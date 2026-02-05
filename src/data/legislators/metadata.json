@@ -1,0 +1,7 @@
+{
+  "lastUpdated": "2026-01-25T23:11:37.549Z",
+  "sources": {
+    "federal": "https://github.com/unitedstates/congress-legislators",
+    "state": "https://github.com/openstates/people"
+  }
+}
