@@ -15,14 +15,14 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Constituent — Contact Your Elected Officials',
+  title: 'My Democracy — Contact Your Representatives',
   description:
-    'Use AI to write personalized messages to your representatives in minutes.',
+    'Contact your federal and state representatives with personalized, AI-crafted messages in minutes.',
   keywords: ['civic engagement', 'contact representatives', 'democracy', 'AI'],
   openGraph: {
-    title: 'Constituent — Contact Your Elected Officials',
+    title: 'My Democracy — Contact Your Representatives',
     description:
-      'Use AI to write personalized messages to your representatives in minutes.',
+      'Contact your federal and state representatives with personalized, AI-crafted messages in minutes.',
     type: 'website',
   },
 };

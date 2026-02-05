@@ -1,7 +1,7 @@
 import { ContactFlow } from '@/components/contact/ContactFlow';
 
 export const metadata = {
-  title: 'Contact Your Representatives — Constituent',
+  title: 'Contact Your Representatives — My Democracy',
   description: 'Find and contact your elected officials with AI-assisted messaging.',
 };
 

@@ -6,7 +6,7 @@ import type { Topic } from './types';
 
 // Brand configuration
 export const BRAND = {
-  name: 'Constituent',
+  name: 'My Democracy',
   tagline: 'Contact Your Elected Officials',
   description: 'Use AI to write personalized messages to your representatives in minutes.',
   colors: {
