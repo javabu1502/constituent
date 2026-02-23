@@ -108,6 +108,20 @@ export function AddressStep({ state, dispatch }: AddressStepProps) {
       }
 
       dispatch({ type: 'SET_OFFICIALS', payload: data.officials });
+
+      // Save address + officials to profile for logged-in users (fire-and-forget)
+      fetch('/api/profile', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          street,
+          city,
+          state: stateCode,
+          zip,
+          representatives: data.officials,
+        }),
+      }).catch(() => {}); // Silently ignore for anonymous users (401)
+
       dispatch({ type: 'GO_TO_STEP', payload: 'representative' });
     } catch (err) {
       dispatch({

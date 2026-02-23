@@ -243,17 +243,17 @@ function OfficialCard({ official, message, deliveryInfo, contactMethod, isCallCo
       {/* Primary action based on delivery method */}
       <div className="space-y-2">
         {deliveryInfo.method === 'staffer_email' && mailtoLink ? (
-          // Staffer email - most reliable
-          <a
-            href={mailtoLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => onSend?.('email_opened')}
+          // Staffer email - open email client without navigating away
+          <button
+            onClick={() => {
+              window.open(mailtoLink, '_blank');
+              onSend?.('email_opened');
+            }}
             className="flex items-center justify-center gap-2 w-full py-2.5 bg-purple-600 hover:bg-purple-700 text-white rounded-lg text-sm font-medium transition-colors"
           >
             <EmailIcon className="w-4 h-4" />
             Send Email{deliveryInfo.stafferName ? ` to ${deliveryInfo.stafferName}` : ''}
-          </a>
+          </button>
         ) : deliveryInfo.method === 'contact_form' && deliveryInfo.contactFormUrl ? (
           // Contact form - copy message then open form
           <a

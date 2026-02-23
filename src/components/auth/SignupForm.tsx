@@ -4,13 +4,19 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { createClient } from '@/lib/supabase/client';
 import { Input } from '@/components/ui/Input';
+import { Select } from '@/components/ui/Select';
 import { Button } from '@/components/ui/Button';
+import { US_STATES } from '@/lib/constants';
 
 export function SignupForm() {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [street, setStreet] = useState('');
+  const [city, setCity] = useState('');
+  const [addrState, setAddrState] = useState('');
+  const [zip, setZip] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -36,7 +42,12 @@ export function SignupForm() {
       email,
       password,
       options: {
-        data: { full_name: name },
+        data: {
+          full_name: name,
+          ...(street && city && addrState && zip
+            ? { street, city, state: addrState, zip }
+            : {}),
+        },
         emailRedirectTo: `${window.location.origin}/auth/callback`,
       },
     });
@@ -117,6 +128,48 @@ export function SignupForm() {
         required
         autoComplete="new-password"
       />
+
+      {/* Optional address fields */}
+      <div className="pt-2 border-t border-gray-200 dark:border-gray-700">
+        <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">
+          Optional — add your address to find your representatives
+        </p>
+        <div className="space-y-3">
+          <Input
+            label="Street Address"
+            type="text"
+            value={street}
+            onChange={(e) => setStreet(e.target.value)}
+            placeholder="123 Main St"
+            autoComplete="street-address"
+          />
+          <Input
+            label="City"
+            type="text"
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+            placeholder="Springfield"
+            autoComplete="address-level2"
+          />
+          <div className="grid grid-cols-2 gap-3">
+            <Select
+              label="State"
+              value={addrState}
+              onChange={(e) => setAddrState(e.target.value)}
+              options={US_STATES.map((s) => ({ value: s.code, label: s.name }))}
+              placeholder="Select state"
+            />
+            <Input
+              label="ZIP Code"
+              type="text"
+              value={zip}
+              onChange={(e) => setZip(e.target.value)}
+              placeholder="62704"
+              autoComplete="postal-code"
+            />
+          </div>
+        </div>
+      </div>
 
       <Button type="submit" className="w-full" isLoading={isLoading}>
         Create Account

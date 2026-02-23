@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { ContactFlow } from '@/components/contact/ContactFlow';
 
 export const metadata = {
@@ -16,7 +17,9 @@ export default function ContactPage() {
           Follow the steps below to find your representatives and send them a message.
         </p>
       </div>
-      <ContactFlow />
+      <Suspense>
+        <ContactFlow />
+      </Suspense>
     </div>
   );
 }

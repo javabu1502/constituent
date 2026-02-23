@@ -1,6 +1,8 @@
 'use client';
 
-import { useReducer, useCallback, useEffect } from 'react';
+import { useReducer, useCallback, useEffect, useRef, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
+import Link from 'next/link';
 import { createClient } from '@/lib/supabase/client';
 import type { Official, Address } from '@/lib/types';
 import { AddressStep } from './AddressStep';
@@ -164,19 +166,85 @@ const STEP_LABELS: Record<string, string> = {
 
 export function ContactFlow() {
   const [state, dispatch] = useReducer(contactReducer, initialState);
+  const searchParams = useSearchParams();
+  const profileLoaded = useRef(false);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
 
-  // Auto-fill name and email for logged-in users
+  // Auto-fill from user profile and handle repId deep-linking
   useEffect(() => {
+    if (profileLoaded.current) return;
+    profileLoaded.current = true;
+
     const supabase = createClient();
     supabase.auth.getUser().then(({ data: { user } }) => {
-      if (user) {
-        if (!state.userEmail && user.email) {
-          dispatch({ type: 'SET_USER_EMAIL', payload: user.email });
-        }
-        if (!state.userName && user.user_metadata?.full_name) {
-          dispatch({ type: 'SET_USER_NAME', payload: user.user_metadata.full_name });
-        }
+      setIsAuthenticated(!!user);
+      if (!user) return;
+
+      if (user.email) {
+        dispatch({ type: 'SET_USER_EMAIL', payload: user.email });
       }
+      if (user.user_metadata?.full_name) {
+        dispatch({ type: 'SET_USER_NAME', payload: user.user_metadata.full_name });
+      }
+
+      // Try to load profile for address skip
+      fetch('/api/profile')
+        .then((res) => (res.ok ? res.json() : null))
+        .then((profile) => {
+          if (!profile?.street || !profile?.city || !profile?.state || !profile?.zip) return;
+
+          // Set address from profile
+          const address: Address = {
+            street: profile.street,
+            city: profile.city,
+            state: profile.state,
+            zip: profile.zip,
+          };
+          dispatch({ type: 'SET_ADDRESS', payload: address });
+
+          // Set cached reps if available
+          const reps: Official[] | null = profile.representatives;
+          if (reps && reps.length > 0) {
+            dispatch({ type: 'SET_OFFICIALS', payload: reps });
+
+            // Check for repId deep-link
+            const repId = searchParams.get('repId');
+            if (repId) {
+              const matchedRep = reps.find((r) => r.id === repId);
+              if (matchedRep) {
+                dispatch({ type: 'SELECT_REPS', payload: [matchedRep] });
+                dispatch({ type: 'GO_TO_STEP', payload: 'method' });
+                return;
+              }
+            }
+
+            // No repId — skip to rep selection step
+            dispatch({ type: 'GO_TO_STEP', payload: 'representative' });
+          } else {
+            // Has address but no cached reps — fetch them and skip
+            fetch('/api/profile/representatives', { method: 'POST' })
+              .then((res) => (res.ok ? res.json() : null))
+              .then((data) => {
+                if (data?.officials?.length) {
+                  dispatch({ type: 'SET_OFFICIALS', payload: data.officials });
+
+                  const repId = searchParams.get('repId');
+                  if (repId) {
+                    const matchedRep = data.officials.find((r: Official) => r.id === repId);
+                    if (matchedRep) {
+                      dispatch({ type: 'SELECT_REPS', payload: [matchedRep] });
+                      dispatch({ type: 'GO_TO_STEP', payload: 'method' });
+                      return;
+                    }
+                  }
+
+                  dispatch({ type: 'GO_TO_STEP', payload: 'representative' });
+                }
+              })
+              .catch(() => {});
+          }
+        })
+        .catch(() => {});
     });
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -220,6 +288,19 @@ export function ContactFlow() {
             >
               Start Over
             </button>
+            {isAuthenticated === false && (
+              <div className="mt-4 p-4 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl">
+                <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
+                  Want to track your messages and see your representatives?
+                </p>
+                <Link
+                  href="/signup"
+                  className="block w-full py-2.5 text-center border-2 border-purple-600 text-purple-600 dark:text-purple-400 dark:border-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/30 rounded-lg text-sm font-medium transition-colors"
+                >
+                  Create a Free Account
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -324,8 +405,8 @@ export function ContactFlow() {
           <div>
             <h4 className="text-sm font-medium text-gray-900 dark:text-white">Your Privacy Matters</h4>
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-              Your address is used only to find your representatives and is never stored.
-              Messages are sent directly from your device. We do not collect personal information.
+              Your address is used to find your representatives. Logged-in users can save their
+              address for faster access. Messages are sent directly from your device.
             </p>
           </div>
         </div>
