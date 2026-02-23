@@ -238,10 +238,11 @@ interface Props {
   savedAddress?: { street: string; city: string; state: string; zip: string } | null;
 }
 
-export function MyRepresentativesSection({ cachedReps, hasAddress, savedAddress }: Props) {
+export function MyRepresentativesSection({ cachedReps, hasAddress: initialHasAddress, savedAddress }: Props) {
   const [reps, setReps] = useState<Official[] | null>(cachedReps);
   const [loading, setLoading] = useState(false);
   const [editing, setEditing] = useState(false);
+  const [hasAddress, setHasAddress] = useState(initialHasAddress);
 
   useEffect(() => {
     // Auto-fetch if user has address but no cached reps
@@ -264,6 +265,7 @@ export function MyRepresentativesSection({ cachedReps, hasAddress, savedAddress 
         initialAddress={savedAddress || null}
         onSaved={(newReps) => {
           setReps(newReps);
+          setHasAddress(true);
           setEditing(false);
         }}
         onCancel={() => setEditing(false)}
