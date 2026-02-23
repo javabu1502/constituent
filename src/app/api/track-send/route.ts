@@ -1,81 +1,95 @@
 import { NextRequest, NextResponse } from 'next/server';
-import type { TrackSendRequest, TrackSendResponse, ApiError } from '@/lib/types';
+import { createAdminClient } from '@/lib/supabase';
+
+interface LogMessageBody {
+  advocate_name: string;
+  advocate_email?: string;
+  advocate_city: string;
+  advocate_state: string;
+  advocate_district?: string;
+  legislator_name: string;
+  legislator_id: string;
+  legislator_party: string;
+  legislator_level: string;
+  legislator_chamber: string;
+  issue_area: string;
+  issue_subtopic: string;
+  message_body: string;
+  delivery_method: string;
+  delivery_status: string;
+  user_id?: string;
+}
 
 /**
  * POST /api/track-send
- * Track anonymous send events for analytics
- *
- * This is a lightweight endpoint that logs send events without storing PII.
- * Implement your own analytics backend (Mixpanel, Amplitude, PostHog, etc.) as needed.
+ * Log a message send event to Supabase
  */
-export async function POST(request: NextRequest): Promise<NextResponse<TrackSendResponse | ApiError>> {
-  // Parse request body
-  let body: TrackSendRequest;
+export async function POST(request: NextRequest) {
+  let body: LogMessageBody;
   try {
     body = await request.json();
   } catch {
     return NextResponse.json(
-      { error: 'Invalid JSON in request body', code: 'INVALID_JSON' },
+      { error: 'Invalid JSON in request body' },
       { status: 400 }
     );
   }
 
-  // Validate required fields
-  const { recipientName, recipientOffice, topic, method } = body;
+  const {
+    advocate_name,
+    legislator_name,
+    legislator_id,
+    issue_area,
+    delivery_method,
+    delivery_status,
+    advocate_city,
+    advocate_state,
+    message_body,
+  } = body;
 
-  if (!recipientName || !recipientOffice || !topic || !method) {
+  if (!advocate_name || !legislator_name || !legislator_id || !issue_area || !delivery_method || !delivery_status || !advocate_city || !advocate_state || !message_body) {
     return NextResponse.json(
-      { error: 'Missing required fields: recipientName, recipientOffice, topic, method', code: 'MISSING_FIELDS' },
+      { error: 'Missing required fields' },
       { status: 400 }
     );
   }
 
-  // Validate method
-  const validMethods = ['email', 'phone', 'web_form'];
-  if (!validMethods.includes(method)) {
+  try {
+    const supabase = createAdminClient();
+
+    const { error } = await supabase.from('messages').insert({
+      advocate_name: body.advocate_name,
+      advocate_email: body.advocate_email || null,
+      advocate_city: body.advocate_city,
+      advocate_state: body.advocate_state,
+      advocate_district: body.advocate_district || null,
+      legislator_name: body.legislator_name,
+      legislator_id: body.legislator_id,
+      legislator_party: body.legislator_party,
+      legislator_level: body.legislator_level,
+      legislator_chamber: body.legislator_chamber,
+      issue_area: body.issue_area,
+      issue_subtopic: body.issue_subtopic,
+      message_body: body.message_body,
+      delivery_method: body.delivery_method,
+      delivery_status: body.delivery_status,
+      user_id: body.user_id || null,
+    });
+
+    if (error) {
+      console.error('[track-send] Supabase insert error:', error);
+      return NextResponse.json(
+        { error: 'Failed to log message' },
+        { status: 500 }
+      );
+    }
+
+    return NextResponse.json({ success: true });
+  } catch (err) {
+    console.error('[track-send] Unexpected error:', err);
     return NextResponse.json(
-      { error: `Invalid method. Must be one of: ${validMethods.join(', ')}`, code: 'INVALID_METHOD' },
-      { status: 400 }
+      { error: 'Internal server error' },
+      { status: 500 }
     );
   }
-
-  // Generate event ID
-  const eventId = `evt_${Date.now()}_${Math.random().toString(36).slice(2, 9)}`;
-  const timestamp = new Date().toISOString();
-
-  // Log the event (this is where you'd send to your analytics service)
-  const event = {
-    eventId,
-    timestamp,
-    recipientOffice,  // "U.S. Senator" or "U.S. Representative"
-    topic,
-    method,
-    // Note: We intentionally don't log recipientName to avoid storing PII
-    // If you need to track by representative, use a hashed/anonymized ID
-  };
-
-  console.log('[TrackSend]', JSON.stringify(event));
-
-  // TODO: Implement your analytics tracking here
-  // Examples:
-  //
-  // Mixpanel:
-  // await mixpanel.track('message_sent', event);
-  //
-  // PostHog:
-  // posthog.capture('message_sent', event);
-  //
-  // Custom webhook:
-  // await fetch(process.env.ANALYTICS_WEBHOOK_URL, {
-  //   method: 'POST',
-  //   body: JSON.stringify(event),
-  // });
-  //
-  // Database:
-  // await db.insert('send_events', event);
-
-  return NextResponse.json({
-    success: true,
-    eventId,
-  });
 }

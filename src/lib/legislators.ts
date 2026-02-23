@@ -459,6 +459,7 @@ function federalToOfficial(
     email: emailInfo.email,
     website: term.url,
     contactForm: term.contact_form,
+    photoUrl: `https://raw.githubusercontent.com/unitedstates/images/gh-pages/congress/225x275/${legislator.id.bioguide}.jpg`,
     office: term.address,
     socialMedia: socialMedia?.social ? {
       twitter: socialMedia.social.twitter,

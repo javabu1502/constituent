@@ -1,8 +1,10 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
+import { createClient } from '@/lib/supabase/client';
 import type { ContactState, ContactAction } from './ContactFlow';
 import type { Official } from '@/lib/types';
+import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 import { formatPhone } from '@/lib/utils';
 import {
@@ -91,9 +93,12 @@ interface OfficialCardProps {
   message: { subject: string; body: string };
   deliveryInfo: DeliveryInfo;
   contactMethod: 'email' | 'phone';
+  isCallComplete?: boolean;
+  onMarkCallComplete?: () => void;
+  onSend?: (deliveryStatus: string) => void;
 }
 
-function OfficialCard({ official, message, deliveryInfo, contactMethod }: OfficialCardProps) {
+function OfficialCard({ official, message, deliveryInfo, contactMethod, isCallComplete, onMarkCallComplete, onSend }: OfficialCardProps) {
   const [copied, setCopied] = useState(false);
   const partyColors = getPartyColors(official.party);
 
@@ -115,7 +120,7 @@ function OfficialCard({ official, message, deliveryInfo, contactMethod }: Offici
   // Render phone card
   if (contactMethod === 'phone') {
     return (
-      <div className="p-4 rounded-xl border border-gray-200">
+      <div className={`p-4 rounded-xl border ${isCallComplete ? 'border-green-300 dark:border-green-700 bg-green-50 dark:bg-green-900/20' : 'border-gray-200 dark:border-gray-700'}`}>
         {/* Official info */}
         <div className="mb-3">
           <div className="flex items-center gap-2 mb-0.5">
@@ -127,37 +132,79 @@ function OfficialCard({ official, message, deliveryInfo, contactMethod }: Offici
                 State
               </span>
             )}
+            {isCallComplete && (
+              <span className="px-2 py-0.5 text-xs font-medium rounded-full bg-green-100 text-green-700 dark:bg-green-800 dark:text-green-300 flex items-center gap-1">
+                <CheckIcon className="w-3 h-3" />
+                Called
+              </span>
+            )}
           </div>
-          <p className="font-semibold text-gray-900">{official.name}</p>
-          <p className="text-sm text-gray-600">{official.title}</p>
+          <p className="font-semibold text-gray-900 dark:text-white">{official.name}</p>
+          <p className="text-sm text-gray-600 dark:text-gray-400">{official.title}</p>
         </div>
 
-        {/* Phone button */}
-        <div className="mb-3">
+        {/* Phone number and actions */}
+        <div className="mb-3 space-y-3">
           {deliveryInfo.phone ? (
-            <a
-              href={deliveryInfo.actionUrl || '#'}
-              className="flex items-center justify-center gap-2 w-full py-2.5 bg-purple-600 hover:bg-purple-700 text-white rounded-lg text-sm font-medium transition-colors"
-            >
-              <PhoneIcon className="w-4 h-4" />
-              Call Now — {formatPhone(deliveryInfo.phone)}
-            </a>
+            <>
+              {/* Prominent phone number as tel: link */}
+              <div className="p-3 bg-purple-50 dark:bg-purple-900/30 border border-purple-200 dark:border-purple-700 rounded-xl text-center">
+                <p className="text-xs text-purple-600 dark:text-purple-400 mb-1">Tap to call</p>
+                <a
+                  href={`tel:${deliveryInfo.phone.replace(/[^\d+]/g, '')}`}
+                  className="text-2xl font-bold text-purple-700 dark:text-purple-300 hover:text-purple-800 dark:hover:text-purple-200 transition-colors"
+                >
+                  {formatPhone(deliveryInfo.phone)}
+                </a>
+              </div>
+              {/* Mark as complete button */}
+              {!isCallComplete ? (
+                <button
+                  onClick={() => { onMarkCallComplete?.(); onSend?.('called'); }}
+                  className="w-full flex items-center justify-center gap-2 py-2.5 border-2 border-green-300 dark:border-green-600 text-green-700 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/30 rounded-lg text-sm font-medium transition-colors"
+                >
+                  <CheckIcon className="w-4 h-4" />
+                  I Made This Call
+                </button>
+              ) : (
+                <span className="w-full flex items-center justify-center gap-2 py-2.5 bg-green-100 dark:bg-green-800 text-green-700 dark:text-green-300 rounded-lg text-sm font-medium">
+                  <CheckIcon className="w-4 h-4" />
+                  Call Complete
+                </span>
+              )}
+            </>
           ) : (
-            <span className="flex items-center justify-center gap-2 w-full py-2.5 bg-gray-200 text-gray-500 rounded-lg text-sm">
-              No phone number available
-            </span>
+            <div className="space-y-2">
+              <div className="p-3 bg-gray-100 dark:bg-gray-700 rounded-xl text-center">
+                <p className="text-sm text-gray-500 dark:text-gray-400">No phone number available</p>
+                <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
+                  Visit their website to find contact information
+                </p>
+              </div>
+            </div>
           )}
         </div>
 
         {/* Script preview */}
         <details className="group">
-          <summary className="cursor-pointer text-xs font-medium text-purple-600 hover:text-purple-700 flex items-center gap-1">
+          <summary className="cursor-pointer text-xs font-medium text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 flex items-center gap-1">
             <ChevronIcon className="w-3 h-3 transition-transform group-open:rotate-90" />
             View your script
           </summary>
-          <div className="mt-2 p-3 bg-gray-50 rounded-lg border border-gray-200 text-xs text-gray-700 whitespace-pre-line">
+          <div className="mt-2 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600 text-xs text-gray-700 dark:text-gray-300 whitespace-pre-line">
             {message.body}
           </div>
+          <button
+            onClick={copyToClipboard}
+            className="mt-2 flex items-center justify-center gap-1.5 w-full py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg text-xs font-medium transition-colors"
+          >
+            {copied ? (
+              <CheckIcon className="w-3.5 h-3.5 text-green-600 dark:text-green-400" />
+            ) : (
+              <CopyIcon className="w-3.5 h-3.5" />
+            )}
+            {copied ? 'Copied!' : 'Copy Script'}
+          </button>
         </details>
       </div>
     );
@@ -165,7 +212,7 @@ function OfficialCard({ official, message, deliveryInfo, contactMethod }: Offici
 
   // Render email card based on delivery method
   return (
-    <div className="p-4 rounded-xl border border-gray-200">
+    <div className="p-4 rounded-xl border border-gray-200 dark:border-gray-700">
       {/* Official info */}
       <div className="mb-3">
         <div className="flex items-center gap-2 mb-0.5">
@@ -178,18 +225,18 @@ function OfficialCard({ official, message, deliveryInfo, contactMethod }: Offici
             </span>
           )}
         </div>
-        <p className="font-semibold text-gray-900">{official.name}</p>
-        <p className="text-sm text-gray-600">{official.title}</p>
-        <p className="text-xs text-gray-500 mt-1 italic truncate">
+        <p className="font-semibold text-gray-900 dark:text-white">{official.name}</p>
+        <p className="text-sm text-gray-600 dark:text-gray-400">{official.title}</p>
+        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 italic truncate">
           Subject: {message.subject}
         </p>
       </div>
 
       {/* CAPTCHA blocked note */}
       {deliveryInfo.captchaBlocked && deliveryInfo.note && (
-        <div className="mb-3 p-2 bg-amber-50 border border-amber-200 rounded-lg flex items-start gap-2">
-          <WarningIcon className="w-4 h-4 text-amber-600 flex-shrink-0 mt-0.5" />
-          <p className="text-xs text-amber-700">{deliveryInfo.note}</p>
+        <div className="mb-3 p-2 bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-700 rounded-lg flex items-start gap-2">
+          <WarningIcon className="w-4 h-4 text-amber-600 dark:text-amber-400 flex-shrink-0 mt-0.5" />
+          <p className="text-xs text-amber-700 dark:text-amber-300">{deliveryInfo.note}</p>
         </div>
       )}
 
@@ -199,6 +246,9 @@ function OfficialCard({ official, message, deliveryInfo, contactMethod }: Offici
           // Staffer email - most reliable
           <a
             href={mailtoLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => onSend?.('email_opened')}
             className="flex items-center justify-center gap-2 w-full py-2.5 bg-purple-600 hover:bg-purple-700 text-white rounded-lg text-sm font-medium transition-colors"
           >
             <EmailIcon className="w-4 h-4" />
@@ -210,7 +260,7 @@ function OfficialCard({ official, message, deliveryInfo, contactMethod }: Offici
             href={deliveryInfo.contactFormUrl}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={copyToClipboard}
+            onClick={() => { copyToClipboard(); onSend?.('form_opened'); }}
             className="flex items-center justify-center gap-2 w-full py-2.5 bg-purple-600 hover:bg-purple-700 text-white rounded-lg text-sm font-medium transition-colors"
           >
             <ExternalLinkIcon className="w-4 h-4" />
@@ -222,7 +272,7 @@ function OfficialCard({ official, message, deliveryInfo, contactMethod }: Offici
             href={deliveryInfo.actionUrl || deliveryInfo.websiteUrl}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={copyToClipboard}
+            onClick={() => { copyToClipboard(); onSend?.('website_opened'); }}
             className="flex items-center justify-center gap-2 w-full py-2.5 bg-purple-600 hover:bg-purple-700 text-white rounded-lg text-sm font-medium transition-colors"
           >
             <ExternalLinkIcon className="w-4 h-4" />
@@ -230,7 +280,7 @@ function OfficialCard({ official, message, deliveryInfo, contactMethod }: Offici
           </a>
         ) : (
           // No method available
-          <span className="flex items-center justify-center gap-2 w-full py-2.5 bg-gray-200 text-gray-500 rounded-lg text-sm">
+          <span className="flex items-center justify-center gap-2 w-full py-2.5 bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400 rounded-lg text-sm">
             No contact method available
           </span>
         )}
@@ -244,7 +294,7 @@ function OfficialCard({ official, message, deliveryInfo, contactMethod }: Offici
               target="_blank"
               rel="noopener noreferrer"
               onClick={copyToClipboard}
-              className="flex-1 flex items-center justify-center gap-1.5 py-2 border border-gray-300 text-gray-700 hover:bg-gray-50 rounded-lg text-xs font-medium transition-colors"
+              className="flex-1 flex items-center justify-center gap-1.5 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg text-xs font-medium transition-colors"
             >
               <ExternalLinkIcon className="w-3.5 h-3.5" />
               Contact Form
@@ -254,12 +304,12 @@ function OfficialCard({ official, message, deliveryInfo, contactMethod }: Offici
           {/* Copy button */}
           <button
             onClick={copyToClipboard}
-            className={`flex items-center justify-center gap-1.5 px-3 py-2 border border-gray-300 text-gray-700 hover:bg-gray-50 rounded-lg text-xs font-medium transition-colors ${
+            className={`flex items-center justify-center gap-1.5 px-3 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg text-xs font-medium transition-colors ${
               deliveryInfo.method !== 'staffer_email' ? 'flex-1' : ''
             }`}
           >
             {copied ? (
-              <CheckIcon className="w-3.5 h-3.5 text-green-600" />
+              <CheckIcon className="w-3.5 h-3.5 text-green-600 dark:text-green-400" />
             ) : (
               <CopyIcon className="w-3.5 h-3.5" />
             )}
@@ -270,16 +320,16 @@ function OfficialCard({ official, message, deliveryInfo, contactMethod }: Offici
 
       {/* Note for contact form method */}
       {deliveryInfo.method === 'contact_form' && !deliveryInfo.captchaBlocked && deliveryInfo.note && (
-        <p className="mt-2 text-xs text-gray-500 italic">{deliveryInfo.note}</p>
+        <p className="mt-2 text-xs text-gray-500 dark:text-gray-400 italic">{deliveryInfo.note}</p>
       )}
 
       {/* Message preview */}
       <details className="mt-3 group">
-        <summary className="cursor-pointer text-xs font-medium text-gray-500 hover:text-gray-700 flex items-center gap-1">
+        <summary className="cursor-pointer text-xs font-medium text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 flex items-center gap-1">
           <ChevronIcon className="w-3 h-3 transition-transform group-open:rotate-90" />
           Preview message
         </summary>
-        <div className="mt-2 p-3 bg-gray-50 rounded-lg border border-gray-200 text-xs text-gray-600 whitespace-pre-line max-h-32 overflow-y-auto">
+        <div className="mt-2 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600 text-xs text-gray-600 dark:text-gray-300 whitespace-pre-line max-h-32 overflow-y-auto">
           {message.body}
         </div>
       </details>
@@ -289,6 +339,15 @@ function OfficialCard({ official, message, deliveryInfo, contactMethod }: Offici
 
 export function SendStep({ state, dispatch, onBack }: SendStepProps) {
   const { selectedReps, messages, contactMethod } = state;
+  const [completedCalls, setCompletedCalls] = useState<Set<string>>(new Set());
+  const [userId, setUserId] = useState<string | null>(null);
+
+  useEffect(() => {
+    const supabase = createClient();
+    supabase.auth.getUser().then(({ data: { user } }) => {
+      if (user) setUserId(user.id);
+    });
+  }, []);
 
   // Calculate delivery info for each official
   const deliveryInfoMap = useMemo(() => {
@@ -298,6 +357,10 @@ export function SendStep({ state, dispatch, onBack }: SendStepProps) {
     }
     return map;
   }, [selectedReps, contactMethod]);
+
+  const markCallComplete = (officialId: string) => {
+    setCompletedCalls(prev => new Set([...prev, officialId]));
+  };
 
   // Count delivery methods for summary
   const deliverySummary = useMemo(() => {
@@ -314,6 +377,35 @@ export function SendStep({ state, dispatch, onBack }: SendStepProps) {
     return { emailCount, formCount, phoneCount };
   }, [deliveryInfoMap]);
 
+  const trackSend = (official: Official, deliveryStatus: string) => {
+    const msg = messages[official.name];
+    const deliveryInfo = deliveryInfoMap.get(official.id);
+    if (!msg || !deliveryInfo) return;
+
+    fetch('/api/track-send', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        advocate_name: state.userName,
+        advocate_email: state.userEmail || undefined,
+        advocate_city: state.address?.city || '',
+        advocate_state: state.address?.state || '',
+        advocate_district: official.district || undefined,
+        legislator_name: official.name,
+        legislator_id: official.id,
+        legislator_party: official.party,
+        legislator_level: official.level,
+        legislator_chamber: official.chamber,
+        issue_area: state.issueCategory || state.issue,
+        issue_subtopic: state.issue,
+        message_body: msg.body,
+        delivery_method: contactMethod === 'phone' ? 'phone' : deliveryInfo.method,
+        delivery_status: deliveryStatus,
+        user_id: userId || undefined,
+      }),
+    }).catch((err) => console.error('[track-send] Failed:', err));
+  };
+
   const handleDone = () => {
     dispatch({ type: 'GO_TO_STEP', payload: 'success' });
   };
@@ -322,21 +414,41 @@ export function SendStep({ state, dispatch, onBack }: SendStepProps) {
     <div className="p-6 sm:p-8">
       {/* Header */}
       <div className="text-center mb-6">
-        <div className="w-14 h-14 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
-          <svg className="w-7 h-7 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
+        <div className={`w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-3 ${
+          contactMethod === 'phone' && completedCalls.size === selectedReps.length
+            ? 'bg-green-100 dark:bg-green-900'
+            : contactMethod === 'phone'
+            ? 'bg-purple-100 dark:bg-purple-900'
+            : 'bg-green-100 dark:bg-green-900'
+        }`}>
+          {contactMethod === 'phone' ? (
+            completedCalls.size === selectedReps.length ? (
+              <svg className="w-7 h-7 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            ) : (
+              <PhoneIcon className="w-7 h-7 text-purple-600 dark:text-purple-400" />
+            )
+          ) : (
+            <svg className="w-7 h-7 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          )}
         </div>
-        <h3 className="text-xl font-semibold text-gray-900">
+        <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
           {contactMethod === 'phone'
-            ? 'Call Your Officials'
+            ? completedCalls.size === selectedReps.length
+              ? 'All Calls Complete!'
+              : 'Call Your Officials'
             : selectedReps.length === 1
             ? 'Your Message is Ready!'
             : `${selectedReps.length} Messages Ready!`}
         </h3>
-        <p className="text-gray-500 mt-1 text-sm">
+        <p className="text-gray-500 dark:text-gray-400 mt-1 text-sm">
           {contactMethod === 'phone'
-            ? 'Call each official and use your script'
+            ? completedCalls.size > 0
+              ? `${completedCalls.size} of ${selectedReps.length} calls complete`
+              : 'Call each official and use your script'
             : deliverySummary.emailCount > 0 && deliverySummary.formCount > 0
             ? `${deliverySummary.emailCount} via email, ${deliverySummary.formCount} via contact form`
             : 'Send each message using the options below'}
@@ -358,6 +470,9 @@ export function SendStep({ state, dispatch, onBack }: SendStepProps) {
               message={msg}
               deliveryInfo={deliveryInfo}
               contactMethod={contactMethod}
+              isCallComplete={completedCalls.has(official.id)}
+              onMarkCallComplete={() => markCallComplete(official.id)}
+              onSend={(status) => trackSend(official, status)}
             />
           );
         })}
@@ -365,9 +480,9 @@ export function SendStep({ state, dispatch, onBack }: SendStepProps) {
 
       {/* Phone tips (phone only) */}
       {contactMethod === 'phone' && (
-        <div className="mb-6 p-3 bg-purple-50 border border-purple-200 rounded-xl">
-          <p className="text-xs font-medium text-purple-700 mb-2">Phone Call Tips</p>
-          <ul className="text-xs text-purple-700 space-y-1">
+        <div className="mb-6 p-3 bg-purple-50 dark:bg-purple-900/30 border border-purple-200 dark:border-purple-700 rounded-xl">
+          <p className="text-xs font-medium text-purple-700 dark:text-purple-300 mb-2">Phone Call Tips</p>
+          <ul className="text-xs text-purple-700 dark:text-purple-300 space-y-1">
             {PHONE_TIPS.map((tip, i) => (
               <li key={i} className="flex gap-2">
                 <span className="flex-shrink-0">&bull;</span>
@@ -380,12 +495,18 @@ export function SendStep({ state, dispatch, onBack }: SendStepProps) {
 
       {/* Note about bounces (email only) */}
       {contactMethod === 'email' && deliverySummary.emailCount > 0 && (
-        <div className="mb-6 p-3 bg-yellow-50 border border-yellow-200 rounded-xl">
-          <p className="text-xs text-yellow-700">
+        <div className="mb-6 p-3 bg-yellow-50 dark:bg-yellow-900/30 border border-yellow-200 dark:border-yellow-700 rounded-xl">
+          <p className="text-xs text-yellow-700 dark:text-yellow-300">
             Note: Some congressional emails may bounce. If that happens, use the official&apos;s contact form on their website.
           </p>
         </div>
       )}
+
+      <p className="text-xs text-gray-500 dark:text-gray-400 text-center mb-4">
+        Your message will be saved to your history. See our{' '}
+        <Link href="/privacy" className="text-purple-600 dark:text-purple-400 hover:underline">Privacy Policy</Link>{' '}
+        for details.
+      </p>
 
       <div className="flex gap-3">
         <Button variant="secondary" onClick={onBack} className="flex-1">

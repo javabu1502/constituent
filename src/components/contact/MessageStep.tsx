@@ -122,19 +122,19 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
       <div className="p-6 sm:p-8">
         <div className="flex flex-col items-center justify-center py-16">
           <div className="relative">
-            <div className="w-16 h-16 border-4 border-purple-200 rounded-full animate-spin border-t-purple-600"></div>
+            <div className="w-16 h-16 border-4 border-purple-200 dark:border-purple-800 rounded-full animate-spin border-t-purple-600"></div>
             <div className="absolute inset-0 flex items-center justify-center">
-              <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-6 h-6 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
               </svg>
             </div>
           </div>
-          <p className="text-gray-600 mt-4 font-medium">
+          <p className="text-gray-600 dark:text-gray-300 mt-4 font-medium">
             {contactMethod === 'phone'
               ? `Writing ${selectedReps.length} script${selectedReps.length > 1 ? 's' : ''}...`
               : `Writing ${selectedReps.length} message${selectedReps.length > 1 ? 's' : ''}...`}
           </p>
-          <p className="text-gray-400 text-sm mt-1">
+          <p className="text-gray-400 dark:text-gray-500 text-sm mt-1">
             {loadedCount} of {selectedReps.length} complete
           </p>
         </div>
@@ -146,10 +146,10 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
     <div className="p-6 sm:p-8">
       {/* Header */}
       <div className="text-center mb-6">
-        <h3 className="text-xl font-semibold text-gray-900">
+        <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
           {contactMethod === 'phone' ? 'Review Scripts' : 'Review Messages'}
         </h3>
-        <p className="text-gray-500 mt-1 text-sm">
+        <p className="text-gray-500 dark:text-gray-400 mt-1 text-sm">
           {selectedReps.length > 1
             ? `${contactMethod === 'phone' ? 'Script' : 'Message'} ${reviewIndex + 1} of ${selectedReps.length} — edit as needed`
             : 'Edit as needed, then continue'}
@@ -157,8 +157,8 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
       </div>
 
       {state.error && (
-        <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-xl">
-          <p className="text-sm text-red-700">{state.error}</p>
+        <div className="mb-4 p-4 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 rounded-xl">
+          <p className="text-sm text-red-700 dark:text-red-300">{state.error}</p>
         </div>
       )}
 
@@ -177,7 +177,7 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
                 className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-colors ${
                   isActive
                     ? 'bg-purple-600 text-white'
-                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                    : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
                 }`}
               >
                 <span className={`w-5 h-5 rounded-full text-xs flex items-center justify-center ${
@@ -201,7 +201,7 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
 
       {/* Current rep info */}
       {currentRep && (
-        <div className="mb-4 p-3 bg-purple-50 border border-purple-200 rounded-xl">
+        <div className="mb-4 p-3 bg-purple-50 dark:bg-purple-900/30 border border-purple-200 dark:border-purple-700 rounded-xl">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold ${
@@ -210,8 +210,8 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
                 {currentRep.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
               </div>
               <div>
-                <p className="font-medium text-gray-900">{currentRep.name}</p>
-                <p className="text-xs text-gray-600">{currentRep.title}</p>
+                <p className="font-medium text-gray-900 dark:text-white">{currentRep.name}</p>
+                <p className="text-xs text-gray-600 dark:text-gray-400">{currentRep.title}</p>
               </div>
             </div>
             <span className={`px-2 py-1 text-xs font-medium rounded-full ${
@@ -222,7 +222,7 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
           </div>
           {/* Staffer explanation for email */}
           {contactMethod === 'email' && currentRep.stafferFirstName && (
-            <p className="mt-2 text-xs text-purple-700">
+            <p className="mt-2 text-xs text-purple-700 dark:text-purple-300">
               Your message will be sent to {currentRep.stafferFirstName}{currentRep.stafferLastName ? ` ${currentRep.stafferLastName}` : ''}, staff for {currentRep.chamber === 'senate' ? 'Sen.' : 'Rep.'} {currentRep.lastName || currentRep.name.split(' ').pop()}&apos;s office.
             </p>
           )}
@@ -234,24 +234,24 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
         <>
           {contactMethod === 'email' && (
             <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Subject Line
               </label>
               <input
                 type="text"
                 value={currentMessage.subject}
                 onChange={(e) => currentRep && updateMessage(currentRep.name, 'subject', e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               />
             </div>
           )}
 
           <div className="mb-4">
             <div className="flex items-center justify-between mb-2">
-              <label className="block text-sm font-medium text-gray-700">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                 {contactMethod === 'phone' ? 'Phone Script' : 'Message Body'}
               </label>
-              <span className="text-xs text-gray-400">
+              <span className="text-xs text-gray-400 dark:text-gray-500">
                 {currentMessage.body.trim().split(/\s+/).filter(Boolean).length} words
               </span>
             </div>
@@ -259,7 +259,7 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
               value={currentMessage.body}
               onChange={(e) => currentRep && updateMessage(currentRep.name, 'body', e.target.value)}
               rows={contactMethod === 'phone' ? 8 : 10}
-              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent resize-none font-mono text-sm leading-relaxed"
+              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent resize-none font-mono text-sm leading-relaxed bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
             />
           </div>
         </>
@@ -267,9 +267,9 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
 
       {/* Phone tips inline (phone only) */}
       {contactMethod === 'phone' && (
-        <div className="mb-4 p-3 bg-purple-50 border border-purple-200 rounded-xl">
-          <p className="text-xs font-medium text-purple-700 mb-2">Phone Call Tips</p>
-          <ul className="text-xs text-purple-700 space-y-1">
+        <div className="mb-4 p-3 bg-purple-50 dark:bg-purple-900/30 border border-purple-200 dark:border-purple-700 rounded-xl">
+          <p className="text-xs font-medium text-purple-700 dark:text-purple-300 mb-2">Phone Call Tips</p>
+          <ul className="text-xs text-purple-700 dark:text-purple-300 space-y-1">
             {PHONE_TIPS.map((tip, i) => (
               <li key={i} className="flex gap-2">
                 <span className="flex-shrink-0">&bull;</span>
@@ -282,8 +282,8 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
 
       {/* Bounce notice (email only) */}
       {contactMethod === 'email' && (
-        <div className="mb-4 p-3 bg-yellow-50 border border-yellow-200 rounded-xl">
-          <p className="text-xs text-yellow-700">
+        <div className="mb-4 p-3 bg-yellow-50 dark:bg-yellow-900/30 border border-yellow-200 dark:border-yellow-700 rounded-xl">
+          <p className="text-xs text-yellow-700 dark:text-yellow-300">
             Note: Some congressional emails may bounce. If that happens, use the official&apos;s contact form on their website.
           </p>
         </div>
@@ -291,21 +291,21 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
 
       {/* Navigation between officials */}
       {selectedReps.length > 1 && (
-        <div className="flex items-center justify-between mb-4 pt-4 border-t border-gray-200">
+        <div className="flex items-center justify-between mb-4 pt-4 border-t border-gray-200 dark:border-gray-700">
           <button
             onClick={() => setReviewIndex(Math.max(0, reviewIndex - 1))}
             disabled={reviewIndex === 0}
-            className="text-sm font-medium text-purple-600 hover:text-purple-700 disabled:text-gray-300 disabled:cursor-not-allowed"
+            className="text-sm font-medium text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 disabled:text-gray-300 dark:disabled:text-gray-600 disabled:cursor-not-allowed"
           >
             Previous
           </button>
-          <span className="text-sm text-gray-500">
+          <span className="text-sm text-gray-500 dark:text-gray-400">
             {reviewIndex + 1} of {selectedReps.length}
           </span>
           <button
             onClick={() => setReviewIndex(Math.min(selectedReps.length - 1, reviewIndex + 1))}
             disabled={reviewIndex === selectedReps.length - 1}
-            className="text-sm font-medium text-purple-600 hover:text-purple-700 disabled:text-gray-300 disabled:cursor-not-allowed"
+            className="text-sm font-medium text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 disabled:text-gray-300 dark:disabled:text-gray-600 disabled:cursor-not-allowed"
           >
             Next
           </button>

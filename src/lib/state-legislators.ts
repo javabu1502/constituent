@@ -1,52 +1,24 @@
 /**
  * State Legislator Lookup
  *
- * Fetches state legislator data from the OpenStates GitHub repository
- * and provides lookup by district.
+ * Reads pre-cached state legislator data (JSON files produced by
+ * `npm run refresh-states`) and provides lookup by district.
+ *
+ * Handles both numeric districts ("5") and named districts
+ * ("3rd Suffolk", "Chittenden-15", "Rockingham 30").
  *
  * Data source: https://github.com/openstates/people
  */
 
 import * as fs from 'fs';
 import * as path from 'path';
-import { parse as parseYaml } from 'yaml';
 import type { Official } from './types';
 
-// Cache directory for downloaded state data
+// Cache directory for state data (populated by scripts/refresh-state-data.ts)
 const CACHE_DIR = path.join(process.cwd(), 'src', 'data', 'states');
 
 // In-memory cache
 const stateDataCache = new Map<string, StateLegislator[]>();
-
-/**
- * Raw legislator data from OpenStates YAML
- */
-interface OpenStatesLegislator {
-  id: string;
-  name: string;
-  given_name?: string;
-  family_name?: string;
-  gender?: string;
-  email?: string;
-  image?: string;
-  party?: Array<{ name: string }>;
-  roles?: Array<{
-    type: 'upper' | 'lower';
-    district: string;
-    start_date?: string;
-    end_date?: string;
-    jurisdiction?: string;
-  }>;
-  offices?: Array<{
-    classification: string;
-    address?: string;
-    voice?: string;
-  }>;
-  links?: Array<{
-    url: string;
-    note?: string;
-  }>;
-}
 
 /**
  * Processed state legislator data
@@ -66,43 +38,74 @@ interface StateLegislator {
   office?: string;
 }
 
-/**
- * Get the GitHub API URL for a state's legislature directory
- */
-function getGitHubApiUrl(stateCode: string): string {
-  return `https://api.github.com/repos/openstates/people/contents/data/${stateCode.toLowerCase()}/legislature`;
-}
+// Map ordinal words to numeric ordinals for district normalization.
+// Covers up to 25th which exceeds any US state legislative district ordinal.
+const ORDINAL_WORDS: Record<string, string> = {
+  first: '1st',
+  second: '2nd',
+  third: '3rd',
+  fourth: '4th',
+  fifth: '5th',
+  sixth: '6th',
+  seventh: '7th',
+  eighth: '8th',
+  ninth: '9th',
+  tenth: '10th',
+  eleventh: '11th',
+  twelfth: '12th',
+  thirteenth: '13th',
+  fourteenth: '14th',
+  fifteenth: '15th',
+  sixteenth: '16th',
+  seventeenth: '17th',
+  eighteenth: '18th',
+  nineteenth: '19th',
+  twentieth: '20th',
+  'twenty-first': '21st',
+  'twenty-second': '22nd',
+  'twenty-third': '23rd',
+  'twenty-fourth': '24th',
+  'twenty-fifth': '25th',
+};
 
 /**
- * Get the cache file path for a state
+ * Normalize a district identifier for comparison.
+ *
+ * Handles:
+ *  - Leading zeros on numeric districts ("001" → "1")
+ *  - Case insensitivity ("3RD SUFFOLK" → "3rd suffolk")
+ *  - Hyphens vs spaces ("Chittenden-15" → "chittenden 15")
+ *  - Ordinal words ("First Middlesex" → "1st middlesex")
  */
-function getCacheFilePath(stateCode: string): string {
-  return path.join(CACHE_DIR, `${stateCode.toUpperCase()}.json`);
-}
+function normalizeDistrict(district: string): string {
+  let d = district.trim().toLowerCase();
 
-/**
- * Check if cache is fresh (less than 24 hours old)
- */
-function isCacheFresh(cacheFile: string): boolean {
-  try {
-    const stats = fs.statSync(cacheFile);
-    const ageMs = Date.now() - stats.mtimeMs;
-    const maxAgeMs = 24 * 60 * 60 * 1000; // 24 hours
-    return ageMs < maxAgeMs;
-  } catch {
-    return false;
+  // Replace hyphens with spaces for consistent comparison
+  d = d.replace(/-/g, ' ');
+
+  // Collapse multiple spaces
+  d = d.replace(/\s+/g, ' ');
+
+  // Convert ordinal words to numeric ordinals
+  for (const [word, num] of Object.entries(ORDINAL_WORDS)) {
+    // word may contain hyphens (already converted to spaces above)
+    const pattern = word.replace(/-/g, ' ');
+    d = d.replace(new RegExp(`\\b${pattern}\\b`, 'g'), num);
   }
+
+  // For purely numeric strings, strip leading zeros
+  if (/^\d+$/.test(d)) {
+    d = d.replace(/^0+/, '') || '0';
+  }
+
+  return d;
 }
 
 /**
  * Load cached state data from disk
  */
 function loadFromCache(stateCode: string): StateLegislator[] | null {
-  const cacheFile = getCacheFilePath(stateCode);
-
-  if (!isCacheFresh(cacheFile)) {
-    return null;
-  }
+  const cacheFile = path.join(CACHE_DIR, `${stateCode.toUpperCase()}.json`);
 
   try {
     const data = fs.readFileSync(cacheFile, 'utf-8');
@@ -113,127 +116,9 @@ function loadFromCache(stateCode: string): StateLegislator[] | null {
 }
 
 /**
- * Save state data to cache
+ * Get state legislators for a state (from cache)
  */
-function saveToCache(stateCode: string, legislators: StateLegislator[]): void {
-  try {
-    fs.mkdirSync(CACHE_DIR, { recursive: true });
-    const cacheFile = getCacheFilePath(stateCode);
-    fs.writeFileSync(cacheFile, JSON.stringify(legislators, null, 2));
-  } catch (error) {
-    console.error(`Failed to save cache for ${stateCode}:`, error);
-  }
-}
-
-/**
- * Parse OpenStates YAML into our format
- */
-function parseOpenStatesYaml(yamlContent: string): StateLegislator | null {
-  try {
-    const data = parseYaml(yamlContent) as OpenStatesLegislator;
-
-    // Find current role (no end_date or end_date in future)
-    const currentRole = data.roles?.find((role) => {
-      if (role.end_date) {
-        return new Date(role.end_date) > new Date();
-      }
-      return true;
-    });
-
-    if (!currentRole) {
-      return null; // No current role
-    }
-
-    // Get phone from offices
-    const capitolOffice = data.offices?.find((o) => o.classification === 'capitol');
-    const districtOffice = data.offices?.find((o) => o.classification === 'district');
-    const phone = capitolOffice?.voice || districtOffice?.voice;
-    const office = capitolOffice?.address || districtOffice?.address;
-
-    // Get website from links
-    const homepage = data.links?.find((l) => l.note === 'homepage');
-    const website = homepage?.url || data.links?.[0]?.url;
-
-    return {
-      id: data.id,
-      name: data.name,
-      firstName: data.given_name,
-      lastName: data.family_name,
-      chamber: currentRole.type,
-      district: currentRole.district,
-      party: data.party?.[0]?.name || 'Unknown',
-      email: data.email,
-      phone,
-      photoUrl: data.image,
-      website,
-      office,
-    };
-  } catch (error) {
-    console.error('Failed to parse YAML:', error);
-    return null;
-  }
-}
-
-/**
- * Fetch state legislator data from GitHub
- */
-async function fetchStateData(stateCode: string): Promise<StateLegislator[]> {
-  const apiUrl = getGitHubApiUrl(stateCode);
-
-  try {
-    // Get list of files
-    const listResponse = await fetch(apiUrl, {
-      headers: {
-        Accept: 'application/vnd.github.v3+json',
-        'User-Agent': 'Constituent-App',
-      },
-    });
-
-    if (!listResponse.ok) {
-      if (listResponse.status === 404) {
-        console.log(`No data available for state: ${stateCode}`);
-        return [];
-      }
-      throw new Error(`GitHub API error: ${listResponse.status}`);
-    }
-
-    const files = (await listResponse.json()) as Array<{
-      name: string;
-      download_url: string;
-    }>;
-
-    // Download each YAML file
-    const legislators: StateLegislator[] = [];
-
-    for (const file of files) {
-      if (!file.name.endsWith('.yml')) continue;
-
-      try {
-        const yamlResponse = await fetch(file.download_url);
-        if (!yamlResponse.ok) continue;
-
-        const yamlContent = await yamlResponse.text();
-        const legislator = parseOpenStatesYaml(yamlContent);
-
-        if (legislator) {
-          legislators.push(legislator);
-        }
-      } catch {
-        // Skip individual file errors
-      }
-    }
-
-    return legislators;
-  } catch (error) {
-    console.error(`Failed to fetch state data for ${stateCode}:`, error);
-    return [];
-  }
-}
-
-/**
- * Get state legislators for a state (with caching)
- */
-async function getStateLegislators(stateCode: string): Promise<StateLegislator[]> {
+function getStateLegislators(stateCode: string): StateLegislator[] {
   const code = stateCode.toUpperCase();
 
   // Check in-memory cache first
@@ -241,25 +126,17 @@ async function getStateLegislators(stateCode: string): Promise<StateLegislator[]
     return stateDataCache.get(code)!;
   }
 
-  // Check disk cache
+  // Load from disk cache
   const cached = loadFromCache(code);
   if (cached) {
     stateDataCache.set(code, cached);
     return cached;
   }
 
-  // Fetch from GitHub
-  console.log(`Fetching state legislator data for ${code}...`);
-  const legislators = await fetchStateData(code);
-
-  // Cache results
-  if (legislators.length > 0) {
-    stateDataCache.set(code, legislators);
-    saveToCache(code, legislators);
-    console.log(`Cached ${legislators.length} legislators for ${code}`);
-  }
-
-  return legislators;
+  console.warn(
+    `No cached data for ${code}. Run "npm run refresh-states" to download state legislator data.`
+  );
+  return [];
 }
 
 /**
@@ -269,11 +146,17 @@ function toOfficial(leg: StateLegislator, stateCode: string): Official {
   const chamberTitle =
     leg.chamber === 'upper' ? 'State Senator' : 'State Representative';
 
+  // Use "District N" for numeric districts, bare name for named districts
+  const isNumeric = /^\d+$/.test(leg.district);
+  const districtLabel = isNumeric
+    ? `District ${leg.district}`
+    : leg.district;
+
   return {
     id: leg.id,
     name: leg.name,
     lastName: leg.lastName,
-    title: `${chamberTitle}, District ${leg.district}`,
+    title: `${chamberTitle}, ${districtLabel}`,
     level: 'state',
     chamber: leg.chamber,
     party: leg.party,
@@ -288,25 +171,18 @@ function toOfficial(leg: StateLegislator, stateCode: string): Official {
 }
 
 /**
- * Normalize district number (strip leading zeros)
- */
-function normalizeDistrict(district: string): string {
-  // Remove leading zeros but keep at least one digit
-  return district.replace(/^0+/, '') || '0';
-}
-
-/**
  * Find the state senator for a given district
  */
-export async function findStateSenator(
+export function findStateSenator(
   stateCode: string,
   district: string
-): Promise<Official | null> {
-  const legislators = await getStateLegislators(stateCode);
-  const normalizedDistrict = normalizeDistrict(district);
+): Official | null {
+  const legislators = getStateLegislators(stateCode);
+  const target = normalizeDistrict(district);
 
   const senator = legislators.find(
-    (leg) => leg.chamber === 'upper' && normalizeDistrict(leg.district) === normalizedDistrict
+    (leg) =>
+      leg.chamber === 'upper' && normalizeDistrict(leg.district) === target
   );
 
   return senator ? toOfficial(senator, stateCode) : null;
@@ -315,15 +191,16 @@ export async function findStateSenator(
 /**
  * Find the state representative for a given district
  */
-export async function findStateRep(
+export function findStateRep(
   stateCode: string,
   district: string
-): Promise<Official | null> {
-  const legislators = await getStateLegislators(stateCode);
-  const normalizedDistrict = normalizeDistrict(district);
+): Official | null {
+  const legislators = getStateLegislators(stateCode);
+  const target = normalizeDistrict(district);
 
   const rep = legislators.find(
-    (leg) => leg.chamber === 'lower' && normalizeDistrict(leg.district) === normalizedDistrict
+    (leg) =>
+      leg.chamber === 'lower' && normalizeDistrict(leg.district) === target
   );
 
   return rep ? toOfficial(rep, stateCode) : null;
@@ -332,29 +209,22 @@ export async function findStateRep(
 /**
  * Find both state legislators (senator and rep) for a location
  */
-export async function findStateLegislators(
+export function findStateLegislators(
   stateCode: string,
   upperDistrict: string | null,
   lowerDistrict: string | null
-): Promise<Official[]> {
+): Official[] {
   const results: Official[] = [];
 
   if (upperDistrict) {
-    const senator = await findStateSenator(stateCode, upperDistrict);
+    const senator = findStateSenator(stateCode, upperDistrict);
     if (senator) results.push(senator);
   }
 
   if (lowerDistrict) {
-    const rep = await findStateRep(stateCode, lowerDistrict);
+    const rep = findStateRep(stateCode, lowerDistrict);
     if (rep) results.push(rep);
   }
 
   return results;
-}
-
-/**
- * Preload state data (call at startup for frequently used states)
- */
-export async function preloadStateData(stateCodes: string[]): Promise<void> {
-  await Promise.all(stateCodes.map(getStateLegislators));
 }

@@ -209,11 +209,14 @@ export async function geocodeAddress(
       const keyLower = key.toLowerCase();
       if (keyLower.includes('state legislative') && keyLower.includes('upper')) {
         const upperInfo = geographies[key]?.[0];
-        stateUpperDistrict = upperInfo?.SLDU || upperInfo?.BASENAME;
+        // Prefer BASENAME (district name) over SLDU (numeric FIPS code)
+        // so named districts like "3rd Suffolk" are preserved
+        stateUpperDistrict = upperInfo?.BASENAME || upperInfo?.SLDU;
       }
       if (keyLower.includes('state legislative') && keyLower.includes('lower')) {
         const lowerInfo = geographies[key]?.[0];
-        stateLowerDistrict = lowerInfo?.SLDL || lowerInfo?.BASENAME;
+        // Prefer BASENAME (district name) over SLDL (numeric FIPS code)
+        stateLowerDistrict = lowerInfo?.BASENAME || lowerInfo?.SLDL;
       }
     }
 

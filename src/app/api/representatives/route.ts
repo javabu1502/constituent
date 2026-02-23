@@ -113,17 +113,12 @@ export async function POST(request: NextRequest): Promise<NextResponse<LookupRes
     }
 
     // Step 3: Look up state legislators
-    try {
-      const stateLegislators = await findStateLegislators(
-        geocodeResult.stateCode,
-        geocodeResult.stateUpperDistrict || null,
-        geocodeResult.stateLowerDistrict || null
-      );
-      officials.push(...stateLegislators);
-    } catch (error) {
-      console.warn('Failed to fetch state legislators:', error);
-      // Continue without state legislators - federal data is still available
-    }
+    const stateLegislators = findStateLegislators(
+      geocodeResult.stateCode,
+      geocodeResult.stateUpperDistrict || null,
+      geocodeResult.stateLowerDistrict || null
+    );
+    officials.push(...stateLegislators);
 
     const result: LookupResult = {
       officials,

@@ -1,6 +1,7 @@
 'use client';
 
-import { useReducer, useCallback } from 'react';
+import { useReducer, useCallback, useEffect } from 'react';
+import { createClient } from '@/lib/supabase/client';
 import type { Official, Address } from '@/lib/types';
 import { AddressStep } from './AddressStep';
 import { RepStep } from './RepStep';
@@ -24,7 +25,9 @@ export interface ContactState {
   contactMethod: 'email' | 'phone';
   // Topic form fields
   userName: string;
+  userEmail: string;
   issue: string;
+  issueCategory: string;
   ask: string;
   personalWhy: string;
   // Per-official messages keyed by official name (like PoliAct)
@@ -44,7 +47,8 @@ type ContactAction =
   | { type: 'SELECT_ALL_REPS' }
   | { type: 'SET_CONTACT_METHOD'; payload: 'email' | 'phone' }
   | { type: 'SET_USER_NAME'; payload: string }
-  | { type: 'SET_ISSUE'; payload: string }
+  | { type: 'SET_USER_EMAIL'; payload: string }
+  | { type: 'SET_ISSUE'; payload: { issue: string; category: string } }
   | { type: 'SET_ASK'; payload: string }
   | { type: 'SET_PERSONAL_WHY'; payload: string }
   | { type: 'SET_MESSAGE'; payload: { officialName: string; message: OfficialMessage } }
@@ -63,7 +67,9 @@ const initialState: ContactState = {
   selectedReps: [],
   contactMethod: 'email',
   userName: '',
+  userEmail: '',
   issue: '',
+  issueCategory: '',
   ask: '',
   personalWhy: '',
   messages: {},
@@ -94,8 +100,10 @@ function contactReducer(state: ContactState, action: ContactAction): ContactStat
       return { ...state, contactMethod: action.payload };
     case 'SET_USER_NAME':
       return { ...state, userName: action.payload };
+    case 'SET_USER_EMAIL':
+      return { ...state, userEmail: action.payload };
     case 'SET_ISSUE':
-      return { ...state, issue: action.payload };
+      return { ...state, issue: action.payload.issue, issueCategory: action.payload.category };
     case 'SET_ASK':
       return { ...state, ask: action.payload };
     case 'SET_PERSONAL_WHY':
@@ -157,6 +165,22 @@ const STEP_LABELS: Record<string, string> = {
 export function ContactFlow() {
   const [state, dispatch] = useReducer(contactReducer, initialState);
 
+  // Auto-fill name and email for logged-in users
+  useEffect(() => {
+    const supabase = createClient();
+    supabase.auth.getUser().then(({ data: { user } }) => {
+      if (user) {
+        if (!state.userEmail && user.email) {
+          dispatch({ type: 'SET_USER_EMAIL', payload: user.email });
+        }
+        if (!state.userName && user.user_metadata?.full_name) {
+          dispatch({ type: 'SET_USER_NAME', payload: user.user_metadata.full_name });
+        }
+      }
+    });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const currentStepIndex = STEPS.indexOf(state.step as typeof STEPS[number]);
 
   const goToStep = useCallback((step: ContactState['step']) => {
@@ -174,19 +198,19 @@ export function ContactFlow() {
   if (state.step === 'success') {
     return (
       <div className="w-full max-w-2xl mx-auto">
-        <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden p-8">
+        <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm overflow-hidden p-8">
           <div className="text-center">
-            <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-              <svg className="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="w-20 h-20 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mx-auto mb-6">
+              <svg className="w-10 h-10 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
             </div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-2">Thank You!</h3>
-            <p className="text-gray-600 mb-6">
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Thank You!</h3>
+            <p className="text-gray-600 dark:text-gray-300 mb-6">
               Your voice matters. Every message counts toward making a difference.
             </p>
-            <div className="p-4 bg-purple-50 border border-purple-200 rounded-xl mb-6">
-              <p className="text-sm text-purple-800">
+            <div className="p-4 bg-purple-50 dark:bg-purple-900/30 border border-purple-200 dark:border-purple-700 rounded-xl mb-6">
+              <p className="text-sm text-purple-800 dark:text-purple-200">
                 Contacted <strong>{state.selectedReps.length} representative{state.selectedReps.length > 1 ? 's' : ''}</strong> about <strong>{state.issue}</strong>
               </p>
             </div>
@@ -208,10 +232,10 @@ export function ContactFlow() {
       <div className="mb-8 px-4">
         {/* Step counter */}
         <div className="text-center mb-4">
-          <span className="text-sm font-medium text-purple-600">
+          <span className="text-sm font-medium text-purple-600 dark:text-purple-400">
             Step {currentStepIndex + 1} of {STEPS.length}
           </span>
-          <h2 className="text-lg font-semibold text-gray-900 mt-1">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white mt-1">
             {STEP_LABELS[state.step]}
           </h2>
         </div>
@@ -226,7 +250,7 @@ export function ContactFlow() {
                     ? 'bg-purple-600'
                     : index === currentStepIndex
                     ? 'bg-purple-400'
-                    : 'bg-gray-200'
+                    : 'bg-gray-200 dark:bg-gray-700'
                 }`}
               />
             </div>
@@ -239,7 +263,7 @@ export function ContactFlow() {
             <div
               key={step}
               className={`flex flex-col items-center ${
-                index <= currentStepIndex ? 'text-purple-600' : 'text-gray-400'
+                index <= currentStepIndex ? 'text-purple-600 dark:text-purple-400' : 'text-gray-400 dark:text-gray-500'
               }`}
             >
               <div
@@ -247,8 +271,8 @@ export function ContactFlow() {
                   index < currentStepIndex
                     ? 'bg-purple-600 border-purple-600'
                     : index === currentStepIndex
-                    ? 'bg-white border-purple-600'
-                    : 'bg-white border-gray-300'
+                    ? 'bg-white dark:bg-gray-800 border-purple-600'
+                    : 'bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600'
                 }`}
               />
               <span className="text-xs mt-1 hidden sm:block">
@@ -260,7 +284,7 @@ export function ContactFlow() {
       </div>
 
       {/* Step content card */}
-      <div className="bg-white rounded-2xl border border-gray-200 shadow-sm overflow-hidden">
+      <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm overflow-hidden">
         {state.step === 'address' && (
           <AddressStep state={state} dispatch={dispatch} />
         )}
@@ -283,9 +307,9 @@ export function ContactFlow() {
 
       {/* Privacy notice */}
       <div className="mt-6 px-4">
-        <div className="flex items-start gap-3 p-4 bg-gray-50 rounded-xl border border-gray-100">
+        <div className="flex items-start gap-3 p-4 bg-gray-50 dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700">
           <svg
-            className="w-5 h-5 text-gray-400 flex-shrink-0 mt-0.5"
+            className="w-5 h-5 text-gray-400 dark:text-gray-500 flex-shrink-0 mt-0.5"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -298,8 +322,8 @@ export function ContactFlow() {
             />
           </svg>
           <div>
-            <h4 className="text-sm font-medium text-gray-900">Your Privacy Matters</h4>
-            <p className="text-xs text-gray-500 mt-1">
+            <h4 className="text-sm font-medium text-gray-900 dark:text-white">Your Privacy Matters</h4>
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
               Your address is used only to find your representatives and is never stored.
               Messages are sent directly from your device. We do not collect personal information.
             </p>

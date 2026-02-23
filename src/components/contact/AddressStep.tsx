@@ -122,9 +122,9 @@ export function AddressStep({ state, dispatch }: AddressStepProps) {
   return (
     <div className="p-6 sm:p-8">
       <div className="text-center mb-8">
-        <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+        <div className="w-16 h-16 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center mx-auto mb-4">
           <svg
-            className="w-8 h-8 text-purple-600"
+            className="w-8 h-8 text-purple-600 dark:text-purple-400"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -143,10 +143,10 @@ export function AddressStep({ state, dispatch }: AddressStepProps) {
             />
           </svg>
         </div>
-        <h3 className="text-xl font-semibold text-gray-900">
+        <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
           Enter Your Home Address
         </h3>
-        <p className="text-gray-500 mt-2 text-sm max-w-sm mx-auto">
+        <p className="text-gray-500 dark:text-gray-400 mt-2 text-sm max-w-sm mx-auto">
           We&apos;ll use this to find your U.S. Senators and Representative in Congress.
         </p>
       </div>
@@ -154,7 +154,7 @@ export function AddressStep({ state, dispatch }: AddressStepProps) {
       <form onSubmit={handleSubmit} className="space-y-4">
         {/* Street Address */}
         <div>
-          <label htmlFor="street" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="street" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
             Street Address
           </label>
           <input
@@ -163,7 +163,7 @@ export function AddressStep({ state, dispatch }: AddressStepProps) {
             value={street}
             onChange={(e) => setStreet(e.target.value)}
             placeholder="123 Main Street"
-            className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent transition-shadow"
+            className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent transition-shadow bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
             autoComplete="street-address"
             autoFocus
           />
@@ -171,7 +171,7 @@ export function AddressStep({ state, dispatch }: AddressStepProps) {
 
         {/* City */}
         <div>
-          <label htmlFor="city" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="city" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
             City
           </label>
           <input
@@ -180,7 +180,7 @@ export function AddressStep({ state, dispatch }: AddressStepProps) {
             value={city}
             onChange={(e) => setCity(e.target.value)}
             placeholder="San Francisco"
-            className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent transition-shadow"
+            className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent transition-shadow bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
             autoComplete="address-level2"
           />
         </div>
@@ -189,14 +189,14 @@ export function AddressStep({ state, dispatch }: AddressStepProps) {
         <div className="grid grid-cols-2 gap-4">
           {/* State */}
           <div>
-            <label htmlFor="state" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="state" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               State
             </label>
             <select
               id="state"
               value={stateCode}
               onChange={(e) => setStateCode(e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent transition-shadow bg-white"
+              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent transition-shadow bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               autoComplete="address-level1"
             >
               <option value="">Select state</option>
@@ -210,8 +210,8 @@ export function AddressStep({ state, dispatch }: AddressStepProps) {
 
           {/* ZIP Code */}
           <div>
-            <label htmlFor="zip" className="block text-sm font-medium text-gray-700 mb-1">
-              ZIP Code <span className="text-gray-400 font-normal">(optional)</span>
+            <label htmlFor="zip" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              ZIP Code <span className="text-gray-400 dark:text-gray-500 font-normal">(optional)</span>
             </label>
             <input
               id="zip"
@@ -219,7 +219,7 @@ export function AddressStep({ state, dispatch }: AddressStepProps) {
               value={zip}
               onChange={(e) => setZip(e.target.value)}
               placeholder="94102"
-              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent transition-shadow"
+              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent transition-shadow bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
               autoComplete="postal-code"
               maxLength={10}
             />
@@ -227,10 +227,10 @@ export function AddressStep({ state, dispatch }: AddressStepProps) {
         </div>
 
         {state.error && (
-          <div className="p-4 bg-red-50 border border-red-200 rounded-xl">
+          <div className="p-4 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 rounded-xl">
             <div className="flex items-start gap-3">
               <svg
-                className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5"
+                className="w-5 h-5 text-red-500 dark:text-red-400 flex-shrink-0 mt-0.5"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -242,7 +242,7 @@ export function AddressStep({ state, dispatch }: AddressStepProps) {
                   d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                 />
               </svg>
-              <p className="text-sm text-red-700">{state.error}</p>
+              <p className="text-sm text-red-700 dark:text-red-300">{state.error}</p>
             </div>
           </div>
         )}
@@ -257,7 +257,7 @@ export function AddressStep({ state, dispatch }: AddressStepProps) {
         </Button>
       </form>
 
-      <p className="text-xs text-gray-400 text-center mt-6">
+      <p className="text-xs text-gray-400 dark:text-gray-500 text-center mt-6">
         Used only to find your representatives. Never stored or shared.
       </p>
     </div>
