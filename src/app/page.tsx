@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
+import { HomeTrends } from '@/components/trends/HomeTrends';
 
 export default function HomePage() {
   return (
@@ -82,6 +83,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* Trending Issues */}
+      <HomeTrends />
 
       {/* What Makes This Different Section */}
       <section className="py-16 sm:py-20 px-4 bg-gray-50 dark:bg-gray-800">

@@ -12,7 +12,7 @@ export async function GET(req: NextRequest) {
   // Build filtered query for issue rankings
   let issueQuery = admin
     .from('messages')
-    .select('issue_area');
+    .select('issue_area, issue_subtopic');
 
   if (period === 'week') {
     const since = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
@@ -28,16 +28,30 @@ export async function GET(req: NextRequest) {
 
   const { data: filteredMessages } = await issueQuery;
 
-  // Aggregate issue counts
+  // Aggregate issue counts and subtopics
   const issueCounts: Record<string, number> = {};
+  const subtopicCounts: Record<string, Record<string, number>> = {};
   for (const msg of filteredMessages || []) {
     const area = msg.issue_area;
     if (area) {
       issueCounts[area] = (issueCounts[area] || 0) + 1;
+      const sub = msg.issue_subtopic;
+      if (sub) {
+        if (!subtopicCounts[area]) subtopicCounts[area] = {};
+        subtopicCounts[area][sub] = (subtopicCounts[area][sub] || 0) + 1;
+      }
     }
   }
   const issues = Object.entries(issueCounts)
-    .map(([issue_area, count]) => ({ issue_area, count }))
+    .map(([issue_area, count]) => ({
+      issue_area,
+      count,
+      subtopics: subtopicCounts[issue_area]
+        ? Object.entries(subtopicCounts[issue_area])
+            .map(([name, cnt]) => ({ name, count: cnt }))
+            .sort((a, b) => b.count - a.count)
+        : [],
+    }))
     .sort((a, b) => b.count - a.count);
 
   // Stats — always unfiltered
@@ -66,7 +80,7 @@ export async function GET(req: NextRequest) {
   };
 
   // State-specific data for authenticated users
-  let stateIssues: { issue_area: string; count: number }[] | undefined;
+  let stateIssues: { issue_area: string; count: number; subtopics: { name: string; count: number }[] }[] | undefined;
   let userState: string | undefined;
 
   try {
@@ -85,7 +99,7 @@ export async function GET(req: NextRequest) {
 
         let stateQuery = admin
           .from('messages')
-          .select('issue_area')
+          .select('issue_area, issue_subtopic')
           .eq('advocate_state', profile.state);
 
         if (period === 'week') {
@@ -103,14 +117,28 @@ export async function GET(req: NextRequest) {
         const { data: stateMessages } = await stateQuery;
 
         const stateCounts: Record<string, number> = {};
+        const stateSubCounts: Record<string, Record<string, number>> = {};
         for (const msg of stateMessages || []) {
           const area = msg.issue_area;
           if (area) {
             stateCounts[area] = (stateCounts[area] || 0) + 1;
+            const sub = msg.issue_subtopic;
+            if (sub) {
+              if (!stateSubCounts[area]) stateSubCounts[area] = {};
+              stateSubCounts[area][sub] = (stateSubCounts[area][sub] || 0) + 1;
+            }
           }
         }
         stateIssues = Object.entries(stateCounts)
-          .map(([issue_area, count]) => ({ issue_area, count }))
+          .map(([issue_area, count]) => ({
+            issue_area,
+            count,
+            subtopics: stateSubCounts[issue_area]
+              ? Object.entries(stateSubCounts[issue_area])
+                  .map(([name, cnt]) => ({ name, count: cnt }))
+                  .sort((a, b) => b.count - a.count)
+              : [],
+          }))
           .sort((a, b) => b.count - a.count);
       }
     }

@@ -2,19 +2,122 @@
 
 import { useState, useEffect, useCallback } from 'react';
 
+interface Subtopic {
+  name: string;
+  count: number;
+}
+
+interface IssueWithSubtopics {
+  issue_area: string;
+  count: number;
+  subtopics: Subtopic[];
+}
+
 interface TrendsData {
-  issues: { issue_area: string; count: number }[];
+  issues: IssueWithSubtopics[];
   stats: {
     totalMessages: number;
     messagesThisMonth: number;
     statesRepresented: number;
   };
-  stateIssues?: { issue_area: string; count: number }[];
+  stateIssues?: IssueWithSubtopics[];
   userState?: string;
 }
 
 type Period = 'all' | 'month' | 'week';
 type Level = 'all' | 'federal' | 'state';
+
+function ChevronIcon({ open }: { open: boolean }) {
+  return (
+    <svg
+      className={`w-4 h-4 text-gray-400 dark:text-gray-500 transition-transform ${open ? 'rotate-90' : ''}`}
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+    </svg>
+  );
+}
+
+function IssueBar({
+  issue,
+  rank,
+  maxCount,
+  gradientFrom,
+  gradientTo,
+}: {
+  issue: IssueWithSubtopics;
+  rank: number;
+  maxCount: number;
+  gradientFrom: string;
+  gradientTo: string;
+}) {
+  const [expanded, setExpanded] = useState(false);
+  const hasSubtopics = issue.subtopics.length > 0;
+  const maxSubCount = issue.subtopics[0]?.count ?? 1;
+
+  return (
+    <div>
+      <button
+        onClick={() => hasSubtopics && setExpanded(!expanded)}
+        className={`w-full bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-3 flex items-center gap-3 text-left ${
+          hasSubtopics ? 'cursor-pointer hover:border-purple-300 dark:hover:border-purple-600 transition-colors' : 'cursor-default'
+        }`}
+      >
+        <span className="text-sm font-medium text-gray-400 dark:text-gray-500 w-6 text-right shrink-0">
+          {rank}
+        </span>
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center justify-between mb-1">
+            <span className="text-sm font-medium text-gray-900 dark:text-white truncate">
+              {issue.issue_area}
+            </span>
+            <div className="flex items-center gap-2 ml-2 shrink-0">
+              <span className="text-sm text-gray-500 dark:text-gray-400">
+                {issue.count.toLocaleString()}
+              </span>
+              {hasSubtopics && <ChevronIcon open={expanded} />}
+            </div>
+          </div>
+          <div className="w-full bg-gray-100 dark:bg-gray-700 rounded-full h-2">
+            <div
+              className={`h-2 rounded-full bg-gradient-to-r ${gradientFrom} ${gradientTo}`}
+              style={{ width: `${(issue.count / maxCount) * 100}%` }}
+            />
+          </div>
+        </div>
+      </button>
+      {expanded && hasSubtopics && (
+        <div className="ml-9 mt-1 mb-1 space-y-1">
+          {issue.subtopics.map((sub) => (
+            <div
+              key={sub.name}
+              className="bg-gray-50 dark:bg-gray-800/50 rounded-md border border-gray-100 dark:border-gray-700/50 px-3 py-2 flex items-center gap-3"
+            >
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center justify-between mb-0.5">
+                  <span className="text-xs font-medium text-gray-700 dark:text-gray-300 truncate">
+                    {sub.name}
+                  </span>
+                  <span className="text-xs text-gray-400 dark:text-gray-500 ml-2 shrink-0">
+                    {sub.count.toLocaleString()}
+                  </span>
+                </div>
+                <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1.5">
+                  <div
+                    className={`h-1.5 rounded-full bg-gradient-to-r ${gradientFrom} ${gradientTo} opacity-70`}
+                    style={{ width: `${(sub.count / maxSubCount) * 100}%` }}
+                  />
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
 
 export function TrendsContent() {
   const [data, setData] = useState<TrendsData | null>(null);
@@ -135,30 +238,14 @@ export function TrendsContent() {
         ) : (
           <div className="space-y-2">
             {data.issues.map((issue, i) => (
-              <div
+              <IssueBar
                 key={issue.issue_area}
-                className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-3 flex items-center gap-3"
-              >
-                <span className="text-sm font-medium text-gray-400 dark:text-gray-500 w-6 text-right">
-                  {i + 1}
-                </span>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center justify-between mb-1">
-                    <span className="text-sm font-medium text-gray-900 dark:text-white truncate">
-                      {issue.issue_area}
-                    </span>
-                    <span className="text-sm text-gray-500 dark:text-gray-400 ml-2 shrink-0">
-                      {issue.count.toLocaleString()}
-                    </span>
-                  </div>
-                  <div className="w-full bg-gray-100 dark:bg-gray-700 rounded-full h-2">
-                    <div
-                      className="h-2 rounded-full bg-gradient-to-r from-purple-500 to-purple-600"
-                      style={{ width: `${(issue.count / maxCount) * 100}%` }}
-                    />
-                  </div>
-                </div>
-              </div>
+                issue={issue}
+                rank={i + 1}
+                maxCount={maxCount}
+                gradientFrom="from-purple-500"
+                gradientTo="to-purple-600"
+              />
             ))}
           </div>
         )}
@@ -177,30 +264,14 @@ export function TrendsContent() {
           ) : (
             <div className="space-y-2">
               {data.stateIssues.map((issue, i) => (
-                <div
+                <IssueBar
                   key={issue.issue_area}
-                  className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-3 flex items-center gap-3"
-                >
-                  <span className="text-sm font-medium text-gray-400 dark:text-gray-500 w-6 text-right">
-                    {i + 1}
-                  </span>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center justify-between mb-1">
-                      <span className="text-sm font-medium text-gray-900 dark:text-white truncate">
-                        {issue.issue_area}
-                      </span>
-                      <span className="text-sm text-gray-500 dark:text-gray-400 ml-2 shrink-0">
-                        {issue.count.toLocaleString()}
-                      </span>
-                    </div>
-                    <div className="w-full bg-gray-100 dark:bg-gray-700 rounded-full h-2">
-                      <div
-                        className="h-2 rounded-full bg-gradient-to-r from-purple-400 to-purple-500"
-                        style={{ width: `${(issue.count / maxStateCount) * 100}%` }}
-                      />
-                    </div>
-                  </div>
-                </div>
+                  issue={issue}
+                  rank={i + 1}
+                  maxCount={maxStateCount}
+                  gradientFrom="from-purple-400"
+                  gradientTo="to-purple-500"
+                />
               ))}
             </div>
           )}
