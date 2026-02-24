@@ -132,6 +132,25 @@ export interface Profile {
   updated_at: string;
 }
 
+// Feed types
+export interface FeedArticle {
+  title: string;
+  link: string;
+  source: string;
+  pubDate: string;
+  subtopic: string;
+}
+
+export interface FeedBill {
+  bill_number: string;
+  title: string;
+  sponsor_name: string;
+  date: string;
+  status: string;
+  rep_id: string;
+  level: 'federal' | 'state';
+}
+
 // Track send event
 export interface TrackSendRequest {
   recipientName: string;
