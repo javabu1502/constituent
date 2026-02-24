@@ -4,6 +4,7 @@ import { createAdminClient } from '@/lib/supabase';
 import { createClient } from '@/lib/supabase/server';
 import { congressFetch } from '@/lib/congress-api';
 import type { RepVote, VotingSummary, VotingRecordResponse, Official } from '@/lib/types';
+import { fetchLegiscanVotes } from '@/lib/legiscan-api';
 
 const CACHE_TTL_MS = 24 * 60 * 60 * 1000; // 24 hours
 const CURRENT_CONGRESS = 119;
@@ -484,6 +485,7 @@ export async function GET(request: NextRequest) {
   }
 
   let votes: RepVote[] = [];
+  let dataSource: VotingRecordResponse['data_source'];
 
   if (rep.level === 'federal') {
     if (rep.chamber === 'house') {
@@ -492,8 +494,29 @@ export async function GET(request: NextRequest) {
       const lastName = rep.lastName || rep.name.split(' ').pop() || rep.name;
       votes = await fetchSenateVotes(rep.id, rep.name, lastName, rep.state);
     }
+    dataSource = 'congress.gov';
   } else {
+    // Try Open States first
     votes = await fetchStateVotes(rep.id, rep.name, rep.chamber);
+    if (votes.length > 0) {
+      dataSource = 'openstates';
+    } else {
+      // Fall back to LegiScan
+      const lastName = rep.lastName || rep.name.split(' ').pop() || rep.name;
+      const legiscanResult = await fetchLegiscanVotes(
+        rep.state,
+        rep.name,
+        lastName,
+        rep.chamber,
+        rep.id,
+      );
+      if (legiscanResult && legiscanResult.votes.length > 0) {
+        votes = legiscanResult.votes;
+        dataSource = 'legiscan';
+      } else {
+        dataSource = 'openstates';
+      }
+    }
   }
 
   // Sort by date descending
@@ -508,6 +531,7 @@ export async function GET(request: NextRequest) {
     votes,
     summary,
     total_available: votes.length,
+    data_source: dataSource,
   };
 
   // Cache for 24 hours

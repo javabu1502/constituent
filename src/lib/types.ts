@@ -271,6 +271,7 @@ export interface VotingRecordResponse {
   votes: RepVote[];
   summary: VotingSummary;
   total_available: number;
+  data_source?: 'congress.gov' | 'openstates' | 'legiscan';
 }
 
 // Campaign types

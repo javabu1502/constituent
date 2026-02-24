@@ -288,7 +288,7 @@ function VotingRecordTab({ repId, repLevel, repState }: { repId: string; repLeve
       return (
         <div className="bg-gray-50 dark:bg-gray-800/50 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
           <p className="text-sm text-gray-600 dark:text-gray-400">
-            Vote data is not currently available for {stateName} state legislators. Not all state legislatures publish roll call vote data through Open States.
+            Vote data is not currently available for {stateName} state legislators. Not all state legislatures publish roll call vote data through Open States or LegiScan.
           </p>
         </div>
       );
@@ -394,9 +394,11 @@ function VotingRecordTab({ repId, repLevel, repState }: { repId: string; repLeve
       {/* Data source note */}
       <div className="bg-gray-50 dark:bg-gray-800/50 rounded-lg p-3 border border-gray-200 dark:border-gray-700">
         <p className="text-xs text-gray-500 dark:text-gray-400">
-          {repLevel === 'federal'
-            ? 'Voting data from Congress.gov for the 119th Congress. Detailed vote tallies and positions are shown for recent votes where data is available.'
-            : 'Voting data from Open States. Coverage may vary by state legislature session.'}
+          {data.data_source === 'legiscan'
+            ? <>Data provided by <a href="https://legiscan.com" target="_blank" rel="noopener noreferrer" className="underline font-medium hover:text-gray-700 dark:hover:text-gray-300">LegiScan</a>. Coverage may vary by state legislature session.</>
+            : repLevel === 'federal'
+              ? 'Voting data from Congress.gov for the 119th Congress. Detailed vote tallies and positions are shown for recent votes where data is available.'
+              : 'Voting data from Open States. Coverage may vary by state legislature session.'}
         </p>
       </div>
     </div>

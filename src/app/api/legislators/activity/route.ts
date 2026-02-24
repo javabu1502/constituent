@@ -1,14 +1,10 @@
 import { NextResponse } from 'next/server';
 import { createAdminClient } from '@/lib/supabase';
 import { openstatesFetch } from '@/lib/openstates-api';
-import { US_STATES } from '@/lib/constants';
+import { fetchLegiscanVotes } from '@/lib/legiscan-api';
 import type { FeedBill, RepVote, RepNewsArticle, BillAction } from '@/lib/types';
 
 const CACHE_TTL_MS = 12 * 60 * 60 * 1000; // 12 hours
-
-function stateCodeToName(code: string): string {
-  return US_STATES.find((s) => s.code === code.toUpperCase())?.name ?? code;
-}
 
 function deriveStatus(classifications: string[][]): string {
   const flat = classifications.flat();
@@ -43,30 +39,23 @@ function isRecent(pubDate: string, maxAgeDays = 30): boolean {
   return age < maxAgeDays * 24 * 60 * 60 * 1000;
 }
 
-async function fetchLegislatorNews(name: string, state: string, personId: string): Promise<RepNewsArticle[]> {
-  const stateName = stateCodeToName(state);
-  const queries = [
-    `"${name}" state legislator when:30d`,
-    `"${name}" ${stateName} when:30d`,
-  ];
-
+async function fetchLegislatorNews(name: string, state: string, personId: string, title?: string): Promise<RepNewsArticle[]> {
   const seen = new Set<string>();
   const articles: RepNewsArticle[] = [];
 
-  for (const query of queries) {
-    if (articles.length >= 5) break;
-    try {
-      const url = `https://news.google.com/rss/search?q=${encodeURIComponent(query)}&hl=en-US&gl=US&ceid=US:en`;
-      const res = await fetch(url, {
-        signal: AbortSignal.timeout(8000),
-        headers: { 'User-Agent': 'Mozilla/5.0 (compatible; MyDemocracy/1.0)' },
-      });
-      if (!res.ok) continue;
+  // Primary search: just the legislator's full name
+  const primaryQuery = `"${name}" when:7d`;
+  try {
+    const url = `https://news.google.com/rss/search?q=${encodeURIComponent(primaryQuery)}&num=10&hl=en-US&gl=US&ceid=US:en`;
+    const res = await fetch(url, {
+      signal: AbortSignal.timeout(8000),
+      headers: { 'User-Agent': 'Mozilla/5.0 (compatible; MyDemocracy/1.0)' },
+    });
+    if (res.ok) {
       const xml = await res.text();
       const items = parseRssItems(xml);
-
       for (const item of items) {
-        if (articles.length >= 5) break;
+        if (articles.length >= 7) break;
         if (seen.has(item.title)) continue;
         if (!isRecent(item.pubDate)) continue;
         seen.add(item.title);
@@ -81,12 +70,123 @@ async function fetchLegislatorNews(name: string, state: string, personId: string
           level: 'state' as const,
         });
       }
+    }
+  } catch {
+    // continue to fallback
+  }
+
+  // Fallback: if fewer than 3 results, broaden with title
+  const titlePrefix = title?.split(',')[0]?.trim() ?? '';
+  if (articles.length < 3 && titlePrefix) {
+    const fallbackQuery = `"${name}" ${titlePrefix} when:7d`;
+    try {
+      const url = `https://news.google.com/rss/search?q=${encodeURIComponent(fallbackQuery)}&num=10&hl=en-US&gl=US&ceid=US:en`;
+      const res = await fetch(url, {
+        signal: AbortSignal.timeout(8000),
+        headers: { 'User-Agent': 'Mozilla/5.0 (compatible; MyDemocracy/1.0)' },
+      });
+      if (res.ok) {
+        const xml = await res.text();
+        const items = parseRssItems(xml);
+        for (const item of items) {
+          if (articles.length >= 7) break;
+          if (seen.has(item.title)) continue;
+          if (!isRecent(item.pubDate)) continue;
+          seen.add(item.title);
+          articles.push({
+            type: 'news' as const,
+            title: item.title,
+            link: item.link,
+            source: item.source,
+            pubDate: item.pubDate,
+            rep_name: name,
+            rep_id: personId,
+            level: 'state' as const,
+          });
+        }
+      }
     } catch {
-      continue;
+      // continue
     }
   }
 
-  return articles;
+  // Sort by date descending, return 7 most recent
+  articles.sort((a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime());
+  return articles.slice(0, 7);
+}
+
+async function fetchOpenStatesVotes(personId: string, repName: string, chamber: string): Promise<RepVote[]> {
+  const query = `
+    query($personId: ID!) {
+      person(id: $personId) {
+        votes(first: 50) {
+          edges {
+            node {
+              option
+              voteEvent {
+                identifier
+                motionText
+                startDate
+                result
+                bill { identifier title }
+                counts { option value }
+              }
+            }
+          }
+        }
+      }
+    }
+  `;
+
+  try {
+    const res = await openstatesFetch(query, { personId });
+    if (!res.ok) return [];
+    const data = await res.json();
+    if (data.errors) return [];
+
+    const edges = data?.data?.person?.votes?.edges ?? [];
+    return edges.map((edge: Record<string, unknown>) => {
+      const node = edge.node as Record<string, unknown>;
+      const ve = node.voteEvent as Record<string, unknown> | undefined;
+      const bill = ve?.bill as Record<string, unknown> | undefined;
+      const counts = (ve?.counts ?? []) as { option: string; value: number }[];
+
+      const yeaCount = counts.find(c => c.option === 'yes')?.value;
+      const nayCount = counts.find(c => c.option === 'no')?.value;
+      const notVotingCount = counts.find(c => c.option === 'absent' || c.option === 'not voting')?.value;
+
+      const option = (node.option as string) ?? '';
+      const normalizedPosition =
+        option === 'yes' ? 'Yea' :
+        option === 'no' ? 'Nay' :
+        option === 'not voting' || option === 'absent' ? 'Not Voting' :
+        option === 'present' || option === 'abstain' ? 'Present' :
+        option;
+
+      return {
+        type: 'vote' as const,
+        roll_number: (ve?.identifier as string) ?? '',
+        question: (ve?.motionText as string) ?? '',
+        description: '',
+        result: (ve?.result as string) ?? '',
+        date: (ve?.startDate as string) ?? '',
+        rep_position: normalizedPosition,
+        bill_number: (bill?.identifier as string) ?? undefined,
+        bill_title: (bill?.title as string) ?? undefined,
+        congress: 0,
+        chamber: (chamber === 'upper' ? 'Senate' : 'House') as 'Senate' | 'House',
+        vote_url: '',
+        rep_id: personId,
+        rep_name: repName,
+        level: 'state' as const,
+        yea_count: yeaCount,
+        nay_count: nayCount,
+        not_voting_count: notVotingCount,
+      };
+    });
+  } catch {
+    return [];
+  }
 }
 
 export async function GET(request: Request) {
@@ -95,6 +195,7 @@ export async function GET(request: Request) {
   const state = searchParams.get('state')?.toUpperCase();
   const chamber = searchParams.get('chamber') as 'upper' | 'lower' | null;
   const name = searchParams.get('name') ?? '';
+  const title = searchParams.get('title') ?? '';
 
   if (!personId || !state) {
     return NextResponse.json({ error: 'Missing personId or state parameter' }, { status: 400 });
@@ -223,15 +324,46 @@ export async function GET(request: Request) {
     // Continue with empty bills
   }
 
+  // Fetch votes: try Open States first, fall back to LegiScan
+  let voteDataSource: string | undefined;
+  try {
+    const osVotes = await fetchOpenStatesVotes(personId, name, chamber || 'lower');
+    if (osVotes.length > 0) {
+      votes.push(...osVotes);
+      voteDataSource = 'openstates';
+    }
+  } catch {
+    // Continue
+  }
+
+  if (votes.length === 0) {
+    try {
+      const lastName = name.split(' ').pop() || name;
+      const legiscanResult = await fetchLegiscanVotes(
+        state,
+        name,
+        lastName,
+        chamber || 'lower',
+        personId,
+      );
+      if (legiscanResult && legiscanResult.votes.length > 0) {
+        votes.push(...legiscanResult.votes);
+        voteDataSource = 'legiscan';
+      }
+    } catch {
+      // Continue with empty votes
+    }
+  }
+
   // Fetch news
   let news: RepNewsArticle[] = [];
   try {
-    news = await fetchLegislatorNews(name, state, personId);
+    news = await fetchLegislatorNews(name, state, personId, title || undefined);
   } catch {
     // Continue with empty news
   }
 
-  const result = { bills, votes, news };
+  const result = { bills, votes, news, vote_data_source: voteDataSource };
 
   // Cache
   await admin

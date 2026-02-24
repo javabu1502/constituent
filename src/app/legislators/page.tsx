@@ -194,8 +194,8 @@ function NewsCard({ article }: { article: RepNewsArticle }) {
   );
 }
 
-function LegislatorActivity({ personId, state, chamber, name }: { personId: string; state: string; chamber: string; name: string }) {
-  const [data, setData] = useState<{ bills: FeedBill[]; votes: RepVote[]; news: RepNewsArticle[] } | null>(null);
+function LegislatorActivity({ personId, state, chamber, name, title }: { personId: string; state: string; chamber: string; name: string; title: string }) {
+  const [data, setData] = useState<{ bills: FeedBill[]; votes: RepVote[]; news: RepNewsArticle[]; vote_data_source?: string } | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<ActivityTab>('legislation');
@@ -203,7 +203,7 @@ function LegislatorActivity({ personId, state, chamber, name }: { personId: stri
   useEffect(() => {
     setLoading(true);
     setError(null);
-    const params = new URLSearchParams({ personId, state, chamber, name });
+    const params = new URLSearchParams({ personId, state, chamber, name, title });
     fetch(`/api/legislators/activity?${params.toString()}`)
       .then((res) => {
         if (!res.ok) throw new Error('Failed to load activity');
@@ -212,7 +212,7 @@ function LegislatorActivity({ personId, state, chamber, name }: { personId: stri
       .then((result) => setData(result))
       .catch((err) => setError(err.message))
       .finally(() => setLoading(false));
-  }, [personId, state, chamber, name]);
+  }, [personId, state, chamber, name, title]);
 
   if (loading) {
     return (
@@ -270,11 +270,29 @@ function LegislatorActivity({ personId, state, chamber, name }: { personId: stri
       {activeTab === 'votes' && (
         <div className="space-y-3">
           {voteCount > 0
-            ? data.votes.map((vote, i) => <VoteCard key={`vote-${i}`} vote={vote} />)
+            ? (
+              <>
+                {data.votes.map((vote, i) => <VoteCard key={`vote-${i}`} vote={vote} />)}
+                {data.vote_data_source === 'legiscan' && (
+                  <div className="bg-gray-50 dark:bg-gray-800/50 rounded-lg p-3 border border-gray-200 dark:border-gray-700">
+                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                      Data provided by <a href="https://legiscan.com" target="_blank" rel="noopener noreferrer" className="underline font-medium hover:text-gray-700 dark:hover:text-gray-300">LegiScan</a>. Coverage may vary by state legislature session.
+                    </p>
+                  </div>
+                )}
+                {data.vote_data_source === 'openstates' && (
+                  <div className="bg-gray-50 dark:bg-gray-800/50 rounded-lg p-3 border border-gray-200 dark:border-gray-700">
+                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                      Voting data from Open States. Coverage may vary by state legislature session.
+                    </p>
+                  </div>
+                )}
+              </>
+            )
             : (
               <div className="bg-gray-50 dark:bg-gray-800/50 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
                 <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Vote data is not currently available for {US_STATES.find(s => s.code === state)?.name ?? state} state legislators. Not all state legislatures publish roll call vote data through Open States.
+                  Vote data is not currently available for {US_STATES.find(s => s.code === state)?.name ?? state} state legislators. Not all state legislatures publish roll call vote data through Open States or LegiScan.
                 </p>
               </div>
             )
@@ -337,6 +355,7 @@ function LegislatorCard({ legislator, state }: { legislator: Official; state: st
           state={state}
           chamber={legislator.chamber}
           name={legislator.name}
+          title={legislator.title}
         />
       )}
     </div>

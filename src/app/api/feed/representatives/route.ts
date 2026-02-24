@@ -1,17 +1,12 @@
 import { NextResponse } from 'next/server';
 import { createAdminClient } from '@/lib/supabase';
 import { createClient } from '@/lib/supabase/server';
-import { US_STATES } from '@/lib/constants';
 import { congressFetch } from '@/lib/congress-api';
 import { openstatesFetch } from '@/lib/openstates-api';
 import type { FeedBill, RepNewsArticle, RepFeedItem, RepFeedResponse, RepVote, Official, BillAction } from '@/lib/types';
 
 const CACHE_TTL_MS = 6 * 60 * 60 * 1000; // 6 hours
 const NINETY_DAYS_MS = 90 * 24 * 60 * 60 * 1000;
-
-function stateCodeToName(code: string): string {
-  return US_STATES.find((s) => s.code === code.toUpperCase())?.name ?? code;
-}
 
 function parseRepresentatives(raw: unknown): Official[] {
   if (!raw || typeof raw !== 'object') return [];
@@ -321,30 +316,23 @@ function isRecent(pubDate: string, maxAgeDays = 30): boolean {
 }
 
 async function fetchRepNews(rep: Official): Promise<RepNewsArticle[]> {
-  const stateName = stateCodeToName(rep.state);
   const titlePrefix = rep.title?.split(',')[0]?.trim() ?? '';
-  const queries = [
-    `"${rep.name}" ${titlePrefix} when:30d`,
-    `"${rep.name}" ${stateName} when:30d`,
-  ];
-
   const seen = new Set<string>();
   const articles: RepNewsArticle[] = [];
 
-  for (const query of queries) {
-    if (articles.length >= 5) break;
-    try {
-      const url = `https://news.google.com/rss/search?q=${encodeURIComponent(query)}&hl=en-US&gl=US&ceid=US:en`;
-      const res = await fetch(url, {
-        signal: AbortSignal.timeout(8000),
-        headers: { 'User-Agent': 'Mozilla/5.0 (compatible; MyDemocracy/1.0)' },
-      });
-      if (!res.ok) continue;
+  // Primary search: just the rep's full name
+  const primaryQuery = `"${rep.name}" when:7d`;
+  try {
+    const url = `https://news.google.com/rss/search?q=${encodeURIComponent(primaryQuery)}&num=10&hl=en-US&gl=US&ceid=US:en`;
+    const res = await fetch(url, {
+      signal: AbortSignal.timeout(8000),
+      headers: { 'User-Agent': 'Mozilla/5.0 (compatible; MyDemocracy/1.0)' },
+    });
+    if (res.ok) {
       const xml = await res.text();
       const items = parseRssItems(xml);
-
       for (const item of items) {
-        if (articles.length >= 5) break;
+        if (articles.length >= 7) break;
         if (seen.has(item.title)) continue;
         if (!isRecent(item.pubDate)) continue;
         seen.add(item.title);
@@ -359,12 +347,48 @@ async function fetchRepNews(rep: Official): Promise<RepNewsArticle[]> {
           level: rep.level,
         });
       }
+    }
+  } catch {
+    // continue to fallback
+  }
+
+  // Fallback: if fewer than 3 results, broaden with title
+  if (articles.length < 3 && titlePrefix) {
+    const fallbackQuery = `"${rep.name}" ${titlePrefix} when:7d`;
+    try {
+      const url = `https://news.google.com/rss/search?q=${encodeURIComponent(fallbackQuery)}&num=10&hl=en-US&gl=US&ceid=US:en`;
+      const res = await fetch(url, {
+        signal: AbortSignal.timeout(8000),
+        headers: { 'User-Agent': 'Mozilla/5.0 (compatible; MyDemocracy/1.0)' },
+      });
+      if (res.ok) {
+        const xml = await res.text();
+        const items = parseRssItems(xml);
+        for (const item of items) {
+          if (articles.length >= 7) break;
+          if (seen.has(item.title)) continue;
+          if (!isRecent(item.pubDate)) continue;
+          seen.add(item.title);
+          articles.push({
+            type: 'news' as const,
+            title: item.title,
+            link: item.link,
+            source: item.source,
+            pubDate: item.pubDate,
+            rep_name: rep.name,
+            rep_id: rep.id,
+            level: rep.level,
+          });
+        }
+      }
     } catch {
-      continue;
+      // continue
     }
   }
 
-  return articles;
+  // Sort by date descending, return 7 most recent
+  articles.sort((a, b) => new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime());
+  return articles.slice(0, 7);
 }
 
 export async function GET() {
