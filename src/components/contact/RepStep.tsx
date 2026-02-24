@@ -81,14 +81,18 @@ function RepCard({
               src={rep.photoUrl}
               alt={rep.name}
               className="w-14 h-14 rounded-full object-cover border-2 border-gray-200 dark:border-gray-600"
+              onError={(e) => {
+                const target = e.currentTarget;
+                target.style.display = 'none';
+                target.nextElementSibling?.classList.remove('hidden');
+              }}
             />
-          ) : (
-            <div
-              className={`w-14 h-14 rounded-full flex items-center justify-center text-base font-bold ${partyColors.bg} ${partyColors.text}`}
-            >
-              {getInitials(rep.name)}
-            </div>
-          )}
+          ) : null}
+          <div
+            className={`w-14 h-14 rounded-full flex items-center justify-center text-base font-bold ${partyColors.bg} ${partyColors.text} ${rep.photoUrl ? 'hidden' : ''}`}
+          >
+            {getInitials(rep.name)}
+          </div>
         </div>
 
         {/* Info */}

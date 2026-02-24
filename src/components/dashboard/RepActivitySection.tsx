@@ -895,7 +895,7 @@ export function RepActivitySection() {
                 key={rep.id}
                 title={rep.name}
                 badge={`${rep.level === 'federal' ? 'Federal' : 'State'} · ${rep.party} · ${rep.title}`}
-                defaultOpen={repIndex === 0}
+                defaultOpen={false}
               >
                 <RepInnerTabs
                   repId={rep.id}

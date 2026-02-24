@@ -327,14 +327,18 @@ function LegislatorCard({ legislator, state }: { legislator: Official; state: st
             src={legislator.photoUrl}
             alt={legislator.name}
             className="w-12 h-12 rounded-full object-cover shrink-0"
+            onError={(e) => {
+              const target = e.currentTarget;
+              target.style.display = 'none';
+              target.nextElementSibling?.classList.remove('hidden');
+            }}
           />
-        ) : (
-          <div className="w-12 h-12 rounded-full bg-gray-200 dark:bg-gray-600 flex items-center justify-center shrink-0">
-            <span className="text-gray-500 dark:text-gray-400 text-lg font-medium">
-              {legislator.name.charAt(0)}
-            </span>
-          </div>
-        )}
+        ) : null}
+        <div className={`w-12 h-12 rounded-full bg-gray-200 dark:bg-gray-600 flex items-center justify-center shrink-0 ${legislator.photoUrl ? 'hidden' : ''}`}>
+          <span className="text-gray-500 dark:text-gray-400 text-lg font-medium">
+            {legislator.name.charAt(0)}
+          </span>
+        </div>
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 flex-wrap">
             <span className="font-semibold text-gray-900 dark:text-white text-sm">{legislator.name}</span>
