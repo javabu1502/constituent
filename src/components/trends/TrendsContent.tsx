@@ -162,7 +162,7 @@ export function TrendsContent() {
           <div className="text-3xl font-bold text-purple-600 dark:text-purple-400">
             {data?.stats.totalMessages.toLocaleString() ?? '—'}
           </div>
-          <div className="text-sm text-gray-600 dark:text-gray-400 mt-1">Total Messages</div>
+          <div className="text-sm text-gray-600 dark:text-gray-400 mt-1">Total Actions</div>
         </div>
         <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5 text-center">
           <div className="text-3xl font-bold text-purple-600 dark:text-purple-400">

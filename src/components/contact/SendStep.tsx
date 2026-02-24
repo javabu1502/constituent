@@ -152,6 +152,7 @@ function OfficialCard({ official, message, deliveryInfo, contactMethod, isCallCo
                 <p className="text-xs text-purple-600 dark:text-purple-400 mb-1">Tap to call</p>
                 <a
                   href={`tel:${deliveryInfo.phone.replace(/[^\d+]/g, '')}`}
+                  onClick={() => onSend?.('initiated')}
                   className="text-2xl font-bold text-purple-700 dark:text-purple-300 hover:text-purple-800 dark:hover:text-purple-200 transition-colors"
                 >
                   {formatPhone(deliveryInfo.phone)}
@@ -160,7 +161,7 @@ function OfficialCard({ official, message, deliveryInfo, contactMethod, isCallCo
               {/* Mark as complete button */}
               {!isCallComplete ? (
                 <button
-                  onClick={() => { onMarkCallComplete?.(); onSend?.('called'); }}
+                  onClick={() => { onMarkCallComplete?.(); }}
                   className="w-full flex items-center justify-center gap-2 py-2.5 border-2 border-green-300 dark:border-green-600 text-green-700 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/30 rounded-lg text-sm font-medium transition-colors"
                 >
                   <CheckIcon className="w-4 h-4" />

@@ -53,27 +53,28 @@ export async function GET() {
     return NextResponse.json({ articles: cached.data });
   }
 
-  // Get distinct (issue_subtopic, legislator_level, advocate_state) combos from user's messages
+  // Get distinct (issue, legislator_level, advocate_state) combos from user's messages
   const { data: messages } = await admin
     .from('messages')
-    .select('issue_subtopic, legislator_level, advocate_state')
+    .select('issue_area, issue_subtopic, legislator_level, advocate_state')
     .or(`user_id.eq.${user.id},advocate_email.eq.${user.email}`);
 
   if (!messages || messages.length === 0) {
     return NextResponse.json({ articles: [] });
   }
 
-  // Deduplicate combos, limit to 5
+  // Deduplicate combos, limit to 5. Prefer subtopic, fall back to issue_area.
   const seen = new Set<string>();
-  const combos: { subtopic: string; level: string; state: string }[] = [];
+  const combos: { topic: string; level: string; state: string }[] = [];
 
   for (const msg of messages) {
-    if (!msg.issue_subtopic) continue;
-    const key = `${msg.issue_subtopic}|${msg.legislator_level}|${msg.advocate_state}`;
+    const topic = msg.issue_subtopic || msg.issue_area;
+    if (!topic) continue;
+    const key = `${topic}|${msg.legislator_level}|${msg.advocate_state}`;
     if (!seen.has(key)) {
       seen.add(key);
       combos.push({
-        subtopic: msg.issue_subtopic,
+        topic,
         level: msg.legislator_level,
         state: msg.advocate_state,
       });
@@ -81,20 +82,20 @@ export async function GET() {
     }
   }
 
-  // Fetch Google News RSS for each combo
+  // Fetch Google News RSS for each combo (limit 3 articles per query)
   const allArticles: FeedArticle[] = [];
 
   await Promise.all(
-    combos.map(async ({ subtopic, level, state }) => {
+    combos.map(async ({ topic, level, state }) => {
       try {
         const query = level === 'state'
-          ? `${subtopic}+${stateCodeToName(state)}`
-          : subtopic;
+          ? `"${topic}" ${stateCodeToName(state)} legislation`
+          : `"${topic}" Congress legislation`;
         const url = `https://news.google.com/rss/search?q=${encodeURIComponent(query)}&hl=en-US&gl=US&ceid=US:en`;
         const res = await fetch(url, { signal: AbortSignal.timeout(8000) });
         if (!res.ok) return;
         const xml = await res.text();
-        const items = parseRssItems(xml, subtopic);
+        const items = parseRssItems(xml, topic).slice(0, 3);
         allArticles.push(...items);
       } catch {
         // Skip failed fetches — partial results are fine
@@ -102,7 +103,7 @@ export async function GET() {
     })
   );
 
-  // Deduplicate by title, sort by date desc, take top 10
+  // Deduplicate by title, sort by date desc, take top 15
   const titleSeen = new Set<string>();
   const deduplicated = allArticles.filter((a) => {
     if (titleSeen.has(a.title)) return false;
@@ -116,7 +117,7 @@ export async function GET() {
     return db - da;
   });
 
-  const top10 = deduplicated.slice(0, 10);
+  const top10 = deduplicated.slice(0, 15);
 
   // Upsert into feed_cache
   await admin

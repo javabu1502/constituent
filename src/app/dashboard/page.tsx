@@ -5,7 +5,6 @@ import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase';
 import { truncate } from '@/lib/utils';
 import { MyRepresentativesSection } from '@/components/dashboard/MyRepresentativesSection';
-import { IssuesFeedSection } from '@/components/dashboard/IssuesFeedSection';
 import { RepActivitySection } from '@/components/dashboard/RepActivitySection';
 
 export const metadata: Metadata = {
@@ -81,6 +80,8 @@ export default async function DashboardPage() {
 
   // Compute activity stats
   const totalMessages = messages?.length ?? 0;
+  const emailsSent = messages?.filter((m: Record<string, string>) => m.delivery_method !== 'phone').length ?? 0;
+  const callsMade = messages?.filter((m: Record<string, string>) => m.delivery_method === 'phone').length ?? 0;
   const uniqueIssues = new Set(messages?.map((m: Record<string, string>) => m.issue_area)).size;
   const uniqueOfficials = new Set(messages?.map((m: Record<string, string>) => m.legislator_name)).size;
 
@@ -117,10 +118,14 @@ export default async function DashboardPage() {
       {/* My Activity */}
       <section className="mb-10">
         <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">My Activity</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
           <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5 text-center">
-            <div className="text-3xl font-bold text-purple-600 dark:text-purple-400">{totalMessages}</div>
-            <div className="text-sm text-gray-600 dark:text-gray-400 mt-1">Messages Sent</div>
+            <div className="text-3xl font-bold text-purple-600 dark:text-purple-400">{emailsSent}</div>
+            <div className="text-sm text-gray-600 dark:text-gray-400 mt-1">Emails Sent</div>
+          </div>
+          <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5 text-center">
+            <div className="text-3xl font-bold text-purple-600 dark:text-purple-400">{callsMade}</div>
+            <div className="text-sm text-gray-600 dark:text-gray-400 mt-1">Calls Made</div>
           </div>
           <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5 text-center">
             <div className="text-3xl font-bold text-purple-600 dark:text-purple-400">{uniqueIssues}</div>
@@ -133,15 +138,9 @@ export default async function DashboardPage() {
         </div>
       </section>
 
-      {/* Issues in the News */}
+      {/* Your Feed */}
       <section className="mb-10">
-        <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Issues in the News</h2>
-        <IssuesFeedSection />
-      </section>
-
-      {/* Representative Activity */}
-      <section className="mb-10">
-        <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Representative Activity</h2>
+        <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Your Feed</h2>
         <RepActivitySection />
       </section>
 

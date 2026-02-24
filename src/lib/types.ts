@@ -142,13 +142,52 @@ export interface FeedArticle {
 }
 
 export interface FeedBill {
+  type: 'bill';
   bill_number: string;
   title: string;
+  description: string;
   sponsor_name: string;
+  sponsors: string[];
   date: string;
   status: string;
+  last_action: string;
+  last_action_date: string;
+  policy_area: string;
+  committee: string;
+  bill_url: string;
   rep_id: string;
   level: 'federal' | 'state';
+}
+
+export interface RepNewsArticle {
+  type: 'news';
+  title: string;
+  link: string;
+  source: string;
+  pubDate: string;
+  rep_name: string;
+  rep_id: string;
+  level: 'federal' | 'state';
+}
+
+export interface RepSocialPost {
+  type: 'social';
+  text: string;
+  link: string;
+  pubDate: string;
+  platform: 'twitter';
+  handle: string;
+  rep_name: string;
+  rep_id: string;
+  level: 'federal' | 'state';
+}
+
+export type RepFeedItem = FeedBill | RepNewsArticle | RepSocialPost;
+
+export interface RepFeedResponse {
+  items: RepFeedItem[];
+  reps: { id: string; name: string; level: 'federal' | 'state'; party: string; title: string; twitter?: string }[];
+  userIssues: string[];
 }
 
 // Track send event
