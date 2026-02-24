@@ -301,6 +301,16 @@ export interface CampaignAction {
   created_at: string;
 }
 
+// AI-generated bill summary
+export interface BillSummary {
+  summary: string;
+  arguments_for: string;
+  arguments_against: string;
+  personal_relevance?: string;
+  bill_number: string;
+  generated_at: string;
+}
+
 // Track send event
 export interface TrackSendRequest {
   recipientName: string;

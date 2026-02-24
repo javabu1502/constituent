@@ -6,8 +6,10 @@ import Link from 'next/link';
 import { US_STATES } from '@/lib/constants';
 import { PARTY_COLORS, DEFAULT_PARTY_COLOR } from '@/lib/constants';
 import type { Official, FeedBill, RepVote, RepNewsArticle, BillAction } from '@/lib/types';
+import { BillSummarySection } from '@/components/dashboard/BillSummarySection';
+import { RepBioTab } from '@/components/dashboard/RepBioTab';
 
-type ActivityTab = 'legislation' | 'votes' | 'news';
+type ActivityTab = 'bio' | 'legislation' | 'votes' | 'news';
 
 function formatDate(dateStr: string): string {
   if (!dateStr) return '';
@@ -100,6 +102,7 @@ function BillCard({ bill }: { bill: FeedBill }) {
           )}
         </div>
       )}
+      <BillSummarySection bill={bill} />
       <div className="flex items-center justify-between gap-2">
         <span className="text-xs text-gray-500 dark:text-gray-400">{bill.sponsor_name} · {formatDate(bill.date)}</span>
         <div className="flex items-center gap-2 shrink-0">
@@ -198,7 +201,7 @@ function LegislatorActivity({ personId, state, chamber, name, title }: { personI
   const [data, setData] = useState<{ bills: FeedBill[]; votes: RepVote[]; news: RepNewsArticle[]; vote_data_source?: string } | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [activeTab, setActiveTab] = useState<ActivityTab>('legislation');
+  const [activeTab, setActiveTab] = useState<ActivityTab>('bio');
 
   useEffect(() => {
     setLoading(true);
@@ -214,34 +217,15 @@ function LegislatorActivity({ personId, state, chamber, name, title }: { personI
       .finally(() => setLoading(false));
   }, [personId, state, chamber, name, title]);
 
-  if (loading) {
-    return (
-      <div className="space-y-3 p-4">
-        {Array.from({ length: 3 }).map((_, i) => (
-          <div key={i} className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4 animate-pulse">
-            <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-2" />
-            <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-1/2" />
-          </div>
-        ))}
-      </div>
-    );
-  }
-
-  if (error) {
-    return <p className="text-sm text-red-500 p-4">{error}</p>;
-  }
-
-  if (!data) return null;
-
-  const billCount = data.bills.length;
-  const voteCount = data.votes.length;
-  const newsCount = data.news.length;
+  const billCount = data?.bills.length ?? 0;
+  const voteCount = data?.votes.length ?? 0;
+  const newsCount = data?.news.length ?? 0;
 
   return (
     <div className="p-4 border-t border-gray-200 dark:border-gray-700">
       <div className="flex bg-gray-100 dark:bg-gray-700/50 rounded-lg p-0.5 mb-3">
-        {(['legislation', 'votes', 'news'] as ActivityTab[]).map((t) => {
-          const count = t === 'legislation' ? billCount : t === 'votes' ? voteCount : newsCount;
+        {(['bio', 'legislation', 'votes', 'news'] as ActivityTab[]).map((t) => {
+          const count = t === 'legislation' ? billCount : t === 'votes' ? voteCount : t === 'news' ? newsCount : undefined;
           return (
             <button
               key={t}
@@ -252,13 +236,32 @@ function LegislatorActivity({ personId, state, chamber, name, title }: { personI
                   : 'text-gray-600 dark:text-gray-400'
               }`}
             >
-              {t.charAt(0).toUpperCase() + t.slice(1)} {count > 0 && <span className="text-gray-400 dark:text-gray-500">({count})</span>}
+              {t.charAt(0).toUpperCase() + t.slice(1)} {count !== undefined && count > 0 && <span className="text-gray-400 dark:text-gray-500">({count})</span>}
             </button>
           );
         })}
       </div>
 
-      {activeTab === 'legislation' && (
+      {activeTab === 'bio' && (
+        <RepBioTab repId={personId} repLevel="state" repState={state} />
+      )}
+
+      {error && activeTab !== 'bio' && (
+        <p className="text-sm text-red-500">{error}</p>
+      )}
+
+      {loading && activeTab !== 'bio' && (
+        <div className="space-y-3">
+          {Array.from({ length: 3 }).map((_, i) => (
+            <div key={i} className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4 animate-pulse">
+              <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-2" />
+              <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-1/2" />
+            </div>
+          ))}
+        </div>
+      )}
+
+      {!loading && !error && data && activeTab === 'legislation' && (
         <div className="space-y-3">
           {billCount > 0
             ? data.bills.map((bill, i) => <BillCard key={`bill-${i}`} bill={bill} />)
@@ -267,7 +270,7 @@ function LegislatorActivity({ personId, state, chamber, name, title }: { personI
         </div>
       )}
 
-      {activeTab === 'votes' && (
+      {!loading && !error && data && activeTab === 'votes' && (
         <div className="space-y-3">
           {voteCount > 0
             ? (
@@ -300,7 +303,7 @@ function LegislatorActivity({ personId, state, chamber, name, title }: { personI
         </div>
       )}
 
-      {activeTab === 'news' && (
+      {!loading && !error && data && activeTab === 'news' && (
         <div className="space-y-3">
           {newsCount > 0
             ? data.news.map((article, i) => <NewsCard key={`news-${i}`} article={article} />)

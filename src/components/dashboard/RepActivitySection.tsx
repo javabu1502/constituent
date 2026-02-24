@@ -4,10 +4,12 @@ import { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 import type { RepFeedItem, RepFeedResponse, FeedBill, RepNewsArticle, RepVote, IssueFeedItem, IssueFeedResponse, RepFinance, RepFinanceResponse, VotingRecordResponse } from '@/lib/types';
 import { US_STATES } from '@/lib/constants';
+import { BillSummarySection } from './BillSummarySection';
+import { RepBioTab } from './RepBioTab';
 
 type Tab = 'by-rep' | 'by-issue';
 type RepSort = 'recent' | 'federal-first' | 'state-first';
-type RepInnerTab = 'legislation' | 'votes' | 'news' | 'fundraising';
+type RepInnerTab = 'bio' | 'legislation' | 'votes' | 'news' | 'fundraising';
 type PositionFilter = 'all' | 'Yea' | 'Nay' | 'Not Voting';
 type TimePeriod = '30d' | '6mo' | '1yr' | 'all';
 
@@ -58,7 +60,7 @@ function WriteAboutButton({ repId, issue, ask }: { repId?: string; issue?: strin
   );
 }
 
-function BillCard({ bill, showWriteAbout = true }: { bill: FeedBill; showWriteAbout?: boolean }) {
+function BillCard({ bill, showWriteAbout = true, userIssues }: { bill: FeedBill; showWriteAbout?: boolean; userIssues?: string[] }) {
   return (
     <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
       <div className="flex items-center gap-2 mb-1 flex-wrap">
@@ -109,6 +111,7 @@ function BillCard({ bill, showWriteAbout = true }: { bill: FeedBill; showWriteAb
           <span className="font-medium">Last action</span>{bill.last_action_date ? ` (${formatDate(bill.last_action_date)})` : ''}: {bill.last_action}
         </div>
       )}
+      <BillSummarySection bill={bill} userIssues={userIssues} />
       <div className="flex items-center justify-between gap-2">
         <span className="text-xs text-gray-500 dark:text-gray-400">{bill.sponsor_name} · {formatDate(bill.date)}</span>
         <div className="flex items-center gap-2 shrink-0">
@@ -638,12 +641,13 @@ function FundingTab({ finance, repId }: { finance: RepFinance | null; repId: str
   );
 }
 
-function RepInnerTabs({ repId, items, repLevel, repState, finance }: {
+function RepInnerTabs({ repId, items, repLevel, repState, finance, userIssues }: {
   repId: string;
   items: RepFeedItem[];
   repLevel: 'federal' | 'state';
   repState?: string;
   finance: RepFinance | null;
+  userIssues?: string[];
 }) {
   const [innerTab, setInnerTab] = useState<RepInnerTab>('legislation');
   const isFederal = repLevel === 'federal';
@@ -651,7 +655,7 @@ function RepInnerTabs({ repId, items, repLevel, repState, finance }: {
   const billItems = useMemo(() => items.filter((i): i is FeedBill => i.type === 'bill'), [items]);
   const newsItems = useMemo(() => items.filter((i): i is RepNewsArticle => i.type === 'news'), [items]);
 
-  const tabs: RepInnerTab[] = isFederal ? ['legislation', 'votes', 'news', 'fundraising'] : ['legislation', 'votes', 'news'];
+  const tabs: RepInnerTab[] = isFederal ? ['bio', 'legislation', 'votes', 'news', 'fundraising'] : ['bio', 'legislation', 'votes', 'news'];
 
   return (
     <div>
@@ -659,7 +663,7 @@ function RepInnerTabs({ repId, items, repLevel, repState, finance }: {
         {tabs.map((t) => {
           const count = t === 'legislation' ? billItems.length
             : t === 'news' ? newsItems.length
-            : undefined; // votes and fundraising load separately
+            : undefined; // bio, votes, and fundraising load separately
           return (
             <button
               key={t}
@@ -676,10 +680,14 @@ function RepInnerTabs({ repId, items, repLevel, repState, finance }: {
         })}
       </div>
 
+      {innerTab === 'bio' && (
+        <RepBioTab repId={repId} repLevel={repLevel} repState={repState} />
+      )}
+
       {innerTab === 'legislation' && (
         <div className="space-y-3">
           {billItems.length > 0
-            ? billItems.map((bill, i) => <BillCard key={`bill-${i}`} bill={bill} />)
+            ? billItems.map((bill, i) => <BillCard key={`bill-${i}`} bill={bill} userIssues={userIssues} />)
             : <p className="text-sm text-gray-500 dark:text-gray-400 px-1">No recent legislation</p>
           }
         </div>
@@ -903,6 +911,7 @@ export function RepActivitySection() {
                   repLevel={rep.level}
                   repState={rep.state}
                   finance={financeData[rep.id] ?? null}
+                  userIssues={userIssues}
                 />
               </CollapsibleSection>
             );

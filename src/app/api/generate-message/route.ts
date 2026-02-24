@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { stripTags, extractJSON, cleanText } from '@/lib/claude';
 
 interface OfficialInput {
   name: string;
@@ -32,70 +33,6 @@ interface OfficialMessage {
   officialName: string;
   subject: string;
   body: string;
-}
-
-function stripTags(text: string): string {
-  let cleaned = text.replace(/<[^>]+\/>/g, '');
-  cleaned = cleaned.replace(/<search>[\s\S]*?<\/search>/gi, '');
-  cleaned = cleaned.replace(/<result>[\s\S]*?<\/result>/gi, '');
-  cleaned = cleaned.replace(/<source>[\s\S]*?<\/source>/gi, '');
-  cleaned = cleaned.replace(/<sources>[\s\S]*?<\/sources>/gi, '');
-  cleaned = cleaned.replace(/<thinking>[\s\S]*?<\/thinking>/gi, '');
-  cleaned = cleaned.replace(/<\/?[a-zA-Z_][a-zA-Z0-9_]*[^>]*>/g, '');
-  return cleaned.trim();
-}
-
-function extractJSON(text: string): unknown {
-  const cleaned = text
-    .replace(/^```json\s*/im, '')
-    .replace(/^```\s*/im, '')
-    .replace(/\s*```\s*$/im, '')
-    .trim();
-
-  // Try direct parse
-  try {
-    return JSON.parse(cleaned);
-  } catch { /* continue */ }
-
-  // Try to find a JSON object or array
-  const braceStart = cleaned.indexOf('{');
-  const bracketStart = cleaned.indexOf('[');
-  const start = (bracketStart >= 0 && (braceStart < 0 || bracketStart < braceStart))
-    ? bracketStart : braceStart;
-
-  if (start >= 0) {
-    const sub = cleaned.slice(start);
-    try {
-      return JSON.parse(sub);
-    } catch { /* continue */ }
-
-    // Try to find the matching closing bracket/brace
-    const opener = sub[0];
-    const closer = opener === '[' ? ']' : '}';
-    let depth = 0;
-    let inString = false;
-    let escape = false;
-    for (let i = 0; i < sub.length; i++) {
-      const ch = sub[i];
-      if (escape) { escape = false; continue; }
-      if (ch === '\\') { escape = true; continue; }
-      if (ch === '"') { inString = !inString; continue; }
-      if (inString) continue;
-      if (ch === opener) depth++;
-      if (ch === closer) { depth--; if (depth === 0) {
-        try { return JSON.parse(sub.slice(0, i + 1)); } catch { break; }
-      }}
-    }
-  }
-
-  return null;
-}
-
-function cleanText(text: string): string {
-  return text
-    .replace(/\\n/g, '\n')
-    .replace(/\n{3,}/g, '\n\n')
-    .trim();
 }
 
 async function generateForOfficial(

@@ -725,6 +725,61 @@ export function getDataMetadata(): { lastUpdated: string; sources: Record<string
 }
 
 /**
+ * Get biographical data for a federal legislator by bioguide ID.
+ * Returns name, bio, terms history, social media, and photo URL.
+ */
+export function getFederalLegislatorBio(bioguideId: string): {
+  name: { first: string; last: string; official_full?: string; suffix?: string };
+  bio?: { birthday?: string; gender?: string; religion?: string };
+  terms: { type: string; start: string; end: string; state: string; district?: number; class?: number; party: string; state_rank?: string; phone?: string; address?: string; url?: string; contact_form?: string; office?: string }[];
+  socialMedia?: { twitter?: string; facebook?: string; instagram?: string };
+  photoUrl: string;
+} | null {
+  const legislators = loadFederalLegislators();
+  const socialMedia = loadFederalSocialMedia();
+
+  const legislator = legislators.find(l => l.id.bioguide === bioguideId);
+  if (!legislator) return null;
+
+  const social = socialMedia.get(bioguideId);
+
+  return {
+    name: {
+      first: legislator.name.first,
+      last: legislator.name.last,
+      official_full: legislator.name.official_full,
+      suffix: legislator.name.suffix,
+    },
+    bio: legislator.bio ? {
+      birthday: legislator.bio.birthday,
+      gender: legislator.bio.gender,
+      religion: legislator.bio.religion,
+    } : undefined,
+    terms: legislator.terms.map(t => ({
+      type: t.type,
+      start: t.start,
+      end: t.end,
+      state: t.state,
+      district: t.district,
+      class: t.class,
+      party: t.party,
+      state_rank: t.state_rank,
+      phone: t.phone,
+      address: t.address,
+      url: t.url,
+      contact_form: t.contact_form,
+      office: t.office,
+    })),
+    socialMedia: social?.social ? {
+      twitter: social.social.twitter,
+      facebook: social.social.facebook,
+      instagram: social.social.instagram,
+    } : undefined,
+    photoUrl: `https://raw.githubusercontent.com/unitedstates/images/gh-pages/congress/225x275/${bioguideId}.jpg`,
+  };
+}
+
+/**
  * Clear the in-memory cache (useful for testing or refreshing data)
  */
 export function clearCache(): void {
