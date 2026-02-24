@@ -175,10 +175,35 @@ export function ContactFlow() {
     if (profileLoaded.current) return;
     profileLoaded.current = true;
 
+    // Read deep-link params
+    const deepIssue = searchParams.get('issue');
+    const deepAsk = searchParams.get('ask');
+    const deepIssueCategory = searchParams.get('issueCategory');
+
+    // Helper: pre-fill topic fields from deep-link params
+    const applyTopicDeepLink = () => {
+      if (deepIssue) {
+        dispatch({ type: 'SET_ISSUE', payload: { issue: deepIssue, category: deepIssueCategory ?? '' } });
+      }
+      if (deepAsk) {
+        dispatch({ type: 'SET_ASK', payload: deepAsk });
+      }
+    };
+
+    // Helper: decide which step to skip to after rep selection
+    const getTargetStep = (): ContactState['step'] => {
+      if (deepIssue) return 'topic'; // rep selected + issue pre-filled → skip to topic
+      return 'method';
+    };
+
     const supabase = createClient();
     supabase.auth.getUser().then(({ data: { user } }) => {
       setIsAuthenticated(!!user);
-      if (!user) return;
+      if (!user) {
+        // Even for unauthenticated users, pre-fill issue if available
+        applyTopicDeepLink();
+        return;
+      }
 
       if (user.email) {
         dispatch({ type: 'SET_USER_EMAIL', payload: user.email });
@@ -186,6 +211,9 @@ export function ContactFlow() {
       if (user.user_metadata?.full_name) {
         dispatch({ type: 'SET_USER_NAME', payload: user.user_metadata.full_name });
       }
+
+      // Pre-fill topic fields from deep-link
+      applyTopicDeepLink();
 
       // Try to load profile for address skip
       fetch('/api/profile')
@@ -213,7 +241,7 @@ export function ContactFlow() {
               const matchedRep = reps.find((r) => r.id === repId);
               if (matchedRep) {
                 dispatch({ type: 'SELECT_REPS', payload: [matchedRep] });
-                dispatch({ type: 'GO_TO_STEP', payload: 'method' });
+                dispatch({ type: 'GO_TO_STEP', payload: getTargetStep() });
                 return;
               }
             }
@@ -233,7 +261,7 @@ export function ContactFlow() {
                     const matchedRep = data.officials.find((r: Official) => r.id === repId);
                     if (matchedRep) {
                       dispatch({ type: 'SELECT_REPS', payload: [matchedRep] });
-                      dispatch({ type: 'GO_TO_STEP', payload: 'method' });
+                      dispatch({ type: 'GO_TO_STEP', payload: getTargetStep() });
                       return;
                     }
                   }

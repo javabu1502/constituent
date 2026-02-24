@@ -76,6 +76,12 @@ export default async function CampaignPage({ params }: PageProps) {
         </div>
       </div>
 
+      {/* Campaign context */}
+      <div className="bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-700 rounded-2xl p-6 mb-6">
+        <h2 className="text-sm font-semibold text-purple-800 dark:text-purple-300 uppercase tracking-wide mb-2">About This Campaign</h2>
+        <p className="text-gray-700 dark:text-gray-300 leading-relaxed">{campaign.description}</p>
+      </div>
+
       {/* Participation form */}
       <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm p-6 sm:p-8">
         <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">Take Action</h2>

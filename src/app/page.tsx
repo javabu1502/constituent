@@ -87,6 +87,29 @@ export default function HomePage() {
       {/* Trending Issues */}
       <HomeTrends />
 
+      {/* Start a Campaign CTA */}
+      <section className="py-16 sm:py-20 px-4 bg-white dark:bg-gray-900">
+        <div className="max-w-3xl mx-auto text-center">
+          <div className="w-16 h-16 bg-purple-100 dark:bg-purple-900 rounded-2xl flex items-center justify-center mx-auto mb-6">
+            <svg className="w-8 h-8 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" />
+            </svg>
+          </div>
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-4">
+            Rally Others Around Your Issue
+          </h2>
+          <p className="text-gray-600 dark:text-gray-300 mb-8 max-w-xl mx-auto leading-relaxed">
+            Create a shareable campaign page and let anyone contact their representatives
+            about the issue you care about — with AI-personalized messages for each participant.
+          </p>
+          <Link href="/campaign/create">
+            <Button size="lg" className="text-lg px-8 py-4">
+              Start a Campaign
+            </Button>
+          </Link>
+        </div>
+      </section>
+
       {/* What Makes This Different Section */}
       <section className="py-16 sm:py-20 px-4 bg-gray-50 dark:bg-gray-800">
         <div className="max-w-4xl mx-auto">

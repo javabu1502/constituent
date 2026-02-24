@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
+import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 import { IssuePicker } from '@/components/ui/IssuePicker';
 
@@ -66,6 +67,18 @@ export function CampaignForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
+      <div className="flex items-center gap-2 p-3 bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-700 rounded-xl">
+        <svg className="w-4 h-4 text-purple-600 dark:text-purple-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <p className="text-sm text-purple-700 dark:text-purple-300">
+          New to campaigns?{' '}
+          <Link href="/guides/how-to-run-a-successful-campaign" className="font-medium underline hover:text-purple-900 dark:hover:text-purple-100">
+            Tips for a successful campaign
+          </Link>
+        </p>
+      </div>
+
       {error && (
         <div className="p-4 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 rounded-xl">
           <p className="text-sm text-red-700 dark:text-red-300">{error}</p>
@@ -161,7 +174,7 @@ export function CampaignForm() {
           className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent resize-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
         />
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-          AI will use this as context when generating personalized messages for participants.
+          This message will be woven into every participant&apos;s personalized letter, combined with their own personal story. The AI will make each letter unique.
         </p>
       </div>
 

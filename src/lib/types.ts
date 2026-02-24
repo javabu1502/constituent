@@ -132,6 +132,13 @@ export interface Profile {
   updated_at: string;
 }
 
+// Bill action timeline
+export interface BillAction {
+  description: string;
+  date: string;
+  classification: string[];
+}
+
 // Feed types
 export interface FeedArticle {
   title: string;
@@ -157,6 +164,8 @@ export interface FeedBill {
   bill_url: string;
   rep_id: string;
   level: 'federal' | 'state';
+  sponsorship_type?: 'sponsored' | 'cosponsored';
+  actions?: BillAction[];
 }
 
 export interface RepNewsArticle {
@@ -170,24 +179,98 @@ export interface RepNewsArticle {
   level: 'federal' | 'state';
 }
 
-export interface RepSocialPost {
-  type: 'social';
-  text: string;
-  link: string;
-  pubDate: string;
-  platform: 'twitter';
-  handle: string;
-  rep_name: string;
+export interface RepVote {
+  type: 'vote';
+  roll_number: string;
+  question: string;
+  description: string;
+  result: string;
+  date: string;
+  rep_position: 'Yea' | 'Nay' | 'Not Voting' | 'Present' | string;
+  bill_number?: string;
+  bill_title?: string;
+  congress: number;
+  chamber: 'Senate' | 'House';
+  vote_url: string;
   rep_id: string;
+  rep_name: string;
   level: 'federal' | 'state';
+  // Vote count fields (when available from detail endpoints)
+  yea_count?: number;
+  nay_count?: number;
+  not_voting_count?: number;
+  present_count?: number;
 }
 
-export type RepFeedItem = FeedBill | RepNewsArticle | RepSocialPost;
+export type RepFeedItem = FeedBill | RepNewsArticle | RepVote;
 
 export interface RepFeedResponse {
   items: RepFeedItem[];
-  reps: { id: string; name: string; level: 'federal' | 'state'; party: string; title: string; twitter?: string }[];
+  votes: RepVote[];
+  reps: { id: string; name: string; level: 'federal' | 'state'; party: string; title: string; state?: string }[];
   userIssues: string[];
+}
+
+export interface IssueFeedItem {
+  type: 'issue-news' | 'issue-bill';
+  title: string;
+  link: string;
+  source?: string;
+  pubDate?: string;
+  date?: string;
+  bill_number?: string;
+  status?: string;
+  policy_area: string;
+  level: 'federal' | 'state';
+  related_rep_names?: string[];
+}
+
+export interface IssueFeedResponse {
+  issues: Record<string, IssueFeedItem[]>;
+  userIssues: string[];
+}
+
+// FEC campaign finance types
+export interface FecContributor {
+  name: string;
+  total: number;
+  count: number;
+}
+
+export interface RepFinance {
+  candidate_id: string;
+  candidate_name: string;
+  cycle: number;
+  total_raised: number;
+  individual_contributions: number;
+  pac_contributions: number;
+  total_disbursements: number;
+  cash_on_hand: number;
+  debt: number;
+  top_contributors: FecContributor[];
+  rep_id: string;
+  rep_name: string;
+  fec_url: string;
+}
+
+export interface RepFinanceResponse {
+  finance: Record<string, RepFinance>; // keyed by rep_id
+}
+
+// Voting record types
+export interface VotingSummary {
+  total_votes: number;
+  yea_votes: number;
+  nay_votes: number;
+  not_voting: number;
+  present_votes: number;
+  participation_rate: number;
+}
+
+export interface VotingRecordResponse {
+  votes: RepVote[];
+  summary: VotingSummary;
+  total_available: number;
 }
 
 // Campaign types

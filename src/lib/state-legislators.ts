@@ -23,7 +23,7 @@ const stateDataCache = new Map<string, StateLegislator[]>();
 /**
  * Processed state legislator data
  */
-interface StateLegislator {
+export interface StateLegislator {
   id: string;
   name: string;
   firstName?: string;
@@ -118,7 +118,7 @@ function loadFromCache(stateCode: string): StateLegislator[] | null {
 /**
  * Get state legislators for a state (from cache)
  */
-function getStateLegislators(stateCode: string): StateLegislator[] {
+export function getStateLegislators(stateCode: string): StateLegislator[] {
   const code = stateCode.toUpperCase();
 
   // Check in-memory cache first
@@ -142,7 +142,7 @@ function getStateLegislators(stateCode: string): StateLegislator[] {
 /**
  * Convert StateLegislator to Official type
  */
-function toOfficial(leg: StateLegislator, stateCode: string): Official {
+export function toOfficial(leg: StateLegislator, stateCode: string): Official {
   const chamberTitle =
     leg.chamber === 'upper' ? 'State Senator' : 'State Representative';
 

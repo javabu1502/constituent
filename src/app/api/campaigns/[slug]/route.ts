@@ -75,3 +75,49 @@ export async function GET(
 
   return NextResponse.json(campaign);
 }
+
+/**
+ * DELETE /api/campaigns/[slug]
+ * Delete campaign. Only the creator can delete.
+ */
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: Promise<{ slug: string }> }
+) {
+  const { slug } = await params;
+
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+
+  if (!user) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
+  const admin = createAdminClient();
+
+  // Verify ownership
+  const { data: campaign } = await admin
+    .from('campaigns')
+    .select('id, creator_id')
+    .eq('slug', slug)
+    .single();
+
+  if (!campaign) {
+    return NextResponse.json({ error: 'Campaign not found' }, { status: 404 });
+  }
+
+  if (campaign.creator_id !== user.id) {
+    return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+  }
+
+  const { error } = await admin
+    .from('campaigns')
+    .delete()
+    .eq('id', campaign.id);
+
+  if (error) {
+    return NextResponse.json({ error: 'Failed to delete campaign' }, { status: 500 });
+  }
+
+  return NextResponse.json({ success: true });
+}

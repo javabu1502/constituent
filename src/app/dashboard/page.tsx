@@ -7,6 +7,7 @@ import { truncate } from '@/lib/utils';
 import { MyRepresentativesSection } from '@/components/dashboard/MyRepresentativesSection';
 import { RepActivitySection } from '@/components/dashboard/RepActivitySection';
 import { CopyLinkButton } from '@/components/campaign/CopyLinkButton';
+import { DeleteCampaignButton } from '@/components/campaign/DeleteCampaignButton';
 
 export const metadata: Metadata = {
   title: 'Dashboard — My Democracy',
@@ -156,7 +157,15 @@ export default async function DashboardPage() {
 
       {/* My Campaigns */}
       <section className="mb-10">
-        <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">My Campaigns</h2>
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white">My Campaigns</h2>
+          <Link
+            href="/campaign/create"
+            className="text-sm text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 font-medium"
+          >
+            + New Campaign
+          </Link>
+        </div>
         {!campaigns || campaigns.length === 0 ? (
           <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm p-8 text-center">
             <div className="w-16 h-16 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -165,7 +174,7 @@ export default async function DashboardPage() {
               </svg>
             </div>
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">No campaigns yet</h3>
-            <p className="text-gray-600 dark:text-gray-400 mb-4">Start a campaign to rally others around an issue you care about.</p>
+            <p className="text-gray-600 dark:text-gray-400 mb-4">Rally others around an issue you care about.</p>
             <Link
               href="/campaign/create"
               className="inline-block px-6 py-2.5 bg-purple-600 hover:bg-purple-700 text-white font-medium rounded-lg transition-colors"
@@ -178,30 +187,35 @@ export default async function DashboardPage() {
             {campaigns.map((campaign: Record<string, string | number>) => (
               <div
                 key={campaign.id}
-                className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4"
+                className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5"
               >
-                <div className="flex items-start justify-between mb-2">
-                  <span className="px-2 py-0.5 text-xs font-medium rounded-full bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300">
+                <div className="flex items-start justify-between mb-3">
+                  <span className="px-2.5 py-1 text-xs font-medium rounded-full bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300">
                     {campaign.issue_area}
                   </span>
-                  <span className="text-xs text-gray-500 dark:text-gray-400">
-                    {Number(campaign.action_count)} action{Number(campaign.action_count) !== 1 ? 's' : ''}
-                  </span>
+                  <div className="flex items-center gap-1.5 text-purple-600 dark:text-purple-400">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    <span className="text-sm font-bold">{Number(campaign.action_count)}</span>
+                    <span className="text-xs text-gray-500 dark:text-gray-400">action{Number(campaign.action_count) !== 1 ? 's' : ''}</span>
+                  </div>
                 </div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-1 line-clamp-1">
                   {campaign.headline}
                 </h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400 mb-3 line-clamp-2">
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 line-clamp-2">
                   {campaign.description}
                 </p>
                 <div className="flex items-center gap-2">
                   <Link
                     href={`/campaign/${campaign.slug}`}
-                    className="flex-1 text-center px-3 py-1.5 bg-purple-600 hover:bg-purple-700 text-white text-sm font-medium rounded-lg transition-colors"
+                    className="flex-1 text-center px-3 py-2 bg-purple-600 hover:bg-purple-700 text-white text-sm font-medium rounded-lg transition-colors"
                   >
                     View Campaign
                   </Link>
                   <CopyLinkButton slug={campaign.slug as string} />
+                  <DeleteCampaignButton slug={campaign.slug as string} headline={campaign.headline as string} />
                 </div>
               </div>
             ))}

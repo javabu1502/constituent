@@ -254,6 +254,12 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             Why does this matter to you? <span className="text-gray-400 dark:text-gray-500 font-normal">(optional)</span>
           </label>
+          <div className="mb-3 p-3 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded-xl">
+            <p className="text-xs text-amber-800 dark:text-amber-300 font-medium mb-1">Tips for a powerful message:</p>
+            <p className="text-xs text-amber-700 dark:text-amber-400">
+              Share how this issue affects you personally. The more specific you are, the more impactful your message will be. Examples: How does this affect your family? Your community? Your daily life?
+            </p>
+          </div>
           <textarea
             value={personalWhy}
             onChange={(e) => setPersonalWhy(e.target.value)}
@@ -261,9 +267,6 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
             rows={3}
             className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent resize-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
           />
-          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-            Personal stories make messages more impactful.
-          </p>
         </div>
 
         <div className="p-3 bg-purple-50 dark:bg-purple-900/30 border border-purple-200 dark:border-purple-700 rounded-xl">
