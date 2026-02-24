@@ -18,6 +18,7 @@ interface LogMessageBody {
   delivery_method: string;
   delivery_status: string;
   user_id?: string;
+  campaign_id?: string;
 }
 
 /**
@@ -74,6 +75,7 @@ export async function POST(request: NextRequest) {
       delivery_method: body.delivery_method,
       delivery_status: body.delivery_status,
       user_id: body.user_id || null,
+      campaign_id: body.campaign_id || null,
     });
 
     if (error) {

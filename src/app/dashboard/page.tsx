@@ -6,6 +6,7 @@ import { createAdminClient } from '@/lib/supabase';
 import { truncate } from '@/lib/utils';
 import { MyRepresentativesSection } from '@/components/dashboard/MyRepresentativesSection';
 import { RepActivitySection } from '@/components/dashboard/RepActivitySection';
+import { CopyLinkButton } from '@/components/campaign/CopyLinkButton';
 
 export const metadata: Metadata = {
   title: 'Dashboard — My Democracy',
@@ -85,6 +86,13 @@ export default async function DashboardPage() {
   const uniqueIssues = new Set(messages?.map((m: Record<string, string>) => m.issue_area)).size;
   const uniqueOfficials = new Set(messages?.map((m: Record<string, string>) => m.legislator_name)).size;
 
+  // Query campaigns
+  const { data: campaigns } = await admin
+    .from('campaigns')
+    .select('*')
+    .eq('creator_id', user.id)
+    .order('created_at', { ascending: false });
+
   const hasAddress = !!(profile?.street && profile?.city && profile?.state && profile?.zip);
   const cachedReps = profile?.representatives ?? null;
   const savedAddress = hasAddress
@@ -101,12 +109,20 @@ export default async function DashboardPage() {
             Welcome back{profile?.name ? `, ${profile.name}` : ''}
           </p>
         </div>
-        <Link
-          href="/contact"
-          className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white text-sm font-medium rounded-lg transition-colors"
-        >
-          New Message
-        </Link>
+        <div className="flex items-center gap-3">
+          <Link
+            href="/campaign/create"
+            className="px-4 py-2 border-2 border-purple-600 text-purple-600 dark:text-purple-400 dark:border-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/20 text-sm font-medium rounded-lg transition-colors"
+          >
+            Start a Campaign
+          </Link>
+          <Link
+            href="/contact"
+            className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white text-sm font-medium rounded-lg transition-colors"
+          >
+            New Message
+          </Link>
+        </div>
       </div>
 
       {/* My Representatives */}
@@ -136,6 +152,61 @@ export default async function DashboardPage() {
             <div className="text-sm text-gray-600 dark:text-gray-400 mt-1">Officials Contacted</div>
           </div>
         </div>
+      </section>
+
+      {/* My Campaigns */}
+      <section className="mb-10">
+        <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">My Campaigns</h2>
+        {!campaigns || campaigns.length === 0 ? (
+          <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm p-8 text-center">
+            <div className="w-16 h-16 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center mx-auto mb-4">
+              <svg className="w-8 h-8 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" />
+              </svg>
+            </div>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">No campaigns yet</h3>
+            <p className="text-gray-600 dark:text-gray-400 mb-4">Start a campaign to rally others around an issue you care about.</p>
+            <Link
+              href="/campaign/create"
+              className="inline-block px-6 py-2.5 bg-purple-600 hover:bg-purple-700 text-white font-medium rounded-lg transition-colors"
+            >
+              Start a Campaign
+            </Link>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {campaigns.map((campaign: Record<string, string | number>) => (
+              <div
+                key={campaign.id}
+                className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4"
+              >
+                <div className="flex items-start justify-between mb-2">
+                  <span className="px-2 py-0.5 text-xs font-medium rounded-full bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300">
+                    {campaign.issue_area}
+                  </span>
+                  <span className="text-xs text-gray-500 dark:text-gray-400">
+                    {Number(campaign.action_count)} action{Number(campaign.action_count) !== 1 ? 's' : ''}
+                  </span>
+                </div>
+                <h3 className="font-semibold text-gray-900 dark:text-white mb-1 line-clamp-1">
+                  {campaign.headline}
+                </h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-3 line-clamp-2">
+                  {campaign.description}
+                </p>
+                <div className="flex items-center gap-2">
+                  <Link
+                    href={`/campaign/${campaign.slug}`}
+                    className="flex-1 text-center px-3 py-1.5 bg-purple-600 hover:bg-purple-700 text-white text-sm font-medium rounded-lg transition-colors"
+                  >
+                    View Campaign
+                  </Link>
+                  <CopyLinkButton slug={campaign.slug as string} />
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </section>
 
       {/* Your Feed */}

@@ -288,6 +288,14 @@ export function ContactFlow() {
             >
               Start Over
             </button>
+            {isAuthenticated && (
+              <Link
+                href={`/campaign/create?issue=${encodeURIComponent(state.issue)}&category=${encodeURIComponent(state.issueCategory)}&ask=${encodeURIComponent(state.ask)}`}
+                className="block w-full mt-3 py-3 text-center border-2 border-purple-600 text-purple-600 dark:text-purple-400 dark:border-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/30 rounded-lg font-medium transition-colors"
+              >
+                Turn This Into a Campaign
+              </Link>
+            )}
             {isAuthenticated === false && (
               <div className="mt-4 p-4 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl">
                 <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">

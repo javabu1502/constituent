@@ -190,6 +190,33 @@ export interface RepFeedResponse {
   userIssues: string[];
 }
 
+// Campaign types
+export interface Campaign {
+  id: string;
+  creator_id: string;
+  slug: string;
+  headline: string;
+  description: string;
+  issue_area: string;
+  issue_subtopic: string | null;
+  target_level: 'federal' | 'state' | 'both';
+  message_template: string | null;
+  status: 'active' | 'paused' | 'archived';
+  action_count: number;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface CampaignAction {
+  id: string;
+  campaign_id: string;
+  participant_name: string;
+  participant_state: string;
+  participant_city: string;
+  messages_sent: number;
+  created_at: string;
+}
+
 // Track send event
 export interface TrackSendRequest {
   recipientName: string;
