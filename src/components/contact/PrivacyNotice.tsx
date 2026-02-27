@@ -18,9 +18,9 @@ export function PrivacyNotice() {
         <div>
           <h4 className="text-sm font-medium text-gray-900">Your Privacy</h4>
           <p className="text-xs text-gray-500 mt-1">
-            Your address is only used to find your representatives and is not stored.
-            Messages are generated locally and sent directly from your device.
-            We do not collect or share your personal information.
+            Your address is used to find your representatives. If you have an
+            account, your address and messages are stored securely in your profile.
+            We never sell or share your personal information.
           </p>
         </div>
       </div>

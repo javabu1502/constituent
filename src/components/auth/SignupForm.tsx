@@ -4,19 +4,16 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { createClient } from '@/lib/supabase/client';
 import { Input } from '@/components/ui/Input';
-import { Select } from '@/components/ui/Select';
 import { Button } from '@/components/ui/Button';
-import { US_STATES } from '@/lib/constants';
+import { GoogleSignInButton } from '@/components/auth/GoogleSignInButton';
+import { AddressAutocomplete, type ParsedAddress } from '@/components/ui/AddressAutocomplete';
 
 export function SignupForm() {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [street, setStreet] = useState('');
-  const [city, setCity] = useState('');
-  const [addrState, setAddrState] = useState('');
-  const [zip, setZip] = useState('');
+  const [address, setAddress] = useState<ParsedAddress>({ street: '', city: '', state: '', zip: '' });
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -44,8 +41,8 @@ export function SignupForm() {
       options: {
         data: {
           full_name: name,
-          ...(street && city && addrState && zip
-            ? { street, city, state: addrState, zip }
+          ...(address.street && address.city && address.state && address.zip
+            ? { street: address.street, city: address.city, state: address.state, zip: address.zip }
             : {}),
         },
         emailRedirectTo: `${window.location.origin}/auth/callback`,
@@ -82,6 +79,18 @@ export function SignupForm() {
   }
 
   return (
+    <div className="space-y-4">
+      <GoogleSignInButton label="Sign up with Google" />
+
+      <div className="relative">
+        <div className="absolute inset-0 flex items-center">
+          <div className="w-full border-t border-gray-300 dark:border-gray-600" />
+        </div>
+        <div className="relative flex justify-center text-sm">
+          <span className="px-2 bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400">or</span>
+        </div>
+      </div>
+
     <form onSubmit={handleSubmit} className="space-y-4">
       {error && (
         <div className="p-3 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-700 rounded-xl">
@@ -129,46 +138,12 @@ export function SignupForm() {
         autoComplete="new-password"
       />
 
-      {/* Optional address fields */}
+      {/* Optional address with autocomplete */}
       <div className="pt-2 border-t border-gray-200 dark:border-gray-700">
-        <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">
-          Optional — add your address to find your representatives
-        </p>
-        <div className="space-y-3">
-          <Input
-            label="Street Address"
-            type="text"
-            value={street}
-            onChange={(e) => setStreet(e.target.value)}
-            placeholder="123 Main St"
-            autoComplete="street-address"
-          />
-          <Input
-            label="City"
-            type="text"
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-            placeholder="Springfield"
-            autoComplete="address-level2"
-          />
-          <div className="grid grid-cols-2 gap-3">
-            <Select
-              label="State"
-              value={addrState}
-              onChange={(e) => setAddrState(e.target.value)}
-              options={US_STATES.map((s) => ({ value: s.code, label: s.name }))}
-              placeholder="Select state"
-            />
-            <Input
-              label="ZIP Code"
-              type="text"
-              value={zip}
-              onChange={(e) => setZip(e.target.value)}
-              placeholder="62704"
-              autoComplete="postal-code"
-            />
-          </div>
-        </div>
+        <AddressAutocomplete
+          onAddressChange={setAddress}
+          optional
+        />
       </div>
 
       <Button type="submit" className="w-full" isLoading={isLoading}>
@@ -182,5 +157,6 @@ export function SignupForm() {
         </Link>
       </p>
     </form>
+    </div>
   );
 }

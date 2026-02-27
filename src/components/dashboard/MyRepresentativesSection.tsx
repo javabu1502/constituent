@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import type { Official } from '@/lib/types';
-import { US_STATES } from '@/lib/constants';
+import { AddressAutocomplete, type ParsedAddress } from '@/components/ui/AddressAutocomplete';
 
 function getPartyColor(party: string) {
   const p = party.toLowerCase();
@@ -95,16 +95,18 @@ interface EditAddressFormProps {
 }
 
 function EditAddressForm({ initialAddress, onSaved, onCancel }: EditAddressFormProps) {
-  const [street, setStreet] = useState(initialAddress?.street || '');
-  const [city, setCity] = useState(initialAddress?.city || '');
-  const [state, setState] = useState(initialAddress?.state || '');
-  const [zip, setZip] = useState(initialAddress?.zip || '');
+  const [address, setAddress] = useState<ParsedAddress>({
+    street: initialAddress?.street || '',
+    city: initialAddress?.city || '',
+    state: initialAddress?.state || '',
+    zip: initialAddress?.zip || '',
+  });
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!street.trim() || !city.trim() || !state || !zip.trim()) {
+    if (!address.street.trim() || !address.city.trim() || !address.state || !address.zip.trim()) {
       setError('Please fill in all address fields.');
       return;
     }
@@ -116,7 +118,7 @@ function EditAddressForm({ initialAddress, onSaved, onCancel }: EditAddressFormP
       const patchRes = await fetch('/api/profile', {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ street, city, state, zip }),
+        body: JSON.stringify(address),
       });
       if (!patchRes.ok) throw new Error('Failed to save address');
 
@@ -126,6 +128,8 @@ function EditAddressForm({ initialAddress, onSaved, onCancel }: EditAddressFormP
 
       if (repData.officials?.length) {
         onSaved(repData.officials);
+        // Notify LocalOfficialsSection to refresh
+        window.dispatchEvent(new Event('local-officials-updated'));
       } else {
         setError('No representatives found for this address. Please check and try again.');
         setSaving(false);
@@ -141,70 +145,11 @@ function EditAddressForm({ initialAddress, onSaved, onCancel }: EditAddressFormP
       <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-4">
         {initialAddress?.street ? 'Update Your Address' : 'Add Your Address'}
       </h3>
-      <div className="space-y-3">
-        <div>
-          <label htmlFor="edit-street" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-            Street Address
-          </label>
-          <input
-            id="edit-street"
-            type="text"
-            value={street}
-            onChange={(e) => setStreet(e.target.value)}
-            placeholder="123 Main St"
-            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 text-sm"
-            autoComplete="street-address"
-          />
-        </div>
-        <div>
-          <label htmlFor="edit-city" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-            City
-          </label>
-          <input
-            id="edit-city"
-            type="text"
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-            placeholder="Springfield"
-            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 text-sm"
-            autoComplete="address-level2"
-          />
-        </div>
-        <div className="grid grid-cols-2 gap-3">
-          <div>
-            <label htmlFor="edit-state" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-              State
-            </label>
-            <select
-              id="edit-state"
-              value={state}
-              onChange={(e) => setState(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
-              autoComplete="address-level1"
-            >
-              <option value="">Select state</option>
-              {US_STATES.map((s) => (
-                <option key={s.code} value={s.code}>{s.name}</option>
-              ))}
-            </select>
-          </div>
-          <div>
-            <label htmlFor="edit-zip" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-              ZIP Code
-            </label>
-            <input
-              id="edit-zip"
-              type="text"
-              value={zip}
-              onChange={(e) => setZip(e.target.value)}
-              placeholder="62704"
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 text-sm"
-              autoComplete="postal-code"
-              maxLength={10}
-            />
-          </div>
-        </div>
-      </div>
+
+      <AddressAutocomplete
+        initialAddress={initialAddress || undefined}
+        onAddressChange={setAddress}
+      />
 
       {error && (
         <div className="mt-3 p-3 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-700 rounded-lg">

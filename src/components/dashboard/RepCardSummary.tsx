@@ -1,26 +1,11 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import type { BioData } from './RepBioTab';
 
-export function RepCardSummary({ repId, repLevel, repState }: {
-  repId: string;
-  repLevel: 'federal' | 'state' | 'local';
-  repState?: string;
+export function RepCardSummary({ bio, loading }: {
+  bio: BioData | null;
+  loading: boolean;
 }) {
-  const [bio, setBio] = useState<BioData | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const params = new URLSearchParams({ repId, level: repLevel });
-    if (repState) params.set('state', repState);
-
-    fetch(`/api/legislators/bio?${params.toString()}`)
-      .then(res => res.ok ? res.json() : null)
-      .then((data: BioData | null) => { if (data) setBio(data); })
-      .catch(() => {})
-      .finally(() => setLoading(false));
-  }, [repId, repLevel, repState]);
 
   if (loading) {
     return (

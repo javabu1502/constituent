@@ -2,14 +2,16 @@
 
 import { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
-import type { RepFeedItem, RepFeedResponse, FeedBill, RepNewsArticle, RepVote, IssueFeedItem, IssueFeedResponse, RepFinance, RepFinanceResponse, VotingRecordResponse } from '@/lib/types';
+import type { RepFeedItem, RepFeedResponse, FeedBill, RepNewsArticle, RepVote, IssueFeedItem, IssueFeedResponse, RepFinance, RepFinanceResponse, VotingRecordResponse, LobbyingResponse } from '@/lib/types';
 import { US_STATES } from '@/lib/constants';
 import { BillSummarySection } from './BillSummarySection';
 import { RepBioTab } from './RepBioTab';
+import { LobbyingTab } from './LobbyingTab';
+import { RepCardSummary } from './RepCardSummary';
 
 type Tab = 'by-rep' | 'by-issue';
 type RepSort = 'recent' | 'federal-first' | 'state-first';
-type RepInnerTab = 'bio' | 'legislation' | 'votes' | 'news' | 'fundraising';
+type RepInnerTab = 'bio' | 'legislation' | 'votes' | 'news' | 'fundraising' | 'lobbying';
 type PositionFilter = 'all' | 'Yea' | 'Nay' | 'Not Voting';
 type TimePeriod = '30d' | '6mo' | '1yr' | 'all';
 
@@ -204,7 +206,7 @@ function VoteCard({ vote }: { vote: RepVote }) {
   );
 }
 
-function VotingRecordTab({ repId, repLevel, repState }: { repId: string; repLevel: 'federal' | 'state'; repState?: string }) {
+function VotingRecordTab({ repId, repLevel, repState }: { repId: string; repLevel: 'federal' | 'state' | 'local'; repState?: string }) {
   const [data, setData] = useState<VotingRecordResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -487,7 +489,57 @@ function formatCurrency(amount: number): string {
   return `$${amount.toLocaleString()}`;
 }
 
-function FundingTab({ finance, repId }: { finance: RepFinance | null; repId: string }) {
+function LobbyingConnectionsSection({ repId, chamber }: { repId: string; chamber?: string }) {
+  const [connections, setConnections] = useState<LobbyingResponse['lobbying_connections']>([]);
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    if (!chamber) return;
+    fetch(`/api/lobbying?repId=${encodeURIComponent(repId)}&chamber=${encodeURIComponent(chamber)}`)
+      .then(res => res.ok ? res.json() : null)
+      .then((data: LobbyingResponse | null) => {
+        if (data?.lobbying_connections?.length) setConnections(data.lobbying_connections);
+      })
+      .catch(() => {})
+      .finally(() => setLoaded(true));
+  }, [repId, chamber]);
+
+  if (!loaded || connections.length === 0) return null;
+
+  return (
+    <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
+      <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-1">Lobbying Connections</h4>
+      <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">
+        Organizations whose employees donated to this representative&apos;s campaign and also spent money lobbying on issues before their committees. This overlap does not necessarily imply coordination or impropriety.
+      </p>
+      <div className="space-y-2">
+        {connections.slice(0, 10).map((conn, i) => (
+          <div key={i} className="flex items-start justify-between py-2 border-b border-gray-100 dark:border-gray-700 last:border-0 gap-3">
+            <div className="min-w-0">
+              <p className="text-sm font-medium text-gray-900 dark:text-white truncate">{conn.organization}</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400">
+                Lobbied on: {conn.lobbied_issues.slice(0, 3).join(', ')}
+              </p>
+            </div>
+            <div className="text-right shrink-0">
+              <p className="text-xs text-green-600 dark:text-green-400 font-medium">Donated: {formatCurrency(conn.donated)}</p>
+              <p className="text-xs text-blue-600 dark:text-blue-400 font-medium">Lobbied: {formatCurrency(conn.lobbying_income)}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className="mt-3 flex justify-end">
+        <WriteAboutButton
+          repId={repId}
+          issue="Lobbying and Campaign Finance"
+          ask={`I noticed that some organizations that donated to your campaign also spent money lobbying on issues before your committees, and I wanted to discuss transparency around these connections.`}
+        />
+      </div>
+    </div>
+  );
+}
+
+function FundingTab({ finance, repId, chamber }: { finance: RepFinance | null; repId: string; chamber?: string }) {
   if (!finance) {
     return <p className="text-sm text-gray-500 dark:text-gray-400 px-1">No campaign finance data available for this representative.</p>;
   }
@@ -631,6 +683,9 @@ function FundingTab({ finance, repId }: { finance: RepFinance | null; repId: str
         </div>
       )}
 
+      {/* Lobbying Connections */}
+      <LobbyingConnectionsSection repId={repId} chamber={chamber} />
+
       {/* FEC Disclaimer */}
       <div className="bg-gray-50 dark:bg-gray-800/50 rounded-lg p-3 border border-gray-200 dark:border-gray-700">
         <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
@@ -641,24 +696,44 @@ function FundingTab({ finance, repId }: { finance: RepFinance | null; repId: str
   );
 }
 
-function RepInnerTabs({ repId, items, repLevel, repState, finance, userIssues }: {
+function RepInnerTabs({ repId, repName, items, repLevel, repState, chamber, finance, userIssues }: {
   repId: string;
+  repName: string;
   items: RepFeedItem[];
-  repLevel: 'federal' | 'state';
+  repLevel: 'federal' | 'state' | 'local';
   repState?: string;
+  chamber?: string;
   finance: RepFinance | null;
   userIssues?: string[];
 }) {
-  const [innerTab, setInnerTab] = useState<RepInnerTab>('legislation');
+  const [innerTab, setInnerTab] = useState<RepInnerTab>('bio');
   const isFederal = repLevel === 'federal';
+
+  // Lift bio fetch so RepCardSummary and RepBioTab share a single request
+  const [bio, setBio] = useState<import('./RepBioTab').BioData | null>(null);
+  const [bioLoading, setBioLoading] = useState(true);
+
+  useEffect(() => {
+    setBioLoading(true);
+    const params = new URLSearchParams({ repId, level: repLevel });
+    if (repState) params.set('state', repState);
+
+    fetch(`/api/legislators/bio?${params.toString()}`)
+      .then(res => res.ok ? res.json() : null)
+      .then((data) => { if (data) setBio(data); })
+      .catch(() => {})
+      .finally(() => setBioLoading(false));
+  }, [repId, repLevel, repState]);
 
   const billItems = useMemo(() => items.filter((i): i is FeedBill => i.type === 'bill'), [items]);
   const newsItems = useMemo(() => items.filter((i): i is RepNewsArticle => i.type === 'news'), [items]);
 
-  const tabs: RepInnerTab[] = isFederal ? ['bio', 'legislation', 'votes', 'news', 'fundraising'] : ['bio', 'legislation', 'votes', 'news'];
+  const tabs: RepInnerTab[] = isFederal ? ['bio', 'legislation', 'votes', 'news', 'fundraising', 'lobbying'] : ['bio', 'legislation', 'votes', 'news'];
 
   return (
     <div>
+      <RepCardSummary bio={bio} loading={bioLoading} />
+
       <div className="flex bg-gray-100 dark:bg-gray-700/50 rounded-lg p-0.5 mb-3">
         {tabs.map((t) => {
           const count = t === 'legislation' ? billItems.length
@@ -681,7 +756,7 @@ function RepInnerTabs({ repId, items, repLevel, repState, finance, userIssues }:
       </div>
 
       {innerTab === 'bio' && (
-        <RepBioTab repId={repId} repLevel={repLevel} repState={repState} />
+        <RepBioTab repId={repId} repLevel={repLevel} repState={repState} bio={bio} bioLoading={bioLoading} />
       )}
 
       {innerTab === 'legislation' && (
@@ -707,7 +782,11 @@ function RepInnerTabs({ repId, items, repLevel, repState, finance, userIssues }:
       )}
 
       {innerTab === 'fundraising' && isFederal && (
-        <FundingTab finance={finance} repId={repId} />
+        <FundingTab finance={finance} repId={repId} chamber={chamber} />
+      )}
+
+      {innerTab === 'lobbying' && isFederal && chamber && (
+        <LobbyingTab repId={repId} repName={repName} chamber={chamber} />
       )}
     </div>
   );
@@ -804,7 +883,7 @@ export function RepActivitySection() {
       groups[id].push(item);
     }
 
-    let sortedReps = [...reps];
+    const sortedReps = [...reps];
     if (repSort === 'federal-first') sortedReps.sort((a, b) => (a.level === 'federal' ? -1 : 1) - (b.level === 'federal' ? -1 : 1));
     else if (repSort === 'state-first') sortedReps.sort((a, b) => (a.level === 'state' ? -1 : 1) - (b.level === 'state' ? -1 : 1));
     else {
@@ -907,9 +986,11 @@ export function RepActivitySection() {
               >
                 <RepInnerTabs
                   repId={rep.id}
+                  repName={rep.name}
                   items={repItems}
                   repLevel={rep.level}
                   repState={rep.state}
+                  chamber={rep.title.toLowerCase().includes('senator') ? 'senate' : 'house'}
                   finance={financeData[rep.id] ?? null}
                   userIssues={userIssues}
                 />
@@ -935,6 +1016,7 @@ export function RepActivitySection() {
                   key={area}
                   title={area}
                   badge={`${issueGroups.groups[area]?.length ?? 0} items`}
+                  defaultOpen={false}
                 >
                   {(issueGroups.groups[area] ?? []).map((item, i) => <IssueFeedCard key={i} item={item} />)}
                 </CollapsibleSection>

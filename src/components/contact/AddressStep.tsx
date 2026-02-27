@@ -1,63 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import type { ContactState, ContactAction } from './ContactFlow';
 import { Button } from '@/components/ui/Button';
-
-// US States for dropdown
-const US_STATES = [
-  { code: 'AL', name: 'Alabama' },
-  { code: 'AK', name: 'Alaska' },
-  { code: 'AZ', name: 'Arizona' },
-  { code: 'AR', name: 'Arkansas' },
-  { code: 'CA', name: 'California' },
-  { code: 'CO', name: 'Colorado' },
-  { code: 'CT', name: 'Connecticut' },
-  { code: 'DE', name: 'Delaware' },
-  { code: 'DC', name: 'District of Columbia' },
-  { code: 'FL', name: 'Florida' },
-  { code: 'GA', name: 'Georgia' },
-  { code: 'HI', name: 'Hawaii' },
-  { code: 'ID', name: 'Idaho' },
-  { code: 'IL', name: 'Illinois' },
-  { code: 'IN', name: 'Indiana' },
-  { code: 'IA', name: 'Iowa' },
-  { code: 'KS', name: 'Kansas' },
-  { code: 'KY', name: 'Kentucky' },
-  { code: 'LA', name: 'Louisiana' },
-  { code: 'ME', name: 'Maine' },
-  { code: 'MD', name: 'Maryland' },
-  { code: 'MA', name: 'Massachusetts' },
-  { code: 'MI', name: 'Michigan' },
-  { code: 'MN', name: 'Minnesota' },
-  { code: 'MS', name: 'Mississippi' },
-  { code: 'MO', name: 'Missouri' },
-  { code: 'MT', name: 'Montana' },
-  { code: 'NE', name: 'Nebraska' },
-  { code: 'NV', name: 'Nevada' },
-  { code: 'NH', name: 'New Hampshire' },
-  { code: 'NJ', name: 'New Jersey' },
-  { code: 'NM', name: 'New Mexico' },
-  { code: 'NY', name: 'New York' },
-  { code: 'NC', name: 'North Carolina' },
-  { code: 'ND', name: 'North Dakota' },
-  { code: 'OH', name: 'Ohio' },
-  { code: 'OK', name: 'Oklahoma' },
-  { code: 'OR', name: 'Oregon' },
-  { code: 'PA', name: 'Pennsylvania' },
-  { code: 'RI', name: 'Rhode Island' },
-  { code: 'SC', name: 'South Carolina' },
-  { code: 'SD', name: 'South Dakota' },
-  { code: 'TN', name: 'Tennessee' },
-  { code: 'TX', name: 'Texas' },
-  { code: 'UT', name: 'Utah' },
-  { code: 'VT', name: 'Vermont' },
-  { code: 'VA', name: 'Virginia' },
-  { code: 'WA', name: 'Washington' },
-  { code: 'WV', name: 'West Virginia' },
-  { code: 'WI', name: 'Wisconsin' },
-  { code: 'WY', name: 'Wyoming' },
-];
+import { AddressAutocomplete, type ParsedAddress } from '@/components/ui/AddressAutocomplete';
 
 interface AddressStepProps {
   state: ContactState;
@@ -65,28 +11,34 @@ interface AddressStepProps {
 }
 
 export function AddressStep({ state, dispatch }: AddressStepProps) {
-  const [street, setStreet] = useState(state.address?.street || '');
-  const [city, setCity] = useState(state.address?.city || '');
-  const [stateCode, setStateCode] = useState(state.address?.state || '');
-  const [zip, setZip] = useState(state.address?.zip || '');
+  const [address, setAddress] = useState<ParsedAddress>({
+    street: state.address?.street || '',
+    city: state.address?.city || '',
+    state: state.address?.state || '',
+    zip: state.address?.zip || '',
+  });
+
+  const onAddressChange = useCallback((a: ParsedAddress) => {
+    setAddress(a);
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!street.trim() || street.trim().length < 3) {
+    if (!address.street.trim() || address.street.trim().length < 3) {
       dispatch({ type: 'SET_ERROR', payload: 'Please enter a valid street address' });
       return;
     }
-    if (!city.trim()) {
+    if (!address.city.trim()) {
       dispatch({ type: 'SET_ERROR', payload: 'Please enter a city' });
       return;
     }
-    if (!stateCode) {
+    if (!address.state) {
       dispatch({ type: 'SET_ERROR', payload: 'Please select a state' });
       return;
     }
 
-    dispatch({ type: 'SET_ADDRESS', payload: { street, city, state: stateCode, zip } });
+    dispatch({ type: 'SET_ADDRESS', payload: address });
     dispatch({ type: 'SET_LOADING', payload: true });
     dispatch({ type: 'SET_ERROR', payload: null });
 
@@ -94,7 +46,7 @@ export function AddressStep({ state, dispatch }: AddressStepProps) {
       const response = await fetch('/api/representatives', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ street, city, state: stateCode, zip }),
+        body: JSON.stringify(address),
       });
 
       const data = await response.json();
@@ -114,10 +66,7 @@ export function AddressStep({ state, dispatch }: AddressStepProps) {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          street,
-          city,
-          state: stateCode,
-          zip,
+          ...address,
           representatives: data.officials,
         }),
       }).catch(() => {}); // Silently ignore for anonymous users (401)
@@ -166,79 +115,11 @@ export function AddressStep({ state, dispatch }: AddressStepProps) {
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-4">
-        {/* Street Address */}
-        <div>
-          <label htmlFor="street" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-            Street Address
-          </label>
-          <input
-            id="street"
-            type="text"
-            value={street}
-            onChange={(e) => setStreet(e.target.value)}
-            placeholder="123 Main Street"
-            className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent transition-shadow bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
-            autoComplete="street-address"
-            autoFocus
-          />
-        </div>
-
-        {/* City */}
-        <div>
-          <label htmlFor="city" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-            City
-          </label>
-          <input
-            id="city"
-            type="text"
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-            placeholder="San Francisco"
-            className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent transition-shadow bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
-            autoComplete="address-level2"
-          />
-        </div>
-
-        {/* State and ZIP row */}
-        <div className="grid grid-cols-2 gap-4">
-          {/* State */}
-          <div>
-            <label htmlFor="state" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-              State
-            </label>
-            <select
-              id="state"
-              value={stateCode}
-              onChange={(e) => setStateCode(e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent transition-shadow bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-              autoComplete="address-level1"
-            >
-              <option value="">Select state</option>
-              {US_STATES.map((s) => (
-                <option key={s.code} value={s.code}>
-                  {s.name}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          {/* ZIP Code */}
-          <div>
-            <label htmlFor="zip" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-              ZIP Code <span className="text-gray-400 dark:text-gray-500 font-normal">(optional)</span>
-            </label>
-            <input
-              id="zip"
-              type="text"
-              value={zip}
-              onChange={(e) => setZip(e.target.value)}
-              placeholder="94102"
-              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent transition-shadow bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
-              autoComplete="postal-code"
-              maxLength={10}
-            />
-          </div>
-        </div>
+        <AddressAutocomplete
+          initialAddress={state.address || undefined}
+          onAddressChange={onAddressChange}
+          label="Address"
+        />
 
         {state.error && (
           <div className="p-4 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 rounded-xl">

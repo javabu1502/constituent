@@ -230,15 +230,17 @@ export function ContactFlow() {
           };
           dispatch({ type: 'SET_ADDRESS', payload: address });
 
-          // Set cached reps if available
+          // Set cached reps if available (merge local officials)
           const reps: Official[] | null = profile.representatives;
-          if (reps && reps.length > 0) {
-            dispatch({ type: 'SET_OFFICIALS', payload: reps });
+          const localOfficials: Official[] | null = profile.local_officials;
+          const allOfficials = [...(reps || []), ...(localOfficials || [])];
+          if (allOfficials.length > 0) {
+            dispatch({ type: 'SET_OFFICIALS', payload: allOfficials });
 
             // Check for repId deep-link
             const repId = searchParams.get('repId');
             if (repId) {
-              const matchedRep = reps.find((r) => r.id === repId);
+              const matchedRep = allOfficials.find((r) => r.id === repId);
               if (matchedRep) {
                 dispatch({ type: 'SELECT_REPS', payload: [matchedRep] });
                 dispatch({ type: 'GO_TO_STEP', payload: getTargetStep() });
@@ -253,12 +255,16 @@ export function ContactFlow() {
             fetch('/api/profile/representatives', { method: 'POST' })
               .then((res) => (res.ok ? res.json() : null))
               .then((data) => {
-                if (data?.officials?.length) {
-                  dispatch({ type: 'SET_OFFICIALS', payload: data.officials });
+                const fetchedOfficials = [
+                  ...(data?.officials || []),
+                  ...(data?.localOfficials || []),
+                ];
+                if (fetchedOfficials.length > 0) {
+                  dispatch({ type: 'SET_OFFICIALS', payload: fetchedOfficials });
 
                   const repId = searchParams.get('repId');
                   if (repId) {
-                    const matchedRep = data.officials.find((r: Official) => r.id === repId);
+                    const matchedRep = fetchedOfficials.find((r: Official) => r.id === repId);
                     if (matchedRep) {
                       dispatch({ type: 'SELECT_REPS', payload: [matchedRep] });
                       dispatch({ type: 'GO_TO_STEP', payload: getTargetStep() });

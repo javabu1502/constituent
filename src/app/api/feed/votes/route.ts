@@ -497,7 +497,7 @@ export async function GET(request: NextRequest) {
     dataSource = 'congress.gov';
   } else {
     // Try Open States first
-    votes = await fetchStateVotes(rep.id, rep.name, rep.chamber);
+    votes = await fetchStateVotes(rep.id, rep.name, rep.chamber || '');
     if (votes.length > 0) {
       dataSource = 'openstates';
     } else {
@@ -507,7 +507,7 @@ export async function GET(request: NextRequest) {
         rep.state,
         rep.name,
         lastName,
-        rep.chamber,
+        rep.chamber || '',
         rep.id,
       );
       if (legiscanResult && legiscanResult.votes.length > 0) {

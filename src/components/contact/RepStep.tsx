@@ -120,6 +120,7 @@ export function RepStep({ state, dispatch, onBack }: RepStepProps) {
   // Group by level first, then by chamber
   const federalOfficials = officials.filter((r) => r.level === 'federal');
   const stateOfficials = officials.filter((r) => r.level === 'state');
+  const localOfficials = officials.filter((r) => r.level === 'local');
 
   // Federal breakdown
   const senators = federalOfficials.filter((r) => r.chamber === 'senate');
@@ -282,6 +283,38 @@ export function RepStep({ state, dispatch, onBack }: RepStepProps) {
                   </div>
                 </div>
               )}
+            </div>
+          </div>
+        )}
+
+        {/* Local Officials Section */}
+        {localOfficials.length > 0 && (
+          <div>
+            <div className="flex items-center gap-2 mb-4">
+              <div className="w-8 h-8 rounded-full bg-green-100 dark:bg-green-900 flex items-center justify-center">
+                <svg className="w-4 h-4 text-green-700 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+              </div>
+              <h4 className="text-base font-semibold text-gray-900 dark:text-white">
+                Local Officials ({localOfficials.length})
+              </h4>
+            </div>
+
+            <div className="space-y-2 pl-2 border-l-2 border-green-200 dark:border-green-700">
+              <div className="pl-4">
+                <div className="space-y-2">
+                  {localOfficials.map((rep) => (
+                    <RepCard
+                      key={rep.id}
+                      rep={rep}
+                      isSelected={isSelected(rep)}
+                      onToggle={() => handleToggle(rep)}
+                    />
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         )}

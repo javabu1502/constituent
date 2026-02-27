@@ -247,7 +247,7 @@ async function fetchChamberVotes(
 
     // Fetch vote detail to get member positions
     const detailUrl = `https://api.congress.gov/v3/vote/${congress}/${chamber.toLowerCase()}/${rollNumber}?api_key=${apiKey}`;
-    let memberPositions: Map<string, string> = new Map();
+    const memberPositions: Map<string, string> = new Map();
 
     try {
       const detailRes = await congressFetch(detailUrl);

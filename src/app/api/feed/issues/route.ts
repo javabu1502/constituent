@@ -104,11 +104,13 @@ async function fetchIssueNews(
   topic: string,
   level: string,
   state: string,
+  otherStateNames: Set<string>,
 ): Promise<IssueFeedItem[]> {
   try {
+    const stateName = stateCodeToName(state);
     const query = level === 'state'
-      ? `"${topic}" ${stateCodeToName(state)} legislation when:30d`
-      : `"${topic}" Congress legislation when:30d`;
+      ? `${topic} ${stateName} bill OR law OR legislature OR policy when:30d`
+      : `${topic} Congress OR Senate OR House OR federal when:30d`;
     const url = `https://news.google.com/rss/search?q=${encodeURIComponent(query)}&hl=en-US&gl=US&ceid=US:en`;
     const res = await fetch(url, {
       signal: AbortSignal.timeout(8000),
@@ -116,10 +118,24 @@ async function fetchIssueNews(
     });
     if (!res.ok) return [];
     const xml = await res.text();
-    const items = parseRssItems(xml).slice(0, 3);
+    const items = parseRssItems(xml).slice(0, 5);
 
     return items
       .filter((item) => isRecent(item.pubDate))
+      .filter((item) => {
+        // Filter out articles about other states unless they also mention federal context
+        const titleLower = item.title.toLowerCase();
+        for (const otherState of otherStateNames) {
+          if (titleLower.includes(otherState.toLowerCase())) {
+            if (titleLower.includes('congress') || titleLower.includes('federal')) {
+              return true;
+            }
+            return false;
+          }
+        }
+        return true;
+      })
+      .slice(0, 3)
       .map((item) => ({
         type: 'issue-news' as const,
         title: item.title,
@@ -159,15 +175,24 @@ export async function GET() {
     }
   }
 
-  // Get user's reps for cross-referencing
+  // Get user's reps and state for cross-referencing
   const { data: profile } = await admin
     .from('profiles')
-    .select('representatives')
+    .select('representatives, state')
     .eq('user_id', user.id)
     .single();
 
   const reps = parseRepresentatives(profile?.representatives);
   const repNames = reps.map((r) => r.name);
+
+  // Build set of other state names for headline filtering
+  const userState = (profile?.state as string) ?? '';
+  const otherStateNames = new Set<string>();
+  for (const s of US_STATES) {
+    if (s.code !== userState.toUpperCase()) {
+      otherStateNames.add(s.name);
+    }
+  }
 
   // Get distinct (issue, legislator_level, advocate_state) combos from user's messages
   const { data: messages } = await admin
@@ -203,7 +228,7 @@ export async function GET() {
 
   // Fetch news for each combo in parallel
   const newsPromises = combos.map(async ({ topic, level, state }) => {
-    const articles = await fetchIssueNews(topic, level, state);
+    const articles = await fetchIssueNews(topic, level, state, otherStateNames);
     return { topic, articles };
   });
   const newsResults = await Promise.all(newsPromises);

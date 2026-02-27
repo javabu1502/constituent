@@ -51,9 +51,11 @@ export default function PrivacyPage() {
                   Open States
                 </a>, we find your federal and state representatives.
               </p>
-              <p className="bg-green-50 dark:bg-green-900/30 border border-green-200 dark:border-green-700 rounded-lg p-4 text-green-800 dark:text-green-300">
-                <strong>Your address is NOT stored.</strong> It&apos;s used only for
-                this lookup and then discarded. We don&apos;t have a database of addresses.
+              <p className="bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-700 rounded-lg p-4 text-blue-800 dark:text-blue-300">
+                <strong>Without an account:</strong> your address is used for lookup only
+                and then discarded. <strong>With an account:</strong> your address is stored
+                securely in your profile so you can access your dashboard and matched
+                representatives. You can update or delete it anytime.
               </p>
             </div>
           </section>
@@ -69,7 +71,7 @@ export default function PrivacyPage() {
               What the AI Sees
             </h2>
             <div className="space-y-3 text-gray-600 dark:text-gray-300 pl-10">
-              <p>When we generate your personalized email or phone script, the AI receives:</p>
+              <p>When we generate your personalized email or phone script, representative bios, or bill summaries, the AI receives:</p>
               <ul className="list-disc list-inside space-y-2 ml-4">
                 <li><strong className="text-gray-900 dark:text-white">Your name</strong> — so it can personalize the message</li>
                 <li><strong className="text-gray-900 dark:text-white">Your city and state</strong> — so it can say &quot;as your constituent from Reno, Nevada&quot;</li>
@@ -111,6 +113,32 @@ export default function PrivacyPage() {
               </p>
               <p className="bg-green-50 dark:bg-green-900/30 border border-green-200 dark:border-green-700 rounded-lg p-4 text-green-800 dark:text-green-300">
                 <strong>We never share, sell, or provide your messages or personal information to any third party</strong> — including legislators, political organizations, or advertisers.
+              </p>
+            </div>
+          </section>
+
+          {/* What We Store When You Create an Account */}
+          <section className="mb-10">
+            <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+              <span className="w-8 h-8 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg className="w-4 h-4 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+              </span>
+              What We Store When You Create an Account
+            </h2>
+            <div className="space-y-3 text-gray-600 dark:text-gray-300 pl-10">
+              <p>
+                When you create an account, we store the following to power your personalized dashboard:
+              </p>
+              <ul className="list-disc list-inside space-y-1 ml-4">
+                <li>Your <strong className="text-gray-900 dark:text-white">name</strong> and <strong className="text-gray-900 dark:text-white">email address</strong></li>
+                <li>Your <strong className="text-gray-900 dark:text-white">street address, city, state, and ZIP code</strong></li>
+                <li>Your <strong className="text-gray-900 dark:text-white">matched representatives</strong> — federal, state, and local officials</li>
+                <li><strong className="text-gray-900 dark:text-white">Dashboard data</strong> — cached voting records, campaign finance, lobbying activity, committee assignments, and bill tracking preferences</li>
+              </ul>
+              <p>
+                You can update or delete your account data at any time from your profile settings.
               </p>
             </div>
           </section>
@@ -164,15 +192,43 @@ export default function PrivacyPage() {
               <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
                 <p className="font-semibold text-gray-900 dark:text-white">Anthropic Claude API</p>
                 <p className="text-sm">
-                  Our AI provider for message generation. Per their{' '}
+                  Our AI provider for message generation, representative bios, and bill summaries. Per their{' '}
                   <a href="https://www.anthropic.com/policies/privacy" className="text-purple-600 dark:text-purple-400 hover:underline" target="_blank" rel="noopener noreferrer">
                     API terms
-                  </a>, messages sent through the API are not stored or used for training.
+                  </a>, data sent through the API is not stored or used for training.
                 </p>
+              </div>
+              <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
+                <p className="font-semibold text-gray-900 dark:text-white">Supabase</p>
+                <p className="text-sm">Database and authentication provider. Stores account data, messages, and dashboard data with encryption at rest and in transit.</p>
               </div>
               <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
                 <p className="font-semibold text-gray-900 dark:text-white">Open States</p>
                 <p className="text-sm">Open source civic data for state legislator information.</p>
+              </div>
+              <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
+                <p className="font-semibold text-gray-900 dark:text-white">Congress.gov API</p>
+                <p className="text-sm">Official congressional data for bill tracking, voting records, and committee information.</p>
+              </div>
+              <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
+                <p className="font-semibold text-gray-900 dark:text-white">FEC API</p>
+                <p className="text-sm">Federal Election Commission data for campaign finance information.</p>
+              </div>
+              <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
+                <p className="font-semibold text-gray-900 dark:text-white">Senate LDA Reports</p>
+                <p className="text-sm">Lobbying Disclosure Act data for lobbying activity disclosures.</p>
+              </div>
+              <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
+                <p className="font-semibold text-gray-900 dark:text-white">LegiScan</p>
+                <p className="text-sm">State and federal legislation tracking data.</p>
+              </div>
+              <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
+                <p className="font-semibold text-gray-900 dark:text-white">Google News RSS</p>
+                <p className="text-sm">Public news feeds for per-representative news aggregation.</p>
+              </div>
+              <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
+                <p className="font-semibold text-gray-900 dark:text-white">Google Civic Information API</p>
+                <p className="text-sm">Local official and election information lookup.</p>
               </div>
               <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
                 <p className="font-semibold text-gray-900 dark:text-white">Vercel</p>
@@ -193,8 +249,9 @@ export default function PrivacyPage() {
             </h2>
             <div className="space-y-3 text-gray-600 dark:text-gray-300 pl-10">
               <p>
-                As we add features like user accounts and message history, we&apos;ll
-                update this policy and ask for your explicit consent.
+                We have added user accounts, personalized dashboards, and expanded
+                civic data features. This policy reflects those additions and will
+                continue to be updated as the platform evolves.
               </p>
               <p className="bg-purple-50 dark:bg-purple-900/30 border border-purple-200 dark:border-purple-700 rounded-lg p-4 text-purple-800 dark:text-purple-300 font-semibold">
                 We will never sell your data. Ever.
@@ -223,8 +280,10 @@ export default function PrivacyPage() {
                 GitHub repository), plus the issue area and details you provide.
               </p>
               <p>
-                The AI does not access voting records or make assumptions beyond party affiliation
-                and committee assignments. You always review and can edit the message before sending.
+                For <strong className="text-gray-900 dark:text-white">representative bios</strong>, the AI uses publicly available data (name, party, state, committees, legislative history) to generate biographical narratives. For <strong className="text-gray-900 dark:text-white">bill summaries</strong>, the AI summarizes publicly available bill text. No personal user data is used for bios or summaries.
+              </p>
+              <p>
+                You always review and can edit messages before sending.
               </p>
               <p>
                 <Link href="/about/ai-tailoring" className="text-purple-600 dark:text-purple-400 hover:underline font-medium">
@@ -246,14 +305,20 @@ export default function PrivacyPage() {
             </h2>
             <div className="space-y-3 text-gray-600 dark:text-gray-300 pl-10">
               <p>
-                Your data is retained indefinitely so it&apos;s available in your message history.
+                <strong className="text-gray-900 dark:text-white">Account data</strong> (profile, address, matched representatives, dashboard preferences) is retained as long as your account is active.
               </p>
               <p>
-                You may request deletion at any time by emailing{' '}
+                <strong className="text-gray-900 dark:text-white">Message history</strong> is retained so you can view it in your dashboard.
+              </p>
+              <p>
+                <strong className="text-gray-900 dark:text-white">Cached representative data</strong> (voting records, campaign finance, lobbying, committees) is refreshed periodically from public sources and is not personal data.
+              </p>
+              <p>
+                You may request deletion of all your personal data at any time by emailing{' '}
                 <a href="mailto:info@mydemocracy.app" className="text-purple-600 dark:text-purple-400 hover:underline">
                   info@mydemocracy.app
                 </a>.
-                We will delete all your stored messages and personal information within 30 days of your request.
+                We will delete your account and all associated personal information within 30 days of your request.
               </p>
             </div>
           </section>

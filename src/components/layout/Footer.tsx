@@ -18,6 +18,9 @@ export function Footer() {
             <Link href="/terms" className="hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
               Terms
             </Link>
+            <Link href="/vote" className="hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
+              Vote
+            </Link>
             <Link href="/contact" className="hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
               Contact Your Reps
             </Link>

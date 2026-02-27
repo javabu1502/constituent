@@ -18,7 +18,7 @@ export interface GeocodedAddress extends Address {
   stateLowerDistrict?: string;
 }
 
-// Official - supports federal and state legislators
+// Official - supports federal, state, and local legislators
 export interface Official {
   id: string;
   name: string;
@@ -26,8 +26,8 @@ export interface Official {
   stafferFirstName?: string;
   stafferLastName?: string;
   title: string;
-  level: 'federal' | 'state';
-  chamber: 'senate' | 'house' | 'upper' | 'lower';
+  level: 'federal' | 'state' | 'local';
+  chamber?: 'senate' | 'house' | 'upper' | 'lower';
   party: string;
   state: string;
   district?: string;
@@ -42,6 +42,16 @@ export interface Official {
     facebook?: string;
     instagram?: string;
   };
+}
+
+// Local official from Google Civic Information API
+export type JurisdictionLevel = 'county' | 'city' | 'school_district' | 'special_district' | 'other';
+
+export interface LocalOfficial extends Official {
+  officeName: string;
+  divisionId: string;
+  jurisdiction: string;
+  jurisdictionLevel: JurisdictionLevel;
 }
 
 // Lookup result with officials
@@ -128,6 +138,7 @@ export interface Profile {
   state: string | null;
   zip: string | null;
   representatives: Official[] | null;
+  local_officials: LocalOfficial[] | null;
   created_at: string;
   updated_at: string;
 }
@@ -176,7 +187,7 @@ export interface RepNewsArticle {
   pubDate: string;
   rep_name: string;
   rep_id: string;
-  level: 'federal' | 'state';
+  level: 'federal' | 'state' | 'local';
 }
 
 export interface RepVote {
@@ -207,7 +218,7 @@ export type RepFeedItem = FeedBill | RepNewsArticle | RepVote;
 export interface RepFeedResponse {
   items: RepFeedItem[];
   votes: RepVote[];
-  reps: { id: string; name: string; level: 'federal' | 'state'; party: string; title: string; state?: string }[];
+  reps: { id: string; name: string; level: 'federal' | 'state' | 'local'; party: string; title: string; state?: string }[];
   userIssues: string[];
 }
 
@@ -309,6 +320,59 @@ export interface BillSummary {
   personal_relevance?: string;
   bill_number: string;
   generated_at: string;
+}
+
+// Lobbying data types (Senate LDA API)
+export interface LobbyingIssueArea {
+  issue_code: string;
+  issue_name: string;
+  total_income: number;
+  filing_count: number;
+}
+
+export interface LobbyingClient {
+  name: string;
+  total_income: number;
+  issue_areas: string[];
+  filing_count: number;
+}
+
+export interface LobbyingFirm {
+  name: string;
+  filing_count: number;
+  top_clients: string[];
+  total_income: number;
+}
+
+export interface LobbyingFiling {
+  client_name: string;
+  registrant_name: string;
+  issue_area: string;
+  issue_code: string;
+  income: number;
+  description: string;
+  filing_year: number;
+  filing_period: string;
+  filing_url: string;
+}
+
+export interface LobbyingConnection {
+  organization: string;
+  donated: number;
+  lobbied_issues: string[];
+  lobbying_income: number;
+}
+
+export interface LobbyingResponse {
+  rep_id: string;
+  rep_name: string;
+  committees: string[];
+  issue_areas: LobbyingIssueArea[];
+  top_clients: LobbyingClient[];
+  top_firms: LobbyingFirm[];
+  recent_filings: LobbyingFiling[];
+  lobbying_connections: LobbyingConnection[];
+  quarters_covered: string[];
 }
 
 // Track send event

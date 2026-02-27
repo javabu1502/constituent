@@ -5,9 +5,12 @@ import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase';
 import { truncate } from '@/lib/utils';
 import { MyRepresentativesSection } from '@/components/dashboard/MyRepresentativesSection';
+import { LocalOfficialsSection } from '@/components/dashboard/LocalOfficialsSection';
 import { RepActivitySection } from '@/components/dashboard/RepActivitySection';
+import { VoterInfoCard } from '@/components/dashboard/VoterInfoCard';
 import { CopyLinkButton } from '@/components/campaign/CopyLinkButton';
 import { DeleteCampaignButton } from '@/components/campaign/DeleteCampaignButton';
+import { EmailDigestToggle } from '@/components/dashboard/EmailDigestToggle';
 
 export const metadata: Metadata = {
   title: 'Dashboard — My Democracy',
@@ -96,6 +99,7 @@ export default async function DashboardPage() {
 
   const hasAddress = !!(profile?.street && profile?.city && profile?.state && profile?.zip);
   const cachedReps = profile?.representatives ?? null;
+  const cachedLocalOfficials = profile?.local_officials ?? null;
   const savedAddress = hasAddress
     ? { street: profile.street, city: profile.city, state: profile.state, zip: profile.zip }
     : null;
@@ -132,6 +136,18 @@ export default async function DashboardPage() {
         <MyRepresentativesSection cachedReps={cachedReps} hasAddress={hasAddress} savedAddress={savedAddress} />
       </section>
 
+      {/* Local Officials */}
+      <section className="mb-10">
+        <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Local Officials</h2>
+        <LocalOfficialsSection cachedLocalOfficials={cachedLocalOfficials} hasAddress={hasAddress} />
+      </section>
+
+      {/* Voter Info */}
+      <section className="mb-10">
+        <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Voter Info</h2>
+        <VoterInfoCard userState={profile?.state || null} />
+      </section>
+
       {/* My Activity */}
       <section className="mb-10">
         <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">My Activity</h2>
@@ -153,6 +169,11 @@ export default async function DashboardPage() {
             <div className="text-sm text-gray-600 dark:text-gray-400 mt-1">Officials Contacted</div>
           </div>
         </div>
+      </section>
+
+      {/* Email Digest */}
+      <section className="mb-10">
+        <EmailDigestToggle currentValue={profile?.email_digest ?? 'none'} />
       </section>
 
       {/* My Campaigns */}

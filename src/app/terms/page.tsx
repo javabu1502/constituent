@@ -30,8 +30,9 @@ export default function TermsPage() {
             </h2>
             <div className="space-y-3 text-gray-600 pl-10">
               <p>
-                My Democracy helps you contact your elected representatives at the
-                federal and state level. By using our service, you agree to the following:
+                My Democracy helps you track, understand, and contact your elected
+                representatives at the federal, state, and local level. By using our
+                service, you agree to the following:
               </p>
               <ul className="list-disc list-inside space-y-2 ml-4">
                 <li>
@@ -115,6 +116,11 @@ export default function TermsPage() {
                   final content you choose to send
                 </li>
                 <li>
+                  AI also generates <strong className="text-gray-900">representative bios
+                  and bill summaries</strong> from public data to help you understand
+                  your representatives and legislation
+                </li>
+                <li>
                   AI suggestions are <strong className="text-gray-900">not legal, medical,
                   or professional advice</strong>
                 </li>
@@ -184,8 +190,9 @@ export default function TermsPage() {
                 </Link>.
               </p>
               <p>
-                The short version: we don&apos;t store your address or messages,
-                and we never sell your data.
+                The short version: if you create an account, your address and
+                messages are stored securely so you can access your dashboard and
+                message history. We never sell your data.
               </p>
             </div>
           </section>

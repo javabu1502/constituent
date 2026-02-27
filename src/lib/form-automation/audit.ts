@@ -218,8 +218,8 @@ async function runAudit(options: {
   console.log(`Found ${allReps.length} representatives with contact forms`);
 
   // Load checkpoint if resuming
-  let completedIds = options.resume ? loadCheckpoint() : new Set<string>();
-  let results = options.resume ? loadExistingResults() : [];
+  const completedIds = options.resume ? loadCheckpoint() : new Set<string>();
+  const results = options.resume ? loadExistingResults() : [];
 
   if (options.resume && completedIds.size > 0) {
     console.log(`Resuming from checkpoint: ${completedIds.size} already completed`);

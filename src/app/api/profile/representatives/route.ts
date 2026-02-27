@@ -4,7 +4,8 @@ import { createAdminClient } from '@/lib/supabase';
 import { geocodeAddress } from '@/lib/geocode';
 import { findSenators, findRepresentative } from '@/lib/legislators';
 import { findStateLegislators } from '@/lib/state-legislators';
-import type { Official } from '@/lib/types';
+import { fetchLocalOfficials } from '@/lib/civic-api';
+import type { Official, LocalOfficial } from '@/lib/types';
 
 /**
  * POST /api/profile/representatives
@@ -75,15 +76,27 @@ export async function POST() {
   );
   officials.push(...stateLegislators);
 
+  // Local officials (non-blocking — don't fail the whole request)
+  let localOfficials: LocalOfficial[] = [];
+  try {
+    const address = `${profile.street}, ${profile.city}, ${profile.state} ${profile.zip}`;
+    localOfficials = await fetchLocalOfficials(address);
+  } catch (err) {
+    console.error('Local officials lookup failed (non-blocking):', err);
+  }
+
   // Save to profile
   const { error: updateError } = await admin
     .from('profiles')
-    .update({ representatives: officials })
+    .update({
+      representatives: officials,
+      local_officials: localOfficials.length > 0 ? localOfficials : null,
+    })
     .eq('user_id', user.id);
 
   if (updateError) {
     return NextResponse.json({ error: 'Failed to save representatives' }, { status: 500 });
   }
 
-  return NextResponse.json({ officials });
+  return NextResponse.json({ officials, localOfficials });
 }

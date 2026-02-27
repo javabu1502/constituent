@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { createClient } from '@/lib/supabase/client';
 import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
+import { GoogleSignInButton } from '@/components/auth/GoogleSignInButton';
 
 export function LoginForm() {
   const router = useRouter();
@@ -39,6 +40,18 @@ export function LoginForm() {
   };
 
   return (
+    <div className="space-y-4">
+      <GoogleSignInButton redirectTo={redirectTo} />
+
+      <div className="relative">
+        <div className="absolute inset-0 flex items-center">
+          <div className="w-full border-t border-gray-300 dark:border-gray-600" />
+        </div>
+        <div className="relative flex justify-center text-sm">
+          <span className="px-2 bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400">or</span>
+        </div>
+      </div>
+
     <form onSubmit={handleSubmit} className="space-y-4">
       {error && (
         <div className="p-3 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-700 rounded-xl">
@@ -77,5 +90,6 @@ export function LoginForm() {
         </Link>
       </p>
     </form>
+    </div>
   );
 }

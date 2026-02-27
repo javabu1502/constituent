@@ -99,16 +99,40 @@ interface OfficialCardProps {
 }
 
 function OfficialCard({ official, message, deliveryInfo, contactMethod, isCallComplete, onMarkCallComplete, onSend }: OfficialCardProps) {
-  const [copied, setCopied] = useState(false);
+  const [messageCopied, setMessageCopied] = useState(false);
+  const [emailCopied, setEmailCopied] = useState(false);
+  const [phoneCopied, setPhoneCopied] = useState(false);
   const partyColors = getPartyColors(official.party);
 
-  const copyToClipboard = async () => {
+  const copyMessage = async () => {
     try {
       await navigator.clipboard.writeText(message.body);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      setMessageCopied(true);
+      setTimeout(() => setMessageCopied(false), 2000);
     } catch (err) {
       console.error('Failed to copy:', err);
+    }
+  };
+
+  const copyEmail = async () => {
+    if (!deliveryInfo.email) return;
+    try {
+      await navigator.clipboard.writeText(deliveryInfo.email);
+      setEmailCopied(true);
+      setTimeout(() => setEmailCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy email:', err);
+    }
+  };
+
+  const copyPhone = async () => {
+    if (!deliveryInfo.phone) return;
+    try {
+      await navigator.clipboard.writeText(deliveryInfo.phone);
+      setPhoneCopied(true);
+      setTimeout(() => setPhoneCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy phone:', err);
     }
   };
 
@@ -158,6 +182,18 @@ function OfficialCard({ official, message, deliveryInfo, contactMethod, isCallCo
                   {formatPhone(deliveryInfo.phone)}
                 </a>
               </div>
+              {/* Copy phone number */}
+              <button
+                onClick={copyPhone}
+                className="w-full flex items-center justify-center gap-1.5 py-2 border border-purple-300 dark:border-purple-600 text-purple-700 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/30 rounded-lg text-sm font-medium transition-colors"
+              >
+                {phoneCopied ? (
+                  <CheckIcon className="w-4 h-4 text-green-600 dark:text-green-400" />
+                ) : (
+                  <CopyIcon className="w-4 h-4" />
+                )}
+                {phoneCopied ? 'Copied!' : 'Copy Number'}
+              </button>
               {/* Mark as complete button */}
               {!isCallComplete ? (
                 <button
@@ -196,15 +232,15 @@ function OfficialCard({ official, message, deliveryInfo, contactMethod, isCallCo
             {message.body}
           </div>
           <button
-            onClick={copyToClipboard}
+            onClick={copyMessage}
             className="mt-2 flex items-center justify-center gap-1.5 w-full py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg text-xs font-medium transition-colors"
           >
-            {copied ? (
+            {messageCopied ? (
               <CheckIcon className="w-3.5 h-3.5 text-green-600 dark:text-green-400" />
             ) : (
               <CopyIcon className="w-3.5 h-3.5" />
             )}
-            {copied ? 'Copied!' : 'Copy Script'}
+            {messageCopied ? 'Copied!' : 'Copy Script'}
           </button>
         </details>
       </div>
@@ -243,17 +279,18 @@ function OfficialCard({ official, message, deliveryInfo, contactMethod, isCallCo
 
       {/* Primary action based on delivery method */}
       <div className="space-y-2">
-        {deliveryInfo.method === 'staffer_email' && mailtoLink ? (
-          // Staffer email - open email client without navigating away
+        {deliveryInfo.method === 'staffer_email' && deliveryInfo.email ? (
+          // Staffer email - copy email address as primary action
           <button
-            onClick={() => {
-              window.open(mailtoLink, '_blank');
-              onSend?.('email_opened');
-            }}
+            onClick={() => { copyEmail(); onSend?.('email_copied'); }}
             className="flex items-center justify-center gap-2 w-full py-2.5 bg-purple-600 hover:bg-purple-700 text-white rounded-lg text-sm font-medium transition-colors"
           >
-            <EmailIcon className="w-4 h-4" />
-            Send Email{deliveryInfo.stafferName ? ` to ${deliveryInfo.stafferName}` : ''}
+            {emailCopied ? (
+              <CheckIcon className="w-4 h-4" />
+            ) : (
+              <CopyIcon className="w-4 h-4" />
+            )}
+            {emailCopied ? 'Copied!' : `Copy Email Address${deliveryInfo.stafferName ? ` for ${deliveryInfo.stafferName}` : ''}`}
           </button>
         ) : deliveryInfo.method === 'contact_form' && deliveryInfo.contactFormUrl ? (
           // Contact form - copy message then open form
@@ -261,7 +298,7 @@ function OfficialCard({ official, message, deliveryInfo, contactMethod, isCallCo
             href={deliveryInfo.contactFormUrl}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={() => { copyToClipboard(); onSend?.('form_opened'); }}
+            onClick={() => { copyMessage(); onSend?.('form_opened'); }}
             className="flex items-center justify-center gap-2 w-full py-2.5 bg-purple-600 hover:bg-purple-700 text-white rounded-lg text-sm font-medium transition-colors"
           >
             <ExternalLinkIcon className="w-4 h-4" />
@@ -273,7 +310,7 @@ function OfficialCard({ official, message, deliveryInfo, contactMethod, isCallCo
             href={deliveryInfo.actionUrl || deliveryInfo.websiteUrl}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={() => { copyToClipboard(); onSend?.('website_opened'); }}
+            onClick={() => { copyMessage(); onSend?.('website_opened'); }}
             className="flex items-center justify-center gap-2 w-full py-2.5 bg-purple-600 hover:bg-purple-700 text-white rounded-lg text-sm font-medium transition-colors"
           >
             <ExternalLinkIcon className="w-4 h-4" />
@@ -288,34 +325,61 @@ function OfficialCard({ official, message, deliveryInfo, contactMethod, isCallCo
 
         {/* Secondary actions row */}
         <div className="flex gap-2">
-          {/* Show contact form as secondary if email is primary */}
-          {deliveryInfo.method === 'staffer_email' && deliveryInfo.contactFormUrl && (
-            <a
-              href={deliveryInfo.contactFormUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={copyToClipboard}
-              className="flex-1 flex items-center justify-center gap-1.5 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg text-xs font-medium transition-colors"
-            >
-              <ExternalLinkIcon className="w-3.5 h-3.5" />
-              Contact Form
-            </a>
+          {deliveryInfo.method === 'staffer_email' ? (
+            <>
+              {/* Copy Message */}
+              <button
+                onClick={copyMessage}
+                className="flex-1 flex items-center justify-center gap-1.5 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg text-xs font-medium transition-colors"
+              >
+                {messageCopied ? (
+                  <CheckIcon className="w-3.5 h-3.5 text-green-600 dark:text-green-400" />
+                ) : (
+                  <CopyIcon className="w-3.5 h-3.5" />
+                )}
+                {messageCopied ? 'Copied!' : 'Copy Message'}
+              </button>
+              {/* Open in Email Client (mailto) */}
+              {mailtoLink && (
+                <button
+                  onClick={() => { window.open(mailtoLink, '_blank'); onSend?.('email_opened'); }}
+                  className="flex-1 flex items-center justify-center gap-1.5 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg text-xs font-medium transition-colors"
+                >
+                  <EmailIcon className="w-3.5 h-3.5" />
+                  Open in Email Client
+                </button>
+              )}
+            </>
+          ) : (
+            <>
+              {/* Copy Email Address (secondary for non-staffer methods) */}
+              {deliveryInfo.email && (
+                <button
+                  onClick={copyEmail}
+                  className="flex-1 flex items-center justify-center gap-1.5 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg text-xs font-medium transition-colors"
+                >
+                  {emailCopied ? (
+                    <CheckIcon className="w-3.5 h-3.5 text-green-600 dark:text-green-400" />
+                  ) : (
+                    <CopyIcon className="w-3.5 h-3.5" />
+                  )}
+                  {emailCopied ? 'Copied!' : 'Copy Email'}
+                </button>
+              )}
+              {/* Copy Message */}
+              <button
+                onClick={copyMessage}
+                className="flex-1 flex items-center justify-center gap-1.5 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg text-xs font-medium transition-colors"
+              >
+                {messageCopied ? (
+                  <CheckIcon className="w-3.5 h-3.5 text-green-600 dark:text-green-400" />
+                ) : (
+                  <CopyIcon className="w-3.5 h-3.5" />
+                )}
+                {messageCopied ? 'Copied!' : 'Copy Message'}
+              </button>
+            </>
           )}
-
-          {/* Copy button */}
-          <button
-            onClick={copyToClipboard}
-            className={`flex items-center justify-center gap-1.5 px-3 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg text-xs font-medium transition-colors ${
-              deliveryInfo.method !== 'staffer_email' ? 'flex-1' : ''
-            }`}
-          >
-            {copied ? (
-              <CheckIcon className="w-3.5 h-3.5 text-green-600 dark:text-green-400" />
-            ) : (
-              <CopyIcon className="w-3.5 h-3.5" />
-            )}
-            {copied ? 'Copied!' : 'Copy Message'}
-          </button>
         </div>
       </div>
 

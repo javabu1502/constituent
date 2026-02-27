@@ -305,13 +305,22 @@ function StateBioContent({ bio }: { bio: StateBio }) {
   );
 }
 
-export function RepBioTab({ repId, repLevel, repState }: { repId: string; repLevel: 'federal' | 'state' | 'local'; repState?: string }) {
-  const [bio, setBio] = useState<BioData | null>(null);
-  const [loading, setLoading] = useState(true);
+export function RepBioTab({ repId, repLevel, repState, bio: externalBio, bioLoading }: {
+  repId: string;
+  repLevel: 'federal' | 'state' | 'local';
+  repState?: string;
+  bio?: BioData | null;
+  bioLoading?: boolean;
+}) {
+  const [internalBio, setInternalBio] = useState<BioData | null>(null);
+  const [internalLoading, setInternalLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  const hasExternal = externalBio !== undefined;
+
   useEffect(() => {
-    setLoading(true);
+    if (hasExternal) return;
+    setInternalLoading(true);
     setError(null);
 
     const params = new URLSearchParams({ repId, level: repLevel });
@@ -322,10 +331,13 @@ export function RepBioTab({ repId, repLevel, repState }: { repId: string; repLev
         if (!res.ok) throw new Error('Failed to load bio');
         return res.json();
       })
-      .then((data: BioData) => setBio(data))
+      .then((data: BioData) => setInternalBio(data))
       .catch(err => setError(err.message))
-      .finally(() => setLoading(false));
-  }, [repId, repLevel, repState]);
+      .finally(() => setInternalLoading(false));
+  }, [repId, repLevel, repState, hasExternal]);
+
+  const bio = hasExternal ? externalBio : internalBio;
+  const loading = hasExternal ? (bioLoading ?? false) : internalLoading;
 
   if (loading) {
     return (

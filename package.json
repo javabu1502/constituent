@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "refresh-states": "npx tsx scripts/refresh-state-data.ts"
+    "refresh-states": "npx tsx scripts/refresh-state-data.ts",
+    "refresh-federal": "npx tsx scripts/refresh-federal-data.ts",
+    "refresh-data": "npm run refresh-states && npm run refresh-federal"
   },
   "dependencies": {
     "@supabase/ssr": "^0.8.0",
@@ -20,15 +22,17 @@
     "next": "^15",
     "react": "^19",
     "react-dom": "^19",
+    "resend": "^6.9.2",
     "tailwind-merge": "^3",
     "tailwindcss": "^4",
     "yaml": "^2"
   },
   "devDependencies": {
+    "@types/google.maps": "^3.58.1",
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "eslint": "^10.0.0",
+    "eslint": "^9.0.0",
     "playwright": "^1.58.2",
     "tsx": "^4",
     "typescript": "5.9.3"
