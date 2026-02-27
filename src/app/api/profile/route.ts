@@ -48,7 +48,7 @@ export async function PATCH(request: Request) {
   }
 
   // Only allow updating specific fields
-  const allowed = ['street', 'city', 'state', 'zip', 'representatives', 'local_officials', 'email_digest'];
+  const allowed = ['street', 'city', 'state', 'zip', 'representatives', 'local_officials'];
   const updates: Record<string, unknown> = {};
   for (const key of allowed) {
     if (key in body) {

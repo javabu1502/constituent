@@ -10,7 +10,6 @@ import { RepActivitySection } from '@/components/dashboard/RepActivitySection';
 import { VoterInfoCard } from '@/components/dashboard/VoterInfoCard';
 import { CopyLinkButton } from '@/components/campaign/CopyLinkButton';
 import { DeleteCampaignButton } from '@/components/campaign/DeleteCampaignButton';
-import { EmailDigestToggle } from '@/components/dashboard/EmailDigestToggle';
 
 export const metadata: Metadata = {
   title: 'Dashboard — My Democracy',
@@ -169,11 +168,6 @@ export default async function DashboardPage() {
             <div className="text-sm text-gray-600 dark:text-gray-400 mt-1">Officials Contacted</div>
           </div>
         </div>
-      </section>
-
-      {/* Email Digest */}
-      <section className="mb-10">
-        <EmailDigestToggle currentValue={profile?.email_digest ?? 'none'} />
       </section>
 
       {/* My Campaigns */}
