@@ -17,6 +17,8 @@ interface FederalBio {
   senateTerms: number;
   houseTerms: number;
   previousChambers: string[];
+  committees?: string[];
+  bioNarrative?: string;
   currentTerm: {
     type: string;
     start: string;
@@ -51,16 +53,27 @@ interface StateBio {
   phone?: string;
   website?: string;
   office?: string;
+  committees?: string[];
+  bioNarrative?: string;
 }
 
-type BioData = FederalBio | StateBio;
+export type BioData = FederalBio | StateBio;
 
-function InfoRow({ label, value }: { label: string; value: string | number | undefined | null }) {
-  if (!value) return null;
+function CommitteeBadges({ committees }: { committees: string[] }) {
+  if (committees.length === 0) return null;
   return (
-    <div className="flex justify-between py-1.5 border-b border-gray-100 dark:border-gray-700 last:border-0">
-      <span className="text-xs text-gray-500 dark:text-gray-400">{label}</span>
-      <span className="text-xs font-medium text-gray-900 dark:text-white text-right">{value}</span>
+    <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-3">
+      <h4 className="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-2">Committee Assignments</h4>
+      <div className="flex gap-1.5 flex-wrap">
+        {committees.map((c) => (
+          <span
+            key={c}
+            className="inline-block px-2 py-0.5 text-[11px] font-medium rounded-full bg-indigo-50 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-800"
+          >
+            {c}
+          </span>
+        ))}
+      </div>
     </div>
   );
 }
@@ -73,9 +86,20 @@ function FederalBioContent({ bio }: { bio: FederalBio }) {
     ? `${term.state_rank.charAt(0).toUpperCase() + term.state_rank.slice(1)} Senator${term.class ? ` (Class ${term.class})` : ''}`
     : null;
 
+  // Build compact overview facts
+  const facts: string[] = [];
+  if (bio.age) facts.push(`Age ${bio.age}`);
+  if (bio.yearsInOffice) facts.push(`${bio.yearsInOffice} yrs in office`);
+  if (bio.firstElected) facts.push(`First elected ${bio.firstElected}`);
+  if (termEndYear) facts.push(`Term ends ${termEndYear}`);
+
+  const termsLabel = bio.senateTerms > 0 && bio.houseTerms > 0
+    ? `${bio.totalTerms} terms (${bio.senateTerms}S, ${bio.houseTerms}H)`
+    : `${bio.totalTerms} term${bio.totalTerms !== 1 ? 's' : ''}`;
+
   return (
     <div className="space-y-4">
-      {/* Header */}
+      {/* Header with photo and key info */}
       <div className="flex items-start gap-3">
         <img
           src={bio.photoUrl}
@@ -86,7 +110,7 @@ function FederalBioContent({ bio }: { bio: FederalBio }) {
             target.style.display = 'none';
           }}
         />
-        <div>
+        <div className="min-w-0">
           <h3 className="text-sm font-semibold text-gray-900 dark:text-white">{bio.name}</h3>
           <p className="text-xs text-gray-500 dark:text-gray-400">
             {term?.party} · {term?.state}{term?.type === 'House' && term?.district !== undefined ? `-${term.district}` : ''}
@@ -94,22 +118,34 @@ function FederalBioContent({ bio }: { bio: FederalBio }) {
           {senateInfo && (
             <p className="text-xs text-gray-500 dark:text-gray-400">{senateInfo}</p>
           )}
+          <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
+            {termsLabel}
+            {bio.previousChambers.length > 0 && ` · Previously: ${bio.previousChambers.join(', ')}`}
+          </p>
+          {facts.length > 0 && (
+            <div className="flex flex-wrap gap-x-2 gap-y-0.5 mt-1">
+              {facts.map((f) => (
+                <span key={f} className="text-[11px] text-gray-500 dark:text-gray-400">{f}</span>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 
-      {/* Details */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-3">
-        <h4 className="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-2">Details</h4>
-        <InfoRow label="Age" value={bio.age} />
-        <InfoRow label="First Elected" value={bio.firstElected} />
-        <InfoRow label="Years in Office" value={bio.yearsInOffice} />
-        <InfoRow label="Terms Served" value={bio.totalTerms} />
-        {bio.senateTerms > 0 && bio.houseTerms > 0 && (
-          <InfoRow label="Terms Breakdown" value={`${bio.senateTerms} Senate, ${bio.houseTerms} House`} />
-        )}
-        <InfoRow label="Term Ends" value={termEndYear} />
-        {bio.gender && <InfoRow label="Gender" value={bio.gender === 'M' ? 'Male' : bio.gender === 'F' ? 'Female' : bio.gender} />}
-      </div>
+      {/* Narrative Bio */}
+      {bio.bioNarrative && (
+        <div>
+          <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+            {bio.bioNarrative}
+          </p>
+          <p className="text-[10px] text-gray-400 dark:text-gray-500 mt-1 italic">
+            Summary based on public records
+          </p>
+        </div>
+      )}
+
+      {/* Committee Assignments */}
+      <CommitteeBadges committees={bio.committees ?? []} />
 
       {/* Social Media */}
       {bio.socialMedia && (bio.socialMedia.twitter || bio.socialMedia.facebook || bio.socialMedia.instagram) && (
@@ -214,6 +250,21 @@ function StateBioContent({ bio }: { bio: StateBio }) {
         </div>
       </div>
 
+      {/* Narrative Bio */}
+      {bio.bioNarrative && (
+        <div>
+          <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+            {bio.bioNarrative}
+          </p>
+          <p className="text-[10px] text-gray-400 dark:text-gray-500 mt-1 italic">
+            Summary based on public records
+          </p>
+        </div>
+      )}
+
+      {/* Committee Assignments */}
+      <CommitteeBadges committees={bio.committees ?? []} />
+
       {/* Contact */}
       {(bio.email || bio.phone || bio.office || bio.website) && (
         <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-3">
@@ -247,14 +298,14 @@ function StateBioContent({ bio }: { bio: StateBio }) {
         </div>
       )}
 
-      {!bio.email && !bio.phone && !bio.office && !bio.website && (
-        <p className="text-xs text-gray-500 dark:text-gray-400">No additional contact information available for this legislator.</p>
+      {!bio.email && !bio.phone && !bio.office && !bio.website && (bio.committees ?? []).length === 0 && !bio.bioNarrative && (
+        <p className="text-xs text-gray-500 dark:text-gray-400">No additional information available for this legislator.</p>
       )}
     </div>
   );
 }
 
-export function RepBioTab({ repId, repLevel, repState }: { repId: string; repLevel: 'federal' | 'state'; repState?: string }) {
+export function RepBioTab({ repId, repLevel, repState }: { repId: string; repLevel: 'federal' | 'state' | 'local'; repState?: string }) {
   const [bio, setBio] = useState<BioData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);

@@ -161,6 +161,7 @@ let federalLegislatorsCache: FederalLegislator[] | null = null;
 let federalSocialMediaCache: Map<string, FederalSocialMedia> | null = null;
 const stateLegislatorsCache: Map<string, OpenStatesPerson[]> = new Map();
 let staffEmailCache: Map<string, StaffEmailEntry> | null = null;
+let federalCommitteeCache: Map<string, string[]> | null = null;
 
 const DATA_DIR = path.join(process.cwd(), 'src', 'data', 'legislators');
 
@@ -780,6 +781,75 @@ export function getFederalLegislatorBio(bioguideId: string): {
 }
 
 /**
+ * Load federal committee assignments from YAML files
+ * (committees-current.yaml + committee-membership-current.yaml
+ *  from unitedstates/congress-legislators repo)
+ *
+ * Returns a Map of bioguideId → array of parent committee names.
+ */
+function loadFederalCommittees(): Map<string, string[]> {
+  if (federalCommitteeCache) return federalCommitteeCache;
+
+  federalCommitteeCache = new Map();
+
+  const committeesPath = path.join(DATA_DIR, 'federal', 'committees-current.yaml');
+  const membershipPath = path.join(DATA_DIR, 'federal', 'committee-membership-current.yaml');
+
+  if (!fs.existsSync(committeesPath) || !fs.existsSync(membershipPath)) {
+    console.warn('[committees] YAML data files not found — run data refresh');
+    return federalCommitteeCache;
+  }
+
+  // Build thomas_id → committee name map
+  const committeesData = yaml.parse(
+    fs.readFileSync(committeesPath, 'utf-8'),
+  ) as Array<{ thomas_id: string; name: string }>;
+
+  const committeeNames = new Map<string, string>();
+  for (const c of committeesData) {
+    committeeNames.set(c.thomas_id, c.name);
+  }
+
+  // Parse membership: { COMMITTEE_ID: [{ bioguide: string }] }
+  // Main committees have 4-char IDs (SSAF, HSAG, etc.).
+  // Subcommittee membership keys are parentId + sub-id (e.g. SSAF15).
+  const membershipData = yaml.parse(
+    fs.readFileSync(membershipPath, 'utf-8'),
+  ) as Record<string, Array<{ bioguide: string }>>;
+
+  for (const [committeeId, members] of Object.entries(membershipData)) {
+    // Resolve parent committee name
+    const parentId = committeeId.substring(0, 4);
+    const committeeName = committeeNames.get(parentId);
+    if (!committeeName) continue;
+
+    for (const member of members) {
+      if (!member.bioguide) continue;
+
+      if (!federalCommitteeCache.has(member.bioguide)) {
+        federalCommitteeCache.set(member.bioguide, []);
+      }
+
+      const existing = federalCommitteeCache.get(member.bioguide)!;
+      if (!existing.includes(committeeName)) {
+        existing.push(committeeName);
+      }
+    }
+  }
+
+  console.log(`[committees] Loaded committee assignments for ${federalCommitteeCache.size} members`);
+  return federalCommitteeCache;
+}
+
+/**
+ * Get committee assignments for a federal legislator by bioguide ID.
+ */
+export function getCommitteesForMember(bioguideId: string): string[] {
+  const committees = loadFederalCommittees();
+  return committees.get(bioguideId) ?? [];
+}
+
+/**
  * Clear the in-memory cache (useful for testing or refreshing data)
  */
 export function clearCache(): void {
@@ -787,4 +857,5 @@ export function clearCache(): void {
   federalSocialMediaCache = null;
   stateLegislatorsCache.clear();
   staffEmailCache = null;
+  federalCommitteeCache = null;
 }
