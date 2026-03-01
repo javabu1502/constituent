@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import { BreadcrumbJsonLd } from '@/lib/seo';
 
 export const metadata: Metadata = {
   title: 'How to Contact Your Congressman | My Democracy',
@@ -9,13 +10,13 @@ export const metadata: Metadata = {
     title: 'How to Contact Your Congressman | My Democracy',
     description: 'Step-by-step guide to contacting your US Representatives and Senators by phone, email, and letter. Learn which methods are most effective.',
     type: 'article',
-    url: 'https://mydemocracy.app/guides/how-to-contact-your-congressman',
   },
 };
 
 export default function ContactCongressmanGuidePage() {
   return (
     <div className="py-12 px-4">
+      <BreadcrumbJsonLd items={[{ name: 'Home', href: '/' }, { name: 'Guides', href: '/guides' }, { name: 'How to Contact Your Congressman', href: '/guides/how-to-contact-your-congressman' }]} />
       <div className="max-w-3xl mx-auto">
         <div className="mb-6">
           <Link

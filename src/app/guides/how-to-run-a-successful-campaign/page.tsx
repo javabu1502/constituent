@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import { BreadcrumbJsonLd } from '@/lib/seo';
 
 export const metadata: Metadata = {
   title: 'How to Run a Successful Campaign | My Democracy',
@@ -9,13 +10,13 @@ export const metadata: Metadata = {
     title: 'How to Run a Successful Campaign | My Democracy',
     description: 'Learn how to create a compelling advocacy campaign that rallies others to contact their representatives.',
     type: 'article',
-    url: 'https://mydemocracy.app/guides/how-to-run-a-successful-campaign',
   },
 };
 
 export default function CampaignGuidePage() {
   return (
     <div className="py-12 px-4">
+      <BreadcrumbJsonLd items={[{ name: 'Home', href: '/' }, { name: 'Guides', href: '/guides' }, { name: 'How to Run a Successful Campaign', href: '/guides/how-to-run-a-successful-campaign' }]} />
       <div className="max-w-3xl mx-auto">
         <div className="mb-6">
           <Link

@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import { BreadcrumbJsonLd } from '@/lib/seo';
 
 export const metadata: Metadata = {
   title: 'How a Bill Becomes Law | My Democracy',
@@ -9,13 +10,13 @@ export const metadata: Metadata = {
     title: 'How a Bill Becomes Law | My Democracy',
     description: 'Understand the legislative process at federal and state levels. Learn how to track bills through Congress and state legislatures.',
     type: 'article',
-    url: 'https://mydemocracy.app/guides/how-a-bill-becomes-law',
   },
 };
 
 export default function BillBecomesLawGuidePage() {
   return (
     <div className="py-12 px-4">
+      <BreadcrumbJsonLd items={[{ name: 'Home', href: '/' }, { name: 'Guides', href: '/guides' }, { name: 'How a Bill Becomes Law', href: '/guides/how-a-bill-becomes-law' }]} />
       <div className="max-w-3xl mx-auto">
         <div className="mb-6">
           <Link

@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import { BreadcrumbJsonLd } from '@/lib/seo';
 
 export const metadata: Metadata = {
   title: 'How to Contact Your State Legislators | My Democracy',
@@ -9,13 +10,13 @@ export const metadata: Metadata = {
     title: 'How to Contact Your State Legislators | My Democracy',
     description: 'Learn how to find and contact your state senators and representatives. Discover why state-level advocacy is often more effective than federal.',
     type: 'article',
-    url: 'https://mydemocracy.app/guides/how-to-contact-your-state-legislators',
   },
 };
 
 export default function ContactStateLegislatorsGuidePage() {
   return (
     <div className="py-12 px-4">
+      <BreadcrumbJsonLd items={[{ name: 'Home', href: '/' }, { name: 'Guides', href: '/guides' }, { name: 'How to Contact Your State Legislators', href: '/guides/how-to-contact-your-state-legislators' }]} />
       <div className="max-w-3xl mx-auto">
         <div className="mb-6">
           <Link

@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import { BreadcrumbJsonLd } from '@/lib/seo';
 
 export const metadata: Metadata = {
   title: 'Write an Effective Letter to Congress | My Democracy',
@@ -9,13 +10,13 @@ export const metadata: Metadata = {
     title: 'Write an Effective Letter to Congress | My Democracy',
     description: 'Learn the structure, tips, and examples for writing messages that congressional offices actually read and respond to.',
     type: 'article',
-    url: 'https://mydemocracy.app/guides/write-effective-letter-to-congress',
   },
 };
 
 export default function WriteLetterGuidePage() {
   return (
     <div className="py-12 px-4">
+      <BreadcrumbJsonLd items={[{ name: 'Home', href: '/' }, { name: 'Guides', href: '/guides' }, { name: 'Write an Effective Letter to Congress', href: '/guides/write-effective-letter-to-congress' }]} />
       <div className="max-w-3xl mx-auto">
         <div className="mb-6">
           <Link

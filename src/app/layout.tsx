@@ -25,6 +25,9 @@ export const metadata: Metadata = {
     icon: '/icon.svg',
     apple: '/apple-touch-icon.png',
   },
+  alternates: {
+    canonical: './',
+  },
   openGraph: {
     title: 'My Democracy | Know Your Reps, Track Legislation, Take Action',
     description:

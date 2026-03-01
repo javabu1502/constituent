@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
+import { BreadcrumbJsonLd } from '@/lib/seo';
 
 export const metadata: Metadata = {
   title: 'Tell Your Story: Effective Advocacy Through Personal Stories | My Democracy',
@@ -9,13 +10,13 @@ export const metadata: Metadata = {
     title: 'Tell Your Story: Effective Advocacy Through Personal Stories | My Democracy',
     description: 'Learn why personal stories matter when contacting elected officials and how to structure them so staffers flag your message for attention.',
     type: 'article',
-    url: 'https://mydemocracy.app/guides/tell-your-story',
   },
 };
 
 export default function TellYourStoryGuidePage() {
   return (
     <div className="py-12 px-4">
+      <BreadcrumbJsonLd items={[{ name: 'Home', href: '/' }, { name: 'Guides', href: '/guides' }, { name: 'Tell Your Story', href: '/guides/tell-your-story' }]} />
       <div className="max-w-3xl mx-auto">
         <div className="mb-6">
           <Link
