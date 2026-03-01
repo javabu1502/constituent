@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.mydemocracy.app'),
-  title: 'My Democracy — Contact Your Representatives',
+  title: 'My Democracy | Know Your Reps, Track Legislation, Take Action',
   description:
     'Find and contact your federal and state representatives in minutes. Write personalized messages with AI assistance. Free, private, no account needed.',
   keywords: ['civic engagement', 'contact representatives', 'democracy', 'AI', 'congress', 'state legislature'],
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     apple: '/apple-touch-icon.png',
   },
   openGraph: {
-    title: 'My Democracy — Contact Your Representatives',
+    title: 'My Democracy | Know Your Reps, Track Legislation, Take Action',
     description:
       'Find and contact your federal and state representatives in minutes. Write personalized messages with AI assistance. Free, private, no account needed.',
     type: 'website',

@@ -2,9 +2,60 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 import { HomeTrends } from '@/components/trends/HomeTrends';
 
+const organizationJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'My Democracy',
+  url: 'https://www.mydemocracy.app',
+  logo: 'https://www.mydemocracy.app/icon.svg',
+  description:
+    'Find and contact your federal and state representatives. Track legislation, voting records, and take civic action.',
+  sameAs: [],
+};
+
+const faqItems = [
+  {
+    question: 'How do I contact my representative?',
+    answer:
+      'Enter your home address on our Contact page and we\'ll find your federal and state representatives. Then choose an issue, and our AI will draft a personalized message you can send by email, fax, or use as a script for a phone call.',
+  },
+  {
+    question: 'Is My Democracy free?',
+    answer:
+      'Yes, My Democracy is completely free to use. No account is required to look up your representatives and send them a message.',
+  },
+  {
+    question: 'How does My Democracy work?',
+    answer:
+      'First, enter your address to find your elected officials at every level of government. Next, pick the issue you care about and our AI writes a personalized message on your behalf. Finally, send it directly to your representatives via email or fax — all in a few minutes.',
+  },
+];
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.answer,
+    },
+  })),
+};
+
 export default function HomePage() {
   return (
     <div className="flex flex-col min-h-screen">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
+
       {/* Hero Section */}
       <section className="py-16 sm:py-24 px-4 bg-gradient-to-b from-purple-50 via-purple-50/50 to-white dark:from-gray-800 dark:via-gray-800/50 dark:to-gray-900">
         <div className="max-w-4xl mx-auto text-center">
@@ -270,6 +321,30 @@ export default function HomePage() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
             </svg>
           </Link>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-16 sm:py-20 px-4 bg-gray-50 dark:bg-gray-800">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white text-center mb-10">
+            Frequently Asked Questions
+          </h2>
+          <div className="space-y-6">
+            {faqItems.map((item) => (
+              <div
+                key={item.question}
+                className="bg-white dark:bg-gray-700 rounded-2xl p-6 border border-gray-200 dark:border-gray-600"
+              >
+                <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
+                  {item.question}
+                </h3>
+                <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+                  {item.answer}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
