@@ -193,18 +193,18 @@ export default function HomePage() {
               </p>
             </Link>
 
-            {/* Committee & Bio Profiles */}
-            <Link href="/legislators" className="bg-white dark:bg-gray-700 rounded-2xl p-6 border border-gray-200 dark:border-gray-600 hover:border-purple-300 dark:hover:border-purple-600 transition-colors">
+            {/* Public Comment */}
+            <Link href="/regulations" className="bg-white dark:bg-gray-700 rounded-2xl p-6 border border-gray-200 dark:border-gray-600 hover:border-purple-300 dark:hover:border-purple-600 transition-colors">
               <div className="w-10 h-10 bg-purple-100 dark:bg-purple-900 rounded-xl flex items-center justify-center mb-4">
                 <svg className="w-5 h-5 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
                 </svg>
               </div>
               <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
-                Committee &amp; Bio Profiles
+                Public Comment
               </h3>
               <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
-                AI-generated bios and committee assignments for every representative.
+                Comment on federal regulations with AI-assisted drafting. Shape the rules that affect your life.
               </p>
             </Link>
           </div>
