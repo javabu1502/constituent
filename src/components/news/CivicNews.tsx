@@ -42,20 +42,26 @@ function LeanBadge({ lean }: { lean: SourceLean }) {
 function BiasLegend() {
   const leans: SourceLean[] = ['left', 'left-center', 'center', 'right-center', 'right'];
   return (
-    <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-gray-500 dark:text-gray-400 mb-4 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg border border-gray-200 dark:border-gray-700">
-      <span className="font-medium text-gray-700 dark:text-gray-300">Source Bias:</span>
-      {leans.map((lean) => {
-        const { label, dotColor } = LEAN_LABELS[lean];
-        return (
-          <span key={lean} className="inline-flex items-center gap-1">
-            <span className={`w-2 h-2 rounded-full ${dotColor}`} />
-            {label}
-          </span>
-        );
-      })}
-      <span className="text-gray-400 dark:text-gray-500">
-        (via <a href="https://www.allsides.com/media-bias/ratings" target="_blank" rel="noopener noreferrer" className="underline hover:text-purple-600 dark:hover:text-purple-400">AllSides</a>)
-      </span>
+    <div className="mb-6 p-4 bg-gray-50 dark:bg-gray-800/50 rounded-xl border border-gray-200 dark:border-gray-700">
+      <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-1">Understanding Source Bias Labels</h3>
+      <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">
+        Each article shows a colored label indicating the source&apos;s editorial lean. This helps you read
+        across the political spectrum and identify potential bias. Ratings are based on{' '}
+        <a href="https://www.allsides.com/media-bias/ratings" target="_blank" rel="noopener noreferrer" className="underline text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300">AllSides</a>{' '}
+        and{' '}
+        <a href="https://adfontesmedia.com/" target="_blank" rel="noopener noreferrer" className="underline text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300">Ad Fontes Media</a>.
+      </p>
+      <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+        {leans.map((lean) => {
+          const { label, dotColor } = LEAN_LABELS[lean];
+          return (
+            <span key={lean} className="inline-flex items-center gap-1.5 text-xs text-gray-600 dark:text-gray-300">
+              <span className={`w-2.5 h-2.5 rounded-full ${dotColor}`} />
+              {label}
+            </span>
+          );
+        })}
+      </div>
     </div>
   );
 }
@@ -80,6 +86,11 @@ function actionUrl(topic: ArticleTopic): string {
 function NewsCard({ article }: { article: NewsArticle }) {
   return (
     <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4 hover:border-purple-300 dark:hover:border-purple-600 transition-colors">
+      {article.topic && (
+        <span className="inline-block px-2 py-0.5 mb-2 text-[10px] font-semibold uppercase tracking-wider text-purple-600 dark:text-purple-400 bg-purple-50 dark:bg-purple-900/20 rounded">
+          {CATEGORY_SHORT[article.topic.issueCategory] || article.topic.issueCategory}
+        </span>
+      )}
       <a
         href={article.link}
         target="_blank"
@@ -88,7 +99,7 @@ function NewsCard({ article }: { article: NewsArticle }) {
         <p className="text-sm font-semibold text-gray-900 dark:text-white line-clamp-2 mb-2">
           {article.title}
         </p>
-        <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
+        <div className="flex items-center flex-wrap gap-x-2 gap-y-1 text-xs text-gray-500 dark:text-gray-400">
           {article.source && <span>{article.source}</span>}
           {article.lean && <LeanBadge lean={article.lean} />}
           {article.source && article.pubDate && <span>&middot;</span>}
@@ -138,30 +149,33 @@ function TopicFilters({
   onSelect: (cat: string | null) => void;
 }) {
   return (
-    <div className="flex gap-1.5 overflow-x-auto pb-3 mb-4 -mx-1 px-1 scrollbar-thin">
-      <button
-        onClick={() => onSelect(null)}
-        className={`px-3 py-1.5 text-xs font-medium rounded-full whitespace-nowrap transition-colors ${
-          selected === null
-            ? 'bg-purple-600 text-white'
-            : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
-        }`}
-      >
-        All Topics
-      </button>
-      {categories.map((cat) => (
+    <div className="mb-6">
+      <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">Filter by Topic</h3>
+      <div className="flex gap-2 overflow-x-auto pb-3 -mx-1 px-1 scrollbar-thin">
         <button
-          key={cat}
-          onClick={() => onSelect(cat)}
-          className={`px-3 py-1.5 text-xs font-medium rounded-full whitespace-nowrap transition-colors ${
-            selected === cat
-              ? 'bg-purple-600 text-white'
+          onClick={() => onSelect(null)}
+          className={`px-3.5 py-1.5 text-xs font-medium rounded-full whitespace-nowrap transition-colors ${
+            selected === null
+              ? 'bg-purple-600 text-white shadow-sm'
               : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
           }`}
         >
-          {CATEGORY_SHORT[cat] || cat}
+          All Topics
         </button>
-      ))}
+        {categories.map((cat) => (
+          <button
+            key={cat}
+            onClick={() => onSelect(cat)}
+            className={`px-3.5 py-1.5 text-xs font-medium rounded-full whitespace-nowrap transition-colors ${
+              selected === cat
+                ? 'bg-purple-600 text-white shadow-sm'
+                : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
+            }`}
+          >
+            {CATEGORY_SHORT[cat] || cat}
+          </button>
+        ))}
+      </div>
     </div>
   );
 }
@@ -265,9 +279,15 @@ export function CivicNews({ limit, compact = false, showLegend = false, showFilt
           onSelect={setSelectedTopic}
         />
       )}
+      {selectedTopic && (
+        <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">
+          Showing <span className="font-medium text-gray-700 dark:text-gray-200">{displayed.length}</span> article{displayed.length !== 1 ? 's' : ''} about{' '}
+          <span className="font-medium text-gray-700 dark:text-gray-200">{CATEGORY_SHORT[selectedTopic] || selectedTopic}</span>
+        </p>
+      )}
       {displayed.length === 0 ? (
         <p className="text-center text-gray-500 dark:text-gray-400 py-8 text-sm">
-          No articles found for this topic right now.
+          No articles found for this topic right now. Try &ldquo;All Topics&rdquo; to see all news.
         </p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
