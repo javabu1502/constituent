@@ -107,15 +107,76 @@ function NewsCard({ article }: { article: NewsArticle }) {
   );
 }
 
+// Short labels for filter tabs
+const CATEGORY_SHORT: Record<string, string> = {
+  'Immigration': 'Immigration',
+  'Health': 'Health',
+  'Environmental Protection': 'Environment',
+  'Crime and Law Enforcement': 'Crime',
+  'Education': 'Education',
+  'Taxation': 'Taxes',
+  'Housing and Community Development': 'Housing',
+  'Social Welfare': 'Social Security',
+  'Armed Forces and National Security': 'Defense',
+  'Government Operations and Politics': 'Elections',
+  'Law': 'Courts',
+  'Economics and Public Finance': 'Economy',
+  'Transportation and Public Works': 'Infrastructure',
+  'Families': 'Families',
+  'Science, Technology, Communications': 'Tech',
+  'International Affairs': 'Foreign Policy',
+  'Labor and Employment': 'Labor',
+};
+
+function TopicFilters({
+  categories,
+  selected,
+  onSelect,
+}: {
+  categories: string[];
+  selected: string | null;
+  onSelect: (cat: string | null) => void;
+}) {
+  return (
+    <div className="flex gap-1.5 overflow-x-auto pb-3 mb-4 -mx-1 px-1 scrollbar-thin">
+      <button
+        onClick={() => onSelect(null)}
+        className={`px-3 py-1.5 text-xs font-medium rounded-full whitespace-nowrap transition-colors ${
+          selected === null
+            ? 'bg-purple-600 text-white'
+            : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
+        }`}
+      >
+        All Topics
+      </button>
+      {categories.map((cat) => (
+        <button
+          key={cat}
+          onClick={() => onSelect(cat)}
+          className={`px-3 py-1.5 text-xs font-medium rounded-full whitespace-nowrap transition-colors ${
+            selected === cat
+              ? 'bg-purple-600 text-white'
+              : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
+          }`}
+        >
+          {CATEGORY_SHORT[cat] || cat}
+        </button>
+      ))}
+    </div>
+  );
+}
+
 interface CivicNewsProps {
   limit?: number;
   compact?: boolean;
   showLegend?: boolean;
+  showFilters?: boolean;
 }
 
-export function CivicNews({ limit, compact = false, showLegend = false }: CivicNewsProps) {
+export function CivicNews({ limit, compact = false, showLegend = false, showFilters = false }: CivicNewsProps) {
   const [articles, setArticles] = useState<NewsArticle[]>([]);
   const [loading, setLoading] = useState(true);
+  const [selectedTopic, setSelectedTopic] = useState<string | null>(null);
 
   useEffect(() => {
     fetch('/api/news/civic')
@@ -125,7 +186,24 @@ export function CivicNews({ limit, compact = false, showLegend = false }: CivicN
       .finally(() => setLoading(false));
   }, []);
 
-  const displayed = limit ? articles.slice(0, limit) : articles;
+  // Extract unique categories sorted by article count
+  const categories = (() => {
+    const counts = new Map<string, number>();
+    for (const a of articles) {
+      if (a.topic?.issueCategory) {
+        counts.set(a.topic.issueCategory, (counts.get(a.topic.issueCategory) ?? 0) + 1);
+      }
+    }
+    return [...counts.entries()]
+      .sort((a, b) => b[1] - a[1])
+      .map(([cat]) => cat);
+  })();
+
+  // Filter by selected topic
+  const filtered = selectedTopic
+    ? articles.filter((a) => a.topic?.issueCategory === selectedTopic)
+    : articles;
+  const displayed = limit ? filtered.slice(0, limit) : filtered;
 
   if (loading) {
     return (
@@ -140,7 +218,7 @@ export function CivicNews({ limit, compact = false, showLegend = false }: CivicN
     );
   }
 
-  if (displayed.length === 0) return null;
+  if (articles.length === 0) return null;
 
   if (compact) {
     return (
@@ -180,11 +258,37 @@ export function CivicNews({ limit, compact = false, showLegend = false }: CivicN
   return (
     <>
       {showLegend && <BiasLegend />}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-        {displayed.map((article, i) => (
-          <NewsCard key={i} article={article} />
-        ))}
-      </div>
+      {showFilters && categories.length > 1 && (
+        <TopicFilters
+          categories={categories}
+          selected={selectedTopic}
+          onSelect={setSelectedTopic}
+        />
+      )}
+      {displayed.length === 0 ? (
+        <p className="text-center text-gray-500 dark:text-gray-400 py-8 text-sm">
+          No articles found for this topic right now.
+        </p>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          {displayed.map((article, i) => (
+            <NewsCard key={i} article={article} />
+          ))}
+        </div>
+      )}
+      {showFilters && selectedTopic && (
+        <div className="mt-4 text-center">
+          <Link
+            href={`/contact?issue=${encodeURIComponent(articles.find(a => a.topic?.issueCategory === selectedTopic)?.topic?.issue ?? selectedTopic)}&issueCategory=${encodeURIComponent(selectedTopic)}`}
+            className="inline-flex items-center gap-1.5 text-sm font-medium text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300"
+          >
+            Contact your reps about {CATEGORY_SHORT[selectedTopic] || selectedTopic}
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </Link>
+        </div>
+      )}
     </>
   );
 }

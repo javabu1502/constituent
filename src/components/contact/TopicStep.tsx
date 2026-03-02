@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import type { ContactState, ContactAction } from './ContactFlow';
 import type { Official } from '@/lib/types';
 import { Button } from '@/components/ui/Button';
@@ -38,8 +39,93 @@ function OfficialBadge({ official }: { official: Official }) {
   );
 }
 
+// Story starter prompts keyed by issueCategory
+const STORY_PROMPTS: Record<string, string[]> = {
+  'Health': [
+    'I or a family member has been affected by...',
+    'My healthcare costs have impacted our family because...',
+    'As someone with a pre-existing condition, I...',
+  ],
+  'Immigration': [
+    'As an immigrant / child of immigrants, my experience...',
+    'Immigration policy affects my community because...',
+    'I have personally seen the impact of enforcement on...',
+  ],
+  'Education': [
+    'As a parent / student / teacher, I have seen...',
+    'School funding in my district has affected...',
+    'The cost of higher education has meant that I...',
+  ],
+  'Environmental Protection': [
+    'Environmental issues affect my community because...',
+    'I have personally experienced the effects of...',
+    'Clean air / water is important to me because...',
+  ],
+  'Crime and Law Enforcement': [
+    'I or someone I know has been directly affected by...',
+    'Public safety in my neighborhood matters because...',
+    'My experience with the justice system showed me...',
+  ],
+  'Taxation': [
+    'As a taxpayer, the current system affects me because...',
+    'Tax policy impacts my small business / family budget by...',
+    'I have seen firsthand how tax changes affected...',
+  ],
+  'Economics and Public Finance': [
+    'Rising costs have forced my family to...',
+    'As a worker in this economy, I struggle with...',
+    'The economic situation in my community means that...',
+  ],
+  'Housing and Community Development': [
+    'Finding affordable housing has been a challenge because...',
+    'Rent / mortgage costs have forced me to...',
+    'I have seen my neighborhood change due to...',
+  ],
+  'Social Welfare': [
+    'Social Security / Medicare is essential for me because...',
+    'Without safety net programs, my family would...',
+    'I rely on these programs because...',
+  ],
+  'Armed Forces and National Security': [
+    'As a veteran / military family member...',
+    'I have served and experienced firsthand...',
+    'National security matters to me because...',
+  ],
+  'Labor and Employment': [
+    'As a worker, my conditions have been affected by...',
+    'Wage policies directly impact my family because...',
+    'My experience in the workplace showed me...',
+  ],
+  'Families': [
+    'As a parent, childcare costs have meant that...',
+    'My family has been directly affected by...',
+    'Balancing work and family is challenging because...',
+  ],
+};
+
+const DEFAULT_STORY_PROMPTS = [
+  'This issue affects my daily life because...',
+  'I or someone I know has been impacted by...',
+  'In my community, I have seen...',
+];
+
+// Advocacy org categories that match issue categories
+const ADVOCACY_LINKS: Record<string, { progressive: string; conservative: string }> = {
+  'Health': { progressive: 'https://familiesusa.org/', conservative: 'https://www.heritage.org/health-care-reform' },
+  'Immigration': { progressive: 'https://www.aclu.org/issues/immigrants-rights', conservative: 'https://www.fairus.org/' },
+  'Environmental Protection': { progressive: 'https://www.sierraclub.org/', conservative: 'https://www.acc.eco/' },
+  'Education': { progressive: 'https://www.nea.org/', conservative: 'https://www.heritage.org/education' },
+  'Crime and Law Enforcement': { progressive: 'https://www.everytown.org/', conservative: 'https://www.nraila.org/' },
+  'Taxation': { progressive: 'https://americansfortaxfairness.org/', conservative: 'https://taxfoundation.org/' },
+  'Economics and Public Finance': { progressive: 'https://www.epi.org/', conservative: 'https://www.aei.org/' },
+  'Armed Forces and National Security': { progressive: 'https://winwithoutwar.org/', conservative: 'https://www.heritage.org/defense' },
+  'Labor and Employment': { progressive: 'https://aflcio.org/', conservative: 'https://www.uschamber.com/' },
+  'Science, Technology, Communications': { progressive: 'https://www.eff.org/', conservative: 'https://techfreedom.org/' },
+};
+
 export function TopicStep({ state, dispatch, onBack }: TopicStepProps) {
   const { selectedReps, userName, issue, ask, personalWhy, contactMethod } = state;
+  const [showStoryHelp, setShowStoryHelp] = useState(false);
 
   const handleContinue = () => {
     if (!userName.trim()) {
@@ -188,10 +274,85 @@ export function TopicStep({ state, dispatch, onBack }: TopicStepProps) {
 
       {/* Your personal why */}
       <div className="mb-5">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-          Your personal why{' '}
-          <span className="text-gray-400 dark:text-gray-500 font-normal">(optional)</span>
-        </label>
+        <div className="flex items-center justify-between mb-2">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+            Your personal why{' '}
+            <span className="text-gray-400 dark:text-gray-500 font-normal">(optional but powerful)</span>
+          </label>
+          <button
+            type="button"
+            onClick={() => setShowStoryHelp(!showStoryHelp)}
+            className="text-xs text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 font-medium"
+          >
+            {showStoryHelp ? 'Hide tips' : 'Help me write this'}
+          </button>
+        </div>
+
+        {showStoryHelp && (
+          <div className="mb-3 p-3 bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-700 rounded-xl space-y-3">
+            <p className="text-xs font-medium text-purple-800 dark:text-purple-200">
+              Messages with personal stories are 6x more likely to be flagged for a legislator&apos;s attention.
+            </p>
+
+            {/* Story starter prompts */}
+            <div>
+              <p className="text-xs font-medium text-purple-700 dark:text-purple-300 mb-1.5">Try starting with:</p>
+              <div className="flex flex-wrap gap-1.5">
+                {(STORY_PROMPTS[state.issueCategory] || DEFAULT_STORY_PROMPTS).map((prompt, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    onClick={() => {
+                      if (!personalWhy.trim()) {
+                        dispatch({ type: 'SET_PERSONAL_WHY', payload: prompt });
+                      }
+                    }}
+                    className="px-2.5 py-1 text-xs bg-white dark:bg-gray-700 border border-purple-200 dark:border-purple-600 rounded-lg text-purple-700 dark:text-purple-300 hover:bg-purple-100 dark:hover:bg-purple-800/30 transition-colors text-left"
+                  >
+                    {prompt}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Story structure tip */}
+            <div className="text-xs text-purple-700 dark:text-purple-300 space-y-1">
+              <p className="font-medium">Strong stories have:</p>
+              <ul className="list-disc list-inside space-y-0.5 text-purple-600 dark:text-purple-400">
+                <li>A specific detail (numbers, names, dates)</li>
+                <li>How it affects your daily life</li>
+                <li>What you&apos;ve tried or what you&apos;re facing</li>
+              </ul>
+            </div>
+
+            {/* Research resources */}
+            {state.issueCategory && ADVOCACY_LINKS[state.issueCategory] && (
+              <div className="pt-2 border-t border-purple-200 dark:border-purple-700">
+                <p className="text-xs font-medium text-purple-700 dark:text-purple-300 mb-1">Research to strengthen your message:</p>
+                <div className="flex gap-2">
+                  <a
+                    href={ADVOCACY_LINKS[state.issueCategory].progressive}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs text-blue-600 dark:text-blue-400 hover:underline"
+                  >
+                    Progressive research
+                  </a>
+                  <span className="text-purple-400">|</span>
+                  <a
+                    href={ADVOCACY_LINKS[state.issueCategory].conservative}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs text-red-600 dark:text-red-400 hover:underline"
+                  >
+                    Conservative research
+                  </a>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+
         <textarea
           value={personalWhy}
           onChange={(e) => dispatch({ type: 'SET_PERSONAL_WHY', payload: e.target.value })}
@@ -201,6 +362,7 @@ export function TopicStep({ state, dispatch, onBack }: TopicStepProps) {
         />
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
           Personal stories drive policy. Congressional staff track constituent concerns and often share compelling stories directly with legislators.
+          {' '}<a href="/guides/tell-your-story" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">Read the full guide</a>.
         </p>
       </div>
 
