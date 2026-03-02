@@ -9,6 +9,7 @@ import voterInfoData from '@/data/voter-info.json';
 import stateMetaData from '@/data/state-meta.json';
 import advocacyOrgsData from '@/data/advocacy-orgs.json';
 import { StateTrends } from './StateTrends';
+import { BillSearch } from '@/components/bills/BillSearch';
 
 // ── Types ────────────────────────────────────────────────────────────────────
 
@@ -101,6 +102,8 @@ export async function generateMetadata({ params }: StatePageProps): Promise<Meta
       `${stateInfo.name} elections 2026`,
       `${stateInfo.name} voter registration`,
       `${stateInfo.name} state legislators`,
+      `${stateInfo.name} bills`,
+      `${stateInfo.name} legislation`,
     ],
     openGraph: { title, description, url: `https://www.mydemocracy.app/states/${slug}`, type: 'website' },
     alternates: { canonical: `https://www.mydemocracy.app/states/${slug}` },
@@ -592,6 +595,16 @@ export default async function StateHubPage({ params }: StatePageProps) {
               <p className="text-gray-500 dark:text-gray-400 text-sm">No state legislator data available for {stateInfo.name} yet.</p>
             </div>
           )}
+        </section>
+      )}
+
+      {/* ═══════════════════════════════════════════════════════════════════ */}
+      {/* Search Legislation */}
+      {/* ═══════════════════════════════════════════════════════════════════ */}
+      {!isDC && (
+        <section className="mb-10">
+          <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Search {stateInfo.name} Legislation</h2>
+          <BillSearch stateCode={stateInfo.code} stateName={stateInfo.name} />
         </section>
       )}
 

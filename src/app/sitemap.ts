@@ -23,6 +23,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/guides/how-a-bill-becomes-law`, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${baseUrl}/guides/tell-your-story`, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${baseUrl}/guides/how-to-run-a-successful-campaign`, changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${baseUrl}/guides/how-to-register-to-vote`, changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${baseUrl}/guides/how-to-attend-a-town-hall`, changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${baseUrl}/guides/how-to-get-involved-in-local-politics`, changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${baseUrl}/guides/how-to-track-legislation`, changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${baseUrl}/news`, changeFrequency: 'daily', priority: 0.8 },
   ];
 
   // Fetch dynamic campaign slugs
@@ -72,5 +77,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
-  return [...staticPages, ...statesIndexPage, ...stateHubPages, ...statePages, ...repPages, ...campaignPages];
+  // /vote/[state] SEO redirect pages
+  const voteStatePages: MetadataRoute.Sitemap = US_STATES.map((s) => ({
+    url: `${baseUrl}/vote/${s.name.toLowerCase().replace(/\s+/g, '-')}`,
+    changeFrequency: 'monthly' as const,
+    priority: 0.6,
+  }));
+
+  return [...staticPages, ...statesIndexPage, ...stateHubPages, ...voteStatePages, ...statePages, ...repPages, ...campaignPages];
 }
