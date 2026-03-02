@@ -8,12 +8,43 @@ interface ArticleTopic {
   issueCategory: string;
 }
 
+type SourceLean = 'left' | 'left-center' | 'center' | 'right-center' | 'right';
+
 interface NewsArticle {
   title: string;
   link: string;
   source: string;
   pubDate: string;
   topic?: ArticleTopic | null;
+  lean?: SourceLean | null;
+}
+
+const LEAN_LABELS: Record<SourceLean, { label: string; color: string }> = {
+  'left': { label: 'L', color: 'bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300' },
+  'left-center': { label: 'LC', color: 'bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400' },
+  'center': { label: 'C', color: 'bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-300' },
+  'right-center': { label: 'RC', color: 'bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400' },
+  'right': { label: 'R', color: 'bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-300' },
+};
+
+const LEAN_FULL: Record<SourceLean, string> = {
+  'left': 'Left',
+  'left-center': 'Left-Center',
+  'center': 'Center',
+  'right-center': 'Right-Center',
+  'right': 'Right',
+};
+
+function LeanBadge({ lean }: { lean: SourceLean }) {
+  const { label, color } = LEAN_LABELS[lean];
+  return (
+    <span
+      className={`inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold leading-none ${color}`}
+      title={`Media bias: ${LEAN_FULL[lean]}`}
+    >
+      {label}
+    </span>
+  );
 }
 
 function formatRelative(dateStr: string): string {
@@ -46,6 +77,7 @@ function NewsCard({ article }: { article: NewsArticle }) {
         </p>
         <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
           {article.source && <span>{article.source}</span>}
+          {article.lean && <LeanBadge lean={article.lean} />}
           {article.source && article.pubDate && <span>&middot;</span>}
           {article.pubDate && <span>{formatRelative(article.pubDate)}</span>}
         </div>
@@ -114,7 +146,7 @@ export function CivicNews({ limit, compact = false }: CivicNewsProps) {
                 <p className="text-sm font-medium text-gray-900 dark:text-white line-clamp-1">{article.title}</p>
               </a>
               <p className="text-xs text-gray-500 dark:text-gray-400">
-                {article.source}{article.source && article.pubDate ? ' · ' : ''}{article.pubDate ? formatRelative(article.pubDate) : ''}
+                {article.source}{article.lean && <>{' '}<LeanBadge lean={article.lean} /></>}{article.source && article.pubDate ? ' · ' : ''}{article.pubDate ? formatRelative(article.pubDate) : ''}
                 {article.topic && (
                   <>
                     {' · '}

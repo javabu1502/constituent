@@ -9,7 +9,8 @@
     "lint": "eslint",
     "refresh-states": "npx tsx scripts/refresh-state-data.ts",
     "refresh-federal": "npx tsx scripts/refresh-federal-data.ts",
-    "refresh-data": "npm run refresh-states && npm run refresh-federal"
+    "refresh-data": "npm run refresh-states && npm run refresh-federal",
+    "seed-campaigns": "npx tsx scripts/seed-campaigns.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.8.0",
