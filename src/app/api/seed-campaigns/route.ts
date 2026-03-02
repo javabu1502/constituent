@@ -1,8 +1,6 @@
 import { NextResponse } from 'next/server';
 import { createAdminClient } from '@/lib/supabase';
 
-const SYSTEM_CREATOR_ID = '00000000-0000-0000-0000-000000000000';
-
 const CAMPAIGNS = [
   {
     slug: 'authorize-military-force-demand-congress-vote-on-iran',
@@ -86,6 +84,13 @@ export async function GET() {
   const supabase = createAdminClient();
   const results: { headline: string; status: string }[] = [];
 
+  // Find an existing user to use as creator (FK constraint requires a real auth user)
+  const { data: users } = await supabase.auth.admin.listUsers({ page: 1, perPage: 1 });
+  const creatorId = users?.users?.[0]?.id;
+  if (!creatorId) {
+    return NextResponse.json({ error: 'No users found to assign as creator' }, { status: 500 });
+  }
+
   for (const campaign of CAMPAIGNS) {
     const { data: existing } = await supabase
       .from('campaigns')
@@ -99,7 +104,7 @@ export async function GET() {
     }
 
     const { error } = await supabase.from('campaigns').insert({
-      creator_id: SYSTEM_CREATOR_ID,
+      creator_id: creatorId,
       ...campaign,
       status: 'active',
       action_count: 0,
