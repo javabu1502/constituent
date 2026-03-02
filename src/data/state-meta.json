@@ -1,0 +1,512 @@
+{
+  "AL": {
+    "governor": { "name": "Kay Ivey", "party": "Republican", "since": 2017 },
+    "legislatureType": "hybrid",
+    "sessionDates": "First Tuesday in February – mid-May (annual)",
+    "inSession": true,
+    "upperChamberName": "Senate",
+    "lowerChamberName": "House of Representatives",
+    "publicCommentUrl": null,
+    "publicCommentMethod": null
+  },
+  "AK": {
+    "governor": { "name": "Mike Dunleavy", "party": "Republican", "since": 2018 },
+    "legislatureType": "full-time",
+    "sessionDates": "Third Tuesday in January – April 20 (90 day limit)",
+    "inSession": true,
+    "upperChamberName": "Senate",
+    "lowerChamberName": "House of Representatives",
+    "publicCommentUrl": null,
+    "publicCommentMethod": null
+  },
+  "AZ": {
+    "governor": { "name": "Katie Hobbs", "party": "Democratic", "since": 2023 },
+    "legislatureType": "hybrid",
+    "sessionDates": "Second Monday in January – typically late spring",
+    "inSession": true,
+    "upperChamberName": "Senate",
+    "lowerChamberName": "House of Representatives",
+    "publicCommentUrl": "https://apps.azleg.gov/BillStatus/RTS",
+    "publicCommentMethod": "Request to Speak (RTS) system"
+  },
+  "AR": {
+    "governor": { "name": "Sarah Huckabee Sanders", "party": "Republican", "since": 2023 },
+    "legislatureType": "hybrid",
+    "sessionDates": "Second Monday in January (odd years, 60 days); fiscal session (even years, 30 days)",
+    "inSession": false,
+    "upperChamberName": "Senate",
+    "lowerChamberName": "House of Representatives",
+    "publicCommentUrl": null,
+    "publicCommentMethod": null
+  },
+  "CA": {
+    "governor": { "name": "Gavin Newsom", "party": "Democratic", "since": 2019 },
+    "legislatureType": "full-time",
+    "sessionDates": "First Monday in December (two-year session)",
+    "inSession": true,
+    "upperChamberName": "Senate",
+    "lowerChamberName": "Assembly",
+    "publicCommentUrl": "https://www.senate.ca.gov/committees",
+    "publicCommentMethod": "Written testimony and teleconference participation"
+  },
+  "CO": {
+    "governor": { "name": "Jared Polis", "party": "Democratic", "since": 2019 },
+    "legislatureType": "hybrid",
+    "sessionDates": "Second Wednesday in January – 120 calendar days",
+    "inSession": true,
+    "upperChamberName": "Senate",
+    "lowerChamberName": "House of Representatives",
+    "publicCommentUrl": "https://leg.colorado.gov/content/testify",
+    "publicCommentMethod": "Online sign-up for in-person, remote (Zoom), or written testimony"
+  },
+  "CT": {
+    "governor": { "name": "Ned Lamont", "party": "Democratic", "since": 2019 },
+    "legislatureType": "hybrid",
+    "sessionDates": "January – June (odd years, long session); February – May (even years, short session)",
+    "inSession": true,
+    "upperChamberName": "Senate",
+    "lowerChamberName": "House of Representatives",
+    "publicCommentUrl": "https://www.cga.ct.gov/asp/Content/yourvoice.asp",
+    "publicCommentMethod": "Written testimony submission before hearings"
+  },
+  "DE": {
+    "governor": { "name": "Matt Meyer", "party": "Democratic", "since": 2025 },
+    "legislatureType": "hybrid",
+    "sessionDates": "Second Tuesday in January – June 30",
+    "inSession": true,
+    "upperChamberName": "Senate",
+    "lowerChamberName": "House of Representatives",
+    "publicCommentUrl": "https://legis.delaware.gov/",
+    "publicCommentMethod": "Zoom webinar registration"
+  },
+  "FL": {
+    "governor": { "name": "Ron DeSantis", "party": "Republican", "since": 2019 },
+    "legislatureType": "hybrid",
+    "sessionDates": "First Tuesday after first Monday in March – 60 calendar days",
+    "inSession": true,
+    "upperChamberName": "Senate",
+    "lowerChamberName": "House of Representatives",
+    "publicCommentUrl": null,
+    "publicCommentMethod": null
+  },
+  "GA": {
+    "governor": { "name": "Brian Kemp", "party": "Republican", "since": 2019 },
+    "legislatureType": "hybrid",
+    "sessionDates": "Second Monday in January – 40 legislative days",
+    "inSession": true,
+    "upperChamberName": "Senate",
+    "lowerChamberName": "House of Representatives",
+    "publicCommentUrl": null,
+    "publicCommentMethod": null
+  },
+  "HI": {
+    "governor": { "name": "Josh Green", "party": "Democratic", "since": 2022 },
+    "legislatureType": "full-time",
+    "sessionDates": "Third Wednesday in January – 60 working days",
+    "inSession": true,
+    "upperChamberName": "Senate",
+    "lowerChamberName": "House of Representatives",
+    "publicCommentUrl": "https://www.capitol.hawaii.gov/submittestimony.aspx",
+    "publicCommentMethod": "Online testimony submission (since 2009)"
+  },
+  "ID": {
+    "governor": { "name": "Brad Little", "party": "Republican", "since": 2019 },
+    "legislatureType": "part-time",
+    "sessionDates": "Monday on or nearest January 9 – typically March/April",
+    "inSession": true,
+    "upperChamberName": "Senate",
+    "lowerChamberName": "House of Representatives",
+    "publicCommentUrl": "https://legislature.idaho.gov/committees/",
+    "publicCommentMethod": "Remote testimony registration via committee webpages"
+  },
+  "IL": {
+    "governor": { "name": "JB Pritzker", "party": "Democratic", "since": 2019 },
+    "legislatureType": "full-time",
+    "sessionDates": "Second Wednesday in January – May 31 (spring); fall veto session",
+    "inSession": true,
+    "upperChamberName": "Senate",
+    "lowerChamberName": "House of Representatives",
+    "publicCommentUrl": "https://my.ilga.gov/",
+    "publicCommentMethod": "Witness slips via General Assembly Dashboard"
+  },
+  "IN": {
+    "governor": { "name": "Mike Braun", "party": "Republican", "since": 2025 },
+    "legislatureType": "hybrid",
+    "sessionDates": "First Tuesday after first Monday in January – April 29 (long) or March 14 (short)",
+    "inSession": true,
+    "upperChamberName": "Senate",
+    "lowerChamberName": "House of Representatives",
+    "publicCommentUrl": null,
+    "publicCommentMethod": null
+  },
+  "IA": {
+    "governor": { "name": "Kim Reynolds", "party": "Republican", "since": 2017 },
+    "legislatureType": "hybrid",
+    "sessionDates": "Second Monday in January – typically April/May",
+    "inSession": true,
+    "upperChamberName": "Senate",
+    "lowerChamberName": "House of Representatives",
+    "publicCommentUrl": null,
+    "publicCommentMethod": null
+  },
+  "KS": {
+    "governor": { "name": "Laura Kelly", "party": "Democratic", "since": 2019 },
+    "legislatureType": "part-time",
+    "sessionDates": "Second Monday in January – typically May",
+    "inSession": true,
+    "upperChamberName": "Senate",
+    "lowerChamberName": "House of Representatives",
+    "publicCommentUrl": null,
+    "publicCommentMethod": null
+  },
+  "KY": {
+    "governor": { "name": "Andy Beshear", "party": "Democratic", "since": 2019 },
+    "legislatureType": "hybrid",
+    "sessionDates": "First Tuesday after first Monday in January – 60 legislative days (odd); 30 days (even)",
+    "inSession": true,
+    "upperChamberName": "Senate",
+    "lowerChamberName": "House of Representatives",
+    "publicCommentUrl": "https://apps.legislature.ky.gov/record/public-input",
+    "publicCommentMethod": "Testimony Request Form via committee pages"
+  },
+  "LA": {
+    "governor": { "name": "Jeff Landry", "party": "Republican", "since": 2024 },
+    "legislatureType": "hybrid",
+    "sessionDates": "Second Monday in March (even years, fiscal); April (odd years, regular) – 60/85 days",
+    "inSession": true,
+    "upperChamberName": "Senate",
+    "lowerChamberName": "House of Representatives",
+    "publicCommentUrl": null,
+    "publicCommentMethod": null
+  },
+  "ME": {
+    "governor": { "name": "Janet Mills", "party": "Democratic", "since": 2019 },
+    "legislatureType": "part-time",
+    "sessionDates": "First Wednesday in December – mid-June (first); January – April (second)",
+    "inSession": true,
+    "upperChamberName": "Senate",
+    "lowerChamberName": "House of Representatives",
+    "publicCommentUrl": "https://legislature.maine.gov/testimony/",
+    "publicCommentMethod": "Online testimony submission form"
+  },
+  "MD": {
+    "governor": { "name": "Wes Moore", "party": "Democratic", "since": 2023 },
+    "legislatureType": "hybrid",
+    "sessionDates": "Second Wednesday in January – April 7 (90 days)",
+    "inSession": true,
+    "upperChamberName": "Senate",
+    "lowerChamberName": "House of Delegates",
+    "publicCommentUrl": "https://mgaleg.maryland.gov/mgawebsite/MyMGA/SignIn",
+    "publicCommentMethod": "MyMGA system: witness signup, testimony upload, video tutorials"
+  },
+  "MA": {
+    "governor": { "name": "Maura Healey", "party": "Democratic", "since": 2023 },
+    "legislatureType": "full-time",
+    "sessionDates": "First Wednesday in January (two-year session)",
+    "inSession": true,
+    "upperChamberName": "Senate",
+    "lowerChamberName": "House of Representatives",
+    "publicCommentUrl": null,
+    "publicCommentMethod": null
+  },
+  "MI": {
+    "governor": { "name": "Gretchen Whitmer", "party": "Democratic", "since": 2019 },
+    "legislatureType": "full-time",
+    "sessionDates": "Second Wednesday in January (year-round)",
+    "inSession": true,
+    "upperChamberName": "Senate",
+    "lowerChamberName": "House of Representatives",
+    "publicCommentUrl": null,
+    "publicCommentMethod": null
+  },
+  "MN": {
+    "governor": { "name": "Tim Walz", "party": "Democratic", "since": 2019 },
+    "legislatureType": "hybrid",
+    "sessionDates": "First Tuesday after first Monday in January – late May",
+    "inSession": true,
+    "upperChamberName": "Senate",
+    "lowerChamberName": "House of Representatives",
+    "publicCommentUrl": null,
+    "publicCommentMethod": null
+  },
+  "MS": {
+    "governor": { "name": "Tate Reeves", "party": "Republican", "since": 2020 },
+    "legislatureType": "part-time",
+    "sessionDates": "First Tuesday after first Monday in January – 125 days (regular) / 90 days (fiscal)",
+    "inSession": true,
+    "upperChamberName": "Senate",
+    "lowerChamberName": "House of Representatives",
+    "publicCommentUrl": null,
+    "publicCommentMethod": null
+  },
+  "MO": {
+    "governor": { "name": "Mike Kehoe", "party": "Republican", "since": 2025 },
+    "legislatureType": "hybrid",
+    "sessionDates": "First Wednesday after first Monday in January – May 30",
+    "inSession": true,
+    "upperChamberName": "Senate",
+    "lowerChamberName": "House of Representatives",
+    "publicCommentUrl": null,
+    "publicCommentMethod": null
+  },
+  "MT": {
+    "governor": { "name": "Greg Gianforte", "party": "Republican", "since": 2021 },
+    "legislatureType": "part-time",
+    "sessionDates": "First Monday in January (odd years, 90 legislative days)",
+    "inSession": true,
+    "upperChamberName": "Senate",
+    "lowerChamberName": "House of Representatives",
+    "publicCommentUrl": "https://leg.mt.gov/committees/",
+    "publicCommentMethod": "Written submissions, position statements, video uploads, Zoom requests"
+  },
+  "NE": {
+    "governor": { "name": "Jim Pillen", "party": "Republican", "since": 2023 },
+    "legislatureType": "hybrid",
+    "sessionDates": "First Wednesday after first Monday in January – 90 days (long) / 60 days (short)",
+    "inSession": true,
+    "upperChamberName": "Legislature",
+    "lowerChamberName": null,
+    "publicCommentUrl": "https://nebraskalegislature.gov/bills/view_bill.php",
+    "publicCommentMethod": "Ongoing online comments from hearing through floor debate"
+  },
+  "NV": {
+    "governor": { "name": "Joe Lombardo", "party": "Republican", "since": 2023 },
+    "legislatureType": "part-time",
+    "sessionDates": "First Monday in February (odd years, 120 calendar days)",
+    "inSession": true,
+    "upperChamberName": "Senate",
+    "lowerChamberName": "Assembly",
+    "publicCommentUrl": "https://www.leg.state.nv.us/App/NELIS/REL/83rd2025",
+    "publicCommentMethod": "NELIS system: bill tracking, registration, position, testimony requests"
+  },
+  "NH": {
+    "governor": { "name": "Kelly Ayotte", "party": "Republican", "since": 2025 },
+    "legislatureType": "part-time",
+    "sessionDates": "First Wednesday in January – June",
+    "inSession": true,
+    "upperChamberName": "Senate",
+    "lowerChamberName": "House of Representatives",
+    "publicCommentUrl": "http://gencourt.state.nh.us/",
+    "publicCommentMethod": "Remote sign-in sheets, Zoom participation"
+  },
+  "NJ": {
+    "governor": { "name": "Phil Murphy", "party": "Democratic", "since": 2018 },
+    "legislatureType": "hybrid",
+    "sessionDates": "Second Tuesday in January (two-year session)",
+    "inSession": true,
+    "upperChamberName": "Senate",
+    "lowerChamberName": "General Assembly",
+    "publicCommentUrl": null,
+    "publicCommentMethod": null
+  },
+  "NM": {
+    "governor": { "name": "Michelle Lujan Grisham", "party": "Democratic", "since": 2019 },
+    "legislatureType": "part-time",
+    "sessionDates": "Third Tuesday in January – 60 days (odd) / 30 days (even)",
+    "inSession": true,
+    "upperChamberName": "Senate",
+    "lowerChamberName": "House of Representatives",
+    "publicCommentUrl": null,
+    "publicCommentMethod": null
+  },
+  "NY": {
+    "governor": { "name": "Kathy Hochul", "party": "Democratic", "since": 2021 },
+    "legislatureType": "full-time",
+    "sessionDates": "First Wednesday after first Monday in January (year-round)",
+    "inSession": true,
+    "upperChamberName": "Senate",
+    "lowerChamberName": "Assembly",
+    "publicCommentUrl": "https://www.nysenate.gov/legislation",
+    "publicCommentMethod": "Senate witness requests, bill opinion submission"
+  },
+  "NC": {
+    "governor": { "name": "Josh Stein", "party": "Democratic", "since": 2025 },
+    "legislatureType": "hybrid",
+    "sessionDates": "Third Wednesday after second Monday in January (odd years, long); May (even years, short)",
+    "inSession": true,
+    "upperChamberName": "Senate",
+    "lowerChamberName": "House of Representatives",
+    "publicCommentUrl": "https://www.ncleg.gov/",
+    "publicCommentMethod": "Request for comment portal via committee pages"
+  },
+  "ND": {
+    "governor": { "name": "Kelly Armstrong", "party": "Republican", "since": 2025 },
+    "legislatureType": "part-time",
+    "sessionDates": "First Tuesday after first Monday in January (odd years, 80 days)",
+    "inSession": true,
+    "upperChamberName": "Senate",
+    "lowerChamberName": "House of Representatives",
+    "publicCommentUrl": null,
+    "publicCommentMethod": null
+  },
+  "OH": {
+    "governor": { "name": "Mike DeWine", "party": "Republican", "since": 2019 },
+    "legislatureType": "full-time",
+    "sessionDates": "First Monday in January (two-year session)",
+    "inSession": true,
+    "upperChamberName": "Senate",
+    "lowerChamberName": "House of Representatives",
+    "publicCommentUrl": null,
+    "publicCommentMethod": null
+  },
+  "OK": {
+    "governor": { "name": "Kevin Stitt", "party": "Republican", "since": 2019 },
+    "legislatureType": "hybrid",
+    "sessionDates": "First Monday in February – last Friday in May",
+    "inSession": true,
+    "upperChamberName": "Senate",
+    "lowerChamberName": "House of Representatives",
+    "publicCommentUrl": null,
+    "publicCommentMethod": null
+  },
+  "OR": {
+    "governor": { "name": "Tina Kotek", "party": "Democratic", "since": 2023 },
+    "legislatureType": "hybrid",
+    "sessionDates": "Second Monday in January (odd years, no limit); February (even years, 35 days)",
+    "inSession": true,
+    "upperChamberName": "Senate",
+    "lowerChamberName": "House of Representatives",
+    "publicCommentUrl": "https://olis.oregonlegislature.gov/liz/testimony",
+    "publicCommentMethod": "Testimony submission form with video guidance"
+  },
+  "PA": {
+    "governor": { "name": "Josh Shapiro", "party": "Democratic", "since": 2023 },
+    "legislatureType": "full-time",
+    "sessionDates": "First Tuesday in January (year-round, two-year session)",
+    "inSession": true,
+    "upperChamberName": "Senate",
+    "lowerChamberName": "House of Representatives",
+    "publicCommentUrl": null,
+    "publicCommentMethod": null
+  },
+  "RI": {
+    "governor": { "name": "Dan McKee", "party": "Democratic", "since": 2021 },
+    "legislatureType": "part-time",
+    "sessionDates": "First Tuesday in January – typically June",
+    "inSession": true,
+    "upperChamberName": "Senate",
+    "lowerChamberName": "House of Representatives",
+    "publicCommentUrl": "https://status.rilegislature.gov/",
+    "publicCommentMethod": "Online form for verbal testimony; email for written"
+  },
+  "SC": {
+    "governor": { "name": "Henry McMaster", "party": "Republican", "since": 2017 },
+    "legislatureType": "hybrid",
+    "sessionDates": "Second Tuesday in January – first Thursday in June",
+    "inSession": true,
+    "upperChamberName": "Senate",
+    "lowerChamberName": "House of Representatives",
+    "publicCommentUrl": null,
+    "publicCommentMethod": null
+  },
+  "SD": {
+    "governor": { "name": "Larry Rhoden", "party": "Republican", "since": 2025 },
+    "legislatureType": "part-time",
+    "sessionDates": "Second Tuesday in January (40 legislative days, odd years; 35 days, even years)",
+    "inSession": true,
+    "upperChamberName": "Senate",
+    "lowerChamberName": "House of Representatives",
+    "publicCommentUrl": null,
+    "publicCommentMethod": "Email testimony; Microsoft Teams for remote"
+  },
+  "TN": {
+    "governor": { "name": "Bill Lee", "party": "Republican", "since": 2019 },
+    "legislatureType": "hybrid",
+    "sessionDates": "Second Tuesday in January – typically April/May",
+    "inSession": true,
+    "upperChamberName": "Senate",
+    "lowerChamberName": "House of Representatives",
+    "publicCommentUrl": null,
+    "publicCommentMethod": null
+  },
+  "TX": {
+    "governor": { "name": "Greg Abbott", "party": "Republican", "since": 2015 },
+    "legislatureType": "part-time",
+    "sessionDates": "Second Tuesday in January (odd years, 140 calendar days)",
+    "inSession": true,
+    "upperChamberName": "Senate",
+    "lowerChamberName": "House of Representatives",
+    "publicCommentUrl": null,
+    "publicCommentMethod": null
+  },
+  "UT": {
+    "governor": { "name": "Spencer Cox", "party": "Republican", "since": 2021 },
+    "legislatureType": "part-time",
+    "sessionDates": "Fourth Monday in January – first Thursday in March (45 days)",
+    "inSession": false,
+    "upperChamberName": "Senate",
+    "lowerChamberName": "House of Representatives",
+    "publicCommentUrl": "https://le.utah.gov/asp/billsintro/SubsAndMore.asp",
+    "publicCommentMethod": "Public comment form (closes 1 hour before meeting)"
+  },
+  "VT": {
+    "governor": { "name": "Phil Scott", "party": "Republican", "since": 2017 },
+    "legislatureType": "part-time",
+    "sessionDates": "First Wednesday after first Monday in January – typically May",
+    "inSession": true,
+    "upperChamberName": "Senate",
+    "lowerChamberName": "House of Representatives",
+    "publicCommentUrl": "https://legislature.vermont.gov/",
+    "publicCommentMethod": "Online forms for selected public hearings"
+  },
+  "VA": {
+    "governor": { "name": "Glenn Youngkin", "party": "Republican", "since": 2022 },
+    "legislatureType": "hybrid",
+    "sessionDates": "Second Wednesday in January – 60 days (even) / 30 days (odd)",
+    "inSession": true,
+    "upperChamberName": "Senate",
+    "lowerChamberName": "House of Delegates",
+    "publicCommentUrl": "https://virginiageneralassembly.gov/",
+    "publicCommentMethod": "House Meeting Schedule Signup; Speak website"
+  },
+  "WA": {
+    "governor": { "name": "Bob Ferguson", "party": "Democratic", "since": 2025 },
+    "legislatureType": "hybrid",
+    "sessionDates": "Second Monday in January – 105 days (odd) / 60 days (even)",
+    "inSession": true,
+    "upperChamberName": "Senate",
+    "lowerChamberName": "House of Representatives",
+    "publicCommentUrl": "https://app.leg.wa.gov/pbc/",
+    "publicCommentMethod": "Portal for testimony registration, written submission, bill comments"
+  },
+  "WV": {
+    "governor": { "name": "Patrick Morrisey", "party": "Republican", "since": 2025 },
+    "legislatureType": "part-time",
+    "sessionDates": "Second Wednesday in January – 60 calendar days",
+    "inSession": true,
+    "upperChamberName": "Senate",
+    "lowerChamberName": "House of Delegates",
+    "publicCommentUrl": null,
+    "publicCommentMethod": null
+  },
+  "WI": {
+    "governor": { "name": "Tony Evers", "party": "Democratic", "since": 2019 },
+    "legislatureType": "full-time",
+    "sessionDates": "First Monday after January 3 (two-year session, meets periodically)",
+    "inSession": true,
+    "upperChamberName": "Senate",
+    "lowerChamberName": "Assembly",
+    "publicCommentUrl": "https://docs.legis.wisconsin.gov/",
+    "publicCommentMethod": "Electronic registration for Senate committees"
+  },
+  "WY": {
+    "governor": { "name": "Mark Gordon", "party": "Republican", "since": 2019 },
+    "legislatureType": "part-time",
+    "sessionDates": "Second Tuesday in January (odd years, 40 days; even years, 20 days)",
+    "inSession": false,
+    "upperChamberName": "Senate",
+    "lowerChamberName": "House of Representatives",
+    "publicCommentUrl": "https://www.wyoleg.gov/Legislation/Calendar",
+    "publicCommentMethod": "Testify button on calendar; Online Hotline for bill opinions"
+  },
+  "DC": {
+    "governor": { "name": "Muriel Bowser", "party": "Democratic", "since": 2015 },
+    "legislatureType": "full-time",
+    "sessionDates": "Year-round (Council of the District of Columbia)",
+    "inSession": true,
+    "upperChamberName": null,
+    "lowerChamberName": "Council",
+    "publicCommentUrl": "https://lims.dccouncil.gov/",
+    "publicCommentMethod": "Written and oral testimony via LIMS"
+  }
+}

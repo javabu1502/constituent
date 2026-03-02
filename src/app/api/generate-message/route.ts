@@ -1,10 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { stripTags, extractJSON, cleanText } from '@/lib/claude';
+import { getCommitteesForMember } from '@/lib/legislators';
 
 interface OfficialInput {
   name: string;
   lastName?: string;
   stafferFirstName?: string;
+  bioguideId?: string;
   title: string;
   party: string;
   state: string;
@@ -136,24 +138,40 @@ CRITICAL: Respond with ONLY a JSON object. No other text.`;
 
   const locationStr = address ? `${address.city}, ${address.state}` : '';
 
+  // Enrich with committee data for federal officials
+  let committeeContext = '';
+  if (!isState && official.bioguideId) {
+    const committees = getCommitteesForMember(official.bioguideId);
+    if (committees.length > 0) {
+      committeeContext = `\nCOMMITTEE ASSIGNMENTS: ${committees.join(', ')}`;
+    }
+  }
+
+  // Guidance on data-enriched writing
+  const dataGuidance = committeeContext
+    ? `\n\nDATA-DRIVEN WRITING TIPS:
+- If the official sits on a committee relevant to the issue, reference it (e.g., "As a member of the [Committee], you have unique influence...")
+- This makes the letter feel researched and serious, not generic`
+    : '';
+
   const emailUserPrompt = `Write a letter to this specific official:
 
-OFFICIAL: ${official.name} (${official.title}, ${official.party}, ${official.state})
+OFFICIAL: ${official.name} (${official.title}, ${official.party}, ${official.state})${committeeContext}
 
 ISSUE: ${issue}
 WHAT I WANT: ${ask}${personalWhy ? `\nMY PERSONAL STORY: ${personalWhy}` : ''}
-SENDER: ${senderName}${locationStr ? ` from ${locationStr}` : ''}
+SENDER: ${senderName}${locationStr ? ` from ${locationStr}` : ''}${dataGuidance}
 
 Respond with ONLY this JSON:
 {"subject": "max 8 words about the ask", "body": "the letter body"}`;
 
   const phoneUserPrompt = `Write a phone call script for calling this specific official's office:
 
-OFFICIAL: ${official.name} (${official.title}, ${official.party}, ${official.state})
+OFFICIAL: ${official.name} (${official.title}, ${official.party}, ${official.state})${committeeContext}
 
 ISSUE: ${issue}
 WHAT I WANT: ${ask}${personalWhy ? `\nMY PERSONAL STORY: ${personalWhy}` : ''}
-SENDER: ${senderName}${locationStr ? ` from ${locationStr}` : ''}
+SENDER: ${senderName}${locationStr ? ` from ${locationStr}` : ''}${dataGuidance}
 
 Respond with ONLY this JSON:
 {"script": "the phone script body"}`;

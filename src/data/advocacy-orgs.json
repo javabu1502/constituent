@@ -1,0 +1,195 @@
+{
+  "Immigration": {
+    "progressive": [
+      { "name": "ACLU - Immigration", "url": "https://www.aclu.org/issues/immigrants-rights" },
+      { "name": "National Immigration Law Center", "url": "https://www.nilc.org/" },
+      { "name": "United We Dream", "url": "https://unitedwedream.org/" }
+    ],
+    "conservative": [
+      { "name": "Federation for American Immigration Reform (FAIR)", "url": "https://www.fairus.org/" },
+      { "name": "Center for Immigration Studies", "url": "https://cis.org/" },
+      { "name": "NumbersUSA", "url": "https://www.numbersusa.com/" }
+    ]
+  },
+  "Health": {
+    "progressive": [
+      { "name": "Families USA", "url": "https://familiesusa.org/" },
+      { "name": "National Health Law Program", "url": "https://healthlaw.org/" },
+      { "name": "Protect Our Care", "url": "https://protectourcare.org/" }
+    ],
+    "conservative": [
+      { "name": "Heritage Foundation - Health", "url": "https://www.heritage.org/health-care-reform" },
+      { "name": "Americans for Prosperity - Healthcare", "url": "https://americansforprosperity.org/issue/health-care/" },
+      { "name": "Paragon Health Institute", "url": "https://paragoninstitute.org/" }
+    ]
+  },
+  "Environmental Protection": {
+    "progressive": [
+      { "name": "Sierra Club", "url": "https://www.sierraclub.org/" },
+      { "name": "League of Conservation Voters", "url": "https://www.lcv.org/" },
+      { "name": "Earthjustice", "url": "https://earthjustice.org/" }
+    ],
+    "conservative": [
+      { "name": "American Energy Alliance", "url": "https://www.americanenergyalliance.org/" },
+      { "name": "Heartland Institute", "url": "https://www.heartland.org/" },
+      { "name": "American Conservation Coalition", "url": "https://www.acc.eco/" }
+    ]
+  },
+  "Crime and Law Enforcement": {
+    "progressive": [
+      { "name": "The Sentencing Project", "url": "https://www.sentencingproject.org/" },
+      { "name": "Everytown for Gun Safety", "url": "https://www.everytown.org/" },
+      { "name": "Vera Institute of Justice", "url": "https://www.vera.org/" }
+    ],
+    "conservative": [
+      { "name": "National Rifle Association (NRA-ILA)", "url": "https://www.nraila.org/" },
+      { "name": "National Sheriffs' Association", "url": "https://www.sheriffs.org/" },
+      { "name": "Right on Crime", "url": "https://rightoncrime.com/" }
+    ]
+  },
+  "Education": {
+    "progressive": [
+      { "name": "National Education Association", "url": "https://www.nea.org/" },
+      { "name": "American Federation of Teachers", "url": "https://www.aft.org/" },
+      { "name": "Education Trust", "url": "https://edtrust.org/" }
+    ],
+    "conservative": [
+      { "name": "Heritage Foundation - Education", "url": "https://www.heritage.org/education" },
+      { "name": "American Federation for Children", "url": "https://www.federationforchildren.org/" },
+      { "name": "Reason Foundation - Education", "url": "https://reason.org/topic/education/" }
+    ]
+  },
+  "Taxation": {
+    "progressive": [
+      { "name": "Americans for Tax Fairness", "url": "https://americansfortaxfairness.org/" },
+      { "name": "Institute on Taxation and Economic Policy", "url": "https://itep.org/" },
+      { "name": "Center on Budget and Policy Priorities", "url": "https://www.cbpp.org/" }
+    ],
+    "conservative": [
+      { "name": "Americans for Tax Reform", "url": "https://www.atr.org/" },
+      { "name": "Tax Foundation", "url": "https://taxfoundation.org/" },
+      { "name": "Club for Growth", "url": "https://www.clubforgrowth.org/" }
+    ]
+  },
+  "Housing and Community Development": {
+    "progressive": [
+      { "name": "National Low Income Housing Coalition", "url": "https://nlihc.org/" },
+      { "name": "National Housing Law Project", "url": "https://www.nhlp.org/" }
+    ],
+    "conservative": [
+      { "name": "Reason Foundation - Housing", "url": "https://reason.org/topic/housing/" },
+      { "name": "Cato Institute - Housing", "url": "https://www.cato.org/research/housing" }
+    ]
+  },
+  "Social Welfare": {
+    "progressive": [
+      { "name": "Social Security Works", "url": "https://socialsecurityworks.org/" },
+      { "name": "National Committee to Preserve Social Security and Medicare", "url": "https://www.ncpssm.org/" }
+    ],
+    "conservative": [
+      { "name": "Heritage Foundation - Social Security", "url": "https://www.heritage.org/social-security" },
+      { "name": "Cato Institute - Social Security", "url": "https://www.cato.org/social-security" }
+    ]
+  },
+  "Armed Forces and National Security": {
+    "progressive": [
+      { "name": "Win Without War", "url": "https://winwithoutwar.org/" },
+      { "name": "Veterans for Peace", "url": "https://www.veteransforpeace.org/" },
+      { "name": "Quincy Institute", "url": "https://quincyinst.org/" }
+    ],
+    "conservative": [
+      { "name": "Heritage Foundation - Defense", "url": "https://www.heritage.org/defense" },
+      { "name": "American Enterprise Institute - Defense", "url": "https://www.aei.org/policy-areas/defense-and-national-security/" },
+      { "name": "Foundation for Defense of Democracies", "url": "https://www.fdd.org/" }
+    ]
+  },
+  "Government Operations and Politics": {
+    "progressive": [
+      { "name": "Common Cause", "url": "https://www.commoncause.org/" },
+      { "name": "Brennan Center for Justice", "url": "https://www.brennancenter.org/" },
+      { "name": "League of Women Voters", "url": "https://www.lwv.org/" }
+    ],
+    "conservative": [
+      { "name": "Heritage Action", "url": "https://heritageaction.com/" },
+      { "name": "Judicial Watch", "url": "https://www.judicialwatch.org/" },
+      { "name": "FreedomWorks", "url": "https://www.freedomworks.org/" }
+    ]
+  },
+  "Law": {
+    "progressive": [
+      { "name": "ACLU", "url": "https://www.aclu.org/" },
+      { "name": "Alliance for Justice", "url": "https://www.afj.org/" },
+      { "name": "Lambda Legal", "url": "https://www.lambdalegal.org/" }
+    ],
+    "conservative": [
+      { "name": "Federalist Society", "url": "https://fedsoc.org/" },
+      { "name": "Alliance Defending Freedom", "url": "https://adflegal.org/" },
+      { "name": "Institute for Justice", "url": "https://ij.org/" }
+    ]
+  },
+  "Economics and Public Finance": {
+    "progressive": [
+      { "name": "Economic Policy Institute", "url": "https://www.epi.org/" },
+      { "name": "Center for American Progress", "url": "https://www.americanprogress.org/" }
+    ],
+    "conservative": [
+      { "name": "Cato Institute", "url": "https://www.cato.org/" },
+      { "name": "American Enterprise Institute", "url": "https://www.aei.org/" },
+      { "name": "Committee for a Responsible Federal Budget", "url": "https://www.crfb.org/" }
+    ]
+  },
+  "Transportation and Public Works": {
+    "progressive": [
+      { "name": "Transportation for America", "url": "https://t4america.org/" },
+      { "name": "National Resources Defense Council", "url": "https://www.nrdc.org/" }
+    ],
+    "conservative": [
+      { "name": "Reason Foundation - Transportation", "url": "https://reason.org/topic/transportation/" },
+      { "name": "Competitive Enterprise Institute", "url": "https://cei.org/" }
+    ]
+  },
+  "Families": {
+    "progressive": [
+      { "name": "National Partnership for Women & Families", "url": "https://www.nationalpartnership.org/" },
+      { "name": "First Focus on Children", "url": "https://firstfocus.org/" }
+    ],
+    "conservative": [
+      { "name": "Family Research Council", "url": "https://www.frc.org/" },
+      { "name": "Institute for Family Studies", "url": "https://ifstudies.org/" }
+    ]
+  },
+  "Science, Technology, Communications": {
+    "progressive": [
+      { "name": "Electronic Frontier Foundation", "url": "https://www.eff.org/" },
+      { "name": "AI Now Institute", "url": "https://ainowinstitute.org/" },
+      { "name": "Free Press", "url": "https://www.freepress.net/" }
+    ],
+    "conservative": [
+      { "name": "TechFreedom", "url": "https://techfreedom.org/" },
+      { "name": "Information Technology and Innovation Foundation", "url": "https://itif.org/" },
+      { "name": "R Street Institute - Technology", "url": "https://www.rstreet.org/issue/technology-and-innovation/" }
+    ]
+  },
+  "International Affairs": {
+    "progressive": [
+      { "name": "Human Rights Watch", "url": "https://www.hrw.org/" },
+      { "name": "Oxfam America", "url": "https://www.oxfamamerica.org/" }
+    ],
+    "conservative": [
+      { "name": "Heritage Foundation - Foreign Policy", "url": "https://www.heritage.org/foreign-policy" },
+      { "name": "Hudson Institute", "url": "https://www.hudson.org/" }
+    ]
+  },
+  "Labor and Employment": {
+    "progressive": [
+      { "name": "AFL-CIO", "url": "https://aflcio.org/" },
+      { "name": "National Employment Law Project", "url": "https://www.nelp.org/" },
+      { "name": "Fight for $15", "url": "https://fightfor15.org/" }
+    ],
+    "conservative": [
+      { "name": "National Right to Work Committee", "url": "https://nrtwc.org/" },
+      { "name": "US Chamber of Commerce", "url": "https://www.uschamber.com/" },
+      { "name": "Employment Policies Institute", "url": "https://epionline.org/" }
+    ]
+  }
+}
