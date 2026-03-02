@@ -19,20 +19,12 @@ interface NewsArticle {
   lean?: SourceLean | null;
 }
 
-const LEAN_LABELS: Record<SourceLean, { label: string; color: string }> = {
-  'left': { label: 'L', color: 'bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300' },
-  'left-center': { label: 'LC', color: 'bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400' },
-  'center': { label: 'C', color: 'bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-300' },
-  'right-center': { label: 'RC', color: 'bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400' },
-  'right': { label: 'R', color: 'bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-300' },
-};
-
-const LEAN_FULL: Record<SourceLean, string> = {
-  'left': 'Left',
-  'left-center': 'Left-Center',
-  'center': 'Center',
-  'right-center': 'Right-Center',
-  'right': 'Right',
+const LEAN_LABELS: Record<SourceLean, { label: string; color: string; dotColor: string }> = {
+  'left': { label: 'Left', color: 'bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300', dotColor: 'bg-blue-500' },
+  'left-center': { label: 'Left-Center', color: 'bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400', dotColor: 'bg-blue-400' },
+  'center': { label: 'Center', color: 'bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-300', dotColor: 'bg-gray-400' },
+  'right-center': { label: 'Right-Center', color: 'bg-red-50 text-red-600 dark:bg-red-900/20 dark:text-red-400', dotColor: 'bg-red-400' },
+  'right': { label: 'Right', color: 'bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-300', dotColor: 'bg-red-500' },
 };
 
 function LeanBadge({ lean }: { lean: SourceLean }) {
@@ -40,10 +32,31 @@ function LeanBadge({ lean }: { lean: SourceLean }) {
   return (
     <span
       className={`inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold leading-none ${color}`}
-      title={`Media bias: ${LEAN_FULL[lean]}`}
+      title={`Source bias rating: ${label} — based on AllSides / Ad Fontes Media`}
     >
       {label}
     </span>
+  );
+}
+
+function BiasLegend() {
+  const leans: SourceLean[] = ['left', 'left-center', 'center', 'right-center', 'right'];
+  return (
+    <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-gray-500 dark:text-gray-400 mb-4 p-3 bg-gray-50 dark:bg-gray-800/50 rounded-lg border border-gray-200 dark:border-gray-700">
+      <span className="font-medium text-gray-700 dark:text-gray-300">Source Bias:</span>
+      {leans.map((lean) => {
+        const { label, dotColor } = LEAN_LABELS[lean];
+        return (
+          <span key={lean} className="inline-flex items-center gap-1">
+            <span className={`w-2 h-2 rounded-full ${dotColor}`} />
+            {label}
+          </span>
+        );
+      })}
+      <span className="text-gray-400 dark:text-gray-500">
+        (via <a href="https://www.allsides.com/media-bias/ratings" target="_blank" rel="noopener noreferrer" className="underline hover:text-purple-600 dark:hover:text-purple-400">AllSides</a>)
+      </span>
+    </div>
   );
 }
 
@@ -97,9 +110,10 @@ function NewsCard({ article }: { article: NewsArticle }) {
 interface CivicNewsProps {
   limit?: number;
   compact?: boolean;
+  showLegend?: boolean;
 }
 
-export function CivicNews({ limit, compact = false }: CivicNewsProps) {
+export function CivicNews({ limit, compact = false, showLegend = false }: CivicNewsProps) {
   const [articles, setArticles] = useState<NewsArticle[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -164,10 +178,13 @@ export function CivicNews({ limit, compact = false }: CivicNewsProps) {
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-      {displayed.map((article, i) => (
-        <NewsCard key={i} article={article} />
-      ))}
-    </div>
+    <>
+      {showLegend && <BiasLegend />}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        {displayed.map((article, i) => (
+          <NewsCard key={i} article={article} />
+        ))}
+      </div>
+    </>
   );
 }

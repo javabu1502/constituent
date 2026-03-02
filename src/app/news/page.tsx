@@ -46,7 +46,7 @@ export default function NewsPage() {
         </p>
       </div>
 
-      <CivicNews />
+      <CivicNews showLegend />
     </div>
   );
 }

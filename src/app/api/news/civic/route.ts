@@ -56,6 +56,16 @@ const SOURCE_LEAN: Record<string, SourceLean> = {
   'Slate': 'left',
   'The Guardian': 'left-center',
   'BBC': 'center',
+  'BBC News': 'center',
+  // New direct feed sources
+  'The Dispatch': 'right-center',
+  'National Review': 'right',
+  'Reason': 'right-center',
+  'PBS NewsHour': 'center',
+  'Axios': 'center',
+  'Roll Call': 'center',
+  'Stateline': 'center',
+  'Military Times': 'center',
 };
 
 // Broader Google News queries
@@ -74,12 +84,25 @@ const DIRECT_FEEDS: { url: string; sourceName: string }[] = [
   { url: 'https://rss.politico.com/politics-news.xml', sourceName: 'Politico' },
   { url: 'https://thehill.com/feed/', sourceName: 'The Hill' },
   { url: 'https://feeds.propublica.org/propublica/main', sourceName: 'ProPublica' },
-  // Independent outlets
+  // Independent / left outlets
   { url: 'https://www.dropsitenews.com/feed', sourceName: 'Drop Site News' },
   { url: 'https://theintercept.com/feed/?rss', sourceName: 'The Intercept' },
   { url: 'https://www.democracynow.org/democracynow.rss', sourceName: 'Democracy Now!' },
   { url: 'https://truthout.org/feed/', sourceName: 'Truthout' },
   { url: 'https://jacobin.com/feed', sourceName: 'Jacobin' },
+  // Right / right-center outlets
+  { url: 'https://thedispatch.com/feed/', sourceName: 'The Dispatch' },
+  { url: 'https://www.nationalreview.com/feed/', sourceName: 'National Review' },
+  { url: 'https://reason.com/feed/', sourceName: 'Reason' },
+  { url: 'https://www.washingtontimes.com/rss/headlines/news/politics/', sourceName: 'Washington Times' },
+  // Center / nonpartisan outlets
+  { url: 'https://www.pbs.org/newshour/feeds/rss/politics', sourceName: 'PBS NewsHour' },
+  { url: 'https://api.axios.com/feed/', sourceName: 'Axios' },
+  { url: 'https://feeds.bbci.co.uk/news/world/us_and_canada/rss.xml', sourceName: 'BBC News' },
+  { url: 'https://rollcall.com/feed/', sourceName: 'Roll Call' },
+  { url: 'https://stateline.org/feed/', sourceName: 'Stateline' },
+  // Military / defense
+  { url: 'https://www.militarytimes.com/arc/outboundfeeds/rss/category/news/pentagon-congress/?outputType=xml', sourceName: 'Military Times' },
 ];
 
 const CACHE_KEY = 'civic-news';
@@ -121,11 +144,22 @@ function normalizeTitle(title: string): string {
 // Source authority ranking (lower = more authoritative)
 const SOURCE_AUTHORITY: Record<string, number> = {
   'AP News': 1,
+  'Reuters': 1,
+  'PBS NewsHour': 2,
+  'BBC News': 2,
   'NPR': 2,
   'ProPublica': 3,
-  'The Intercept': 4,
-  'Politico': 5,
-  'The Hill': 6,
+  'Roll Call': 3,
+  'Axios': 4,
+  'Politico': 4,
+  'The Hill': 5,
+  'The Intercept': 5,
+  'The Dispatch': 5,
+  'National Review': 5,
+  'Reason': 5,
+  'Washington Times': 6,
+  'Stateline': 6,
+  'Military Times': 6,
   'Drop Site News': 7,
   'Democracy Now!': 7,
   'Truthout': 8,
@@ -332,9 +366,9 @@ export async function GET() {
       return db - da;
     });
 
-    // Topic-aware diversity cap, then take top 20
+    // Topic-aware diversity cap, then take top 30
     const diverseArticles = applyTopicCaps(dedupedArticles);
-    const articles = diverseArticles.slice(0, 20);
+    const articles = diverseArticles.slice(0, 30);
 
     // Cache result
     await supabase
