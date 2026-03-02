@@ -8,6 +8,7 @@ import {
   getCommitteesForMember,
 } from '@/lib/legislators';
 import ProfileClient from './ProfileClient';
+import RepPublicData from './RepPublicData';
 
 // Build a state code → slug map
 const STATE_SLUG_MAP: Record<string, string> = {};
@@ -372,6 +373,9 @@ export default async function RepProfilePage({ params }: RepPageProps) {
 
       {/* Client component for dynamic data */}
       <ProfileClient bioguideId={bioguideId} name={fullName} />
+
+      {/* Public voting, finance, lobbying data */}
+      <RepPublicData bioguideId={bioguideId} name={fullName} />
 
       {/* Bottom CTA */}
       <div className="flex flex-col sm:flex-row items-center justify-center gap-4 py-8 border-t border-gray-200 dark:border-gray-700 mt-8">

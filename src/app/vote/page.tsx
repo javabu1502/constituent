@@ -278,6 +278,34 @@ export default function VotePage() {
           </div>
         )}
 
+        {/* Your Representatives */}
+        {stateData && (
+          <div className="mb-6 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
+            <h3 className="font-semibold text-gray-900 dark:text-white text-sm mb-2">
+              Your {stateData.name} Representatives
+            </h3>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
+              {stateData.houseSeats} House seat{stateData.houseSeats !== 1 ? 's' : ''}
+              {stateData.senateRace2026 ? ' + Senate race in 2026' : ' — no Senate race in 2026'}
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <Link
+                href={`/states/${US_STATES.find((s) => s.code === stateData.abbreviation)?.name.toLowerCase().replace(/\s+/g, '-')}`}
+                className="text-sm text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 font-medium transition-colors"
+              >
+                View {stateData.name} delegation
+              </Link>
+              <span className="text-gray-300 dark:text-gray-600">|</span>
+              <Link
+                href="/contact"
+                className="text-sm text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 font-medium transition-colors"
+              >
+                Contact your reps
+              </Link>
+            </div>
+          </div>
+        )}
+
         {stateData ? (
           <>
             {/* Quick Action Cards */}

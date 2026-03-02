@@ -1,65 +1,67 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { createAdminClient } from '@/lib/supabase';
-import { createClient } from '@/lib/supabase/server';
+import { getFederalLegislatorBio } from '@/lib/legislators';
 import { committeesToIssueCodes } from '@/lib/lobbying-constants';
-import { fetchCommittees, getRecentQuarters, fetchLdaFilings, filterAndExtract, findLobbyingConnections, DELAY_MS, sleep } from '@/lib/lobbying-data';
+import {
+  fetchCommittees,
+  getRecentQuarters,
+  fetchLdaFilings,
+  filterAndExtract,
+  DELAY_MS,
+  sleep,
+} from '@/lib/lobbying-data';
 import type { LdaFiling } from '@/lib/lobbying-data';
 import type {
   LobbyingResponse,
   LobbyingIssueArea,
   LobbyingClient,
   LobbyingFirm,
-  LobbyingConnection,
-  Official,
-  FecContributor,
 } from '@/lib/types';
 
-const CACHE_TTL_MS = 7 * 24 * 60 * 60 * 1000; // 7 days — lobbying data is quarterly
+const CACHE_TTL_MS = 7 * 24 * 60 * 60 * 1000; // 7 days
+const PUBLIC_USER_ID = '00000000-0000-0000-0000-000000000000';
 
-export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url);
-  const repId = searchParams.get('repId');
-  const chamber = searchParams.get('chamber'); // 'senate' or 'house'
+export async function GET(
+  request: NextRequest,
+  { params }: { params: Promise<{ bioguideId: string }> }
+) {
+  const { bioguideId } = await params;
 
-  if (!repId || !chamber) {
-    return NextResponse.json({ error: 'repId and chamber are required' }, { status: 400 });
-  }
-
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
-
-  if (!user) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  if (!bioguideId) {
+    return NextResponse.json({ error: 'bioguideId is required' }, { status: 400 });
   }
 
   const admin = createAdminClient();
-  const cacheKey = `lobbying-${repId}`;
+  const cacheKey = `public-lobbying-${bioguideId}`;
 
   // Check cache
   const { data: cached } = await admin
     .from('feed_cache')
     .select('data, fetched_at')
-    .eq('user_id', user.id)
+    .eq('user_id', PUBLIC_USER_ID)
     .eq('feed_type', cacheKey)
     .single();
 
   if (cached && Date.now() - new Date(cached.fetched_at).getTime() < CACHE_TTL_MS) {
-    return NextResponse.json(cached.data as LobbyingResponse);
+    return NextResponse.json(cached.data as LobbyingResponse, {
+      headers: { 'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400' },
+    });
   }
 
-  // Get rep info from profile
-  const { data: profile } = await admin
-    .from('profiles')
-    .select('representatives')
-    .eq('user_id', user.id)
-    .single();
+  // Look up legislator to determine chamber and name
+  const bio = getFederalLegislatorBio(bioguideId);
+  if (!bio) {
+    return NextResponse.json({ error: 'Legislator not found' }, { status: 404 });
+  }
 
-  const reps = (profile?.representatives ?? []) as Official[];
-  const rep = reps.find((r) => r.id === repId);
-  const repName = rep?.name ?? 'Representative';
+  const repName = bio.name.official_full || `${bio.name.first} ${bio.name.last}`;
+
+  // Determine chamber from the most recent term
+  const currentTerm = bio.terms[bio.terms.length - 1];
+  const chamber = currentTerm?.type === 'sen' ? 'senate' : 'house';
 
   // Fetch committee assignments from Congress.gov
-  const committees = await fetchCommittees(repId);
+  const committees = await fetchCommittees(bioguideId);
   const issueCodes = new Set(committeesToIssueCodes(committees));
 
   // Fetch LDA filings for recent quarters
@@ -116,32 +118,16 @@ export async function GET(request: Request) {
     .sort((a, b) => b.income - a.income)
     .slice(0, 10);
 
-  // Cross-reference with FEC data for lobbying connections
-  let lobbyingConnections: LobbyingConnection[] = [];
-  const { data: financeCache } = await admin
-    .from('feed_cache')
-    .select('data')
-    .eq('user_id', user.id)
-    .eq('feed_type', 'finance')
-    .single();
-
-  if (financeCache?.data) {
-    const financeData = financeCache.data as { finance?: Record<string, { top_contributors?: FecContributor[] }> };
-    const repFinance = financeData.finance?.[repId];
-    if (repFinance?.top_contributors) {
-      lobbyingConnections = findLobbyingConnections(repFinance.top_contributors, clientMap);
-    }
-  }
-
+  // No lobbying connections for public version (no user finance cache)
   const payload: LobbyingResponse = {
-    rep_id: repId,
+    rep_id: bioguideId,
     rep_name: repName,
     committees,
     issue_areas: issueAreas,
     top_clients: topClients,
     top_firms: topFirms,
     recent_filings: sortedRecentFilings,
-    lobbying_connections: lobbyingConnections,
+    lobbying_connections: [],
     quarters_covered: quarters.map((q) => q.label),
   };
 
@@ -149,9 +135,11 @@ export async function GET(request: Request) {
   await admin
     .from('feed_cache')
     .upsert(
-      { user_id: user.id, feed_type: cacheKey, data: payload, fetched_at: new Date().toISOString() },
+      { user_id: PUBLIC_USER_ID, feed_type: cacheKey, data: payload, fetched_at: new Date().toISOString() },
       { onConflict: 'user_id,feed_type' }
     );
 
-  return NextResponse.json(payload);
+  return NextResponse.json(payload, {
+    headers: { 'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400' },
+  });
 }

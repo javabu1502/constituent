@@ -58,7 +58,7 @@ export async function POST(request: NextRequest) {
   try {
     const supabase = createAdminClient();
 
-    const { error } = await supabase.from('messages').insert({
+    const { data, error } = await supabase.from('messages').insert({
       advocate_name: body.advocate_name,
       advocate_email: body.advocate_email || null,
       advocate_city: body.advocate_city,
@@ -76,7 +76,7 @@ export async function POST(request: NextRequest) {
       delivery_status: body.delivery_status,
       user_id: body.user_id || null,
       campaign_id: body.campaign_id || null,
-    });
+    }).select('id').single();
 
     if (error) {
       console.error('[track-send] Supabase insert error:', error);
@@ -86,7 +86,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ success: true, shareId: data?.id });
   } catch (err) {
     console.error('[track-send] Unexpected error:', err);
     return NextResponse.json(

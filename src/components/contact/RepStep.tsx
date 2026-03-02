@@ -150,7 +150,7 @@ export function RepStep({ state, dispatch, onBack }: RepStepProps) {
       dispatch({ type: 'SET_ERROR', payload: 'Please select at least one representative' });
       return;
     }
-    dispatch({ type: 'GO_TO_STEP', payload: 'method' });
+    dispatch({ type: 'GO_TO_STEP', payload: 'topic' });
   };
 
   return (

@@ -7,10 +7,10 @@ import { createClient } from '@/lib/supabase/client';
 import type { Official, Address } from '@/lib/types';
 import { AddressStep } from './AddressStep';
 import { RepStep } from './RepStep';
-import { MethodStep } from './MethodStep';
 import { TopicStep } from './TopicStep';
 import { MessageStep } from './MessageStep';
 import { SendStep } from './SendStep';
+import { ShareActions } from './ShareActions';
 
 // Per-official message
 export interface OfficialMessage {
@@ -20,7 +20,8 @@ export interface OfficialMessage {
 
 // State shape
 export interface ContactState {
-  step: 'address' | 'representative' | 'method' | 'topic' | 'message' | 'send' | 'success';
+  step: 'address' | 'representative' | 'topic' | 'message' | 'send' | 'success';
+  shareId: string | null;
   address: Address | null;
   officials: Official[];
   selectedReps: Official[];
@@ -59,6 +60,7 @@ type ContactAction =
   | { type: 'SET_LOADING_ID'; payload: { officialId: string; loading: boolean } }
   | { type: 'SET_LOADING'; payload: boolean }
   | { type: 'SET_ERROR'; payload: string | null }
+  | { type: 'SET_SHARE_ID'; payload: string }
   | { type: 'GO_TO_STEP'; payload: ContactState['step'] }
   | { type: 'RESET' };
 
@@ -78,6 +80,7 @@ const initialState: ContactState = {
   loadingIds: new Set(),
   isLoading: false,
   error: null,
+  shareId: null,
 };
 
 function contactReducer(state: ContactState, action: ContactAction): ContactState {
@@ -144,6 +147,8 @@ function contactReducer(state: ContactState, action: ContactAction): ContactStat
       return { ...state, isLoading: action.payload };
     case 'SET_ERROR':
       return { ...state, error: action.payload };
+    case 'SET_SHARE_ID':
+      return { ...state, shareId: action.payload };
     case 'GO_TO_STEP':
       return { ...state, step: action.payload, error: null };
     case 'RESET':
@@ -153,11 +158,10 @@ function contactReducer(state: ContactState, action: ContactAction): ContactStat
   }
 }
 
-const STEPS = ['address', 'representative', 'method', 'topic', 'message', 'send'] as const;
+const STEPS = ['address', 'representative', 'topic', 'message', 'send'] as const;
 const STEP_LABELS: Record<string, string> = {
   address: 'Address',
   representative: 'Representatives',
-  method: 'Method',
   topic: 'Your Message',
   message: 'Review',
   send: 'Send',
@@ -192,8 +196,7 @@ export function ContactFlow() {
 
     // Helper: decide which step to skip to after rep selection
     const getTargetStep = (): ContactState['step'] => {
-      if (deepIssue) return 'topic'; // rep selected + issue pre-filled → skip to topic
-      return 'method';
+      return 'topic';
     };
 
     const supabase = createClient();
@@ -316,6 +319,13 @@ export function ContactFlow() {
                 Contacted <strong>{state.selectedReps.length} representative{state.selectedReps.length > 1 ? 's' : ''}</strong> about <strong>{state.issue}</strong>
               </p>
             </div>
+            {state.shareId && (
+              <ShareActions
+                shareId={state.shareId}
+                repName={state.selectedReps.length === 1 ? state.selectedReps[0].name : `${state.selectedReps.length} representatives`}
+                issue={state.issue}
+              />
+            )}
             <button
               onClick={() => dispatch({ type: 'RESET' })}
               className="w-full py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-medium transition-colors"
@@ -413,9 +423,6 @@ export function ContactFlow() {
         )}
         {state.step === 'representative' && (
           <RepStep state={state} dispatch={dispatch} onBack={goBack} />
-        )}
-        {state.step === 'method' && (
-          <MethodStep state={state} dispatch={dispatch} onBack={goBack} />
         )}
         {state.step === 'topic' && (
           <TopicStep state={state} dispatch={dispatch} onBack={goBack} />

@@ -468,7 +468,14 @@ export function SendStep({ state, dispatch, onBack }: SendStepProps) {
         delivery_status: deliveryStatus,
         user_id: userId || undefined,
       }),
-    }).catch((err) => console.error('[track-send] Failed:', err));
+    })
+      .then((res) => res.ok ? res.json() : null)
+      .then((data) => {
+        if (data?.shareId) {
+          dispatch({ type: 'SET_SHARE_ID', payload: data.shareId });
+        }
+      })
+      .catch((err) => console.error('[track-send] Failed:', err));
   };
 
   const handleDone = () => {

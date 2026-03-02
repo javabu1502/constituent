@@ -6,6 +6,7 @@ export async function GET(req: NextRequest) {
   const { searchParams } = req.nextUrl;
   const period = searchParams.get('period') || 'all';
   const level = searchParams.get('level') || 'all';
+  const stateParam = searchParams.get('state');
 
   const admin = createAdminClient();
 
@@ -24,6 +25,10 @@ export async function GET(req: NextRequest) {
 
   if (level !== 'all') {
     issueQuery = issueQuery.eq('legislator_level', level);
+  }
+
+  if (stateParam) {
+    issueQuery = issueQuery.eq('advocate_state', stateParam);
   }
 
   const { data: filteredMessages } = await issueQuery;

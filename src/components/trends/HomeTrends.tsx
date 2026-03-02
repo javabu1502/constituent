@@ -83,9 +83,17 @@ export function HomeTrends() {
                     <span className="text-sm font-medium text-gray-900 dark:text-white truncate">
                       {issue.issue_area}
                     </span>
-                    <span className="text-sm text-gray-500 dark:text-gray-400 ml-2 shrink-0">
-                      {issue.count.toLocaleString()}
-                    </span>
+                    <div className="flex items-center ml-2 shrink-0">
+                      <span className="text-sm text-gray-500 dark:text-gray-400">
+                        {issue.count.toLocaleString()}
+                      </span>
+                      <Link
+                        href={`/contact?issue=${encodeURIComponent(issue.issue_area)}`}
+                        className="text-xs text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 font-medium ml-2 shrink-0"
+                      >
+                        Write about this
+                      </Link>
+                    </div>
                   </div>
                   <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
                     <div

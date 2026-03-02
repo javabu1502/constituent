@@ -6,6 +6,7 @@ import { findSenators, findAllRepresentatives } from '@/lib/legislators';
 import { getStateLegislators, toOfficial } from '@/lib/state-legislators';
 import type { Official } from '@/lib/types';
 import voterInfoData from '@/data/voter-info.json';
+import { StateTrends } from './StateTrends';
 
 // Voter info type derived from the JSON structure
 interface VoterInfo {
@@ -387,6 +388,9 @@ export default async function StateHubPage({ params }: StatePageProps) {
           </div>
         )}
       </section>
+
+      {/* Trending Issues */}
+      <StateTrends stateCode={stateInfo.code} stateName={stateInfo.name} />
 
       {/* State Legislature */}
       {!isDC && (

@@ -210,27 +210,23 @@ export default function ProfileClient({
         </section>
       )}
 
-      {/* Activity CTA */}
-      <div className="bg-gray-50 dark:bg-gray-800/50 rounded-xl border border-gray-200 dark:border-gray-700 p-5 text-center">
-        <p className="text-gray-600 dark:text-gray-400 text-sm mb-3">
-          View full voting record and legislation on your dashboard
-        </p>
-        <div className="flex items-center justify-center gap-4 flex-wrap">
-          <Link
-            href="/dashboard"
-            className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white text-sm font-medium rounded-lg transition-colors"
-          >
-            Open Dashboard
-          </Link>
-          <a
-            href={`https://www.congress.gov/member/${name.toLowerCase().replace(/\s+/g, '-')}/${bioguideId}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-sm text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 font-medium"
-          >
-            View on Congress.gov
-          </a>
-        </div>
+      {/* Dashboard + Congress.gov links */}
+      <div className="flex items-center justify-center gap-4 flex-wrap text-sm">
+        <Link
+          href="/login"
+          className="text-gray-500 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
+        >
+          Sign in for your personalized dashboard
+        </Link>
+        <span className="text-gray-300 dark:text-gray-600">|</span>
+        <a
+          href={`https://www.congress.gov/member/${name.toLowerCase().replace(/\s+/g, '-')}/${bioguideId}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 font-medium"
+        >
+          View on Congress.gov
+        </a>
       </div>
     </div>
   );

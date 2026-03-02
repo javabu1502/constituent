@@ -713,15 +713,19 @@ function LegislatorsContent() {
           )}
 
           {!selectedState && (
-            <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-8 text-center">
-              <div className="w-16 h-16 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg className="w-8 h-8 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
+            <div>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Browse by State</h3>
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
+                {US_STATES.filter((s) => s.code !== 'DC').map((s) => (
+                  <Link
+                    key={s.code}
+                    href={`/legislators/${s.name.toLowerCase().replace(/\s+/g, '-')}`}
+                    className="px-3 py-2 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 text-sm text-gray-700 dark:text-gray-300 hover:border-purple-400 dark:hover:border-purple-500 hover:text-purple-600 dark:hover:text-purple-400 transition-colors text-center"
+                  >
+                    {s.name}
+                  </Link>
+                ))}
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Select a State</h3>
-              <p className="text-gray-600 dark:text-gray-400">Choose a state from the dropdown above to browse its legislators.</p>
             </div>
           )}
         </>
