@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { US_STATES } from '@/lib/constants';
+import { StatePicker } from '@/components/ui/StatePicker';
 
 export const metadata: Metadata = {
   title: 'All 50 States & DC — Voting Info, Representatives & Elections | My Democracy',
@@ -70,18 +71,28 @@ export default function StatesIndexPage() {
         </p>
       </div>
 
-      {/* State grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
-        {US_STATES.map((s) => (
-          <Link
-            key={s.code}
-            href={`/states/${s.name.toLowerCase().replace(/\s+/g, '-')}`}
-            className="px-3 py-2 bg-white dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600 text-sm text-gray-700 dark:text-gray-300 hover:border-purple-400 dark:hover:border-purple-500 hover:text-purple-600 dark:hover:text-purple-400 transition-colors text-center"
-          >
-            {s.name}
-          </Link>
-        ))}
+      {/* State search */}
+      <div className="mb-8">
+        <StatePicker />
       </div>
+
+      {/* State grid (expandable for browsing / SEO) */}
+      <details>
+        <summary className="cursor-pointer text-sm font-medium text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 mb-4">
+          View all states
+        </summary>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
+          {US_STATES.map((s) => (
+            <Link
+              key={s.code}
+              href={`/states/${s.name.toLowerCase().replace(/\s+/g, '-')}`}
+              className="px-3 py-2 bg-white dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600 text-sm text-gray-700 dark:text-gray-300 hover:border-purple-400 dark:hover:border-purple-500 hover:text-purple-600 dark:hover:text-purple-400 transition-colors text-center"
+            >
+              {s.name}
+            </Link>
+          ))}
+        </div>
+      </details>
     </div>
   );
 }
