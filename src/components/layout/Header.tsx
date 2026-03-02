@@ -49,6 +49,12 @@ export async function Header() {
               Guides
             </Link>
             <Link
+              href="/regulations"
+              className="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
+            >
+              Regulations
+            </Link>
+            <Link
               href="/campaigns"
               className="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
             >

@@ -10,6 +10,7 @@ const FOOTER_COLUMNS = [
       { href: '/news', label: 'News' },
       { href: '/trends', label: 'Trends' },
       { href: '/vote', label: 'Vote' },
+      { href: '/regulations', label: 'Regulations' },
     ],
   },
   {

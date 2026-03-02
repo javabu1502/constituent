@@ -91,6 +91,13 @@ export function MobileNav({ user }: { user: User | null }) {
             Guides
           </Link>
           <Link
+            href="/regulations"
+            onClick={() => setOpen(false)}
+            className="block px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+          >
+            Regulations
+          </Link>
+          <Link
             href="/campaigns"
             onClick={() => setOpen(false)}
             className="block px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"

@@ -10,6 +10,7 @@ import stateMetaData from '@/data/state-meta.json';
 import advocacyOrgsData from '@/data/advocacy-orgs.json';
 import { StateTrends } from './StateTrends';
 import { BillSearch } from '@/components/bills/BillSearch';
+import { FederalSpending } from '@/components/spending/FederalSpending';
 
 // ── Types ────────────────────────────────────────────────────────────────────
 
@@ -548,6 +549,14 @@ export default async function StateHubPage({ params }: StatePageProps) {
       {/* Trending Issues */}
       {/* ═══════════════════════════════════════════════════════════════════ */}
       <StateTrends stateCode={stateInfo.code} stateName={stateInfo.name} />
+
+      {/* ═══════════════════════════════════════════════════════════════════ */}
+      {/* Federal Spending */}
+      {/* ═══════════════════════════════════════════════════════════════════ */}
+      <section className="mb-10">
+        <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Federal Spending in {stateInfo.name}</h2>
+        <FederalSpending stateCode={stateInfo.code} stateName={stateInfo.name} />
+      </section>
 
       {/* ═══════════════════════════════════════════════════════════════════ */}
       {/* State Legislature */}
