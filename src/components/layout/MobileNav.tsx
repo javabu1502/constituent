@@ -51,23 +51,23 @@ export function MobileNav({ user }: { user: User | null }) {
           <Link
             href="/contact"
             onClick={() => setOpen(false)}
-            className="block px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+            className="block px-4 py-2.5 text-sm font-medium text-purple-700 dark:text-purple-300 bg-purple-50 dark:bg-purple-900/20 hover:bg-purple-100 dark:hover:bg-purple-900/30 transition-colors"
           >
-            Contact Officials
+            Contact Your Reps
           </Link>
           <Link
-            href="/vote"
+            href="/legislators"
             onClick={() => setOpen(false)}
             className="block px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
           >
-            Vote
+            Legislators
           </Link>
           <Link
-            href="/campaigns"
+            href="/news"
             onClick={() => setOpen(false)}
             className="block px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
           >
-            Campaigns
+            News
           </Link>
           <Link
             href="/trends"
@@ -77,6 +77,13 @@ export function MobileNav({ user }: { user: User | null }) {
             Trends
           </Link>
           <Link
+            href="/vote"
+            onClick={() => setOpen(false)}
+            className="block px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+          >
+            Vote
+          </Link>
+          <Link
             href="/guides"
             onClick={() => setOpen(false)}
             className="block px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
@@ -84,9 +91,20 @@ export function MobileNav({ user }: { user: User | null }) {
             Guides
           </Link>
           <Link
-            href="/about"
+            href="/campaigns"
             onClick={() => setOpen(false)}
             className="block px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+          >
+            Campaigns
+          </Link>
+
+          <div className="border-t border-gray-100 dark:border-gray-700 my-1" />
+
+          <p className="px-4 py-1.5 text-xs font-medium text-gray-400 dark:text-gray-500 uppercase tracking-wider">More</p>
+          <Link
+            href="/about"
+            onClick={() => setOpen(false)}
+            className="block px-4 py-2.5 text-sm text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
           >
             About
           </Link>
@@ -95,7 +113,7 @@ export function MobileNav({ user }: { user: User | null }) {
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => setOpen(false)}
-            className="block px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+            className="block px-4 py-2.5 text-sm text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
           >
             Support
           </a>

@@ -1,6 +1,8 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
+import Link from 'next/link';
+import { CivicNews } from '@/components/news/CivicNews';
 
 interface Subtopic {
   name: string;
@@ -77,6 +79,13 @@ function IssueBar({
               <span className="text-sm text-gray-500 dark:text-gray-400">
                 {issue.count.toLocaleString()}
               </span>
+              <Link
+                href={`/contact?issue=${encodeURIComponent(issue.issue_area)}`}
+                onClick={(e) => e.stopPropagation()}
+                className="text-xs text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 font-medium"
+              >
+                Write about this
+              </Link>
               {hasSubtopics && <ChevronIcon open={expanded} />}
             </div>
           </div>
@@ -100,9 +109,17 @@ function IssueBar({
                   <span className="text-xs font-medium text-gray-700 dark:text-gray-300 truncate">
                     {sub.name}
                   </span>
-                  <span className="text-xs text-gray-400 dark:text-gray-500 ml-2 shrink-0">
-                    {sub.count.toLocaleString()}
-                  </span>
+                  <div className="flex items-center gap-2 ml-2 shrink-0">
+                    <span className="text-xs text-gray-400 dark:text-gray-500">
+                      {sub.count.toLocaleString()}
+                    </span>
+                    <Link
+                      href={`/contact?issue=${encodeURIComponent(sub.name)}`}
+                      className="text-xs text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 font-medium"
+                    >
+                      Write about this
+                    </Link>
+                  </div>
                 </div>
                 <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1.5">
                   <div
@@ -249,6 +266,20 @@ export function TrendsContent() {
             ))}
           </div>
         )}
+      </div>
+
+      {/* In the News */}
+      <div>
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white">In the News</h2>
+          <Link
+            href="/news"
+            className="text-sm font-medium text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 transition-colors"
+          >
+            See all news &rarr;
+          </Link>
+        </div>
+        <CivicNews limit={3} compact />
       </div>
 
       {/* State Section */}

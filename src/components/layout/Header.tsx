@@ -20,21 +20,21 @@ export async function Header() {
           <nav className="hidden md:flex items-center gap-6">
             <Link
               href="/contact"
-              className="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
+              className="px-3 py-1.5 bg-purple-600 text-white text-sm font-medium rounded-lg hover:bg-purple-700 transition-colors"
             >
-              Contact Officials
+              Contact Your Reps
             </Link>
             <Link
-              href="/vote"
+              href="/legislators"
               className="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
             >
-              Vote
+              Legislators
             </Link>
             <Link
-              href="/campaigns"
+              href="/news"
               className="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
             >
-              Campaigns
+              News
             </Link>
             <Link
               href="/trends"
@@ -43,25 +43,23 @@ export async function Header() {
               Trends
             </Link>
             <Link
+              href="/vote"
+              className="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
+            >
+              Vote
+            </Link>
+            <Link
               href="/guides"
               className="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
             >
               Guides
             </Link>
             <Link
-              href="/about"
+              href="/campaigns"
               className="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
             >
-              About
+              Campaigns
             </Link>
-            <a
-              href="https://buymeacoffee.com/mydemocracy"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
-            >
-              Support
-            </a>
             <UserMenu user={user} />
           </nav>
 
