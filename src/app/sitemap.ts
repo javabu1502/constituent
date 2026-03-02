@@ -1,5 +1,7 @@
 import type { MetadataRoute } from 'next';
 import { createAdminClient } from '@/lib/supabase';
+import { US_STATES } from '@/lib/constants';
+import { getAllFederalLegislators } from '@/lib/legislators';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://www.mydemocracy.app';
@@ -44,5 +46,31 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Supabase unavailable at build time — skip dynamic campaigns
   }
 
-  return [...staticPages, ...campaignPages];
+  // State hub pages (higher priority — comprehensive info hubs)
+  const stateHubPages: MetadataRoute.Sitemap = US_STATES.map((s) => ({
+    url: `${baseUrl}/states/${s.name.toLowerCase().replace(/\s+/g, '-')}`,
+    changeFrequency: 'weekly' as const,
+    priority: 0.8,
+  }));
+
+  // State legislator pages
+  const statePages: MetadataRoute.Sitemap = US_STATES.map((s) => ({
+    url: `${baseUrl}/legislators/${s.name.toLowerCase().replace(/\s+/g, '-')}`,
+    changeFrequency: 'weekly' as const,
+    priority: 0.7,
+  }));
+
+  // States index page
+  const statesIndexPage: MetadataRoute.Sitemap = [
+    { url: `${baseUrl}/states`, changeFrequency: 'monthly', priority: 0.8 },
+  ];
+
+  // Individual legislator profile pages
+  const repPages: MetadataRoute.Sitemap = getAllFederalLegislators().map((leg) => ({
+    url: `${baseUrl}/rep/${leg.id}`,
+    changeFrequency: 'weekly' as const,
+    priority: 0.7,
+  }));
+
+  return [...staticPages, ...statesIndexPage, ...stateHubPages, ...statePages, ...repPages, ...campaignPages];
 }

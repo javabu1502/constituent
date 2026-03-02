@@ -646,6 +646,24 @@ export function findAllRepresentatives(stateCode: string): Official[] {
 }
 
 /**
+ * Get all current federal legislators (senators + representatives)
+ */
+export function getAllFederalLegislators(): Official[] {
+  const legislators = loadFederalLegislators();
+  const socialMedia = loadFederalSocialMedia();
+  const officials: Official[] = [];
+
+  for (const legislator of legislators) {
+    const term = getCurrentTerm(legislator);
+    if (term) {
+      officials.push(federalToOfficial(legislator, term, socialMedia.get(legislator.id.bioguide)));
+    }
+  }
+
+  return officials;
+}
+
+/**
  * Find all state legislators for a state (for listing purposes)
  */
 export function findAllStateLegislators(stateCode: string): Official[] {
