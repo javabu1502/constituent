@@ -101,9 +101,12 @@ export default function RepPublicData({
 
   return (
     <section className="mb-6">
-      <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-3">
+      <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-1">
         Public Record
       </h2>
+      <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">
+        Official voting history, campaign fundraising, and lobbying activity from public records.
+      </p>
 
       {/* Tabs */}
       <div className="flex gap-1 mb-4">
@@ -128,11 +131,14 @@ export default function RepPublicData({
         ) : tab === 'votes' ? (
           votesData ? (
             <div className="space-y-4">
+              <p className="text-xs text-gray-500 dark:text-gray-400">
+                Roll call votes are how Congress officially records each member&apos;s position on legislation. Yea = voted yes, Nay = voted no. Participation rate shows how often this member voted (Congress average is ~96%).
+              </p>
               {/* Summary stats */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                 <StatCard label="Total Votes" value={votesData.summary.total_votes.toLocaleString()} />
-                <StatCard label="Yea" value={votesData.summary.yea_votes.toLocaleString()} />
-                <StatCard label="Nay" value={votesData.summary.nay_votes.toLocaleString()} />
+                <StatCard label="Voted Yes" value={votesData.summary.yea_votes.toLocaleString()} />
+                <StatCard label="Voted No" value={votesData.summary.nay_votes.toLocaleString()} />
                 <StatCard label="Participation" value={`${votesData.summary.participation_rate}%`} />
               </div>
 
@@ -178,20 +184,26 @@ export default function RepPublicData({
         ) : tab === 'funding' ? (
           financeData ? (
             <div className="space-y-4">
+              <p className="text-xs text-gray-500 dark:text-gray-400">
+                Campaign finance data from the Federal Election Commission (FEC). &quot;Individual&quot; means donations from people. &quot;PAC&quot; (Political Action Committee) means donations from organizations like unions, corporations, or interest groups. &quot;Cash on Hand&quot; is money remaining in the campaign account.
+              </p>
               {/* Summary stats */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                 <StatCard label="Total Raised" value={formatMoney(financeData.total_raised)} />
-                <StatCard label="Individual" value={formatMoney(financeData.individual_contributions)} />
-                <StatCard label="PAC" value={formatMoney(financeData.pac_contributions)} />
+                <StatCard label="From Individuals" value={formatMoney(financeData.individual_contributions)} />
+                <StatCard label="From PACs" value={formatMoney(financeData.pac_contributions)} />
                 <StatCard label="Cash on Hand" value={formatMoney(financeData.cash_on_hand)} />
               </div>
 
               {/* Top contributors */}
               {financeData.top_contributors.length > 0 && (
                 <div>
-                  <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                  <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
                     Top Contributors (by employer)
                   </h3>
+                  <p className="text-xs text-gray-400 dark:text-gray-500 mb-2">
+                    These are individual donations grouped by where donors work. Corporations cannot donate directly to campaigns.
+                  </p>
                   <div className="space-y-1">
                     {financeData.top_contributors.slice(0, 10).map((c, i) => (
                       <div
@@ -241,12 +253,18 @@ export default function RepPublicData({
         ) : tab === 'lobbying' ? (
           lobbyingData && (lobbyingData.issue_areas.length > 0 || lobbyingData.top_clients.length > 0) ? (
             <div className="space-y-4">
+              <p className="text-xs text-gray-500 dark:text-gray-400">
+                Lobbying means hiring professionals to advocate to lawmakers on specific issues. Companies, unions, and nonprofits are required by law to report this activity. The data below shows which industries and organizations are actively lobbying on issues this member oversees.
+              </p>
               {/* Top issue areas */}
               {lobbyingData.issue_areas.length > 0 && (
                 <div>
-                  <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                  <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
                     Top Lobbying Issue Areas
                   </h3>
+                  <p className="text-xs text-gray-400 dark:text-gray-500 mb-2">
+                    Dollar amounts are total fees paid to lobbying firms for each issue area.
+                  </p>
                   <div className="space-y-1">
                     {lobbyingData.issue_areas.slice(0, 5).map((area) => {
                       const maxIncome = lobbyingData.issue_areas[0]?.total_income ?? 1;
@@ -305,9 +323,12 @@ export default function RepPublicData({
               {/* Lobbying connections */}
               {lobbyingData.lobbying_connections.length > 0 && (
                 <div>
-                  <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                  <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
                     Donor-Lobbying Connections
                   </h3>
+                  <p className="text-xs text-gray-400 dark:text-gray-500 mb-2">
+                    Organizations that both donated to this member&apos;s campaign and lobbied on issues they oversee. Overlap does not imply impropriety.
+                  </p>
                   <div className="space-y-1">
                     {lobbyingData.lobbying_connections.slice(0, 5).map((conn) => (
                       <div

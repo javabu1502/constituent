@@ -306,12 +306,13 @@ export function IssuePicker({ value, category, onChange }: IssuePickerProps) {
           placeholder='Search topics, e.g. "child care", "student loans"'
           className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
           role="combobox"
+          aria-controls="issue-picker-listbox"
           aria-expanded={isOpen}
           aria-haspopup="listbox"
           autoComplete="off"
         />
         {isOpen && (
-          <div ref={listRef} role="listbox" className="absolute z-50 w-full mt-1 max-h-60 overflow-y-auto bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-xl shadow-lg">
+          <div ref={listRef} id="issue-picker-listbox" role="listbox" className="absolute z-50 w-full mt-1 max-h-60 overflow-y-auto bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-xl shadow-lg">
             {results.length === 0 && (
               <div className="px-4 py-3 text-sm text-gray-500 dark:text-gray-400">No matching topics</div>
             )}

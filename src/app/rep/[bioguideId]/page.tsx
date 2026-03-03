@@ -252,9 +252,12 @@ export default async function RepProfilePage({ params }: RepPageProps) {
       {/* Committee Assignments */}
       {committees.length > 0 && (
         <section className="mb-6">
-          <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-3">
+          <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-1">
             Committee Assignments
           </h2>
+          <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">
+            Committees review legislation and conduct oversight in specific policy areas. A member&apos;s committee assignments largely determine which issues they can most directly influence.
+          </p>
           <div className="flex flex-wrap gap-2">
             {committees.map((c) => (
               <span

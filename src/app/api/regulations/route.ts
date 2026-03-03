@@ -53,18 +53,6 @@ export async function GET(request: NextRequest) {
 
     if (mode === 'executive_orders') {
       // Fetch recent executive orders
-      const params = new URLSearchParams({
-        'conditions[type][]': 'PRESDOCU',
-        'conditions[presidential_document_type][]': 'executive_order',
-        'order': 'newest',
-        'per_page': '20',
-        'page': String(page),
-        'fields[]': [
-          'document_number', 'title', 'type', 'abstract', 'html_url',
-          'pdf_url', 'publication_date', 'agencies', 'subtype',
-        ].join(','),
-      });
-      // fields[] needs to be repeated
       url = `${FR_API}/documents.json?conditions[type][]=PRESDOCU&conditions[presidential_document_type][]=executive_order&order=newest&per_page=20&page=${page}&fields[]=document_number&fields[]=title&fields[]=type&fields[]=abstract&fields[]=html_url&fields[]=pdf_url&fields[]=publication_date&fields[]=agencies&fields[]=subtype`;
     } else {
       // Build conditions for proposed rules / open comment periods

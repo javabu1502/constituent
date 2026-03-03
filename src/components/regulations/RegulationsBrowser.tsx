@@ -103,7 +103,7 @@ export function RegulationsBrowser() {
   const modes: { key: Mode; label: string; description: string }[] = [
     { key: 'open', label: 'Open for Comment', description: 'Proposed rules accepting public comments right now' },
     { key: 'recent', label: 'Recent Rules', description: 'Recently proposed and finalized federal rules' },
-    { key: 'executive_orders', label: 'Executive Orders', description: 'Recent presidential executive orders' },
+    { key: 'executive_orders', label: 'Executive Orders', description: 'Executive orders are directives from the President that carry the force of law without needing a vote in Congress. They cannot be publicly commented on, but you can contact your representatives if you want Congress to respond.' },
   ];
 
   return (

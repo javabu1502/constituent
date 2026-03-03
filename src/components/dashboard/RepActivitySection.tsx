@@ -8,7 +8,7 @@ import { BillSummarySection } from './BillSummarySection';
 import { RepBioTab } from './RepBioTab';
 import { LobbyingTab } from './LobbyingTab';
 import { RepCardSummary } from './RepCardSummary';
-import { ChevronIcon, CollapsibleSection } from '@/components/ui/CollapsibleSection';
+import { CollapsibleSection } from '@/components/ui/CollapsibleSection';
 
 type Tab = 'by-rep' | 'by-issue';
 type RepSort = 'recent' | 'federal-first' | 'state-first';
@@ -68,11 +68,13 @@ function BillCard({ bill, showWriteAbout = true, userIssues }: { bill: FeedBill;
           {bill.level === 'federal' ? 'Federal' : 'State'}
         </span>
         {bill.sponsorship_type && (
-          <span className={`px-2 py-0.5 text-xs font-medium rounded-full ${
-            bill.sponsorship_type === 'sponsored'
-              ? 'bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-300'
-              : 'bg-teal-100 text-teal-800 dark:bg-teal-900 dark:text-teal-300'
-          }`}>
+          <span
+            title={bill.sponsorship_type === 'sponsored' ? 'This rep introduced this bill' : 'This rep added their support to a bill written by another member'}
+            className={`px-2 py-0.5 text-xs font-medium rounded-full cursor-help ${
+              bill.sponsorship_type === 'sponsored'
+                ? 'bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-300'
+                : 'bg-teal-100 text-teal-800 dark:bg-teal-900 dark:text-teal-300'
+            }`}>
             {bill.sponsorship_type === 'sponsored' ? 'Sponsored' : 'Cosponsored'}
           </span>
         )}
@@ -807,7 +809,7 @@ export function RepActivitySection() {
   const [financeData, setFinanceData] = useState<Record<string, RepFinance>>({});
   const [repLoading, setRepLoading] = useState(true);
   const [issueLoading, setIssueLoading] = useState(true);
-  const [financeLoading, setFinanceLoading] = useState(true);
+  const [, setFinanceLoading] = useState(true);
   const [tab, setTab] = useState<Tab>('by-rep');
   const [repSort, setRepSort] = useState<RepSort>('recent');
 
@@ -941,7 +943,7 @@ export function RepActivitySection() {
       {/* By Representative tab */}
       {tab === 'by-rep' && (
         <div>
-          {byRep.sortedReps.map((rep, repIndex) => {
+          {byRep.sortedReps.map((rep) => {
             const repItems = byRep.groups[rep.id] ?? [];
 
             return (

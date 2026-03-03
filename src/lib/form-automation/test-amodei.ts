@@ -96,7 +96,7 @@ async function fillAmodeiForm(page: Page): Promise<boolean> {
     console.log('Selecting state (Nevada)...');
     try {
       await stateSelect.selectOption({ label: 'Nevada' });
-    } catch (e) {
+    } catch {
       console.log('Could not select state, may already be selected');
     }
   }

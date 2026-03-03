@@ -108,31 +108,42 @@ const DIRECT_FEEDS: { url: string; sourceName: string }[] = [
 const CACHE_KEY = 'civic-news';
 const CACHE_TTL_MS = 2 * 60 * 60 * 1000; // 2 hours
 
-// Keyword-to-policy-area classification
+// Keyword-to-policy-area classification (checked against title + description)
 const TOPIC_PATTERNS: { pattern: RegExp; topic: ArticleTopic }[] = [
-  { pattern: /immigra|border|asylum|migrant|deport|visa|daca|refugee/i, topic: { issue: 'Immigration', issueCategory: 'Immigration' } },
-  { pattern: /health\s?care|medicare|medicaid|obamacare|aca|prescription|opioid|mental health|reproductive/i, topic: { issue: 'Healthcare', issueCategory: 'Health' } },
-  { pattern: /climate|environment|clean energy|renewable|emission|epa|pollution|carbon/i, topic: { issue: 'Climate Change', issueCategory: 'Environmental Protection' } },
-  { pattern: /gun|firearm|second amendment|mass shooting|assault weapon/i, topic: { issue: 'Gun Violence', issueCategory: 'Crime and Law Enforcement' } },
-  { pattern: /education|student loan|school|teacher|college tuition/i, topic: { issue: 'Education', issueCategory: 'Education' } },
-  { pattern: /tax|irs|income tax|corporate tax|tax credit|tariff/i, topic: { issue: 'Tax Reform', issueCategory: 'Taxation' } },
-  { pattern: /housing|rent|homeless|mortgage|affordable home/i, topic: { issue: 'Affordable Housing', issueCategory: 'Housing and Community Development' } },
-  { pattern: /social security|retirement|disability benefit|safety net/i, topic: { issue: 'Social Security', issueCategory: 'Social Welfare' } },
-  { pattern: /veteran|va benefit|military|defense|pentagon/i, topic: { issue: 'Veterans', issueCategory: 'Armed Forces and National Security' } },
-  { pattern: /voting right|election|ballot|gerrymandering|campaign finance/i, topic: { issue: 'Elections', issueCategory: 'Government Operations and Politics' } },
-  { pattern: /supreme court|judicial|judge|legal reform/i, topic: { issue: 'Supreme Court', issueCategory: 'Law' } },
-  { pattern: /economy|inflation|job|unemployment|wage|recession|cost of living/i, topic: { issue: 'Cost of Living', issueCategory: 'Economics and Public Finance' } },
-  { pattern: /infrastructure|road|bridge|transit|broadband|rail/i, topic: { issue: 'Infrastructure', issueCategory: 'Transportation and Public Works' } },
-  { pattern: /police|criminal justice|prison|sentencing|law enforcement/i, topic: { issue: 'Criminal Justice Reform', issueCategory: 'Crime and Law Enforcement' } },
-  { pattern: /child care|family leave|foster|adoption|child welfare/i, topic: { issue: 'Child Care', issueCategory: 'Families' } },
-  { pattern: /ai\b|artificial intelligence|data privacy|social media|tech regulat/i, topic: { issue: 'AI', issueCategory: 'Science, Technology, Communications' } },
-  { pattern: /ukraine|china|nato|foreign aid|diplomacy|sanction/i, topic: { issue: 'Foreign Aid', issueCategory: 'International Affairs' } },
-  { pattern: /minimum wage|union|worker|labor|workplace/i, topic: { issue: 'Worker Rights', issueCategory: 'Labor and Employment' } },
+  { pattern: /immigra|border\s+(wall|patrol|crisis|security)|asylum|migrant|deport|visa|daca|refugee|undocumented/i, topic: { issue: 'Immigration', issueCategory: 'Immigration' } },
+  { pattern: /health\s?care|medicare|medicaid|obamacare|aca\b|prescription|opioid|mental health|reproductive|abortion|roe|planned parenthood|insulin|drug price/i, topic: { issue: 'Healthcare', issueCategory: 'Health' } },
+  { pattern: /climate|environment|clean energy|renewable|emission|epa\b|pollution|carbon|fossil fuel|drilling|wildfire|paris accord/i, topic: { issue: 'Climate Change', issueCategory: 'Environmental Protection' } },
+  { pattern: /gun\b|firearm|second amendment|mass shooting|assault weapon|background check|red flag law/i, topic: { issue: 'Gun Violence', issueCategory: 'Crime and Law Enforcement' } },
+  { pattern: /education|student loan|school|teacher|college tuition|university|title ix|student debt|book ban/i, topic: { issue: 'Education', issueCategory: 'Education' } },
+  { pattern: /\btax\b|irs\b|income tax|corporate tax|tax credit|tariff|trade war|import duty|tax cut|tax hike/i, topic: { issue: 'Tax Reform', issueCategory: 'Taxation' } },
+  { pattern: /housing|rent\b|homeless|mortgage|affordable home|eviction|section 8|hud\b/i, topic: { issue: 'Affordable Housing', issueCategory: 'Housing and Community Development' } },
+  { pattern: /social security|retirement|disability benefit|safety net|snap\b|food stamp|welfare/i, topic: { issue: 'Social Security', issueCategory: 'Social Welfare' } },
+  { pattern: /veteran|va benefit|military|defense|pentagon|armed forces|troops|national guard/i, topic: { issue: 'Veterans', issueCategory: 'Armed Forces and National Security' } },
+  { pattern: /voting right|election|ballot|gerrymandering|campaign finance|voter registration|electoral|primary|midterm|poll\b|caucus/i, topic: { issue: 'Elections', issueCategory: 'Government Operations and Politics' } },
+  { pattern: /supreme court|judicial|judge|legal reform|court ruling|constitutional|overturned|dissent/i, topic: { issue: 'Supreme Court', issueCategory: 'Law' } },
+  { pattern: /economy|inflation|job market|unemployment|wage|recession|cost of living|gdp|interest rate|federal reserve|stock market/i, topic: { issue: 'Cost of Living', issueCategory: 'Economics and Public Finance' } },
+  { pattern: /infrastructure|road|bridge|transit|broadband|rail|highway|water system|amtrak/i, topic: { issue: 'Infrastructure', issueCategory: 'Transportation and Public Works' } },
+  { pattern: /police|criminal justice|prison|sentencing|law enforcement|incarceration|bail|parole|death penalty|fentanyl/i, topic: { issue: 'Criminal Justice Reform', issueCategory: 'Crime and Law Enforcement' } },
+  { pattern: /child care|family leave|foster|adoption|child welfare|childcare|parental leave|child tax/i, topic: { issue: 'Child Care', issueCategory: 'Families' } },
+  { pattern: /\bai\b|artificial intelligence|data privacy|social media|tech regulat|tiktok|cybersecurity|big tech|antitrust/i, topic: { issue: 'AI & Tech', issueCategory: 'Science, Technology, Communications' } },
+  { pattern: /ukraine|china|nato|foreign aid|diplomacy|sanction|russia|iran|israel|gaza|middle east|north korea|trade deal/i, topic: { issue: 'Foreign Policy', issueCategory: 'International Affairs' } },
+  { pattern: /minimum wage|union|worker|labor|workplace|strike\b|overtime|gig economy|nlrb/i, topic: { issue: 'Worker Rights', issueCategory: 'Labor and Employment' } },
+  // Broader catch-all patterns (checked last)
+  { pattern: /executive order|white house|president\s+(sign|veto|order|announc|act)|oval office/i, topic: { issue: 'Executive Action', issueCategory: 'Government Operations and Politics' } },
+  { pattern: /congress|senate\s+(vote|pass|block|confirm)|house\s+(vote|pass|block)|bipartisan|filibuster|legislation|lawmakers|appropriation|government shutdown|debt ceiling|spending bill|budget/i, topic: { issue: 'Congress', issueCategory: 'Government Operations and Politics' } },
+  { pattern: /civil rights|discrimination|lgbtq|equality|title vii|affirmative action|dei\b|diversity/i, topic: { issue: 'Civil Rights', issueCategory: 'Civil Rights' } },
 ];
 
-function classifyArticle(title: string): ArticleTopic | null {
+function classifyArticle(title: string, description?: string): ArticleTopic | null {
+  // Check title first, then title + description combined for broader matching
   for (const { pattern, topic } of TOPIC_PATTERNS) {
     if (pattern.test(title)) return topic;
+  }
+  if (description) {
+    const combined = `${title} ${description}`;
+    for (const { pattern, topic } of TOPIC_PATTERNS) {
+      if (pattern.test(combined)) return topic;
+    }
   }
   return null;
 }
@@ -243,7 +254,7 @@ function deduplicateNearDuplicates(articles: NewsArticle[]): NewsArticle[] {
 }
 
 /** Max articles per topic category to ensure diversity */
-const MAX_PER_TOPIC = 4;
+const MAX_PER_TOPIC = 5;
 
 /**
  * Enforce a cap of MAX_PER_TOPIC articles per issueCategory.
@@ -280,8 +291,9 @@ function parseRssItems(xml: string, fallbackSource?: string): NewsArticle[] {
     const link = item.match(/<link>(?:<!\[CDATA\[)?([\s\S]*?)(?:\]\]>)?<\/link>/)?.[1]?.trim() ?? '';
     const source = item.match(/<source[^>]*>([\s\S]*?)<\/source>/)?.[1]?.trim() || fallbackSource || '';
     const pubDate = item.match(/<pubDate>([\s\S]*?)<\/pubDate>/)?.[1]?.trim() ?? '';
+    const description = item.match(/<description>(?:<!\[CDATA\[)?([\s\S]*?)(?:\]\]>)?<\/description>/)?.[1]?.trim() ?? '';
     if (rawTitle && link) {
-      items.push({ title: rawTitle, link, source, pubDate, topic: classifyArticle(rawTitle), lean: SOURCE_LEAN[source] ?? null });
+      items.push({ title: rawTitle, link, source, pubDate, topic: classifyArticle(rawTitle, description), lean: SOURCE_LEAN[source] ?? null });
     }
   }
   return items;
@@ -366,9 +378,9 @@ export async function GET() {
       return db - da;
     });
 
-    // Topic-aware diversity cap, then take top 30
+    // Topic-aware diversity cap, then take top 40
     const diverseArticles = applyTopicCaps(dedupedArticles);
-    const articles = diverseArticles.slice(0, 30);
+    const articles = diverseArticles.slice(0, 40);
 
     // Cache result
     await supabase

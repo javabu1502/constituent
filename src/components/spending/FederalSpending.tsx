@@ -44,6 +44,15 @@ export function FederalSpending({ stateCode, stateName }: { stateCode: string; s
 
   return (
     <div>
+      {/* Explainer */}
+      <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl">
+        <p className="text-xs text-blue-800 dark:text-blue-300">
+          The federal government distributes money to your state through contracts, grants, and assistance programs.
+          Your representatives in Congress vote on how these funds are allocated. Each &quot;award&quot; below is a contract or grant
+          from a federal agency to a company, nonprofit, university, or local government.
+        </p>
+      </div>
+
       {/* Summary */}
       <div className="grid grid-cols-2 gap-3 mb-4">
         <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 text-center">
@@ -51,14 +60,14 @@ export function FederalSpending({ stateCode, stateName }: { stateCode: string; s
             {formatMoney(data.totalObligations)}
           </div>
           <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-            FY{data.fiscalYear} Federal Spending
+            FY{data.fiscalYear} Committed Funds
           </div>
         </div>
         <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 text-center">
           <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">
             {data.awardCount > 0 ? data.awardCount.toLocaleString() : '-'}
           </div>
-          <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">Awards</div>
+          <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">Contracts &amp; Grants</div>
         </div>
       </div>
 

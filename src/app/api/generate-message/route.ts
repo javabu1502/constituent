@@ -64,11 +64,6 @@ async function generateForOfficial(
 
   const officialLastName = official.lastName || official.name.split(' ').pop();
 
-  // Build constituent context based on level
-  const levelContext = isState
-    ? `a state legislator in ${official.state}${official.district ? ` District ${official.district}` : ''}`
-    : `a member of the U.S. Congress representing ${official.state}`;
-
   const constituentContext = isState && official.district
     ? `${official.state} ${titleLower.includes('senator') ? 'Senate' : 'Assembly'} District ${official.district}`
     : official.state;

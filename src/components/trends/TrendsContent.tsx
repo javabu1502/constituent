@@ -169,7 +169,7 @@ export function TrendsContent() {
       <div>
         <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Advocacy Trends</h1>
         <p className="text-gray-600 dark:text-gray-400 mt-1">
-          See what issues people across the country are writing to their representatives about.
+          See what issues people across the country are writing to their representatives about. When many people write about the same issue, it signals to lawmakers that their constituents care.
         </p>
       </div>
 
@@ -179,7 +179,7 @@ export function TrendsContent() {
           <div className="text-3xl font-bold text-purple-600 dark:text-purple-400">
             {data?.stats.totalMessages.toLocaleString() ?? '-'}
           </div>
-          <div className="text-sm text-gray-600 dark:text-gray-400 mt-1">Total Actions</div>
+          <div className="text-sm text-gray-600 dark:text-gray-400 mt-1">Messages Sent</div>
         </div>
         <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5 text-center">
           <div className="text-3xl font-bold text-purple-600 dark:text-purple-400">
@@ -191,7 +191,7 @@ export function TrendsContent() {
           <div className="text-3xl font-bold text-purple-600 dark:text-purple-400">
             {data?.stats.statesRepresented ?? '-'}
           </div>
-          <div className="text-sm text-gray-600 dark:text-gray-400 mt-1">States Represented</div>
+          <div className="text-sm text-gray-600 dark:text-gray-400 mt-1">States Active</div>
         </div>
       </div>
 
