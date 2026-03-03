@@ -48,7 +48,9 @@ export async function GET() {
         (f) => f.top_contributors.length > 0 && f.top_contributors.length <= 10
       );
       if (!needsRefresh) {
-        return NextResponse.json(cachedPayload);
+        return NextResponse.json(cachedPayload, {
+          headers: { 'Cache-Control': 'private, max-age=300, stale-while-revalidate=600' },
+        });
       }
     }
   }
@@ -114,5 +116,7 @@ export async function GET() {
       { onConflict: 'user_id,feed_type' }
     );
 
-  return NextResponse.json(payload);
+  return NextResponse.json(payload, {
+    headers: { 'Cache-Control': 'private, max-age=300, stale-while-revalidate=600' },
+  });
 }

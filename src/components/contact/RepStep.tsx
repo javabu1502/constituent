@@ -157,10 +157,10 @@ export function RepStep({ state, dispatch, onBack }: RepStepProps) {
     <div className="p-6 sm:p-8">
       <div className="text-center mb-6">
         <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-          Select Representatives
+          Who should hear from you?
         </h3>
         <p className="text-gray-500 dark:text-gray-400 mt-2 text-sm">
-          Choose who you&apos;d like to contact. You can select multiple.
+          Select the officials you want to contact. Each one will get a personalized message tailored to their party and positions.
         </p>
       </div>
 

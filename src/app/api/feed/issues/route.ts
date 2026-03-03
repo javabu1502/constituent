@@ -171,7 +171,9 @@ export async function GET() {
   if (cached && Date.now() - new Date(cached.fetched_at).getTime() < CACHE_TTL_MS) {
     const cachedPayload = cached.data as { issues?: Record<string, IssueFeedItem[]>; userIssues?: string[] };
     if (cachedPayload?.issues && cachedPayload?.userIssues) {
-      return NextResponse.json({ issues: cachedPayload.issues, userIssues: cachedPayload.userIssues } satisfies IssueFeedResponse);
+      return NextResponse.json({ issues: cachedPayload.issues, userIssues: cachedPayload.userIssues } satisfies IssueFeedResponse, {
+        headers: { 'Cache-Control': 'private, max-age=120, stale-while-revalidate=300' },
+      });
     }
   }
 
@@ -277,5 +279,7 @@ export async function GET() {
       { onConflict: 'user_id,feed_type' }
     );
 
-  return NextResponse.json(payload);
+  return NextResponse.json(payload, {
+    headers: { 'Cache-Control': 'private, max-age=120, stale-while-revalidate=300' },
+  });
 }

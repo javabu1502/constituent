@@ -19,7 +19,7 @@ const faqItems = [
   {
     question: 'How do I contact my representative?',
     answer:
-      'Enter your home address on our Contact page and we\'ll find your federal and state representatives. Then choose an issue, and our AI will draft a personalized message you can send by email, fax, or use as a script for a phone call.',
+      'Enter your home address on our Contact page and we\'ll find your federal and state representatives. Then choose an issue, and our AI will draft a personalized message you can send by email or use as a script for a phone call.',
   },
   {
     question: 'Is My Democracy free?',
@@ -80,6 +80,50 @@ export default function HomePage() {
               <Button variant="secondary" size="lg" className="text-lg px-8 py-4">
                 Explore Dashboard
               </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* How It Works */}
+      <section className="py-12 px-4 bg-white dark:bg-gray-900">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-xl font-bold text-gray-900 dark:text-white text-center mb-8">How It Works</h2>
+          <div className="grid sm:grid-cols-3 gap-6">
+            <div className="text-center">
+              <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center mx-auto mb-3">
+                <span className="text-lg font-bold text-purple-600 dark:text-purple-400">1</span>
+              </div>
+              <h3 className="font-semibold text-gray-900 dark:text-white mb-1">Enter your address</h3>
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                We find your elected officials at every level of government.
+              </p>
+            </div>
+            <div className="text-center">
+              <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center mx-auto mb-3">
+                <span className="text-lg font-bold text-purple-600 dark:text-purple-400">2</span>
+              </div>
+              <h3 className="font-semibold text-gray-900 dark:text-white mb-1">Pick your issue</h3>
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                Choose a topic you care about and AI writes a personalized message for each official.
+              </p>
+            </div>
+            <div className="text-center">
+              <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center mx-auto mb-3">
+                <span className="text-lg font-bold text-purple-600 dark:text-purple-400">3</span>
+              </div>
+              <h3 className="font-semibold text-gray-900 dark:text-white mb-1">Review and send</h3>
+              <p className="text-sm text-gray-500 dark:text-gray-400">
+                Edit if you want, then send your message via email or phone. Takes under 5 minutes.
+              </p>
+            </div>
+          </div>
+          <div className="text-center mt-8">
+            <Link
+              href="/contact"
+              className="inline-block px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-medium rounded-lg transition-colors"
+            >
+              Get Started
             </Link>
           </div>
         </div>

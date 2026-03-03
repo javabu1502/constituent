@@ -168,6 +168,14 @@ const STEP_LABELS: Record<string, string> = {
   success: 'Done',
 };
 
+const STEP_DESCRIPTIONS: Record<string, string> = {
+  address: 'We use your address to find your elected officials.',
+  representative: 'Choose who will receive your message.',
+  topic: 'Tell us what you care about. AI writes a personalized message for each official.',
+  message: 'Review and edit the AI-generated messages before sending.',
+  send: 'Deliver your messages to your representatives.',
+};
+
 export function ContactFlow() {
   const [state, dispatch] = useReducer(contactReducer, initialState);
   const searchParams = useSearchParams();
@@ -371,6 +379,11 @@ export function ContactFlow() {
           <h2 className="text-lg font-semibold text-gray-900 dark:text-white mt-1">
             {STEP_LABELS[state.step]}
           </h2>
+          {STEP_DESCRIPTIONS[state.step] && (
+            <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+              {STEP_DESCRIPTIONS[state.step]}
+            </p>
+          )}
         </div>
 
         {/* Progress bar */}

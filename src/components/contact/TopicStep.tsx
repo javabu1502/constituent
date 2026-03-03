@@ -147,6 +147,7 @@ export function TopicStep({ state, dispatch, onBack }: TopicStepProps) {
   return (
     <div className="p-6 sm:p-8">
       {/* Contact method toggle */}
+      <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">Choose how you want to reach out:</p>
       <div className="flex bg-gray-100 dark:bg-gray-700/50 rounded-lg p-1 mb-6">
         <button
           type="button"
@@ -258,15 +259,15 @@ export function TopicStep({ state, dispatch, onBack }: TopicStepProps) {
         />
       </div>
 
-      {/* What do you want? */}
+      {/* What action do you want them to take? */}
       <div className="mb-5">
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-          What do you want? <span className="text-red-500">*</span>
+          What action do you want them to take? <span className="text-red-500">*</span>
         </label>
         <textarea
           value={ask}
           onChange={(e) => dispatch({ type: 'SET_ASK', payload: e.target.value })}
-          placeholder='e.g., "Fix the roads in my district", "Review current policy"'
+          placeholder='e.g., "Vote yes on the infrastructure bill", "Fix the roads in my district"'
           rows={2}
           className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent resize-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
         />

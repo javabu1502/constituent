@@ -11,6 +11,7 @@ import { VoterInfoCard } from '@/components/dashboard/VoterInfoCard';
 import { CopyLinkButton } from '@/components/campaign/CopyLinkButton';
 import { DeleteCampaignButton } from '@/components/campaign/DeleteCampaignButton';
 import { CollapsibleSection } from '@/components/ui/CollapsibleSection';
+import { GettingStartedChecklist } from '@/components/dashboard/GettingStartedChecklist';
 
 export const metadata: Metadata = {
   title: 'Dashboard | My Democracy',
@@ -143,6 +144,13 @@ export default async function DashboardPage() {
           </Link>
         </div>
       </div>
+
+      {/* Getting Started checklist for new users */}
+      <GettingStartedChecklist
+        hasAddress={hasAddress}
+        hasReps={!!cachedReps && Array.isArray(cachedReps) && cachedReps.length > 0}
+        hasMessages={totalMessages > 0}
+      />
 
       {/* PRIMARY: My Representatives */}
       <section className="mb-10">

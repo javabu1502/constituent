@@ -446,7 +446,9 @@ export async function GET() {
     && Date.now() - new Date(cached.fetched_at).getTime() < CACHE_TTL_MS;
   if (cacheValid) {
     const cd = cachedData as { items: RepFeedItem[]; votes: RepVote[] };
-    return NextResponse.json({ items: cd.items, votes: cd.votes, reps: repsMeta, userIssues } satisfies RepFeedResponse);
+    return NextResponse.json({ items: cd.items, votes: cd.votes, reps: repsMeta, userIssues } satisfies RepFeedResponse, {
+      headers: { 'Cache-Control': 'private, max-age=120, stale-while-revalidate=300' },
+    });
   }
 
   const errors: string[] = [];
@@ -554,5 +556,7 @@ export async function GET() {
     reps: repsMeta,
     userIssues,
     ...(errors.length > 0 ? { errors } : {}),
+  }, {
+    headers: { 'Cache-Control': 'private, max-age=120, stale-while-revalidate=300' },
   });
 }

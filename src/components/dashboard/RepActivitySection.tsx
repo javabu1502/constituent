@@ -805,42 +805,39 @@ export function RepActivitySection() {
   const [userIssues, setUserIssues] = useState<string[]>([]);
   const [issueData, setIssueData] = useState<IssueFeedResponse | null>(null);
   const [financeData, setFinanceData] = useState<Record<string, RepFinance>>({});
-  const [loading, setLoading] = useState(true);
-  const [issueLoading, setIssueLoading] = useState(false);
+  const [repLoading, setRepLoading] = useState(true);
+  const [issueLoading, setIssueLoading] = useState(true);
+  const [financeLoading, setFinanceLoading] = useState(true);
   const [tab, setTab] = useState<Tab>('by-rep');
   const [repSort, setRepSort] = useState<RepSort>('recent');
 
-  // Fetch rep feed and issue feed in parallel
+  // Fetch each feed independently so fast ones render immediately
   useEffect(() => {
-    const fetchRepFeed = fetch('/api/feed/representatives')
+    fetch('/api/feed/representatives')
       .then((res) => res.json())
       .then((data: RepFeedResponse) => {
         setItems(data.items ?? []);
         setReps(data.reps ?? []);
         setUserIssues(data.userIssues ?? []);
       })
-      .catch(() => {});
+      .catch(() => {})
+      .finally(() => setRepLoading(false));
 
-    const fetchIssueFeed = () => {
-      setIssueLoading(true);
-      return fetch('/api/feed/issues')
-        .then((res) => res.json())
-        .then((data: IssueFeedResponse) => {
-          setIssueData(data);
-        })
-        .catch(() => {})
-        .finally(() => setIssueLoading(false));
-    };
+    fetch('/api/feed/issues')
+      .then((res) => res.json())
+      .then((data: IssueFeedResponse) => {
+        setIssueData(data);
+      })
+      .catch(() => {})
+      .finally(() => setIssueLoading(false));
 
-    const fetchFinance = fetch('/api/feed/finance')
+    fetch('/api/feed/finance')
       .then((res) => res.json())
       .then((data: RepFinanceResponse) => {
         setFinanceData(data.finance ?? {});
       })
-      .catch(() => {});
-
-    Promise.all([fetchRepFeed, fetchIssueFeed(), fetchFinance])
-      .finally(() => setLoading(false));
+      .catch(() => {})
+      .finally(() => setFinanceLoading(false));
   }, []);
 
   // Group items by representative
@@ -880,9 +877,10 @@ export function RepActivitySection() {
     return { groups, userAreas, discoverAreas };
   }, [issueData, userIssues]);
 
-  if (loading) {
+  if (repLoading) {
     return (
       <div className="space-y-3">
+        <p className="text-sm text-gray-500 dark:text-gray-400 animate-pulse">Loading your representatives&apos; activity...</p>
         {Array.from({ length: 4 }).map((_, i) => <SkeletonCard key={i} />)}
       </div>
     );
