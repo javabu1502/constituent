@@ -4,6 +4,9 @@ import { ContactFlow } from '@/components/contact/ContactFlow';
 export const metadata = {
   title: 'Contact Your Representatives | My Democracy',
   description: 'Find your federal and state representatives and send them a personalized message or make a phone call. AI writes the perfect message for you.',
+  alternates: {
+    canonical: 'https://www.mydemocracy.app/contact',
+  },
 };
 
 export default function ContactPage() {

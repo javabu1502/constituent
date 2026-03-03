@@ -11,6 +11,9 @@ export const metadata: Metadata = {
     'federal register', 'executive orders', 'EPA regulations', 'submit comment',
     'notice and comment', 'rulemaking', 'civic participation',
   ],
+  alternates: {
+    canonical: 'https://www.mydemocracy.app/regulations',
+  },
   openGraph: {
     title: 'Federal Regulations & Public Comment | My Democracy',
     description: 'Browse open federal regulations and submit public comments. Your voice matters in the rulemaking process.',

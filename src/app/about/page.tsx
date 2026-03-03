@@ -4,6 +4,9 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'About | My Democracy',
   description: 'Learn how My Democracy helps you contact your elected representatives with AI-assisted messaging. Free, private, and easy to use.',
+  alternates: {
+    canonical: 'https://www.mydemocracy.app/about',
+  },
 };
 
 export default function AboutPage() {

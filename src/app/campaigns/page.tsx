@@ -6,6 +6,9 @@ import { CampaignFilters } from '@/components/campaign/CampaignFilters';
 export const metadata: Metadata = {
   title: 'Campaigns | My Democracy',
   description: 'Browse public civic campaigns. Rally others around issues you care about.',
+  alternates: {
+    canonical: 'https://www.mydemocracy.app/campaigns',
+  },
   openGraph: {
     title: 'Campaigns | My Democracy',
     description: 'Browse public civic campaigns. Rally others around issues you care about.',

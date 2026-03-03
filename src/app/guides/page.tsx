@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   title: 'Civic Engagement Guides | My Democracy',
   description: 'Learn how to effectively contact your elected representatives, write compelling letters to Congress, and make your voice heard in democracy.',
   keywords: ['civic engagement', 'contact congress', 'write to representatives', 'how to contact senator', 'state legislature', 'advocacy guide'],
+  alternates: {
+    canonical: 'https://www.mydemocracy.app/guides',
+  },
   openGraph: {
     title: 'Civic Engagement Guides | My Democracy',
     description: 'Learn how to effectively contact your elected representatives, write compelling letters to Congress, and make your voice heard in democracy.',

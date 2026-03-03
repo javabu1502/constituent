@@ -5,6 +5,9 @@ import { TrendsContent } from '@/components/trends/TrendsContent';
 export const metadata: Metadata = {
   title: 'Advocacy Trends | My Democracy',
   description: 'See what issues people across the country are writing to Congress about.',
+  alternates: {
+    canonical: 'https://www.mydemocracy.app/trends',
+  },
   openGraph: {
     title: 'Advocacy Trends | My Democracy',
     description: 'See what issues people across the country are writing to Congress about.',
