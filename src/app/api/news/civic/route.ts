@@ -66,6 +66,12 @@ const SOURCE_LEAN: Record<string, SourceLean> = {
   'Roll Call': 'center',
   'Stateline': 'center',
   'Military Times': 'center',
+  // Independent newsletters
+  'Tangle': 'center',
+  'Slow Boring': 'left-center',
+  'The Liberal Patriot': 'center',
+  'The Bulwark': 'right-center',
+  'Popular Information': 'left-center',
 };
 
 // Focused Google News queries for civic/government news
@@ -95,6 +101,12 @@ const DIRECT_FEEDS: { url: string; sourceName: string }[] = [
   // Congressional / state-focused
   { url: 'https://rollcall.com/feed/', sourceName: 'Roll Call' },
   { url: 'https://stateline.org/feed/', sourceName: 'Stateline' },
+  // Independent newsletters (balanced mix)
+  { url: 'https://www.readtangle.com/feed/', sourceName: 'Tangle' },
+  { url: 'https://www.slowboring.com/feed', sourceName: 'Slow Boring' },
+  { url: 'https://www.liberalpatriot.com/feed', sourceName: 'The Liberal Patriot' },
+  { url: 'https://www.thebulwark.com/feed/', sourceName: 'The Bulwark' },
+  { url: 'https://popular.info/feed', sourceName: 'Popular Information' },
 ];
 
 const CACHE_KEY = 'civic-news';
@@ -167,6 +179,12 @@ const SOURCE_AUTHORITY: Record<string, number> = {
   'Democracy Now!': 7,
   'Truthout': 8,
   'Jacobin': 8,
+  // Independent newsletters
+  'Tangle': 6,
+  'Slow Boring': 7,
+  'The Liberal Patriot': 7,
+  'The Bulwark': 6,
+  'Popular Information': 7,
 };
 
 function getSourceRank(source: string): number {
