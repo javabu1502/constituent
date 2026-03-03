@@ -3,6 +3,9 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import { Analytics } from "@vercel/analytics/react"
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
+import { ChatProvider } from '@/components/chat/ChatProvider';
+import { ChatButton } from '@/components/chat/ChatButton';
+import { ChatPanel } from '@/components/chat/ChatPanel';
 import './globals.css';
 
 const geistSans = Geist({
@@ -60,9 +63,13 @@ export default function RootLayout({
         >
           Skip to main content
         </a>
-        <Header />
-        <main id="main-content" className="flex-1">{children}</main>
-        <Footer />
+        <ChatProvider>
+          <Header />
+          <main id="main-content" className="flex-1">{children}</main>
+          <Footer />
+          <ChatPanel />
+          <ChatButton />
+        </ChatProvider>
         <Analytics />
       </body>
     </html>
