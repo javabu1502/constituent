@@ -55,22 +55,25 @@ const POPULAR_TOPICS: { label: string; category: string; subtopics: { label: str
     ],
   },
   {
-    label: 'Gun Policy',
+    label: 'Crime & Justice',
     category: 'Crime and Law Enforcement',
     subtopics: [
       { label: 'Gun Violence', category: 'Crime and Law Enforcement' },
       { label: 'Criminal Justice Reform', category: 'Crime and Law Enforcement' },
       { label: 'Police Reform', category: 'Crime and Law Enforcement' },
+      { label: 'Drug Policy', category: 'Crime and Law Enforcement' },
     ],
   },
   {
-    label: 'Climate & Environment',
+    label: 'Climate & Energy',
     category: 'Environmental Protection',
     subtopics: [
       { label: 'Climate Change', category: 'Environmental Protection' },
+      { label: 'Renewable Energy', category: 'Energy' },
+      { label: 'Oil and Gas', category: 'Energy' },
+      { label: 'Nuclear Energy', category: 'Energy' },
       { label: 'Clean Air', category: 'Environmental Protection' },
       { label: 'Clean Water', category: 'Environmental Protection' },
-      { label: 'Renewable Energy', category: 'Energy' },
     ],
   },
   {
@@ -94,12 +97,13 @@ const POPULAR_TOPICS: { label: string; category: string; subtopics: { label: str
     ],
   },
   {
-    label: 'Social Security',
+    label: 'Social Security & Safety Net',
     category: 'Social Welfare',
     subtopics: [
       { label: 'Social Security', category: 'Social Welfare' },
       { label: 'Disability Benefits', category: 'Social Welfare' },
       { label: 'Safety Net Programs', category: 'Social Welfare' },
+      { label: 'Food Assistance', category: 'Social Welfare' },
     ],
   },
   {
@@ -107,6 +111,7 @@ const POPULAR_TOPICS: { label: string; category: string; subtopics: { label: str
     category: 'Armed Forces and National Security',
     subtopics: [
       { label: 'Veterans', category: 'Armed Forces and National Security' },
+      { label: 'VA Healthcare', category: 'Armed Forces and National Security' },
       { label: 'Military Funding', category: 'Armed Forces and National Security' },
       { label: 'Defense Spending', category: 'Armed Forces and National Security' },
     ],
@@ -128,8 +133,32 @@ const POPULAR_TOPICS: { label: string; category: string; subtopics: { label: str
       { label: 'Minimum Wage', category: 'Labor and Employment' },
       { label: 'Worker Rights', category: 'Labor and Employment' },
       { label: 'Unions', category: 'Labor and Employment' },
+    ],
+  },
+  {
+    label: 'Families',
+    category: 'Families',
+    subtopics: [
       { label: 'Child Care', category: 'Families' },
       { label: 'Paid Family Leave', category: 'Families' },
+    ],
+  },
+  {
+    label: 'Technology',
+    category: 'Science, Technology, Communications',
+    subtopics: [
+      { label: 'AI', category: 'Science, Technology, Communications' },
+      { label: 'Data Privacy', category: 'Science, Technology, Communications' },
+      { label: 'Social Media Regulation', category: 'Science, Technology, Communications' },
+    ],
+  },
+  {
+    label: 'Foreign Policy',
+    category: 'International Affairs',
+    subtopics: [
+      { label: 'Ukraine', category: 'International Affairs' },
+      { label: 'Foreign Aid', category: 'International Affairs' },
+      { label: 'Tariffs', category: 'Foreign Trade and International Finance' },
     ],
   },
 ];

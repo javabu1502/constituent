@@ -344,7 +344,7 @@ export default function CampaignGuidePage() {
             </div>
           </section>
 
-          {/* Real Campaign Examples */}
+          {/* Hypothetical Campaign Examples */}
           <section className="mb-10">
             <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
               <span className="w-8 h-8 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -352,49 +352,49 @@ export default function CampaignGuidePage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
                 </svg>
               </span>
-              Real Campaign Examples
+              Example Campaign Scenarios
             </h2>
             <div className="pl-10 text-gray-600 dark:text-gray-300 space-y-6">
               <p>
-                Sometimes the best way to learn is by example. Here are three real-world scenarios that show how effective campaigns come together, from local neighborhood issues to statewide policy fights.
+                Sometimes the best way to learn is by example. Here are three <strong className="text-gray-900 dark:text-white">hypothetical scenarios</strong> that illustrate how effective campaigns could come together, from local neighborhood issues to statewide policy fights.
               </p>
 
               {/* Example 1 */}
               <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-5 space-y-3">
-                <h3 className="font-semibold text-gray-900 dark:text-white text-lg">&quot;Save the Maplewood Library Branch&quot;</h3>
-                <p className="text-sm"><strong className="text-gray-900 dark:text-white">Scale:</strong> 30 participants, 90 messages to city council</p>
+                <h3 className="font-semibold text-gray-900 dark:text-white text-lg">Saving a Local Library Branch</h3>
+                <p className="text-sm"><strong className="text-gray-900 dark:text-white">Scale:</strong> Local — targeting city council</p>
                 <div className="space-y-2">
-                  <p><strong className="text-gray-900 dark:text-white">The situation:</strong> The city proposed closing the Maplewood branch library to cut costs. A parent who used the branch for children&apos;s programming decided to fight back.</p>
-                  <p><strong className="text-gray-900 dark:text-white">Their approach:</strong> Created a campaign with a clear headline, &quot;Keep the Maplewood Library Open for Our Kids,&quot; and a description that cited specific usage numbers: 200 children attended summer reading programs, 45 seniors used the free computer lab weekly, and the branch served as the only public meeting space in a 3-mile radius.</p>
-                  <p><strong className="text-gray-900 dark:text-white">How they shared it:</strong> Posted in the neighborhood Facebook group, shared at a PTA meeting, and texted the link to 15 parents from story time. Each of those parents shared it with a few more.</p>
-                  <p><strong className="text-gray-900 dark:text-white">Results:</strong> 30 residents sent personalized messages to all five city council members within 10 days, 90 messages total. Two council members cited the volume of constituent correspondence when they voted against the closure. The library stayed open.</p>
-                  <p><strong className="text-gray-900 dark:text-white">What made it work:</strong> Hyper-local focus, specific data points in the description, and personal sharing through trusted community channels. Every message included a real story about how the library mattered to that family.</p>
+                  <p><strong className="text-gray-900 dark:text-white">The situation:</strong> Imagine a city proposes closing a neighborhood branch library to cut costs. A parent who uses the branch for children&apos;s programming decides to fight back.</p>
+                  <p><strong className="text-gray-900 dark:text-white">Their approach:</strong> They create a campaign with a clear headline, &quot;Keep Our Library Open for Our Kids,&quot; and a description that cites specific usage numbers: how many children attend summer reading programs, how many seniors use the free computer lab, and the fact that the branch is the only public meeting space in the area.</p>
+                  <p><strong className="text-gray-900 dark:text-white">How they share it:</strong> Post in the neighborhood Facebook group, share at a PTA meeting, and text the link to other parents. Each of those parents shares it with a few more.</p>
+                  <p><strong className="text-gray-900 dark:text-white">Potential outcome:</strong> Dozens of residents send personalized messages to city council members within days. Council members take notice when they see the volume of constituent correspondence, making it harder to proceed with the closure.</p>
+                  <p><strong className="text-gray-900 dark:text-white">Why this approach works:</strong> Hyper-local focus, specific data points in the description, and personal sharing through trusted community channels. Every message includes a personal story about how the library matters to that family.</p>
                 </div>
               </div>
 
               {/* Example 2 */}
               <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-5 space-y-3">
-                <h3 className="font-semibold text-gray-900 dark:text-white text-lg">&quot;Stop the 15% Tuition Hike at State Universities&quot;</h3>
-                <p className="text-sm"><strong className="text-gray-900 dark:text-white">Scale:</strong> 200+ participants across 15 legislative districts</p>
+                <h3 className="font-semibold text-gray-900 dark:text-white text-lg">Opposing a Tuition Hike</h3>
+                <p className="text-sm"><strong className="text-gray-900 dark:text-white">Scale:</strong> Statewide — targeting state legislators</p>
                 <div className="space-y-2">
-                  <p><strong className="text-gray-900 dark:text-white">The situation:</strong> The state Board of Regents proposed a 15% tuition increase across all public universities. A college junior studying education realized the increase would force her to take on an additional $8,000 in loans.</p>
-                  <p><strong className="text-gray-900 dark:text-white">Their approach:</strong> The headline, &quot;Tell Your State Rep: Block the 15% Tuition Increase,&quot; named the exact policy and the ask. The message template focused on a single action: urging reps to vote NO on the appropriations bill that enabled the increase, and included key facts about student debt averages and the state&apos;s higher-ed funding trends.</p>
-                  <p><strong className="text-gray-900 dark:text-white">How they shared it:</strong> Shared in student government Slack channels at three universities, posted in campus organization group chats, and emailed to every student org listserv they could find. A campus newspaper wrote about the campaign after seeing it circulate, which drove another wave of participation.</p>
-                  <p><strong className="text-gray-900 dark:text-white">Results:</strong> Over 200 students from 15 different districts sent personalized messages to their state representatives. The geographic spread was key. Legislators from rural and suburban districts heard from constituents they wouldn&apos;t normally hear from on higher-ed issues. The tuition increase was reduced from 15% to 6%.</p>
-                  <p><strong className="text-gray-900 dark:text-white">What made it work:</strong> The campaign gave students a way to channel frustration into structured political action. Instead of a petition with anonymous signatures, every legislator received unique, personal letters from verified constituents in their own district. The statewide geographic coverage made it impossible to dismiss as a single-campus issue.</p>
+                  <p><strong className="text-gray-900 dark:text-white">The situation:</strong> Imagine a state Board of Regents proposes a large tuition increase across public universities. A college student realizes the increase would force them to take on significantly more debt.</p>
+                  <p><strong className="text-gray-900 dark:text-white">Their approach:</strong> They create a campaign with a clear headline naming the exact policy and the ask. The message template focuses on a single action: urging reps to vote against the appropriations bill enabling the increase, and includes key facts about student debt and the state&apos;s higher-ed funding trends.</p>
+                  <p><strong className="text-gray-900 dark:text-white">How they share it:</strong> Through student government channels at multiple universities, campus organization group chats, and student org listservs. A campus newspaper picks up the story, driving another wave of participation.</p>
+                  <p><strong className="text-gray-900 dark:text-white">Potential outcome:</strong> Students from many legislative districts send personalized messages to their state representatives. The geographic spread matters — legislators from rural and suburban districts hear from constituents they wouldn&apos;t normally hear from on higher-ed issues, making it harder to dismiss as a single-campus concern.</p>
+                  <p><strong className="text-gray-900 dark:text-white">Why this approach works:</strong> It channels frustration into structured political action. Instead of a petition with anonymous signatures, every legislator receives unique, personal letters from constituents in their own district. Statewide geographic coverage makes the issue impossible to ignore.</p>
                 </div>
               </div>
 
               {/* Example 3 */}
               <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-5 space-y-3">
-                <h3 className="font-semibold text-gray-900 dark:text-white text-lg">&quot;Install Protected Crosswalks on Route 9 Before Someone Else Gets Hurt&quot;</h3>
-                <p className="text-sm"><strong className="text-gray-900 dark:text-white">Scale:</strong> 65 participants, messages to local officials + state DOT</p>
+                <h3 className="font-semibold text-gray-900 dark:text-white text-lg">Improving Pedestrian Safety</h3>
+                <p className="text-sm"><strong className="text-gray-900 dark:text-white">Scale:</strong> Neighborhood — targeting local officials + state DOT</p>
                 <div className="space-y-2">
-                  <p><strong className="text-gray-900 dark:text-white">The situation:</strong> After a pedestrian was hit crossing Route 9 near an elementary school, a neighbor decided the community had waited long enough for the crosswalk improvements that had been promised for years.</p>
-                  <p><strong className="text-gray-900 dark:text-white">Their approach:</strong> The campaign targeted both local selectboard members and the state Department of Transportation. The description included specifics: four pedestrian incidents at the same intersection in three years, a state traffic study from two years prior that recommended improvements but was never funded, and the fact that 300 children crossed that intersection daily during the school year.</p>
-                  <p><strong className="text-gray-900 dark:text-white">How they shared it:</strong> Started with the school&apos;s parent email list, then posted on Nextdoor and shared at a community safety forum. A local TV station covered the story, and the campaign organizer shared the link during the broadcast interview.</p>
-                  <p><strong className="text-gray-900 dark:text-white">Results:</strong> 65 residents sent messages over two weeks. The selectboard added crosswalk improvements to the next town meeting agenda, and the state DOT fast-tracked a safety review. Protected crosswalks with flashing beacons were installed within six months.</p>
-                  <p><strong className="text-gray-900 dark:text-white">What made it work:</strong> Urgency driven by a real incident, combined with data that showed a pattern. The dual targeting of local and state officials ensured that neither level of government could point to the other as responsible. Media coverage amplified reach beyond the organizer&apos;s personal network.</p>
+                  <p><strong className="text-gray-900 dark:text-white">The situation:</strong> Imagine a dangerous intersection near an elementary school where pedestrians have been hit. A neighbor decides the community has waited long enough for the crosswalk improvements that have been promised for years.</p>
+                  <p><strong className="text-gray-900 dark:text-white">Their approach:</strong> The campaign targets both local officials and the state Department of Transportation. The description includes specifics: the number of pedestrian incidents, an existing traffic study that recommended improvements but was never funded, and how many children cross the intersection daily during the school year.</p>
+                  <p><strong className="text-gray-900 dark:text-white">How they share it:</strong> Start with the school&apos;s parent email list, then post on Nextdoor and share at a community safety forum. Local media coverage further amplifies reach.</p>
+                  <p><strong className="text-gray-900 dark:text-white">Potential outcome:</strong> Dozens of residents send messages over a couple of weeks. Local officials add crosswalk improvements to their agenda, and the state DOT moves up a safety review. The dual pressure from both levels of government makes it harder for either side to pass the buck.</p>
+                  <p><strong className="text-gray-900 dark:text-white">Why this approach works:</strong> Urgency driven by a safety concern, combined with data that shows a pattern. Targeting both local and state officials ensures neither level of government can point to the other as responsible. Media coverage amplifies reach beyond the organizer&apos;s personal network.</p>
                 </div>
               </div>
             </div>

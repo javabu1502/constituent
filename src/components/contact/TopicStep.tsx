@@ -135,7 +135,7 @@ interface TopicInfo {
 const SUBTOPIC_CONTEXT: Record<string, TopicInfo> = {
   // Immigration subtopics
   'DACA': {
-    summary: 'DACA (Deferred Action for Childhood Arrivals) protects ~600,000 people brought to the U.S. as children from deportation and allows them to work legally.',
+    summary: 'DACA (Deferred Action for Childhood Arrivals) protects hundreds of thousands of people brought to the U.S. as children from deportation and allows them to work legally.',
     currentEvents: [
       'Federal courts have blocked new DACA applications while allowing renewals',
       'Multiple congressional proposals (DREAM Act, bipartisan frameworks) have stalled',
@@ -148,7 +148,7 @@ const SUBTOPIC_CONTEXT: Record<string, TopicInfo> = {
       { label: 'Bipartisan solution', ask: 'Work across the aisle to find a permanent legislative solution for Dreamers' },
     ],
     perspectives: [
-      { label: 'Protect Dreamers', points: ['They were brought as children and had no choice', 'They contribute $42B+ annually to the economy', 'Most have no ties to their birth country'] },
+      { label: 'Protect Dreamers', points: ['They were brought as children and had no choice', 'They contribute significantly to the economy as workers and taxpayers', 'Most have no ties to their birth country'] },
       { label: 'Rule of law', points: ['Executive action bypassed Congress', 'Legal immigration should be the path', 'Amnesty incentivizes future illegal crossings'] },
     ],
   },
@@ -239,8 +239,8 @@ const SUBTOPIC_CONTEXT: Record<string, TopicInfo> = {
       { label: 'Expand coverage', ask: 'Expand Medicare to cover dental, vision, and hearing' },
     ],
     perspectives: [
-      { label: 'Strengthen Medicare', points: ['Seniors earned their benefits through a lifetime of payroll taxes', 'Expanding benefits improves quality of life', 'Medicare is more efficient than private insurance'] },
-      { label: 'Reform for solvency', points: ['Without reform, the trust fund will run out', 'Means-testing could focus resources on those most in need', 'Competition from private plans can improve choices'] },
+      { label: 'Expand coverage', points: ['Seniors earned their benefits through a lifetime of payroll taxes', 'Expanding benefits improves quality of life', 'Medicare is more efficient than private insurance'] },
+      { label: 'Ensure solvency', points: ['Without reform, the trust fund will run out', 'Means-testing could focus resources on those most in need', 'Competition from private plans can improve choices'] },
     ],
   },
   'Medicaid': {
@@ -329,13 +329,13 @@ const SUBTOPIC_CONTEXT: Record<string, TopicInfo> = {
       { label: 'Fix the gaps', ask: 'Close the Medicaid coverage gap in states that haven\'t expanded' },
     ],
     perspectives: [
-      { label: 'Protect the ACA', points: ['21+ million rely on marketplace coverage', 'Pre-existing condition protections are widely popular', 'Subsidies keep coverage affordable'] },
-      { label: 'Reform or replace', points: ['Premiums and deductibles are still too high for many', 'Competition should drive down costs', 'One-size-fits-all doesn\'t work'] },
+      { label: 'Keep and strengthen', points: ['Millions rely on marketplace coverage', 'Pre-existing condition protections are widely popular', 'Subsidies keep coverage affordable for many'] },
+      { label: 'Reform the system', points: ['Premiums and deductibles are still too high for many', 'Competition should drive down costs', 'One-size-fits-all doesn\'t work for every situation'] },
     ],
   },
   // Crime subtopics
   'Gun Violence': {
-    summary: 'Gun violence kills 45,000+ Americans yearly. Policy focuses on background checks, assault weapons, red flag laws, and community violence intervention.',
+    summary: 'Gun policy debates center on background checks, assault weapons, red flag laws, Second Amendment rights, and community violence intervention.',
     currentEvents: [
       'Bipartisan Safer Communities Act passed in 2022 (first gun law in 30 years)',
       'State-level red flag laws expanding, with mixed implementation',
@@ -348,8 +348,8 @@ const SUBTOPIC_CONTEXT: Record<string, TopicInfo> = {
       { label: 'Protect 2nd Amendment', ask: 'Oppose new gun restrictions that infringe on law-abiding citizens\' Second Amendment rights' },
     ],
     perspectives: [
-      { label: 'Gun safety', points: ['Background checks are supported by 90%+ of Americans', 'Other democracies have far fewer gun deaths', 'Red flag laws have prevented mass shootings'] },
-      { label: 'Gun rights', points: ['The Second Amendment is a fundamental right', 'New laws won\'t stop criminals who ignore laws', 'Focus on mental health and enforcement, not restrictions'] },
+      { label: 'More regulation', points: ['Background checks are supported by a large majority of Americans', 'Other democracies have far fewer gun deaths', 'Red flag laws have helped prevent some mass shootings'] },
+      { label: 'Protect rights', points: ['The Second Amendment is a fundamental right', 'New laws won\'t stop criminals who ignore existing ones', 'Focus on mental health and enforcement, not restrictions'] },
     ],
   },
   'Police Reform': {
@@ -366,8 +366,8 @@ const SUBTOPIC_CONTEXT: Record<string, TopicInfo> = {
       { label: 'Community policing', ask: 'Invest in community policing programs that build trust between officers and neighborhoods' },
     ],
     perspectives: [
-      { label: 'Reform needed', points: ['Accountability builds public trust', 'De-escalation training saves lives on both sides', 'Mental health calls need different responders'] },
-      { label: 'Support police', points: ['Officers face dangerous situations daily', 'Defunding rhetoric makes communities less safe', 'Better pay and training, not restrictions'] },
+      { label: 'Accountability focus', points: ['Accountability builds public trust', 'De-escalation training saves lives on both sides', 'Mental health calls may need different responders'] },
+      { label: 'Support officers', points: ['Officers face dangerous situations daily', 'Communities are safer with well-supported police', 'Better pay and training attract better officers'] },
     ],
   },
   'Criminal Justice Reform': {
@@ -476,8 +476,8 @@ const SUBTOPIC_CONTEXT: Record<string, TopicInfo> = {
       { label: 'No new regulations', ask: 'Oppose costly climate regulations that hurt the economy and raise energy prices' },
     ],
     perspectives: [
-      { label: 'Act now', points: ['The science is clear and the window is closing', 'Clean energy is now cheaper than fossil fuels', 'Climate disasters already cost billions annually'] },
-      { label: 'Balanced approach', points: ['Rapid transition threatens energy reliability', 'The U.S. can\'t solve climate change alone', 'Innovation, not regulation, is the answer'] },
+      { label: 'Aggressive action', points: ['The science is clear and the window is closing', 'Clean energy is now cheaper than fossil fuels', 'Climate disasters already cost billions annually'] },
+      { label: 'Gradual transition', points: ['Rapid transition threatens energy reliability', 'The U.S. can\'t solve climate change alone', 'Innovation, not regulation, is the answer'] },
     ],
   },
   'Renewable Energy': {
@@ -513,8 +513,8 @@ const SUBTOPIC_CONTEXT: Record<string, TopicInfo> = {
       { label: 'Market approach', ask: 'Remove regulations that increase building costs and let the market increase supply' },
     ],
     perspectives: [
-      { label: 'Government action', points: ['The market alone won\'t solve the affordability crisis', 'Vouchers and subsidies prevent homelessness', 'Zoning reform is needed at every level'] },
-      { label: 'Market solutions', points: ['Over-regulation drives up building costs', 'Rent control discourages new construction', 'More supply naturally lowers prices'] },
+      { label: 'Public investment', points: ['The market alone won\'t solve the affordability crisis', 'Vouchers and subsidies prevent homelessness', 'Zoning reform is needed at every level'] },
+      { label: 'Supply-side reform', points: ['Over-regulation drives up building costs', 'Rent control discourages new construction', 'More supply naturally lowers prices'] },
     ],
   },
   'Homelessness': {
@@ -531,7 +531,7 @@ const SUBTOPIC_CONTEXT: Record<string, TopicInfo> = {
       { label: 'Prevention', ask: 'Invest in homelessness prevention — eviction diversion and emergency rental assistance' },
     ],
     perspectives: [
-      { label: 'Housing First', points: ['You can\'t treat mental illness or addiction without stable housing', 'Housing First is proven more effective and cheaper than shelters', 'Criminalizing homelessness doesn\'t solve it'] },
+      { label: 'Housing First', points: ['You can\'t treat mental illness or addiction without stable housing', 'Housing First research shows it can reduce chronic homelessness and cost less than long-term shelter use', 'Criminalizing homelessness doesn\'t solve it'] },
       { label: 'Accountability', points: ['Encampments are unsafe for residents and homeless individuals', 'Treatment should be a requirement, not optional', 'Enabling without accountability doesn\'t help'] },
     ],
   },
@@ -625,8 +625,8 @@ const SUBTOPIC_CONTEXT: Record<string, TopicInfo> = {
       { label: 'Protect small business', ask: 'If raising the minimum wage, phase it in gradually for small businesses' },
     ],
     perspectives: [
-      { label: 'Raise it', points: ['$7.25 is poverty wage — $15K/year before taxes', 'Higher wages reduce turnover and increase productivity', 'States that raised it saw no significant job losses'] },
-      { label: 'Keep flexible', points: ['One size doesn\'t fit all — $15 in NYC differs from rural Alabama', 'Forced increases can reduce hours for low-wage workers', 'Small businesses operate on thin margins'] },
+      { label: 'Raise the wage', points: ['$7.25/hour hasn\'t changed since 2009', 'Higher wages can reduce turnover and increase productivity', 'Many states that raised their minimum saw continued job growth'] },
+      { label: 'Local flexibility', points: ['One size doesn\'t fit all — $15 in NYC differs from rural areas', 'Mandated increases can reduce hours for some low-wage workers', 'Small businesses operate on thin margins'] },
     ],
   },
   // Civil rights subtopics
@@ -681,8 +681,8 @@ const SUBTOPIC_CONTEXT: Record<string, TopicInfo> = {
       { label: 'Worker protections', ask: 'Require companies to provide retraining when AI displaces workers' },
     ],
     perspectives: [
-      { label: 'Regulate now', points: ['AI is moving faster than laws', 'Bias in AI perpetuates discrimination', 'Deepfakes threaten democracy'] },
-      { label: 'Innovation first', points: ['Over-regulation pushes development overseas', 'AI will create more jobs than it destroys', 'Industry self-regulation can move faster'] },
+      { label: 'Regulate proactively', points: ['AI is moving faster than laws can keep up', 'Bias in AI systems can perpetuate discrimination', 'Deepfakes pose risks to elections and individuals'] },
+      { label: 'Let innovation lead', points: ['Over-regulation pushes development overseas', 'AI will create more jobs than it displaces', 'Industry can self-regulate faster than government'] },
     ],
   },
   'Data Privacy': {
@@ -736,8 +736,8 @@ const SUBTOPIC_CONTEXT: Record<string, TopicInfo> = {
       { label: 'Transition support', ask: 'Support fossil fuel workers with job training and economic development during the energy transition' },
     ],
     perspectives: [
-      { label: 'Phase out', points: ['Fossil fuels are the primary driver of climate change', 'Subsidies are corporate welfare for profitable companies', 'Clean energy is already cheaper'] },
-      { label: 'Energy security', points: ['We need oil and gas for energy reliability', 'U.S. production means less reliance on hostile nations', 'Transition should be gradual, not forced'] },
+      { label: 'Transition away', points: ['Fossil fuels are the primary driver of climate change', 'Subsidies go to highly profitable companies', 'Clean energy is already cheaper in many areas'] },
+      { label: 'Continue production', points: ['Oil and gas ensure energy reliability today', 'U.S. production reduces reliance on hostile nations', 'Transition should be gradual, not forced'] },
     ],
   },
   // Trade subtopics
@@ -793,7 +793,433 @@ const SUBTOPIC_CONTEXT: Record<string, TopicInfo> = {
     ],
     perspectives: [
       { label: 'Invest abroad', points: ['Foreign aid prevents conflicts that cost far more', 'Global health programs prevent pandemics from reaching the U.S.', 'Aid builds goodwill and counters Chinese influence'] },
-      { label: 'America first', points: ['Charity begins at home', 'Much aid is wasted or goes to corrupt governments', 'Less than 1% of the budget but every dollar counts'] },
+      { label: 'Domestic focus', points: ['Charity begins at home', 'Much aid is wasted or goes to corrupt governments', 'Less than 1% of the budget but every dollar counts'] },
+    ],
+  },
+  // Families subtopics
+  'Child Care': {
+    summary: 'Child care policy covers affordability, availability, provider quality, and how working parents access care. Average costs vary widely by state.',
+    currentEvents: [
+      'Pandemic-era childcare funding has expired, stressing providers',
+      'Child care deserts — many areas lack enough licensed providers',
+      'Debates over universal pre-K and expanding the child tax credit',
+    ],
+    commonAsks: [
+      { label: 'Expand child tax credit', ask: 'Expand and make permanent the child tax credit to help families with child care costs' },
+      { label: 'Fund universal pre-K', ask: 'Fund universal pre-kindergarten so every child has access to early education' },
+      { label: 'Support providers', ask: 'Increase pay and funding for child care workers to reduce provider shortages' },
+      { label: 'Tax incentives for employers', ask: 'Create tax incentives for employers who offer child care benefits to workers' },
+    ],
+    perspectives: [
+      { label: 'Public investment', points: ['Affordable child care lets parents work and strengthens the economy', 'Early childhood education improves long-term outcomes', 'Provider pay is too low to attract enough workers'] },
+      { label: 'Family choice', points: ['Parents should choose the care arrangement that works for their family', 'Government programs can crowd out private and faith-based options', 'Tax credits give flexibility without growing bureaucracy'] },
+    ],
+  },
+  'Paid Family Leave': {
+    summary: 'The U.S. has no federal paid family leave law. The FMLA guarantees 12 weeks of unpaid leave, but many workers can\'t afford to take it.',
+    currentEvents: [
+      'Several states have implemented their own paid leave programs',
+      'Federal paid leave proposals have stalled in Congress',
+      'Debates over employer mandates vs. tax-credit approaches',
+    ],
+    commonAsks: [
+      { label: 'Federal paid leave', ask: 'Pass a federal paid family and medical leave program' },
+      { label: 'Tax credits approach', ask: 'Offer tax credits to employers who voluntarily provide paid leave' },
+      { label: 'Expand FMLA', ask: 'Expand FMLA to cover more workers and smaller employers' },
+      { label: 'State-level solutions', ask: 'Let states design their own paid leave programs with federal support' },
+    ],
+    perspectives: [
+      { label: 'Worker support', points: ['No one should have to choose between a paycheck and caring for family', 'Paid leave improves worker retention and productivity', 'Most industrialized nations already guarantee paid leave'] },
+      { label: 'Business concerns', points: ['Mandates are especially hard on small businesses', 'Voluntary employer programs are growing without mandates', 'One-size-fits-all doesn\'t work for every industry'] },
+    ],
+  },
+  // Economy subtopics (missing)
+  'Cost of Living': {
+    summary: 'Cost of living encompasses housing, food, healthcare, transportation, and childcare — the everyday expenses that determine whether families can make ends meet.',
+    currentEvents: [
+      'Housing, groceries, and insurance costs remain elevated even as overall inflation moderates',
+      'Regional cost differences create uneven economic pressure across the country',
+      'Debates over whether wages are keeping pace with rising costs',
+    ],
+    commonAsks: [
+      { label: 'Lower everyday costs', ask: 'Take action to reduce the cost of groceries, gas, and housing for working families' },
+      { label: 'Raise wages', ask: 'Support policies that help wages keep up with the rising cost of living' },
+      { label: 'Cut regulations', ask: 'Reduce regulations that drive up costs for consumers and businesses' },
+      { label: 'Targeted relief', ask: 'Provide targeted tax credits or subsidies for families struggling with rising costs' },
+    ],
+    perspectives: [
+      { label: 'Structural solutions', points: ['Wages haven\'t kept up with costs for decades', 'Housing supply and healthcare reform address root causes', 'Working families need direct relief now'] },
+      { label: 'Market solutions', points: ['Government spending contributes to higher prices', 'Reducing regulations lowers costs for everyone', 'A growing economy is the best path to affordability'] },
+    ],
+  },
+  'Federal Budget': {
+    summary: 'The federal budget sets annual spending priorities across defense, healthcare, education, infrastructure, and more. Congress must pass appropriations bills or face shutdowns.',
+    currentEvents: [
+      'Government shutdown threats during budget negotiations',
+      'Debates over discretionary spending levels and continuing resolutions',
+      'Mandatory spending (Social Security, Medicare) grows automatically each year',
+    ],
+    commonAsks: [
+      { label: 'Increase domestic spending', ask: 'Increase funding for education, infrastructure, and social programs' },
+      { label: 'Cut spending', ask: 'Reduce federal spending to bring the budget closer to balance' },
+      { label: 'Reform the process', ask: 'Reform the budget process to prevent shutdowns and last-minute continuing resolutions' },
+      { label: 'Prioritize defense', ask: 'Prioritize defense spending to maintain national security' },
+    ],
+    perspectives: [
+      { label: 'Invest in priorities', points: ['Public investment in infrastructure and education drives growth', 'Safety net programs reduce poverty and stabilize the economy', 'Revenue increases can fund priorities responsibly'] },
+      { label: 'Fiscal restraint', points: ['Government spending must be sustainable', 'Waste and inefficiency should be addressed first', 'Future generations shouldn\'t bear the burden of today\'s spending'] },
+    ],
+  },
+  'National Debt': {
+    summary: 'The U.S. national debt exceeds $34 trillion. Interest payments on the debt are now one of the largest federal expenditures.',
+    currentEvents: [
+      'Debt ceiling negotiations create recurring political standoffs',
+      'Interest payments on the debt are growing rapidly as rates rise',
+      'CBO projects debt will continue growing under current policy',
+    ],
+    commonAsks: [
+      { label: 'Balance the budget', ask: 'Work toward a balanced federal budget to stop adding to the debt' },
+      { label: 'Raise revenue', ask: 'Increase tax revenue from high earners and corporations to reduce the deficit' },
+      { label: 'Cut entitlements', ask: 'Reform entitlement programs to reduce long-term spending growth' },
+      { label: 'Grow the economy', ask: 'Focus on economic growth to increase revenue without raising tax rates' },
+    ],
+    perspectives: [
+      { label: 'Reduce the debt', points: ['Growing debt burdens future generations', 'Interest payments crowd out other spending', 'Fiscal discipline is essential for long-term stability'] },
+      { label: 'Strategic investment', points: ['Not all debt is bad — borrowing for growth pays off', 'Austerity during downturns makes things worse', 'The U.S. can manage its debt as the world\'s reserve currency'] },
+    ],
+  },
+  // Education subtopics (missing)
+  'Higher Education': {
+    summary: 'Higher education policy covers college affordability, the value of degrees, vocational alternatives, and how institutions are funded and regulated.',
+    currentEvents: [
+      'College tuition has risen faster than inflation for decades',
+      'Growing interest in trade schools, apprenticeships, and alternative credentials',
+      'Debates over the return on investment of a four-year degree',
+    ],
+    commonAsks: [
+      { label: 'Free community college', ask: 'Make community college tuition-free to expand access to higher education' },
+      { label: 'Expand Pell Grants', ask: 'Increase Pell Grant funding so low-income students can afford college' },
+      { label: 'Fund vocational training', ask: 'Invest in vocational and trade school programs as alternatives to four-year degrees' },
+      { label: 'Reduce costs', ask: 'Hold colleges accountable for rising costs and administrative bloat' },
+    ],
+    perspectives: [
+      { label: 'Expand access', points: ['Education is the best path to upward mobility', 'Cost shouldn\'t determine who gets a degree', 'Public investment in education pays for itself'] },
+      { label: 'Accountability first', points: ['Colleges need accountability for the outcomes they deliver', 'Not everyone needs a four-year degree', 'Trade skills are in high demand and lead to good-paying jobs'] },
+    ],
+  },
+  // Environment subtopics (missing)
+  'Clean Air': {
+    summary: 'Clean air policy covers emissions standards for vehicles and industry, air quality monitoring, wildfire smoke, and environmental justice in overburdened communities.',
+    currentEvents: [
+      'EPA vehicle emissions standards pushing transition to cleaner cars',
+      'Wildfire smoke affecting air quality across wide regions',
+      'Environmental justice concerns about pollution in low-income communities',
+    ],
+    commonAsks: [
+      { label: 'Strengthen EPA standards', ask: 'Strengthen EPA air quality standards to protect public health' },
+      { label: 'EV transition', ask: 'Support the transition to electric vehicles to improve air quality' },
+      { label: 'Flexible compliance', ask: 'Give industries flexible timelines to meet air quality standards without harming jobs' },
+      { label: 'Environmental justice', ask: 'Prioritize cleaning up pollution in communities that bear the greatest burden' },
+    ],
+    perspectives: [
+      { label: 'Stronger standards', points: ['Air pollution causes hundreds of thousands of premature deaths', 'Low-income communities bear disproportionate exposure', 'Clean air technology creates economic opportunity'] },
+      { label: 'Practical approach', points: ['Regulations should consider economic impact on workers and industries', 'Technology transitions need realistic timelines', 'Local conditions should inform standards'] },
+    ],
+  },
+  'Clean Water': {
+    summary: 'Clean water policy covers drinking water safety, infrastructure upgrades, PFAS contamination, agricultural runoff, and wastewater treatment.',
+    currentEvents: [
+      'Ongoing lead pipe replacement funded by infrastructure law',
+      'PFAS "forever chemicals" found in drinking water nationwide',
+      'Aging water infrastructure needs trillions in investment',
+    ],
+    commonAsks: [
+      { label: 'Replace lead pipes', ask: 'Accelerate replacement of lead pipes to protect children and families' },
+      { label: 'Regulate PFAS', ask: 'Set enforceable limits on PFAS contamination in drinking water' },
+      { label: 'Fund infrastructure', ask: 'Increase funding for water infrastructure upgrades in aging systems' },
+      { label: 'Polluter accountability', ask: 'Hold polluters financially responsible for cleaning up water contamination' },
+    ],
+    perspectives: [
+      { label: 'Federal standards', points: ['Safe water is a basic right that requires strong standards', 'Local systems need federal help to replace aging infrastructure', 'PFAS contamination is a nationwide problem requiring a national response'] },
+      { label: 'Local control', points: ['States and localities understand their water systems best', 'Federal mandates without funding shift costs to ratepayers', 'Regulations should be based on sound science and cost-benefit analysis'] },
+    ],
+  },
+  // Housing subtopics (missing)
+  'Rent': {
+    summary: 'Rent policy covers affordability, tenant protections, eviction processes, and whether rent stabilization helps or hurts the housing market.',
+    currentEvents: [
+      'Rents have increased significantly in most metro areas',
+      'Eviction filings rising after pandemic-era protections expired',
+      'Debates over rent control and tenant protection legislation',
+    ],
+    commonAsks: [
+      { label: 'Rent stabilization', ask: 'Support rent stabilization measures to prevent extreme rent increases' },
+      { label: 'Tenant protections', ask: 'Strengthen tenant protections against unfair evictions and fee gouging' },
+      { label: 'Build more housing', ask: 'Focus on increasing housing supply rather than price controls' },
+      { label: 'Landlord fairness', ask: 'Balance tenant protections with the ability of landlords to maintain and invest in properties' },
+    ],
+    perspectives: [
+      { label: 'Protect renters', points: ['Housing instability harms families, health, and children\'s education', 'Renters need protections against sudden, extreme increases', 'Eviction prevention saves money compared to homelessness services'] },
+      { label: 'Market approach', points: ['Rent control discourages new construction and reduces supply', 'More housing supply is the most effective way to lower rents', 'Property owners need predictability to invest in maintenance'] },
+    ],
+  },
+  'Mortgage Rates': {
+    summary: 'Mortgage rates affect whether families can afford to buy homes. Rates are influenced by the Federal Reserve, inflation, and housing market conditions.',
+    currentEvents: [
+      'Higher mortgage rates have significantly reduced home affordability',
+      'Low housing inventory and high rates creating a "lock-in" effect for existing homeowners',
+      'First-time buyers face especially steep barriers to homeownership',
+    ],
+    commonAsks: [
+      { label: 'First-time buyer help', ask: 'Expand first-time homebuyer programs including down payment assistance' },
+      { label: 'Increase supply', ask: 'Address the housing supply shortage to bring down home prices' },
+      { label: 'Keep government out', ask: 'Let the market set mortgage rates without government intervention' },
+      { label: 'Zoning reform', ask: 'Reform local zoning laws that restrict new housing construction' },
+    ],
+    perspectives: [
+      { label: 'Assist buyers', points: ['Homeownership is how most families build wealth', 'Current rates lock out an entire generation of buyers', 'Targeted assistance helps without distorting the market'] },
+      { label: 'Let markets work', points: ['Government subsidies can inflate prices further', 'Supply-side solutions address the root problem', 'Artificially low rates contributed to past housing bubbles'] },
+    ],
+  },
+  // Taxation subtopics (missing)
+  'Tax Reform': {
+    summary: 'Tax reform efforts aim to simplify the tax code, close loopholes, adjust rates, and make the system fairer — though what "fairer" means depends on your perspective.',
+    currentEvents: [
+      'Tax Cuts and Jobs Act provisions set to expire, prompting a major reform debate',
+      'Proposals range from flat taxes to expanded credits to wealth taxes',
+      'Complexity of the code costs Americans billions in compliance time and fees',
+    ],
+    commonAsks: [
+      { label: 'Simplify filing', ask: 'Simplify the tax code so most Americans can file easily without professional help' },
+      { label: 'Close loopholes', ask: 'Close tax loopholes that allow some to pay less than their fair share' },
+      { label: 'Lower rates', ask: 'Lower tax rates for individuals and businesses to spur economic growth' },
+      { label: 'Progressive reform', ask: 'Make the tax code more progressive so higher earners contribute more' },
+    ],
+    perspectives: [
+      { label: 'Simpler and lower', points: ['The current code is too complex and costly to comply with', 'Lower rates encourage investment and job creation', 'Fewer loopholes mean a broader, fairer base'] },
+      { label: 'More equitable', points: ['The wealthy often pay lower effective rates than workers', 'Revenue from closing loopholes can fund essential services', 'The tax code should reduce inequality, not increase it'] },
+    ],
+  },
+  // Social Welfare subtopics (missing)
+  'Disability Benefits': {
+    summary: 'Social Security Disability Insurance (SSDI) and Supplemental Security Income (SSI) provide income to Americans with disabilities. Application wait times can stretch over a year.',
+    currentEvents: [
+      'Application backlogs and long wait times for disability determinations',
+      'Debates over benefit adequacy — SSI maximum is below the poverty line',
+      'Work incentive programs aimed at helping beneficiaries return to work',
+    ],
+    commonAsks: [
+      { label: 'Reduce wait times', ask: 'Hire more administrative law judges to reduce the disability application backlog' },
+      { label: 'Increase benefits', ask: 'Raise SSI benefit levels above the poverty line' },
+      { label: 'Work incentives', ask: 'Improve work incentive programs so people can work without losing benefits abruptly' },
+      { label: 'Prevent fraud', ask: 'Strengthen oversight to prevent disability fraud while protecting legitimate claimants' },
+    ],
+    perspectives: [
+      { label: 'Strengthen the safety net', points: ['People with disabilities deserve adequate support', 'The application process is inhumane — people die waiting', 'Benefits haven\'t kept up with the cost of living'] },
+      { label: 'Reform for sustainability', points: ['The system needs better oversight to ensure it helps those truly in need', 'Work incentives help people regain independence', 'Long-term solvency requires smart reforms'] },
+    ],
+  },
+  'Safety Net Programs': {
+    summary: 'Federal safety net programs include SNAP (food assistance), TANF (cash assistance), WIC (nutrition for mothers and children), and housing assistance.',
+    currentEvents: [
+      'Debates over work requirements for SNAP and other benefit programs',
+      'SNAP benefit adjustments and eligibility changes',
+      'Pandemic-era expansions have expired, affecting millions of families',
+    ],
+    commonAsks: [
+      { label: 'Protect benefits', ask: 'Protect SNAP, WIC, and other safety net programs from cuts' },
+      { label: 'Add work requirements', ask: 'Add or strengthen work requirements for able-bodied adults receiving benefits' },
+      { label: 'Expand eligibility', ask: 'Expand eligibility for safety net programs to cover more working families' },
+      { label: 'Block grants to states', ask: 'Convert programs to block grants so states have more flexibility in how they serve residents' },
+    ],
+    perspectives: [
+      { label: 'Protect and expand', points: ['These programs keep millions out of poverty', 'Most recipients are working families, children, elderly, or disabled', 'Hunger and poverty cost more in healthcare and lost productivity'] },
+      { label: 'Reform and accountability', points: ['Programs should encourage self-sufficiency', 'States know their populations best and need flexibility', 'Spending must be sustainable long-term'] },
+    ],
+  },
+  // Armed Forces subtopics (missing)
+  'Veterans': {
+    summary: 'Over 18 million Americans are veterans. Key issues include healthcare access through the VA, disability benefits, mental health, homelessness, and the transition to civilian life.',
+    currentEvents: [
+      'PACT Act expanded benefits for veterans exposed to burn pits and toxic substances',
+      'VA modernization efforts to reduce wait times and improve care',
+      'Veteran suicide prevention remains a major focus',
+    ],
+    commonAsks: [
+      { label: 'Expand VA care', ask: 'Expand VA healthcare access and reduce wait times for veterans' },
+      { label: 'Mental health resources', ask: 'Increase mental health and suicide prevention resources for veterans' },
+      { label: 'Community care options', ask: 'Expand community care options so veterans can see private doctors when VA wait times are too long' },
+      { label: 'Transition support', ask: 'Improve programs that help veterans transition to civilian careers' },
+    ],
+    perspectives: [
+      { label: 'Strengthen the VA', points: ['Veterans earned their care through service', 'The VA understands veteran-specific needs better than private providers', 'Funding the VA properly solves most access problems'] },
+      { label: 'More options', points: ['Veterans deserve the freedom to choose their healthcare provider', 'Competition improves quality for veterans', 'Not every veteran lives near a VA facility'] },
+    ],
+  },
+  'Military Funding': {
+    summary: 'The U.S. military budget is the largest in the world. Debates focus on whether spending levels are adequate, how funds are allocated, and what threats to prioritize.',
+    currentEvents: [
+      'Annual defense budget exceeds $800 billion',
+      'Competition with China driving modernization and technology investment',
+      'Military recruitment challenges across service branches',
+    ],
+    commonAsks: [
+      { label: 'Increase funding', ask: 'Increase military funding to maintain readiness and deter adversaries' },
+      { label: 'Audit spending', ask: 'Require the Pentagon to pass a full audit and eliminate waste' },
+      { label: 'Redirect to domestic', ask: 'Redirect some military spending toward domestic priorities like infrastructure and education' },
+      { label: 'Modernize', ask: 'Prioritize military modernization and technology over legacy systems' },
+    ],
+    perspectives: [
+      { label: 'Strong defense', points: ['Peace through strength deters conflict', 'Threats from China, Russia, and others are growing', 'Underfunding the military risks national security'] },
+      { label: 'Smarter spending', points: ['The Pentagon has never passed a full audit', 'Spending more doesn\'t always mean better outcomes', 'Domestic investments also strengthen national security'] },
+    ],
+  },
+  'Defense Spending': {
+    summary: 'Defense spending policy covers weapons procurement, military pay, base operations, research and development, and allied burden-sharing.',
+    currentEvents: [
+      'New weapons systems (hypersonic, AI, space) driving R&D spending',
+      'Debates over force structure — fewer troops, more technology',
+      'Allied nations increasing their own defense spending',
+    ],
+    commonAsks: [
+      { label: 'Invest in technology', ask: 'Prioritize defense R&D in AI, cyber, and emerging technologies' },
+      { label: 'Maintain force strength', ask: 'Maintain troop levels and readiness to meet current threats' },
+      { label: 'Allies pay more', ask: 'Insist that allied nations meet their own defense spending commitments' },
+      { label: 'Cut excess', ask: 'Close unneeded bases and cut legacy programs to free up funds' },
+    ],
+    perspectives: [
+      { label: 'Maintain superiority', points: ['Technological superiority is the cornerstone of national defense', 'Adversaries are investing heavily — we must keep pace', 'Defense jobs support communities across the country'] },
+      { label: 'Efficient spending', points: ['Throwing money at defense doesn\'t guarantee security', 'The Pentagon needs accountability before more funding', 'Diplomacy and alliances can be more cost-effective'] },
+    ],
+  },
+  // Civil Rights subtopics (missing)
+  'Discrimination': {
+    summary: 'Anti-discrimination policy covers protections in employment, housing, education, and public services based on race, gender, religion, disability, and other characteristics.',
+    currentEvents: [
+      'Supreme Court rulings on affirmative action in college admissions',
+      'Debates over diversity, equity, and inclusion (DEI) programs',
+      'Enforcement of workplace discrimination protections',
+    ],
+    commonAsks: [
+      { label: 'Strengthen enforcement', ask: 'Strengthen enforcement of existing anti-discrimination laws' },
+      { label: 'Color-blind policy', ask: 'Support color-blind, merit-based policies rather than race-conscious ones' },
+      { label: 'Protect DEI', ask: 'Protect diversity and inclusion programs that address systemic barriers' },
+      { label: 'Religious exemptions', ask: 'Ensure anti-discrimination law includes protections for sincerely held religious beliefs' },
+    ],
+    perspectives: [
+      { label: 'Active remedies', points: ['Historical discrimination created barriers that persist today', 'Diverse institutions perform better and serve more people', 'Enforcement is essential because discrimination still occurs'] },
+      { label: 'Equal treatment', points: ['The law should treat everyone the same regardless of identity', 'Merit-based systems are the fairest approach', 'Government mandates can have unintended consequences'] },
+    ],
+  },
+  'Free Speech': {
+    summary: 'Free speech policy covers First Amendment protections, campus speech, protest rights, government censorship, and the line between free expression and harmful speech.',
+    currentEvents: [
+      'Campus speech codes and speaker disinvitation debates',
+      'Government involvement in social media content moderation under scrutiny',
+      'Protest rights and laws restricting demonstrations',
+    ],
+    commonAsks: [
+      { label: 'Protect all speech', ask: 'Protect broad free speech rights including speech that is controversial or unpopular' },
+      { label: 'Campus free speech', ask: 'Pass legislation protecting free speech and open debate on college campuses' },
+      { label: 'Limit harmful speech', ask: 'Establish reasonable limits on speech that directly incites violence or harassment' },
+      { label: 'Government neutrality', ask: 'Prevent the government from pressuring private platforms to censor lawful speech' },
+    ],
+    perspectives: [
+      { label: 'Broad protections', points: ['Free speech is the foundation of democracy', 'Unpopular speech is exactly what the First Amendment protects', 'Government should never be the arbiter of acceptable ideas'] },
+      { label: 'Responsible limits', points: ['Free speech doesn\'t mean freedom from consequences', 'Some speech causes real harm to vulnerable communities', 'Platforms and institutions can set standards without violating the First Amendment'] },
+    ],
+  },
+  // Labor subtopics (missing)
+  'Worker Rights': {
+    summary: 'Worker rights policy covers workplace safety, overtime protections, gig worker classification, anti-retaliation, and the balance between employer flexibility and employee protections.',
+    currentEvents: [
+      'Gig worker classification debates (employee vs. independent contractor)',
+      'Remote work policies and employer flexibility after the pandemic',
+      'OSHA enforcement and workplace safety standards',
+    ],
+    commonAsks: [
+      { label: 'Classify gig workers', ask: 'Classify gig workers as employees so they receive benefits and protections' },
+      { label: 'Strengthen OSHA', ask: 'Strengthen workplace safety enforcement and increase OSHA funding' },
+      { label: 'Worker flexibility', ask: 'Preserve worker flexibility and independent contractor status for those who want it' },
+      { label: 'Overtime protections', ask: 'Expand overtime pay protections to cover more salaried workers' },
+    ],
+    perspectives: [
+      { label: 'Stronger protections', points: ['Workers are the backbone of the economy and deserve fair treatment', 'Misclassification denies workers benefits they\'ve earned', 'Safety regulations save lives'] },
+      { label: 'Flexibility and choice', points: ['Many workers prefer independent contractor flexibility', 'Over-regulation increases costs and reduces opportunities', 'Businesses need flexibility to compete and create jobs'] },
+    ],
+  },
+  'Unions': {
+    summary: 'Union policy covers the right to organize, collective bargaining, right-to-work laws, and whether labor law should be reformed to make organizing easier or harder.',
+    currentEvents: [
+      'High-profile organizing efforts at major companies (Amazon, Starbucks, etc.)',
+      'PRO Act (Protecting the Right to Organize) debated in Congress',
+      'Right-to-work laws in place in roughly half the states',
+    ],
+    commonAsks: [
+      { label: 'Pass the PRO Act', ask: 'Pass the PRO Act to strengthen workers\' right to organize and bargain collectively' },
+      { label: 'Protect right to organize', ask: 'Protect workers from retaliation when they try to form or join a union' },
+      { label: 'Right-to-work', ask: 'Support right-to-work laws so no one is forced to pay union dues as a condition of employment' },
+      { label: 'Modernize labor law', ask: 'Update labor law to reflect the modern economy including gig and remote work' },
+    ],
+    perspectives: [
+      { label: 'Support organizing', points: ['Unions helped build the middle class', 'Collective bargaining gives workers a fair voice', 'Union workers earn higher wages and better benefits on average'] },
+      { label: 'Worker freedom', points: ['Workers should choose whether to join a union without pressure', 'Unions can make businesses less competitive', 'Right-to-work protects individual choice'] },
+    ],
+  },
+  // Additional Food Assistance subtopic
+  'Food Assistance': {
+    summary: 'SNAP (formerly food stamps) serves roughly 40 million Americans. Policy debates focus on benefit levels, eligibility, work requirements, and nutrition standards.',
+    currentEvents: [
+      'SNAP benefit levels adjusted after pandemic-era expansions ended',
+      'Work requirement proposals for able-bodied adults in farm bill debates',
+      'Rising food costs putting pressure on both families and program budgets',
+    ],
+    commonAsks: [
+      { label: 'Protect SNAP', ask: 'Protect SNAP funding and oppose cuts to food assistance' },
+      { label: 'Work requirements', ask: 'Support work requirements for able-bodied SNAP recipients without dependents' },
+      { label: 'Increase benefits', ask: 'Increase SNAP benefits to keep up with rising food costs' },
+      { label: 'Improve nutrition', ask: 'Update SNAP nutrition standards to encourage healthier food choices' },
+    ],
+    perspectives: [
+      { label: 'Protect the program', points: ['SNAP is the front line against hunger in America', 'Most recipients are children, elderly, or working adults', 'Hunger reduces productivity and increases healthcare costs'] },
+      { label: 'Reform the program', points: ['Work requirements encourage self-sufficiency', 'The program should focus on those who truly need it', 'Better nutrition standards improve outcomes'] },
+    ],
+  },
+  // Nuclear Energy subtopic
+  'Nuclear Energy': {
+    summary: 'Nuclear energy provides about 20% of U.S. electricity with near-zero carbon emissions. Policy debates focus on safety, waste, costs, and the role of nuclear in the energy mix.',
+    currentEvents: [
+      'Renewed interest in nuclear as a clean energy source',
+      'Small modular reactors (SMRs) advancing through regulatory approval',
+      'Debates over extending licenses for existing nuclear plants vs. building new ones',
+    ],
+    commonAsks: [
+      { label: 'Expand nuclear', ask: 'Support expansion of nuclear energy as part of a clean energy strategy' },
+      { label: 'Fund SMRs', ask: 'Invest in small modular reactor technology to make nuclear cheaper and safer' },
+      { label: 'Phase out nuclear', ask: 'Phase out nuclear power due to waste, cost, and safety concerns' },
+      { label: 'Solve waste storage', ask: 'Develop a permanent solution for nuclear waste storage' },
+    ],
+    perspectives: [
+      { label: 'Pro-nuclear', points: ['Nuclear is the largest source of carbon-free electricity', 'New designs are safer and produce less waste', 'Nuclear provides reliable baseload power unlike wind and solar'] },
+      { label: 'Nuclear skepticism', points: ['Nuclear waste remains dangerous for thousands of years', 'New plants are extremely expensive and slow to build', 'Renewables and storage can fill the same role more cheaply'] },
+    ],
+  },
+  'VA Healthcare': {
+    summary: 'The VA healthcare system serves over 9 million enrolled veterans. Issues include wait times, quality of care, mental health services, and the balance between VA and private care.',
+    currentEvents: [
+      'PACT Act expanding eligibility for veterans exposed to toxic substances',
+      'VA wait times and staffing shortages at some facilities',
+      'Community Care program allowing veterans to see private doctors',
+    ],
+    commonAsks: [
+      { label: 'Reduce wait times', ask: 'Hire more VA medical staff to reduce wait times for veteran appointments' },
+      { label: 'Expand Community Care', ask: 'Expand the Community Care program so veterans have more options near them' },
+      { label: 'Mental health focus', ask: 'Increase VA mental health and suicide prevention resources' },
+      { label: 'Strengthen the VA', ask: 'Invest in VA facilities and staff rather than privatizing veteran care' },
+    ],
+    perspectives: [
+      { label: 'Invest in the VA', points: ['The VA understands veteran-specific conditions like no other system', 'Properly funded, the VA delivers excellent care', 'Privatization fragments care and loses institutional knowledge'] },
+      { label: 'Veteran choice', points: ['Veterans should choose where they get care', 'Private options reduce wait times', 'Competition improves quality for everyone'] },
     ],
   },
 };
@@ -858,8 +1284,8 @@ const CATEGORY_CONTEXT: Record<string, TopicInfo> = {
       { label: 'Fund community safety', ask: 'Invest in community-based violence prevention programs' },
     ],
     perspectives: [
-      { label: 'Prevention focus', points: ['Background checks save lives', 'Community programs reduce violence', 'Mental health and gun access are connected'] },
-      { label: 'Rights focus', points: ['Law-abiding citizens have a right to self-defense', 'Enforce existing laws before adding new ones', 'Root causes need addressing'] },
+      { label: 'More regulation', points: ['Background checks can save lives', 'Community programs reduce violence', 'Mental health and gun access are connected'] },
+      { label: 'Protect rights', points: ['Law-abiding citizens have a right to self-defense', 'Enforce existing laws before adding new ones', 'Root causes need addressing'] },
     ],
   },
   'Environmental Protection': {
@@ -871,8 +1297,8 @@ const CATEGORY_CONTEXT: Record<string, TopicInfo> = {
       { label: 'Protect clean water', ask: 'Strengthen clean water protections and infrastructure' },
     ],
     perspectives: [
-      { label: 'Climate urgency', points: ['Scientific consensus demands action', 'Clean energy creates jobs', 'Extreme weather costs are rising'] },
-      { label: 'Economic balance', points: ['Regulations must consider job impacts', 'Energy independence needs all sources', 'Gradual transitions protect workers'] },
+      { label: 'Faster action', points: ['Scientific consensus supports action', 'Clean energy creates economic opportunity', 'Extreme weather costs are rising'] },
+      { label: 'Measured transition', points: ['Regulations must consider job impacts', 'Energy independence needs all sources', 'Gradual transitions protect workers and communities'] },
     ],
   },
   'Taxation': {
@@ -884,8 +1310,8 @@ const CATEGORY_CONTEXT: Record<string, TopicInfo> = {
       { label: 'Close loopholes', ask: 'Close corporate tax loopholes so all businesses pay their fair share' },
     ],
     perspectives: [
-      { label: 'Progressive', points: ['Wealthy should pay more', 'Revenue funds essential services', 'Tax credits help working families'] },
-      { label: 'Lower taxes', points: ['Lower taxes spur growth', 'People spend their money better than government', 'Simplify the tax code'] },
+      { label: 'More revenue', points: ['Higher earners can contribute more', 'Revenue funds essential services', 'Tax credits help working families'] },
+      { label: 'Lower rates', points: ['Lower taxes spur growth', 'People spend their money better than government', 'Simplify the tax code'] },
     ],
   },
   'Economics and Public Finance': {
@@ -966,6 +1392,58 @@ const CATEGORY_CONTEXT: Record<string, TopicInfo> = {
       { label: 'Liberty focus', points: ['Government overreach threatens freedom', 'Individual rights must be balanced', 'States should decide many of these issues'] },
     ],
   },
+  'Families': {
+    summary: 'Family policy covers child care, parental leave, adoption, child welfare, and work-family balance.',
+    currentEvents: ['Childcare costs rising faster than wages', 'Federal paid leave proposals debated in Congress', 'Child tax credit expansion debates'],
+    commonAsks: [
+      { label: 'Affordable child care', ask: 'Support policies that make child care affordable for working families' },
+      { label: 'Paid family leave', ask: 'Pass federal paid family leave so parents can bond with newborns without losing income' },
+      { label: 'Expand child tax credit', ask: 'Expand the child tax credit to help families with the cost of raising children' },
+    ],
+    perspectives: [
+      { label: 'Public investment', points: ['Families need support to thrive in today\'s economy', 'Affordable child care benefits children and parents', 'Paid leave improves child health and family stability'] },
+      { label: 'Family choice', points: ['Parents know best how to raise their children', 'Tax credits give flexibility without government programs', 'Mandates on employers can reduce jobs and wages'] },
+    ],
+  },
+  'Energy': {
+    summary: 'Energy policy covers the mix of sources powering the nation — oil, gas, nuclear, solar, wind — and the balance between affordability, reliability, and environmental impact.',
+    currentEvents: ['Debates over the pace of transition from fossil fuels to clean energy', 'Energy prices affected by global supply and domestic policy', 'Grid modernization and reliability challenges'],
+    commonAsks: [
+      { label: 'All-of-the-above', ask: 'Support an all-of-the-above energy strategy that includes fossil fuels and renewables' },
+      { label: 'Clean energy', ask: 'Accelerate the transition to clean energy sources' },
+      { label: 'Energy independence', ask: 'Prioritize domestic energy production to reduce reliance on foreign sources' },
+    ],
+    perspectives: [
+      { label: 'Transition faster', points: ['Clean energy is now cheaper and creates jobs', 'Climate change requires urgent action', 'Energy independence through renewables'] },
+      { label: 'Reliable and affordable', points: ['Fossil fuels ensure reliability today', 'Rapid transitions risk grid stability', 'Energy costs must remain affordable'] },
+    ],
+  },
+  'Foreign Trade and International Finance': {
+    summary: 'Trade policy covers tariffs, trade agreements, supply chains, and the balance between protecting domestic industries and keeping consumer prices low.',
+    currentEvents: ['Tariffs on imports from multiple countries', 'Supply chain reshoring and "friend-shoring" efforts', 'Trade tensions with major partners'],
+    commonAsks: [
+      { label: 'Protect American jobs', ask: 'Use tariffs and trade policy to protect American manufacturing jobs' },
+      { label: 'Free trade', ask: 'Reduce tariffs and barriers to lower costs for consumers and businesses' },
+      { label: 'Fair trade deals', ask: 'Negotiate trade deals that protect workers and the environment' },
+    ],
+    perspectives: [
+      { label: 'Protect industry', points: ['Tariffs bring manufacturing back', 'Trade partners must play by fair rules', 'National security requires domestic production'] },
+      { label: 'Open trade', points: ['Tariffs raise costs for consumers', 'Trade creates jobs in export industries', 'Allies benefit from economic cooperation'] },
+    ],
+  },
+  'Science, Technology, Communications': {
+    summary: 'Tech policy covers AI regulation, data privacy, social media, broadband access, and how technology affects jobs, elections, and daily life.',
+    currentEvents: ['AI regulation proposals advancing', 'Data privacy legislation debated', 'Social media and youth safety concerns'],
+    commonAsks: [
+      { label: 'Regulate AI', ask: 'Pass legislation requiring transparency and safety standards for AI systems' },
+      { label: 'Data privacy', ask: 'Pass a comprehensive federal data privacy law' },
+      { label: 'Protect kids online', ask: 'Pass stronger protections for children on social media platforms' },
+    ],
+    perspectives: [
+      { label: 'Regulate technology', points: ['Technology is moving faster than the law', 'Privacy and safety require federal standards', 'Platforms should be accountable'] },
+      { label: 'Encourage innovation', points: ['Over-regulation pushes companies overseas', 'The private sector innovates faster than government', 'Light-touch regulation preserves competition'] },
+    ],
+  },
 };
 
 // Look up context: specific issue first, then category fallback
@@ -979,6 +1457,11 @@ function TopicInfoPanel({ issueCategory, issue, onSelectAsk }: {
   onSelectAsk: (ask: string) => void;
 }) {
   const context = getTopicContext(issue, issueCategory);
+
+  // Randomize perspective order so neither side consistently appears first
+  const [perspectiveOrder] = useState(() =>
+    context ? (Math.random() < 0.5 ? [...context.perspectives] : [...context.perspectives].reverse()) : []
+  );
 
   if (!context) return null;
 
@@ -1021,7 +1504,7 @@ function TopicInfoPanel({ issueCategory, issue, onSelectAsk }: {
       <div>
         <p className="text-xs font-semibold text-blue-700 dark:text-blue-300 mb-1.5">Different perspectives:</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-          {context.perspectives.map((perspective) => (
+          {perspectiveOrder.map((perspective) => (
             <div key={perspective.label} className="bg-white/60 dark:bg-gray-700/50 rounded-lg p-2.5">
               <p className="text-xs font-medium text-blue-800 dark:text-blue-200 mb-1">{perspective.label}</p>
               <ul className="space-y-0.5">
@@ -1239,7 +1722,7 @@ export function TopicStep({ state, dispatch, onBack }: TopicStepProps) {
         {showStoryHelp && (
           <div className="mb-3 p-3 bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-700 rounded-xl space-y-3">
             <p className="text-xs font-medium text-purple-800 dark:text-purple-200">
-              Messages with personal stories are 6x more likely to be flagged for a legislator&apos;s attention.
+              Congressional staff say that personal stories stand out — messages that share a real experience are much more likely to get attention.
             </p>
 
             {/* Story starter prompts */}
