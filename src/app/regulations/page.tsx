@@ -4,7 +4,7 @@ import { BreadcrumbJsonLd } from '@/lib/seo';
 import { RegulationsBrowser } from '@/components/regulations/RegulationsBrowser';
 
 export const metadata: Metadata = {
-  title: 'Federal Regulations & Public Comment — Have Your Say | My Democracy',
+  title: 'Federal Regulations & Public Comment | My Democracy',
   description: 'Browse open federal regulations accepting public comments. Submit your opinion on proposed rules from the EPA, FCC, HHS, and more. Track executive orders and recent rules.',
   keywords: [
     'public comment', 'federal regulations', 'proposed rules', 'regulations.gov',
@@ -48,7 +48,7 @@ export default function RegulationsPage() {
             <div className="text-sm text-purple-800 dark:text-purple-300">
               <p className="font-medium mb-1">How public comment works</p>
               <p>
-                When a federal agency proposes a new rule, they must publish it and accept public comments — typically for 30-60 days. Agencies are legally required to read and respond to substantive comments. Your comment becomes part of the official record and can influence the final rule. This is one of the most direct ways to shape federal policy.
+                When a federal agency proposes a new rule, they must publish it and accept public comments, typically for 30-60 days. Agencies are legally required to read and respond to substantive comments. Your comment becomes part of the official record and can influence the final rule. This is one of the most direct ways to shape federal policy.
               </p>
             </div>
           </div>

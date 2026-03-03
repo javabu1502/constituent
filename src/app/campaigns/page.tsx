@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { createAdminClient } from '@/lib/supabase';
 
 export const metadata: Metadata = {
-  title: 'Campaigns — My Democracy',
+  title: 'Campaigns | My Democracy',
   description: 'Browse public civic campaigns. Rally others around issues you care about.',
 };
 

@@ -128,7 +128,7 @@ export function AddressAutocomplete({
 
   // Load Google Maps API
   useEffect(() => {
-    // Suppress the "This page can't load Google Maps correctly" overlay —
+    // Suppress the "This page can't load Google Maps correctly" overlay.
     // we only use Places Autocomplete, not map rendering.
     (window as unknown as Record<string, unknown>).gm_authFailure = () => {
       setTimeout(() => {
@@ -182,7 +182,7 @@ export function AddressAutocomplete({
       <div className="space-y-3">
         {optional && (
           <p className="text-xs text-gray-500 dark:text-gray-400">
-            Optional — add your address to find your representatives
+            Optional - add your address to find your representatives
           </p>
         )}
         <Input
@@ -235,7 +235,7 @@ export function AddressAutocomplete({
     <div className="space-y-2">
       {optional && (
         <p className="text-xs text-gray-500 dark:text-gray-400">
-          Optional — add your address to find your representatives
+          Optional: add your address to find your representatives
         </p>
       )}
       <div>

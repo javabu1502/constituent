@@ -36,7 +36,7 @@ export default function CampaignGuidePage() {
 
         <div className="prose prose-gray dark:prose-invert max-w-none">
           <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
-            A campaign turns one person&apos;s concern into a collective voice. When dozens or hundreds of constituents contact their representatives about the same issue — each with their own personal story — legislators pay attention. Here&apos;s how to make your campaign as effective as possible.
+            A campaign turns one person&apos;s concern into a collective voice. When dozens or hundreds of constituents contact their representatives about the same issue, each with their own personal story, legislators pay attention. Here&apos;s how to make your campaign as effective as possible.
           </p>
 
           {/* Why Campaigns Work */}
@@ -51,16 +51,16 @@ export default function CampaignGuidePage() {
             </h2>
             <div className="pl-10 text-gray-600 dark:text-gray-300 space-y-4">
               <p>
-                Congressional offices tally every message they receive, and volume matters. When a staffer sees 50 messages about the same issue in a week, that gets elevated to the legislator. A single voice is easy to overlook — a chorus is impossible to ignore.
+                Congressional offices tally every message they receive, and volume matters. When a staffer sees 50 messages about the same issue in a week, that gets elevated to the legislator. A single voice is easy to overlook. A chorus is impossible to ignore.
               </p>
               <p>
                 <strong className="text-gray-900 dark:text-white">Campaigns amplify impact because:</strong>
               </p>
               <ul className="list-disc list-inside space-y-2">
-                <li><strong className="text-gray-900 dark:text-white">Volume signals priority</strong> — Staffers report constituent sentiment in weekly briefings. A spike in messages on an issue moves it up the priority list.</li>
-                <li><strong className="text-gray-900 dark:text-white">Every message is unique</strong> — Unlike petition signatures, each campaign participant sends a personalized message with their own story. This carries far more weight than a form letter.</li>
-                <li><strong className="text-gray-900 dark:text-white">Geographic spread matters</strong> — Messages from across a district prove an issue isn&apos;t limited to one neighborhood.</li>
-                <li><strong className="text-gray-900 dark:text-white">It&apos;s harder to dismiss</strong> — One email is easy to file away. Fifty unique, personal messages from real constituents demand a response.</li>
+                <li><strong className="text-gray-900 dark:text-white">Volume signals priority</strong>: Staffers report constituent sentiment in weekly briefings. A spike in messages on an issue moves it up the priority list.</li>
+                <li><strong className="text-gray-900 dark:text-white">Every message is unique</strong>: Unlike petition signatures, each campaign participant sends a personalized message with their own story. This carries far more weight than a form letter.</li>
+                <li><strong className="text-gray-900 dark:text-white">Geographic spread matters</strong>: Messages from across a district prove an issue isn&apos;t limited to one neighborhood.</li>
+                <li><strong className="text-gray-900 dark:text-white">It&apos;s harder to dismiss</strong>: One email is easy to file away. Fifty unique, personal messages from real constituents demand a response.</li>
               </ul>
             </div>
           </section>
@@ -83,10 +83,10 @@ export default function CampaignGuidePage() {
                 <strong className="text-gray-900 dark:text-white">What makes a great headline:</strong>
               </p>
               <ul className="list-disc list-inside space-y-2">
-                <li><strong className="text-gray-900 dark:text-white">Be specific</strong> — &quot;Protect funding for Lincoln Elementary&apos;s after-school program&quot; beats &quot;Save our schools&quot;</li>
-                <li><strong className="text-gray-900 dark:text-white">Use action words</strong> — Start with verbs like &quot;Protect,&quot; &quot;Stop,&quot; &quot;Support,&quot; &quot;Demand,&quot; &quot;Fund&quot;</li>
-                <li><strong className="text-gray-900 dark:text-white">Make it local</strong> — If this affects a specific community, name it</li>
-                <li><strong className="text-gray-900 dark:text-white">Keep it under 80 characters</strong> — Short enough to share easily and display well on mobile</li>
+                <li><strong className="text-gray-900 dark:text-white">Be specific</strong>: &quot;Protect funding for Lincoln Elementary&apos;s after-school program&quot; beats &quot;Save our schools&quot;</li>
+                <li><strong className="text-gray-900 dark:text-white">Use action words</strong>: Start with verbs like &quot;Protect,&quot; &quot;Stop,&quot; &quot;Support,&quot; &quot;Demand,&quot; &quot;Fund&quot;</li>
+                <li><strong className="text-gray-900 dark:text-white">Make it local</strong>: If this affects a specific community, name it</li>
+                <li><strong className="text-gray-900 dark:text-white">Keep it under 80 characters</strong>: Short enough to share easily and display well on mobile</li>
               </ul>
               <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg text-sm space-y-2">
                 <p><span className="text-green-600 dark:text-green-400">Good:</span> &quot;Stop the closure of Riverside Community Health Center&quot;</p>
@@ -109,7 +109,7 @@ export default function CampaignGuidePage() {
             </h2>
             <div className="pl-10 text-gray-600 dark:text-gray-300 space-y-4">
               <p>
-                Your description is your pitch. Someone is deciding whether to spend five minutes taking action — give them a reason.
+                Your description is your pitch. Someone is deciding whether to spend five minutes taking action. Give them a reason.
               </p>
               <div className="space-y-6">
                 <div>
@@ -133,7 +133,7 @@ export default function CampaignGuidePage() {
                 <div>
                   <h3 className="font-semibold text-gray-900 dark:text-white mb-2">4. Create urgency</h3>
                   <p>
-                    If there&apos;s a deadline — a vote date, a budget hearing, a comment period — mention it. Urgency drives action.
+                    If there&apos;s a deadline, such as a vote date, a budget hearing, or a comment period, mention it. Urgency drives action.
                   </p>
                 </div>
               </div>
@@ -158,11 +158,11 @@ export default function CampaignGuidePage() {
                 <strong className="text-gray-900 dark:text-white">Keep these principles in mind:</strong>
               </p>
               <ul className="list-disc list-inside space-y-2">
-                <li><strong className="text-gray-900 dark:text-white">One ask, not ten</strong> — Focus on a single, specific action you want legislators to take. &quot;Vote YES on SB 456&quot; is better than a list of grievances. Messages with a clear ask are more likely to be logged correctly.</li>
-                <li><strong className="text-gray-900 dark:text-white">Be specific about the action</strong> — &quot;Co-sponsor HR 789&quot; or &quot;Vote to restore the $2M budget line for community clinics&quot; gives staffers something actionable to report.</li>
-                <li><strong className="text-gray-900 dark:text-white">Include key facts</strong> — Mention 2-3 supporting points that participants might not know. The AI will weave these into each personalized letter alongside the participant&apos;s own story.</li>
-                <li><strong className="text-gray-900 dark:text-white">Set the tone</strong> — If you want messages to be urgent, professional, hopeful, or firm, say so. The AI picks up on tone cues.</li>
-                <li><strong className="text-gray-900 dark:text-white">Don&apos;t write a full letter</strong> — The AI generates unique messages for each participant. Provide the substance and direction, not the exact wording.</li>
+                <li><strong className="text-gray-900 dark:text-white">One ask, not ten</strong>: Focus on a single, specific action you want legislators to take. &quot;Vote YES on SB 456&quot; is better than a list of grievances. Messages with a clear ask are more likely to be logged correctly.</li>
+                <li><strong className="text-gray-900 dark:text-white">Be specific about the action</strong>: &quot;Co-sponsor HR 789&quot; or &quot;Vote to restore the $2M budget line for community clinics&quot; gives staffers something actionable to report.</li>
+                <li><strong className="text-gray-900 dark:text-white">Include key facts</strong>: Mention 2-3 supporting points that participants might not know. The AI will weave these into each personalized letter alongside the participant&apos;s own story.</li>
+                <li><strong className="text-gray-900 dark:text-white">Set the tone</strong>: If you want messages to be urgent, professional, hopeful, or firm, say so. The AI picks up on tone cues.</li>
+                <li><strong className="text-gray-900 dark:text-white">Don&apos;t write a full letter</strong>: The AI generates unique messages for each participant. Provide the substance and direction, not the exact wording.</li>
               </ul>
               <div className="bg-gray-100 dark:bg-gray-800 p-4 rounded-lg text-sm space-y-3">
                 <p className="font-medium text-gray-900 dark:text-white">Example template:</p>
@@ -185,7 +185,7 @@ export default function CampaignGuidePage() {
             </h2>
             <div className="pl-10 text-gray-600 dark:text-gray-300 space-y-4">
               <p>
-                A campaign is only as powerful as its reach. The good news: you don&apos;t need a massive following. You need the right people — constituents who live in the relevant districts and care about the issue.
+                A campaign is only as powerful as its reach. The good news: you don&apos;t need a massive following. You need the right people: constituents who live in the relevant districts and care about the issue.
               </p>
               <div className="space-y-6">
                 <div>
@@ -194,15 +194,15 @@ export default function CampaignGuidePage() {
                     <li>Share the campaign link with a personal message about why you started it</li>
                     <li>Tag relevant local organizations, journalists, or community leaders</li>
                     <li>Post in local Facebook groups, Nextdoor, and community subreddits</li>
-                    <li>Use relevant hashtags but keep them local — #SpringfieldIL is more targeted than #SaveHealthcare</li>
-                    <li>Share updates as your action count grows — momentum attracts more participants</li>
+                    <li>Use relevant hashtags but keep them local. #SpringfieldIL is more targeted than #SaveHealthcare</li>
+                    <li>Share updates as your action count grows. Momentum attracts more participants</li>
                   </ul>
                 </div>
                 <div>
                   <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Email</h3>
                   <ul className="list-disc list-inside space-y-1">
                     <li>Send to friends, family, and colleagues who live in the affected area</li>
-                    <li>Write a short personal note — don&apos;t just drop a link</li>
+                    <li>Write a short personal note. Don&apos;t just drop a link</li>
                     <li>Ask people to forward it to others who might care</li>
                     <li>Follow up after a few days with an update on how many people have taken action</li>
                   </ul>
@@ -211,7 +211,7 @@ export default function CampaignGuidePage() {
                   <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Community Groups</h3>
                   <ul className="list-disc list-inside space-y-1">
                     <li>Share at PTA meetings, church groups, neighborhood associations, or professional organizations</li>
-                    <li>Ask group leaders if they can share on your behalf — a recommendation from a trusted leader carries weight</li>
+                    <li>Ask group leaders if they can share on your behalf. A recommendation from a trusted leader carries weight</li>
                     <li>Offer to present briefly about the issue and make it easy for people to take action on the spot</li>
                   </ul>
                 </div>
@@ -242,11 +242,11 @@ export default function CampaignGuidePage() {
                 When participants add their personal story to your campaign, it transforms a generic message into something that moves legislators. Here&apos;s what you should encourage participants to share:
               </p>
               <ul className="list-disc list-inside space-y-2">
-                <li><strong className="text-gray-900 dark:text-white">Be specific</strong> — &quot;My 8-year-old can&apos;t get speech therapy because the waitlist at our community clinic is 6 months&quot; hits harder than &quot;healthcare access is a problem&quot;</li>
-                <li><strong className="text-gray-900 dark:text-white">Make it personal</strong> — First-person experiences (&quot;I&quot; and &quot;my family&quot;) carry more weight than third-person observations (&quot;people are struggling&quot;)</li>
-                <li><strong className="text-gray-900 dark:text-white">Connect to the policy</strong> — The best stories draw a clear line between the problem and the legislation. &quot;If this clinic closes, 200 families in our neighborhood lose access to affordable mental health care&quot;</li>
-                <li><strong className="text-gray-900 dark:text-white">Include real details</strong> — Dollar amounts, wait times, distances traveled, choices faced. Specifics are what make staffers stop and read.</li>
-                <li><strong className="text-gray-900 dark:text-white">Show the stakes</strong> — What happens if nothing changes? What would change if the legislation passes?</li>
+                <li><strong className="text-gray-900 dark:text-white">Be specific</strong>: &quot;My 8-year-old can&apos;t get speech therapy because the waitlist at our community clinic is 6 months&quot; hits harder than &quot;healthcare access is a problem&quot;</li>
+                <li><strong className="text-gray-900 dark:text-white">Make it personal</strong>: First-person experiences (&quot;I&quot; and &quot;my family&quot;) carry more weight than third-person observations (&quot;people are struggling&quot;)</li>
+                <li><strong className="text-gray-900 dark:text-white">Connect to the policy</strong>: The best stories draw a clear line between the problem and the legislation. &quot;If this clinic closes, 200 families in our neighborhood lose access to affordable mental health care&quot;</li>
+                <li><strong className="text-gray-900 dark:text-white">Include real details</strong>: Dollar amounts, wait times, distances traveled, choices faced. Specifics are what make staffers stop and read.</li>
+                <li><strong className="text-gray-900 dark:text-white">Show the stakes</strong>: What happens if nothing changes? What would change if the legislation passes?</li>
               </ul>
               <p>
                 You can include guidance like this in your campaign description to help participants write stronger stories. For more, see our full guide on <Link href="/guides/tell-your-story" className="text-purple-600 dark:text-purple-400 hover:underline">telling your story effectively</Link>.
@@ -269,19 +269,19 @@ export default function CampaignGuidePage() {
                 Your dashboard shows real-time campaign analytics. Here&apos;s how to interpret them and use them to grow your campaign:
               </p>
               <ul className="list-disc list-inside space-y-2">
-                <li><strong className="text-gray-900 dark:text-white">Action count</strong> — The total number of people who have participated. Share milestones (&quot;We hit 50 actions!&quot;) to build momentum.</li>
-                <li><strong className="text-gray-900 dark:text-white">Messages sent</strong> — The total messages delivered to representatives. This is the number that matters to congressional offices.</li>
-                <li><strong className="text-gray-900 dark:text-white">States represented</strong> — Geographic diversity shows the issue isn&apos;t limited to one area. If you notice gaps, target your sharing efforts there.</li>
-                <li><strong className="text-gray-900 dark:text-white">Recent actions</strong> — See when people are participating. A surge after sharing on a particular platform tells you where your audience is.</li>
+                <li><strong className="text-gray-900 dark:text-white">Action count</strong>: The total number of people who have participated. Share milestones (&quot;We hit 50 actions!&quot;) to build momentum.</li>
+                <li><strong className="text-gray-900 dark:text-white">Messages sent</strong>: The total messages delivered to representatives. This is the number that matters to congressional offices.</li>
+                <li><strong className="text-gray-900 dark:text-white">States represented</strong>: Geographic diversity shows the issue isn&apos;t limited to one area. If you notice gaps, target your sharing efforts there.</li>
+                <li><strong className="text-gray-900 dark:text-white">Recent actions</strong>: See when people are participating. A surge after sharing on a particular platform tells you where your audience is.</li>
               </ul>
               <p>
                 <strong className="text-gray-900 dark:text-white">What to do with your data:</strong>
               </p>
               <ul className="list-disc list-inside space-y-2">
-                <li>Share progress updates — &quot;47 people have sent messages to their representatives this week&quot;</li>
+                <li>Share progress updates: &quot;47 people have sent messages to their representatives this week&quot;</li>
                 <li>Identify which sharing channels drive the most participation and double down</li>
                 <li>If growth slows, try a new angle or share a participant&apos;s story (with permission)</li>
-                <li>Set goals and celebrate them publicly — &quot;Help us reach 100 actions by Friday&quot;</li>
+                <li>Set goals and celebrate them publicly: &quot;Help us reach 100 actions by Friday&quot;</li>
               </ul>
             </div>
           </section>
@@ -356,7 +356,7 @@ export default function CampaignGuidePage() {
             </h2>
             <div className="pl-10 text-gray-600 dark:text-gray-300 space-y-6">
               <p>
-                Sometimes the best way to learn is by example. Here are three real-world scenarios that show how effective campaigns come together — from local neighborhood issues to statewide policy fights.
+                Sometimes the best way to learn is by example. Here are three real-world scenarios that show how effective campaigns come together, from local neighborhood issues to statewide policy fights.
               </p>
 
               {/* Example 1 */}
@@ -365,9 +365,9 @@ export default function CampaignGuidePage() {
                 <p className="text-sm"><strong className="text-gray-900 dark:text-white">Scale:</strong> 30 participants, 90 messages to city council</p>
                 <div className="space-y-2">
                   <p><strong className="text-gray-900 dark:text-white">The situation:</strong> The city proposed closing the Maplewood branch library to cut costs. A parent who used the branch for children&apos;s programming decided to fight back.</p>
-                  <p><strong className="text-gray-900 dark:text-white">Their approach:</strong> Created a campaign with a clear headline — &quot;Keep the Maplewood Library Open for Our Kids&quot; — and a description that cited specific usage numbers: 200 children attended summer reading programs, 45 seniors used the free computer lab weekly, and the branch served as the only public meeting space in a 3-mile radius.</p>
+                  <p><strong className="text-gray-900 dark:text-white">Their approach:</strong> Created a campaign with a clear headline, &quot;Keep the Maplewood Library Open for Our Kids,&quot; and a description that cited specific usage numbers: 200 children attended summer reading programs, 45 seniors used the free computer lab weekly, and the branch served as the only public meeting space in a 3-mile radius.</p>
                   <p><strong className="text-gray-900 dark:text-white">How they shared it:</strong> Posted in the neighborhood Facebook group, shared at a PTA meeting, and texted the link to 15 parents from story time. Each of those parents shared it with a few more.</p>
-                  <p><strong className="text-gray-900 dark:text-white">Results:</strong> 30 residents sent personalized messages to all five city council members within 10 days — 90 messages total. Two council members cited the volume of constituent correspondence when they voted against the closure. The library stayed open.</p>
+                  <p><strong className="text-gray-900 dark:text-white">Results:</strong> 30 residents sent personalized messages to all five city council members within 10 days, 90 messages total. Two council members cited the volume of constituent correspondence when they voted against the closure. The library stayed open.</p>
                   <p><strong className="text-gray-900 dark:text-white">What made it work:</strong> Hyper-local focus, specific data points in the description, and personal sharing through trusted community channels. Every message included a real story about how the library mattered to that family.</p>
                 </div>
               </div>
@@ -378,9 +378,9 @@ export default function CampaignGuidePage() {
                 <p className="text-sm"><strong className="text-gray-900 dark:text-white">Scale:</strong> 200+ participants across 15 legislative districts</p>
                 <div className="space-y-2">
                   <p><strong className="text-gray-900 dark:text-white">The situation:</strong> The state Board of Regents proposed a 15% tuition increase across all public universities. A college junior studying education realized the increase would force her to take on an additional $8,000 in loans.</p>
-                  <p><strong className="text-gray-900 dark:text-white">Their approach:</strong> The headline — &quot;Tell Your State Rep: Block the 15% Tuition Increase&quot; — named the exact policy and the ask. The message template focused on a single action: urging reps to vote NO on the appropriations bill that enabled the increase, and included key facts about student debt averages and the state&apos;s higher-ed funding trends.</p>
+                  <p><strong className="text-gray-900 dark:text-white">Their approach:</strong> The headline, &quot;Tell Your State Rep: Block the 15% Tuition Increase,&quot; named the exact policy and the ask. The message template focused on a single action: urging reps to vote NO on the appropriations bill that enabled the increase, and included key facts about student debt averages and the state&apos;s higher-ed funding trends.</p>
                   <p><strong className="text-gray-900 dark:text-white">How they shared it:</strong> Shared in student government Slack channels at three universities, posted in campus organization group chats, and emailed to every student org listserv they could find. A campus newspaper wrote about the campaign after seeing it circulate, which drove another wave of participation.</p>
-                  <p><strong className="text-gray-900 dark:text-white">Results:</strong> Over 200 students from 15 different districts sent personalized messages to their state representatives. The geographic spread was key — legislators from rural and suburban districts heard from constituents they wouldn&apos;t normally hear from on higher-ed issues. The tuition increase was reduced from 15% to 6%.</p>
+                  <p><strong className="text-gray-900 dark:text-white">Results:</strong> Over 200 students from 15 different districts sent personalized messages to their state representatives. The geographic spread was key. Legislators from rural and suburban districts heard from constituents they wouldn&apos;t normally hear from on higher-ed issues. The tuition increase was reduced from 15% to 6%.</p>
                   <p><strong className="text-gray-900 dark:text-white">What made it work:</strong> The campaign gave students a way to channel frustration into structured political action. Instead of a petition with anonymous signatures, every legislator received unique, personal letters from verified constituents in their own district. The statewide geographic coverage made it impossible to dismiss as a single-campus issue.</p>
                 </div>
               </div>
@@ -426,7 +426,7 @@ export default function CampaignGuidePage() {
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Facebook</h3>
                 <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-4">
-                  <p className="text-sm font-mono whitespace-pre-wrap">Hey friends — I need your help with something that matters to me personally.{'\n\n'}[Explain the issue in 2-3 sentences: what&apos;s happening, who it affects, and why you care.]{'\n\n'}I created a campaign page that makes it easy to send a personalized message to your representative. It takes about 2 minutes, and you don&apos;t need to write anything from scratch — just add your story and the tool does the rest.{'\n\n'}If you live in [state/city/district], your voice really matters here. Even if you don&apos;t, please consider sharing this with someone who does.{'\n\n'}[campaign link]{'\n\n'}Thank you for caring about this.</p>
+                  <p className="text-sm font-mono whitespace-pre-wrap">Hey friends - I need your help with something that matters to me personally.{'\n\n'}[Explain the issue in 2-3 sentences: what&apos;s happening, who it affects, and why you care.]{'\n\n'}I created a campaign page that makes it easy to send a personalized message to your representative. It takes about 2 minutes, and you don&apos;t need to write anything from scratch - just add your story and the tool does the rest.{'\n\n'}If you live in [state/city/district], your voice really matters here. Even if you don&apos;t, please consider sharing this with someone who does.{'\n\n'}[campaign link]{'\n\n'}Thank you for caring about this.</p>
                 </div>
                 <p className="text-sm mt-2 text-gray-500 dark:text-gray-400">Tip: Personal posts outperform formal ones. Share why this issue matters to you specifically. Tag friends who live in the affected area.</p>
               </div>
@@ -450,7 +450,7 @@ export default function CampaignGuidePage() {
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Email to Friends / Colleagues</h3>
                 <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-4">
-                  <p className="text-sm font-mono whitespace-pre-wrap">Subject: Can you take 2 minutes to help with [issue]?{'\n\n'}Hi [name],{'\n\n'}I&apos;m reaching out because [explain your personal connection to the issue in 1-2 sentences].{'\n\n'}[Describe the issue and what&apos;s at stake in 2-3 sentences.]{'\n\n'}I created a campaign page that makes it easy to send a personalized message to your representative. You just add a brief personal story and the tool generates a unique letter. It takes about 2 minutes.{'\n\n'}Here&apos;s the link: [campaign link]{'\n\n'}If this isn&apos;t your issue, no worries at all — but if you could forward this to anyone who might care, that would help too.{'\n\n'}Thanks,{'\n'}[Your name]</p>
+                  <p className="text-sm font-mono whitespace-pre-wrap">Subject: Can you take 2 minutes to help with [issue]?{'\n\n'}Hi [name],{'\n\n'}I&apos;m reaching out because [explain your personal connection to the issue in 1-2 sentences].{'\n\n'}[Describe the issue and what&apos;s at stake in 2-3 sentences.]{'\n\n'}I created a campaign page that makes it easy to send a personalized message to your representative. You just add a brief personal story and the tool generates a unique letter. It takes about 2 minutes.{'\n\n'}Here&apos;s the link: [campaign link]{'\n\n'}If this isn&apos;t your issue, no worries at all, but if you could forward this to anyone who might care, that would help too.{'\n\n'}Thanks,{'\n'}[Your name]</p>
                 </div>
                 <p className="text-sm mt-2 text-gray-500 dark:text-gray-400">Tip: Personalize the subject line and opening. Emails from someone you know have much higher open rates than mass messages. Send to small batches rather than one big BCC list.</p>
               </div>
@@ -477,19 +477,19 @@ export default function CampaignGuidePage() {
                   <h3 className="font-semibold text-gray-900 dark:text-white mb-1">Day 1-2: Research the Issue</h3>
                   <ul className="list-disc list-inside space-y-1 text-sm">
                     <li>Identify the specific policy, bill, or decision you want to influence</li>
-                    <li>Find out who has the power to act — is this a city council vote, a state legislature issue, or a federal matter?</li>
+                    <li>Find out who has the power to act. Is this a city council vote, a state legislature issue, or a federal matter?</li>
                     <li>Gather 3-5 key facts or data points that support your position</li>
                     <li>Check if there&apos;s a deadline (vote date, comment period, budget hearing) that creates natural urgency</li>
-                    <li>Look for existing organizations or groups already working on the issue — they can be sharing partners later</li>
+                    <li>Look for existing organizations or groups already working on the issue. They can be sharing partners later</li>
                   </ul>
                 </div>
 
                 <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-4">
                   <h3 className="font-semibold text-gray-900 dark:text-white mb-1">Day 3: Create the Campaign</h3>
                   <ul className="list-disc list-inside space-y-1 text-sm">
-                    <li>Write your headline — specific, action-oriented, under 80 characters</li>
-                    <li>Write your description — problem, impact, path forward, and urgency</li>
-                    <li>Draft the message template — one clear ask with supporting facts and a tone direction</li>
+                    <li>Write your headline - specific, action-oriented, under 80 characters</li>
+                    <li>Write your description - problem, impact, path forward, and urgency</li>
+                    <li>Draft the message template - one clear ask with supporting facts and a tone direction</li>
                     <li>Select the correct legislative target level (federal, state, or both)</li>
                     <li>Review everything once more before publishing</li>
                   </ul>
@@ -500,7 +500,7 @@ export default function CampaignGuidePage() {
                   <ul className="list-disc list-inside space-y-1 text-sm">
                     <li>Share with 5-10 close contacts and ask them to go through the full flow</li>
                     <li>Ask for honest feedback: Is the description clear? Does the generated message sound right?</li>
-                    <li>Check that the campaign page looks good on mobile — most people will see it on their phone</li>
+                    <li>Check that the campaign page looks good on mobile. Most people will see it on their phone</li>
                     <li>Make any adjustments based on feedback before going wide</li>
                   </ul>
                 </div>
@@ -522,7 +522,7 @@ export default function CampaignGuidePage() {
                     <li>Post progress updates: &quot;42 people have sent messages to their representatives so far!&quot;</li>
                     <li>Share a participant&apos;s story (with permission) to show the human impact</li>
                     <li>Set a public goal: &quot;Help us reach 100 actions by Friday&quot;</li>
-                    <li>Reach out to local media or bloggers — a campaign with momentum is a story worth covering</li>
+                    <li>Reach out to local media or bloggers. A campaign with momentum is a story worth covering</li>
                     <li>Try a new channel you haven&apos;t used yet (Nextdoor, a different community group, a local subreddit)</li>
                   </ul>
                 </div>
@@ -530,9 +530,9 @@ export default function CampaignGuidePage() {
                 <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-4">
                   <h3 className="font-semibold text-gray-900 dark:text-white mb-1">Week 3+: Follow Up and Share Outcomes</h3>
                   <ul className="list-disc list-inside space-y-1 text-sm">
-                    <li>If there&apos;s been a vote or decision, share the outcome with participants — they deserve to know their effort mattered</li>
+                    <li>If there&apos;s been a vote or decision, share the outcome with participants. They deserve to know their effort mattered</li>
                     <li>If the fight continues, share what&apos;s next and rally for the next round of action</li>
-                    <li>Thank everyone who participated — publicly and privately</li>
+                    <li>Thank everyone who participated, publicly and privately</li>
                     <li>Document what worked and what didn&apos;t for your next campaign</li>
                     <li>Consider starting a new campaign for the next phase of the issue</li>
                   </ul>
@@ -560,14 +560,14 @@ export default function CampaignGuidePage() {
                 <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-4 space-y-2">
                   <h3 className="font-semibold text-gray-900 dark:text-white">Conversion Rate</h3>
                   <p className="text-sm"><strong className="text-gray-900 dark:text-white">What it is:</strong> The percentage of people who visit your campaign page and actually take action.</p>
-                  <p className="text-sm"><strong className="text-gray-900 dark:text-white">Good benchmark:</strong> 15-30% is strong for advocacy campaigns. If you&apos;re below 10%, your page may need work — revisit your headline and description to make the ask clearer and the urgency more apparent.</p>
+                  <p className="text-sm"><strong className="text-gray-900 dark:text-white">Good benchmark:</strong> 15-30% is strong for advocacy campaigns. If you&apos;re below 10%, your page may need work. Revisit your headline and description to make the ask clearer and the urgency more apparent.</p>
                   <p className="text-sm"><strong className="text-gray-900 dark:text-white">How to improve:</strong> Make sure the first sentence of your description answers &quot;why should I care?&quot; Reduce friction by keeping the page simple and the ask obvious.</p>
                 </div>
 
                 <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-4 space-y-2">
                   <h3 className="font-semibold text-gray-900 dark:text-white">Messages per Representative</h3>
                   <p className="text-sm"><strong className="text-gray-900 dark:text-white">What it is:</strong> How many individual messages each targeted legislator has received from your campaign.</p>
-                  <p className="text-sm"><strong className="text-gray-900 dark:text-white">Good benchmark:</strong> 20-50 messages per representative in a single week is the threshold where congressional offices typically take notice. At the local level (city council, selectboard), the bar is lower — even 10-15 unique messages on the same issue stands out.</p>
+                  <p className="text-sm"><strong className="text-gray-900 dark:text-white">Good benchmark:</strong> 20-50 messages per representative in a single week is the threshold where congressional offices typically take notice. At the local level (city council, selectboard), the bar is lower. Even 10-15 unique messages on the same issue stands out.</p>
                   <p className="text-sm"><strong className="text-gray-900 dark:text-white">How to improve:</strong> Focus sharing efforts on people who live in districts where your message count is low. If one rep has received 40 messages and another has received 3, direct your outreach geographically.</p>
                 </div>
 
@@ -580,7 +580,7 @@ export default function CampaignGuidePage() {
 
                 <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-4 space-y-2">
                   <h3 className="font-semibold text-gray-900 dark:text-white">Sharing Momentum</h3>
-                  <p className="text-sm"><strong className="text-gray-900 dark:text-white">What it is:</strong> The rate of new participants per day — are actions accelerating, steady, or declining?</p>
+                  <p className="text-sm"><strong className="text-gray-900 dark:text-white">What it is:</strong> The rate of new participants per day. Are actions accelerating, steady, or declining?</p>
                   <p className="text-sm"><strong className="text-gray-900 dark:text-white">Good benchmark:</strong> A healthy campaign sees a spike on launch day, a dip, and then a second wave driven by shares and media coverage. If you&apos;re getting 5+ new participants per day, your campaign has strong organic momentum.</p>
                   <p className="text-sm"><strong className="text-gray-900 dark:text-white">How to improve:</strong> Post milestone updates to reignite interest. Each update is a new opportunity for people to share your campaign with their own networks.</p>
                 </div>
@@ -592,11 +592,11 @@ export default function CampaignGuidePage() {
                   Every campaign hits a point where growth slows. This is normal. Here&apos;s what to do:
                 </p>
                 <ul className="list-disc list-inside space-y-1 text-sm">
-                  <li><strong className="text-gray-900 dark:text-white">Try a new channel</strong> — If you&apos;ve only shared on social media, try email. If you&apos;ve only done online outreach, mention it at an in-person gathering.</li>
-                  <li><strong className="text-gray-900 dark:text-white">Refresh your message</strong> — Share a new angle, a participant&apos;s story, or a recent news development related to the issue.</li>
-                  <li><strong className="text-gray-900 dark:text-white">Ask for shares, not just actions</strong> — Sometimes the best thing a supporter can do is forward your campaign to three friends.</li>
-                  <li><strong className="text-gray-900 dark:text-white">Set a deadline</strong> — &quot;We need 25 more messages by Thursday&quot; creates a concrete reason for people to act now instead of later.</li>
-                  <li><strong className="text-gray-900 dark:text-white">Partner with an organization</strong> — Reach out to a local nonprofit, advocacy group, or community organization that cares about the issue. Their endorsement and distribution list can unlock a whole new audience.</li>
+                  <li><strong className="text-gray-900 dark:text-white">Try a new channel:</strong> If you&apos;ve only shared on social media, try email. If you&apos;ve only done online outreach, mention it at an in-person gathering.</li>
+                  <li><strong className="text-gray-900 dark:text-white">Refresh your message:</strong> Share a new angle, a participant&apos;s story, or a recent news development related to the issue.</li>
+                  <li><strong className="text-gray-900 dark:text-white">Ask for shares, not just actions:</strong> Sometimes the best thing a supporter can do is forward your campaign to three friends.</li>
+                  <li><strong className="text-gray-900 dark:text-white">Set a deadline:</strong> &quot;We need 25 more messages by Thursday&quot; creates a concrete reason for people to act now instead of later.</li>
+                  <li><strong className="text-gray-900 dark:text-white">Partner with an organization:</strong> Reach out to a local nonprofit, advocacy group, or community organization that cares about the issue. Their endorsement and distribution list can unlock a whole new audience.</li>
                 </ul>
               </div>
             </div>

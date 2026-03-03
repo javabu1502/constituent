@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { SignupForm } from '@/components/auth/SignupForm';
 
 export const metadata: Metadata = {
-  title: 'Create Account — My Democracy',
+  title: 'Create Account | My Democracy',
   description: 'Create a My Democracy account to track your advocacy and message history.',
 };
 

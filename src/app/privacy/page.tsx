@@ -73,10 +73,10 @@ export default function PrivacyPage() {
             <div className="space-y-3 text-gray-600 dark:text-gray-300 pl-10">
               <p>When we generate your personalized email or phone script, representative bios, or bill summaries, the AI receives:</p>
               <ul className="list-disc list-inside space-y-2 ml-4">
-                <li><strong className="text-gray-900 dark:text-white">Your name</strong> — so it can personalize the message</li>
-                <li><strong className="text-gray-900 dark:text-white">Your city and state</strong> — so it can say &quot;as your constituent from Reno, Nevada&quot;</li>
-                <li><strong className="text-gray-900 dark:text-white">The issue you care about</strong> — what you wrote in your own words</li>
-                <li><strong className="text-gray-900 dark:text-white">Your representative&apos;s info</strong> — name, party, position, so it can tailor the message</li>
+                <li><strong className="text-gray-900 dark:text-white">Your name</strong>: so it can personalize the message</li>
+                <li><strong className="text-gray-900 dark:text-white">Your city and state</strong>: so it can say &quot;as your constituent from Reno, Nevada&quot;</li>
+                <li><strong className="text-gray-900 dark:text-white">The issue you care about</strong>: what you wrote in your own words</li>
+                <li><strong className="text-gray-900 dark:text-white">Your representative&apos;s info</strong>: name, party, position, so it can tailor the message</li>
               </ul>
               <p className="bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-700 rounded-lg p-4 text-blue-800 dark:text-blue-300">
                 <strong>The AI does NOT see your full street address</strong> or any
@@ -112,7 +112,7 @@ export default function PrivacyPage() {
                 We store this so you can view your message history when you create an account.
               </p>
               <p className="bg-green-50 dark:bg-green-900/30 border border-green-200 dark:border-green-700 rounded-lg p-4 text-green-800 dark:text-green-300">
-                <strong>We never share, sell, or provide your messages or personal information to any third party</strong> — including legislators, political organizations, or advertisers.
+                <strong>We never share, sell, or provide your messages or personal information to any third party</strong>, including legislators, political organizations, or advertisers.
               </p>
             </div>
           </section>
@@ -134,8 +134,8 @@ export default function PrivacyPage() {
               <ul className="list-disc list-inside space-y-1 ml-4">
                 <li>Your <strong className="text-gray-900 dark:text-white">name</strong> and <strong className="text-gray-900 dark:text-white">email address</strong></li>
                 <li>Your <strong className="text-gray-900 dark:text-white">street address, city, state, and ZIP code</strong></li>
-                <li>Your <strong className="text-gray-900 dark:text-white">matched representatives</strong> — federal, state, and local officials</li>
-                <li><strong className="text-gray-900 dark:text-white">Dashboard data</strong> — cached voting records, campaign finance, lobbying activity, committee assignments, and bill tracking preferences</li>
+                <li>Your <strong className="text-gray-900 dark:text-white">matched representatives</strong>: federal, state, and local officials</li>
+                <li><strong className="text-gray-900 dark:text-white">Dashboard data</strong>: cached voting records, campaign finance, lobbying activity, committee assignments, and bill tracking preferences</li>
               </ul>
               <p>
                 You can update or delete your account data at any time from your profile settings.
@@ -162,7 +162,7 @@ export default function PrivacyPage() {
                   <strong className="text-gray-900 dark:text-white">To show your message history:</strong> if you create an account, you can view every message you&apos;ve sent.
                 </li>
                 <li>
-                  <strong className="text-gray-900 dark:text-white">To track issue trends:</strong> we use anonymized, aggregated data (such as how many messages were sent about &quot;Health&quot; or &quot;Education&quot;) to show what issues constituents care about — this data is never tied to your identity.
+                  <strong className="text-gray-900 dark:text-white">To track issue trends:</strong> we use anonymized, aggregated data (such as how many messages were sent about &quot;Health&quot; or &quot;Education&quot;) to show what issues constituents care about. This data is never tied to your identity.
                 </li>
                 <li>
                   <strong className="text-gray-900 dark:text-white">To improve the platform:</strong> we may review anonymized message patterns to improve AI message generation.

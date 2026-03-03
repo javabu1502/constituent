@@ -3,7 +3,7 @@ import { Suspense } from 'react';
 import { LoginForm } from '@/components/auth/LoginForm';
 
 export const metadata: Metadata = {
-  title: 'Sign In — My Democracy',
+  title: 'Sign In | My Democracy',
   description: 'Sign in to your My Democracy account to track your message history.',
 };
 

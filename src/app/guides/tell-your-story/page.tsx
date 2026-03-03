@@ -57,10 +57,10 @@ export default function TellYourStoryGuidePage() {
                 <strong className="text-gray-900 dark:text-white">Stories work because:</strong>
               </p>
               <ul className="list-disc list-inside space-y-2">
-                <li><strong className="text-gray-900 dark:text-white">They&apos;re memorable</strong> — A staffer might forget the tenth email about healthcare costs, but they&apos;ll remember the parent who couldn&apos;t afford insulin for their child.</li>
-                <li><strong className="text-gray-900 dark:text-white">They&apos;re credible</strong> — You&apos;re the expert on your own life. No one can challenge your personal experience.</li>
-                <li><strong className="text-gray-900 dark:text-white">They&apos;re usable</strong> — Legislators use constituent stories in floor speeches, press releases, and committee hearings. Your story could shape the national conversation.</li>
-                <li><strong className="text-gray-900 dark:text-white">They humanize policy</strong> — Abstract debates become real when tied to real people.</li>
+                <li><strong className="text-gray-900 dark:text-white">They&apos;re memorable</strong>: A staffer might forget the tenth email about healthcare costs, but they&apos;ll remember the parent who couldn&apos;t afford insulin for their child.</li>
+                <li><strong className="text-gray-900 dark:text-white">They&apos;re credible</strong>: You&apos;re the expert on your own life. No one can challenge your personal experience.</li>
+                <li><strong className="text-gray-900 dark:text-white">They&apos;re usable</strong>: Legislators use constituent stories in floor speeches, press releases, and committee hearings. Your story could shape the national conversation.</li>
+                <li><strong className="text-gray-900 dark:text-white">They humanize policy</strong>: Abstract debates become real when tied to real people.</li>
               </ul>
             </div>
           </section>
@@ -77,14 +77,14 @@ export default function TellYourStoryGuidePage() {
             </h2>
             <div className="pl-10 text-gray-600 dark:text-gray-300 space-y-4">
               <p>
-                Not every message reaches the legislator personally — most are logged and categorized by staff. But certain messages get elevated. Former staffers say they flag messages that:
+                Not every message reaches the legislator personally. Most are logged and categorized by staff. But certain messages get elevated. Former staffers say they flag messages that:
               </p>
               <ul className="list-disc list-inside space-y-2">
                 <li><strong className="text-gray-900 dark:text-white">Tell a compelling personal story</strong> with specific, concrete details</li>
-                <li><strong className="text-gray-900 dark:text-white">Could be used publicly</strong> — in a speech, hearing, or press statement</li>
-                <li><strong className="text-gray-900 dark:text-white">Come from key constituents</strong> — business owners, community leaders, or people directly affected by pending legislation</li>
+                <li><strong className="text-gray-900 dark:text-white">Could be used publicly</strong>: in a speech, hearing, or press statement</li>
+                <li><strong className="text-gray-900 dark:text-white">Come from key constituents</strong>: business owners, community leaders, or people directly affected by pending legislation</li>
                 <li><strong className="text-gray-900 dark:text-white">Offer a unique perspective</strong> the office hasn&apos;t heard before</li>
-                <li><strong className="text-gray-900 dark:text-white">Are well-written and professional</strong> — demonstrating the constituent took time and care</li>
+                <li><strong className="text-gray-900 dark:text-white">Are well-written and professional</strong>: demonstrating the constituent took time and care</li>
               </ul>
             </div>
           </section>
@@ -123,7 +123,7 @@ export default function TellYourStoryGuidePage() {
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">3. The Impact (2-3 sentences)</h3>
                 <p className="text-gray-600 dark:text-gray-300">
-                  Describe concrete effects on your life. Use specific details — numbers, dates, consequences.
+                  Describe concrete effects on your life. Use specific details: numbers, dates, consequences.
                 </p>
                 <div className="mt-2 bg-gray-100 dark:bg-gray-800 p-3 rounded-lg text-sm">
                   <span className="text-green-600 dark:text-green-400">Example:</span> &quot;That&apos;s 10% of my take-home pay, just for one medication. Last winter, I stretched her prescription to make it last longer. She ended up in the emergency room.&quot;
@@ -154,12 +154,12 @@ export default function TellYourStoryGuidePage() {
             </h2>
             <div className="pl-10">
               <ul className="list-disc list-inside text-gray-600 dark:text-gray-300 space-y-2">
-                <li><strong className="text-gray-900 dark:text-white">Specific numbers</strong> — &quot;$847 a month&quot; is more powerful than &quot;expensive&quot;</li>
-                <li><strong className="text-gray-900 dark:text-white">Names and ages</strong> — &quot;My son Marcus, 12&quot; is more real than &quot;my child&quot;</li>
-                <li><strong className="text-gray-900 dark:text-white">A turning point</strong> — The moment things changed, the decision you faced</li>
-                <li><strong className="text-gray-900 dark:text-white">Local details</strong> — Mention your town, local businesses, community connections</li>
-                <li><strong className="text-gray-900 dark:text-white">The impossible choice</strong> — Two options that shouldn&apos;t be in conflict</li>
-                <li><strong className="text-gray-900 dark:text-white">What you tried</strong> — Shows you&apos;re not just complaining, but exhausted alternatives</li>
+                <li><strong className="text-gray-900 dark:text-white">Specific numbers</strong>: &quot;$847 a month&quot; is more powerful than &quot;expensive&quot;</li>
+                <li><strong className="text-gray-900 dark:text-white">Names and ages</strong>: &quot;My son Marcus, 12&quot; is more real than &quot;my child&quot;</li>
+                <li><strong className="text-gray-900 dark:text-white">A turning point</strong>: The moment things changed, the decision you faced</li>
+                <li><strong className="text-gray-900 dark:text-white">Local details</strong>: Mention your town, local businesses, community connections</li>
+                <li><strong className="text-gray-900 dark:text-white">The impossible choice</strong>: Two options that shouldn&apos;t be in conflict</li>
+                <li><strong className="text-gray-900 dark:text-white">What you tried</strong>: Shows you&apos;re not just complaining, but exhausted alternatives</li>
               </ul>
             </div>
           </section>
@@ -176,12 +176,12 @@ export default function TellYourStoryGuidePage() {
             </h2>
             <div className="pl-10">
               <ul className="list-disc list-inside text-gray-600 dark:text-gray-300 space-y-2">
-                <li><strong className="text-gray-900 dark:text-white">Generalizations</strong> — &quot;Many people struggle&quot; is less powerful than your specific struggle</li>
-                <li><strong className="text-gray-900 dark:text-white">Statistics without story</strong> — Numbers support your story; they don&apos;t replace it</li>
-                <li><strong className="text-gray-900 dark:text-white">Exaggeration</strong> — Stick to the truth. Credibility is everything.</li>
-                <li><strong className="text-gray-900 dark:text-white">Blaming the legislator</strong> — Focus on the problem and solution, not attacks</li>
-                <li><strong className="text-gray-900 dark:text-white">Too much context</strong> — Get to the emotional core quickly</li>
-                <li><strong className="text-gray-900 dark:text-white">Oversharing</strong> — Include what&apos;s relevant, not your entire life history</li>
+                <li><strong className="text-gray-900 dark:text-white">Generalizations</strong>: &quot;Many people struggle&quot; is less powerful than your specific struggle</li>
+                <li><strong className="text-gray-900 dark:text-white">Statistics without story</strong>: Numbers support your story; they don&apos;t replace it</li>
+                <li><strong className="text-gray-900 dark:text-white">Exaggeration</strong>: Stick to the truth. Credibility is everything.</li>
+                <li><strong className="text-gray-900 dark:text-white">Blaming the legislator</strong>: Focus on the problem and solution, not attacks</li>
+                <li><strong className="text-gray-900 dark:text-white">Too much context</strong>: Get to the emotional core quickly</li>
+                <li><strong className="text-gray-900 dark:text-white">Oversharing</strong>: Include what&apos;s relevant, not your entire life history</li>
               </ul>
             </div>
           </section>
@@ -203,7 +203,7 @@ export default function TellYourStoryGuidePage() {
                   My name is Maria Chen, and I live at 142 Oak Street in Riverside. I&apos;m writing about childcare costs.
                 </p>
                 <p>
-                  Two years ago, my husband and I both worked full-time. Then we had twins. When we looked at childcare costs — $2,400 a month for two infants in our area — we did the math. After taxes, it would cost more than my entire salary to have both kids in daycare.
+                  Two years ago, my husband and I both worked full-time. Then we had twins. When we looked at childcare costs, $2,400 a month for two infants in our area, we did the math. After taxes, it would cost more than my entire salary to have both kids in daycare.
                 </p>
                 <p>
                   I quit my job as an accountant. I didn&apos;t want to. I loved my career. But paying to work made no financial sense. Now we&apos;re a single-income family in a two-income economy. We&apos;ve burned through our savings and postponed buying a home indefinitely.
@@ -275,7 +275,7 @@ export default function TellYourStoryGuidePage() {
                     In January, I called the Dallas VA Medical Center to schedule an appointment for recurring knee pain from a service-related injury. The earliest available appointment was 14 weeks out. Fourteen weeks of limping to my warehouse job, popping over-the-counter painkillers, and hoping the damage wasn&apos;t getting worse.
                   </p>
                   <p>
-                    By the time I finally saw a doctor in April, the cartilage damage had progressed. What could have been treated with physical therapy now requires surgery — surgery with its own six-month waitlist. I&apos;ve used 11 sick days so far this year. My supervisor has been patient, but I can feel that patience running out.
+                    By the time I finally saw a doctor in April, the cartilage damage had progressed. What could have been treated with physical therapy now requires surgery, surgery with its own six-month waitlist. I&apos;ve used 11 sick days so far this year. My supervisor has been patient, but I can feel that patience running out.
                   </p>
                   <p>
                     I didn&apos;t hesitate when my country asked me to serve. I&apos;m asking you not to hesitate now. Please support S. 2100, the Veterans Timely Access to Care Act, so that no veteran has to watch a treatable injury become a serious one while waiting in line.
@@ -294,16 +294,16 @@ export default function TellYourStoryGuidePage() {
                 <div className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 text-sm text-gray-700 dark:text-gray-300 space-y-4">
                   <p>Dear Representative Park,</p>
                   <p>
-                    My name is Diane Okafor, and I own Sunrise Bakery at 88 Main Street in Glendale. I&apos;ve been in business for nine years, and I employ 14 people — most of them from our neighborhood. I&apos;m writing because compliance paperwork is strangling my business.
+                    My name is Diane Okafor, and I own Sunrise Bakery at 88 Main Street in Glendale. I&apos;ve been in business for nine years, and I employ 14 people, most of them from our neighborhood. I&apos;m writing because compliance paperwork is strangling my business.
                   </p>
                   <p>
-                    Last year, I spent over $18,000 on accounting and legal fees just to stay compliant with federal reporting requirements. That&apos;s not taxes — that&apos;s the cost of figuring out what I owe and filling out the right forms. I now complete 37 different federal and state filings annually. Every hour I spend on paperwork is an hour I&apos;m not baking, training staff, or serving customers.
+                    Last year, I spent over $18,000 on accounting and legal fees just to stay compliant with federal reporting requirements. That&apos;s not taxes. That&apos;s the cost of figuring out what I owe and filling out the right forms. I now complete 37 different federal and state filings annually. Every hour I spend on paperwork is an hour I&apos;m not baking, training staff, or serving customers.
                   </p>
                   <p>
                     I had planned to open a second location this year and hire ten more people. I&apos;ve shelved those plans. The cost and complexity of doubling my compliance burden makes expansion feel like a trap rather than an opportunity. That&apos;s 10 jobs our community won&apos;t see.
                   </p>
                   <p>
-                    Please co-sponsor HR 3300, the Small Business Regulatory Relief Act. Small businesses like mine want to grow and create jobs — we just need the government to stop making it so expensive to try.
+                    Please co-sponsor HR 3300, the Small Business Regulatory Relief Act. Small businesses like mine want to grow and create jobs. We just need the government to stop making it so expensive to try.
                   </p>
                   <p>
                     Sincerely,<br />
@@ -319,10 +319,10 @@ export default function TellYourStoryGuidePage() {
                 <div className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 text-sm text-gray-700 dark:text-gray-300 space-y-4">
                   <p>Dear Senator Mitchell,</p>
                   <p>
-                    My name is Priya Sharma. I&apos;m 26 years old and live at 1200 Elm Avenue in Columbus. I graduated from Ohio State three years ago with a degree in social work — and $74,000 in federal student loan debt. I&apos;m writing because that debt is shaping every decision I make.
+                    My name is Priya Sharma. I&apos;m 26 years old and live at 1200 Elm Avenue in Columbus. I graduated from Ohio State three years ago with a degree in social work and $74,000 in federal student loan debt. I&apos;m writing because that debt is shaping every decision I make.
                   </p>
                   <p>
-                    I work full-time as a child welfare caseworker for Franklin County. It&apos;s work I believe in deeply. My monthly student loan payment is $687 — nearly a third of my take-home pay. After rent, loans, and basic expenses, I have about $120 left each month. I haven&apos;t seen a dentist in two years. I drive a car with 190,000 miles on it because I can&apos;t afford a repair, let alone a replacement.
+                    I work full-time as a child welfare caseworker for Franklin County. It&apos;s work I believe in deeply. My monthly student loan payment is $687, nearly a third of my take-home pay. After rent, loans, and basic expenses, I have about $120 left each month. I haven&apos;t seen a dentist in two years. I drive a car with 190,000 miles on it because I can&apos;t afford a repair, let alone a replacement.
                   </p>
                   <p>
                     I chose public service on purpose. I wanted to help kids in crisis, not chase a Wall Street salary. But my loan servicer doesn&apos;t care about my career choice. Three years of payments and I still owe $68,000 because most of my payment goes to interest. At this rate, I&apos;ll be 48 before I&apos;m free of this debt. I can&apos;t save for a home. Starting a family feels irresponsible.
@@ -362,9 +362,9 @@ export default function TellYourStoryGuidePage() {
                   Email, phone calls, and physical letters are the bread and butter of constituent advocacy. Each format favors a different approach:
                 </p>
                 <ul className="list-disc list-inside text-gray-600 dark:text-gray-300 space-y-1">
-                  <li><strong className="text-gray-900 dark:text-white">Email</strong> — Use the full Hook &rarr; Context &rarr; Impact &rarr; Ask structure. Keep it under 400 words. Include your name and full address so staff can verify you&apos;re a constituent.</li>
-                  <li><strong className="text-gray-900 dark:text-white">Phone</strong> — Condense your story to 60 seconds. Lead with your name, ZIP code, and the bill number. Share one vivid detail from your experience, then make your ask. The staffer will log it.</li>
-                  <li><strong className="text-gray-900 dark:text-white">Physical letter</strong> — Carries extra weight because it takes more effort. Follow the email format but print it on clean paper and sign it by hand. Mail to the district office for faster delivery.</li>
+                  <li><strong className="text-gray-900 dark:text-white">Email</strong>: Use the full Hook &rarr; Context &rarr; Impact &rarr; Ask structure. Keep it under 400 words. Include your name and full address so staff can verify you&apos;re a constituent.</li>
+                  <li><strong className="text-gray-900 dark:text-white">Phone</strong>: Condense your story to 60 seconds. Lead with your name, ZIP code, and the bill number. Share one vivid detail from your experience, then make your ask. The staffer will log it.</li>
+                  <li><strong className="text-gray-900 dark:text-white">Physical letter</strong>: Carries extra weight because it takes more effort. Follow the email format but print it on clean paper and sign it by hand. Mail to the district office for faster delivery.</li>
                 </ul>
               </div>
 
@@ -375,7 +375,7 @@ export default function TellYourStoryGuidePage() {
                 </p>
                 <ul className="list-disc list-inside text-gray-600 dark:text-gray-300 space-y-1">
                   <li>Check your state legislature&apos;s website or Congress.gov for upcoming hearings on issues you care about.</li>
-                  <li>Request a slot to testify — many committees accept public sign-ups, especially at the state level.</li>
+                  <li>Request a slot to testify. Many committees accept public sign-ups, especially at the state level.</li>
                   <li>Prepare a written version (usually 2-3 pages) and a shorter spoken version (often limited to 3-5 minutes).</li>
                   <li>Practice reading it aloud. Speak slowly and make eye contact with the committee members.</li>
                   <li>Bring copies of your written testimony to hand out.</li>
@@ -385,7 +385,7 @@ export default function TellYourStoryGuidePage() {
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Town Hall Meetings and Constituent Forums</h3>
                 <p className="text-gray-600 dark:text-gray-300 mb-2">
-                  Town halls are public events where legislators hear directly from constituents. Your story can shape the conversation — and other attendees may amplify it.
+                  Town halls are public events where legislators hear directly from constituents. Your story can shape the conversation, and other attendees may amplify it.
                 </p>
                 <ul className="list-disc list-inside text-gray-600 dark:text-gray-300 space-y-1">
                   <li>Arrive early to get a seat near the front or sign up for the question queue.</li>
@@ -398,12 +398,12 @@ export default function TellYourStoryGuidePage() {
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Op-Eds and Letters to the Editor</h3>
                 <p className="text-gray-600 dark:text-gray-300 mb-2">
-                  Local newspapers are still closely monitored by legislative offices. A published letter or op-ed puts your story in front of thousands of constituents — and the legislator&apos;s press team.
+                  Local newspapers are still closely monitored by legislative offices. A published letter or op-ed puts your story in front of thousands of constituents and the legislator&apos;s press team.
                 </p>
                 <ul className="list-disc list-inside text-gray-600 dark:text-gray-300 space-y-1">
-                  <li><strong className="text-gray-900 dark:text-white">Letters to the editor</strong> — Usually 150-200 words. Pick one aspect of your story and connect it to a timely news event or vote. Submit through the newspaper&apos;s website.</li>
-                  <li><strong className="text-gray-900 dark:text-white">Op-eds</strong> — Usually 600-800 words. Tell your full story with more context. Include a call to action. Pitch it to the opinion editor with a one-paragraph summary of who you are and why this matters now.</li>
-                  <li>Mention your legislator by name — this makes it much more likely their office will notice.</li>
+                  <li><strong className="text-gray-900 dark:text-white">Letters to the editor</strong>: Usually 150-200 words. Pick one aspect of your story and connect it to a timely news event or vote. Submit through the newspaper&apos;s website.</li>
+                  <li><strong className="text-gray-900 dark:text-white">Op-eds</strong>: Usually 600-800 words. Tell your full story with more context. Include a call to action. Pitch it to the opinion editor with a one-paragraph summary of who you are and why this matters now.</li>
+                  <li>Mention your legislator by name. This makes it much more likely their office will notice.</li>
                 </ul>
               </div>
 
@@ -414,10 +414,10 @@ export default function TellYourStoryGuidePage() {
                 </p>
                 <ul className="list-disc list-inside text-gray-600 dark:text-gray-300 space-y-1">
                   <li>Tag your representative&apos;s official account directly. Staff monitor these mentions.</li>
-                  <li>Keep it concise — lead with the hook, share one powerful detail, and make your ask.</li>
+                  <li>Keep it concise. Lead with the hook, share one powerful detail, and make your ask.</li>
                   <li>Use relevant hashtags to reach broader advocacy communities.</li>
                   <li>Video is especially powerful. A 60-second clip of you telling your story can reach thousands.</li>
-                  <li>Be prepared for public responses — both supportive and critical.</li>
+                  <li>Be prepared for public responses, both supportive and critical.</li>
                 </ul>
               </div>
 
@@ -442,9 +442,9 @@ export default function TellYourStoryGuidePage() {
                 <ul className="list-disc list-inside text-gray-600 dark:text-gray-300 space-y-1">
                   <li>Reach out to local reporters who cover the policy area you care about. A brief email explaining your story and offering to be interviewed is often enough.</li>
                   <li>Prepare 2-3 key points you want to make, and practice saying them in plain language.</li>
-                  <li>You can set ground rules — let the reporter know if there are details you want to keep off the record.</li>
+                  <li>You can set ground rules. Let the reporter know if there are details you want to keep off the record.</li>
                   <li>Ask if you can review your quotes before publication. Many reporters will accommodate this.</li>
-                  <li>Share the published article with your legislator&apos;s office — media coverage adds significant weight to your advocacy.</li>
+                  <li>Share the published article with your legislator&apos;s office. Media coverage adds significant weight to your advocacy.</li>
                 </ul>
               </div>
             </div>
@@ -462,7 +462,7 @@ export default function TellYourStoryGuidePage() {
             </h2>
             <div className="pl-10 space-y-6">
               <p className="text-gray-600 dark:text-gray-300">
-                Even well-intentioned advocacy messages can miss the mark. Here are the most common mistakes — and how to avoid them.
+                Even well-intentioned advocacy messages can miss the mark. Here are the most common mistakes and how to avoid them.
               </p>
 
               <div>
@@ -479,7 +479,7 @@ export default function TellYourStoryGuidePage() {
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Being So Emotional That the Ask Gets Lost</h3>
                 <p className="text-gray-600 dark:text-gray-300 mb-2">
-                  Emotion is powerful — but it needs to be channeled, not unleashed. A message that&apos;s all pain and no direction leaves the staffer sympathetic but unsure what to do. Every story needs to land on a specific request.
+                  Emotion is powerful, but it needs to be channeled, not unleashed. A message that&apos;s all pain and no direction leaves the staffer sympathetic but unsure what to do. Every story needs to land on a specific request.
                 </p>
                 <div className="bg-gray-100 dark:bg-gray-800 p-3 rounded-lg text-sm space-y-2">
                   <p><span className="text-red-500 dark:text-red-400 font-medium">Pitfall:</span> Three paragraphs of heartbreak followed by &quot;Something has to change!!! When will someone DO something?!&quot;</p>
@@ -490,7 +490,7 @@ export default function TellYourStoryGuidePage() {
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Not Connecting Your Experience to a Specific Policy Action</h3>
                 <p className="text-gray-600 dark:text-gray-300 mb-2">
-                  A moving story without a policy connection is just a story. Staffers categorize messages by issue and position — &quot;supports HR 1234&quot; or &quot;opposes S. 567.&quot; If your message doesn&apos;t reference a specific bill, vote, or action, it&apos;s much harder to count and much easier to set aside.
+                  A moving story without a policy connection is just a story. Staffers categorize messages by issue and position: &quot;supports HR 1234&quot; or &quot;opposes S. 567.&quot; If your message doesn&apos;t reference a specific bill, vote, or action, it&apos;s much harder to count and much easier to set aside.
                 </p>
                 <div className="bg-gray-100 dark:bg-gray-800 p-3 rounded-lg text-sm space-y-2">
                   <p><span className="text-red-500 dark:text-red-400 font-medium">Pitfall:</span> &quot;Healthcare costs are too high. Please fix this.&quot;</p>
@@ -501,7 +501,7 @@ export default function TellYourStoryGuidePage() {
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Writing a Novel Instead of a Focused Story</h3>
                 <p className="text-gray-600 dark:text-gray-300 mb-2">
-                  Staffers process hundreds of messages a day. A 2,000-word message — no matter how well-written — will get skimmed at best. The most effective messages are 200-400 words. Every sentence should earn its place.
+                  Staffers process hundreds of messages a day. A 2,000-word message, no matter how well-written, will get skimmed at best. The most effective messages are 200-400 words. Every sentence should earn its place.
                 </p>
                 <div className="bg-gray-100 dark:bg-gray-800 p-3 rounded-lg text-sm space-y-2">
                   <p><span className="text-red-500 dark:text-red-400 font-medium">Pitfall:</span> Starting from your childhood, tracing your entire career history, explaining every detail of your insurance plan, and eventually arriving at the point on page two.</p>
@@ -512,11 +512,11 @@ export default function TellYourStoryGuidePage() {
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Forgetting to Include Your Name and Address</h3>
                 <p className="text-gray-600 dark:text-gray-300 mb-2">
-                  This is surprisingly common — and it can sink an otherwise powerful message. Legislative offices prioritize constituents. If they can&apos;t verify that you live in their district, your message may be discarded entirely. Always include your full name, street address, and ZIP code.
+                  This is surprisingly common, and it can sink an otherwise powerful message. Legislative offices prioritize constituents. If they can&apos;t verify that you live in their district, your message may be discarded entirely. Always include your full name, street address, and ZIP code.
                 </p>
                 <div className="bg-gray-100 dark:bg-gray-800 p-3 rounded-lg text-sm space-y-2">
-                  <p><span className="text-red-500 dark:text-red-400 font-medium">Pitfall:</span> A passionate, well-structured message signed only with &quot;— A Concerned Citizen&quot;</p>
-                  <p><span className="text-green-600 dark:text-green-400 font-medium">Better:</span> Close with your full name, street address, city, state, and ZIP. This isn&apos;t about surveillance — it&apos;s about proving you&apos;re a real constituent whose vote matters to this specific legislator.</p>
+                  <p><span className="text-red-500 dark:text-red-400 font-medium">Pitfall:</span> A passionate, well-structured message signed only with &quot;- A Concerned Citizen&quot;</p>
+                  <p><span className="text-green-600 dark:text-green-400 font-medium">Better:</span> Close with your full name, street address, city, state, and ZIP. This isn&apos;t about surveillance. It&apos;s about proving you&apos;re a real constituent whose vote matters to this specific legislator.</p>
                 </div>
               </div>
 
@@ -527,7 +527,7 @@ export default function TellYourStoryGuidePage() {
                 </p>
                 <div className="bg-gray-100 dark:bg-gray-800 p-3 rounded-lg text-sm space-y-2">
                   <p><span className="text-red-500 dark:text-red-400 font-medium">Pitfall:</span> &quot;My neighbor told me her mother couldn&apos;t get her medication and I think that&apos;s really sad and wrong.&quot;</p>
-                  <p><span className="text-green-600 dark:text-green-400 font-medium">Better:</span> Tell your own story, even if it feels smaller. &quot;I spent three hours on the phone with my insurance company last week trying to get my prescription approved.&quot; If someone else&apos;s story is more compelling, encourage them to write their own message — and offer to help them do it.</p>
+                  <p><span className="text-green-600 dark:text-green-400 font-medium">Better:</span> Tell your own story, even if it feels smaller. &quot;I spent three hours on the phone with my insurance company last week trying to get my prescription approved.&quot; If someone else&apos;s story is more compelling, encourage them to write their own message, and offer to help them do it.</p>
                 </div>
               </div>
             </div>

@@ -106,7 +106,7 @@ export function LobbyingTab({ repId, repName, chamber }: { repId: string; repNam
       {/* Data source header */}
       <div className="bg-amber-50 dark:bg-amber-900/20 rounded-lg p-3 border border-amber-200 dark:border-amber-800">
         <p className="text-xs text-amber-800 dark:text-amber-300">
-          Lobbying activity on <strong>{firstName}&apos;s committee jurisdictions</strong> for {data.quarters_covered.join(' & ')}. The LDA tracks lobbying at the chamber level, not per-member &mdash; these filings target the {chamber === 'senate' ? 'Senate' : 'House'} on issues under committees {firstName} serves on.
+          Lobbying activity on <strong>{firstName}&apos;s committee jurisdictions</strong> for {data.quarters_covered.join(' & ')}. The LDA tracks lobbying at the chamber level, not per-member. These filings target the {chamber === 'senate' ? 'Senate' : 'House'} on issues under committees {firstName} serves on.
         </p>
       </div>
 

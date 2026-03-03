@@ -251,10 +251,10 @@ export function ContactFlow() {
               }
             }
 
-            // No repId — skip to rep selection step
+            // No repId - skip to rep selection step
             dispatch({ type: 'GO_TO_STEP', payload: 'representative' });
           } else {
-            // Has address but no cached reps — fetch them and skip
+            // Has address but no cached reps - fetch them and skip
             fetch('/api/profile/representatives', { method: 'POST' })
               .then((res) => (res.ok ? res.json() : null))
               .then((data) => {

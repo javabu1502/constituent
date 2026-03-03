@@ -29,7 +29,7 @@ const faqItems = [
   {
     question: 'How does My Democracy work?',
     answer:
-      'First, enter your address to find your elected officials at every level of government. Next, pick the issue you care about and our AI writes a personalized message on your behalf. Finally, send it directly to your representatives via email or fax — all in a few minutes.',
+      'First, enter your address to find your elected officials at every level of government. Next, pick the issue you care about and our AI writes a personalized message on your behalf. Finally, send it directly to your representatives via email or phone, all in a few minutes.',
   },
 ];
 
@@ -144,7 +144,7 @@ export default function HomePage() {
                 Campaign Finance
               </h3>
               <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
-                Follow the money — see who funds your representatives&apos; campaigns.
+                Follow the money. See who funds your representatives&apos; campaigns.
               </p>
             </Link>
 
@@ -224,7 +224,7 @@ export default function HomePage() {
           </h2>
           <p className="text-gray-600 dark:text-gray-300 mb-8 max-w-xl mx-auto leading-relaxed">
             Create a shareable campaign page and let anyone contact their representatives
-            about the issue you care about — with AI-personalized messages for each participant.
+            about the issue you care about, with AI-personalized messages for each participant.
           </p>
           <Link href="/campaign/create">
             <Button size="lg" className="text-lg px-8 py-4">

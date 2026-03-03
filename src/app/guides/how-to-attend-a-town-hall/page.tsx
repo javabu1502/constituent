@@ -48,10 +48,10 @@ export default function TownHallGuidePage() {
             </h2>
             <div className="pl-10 text-gray-600 dark:text-gray-300 space-y-3">
               <ul className="list-disc list-inside space-y-2">
-                <li><strong className="text-gray-900 dark:text-white">Your representative&apos;s website</strong> — Check the &quot;Events&quot; or &quot;News&quot; section for upcoming town halls and constituent meetings.</li>
-                <li><strong className="text-gray-900 dark:text-white">Town Hall Project</strong> — <a href="https://townhallproject.com/" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">townhallproject.com</a> tracks town halls, forums, and public events for members of Congress.</li>
-                <li><strong className="text-gray-900 dark:text-white">Local news and social media</strong> — Follow your representative on social media and check local news for announcements.</li>
-                <li><strong className="text-gray-900 dark:text-white">Call the district office</strong> — Staff can tell you about upcoming events and how to RSVP.</li>
+                <li><strong className="text-gray-900 dark:text-white">Your representative&apos;s website</strong>: Check the &quot;Events&quot; or &quot;News&quot; section for upcoming town halls and constituent meetings.</li>
+                <li><strong className="text-gray-900 dark:text-white">Town Hall Project</strong>: <a href="https://townhallproject.com/" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">townhallproject.com</a> tracks town halls, forums, and public events for members of Congress.</li>
+                <li><strong className="text-gray-900 dark:text-white">Local news and social media</strong>: Follow your representative on social media and check local news for announcements.</li>
+                <li><strong className="text-gray-900 dark:text-white">Call the district office</strong>: Staff can tell you about upcoming events and how to RSVP.</li>
               </ul>
               <p>
                 Town halls are most common during congressional recess periods (August, holidays, and between sessions). State legislators often hold them during session breaks.
@@ -76,7 +76,7 @@ export default function TownHallGuidePage() {
               </div>
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Write your question in advance</h3>
-                <p>Keep it under 30 seconds. Structure it as: brief personal context + specific question. Don&apos;t give a speech — ask something the legislator must respond to.</p>
+                <p>Keep it under 30 seconds. Structure it as: brief personal context + specific question. Don&apos;t give a speech. Ask something the legislator must respond to.</p>
                 <div className="mt-2 bg-gray-100 dark:bg-gray-800 p-3 rounded-lg text-sm">
                   <span className="text-green-600 dark:text-green-400">Good:</span> &quot;I&apos;m a teacher in this district. Last year, 3 of my students couldn&apos;t afford required textbooks. Will you vote for HR 1234 to fund school supplies?&quot;
                 </div>
@@ -104,11 +104,11 @@ export default function TownHallGuidePage() {
             </h2>
             <div className="pl-10 text-gray-600 dark:text-gray-300 space-y-3">
               <ul className="list-disc list-inside space-y-2">
-                <li><strong className="text-gray-900 dark:text-white">Be respectful</strong> — Firm and passionate is fine. Hostile and disruptive is counterproductive and may get you removed.</li>
-                <li><strong className="text-gray-900 dark:text-white">State your name and where you live</strong> — This establishes you as a constituent. Legislators pay closer attention to their own voters.</li>
-                <li><strong className="text-gray-900 dark:text-white">Ask a question, don&apos;t give a speech</strong> — You&apos;ll get 30-60 seconds. End with a direct question that requires a yes or no answer.</li>
-                <li><strong className="text-gray-900 dark:text-white">Record the response</strong> — Note what the legislator says. If they make a commitment, you can follow up later to hold them accountable.</li>
-                <li><strong className="text-gray-900 dark:text-white">Applaud others</strong> — When someone asks a good question on your issue, show vocal support. It demonstrates that multiple constituents care.</li>
+                <li><strong className="text-gray-900 dark:text-white">Be respectful</strong>: Firm and passionate is fine. Hostile and disruptive is counterproductive and may get you removed.</li>
+                <li><strong className="text-gray-900 dark:text-white">State your name and where you live</strong>: This establishes you as a constituent. Legislators pay closer attention to their own voters.</li>
+                <li><strong className="text-gray-900 dark:text-white">Ask a question, don&apos;t give a speech</strong>: You&apos;ll get 30-60 seconds. End with a direct question that requires a yes or no answer.</li>
+                <li><strong className="text-gray-900 dark:text-white">Record the response</strong>: Note what the legislator says. If they make a commitment, you can follow up later to hold them accountable.</li>
+                <li><strong className="text-gray-900 dark:text-white">Applaud others</strong>: When someone asks a good question on your issue, show vocal support. It demonstrates that multiple constituents care.</li>
               </ul>
             </div>
           </section>
@@ -125,9 +125,9 @@ export default function TownHallGuidePage() {
             </h2>
             <div className="pl-10 text-gray-600 dark:text-gray-300 space-y-3">
               <ul className="list-disc list-inside space-y-2">
-                <li><strong className="text-gray-900 dark:text-white">Send a follow-up message</strong> — Reference the town hall and what was discussed. This reinforces your position in the office&apos;s records.</li>
-                <li><strong className="text-gray-900 dark:text-white">Share on social media</strong> — Post about your experience. Tag your representative. Other constituents want to know what happened.</li>
-                <li><strong className="text-gray-900 dark:text-white">Report to local media</strong> — If the legislator made a notable statement, tip off local reporters. Media coverage amplifies accountability.</li>
+                <li><strong className="text-gray-900 dark:text-white">Send a follow-up message</strong>: Reference the town hall and what was discussed. This reinforces your position in the office&apos;s records.</li>
+                <li><strong className="text-gray-900 dark:text-white">Share on social media</strong>: Post about your experience. Tag your representative. Other constituents want to know what happened.</li>
+                <li><strong className="text-gray-900 dark:text-white">Report to local media</strong>: If the legislator made a notable statement, tip off local reporters. Media coverage amplifies accountability.</li>
               </ul>
             </div>
           </section>
@@ -147,7 +147,7 @@ export default function TownHallGuidePage() {
                 Many legislators now host virtual events via Zoom, Facebook Live, or telephone. These are more accessible for people who can&apos;t attend in person.
               </p>
               <ul className="list-disc list-inside space-y-2">
-                <li>Sign up in advance — virtual events often require registration.</li>
+                <li>Sign up in advance. Virtual events often require registration.</li>
                 <li>Submit your question early. Many virtual town halls collect questions beforehand and select which to ask.</li>
                 <li>Have your question written out and ready to read clearly on camera or phone.</li>
               </ul>
@@ -167,7 +167,7 @@ export default function TownHallGuidePage() {
 
         <div className="mt-10 bg-purple-50 dark:bg-purple-900/20 rounded-2xl p-8 text-center">
           <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">Can&apos;t attend a town hall?</h2>
-          <p className="text-gray-600 dark:text-gray-300 mb-6">Contact your representatives by email or phone — your voice still counts.</p>
+          <p className="text-gray-600 dark:text-gray-300 mb-6">Contact your representatives by email or phone. Your voice still counts.</p>
           <Link href="/contact" className="inline-flex items-center gap-2 px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg transition-colors">
             Contact Your Reps
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>

@@ -682,7 +682,7 @@ function FundingTab({ finance, repId, chamber }: { finance: RepFinance | null; r
       {/* FEC Disclaimer */}
       <div className="bg-gray-50 dark:bg-gray-800/50 rounded-lg p-3 border border-gray-200 dark:border-gray-700">
         <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
-          <strong className="text-gray-600 dark:text-gray-300">About this data:</strong> All figures are from reports filed with the Federal Election Commission (<a href="https://www.fec.gov" target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-700 dark:hover:text-gray-300">fec.gov</a>) for the {cycleLabel} election cycle. Contributor data is grouped by self-reported employer name — it represents where individual donors work, not direct contributions from those organizations. Campaign contributions do not necessarily indicate influence over policy positions. Data may lag current filings by several weeks.
+          <strong className="text-gray-600 dark:text-gray-300">About this data:</strong> All figures are from reports filed with the Federal Election Commission (<a href="https://www.fec.gov" target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-700 dark:hover:text-gray-300">fec.gov</a>) for the {cycleLabel} election cycle. Contributor data is grouped by self-reported employer name. It represents where individual donors work, not direct contributions from those organizations. Campaign contributions do not necessarily indicate influence over policy positions. Data may lag current filings by several weeks.
         </p>
       </div>
     </div>

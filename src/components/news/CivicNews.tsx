@@ -32,7 +32,7 @@ function LeanBadge({ lean }: { lean: SourceLean }) {
   return (
     <span
       className={`inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold leading-none ${color}`}
-      title={`Source bias rating: ${label} — based on AllSides / Ad Fontes Media`}
+      title={`Source bias rating: ${label} (based on AllSides / Ad Fontes Media)`}
     >
       {label}
     </span>

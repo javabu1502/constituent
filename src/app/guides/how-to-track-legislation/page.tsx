@@ -3,11 +3,11 @@ import type { Metadata } from 'next';
 import { BreadcrumbJsonLd } from '@/lib/seo';
 
 export const metadata: Metadata = {
-  title: 'How to Track Legislation — Bills, Votes & Committees | My Democracy',
+  title: 'How to Track Legislation | Bills, Votes & Committees | My Democracy',
   description: 'Learn how to track bills in Congress and your state legislature. Tools, resources, and strategies for staying on top of legislation that affects you.',
   keywords: ['track legislation', 'track bills', 'Congress.gov', 'bill tracking', 'how to follow a bill', 'state legislature bills', 'committee hearings', 'legislative tracker'],
   openGraph: {
-    title: 'How to Track Legislation — Bills, Votes & Committees | My Democracy',
+    title: 'How to Track Legislation | Bills, Votes & Committees | My Democracy',
     description: 'Learn how to track bills in Congress and your state legislature with free tools and strategies.',
     type: 'article',
   },
@@ -175,11 +175,11 @@ export default function TrackLegislationGuidePage() {
             </h2>
             <div className="pl-10 text-gray-600 dark:text-gray-300">
               <ul className="list-disc list-inside space-y-2">
-                <li><strong className="text-gray-900 dark:text-white">Set up alerts</strong> — Use Congress.gov email alerts or GovTrack to get notified when your bill moves.</li>
-                <li><strong className="text-gray-900 dark:text-white">Follow committees</strong> — If your issue is in a specific committee, track that committee&apos;s schedule and hearings.</li>
-                <li><strong className="text-gray-900 dark:text-white">Follow advocacy organizations</strong> — Groups that work on your issue will alert you when action is needed. Check our <Link href="/states" className="text-purple-600 dark:text-purple-400 hover:underline">state pages</Link> for organizations by issue area.</li>
-                <li><strong className="text-gray-900 dark:text-white">Check voting records</strong> — After a vote, check how your representatives voted. The <Link href="/legislators" className="text-purple-600 dark:text-purple-400 hover:underline">My Democracy legislator profiles</Link> show recent votes.</li>
-                <li><strong className="text-gray-900 dark:text-white">Act at the right time</strong> — Contact during committee markup or right before floor votes has the most impact.</li>
+                <li><strong className="text-gray-900 dark:text-white">Set up alerts</strong>: Use Congress.gov email alerts or GovTrack to get notified when your bill moves.</li>
+                <li><strong className="text-gray-900 dark:text-white">Follow committees</strong>: If your issue is in a specific committee, track that committee&apos;s schedule and hearings.</li>
+                <li><strong className="text-gray-900 dark:text-white">Follow advocacy organizations</strong>: Groups that work on your issue will alert you when action is needed. Check our <Link href="/states" className="text-purple-600 dark:text-purple-400 hover:underline">state pages</Link> for organizations by issue area.</li>
+                <li><strong className="text-gray-900 dark:text-white">Check voting records</strong>: After a vote, check how your representatives voted. The <Link href="/legislators" className="text-purple-600 dark:text-purple-400 hover:underline">My Democracy legislator profiles</Link> show recent votes.</li>
+                <li><strong className="text-gray-900 dark:text-white">Act at the right time</strong>: Contact during committee markup or right before floor votes has the most impact.</li>
               </ul>
             </div>
           </section>

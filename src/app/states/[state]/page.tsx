@@ -86,9 +86,9 @@ interface StatePageProps {
 export async function generateMetadata({ params }: StatePageProps): Promise<Metadata> {
   const { state: slug } = await params;
   const stateInfo = STATES_BY_SLUG[slug];
-  if (!stateInfo) return { title: 'State Info — My Democracy' };
+  if (!stateInfo) return { title: 'State Info | My Democracy' };
 
-  const title = `${stateInfo.name} Government, Voting & Representatives — My Democracy`;
+  const title = `${stateInfo.name} Government, Voting & Representatives | My Democracy`;
   const description = `Everything about ${stateInfo.name}: governor, state legislature, voting rules, election dates, federal delegation, state legislators, advocacy organizations, and how to get involved.`;
 
   return {
@@ -623,7 +623,7 @@ export default async function StateHubPage({ params }: StatePageProps) {
       <section className="mb-10">
         <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Advocacy Organizations</h2>
         <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
-          Organizations working on key policy issues — explore perspectives from both sides.
+          Organizations working on key policy issues. Explore perspectives from both sides.
         </p>
 
         <div className="space-y-4">
@@ -728,7 +728,7 @@ export default async function StateHubPage({ params }: StatePageProps) {
       {/* CTA */}
       <div className="text-center py-8 border-t border-gray-200 dark:border-gray-700">
         <p className="text-gray-600 dark:text-gray-400 mb-4">
-          Make your voice heard — contact your {stateInfo.name} representatives today.
+          Make your voice heard. Contact your {stateInfo.name} representatives today.
         </p>
         <Link href="/contact" className="inline-block px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-medium rounded-lg transition-colors">
           Contact Your Representatives

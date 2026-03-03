@@ -94,7 +94,7 @@ function BillCard({ bill }: { bill: FeedBill }) {
               {bill.actions.map((action: BillAction, i: number) => (
                 <div key={i} className="text-xs text-gray-600 dark:text-gray-400">
                   <span className="font-medium text-gray-700 dark:text-gray-300">{formatDate(action.date)}</span>
-                  {' — '}
+                  {' - '}
                   {action.description}
                 </div>
               ))}

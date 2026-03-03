@@ -30,13 +30,13 @@ export default function AboutPage() {
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Contact Your Representatives</h3>
                 <ul className="list-disc list-inside space-y-2">
                   <li>
-                    <strong className="text-gray-900 dark:text-white">Find all your elected officials</strong> — federal, state, and local — from one address lookup
+                    <strong className="text-gray-900 dark:text-white">Find all your elected officials</strong>: federal, state, and local, from one address lookup
                   </li>
                   <li>
-                    <strong className="text-gray-900 dark:text-white">Write personalized messages with AI assistance</strong> — emails or phone scripts — that you review and edit before sending
+                    <strong className="text-gray-900 dark:text-white">Write personalized messages with AI assistance</strong>: emails or phone scripts that you review and edit before sending
                   </li>
                   <li>
-                    <strong className="text-gray-900 dark:text-white">Contact via email or phone</strong> — send emails directly or call with an AI-generated script
+                    <strong className="text-gray-900 dark:text-white">Contact via email or phone</strong>:send emails directly or call with an AI-generated script
                   </li>
                 </ul>
               </div>
@@ -44,28 +44,28 @@ export default function AboutPage() {
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Personalized Dashboard</h3>
                 <ul className="list-disc list-inside space-y-2">
                   <li>
-                    <strong className="text-gray-900 dark:text-white">Activity feed</strong> — see your message history and engagement at a glance
+                    <strong className="text-gray-900 dark:text-white">Activity feed</strong>:see your message history and engagement at a glance
                   </li>
                   <li>
-                    <strong className="text-gray-900 dark:text-white">Voting records</strong> — track how your representatives vote on legislation
+                    <strong className="text-gray-900 dark:text-white">Voting records</strong>:track how your representatives vote on legislation
                   </li>
                   <li>
-                    <strong className="text-gray-900 dark:text-white">Campaign finance</strong> — follow the money behind your representatives
+                    <strong className="text-gray-900 dark:text-white">Campaign finance</strong>:follow the money behind your representatives
                   </li>
                   <li>
-                    <strong className="text-gray-900 dark:text-white">Lobbying activity</strong> — see who&apos;s lobbying your representatives
+                    <strong className="text-gray-900 dark:text-white">Lobbying activity</strong>:see who&apos;s lobbying your representatives
                   </li>
                   <li>
-                    <strong className="text-gray-900 dark:text-white">AI-generated bios</strong> — understand your representatives&apos; backgrounds and priorities
+                    <strong className="text-gray-900 dark:text-white">AI-generated bios</strong>:understand your representatives&apos; backgrounds and priorities
                   </li>
                   <li>
-                    <strong className="text-gray-900 dark:text-white">Committee assignments</strong> — know where your reps have influence
+                    <strong className="text-gray-900 dark:text-white">Committee assignments</strong>:know where your reps have influence
                   </li>
                   <li>
-                    <strong className="text-gray-900 dark:text-white">Bill tracking with AI summaries</strong> — follow legislation that matters to you
+                    <strong className="text-gray-900 dark:text-white">Bill tracking with AI summaries</strong>:follow legislation that matters to you
                   </li>
                   <li>
-                    <strong className="text-gray-900 dark:text-white">Per-representative news</strong> — stay informed about what your reps are doing
+                    <strong className="text-gray-900 dark:text-white">Per-representative news</strong>:stay informed about what your reps are doing
                   </li>
                 </ul>
               </div>
@@ -73,13 +73,13 @@ export default function AboutPage() {
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Civic Tools</h3>
                 <ul className="list-disc list-inside space-y-2">
                   <li>
-                    <strong className="text-gray-900 dark:text-white">Campaigns</strong> — create shareable issue campaigns to rally others
+                    <strong className="text-gray-900 dark:text-white">Campaigns</strong>:create shareable issue campaigns to rally others
                   </li>
                   <li>
-                    <strong className="text-gray-900 dark:text-white">Voter information</strong> — find your polling place and registration status
+                    <strong className="text-gray-900 dark:text-white">Voter information</strong>:find your polling place and registration status
                   </li>
                   <li>
-                    <strong className="text-gray-900 dark:text-white">Trending issues</strong> — see what topics people are contacting their reps about
+                    <strong className="text-gray-900 dark:text-white">Trending issues</strong>:see what topics people are contacting their reps about
                   </li>
                 </ul>
               </div>
@@ -104,13 +104,13 @@ export default function AboutPage() {
             <div className="space-y-3 text-gray-600 dark:text-gray-300 pl-10">
               <ol className="list-decimal list-inside space-y-2">
                 <li>
-                  <strong className="text-gray-900 dark:text-white">Enter your address</strong> — we find your federal, state, and local representatives
+                  <strong className="text-gray-900 dark:text-white">Enter your address</strong>:we find your federal, state, and local representatives
                 </li>
                 <li>
-                  <strong className="text-gray-900 dark:text-white">Tell us what you care about</strong> — AI writes personalized messages for each representative
+                  <strong className="text-gray-900 dark:text-white">Tell us what you care about</strong>:AI writes personalized messages for each representative
                 </li>
                 <li>
-                  <strong className="text-gray-900 dark:text-white">Reach out</strong> — send an email or make a call
+                  <strong className="text-gray-900 dark:text-white">Reach out</strong>:send an email or make a call
                 </li>
               </ol>
             </div>
@@ -129,13 +129,13 @@ export default function AboutPage() {
             <div className="space-y-3 text-gray-600 dark:text-gray-300 pl-10">
               <ul className="list-disc list-inside space-y-2">
                 <li>
-                  <strong className="text-gray-900 dark:text-white">Congressional offices track and tally every constituent contact</strong> — emails, calls, everything
+                  <strong className="text-gray-900 dark:text-white">Congressional offices track and tally every constituent contact</strong>:emails, calls, everything
                 </li>
                 <li>
                   <strong className="text-gray-900 dark:text-white">Personalized messages carry more weight</strong> than form letters or scripts
                 </li>
                 <li>
-                  <strong className="text-gray-900 dark:text-white">Your representatives work for you</strong> — but only if they hear from you
+                  <strong className="text-gray-900 dark:text-white">Your representatives work for you</strong>:but only if they hear from you
                 </li>
               </ul>
             </div>
@@ -154,16 +154,16 @@ export default function AboutPage() {
             <div className="space-y-3 text-gray-600 dark:text-gray-300 pl-10">
               <ul className="list-disc list-inside space-y-2">
                 <li>
-                  <strong className="text-gray-900 dark:text-white">Not a form letter</strong> — every message is unique, written by AI based on your words
+                  <strong className="text-gray-900 dark:text-white">Not a form letter</strong>:every message is unique, written by AI based on your words
                 </li>
                 <li>
-                  <strong className="text-gray-900 dark:text-white">Federal, state, AND local</strong> — contact all your representatives from one place
+                  <strong className="text-gray-900 dark:text-white">Federal, state, AND local</strong>:contact all your representatives from one place
                 </li>
                 <li>
-                  <strong className="text-gray-900 dark:text-white">Every contact counts</strong> — congressional offices tally every constituent message
+                  <strong className="text-gray-900 dark:text-white">Every contact counts</strong>:congressional offices tally every constituent message
                 </li>
                 <li>
-                  <strong className="text-gray-900 dark:text-white">Your personal story matters most</strong> — real constituent stories are what move legislators to act
+                  <strong className="text-gray-900 dark:text-white">Your personal story matters most</strong>:real constituent stories are what move legislators to act
                 </li>
               </ul>
             </div>

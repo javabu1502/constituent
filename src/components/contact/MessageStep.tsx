@@ -154,7 +154,7 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
         </h3>
         <p className="text-gray-500 dark:text-gray-400 mt-1 text-sm">
           {selectedReps.length > 1
-            ? `${contactMethod === 'phone' ? 'Script' : 'Message'} ${reviewIndex + 1} of ${selectedReps.length} — edit as needed`
+            ? `${contactMethod === 'phone' ? 'Script' : 'Message'} ${reviewIndex + 1} of ${selectedReps.length} - edit as needed`
             : 'Edit as needed, then continue'}
         </p>
       </div>

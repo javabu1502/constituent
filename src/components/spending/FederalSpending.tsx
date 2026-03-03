@@ -56,7 +56,7 @@ export function FederalSpending({ stateCode, stateName }: { stateCode: string; s
         </div>
         <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 text-center">
           <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">
-            {data.awardCount > 0 ? data.awardCount.toLocaleString() : '—'}
+            {data.awardCount > 0 ? data.awardCount.toLocaleString() : '-'}
           </div>
           <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">Awards</div>
         </div>

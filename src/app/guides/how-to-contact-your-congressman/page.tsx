@@ -52,10 +52,10 @@ export default function ContactCongressmanGuidePage() {
             </h2>
             <div className="pl-10 text-gray-600 dark:text-gray-300 space-y-4">
               <p>
-                <strong className="text-gray-900 dark:text-white">US Senators (2)</strong> — Represent your entire state. Serve 6-year terms. Vote on federal legislation, confirm presidential appointments, and ratify treaties.
+                <strong className="text-gray-900 dark:text-white">US Senators (2)</strong>: Represent your entire state. Serve 6-year terms. Vote on federal legislation, confirm presidential appointments, and ratify treaties.
               </p>
               <p>
-                <strong className="text-gray-900 dark:text-white">US Representative (1)</strong> — Represents your congressional district. Serves 2-year terms. Votes on federal legislation and controls the federal budget.
+                <strong className="text-gray-900 dark:text-white">US Representative (1)</strong>: Represents your congressional district. Serves 2-year terms. Votes on federal legislation and controls the federal budget.
               </p>
               <p>
                 Not sure who represents you? <Link href="/contact" className="text-purple-600 dark:text-purple-400 hover:underline">Enter your address</Link> to find out instantly.
@@ -115,7 +115,7 @@ export default function ContactCongressmanGuidePage() {
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">4. In-Person Meetings</h3>
                 <p className="text-gray-600 dark:text-gray-300">
-                  Request a meeting through the scheduler. You&apos;ll likely meet with a staff member, which is valuable — they brief the legislator and often specialize in your issue area.
+                  Request a meeting through the scheduler. You&apos;ll likely meet with a staff member, which is valuable. They brief the legislator and often specialize in your issue area.
                 </p>
               </div>
             </div>
@@ -133,12 +133,12 @@ export default function ContactCongressmanGuidePage() {
             </h2>
             <div className="pl-10">
               <ul className="list-disc list-inside text-gray-600 dark:text-gray-300 space-y-2">
-                <li><strong className="text-gray-900 dark:text-white">Be a constituent</strong> — Only contact your own representatives. They won&apos;t respond to non-constituents.</li>
-                <li><strong className="text-gray-900 dark:text-white">Be specific</strong> — Reference bill numbers, ask for specific votes, name the issue clearly.</li>
-                <li><strong className="text-gray-900 dark:text-white">Be brief</strong> — Staff handle hundreds of contacts daily. Get to the point.</li>
-                <li><strong className="text-gray-900 dark:text-white">Be respectful</strong> — Even when frustrated. Rudeness gets you flagged and ignored.</li>
-                <li><strong className="text-gray-900 dark:text-white">Share your story</strong> — Personal experiences are more persuasive than statistics. <Link href="/guides/tell-your-story" className="text-purple-600 dark:text-purple-400 hover:underline">Learn how</Link>.</li>
-                <li><strong className="text-gray-900 dark:text-white">Follow up</strong> — Multiple contacts on the same issue show sustained interest.</li>
+                <li><strong className="text-gray-900 dark:text-white">Be a constituent</strong>: Only contact your own representatives. They won&apos;t respond to non-constituents.</li>
+                <li><strong className="text-gray-900 dark:text-white">Be specific</strong>: Reference bill numbers, ask for specific votes, name the issue clearly.</li>
+                <li><strong className="text-gray-900 dark:text-white">Be brief</strong>: Staff handle hundreds of contacts daily. Get to the point.</li>
+                <li><strong className="text-gray-900 dark:text-white">Be respectful</strong>: Even when frustrated. Rudeness gets you flagged and ignored.</li>
+                <li><strong className="text-gray-900 dark:text-white">Share your story</strong>: Personal experiences are more persuasive than statistics. <Link href="/guides/tell-your-story" className="text-purple-600 dark:text-purple-400 hover:underline">Learn how</Link>.</li>
+                <li><strong className="text-gray-900 dark:text-white">Follow up</strong>: Multiple contacts on the same issue show sustained interest.</li>
               </ul>
             </div>
           </section>
@@ -192,7 +192,7 @@ export default function ContactCongressmanGuidePage() {
                 </p>
                 <p className="font-semibold text-gray-900 dark:text-white">Explain briefly why (1-2 sentences):</p>
                 <p>
-                  &quot;This issue matters to me because <span className="text-purple-600 dark:text-purple-400">[your personal reason — how it affects you, your family, or your community]</span>.&quot;
+                  &quot;This issue matters to me because <span className="text-purple-600 dark:text-purple-400">[your personal reason - how it affects you, your family, or your community]</span>.&quot;
                 </p>
                 <p className="font-semibold text-gray-900 dark:text-white">Make your ask:</p>
                 <p>
@@ -204,7 +204,7 @@ export default function ContactCongressmanGuidePage() {
                 </p>
                 <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
                   <p className="text-xs text-gray-500 dark:text-gray-400">
-                    <strong>Tip:</strong> The staffer may ask for your full address to confirm you&apos;re a constituent. They may also tell you the legislator&apos;s current position on the issue. Don&apos;t worry if you stumble — staff appreciate that you called, regardless of polish.
+                    <strong>Tip:</strong> The staffer may ask for your full address to confirm you&apos;re a constituent. They may also tell you the legislator&apos;s current position on the issue. Don&apos;t worry if you stumble. Staff appreciate that you called, regardless of polish.
                   </p>
                 </div>
               </div>
@@ -227,7 +227,7 @@ export default function ContactCongressmanGuidePage() {
               </p>
               <div className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 text-sm text-gray-700 dark:text-gray-300 space-y-4">
                 <p>
-                  <strong className="text-gray-900 dark:text-white">Subject:</strong> <span className="text-purple-600 dark:text-purple-400">[Your Position: Support/Oppose]</span> — <span className="text-purple-600 dark:text-purple-400">[Bill Number or Issue Name]</span>
+                  <strong className="text-gray-900 dark:text-white">Subject:</strong> <span className="text-purple-600 dark:text-purple-400">[Your Position: Support/Oppose]</span> - <span className="text-purple-600 dark:text-purple-400">[Bill Number or Issue Name]</span>
                 </p>
                 <p>Dear <span className="text-purple-600 dark:text-purple-400">[Senator/Representative]</span> <span className="text-purple-600 dark:text-purple-400">[Last Name]</span>,</p>
                 <p>
@@ -281,10 +281,10 @@ export default function ContactCongressmanGuidePage() {
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">How Your Message Gets Processed</h3>
                 <p>When your phone call, email, or letter arrives, here&apos;s what happens:</p>
                 <ol className="list-decimal list-inside space-y-2 mt-2">
-                  <li><strong className="text-gray-900 dark:text-white">Constituent verification</strong> — Staff checks your address against the district or state boundaries. If you&apos;re not a constituent, your message may not be logged at all.</li>
-                  <li><strong className="text-gray-900 dark:text-white">Issue categorization</strong> — Your message is tagged with one or more issue codes (e.g., &quot;Healthcare — Prescription Drug Pricing&quot; or &quot;Environment — Climate Change&quot;). This is why stating your issue clearly matters.</li>
-                  <li><strong className="text-gray-900 dark:text-white">Position coding</strong> — Staff marks your position: <strong className="text-gray-900 dark:text-white">support</strong>, <strong className="text-gray-900 dark:text-white">oppose</strong>, or <strong className="text-gray-900 dark:text-white">undecided/informational</strong>. Ambiguous messages are harder to code and may be categorized as &quot;general comment.&quot;</li>
-                  <li><strong className="text-gray-900 dark:text-white">Response queuing</strong> — Your message is queued for a response letter, typically a form response tailored to the issue. Particularly compelling messages may be flagged for personal attention.</li>
+                  <li><strong className="text-gray-900 dark:text-white">Constituent verification</strong>: Staff checks your address against the district or state boundaries. If you&apos;re not a constituent, your message may not be logged at all.</li>
+                  <li><strong className="text-gray-900 dark:text-white">Issue categorization</strong>: Your message is tagged with one or more issue codes (e.g., &quot;Healthcare - Prescription Drug Pricing&quot; or &quot;Environment - Climate Change&quot;). This is why stating your issue clearly matters.</li>
+                  <li><strong className="text-gray-900 dark:text-white">Position coding</strong>: Staff marks your position: <strong className="text-gray-900 dark:text-white">support</strong>, <strong className="text-gray-900 dark:text-white">oppose</strong>, or <strong className="text-gray-900 dark:text-white">undecided/informational</strong>. Ambiguous messages are harder to code and may be categorized as &quot;general comment.&quot;</li>
+                  <li><strong className="text-gray-900 dark:text-white">Response queuing</strong>: Your message is queued for a response letter, typically a form response tailored to the issue. Particularly compelling messages may be flagged for personal attention.</li>
                 </ol>
               </div>
               <div>
@@ -293,7 +293,7 @@ export default function ContactCongressmanGuidePage() {
                   Every week, the legislative director or chief of staff compiles a <strong className="text-gray-900 dark:text-white">constituent mail report</strong>. These reports summarize the top issues by volume and show the breakdown of support versus opposition. Before a major vote, the legislator often reviews these numbers to gauge constituent sentiment.
                 </p>
                 <p className="mt-2">
-                  A typical report might show: &quot;Healthcare — 847 contacts this week (612 support, 198 oppose, 37 undecided).&quot; This is why every single contact counts — you are literally a data point that influences decisions.
+                  A typical report might show: &quot;Healthcare - 847 contacts this week (612 support, 198 oppose, 37 undecided).&quot; This is why every single contact counts. You are literally a data point that influences decisions.
                 </p>
               </div>
               <div className="bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800 rounded-lg p-4 text-sm">
@@ -360,7 +360,7 @@ export default function ContactCongressmanGuidePage() {
                     <div>
                       <p className="font-semibold text-gray-900 dark:text-white">Writing too long</p>
                       <p className="text-sm mt-1">
-                        Congressional staff members process hundreds of messages per day. A three-page letter won&apos;t get three times the attention of a one-page letter — in fact, it may get less. Keep written messages to one page or under 300 words. For phone calls, aim for under two minutes. The most effective messages are brief, clear, and personal.
+                        Congressional staff members process hundreds of messages per day. A three-page letter won&apos;t get three times the attention of a one-page letter. In fact, it may get less. Keep written messages to one page or under 300 words. For phone calls, aim for under two minutes. The most effective messages are brief, clear, and personal.
                       </p>
                     </div>
                   </div>
@@ -369,7 +369,7 @@ export default function ContactCongressmanGuidePage() {
                     <div>
                       <p className="font-semibold text-gray-900 dark:text-white">Using threatening or abusive language</p>
                       <p className="text-sm mt-1">
-                        Messages containing threats — even vague ones like &quot;you&apos;ll regret this&quot; — are flagged by staff and may be forwarded to the Capitol Police. Beyond the legal implications, hostile language ensures your message is dismissed rather than considered. You can be firm and passionate without being threatening. Expressing disappointment or concern is always more effective than anger.
+                        Messages containing threats, even vague ones like &quot;you&apos;ll regret this,&quot; are flagged by staff and may be forwarded to the Capitol Police. Beyond the legal implications, hostile language ensures your message is dismissed rather than considered. You can be firm and passionate without being threatening. Expressing disappointment or concern is always more effective than anger.
                       </p>
                     </div>
                   </div>
@@ -392,31 +392,31 @@ export default function ContactCongressmanGuidePage() {
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Will my representative actually read my message?</h3>
                 <p className="text-gray-600 dark:text-gray-300 text-sm">
-                  In most cases, the legislator personally will not read your individual message. However, that does not mean it doesn&apos;t matter. Staff members read, categorize, and tally every constituent contact. The legislator reviews summary reports showing how many constituents support or oppose key issues. Exceptionally compelling personal stories may be pulled and shared directly with the member — sometimes even quoted on the floor of Congress. Your message influences the data that shapes their decisions.
+                  In most cases, the legislator personally will not read your individual message. However, that does not mean it doesn&apos;t matter. Staff members read, categorize, and tally every constituent contact. The legislator reviews summary reports showing how many constituents support or oppose key issues. Exceptionally compelling personal stories may be pulled and shared directly with the member, sometimes even quoted on the floor of Congress. Your message influences the data that shapes their decisions.
                 </p>
               </div>
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Should I contact all three of my members of Congress?</h3>
                 <p className="text-gray-600 dark:text-gray-300 text-sm">
-                  It depends on the issue. If you&apos;re writing about a bill in the House, contact your House representative. If it&apos;s a Senate bill, contact your two senators. For broad policy issues or executive branch actions, contacting all three can be appropriate. Just make sure to personalize each message for the correct chamber and legislator — a message asking your senator to vote on a House bill shows you haven&apos;t done your homework.
+                  It depends on the issue. If you&apos;re writing about a bill in the House, contact your House representative. If it&apos;s a Senate bill, contact your two senators. For broad policy issues or executive branch actions, contacting all three can be appropriate. Just make sure to personalize each message for the correct chamber and legislator. A message asking your senator to vote on a House bill shows you haven&apos;t done your homework.
                 </p>
               </div>
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">What if my representative already agrees with me?</h3>
                 <p className="text-gray-600 dark:text-gray-300 text-sm">
-                  Contacting an ally is still valuable. It reinforces their position, gives them constituent stories to use in advocacy, and lets them know the issue has active support back home. Legislators who hear from constituents on an issue are more likely to prioritize it, co-sponsor related bills, and speak publicly about it. You might also ask them to take a leadership role — for example, asking them to whip votes from colleagues or sign onto a letter to committee leadership.
+                  Contacting an ally is still valuable. It reinforces their position, gives them constituent stories to use in advocacy, and lets them know the issue has active support back home. Legislators who hear from constituents on an issue are more likely to prioritize it, co-sponsor related bills, and speak publicly about it. You might also ask them to take a leadership role, for example asking them to whip votes from colleagues or sign onto a letter to committee leadership.
                 </p>
               </div>
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">How long until I get a response?</h3>
                 <p className="text-gray-600 dark:text-gray-300 text-sm">
-                  Response times vary widely. Phone calls typically don&apos;t receive a follow-up response — the conversation is your response. For emails and letters, expect a written reply in 4 to 8 weeks, though during busy legislative periods or crises it may take longer. The response is usually a form letter addressing the issue topic. Don&apos;t be discouraged by delayed or generic responses — the purpose of your contact is to be counted, not to start a correspondence.
+                  Response times vary widely. Phone calls typically don&apos;t receive a follow-up response. The conversation is your response. For emails and letters, expect a written reply in 4 to 8 weeks, though during busy legislative periods or crises it may take longer. The response is usually a form letter addressing the issue topic. Don&apos;t be discouraged by delayed or generic responses. The purpose of your contact is to be counted, not to start a correspondence.
                 </p>
               </div>
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Does contacting Congress actually work?</h3>
                 <p className="text-gray-600 dark:text-gray-300 text-sm">
-                  Yes. There are documented cases where constituent pressure has changed votes, blocked legislation, and advanced stalled bills. The Affordable Care Act repeal effort in 2017 was derailed in part because of massive constituent phone campaigns. Congressional staff consistently report that high call volume on an issue gets a legislator&apos;s attention. Individual messages add up. When hundreds or thousands of constituents contact an office on the same issue, it signals political risk — and that is what moves elected officials.
+                  Yes. There are documented cases where constituent pressure has changed votes, blocked legislation, and advanced stalled bills. The Affordable Care Act repeal effort in 2017 was derailed in part because of massive constituent phone campaigns. Congressional staff consistently report that high call volume on an issue gets a legislator&apos;s attention. Individual messages add up. When hundreds or thousands of constituents contact an office on the same issue, it signals political risk, and that is what moves elected officials.
                 </p>
               </div>
             </div>

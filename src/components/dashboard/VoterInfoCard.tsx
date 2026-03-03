@@ -82,7 +82,7 @@ export function VoterInfoCard({ userState }: Props) {
           </svg>
         </div>
         <div className="flex-1 min-w-0">
-          <h3 className="font-semibold text-gray-900 dark:text-white text-sm">Voter Info — {stateData.name}</h3>
+          <h3 className="font-semibold text-gray-900 dark:text-white text-sm">Voter Info - {stateData.name}</h3>
           {nextElection.days > 0 && (
             <p className={`text-xs font-medium ${isElectionSoon ? 'text-red-600 dark:text-red-400' : 'text-purple-600 dark:text-purple-400'}`}>
               {nextElection.days} days until {nextElection.label} ({formatDateShort(nextElection.date)})

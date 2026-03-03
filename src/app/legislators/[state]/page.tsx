@@ -26,9 +26,9 @@ interface StatePageProps {
 export async function generateMetadata({ params }: StatePageProps): Promise<Metadata> {
   const { state: slug } = await params;
   const stateInfo = STATES_BY_SLUG[slug];
-  if (!stateInfo) return { title: 'State Legislators — My Democracy' };
+  if (!stateInfo) return { title: 'State Legislators | My Democracy' };
 
-  const title = `${stateInfo.name} State Legislators — My Democracy`;
+  const title = `${stateInfo.name} State Legislators | My Democracy`;
   const description = `Browse all ${stateInfo.name} state senators and representatives. View their party, district, photo, and contact them directly on My Democracy.`;
 
   return {

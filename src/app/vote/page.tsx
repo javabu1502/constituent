@@ -98,7 +98,7 @@ function LocationCard({ location, type }: { location: VoterInfoLocation; type: s
           )}
           {location.startDate && location.endDate && (
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-              {formatDateShort(location.startDate)} — {formatDateShort(location.endDate)}
+              {formatDateShort(location.startDate)} - {formatDateShort(location.endDate)}
             </p>
           )}
           {location.notes && (
@@ -233,7 +233,7 @@ export default function VotePage() {
         <div className="mb-8">
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Your Voting Guide</h1>
           <p className="text-gray-600 dark:text-gray-400">
-            Everything you need to vote — registration, deadlines, polling places, and what&apos;s on your ballot.
+            Everything you need to vote: registration, deadlines, polling places, and what&apos;s on your ballot.
           </p>
         </div>
 
@@ -286,7 +286,7 @@ export default function VotePage() {
             </h3>
             <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
               {stateData.houseSeats} House seat{stateData.houseSeats !== 1 ? 's' : ''}
-              {stateData.senateRace2026 ? ' + Senate race in 2026' : ' — no Senate race in 2026'}
+              {stateData.senateRace2026 ? ' + Senate race in 2026' : ' - no Senate race in 2026'}
             </p>
             <div className="flex flex-wrap gap-3">
               <Link

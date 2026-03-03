@@ -4,7 +4,7 @@ import { US_STATES } from '@/lib/constants';
 import { StatePicker } from '@/components/ui/StatePicker';
 
 export const metadata: Metadata = {
-  title: 'All 50 States & DC — Voting Info, Representatives & Elections | My Democracy',
+  title: 'All 50 States & DC | Voting Info, Representatives & Elections | My Democracy',
   description:
     'Find voting rules, election dates, and elected officials for every U.S. state and Washington DC. Your starting point for civic engagement.',
   keywords: [
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     'find my representative',
   ],
   openGraph: {
-    title: 'All 50 States & DC — Voting Info, Representatives & Elections | My Democracy',
+    title: 'All 50 States & DC | Voting Info, Representatives & Elections | My Democracy',
     description:
       'Find voting rules, election dates, and elected officials for every U.S. state and Washington DC.',
     url: 'https://www.mydemocracy.app/states',

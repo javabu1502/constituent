@@ -33,7 +33,7 @@ export default function LocalPoliticsGuidePage() {
 
         <div className="prose prose-gray dark:prose-invert max-w-none">
           <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
-            Local government makes the decisions that most directly affect your daily life — roads, schools, police, zoning, parks, water. Yet fewer than 15% of eligible voters participate in local elections. Here&apos;s how to change that, starting with you.
+            Local government makes the decisions that most directly affect your daily life: roads, schools, police, zoning, parks, water. Yet fewer than 15% of eligible voters participate in local elections. Here&apos;s how to change that, starting with you.
           </p>
 
           {/* Why Local Matters */}
@@ -49,10 +49,10 @@ export default function LocalPoliticsGuidePage() {
             </h2>
             <div className="pl-10 text-gray-600 dark:text-gray-300 space-y-3">
               <ul className="list-disc list-inside space-y-2">
-                <li><strong className="text-gray-900 dark:text-white">Direct impact</strong> — Local decisions about zoning, schools, and infrastructure affect you every day. Federal legislation may take years; a city council vote can change your neighborhood next month.</li>
-                <li><strong className="text-gray-900 dark:text-white">Your voice carries more weight</strong> — A city council member might represent 10,000 people instead of 760,000. One phone call or one vote can genuinely swing a decision.</li>
-                <li><strong className="text-gray-900 dark:text-white">Less partisanship</strong> — Many local races are nonpartisan. Issues like road repairs, park funding, and school safety cross party lines.</li>
-                <li><strong className="text-gray-900 dark:text-white">Pipeline to higher office</strong> — Most state and federal legislators started in local government. The leaders you support locally may shape state and national policy someday.</li>
+                <li><strong className="text-gray-900 dark:text-white">Direct impact</strong>: Local decisions about zoning, schools, and infrastructure affect you every day. Federal legislation may take years; a city council vote can change your neighborhood next month.</li>
+                <li><strong className="text-gray-900 dark:text-white">Your voice carries more weight</strong>: A city council member might represent 10,000 people instead of 760,000. One phone call or one vote can genuinely swing a decision.</li>
+                <li><strong className="text-gray-900 dark:text-white">Less partisanship</strong>: Many local races are nonpartisan. Issues like road repairs, park funding, and school safety cross party lines.</li>
+                <li><strong className="text-gray-900 dark:text-white">Pipeline to higher office</strong>: Most state and federal legislators started in local government. The leaders you support locally may shape state and national policy someday.</li>
               </ul>
             </div>
           </section>
@@ -85,7 +85,7 @@ export default function LocalPoliticsGuidePage() {
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">3. Show Up for School Board Meetings</h3>
                 <p className="text-gray-600 dark:text-gray-300">
-                  School boards control budgets, curriculum standards, and school safety policies. Meetings are public and usually held monthly. Your presence signals community engagement — especially on contentious issues.
+                  School boards control budgets, curriculum standards, and school safety policies. Meetings are public and usually held monthly. Your presence signals community engagement, especially on contentious issues.
                 </p>
               </div>
 
@@ -99,7 +99,7 @@ export default function LocalPoliticsGuidePage() {
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">5. Vote in Every Election</h3>
                 <p className="text-gray-600 dark:text-gray-300">
-                  Local elections often have turnout below 20%. Your vote has dramatically more impact than in national races. Pay special attention to primary elections, bond measures, and ballot initiatives — these often pass or fail by thin margins.
+                  Local elections often have turnout below 20%. Your vote has dramatically more impact than in national races. Pay special attention to primary elections, bond measures, and ballot initiatives. These often pass or fail by thin margins.
                 </p>
               </div>
 
@@ -113,7 +113,7 @@ export default function LocalPoliticsGuidePage() {
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">7. Volunteer on a Campaign</h3>
                 <p className="text-gray-600 dark:text-gray-300">
-                  Local campaigns need volunteers for door-knocking, phone banking, and event organizing. This is the fastest way to learn how local politics actually works — and to build relationships with future officeholders.
+                  Local campaigns need volunteers for door-knocking, phone banking, and event organizing. This is the fastest way to learn how local politics actually works, and to build relationships with future officeholders.
                 </p>
               </div>
 
@@ -134,7 +134,7 @@ export default function LocalPoliticsGuidePage() {
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">10. Run for Office</h3>
                 <p className="text-gray-600 dark:text-gray-300">
-                  Many local offices go uncontested. School board, city council, water board, library trustee — these positions are achievable starting points. Organizations like <a href="https://runforsomething.net/" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">Run for Something</a> help first-time candidates from all backgrounds get started.
+                  Many local offices go uncontested. School board, city council, water board, library trustee. These positions are achievable starting points. Organizations like <a href="https://runforsomething.net/" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">Run for Something</a> help first-time candidates from all backgrounds get started.
                 </p>
               </div>
             </div>

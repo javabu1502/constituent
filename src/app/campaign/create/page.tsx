@@ -4,7 +4,7 @@ import { createClient } from '@/lib/supabase/server';
 import { CampaignForm } from '@/components/campaign/CampaignForm';
 
 export const metadata: Metadata = {
-  title: 'Start a Campaign — My Democracy',
+  title: 'Start a Campaign | My Democracy',
   description: 'Create a shareable campaign page to rally others around an issue you care about.',
 };
 

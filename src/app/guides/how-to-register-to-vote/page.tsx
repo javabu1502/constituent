@@ -3,11 +3,11 @@ import type { Metadata } from 'next';
 import { BreadcrumbJsonLd } from '@/lib/seo';
 
 export const metadata: Metadata = {
-  title: 'How to Register to Vote — Complete 2026 Guide | My Democracy',
+  title: 'How to Register to Vote | Complete 2026 Guide | My Democracy',
   description: 'Step-by-step guide to voter registration in every US state. Learn about online registration, deadlines, ID requirements, and same-day registration options.',
   keywords: ['register to vote', 'voter registration', 'how to register to vote', 'voting registration deadline', 'same day voter registration', 'online voter registration'],
   openGraph: {
-    title: 'How to Register to Vote — Complete 2026 Guide | My Democracy',
+    title: 'How to Register to Vote | Complete 2026 Guide | My Democracy',
     description: 'Step-by-step guide to voter registration in every US state. Learn about online registration, deadlines, and ID requirements.',
     type: 'article',
   },
@@ -103,7 +103,7 @@ export default function RegisterToVotePage() {
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">4. Automatic Registration</h3>
                 <p className="text-gray-600 dark:text-gray-300 mb-2">
-                  23 states plus DC have automatic voter registration — you&apos;re registered when you interact with a government agency (usually the DMV) unless you opt out. Check if your state participates.
+                  23 states plus DC have automatic voter registration. You&apos;re registered when you interact with a government agency (usually the DMV) unless you opt out. Check if your state participates.
                 </p>
               </div>
             </div>
@@ -121,11 +121,11 @@ export default function RegisterToVotePage() {
             </h2>
             <div className="pl-10 text-gray-600 dark:text-gray-300">
               <ul className="list-disc list-inside space-y-2">
-                <li><strong className="text-gray-900 dark:text-white">State-issued ID</strong> — Driver&apos;s license or state ID number (for online registration)</li>
-                <li><strong className="text-gray-900 dark:text-white">Last 4 of SSN</strong> — Required if you don&apos;t have a state ID</li>
-                <li><strong className="text-gray-900 dark:text-white">Current address</strong> — Must match your residential address</li>
-                <li><strong className="text-gray-900 dark:text-white">Date of birth</strong> — You must be 18 by Election Day (some states allow 17-year-olds to register)</li>
-                <li><strong className="text-gray-900 dark:text-white">US citizenship</strong> — You must be a US citizen to vote in federal elections</li>
+                <li><strong className="text-gray-900 dark:text-white">State-issued ID</strong>: Driver&apos;s license or state ID number (for online registration)</li>
+                <li><strong className="text-gray-900 dark:text-white">Last 4 of SSN</strong>: Required if you don&apos;t have a state ID</li>
+                <li><strong className="text-gray-900 dark:text-white">Current address</strong>: Must match your residential address</li>
+                <li><strong className="text-gray-900 dark:text-white">Date of birth</strong>: You must be 18 by Election Day (some states allow 17-year-olds to register)</li>
+                <li><strong className="text-gray-900 dark:text-white">US citizenship</strong>: You must be a US citizen to vote in federal elections</li>
               </ul>
             </div>
           </section>
@@ -143,9 +143,9 @@ export default function RegisterToVotePage() {
             <div className="pl-10 text-gray-600 dark:text-gray-300 space-y-3">
               <p>Deadlines vary by state, typically 15-30 days before an election. Key facts:</p>
               <ul className="list-disc list-inside space-y-2">
-                <li><strong className="text-gray-900 dark:text-white">Same-day registration</strong> — 21 states plus DC allow you to register and vote on the same day. Bring proof of residency.</li>
-                <li><strong className="text-gray-900 dark:text-white">North Dakota</strong> — No registration required at all. Just show up with valid ID.</li>
-                <li><strong className="text-gray-900 dark:text-white">Online deadlines</strong> — Usually earlier than mail or in-person deadlines.</li>
+                <li><strong className="text-gray-900 dark:text-white">Same-day registration</strong>: 21 states plus DC allow you to register and vote on the same day. Bring proof of residency.</li>
+                <li><strong className="text-gray-900 dark:text-white">North Dakota</strong>: No registration required at all. Just show up with valid ID.</li>
+                <li><strong className="text-gray-900 dark:text-white">Online deadlines</strong>: Usually earlier than mail or in-person deadlines.</li>
               </ul>
               <p>
                 Find your exact deadline at <a href="https://www.vote.org/voter-registration-deadlines/" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">Vote.org</a> or check your <Link href="/states" className="text-purple-600 dark:text-purple-400 hover:underline">state info page</Link>.
@@ -165,10 +165,10 @@ export default function RegisterToVotePage() {
             </h2>
             <div className="pl-10 text-gray-600 dark:text-gray-300 space-y-3">
               <ul className="list-disc list-inside space-y-2">
-                <li><strong className="text-gray-900 dark:text-white">Verify your registration</strong> — Check back in 2-4 weeks to confirm it was processed.</li>
-                <li><strong className="text-gray-900 dark:text-white">Know your polling place</strong> — Find it before Election Day at <a href="https://www.vote.org/polling-place-locator/" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">Vote.org</a>.</li>
-                <li><strong className="text-gray-900 dark:text-white">Understand voter ID laws</strong> — 36 states require some form of ID at the polls. Know what your state requires.</li>
-                <li><strong className="text-gray-900 dark:text-white">Consider early voting</strong> — 46 states offer early voting or no-excuse mail ballots. Avoid Election Day lines.</li>
+                <li><strong className="text-gray-900 dark:text-white">Verify your registration</strong>: Check back in 2-4 weeks to confirm it was processed.</li>
+                <li><strong className="text-gray-900 dark:text-white">Know your polling place</strong>: Find it before Election Day at <a href="https://www.vote.org/polling-place-locator/" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">Vote.org</a>.</li>
+                <li><strong className="text-gray-900 dark:text-white">Understand voter ID laws</strong>: 36 states require some form of ID at the polls. Know what your state requires.</li>
+                <li><strong className="text-gray-900 dark:text-white">Consider early voting</strong>: 46 states offer early voting or no-excuse mail ballots. Avoid Election Day lines.</li>
               </ul>
             </div>
           </section>
@@ -197,9 +197,9 @@ export default function RegisterToVotePage() {
                 </p>
               </div>
               <div>
-                <h3 className="font-semibold text-gray-900 dark:text-white mb-2">I&apos;m a college student — where should I register?</h3>
+                <h3 className="font-semibold text-gray-900 dark:text-white mb-2">I&apos;m a college student - where should I register?</h3>
                 <p className="text-gray-600 dark:text-gray-300 text-sm">
-                  You can register at either your home address or your college address — but only one. Consider which races are more competitive or meaningful to you.
+                  You can register at either your home address or your college address, but only one. Consider which races are more competitive or meaningful to you.
                 </p>
               </div>
             </div>

@@ -28,14 +28,14 @@ export async function generateMetadata({ params }: SharePageProps): Promise<Meta
   const data = await getShareData(id);
 
   if (!data) {
-    return { title: 'Share — My Democracy' };
+    return { title: 'Share | My Democracy' };
   }
 
   const title = `A citizen contacted ${data.legislator_name} about ${data.issue_subtopic || data.issue_area}`;
-  const description = `A constituent from ${data.advocate_city}, ${data.advocate_state} contacted ${data.legislator_name}. Make your voice heard too — contact your representatives on My Democracy.`;
+  const description = `A constituent from ${data.advocate_city}, ${data.advocate_state} contacted ${data.legislator_name}. Make your voice heard too. Contact your representatives on My Democracy.`;
 
   return {
-    title: `${title} — My Democracy`,
+    title: `${title} | My Democracy`,
     description,
     openGraph: {
       title,
@@ -91,7 +91,7 @@ export default async function SharePage({ params }: SharePageProps) {
 
             <div className="p-4 bg-purple-50 dark:bg-purple-900/30 border border-purple-200 dark:border-purple-700 rounded-xl mb-6">
               <p className="text-sm text-purple-800 dark:text-purple-200">
-                Every message to Congress matters. Your representatives work for you — let them know what you care about.
+                Every message to Congress matters. Your representatives work for you. Let them know what you care about.
               </p>
             </div>
 

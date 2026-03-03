@@ -253,7 +253,7 @@ export function LocalOfficialsSection({ cachedLocalOfficials, hasAddress }: Prop
     }
   }, [hasAddress, cachedLocalOfficials, officials]);
 
-  // No address — parent section handles the "Add Address" prompt
+  // No address - parent section handles the "Add Address" prompt
   if (!hasAddress) return null;
 
   if (loading) {

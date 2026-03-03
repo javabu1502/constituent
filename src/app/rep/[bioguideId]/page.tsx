@@ -32,7 +32,7 @@ interface RepPageProps {
 export async function generateMetadata({ params }: RepPageProps): Promise<Metadata> {
   const { bioguideId } = await params;
   const bio = getFederalLegislatorBio(bioguideId);
-  if (!bio) return { title: 'Legislator — My Democracy' };
+  if (!bio) return { title: 'Legislator | My Democracy' };
 
   const currentTerm = bio.terms[bio.terms.length - 1];
   const fullName =
@@ -43,7 +43,7 @@ export async function generateMetadata({ params }: RepPageProps): Promise<Metada
   const party = currentTerm?.party?.charAt(0) ?? '';
   const state = currentTerm?.state ?? '';
 
-  const title = `${chamber} ${fullName} (${party}-${state}) — Profile, Voting Record & Contact | My Democracy`;
+  const title = `${chamber} ${fullName} (${party}-${state}) | Profile, Voting Record & Contact | My Democracy`;
   const description = `${fullName} is a member of the U.S. ${currentTerm?.type === 'sen' ? 'Senate' : 'House of Representatives'} representing ${STATE_NAME_MAP[state] ?? state}. View their profile, committees, voting record, and contact information.`;
 
   return {

@@ -52,13 +52,13 @@ export default function ContactStateLegislatorsGuidePage() {
             <div className="pl-10 text-gray-600 dark:text-gray-300 space-y-4">
               <p>State legislatures control policies that directly affect your life:</p>
               <ul className="list-disc list-inside space-y-2">
-                <li><strong className="text-gray-900 dark:text-white">Education</strong> — School funding, curriculum standards, higher education</li>
-                <li><strong className="text-gray-900 dark:text-white">Healthcare</strong> — Medicaid expansion, insurance regulations, public health</li>
-                <li><strong className="text-gray-900 dark:text-white">Criminal Justice</strong> — Sentencing, policing, prison reform</li>
-                <li><strong className="text-gray-900 dark:text-white">Environment</strong> — Land use, water rights, state environmental regulations</li>
-                <li><strong className="text-gray-900 dark:text-white">Elections</strong> — Voting access, redistricting, election administration</li>
-                <li><strong className="text-gray-900 dark:text-white">Taxes</strong> — Income tax, sales tax, property tax</li>
-                <li><strong className="text-gray-900 dark:text-white">Infrastructure</strong> — Roads, public transit, utilities</li>
+                <li><strong className="text-gray-900 dark:text-white">Education</strong>: School funding, curriculum standards, higher education</li>
+                <li><strong className="text-gray-900 dark:text-white">Healthcare</strong>: Medicaid expansion, insurance regulations, public health</li>
+                <li><strong className="text-gray-900 dark:text-white">Criminal Justice</strong>: Sentencing, policing, prison reform</li>
+                <li><strong className="text-gray-900 dark:text-white">Environment</strong>: Land use, water rights, state environmental regulations</li>
+                <li><strong className="text-gray-900 dark:text-white">Elections</strong>: Voting access, redistricting, election administration</li>
+                <li><strong className="text-gray-900 dark:text-white">Taxes</strong>: Income tax, sales tax, property tax</li>
+                <li><strong className="text-gray-900 dark:text-white">Infrastructure</strong>: Roads, public transit, utilities</li>
               </ul>
             </div>
           </section>
@@ -76,10 +76,10 @@ export default function ContactStateLegislatorsGuidePage() {
             <div className="pl-10 text-gray-600 dark:text-gray-300 space-y-4">
               <p>Most states have a bicameral legislature (like Congress):</p>
               <p>
-                <strong className="text-gray-900 dark:text-white">State Senator</strong> — Represents a larger district, typically serves 4-year terms. Your state senate district usually contains multiple house districts.
+                <strong className="text-gray-900 dark:text-white">State Senator</strong>: Represents a larger district, typically serves 4-year terms. Your state senate district usually contains multiple house districts.
               </p>
               <p>
-                <strong className="text-gray-900 dark:text-white">State Representative / Assembly Member</strong> — Represents a smaller district, typically serves 2-year terms. Titles vary by state (Representative, Delegate, Assembly Member).
+                <strong className="text-gray-900 dark:text-white">State Representative / Assembly Member</strong>: Represents a smaller district, typically serves 2-year terms. Titles vary by state (Representative, Delegate, Assembly Member).
               </p>
               <p className="text-sm italic">
                 Note: Nebraska has a unicameral legislature with only senators. Some states have different structures.
@@ -99,11 +99,11 @@ export default function ContactStateLegislatorsGuidePage() {
             </h2>
             <div className="pl-10">
               <ul className="list-disc list-inside text-gray-600 dark:text-gray-300 space-y-2">
-                <li><strong className="text-gray-900 dark:text-white">Smaller constituencies</strong> — Your state rep may represent 50,000 people vs. 760,000 for a US House member. Your voice carries more weight.</li>
-                <li><strong className="text-gray-900 dark:text-white">Less competition for attention</strong> — State offices receive far fewer contacts than Congressional offices.</li>
-                <li><strong className="text-gray-900 dark:text-white">More accessible</strong> — State legislators often have direct email, answer their own phones, and hold local office hours.</li>
-                <li><strong className="text-gray-900 dark:text-white">Faster action</strong> — State legislatures can move quickly on issues. Policies can change in a single session.</li>
-                <li><strong className="text-gray-900 dark:text-white">Testing ground</strong> — Many federal policies started as state experiments. State action can drive national change.</li>
+                <li><strong className="text-gray-900 dark:text-white">Smaller constituencies</strong>: Your state rep may represent 50,000 people vs. 760,000 for a US House member. Your voice carries more weight.</li>
+                <li><strong className="text-gray-900 dark:text-white">Less competition for attention</strong>: State offices receive far fewer contacts than Congressional offices.</li>
+                <li><strong className="text-gray-900 dark:text-white">More accessible</strong>: State legislators often have direct email, answer their own phones, and hold local office hours.</li>
+                <li><strong className="text-gray-900 dark:text-white">Faster action</strong>: State legislatures can move quickly on issues. Policies can change in a single session.</li>
+                <li><strong className="text-gray-900 dark:text-white">Testing ground</strong>: Many federal policies started as state experiments. State action can drive national change.</li>
               </ul>
             </div>
           </section>
@@ -120,7 +120,7 @@ export default function ContactStateLegislatorsGuidePage() {
             </h2>
             <div className="pl-10 text-gray-600 dark:text-gray-300 space-y-4">
               <p>
-                <Link href="/contact" className="text-purple-600 dark:text-purple-400 hover:underline font-medium">Use My Democracy</Link> — Enter your address and we&apos;ll find all your representatives, federal and state, in one lookup.
+                <Link href="/contact" className="text-purple-600 dark:text-purple-400 hover:underline font-medium">Use My Democracy</Link>: Enter your address and we&apos;ll find all your representatives, federal and state, in one lookup.
               </p>
               <p>
                 You can also use <a href="https://openstates.org/find_your_legislator/" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">Open States</a> or your state legislature&apos;s official website.
@@ -140,16 +140,16 @@ export default function ContactStateLegislatorsGuidePage() {
             </h2>
             <div className="pl-10 text-gray-600 dark:text-gray-300 space-y-4">
               <p>
-                <strong className="text-gray-900 dark:text-white">Email</strong> — Most state legislators list a direct email address. Unlike Congress, you&apos;re often emailing them personally, not a webform that goes to staff.
+                <strong className="text-gray-900 dark:text-white">Email</strong>: Most state legislators list a direct email address. Unlike Congress, you&apos;re often emailing them personally, not a webform that goes to staff.
               </p>
               <p>
-                <strong className="text-gray-900 dark:text-white">Phone</strong> — Call their capitol office during session or district office year-round. Many answer their own phones.
+                <strong className="text-gray-900 dark:text-white">Phone</strong>: Call their capitol office during session or district office year-round. Many answer their own phones.
               </p>
               <p>
-                <strong className="text-gray-900 dark:text-white">In-Person</strong> — Attend town halls, legislative hearings, or request a meeting. State legislators are far more accessible than members of Congress.
+                <strong className="text-gray-900 dark:text-white">In-Person</strong>: Attend town halls, legislative hearings, or request a meeting. State legislators are far more accessible than members of Congress.
               </p>
               <p>
-                <strong className="text-gray-900 dark:text-white">Testify</strong> — Many state legislatures allow public testimony on bills. This is direct democracy in action.
+                <strong className="text-gray-900 dark:text-white">Testify</strong>: Many state legislatures allow public testimony on bills. This is direct democracy in action.
               </p>
             </div>
           </section>
@@ -166,11 +166,11 @@ export default function ContactStateLegislatorsGuidePage() {
             </h2>
             <div className="pl-10">
               <ul className="list-disc list-inside text-gray-600 dark:text-gray-300 space-y-2">
-                <li><strong className="text-gray-900 dark:text-white">Know the bill number</strong> — State bills are tracked by number (e.g., HB 123, SB 456). Be specific.</li>
-                <li><strong className="text-gray-900 dark:text-white">Time it right</strong> — Contact before committee hearings or floor votes for maximum impact.</li>
-                <li><strong className="text-gray-900 dark:text-white">Build relationships</strong> — State legislators remember constituents who engage consistently.</li>
-                <li><strong className="text-gray-900 dark:text-white">Attend hearings</strong> — Your physical presence matters, even if you don&apos;t testify.</li>
-                <li><strong className="text-gray-900 dark:text-white">Connect local</strong> — Explain how state policy affects your community specifically.</li>
+                <li><strong className="text-gray-900 dark:text-white">Know the bill number</strong>: State bills are tracked by number (e.g., HB 123, SB 456). Be specific.</li>
+                <li><strong className="text-gray-900 dark:text-white">Time it right</strong>: Contact before committee hearings or floor votes for maximum impact.</li>
+                <li><strong className="text-gray-900 dark:text-white">Build relationships</strong>: State legislators remember constituents who engage consistently.</li>
+                <li><strong className="text-gray-900 dark:text-white">Attend hearings</strong>: Your physical presence matters, even if you don&apos;t testify.</li>
+                <li><strong className="text-gray-900 dark:text-white">Connect local</strong>: Explain how state policy affects your community specifically.</li>
               </ul>
             </div>
           </section>
@@ -187,7 +187,7 @@ export default function ContactStateLegislatorsGuidePage() {
             </h2>
             <div className="pl-10 text-gray-600 dark:text-gray-300 space-y-3">
               <p>
-                <a href="https://openstates.org" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline font-medium">Open States</a> — Free, searchable database of state legislation across all 50 states. Track bills, see voting records, and find your legislators.
+                <a href="https://openstates.org" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline font-medium">Open States</a>: Free, searchable database of state legislation across all 50 states. Track bills, see voting records, and find your legislators.
               </p>
               <p>
                 Learn more about the legislative process in our <Link href="/guides/how-a-bill-becomes-law" className="text-purple-600 dark:text-purple-400 hover:underline">How a Bill Becomes Law</Link> guide.
@@ -213,7 +213,7 @@ export default function ContactStateLegislatorsGuidePage() {
               <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-lg p-4">
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Nebraska&apos;s Unicameral Legislature</h3>
                 <p>
-                  Nebraska is the only state with a unicameral (single-chamber) legislature. Its 49 members are called &quot;senators&quot; and the body is officially nonpartisan — members do not run with a party label. If you live in Nebraska, you have one state legislator instead of two.
+                  Nebraska is the only state with a unicameral (single-chamber) legislature. Its 49 members are called &quot;senators&quot; and the body is officially nonpartisan. Members do not run with a party label. If you live in Nebraska, you have one state legislator instead of two.
                 </p>
               </div>
 
@@ -223,9 +223,9 @@ export default function ContactStateLegislatorsGuidePage() {
                   How often your legislature meets affects when and how you should contact them:
                 </p>
                 <ul className="list-disc list-inside space-y-2">
-                  <li><strong className="text-gray-900 dark:text-white">Full-time legislatures</strong> — California, New York, Pennsylvania, and Michigan have full-time, year-round legislatures. Legislators are paid a full salary and treat it as their primary job. You can reach them at the capitol most of the year.</li>
-                  <li><strong className="text-gray-900 dark:text-white">Part-time legislatures</strong> — Texas meets for only 140 days every two years. New Hampshire legislators earn just $100 per year. Montana, Nevada, and North Dakota also meet every other year. Timing your advocacy around their session schedule is critical.</li>
-                  <li><strong className="text-gray-900 dark:text-white">Hybrid legislatures</strong> — Most states fall somewhere in between. Ohio, Colorado, and Florida have legislatures that meet for several months each year but are not considered full-time positions.</li>
+                  <li><strong className="text-gray-900 dark:text-white">Full-time legislatures</strong>: California, New York, Pennsylvania, and Michigan have full-time, year-round legislatures. Legislators are paid a full salary and treat it as their primary job. You can reach them at the capitol most of the year.</li>
+                  <li><strong className="text-gray-900 dark:text-white">Part-time legislatures</strong>: Texas meets for only 140 days every two years. New Hampshire legislators earn just $100 per year. Montana, Nevada, and North Dakota also meet every other year. Timing your advocacy around their session schedule is critical.</li>
+                  <li><strong className="text-gray-900 dark:text-white">Hybrid legislatures</strong>: Most states fall somewhere in between. Ohio, Colorado, and Florida have legislatures that meet for several months each year but are not considered full-time positions.</li>
                 </ul>
               </div>
 
@@ -235,8 +235,8 @@ export default function ContactStateLegislatorsGuidePage() {
                   This distinction matters because it shapes how legislators interact with constituents:
                 </p>
                 <ul className="list-disc list-inside space-y-2">
-                  <li><strong className="text-gray-900 dark:text-white">Citizen legislatures</strong> — States like New Hampshire (400 House members!), Wyoming, and Vermont have legislators who hold other jobs and serve part-time. They often live and work in your community, making them very accessible. You might run into them at the grocery store.</li>
-                  <li><strong className="text-gray-900 dark:text-white">Professional legislatures</strong> — States like California and New York have legislators with full salaries, large staffs, and year-round schedules. Contacting them works more like contacting a member of Congress — you&apos;ll typically interact with staff first.</li>
+                  <li><strong className="text-gray-900 dark:text-white">Citizen legislatures</strong>: States like New Hampshire (400 House members!), Wyoming, and Vermont have legislators who hold other jobs and serve part-time. They often live and work in your community, making them very accessible. You might run into them at the grocery store.</li>
+                  <li><strong className="text-gray-900 dark:text-white">Professional legislatures</strong>: States like California and New York have legislators with full salaries, large staffs, and year-round schedules. Contacting them works more like contacting a member of Congress, and you&apos;ll typically interact with staff first.</li>
                 </ul>
               </div>
 
@@ -246,9 +246,9 @@ export default function ContactStateLegislatorsGuidePage() {
                   Term limits vary widely and affect the kind of relationship you can build with a legislator:
                 </p>
                 <ul className="list-disc list-inside space-y-2">
-                  <li><strong className="text-gray-900 dark:text-white">Strict term limits</strong> — Michigan, Arkansas, and Oklahoma limit legislators to 6-8 years total. Turnover is high, so new members are common and often more receptive to constituent input while learning their role.</li>
-                  <li><strong className="text-gray-900 dark:text-white">Moderate term limits</strong> — California allows 12 years total across both chambers. Colorado and Maine set 8-year limits per chamber.</li>
-                  <li><strong className="text-gray-900 dark:text-white">No term limits</strong> — About 15 states, including Texas, Illinois, and Wisconsin, have no term limits at all. Legislators can serve indefinitely, allowing for deeper long-term relationships with engaged constituents.</li>
+                  <li><strong className="text-gray-900 dark:text-white">Strict term limits</strong>: Michigan, Arkansas, and Oklahoma limit legislators to 6-8 years total. Turnover is high, so new members are common and often more receptive to constituent input while learning their role.</li>
+                  <li><strong className="text-gray-900 dark:text-white">Moderate term limits</strong>: California allows 12 years total across both chambers. Colorado and Maine set 8-year limits per chamber.</li>
+                  <li><strong className="text-gray-900 dark:text-white">No term limits</strong>: About 15 states, including Texas, Illinois, and Wisconsin, have no term limits at all. Legislators can serve indefinitely, allowing for deeper long-term relationships with engaged constituents.</li>
                 </ul>
               </div>
             </div>
@@ -280,7 +280,7 @@ export default function ContactStateLegislatorsGuidePage() {
                   </p>
 
                   <p className="text-sm italic">
-                    If the legislator answers: Great — you can speak directly. If it&apos;s a staff member, ask if the legislator is available. If not, the staffer can take your message.
+                    If the legislator answers, you can speak directly. If it&apos;s a staff member, ask if the legislator is available. If not, the staffer can take your message.
                   </p>
 
                   <p>
@@ -337,7 +337,7 @@ export default function ContactStateLegislatorsGuidePage() {
                   <p>
                     <strong className="text-gray-900 dark:text-white">Subject Line:</strong>
                     <br />
-                    <span className="text-purple-600 dark:text-purple-400">[Your City]</span> constituent — Please <span className="text-purple-600 dark:text-purple-400">[support/oppose]</span> <span className="text-purple-600 dark:text-purple-400">[Bill Number]</span>
+                    <span className="text-purple-600 dark:text-purple-400">[Your City]</span> constituent - Please <span className="text-purple-600 dark:text-purple-400">[support/oppose]</span> <span className="text-purple-600 dark:text-purple-400">[Bill Number]</span>
                   </p>
 
                   <p>
@@ -347,9 +347,9 @@ export default function ContactStateLegislatorsGuidePage() {
                   <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded p-4 space-y-3 text-sm">
                     <p>Dear <span className="text-purple-600 dark:text-purple-400">[Representative/Senator]</span> <span className="text-purple-600 dark:text-purple-400">[Last Name]</span>,</p>
 
-                    <p>My name is <span className="text-purple-600 dark:text-purple-400">[Your Name]</span> and I live in <span className="text-purple-600 dark:text-purple-400">[your city/neighborhood]</span> in your district. I&apos;m writing to ask you to <span className="text-purple-600 dark:text-purple-400">[support/oppose]</span> <span className="text-purple-600 dark:text-purple-400">[Bill Number — Bill Name]</span>.</p>
+                    <p>My name is <span className="text-purple-600 dark:text-purple-400">[Your Name]</span> and I live in <span className="text-purple-600 dark:text-purple-400">[your city/neighborhood]</span> in your district. I&apos;m writing to ask you to <span className="text-purple-600 dark:text-purple-400">[support/oppose]</span> <span className="text-purple-600 dark:text-purple-400">[Bill Number - Bill Name]</span>.</p>
 
-                    <p>This issue is important to me personally because <span className="text-purple-600 dark:text-purple-400">[explain your connection to the issue — be specific and genuine. Mention your neighborhood, your family, your workplace, or your community. One or two paragraphs is plenty.]</span></p>
+                    <p>This issue is important to me personally because <span className="text-purple-600 dark:text-purple-400">[explain your connection to the issue. Be specific and genuine. Mention your neighborhood, your family, your workplace, or your community. One or two paragraphs is plenty.]</span></p>
 
                     <p>I understand that you serve on the <span className="text-purple-600 dark:text-purple-400">[relevant committee, if applicable]</span>, and I hope you&apos;ll consider the impact this bill would have on families like mine in <span className="text-purple-600 dark:text-purple-400">[your city/town]</span>.</p>
 
@@ -362,14 +362,14 @@ export default function ContactStateLegislatorsGuidePage() {
                       <br />
                       <span className="text-purple-600 dark:text-purple-400">[Your Address]</span>
                       <br />
-                      <span className="text-purple-600 dark:text-purple-400">[Your Phone Number — optional but recommended]</span>
+                      <span className="text-purple-600 dark:text-purple-400">[Your Phone Number - optional but recommended]</span>
                     </p>
                   </div>
                 </div>
               </div>
 
               <p className="text-sm italic">
-                Tip: Mentioning your specific neighborhood or community helps the legislator connect your message to their district. Offering to meet in person signals that you&apos;re an engaged, long-term constituent — not just sending a form letter.
+                Tip: Mentioning your specific neighborhood or community helps the legislator connect your message to their district. Offering to meet in person signals that you&apos;re an engaged, long-term constituent, not just sending a form letter.
               </p>
             </div>
           </section>
@@ -487,7 +487,7 @@ export default function ContactStateLegislatorsGuidePage() {
             </h2>
             <div className="pl-10 text-gray-600 dark:text-gray-300 space-y-4">
               <p>
-                Committee hearings are where the real work of legislating happens at the state level. Most bills live or die in committee — they never reach a full floor vote. Attending and testifying at hearings is one of the most powerful forms of civic engagement available to you.
+                Committee hearings are where the real work of legislating happens at the state level. Most bills live or die in committee. They never reach a full floor vote. Attending and testifying at hearings is one of the most powerful forms of civic engagement available to you.
               </p>
 
               <div className="space-y-4">
@@ -501,9 +501,9 @@ export default function ContactStateLegislatorsGuidePage() {
                 <div>
                   <h3 className="font-semibold text-gray-900 dark:text-white mb-2">How to Find Hearing Schedules</h3>
                   <ul className="list-disc list-inside space-y-2">
-                    <li>Check your state legislature&apos;s official website — most post committee calendars and agendas online, usually under &quot;Committees&quot; or &quot;Calendar.&quot;</li>
+                    <li>Check your state legislature&apos;s official website. Most post committee calendars and agendas online, usually under &quot;Committees&quot; or &quot;Calendar.&quot;</li>
                     <li>Use <a href="https://openstates.org" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">Open States</a> to track specific bills and see when they&apos;re scheduled for hearings.</li>
-                    <li>Sign up for email alerts from your state legislature — many offer notifications when a bill you&apos;re tracking is scheduled for a hearing.</li>
+                    <li>Sign up for email alerts from your state legislature. Many offer notifications when a bill you&apos;re tracking is scheduled for a hearing.</li>
                     <li>Follow relevant committees on social media or subscribe to their newsletters.</li>
                     <li>Call the committee clerk&apos;s office directly to confirm hearing dates and ask about public testimony procedures.</li>
                   </ul>
@@ -515,33 +515,33 @@ export default function ContactStateLegislatorsGuidePage() {
                     The process varies by state, but here is what to expect:
                   </p>
                   <ul className="list-disc list-inside space-y-2">
-                    <li><strong className="text-gray-900 dark:text-white">Pre-registration</strong> — Some states require you to sign up online in advance. Check the committee&apos;s page for a sign-up form or instructions.</li>
-                    <li><strong className="text-gray-900 dark:text-white">Day-of sign-up</strong> — Many states let you sign up to testify when you arrive at the hearing. You&apos;ll fill out a card or form indicating the bill number, your name, and whether you support or oppose it.</li>
-                    <li><strong className="text-gray-900 dark:text-white">Written testimony</strong> — If you cannot attend in person, most committees accept written testimony submitted by email or through an online portal. This still gets entered into the official record.</li>
-                    <li><strong className="text-gray-900 dark:text-white">Virtual testimony</strong> — Since 2020, many states have added options for testifying remotely via video or phone. Check if your state offers this.</li>
+                    <li><strong className="text-gray-900 dark:text-white">Pre-registration</strong>: Some states require you to sign up online in advance. Check the committee&apos;s page for a sign-up form or instructions.</li>
+                    <li><strong className="text-gray-900 dark:text-white">Day-of sign-up</strong>: Many states let you sign up to testify when you arrive at the hearing. You&apos;ll fill out a card or form indicating the bill number, your name, and whether you support or oppose it.</li>
+                    <li><strong className="text-gray-900 dark:text-white">Written testimony</strong>: If you cannot attend in person, most committees accept written testimony submitted by email or through an online portal. This still gets entered into the official record.</li>
+                    <li><strong className="text-gray-900 dark:text-white">Virtual testimony</strong>: Since 2020, many states have added options for testifying remotely via video or phone. Check if your state offers this.</li>
                   </ul>
                 </div>
 
                 <div>
                   <h3 className="font-semibold text-gray-900 dark:text-white mb-2">What to Prepare</h3>
                   <ul className="list-disc list-inside space-y-2">
-                    <li><strong className="text-gray-900 dark:text-white">Know the bill</strong> — Read the bill text or at least a reliable summary. Understand what it does and what section concerns you.</li>
-                    <li><strong className="text-gray-900 dark:text-white">Write your testimony</strong> — Prepare 2-3 minutes of remarks. State who you are, where you live, and why this bill matters to you personally. Stick to one or two key points.</li>
-                    <li><strong className="text-gray-900 dark:text-white">Bring copies</strong> — Print several copies of your written testimony to hand to committee members and the clerk.</li>
-                    <li><strong className="text-gray-900 dark:text-white">Practice</strong> — Read your testimony aloud a few times. Committee chairs will often cut you off when your time is up, so make sure your most important point comes first.</li>
-                    <li><strong className="text-gray-900 dark:text-white">Prepare for questions</strong> — Committee members may ask you follow-up questions. It&apos;s perfectly fine to say &quot;I don&apos;t know&quot; and offer to follow up in writing.</li>
+                    <li><strong className="text-gray-900 dark:text-white">Know the bill</strong>: Read the bill text or at least a reliable summary. Understand what it does and what section concerns you.</li>
+                    <li><strong className="text-gray-900 dark:text-white">Write your testimony</strong>: Prepare 2-3 minutes of remarks. State who you are, where you live, and why this bill matters to you personally. Stick to one or two key points.</li>
+                    <li><strong className="text-gray-900 dark:text-white">Bring copies</strong>: Print several copies of your written testimony to hand to committee members and the clerk.</li>
+                    <li><strong className="text-gray-900 dark:text-white">Practice</strong>: Read your testimony aloud a few times. Committee chairs will often cut you off when your time is up, so make sure your most important point comes first.</li>
+                    <li><strong className="text-gray-900 dark:text-white">Prepare for questions</strong>: Committee members may ask you follow-up questions. It&apos;s perfectly fine to say &quot;I don&apos;t know&quot; and offer to follow up in writing.</li>
                   </ul>
                 </div>
 
                 <div>
                   <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Tips for Effective Testimony</h3>
                   <ul className="list-disc list-inside space-y-2">
-                    <li><strong className="text-gray-900 dark:text-white">Tell your story</strong> — Personal narratives are far more persuasive than statistics. Legislators hear data all day — your lived experience is what moves them.</li>
-                    <li><strong className="text-gray-900 dark:text-white">Be respectful and concise</strong> — Thank the committee for their time. Stay within your allotted time. Avoid reading verbatim if you can — eye contact matters.</li>
-                    <li><strong className="text-gray-900 dark:text-white">Arrive early</strong> — Hearings can run long and testimony is usually taken in sign-up order. Arriving early also gives you time to get oriented.</li>
-                    <li><strong className="text-gray-900 dark:text-white">Dress appropriately</strong> — Business casual is a safe choice. You want to be taken seriously as a citizen participant.</li>
-                    <li><strong className="text-gray-900 dark:text-white">Don&apos;t repeat others</strong> — If someone before you made your exact point, it&apos;s fine to say &quot;I agree with the previous testimony and would like to add...&quot; rather than repeating the same argument.</li>
-                    <li><strong className="text-gray-900 dark:text-white">Even showing up matters</strong> — If you don&apos;t want to testify, you can still sign in as &quot;for&quot; or &quot;against&quot; a bill. Committees count these numbers, and your physical presence in the room demonstrates public interest.</li>
+                    <li><strong className="text-gray-900 dark:text-white">Tell your story</strong>: Personal narratives are far more persuasive than statistics. Legislators hear data all day, and your lived experience is what moves them.</li>
+                    <li><strong className="text-gray-900 dark:text-white">Be respectful and concise</strong>: Thank the committee for their time. Stay within your allotted time. Avoid reading verbatim if you can. Eye contact matters.</li>
+                    <li><strong className="text-gray-900 dark:text-white">Arrive early</strong>: Hearings can run long and testimony is usually taken in sign-up order. Arriving early also gives you time to get oriented.</li>
+                    <li><strong className="text-gray-900 dark:text-white">Dress appropriately</strong>: Business casual is a safe choice. You want to be taken seriously as a citizen participant.</li>
+                    <li><strong className="text-gray-900 dark:text-white">Don&apos;t repeat others</strong>: If someone before you made your exact point, it&apos;s fine to say &quot;I agree with the previous testimony and would like to add...&quot; rather than repeating the same argument.</li>
+                    <li><strong className="text-gray-900 dark:text-white">Even showing up matters</strong>: If you don&apos;t want to testify, you can still sign in as &quot;for&quot; or &quot;against&quot; a bill. Committees count these numbers, and your physical presence in the room demonstrates public interest.</li>
                   </ul>
                 </div>
               </div>
@@ -577,7 +577,7 @@ export default function ContactStateLegislatorsGuidePage() {
             Ready to contact your state legislators?
           </h2>
           <p className="text-gray-600 dark:text-gray-300 mb-6">
-            Find all your representatives — federal and state — with one address lookup.
+            Find all your representatives, federal and state, with one address lookup.
           </p>
           <Link
             href="/contact"

@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   return {
-    title: `${campaign.headline} — My Democracy`,
+    title: `${campaign.headline} | My Democracy`,
     description: campaign.description,
     openGraph: {
       title: campaign.headline,

@@ -57,7 +57,7 @@ export default function WriteLetterGuidePage() {
                 <strong className="text-gray-900 dark:text-white">A personalized message signals:</strong>
               </p>
               <ul className="list-disc list-inside space-y-1">
-                <li>You took time to write — you&apos;re an engaged voter</li>
+                <li>You took time to write -you&apos;re an engaged voter</li>
                 <li>You have a real stake in the issue</li>
                 <li>You might tell others and influence their votes</li>
                 <li>Your story could be useful for the legislator&apos;s own advocacy</li>
@@ -79,14 +79,14 @@ export default function WriteLetterGuidePage() {
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">1. Identify Yourself as a Constituent</h3>
                 <p className="text-gray-600 dark:text-gray-300">
-                  Start with your full name and address. This is critical — offices only respond to and track messages from constituents. Include your city and ZIP code at minimum.
+                  Start with your full name and address. This is critical -offices only respond to and track messages from constituents. Include your city and ZIP code at minimum.
                 </p>
               </div>
 
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">2. State Your Purpose Immediately</h3>
                 <p className="text-gray-600 dark:text-gray-300">
-                  In the first sentence, state the issue and your position. Staff sort messages by topic — make it easy for them to categorize yours correctly.
+                  In the first sentence, state the issue and your position. Staff sort messages by topic -make it easy for them to categorize yours correctly.
                 </p>
                 <div className="mt-2 bg-gray-100 dark:bg-gray-800 p-3 rounded-lg text-sm">
                   <span className="text-green-600 dark:text-green-400">Good:</span> &quot;I&apos;m writing to urge you to vote YES on HR 1234, the Clean Water Act.&quot;<br />
@@ -134,7 +134,7 @@ export default function WriteLetterGuidePage() {
                   My name is [Your Name], and I live in [City, State ZIP]. I&apos;m writing to urge you to vote YES on S. 1234, the Affordable Insulin Act.
                 </p>
                 <p>
-                  My daughter was diagnosed with Type 1 diabetes at age 12. Last year, even with insurance, we paid over $4,000 out of pocket for her insulin. For many families, this cost is impossible — I&apos;ve heard stories of people rationing doses, which can be fatal.
+                  My daughter was diagnosed with Type 1 diabetes at age 12. Last year, even with insurance, we paid over $4,000 out of pocket for her insulin. For many families, this cost is impossible -I&apos;ve heard stories of people rationing doses, which can be fatal.
                 </p>
                 <p>
                   This bill would cap insulin costs at $35 per month. That&apos;s the difference between my daughter living a normal life and our family facing impossible choices.
@@ -167,11 +167,11 @@ export default function WriteLetterGuidePage() {
             </h2>
             <div className="pl-10">
               <ul className="list-disc list-inside text-gray-600 dark:text-gray-300 space-y-2">
-                <li><strong className="text-gray-900 dark:text-white">Bill number</strong> — If there&apos;s specific legislation, reference it (HR 1234, S. 5678)</li>
-                <li><strong className="text-gray-900 dark:text-white">Your position</strong> — Support, oppose, or requesting action</li>
-                <li><strong className="text-gray-900 dark:text-white">Personal story</strong> — How this issue affects you, your family, or community</li>
-                <li><strong className="text-gray-900 dark:text-white">Specific ask</strong> — Vote, co-sponsor, hold a hearing, etc.</li>
-                <li><strong className="text-gray-900 dark:text-white">Your contact info</strong> — So they can verify you&apos;re a constituent and respond</li>
+                <li><strong className="text-gray-900 dark:text-white">Bill number</strong> -If there&apos;s specific legislation, reference it (HR 1234, S. 5678)</li>
+                <li><strong className="text-gray-900 dark:text-white">Your position</strong> -Support, oppose, or requesting action</li>
+                <li><strong className="text-gray-900 dark:text-white">Personal story</strong> -How this issue affects you, your family, or community</li>
+                <li><strong className="text-gray-900 dark:text-white">Specific ask</strong> -Vote, co-sponsor, hold a hearing, etc.</li>
+                <li><strong className="text-gray-900 dark:text-white">Your contact info</strong> -So they can verify you&apos;re a constituent and respond</li>
               </ul>
             </div>
           </section>
@@ -188,12 +188,12 @@ export default function WriteLetterGuidePage() {
             </h2>
             <div className="pl-10">
               <ul className="list-disc list-inside text-gray-600 dark:text-gray-300 space-y-2">
-                <li><strong className="text-gray-900 dark:text-white">Threats</strong> — Threatening language gets your message flagged and ignored</li>
-                <li><strong className="text-gray-900 dark:text-white">Personal attacks</strong> — Insults won&apos;t change minds</li>
-                <li><strong className="text-gray-900 dark:text-white">Lengthy manifestos</strong> — Keep it under one page. Staff don&apos;t have time for essays</li>
-                <li><strong className="text-gray-900 dark:text-white">Multiple issues</strong> — One letter, one topic. Multi-issue letters get miscategorized</li>
-                <li><strong className="text-gray-900 dark:text-white">Form letter language</strong> — If it sounds like a template, it gets treated like one</li>
-                <li><strong className="text-gray-900 dark:text-white">All caps</strong> — It reads as shouting and looks like spam</li>
+                <li><strong className="text-gray-900 dark:text-white">Threats</strong> -Threatening language gets your message flagged and ignored</li>
+                <li><strong className="text-gray-900 dark:text-white">Personal attacks</strong> -Insults won&apos;t change minds</li>
+                <li><strong className="text-gray-900 dark:text-white">Lengthy manifestos</strong> -Keep it under one page. Staff don&apos;t have time for essays</li>
+                <li><strong className="text-gray-900 dark:text-white">Multiple issues</strong> -One letter, one topic. Multi-issue letters get miscategorized</li>
+                <li><strong className="text-gray-900 dark:text-white">Form letter language</strong> -If it sounds like a template, it gets treated like one</li>
+                <li><strong className="text-gray-900 dark:text-white">All caps</strong> -It reads as shouting and looks like spam</li>
               </ul>
             </div>
           </section>
@@ -212,7 +212,7 @@ export default function WriteLetterGuidePage() {
               <p>Former congressional staffers consistently share these insights:</p>
               <ul className="list-disc list-inside space-y-2">
                 <li>&quot;We can tell a real letter in three seconds. Personal details matter.&quot;</li>
-                <li>&quot;The best letters tell us something we can use — a story for the floor, a local angle for press.&quot;</li>
+                <li>&quot;The best letters tell us something we can use -a story for the floor, a local angle for press.&quot;</li>
                 <li>&quot;Timing matters. Before a vote is ideal. After, we still log it, but it&apos;s too late to influence that decision.&quot;</li>
                 <li>&quot;We remember repeat contacts. Constituents who write multiple times on an issue get noticed.&quot;</li>
                 <li>&quot;Professional and personal beats angry and generic every time.&quot;</li>
@@ -270,7 +270,7 @@ export default function WriteLetterGuidePage() {
                     This year, due to budget cuts, Lincoln Elementary eliminated its art program, reduced the school librarian to two days per week, and increased class sizes to 32 students per room. My son&apos;s third-grade class now has one teacher and no aide for 32 eight-year-olds. My daughter, who struggles with reading, lost access to the after-school literacy tutoring program that was helping her catch up to grade level.
                   </p>
                   <p>
-                    These aren&apos;t extras — they&apos;re the foundations of a real education. Our district has cut $4.2 million from its budget over the past three years while enrollment has grown by 800 students. Teachers are burning out, families who can afford it are leaving for private schools, and the children who remain are getting less every year.
+                    These aren&apos;t extras -they&apos;re the foundations of a real education. Our district has cut $4.2 million from its budget over the past three years while enrollment has grown by 800 students. Teachers are burning out, families who can afford it are leaving for private schools, and the children who remain are getting less every year.
                   </p>
                   <p>
                     S. 2345 would increase Title I funding by 20% and create a new grant program for schools experiencing budget shortfalls. This would directly help schools like Lincoln Elementary restore the programs our kids need.
@@ -344,7 +344,7 @@ export default function WriteLetterGuidePage() {
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">3. Explain Why It Matters to You</h3>
                 <div className="bg-gray-100 dark:bg-gray-800 p-3 rounded-lg text-sm space-y-2">
                   <p>
-                    <span className="text-green-600 dark:text-green-400">Good:</span> &quot;My daughter&apos;s school eliminated its reading tutoring program this year due to budget cuts. She was making real progress — her reading level improved two grades in six months — and now that support is gone. She cries before school because she feels like she&apos;s falling behind again.&quot;
+                    <span className="text-green-600 dark:text-green-400">Good:</span> &quot;My daughter&apos;s school eliminated its reading tutoring program this year due to budget cuts. She was making real progress -her reading level improved two grades in six months -and now that support is gone. She cries before school because she feels like she&apos;s falling behind again.&quot;
                   </p>
                   <p>
                     <span className="text-red-600 dark:text-red-400">Weak:</span> &quot;Education is important for the future of America and we need to invest more in our schools.&quot;
@@ -403,14 +403,14 @@ export default function WriteLetterGuidePage() {
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Ideal Length: 200 &ndash; 400 Words</h3>
                 <p className="text-gray-600 dark:text-gray-300">
-                  Congressional staff process hundreds of messages per day. A letter between 200 and 400 words is long enough to include your personal story and a specific ask, but short enough that a staffer can read and categorize it in under two minutes. If your letter runs longer than one printed page, cut it. The insulin letter example above is about 150 words — even shorter is fine when the message is clear.
+                  Congressional staff process hundreds of messages per day. A letter between 200 and 400 words is long enough to include your personal story and a specific ask, but short enough that a staffer can read and categorize it in under two minutes. If your letter runs longer than one printed page, cut it. The insulin letter example above is about 150 words -even shorter is fine when the message is clear.
                 </p>
               </div>
 
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Use Paragraphs, Not Walls of Text</h3>
                 <p className="text-gray-600 dark:text-gray-300">
-                  Break your letter into short, focused paragraphs — one idea per paragraph. A staffer scanning a dense block of text is more likely to miscategorize it or skim past your key point. White space makes your message easier to read on screens of all sizes, especially since most congressional contact forms display submissions in plain text.
+                  Break your letter into short, focused paragraphs -one idea per paragraph. A staffer scanning a dense block of text is more likely to miscategorize it or skim past your key point. White space makes your message easier to read on screens of all sizes, especially since most congressional contact forms display submissions in plain text.
                 </p>
               </div>
 
@@ -421,7 +421,7 @@ export default function WriteLetterGuidePage() {
                 </p>
                 <div className="bg-gray-100 dark:bg-gray-800 p-3 rounded-lg text-sm space-y-2">
                   <p>
-                    <span className="text-green-600 dark:text-green-400">Good:</span> &quot;Support S. 2345 — Increase Title I Education Funding&quot;
+                    <span className="text-green-600 dark:text-green-400">Good:</span> &quot;Support S. 2345 -Increase Title I Education Funding&quot;
                   </p>
                   <p>
                     <span className="text-green-600 dark:text-green-400">Good:</span> &quot;Constituent Request: Vote YES on HR 5678 (Safe Streets Act)&quot;
@@ -444,10 +444,10 @@ export default function WriteLetterGuidePage() {
                   Using the correct form of address signals that you take the communication seriously. Here are the standard conventions:
                 </p>
                 <ul className="list-disc list-inside text-gray-600 dark:text-gray-300 space-y-2 text-sm">
-                  <li><strong className="text-gray-900 dark:text-white">U.S. Senator</strong> — Address as &quot;The Honorable [Full Name]&quot; in the heading; use &quot;Dear Senator [Last Name],&quot; in the salutation</li>
-                  <li><strong className="text-gray-900 dark:text-white">U.S. Representative</strong> — Address as &quot;The Honorable [Full Name]&quot; in the heading; use &quot;Dear Representative [Last Name],&quot; in the salutation</li>
-                  <li><strong className="text-gray-900 dark:text-white">Committee Chair</strong> — Use &quot;Dear Chairman [Last Name],&quot; or &quot;Dear Chairwoman [Last Name],&quot;</li>
-                  <li><strong className="text-gray-900 dark:text-white">Speaker of the House</strong> — Use &quot;Dear Mr. Speaker,&quot; or &quot;Dear Madam Speaker,&quot;</li>
+                  <li><strong className="text-gray-900 dark:text-white">U.S. Senator</strong> -Address as &quot;The Honorable [Full Name]&quot; in the heading; use &quot;Dear Senator [Last Name],&quot; in the salutation</li>
+                  <li><strong className="text-gray-900 dark:text-white">U.S. Representative</strong> -Address as &quot;The Honorable [Full Name]&quot; in the heading; use &quot;Dear Representative [Last Name],&quot; in the salutation</li>
+                  <li><strong className="text-gray-900 dark:text-white">Committee Chair</strong> -Use &quot;Dear Chairman [Last Name],&quot; or &quot;Dear Chairwoman [Last Name],&quot;</li>
+                  <li><strong className="text-gray-900 dark:text-white">Speaker of the House</strong> -Use &quot;Dear Mr. Speaker,&quot; or &quot;Dear Madam Speaker,&quot;</li>
                 </ul>
                 <p className="text-gray-500 dark:text-gray-400 text-sm mt-2">
                   When using a congressional web contact form, the salutation is often pre-filled. In that case, focus on the body of your message.
@@ -457,7 +457,7 @@ export default function WriteLetterGuidePage() {
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Include Bill Numbers When Possible</h3>
                 <p className="text-gray-600 dark:text-gray-300">
-                  Referencing a specific bill number (e.g., HR 1234 or S. 5678) in both your subject line and opening sentence makes your letter dramatically easier for staff to process. Offices track constituent sentiment by bill — if your letter doesn&apos;t mention the bill number, a staffer has to figure out which legislation you&apos;re referring to, and they might guess wrong. You can find bill numbers by searching on <Link href="https://www.congress.gov" className="text-purple-600 dark:text-purple-400 hover:underline" target="_blank" rel="noopener noreferrer">congress.gov</Link> or by checking advocacy organization websites that are promoting the legislation.
+                  Referencing a specific bill number (e.g., HR 1234 or S. 5678) in both your subject line and opening sentence makes your letter dramatically easier for staff to process. Offices track constituent sentiment by bill -if your letter doesn&apos;t mention the bill number, a staffer has to figure out which legislation you&apos;re referring to, and they might guess wrong. You can find bill numbers by searching on <Link href="https://www.congress.gov" className="text-purple-600 dark:text-purple-400 hover:underline" target="_blank" rel="noopener noreferrer">congress.gov</Link> or by checking advocacy organization websites that are promoting the legislation.
                 </p>
               </div>
 
@@ -467,10 +467,10 @@ export default function WriteLetterGuidePage() {
                   Congressional offices are required to respond to constituent mail, but it can take 4 to 8 weeks. Here&apos;s when and how to follow up:
                 </p>
                 <ul className="list-disc list-inside text-gray-600 dark:text-gray-300 space-y-2 text-sm">
-                  <li><strong className="text-gray-900 dark:text-white">Before a vote</strong> — If a key vote is approaching, send a shorter follow-up reminding them of your position. Reference your original letter by date.</li>
-                  <li><strong className="text-gray-900 dark:text-white">After 6 weeks with no response</strong> — Call the district office and politely ask about the status of your correspondence. Have your original send date ready.</li>
-                  <li><strong className="text-gray-900 dark:text-white">After a vote</strong> — Send a brief thank-you if they voted your way, or a respectful note of disappointment if they didn&apos;t. This keeps you on their radar as an engaged constituent.</li>
-                  <li><strong className="text-gray-900 dark:text-white">When new developments occur</strong> — If a bill is amended, a related event happens in your community, or you have new information, write again and reference your earlier letter.</li>
+                  <li><strong className="text-gray-900 dark:text-white">Before a vote</strong> -If a key vote is approaching, send a shorter follow-up reminding them of your position. Reference your original letter by date.</li>
+                  <li><strong className="text-gray-900 dark:text-white">After 6 weeks with no response</strong> -Call the district office and politely ask about the status of your correspondence. Have your original send date ready.</li>
+                  <li><strong className="text-gray-900 dark:text-white">After a vote</strong> -Send a brief thank-you if they voted your way, or a respectful note of disappointment if they didn&apos;t. This keeps you on their radar as an engaged constituent.</li>
+                  <li><strong className="text-gray-900 dark:text-white">When new developments occur</strong> -If a bill is amended, a related event happens in your community, or you have new information, write again and reference your earlier letter.</li>
                 </ul>
                 <p className="text-gray-500 dark:text-gray-400 text-sm mt-2">
                   Consistent, polite follow-up is one of the most effective advocacy strategies. Offices track repeat contacts, and constituents who write multiple times are taken more seriously.

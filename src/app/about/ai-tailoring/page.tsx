@@ -32,11 +32,11 @@ export default function AITailoringPage() {
               </p>
               <ul className="list-disc list-inside space-y-2 ml-4">
                 <li>
-                  <strong className="text-gray-900 dark:text-white">Name, party, state, and chamber</strong> &mdash;
+                  <strong className="text-gray-900 dark:text-white">Name, party, state, and chamber</strong>:
                   so the message is addressed correctly and uses appropriate framing
                 </li>
                 <li>
-                  <strong className="text-gray-900 dark:text-white">Committee assignments</strong> &mdash;
+                  <strong className="text-gray-900 dark:text-white">Committee assignments</strong>:
                   if the legislator sits on a committee relevant to your issue, the AI can reference it
                 </li>
               </ul>
@@ -75,7 +75,7 @@ export default function AITailoringPage() {
                 </li>
               </ul>
               <p>
-                The goal is a message that feels like you wrote it &mdash; not a
+                The goal is a message that feels like you wrote it, not a
                 generic form letter.
               </p>
             </div>
@@ -121,19 +121,19 @@ export default function AITailoringPage() {
               </p>
               <ul className="list-disc list-inside space-y-2 ml-4">
                 <li>
-                  <strong className="text-gray-900 dark:text-white">Voting history</strong> &mdash;
+                  <strong className="text-gray-900 dark:text-white">Voting history</strong>:
                   incorporating how legislators voted on related bills so the AI can reference specific past votes
                 </li>
                 <li>
-                  <strong className="text-gray-900 dark:text-white">Sponsored legislation</strong> &mdash;
+                  <strong className="text-gray-900 dark:text-white">Sponsored legislation</strong>:
                   tracking which bills a legislator has sponsored or cosponsored to understand their policy priorities
                 </li>
                 <li>
-                  <strong className="text-gray-900 dark:text-white">Active legislation</strong> &mdash;
+                  <strong className="text-gray-900 dark:text-white">Active legislation</strong>:
                   using the official Congress.gov API to surface bills related to your issue, so your message can reference specific bill numbers
                 </li>
                 <li>
-                  <strong className="text-gray-900 dark:text-white">Trending issues</strong> &mdash;
+                  <strong className="text-gray-900 dark:text-white">Trending issues</strong>:
                   showing what topics other constituents in your district are writing about
                 </li>
               </ul>

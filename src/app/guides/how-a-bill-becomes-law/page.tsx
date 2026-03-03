@@ -98,7 +98,7 @@ export default function BillBecomesLawGuidePage() {
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">7. Veto Override</h3>
                 <p className="text-gray-600 dark:text-gray-300">
-                  Congress can override a veto with a 2/3 majority in both chambers — rare but possible.
+                  Congress can override a veto with a 2/3 majority in both chambers. This is rare but possible.
                 </p>
               </div>
             </div>
@@ -141,10 +141,10 @@ export default function BillBecomesLawGuidePage() {
                 State legislatures follow a similar process, but with important differences:
               </p>
               <ul className="list-disc list-inside space-y-2">
-                <li><strong className="text-gray-900 dark:text-white">Shorter sessions</strong> — Many state legislatures meet only part of the year. Bills must pass quickly or die.</li>
-                <li><strong className="text-gray-900 dark:text-white">Fewer procedural hurdles</strong> — No filibuster in most states. Bills move faster.</li>
-                <li><strong className="text-gray-900 dark:text-white">More accessible</strong> — Public testimony is common. You can directly address legislators.</li>
-                <li><strong className="text-gray-900 dark:text-white">Governor action</strong> — Like the President, governors can sign, veto, or in some states, line-item veto specific provisions.</li>
+                <li><strong className="text-gray-900 dark:text-white">Shorter sessions</strong>: Many state legislatures meet only part of the year. Bills must pass quickly or die.</li>
+                <li><strong className="text-gray-900 dark:text-white">Fewer procedural hurdles</strong>: No filibuster in most states. Bills move faster.</li>
+                <li><strong className="text-gray-900 dark:text-white">More accessible</strong>: Public testimony is common. You can directly address legislators.</li>
+                <li><strong className="text-gray-900 dark:text-white">Governor action</strong>: Like the President, governors can sign, veto, or in some states, line-item veto specific provisions.</li>
               </ul>
               <p>
                 <strong className="text-gray-900 dark:text-white">Nebraska is unique:</strong> It has a unicameral (single-chamber) legislature, so bills only need to pass once.
@@ -165,10 +165,10 @@ export default function BillBecomesLawGuidePage() {
             <div className="pl-10 text-gray-600 dark:text-gray-300 space-y-3">
               <p>Your advocacy has the most impact at these moments:</p>
               <ul className="list-disc list-inside space-y-2">
-                <li><strong className="text-gray-900 dark:text-white">Before committee hearings</strong> — When the bill is being debated and can be amended</li>
-                <li><strong className="text-gray-900 dark:text-white">Before floor votes</strong> — When legislators are finalizing their positions</li>
-                <li><strong className="text-gray-900 dark:text-white">During conference</strong> — When differences are being reconciled</li>
-                <li><strong className="text-gray-900 dark:text-white">Before the President/Governor acts</strong> — To encourage signature or veto</li>
+                <li><strong className="text-gray-900 dark:text-white">Before committee hearings</strong>: When the bill is being debated and can be amended</li>
+                <li><strong className="text-gray-900 dark:text-white">Before floor votes</strong>: When legislators are finalizing their positions</li>
+                <li><strong className="text-gray-900 dark:text-white">During conference</strong>: When differences are being reconciled</li>
+                <li><strong className="text-gray-900 dark:text-white">Before the President/Governor acts</strong>: To encourage signature or veto</li>
               </ul>
               <p>
                 Even if you miss these windows, contact still matters. Offices track constituent sentiment over time, and your message helps shape future votes.
@@ -190,13 +190,13 @@ export default function BillBecomesLawGuidePage() {
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Federal Bills</h3>
                 <p className="text-gray-600 dark:text-gray-300">
-                  <a href="https://www.congress.gov" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline font-medium">Congress.gov</a> — The official source for federal legislation. Search by bill number, keyword, or sponsor. Track status, read full text, and see voting records.
+                  <a href="https://www.congress.gov" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline font-medium">Congress.gov</a>: The official source for federal legislation. Search by bill number, keyword, or sponsor. Track status, read full text, and see voting records.
                 </p>
               </div>
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">State Bills</h3>
                 <p className="text-gray-600 dark:text-gray-300">
-                  <a href="https://openstates.org" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline font-medium">Open States</a> — Free, searchable database covering all 50 state legislatures. Track bills, see voting records, and find your legislators.
+                  <a href="https://openstates.org" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline font-medium">Open States</a>: Free, searchable database covering all 50 state legislatures. Track bills, see voting records, and find your legislators.
                 </p>
               </div>
             </div>
@@ -259,34 +259,34 @@ export default function BillBecomesLawGuidePage() {
                   Amendments are the primary way bills change as they move through Congress. They can be introduced at two key stages: during <strong className="text-gray-900 dark:text-white">committee markup</strong> and during <strong className="text-gray-900 dark:text-white">floor debate</strong>. During markup, committee members propose changes line by line, debating and voting on each one. This is often where the most substantive policy changes happen, away from the spotlight of the full chamber.
                 </p>
                 <p className="text-gray-600 dark:text-gray-300 mt-2">
-                  On the floor, amendments follow different rules in each chamber. Amendments can be simple (changing a few words), substitute (replacing entire sections), or even &quot;amendments to amendments&quot; — secondary changes layered on top of proposed changes.
+                  On the floor, amendments follow different rules in each chamber. Amendments can be simple (changing a few words), substitute (replacing entire sections), or even &quot;amendments to amendments,&quot; secondary changes layered on top of proposed changes.
                 </p>
               </div>
 
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Open Rules vs. Closed Rules in the House</h3>
                 <p className="text-gray-600 dark:text-gray-300">
-                  In the House of Representatives, the <strong className="text-gray-900 dark:text-white">Rules Committee</strong> determines how each bill is debated on the floor. Under an <strong className="text-gray-900 dark:text-white">open rule</strong>, any member can offer germane amendments — this allows for broad debate and changes. Under a <strong className="text-gray-900 dark:text-white">closed rule</strong>, no amendments are permitted, and the bill must be voted on as-is. Most common is a <strong className="text-gray-900 dark:text-white">structured rule</strong> (sometimes called a &quot;modified closed rule&quot;), which allows only specific, pre-approved amendments to be considered.
+                  In the House of Representatives, the <strong className="text-gray-900 dark:text-white">Rules Committee</strong> determines how each bill is debated on the floor. Under an <strong className="text-gray-900 dark:text-white">open rule</strong>, any member can offer germane amendments. This allows for broad debate and changes. Under a <strong className="text-gray-900 dark:text-white">closed rule</strong>, no amendments are permitted, and the bill must be voted on as-is. Most common is a <strong className="text-gray-900 dark:text-white">structured rule</strong> (sometimes called a &quot;modified closed rule&quot;), which allows only specific, pre-approved amendments to be considered.
                 </p>
                 <p className="text-gray-600 dark:text-gray-300 mt-2">
-                  The Senate operates differently — any senator can generally offer amendments, including non-germane ones, unless a unanimous consent agreement or cloture limits the process.
+                  The Senate operates differently. Any senator can generally offer amendments, including non-germane ones, unless a unanimous consent agreement or cloture limits the process.
                 </p>
               </div>
 
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">How Conference Committees Are Formed</h3>
                 <p className="text-gray-600 dark:text-gray-300">
-                  When the House and Senate pass different versions of the same bill, a <strong className="text-gray-900 dark:text-white">conference committee</strong> is appointed to reconcile the differences. The Speaker of the House and the Senate presiding officer each appoint conferees — typically senior members of the committees that handled the bill. The conferees negotiate behind closed doors, producing a <strong className="text-gray-900 dark:text-white">conference report</strong> that both chambers must then approve without further amendment.
+                  When the House and Senate pass different versions of the same bill, a <strong className="text-gray-900 dark:text-white">conference committee</strong> is appointed to reconcile the differences. The Speaker of the House and the Senate presiding officer each appoint conferees, typically senior members of the committees that handled the bill. The conferees negotiate behind closed doors, producing a <strong className="text-gray-900 dark:text-white">conference report</strong> that both chambers must then approve without further amendment.
                 </p>
                 <p className="text-gray-600 dark:text-gray-300 mt-2">
-                  In recent years, congressional leadership has sometimes bypassed the formal conference process by exchanging amendment texts between chambers — a less transparent approach sometimes called &quot;ping-ponging.&quot;
+                  In recent years, congressional leadership has sometimes bypassed the formal conference process by exchanging amendment texts between chambers, a less transparent approach sometimes called &quot;ping-ponging.&quot;
                 </p>
               </div>
 
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Why the Final Bill Often Looks Very Different</h3>
                 <p className="text-gray-600 dark:text-gray-300">
-                  Between committee markup, floor amendments, and conference negotiations, a bill can change dramatically from its original form. Provisions may be added, removed, or rewritten entirely. Major legislation like spending bills or reform packages often bear little resemblance to the version that was introduced. This is why tracking a bill&apos;s progress — not just its introduction — is essential for engaged citizens.
+                  Between committee markup, floor amendments, and conference negotiations, a bill can change dramatically from its original form. Provisions may be added, removed, or rewritten entirely. Major legislation like spending bills or reform packages often bear little resemblance to the version that was introduced. This is why tracking a bill&apos;s progress, not just its introduction, is essential for engaged citizens.
                 </p>
                 <p className="text-gray-600 dark:text-gray-300 mt-2 text-sm italic">
                   Advocacy tip: Watch for amendments that change a bill&apos;s impact. A bill you supported at introduction may have been altered significantly by the time it reaches a vote. Read the latest version and any amendment summaries before contacting your representatives.
@@ -312,7 +312,7 @@ export default function BillBecomesLawGuidePage() {
 
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
-                  <a href="https://www.congress.gov" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">Congress.gov</a> — Federal Legislation
+                  <a href="https://www.congress.gov" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">Congress.gov</a> - Federal Legislation
                 </h3>
                 <p className="text-gray-600 dark:text-gray-300">
                   The official source for all federal legislation, maintained by the Library of Congress. Search by <strong className="text-gray-900 dark:text-white">keyword</strong>, <strong className="text-gray-900 dark:text-white">sponsor name</strong>, <strong className="text-gray-900 dark:text-white">committee</strong>, or <strong className="text-gray-900 dark:text-white">bill number</strong> (e.g., HR 1234 or S 567). You can read the full text of any bill, track its status through each stage of the process, view amendments, see committee reports, and check voting records. Best for: authoritative, detailed federal bill tracking and reading actual bill text.
@@ -321,7 +321,7 @@ export default function BillBecomesLawGuidePage() {
 
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
-                  <a href="https://openstates.org" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">Open States</a> — State Legislation
+                  <a href="https://openstates.org" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">Open States</a> - State Legislation
                 </h3>
                 <p className="text-gray-600 dark:text-gray-300">
                   A free, open-source platform that tracks legislation across <strong className="text-gray-900 dark:text-white">all 50 state legislatures</strong>, plus D.C. and Puerto Rico. Search for bills, see voting records, and find your state legislators. Open States normalizes data across different state systems, making it easy to search consistently no matter which state you&apos;re interested in. Best for: tracking state-level bills and finding your state representatives.
@@ -330,7 +330,7 @@ export default function BillBecomesLawGuidePage() {
 
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
-                  <a href="https://www.govtrack.us" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">GovTrack.us</a> — Alerts and Predictions
+                  <a href="https://www.govtrack.us" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">GovTrack.us</a> - Alerts and Predictions
                 </h3>
                 <p className="text-gray-600 dark:text-gray-300">
                   GovTrack makes federal legislation more accessible with features like <strong className="text-gray-900 dark:text-white">email alerts</strong> when bills you follow are updated, <strong className="text-gray-900 dark:text-white">prognosis scores</strong> that predict whether a bill is likely to pass, and plain-language summaries. It also provides detailed legislator profiles with voting records and report cards. Best for: getting notified about changes and understanding a bill&apos;s likelihood of passage.
@@ -339,10 +339,10 @@ export default function BillBecomesLawGuidePage() {
 
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
-                  <a href="https://legiscan.com" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">LegiScan</a> — Cross-State Tracking
+                  <a href="https://legiscan.com" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">LegiScan</a> - Cross-State Tracking
                 </h3>
                 <p className="text-gray-600 dark:text-gray-300">
-                  LegiScan tracks legislation across <strong className="text-gray-900 dark:text-white">all 50 states and Congress</strong> in a single interface. It&apos;s particularly useful for tracking bills on a specific topic across multiple states — for example, seeing how different states are handling education policy or healthcare reform. It offers relevance scoring and keyword-based monitoring. Best for: watching how similar bills move through different states simultaneously.
+                  LegiScan tracks legislation across <strong className="text-gray-900 dark:text-white">all 50 states and Congress</strong> in a single interface. It&apos;s particularly useful for tracking bills on a specific topic across multiple states. For example, you can see how different states are handling education policy or healthcare reform. It offers relevance scoring and keyword-based monitoring. Best for: watching how similar bills move through different states simultaneously.
                 </p>
               </div>
 
@@ -401,7 +401,7 @@ export default function BillBecomesLawGuidePage() {
                     <strong className="text-gray-900 dark:text-white">What to ask for:</strong> If your representative is on the committee, ask them to support or oppose the bill during markup. Provide specific information about how the bill would affect your community.
                   </p>
                   <p className="text-gray-600 dark:text-gray-300 text-sm italic">
-                    How to be effective: Call the committee office directly, not just your own representative. At the state level, sign up to testify in person — your physical presence carries significant weight. Submit written testimony if you cannot attend.
+                    How to be effective: Call the committee office directly, not just your own representative. At the state level, sign up to testify in person. Your physical presence carries significant weight. Submit written testimony if you cannot attend.
                   </p>
                 </div>
 
@@ -431,13 +431,13 @@ export default function BillBecomesLawGuidePage() {
                     <strong className="text-gray-900 dark:text-white">What&apos;s happening:</strong> The full chamber debates the bill. Additional amendments may be offered on the floor. Legislators make speeches for and against. A final vote is taken.
                   </p>
                   <p className="text-gray-600 dark:text-gray-300 mb-2">
-                    <strong className="text-gray-900 dark:text-white">Why this moment matters:</strong> This is when every legislator — not just committee members — takes a position. Floor votes are public and become part of the permanent record. Legislators are especially sensitive to constituent opinion right before recorded votes.
+                    <strong className="text-gray-900 dark:text-white">Why this moment matters:</strong> This is when every legislator, not just committee members, takes a position. Floor votes are public and become part of the permanent record. Legislators are especially sensitive to constituent opinion right before recorded votes.
                   </p>
                   <p className="text-gray-600 dark:text-gray-300 mb-2">
                     <strong className="text-gray-900 dark:text-white">What to ask for:</strong> Ask your specific representative or senator to vote yes or no. Be clear and direct about your position.
                   </p>
                   <p className="text-gray-600 dark:text-gray-300 text-sm italic">
-                    How to be effective: Contact your own representative or senator directly — they care most about their own constituents. Phone calls are the highest-impact method before floor votes. Keep your message to 30 seconds: your name, your location, the bill number, and your position.
+                    How to be effective: Contact your own representative or senator directly. They care most about their own constituents. Phone calls are the highest-impact method before floor votes. Keep your message to 30 seconds: your name, your location, the bill number, and your position.
                   </p>
                 </div>
 
@@ -473,7 +473,7 @@ export default function BillBecomesLawGuidePage() {
                     <strong className="text-gray-900 dark:text-white">What to ask for:</strong> Ask the President or Governor to sign or veto the bill. If a veto occurs, contact your legislators to support or oppose a veto override.
                   </p>
                   <p className="text-gray-600 dark:text-gray-300 text-sm italic">
-                    How to be effective: Call the White House comment line (202-456-1111) or your governor&apos;s office. Volume matters at this stage — coordinate with others who share your position. Petitions, social media campaigns, and media op-eds amplify your message.
+                    How to be effective: Call the White House comment line (202-456-1111) or your governor&apos;s office. Volume matters at this stage. Coordinate with others who share your position. Petitions, social media campaigns, and media op-eds amplify your message.
                   </p>
                 </div>
               </div>
@@ -509,7 +509,7 @@ export default function BillBecomesLawGuidePage() {
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Joint Resolutions (H.J.Res. / S.J.Res.)</h3>
                 <p className="text-gray-600 dark:text-gray-300">
-                  Joint resolutions are virtually identical to bills in their legal effect — they pass through the same process and require the President&apos;s signature. They are typically used for <strong className="text-gray-900 dark:text-white">constitutional amendments</strong> (which require a two-thirds vote in both chambers and do not require presidential approval) or for limited or temporary matters, such as continuing resolutions to fund the government.
+                  Joint resolutions are virtually identical to bills in their legal effect. They pass through the same process and require the President&apos;s signature. They are typically used for <strong className="text-gray-900 dark:text-white">constitutional amendments</strong> (which require a two-thirds vote in both chambers and do not require presidential approval) or for limited or temporary matters, such as continuing resolutions to fund the government.
                 </p>
               </div>
 
@@ -537,7 +537,7 @@ export default function BillBecomesLawGuidePage() {
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Authorization Bills</h3>
                 <p className="text-gray-600 dark:text-gray-300">
-                  Authorization bills <strong className="text-gray-900 dark:text-white">create or continue</strong> government programs and set policy guidelines, including maximum funding levels. However, they do not actually provide money — that requires a separate appropriations bill. For example, the National Defense Authorization Act (NDAA) sets defense policy and spending limits each year, but the actual defense budget is allocated through appropriations.
+                  Authorization bills <strong className="text-gray-900 dark:text-white">create or continue</strong> government programs and set policy guidelines, including maximum funding levels. However, they do not actually provide money. That requires a separate appropriations bill. For example, the National Defense Authorization Act (NDAA) sets defense policy and spending limits each year, but the actual defense budget is allocated through appropriations.
                 </p>
               </div>
 

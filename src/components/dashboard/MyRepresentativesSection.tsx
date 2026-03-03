@@ -218,7 +218,7 @@ export function MyRepresentativesSection({ cachedReps, hasAddress: initialHasAdd
     );
   }
 
-  // No address — prompt user
+  // No address - prompt user
   if (!hasAddress) {
     return (
       <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm p-8 text-center">

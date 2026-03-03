@@ -113,7 +113,7 @@ export function IssuePicker({ value, category, onChange }: IssuePickerProps) {
         <div className="flex items-center gap-2 w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700">
           <span className="flex-1 text-sm text-gray-900 dark:text-white">
             <span className="font-medium">{value}</span>
-            <span className="text-gray-400 dark:text-gray-500"> — {category}</span>
+            <span className="text-gray-400 dark:text-gray-500"> - {category}</span>
           </span>
           <button
             type="button"
@@ -208,7 +208,7 @@ export function IssuePicker({ value, category, onChange }: IssuePickerProps) {
               }`}
             >
               <span className="font-medium">{option.label}</span>
-              <span className="text-gray-400 dark:text-gray-500"> — {option.category}</span>
+              <span className="text-gray-400 dark:text-gray-500"> - {option.category}</span>
             </button>
           ))}
 
@@ -226,7 +226,7 @@ export function IssuePicker({ value, category, onChange }: IssuePickerProps) {
                 : 'text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700'
             }`}
           >
-            Other — describe your own issue
+            Other - describe your own issue
           </button>
         </div>
       )}

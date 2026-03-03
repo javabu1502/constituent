@@ -66,7 +66,7 @@ const guides = [
   },
   {
     title: 'How to Register to Vote',
-    description: 'Complete guide to voter registration — online, by mail, and in person. Deadlines, ID requirements, and same-day options by state.',
+    description: 'Complete guide to voter registration: online, by mail, and in person. Deadlines, ID requirements, and same-day options by state.',
     href: '/guides/how-to-register-to-vote',
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -86,7 +86,7 @@ const guides = [
   },
   {
     title: 'How to Get Involved in Local Politics',
-    description: 'City councils, school boards, ballot initiatives — practical ways to engage with the government that affects your daily life.',
+    description: 'City councils, school boards, ballot initiatives. Practical ways to engage with the government that affects your daily life.',
     href: '/guides/how-to-get-involved-in-local-politics',
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">

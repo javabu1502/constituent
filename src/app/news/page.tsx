@@ -4,11 +4,11 @@ import { BreadcrumbJsonLd } from '@/lib/seo';
 import { CivicNews } from '@/components/news/CivicNews';
 
 export const metadata: Metadata = {
-  title: 'Civic News — My Democracy',
+  title: 'Civic News | My Democracy',
   description:
     'Stay informed with the latest civic and political news from multiple sources. Find actionable stories and contact your representatives.',
   openGraph: {
-    title: 'Civic News — My Democracy',
+    title: 'Civic News | My Democracy',
     description:
       'Stay informed with the latest civic and political news from multiple sources.',
     url: 'https://www.mydemocracy.app/news',

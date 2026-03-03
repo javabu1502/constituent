@@ -13,7 +13,7 @@ import { DeleteCampaignButton } from '@/components/campaign/DeleteCampaignButton
 import { CollapsibleSection } from '@/components/ui/CollapsibleSection';
 
 export const metadata: Metadata = {
-  title: 'Dashboard — My Democracy',
+  title: 'Dashboard | My Democracy',
   description: 'Your personalized civic hub. View your representatives, activity, and message history.',
 };
 
