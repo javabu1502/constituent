@@ -23,6 +23,7 @@ export function SearchButton() {
         onClick={() => setOpen(true)}
         className="p-2 text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
         aria-label="Search (Cmd+K)"
+        aria-expanded={open}
         title="Search (Cmd+K)"
       >
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

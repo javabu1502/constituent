@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { createAdminClient } from '@/lib/supabase';
+import { CampaignFilters } from '@/components/campaign/CampaignFilters';
 
 export const metadata: Metadata = {
   title: 'Campaigns | My Democracy',
@@ -16,12 +17,13 @@ export default async function CampaignsPage() {
   const { data: campaigns } = await admin
     .from('campaigns')
     .select('id, slug, headline, description, issue_area, action_count, created_at')
+    .eq('status', 'active')
     .order('created_at', { ascending: false })
-    .limit(20);
+    .limit(50);
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-8">
-      <div className="flex items-center justify-between mb-8">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
         <div>
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Campaigns</h1>
           <p className="text-gray-600 dark:text-gray-400 mt-1">
@@ -30,7 +32,7 @@ export default async function CampaignsPage() {
         </div>
         <Link
           href="/campaign/create"
-          className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white text-sm font-medium rounded-lg transition-colors shrink-0"
+          className="px-4 py-2.5 bg-purple-600 hover:bg-purple-700 text-white text-sm font-medium rounded-lg transition-colors shrink-0 text-center"
         >
           Start a Campaign
         </Link>
@@ -53,33 +55,7 @@ export default async function CampaignsPage() {
           </Link>
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {campaigns.map((campaign) => (
-            <Link
-              key={campaign.id}
-              href={`/campaign/${campaign.slug}`}
-              className="block bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5 hover:shadow-md hover:border-purple-300 dark:hover:border-purple-700 transition-all"
-            >
-              <div className="flex items-center justify-between mb-3">
-                <span className="px-2.5 py-1 text-xs font-medium rounded-full bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300">
-                  {campaign.issue_area}
-                </span>
-                <div className="flex items-center gap-1 text-gray-500 dark:text-gray-400">
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
-                  </svg>
-                  <span className="text-sm font-bold">{campaign.action_count ?? 0}</span>
-                </div>
-              </div>
-              <h3 className="font-semibold text-gray-900 dark:text-white mb-1 line-clamp-2">
-                {campaign.headline}
-              </h3>
-              <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-3">
-                {campaign.description}
-              </p>
-            </Link>
-          ))}
-        </div>
+        <CampaignFilters campaigns={campaigns} />
       )}
     </div>
   );

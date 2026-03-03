@@ -119,7 +119,7 @@ export function GettingStartedChecklist({ hasAddress, hasReps, hasMessages }: Ge
               {isNext && step.href && (
                 <Link
                   href={step.href}
-                  className="px-3 py-1.5 text-xs font-medium bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors flex-shrink-0"
+                  className="px-4 py-2 text-xs font-medium bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors flex-shrink-0"
                 >
                   {step.key === 'message' ? 'Write message' : 'Get started'}
                 </Link>

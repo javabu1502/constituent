@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { US_STATES, PARTY_COLORS, DEFAULT_PARTY_COLOR } from '@/lib/constants';
@@ -133,7 +134,7 @@ function OfficialRow({ official }: { official: Official }) {
   return (
     <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors">
       {official.photoUrl ? (
-        <img src={official.photoUrl} alt={official.name} className="w-12 h-12 rounded-full object-cover shrink-0 border border-gray-200 dark:border-gray-600" />
+        <Image src={official.photoUrl} alt={official.name} width={48} height={48} className="w-12 h-12 rounded-full object-cover shrink-0 border border-gray-200 dark:border-gray-600" />
       ) : (
         <div className="w-12 h-12 rounded-full bg-gray-200 dark:bg-gray-600 flex items-center justify-center shrink-0">
           <span className="text-gray-500 dark:text-gray-400 text-lg font-medium">{official.name.charAt(0)}</span>

@@ -37,13 +37,13 @@ export function Footer() {
   return (
     <footer className="border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
       <div className="max-w-5xl mx-auto px-4 py-8">
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 mb-8">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-8 mb-8">
           {FOOTER_COLUMNS.map((col) => (
             <div key={col.heading}>
               <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500 mb-3">
                 {col.heading}
               </h3>
-              <ul className="space-y-2 text-sm">
+              <ul className="space-y-1 text-sm">
                 {col.links.map((link) => (
                   <li key={link.href}>
                     {'external' in link && link.external ? (
@@ -51,14 +51,14 @@ export function Footer() {
                         href={link.href}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-gray-500 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
+                        className="inline-block py-1 text-gray-500 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
                       >
                         {link.label}
                       </a>
                     ) : (
                       <Link
                         href={link.href}
-                        className="text-gray-500 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
+                        className="inline-block py-1 text-gray-500 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
                       >
                         {link.label}
                       </Link>

@@ -61,13 +61,6 @@ export function WelcomeTour() {
   const [visible, setVisible] = useState(false);
   const [step, setStep] = useState(0);
 
-  useEffect(() => {
-    const seen = localStorage.getItem(STORAGE_KEY);
-    if (!seen) {
-      setVisible(true);
-    }
-  }, []);
-
   function dismiss() {
     localStorage.setItem(STORAGE_KEY, 'true');
     setVisible(false);
@@ -85,6 +78,23 @@ export function WelcomeTour() {
     if (step > 0) setStep(step - 1);
   }
 
+  useEffect(() => {
+    const seen = localStorage.getItem(STORAGE_KEY);
+    if (!seen) {
+      setVisible(true);
+    }
+  }, []);
+
+  // Close on Escape
+  useEffect(() => {
+    if (!visible) return;
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key === 'Escape') dismiss();
+    }
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  });
+
   if (!visible) return null;
 
   const current = tourSteps[step];
@@ -92,7 +102,7 @@ export function WelcomeTour() {
   const isFirst = step === 0;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div role="dialog" aria-modal="true" aria-labelledby="tour-title" className="fixed inset-0 z-50 flex items-center justify-center p-4">
       {/* Overlay */}
       <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={dismiss} />
 
@@ -121,7 +131,7 @@ export function WelcomeTour() {
           <div className="w-16 h-16 mx-auto mb-4 bg-purple-100 dark:bg-purple-900/50 rounded-full flex items-center justify-center text-purple-600 dark:text-purple-400">
             {current.icon}
           </div>
-          <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+          <h2 id="tour-title" className="text-xl font-bold text-gray-900 dark:text-white mb-2">
             {current.title}
           </h2>
           <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">

@@ -196,6 +196,9 @@ export function SearchDialog({ onClose }: SearchDialogProps) {
   return (
     <div
       ref={overlayRef}
+      role="dialog"
+      aria-modal="true"
+      aria-label="Search"
       className="fixed inset-0 z-50 flex items-start justify-center pt-[15vh] px-4 bg-black/50"
       onClick={(e) => {
         if (e.target === overlayRef.current) onClose();
@@ -214,6 +217,7 @@ export function SearchDialog({ onClose }: SearchDialogProps) {
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder="Search guides, states, representatives, issues..."
+            aria-label="Search guides, states, representatives, issues"
             className="flex-1 bg-transparent text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 text-sm outline-none"
           />
           <kbd className="hidden sm:inline-flex items-center px-1.5 py-0.5 text-[10px] font-medium text-gray-400 dark:text-gray-500 bg-gray-100 dark:bg-gray-700 rounded">
@@ -244,7 +248,7 @@ export function SearchDialog({ onClose }: SearchDialogProps) {
                     key={link.href}
                     href={link.href}
                     onClick={onClose}
-                    className="px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-purple-50 dark:hover:bg-purple-900/20 rounded-lg transition-colors"
+                    className="px-3 py-3 text-sm text-gray-700 dark:text-gray-300 hover:bg-purple-50 dark:hover:bg-purple-900/20 rounded-lg transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -271,7 +275,7 @@ export function SearchDialog({ onClose }: SearchDialogProps) {
                   key={`${result.type}-${result.href}-${index}`}
                   onClick={() => navigate(result.href)}
                   onMouseEnter={() => setActiveIndex(index)}
-                  className={`w-full text-left px-4 py-2.5 flex items-center gap-3 transition-colors ${
+                  className={`w-full text-left px-4 py-3 flex items-center gap-3 transition-colors ${
                     index === activeIndex
                       ? 'bg-purple-50 dark:bg-purple-900/20'
                       : 'hover:bg-gray-50 dark:hover:bg-gray-700/50'
@@ -292,11 +296,9 @@ export function SearchDialog({ onClose }: SearchDialogProps) {
                   </div>
                 </button>
               ))}
-              {isSearching && (
-                <div className="px-4 py-2 text-xs text-gray-400 dark:text-gray-500">
-                  Searching...
-                </div>
-              )}
+              <div role="status" aria-live="polite" className="px-4 py-2 text-xs text-gray-400 dark:text-gray-500">
+                {isSearching ? 'Searching...' : q.length >= 2 ? `${allResults.length} result${allResults.length !== 1 ? 's' : ''}` : ''}
+              </div>
             </div>
           )}
         </div>

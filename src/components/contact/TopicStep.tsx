@@ -308,7 +308,7 @@ export function TopicStep({ state, dispatch, onBack }: TopicStepProps) {
                         dispatch({ type: 'SET_PERSONAL_WHY', payload: prompt });
                       }
                     }}
-                    className="px-2.5 py-1 text-xs bg-white dark:bg-gray-700 border border-purple-200 dark:border-purple-600 rounded-lg text-purple-700 dark:text-purple-300 hover:bg-purple-100 dark:hover:bg-purple-800/30 transition-colors text-left"
+                    className="px-3 py-2 text-xs bg-white dark:bg-gray-700 border border-purple-200 dark:border-purple-600 rounded-lg text-purple-700 dark:text-purple-300 hover:bg-purple-100 dark:hover:bg-purple-800/30 transition-colors text-left"
                   >
                     {prompt}
                   </button>

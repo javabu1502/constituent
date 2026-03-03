@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import type { Official } from '@/lib/types';
 import { AddressAutocomplete, type ParsedAddress } from '@/components/ui/AddressAutocomplete';
@@ -32,9 +33,11 @@ function RepCard({ official }: { official: Official }) {
     <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4 flex flex-col">
       <div className="flex items-start gap-3 mb-3">
         {official.photoUrl ? (
-          <img
+          <Image
             src={official.photoUrl}
             alt={official.name}
+            width={48}
+            height={48}
             className="w-12 h-12 rounded-full object-cover flex-shrink-0"
             onError={(e) => {
               const target = e.currentTarget;

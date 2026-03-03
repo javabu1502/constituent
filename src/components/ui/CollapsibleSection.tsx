@@ -10,6 +10,8 @@ export function ChevronIcon({ open }: { open: boolean }) {
   );
 }
 
+let sectionIdCounter = 0;
+
 export function CollapsibleSection({ title, badge, children, defaultOpen = true }: {
   title: string;
   badge?: string;
@@ -17,10 +19,13 @@ export function CollapsibleSection({ title, badge, children, defaultOpen = true 
   defaultOpen?: boolean;
 }) {
   const [open, setOpen] = useState(defaultOpen);
+  const [id] = useState(() => `collapsible-${++sectionIdCounter}`);
   return (
     <div className="mb-4">
       <button
         onClick={() => setOpen(!open)}
+        aria-expanded={open}
+        aria-controls={id}
         className="w-full flex items-center justify-between px-4 py-3 bg-gray-50 dark:bg-gray-800/50 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
       >
         <div className="flex items-center gap-2">
@@ -29,7 +34,7 @@ export function CollapsibleSection({ title, badge, children, defaultOpen = true 
         </div>
         <ChevronIcon open={open} />
       </button>
-      {open && <div className="mt-2 space-y-3">{children}</div>}
+      {open && <div id={id} role="region" aria-label={title} className="mt-2 space-y-3">{children}</div>}
     </div>
   );
 }

@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useMemo, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
+import Image from 'next/image';
 import Link from 'next/link';
 import { US_STATES } from '@/lib/constants';
 import { PARTY_COLORS, DEFAULT_PARTY_COLOR } from '@/lib/constants';
@@ -390,7 +391,7 @@ function LocalOfficialCard({ official }: { official: LocalOfficial }) {
     <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
       <div className="flex items-start gap-3 mb-2">
         {official.photoUrl ? (
-          <img src={official.photoUrl} alt={official.name} className="w-12 h-12 rounded-full object-cover shrink-0" />
+          <Image src={official.photoUrl} alt={official.name} width={48} height={48} className="w-12 h-12 rounded-full object-cover shrink-0" />
         ) : (
           <div className="w-12 h-12 rounded-full bg-gray-200 dark:bg-gray-600 flex items-center justify-center shrink-0">
             <span className="text-gray-500 dark:text-gray-400 text-lg font-medium">{official.name.charAt(0)}</span>
