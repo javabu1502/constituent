@@ -23,14 +23,14 @@ type Mode = 'open' | 'recent' | 'executive_orders';
 
 const POPULAR_AGENCIES = [
   { slug: 'environmental-protection-agency', name: 'EPA' },
-  { slug: 'department-of-education', name: 'Education' },
-  { slug: 'department-of-health-and-human-services', name: 'HHS' },
-  { slug: 'department-of-labor', name: 'Labor' },
+  { slug: 'education-department', name: 'Education' },
+  { slug: 'health-and-human-services-department', name: 'HHS' },
+  { slug: 'labor-department', name: 'Labor' },
   { slug: 'federal-communications-commission', name: 'FCC' },
-  { slug: 'department-of-homeland-security', name: 'DHS' },
-  { slug: 'department-of-housing-and-urban-development', name: 'HUD' },
-  { slug: 'department-of-the-treasury', name: 'Treasury' },
-  { slug: 'department-of-agriculture', name: 'USDA' },
+  { slug: 'homeland-security-department', name: 'DHS' },
+  { slug: 'housing-and-urban-development-department', name: 'HUD' },
+  { slug: 'treasury-department', name: 'Treasury' },
+  { slug: 'agriculture-department', name: 'USDA' },
   { slug: 'securities-and-exchange-commission', name: 'SEC' },
 ];
 
@@ -484,6 +484,19 @@ function CommentWriter({
           </div>
         ) : (
           <div className="space-y-4">
+            {/* How it works */}
+            <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-3">
+              <p className="text-xs font-medium text-blue-800 dark:text-blue-300 mb-1.5">How to submit your comment</p>
+              <ol className="text-xs text-blue-700 dark:text-blue-400 space-y-1 list-decimal list-inside">
+                <li>Review and edit your draft below</li>
+                <li>Click &quot;Copy &amp; Open Regulations.gov&quot; to copy your comment and open the official form</li>
+                <li>Paste your comment into the Regulations.gov form and submit it there</li>
+              </ol>
+              <p className="text-[10px] text-blue-600 dark:text-blue-500 mt-1.5">
+                Federal law requires public comments be submitted through Regulations.gov. We cannot submit on your behalf, but we make it easy to get your comment ready.
+              </p>
+            </div>
+
             {/* Generated comment */}
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
@@ -497,23 +510,28 @@ function CommentWriter({
               />
             </div>
 
-            <div className="flex gap-3">
-              <button
-                onClick={handleCopy}
-                className="flex-1 py-2.5 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 font-medium rounded-xl transition-colors text-sm"
-              >
-                {copied ? 'Copied!' : 'Copy to Clipboard'}
-              </button>
+            <div className="flex flex-col gap-2">
               {regulation.commentUrl && (
                 <a
                   href={regulation.commentUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 py-2.5 bg-purple-600 hover:bg-purple-700 text-white font-medium rounded-xl transition-colors text-sm text-center"
+                  onClick={() => {
+                    navigator.clipboard.writeText(generatedComment);
+                    setCopied(true);
+                    setTimeout(() => setCopied(false), 3000);
+                  }}
+                  className="w-full py-3 bg-purple-600 hover:bg-purple-700 text-white font-medium rounded-xl transition-colors text-sm text-center"
                 >
-                  Submit on Regulations.gov
+                  {copied ? 'Copied! Opening Regulations.gov...' : 'Copy & Open Regulations.gov'}
                 </a>
               )}
+              <button
+                onClick={handleCopy}
+                className="w-full py-2.5 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 font-medium rounded-xl transition-colors text-sm"
+              >
+                {copied ? 'Copied!' : 'Copy to Clipboard Only'}
+              </button>
             </div>
 
             <button
@@ -522,10 +540,6 @@ function CommentWriter({
             >
               Start Over
             </button>
-
-            <p className="text-[10px] text-gray-400 dark:text-gray-500 text-center">
-              Review and edit your comment, then copy and paste it into the official Regulations.gov comment form.
-            </p>
           </div>
         )}
       </div>

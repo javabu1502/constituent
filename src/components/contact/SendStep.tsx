@@ -280,42 +280,63 @@ function OfficialCard({ official, message, deliveryInfo, contactMethod, isCallCo
       {/* Primary action based on delivery method */}
       <div className="space-y-2">
         {deliveryInfo.method === 'staffer_email' && deliveryInfo.email ? (
-          // Staffer email - copy email address as primary action
-          <button
-            onClick={() => { copyEmail(); onSend?.('email_copied'); }}
-            className="flex items-center justify-center gap-2 w-full py-2.5 bg-purple-600 hover:bg-purple-700 text-white rounded-lg text-sm font-medium transition-colors"
-          >
-            {emailCopied ? (
-              <CheckIcon className="w-4 h-4" />
+          // Staffer email - open in email client as primary action
+          <>
+            {mailtoLink ? (
+              <button
+                onClick={() => { window.open(mailtoLink, '_blank'); onSend?.('email_opened'); }}
+                className="flex items-center justify-center gap-2 w-full py-2.5 bg-purple-600 hover:bg-purple-700 text-white rounded-lg text-sm font-medium transition-colors"
+              >
+                <EmailIcon className="w-4 h-4" />
+                Send with Your Email
+              </button>
             ) : (
-              <CopyIcon className="w-4 h-4" />
+              <button
+                onClick={() => { copyEmail(); onSend?.('email_copied'); }}
+                className="flex items-center justify-center gap-2 w-full py-2.5 bg-purple-600 hover:bg-purple-700 text-white rounded-lg text-sm font-medium transition-colors"
+              >
+                {emailCopied ? <CheckIcon className="w-4 h-4" /> : <CopyIcon className="w-4 h-4" />}
+                {emailCopied ? 'Copied!' : 'Copy Email Address'}
+              </button>
             )}
-            {emailCopied ? 'Copied!' : `Copy Email Address${deliveryInfo.stafferName ? ` for ${deliveryInfo.stafferName}` : ''}`}
-          </button>
+            <p className="text-[10px] text-gray-400 dark:text-gray-500 text-center">
+              Opens your email app with the message pre-filled. Just hit send.
+            </p>
+          </>
         ) : deliveryInfo.method === 'contact_form' && deliveryInfo.contactFormUrl ? (
           // Contact form - copy message then open form
-          <a
-            href={deliveryInfo.contactFormUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => { copyMessage(); onSend?.('form_opened'); }}
-            className="flex items-center justify-center gap-2 w-full py-2.5 bg-purple-600 hover:bg-purple-700 text-white rounded-lg text-sm font-medium transition-colors"
-          >
-            <ExternalLinkIcon className="w-4 h-4" />
-            Open Contact Form
-          </a>
+          <>
+            <a
+              href={deliveryInfo.contactFormUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => { copyMessage(); onSend?.('form_opened'); }}
+              className="flex items-center justify-center gap-2 w-full py-2.5 bg-purple-600 hover:bg-purple-700 text-white rounded-lg text-sm font-medium transition-colors"
+            >
+              <ExternalLinkIcon className="w-4 h-4" />
+              Open Contact Form
+            </a>
+            <p className="text-[10px] text-gray-400 dark:text-gray-500 text-center">
+              Your message is copied to clipboard. Paste it into the form.
+            </p>
+          </>
         ) : deliveryInfo.method === 'website' && deliveryInfo.websiteUrl ? (
           // Website fallback
-          <a
-            href={deliveryInfo.actionUrl || deliveryInfo.websiteUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => { copyMessage(); onSend?.('website_opened'); }}
-            className="flex items-center justify-center gap-2 w-full py-2.5 bg-purple-600 hover:bg-purple-700 text-white rounded-lg text-sm font-medium transition-colors"
-          >
-            <ExternalLinkIcon className="w-4 h-4" />
-            Visit Website
-          </a>
+          <>
+            <a
+              href={deliveryInfo.actionUrl || deliveryInfo.websiteUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => { copyMessage(); onSend?.('website_opened'); }}
+              className="flex items-center justify-center gap-2 w-full py-2.5 bg-purple-600 hover:bg-purple-700 text-white rounded-lg text-sm font-medium transition-colors"
+            >
+              <ExternalLinkIcon className="w-4 h-4" />
+              Visit Website
+            </a>
+            <p className="text-[10px] text-gray-400 dark:text-gray-500 text-center">
+              Your message is copied to clipboard. Paste it on their site.
+            </p>
+          </>
         ) : (
           // No method available
           <span className="flex items-center justify-center gap-2 w-full py-2.5 bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400 rounded-lg text-sm">
@@ -327,6 +348,18 @@ function OfficialCard({ official, message, deliveryInfo, contactMethod, isCallCo
         <div className="flex gap-2">
           {deliveryInfo.method === 'staffer_email' ? (
             <>
+              {/* Copy Email Address */}
+              <button
+                onClick={() => { copyEmail(); onSend?.('email_copied'); }}
+                className="flex-1 flex items-center justify-center gap-1.5 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg text-xs font-medium transition-colors"
+              >
+                {emailCopied ? (
+                  <CheckIcon className="w-3.5 h-3.5 text-green-600 dark:text-green-400" />
+                ) : (
+                  <CopyIcon className="w-3.5 h-3.5" />
+                )}
+                {emailCopied ? 'Copied!' : 'Copy Email Address'}
+              </button>
               {/* Copy Message */}
               <button
                 onClick={copyMessage}
@@ -339,16 +372,6 @@ function OfficialCard({ official, message, deliveryInfo, contactMethod, isCallCo
                 )}
                 {messageCopied ? 'Copied!' : 'Copy Message'}
               </button>
-              {/* Open in Email Client (mailto) */}
-              {mailtoLink && (
-                <button
-                  onClick={() => { window.open(mailtoLink, '_blank'); onSend?.('email_opened'); }}
-                  className="flex-1 flex items-center justify-center gap-1.5 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg text-xs font-medium transition-colors"
-                >
-                  <EmailIcon className="w-3.5 h-3.5" />
-                  Open in Email Client
-                </button>
-              )}
             </>
           ) : (
             <>
@@ -523,6 +546,8 @@ export function SendStep({ state, dispatch, onBack }: SendStepProps) {
               : 'Call each official and use your script'
             : deliverySummary.emailCount > 0 && deliverySummary.formCount > 0
             ? `${deliverySummary.emailCount} via email, ${deliverySummary.formCount} via contact form`
+            : deliverySummary.emailCount > 0
+            ? 'Click "Send with Your Email" to open your email app with the message ready to send'
             : 'Send each message using the options below'}
         </p>
       </div>
