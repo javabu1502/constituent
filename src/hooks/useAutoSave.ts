@@ -42,9 +42,12 @@ export function useAutoSave(
   savedDraft: SavedDraft | null;
   dismissDraft: () => void;
   clearDraft: () => void;
+  justSaved: boolean;
 } {
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const fadeRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [savedDraft, setSavedDraft] = useState<SavedDraft | null>(null);
+  const [justSaved, setJustSaved] = useState(false);
   const hasChecked = useRef(false);
 
   // On mount: check for existing draft
@@ -98,6 +101,9 @@ export function useAutoSave(
 
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(draft));
+        setJustSaved(true);
+        if (fadeRef.current) clearTimeout(fadeRef.current);
+        fadeRef.current = setTimeout(() => setJustSaved(false), 2000);
       } catch {
         // localStorage full or unavailable
       }
@@ -129,5 +135,5 @@ export function useAutoSave(
     setSavedDraft(null);
   }, []);
 
-  return { savedDraft, dismissDraft, clearDraft };
+  return { savedDraft, dismissDraft, clearDraft, justSaved };
 }

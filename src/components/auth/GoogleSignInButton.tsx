@@ -62,9 +62,6 @@ export function GoogleSignInButton({ redirectTo, label = 'Sign in with Google' }
         </svg>
         Secure sign-in powered by Supabase &amp; Google. Your data stays private.
       </p>
-      <p className="mt-1.5 text-[11px] text-gray-400 dark:text-gray-500 text-center leading-snug">
-        Note: The sign-in screen will show &quot;mydemocracy.supabase.co&quot; - that&apos;s us! We use Supabase for secure authentication.
-      </p>
     </div>
   );
 }

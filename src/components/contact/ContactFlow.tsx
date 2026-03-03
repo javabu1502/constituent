@@ -12,6 +12,7 @@ import { MessageStep } from './MessageStep';
 import { SendStep } from './SendStep';
 import { ShareActions } from './ShareActions';
 import { useAutoSave, type SavedDraft } from '@/hooks/useAutoSave';
+import { trackEvent } from '@/lib/analytics';
 
 // Per-official message
 export interface OfficialMessage {
@@ -189,11 +190,14 @@ export function ContactFlow() {
     if (action.type === 'RESET') {
       setWasReset(true);
     }
+    if (action.type === 'GO_TO_STEP') {
+      trackEvent('contact_step', { step: action.payload });
+    }
     dispatch(action);
   }, []);
 
   // Auto-save hook — persists draft to localStorage
-  const { savedDraft, dismissDraft, clearDraft } = useAutoSave(state, wasReset);
+  const { savedDraft, dismissDraft, clearDraft, justSaved } = useAutoSave(state, wasReset);
   const hasDeepLink = useMemo(
     () => searchParams.has('issue') || searchParams.has('ask') || searchParams.has('repId'),
     [searchParams]
@@ -478,6 +482,14 @@ export function ContactFlow() {
           {STEP_DESCRIPTIONS[state.step] && (
             <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
               {STEP_DESCRIPTIONS[state.step]}
+            </p>
+          )}
+          {justSaved && (
+            <p className="text-xs text-green-600 dark:text-green-400 mt-1.5 flex items-center justify-center gap-1 animate-fade-in">
+              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              </svg>
+              Draft saved
             </p>
           )}
         </div>

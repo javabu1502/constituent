@@ -3,6 +3,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 import { createClient } from '@/lib/supabase/client';
+import { trackEvent } from '@/lib/analytics';
 import type { Campaign } from '@/lib/types';
 import type { Official } from '@/lib/types';
 import { US_STATES } from '@/lib/constants';
@@ -201,6 +202,8 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
         messages_sent: sentCount,
       }),
     }).catch((err) => console.error('[participate] Failed:', err));
+
+    trackEvent('campaign_action', { campaign: campaign.slug, issue: campaign.issue_area });
   };
 
   // Step 1: Form

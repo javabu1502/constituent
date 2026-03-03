@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
+import { trackEvent } from '@/lib/analytics';
 import { Button } from '@/components/ui/Button';
 import { IssuePicker } from '@/components/ui/IssuePicker';
 
@@ -58,6 +59,7 @@ export function CampaignForm() {
         throw new Error(data.error || 'Failed to create campaign');
       }
 
+      trackEvent('campaign_created', { issue: issueArea });
       router.push(`/campaign/${data.slug}`);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to create campaign');

@@ -2,6 +2,7 @@
 
 import { useState, useMemo, useEffect } from 'react';
 import { createClient } from '@/lib/supabase/client';
+import { trackEvent } from '@/lib/analytics';
 import type { ContactState, ContactAction } from './ContactFlow';
 import type { Official } from '@/lib/types';
 import Link from 'next/link';
@@ -497,6 +498,10 @@ export function SendStep({ state, dispatch, onBack }: SendStepProps) {
         if (data?.shareId) {
           dispatch({ type: 'SET_SHARE_ID', payload: data.shareId });
         }
+        trackEvent('message_sent', {
+          method: contactMethod === 'phone' ? 'phone' : 'email',
+          issue: state.issueCategory || 'unknown',
+        });
       })
       .catch((err) => console.error('[track-send] Failed:', err));
   };
