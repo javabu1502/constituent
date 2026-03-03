@@ -1,6 +1,6 @@
 'use client';
 
-import { useReducer, useCallback, useEffect, useRef, useState } from 'react';
+import { useReducer, useCallback, useEffect, useRef, useState, useMemo } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { createClient } from '@/lib/supabase/client';
@@ -11,6 +11,7 @@ import { TopicStep } from './TopicStep';
 import { MessageStep } from './MessageStep';
 import { SendStep } from './SendStep';
 import { ShareActions } from './ShareActions';
+import { useAutoSave, type SavedDraft } from '@/hooks/useAutoSave';
 
 // Per-official message
 export interface OfficialMessage {
@@ -181,6 +182,73 @@ export function ContactFlow() {
   const searchParams = useSearchParams();
   const profileLoaded = useRef(false);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
+  const [wasReset, setWasReset] = useState(false);
+
+  // Wrap dispatch to detect RESET and clear auto-save
+  const wrappedDispatch = useCallback((action: ContactAction) => {
+    if (action.type === 'RESET') {
+      setWasReset(true);
+    }
+    dispatch(action);
+  }, []);
+
+  // Auto-save hook — persists draft to localStorage
+  const { savedDraft, dismissDraft, clearDraft } = useAutoSave(state, wasReset);
+  const hasDeepLink = useMemo(
+    () => searchParams.has('issue') || searchParams.has('ask') || searchParams.has('repId'),
+    [searchParams]
+  );
+
+  // Restore a saved draft
+  const restoreDraft = useCallback(async (draft: SavedDraft) => {
+    dismissDraft();
+
+    // Restore simple fields immediately
+    if (draft.address) {
+      dispatch({ type: 'SET_ADDRESS', payload: draft.address as Address });
+    }
+    dispatch({ type: 'SET_CONTACT_METHOD', payload: draft.contactMethod });
+    if (draft.userName) dispatch({ type: 'SET_USER_NAME', payload: draft.userName });
+    if (draft.userEmail) dispatch({ type: 'SET_USER_EMAIL', payload: draft.userEmail });
+    if (draft.issue) {
+      dispatch({ type: 'SET_ISSUE', payload: { issue: draft.issue, category: draft.issueCategory } });
+    }
+    if (draft.ask) dispatch({ type: 'SET_ASK', payload: draft.ask });
+    if (draft.personalWhy) dispatch({ type: 'SET_PERSONAL_WHY', payload: draft.personalWhy });
+    if (Object.keys(draft.messages).length > 0) {
+      dispatch({ type: 'SET_MESSAGES', payload: draft.messages });
+    }
+
+    // Re-fetch officials if address is available
+    if (draft.address) {
+      dispatch({ type: 'SET_LOADING', payload: true });
+      try {
+        const response = await fetch('/api/representatives', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(draft.address),
+        });
+        const data = await response.json();
+        if (data.officials?.length > 0) {
+          dispatch({ type: 'SET_OFFICIALS', payload: data.officials });
+          const matchedReps = data.officials.filter(
+            (o: Official) => draft.selectedRepIds.includes(o.id)
+          );
+          if (matchedReps.length > 0) {
+            dispatch({ type: 'SELECT_REPS', payload: matchedReps });
+          }
+        }
+      } catch {
+        dispatch({ type: 'GO_TO_STEP', payload: 'address' });
+        dispatch({ type: 'SET_LOADING', payload: false });
+        return;
+      }
+      dispatch({ type: 'SET_LOADING', payload: false });
+    }
+
+    // Navigate to saved step
+    dispatch({ type: 'GO_TO_STEP', payload: draft.step as ContactState['step'] });
+  }, [dismissDraft]);
 
   // Auto-fill from user profile and handle repId deep-linking
   useEffect(() => {
@@ -335,7 +403,7 @@ export function ContactFlow() {
               />
             )}
             <button
-              onClick={() => dispatch({ type: 'RESET' })}
+              onClick={() => wrappedDispatch({ type: 'RESET' })}
               className="w-full py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-medium transition-colors"
             >
               Start Over
@@ -369,6 +437,34 @@ export function ContactFlow() {
 
   return (
     <div className="w-full max-w-2xl mx-auto">
+      {/* Resume draft banner */}
+      {savedDraft && !hasDeepLink && state.step === 'address' && (
+        <div className="mb-4 mx-4 p-4 bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-700 rounded-xl flex items-center justify-between gap-4">
+          <div className="min-w-0">
+            <p className="text-sm font-medium text-purple-900 dark:text-purple-100">
+              Resume your draft?
+            </p>
+            <p className="text-xs text-purple-700 dark:text-purple-300 mt-0.5 truncate">
+              You were working on a message about &quot;{savedDraft.issue || 'a topic'}&quot;
+            </p>
+          </div>
+          <div className="flex gap-2 flex-shrink-0">
+            <button
+              onClick={() => restoreDraft(savedDraft)}
+              className="px-3 py-1.5 text-xs font-medium bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
+            >
+              Resume
+            </button>
+            <button
+              onClick={() => { dismissDraft(); clearDraft(); }}
+              className="px-3 py-1.5 text-xs font-medium text-purple-600 dark:text-purple-400 hover:bg-purple-100 dark:hover:bg-purple-900/40 rounded-lg transition-colors"
+            >
+              Discard
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* Progress indicator */}
       <div className="mb-8 px-4">
         {/* Step counter */}
@@ -432,19 +528,19 @@ export function ContactFlow() {
       {/* Step content card */}
       <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm overflow-hidden">
         {state.step === 'address' && (
-          <AddressStep state={state} dispatch={dispatch} />
+          <AddressStep state={state} dispatch={wrappedDispatch} />
         )}
         {state.step === 'representative' && (
-          <RepStep state={state} dispatch={dispatch} onBack={goBack} />
+          <RepStep state={state} dispatch={wrappedDispatch} onBack={goBack} />
         )}
         {state.step === 'topic' && (
-          <TopicStep state={state} dispatch={dispatch} onBack={goBack} />
+          <TopicStep state={state} dispatch={wrappedDispatch} onBack={goBack} />
         )}
         {state.step === 'message' && (
-          <MessageStep state={state} dispatch={dispatch} onBack={goBack} />
+          <MessageStep state={state} dispatch={wrappedDispatch} onBack={goBack} />
         )}
         {state.step === 'send' && (
-          <SendStep state={state} dispatch={dispatch} onBack={goBack} />
+          <SendStep state={state} dispatch={wrappedDispatch} onBack={goBack} />
         )}
       </div>
 

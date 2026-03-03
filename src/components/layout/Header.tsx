@@ -3,6 +3,7 @@ import { BRAND } from '@/lib/constants';
 import { createClient } from '@/lib/supabase/server';
 import { UserMenu } from './UserMenu';
 import { MobileNav } from './MobileNav';
+import { SearchButton } from '@/components/search/SearchButton';
 
 export async function Header() {
   const supabase = await createClient();
@@ -12,9 +13,12 @@ export async function Header() {
     <header className="border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
       <div className="max-w-5xl mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
-          <Link href="/" className="font-semibold text-xl text-gray-900 dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
-            {BRAND.name}
-          </Link>
+          <div className="flex items-center gap-2">
+            <Link href="/" className="font-semibold text-xl text-gray-900 dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
+              {BRAND.name}
+            </Link>
+            <SearchButton />
+          </div>
 
           {/* Desktop nav */}
           <nav className="hidden md:flex items-center gap-6">
