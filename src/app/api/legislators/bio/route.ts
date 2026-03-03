@@ -151,7 +151,6 @@ export async function GET(request: NextRequest) {
         currentTerm?.district !== undefined ? `District: ${currentTerm.district}` : null,
         `Chamber: ${chamberType}`,
         bio.bio?.birthday ? `Born: ${bio.bio.birthday}` : null,
-        committees.length > 0 ? `Committees: ${committees.join(', ')}` : null,
         yearsInOffice ? `Years in office: ${yearsInOffice}` : null,
         firstElectedYear ? `First elected: ${firstElectedYear}` : null,
         `Total terms: ${bio.terms.length}`,
@@ -159,7 +158,7 @@ export async function GET(request: NextRequest) {
       ].filter(Boolean).join('\n');
 
       bioNarrative = await callClaude(
-        'Generate a 2-3 sentence nonpartisan biographical summary of a US legislator. Be factual and concise. Include when they took office, their committee assignments, and any prior notable roles (e.g. previous offices held, military service, career background). Do not include opinions or policy positions.',
+        'Generate a 2-3 sentence nonpartisan biographical summary of a US legislator. Be factual and concise. Include when they took office and any prior notable roles (e.g. previous offices held, military service, career background). Do not mention committee assignments. Do not include opinions or policy positions.',
         details,
         300,
       );
@@ -237,11 +236,10 @@ export async function GET(request: NextRequest) {
       `Party: ${leg.party}`,
       `Chamber: ${stateName} State ${chamberName}`,
       `District: ${leg.district}`,
-      committees.length > 0 ? `Committees: ${committees.join(', ')}` : null,
     ].filter(Boolean).join('\n');
 
     bioNarrative = await callClaude(
-      'Generate a 2-3 sentence nonpartisan biographical summary of a US state legislator. Be factual and concise. Include career background and notable roles if inferable. Do not include opinions or policy positions.',
+      'Generate a 2-3 sentence nonpartisan biographical summary of a US state legislator. Be factual and concise. Include career background and notable roles if inferable. Do not mention committee assignments. Do not include opinions or policy positions.',
       details,
       200,
     );
