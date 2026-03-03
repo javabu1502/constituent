@@ -402,16 +402,43 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
         Your voice matters. Every message counts toward making a difference.
       </p>
 
-      {/* Share buttons */}
-      <div className="flex flex-col gap-3 mb-6">
-        <ShareButton slug={campaign.slug} />
+      {/* Share section */}
+      <div className="mb-6">
+        <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+          Spread the word and multiply your impact:
+        </p>
+        <div className="grid grid-cols-2 gap-2">
+          <ShareButton slug={campaign.slug} />
+          <a
+            href={`https://x.com/intent/tweet?text=${encodeURIComponent(`I just took action on "${campaign.headline}" - you should too!`)}&url=${encodeURIComponent(typeof window !== 'undefined' ? `${window.location.origin}/campaign/${campaign.slug}` : `/campaign/${campaign.slug}`)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="py-3 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg font-medium transition-colors text-center text-sm"
+          >
+            Share on X
+          </a>
+          <a
+            href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(typeof window !== 'undefined' ? `${window.location.origin}/campaign/${campaign.slug}` : `/campaign/${campaign.slug}`)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="py-3 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg font-medium transition-colors text-center text-sm"
+          >
+            Share on Facebook
+          </a>
+          <a
+            href={`https://wa.me/?text=${encodeURIComponent(`I just took action on "${campaign.headline}" - join me! ${typeof window !== 'undefined' ? `${window.location.origin}/campaign/${campaign.slug}` : `/campaign/${campaign.slug}`}`)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="py-3 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg font-medium transition-colors text-center text-sm"
+          >
+            Share on WhatsApp
+          </a>
+        </div>
         <a
-          href={`https://x.com/intent/tweet?text=${encodeURIComponent(`I just took action on "${campaign.headline}" - you should too!`)}&url=${encodeURIComponent(typeof window !== 'undefined' ? `${window.location.origin}/campaign/${campaign.slug}` : `/campaign/${campaign.slug}`)}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="w-full py-3 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg font-medium transition-colors text-center"
+          href={`mailto:?subject=${encodeURIComponent(`Take action: ${campaign.headline}`)}&body=${encodeURIComponent(`I just took action on "${campaign.headline}" through My Democracy. You should too!\n\n${typeof window !== 'undefined' ? `${window.location.origin}/campaign/${campaign.slug}` : `/campaign/${campaign.slug}`}`)}`}
+          className="block w-full mt-2 py-3 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg font-medium transition-colors text-center text-sm"
         >
-          Share on X
+          Share via Email
         </a>
       </div>
 

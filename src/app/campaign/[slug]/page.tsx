@@ -68,11 +68,38 @@ export default async function CampaignPage({ params }: PageProps) {
         <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
           {campaign.description}
         </p>
-        <div className="flex items-center gap-4 mt-4">
-          <span className="text-sm text-gray-500 dark:text-gray-400">
-            {campaign.action_count} action{campaign.action_count !== 1 ? 's' : ''} taken
-          </span>
-          <CopyLinkButton slug={campaign.slug} />
+        {/* Social proof bar */}
+        <div className="mt-4 p-3 bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-700 rounded-xl">
+          <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center gap-2">
+              <svg className="w-5 h-5 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+              <span className="text-lg font-bold text-purple-700 dark:text-purple-300">
+                {campaign.action_count}
+              </span>
+              <span className="text-sm text-purple-600 dark:text-purple-400">
+                {campaign.action_count === 1 ? 'person has' : 'people have'} taken action
+              </span>
+            </div>
+            <CopyLinkButton slug={campaign.slug} />
+          </div>
+          {/* Progress bar toward next milestone */}
+          {(() => {
+            const milestones = [10, 25, 50, 100, 250, 500, 1000];
+            const next = milestones.find(m => m > campaign.action_count) ?? milestones[milestones.length - 1];
+            const pct = Math.min((campaign.action_count / next) * 100, 100);
+            return (
+              <div>
+                <div className="w-full bg-purple-200 dark:bg-purple-800 rounded-full h-2">
+                  <div className="h-2 rounded-full bg-purple-600 dark:bg-purple-400 transition-all" style={{ width: `${pct}%` }} />
+                </div>
+                <p className="text-xs text-purple-500 dark:text-purple-400 mt-1 text-right">
+                  {campaign.action_count < next ? `${next - campaign.action_count} more to reach ${next}` : `${next}+ reached!`}
+                </p>
+              </div>
+            );
+          })()}
         </div>
       </div>
 

@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/Button';
 import { HomeTrends } from '@/components/trends/HomeTrends';
 import { US_STATES } from '@/lib/constants';
 import { StatePicker } from '@/components/ui/StatePicker';
+import { createAdminClient } from '@/lib/supabase';
 
 const organizationJsonLd = {
   '@context': 'https://schema.org',
@@ -46,7 +47,25 @@ const faqJsonLd = {
   })),
 };
 
-export default function HomePage() {
+export default async function HomePage() {
+  // Fetch aggregate stats for social proof
+  let totalMessages = 0;
+  let statesActive = 0;
+  let totalCampaigns = 0;
+  try {
+    const admin = createAdminClient();
+    const [msgResult, stateResult, campResult] = await Promise.all([
+      admin.from('messages').select('*', { count: 'exact', head: true }),
+      admin.from('messages').select('advocate_state'),
+      admin.from('campaigns').select('*', { count: 'exact', head: true }).eq('status', 'active'),
+    ]);
+    totalMessages = msgResult.count ?? 0;
+    const uniqueStates = new Set((stateResult.data ?? []).map(r => r.advocate_state).filter(Boolean));
+    statesActive = uniqueStates.size;
+    totalCampaigns = campResult.count ?? 0;
+  } catch {
+    // Stats are non-critical — show zeros if fetch fails
+  }
   return (
     <div className="flex flex-col min-h-screen">
       <script
@@ -82,6 +101,32 @@ export default function HomePage() {
               </Button>
             </Link>
           </div>
+
+          {/* Social proof stats */}
+          {totalMessages > 0 && (
+            <div className="flex items-center justify-center gap-8 sm:gap-12 mt-10 pt-8 border-t border-purple-200 dark:border-gray-700">
+              <div className="text-center">
+                <div className="text-2xl sm:text-3xl font-bold text-purple-700 dark:text-purple-300">
+                  {totalMessages.toLocaleString()}
+                </div>
+                <div className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Messages Sent</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl sm:text-3xl font-bold text-purple-700 dark:text-purple-300">
+                  {statesActive}
+                </div>
+                <div className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">States Active</div>
+              </div>
+              {totalCampaigns > 0 && (
+                <div className="text-center">
+                  <div className="text-2xl sm:text-3xl font-bold text-purple-700 dark:text-purple-300">
+                    {totalCampaigns}
+                  </div>
+                  <div className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Active Campaigns</div>
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </section>
 

@@ -164,11 +164,14 @@ export function RepStep({ state, dispatch, onBack }: RepStepProps) {
         </p>
       </div>
 
-      {/* Select All / Deselect All */}
-      <div className="flex justify-end mb-4">
+      {/* Not sure hint + Select All */}
+      <div className="flex items-center justify-between mb-4">
+        <p className="text-xs text-gray-500 dark:text-gray-400">
+          Not sure who to pick? Select all and each will get a personalized message.
+        </p>
         <button
           onClick={handleSelectAll}
-          className="text-sm font-medium text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 transition-colors"
+          className="text-sm font-medium text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 transition-colors shrink-0 ml-4"
         >
           {allSelected ? 'Deselect All' : 'Select All'}
         </button>
@@ -188,6 +191,9 @@ export function RepStep({ state, dispatch, onBack }: RepStepProps) {
                 Federal Representatives ({federalOfficials.length})
               </h4>
             </div>
+            <p className="text-xs text-gray-500 dark:text-gray-400 ml-10 mb-3">
+              Your members of Congress. They vote on federal laws, the national budget, foreign policy, and Supreme Court nominees.
+            </p>
 
             <div className="space-y-4 pl-2 border-l-2 border-blue-200 dark:border-blue-700">
               {/* U.S. Senators */}
@@ -244,6 +250,9 @@ export function RepStep({ state, dispatch, onBack }: RepStepProps) {
                 State Legislators ({stateOfficials.length})
               </h4>
             </div>
+            <p className="text-xs text-gray-500 dark:text-gray-400 ml-10 mb-3">
+              Your state-level lawmakers. They handle education funding, roads, policing, state taxes, and local regulations.
+            </p>
 
             <div className="space-y-4 pl-2 border-l-2 border-purple-200 dark:border-purple-700">
               {/* State Senator */}
@@ -301,6 +310,9 @@ export function RepStep({ state, dispatch, onBack }: RepStepProps) {
                 Local Officials ({localOfficials.length})
               </h4>
             </div>
+            <p className="text-xs text-gray-500 dark:text-gray-400 ml-10 mb-3">
+              Your city and county leaders. They manage zoning, utilities, public safety, schools, and day-to-day community issues.
+            </p>
 
             <div className="space-y-2 pl-2 border-l-2 border-green-200 dark:border-green-700">
               <div className="pl-4">

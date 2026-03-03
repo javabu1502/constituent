@@ -314,17 +314,69 @@ export async function POST(request: NextRequest) {
   try {
     // Generate separate messages for each official in parallel
     const results = await Promise.all(
-      officials.map(official =>
-        generateForOfficial(apiKey, official, issue, ask, personalWhy, senderName, address, method)
-      )
+      officials.map(async (official) => {
+        try {
+          return await generateForOfficial(apiKey, official, issue, ask, personalWhy, senderName, address, method);
+        } catch (err) {
+          console.warn(`[generate-message] AI failed for ${official.name}, using template:`, err);
+          return buildTemplateFallback(official, issue, ask, personalWhy, senderName, address, method);
+        }
+      })
     );
 
     return NextResponse.json({ messages: results });
   } catch (error) {
     console.error('Error generating messages:', error);
-    return NextResponse.json(
-      { error: 'Failed to generate messages. Please try again.' },
-      { status: 500 }
+    // Final fallback: template messages for all officials
+    const fallbacks = officials.map(official =>
+      buildTemplateFallback(official, issue, ask, personalWhy, senderName, address, contactMethod === 'phone' ? 'phone' : 'email')
     );
+    return NextResponse.json({ messages: fallbacks });
   }
+}
+
+function buildTemplateFallback(
+  official: OfficialInput,
+  issue: string,
+  ask: string,
+  personalWhy: string | undefined,
+  senderName: string,
+  address: AddressInput | undefined,
+  contactMethod: 'email' | 'phone'
+): OfficialMessage {
+  const lastName = official.lastName || official.name.split(' ').pop() || official.name;
+  const titleLower = official.title.toLowerCase();
+  const isSenator = titleLower.includes('senator');
+  const salutationTitle = isSenator ? 'Senator' : titleLower.includes('representative') ? 'Representative' : '';
+  const locationStr = address ? `${address.city}, ${address.state}` : '';
+
+  if (contactMethod === 'phone') {
+    const parts = [
+      `Hi, my name is ${senderName} and I'm a constituent${locationStr ? ` from ${locationStr}` : ''}.`,
+      `I'm calling about ${issue}.`,
+      ask,
+      personalWhy ? personalWhy : '',
+      `I hope ${salutationTitle ? `${salutationTitle} ${lastName}` : official.name} will take this issue seriously. Thank you for your time.`,
+    ].filter(Boolean);
+    return { officialName: official.name, subject: '', body: parts.join('\n\n') };
+  }
+
+  const salutation = salutationTitle ? `Dear ${salutationTitle} ${lastName},` : `Dear ${official.name},`;
+  const bodyParts = [
+    `I am writing to you as a constituent${locationStr ? ` from ${locationStr}` : ''} about ${issue}.`,
+    ask,
+    personalWhy ? personalWhy : '',
+    `I respectfully ask that you consider the views of your constituents on this important matter. Thank you for your service and for taking the time to listen.`,
+  ].filter(Boolean);
+
+  let closing = `Sincerely,\n${senderName}`;
+  if (address) {
+    closing += `\n${address.street}\n${address.city}, ${address.state} ${address.zip}`;
+  }
+
+  return {
+    officialName: official.name,
+    subject: `Constituent Message: ${issue.slice(0, 60)}`,
+    body: `${salutation}\n\n${bodyParts.join('\n\n')}\n\n${closing}`,
+  };
 }
