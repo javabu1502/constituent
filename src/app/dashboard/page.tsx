@@ -49,12 +49,18 @@ export default async function DashboardPage() {
 
   const admin = createAdminClient();
 
-  // Ensure profile exists (auto-create for users who signed up before this feature)
-  let { data: profile } = await admin
-    .from('profiles')
-    .select('*')
-    .eq('user_id', user.id)
-    .single();
+  // Fetch profile, messages, and campaigns in parallel for speed
+  const [profileResult, messagesResult, campaignsResult] = await Promise.all([
+    admin.from('profiles').select('*').eq('user_id', user.id).single(),
+    admin.from('messages')
+      .select('id,delivery_method,issue_area,issue_subtopic,legislator_name,legislator_party,delivery_status,created_at,message_body')
+      .or(`user_id.eq.${user.id},advocate_email.eq.${user.email}`)
+      .order('created_at', { ascending: false })
+      .limit(100),
+    admin.from('campaigns').select('*').eq('creator_id', user.id).order('created_at', { ascending: false }),
+  ]);
+
+  let profile = profileResult.data;
 
   if (!profile) {
     const meta = user.user_metadata || {};
@@ -76,12 +82,7 @@ export default async function DashboardPage() {
     profile = newProfile;
   }
 
-  // Query messages
-  const { data: messages } = await admin
-    .from('messages')
-    .select('*')
-    .or(`user_id.eq.${user.id},advocate_email.eq.${user.email}`)
-    .order('created_at', { ascending: false });
+  const messages = messagesResult.data;
 
   // Compute activity stats
   const totalMessages = messages?.length ?? 0;
@@ -90,12 +91,7 @@ export default async function DashboardPage() {
   const uniqueIssues = new Set(messages?.map((m: Record<string, string>) => m.issue_area)).size;
   const uniqueOfficials = new Set(messages?.map((m: Record<string, string>) => m.legislator_name)).size;
 
-  // Query campaigns
-  const { data: campaigns } = await admin
-    .from('campaigns')
-    .select('*')
-    .eq('creator_id', user.id)
-    .order('created_at', { ascending: false });
+  const campaigns = campaignsResult.data;
 
   const hasAddress = !!(profile?.street && profile?.city && profile?.state && profile?.zip);
   const cachedReps = profile?.representatives ?? null;

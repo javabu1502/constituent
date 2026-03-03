@@ -1,7 +1,8 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
+import { createClient } from '@/lib/supabase/client';
 import type { Campaign } from '@/lib/types';
 import type { Official } from '@/lib/types';
 import { US_STATES } from '@/lib/constants';
@@ -31,6 +32,38 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
   const [zip, setZip] = useState('');
   const [personalWhy, setPersonalWhy] = useState('');
   const [error, setError] = useState<string | null>(null);
+  const [profileLoaded, setProfileLoaded] = useState(false);
+
+  // Auto-fill from profile for logged-in users
+  useEffect(() => {
+    async function loadProfile() {
+      try {
+        const supabase = createClient();
+        const { data: { user } } = await supabase.auth.getUser();
+        if (!user) return;
+
+        // Pre-fill name from auth metadata
+        if (user.user_metadata?.full_name && !name) {
+          setName(user.user_metadata.full_name);
+        }
+
+        // Fetch saved address from profile
+        const res = await fetch('/api/profile');
+        if (!res.ok) return;
+        const profile = await res.json();
+
+        if (profile.street && !street) setStreet(profile.street);
+        if (profile.city && !city) setCity(profile.city);
+        if (profile.state && !state) setState(profile.state);
+        if (profile.zip && !zip) setZip(profile.zip);
+        setProfileLoaded(true);
+      } catch {
+        // Not logged in or profile fetch failed - no problem
+      }
+    }
+    loadProfile();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Data from API calls
   const [officials, setOfficials] = useState<Official[]>([]);
@@ -174,6 +207,16 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
   if (step === 'form') {
     return (
       <form onSubmit={handleFormSubmit} className="space-y-5">
+        {profileLoaded && (
+          <div className="p-3 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-xl">
+            <p className="text-xs text-green-700 dark:text-green-300 flex items-center gap-1.5">
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              </svg>
+              Your info has been filled from your account. Edit if needed.
+            </p>
+          </div>
+        )}
         {error && (
           <div className="p-4 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 rounded-xl">
             <p className="text-sm text-red-700 dark:text-red-300">{error}</p>

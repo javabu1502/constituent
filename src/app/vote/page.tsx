@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
-import Head from 'next/head';
 import { US_STATES } from '@/lib/constants';
 import { createClient } from '@/lib/supabase/client';
 import voterInfoData from '@/data/voter-info.json';
@@ -182,51 +181,49 @@ export default function VotePage() {
 
   return (
     <>
-      <Head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              '@context': 'https://schema.org',
-              '@type': 'FAQPage',
-              mainEntity: [
-                {
-                  '@type': 'Question',
-                  name: 'How do I register to vote?',
-                  acceptedAnswer: {
-                    '@type': 'Answer',
-                    text: 'Most states offer online voter registration. Visit vote.gov or your state election office website to register. Some states also offer same-day registration at the polls.',
-                  },
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'FAQPage',
+            mainEntity: [
+              {
+                '@type': 'Question',
+                name: 'How do I register to vote?',
+                acceptedAnswer: {
+                  '@type': 'Answer',
+                  text: 'Most states offer online voter registration. Visit vote.gov or your state election office website to register. Some states also offer same-day registration at the polls.',
                 },
-                {
-                  '@type': 'Question',
-                  name: 'How can I check if I am registered to vote?',
-                  acceptedAnswer: {
-                    '@type': 'Answer',
-                    text: 'Each state has an online registration lookup tool. Select your state on our voting guide page to find the direct link to check your registration status.',
-                  },
+              },
+              {
+                '@type': 'Question',
+                name: 'How can I check if I am registered to vote?',
+                acceptedAnswer: {
+                  '@type': 'Answer',
+                  text: 'Each state has an online registration lookup tool. Select your state on our voting guide page to find the direct link to check your registration status.',
                 },
-                {
-                  '@type': 'Question',
-                  name: 'When is the 2026 general election?',
-                  acceptedAnswer: {
-                    '@type': 'Answer',
-                    text: 'The 2026 general election is on Tuesday, November 3, 2026. Primary election dates vary by state.',
-                  },
+              },
+              {
+                '@type': 'Question',
+                name: 'When is the 2026 general election?',
+                acceptedAnswer: {
+                  '@type': 'Answer',
+                  text: 'The 2026 general election is on Tuesday, November 3, 2026. Primary election dates vary by state.',
                 },
-                {
-                  '@type': 'Question',
-                  name: 'Do I need an ID to vote?',
-                  acceptedAnswer: {
-                    '@type': 'Answer',
-                    text: 'Voter ID requirements vary by state. Some states require photo ID, others accept non-photo ID, and some states have no ID requirement. Check your state voting rules for specific requirements.',
-                  },
+              },
+              {
+                '@type': 'Question',
+                name: 'Do I need an ID to vote?',
+                acceptedAnswer: {
+                  '@type': 'Answer',
+                  text: 'Voter ID requirements vary by state. Some states require photo ID, others accept non-photo ID, and some states have no ID requirement. Check your state voting rules for specific requirements.',
                 },
-              ],
-            }),
-          }}
-        />
-      </Head>
+              },
+            ],
+          }),
+        }}
+      />
 
       <div className="max-w-4xl mx-auto px-4 py-8">
         {/* Header */}
