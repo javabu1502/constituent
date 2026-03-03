@@ -5,6 +5,10 @@ import { createAdminClient } from '@/lib/supabase';
 export const metadata: Metadata = {
   title: 'Campaigns | My Democracy',
   description: 'Browse public civic campaigns. Rally others around issues you care about.',
+  openGraph: {
+    title: 'Campaigns | My Democracy',
+    description: 'Browse public civic campaigns. Rally others around issues you care about.',
+  },
 };
 
 export default async function CampaignsPage() {

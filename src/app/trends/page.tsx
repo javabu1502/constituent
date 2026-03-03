@@ -5,6 +5,10 @@ import { TrendsContent } from '@/components/trends/TrendsContent';
 export const metadata: Metadata = {
   title: 'Advocacy Trends | My Democracy',
   description: 'See what issues people across the country are writing to Congress about.',
+  openGraph: {
+    title: 'Advocacy Trends | My Democracy',
+    description: 'See what issues people across the country are writing to Congress about.',
+  },
 };
 
 export default function TrendsPage() {

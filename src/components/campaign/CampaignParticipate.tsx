@@ -406,12 +406,12 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
       <div className="flex flex-col gap-3 mb-6">
         <ShareButton slug={campaign.slug} />
         <a
-          href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(`I just took action on "${campaign.headline}" - you should too!`)}&url=${encodeURIComponent(typeof window !== 'undefined' ? `${window.location.origin}/campaign/${campaign.slug}` : `/campaign/${campaign.slug}`)}`}
+          href={`https://x.com/intent/tweet?text=${encodeURIComponent(`I just took action on "${campaign.headline}" - you should too!`)}&url=${encodeURIComponent(typeof window !== 'undefined' ? `${window.location.origin}/campaign/${campaign.slug}` : `/campaign/${campaign.slug}`)}`}
           target="_blank"
           rel="noopener noreferrer"
           className="w-full py-3 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg font-medium transition-colors text-center"
         >
-          Share on X / Twitter
+          Share on X
         </a>
       </div>
 

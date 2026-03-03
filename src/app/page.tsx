@@ -12,7 +12,7 @@ const organizationJsonLd = {
   logo: 'https://www.mydemocracy.app/icon.svg',
   description:
     'Find and contact your federal and state representatives. Track legislation, voting records, and take civic action.',
-  sameAs: [],
+  sameAs: ['https://x.com/mydemocracyapp'],
 };
 
 const faqItems = [

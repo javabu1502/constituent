@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     apple: '/apple-touch-icon.png',
   },
   alternates: {
-    canonical: './',
+    canonical: 'https://www.mydemocracy.app/',
   },
   openGraph: {
     title: 'My Democracy | Know Your Reps, Track Legislation, Take Action',
@@ -34,6 +34,13 @@ export const metadata: Metadata = {
       'Find and contact your federal and state representatives in minutes. Write personalized messages with AI assistance. Free, private, no account needed.',
     type: 'website',
     images: [{ url: '/og-image.png', width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'My Democracy | Know Your Reps, Track Legislation, Take Action',
+    description:
+      'Find and contact your federal and state representatives in minutes. Write personalized messages with AI assistance.',
+    images: ['/og-image.png'],
   },
 };
 

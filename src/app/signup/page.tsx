@@ -4,6 +4,7 @@ import { SignupForm } from '@/components/auth/SignupForm';
 export const metadata: Metadata = {
   title: 'Create Account | My Democracy',
   description: 'Create a My Democracy account to track your advocacy and message history.',
+  robots: { index: false, follow: false },
 };
 
 export default function SignupPage() {

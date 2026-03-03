@@ -5,6 +5,7 @@ import { LoginForm } from '@/components/auth/LoginForm';
 export const metadata: Metadata = {
   title: 'Sign In | My Democracy',
   description: 'Sign in to your My Democracy account to track your message history.',
+  robots: { index: false, follow: false },
 };
 
 export default function LoginPage() {
