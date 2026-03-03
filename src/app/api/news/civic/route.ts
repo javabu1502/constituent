@@ -68,41 +68,33 @@ const SOURCE_LEAN: Record<string, SourceLean> = {
   'Military Times': 'center',
 };
 
-// Broader Google News queries
+// Focused Google News queries for civic/government news
 const GOOGLE_NEWS_QUERIES = [
-  'US politics',
-  'Congress',
-  'White House',
+  'US Congress legislation',
   'state government policy',
 ];
 
-// Direct RSS feeds (no API keys needed)
+// Direct RSS feeds — curated set matching AllSides-rated sources for balanced coverage
+// Left / Lean Left / Center / Lean Right / Right represented
 const DIRECT_FEEDS: { url: string; sourceName: string }[] = [
-  // Major outlets
+  // Center sources
   { url: 'https://feeds.apnews.com/rss/APNewsTopics/Politics', sourceName: 'AP News' },
-  { url: 'https://feeds.npr.org/1014/rss.xml', sourceName: 'NPR' },
-  { url: 'https://rss.politico.com/politics-news.xml', sourceName: 'Politico' },
-  { url: 'https://thehill.com/feed/', sourceName: 'The Hill' },
-  { url: 'https://feeds.propublica.org/propublica/main', sourceName: 'ProPublica' },
-  // Independent / left outlets
-  { url: 'https://www.dropsitenews.com/feed', sourceName: 'Drop Site News' },
-  { url: 'https://theintercept.com/feed/?rss', sourceName: 'The Intercept' },
-  { url: 'https://www.democracynow.org/democracynow.rss', sourceName: 'Democracy Now!' },
-  { url: 'https://truthout.org/feed/', sourceName: 'Truthout' },
-  { url: 'https://jacobin.com/feed', sourceName: 'Jacobin' },
-  // Right / right-center outlets
-  { url: 'https://thedispatch.com/feed/', sourceName: 'The Dispatch' },
-  { url: 'https://www.nationalreview.com/feed/', sourceName: 'National Review' },
-  { url: 'https://reason.com/feed/', sourceName: 'Reason' },
-  { url: 'https://www.washingtontimes.com/rss/headlines/news/politics/', sourceName: 'Washington Times' },
-  // Center / nonpartisan outlets
   { url: 'https://www.pbs.org/newshour/feeds/rss/politics', sourceName: 'PBS NewsHour' },
   { url: 'https://api.axios.com/feed/', sourceName: 'Axios' },
   { url: 'https://feeds.bbci.co.uk/news/world/us_and_canada/rss.xml', sourceName: 'BBC News' },
+  { url: 'https://thehill.com/feed/', sourceName: 'The Hill' },
+  { url: 'https://rss.politico.com/politics-news.xml', sourceName: 'Politico' },
+  // Lean Left sources
+  { url: 'https://feeds.npr.org/1014/rss.xml', sourceName: 'NPR' },
+  { url: 'https://feeds.propublica.org/propublica/main', sourceName: 'ProPublica' },
+  { url: 'https://www.dropsitenews.com/feed', sourceName: 'Drop Site News' },
+  // Lean Right / Right sources
+  { url: 'https://www.nationalreview.com/feed/', sourceName: 'National Review' },
+  { url: 'https://reason.com/feed/', sourceName: 'Reason' },
+  { url: 'https://thedispatch.com/feed/', sourceName: 'The Dispatch' },
+  // Congressional / state-focused
   { url: 'https://rollcall.com/feed/', sourceName: 'Roll Call' },
   { url: 'https://stateline.org/feed/', sourceName: 'Stateline' },
-  // Military / defense
-  { url: 'https://www.militarytimes.com/arc/outboundfeeds/rss/category/news/pentagon-congress/?outputType=xml', sourceName: 'Military Times' },
 ];
 
 const CACHE_KEY = 'civic-news';
