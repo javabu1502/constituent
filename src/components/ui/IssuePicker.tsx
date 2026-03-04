@@ -21,6 +21,10 @@ const POPULAR_TOPICS: { label: string; category: string; subtopics: { label: str
       { label: 'Mental Health', category: 'Health' },
       { label: 'Reproductive Health', category: 'Health' },
       { label: 'ACA/Obamacare', category: 'Health' },
+      { label: 'Infant/Early Childhood Mental Health', category: 'Health' },
+      { label: 'Maternal Health', category: 'Health' },
+      { label: 'Dental Care', category: 'Health' },
+      { label: 'Vaccine Policy', category: 'Health' },
     ],
   },
   {
@@ -32,6 +36,8 @@ const POPULAR_TOPICS: { label: string; category: string; subtopics: { label: str
       { label: 'Visas', category: 'Immigration' },
       { label: 'Asylum', category: 'Immigration' },
       { label: 'Refugee Policy', category: 'Immigration' },
+      { label: 'Deportation', category: 'Immigration' },
+      { label: 'Legal Immigration', category: 'Immigration' },
     ],
   },
   {
@@ -42,6 +48,8 @@ const POPULAR_TOPICS: { label: string; category: string; subtopics: { label: str
       { label: 'Cost of Living', category: 'Economics and Public Finance' },
       { label: 'Federal Budget', category: 'Economics and Public Finance' },
       { label: 'National Debt', category: 'Economics and Public Finance' },
+      { label: 'Wage Growth', category: 'Economics and Public Finance' },
+      { label: 'Recession', category: 'Economics and Public Finance' },
     ],
   },
   {
@@ -52,6 +60,10 @@ const POPULAR_TOPICS: { label: string; category: string; subtopics: { label: str
       { label: 'Student Loans', category: 'Education' },
       { label: 'Higher Education', category: 'Education' },
       { label: 'School Choice', category: 'Education' },
+      { label: 'School Safety', category: 'Education' },
+      { label: 'Teacher Pay', category: 'Education' },
+      { label: 'Early Childhood Education', category: 'Education' },
+      { label: 'Book Bans', category: 'Education' },
     ],
   },
   {
@@ -62,6 +74,12 @@ const POPULAR_TOPICS: { label: string; category: string; subtopics: { label: str
       { label: 'Criminal Justice Reform', category: 'Crime and Law Enforcement' },
       { label: 'Police Reform', category: 'Crime and Law Enforcement' },
       { label: 'Drug Policy', category: 'Crime and Law Enforcement' },
+      { label: 'Fentanyl', category: 'Crime and Law Enforcement' },
+      { label: 'Domestic Violence', category: 'Crime and Law Enforcement' },
+      { label: 'Human Trafficking', category: 'Crime and Law Enforcement' },
+      { label: 'Juvenile Justice', category: 'Crime and Law Enforcement' },
+      { label: 'Bail Reform', category: 'Crime and Law Enforcement' },
+      { label: 'Death Penalty', category: 'Crime and Law Enforcement' },
     ],
   },
   {
@@ -72,8 +90,10 @@ const POPULAR_TOPICS: { label: string; category: string; subtopics: { label: str
       { label: 'Renewable Energy', category: 'Energy' },
       { label: 'Oil and Gas', category: 'Energy' },
       { label: 'Nuclear Energy', category: 'Energy' },
+      { label: 'Electric Vehicles', category: 'Energy' },
       { label: 'Clean Air', category: 'Environmental Protection' },
       { label: 'Clean Water', category: 'Environmental Protection' },
+      { label: 'Wildfires', category: 'Environmental Protection' },
     ],
   },
   {
@@ -84,6 +104,8 @@ const POPULAR_TOPICS: { label: string; category: string; subtopics: { label: str
       { label: 'Rent', category: 'Housing and Community Development' },
       { label: 'Homelessness', category: 'Housing and Community Development' },
       { label: 'Mortgage Rates', category: 'Housing and Community Development' },
+      { label: 'Zoning Reform', category: 'Housing and Community Development' },
+      { label: 'Public Housing', category: 'Housing and Community Development' },
     ],
   },
   {
@@ -93,6 +115,8 @@ const POPULAR_TOPICS: { label: string; category: string; subtopics: { label: str
       { label: 'Income Tax', category: 'Taxation' },
       { label: 'Corporate Tax', category: 'Taxation' },
       { label: 'Tax Reform', category: 'Taxation' },
+      { label: 'Wealth Tax', category: 'Taxation' },
+      { label: 'Capital Gains Tax', category: 'Taxation' },
       { label: 'Tariffs', category: 'Foreign Trade and International Finance' },
     ],
   },
@@ -104,6 +128,8 @@ const POPULAR_TOPICS: { label: string; category: string; subtopics: { label: str
       { label: 'Disability Benefits', category: 'Social Welfare' },
       { label: 'Safety Net Programs', category: 'Social Welfare' },
       { label: 'Food Assistance', category: 'Social Welfare' },
+      { label: 'Senior Care', category: 'Social Welfare' },
+      { label: 'Universal Basic Income', category: 'Social Welfare' },
     ],
   },
   {
@@ -112,8 +138,11 @@ const POPULAR_TOPICS: { label: string; category: string; subtopics: { label: str
     subtopics: [
       { label: 'Veterans', category: 'Armed Forces and National Security' },
       { label: 'VA Healthcare', category: 'Armed Forces and National Security' },
+      { label: 'PTSD', category: 'Armed Forces and National Security' },
       { label: 'Military Funding', category: 'Armed Forces and National Security' },
       { label: 'Defense Spending', category: 'Armed Forces and National Security' },
+      { label: 'Military Families', category: 'Armed Forces and National Security' },
+      { label: 'Cybersecurity', category: 'Armed Forces and National Security' },
     ],
   },
   {
@@ -124,6 +153,8 @@ const POPULAR_TOPICS: { label: string; category: string; subtopics: { label: str
       { label: 'Discrimination', category: 'Civil Rights and Liberties, Minority Issues' },
       { label: 'LGBTQ+ Rights', category: 'Civil Rights and Liberties, Minority Issues' },
       { label: 'Free Speech', category: 'Civil Rights and Liberties, Minority Issues' },
+      { label: 'Racial Justice', category: 'Civil Rights and Liberties, Minority Issues' },
+      { label: 'Police Accountability', category: 'Civil Rights and Liberties, Minority Issues' },
     ],
   },
   {
@@ -133,6 +164,8 @@ const POPULAR_TOPICS: { label: string; category: string; subtopics: { label: str
       { label: 'Minimum Wage', category: 'Labor and Employment' },
       { label: 'Worker Rights', category: 'Labor and Employment' },
       { label: 'Unions', category: 'Labor and Employment' },
+      { label: 'Paid Sick Leave', category: 'Labor and Employment' },
+      { label: 'Overtime Pay', category: 'Labor and Employment' },
     ],
   },
   {
@@ -141,6 +174,10 @@ const POPULAR_TOPICS: { label: string; category: string; subtopics: { label: str
     subtopics: [
       { label: 'Child Care', category: 'Families' },
       { label: 'Paid Family Leave', category: 'Families' },
+      { label: 'Child Tax Credit', category: 'Families' },
+      { label: 'Child Safety Online', category: 'Families' },
+      { label: 'Foster Care', category: 'Families' },
+      { label: 'Youth Mental Health', category: 'Families' },
     ],
   },
   {
@@ -150,6 +187,8 @@ const POPULAR_TOPICS: { label: string; category: string; subtopics: { label: str
       { label: 'AI', category: 'Science, Technology, Communications' },
       { label: 'Data Privacy', category: 'Science, Technology, Communications' },
       { label: 'Social Media Regulation', category: 'Science, Technology, Communications' },
+      { label: 'Cybersecurity', category: 'Science, Technology, Communications' },
+      { label: 'Net Neutrality', category: 'Science, Technology, Communications' },
     ],
   },
   {
@@ -157,6 +196,11 @@ const POPULAR_TOPICS: { label: string; category: string; subtopics: { label: str
     category: 'International Affairs',
     subtopics: [
       { label: 'Ukraine', category: 'International Affairs' },
+      { label: 'Israel/Palestine', category: 'International Affairs' },
+      { label: 'Iran', category: 'International Affairs' },
+      { label: 'China', category: 'International Affairs' },
+      { label: 'Russia', category: 'International Affairs' },
+      { label: 'NATO', category: 'International Affairs' },
       { label: 'Foreign Aid', category: 'International Affairs' },
       { label: 'Tariffs', category: 'Foreign Trade and International Finance' },
     ],
