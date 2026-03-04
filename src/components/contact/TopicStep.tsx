@@ -109,47 +109,72 @@ const DEFAULT_STORY_PROMPTS = [
   'In my community, I have seen...',
 ];
 
-// Advocacy organizations by issue category — for "Learn more / Get involved"
+// Organizations working on each issue area — for "Learn more / Get involved"
 const ADVOCACY_ORGS: Record<string, { name: string; url: string }[]> = {
   'Health': [
+    { name: 'KFF (Health Policy Research)', url: 'https://www.kff.org/' },
     { name: 'Families USA', url: 'https://familiesusa.org/' },
-    { name: 'Heritage Foundation — Health', url: 'https://www.heritage.org/health-care-reform' },
+    { name: 'National Alliance on Mental Illness', url: 'https://www.nami.org/' },
   ],
   'Immigration': [
-    { name: 'ACLU — Immigrants\' Rights', url: 'https://www.aclu.org/issues/immigrants-rights' },
-    { name: 'FAIR', url: 'https://www.fairus.org/' },
+    { name: 'American Immigration Lawyers Association', url: 'https://www.aila.org/' },
+    { name: 'Migration Policy Institute', url: 'https://www.migrationpolicy.org/' },
+    { name: 'National Immigration Forum', url: 'https://immigrationforum.org/' },
   ],
   'Environmental Protection': [
     { name: 'Sierra Club', url: 'https://www.sierraclub.org/' },
     { name: 'American Conservation Coalition', url: 'https://www.acc.eco/' },
+    { name: 'Environmental Defense Fund', url: 'https://www.edf.org/' },
   ],
   'Education': [
     { name: 'National Education Association', url: 'https://www.nea.org/' },
-    { name: 'Heritage Foundation — Education', url: 'https://www.heritage.org/education' },
+    { name: 'National PTA', url: 'https://www.pta.org/' },
+    { name: 'Education Trust', url: 'https://edtrust.org/' },
   ],
   'Crime and Law Enforcement': [
-    { name: 'Everytown for Gun Safety', url: 'https://www.everytown.org/' },
-    { name: 'NRA-ILA', url: 'https://www.nraila.org/' },
+    { name: 'Brennan Center for Justice', url: 'https://www.brennancenter.org/' },
+    { name: 'National Criminal Justice Association', url: 'https://www.ncja.org/' },
+    { name: 'Council on Criminal Justice', url: 'https://counciloncj.org/' },
   ],
   'Taxation': [
-    { name: 'Americans for Tax Fairness', url: 'https://americansfortaxfairness.org/' },
     { name: 'Tax Foundation', url: 'https://taxfoundation.org/' },
+    { name: 'Tax Policy Center', url: 'https://www.taxpolicycenter.org/' },
+    { name: 'Center on Budget and Policy Priorities', url: 'https://www.cbpp.org/' },
   ],
   'Economics and Public Finance': [
+    { name: 'Brookings Institution', url: 'https://www.brookings.edu/' },
     { name: 'Economic Policy Institute', url: 'https://www.epi.org/' },
-    { name: 'American Enterprise Institute', url: 'https://www.aei.org/' },
+    { name: 'Committee for a Responsible Federal Budget', url: 'https://www.crfb.org/' },
   ],
   'Armed Forces and National Security': [
-    { name: 'Win Without War', url: 'https://winwithoutwar.org/' },
-    { name: 'Heritage Foundation — Defense', url: 'https://www.heritage.org/defense' },
+    { name: 'Veterans of Foreign Wars', url: 'https://www.vfw.org/' },
+    { name: 'RAND National Security', url: 'https://www.rand.org/topics/national-security.html' },
+    { name: 'Blue Star Families', url: 'https://bluestarfam.org/' },
   ],
   'Labor and Employment': [
-    { name: 'AFL-CIO', url: 'https://aflcio.org/' },
-    { name: 'U.S. Chamber of Commerce', url: 'https://www.uschamber.com/' },
+    { name: 'U.S. Department of Labor', url: 'https://www.dol.gov/' },
+    { name: 'National Employment Law Project', url: 'https://www.nelp.org/' },
+    { name: 'Society for Human Resource Management', url: 'https://www.shrm.org/' },
   ],
   'Science, Technology, Communications': [
     { name: 'Electronic Frontier Foundation', url: 'https://www.eff.org/' },
-    { name: 'TechFreedom', url: 'https://techfreedom.org/' },
+    { name: 'Information Technology and Innovation Foundation', url: 'https://itif.org/' },
+    { name: 'Center for Democracy and Technology', url: 'https://cdt.org/' },
+  ],
+  'Housing and Community Development': [
+    { name: 'National Low Income Housing Coalition', url: 'https://nlihc.org/' },
+    { name: 'Habitat for Humanity', url: 'https://www.habitat.org/' },
+    { name: 'Urban Institute — Housing', url: 'https://www.urban.org/policy-centers/housing-finance-policy-center' },
+  ],
+  'Social Welfare': [
+    { name: 'AARP', url: 'https://www.aarp.org/' },
+    { name: 'Center on Budget and Policy Priorities', url: 'https://www.cbpp.org/' },
+    { name: 'National Academy of Social Insurance', url: 'https://www.nasi.org/' },
+  ],
+  'Families': [
+    { name: 'National Partnership for Women & Families', url: 'https://nationalpartnership.org/' },
+    { name: 'Child Welfare League of America', url: 'https://www.cwla.org/' },
+    { name: 'Zero to Three', url: 'https://www.zerotothree.org/' },
   ],
 };
 
