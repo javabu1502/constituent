@@ -3,6 +3,7 @@ import { BRAND } from '@/lib/constants';
 import { createClient } from '@/lib/supabase/server';
 import { UserMenu } from './UserMenu';
 import { MobileNav } from './MobileNav';
+import { NavDropdown } from './NavDropdown';
 import { SearchButton } from '@/components/search/SearchButton';
 
 export async function Header() {
@@ -28,48 +29,30 @@ export async function Header() {
             >
               Contact Your Reps
             </Link>
-            <Link
-              href="/states"
-              className="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
-            >
-              States
-            </Link>
-            <Link
-              href="/news"
-              className="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
-            >
-              News
-            </Link>
-            <Link
-              href="/trends"
-              className="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
-            >
-              Trends
-            </Link>
-            <Link
-              href="/vote"
-              className="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
-            >
-              Vote
-            </Link>
-            <Link
-              href="/guides"
-              className="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
-            >
-              Guides
-            </Link>
-            <Link
-              href="/regulations"
-              className="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
-            >
-              Regulations
-            </Link>
-            <Link
-              href="/campaigns"
-              className="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
-            >
-              Campaigns
-            </Link>
+            <NavDropdown
+              label="Explore"
+              items={[
+                { href: '/states', label: 'States' },
+                { href: '/legislators', label: 'Legislators' },
+                { href: '/news', label: 'News' },
+                { href: '/trends', label: 'Trends' },
+              ]}
+            />
+            <NavDropdown
+              label="Take Action"
+              items={[
+                { href: '/vote', label: 'Vote' },
+                { href: '/regulations', label: 'Regulations' },
+                { href: '/campaigns', label: 'Campaigns' },
+              ]}
+            />
+            <NavDropdown
+              label="Learn"
+              items={[
+                { href: '/guides', label: 'Guides' },
+                { href: '/about', label: 'About' },
+              ]}
+            />
             <UserMenu user={user} />
           </nav>
 

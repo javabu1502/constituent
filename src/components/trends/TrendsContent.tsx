@@ -27,6 +27,19 @@ interface TrendsData {
   userState?: string;
 }
 
+interface TopRep {
+  legislatorId: string;
+  name: string;
+  party: string;
+  chamber: string;
+  count: number;
+}
+
+interface TopRepsData {
+  senate: TopRep[];
+  house: TopRep[];
+}
+
 type Period = 'all' | 'month' | 'week';
 type Level = 'all' | 'federal' | 'state';
 
@@ -80,13 +93,6 @@ function IssueBar({
               <span className="text-sm text-gray-500 dark:text-gray-400">
                 {issue.count.toLocaleString()}
               </span>
-              <Link
-                href={`/contact?issue=${encodeURIComponent(issue.issue_area)}`}
-                onClick={(e) => e.stopPropagation()}
-                className="text-xs text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 font-medium"
-              >
-                Write about this
-              </Link>
               {hasSubtopics && <ChevronIcon open={expanded} />}
             </div>
           </div>
@@ -110,17 +116,9 @@ function IssueBar({
                   <span className="text-xs font-medium text-gray-700 dark:text-gray-300 truncate">
                     {sub.name}
                   </span>
-                  <div className="flex items-center gap-2 ml-2 shrink-0">
-                    <span className="text-xs text-gray-400 dark:text-gray-500">
-                      {sub.count.toLocaleString()}
-                    </span>
-                    <Link
-                      href={`/contact?issue=${encodeURIComponent(sub.name)}`}
-                      className="text-xs text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 font-medium"
-                    >
-                      Write about this
-                    </Link>
-                  </div>
+                  <span className="text-xs text-gray-400 dark:text-gray-500 ml-2 shrink-0">
+                    {sub.count.toLocaleString()}
+                  </span>
                 </div>
                 <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1.5">
                   <div
@@ -142,6 +140,7 @@ export function TrendsContent() {
   const [loading, setLoading] = useState(true);
   const [period, setPeriod] = useState<Period>('all');
   const [level, setLevel] = useState<Level>('all');
+  const [topReps, setTopReps] = useState<TopRepsData | null>(null);
 
   const fetchData = useCallback(async () => {
     setLoading(true);
@@ -160,6 +159,13 @@ export function TrendsContent() {
   useEffect(() => {
     fetchData();
   }, [fetchData]);
+
+  useEffect(() => {
+    fetch('/api/trends/top-reps')
+      .then((r) => r.json())
+      .then((json) => setTopReps(json))
+      .catch(() => {});
+  }, []);
 
   const maxCount = data?.issues?.[0]?.count ?? 1;
   const maxStateCount = data?.stateIssues?.[0]?.count ?? 1;
@@ -291,6 +297,77 @@ export function TrendsContent() {
                   gradientTo="to-purple-500"
                 />
               ))}
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Most Contacted Representatives */}
+      {topReps && (topReps.senate.length > 0 || topReps.house.length > 0) && (
+        <div className="space-y-6">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Most Contacted Representatives</h2>
+
+          {topReps.senate.length > 0 && (
+            <div>
+              <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-3">Senate</h3>
+              <div className="space-y-1.5">
+                {topReps.senate.map((rep, i) => (
+                  <Link
+                    key={rep.legislatorId}
+                    href={`/rep/${rep.legislatorId}`}
+                    className="flex items-center gap-3 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-3 hover:border-purple-300 dark:hover:border-purple-600 transition-colors"
+                  >
+                    <span className="text-sm font-medium text-gray-400 dark:text-gray-500 w-6 text-right shrink-0">
+                      {i + 1}
+                    </span>
+                    <span className="text-sm font-medium text-gray-900 dark:text-white flex-1 truncate">
+                      {rep.name}
+                    </span>
+                    <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${
+                      rep.party === 'Democratic' ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400' :
+                      rep.party === 'Republican' ? 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400' :
+                      'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'
+                    }`}>
+                      {rep.party === 'Democratic' ? 'D' : rep.party === 'Republican' ? 'R' : 'I'}
+                    </span>
+                    <span className="text-sm text-gray-500 dark:text-gray-400 shrink-0">
+                      {rep.count.toLocaleString()} messages
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {topReps.house.length > 0 && (
+            <div>
+              <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-3">House</h3>
+              <div className="space-y-1.5">
+                {topReps.house.map((rep, i) => (
+                  <Link
+                    key={rep.legislatorId}
+                    href={`/rep/${rep.legislatorId}`}
+                    className="flex items-center gap-3 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-3 hover:border-purple-300 dark:hover:border-purple-600 transition-colors"
+                  >
+                    <span className="text-sm font-medium text-gray-400 dark:text-gray-500 w-6 text-right shrink-0">
+                      {i + 1}
+                    </span>
+                    <span className="text-sm font-medium text-gray-900 dark:text-white flex-1 truncate">
+                      {rep.name}
+                    </span>
+                    <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${
+                      rep.party === 'Democratic' ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400' :
+                      rep.party === 'Republican' ? 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400' :
+                      'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'
+                    }`}>
+                      {rep.party === 'Democratic' ? 'D' : rep.party === 'Republican' ? 'R' : 'I'}
+                    </span>
+                    <span className="text-sm text-gray-500 dark:text-gray-400 shrink-0">
+                      {rep.count.toLocaleString()} messages
+                    </span>
+                  </Link>
+                ))}
+              </div>
             </div>
           )}
         </div>

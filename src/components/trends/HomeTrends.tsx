@@ -8,53 +8,47 @@ interface Issue {
   count: number;
 }
 
-interface Stats {
-  totalMessages: number;
-  statesRepresented: number;
+interface TopRep {
+  legislatorId: string;
+  name: string;
+  party: string;
+  chamber: string;
+  count: number;
 }
 
 export function HomeTrends() {
   const [issues, setIssues] = useState<Issue[]>([]);
-  const [stats, setStats] = useState<Stats | null>(null);
   const [loaded, setLoaded] = useState(false);
+  const [topReps, setTopReps] = useState<TopRep[]>([]);
 
   useEffect(() => {
     fetch('/api/trends?period=all&level=all')
       .then((r) => r.json())
       .then((data) => {
         setIssues((data.issues || []).slice(0, 5));
-        setStats(data.stats || null);
         setLoaded(true);
       })
       .catch(() => setLoaded(true));
+
+    fetch('/api/trends/top-reps')
+      .then((r) => r.json())
+      .then((data) => {
+        // Combine senate + house, sort by count, take top 5
+        const all = [...(data.senate || []), ...(data.house || [])]
+          .sort((a: TopRep, b: TopRep) => b.count - a.count)
+          .slice(0, 5);
+        setTopReps(all);
+      })
+      .catch(() => {});
   }, []);
 
   const maxCount = issues[0]?.count ?? 1;
 
-  if (loaded && issues.length === 0 && !stats) return null;
+  if (loaded && issues.length === 0) return null;
 
   return (
     <section className="py-16 sm:py-20 px-4 bg-white dark:bg-gray-900">
       <div className="max-w-3xl mx-auto">
-        {/* Social proof stats */}
-        {stats && stats.totalMessages > 0 && (
-          <div className="flex items-center justify-center gap-8 sm:gap-12 mb-10">
-            <div className="text-center">
-              <div className="text-3xl sm:text-4xl font-bold text-purple-600 dark:text-purple-400">
-                {stats.totalMessages.toLocaleString()}
-              </div>
-              <div className="text-sm text-gray-500 dark:text-gray-400 mt-1">Actions Taken</div>
-            </div>
-            <div className="w-px h-12 bg-gray-200 dark:bg-gray-700" />
-            <div className="text-center">
-              <div className="text-3xl sm:text-4xl font-bold text-purple-600 dark:text-purple-400">
-                {stats.statesRepresented}
-              </div>
-              <div className="text-sm text-gray-500 dark:text-gray-400 mt-1">States</div>
-            </div>
-          </div>
-        )}
-
         <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white text-center mb-4">
           What People Are Writing About
         </h2>
@@ -83,17 +77,9 @@ export function HomeTrends() {
                     <span className="text-sm font-medium text-gray-900 dark:text-white truncate">
                       {issue.issue_area}
                     </span>
-                    <div className="flex items-center ml-2 shrink-0">
-                      <span className="text-sm text-gray-500 dark:text-gray-400">
-                        {issue.count.toLocaleString()}
-                      </span>
-                      <Link
-                        href={`/contact?issue=${encodeURIComponent(issue.issue_area)}`}
-                        className="text-xs text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 font-medium ml-2 shrink-0"
-                      >
-                        Write about this
-                      </Link>
-                    </div>
+                    <span className="text-sm text-gray-500 dark:text-gray-400 ml-2 shrink-0">
+                      {issue.count.toLocaleString()}
+                    </span>
                   </div>
                   <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
                     <div
@@ -104,6 +90,34 @@ export function HomeTrends() {
                 </div>
               </div>
             ))}
+          </div>
+        )}
+
+        {/* Top Contacted Reps */}
+        {topReps.length > 0 && (
+          <div className="mt-8">
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
+              Top Contacted Representatives
+            </h3>
+            <div className="flex flex-wrap gap-2">
+              {topReps.map((rep) => (
+                <Link
+                  key={rep.legislatorId}
+                  href={`/rep/${rep.legislatorId}`}
+                  className="inline-flex items-center gap-1.5 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-full px-3 py-1.5 hover:border-purple-300 dark:hover:border-purple-600 transition-colors"
+                >
+                  <span className={`w-2 h-2 rounded-full ${
+                    rep.party === 'Democratic' ? 'bg-blue-500' :
+                    rep.party === 'Republican' ? 'bg-red-500' :
+                    'bg-gray-400'
+                  }`} />
+                  <span className="text-sm font-medium text-gray-900 dark:text-white">{rep.name}</span>
+                  <span className="text-xs text-gray-400 dark:text-gray-500">
+                    {rep.chamber === 'Senate' ? 'Sen.' : 'Rep.'}
+                  </span>
+                </Link>
+              ))}
+            </div>
           </div>
         )}
 
