@@ -3,6 +3,7 @@ import { stripTags, extractJSON, cleanText } from '@/lib/claude';
 import { getCommitteesForMember } from '@/lib/legislators';
 import { z } from 'zod';
 import { generateMessageSchema, parseBody } from '@/lib/schemas';
+import { generateLimiter, getClientIp } from '@/lib/rate-limit';
 
 type GenerateRequest = z.infer<typeof generateMessageSchema>;
 type OfficialInput = GenerateRequest['officials'][number];
@@ -256,6 +257,15 @@ Respond with ONLY this JSON:
 }
 
 export async function POST(request: NextRequest) {
+  const ip = getClientIp(request);
+  const { success, retryAfter } = generateLimiter.check(ip);
+  if (!success) {
+    return NextResponse.json(
+      { error: 'Too many requests' },
+      { status: 429, headers: { 'Retry-After': String(retryAfter) } }
+    );
+  }
+
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) {
     return NextResponse.json(

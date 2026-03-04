@@ -5,6 +5,8 @@
  * Returns a ReadableStream of plain text chunks.
  */
 
+import { env } from './env';
+
 interface Message {
   role: 'user' | 'assistant';
   content: string;
@@ -15,10 +17,7 @@ export function callClaudeStream(
   messages: Message[],
   maxTokens = 800
 ): ReadableStream<Uint8Array> {
-  const apiKey = process.env.ANTHROPIC_API_KEY;
-  if (!apiKey) {
-    throw new Error('ANTHROPIC_API_KEY is not configured');
-  }
+  const { ANTHROPIC_API_KEY, CLAUDE_MODEL } = env();
 
   const encoder = new TextEncoder();
 
@@ -29,11 +28,11 @@ export function callClaudeStream(
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'x-api-key': apiKey,
+            'x-api-key': ANTHROPIC_API_KEY,
             'anthropic-version': '2023-06-01',
           },
           body: JSON.stringify({
-            model: process.env.CLAUDE_MODEL || 'claude-sonnet-4-20250514',
+            model: CLAUDE_MODEL || 'claude-sonnet-4-20250514',
             max_tokens: maxTokens,
             system: systemPrompt,
             messages,

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useMemo, useRef } from 'react';
 import type { ContactState, ContactAction } from './ContactFlow';
 import type { Official } from '@/lib/types';
 import { Button } from '@/components/ui/Button';
@@ -1578,6 +1578,130 @@ function TopicInfoPanel({ issueCategory, issue, onSelectAsk }: {
   );
 }
 
+// Parse markdown into React elements (bold + links)
+function renderMarkdown(text: string): React.ReactNode[] {
+  const parts = text.split(/(\*\*[^*]+\*\*|\[[^\]]+\]\([^)]+\))/g);
+  return parts.map((part, j) => {
+    if (/^\*\*[^*]+\*\*$/.test(part)) {
+      return <strong key={j}>{part.replace(/\*\*/g, '')}</strong>;
+    }
+    const linkMatch = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+    if (linkMatch) {
+      return (
+        <a
+          key={j}
+          href={linkMatch[2]}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-purple-600 dark:text-purple-400 underline hover:text-purple-800 dark:hover:text-purple-200"
+        >
+          {linkMatch[1]}
+        </a>
+      );
+    }
+    return <span key={j}>{part}</span>;
+  });
+}
+
+interface ParsedLine {
+  type: 'header' | 'bullet' | 'text';
+  text: string;
+  isLegislation: boolean;
+}
+
+function parseResearchContent(content: string): ParsedLine[] {
+  const lines: ParsedLine[] = [];
+  let currentSection = '';
+
+  for (const line of content.split('\n')) {
+    const trimmed = line.trim();
+    if (!trimmed) continue;
+
+    if (/^\*\*[^*]+\*\*$/.test(trimmed)) {
+      currentSection = trimmed.replace(/\*\*/g, '').toLowerCase();
+      lines.push({ type: 'header', text: trimmed.replace(/\*\*/g, ''), isLegislation: false });
+    } else if (trimmed.startsWith('- ')) {
+      lines.push({ type: 'bullet', text: trimmed.slice(2), isLegislation: currentSection.includes('legislation') });
+    } else {
+      lines.push({ type: 'text', text: trimmed, isLegislation: false });
+    }
+  }
+  return lines;
+}
+
+function ResearchResults({
+  content,
+  dispatch,
+  ask,
+  personalWhy,
+}: {
+  content: string;
+  dispatch: React.Dispatch<ContactAction>;
+  ask: string;
+  personalWhy: string;
+}) {
+  const parsed = useMemo(() => parseResearchContent(content), [content]);
+
+  return (
+    <div className="space-y-1.5">
+      {parsed.map((line, i) => {
+        if (line.type === 'header') {
+          return (
+            <p key={i} className="font-semibold text-purple-800 dark:text-purple-200 pt-1">
+              {line.text}
+            </p>
+          );
+        }
+
+        if (line.type === 'bullet') {
+          const handleUse = () => {
+            if (line.isLegislation) {
+              const billMatch = line.text.match(/^([A-Z]+\s+\d+):\s*(.+?)(?:\s*\(Latest:|$)/);
+              const insertText = billMatch
+                ? `I urge you to support ${billMatch[1]} - ${billMatch[2].trim()}`
+                : line.text.replace(/\[.*?\]\(.*?\)/g, '').trim();
+
+              if (ask.trim()) {
+                dispatch({ type: 'SET_ASK', payload: ask + '\n\n' + insertText });
+              } else {
+                dispatch({ type: 'SET_ASK', payload: insertText });
+              }
+            } else {
+              const cleanText = line.text
+                .replace(/\*\*/g, '')
+                .replace(/\[.*?\]\(.*?\)/g, '')
+                .trim();
+
+              if (personalWhy.trim()) {
+                dispatch({ type: 'SET_PERSONAL_WHY', payload: personalWhy + '\n\n' + cleanText });
+              } else {
+                dispatch({ type: 'SET_PERSONAL_WHY', payload: cleanText });
+              }
+            }
+          };
+
+          return (
+            <div key={i} className="flex gap-1.5 pl-1 group">
+              <span className="text-purple-500 shrink-0">&bull;</span>
+              <span className="flex-1">{renderMarkdown(line.text)}</span>
+              <button
+                type="button"
+                onClick={handleUse}
+                title={line.isLegislation ? 'Add to your ask' : 'Add to your story'}
+                className="shrink-0 px-1.5 py-0.5 text-xs text-purple-600 dark:text-purple-400 bg-purple-100 dark:bg-purple-900/30 rounded hover:bg-purple-200 dark:hover:bg-purple-800/50 opacity-0 group-hover:opacity-100 transition-opacity"
+              >
+                +
+              </button>
+            </div>
+          );
+        }
+
+        return <p key={i}>{renderMarkdown(line.text)}</p>;
+      })}
+    </div>
+  );
+}
+
 export function TopicStep({ state, dispatch, onBack }: TopicStepProps) {
   const { selectedReps, userName, issue, ask, personalWhy, contactMethod } = state;
   const [showStoryHelp, setShowStoryHelp] = useState(false);
@@ -1885,44 +2009,17 @@ export function TopicStep({ state, dispatch, onBack }: TopicStepProps) {
 
               {researchContent && (
                 <div className="mt-2">
-                  <div className="p-3 bg-white dark:bg-gray-700 border border-purple-200 dark:border-purple-600 rounded-lg text-xs text-gray-800 dark:text-gray-200 space-y-1.5">
-                    {researchContent.split('\n').map((line, i) => {
-                      const trimmed = line.trim();
-                      if (!trimmed) return null;
-                      // Bold-only lines are section headers
-                      if (/^\*\*[^*]+\*\*$/.test(trimmed)) {
-                        return <p key={i} className="font-semibold text-purple-800 dark:text-purple-200 pt-1">{trimmed.replace(/\*\*/g, '')}</p>;
-                      }
-                      // Bullet lines
-                      if (trimmed.startsWith('- ')) {
-                        const content = trimmed.slice(2);
-                        const parts = content.split(/(\*\*[^*]+\*\*)/g);
-                        return (
-                          <div key={i} className="flex gap-1.5 pl-1">
-                            <span className="text-purple-500 shrink-0">&bull;</span>
-                            <span>
-                              {parts.map((part, j) =>
-                                /^\*\*[^*]+\*\*$/.test(part)
-                                  ? <strong key={j}>{part.replace(/\*\*/g, '')}</strong>
-                                  : <span key={j}>{part}</span>
-                              )}
-                            </span>
-                          </div>
-                        );
-                      }
-                      // Plain text lines — also render inline bold
-                      const parts = trimmed.split(/(\*\*[^*]+\*\*)/g);
-                      return (
-                        <p key={i}>
-                          {parts.map((part, j) =>
-                            /^\*\*[^*]+\*\*$/.test(part)
-                              ? <strong key={j}>{part.replace(/\*\*/g, '')}</strong>
-                              : <span key={j}>{part}</span>
-                          )}
-                        </p>
-                      );
-                    })}
+                  <div className="p-3 bg-white dark:bg-gray-700 border border-purple-200 dark:border-purple-600 rounded-lg text-xs text-gray-800 dark:text-gray-200">
+                    <ResearchResults
+                      content={researchContent}
+                      dispatch={dispatch}
+                      ask={ask}
+                      personalWhy={personalWhy}
+                    />
                   </div>
+                  <p className="mt-1 text-xs text-purple-500 dark:text-purple-500">
+                    Hover over a bullet and click + to add it to your message.
+                  </p>
                   <button
                     type="button"
                     onClick={() => { setResearchContent(''); setResearchError(''); }}

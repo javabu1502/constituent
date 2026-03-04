@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { callClaude, extractJSON, cleanText } from '@/lib/claude';
 import { generateCommentSchema, parseBody } from '@/lib/schemas';
+import { generateLimiter, getClientIp } from '@/lib/rate-limit';
 
 /**
  * POST /api/generate-comment
@@ -10,6 +11,15 @@ import { generateCommentSchema, parseBody } from '@/lib/schemas';
  */
 
 export async function POST(request: NextRequest) {
+  const ip = getClientIp(request);
+  const { success, retryAfter } = generateLimiter.check(ip);
+  if (!success) {
+    return NextResponse.json(
+      { error: 'Too many requests' },
+      { status: 429, headers: { 'Retry-After': String(retryAfter) } }
+    );
+  }
+
   if (!process.env.ANTHROPIC_API_KEY) {
     return NextResponse.json(
       { error: 'AI comment generation is not configured' },

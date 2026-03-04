@@ -1,8 +1,18 @@
 import { callClaudeStream } from '@/lib/claude-stream';
 import { CHAT_SYSTEM_PROMPT } from '@/lib/chat-system-prompt';
 import { chatRequestSchema, parseBody } from '@/lib/schemas';
+import { chatLimiter, getClientIp } from '@/lib/rate-limit';
 
 export async function POST(request: Request) {
+  const ip = getClientIp(request);
+  const { success, retryAfter } = chatLimiter.check(ip);
+  if (!success) {
+    return new Response('Too many requests', {
+      status: 429,
+      headers: { 'Retry-After': String(retryAfter) },
+    });
+  }
+
   if (!process.env.ANTHROPIC_API_KEY) {
     return new Response('AI assistant is temporarily unavailable', { status: 503 });
   }

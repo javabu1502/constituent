@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { callClaude, extractJSON, stripTags } from '@/lib/claude';
 import { createAdminClient } from '@/lib/supabase';
 import type { BillSummary } from '@/lib/types';
+import { summaryLimiter, getClientIp } from '@/lib/rate-limit';
 
 interface BillSummaryRequest {
   bill_number: string;
@@ -29,6 +30,15 @@ Guidelines:
 const RELEVANCE_SYSTEM_PROMPT = `You are a civic engagement assistant. In 1-2 sentences, connect this bill to the citizen's concerns. Respond with ONLY JSON: {"personal_relevance": "..."}`;
 
 export async function POST(request: NextRequest) {
+  const ip = getClientIp(request);
+  const { success, retryAfter } = summaryLimiter.check(ip);
+  if (!success) {
+    return NextResponse.json(
+      { error: 'Too many requests' },
+      { status: 429, headers: { 'Retry-After': String(retryAfter) } }
+    );
+  }
+
   let body: BillSummaryRequest;
   try {
     body = await request.json();

@@ -1,13 +1,8 @@
 import { createClient } from '@supabase/supabase-js';
+import { env } from './env';
 
 // Admin client using the secret key — bypasses RLS, use in API routes only
 export function createAdminClient() {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const key = process.env.SUPABASE_SECRET_KEY;
-
-  if (!url || !key) {
-    throw new Error('Missing NEXT_PUBLIC_SUPABASE_URL or SUPABASE_SECRET_KEY');
-  }
-
-  return createClient(url, key);
+  const { NEXT_PUBLIC_SUPABASE_URL, SUPABASE_SECRET_KEY } = env();
+  return createClient(NEXT_PUBLIC_SUPABASE_URL, SUPABASE_SECRET_KEY);
 }

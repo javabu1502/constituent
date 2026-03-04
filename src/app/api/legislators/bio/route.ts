@@ -3,6 +3,7 @@ import { getFederalLegislatorBio, getCommitteesForMember } from '@/lib/legislato
 import { getStateLegislators } from '@/lib/state-legislators';
 import { createAdminClient } from '@/lib/supabase';
 import { callClaude } from '@/lib/claude';
+import { summaryLimiter, getClientIp } from '@/lib/rate-limit';
 
 const CACHE_TTL_MS = 30 * 24 * 60 * 60 * 1000; // 30 days
 const PUBLIC_USER_ID = '00000000-0000-0000-0000-000000000000'; // nil UUID for shared/public cache
@@ -71,6 +72,15 @@ async function fetchStateCommittees(personId: string): Promise<string[]> {
 }
 
 export async function GET(request: NextRequest) {
+  const ip = getClientIp(request);
+  const { success, retryAfter } = summaryLimiter.check(ip);
+  if (!success) {
+    return NextResponse.json(
+      { error: 'Too many requests' },
+      { status: 429, headers: { 'Retry-After': String(retryAfter) } }
+    );
+  }
+
   const { searchParams } = new URL(request.url);
   const repId = searchParams.get('repId');
   const level = searchParams.get('level') as 'federal' | 'state' | null;

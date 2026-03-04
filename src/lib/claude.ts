@@ -5,6 +5,8 @@
  * for use across API routes that interact with the Anthropic API.
  */
 
+import { env } from './env';
+
 export function stripTags(text: string): string {
   let cleaned = text.replace(/<[^>]+\/>/g, '');
   cleaned = cleaned.replace(/<search>[\s\S]*?<\/search>/gi, '');
@@ -78,20 +80,17 @@ export async function callClaude(
   userPrompt: string,
   maxTokens = 1200
 ): Promise<string> {
-  const apiKey = process.env.ANTHROPIC_API_KEY;
-  if (!apiKey) {
-    throw new Error('ANTHROPIC_API_KEY is not configured');
-  }
+  const { ANTHROPIC_API_KEY, CLAUDE_MODEL } = env();
 
   const response = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'x-api-key': apiKey,
+      'x-api-key': ANTHROPIC_API_KEY,
       'anthropic-version': '2023-06-01',
     },
     body: JSON.stringify({
-      model: process.env.CLAUDE_MODEL || 'claude-sonnet-4-20250514',
+      model: CLAUDE_MODEL || 'claude-sonnet-4-20250514',
       max_tokens: maxTokens,
       system: systemPrompt,
       messages: [{ role: 'user', content: userPrompt }],
