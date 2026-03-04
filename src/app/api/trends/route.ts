@@ -2,41 +2,10 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createAdminClient } from '@/lib/supabase';
 import { createClient } from '@/lib/supabase/server';
 
-export async function GET(req: NextRequest) {
-  const { searchParams } = req.nextUrl;
-  const period = searchParams.get('period') || 'all';
-  const level = searchParams.get('level') || 'all';
-  const stateParam = searchParams.get('state');
-
-  const admin = createAdminClient();
-
-  // Build filtered query for issue rankings
-  let issueQuery = admin
-    .from('messages')
-    .select('issue_area, issue_subtopic');
-
-  if (period === 'week') {
-    const since = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
-    issueQuery = issueQuery.gte('created_at', since);
-  } else if (period === 'month') {
-    const since = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
-    issueQuery = issueQuery.gte('created_at', since);
-  }
-
-  if (level !== 'all') {
-    issueQuery = issueQuery.eq('legislator_level', level);
-  }
-
-  if (stateParam) {
-    issueQuery = issueQuery.eq('advocate_state', stateParam);
-  }
-
-  const { data: filteredMessages } = await issueQuery;
-
-  // Aggregate issue counts and subtopics
+function aggregateIssues(messages: { issue_area: string; issue_subtopic: string | null }[]) {
   const issueCounts: Record<string, number> = {};
   const subtopicCounts: Record<string, Record<string, number>> = {};
-  for (const msg of filteredMessages || []) {
+  for (const msg of messages) {
     const area = msg.issue_area;
     if (area) {
       issueCounts[area] = (issueCounts[area] || 0) + 1;
@@ -47,7 +16,7 @@ export async function GET(req: NextRequest) {
       }
     }
   }
-  const issues = Object.entries(issueCounts)
+  return Object.entries(issueCounts)
     .map(([issue_area, count]) => ({
       issue_area,
       count,
@@ -58,21 +27,48 @@ export async function GET(req: NextRequest) {
         : [],
     }))
     .sort((a, b) => b.count - a.count);
+}
 
-  // Stats — always unfiltered
-  const { count: totalMessages } = await admin
+function buildTimeFilter(period: string): string | null {
+  if (period === 'week') return new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
+  if (period === 'month') return new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
+  return null;
+}
+
+export async function GET(req: NextRequest) {
+  const { searchParams } = req.nextUrl;
+  const period = searchParams.get('period') || 'all';
+  const level = searchParams.get('level') || 'all';
+  const stateParam = searchParams.get('state');
+
+  const admin = createAdminClient();
+  const since = buildTimeFilter(period);
+
+  // Build filtered query for issue rankings
+  let issueQuery = admin
     .from('messages')
-    .select('*', { count: 'exact', head: true });
+    .select('issue_area, issue_subtopic');
 
+  if (since) issueQuery = issueQuery.gte('created_at', since);
+  if (level !== 'all') issueQuery = issueQuery.eq('legislator_level', level);
+  if (stateParam) issueQuery = issueQuery.eq('advocate_state', stateParam);
+
+  // Stats queries — run all in parallel with the issues query
   const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
-  const { count: messagesThisMonth } = await admin
-    .from('messages')
-    .select('*', { count: 'exact', head: true })
-    .gte('created_at', thirtyDaysAgo);
 
-  const { data: stateData } = await admin
-    .from('messages')
-    .select('advocate_state');
+  const [
+    { data: filteredMessages },
+    { count: totalMessages },
+    { count: messagesThisMonth },
+    { data: stateData },
+  ] = await Promise.all([
+    issueQuery,
+    admin.from('messages').select('*', { count: 'exact', head: true }),
+    admin.from('messages').select('*', { count: 'exact', head: true }).gte('created_at', thirtyDaysAgo),
+    admin.from('messages').select('advocate_state').limit(10000),
+  ]);
+
+  const issues = aggregateIssues(filteredMessages || []);
 
   const uniqueStates = new Set(
     (stateData || []).map((m) => m.advocate_state).filter(Boolean)
@@ -85,7 +81,7 @@ export async function GET(req: NextRequest) {
   };
 
   // State-specific data for authenticated users
-  let stateIssues: { issue_area: string; count: number; subtopics: { name: string; count: number }[] }[] | undefined;
+  let stateIssues: ReturnType<typeof aggregateIssues> | undefined;
   let userState: string | undefined;
 
   try {
@@ -107,49 +103,23 @@ export async function GET(req: NextRequest) {
           .select('issue_area, issue_subtopic')
           .eq('advocate_state', profile.state);
 
-        if (period === 'week') {
-          const since = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
-          stateQuery = stateQuery.gte('created_at', since);
-        } else if (period === 'month') {
-          const since = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
-          stateQuery = stateQuery.gte('created_at', since);
-        }
-
-        if (level !== 'all') {
-          stateQuery = stateQuery.eq('legislator_level', level);
-        }
+        if (since) stateQuery = stateQuery.gte('created_at', since);
+        if (level !== 'all') stateQuery = stateQuery.eq('legislator_level', level);
 
         const { data: stateMessages } = await stateQuery;
-
-        const stateCounts: Record<string, number> = {};
-        const stateSubCounts: Record<string, Record<string, number>> = {};
-        for (const msg of stateMessages || []) {
-          const area = msg.issue_area;
-          if (area) {
-            stateCounts[area] = (stateCounts[area] || 0) + 1;
-            const sub = msg.issue_subtopic;
-            if (sub) {
-              if (!stateSubCounts[area]) stateSubCounts[area] = {};
-              stateSubCounts[area][sub] = (stateSubCounts[area][sub] || 0) + 1;
-            }
-          }
-        }
-        stateIssues = Object.entries(stateCounts)
-          .map(([issue_area, count]) => ({
-            issue_area,
-            count,
-            subtopics: stateSubCounts[issue_area]
-              ? Object.entries(stateSubCounts[issue_area])
-                  .map(([name, cnt]) => ({ name, count: cnt }))
-                  .sort((a, b) => b.count - a.count)
-              : [],
-          }))
-          .sort((a, b) => b.count - a.count);
+        stateIssues = aggregateIssues(stateMessages || []);
       }
     }
   } catch {
     // Anonymous user — no state data
   }
 
-  return NextResponse.json({ issues, stats, stateIssues, userState });
+  return NextResponse.json(
+    { issues, stats, stateIssues, userState },
+    {
+      headers: {
+        'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=600',
+      },
+    }
+  );
 }

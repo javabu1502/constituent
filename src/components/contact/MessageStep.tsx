@@ -30,65 +30,64 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
   const currentRep = selectedReps[reviewIndex];
   const currentMessage = currentRep ? messages[currentRep.name] : null;
 
+  const generateMessages = async () => {
+    setIsGenerating(true);
+    dispatch({ type: 'SET_ERROR', payload: null });
+
+    try {
+      const response = await fetch('/api/generate-message', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          officials: selectedReps.map(o => ({
+            name: o.name,
+            lastName: o.lastName,
+            stafferFirstName: o.stafferFirstName,
+            bioguideId: o.level === 'federal' ? o.id : undefined,
+            title: o.title,
+            party: o.party,
+            state: o.state,
+            level: o.level,
+            district: o.district,
+          })),
+          issue: issue.trim(),
+          ask: ask.trim(),
+          personalWhy: personalWhy.trim() || undefined,
+          senderName: userName,
+          address: address ? {
+            street: address.street,
+            city: address.city,
+            state: address.state,
+            zip: address.zip,
+          } : undefined,
+          contactMethod,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to generate messages');
+      }
+
+      // Store per-official messages keyed by name
+      const msgMap: Record<string, OfficialMessage> = {};
+      for (const msg of data.messages) {
+        msgMap[msg.officialName] = { subject: msg.subject, body: msg.body };
+      }
+      dispatch({ type: 'SET_MESSAGES', payload: msgMap });
+    } catch (err) {
+      console.error('Error generating messages:', err);
+      dispatch({ type: 'SET_ERROR', payload: err instanceof Error ? err.message : 'Failed to generate messages' });
+    } finally {
+      setIsGenerating(false);
+    }
+  };
+
   // Generate messages on mount if not already present
   useEffect(() => {
     const repsNeedingMessages = selectedReps.filter(rep => !messages[rep.name]);
     if (repsNeedingMessages.length === 0) return;
-
-    const generateMessages = async () => {
-      setIsGenerating(true);
-      dispatch({ type: 'SET_ERROR', payload: null });
-
-      try {
-        const response = await fetch('/api/generate-message', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            officials: selectedReps.map(o => ({
-              name: o.name,
-              lastName: o.lastName,
-              stafferFirstName: o.stafferFirstName,
-              bioguideId: o.level === 'federal' ? o.id : undefined,
-              title: o.title,
-              party: o.party,
-              state: o.state,
-              level: o.level,
-              district: o.district,
-            })),
-            issue: issue.trim(),
-            ask: ask.trim(),
-            personalWhy: personalWhy.trim() || undefined,
-            senderName: userName,
-            address: address ? {
-              street: address.street,
-              city: address.city,
-              state: address.state,
-              zip: address.zip,
-            } : undefined,
-            contactMethod,
-          }),
-        });
-
-        const data = await response.json();
-
-        if (!response.ok) {
-          throw new Error(data.error || 'Failed to generate messages');
-        }
-
-        // Store per-official messages keyed by name
-        const msgMap: Record<string, OfficialMessage> = {};
-        for (const msg of data.messages) {
-          msgMap[msg.officialName] = { subject: msg.subject, body: msg.body };
-        }
-        dispatch({ type: 'SET_MESSAGES', payload: msgMap });
-      } catch (err) {
-        console.error('Error generating messages:', err);
-        dispatch({ type: 'SET_ERROR', payload: err instanceof Error ? err.message : 'Failed to generate messages' });
-      } finally {
-        setIsGenerating(false);
-      }
-    };
-
     generateMessages();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -161,7 +160,17 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
 
       {state.error && (
         <div className="mb-4 p-4 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 rounded-xl">
-          <p className="text-sm text-red-700 dark:text-red-300">{state.error}</p>
+          <div className="flex items-center justify-between gap-3">
+            <p className="text-sm text-red-700 dark:text-red-300">{state.error}</p>
+            {Object.keys(messages).length < selectedReps.length && (
+              <button
+                onClick={generateMessages}
+                className="shrink-0 px-3 py-1.5 text-sm font-medium text-red-700 dark:text-red-300 bg-red-100 dark:bg-red-900/50 hover:bg-red-200 dark:hover:bg-red-900/70 rounded-lg transition-colors"
+              >
+                Try Again
+              </button>
+            )}
+          </div>
         </div>
       )}
 
