@@ -8,7 +8,6 @@ import { getStateLegislators, toOfficial } from '@/lib/state-legislators';
 import type { Official } from '@/lib/types';
 import voterInfoData from '@/data/voter-info.json';
 import stateMetaData from '@/data/state-meta.json';
-import advocacyOrgsData from '@/data/advocacy-orgs.json';
 import { StateTrends } from './StateTrends';
 import { BillSearch } from '@/components/bills/BillSearch';
 import { FederalSpending } from '@/components/spending/FederalSpending';
@@ -52,19 +51,8 @@ interface StateMeta {
   publicCommentMethod: string | null;
 }
 
-interface AdvocacyOrg {
-  name: string;
-  url: string;
-}
-
-interface AdvocacyCategory {
-  progressive: AdvocacyOrg[];
-  conservative: AdvocacyOrg[];
-}
-
 const voterInfo = voterInfoData as Record<string, VoterInfo>;
 const stateMeta = stateMetaData as Record<string, StateMeta>;
-const advocacyOrgs = advocacyOrgsData as Record<string, AdvocacyCategory>;
 
 // ── State lookup ─────────────────────────────────────────────────────────────
 
@@ -90,7 +78,7 @@ export async function generateMetadata({ params }: StatePageProps): Promise<Meta
   if (!stateInfo) return { title: 'State Info | My Democracy' };
 
   const title = `${stateInfo.name} Government, Voting & Representatives | My Democracy`;
-  const description = `Everything about ${stateInfo.name}: governor, state legislature, voting rules, election dates, federal delegation, state legislators, advocacy organizations, and how to get involved.`;
+  const description = `Everything about ${stateInfo.name}: governor, state legislature, voting rules, election dates, federal delegation, state legislators, and how to get involved.`;
 
   return {
     title,
@@ -153,9 +141,6 @@ function OfficialRow({ official }: { official: Official }) {
         </div>
         <p className="text-xs text-gray-500 dark:text-gray-400 truncate">{official.title}</p>
       </div>
-      <Link href={`/contact?repId=${official.id}`} className="shrink-0 px-3 py-1.5 bg-purple-600 hover:bg-purple-700 text-white text-xs font-medium rounded-lg transition-colors">
-        Contact
-      </Link>
     </div>
   );
 }
@@ -227,13 +212,6 @@ export default async function StateHubPage({ params }: StatePageProps) {
   const registerUrl = info.registerOnline ?? info.registerVoteGov;
   const governor = meta?.governor;
   const govPartyColor = governor ? (PARTY_COLORS[governor.party] ?? DEFAULT_PARTY_COLOR) : DEFAULT_PARTY_COLOR;
-
-  // Collect unique issue categories from trending data (for advocacy section)
-  const topIssueCategories = [
-    'Immigration', 'Health', 'Environmental Protection', 'Crime and Law Enforcement',
-    'Education', 'Taxation', 'Economics and Public Finance', 'Armed Forces and National Security',
-    'Government Operations and Politics', 'Labor and Employment',
-  ];
 
   // FAQPage structured data for SEO
   const faqJsonLd = {
@@ -617,57 +595,6 @@ export default async function StateHubPage({ params }: StatePageProps) {
           <BillSearch stateCode={stateInfo.code} stateName={stateInfo.name} />
         </section>
       )}
-
-      {/* ═══════════════════════════════════════════════════════════════════ */}
-      {/* Advocacy Organizations */}
-      {/* ═══════════════════════════════════════════════════════════════════ */}
-      <section className="mb-10">
-        <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Advocacy Organizations</h2>
-        <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
-          Organizations working on key policy issues. Explore perspectives from both sides.
-        </p>
-
-        <div className="space-y-4">
-          {topIssueCategories.filter((cat) => advocacyOrgs[cat]).map((category) => {
-            const orgs = advocacyOrgs[category];
-            return (
-              <details key={category} className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm">
-                <summary className="px-5 py-3 cursor-pointer text-sm font-semibold text-gray-900 dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
-                  {category}
-                </summary>
-                <div className="px-5 pb-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div>
-                    <h4 className="text-xs font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-wider mb-2">Progressive</h4>
-                    <ul className="space-y-1">
-                      {orgs.progressive.map((org) => (
-                        <li key={org.name}>
-                          <a href={org.url} target="_blank" rel="noopener noreferrer"
-                            className="text-sm text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
-                            {org.name} &rarr;
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div>
-                    <h4 className="text-xs font-semibold text-red-600 dark:text-red-400 uppercase tracking-wider mb-2">Conservative</h4>
-                    <ul className="space-y-1">
-                      {orgs.conservative.map((org) => (
-                        <li key={org.name}>
-                          <a href={org.url} target="_blank" rel="noopener noreferrer"
-                            className="text-sm text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
-                            {org.name} &rarr;
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </details>
-            );
-          })}
-        </div>
-      </section>
 
       {/* ═══════════════════════════════════════════════════════════════════ */}
       {/* Quick Links */}
