@@ -60,4 +60,54 @@ export const GUIDES: GuideEntry[] = [
     description: 'Create a compelling campaign that rallies others to contact their representatives. Tips on headlines, messaging, sharing, and tracking.',
     href: '/guides/how-to-run-a-successful-campaign',
   },
+  {
+    title: 'Who Are My Representatives?',
+    description: 'Find out who represents you at every level of government — federal, state, and local — and learn how to contact them.',
+    href: '/guides/who-are-my-representatives',
+  },
+  {
+    title: 'How to Vote in a Primary Election',
+    description: 'Understand open vs. closed primaries, find your primary date, and learn what you need to participate.',
+    href: '/guides/how-to-vote-in-a-primary-election',
+  },
+  {
+    title: 'What Does My Congressman Actually Do?',
+    description: 'Legislating, committee work, constituent services, and oversight — what members of Congress do day-to-day.',
+    href: '/guides/what-does-my-congressman-do',
+  },
+  {
+    title: 'Understanding Your Ballot',
+    description: 'Learn how to read your ballot: types of races, ballot measures, judicial retentions, and how to research candidates.',
+    href: '/guides/understanding-your-ballot',
+  },
+  {
+    title: 'How Congress Votes and What It Means',
+    description: 'Roll call votes, voice votes, key thresholds, and how to look up your representative\'s voting record.',
+    href: '/guides/how-congress-votes',
+  },
+  {
+    title: 'What Is Gerrymandering and How Does It Affect You?',
+    description: 'How redistricting works, the effects of gerrymandering on elections, and what citizens can do about it.',
+    href: '/guides/what-is-gerrymandering',
+  },
+  {
+    title: 'How to Request Help from Your Rep',
+    description: 'Congressional casework: how to get free help with Social Security, VA benefits, immigration, IRS issues, and more.',
+    href: '/guides/constituent-services',
+  },
+  {
+    title: 'How Government Spending Works',
+    description: 'The federal budget process, mandatory vs. discretionary spending, and where to track how your tax dollars are spent.',
+    href: '/guides/how-government-spending-works',
+  },
+  {
+    title: 'How to Organize Your Neighbors Around an Issue',
+    description: 'Build a coalition, run effective meetings, and escalate to elected officials with community organizing strategies.',
+    href: '/guides/how-to-organize-your-neighbors',
+  },
+  {
+    title: 'How to Testify at a Public Hearing',
+    description: 'Prepare and deliver testimony at city council, school board, state legislature, and congressional hearings.',
+    href: '/guides/how-to-testify-at-a-public-hearing',
+  },
 ];
