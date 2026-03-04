@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import type { ContactState, ContactAction } from './ContactFlow';
 import type { Official } from '@/lib/types';
 import { Button } from '@/components/ui/Button';
@@ -109,18 +109,48 @@ const DEFAULT_STORY_PROMPTS = [
   'In my community, I have seen...',
 ];
 
-// Advocacy org categories that match issue categories
-const ADVOCACY_LINKS: Record<string, { progressive: string; conservative: string }> = {
-  'Health': { progressive: 'https://familiesusa.org/', conservative: 'https://www.heritage.org/health-care-reform' },
-  'Immigration': { progressive: 'https://www.aclu.org/issues/immigrants-rights', conservative: 'https://www.fairus.org/' },
-  'Environmental Protection': { progressive: 'https://www.sierraclub.org/', conservative: 'https://www.acc.eco/' },
-  'Education': { progressive: 'https://www.nea.org/', conservative: 'https://www.heritage.org/education' },
-  'Crime and Law Enforcement': { progressive: 'https://www.everytown.org/', conservative: 'https://www.nraila.org/' },
-  'Taxation': { progressive: 'https://americansfortaxfairness.org/', conservative: 'https://taxfoundation.org/' },
-  'Economics and Public Finance': { progressive: 'https://www.epi.org/', conservative: 'https://www.aei.org/' },
-  'Armed Forces and National Security': { progressive: 'https://winwithoutwar.org/', conservative: 'https://www.heritage.org/defense' },
-  'Labor and Employment': { progressive: 'https://aflcio.org/', conservative: 'https://www.uschamber.com/' },
-  'Science, Technology, Communications': { progressive: 'https://www.eff.org/', conservative: 'https://techfreedom.org/' },
+// Advocacy organizations by issue category — for "Learn more / Get involved"
+const ADVOCACY_ORGS: Record<string, { name: string; url: string }[]> = {
+  'Health': [
+    { name: 'Families USA', url: 'https://familiesusa.org/' },
+    { name: 'Heritage Foundation — Health', url: 'https://www.heritage.org/health-care-reform' },
+  ],
+  'Immigration': [
+    { name: 'ACLU — Immigrants\' Rights', url: 'https://www.aclu.org/issues/immigrants-rights' },
+    { name: 'FAIR', url: 'https://www.fairus.org/' },
+  ],
+  'Environmental Protection': [
+    { name: 'Sierra Club', url: 'https://www.sierraclub.org/' },
+    { name: 'American Conservation Coalition', url: 'https://www.acc.eco/' },
+  ],
+  'Education': [
+    { name: 'National Education Association', url: 'https://www.nea.org/' },
+    { name: 'Heritage Foundation — Education', url: 'https://www.heritage.org/education' },
+  ],
+  'Crime and Law Enforcement': [
+    { name: 'Everytown for Gun Safety', url: 'https://www.everytown.org/' },
+    { name: 'NRA-ILA', url: 'https://www.nraila.org/' },
+  ],
+  'Taxation': [
+    { name: 'Americans for Tax Fairness', url: 'https://americansfortaxfairness.org/' },
+    { name: 'Tax Foundation', url: 'https://taxfoundation.org/' },
+  ],
+  'Economics and Public Finance': [
+    { name: 'Economic Policy Institute', url: 'https://www.epi.org/' },
+    { name: 'American Enterprise Institute', url: 'https://www.aei.org/' },
+  ],
+  'Armed Forces and National Security': [
+    { name: 'Win Without War', url: 'https://winwithoutwar.org/' },
+    { name: 'Heritage Foundation — Defense', url: 'https://www.heritage.org/defense' },
+  ],
+  'Labor and Employment': [
+    { name: 'AFL-CIO', url: 'https://aflcio.org/' },
+    { name: 'U.S. Chamber of Commerce', url: 'https://www.uschamber.com/' },
+  ],
+  'Science, Technology, Communications': [
+    { name: 'Electronic Frontier Foundation', url: 'https://www.eff.org/' },
+    { name: 'TechFreedom', url: 'https://techfreedom.org/' },
+  ],
 };
 
 // Topic context: keyed by specific issue label first, then category as fallback
@@ -1527,6 +1557,53 @@ export function TopicStep({ state, dispatch, onBack }: TopicStepProps) {
   const { selectedReps, userName, issue, ask, personalWhy, contactMethod } = state;
   const [showStoryHelp, setShowStoryHelp] = useState(false);
   const [showTopicInfo, setShowTopicInfo] = useState(false);
+  const [researchContent, setResearchContent] = useState('');
+  const [researchLoading, setResearchLoading] = useState(false);
+  const [researchError, setResearchError] = useState('');
+  const researchAbortRef = useRef<AbortController | null>(null);
+
+  const handleResearch = async () => {
+    if (researchAbortRef.current) {
+      researchAbortRef.current.abort();
+    }
+
+    setResearchContent('');
+    setResearchError('');
+    setResearchLoading(true);
+
+    const abortController = new AbortController();
+    researchAbortRef.current = abortController;
+
+    try {
+      const res = await fetch('/api/research-assist', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ issue, issueCategory: state.issueCategory, ask }),
+        signal: abortController.signal,
+      });
+
+      if (!res.ok) {
+        throw new Error(`Request failed (${res.status})`);
+      }
+
+      const reader = res.body?.getReader();
+      if (!reader) throw new Error('No response stream');
+
+      const decoder = new TextDecoder();
+      let text = '';
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        text += decoder.decode(value, { stream: true });
+        setResearchContent(text);
+      }
+    } catch (err: unknown) {
+      if (err instanceof Error && err.name === 'AbortError') return;
+      setResearchError(err instanceof Error ? err.message : 'Something went wrong');
+    } finally {
+      setResearchLoading(false);
+    }
+  };
 
   const handleContinue = () => {
     if (!userName.trim()) {
@@ -1756,28 +1833,98 @@ export function TopicStep({ state, dispatch, onBack }: TopicStepProps) {
               </ul>
             </div>
 
-            {/* Research resources */}
-            {state.issueCategory && ADVOCACY_LINKS[state.issueCategory] && (
+            {/* AI Research assistant */}
+            <div className="pt-2 border-t border-purple-200 dark:border-purple-700">
+              <p className="text-xs font-medium text-purple-700 dark:text-purple-300 mb-1.5">Research to strengthen your message:</p>
+              <button
+                type="button"
+                onClick={handleResearch}
+                disabled={!state.issueCategory || !issue || researchLoading}
+                className="px-3 py-2 text-xs font-medium bg-purple-600 text-white rounded-lg hover:bg-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              >
+                {researchLoading ? 'Researching...' : 'Find talking points & legislation'}
+              </button>
+
+              {researchError && (
+                <div className="mt-2 p-2 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-700 rounded-lg">
+                  <p className="text-xs text-red-600 dark:text-red-400">{researchError}</p>
+                  <button
+                    type="button"
+                    onClick={handleResearch}
+                    className="mt-1 text-xs text-red-700 dark:text-red-300 underline hover:no-underline"
+                  >
+                    Try again
+                  </button>
+                </div>
+              )}
+
+              {researchContent && (
+                <div className="mt-2">
+                  <div className="p-3 bg-white dark:bg-gray-700 border border-purple-200 dark:border-purple-600 rounded-lg text-xs text-gray-800 dark:text-gray-200 space-y-1.5">
+                    {researchContent.split('\n').map((line, i) => {
+                      const trimmed = line.trim();
+                      if (!trimmed) return null;
+                      // Bold-only lines are section headers
+                      if (/^\*\*[^*]+\*\*$/.test(trimmed)) {
+                        return <p key={i} className="font-semibold text-purple-800 dark:text-purple-200 pt-1">{trimmed.replace(/\*\*/g, '')}</p>;
+                      }
+                      // Bullet lines
+                      if (trimmed.startsWith('- ')) {
+                        const content = trimmed.slice(2);
+                        const parts = content.split(/(\*\*[^*]+\*\*)/g);
+                        return (
+                          <div key={i} className="flex gap-1.5 pl-1">
+                            <span className="text-purple-500 shrink-0">&bull;</span>
+                            <span>
+                              {parts.map((part, j) =>
+                                /^\*\*[^*]+\*\*$/.test(part)
+                                  ? <strong key={j}>{part.replace(/\*\*/g, '')}</strong>
+                                  : <span key={j}>{part}</span>
+                              )}
+                            </span>
+                          </div>
+                        );
+                      }
+                      // Plain text lines — also render inline bold
+                      const parts = trimmed.split(/(\*\*[^*]+\*\*)/g);
+                      return (
+                        <p key={i}>
+                          {parts.map((part, j) =>
+                            /^\*\*[^*]+\*\*$/.test(part)
+                              ? <strong key={j}>{part.replace(/\*\*/g, '')}</strong>
+                              : <span key={j}>{part}</span>
+                          )}
+                        </p>
+                      );
+                    })}
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => { setResearchContent(''); setResearchError(''); }}
+                    className="mt-1.5 text-xs text-purple-600 dark:text-purple-400 hover:underline"
+                  >
+                    Clear
+                  </button>
+                </div>
+              )}
+            </div>
+
+            {/* Advocacy organizations */}
+            {state.issueCategory && ADVOCACY_ORGS[state.issueCategory] && (
               <div className="pt-2 border-t border-purple-200 dark:border-purple-700">
-                <p className="text-xs font-medium text-purple-700 dark:text-purple-300 mb-1">Research to strengthen your message:</p>
-                <div className="flex gap-2">
-                  <a
-                    href={ADVOCACY_LINKS[state.issueCategory].progressive}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-xs text-blue-600 dark:text-blue-400 hover:underline"
-                  >
-                    Progressive research
-                  </a>
-                  <span className="text-purple-400">|</span>
-                  <a
-                    href={ADVOCACY_LINKS[state.issueCategory].conservative}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-xs text-red-600 dark:text-red-400 hover:underline"
-                  >
-                    Conservative research
-                  </a>
+                <p className="text-xs font-medium text-purple-700 dark:text-purple-300 mb-1">Learn more or get involved:</p>
+                <div className="flex flex-wrap gap-x-3 gap-y-1">
+                  {ADVOCACY_ORGS[state.issueCategory].map((org) => (
+                    <a
+                      key={org.url}
+                      href={org.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs text-purple-600 dark:text-purple-400 hover:underline"
+                    >
+                      {org.name}
+                    </a>
+                  ))}
                 </div>
               </div>
             )}
