@@ -1,35 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { stripTags, extractJSON, cleanText } from '@/lib/claude';
 import { getCommitteesForMember } from '@/lib/legislators';
+import { z } from 'zod';
+import { generateMessageSchema, parseBody } from '@/lib/schemas';
 
-interface OfficialInput {
-  name: string;
-  lastName?: string;
-  stafferFirstName?: string;
-  bioguideId?: string;
-  title: string;
-  party: string;
-  state: string;
-  level?: 'federal' | 'state';
-  district?: string;
-}
-
-interface AddressInput {
-  street: string;
-  city: string;
-  state: string;
-  zip: string;
-}
-
-interface GenerateRequest {
-  officials: OfficialInput[];
-  issue: string;
-  ask: string;
-  personalWhy?: string;
-  senderName: string;
-  address?: AddressInput;
-  contactMethod?: 'email' | 'phone';
-}
+type GenerateRequest = z.infer<typeof generateMessageSchema>;
+type OfficialInput = GenerateRequest['officials'][number];
+type AddressInput = NonNullable<GenerateRequest['address']>;
 
 interface OfficialMessage {
   officialName: string;
@@ -287,28 +264,19 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  let reqBody: GenerateRequest;
+  let raw: unknown;
   try {
-    reqBody = await request.json();
+    raw = await request.json();
   } catch {
     return NextResponse.json({ error: 'Invalid request body' }, { status: 400 });
   }
 
-  const { officials, issue, ask, personalWhy, senderName, address, contactMethod } = reqBody;
-
-  if (!officials || officials.length === 0) {
-    return NextResponse.json({ error: 'At least one official is required' }, { status: 400 });
-  }
-  if (!issue?.trim()) {
-    return NextResponse.json({ error: 'Issue is required' }, { status: 400 });
-  }
-  if (!ask?.trim()) {
-    return NextResponse.json({ error: 'Your position is required' }, { status: 400 });
-  }
-  if (!senderName?.trim()) {
-    return NextResponse.json({ error: 'Sender name is required' }, { status: 400 });
+  const parsed = parseBody(generateMessageSchema, raw);
+  if (!parsed.success) {
+    return NextResponse.json({ error: parsed.error }, { status: 400 });
   }
 
+  const { officials, issue, ask, personalWhy, senderName, address, contactMethod } = parsed.data;
   const method = contactMethod === 'phone' ? 'phone' : 'email';
 
   try {

@@ -1,45 +1,29 @@
 import { callClaudeStream } from '@/lib/claude-stream';
 import { CHAT_SYSTEM_PROMPT } from '@/lib/chat-system-prompt';
-
-interface ChatMessage {
-  role: 'user' | 'assistant';
-  content: string;
-}
+import { chatRequestSchema, parseBody } from '@/lib/schemas';
 
 export async function POST(request: Request) {
   if (!process.env.ANTHROPIC_API_KEY) {
     return new Response('AI assistant is temporarily unavailable', { status: 503 });
   }
 
-  let body: { messages?: ChatMessage[] };
+  let raw: unknown;
   try {
-    body = await request.json();
+    raw = await request.json();
   } catch {
     return new Response('Invalid JSON', { status: 400 });
   }
 
-  const { messages } = body;
-
-  if (!Array.isArray(messages) || messages.length === 0) {
-    return new Response('Messages array is required', { status: 400 });
+  const parsed = parseBody(chatRequestSchema, raw);
+  if (!parsed.success) {
+    return new Response(parsed.error, { status: 400 });
   }
 
-  if (messages.length > 50) {
-    return new Response('Too many messages', { status: 400 });
-  }
+  const { messages } = parsed.data;
 
   const last = messages[messages.length - 1];
   if (last.role !== 'user') {
     return new Response('Last message must be from user', { status: 400 });
-  }
-
-  for (const msg of messages) {
-    if (!msg.role || !msg.content) {
-      return new Response('Each message must have role and content', { status: 400 });
-    }
-    if (msg.content.length > 2000) {
-      return new Response('Message too long (max 2000 characters)', { status: 400 });
-    }
   }
 
   try {

@@ -1,34 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createAdminClient } from '@/lib/supabase';
-
-interface LogMessageBody {
-  advocate_name: string;
-  advocate_email?: string;
-  advocate_city: string;
-  advocate_state: string;
-  advocate_district?: string;
-  legislator_name: string;
-  legislator_id: string;
-  legislator_party: string;
-  legislator_level: string;
-  legislator_chamber: string;
-  issue_area: string;
-  issue_subtopic: string;
-  message_body: string;
-  delivery_method: string;
-  delivery_status: string;
-  user_id?: string;
-  campaign_id?: string;
-}
+import { trackSendSchema, parseBody } from '@/lib/schemas';
 
 /**
  * POST /api/track-send
  * Log a message send event to Supabase
  */
 export async function POST(request: NextRequest) {
-  let body: LogMessageBody;
+  let raw: unknown;
   try {
-    body = await request.json();
+    raw = await request.json();
   } catch {
     return NextResponse.json(
       { error: 'Invalid JSON in request body' },
@@ -36,24 +17,15 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const {
-    advocate_name,
-    legislator_name,
-    legislator_id,
-    issue_area,
-    delivery_method,
-    delivery_status,
-    advocate_city,
-    advocate_state,
-    message_body,
-  } = body;
-
-  if (!advocate_name || !legislator_name || !legislator_id || !issue_area || !delivery_method || !delivery_status || !advocate_city || !advocate_state || !message_body) {
+  const parsed = parseBody(trackSendSchema, raw);
+  if (!parsed.success) {
     return NextResponse.json(
-      { error: 'Missing required fields' },
+      { error: parsed.error },
       { status: 400 }
     );
   }
+
+  const body = parsed.data;
 
   try {
     const supabase = createAdminClient();

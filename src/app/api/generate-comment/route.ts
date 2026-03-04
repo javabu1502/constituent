@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { callClaude, extractJSON, cleanText } from '@/lib/claude';
+import { generateCommentSchema, parseBody } from '@/lib/schemas';
 
 /**
  * POST /api/generate-comment
@@ -7,16 +8,6 @@ import { callClaude, extractJSON, cleanText } from '@/lib/claude';
  * Generates an AI-assisted public comment for a federal regulation.
  * Uses the Anthropic API (same as the contact message generator).
  */
-
-interface GenerateCommentRequest {
-  regulationTitle: string;
-  agency: string;
-  abstract: string | null;
-  position: 'support' | 'oppose' | 'concerns';
-  personalStory: string;
-  keyPoints: string;
-  senderName: string;
-}
 
 export async function POST(request: NextRequest) {
   if (!process.env.ANTHROPIC_API_KEY) {
@@ -26,21 +17,19 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  let body: GenerateCommentRequest;
+  let raw: unknown;
   try {
-    body = await request.json();
+    raw = await request.json();
   } catch {
     return NextResponse.json({ error: 'Invalid request body' }, { status: 400 });
   }
 
-  const { regulationTitle, agency, abstract, position, personalStory, keyPoints, senderName } = body;
-
-  if (!regulationTitle || !position || !senderName) {
-    return NextResponse.json(
-      { error: 'regulationTitle, position, and senderName are required' },
-      { status: 400 }
-    );
+  const parsed = parseBody(generateCommentSchema, raw);
+  if (!parsed.success) {
+    return NextResponse.json({ error: parsed.error }, { status: 400 });
   }
+
+  const { regulationTitle, agency, abstract, position, personalStory, keyPoints, senderName } = parsed.data;
 
   const positionLabel = position === 'support' ? 'supporting' : position === 'oppose' ? 'opposing' : 'raising concerns about';
 

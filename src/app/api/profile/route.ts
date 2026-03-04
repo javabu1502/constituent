@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase';
+import { profileUpdateSchema, parseBody } from '@/lib/schemas';
 
 /**
  * GET /api/profile
@@ -40,24 +41,24 @@ export async function PATCH(request: Request) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  let body: Record<string, unknown>;
+  let raw: unknown;
   try {
-    body = await request.json();
+    raw = await request.json();
   } catch {
     return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 });
   }
 
-  // Only allow updating specific fields
-  const allowed = ['street', 'city', 'state', 'zip', 'representatives', 'local_officials'];
-  const updates: Record<string, unknown> = {};
-  for (const key of allowed) {
-    if (key in body) {
-      updates[key] = body[key];
-    }
+  const parsed = parseBody(profileUpdateSchema, raw);
+  if (!parsed.success) {
+    return NextResponse.json({ error: parsed.error }, { status: 400 });
   }
 
-  if (Object.keys(updates).length === 0) {
-    return NextResponse.json({ error: 'No valid fields to update' }, { status: 400 });
+  // Filter out undefined values
+  const updates: Record<string, unknown> = {};
+  for (const [key, value] of Object.entries(parsed.data)) {
+    if (value !== undefined) {
+      updates[key] = value;
+    }
   }
 
   const admin = createAdminClient();

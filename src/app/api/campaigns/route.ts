@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase';
+import { createCampaignSchema, parseBody } from '@/lib/schemas';
 
 function slugify(text: string): string {
   return text
@@ -25,36 +26,19 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Authentication required' }, { status: 401 });
   }
 
-  let body: {
-    headline: string;
-    description: string;
-    issue_area: string;
-    issue_subtopic?: string;
-    target_level: string;
-    message_template?: string;
-  };
-
+  let raw: unknown;
   try {
-    body = await request.json();
+    raw = await request.json();
   } catch {
     return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 });
   }
 
-  const { headline, description, issue_area, issue_subtopic, target_level, message_template } = body;
+  const parsed = parseBody(createCampaignSchema, raw);
+  if (!parsed.success) {
+    return NextResponse.json({ error: parsed.error }, { status: 400 });
+  }
 
-  // Validation
-  if (!headline || headline.length < 3 || headline.length > 100) {
-    return NextResponse.json({ error: 'Headline must be 3-100 characters' }, { status: 400 });
-  }
-  if (!description || description.length < 10 || description.length > 500) {
-    return NextResponse.json({ error: 'Description must be 10-500 characters' }, { status: 400 });
-  }
-  if (!issue_area) {
-    return NextResponse.json({ error: 'Issue area is required' }, { status: 400 });
-  }
-  if (!target_level || !['federal', 'state', 'both'].includes(target_level)) {
-    return NextResponse.json({ error: 'Target level must be federal, state, or both' }, { status: 400 });
-  }
+  const { headline, description, issue_area, issue_subtopic, target_level, message_template } = parsed.data;
 
   const slug = slugify(headline).slice(0, 50) + '-' + randomSuffix();
 
