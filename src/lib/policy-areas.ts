@@ -18,25 +18,25 @@ const POLICY_AREAS: Record<string, string[]> = {
   'Civil Rights and Liberties, Minority Issues': ['Voting Rights', 'Discrimination', 'LGBTQ+ Rights', 'Disability Rights', 'Free Speech', 'Racial Justice', 'Police Accountability', 'Affirmative Action', 'Reparations', 'Censorship', 'DEI', 'Age Discrimination', 'Religious Exemptions', 'Hate Speech', 'Voter Suppression', 'ADA Compliance', 'Equal Pay', 'Indigenous Rights'],
   'Commerce': ['Small Business', 'Consumer Protection', 'Trade', 'Antitrust', 'Gig Economy', 'Supply Chain', 'Price Gouging', 'Junk Fees', 'Price Transparency', 'Shrinkflation', 'Right to Repair', 'Mergers and Acquisitions'],
   'Congress': ['Congressional Reform', 'Term Limits', 'Government Accountability', 'Congressional Oversight', 'Congressional Pay', 'Earmarks', 'Congressional Stock Trading', 'Insider Trading Ban', 'Congressional Subpoena Power'],
-  'Crime and Law Enforcement': ['Gun Violence', 'Police Reform', 'Drug Policy', 'Criminal Justice Reform', 'Sentencing', 'Fentanyl', 'Human Trafficking', 'Cybercrime', 'Domestic Violence', 'Hate Crimes', 'Mass Incarceration', 'Death Penalty', 'Bail Reform', 'Juvenile Justice', 'Gang Violence', 'Recidivism', 'Carjacking', 'Retail Theft', 'Cyberstalking', 'School Shootings', 'Sex Trafficking', 'Elder Abuse', 'White Collar Crime', 'Asset Forfeiture', 'Body Cameras'],
-  'Economics and Public Finance': ['Federal Budget', 'National Debt', 'Inflation', 'Cost of Living', 'Wage Growth', 'Federal Reserve', 'Recession', 'Trade Deficit', 'Income Inequality', 'Poverty Rate', 'GDP Growth', 'Government Shutdown', 'Debt Ceiling', 'Austerity'],
-  'Education': ['K-12 Education', 'Student Loans', 'Higher Education', 'Special Education', 'School Choice', 'Teacher Pay', 'School Safety', 'Book Bans', 'School Funding', 'Early Childhood Education', 'Pre-K', 'Title IX', 'STEM Education', 'Homeschooling', 'Charter Schools', 'Student Debt Forgiveness', 'School Vouchers', 'Standardized Testing', 'College Affordability', 'Sex Education', 'Library Funding', 'Civics Education'],
+  'Crime and Law Enforcement': ['Gun Violence', 'Police Reform', 'Drug Policy', 'Criminal Justice Reform', 'Sentencing', 'Fentanyl', 'Human Trafficking', 'Cybercrime', 'Domestic Violence', 'Hate Crimes', 'Mass Incarceration', 'Death Penalty', 'Bail Reform', 'Juvenile Justice', 'Gang Violence', 'Recidivism', 'Carjacking', 'Retail Theft', 'Cyberstalking', 'School Shootings', 'Sex Trafficking', 'Elder Abuse', 'White Collar Crime', 'Asset Forfeiture', 'Body Cameras', 'Drug Cartels', 'Organized Crime'],
+  'Economics and Public Finance': ['Federal Budget', 'National Debt', 'Inflation', 'Cost of Living', 'Wage Growth', 'Federal Reserve', 'Recession', 'Trade Deficit', 'Income Inequality', 'Poverty Rate', 'GDP Growth', 'Government Shutdown', 'Debt Ceiling', 'Austerity', 'Grocery Prices', 'Gas Prices', 'Utility Bills', 'Rent Prices'],
+  'Education': ['K-12 Education', 'Student Loans', 'Higher Education', 'Special Education', 'School Choice', 'Teacher Pay', 'School Safety', 'Book Bans', 'School Funding', 'Early Childhood Education', 'Pre-K', 'Title IX', 'STEM Education', 'Homeschooling', 'Charter Schools', 'Student Debt Forgiveness', 'School Vouchers', 'Standardized Testing', 'College Affordability', 'Sex Education', 'Library Funding', 'Civics Education', 'School Boards', 'Bullying'],
   'Emergency Management': ['Disaster Relief', 'FEMA', 'Emergency Preparedness', 'Climate Resilience', 'Pandemic Preparedness', 'First Responders', 'Wildfire Management', 'Flood Insurance', 'National Stockpile', 'Climate Adaptation'],
   'Energy': ['Oil and Gas', 'Renewable Energy', 'Energy Costs', 'Nuclear Energy', 'Electric Vehicles', 'Energy Grid', 'Fracking', 'Carbon Tax', 'Energy Storage', 'Hydrogen', 'Pipeline Safety', 'Energy Independence', 'Geothermal', 'Offshore Wind', 'Coal'],
   'Environmental Protection': ['Climate Change', 'Clean Air', 'Clean Water', 'Pollution', 'EPA', 'PFAS/Forever Chemicals', 'Plastics', 'Environmental Justice', 'Wildfires', 'Carbon Capture', 'Methane', 'NEPA Reform', 'Deforestation', 'Microplastics', 'Lead Pipes', 'Superfund Sites', 'Ozone', 'Wetlands'],
-  'Families': ['Child Care', 'Paid Family Leave', 'Child Welfare', 'Foster Care', 'Adoption', 'Child Tax Credit', 'Parental Rights', 'Child Safety Online', 'Child Poverty', 'Grandparent Caregivers', 'Youth Mental Health', 'Social Media Age Limits', 'Screen Time', 'Grandparent Rights', 'Surrogacy', 'Fertility Treatment', 'Single Parents'],
+  'Families': ['Child Care', 'Paid Family Leave', 'Child Welfare', 'Foster Care', 'Adoption', 'Child Tax Credit', 'Parental Rights', 'Child Safety Online', 'Child Poverty', 'Grandparent Caregivers', 'Youth Mental Health', 'Social Media Age Limits', 'Screen Time', 'Grandparent Rights', 'Surrogacy', 'Fertility Treatment', 'Single Parents', 'Child Hunger'],
   'Finance and Financial Sector': ['Banking', 'Credit', 'Wall Street Regulation', 'Cryptocurrency', 'Predatory Lending', 'Insurance Regulation', 'Financial Literacy', 'Student Debt', 'Bank Failures', 'FDIC', 'Credit Card Fees', 'Buy Now Pay Later', 'Credit Scores', 'Fintech', 'Money Laundering', 'SEC Regulation'],
   'Foreign Trade and International Finance': ['Tariffs', 'Trade Agreements', 'Sanctions', 'Imports/Exports', 'Trade with China', 'USMCA', 'Currency Manipulation', 'Supply Chain Security', 'De-dollarization', 'Export Controls', 'Rare Earth Minerals', 'Forced Labor Imports', 'Trade Enforcement'],
-  'Government Operations and Politics': ['Elections', 'Campaign Finance', 'Government Spending', 'Federal Agencies', 'Voter ID', 'Redistricting', 'Ethics Reform', 'Lobbying Reform', 'Government Transparency', 'Filibuster Reform', 'Dark Money', 'Ranked Choice Voting', 'Statehood (DC/PR)', 'Electoral College', 'Term Limits (State)', 'Mail-In Voting', 'Poll Access'],
-  'Health': ['Medicare', 'Medicaid', 'Prescription Drug Costs', 'Mental Health', 'Reproductive Health', 'Opioids', 'ACA/Obamacare', 'Public Health', 'Telehealth', 'Hospital Access', 'Veterans Health', 'Infant/Early Childhood Mental Health', 'Maternal Health', 'Dental Care', 'Long-Term Care', 'Nursing Shortage', 'Vaccine Policy', 'Health Equity', 'Insulin Pricing', 'Gender-Affirming Care', 'Drug Importation', 'Medical Debt', 'Rural Hospitals', 'Obesity', 'Cancer Research', 'Rare Diseases', 'Organ Donation', 'Hearing Aids', 'Vision Care', 'Addiction Treatment', 'Fetal Health', 'Prior Authorization'],
+  'Government Operations and Politics': ['Elections', 'Campaign Finance', 'Government Spending', 'Federal Agencies', 'Voter ID', 'Redistricting', 'Ethics Reform', 'Lobbying Reform', 'Government Transparency', 'Filibuster Reform', 'Dark Money', 'Ranked Choice Voting', 'Statehood (DC/PR)', 'Electoral College', 'Term Limits (State)', 'Mail-In Voting', 'Poll Access', 'Government Efficiency', 'DOGE', 'Government Waste'],
+  'Health': ['Medicare', 'Medicaid', 'Prescription Drug Costs', 'Mental Health', 'Reproductive Health', 'Opioids', 'ACA/Obamacare', 'Public Health', 'Telehealth', 'Hospital Access', 'Veterans Health', 'Infant/Early Childhood Mental Health', 'Maternal Health', 'Dental Care', 'Long-Term Care', 'Nursing Shortage', 'Vaccine Policy', 'Health Equity', 'Insulin Pricing', 'Gender-Affirming Care', 'Drug Importation', 'Medical Debt', 'Rural Hospitals', 'Obesity', 'Cancer Research', 'Rare Diseases', 'Organ Donation', 'Hearing Aids', 'Vision Care', 'Addiction Treatment', 'Fetal Health', 'Prior Authorization', 'Drug Overdose', 'ER Wait Times', 'Health Insurance Costs'],
   'Housing and Community Development': ['Affordable Housing', 'Homelessness', 'Rent', 'Mortgage Rates', 'HUD', 'Zoning Reform', 'Public Housing', 'Housing Discrimination', 'Rent Control', 'First-Time Homebuyers', 'Housing Supply', 'Gentrification', 'Lead Paint', 'Eviction Protections', 'Down Payment Assistance', 'NIMBY/Zoning'],
-  'Immigration': ['Border Security', 'DACA', 'Visas', 'Asylum', 'Refugee Policy', 'Legal Immigration', 'Immigration Courts', 'H-1B Visas', 'Citizenship', 'Deportation', 'TPS', 'E-Verify', 'Immigration Detention', 'Family Separation', 'Sanctuary Cities', 'Immigration Backlog', 'Work Permits', 'Birthright Citizenship'],
+  'Immigration': ['Border Security', 'DACA', 'Visas', 'Asylum', 'Refugee Policy', 'Legal Immigration', 'Immigration Courts', 'H-1B Visas', 'Citizenship', 'Deportation', 'TPS', 'E-Verify', 'Immigration Detention', 'Family Separation', 'Sanctuary Cities', 'Immigration Backlog', 'Work Permits', 'Birthright Citizenship', 'Immigration Raids', 'Migrant Workers'],
   'International Affairs': ['Foreign Aid', 'Diplomacy', 'NATO', 'Middle East', 'Ukraine', 'China', 'Iran', 'Israel/Palestine', 'Russia', 'Taiwan', 'North Korea', 'Africa', 'Latin America', 'United Nations', 'Human Rights Abroad', 'Arms Control', 'Terrorism', 'South Korea', 'India', 'Venezuela', 'Sanctions Enforcement', 'Global Health', 'WHO', 'Peacekeeping', 'Cybersecurity (Intl)', 'Climate Agreements', 'Trade War'],
   'Labor and Employment': ['Minimum Wage', 'Worker Rights', 'Unions', 'Workplace Safety', 'Unemployment', 'Paid Sick Leave', 'Remote Work', 'Overtime Pay', 'Child Labor', 'Pension', 'Right to Work', 'Gig Worker Benefits', 'Workplace Harassment', 'Tipped Minimum Wage', 'Non-Compete Agreements', 'Apprenticeships', 'Worker Misclassification', 'Four-Day Work Week', 'Prevailing Wage'],
   'Law': ['Supreme Court', 'Judicial Appointments', 'Legal Reform', 'Court Reform', 'Legal Aid', 'Civil Asset Forfeiture', 'Qualified Immunity', 'Mandatory Minimums', 'Privacy Law', 'Eminent Domain', 'Class Action Reform', 'Wrongful Conviction'],
   'Native Americans': ['Tribal Sovereignty', 'Indian Health Service', 'Native Land Rights', 'Missing and Murdered Indigenous People', 'Tribal Education', 'Tribal Gaming', 'Water Rights (Tribal)', 'Language Preservation', 'Urban Indigenous Issues'],
   'Public Lands and Natural Resources': ['National Parks', 'Public Lands', 'Mining', 'Forestry', 'Conservation', 'Wilderness Protection', 'Drilling on Public Lands', 'Offshore Drilling', 'Critical Minerals', 'Grazing Rights', 'Water Allocation', 'Endangered Habitat', 'Old Growth Forests'],
-  'Science, Technology, Communications': ['AI', 'Internet/Broadband', 'Space', 'Social Media Regulation', 'Data Privacy', 'Cybersecurity', 'Net Neutrality', 'Tech Monopolies', 'Automation/Robotics', 'Deepfakes', 'Age Verification', 'Semiconductors/CHIPS', 'Autonomous Vehicles', 'Quantum Computing', '5G/6G', 'Open Source', 'Surveillance Technology', 'Algorithmic Bias', 'Right to Repair (Tech)'],
+  'Science, Technology, Communications': ['AI', 'Internet/Broadband', 'Space', 'Social Media Regulation', 'Data Privacy', 'Cybersecurity', 'Net Neutrality', 'Tech Monopolies', 'Automation/Robotics', 'Deepfakes', 'Age Verification', 'Semiconductors/CHIPS', 'Autonomous Vehicles', 'Quantum Computing', '5G/6G', 'Open Source', 'Surveillance Technology', 'Algorithmic Bias', 'Right to Repair (Tech)', 'TikTok Ban', 'Phone Addiction'],
   'Social Welfare': ['Social Security', 'Poverty', 'Disability Benefits', 'Safety Net Programs', 'Universal Basic Income', 'Food Insecurity', 'Senior Care', 'Aging', 'Section 8/Housing Vouchers', 'TANF', 'WIC', 'SSI', 'SSDI', 'Supplemental Nutrition', 'Community Health Centers', 'Warming/Cooling Centers'],
   'Sports and Recreation': ['Youth Sports', 'Outdoor Recreation', 'Stadium Funding', 'Title IX Athletics', 'Recreation Access', 'Olympic Funding', 'NIL/College Athletes', 'Youth Sports Safety'],
   'Taxation': ['Income Tax', 'Corporate Tax', 'Tax Reform', 'Tax Credits', 'Capital Gains Tax', 'Wealth Tax', 'Estate Tax', 'Tax Loopholes', 'Property Tax', 'Sales Tax', 'Carbon Tax', 'Crypto Tax', 'SALT Deduction', 'Tax Filing Simplification', 'Charitable Deduction'],
@@ -604,6 +604,151 @@ const KEYWORD_ALIASES: Record<string, string[]> = {
   'climate agreement': ['climate agreements', 'international affairs'],
   'paris agreement': ['climate agreements', 'international affairs'],
   'trade war': ['trade war', 'tariffs', 'international affairs'],
+  // Plain English problems people type
+  "can't afford": ['cost of living', 'inflation', 'economics and public finance'],
+  'too expensive': ['cost of living', 'inflation', 'economics and public finance'],
+  'bills': ['utility bills', 'cost of living', 'economics and public finance'],
+  'my kid': ['families', 'education', 'child care'],
+  'my child': ['families', 'education', 'child care'],
+  'my kids': ['families', 'education', 'child care'],
+  'unsafe': ['crime and law enforcement', 'school safety', 'public health'],
+  'dangerous': ['crime and law enforcement', 'school safety', 'public health'],
+  'homeless people': ['homelessness', 'housing and community development'],
+  'cost of living': ['cost of living', 'inflation', 'grocery prices', 'gas prices'],
+  'grocery prices': ['grocery prices', 'inflation', 'cost of living'],
+  'gas prices': ['gas prices', 'oil and gas', 'energy costs'],
+  'utility bills': ['utility bills', 'energy costs', 'cost of living'],
+  'rent prices': ['rent prices', 'rent', 'affordable housing'],
+  'my rent': ['rent', 'rent prices', 'affordable housing'],
+  'high rent': ['rent', 'rent prices', 'affordable housing'],
+  'too much rent': ['rent', 'rent prices', 'affordable housing'],
+  'afford rent': ['rent', 'rent prices', 'affordable housing', 'cost of living'],
+  'afford food': ['food insecurity', 'snap/food stamps', 'grocery prices'],
+  'afford gas': ['gas prices', 'energy costs', 'cost of living'],
+  'afford college': ['college affordability', 'student loans', 'higher education'],
+  'food prices': ['grocery prices', 'inflation', 'cost of living'],
+  'electric bill': ['utility bills', 'energy costs'],
+  'power bill': ['utility bills', 'energy costs'],
+  'heating bill': ['utility bills', 'energy costs'],
+  'water bill': ['utility bills', 'clean water', 'water infrastructure'],
+  'phone bill': ['utility bills', 'internet/broadband'],
+  // Current events / 2025-2026 terms
+  'doge': ['doge', 'government efficiency', 'government waste', 'government operations and politics'],
+  'government efficiency': ['government efficiency', 'government waste', 'government spending'],
+  'government waste': ['government waste', 'government efficiency', 'government spending'],
+  'elon': ['doge', 'government efficiency', 'government operations and politics'],
+  'elon musk': ['doge', 'government efficiency', 'government operations and politics'],
+  'mass deportation': ['deportation', 'immigration raids', 'immigration'],
+  'raids': ['immigration raids', 'deportation', 'immigration'],
+  'immigration raids': ['immigration raids', 'deportation', 'immigration'],
+  'tiktok ban': ['tiktok ban', 'social media regulation', 'data privacy'],
+  'cancel culture': ['free speech', 'censorship', 'civil rights and liberties, minority issues'],
+  'crt': ['civil rights and liberties, minority issues', 'education', 'racial justice'],
+  'critical race theory': ['civil rights and liberties, minority issues', 'education', 'racial justice'],
+  'woke': ['dei', 'civil rights and liberties, minority issues'],
+  'defund': ['police reform', 'crime and law enforcement'],
+  'defund the police': ['police reform', 'crime and law enforcement'],
+  'drug cartels': ['drug cartels', 'fentanyl', 'border security'],
+  'cartel': ['drug cartels', 'fentanyl', 'border security'],
+  'cartels': ['drug cartels', 'fentanyl', 'border security'],
+  'organized crime': ['organized crime', 'crime and law enforcement'],
+  // Government agency acronyms
+  'cbp': ['border security', 'immigration', 'immigration detention'],
+  'doj': ['criminal justice reform', 'law', 'crime and law enforcement'],
+  'atf': ['gun violence', 'crime and law enforcement'],
+  'cdc': ['public health', 'vaccine policy', 'health'],
+  'fda': ['food safety', 'drug policy', 'prescription drug costs', 'health'],
+  'hhs': ['health', 'medicare', 'medicaid'],
+  'dhs': ['border security', 'immigration', 'cybersecurity'],
+  'doe': ['education', 'energy', 'k-12 education'],
+  'usda': ['agriculture and food', 'farming', 'food safety'],
+  'epa': ['epa', 'environmental protection', 'clean air', 'clean water'],
+  'hud': ['hud', 'affordable housing', 'housing and community development'],
+  'va': ['veterans', 'va healthcare', 'armed forces and national security'],
+  'ssa': ['social security', 'social welfare'],
+  'ftc': ['consumer protection', 'antitrust', 'commerce'],
+  'fcc': ['internet/broadband', 'net neutrality', 'science, technology'],
+  'dea': ['drug policy', 'fentanyl', 'crime and law enforcement'],
+  // Brand names people associate with issues
+  'amazon': ['gig economy', 'antitrust', 'worker rights', 'tech monopolies'],
+  'google': ['tech monopolies', 'data privacy', 'antitrust'],
+  'facebook': ['social media regulation', 'data privacy', 'child safety online'],
+  'meta': ['social media regulation', 'data privacy', 'child safety online'],
+  'instagram': ['social media regulation', 'child safety online', 'youth mental health'],
+  'walmart': ['minimum wage', 'worker rights', 'labor and employment'],
+  'doordash': ['gig economy', 'gig worker benefits', 'worker rights'],
+  'grubhub': ['gig economy', 'gig worker benefits', 'worker rights'],
+  'instacart': ['gig economy', 'gig worker benefits', 'worker rights'],
+  'apple': ['tech monopolies', 'data privacy', 'antitrust'],
+  'twitter': ['social media regulation', 'free speech', 'data privacy'],
+  'x.com': ['social media regulation', 'free speech', 'data privacy'],
+  // Emotional / problem-oriented
+  'bullying': ['bullying', 'school safety', 'education'],
+  'bullied': ['bullying', 'school safety', 'education'],
+  'cyberbullying': ['bullying', 'child safety online', 'education'],
+  'overdose': ['drug overdose', 'opioids', 'fentanyl', 'health'],
+  'od': ['drug overdose', 'opioids', 'fentanyl'],
+  'drug overdose': ['drug overdose', 'opioids', 'fentanyl', 'health'],
+  'scam': ['consumer protection', 'elder abuse', 'commerce'],
+  'scammed': ['consumer protection', 'elder abuse', 'commerce'],
+  'fraud': ['consumer protection', 'white collar crime', 'elder abuse'],
+  'kicked out': ['eviction protections', 'homelessness', 'housing and community development'],
+  'evicted': ['eviction protections', 'homelessness', 'housing and community development'],
+  'laid off': ['unemployment', 'labor and employment'],
+  'layoff': ['unemployment', 'labor and employment'],
+  'layoffs': ['unemployment', 'labor and employment'],
+  'fired': ['unemployment', 'labor and employment', 'worker rights'],
+  "can't find a doctor": ['hospital access', 'rural hospitals', 'health'],
+  'er wait': ['er wait times', 'hospital access', 'health'],
+  'emergency room': ['er wait times', 'hospital access', 'health'],
+  'health insurance': ['health insurance costs', 'aca/obamacare', 'health'],
+  'insurance cost': ['health insurance costs', 'aca/obamacare', 'health'],
+  'insurance costs': ['health insurance costs', 'aca/obamacare', 'health'],
+  'copay': ['health insurance costs', 'prescription drug costs', 'health'],
+  'deductible': ['health insurance costs', 'health'],
+  'premium': ['health insurance costs', 'health'],
+  'premiums': ['health insurance costs', 'aca/obamacare', 'health'],
+  'uninsured': ['health insurance costs', 'aca/obamacare', 'medicaid'],
+  'phone addiction': ['phone addiction', 'screen time', 'youth mental health'],
+  'child hunger': ['child hunger', 'food insecurity', 'snap/food stamps', 'school meals'],
+  'school board': ['school boards', 'k-12 education', 'education'],
+  'school boards': ['school boards', 'k-12 education', 'education'],
+  'migrant': ['migrant workers', 'immigration', 'asylum'],
+  'migrant workers': ['migrant workers', 'agricultural workers', 'immigration'],
+  'migrants': ['migrant workers', 'immigration', 'asylum'],
+  // Common alternate spellings/forms
+  'healthcare': ['health', 'aca/obamacare', 'health insurance costs'],
+  'obamacare': ['aca/obamacare', 'health insurance costs', 'health'],
+  'govt': ['government spending', 'government operations and politics', 'federal agencies'],
+  'rep': ['congressional reform', 'congress'],
+  'reps': ['congressional reform', 'congress'],
+  'e verify': ['e-verify', 'immigration'],
+  'everify': ['e-verify', 'immigration'],
+  'pre k': ['pre-k', 'early childhood education'],
+  'prek': ['pre-k', 'early childhood education'],
+  // Additional everyday terms people might search
+  'paycheck': ['minimum wage', 'wage growth', 'labor and employment'],
+  'broke': ['cost of living', 'poverty', 'economics and public finance'],
+  'struggling': ['cost of living', 'poverty', 'economics and public finance'],
+  'afford': ['cost of living', 'inflation', 'economics and public finance'],
+  'safety': ['crime and law enforcement', 'school safety', 'public health'],
+  'stealing': ['retail theft', 'crime and law enforcement'],
+  'theft': ['retail theft', 'crime and law enforcement'],
+  'robbery': ['crime and law enforcement'],
+  'murder': ['crime and law enforcement', 'gun violence'],
+  'drunk driving': ['crime and law enforcement', 'highway safety'],
+  'dui': ['crime and law enforcement'],
+  'speeding': ['highway safety', 'pedestrian safety', 'transportation'],
+  'pothole': ['roads', 'infrastructure'],
+  'commute': ['public transit', 'roads', 'transportation'],
+  'daycamp': ['child care', 'families'],
+  'babysitter': ['child care', 'families'],
+  'nanny': ['child care', 'families'],
+  'student': ['student loans', 'higher education', 'education'],
+  'tutor': ['k-12 education', 'education'],
+  'textbook': ['higher education', 'college affordability', 'education'],
+  'diploma': ['k-12 education', 'education'],
+  'ged': ['k-12 education', 'education'],
 };
 
 // Pre-built flat list for search
@@ -621,22 +766,34 @@ export function getAllIssueOptions(): IssueOption[] {
   return cachedOptions;
 }
 
+/** Strip hyphens and collapse whitespace for fuzzy matching */
+function normalize(text: string): string {
+  return text.replace(/-/g, ' ').replace(/\s+/g, ' ');
+}
+
 export function searchIssues(query: string): IssueOption[] {
   const q = query.trim().toLowerCase();
   if (!q) return getAllIssueOptions();
 
+  const qNorm = normalize(q);
+
   // Expand query with keyword aliases
   const expandedTerms = new Set<string>();
+  // Track exact alias matches (full query = alias key) for boosted scoring
+  const exactAliasTerms = new Set<string>();
   // Add original terms
-  const originalTerms = q.split(/\s+/);
+  const originalTerms = qNorm.split(/\s+/);
   for (const term of originalTerms) {
     expandedTerms.add(term);
   }
   // Check for multi-word aliases (e.g., "food stamps", "social security")
+  // Match against both the raw query and the normalized query
   for (const [alias, expansions] of Object.entries(KEYWORD_ALIASES)) {
-    if (q.includes(alias)) {
+    if (qNorm.includes(alias) || q.includes(alias)) {
+      const isExactMatch = qNorm === alias || q === alias;
       for (const expansion of expansions) {
         expandedTerms.add(expansion);
+        if (isExactMatch) exactAliasTerms.add(expansion);
       }
     }
   }
@@ -645,7 +802,8 @@ export function searchIssues(query: string): IssueOption[] {
 
   // Score each option: higher score = better match
   const scored = allOptions.map((option) => {
-    const haystack = `${option.label} ${option.category}`.toLowerCase();
+    const raw = `${option.label} ${option.category}`.toLowerCase();
+    const haystack = normalize(raw);
     let score = 0;
 
     // Direct match on original terms (highest weight)
@@ -653,10 +811,12 @@ export function searchIssues(query: string): IssueOption[] {
       if (haystack.includes(term)) score += 10;
     }
 
-    // Expanded term matches (lower weight)
+    // Expanded term matches (lower weight, unless from exact alias match)
     for (const term of expandedTerms) {
       if (originalTerms.includes(term)) continue; // already counted
-      if (haystack.includes(term)) score += 5;
+      if (haystack.includes(term)) {
+        score += exactAliasTerms.has(term) ? 15 : 5;
+      }
     }
 
     return { option, score };
