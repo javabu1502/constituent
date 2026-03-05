@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { congressFetch } from '@/lib/congress-api';
 import { callClaudeStream } from '@/lib/claude-stream';
 import { researchLimiter, getClientIp } from '@/lib/rate-limit';
+import { verifyTurnstile } from '@/lib/turnstile';
 
 interface ResearchRequest {
   issue: string;
@@ -83,16 +84,23 @@ export async function POST(request: NextRequest) {
     });
   }
 
-  let body: ResearchRequest;
+  let body: ResearchRequest & { turnstileToken?: string };
   try {
     body = await request.json();
   } catch {
     return NextResponse.json({ error: 'Invalid request body' }, { status: 400 });
   }
 
-  const { issue, issueCategory, ask } = body;
+  const { issue, issueCategory, ask, turnstileToken } = body;
   if (!issue || !issueCategory) {
     return NextResponse.json({ error: 'issue and issueCategory are required' }, { status: 400 });
+  }
+
+  if (turnstileToken !== undefined || process.env.TURNSTILE_SECRET_KEY) {
+    const valid = await verifyTurnstile(turnstileToken || '');
+    if (!valid) {
+      return new Response('CAPTCHA verification failed', { status: 403 });
+    }
   }
 
   const billContext = await fetchRecentBills(issueCategory);

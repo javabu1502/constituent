@@ -80,7 +80,7 @@ function RepCard({
             <img
               src={rep.photoUrl}
               alt={rep.name}
-              className="w-14 h-14 rounded-full object-cover border-2 border-gray-200 dark:border-gray-600"
+              className="w-10 h-10 sm:w-14 sm:h-14 rounded-full object-cover border-2 border-gray-200 dark:border-gray-600"
               onError={(e) => {
                 const target = e.currentTarget;
                 target.style.display = 'none';
@@ -89,7 +89,7 @@ function RepCard({
             />
           ) : null}
           <div
-            className={`w-14 h-14 rounded-full flex items-center justify-center text-base font-bold ${partyColors.bg} ${partyColors.text} ${rep.photoUrl ? 'hidden' : ''}`}
+            className={`w-10 h-10 sm:w-14 sm:h-14 rounded-full flex items-center justify-center text-sm sm:text-base font-bold ${partyColors.bg} ${partyColors.text} ${rep.photoUrl ? 'hidden' : ''}`}
           >
             {getInitials(rep.name)}
           </div>
@@ -165,13 +165,13 @@ export function RepStep({ state, dispatch, onBack }: RepStepProps) {
       </div>
 
       {/* Not sure hint + Select All */}
-      <div className="flex items-center justify-between mb-4">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
         <p className="text-xs text-gray-500 dark:text-gray-400">
           Not sure who to pick? Select all and each will get a personalized message.
         </p>
         <button
           onClick={handleSelectAll}
-          className="text-sm font-medium text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 transition-colors shrink-0 ml-4"
+          className="text-sm font-medium text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 transition-colors shrink-0"
         >
           {allSelected ? 'Deselect All' : 'Select All'}
         </button>

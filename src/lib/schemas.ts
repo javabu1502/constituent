@@ -31,6 +31,7 @@ export const generateMessageSchema = z.object({
   senderName: z.string().min(1).max(200),
   address: addressSchema.optional(),
   contactMethod: z.enum(['email', 'phone']).optional(),
+  turnstileToken: z.string().optional(),
 });
 
 export const chatRequestSchema = z.object({
@@ -43,6 +44,7 @@ export const chatRequestSchema = z.object({
     )
     .min(1)
     .max(50),
+  turnstileToken: z.string().optional(),
 });
 
 export const trackSendSchema = z.object({
@@ -82,6 +84,7 @@ export const generateCommentSchema = z.object({
   personalStory: z.string().max(2000).optional(),
   keyPoints: z.string().max(2000).optional(),
   senderName: z.string().min(1).max(200),
+  turnstileToken: z.string().optional(),
 });
 
 export const profileUpdateSchema = z

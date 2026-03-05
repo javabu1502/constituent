@@ -2,6 +2,7 @@ import { callClaudeStream } from '@/lib/claude-stream';
 import { CHAT_SYSTEM_PROMPT } from '@/lib/chat-system-prompt';
 import { chatRequestSchema, parseBody } from '@/lib/schemas';
 import { chatLimiter, getClientIp } from '@/lib/rate-limit';
+import { verifyTurnstile } from '@/lib/turnstile';
 
 export async function POST(request: Request) {
   const ip = getClientIp(request);
@@ -29,7 +30,14 @@ export async function POST(request: Request) {
     return new Response(parsed.error, { status: 400 });
   }
 
-  const { messages } = parsed.data;
+  const { messages, turnstileToken } = parsed.data;
+
+  if (turnstileToken !== undefined || process.env.TURNSTILE_SECRET_KEY) {
+    const valid = await verifyTurnstile(turnstileToken || '');
+    if (!valid) {
+      return new Response('CAPTCHA verification failed', { status: 403 });
+    }
+  }
 
   const last = messages[messages.length - 1];
   if (last.role !== 'user') {

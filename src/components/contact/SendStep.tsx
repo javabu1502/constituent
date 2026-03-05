@@ -346,7 +346,7 @@ function OfficialCard({ official, message, deliveryInfo, contactMethod, isCallCo
         )}
 
         {/* Secondary actions row */}
-        <div className="flex gap-2">
+        <div className="flex flex-col sm:flex-row gap-2">
           {deliveryInfo.method === 'staffer_email' ? (
             <>
               {/* Copy Email Address */}

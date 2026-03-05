@@ -152,7 +152,7 @@ export function AddressStep({ state, dispatch }: AddressStepProps) {
         </Button>
       </form>
 
-      <p className="text-xs text-gray-400 dark:text-gray-500 text-center mt-6">
+      <p className="text-xs text-gray-500 dark:text-gray-400 text-center mt-6">
         Used only to find your representatives. Never stored or shared.
       </p>
     </div>

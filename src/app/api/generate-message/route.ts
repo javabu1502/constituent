@@ -4,6 +4,7 @@ import { getCommitteesForMember } from '@/lib/legislators';
 import { z } from 'zod';
 import { generateMessageSchema, parseBody } from '@/lib/schemas';
 import { generateLimiter, getClientIp } from '@/lib/rate-limit';
+import { verifyTurnstile } from '@/lib/turnstile';
 
 type GenerateRequest = z.infer<typeof generateMessageSchema>;
 type OfficialInput = GenerateRequest['officials'][number];
@@ -286,7 +287,15 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: parsed.error }, { status: 400 });
   }
 
-  const { officials, issue, ask, personalWhy, senderName, address, contactMethod } = parsed.data;
+  const { officials, issue, ask, personalWhy, senderName, address, contactMethod, turnstileToken } = parsed.data;
+
+  if (turnstileToken !== undefined || process.env.TURNSTILE_SECRET_KEY) {
+    const valid = await verifyTurnstile(turnstileToken || '');
+    if (!valid) {
+      return NextResponse.json({ error: 'CAPTCHA verification failed' }, { status: 403 });
+    }
+  }
+
   const method = contactMethod === 'phone' ? 'phone' : 'email';
 
   try {

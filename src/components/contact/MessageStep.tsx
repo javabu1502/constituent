@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import type { ContactState, ContactAction, OfficialMessage } from './ContactFlow';
 import { Button } from '@/components/ui/Button';
 import { PHONE_TIPS } from '@/lib/phone-tips';
+import { useTurnstile } from '@/components/ui/Turnstile';
 
 interface MessageStepProps {
   state: ContactState;
@@ -26,6 +27,7 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
   const { selectedReps, userName, issue, ask, personalWhy, messages, contactMethod, address } = state;
   const [reviewIndex, setReviewIndex] = useState(0);
   const [isGenerating, setIsGenerating] = useState(false);
+  const { getToken, TurnstileWidget } = useTurnstile();
 
   const currentRep = selectedReps[reviewIndex];
   const currentMessage = currentRep ? messages[currentRep.name] : null;
@@ -35,6 +37,7 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
     dispatch({ type: 'SET_ERROR', payload: null });
 
     try {
+      const turnstileToken = await getToken();
       const response = await fetch('/api/generate-message', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -61,6 +64,7 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
             zip: address.zip,
           } : undefined,
           contactMethod,
+          turnstileToken: turnstileToken || undefined,
         }),
       });
 
@@ -176,7 +180,8 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
 
       {/* Official tabs */}
       {selectedReps.length > 1 && (
-        <div className="flex gap-1 overflow-x-auto pb-3 mb-4 -mx-2 px-2">
+        <div className="relative mb-4">
+        <div className="flex gap-1 overflow-x-auto pb-3 -mx-2 px-2">
           {selectedReps.map((rep, i) => {
             const partyColors = getPartyColors(rep.party);
             const isActive = i === reviewIndex;
@@ -208,6 +213,8 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
               </button>
             );
           })}
+        </div>
+        <div className="pointer-events-none absolute right-0 top-0 bottom-3 w-8 bg-gradient-to-l from-white dark:from-gray-800 to-transparent sm:hidden" />
         </div>
       )}
 
@@ -270,7 +277,7 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
             <textarea
               value={currentMessage.body}
               onChange={(e) => currentRep && updateMessage(currentRep.name, 'body', e.target.value)}
-              rows={contactMethod === 'phone' ? 8 : 10}
+              rows={contactMethod === 'phone' ? 6 : 8}
               className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent resize-none font-mono text-sm leading-relaxed bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
             />
           </div>
@@ -338,6 +345,7 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
           </Button>
         )}
       </div>
+      <TurnstileWidget />
     </div>
   );
 }

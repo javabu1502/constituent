@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { callClaude, extractJSON, cleanText } from '@/lib/claude';
 import { generateCommentSchema, parseBody } from '@/lib/schemas';
 import { generateLimiter, getClientIp } from '@/lib/rate-limit';
+import { verifyTurnstile } from '@/lib/turnstile';
 
 /**
  * POST /api/generate-comment
@@ -39,7 +40,14 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: parsed.error }, { status: 400 });
   }
 
-  const { regulationTitle, agency, abstract, position, personalStory, keyPoints, senderName } = parsed.data;
+  const { regulationTitle, agency, abstract, position, personalStory, keyPoints, senderName, turnstileToken } = parsed.data;
+
+  if (turnstileToken !== undefined || process.env.TURNSTILE_SECRET_KEY) {
+    const valid = await verifyTurnstile(turnstileToken || '');
+    if (!valid) {
+      return NextResponse.json({ error: 'CAPTCHA verification failed' }, { status: 403 });
+    }
+  }
 
   const positionLabel = position === 'support' ? 'supporting' : position === 'oppose' ? 'opposing' : 'raising concerns about';
 

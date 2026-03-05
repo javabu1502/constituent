@@ -13,6 +13,7 @@ import { DeleteCampaignButton } from '@/components/campaign/DeleteCampaignButton
 import { CollapsibleSection } from '@/components/ui/CollapsibleSection';
 import { GettingStartedChecklist } from '@/components/dashboard/GettingStartedChecklist';
 import { WelcomeTour } from '@/components/dashboard/WelcomeTour';
+import { NotificationPreferences } from '@/components/dashboard/NotificationPreferences';
 
 export const metadata: Metadata = {
   title: 'Dashboard | My Democracy',
@@ -164,6 +165,12 @@ export default async function DashboardPage() {
       <section className="mb-10">
         <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Your Feed</h2>
         <RepActivitySection />
+      </section>
+
+      {/* Notifications */}
+      <section className="mb-10">
+        <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Notifications</h2>
+        <NotificationPreferences userEmail={user.email || ''} />
       </section>
 
       {/* SECONDARY sections */}

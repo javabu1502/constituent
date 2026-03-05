@@ -5,6 +5,7 @@ import type { ContactState, ContactAction } from './ContactFlow';
 import type { Official } from '@/lib/types';
 import { Button } from '@/components/ui/Button';
 import { IssuePicker } from '@/components/ui/IssuePicker';
+import { useTurnstile } from '@/components/ui/Turnstile';
 
 interface TopicStepProps {
   state: ContactState;
@@ -1710,6 +1711,7 @@ export function TopicStep({ state, dispatch, onBack }: TopicStepProps) {
   const [researchLoading, setResearchLoading] = useState(false);
   const [researchError, setResearchError] = useState('');
   const researchAbortRef = useRef<AbortController | null>(null);
+  const { getToken, TurnstileWidget } = useTurnstile();
 
   const handleResearch = async () => {
     if (researchAbortRef.current) {
@@ -1724,10 +1726,11 @@ export function TopicStep({ state, dispatch, onBack }: TopicStepProps) {
     researchAbortRef.current = abortController;
 
     try {
+      const turnstileToken = await getToken();
       const res = await fetch('/api/research-assist', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ issue, issueCategory: state.issueCategory, ask }),
+        body: JSON.stringify({ issue, issueCategory: state.issueCategory, ask, turnstileToken: turnstileToken || undefined }),
         signal: abortController.signal,
       });
 
@@ -2094,6 +2097,7 @@ export function TopicStep({ state, dispatch, onBack }: TopicStepProps) {
           See our Privacy Policy
         </a>{' '}for details.
       </p>
+      <TurnstileWidget />
     </div>
   );
 }

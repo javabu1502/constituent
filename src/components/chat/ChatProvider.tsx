@@ -1,6 +1,7 @@
 'use client';
 
 import { createContext, useContext, useState, useCallback, useRef, type ReactNode } from 'react';
+import { useTurnstile } from '@/components/ui/Turnstile';
 
 interface Message {
   id: string;
@@ -36,6 +37,7 @@ export function ChatProvider({ children }: { children: ReactNode }) {
   const [error, setError] = useState<string | null>(null);
   const abortRef = useRef<AbortController | null>(null);
   const timestampsRef = useRef<number[]>([]);
+  const { getToken, TurnstileWidget } = useTurnstile();
 
   const sendMessage = useCallback(async (content: string) => {
     const trimmed = content.trim();
@@ -74,11 +76,12 @@ export function ChatProvider({ children }: { children: ReactNode }) {
     }));
 
     try {
+      const turnstileToken = await getToken();
       abortRef.current = new AbortController();
       const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: apiMessages }),
+        body: JSON.stringify({ messages: apiMessages, turnstileToken: turnstileToken || undefined }),
         signal: abortRef.current.signal,
       });
 
@@ -119,7 +122,7 @@ export function ChatProvider({ children }: { children: ReactNode }) {
       setIsLoading(false);
       abortRef.current = null;
     }
-  }, [isLoading, messages]);
+  }, [isLoading, messages, getToken]);
 
   const clearChat = useCallback(() => {
     if (abortRef.current) abortRef.current.abort();
@@ -133,6 +136,7 @@ export function ChatProvider({ children }: { children: ReactNode }) {
       value={{ isOpen, setIsOpen, messages, isLoading, error, sendMessage, clearChat }}
     >
       {children}
+      <TurnstileWidget />
     </ChatContext.Provider>
   );
 }

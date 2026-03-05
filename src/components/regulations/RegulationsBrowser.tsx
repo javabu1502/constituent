@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useEffect } from 'react';
 import Link from 'next/link';
+import { useTurnstile } from '@/components/ui/Turnstile';
 
 interface Regulation {
   id: string;
@@ -337,11 +338,13 @@ function CommentWriter({
   const [generatedComment, setGeneratedComment] = useState('');
   const [generating, setGenerating] = useState(false);
   const [copied, setCopied] = useState(false);
+  const { getToken, TurnstileWidget } = useTurnstile();
 
   const handleGenerate = async () => {
     if (!senderName.trim()) return;
     setGenerating(true);
     try {
+      const turnstileToken = await getToken();
       const res = await fetch('/api/generate-comment', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -353,6 +356,7 @@ function CommentWriter({
           personalStory: personalStory.trim(),
           keyPoints: keyPoints.trim(),
           senderName: senderName.trim(),
+          turnstileToken: turnstileToken || undefined,
         }),
       });
       const data = await res.json();
@@ -543,6 +547,7 @@ function CommentWriter({
           </div>
         )}
       </div>
+      <TurnstileWidget />
     </div>
   );
 }

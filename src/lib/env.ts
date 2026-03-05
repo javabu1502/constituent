@@ -5,6 +5,7 @@ const publicSchema = z.object({
   NEXT_PUBLIC_SUPABASE_URL: z.string().url(),
   NEXT_PUBLIC_SUPABASE_ANON_KEY: z.string().min(1),
   NEXT_PUBLIC_GOOGLE_MAPS_API_KEY: z.string().min(1),
+  NEXT_PUBLIC_TURNSTILE_SITE_KEY: z.string().optional(),
 });
 
 // Server-only env vars
@@ -16,6 +17,10 @@ const serverSchema = z.object({
   LEGISCAN_API_KEY: z.string().optional(),
   OPENSTATES_API_KEY: z.string().optional(),
   SUPABASE_SECRET_KEY: z.string().min(1),
+  TURNSTILE_SECRET_KEY: z.string().optional(),
+  RESEND_API_KEY: z.string().optional(),
+  RESEND_FROM_EMAIL: z.string().optional(),
+  CRON_SECRET: z.string().optional(),
 });
 
 // Combined schema
