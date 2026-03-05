@@ -12,7 +12,7 @@ const organizationJsonLd = {
   url: 'https://www.mydemocracy.app',
   logo: 'https://www.mydemocracy.app/icon.svg',
   description:
-    'Find and contact your federal and state representatives. Track legislation, voting records, and take civic action.',
+    'Find out who represents you, see what they\'re voting on, and send them a message in minutes.',
   sameAs: ['https://x.com/mydemocracyapp'],
 };
 
@@ -86,8 +86,8 @@ export default async function HomePage() {
             <span className="text-purple-600 dark:text-purple-400">Make it heard.</span>
           </h1>
           <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 mb-10 max-w-2xl mx-auto leading-relaxed">
-            Your all-in-one civic engagement hub. Know your representatives,
-            track legislation, and take action.
+            Find out who represents you, see what they&apos;re voting on,
+            and send them a message in minutes.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/contact">
