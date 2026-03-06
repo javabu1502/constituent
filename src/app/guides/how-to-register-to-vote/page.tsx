@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
-import { BreadcrumbJsonLd } from '@/lib/seo';
+import { BreadcrumbJsonLd, FaqJsonLd } from '@/lib/seo';
 
 export const metadata: Metadata = {
   title: 'How to Register to Vote | Complete 2026 Guide | My Democracy',
@@ -17,6 +17,11 @@ export default function RegisterToVotePage() {
   return (
     <div className="py-12 px-4">
       <BreadcrumbJsonLd items={[{ name: 'Home', href: '/' }, { name: 'Guides', href: '/guides' }, { name: 'How to Register to Vote', href: '/guides/how-to-register-to-vote' }]} />
+      <FaqJsonLd items={[
+        { question: 'Can I register to vote if I\'m homeless?', answer: 'Yes. Every state allows homeless individuals to register. You can use a shelter address, a street corner description, or a general delivery address at a post office.' },
+        { question: 'Can I register to vote if I have a felony conviction?', answer: 'It depends on your state. Most states restore voting rights after completing your sentence. Maine, Vermont, and DC allow voting from prison. Check your state\'s specific rules at the ACLU.' },
+        { question: 'I\'m a college student - where should I register to vote?', answer: 'You can register at either your home address or your college address, but only one. Consider which races are more competitive or meaningful to you.' },
+      ]} />
       <div className="max-w-3xl mx-auto">
         <div className="mb-6">
           <Link

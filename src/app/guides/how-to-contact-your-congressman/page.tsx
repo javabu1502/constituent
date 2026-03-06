@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
-import { BreadcrumbJsonLd } from '@/lib/seo';
+import { BreadcrumbJsonLd, HowToJsonLd } from '@/lib/seo';
 
 export const metadata: Metadata = {
   title: 'How to Contact Your Elected Officials | My Democracy',
@@ -17,6 +17,17 @@ export default function ContactCongressmanGuidePage() {
   return (
     <div className="py-12 px-4">
       <BreadcrumbJsonLd items={[{ name: 'Home', href: '/' }, { name: 'Guides', href: '/guides' }, { name: 'How to Contact Your Elected Officials', href: '/guides/how-to-contact-your-congressman' }]} />
+      <HowToJsonLd
+        name="How to Contact Your Elected Officials"
+        description="Step-by-step guide to contacting your US Representatives and Senators by phone, email, and letter."
+        steps={[
+          { name: 'Find your officials', text: 'Enter your address to identify your two US Senators and one US Representative.' },
+          { name: 'Choose a contact method', text: 'Phone calls are most effective, followed by personalized emails, physical letters, and in-person meetings.' },
+          { name: 'Write your message', text: 'State your name and address, reference a specific bill or issue, and clearly state your position (support or oppose).' },
+          { name: 'Send your message', text: 'Call the DC or district office, submit via the official website contact form, or mail a letter to the district office.' },
+          { name: 'Follow up', text: 'Multiple contacts on the same issue show sustained interest. Follow up if you don\'t see action.' },
+        ]}
+      />
       <div className="max-w-3xl mx-auto">
         <div className="mb-6">
           <Link

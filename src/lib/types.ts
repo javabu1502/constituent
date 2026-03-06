@@ -375,6 +375,19 @@ export interface LobbyingResponse {
   quarters_covered: string[];
 }
 
+// District demographics (Census ACS data)
+export interface DistrictDemographics {
+  totalPopulation: number;
+  medianIncome: number;
+  medianAge: number;
+  bachelorsPlusPercent: number;
+  povertyRate: number;
+  district: string;
+  state: string;
+  source: string;
+  year: number;
+}
+
 // Track send event
 export interface TrackSendRequest {
   recipientName: string;

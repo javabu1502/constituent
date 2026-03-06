@@ -21,6 +21,7 @@ const serverSchema = z.object({
   RESEND_API_KEY: z.string().optional(),
   RESEND_FROM_EMAIL: z.string().optional(),
   CRON_SECRET: z.string().optional(),
+  CENSUS_API_KEY: z.string().optional(),
 });
 
 // Combined schema

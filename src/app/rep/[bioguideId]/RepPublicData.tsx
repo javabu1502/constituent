@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import type { RepVote, VotingSummary, RepFinance, LobbyingResponse } from '@/lib/types';
+import type { RepVote, VotingSummary, RepFinance, LobbyingResponse, DistrictDemographics } from '@/lib/types';
 
-type Tab = 'votes' | 'funding' | 'lobbying';
+type Tab = 'votes' | 'funding' | 'lobbying' | 'district';
 
 interface VotesData {
   votes: RepVote[];
@@ -70,6 +70,7 @@ export default function RepPublicData({
   const [votesData, setVotesData] = useState<VotesData | null>(null);
   const [financeData, setFinanceData] = useState<RepFinance | null>(null);
   const [lobbyingData, setLobbyingData] = useState<LobbyingResponse | null>(null);
+  const [demographicsData, setDemographicsData] = useState<DistrictDemographics | null>(null);
   const [loading, setLoading] = useState(true);
 
   const lastName = name.split(' ').pop() || name;
@@ -79,6 +80,7 @@ export default function RepPublicData({
       fetch(`/api/rep/${bioguideId}/votes`).then((r) => (r.ok ? r.json() : null)),
       fetch(`/api/rep/${bioguideId}/finance`).then((r) => (r.ok ? r.json() : null)),
       fetch(`/api/rep/${bioguideId}/lobbying`).then((r) => (r.ok ? r.json() : null)),
+      fetch(`/api/rep/${bioguideId}/demographics`).then((r) => (r.ok ? r.json() : null)),
     ]).then((results) => {
       if (results[0].status === 'fulfilled' && results[0].value) {
         setVotesData(results[0].value);
@@ -89,6 +91,9 @@ export default function RepPublicData({
       if (results[2].status === 'fulfilled' && results[2].value) {
         setLobbyingData(results[2].value);
       }
+      if (results[3].status === 'fulfilled' && results[3].value?.demographics) {
+        setDemographicsData(results[3].value.demographics);
+      }
       setLoading(false);
     });
   }, [bioguideId]);
@@ -97,6 +102,7 @@ export default function RepPublicData({
     { key: 'votes', label: 'Votes' },
     { key: 'funding', label: 'Funding' },
     { key: 'lobbying', label: 'Lobbying' },
+    { key: 'district', label: 'District' },
   ];
 
   return (
@@ -357,6 +363,28 @@ export default function RepPublicData({
           ) : (
             <p className="text-gray-500 dark:text-gray-400 text-sm text-center py-4">
               Lobbying data not available yet.
+            </p>
+          )
+        ) : tab === 'district' ? (
+          demographicsData ? (
+            <div className="space-y-4">
+              <p className="text-xs text-gray-500 dark:text-gray-400">
+                District demographics from the U.S. Census Bureau American Community Survey ({demographicsData.year} 5-Year Estimates). Shows the population characteristics of the area this official represents.
+              </p>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                <StatCard label="Population" value={demographicsData.totalPopulation.toLocaleString()} />
+                <StatCard label="Median Income" value={formatMoney(demographicsData.medianIncome)} />
+                <StatCard label="Median Age" value={demographicsData.medianAge.toFixed(1)} />
+                <StatCard label="Bachelor's+" value={`${demographicsData.bachelorsPlusPercent}%`} />
+                <StatCard label="Poverty Rate" value={`${demographicsData.povertyRate}%`} />
+              </div>
+              <p className="text-xs text-gray-400 dark:text-gray-500">
+                Source: {demographicsData.source}
+              </p>
+            </div>
+          ) : (
+            <p className="text-gray-500 dark:text-gray-400 text-sm text-center py-4">
+              District demographics not available yet.
             </p>
           )
         ) : null}
