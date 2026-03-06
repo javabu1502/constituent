@@ -148,7 +148,7 @@ export default function PrimaryElectionGuidePage() {
 
         <div className="mt-10 bg-purple-50 dark:bg-purple-900/20 rounded-2xl p-8 text-center">
           <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">Know your primary date?</h2>
-          <p className="text-gray-600 dark:text-gray-300 mb-6">Check your state&apos;s election info and find your representatives.</p>
+          <p className="text-gray-600 dark:text-gray-300 mb-6">Check your state&apos;s election info and find your officials.</p>
           <Link href="/states" className="inline-flex items-center gap-2 px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg transition-colors">
             Find Your State
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>

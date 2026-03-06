@@ -289,7 +289,7 @@ export default function BillBecomesLawGuidePage() {
                   Between committee markup, floor amendments, and conference negotiations, a bill can change dramatically from its original form. Provisions may be added, removed, or rewritten entirely. Major legislation like spending bills or reform packages often bear little resemblance to the version that was introduced. This is why tracking a bill&apos;s progress, not just its introduction, is essential for engaged citizens.
                 </p>
                 <p className="text-gray-600 dark:text-gray-300 mt-2 text-sm italic">
-                  Advocacy tip: Watch for amendments that change a bill&apos;s impact. A bill you supported at introduction may have been altered significantly by the time it reaches a vote. Read the latest version and any amendment summaries before contacting your representatives.
+                  Advocacy tip: Watch for amendments that change a bill&apos;s impact. A bill you supported at introduction may have been altered significantly by the time it reaches a vote. Read the latest version and any amendment summaries before contacting your officials.
                 </p>
               </div>
             </div>
@@ -380,7 +380,7 @@ export default function BillBecomesLawGuidePage() {
                     <strong className="text-gray-900 dark:text-white">Why this moment matters:</strong> Early support (or opposition) shapes whether a bill gains momentum. Legislators gauge interest at this stage to decide how much political capital to invest.
                   </p>
                   <p className="text-gray-600 dark:text-gray-300 mb-2">
-                    <strong className="text-gray-900 dark:text-white">What to ask for:</strong> Ask your representative to co-sponsor (or refuse to co-sponsor) the bill. If they introduced it, thank them or express your concerns.
+                    <strong className="text-gray-900 dark:text-white">What to ask for:</strong> Ask your official to co-sponsor (or refuse to co-sponsor) the bill. If they introduced it, thank them or express your concerns.
                   </p>
                   <p className="text-gray-600 dark:text-gray-300 text-sm italic">
                     How to be effective: Reference the bill by number. Be specific about why it matters to you personally. A brief, personal story is more persuasive than a form letter.
@@ -398,7 +398,7 @@ export default function BillBecomesLawGuidePage() {
                     <strong className="text-gray-900 dark:text-white">Why this moment matters:</strong> This is one of the <strong className="text-gray-900 dark:text-white">highest-impact intervention points</strong>. Committee members are actively gathering information and forming opinions. Most bills die in committee, so energy here can determine whether a bill advances or stalls.
                   </p>
                   <p className="text-gray-600 dark:text-gray-300 mb-2">
-                    <strong className="text-gray-900 dark:text-white">What to ask for:</strong> If your representative is on the committee, ask them to support or oppose the bill during markup. Provide specific information about how the bill would affect your community.
+                    <strong className="text-gray-900 dark:text-white">What to ask for:</strong> If your official is on the committee, ask them to support or oppose the bill during markup. Provide specific information about how the bill would affect your community.
                   </p>
                   <p className="text-gray-600 dark:text-gray-300 text-sm italic">
                     How to be effective: Call the committee office directly, not just your own representative. At the state level, sign up to testify in person. Your physical presence carries significant weight. Submit written testimony if you cannot attend.
@@ -452,7 +452,7 @@ export default function BillBecomesLawGuidePage() {
                     <strong className="text-gray-900 dark:text-white">Why this moment matters:</strong> Conference is where major last-minute changes are often made. Provisions can be added or removed with little public scrutiny. The final bill may differ significantly from what either chamber originally passed.
                   </p>
                   <p className="text-gray-600 dark:text-gray-300 mb-2">
-                    <strong className="text-gray-900 dark:text-white">What to ask for:</strong> Ask conferees to keep (or remove) specific provisions. Ask your representatives to vote against the conference report if critical provisions were changed.
+                    <strong className="text-gray-900 dark:text-white">What to ask for:</strong> Ask conferees to keep (or remove) specific provisions. Ask your officials to vote against the conference report if critical provisions were changed.
                   </p>
                   <p className="text-gray-600 dark:text-gray-300 text-sm italic">
                     How to be effective: This is an often-overlooked intervention point. Contact the offices of conferees directly, even if they are not your own representatives. Advocacy organizations and media attention are especially valuable at this stage to increase transparency.
@@ -556,7 +556,7 @@ export default function BillBecomesLawGuidePage() {
             <ul className="space-y-2">
               <li>
                 <Link href="/guides/how-to-contact-your-congressman" className="text-purple-600 dark:text-purple-400 hover:underline">
-                  How to Contact Your Congressman
+                  How to Contact Your Elected Officials
                 </Link>
               </li>
               <li>
@@ -579,13 +579,13 @@ export default function BillBecomesLawGuidePage() {
             Ready to influence the process?
           </h2>
           <p className="text-gray-600 dark:text-gray-300 mb-6">
-            Find your representatives and let them know where you stand.
+            Find your officials and let them know where you stand.
           </p>
           <Link
             href="/contact"
             className="inline-flex items-center gap-2 px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg transition-colors"
           >
-            Contact Your Reps
+            Write to Your Officials
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
             </svg>

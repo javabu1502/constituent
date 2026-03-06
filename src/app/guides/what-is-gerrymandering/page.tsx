@@ -133,7 +133,7 @@ export default function GerrymanderingGuidePage() {
           <section className="mb-10 bg-gray-50 dark:bg-gray-800 rounded-xl p-6">
             <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Related Guides</h2>
             <ul className="space-y-2">
-              <li><Link href="/guides/who-are-my-representatives" className="text-purple-600 dark:text-purple-400 hover:underline">Who Are My Representatives?</Link></li>
+              <li><Link href="/guides/who-are-my-representatives" className="text-purple-600 dark:text-purple-400 hover:underline">Who Are My Elected Officials?</Link></li>
               <li><Link href="/guides/how-to-vote-in-a-primary-election" className="text-purple-600 dark:text-purple-400 hover:underline">How to Vote in a Primary Election</Link></li>
               <li><Link href="/guides/how-to-get-involved-in-local-politics" className="text-purple-600 dark:text-purple-400 hover:underline">How to Get Involved in Local Politics</Link></li>
             </ul>
@@ -144,7 +144,7 @@ export default function GerrymanderingGuidePage() {
           <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">Want to take action?</h2>
           <p className="text-gray-600 dark:text-gray-300 mb-6">Contact your state legislators about redistricting reform.</p>
           <Link href="/contact" className="inline-flex items-center gap-2 px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg transition-colors">
-            Contact Your Reps
+            Write to Your Officials
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
           </Link>
         </div>

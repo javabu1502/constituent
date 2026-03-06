@@ -208,7 +208,7 @@ export default function CommentOnRegulationsGuidePage() {
               </li>
               <li>
                 <Link href="/guides/how-to-contact-your-congressman" className="text-purple-600 dark:text-purple-400 hover:underline">
-                  How to Contact Your Congressman
+                  How to Contact Your Elected Officials
                 </Link>
               </li>
             </ul>
@@ -227,7 +227,7 @@ export default function CommentOnRegulationsGuidePage() {
             href="/contact"
             className="inline-flex items-center gap-2 px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg transition-colors"
           >
-            Contact Your Reps
+            Write to Your Officials
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
             </svg>

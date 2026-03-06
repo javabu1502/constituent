@@ -490,7 +490,7 @@ export default function WriteLetterGuidePage() {
               </li>
               <li>
                 <Link href="/guides/how-to-contact-your-congressman" className="text-purple-600 dark:text-purple-400 hover:underline">
-                  How to Contact Your Congressman
+                  How to Contact Your Elected Officials
                 </Link>
               </li>
               <li>

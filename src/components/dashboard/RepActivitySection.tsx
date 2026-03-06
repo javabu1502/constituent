@@ -293,7 +293,7 @@ function VotingRecordTab({ repId, repLevel, repState }: { repId: string; repLeve
         </div>
       );
     }
-    return <p className="text-sm text-gray-500 dark:text-gray-400 px-1">No voting record available for this representative.</p>;
+    return <p className="text-sm text-gray-500 dark:text-gray-400 px-1">No voting record available for this official.</p>;
   }
 
   const summary = data.summary;
@@ -505,7 +505,7 @@ function LobbyingConnectionsSection({ repId, chamber }: { repId: string; chamber
     <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
       <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-1">Lobbying Connections</h4>
       <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">
-        Organizations whose employees donated to this representative&apos;s campaign and also spent money lobbying on issues before their committees. This overlap does not necessarily imply coordination or impropriety.
+        Organizations whose employees donated to this official&apos;s campaign and also spent money lobbying on issues before their committees. This overlap does not necessarily imply coordination or impropriety.
       </p>
       <div className="space-y-2">
         {connections.slice(0, 10).map((conn, i) => (
@@ -536,7 +536,7 @@ function LobbyingConnectionsSection({ repId, chamber }: { repId: string; chamber
 
 function FundingTab({ finance, repId, chamber }: { finance: RepFinance | null; repId: string; chamber?: string }) {
   if (!finance) {
-    return <p className="text-sm text-gray-500 dark:text-gray-400 px-1">No campaign finance data available for this representative.</p>;
+    return <p className="text-sm text-gray-500 dark:text-gray-400 px-1">No campaign finance data available for this official.</p>;
   }
 
   const individualPct = finance.total_raised > 0 ? Math.round((finance.individual_contributions / finance.total_raised) * 100) : 0;
@@ -882,7 +882,7 @@ export function RepActivitySection() {
   if (repLoading) {
     return (
       <div className="space-y-3">
-        <p className="text-sm text-gray-500 dark:text-gray-400 animate-pulse">Loading your representatives&apos; activity...</p>
+        <p className="text-sm text-gray-500 dark:text-gray-400 animate-pulse">Loading your officials&apos; activity...</p>
         {Array.from({ length: 4 }).map((_, i) => <SkeletonCard key={i} />)}
       </div>
     );
@@ -897,7 +897,7 @@ export function RepActivitySection() {
           </svg>
         </div>
         <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">No activity yet</h3>
-        <p className="text-gray-600 dark:text-gray-400 mb-4">Add your address to see bills and news from your representatives.</p>
+        <p className="text-gray-600 dark:text-gray-400 mb-4">Add your address to see bills and news from your officials.</p>
       </div>
     );
   }
@@ -914,7 +914,7 @@ export function RepActivitySection() {
               tab === 'by-rep' ? 'bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm' : 'text-gray-600 dark:text-gray-400'
             }`}
           >
-            By Representative
+            By Official
           </button>
           <button
             onClick={() => setTab('by-issue')}
@@ -1011,7 +1011,7 @@ export function RepActivitySection() {
           )}
           {!issueLoading && issueGroups.userAreas.length === 0 && issueGroups.discoverAreas.length === 0 && (
             <div className="text-center py-8">
-              <p className="text-gray-500 dark:text-gray-400">No issue data available yet. Send messages to your representatives to see personalized issue tracking.</p>
+              <p className="text-gray-500 dark:text-gray-400">No issue data available yet. Send messages to your officials to see personalized issue tracking.</p>
             </div>
           )}
         </div>

@@ -3,11 +3,11 @@ import type { Metadata } from 'next';
 import { BreadcrumbJsonLd } from '@/lib/seo';
 
 export const metadata: Metadata = {
-  title: 'How to Contact Your Congressman | My Democracy',
+  title: 'How to Contact Your Elected Officials | My Democracy',
   description: 'Step-by-step guide to contacting your US Representatives and Senators by phone, email, and letter. Learn which methods are most effective.',
   keywords: ['contact congressman', 'contact senator', 'call congress', 'email representative', 'write to congress', 'congressional office'],
   openGraph: {
-    title: 'How to Contact Your Congressman | My Democracy',
+    title: 'How to Contact Your Elected Officials | My Democracy',
     description: 'Step-by-step guide to contacting your US Representatives and Senators by phone, email, and letter. Learn which methods are most effective.',
     type: 'article',
   },
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 export default function ContactCongressmanGuidePage() {
   return (
     <div className="py-12 px-4">
-      <BreadcrumbJsonLd items={[{ name: 'Home', href: '/' }, { name: 'Guides', href: '/guides' }, { name: 'How to Contact Your Congressman', href: '/guides/how-to-contact-your-congressman' }]} />
+      <BreadcrumbJsonLd items={[{ name: 'Home', href: '/' }, { name: 'Guides', href: '/guides' }, { name: 'How to Contact Your Elected Officials', href: '/guides/how-to-contact-your-congressman' }]} />
       <div className="max-w-3xl mx-auto">
         <div className="mb-6">
           <Link
@@ -31,7 +31,7 @@ export default function ContactCongressmanGuidePage() {
         </div>
 
         <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-6">
-          How to Contact Your Congressman
+          How to Contact Your Elected Officials
         </h1>
 
         <div className="prose prose-gray dark:prose-invert max-w-none">
@@ -94,7 +94,7 @@ export default function ContactCongressmanGuidePage() {
                 </p>
                 <ul className="list-disc list-inside text-gray-600 dark:text-gray-300 space-y-1 text-sm">
                   <li>Use the contact form on the official website</li>
-                  <li>Include your full address (they verify constituents)</li>
+                  <li>Include your full address (they verify you live in their area)</li>
                   <li>Be specific about the issue and your ask</li>
                   <li>Share a personal story if relevant</li>
                 </ul>
@@ -133,7 +133,7 @@ export default function ContactCongressmanGuidePage() {
             </h2>
             <div className="pl-10">
               <ul className="list-disc list-inside text-gray-600 dark:text-gray-300 space-y-2">
-                <li><strong className="text-gray-900 dark:text-white">Be a constituent</strong>: Only contact your own representatives. They won&apos;t respond to non-constituents.</li>
+                <li><strong className="text-gray-900 dark:text-white">Contact your own officials</strong>: Only contact officials who represent your area. They won&apos;t respond to people outside their district or state.</li>
                 <li><strong className="text-gray-900 dark:text-white">Be specific</strong>: Reference bill numbers, ask for specific votes, name the issue clearly.</li>
                 <li><strong className="text-gray-900 dark:text-white">Be brief</strong>: Staff handle hundreds of contacts daily. Get to the point.</li>
                 <li><strong className="text-gray-900 dark:text-white">Be respectful</strong>: Even when frustrated. Rudeness gets you flagged and ignored.</li>
@@ -154,7 +154,7 @@ export default function ContactCongressmanGuidePage() {
               What Happens to Your Message
             </h2>
             <div className="pl-10 text-gray-600 dark:text-gray-300 space-y-3">
-              <p>Congressional offices track and tally every constituent contact:</p>
+              <p>Congressional offices track and tally every contact from people in their district or state:</p>
               <ol className="list-decimal list-inside space-y-2">
                 <li>Staff logs your message by issue and position (support/oppose)</li>
                 <li>Data is compiled into daily and weekly reports</li>
@@ -184,7 +184,7 @@ export default function ContactCongressmanGuidePage() {
               <div className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 text-sm text-gray-700 dark:text-gray-300 space-y-4">
                 <p className="font-semibold text-gray-900 dark:text-white">When the staffer answers:</p>
                 <p>
-                  &quot;Hi, my name is <span className="text-purple-600 dark:text-purple-400">[Your Full Name]</span> and I&apos;m a constituent from <span className="text-purple-600 dark:text-purple-400">[City, State]</span>, ZIP code <span className="text-purple-600 dark:text-purple-400">[ZIP]</span>.&quot;
+                  &quot;Hi, my name is <span className="text-purple-600 dark:text-purple-400">[Your Full Name]</span> and I live in <span className="text-purple-600 dark:text-purple-400">[City, State]</span>, ZIP code <span className="text-purple-600 dark:text-purple-400">[ZIP]</span>.&quot;
                 </p>
                 <p className="font-semibold text-gray-900 dark:text-white">State your issue:</p>
                 <p>
@@ -204,7 +204,7 @@ export default function ContactCongressmanGuidePage() {
                 </p>
                 <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
                   <p className="text-xs text-gray-500 dark:text-gray-400">
-                    <strong>Tip:</strong> The staffer may ask for your full address to confirm you&apos;re a constituent. They may also tell you the legislator&apos;s current position on the issue. Don&apos;t worry if you stumble. Staff appreciate that you called, regardless of polish.
+                    <strong>Tip:</strong> The staffer may ask for your full address to confirm you live in the district. They may also tell you the legislator&apos;s current position on the issue. Don&apos;t worry if you stumble. Staff appreciate that you called, regardless of polish.
                   </p>
                 </div>
               </div>
@@ -231,7 +231,7 @@ export default function ContactCongressmanGuidePage() {
                 </p>
                 <p>Dear <span className="text-purple-600 dark:text-purple-400">[Senator/Representative]</span> <span className="text-purple-600 dark:text-purple-400">[Last Name]</span>,</p>
                 <p>
-                  My name is <span className="text-purple-600 dark:text-purple-400">[Your Full Name]</span> and I am a constituent living in <span className="text-purple-600 dark:text-purple-400">[City, State ZIP]</span>. I am writing to <span className="text-purple-600 dark:text-purple-400">[urge you to support / ask you to oppose / request your co-sponsorship of]</span> <span className="text-purple-600 dark:text-purple-400">[Bill Number]</span>, the <span className="text-purple-600 dark:text-purple-400">[Bill Name]</span>.
+                  My name is <span className="text-purple-600 dark:text-purple-400">[Your Full Name]</span> and I live in <span className="text-purple-600 dark:text-purple-400">[City, State ZIP]</span>. I am writing to <span className="text-purple-600 dark:text-purple-400">[urge you to support / ask you to oppose / request your co-sponsorship of]</span> <span className="text-purple-600 dark:text-purple-400">[Bill Number]</span>, the <span className="text-purple-600 dark:text-purple-400">[Bill Name]</span>.
                 </p>
                 <p>
                   This issue is important to me because <span className="text-purple-600 dark:text-purple-400">[1-3 sentences explaining your personal connection to the issue. How does it affect you, your family, your community, or your livelihood? Specific details are more compelling than general statements.]</span>
@@ -281,7 +281,7 @@ export default function ContactCongressmanGuidePage() {
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">How Your Message Gets Processed</h3>
                 <p>When your phone call, email, or letter arrives, here&apos;s what happens:</p>
                 <ol className="list-decimal list-inside space-y-2 mt-2">
-                  <li><strong className="text-gray-900 dark:text-white">Constituent verification</strong>: Staff checks your address against the district or state boundaries. If you&apos;re not a constituent, your message may not be logged at all.</li>
+                  <li><strong className="text-gray-900 dark:text-white">Address verification</strong>: Staff checks your address against the district or state boundaries. If you don&apos;t live in their area, your message may not be logged at all.</li>
                   <li><strong className="text-gray-900 dark:text-white">Issue categorization</strong>: Your message is tagged with one or more issue codes (e.g., &quot;Healthcare - Prescription Drug Pricing&quot; or &quot;Environment - Climate Change&quot;). This is why stating your issue clearly matters.</li>
                   <li><strong className="text-gray-900 dark:text-white">Position coding</strong>: Staff marks your position: <strong className="text-gray-900 dark:text-white">support</strong>, <strong className="text-gray-900 dark:text-white">oppose</strong>, or <strong className="text-gray-900 dark:text-white">undecided/informational</strong>. Ambiguous messages are harder to code and may be categorized as &quot;general comment.&quot;</li>
                   <li><strong className="text-gray-900 dark:text-white">Response queuing</strong>: Your message is queued for a response letter, typically a form response tailored to the issue. Particularly compelling messages may be flagged for personal attention.</li>
@@ -290,7 +290,7 @@ export default function ContactCongressmanGuidePage() {
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">The Reports That Shape Decisions</h3>
                 <p>
-                  Every week, the legislative director or chief of staff compiles a <strong className="text-gray-900 dark:text-white">constituent mail report</strong>. These reports summarize the top issues by volume and show the breakdown of support versus opposition. Before a major vote, the legislator often reviews these numbers to gauge constituent sentiment.
+                  Every week, the legislative director or chief of staff compiles a <strong className="text-gray-900 dark:text-white">mail report</strong>. These reports summarize the top issues by volume and show the breakdown of support versus opposition. Before a major vote, the legislator often reviews these numbers to gauge public sentiment in their district.
                 </p>
                 <p className="mt-2">
                   A typical report might show: &quot;Healthcare - 847 contacts this week (612 support, 198 oppose, 37 undecided).&quot; This is why every single contact counts. You are literally a data point that influences decisions.
@@ -317,14 +317,14 @@ export default function ContactCongressmanGuidePage() {
             </h2>
             <div className="pl-10 space-y-4">
               <div className="text-gray-600 dark:text-gray-300">
-                <p className="mb-4">Even well-intentioned constituents sometimes undermine their own advocacy. Here are the most common mistakes and how to avoid them:</p>
+                <p className="mb-4">Even well-intentioned people sometimes undermine their own advocacy. Here are the most common mistakes and how to avoid them:</p>
                 <div className="space-y-4">
                   <div className="flex gap-3">
                     <span className="text-red-500 dark:text-red-400 font-bold text-lg leading-6 flex-shrink-0">1.</span>
                     <div>
-                      <p className="font-semibold text-gray-900 dark:text-white">Contacting representatives who don&apos;t represent you</p>
+                      <p className="font-semibold text-gray-900 dark:text-white">Contacting officials who don&apos;t represent you</p>
                       <p className="text-sm mt-1">
-                        Congressional offices only log and respond to contacts from their own constituents. If you call a senator from another state, your message will be politely noted but will not be tallied in constituent reports. Focus your energy on your own two senators and one House representative. Not sure who they are? <Link href="/contact" className="text-purple-600 dark:text-purple-400 hover:underline">Look them up here</Link>.
+                        Congressional offices only log and respond to contacts from people in their district or state. If you call a senator from another state, your message will be politely noted but will not be tallied in their reports. Focus your energy on your own two senators and one House representative. Not sure who they are? <Link href="/contact" className="text-purple-600 dark:text-purple-400 hover:underline">Look them up here</Link>.
                       </p>
                     </div>
                   </div>
@@ -390,9 +390,9 @@ export default function ContactCongressmanGuidePage() {
             </h2>
             <div className="pl-10 space-y-6">
               <div>
-                <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Will my representative actually read my message?</h3>
+                <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Will my official actually read my message?</h3>
                 <p className="text-gray-600 dark:text-gray-300 text-sm">
-                  In most cases, the legislator personally will not read your individual message. However, that does not mean it doesn&apos;t matter. Staff members read, categorize, and tally every constituent contact. The legislator reviews summary reports showing how many constituents support or oppose key issues. Exceptionally compelling personal stories may be pulled and shared directly with the member, sometimes even quoted on the floor of Congress. Your message influences the data that shapes their decisions.
+                  In most cases, the legislator personally will not read your individual message. However, that does not mean it doesn&apos;t matter. Staff members read, categorize, and tally every contact. The legislator reviews summary reports showing how many people support or oppose key issues. Exceptionally compelling personal stories may be pulled and shared directly with the member, sometimes even quoted on the floor of Congress. Your message influences the data that shapes their decisions.
                 </p>
               </div>
               <div>
@@ -402,9 +402,9 @@ export default function ContactCongressmanGuidePage() {
                 </p>
               </div>
               <div>
-                <h3 className="font-semibold text-gray-900 dark:text-white mb-2">What if my representative already agrees with me?</h3>
+                <h3 className="font-semibold text-gray-900 dark:text-white mb-2">What if my official already agrees with me?</h3>
                 <p className="text-gray-600 dark:text-gray-300 text-sm">
-                  Contacting an ally is still valuable. It reinforces their position, gives them constituent stories to use in advocacy, and lets them know the issue has active support back home. Legislators who hear from constituents on an issue are more likely to prioritize it, co-sponsor related bills, and speak publicly about it. You might also ask them to take a leadership role, for example asking them to whip votes from colleagues or sign onto a letter to committee leadership.
+                  Contacting an ally is still valuable. It reinforces their position, gives them personal stories to use in advocacy, and lets them know the issue has active support back home. Legislators who hear from people in their district on an issue are more likely to prioritize it, co-sponsor related bills, and speak publicly about it. You might also ask them to take a leadership role, for example asking them to whip votes from colleagues or sign onto a letter to committee leadership.
                 </p>
               </div>
               <div>
@@ -416,7 +416,7 @@ export default function ContactCongressmanGuidePage() {
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Does contacting Congress actually work?</h3>
                 <p className="text-gray-600 dark:text-gray-300 text-sm">
-                  Yes. There are documented cases where constituent pressure has changed votes, blocked legislation, and advanced stalled bills. The Affordable Care Act repeal effort in 2017 was derailed in part because of massive constituent phone campaigns. Congressional staff consistently report that high call volume on an issue gets a legislator&apos;s attention. Individual messages add up. When hundreds or thousands of constituents contact an office on the same issue, it signals political risk, and that is what moves elected officials.
+                  Yes. There are documented cases where public pressure has changed votes, blocked legislation, and advanced stalled bills. The Affordable Care Act repeal effort in 2017 was derailed in part because of massive phone campaigns. Congressional staff consistently report that high call volume on an issue gets a legislator&apos;s attention. Individual messages add up. When hundreds or thousands of people contact an office on the same issue, it signals political risk, and that is what moves elected officials.
                 </p>
               </div>
             </div>
@@ -451,13 +451,13 @@ export default function ContactCongressmanGuidePage() {
             Ready to contact Congress?
           </h2>
           <p className="text-gray-600 dark:text-gray-300 mb-6">
-            Find your representatives and send a personalized message in minutes.
+            Find your officials and send a personalized message in minutes.
           </p>
           <Link
             href="/contact"
             className="inline-flex items-center gap-2 px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg transition-colors"
           >
-            Contact Your Reps
+            Write to Your Officials
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
             </svg>

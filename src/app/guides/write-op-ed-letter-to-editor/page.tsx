@@ -166,7 +166,7 @@ export default function OpEdLetterToEditorGuidePage() {
               </p>
               <ul className="list-disc list-inside space-y-2">
                 <li><strong className="text-gray-900 dark:text-white">Share it widely</strong>: Post the published piece on social media, send it to community groups, and email it to your personal network. The more people who read it, the more influence it has.</li>
-                <li><strong className="text-gray-900 dark:text-white">Send it to your representatives</strong>: Email or mail a copy to your elected officials with a brief cover note. Legislators and their staff monitor local media, but a direct share ensures they see it. Use our <Link href="/guides/write-effective-letter-to-congress" className="text-purple-600 dark:text-purple-400 hover:underline">guide to writing effective letters to Congress</Link> for tips on that follow-up.</li>
+                <li><strong className="text-gray-900 dark:text-white">Send it to your officials</strong>: Email or mail a copy to your elected officials with a brief cover note. Legislators and their staff monitor local media, but a direct share ensures they see it. Use our <Link href="/guides/write-effective-letter-to-congress" className="text-purple-600 dark:text-purple-400 hover:underline">guide to writing effective letters to Congress</Link> for tips on that follow-up.</li>
                 <li><strong className="text-gray-900 dark:text-white">Engage with responses</strong>: If readers comment or write their own letters in response, engage constructively. This extends the conversation and keeps the issue in the public eye.</li>
                 <li><strong className="text-gray-900 dark:text-white">Build on the momentum</strong>: A published opinion piece gives you credibility and visibility. Use it as a springboard for other advocacy — speaking at public meetings, organizing community events, or <Link href="/guides/tell-your-story" className="text-purple-600 dark:text-purple-400 hover:underline">telling your story</Link> in other contexts.</li>
               </ul>
@@ -186,9 +186,9 @@ export default function OpEdLetterToEditorGuidePage() {
 
         <div className="mt-10 bg-purple-50 dark:bg-purple-900/20 rounded-2xl p-8 text-center">
           <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">Pair your published piece with direct action</h2>
-          <p className="text-gray-600 dark:text-gray-300 mb-6">Send your op-ed or letter directly to your representatives to reinforce your message.</p>
+          <p className="text-gray-600 dark:text-gray-300 mb-6">Send your op-ed or letter directly to your officials to reinforce your message.</p>
           <Link href="/contact" className="inline-flex items-center gap-2 px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg transition-colors">
-            Contact Your Reps
+            Write to Your Officials
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
           </Link>
         </div>

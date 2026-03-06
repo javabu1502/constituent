@@ -5,14 +5,14 @@
 
 export type GuideCategory =
   | 'getting-started'
-  | 'contacting-reps'
+  | 'contacting-officials'
   | 'understanding-government'
   | 'elections-voting'
   | 'community-action';
 
 export const CATEGORY_LABELS: Record<GuideCategory, string> = {
   'getting-started': 'Getting Started',
-  'contacting-reps': 'Contacting Reps',
+  'contacting-officials': 'Contacting Officials',
   'understanding-government': 'Understanding Government',
   'elections-voting': 'Elections & Voting',
   'community-action': 'Community Action',
@@ -28,7 +28,7 @@ export interface GuideEntry {
 export const GUIDES: GuideEntry[] = [
   // Getting Started
   {
-    title: 'Who Are My Representatives?',
+    title: 'Who Are My Elected Officials?',
     description: 'Find out who represents you at every level of government — federal, state, and local — and learn how to contact them.',
     href: '/guides/who-are-my-representatives',
     category: 'getting-started',
@@ -58,48 +58,48 @@ export const GUIDES: GuideEntry[] = [
     category: 'getting-started',
   },
 
-  // Contacting Reps
+  // Contacting Officials
   {
-    title: 'How to Contact Your Congressman',
+    title: 'How to Contact Your Elected Officials',
     description: 'Step-by-step guide to reaching your US Representatives and Senators by phone, email, and letter.',
     href: '/guides/how-to-contact-your-congressman',
-    category: 'contacting-reps',
+    category: 'contacting-officials',
   },
   {
     title: 'How to Contact Your State Legislators',
-    description: 'Find and contact your state senators and representatives. Why state-level advocacy matters.',
+    description: 'Find and contact your state senators and officials. Why state-level advocacy matters.',
     href: '/guides/how-to-contact-your-state-legislators',
-    category: 'contacting-reps',
+    category: 'contacting-officials',
   },
   {
     title: 'Write an Effective Letter to Congress',
     description: 'Structure, tips, and examples for writing messages that congressional offices actually read.',
     href: '/guides/write-effective-letter-to-congress',
-    category: 'contacting-reps',
+    category: 'contacting-officials',
   },
   {
     title: 'Tell Your Story',
     description: 'Why personal stories matter and how to structure them so staffers flag your message for attention.',
     href: '/guides/tell-your-story',
-    category: 'contacting-reps',
+    category: 'contacting-officials',
   },
   {
-    title: 'How to Request Help from Your Rep',
+    title: 'How to Request Help from Your Officials',
     description: 'Congressional casework: how to get free help with Social Security, VA benefits, immigration, IRS issues, and more.',
     href: '/guides/constituent-services',
-    category: 'contacting-reps',
+    category: 'contacting-officials',
   },
   {
     title: 'How to Comment on Federal Regulations',
     description: 'The notice-and-comment process on Regulations.gov: how to find proposed rules and submit effective public comments.',
     href: '/guides/how-to-comment-on-regulations',
-    category: 'contacting-reps',
+    category: 'contacting-officials',
   },
   {
-    title: 'How to Use Social Media to Reach Your Representatives',
+    title: 'How to Use Social Media to Reach Your Officials',
     description: 'Tips for effective advocacy on social platforms — what works, what doesn\'t, and how to amplify your message.',
     href: '/guides/social-media-advocacy',
-    category: 'contacting-reps',
+    category: 'contacting-officials',
   },
 
   // Understanding Government
@@ -110,14 +110,14 @@ export const GUIDES: GuideEntry[] = [
     category: 'understanding-government',
   },
   {
-    title: 'What Does My Congressman Actually Do?',
+    title: 'What Does My Elected Official Actually Do?',
     description: 'Legislating, committee work, constituent services, and oversight — what members of Congress do day-to-day.',
     href: '/guides/what-does-my-congressman-do',
     category: 'understanding-government',
   },
   {
     title: 'How Congress Votes and What It Means',
-    description: 'Roll call votes, voice votes, key thresholds, and how to look up your representative\'s voting record.',
+    description: 'Roll call votes, voice votes, key thresholds, and how to look up your official\'s voting record.',
     href: '/guides/how-congress-votes',
     category: 'understanding-government',
   },
@@ -129,7 +129,7 @@ export const GUIDES: GuideEntry[] = [
   },
   {
     title: 'What Is Gerrymandering and How Does It Affect You?',
-    description: 'How redistricting works, the effects of gerrymandering on elections, and what citizens can do about it.',
+    description: 'How redistricting works, the effects of gerrymandering on elections, and what you can do about it.',
     href: '/guides/what-is-gerrymandering',
     category: 'understanding-government',
   },
@@ -187,13 +187,13 @@ export const GUIDES: GuideEntry[] = [
   // Community Action
   {
     title: 'How to Attend a Town Hall',
-    description: 'Find town halls, prepare your question, and make your voice heard face-to-face with your representatives.',
+    description: 'Find town halls, prepare your question, and make your voice heard face-to-face with your officials.',
     href: '/guides/how-to-attend-a-town-hall',
     category: 'community-action',
   },
   {
     title: 'How to Run a Successful Campaign',
-    description: 'Create a compelling campaign that rallies others to contact their representatives. Tips on headlines, messaging, sharing, and tracking.',
+    description: 'Create a compelling campaign that rallies others to contact their officials. Tips on headlines, messaging, sharing, and tracking.',
     href: '/guides/how-to-run-a-successful-campaign',
     category: 'community-action',
   },

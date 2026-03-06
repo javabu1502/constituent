@@ -134,7 +134,7 @@ function EditAddressForm({ initialAddress, onSaved, onCancel }: EditAddressFormP
         // Notify LocalOfficialsSection to refresh
         window.dispatchEvent(new Event('local-officials-updated'));
       } else {
-        setError('No representatives found for this address. Please check and try again.');
+        setError('No officials found for this address. Please check and try again.');
         setSaving(false);
       }
     } catch {
@@ -233,7 +233,7 @@ export function MyRepresentativesSection({ cachedReps, hasAddress: initialHasAdd
         </div>
         <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Add Your Address</h3>
         <p className="text-gray-600 dark:text-gray-400 mb-4">
-          Enter your address to see your elected representatives and contact them directly.
+          Enter your address to see your elected officials and contact them directly.
         </p>
         <button
           onClick={() => setEditing(true)}

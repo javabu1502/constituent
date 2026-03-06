@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Terms of Service | My Democracy',
-  description: 'Terms of service for using My Democracy to contact your elected representatives.',
+  description: 'Terms of service for using My Democracy to contact your elected officials.',
 };
 
 export default function TermsPage() {
@@ -31,7 +31,7 @@ export default function TermsPage() {
             <div className="space-y-3 text-gray-600 dark:text-gray-300 pl-10">
               <p>
                 My Democracy helps you track, understand, and contact your elected
-                representatives at the federal, state, and local level. By using our
+                officials at the federal, state, and local level. By using our
                 service, you agree to the following:
               </p>
               <ul className="list-disc list-inside space-y-2 ml-4">
@@ -116,9 +116,9 @@ export default function TermsPage() {
                   final content you choose to send
                 </li>
                 <li>
-                  AI also generates <strong className="text-gray-900 dark:text-white">representative bios
+                  AI also generates <strong className="text-gray-900 dark:text-white">official bios
                   and bill summaries</strong> from public data to help you understand
-                  your representatives and legislation
+                  your officials and legislation
                 </li>
                 <li>
                   AI suggestions are <strong className="text-gray-900 dark:text-white">not legal, medical,

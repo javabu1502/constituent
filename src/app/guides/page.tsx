@@ -6,14 +6,14 @@ import type { ReactNode } from 'react';
 
 export const metadata: Metadata = {
   title: 'Civic Engagement Guides | My Democracy',
-  description: 'Learn how to effectively contact your elected representatives, write compelling letters to Congress, and make your voice heard in democracy.',
-  keywords: ['civic engagement', 'contact congress', 'write to representatives', 'how to contact senator', 'state legislature', 'advocacy guide'],
+  description: 'Learn how to effectively contact your elected officials, write compelling letters to Congress, and make your voice heard in democracy.',
+  keywords: ['civic engagement', 'contact congress', 'write to officials', 'how to contact senator', 'state legislature', 'advocacy guide'],
   alternates: {
     canonical: 'https://www.mydemocracy.app/guides',
   },
   openGraph: {
     title: 'Civic Engagement Guides | My Democracy',
-    description: 'Learn how to effectively contact your elected representatives, write compelling letters to Congress, and make your voice heard in democracy.',
+    description: 'Learn how to effectively contact your elected officials, write compelling letters to Congress, and make your voice heard in democracy.',
     type: 'website',
   },
 };
@@ -194,7 +194,7 @@ export default function GuidesPage() {
           Civic Engagement Guides
         </h1>
         <p className="text-lg text-gray-600 dark:text-gray-300 mb-10">
-          Everything you need to know to effectively contact your elected representatives and make your voice heard.
+          Everything you need to know to effectively contact your elected officials and make your voice heard.
         </p>
 
         <GuidesGrid icons={guideIcons} />
@@ -205,13 +205,13 @@ export default function GuidesPage() {
             Ready to make your voice heard?
           </h2>
           <p className="text-gray-600 dark:text-gray-300 mb-6">
-            Use what you&apos;ve learned to contact your representatives today.
+            Use what you&apos;ve learned to contact your officials today.
           </p>
           <Link
             href="/contact"
             className="inline-flex items-center gap-2 px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg transition-colors"
           >
-            Contact Your Reps
+            Write to Your Officials
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
             </svg>

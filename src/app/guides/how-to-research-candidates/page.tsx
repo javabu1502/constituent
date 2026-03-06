@@ -79,7 +79,7 @@ export default function ResearchCandidatesGuidePage() {
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Federal Candidates</h3>
                 <p className="text-gray-600 dark:text-gray-300">
-                  <a href="https://www.congress.gov/members" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">Congress.gov</a> is the official source for federal voting records. You can look up any current or former member of Congress, see every vote they have cast, view the bills they have sponsored or co-sponsored, and read their committee assignments. Search by name, state, or district to find your representatives.
+                  <a href="https://www.congress.gov/members" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">Congress.gov</a> is the official source for federal voting records. You can look up any current or former member of Congress, see every vote they have cast, view the bills they have sponsored or co-sponsored, and read their committee assignments. Search by name, state, or district to find your officials.
                 </p>
               </div>
               <div>
@@ -228,7 +228,7 @@ export default function ResearchCandidatesGuidePage() {
         {/* CTA Section */}
         <div className="mt-10 bg-purple-50 dark:bg-purple-900/20 rounded-2xl p-8 text-center">
           <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
-            Ready to hold your representatives accountable?
+            Ready to hold your officials accountable?
           </h2>
           <p className="text-gray-600 dark:text-gray-300 mb-6">
             Look up your elected officials and see how they are representing you.
@@ -237,7 +237,7 @@ export default function ResearchCandidatesGuidePage() {
             href="/contact"
             className="inline-flex items-center gap-2 px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg transition-colors"
           >
-            Contact Your Reps
+            Write to Your Officials
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
             </svg>

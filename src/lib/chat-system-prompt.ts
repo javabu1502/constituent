@@ -46,7 +46,7 @@ Explore federal spending data and political trends.
 Educational articles including:
 - [How a Bill Becomes a Law](/guides/how-a-bill-becomes-law)
 - [How to Register to Vote](/guides/how-to-register-to-vote)
-- [How to Contact Your Congressman](/guides/how-to-contact-your-congressman)
+- [How to Contact Your Elected Officials](/guides/how-to-contact-your-congressman)
 - [How to Contact State Legislators](/guides/how-to-contact-your-state-legislators)
 - [How to Track Legislation](/guides/how-to-track-legislation)
 - [How to Attend a Town Hall](/guides/how-to-attend-a-town-hall)

@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'About | My Democracy',
-  description: 'Learn how My Democracy helps you contact your elected representatives with AI-assisted messaging. Free, private, and easy to use.',
+  description: 'Learn how My Democracy helps you write to your elected officials with AI-assisted messaging. Free, private, and easy to use.',
   alternates: {
     canonical: 'https://www.mydemocracy.app/about',
   },
@@ -30,7 +30,7 @@ export default function AboutPage() {
             </h2>
             <div className="space-y-6 text-gray-600 dark:text-gray-300 pl-10">
               <div>
-                <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Contact Your Representatives</h3>
+                <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Write to Your Officials</h3>
                 <ul className="list-disc list-inside space-y-2">
                   <li>
                     <strong className="text-gray-900 dark:text-white">Find all your elected officials</strong>: federal, state, and local, from one address lookup
@@ -50,25 +50,25 @@ export default function AboutPage() {
                     <strong className="text-gray-900 dark:text-white">Activity feed</strong>:see your message history and engagement at a glance
                   </li>
                   <li>
-                    <strong className="text-gray-900 dark:text-white">Voting records</strong>:track how your representatives vote on legislation
+                    <strong className="text-gray-900 dark:text-white">Voting records</strong>:track how your officials vote on legislation
                   </li>
                   <li>
-                    <strong className="text-gray-900 dark:text-white">Campaign finance</strong>:follow the money behind your representatives
+                    <strong className="text-gray-900 dark:text-white">Campaign finance</strong>:follow the money behind your officials
                   </li>
                   <li>
-                    <strong className="text-gray-900 dark:text-white">Lobbying activity</strong>:see who&apos;s lobbying your representatives
+                    <strong className="text-gray-900 dark:text-white">Lobbying activity</strong>:see who&apos;s lobbying your officials
                   </li>
                   <li>
-                    <strong className="text-gray-900 dark:text-white">AI-generated bios</strong>:understand your representatives&apos; backgrounds and priorities
+                    <strong className="text-gray-900 dark:text-white">AI-generated bios</strong>:understand your officials&apos; backgrounds and priorities
                   </li>
                   <li>
-                    <strong className="text-gray-900 dark:text-white">Committee assignments</strong>:know where your reps have influence
+                    <strong className="text-gray-900 dark:text-white">Committee assignments</strong>:know where your officials have influence
                   </li>
                   <li>
                     <strong className="text-gray-900 dark:text-white">Bill tracking with AI summaries</strong>:follow legislation that matters to you
                   </li>
                   <li>
-                    <strong className="text-gray-900 dark:text-white">Per-representative news</strong>:stay informed about what your reps are doing
+                    <strong className="text-gray-900 dark:text-white">Per-representative news</strong>:stay informed about what your officials are doing
                   </li>
                 </ul>
               </div>
@@ -82,7 +82,7 @@ export default function AboutPage() {
                     <strong className="text-gray-900 dark:text-white">Voter information</strong>:find your polling place and registration status
                   </li>
                   <li>
-                    <strong className="text-gray-900 dark:text-white">Trending issues</strong>:see what topics people are contacting their reps about
+                    <strong className="text-gray-900 dark:text-white">Trending issues</strong>:see what topics people are contacting their officials about
                   </li>
                 </ul>
               </div>
@@ -107,7 +107,7 @@ export default function AboutPage() {
             <div className="space-y-3 text-gray-600 dark:text-gray-300 pl-10">
               <ol className="list-decimal list-inside space-y-2">
                 <li>
-                  <strong className="text-gray-900 dark:text-white">Enter your address</strong>:we find your federal, state, and local representatives
+                  <strong className="text-gray-900 dark:text-white">Enter your address</strong>:we find your federal, state, and local officials
                 </li>
                 <li>
                   <strong className="text-gray-900 dark:text-white">Tell us what you care about</strong>:AI writes personalized messages for each representative
@@ -138,7 +138,7 @@ export default function AboutPage() {
                   <strong className="text-gray-900 dark:text-white">Personalized messages carry more weight</strong> than form letters or scripts
                 </li>
                 <li>
-                  <strong className="text-gray-900 dark:text-white">Your representatives work for you</strong>:but only if they hear from you
+                  <strong className="text-gray-900 dark:text-white">Your officials work for you</strong>:but only if they hear from you
                 </li>
               </ul>
             </div>
@@ -160,7 +160,7 @@ export default function AboutPage() {
                   <strong className="text-gray-900 dark:text-white">Not a form letter</strong>:every message is unique, written by AI based on your words
                 </li>
                 <li>
-                  <strong className="text-gray-900 dark:text-white">Federal, state, AND local</strong>:contact all your representatives from one place
+                  <strong className="text-gray-900 dark:text-white">Federal, state, AND local</strong>:contact all your officials from one place
                 </li>
                 <li>
                   <strong className="text-gray-900 dark:text-white">Every contact counts</strong>:congressional offices tally every constituent message

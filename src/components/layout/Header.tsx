@@ -27,7 +27,7 @@ export async function Header() {
               href="/contact"
               className="px-3 py-1.5 bg-purple-600 text-white text-sm font-medium rounded-lg hover:bg-purple-700 transition-colors"
             >
-              Contact Your Reps
+              Write to Your Officials
             </Link>
             <NavDropdown
               label="Explore"

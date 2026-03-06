@@ -121,7 +121,7 @@ export default function CivicEngagementStudentsGuidePage() {
                 Working in government — even temporarily — gives you an inside understanding of how policy is made and how public institutions serve communities:
               </p>
               <ul className="list-disc list-inside space-y-2">
-                <li><strong className="text-gray-900 dark:text-white">Congressional internships</strong>: Members of Congress offer internships in both their Washington, D.C. offices and their district or state offices. These positions involve answering constituent calls, attending hearings, researching policy issues, and assisting staff. Apply directly through your representative&apos;s or senator&apos;s official website.</li>
+                <li><strong className="text-gray-900 dark:text-white">Congressional internships</strong>: Members of Congress offer internships in both their Washington, D.C. offices and their district or state offices. These positions involve answering constituent calls, attending hearings, researching policy issues, and assisting staff. Apply directly through your official&apos;s or senator&apos;s official website.</li>
                 <li><strong className="text-gray-900 dark:text-white">State legislature internships</strong>: Most state legislatures run internship programs during the legislative session. These opportunities let you observe the lawmaking process up close and are often less competitive than federal positions.</li>
                 <li><strong className="text-gray-900 dark:text-white">Local government</strong>: City halls, county offices, and local agencies frequently seek interns and volunteers. These roles are a great way to learn how local government directly affects your community — from zoning decisions to public transit to parks and recreation.</li>
                 <li><strong className="text-gray-900 dark:text-white">Federal agencies</strong>: Many federal agencies offer student internship programs. You can search for opportunities through <a href="https://www.usa.gov" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">usa.gov</a> or the federal government&apos;s official job board at USAJOBS.</li>
@@ -146,8 +146,8 @@ export default function CivicEngagementStudentsGuidePage() {
               </p>
               <ul className="list-disc list-inside space-y-2">
                 <li><strong className="text-gray-900 dark:text-white">Vote in every election</strong>: Federal, state, local, primary, runoff, and special elections all matter. Many consequential decisions — school board seats, local ballot measures, district attorney races — are decided in low-turnout elections where every vote carries more weight.</li>
-                <li><strong className="text-gray-900 dark:text-white">Stay informed</strong>: Follow local news, read about the issues your representatives are working on, and check how they vote. Our <Link href="/guides/how-to-track-legislation" className="text-purple-600 dark:text-purple-400 hover:underline">legislation tracking guide</Link> can help you stay up to date.</li>
-                <li><strong className="text-gray-900 dark:text-white">Contact your representatives regularly</strong>: You don&apos;t have to wait for a crisis. A brief phone call or email sharing your perspective on a pending bill takes just a few minutes and helps your representative understand their constituents&apos; priorities.</li>
+                <li><strong className="text-gray-900 dark:text-white">Stay informed</strong>: Follow local news, read about the issues your officials are working on, and check how they vote. Our <Link href="/guides/how-to-track-legislation" className="text-purple-600 dark:text-purple-400 hover:underline">legislation tracking guide</Link> can help you stay up to date.</li>
+                <li><strong className="text-gray-900 dark:text-white">Contact your officials regularly</strong>: You don&apos;t have to wait for a crisis. A brief phone call or email sharing your perspective on a pending bill takes just a few minutes and helps your official understand their constituents&apos; priorities.</li>
                 <li><strong className="text-gray-900 dark:text-white">Engage in your community</strong>: Attend neighborhood meetings, volunteer with local organizations, and get to know the people working on issues you care about. Civic engagement extends well beyond elections.</li>
                 <li><strong className="text-gray-900 dark:text-white">Be a reliable source for friends and family</strong>: Share what you learn. Help friends register to vote, explain what&apos;s on the ballot, and encourage the people around you to participate. Civic engagement is contagious.</li>
               </ul>
@@ -169,7 +169,7 @@ export default function CivicEngagementStudentsGuidePage() {
           <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">Ready to make your voice count?</h2>
           <p className="text-gray-600 dark:text-gray-300 mb-6">Start by finding your elected officials and reaching out to them on the issues you care about.</p>
           <Link href="/contact" className="inline-flex items-center gap-2 px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg transition-colors">
-            Contact Your Reps
+            Write to Your Officials
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
           </Link>
         </div>

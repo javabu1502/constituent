@@ -182,7 +182,7 @@ export function AddressAutocomplete({
       <div className="space-y-3">
         {optional && (
           <p className="text-xs text-gray-500 dark:text-gray-400">
-            Optional - add your address to find your representatives
+            Optional - add your address to find your officials
           </p>
         )}
         <Input
@@ -235,7 +235,7 @@ export function AddressAutocomplete({
     <div className="space-y-2">
       {optional && (
         <p className="text-xs text-gray-500 dark:text-gray-400">
-          Optional: add your address to find your representatives
+          Optional: add your address to find your officials
         </p>
       )}
       <div>

@@ -192,7 +192,7 @@ export default function CivicEngagementNewCitizensGuidePage() {
               <ul className="list-disc list-inside space-y-2">
                 <li>Keep your naturalization certificate in a safe place. You may need it for voter registration, passport applications, and other processes.</li>
                 <li>Register to vote as soon as possible, even if there isn&apos;t an election coming up soon. Being registered means you&apos;ll be ready when the time comes.</li>
-                <li>Learn who your representatives are at every level -federal, state, and local. You can use <Link href="/guides/who-are-my-representatives" className="text-purple-600 dark:text-purple-400 hover:underline">My Democracy&apos;s tools</Link> to find them by your address.</li>
+                <li>Learn who your officials are at every level -federal, state, and local. You can use <Link href="/guides/who-are-my-representatives" className="text-purple-600 dark:text-purple-400 hover:underline">My Democracy&apos;s tools</Link> to find them by your address.</li>
                 <li>Don&apos;t feel pressured to have opinions on every issue immediately. Take time to learn about the issues that affect your community and form your own views.</li>
               </ul>
             </div>
@@ -209,7 +209,7 @@ export default function CivicEngagementNewCitizensGuidePage() {
               </li>
               <li>
                 <Link href="/guides/who-are-my-representatives" className="text-purple-600 dark:text-purple-400 hover:underline">
-                  Who Are My Representatives?
+                  Who Are My Elected Officials?
                 </Link>
               </li>
               <li>
@@ -227,13 +227,13 @@ export default function CivicEngagementNewCitizensGuidePage() {
             Ready to make your voice heard?
           </h2>
           <p className="text-gray-600 dark:text-gray-300 mb-6">
-            Find your representatives and start engaging with the people who represent you in government.
+            Find your officials and start engaging with the people who represent you in government.
           </p>
           <Link
             href="/contact"
             className="inline-flex items-center gap-2 px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg transition-colors"
           >
-            Contact Your Reps
+            Write to Your Officials
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
             </svg>

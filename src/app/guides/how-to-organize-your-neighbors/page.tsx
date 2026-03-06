@@ -117,7 +117,7 @@ export default function OrganizeNeighborsGuidePage() {
               <ul className="list-disc list-inside space-y-2">
                 <li><strong className="text-gray-900 dark:text-white">Write letters and make calls</strong>: Coordinate a day when everyone contacts their representative on the same issue. See our <Link href="/guides/write-effective-letter-to-congress" className="text-purple-600 dark:text-purple-400 hover:underline">letter-writing guide</Link>.</li>
                 <li><strong className="text-gray-900 dark:text-white">Attend public meetings</strong>: Show up to city council, school board, or other meetings as a group. Numbers matter. See our guide to <Link href="/guides/how-to-testify-at-a-public-hearing" className="text-purple-600 dark:text-purple-400 hover:underline">testifying at public hearings</Link>.</li>
-                <li><strong className="text-gray-900 dark:text-white">Create a petition</strong>: A petition with signatures demonstrates broad support. Deliver it in person to your representative&apos;s office.</li>
+                <li><strong className="text-gray-900 dark:text-white">Create a petition</strong>: A petition with signatures demonstrates broad support. Deliver it in person to your official&apos;s office.</li>
                 <li><strong className="text-gray-900 dark:text-white">Contact local media</strong>: Reach out to local newspaper reporters, TV stations, and community blogs. A well-told story attracts attention and pressure.</li>
                 <li><strong className="text-gray-900 dark:text-white">Run a campaign</strong>: Use <Link href="/guides/how-to-run-a-successful-campaign" className="text-purple-600 dark:text-purple-400 hover:underline">My Democracy&apos;s campaign tools</Link> to coordinate outreach and track impact.</li>
               </ul>
@@ -137,9 +137,9 @@ export default function OrganizeNeighborsGuidePage() {
 
         <div className="mt-10 bg-purple-50 dark:bg-purple-900/20 rounded-2xl p-8 text-center">
           <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">Ready to rally your neighbors?</h2>
-          <p className="text-gray-600 dark:text-gray-300 mb-6">Start by contacting your representatives together.</p>
+          <p className="text-gray-600 dark:text-gray-300 mb-6">Start by contacting your officials together.</p>
           <Link href="/contact" className="inline-flex items-center gap-2 px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg transition-colors">
-            Contact Your Reps
+            Write to Your Officials
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
           </Link>
         </div>

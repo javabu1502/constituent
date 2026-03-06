@@ -25,12 +25,12 @@ const faqItems = [
   {
     question: 'Is My Democracy free?',
     answer:
-      'Yes, My Democracy is completely free to use. No account is required to look up your representatives and send them a message.',
+      'Yes, My Democracy is completely free to use. No account is required to look up your officials and send them a message.',
   },
   {
     question: 'How does My Democracy work?',
     answer:
-      'First, enter your address to find your elected officials at every level of government. Next, pick the issue you care about and our AI writes a personalized message on your behalf. Finally, send it directly to your representatives via email or phone, all in a few minutes.',
+      'First, enter your address to find your elected officials at every level of government. Next, pick the issue you care about and our AI writes a personalized message on your behalf. Finally, send it directly to your officials via email or phone, all in a few minutes.',
   },
 ];
 
@@ -92,7 +92,7 @@ export default async function HomePage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/contact">
               <Button size="lg" className="text-lg px-8 py-4">
-                Contact Your Reps
+                Write to Your Officials
               </Button>
             </Link>
             <Link href="/dashboard">
@@ -203,7 +203,7 @@ export default async function HomePage() {
             Your Complete Civic Dashboard
           </h2>
           <p className="text-gray-500 dark:text-gray-400 text-center mb-12 max-w-xl mx-auto">
-            Everything you need to stay informed about your representatives
+            Everything you need to stay informed about your officials
           </p>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -218,7 +218,7 @@ export default async function HomePage() {
                 Voting Records
               </h3>
               <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
-                See how your representatives vote on the issues that matter to you.
+                See how your officials vote on the issues that matter to you.
               </p>
             </Link>
 
@@ -233,7 +233,7 @@ export default async function HomePage() {
                 Campaign Finance
               </h3>
               <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
-                Follow the money. See who funds your representatives&apos; campaigns.
+                Follow the money. See who funds your officials&apos; campaigns.
               </p>
             </Link>
 
@@ -248,7 +248,7 @@ export default async function HomePage() {
                 Lobbying Activity
               </h3>
               <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
-                See which organizations are lobbying your representatives and on what issues.
+                See which organizations are lobbying your officials and on what issues.
               </p>
             </Link>
 
@@ -278,7 +278,7 @@ export default async function HomePage() {
                 News Feed
               </h3>
               <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
-                Stay up to date with the latest news about each of your representatives.
+                Stay up to date with the latest news about each of your officials.
               </p>
             </Link>
 
@@ -344,7 +344,7 @@ export default async function HomePage() {
                 Write an Effective Letter
               </h3>
               <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
-                Tips for writing messages that get noticed by your representatives.
+                Tips for writing messages that get noticed by your officials.
               </p>
             </Link>
 

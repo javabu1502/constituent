@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: SharePageProps): Promise<Meta
   }
 
   const title = `A citizen contacted ${data.legislator_name} about ${data.issue_subtopic || data.issue_area}`;
-  const description = `A constituent from ${data.advocate_city}, ${data.advocate_state} contacted ${data.legislator_name}. Make your voice heard too. Contact your representatives on My Democracy.`;
+  const description = `A constituent from ${data.advocate_city}, ${data.advocate_state} contacted ${data.legislator_name}. Make your voice heard too. Write to your officials on My Democracy.`;
 
   return {
     title: `${title} | My Democracy`,

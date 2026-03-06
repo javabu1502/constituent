@@ -56,7 +56,7 @@ export default function TrackLegislationGuidePage() {
                   <li>Search by keyword, bill number, or sponsor</li>
                   <li>Track a bill&apos;s status through the legislative process</li>
                   <li>Read full bill text, summaries, and committee reports</li>
-                  <li>View roll call votes and see how your representative voted</li>
+                  <li>View roll call votes and see how your official voted</li>
                   <li>Set up email alerts for specific bills or topics</li>
                 </ul>
               </div>
@@ -178,7 +178,7 @@ export default function TrackLegislationGuidePage() {
                 <li><strong className="text-gray-900 dark:text-white">Set up alerts</strong>: Use Congress.gov email alerts or GovTrack to get notified when your bill moves.</li>
                 <li><strong className="text-gray-900 dark:text-white">Follow committees</strong>: If your issue is in a specific committee, track that committee&apos;s schedule and hearings.</li>
                 <li><strong className="text-gray-900 dark:text-white">Follow advocacy organizations</strong>: Groups that work on your issue will alert you when action is needed. Check our <Link href="/states" className="text-purple-600 dark:text-purple-400 hover:underline">state pages</Link> for organizations by issue area.</li>
-                <li><strong className="text-gray-900 dark:text-white">Check voting records</strong>: After a vote, check how your representatives voted. The <Link href="/legislators" className="text-purple-600 dark:text-purple-400 hover:underline">My Democracy legislator profiles</Link> show recent votes.</li>
+                <li><strong className="text-gray-900 dark:text-white">Check voting records</strong>: After a vote, check how your officials voted. The <Link href="/legislators" className="text-purple-600 dark:text-purple-400 hover:underline">My Democracy legislator profiles</Link> show recent votes.</li>
                 <li><strong className="text-gray-900 dark:text-white">Act at the right time</strong>: Contact during committee markup or right before floor votes has the most impact.</li>
               </ul>
             </div>
@@ -189,7 +189,7 @@ export default function TrackLegislationGuidePage() {
             <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Related Guides</h2>
             <ul className="space-y-2">
               <li><Link href="/guides/how-a-bill-becomes-law" className="text-purple-600 dark:text-purple-400 hover:underline">How a Bill Becomes Law</Link></li>
-              <li><Link href="/guides/how-to-contact-your-congressman" className="text-purple-600 dark:text-purple-400 hover:underline">How to Contact Your Congressman</Link></li>
+              <li><Link href="/guides/how-to-contact-your-congressman" className="text-purple-600 dark:text-purple-400 hover:underline">How to Contact Your Elected Officials</Link></li>
               <li><Link href="/guides/write-effective-letter-to-congress" className="text-purple-600 dark:text-purple-400 hover:underline">Write an Effective Letter to Congress</Link></li>
             </ul>
           </section>
@@ -197,9 +197,9 @@ export default function TrackLegislationGuidePage() {
 
         <div className="mt-10 bg-purple-50 dark:bg-purple-900/20 rounded-2xl p-8 text-center">
           <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">Found a bill you care about?</h2>
-          <p className="text-gray-600 dark:text-gray-300 mb-6">Contact your representatives and tell them your position.</p>
+          <p className="text-gray-600 dark:text-gray-300 mb-6">Contact your officials and tell them your position.</p>
           <Link href="/contact" className="inline-flex items-center gap-2 px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg transition-colors">
-            Contact Your Reps
+            Write to Your Officials
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
           </Link>
         </div>

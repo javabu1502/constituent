@@ -3,7 +3,7 @@
 import { useChatContext } from './ChatProvider';
 
 const SUGGESTIONS = [
-  'How do I contact my representative?',
+  'How do I contact my officials?',
   'How does a bill become a law?',
   'How do I register to vote?',
   'What can I do on My Democracy?',

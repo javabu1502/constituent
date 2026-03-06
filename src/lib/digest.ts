@@ -212,7 +212,7 @@ export function renderDigestHtml(data: DigestData, unsubscribeUrl: string): stri
   </div>
 
   <p style="font-size:15px;">Hi ${data.userName},</p>
-  <p style="font-size:14px;color:#4b5563;">Here's what your representatives have been up to this week:</p>
+  <p style="font-size:14px;color:#4b5563;">Here's what your officials have been up to this week:</p>
 
   ${repSections}
 

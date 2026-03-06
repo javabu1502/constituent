@@ -120,7 +120,7 @@ export default function ContactStateLegislatorsGuidePage() {
             </h2>
             <div className="pl-10 text-gray-600 dark:text-gray-300 space-y-4">
               <p>
-                <Link href="/contact" className="text-purple-600 dark:text-purple-400 hover:underline font-medium">Use My Democracy</Link>: Enter your address and we&apos;ll find all your representatives, federal and state, in one lookup.
+                <Link href="/contact" className="text-purple-600 dark:text-purple-400 hover:underline font-medium">Use My Democracy</Link>: Enter your address and we&apos;ll find all your officials, federal and state, in one lookup.
               </p>
               <p>
                 You can also use <a href="https://openstates.org/find_your_legislator/" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">Open States</a> or your state legislature&apos;s official website.
@@ -554,7 +554,7 @@ export default function ContactStateLegislatorsGuidePage() {
             <ul className="space-y-2">
               <li>
                 <Link href="/guides/how-to-contact-your-congressman" className="text-purple-600 dark:text-purple-400 hover:underline">
-                  How to Contact Your Congressman
+                  How to Contact Your Elected Officials
                 </Link>
               </li>
               <li>
@@ -577,7 +577,7 @@ export default function ContactStateLegislatorsGuidePage() {
             Ready to contact your state legislators?
           </h2>
           <p className="text-gray-600 dark:text-gray-300 mb-6">
-            Find all your representatives, federal and state, with one address lookup.
+            Find all your officials, federal and state, with one address lookup.
           </p>
           <Link
             href="/contact"

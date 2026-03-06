@@ -48,9 +48,9 @@ export default function TownHallGuidePage() {
             </h2>
             <div className="pl-10 text-gray-600 dark:text-gray-300 space-y-3">
               <ul className="list-disc list-inside space-y-2">
-                <li><strong className="text-gray-900 dark:text-white">Your representative&apos;s website</strong>: Check the &quot;Events&quot; or &quot;News&quot; section for upcoming town halls and constituent meetings.</li>
+                <li><strong className="text-gray-900 dark:text-white">Your official&apos;s website</strong>: Check the &quot;Events&quot; or &quot;News&quot; section for upcoming town halls and constituent meetings.</li>
                 <li><strong className="text-gray-900 dark:text-white">Town Hall Project</strong>: <a href="https://townhallproject.com/" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">townhallproject.com</a> tracks town halls, forums, and public events for members of Congress.</li>
-                <li><strong className="text-gray-900 dark:text-white">Local news and social media</strong>: Follow your representative on social media and check local news for announcements.</li>
+                <li><strong className="text-gray-900 dark:text-white">Local news and social media</strong>: Follow your official on social media and check local news for announcements.</li>
                 <li><strong className="text-gray-900 dark:text-white">Call the district office</strong>: Staff can tell you about upcoming events and how to RSVP.</li>
               </ul>
               <p>
@@ -126,7 +126,7 @@ export default function TownHallGuidePage() {
             <div className="pl-10 text-gray-600 dark:text-gray-300 space-y-3">
               <ul className="list-disc list-inside space-y-2">
                 <li><strong className="text-gray-900 dark:text-white">Send a follow-up message</strong>: Reference the town hall and what was discussed. This reinforces your position in the office&apos;s records.</li>
-                <li><strong className="text-gray-900 dark:text-white">Share on social media</strong>: Post about your experience. Tag your representative. Other constituents want to know what happened.</li>
+                <li><strong className="text-gray-900 dark:text-white">Share on social media</strong>: Post about your experience. Tag your official. Other constituents want to know what happened.</li>
                 <li><strong className="text-gray-900 dark:text-white">Report to local media</strong>: If the legislator made a notable statement, tip off local reporters. Media coverage amplifies accountability.</li>
               </ul>
             </div>
@@ -158,7 +158,7 @@ export default function TownHallGuidePage() {
           <section className="mb-10 bg-gray-50 dark:bg-gray-800 rounded-xl p-6">
             <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Related Guides</h2>
             <ul className="space-y-2">
-              <li><Link href="/guides/how-to-contact-your-congressman" className="text-purple-600 dark:text-purple-400 hover:underline">How to Contact Your Congressman</Link></li>
+              <li><Link href="/guides/how-to-contact-your-congressman" className="text-purple-600 dark:text-purple-400 hover:underline">How to Contact Your Elected Officials</Link></li>
               <li><Link href="/guides/tell-your-story" className="text-purple-600 dark:text-purple-400 hover:underline">Tell Your Story</Link></li>
               <li><Link href="/guides/how-to-get-involved-in-local-politics" className="text-purple-600 dark:text-purple-400 hover:underline">How to Get Involved in Local Politics</Link></li>
             </ul>
@@ -167,9 +167,9 @@ export default function TownHallGuidePage() {
 
         <div className="mt-10 bg-purple-50 dark:bg-purple-900/20 rounded-2xl p-8 text-center">
           <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">Can&apos;t attend a town hall?</h2>
-          <p className="text-gray-600 dark:text-gray-300 mb-6">Contact your representatives by email or phone. Your voice still counts.</p>
+          <p className="text-gray-600 dark:text-gray-300 mb-6">Contact your officials by email or phone. Your voice still counts.</p>
           <Link href="/contact" className="inline-flex items-center gap-2 px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg transition-colors">
-            Contact Your Reps
+            Write to Your Officials
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
           </Link>
         </div>

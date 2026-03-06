@@ -73,7 +73,7 @@ export default function SocialMediaAdvocacyGuidePage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
               </span>
-              Finding Your Reps on Social Media
+              Finding Your Officials on Social Media
             </h2>
             <div className="pl-10 text-gray-600 dark:text-gray-300 space-y-4">
               <p>
@@ -83,7 +83,7 @@ export default function SocialMediaAdvocacyGuidePage() {
                 <strong className="text-gray-900 dark:text-white">How to find official accounts:</strong>
               </p>
               <ul className="list-disc list-inside space-y-2">
-                <li><strong className="text-gray-900 dark:text-white">Official websites</strong>: Your representative&apos;s .gov website typically lists their official social media accounts. For members of Congress, check their page on <a href="https://www.house.gov/representatives" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">house.gov</a> or <a href="https://www.senate.gov/senators/" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">senate.gov</a>.</li>
+                <li><strong className="text-gray-900 dark:text-white">Official websites</strong>: Your official&apos;s .gov website typically lists their official social media accounts. For members of Congress, check their page on <a href="https://www.house.gov/representatives" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">house.gov</a> or <a href="https://www.senate.gov/senators/" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">senate.gov</a>.</li>
                 <li><strong className="text-gray-900 dark:text-white">Verification badges</strong>: Look for verified or official badges on platforms to confirm you&apos;re engaging with the real account.</li>
                 <li><strong className="text-gray-900 dark:text-white">My Democracy</strong>: Use our <Link href="/contact" className="text-purple-600 dark:text-purple-400 hover:underline">representative lookup tool</Link> to find your elected officials and their contact information.</li>
               </ul>
@@ -111,7 +111,7 @@ export default function SocialMediaAdvocacyGuidePage() {
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Structure Your Post</h3>
                 <ul className="list-disc list-inside text-gray-600 dark:text-gray-300 space-y-2">
-                  <li><strong className="text-gray-900 dark:text-white">Tag the official account</strong>: Always include your representative&apos;s handle so the post appears in their mentions.</li>
+                  <li><strong className="text-gray-900 dark:text-white">Tag the official account</strong>: Always include your official&apos;s handle so the post appears in their mentions.</li>
                   <li><strong className="text-gray-900 dark:text-white">Identify yourself as a constituent</strong>: Mention your city, district, or state. This immediately signals that you&apos;re a voter who matters to them.</li>
                   <li><strong className="text-gray-900 dark:text-white">State the issue clearly</strong>: Name the bill, vote, or policy in plain language.</li>
                   <li><strong className="text-gray-900 dark:text-white">Make a specific ask</strong>: &quot;Vote yes on...&quot; or &quot;Co-sponsor...&quot; or &quot;Hold a town hall on...&quot; is far more effective than &quot;do something about...&quot;</li>
@@ -134,8 +134,8 @@ export default function SocialMediaAdvocacyGuidePage() {
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Platform-Specific Tips</h3>
                 <ul className="list-disc list-inside text-gray-600 dark:text-gray-300 space-y-2">
-                  <li><strong className="text-gray-900 dark:text-white">X (Twitter)</strong>: Keep posts focused on one issue. Tag the official account. Use relevant hashtags to extend reach beyond your followers. Quote-posting your representative&apos;s own statements with a respectful response can be effective.</li>
-                  <li><strong className="text-gray-900 dark:text-white">Facebook</strong>: Comment on your representative&apos;s official page posts. Longer comments with personal stories tend to perform well. Sharing their posts with your own commentary reaches your network.</li>
+                  <li><strong className="text-gray-900 dark:text-white">X (Twitter)</strong>: Keep posts focused on one issue. Tag the official account. Use relevant hashtags to extend reach beyond your followers. Quote-posting your official&apos;s own statements with a respectful response can be effective.</li>
+                  <li><strong className="text-gray-900 dark:text-white">Facebook</strong>: Comment on your official&apos;s official page posts. Longer comments with personal stories tend to perform well. Sharing their posts with your own commentary reaches your network.</li>
                   <li><strong className="text-gray-900 dark:text-white">Instagram</strong>: Visual content performs best. A photo of you at a town hall, in your community, or a simple text graphic with your message can be powerful. Use stories to tag representatives directly.</li>
                   <li><strong className="text-gray-900 dark:text-white">Video</strong>: Short video messages (under 60 seconds) where you look into the camera and tell your story are among the most compelling content on any platform. They&apos;re hard to ignore and easy to share.</li>
                 </ul>
@@ -190,7 +190,7 @@ export default function SocialMediaAdvocacyGuidePage() {
               <ul className="list-disc list-inside space-y-2">
                 <li><strong className="text-gray-900 dark:text-white">Personal attacks and insults</strong>: Hostile messages are dismissed, and on many platforms they may be hidden or filtered. Anger is understandable, but disrespectful posts give staff an easy reason to disregard your message. Firm and direct is more effective than aggressive.</li>
                 <li><strong className="text-gray-900 dark:text-white">Copy-paste campaigns</strong>: When hundreds of people post the exact same text, staff recognize it as an organized campaign and may discount it. Form letters carry less weight than personal messages. Use talking points as a starting framework, but write your own words.</li>
-                <li><strong className="text-gray-900 dark:text-white">Posting without identifying as a constituent</strong>: If your representative&apos;s staff can&apos;t tell you live in their district, your post may not be counted. Always mention your city, state, or district.</li>
+                <li><strong className="text-gray-900 dark:text-white">Posting without identifying as a constituent</strong>: If your official&apos;s staff can&apos;t tell you live in their district, your post may not be counted. Always mention your city, state, or district.</li>
                 <li><strong className="text-gray-900 dark:text-white">Engaging only once</strong>: A single post is easy to overlook. Sustained engagement over time, commenting on relevant posts, following up on votes, asking for updates, shows that you are a committed constituent who is paying attention.</li>
                 <li><strong className="text-gray-900 dark:text-white">Spreading misinformation</strong>: Inaccurate claims undermine your credibility. Before posting, verify your facts using official government sources like <a href="https://www.congress.gov" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">Congress.gov</a> or your state legislature&apos;s website. If you make a mistake, correct it publicly.</li>
                 <li><strong className="text-gray-900 dark:text-white">Threatening language</strong>: Any language that could be interpreted as a threat is taken extremely seriously. It can result in your message being reported to law enforcement rather than logged as constituent feedback. Stick to civil, issue-focused communication.</li>
@@ -230,13 +230,13 @@ export default function SocialMediaAdvocacyGuidePage() {
             Ready to Make Your Voice Heard?
           </h2>
           <p className="text-gray-600 dark:text-gray-300 mb-6">
-            Find your representatives and craft a message that gets their attention, online or off.
+            Find your officials and craft a message that gets their attention, online or off.
           </p>
           <Link
             href="/contact"
             className="inline-flex items-center gap-2 px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg transition-colors"
           >
-            Contact Your Reps
+            Write to Your Officials
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
             </svg>

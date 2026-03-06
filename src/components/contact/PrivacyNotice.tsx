@@ -18,7 +18,7 @@ export function PrivacyNotice() {
         <div>
           <h4 className="text-sm font-medium text-gray-900">Your Privacy</h4>
           <p className="text-xs text-gray-500 mt-1">
-            Your address is used to find your representatives. If you have an
+            Your address is used to find your officials. If you have an
             account, your address and messages are stored securely in your profile.
             We never sell or share your personal information.
           </p>

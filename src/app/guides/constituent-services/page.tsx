@@ -3,11 +3,11 @@ import type { Metadata } from 'next';
 import { BreadcrumbJsonLd } from '@/lib/seo';
 
 export const metadata: Metadata = {
-  title: 'How to Request Help from Your Rep | Constituent Services | My Democracy',
+  title: 'How to Request Help from Your Officials | Constituent Services | My Democracy',
   description: 'Learn how to use constituent services to get help from your congressional office with Social Security, Medicare, VA benefits, immigration, passports, and more.',
   keywords: ['constituent services', 'casework congress', 'help from congressman', 'congressional casework', 'federal agency help', 'VA benefits help', 'passport help congressman'],
   openGraph: {
-    title: 'How to Request Help from Your Rep | Constituent Services | My Democracy',
+    title: 'How to Request Help from Your Officials | Constituent Services | My Democracy',
     description: 'Learn how to get free help from your congressional office with federal agency issues.',
     type: 'article',
   },
@@ -28,12 +28,12 @@ export default function ConstituentServicesGuidePage() {
         </div>
 
         <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-6">
-          How to Request Help from Your Rep
+          How to Request Help from Your Officials
         </h1>
 
         <div className="prose prose-gray dark:prose-invert max-w-none">
           <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
-            One of the most valuable — and least known — services your congressional office provides is casework: helping constituents resolve problems with federal agencies. This service is free, nonpartisan, and available to everyone in the district or state.
+            One of the most valuable — and least known — services your congressional office provides is casework: helping people in their district resolve problems with federal agencies. This is called casework (free help from your official&apos;s office), and it&apos;s nonpartisan and available to everyone.
           </p>
 
           {/* What Is Casework */}
@@ -115,7 +115,7 @@ export default function ConstituentServicesGuidePage() {
                 <div className="flex gap-3">
                   <span className="w-6 h-6 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center text-xs font-bold text-purple-600 dark:text-purple-400 flex-shrink-0 mt-0.5">1</span>
                   <div>
-                    <p className="font-semibold text-gray-900 dark:text-white">Find your representative&apos;s casework page</p>
+                    <p className="font-semibold text-gray-900 dark:text-white">Find your official&apos;s casework page</p>
                     <p className="text-sm">Visit the <Link href="/legislators" className="text-purple-600 dark:text-purple-400 hover:underline">My Democracy legislator directory</Link> to find your representative. Most congressional offices have a &quot;Help with a Federal Agency&quot; or &quot;Casework&quot; page on their official website with an intake form.</p>
                   </div>
                 </div>
@@ -158,7 +158,7 @@ export default function ConstituentServicesGuidePage() {
               <ul className="list-disc list-inside space-y-2">
                 <li><strong className="text-gray-900 dark:text-white">Be specific</strong>: Clearly explain what happened, what you need, and what you&apos;ve already tried.</li>
                 <li><strong className="text-gray-900 dark:text-white">Contact the district office</strong>: Casework is handled by district or state office staff, not the Washington, DC office.</li>
-                <li><strong className="text-gray-900 dark:text-white">Try all your representatives</strong>: You can contact both your senators and your House rep. Different offices may have different relationships with the agency.</li>
+                <li><strong className="text-gray-900 dark:text-white">Try all your officials</strong>: You can contact both your senators and your House member. Different offices may have different relationships with the agency.</li>
                 <li><strong className="text-gray-900 dark:text-white">Be patient but persistent</strong>: Federal agencies can be slow. A congressional inquiry doesn&apos;t guarantee a different outcome, but it ensures your case gets reviewed.</li>
               </ul>
             </div>
@@ -168,18 +168,18 @@ export default function ConstituentServicesGuidePage() {
           <section className="mb-10 bg-gray-50 dark:bg-gray-800 rounded-xl p-6">
             <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Related Guides</h2>
             <ul className="space-y-2">
-              <li><Link href="/guides/how-to-contact-your-congressman" className="text-purple-600 dark:text-purple-400 hover:underline">How to Contact Your Congressman</Link></li>
-              <li><Link href="/guides/what-does-my-congressman-do" className="text-purple-600 dark:text-purple-400 hover:underline">What Does My Congressman Actually Do?</Link></li>
-              <li><Link href="/guides/who-are-my-representatives" className="text-purple-600 dark:text-purple-400 hover:underline">Who Are My Representatives?</Link></li>
+              <li><Link href="/guides/how-to-contact-your-congressman" className="text-purple-600 dark:text-purple-400 hover:underline">How to Contact Your Elected Officials</Link></li>
+              <li><Link href="/guides/what-does-my-congressman-do" className="text-purple-600 dark:text-purple-400 hover:underline">What Does My Elected Official Actually Do?</Link></li>
+              <li><Link href="/guides/who-are-my-representatives" className="text-purple-600 dark:text-purple-400 hover:underline">Who Are My Elected Officials?</Link></li>
             </ul>
           </section>
         </div>
 
         <div className="mt-10 bg-purple-50 dark:bg-purple-900/20 rounded-2xl p-8 text-center">
           <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">Need help with a federal agency?</h2>
-          <p className="text-gray-600 dark:text-gray-300 mb-6">Find your representative and reach out to their casework team.</p>
+          <p className="text-gray-600 dark:text-gray-300 mb-6">Find your officials and reach out to their casework team.</p>
           <Link href="/contact" className="inline-flex items-center gap-2 px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg transition-colors">
-            Contact Your Reps
+            Write to Your Officials
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
           </Link>
         </div>

@@ -63,7 +63,7 @@ export function IssuesFeedSection() {
         </div>
         <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">No news yet</h3>
         <p className="text-gray-600 dark:text-gray-400 mb-4">
-          Start contacting your representatives to see personalized news here.
+          Start contacting your officials to see personalized news here.
         </p>
         <Link
           href="/contact"

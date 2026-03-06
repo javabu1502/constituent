@@ -317,16 +317,16 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
 
         <div className="p-3 bg-purple-50 dark:bg-purple-900/30 border border-purple-200 dark:border-purple-700 rounded-xl">
           <p className="text-xs text-purple-700 dark:text-purple-300">
-            AI will write personalized messages to your representatives based on this campaign. You&apos;ll review before sending.
+            AI will write personalized messages to your officials based on this campaign. You&apos;ll review before sending.
           </p>
         </div>
 
         <Button type="submit" className="w-full" size="lg">
-          Find My Representatives
+          Find My Officials
         </Button>
 
         <p className="text-xs text-gray-400 dark:text-gray-500 text-center">
-          Your address is used only to find your representatives. See our{' '}
+          Your address is used only to find your officials. See our{' '}
           <a href="/privacy" className="underline hover:text-gray-600 dark:hover:text-gray-300">Privacy Policy</a>.
         </p>
       </form>
@@ -345,7 +345,7 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
             </svg>
           </div>
         </div>
-        <p className="text-gray-600 dark:text-gray-300 mt-4 font-medium">Finding your representatives...</p>
+        <p className="text-gray-600 dark:text-gray-300 mt-4 font-medium">Finding your officials...</p>
         <p className="text-gray-400 dark:text-gray-500 text-sm mt-1">Generating personalized messages</p>
       </div>
     );

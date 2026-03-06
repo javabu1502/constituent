@@ -235,7 +235,7 @@ export function SearchDialog({ onClose }: SearchDialogProps) {
               </p>
               <div className="grid grid-cols-2 gap-2">
                 {[
-                  { label: 'Contact Your Reps', href: '/contact' },
+                  { label: 'Write to Your Officials', href: '/contact' },
                   { label: 'States', href: '/states' },
                   { label: 'News', href: '/news' },
                   { label: 'Trends', href: '/trends' },

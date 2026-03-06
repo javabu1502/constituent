@@ -170,14 +170,14 @@ export default function NewsMediaLiteracyGuidePage() {
             </h2>
             <div className="pl-10 text-gray-600 dark:text-gray-300 space-y-3">
               <p>
-                When it comes to civic engagement specifically -tracking legislation, understanding government processes, and following what your representatives are doing -primary sources are your best bet. These are the official records and proceedings themselves, not someone else&apos;s interpretation of them.
+                When it comes to civic engagement specifically -tracking legislation, understanding government processes, and following what your officials are doing -primary sources are your best bet. These are the official records and proceedings themselves, not someone else&apos;s interpretation of them.
               </p>
               <p>
                 <strong className="text-gray-900 dark:text-white">Primary government sources:</strong>
               </p>
               <ul className="list-disc list-inside space-y-2">
-                <li><a href="https://www.congress.gov" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">Congress.gov</a> -The official source for federal legislation. You can read the full text of bills, track their progress through committees, and see how your representatives voted. Learn more in our <Link href="/guides/how-to-track-legislation" className="text-purple-600 dark:text-purple-400 hover:underline">guide to tracking legislation</Link>.</li>
-                <li><a href="https://www.c-span.org" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">C-SPAN</a> -Provides unedited, gavel-to-gavel coverage of congressional proceedings, committee hearings, and other government events. Watching C-SPAN lets you see what your representatives actually say on the floor, without editing or commentary.</li>
+                <li><a href="https://www.congress.gov" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">Congress.gov</a> -The official source for federal legislation. You can read the full text of bills, track their progress through committees, and see how your officials voted. Learn more in our <Link href="/guides/how-to-track-legislation" className="text-purple-600 dark:text-purple-400 hover:underline">guide to tracking legislation</Link>.</li>
+                <li><a href="https://www.c-span.org" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">C-SPAN</a> -Provides unedited, gavel-to-gavel coverage of congressional proceedings, committee hearings, and other government events. Watching C-SPAN lets you see what your officials actually say on the floor, without editing or commentary.</li>
               </ul>
               <p>
                 <strong className="text-gray-900 dark:text-white">Wire services for straight news reporting:</strong>
@@ -198,7 +198,7 @@ export default function NewsMediaLiteracyGuidePage() {
             <ul className="space-y-2">
               <li>
                 <Link href="/guides/who-are-my-representatives" className="text-purple-600 dark:text-purple-400 hover:underline">
-                  Who Are My Representatives?
+                  Who Are My Elected Officials?
                 </Link>
               </li>
               <li>
@@ -221,13 +221,13 @@ export default function NewsMediaLiteracyGuidePage() {
             Ready to put your knowledge to work?
           </h2>
           <p className="text-gray-600 dark:text-gray-300 mb-6">
-            Now that you know how to stay informed, take the next step and reach out to your representatives about the issues that matter to you.
+            Now that you know how to stay informed, take the next step and reach out to your officials about the issues that matter to you.
           </p>
           <Link
             href="/contact"
             className="inline-flex items-center gap-2 px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg transition-colors"
           >
-            Contact Your Reps
+            Write to Your Officials
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
             </svg>

@@ -298,7 +298,7 @@ export function LocalOfficialsSection({ cachedLocalOfficials, hasAddress }: Prop
       </div>
       <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Local data not available yet</h4>
       <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-        Local official data coverage varies by area. You can find your local representatives through these resources:
+        Local official data coverage varies by area. You can find your local officials through these resources:
       </p>
       <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
         <a

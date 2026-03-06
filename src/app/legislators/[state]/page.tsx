@@ -196,13 +196,13 @@ export default async function StateLegislatorsPage({ params }: StatePageProps) {
       {/* CTA */}
       <div className="mt-12 text-center">
         <p className="text-gray-600 dark:text-gray-400 mb-4">
-          Can&apos;t find your representative? Enter your address for an exact match.
+          Can&apos;t find your official? Enter your address for an exact match.
         </p>
         <Link
           href="/contact"
           className="inline-block px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-medium rounded-lg transition-colors"
         >
-          Find My Representatives
+          Find My Officials
         </Link>
       </div>
     </div>

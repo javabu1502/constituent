@@ -244,13 +244,13 @@ export default function ExecutiveOrdersGuidePage() {
             Have Thoughts on Presidential Action?
           </h2>
           <p className="text-gray-600 dark:text-gray-300 mb-6">
-            Your representatives in Congress have the power to respond to executive orders through legislation and oversight. Let them know where you stand.
+            Your officials in Congress have the power to respond to executive orders through legislation and oversight. Let them know where you stand.
           </p>
           <Link
             href="/contact"
             className="inline-flex items-center gap-2 px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg transition-colors"
           >
-            Contact Your Reps
+            Write to Your Officials
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
             </svg>

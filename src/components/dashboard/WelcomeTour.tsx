@@ -16,7 +16,7 @@ const tourSteps = [
     ),
   },
   {
-    title: 'My Representatives',
+    title: 'My Officials',
     description:
       'Add your address and we\'ll show you everyone who represents you — from Congress to your city council. See how they vote, what bills they work on, and how to reach them.',
     icon: (

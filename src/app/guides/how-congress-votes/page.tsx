@@ -4,11 +4,11 @@ import { BreadcrumbJsonLd } from '@/lib/seo';
 
 export const metadata: Metadata = {
   title: 'How Congress Votes and What It Means | My Democracy',
-  description: 'Learn how voting works in the US Congress: roll call votes, voice votes, quorum requirements, and how to look up how your representative voted on any bill.',
+  description: 'Learn how voting works in the US Congress: roll call votes, voice votes, quorum requirements, and how to look up how your official voted on any bill.',
   keywords: ['how congress votes', 'roll call vote', 'congressional voting', 'how does congress vote', 'voice vote', 'voting records congress', 'how my representative voted'],
   openGraph: {
     title: 'How Congress Votes and What It Means | My Democracy',
-    description: 'Learn how voting works in Congress and how to find your representative\'s voting record.',
+    description: 'Learn how voting works in Congress and how to find your official\'s voting record.',
     type: 'article',
   },
 };
@@ -33,7 +33,7 @@ export default function HowCongressVotesPage() {
 
         <div className="prose prose-gray dark:prose-invert max-w-none">
           <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
-            Congress uses several types of votes to make decisions. Understanding the difference between a voice vote and a roll call vote — and knowing how to find your representative&apos;s voting record — is key to holding your elected officials accountable.
+            Congress uses several types of votes to make decisions. Understanding the difference between a voice vote and a roll call vote — and knowing how to find your official&apos;s voting record — is key to holding your elected officials accountable.
           </p>
 
           {/* Types of Votes */}
@@ -105,7 +105,7 @@ export default function HowCongressVotesPage() {
               How to Look Up Voting Records
             </h2>
             <div className="pl-10 text-gray-600 dark:text-gray-300 space-y-3">
-              <p>Several free resources let you see exactly how your representative voted:</p>
+              <p>Several free resources let you see exactly how your official voted:</p>
               <ul className="list-disc list-inside space-y-2">
                 <li><strong className="text-gray-900 dark:text-white">My Democracy</strong>: Visit the <Link href="/vote" className="text-purple-600 dark:text-purple-400 hover:underline">voting records page</Link> or any <Link href="/legislators" className="text-purple-600 dark:text-purple-400 hover:underline">legislator profile</Link> to see recent votes.</li>
                 <li><strong className="text-gray-900 dark:text-white">Congress.gov</strong>: The official source for all <a href="https://www.congress.gov/roll-call-votes" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">roll call votes</a>, searchable by date, bill, or member.</li>
@@ -129,7 +129,7 @@ export default function HowCongressVotesPage() {
                 When you see a member listed as &quot;Not Voting,&quot; it can mean several things: they were absent due to illness or travel, they had a conflict of interest, or they chose to abstain. Members can also vote &quot;Present&quot; — which counts for quorum purposes but not as a vote for or against.
               </p>
               <p>
-                A pattern of missed votes can be significant. If your representative has a high rate of missed votes, that may be worth asking about through <Link href="/guides/how-to-contact-your-congressman" className="text-purple-600 dark:text-purple-400 hover:underline">direct contact</Link> or at a <Link href="/guides/how-to-attend-a-town-hall" className="text-purple-600 dark:text-purple-400 hover:underline">town hall</Link>.
+                A pattern of missed votes can be significant. If your official has a high rate of missed votes, that may be worth asking about through <Link href="/guides/how-to-contact-your-congressman" className="text-purple-600 dark:text-purple-400 hover:underline">direct contact</Link> or at a <Link href="/guides/how-to-attend-a-town-hall" className="text-purple-600 dark:text-purple-400 hover:underline">town hall</Link>.
               </p>
             </div>
           </section>
@@ -139,14 +139,14 @@ export default function HowCongressVotesPage() {
             <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Related Guides</h2>
             <ul className="space-y-2">
               <li><Link href="/guides/how-a-bill-becomes-law" className="text-purple-600 dark:text-purple-400 hover:underline">How a Bill Becomes Law</Link></li>
-              <li><Link href="/guides/what-does-my-congressman-do" className="text-purple-600 dark:text-purple-400 hover:underline">What Does My Congressman Actually Do?</Link></li>
+              <li><Link href="/guides/what-does-my-congressman-do" className="text-purple-600 dark:text-purple-400 hover:underline">What Does My Elected Official Actually Do?</Link></li>
               <li><Link href="/guides/how-to-track-legislation" className="text-purple-600 dark:text-purple-400 hover:underline">How to Track Legislation</Link></li>
             </ul>
           </section>
         </div>
 
         <div className="mt-10 bg-purple-50 dark:bg-purple-900/20 rounded-2xl p-8 text-center">
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">See how your representatives voted</h2>
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">See how your officials voted</h2>
           <p className="text-gray-600 dark:text-gray-300 mb-6">Look up recent votes and hold your elected officials accountable.</p>
           <Link href="/vote" className="inline-flex items-center gap-2 px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg transition-colors">
             View Voting Records

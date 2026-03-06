@@ -180,7 +180,7 @@ export default function StateVsFederalPowerGuidePage() {
                 This also means that <strong className="text-gray-900 dark:text-white">state and local elections</strong> have an enormous impact on your daily life. Governors, state legislators, attorneys general, and local officials make decisions about education funding, policing, infrastructure, business regulations, and much more. Voter turnout in state and local elections is typically much lower than in presidential elections, which means your vote and your voice carry even more weight.
               </p>
               <p className="text-gray-600 dark:text-gray-300">
-                When you are advocating for a policy change, the first step is always to ask: <strong className="text-gray-900 dark:text-white">which level of government has authority over this issue?</strong> Directing your energy to the right officials makes your advocacy more effective. Use our <Link href="/contact" className="text-purple-600 dark:text-purple-400 hover:underline">contact tool</Link> to find both your federal and state representatives.
+                When you are advocating for a policy change, the first step is always to ask: <strong className="text-gray-900 dark:text-white">which level of government has authority over this issue?</strong> Directing your energy to the right officials makes your advocacy more effective. Use our <Link href="/contact" className="text-purple-600 dark:text-purple-400 hover:underline">contact tool</Link> to find both your federal and state officials.
               </p>
             </div>
           </section>
@@ -214,13 +214,13 @@ export default function StateVsFederalPowerGuidePage() {
             Know who represents you at every level
           </h2>
           <p className="text-gray-600 dark:text-gray-300 mb-6">
-            Find your federal and state representatives and make your voice heard where it counts.
+            Find your federal and state officials and make your voice heard where it counts.
           </p>
           <Link
             href="/contact"
             className="inline-flex items-center gap-2 px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg transition-colors"
           >
-            Contact Your Reps
+            Write to Your Officials
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
             </svg>

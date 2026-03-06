@@ -18,7 +18,7 @@ export default function PrivacyPage() {
         </p>
 
         <div className="prose prose-gray dark:prose-invert max-w-none">
-          {/* How We Find Your Representatives */}
+          {/* How We Find Your Officials */}
           <section className="mb-10">
             <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
               <span className="w-8 h-8 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -27,7 +27,7 @@ export default function PrivacyPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
               </span>
-              How We Find Your Representatives
+              How We Find Your Officials
             </h2>
             <div className="space-y-3 text-gray-600 dark:text-gray-300 pl-10">
               <p>
@@ -55,7 +55,7 @@ export default function PrivacyPage() {
                 <strong>Without an account:</strong> your address is used for lookup only
                 and then discarded. <strong>With an account:</strong> your address is stored
                 securely in your profile so you can access your dashboard and matched
-                representatives. You can update or delete it anytime.
+                officials. You can update or delete it anytime.
               </p>
             </div>
           </section>
@@ -71,12 +71,12 @@ export default function PrivacyPage() {
               What the AI Sees
             </h2>
             <div className="space-y-3 text-gray-600 dark:text-gray-300 pl-10">
-              <p>When we generate your personalized email or phone script, representative bios, or bill summaries, the AI receives:</p>
+              <p>When we generate your personalized email or phone script, official bios, or bill summaries, the AI receives:</p>
               <ul className="list-disc list-inside space-y-2 ml-4">
                 <li><strong className="text-gray-900 dark:text-white">Your name</strong>: so it can personalize the message</li>
                 <li><strong className="text-gray-900 dark:text-white">Your city and state</strong>: so it can say &quot;as your constituent from Reno, Nevada&quot;</li>
                 <li><strong className="text-gray-900 dark:text-white">The issue you care about</strong>: what you wrote in your own words</li>
-                <li><strong className="text-gray-900 dark:text-white">Your representative&apos;s info</strong>: name, party, position, so it can tailor the message</li>
+                <li><strong className="text-gray-900 dark:text-white">Your official&apos;s info</strong>: name, party, position, so it can tailor the message</li>
               </ul>
               <p className="bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-700 rounded-lg p-4 text-blue-800 dark:text-blue-300">
                 <strong>The AI does NOT see your full street address</strong> or any
@@ -192,7 +192,7 @@ export default function PrivacyPage() {
               <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
                 <p className="font-semibold text-gray-900 dark:text-white">Anthropic Claude API</p>
                 <p className="text-sm">
-                  Our AI provider for message generation, representative bios, and bill summaries. Per their{' '}
+                  Our AI provider for message generation, official bios, and bill summaries. Per their{' '}
                   <a href="https://www.anthropic.com/policies/privacy" className="text-purple-600 dark:text-purple-400 hover:underline" target="_blank" rel="noopener noreferrer">
                     API terms
                   </a>, data sent through the API is not stored or used for training.
@@ -280,7 +280,7 @@ export default function PrivacyPage() {
                 GitHub repository), plus the issue area and details you provide.
               </p>
               <p>
-                For <strong className="text-gray-900 dark:text-white">representative bios</strong>, the AI uses publicly available data (name, party, state, committees, legislative history) to generate biographical narratives. For <strong className="text-gray-900 dark:text-white">bill summaries</strong>, the AI summarizes publicly available bill text. No personal user data is used for bios or summaries.
+                For <strong className="text-gray-900 dark:text-white">official bios</strong>, the AI uses publicly available data (name, party, state, committees, legislative history) to generate biographical narratives. For <strong className="text-gray-900 dark:text-white">bill summaries</strong>, the AI summarizes publicly available bill text. No personal user data is used for bios or summaries.
               </p>
               <p>
                 You always review and can edit messages before sending.

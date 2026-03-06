@@ -4,11 +4,11 @@ import { BreadcrumbJsonLd } from '@/lib/seo';
 
 export const metadata: Metadata = {
   title: 'How to Run a Successful Campaign | My Democracy',
-  description: 'Learn how to create a compelling advocacy campaign that rallies others to contact their representatives. Tips on headlines, descriptions, messaging, sharing, and tracking success.',
+  description: 'Learn how to create a compelling advocacy campaign that rallies others to contact their officials. Tips on headlines, descriptions, messaging, sharing, and tracking success.',
   keywords: ['advocacy campaign', 'grassroots campaign', 'civic engagement', 'contact congress', 'collective action', 'campaign tips'],
   openGraph: {
     title: 'How to Run a Successful Campaign | My Democracy',
-    description: 'Learn how to create a compelling advocacy campaign that rallies others to contact their representatives.',
+    description: 'Learn how to create a compelling advocacy campaign that rallies others to contact their officials.',
     type: 'article',
   },
 };
@@ -36,7 +36,7 @@ export default function CampaignGuidePage() {
 
         <div className="prose prose-gray dark:prose-invert max-w-none">
           <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
-            A campaign turns one person&apos;s concern into a collective voice. When dozens or hundreds of constituents contact their representatives about the same issue, each with their own personal story, legislators pay attention. Here&apos;s how to make your campaign as effective as possible.
+            A campaign turns one person&apos;s concern into a collective voice. When dozens or hundreds of constituents contact their officials about the same issue, each with their own personal story, legislators pay attention. Here&apos;s how to make your campaign as effective as possible.
           </p>
 
           {/* Why Campaigns Work */}
@@ -278,7 +278,7 @@ export default function CampaignGuidePage() {
                 <strong className="text-gray-900 dark:text-white">What to do with your data:</strong>
               </p>
               <ul className="list-disc list-inside space-y-2">
-                <li>Share progress updates: &quot;47 people have sent messages to their representatives this week&quot;</li>
+                <li>Share progress updates: &quot;47 people have sent messages to their officials this week&quot;</li>
                 <li>Identify which sharing channels drive the most participation and double down</li>
                 <li>If growth slows, try a new angle or share a participant&apos;s story (with permission)</li>
                 <li>Set goals and celebrate them publicly: &quot;Help us reach 100 actions by Friday&quot;</li>
@@ -426,7 +426,7 @@ export default function CampaignGuidePage() {
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Facebook</h3>
                 <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-4">
-                  <p className="text-sm font-mono whitespace-pre-wrap">Hey friends - I need your help with something that matters to me personally.{'\n\n'}[Explain the issue in 2-3 sentences: what&apos;s happening, who it affects, and why you care.]{'\n\n'}I created a campaign page that makes it easy to send a personalized message to your representative. It takes about 2 minutes, and you don&apos;t need to write anything from scratch - just add your story and the tool does the rest.{'\n\n'}If you live in [state/city/district], your voice really matters here. Even if you don&apos;t, please consider sharing this with someone who does.{'\n\n'}[campaign link]{'\n\n'}Thank you for caring about this.</p>
+                  <p className="text-sm font-mono whitespace-pre-wrap">Hey friends - I need your help with something that matters to me personally.{'\n\n'}[Explain the issue in 2-3 sentences: what&apos;s happening, who it affects, and why you care.]{'\n\n'}I created a campaign page that makes it easy to send a personalized message to your official. It takes about 2 minutes, and you don&apos;t need to write anything from scratch - just add your story and the tool does the rest.{'\n\n'}If you live in [state/city/district], your voice really matters here. Even if you don&apos;t, please consider sharing this with someone who does.{'\n\n'}[campaign link]{'\n\n'}Thank you for caring about this.</p>
                 </div>
                 <p className="text-sm mt-2 text-gray-500 dark:text-gray-400">Tip: Personal posts outperform formal ones. Share why this issue matters to you specifically. Tag friends who live in the affected area.</p>
               </div>
@@ -450,7 +450,7 @@ export default function CampaignGuidePage() {
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Email to Friends / Colleagues</h3>
                 <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-4">
-                  <p className="text-sm font-mono whitespace-pre-wrap">Subject: Can you take 2 minutes to help with [issue]?{'\n\n'}Hi [name],{'\n\n'}I&apos;m reaching out because [explain your personal connection to the issue in 1-2 sentences].{'\n\n'}[Describe the issue and what&apos;s at stake in 2-3 sentences.]{'\n\n'}I created a campaign page that makes it easy to send a personalized message to your representative. You just add a brief personal story and the tool generates a unique letter. It takes about 2 minutes.{'\n\n'}Here&apos;s the link: [campaign link]{'\n\n'}If this isn&apos;t your issue, no worries at all, but if you could forward this to anyone who might care, that would help too.{'\n\n'}Thanks,{'\n'}[Your name]</p>
+                  <p className="text-sm font-mono whitespace-pre-wrap">Subject: Can you take 2 minutes to help with [issue]?{'\n\n'}Hi [name],{'\n\n'}I&apos;m reaching out because [explain your personal connection to the issue in 1-2 sentences].{'\n\n'}[Describe the issue and what&apos;s at stake in 2-3 sentences.]{'\n\n'}I created a campaign page that makes it easy to send a personalized message to your official. You just add a brief personal story and the tool generates a unique letter. It takes about 2 minutes.{'\n\n'}Here&apos;s the link: [campaign link]{'\n\n'}If this isn&apos;t your issue, no worries at all, but if you could forward this to anyone who might care, that would help too.{'\n\n'}Thanks,{'\n'}[Your name]</p>
                 </div>
                 <p className="text-sm mt-2 text-gray-500 dark:text-gray-400">Tip: Personalize the subject line and opening. Emails from someone you know have much higher open rates than mass messages. Send to small batches rather than one big BCC list.</p>
               </div>
@@ -519,7 +519,7 @@ export default function CampaignGuidePage() {
                 <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-4">
                   <h3 className="font-semibold text-gray-900 dark:text-white mb-1">Week 2: Share Updates and Hit Milestones</h3>
                   <ul className="list-disc list-inside space-y-1 text-sm">
-                    <li>Post progress updates: &quot;42 people have sent messages to their representatives so far!&quot;</li>
+                    <li>Post progress updates: &quot;42 people have sent messages to their officials so far!&quot;</li>
                     <li>Share a participant&apos;s story (with permission) to show the human impact</li>
                     <li>Set a public goal: &quot;Help us reach 100 actions by Friday&quot;</li>
                     <li>Reach out to local media or bloggers. A campaign with momentum is a story worth covering</li>
@@ -618,7 +618,7 @@ export default function CampaignGuidePage() {
               </li>
               <li>
                 <Link href="/guides/how-to-contact-your-congressman" className="text-purple-600 dark:text-purple-400 hover:underline">
-                  How to Contact Your Congressman
+                  How to Contact Your Elected Officials
                 </Link>
               </li>
             </ul>

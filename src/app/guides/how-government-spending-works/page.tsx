@@ -33,7 +33,7 @@ export default function GovernmentSpendingGuidePage() {
 
         <div className="prose prose-gray dark:prose-invert max-w-none">
           <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
-            The federal budget determines how the government collects and spends trillions of dollars each year. Understanding this process helps you follow policy debates, hold your representatives accountable, and see where your tax dollars go.
+            The federal budget determines how the government collects and spends trillions of dollars each year. Understanding this process helps you follow policy debates, hold your officials accountable, and see where your tax dollars go.
           </p>
 
           {/* The Budget Process */}
@@ -146,7 +146,7 @@ export default function GovernmentSpendingGuidePage() {
             </h2>
             <div className="pl-10 text-gray-600 dark:text-gray-300">
               <ul className="list-disc list-inside space-y-2">
-                <li><strong className="text-gray-900 dark:text-white">Contact your reps during budget season</strong>: The budget and appropriations process runs from February through September. Let your representatives know your spending priorities.</li>
+                <li><strong className="text-gray-900 dark:text-white">Contact your officials during budget season</strong>: The budget and appropriations process runs from February through September. Let your officials know your spending priorities.</li>
                 <li><strong className="text-gray-900 dark:text-white">Follow appropriations bills</strong>: Use our <Link href="/guides/how-to-track-legislation" className="text-purple-600 dark:text-purple-400 hover:underline">legislation tracking guide</Link> to follow specific spending bills.</li>
                 <li><strong className="text-gray-900 dark:text-white">Attend hearings</strong>: Appropriations subcommittee hearings are public. Check <a href="https://www.congress.gov/committees" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">Congress.gov</a> for schedules.</li>
               </ul>
@@ -166,9 +166,9 @@ export default function GovernmentSpendingGuidePage() {
 
         <div className="mt-10 bg-purple-50 dark:bg-purple-900/20 rounded-2xl p-8 text-center">
           <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">Have spending priorities?</h2>
-          <p className="text-gray-600 dark:text-gray-300 mb-6">Tell your representatives what you think the budget should fund.</p>
+          <p className="text-gray-600 dark:text-gray-300 mb-6">Tell your officials what you think the budget should fund.</p>
           <Link href="/contact" className="inline-flex items-center gap-2 px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg transition-colors">
-            Contact Your Reps
+            Write to Your Officials
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
           </Link>
         </div>

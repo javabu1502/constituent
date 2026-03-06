@@ -62,7 +62,7 @@ export function MobileNav({ user }: { user: User | null }) {
             onClick={() => setOpen(false)}
             className="block px-4 py-3 text-sm font-medium text-purple-700 dark:text-purple-300 bg-purple-50 dark:bg-purple-900/20 hover:bg-purple-100 dark:hover:bg-purple-900/30 transition-colors"
           >
-            Contact Your Reps
+            Write to Your Officials
           </Link>
 
           <p className="px-4 pt-3 pb-1 text-xs font-medium text-gray-400 dark:text-gray-500 uppercase tracking-wider">Explore</p>

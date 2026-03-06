@@ -18,9 +18,9 @@ const steps = [
   },
   {
     key: 'reps',
-    title: 'See your representatives',
+    title: 'See your officials',
     description: 'See everyone who represents you, from Washington D.C. to your state capital.',
-    doneText: 'Representatives found',
+    doneText: 'Officials found',
     href: null, // auto-done when address is added
   },
   {

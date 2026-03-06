@@ -357,7 +357,7 @@ export default function TellYourStoryGuidePage() {
               </p>
 
               <div>
-                <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Direct Messages to Representatives</h3>
+                <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Direct Messages to Officials</h3>
                 <p className="text-gray-600 dark:text-gray-300 mb-2">
                   Email, phone calls, and physical letters are the bread and butter of constituent advocacy. Each format favors a different approach:
                 </p>
@@ -410,10 +410,10 @@ export default function TellYourStoryGuidePage() {
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Social Media</h3>
                 <p className="text-gray-600 dark:text-gray-300 mb-2">
-                  Tagging your representative on social media creates public accountability. A compelling story that goes viral can move an issue faster than a hundred private emails.
+                  Tagging your official on social media creates public accountability. A compelling story that goes viral can move an issue faster than a hundred private emails.
                 </p>
                 <ul className="list-disc list-inside text-gray-600 dark:text-gray-300 space-y-1">
-                  <li>Tag your representative&apos;s official account directly. Staff monitor these mentions.</li>
+                  <li>Tag your official&apos;s account directly. Staff monitor these mentions.</li>
                   <li>Keep it concise. Lead with the hook, share one powerful detail, and make your ask.</li>
                   <li>Use relevant hashtags to reach broader advocacy communities.</li>
                   <li>Video is especially powerful. A 60-second clip of you telling your story can reach thousands.</li>
@@ -544,7 +544,7 @@ export default function TellYourStoryGuidePage() {
               </li>
               <li>
                 <Link href="/guides/how-to-contact-your-congressman" className="text-purple-600 dark:text-purple-400 hover:underline">
-                  How to Contact Your Congressman
+                  How to Contact Your Elected Officials
                 </Link>
               </li>
               <li>

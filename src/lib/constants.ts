@@ -8,7 +8,7 @@ import type { Topic } from './types';
 export const BRAND = {
   name: 'My Democracy',
   tagline: 'Contact Your Elected Officials',
-  description: 'Use AI to write personalized messages to your representatives in minutes.',
+  description: 'Use AI to write personalized messages to your elected officials in minutes.',
   colors: {
     primary: '#6A39C9',
     primaryHover: '#5A2EB0',
@@ -16,7 +16,7 @@ export const BRAND = {
   },
 } as const;
 
-// Pre-defined topics for contacting representatives
+// Pre-defined topics for contacting officials
 export const TOPICS: Topic[] = [
   {
     id: 'healthcare',
