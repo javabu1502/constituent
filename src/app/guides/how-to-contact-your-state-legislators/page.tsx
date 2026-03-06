@@ -224,7 +224,7 @@ export default function ContactStateLegislatorsGuidePage() {
                 </p>
                 <ul className="list-disc list-inside space-y-2">
                   <li><strong className="text-gray-900 dark:text-white">Full-time legislatures</strong>: California, New York, Pennsylvania, and Michigan have full-time, year-round legislatures. Legislators are paid a full salary and treat it as their primary job. You can reach them at the capitol most of the year.</li>
-                  <li><strong className="text-gray-900 dark:text-white">Part-time legislatures</strong>: Texas meets for only 140 days every two years. New Hampshire legislators earn just $100 per year. Montana, Nevada, and North Dakota also meet every other year. Timing your advocacy around their session schedule is critical.</li>
+                  <li><strong className="text-gray-900 dark:text-white">Part-time legislatures</strong>: Texas meets for only <a href="https://www.ncsl.org/about-state-legislatures/legislative-session-length" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">140 days every two years</a>. New Hampshire legislators earn just <a href="https://www.ncsl.org/about-state-legislatures/2024-legislator-compensation" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">$100 per year</a>. Montana, Nevada, and North Dakota also meet every other year. Timing your advocacy around their session schedule is critical.</li>
                   <li><strong className="text-gray-900 dark:text-white">Hybrid legislatures</strong>: Most states fall somewhere in between. Ohio, Colorado, and Florida have legislatures that meet for several months each year but are not considered full-time positions.</li>
                 </ul>
               </div>
@@ -235,7 +235,7 @@ export default function ContactStateLegislatorsGuidePage() {
                   This distinction matters because it shapes how legislators interact with constituents:
                 </p>
                 <ul className="list-disc list-inside space-y-2">
-                  <li><strong className="text-gray-900 dark:text-white">Citizen legislatures</strong>: States like New Hampshire (400 House members!), Wyoming, and Vermont have legislators who hold other jobs and serve part-time. They often live and work in your community, making them very accessible. You might run into them at the grocery store.</li>
+                  <li><strong className="text-gray-900 dark:text-white">Citizen legislatures</strong>: States like New Hampshire (<a href="https://www.ncsl.org/about-state-legislatures/number-of-legislators-and-length-of-terms" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">400 House members</a>!), Wyoming, and Vermont have legislators who hold other jobs and serve part-time. They often live and work in your community, making them very accessible. You might run into them at the grocery store.</li>
                   <li><strong className="text-gray-900 dark:text-white">Professional legislatures</strong>: States like California and New York have legislators with full salaries, large staffs, and year-round schedules. Contacting them works more like contacting a member of Congress, and you&apos;ll typically interact with staff first.</li>
                 </ul>
               </div>

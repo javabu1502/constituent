@@ -56,7 +56,7 @@ export default function BallotMeasuresGuidePage() {
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Initiatives (Citizen-Initiated Measures)</h3>
                 <p className="text-gray-600 dark:text-gray-300">
-                  An initiative allows citizens to propose a new law or constitutional amendment by collecting a required number of signatures from registered voters. If enough valid signatures are gathered, the proposal is placed on the ballot for all voters to decide. Initiatives bypass the legislature entirely -- they go directly from petition to ballot. Not all states allow initiatives; the process is available in roughly half of U.S. states, predominantly in the West.
+                  An initiative allows citizens to propose a new law or constitutional amendment by collecting a required number of signatures from registered voters. If enough valid signatures are gathered, the proposal is placed on the ballot for all voters to decide. Initiatives bypass the legislature entirely -- they go directly from petition to ballot. Not all states allow initiatives; the process is available in <a href="https://www.ncsl.org/elections-and-campaigns/initiative-and-referendum-states" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">26 states</a>, predominantly in the West.
                 </p>
               </div>
               <div>

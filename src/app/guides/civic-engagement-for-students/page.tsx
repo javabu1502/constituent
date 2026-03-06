@@ -48,7 +48,7 @@ export default function CivicEngagementStudentsGuidePage() {
             </h2>
             <div className="pl-10 text-gray-600 dark:text-gray-300 space-y-3">
               <p>
-                Civic habits formed early tend to last a lifetime. Research in political science consistently shows that people who vote in their first eligible election are significantly more likely to continue voting in future elections. The same pattern holds for other forms of participation — attending community meetings, contacting elected officials, and volunteering for causes.
+                Civic habits formed early tend to last a lifetime. <a href="https://circle.tufts.edu/" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">Research in political science</a> consistently shows that people who vote in their first eligible election are significantly more likely to continue voting in future elections. The same pattern holds for other forms of participation — attending community meetings, contacting elected officials, and volunteering for causes.
               </p>
               <p>
                 Policy decisions made today — on education funding, climate policy, student debt, housing, and healthcare — will shape your life for decades. Young people are directly affected by these decisions, and elected officials pay attention when young constituents speak up. Getting involved now means having a say in the outcomes that matter most to your generation.

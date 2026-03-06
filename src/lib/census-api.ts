@@ -17,8 +17,8 @@ export const STATE_FIPS: Record<string, string> = {
   DC: '11',
 };
 
-const ACS_BASE = 'https://api.census.gov/data/2022/acs/acs5';
-const ACS_YEAR = 2022;
+const ACS_BASE = 'https://api.census.gov/data/2024/acs/acs5';
+const ACS_YEAR = 2024;
 
 // Variables:
 // B01003_001E = total population

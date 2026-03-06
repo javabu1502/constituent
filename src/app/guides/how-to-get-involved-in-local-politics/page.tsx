@@ -33,7 +33,7 @@ export default function LocalPoliticsGuidePage() {
 
         <div className="prose prose-gray dark:prose-invert max-w-none">
           <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
-            Local government makes the decisions that most directly affect your daily life: roads, schools, police, zoning, parks, water. Yet fewer than 15% of eligible voters participate in local elections. Here&apos;s how to change that, starting with you.
+            Local government makes the decisions that most directly affect your daily life: roads, schools, police, zoning, parks, water. Yet <a href="https://www.pdx.edu/news/who-votes-local-elections" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">fewer than 15% of eligible voters</a> participate in local elections. Here&apos;s how to change that, starting with you.
           </p>
 
           {/* Why Local Matters */}

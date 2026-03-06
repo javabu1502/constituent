@@ -84,7 +84,7 @@ export default function RegisterToVotePage() {
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">1. Online Registration (Fastest)</h3>
                 <p className="text-gray-600 dark:text-gray-300 mb-2">
-                  41 states plus DC offer online voter registration. You&apos;ll need your state ID or driver&apos;s license number. The process takes about 2 minutes.
+                  <a href="https://www.ncsl.org/elections-and-campaigns/online-voter-registration" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">43 states plus DC</a> offer online voter registration (as of 2026). You&apos;ll need your state ID or driver&apos;s license number. The process takes about 2 minutes.
                 </p>
                 <p className="text-gray-600 dark:text-gray-300">
                   Start at <a href="https://www.vote.org/register-to-vote/" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">Vote.org</a>, which will redirect you to your state&apos;s official registration page.
@@ -108,7 +108,7 @@ export default function RegisterToVotePage() {
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">4. Automatic Registration</h3>
                 <p className="text-gray-600 dark:text-gray-300 mb-2">
-                  23 states plus DC have automatic voter registration. You&apos;re registered when you interact with a government agency (usually the DMV) unless you opt out. Check if your state participates.
+                  <a href="https://www.ncsl.org/elections-and-campaigns/automatic-voter-registration" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">24 states plus DC</a> have automatic voter registration (as of 2026). You&apos;re registered when you interact with a government agency (usually the DMV) unless you opt out. Check if your state participates.
                 </p>
               </div>
             </div>
@@ -148,7 +148,7 @@ export default function RegisterToVotePage() {
             <div className="pl-10 text-gray-600 dark:text-gray-300 space-y-3">
               <p>Deadlines vary by state, typically 15-30 days before an election. Key facts:</p>
               <ul className="list-disc list-inside space-y-2">
-                <li><strong className="text-gray-900 dark:text-white">Same-day registration</strong>: 21 states plus DC allow you to register and vote on the same day. Bring proof of residency.</li>
+                <li><strong className="text-gray-900 dark:text-white">Same-day registration</strong>: <a href="https://www.ncsl.org/elections-and-campaigns/same-day-voter-registration" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">22 states plus DC</a> allow you to register and vote on the same day (as of 2026). Bring proof of residency.</li>
                 <li><strong className="text-gray-900 dark:text-white">North Dakota</strong>: No registration required at all. Just show up with valid ID.</li>
                 <li><strong className="text-gray-900 dark:text-white">Online deadlines</strong>: Usually earlier than mail or in-person deadlines.</li>
               </ul>
@@ -172,8 +172,8 @@ export default function RegisterToVotePage() {
               <ul className="list-disc list-inside space-y-2">
                 <li><strong className="text-gray-900 dark:text-white">Verify your registration</strong>: Check back in 2-4 weeks to confirm it was processed.</li>
                 <li><strong className="text-gray-900 dark:text-white">Know your polling place</strong>: Find it before Election Day at <a href="https://www.vote.org/polling-place-locator/" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">Vote.org</a>.</li>
-                <li><strong className="text-gray-900 dark:text-white">Understand voter ID laws</strong>: 36 states require some form of ID at the polls. Know what your state requires.</li>
-                <li><strong className="text-gray-900 dark:text-white">Consider early voting</strong>: 46 states offer early voting or no-excuse mail ballots. Avoid Election Day lines.</li>
+                <li><strong className="text-gray-900 dark:text-white">Understand voter ID laws</strong>: <a href="https://www.ncsl.org/elections-and-campaigns/voter-id" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">36 states</a> require some form of ID at the polls (as of 2026). Know what your state requires.</li>
+                <li><strong className="text-gray-900 dark:text-white">Consider early voting</strong>: <a href="https://www.ncsl.org/elections-and-campaigns/early-voting" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">47 states plus DC</a> offer early voting (as of 2026). Avoid Election Day lines.</li>
               </ul>
             </div>
           </section>

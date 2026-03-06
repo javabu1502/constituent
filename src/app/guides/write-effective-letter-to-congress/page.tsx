@@ -140,7 +140,7 @@ export default function WriteLetterGuidePage() {
                   This bill would cap insulin costs at $35 per month. That&apos;s the difference between my daughter living a normal life and our family facing impossible choices.
                 </p>
                 <p>
-                  Please support S. 1234 and help make insulin affordable for the 7 million Americans who depend on it.
+                  Please support S. 1234 and help make insulin affordable for the <a href="https://www.cdc.gov/diabetes/php/data-research/index.html" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">7 million Americans</a> who depend on it.
                 </p>
                 <p>
                   Thank you for your service and consideration.

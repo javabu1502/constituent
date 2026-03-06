@@ -138,7 +138,7 @@ export default function RepPublicData({
           votesData ? (
             <div className="space-y-4">
               <p className="text-xs text-gray-500 dark:text-gray-400">
-                Roll call votes are how Congress officially records each member&apos;s position on legislation. Yea = voted yes, Nay = voted no. Participation rate shows how often this member voted (Congress average is ~96%).
+                Roll call votes are how Congress officially records each member&apos;s position on legislation. Yea = voted yes, Nay = voted no. Participation rate shows how often this member voted (Congress average is ~95%, per Roll Call).
               </p>
               {/* Summary stats */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
