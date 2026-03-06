@@ -52,11 +52,11 @@ export function AddressStep({ state, dispatch }: AddressStepProps) {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || 'Failed to find representatives');
+        throw new Error(data.error || 'Failed to find your elected officials');
       }
 
       if (!data.officials || data.officials.length === 0) {
-        throw new Error('No representatives found for this address');
+        throw new Error('No elected officials found for this address');
       }
 
       dispatch({ type: 'SET_OFFICIALS', payload: data.officials });
@@ -110,7 +110,7 @@ export function AddressStep({ state, dispatch }: AddressStepProps) {
           Enter Your Home Address
         </h3>
         <p className="text-gray-500 dark:text-gray-400 mt-2 text-sm max-w-sm mx-auto">
-          We&apos;ll use this to find your U.S. Senators and Representative in Congress.
+          We&apos;ll find the people who represent you — from Congress down to your city or county.
         </p>
       </div>
 
@@ -148,12 +148,12 @@ export function AddressStep({ state, dispatch }: AddressStepProps) {
           size="lg"
           isLoading={state.isLoading}
         >
-          {state.isLoading ? 'Finding Representatives...' : 'Find My Representatives'}
+          {state.isLoading ? 'Finding Your Officials...' : 'Find My Elected Officials'}
         </Button>
       </form>
 
       <p className="text-xs text-gray-500 dark:text-gray-400 text-center mt-6">
-        Used only to find your representatives. Never stored or shared.
+        Used only to look up your officials. Never stored or shared.
       </p>
     </div>
   );

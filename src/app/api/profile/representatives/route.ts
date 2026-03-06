@@ -95,7 +95,7 @@ export async function POST() {
     .eq('user_id', user.id);
 
   if (updateError) {
-    return NextResponse.json({ error: 'Failed to save representatives' }, { status: 500 });
+    return NextResponse.json({ error: 'Failed to save elected officials' }, { status: 500 });
   }
 
   return NextResponse.json({ officials, localOfficials });

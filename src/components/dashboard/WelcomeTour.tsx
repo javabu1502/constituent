@@ -18,7 +18,7 @@ const tourSteps = [
   {
     title: 'My Representatives',
     description:
-      'Add your address and we\'ll find every elected official who represents you — federal, state, and local. See their contact info, voting records, and recent activity.',
+      'Add your address and we\'ll show you everyone who represents you — from Congress to your city council. See how they vote, what bills they work on, and how to reach them.',
     icon: (
       <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -28,7 +28,7 @@ const tourSteps = [
   {
     title: 'Your Feed',
     description:
-      'Stay informed with a personalized feed of bills, votes, news, and lobbying activity from your representatives. Filter by topic or official.',
+      'See what your officials are up to — new bills, how they voted, and news coverage. Filter by topic or person.',
     icon: (
       <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
@@ -38,7 +38,7 @@ const tourSteps = [
   {
     title: 'Contact Your Officials',
     description:
-      'Write to your representatives in minutes. Pick an issue, and AI helps draft a personalized message. You review everything before it\'s sent via email or phone script.',
+      'Write to your officials in minutes. Tell us what matters to you, and AI helps draft a message. You review and edit everything before it\'s sent.',
     icon: (
       <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -48,7 +48,7 @@ const tourSteps = [
   {
     title: 'Campaigns & Search',
     description:
-      'Start campaigns to rally others around issues you care about. Use search (Cmd+K) to quickly find representatives, guides, states, and policy topics from anywhere on the site.',
+      'Start campaigns to rally others around issues you care about. Use search to quickly find officials, guides, and topics from anywhere on the site.',
     icon: (
       <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />

@@ -163,19 +163,19 @@ function contactReducer(state: ContactState, action: ContactAction): ContactStat
 const STEPS = ['address', 'representative', 'topic', 'message', 'send'] as const;
 const STEP_LABELS: Record<string, string> = {
   address: 'Address',
-  representative: 'Representatives',
-  topic: 'Your Message',
+  representative: 'Who to Contact',
+  topic: 'Your Issue',
   message: 'Review',
   send: 'Send',
   success: 'Done',
 };
 
 const STEP_DESCRIPTIONS: Record<string, string> = {
-  address: 'We use your address to find your elected officials.',
-  representative: 'Choose who will receive your message.',
-  topic: 'Tell us what you care about. AI writes a personalized message for each official.',
-  message: 'Review and edit the AI-generated messages before sending.',
-  send: 'Deliver your messages to your representatives.',
+  address: 'We use your address to find the people who represent you.',
+  representative: 'Pick who you want to write to.',
+  topic: 'Tell us what matters to you. AI will draft a message for each person you selected.',
+  message: 'Read over the messages and make any changes before sending.',
+  send: 'Send your messages.',
 };
 
 export function ContactFlow() {
@@ -396,13 +396,13 @@ export function ContactFlow() {
             </p>
             <div className="p-4 bg-purple-50 dark:bg-purple-900/30 border border-purple-200 dark:border-purple-700 rounded-xl mb-6">
               <p className="text-sm text-purple-800 dark:text-purple-200">
-                Contacted <strong>{state.selectedReps.length} representative{state.selectedReps.length > 1 ? 's' : ''}</strong> about <strong>{state.issue}</strong>
+                Contacted <strong>{state.selectedReps.length} official{state.selectedReps.length > 1 ? 's' : ''}</strong> about <strong>{state.issue}</strong>
               </p>
             </div>
             {state.shareId && (
               <ShareActions
                 shareId={state.shareId}
-                repName={state.selectedReps.length === 1 ? state.selectedReps[0].name : `${state.selectedReps.length} representatives`}
+                repName={state.selectedReps.length === 1 ? state.selectedReps[0].name : `${state.selectedReps.length} officials`}
                 issue={state.issue}
               />
             )}
@@ -423,7 +423,7 @@ export function ContactFlow() {
             {isAuthenticated === false && (
               <div className="mt-4 p-4 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-xl">
                 <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
-                  Want to track your messages and see your representatives?
+                  Want to track your messages and stay updated on your officials?
                 </p>
                 <Link
                   href="/signup"
@@ -575,7 +575,7 @@ export function ContactFlow() {
           <div>
             <h4 className="text-sm font-medium text-gray-900 dark:text-white">Your Privacy Matters</h4>
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-              Your address is used to find your representatives. Logged-in users can save their
+              Your address is used to find your elected officials. Logged-in users can save their
               address for faster access. Messages are sent directly from your device.
             </p>
           </div>

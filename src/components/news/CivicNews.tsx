@@ -302,7 +302,7 @@ export function CivicNews({ limit, compact = false, showLegend = false, showFilt
             href={`/contact?issue=${encodeURIComponent(articles.find(a => a.topic?.issueCategory === selectedTopic)?.topic?.issue ?? selectedTopic)}&issueCategory=${encodeURIComponent(selectedTopic)}`}
             className="inline-flex items-center gap-1.5 text-sm font-medium text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300"
           >
-            Contact your reps about {CATEGORY_SHORT[selectedTopic] || selectedTopic}
+            Write to your officials about {CATEGORY_SHORT[selectedTopic] || selectedTopic}
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
             </svg>

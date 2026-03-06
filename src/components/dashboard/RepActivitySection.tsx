@@ -69,7 +69,7 @@ function BillCard({ bill, showWriteAbout = true, userIssues }: { bill: FeedBill;
         </span>
         {bill.sponsorship_type && (
           <span
-            title={bill.sponsorship_type === 'sponsored' ? 'This rep introduced this bill' : 'This rep added their support to a bill written by another member'}
+            title={bill.sponsorship_type === 'sponsored' ? 'This official introduced this bill' : 'This official added their support to a bill written by another member'}
             className={`px-2 py-0.5 text-xs font-medium rounded-full cursor-help ${
               bill.sponsorship_type === 'sponsored'
                 ? 'bg-indigo-100 text-indigo-800 dark:bg-indigo-900 dark:text-indigo-300'

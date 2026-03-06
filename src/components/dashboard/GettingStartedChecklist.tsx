@@ -12,21 +12,21 @@ const steps = [
   {
     key: 'address',
     title: 'Add your address',
-    description: 'We use it to find your elected officials at every level of government.',
+    description: 'We use it to find the people who represent you — from Congress to your city council.',
     doneText: 'Address saved',
     href: '/contact',
   },
   {
     key: 'reps',
     title: 'See your representatives',
-    description: 'View who represents you in Congress and your state legislature.',
+    description: 'See everyone who represents you, from Washington D.C. to your state capital.',
     doneText: 'Representatives found',
     href: null, // auto-done when address is added
   },
   {
     key: 'message',
     title: 'Send your first message',
-    description: 'Pick a topic, and AI writes a personalized letter to your officials. You review before sending.',
+    description: 'Pick what matters to you, and AI drafts a message. You review and edit before anything is sent.',
     doneText: 'First message sent',
     href: '/contact',
   },

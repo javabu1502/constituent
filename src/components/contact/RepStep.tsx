@@ -147,7 +147,7 @@ export function RepStep({ state, dispatch, onBack }: RepStepProps) {
 
   const handleContinue = () => {
     if (selectedReps.length === 0) {
-      dispatch({ type: 'SET_ERROR', payload: 'Please select at least one representative' });
+      dispatch({ type: 'SET_ERROR', payload: 'Please select at least one official' });
       return;
     }
     dispatch({ type: 'GO_TO_STEP', payload: 'topic' });
@@ -160,14 +160,14 @@ export function RepStep({ state, dispatch, onBack }: RepStepProps) {
           Who should hear from you?
         </h3>
         <p className="text-gray-500 dark:text-gray-400 mt-2 text-sm">
-          Select the officials you want to contact. Each one will get a personalized message tailored to their party and positions.
+          Select the people you want to write to. Each will get their own message.
         </p>
       </div>
 
       {/* Not sure hint + Select All */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
         <p className="text-xs text-gray-500 dark:text-gray-400">
-          Not sure who to pick? Select all and each will get a personalized message.
+          Not sure? Select all — each person gets their own message.
         </p>
         <button
           onClick={handleSelectAll}
@@ -188,11 +188,11 @@ export function RepStep({ state, dispatch, onBack }: RepStepProps) {
                 </svg>
               </div>
               <h4 className="text-base font-semibold text-gray-900 dark:text-white">
-                Federal Representatives ({federalOfficials.length})
+                U.S. Congress ({federalOfficials.length})
               </h4>
             </div>
             <p className="text-xs text-gray-500 dark:text-gray-400 ml-10 mb-3">
-              Your members of Congress. They vote on federal laws, the national budget, foreign policy, and Supreme Court nominees.
+              These are your members of Congress. They make decisions on national issues like healthcare, immigration, taxes, and the federal budget.
             </p>
 
             <div className="space-y-4 pl-2 border-l-2 border-blue-200 dark:border-blue-700">
@@ -247,11 +247,11 @@ export function RepStep({ state, dispatch, onBack }: RepStepProps) {
                 </svg>
               </div>
               <h4 className="text-base font-semibold text-gray-900 dark:text-white">
-                State Legislators ({stateOfficials.length})
+                State Legislature ({stateOfficials.length})
               </h4>
             </div>
             <p className="text-xs text-gray-500 dark:text-gray-400 ml-10 mb-3">
-              Your state-level lawmakers. They handle education funding, roads, policing, state taxes, and local regulations.
+              Your state-level lawmakers. They handle things like school funding, roads, state taxes, and policing.
             </p>
 
             <div className="space-y-4 pl-2 border-l-2 border-purple-200 dark:border-purple-700">
@@ -311,7 +311,7 @@ export function RepStep({ state, dispatch, onBack }: RepStepProps) {
               </h4>
             </div>
             <p className="text-xs text-gray-500 dark:text-gray-400 ml-10 mb-3">
-              Your city and county leaders. They manage zoning, utilities, public safety, schools, and day-to-day community issues.
+              Your city and county leaders. They handle local issues like parks, trash pickup, zoning, public safety, and community services.
             </p>
 
             <div className="space-y-2 pl-2 border-l-2 border-green-200 dark:border-green-700">
@@ -348,8 +348,8 @@ export function RepStep({ state, dispatch, onBack }: RepStepProps) {
           className="flex-1"
         >
           {selectedReps.length === 0
-            ? 'Select Representatives'
-            : `Continue with ${selectedReps.length} representative${selectedReps.length > 1 ? 's' : ''}`}
+            ? 'Select Officials'
+            : `Continue with ${selectedReps.length} official${selectedReps.length > 1 ? 's' : ''}`}
         </Button>
       </div>
     </div>

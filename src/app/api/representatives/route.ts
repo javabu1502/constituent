@@ -163,7 +163,7 @@ export async function POST(request: NextRequest): Promise<NextResponse<LookupRes
   } catch (error) {
     console.error('Error looking up representatives:', error);
     return NextResponse.json(
-      { error: 'Failed to look up representatives', code: 'INTERNAL_ERROR' },
+      { error: 'Failed to look up elected officials', code: 'INTERNAL_ERROR' },
       { status: 500 }
     );
   }

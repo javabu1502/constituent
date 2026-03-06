@@ -179,7 +179,7 @@ export function SearchDialog({ onClose }: SearchDialogProps) {
     guide: 'Guide',
     state: 'State',
     issue: 'Issue',
-    legislator: 'Representative',
+    legislator: 'Official',
     campaign: 'Campaign',
     link: 'Page',
   };
@@ -216,8 +216,8 @@ export function SearchDialog({ onClose }: SearchDialogProps) {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Search guides, states, representatives, issues..."
-            aria-label="Search guides, states, representatives, issues"
+            placeholder="Search guides, states, officials, issues..."
+            aria-label="Search guides, states, officials, issues"
             className="flex-1 bg-transparent text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 text-sm outline-none"
           />
           <kbd className="hidden sm:inline-flex items-center px-1.5 py-0.5 text-[10px] font-medium text-gray-400 dark:text-gray-500 bg-gray-100 dark:bg-gray-700 rounded">

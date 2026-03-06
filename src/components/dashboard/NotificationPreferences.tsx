@@ -75,7 +75,7 @@ export function NotificationPreferences({ userEmail }: { userEmail: string }) {
             Weekly Digest
           </h4>
           <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
-            Get a weekly email summary of your reps&apos; activity
+            Get a weekly email with what your officials have been up to
           </p>
         </div>
         <button

@@ -21,7 +21,7 @@ export default function NotFound() {
           href="/contact"
           className="px-5 py-2.5 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 text-sm font-medium rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
         >
-          Contact your reps
+          Write to your officials
         </Link>
       </div>
     </div>
