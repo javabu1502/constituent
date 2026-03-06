@@ -131,6 +131,8 @@ export interface Official {
   contactForm?: string;
   photoUrl?: string;
   office?: string;
+  senateClass?: number;
+  termEnd?: string;
   socialMedia?: {
     twitter?: string;
     facebook?: string;
@@ -462,6 +464,8 @@ function federalToOfficial(
     contactForm: term.contact_form,
     photoUrl: `https://raw.githubusercontent.com/unitedstates/images/gh-pages/congress/225x275/${legislator.id.bioguide}.jpg`,
     office: term.address,
+    senateClass: term.type === 'sen' ? term.class : undefined,
+    termEnd: term.end,
     socialMedia: socialMedia?.social ? {
       twitter: socialMedia.social.twitter,
       facebook: socialMedia.social.facebook,

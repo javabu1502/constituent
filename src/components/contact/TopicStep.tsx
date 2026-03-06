@@ -293,6 +293,7 @@ const SUBTOPIC_CONTEXT: Record<string, TopicInfo> = {
       { label: 'Lower drug costs', ask: 'Expand Medicare\'s ability to negotiate prescription drug prices' },
       { label: 'Shore up funding', ask: 'Ensure the Medicare trust fund remains solvent for future generations' },
       { label: 'Expand coverage', ask: 'Expand Medicare to cover dental, vision, and hearing' },
+      { label: 'Medicare buy-in at 60', ask: 'Allow Americans aged 60-64 to buy into Medicare early' },
     ],
     perspectives: [
       { label: 'Expand coverage', points: ['Seniors earned their benefits through a lifetime of payroll taxes', 'Expanding benefits improves quality of life', 'Medicare is more efficient than private insurance'] },
@@ -311,6 +312,7 @@ const SUBTOPIC_CONTEXT: Record<string, TopicInfo> = {
       { label: 'Protect funding', ask: 'Oppose block grants or per-capita caps that would cut Medicaid funding' },
       { label: 'Add work requirements', ask: 'Support work requirements for able-bodied Medicaid recipients' },
       { label: 'Simplify enrollment', ask: 'Streamline Medicaid enrollment to prevent eligible people from losing coverage' },
+      { label: 'Continuous eligibility for kids', ask: 'Guarantee continuous Medicaid eligibility for children so they don\'t lose coverage during renewals' },
     ],
     perspectives: [
       { label: 'Expand access', points: ['Expansion states see better health outcomes', 'The coverage gap leaves working people uninsured', 'Rural hospitals depend on Medicaid'] },
@@ -329,6 +331,8 @@ const SUBTOPIC_CONTEXT: Record<string, TopicInfo> = {
       { label: 'Cap out-of-pocket costs', ask: 'Cap out-of-pocket prescription drug costs for all Americans, not just Medicare' },
       { label: 'Allow importation', ask: 'Allow safe importation of cheaper drugs from Canada and other countries' },
       { label: 'Protect innovation', ask: 'Ensure drug pricing reforms don\'t stifle pharmaceutical research and development' },
+      { label: 'Extend $35 insulin cap', ask: 'Extend the $35/month insulin price cap to all Americans, not just Medicare patients' },
+      { label: 'Ban pay-for-delay', ask: 'Ban pay-for-delay deals where brand-name drug companies pay to keep generics off the market' },
     ],
     perspectives: [
       { label: 'Lower prices', points: ['Americans shouldn\'t pay 2-3x what other countries pay', 'Drug companies have record profits', 'High prices force people to ration medications'] },
@@ -347,6 +351,8 @@ const SUBTOPIC_CONTEXT: Record<string, TopicInfo> = {
       { label: 'Enforce parity', ask: 'Enforce mental health parity laws so insurance covers mental health equally to physical health' },
       { label: 'School counselors', ask: 'Fund school-based mental health counselors to support youth mental health' },
       { label: 'Crisis services', ask: 'Expand crisis intervention services including mobile crisis teams' },
+      { label: 'Fund 988 Lifeline', ask: 'Fully fund the 988 Suicide & Crisis Lifeline to ensure it can meet demand' },
+      { label: 'Expand telehealth', ask: 'Make permanent the expanded telehealth access for mental health services' },
     ],
     perspectives: [
       { label: 'Invest in care', points: ['1 in 5 Americans has a mental health condition', 'Treatment saves money by reducing ER visits and incarceration', 'Provider shortages leave people waiting months'] },
@@ -365,6 +371,7 @@ const SUBTOPIC_CONTEXT: Record<string, TopicInfo> = {
       { label: 'Protect life', ask: 'Support protections for unborn life and oppose taxpayer funding of abortion' },
       { label: 'Protect contraception', ask: 'Pass the Right to Contraception Act to guarantee access to birth control' },
       { label: 'Maternal health', ask: 'Invest in maternal health to reduce the U.S. maternal mortality rate' },
+      { label: 'Extend postpartum Medicaid', ask: 'Extend postpartum Medicaid coverage to 12 months in all states' },
     ],
     perspectives: [
       { label: 'Pro-choice', points: ['Reproductive decisions belong to individuals, not government', 'Bans don\'t stop abortions, they make them unsafe', 'Access to contraception prevents abortions'] },
@@ -383,6 +390,7 @@ const SUBTOPIC_CONTEXT: Record<string, TopicInfo> = {
       { label: 'Protect pre-existing', ask: 'Protect the pre-existing condition coverage guarantee under the ACA' },
       { label: 'Replace with better', ask: 'Replace the ACA with a system that lowers costs and increases choice' },
       { label: 'Fix the gaps', ask: 'Close the Medicaid coverage gap in states that haven\'t expanded' },
+      { label: 'Add a public option', ask: 'Create a public health insurance option to compete with private plans and lower costs' },
     ],
     perspectives: [
       { label: 'Keep and strengthen', points: ['Millions rely on marketplace coverage', 'Pre-existing condition protections are widely popular', 'Subsidies keep coverage affordable for many'] },
@@ -402,6 +410,8 @@ const SUBTOPIC_CONTEXT: Record<string, TopicInfo> = {
       { label: 'Assault weapons ban', ask: 'Reinstate the federal assault weapons ban' },
       { label: 'Red flag laws', ask: 'Support federal incentives for state red flag laws that temporarily remove guns from people in crisis' },
       { label: 'Protect 2nd Amendment', ask: 'Oppose new gun restrictions that infringe on law-abiding citizens\' Second Amendment rights' },
+      { label: 'Fund violence intervention', ask: 'Fund community violence intervention programs that reduce gun violence in the most affected neighborhoods' },
+      { label: 'Raise purchase age to 21', ask: 'Raise the minimum age to purchase semi-automatic rifles to 21' },
     ],
     perspectives: [
       { label: 'More regulation', points: ['Background checks are supported by a large majority of Americans', 'Other democracies have far fewer gun deaths', 'Red flag laws have helped prevent some mass shootings'] },
@@ -420,6 +430,7 @@ const SUBTOPIC_CONTEXT: Record<string, TopicInfo> = {
       { label: 'Fund training', ask: 'Increase funding for de-escalation training and mental health crisis response' },
       { label: 'Support officers', ask: 'Increase police funding and support to help officers do their jobs safely' },
       { label: 'Community policing', ask: 'Invest in community policing programs that build trust between officers and neighborhoods' },
+      { label: 'Pass the George Floyd Act', ask: 'Pass the George Floyd Justice in Policing Act to set national standards for use of force and accountability' },
     ],
     perspectives: [
       { label: 'Accountability focus', points: ['Accountability builds public trust', 'De-escalation training saves lives on both sides', 'Mental health calls may need different responders'] },
@@ -438,6 +449,7 @@ const SUBTOPIC_CONTEXT: Record<string, TopicInfo> = {
       { label: 'Fund re-entry', ask: 'Invest in re-entry programs (housing, jobs, treatment) to reduce recidivism' },
       { label: 'End private prisons', ask: 'Phase out federal contracts with private prisons' },
       { label: 'Tough on crime', ask: 'Oppose early release programs and maintain strong sentencing to keep communities safe' },
+      { label: 'Expand record expungement', ask: 'Expand federal record expungement and sealing for non-violent offenses to help people find jobs' },
     ],
     perspectives: [
       { label: 'Reform system', points: ['The U.S. incarcerates more people than any country', 'Rehabilitation reduces reoffending', 'Racial disparities in sentencing need addressing'] },
@@ -456,6 +468,7 @@ const SUBTOPIC_CONTEXT: Record<string, TopicInfo> = {
       { label: 'Fight opioid crisis', ask: 'Increase funding for opioid treatment, naloxone distribution, and fentanyl interdiction' },
       { label: 'Treatment over jail', ask: 'Redirect drug enforcement funding toward treatment and harm reduction programs' },
       { label: 'Keep enforcement', ask: 'Maintain strong drug enforcement to keep dangerous substances off the streets' },
+      { label: 'SAFE Banking for cannabis', ask: 'Pass the SAFE Banking Act so legal cannabis businesses can access banking services' },
     ],
     perspectives: [
       { label: 'Treatment approach', points: ['Addiction is a health issue, not a criminal one', 'Treatment is cheaper and more effective than incarceration', 'Harm reduction saves lives without enabling use'] },
@@ -475,6 +488,7 @@ const SUBTOPIC_CONTEXT: Record<string, TopicInfo> = {
       { label: 'Fix income-driven repayment', ask: 'Protect and expand income-driven repayment plans so payments are affordable' },
       { label: 'No forgiveness', ask: 'Oppose blanket student loan forgiveness that\'s unfair to those who already paid' },
       { label: 'Lower college costs', ask: 'Address the root cause by making college more affordable in the first place' },
+      { label: 'Protect PSLF', ask: 'Protect and strengthen Public Service Loan Forgiveness for teachers, nurses, and public servants' },
     ],
     perspectives: [
       { label: 'Forgive debt', points: ['Debt blocks homebuying, starting families, and economic growth', 'Many were misled about the value of their degrees', 'The government profited billions from student loans'] },
@@ -493,6 +507,8 @@ const SUBTOPIC_CONTEXT: Record<string, TopicInfo> = {
       { label: 'Raise teacher pay', ask: 'Support federal incentives to raise teacher salaries and reduce shortages' },
       { label: 'School choice', ask: 'Support school choice options including charter schools and vouchers for parents' },
       { label: 'School safety', ask: 'Invest in school safety measures including counselors, not just hardening' },
+      { label: 'Universal free school meals', ask: 'Make free school breakfast and lunch universal for all students regardless of income' },
+      { label: 'Support teachers', ask: 'Fund classroom supply stipends and loan forgiveness to recruit and retain teachers' },
     ],
     perspectives: [
       { label: 'Invest in public ed', points: ['Funding gaps create inequality of opportunity', 'Teachers are the #1 factor in student success', 'Public schools serve every child'] },
@@ -530,6 +546,8 @@ const SUBTOPIC_CONTEXT: Record<string, TopicInfo> = {
       { label: 'Protect energy jobs', ask: 'Ensure the clean energy transition doesn\'t leave fossil fuel workers behind' },
       { label: 'Carbon pricing', ask: 'Support a carbon tax or cap-and-trade system to make polluters pay' },
       { label: 'No new regulations', ask: 'Oppose costly climate regulations that hurt the economy and raise energy prices' },
+      { label: 'Environmental justice', ask: 'Prioritize climate investments in communities disproportionately affected by pollution' },
+      { label: 'Climate corps', ask: 'Fund a Civilian Climate Corps to create jobs in conservation and clean energy' },
     ],
     perspectives: [
       { label: 'Aggressive action', points: ['The science is clear and the window is closing', 'Clean energy is now cheaper than fossil fuels', 'Climate disasters already cost billions annually'] },
@@ -548,6 +566,8 @@ const SUBTOPIC_CONTEXT: Record<string, TopicInfo> = {
       { label: 'Modernize the grid', ask: 'Invest in grid modernization and transmission to handle more renewable energy' },
       { label: 'All-of-the-above energy', ask: 'Support all energy sources including fossil fuels to ensure affordable, reliable power' },
       { label: 'Energy independence', ask: 'Invest in domestic clean energy manufacturing to reduce dependence on foreign supply chains' },
+      { label: 'Community solar', ask: 'Expand community solar programs so renters and low-income families can access clean energy savings' },
+      { label: 'EV charging infrastructure', ask: 'Accelerate deployment of EV charging stations especially in rural and underserved areas' },
     ],
     perspectives: [
       { label: 'Go renewable', points: ['Renewables create more jobs per dollar than fossil fuels', 'Energy independence through domestic solar and wind', 'Clean air and lower electricity costs'] },
@@ -567,6 +587,8 @@ const SUBTOPIC_CONTEXT: Record<string, TopicInfo> = {
       { label: 'Expand vouchers', ask: 'Expand Section 8 housing vouchers so everyone eligible can receive one (75% are turned away)' },
       { label: 'Rent control', ask: 'Support federal rent stabilization measures to prevent extreme rent increases' },
       { label: 'Market approach', ask: 'Remove regulations that increase building costs and let the market increase supply' },
+      { label: 'Down payment assistance', ask: 'Fund first-time homebuyer down payment assistance programs to help families build wealth' },
+      { label: 'Expand LIHTC', ask: 'Expand the Low-Income Housing Tax Credit to build more affordable housing units' },
     ],
     perspectives: [
       { label: 'Public investment', points: ['The market alone won\'t solve the affordability crisis', 'Vouchers and subsidies prevent homelessness', 'Zoning reform is needed at every level'] },
@@ -585,6 +607,8 @@ const SUBTOPIC_CONTEXT: Record<string, TopicInfo> = {
       { label: 'Mental health services', ask: 'Expand mental health and addiction treatment services for homeless individuals' },
       { label: 'Clear encampments', ask: 'Support clearing homeless encampments and directing people to shelter and services' },
       { label: 'Prevention', ask: 'Invest in homelessness prevention — eviction diversion and emergency rental assistance' },
+      { label: 'Rapid rehousing', ask: 'Fund rapid rehousing programs that quickly move people from shelters into permanent housing' },
+      { label: 'End veteran homelessness', ask: 'Fully fund HUD-VASH vouchers and supportive services to end veteran homelessness' },
     ],
     perspectives: [
       { label: 'Housing First', points: ['You can\'t treat mental illness or addiction without stable housing', 'Housing First research shows it can reduce chronic homelessness and cost less than long-term shelter use', 'Criminalizing homelessness doesn\'t solve it'] },
@@ -604,6 +628,7 @@ const SUBTOPIC_CONTEXT: Record<string, TopicInfo> = {
       { label: 'Only extend for middle class', ask: 'Extend tax cuts only for those making under $400,000 and let top rates rise' },
       { label: 'Simplify the code', ask: 'Simplify the tax code to reduce complexity and close loopholes' },
       { label: 'Billionaire minimum tax', ask: 'Enact a minimum tax on billionaires\' unrealized gains' },
+      { label: 'Expand EITC', ask: 'Expand the Earned Income Tax Credit to put more money in working families\' pockets' },
     ],
     perspectives: [
       { label: 'Lower taxes', points: ['Tax cuts boost the economy and job creation', 'People should keep more of their earnings', 'High taxes drive investment offshore'] },
@@ -622,6 +647,7 @@ const SUBTOPIC_CONTEXT: Record<string, TopicInfo> = {
       { label: 'Close loopholes', ask: 'Close corporate tax loopholes that allow profitable companies to pay nothing' },
       { label: 'Keep rate competitive', ask: 'Maintain the current corporate tax rate to keep American businesses competitive globally' },
       { label: 'Minimum book tax', ask: 'Enforce the corporate minimum tax so no billion-dollar company pays zero' },
+      { label: 'Tax stock buybacks', ask: 'Increase the tax on corporate stock buybacks to encourage reinvestment in workers and R&D' },
     ],
     perspectives: [
       { label: 'Raise & close loopholes', points: ['Corporations should pay their fair share', 'Revenue can fund infrastructure and education', 'The 2017 cut primarily benefited shareholders'] },
@@ -641,6 +667,8 @@ const SUBTOPIC_CONTEXT: Record<string, TopicInfo> = {
       { label: 'Cut spending', ask: 'Reduce federal spending to stop fueling inflation' },
       { label: 'Anti-price-gouging', ask: 'Pass anti-price-gouging legislation to prevent corporations from exploiting consumers' },
       { label: 'Energy costs', ask: 'Increase domestic energy production to bring down gas and heating costs' },
+      { label: 'Strengthen antitrust', ask: 'Strengthen antitrust enforcement to increase competition and bring down prices' },
+      { label: 'Cap credit card rates', ask: 'Cap credit card interest rates so families aren\'t crushed by high-interest debt on essentials' },
     ],
     perspectives: [
       { label: 'Structural issues', points: ['Corporate profit margins are at record highs', 'Supply chain investments prevent future spikes', 'Workers need wages that keep up with prices'] },
@@ -660,6 +688,8 @@ const SUBTOPIC_CONTEXT: Record<string, TopicInfo> = {
       { label: 'Raise the cap', ask: 'Lift the payroll tax cap so high earners pay Social Security tax on all their income' },
       { label: 'Reform to sustain', ask: 'Support bipartisan reforms to keep Social Security solvent for future generations' },
       { label: 'Increase COLA', ask: 'Use a more accurate cost-of-living formula that reflects seniors\' actual expenses' },
+      { label: 'Repeal WEP/GPO', ask: 'Repeal the Windfall Elimination Provision and Government Pension Offset that cut benefits for public employees' },
+      { label: 'Expand benefits', ask: 'Increase the minimum Social Security benefit so no retiree lives in poverty' },
     ],
     perspectives: [
       { label: 'Protect benefits', points: ['Workers paid into the system their whole lives', 'Lifting the cap solves most of the shortfall', 'Social Security keeps 22 million out of poverty'] },
@@ -679,6 +709,7 @@ const SUBTOPIC_CONTEXT: Record<string, TopicInfo> = {
       { label: 'Eliminate tipped minimum', ask: 'Eliminate the subminimum tipped wage — everyone deserves a base wage' },
       { label: 'Keep it local', ask: 'Let states and cities set their own minimum wage based on local cost of living' },
       { label: 'Protect small business', ask: 'If raising the minimum wage, phase it in gradually for small businesses' },
+      { label: 'Index to inflation', ask: 'Index the minimum wage to inflation so it automatically keeps up with the cost of living' },
     ],
     perspectives: [
       { label: 'Raise the wage', points: ['$7.25/hour hasn\'t changed since 2009', 'Higher wages can reduce turnover and increase productivity', 'Many states that raised their minimum saw continued job growth'] },
@@ -698,6 +729,7 @@ const SUBTOPIC_CONTEXT: Record<string, TopicInfo> = {
       { label: 'Voter ID', ask: 'Support voter ID requirements to ensure election integrity' },
       { label: 'Expand mail-in voting', ask: 'Expand access to mail-in and early voting in all states' },
       { label: 'End gerrymandering', ask: 'Support independent redistricting commissions to end partisan gerrymandering' },
+      { label: 'Automatic voter registration', ask: 'Implement automatic voter registration at DMVs and government agencies nationwide' },
     ],
     perspectives: [
       { label: 'Expand access', points: ['Voting should be easy for every eligible citizen', 'Restrictions disproportionately affect minority and low-income voters', 'Higher turnout strengthens democracy'] },
@@ -716,6 +748,7 @@ const SUBTOPIC_CONTEXT: Record<string, TopicInfo> = {
       { label: 'Protect trans youth', ask: 'Oppose legislation that restricts healthcare and participation for transgender youth' },
       { label: 'Parental rights', ask: 'Support parents\' rights to make decisions about their children without government interference' },
       { label: 'Religious liberty', ask: 'Protect religious organizations\' right to operate according to their beliefs' },
+      { label: 'Ban conversion therapy', ask: 'Ban the harmful practice of conversion therapy for minors nationwide' },
     ],
     perspectives: [
       { label: 'Equal protection', points: ['LGBTQ+ people face discrimination in housing, employment, and healthcare', 'Trans youth have alarming rates of depression and suicide', 'Federal protections ensure equal treatment nationwide'] },
@@ -735,6 +768,8 @@ const SUBTOPIC_CONTEXT: Record<string, TopicInfo> = {
       { label: 'Ban deepfakes', ask: 'Ban AI-generated deepfakes in elections and non-consensual intimate images' },
       { label: 'Protect innovation', ask: 'Avoid over-regulating AI to keep the U.S. competitive with China' },
       { label: 'Worker protections', ask: 'Require companies to provide retraining when AI displaces workers' },
+      { label: 'Require watermarks', ask: 'Require AI-generated content to include watermarks or disclosures so people know what\'s real' },
+      { label: 'Algorithmic bias audits', ask: 'Require audits of AI systems used in hiring, lending, and criminal justice to prevent discrimination' },
     ],
     perspectives: [
       { label: 'Regulate proactively', points: ['AI is moving faster than laws can keep up', 'Bias in AI systems can perpetuate discrimination', 'Deepfakes pose risks to elections and individuals'] },
@@ -771,6 +806,7 @@ const SUBTOPIC_CONTEXT: Record<string, TopicInfo> = {
       { label: 'Reform Section 230', ask: 'Reform Section 230 to hold platforms accountable for harmful content they amplify' },
       { label: 'Protect free speech', ask: 'Oppose social media regulations that could lead to government censorship' },
       { label: 'Algorithm transparency', ask: 'Require social media companies to be transparent about how their algorithms promote content' },
+      { label: 'Age verification', ask: 'Require age verification for social media accounts to protect children under 13' },
     ],
     perspectives: [
       { label: 'Regulate platforms', points: ['Algorithms designed to addict are harming youth', 'Platforms profit from outrage and misinformation', 'Transparency is the bare minimum'] },
@@ -790,6 +826,7 @@ const SUBTOPIC_CONTEXT: Record<string, TopicInfo> = {
       { label: 'Expand drilling', ask: 'Expand domestic oil and gas production to lower energy costs and ensure energy independence' },
       { label: 'No new leases', ask: 'Stop approving new fossil fuel leases on federal lands to meet climate goals' },
       { label: 'Transition support', ask: 'Support fossil fuel workers with job training and economic development during the energy transition' },
+      { label: 'Clean up orphaned wells', ask: 'Fund cleanup of orphaned oil and gas wells that leak methane and contaminate groundwater' },
     ],
     perspectives: [
       { label: 'Transition away', points: ['Fossil fuels are the primary driver of climate change', 'Subsidies go to highly profitable companies', 'Clean energy is already cheaper in many areas'] },
@@ -809,6 +846,7 @@ const SUBTOPIC_CONTEXT: Record<string, TopicInfo> = {
       { label: 'Reduce tariffs', ask: 'Reduce tariffs that are raising prices for American consumers and businesses' },
       { label: 'Targeted tariffs', ask: 'Use targeted tariffs on strategic industries (chips, clean energy) not broad ones that raise costs' },
       { label: 'Negotiate trade deals', ask: 'Negotiate fair trade agreements rather than relying on unilateral tariffs' },
+      { label: 'Trade Adjustment Assistance', ask: 'Fund Trade Adjustment Assistance to help workers and communities displaced by trade policy changes' },
     ],
     perspectives: [
       { label: 'Protect industry', points: ['Tariffs bring manufacturing jobs back', 'China doesn\'t play by fair trade rules', 'National security requires domestic production'] },
@@ -846,6 +884,7 @@ const SUBTOPIC_CONTEXT: Record<string, TopicInfo> = {
       { label: 'Cut foreign aid', ask: 'Reduce foreign aid spending and redirect it to domestic programs' },
       { label: 'Reform aid', ask: 'Reform foreign aid to ensure it\'s effective, accountable, and aligned with U.S. interests' },
       { label: 'Humanitarian focus', ask: 'Prioritize humanitarian aid for the most vulnerable populations worldwide' },
+      { label: 'Protect PEPFAR', ask: 'Maintain funding for PEPFAR, the HIV/AIDS program that has saved 25+ million lives' },
     ],
     perspectives: [
       { label: 'Invest abroad', points: ['Foreign aid prevents conflicts that cost far more', 'Global health programs prevent pandemics from reaching the U.S.', 'Aid builds goodwill and counters Chinese influence'] },
@@ -865,6 +904,8 @@ const SUBTOPIC_CONTEXT: Record<string, TopicInfo> = {
       { label: 'Fund universal pre-K', ask: 'Fund universal pre-kindergarten so every child has access to early education' },
       { label: 'Support providers', ask: 'Increase pay and funding for child care workers to reduce provider shortages' },
       { label: 'Tax incentives for employers', ask: 'Create tax incentives for employers who offer child care benefits to workers' },
+      { label: 'Expand child care subsidies', ask: 'Expand the Child Care and Development Block Grant (CCDBG) so more families qualify for child care subsidies' },
+      { label: 'Cap costs at 7% of income', ask: 'Cap child care costs at no more than 7% of family income so parents can afford to work' },
     ],
     perspectives: [
       { label: 'Public investment', points: ['Affordable child care lets parents work and strengthens the economy', 'Early childhood education improves long-term outcomes', 'Provider pay is too low to attract enough workers'] },
@@ -883,6 +924,7 @@ const SUBTOPIC_CONTEXT: Record<string, TopicInfo> = {
       { label: 'Tax credits approach', ask: 'Offer tax credits to employers who voluntarily provide paid leave' },
       { label: 'Expand FMLA', ask: 'Expand FMLA to cover more workers and smaller employers' },
       { label: 'State-level solutions', ask: 'Let states design their own paid leave programs with federal support' },
+      { label: 'Pass the FAMILY Act', ask: 'Pass the FAMILY Act to create a national paid family and medical leave insurance program' },
     ],
     perspectives: [
       { label: 'Worker support', points: ['No one should have to choose between a paycheck and caring for family', 'Paid leave improves worker retention and productivity', 'Most industrialized nations already guarantee paid leave'] },
@@ -902,6 +944,7 @@ const SUBTOPIC_CONTEXT: Record<string, TopicInfo> = {
       { label: 'Raise wages', ask: 'Support policies that help wages keep up with the rising cost of living' },
       { label: 'Cut regulations', ask: 'Reduce regulations that drive up costs for consumers and businesses' },
       { label: 'Targeted relief', ask: 'Provide targeted tax credits or subsidies for families struggling with rising costs' },
+      { label: 'Cap insulin & drug costs', ask: 'Cap out-of-pocket costs for insulin and essential medications for all Americans' },
     ],
     perspectives: [
       { label: 'Structural solutions', points: ['Wages haven\'t kept up with costs for decades', 'Housing supply and healthcare reform address root causes', 'Working families need direct relief now'] },
@@ -957,6 +1000,8 @@ const SUBTOPIC_CONTEXT: Record<string, TopicInfo> = {
       { label: 'Expand Pell Grants', ask: 'Increase Pell Grant funding so low-income students can afford college' },
       { label: 'Fund vocational training', ask: 'Invest in vocational and trade school programs as alternatives to four-year degrees' },
       { label: 'Reduce costs', ask: 'Hold colleges accountable for rising costs and administrative bloat' },
+      { label: 'Double the Pell Grant', ask: 'Double the maximum Pell Grant to restore its purchasing power for low-income students' },
+      { label: 'Expand apprenticeships', ask: 'Expand registered apprenticeship programs as earn-while-you-learn alternatives to college' },
     ],
     perspectives: [
       { label: 'Expand access', points: ['Education is the best path to upward mobility', 'Cost shouldn\'t determine who gets a degree', 'Public investment in education pays for itself'] },
@@ -994,6 +1039,7 @@ const SUBTOPIC_CONTEXT: Record<string, TopicInfo> = {
       { label: 'Regulate PFAS', ask: 'Set enforceable limits on PFAS contamination in drinking water' },
       { label: 'Fund infrastructure', ask: 'Increase funding for water infrastructure upgrades in aging systems' },
       { label: 'Polluter accountability', ask: 'Hold polluters financially responsible for cleaning up water contamination' },
+      { label: 'Protect wetlands', ask: 'Restore Clean Water Act protections for wetlands and streams that filter drinking water' },
     ],
     perspectives: [
       { label: 'Federal standards', points: ['Safe water is a basic right that requires strong standards', 'Local systems need federal help to replace aging infrastructure', 'PFAS contamination is a nationwide problem requiring a national response'] },
@@ -1013,6 +1059,8 @@ const SUBTOPIC_CONTEXT: Record<string, TopicInfo> = {
       { label: 'Tenant protections', ask: 'Strengthen tenant protections against unfair evictions and fee gouging' },
       { label: 'Build more housing', ask: 'Focus on increasing housing supply rather than price controls' },
       { label: 'Landlord fairness', ask: 'Balance tenant protections with the ability of landlords to maintain and invest in properties' },
+      { label: 'Rental assistance', ask: 'Expand emergency rental assistance programs to prevent evictions before they happen' },
+      { label: 'Ban junk fees', ask: 'Ban hidden junk fees in rental applications and leases that surprise tenants' },
     ],
     perspectives: [
       { label: 'Protect renters', points: ['Housing instability harms families, health, and children\'s education', 'Renters need protections against sudden, extreme increases', 'Eviction prevention saves money compared to homelessness services'] },
@@ -1069,6 +1117,8 @@ const SUBTOPIC_CONTEXT: Record<string, TopicInfo> = {
       { label: 'Increase benefits', ask: 'Raise SSI benefit levels above the poverty line' },
       { label: 'Work incentives', ask: 'Improve work incentive programs so people can work without losing benefits abruptly' },
       { label: 'Prevent fraud', ask: 'Strengthen oversight to prevent disability fraud while protecting legitimate claimants' },
+      { label: 'Expand ABLE accounts', ask: 'Expand ABLE savings accounts so people with disabilities can save without losing benefits' },
+      { label: 'Eliminate marriage penalty', ask: 'Eliminate the SSI marriage penalty that cuts benefits when disabled individuals marry' },
     ],
     perspectives: [
       { label: 'Strengthen the safety net', points: ['People with disabilities deserve adequate support', 'The application process is inhumane — people die waiting', 'Benefits haven\'t kept up with the cost of living'] },
@@ -1087,6 +1137,7 @@ const SUBTOPIC_CONTEXT: Record<string, TopicInfo> = {
       { label: 'Add work requirements', ask: 'Add or strengthen work requirements for able-bodied adults receiving benefits' },
       { label: 'Expand eligibility', ask: 'Expand eligibility for safety net programs to cover more working families' },
       { label: 'Block grants to states', ask: 'Convert programs to block grants so states have more flexibility in how they serve residents' },
+      { label: 'Expand EITC', ask: 'Expand the Earned Income Tax Credit to lift more working families out of poverty' },
     ],
     perspectives: [
       { label: 'Protect and expand', points: ['These programs keep millions out of poverty', 'Most recipients are working families, children, elderly, or disabled', 'Hunger and poverty cost more in healthcare and lost productivity'] },
@@ -1106,6 +1157,8 @@ const SUBTOPIC_CONTEXT: Record<string, TopicInfo> = {
       { label: 'Mental health resources', ask: 'Increase mental health and suicide prevention resources for veterans' },
       { label: 'Community care options', ask: 'Expand community care options so veterans can see private doctors when VA wait times are too long' },
       { label: 'Transition support', ask: 'Improve programs that help veterans transition to civilian careers' },
+      { label: 'Fund PACT Act fully', ask: 'Fully fund the PACT Act to ensure all veterans exposed to burn pits and toxins receive care' },
+      { label: 'Support military families', ask: 'Expand support for military families including spouse employment programs and childcare' },
     ],
     perspectives: [
       { label: 'Strengthen the VA', points: ['Veterans earned their care through service', 'The VA understands veteran-specific needs better than private providers', 'Funding the VA properly solves most access problems'] },
@@ -1161,6 +1214,7 @@ const SUBTOPIC_CONTEXT: Record<string, TopicInfo> = {
       { label: 'Color-blind policy', ask: 'Support color-blind, merit-based policies rather than race-conscious ones' },
       { label: 'Protect DEI', ask: 'Protect diversity and inclusion programs that address systemic barriers' },
       { label: 'Religious exemptions', ask: 'Ensure anti-discrimination law includes protections for sincerely held religious beliefs' },
+      { label: 'Pass the CROWN Act', ask: 'Pass the CROWN Act to ban race-based hair discrimination in workplaces and schools' },
     ],
     perspectives: [
       { label: 'Active remedies', points: ['Historical discrimination created barriers that persist today', 'Diverse institutions perform better and serve more people', 'Enforcement is essential because discrimination still occurs'] },
@@ -1198,6 +1252,7 @@ const SUBTOPIC_CONTEXT: Record<string, TopicInfo> = {
       { label: 'Strengthen OSHA', ask: 'Strengthen workplace safety enforcement and increase OSHA funding' },
       { label: 'Worker flexibility', ask: 'Preserve worker flexibility and independent contractor status for those who want it' },
       { label: 'Overtime protections', ask: 'Expand overtime pay protections to cover more salaried workers' },
+      { label: 'Ban non-competes', ask: 'Ban non-compete agreements that trap workers and suppress wages' },
     ],
     perspectives: [
       { label: 'Stronger protections', points: ['Workers are the backbone of the economy and deserve fair treatment', 'Misclassification denies workers benefits they\'ve earned', 'Safety regulations save lives'] },
@@ -1235,6 +1290,8 @@ const SUBTOPIC_CONTEXT: Record<string, TopicInfo> = {
       { label: 'Work requirements', ask: 'Support work requirements for able-bodied SNAP recipients without dependents' },
       { label: 'Increase benefits', ask: 'Increase SNAP benefits to keep up with rising food costs' },
       { label: 'Improve nutrition', ask: 'Update SNAP nutrition standards to encourage healthier food choices' },
+      { label: 'Expand school meals', ask: 'Make free school meals universal so no child goes hungry during the school day' },
+      { label: 'Fund food banks', ask: 'Increase federal support for food banks and emergency food programs' },
     ],
     perspectives: [
       { label: 'Protect the program', points: ['SNAP is the front line against hunger in America', 'Most recipients are children, elderly, or working adults', 'Hunger reduces productivity and increases healthcare costs'] },
@@ -1272,6 +1329,7 @@ const SUBTOPIC_CONTEXT: Record<string, TopicInfo> = {
       { label: 'Expand Community Care', ask: 'Expand the Community Care program so veterans have more options near them' },
       { label: 'Mental health focus', ask: 'Increase VA mental health and suicide prevention resources' },
       { label: 'Strengthen the VA', ask: 'Invest in VA facilities and staff rather than privatizing veteran care' },
+      { label: 'Caregiver support', ask: 'Expand the VA Caregiver Support Program to cover more veterans and family caregivers' },
     ],
     perspectives: [
       { label: 'Invest in the VA', points: ['The VA understands veteran-specific conditions like no other system', 'Properly funded, the VA delivers excellent care', 'Privatization fragments care and loses institutional knowledge'] },
@@ -1963,7 +2021,9 @@ export function TopicStep({ state, dispatch, onBack }: TopicStepProps) {
                     key={i}
                     type="button"
                     onClick={() => {
-                      if (!personalWhy.trim()) {
+                      if (personalWhy.trim()) {
+                        dispatch({ type: 'SET_PERSONAL_WHY', payload: prompt + '\n\n' + personalWhy });
+                      } else {
                         dispatch({ type: 'SET_PERSONAL_WHY', payload: prompt });
                       }
                     }}

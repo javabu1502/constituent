@@ -116,7 +116,7 @@ const LEG_TYPE_LABELS: Record<string, { label: string; color: string; descriptio
   'part-time': { label: 'Part-Time', color: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300', description: 'Legislature meets for limited sessions; legislators maintain other careers' },
 };
 
-function OfficialRow({ official }: { official: Official }) {
+function OfficialRow({ official, badge }: { official: Official; badge?: string }) {
   const partyColor = PARTY_COLORS[official.party] ?? DEFAULT_PARTY_COLOR;
 
   return (
@@ -138,6 +138,9 @@ function OfficialRow({ official }: { official: Official }) {
             <span className="font-semibold text-gray-900 dark:text-white text-sm">{official.name}</span>
           )}
           <span className={`px-2 py-0.5 text-xs font-medium rounded-full ${partyColor.bg} ${partyColor.text}`}>{official.party}</span>
+          {badge && (
+            <span className="px-2 py-0.5 text-xs font-medium rounded-full bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-300">{badge}</span>
+          )}
         </div>
         <p className="text-xs text-gray-500 dark:text-gray-400 truncate">{official.title}</p>
       </div>
@@ -187,6 +190,9 @@ export default async function StateHubPage({ params }: StatePageProps) {
   // Federal delegation
   const senators = findSenators(stateInfo.code);
   const representatives = findAllRepresentatives(stateInfo.code);
+
+  // Find senator up for re-election in 2026 (Class 2 seats)
+  const senatorUp2026 = senators.find(s => s.senateClass === 2) ?? null;
 
   // State legislature
   const stateLegislators = getStateLegislators(stateInfo.code);
@@ -295,9 +301,11 @@ export default async function StateHubPage({ params }: StatePageProps) {
           </div>
           <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 text-center">
             <div className="text-2xl font-bold">
-              {info.senateRace2026
-                ? <span className="text-green-600 dark:text-green-400">Yes</span>
-                : <span className="text-gray-400 dark:text-gray-500">No</span>}
+              {senatorUp2026
+                ? <span className="text-green-600 dark:text-green-400">{senatorUp2026.lastName}</span>
+                : info.senateRace2026
+                  ? <span className="text-green-600 dark:text-green-400">Yes</span>
+                  : <span className="text-gray-400 dark:text-gray-500">No</span>}
             </div>
             <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">Senate Race 2026</div>
           </div>
@@ -490,6 +498,39 @@ export default async function StateHubPage({ params }: StatePageProps) {
       </section>
 
       {/* ═══════════════════════════════════════════════════════════════════ */}
+      {/* 2026 Senate Race */}
+      {/* ═══════════════════════════════════════════════════════════════════ */}
+      {senatorUp2026 && (
+        <section className="mb-10">
+          <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">2026 Senate Race</h2>
+          <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
+            <div className="flex items-center gap-4">
+              {senatorUp2026.photoUrl ? (
+                <Image src={senatorUp2026.photoUrl} alt={senatorUp2026.name} width={64} height={64} className="w-16 h-16 rounded-full object-cover shrink-0 border border-gray-200 dark:border-gray-600" />
+              ) : (
+                <div className="w-16 h-16 rounded-full bg-gray-200 dark:bg-gray-600 flex items-center justify-center shrink-0">
+                  <span className="text-gray-500 dark:text-gray-400 text-xl font-medium">{senatorUp2026.name.charAt(0)}</span>
+                </div>
+              )}
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2 flex-wrap mb-1">
+                  <Link href={`/rep/${senatorUp2026.id}`} className="font-semibold text-gray-900 dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
+                    {senatorUp2026.name}
+                  </Link>
+                  <span className={`px-2 py-0.5 text-xs font-medium rounded-full ${(PARTY_COLORS[senatorUp2026.party] ?? DEFAULT_PARTY_COLOR).bg} ${(PARTY_COLORS[senatorUp2026.party] ?? DEFAULT_PARTY_COLOR).text}`}>{senatorUp2026.party}</span>
+                  <span className="px-2 py-0.5 text-xs font-medium rounded-full bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-300">Up for Re-election</span>
+                </div>
+                <p className="text-sm text-gray-600 dark:text-gray-400">{senatorUp2026.title}</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                  Class 2 seat · Primary: {new Date(info.primary2026 + 'T00:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ═══════════════════════════════════════════════════════════════════ */}
       {/* Federal Delegation */}
       {/* ═══════════════════════════════════════════════════════════════════ */}
       <section className="mb-10">
@@ -501,7 +542,7 @@ export default async function StateHubPage({ params }: StatePageProps) {
               U.S. Senators <span className="font-normal text-gray-500 dark:text-gray-400">({senators.length})</span>
             </h3>
             <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm divide-y divide-gray-100 dark:divide-gray-700">
-              {senators.map((s) => <OfficialRow key={s.id} official={s} />)}
+              {senators.map((s) => <OfficialRow key={s.id} official={s} badge={s.senateClass === 2 ? 'Up in 2026' : undefined} />)}
             </div>
           </div>
         )}

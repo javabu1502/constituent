@@ -37,6 +37,8 @@ export interface Official {
   contactForm?: string;
   photoUrl?: string;
   office?: string;
+  senateClass?: number;  // Senate class (1, 2, or 3)
+  termEnd?: string;      // Term end date (e.g., "2027-01-03")
   socialMedia?: {
     twitter?: string;
     facebook?: string;
