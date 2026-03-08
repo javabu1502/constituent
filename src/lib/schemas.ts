@@ -26,6 +26,7 @@ const addressSchema = z.object({
 export const generateMessageSchema = z.object({
   officials: z.array(officialSchema).min(1).max(20),
   issue: z.string().min(1).max(500),
+  issueCategory: z.string().max(200).optional(),
   ask: z.string().min(1).max(1000),
   personalWhy: z.string().max(2000).optional(),
   senderName: z.string().min(1).max(200),

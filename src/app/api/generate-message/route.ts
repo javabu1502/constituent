@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { stripTags, extractJSON, cleanText } from '@/lib/claude';
 import { getCommitteesForMember } from '@/lib/legislators';
+import { getTopicContext, type TopicInfo } from '@/data/topic-content';
 import { z } from 'zod';
 import { generateMessageSchema, parseBody } from '@/lib/schemas';
 import { generateLimiter, getClientIp } from '@/lib/rate-limit';
@@ -16,6 +17,30 @@ interface OfficialMessage {
   body: string;
 }
 
+function buildTopicDataBlock(info: TopicInfo): string {
+  const sections: string[] = [];
+
+  if (info.keyStats && info.keyStats.length > 0) {
+    const stats = info.keyStats.map(s => `• ${s.value} — ${s.label} (${s.source})`).join('\n');
+    sections.push(`KEY STATISTICS:\n${stats}`);
+  }
+
+  if (info.currentEvents.length > 0) {
+    sections.push(`CURRENT CONTEXT:\n${info.currentEvents.join('\n')}`);
+  }
+
+  if (info.perspectives.length > 0) {
+    const persp = info.perspectives.map(p => {
+      let entry = `• ${p.label}: ${p.points.join('; ')}`;
+      if (p.counterpoint) entry += `\n  Counterpoint: ${p.counterpoint}`;
+      return entry;
+    }).join('\n');
+    sections.push(`KEY ARGUMENTS:\n${persp}`);
+  }
+
+  return sections.join('\n\n');
+}
+
 async function generateForOfficial(
   apiKey: string,
   official: OfficialInput,
@@ -25,6 +50,7 @@ async function generateForOfficial(
   senderName: string,
   address: AddressInput | undefined,
   contactMethod: 'email' | 'phone' = 'email',
+  topicData?: string,
 ): Promise<OfficialMessage> {
   const isState = official.level === 'state';
   const titleLower = official.title.toLowerCase();
@@ -69,15 +95,22 @@ Use your knowledge of this official's party affiliation, state, and likely posit
 Writing guidelines:
 - If the official likely SUPPORTS the constituent's position: thank them specifically and urge continued leadership
 - If the official likely OPPOSES it: respectfully urge them to reconsider, noting any relevant party or state context
-- Include 1-2 relevant facts or recent events about the issue
+- Use the provided statistics and cite sources — weave specific numbers into the argument naturally (e.g. "With 43 million Americans carrying student loan debt..." or "according to the CBO...")
+- Acknowledge the strongest counterargument briefly, then pivot to the constituent's position — this shows sophistication and is more persuasive
 - Weave in the constituent's personal story naturally if provided
 - Identify the sender as a constituent in the opening (when writing to a staffer, say "constituent of [Official]", NOT "your constituent")
 - Include a specific, actionable ask
 - Maintain a respectful, firm tone
-- Keep the letter under 250 words
+- Keep the letter between 200-300 words
 - Do NOT include a greeting line (no "Dear Senator") or signature block (no "Sincerely") — the app handles those
 - Write in first person
 - Be direct and specific to THIS official, not generic${stafferNote}${stateNote}
+
+DATA-DRIVEN WRITING:
+- Use specific numbers from the KEY STATISTICS provided — they add credibility
+- Cite the source briefly when using a stat (e.g. "according to the CBO" or "per CDC data")
+- If KEY ARGUMENTS are provided, use the strongest points for the constituent's likely side
+- Acknowledge one counterpoint briefly to show good faith, then pivot
 
 SUBJECT LINE RULES:
 - Maximum 6-8 words
@@ -104,7 +137,15 @@ Writing guidelines:
 - Write as a flowing, natural script the caller reads aloud
 - Be direct and specific to THIS official, not generic
 - If the official likely SUPPORTS the position: acknowledge that and urge continued action
-- If the official likely OPPOSES it: respectfully urge reconsideration${stateNote ? stateNote.replace('email', 'call') : ''}
+- If the official likely OPPOSES it: respectfully urge reconsideration
+- Work ONE key statistic into the script naturally — e.g. "I'm concerned because over 48,000 Americans die from gun violence each year"
+- End with a clear, specific ask — not a vague "please consider"${stateNote ? stateNote.replace('email', 'call') : ''}
+
+DATA-DRIVEN WRITING:
+- Use specific numbers from the KEY STATISTICS provided — they add credibility
+- Cite the source briefly when using a stat (e.g. "according to the CBO" or "per CDC data")
+- If KEY ARGUMENTS are provided, use the strongest points for the constituent's likely side
+- Acknowledge one counterpoint briefly to show good faith, then pivot
 
 CRITICAL: Respond with ONLY a JSON object. No other text.`;
 
@@ -121,31 +162,45 @@ CRITICAL: Respond with ONLY a JSON object. No other text.`;
     }
   }
 
-  // Guidance on data-enriched writing
-  const dataGuidance = committeeContext
-    ? `\n\nDATA-DRIVEN WRITING TIPS:
-- If the official sits on a committee relevant to the issue, reference it (e.g., "As a member of the [Committee], you have unique influence...")
-- This makes the letter feel researched and serious, not generic`
-    : '';
+  // Build tailoring block with party-specific framing and committee context
+  const partyLower = official.party.toLowerCase();
+  let partyFraming = '';
+  if (partyLower.includes('republican')) {
+    partyFraming = 'Frame around fiscal responsibility, limited government, local control, and individual liberty';
+  } else if (partyLower.includes('democrat')) {
+    partyFraming = 'Frame around equity, public investment, protecting vulnerable populations, and community welfare';
+  }
+
+  const tailoringLines: string[] = [];
+  tailoringLines.push(`- Party: ${official.party}${partyFraming ? ` — ${partyFraming}` : ''}`);
+  if (committeeContext) {
+    tailoringLines.push(`- ${committeeContext.trim()} — if relevant to the issue, lead with this (e.g., "As a member of the [Committee], you have unique influence...")`);
+  }
+  tailoringLines.push('- If the official likely agrees: thank specifically and urge leadership');
+  tailoringLines.push('- If the official likely disagrees: find common ground first, then make the ask');
+
+  const tailoringBlock = `\n\nTAILORING TIPS:\n${tailoringLines.join('\n')}`;
+
+  const topicDataSection = topicData ? `\n${topicData}` : '';
 
   const emailUserPrompt = `Write a letter to this specific official:
 
-OFFICIAL: ${official.name} (${official.title}, ${official.party}, ${official.state})${committeeContext}
+OFFICIAL: ${official.name} (${official.title}, ${official.party}, ${official.state})
 
-ISSUE: ${issue}
+ISSUE: ${issue}${topicDataSection}
 WHAT I WANT: ${ask}${personalWhy ? `\nMY PERSONAL STORY: ${personalWhy}` : ''}
-SENDER: ${senderName}${locationStr ? ` from ${locationStr}` : ''}${dataGuidance}
+SENDER: ${senderName}${locationStr ? ` from ${locationStr}` : ''}${tailoringBlock}
 
 Respond with ONLY this JSON:
 {"subject": "max 8 words about the ask", "body": "the letter body"}`;
 
   const phoneUserPrompt = `Write a phone call script for calling this specific official's office:
 
-OFFICIAL: ${official.name} (${official.title}, ${official.party}, ${official.state})${committeeContext}
+OFFICIAL: ${official.name} (${official.title}, ${official.party}, ${official.state})
 
-ISSUE: ${issue}
+ISSUE: ${issue}${topicDataSection}
 WHAT I WANT: ${ask}${personalWhy ? `\nMY PERSONAL STORY: ${personalWhy}` : ''}
-SENDER: ${senderName}${locationStr ? ` from ${locationStr}` : ''}${dataGuidance}
+SENDER: ${senderName}${locationStr ? ` from ${locationStr}` : ''}${tailoringBlock}
 
 Respond with ONLY this JSON:
 {"script": "the phone script body"}`;
@@ -287,7 +342,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: parsed.error }, { status: 400 });
   }
 
-  const { officials, issue, ask, personalWhy, senderName, address, contactMethod, turnstileToken } = parsed.data;
+  const { officials, issue, issueCategory, ask, personalWhy, senderName, address, contactMethod, turnstileToken } = parsed.data;
 
   if (turnstileToken !== undefined || process.env.TURNSTILE_SECRET_KEY) {
     const valid = await verifyTurnstile(turnstileToken || '');
@@ -298,12 +353,21 @@ export async function POST(request: NextRequest) {
 
   const method = contactMethod === 'phone' ? 'phone' : 'email';
 
+  // Look up enriched topic data
+  let topicDataBlock: string | undefined;
+  if (issueCategory) {
+    const topicInfo = getTopicContext(issue, issueCategory);
+    if (topicInfo) {
+      topicDataBlock = buildTopicDataBlock(topicInfo);
+    }
+  }
+
   try {
     // Generate separate messages for each official in parallel
     const results = await Promise.all(
       officials.map(async (official) => {
         try {
-          return await generateForOfficial(apiKey, official, issue, ask, personalWhy, senderName, address, method);
+          return await generateForOfficial(apiKey, official, issue, ask, personalWhy, senderName, address, method, topicDataBlock);
         } catch (err) {
           console.warn(`[generate-message] AI failed for ${official.name}, using template:`, err);
           return buildTemplateFallback(official, issue, ask, personalWhy, senderName, address, method);

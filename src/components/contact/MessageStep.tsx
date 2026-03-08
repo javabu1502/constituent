@@ -54,6 +54,7 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
             district: o.district,
           })),
           issue: issue.trim(),
+          issueCategory: state.issueCategory || undefined,
           ask: ask.trim(),
           personalWhy: personalWhy.trim() || undefined,
           senderName: userName,
