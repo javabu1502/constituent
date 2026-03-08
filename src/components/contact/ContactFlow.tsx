@@ -28,6 +28,7 @@ export interface ContactState {
   officials: Official[];
   selectedReps: Official[];
   contactMethod: 'email' | 'phone';
+  tone: 'professional' | 'personal' | 'passionate';
   // Topic form fields
   userName: string;
   userEmail: string;
@@ -51,6 +52,7 @@ type ContactAction =
   | { type: 'TOGGLE_REP'; payload: Official }
   | { type: 'SELECT_ALL_REPS' }
   | { type: 'SET_CONTACT_METHOD'; payload: 'email' | 'phone' }
+  | { type: 'SET_TONE'; payload: 'professional' | 'personal' | 'passionate' }
   | { type: 'SET_USER_NAME'; payload: string }
   | { type: 'SET_USER_EMAIL'; payload: string }
   | { type: 'SET_ISSUE'; payload: { issue: string; category: string } }
@@ -72,6 +74,7 @@ const initialState: ContactState = {
   officials: [],
   selectedReps: [],
   contactMethod: 'email',
+  tone: 'professional',
   userName: '',
   userEmail: '',
   issue: '',
@@ -105,6 +108,8 @@ function contactReducer(state: ContactState, action: ContactAction): ContactStat
       return { ...state, selectedReps: [...state.officials] };
     case 'SET_CONTACT_METHOD':
       return { ...state, contactMethod: action.payload };
+    case 'SET_TONE':
+      return { ...state, tone: action.payload };
     case 'SET_USER_NAME':
       return { ...state, userName: action.payload };
     case 'SET_USER_EMAIL':

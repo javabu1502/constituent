@@ -65,22 +65,48 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
             zip: address.zip,
           } : undefined,
           contactMethod,
+          tone: state.tone,
           turnstileToken: turnstileToken || undefined,
         }),
       });
 
-      const data = await response.json();
-
       if (!response.ok) {
+        // Non-OK response: try to parse JSON error
+        const data = await response.json().catch(() => ({ error: 'Failed to generate messages' }));
         throw new Error(data.error || 'Failed to generate messages');
       }
 
-      // Store per-official messages keyed by name
-      const msgMap: Record<string, OfficialMessage> = {};
-      for (const msg of data.messages) {
-        msgMap[msg.officialName] = { subject: msg.subject, body: msg.body };
+      // SSE stream consumption
+      const reader = response.body?.getReader();
+      if (!reader) throw new Error('No response stream');
+
+      const decoder = new TextDecoder();
+      let buffer = '';
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        buffer += decoder.decode(value, { stream: true });
+        const lines = buffer.split('\n');
+        buffer = lines.pop() || '';
+
+        for (const line of lines) {
+          if (!line.startsWith('data: ')) continue;
+          const data = line.slice(6).trim();
+          if (data === '[DONE]') continue;
+
+          try {
+            const msg = JSON.parse(data) as { officialName: string; subject: string; body: string };
+            dispatch({
+              type: 'SET_MESSAGE',
+              payload: { officialName: msg.officialName, message: { subject: msg.subject, body: msg.body } },
+            });
+          } catch {
+            // Skip malformed lines
+          }
+        }
       }
-      dispatch({ type: 'SET_MESSAGES', payload: msgMap });
     } catch (err) {
       console.error('Error generating messages:', err);
       dispatch({ type: 'SET_ERROR', payload: err instanceof Error ? err.message : 'Failed to generate messages' });
@@ -121,10 +147,12 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
     dispatch({ type: 'GO_TO_STEP', payload: 'send' });
   };
 
-  // Show loading state
-  if (isGenerating) {
-    const loadedCount = Object.keys(messages).length;
+  const loadedCount = Object.keys(messages).filter(name =>
+    selectedReps.some(rep => rep.name === name)
+  ).length;
 
+  // Show full-screen spinner only when generating AND no messages have arrived yet
+  if (isGenerating && loadedCount === 0) {
     return (
       <div className="p-6 sm:p-8">
         <div className="flex flex-col items-center justify-center py-16">
@@ -162,6 +190,17 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
             : 'Edit as needed, then continue'}
         </p>
       </div>
+
+      {isGenerating && loadedCount > 0 && (
+        <div className="mb-4 p-3 bg-purple-50 dark:bg-purple-900/30 border border-purple-200 dark:border-purple-700 rounded-xl">
+          <div className="flex items-center gap-2">
+            <div className="w-4 h-4 border-2 border-purple-200 dark:border-purple-700 rounded-full animate-spin border-t-purple-600" />
+            <p className="text-sm text-purple-700 dark:text-purple-300">
+              {loadedCount} of {selectedReps.length} {contactMethod === 'phone' ? 'scripts' : 'messages'} ready
+            </p>
+          </div>
+        </div>
+      )}
 
       {state.error && (
         <div className="mb-4 p-4 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 rounded-xl">
@@ -206,11 +245,13 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
                 <span className="truncate max-w-[100px]">
                   {rep.lastName || rep.name.split(' ').pop()}
                 </span>
-                {hasMessage && (
+                {hasMessage ? (
                   <svg className="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
-                )}
+                ) : isGenerating ? (
+                  <div className="w-4 h-4 border-2 border-gray-300 dark:border-gray-500 rounded-full animate-spin border-t-purple-600" />
+                ) : null}
               </button>
             );
           })}

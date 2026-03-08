@@ -334,7 +334,7 @@ function ResearchResults({
 }
 
 export function TopicStep({ state, dispatch, onBack }: TopicStepProps) {
-  const { selectedReps, userName, issue, ask, personalWhy, contactMethod } = state;
+  const { selectedReps, userName, issue, ask, personalWhy, contactMethod, tone } = state;
   const [showStoryHelp, setShowStoryHelp] = useState(false);
   const [showTopicInfo, setShowTopicInfo] = useState(false);
   const [researchContent, setResearchContent] = useState('');
@@ -438,6 +438,30 @@ export function TopicStep({ state, dispatch, onBack }: TopicStepProps) {
           Phone
         </button>
       </div>
+
+      {/* Tone selector */}
+      <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">Choose a tone:</p>
+      <div className="flex bg-gray-100 dark:bg-gray-700/50 rounded-lg p-1 mb-1">
+        {(['professional', 'personal', 'passionate'] as const).map((t) => (
+          <button
+            key={t}
+            type="button"
+            onClick={() => dispatch({ type: 'SET_TONE', payload: t })}
+            className={`flex-1 px-3 py-2.5 text-sm font-medium rounded-md transition-colors capitalize ${
+              tone === t
+                ? 'bg-white dark:bg-gray-600 text-gray-900 dark:text-white shadow-sm'
+                : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
+            }`}
+          >
+            {t}
+          </button>
+        ))}
+      </div>
+      <p className="text-xs text-gray-400 dark:text-gray-500 mb-6">
+        {tone === 'professional' && 'Formal and data-driven'}
+        {tone === 'personal' && 'Lead with your story'}
+        {tone === 'passionate' && 'Urgent and bold'}
+      </p>
 
       {/* Header */}
       <div className="text-center mb-6">

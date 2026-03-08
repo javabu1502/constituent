@@ -32,6 +32,7 @@ export const generateMessageSchema = z.object({
   senderName: z.string().min(1).max(200),
   address: addressSchema.optional(),
   contactMethod: z.enum(['email', 'phone']).optional(),
+  tone: z.enum(['professional', 'personal', 'passionate']).optional(),
   turnstileToken: z.string().optional(),
 });
 

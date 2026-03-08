@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { stripTags, extractJSON, cleanText } from '@/lib/claude';
-import { getCommitteesForMember } from '@/lib/legislators';
+import { getCommitteesForMember, getFederalLegislatorBio } from '@/lib/legislators';
 import { getTopicContext, type TopicInfo } from '@/data/topic-content';
+import { fetchHouseVotes, fetchSenateVotes } from '@/lib/votes';
+import { fetchDistrictDemographics } from '@/lib/census-api';
 import { z } from 'zod';
 import { generateMessageSchema, parseBody } from '@/lib/schemas';
 import { generateLimiter, getClientIp } from '@/lib/rate-limit';
@@ -10,6 +12,7 @@ import { verifyTurnstile } from '@/lib/turnstile';
 type GenerateRequest = z.infer<typeof generateMessageSchema>;
 type OfficialInput = GenerateRequest['officials'][number];
 type AddressInput = NonNullable<GenerateRequest['address']>;
+type Tone = NonNullable<GenerateRequest['tone']>;
 
 interface OfficialMessage {
   officialName: string;
@@ -41,6 +44,200 @@ function buildTopicDataBlock(info: TopicInfo): string {
   return sections.join('\n\n');
 }
 
+// --- Feature 1: Few-shot examples ---
+
+function buildFewShotMessages(contactMethod: 'email' | 'phone'): { role: 'user' | 'assistant'; content: string }[] {
+  if (contactMethod === 'phone') {
+    return [
+      {
+        role: 'user',
+        content: `Write a phone call script for calling this specific official's office:
+
+OFFICIAL: Sen. Maria Cantwell (U.S. Senator, Democrat, WA)
+
+ISSUE: Climate change
+KEY STATISTICS:
+• $145 billion — Annual cost of climate disasters in the U.S. (NOAA)
+WHAT I WANT: Support the Clean Energy Innovation Act
+SENDER: Jamie Rivera from Seattle, WA
+
+TAILORING TIPS:
+- Party: Democrat — Frame around equity, public investment, protecting vulnerable populations, and community welfare
+- If the official likely agrees: thank specifically and urge leadership
+
+Respond with ONLY this JSON:
+{"script": "the phone script body"}`,
+      },
+      {
+        role: 'assistant',
+        content: `{"script": "I'm calling to urge Senator Cantwell to support the Clean Energy Innovation Act. Climate disasters cost our country $145 billion a year according to NOAA, and that number keeps climbing. I know the Senator has been a leader on clean energy — I'm grateful for that work and I'm asking her to keep pushing. This bill would accelerate the transition we need. I'd like the Senator to co-sponsor the Clean Energy Innovation Act and push for a floor vote this session."}`,
+      },
+    ];
+  }
+
+  // Email: 2 example exchanges
+  return [
+    {
+      role: 'user',
+      content: `Write a letter to this specific official:
+
+OFFICIAL: Sen. Patty Murray (U.S. Senator, Democrat, WA)
+
+ISSUE: Student loan debt
+KEY STATISTICS:
+• 43 million — Americans carrying student loan debt (Federal Reserve)
+• $1.77 trillion — Total outstanding student loan debt (ED)
+WHAT I WANT: Support student loan relief legislation
+MY PERSONAL STORY: I graduated with $47,000 in debt and have been paying for 12 years.
+SENDER: Alex Chen from Tacoma, WA
+
+TAILORING TIPS:
+- Party: Democrat — Frame around equity, public investment, protecting vulnerable populations, and community welfare
+- If the official likely agrees: thank specifically and urge leadership
+
+Respond with ONLY this JSON:
+{"subject": "max 8 words about the ask", "body": "the letter body"}`,
+    },
+    {
+      role: 'assistant',
+      content: `{"subject": "Please Keep Fighting on Student Loans", "body": "As a constituent from Tacoma, I want to thank you for your leadership on making higher education more accessible. With 43 million Americans carrying student loan debt totaling $1.77 trillion according to the Federal Reserve, this crisis demands continued action.\\n\\nI graduated twelve years ago with $47,000 in debt. Despite making consistent payments, the balance has barely moved due to interest. I'm one of millions stuck in this cycle — working hard, playing by the rules, and still unable to get ahead.\\n\\nSome argue relief is unfair to those who already paid, and I understand that concern. But we don't refuse to cure a disease because earlier patients suffered. Addressing this crisis strengthens the economy — borrowers freed from crushing debt can buy homes, start businesses, and invest in their communities.\\n\\nI respectfully ask that you co-sponsor comprehensive student loan relief legislation and push for a vote this session. Your constituents are counting on you to lead on this."}`,
+    },
+    {
+      role: 'user',
+      content: `Write a letter to this specific official:
+
+OFFICIAL: Sen. Ted Cruz (U.S. Senator, Republican, TX)
+
+ISSUE: Student loan debt
+KEY STATISTICS:
+• 43 million — Americans carrying student loan debt (Federal Reserve)
+• $1.77 trillion — Total outstanding student loan debt (ED)
+WHAT I WANT: Support student loan relief legislation
+SENDER: Jordan Miller from Houston, TX
+
+TAILORING TIPS:
+- Party: Republican — Frame around fiscal responsibility, limited government, local control, and individual liberty
+- If the official likely disagrees: find common ground first, then make the ask
+
+Respond with ONLY this JSON:
+{"subject": "max 8 words about the ask", "body": "the letter body"}`,
+    },
+    {
+      role: 'assistant',
+      content: `{"subject": "Student Debt Is Holding Back Our Economy", "body": "As your constituent in Houston, I'm writing about the student loan crisis that affects 43 million Americans and $1.77 trillion in outstanding debt, according to Federal Reserve data.\\n\\nI know you've championed policies that empower individuals and reduce government overreach, and I share those values. The current student loan system is itself a product of government distortion — federal lending inflated tuition costs while leaving borrowers trapped. This isn't a free market outcome; it's a government-created problem.\\n\\nCritics of relief worry about moral hazard, and that's a fair concern. But targeted reform that addresses predatory interest rates and holds institutions accountable aligns with conservative principles of fixing broken systems rather than propping them up.\\n\\nWith $1.77 trillion locked in student debt, potential entrepreneurs can't take risks, families can't build wealth, and the economy suffers. Interest rate reform and institutional accountability would free up economic activity without blanket bailouts.\\n\\nI urge you to support bipartisan student loan reform that reduces interest burdens and holds universities accountable for outcomes. This is about economic freedom, not handouts."}`,
+    },
+  ];
+}
+
+// --- Feature 3: Vote/cosponsor data ---
+
+async function fetchRelevantVotes(
+  official: OfficialInput,
+  issue: string,
+  issueCategory: string | undefined,
+): Promise<string> {
+  if (official.level === 'state' || !official.bioguideId) return '';
+
+  const bio = getFederalLegislatorBio(official.bioguideId);
+  if (!bio || bio.terms.length === 0) return '';
+
+  const lastTerm = bio.terms[bio.terms.length - 1];
+  const isSenate = lastTerm.type === 'sen';
+
+  try {
+    const votes = isSenate
+      ? await fetchSenateVotes(
+          official.bioguideId,
+          official.name,
+          bio.name.last,
+          lastTerm.state,
+        )
+      : await fetchHouseVotes(official.bioguideId, official.name);
+
+    if (votes.length === 0) return '';
+
+    // Keyword-match issue + category against vote fields
+    const keywords = [
+      ...issue.toLowerCase().split(/\s+/),
+      ...(issueCategory ? issueCategory.toLowerCase().split(/\s+/) : []),
+    ].filter(w => w.length > 3);
+
+    const scored = votes
+      .map(v => {
+        const searchText = [v.question, v.description, v.bill_title || ''].join(' ').toLowerCase();
+        const matches = keywords.filter(kw => searchText.includes(kw)).length;
+        return { vote: v, matches };
+      })
+      .filter(s => s.matches > 0)
+      .sort((a, b) => b.matches - a.matches)
+      .slice(0, 3);
+
+    if (scored.length === 0) return '';
+
+    const lines = scored.map(({ vote: v }) => {
+      const pos = v.rep_position || 'Unknown';
+      const dateStr = v.date ? ` (${new Date(v.date).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })})` : '';
+      const resultStr = v.result ? ` — ${v.result}` : '';
+      const billStr = v.bill_number ? `${v.bill_number} ` : '';
+      const title = v.bill_title || v.question;
+      return `• Voted ${pos} on ${billStr}"${title}"${dateStr}${resultStr}`;
+    });
+
+    return `\nVOTING RECORD ON THIS ISSUE:\n${lines.join('\n')}`;
+  } catch (err) {
+    console.warn(`[generate-message] Vote fetch failed for ${official.name}:`, err);
+    return '';
+  }
+}
+
+// --- Feature 4: Local impact data ---
+
+async function fetchDistrictContext(official: OfficialInput): Promise<string> {
+  if (official.level === 'state' || !official.bioguideId) return '';
+
+  const bio = getFederalLegislatorBio(official.bioguideId);
+  if (!bio || bio.terms.length === 0) return '';
+
+  const lastTerm = bio.terms[bio.terms.length - 1];
+  const isSenate = lastTerm.type === 'sen';
+  const district = isSenate ? '00' : String(lastTerm.district ?? '00');
+
+  try {
+    const demographics = await fetchDistrictDemographics(lastTerm.state, district);
+    if (!demographics) return '';
+
+    const pop = demographics.totalPopulation.toLocaleString();
+    const income = `$${demographics.medianIncome.toLocaleString()}`;
+    const poverty = `${demographics.povertyRate}%`;
+    const label = isSenate ? lastTerm.state : `${lastTerm.state}-${district.padStart(2, '0')}`;
+
+    return `\nDISTRICT DATA (${label}):\n• Population: ${pop} | Median income: ${income} | Poverty rate: ${poverty}`;
+  } catch (err) {
+    console.warn(`[generate-message] Demographics fetch failed for ${official.name}:`, err);
+    return '';
+  }
+}
+
+// --- Feature 5: Tone instructions ---
+
+function buildToneInstructions(tone: Tone): string {
+  switch (tone) {
+    case 'personal':
+      return `\n\nTONE — PERSONAL:
+- Lead with the personal story, use conversational language, show vulnerability
+- Frame statistics personally (e.g. "I'm one of 43 million...")
+- Prioritize emotional connection over formality`;
+    case 'passionate':
+      return `\n\nTONE — PASSIONATE:
+- Use strong, urgent language — bold demands, not timid requests
+- Lead with the most alarming statistic
+- Express moral urgency and the stakes of inaction
+- Still respectful — passionate, not hostile`;
+    default:
+      return ''; // professional is the default style
+  }
+}
+
 async function generateForOfficial(
   apiKey: string,
   official: OfficialInput,
@@ -51,6 +248,9 @@ async function generateForOfficial(
   address: AddressInput | undefined,
   contactMethod: 'email' | 'phone' = 'email',
   topicData?: string,
+  voteContext?: string,
+  districtContext?: string,
+  tone: Tone = 'professional',
 ): Promise<OfficialMessage> {
   const isState = official.level === 'state';
   const titleLower = official.title.toLowerCase();
@@ -88,6 +288,16 @@ async function generateForOfficial(
 - State legislators handle state laws, budgets, and regulations`
     : '';
 
+  const voteInstructions = voteContext
+    ? `\n- If VOTING RECORD is provided, reference the official's actual votes — e.g. "Your Yea vote on H.R. 1234 shows your commitment..." or "Despite your Nay vote on S. 567, I urge you to reconsider..."`
+    : '';
+
+  const districtInstructions = districtContext
+    ? `\n- If DISTRICT DATA is provided, ground arguments in local impact — e.g. "With a poverty rate of 11.2% in our district..." or "The 780,000 residents of this district..."`
+    : '';
+
+  const toneInstructions = buildToneInstructions(tone);
+
   const emailSystemPrompt = `You are an expert constituent letter writer. Write a compelling, personalized letter from a constituent to ONE specific elected official.
 
 Use your knowledge of this official's party affiliation, state, and likely positions to tailor the letter specifically to them.
@@ -104,7 +314,7 @@ Writing guidelines:
 - Keep the letter between 200-300 words
 - Do NOT include a greeting line (no "Dear Senator") or signature block (no "Sincerely") — the app handles those
 - Write in first person
-- Be direct and specific to THIS official, not generic${stafferNote}${stateNote}
+- Be direct and specific to THIS official, not generic${stafferNote}${stateNote}${voteInstructions}${districtInstructions}${toneInstructions}
 
 DATA-DRIVEN WRITING:
 - Use specific numbers from the KEY STATISTICS provided — they add credibility
@@ -139,7 +349,7 @@ Writing guidelines:
 - If the official likely SUPPORTS the position: acknowledge that and urge continued action
 - If the official likely OPPOSES it: respectfully urge reconsideration
 - Work ONE key statistic into the script naturally — e.g. "I'm concerned because over 48,000 Americans die from gun violence each year"
-- End with a clear, specific ask — not a vague "please consider"${stateNote ? stateNote.replace('email', 'call') : ''}
+- End with a clear, specific ask — not a vague "please consider"${stateNote ? stateNote.replace('email', 'call') : ''}${voteInstructions}${districtInstructions}${toneInstructions}
 
 DATA-DRIVEN WRITING:
 - Use specific numbers from the KEY STATISTICS provided — they add credibility
@@ -182,12 +392,14 @@ CRITICAL: Respond with ONLY a JSON object. No other text.`;
   const tailoringBlock = `\n\nTAILORING TIPS:\n${tailoringLines.join('\n')}`;
 
   const topicDataSection = topicData ? `\n${topicData}` : '';
+  const voteSection = voteContext || '';
+  const districtSection = districtContext || '';
 
   const emailUserPrompt = `Write a letter to this specific official:
 
 OFFICIAL: ${official.name} (${official.title}, ${official.party}, ${official.state})
 
-ISSUE: ${issue}${topicDataSection}
+ISSUE: ${issue}${topicDataSection}${voteSection}${districtSection}
 WHAT I WANT: ${ask}${personalWhy ? `\nMY PERSONAL STORY: ${personalWhy}` : ''}
 SENDER: ${senderName}${locationStr ? ` from ${locationStr}` : ''}${tailoringBlock}
 
@@ -198,7 +410,7 @@ Respond with ONLY this JSON:
 
 OFFICIAL: ${official.name} (${official.title}, ${official.party}, ${official.state})
 
-ISSUE: ${issue}${topicDataSection}
+ISSUE: ${issue}${topicDataSection}${voteSection}${districtSection}
 WHAT I WANT: ${ask}${personalWhy ? `\nMY PERSONAL STORY: ${personalWhy}` : ''}
 SENDER: ${senderName}${locationStr ? ` from ${locationStr}` : ''}${tailoringBlock}
 
@@ -206,6 +418,9 @@ Respond with ONLY this JSON:
 {"script": "the phone script body"}`;
 
   const userPrompt = contactMethod === 'phone' ? phoneUserPrompt : emailUserPrompt;
+
+  // Build messages with few-shot examples
+  const fewShotMessages = buildFewShotMessages(contactMethod);
 
   const response = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
@@ -218,7 +433,7 @@ Respond with ONLY this JSON:
       model: process.env.CLAUDE_MODEL || 'claude-sonnet-4-20250514',
       max_tokens: 1200,
       system: systemPrompt,
-      messages: [{ role: 'user', content: userPrompt }],
+      messages: [...fewShotMessages, { role: 'user', content: userPrompt }],
     }),
   });
 
@@ -342,7 +557,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: parsed.error }, { status: 400 });
   }
 
-  const { officials, issue, issueCategory, ask, personalWhy, senderName, address, contactMethod, turnstileToken } = parsed.data;
+  const { officials, issue, issueCategory, ask, personalWhy, senderName, address, contactMethod, tone, turnstileToken } = parsed.data;
 
   if (turnstileToken !== undefined || process.env.TURNSTILE_SECRET_KEY) {
     const valid = await verifyTurnstile(turnstileToken || '');
@@ -352,6 +567,7 @@ export async function POST(request: NextRequest) {
   }
 
   const method = contactMethod === 'phone' ? 'phone' : 'email';
+  const selectedTone: Tone = tone || 'professional';
 
   // Look up enriched topic data
   let topicDataBlock: string | undefined;
@@ -362,28 +578,65 @@ export async function POST(request: NextRequest) {
     }
   }
 
-  try {
-    // Generate separate messages for each official in parallel
-    const results = await Promise.all(
-      officials.map(async (official) => {
-        try {
-          return await generateForOfficial(apiKey, official, issue, ask, personalWhy, senderName, address, method, topicDataBlock);
-        } catch (err) {
-          console.warn(`[generate-message] AI failed for ${official.name}, using template:`, err);
-          return buildTemplateFallback(official, issue, ask, personalWhy, senderName, address, method);
-        }
-      })
-    );
+  // --- Feature 2: SSE streaming ---
+  const encoder = new TextEncoder();
+  const stream = new ReadableStream({
+    async start(controller) {
+      const enqueueMessage = (msg: OfficialMessage) => {
+        controller.enqueue(encoder.encode(`data: ${JSON.stringify(msg)}\n\n`));
+      };
 
-    return NextResponse.json({ messages: results });
-  } catch (error) {
-    console.error('Error generating messages:', error);
-    // Final fallback: template messages for all officials
-    const fallbacks = officials.map(official =>
-      buildTemplateFallback(official, issue, ask, personalWhy, senderName, address, contactMethod === 'phone' ? 'phone' : 'email')
-    );
-    return NextResponse.json({ messages: fallbacks });
-  }
+      try {
+        // Generate messages in parallel; stream each as it completes
+        const promises = officials.map(async (official) => {
+          try {
+            // Fetch vote + district data in parallel for federal officials
+            const [voteContext, districtContext] = await Promise.all([
+              fetchRelevantVotes(official, issue, issueCategory),
+              fetchDistrictContext(official),
+            ]);
+
+            const result = await generateForOfficial(
+              apiKey, official, issue, ask, personalWhy, senderName, address, method,
+              topicDataBlock, voteContext, districtContext, selectedTone,
+            );
+            enqueueMessage(result);
+            return result;
+          } catch (err) {
+            console.warn(`[generate-message] AI failed for ${official.name}, using template:`, err);
+            const fallback = buildTemplateFallback(official, issue, ask, personalWhy, senderName, address, method);
+            enqueueMessage(fallback);
+            return fallback;
+          }
+        });
+
+        await Promise.all(promises);
+        controller.enqueue(encoder.encode(`data: [DONE]\n\n`));
+        controller.close();
+      } catch (error) {
+        console.error('Error in SSE stream:', error);
+        // Send fallbacks for any remaining officials
+        for (const official of officials) {
+          try {
+            const fallback = buildTemplateFallback(official, issue, ask, personalWhy, senderName, address, method);
+            enqueueMessage(fallback);
+          } catch {
+            // Skip if we can't even build a fallback
+          }
+        }
+        controller.enqueue(encoder.encode(`data: [DONE]\n\n`));
+        controller.close();
+      }
+    },
+  });
+
+  return new Response(stream, {
+    headers: {
+      'Content-Type': 'text/event-stream',
+      'Cache-Control': 'no-cache',
+      'Connection': 'keep-alive',
+    },
+  });
 }
 
 function buildTemplateFallback(
