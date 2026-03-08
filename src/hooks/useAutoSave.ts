@@ -11,6 +11,7 @@ export interface SavedDraft {
   address: { street: string; city: string; state: string; zip: string } | null;
   selectedRepIds: string[];
   contactMethod: 'email' | 'phone';
+  tone: 'professional' | 'personal' | 'passionate';
   userName: string;
   userEmail: string;
   issue: string;
@@ -26,6 +27,7 @@ interface AutoSaveState {
   address: { street: string; city: string; state: string; zip: string } | null;
   selectedReps: { id: string }[];
   contactMethod: 'email' | 'phone';
+  tone: 'professional' | 'personal' | 'passionate';
   userName: string;
   userEmail: string;
   issue: string;
@@ -89,6 +91,7 @@ export function useAutoSave(
         address: state.address,
         selectedRepIds: state.selectedReps.map((r) => r.id),
         contactMethod: state.contactMethod,
+        tone: state.tone,
         userName: state.userName,
         userEmail: state.userEmail,
         issue: state.issue,
@@ -113,7 +116,7 @@ export function useAutoSave(
       if (timerRef.current) clearTimeout(timerRef.current);
     };
   }, [
-    state.step, state.address, state.selectedReps, state.contactMethod,
+    state.step, state.address, state.selectedReps, state.contactMethod, state.tone,
     state.userName, state.userEmail, state.issue, state.issueCategory,
     state.ask, state.personalWhy, state.messages,
   ]);

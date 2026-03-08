@@ -107,9 +107,9 @@ function contactReducer(state: ContactState, action: ContactAction): ContactStat
     case 'SELECT_ALL_REPS':
       return { ...state, selectedReps: [...state.officials] };
     case 'SET_CONTACT_METHOD':
-      return { ...state, contactMethod: action.payload };
+      return { ...state, contactMethod: action.payload, messages: {} };
     case 'SET_TONE':
-      return { ...state, tone: action.payload };
+      return { ...state, tone: action.payload, messages: {} };
     case 'SET_USER_NAME':
       return { ...state, userName: action.payload };
     case 'SET_USER_EMAIL':
@@ -217,6 +217,7 @@ export function ContactFlow() {
       dispatch({ type: 'SET_ADDRESS', payload: draft.address as Address });
     }
     dispatch({ type: 'SET_CONTACT_METHOD', payload: draft.contactMethod });
+    if (draft.tone) dispatch({ type: 'SET_TONE', payload: draft.tone });
     if (draft.userName) dispatch({ type: 'SET_USER_NAME', payload: draft.userName });
     if (draft.userEmail) dispatch({ type: 'SET_USER_EMAIL', payload: draft.userEmail });
     if (draft.issue) {
