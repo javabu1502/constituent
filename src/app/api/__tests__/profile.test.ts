@@ -1,4 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { NextRequest } from 'next/server';
 
 const mockGetUser = vi.fn();
 const mockProfileSelect = vi.fn();
@@ -21,6 +22,11 @@ vi.mock('@/lib/supabase', () => ({
       update: mockProfileUpdate,
     })),
   })),
+}));
+
+vi.mock('@/lib/rate-limit', () => ({
+  profileLimiter: { check: vi.fn((): { success: boolean; retryAfter?: number } => ({ success: true })) },
+  getClientIp: vi.fn(() => '127.0.0.1'),
 }));
 
 vi.mock('@/lib/env', () => ({
@@ -91,7 +97,7 @@ describe('PATCH /api/profile', () => {
 
   it('returns 200 with updated profile for valid update', async () => {
     const { PATCH } = await import('../profile/route');
-    const req = new Request('http://localhost/api/profile', {
+    const req = new NextRequest('http://localhost/api/profile', {
       method: 'PATCH',
       body: JSON.stringify({ city: 'San Francisco' }),
       headers: { 'Content-Type': 'application/json' },
@@ -107,7 +113,7 @@ describe('PATCH /api/profile', () => {
     mockGetUser.mockResolvedValue({ data: { user: null } });
 
     const { PATCH } = await import('../profile/route');
-    const req = new Request('http://localhost/api/profile', {
+    const req = new NextRequest('http://localhost/api/profile', {
       method: 'PATCH',
       body: JSON.stringify({ city: 'San Francisco' }),
       headers: { 'Content-Type': 'application/json' },
@@ -119,7 +125,7 @@ describe('PATCH /api/profile', () => {
 
   it('returns 400 for invalid JSON', async () => {
     const { PATCH } = await import('../profile/route');
-    const req = new Request('http://localhost/api/profile', {
+    const req = new NextRequest('http://localhost/api/profile', {
       method: 'PATCH',
       body: 'not json',
       headers: { 'Content-Type': 'application/json' },
@@ -131,7 +137,7 @@ describe('PATCH /api/profile', () => {
 
   it('returns 400 for Zod failure (empty object)', async () => {
     const { PATCH } = await import('../profile/route');
-    const req = new Request('http://localhost/api/profile', {
+    const req = new NextRequest('http://localhost/api/profile', {
       method: 'PATCH',
       body: JSON.stringify({}),
       headers: { 'Content-Type': 'application/json' },

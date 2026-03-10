@@ -1,12 +1,19 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createAdminClient } from '@/lib/supabase';
 import { trackSendSchema, parseBody } from '@/lib/schemas';
+import { writeLimiter, getClientIp } from '@/lib/rate-limit';
 
 /**
  * POST /api/track-send
  * Log a message send event to Supabase
  */
 export async function POST(request: NextRequest) {
+  const ip = getClientIp(request);
+  const { success, retryAfter } = writeLimiter.check(ip);
+  if (!success) {
+    return NextResponse.json({ error: 'Too many requests' }, { status: 429, headers: { 'Retry-After': String(retryAfter) } });
+  }
+
   let raw: unknown;
   try {
     raw = await request.json();

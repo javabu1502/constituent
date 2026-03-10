@@ -1,7 +1,8 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase';
 import { profileUpdateSchema, parseBody } from '@/lib/schemas';
+import { profileLimiter, getClientIp } from '@/lib/rate-limit';
 
 /**
  * GET /api/profile
@@ -33,12 +34,18 @@ export async function GET() {
  * PATCH /api/profile
  * Updates the authenticated user's profile (address and/or representatives)
  */
-export async function PATCH(request: Request) {
+export async function PATCH(request: NextRequest) {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
 
   if (!user) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
+  const ip = getClientIp(request);
+  const { success, retryAfter } = profileLimiter.check(ip);
+  if (!success) {
+    return NextResponse.json({ error: 'Too many requests' }, { status: 429, headers: { 'Retry-After': String(retryAfter) } });
   }
 
   let raw: unknown;

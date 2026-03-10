@@ -61,6 +61,7 @@ function RepCard({
         >
           {isSelected && (
             <svg
+              aria-hidden="true"
               className="w-4 h-4 text-white"
               fill="currentColor"
               viewBox="0 0 20 20"
@@ -89,6 +90,8 @@ function RepCard({
             />
           ) : null}
           <div
+            role="img"
+            aria-label={rep.name}
             className={`w-10 h-10 sm:w-14 sm:h-14 rounded-full flex items-center justify-center text-sm sm:text-base font-bold ${partyColors.bg} ${partyColors.text} ${rep.photoUrl ? 'hidden' : ''}`}
           >
             {getInitials(rep.name)}
@@ -100,6 +103,7 @@ function RepCard({
           <div className="flex items-center gap-2 mb-1">
             <h4 className="font-semibold text-gray-900 dark:text-white truncate">{rep.name}</h4>
             <span
+              aria-label={rep.party}
               className={`px-2 py-0.5 text-xs font-medium rounded-full ${partyColors.bg} ${partyColors.text}`}
             >
               {rep.party.charAt(0)}

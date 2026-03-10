@@ -20,7 +20,7 @@ export async function GET() {
   }
 
   return NextResponse.json({
-    preferences: data || { weekly_digest: false, email: user.email || '' },
+    preferences: data || { weekly_digest: false, follow_up_reminders: false, email: user.email || '' },
   });
 }
 
@@ -32,7 +32,7 @@ export async function PUT(request: Request) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  let body: { weekly_digest?: boolean; email?: string };
+  let body: { weekly_digest?: boolean; follow_up_reminders?: boolean; email?: string };
   try {
     body = await request.json();
   } catch {
@@ -46,6 +46,10 @@ export async function PUT(request: Request) {
 
   if (typeof body.weekly_digest === 'boolean') {
     updates.weekly_digest = body.weekly_digest;
+  }
+
+  if (typeof body.follow_up_reminders === 'boolean') {
+    updates.follow_up_reminders = body.follow_up_reminders;
   }
 
   if (typeof body.email === 'string' && body.email.includes('@')) {

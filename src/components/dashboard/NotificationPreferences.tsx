@@ -4,12 +4,14 @@ import { useState, useEffect } from 'react';
 
 interface Preferences {
   weekly_digest: boolean;
+  follow_up_reminders: boolean;
   email: string;
 }
 
 export function NotificationPreferences({ userEmail }: { userEmail: string }) {
   const [prefs, setPrefs] = useState<Preferences>({
     weekly_digest: false,
+    follow_up_reminders: false,
     email: userEmail,
   });
   const [loading, setLoading] = useState(true);
@@ -23,6 +25,7 @@ export function NotificationPreferences({ userEmail }: { userEmail: string }) {
         if (data.preferences) {
           setPrefs({
             weekly_digest: data.preferences.weekly_digest ?? false,
+            follow_up_reminders: data.preferences.follow_up_reminders ?? false,
             email: data.preferences.email || userEmail,
           });
         }
@@ -31,9 +34,9 @@ export function NotificationPreferences({ userEmail }: { userEmail: string }) {
       .finally(() => setLoading(false));
   }, [userEmail]);
 
-  const handleToggle = async () => {
-    const newValue = !prefs.weekly_digest;
-    setPrefs((p) => ({ ...p, weekly_digest: newValue }));
+  const handleToggle = async (field: 'weekly_digest' | 'follow_up_reminders') => {
+    const newValue = !prefs[field];
+    setPrefs((p) => ({ ...p, [field]: newValue }));
     setSaving(true);
     setSaved(false);
 
@@ -41,7 +44,7 @@ export function NotificationPreferences({ userEmail }: { userEmail: string }) {
       const res = await fetch('/api/notifications/preferences', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ weekly_digest: newValue, email: prefs.email }),
+        body: JSON.stringify({ [field]: newValue, email: prefs.email }),
       });
 
       if (res.ok) {
@@ -49,10 +52,10 @@ export function NotificationPreferences({ userEmail }: { userEmail: string }) {
         setTimeout(() => setSaved(false), 2000);
       } else {
         // Revert on error
-        setPrefs((p) => ({ ...p, weekly_digest: !newValue }));
+        setPrefs((p) => ({ ...p, [field]: !newValue }));
       }
     } catch {
-      setPrefs((p) => ({ ...p, weekly_digest: !newValue }));
+      setPrefs((p) => ({ ...p, [field]: !newValue }));
     } finally {
       setSaving(false);
     }
@@ -79,7 +82,7 @@ export function NotificationPreferences({ userEmail }: { userEmail: string }) {
           </p>
         </div>
         <button
-          onClick={handleToggle}
+          onClick={() => handleToggle('weekly_digest')}
           disabled={saving}
           className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 disabled:opacity-50 ${
             prefs.weekly_digest
@@ -97,7 +100,35 @@ export function NotificationPreferences({ userEmail }: { userEmail: string }) {
         </button>
       </div>
 
-      {prefs.weekly_digest && (
+      <div className="flex items-center justify-between mt-4 pt-4 border-t border-gray-100 dark:border-gray-700">
+        <div>
+          <h4 className="text-sm font-semibold text-gray-900 dark:text-white">
+            Follow-Up Reminders
+          </h4>
+          <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
+            Get reminded to follow up after 2 weeks
+          </p>
+        </div>
+        <button
+          onClick={() => handleToggle('follow_up_reminders')}
+          disabled={saving}
+          className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 disabled:opacity-50 ${
+            prefs.follow_up_reminders
+              ? 'bg-purple-600'
+              : 'bg-gray-200 dark:bg-gray-600'
+          }`}
+          role="switch"
+          aria-checked={prefs.follow_up_reminders}
+        >
+          <span
+            className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+              prefs.follow_up_reminders ? 'translate-x-6' : 'translate-x-1'
+            }`}
+          />
+        </button>
+      </div>
+
+      {(prefs.weekly_digest || prefs.follow_up_reminders) && (
         <div className="mt-3 pt-3 border-t border-gray-100 dark:border-gray-700">
           <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">
             Email
@@ -111,14 +142,18 @@ export function NotificationPreferences({ userEmail }: { userEmail: string }) {
                 await fetch('/api/notifications/preferences', {
                   method: 'PUT',
                   headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify({ weekly_digest: prefs.weekly_digest, email: prefs.email }),
+                  body: JSON.stringify({
+                    weekly_digest: prefs.weekly_digest,
+                    follow_up_reminders: prefs.follow_up_reminders,
+                    email: prefs.email,
+                  }),
                 });
               }
             }}
             className="w-full px-3 py-1.5 text-sm border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-purple-600"
           />
           <p className="text-[10px] text-gray-400 dark:text-gray-500 mt-1">
-            Sent Mondays at 9am ET. You can unsubscribe anytime.
+            Digest sent Mondays at 9am ET. Follow-ups sent Wednesdays at 10am ET. You can unsubscribe anytime.
           </p>
         </div>
       )}

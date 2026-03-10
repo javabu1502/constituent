@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase';
 import { createCampaignSchema, parseBody } from '@/lib/schemas';
+import { profileLimiter, getClientIp } from '@/lib/rate-limit';
 
 function slugify(text: string): string {
   return text
@@ -24,6 +25,12 @@ export async function POST(request: NextRequest) {
 
   if (!user) {
     return NextResponse.json({ error: 'Authentication required' }, { status: 401 });
+  }
+
+  const ip = getClientIp(request);
+  const { success, retryAfter } = profileLimiter.check(ip);
+  if (!success) {
+    return NextResponse.json({ error: 'Too many requests' }, { status: 429, headers: { 'Retry-After': String(retryAfter) } });
   }
 
   let raw: unknown;

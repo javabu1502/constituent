@@ -37,7 +37,7 @@ export async function GET(
 
   // If creator, include analytics
   if (isCreator) {
-    const [messagesResult, actionsResult, statesResult, recentActionsResult] = await Promise.all([
+    const [messagesResult, actionsResult, statesResult, recentActionsResult, dailyCountsResult, deliveryBreakdownResult] = await Promise.all([
       admin
         .from('messages')
         .select('id', { count: 'exact', head: true })
@@ -56,19 +56,62 @@ export async function GET(
         .eq('campaign_id', campaign.id)
         .order('created_at', { ascending: false })
         .limit(50),
+      // Daily counts (last 30 days)
+      admin
+        .from('campaign_actions')
+        .select('created_at')
+        .eq('campaign_id', campaign.id)
+        .gte('created_at', new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString()),
+      // Delivery breakdown
+      admin
+        .from('messages')
+        .select('delivery_method')
+        .eq('campaign_id', campaign.id),
     ]);
+
+    // Daily counts
+    const dailyCounts: Record<string, number> = {};
+    for (const action of dailyCountsResult.data || []) {
+      const date = new Date(action.created_at).toISOString().split('T')[0];
+      dailyCounts[date] = (dailyCounts[date] || 0) + 1;
+    }
+
+    // Delivery breakdown
+    const deliveryBreakdown: Record<string, number> = {};
+    for (const msg of deliveryBreakdownResult.data || []) {
+      const method = msg.delivery_method || 'unknown';
+      deliveryBreakdown[method] = (deliveryBreakdown[method] || 0) + 1;
+    }
+
+    // Top states
+    const stateCounts: Record<string, number> = {};
+    for (const action of statesResult.data || []) {
+      const state = action.participant_state;
+      stateCounts[state] = (stateCounts[state] || 0) + 1;
+    }
+    const topStates = Object.entries(stateCounts)
+      .map(([state, count]) => ({ state, count }))
+      .sort((a, b) => b.count - a.count)
+      .slice(0, 10);
 
     const statesSet = new Set(
       (statesResult.data || []).map((a: { participant_state: string }) => a.participant_state)
     );
 
+    const totalMessages = messagesResult.count || 0;
+    const totalActions = actionsResult.count || 0;
+
     return NextResponse.json({
       ...campaign,
       analytics: {
-        total_actions: actionsResult.count || 0,
-        total_messages: messagesResult.count || 0,
+        total_actions: totalActions,
+        total_messages: totalMessages,
         states_represented: Array.from(statesSet),
         recent_actions: recentActionsResult.data || [],
+        daily_counts: dailyCounts,
+        delivery_breakdown: deliveryBreakdown,
+        top_states: topStates,
+        avg_messages_per_action: totalActions > 0 ? Math.round((totalMessages / totalActions) * 10) / 10 : 0,
       },
     });
   }

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createAdminClient } from '@/lib/supabase';
+import { writeLimiter, getClientIp } from '@/lib/rate-limit';
 
 /**
  * POST /api/campaigns/[slug]/participate
@@ -9,6 +10,12 @@ export async function POST(
   request: NextRequest,
   { params }: { params: Promise<{ slug: string }> }
 ) {
+  const ip = getClientIp(request);
+  const { success, retryAfter } = writeLimiter.check(ip);
+  if (!success) {
+    return NextResponse.json({ error: 'Too many requests' }, { status: 429, headers: { 'Retry-After': String(retryAfter) } });
+  }
+
   const { slug } = await params;
 
   let body: {

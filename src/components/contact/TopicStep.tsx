@@ -33,7 +33,7 @@ function OfficialBadge({ official }: { official: Official }) {
   return (
     <div className="p-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-700">
       <div className="flex items-center gap-2 mb-0.5">
-        <span className={`px-2 py-0.5 text-xs font-medium rounded-full ${partyColors.bg} ${partyColors.text}`}>
+        <span aria-label={official.party} className={`px-2 py-0.5 text-xs font-medium rounded-full ${partyColors.bg} ${partyColors.text}`}>
           {official.party.charAt(0)}
         </span>
       </div>

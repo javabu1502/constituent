@@ -7,6 +7,7 @@ import {
 } from '@/lib/legislators';
 import { findStateLegislators } from '@/lib/state-legislators';
 import { fetchLocalOfficials } from '@/lib/civic-api';
+import { lookupLimiter, getClientIp } from '@/lib/rate-limit';
 import type { Official, LookupResult, ApiError } from '@/lib/types';
 
 /**
@@ -17,6 +18,12 @@ import type { Official, LookupResult, ApiError } from '@/lib/types';
  * Response: { officials, address, warning? }
  */
 export async function POST(request: NextRequest): Promise<NextResponse<LookupResult | ApiError>> {
+  const ip = getClientIp(request);
+  const { success, retryAfter } = lookupLimiter.check(ip);
+  if (!success) {
+    return NextResponse.json({ error: 'Too many requests', code: 'RATE_LIMITED' }, { status: 429, headers: { 'Retry-After': String(retryAfter) } });
+  }
+
   // Parse request body
   let body: { street: string; city: string; state: string; zip?: string };
   try {

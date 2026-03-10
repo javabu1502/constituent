@@ -61,3 +61,6 @@ export const chatLimiter = rateLimit({ windowMs: 60_000, maxRequests: 20 });    
 export const researchLimiter = rateLimit({ windowMs: 60_000, maxRequests: 10 });    // streaming research
 export const generateLimiter = rateLimit({ windowMs: 60_000, maxRequests: 5 });     // expensive generation
 export const summaryLimiter = rateLimit({ windowMs: 60_000, maxRequests: 15 });     // has Supabase cache
+export const writeLimiter = rateLimit({ windowMs: 60_000, maxRequests: 10 });      // track-send, message-feedback, participate
+export const lookupLimiter = rateLimit({ windowMs: 60_000, maxRequests: 15 });     // representatives
+export const profileLimiter = rateLimit({ windowMs: 60_000, maxRequests: 10 });    // profile, campaigns
