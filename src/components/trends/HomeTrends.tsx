@@ -107,8 +107,8 @@ export function HomeTrends() {
                   className="inline-flex items-center gap-1.5 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-full px-3 py-1.5 hover:border-purple-300 dark:hover:border-purple-600 transition-colors"
                 >
                   <span className={`w-2 h-2 rounded-full ${
-                    rep.party === 'Democratic' ? 'bg-blue-500' :
-                    rep.party === 'Republican' ? 'bg-red-500' :
+                    rep.party.startsWith('Democrat') ? 'bg-blue-500' :
+                    rep.party.startsWith('Republican') ? 'bg-red-500' :
                     'bg-gray-400'
                   }`} />
                   <span className="text-sm font-medium text-gray-900 dark:text-white">{rep.name}</span>
