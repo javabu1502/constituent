@@ -27,6 +27,7 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
   const { selectedReps, userName, issue, ask, personalWhy, messages, contactMethod, address } = state;
   const [reviewIndex, setReviewIndex] = useState(0);
   const [isGenerating, setIsGenerating] = useState(false);
+  const [feedback, setFeedback] = useState<Record<string, 'positive' | 'negative'>>({});
   const { getToken, TurnstileWidget } = useTurnstile();
 
   const currentRep = selectedReps[reviewIndex];
@@ -113,6 +114,121 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
     } finally {
       setIsGenerating(false);
     }
+  };
+
+  const regenerateSingle = async (rep: typeof selectedReps[0]) => {
+    dispatch({ type: 'SET_LOADING_ID', payload: { officialId: rep.name, loading: true } });
+    dispatch({ type: 'SET_ERROR', payload: null });
+
+    try {
+      const turnstileToken = await getToken();
+      const response = await fetch('/api/generate-message', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          officials: [{
+            name: rep.name,
+            lastName: rep.lastName,
+            stafferFirstName: rep.stafferFirstName,
+            bioguideId: rep.level === 'federal' ? rep.id : undefined,
+            title: rep.title,
+            party: rep.party,
+            state: rep.state,
+            level: rep.level,
+            district: rep.district,
+          }],
+          issue: issue.trim(),
+          issueCategory: state.issueCategory || undefined,
+          ask: ask.trim(),
+          personalWhy: personalWhy.trim() || undefined,
+          senderName: userName,
+          address: address ? {
+            street: address.street,
+            city: address.city,
+            state: address.state,
+            zip: address.zip,
+          } : undefined,
+          contactMethod,
+          tone: state.tone,
+          turnstileToken: turnstileToken || undefined,
+        }),
+      });
+
+      if (!response.ok) {
+        const data = await response.json().catch(() => ({ error: 'Failed to regenerate message' }));
+        throw new Error(data.error || 'Failed to regenerate message');
+      }
+
+      const reader = response.body?.getReader();
+      if (!reader) throw new Error('No response stream');
+
+      const decoder = new TextDecoder();
+      let buffer = '';
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        buffer += decoder.decode(value, { stream: true });
+        const lines = buffer.split('\n');
+        buffer = lines.pop() || '';
+
+        for (const line of lines) {
+          if (!line.startsWith('data: ')) continue;
+          const data = line.slice(6).trim();
+          if (data === '[DONE]') continue;
+
+          try {
+            const msg = JSON.parse(data) as { officialName: string; subject: string; body: string };
+            dispatch({
+              type: 'SET_MESSAGE',
+              payload: { officialName: msg.officialName, message: { subject: msg.subject, body: msg.body } },
+            });
+          } catch {
+            // Skip malformed lines
+          }
+        }
+      }
+    } catch (err) {
+      console.error('Error regenerating message:', err);
+      dispatch({ type: 'SET_ERROR', payload: err instanceof Error ? err.message : 'Failed to regenerate message' });
+    } finally {
+      dispatch({ type: 'SET_LOADING_ID', payload: { officialId: rep.name, loading: false } });
+      // Clear feedback for this rep since the message changed
+      setFeedback(prev => {
+        const next = { ...prev };
+        delete next[rep.name];
+        return next;
+      });
+    }
+  };
+
+  const computeMessageHash = (party: string, issueCategory: string, tone: string): string => {
+    const str = `${party}|${issueCategory}|${tone}`;
+    let hash = 5381;
+    for (let i = 0; i < str.length; i++) {
+      hash = ((hash << 5) + hash + str.charCodeAt(i)) & 0xffffffff;
+    }
+    return Math.abs(hash).toString(36);
+  };
+
+  const submitFeedback = (rep: typeof selectedReps[0], rating: 'positive' | 'negative') => {
+    setFeedback(prev => ({ ...prev, [rep.name]: rating }));
+    fetch('/api/message-feedback', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        messageHash: computeMessageHash(rep.party, state.issueCategory || '', state.tone),
+        officialName: rep.name,
+        officialParty: rep.party,
+        issueCategory: state.issueCategory || undefined,
+        tone: state.tone,
+        contactMethod,
+        rating,
+      }),
+    }).catch(() => {
+      // Fire-and-forget — don't block the user
+    });
   };
 
   // Generate messages on mount if not already present
@@ -245,7 +361,9 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
                 <span className="truncate max-w-[100px]">
                   {rep.lastName || rep.name.split(' ').pop()}
                 </span>
-                {hasMessage ? (
+                {state.loadingIds.has(rep.name) ? (
+                  <div className="w-4 h-4 border-2 border-gray-300 dark:border-gray-500 rounded-full animate-spin border-t-purple-600" />
+                ) : hasMessage ? (
                   <svg className="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
@@ -322,6 +440,54 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
               rows={contactMethod === 'phone' ? 6 : 8}
               className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent resize-none font-mono text-sm leading-relaxed bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
             />
+            {/* Regenerate + Feedback row */}
+            <div className="flex items-center justify-between mt-2">
+              {/* Feedback */}
+              <div className="flex items-center gap-1">
+                {currentRep && feedback[currentRep.name] ? (
+                  <span className="text-xs text-gray-500 dark:text-gray-400">Thanks!</span>
+                ) : currentRep ? (
+                  <>
+                    <span className="text-xs text-gray-500 dark:text-gray-400 mr-1">Helpful?</span>
+                    <button
+                      onClick={() => currentRep && submitFeedback(currentRep, 'positive')}
+                      className="p-1 text-gray-400 hover:text-green-600 dark:hover:text-green-400 transition-colors"
+                      title="Yes, helpful"
+                    >
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5" />
+                      </svg>
+                    </button>
+                    <button
+                      onClick={() => currentRep && submitFeedback(currentRep, 'negative')}
+                      className="p-1 text-gray-400 hover:text-red-600 dark:hover:text-red-400 transition-colors"
+                      title="No, not helpful"
+                    >
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 14H5.236a2 2 0 01-1.789-2.894l3.5-7A2 2 0 018.736 3h4.018c.163 0 .326.02.485.06L17 4m-7 10v2a3.5 3.5 0 003.5 3.5h.095a.905.905 0 00.905-.905c0-.714.211-1.412.608-2.006L17 13V4m-7 10h2m5-6h2a2 2 0 012 2v6a2 2 0 01-2 2h-2.5" />
+                      </svg>
+                    </button>
+                  </>
+                ) : null}
+              </div>
+              {/* Regenerate */}
+              {currentRep && (
+                <button
+                  onClick={() => regenerateSingle(currentRep)}
+                  disabled={state.loadingIds.has(currentRep.name)}
+                  className="flex items-center gap-1 text-sm font-medium text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                >
+                  {state.loadingIds.has(currentRep.name) ? (
+                    <div className="w-4 h-4 border-2 border-purple-200 dark:border-purple-700 rounded-full animate-spin border-t-purple-600" />
+                  ) : (
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                    </svg>
+                  )}
+                  Regenerate
+                </button>
+              )}
+            </div>
           </div>
         </>
       )}

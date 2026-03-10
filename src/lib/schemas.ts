@@ -89,6 +89,24 @@ export const generateCommentSchema = z.object({
   turnstileToken: z.string().optional(),
 });
 
+export const messageFeedbackSchema = z.object({
+  messageHash: z.string().min(1).max(100),
+  officialName: z.string().min(1).max(200),
+  officialParty: z.string().max(50).optional(),
+  issueCategory: z.string().max(200).optional(),
+  tone: z.string().max(50).optional(),
+  contactMethod: z.string().max(20).optional(),
+  rating: z.enum(['positive', 'negative']),
+});
+
+export const generateFollowUpSchema = z.object({
+  originalMessageId: z.string().uuid(),
+  followUpType: z.enum(['no_response', 'thank_you']),
+  senderName: z.string().min(1).max(200),
+  additionalContext: z.string().max(1000).optional(),
+  turnstileToken: z.string().optional(),
+});
+
 export const profileUpdateSchema = z
   .object({
     street: z.string().min(1).max(200).optional(),

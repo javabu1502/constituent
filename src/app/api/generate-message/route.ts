@@ -3,7 +3,9 @@ import { stripTags, extractJSON, cleanText } from '@/lib/claude';
 import { getCommitteesForMember, getFederalLegislatorBio } from '@/lib/legislators';
 import { getTopicContext, type TopicInfo } from '@/data/topic-content';
 import { fetchHouseVotes, fetchSenateVotes } from '@/lib/votes';
+import { fetchLegiscanVotes } from '@/lib/legiscan-api';
 import { fetchDistrictDemographics } from '@/lib/census-api';
+import { detectBillReferences, fetchFederalBillDetails, fetchStateBillDetails, buildBillDetailsBlock } from '@/lib/bill-detection';
 import { z } from 'zod';
 import { generateMessageSchema, parseBody } from '@/lib/schemas';
 import { generateLimiter, getClientIp } from '@/lib/rate-limit';
@@ -136,7 +138,60 @@ async function fetchRelevantVotes(
   issue: string,
   issueCategory: string | undefined,
 ): Promise<string> {
-  if (official.level === 'state' || !official.bioguideId) return '';
+  // State legislator vote data via LegiScan
+  if (official.level === 'state') {
+    if (!process.env.LEGISCAN_API_KEY) return '';
+
+    try {
+      const titleLower = official.title.toLowerCase();
+      const chamber = titleLower.includes('senator') ? 'upper' : 'lower';
+      const personId = official.bioguideId || `state-${official.state}-${official.name.replace(/\s+/g, '-')}`;
+
+      const result = await fetchLegiscanVotes(
+        official.state,
+        official.name,
+        official.lastName,
+        chamber,
+        personId,
+      );
+
+      if (!result?.votes || result.votes.length === 0) return '';
+
+      // Keyword-match scoring (same as federal)
+      const keywords = [
+        ...issue.toLowerCase().split(/\s+/),
+        ...(issueCategory ? issueCategory.toLowerCase().split(/\s+/) : []),
+      ].filter(w => w.length > 3);
+
+      const scored = result.votes
+        .map(v => {
+          const searchText = [v.question, v.description, v.bill_title || ''].join(' ').toLowerCase();
+          const matches = keywords.filter(kw => searchText.includes(kw)).length;
+          return { vote: v, matches };
+        })
+        .filter(s => s.matches > 0)
+        .sort((a, b) => b.matches - a.matches)
+        .slice(0, 3);
+
+      if (scored.length === 0) return '';
+
+      const lines = scored.map(({ vote: v }) => {
+        const pos = v.rep_position || 'Unknown';
+        const dateStr = v.date ? ` (${new Date(v.date).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })})` : '';
+        const resultStr = v.result ? ` — ${v.result}` : '';
+        const billStr = v.bill_number ? `${v.bill_number} ` : '';
+        const title = v.bill_title || v.question;
+        return `• Voted ${pos} on ${billStr}"${title}"${dateStr}${resultStr}`;
+      });
+
+      return `\nSTATE VOTING RECORD ON THIS ISSUE:\n${lines.join('\n')}`;
+    } catch (err) {
+      console.warn(`[generate-message] State vote fetch failed for ${official.name}:`, err);
+      return '';
+    }
+  }
+
+  if (!official.bioguideId) return '';
 
   const bio = getFederalLegislatorBio(official.bioguideId);
   if (!bio || bio.terms.length === 0) return '';
@@ -251,6 +306,7 @@ async function generateForOfficial(
   voteContext?: string,
   districtContext?: string,
   tone: Tone = 'professional',
+  billDetails?: string,
 ): Promise<OfficialMessage> {
   const isState = official.level === 'state';
   const titleLower = official.title.toLowerCase();
@@ -296,6 +352,10 @@ async function generateForOfficial(
     ? `\n- If DISTRICT DATA is provided, ground arguments in local impact — e.g. "With a poverty rate of 11.2% in our district..." or "The 780,000 residents of this district..."`
     : '';
 
+  const billInstructions = billDetails
+    ? `\n- If BILL DETAILS are provided, reference the specific bill by number and title.`
+    : '';
+
   const toneInstructions = buildToneInstructions(tone);
 
   const emailSystemPrompt = `You are an expert constituent letter writer. Write a compelling, personalized letter from a constituent to ONE specific elected official.
@@ -314,7 +374,7 @@ Writing guidelines:
 - Keep the letter between 200-300 words
 - Do NOT include a greeting line (no "Dear Senator") or signature block (no "Sincerely") — the app handles those
 - Write in first person
-- Be direct and specific to THIS official, not generic${stafferNote}${stateNote}${voteInstructions}${districtInstructions}${toneInstructions}
+- Be direct and specific to THIS official, not generic${stafferNote}${stateNote}${voteInstructions}${districtInstructions}${billInstructions}${toneInstructions}
 
 DATA-DRIVEN WRITING:
 - Use specific numbers from the KEY STATISTICS provided — they add credibility
@@ -349,7 +409,7 @@ Writing guidelines:
 - If the official likely SUPPORTS the position: acknowledge that and urge continued action
 - If the official likely OPPOSES it: respectfully urge reconsideration
 - Work ONE key statistic into the script naturally — e.g. "I'm concerned because over 48,000 Americans die from gun violence each year"
-- End with a clear, specific ask — not a vague "please consider"${stateNote ? stateNote.replace('email', 'call') : ''}${voteInstructions}${districtInstructions}${toneInstructions}
+- End with a clear, specific ask — not a vague "please consider"${stateNote ? stateNote.replace('email', 'call') : ''}${voteInstructions}${districtInstructions}${billInstructions}${toneInstructions}
 
 DATA-DRIVEN WRITING:
 - Use specific numbers from the KEY STATISTICS provided — they add credibility
@@ -394,12 +454,13 @@ CRITICAL: Respond with ONLY a JSON object. No other text.`;
   const topicDataSection = topicData ? `\n${topicData}` : '';
   const voteSection = voteContext || '';
   const districtSection = districtContext || '';
+  const billDataSection = billDetails || '';
 
   const emailUserPrompt = `Write a letter to this specific official:
 
 OFFICIAL: ${official.name} (${official.title}, ${official.party}, ${official.state})
 
-ISSUE: ${issue}${topicDataSection}${voteSection}${districtSection}
+ISSUE: ${issue}${topicDataSection}${billDataSection}${voteSection}${districtSection}
 WHAT I WANT: ${ask}${personalWhy ? `\nMY PERSONAL STORY: ${personalWhy}` : ''}
 SENDER: ${senderName}${locationStr ? ` from ${locationStr}` : ''}${tailoringBlock}
 
@@ -410,7 +471,7 @@ Respond with ONLY this JSON:
 
 OFFICIAL: ${official.name} (${official.title}, ${official.party}, ${official.state})
 
-ISSUE: ${issue}${topicDataSection}${voteSection}${districtSection}
+ISSUE: ${issue}${topicDataSection}${billDataSection}${voteSection}${districtSection}
 WHAT I WANT: ${ask}${personalWhy ? `\nMY PERSONAL STORY: ${personalWhy}` : ''}
 SENDER: ${senderName}${locationStr ? ` from ${locationStr}` : ''}${tailoringBlock}
 
@@ -578,6 +639,27 @@ export async function POST(request: NextRequest) {
     }
   }
 
+  // Detect and fetch bill details
+  let billDetailsBlock = '';
+  try {
+    const billRefs = detectBillReferences(`${issue} ${ask}`);
+    if (billRefs.length > 0) {
+      const billPromises = billRefs.slice(0, 3).map(async (ref) => {
+        if (ref.level === 'federal') {
+          return fetchFederalBillDetails(ref.type, ref.number);
+        }
+        // State bill — pass state from first official if available
+        const state = officials[0]?.state;
+        return fetchStateBillDetails(ref.raw, state);
+      });
+      const billResults = await Promise.all(billPromises);
+      const validBills = billResults.filter((b): b is NonNullable<typeof b> => b !== null);
+      billDetailsBlock = buildBillDetailsBlock(validBills);
+    }
+  } catch (err) {
+    console.warn('[generate-message] Bill detection failed:', err);
+  }
+
   // --- Feature 2: SSE streaming ---
   const encoder = new TextEncoder();
   const stream = new ReadableStream({
@@ -598,7 +680,7 @@ export async function POST(request: NextRequest) {
 
             const result = await generateForOfficial(
               apiKey, official, issue, ask, personalWhy, senderName, address, method,
-              topicDataBlock, voteContext, districtContext, selectedTone,
+              topicDataBlock, voteContext, districtContext, selectedTone, billDetailsBlock,
             );
             enqueueMessage(result);
             return result;

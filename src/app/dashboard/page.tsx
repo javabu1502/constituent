@@ -14,6 +14,7 @@ import { CollapsibleSection } from '@/components/ui/CollapsibleSection';
 import { GettingStartedChecklist } from '@/components/dashboard/GettingStartedChecklist';
 import { WelcomeTour } from '@/components/dashboard/WelcomeTour';
 import { NotificationPreferences } from '@/components/dashboard/NotificationPreferences';
+import { FollowUpButton } from '@/components/dashboard/FollowUpButton';
 
 export const metadata: Metadata = {
   title: 'Dashboard | My Democracy',
@@ -232,6 +233,15 @@ export default async function DashboardPage() {
                     <p className="text-sm text-gray-700 dark:text-gray-300 line-clamp-2">
                       {truncate(msg.message_body, 200)}
                     </p>
+                    <div className="mt-2">
+                      <FollowUpButton
+                        messageId={msg.id}
+                        officialName={msg.legislator_name}
+                        issueArea={msg.issue_area}
+                        deliveryMethod={msg.delivery_method}
+                        senderName={profile?.name || ''}
+                      />
+                    </div>
                   </div>
                 );
               })}
