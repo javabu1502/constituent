@@ -178,7 +178,7 @@ export default async function DashboardPage() {
 
       {/* SECONDARY sections */}
       <div className="mb-10">
-        <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500 mb-4">More</h3>
+        <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-4">More</h3>
 
         {/* My Messages */}
         <CollapsibleSection title="Messages I've Sent" badge={totalMessages > 0 ? `${totalMessages}` : undefined} defaultOpen={false}>

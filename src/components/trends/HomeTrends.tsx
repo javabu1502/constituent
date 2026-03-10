@@ -69,7 +69,7 @@ export function HomeTrends() {
                 key={issue.issue_area}
                 className="bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-3 flex items-center gap-3"
               >
-                <span className="text-sm font-medium text-gray-400 dark:text-gray-500 w-6 text-right shrink-0">
+                <span className="text-sm font-medium text-gray-500 dark:text-gray-400 w-6 text-right shrink-0">
                   {i + 1}
                 </span>
                 <div className="flex-1 min-w-0">
@@ -112,7 +112,7 @@ export function HomeTrends() {
                     'bg-gray-400'
                   }`} />
                   <span className="text-sm font-medium text-gray-900 dark:text-white">{rep.name}</span>
-                  <span className="text-xs text-gray-400 dark:text-gray-500">
+                  <span className="text-xs text-gray-500 dark:text-gray-400">
                     {rep.chamber === 'Senate' ? 'Sen.' : 'Rep.'}
                   </span>
                 </Link>

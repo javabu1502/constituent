@@ -40,7 +40,7 @@ export function Footer() {
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-8 mb-8">
           {FOOTER_COLUMNS.map((col) => (
             <div key={col.heading}>
-              <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500 mb-3">
+              <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-3">
                 {col.heading}
               </h3>
               <ul className="space-y-1 text-sm">
@@ -73,7 +73,7 @@ export function Footer() {
           <span className="text-sm text-gray-600 dark:text-gray-400">
             {BRAND.name} &copy; {currentYear}
           </span>
-          <p className="mt-1 text-xs text-gray-400 dark:text-gray-500">
+          <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
             {BRAND.description}
           </p>
         </div>

@@ -139,7 +139,7 @@ export function StatePicker() {
                 }`}
               >
                 <span>{s.name}</span>
-                <span className="text-xs text-gray-400 dark:text-gray-500">{s.code}</span>
+                <span className="text-xs text-gray-500 dark:text-gray-400">{s.code}</span>
               </li>
             ))}
           </ul>
@@ -154,7 +154,7 @@ export function StatePicker() {
 
       {/* Popular state quick-links */}
       <div className="flex flex-wrap items-center gap-2 mt-3">
-        <span className="text-xs text-gray-400 dark:text-gray-500">Popular:</span>
+        <span className="text-xs text-gray-500 dark:text-gray-400">Popular:</span>
         {POPULAR_STATES.map((code) => {
           const state = US_STATES.find((s) => s.code === code)!;
           return (
