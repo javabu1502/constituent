@@ -163,6 +163,24 @@ export const GUIDES: GuideEntry[] = [
     href: '/guides/state-vs-federal-power',
     category: 'understanding-government',
   },
+  {
+    title: 'How Impeachment Works',
+    description: 'How the impeachment process works — from House investigation and articles of impeachment to the Senate trial and historical examples.',
+    href: '/guides/how-impeachment-works',
+    category: 'understanding-government',
+  },
+  {
+    title: 'How the Census Works',
+    description: 'How the US Census works, why it matters for representation and federal funding, and how to make your community count.',
+    href: '/guides/how-the-census-works',
+    category: 'understanding-government',
+  },
+  {
+    title: 'How Local Government Works',
+    description: 'City councils, county boards, school boards, and special districts — how local government works and how to get involved.',
+    href: '/guides/how-local-government-works',
+    category: 'understanding-government',
+  },
 
   // Elections & Voting
   {
@@ -193,6 +211,12 @@ export const GUIDES: GuideEntry[] = [
     title: 'What Are Ballot Measures and How Should I Vote on Them?',
     description: 'Understand initiatives, referendums, and propositions — how they work and how to evaluate them before you vote.',
     href: '/guides/ballot-measures',
+    category: 'elections-voting',
+  },
+  {
+    title: 'How Primaries and Caucuses Work',
+    description: 'Understand the difference between primaries and caucuses, how delegates are allocated, and how to participate in your state.',
+    href: '/guides/how-primaries-and-caucuses-work',
     category: 'elections-voting',
   },
 
