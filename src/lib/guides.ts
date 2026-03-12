@@ -128,6 +128,18 @@ export const GUIDES: GuideEntry[] = [
     category: 'understanding-government',
   },
   {
+    title: 'The Federal Budget Process',
+    description: 'A step-by-step walkthrough of how the federal budget is created — from the President\'s proposal through appropriations, reconciliation, and the debt ceiling.',
+    href: '/guides/federal-budget-process',
+    category: 'understanding-government',
+  },
+  {
+    title: 'What Is the Electoral College and How Does It Work?',
+    description: 'How the Electoral College works, why it exists, how electors are chosen, and what it means for your vote in presidential elections.',
+    href: '/guides/what-is-the-electoral-college',
+    category: 'understanding-government',
+  },
+  {
     title: 'What Is Gerrymandering and How Does It Affect You?',
     description: 'How redistricting works, the effects of gerrymandering on elections, and what you can do about it.',
     href: '/guides/what-is-gerrymandering',
