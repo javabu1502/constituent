@@ -12,7 +12,6 @@ const GENERAL_SUGGESTIONS = [
 ];
 
 const INTERVIEW_SUGGESTIONS = [
-  'I want to write about healthcare',
   'Something in my community needs to change',
   'I\'m not sure where to start',
   'I have a story I want to share',
