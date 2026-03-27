@@ -61,6 +61,7 @@ export async function POST(request: NextRequest) {
       issue_subtopic: issue_subtopic || null,
       target_level,
       message_template: message_template || null,
+      status: 'pending',
     })
     .select()
     .single();

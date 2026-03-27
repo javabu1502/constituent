@@ -19,6 +19,7 @@ export function CampaignForm() {
   const [messageTemplate, setMessageTemplate] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -60,12 +61,30 @@ export function CampaignForm() {
       }
 
       trackEvent('campaign_created', { issue: issueArea });
-      router.push(`/campaign/${data.slug}`);
+      setSubmitted(true);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to create campaign');
       setIsSubmitting(false);
     }
   };
+
+  if (submitted) {
+    return (
+      <div className="text-center py-8">
+        <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-yellow-100 dark:bg-yellow-900/30 flex items-center justify-center">
+          <svg className="w-8 h-8 text-yellow-600 dark:text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+        <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Campaign Submitted for Review</h3>
+        <p className="text-gray-600 dark:text-gray-300 mb-6">
+          Your campaign has been submitted and is pending approval. We review campaigns to ensure quality and safety. You&apos;ll be able to see its status on your{' '}
+          <Link href="/dashboard" className="text-purple-600 dark:text-purple-400 underline hover:text-purple-800 dark:hover:text-purple-200">dashboard</Link>.
+        </p>
+        <Button onClick={() => router.push('/dashboard')} variant="secondary">Go to Dashboard</Button>
+      </div>
+    );
+  }
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">

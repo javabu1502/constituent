@@ -17,6 +17,7 @@ export async function GET(request: NextRequest) {
   let query = admin
     .from('campaigns')
     .select('id, slug, headline, description, issue_area, action_count, created_at')
+    .eq('status', 'active')
     .order(sort === 'popular' ? 'action_count' : 'created_at', { ascending: false })
     .limit(limit);
 
