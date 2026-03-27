@@ -45,6 +45,12 @@ function renderContent(content: string) {
 export function ChatMessage({ role, content, isStreaming }: ChatMessageProps) {
   const isUser = role === 'user';
 
+  // Hide JSON code blocks from interview results — the UI handles the handoff
+  const displayContent = content.replace(/```json\s*[\s\S]*?```/g, '').trim();
+
+  // If the entire message was just JSON, don't render an empty bubble
+  if (!isUser && !displayContent && !isStreaming) return null;
+
   return (
     <div className={cn('flex mb-3', isUser ? 'justify-end' : 'justify-start')}>
       <div
@@ -55,7 +61,7 @@ export function ChatMessage({ role, content, isStreaming }: ChatMessageProps) {
             : 'bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-bl-md'
         )}
       >
-        {renderContent(content)}
+        {renderContent(displayContent)}
         {isStreaming && !content && (
           <span className="inline-block w-2 h-4 bg-gray-400 dark:bg-gray-500 animate-pulse rounded-sm" />
         )}

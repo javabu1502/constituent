@@ -3,6 +3,59 @@ import { INTERVIEW_SYSTEM_PROMPT } from '@/lib/interview-system-prompt';
 import { chatRequestSchema, parseBody } from '@/lib/schemas';
 import { chatLimiter, dailyChatCap, getClientIp } from '@/lib/rate-limit';
 import { verifyTurnstile } from '@/lib/turnstile';
+import { buildResearchContext } from '@/lib/research';
+
+/**
+ * Scan conversation to extract the issue category once it emerges.
+ * Looks for common civic issue keywords in user + assistant messages.
+ */
+const ISSUE_CATEGORIES: Record<string, string[]> = {
+  'Healthcare': ['healthcare', 'health care', 'insurance', 'medical', 'hospital', 'medicare', 'medicaid', 'prescription', 'drug prices', 'mental health'],
+  'Education': ['education', 'school', 'student', 'teacher', 'college', 'university', 'tuition', 'student loan'],
+  'Environment': ['environment', 'climate', 'pollution', 'clean energy', 'renewable', 'emissions', 'water quality', 'conservation'],
+  'Housing': ['housing', 'rent', 'affordable housing', 'homeless', 'mortgage', 'eviction', 'zoning'],
+  'Immigration': ['immigration', 'immigrant', 'border', 'visa', 'asylum', 'daca', 'citizenship', 'deportation'],
+  'Economy': ['economy', 'jobs', 'wages', 'minimum wage', 'inflation', 'taxes', 'tax', 'unemployment', 'cost of living'],
+  'Criminal Justice': ['criminal justice', 'police', 'prison', 'incarceration', 'sentencing', 'bail', 'reform'],
+  'Gun Policy': ['gun', 'firearm', 'second amendment', 'background check', 'gun violence', 'gun control'],
+  'Veterans': ['veteran', 'military', 'va ', 'service member'],
+  'Civil Rights': ['civil rights', 'discrimination', 'voting rights', 'equality', 'lgbtq', 'disability'],
+  'Transportation': ['transportation', 'infrastructure', 'roads', 'transit', 'highway', 'bridge'],
+  'Social Security': ['social security', 'retirement', 'pension', 'seniors'],
+  'Agriculture': ['agriculture', 'farming', 'farm bill', 'food stamp', 'snap', 'rural'],
+  'Technology': ['technology', 'privacy', 'data', 'ai ', 'artificial intelligence', 'social media', 'internet'],
+};
+
+function detectIssueCategory(messages: { role: string; content: string }[]): string | null {
+  // Only look at enough messages to detect — usually by message 3-4 the issue is clear
+  const text = messages
+    .slice(0, 6)
+    .map(m => m.content.toLowerCase())
+    .join(' ');
+
+  let bestMatch: string | null = null;
+  let bestCount = 0;
+
+  for (const [category, keywords] of Object.entries(ISSUE_CATEGORIES)) {
+    const count = keywords.filter(kw => text.includes(kw)).length;
+    if (count > bestCount) {
+      bestCount = count;
+      bestMatch = category;
+    }
+  }
+
+  return bestCount > 0 ? bestMatch : null;
+}
+
+function detectSpecificIssue(messages: { role: string; content: string }[]): string {
+  // Use the first substantive user message as the issue description
+  for (const msg of messages) {
+    if (msg.role === 'user' && msg.content.length > 10) {
+      return msg.content.slice(0, 200);
+    }
+  }
+  return '';
+}
 
 export async function POST(request: Request) {
   const ip = getClientIp(request);
@@ -49,8 +102,20 @@ export async function POST(request: Request) {
     return new Response('Last message must be from user', { status: 400 });
   }
 
+  // After a few exchanges, try to enrich with real legislative data
+  let researchContext = '';
+  if (messages.length >= 3) {
+    const category = detectIssueCategory(messages);
+    if (category) {
+      const issue = detectSpecificIssue(messages);
+      researchContext = await buildResearchContext(category, issue);
+    }
+  }
+
+  const systemPrompt = INTERVIEW_SYSTEM_PROMPT + researchContext;
+
   try {
-    const stream = callClaudeStream(INTERVIEW_SYSTEM_PROMPT, messages, 800);
+    const stream = callClaudeStream(systemPrompt, messages, 800);
 
     return new Response(stream, {
       headers: {

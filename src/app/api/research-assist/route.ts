@@ -1,33 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { congressFetch } from '@/lib/congress-api';
 import { callClaudeStream } from '@/lib/claude-stream';
 import { researchLimiter, getClientIp } from '@/lib/rate-limit';
 import { verifyTurnstile } from '@/lib/turnstile';
+import { fetchRecentBills } from '@/lib/research';
 
 interface ResearchRequest {
   issue: string;
   issueCategory: string;
   ask?: string;
 }
-
-interface Bill {
-  title?: string;
-  type?: string;
-  number?: string;
-  congress?: number;
-  latestAction?: { text?: string; actionDate?: string };
-}
-
-const TYPE_TO_SLUG: Record<string, string> = {
-  hr: 'house-bill',
-  s: 'senate-bill',
-  hjres: 'house-joint-resolution',
-  sjres: 'senate-joint-resolution',
-  hconres: 'house-concurrent-resolution',
-  sconres: 'senate-concurrent-resolution',
-  hres: 'house-resolution',
-  sres: 'senate-resolution',
-};
 
 const SYSTEM_PROMPT = `You are a nonpartisan legislative research assistant. The user is writing to their representative about a specific issue. Help them strengthen their message with factual research.
 
@@ -42,37 +23,6 @@ Given the user's issue and desired action, provide:
 When citing legislation, use markdown link format: [Bill Number - Title](url). The bill URLs are provided in the context data. Always include clickable links for any bill you reference.
 
 Keep the total response under 250 words. Use markdown: **bold** for section headers, - for bullet points, **bold** within bullets for emphasis on key facts. Be factual and specific — no vague platitudes.`;
-
-async function fetchRecentBills(policyArea: string): Promise<string> {
-  const apiKey = process.env.CONGRESS_API_KEY;
-  if (!apiKey) return '';
-
-  try {
-    const url = `https://api.congress.gov/v3/bill?policyArea=${encodeURIComponent(policyArea)}&sort=updateDate+desc&limit=5&api_key=${apiKey}`;
-    const res = await congressFetch(url);
-    if (!res.ok) return '';
-
-    const data = await res.json();
-    const bills: Bill[] = data.bills ?? [];
-    if (bills.length === 0) return '';
-
-    const lines = bills.map((b) => {
-      const num = b.type && b.number ? `${b.type.toUpperCase()} ${b.number}` : '';
-      const action = b.latestAction?.text ?? '';
-      const slug = b.type ? TYPE_TO_SLUG[b.type.toLowerCase()] : null;
-      const congress = b.congress ?? 119;
-      const url = slug && b.number
-        ? `https://www.congress.gov/bill/${congress}th-congress/${slug}/${b.number}`
-        : '';
-      const urlPart = url ? ` [View on Congress.gov](${url})` : '';
-      return `- ${num ? num + ': ' : ''}${b.title ?? 'Untitled'}${action ? ' (Latest: ' + action + ')' : ''}${urlPart}`;
-    });
-
-    return `\n\nRecent bills in Congress related to "${policyArea}":\n${lines.join('\n')}`;
-  } catch {
-    return '';
-  }
-}
 
 export async function POST(request: NextRequest) {
   const ip = getClientIp(request);
