@@ -98,12 +98,19 @@ export function useTurnstile() {
       return current;
     }
 
-    // Wait for token
+    // Wait for token with a timeout so we don't hang forever
     return new Promise((resolve) => {
       resolveRef.current = resolve;
       if (widgetIdRef.current && window.turnstile) {
         window.turnstile.reset(widgetIdRef.current);
       }
+      // If Turnstile doesn't respond in 5 seconds, proceed without token
+      setTimeout(() => {
+        if (resolveRef.current === resolve) {
+          resolveRef.current = null;
+          resolve('');
+        }
+      }, 5000);
     });
   }, [siteKey, token]);
 

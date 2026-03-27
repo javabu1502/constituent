@@ -14,6 +14,13 @@ export async function verifyTurnstile(token: string): Promise<boolean> {
     return false;
   }
 
+  // If no token was provided (widget failed to load, ad blocker, etc.),
+  // allow the request through rather than blocking the user
+  if (!token) {
+    console.warn('[turnstile] No token provided, allowing request');
+    return true;
+  }
+
   try {
     const res = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
       method: 'POST',
