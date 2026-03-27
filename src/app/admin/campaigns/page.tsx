@@ -11,6 +11,7 @@ interface CampaignItem {
   issue_area: string;
   target_level: string;
   status: string;
+  distribution_plan?: string;
   created_at: string;
 }
 
@@ -150,6 +151,12 @@ function CampaignCard({
             </span>
           </div>
           <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">{campaign.description}</p>
+          {campaign.distribution_plan && (
+            <div className="mb-2 p-2 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
+              <p className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">Distribution Plan</p>
+              <p className="text-sm text-gray-600 dark:text-gray-300">{campaign.distribution_plan}</p>
+            </div>
+          )}
           <div className="flex items-center gap-3 text-xs text-gray-500 dark:text-gray-400">
             <span>{campaign.issue_area}</span>
             <span className="capitalize">{campaign.target_level}</span>

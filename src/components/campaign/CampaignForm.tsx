@@ -17,6 +17,7 @@ export function CampaignForm() {
   const [issueCategory, setIssueCategory] = useState(searchParams.get('category') || '');
   const [targetLevel, setTargetLevel] = useState<'federal' | 'state' | 'both'>('federal');
   const [messageTemplate, setMessageTemplate] = useState('');
+  const [distributionPlan, setDistributionPlan] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
@@ -37,6 +38,10 @@ export function CampaignForm() {
       setError('Please select an issue area');
       return;
     }
+    if (!distributionPlan.trim() || distributionPlan.trim().length < 10) {
+      setError('Please describe your distribution plan (at least 10 characters)');
+      return;
+    }
 
     setIsSubmitting(true);
 
@@ -51,6 +56,7 @@ export function CampaignForm() {
           issue_subtopic: issueCategory ? issueArea : null,
           target_level: targetLevel,
           message_template: messageTemplate.trim() || null,
+          distribution_plan: distributionPlan.trim(),
         }),
       });
 
@@ -93,10 +99,7 @@ export function CampaignForm() {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
         <p className="text-sm text-purple-700 dark:text-purple-300">
-          New to campaigns?{' '}
-          <Link href="/guides/how-to-run-a-successful-campaign" className="font-medium underline hover:text-purple-900 dark:hover:text-purple-100">
-            Tips for a successful campaign
-          </Link>
+          Campaigns are reviewed before going live. Strong campaigns have a clear ask, a defined audience, and a plan for getting the word out.
         </p>
       </div>
 
@@ -199,8 +202,26 @@ export function CampaignForm() {
         </p>
       </div>
 
+      {/* Distribution Plan */}
+      <div>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          Distribution &amp; Engagement Plan <span className="text-red-500">*</span>
+        </label>
+        <textarea
+          value={distributionPlan}
+          onChange={(e) => setDistributionPlan(e.target.value)}
+          placeholder="How will you get people involved? e.g., sharing in community groups, social media outreach, partnering with local organizations..."
+          rows={4}
+          maxLength={1000}
+          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent resize-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
+        />
+        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+          Campaigns with a clear outreach strategy are more likely to be approved. ({distributionPlan.length}/1000)
+        </p>
+      </div>
+
       <Button type="submit" isLoading={isSubmitting} className="w-full" size="lg">
-        Create Campaign
+        Submit Campaign for Review
       </Button>
     </form>
   );

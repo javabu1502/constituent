@@ -45,7 +45,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: parsed.error }, { status: 400 });
   }
 
-  const { headline, description, issue_area, issue_subtopic, target_level, message_template } = parsed.data;
+  const { headline, description, issue_area, issue_subtopic, target_level, message_template, distribution_plan } = parsed.data;
 
   const slug = slugify(headline).slice(0, 50) + '-' + randomSuffix();
 
@@ -61,6 +61,7 @@ export async function POST(request: NextRequest) {
       issue_subtopic: issue_subtopic || null,
       target_level,
       message_template: message_template || null,
+      distribution_plan,
       status: 'pending',
     })
     .select()

@@ -76,6 +76,7 @@ export const createCampaignSchema = z.object({
   issue_subtopic: z.string().max(200).optional(),
   target_level: z.enum(['federal', 'state', 'both']),
   message_template: z.string().max(2000).optional(),
+  distribution_plan: z.string().min(10).max(1000),
 });
 
 export const generateCommentSchema = z.object({
@@ -119,6 +120,13 @@ export const profileUpdateSchema = z
   .refine((data) => Object.values(data).some((v) => v !== undefined), {
     message: 'At least one field is required',
   });
+
+export const campaignParticipateSchema = z.object({
+  participant_name: z.string().min(1).max(200),
+  participant_city: z.string().min(1).max(100),
+  participant_state: z.string().min(1).max(50),
+  messages_sent: z.number().int().min(0).max(1000).optional(),
+});
 
 // --- Helper ---
 
