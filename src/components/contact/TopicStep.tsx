@@ -9,6 +9,7 @@ import { useTurnstile } from '@/components/ui/Turnstile';
 import { getTopicContext } from '@/data/topic-content';
 import { ADVOCACY_ORGS, SUBTOPIC_ORGS } from '@/data/advocacy-orgs';
 import { STORY_PROMPTS, DEFAULT_STORY_PROMPTS } from '@/data/story-prompts';
+import { useChatContext } from '@/components/chat/ChatProvider';
 
 interface TopicStepProps {
   state: ContactState;
@@ -336,6 +337,28 @@ function ResearchResults({
 export function TopicStep({ state, dispatch, onBack }: TopicStepProps) {
   const { selectedReps, userName, issue, ask, personalWhy, contactMethod, tone } = state;
   const [showStoryHelp, setShowStoryHelp] = useState(false);
+  const { setIsOpen, setMode, interviewResult, clearInterviewResult } = useChatContext();
+
+  // Apply interview results when they come in
+  const appliedRef = useRef(false);
+  if (interviewResult && !appliedRef.current) {
+    appliedRef.current = true;
+    if (interviewResult.issue) {
+      dispatch({ type: 'SET_ISSUE', payload: { issue: interviewResult.issue, category: interviewResult.issueCategory || '' } });
+    }
+    if (interviewResult.ask) {
+      dispatch({ type: 'SET_ASK', payload: interviewResult.ask });
+    }
+    if (interviewResult.personalWhy) {
+      dispatch({ type: 'SET_PERSONAL_WHY', payload: interviewResult.personalWhy });
+    }
+    if (interviewResult.suggestedTone) {
+      dispatch({ type: 'SET_TONE', payload: interviewResult.suggestedTone });
+    }
+    clearInterviewResult();
+    // Reset so it can apply again if user does another interview
+    setTimeout(() => { appliedRef.current = false; }, 100);
+  }
   const [showTopicInfo, setShowTopicInfo] = useState(false);
   const [researchContent, setResearchContent] = useState('');
   const [researchLoading, setResearchLoading] = useState(false);
@@ -477,6 +500,33 @@ export function TopicStep({ state, dispatch, onBack }: TopicStepProps) {
             How does this work?
           </a>
         </p>
+      </div>
+
+      {/* Guided interview CTA */}
+      <div className="mb-6 p-4 bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-700 rounded-xl">
+        <div className="flex items-start gap-3">
+          <div className="w-8 h-8 rounded-full bg-purple-100 dark:bg-purple-900/40 flex items-center justify-center flex-shrink-0 mt-0.5">
+            <svg className="w-4 h-4 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+            </svg>
+          </div>
+          <div className="flex-1 min-w-0">
+            <p className="text-sm font-medium text-purple-900 dark:text-purple-100">Not sure what to say?</p>
+            <p className="text-xs text-purple-700 dark:text-purple-300 mt-0.5">
+              Chat with our assistant and we&apos;ll help you figure out your issue, who to contact, and what to ask for. Share only what feels comfortable.
+            </p>
+            <button
+              type="button"
+              onClick={() => {
+                setMode('interview');
+                setIsOpen(true);
+              }}
+              className="mt-2 px-4 py-2 text-xs font-medium bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
+            >
+              Chat with My Democracy Assistant
+            </button>
+          </div>
+        </div>
       </div>
 
       {state.error && (
