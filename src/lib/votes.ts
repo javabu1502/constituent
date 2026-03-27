@@ -1,5 +1,6 @@
 import { congressFetch } from '@/lib/congress-api';
 import type { RepVote, VotingSummary } from '@/lib/types';
+import { cacheGet, cacheSet, TTL } from '@/lib/cache';
 
 export const CURRENT_CONGRESS = 119;
 export const VOTES_LIST_LIMIT = 100;
@@ -31,6 +32,10 @@ export async function fetchHouseVotes(
   bioguideId: string,
   repName: string,
 ): Promise<RepVote[]> {
+  const cacheKey = `house-votes-${CURRENT_CONGRESS}-${bioguideId}`;
+  const cached = cacheGet<RepVote[]>(cacheKey);
+  if (cached) return cached;
+
   const apiKey = process.env.CONGRESS_API_KEY;
   if (!apiKey) return [];
 
@@ -143,6 +148,7 @@ export async function fetchHouseVotes(
     });
   }
 
+  if (votes.length > 0) cacheSet(cacheKey, votes, TTL.ONE_DAY);
   return votes;
 }
 
@@ -159,6 +165,10 @@ export async function fetchSenateVotes(
   repLastName: string,
   repState: string,
 ): Promise<RepVote[]> {
+  const cacheKey = `senate-votes-${CURRENT_CONGRESS}-${bioguideId}`;
+  const cached = cacheGet<RepVote[]>(cacheKey);
+  if (cached) return cached;
+
   const allVotes: RepVote[] = [];
   const session = getCongressSession();
 
@@ -301,6 +311,7 @@ export async function fetchSenateVotes(
     }
   }
 
+  if (allVotes.length > 0) cacheSet(cacheKey, allVotes, TTL.ONE_DAY);
   return allVotes;
 }
 

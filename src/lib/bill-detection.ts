@@ -1,5 +1,6 @@
 import { congressFetch } from '@/lib/congress-api';
 import { openstatesFetch } from '@/lib/openstates-api';
+import { cacheGet, cacheSet, TTL } from '@/lib/cache';
 
 export interface BillReference {
   raw: string;
@@ -85,11 +86,15 @@ export function detectBillReferences(text: string): BillReference[] {
 }
 
 export async function fetchFederalBillDetails(billType: string, billNumber: string): Promise<BillDetails | null> {
+  const congress = '119';
+  const cacheKey = `bill-fed-${congress}-${billType}-${billNumber}`;
+  const cached = cacheGet<BillDetails>(cacheKey);
+  if (cached) return cached;
+
   const apiKey = process.env.CONGRESS_API_KEY;
   if (!apiKey) return null;
 
   try {
-    const congress = '119'; // Current congress
     const billUrl = `https://api.congress.gov/v3/bill/${congress}/${billType}/${billNumber}?api_key=${apiKey}`;
     const res = await congressFetch(billUrl);
     if (!res.ok) return null;
@@ -129,7 +134,7 @@ export async function fetchFederalBillDetails(billType: string, billNumber: stri
     // Determine status from latest action
     const status = bill.latestAction?.text || bill.status || 'Unknown';
 
-    return {
+    const result: BillDetails = {
       billNumber: bill.number || `${billType.toUpperCase()} ${billNumber}`,
       title: bill.title || 'Untitled',
       sponsors,
@@ -137,6 +142,9 @@ export async function fetchFederalBillDetails(billType: string, billNumber: stri
       summary,
       level: 'federal',
     };
+
+    cacheSet(cacheKey, result, TTL.ONE_WEEK);
+    return result;
   } catch (err) {
     console.warn(`[bill-detection] Federal bill fetch failed for ${billType} ${billNumber}:`, err);
     return null;
@@ -145,6 +153,10 @@ export async function fetchFederalBillDetails(billType: string, billNumber: stri
 
 export async function fetchStateBillDetails(identifier: string, state?: string): Promise<BillDetails | null> {
   if (!process.env.OPENSTATES_API_KEY) return null;
+
+  const cacheKey = `bill-state-${state || 'any'}-${identifier}`;
+  const cached = cacheGet<BillDetails>(cacheKey);
+  if (cached) return cached;
 
   try {
     const query = `
@@ -173,7 +185,7 @@ export async function fetchStateBillDetails(identifier: string, state?: string):
 
     const bill = edges[0].node;
 
-    return {
+    const result: BillDetails = {
       billNumber: bill.identifier || identifier,
       title: bill.title || 'Untitled',
       sponsors: (bill.sponsorships || []).map((s: { name: string }) => s.name).slice(0, 5),
@@ -181,6 +193,9 @@ export async function fetchStateBillDetails(identifier: string, state?: string):
       summary: (bill.abstracts?.[0]?.abstract || '').slice(0, 500),
       level: 'state',
     };
+
+    cacheSet(cacheKey, result, TTL.ONE_DAY);
+    return result;
   } catch (err) {
     console.warn(`[bill-detection] State bill fetch failed for ${identifier}:`, err);
     return null;

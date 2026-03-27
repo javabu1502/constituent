@@ -1,4 +1,5 @@
 import type { DistrictDemographics } from '@/lib/types';
+import { cacheGet, cacheSet, TTL } from '@/lib/cache';
 
 /**
  * State abbreviation → FIPS code mapping.
@@ -57,6 +58,10 @@ export async function fetchDistrictDemographics(
   const fips = STATE_FIPS[state.toUpperCase()];
   if (!fips) return null;
 
+  const cacheKey = `census-${state.toUpperCase()}-${district.padStart(2, '0')}`;
+  const cached = cacheGet<DistrictDemographics>(cacheKey);
+  if (cached) return cached;
+
   // Pad district to 2 digits
   const districtPadded = district.padStart(2, '0');
 
@@ -103,7 +108,7 @@ export async function fetchDistrictDemographics(
       ? Math.round((belowPoverty / povertyUniverse) * 1000) / 10
       : 0;
 
-    return {
+    const result: DistrictDemographics = {
       totalPopulation: totalPop,
       medianIncome,
       medianAge,
@@ -114,6 +119,9 @@ export async function fetchDistrictDemographics(
       source: 'U.S. Census Bureau ACS 5-Year Estimates',
       year: ACS_YEAR,
     };
+
+    cacheSet(cacheKey, result, TTL.THIRTY_DAYS);
+    return result;
   } catch {
     return null;
   }
