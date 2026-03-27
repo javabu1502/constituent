@@ -618,7 +618,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: parsed.error }, { status: 400 });
   }
 
-  const { officials, issue, issueCategory, ask, personalWhy, senderName, address, contactMethod, tone, turnstileToken } = parsed.data;
+  const { officials, issue, issueCategory, ask, personalWhy, senderName, address, contactMethod, tone, revisionNote, existingMessage, turnstileToken } = parsed.data;
 
   // Require CAPTCHA in production
   if (process.env.TURNSTILE_SECRET_KEY) {
@@ -635,6 +635,94 @@ export async function POST(request: NextRequest) {
       { error: 'Daily message limit reached. Try again tomorrow.' },
       { status: 429 },
     );
+  }
+
+  // --- Fast revision path ---
+  if (revisionNote && existingMessage && officials.length === 1) {
+    const official = officials[0];
+    const revisionSystemPrompt = `You are editing a constituent message. The user has a correction or suggestion. Apply their feedback to the existing message.
+
+Rules:
+- Only change what the user asks for. Keep everything else the same.
+- Maintain the same tone, structure, and length.
+- Keep the salutation and closing exactly as they are.
+- If the user says something is wrong (e.g., "I'm not a gig worker"), fix that assumption throughout.
+- Respond with ONLY a JSON object, no other text.`;
+
+    const revisionUserPrompt = `Here is the existing ${contactMethod === 'phone' ? 'phone script' : 'message'}:
+
+"""
+${existingMessage}
+"""
+
+The user says: "${revisionNote}"
+
+Apply their feedback and return the revised version as JSON:
+${contactMethod === 'phone' ? '{"script": "the revised phone script"}' : '{"subject": "the subject line", "body": "the revised message body"}'}`;
+
+    try {
+      const revResponse = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': apiKey,
+          'anthropic-version': '2023-06-01',
+        },
+        body: JSON.stringify({
+          model: process.env.CLAUDE_MODEL || 'claude-sonnet-4-20250514',
+          max_tokens: 1200,
+          system: revisionSystemPrompt,
+          messages: [{ role: 'user', content: revisionUserPrompt }],
+        }),
+      });
+
+      if (!revResponse.ok) {
+        const errText = await revResponse.text();
+        console.error('[generate-message] Revision API error:', revResponse.status, errText);
+        return NextResponse.json({ error: 'Failed to revise message' }, { status: 502 });
+      }
+
+      const revData = await revResponse.json();
+      const textParts: string[] = [];
+      for (const block of (revData.content || [])) {
+        if (block.type === 'text' && block.text) textParts.push(block.text);
+      }
+
+      const rawText = textParts.join('\n');
+      const revParsed = extractJSON(stripTags(rawText)) as { subject?: string; body?: string; script?: string } | null;
+
+      let resultBody: string;
+      let resultSubject: string;
+
+      if (contactMethod === 'phone') {
+        resultBody = revParsed?.script || revParsed?.body || cleanText(stripTags(rawText));
+        resultSubject = '';
+      } else {
+        resultBody = revParsed?.body || cleanText(stripTags(rawText));
+        resultSubject = revParsed?.subject || '';
+      }
+
+      const encoder = new TextEncoder();
+      const revStream = new ReadableStream({
+        start(controller) {
+          const msg = { officialName: official.name, subject: cleanText(resultSubject), body: cleanText(resultBody) };
+          controller.enqueue(encoder.encode(`data: ${JSON.stringify(msg)}\n\n`));
+          controller.enqueue(encoder.encode(`data: [DONE]\n\n`));
+          controller.close();
+        },
+      });
+
+      return new Response(revStream, {
+        headers: {
+          'Content-Type': 'text/event-stream',
+          'Cache-Control': 'no-cache',
+          'Connection': 'keep-alive',
+        },
+      });
+    } catch (err) {
+      console.error('[generate-message] Revision error:', err);
+      return NextResponse.json({ error: 'Failed to revise message' }, { status: 500 });
+    }
   }
 
   const method = contactMethod === 'phone' ? 'phone' : 'email';

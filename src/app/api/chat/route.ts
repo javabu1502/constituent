@@ -1,4 +1,4 @@
-import { callClaudeStream } from '@/lib/claude-stream';
+import { callClaudeStreamFast } from '@/lib/claude-stream';
 import { CHAT_SYSTEM_PROMPT } from '@/lib/chat-system-prompt';
 import { chatRequestSchema, parseBody } from '@/lib/schemas';
 import { chatLimiter, dailyChatCap, getClientIp } from '@/lib/rate-limit';
@@ -52,7 +52,7 @@ export async function POST(request: Request) {
   }
 
   try {
-    const stream = callClaudeStream(CHAT_SYSTEM_PROMPT, messages, 800);
+    const stream = callClaudeStreamFast(CHAT_SYSTEM_PROMPT, messages, 800);
 
     return new Response(stream, {
       headers: {

@@ -12,12 +12,34 @@ interface Message {
   content: string;
 }
 
+/**
+ * Fast variant using Haiku — for chat/interview where speed matters more than depth.
+ * ~5x faster and ~10x cheaper than Sonnet.
+ */
+export function callClaudeStreamFast(
+  systemPrompt: string,
+  messages: Message[],
+  maxTokens = 800
+): ReadableStream<Uint8Array> {
+  return callClaudeStreamWithModel(systemPrompt, messages, maxTokens, 'claude-haiku-4-5-20251001');
+}
+
 export function callClaudeStream(
   systemPrompt: string,
   messages: Message[],
   maxTokens = 800
 ): ReadableStream<Uint8Array> {
-  const { ANTHROPIC_API_KEY, CLAUDE_MODEL } = env();
+  const { CLAUDE_MODEL } = env();
+  return callClaudeStreamWithModel(systemPrompt, messages, maxTokens, CLAUDE_MODEL || 'claude-sonnet-4-20250514');
+}
+
+function callClaudeStreamWithModel(
+  systemPrompt: string,
+  messages: Message[],
+  maxTokens: number,
+  model: string,
+): ReadableStream<Uint8Array> {
+  const { ANTHROPIC_API_KEY } = env();
 
   const encoder = new TextEncoder();
 
@@ -32,7 +54,7 @@ export function callClaudeStream(
             'anthropic-version': '2023-06-01',
           },
           body: JSON.stringify({
-            model: CLAUDE_MODEL || 'claude-sonnet-4-20250514',
+            model,
             max_tokens: maxTokens,
             system: systemPrompt,
             messages,

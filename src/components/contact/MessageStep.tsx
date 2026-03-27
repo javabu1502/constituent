@@ -28,6 +28,9 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
   const [reviewIndex, setReviewIndex] = useState(0);
   const [isGenerating, setIsGenerating] = useState(false);
   const [feedback, setFeedback] = useState<Record<string, 'positive' | 'negative'>>({});
+  const [suggestionInput, setSuggestionInput] = useState('');
+  const [showSuggestionInput, setShowSuggestionInput] = useState(false);
+  const [isRevising, setIsRevising] = useState(false);
   const { getToken, TurnstileWidget } = useTurnstile();
 
   const currentRep = selectedReps[reviewIndex];
@@ -200,6 +203,93 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
         delete next[rep.name];
         return next;
       });
+    }
+  };
+
+  const reviseMessage = async (rep: typeof selectedReps[0], note: string) => {
+    const currentMsg = messages[rep.name];
+    if (!currentMsg || !note.trim()) return;
+
+    setIsRevising(true);
+    dispatch({ type: 'SET_ERROR', payload: null });
+
+    try {
+      const turnstileToken = await getToken();
+      const response = await fetch('/api/generate-message', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          officials: [{
+            name: rep.name,
+            lastName: rep.lastName,
+            stafferFirstName: rep.stafferFirstName,
+            bioguideId: rep.level === 'federal' ? rep.id : undefined,
+            title: rep.title,
+            party: rep.party,
+            state: rep.state,
+            level: rep.level,
+            district: rep.district,
+          }],
+          issue: issue.trim(),
+          issueCategory: state.issueCategory || undefined,
+          ask: ask.trim(),
+          personalWhy: personalWhy.trim() || undefined,
+          senderName: userName,
+          address: address ? {
+            street: address.street,
+            city: address.city,
+            state: address.state,
+            zip: address.zip,
+          } : undefined,
+          contactMethod,
+          tone: state.tone,
+          revisionNote: note.trim(),
+          existingMessage: currentMsg.body,
+          turnstileToken: turnstileToken || undefined,
+        }),
+      });
+
+      if (!response.ok) {
+        const data = await response.json().catch(() => ({ error: 'Failed to revise message' }));
+        throw new Error(data.error || 'Failed to revise message');
+      }
+
+      const reader = response.body?.getReader();
+      if (!reader) throw new Error('No response stream');
+
+      const decoder = new TextDecoder();
+      let buffer = '';
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        buffer += decoder.decode(value, { stream: true });
+        const lines = buffer.split('\n');
+        buffer = lines.pop() || '';
+
+        for (const line of lines) {
+          if (!line.startsWith('data: ')) continue;
+          const data = line.slice(6).trim();
+          if (data === '[DONE]') continue;
+          try {
+            const msg = JSON.parse(data) as { officialName: string; subject: string; body: string };
+            dispatch({
+              type: 'SET_MESSAGE',
+              payload: { officialName: msg.officialName, message: { subject: msg.subject || currentMsg.subject, body: msg.body } },
+            });
+          } catch {
+            // skip
+          }
+        }
+      }
+
+      setSuggestionInput('');
+      setShowSuggestionInput(false);
+    } catch (err) {
+      console.error('Error revising message:', err);
+      dispatch({ type: 'SET_ERROR', payload: err instanceof Error ? err.message : 'Failed to revise message' });
+    } finally {
+      setIsRevising(false);
     }
   };
 
@@ -475,24 +565,75 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
                   </>
                 ) : null}
               </div>
-              {/* Regenerate */}
-              {currentRep && (
-                <button
-                  onClick={() => regenerateSingle(currentRep)}
-                  disabled={state.loadingIds.has(currentRep.name)}
-                  className="flex items-center gap-1 text-sm font-medium text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                >
-                  {state.loadingIds.has(currentRep.name) ? (
-                    <div className="w-4 h-4 border-2 border-purple-200 dark:border-purple-700 rounded-full animate-spin border-t-purple-600" />
-                  ) : (
+              {/* Suggest a change + Regenerate */}
+              <div className="flex items-center gap-3">
+                {currentRep && (
+                  <button
+                    onClick={() => setShowSuggestionInput(!showSuggestionInput)}
+                    className="flex items-center gap-1 text-sm font-medium text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 transition-colors"
+                  >
                     <svg aria-hidden="true" className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                     </svg>
-                  )}
-                  Regenerate
-                </button>
-              )}
+                    Suggest a change
+                  </button>
+                )}
+                {currentRep && (
+                  <button
+                    onClick={() => regenerateSingle(currentRep)}
+                    disabled={state.loadingIds.has(currentRep.name)}
+                    className="flex items-center gap-1 text-sm font-medium text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  >
+                    {state.loadingIds.has(currentRep.name) ? (
+                      <div className="w-4 h-4 border-2 border-gray-200 dark:border-gray-700 rounded-full animate-spin border-t-gray-500" />
+                    ) : (
+                      <svg aria-hidden="true" className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                      </svg>
+                    )}
+                    Start over
+                  </button>
+                )}
+              </div>
             </div>
+
+            {/* Suggestion input */}
+            {showSuggestionInput && currentRep && (
+              <div className="mt-3 p-3 bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-700 rounded-xl">
+                <label className="block text-xs font-medium text-purple-700 dark:text-purple-300 mb-1.5">
+                  What should be different?
+                </label>
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    value={suggestionInput}
+                    onChange={(e) => setSuggestionInput(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' && suggestionInput.trim() && !isRevising) {
+                        reviseMessage(currentRep, suggestionInput);
+                      }
+                    }}
+                    placeholder={"e.g., \"I'm not a gig worker, I'm a teacher\" or \"Make it shorter\""}
+                    maxLength={500}
+                    className="flex-1 px-3 py-2 text-sm border border-purple-200 dark:border-purple-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  />
+                  <button
+                    onClick={() => reviseMessage(currentRep, suggestionInput)}
+                    disabled={!suggestionInput.trim() || isRevising}
+                    className="px-3 py-2 text-sm font-medium bg-purple-600 text-white rounded-lg hover:bg-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors shrink-0"
+                  >
+                    {isRevising ? (
+                      <div className="w-4 h-4 border-2 border-white/30 rounded-full animate-spin border-t-white" />
+                    ) : (
+                      'Revise'
+                    )}
+                  </button>
+                </div>
+                <p className="text-xs text-purple-500 dark:text-purple-400 mt-1.5">
+                  Tell the AI what to fix — it&apos;ll update the message without starting over.
+                </p>
+              </div>
+            )}
           </div>
         </>
       )}
