@@ -57,6 +57,8 @@ export function getClientIp(request: Request): string {
 }
 
 // Pre-configured limiters for different route tiers
+
+// Per-minute burst limiters
 export const chatLimiter = rateLimit({ windowMs: 60_000, maxRequests: 20 });       // streaming, called frequently
 export const researchLimiter = rateLimit({ windowMs: 60_000, maxRequests: 10 });    // streaming research
 export const generateLimiter = rateLimit({ windowMs: 60_000, maxRequests: 5 });     // expensive generation
@@ -64,3 +66,9 @@ export const summaryLimiter = rateLimit({ windowMs: 60_000, maxRequests: 15 }); 
 export const writeLimiter = rateLimit({ windowMs: 60_000, maxRequests: 10 });      // track-send, message-feedback, participate
 export const lookupLimiter = rateLimit({ windowMs: 60_000, maxRequests: 15 });     // representatives
 export const profileLimiter = rateLimit({ windowMs: 60_000, maxRequests: 10 });    // profile, campaigns
+
+// Daily caps for AI routes — prevents budget drain without requiring auth.
+// Uses the same in-memory sliding window with a 24-hour window.
+const DAY_MS = 24 * 60 * 60 * 1000;
+export const dailyGenerateCap = rateLimit({ windowMs: DAY_MS, maxRequests: 20 });  // ~$0.28/day max per IP
+export const dailyChatCap = rateLimit({ windowMs: DAY_MS, maxRequests: 50 });      // ~$0.50/day max per IP

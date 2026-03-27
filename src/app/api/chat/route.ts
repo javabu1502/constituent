@@ -1,7 +1,7 @@
 import { callClaudeStream } from '@/lib/claude-stream';
 import { CHAT_SYSTEM_PROMPT } from '@/lib/chat-system-prompt';
 import { chatRequestSchema, parseBody } from '@/lib/schemas';
-import { chatLimiter, getClientIp } from '@/lib/rate-limit';
+import { chatLimiter, dailyChatCap, getClientIp } from '@/lib/rate-limit';
 import { verifyTurnstile } from '@/lib/turnstile';
 
 export async function POST(request: Request) {
@@ -32,11 +32,18 @@ export async function POST(request: Request) {
 
   const { messages, turnstileToken } = parsed.data;
 
-  if (turnstileToken !== undefined || process.env.TURNSTILE_SECRET_KEY) {
+  // Require CAPTCHA in production
+  if (process.env.TURNSTILE_SECRET_KEY) {
     const valid = await verifyTurnstile(turnstileToken || '');
     if (!valid) {
       return new Response('CAPTCHA verification failed', { status: 403 });
     }
+  }
+
+  // Daily cap per IP (no auth required)
+  const { success: dailyOk } = dailyChatCap.check(ip);
+  if (!dailyOk) {
+    return new Response('Daily chat limit reached. Try again tomorrow.', { status: 429 });
   }
 
   const last = messages[messages.length - 1];
