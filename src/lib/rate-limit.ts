@@ -67,8 +67,8 @@ export const writeLimiter = rateLimit({ windowMs: 60_000, maxRequests: 10 });   
 export const lookupLimiter = rateLimit({ windowMs: 60_000, maxRequests: 15 });     // representatives
 export const profileLimiter = rateLimit({ windowMs: 60_000, maxRequests: 10 });    // profile, campaigns
 
-// Daily caps for AI routes — prevents budget drain without requiring auth.
-// Uses the same in-memory sliding window with a 24-hour window.
-const DAY_MS = 24 * 60 * 60 * 1000;
-export const dailyGenerateCap = rateLimit({ windowMs: DAY_MS, maxRequests: 20 });  // ~$0.28/day max per IP
-export const dailyChatCap = rateLimit({ windowMs: DAY_MS, maxRequests: 50 });      // ~$0.50/day max per IP
+// NOTE: Daily AI cost caps are enforced durably in the database via
+// `enforceDailyQuota` in @/lib/usage-quota — not here. In-memory counters
+// don't hold across Vercel's serverless instances, so they can't reliably
+// cap spend. The per-minute burst limiters above are still per-instance,
+// which is fine for throttling bursts.

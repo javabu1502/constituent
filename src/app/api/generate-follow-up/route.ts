@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createAdminClient } from '@/lib/supabase';
 import { generateFollowUpSchema, parseBody } from '@/lib/schemas';
-import { generateLimiter, dailyGenerateCap, getClientIp } from '@/lib/rate-limit';
+import { generateLimiter, getClientIp } from '@/lib/rate-limit';
 import { verifyTurnstile } from '@/lib/turnstile';
+import { enforceDailyQuota } from '@/lib/usage-quota';
 
 export async function POST(request: NextRequest) {
   const ip = getClientIp(request);
@@ -41,8 +42,8 @@ export async function POST(request: NextRequest) {
     }
   }
 
-  // Daily cap per IP (no auth required)
-  const { success: dailyOk } = dailyGenerateCap.check(ip);
+  // Durable daily cap, keyed by user (if signed in) or hashed IP
+  const { allowed: dailyOk } = await enforceDailyQuota(ip, 'generate_follow_up');
   if (!dailyOk) {
     return NextResponse.json(
       { error: 'Daily generation limit reached. Try again tomorrow.' },

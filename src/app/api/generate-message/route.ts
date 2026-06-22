@@ -8,8 +8,9 @@ import { fetchDistrictDemographics } from '@/lib/census-api';
 import { detectBillReferences, fetchFederalBillDetails, fetchStateBillDetails, buildBillDetailsBlock } from '@/lib/bill-detection';
 import { z } from 'zod';
 import { generateMessageSchema, parseBody } from '@/lib/schemas';
-import { generateLimiter, dailyGenerateCap, getClientIp } from '@/lib/rate-limit';
+import { generateLimiter, getClientIp } from '@/lib/rate-limit';
 import { verifyTurnstile } from '@/lib/turnstile';
+import { enforceDailyQuota } from '@/lib/usage-quota';
 
 type GenerateRequest = z.infer<typeof generateMessageSchema>;
 type OfficialInput = GenerateRequest['officials'][number];
@@ -628,8 +629,8 @@ export async function POST(request: NextRequest) {
     }
   }
 
-  // Daily cap per IP (no auth required)
-  const { success: dailyOk } = dailyGenerateCap.check(ip);
+  // Durable daily cap, keyed by user (if signed in) or hashed IP
+  const { allowed: dailyOk } = await enforceDailyQuota(ip, 'generate_message');
   if (!dailyOk) {
     return NextResponse.json(
       { error: 'Daily message limit reached. Try again tomorrow.' },

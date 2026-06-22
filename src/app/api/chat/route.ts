@@ -1,8 +1,9 @@
 import { callClaudeStreamFast } from '@/lib/claude-stream';
 import { CHAT_SYSTEM_PROMPT } from '@/lib/chat-system-prompt';
 import { chatRequestSchema, parseBody } from '@/lib/schemas';
-import { chatLimiter, dailyChatCap, getClientIp } from '@/lib/rate-limit';
+import { chatLimiter, getClientIp } from '@/lib/rate-limit';
 import { verifyTurnstile } from '@/lib/turnstile';
+import { enforceDailyQuota } from '@/lib/usage-quota';
 
 export async function POST(request: Request) {
   const ip = getClientIp(request);
@@ -40,8 +41,8 @@ export async function POST(request: Request) {
     }
   }
 
-  // Daily cap per IP (no auth required)
-  const { success: dailyOk } = dailyChatCap.check(ip);
+  // Durable daily cap, keyed by user (if signed in) or hashed IP
+  const { allowed: dailyOk } = await enforceDailyQuota(ip, 'chat');
   if (!dailyOk) {
     return new Response('Daily chat limit reached. Try again tomorrow.', { status: 429 });
   }

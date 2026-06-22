@@ -1,8 +1,9 @@
 import { callClaudeStream, callClaudeStreamFast } from '@/lib/claude-stream';
 import { INTERVIEW_SYSTEM_PROMPT } from '@/lib/interview-system-prompt';
 import { chatRequestSchema, parseBody } from '@/lib/schemas';
-import { chatLimiter, dailyChatCap, getClientIp } from '@/lib/rate-limit';
+import { chatLimiter, getClientIp } from '@/lib/rate-limit';
 import { verifyTurnstile } from '@/lib/turnstile';
+import { enforceDailyQuota } from '@/lib/usage-quota';
 import { buildResearchContext } from '@/lib/research';
 
 /**
@@ -92,7 +93,7 @@ export async function POST(request: Request) {
     }
   }
 
-  const { success: dailyOk } = dailyChatCap.check(ip);
+  const { allowed: dailyOk } = await enforceDailyQuota(ip, 'chat');
   if (!dailyOk) {
     return new Response('Daily chat limit reached. Try again tomorrow.', { status: 429 });
   }

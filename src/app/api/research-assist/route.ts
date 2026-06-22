@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { callClaudeStream } from '@/lib/claude-stream';
 import { researchLimiter, getClientIp } from '@/lib/rate-limit';
 import { verifyTurnstile } from '@/lib/turnstile';
+import { enforceDailyQuota } from '@/lib/usage-quota';
 import { fetchRecentBills } from '@/lib/research';
 
 interface ResearchRequest {
@@ -51,6 +52,12 @@ export async function POST(request: NextRequest) {
     if (!valid) {
       return new Response('CAPTCHA verification failed', { status: 403 });
     }
+  }
+
+  // Durable daily cap, keyed by user (if signed in) or hashed IP
+  const { allowed: dailyOk } = await enforceDailyQuota(ip, 'research');
+  if (!dailyOk) {
+    return new Response('Daily research limit reached. Try again tomorrow.', { status: 429 });
   }
 
   const billContext = await fetchRecentBills(issueCategory);
