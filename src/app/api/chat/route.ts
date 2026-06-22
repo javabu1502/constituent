@@ -3,7 +3,7 @@ import { CHAT_SYSTEM_PROMPT } from '@/lib/chat-system-prompt';
 import { chatRequestSchema, parseBody } from '@/lib/schemas';
 import { chatLimiter, getClientIp } from '@/lib/rate-limit';
 import { verifyTurnstile } from '@/lib/turnstile';
-import { enforceDailyQuota } from '@/lib/usage-quota';
+import { enforceDailyQuota, resolveUsageIdentity } from '@/lib/usage-quota';
 
 export async function POST(request: Request) {
   const ip = getClientIp(request);
@@ -33,16 +33,19 @@ export async function POST(request: Request) {
 
   const { messages, turnstileToken } = parsed.data;
 
-  // Require CAPTCHA in production
+  // Resolve who this request is (user or hashed IP) once, for the bot + cost checks
+  const identity = await resolveUsageIdentity(ip);
+
+  // Bot protection: anonymous requests must pass Turnstile; signed-in users get the lenient path
   if (process.env.TURNSTILE_SECRET_KEY) {
-    const valid = await verifyTurnstile(turnstileToken || '');
+    const valid = await verifyTurnstile(turnstileToken || '', { strict: !identity.userId });
     if (!valid) {
       return new Response('CAPTCHA verification failed', { status: 403 });
     }
   }
 
   // Durable daily cap, keyed by user (if signed in) or hashed IP
-  const { allowed: dailyOk } = await enforceDailyQuota(ip, 'chat');
+  const { allowed: dailyOk } = await enforceDailyQuota(ip, 'chat', identity);
   if (!dailyOk) {
     return new Response('Daily chat limit reached. Try again tomorrow.', { status: 429 });
   }

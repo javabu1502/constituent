@@ -41,6 +41,7 @@ vi.mock('@/lib/turnstile', () => ({
 
 vi.mock('@/lib/usage-quota', () => ({
   enforceDailyQuota: vi.fn(async () => ({ allowed: true, remaining: 10 })),
+  resolveUsageIdentity: vi.fn(async () => ({ userId: null, ipHash: 'test-hash' })),
 }));
 
 vi.mock('@/lib/supabase/server', () => ({

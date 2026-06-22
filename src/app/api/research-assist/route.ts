@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { callClaudeStream } from '@/lib/claude-stream';
 import { researchLimiter, getClientIp } from '@/lib/rate-limit';
 import { verifyTurnstile } from '@/lib/turnstile';
-import { enforceDailyQuota } from '@/lib/usage-quota';
+import { enforceDailyQuota, resolveUsageIdentity } from '@/lib/usage-quota';
 import { fetchRecentBills } from '@/lib/research';
 
 interface ResearchRequest {
@@ -47,15 +47,18 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'issue and issueCategory are required' }, { status: 400 });
   }
 
+  const identity = await resolveUsageIdentity(ip);
+
+  // Bot protection: anonymous requests must pass Turnstile; signed-in users get the lenient path
   if (turnstileToken !== undefined || process.env.TURNSTILE_SECRET_KEY) {
-    const valid = await verifyTurnstile(turnstileToken || '');
+    const valid = await verifyTurnstile(turnstileToken || '', { strict: !identity.userId });
     if (!valid) {
       return new Response('CAPTCHA verification failed', { status: 403 });
     }
   }
 
   // Durable daily cap, keyed by user (if signed in) or hashed IP
-  const { allowed: dailyOk } = await enforceDailyQuota(ip, 'research');
+  const { allowed: dailyOk } = await enforceDailyQuota(ip, 'research', identity);
   if (!dailyOk) {
     return new Response('Daily research limit reached. Try again tomorrow.', { status: 429 });
   }

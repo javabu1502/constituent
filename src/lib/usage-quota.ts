@@ -106,11 +106,12 @@ export async function logUsage(
 export async function enforceDailyQuota(
   ip: string,
   actionType: string,
+  identity?: UsageIdentity,
 ): Promise<{ allowed: boolean; remaining: number }> {
-  const identity = await resolveUsageIdentity(ip);
-  const { allowed, remaining } = await checkDailyQuota(identity, actionType);
+  const id = identity ?? (await resolveUsageIdentity(ip));
+  const { allowed, remaining } = await checkDailyQuota(id, actionType);
   if (allowed) {
-    void logUsage(identity, actionType);
+    void logUsage(id, actionType);
   }
   return { allowed, remaining };
 }

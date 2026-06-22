@@ -3,7 +3,7 @@ import { createAdminClient } from '@/lib/supabase';
 import { generateFollowUpSchema, parseBody } from '@/lib/schemas';
 import { generateLimiter, getClientIp } from '@/lib/rate-limit';
 import { verifyTurnstile } from '@/lib/turnstile';
-import { enforceDailyQuota } from '@/lib/usage-quota';
+import { enforceDailyQuota, resolveUsageIdentity } from '@/lib/usage-quota';
 
 export async function POST(request: NextRequest) {
   const ip = getClientIp(request);
@@ -34,16 +34,19 @@ export async function POST(request: NextRequest) {
 
   const { originalMessageId, followUpType, senderName, additionalContext, turnstileToken } = parsed.data;
 
-  // Require CAPTCHA in production
+  // Resolve who this request is (user or hashed IP) once, for the bot + cost checks
+  const identity = await resolveUsageIdentity(ip);
+
+  // Bot protection: anonymous requests must pass Turnstile; signed-in users get the lenient path
   if (process.env.TURNSTILE_SECRET_KEY) {
-    const valid = await verifyTurnstile(turnstileToken || '');
+    const valid = await verifyTurnstile(turnstileToken || '', { strict: !identity.userId });
     if (!valid) {
       return NextResponse.json({ error: 'CAPTCHA verification failed' }, { status: 403 });
     }
   }
 
   // Durable daily cap, keyed by user (if signed in) or hashed IP
-  const { allowed: dailyOk } = await enforceDailyQuota(ip, 'generate_follow_up');
+  const { allowed: dailyOk } = await enforceDailyQuota(ip, 'generate_follow_up', identity);
   if (!dailyOk) {
     return NextResponse.json(
       { error: 'Daily generation limit reached. Try again tomorrow.' },
