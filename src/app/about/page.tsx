@@ -207,8 +207,8 @@ export default function AboutPage() {
               </p>
               <p>
                 Questions? Contact{' '}
-                <a href="mailto:info@mydemocracy.app" className="text-purple-600 dark:text-purple-400 hover:underline">
-                  info@mydemocracy.app
+                <a href="mailto:Jared@mydemocracy.app" className="text-purple-600 dark:text-purple-400 hover:underline">
+                  Jared@mydemocracy.app
                 </a>
               </p>
             </div>

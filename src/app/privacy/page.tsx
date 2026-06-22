@@ -14,7 +14,7 @@ export default function PrivacyPage() {
           Privacy Policy
         </h1>
         <p className="text-gray-500 dark:text-gray-400 mb-10">
-          Last updated: February 2026
+          Last updated: June 2026
         </p>
 
         <div className="prose prose-gray dark:prose-invert max-w-none">
@@ -143,6 +143,35 @@ export default function PrivacyPage() {
             </div>
           </section>
 
+          {/* Other Information We Store */}
+          <section className="mb-10">
+            <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+              <span className="w-8 h-8 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg className="w-4 h-4 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                </svg>
+              </span>
+              Other Information We Store
+            </h2>
+            <div className="space-y-3 text-gray-600 dark:text-gray-300 pl-10">
+              <p>Depending on which features you use, we may also store:</p>
+              <ul className="list-disc list-inside space-y-2 ml-4">
+                <li>
+                  <strong className="text-gray-900 dark:text-white">Campaign participation</strong>: if you create or join an advocacy campaign, we store the campaign details and the name, city, and state you supply, along with how many messages were sent.
+                </li>
+                <li>
+                  <strong className="text-gray-900 dark:text-white">Message-quality ratings</strong>: if you give a draft a thumbs up or down, we record that rating with the issue, tone, and official&apos;s party — but <strong className="text-gray-900 dark:text-white">not</strong> the message text or your identity. It is stored against a one-way hash so we can improve drafting quality.
+                </li>
+                <li>
+                  <strong className="text-gray-900 dark:text-white">Notification preferences</strong>: if you opt in to the weekly digest or follow-up reminders, we store your email and those preferences so we can send them. You can unsubscribe at any time.
+                </li>
+                <li>
+                  <strong className="text-gray-900 dark:text-white">AI usage logs</strong>: see &quot;To prevent abuse and control costs&quot; below — a timestamped record of AI-generation events, tied to your account or a hashed IP, purged after 30 days.
+                </li>
+              </ul>
+            </div>
+          </section>
+
           {/* How We Use Your Data */}
           <section className="mb-10">
             <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
@@ -166,6 +195,9 @@ export default function PrivacyPage() {
                 </li>
                 <li>
                   <strong className="text-gray-900 dark:text-white">To improve the platform:</strong> we may review anonymized message patterns to improve AI message generation.
+                </li>
+                <li>
+                  <strong className="text-gray-900 dark:text-white">To prevent abuse and control costs:</strong> we log AI-generation events (which feature was used and when) to enforce daily limits and protect against automated abuse. For signed-in users this is tied to your account; for visitors without an account we record only a <strong className="text-gray-900 dark:text-white">one-way hashed version of your IP address</strong> — we never store raw IP addresses for this purpose. These logs are automatically purged after 30 days.
                 </li>
               </ul>
               <p className="bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-700 rounded-lg p-4 text-blue-800 dark:text-blue-300">
@@ -192,10 +224,17 @@ export default function PrivacyPage() {
               <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
                 <p className="font-semibold text-gray-900 dark:text-white">Anthropic Claude API</p>
                 <p className="text-sm">
-                  Our AI provider for message generation, official bios, and bill summaries. Per their{' '}
-                  <a href="https://www.anthropic.com/policies/privacy" className="text-purple-600 dark:text-purple-400 hover:underline" target="_blank" rel="noopener noreferrer">
-                    API terms
-                  </a>, data sent through the API is not stored or used for training.
+                  Our AI provider for drafting messages, follow-ups, and public comments, the
+                  guided-interview chat, research assistance, official bios, and bill summaries.
+                  When you use one of these features, the text you provide (your name, city/state,
+                  the issue, and the official&apos;s public details) is sent to Anthropic to generate
+                  the response. Under Anthropic&apos;s{' '}
+                  <a href="https://www.anthropic.com/legal/commercial-terms" className="text-purple-600 dark:text-purple-400 hover:underline" target="_blank" rel="noopener noreferrer">
+                    Commercial Terms
+                  </a>, data submitted through the API is{' '}
+                  <strong className="text-gray-900 dark:text-white">not used to train their models</strong>.
+                  Anthropic retains it only transiently to deliver the response and for automated
+                  safety/abuse monitoring, then deletes it. Your full street address is never sent.
                 </p>
               </div>
               <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
@@ -315,8 +354,8 @@ export default function PrivacyPage() {
               </p>
               <p>
                 You may request deletion of all your personal data at any time by emailing{' '}
-                <a href="mailto:info@mydemocracy.app" className="text-purple-600 dark:text-purple-400 hover:underline">
-                  info@mydemocracy.app
+                <a href="mailto:Jared@mydemocracy.app" className="text-purple-600 dark:text-purple-400 hover:underline">
+                  Jared@mydemocracy.app
                 </a>.
                 We will delete your account and all associated personal information within 30 days of your request.
               </p>
@@ -335,12 +374,29 @@ export default function PrivacyPage() {
             </h2>
             <div className="space-y-3 text-gray-600 dark:text-gray-300 pl-10">
               <p>
-                Your data is stored securely using{' '}
+                Your data is stored using{' '}
                 <a href="https://supabase.com" className="text-purple-600 dark:text-purple-400 hover:underline" target="_blank" rel="noopener noreferrer">
                   Supabase
                 </a>, a trusted cloud database provider with encryption at rest and in transit.
-                Access to your data is restricted to essential platform operations only.
+                We take a defense-in-depth approach:
               </p>
+              <ul className="list-disc list-inside space-y-2 ml-4">
+                <li>
+                  <strong className="text-gray-900 dark:text-white">Row-level security</strong>: database access policies ensure each account can only read and write its own data.
+                </li>
+                <li>
+                  <strong className="text-gray-900 dark:text-white">Encrypted connections</strong>: the site is served over HTTPS with HSTS, and browser-hardening headers (clickjacking, MIME-sniffing, and referrer protections) are applied to every response.
+                </li>
+                <li>
+                  <strong className="text-gray-900 dark:text-white">Abuse protection</strong>: rate limiting and per-account (or per-IP) daily usage limits guard our AI features against automated misuse.
+                </li>
+                <li>
+                  <strong className="text-gray-900 dark:text-white">Data minimization</strong>: we never store raw IP addresses for usage tracking — only one-way hashes — and the AI is never given your full street address.
+                </li>
+                <li>
+                  <strong className="text-gray-900 dark:text-white">Least privilege</strong>: access to your data is restricted to essential platform operations only.
+                </li>
+              </ul>
             </div>
           </section>
 
@@ -360,8 +416,8 @@ export default function PrivacyPage() {
               </p>
               <p>
                 Email us at{' '}
-                <a href="mailto:info@mydemocracy.app" className="text-purple-600 dark:text-purple-400 hover:underline">
-                  info@mydemocracy.app
+                <a href="mailto:Jared@mydemocracy.app" className="text-purple-600 dark:text-purple-400 hover:underline">
+                  Jared@mydemocracy.app
                 </a>
               </p>
             </div>
