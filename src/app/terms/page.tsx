@@ -235,8 +235,8 @@ export default function TermsPage() {
               </p>
               <p>
                 Email us at{' '}
-                <a href="mailto:info@mydemocracy.app" className="text-purple-600 hover:underline">
-                  info@mydemocracy.app
+                <a href="mailto:Jared@mydemocracy.app" className="text-purple-600 hover:underline">
+                  Jared@mydemocracy.app
                 </a>
               </p>
             </div>

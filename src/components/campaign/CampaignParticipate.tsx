@@ -14,6 +14,7 @@ import {
   generateMailtoLink,
   type DeliveryInfo,
 } from '@/lib/delivery';
+import { useTurnstile } from '@/components/ui/Turnstile';
 
 type Step = 'form' | 'loading' | 'review' | 'done';
 
@@ -34,6 +35,7 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
   const [personalWhy, setPersonalWhy] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [profileLoaded, setProfileLoaded] = useState(false);
+  const { getToken, TurnstileWidget } = useTurnstile();
 
   // Auto-fill from profile for logged-in users
   useEffect(() => {
@@ -114,6 +116,8 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
         ? `${campaign.headline}. ${campaign.message_template}`
         : campaign.headline;
 
+      const turnstileToken = await getToken();
+
       const msgRes = await fetch('/api/generate-message', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -132,6 +136,7 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
           senderName: name.trim(),
           address: { street: street.trim(), city: city.trim(), state, zip: zip.trim() },
           contactMethod: 'email',
+          turnstileToken,
         }),
       });
 
@@ -320,6 +325,8 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
             AI will write personalized messages to your officials based on this campaign. You&apos;ll review before sending.
           </p>
         </div>
+
+        <TurnstileWidget />
 
         <Button type="submit" className="w-full" size="lg">
           Find My Officials

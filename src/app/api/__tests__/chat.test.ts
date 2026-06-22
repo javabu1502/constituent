@@ -2,6 +2,17 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 
 vi.mock('@/lib/claude-stream', () => ({
   callClaudeStream: vi.fn(() => new ReadableStream({ start(c) { c.close(); } })),
+  callClaudeStreamFast: vi.fn(() => new ReadableStream({
+    start(c) {
+      c.enqueue(new TextEncoder().encode('Hello from Claude'));
+      c.close();
+    },
+  })),
+}));
+
+vi.mock('@/lib/usage-quota', () => ({
+  enforceDailyQuota: vi.fn(async () => ({ allowed: true, remaining: 10 })),
+  resolveUsageIdentity: vi.fn(async () => ({ userId: null, ipHash: 'test-hash' })),
 }));
 
 vi.mock('@/lib/chat-system-prompt', () => ({
@@ -96,6 +107,16 @@ describe('POST /api/chat', () => {
 
     vi.doMock('@/lib/claude-stream', () => ({
       callClaudeStream: vi.fn(() => new ReadableStream({ start(c) { c.close(); } })),
+      callClaudeStreamFast: vi.fn(() => new ReadableStream({
+        start(c) {
+          c.enqueue(new TextEncoder().encode('Hello from Claude'));
+          c.close();
+        },
+      })),
+    }));
+    vi.doMock('@/lib/usage-quota', () => ({
+      enforceDailyQuota: vi.fn(async () => ({ allowed: true, remaining: 10 })),
+      resolveUsageIdentity: vi.fn(async () => ({ userId: null, ipHash: 'test-hash' })),
     }));
     vi.doMock('@/lib/chat-system-prompt', () => ({
       CHAT_SYSTEM_PROMPT: 'test system prompt',

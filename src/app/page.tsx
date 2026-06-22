@@ -103,7 +103,7 @@ export default async function HomePage() {
           </div>
 
           {/* Social proof stats */}
-          {totalMessages > 0 && (
+          {totalMessages >= 100 && (
             <div className="flex items-center justify-center gap-8 sm:gap-12 mt-10 pt-8 border-t border-purple-200 dark:border-gray-700">
               <div className="text-center">
                 <div className="text-2xl sm:text-3xl font-bold text-purple-700 dark:text-purple-300">

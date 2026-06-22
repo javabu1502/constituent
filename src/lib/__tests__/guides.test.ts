@@ -2,8 +2,8 @@ import { describe, it, expect } from 'vitest';
 import { GUIDES, CATEGORY_LABELS, type GuideCategory } from '../guides';
 
 describe('GUIDES', () => {
-  it('has 32 guides', () => {
-    expect(GUIDES.length).toBe(32);
+  it('has 38 guides', () => {
+    expect(GUIDES.length).toBe(38);
   });
 
   it('every guide has required fields', () => {

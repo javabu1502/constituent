@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createAdminClient } from '@/lib/supabase';
+import { campaignParticipateSchema, parseBody } from '@/lib/schemas';
 import { writeLimiter, getClientIp } from '@/lib/rate-limit';
 
 /**
@@ -18,24 +19,19 @@ export async function POST(
 
   const { slug } = await params;
 
-  let body: {
-    participant_name: string;
-    participant_city: string;
-    participant_state: string;
-    messages_sent: number;
-  };
-
+  let raw: unknown;
   try {
-    body = await request.json();
+    raw = await request.json();
   } catch {
     return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 });
   }
 
-  const { participant_name, participant_city, participant_state, messages_sent } = body;
-
-  if (!participant_name || !participant_city || !participant_state) {
-    return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
+  const parsed = parseBody(campaignParticipateSchema, raw);
+  if (!parsed.success) {
+    return NextResponse.json({ error: parsed.error }, { status: 400 });
   }
+
+  const { participant_name, participant_city, participant_state, messages_sent } = parsed.data;
 
   const admin = createAdminClient();
 

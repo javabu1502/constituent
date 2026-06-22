@@ -2,6 +2,16 @@ import { congressFetch } from '@/lib/congress-api';
 import { createAdminClient } from '@/lib/supabase';
 import { createHmac } from 'crypto';
 
+/** Escape HTML special characters to prevent XSS in email templates. */
+function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 interface Vote {
   bill: string;
   position: string;
@@ -133,7 +143,10 @@ function getSlug(type?: string): string {
  * Generates an unsubscribe token (HMAC of userId).
  */
 export function generateUnsubscribeToken(userId: string): string {
-  const secret = process.env.CRON_SECRET || 'default-secret';
+  const secret = process.env.UNSUBSCRIBE_SECRET || process.env.CRON_SECRET;
+  if (!secret) {
+    throw new Error('UNSUBSCRIBE_SECRET or CRON_SECRET must be set');
+  }
   return createHmac('sha256', secret).update(`${userId}:unsubscribe`).digest('hex');
 }
 
@@ -156,10 +169,10 @@ export function renderDigestHtml(data: DigestData, unsubscribeUrl: string): stri
         .map(
           (v) =>
             `<tr>
-              <td style="padding:4px 8px;border-bottom:1px solid #eee;">${v.bill}</td>
-              <td style="padding:4px 8px;border-bottom:1px solid #eee;">${v.position}</td>
-              <td style="padding:4px 8px;border-bottom:1px solid #eee;">${v.result}</td>
-              <td style="padding:4px 8px;border-bottom:1px solid #eee;">${v.date}</td>
+              <td style="padding:4px 8px;border-bottom:1px solid #eee;">${escapeHtml(v.bill)}</td>
+              <td style="padding:4px 8px;border-bottom:1px solid #eee;">${escapeHtml(v.position)}</td>
+              <td style="padding:4px 8px;border-bottom:1px solid #eee;">${escapeHtml(v.result)}</td>
+              <td style="padding:4px 8px;border-bottom:1px solid #eee;">${escapeHtml(v.date)}</td>
             </tr>`
         )
         .join('');
@@ -182,8 +195,8 @@ export function renderDigestHtml(data: DigestData, unsubscribeUrl: string): stri
         .map(
           (b) =>
             `<li style="margin-bottom:6px;">
-              <a href="${b.url}" style="color:#7c3aed;text-decoration:none;font-weight:500;">${b.number}: ${b.title}</a>
-              <br><span style="font-size:12px;color:#6b7280;">${b.status}</span>
+              <a href="${escapeHtml(b.url)}" style="color:#7c3aed;text-decoration:none;font-weight:500;">${escapeHtml(b.number)}: ${escapeHtml(b.title)}</a>
+              <br><span style="font-size:12px;color:#6b7280;">${escapeHtml(b.status)}</span>
             </li>`
         )
         .join('');
@@ -194,8 +207,8 @@ export function renderDigestHtml(data: DigestData, unsubscribeUrl: string): stri
 
     return `
       <div style="margin-bottom:24px;padding:16px;border:1px solid #e5e7eb;border-radius:8px;">
-        <h3 style="margin:0 0 4px;color:#111827;">${rep.repName}</h3>
-        <p style="margin:0 0 8px;color:#6b7280;font-size:13px;">${rep.repTitle}</p>
+        <h3 style="margin:0 0 4px;color:#111827;">${escapeHtml(rep.repName)}</h3>
+        <p style="margin:0 0 8px;color:#6b7280;font-size:13px;">${escapeHtml(rep.repTitle)}</p>
         ${votesHtml}
         ${billsHtml}
       </div>`;
@@ -211,7 +224,7 @@ export function renderDigestHtml(data: DigestData, unsubscribeUrl: string): stri
     <p style="color:#6b7280;font-size:14px;margin:4px 0 0;">Weekly Activity Digest</p>
   </div>
 
-  <p style="font-size:15px;">Hi ${data.userName},</p>
+  <p style="font-size:15px;">Hi ${escapeHtml(data.userName)},</p>
   <p style="font-size:14px;color:#4b5563;">Here's what your officials have been up to this week:</p>
 
   ${repSections}

@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createAdminClient } from '@/lib/supabase';
+import { createClient } from '@/lib/supabase/server';
 import { trackSendSchema, parseBody } from '@/lib/schemas';
 import { writeLimiter, getClientIp } from '@/lib/rate-limit';
+import { checkLegislatorCooldown } from '@/lib/usage-quota';
 
 /**
  * POST /api/track-send
@@ -34,6 +36,31 @@ export async function POST(request: NextRequest) {
 
   const body = parsed.data;
 
+  // If user_id is provided, verify it matches the authenticated user
+  let verifiedUserId: string | null = body.user_id || null;
+  if (verifiedUserId) {
+    try {
+      const authClient = await createClient();
+      const { data: { user } } = await authClient.auth.getUser();
+      if (!user || user.id !== verifiedUserId) {
+        verifiedUserId = user?.id || null;
+      }
+    } catch {
+      verifiedUserId = null;
+    }
+  }
+
+  // Per-legislator cooldown: prevent spamming the same rep
+  if (verifiedUserId && body.legislator_id) {
+    const cooldown = await checkLegislatorCooldown(verifiedUserId, body.legislator_id);
+    if (!cooldown.allowed) {
+      return NextResponse.json(
+        { error: `You already contacted this official on ${cooldown.lastContactDate}. Please wait before sending another message to the same representative.` },
+        { status: 429 },
+      );
+    }
+  }
+
   try {
     const supabase = createAdminClient();
 
@@ -53,7 +80,7 @@ export async function POST(request: NextRequest) {
       message_body: body.message_body,
       delivery_method: body.delivery_method,
       delivery_status: body.delivery_status,
-      user_id: body.user_id || null,
+      user_id: verifiedUserId,
       campaign_id: body.campaign_id || null,
     }).select('id').single();
 

@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { callClaude, extractJSON, cleanText } from '@/lib/claude';
 import { generateCommentSchema, parseBody } from '@/lib/schemas';
-import { generateLimiter, dailyGenerateCap, getClientIp } from '@/lib/rate-limit';
+import { generateLimiter, getClientIp } from '@/lib/rate-limit';
 import { verifyTurnstile } from '@/lib/turnstile';
+import { enforceDailyQuota, resolveUsageIdentity } from '@/lib/usage-quota';
 
 /**
  * POST /api/generate-comment
@@ -42,16 +43,19 @@ export async function POST(request: NextRequest) {
 
   const { regulationTitle, agency, abstract, position, personalStory, keyPoints, senderName, turnstileToken } = parsed.data;
 
-  // Require CAPTCHA in production
+  // Resolve who this request is (user or hashed IP) once, for the bot + cost checks
+  const identity = await resolveUsageIdentity(ip);
+
+  // Bot protection: anonymous requests must pass Turnstile; signed-in users get the lenient path
   if (process.env.TURNSTILE_SECRET_KEY) {
-    const valid = await verifyTurnstile(turnstileToken || '');
+    const valid = await verifyTurnstile(turnstileToken || '', { strict: !identity.userId });
     if (!valid) {
       return NextResponse.json({ error: 'CAPTCHA verification failed' }, { status: 403 });
     }
   }
 
-  // Daily cap per IP (no auth required)
-  const { success: dailyOk } = dailyGenerateCap.check(ip);
+  // Durable daily cap, keyed by user (if signed in) or hashed IP
+  const { allowed: dailyOk } = await enforceDailyQuota(ip, 'generate_comment', identity);
   if (!dailyOk) {
     return NextResponse.json(
       { error: 'Daily generation limit reached. Try again tomorrow.' },
