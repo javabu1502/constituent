@@ -13,7 +13,6 @@ import { DeleteCampaignButton } from '@/components/campaign/DeleteCampaignButton
 import { CollapsibleSection } from '@/components/ui/CollapsibleSection';
 import { GettingStartedChecklist } from '@/components/dashboard/GettingStartedChecklist';
 import { WelcomeTour } from '@/components/dashboard/WelcomeTour';
-import { NotificationPreferences } from '@/components/dashboard/NotificationPreferences';
 import { FollowUpButton } from '@/components/dashboard/FollowUpButton';
 
 export const metadata: Metadata = {
@@ -170,11 +169,10 @@ export default async function DashboardPage() {
         <RepActivitySection />
       </section>
 
-      {/* Notifications */}
-      <section className="mb-10">
-        <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Notifications</h2>
-        <NotificationPreferences userEmail={user.email || ''} />
-      </section>
+      {/* Notifications (Weekly Digest + Follow-Up Reminders) are hidden until
+          Resend email delivery is configured. Restore this section and the
+          NotificationPreferences import, and re-enable the crons in vercel.json,
+          once RESEND_API_KEY is set. */}
 
       {/* SECONDARY sections */}
       <div className="mb-10">
