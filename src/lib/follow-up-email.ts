@@ -1,3 +1,13 @@
+/** Escape HTML special characters to prevent XSS in email templates. */
+function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 export function renderFollowUpHtml(
   data: {
     userName: string;
@@ -19,8 +29,8 @@ export function renderFollowUpHtml(
 
       return `
         <tr>
-          <td style="padding:8px 12px;border-bottom:1px solid #eee;font-size:14px;">${m.legislator_name}</td>
-          <td style="padding:8px 12px;border-bottom:1px solid #eee;font-size:14px;">${m.issue_area}</td>
+          <td style="padding:8px 12px;border-bottom:1px solid #eee;font-size:14px;">${escapeHtml(m.legislator_name)}</td>
+          <td style="padding:8px 12px;border-bottom:1px solid #eee;font-size:14px;">${escapeHtml(m.issue_area)}</td>
           <td style="padding:8px 12px;border-bottom:1px solid #eee;font-size:14px;color:#6b7280;">${timeLabel}</td>
         </tr>`;
     })
@@ -36,7 +46,7 @@ export function renderFollowUpHtml(
     <p style="color:#6b7280;font-size:14px;margin:4px 0 0;">Follow-Up Reminder</p>
   </div>
 
-  <p style="font-size:15px;">Hi ${data.userName},</p>
+  <p style="font-size:15px;">Hi ${escapeHtml(data.userName)},</p>
   <p style="font-size:14px;color:#4b5563;">
     You sent ${data.messages.length} message${data.messages.length > 1 ? 's' : ''} to your officials that ${data.messages.length > 1 ? "haven't" : "hasn't"} received a response yet.
     Following up can make a real difference — officials pay attention when constituents persist.

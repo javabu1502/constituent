@@ -1,13 +1,20 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase';
+import { writeLimiter, getClientIp } from '@/lib/rate-limit';
 
 /**
  * POST /api/auth/ensure-profile
  * Creates a profile row for the authenticated user if one doesn't exist.
  * Called after OAuth sign-in from the client-side callback.
  */
-export async function POST() {
+export async function POST(request: NextRequest) {
+  const ip = getClientIp(request);
+  const { success, retryAfter } = writeLimiter.check(ip);
+  if (!success) {
+    return NextResponse.json({ error: 'Too many requests' }, { status: 429, headers: { 'Retry-After': String(retryAfter) } });
+  }
+
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
 
