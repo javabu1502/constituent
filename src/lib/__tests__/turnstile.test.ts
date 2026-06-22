@@ -15,6 +15,7 @@ describe('verifyTurnstile()', () => {
   });
 
   it('calls Cloudflare siteverify and returns true on success', async () => {
+    vi.stubEnv('NODE_ENV', 'production');
     vi.stubEnv('TURNSTILE_SECRET_KEY', 'test-secret');
 
     const mockFetch = vi.fn().mockResolvedValue({
@@ -36,6 +37,7 @@ describe('verifyTurnstile()', () => {
   });
 
   it('returns false on failed verification', async () => {
+    vi.stubEnv('NODE_ENV', 'production');
     vi.stubEnv('TURNSTILE_SECRET_KEY', 'test-secret');
 
     const mockFetch = vi.fn().mockResolvedValue({
@@ -50,6 +52,7 @@ describe('verifyTurnstile()', () => {
   });
 
   it('returns false when fetch throws', async () => {
+    vi.stubEnv('NODE_ENV', 'production');
     vi.stubEnv('TURNSTILE_SECRET_KEY', 'test-secret');
 
     const mockFetch = vi.fn().mockRejectedValue(new Error('Network error'));

@@ -169,6 +169,7 @@ describe('createCampaignSchema', () => {
       description: 'A campaign to protect local parks from development.',
       issue_area: 'Environment',
       target_level: 'state',
+      distribution_plan: 'Share with our neighborhood association and local environmental groups.',
     });
     expect(result.success).toBe(true);
   });

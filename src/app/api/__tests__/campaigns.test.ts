@@ -47,6 +47,7 @@ const validCampaign = {
   description: 'A campaign to protect national parks from development',
   issue_area: 'Environment',
   target_level: 'federal' as const,
+  distribution_plan: 'Share with our neighborhood association and local environmental groups.',
 };
 
 describe('POST /api/campaigns', () => {

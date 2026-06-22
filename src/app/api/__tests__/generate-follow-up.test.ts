@@ -2,7 +2,8 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { NextRequest } from 'next/server';
 
 const mockSingle = vi.fn();
-const mockEq = vi.fn(() => ({ single: mockSingle }));
+const mockEq2 = vi.fn(() => ({ single: mockSingle }));
+const mockEq = vi.fn(() => ({ eq: mockEq2, single: mockSingle }));
 const mockSelect = vi.fn(() => ({ eq: mockEq }));
 const mockInsert = vi.fn();
 
@@ -36,6 +37,21 @@ vi.mock('@/lib/rate-limit', () => ({
 
 vi.mock('@/lib/turnstile', () => ({
   verifyTurnstile: vi.fn(() => Promise.resolve(true)),
+}));
+
+vi.mock('@/lib/usage-quota', () => ({
+  enforceDailyQuota: vi.fn(async () => ({ allowed: true, remaining: 10 })),
+}));
+
+vi.mock('@/lib/supabase/server', () => ({
+  createClient: vi.fn(async () => ({
+    auth: {
+      getUser: vi.fn(() => Promise.resolve({
+        data: { user: { id: 'test-user-id' } },
+        error: null,
+      })),
+    },
+  })),
 }));
 
 const originalMessage = {
@@ -144,6 +160,8 @@ describe('POST /api/generate-follow-up', () => {
   });
 
   it('returns 403 when turnstile verification fails', async () => {
+    // The route only runs turnstile verification when the secret key is set.
+    process.env.TURNSTILE_SECRET_KEY = 'test-secret';
     const { verifyTurnstile } = await import('@/lib/turnstile');
     vi.mocked(verifyTurnstile).mockResolvedValueOnce(false);
 

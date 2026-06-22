@@ -29,6 +29,27 @@ vi.mock('@/lib/rate-limit', () => ({
   getClientIp: () => '127.0.0.1',
 }));
 
+vi.mock('@/lib/usage-quota', () => ({
+  enforceDailyQuota: vi.fn(async () => ({ allowed: true, remaining: 10 })),
+}));
+
+/**
+ * The route streams results as Server-Sent Events (`data: {...}\n\n`, ending
+ * with `data: [DONE]`). This helper drains that stream and reconstructs the
+ * `{ messages: [...] }` shape the assertions expect.
+ */
+async function readSSEMessages(res: Response): Promise<{ messages: unknown[] }> {
+  const text = await res.text();
+  const messages: unknown[] = [];
+  for (const line of text.split('\n')) {
+    if (!line.startsWith('data: ')) continue;
+    const payload = line.slice(6).trim();
+    if (payload === '[DONE]' || !payload) continue;
+    messages.push(JSON.parse(payload));
+  }
+  return { messages };
+}
+
 const validBody = {
   officials: [{
     name: 'Jane Smith',
@@ -68,10 +89,10 @@ describe('POST /api/generate-message', () => {
 
     const res = await POST(req);
     expect(res.status).toBe(200);
-    const data = await res.json();
+    const data = await readSSEMessages(res);
     expect(data.messages).toBeDefined();
     expect(data.messages).toHaveLength(1);
-    expect(data.messages[0].officialName).toBe('Jane Smith');
+    expect((data.messages[0] as { officialName: string }).officialName).toBe('Jane Smith');
   });
 
   it('returns 400 for invalid JSON', async () => {
@@ -156,10 +177,10 @@ describe('POST /api/generate-message', () => {
 
     const res = await POST(req);
     expect(res.status).toBe(200);
-    const data = await res.json();
+    const data = await readSSEMessages(res);
     expect(data.messages).toBeDefined();
     // Falls back to template — uses last name "Smith" in salutation
-    expect(data.messages[0].body).toContain('Smith');
+    expect((data.messages[0] as { body: string }).body).toContain('Smith');
   });
 
   it('generates phone scripts for phone contact method', async () => {
@@ -179,8 +200,8 @@ describe('POST /api/generate-message', () => {
 
     const res = await POST(req);
     expect(res.status).toBe(200);
-    const data = await res.json();
-    expect(data.messages[0].body).toContain('Hi, my name is');
+    const data = await readSSEMessages(res);
+    expect((data.messages[0] as { body: string }).body).toContain('Hi, my name is');
   });
 
   it('generates messages for multiple officials in parallel', async () => {
@@ -199,7 +220,7 @@ describe('POST /api/generate-message', () => {
 
     const res = await POST(req);
     expect(res.status).toBe(200);
-    const data = await res.json();
+    const data = await readSSEMessages(res);
     expect(data.messages).toHaveLength(2);
   });
 
@@ -216,7 +237,7 @@ describe('POST /api/generate-message', () => {
 
     const res = await POST(req);
     expect(res.status).toBe(200);
-    const data = await res.json();
-    expect(data.messages[0].body).toContain('Sacramento');
+    const data = await readSSEMessages(res);
+    expect((data.messages[0] as { body: string }).body).toContain('Sacramento');
   });
 });

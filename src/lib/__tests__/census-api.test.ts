@@ -1,6 +1,15 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { fetchDistrictDemographics, STATE_FIPS } from '../census-api';
 
+// The census module uses a process-level in-memory cache. Without stubbing it,
+// the first successful fetch caches `census-CA-12`, and later tests that reuse
+// CA/12 would get the cached value instead of exercising the fetch path.
+vi.mock('@/lib/cache', () => ({
+  cacheGet: vi.fn(() => null),
+  cacheSet: vi.fn(),
+  TTL: { ONE_HOUR: 1, ONE_DAY: 1, ONE_WEEK: 1, THIRTY_DAYS: 1 },
+}));
+
 describe('STATE_FIPS', () => {
   it('has all 50 states plus DC', () => {
     expect(Object.keys(STATE_FIPS).length).toBe(51);
