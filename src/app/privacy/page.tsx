@@ -388,7 +388,7 @@ export default function PrivacyPage() {
                   <strong className="text-gray-900 dark:text-white">Encrypted connections</strong>: the site is served over HTTPS with HSTS, and browser-hardening headers (clickjacking, MIME-sniffing, and referrer protections) are applied to every response.
                 </li>
                 <li>
-                  <strong className="text-gray-900 dark:text-white">Abuse protection</strong>: rate limiting and per-account (or per-IP) daily usage limits guard our AI features against automated misuse.
+                  <strong className="text-gray-900 dark:text-white">Abuse protection</strong>: CAPTCHA bot-detection, rate limiting, and per-account (or per-IP) daily usage limits guard our AI features against automated misuse.
                 </li>
                 <li>
                   <strong className="text-gray-900 dark:text-white">Data minimization</strong>: we never store raw IP addresses for usage tracking — only one-way hashes — and the AI is never given your full street address.
