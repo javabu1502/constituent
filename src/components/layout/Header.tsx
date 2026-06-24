@@ -29,6 +29,12 @@ export async function Header() {
             >
               Write to Your Officials
             </Link>
+            <Link
+              href="/campaigns"
+              className="text-sm font-semibold text-purple-700 dark:text-purple-300 hover:text-purple-900 dark:hover:text-purple-100 transition-colors"
+            >
+              Campaigns
+            </Link>
             <NavDropdown
               label="Explore"
               items={[
@@ -43,7 +49,6 @@ export async function Header() {
               items={[
                 { href: '/vote', label: 'Vote' },
                 { href: '/regulations', label: 'Regulations' },
-                { href: '/campaigns', label: 'Campaigns' },
               ]}
             />
             <NavDropdown

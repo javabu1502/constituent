@@ -309,17 +309,25 @@ export default async function HomePage() {
             </svg>
           </div>
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-4">
-            Rally Others Around Your Issue
+            Campaigns: Rally Others Around Your Issue
           </h2>
           <p className="text-gray-600 dark:text-gray-300 mb-8 max-w-xl mx-auto leading-relaxed">
-            Create a shareable campaign page and let anyone contact their representatives
-            about the issue you care about, with AI-personalized messages for each participant.
+            Join a campaign and contact your representatives in minutes, or create a shareable
+            campaign page so anyone can take action on the issue you care about — with
+            AI-personalized messages for each participant.
           </p>
-          <Link href="/campaign/create">
-            <Button size="lg" className="text-lg px-8 py-4">
-              Start a Campaign
-            </Button>
-          </Link>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href="/campaigns">
+              <Button size="lg" className="text-lg px-8 py-4">
+                Browse Campaigns
+              </Button>
+            </Link>
+            <Link href="/campaign/create">
+              <Button variant="secondary" size="lg" className="text-lg px-8 py-4">
+                Start a Campaign
+              </Button>
+            </Link>
+          </div>
         </div>
       </section>
 
