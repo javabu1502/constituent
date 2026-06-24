@@ -9,7 +9,7 @@ import type { Page } from 'playwright';
 import type { FormAnalysis, FormField, AnalyzerConfig } from './types';
 import { takeScreenshot, scrollPage } from './browser';
 
-const DEFAULT_MODEL = 'claude-sonnet-4-20250514';
+const DEFAULT_MODEL = 'claude-sonnet-4-6';
 const DEFAULT_MAX_TOKENS = 4096;
 
 /**

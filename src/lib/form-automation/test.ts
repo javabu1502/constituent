@@ -65,7 +65,7 @@ const TEST_CONFIG: AutomationConfig = {
   },
   analyzer: {
     apiKey: process.env.ANTHROPIC_API_KEY || '',
-    model: 'claude-sonnet-4-20250514',
+    model: 'claude-sonnet-4-6',
   },
   submit: true, // REAL SUBMISSION
   debugDir: path.join(process.cwd(), 'test-screenshots'),

@@ -492,7 +492,7 @@ Respond with ONLY this JSON:
       'anthropic-version': '2023-06-01',
     },
     body: JSON.stringify({
-      model: process.env.CLAUDE_MODEL || 'claude-sonnet-4-20250514',
+      model: process.env.CLAUDE_MODEL || 'claude-sonnet-4-6',
       max_tokens: 1200,
       system: systemPrompt,
       messages: [...fewShotMessages, { role: 'user', content: userPrompt }],
@@ -673,7 +673,7 @@ ${contactMethod === 'phone' ? '{"script": "the revised phone script"}' : '{"subj
           'anthropic-version': '2023-06-01',
         },
         body: JSON.stringify({
-          model: process.env.CLAUDE_MODEL || 'claude-sonnet-4-20250514',
+          model: process.env.CLAUDE_MODEL || 'claude-sonnet-4-6',
           max_tokens: 1200,
           system: revisionSystemPrompt,
           messages: [{ role: 'user', content: revisionUserPrompt }],

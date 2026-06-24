@@ -69,7 +69,7 @@ async function checkForCaptcha(
       'anthropic-version': '2023-06-01',
     },
     body: JSON.stringify({
-      model: 'claude-sonnet-4-20250514', // Use Sonnet for cost-efficiency
+      model: 'claude-sonnet-4-6', // Use Sonnet for cost-efficiency
       max_tokens: 256, // Small response needed
       messages: [
         {

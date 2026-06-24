@@ -30,7 +30,7 @@ export function callClaudeStream(
   maxTokens = 800
 ): ReadableStream<Uint8Array> {
   const { CLAUDE_MODEL } = env();
-  return callClaudeStreamWithModel(systemPrompt, messages, maxTokens, CLAUDE_MODEL || 'claude-sonnet-4-20250514');
+  return callClaudeStreamWithModel(systemPrompt, messages, maxTokens, CLAUDE_MODEL || 'claude-sonnet-4-6');
 }
 
 function callClaudeStreamWithModel(
