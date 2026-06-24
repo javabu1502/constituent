@@ -464,7 +464,7 @@ export default function WriteLetterGuidePage() {
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">When to Follow Up</h3>
                 <p className="text-gray-600 dark:text-gray-300 mb-2">
-                  Congressional offices are required to respond to constituent mail, but it can take 4 to 8 weeks. Here&apos;s when and how to follow up:
+                  Congressional offices generally try to respond to constituent mail, though they are not legally required to do so, and it can take 4 to 8 weeks. Here&apos;s when and how to follow up:
                 </p>
                 <ul className="list-disc list-inside text-gray-600 dark:text-gray-300 space-y-2 text-sm">
                   <li><strong className="text-gray-900 dark:text-white">Before a vote</strong> -If a key vote is approaching, send a shorter follow-up reminding them of your position. Reference your original letter by date.</li>

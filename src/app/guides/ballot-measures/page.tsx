@@ -56,7 +56,7 @@ export default function BallotMeasuresGuidePage() {
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Initiatives (Citizen-Initiated Measures)</h3>
                 <p className="text-gray-600 dark:text-gray-300">
-                  An initiative allows citizens to propose a new law or constitutional amendment by collecting a required number of signatures from registered voters. If enough valid signatures are gathered, the proposal is placed on the ballot for all voters to decide. Initiatives bypass the legislature entirely -- they go directly from petition to ballot. Not all states allow initiatives; the process is available in <a href="https://www.ncsl.org/elections-and-campaigns/initiative-and-referendum-states" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">26 states</a>, predominantly in the West.
+                  An initiative allows citizens to propose a new law or constitutional amendment by collecting a required number of signatures from registered voters. If enough valid signatures are gathered, the proposal is placed on the ballot for all voters to decide. Initiatives bypass the legislature entirely -- they go directly from petition to ballot. Not all states allow initiatives; the process is available in about <a href="https://www.ncsl.org/elections-and-campaigns/initiative-and-referendum-states" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">24 states</a>, predominantly in the West.
                 </p>
               </div>
               <div>
@@ -112,7 +112,7 @@ export default function BallotMeasuresGuidePage() {
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Legislative Referrals</h3>
                 <p className="text-gray-600 dark:text-gray-300">
-                  When a state legislature places a measure on the ballot, it typically must pass a resolution by a supermajority vote. This is common for proposed constitutional amendments, which most state constitutions require to be approved by voters before taking effect. The legislature drafts the language, and voters then have the final say.
+                  When a state legislature places a measure on the ballot, the requirements vary by state. For proposed constitutional amendments in particular, many states require the legislature to pass a resolution by a supermajority vote, and most state constitutions require voter approval before such amendments take effect. The legislature drafts the language, and voters then have the final say.
                 </p>
               </div>
               <div>

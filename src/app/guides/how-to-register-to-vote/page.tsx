@@ -19,7 +19,7 @@ export default function RegisterToVotePage() {
       <BreadcrumbJsonLd items={[{ name: 'Home', href: '/' }, { name: 'Guides', href: '/guides' }, { name: 'How to Register to Vote', href: '/guides/how-to-register-to-vote' }]} />
       <FaqJsonLd items={[
         { question: 'Can I register to vote if I\'m homeless?', answer: 'Yes. Every state allows homeless individuals to register. You can use a shelter address, a street corner description, or a general delivery address at a post office.' },
-        { question: 'Can I register to vote if I have a felony conviction?', answer: 'It depends on your state. Most states restore voting rights after completing your sentence. Maine, Vermont, and DC allow voting from prison. Check your state\'s specific rules at the ACLU.' },
+        { question: 'Can I register to vote if I have a felony conviction?', answer: 'It depends on your state, and rules vary widely. Some states restore voting rights automatically upon release from prison or while on parole or probation; others require completing your full sentence first. Maine, Vermont, and DC allow voting from prison. Check your state\'s specific rules at the ACLU.' },
         { question: 'I\'m a college student - where should I register to vote?', answer: 'You can register at either your home address or your college address, but only one. Consider which races are more competitive or meaningful to you.' },
       ]} />
       <div className="max-w-3xl mx-auto">
@@ -84,7 +84,7 @@ export default function RegisterToVotePage() {
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">1. Online Registration (Fastest)</h3>
                 <p className="text-gray-600 dark:text-gray-300 mb-2">
-                  <a href="https://www.ncsl.org/elections-and-campaigns/online-voter-registration" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">43 states plus DC</a> offer online voter registration (as of 2026). You&apos;ll need your state ID or driver&apos;s license number. The process takes about 2 minutes.
+                  <a href="https://www.ncsl.org/elections-and-campaigns/online-voter-registration" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">42 states plus DC</a> offer online voter registration (as of 2026). You&apos;ll need your state ID or driver&apos;s license number. The process takes about 2 minutes.
                 </p>
                 <p className="text-gray-600 dark:text-gray-300">
                   Start at <a href="https://www.vote.org/register-to-vote/" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">Vote.org</a>, which will redirect you to your state&apos;s official registration page.
@@ -172,7 +172,7 @@ export default function RegisterToVotePage() {
               <ul className="list-disc list-inside space-y-2">
                 <li><strong className="text-gray-900 dark:text-white">Verify your registration</strong>: Check back in 2-4 weeks to confirm it was processed.</li>
                 <li><strong className="text-gray-900 dark:text-white">Know your polling place</strong>: Find it before Election Day at <a href="https://www.vote.org/polling-place-locator/" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">Vote.org</a>.</li>
-                <li><strong className="text-gray-900 dark:text-white">Understand voter ID laws</strong>: <a href="https://www.ncsl.org/elections-and-campaigns/voter-id" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">36 states</a> require some form of ID at the polls (as of 2026). Know what your state requires.</li>
+                <li><strong className="text-gray-900 dark:text-white">Understand voter ID laws</strong>: <a href="https://www.ncsl.org/elections-and-campaigns/voter-id" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">35 states</a> require some form of ID at the polls (as of 2026). Know what your state requires.</li>
                 <li><strong className="text-gray-900 dark:text-white">Consider early voting</strong>: <a href="https://www.ncsl.org/elections-and-campaigns/early-voting" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">47 states plus DC</a> offer early voting (as of 2026). Avoid Election Day lines.</li>
               </ul>
             </div>
@@ -198,7 +198,7 @@ export default function RegisterToVotePage() {
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Can I register if I have a felony conviction?</h3>
                 <p className="text-gray-600 dark:text-gray-300 text-sm">
-                  It depends on your state. Most states restore voting rights after completing your sentence. Maine, Vermont, and DC allow voting from prison. Check your state&apos;s specific rules at the <a href="https://www.aclu.org/issues/voting-rights/voter-restoration" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">ACLU</a>.
+                  It depends on your state, and rules vary widely. Some states restore voting rights automatically upon release from prison or while on parole or probation; others require completing your full sentence first. Maine, Vermont, and DC allow voting from prison. Check your state&apos;s specific rules at the <a href="https://www.aclu.org/issues/voting-rights/voter-restoration" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">ACLU</a>.
                 </p>
               </div>
               <div>

@@ -118,7 +118,7 @@ export default function FederalBudgetProcessGuidePage() {
                 </div>
                 <div>
                   <h3 className="font-semibold text-gray-900 dark:text-white mb-1">Historical Examples</h3>
-                  <p className="text-sm">Major legislation passed through reconciliation includes the Affordable Care Act (2010), the Tax Cuts and Jobs Act (2017), and the Inflation Reduction Act (2022). Both parties use this tool when they hold the majority and want to advance their fiscal agenda.</p>
+                  <p className="text-sm">Major legislation passed through reconciliation includes the Health Care and Education Reconciliation Act of 2010 (the follow-on amendments to the Affordable Care Act — the main ACA itself passed under regular order with 60 votes), the Tax Cuts and Jobs Act (2017), and the Inflation Reduction Act (2022). Both parties use this tool when they hold the majority and want to advance their fiscal agenda.</p>
                 </div>
               </div>
             </div>

@@ -139,7 +139,7 @@ export default function SupremeCourtGuidePage() {
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Writing Opinions</h3>
                 <p>
-                  The senior justice in the majority assigns the task of writing the majority opinion. This opinion becomes the binding law of the land. The process of writing and circulating draft opinions can take weeks or months, as justices negotiate language and occasionally change their votes.
+                  If the Chief Justice is in the majority, the Chief Justice assigns who writes the majority opinion. If the Chief Justice is not in the majority, the most senior associate justice in the majority makes the assignment. This opinion becomes the binding law of the land. The process of writing and circulating draft opinions can take weeks or months, as justices negotiate language and occasionally change their votes.
                 </p>
                 <ul className="list-disc list-inside space-y-2 mt-2">
                   <li><strong className="text-gray-900 dark:text-white">Majority opinion</strong>: The official opinion of the Court, joined by at least five justices. It establishes the legal precedent.</li>

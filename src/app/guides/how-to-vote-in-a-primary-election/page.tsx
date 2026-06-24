@@ -88,7 +88,13 @@ export default function PrimaryElectionGuidePage() {
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Nonpartisan / Top-Two / Top-Four Primary</h3>
                 <p className="text-gray-600 dark:text-gray-300">
-                  All candidates appear on a single ballot regardless of party. The top two (or top four, as in Alaska) vote-getters advance to the general election. California, Washington, and Louisiana use variations of this system.
+                  All candidates appear on a single ballot regardless of party. The top two (or top four, as in Alaska) vote-getters advance to the general election. California and Washington use variations of this system.
+                </p>
+              </div>
+              <div>
+                <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Majority-Vote (&quot;Jungle&quot;) System</h3>
+                <p className="text-gray-600 dark:text-gray-300">
+                  Louisiana uses a distinct majority-vote system. All candidates, regardless of party, appear together on a single ballot in the general election. A candidate who wins more than 50% of the vote is elected outright. Only if no one clears 50% is a runoff held between the top two finishers.
                 </p>
               </div>
             </div>

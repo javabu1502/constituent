@@ -66,7 +66,7 @@ export default function ContactCongressmanGuidePage() {
                 <strong className="text-gray-900 dark:text-white">US Senators (2)</strong>: Represent your entire state. Serve 6-year terms. Vote on federal legislation, confirm presidential appointments, and ratify treaties.
               </p>
               <p>
-                <strong className="text-gray-900 dark:text-white">US Representative (1)</strong>: Represents your congressional district. Serves 2-year terms. Votes on federal legislation and controls the federal budget.
+                <strong className="text-gray-900 dark:text-white">US Representative (1)</strong>: Represents your congressional district. Serves 2-year terms. Votes on federal legislation. The House originates revenue bills and leads on appropriations, but the federal budget requires both chambers of Congress and the President.
               </p>
               <p>
                 Not sure who represents you? <Link href="/contact" className="text-purple-600 dark:text-purple-400 hover:underline">Enter your address</Link> to find out instantly.
@@ -285,7 +285,7 @@ export default function ContactCongressmanGuidePage() {
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">The Software</h3>
                 <p>
-                  Most offices use one of two major platforms: <strong className="text-gray-900 dark:text-white">IQ</strong> (by Lockheed Martin, commonly used in the Senate) or <strong className="text-gray-900 dark:text-white">Fireside</strong> (commonly used in the House). These systems manage incoming mail, track constituent contacts, and generate reports. Some offices have adopted newer platforms, but the core functionality is the same.
+                  Most offices use a correspondence management system such as <strong className="text-gray-900 dark:text-white">Intranet Quorum (IQ, by Leidos)</strong>, <strong className="text-gray-900 dark:text-white">Fireside</strong> (FiscalNote), or <strong className="text-gray-900 dark:text-white">iConstituent</strong>. These platforms are used across both chambers to manage incoming mail, track constituent contacts, and generate reports. Some offices have adopted newer platforms, but the core functionality is the same.
                 </p>
               </div>
               <div>

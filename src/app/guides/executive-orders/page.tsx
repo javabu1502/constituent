@@ -197,7 +197,7 @@ export default function ExecutiveOrdersGuidePage() {
               </p>
               <ul className="list-disc list-inside space-y-3">
                 <li>
-                  <strong className="text-gray-900 dark:text-white">Emancipation Proclamation (1863)</strong>: President Abraham Lincoln issued Executive Order declaring that enslaved people in Confederate states &quot;shall be then, thenceforward, and forever free.&quot; Issued under the President&apos;s war powers, it transformed the Civil War into a fight against slavery and eventually led to the Thirteenth Amendment.
+                  <strong className="text-gray-900 dark:text-white">Emancipation Proclamation (1863)</strong>: President Abraham Lincoln declared that enslaved people in Confederate states &quot;shall be then, thenceforward, and forever free.&quot; Technically a presidential proclamation issued under the President&apos;s war powers rather than a numbered executive order, it transformed the Civil War into a fight against slavery and eventually led to the Thirteenth Amendment.
                 </li>
                 <li>
                   <strong className="text-gray-900 dark:text-white">Executive Order 9066 (1942)</strong>: President Franklin D. Roosevelt authorized the forced relocation and internment of Japanese Americans during World War II. This order is widely regarded as one of the most significant civil liberties violations in American history. Congress later formally apologized and provided reparations to surviving internees through the Civil Liberties Act of 1988.

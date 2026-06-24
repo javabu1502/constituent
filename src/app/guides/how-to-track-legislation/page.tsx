@@ -69,9 +69,9 @@ export default function TrackLegislationGuidePage() {
               </div>
 
               <div>
-                <h3 className="font-semibold text-gray-900 dark:text-white mb-2">ProPublica Congress API</h3>
+                <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Congress.gov API (For Developers)</h3>
                 <p className="text-gray-600 dark:text-gray-300 mb-2">
-                  <a href="https://projects.propublica.org/represent/" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">ProPublica Represent</a> tracks votes, statements, and bill sponsorship with an emphasis on accountability journalism.
+                  The official <a href="https://api.congress.gov/" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">Congress.gov API</a> provides free, programmatic access to bill data, votes, summaries, and member information directly from the Library of Congress. It&apos;s ideal for building your own trackers, dashboards, or alerts.
                 </p>
               </div>
             </div>

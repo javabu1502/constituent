@@ -232,7 +232,7 @@ export default function BillBecomesLawGuidePage() {
                 </div>
                 <div>
                   <dt className="font-semibold text-gray-900 dark:text-white">Reconciliation</dt>
-                  <dd>A special budget process that bypasses the filibuster, requiring only 51 votes.</dd>
+                  <dd>A special budget process that bypasses the filibuster, requiring only a simple majority (51 votes, or 50 senators plus the Vice President breaking the tie).</dd>
                 </div>
                 <div>
                   <dt className="font-semibold text-gray-900 dark:text-white">Omnibus</dt>
@@ -544,7 +544,7 @@ export default function BillBecomesLawGuidePage() {
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Budget Reconciliation</h3>
                 <p className="text-gray-600 dark:text-gray-300">
-                  Reconciliation is a special legislative process designed to align spending, revenue, and the debt limit with the goals set in the annual budget resolution. Its significance lies in its procedural advantages: reconciliation bills <strong className="text-gray-900 dark:text-white">cannot be filibustered</strong> in the Senate, meaning they need only 51 votes (instead of the usual 60 to overcome a filibuster). This makes reconciliation a powerful tool for passing major fiscal legislation along party lines. Recent examples include the Inflation Reduction Act and the Tax Cuts and Jobs Act.
+                  Reconciliation is a special legislative process designed to align spending, revenue, and the debt limit with the goals set in the annual budget resolution. Its significance lies in its procedural advantages: reconciliation bills <strong className="text-gray-900 dark:text-white">cannot be filibustered</strong> in the Senate, meaning they need only a simple majority &mdash; 51 votes, or 50 senators with the Vice President breaking the tie &mdash; instead of the usual 60 to overcome a filibuster. This makes reconciliation a powerful tool for passing major fiscal legislation along party lines. Recent examples include the Inflation Reduction Act and the Tax Cuts and Jobs Act.
                 </p>
               </div>
             </div>

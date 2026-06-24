@@ -49,8 +49,8 @@ export default function TownHallGuidePage() {
             <div className="pl-10 text-gray-600 dark:text-gray-300 space-y-3">
               <ul className="list-disc list-inside space-y-2">
                 <li><strong className="text-gray-900 dark:text-white">Your official&apos;s website</strong>: Check the &quot;Events&quot; or &quot;News&quot; section for upcoming town halls and constituent meetings.</li>
-                <li><strong className="text-gray-900 dark:text-white">Town Hall Project</strong>: <a href="https://townhallproject.com/" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">townhallproject.com</a> tracks town halls, forums, and public events for members of Congress.</li>
-                <li><strong className="text-gray-900 dark:text-white">Local news and social media</strong>: Follow your official on social media and check local news for announcements.</li>
+                <li><strong className="text-gray-900 dark:text-white">Tracker sites</strong>: Independent projects like <a href="https://5calls.org" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">5 Calls</a> and <a href="https://townhallproject.com/" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">Town Hall Project</a> aggregate town halls and public events for members of Congress. Coverage varies, so cross-check anything you find against your official&apos;s own announcements.</li>
+                <li><strong className="text-gray-900 dark:text-white">Local news and social media</strong>: Follow your official&apos;s official website and social media accounts directly, and check local news, since members typically announce their own schedules there first.</li>
                 <li><strong className="text-gray-900 dark:text-white">Call the district office</strong>: Staff can tell you about upcoming events and how to RSVP.</li>
               </ul>
               <p>

@@ -89,7 +89,7 @@ export default function HowCongressVotesPage() {
                 <li><strong className="text-gray-900 dark:text-white">Simple majority</strong>: Most legislation passes with a majority of those present and voting (not necessarily a majority of all members).</li>
                 <li><strong className="text-gray-900 dark:text-white">Three-fifths (60 votes in the Senate)</strong>: Required to invoke cloture and end a filibuster. This effectively means most Senate legislation needs 60 votes to advance.</li>
                 <li><strong className="text-gray-900 dark:text-white">Two-thirds</strong>: Required to override a presidential veto, propose constitutional amendments, convict in impeachment trials, and expel a member.</li>
-                <li><strong className="text-gray-900 dark:text-white">Quorum</strong>: A majority of members must be present for official business. In the House, that means 218 of 435 members; in the Senate, 51 of 100.</li>
+                <li><strong className="text-gray-900 dark:text-white">Quorum</strong>: A majority of members must be present for official business. In the House, that means a majority of sitting members — 218 when all 435 seats are filled, but fewer if there are vacancies; in the Senate, a majority of sitting senators (51 of 100 when every seat is filled).</li>
               </ul>
             </div>
           </section>

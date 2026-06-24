@@ -158,7 +158,7 @@ export default function ElectoralCollegeGuidePage() {
               <div className="space-y-4">
                 <div>
                   <h3 className="font-semibold text-gray-900 dark:text-white mb-1">National Popular Vote Interstate Compact (NPVIC)</h3>
-                  <p className="text-sm">A state-level agreement where participating states pledge to award their electoral votes to the national popular vote winner — but only once states representing 270+ electoral votes join. As of 2024, states with 209 electoral votes have signed on. Supporters say it would ensure every vote counts equally; critics argue it undermines the federal structure the founders intended.</p>
+                  <p className="text-sm">A state-level agreement where participating states pledge to award their electoral votes to the national popular vote winner — but only once states representing 270+ electoral votes join. As of 2025, states with 222 electoral votes have signed on. Supporters say it would ensure every vote counts equally; critics argue it undermines the federal structure the founders intended.</p>
                 </div>
                 <div>
                   <h3 className="font-semibold text-gray-900 dark:text-white mb-1">Constitutional Amendment</h3>
