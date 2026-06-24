@@ -209,7 +209,7 @@ export function CampaignForm() {
       const data = await res.json();
 
       if (!res.ok) {
-        throw new Error(data.error || 'Failed to create campaign');
+        throw new Error(data.detail ? `${data.error}: ${data.detail}` : (data.error || 'Failed to create campaign'));
       }
 
       trackEvent('campaign_created', { issue: issueArea });

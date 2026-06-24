@@ -201,23 +201,40 @@ export async function geocodeAddress(
       }
     }
 
-    // Find state legislative districts
-    let stateUpperDistrict: string | undefined;
-    let stateLowerDistrict: string | undefined;
+    // Find state legislative districts.
+    // Census can return more than one state-legislative layer per chamber
+    // (multiple redistricting vintages). Last-one-wins let a stale layer clobber
+    // the current district for towns moved in redistricting (e.g. Dracut → First
+    // Middlesex Senate). Instead, pick the MOST CURRENT layer per chamber — the
+    // one whose key has the highest 4-digit year — and still prefer the named
+    // BASENAME over the numeric SLDU/SLDL FIPS code.
+    const slKeys = Object.keys(geographies).filter(k =>
+      k.toLowerCase().includes('state legislative')
+    );
+    const yearOf = (key: string): number => {
+      const years = key.match(/\b(\d{4})\b/g);
+      return years ? Math.max(...years.map(Number)) : 0;
+    };
+    const pickCurrent = (chamber: 'upper' | 'lower') => {
+      const keys = slKeys
+        .filter(k => k.toLowerCase().includes(chamber))
+        .sort((a, b) => yearOf(b) - yearOf(a));
+      return keys.length > 0 ? geographies[keys[0]]?.[0] : undefined;
+    };
 
-    for (const key of Object.keys(geographies)) {
-      const keyLower = key.toLowerCase();
-      if (keyLower.includes('state legislative') && keyLower.includes('upper')) {
-        const upperInfo = geographies[key]?.[0];
-        // Prefer BASENAME (district name) over SLDU (numeric FIPS code)
-        // so named districts like "3rd Suffolk" are preserved
-        stateUpperDistrict = upperInfo?.BASENAME || upperInfo?.SLDU;
-      }
-      if (keyLower.includes('state legislative') && keyLower.includes('lower')) {
-        const lowerInfo = geographies[key]?.[0];
-        // Prefer BASENAME (district name) over SLDL (numeric FIPS code)
-        stateLowerDistrict = lowerInfo?.BASENAME || lowerInfo?.SLDL;
-      }
+    const upperInfo = pickCurrent('upper');
+    const lowerInfo = pickCurrent('lower');
+    const stateUpperDistrict = upperInfo?.BASENAME || upperInfo?.SLDU;
+    const stateLowerDistrict = lowerInfo?.BASENAME || lowerInfo?.SLDL;
+
+    // Only warn when a chamber failed to resolve, so future misses are debuggable.
+    if (!stateUpperDistrict || !stateLowerDistrict) {
+      console.warn('[geocode] Unresolved state district', {
+        address: `${street}, ${city}, ${state}`,
+        availableLayers: slKeys,
+        resolvedUpper: stateUpperDistrict ?? null,
+        resolvedLower: stateLowerDistrict ?? null,
+      });
     }
 
     return {
