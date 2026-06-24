@@ -75,9 +75,9 @@ export const createCampaignSchema = z.object({
   headline: z.string().min(3).max(100),
   description: z.string().min(10).max(500),
   issue_area: z.string().min(1).max(200),
-  issue_subtopic: z.string().max(200).optional(),
+  issue_subtopic: z.string().max(200).nullish(),
   target_level: z.enum(['federal', 'state', 'both']),
-  message_template: z.string().max(2000).optional(),
+  message_template: z.string().max(2000).nullish(),
   distribution_plan: z.string().min(10).max(1000),
   // Optional related bill (federal or state) — all-or-nothing, resolved client-side
   bill_level: z.enum(['federal', 'state']).optional(),
