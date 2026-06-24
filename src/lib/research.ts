@@ -14,7 +14,7 @@ interface Bill {
   latestAction?: { text?: string; actionDate?: string };
 }
 
-const TYPE_TO_SLUG: Record<string, string> = {
+export const TYPE_TO_SLUG: Record<string, string> = {
   hr: 'house-bill',
   s: 'senate-bill',
   hjres: 'house-joint-resolution',
@@ -24,6 +24,25 @@ const TYPE_TO_SLUG: Record<string, string> = {
   hres: 'house-resolution',
   sres: 'senate-resolution',
 };
+
+/** slug → API type code (reverse of TYPE_TO_SLUG), for parsing congress.gov URLs. */
+export const SLUG_TO_TYPE: Record<string, string> = Object.fromEntries(
+  Object.entries(TYPE_TO_SLUG).map(([type, slug]) => [slug, type])
+);
+
+/**
+ * Build the canonical congress.gov bill URL from an API type code (e.g. "hr"),
+ * bill number, and congress. Returns null for an unknown type.
+ */
+export function buildCongressBillUrl(
+  type: string,
+  number: string | number,
+  congress: number | string = 119
+): string | null {
+  const slug = TYPE_TO_SLUG[type.toLowerCase()];
+  if (!slug) return null;
+  return `https://www.congress.gov/bill/${congress}th-congress/${slug}/${number}`;
+}
 
 /**
  * Fetch recent bills from the Congress API for a given policy area.

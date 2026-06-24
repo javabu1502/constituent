@@ -79,6 +79,12 @@ export const createCampaignSchema = z.object({
   target_level: z.enum(['federal', 'state', 'both']),
   message_template: z.string().max(2000).optional(),
   distribution_plan: z.string().min(10).max(1000),
+  // Optional related bill (federal or state) — all-or-nothing, resolved client-side
+  bill_level: z.enum(['federal', 'state']).optional(),
+  bill_state: z.string().length(2).optional(),
+  bill_ref: z.string().max(60).optional(),
+  bill_title: z.string().max(500).optional(),
+  bill_url: z.string().max(1000).optional(),
 });
 
 export const generateCommentSchema = z.object({

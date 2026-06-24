@@ -68,6 +68,21 @@ export default async function CampaignPage({ params }: PageProps) {
         <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
           {campaign.description}
         </p>
+        {/* Related bill */}
+        {campaign.bill_url && (
+          <a
+            href={campaign.bill_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-4 inline-flex items-center gap-2 text-sm text-purple-700 dark:text-purple-300 hover:underline"
+          >
+            📄 About this bill:{' '}
+            <span className="font-medium">
+              {campaign.bill_ref ? `${campaign.bill_ref} — ` : ''}{campaign.bill_title || 'View bill'}
+            </span>
+            {campaign.bill_level === 'state' && campaign.bill_state ? ` (${campaign.bill_state})` : ''}
+          </a>
+        )}
         {/* Social proof bar */}
         <div className="mt-4 p-3 bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-700 rounded-xl">
           <div className="flex items-center justify-between mb-2">

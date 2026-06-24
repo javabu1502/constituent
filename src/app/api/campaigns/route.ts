@@ -55,7 +55,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: parsed.error }, { status: 400 });
   }
 
-  const { headline, description, issue_area, issue_subtopic, target_level, message_template, distribution_plan } = parsed.data;
+  const { headline, description, issue_area, issue_subtopic, target_level, message_template, distribution_plan, bill_level, bill_state, bill_ref, bill_title, bill_url } = parsed.data;
 
   const slug = slugify(headline).slice(0, 50) + '-' + randomSuffix();
 
@@ -72,6 +72,11 @@ export async function POST(request: NextRequest) {
       target_level,
       message_template: message_template || null,
       distribution_plan,
+      bill_level: bill_level || null,
+      bill_state: bill_level === 'state' ? (bill_state || null) : null,
+      bill_ref: bill_ref || null,
+      bill_title: bill_title || null,
+      bill_url: bill_url || null,
       status: 'pending',
     })
     .select()

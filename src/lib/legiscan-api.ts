@@ -126,6 +126,53 @@ export async function getCurrentSession(stateCode: string): Promise<LegiScanSess
 }
 
 /**
+ * Resolve a state bill number (e.g. "AB 123", "SB1234") to its official title
+ * and link within a state's current session. Prefers the statehouse
+ * `state_link`, falling back to the LegiScan page. Returns null if unresolved.
+ */
+export async function resolveLegiscanBill(
+  stateCode: string,
+  query: string,
+): Promise<{ title: string; url: string; ref: string } | null> {
+  const session = await getCurrentSession(stateCode);
+  if (!session) return null;
+
+  const normalize = (s: string) => s.replace(/[^a-z0-9]/gi, '').toUpperCase();
+  const target = normalize(query);
+
+  const searchData = await legiscanFetch('getSearch', {
+    id: String(session.session_id),
+    query,
+  });
+  const searchresult = searchData?.searchresult as Record<string, unknown> | undefined;
+  if (!searchresult) return null;
+
+  const results = Object.entries(searchresult)
+    .filter(([k]) => k !== 'summary')
+    .map(([, v]) => v as { bill_id?: number; bill_number?: string; title?: string; url?: string });
+
+  if (results.length === 0) return null;
+
+  // Prefer an exact bill-number match; otherwise the top relevance hit
+  // (the creator confirms the resolved title before saving).
+  const chosen = results.find(r => normalize(r.bill_number || '') === target) ?? results[0];
+  if (!chosen?.bill_id) return null;
+
+  // Fetch the bill for the official statehouse link + canonical title
+  const billData = await legiscanFetch('getBill', { id: String(chosen.bill_id) });
+  const bill = billData?.bill as
+    | { bill_number?: string; title?: string; state_link?: string; url?: string }
+    | undefined;
+
+  const title = bill?.title || chosen.title || '';
+  const url = bill?.state_link || bill?.url || chosen.url || '';
+  const ref = bill?.bill_number || chosen.bill_number || query;
+
+  if (!title || !url) return null;
+  return { title, url, ref };
+}
+
+/**
  * Find a legislator's LegiScan people_id by matching name.
  * Uses getSessionPeople and caches the results.
  */

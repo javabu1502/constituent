@@ -1,11 +1,22 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { trackEvent } from '@/lib/analytics';
 import { Button } from '@/components/ui/Button';
 import { IssuePicker } from '@/components/ui/IssuePicker';
+import { US_STATES } from '@/lib/constants';
+import { detectBillReferences } from '@/lib/bills';
+
+type BillLevel = '' | 'federal' | 'state';
+interface ResolvedBill {
+  level: 'federal' | 'state';
+  state?: string;
+  ref: string;
+  title: string;
+  url: string;
+}
 
 export function CampaignForm() {
   const router = useRouter();
@@ -18,9 +29,135 @@ export function CampaignForm() {
   const [targetLevel, setTargetLevel] = useState<'federal' | 'state' | 'both'>('federal');
   const [messageTemplate, setMessageTemplate] = useState('');
   const [distributionPlan, setDistributionPlan] = useState('');
+
+  // Optional related bill
+  const [billLevel, setBillLevel] = useState<BillLevel>('');
+  const [billState, setBillState] = useState('');
+  const [billQuery, setBillQuery] = useState('');
+  const [resolvedBill, setResolvedBill] = useState<ResolvedBill | null>(null);
+  const [billStatus, setBillStatus] = useState<'idle' | 'resolving' | 'notfound' | 'error'>('idle');
+
+  // Suggestion from headline/description text
+  const [suggestion, setSuggestion] = useState<
+    { detectedRaw: string; ref: string; level: 'federal' | 'state'; title?: string; url?: string; state?: string; needsState?: boolean } | null
+  >(null);
+  const [dismissedRefs, setDismissedRefs] = useState<Set<string>>(new Set());
+  const resolveCache = useRef<Map<string, ResolvedBill | null>>(new Map());
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
+
+  // Reset any prior resolution when the bill inputs change
+  const resetBill = () => {
+    setResolvedBill(null);
+    setBillStatus('idle');
+  };
+
+  const resolveBill = async () => {
+    const query = billQuery.trim();
+    if (!billLevel || !query) return;
+    if (billLevel === 'state' && !billState) {
+      setBillStatus('error');
+      return;
+    }
+    setBillStatus('resolving');
+    setResolvedBill(null);
+    try {
+      const res = await fetch('/api/bills/resolve', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          level: billLevel,
+          state: billLevel === 'state' ? billState : undefined,
+          query,
+        }),
+      });
+      const data = await res.json();
+      if (res.ok && data.found) {
+        setResolvedBill({
+          level: billLevel,
+          state: data.state,
+          ref: data.ref,
+          title: data.title,
+          url: data.url,
+        });
+        setBillStatus('idle');
+      } else {
+        setBillStatus('notfound');
+      }
+    } catch {
+      setBillStatus('error');
+    }
+  };
+
+  // Suggest a bill detected in the headline/description (debounced, cached).
+  // Suggestion only — never sets a bill without an explicit "Use this" click.
+  useEffect(() => {
+    if (resolvedBill) { setSuggestion(null); return; }
+    const refs = detectBillReferences(`${headline} ${description}`);
+    if (refs.length === 0) { setSuggestion(null); return; }
+    const ref = refs[0];
+    if (dismissedRefs.has(ref.raw)) { setSuggestion(null); return; }
+
+    const timer = setTimeout(async () => {
+      // State bills can't be resolved without a chosen state
+      if (ref.level === 'state' && !billState) {
+        setSuggestion({ detectedRaw: ref.raw, ref: ref.raw, level: 'state', needsState: true });
+        return;
+      }
+      const cacheKey = ref.level === 'state' ? `state:${billState}:${ref.raw}` : `fed:${ref.raw}`;
+      let resolved = resolveCache.current.get(cacheKey);
+      if (resolved === undefined) {
+        try {
+          const res = await fetch('/api/bills/resolve', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              level: ref.level,
+              state: ref.level === 'state' ? billState : undefined,
+              query: ref.raw,
+            }),
+          });
+          const data = await res.json();
+          resolved = res.ok && data.found
+            ? { level: ref.level, state: data.state, ref: data.ref, title: data.title, url: data.url }
+            : null;
+        } catch {
+          resolved = null;
+        }
+        resolveCache.current.set(cacheKey, resolved);
+      }
+      setSuggestion(
+        resolved
+          ? { detectedRaw: ref.raw, ref: resolved.ref, level: resolved.level, title: resolved.title, url: resolved.url, state: resolved.state }
+          : null
+      );
+    }, 600);
+
+    return () => clearTimeout(timer);
+  }, [headline, description, billState, resolvedBill, dismissedRefs]);
+
+  const useSuggestion = () => {
+    if (!suggestion?.url || !suggestion.title) return;
+    setBillLevel(suggestion.level);
+    if (suggestion.level === 'state' && suggestion.state) setBillState(suggestion.state);
+    setBillQuery(suggestion.ref);
+    setResolvedBill({
+      level: suggestion.level,
+      state: suggestion.state,
+      ref: suggestion.ref,
+      title: suggestion.title,
+      url: suggestion.url,
+    });
+    setBillStatus('idle');
+    setSuggestion(null);
+  };
+
+  const dismissSuggestion = () => {
+    if (suggestion) setDismissedRefs((prev) => new Set(prev).add(suggestion.detectedRaw));
+    setSuggestion(null);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -57,6 +194,15 @@ export function CampaignForm() {
           target_level: targetLevel,
           message_template: messageTemplate.trim() || null,
           distribution_plan: distributionPlan.trim(),
+          ...(resolvedBill
+            ? {
+                bill_level: resolvedBill.level,
+                bill_state: resolvedBill.level === 'state' ? resolvedBill.state : undefined,
+                bill_ref: resolvedBill.ref,
+                bill_title: resolvedBill.title,
+                bill_url: resolvedBill.url,
+              }
+            : {}),
         }),
       });
 
@@ -183,6 +329,128 @@ export function CampaignForm() {
             </label>
           ))}
         </div>
+      </div>
+
+      {/* Related Bill (optional) */}
+      <div>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          Related Bill <span className="text-gray-400 dark:text-gray-500 font-normal">(optional)</span>
+        </label>
+        <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">
+          Link a specific bill so participants&apos; letters reference it directly.
+        </p>
+
+        {suggestion && (
+          <div className="mb-3 flex items-start gap-2 p-3 rounded-lg bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-800">
+            <span aria-hidden="true">💡</span>
+            <div className="flex-1">
+              {suggestion.needsState ? (
+                <p className="text-sm text-blue-800 dark:text-blue-300">
+                  Looks like you mentioned a bill (<span className="font-semibold">{suggestion.detectedRaw}</span>) — choose <strong>State</strong> below and pick its state, and we can link it.
+                </p>
+              ) : (
+                <p className="text-sm text-blue-800 dark:text-blue-300">
+                  We found a possible bill: <span className="font-semibold">{suggestion.ref}</span>{suggestion.title ? ` — ${suggestion.title}` : ''}.
+                </p>
+              )}
+              <div className="mt-2 flex gap-2">
+                {!suggestion.needsState && (
+                  <button
+                    type="button"
+                    onClick={useSuggestion}
+                    className="text-xs font-medium px-2.5 py-1 bg-purple-600 hover:bg-purple-700 text-white rounded-md"
+                  >
+                    Use this
+                  </button>
+                )}
+                <button
+                  type="button"
+                  onClick={dismissSuggestion}
+                  className="text-xs px-2.5 py-1 border border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-300 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700"
+                >
+                  Dismiss
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        <div className="flex gap-2 mb-3">
+          {([['', 'None'], ['federal', 'Federal'], ['state', 'State']] as const).map(([val, lbl]) => (
+            <label
+              key={val || 'none'}
+              className={`flex-1 text-center px-3 py-2 rounded-lg border-2 cursor-pointer text-sm font-medium transition-colors ${
+                billLevel === val
+                  ? 'border-purple-600 bg-purple-50 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300'
+                  : 'border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:border-gray-400'
+              }`}
+            >
+              <input
+                type="radio"
+                name="billLevel"
+                value={val}
+                checked={billLevel === val}
+                onChange={() => { setBillLevel(val); setBillQuery(''); resetBill(); }}
+                className="sr-only"
+              />
+              {lbl}
+            </label>
+          ))}
+        </div>
+
+        {billLevel && (
+          <>
+            <div className="flex gap-2">
+              {billLevel === 'state' && (
+                <select
+                  value={billState}
+                  onChange={(e) => { setBillState(e.target.value); resetBill(); }}
+                  className="px-3 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                >
+                  <option value="">State…</option>
+                  {US_STATES.map((s) => (
+                    <option key={s.code} value={s.code}>{s.code}</option>
+                  ))}
+                </select>
+              )}
+              <input
+                type="text"
+                value={billQuery}
+                onChange={(e) => { setBillQuery(e.target.value); resetBill(); }}
+                onBlur={resolveBill}
+                placeholder={billLevel === 'federal' ? 'e.g., H.R. 22 or a congress.gov link' : 'e.g., AB 1234'}
+                className="flex-1 px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
+              />
+              <Button type="button" variant="secondary" onClick={resolveBill} isLoading={billStatus === 'resolving'}>
+                Look up
+              </Button>
+            </div>
+
+            {resolvedBill && (
+              <div className="mt-2 flex items-start gap-2 p-3 rounded-lg bg-green-50 dark:bg-green-900/30 border border-green-200 dark:border-green-800">
+                <span className="text-green-600 dark:text-green-400">✓</span>
+                <p className="text-sm text-green-800 dark:text-green-300">
+                  <span className="font-semibold">{resolvedBill.ref}</span> — {resolvedBill.title}
+                </p>
+              </div>
+            )}
+            {billStatus === 'notfound' && (
+              <p className="mt-2 text-sm text-amber-600 dark:text-amber-400">
+                Couldn&apos;t find that bill. Check the number{billLevel === 'state' ? ' and state' : ''} and try again.
+              </p>
+            )}
+            {billStatus === 'error' && (
+              <p className="mt-2 text-sm text-red-600 dark:text-red-400">
+                {billLevel === 'state' && !billState ? 'Pick a state first.' : 'Lookup failed — try again.'}
+              </p>
+            )}
+            {billLevel === 'state' && (
+              <p className="mt-2 text-xs text-gray-500 dark:text-gray-400">
+                State bills apply to a single state — this campaign will be scoped to {billState || 'that state'}.
+              </p>
+            )}
+          </>
+        )}
       </div>
 
       {/* Message Template (optional) */}

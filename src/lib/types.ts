@@ -302,6 +302,12 @@ export interface Campaign {
   action_count: number;
   created_at: string;
   updated_at: string;
+  // Optional related bill (federal or state)
+  bill_level: 'federal' | 'state' | null;
+  bill_state: string | null;
+  bill_ref: string | null;
+  bill_title: string | null;
+  bill_url: string | null;
 }
 
 export interface CampaignAction {

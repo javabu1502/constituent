@@ -112,9 +112,14 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
       setOfficials(filtered);
 
       // Generate messages
-      const ask = campaign.message_template
+      let ask = campaign.message_template
         ? `${campaign.headline}. ${campaign.message_template}`
         : campaign.headline;
+      // Ground the message in the campaign's related bill (if any) — the
+      // generate-message route runs detectBillReferences over the ask.
+      if (campaign.bill_ref) {
+        ask += ` Specifically regarding ${campaign.bill_ref}.`;
+      }
 
       const turnstileToken = await getToken();
 
