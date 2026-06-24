@@ -35,3 +35,32 @@ export async function sendDigestEmail(
     throw new Error(`Failed to send email: ${error.message}`);
   }
 }
+
+/**
+ * Send an internal admin notification (e.g. a new campaign awaiting approval)
+ * to ADMIN_NOTIFY_EMAIL. Best-effort: never throws, so it can't break the
+ * action that triggered it.
+ */
+export async function sendAdminNotification(
+  subject: string,
+  html: string
+): Promise<void> {
+  const resend = getResend();
+  if (!resend) {
+    console.warn('[resend] RESEND_API_KEY not set, skipping admin notification');
+    return;
+  }
+
+  const to = process.env.ADMIN_NOTIFY_EMAIL;
+  if (!to) {
+    console.warn('[resend] ADMIN_NOTIFY_EMAIL not set, skipping admin notification');
+    return;
+  }
+
+  const from = process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev';
+
+  const { error } = await resend.emails.send({ from, to, subject, html });
+  if (error) {
+    console.error('[resend] Failed to send admin notification:', error);
+  }
+}

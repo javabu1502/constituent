@@ -3,6 +3,16 @@ import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase';
 import { createCampaignSchema, parseBody } from '@/lib/schemas';
 import { profileLimiter, getClientIp } from '@/lib/rate-limit';
+import { sendAdminNotification } from '@/lib/resend';
+
+function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
 
 function slugify(text: string): string {
   return text
@@ -71,6 +81,21 @@ export async function POST(request: NextRequest) {
     console.error('[campaigns] Insert error:', error);
     return NextResponse.json({ error: 'Failed to create campaign' }, { status: 500 });
   }
+
+  // Ping the admin that a new campaign is awaiting approval (fire-and-forget)
+  void sendAdminNotification(
+    `New campaign awaiting approval: ${headline}`,
+    `<h2>New campaign submitted</h2>
+     <p><strong>${escapeHtml(headline)}</strong></p>
+     <p>${escapeHtml(description)}</p>
+     <ul>
+       <li>Issue: ${escapeHtml(issue_area)}${issue_subtopic ? ` / ${escapeHtml(issue_subtopic)}` : ''}</li>
+       <li>Target level: ${escapeHtml(target_level)}</li>
+       <li>Distribution plan: ${escapeHtml(distribution_plan)}</li>
+       <li>Slug: ${escapeHtml(slug)}</li>
+     </ul>
+     <p>Status is <strong>pending</strong> — review and approve it in the admin dashboard.</p>`
+  );
 
   return NextResponse.json(campaign);
 }
