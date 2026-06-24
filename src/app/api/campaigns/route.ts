@@ -84,11 +84,7 @@ export async function POST(request: NextRequest) {
 
   if (error) {
     console.error('[campaigns] Insert error:', error);
-    // TEMP DEBUG: surface the underlying DB error to diagnose the insert failure
-    return NextResponse.json(
-      { error: 'Failed to create campaign', detail: error.message, code: error.code, hint: error.hint },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Failed to create campaign' }, { status: 500 });
   }
 
   // Ping the admin that a new campaign is awaiting approval (fire-and-forget)
