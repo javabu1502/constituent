@@ -2,9 +2,14 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase';
 
-function isAdmin(userId: string): boolean {
-  const adminIds = process.env.ADMIN_USER_IDS?.split(',').map(id => id.trim()) ?? [];
-  return adminIds.includes(userId);
+function isAdmin(user: { id: string; email?: string }): boolean {
+  const adminIds = process.env.ADMIN_USER_IDS?.split(',').map(s => s.trim()).filter(Boolean) ?? [];
+  if (adminIds.includes(user.id)) return true;
+
+  const adminEmails = process.env.ADMIN_EMAILS?.split(',').map(s => s.trim().toLowerCase()).filter(Boolean) ?? [];
+  if (user.email && adminEmails.includes(user.email.toLowerCase())) return true;
+
+  return false;
 }
 
 /**
@@ -15,7 +20,7 @@ export async function GET() {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
 
-  if (!user || !isAdmin(user.id)) {
+  if (!user || !isAdmin(user)) {
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
   }
 
@@ -43,7 +48,7 @@ export async function PATCH(request: NextRequest) {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
 
-  if (!user || !isAdmin(user.id)) {
+  if (!user || !isAdmin(user)) {
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
   }
 
