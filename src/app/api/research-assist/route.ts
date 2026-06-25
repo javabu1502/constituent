@@ -4,6 +4,7 @@ import { researchLimiter, getClientIp } from '@/lib/rate-limit';
 import { verifyTurnstile } from '@/lib/turnstile';
 import { enforceDailyQuota, resolveUsageIdentity } from '@/lib/usage-quota';
 import { fetchRecentBills } from '@/lib/research';
+import { fetchRecentNews } from '@/lib/news-context';
 
 interface ResearchRequest {
   issue: string;
@@ -63,10 +64,18 @@ export async function POST(request: NextRequest) {
     return new Response('Daily research limit reached. Try again tomorrow.', { status: 429 });
   }
 
-  const billContext = await fetchRecentBills(issueCategory);
+  // Fetch bills + recent news in parallel (both fail open)
+  const [billContext, newsContext] = await Promise.all([
+    fetchRecentBills(issueCategory),
+    fetchRecentNews([issue, ask, issueCategory].filter(Boolean).join(' ')),
+  ]);
+
+  const newsBlock = newsContext
+    ? `\n\nRECENT NEWS / CURRENT CONTEXT (factual grounding — use ONLY facts present here, attribute to the source and date, hedge on developing stories, stay strictly nonpartisan; do not invent or extrapolate):\n${newsContext}`
+    : '';
 
   const userPrompt = `Issue category: ${issueCategory}
-Specific issue: ${issue}${ask ? `\nThe user's ask: ${ask}` : ''}${billContext}`;
+Specific issue: ${issue}${ask ? `\nThe user's ask: ${ask}` : ''}${billContext}${newsBlock}`;
 
   const stream = callClaudeStream(SYSTEM_PROMPT, [{ role: 'user', content: userPrompt }], 600);
 

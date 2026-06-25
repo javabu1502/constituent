@@ -4,6 +4,7 @@ import { chatRequestSchema, parseBody } from '@/lib/schemas';
 import { chatLimiter, getClientIp } from '@/lib/rate-limit';
 import { verifyTurnstile } from '@/lib/turnstile';
 import { enforceDailyQuota, resolveUsageIdentity } from '@/lib/usage-quota';
+import { fetchRecentNews } from '@/lib/news-context';
 
 export async function POST(request: Request) {
   const ip = getClientIp(request);
@@ -55,8 +56,23 @@ export async function POST(request: Request) {
     return new Response('Last message must be from user', { status: 400 });
   }
 
+  // Ground the assistant in recent news on the user's current topic (fail open)
+  let systemPrompt = CHAT_SYSTEM_PROMPT;
   try {
-    const stream = callClaudeStreamFast(CHAT_SYSTEM_PROMPT, messages, 800);
+    const topic = typeof last.content === 'string' ? last.content : '';
+    const news = await fetchRecentNews(topic);
+    if (news) {
+      systemPrompt = `${CHAT_SYSTEM_PROMPT}
+
+RECENT NEWS / CURRENT CONTEXT (factual grounding on the user's current topic — use ONLY facts present here, attribute to the source and date, hedge on developing stories, stay strictly nonpartisan, and never invent or extrapolate):
+${news}`;
+    }
+  } catch {
+    // fail open — the assistant still works without news
+  }
+
+  try {
+    const stream = callClaudeStreamFast(systemPrompt, messages, 800);
 
     return new Response(stream, {
       headers: {
