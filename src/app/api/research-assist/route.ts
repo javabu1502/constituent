@@ -71,7 +71,7 @@ export async function POST(request: NextRequest) {
   ]);
 
   const newsBlock = newsContext
-    ? `\n\nRECENT NEWS / CURRENT CONTEXT (factual grounding — use ONLY facts present here, attribute to the source and date, hedge on developing stories, stay strictly nonpartisan; do not invent or extrapolate):\n${newsContext}`
+    ? `\n\nRECENT NEWS / CURRENT CONTEXT (factual grounding — use ONLY facts present here; cite a news outlet only if it is named on that line, otherwise say "recent reporting"; attribute to the date/timeframe; hedge on developing stories; stay strictly nonpartisan; do not invent or extrapolate):\n${newsContext}`
     : '';
 
   const userPrompt = `Issue category: ${issueCategory}

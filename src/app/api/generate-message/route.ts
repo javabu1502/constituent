@@ -360,7 +360,7 @@ async function generateForOfficial(
     : '';
 
   const newsInstructions = newsContext
-    ? `\n- If RECENT NEWS / CURRENT CONTEXT is provided, you MAY reference timely developments — but ONLY facts present in that block, attributed naturally to the source and timeframe (e.g. "amid recent reports that..." or "as [source] reported this month..."). Never invent, infer, or extrapolate beyond it. Stay strictly nonpartisan and avoid speculation on fast-moving stories.`
+    ? `\n- If RECENT NEWS / CURRENT CONTEXT is provided, you MAY reference timely developments — but ONLY facts present in that block, attributed naturally to the timeframe. Name a specific news outlet ONLY if it is listed for that item in the block; if a fact's source is not named there, write "recent reporting" (e.g. "amid recent reporting that...") rather than inventing an outlet. Never invent, infer, or extrapolate beyond the provided news. Stay strictly nonpartisan and avoid speculation on fast-moving stories.`
     : '';
 
   const toneInstructions = buildToneInstructions(tone);
@@ -463,7 +463,7 @@ CRITICAL: Respond with ONLY a JSON object. No other text.`;
   const districtSection = districtContext || '';
   const billDataSection = billDetails || '';
   const newsSection = newsContext
-    ? `\nRECENT NEWS / CURRENT CONTEXT (factual grounding — use ONLY facts present here, attribute to the source/date, do not invent or extrapolate):\n${newsContext}`
+    ? `\nRECENT NEWS / CURRENT CONTEXT (factual grounding — use ONLY facts present here; cite an outlet only if it is named on that line below, otherwise say "recent reporting"; do not invent or extrapolate):\n${newsContext}`
     : '';
 
   const emailUserPrompt = `Write a letter to this specific official:
