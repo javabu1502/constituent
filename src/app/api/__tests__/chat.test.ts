@@ -8,6 +8,12 @@ vi.mock('@/lib/claude-stream', () => ({
       c.close();
     },
   })),
+  callClaudeStreamWithSearch: vi.fn(() => new ReadableStream({
+    start(c) {
+      c.enqueue(new TextEncoder().encode('Hello from Claude'));
+      c.close();
+    },
+  })),
 }));
 
 vi.mock('@/lib/usage-quota', () => ({
@@ -108,6 +114,12 @@ describe('POST /api/chat', () => {
     vi.doMock('@/lib/claude-stream', () => ({
       callClaudeStream: vi.fn(() => new ReadableStream({ start(c) { c.close(); } })),
       callClaudeStreamFast: vi.fn(() => new ReadableStream({
+        start(c) {
+          c.enqueue(new TextEncoder().encode('Hello from Claude'));
+          c.close();
+        },
+      })),
+      callClaudeStreamWithSearch: vi.fn(() => new ReadableStream({
         start(c) {
           c.enqueue(new TextEncoder().encode('Hello from Claude'));
           c.close();

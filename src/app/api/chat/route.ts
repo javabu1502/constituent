@@ -1,10 +1,9 @@
-import { callClaudeStreamFast } from '@/lib/claude-stream';
+import { callClaudeStreamWithSearch } from '@/lib/claude-stream';
 import { CHAT_SYSTEM_PROMPT } from '@/lib/chat-system-prompt';
 import { chatRequestSchema, parseBody } from '@/lib/schemas';
 import { chatLimiter, getClientIp } from '@/lib/rate-limit';
 import { verifyTurnstile } from '@/lib/turnstile';
 import { enforceDailyQuota, resolveUsageIdentity } from '@/lib/usage-quota';
-import { fetchRecentNews } from '@/lib/news-context';
 
 export async function POST(request: Request) {
   const ip = getClientIp(request);
@@ -56,23 +55,15 @@ export async function POST(request: Request) {
     return new Response('Last message must be from user', { status: 400 });
   }
 
-  // Ground the assistant in recent news on the user's current topic (fail open)
-  let systemPrompt = CHAT_SYSTEM_PROMPT;
-  try {
-    const topic = typeof last.content === 'string' ? last.content : '';
-    const news = await fetchRecentNews(topic);
-    if (news) {
-      systemPrompt = `${CHAT_SYSTEM_PROMPT}
+  // The assistant can search the web for current/time-sensitive questions and
+  // cite sources. It self-gates — stable civics questions are answered directly,
+  // so a search (billed per use) only happens when the topic genuinely needs it.
+  const systemPrompt = `${CHAT_SYSTEM_PROMPT}
 
-RECENT NEWS / CURRENT CONTEXT (sourced, dated news lines on the user's topic — synthesize across the relevant ones for a substantive, accurate answer; use only what they say; cite a source only when named on its line; attribute to the date/timeframe; invent no outlets, quotes, numbers, or motivations beyond these lines; hedge on developing stories; stay strictly nonpartisan):
-${news}`;
-    }
-  } catch {
-    // fail open — the assistant still works without news
-  }
+You have a web_search tool. Use it ONLY when the question depends on current, time-sensitive, or recent information — recent events, the status of a current bill or vote, current prices, or who currently holds an office. For stable civics knowledge, answer directly without searching. When you do search: base every claim on the results, attribute to the source and the date/timeframe, stay strictly nonpartisan, hedge on developing stories, and never fabricate. The cited sources are shown to the user automatically.`;
 
   try {
-    const stream = callClaudeStreamFast(systemPrompt, messages, 800);
+    const stream = callClaudeStreamWithSearch(systemPrompt, messages, 1024);
 
     return new Response(stream, {
       headers: {
