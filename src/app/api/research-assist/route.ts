@@ -71,7 +71,7 @@ export async function POST(request: NextRequest) {
   ]);
 
   const newsBlock = newsContext
-    ? `\n\nRECENT NEWS / CURRENT CONTEXT (HEADLINES ONLY — no article text. State only what a line literally says; cite an outlet only if named on that line (else "recent reporting"); add no quotes, numbers, or characterizations beyond the headline; attribute to the date/timeframe; hedge on developing stories; stay strictly nonpartisan; do not invent or extrapolate):\n${newsContext}`
+    ? `\n\nRECENT NEWS / CURRENT CONTEXT (sourced, dated news lines — synthesize across the relevant ones for a substantive, accurate summary; use only what they say; cite a source only when named on its line; attribute to the date/timeframe; invent no outlets, quotes, numbers, or motivations beyond these lines; hedge on developing stories; stay strictly nonpartisan):\n${newsContext}`
     : '';
 
   const userPrompt = `Issue category: ${issueCategory}

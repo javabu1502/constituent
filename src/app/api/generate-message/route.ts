@@ -360,7 +360,7 @@ async function generateForOfficial(
     : '';
 
   const newsInstructions = newsContext
-    ? `\n- If RECENT NEWS / CURRENT CONTEXT is provided, you MAY reference timely developments — but treat it as HEADLINES ONLY (you do NOT have the article text). State only what a headline literally says (e.g. that a bill passed, or that a signing was canceled), attributed to the timeframe. Name a news outlet ONLY if it is listed on that headline's line; otherwise write "recent reporting". Do NOT add quotes, vote counts, statistics, motivations, or characterizations (e.g. "largest in a generation", "held hostage") that are not literally in a headline. Never invent, infer, or extrapolate. Stay strictly nonpartisan and avoid speculation on fast-moving stories.`
+    ? `\n- If RECENT NEWS / CURRENT CONTEXT is provided, engage with it substantively — don't merely restate one headline. Draw across the relevant lines to describe the development accurately (e.g. that a bill passed both chambers with bipartisan support and the President has not yet signed it), using the concrete facts they contain — bill names, vote tallies, what the measure does, and any signing/veto action — attributed to the dates, and to a source only when it is named on that line. Use ONLY what the lines actually say: never invent outlets, quotes, vote counts, motivations, or characterizations beyond them. Stay strictly nonpartisan and hedge on fast-moving stories.`
     : '';
 
   const toneInstructions = buildToneInstructions(tone);
@@ -463,7 +463,7 @@ CRITICAL: Respond with ONLY a JSON object. No other text.`;
   const districtSection = districtContext || '';
   const billDataSection = billDetails || '';
   const newsSection = newsContext
-    ? `\nRECENT NEWS / CURRENT CONTEXT (HEADLINES ONLY — no article text. State only what a line literally says; cite an outlet only if named on that line (else "recent reporting"); add no quotes, numbers, or characterizations beyond the headline):\n${newsContext}`
+    ? `\nRECENT NEWS / CURRENT CONTEXT (sourced, dated news lines — synthesize across the relevant ones for a substantive, accurate account; use only what they say; cite a source only when named on its line; invent no outlets, quotes, numbers, or motivations beyond these lines):\n${newsContext}`
     : '';
 
   const emailUserPrompt = `Write a letter to this specific official:

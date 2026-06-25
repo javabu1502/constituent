@@ -138,7 +138,7 @@ export async function fetchRecentNews(query: string): Promise<string> {
       if (count >= 2) continue;
       perSource.set(src, count + 1);
       picked.push(it);
-      if (picked.length >= 5) break;
+      if (picked.length >= 8) break;
     }
     if (picked.length === 0) return '';
 

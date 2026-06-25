@@ -64,7 +64,7 @@ export async function POST(request: Request) {
     if (news) {
       systemPrompt = `${CHAT_SYSTEM_PROMPT}
 
-RECENT NEWS / CURRENT CONTEXT (HEADLINES ONLY on the user's topic — no article text. State only what a line literally says; cite an outlet only if named on that line (else "recent reporting"); add no quotes, numbers, or characterizations beyond the headline; attribute to the date/timeframe; hedge on developing stories; stay strictly nonpartisan; never invent or extrapolate):
+RECENT NEWS / CURRENT CONTEXT (sourced, dated news lines on the user's topic — synthesize across the relevant ones for a substantive, accurate answer; use only what they say; cite a source only when named on its line; attribute to the date/timeframe; invent no outlets, quotes, numbers, or motivations beyond these lines; hedge on developing stories; stay strictly nonpartisan):
 ${news}`;
     }
   } catch {
