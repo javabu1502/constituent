@@ -29,8 +29,11 @@ export async function updateSession(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  // Protect /dashboard — redirect to /login if not authenticated
-  if (!user && (request.nextUrl.pathname.startsWith('/dashboard') || request.nextUrl.pathname === '/campaign/create')) {
+  // Protect /dashboard — redirect to /login if not authenticated.
+  // NOTE: /campaign/create is intentionally NOT guarded here — it renders a public
+  // explainer + sign-in CTA for logged-out visitors (and the create API still
+  // requires auth), so a middleware redirect would hide that and drop the ?type.
+  if (!user && request.nextUrl.pathname.startsWith('/dashboard')) {
     const url = request.nextUrl.clone();
     url.pathname = '/login';
     url.searchParams.set('redirectTo', request.nextUrl.pathname);
