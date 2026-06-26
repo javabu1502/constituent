@@ -65,6 +65,7 @@ CREATE INDEX IF NOT EXISTS idx_stories_campaign ON public.stories (campaign_id, 
 -- This policy only governs direct client access — users see their own stories.
 ALTER TABLE public.stories ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "Users can view own stories" ON public.stories;
 CREATE POLICY "Users can view own stories"
   ON public.stories FOR SELECT
   TO authenticated
