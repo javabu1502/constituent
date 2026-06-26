@@ -422,7 +422,7 @@ export default async function HomePage() {
             </svg>
           </div>
           <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-3">
-            Reader-funded, ad-free, independent
+            User-funded, ad-free, independent
           </h2>
           <p className="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
             My Democracy takes no ads and never sells your data. Donations from people like you

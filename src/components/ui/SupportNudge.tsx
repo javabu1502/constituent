@@ -38,7 +38,7 @@ export function SupportNudge() {
       </svg>
       <div className="flex-1">
         <p className="text-sm text-amber-900 dark:text-amber-200">
-          My Democracy is reader-funded — no ads, no data sales. If this was useful, want to chip in to keep it free?
+          My Democracy is user-funded — no ads, no data sales. If this was useful, want to chip in to keep it free?
         </p>
         <div className="mt-2 flex items-center gap-3">
           <a
