@@ -22,8 +22,15 @@ const ATTR_LABELS: Record<AttributionLevel, { label: string; help: string }> = {
   anonymous: { label: 'Keep me anonymous', help: 'We strip identifying details so the story can’t be traced to you.' },
 };
 
-const GREETING =
-  "Hi — I’m here to help you put your experience into words. There’s no rush, and you can skip anything. To start: what does this issue mean to you, or what happened?";
+function buildGreeting(campaign: Campaign): string {
+  const lead = "Hi — I’m here to help you put your experience into words. There’s no rush, and you can skip anything.";
+  const prompt = campaign.story_prompt?.trim();
+  if (prompt) {
+    // Open with the exact prompt the campaign creator wrote.
+    return `${lead}\n\nTo start: ${prompt}`;
+  }
+  return `${lead}\n\nTo start: what’s your experience with ${campaign.headline}, or what happened?`;
+}
 
 export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
   const [step, setStep] = useState<Step>('intro');
@@ -31,7 +38,7 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   // Interview chat
-  const [messages, setMessages] = useState<ChatMessage[]>([{ role: 'assistant', content: GREETING }]);
+  const [messages, setMessages] = useState<ChatMessage[]>(() => [{ role: 'assistant', content: buildGreeting(campaign) }]);
   const [input, setInput] = useState('');
   const [streaming, setStreaming] = useState(false);
   const [composing, setComposing] = useState(false);
