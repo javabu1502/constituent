@@ -84,6 +84,11 @@ Use EVERYTHING the storyteller shared. Weave their concrete details, moments, fe
 
 Write in their own voice — first person, warm, human, and grounded in real specifics. Develop and connect what they said into full, flowing sentences and a natural narrative; don't just list their answers. But do NOT invent facts, names, places, numbers, or events they didn't mention — if a piece is missing, leave it out rather than fabricate. Aim for roughly 250–600 words (shorter only if they truly gave little to work with). No salutation or signature — just the story.
 
+Sound like a real person, not AI. Specifically:
+- Do NOT use em dashes or en dashes (— or –). Use periods, commas, or simple words like "and" / "but" instead.
+- Avoid polished marketing cadence and clichés ("at the end of the day", "now more than ever", "speaks volumes"). Plain, everyday language.
+- Vary sentence length. Short, direct sentences are good. It's fine to be a little plain or imperfect — that reads as human.
+
 Respond with ONLY this JSON, nothing else:
 {
   "title": "a short, honest title in their voice (max 80 chars)",

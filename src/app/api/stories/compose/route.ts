@@ -45,6 +45,16 @@ export async function POST(request: Request) {
     .map((m) => `${m.role === 'user' ? 'Storyteller' : 'Guide'}: ${m.content}`)
     .join('\n\n');
 
+  // Safety net: strip the AI-tell em/en dashes the model may still emit, turning
+  // them into ordinary punctuation so stories read like a real person wrote them.
+  const deDash = (s: string): string =>
+    s
+      .replace(/\s*[—–]\s*/g, ', ')   // em/en dash (with any surrounding spaces) -> comma
+      .replace(/,\s*,/g, ',')          // collapse accidental double commas
+      .replace(/\s+([.,;:!?])/g, '$1') // no space before punctuation
+      .replace(/,(\s*[.;:!?])/g, '$1') // drop a comma that landed right before end punctuation
+      .replace(/[ \t]{2,}/g, ' ');     // collapse double spaces
+
   try {
     const text = await callClaude(STORY_COMPOSE_PROMPT, transcript, 1600);
     const json = extractJSON(text) as { title?: string; body?: string } | null;
@@ -54,8 +64,8 @@ export async function POST(request: Request) {
     }
 
     return NextResponse.json({
-      title: (json.title || '').slice(0, 120),
-      body: json.body.trim().slice(0, 8000),
+      title: deDash((json.title || '').slice(0, 120)),
+      body: deDash(json.body.trim().slice(0, 8000)),
     });
   } catch (err) {
     console.error('Story compose API error:', err);
