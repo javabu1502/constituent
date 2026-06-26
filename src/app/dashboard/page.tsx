@@ -52,8 +52,8 @@ export default async function DashboardPage() {
 
   const admin = createAdminClient();
 
-  // Fetch profile, messages, and campaigns in parallel for speed
-  const [profileResult, messagesResult, campaignsResult] = await Promise.all([
+  // Fetch profile, messages, campaigns, and the user's saved stories in parallel
+  const [profileResult, messagesResult, campaignsResult, storiesResult] = await Promise.all([
     admin.from('profiles').select('*').eq('user_id', user.id).single(),
     admin.from('messages')
       .select('id,delivery_method,issue_area,issue_subtopic,legislator_name,legislator_party,delivery_status,created_at,message_body')
@@ -61,6 +61,11 @@ export default async function DashboardPage() {
       .order('created_at', { ascending: false })
       .limit(100),
     admin.from('campaigns').select('*').eq('creator_id', user.id).order('created_at', { ascending: false }),
+    admin.from('stories')
+      .select('id, title, body, attribution_level, status, created_at, campaigns(headline, slug, recipient_email, edit_revoke_policy)')
+      .eq('user_id', user.id)
+      .order('created_at', { ascending: false })
+      .limit(50),
   ]);
 
   let profile = profileResult.data;
@@ -95,6 +100,7 @@ export default async function DashboardPage() {
   const uniqueOfficials = new Set(messages?.map((m: Record<string, string>) => m.legislator_name)).size;
 
   const campaigns = campaignsResult.data;
+  const stories = storiesResult.data;
 
   const hasAddress = !!(profile?.street && profile?.city && profile?.state && profile?.zip);
   const cachedReps = profile?.representatives ?? null;
@@ -277,18 +283,42 @@ export default async function DashboardPage() {
                   key={campaign.id}
                   className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5"
                 >
-                  <div className="flex items-start justify-between mb-3">
-                    <span className="px-2.5 py-1 text-xs font-medium rounded-full bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300">
-                      {campaign.issue_area}
-                    </span>
-                    <div className="flex items-center gap-1.5 text-purple-600 dark:text-purple-400">
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
-                      </svg>
-                      <span className="text-sm font-bold">{Number(campaign.action_count)}</span>
-                      <span className="text-xs text-gray-500 dark:text-gray-400">action{Number(campaign.action_count) !== 1 ? 's' : ''}</span>
-                    </div>
-                  </div>
+                  {(() => {
+                    const isStory = campaign.campaign_type === 'storytelling';
+                    const count = isStory ? Number(campaign.story_count) : Number(campaign.action_count);
+                    const approval = String(campaign.approval_status || 'approved');
+                    const approvalBadge: Record<string, { label: string; cls: string }> = {
+                      pending: { label: 'Pending review', cls: 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-300' },
+                      rejected: { label: 'Needs changes', cls: 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300' },
+                    };
+                    const ab = approvalBadge[approval];
+                    return (
+                      <div className="flex items-start justify-between mb-3">
+                        <div className="flex flex-wrap items-center gap-1.5">
+                          <span className="px-2.5 py-1 text-xs font-medium rounded-full bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300">
+                            {campaign.issue_area}
+                          </span>
+                          {isStory && (
+                            <span className="px-2.5 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300">
+                              Storytelling
+                            </span>
+                          )}
+                          {ab && (
+                            <span className={`px-2.5 py-1 text-xs font-medium rounded-full ${ab.cls}`}>{ab.label}</span>
+                          )}
+                        </div>
+                        <div className="flex items-center gap-1.5 text-purple-600 dark:text-purple-400">
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+                          </svg>
+                          <span className="text-sm font-bold">{count}</span>
+                          <span className="text-xs text-gray-500 dark:text-gray-400">
+                            {isStory ? `stor${count === 1 ? 'y' : 'ies'}` : `action${count !== 1 ? 's' : ''}`}
+                          </span>
+                        </div>
+                      </div>
+                    );
+                  })()}
                   <h3 className="font-semibold text-gray-900 dark:text-white mb-1 line-clamp-1">
                     {campaign.headline}
                   </h3>
@@ -316,6 +346,61 @@ export default async function DashboardPage() {
             </div>
           )}
         </CollapsibleSection>
+
+        {/* My Stories */}
+        {stories && stories.length > 0 && (
+          <CollapsibleSection title="Stories I've Shared" badge={`${stories.length}`} defaultOpen={false}>
+            <div className="space-y-4">
+              {stories.map((story: Record<string, unknown>) => {
+                const c = (Array.isArray(story.campaigns) ? story.campaigns[0] : story.campaigns) as
+                  | { headline?: string; slug?: string; recipient_email?: string; edit_revoke_policy?: string }
+                  | null;
+                const attribution = String(story.attribution_level);
+                const attrLabel = attribution === 'named' ? 'Named' : attribution === 'first_name_only' ? 'First name only' : 'Anonymous';
+                const revoked = story.status === 'revoked';
+                const date = new Date(String(story.created_at)).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+                const editMailto = c?.recipient_email
+                  ? `mailto:${encodeURIComponent(c.recipient_email)}?subject=${encodeURIComponent(`Request about my story: ${c.headline ?? ''}`)}&body=${encodeURIComponent(
+                      `Hi,\n\nI previously shared a story for "${c.headline ?? ''}". I'd like to request an edit or to revoke it.\n\n${c.edit_revoke_policy ? `(Your stated policy: ${c.edit_revoke_policy})\n\n` : ''}Details of my request:\n\nThank you.`
+                    )}`
+                  : null;
+                return (
+                  <div key={String(story.id)} className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
+                    <div className="flex items-start justify-between mb-2 gap-2">
+                      <div className="flex flex-wrap items-center gap-2">
+                        {c?.headline && (
+                          <Link href={`/campaign/${c.slug}`} className="font-semibold text-gray-900 dark:text-white hover:underline">
+                            {c.headline}
+                          </Link>
+                        )}
+                        <span className="px-2 py-0.5 text-xs font-medium rounded-full bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300">{attrLabel}</span>
+                        {revoked && (
+                          <span className="px-2 py-0.5 text-xs font-medium rounded-full bg-gray-200 text-gray-600 dark:bg-gray-700 dark:text-gray-300">Revoked</span>
+                        )}
+                      </div>
+                      <span className="text-xs text-gray-500 dark:text-gray-400 shrink-0">{date}</span>
+                    </div>
+                    {story.title ? <p className="text-sm font-medium text-gray-800 dark:text-gray-200 mb-1">{String(story.title)}</p> : null}
+                    <p className="text-sm text-gray-700 dark:text-gray-300 line-clamp-3">{truncate(String(story.body), 240)}</p>
+                    {editMailto && !revoked && (
+                      <div className="mt-3">
+                        <a
+                          href={editMailto}
+                          className="inline-flex items-center gap-1.5 px-3 py-1.5 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 text-xs font-medium rounded-lg transition-colors"
+                        >
+                          ✉️ Request edit / revoke
+                        </a>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+            <p className="text-xs text-gray-400 dark:text-gray-500 mt-3">
+              Stories are sent directly to each campaign from your email. Editing or revoking is handled by contacting the campaign — stories already shared or used can&apos;t be automatically recalled.
+            </p>
+          </CollapsibleSection>
+        )}
 
         {/* Local Officials */}
         <CollapsibleSection title="Local Officials" defaultOpen={false}>

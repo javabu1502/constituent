@@ -193,6 +193,30 @@ describe('createCampaignSchema', () => {
     });
     expect(result.success).toBe(false);
   });
+
+  it('accepts a valid storytelling campaign (no target_level/distribution_plan needed)', () => {
+    const result = createCampaignSchema.safeParse({
+      campaign_type: 'storytelling',
+      headline: 'Share Your Housing Story',
+      description: 'Tell us how the cost of housing has affected your family.',
+      issue_area: 'Housing',
+      usage_statement: 'We may share your story with legislators and in our reports.',
+      attribution_options: ['named', 'anonymous'],
+      edit_revoke_policy: 'Email us any time to edit or revoke your story.',
+    });
+    expect(result.success).toBe(true);
+  });
+
+  it('rejects a storytelling campaign missing usage_statement / attribution / policy', () => {
+    const result = createCampaignSchema.safeParse({
+      campaign_type: 'storytelling',
+      headline: 'Share Your Housing Story',
+      description: 'Tell us how the cost of housing has affected your family.',
+      issue_area: 'Housing',
+      attribution_options: [],
+    });
+    expect(result.success).toBe(false);
+  });
 });
 
 // --- generateCommentSchema ---

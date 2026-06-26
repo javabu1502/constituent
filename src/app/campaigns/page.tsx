@@ -27,6 +27,15 @@ export default async function CampaignsPage() {
     .order('created_at', { ascending: false })
     .limit(50);
 
+  // Platform-wide social proof: total actions + stories across approved campaigns.
+  const { data: totalsRows } = await admin
+    .from('campaigns')
+    .select('action_count, story_count')
+    .eq('approval_status', 'approved')
+    .limit(2000);
+  const totalActions = (totalsRows ?? []).reduce((sum, r) => sum + (Number(r.action_count) || 0), 0);
+  const totalStories = (totalsRows ?? []).reduce((sum, r) => sum + (Number(r.story_count) || 0), 0);
+
   return (
     <div className="max-w-5xl mx-auto px-4 py-8">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
@@ -35,6 +44,20 @@ export default async function CampaignsPage() {
           <p className="text-gray-600 dark:text-gray-400 mt-1">
             Browse public campaigns and rally others around the issues you care about.
           </p>
+          {(totalActions > 0 || totalStories > 0) && (
+            <div className="flex flex-wrap items-center gap-2 mt-3">
+              {totalActions > 0 && (
+                <span className="px-3 py-1 text-xs font-medium rounded-full bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300">
+                  {totalActions.toLocaleString()} action{totalActions !== 1 ? 's' : ''} taken
+                </span>
+              )}
+              {totalStories > 0 && (
+                <span className="px-3 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300">
+                  {totalStories.toLocaleString()} stor{totalStories !== 1 ? 'ies' : 'y'} shared
+                </span>
+              )}
+            </div>
+          )}
         </div>
         <Link
           href="/campaign/create"
