@@ -72,6 +72,21 @@ export function cleanText(text: string): string {
 }
 
 /**
+ * Strip the AI-tell em/en dashes from generated prose, converting them into
+ * ordinary punctuation so the text reads like a real person wrote it. Use on
+ * user-facing AI output (stories, constituent messages) — NOT on data where a
+ * dash is meaningful (e.g. numeric ranges).
+ */
+export function deDash(text: string): string {
+  return text
+    .replace(/\s*[—–]\s*/g, ', ')    // em/en dash (with any surrounding spaces) -> comma
+    .replace(/,\s*,/g, ',')           // collapse accidental double commas
+    .replace(/\s+([.,;:!?])/g, '$1')  // no space before punctuation
+    .replace(/,(\s*[.;:!?])/g, '$1')  // drop a comma that landed right before end punctuation
+    .replace(/[ \t]{2,}/g, ' ');      // collapse double spaces
+}
+
+/**
  * Call the Anthropic Claude API with a system prompt and user prompt.
  * Returns the raw text response.
  */

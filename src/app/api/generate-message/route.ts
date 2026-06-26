@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { stripTags, extractJSON, cleanText } from '@/lib/claude';
+import { stripTags, extractJSON, cleanText, deDash } from '@/lib/claude';
 import { getCommitteesForMember, getFederalLegislatorBio } from '@/lib/legislators';
 import { getTopicContext, type TopicInfo } from '@/data/topic-content';
 import { fetchHouseVotes, fetchSenateVotes } from '@/lib/votes';
@@ -104,7 +104,7 @@ Respond with ONLY this JSON:
     },
     {
       role: 'assistant',
-      content: `{"subject": "Please Keep Fighting on Student Loans", "body": "As a constituent from Tacoma, I want to thank you for your leadership on making higher education more accessible. With 43 million Americans carrying student loan debt totaling $1.77 trillion according to the Federal Reserve, this crisis demands continued action.\\n\\nI graduated twelve years ago with $47,000 in debt. Despite making consistent payments, the balance has barely moved due to interest. I'm one of millions stuck in this cycle — working hard, playing by the rules, and still unable to get ahead.\\n\\nSome argue relief is unfair to those who already paid, and I understand that concern. But we don't refuse to cure a disease because earlier patients suffered. Addressing this crisis strengthens the economy — borrowers freed from crushing debt can buy homes, start businesses, and invest in their communities.\\n\\nI respectfully ask that you co-sponsor comprehensive student loan relief legislation and push for a vote this session. Your constituents are counting on you to lead on this."}`,
+      content: `{"subject": "Please Keep Fighting on Student Loans", "body": "As a constituent from Tacoma, I want to thank you for your leadership on making higher education more accessible. With 43 million Americans carrying student loan debt totaling $1.77 trillion according to the Federal Reserve, this crisis demands continued action.\\n\\nI graduated twelve years ago with $47,000 in debt. Despite making consistent payments, the balance has barely moved due to interest. I'm one of millions stuck in this cycle, working hard, playing by the rules, and still unable to get ahead.\\n\\nSome argue relief is unfair to those who already paid, and I understand that concern. But we don't refuse to cure a disease because earlier patients suffered. Addressing this crisis strengthens the economy. Borrowers freed from crushing debt can buy homes, start businesses, and invest in their communities.\\n\\nI respectfully ask that you co-sponsor comprehensive student loan relief legislation and push for a vote this session. Your constituents are counting on you to lead on this."}`,
     },
     {
       role: 'user',
@@ -128,7 +128,7 @@ Respond with ONLY this JSON:
     },
     {
       role: 'assistant',
-      content: `{"subject": "Student Debt Is Holding Back Our Economy", "body": "As your constituent in Houston, I'm writing about the student loan crisis that affects 43 million Americans and $1.77 trillion in outstanding debt, according to Federal Reserve data.\\n\\nI know you've championed policies that empower individuals and reduce government overreach, and I share those values. The current student loan system is itself a product of government distortion — federal lending inflated tuition costs while leaving borrowers trapped. This isn't a free market outcome; it's a government-created problem.\\n\\nCritics of relief worry about moral hazard, and that's a fair concern. But targeted reform that addresses predatory interest rates and holds institutions accountable aligns with conservative principles of fixing broken systems rather than propping them up.\\n\\nWith $1.77 trillion locked in student debt, potential entrepreneurs can't take risks, families can't build wealth, and the economy suffers. Interest rate reform and institutional accountability would free up economic activity without blanket bailouts.\\n\\nI urge you to support bipartisan student loan reform that reduces interest burdens and holds universities accountable for outcomes. This is about economic freedom, not handouts."}`,
+      content: `{"subject": "Student Debt Is Holding Back Our Economy", "body": "As your constituent in Houston, I'm writing about the student loan crisis that affects 43 million Americans and $1.77 trillion in outstanding debt, according to Federal Reserve data.\\n\\nI know you've championed policies that empower individuals and reduce government overreach, and I share those values. The current student loan system is itself a product of government distortion. Federal lending inflated tuition costs while leaving borrowers trapped. This isn't a free market outcome; it's a government-created problem.\\n\\nCritics of relief worry about moral hazard, and that's a fair concern. But targeted reform that addresses predatory interest rates and holds institutions accountable aligns with conservative principles of fixing broken systems rather than propping them up.\\n\\nWith $1.77 trillion locked in student debt, potential entrepreneurs can't take risks, families can't build wealth, and the economy suffers. Interest rate reform and institutional accountability would free up economic activity without blanket bailouts.\\n\\nI urge you to support bipartisan student loan reform that reduces interest burdens and holds universities accountable for outcomes. This is about economic freedom, not handouts."}`,
     },
   ];
 }
@@ -397,6 +397,11 @@ SUBJECT LINE RULES:
 - Good examples: "Please Support ICE Reform", "Concerned About ICE Enforcement", "We Need Better Road Infrastructure", "Please Protect Our Local Schools"
 - Bad examples: "Constituent Urges Action on ICE", "Nevada Resident Requests Reform", "Urgent Constituent Request"
 
+SOUND HUMAN, NOT AI:
+- Do NOT use em dashes or en dashes (— or –). Use periods, commas, or "and"/"but" instead.
+- Avoid clichés and marketing cadence ("at the end of the day", "now more than ever", "stand idly by", "make no mistake"). Plain, everyday language.
+- Vary sentence length. A little plainness reads as a real person.
+
 CRITICAL: Respond with ONLY a JSON object. No other text.`;
 
   const phoneSystemPrompt = `You are an expert at writing phone call scripts for constituents calling their elected officials.
@@ -423,6 +428,11 @@ DATA-DRIVEN WRITING:
 - Cite the source briefly when using a stat (e.g. "according to the CBO" or "per CDC data")
 - If KEY ARGUMENTS are provided, use the strongest points for the constituent's likely side
 - Acknowledge one counterpoint briefly to show good faith, then pivot
+
+SOUND HUMAN, NOT AI:
+- Do NOT use em dashes or en dashes (— or –). Use periods, commas, or "and"/"but" instead.
+- Avoid clichés and marketing cadence ("at the end of the day", "now more than ever", "stand idly by", "make no mistake"). Plain, everyday language.
+- Vary sentence length. A little plainness reads as a real person.
 
 CRITICAL: Respond with ONLY a JSON object. No other text.`;
 
@@ -537,7 +547,7 @@ Respond with ONLY this JSON:
       script = strippedText;
     }
 
-    const cleanedScript = cleanText(script);
+    const cleanedScript = deDash(cleanText(script));
 
     // Build phone opening and closing
     const opening = `Hi, my name is ${senderName} and I'm a constituent${locationStr ? ` from ${locationStr}` : ''}.`;
@@ -563,8 +573,8 @@ Respond with ONLY this JSON:
     body = strippedText;
   }
 
-  const cleanedBody = cleanText(body);
-  const cleanedSubject = cleanText(subj).replace(/\n/g, ' ');
+  const cleanedBody = deDash(cleanText(body));
+  const cleanedSubject = deDash(cleanText(subj).replace(/\n/g, ' '));
 
   // Build proper salutation
   let salutation: string;
@@ -718,7 +728,7 @@ ${contactMethod === 'phone' ? '{"script": "the revised phone script"}' : '{"subj
       const encoder = new TextEncoder();
       const revStream = new ReadableStream({
         start(controller) {
-          const msg = { officialName: official.name, subject: cleanText(resultSubject), body: cleanText(resultBody) };
+          const msg = { officialName: official.name, subject: deDash(cleanText(resultSubject)), body: deDash(cleanText(resultBody)) };
           controller.enqueue(encoder.encode(`data: ${JSON.stringify(msg)}\n\n`));
           controller.enqueue(encoder.encode(`data: [DONE]\n\n`));
           controller.close();
