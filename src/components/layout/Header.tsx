@@ -58,6 +58,17 @@ export async function Header() {
                 { href: '/about', label: 'About' },
               ]}
             />
+            <a
+              href="https://buymeacoffee.com/mydemocracy"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-amber-500 hover:bg-amber-600 text-white text-sm font-semibold rounded-lg transition-colors"
+            >
+              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
+              </svg>
+              Donate
+            </a>
             <UserMenu user={user} />
           </nav>
 

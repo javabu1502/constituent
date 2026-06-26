@@ -69,6 +69,22 @@ export function Footer() {
             </div>
           ))}
         </div>
+        <div className="border-t border-gray-200 dark:border-gray-700 pt-6 pb-2 flex flex-col sm:flex-row items-center justify-center gap-3 text-center">
+          <span className="text-sm text-gray-600 dark:text-gray-300">
+            Keep {BRAND.name} free and independent.
+          </span>
+          <a
+            href="https://buymeacoffee.com/mydemocracy"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 px-4 py-2 bg-amber-500 hover:bg-amber-600 text-white text-sm font-semibold rounded-lg transition-colors"
+          >
+            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+              <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
+            </svg>
+            Donate
+          </a>
+        </div>
         <div className="border-t border-gray-200 dark:border-gray-700 pt-4 text-center">
           <span className="text-sm text-gray-600 dark:text-gray-400">
             {BRAND.name} &copy; {currentYear}

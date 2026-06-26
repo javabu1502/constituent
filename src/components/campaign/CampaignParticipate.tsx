@@ -15,6 +15,7 @@ import {
   type DeliveryInfo,
 } from '@/lib/delivery';
 import { useTurnstile } from '@/components/ui/Turnstile';
+import { SupportNudge } from '@/components/ui/SupportNudge';
 
 type Step = 'form' | 'loading' | 'review' | 'done';
 
@@ -416,6 +417,8 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
       <p className="text-gray-600 dark:text-gray-300 mb-6">
         Your voice matters. Every message counts toward making a difference.
       </p>
+
+      <SupportNudge />
 
       {/* Share section */}
       <div className="mb-6">

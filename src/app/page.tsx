@@ -413,6 +413,35 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* Support band */}
+      <section className="py-12 px-4 bg-amber-50 dark:bg-amber-900/10 border-y border-amber-100 dark:border-amber-900/30">
+        <div className="max-w-2xl mx-auto text-center">
+          <div className="w-12 h-12 bg-amber-100 dark:bg-amber-900/40 rounded-full flex items-center justify-center mx-auto mb-5">
+            <svg className="w-6 h-6 text-amber-600 dark:text-amber-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+              <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
+            </svg>
+          </div>
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-3">
+            Reader-funded, ad-free, independent
+          </h2>
+          <p className="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
+            My Democracy takes no ads and never sells your data. Donations from people like you
+            are what keep these tools free for everyone.
+          </p>
+          <a
+            href="https://buymeacoffee.com/mydemocracy"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-amber-500 hover:bg-amber-600 text-white font-semibold rounded-lg transition-colors"
+          >
+            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+              <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
+            </svg>
+            Support My Democracy
+          </a>
+        </div>
+      </section>
+
       {/* Privacy Section */}
       <section className="py-16 sm:py-20 px-4 bg-gray-50 dark:bg-gray-800">
         <div className="max-w-2xl mx-auto text-center">

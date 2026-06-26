@@ -10,6 +10,7 @@ import { RepStep } from './RepStep';
 import { TopicStep } from './TopicStep';
 import { MessageStep } from './MessageStep';
 import { SendStep } from './SendStep';
+import { SupportNudge } from '@/components/ui/SupportNudge';
 import { ShareActions } from './ShareActions';
 import { useAutoSave, type SavedDraft } from '@/hooks/useAutoSave';
 import { trackEvent } from '@/lib/analytics';
@@ -405,6 +406,7 @@ export function ContactFlow() {
                 Contacted <strong>{state.selectedReps.length} official{state.selectedReps.length > 1 ? 's' : ''}</strong> about <strong>{state.issue}</strong>
               </p>
             </div>
+            <SupportNudge />
             {state.shareId && (
               <ShareActions
                 shareId={state.shareId}
