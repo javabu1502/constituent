@@ -46,7 +46,7 @@ export async function POST(request: Request) {
     .join('\n\n');
 
   try {
-    const text = await callClaude(STORY_COMPOSE_PROMPT, transcript, 1200);
+    const text = await callClaude(STORY_COMPOSE_PROMPT, transcript, 1600);
     const json = extractJSON(text) as { title?: string; body?: string } | null;
 
     if (!json || typeof json.body !== 'string' || json.body.trim().length < 20) {
