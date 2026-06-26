@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { createAdminClient } from '@/lib/supabase';
 import { CampaignParticipate } from '@/components/campaign/CampaignParticipate';
+import { StorytellerFlow } from '@/components/campaign/StorytellerFlow';
 import { CopyLinkButton } from '@/components/campaign/CopyLinkButton';
 import type { Campaign } from '@/lib/types';
 
@@ -49,6 +50,7 @@ export default async function CampaignPage({ params }: PageProps) {
   }
 
   const campaign = data as Campaign;
+  const isStory = campaign.campaign_type === 'storytelling';
 
   return (
     <div className="max-w-2xl mx-auto px-4 py-8">
@@ -58,9 +60,15 @@ export default async function CampaignPage({ params }: PageProps) {
           <span className="px-3 py-1 text-xs font-medium rounded-full bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300">
             {campaign.issue_area}
           </span>
-          <span className="px-3 py-1 text-xs font-medium rounded-full bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-400 capitalize">
-            {campaign.target_level === 'both' ? 'Federal & State' : campaign.target_level}
-          </span>
+          {isStory ? (
+            <span className="px-3 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300">
+              Share your story
+            </span>
+          ) : (
+            <span className="px-3 py-1 text-xs font-medium rounded-full bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-400 capitalize">
+              {campaign.target_level === 'both' ? 'Federal & State' : campaign.target_level}
+            </span>
+          )}
         </div>
         <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-3">
           {campaign.headline}
@@ -91,26 +99,29 @@ export default async function CampaignPage({ params }: PageProps) {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
               <span className="text-lg font-bold text-purple-700 dark:text-purple-300">
-                {campaign.action_count}
+                {isStory ? campaign.story_count : campaign.action_count}
               </span>
               <span className="text-sm text-purple-600 dark:text-purple-400">
-                {campaign.action_count === 1 ? 'person has' : 'people have'} taken action
+                {isStory
+                  ? `${(campaign.story_count === 1) ? 'person has' : 'people have'} shared their story`
+                  : `${(campaign.action_count === 1) ? 'person has' : 'people have'} taken action`}
               </span>
             </div>
             <CopyLinkButton slug={campaign.slug} />
           </div>
           {/* Progress bar toward next milestone */}
           {(() => {
+            const count = isStory ? campaign.story_count : campaign.action_count;
             const milestones = [10, 25, 50, 100, 250, 500, 1000];
-            const next = milestones.find(m => m > campaign.action_count) ?? milestones[milestones.length - 1];
-            const pct = Math.min((campaign.action_count / next) * 100, 100);
+            const next = milestones.find(m => m > count) ?? milestones[milestones.length - 1];
+            const pct = Math.min((count / next) * 100, 100);
             return (
               <div>
                 <div className="w-full bg-purple-200 dark:bg-purple-800 rounded-full h-2">
                   <div className="h-2 rounded-full bg-purple-600 dark:bg-purple-400 transition-all" style={{ width: `${pct}%` }} />
                 </div>
                 <p className="text-xs text-purple-500 dark:text-purple-400 mt-1 text-right">
-                  {campaign.action_count < next ? `${next - campaign.action_count} more to reach ${next}` : `${next}+ reached!`}
+                  {count < next ? `${next - count} more to reach ${next}` : `${next}+ reached!`}
                 </p>
               </div>
             );
@@ -120,8 +131,10 @@ export default async function CampaignPage({ params }: PageProps) {
 
       {/* Participation form */}
       <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm p-6 sm:p-8">
-        <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">Take Action</h2>
-        <CampaignParticipate campaign={campaign} />
+        <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">
+          {isStory ? 'Share Your Story' : 'Take Action'}
+        </h2>
+        {isStory ? <StorytellerFlow campaign={campaign} /> : <CampaignParticipate campaign={campaign} />}
       </div>
     </div>
   );

@@ -116,6 +116,30 @@ export const createCampaignSchema = z.object({
   }
 });
 
+export const storyChatSchema = z.object({
+  campaignSlug: z.string().min(1).max(120),
+  messages: z
+    .array(
+      z.object({
+        role: z.enum(['user', 'assistant']),
+        content: z.string().min(1).max(4000),
+      })
+    )
+    .min(1)
+    .max(60),
+  turnstileToken: z.string().optional(),
+});
+
+export const submitStorySchema = z.object({
+  campaignSlug: z.string().min(1).max(120),
+  title: z.string().max(120).nullish(),
+  body: z.string().min(20).max(8000),
+  attribution_level: z.enum(['named', 'first_name_only', 'anonymous']),
+  storyteller_name: z.string().max(200).nullish(),
+  consent_usage: z.literal(true),
+  consent_truthful: z.literal(true),
+});
+
 export const generateCommentSchema = z.object({
   regulationTitle: z.string().min(1).max(500),
   agency: z.string().min(1).max(200),
