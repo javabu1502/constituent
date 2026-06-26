@@ -99,8 +99,8 @@ export const createCampaignSchema = z.object({
   recipient_email: z.string().email().max(200).nullish(),
 }).superRefine((data, ctx) => {
   if (data.campaign_type === 'storytelling') {
-    if (!data.usage_statement || data.usage_statement.trim().length < 10) {
-      ctx.addIssue({ code: 'custom', path: ['usage_statement'], message: 'A usage statement (how stories will be used) is required' });
+    if (!data.usage_tags || data.usage_tags.length < 1) {
+      ctx.addIssue({ code: 'custom', path: ['usage_tags'], message: 'Select at least one way you’d like to use these stories' });
     }
     if (!data.edit_revoke_policy || data.edit_revoke_policy.trim().length < 10) {
       ctx.addIssue({ code: 'custom', path: ['edit_revoke_policy'], message: 'An edit/revoke policy is required' });

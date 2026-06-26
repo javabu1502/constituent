@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/Button';
 import { IssuePicker } from '@/components/ui/IssuePicker';
 import { US_STATES } from '@/lib/constants';
 import { detectBillReferences } from '@/lib/bills';
+import { STORY_USAGE_OPTIONS } from '@/lib/story-usage';
 
 type BillLevel = '' | 'federal' | 'state';
 interface ResolvedBill {
@@ -39,7 +40,7 @@ export function CampaignForm() {
 
   // Storytelling fields
   const [storyPrompt, setStoryPrompt] = useState('');
-  const [usageStatement, setUsageStatement] = useState('');
+  const [usageTags, setUsageTags] = useState<string[]>([]);
   const [editRevokePolicy, setEditRevokePolicy] = useState(
     'To change or withdraw your story later, contact the campaign organizer at the email where stories are sent (set below). If you created an account, you can also request this from your dashboard. Anything already shared or published may not be fully recallable.'
   );
@@ -196,8 +197,8 @@ export function CampaignForm() {
         return;
       }
     } else {
-      if (!usageStatement.trim() || usageStatement.trim().length < 10) {
-        setError('Please describe how stories will be used (at least 10 characters)');
+      if (usageTags.length < 1) {
+        setError('Select at least one way you’d like to use these stories');
         return;
       }
       if (!editRevokePolicy.trim() || editRevokePolicy.trim().length < 10) {
@@ -236,7 +237,7 @@ export function CampaignForm() {
         : {
             ...sharedBody,
             story_prompt: storyPrompt.trim() || null,
-            usage_statement: usageStatement.trim(),
+            usage_tags: usageTags,
             edit_revoke_policy: editRevokePolicy.trim(),
             recipient_email: recipientEmail.trim() || null,
           };
@@ -305,7 +306,9 @@ export function CampaignForm() {
           type="text"
           value={headline}
           onChange={(e) => setHeadline(e.target.value)}
-          placeholder="e.g., Protect our local parks funding"
+          placeholder={campaignType === 'storytelling'
+            ? 'e.g., Tell your story: how housing costs hit your family'
+            : 'e.g., Protect our local parks funding'}
           maxLength={100}
           className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
         />
@@ -320,7 +323,9 @@ export function CampaignForm() {
         <textarea
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          placeholder="Explain the issue and why people should take action..."
+          placeholder={campaignType === 'storytelling'
+            ? 'e.g., We’re collecting personal stories about how rising housing costs are affecting families in our community, to share with legislators and show why this issue matters.'
+            : 'Explain the issue and why people should take action...'}
           rows={4}
           maxLength={500}
           className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent resize-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
@@ -559,23 +564,38 @@ export function CampaignForm() {
             />
           </div>
 
-          {/* Usage statement */}
+          {/* Intended uses (checkboxes) */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               How would you like to use these stories? <span className="text-red-500">*</span>
             </label>
-            <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">
-              Describe how you hope to use the stories you collect. This is shown to every storyteller for transparency — then <strong>each storyteller chooses which specific uses they’re comfortable with</strong>, and we only pass along the permissions they grant.
+            <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">
+              Pick the ways you’d like to use the stories you collect. Each storyteller then chooses which of these they’re comfortable with — we only pass along the uses they grant.
             </p>
-            <textarea
-              value={usageStatement}
-              onChange={(e) => setUsageStatement(e.target.value)}
-              placeholder="e.g., We’d love to share your story with legislators, and (with your permission) include it in our reports and on our website to show why this issue matters."
-              rows={3}
-              maxLength={3000}
-              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 resize-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
-            />
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Be specific and honest — clear, respectful intentions earn more (and better) stories.</p>
+            <div className="space-y-2">
+              {STORY_USAGE_OPTIONS.map((opt) => {
+                const on = usageTags.includes(opt.value);
+                return (
+                  <label
+                    key={opt.value}
+                    className={`flex items-start gap-3 p-3 rounded-xl border cursor-pointer transition-colors ${
+                      on ? 'border-purple-500 bg-purple-50 dark:bg-purple-900/20' : 'border-gray-200 dark:border-gray-600 hover:border-gray-400'
+                    }`}
+                  >
+                    <input
+                      type="checkbox"
+                      checked={on}
+                      onChange={() => setUsageTags((prev) => on ? prev.filter((t) => t !== opt.value) : [...prev, opt.value])}
+                      className="mt-1 h-4 w-4 rounded text-purple-600 focus:ring-purple-500"
+                    />
+                    <span>
+                      <span className="block text-sm font-medium text-gray-800 dark:text-gray-200">{opt.label}</span>
+                      <span className="block text-xs text-gray-500 dark:text-gray-400">{opt.description}</span>
+                    </span>
+                  </label>
+                );
+              })}
+            </div>
           </div>
 
           {/* Attribution is always the storyteller's choice (named / first name only /

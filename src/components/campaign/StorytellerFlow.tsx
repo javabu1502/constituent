@@ -42,6 +42,10 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
 
   // Consent / attribution — both are the storyteller's choice.
   const allowedAttribution: AttributionLevel[] = ['named', 'first_name_only', 'anonymous'];
+  // The storyteller grants from the uses the campaign asked for (fallback: all).
+  const availableUses = campaign.usage_tags?.length
+    ? STORY_USAGE_OPTIONS.filter((o) => campaign.usage_tags!.includes(o.value))
+    : STORY_USAGE_OPTIONS;
   const [attribution, setAttribution] = useState<AttributionLevel>('named');
   const [storytellerName, setStorytellerName] = useState('');
   const [grantedUses, setGrantedUses] = useState<string[]>([]);
@@ -413,7 +417,7 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
             You’re in control. Check only the uses you’re comfortable with — we pass your choices to the campaign and they should only use your story in the ways you allow. Pick at least one.
           </p>
           <div className="space-y-2">
-            {STORY_USAGE_OPTIONS.map((opt) => {
+            {availableUses.map((opt) => {
               const on = grantedUses.includes(opt.value);
               return (
                 <label

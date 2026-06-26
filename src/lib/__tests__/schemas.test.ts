@@ -200,18 +200,19 @@ describe('createCampaignSchema', () => {
       headline: 'Share Your Housing Story',
       description: 'Tell us how the cost of housing has affected your family.',
       issue_area: '', // storytelling drops the issue picker; empty is allowed
-      usage_statement: 'We may share your story with legislators and in our reports.',
+      usage_tags: ['shared_with_legislators', 'included_in_reports'],
       edit_revoke_policy: 'Email us any time to edit or revoke your story.',
     });
     expect(result.success).toBe(true);
   });
 
-  it('rejects a storytelling campaign missing usage_statement / edit_revoke_policy', () => {
+  it('rejects a storytelling campaign missing usage_tags / edit_revoke_policy', () => {
     const result = createCampaignSchema.safeParse({
       campaign_type: 'storytelling',
       headline: 'Share Your Housing Story',
       description: 'Tell us how the cost of housing has affected your family.',
       issue_area: '',
+      usage_tags: [],
     });
     expect(result.success).toBe(false);
   });
