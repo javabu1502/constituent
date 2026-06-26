@@ -13,6 +13,15 @@ vi.mock('@/lib/supabase', () => ({
   })),
 }));
 
+const mockGetUser = vi.fn();
+vi.mock('@/lib/supabase/server', () => ({
+  createClient: vi.fn(async () => ({ auth: { getUser: mockGetUser } })),
+}));
+
+vi.mock('@/lib/usage-quota', () => ({
+  checkLegislatorCooldown: vi.fn(async () => ({ allowed: true })),
+}));
+
 vi.mock('@/lib/env', () => ({
   env: () => ({
     ANTHROPIC_API_KEY: 'test-key',
@@ -47,6 +56,7 @@ describe('POST /api/track-send', () => {
     mockSingle.mockResolvedValue({ data: { id: 'test-id' }, error: null });
     mockSelect.mockReturnValue({ single: mockSingle });
     mockInsert.mockReturnValue({ select: mockSelect });
+    mockGetUser.mockResolvedValue({ data: { user: null } });
   });
 
   it('returns 200 with success and shareId for valid request', async () => {
@@ -131,5 +141,41 @@ describe('POST /api/track-send', () => {
     expect(res.status).toBe(200);
     const data = await res.json();
     expect(data.success).toBe(true);
+  });
+
+  it('does NOT store the message text for anonymous senders', async () => {
+    const { POST } = await import('../track-send/route');
+    const req = new NextRequest('http://localhost/api/track-send', {
+      method: 'POST',
+      body: JSON.stringify(validBody), // no user_id → anonymous
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    const res = await POST(req);
+    expect(res.status).toBe(200);
+    const inserted = mockInsert.mock.calls[0][0];
+    expect(inserted.message_body).toBe('');
+    // Trend metadata is still recorded
+    expect(inserted.issue_area).toBe('Environment');
+    expect(inserted.advocate_state).toBe('CA');
+    expect(inserted.user_id).toBeNull();
+  });
+
+  it('stores the message text for a verified signed-in sender', async () => {
+    const userId = '550e8400-e29b-41d4-a716-446655440000';
+    mockGetUser.mockResolvedValue({ data: { user: { id: userId } } });
+
+    const { POST } = await import('../track-send/route');
+    const req = new NextRequest('http://localhost/api/track-send', {
+      method: 'POST',
+      body: JSON.stringify({ ...validBody, user_id: userId }),
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    const res = await POST(req);
+    expect(res.status).toBe(200);
+    const inserted = mockInsert.mock.calls[0][0];
+    expect(inserted.message_body).toBe(validBody.message_body);
+    expect(inserted.user_id).toBe(userId);
   });
 });

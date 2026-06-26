@@ -77,7 +77,10 @@ export async function POST(request: NextRequest) {
       legislator_chamber: body.legislator_chamber,
       issue_area: body.issue_area,
       issue_subtopic: body.issue_subtopic,
-      message_body: body.message_body,
+      // Only retain the message text for signed-in users, so they can re-read it
+      // in their dashboard. Anonymous sends keep the trend metadata above but we
+      // do NOT store what they wrote (left empty).
+      message_body: verifiedUserId ? body.message_body : '',
       delivery_method: body.delivery_method,
       delivery_status: body.delivery_status,
       user_id: verifiedUserId,
