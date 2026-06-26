@@ -514,7 +514,7 @@ export function CampaignForm() {
           className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent resize-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
         />
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-          This message will be woven into every participant&apos;s personalized letter, combined with their own personal story. The AI will make each letter unique.
+          This message will be woven into every participant&apos;s personalized letter, combined with their own personal reasons for caring. The AI will make each letter unique.
         </p>
       </div>
 
@@ -643,7 +643,7 @@ export function CampaignForm() {
       )}
 
       <Button type="submit" isLoading={isSubmitting} className="w-full" size="lg">
-        {campaignType === 'storytelling' ? 'Submit Storytelling Campaign for Review' : 'Submit Campaign for Review'}
+        {campaignType === 'storytelling' ? 'Submit Storytelling Campaign for Review' : 'Submit Advocacy Campaign for Review'}
       </Button>
     </form>
   );

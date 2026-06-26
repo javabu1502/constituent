@@ -27,7 +27,7 @@ export default async function CreateCampaignPage({
     <div className="max-w-2xl mx-auto px-4 py-8">
       <div className="text-center mb-8">
         <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-          {isStory ? 'Start a Storytelling Campaign' : 'Start a Campaign'}
+          {isStory ? 'Start a Storytelling Campaign' : 'Start an Advocacy Campaign'}
         </h1>
         <p className="text-gray-600 dark:text-gray-400 mt-2">
           {isStory
