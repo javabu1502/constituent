@@ -21,6 +21,9 @@ export default async function CampaignsPage() {
     .from('campaigns')
     .select('id, slug, headline, description, issue_area, action_count, created_at')
     .eq('status', 'active')
+    .eq('approval_status', 'approved')
+    .eq('visibility', 'public')
+    .eq('campaign_type', 'advocacy') // storytelling campaigns are link-only, never listed
     .order('created_at', { ascending: false })
     .limit(50);
 

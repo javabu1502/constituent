@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     .from('campaigns')
     .select('headline, description')
     .eq('slug', slug)
-    .eq('status', 'active')
+    .eq('approval_status', 'approved')
     .single();
 
   if (!campaign) {
@@ -41,7 +41,7 @@ export default async function CampaignPage({ params }: PageProps) {
     .from('campaigns')
     .select('*')
     .eq('slug', slug)
-    .eq('status', 'active')
+    .eq('approval_status', 'approved')
     .single();
 
   if (error || !data) {
