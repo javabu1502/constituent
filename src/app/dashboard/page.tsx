@@ -295,9 +295,11 @@ export default async function DashboardPage() {
                     return (
                       <div className="flex items-start justify-between mb-3">
                         <div className="flex flex-wrap items-center gap-1.5">
-                          <span className="px-2.5 py-1 text-xs font-medium rounded-full bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300">
-                            {campaign.issue_area}
-                          </span>
+                          {campaign.issue_area && (
+                            <span className="px-2.5 py-1 text-xs font-medium rounded-full bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300">
+                              {campaign.issue_area}
+                            </span>
+                          )}
                           {isStory && (
                             <span className="px-2.5 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300">
                               Storytelling

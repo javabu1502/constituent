@@ -76,7 +76,9 @@ export const createCampaignSchema = z.object({
   visibility: z.enum(['public', 'unlisted']).optional(),
   headline: z.string().min(3).max(100),
   description: z.string().min(10).max(500),
-  issue_area: z.string().min(1).max(200),
+  // Required for advocacy (enforced in superRefine); storytelling omits it and the
+  // story prompt defines the topic, so an empty string is accepted here.
+  issue_area: z.string().max(200),
   issue_subtopic: z.string().max(200).nullish(),
   // Advocacy fields
   target_level: z.enum(['federal', 'state', 'both']).optional(),
@@ -100,13 +102,13 @@ export const createCampaignSchema = z.object({
     if (!data.usage_statement || data.usage_statement.trim().length < 10) {
       ctx.addIssue({ code: 'custom', path: ['usage_statement'], message: 'A usage statement (how stories will be used) is required' });
     }
-    if (!data.attribution_options || data.attribution_options.length < 1) {
-      ctx.addIssue({ code: 'custom', path: ['attribution_options'], message: 'Allow at least one attribution option' });
-    }
     if (!data.edit_revoke_policy || data.edit_revoke_policy.trim().length < 10) {
       ctx.addIssue({ code: 'custom', path: ['edit_revoke_policy'], message: 'An edit/revoke policy is required' });
     }
   } else {
+    if (!data.issue_area || data.issue_area.trim().length < 1) {
+      ctx.addIssue({ code: 'custom', path: ['issue_area'], message: 'Issue area is required' });
+    }
     if (!data.target_level) {
       ctx.addIssue({ code: 'custom', path: ['target_level'], message: 'Target level is required' });
     }
@@ -136,6 +138,8 @@ export const submitStorySchema = z.object({
   body: z.string().min(20).max(8000),
   attribution_level: z.enum(['named', 'first_name_only', 'anonymous']),
   storyteller_name: z.string().max(200).nullish(),
+  // Which uses the storyteller is OK with (their choice, not the creator's).
+  granted_uses: z.array(z.string().max(60)).min(1).max(20),
   consent_usage: z.literal(true),
   consent_truthful: z.literal(true),
 });

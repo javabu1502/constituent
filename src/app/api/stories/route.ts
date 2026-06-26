@@ -37,7 +37,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: parsed.error }, { status: 400 });
   }
 
-  const { campaignSlug, title, body, attribution_level, storyteller_name } = parsed.data;
+  const { campaignSlug, title, body, attribution_level, storyteller_name, granted_uses } = parsed.data;
 
   // Optional auth — drives whether we persist the story.
   const supabase = await createClient();
@@ -46,7 +46,7 @@ export async function POST(request: NextRequest) {
   const admin = createAdminClient();
   const { data: campaign, error: campaignError } = await admin
     .from('campaigns')
-    .select('id, slug, headline, usage_statement, usage_tags, attribution_options, recipient_email, approval_status, campaign_type')
+    .select('id, slug, headline, usage_statement, recipient_email, approval_status, campaign_type')
     .eq('slug', campaignSlug)
     .eq('approval_status', 'approved')
     .eq('campaign_type', 'storytelling')
@@ -56,15 +56,8 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Campaign not found' }, { status: 404 });
   }
 
-  // The chosen attribution must be one the creator allows.
-  const allowed: string[] = campaign.attribution_options?.length
-    ? campaign.attribution_options
-    : ['named', 'first_name_only', 'anonymous'];
-  if (!allowed.includes(attribution_level)) {
-    return NextResponse.json({ error: 'That attribution option is not allowed for this campaign.' }, { status: 400 });
-  }
-
-  // Enforce attribution on our end before the story ever leaves us.
+  // Attribution is entirely the storyteller's choice (any of the three levels).
+  // Enforce it on our end before the story ever leaves us.
   const { final_body, flagged } = await applyAttribution(body, attribution_level, storyteller_name);
 
   // Always count the submission.
@@ -86,7 +79,7 @@ export async function POST(request: NextRequest) {
       attribution_level,
       consent_usage_snapshot: {
         usage_statement: campaign.usage_statement ?? null,
-        usage_tags: campaign.usage_tags ?? null,
+        granted_uses,
       },
       status: 'active',
     });

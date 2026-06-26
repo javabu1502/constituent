@@ -40,10 +40,8 @@ export function CampaignForm() {
   // Storytelling fields
   const [storyPrompt, setStoryPrompt] = useState('');
   const [usageStatement, setUsageStatement] = useState('');
-  const [usageTags, setUsageTags] = useState<string[]>([]);
-  const [attributionOptions, setAttributionOptions] = useState<string[]>(['named', 'first_name_only', 'anonymous']);
   const [editRevokePolicy, setEditRevokePolicy] = useState(
-    'To edit or revoke your story, contact us at the email on this campaign. Stories already shared or published may not be able to be fully recalled.'
+    'To change or withdraw your story later, contact the campaign organizer at the email where stories are sent (set below). If you created an account, you can also request this from your dashboard. Anything already shared or published may not be fully recallable.'
   );
   const [recipientEmail, setRecipientEmail] = useState('');
 
@@ -188,11 +186,11 @@ export function CampaignForm() {
       setError('Description must be at least 10 characters');
       return;
     }
-    if (!issueArea.trim()) {
-      setError('Please select an issue area');
-      return;
-    }
     if (campaignType === 'advocacy') {
+      if (!issueArea.trim()) {
+        setError('Please select an issue area');
+        return;
+      }
       if (!distributionPlan.trim() || distributionPlan.trim().length < 10) {
         setError('Please describe your distribution plan (at least 10 characters)');
         return;
@@ -200,10 +198,6 @@ export function CampaignForm() {
     } else {
       if (!usageStatement.trim() || usageStatement.trim().length < 10) {
         setError('Please describe how stories will be used (at least 10 characters)');
-        return;
-      }
-      if (attributionOptions.length < 1) {
-        setError('Allow at least one attribution option');
         return;
       }
       if (!editRevokePolicy.trim() || editRevokePolicy.trim().length < 10) {
@@ -243,8 +237,6 @@ export function CampaignForm() {
             ...sharedBody,
             story_prompt: storyPrompt.trim() || null,
             usage_statement: usageStatement.trim(),
-            usage_tags: usageTags,
-            attribution_options: attributionOptions,
             edit_revoke_policy: editRevokePolicy.trim(),
             recipient_email: recipientEmail.trim() || null,
           };
@@ -336,7 +328,9 @@ export function CampaignForm() {
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{description.length}/500 characters</p>
       </div>
 
-      {/* Issue Area */}
+      {campaignType === 'advocacy' && (
+        <>
+      {/* Issue Area (advocacy only — storytelling uses the story prompt for its topic) */}
       <div>
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
           Issue Area <span className="text-red-500">*</span>
@@ -351,8 +345,6 @@ export function CampaignForm() {
         />
       </div>
 
-      {campaignType === 'advocacy' && (
-        <>
       {/* Target Level */}
       <div>
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -570,75 +562,29 @@ export function CampaignForm() {
           {/* Usage statement */}
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              How will stories be used? <span className="text-red-500">*</span>
+              How would you like to use these stories? <span className="text-red-500">*</span>
             </label>
+            <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">
+              Describe how you hope to use the stories you collect. This is shown to every storyteller for transparency — then <strong>each storyteller chooses which specific uses they’re comfortable with</strong>, and we only pass along the permissions they grant.
+            </p>
             <textarea
               value={usageStatement}
               onChange={(e) => setUsageStatement(e.target.value)}
-              placeholder="Shown to every storyteller before they consent. e.g., We may share your story with legislators and include it (with your chosen attribution) in our reports and on our website."
+              placeholder="e.g., We’d love to share your story with legislators, and (with your permission) include it in our reports and on our website to show why this issue matters."
               rows={3}
               maxLength={3000}
               className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 resize-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
             />
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Storytellers must agree to this before submitting. Be specific and honest.</p>
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Be specific and honest — clear, respectful intentions earn more (and better) stories.</p>
           </div>
 
-          {/* Usage tags */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              Usage Tags <span className="text-gray-400 dark:text-gray-500 font-normal">(optional)</span>
-            </label>
-            <div className="flex flex-wrap gap-2">
-              {([
-                ['shared_with_legislators', 'Shared with legislators'],
-                ['published_web_social', 'Published on web / social'],
-                ['included_in_reports', 'Included in reports'],
-                ['used_anonymously', 'Used anonymously'],
-              ] as const).map(([val, lbl]) => {
-                const on = usageTags.includes(val);
-                return (
-                  <button
-                    key={val}
-                    type="button"
-                    onClick={() => setUsageTags((prev) => on ? prev.filter((t) => t !== val) : [...prev, val])}
-                    className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-colors ${
-                      on ? 'bg-purple-600 border-purple-600 text-white' : 'border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:border-gray-400'
-                    }`}
-                  >
-                    {lbl}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Attribution options */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              Allowed Attribution <span className="text-red-500">*</span>
-            </label>
-            <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">Which attribution choices may storytellers pick? We enforce their choice before the story reaches you.</p>
-            <div className="flex flex-wrap gap-2">
-              {([
-                ['named', 'Named'],
-                ['first_name_only', 'First name only'],
-                ['anonymous', 'Anonymous'],
-              ] as const).map(([val, lbl]) => {
-                const on = attributionOptions.includes(val);
-                return (
-                  <button
-                    key={val}
-                    type="button"
-                    onClick={() => setAttributionOptions((prev) => on ? prev.filter((t) => t !== val) : [...prev, val])}
-                    className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-colors ${
-                      on ? 'bg-purple-600 border-purple-600 text-white' : 'border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:border-gray-400'
-                    }`}
-                  >
-                    {lbl}
-                  </button>
-                );
-              })}
-            </div>
+          {/* Attribution is always the storyteller's choice (named / first name only /
+              anonymous), made on their end — the creator doesn't restrict it. We enforce
+              whatever the storyteller picks before the story reaches the creator. */}
+          <div className="p-3 bg-gray-50 dark:bg-gray-700/50 rounded-xl">
+            <p className="text-xs text-gray-600 dark:text-gray-300">
+              <strong>Attribution is the storyteller’s choice.</strong> Each person decides whether to be named, share first name only, or stay anonymous — and we enforce that choice before their story reaches you.
+            </p>
           </div>
 
           {/* Edit / revoke policy */}

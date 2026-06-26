@@ -57,9 +57,11 @@ export default async function CampaignPage({ params }: PageProps) {
       {/* Campaign header */}
       <div className="mb-8">
         <div className="flex items-center gap-2 mb-3">
-          <span className="px-3 py-1 text-xs font-medium rounded-full bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300">
-            {campaign.issue_area}
-          </span>
+          {campaign.issue_area && (
+            <span className="px-3 py-1 text-xs font-medium rounded-full bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300">
+              {campaign.issue_area}
+            </span>
+          )}
           {isStory ? (
             <span className="px-3 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300">
               Share your story

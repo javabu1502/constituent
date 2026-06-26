@@ -335,7 +335,7 @@ export interface Story {
   body: string;
   attribution_level: AttributionLevel;
   consent_at: string;
-  consent_usage_snapshot: { usage_statement: string | null; usage_tags: string[] | null };
+  consent_usage_snapshot: { usage_statement: string | null; granted_uses: string[] };
   status: 'active' | 'revoked';
   revoked_at: string | null;
   created_at: string;

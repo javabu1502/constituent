@@ -43,8 +43,7 @@ vi.mock('@/lib/rate-limit', () => ({
 
 const APPROVED_CAMPAIGN = {
   id: 'c1', slug: 'test', headline: 'Housing Stories',
-  usage_statement: 'shared with legislators', usage_tags: ['shared_with_legislators'],
-  attribution_options: ['named', 'anonymous'], recipient_email: 'creator@example.com',
+  usage_statement: 'shared with legislators', recipient_email: 'creator@example.com',
   approval_status: 'approved', campaign_type: 'storytelling',
 };
 
@@ -54,6 +53,7 @@ const validBody = {
   body: 'This is my story and it is definitely long enough to pass.',
   attribution_level: 'named',
   storyteller_name: 'Jane Doe',
+  granted_uses: ['shared_with_legislators', 'published_web_social'],
   consent_usage: true,
   consent_truthful: true,
 };
@@ -101,12 +101,12 @@ describe('POST /api/stories', () => {
     const inserted = mockStoriesInsert.mock.calls[0][0];
     expect(inserted.user_id).toBe('u1');
     expect(inserted.body).toBe('FINAL BODY');
-    expect(inserted.consent_usage_snapshot).toEqual({ usage_statement: 'shared with legislators', usage_tags: ['shared_with_legislators'] });
+    expect(inserted.consent_usage_snapshot).toEqual({ usage_statement: 'shared with legislators', granted_uses: ['shared_with_legislators', 'published_web_social'] });
   });
 
-  it('rejects an attribution level the campaign does not allow', async () => {
+  it('requires at least one granted use', async () => {
     const { POST } = await import('../stories/route');
-    const res = await POST(makeReq({ ...validBody, attribution_level: 'first_name_only' }));
+    const res = await POST(makeReq({ ...validBody, granted_uses: [] }));
     expect(res.status).toBe(400);
     expect(mockRpc).not.toHaveBeenCalled();
   });

@@ -6,6 +6,7 @@ import { createClient } from '@/lib/supabase/client';
 import { trackEvent } from '@/lib/analytics';
 import { Button } from '@/components/ui/Button';
 import { SupportNudge } from '@/components/ui/SupportNudge';
+import { STORY_USAGE_OPTIONS, usageLabels } from '@/lib/story-usage';
 import type { Campaign, AttributionLevel } from '@/lib/types';
 
 type Step = 'intro' | 'interview' | 'review' | 'consent' | 'send' | 'done';
@@ -39,13 +40,11 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
 
-  // Consent / attribution
-  const allowedAttribution = (campaign.attribution_options?.length
-    ? campaign.attribution_options
-    : (['named', 'first_name_only', 'anonymous'] as AttributionLevel[]));
-  const [attribution, setAttribution] = useState<AttributionLevel>(allowedAttribution[0]);
+  // Consent / attribution — both are the storyteller's choice.
+  const allowedAttribution: AttributionLevel[] = ['named', 'first_name_only', 'anonymous'];
+  const [attribution, setAttribution] = useState<AttributionLevel>('named');
   const [storytellerName, setStorytellerName] = useState('');
-  const [consentUsage, setConsentUsage] = useState(false);
+  const [grantedUses, setGrantedUses] = useState<string[]>([]);
   const [consentTruthful, setConsentTruthful] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
@@ -149,8 +148,12 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
   // --- Submit (apply attribution, count, persist) ---
   const submitStory = async () => {
     setError(null);
-    if (!consentUsage || !consentTruthful) {
-      setError('Please confirm both checkboxes to continue.');
+    if (grantedUses.length < 1) {
+      setError('Please choose at least one way your story may be used.');
+      return;
+    }
+    if (!consentTruthful) {
+      setError('Please confirm this is your own true experience.');
       return;
     }
     if (attribution !== 'anonymous' && !storytellerName.trim()) {
@@ -168,6 +171,7 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
           body: body.trim(),
           attribution_level: attribution,
           storyteller_name: attribution === 'anonymous' ? null : storytellerName.trim(),
+          granted_uses: grantedUses,
           consent_usage: true,
           consent_truthful: true,
         }),
@@ -190,8 +194,15 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
   };
 
   const mailtoHref = () => {
+    const attrLine =
+      attribution === 'named' ? `NAMED — you may attribute this story to ${storytellerName.trim() || 'me'}.`
+      : attribution === 'first_name_only' ? 'FIRST NAME ONLY — please use my first name only, not my full name.'
+      : 'ANONYMOUS — please do not attribute this story to me or try to identify me.';
+    const uses = usageLabels(grantedUses).map((u) => `  • ${u}`).join('\n');
+    const terms =
+      `— My terms —\nAttribution: ${attrLine}\nI’m OK with my story being used in these ways:\n${uses}\n\n`;
     const intro = "Hi,\n\nI’d like to share my story for your campaign. (If you have a photo that helps tell it, you can attach it to this email before sending.)\n\n";
-    const bodyText = `${intro}${finalBody}\n`;
+    const bodyText = `${intro}${terms}${finalBody}\n`;
     return `mailto:${encodeURIComponent(recipientEmail)}?subject=${encodeURIComponent(mailtoSubject)}&body=${encodeURIComponent(bodyText)}`;
   };
 
@@ -387,13 +398,45 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
           </div>
         )}
 
-        {/* Usage reminder */}
+        {/* What the campaign hopes to do (context) */}
         {campaign.usage_statement && (
           <div className="p-3 bg-gray-50 dark:bg-gray-700/50 rounded-xl">
-            <p className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">How {campaign.headline} will use your story</p>
+            <p className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">What {campaign.headline} hopes to do with stories</p>
             <p className="text-sm text-gray-600 dark:text-gray-300">{campaign.usage_statement}</p>
           </div>
         )}
+
+        {/* Storyteller's usage permissions */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">How is it OK to use your story?</label>
+          <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">
+            You’re in control. Check only the uses you’re comfortable with — we pass your choices to the campaign and they should only use your story in the ways you allow. Pick at least one.
+          </p>
+          <div className="space-y-2">
+            {STORY_USAGE_OPTIONS.map((opt) => {
+              const on = grantedUses.includes(opt.value);
+              return (
+                <label
+                  key={opt.value}
+                  className={`flex items-start gap-3 p-3 rounded-xl border cursor-pointer transition-colors ${
+                    on ? 'border-purple-500 bg-purple-50 dark:bg-purple-900/20' : 'border-gray-200 dark:border-gray-700'
+                  }`}
+                >
+                  <input
+                    type="checkbox"
+                    checked={on}
+                    onChange={() => setGrantedUses((prev) => on ? prev.filter((u) => u !== opt.value) : [...prev, opt.value])}
+                    className="mt-1 h-4 w-4 rounded text-purple-600 focus:ring-purple-500"
+                  />
+                  <span>
+                    <span className="block text-sm font-medium text-gray-800 dark:text-gray-200">{opt.label}</span>
+                    <span className="block text-xs text-gray-500 dark:text-gray-400">{opt.description}</span>
+                  </span>
+                </label>
+              );
+            })}
+          </div>
+        </div>
 
         {/* Photo prompt */}
         <div className="p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700 rounded-xl">
@@ -406,12 +449,6 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
 
         {/* Consent gate */}
         <div className="space-y-2">
-          <label className="flex items-start gap-3 cursor-pointer">
-            <input type="checkbox" checked={consentUsage} onChange={(e) => setConsentUsage(e.target.checked)} className="mt-1 h-4 w-4 rounded text-purple-600 focus:ring-purple-500" />
-            <span className="text-sm text-gray-700 dark:text-gray-300">
-              I consent to <strong>{campaign.headline}</strong> using my story as described above, with my chosen attribution.
-            </span>
-          </label>
           <label className="flex items-start gap-3 cursor-pointer">
             <input type="checkbox" checked={consentTruthful} onChange={(e) => setConsentTruthful(e.target.checked)} className="mt-1 h-4 w-4 rounded text-purple-600 focus:ring-purple-500" />
             <span className="text-sm text-gray-700 dark:text-gray-300">
@@ -430,7 +467,7 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
 
         <div className="flex gap-2">
           <Button variant="secondary" onClick={() => setStep('review')} className="flex-1">Back</Button>
-          <Button onClick={submitStory} isLoading={submitting} disabled={!consentUsage || !consentTruthful} className="flex-1">
+          <Button onClick={submitStory} isLoading={submitting} disabled={grantedUses.length < 1 || !consentTruthful} className="flex-1">
             Prepare my email
           </Button>
         </div>
