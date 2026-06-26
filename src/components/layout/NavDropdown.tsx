@@ -12,9 +12,13 @@ interface NavItem {
 interface NavDropdownProps {
   label: string;
   items: NavItem[];
+  /** Use the prominent (purple, semibold) label styling, e.g. for primary nav. */
+  emphasis?: boolean;
+  /** Tailwind width class for the dropdown menu (default w-44). */
+  menuWidthClass?: string;
 }
 
-export function NavDropdown({ label, items }: NavDropdownProps) {
+export function NavDropdown({ label, items, emphasis = false, menuWidthClass = 'w-44' }: NavDropdownProps) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -72,10 +76,12 @@ export function NavDropdown({ label, items }: NavDropdownProps) {
         onClick={() => setOpen(!open)}
         aria-expanded={open}
         aria-haspopup="menu"
-        className={`flex items-center gap-1 text-sm font-medium transition-colors ${
-          isActive
-            ? 'text-purple-600 dark:text-purple-400'
-            : 'text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400'
+        className={`flex items-center gap-1 text-sm transition-colors ${
+          emphasis
+            ? 'font-semibold text-purple-700 dark:text-purple-300 hover:text-purple-900 dark:hover:text-purple-100'
+            : isActive
+            ? 'font-medium text-purple-600 dark:text-purple-400'
+            : 'font-medium text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400'
         }`}
       >
         {label}
@@ -92,7 +98,7 @@ export function NavDropdown({ label, items }: NavDropdownProps) {
       {open && (
         <div
           role="menu"
-          className="absolute top-full left-0 mt-2 w-44 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 shadow-lg py-1 z-50"
+          className={`absolute top-full left-0 mt-2 ${menuWidthClass} bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 shadow-lg py-1 z-50`}
         >
           {items.map((item) => (
             <Link

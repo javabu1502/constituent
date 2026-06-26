@@ -97,7 +97,7 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
         body: JSON.stringify({ campaignSlug: campaign.slug, messages: next.slice(-30) }),
       });
       if (!res.ok || !res.body) {
-        throw new Error((await res.text().catch(() => '')) || 'The assistant is unavailable right now.');
+        throw new Error((await res.text().catch(() => '')) || 'Sorry — we couldn’t connect just now. Please try again.');
       }
 
       const reader = res.body.getReader();
@@ -209,7 +209,7 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
         <div className="space-y-2 text-sm text-gray-600 dark:text-gray-300">
           <p className="font-medium text-gray-900 dark:text-white">How it works</p>
           <ol className="list-decimal list-inside space-y-1">
-            <li>The Assistant helps you put your experience into words — at your pace.</li>
+            <li>We’ll ask a few gentle questions to help you put your experience into words — at your pace.</li>
             <li>You review and edit the final story.</li>
             <li>You choose how you’re credited and confirm your consent.</li>
             <li>You email the story to the campaign from your own email.</li>
@@ -327,7 +327,7 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
         </div>
         {error && <p className="text-sm text-red-600 dark:text-red-400">{error}</p>}
         <div className="flex gap-2">
-          <Button variant="secondary" onClick={() => setStep('interview')} className="flex-1">Keep editing with the Assistant</Button>
+          <Button variant="secondary" onClick={() => setStep('interview')} className="flex-1">Back to the questions</Button>
           <Button onClick={() => { setError(null); setStep('consent'); }} disabled={body.trim().length < 20} className="flex-1">Continue</Button>
         </div>
       </div>

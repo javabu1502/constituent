@@ -71,6 +71,20 @@ export function MobileNav({ user }: { user: User | null }) {
           >
             Campaigns
           </Link>
+          <Link
+            href="/campaign/create?type=advocacy"
+            onClick={() => setOpen(false)}
+            className="block pl-7 pr-4 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+          >
+            Start an Advocacy Campaign
+          </Link>
+          <Link
+            href="/campaign/create?type=storytelling"
+            onClick={() => setOpen(false)}
+            className="block pl-7 pr-4 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+          >
+            Start a Storytelling Campaign
+          </Link>
           <a
             href="https://buymeacoffee.com/mydemocracy"
             target="_blank"

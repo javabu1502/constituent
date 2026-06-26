@@ -29,12 +29,16 @@ export async function Header() {
             >
               Write to Your Officials
             </Link>
-            <Link
-              href="/campaigns"
-              className="text-sm font-semibold text-purple-700 dark:text-purple-300 hover:text-purple-900 dark:hover:text-purple-100 transition-colors"
-            >
-              Campaigns
-            </Link>
+            <NavDropdown
+              label="Campaigns"
+              emphasis
+              menuWidthClass="w-60"
+              items={[
+                { href: '/campaigns', label: 'Browse Campaigns' },
+                { href: '/campaign/create?type=advocacy', label: 'Start an Advocacy Campaign' },
+                { href: '/campaign/create?type=storytelling', label: 'Start a Storytelling Campaign' },
+              ]}
+            />
             <NavDropdown
               label="Explore"
               items={[

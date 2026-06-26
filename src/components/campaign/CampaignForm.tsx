@@ -30,9 +30,12 @@ export function CampaignForm() {
   const [messageTemplate, setMessageTemplate] = useState('');
   const [distributionPlan, setDistributionPlan] = useState('');
 
-  // Campaign type + visibility
-  const [campaignType, setCampaignType] = useState<'advocacy' | 'storytelling'>('advocacy');
-  const [visibility, setVisibility] = useState<'public' | 'unlisted'>('public');
+  // Campaign type is fixed by the entry point (?type=advocacy|storytelling);
+  // each type has its own track below. Advocacy campaigns are always public.
+  const [campaignType] = useState<'advocacy' | 'storytelling'>(
+    searchParams.get('type') === 'storytelling' ? 'storytelling' : 'advocacy'
+  );
+  const visibility: 'public' | 'unlisted' = 'public';
 
   // Storytelling fields
   const [storyPrompt, setStoryPrompt] = useState('');
@@ -301,39 +304,6 @@ export function CampaignForm() {
         </div>
       )}
 
-      {/* Campaign type */}
-      <div>
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-          Campaign Type <span className="text-red-500">*</span>
-        </label>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          {([
-            ['advocacy', 'Advocacy', 'Mobilize people to contact their representatives with AI-personalized messages.'],
-            ['storytelling', 'Storytelling', 'Collect personal stories from supporters — developed with the Assistant and shared with you.'],
-          ] as const).map(([val, lbl, desc]) => (
-            <label
-              key={val}
-              className={`px-4 py-3 rounded-xl border-2 cursor-pointer transition-colors ${
-                campaignType === val
-                  ? 'border-purple-600 bg-purple-50 dark:bg-purple-900/30'
-                  : 'border-gray-300 dark:border-gray-600 hover:border-gray-400'
-              }`}
-            >
-              <input
-                type="radio"
-                name="campaignType"
-                value={val}
-                checked={campaignType === val}
-                onChange={() => setCampaignType(val)}
-                className="sr-only"
-              />
-              <span className={`block text-sm font-semibold ${campaignType === val ? 'text-purple-700 dark:text-purple-300' : 'text-gray-900 dark:text-white'}`}>{lbl}</span>
-              <span className="block text-xs text-gray-500 dark:text-gray-400 mt-1">{desc}</span>
-            </label>
-          ))}
-        </div>
-      </div>
-
       {/* Headline */}
       <div>
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -569,23 +539,6 @@ export function CampaignForm() {
         </p>
       </div>
 
-      {/* Visibility (advocacy only) */}
-      <div className="p-3 rounded-xl border border-gray-200 dark:border-gray-700">
-        <label className="flex items-start gap-3 cursor-pointer">
-          <input
-            type="checkbox"
-            checked={visibility === 'public'}
-            onChange={(e) => setVisibility(e.target.checked ? 'public' : 'unlisted')}
-            className="mt-1 h-4 w-4 rounded border-gray-300 text-purple-600 focus:ring-purple-500"
-          />
-          <span>
-            <span className="block text-sm font-medium text-gray-700 dark:text-gray-300">List this campaign publicly on the website</span>
-            <span className="block text-xs text-gray-500 dark:text-gray-400 mt-0.5">
-              When on, it appears in the public campaign directory once approved. When off, it&apos;s reachable only by the share link.
-            </span>
-          </span>
-        </label>
-      </div>
         </>
       )}
 
@@ -595,7 +548,7 @@ export function CampaignForm() {
           <div className="p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700 rounded-xl">
             <p className="text-sm text-blue-800 dark:text-blue-300">
               Storytelling campaigns are <strong>shared by link only</strong> — they never appear in the public directory.
-              Supporters develop a personal story with the Assistant and email it to you.
+              Supporters answer a few guided questions to shape their story, then email it to you.
             </p>
           </div>
 
