@@ -308,6 +308,38 @@ export interface Campaign {
   bill_ref: string | null;
   bill_title: string | null;
   bill_url: string | null;
+  // Campaign type + moderation/visibility (storytelling vs advocacy)
+  campaign_type: 'advocacy' | 'storytelling';
+  visibility: 'public' | 'unlisted';
+  approval_status: 'pending' | 'approved' | 'rejected';
+  reviewed_by: string | null;
+  approved_at: string | null;
+  review_note: string | null;
+  story_count: number;
+  // Storytelling-only fields (null for advocacy)
+  story_prompt: string | null;
+  usage_statement: string | null;
+  usage_tags: string[] | null;
+  attribution_options: AttributionLevel[] | null;
+  edit_revoke_policy: string | null;
+  recipient_email: string | null;
+}
+
+export type AttributionLevel = 'named' | 'first_name_only' | 'anonymous';
+
+export interface Story {
+  id: string;
+  campaign_id: string;
+  user_id: string;
+  title: string | null;
+  body: string;
+  attribution_level: AttributionLevel;
+  consent_at: string;
+  consent_usage_snapshot: { usage_statement: string | null; usage_tags: string[] | null };
+  status: 'active' | 'revoked';
+  revoked_at: string | null;
+  created_at: string;
+  updated_at: string;
 }
 
 export interface CampaignAction {
