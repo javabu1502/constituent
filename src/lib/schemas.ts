@@ -72,19 +72,48 @@ export const trackSendSchema = z.object({
 });
 
 export const createCampaignSchema = z.object({
+  campaign_type: z.enum(['advocacy', 'storytelling']).default('advocacy'),
+  visibility: z.enum(['public', 'unlisted']).optional(),
   headline: z.string().min(3).max(100),
   description: z.string().min(10).max(500),
   issue_area: z.string().min(1).max(200),
   issue_subtopic: z.string().max(200).nullish(),
-  target_level: z.enum(['federal', 'state', 'both']),
+  // Advocacy fields
+  target_level: z.enum(['federal', 'state', 'both']).optional(),
   message_template: z.string().max(2000).nullish(),
-  distribution_plan: z.string().min(10).max(1000),
+  distribution_plan: z.string().max(1000).nullish(),
   // Optional related bill (federal or state) — all-or-nothing, resolved client-side
   bill_level: z.enum(['federal', 'state']).optional(),
   bill_state: z.string().length(2).optional(),
   bill_ref: z.string().max(60).optional(),
   bill_title: z.string().max(500).optional(),
   bill_url: z.string().max(1000).optional(),
+  // Storytelling fields
+  story_prompt: z.string().max(2000).nullish(),
+  usage_statement: z.string().max(3000).optional(),
+  usage_tags: z.array(z.string().max(60)).max(20).optional(),
+  attribution_options: z.array(z.enum(['named', 'first_name_only', 'anonymous'])).optional(),
+  edit_revoke_policy: z.string().max(2000).optional(),
+  recipient_email: z.string().email().max(200).nullish(),
+}).superRefine((data, ctx) => {
+  if (data.campaign_type === 'storytelling') {
+    if (!data.usage_statement || data.usage_statement.trim().length < 10) {
+      ctx.addIssue({ code: 'custom', path: ['usage_statement'], message: 'A usage statement (how stories will be used) is required' });
+    }
+    if (!data.attribution_options || data.attribution_options.length < 1) {
+      ctx.addIssue({ code: 'custom', path: ['attribution_options'], message: 'Allow at least one attribution option' });
+    }
+    if (!data.edit_revoke_policy || data.edit_revoke_policy.trim().length < 10) {
+      ctx.addIssue({ code: 'custom', path: ['edit_revoke_policy'], message: 'An edit/revoke policy is required' });
+    }
+  } else {
+    if (!data.target_level) {
+      ctx.addIssue({ code: 'custom', path: ['target_level'], message: 'Target level is required' });
+    }
+    if (!data.distribution_plan || data.distribution_plan.trim().length < 10) {
+      ctx.addIssue({ code: 'custom', path: ['distribution_plan'], message: 'Distribution plan must be at least 10 characters' });
+    }
+  }
 });
 
 export const generateCommentSchema = z.object({

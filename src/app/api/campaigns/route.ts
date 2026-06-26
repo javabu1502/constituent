@@ -55,8 +55,14 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: parsed.error }, { status: 400 });
   }
 
-  const { headline, description, issue_area, issue_subtopic, target_level, message_template, distribution_plan, bill_level, bill_state, bill_ref, bill_title, bill_url } = parsed.data;
+  const {
+    campaign_type, visibility, headline, description, issue_area, issue_subtopic,
+    target_level, message_template, distribution_plan,
+    bill_level, bill_state, bill_ref, bill_title, bill_url,
+    story_prompt, usage_statement, usage_tags, attribution_options, edit_revoke_policy, recipient_email,
+  } = parsed.data;
 
+  const isStory = campaign_type === 'storytelling';
   const slug = slugify(headline).slice(0, 50) + '-' + randomSuffix();
 
   const admin = createAdminClient();
@@ -65,18 +71,28 @@ export async function POST(request: NextRequest) {
     .insert({
       creator_id: user.id,
       slug,
+      campaign_type,
+      // Storytelling is always unlisted; advocacy creator chooses
+      visibility: isStory ? 'unlisted' : (visibility || 'public'),
+      approval_status: 'pending',
       headline,
       description,
       issue_area,
       issue_subtopic: issue_subtopic || null,
-      target_level,
-      message_template: message_template || null,
-      distribution_plan,
-      bill_level: bill_level || null,
-      bill_state: bill_level === 'state' ? (bill_state || null) : null,
-      bill_ref: bill_ref || null,
-      bill_title: bill_title || null,
-      bill_url: bill_url || null,
+      target_level: isStory ? 'federal' : target_level,
+      message_template: isStory ? null : (message_template || null),
+      distribution_plan: isStory ? null : distribution_plan,
+      bill_level: isStory ? null : (bill_level || null),
+      bill_state: !isStory && bill_level === 'state' ? (bill_state || null) : null,
+      bill_ref: isStory ? null : (bill_ref || null),
+      bill_title: isStory ? null : (bill_title || null),
+      bill_url: isStory ? null : (bill_url || null),
+      story_prompt: isStory ? (story_prompt || null) : null,
+      usage_statement: isStory ? usage_statement : null,
+      usage_tags: isStory ? (usage_tags || []) : null,
+      attribution_options: isStory ? attribution_options : null,
+      edit_revoke_policy: isStory ? edit_revoke_policy : null,
+      recipient_email: isStory ? (recipient_email || user.email || null) : null,
       status: 'pending',
     })
     .select()
@@ -94,9 +110,11 @@ export async function POST(request: NextRequest) {
      <p><strong>${escapeHtml(headline)}</strong></p>
      <p>${escapeHtml(description)}</p>
      <ul>
+       <li>Type: ${escapeHtml(campaign_type)}</li>
        <li>Issue: ${escapeHtml(issue_area)}${issue_subtopic ? ` / ${escapeHtml(issue_subtopic)}` : ''}</li>
-       <li>Target level: ${escapeHtml(target_level)}</li>
-       <li>Distribution plan: ${escapeHtml(distribution_plan)}</li>
+       ${isStory
+         ? `<li>Story prompt: ${escapeHtml(story_prompt || '—')}</li><li>Usage: ${escapeHtml(usage_statement || '')}</li>`
+         : `<li>Target level: ${escapeHtml(target_level || '')}</li><li>Distribution plan: ${escapeHtml(distribution_plan || '')}</li>`}
        <li>Slug: ${escapeHtml(slug)}</li>
      </ul>
      <p>Status is <strong>pending</strong> — review and approve it in the admin dashboard.</p>`

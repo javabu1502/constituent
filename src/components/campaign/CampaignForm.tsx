@@ -30,6 +30,20 @@ export function CampaignForm() {
   const [messageTemplate, setMessageTemplate] = useState('');
   const [distributionPlan, setDistributionPlan] = useState('');
 
+  // Campaign type + visibility
+  const [campaignType, setCampaignType] = useState<'advocacy' | 'storytelling'>('advocacy');
+  const [visibility, setVisibility] = useState<'public' | 'unlisted'>('public');
+
+  // Storytelling fields
+  const [storyPrompt, setStoryPrompt] = useState('');
+  const [usageStatement, setUsageStatement] = useState('');
+  const [usageTags, setUsageTags] = useState<string[]>([]);
+  const [attributionOptions, setAttributionOptions] = useState<string[]>(['named', 'first_name_only', 'anonymous']);
+  const [editRevokePolicy, setEditRevokePolicy] = useState(
+    'To edit or revoke your story, contact us at the email on this campaign. Stories already shared or published may not be able to be fully recalled.'
+  );
+  const [recipientEmail, setRecipientEmail] = useState('');
+
   // Optional related bill
   const [billLevel, setBillLevel] = useState<BillLevel>('');
   const [billState, setBillState] = useState('');
@@ -175,35 +189,67 @@ export function CampaignForm() {
       setError('Please select an issue area');
       return;
     }
-    if (!distributionPlan.trim() || distributionPlan.trim().length < 10) {
-      setError('Please describe your distribution plan (at least 10 characters)');
-      return;
+    if (campaignType === 'advocacy') {
+      if (!distributionPlan.trim() || distributionPlan.trim().length < 10) {
+        setError('Please describe your distribution plan (at least 10 characters)');
+        return;
+      }
+    } else {
+      if (!usageStatement.trim() || usageStatement.trim().length < 10) {
+        setError('Please describe how stories will be used (at least 10 characters)');
+        return;
+      }
+      if (attributionOptions.length < 1) {
+        setError('Allow at least one attribution option');
+        return;
+      }
+      if (!editRevokePolicy.trim() || editRevokePolicy.trim().length < 10) {
+        setError('Please describe how storytellers can edit or revoke their story');
+        return;
+      }
     }
 
     setIsSubmitting(true);
 
     try {
+      const sharedBody = {
+        campaign_type: campaignType,
+        headline: headline.trim(),
+        description: description.trim(),
+        issue_area: issueCategory || issueArea,
+        issue_subtopic: issueCategory ? issueArea : null,
+      };
+      const body = campaignType === 'advocacy'
+        ? {
+            ...sharedBody,
+            visibility,
+            target_level: targetLevel,
+            message_template: messageTemplate.trim() || null,
+            distribution_plan: distributionPlan.trim(),
+            ...(resolvedBill
+              ? {
+                  bill_level: resolvedBill.level,
+                  bill_state: resolvedBill.level === 'state' ? resolvedBill.state : undefined,
+                  bill_ref: resolvedBill.ref,
+                  bill_title: resolvedBill.title,
+                  bill_url: resolvedBill.url,
+                }
+              : {}),
+          }
+        : {
+            ...sharedBody,
+            story_prompt: storyPrompt.trim() || null,
+            usage_statement: usageStatement.trim(),
+            usage_tags: usageTags,
+            attribution_options: attributionOptions,
+            edit_revoke_policy: editRevokePolicy.trim(),
+            recipient_email: recipientEmail.trim() || null,
+          };
+
       const res = await fetch('/api/campaigns', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          headline: headline.trim(),
-          description: description.trim(),
-          issue_area: issueCategory || issueArea,
-          issue_subtopic: issueCategory ? issueArea : null,
-          target_level: targetLevel,
-          message_template: messageTemplate.trim() || null,
-          distribution_plan: distributionPlan.trim(),
-          ...(resolvedBill
-            ? {
-                bill_level: resolvedBill.level,
-                bill_state: resolvedBill.level === 'state' ? resolvedBill.state : undefined,
-                bill_ref: resolvedBill.ref,
-                bill_title: resolvedBill.title,
-                bill_url: resolvedBill.url,
-              }
-            : {}),
-        }),
+        body: JSON.stringify(body),
       });
 
       const data = await res.json();
@@ -255,6 +301,39 @@ export function CampaignForm() {
         </div>
       )}
 
+      {/* Campaign type */}
+      <div>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          Campaign Type <span className="text-red-500">*</span>
+        </label>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {([
+            ['advocacy', 'Advocacy', 'Mobilize people to contact their representatives with AI-personalized messages.'],
+            ['storytelling', 'Storytelling', 'Collect personal stories from supporters — developed with the Assistant and shared with you.'],
+          ] as const).map(([val, lbl, desc]) => (
+            <label
+              key={val}
+              className={`px-4 py-3 rounded-xl border-2 cursor-pointer transition-colors ${
+                campaignType === val
+                  ? 'border-purple-600 bg-purple-50 dark:bg-purple-900/30'
+                  : 'border-gray-300 dark:border-gray-600 hover:border-gray-400'
+              }`}
+            >
+              <input
+                type="radio"
+                name="campaignType"
+                value={val}
+                checked={campaignType === val}
+                onChange={() => setCampaignType(val)}
+                className="sr-only"
+              />
+              <span className={`block text-sm font-semibold ${campaignType === val ? 'text-purple-700 dark:text-purple-300' : 'text-gray-900 dark:text-white'}`}>{lbl}</span>
+              <span className="block text-xs text-gray-500 dark:text-gray-400 mt-1">{desc}</span>
+            </label>
+          ))}
+        </div>
+      </div>
+
       {/* Headline */}
       <div>
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -302,6 +381,8 @@ export function CampaignForm() {
         />
       </div>
 
+      {campaignType === 'advocacy' && (
+        <>
       {/* Target Level */}
       <div>
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -488,8 +569,162 @@ export function CampaignForm() {
         </p>
       </div>
 
+      {/* Visibility (advocacy only) */}
+      <div className="p-3 rounded-xl border border-gray-200 dark:border-gray-700">
+        <label className="flex items-start gap-3 cursor-pointer">
+          <input
+            type="checkbox"
+            checked={visibility === 'public'}
+            onChange={(e) => setVisibility(e.target.checked ? 'public' : 'unlisted')}
+            className="mt-1 h-4 w-4 rounded border-gray-300 text-purple-600 focus:ring-purple-500"
+          />
+          <span>
+            <span className="block text-sm font-medium text-gray-700 dark:text-gray-300">List this campaign publicly on the website</span>
+            <span className="block text-xs text-gray-500 dark:text-gray-400 mt-0.5">
+              When on, it appears in the public campaign directory once approved. When off, it&apos;s reachable only by the share link.
+            </span>
+          </span>
+        </label>
+      </div>
+        </>
+      )}
+
+      {/* Storytelling fields */}
+      {campaignType === 'storytelling' && (
+        <>
+          <div className="p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700 rounded-xl">
+            <p className="text-sm text-blue-800 dark:text-blue-300">
+              Storytelling campaigns are <strong>shared by link only</strong> — they never appear in the public directory.
+              Supporters develop a personal story with the Assistant and email it to you.
+            </p>
+          </div>
+
+          {/* Story prompt */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              Story Prompt <span className="text-gray-400 dark:text-gray-500 font-normal">(optional)</span>
+            </label>
+            <textarea
+              value={storyPrompt}
+              onChange={(e) => setStoryPrompt(e.target.value)}
+              placeholder="What kind of story are you asking for? e.g., How has the cost of housing affected your family?"
+              rows={3}
+              maxLength={2000}
+              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 resize-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
+            />
+          </div>
+
+          {/* Usage statement */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              How will stories be used? <span className="text-red-500">*</span>
+            </label>
+            <textarea
+              value={usageStatement}
+              onChange={(e) => setUsageStatement(e.target.value)}
+              placeholder="Shown to every storyteller before they consent. e.g., We may share your story with legislators and include it (with your chosen attribution) in our reports and on our website."
+              rows={3}
+              maxLength={3000}
+              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 resize-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
+            />
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Storytellers must agree to this before submitting. Be specific and honest.</p>
+          </div>
+
+          {/* Usage tags */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              Usage Tags <span className="text-gray-400 dark:text-gray-500 font-normal">(optional)</span>
+            </label>
+            <div className="flex flex-wrap gap-2">
+              {([
+                ['shared_with_legislators', 'Shared with legislators'],
+                ['published_web_social', 'Published on web / social'],
+                ['included_in_reports', 'Included in reports'],
+                ['used_anonymously', 'Used anonymously'],
+              ] as const).map(([val, lbl]) => {
+                const on = usageTags.includes(val);
+                return (
+                  <button
+                    key={val}
+                    type="button"
+                    onClick={() => setUsageTags((prev) => on ? prev.filter((t) => t !== val) : [...prev, val])}
+                    className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-colors ${
+                      on ? 'bg-purple-600 border-purple-600 text-white' : 'border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:border-gray-400'
+                    }`}
+                  >
+                    {lbl}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Attribution options */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              Allowed Attribution <span className="text-red-500">*</span>
+            </label>
+            <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">Which attribution choices may storytellers pick? We enforce their choice before the story reaches you.</p>
+            <div className="flex flex-wrap gap-2">
+              {([
+                ['named', 'Named'],
+                ['first_name_only', 'First name only'],
+                ['anonymous', 'Anonymous'],
+              ] as const).map(([val, lbl]) => {
+                const on = attributionOptions.includes(val);
+                return (
+                  <button
+                    key={val}
+                    type="button"
+                    onClick={() => setAttributionOptions((prev) => on ? prev.filter((t) => t !== val) : [...prev, val])}
+                    className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-colors ${
+                      on ? 'bg-purple-600 border-purple-600 text-white' : 'border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:border-gray-400'
+                    }`}
+                  >
+                    {lbl}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Edit / revoke policy */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              Edit / Revoke Policy <span className="text-red-500">*</span>
+            </label>
+            <textarea
+              value={editRevokePolicy}
+              onChange={(e) => setEditRevokePolicy(e.target.value)}
+              placeholder="How can a storyteller edit or revoke their story later?"
+              rows={3}
+              maxLength={2000}
+              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 resize-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
+            />
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+              Revocation is handled by contacting you — stories already shared or used can&apos;t be auto-recalled.
+            </p>
+          </div>
+
+          {/* Recipient email */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              Where should stories be sent? <span className="text-gray-400 dark:text-gray-500 font-normal">(optional)</span>
+            </label>
+            <input
+              type="email"
+              value={recipientEmail}
+              onChange={(e) => setRecipientEmail(e.target.value)}
+              placeholder="Defaults to your account email"
+              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
+            />
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Storytellers email their finished story to this address from their own email.</p>
+          </div>
+        </>
+      )}
+
       <Button type="submit" isLoading={isSubmitting} className="w-full" size="lg">
-        Submit Campaign for Review
+        {campaignType === 'storytelling' ? 'Submit Storytelling Campaign for Review' : 'Submit Campaign for Review'}
       </Button>
     </form>
   );
