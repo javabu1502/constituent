@@ -130,7 +130,16 @@ function OfficialRow({ official, badge }: { official: Official; badge?: string }
       )}
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2 flex-wrap">
-          {official.level === 'federal' ? (
+          {official.website ? (
+            <a
+              href={official.website}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-gray-900 dark:text-white text-sm hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
+            >
+              {official.name}
+            </a>
+          ) : official.level === 'federal' ? (
             <Link href={`/rep/${official.id}`} className="font-semibold text-gray-900 dark:text-white text-sm hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
               {official.name}
             </Link>
