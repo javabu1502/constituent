@@ -52,7 +52,8 @@ export async function Header() {
               label="Take Action"
               items={[
                 { href: '/vote', label: 'Vote' },
-                { href: '/regulations', label: 'Regulations' },
+                // Regulations (public comment) temporarily hidden — restore to bring it back.
+                // { href: '/regulations', label: 'Regulations' },
               ]}
             />
             <NavDropdown

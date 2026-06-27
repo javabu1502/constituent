@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase';
 import { submitStorySchema, parseBody } from '@/lib/schemas';
 import { writeLimiter, getClientIp } from '@/lib/rate-limit';
@@ -10,15 +9,32 @@ import { deDash } from '@/lib/claude';
  * POST /api/stories
  * Submit a story to a storytelling campaign.
  *
- * Pipeline:
+ * We never store the story itself — not even for signed-in users. We only:
  *   1. Validate consent + attribution.
  *   2. Enforce the chosen attribution on our end (named / first-name / anonymous).
- *   3. Always increment the campaign's running story_count.
- *   4. Persist the story ONLY for a logged-in storyteller (with a consent
- *      snapshot). Anonymous-of-account submissions are counted, never stored.
- *   5. Return the attribution-applied body so the storyteller can email it to
- *      the campaign from their own client (we never send on their behalf).
+ *   3. Increment the campaign's running story_count.
+ *   4. Store ONLY a short, scrubbed title ("subject") — never the body, the name,
+ *      or who wrote it — so a creator can see what subjects came in.
+ *   5. Return the attribution-applied body so the storyteller can email it to the
+ *      campaign from their own client. Their own sent email is their record of it.
  */
+function escapeRegExp(s: string): string {
+  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+/** Keep a topical title only; strip the storyteller's name and dashes. */
+function sanitizeTitle(title: string | null | undefined, name: string | null | undefined): string {
+  let t = deDash((title || '').trim());
+  const nm = (name || '').trim();
+  if (nm && t) {
+    for (const part of [nm, nm.split(/\s+/)[0]].filter(Boolean)) {
+      t = t.replace(new RegExp(`\\b${escapeRegExp(part)}(?:['’]s)?\\b`, 'gi'), '').trim();
+    }
+    t = t.replace(/\s{2,}/g, ' ').replace(/^[\s,–—-]+|[\s,]+$/g, '').trim();
+  }
+  return t.slice(0, 120);
+}
+
 export async function POST(request: NextRequest) {
   const ip = getClientIp(request);
   const { success, retryAfter } = writeLimiter.check(ip);
@@ -38,16 +54,12 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: parsed.error }, { status: 400 });
   }
 
-  const { campaignSlug, title, body, attribution_level, storyteller_name, granted_uses } = parsed.data;
-
-  // Optional auth — drives whether we persist the story.
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const { campaignSlug, title, body, attribution_level, storyteller_name } = parsed.data;
 
   const admin = createAdminClient();
   const { data: campaign, error: campaignError } = await admin
     .from('campaigns')
-    .select('id, slug, headline, usage_statement, recipient_email, approval_status, campaign_type')
+    .select('id, slug, headline, recipient_email, approval_status, campaign_type')
     .eq('slug', campaignSlug)
     .eq('approval_status', 'approved')
     .eq('campaign_type', 'storytelling')
@@ -64,7 +76,7 @@ export async function POST(request: NextRequest) {
   const final_body = deDash(applied.final_body);
   const flagged = applied.flagged;
 
-  // Always count the submission.
+  // Running count.
   const { error: rpcError } = await admin.rpc('increment_campaign_story_count', {
     campaign_slug: campaignSlug,
   });
@@ -72,31 +84,19 @@ export async function POST(request: NextRequest) {
     console.error('[stories] story-count RPC error:', rpcError);
   }
 
-  // Persist only for logged-in storytellers, with a consent snapshot.
-  let persisted = false;
-  if (user) {
-    const { error: insertError } = await admin.from('stories').insert({
-      campaign_id: campaign.id,
-      user_id: user.id,
-      title: title || null,
-      body: final_body,
-      attribution_level,
-      consent_usage_snapshot: {
-        usage_statement: campaign.usage_statement ?? null,
-        granted_uses,
-      },
-      status: 'active',
-    });
-    if (insertError) {
-      console.error('[stories] Insert error:', insertError);
-    } else {
-      persisted = true;
+  // Store ONLY a short, scrubbed title — no body, no name, no link to the person.
+  const subjectTitle = sanitizeTitle(title, storyteller_name);
+  if (subjectTitle) {
+    const { error: subjectError } = await admin
+      .from('story_subjects')
+      .insert({ campaign_id: campaign.id, title: subjectTitle });
+    if (subjectError) {
+      console.error('[stories] subject insert error:', subjectError);
     }
   }
 
   return NextResponse.json({
     success: true,
-    persisted,
     final_body,
     flagged,
     recipient_email: campaign.recipient_email ?? null,

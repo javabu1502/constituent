@@ -89,8 +89,10 @@ Sound like a real person, not AI. Specifically:
 - Avoid polished marketing cadence and clichés ("at the end of the day", "now more than ever", "speaks volumes"). Plain, everyday language.
 - Vary sentence length. Short, direct sentences are good. It's fine to be a little plain or imperfect — that reads as human.
 
+For the title: make it a short, topical headline about the issue (max 80 chars). It must NOT contain the person's name, employer, or a specific small place — keep it general enough that it identifies the topic, not the person (e.g. "Rising costs are forcing me to consider closing").
+
 Respond with ONLY this JSON, nothing else:
 {
-  "title": "a short, honest title in their voice (max 80 chars)",
+  "title": "a short, topical, non-identifying title (max 80 chars)",
   "body": "the full story text"
 }`;

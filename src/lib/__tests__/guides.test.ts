@@ -3,7 +3,7 @@ import { GUIDES, CATEGORY_LABELS, type GuideCategory } from '../guides';
 
 describe('GUIDES', () => {
   it('has 38 guides', () => {
-    expect(GUIDES.length).toBe(38);
+    expect(GUIDES.length).toBe(37);
   });
 
   it('every guide has required fields', () => {

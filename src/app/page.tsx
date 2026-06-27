@@ -282,7 +282,7 @@ export default async function HomePage() {
               </p>
             </Link>
 
-            {/* Public Comment */}
+            {/* Public Comment (regulations) temporarily hidden — restore this card to bring it back.
             <Link href="/regulations" className="bg-white dark:bg-gray-700 rounded-2xl p-6 border border-gray-200 dark:border-gray-600 hover:border-purple-300 dark:hover:border-purple-600 transition-colors">
               <div className="w-10 h-10 bg-purple-100 dark:bg-purple-900 rounded-xl flex items-center justify-center mb-4">
                 <svg className="w-5 h-5 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -296,6 +296,7 @@ export default async function HomePage() {
                 Comment on federal regulations with AI-assisted drafting. Shape the rules that affect your life.
               </p>
             </Link>
+            */}
           </div>
         </div>
       </section>

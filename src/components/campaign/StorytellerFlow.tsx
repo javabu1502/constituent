@@ -35,7 +35,6 @@ function buildGreeting(campaign: Campaign): string {
 export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
   const [step, setStep] = useState<Step>('intro');
   const [error, setError] = useState<string | null>(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   // Interview chat
   const [messages, setMessages] = useState<ChatMessage[]>(() => [{ role: 'assistant', content: buildGreeting(campaign) }]);
@@ -63,7 +62,6 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
   const [finalBody, setFinalBody] = useState('');
   const [recipientEmail, setRecipientEmail] = useState('');
   const [mailtoSubject, setMailtoSubject] = useState('');
-  const [persisted, setPersisted] = useState(false);
   const [flagged, setFlagged] = useState<string[]>([]);
 
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -74,7 +72,7 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
         const supabase = createClient();
         const { data: { user } } = await supabase.auth.getUser();
         if (user) {
-          setIsLoggedIn(true);
+          // Pre-fill the name for convenience; we never store the story itself.
           const n = user.user_metadata?.full_name || '';
           if (n) setStorytellerName(n);
         }
@@ -193,7 +191,6 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
       setFinalBody(data.final_body || body.trim());
       setRecipientEmail(data.recipient_email || '');
       setMailtoSubject(data.subject || `My story: ${campaign.headline}`);
-      setPersisted(Boolean(data.persisted));
       setFlagged(Array.isArray(data.flagged) ? data.flagged : []);
       trackEvent('story_submitted', { campaign: campaign.slug, attribution });
       setStep('send');
@@ -553,31 +550,16 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
       </div>
       <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Thank you for sharing</h3>
       <p className="text-gray-600 dark:text-gray-300 mb-6">
-        Your story adds a human voice to this cause — and that’s what moves people.
+        Your story adds a human voice to this cause, and that’s what moves people.
       </p>
 
-      {persisted ? (
-        <div className="mb-6 p-3 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-xl">
-          <p className="text-sm text-green-700 dark:text-green-300">
-            We saved this story to your dashboard so you can revisit or request changes later.
-          </p>
-        </div>
-      ) : !isLoggedIn ? (
-        <div className="mb-6 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-xl">
-          <p className="text-sm text-gray-600 dark:text-gray-300">
-            Want to keep a copy of your stories?{' '}
-            <Link href="/login" className="text-purple-600 dark:text-purple-400 font-medium hover:underline">Create a free account</Link>.
-          </p>
-        </div>
-      ) : null}
+      <div className="mb-6 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-xl">
+        <p className="text-sm text-gray-600 dark:text-gray-300">
+          We don’t keep a copy of your story. Your record of it is the email you just sent, so look there if you’d like to see it again.
+        </p>
+      </div>
 
       <SupportNudge />
-
-      {persisted && (
-        <Link href="/dashboard" className="block text-sm text-purple-600 dark:text-purple-400 font-medium hover:underline mt-2">
-          View my stories
-        </Link>
-      )}
     </div>
   );
 }

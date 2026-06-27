@@ -6,23 +6,18 @@ const mockEq3 = vi.fn(() => ({ single: mockSingle }));
 const mockEq2 = vi.fn(() => ({ eq: mockEq3 }));
 const mockEq1 = vi.fn(() => ({ eq: mockEq2 }));
 const mockCampaignSelect = vi.fn(() => ({ eq: mockEq1 }));
-const mockStoriesInsert = vi.fn();
+const mockSubjectInsert = vi.fn();
 const mockRpc = vi.fn();
 
 vi.mock('@/lib/supabase', () => ({
   createAdminClient: vi.fn(() => ({
     from: vi.fn((table: string) => {
       if (table === 'campaigns') return { select: mockCampaignSelect };
-      if (table === 'stories') return { insert: mockStoriesInsert };
+      if (table === 'story_subjects') return { insert: mockSubjectInsert };
       return {};
     }),
     rpc: mockRpc,
   })),
-}));
-
-const mockGetUser = vi.fn();
-vi.mock('@/lib/supabase/server', () => ({
-  createClient: vi.fn(async () => ({ auth: { getUser: mockGetUser } })),
 }));
 
 // Keep attribution deterministic — its own unit test covers the logic.
@@ -43,7 +38,7 @@ vi.mock('@/lib/rate-limit', () => ({
 
 const APPROVED_CAMPAIGN = {
   id: 'c1', slug: 'test', headline: 'Housing Stories',
-  usage_statement: 'shared with legislators', recipient_email: 'creator@example.com',
+  recipient_email: 'creator@example.com',
   approval_status: 'approved', campaign_type: 'storytelling',
 };
 
@@ -70,38 +65,36 @@ describe('POST /api/stories', () => {
   beforeEach(() => {
     vi.clearAllMocks();
     mockWriteLimiter.check.mockReturnValue({ success: true });
-    mockGetUser.mockResolvedValue({ data: { user: null } });
     mockSingle.mockResolvedValue({ data: APPROVED_CAMPAIGN, error: null });
-    mockStoriesInsert.mockResolvedValue({ error: null });
+    mockSubjectInsert.mockResolvedValue({ error: null });
     mockRpc.mockResolvedValue({ error: null });
     mockApply.mockResolvedValue({ final_body: 'FINAL BODY', flagged: [] });
   });
 
-  it('anonymous submission: counts but does not persist', async () => {
+  it('counts the submission and stores only a scrubbed subject — never the body', async () => {
     const { POST } = await import('../stories/route');
     const res = await POST(makeReq(validBody));
     expect(res.status).toBe(200);
     const data = await res.json();
-    expect(data.persisted).toBe(false);
     expect(data.final_body).toBe('FINAL BODY');
     expect(data.recipient_email).toBe('creator@example.com');
+    expect(data.persisted).toBeUndefined(); // nothing about persistence is reported
     expect(mockRpc).toHaveBeenCalledWith('increment_campaign_story_count', { campaign_slug: 'test' });
-    expect(mockStoriesInsert).not.toHaveBeenCalled();
+
+    // Only a title is stored — no body, no name, no user link.
+    expect(mockSubjectInsert).toHaveBeenCalledOnce();
+    const inserted = mockSubjectInsert.mock.calls[0][0];
+    expect(inserted).toEqual({ campaign_id: 'c1', title: 'My story' });
+    expect(JSON.stringify(inserted)).not.toContain('This is my story');
   });
 
-  it('logged-in submission: persists with a consent snapshot and still counts', async () => {
-    mockGetUser.mockResolvedValue({ data: { user: { id: 'u1' } } });
+  it('strips the storyteller name out of the stored subject title', async () => {
     const { POST } = await import('../stories/route');
-    const res = await POST(makeReq(validBody));
+    const res = await POST(makeReq({ ...validBody, title: 'Why Jane Doe is closing her daycare' }));
     expect(res.status).toBe(200);
-    const data = await res.json();
-    expect(data.persisted).toBe(true);
-    expect(mockRpc).toHaveBeenCalledOnce();
-    expect(mockStoriesInsert).toHaveBeenCalledOnce();
-    const inserted = mockStoriesInsert.mock.calls[0][0];
-    expect(inserted.user_id).toBe('u1');
-    expect(inserted.body).toBe('FINAL BODY');
-    expect(inserted.consent_usage_snapshot).toEqual({ usage_statement: 'shared with legislators', granted_uses: ['shared_with_legislators', 'published_web_social'] });
+    const inserted = mockSubjectInsert.mock.calls[0][0];
+    expect(inserted.title).not.toMatch(/Jane/i);
+    expect(inserted.title).toContain('daycare');
   });
 
   it('requires at least one granted use', async () => {

@@ -89,12 +89,14 @@ export const GUIDES: GuideEntry[] = [
     href: '/guides/constituent-services',
     category: 'contacting-officials',
   },
-  {
-    title: 'How to Comment on Federal Regulations',
-    description: 'The notice-and-comment process on Regulations.gov: how to find proposed rules and submit effective public comments.',
-    href: '/guides/how-to-comment-on-regulations',
-    category: 'contacting-officials',
-  },
+  // Regulations (public comment) temporarily hidden alongside the regulations
+  // feature — restore this entry to bring the guide back.
+  // {
+  //   title: 'How to Comment on Federal Regulations',
+  //   description: 'The notice-and-comment process on Regulations.gov: how to find proposed rules and submit effective public comments.',
+  //   href: '/guides/how-to-comment-on-regulations',
+  //   category: 'contacting-officials',
+  // },
   {
     title: 'How to Use Social Media to Reach Your Officials',
     description: 'Tips for effective advocacy on social platforms — what works, what doesn\'t, and how to amplify your message.',

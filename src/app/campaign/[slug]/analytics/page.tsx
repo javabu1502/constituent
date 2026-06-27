@@ -56,30 +56,19 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
     redirect(`/campaign/${slug}`);
   }
 
-  // ----- Storytelling campaigns: story-based analytics -----
+  // ----- Storytelling campaigns: running count + non-identifying subjects -----
   if (campaign.campaign_type === 'storytelling') {
-    const since = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
-    const { data: storyRows } = await admin
-      .from('stories')
-      .select('attribution_level, created_at')
-      .eq('campaign_id', campaign.id);
-
-    const attribution_breakdown: Record<string, number> = {};
-    const daily_counts: Record<string, number> = {};
-    for (const s of storyRows || []) {
-      attribution_breakdown[s.attribution_level] = (attribution_breakdown[s.attribution_level] || 0) + 1;
-      if (s.created_at >= since) {
-        const d = new Date(s.created_at).toISOString().split('T')[0];
-        daily_counts[d] = (daily_counts[d] || 0) + 1;
-      }
-    }
+    const { data: subjectRows } = await admin
+      .from('story_subjects')
+      .select('title, created_at')
+      .eq('campaign_id', campaign.id)
+      .order('created_at', { ascending: false })
+      .limit(100);
 
     const storyAnalytics = {
       kind: 'storytelling' as const,
       total_stories: campaign.story_count || 0,
-      saved_stories: (storyRows || []).length,
-      attribution_breakdown,
-      daily_counts,
+      subjects: (subjectRows || []).map((s) => ({ title: s.title as string, created_at: s.created_at as string })),
     };
 
     return (

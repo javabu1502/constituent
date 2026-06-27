@@ -10,7 +10,8 @@ const FOOTER_COLUMNS = [
       { href: '/news', label: 'News' },
       { href: '/trends', label: 'Trends' },
       { href: '/vote', label: 'Vote' },
-      { href: '/regulations', label: 'Regulations' },
+      // Regulations (public comment) temporarily hidden — restore to bring it back.
+      // { href: '/regulations', label: 'Regulations' },
     ],
   },
   {
