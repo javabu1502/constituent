@@ -4,6 +4,7 @@ import { createAdminClient } from '@/lib/supabase';
 import { submitStorySchema, parseBody } from '@/lib/schemas';
 import { writeLimiter, getClientIp } from '@/lib/rate-limit';
 import { applyAttribution } from '@/lib/story-attribution';
+import { deDash } from '@/lib/claude';
 
 /**
  * POST /api/stories
@@ -57,8 +58,11 @@ export async function POST(request: NextRequest) {
   }
 
   // Attribution is entirely the storyteller's choice (any of the three levels).
-  // Enforce it on our end before the story ever leaves us.
-  const { final_body, flagged } = await applyAttribution(body, attribution_level, storyteller_name);
+  // Enforce it on our end before the story ever leaves us. de-dash so the sent
+  // text reads like a person wrote it (the anonymous redaction pass can add them).
+  const applied = await applyAttribution(body, attribution_level, storyteller_name);
+  const final_body = deDash(applied.final_body);
+  const flagged = applied.flagged;
 
   // Always count the submission.
   const { error: rpcError } = await admin.rpc('increment_campaign_story_count', {

@@ -1,19 +1,132 @@
 'use client';
 
+interface AdvocacyAnalytics {
+  kind: 'advocacy';
+  total_actions: number;
+  total_messages: number;
+  states_represented: string[];
+  daily_counts: Record<string, number>;
+  delivery_breakdown: Record<string, number>;
+  top_states: Array<{ state: string; count: number }>;
+  avg_messages_per_action: number;
+}
+
+interface StoryAnalytics {
+  kind: 'storytelling';
+  total_stories: number;
+  saved_stories: number;
+  attribution_breakdown: Record<string, number>;
+  daily_counts: Record<string, number>;
+}
+
 interface CampaignAnalyticsProps {
-  analytics: {
-    total_actions: number;
-    total_messages: number;
-    states_represented: string[];
-    daily_counts: Record<string, number>;
-    delivery_breakdown: Record<string, number>;
-    top_states: Array<{ state: string; count: number }>;
-    avg_messages_per_action: number;
-  };
+  analytics: AdvocacyAnalytics | StoryAnalytics;
   campaignName: string;
 }
 
+// Shared 30-day bar chart used by both campaign types.
+function DailyActivityChart({ counts, unit }: { counts: Record<string, number>; unit: string }) {
+  const today = new Date();
+  const dailyDates: string[] = [];
+  for (let i = 29; i >= 0; i--) {
+    const d = new Date(today);
+    d.setDate(d.getDate() - i);
+    dailyDates.push(d.toISOString().split('T')[0]);
+  }
+  const dailyValues = dailyDates.map((date) => counts[date] || 0);
+  const maxDaily = Math.max(...dailyValues, 1);
+
+  return (
+    <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
+      <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-4">Daily Activity (Last 30 Days)</h3>
+      <div className="flex items-end gap-[2px] h-40">
+        {dailyDates.map((date, i) => {
+          const count = dailyValues[i];
+          const heightPct = (count / maxDaily) * 100;
+          const formattedDate = new Date(date + 'T12:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+          return (
+            <div key={date} className="flex-1 flex flex-col items-center justify-end h-full group relative">
+              <div
+                className="w-full bg-purple-500 dark:bg-purple-400 rounded-t-sm transition-all hover:bg-purple-600 dark:hover:bg-purple-300"
+                style={{ height: count > 0 ? `${Math.max(heightPct, 4)}%` : '0%', minHeight: count > 0 ? '2px' : '0px' }}
+              />
+              <div className="absolute bottom-full mb-2 hidden group-hover:block z-10">
+                <div className="bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 text-xs rounded-lg px-2 py-1 whitespace-nowrap shadow-lg">
+                  {formattedDate}: {count} {unit}{count !== 1 ? 's' : ''}
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      <div className="flex justify-between mt-2 text-xs text-gray-400 dark:text-gray-500">
+        <span>{new Date(dailyDates[0] + 'T12:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>
+        <span>{new Date(dailyDates[dailyDates.length - 1] + 'T12:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>
+      </div>
+    </div>
+  );
+}
+
+const ATTR_LABEL: Record<string, string> = {
+  named: 'Named',
+  first_name_only: 'First name only',
+  anonymous: 'Anonymous',
+};
+
+function StorytellingAnalytics({ analytics }: { analytics: StoryAnalytics }) {
+  const attrEntries = Object.entries(analytics.attribution_breakdown).sort((a, b) => b[1] - a[1]);
+  const maxAttr = attrEntries.length > 0 ? Math.max(...attrEntries.map(([, c]) => c)) : 1;
+
+  return (
+    <div className="space-y-8">
+      <div className="grid grid-cols-2 gap-4">
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
+          <p className="text-sm text-gray-500 dark:text-gray-400">Stories Shared</p>
+          <p className="text-3xl font-bold text-gray-900 dark:text-white mt-1">{analytics.total_stories.toLocaleString()}</p>
+          <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">Everyone, including anonymous</p>
+        </div>
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
+          <p className="text-sm text-gray-500 dark:text-gray-400">Saved to Dashboards</p>
+          <p className="text-3xl font-bold text-gray-900 dark:text-white mt-1">{analytics.saved_stories.toLocaleString()}</p>
+          <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">From signed-in storytellers</p>
+        </div>
+      </div>
+
+      <DailyActivityChart counts={analytics.daily_counts} unit="story" />
+
+      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
+        <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-4">How storytellers chose to be credited</h3>
+        {attrEntries.length === 0 ? (
+          <p className="text-sm text-gray-500 dark:text-gray-400">No saved stories yet</p>
+        ) : (
+          <div className="space-y-3">
+            {attrEntries.map(([level, count]) => (
+              <div key={level}>
+                <div className="flex items-center justify-between text-sm mb-1">
+                  <span className="font-medium text-gray-700 dark:text-gray-300">{ATTR_LABEL[level] || level}</span>
+                  <span className="text-gray-500 dark:text-gray-400">{count} stor{count !== 1 ? 'ies' : 'y'}</span>
+                </div>
+                <div className="w-full bg-gray-100 dark:bg-gray-700 rounded-full h-2">
+                  <div className="h-2 rounded-full bg-purple-500 dark:bg-purple-400 transition-all" style={{ width: `${(count / maxAttr) * 100}%` }} />
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <p className="text-xs text-gray-400 dark:text-gray-500">
+        &ldquo;Stories Shared&rdquo; counts every submission, including anonymous ones. The chart and breakdown above
+        cover only stories from signed-in storytellers — anonymous submissions are counted but not individually stored.
+      </p>
+    </div>
+  );
+}
+
 export function CampaignAnalytics({ analytics, campaignName }: CampaignAnalyticsProps) {
+  if (analytics.kind === 'storytelling') {
+    return <StorytellingAnalytics analytics={analytics} />;
+  }
   // Generate all 30 dates for the chart
   const today = new Date();
   const dailyDates: string[] = [];

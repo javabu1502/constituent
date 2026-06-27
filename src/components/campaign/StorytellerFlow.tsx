@@ -205,15 +205,20 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
   };
 
   const mailtoHref = () => {
-    const attrLine =
-      attribution === 'named' ? `NAMED — you may attribute this story to ${storytellerName.trim() || 'me'}.`
-      : attribution === 'first_name_only' ? 'FIRST NAME ONLY — please use my first name only, not my full name.'
-      : 'ANONYMOUS — please do not attribute this story to me or try to identify me.';
-    const uses = usageLabels(grantedUses).map((u) => `  • ${u}`).join('\n');
-    const terms =
-      `— My terms —\nAttribution: ${attrLine}\nI’m OK with my story being used in these ways:\n${uses}\n\n`;
-    const intro = "Hi,\n\nI’d like to share my story for your campaign. (If you have a photo that helps tell it, you can attach it to this email before sending.)\n\n";
-    const bodyText = `${intro}${terms}${finalBody}\n`;
+    const fullName = storytellerName.trim();
+    const firstName = fullName.split(/\s+/)[0] || '';
+    const closing =
+      attribution === 'named' && fullName ? `Thank you,\n${fullName}`
+      : attribution === 'first_name_only' && firstName ? `Thank you,\n${firstName}`
+      : 'Thank you,\nA community member (sharing anonymously)';
+    const attrNote =
+      attribution === 'named' ? 'You may use my name with this story.'
+      : attribution === 'first_name_only' ? 'Please use my first name only, not my full name.'
+      : 'Please keep me anonymous. Do not attribute this story to me or try to identify me.';
+    const uses = usageLabels(grantedUses).map((u) => `  - ${u}`).join('\n');
+    const greeting = `Hello,\n\nI’d like to share my personal story for your campaign, “${campaign.headline}.”`;
+    const note = `A note on how I’d like my story used:\n- ${attrNote}\n- I’m OK with it being used in these ways:\n${uses}`;
+    const bodyText = `${greeting}\n\n${finalBody}\n\n${closing}\n\n----------\n${note}\n`;
     return `mailto:${encodeURIComponent(recipientEmail)}?subject=${encodeURIComponent(mailtoSubject)}&body=${encodeURIComponent(bodyText)}`;
   };
 

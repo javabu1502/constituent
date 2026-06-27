@@ -56,7 +56,49 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
     redirect(`/campaign/${slug}`);
   }
 
-  // Run analytics queries
+  // ----- Storytelling campaigns: story-based analytics -----
+  if (campaign.campaign_type === 'storytelling') {
+    const since = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
+    const { data: storyRows } = await admin
+      .from('stories')
+      .select('attribution_level, created_at')
+      .eq('campaign_id', campaign.id);
+
+    const attribution_breakdown: Record<string, number> = {};
+    const daily_counts: Record<string, number> = {};
+    for (const s of storyRows || []) {
+      attribution_breakdown[s.attribution_level] = (attribution_breakdown[s.attribution_level] || 0) + 1;
+      if (s.created_at >= since) {
+        const d = new Date(s.created_at).toISOString().split('T')[0];
+        daily_counts[d] = (daily_counts[d] || 0) + 1;
+      }
+    }
+
+    const storyAnalytics = {
+      kind: 'storytelling' as const,
+      total_stories: campaign.story_count || 0,
+      saved_stories: (storyRows || []).length,
+      attribution_breakdown,
+      daily_counts,
+    };
+
+    return (
+      <div className="max-w-5xl mx-auto px-4 py-8">
+        <div className="mb-6">
+          <Link href="/dashboard" className="text-sm text-purple-600 dark:text-purple-400 hover:underline">
+            &larr; Back to Dashboard
+          </Link>
+        </div>
+        <div className="mb-8">
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Campaign Analytics</h1>
+          <p className="text-gray-600 dark:text-gray-400 mt-1">{campaign.headline}</p>
+        </div>
+        <CampaignAnalytics analytics={storyAnalytics} campaignName={campaign.headline} />
+      </div>
+    );
+  }
+
+  // ----- Advocacy campaigns: action/message analytics -----
   const [messagesResult, actionsResult, statesResult, recentActionsResult, dailyCountsResult, deliveryBreakdownResult] = await Promise.all([
     admin
       .from('messages')
@@ -122,6 +164,7 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
   const totalActions = actionsResult.count || 0;
 
   const analytics = {
+    kind: 'advocacy' as const,
     total_actions: totalActions,
     total_messages: totalMessages,
     states_represented: Array.from(statesSet),
