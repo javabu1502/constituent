@@ -6,6 +6,7 @@ import { createClient } from '@/lib/supabase/client';
 import { trackEvent } from '@/lib/analytics';
 import { Button } from '@/components/ui/Button';
 import { SupportNudge } from '@/components/ui/SupportNudge';
+import { MicButton } from '@/components/chat/MicButton';
 import { STORY_USAGE_OPTIONS, usageLabels } from '@/lib/story-usage';
 import type { Campaign, AttributionLevel } from '@/lib/types';
 
@@ -304,6 +305,7 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
             disabled={streaming}
             className="flex-1 px-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 resize-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 text-sm"
           />
+          <MicButton text={input} setText={setInput} disabled={streaming} className="self-end" />
           <Button onClick={sendMessage} isLoading={streaming} className="self-end">
             Send
           </Button>

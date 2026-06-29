@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useChatContext } from './ChatProvider';
 import { ChatMessage } from './ChatMessage';
 import { ChatSuggestions } from './ChatSuggestions';
+import { MicButton } from './MicButton';
 
 export function ChatPanel() {
   const {
@@ -35,6 +36,11 @@ export function ChatPanel() {
     ta.style.height = 'auto';
     ta.style.height = Math.min(ta.scrollHeight, 96) + 'px';
   }, []);
+
+  // Keep the textarea sized to its content even when filled programmatically (voice input).
+  useEffect(() => {
+    resizeTextarea();
+  }, [input, resizeTextarea]);
 
   const handleSend = useCallback(() => {
     if (!input.trim() || isLoading) return;
@@ -185,6 +191,7 @@ export function ChatPanel() {
             maxLength={2000}
             className="flex-1 resize-none rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent placeholder:text-gray-400 dark:placeholder:text-gray-500"
           />
+          <MicButton text={input} setText={setInput} disabled={isLoading} />
           <button
             onClick={handleSend}
             disabled={!input.trim() || isLoading}
