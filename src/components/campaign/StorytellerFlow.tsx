@@ -7,8 +7,9 @@ import { trackEvent } from '@/lib/analytics';
 import { Button } from '@/components/ui/Button';
 import { SupportNudge } from '@/components/ui/SupportNudge';
 import { MicButton } from '@/components/chat/MicButton';
+import { AddressAutocomplete, type ParsedAddress } from '@/components/ui/AddressAutocomplete';
 import { STORY_USAGE_OPTIONS, usageLabels } from '@/lib/story-usage';
-import type { Campaign, AttributionLevel } from '@/lib/types';
+import type { Campaign, AttributionLevel, Official } from '@/lib/types';
 
 type Step = 'intro' | 'interview' | 'review' | 'consent' | 'send' | 'done';
 
@@ -58,6 +59,11 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
   const [grantedUses, setGrantedUses] = useState<string[]>([]);
   const [consentTruthful, setConsentTruthful] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+
+  // Optional location — used only in-request to derive city/state + reps for the
+  // creator. We never send the street address and never store any of it.
+  const [address, setAddress] = useState<ParsedAddress>({ street: '', city: '', state: '', zip: '' });
+  const [locationInfo, setLocationInfo] = useState<{ cityState: string; reps: string[] } | null>(null);
 
   // Result from submit
   const [finalBody, setFinalBody] = useState('');
@@ -172,6 +178,34 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
     }
     setSubmitting(true);
     try {
+      // If they shared an address, match their reps in-request. We only keep the
+      // city/state + rep names for the email — never the street, and never stored.
+      let location: { cityState: string; reps: string[] } | null = null;
+      if (address.city.trim() && address.state.trim()) {
+        const reps: string[] = [];
+        if (address.street.trim() && address.zip.trim()) {
+          try {
+            const repRes = await fetch('/api/representatives', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ street: address.street.trim(), city: address.city.trim(), state: address.state.trim(), zip: address.zip.trim() }),
+            });
+            if (repRes.ok) {
+              const repData = await repRes.json();
+              for (const o of (repData.officials || []) as Official[]) {
+                if (o.level === 'federal' || o.level === 'state') {
+                  reps.push(o.title ? `${o.name} (${o.title})` : o.name);
+                }
+              }
+            }
+          } catch {
+            // rep lookup is best-effort — still share city/state
+          }
+        }
+        location = { cityState: `${address.city.trim()}, ${address.state.trim()}`, reps };
+      }
+      setLocationInfo(location);
+
       const res = await fetch('/api/stories', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -215,8 +249,16 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
       : 'Please keep me anonymous. Do not attribute this story to me or try to identify me.';
     const uses = usageLabels(grantedUses).map((u) => `  - ${u}`).join('\n');
     const greeting = `Hello,\n\nI’d like to share my personal story for your campaign, “${campaign.headline}.”`;
+    let locationBlock = '';
+    if (locationInfo) {
+      locationBlock = `\nWhere I’m writing from: ${locationInfo.cityState}`;
+      if (locationInfo.reps.length) {
+        locationBlock += `\nMy representatives:\n${locationInfo.reps.map((r) => `  - ${r}`).join('\n')}`;
+      }
+      locationBlock += '\n';
+    }
     const note = `A note on how I’d like my story used:\n- ${attrNote}\n- I’m OK with it being used in these ways:\n${uses}`;
-    const bodyText = `${greeting}\n\n${finalBody}\n\n${closing}\n\n----------\n${note}\n`;
+    const bodyText = `${greeting}\n\n${finalBody}\n\n${closing}\n\n----------\n${note}\n${locationBlock}`;
     return `mailto:${encodeURIComponent(recipientEmail)}?subject=${encodeURIComponent(mailtoSubject)}&body=${encodeURIComponent(bodyText)}`;
   };
 
@@ -416,6 +458,27 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
             )}
           </div>
         )}
+
+        {/* Optional location — strongly encouraged, never the street, never stored */}
+        <div className="p-4 bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-700 rounded-xl">
+          <p className="text-sm font-medium text-purple-900 dark:text-purple-200 mb-1">📍 Where are you writing from? <span className="font-normal text-purple-700 dark:text-purple-300">(optional, but it matters a lot)</span></p>
+          <p className="text-xs text-purple-800 dark:text-purple-300 mb-3">
+            Decision-makers listen hardest to people they actually represent. Sharing your address lets us tell the campaign
+            your city and state and connect your story to <strong>your own state and federal representatives</strong>, so it reaches the
+            people who can act on it. We only share your <strong>city, state, and representatives</strong> — never your street address, and we don’t store any of it.
+          </p>
+          <AddressAutocomplete
+            label="Your address"
+            optional
+            initialAddress={address}
+            onAddressChange={setAddress}
+          />
+          {address.city && address.state && (
+            <p className="text-xs text-purple-700 dark:text-purple-300 mt-2">
+              The campaign will see: <strong>{address.city}, {address.state}</strong>{address.street && address.zip ? ' + your matched representatives' : ''}. Your street address is never shared.
+            </p>
+          )}
+        </div>
 
         {/* What the campaign hopes to do (context) */}
         {campaign.usage_statement && (
