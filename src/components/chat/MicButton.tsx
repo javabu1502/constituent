@@ -61,10 +61,24 @@ export function MicButton({
   const recRef = useRef<SpeechRecognitionInstance | null>(null);
   const baseRef = useRef('');
   const finalRef = useRef('');
+  const producedRef = useRef(false); // have we put any spoken text in the field this session?
 
   useEffect(() => {
     setSupported(getRecognitionCtor() !== null);
   }, []);
+
+  // If the field gets cleared (e.g. the message was submitted) while the mic is
+  // still on, stop listening so it doesn't re-fill the box with the old text.
+  useEffect(() => {
+    if (listening && text === '' && producedRef.current) {
+      producedRef.current = false;
+      try {
+        recRef.current?.stop();
+      } catch {
+        /* ignore */
+      }
+    }
+  }, [text, listening]);
 
   // Abort any active recognition on unmount.
   useEffect(() => {
@@ -96,6 +110,7 @@ export function MicButton({
 
     baseRef.current = text.trim();
     finalRef.current = '';
+    producedRef.current = false;
 
     rec.onresult = (e: SpeechRecognitionEventAlt) => {
       let interim = '';
@@ -106,6 +121,7 @@ export function MicButton({
       }
       const session = (finalRef.current + interim).replace(/\s+/g, ' ').trim();
       const base = baseRef.current;
+      if (session) producedRef.current = true;
       setText(base && session ? `${base} ${session}` : base || session);
     };
     rec.onend = () => {

@@ -263,10 +263,9 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
 
   // ---------- INTERVIEW ----------
   if (step === 'interview') {
-    // Encourage a little back-and-forth first so the composed story has real
-    // substance (a concrete moment + impact), not just one short answer.
+    // Let people draft as soon as they've shared something — they can refine after.
     const answerCount = messages.filter((m) => m.role === 'user').length;
-    const canCompose = answerCount >= 2;
+    const canCompose = answerCount >= 1;
     return (
       <div className="space-y-4">
         <div
@@ -323,8 +322,8 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
           </Button>
           <p className="text-xs text-gray-400 dark:text-gray-500 text-center mt-1.5">
             {canCompose
-              ? 'You’ll be able to edit it and choose how you’re credited before anything is sent.'
-              : 'Share a bit more first — the more you tell, the fuller your story will be.'}
+              ? 'Ready whenever you are — you’ll be able to edit it and choose how you’re credited before anything is sent.'
+              : 'Share a little to get started.'}
           </p>
         </div>
       </div>
