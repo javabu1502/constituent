@@ -60,9 +60,11 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
   const [consentTruthful, setConsentTruthful] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
-  // Optional location — used only in-request to derive city/state + reps for the
-  // creator. We never send the street address and never store any of it.
+  // Address is required (so everyone is a verified constituent), but sharing the
+  // derived city/state + reps with the creator is opt-out. We use the address only
+  // in-request, never send the street, and never store any of it.
   const [address, setAddress] = useState<ParsedAddress>({ street: '', city: '', state: '', zip: '' });
+  const [shareLocation, setShareLocation] = useState(true);
   const [locationInfo, setLocationInfo] = useState<{ cityState: string; reps: string[] } | null>(null);
 
   // Result from submit
@@ -176,31 +178,33 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
       setError('Please enter the name you’d like used, or choose to stay anonymous.');
       return;
     }
+    if (!address.street.trim() || !address.city.trim() || !address.state.trim() || !address.zip.trim()) {
+      setError('Please enter your full address. It stays private — you choose what to share below.');
+      return;
+    }
     setSubmitting(true);
     try {
-      // If they shared an address, match their reps in-request. We only keep the
-      // city/state + rep names for the email — never the street, and never stored.
+      // Only if they leave sharing on do we derive city/state + match reps. We keep
+      // just the city/state + rep names for the email — never the street, never stored.
       let location: { cityState: string; reps: string[] } | null = null;
-      if (address.city.trim() && address.state.trim()) {
+      if (shareLocation) {
         const reps: string[] = [];
-        if (address.street.trim() && address.zip.trim()) {
-          try {
-            const repRes = await fetch('/api/representatives', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ street: address.street.trim(), city: address.city.trim(), state: address.state.trim(), zip: address.zip.trim() }),
-            });
-            if (repRes.ok) {
-              const repData = await repRes.json();
-              for (const o of (repData.officials || []) as Official[]) {
-                if (o.level === 'federal' || o.level === 'state') {
-                  reps.push(o.title ? `${o.name} (${o.title})` : o.name);
-                }
+        try {
+          const repRes = await fetch('/api/representatives', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ street: address.street.trim(), city: address.city.trim(), state: address.state.trim(), zip: address.zip.trim() }),
+          });
+          if (repRes.ok) {
+            const repData = await repRes.json();
+            for (const o of (repData.officials || []) as Official[]) {
+              if (o.level === 'federal' || o.level === 'state') {
+                reps.push(o.title ? `${o.name} (${o.title})` : o.name);
               }
             }
-          } catch {
-            // rep lookup is best-effort — still share city/state
           }
+        } catch {
+          // rep lookup is best-effort — still share city/state
         }
         location = { cityState: `${address.city.trim()}, ${address.state.trim()}`, reps };
       }
@@ -459,23 +463,43 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
           </div>
         )}
 
-        {/* Optional location — strongly encouraged, never the street, never stored */}
+        {/* Address (required) — sharing the derived city/state + reps is opt-out */}
         <div className="p-4 bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-700 rounded-xl">
-          <p className="text-sm font-medium text-purple-900 dark:text-purple-200 mb-1">📍 Where are you writing from? <span className="font-normal text-purple-700 dark:text-purple-300">(optional, but it matters a lot)</span></p>
+          <p className="text-sm font-medium text-purple-900 dark:text-purple-200 mb-1">📍 Your address <span className="text-red-500">*</span></p>
           <p className="text-xs text-purple-800 dark:text-purple-300 mb-3">
-            Decision-makers listen hardest to people they actually represent. Sharing your address lets us tell the campaign
-            your city and state and connect your story to <strong>your own state and federal representatives</strong>, so it reaches the
-            people who can act on it. We only share your <strong>city, state, and representatives</strong> — never your street address, and we don’t store any of it.
+            We ask everyone for their address so the campaign knows its stories come from real constituents.
+            It stays private — your <strong>street address is never shared and never stored</strong>. You choose below what the campaign sees.
           </p>
           <AddressAutocomplete
             label="Your address"
-            optional
             initialAddress={address}
             onAddressChange={setAddress}
           />
-          {address.city && address.state && (
-            <p className="text-xs text-purple-700 dark:text-purple-300 mt-2">
-              The campaign will see: <strong>{address.city}, {address.state}</strong>{address.street && address.zip ? ' + your matched representatives' : ''}. Your street address is never shared.
+
+          <label className="flex items-start gap-3 mt-3 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={shareLocation}
+              onChange={(e) => setShareLocation(e.target.checked)}
+              className="mt-1 h-4 w-4 rounded text-purple-600 focus:ring-purple-500"
+            />
+            <span className="text-sm text-purple-900 dark:text-purple-200">
+              Share my <strong>city, state, and representatives</strong> with this campaign <span className="font-normal text-purple-700 dark:text-purple-300">(recommended)</span>
+            </span>
+          </label>
+
+          {shareLocation ? (
+            <p className="text-xs text-purple-800 dark:text-purple-300 mt-2">
+              Why it helps: decision-makers listen hardest to people they actually represent. This connects your story to your own
+              state and federal lawmakers so it reaches the people who can act on it.
+              {address.city && address.state && (
+                <> The campaign will see: <strong>{address.city}, {address.state}</strong> + your matched representatives.</>
+              )}
+            </p>
+          ) : (
+            <p className="text-xs text-amber-700 dark:text-amber-300 mt-2">
+              You’ve chosen not to share your location. Your story still counts, but it won’t be tied to your lawmakers —
+              which is what makes stories land hardest with decision-makers. You can turn this back on any time.
             </p>
           )}
         </div>
