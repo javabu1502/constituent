@@ -161,8 +161,8 @@ describe('POST /api/generate-follow-up', () => {
   });
 
   it('returns 403 when turnstile verification fails', async () => {
-    // The route only runs turnstile verification when the secret key is set.
-    process.env.TURNSTILE_SECRET_KEY = 'test-secret';
+    // The route runs turnstile verification in production.
+    vi.stubEnv('NODE_ENV', 'production');
     const { verifyTurnstile } = await import('@/lib/turnstile');
     vi.mocked(verifyTurnstile).mockResolvedValueOnce(false);
 
@@ -175,6 +175,7 @@ describe('POST /api/generate-follow-up', () => {
 
     const res = await POST(req);
     expect(res.status).toBe(403);
+    vi.unstubAllEnvs();
   });
 
   it('returns 404 when original message is not found', async () => {

@@ -9,10 +9,21 @@ const DAILY_LIMITS: Record<string, number> = {
   generate_comment: 10,
   research: 15,
   chat: 50,
+  // Server-side CWC deliveries per identity per day. Caps how many real
+  // messages a single sender can push to Congress through us.
+  deliver: 20,
 };
 
 /** Minimum days between messages to the same legislator */
 const LEGISLATOR_COOLDOWN_DAYS = 7;
+
+/**
+ * Platform-wide daily ceiling on AI-generation events across ALL identities.
+ * A backstop against budget-burn that IP rotation would otherwise defeat (the
+ * per-identity caps reset per hashed IP). Configurable via env; generous by
+ * default so it only trips on genuine runaway abuse.
+ */
+const GLOBAL_DAILY_AI_LIMIT = Number(process.env.GLOBAL_AI_DAILY_LIMIT) || 10000;
 
 /**
  * Who a usage event is attributed to. Exactly one field is set:
@@ -79,6 +90,29 @@ export async function checkDailyQuota(
   return { allowed: used < limit, remaining: Math.max(0, limit - used) };
 }
 
+/**
+ * Platform-wide daily budget backstop: is the total number of AI-generation
+ * events today (across every user and IP) still under the global ceiling?
+ * Fails OPEN on a DB error — the per-identity caps remain in force, and we
+ * never want an infra hiccup to hard-down every AI route.
+ */
+export async function checkGlobalDailyBudget(): Promise<boolean> {
+  const supabase = createAdminClient();
+  const startOfDay = new Date();
+  startOfDay.setHours(0, 0, 0, 0);
+
+  const { count, error } = await supabase
+    .from('ai_usage_logs')
+    .select('*', { count: 'exact', head: true })
+    .gte('created_at', startOfDay.toISOString());
+
+  if (error) {
+    console.error('[usage-quota] Failed to check global budget:', error);
+    return true;
+  }
+  return (count ?? 0) < GLOBAL_DAILY_AI_LIMIT;
+}
+
 /** Log a single AI generation usage event. Best-effort; never throws. */
 export async function logUsage(
   identity: UsageIdentity,
@@ -109,11 +143,60 @@ export async function enforceDailyQuota(
   identity?: UsageIdentity,
 ): Promise<{ allowed: boolean; remaining: number }> {
   const id = identity ?? (await resolveUsageIdentity(ip));
+
+  // Global daily backstop first — independent of per-identity IP rotation.
+  if (!(await checkGlobalDailyBudget())) {
+    console.warn('[usage-quota] Global daily AI budget reached — rejecting request');
+    return { allowed: false, remaining: 0 };
+  }
+
   const { allowed, remaining } = await checkDailyQuota(id, actionType);
   if (allowed) {
     void logUsage(id, actionType);
   }
   return { allowed, remaining };
+}
+
+/** A prior message by a sender, used by the compliance gate for split-abuse detection. */
+export interface RecentMessageRow {
+  id: string;
+  legislator_name: string | null;
+  issue_area: string | null;
+  message_body: string | null;
+  created_at: string;
+}
+
+/**
+ * Fetch a sender's most recent messages, newest first, for the pre-send
+ * compliance gate to compare against (detecting objectionable content split
+ * across multiple submissions). Scoped by user_id when signed in, otherwise by
+ * hashed IP. Best-effort — returns [] on error so screening never hard-fails.
+ *
+ * Note: `message_body` is only stored for signed-in users (see track-send), so
+ * anonymous history carries metadata only.
+ */
+export async function getRecentMessages(
+  identity: UsageIdentity,
+  limit = 10,
+): Promise<RecentMessageRow[]> {
+  const supabase = createAdminClient();
+
+  let query = supabase
+    .from('messages')
+    .select('id, legislator_name, issue_area, message_body, created_at')
+    .order('created_at', { ascending: false })
+    .limit(limit);
+
+  query = identity.userId
+    ? query.eq('user_id', identity.userId)
+    : query.eq('ip_hash', identity.ipHash);
+
+  const { data, error } = await query;
+  if (error) {
+    console.error('[usage-quota] Failed to fetch recent messages:', error);
+    return [];
+  }
+  return (data ?? []) as RecentMessageRow[];
 }
 
 /**

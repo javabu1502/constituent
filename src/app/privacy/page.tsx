@@ -14,7 +14,7 @@ export default function PrivacyPage() {
           Privacy Policy
         </h1>
         <p className="text-gray-500 dark:text-gray-400 mb-10">
-          Last updated: June 2026
+          Last updated: July 2026
         </p>
 
         <div className="prose prose-gray dark:prose-invert max-w-none">
@@ -167,6 +167,9 @@ export default function PrivacyPage() {
                   <strong className="text-gray-900 dark:text-white">Campaign participation</strong>: if you create or join an advocacy campaign, we store the campaign details and the name, city, and state you supply, along with how many messages were sent.
                 </li>
                 <li>
+                  <strong className="text-gray-900 dark:text-white">Storytelling campaigns</strong>: if you share a personal story with a storytelling campaign, we save it to that campaign&apos;s private dashboard (see the &quot;Storytelling Campaigns&quot; section below). You can opt out at submission, and remove a saved story anytime from your dashboard.
+                </li>
+                <li>
                   <strong className="text-gray-900 dark:text-white">Message-quality ratings</strong>: if you give a draft a thumbs up or down, we record that rating with the issue, tone, and official&apos;s party — but <strong className="text-gray-900 dark:text-white">not</strong> the message text or your identity. It is stored against a one-way hash so we can improve drafting quality.
                 </li>
                 <li>
@@ -176,6 +179,53 @@ export default function PrivacyPage() {
                   <strong className="text-gray-900 dark:text-white">AI usage logs</strong>: see &quot;To prevent abuse and control costs&quot; below — a timestamped record of AI-generation events, tied to your account or a hashed IP, purged after 30 days.
                 </li>
               </ul>
+            </div>
+          </section>
+
+          {/* Storytelling Campaigns */}
+          <section className="mb-10">
+            <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
+              <span className="w-8 h-8 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg className="w-4 h-4 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
+                </svg>
+              </span>
+              Storytelling Campaigns
+            </h2>
+            <div className="space-y-3 text-gray-600 dark:text-gray-300 pl-10">
+              <p>
+                Some organizers run <strong className="text-gray-900 dark:text-white">storytelling campaigns</strong> that
+                invite you to share a personal story. Because the whole point is to share your story with that campaign,
+                when you submit one we save it to that campaign&apos;s private dashboard so the organizer can read, track,
+                and follow up on the stories they receive. What we save depends on the choices you make:
+              </p>
+              <ul className="list-disc list-inside space-y-2 ml-4">
+                <li>
+                  <strong className="text-gray-900 dark:text-white">Your story text</strong>, as you chose to have it
+                  attributed. If you choose <strong>anonymous</strong>, we run an automatic pass to remove your name and we
+                  save <strong className="text-gray-900 dark:text-white">no name, contact, or location</strong> with it.
+                </li>
+                <li>
+                  <strong className="text-gray-900 dark:text-white">Your name</strong> (full, first-name-only, or none)
+                  exactly as you chose; your <strong className="text-gray-900 dark:text-white">city and state</strong> only
+                  if you opt to share your location; and a <strong className="text-gray-900 dark:text-white">contact email</strong> only
+                  if you provide one for follow-up. Your street address is never shared or stored.
+                </li>
+                <li>
+                  The <strong className="text-gray-900 dark:text-white">uses you granted</strong> and the date you shared it.
+                </li>
+              </ul>
+              <p>
+                <strong className="text-gray-900 dark:text-white">Who can see it:</strong> only the organizer of that
+                specific campaign and you. Saved stories are not public and are not shared with any other campaign or third
+                party. The organizer can download their campaign&apos;s stories as a spreadsheet for their own records.
+              </p>
+              <p>
+                <strong className="text-gray-900 dark:text-white">You&apos;re in control:</strong> you can decline to save
+                your story when you submit it (you can still email it yourself), and you can remove a saved story at any time
+                from your dashboard, which takes it out of the organizer&apos;s dashboard and export. You may also email us to
+                delete all of your data (see &quot;Data Retention &amp; Deletion&quot;).
+              </p>
             </div>
           </section>
 

@@ -1,16 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase';
-
-function isAdmin(user: { id: string; email?: string }): boolean {
-  const adminIds = process.env.ADMIN_USER_IDS?.split(',').map(s => s.trim()).filter(Boolean) ?? [];
-  if (adminIds.includes(user.id)) return true;
-
-  const adminEmails = process.env.ADMIN_EMAILS?.split(',').map(s => s.trim().toLowerCase()).filter(Boolean) ?? [];
-  if (user.email && adminEmails.includes(user.email.toLowerCase())) return true;
-
-  return false;
-}
+import { isAdmin } from '@/lib/admin';
 
 /**
  * GET /api/admin/campaigns

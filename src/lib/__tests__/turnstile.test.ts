@@ -51,6 +51,24 @@ describe('verifyTurnstile()', () => {
     expect(result).toBe(false);
   });
 
+  it('fails CLOSED for anonymous (strict) requests when the secret is missing in production', async () => {
+    vi.stubEnv('NODE_ENV', 'production');
+    delete process.env.TURNSTILE_SECRET_KEY;
+
+    const { verifyTurnstile } = await import('../turnstile');
+    const result = await verifyTurnstile('any-token', { strict: true });
+    expect(result).toBe(false);
+  });
+
+  it('stays lenient for signed-in requests when the secret is missing in production', async () => {
+    vi.stubEnv('NODE_ENV', 'production');
+    delete process.env.TURNSTILE_SECRET_KEY;
+
+    const { verifyTurnstile } = await import('../turnstile');
+    const result = await verifyTurnstile('any-token', { strict: false });
+    expect(result).toBe(true);
+  });
+
   it('returns false when fetch throws', async () => {
     vi.stubEnv('NODE_ENV', 'production');
     vi.stubEnv('TURNSTILE_SECRET_KEY', 'test-secret');
