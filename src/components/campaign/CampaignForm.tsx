@@ -19,7 +19,7 @@ interface ResolvedBill {
   url: string;
 }
 
-export function CampaignForm() {
+export function CampaignForm({ initialType }: { initialType?: 'advocacy' | 'storytelling' } = {}) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -33,8 +33,10 @@ export function CampaignForm() {
 
   // Campaign type is fixed by the entry point (?type=advocacy|storytelling);
   // each type has its own track below. Advocacy campaigns are always public.
+  // Fixed by the entry point. Prefer the server-provided prop (reliable on SSR);
+  // fall back to the URL param so the component still works if used standalone.
   const [campaignType] = useState<'advocacy' | 'storytelling'>(
-    searchParams.get('type') === 'storytelling' ? 'storytelling' : 'advocacy'
+    initialType ?? (searchParams.get('type') === 'storytelling' ? 'storytelling' : 'advocacy')
   );
   const visibility: 'public' | 'unlisted' = 'public';
 
