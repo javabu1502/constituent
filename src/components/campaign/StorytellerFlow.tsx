@@ -242,7 +242,10 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
       setMailtoSubject(data.subject || `My story: ${campaign.headline}`);
       setFlagged(Array.isArray(data.flagged) ? data.flagged : []);
       trackEvent('story_submitted', { campaign: campaign.slug, attribution });
-      setStep('send');
+      // Closed loop: a saved story is already delivered to the campaign's
+      // dashboard, so there's nothing to email — go straight to the confirmation.
+      // Only opted-out storytellers need the email-it-yourself step.
+      setStep(saveToCampaign ? 'done' : 'send');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Could not submit your story');
     } finally {
@@ -641,9 +644,9 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
             </svg>
           </div>
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Your story is ready to send</h3>
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Email your story to the campaign</h3>
           <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-            We’ve applied your <strong>{ATTR_LABELS[attribution].label.toLowerCase()}</strong> choice. Send it from your own email — and attach a photo if you have one.
+            You chose not to save your story to the campaign’s dashboard, so send it from your own email to share it. We’ve applied your <strong>{ATTR_LABELS[attribution].label.toLowerCase()}</strong> choice — attach a photo if you have one.
           </p>
         </div>
 
@@ -694,10 +697,18 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
       <div className="mb-6 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-xl">
         <p className="text-sm text-gray-600 dark:text-gray-300">
           {saveToCampaign
-            ? 'Your story is saved to this campaign. You can view or remove it anytime from your dashboard, and the email you just sent is your own copy.'
+            ? `Your story has been delivered to ${campaign.headline}. It’s now in the organizer’s dashboard — you don’t need to email anything. You can view or remove it anytime from your dashboard.`
             : 'We didn’t keep a copy of your story. Your record of it is the email you just sent, so look there if you’d like to see it again.'}
         </p>
       </div>
+
+      {saveToCampaign && flagged.length > 0 && (
+        <div className="mb-6 p-3 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded-xl text-left">
+          <p className="text-xs text-amber-800 dark:text-amber-300">
+            One note: we couldn’t fully resolve these possibly-identifying details — {flagged.join(', ')}. If you’d like, review your story in your dashboard and remove it there if you’re not comfortable.
+          </p>
+        </div>
+      )}
 
       <SupportNudge />
     </div>
