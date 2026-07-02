@@ -9,6 +9,9 @@ const DAILY_LIMITS: Record<string, number> = {
   generate_comment: 10,
   research: 15,
   chat: 50,
+  // Server-side CWC deliveries per identity per day. Caps how many real
+  // messages a single sender can push to Congress through us.
+  deliver: 20,
 };
 
 /** Minimum days between messages to the same legislator */
@@ -114,6 +117,48 @@ export async function enforceDailyQuota(
     void logUsage(id, actionType);
   }
   return { allowed, remaining };
+}
+
+/** A prior message by a sender, used by the compliance gate for split-abuse detection. */
+export interface RecentMessageRow {
+  id: string;
+  legislator_name: string | null;
+  issue_area: string | null;
+  message_body: string | null;
+  created_at: string;
+}
+
+/**
+ * Fetch a sender's most recent messages, newest first, for the pre-send
+ * compliance gate to compare against (detecting objectionable content split
+ * across multiple submissions). Scoped by user_id when signed in, otherwise by
+ * hashed IP. Best-effort — returns [] on error so screening never hard-fails.
+ *
+ * Note: `message_body` is only stored for signed-in users (see track-send), so
+ * anonymous history carries metadata only.
+ */
+export async function getRecentMessages(
+  identity: UsageIdentity,
+  limit = 10,
+): Promise<RecentMessageRow[]> {
+  const supabase = createAdminClient();
+
+  let query = supabase
+    .from('messages')
+    .select('id, legislator_name, issue_area, message_body, created_at')
+    .order('created_at', { ascending: false })
+    .limit(limit);
+
+  query = identity.userId
+    ? query.eq('user_id', identity.userId)
+    : query.eq('ip_hash', identity.ipHash);
+
+  const { data, error } = await query;
+  if (error) {
+    console.error('[usage-quota] Failed to fetch recent messages:', error);
+    return [];
+  }
+  return (data ?? []) as RecentMessageRow[];
 }
 
 /**

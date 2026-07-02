@@ -89,6 +89,17 @@ function WarningIcon({ className }: { className?: string }) {
   );
 }
 
+/** Result of a POST /api/deliver call, normalized for the UI. */
+interface CWCDeliverResult {
+  status: number;
+  decision?: 'pass' | 'review' | 'block';
+  delivered?: boolean;
+  shareId?: string;
+  reasons?: string[];
+  error?: string;
+  message?: string;
+}
+
 interface OfficialCardProps {
   official: Official;
   message: { subject: string; body: string };
@@ -97,9 +108,89 @@ interface OfficialCardProps {
   isCallComplete?: boolean;
   onMarkCallComplete?: () => void;
   onSend?: (deliveryStatus: string) => void;
+  /** When true, this recipient can be delivered server-side via CWC. */
+  cwcEligible?: boolean;
+  onDeliverCWC?: () => Promise<CWCDeliverResult>;
 }
 
-function OfficialCard({ official, message, deliveryInfo, contactMethod, isCallComplete, onMarkCallComplete, onSend }: OfficialCardProps) {
+/**
+ * Official CWC delivery for a federal recipient: one button, three honest
+ * outcomes (delivered / under review / needs revision). Replaces the mailto
+ * path for congressional offices when CWC is enabled.
+ */
+function CWCDeliverPanel({ onDeliverCWC }: { onDeliverCWC: () => Promise<CWCDeliverResult> }) {
+  const [state, setState] = useState<'idle' | 'sending' | 'delivered' | 'review' | 'blocked' | 'error'>('idle');
+  const [detail, setDetail] = useState<string | null>(null);
+
+  const deliver = async () => {
+    if (state === 'sending' || state === 'delivered' || state === 'review') return; // one-shot
+    setState('sending');
+    setDetail(null);
+    try {
+      const r = await onDeliverCWC();
+      if (r.decision === 'block' || r.status === 422) {
+        setState('blocked');
+        setDetail(r.reasons?.length ? r.reasons.join(' ') : r.error ?? null);
+      } else if (r.decision === 'review' || r.status === 202) {
+        setState('review');
+        setDetail(r.message ?? null);
+      } else if (r.delivered) {
+        setState('delivered');
+      } else {
+        setState('error');
+        setDetail(r.error ?? 'Delivery could not be completed. Please try again shortly.');
+      }
+    } catch {
+      setState('error');
+      setDetail('Something went wrong. Please try again.');
+    }
+  };
+
+  if (state === 'delivered') {
+    return (
+      <div className="p-3 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-700 rounded-lg flex items-start gap-2">
+        <CheckIcon className="w-4 h-4 text-green-600 dark:text-green-400 flex-shrink-0 mt-0.5" />
+        <p className="text-sm text-green-700 dark:text-green-300">Delivered to the office via the official congressional system.</p>
+      </div>
+    );
+  }
+  if (state === 'review') {
+    return (
+      <div className="p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700 rounded-lg">
+        <p className="text-sm text-blue-700 dark:text-blue-300">{detail ?? 'Received and undergoing a quick review before delivery.'}</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-2">
+      <button
+        onClick={deliver}
+        disabled={state === 'sending'}
+        className="flex items-center justify-center gap-2 w-full py-2.5 bg-purple-600 hover:bg-purple-700 disabled:opacity-60 text-white rounded-lg text-sm font-medium transition-colors"
+      >
+        <EmailIcon className="w-4 h-4" />
+        {state === 'sending' ? 'Delivering…' : 'Deliver to Congress'}
+      </button>
+      {state === 'blocked' && (
+        <div className="p-2 bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-700 rounded-lg flex items-start gap-2">
+          <WarningIcon className="w-4 h-4 text-amber-600 dark:text-amber-400 flex-shrink-0 mt-0.5" />
+          <p className="text-xs text-amber-700 dark:text-amber-300">
+            {detail ?? 'This message could not be submitted. Please revise it to be a genuine message from you, with your real name and details.'}
+          </p>
+        </div>
+      )}
+      {state === 'error' && (
+        <p className="text-xs text-red-600 dark:text-red-400 text-center">{detail}</p>
+      )}
+      <p className="text-[10px] text-gray-400 dark:text-gray-500 text-center">
+        Sent directly through the official Communicating With Congress system.
+      </p>
+    </div>
+  );
+}
+
+function OfficialCard({ official, message, deliveryInfo, contactMethod, isCallComplete, onMarkCallComplete, onSend, cwcEligible, onDeliverCWC }: OfficialCardProps) {
   const [messageCopied, setMessageCopied] = useState(false);
   const [emailCopied, setEmailCopied] = useState(false);
   const [phoneCopied, setPhoneCopied] = useState(false);
@@ -280,7 +371,10 @@ function OfficialCard({ official, message, deliveryInfo, contactMethod, isCallCo
 
       {/* Primary action based on delivery method */}
       <div className="space-y-2">
-        {deliveryInfo.method === 'staffer_email' && deliveryInfo.email ? (
+        {cwcEligible && onDeliverCWC ? (
+          // Official CWC delivery for federal recipients (server-side).
+          <CWCDeliverPanel onDeliverCWC={onDeliverCWC} />
+        ) : deliveryInfo.method === 'staffer_email' && deliveryInfo.email ? (
           // Staffer email - open in email client as primary action
           <>
             {mailtoLink ? (
@@ -506,6 +600,56 @@ export function SendStep({ state, dispatch, onBack }: SendStepProps) {
       .catch((err) => console.error('[track-send] Failed:', err));
   };
 
+  // CWC server-side delivery is gated by a build flag so it stays dormant until
+  // the API key is live and validated on staging. A federal email recipient is
+  // eligible only when we have the full sender identity CWC requires.
+  const cwcEnabled = process.env.NEXT_PUBLIC_CWC_ENABLED === 'true';
+  const canDeliverCWC = (official: Official) =>
+    cwcEnabled &&
+    contactMethod === 'email' &&
+    official.level !== 'state' &&
+    Boolean(state.userEmail && state.address?.street && state.address?.zip);
+
+  const deliverViaCWC = async (official: Official): Promise<CWCDeliverResult> => {
+    const msg = messages[official.name];
+    if (!msg || !state.address) {
+      return { status: 400, error: 'Missing message or address.' };
+    }
+    try {
+      const res = await fetch('/api/deliver', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          advocate_name: state.userName,
+          advocate_email: state.userEmail,
+          advocate_street: state.address.street,
+          advocate_city: state.address.city,
+          advocate_state: state.address.state,
+          advocate_zip: state.address.zip,
+          advocate_district: official.district || undefined,
+          legislator_name: official.name,
+          legislator_id: official.id,
+          legislator_party: official.party,
+          legislator_level: official.level,
+          legislator_chamber: official.chamber,
+          issue_area: state.issueCategory || state.issue,
+          issue_subtopic: state.issue,
+          message_body: msg.body,
+          user_id: userId || undefined,
+        }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (data?.shareId) dispatch({ type: 'SET_SHARE_ID', payload: data.shareId });
+      if (res.ok || res.status === 202) {
+        trackEvent('message_sent', { method: 'cwc', issue: state.issueCategory || 'unknown' });
+      }
+      return { status: res.status, ...data };
+    } catch (err) {
+      console.error('[deliver] Failed:', err);
+      return { status: 0, error: 'Network error.' };
+    }
+  };
+
   const handleDone = () => {
     dispatch({ type: 'GO_TO_STEP', payload: 'success' });
   };
@@ -575,6 +719,8 @@ export function SendStep({ state, dispatch, onBack }: SendStepProps) {
               isCallComplete={completedCalls.has(official.id)}
               onMarkCallComplete={() => markCallComplete(official.id)}
               onSend={(status) => trackSend(official, status)}
+              cwcEligible={canDeliverCWC(official)}
+              onDeliverCWC={() => deliverViaCWC(official)}
             />
           );
         })}

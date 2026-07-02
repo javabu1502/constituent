@@ -6,6 +6,7 @@ import { Footer } from '@/components/layout/Footer';
 import { ChatProvider } from '@/components/chat/ChatProvider';
 import { ChatButton } from '@/components/chat/ChatButton';
 import { ChatPanel } from '@/components/chat/ChatPanel';
+import { isStaging } from '@/lib/site-env';
 import './globals.css';
 
 const geistSans = Geist({
@@ -63,6 +64,11 @@ export default function RootLayout({
         >
           Skip to main content
         </a>
+        {isStaging() && (
+          <div className="w-full bg-amber-500 text-black text-center text-xs font-semibold py-1 px-2">
+            STAGING — test environment. Data here is not real and messages are not delivered to live offices.
+          </div>
+        )}
         <ChatProvider>
           <Header />
           <main id="main-content" className="flex-1">{children}</main>

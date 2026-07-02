@@ -71,6 +71,30 @@ export const trackSendSchema = z.object({
   campaign_id: z.string().uuid().optional(),
 });
 
+// Server-side CWC delivery. Superset of trackSend with the fields CWC needs
+// (zip required, optional phone) and message_body required.
+export const deliverSchema = z.object({
+  advocate_name: z.string().min(1).max(200),
+  advocate_email: z.string().email().max(254),
+  advocate_street: z.string().min(1).max(200),
+  advocate_city: z.string().min(1).max(100),
+  advocate_state: z.string().min(1).max(50),
+  advocate_zip: z.string().regex(/^\d{5}(-\d{4})?$/),
+  advocate_district: z.string().max(20).optional(),
+  advocate_phone: z.string().max(30).optional(),
+  legislator_name: z.string().min(1).max(200),
+  legislator_id: z.string().min(1).max(20),
+  legislator_party: z.string().min(1).max(50),
+  legislator_level: z.string().min(1).max(20),
+  legislator_chamber: z.string().min(1).max(20),
+  issue_area: z.string().min(1).max(200),
+  issue_subtopic: z.string().min(1).max(200),
+  message_body: z.string().min(1).max(10000),
+  user_id: z.string().uuid().optional(),
+  campaign_id: z.string().uuid().optional(),
+  turnstileToken: z.string().optional(),
+});
+
 export const createCampaignSchema = z.object({
   campaign_type: z.enum(['advocacy', 'storytelling']).default('advocacy'),
   visibility: z.enum(['public', 'unlisted']).optional(),
