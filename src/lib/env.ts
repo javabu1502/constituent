@@ -40,6 +40,8 @@ const serverSchema = z.object({
   ADMIN_USER_IDS: z.string().optional(),
   ADMIN_EMAILS: z.string().optional(),
   ADMIN_NOTIFY_EMAIL: z.string().optional(),
+  // Platform-wide daily ceiling on AI-generation events (global spend breaker).
+  GLOBAL_AI_DAILY_LIMIT: z.string().optional(),
 });
 
 // Combined schema

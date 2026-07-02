@@ -51,7 +51,7 @@ export async function POST(request: NextRequest) {
   const identity = await resolveUsageIdentity(ip);
 
   // Bot protection: anonymous requests must pass Turnstile; signed-in users get the lenient path
-  if (turnstileToken !== undefined || process.env.TURNSTILE_SECRET_KEY) {
+  if (process.env.NODE_ENV === 'production') {
     const valid = await verifyTurnstile(turnstileToken || '', { strict: !identity.userId });
     if (!valid) {
       return new Response('CAPTCHA verification failed', { status: 403 });

@@ -18,6 +18,14 @@ const DAILY_LIMITS: Record<string, number> = {
 const LEGISLATOR_COOLDOWN_DAYS = 7;
 
 /**
+ * Platform-wide daily ceiling on AI-generation events across ALL identities.
+ * A backstop against budget-burn that IP rotation would otherwise defeat (the
+ * per-identity caps reset per hashed IP). Configurable via env; generous by
+ * default so it only trips on genuine runaway abuse.
+ */
+const GLOBAL_DAILY_AI_LIMIT = Number(process.env.GLOBAL_AI_DAILY_LIMIT) || 10000;
+
+/**
  * Who a usage event is attributed to. Exactly one field is set:
  * a logged-in user, or a hashed client IP for anonymous traffic.
  */
@@ -82,6 +90,29 @@ export async function checkDailyQuota(
   return { allowed: used < limit, remaining: Math.max(0, limit - used) };
 }
 
+/**
+ * Platform-wide daily budget backstop: is the total number of AI-generation
+ * events today (across every user and IP) still under the global ceiling?
+ * Fails OPEN on a DB error — the per-identity caps remain in force, and we
+ * never want an infra hiccup to hard-down every AI route.
+ */
+export async function checkGlobalDailyBudget(): Promise<boolean> {
+  const supabase = createAdminClient();
+  const startOfDay = new Date();
+  startOfDay.setHours(0, 0, 0, 0);
+
+  const { count, error } = await supabase
+    .from('ai_usage_logs')
+    .select('*', { count: 'exact', head: true })
+    .gte('created_at', startOfDay.toISOString());
+
+  if (error) {
+    console.error('[usage-quota] Failed to check global budget:', error);
+    return true;
+  }
+  return (count ?? 0) < GLOBAL_DAILY_AI_LIMIT;
+}
+
 /** Log a single AI generation usage event. Best-effort; never throws. */
 export async function logUsage(
   identity: UsageIdentity,
@@ -112,6 +143,13 @@ export async function enforceDailyQuota(
   identity?: UsageIdentity,
 ): Promise<{ allowed: boolean; remaining: number }> {
   const id = identity ?? (await resolveUsageIdentity(ip));
+
+  // Global daily backstop first — independent of per-identity IP rotation.
+  if (!(await checkGlobalDailyBudget())) {
+    console.warn('[usage-quota] Global daily AI budget reached — rejecting request');
+    return { allowed: false, remaining: 0 };
+  }
+
   const { allowed, remaining } = await checkDailyQuota(id, actionType);
   if (allowed) {
     void logUsage(id, actionType);

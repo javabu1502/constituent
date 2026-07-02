@@ -42,7 +42,7 @@ export async function POST(request: Request) {
 
   const identity = await resolveUsageIdentity(ip);
 
-  if (process.env.TURNSTILE_SECRET_KEY) {
+  if (process.env.NODE_ENV === 'production') {
     const valid = await verifyTurnstile(turnstileToken || '', { strict: !identity.userId });
     if (!valid) {
       return new Response('CAPTCHA verification failed', { status: 403 });

@@ -19,8 +19,11 @@ export async function verifyTurnstile(
 
   const secret = process.env.TURNSTILE_SECRET_KEY;
   if (!secret) {
-    console.error('[turnstile] TURNSTILE_SECRET_KEY not set in production');
-    return false;
+    // Misconfiguration in production. Fail CLOSED for anonymous (strict)
+    // callers so a missing key can never silently disable bot protection;
+    // stay lenient for signed-in users, who are already identified + capped.
+    console.error('[turnstile] TURNSTILE_SECRET_KEY not set in production — failing closed for anonymous requests');
+    return !opts.strict;
   }
 
   // No token (widget failed to load, ad blocker, or a bot skipping it):

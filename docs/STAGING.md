@@ -46,7 +46,8 @@ Preview/`staging` environment:
 | `CWC_DELIVERY_AGENT_ID` / `_NAME` / `_EMAIL` | as issued for the test env |
 | `NEXT_PUBLIC_CWC_ENABLED` | `true` (turns the client "Deliver to Congress" path on for testing) |
 | `ANTHROPIC_API_KEY`, `CONGRESS_API_KEY`, and other API keys | copy from prod (or use test keys) |
-| `ADMIN_USER_IDS` / `ADMIN_EMAILS` | your admin identities (for the review queue) |
+| `ADMIN_USER_IDS` / `ADMIN_EMAILS` | your admin identities (for the review queue + CWC diagnostics) |
+| `GLOBAL_AI_DAILY_LIMIT` | optional; platform-wide daily cap on AI events (default 10000) |
 
 > Turnstile note: Vercel runs staging with `NODE_ENV=production`, so the dev
 > bypass in `turnstile.ts` does NOT apply — the test keys above are what keep the
