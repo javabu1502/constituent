@@ -136,6 +136,11 @@ export async function POST(request: NextRequest) {
         ? trimmedName.split(/\s+/)[0] || null
         : trimmedName || null;
 
+    // Share the storyteller's email with the collector ONLY if they granted the
+    // "They may contact me about it" use (and aren't anonymous). Otherwise never.
+    const canContact = !isAnon && granted_uses.includes('contact_me_followup');
+    const emailToStore = canContact ? storyteller_email?.trim() || userEmail || null : null;
+
     const { error: storyError } = await admin.from('stories').insert({
       campaign_id: campaign.id,
       user_id: userId,
@@ -146,7 +151,7 @@ export async function POST(request: NextRequest) {
       title: isAnon ? subjectTitle || null : title ? deDash(title).slice(0, 120) : null,
       attribution_level,
       storyteller_name: nameToStore,
-      storyteller_email: isAnon ? null : storyteller_email?.trim() || userEmail || null,
+      storyteller_email: emailToStore,
       city: isAnon ? null : city?.trim() || null,
       state: isAnon ? null : state?.trim() || null,
       consent_usage_snapshot: {

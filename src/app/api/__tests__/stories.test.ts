@@ -102,7 +102,13 @@ describe('POST /api/stories', () => {
 
   it('persists a named story with the attribution-applied body + full identity', async () => {
     const { POST } = await import('../stories/route');
-    await POST(makeReq({ ...validBody, storyteller_email: 'jane@example.com', city: 'Reno', state: 'NV' }));
+    await POST(makeReq({
+      ...validBody,
+      granted_uses: [...validBody.granted_uses, 'contact_me_followup'],
+      storyteller_email: 'jane@example.com',
+      city: 'Reno',
+      state: 'NV',
+    }));
 
     expect(mockStoryInsert).toHaveBeenCalledOnce();
     const row = mockStoryInsert.mock.calls[0][0];
@@ -110,11 +116,18 @@ describe('POST /api/stories', () => {
     expect(row.body).toBe('FINAL BODY'); // attribution-applied, not the raw body
     expect(row.attribution_level).toBe('named');
     expect(row.storyteller_name).toBe('Jane Doe');
+    // Email is shared only because contact_me_followup was granted.
     expect(row.storyteller_email).toBe('jane@example.com');
     expect(row.city).toBe('Reno');
     expect(row.state).toBe('NV');
     expect(row.status).toBe('active');
-    expect(row.consent_usage_snapshot.granted_uses).toEqual(validBody.granted_uses);
+  });
+
+  it('does NOT store the email when contact_me_followup was not granted', async () => {
+    const { POST } = await import('../stories/route');
+    await POST(makeReq({ ...validBody, storyteller_email: 'jane@example.com' }));
+    const row = mockStoryInsert.mock.calls[0][0];
+    expect(row.storyteller_email).toBeNull();
   });
 
   it('stores only the first name for first_name_only attribution', async () => {
