@@ -47,6 +47,8 @@ export interface CWCResult {
   errorMessage?: string;
   /** Raw provider response text, retained for the audit trail. */
   rawResponse?: string;
+  /** The exact request body sent to CWC. Populated for diagnostics. */
+  requestXml?: string;
 }
 
 /** True when CWC delivery is configured for this environment. */
@@ -168,6 +170,7 @@ export async function submitToCWC(
         errorCode: `http_${res.status}`,
         errorMessage: `CWC returned HTTP ${res.status}`,
         rawResponse,
+        requestXml: xml,
       };
     }
 
@@ -176,6 +179,7 @@ export async function submitToCWC(
       status: 'sent',
       cwcMessageId: deliveryId,
       rawResponse,
+      requestXml: xml,
     };
   } catch (err) {
     console.error('[cwc] Delivery request failed:', err);
@@ -184,6 +188,7 @@ export async function submitToCWC(
       status: 'error',
       errorCode: 'network_error',
       errorMessage: 'CWC delivery request failed.',
+      requestXml: xml,
     };
   }
 }
