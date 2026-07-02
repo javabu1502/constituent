@@ -166,6 +166,13 @@ export const submitStorySchema = z.object({
   granted_uses: z.array(z.string().max(60)).min(1).max(20),
   consent_usage: z.literal(true),
   consent_truthful: z.literal(true),
+  // Storytelling persistence: the story is saved to the campaign organizer's
+  // dashboard by default; `store: false` is the storyteller's opt-out. City/
+  // state are sent only when location sharing is on; email is optional contact.
+  store: z.boolean().default(true),
+  city: z.string().max(100).nullish(),
+  state: z.string().max(50).nullish(),
+  storyteller_email: z.string().email().max(254).nullish(),
 });
 
 export const generateCommentSchema = z.object({

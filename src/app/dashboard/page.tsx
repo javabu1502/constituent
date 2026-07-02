@@ -14,6 +14,7 @@ import { CollapsibleSection } from '@/components/ui/CollapsibleSection';
 import { GettingStartedChecklist } from '@/components/dashboard/GettingStartedChecklist';
 import { WelcomeTour } from '@/components/dashboard/WelcomeTour';
 import { FollowUpButton } from '@/components/dashboard/FollowUpButton';
+import { MyStoriesSection } from '@/components/dashboard/MyStoriesSection';
 
 export const metadata: Metadata = {
   title: 'Dashboard | My Democracy',
@@ -37,6 +38,10 @@ function getStatusBadge(status: string) {
       return { label: 'Website Visited', class: 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300' };
     case 'called':
       return { label: 'Called', class: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300' };
+    case 'sent':
+      return { label: 'Delivered to Congress', class: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300' };
+    case 'pending_review':
+      return { label: 'Under Review', class: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300' };
     default:
       return { label: status, class: 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300' };
   }
@@ -52,8 +57,8 @@ export default async function DashboardPage() {
 
   const admin = createAdminClient();
 
-  // Fetch profile, messages, and campaigns in parallel
-  const [profileResult, messagesResult, campaignsResult] = await Promise.all([
+  // Fetch profile, messages, campaigns, and the user's own stories in parallel
+  const [profileResult, messagesResult, campaignsResult, storiesResult] = await Promise.all([
     admin.from('profiles').select('*').eq('user_id', user.id).single(),
     admin.from('messages')
       .select('id,delivery_method,issue_area,issue_subtopic,legislator_name,legislator_party,delivery_status,created_at,message_body')
@@ -61,6 +66,12 @@ export default async function DashboardPage() {
       .order('created_at', { ascending: false })
       .limit(100),
     admin.from('campaigns').select('*').eq('creator_id', user.id).order('created_at', { ascending: false }),
+    admin.from('stories')
+      .select('id,created_at,attribution_level,title,body,campaigns(headline)')
+      .eq('user_id', user.id)
+      .eq('status', 'active')
+      .order('created_at', { ascending: false })
+      .limit(50),
   ]);
 
   let profile = profileResult.data;
@@ -95,6 +106,20 @@ export default async function DashboardPage() {
   const uniqueOfficials = new Set(messages?.map((m: Record<string, string>) => m.legislator_name)).size;
 
   const campaigns = campaignsResult.data;
+
+  const myStories = (storiesResult.data ?? []).map((s: Record<string, unknown>) => {
+    const body = (s.body as string | null) ?? '';
+    const campaignRel = s.campaigns as { headline?: string } | { headline?: string }[] | null;
+    const headline = Array.isArray(campaignRel) ? campaignRel[0]?.headline : campaignRel?.headline;
+    return {
+      id: s.id as string,
+      created_at: s.created_at as string,
+      attribution_level: s.attribution_level as 'named' | 'first_name_only' | 'anonymous',
+      campaign_headline: headline ?? null,
+      title: (s.title as string | null) ?? null,
+      preview: body.length > 180 ? body.slice(0, 180) + '…' : body,
+    };
+  });
 
   const hasAddress = !!(profile?.street && profile?.city && profile?.state && profile?.zip);
   const cachedReps = profile?.representatives ?? null;
@@ -251,6 +276,18 @@ export default async function DashboardPage() {
             </div>
           )}
         </CollapsibleSection>
+
+        {/* My Stories */}
+        {myStories.length > 0 && (
+          <CollapsibleSection title="My Stories" badge={`${myStories.length}`} defaultOpen={false}>
+            <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
+              <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">
+                Stories you saved to a campaign. Removing one takes it out of the organizer&apos;s dashboard and export.
+              </p>
+              <MyStoriesSection stories={myStories} />
+            </div>
+          </CollapsibleSection>
+        )}
 
         {/* My Campaigns */}
         <CollapsibleSection title="My Campaigns" badge={campaigns && campaigns.length > 0 ? `${campaigns.length}` : undefined} defaultOpen={false}>

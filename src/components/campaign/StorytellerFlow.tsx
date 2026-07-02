@@ -56,8 +56,12 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
     : STORY_USAGE_OPTIONS;
   const [attribution, setAttribution] = useState<AttributionLevel>('named');
   const [storytellerName, setStorytellerName] = useState('');
+  const [storytellerEmail, setStorytellerEmail] = useState('');
   const [grantedUses, setGrantedUses] = useState<string[]>([]);
   const [consentTruthful, setConsentTruthful] = useState(false);
+  // Stories are saved to the campaign organizer's dashboard by default; this is
+  // the storyteller's opt-out (true = save, the default).
+  const [saveToCampaign, setSaveToCampaign] = useState(true);
   const [submitting, setSubmitting] = useState(false);
 
   // Address is required (so everyone is a verified constituent), but sharing the
@@ -81,9 +85,10 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
         const supabase = createClient();
         const { data: { user } } = await supabase.auth.getUser();
         if (user) {
-          // Pre-fill the name for convenience; we never store the story itself.
+          // Pre-fill name + contact email for convenience.
           const n = user.user_metadata?.full_name || '';
           if (n) setStorytellerName(n);
+          if (user.email) setStorytellerEmail(user.email);
         }
       } catch {
         // anonymous — fine
@@ -222,6 +227,11 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
           granted_uses: grantedUses,
           consent_usage: true,
           consent_truthful: true,
+          store: saveToCampaign,
+          city: shareLocation && attribution !== 'anonymous' ? address.city.trim() : null,
+          state: shareLocation && attribution !== 'anonymous' ? address.state.trim() : null,
+          storyteller_email:
+            attribution === 'anonymous' ? null : storytellerEmail.trim() || null,
         }),
       });
       const data = await res.json();
@@ -554,6 +564,45 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
           </p>
         </div>
 
+        {/* Optional contact email — shown when the storyteller allows follow-up */}
+        {attribution !== 'anonymous' && grantedUses.includes('contact_me_followup') && (
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              Contact email <span className="font-normal text-gray-400">(optional)</span>
+            </label>
+            <input
+              type="email"
+              value={storytellerEmail}
+              onChange={(e) => setStorytellerEmail(e.target.value)}
+              placeholder="you@example.com"
+              className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
+            />
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+              So the campaign can follow up with you. Shared with this campaign only.
+            </p>
+          </div>
+        )}
+
+        {/* Save-to-campaign notice + opt-out */}
+        <div className="p-3 bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-700 rounded-xl">
+          <p className="text-xs text-purple-800 dark:text-purple-300 mb-3">
+            {attribution === 'anonymous'
+              ? <>Your story will be saved to <strong>{campaign.headline}</strong>’s dashboard so the organizer can keep track of it. Because you chose to stay anonymous, <strong>no name, contact, or location</strong> is saved with it. You can remove it anytime from your dashboard.</>
+              : <>Your story and the details you chose to share will be saved to <strong>{campaign.headline}</strong>’s dashboard so the organizer can keep track and follow up. You can remove it anytime from your dashboard.</>}
+          </p>
+          <label className="flex items-start gap-3 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={!saveToCampaign}
+              onChange={(e) => setSaveToCampaign(!e.target.checked)}
+              className="mt-1 h-4 w-4 rounded text-purple-600 focus:ring-purple-500"
+            />
+            <span className="text-sm text-purple-900 dark:text-purple-200">
+              Don’t save my story to the campaign’s dashboard — I’ll just email it myself.
+            </span>
+          </label>
+        </div>
+
         {/* Consent gate */}
         <div className="space-y-2">
           <label className="flex items-start gap-3 cursor-pointer">
@@ -644,7 +693,9 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
 
       <div className="mb-6 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-xl">
         <p className="text-sm text-gray-600 dark:text-gray-300">
-          We don’t keep a copy of your story. Your record of it is the email you just sent, so look there if you’d like to see it again.
+          {saveToCampaign
+            ? 'Your story is saved to this campaign. You can view or remove it anytime from your dashboard, and the email you just sent is your own copy.'
+            : 'We didn’t keep a copy of your story. Your record of it is the email you just sent, so look there if you’d like to see it again.'}
         </p>
       </div>
 
