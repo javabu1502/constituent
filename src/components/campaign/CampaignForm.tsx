@@ -547,7 +547,7 @@ export function CampaignForm({ initialType }: { initialType?: 'advocacy' | 'stor
           <div className="p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700 rounded-xl">
             <p className="text-sm text-blue-800 dark:text-blue-300">
               Storytelling campaigns are <strong>shared by link only</strong> — they never appear in the public directory.
-              Supporters answer a few guided questions to shape their story, then email it to you.
+              Supporters answer a few guided questions to shape their story, then it&apos;s saved straight to your campaign dashboard, where you can read every story and download them all as a spreadsheet.
             </p>
           </div>
 

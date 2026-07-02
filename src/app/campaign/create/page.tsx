@@ -21,12 +21,12 @@ const COPY = {
   },
   storytelling: {
     heading: 'Start a Storytelling Campaign',
-    subtitle: 'Collect personal stories from your supporters. Each person is guided step by step, then emails their story to you.',
-    what: 'Collect personal stories from your supporters. A guided chat helps each person write their story in their own words — then they choose how they’re credited and email it to you.',
+    subtitle: 'Collect personal stories from your supporters. Each person is guided step by step, and their story is saved to your campaign dashboard.',
+    what: 'Collect personal stories from your supporters. A guided chat helps each person write their story in their own words — then they choose how they’re credited, and it’s saved to your dashboard.',
     points: [
       'Share a private link — supporters write their story with guided help.',
       'They choose how they’re credited and how their story may be used.',
-      'Finished stories come straight to your inbox.',
+      'Every story lands in your dashboard — read them all and download as a spreadsheet.',
     ],
   },
 };
