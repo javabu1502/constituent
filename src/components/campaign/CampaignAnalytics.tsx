@@ -108,28 +108,6 @@ function StorytellingAnalytics({ analytics }: { analytics: StoryAnalytics }) {
           </ul>
         )}
       </div>
-
-      {/* Aggregate topic subjects (includes opted-out + anonymous submissions) */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
-        <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-1">Story subjects</h3>
-        <p className="text-xs text-gray-500 dark:text-gray-400 mb-4">
-          A topic-level title for every submission, including those not saved above.
-        </p>
-        {analytics.subjects.length === 0 ? (
-          <p className="text-sm text-gray-500 dark:text-gray-400">No subjects yet.</p>
-        ) : (
-          <ul className="divide-y divide-gray-100 dark:divide-gray-700">
-            {analytics.subjects.map((s, i) => (
-              <li key={i} className="py-2.5 flex items-start justify-between gap-3">
-                <span className="text-sm text-gray-800 dark:text-gray-200">{s.title}</span>
-                <span className="text-xs text-gray-400 dark:text-gray-500 shrink-0">
-                  {new Date(s.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-                </span>
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
     </div>
   );
 }
