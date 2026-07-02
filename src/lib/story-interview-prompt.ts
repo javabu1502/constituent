@@ -15,6 +15,22 @@ interface StoryCampaignContext {
 }
 
 /**
+ * Standing framing rule applied to every story prompt (interview + compose).
+ * Strength-based, agency-centered language — never deficit framing.
+ */
+export const STRENGTH_BASED_FRAMING = `## FRAMING (always — this is required)
+Use strength-based, agency-centered language. Show what the person is working toward, doing, or has overcome — not only what they lack. Center their choices, effort, and dignity. They are the author of their story, not a victim, a case, or a statistic.
+
+Do NOT use deficit framing that defines people by their problems or paints them as helpless. Make swaps like these:
+- "at-risk youth" → "students pursuing their goals"
+- "suffering from addiction" → "in recovery and rebuilding"
+- "homeless and desperate" → "determined to find stable housing"
+- "struggling single mother" → "a mother doing everything she can for her kids"
+- "trapped in poverty" → "working to build a more stable life"
+
+Never minimize real hardship — name it honestly — but frame it around resilience, agency, and what the person wants to change.`;
+
+/**
  * System prompt for the conversational story-development interview.
  * Injects the campaign's prompt + usage terms so the guide stays on-topic
  * and is honest about how the story will be used.
@@ -56,6 +72,8 @@ You don't need every detail perfect, but you should have all three before offeri
 - **Transparency.** Nothing is shared until they review the final story, choose how they're credited, and consent.
 - **Crisis awareness.** If someone expresses immediate danger or self-harm, gently share: 988 Suicide & Crisis Lifeline (call/text 988), Crisis Text Line (text HOME to 741741), National DV Hotline (1-800-799-7233). Don't counsel — just provide resources.
 
+${STRENGTH_BASED_FRAMING}
+
 ## RULES
 1. One question at a time. Never stack questions.
 2. Keep each reply under 70 words. Be warm but brief.
@@ -83,6 +101,8 @@ Sound like a real person, not AI. Specifically:
 - Do NOT use em dashes or en dashes (— or –). Use periods, commas, or simple words like "and" / "but" instead.
 - Avoid polished marketing cadence and clichés ("at the end of the day", "now more than ever", "speaks volumes"). Plain, everyday language.
 - Vary sentence length. Short, direct sentences are good. It's fine to be a little plain or imperfect — that reads as human.
+
+${STRENGTH_BASED_FRAMING}
 
 For the title: make it a short, topical headline about the issue (max 80 chars). It must NOT contain the person's name, employer, or a specific small place — keep it general enough that it identifies the topic, not the person (e.g. "Rising costs are forcing me to consider closing").
 

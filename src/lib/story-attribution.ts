@@ -12,6 +12,7 @@
  */
 
 import { callClaude, extractJSON } from '@/lib/claude';
+import { STRENGTH_BASED_FRAMING } from '@/lib/story-interview-prompt';
 import type { AttributionLevel } from '@/lib/types';
 
 export interface AttributionResult {
@@ -26,6 +27,8 @@ function escapeRegExp(s: string): string {
 const REDACT_PROMPT = `You anonymize a first-person personal story so it cannot be traced back to its author, while preserving its meaning and emotional truth.
 
 Remove or generalize any uniquely identifying detail: full names, employers/specific organizations, exact street addresses, small/specific place names, phone numbers, emails, license/case/ID numbers, and any rare combination of facts that could single the person out. Keep the story coherent and human — replace specifics with neutral generalizations (e.g. "my employer", "a town near me") rather than deleting whole sentences.
+
+${STRENGTH_BASED_FRAMING}
 
 Respond with ONLY this JSON:
 {
