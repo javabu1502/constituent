@@ -44,7 +44,7 @@ export function CampaignForm({ initialType }: { initialType?: 'advocacy' | 'stor
   const [storyPrompt, setStoryPrompt] = useState('');
   const [usageTags, setUsageTags] = useState<string[]>([]);
   const [editRevokePolicy, setEditRevokePolicy] = useState(
-    'To change or withdraw your story later, contact the campaign organizer at the email where stories are sent (set below). If you created an account, you can also request this from your dashboard. Anything already shared or published may not be fully recallable.'
+    'You can change or revoke your story anytime from your dashboard — we’re flagged the moment you do. If your story was already shared or published somewhere before you changed it, that copy may not be fully recallable.'
   );
 
   // Optional related bill
@@ -617,13 +617,14 @@ export function CampaignForm({ initialType }: { initialType?: 'advocacy' | 'stor
             <textarea
               value={editRevokePolicy}
               onChange={(e) => setEditRevokePolicy(e.target.value)}
-              placeholder="How can a storyteller edit or revoke their story later?"
+              placeholder="What happens if a storyteller changes or revokes their story later?"
               rows={3}
               maxLength={2000}
               className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 resize-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
             />
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-              Revocation is handled by contacting you — stories already shared or used can&apos;t be auto-recalled.
+              Shown to every storyteller before they share. Storytellers change or revoke their own story from their
+              dashboard; you&apos;re flagged when they do, and revoked stories are hidden from you and the export.
             </p>
           </div>
 

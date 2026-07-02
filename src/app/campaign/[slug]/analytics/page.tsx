@@ -67,9 +67,10 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
         .limit(100),
       admin
         .from('stories')
-        .select('id, created_at, attribution_level, storyteller_name, title, body')
+        // Include revoked so the collector is flagged (content hidden below).
+        .select('id, created_at, attribution_level, storyteller_name, title, body, status, edited_at')
         .eq('campaign_id', campaign.id)
-        .eq('status', 'active')
+        .in('status', ['active', 'revoked'])
         .order('created_at', { ascending: false })
         .limit(200),
     ]);
@@ -81,14 +82,17 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
       subjects: (subjectRows || []).map((s) => ({ title: s.title as string, created_at: s.created_at as string })),
       stories: (storyRows || []).map((s) => {
         const level = s.attribution_level as 'named' | 'first_name_only' | 'anonymous';
-        const body = (s.body as string | null) ?? '';
+        const revoked = (s.status as string) === 'revoked';
+        const body = revoked ? '' : ((s.body as string | null) ?? ''); // never expose revoked content
         return {
           id: s.id as string,
           created_at: s.created_at as string,
           attribution_level: level,
           display_name: level === 'anonymous' ? 'Anonymous' : ((s.storyteller_name as string | null) || 'Unnamed'),
-          title: (s.title as string | null) ?? null,
+          title: revoked ? null : ((s.title as string | null) ?? null),
           preview: body.length > 180 ? body.slice(0, 180) + '…' : body,
+          revoked,
+          edited_at: (s.edited_at as string | null) ?? null,
         };
       }),
     };

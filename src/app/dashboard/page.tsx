@@ -67,7 +67,7 @@ export default async function DashboardPage() {
       .limit(100),
     admin.from('campaigns').select('*').eq('creator_id', user.id).order('created_at', { ascending: false }),
     admin.from('stories')
-      .select('id,created_at,attribution_level,title,body,campaigns(headline)')
+      .select('id,created_at,attribution_level,title,body,campaigns(headline,edit_revoke_policy)')
       .eq('user_id', user.id)
       .eq('status', 'active')
       .order('created_at', { ascending: false })
@@ -109,15 +109,17 @@ export default async function DashboardPage() {
 
   const myStories = (storiesResult.data ?? []).map((s: Record<string, unknown>) => {
     const body = (s.body as string | null) ?? '';
-    const campaignRel = s.campaigns as { headline?: string } | { headline?: string }[] | null;
-    const headline = Array.isArray(campaignRel) ? campaignRel[0]?.headline : campaignRel?.headline;
+    type CampRel = { headline?: string; edit_revoke_policy?: string };
+    const campaignRel = s.campaigns as CampRel | CampRel[] | null;
+    const camp = Array.isArray(campaignRel) ? campaignRel[0] : campaignRel;
     return {
       id: s.id as string,
       created_at: s.created_at as string,
       attribution_level: s.attribution_level as 'named' | 'first_name_only' | 'anonymous',
-      campaign_headline: headline ?? null,
+      campaign_headline: camp?.headline ?? null,
+      edit_revoke_policy: camp?.edit_revoke_policy ?? null,
       title: (s.title as string | null) ?? null,
-      preview: body.length > 180 ? body.slice(0, 180) + '…' : body,
+      body,
     };
   });
 
@@ -282,7 +284,8 @@ export default async function DashboardPage() {
           <CollapsibleSection title="My Stories" badge={`${myStories.length}`} defaultOpen={false}>
             <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
               <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">
-                Stories you saved to a campaign. Removing one takes it out of the organizer&apos;s dashboard and export.
+                Stories you shared with a campaign. You can <strong>change</strong> or <strong>revoke</strong> yours anytime —
+                the campaign is flagged either way.
               </p>
               <MyStoriesSection stories={myStories} />
             </div>

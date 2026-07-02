@@ -59,9 +59,6 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
   const [storytellerEmail, setStorytellerEmail] = useState('');
   const [grantedUses, setGrantedUses] = useState<string[]>([]);
   const [consentTruthful, setConsentTruthful] = useState(false);
-  // Stories are saved to the campaign organizer's dashboard by default; this is
-  // the storyteller's opt-out (true = save, the default).
-  const [saveToCampaign, setSaveToCampaign] = useState(true);
   const [submitting, setSubmitting] = useState(false);
 
   // Address is required (so everyone is a verified constituent), but sharing the
@@ -227,7 +224,7 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
           granted_uses: grantedUses,
           consent_usage: true,
           consent_truthful: true,
-          store: saveToCampaign,
+          store: true,
           city: shareLocation && attribution !== 'anonymous' ? address.city.trim() : null,
           state: shareLocation && attribution !== 'anonymous' ? address.state.trim() : null,
           storyteller_email:
@@ -242,10 +239,9 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
       setMailtoSubject(data.subject || `My story: ${campaign.headline}`);
       setFlagged(Array.isArray(data.flagged) ? data.flagged : []);
       trackEvent('story_submitted', { campaign: campaign.slug, attribution });
-      // Closed loop: a saved story is already delivered to the campaign's
-      // dashboard, so there's nothing to email — go straight to the confirmation.
-      // Only opted-out storytellers need the email-it-yourself step.
-      setStep(saveToCampaign ? 'done' : 'send');
+      // Closed loop: the story is saved to the campaign's dashboard, so there's
+      // nothing to email — go straight to the confirmation.
+      setStep('done');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Could not submit your story');
     } finally {
@@ -558,15 +554,6 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
           </div>
         </div>
 
-        {/* Photo prompt */}
-        <div className="p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700 rounded-xl">
-          <p className="text-sm text-blue-900 dark:text-blue-200 font-medium mb-1">📷 A photo makes your story land</p>
-          <p className="text-xs text-blue-800 dark:text-blue-300">
-            Stories with a face or a moment behind them are far more powerful. On the next step you’ll send the story from your own email — feel free to attach a photo there.
-            One privacy tip: photos can carry hidden location data, so only share images you’re comfortable making public.
-          </p>
-        </div>
-
         {/* Optional contact email — shown when the storyteller allows follow-up */}
         {attribution !== 'anonymous' && grantedUses.includes('contact_me_followup') && (
           <div>
@@ -586,24 +573,18 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
           </div>
         )}
 
-        {/* Save-to-campaign notice + opt-out */}
+        {/* Save-to-campaign notice */}
         <div className="p-3 bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-700 rounded-xl">
-          <p className="text-xs text-purple-800 dark:text-purple-300 mb-3">
+          <p className="text-xs text-purple-800 dark:text-purple-300">
             {attribution === 'anonymous'
-              ? <>Your story will be saved to <strong>{campaign.headline}</strong>’s dashboard so the organizer can keep track of it. Because you chose to stay anonymous, <strong>no name, contact, or location</strong> is saved with it. You can remove it anytime from your dashboard.</>
-              : <>Your story and the details you chose to share will be saved to <strong>{campaign.headline}</strong>’s dashboard so the organizer can keep track and follow up. You can remove it anytime from your dashboard.</>}
+              ? <>Your story will be shared with <strong>{campaign.headline}</strong> through their dashboard. Because you chose to stay anonymous, <strong>no name, contact, or location</strong> is saved with it. You can <strong>change or revoke</strong> it anytime from your dashboard{campaign.edit_revoke_policy ? '' : ''}.</>
+              : <>Your story and the details you chose to share will go to <strong>{campaign.headline}</strong> through their dashboard, so they can read it and follow up. You can <strong>change or revoke</strong> it anytime from your dashboard.</>}
           </p>
-          <label className="flex items-start gap-3 cursor-pointer">
-            <input
-              type="checkbox"
-              checked={!saveToCampaign}
-              onChange={(e) => setSaveToCampaign(!e.target.checked)}
-              className="mt-1 h-4 w-4 rounded text-purple-600 focus:ring-purple-500"
-            />
-            <span className="text-sm text-purple-900 dark:text-purple-200">
-              Don’t save my story to the campaign’s dashboard — I’ll just email it myself.
-            </span>
-          </label>
+          {campaign.edit_revoke_policy && (
+            <p className="text-[11px] text-purple-700 dark:text-purple-300 mt-2">
+              <span className="font-medium">The campaign’s edit/revoke policy:</span> {campaign.edit_revoke_policy}
+            </p>
+          )}
         </div>
 
         {/* Consent gate */}
@@ -696,13 +677,11 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
 
       <div className="mb-6 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-xl">
         <p className="text-sm text-gray-600 dark:text-gray-300">
-          {saveToCampaign
-            ? `Your story has been delivered to ${campaign.headline}. It’s now in the organizer’s dashboard — you don’t need to email anything. You can view or remove it anytime from your dashboard.`
-            : 'We didn’t keep a copy of your story. Your record of it is the email you just sent, so look there if you’d like to see it again.'}
+          {`Your story has been shared with ${campaign.headline} — it’s now in their dashboard. You can change or revoke it anytime from your own dashboard.`}
         </p>
       </div>
 
-      {saveToCampaign && flagged.length > 0 && (
+      {flagged.length > 0 && (
         <div className="mb-6 p-3 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded-xl text-left">
           <p className="text-xs text-amber-800 dark:text-amber-300">
             One note: we couldn’t fully resolve these possibly-identifying details — {flagged.join(', ')}. If you’d like, review your story in your dashboard and remove it there if you’re not comfortable.

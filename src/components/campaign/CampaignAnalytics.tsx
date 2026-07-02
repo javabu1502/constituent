@@ -18,6 +18,8 @@ interface StoryListItem {
   display_name: string; // "Anonymous" for anonymous rows
   title: string | null;
   preview: string;
+  revoked: boolean;
+  edited_at: string | null;
 }
 
 interface StoryAnalytics {
@@ -62,26 +64,45 @@ function StorytellingAnalytics({ analytics }: { analytics: StoryAnalytics }) {
           )}
         </div>
         <p className="text-xs text-gray-500 dark:text-gray-400 mb-4">
-          Stories storytellers chose to save to your campaign. Anonymous stories are shown without any name or contact
-          details. Storytellers can remove their story at any time.
+          Stories storytellers shared with your campaign. Anonymous stories show no name or contact details.
+          Storytellers can change or revoke their story at any time — changes are flagged, and revoked stories are
+          hidden and excluded from the CSV.
         </p>
         {analytics.stories.length === 0 ? (
-          <p className="text-sm text-gray-500 dark:text-gray-400">No saved stories yet.</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400">No stories yet.</p>
         ) : (
           <ul className="divide-y divide-gray-100 dark:divide-gray-700">
             {analytics.stories.map((s) => (
-              <li key={s.id} className="py-3">
+              <li key={s.id} className={`py-3 ${s.revoked ? 'opacity-70' : ''}`}>
                 <div className="flex items-center gap-2 mb-1 flex-wrap">
                   <span className="text-sm font-medium text-gray-900 dark:text-white">{s.display_name}</span>
                   <span className={`px-2 py-0.5 text-[10px] font-medium rounded-full ${attributionBadge(s.attribution_level)}`}>
                     {s.attribution_level.replace('_', ' ')}
                   </span>
+                  {s.revoked && (
+                    <span className="px-2 py-0.5 text-[10px] font-medium rounded-full bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300">
+                      revoked
+                    </span>
+                  )}
+                  {!s.revoked && s.edited_at && (
+                    <span className="px-2 py-0.5 text-[10px] font-medium rounded-full bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300">
+                      edited {new Date(s.edited_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                    </span>
+                  )}
                   <span className="text-xs text-gray-400 dark:text-gray-500 ml-auto">
                     {new Date(s.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
                   </span>
                 </div>
-                {s.title && <p className="text-sm text-gray-800 dark:text-gray-200">{s.title}</p>}
-                <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5 line-clamp-2">{s.preview}</p>
+                {s.revoked ? (
+                  <p className="text-xs text-red-600 dark:text-red-400 italic">
+                    The storyteller revoked this story — please don’t use it.
+                  </p>
+                ) : (
+                  <>
+                    {s.title && <p className="text-sm text-gray-800 dark:text-gray-200">{s.title}</p>}
+                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5 line-clamp-2">{s.preview}</p>
+                  </>
+                )}
               </li>
             ))}
           </ul>
