@@ -58,17 +58,39 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
 
   // ----- Storytelling campaigns: running count + non-identifying subjects -----
   if (campaign.campaign_type === 'storytelling') {
-    const { data: subjectRows } = await admin
-      .from('story_subjects')
-      .select('title, created_at')
-      .eq('campaign_id', campaign.id)
-      .order('created_at', { ascending: false })
-      .limit(100);
+    const [{ data: subjectRows }, { data: storyRows }] = await Promise.all([
+      admin
+        .from('story_subjects')
+        .select('title, created_at')
+        .eq('campaign_id', campaign.id)
+        .order('created_at', { ascending: false })
+        .limit(100),
+      admin
+        .from('stories')
+        .select('id, created_at, attribution_level, storyteller_name, title, body')
+        .eq('campaign_id', campaign.id)
+        .eq('status', 'active')
+        .order('created_at', { ascending: false })
+        .limit(200),
+    ]);
 
     const storyAnalytics = {
       kind: 'storytelling' as const,
       total_stories: campaign.story_count || 0,
+      campaign_slug: campaign.slug as string,
       subjects: (subjectRows || []).map((s) => ({ title: s.title as string, created_at: s.created_at as string })),
+      stories: (storyRows || []).map((s) => {
+        const level = s.attribution_level as 'named' | 'first_name_only' | 'anonymous';
+        const body = (s.body as string | null) ?? '';
+        return {
+          id: s.id as string,
+          created_at: s.created_at as string,
+          attribution_level: level,
+          display_name: level === 'anonymous' ? 'Anonymous' : ((s.storyteller_name as string | null) || 'Unnamed'),
+          title: (s.title as string | null) ?? null,
+          preview: body.length > 180 ? body.slice(0, 180) + '…' : body,
+        };
+      }),
     };
 
     return (
@@ -88,7 +110,7 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
   }
 
   // ----- Advocacy campaigns: action/message analytics -----
-  const [messagesResult, actionsResult, statesResult, recentActionsResult, dailyCountsResult, deliveryBreakdownResult] = await Promise.all([
+  const [messagesResult, actionsResult, statesResult, dailyCountsResult, deliveryBreakdownResult] = await Promise.all([
     admin
       .from('messages')
       .select('id', { count: 'exact', head: true })
@@ -101,12 +123,6 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
       .from('campaign_actions')
       .select('participant_state')
       .eq('campaign_id', campaign.id),
-    admin
-      .from('campaign_actions')
-      .select('*')
-      .eq('campaign_id', campaign.id)
-      .order('created_at', { ascending: false })
-      .limit(50),
     // Daily counts (last 30 days)
     admin
       .from('campaign_actions')
