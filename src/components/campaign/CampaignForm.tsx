@@ -46,7 +46,6 @@ export function CampaignForm({ initialType }: { initialType?: 'advocacy' | 'stor
   const [editRevokePolicy, setEditRevokePolicy] = useState(
     'To change or withdraw your story later, contact the campaign organizer at the email where stories are sent (set below). If you created an account, you can also request this from your dashboard. Anything already shared or published may not be fully recallable.'
   );
-  const [recipientEmail, setRecipientEmail] = useState('');
 
   // Optional related bill
   const [billLevel, setBillLevel] = useState<BillLevel>('');
@@ -241,7 +240,8 @@ export function CampaignForm({ initialType }: { initialType?: 'advocacy' | 'stor
             story_prompt: storyPrompt.trim() || null,
             usage_tags: usageTags,
             edit_revoke_policy: editRevokePolicy.trim(),
-            recipient_email: recipientEmail.trim() || null,
+            // Stories are collected in the campaign dashboard, not emailed.
+            recipient_email: null,
           };
 
       const res = await fetch('/api/campaigns', {
@@ -627,20 +627,6 @@ export function CampaignForm({ initialType }: { initialType?: 'advocacy' | 'stor
             </p>
           </div>
 
-          {/* Recipient email */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              Where should stories be sent? <span className="text-gray-400 dark:text-gray-500 font-normal">(optional)</span>
-            </label>
-            <input
-              type="email"
-              value={recipientEmail}
-              onChange={(e) => setRecipientEmail(e.target.value)}
-              placeholder="Defaults to your account email"
-              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
-            />
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Storytellers email their finished story to this address from their own email.</p>
-          </div>
         </>
       )}
 
