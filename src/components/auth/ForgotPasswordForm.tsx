@@ -5,8 +5,10 @@ import Link from 'next/link';
 import { createClient } from '@/lib/supabase/client';
 import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
+import { useTurnstile } from '@/components/ui/Turnstile';
 
 export function ForgotPasswordForm() {
+  const { getToken, TurnstileWidget } = useTurnstile();
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -17,9 +19,12 @@ export function ForgotPasswordForm() {
     setError('');
     setIsLoading(true);
 
+    const captchaToken = await getToken();
+
     const supabase = createClient();
     const { error: resetError } = await supabase.auth.resetPasswordForEmail(email, {
       redirectTo: `${window.location.origin}/reset-password`,
+      ...(captchaToken ? { captchaToken } : {}),
     });
 
     if (resetError) {
@@ -73,6 +78,8 @@ export function ForgotPasswordForm() {
         required
         autoComplete="email"
       />
+
+      <TurnstileWidget />
 
       <Button type="submit" className="w-full" isLoading={isLoading}>
         Send Reset Link

@@ -7,8 +7,10 @@ import { createClient } from '@/lib/supabase/client';
 import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
 import { GoogleSignInButton } from '@/components/auth/GoogleSignInButton';
+import { useTurnstile } from '@/components/ui/Turnstile';
 
 export function LoginForm() {
+  const { getToken, TurnstileWidget } = useTurnstile();
   const router = useRouter();
   const searchParams = useSearchParams();
   const rawRedirect = searchParams.get('redirectTo') || '/dashboard';
@@ -25,10 +27,14 @@ export function LoginForm() {
     setError('');
     setIsLoading(true);
 
+    // Supabase Auth CAPTCHA protection requires a token on password sign-in.
+    const captchaToken = await getToken();
+
     const supabase = createClient();
     const { error: authError } = await supabase.auth.signInWithPassword({
       email,
       password,
+      ...(captchaToken ? { options: { captchaToken } } : {}),
     });
 
     if (authError) {
@@ -87,6 +93,8 @@ export function LoginForm() {
           </Link>
         </div>
       </div>
+
+      <TurnstileWidget />
 
       <Button type="submit" className="w-full" isLoading={isLoading}>
         Sign In

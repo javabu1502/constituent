@@ -7,8 +7,10 @@ import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
 import { GoogleSignInButton } from '@/components/auth/GoogleSignInButton';
 import { AddressAutocomplete, type ParsedAddress } from '@/components/ui/AddressAutocomplete';
+import { useTurnstile } from '@/components/ui/Turnstile';
 
 export function SignupForm() {
+  const { getToken, TurnstileWidget } = useTurnstile();
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
@@ -34,6 +36,10 @@ export function SignupForm() {
 
     setIsLoading(true);
 
+    // Supabase Auth has CAPTCHA protection enabled — obtain a Turnstile token
+    // and pass it so the sign-up isn't rejected with "no captcha_token found".
+    const captchaToken = await getToken();
+
     const supabase = createClient();
     const { error: authError } = await supabase.auth.signUp({
       email,
@@ -46,6 +52,7 @@ export function SignupForm() {
             : {}),
         },
         emailRedirectTo: `${window.location.origin}/auth/callback`,
+        ...(captchaToken ? { captchaToken } : {}),
       },
     });
 
@@ -145,6 +152,8 @@ export function SignupForm() {
           optional
         />
       </div>
+
+      <TurnstileWidget />
 
       <Button type="submit" className="w-full" isLoading={isLoading}>
         Create Account
