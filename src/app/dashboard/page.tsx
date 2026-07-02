@@ -67,7 +67,7 @@ export default async function DashboardPage() {
       .limit(100),
     admin.from('campaigns').select('*').eq('creator_id', user.id).order('created_at', { ascending: false }),
     admin.from('stories')
-      .select('id,created_at,attribution_level,title,body,campaigns(headline,edit_revoke_policy)')
+      .select('id,created_at,attribution_level,title,body,campaigns(headline)')
       .eq('user_id', user.id)
       .eq('status', 'active')
       .order('created_at', { ascending: false })
@@ -109,7 +109,7 @@ export default async function DashboardPage() {
 
   const myStories = (storiesResult.data ?? []).map((s: Record<string, unknown>) => {
     const body = (s.body as string | null) ?? '';
-    type CampRel = { headline?: string; edit_revoke_policy?: string };
+    type CampRel = { headline?: string };
     const campaignRel = s.campaigns as CampRel | CampRel[] | null;
     const camp = Array.isArray(campaignRel) ? campaignRel[0] : campaignRel;
     return {
@@ -117,7 +117,6 @@ export default async function DashboardPage() {
       created_at: s.created_at as string,
       attribution_level: s.attribution_level as 'named' | 'first_name_only' | 'anonymous',
       campaign_headline: camp?.headline ?? null,
-      edit_revoke_policy: camp?.edit_revoke_policy ?? null,
       title: (s.title as string | null) ?? null,
       body,
     };

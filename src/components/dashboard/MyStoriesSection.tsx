@@ -8,7 +8,6 @@ export interface MyStory {
   created_at: string;
   attribution_level: 'named' | 'first_name_only' | 'anonymous';
   campaign_headline: string | null;
-  edit_revoke_policy: string | null;
   title: string | null;
   body: string;
 }
@@ -119,12 +118,6 @@ function StoryCard({ story }: { story: MyStory }) {
       )}
 
       {error && <p className="text-xs text-red-600 dark:text-red-400 mt-1">{error}</p>}
-
-      {story.edit_revoke_policy && (
-        <p className="text-[11px] text-gray-400 dark:text-gray-500 mt-1.5">
-          <span className="font-medium">This campaign&apos;s edit/revoke policy:</span> {story.edit_revoke_policy}
-        </p>
-      )}
     </li>
   );
 }

@@ -577,14 +577,13 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
         <div className="p-3 bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-700 rounded-xl">
           <p className="text-xs text-purple-800 dark:text-purple-300">
             {attribution === 'anonymous'
-              ? <>Your story will be shared with <strong>{campaign.headline}</strong> through their dashboard. Because you chose to stay anonymous, <strong>no name, contact, or location</strong> is saved with it. You can <strong>change or revoke</strong> it anytime from your dashboard{campaign.edit_revoke_policy ? '' : ''}.</>
-              : <>Your story and the details you chose to share will go to <strong>{campaign.headline}</strong> through their dashboard, so they can read it and follow up. You can <strong>change or revoke</strong> it anytime from your dashboard.</>}
+              ? <>Your story will be shared with <strong>{campaign.headline}</strong> through their dashboard. Because you chose to stay anonymous, <strong>no name, contact, or location</strong> is saved with it.</>
+              : <>Your story and the details you chose to share will go to <strong>{campaign.headline}</strong> through their dashboard, so they can read it and follow up.</>}
           </p>
-          {campaign.edit_revoke_policy && (
-            <p className="text-[11px] text-purple-700 dark:text-purple-300 mt-2">
-              <span className="font-medium">The campaign’s edit/revoke policy:</span> {campaign.edit_revoke_policy}
-            </p>
-          )}
+          <p className="text-[11px] text-purple-700 dark:text-purple-300 mt-2">
+            You can <strong>change or revoke</strong> your story anytime from your dashboard. Anything the campaign already
+            used or published before you change it may not be fully recallable.
+          </p>
         </div>
 
         {/* Consent gate */}
@@ -596,12 +595,6 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
             </span>
           </label>
         </div>
-
-        {campaign.edit_revoke_policy && (
-          <p className="text-xs text-gray-500 dark:text-gray-400">
-            <strong>Changed your mind later?</strong> {campaign.edit_revoke_policy}
-          </p>
-        )}
 
         {error && <p className="text-sm text-red-600 dark:text-red-400">{error}</p>}
 

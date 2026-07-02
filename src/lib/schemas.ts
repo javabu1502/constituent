@@ -102,9 +102,6 @@ export const createCampaignSchema = z.object({
     if (!data.usage_tags || data.usage_tags.length < 1) {
       ctx.addIssue({ code: 'custom', path: ['usage_tags'], message: 'Select at least one way you’d like to use these stories' });
     }
-    if (!data.edit_revoke_policy || data.edit_revoke_policy.trim().length < 10) {
-      ctx.addIssue({ code: 'custom', path: ['edit_revoke_policy'], message: 'An edit/revoke policy is required' });
-    }
   } else {
     if (!data.issue_area || data.issue_area.trim().length < 1) {
       ctx.addIssue({ code: 'custom', path: ['issue_area'], message: 'Issue area is required' });

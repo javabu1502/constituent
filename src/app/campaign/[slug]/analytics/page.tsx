@@ -3,6 +3,7 @@ import { redirect, notFound } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase';
 import { CampaignAnalytics } from '@/components/campaign/CampaignAnalytics';
+import { usageLabels } from '@/lib/story-usage';
 import Link from 'next/link';
 
 interface PageProps {
@@ -68,7 +69,7 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
       admin
         .from('stories')
         // Include revoked so the collector is flagged (content hidden below).
-        .select('id, created_at, attribution_level, storyteller_name, title, body, status, edited_at')
+        .select('id, created_at, attribution_level, storyteller_name, storyteller_email, city, state, title, body, status, edited_at, consent_usage_snapshot')
         .eq('campaign_id', campaign.id)
         .in('status', ['active', 'revoked'])
         .order('created_at', { ascending: false })
@@ -83,14 +84,19 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
       stories: (storyRows || []).map((s) => {
         const level = s.attribution_level as 'named' | 'first_name_only' | 'anonymous';
         const revoked = (s.status as string) === 'revoked';
-        const body = revoked ? '' : ((s.body as string | null) ?? ''); // never expose revoked content
+        const snapshot = (s.consent_usage_snapshot ?? {}) as { granted_uses?: string[] };
         return {
           id: s.id as string,
           created_at: s.created_at as string,
           attribution_level: level,
           display_name: level === 'anonymous' ? 'Anonymous' : ((s.storyteller_name as string | null) || 'Unnamed'),
+          // Revoked stories expose no content or identity.
+          city: revoked ? null : ((s.city as string | null) ?? null),
+          state: revoked ? null : ((s.state as string | null) ?? null),
+          email: revoked ? null : ((s.storyteller_email as string | null) ?? null),
           title: revoked ? null : ((s.title as string | null) ?? null),
-          preview: body.length > 180 ? body.slice(0, 180) + '…' : body,
+          body: revoked ? '' : ((s.body as string | null) ?? ''),
+          granted_uses: revoked ? [] : usageLabels(snapshot.granted_uses ?? []),
           revoked,
           edited_at: (s.edited_at as string | null) ?? null,
         };

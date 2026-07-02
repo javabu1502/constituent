@@ -16,8 +16,12 @@ interface StoryListItem {
   created_at: string;
   attribution_level: 'named' | 'first_name_only' | 'anonymous';
   display_name: string; // "Anonymous" for anonymous rows
+  city: string | null;
+  state: string | null;
+  email: string | null;
   title: string | null;
-  preview: string;
+  body: string;
+  granted_uses: string[];
   revoked: boolean;
   edited_at: string | null;
 }
@@ -99,8 +103,24 @@ function StorytellingAnalytics({ analytics }: { analytics: StoryAnalytics }) {
                   </p>
                 ) : (
                   <>
-                    {s.title && <p className="text-sm text-gray-800 dark:text-gray-200">{s.title}</p>}
-                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5 line-clamp-2">{s.preview}</p>
+                    {/* Contact + location, shown only when the storyteller shared them */}
+                    {(s.city || s.state || s.email) && (
+                      <div className="flex items-center gap-x-3 gap-y-0.5 flex-wrap text-xs text-gray-500 dark:text-gray-400 mb-1">
+                        {(s.city || s.state) && <span>📍 {[s.city, s.state].filter(Boolean).join(', ')}</span>}
+                        {s.email && <span>✉️ <a href={`mailto:${s.email}`} className="text-purple-600 dark:text-purple-400 hover:underline">{s.email}</a></span>}
+                      </div>
+                    )}
+                    {s.title && <p className="text-sm font-medium text-gray-800 dark:text-gray-200">{s.title}</p>}
+                    <p className="text-sm text-gray-600 dark:text-gray-300 mt-0.5 whitespace-pre-line">{s.body}</p>
+                    {s.granted_uses.length > 0 && (
+                      <div className="mt-2 flex flex-wrap gap-1">
+                        {s.granted_uses.map((u) => (
+                          <span key={u} className="px-2 py-0.5 text-[10px] rounded-full bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-300">
+                            {u}
+                          </span>
+                        ))}
+                      </div>
+                    )}
                   </>
                 )}
               </li>
