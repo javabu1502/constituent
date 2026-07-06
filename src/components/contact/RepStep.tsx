@@ -1,11 +1,11 @@
 'use client';
 
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import type { ContactState, ContactAction } from './ContactFlow';
 import type { Official } from '@/lib/types';
 import { Button } from '@/components/ui/Button';
 import { TOPICS } from '@/lib/constants';
-import { getJurisdiction, matchLabelForLevel, type GovLevel } from '@/lib/issue-jurisdiction';
+import { getJurisdiction, matchLabelForLevel, type GovLevel, type JurisdictionGuidance } from '@/lib/issue-jurisdiction';
 
 type MatchLabel = 'best' | 'also' | 'low';
 
@@ -164,10 +164,46 @@ export function RepStep({ state, dispatch, onBack }: RepStepProps) {
   const stateSenators = stateOfficials.filter((r) => r.chamber === 'upper');
   const stateReps = stateOfficials.filter((r) => r.chamber === 'lower');
 
+  // "Who should I contact?" — AI routing of a free-text concern. Its answer
+  // (decisive weights + a plain recommendation) overrides the blunter
+  // rule-based topic map while set.
+  const [whoText, setWhoText] = useState('');
+  const [whoLoading, setWhoLoading] = useState(false);
+  const [whoNote, setWhoNote] = useState<string | null>(null);
+  const [whoError, setWhoError] = useState<string | null>(null);
+  const [aiGuidance, setAiGuidance] = useState<JurisdictionGuidance | null>(null);
+
+  const handleAskWho = async () => {
+    const description = whoText.trim();
+    if (description.length < 5 || whoLoading) return;
+    setWhoLoading(true);
+    setWhoError(null);
+    try {
+      const res = await fetch('/api/contact/who', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ description }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Could not analyze that right now');
+      setAiGuidance({ weights: data.weights, why: data.why });
+      setWhoNote(data.note || null);
+      if (data.issue) {
+        dispatch({ type: 'SET_ISSUE', payload: { issue: data.issue, category: '' } });
+      }
+    } catch (err) {
+      setWhoError(err instanceof Error ? err.message : 'Could not analyze that right now');
+    } finally {
+      setWhoLoading(false);
+    }
+  };
+
   // Issue-aware guidance: which level of government handles this issue.
-  // The issue may arrive prefilled (news/campaign deep links) or be picked
-  // right here — either way the guidance appears BEFORE anyone is selected.
-  const guidance = useMemo(() => (issue ? getJurisdiction(issue) : null), [issue]);
+  // AI answer wins; otherwise the issue (prefilled via news/campaign deep
+  // links, or picked from the shortcut chips) goes through the rule map.
+  // Either way the guidance appears BEFORE anyone is selected.
+  const ruleGuidance = useMemo(() => (issue ? getJurisdiction(issue) : null), [issue]);
+  const guidance = aiGuidance ?? ruleGuidance;
   const labelFor = (level: GovLevel): MatchLabel | undefined =>
     guidance ? matchLabelForLevel(guidance, level) : undefined;
 
@@ -199,6 +235,10 @@ export function RepStep({ state, dispatch, onBack }: RepStepProps) {
   };
 
   const handlePickIssue = (label: string) => {
+    // Chips are rule-based shortcuts — picking one discards any AI answer.
+    setAiGuidance(null);
+    setWhoNote(null);
+    setWhoError(null);
     if (issue === label) {
       dispatch({ type: 'SET_ISSUE', payload: { issue: '', category: '' } });
     } else {
@@ -227,22 +267,52 @@ export function RepStep({ state, dispatch, onBack }: RepStepProps) {
         </p>
       </div>
 
-      {/* Issue quick-pick: tells us which officials actually handle it */}
+      {/* Who should I contact? — describe the issue, get routed to the right level */}
       <div className="mb-5 p-4 bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800 rounded-xl">
         <p className="text-sm font-medium text-purple-900 dark:text-purple-200 mb-1">
-          What&rsquo;s your message about?
+          Who should I contact?
         </p>
         <p className="text-xs text-purple-800 dark:text-purple-300 mb-3">
-          Different issues are decided at different levels of government. Pick a topic and we&rsquo;ll flag
-          the officials who can actually act on it. (Optional — you can also decide on the next step.)
+          Different issues are decided at different levels of government. Describe what&rsquo;s going on
+          and we&rsquo;ll point you to the officials who can actually act on it.
         </p>
-        <div className="flex flex-wrap gap-1.5">
+        <div className="flex gap-2">
+          <input
+            type="text"
+            value={whoText}
+            onChange={(e) => setWhoText(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') handleAskWho();
+            }}
+            maxLength={400}
+            placeholder="e.g. My street floods every winter and nothing gets fixed"
+            className="flex-1 px-3 py-2 text-sm border border-purple-200 dark:border-purple-700 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-600"
+          />
+          <button
+            onClick={handleAskWho}
+            disabled={whoLoading || whoText.trim().length < 5}
+            className="px-4 py-2 bg-purple-600 hover:bg-purple-700 disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-semibold rounded-lg transition-colors shrink-0"
+          >
+            {whoLoading ? 'Thinking…' : 'Ask'}
+          </button>
+        </div>
+        {whoError && (
+          <p className="mt-2 text-xs text-red-600 dark:text-red-400">{whoError}</p>
+        )}
+        {whoNote && (
+          <div className="mt-3 p-3 bg-white dark:bg-gray-800 border border-purple-200 dark:border-purple-700 rounded-lg">
+            <p className="text-sm text-gray-800 dark:text-gray-200">💡 {whoNote}</p>
+          </div>
+        )}
+
+        {/* Shortcut chips for common topics (rule-based, no AI call) */}
+        <div className="flex flex-wrap gap-1.5 mt-3">
           {issueTopics.map((t) => (
             <button
               key={t.id}
               onClick={() => handlePickIssue(t.label)}
               className={`px-2.5 py-1 text-xs font-medium rounded-full transition-colors ${
-                issue === t.label
+                !aiGuidance && issue === t.label
                   ? 'bg-purple-600 text-white'
                   : 'bg-white dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-purple-200 dark:border-purple-700 hover:bg-purple-100 dark:hover:bg-purple-900/40'
               }`}
@@ -250,7 +320,7 @@ export function RepStep({ state, dispatch, onBack }: RepStepProps) {
               {t.icon} {t.label}
             </button>
           ))}
-          {issue && !issueTopics.some((t) => t.label === issue) && (
+          {issue && (aiGuidance || !issueTopics.some((t) => t.label === issue)) && (
             <span className="px-2.5 py-1 text-xs font-medium rounded-full bg-purple-600 text-white">
               {issue}
             </span>
@@ -261,7 +331,7 @@ export function RepStep({ state, dispatch, onBack }: RepStepProps) {
             onClick={handleSelectRecommended}
             className="mt-3 inline-flex items-center gap-1.5 px-3 py-1.5 bg-purple-600 hover:bg-purple-700 text-white text-xs font-semibold rounded-lg transition-colors"
           >
-            ✓ Select the best matches for {issue}
+            ✓ Select the best matches{issue ? ` for ${issue}` : ''}
           </button>
         )}
       </div>
