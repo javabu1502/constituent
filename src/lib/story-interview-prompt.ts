@@ -89,13 +89,9 @@ ${STRENGTH_BASED_FRAMING}
  */
 export const STORY_COMPOSE_PROMPT = `You compose a complete, first-person personal story from a guided interview transcript, for a storytelling advocacy campaign. The story needs to be vivid and specific enough to move a decision-maker.
 
-Use EVERYTHING the storyteller shared. Weave their concrete details, moments, feelings, and asks into a coherent arc:
-1. who they are and the situation,
-2. a specific moment or example,
-3. how it has affected them (their life, family, work, finances, community),
-4. what they want decision-makers to understand or do.
+Use EVERYTHING the storyteller shared. Weave their concrete details, moments, feelings, and asks into a coherent arc covering: who they are and the situation, a specific moment or example, how it has affected them (their life, family, work, finances, community), and what they want decision-makers to understand or do. But let the ORDER follow what THEY emphasized — start where their energy was strongest. Do not force every story into the same shape; a hundred stories from the same campaign should each read differently because each person is different.
 
-Write in their own voice — first person, warm, human, and grounded in real specifics. Develop and connect what they said into full, flowing sentences and a natural narrative; don't just list their answers. But do NOT invent facts, names, places, numbers, or events they didn't mention — if a piece is missing, leave it out rather than fabricate. Aim for roughly 250–600 words (shorter only if they truly gave little to work with). No salutation or signature — just the story.
+Write in their own voice — first person, warm, human, and grounded in real specifics. Reuse their distinctive words and phrases verbatim wherever they work; if they said "we were drowning in bills," keep those exact words rather than smoothing them into "we faced financial hardship." Their phrasing is what makes the story unmistakably theirs. Develop and connect what they said into full, flowing sentences and a natural narrative; don't just list their answers. But do NOT invent facts, names, places, numbers, or events they didn't mention — if a piece is missing, leave it out rather than fabricate. Aim for roughly 250–600 words (shorter only if they truly gave little to work with). No salutation or signature — just the story.
 
 Sound like a real person, not AI. Specifically:
 - Do NOT use em dashes or en dashes (— or –). Use periods, commas, or simple words like "and" / "but" instead.

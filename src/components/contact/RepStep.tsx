@@ -1,8 +1,35 @@
 'use client';
 
+import { useMemo } from 'react';
 import type { ContactState, ContactAction } from './ContactFlow';
 import type { Official } from '@/lib/types';
 import { Button } from '@/components/ui/Button';
+import { TOPICS } from '@/lib/constants';
+import { getJurisdiction, matchLabelForLevel, type GovLevel } from '@/lib/issue-jurisdiction';
+
+type MatchLabel = 'best' | 'also' | 'low';
+
+function MatchBadge({ label }: { label: MatchLabel }) {
+  if (label === 'best') {
+    return (
+      <span className="px-2 py-0.5 text-[10px] font-semibold rounded-full bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-300 shrink-0">
+        ✓ Best match
+      </span>
+    );
+  }
+  if (label === 'also') {
+    return (
+      <span className="px-2 py-0.5 text-[10px] font-medium rounded-full bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300 shrink-0">
+        Also relevant
+      </span>
+    );
+  }
+  return (
+    <span className="px-2 py-0.5 text-[10px] font-medium rounded-full bg-gray-100 text-gray-500 dark:bg-gray-700 dark:text-gray-400 shrink-0">
+      Less direct role
+    </span>
+  );
+}
 
 interface RepStepProps {
   state: ContactState;
@@ -34,10 +61,12 @@ function RepCard({
   rep,
   isSelected,
   onToggle,
+  matchLabel,
 }: {
   rep: Official;
   isSelected: boolean;
   onToggle: () => void;
+  matchLabel?: MatchLabel;
 }) {
   const partyColors = getPartyColors(rep.party);
 
@@ -100,7 +129,7 @@ function RepCard({
 
         {/* Info */}
         <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-2 mb-1">
+          <div className="flex items-center gap-2 mb-1 flex-wrap">
             <h4 className="font-semibold text-gray-900 dark:text-white truncate">{rep.name}</h4>
             <span
               aria-label={rep.party}
@@ -108,6 +137,7 @@ function RepCard({
             >
               {rep.party.charAt(0)}
             </span>
+            {matchLabel && <MatchBadge label={matchLabel} />}
           </div>
           <p className="text-sm text-gray-600 dark:text-gray-400 truncate">
             {rep.title}
@@ -119,7 +149,7 @@ function RepCard({
 }
 
 export function RepStep({ state, dispatch, onBack }: RepStepProps) {
-  const { officials, selectedReps } = state;
+  const { officials, selectedReps, issue } = state;
 
   // Group by level first, then by chamber
   const federalOfficials = officials.filter((r) => r.level === 'federal');
@@ -133,6 +163,13 @@ export function RepStep({ state, dispatch, onBack }: RepStepProps) {
   // State breakdown
   const stateSenators = stateOfficials.filter((r) => r.chamber === 'upper');
   const stateReps = stateOfficials.filter((r) => r.chamber === 'lower');
+
+  // Issue-aware guidance: which level of government handles this issue.
+  // The issue may arrive prefilled (news/campaign deep links) or be picked
+  // right here — either way the guidance appears BEFORE anyone is selected.
+  const guidance = useMemo(() => (issue ? getJurisdiction(issue) : null), [issue]);
+  const labelFor = (level: GovLevel): MatchLabel | undefined =>
+    guidance ? matchLabelForLevel(guidance, level) : undefined;
 
   const isSelected = (rep: Official) => selectedReps.some(r => r.id === rep.id);
   const allSelected = officials.length > 0 && selectedReps.length === officials.length;
@@ -149,6 +186,26 @@ export function RepStep({ state, dispatch, onBack }: RepStepProps) {
     }
   };
 
+  // Select every official at the issue's primary level(s) — or, when no level
+  // scores 2, everyone at a level that scores 1.
+  const handleSelectRecommended = () => {
+    if (!guidance) return;
+    const hasBest = (['federal', 'state', 'local'] as GovLevel[]).some((l) => guidance.weights[l] === 2);
+    const minWeight = hasBest ? 2 : 1;
+    const recommended = officials.filter((r) => guidance.weights[r.level as GovLevel] >= minWeight);
+    if (recommended.length > 0) {
+      dispatch({ type: 'SELECT_REPS', payload: recommended });
+    }
+  };
+
+  const handlePickIssue = (label: string) => {
+    if (issue === label) {
+      dispatch({ type: 'SET_ISSUE', payload: { issue: '', category: '' } });
+    } else {
+      dispatch({ type: 'SET_ISSUE', payload: { issue: label, category: '' } });
+    }
+  };
+
   const handleContinue = () => {
     if (selectedReps.length === 0) {
       dispatch({ type: 'SET_ERROR', payload: 'Please select at least one official' });
@@ -156,6 +213,8 @@ export function RepStep({ state, dispatch, onBack }: RepStepProps) {
     }
     dispatch({ type: 'GO_TO_STEP', payload: 'topic' });
   };
+
+  const issueTopics = TOPICS.filter((t) => t.id !== 'other');
 
   return (
     <div className="p-6 sm:p-8">
@@ -166,6 +225,45 @@ export function RepStep({ state, dispatch, onBack }: RepStepProps) {
         <p className="text-gray-500 dark:text-gray-400 mt-2 text-sm">
           Select the people you want to write to. Each will get their own message.
         </p>
+      </div>
+
+      {/* Issue quick-pick: tells us which officials actually handle it */}
+      <div className="mb-5 p-4 bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800 rounded-xl">
+        <p className="text-sm font-medium text-purple-900 dark:text-purple-200 mb-1">
+          What&rsquo;s your message about?
+        </p>
+        <p className="text-xs text-purple-800 dark:text-purple-300 mb-3">
+          Different issues are decided at different levels of government. Pick a topic and we&rsquo;ll flag
+          the officials who can actually act on it. (Optional — you can also decide on the next step.)
+        </p>
+        <div className="flex flex-wrap gap-1.5">
+          {issueTopics.map((t) => (
+            <button
+              key={t.id}
+              onClick={() => handlePickIssue(t.label)}
+              className={`px-2.5 py-1 text-xs font-medium rounded-full transition-colors ${
+                issue === t.label
+                  ? 'bg-purple-600 text-white'
+                  : 'bg-white dark:bg-gray-700 text-gray-600 dark:text-gray-300 border border-purple-200 dark:border-purple-700 hover:bg-purple-100 dark:hover:bg-purple-900/40'
+              }`}
+            >
+              {t.icon} {t.label}
+            </button>
+          ))}
+          {issue && !issueTopics.some((t) => t.label === issue) && (
+            <span className="px-2.5 py-1 text-xs font-medium rounded-full bg-purple-600 text-white">
+              {issue}
+            </span>
+          )}
+        </div>
+        {guidance && (
+          <button
+            onClick={handleSelectRecommended}
+            className="mt-3 text-xs font-semibold text-purple-700 dark:text-purple-300 hover:underline"
+          >
+            ✓ Select the best matches for {issue} →
+          </button>
+        )}
       </div>
 
       {/* Not sure hint + Select All */}
@@ -196,7 +294,8 @@ export function RepStep({ state, dispatch, onBack }: RepStepProps) {
               </h4>
             </div>
             <p className="text-xs text-gray-500 dark:text-gray-400 ml-10 mb-3">
-              These are your members of Congress. They make decisions on national issues like healthcare, immigration, taxes, and the federal budget.
+              {guidance?.why.federal ??
+                'These are your members of Congress. They make decisions on national issues like healthcare, immigration, taxes, and the federal budget.'}
             </p>
 
             <div className="space-y-4 pl-2 border-l-2 border-blue-200 dark:border-blue-700">
@@ -213,6 +312,7 @@ export function RepStep({ state, dispatch, onBack }: RepStepProps) {
                         rep={rep}
                         isSelected={isSelected(rep)}
                         onToggle={() => handleToggle(rep)}
+                        matchLabel={labelFor('federal')}
                       />
                     ))}
                   </div>
@@ -232,6 +332,7 @@ export function RepStep({ state, dispatch, onBack }: RepStepProps) {
                         rep={rep}
                         isSelected={isSelected(rep)}
                         onToggle={() => handleToggle(rep)}
+                        matchLabel={labelFor('federal')}
                       />
                     ))}
                   </div>
@@ -255,7 +356,8 @@ export function RepStep({ state, dispatch, onBack }: RepStepProps) {
               </h4>
             </div>
             <p className="text-xs text-gray-500 dark:text-gray-400 ml-10 mb-3">
-              Your state-level lawmakers. They handle things like school funding, roads, state taxes, and policing.
+              {guidance?.why.state ??
+                'Your state-level lawmakers. They handle things like school funding, roads, state taxes, and policing.'}
             </p>
 
             <div className="space-y-4 pl-2 border-l-2 border-purple-200 dark:border-purple-700">
@@ -272,6 +374,7 @@ export function RepStep({ state, dispatch, onBack }: RepStepProps) {
                         rep={rep}
                         isSelected={isSelected(rep)}
                         onToggle={() => handleToggle(rep)}
+                        matchLabel={labelFor('state')}
                       />
                     ))}
                   </div>
@@ -291,6 +394,7 @@ export function RepStep({ state, dispatch, onBack }: RepStepProps) {
                         rep={rep}
                         isSelected={isSelected(rep)}
                         onToggle={() => handleToggle(rep)}
+                        matchLabel={labelFor('state')}
                       />
                     ))}
                   </div>
@@ -315,7 +419,8 @@ export function RepStep({ state, dispatch, onBack }: RepStepProps) {
               </h4>
             </div>
             <p className="text-xs text-gray-500 dark:text-gray-400 ml-10 mb-3">
-              Your city and county leaders. They handle local issues like parks, trash pickup, zoning, public safety, and community services.
+              {guidance?.why.local ??
+                'Your city and county leaders. They handle local issues like parks, trash pickup, zoning, public safety, and community services.'}
             </p>
 
             <div className="space-y-2 pl-2 border-l-2 border-green-200 dark:border-green-700">
@@ -327,6 +432,7 @@ export function RepStep({ state, dispatch, onBack }: RepStepProps) {
                       rep={rep}
                       isSelected={isSelected(rep)}
                       onToggle={() => handleToggle(rep)}
+                      matchLabel={labelFor('local')}
                     />
                   ))}
                 </div>
