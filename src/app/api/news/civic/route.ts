@@ -1,5 +1,7 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { createAdminClient } from '@/lib/supabase';
+import { detectBillReferences } from '@/lib/bills';
+import { US_STATES } from '@/lib/constants';
 
 interface ArticleTopic {
   issue: string;
@@ -15,6 +17,14 @@ interface NewsArticle {
   pubDate: string;
   topic: ArticleTopic | null;
   lean: SourceLean | null;
+  /** Lean mix of all near-duplicate versions of this story (before dedup). */
+  coverage?: { left: number; center: number; right: number; total: number };
+  /** Set when a multi-source story has zero coverage from one side. */
+  blindspot?: 'left' | 'right' | null;
+  /** First federal bill referenced in the headline, linked to congress.gov. */
+  bill?: { label: string; url: string } | null;
+  /** Active campaign on this article's issue, if one exists. */
+  campaign?: { slug: string; headline: string } | null;
 }
 
 // Media bias ratings based on AllSides / Ad Fontes Media
@@ -227,19 +237,36 @@ function titlesAreSimilar(wordsA: Set<string>, wordsB: Set<string>): boolean {
   return overlap / smaller.size >= 0.5;
 }
 
+function leanBucket(lean: SourceLean | null): 'left' | 'center' | 'right' | null {
+  if (!lean) return null;
+  if (lean === 'left' || lean === 'left-center') return 'left';
+  if (lean === 'right' || lean === 'right-center') return 'right';
+  return 'center';
+}
+
 /**
  * Near-duplicate removal: for articles with 50%+ keyword overlap,
  * keep the one from the more authoritative source, or the newer one.
+ *
+ * While collapsing duplicates we record the lean mix of every version of the
+ * story. A story that several sources covered but with ZERO coverage from one
+ * side of the spectrum gets a `blindspot` marker — readers of that side likely
+ * aren't seeing it.
  */
 function deduplicateNearDuplicates(articles: NewsArticle[]): NewsArticle[] {
-  const kept: { article: NewsArticle; words: Set<string> }[] = [];
+  const kept: { article: NewsArticle; words: Set<string>; coverage: { left: number; center: number; right: number; total: number } }[] = [];
 
   for (const article of articles) {
     const words = getSignificantWords(article.title);
+    const bucket = leanBucket(article.lean);
     let isDuplicate = false;
 
     for (let i = 0; i < kept.length; i++) {
       if (titlesAreSimilar(words, kept[i].words)) {
+        // Accumulate this version's lean into the story's coverage mix.
+        if (bucket) kept[i].coverage[bucket] += 1;
+        kept[i].coverage.total += 1;
+
         // Decide which to keep: prefer more authoritative source, then newer
         const existing = kept[i].article;
         const existingRank = getSourceRank(existing.source);
@@ -248,7 +275,7 @@ function deduplicateNearDuplicates(articles: NewsArticle[]): NewsArticle[] {
         if (newRank < existingRank ||
             (newRank === existingRank &&
              new Date(article.pubDate || 0).getTime() > new Date(existing.pubDate || 0).getTime())) {
-          kept[i] = { article, words };
+          kept[i] = { article, words, coverage: kept[i].coverage };
         }
         isDuplicate = true;
         break;
@@ -256,11 +283,23 @@ function deduplicateNearDuplicates(articles: NewsArticle[]): NewsArticle[] {
     }
 
     if (!isDuplicate) {
-      kept.push({ article, words });
+      const coverage = { left: 0, center: 0, right: 0, total: 1 };
+      if (bucket) coverage[bucket] = 1;
+      kept.push({ article, words, coverage });
     }
   }
 
-  return kept.map((k) => k.article);
+  return kept.map((k) => {
+    const c = k.coverage;
+    // Blindspot: a story at least 3 sources covered, with partisan coverage
+    // on one side only. (Center-only stories aren't blindspots.)
+    let blindspot: 'left' | 'right' | null = null;
+    if (c.total >= 3 && c.left + c.right > 0) {
+      if (c.right === 0 && c.left > 0) blindspot = 'right';
+      else if (c.left === 0 && c.right > 0) blindspot = 'left';
+    }
+    return { ...k.article, coverage: c, blindspot };
+  });
 }
 
 /** Max articles per topic category to ensure diversity */
@@ -319,19 +358,82 @@ async function fetchWithTimeout(url: string, timeoutMs = 5000): Promise<string |
   }
 }
 
+// Congress.gov URL segments by bill type code
+const CONGRESS_URL_TYPES: Record<string, string> = {
+  hr: 'house-bill',
+  s: 'senate-bill',
+  hres: 'house-resolution',
+  sres: 'senate-resolution',
+  hjres: 'house-joint-resolution',
+  sjres: 'senate-joint-resolution',
+  hconres: 'house-concurrent-resolution',
+  sconres: 'senate-concurrent-resolution',
+};
+
+/** Attach a congress.gov link for the first federal bill in the headline. */
+function detectBill(title: string): NewsArticle['bill'] {
+  try {
+    const refs = detectBillReferences(title);
+    const fed = refs.find((r) => r.level === 'federal');
+    if (!fed) return null;
+    const seg = CONGRESS_URL_TYPES[fed.type];
+    if (!seg) return null;
+    return {
+      label: fed.raw,
+      url: `https://www.congress.gov/bill/119th-congress/${seg}/${fed.number}`,
+    };
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Map each issue to the most active approved campaign on that issue, so news
+ * about a topic can recruit readers into an existing campaign.
+ */
+async function fetchCampaignsByIssue(supabase: ReturnType<typeof createAdminClient>): Promise<Map<string, { slug: string; headline: string }>> {
+  const byIssue = new Map<string, { slug: string; headline: string; weight: number }>();
+  try {
+    const { data } = await supabase
+      .from('campaigns')
+      .select('slug, headline, issue_area, action_count, story_count')
+      .eq('approval_status', 'approved')
+      .eq('status', 'active')
+      .limit(200);
+    for (const c of data || []) {
+      const issue = (c.issue_area || '').trim().toLowerCase();
+      if (!issue || !c.slug) continue;
+      const weight = (Number(c.action_count) || 0) + (Number(c.story_count) || 0);
+      const existing = byIssue.get(issue);
+      if (!existing || weight > existing.weight) {
+        byIssue.set(issue, { slug: c.slug, headline: c.headline, weight });
+      }
+    }
+  } catch {
+    // Campaign matching is best-effort.
+  }
+  return new Map([...byIssue.entries()].map(([k, v]) => [k, { slug: v.slug, headline: v.headline }]));
+}
+
 /**
  * GET /api/news/civic
- * Multi-source civic news with topic classification, 2-hour Supabase cache
+ * Multi-source civic news with topic classification, 2-hour Supabase cache.
+ * Pass ?state=NV for a state-focused feed (per-state cache key).
  */
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
     const supabase = createAdminClient();
+
+    // Optional state mode
+    const stateParam = (request.nextUrl.searchParams.get('state') || '').trim().toUpperCase();
+    const stateEntry = US_STATES.find((s) => s.code === stateParam);
+    const cacheKey = stateEntry ? `${CACHE_KEY}-${stateEntry.code}` : CACHE_KEY;
 
     // Check cache
     const { data: cached } = await supabase
       .from('feed_cache')
       .select('data, created_at')
-      .eq('cache_key', CACHE_KEY)
+      .eq('cache_key', cacheKey)
       .single();
 
     if (cached) {
@@ -344,25 +446,43 @@ export async function GET() {
     // Build all fetch promises
     const fetches: Promise<NewsArticle[]>[] = [];
 
-    // Google News RSS queries
-    for (const query of GOOGLE_NEWS_QUERIES) {
-      const encoded = encodeURIComponent(`${query} when:3d`);
-      fetches.push(
-        fetchWithTimeout(`https://news.google.com/rss/search?q=${encoded}&hl=en-US&gl=US&ceid=US:en`)
-          .then((xml) => (xml ? parseRssItems(xml) : []))
-      );
+    if (stateEntry) {
+      // State mode: state-government-focused Google News queries only.
+      const stateQueries = [
+        `"${stateEntry.name}" (legislature OR governor OR "state government" OR lawmakers)`,
+        `"${stateEntry.name}" (ballot OR election OR "state senate" OR "state assembly")`,
+      ];
+      for (const query of stateQueries) {
+        const encoded = encodeURIComponent(`${query} when:7d`);
+        fetches.push(
+          fetchWithTimeout(`https://news.google.com/rss/search?q=${encoded}&hl=en-US&gl=US&ceid=US:en`)
+            .then((xml) => (xml ? parseRssItems(xml) : []))
+        );
+      }
+    } else {
+      // Google News RSS queries
+      for (const query of GOOGLE_NEWS_QUERIES) {
+        const encoded = encodeURIComponent(`${query} when:3d`);
+        fetches.push(
+          fetchWithTimeout(`https://news.google.com/rss/search?q=${encoded}&hl=en-US&gl=US&ceid=US:en`)
+            .then((xml) => (xml ? parseRssItems(xml) : []))
+        );
+      }
+
+      // Direct RSS feeds
+      for (const feed of DIRECT_FEEDS) {
+        fetches.push(
+          fetchWithTimeout(feed.url)
+            .then((xml) => (xml ? parseRssItems(xml, feed.sourceName) : []))
+        );
+      }
     }
 
-    // Direct RSS feeds
-    for (const feed of DIRECT_FEEDS) {
-      fetches.push(
-        fetchWithTimeout(feed.url)
-          .then((xml) => (xml ? parseRssItems(xml, feed.sourceName) : []))
-      );
-    }
-
-    // Fetch all in parallel
-    const results = await Promise.allSettled(fetches);
+    // Fetch all feeds + the campaign-issue map in parallel
+    const [results, campaignsByIssue] = await Promise.all([
+      Promise.allSettled(fetches),
+      fetchCampaignsByIssue(supabase),
+    ]);
 
     // Deduplicate by normalized title
     const seen = new Set<string>();
@@ -378,7 +498,7 @@ export async function GET() {
       }
     }
 
-    // Near-duplicate removal (keyword overlap)
+    // Near-duplicate removal (keyword overlap) + blindspot detection
     const dedupedArticles = deduplicateNearDuplicates(allArticles);
 
     // Sort by date descending
@@ -390,13 +510,19 @@ export async function GET() {
 
     // Topic-aware diversity cap, then take top 40
     const diverseArticles = applyTopicCaps(dedupedArticles);
-    const articles = diverseArticles.slice(0, 40);
+
+    // Enrich: bill links + matching active campaigns
+    const articles = diverseArticles.slice(0, 40).map((a) => ({
+      ...a,
+      bill: detectBill(a.title),
+      campaign: a.topic ? campaignsByIssue.get(a.topic.issue.toLowerCase()) ?? null : null,
+    }));
 
     // Cache result
     await supabase
       .from('feed_cache')
       .upsert(
-        { cache_key: CACHE_KEY, data: { articles }, created_at: new Date().toISOString() },
+        { cache_key: cacheKey, data: { articles }, created_at: new Date().toISOString() },
         { onConflict: 'cache_key' }
       );
 

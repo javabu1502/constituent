@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { BreadcrumbJsonLd } from '@/lib/seo';
 import { CivicNews } from '@/components/news/CivicNews';
+import { NewsBrief } from '@/components/news/NewsBrief';
 
 export const metadata: Metadata = {
   title: 'Civic News | My Democracy',
@@ -45,6 +46,8 @@ export default function NewsPage() {
           The latest political and civic news from multiple sources, with actionable links to write to your officials.
         </p>
       </div>
+
+      <NewsBrief />
 
       <CivicNews showLegend showFilters />
     </div>
