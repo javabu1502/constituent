@@ -154,7 +154,7 @@ export const submitStorySchema = z.object({
       z.object({
         name: z.string().min(1).max(200),
         title: z.string().max(120).nullish(),
-        level: z.enum(['federal', 'state']),
+        level: z.enum(['federal', 'state', 'local']),
         chamber: z.string().max(20).nullish(),
         party: z.string().max(60).nullish(),
         state: z.string().max(50).nullish(),

@@ -7,7 +7,17 @@ import { US_STATES } from '@/lib/constants';
 interface OfficialContacted {
   name: string;
   party: string | null;
+  level: string | null;
+  chamber: string | null;
   count: number;
+}
+
+interface RecentAction {
+  name: string;
+  city: string | null;
+  state: string | null;
+  messages_sent: number;
+  created_at: string;
 }
 
 interface AdvocacyAnalytics {
@@ -16,9 +26,16 @@ interface AdvocacyAnalytics {
   total_messages: number;
   states_represented: string[];
   daily_counts: Record<string, number>;
+  this_week: number;
+  prev_week: number;
   delivery_breakdown: Record<string, number>;
+  status_breakdown: Record<string, number>;
+  party_split: Record<string, number>;
   top_states: Array<{ state: string; count: number }>;
+  top_cities: Array<{ city: string; state: string | null; count: number }>;
   officials_contacted: OfficialContacted[];
+  recent_actions: RecentAction[];
+  cities_count: number;
   avg_messages_per_action: number;
 }
 
@@ -44,6 +61,7 @@ interface StoryOfficial {
   title: string | null;
   party: string | null;
   state: string | null;
+  level: string; // 'federal' | 'state' | 'local'
   story_count: number;
   inferred: boolean; // true = senators inferred from state, not matched from address
 }
@@ -289,46 +307,58 @@ function StorytellingAnalytics({ analytics, campaignName }: { analytics: StoryAn
         <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
           <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-1">By Elected Official</h3>
           <p className="text-xs text-gray-500 dark:text-gray-400 mb-4">
-            How many storytellers each official represents. Click one to pull up their constituents&rsquo; stories —
-            then bring exactly those stories to that office. &ldquo;State match&rdquo; officials are the state&rsquo;s US senators
-            inferred from the storyteller&rsquo;s state; others were matched from the storyteller&rsquo;s own address.
+            Every official — federal, state, and local — matched from your storytellers&rsquo; addresses, with how many
+            storytellers each represents. Click one to pull up their constituents&rsquo; stories, then bring exactly those
+            stories to that office. &ldquo;State match&rdquo; officials are US senators inferred from the storyteller&rsquo;s state
+            (used for stories shared before address matching existed).
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-            {analytics.officials.slice(0, 20).map((o) => {
-              const selected = officialFilter === o.name;
-              return (
-                <button
-                  key={`${o.name}|${o.state ?? ''}`}
-                  onClick={() => setOfficialFilter(selected ? '' : o.name)}
-                  className={`flex items-center justify-between gap-2 px-3 py-2 rounded-lg border text-left transition-colors ${
-                    selected
-                      ? 'border-purple-600 bg-purple-50 dark:bg-purple-900/30 dark:border-purple-400'
-                      : 'border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50'
-                  }`}
-                >
-                  <span className="min-w-0">
-                    <span className="block text-sm font-medium text-gray-900 dark:text-white truncate">{o.name}</span>
-                    <span className="block text-xs text-gray-500 dark:text-gray-400 truncate">
-                      {[o.title, stateCode(o.state)].filter(Boolean).join(' · ')}
-                    </span>
-                  </span>
-                  <span className="flex items-center gap-1.5 shrink-0">
-                    {o.party && (
-                      <span className={`px-1.5 py-0.5 text-[10px] font-medium rounded-full ${partyBadgeClass(o.party)}`}>
-                        {o.party.charAt(0).toUpperCase()}
-                      </span>
-                    )}
-                    {o.inferred && (
-                      <span className="px-1.5 py-0.5 text-[10px] rounded-full bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300">
-                        state match
-                      </span>
-                    )}
-                    <span className="text-sm font-bold text-purple-600 dark:text-purple-400">{o.story_count}</span>
-                  </span>
-                </button>
-              );
-            })}
-          </div>
+          {(['federal', 'state', 'local'] as const).map((lvl) => {
+            const group = analytics.officials.filter((o) => o.level === lvl).slice(0, 20);
+            if (group.length === 0) return null;
+            return (
+              <div key={lvl} className="mb-4 last:mb-0">
+                <h4 className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">
+                  {lvl === 'federal' ? 'Federal' : lvl === 'state' ? 'State' : 'Local'}
+                </h4>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  {group.map((o) => {
+                    const selected = officialFilter === o.name;
+                    return (
+                      <button
+                        key={`${o.name}|${o.state ?? ''}`}
+                        onClick={() => setOfficialFilter(selected ? '' : o.name)}
+                        className={`flex items-center justify-between gap-2 px-3 py-2 rounded-lg border text-left transition-colors ${
+                          selected
+                            ? 'border-purple-600 bg-purple-50 dark:bg-purple-900/30 dark:border-purple-400'
+                            : 'border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50'
+                        }`}
+                      >
+                        <span className="min-w-0">
+                          <span className="block text-sm font-medium text-gray-900 dark:text-white truncate">{o.name}</span>
+                          <span className="block text-xs text-gray-500 dark:text-gray-400 truncate">
+                            {[o.title, stateCode(o.state)].filter(Boolean).join(' · ')}
+                          </span>
+                        </span>
+                        <span className="flex items-center gap-1.5 shrink-0">
+                          {o.party && (
+                            <span className={`px-1.5 py-0.5 text-[10px] font-medium rounded-full ${partyBadgeClass(o.party)}`}>
+                              {o.party.charAt(0).toUpperCase()}
+                            </span>
+                          )}
+                          {o.inferred && (
+                            <span className="px-1.5 py-0.5 text-[10px] rounded-full bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300">
+                              state match
+                            </span>
+                          )}
+                          <span className="text-sm font-bold text-purple-600 dark:text-purple-400">{o.story_count}</span>
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            );
+          })}
         </div>
       )}
 
@@ -516,13 +546,26 @@ export function CampaignAnalytics({ analytics, campaignName }: CampaignAnalytics
   }
 
   const maxTopState = analytics.top_states.length > 0 ? analytics.top_states[0].count : 1;
+  const maxTopCity = analytics.top_cities.length > 0 ? analytics.top_cities[0].count : 1;
 
   const deliveryEntries = Object.entries(analytics.delivery_breakdown).sort(
     (a, b) => b[1] - a[1]
   );
   const maxDelivery = deliveryEntries.length > 0 ? deliveryEntries[0][1] : 1;
 
+  const statusEntries = Object.entries(analytics.status_breakdown).sort((a, b) => b[1] - a[1]);
+  const maxStatus = statusEntries.length > 0 ? statusEntries[0][1] : 1;
+
   const maxOfficial = analytics.officials_contacted.length > 0 ? analytics.officials_contacted[0].count : 1;
+
+  // Weekly momentum: this week's actions vs the 7 days before.
+  const weekDelta =
+    analytics.prev_week > 0
+      ? Math.round(((analytics.this_week - analytics.prev_week) / analytics.prev_week) * 100)
+      : null;
+
+  const partyEntries = Object.entries(analytics.party_split).sort((a, b) => b[1] - a[1]);
+  const partyTotal = partyEntries.reduce((sum, [, n]) => sum + n, 0);
 
   function formatDeliveryMethod(method: string): string {
     switch (method) {
@@ -539,35 +582,77 @@ export function CampaignAnalytics({ analytics, campaignName }: CampaignAnalytics
     }
   }
 
+  function formatStatus(status: string): string {
+    switch (status) {
+      case 'sent':
+        return 'Delivered to Congress';
+      case 'email_opened':
+        return 'Email Sent';
+      case 'form_opened':
+        return 'Form Opened';
+      case 'website_opened':
+        return 'Website Visited';
+      case 'called':
+        return 'Called';
+      case 'pending_review':
+        return 'Under Review';
+      default:
+        return status.charAt(0).toUpperCase() + status.slice(1).replace(/_/g, ' ');
+    }
+  }
+
+  function chamberLabel(level: string | null, chamber: string | null): string {
+    if (level === 'federal') return chamber === 'senate' ? 'U.S. Senate' : chamber === 'house' ? 'U.S. House' : 'Federal';
+    if (level === 'state') return chamber === 'upper' ? 'State Senate' : chamber === 'lower' ? 'State House' : 'State';
+    return level ? level.charAt(0).toUpperCase() + level.slice(1) : '';
+  }
+
   return (
     <div className="space-y-8">
-      {/* Stats cards row */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
-          <p className="text-sm text-gray-500 dark:text-gray-400">Total Actions</p>
-          <p className="text-3xl font-bold text-gray-900 dark:text-white mt-1">
+      {/* Stats cards row — use, impact, reach */}
+      <div className="grid grid-cols-2 lg:grid-cols-6 gap-3">
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
+          <p className="text-xs text-gray-500 dark:text-gray-400">Total Actions</p>
+          <p className="text-2xl font-bold text-gray-900 dark:text-white mt-1">
             {analytics.total_actions.toLocaleString()}
           </p>
         </div>
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
-          <p className="text-sm text-gray-500 dark:text-gray-400">Total Messages</p>
-          <p className="text-3xl font-bold text-gray-900 dark:text-white mt-1">
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
+          <p className="text-xs text-gray-500 dark:text-gray-400">Total Messages</p>
+          <p className="text-2xl font-bold text-gray-900 dark:text-white mt-1">
             {analytics.total_messages.toLocaleString()}
           </p>
+          <p className="text-[11px] text-gray-400 dark:text-gray-500 mt-0.5">
+            {analytics.avg_messages_per_action}/participant
+          </p>
         </div>
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
-          <p className="text-sm text-gray-500 dark:text-gray-400">States Reached</p>
-          <p className="text-3xl font-bold text-gray-900 dark:text-white mt-1">
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
+          <p className="text-xs text-gray-500 dark:text-gray-400">This Week</p>
+          <p className="text-2xl font-bold text-gray-900 dark:text-white mt-1">
+            {analytics.this_week.toLocaleString()}
+          </p>
+          {weekDelta !== null && (
+            <p className={`text-[11px] mt-0.5 font-medium ${weekDelta >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-500 dark:text-red-400'}`}>
+              {weekDelta >= 0 ? '+' : ''}{weekDelta}% vs last week
+            </p>
+          )}
+        </div>
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
+          <p className="text-xs text-gray-500 dark:text-gray-400">Officials Contacted</p>
+          <p className="text-2xl font-bold text-gray-900 dark:text-white mt-1">
+            {analytics.officials_contacted.length}
+          </p>
+        </div>
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
+          <p className="text-xs text-gray-500 dark:text-gray-400">States Reached</p>
+          <p className="text-2xl font-bold text-gray-900 dark:text-white mt-1">
             {analytics.states_represented.length}
           </p>
         </div>
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
-          <p className="text-sm text-gray-500 dark:text-gray-400">Officials Contacted</p>
-          <p className="text-3xl font-bold text-gray-900 dark:text-white mt-1">
-            {analytics.officials_contacted.length}
-          </p>
-          <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
-            {analytics.avg_messages_per_action} msgs/participant
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
+          <p className="text-xs text-gray-500 dark:text-gray-400">Cities</p>
+          <p className="text-2xl font-bold text-gray-900 dark:text-white mt-1">
+            {analytics.cities_count}
           </p>
         </div>
       </div>
@@ -584,23 +669,52 @@ export function CampaignAnalytics({ analytics, campaignName }: CampaignAnalytics
       {analytics.officials_contacted.length > 0 && (
         <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
           <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-1">Officials Contacted</h3>
-          <p className="text-xs text-gray-500 dark:text-gray-400 mb-4">
+          <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">
             Which lawmakers your campaign&rsquo;s messages went to — use this to see where pressure is landing and
             which offices to target next.
           </p>
+          {partyTotal > 0 && partyEntries.length > 1 && (
+            <div className="mb-4">
+              <div className="flex w-full h-2.5 rounded-full overflow-hidden">
+                {partyEntries.map(([party, n]) => (
+                  <div
+                    key={party}
+                    className={
+                      party.toLowerCase().startsWith('d')
+                        ? 'bg-blue-500'
+                        : party.toLowerCase().startsWith('r')
+                          ? 'bg-red-500'
+                          : 'bg-gray-400'
+                    }
+                    style={{ width: `${(n / partyTotal) * 100}%` }}
+                  />
+                ))}
+              </div>
+              <p className="text-[11px] text-gray-500 dark:text-gray-400 mt-1">
+                {partyEntries
+                  .map(([party, n]) => `${Math.round((n / partyTotal) * 100)}% ${party}`)
+                  .join(' · ')}
+              </p>
+            </div>
+          )}
           <div className="space-y-3">
-            {analytics.officials_contacted.map(({ name, party, count }) => (
+            {analytics.officials_contacted.map(({ name, party, level, chamber, count }) => (
               <div key={name}>
                 <div className="flex items-center justify-between text-sm mb-1">
-                  <span className="flex items-center gap-2 font-medium text-gray-700 dark:text-gray-300">
-                    {name}
+                  <span className="flex items-center gap-2 min-w-0 font-medium text-gray-700 dark:text-gray-300">
+                    <span className="truncate">{name}</span>
                     {party && (
-                      <span className={`px-1.5 py-0.5 text-[10px] font-medium rounded-full ${partyBadgeClass(party)}`}>
+                      <span className={`px-1.5 py-0.5 text-[10px] font-medium rounded-full shrink-0 ${partyBadgeClass(party)}`}>
                         {party}
                       </span>
                     )}
+                    {chamberLabel(level, chamber) && (
+                      <span className="px-1.5 py-0.5 text-[10px] rounded-full bg-gray-100 text-gray-500 dark:bg-gray-700 dark:text-gray-400 shrink-0">
+                        {chamberLabel(level, chamber)}
+                      </span>
+                    )}
                   </span>
-                  <span className="text-gray-500 dark:text-gray-400">
+                  <span className="text-gray-500 dark:text-gray-400 shrink-0 ml-2">
                     {count} message{count !== 1 ? 's' : ''}
                   </span>
                 </div>
@@ -616,9 +730,75 @@ export function CampaignAnalytics({ analytics, campaignName }: CampaignAnalytics
         </div>
       )}
 
-      {/* Top states and Delivery breakdown side by side */}
+      {/* Outcomes and Delivery methods side by side */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        {/* Top states */}
+        {/* Message outcomes — how far each message got */}
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
+          <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-1">Message Outcomes</h3>
+          <p className="text-xs text-gray-500 dark:text-gray-400 mb-4">
+            How far messages got — from opening a contact form to confirmed delivery.
+          </p>
+          {statusEntries.length === 0 ? (
+            <p className="text-sm text-gray-500 dark:text-gray-400">No data yet</p>
+          ) : (
+            <div className="space-y-3">
+              {statusEntries.map(([status, count]) => (
+                <div key={status}>
+                  <div className="flex items-center justify-between text-sm mb-1">
+                    <span className="font-medium text-gray-700 dark:text-gray-300">
+                      {formatStatus(status)}
+                    </span>
+                    <span className="text-gray-500 dark:text-gray-400">
+                      {count} message{count !== 1 ? 's' : ''}
+                    </span>
+                  </div>
+                  <div className="w-full bg-gray-100 dark:bg-gray-700 rounded-full h-2">
+                    <div
+                      className="h-2 rounded-full bg-green-500 dark:bg-green-400 transition-all"
+                      style={{ width: `${(count / maxStatus) * 100}%` }}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Delivery breakdown */}
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
+          <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-1">Delivery Methods</h3>
+          <p className="text-xs text-gray-500 dark:text-gray-400 mb-4">
+            How participants chose to reach out.
+          </p>
+          {deliveryEntries.length === 0 ? (
+            <p className="text-sm text-gray-500 dark:text-gray-400">No data yet</p>
+          ) : (
+            <div className="space-y-3">
+              {deliveryEntries.map(([method, count]) => (
+                <div key={method}>
+                  <div className="flex items-center justify-between text-sm mb-1">
+                    <span className="font-medium text-gray-700 dark:text-gray-300">
+                      {formatDeliveryMethod(method)}
+                    </span>
+                    <span className="text-gray-500 dark:text-gray-400">
+                      {count} message{count !== 1 ? 's' : ''}
+                    </span>
+                  </div>
+                  <div className="w-full bg-gray-100 dark:bg-gray-700 rounded-full h-2">
+                    <div
+                      className="h-2 rounded-full bg-blue-500 dark:bg-blue-400 transition-all"
+                      style={{ width: `${(count / maxDelivery) * 100}%` }}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Top states and Top cities side by side */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
           <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-4">
             Top States
@@ -647,29 +827,28 @@ export function CampaignAnalytics({ analytics, campaignName }: CampaignAnalytics
           )}
         </div>
 
-        {/* Delivery breakdown */}
         <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
           <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-4">
-            Delivery Methods
+            Top Cities
           </h3>
-          {deliveryEntries.length === 0 ? (
+          {analytics.top_cities.length === 0 ? (
             <p className="text-sm text-gray-500 dark:text-gray-400">No data yet</p>
           ) : (
             <div className="space-y-3">
-              {deliveryEntries.map(([method, count]) => (
-                <div key={method}>
+              {analytics.top_cities.map(({ city, state, count }) => (
+                <div key={`${city}|${state ?? ''}`}>
                   <div className="flex items-center justify-between text-sm mb-1">
                     <span className="font-medium text-gray-700 dark:text-gray-300">
-                      {formatDeliveryMethod(method)}
+                      {city}{state ? `, ${state}` : ''}
                     </span>
                     <span className="text-gray-500 dark:text-gray-400">
-                      {count} message{count !== 1 ? 's' : ''}
+                      {count} action{count !== 1 ? 's' : ''}
                     </span>
                   </div>
                   <div className="w-full bg-gray-100 dark:bg-gray-700 rounded-full h-2">
                     <div
-                      className="h-2 rounded-full bg-blue-500 dark:bg-blue-400 transition-all"
-                      style={{ width: `${(count / maxDelivery) * 100}%` }}
+                      className="h-2 rounded-full bg-purple-500 dark:bg-purple-400 transition-all"
+                      style={{ width: `${(count / maxTopCity) * 100}%` }}
                     />
                   </div>
                 </div>
@@ -678,6 +857,29 @@ export function CampaignAnalytics({ analytics, campaignName }: CampaignAnalytics
           )}
         </div>
       </div>
+
+      {/* Recent activity pulse */}
+      {analytics.recent_actions.length > 0 && (
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
+          <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-4">Recent Activity</h3>
+          <ul className="divide-y divide-gray-100 dark:divide-gray-700">
+            {analytics.recent_actions.map((a, i) => (
+              <li key={`${a.created_at}-${i}`} className="py-2 flex items-center justify-between gap-3 text-sm">
+                <span className="text-gray-700 dark:text-gray-300 min-w-0 truncate">
+                  <span className="font-medium">{a.name}</span>
+                  {(a.city || a.state) && (
+                    <span className="text-gray-500 dark:text-gray-400"> from {[a.city, a.state].filter(Boolean).join(', ')}</span>
+                  )}{' '}
+                  took action{a.messages_sent > 0 ? ` — ${a.messages_sent} message${a.messages_sent !== 1 ? 's' : ''}` : ''}
+                </span>
+                <span className="text-xs text-gray-400 dark:text-gray-500 shrink-0">
+                  {new Date(a.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }

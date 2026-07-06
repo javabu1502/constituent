@@ -189,7 +189,7 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
       // Only if they leave sharing on do we derive city/state + match reps.
       // The consent covers city, state, and representatives — never the street.
       let location: { cityState: string; reps: string[] } | null = null;
-      type SharedRep = { name: string; title: string | null; level: 'federal' | 'state'; chamber: string | null; party: string | null; state: string | null };
+      type SharedRep = { name: string; title: string | null; level: 'federal' | 'state' | 'local'; chamber: string | null; party: string | null; state: string | null };
       let sharedReps: SharedRep[] = [];
       if (shareLocation) {
         const reps: string[] = [];
@@ -201,18 +201,17 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
           });
           if (repRes.ok) {
             const repData = await repRes.json();
+            // Every elected official the lookup matched — federal, state, and local.
             for (const o of (repData.officials || []) as Official[]) {
-              if (o.level === 'federal' || o.level === 'state') {
-                reps.push(o.title ? `${o.name} (${o.title})` : o.name);
-                sharedReps.push({
-                  name: o.name,
-                  title: o.title || null,
-                  level: o.level,
-                  chamber: o.chamber || null,
-                  party: o.party || null,
-                  state: o.state || null,
-                });
-              }
+              reps.push(o.title ? `${o.name} (${o.title})` : o.name);
+              sharedReps.push({
+                name: o.name,
+                title: o.title || null,
+                level: o.level,
+                chamber: o.chamber || null,
+                party: o.party || null,
+                state: o.state || null,
+              });
             }
           }
         } catch {

@@ -87,7 +87,7 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
       return match?.code ?? null;
     };
 
-    type StoryRep = { name: string; title: string | null; party: string | null; state: string | null; inferred: boolean };
+    type StoryRep = { name: string; title: string | null; party: string | null; state: string | null; level: string; inferred: boolean };
 
     // Fallback for stories submitted before shared_reps existed (or where the
     // rep lookup failed): a state alone pins down its two US senators exactly.
@@ -101,6 +101,7 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
             title: o.title || 'U.S. Senator',
             party: o.party || null,
             state: o.state || code,
+            level: 'federal',
             inferred: true,
           }));
         } catch {
@@ -111,7 +112,7 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
       return cached;
     };
 
-    const officialAgg = new Map<string, { name: string; title: string | null; party: string | null; state: string | null; story_count: number; inferred: boolean }>();
+    const officialAgg = new Map<string, { name: string; title: string | null; party: string | null; state: string | null; level: string; story_count: number; inferred: boolean }>();
 
     const stories = (storyRows || []).map((s) => {
       const level = s.attribution_level as 'named' | 'first_name_only' | 'anonymous';
@@ -123,11 +124,11 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
       // time, otherwise inferred senators from the shared state.
       let reps: StoryRep[] = [];
       if (!revoked) {
-        const shared = s.shared_reps as Array<{ name?: string; title?: string | null; party?: string | null; state?: string | null }> | null;
+        const shared = s.shared_reps as Array<{ name?: string; title?: string | null; party?: string | null; state?: string | null; level?: string | null }> | null;
         if (Array.isArray(shared) && shared.length > 0) {
           reps = shared
             .filter((r) => typeof r?.name === 'string' && r.name)
-            .map((r) => ({ name: r.name as string, title: r.title ?? null, party: r.party ?? null, state: r.state ?? null, inferred: false }));
+            .map((r) => ({ name: r.name as string, title: r.title ?? null, party: r.party ?? null, state: r.state ?? null, level: r.level ?? 'federal', inferred: false }));
         } else {
           const code = stateCodeOf((s.state as string | null) ?? null);
           if (code) reps = senatorsFor(code);
@@ -139,7 +140,7 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
             existing.story_count += 1;
             existing.inferred = existing.inferred && r.inferred;
           } else {
-            officialAgg.set(key, { name: r.name, title: r.title, party: r.party, state: r.state, story_count: 1, inferred: r.inferred });
+            officialAgg.set(key, { name: r.name, title: r.title, party: r.party, state: r.state, level: r.level, story_count: 1, inferred: r.inferred });
           }
         }
       }
@@ -189,89 +190,140 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
   }
 
   // ----- Advocacy campaigns: action/message analytics -----
-  const [messagesResult, actionsResult, statesResult, dailyCountsResult, deliveryBreakdownResult] = await Promise.all([
+  const [messagesResult, actionsResult] = await Promise.all([
     admin
       .from('messages')
-      .select('id', { count: 'exact', head: true })
-      .eq('campaign_id', campaign.id),
-    admin
-      .from('campaign_actions')
-      .select('id', { count: 'exact', head: true })
-      .eq('campaign_id', campaign.id),
-    admin
-      .from('campaign_actions')
-      .select('participant_state')
-      .eq('campaign_id', campaign.id),
-    // Daily counts (last 30 days)
-    admin
-      .from('campaign_actions')
-      .select('created_at')
+      .select('delivery_method, delivery_status, legislator_name, legislator_party, legislator_level, legislator_chamber, advocate_city, advocate_state, created_at')
       .eq('campaign_id', campaign.id)
-      .gte('created_at', new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString()),
-    // Delivery breakdown + officials contacted
+      .limit(10000),
     admin
-      .from('messages')
-      .select('delivery_method, legislator_name, legislator_party')
-      .eq('campaign_id', campaign.id),
+      .from('campaign_actions')
+      .select('participant_name, participant_city, participant_state, messages_sent, created_at')
+      .eq('campaign_id', campaign.id)
+      .order('created_at', { ascending: false })
+      .limit(10000),
   ]);
 
-  // Daily counts
+  const campaignMessages = messagesResult.data || [];
+  const actions = actionsResult.data || [];
+
+  // Daily counts (last 30 days) + weekly momentum
+  const thirtyDaysAgo = Date.now() - 30 * 24 * 60 * 60 * 1000;
+  const sevenDaysAgo = Date.now() - 7 * 24 * 60 * 60 * 1000;
+  const fourteenDaysAgo = Date.now() - 14 * 24 * 60 * 60 * 1000;
   const dailyCounts: Record<string, number> = {};
-  for (const action of dailyCountsResult.data || []) {
-    const date = new Date(action.created_at).toISOString().split('T')[0];
-    dailyCounts[date] = (dailyCounts[date] || 0) + 1;
+  let thisWeek = 0;
+  let prevWeek = 0;
+  for (const action of actions) {
+    const ts = new Date(action.created_at).getTime();
+    if (ts >= thirtyDaysAgo) {
+      const date = new Date(action.created_at).toISOString().split('T')[0];
+      dailyCounts[date] = (dailyCounts[date] || 0) + 1;
+    }
+    if (ts >= sevenDaysAgo) thisWeek += 1;
+    else if (ts >= fourteenDaysAgo) prevWeek += 1;
   }
 
-  // Delivery breakdown
+  // Delivery breakdown (how) + outcome breakdown (how far it got)
   const deliveryBreakdown: Record<string, number> = {};
-  for (const msg of deliveryBreakdownResult.data || []) {
+  const statusBreakdown: Record<string, number> = {};
+  for (const msg of campaignMessages) {
     const method = msg.delivery_method || 'unknown';
     deliveryBreakdown[method] = (deliveryBreakdown[method] || 0) + 1;
+    const status = msg.delivery_status || 'unknown';
+    statusBreakdown[status] = (statusBreakdown[status] || 0) + 1;
   }
 
-  // Officials contacted — which lawmakers this campaign's messages went to.
-  const officialCounts = new Map<string, { name: string; party: string | null; count: number }>();
-  for (const msg of deliveryBreakdownResult.data || []) {
+  // Officials contacted — which lawmakers this campaign's messages went to,
+  // with level/chamber so the creator can see where pressure is landing.
+  const officialCounts = new Map<string, { name: string; party: string | null; level: string | null; chamber: string | null; count: number }>();
+  for (const msg of campaignMessages) {
     const name = (msg.legislator_name || '').trim();
     if (!name) continue;
     const existing = officialCounts.get(name);
     if (existing) {
       existing.count += 1;
     } else {
-      officialCounts.set(name, { name, party: msg.legislator_party || null, count: 1 });
+      officialCounts.set(name, {
+        name,
+        party: msg.legislator_party || null,
+        level: msg.legislator_level || null,
+        chamber: msg.legislator_chamber || null,
+        count: 1,
+      });
     }
   }
   const officialsContacted = Array.from(officialCounts.values())
     .sort((a, b) => b.count - a.count)
     .slice(0, 15);
 
-  // Top states
+  // Party split of contacted officials' messages (is the pressure bipartisan?)
+  const partySplit: Record<string, number> = {};
+  for (const msg of campaignMessages) {
+    const p = (msg.legislator_party || '').trim();
+    if (!p) continue;
+    partySplit[p] = (partySplit[p] || 0) + 1;
+  }
+
+  // Top states + cities (reach)
   const stateCounts: Record<string, number> = {};
-  for (const action of statesResult.data || []) {
+  const cityCounts = new Map<string, { city: string; state: string | null; count: number }>();
+  for (const action of actions) {
     const state = action.participant_state;
-    stateCounts[state] = (stateCounts[state] || 0) + 1;
+    if (state) stateCounts[state] = (stateCounts[state] || 0) + 1;
+    const city = (action.participant_city || '').trim();
+    if (city) {
+      const key = `${city.toLowerCase()}|${state ?? ''}`;
+      const existing = cityCounts.get(key);
+      if (existing) existing.count += 1;
+      else cityCounts.set(key, { city, state: state ?? null, count: 1 });
+    }
   }
   const topStates = Object.entries(stateCounts)
     .map(([state, count]) => ({ state, count }))
     .sort((a, b) => b.count - a.count)
     .slice(0, 10);
+  const topCities = Array.from(cityCounts.values())
+    .sort((a, b) => b.count - a.count)
+    .slice(0, 10);
 
-  const statesSet = new Set(
-    (statesResult.data || []).map((a: { participant_state: string }) => a.participant_state)
-  );
+  // Recent activity pulse — first name + last initial only.
+  const recentActions = actions.slice(0, 8).map((a) => {
+    const raw = (a.participant_name || '').trim();
+    const parts = raw.split(/\s+/).filter(Boolean);
+    const display = parts.length === 0
+      ? 'Someone'
+      : parts.length === 1
+        ? parts[0]
+        : `${parts[0]} ${parts[parts.length - 1].charAt(0)}.`;
+    return {
+      name: display,
+      city: a.participant_city ?? null,
+      state: a.participant_state ?? null,
+      messages_sent: Number(a.messages_sent) || 0,
+      created_at: a.created_at as string,
+    };
+  });
 
-  const totalMessages = messagesResult.count || 0;
-  const totalActions = actionsResult.count || 0;
+  const totalMessages = campaignMessages.length;
+  const totalActions = actions.length;
 
   const analytics = {
     kind: 'advocacy' as const,
     total_actions: totalActions,
     total_messages: totalMessages,
-    states_represented: Array.from(statesSet),
+    states_represented: Object.keys(stateCounts),
     daily_counts: dailyCounts,
+    this_week: thisWeek,
+    prev_week: prevWeek,
     delivery_breakdown: deliveryBreakdown,
+    status_breakdown: statusBreakdown,
+    party_split: partySplit,
     top_states: topStates,
+    top_cities: topCities,
     officials_contacted: officialsContacted,
+    recent_actions: recentActions,
+    cities_count: cityCounts.size,
     avg_messages_per_action: totalActions > 0 ? Math.round((totalMessages / totalActions) * 10) / 10 : 0,
   };
 
