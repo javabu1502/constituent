@@ -259,17 +259,17 @@ export function RepStep({ state, dispatch, onBack }: RepStepProps) {
         {guidance && (
           <button
             onClick={handleSelectRecommended}
-            className="mt-3 text-xs font-semibold text-purple-700 dark:text-purple-300 hover:underline"
+            className="mt-3 inline-flex items-center gap-1.5 px-3 py-1.5 bg-purple-600 hover:bg-purple-700 text-white text-xs font-semibold rounded-lg transition-colors"
           >
-            ✓ Select the best matches for {issue} →
+            ✓ Select the best matches for {issue}
           </button>
         )}
       </div>
 
-      {/* Not sure hint + Select All */}
+      {/* Targeted-outreach hint + Select All (de-emphasized escape hatch) */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
         <p className="text-xs text-gray-500 dark:text-gray-400">
-          Not sure? Select all — each person gets their own message.
+          A targeted message to the right office often lands hardest — but big moments call for everyone.
         </p>
         <button
           onClick={handleSelectAll}
