@@ -1,11 +1,12 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import type { ContactState, ContactAction } from './ContactFlow';
 import type { Official } from '@/lib/types';
 import { Button } from '@/components/ui/Button';
 import { TOPICS } from '@/lib/constants';
 import { getJurisdiction, matchLabelForLevel, type GovLevel, type JurisdictionGuidance } from '@/lib/issue-jurisdiction';
+import { useChatContext } from '@/components/chat/ChatProvider';
 
 type MatchLabel = 'best' | 'also' | 'low';
 
@@ -151,6 +152,38 @@ function RepCard({
 export function RepStep({ state, dispatch, onBack }: RepStepProps) {
   const { officials, selectedReps, issue } = state;
 
+  // Guided path: the Assistant's interview figures out who to contact, the
+  // issue, the ask, and their story. When it finishes while this step is up,
+  // apply everything — select the recommended officials and skip ahead to
+  // review the details — instead of making them do the manual steps.
+  const { setIsOpen, setMode, interviewResult, clearInterviewResult } = useChatContext();
+  const appliedInterviewRef = useRef(false);
+
+  useEffect(() => {
+    if (!interviewResult || appliedInterviewRef.current) return;
+    appliedInterviewRef.current = true;
+    const r = interviewResult;
+    if (r.issue) dispatch({ type: 'SET_ISSUE', payload: { issue: r.issue, category: r.issueCategory || '' } });
+    if (r.ask) dispatch({ type: 'SET_ASK', payload: r.ask });
+    if (r.personalWhy) dispatch({ type: 'SET_PERSONAL_WHY', payload: r.personalWhy });
+    if (r.suggestedTone) dispatch({ type: 'SET_TONE', payload: r.suggestedTone });
+    const levels: GovLevel[] = r.level === 'both' ? ['federal', 'state'] : [r.level];
+    const recommended = officials.filter((o) => levels.includes(o.level as GovLevel));
+    if (recommended.length > 0) {
+      dispatch({ type: 'SELECT_REPS', payload: recommended });
+    }
+    clearInterviewResult();
+    setIsOpen(false);
+    if (recommended.length > 0) {
+      dispatch({ type: 'GO_TO_STEP', payload: 'topic' });
+    }
+  }, [interviewResult, officials, dispatch, clearInterviewResult, setIsOpen]);
+
+  const startGuided = () => {
+    setMode('interview');
+    setIsOpen(true);
+  };
+
   // Group by level first, then by chamber
   const federalOfficials = officials.filter((r) => r.level === 'federal');
   const stateOfficials = officials.filter((r) => r.level === 'state');
@@ -265,6 +298,26 @@ export function RepStep({ state, dispatch, onBack }: RepStepProps) {
         <p className="text-gray-500 dark:text-gray-400 mt-2 text-sm">
           Select the people you want to write to. Each will get their own message.
         </p>
+      </div>
+
+      {/* Two paths: guided with the Assistant, or manual below */}
+      <div className="mb-5 p-4 bg-gradient-to-r from-purple-600 to-purple-700 rounded-xl text-white">
+        <div className="flex items-center justify-between gap-3 flex-wrap">
+          <div className="min-w-0 flex-1">
+            <p className="text-sm font-semibold">✨ Want a hand with all of it?</p>
+            <p className="text-xs text-purple-100 mt-0.5">
+              Chat with the My Democracy Assistant. It&rsquo;ll help you figure out who to contact, name your
+              issue, and shape your story — then set everything up here for you. Share only what feels comfortable.
+            </p>
+          </div>
+          <button
+            onClick={startGuided}
+            className="px-4 py-2 bg-white text-purple-700 hover:bg-purple-50 text-sm font-semibold rounded-lg transition-colors shrink-0"
+          >
+            Start guided
+          </button>
+        </div>
+        <p className="text-[11px] text-purple-200 mt-2">Prefer to do it yourself? Just continue below.</p>
       </div>
 
       {/* Who should I contact? — describe the issue, get routed to the right level */}
