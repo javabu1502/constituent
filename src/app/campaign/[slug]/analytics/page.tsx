@@ -4,6 +4,8 @@ import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase';
 import { CampaignAnalytics } from '@/components/campaign/CampaignAnalytics';
 import { usageLabels } from '@/lib/story-usage';
+import { findSenators } from '@/lib/legislators';
+import { US_STATES } from '@/lib/constants';
 import Link from 'next/link';
 
 interface PageProps {
@@ -69,38 +71,105 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
       admin
         .from('stories')
         // Include revoked so the collector is flagged (content hidden below).
-        .select('id, created_at, attribution_level, storyteller_name, storyteller_email, city, state, title, body, status, edited_at, consent_usage_snapshot')
+        .select('id, created_at, attribution_level, storyteller_name, storyteller_email, city, state, title, body, status, edited_at, consent_usage_snapshot, shared_reps')
         .eq('campaign_id', campaign.id)
         .in('status', ['active', 'revoked'])
         .order('created_at', { ascending: false })
         .limit(200),
     ]);
 
+    // Normalize "NV" / "Nevada" to a two-letter code.
+    const stateCodeOf = (raw: string | null): string | null => {
+      if (!raw) return null;
+      const t = raw.trim();
+      if (/^[A-Za-z]{2}$/.test(t)) return t.toUpperCase();
+      const match = US_STATES.find((s) => s.name.toLowerCase() === t.toLowerCase());
+      return match?.code ?? null;
+    };
+
+    type StoryRep = { name: string; title: string | null; party: string | null; state: string | null; inferred: boolean };
+
+    // Fallback for stories submitted before shared_reps existed (or where the
+    // rep lookup failed): a state alone pins down its two US senators exactly.
+    const senatorCache = new Map<string, StoryRep[]>();
+    const senatorsFor = (code: string): StoryRep[] => {
+      let cached = senatorCache.get(code);
+      if (!cached) {
+        try {
+          cached = findSenators(code).map((o) => ({
+            name: o.name,
+            title: o.title || 'U.S. Senator',
+            party: o.party || null,
+            state: o.state || code,
+            inferred: true,
+          }));
+        } catch {
+          cached = [];
+        }
+        senatorCache.set(code, cached);
+      }
+      return cached;
+    };
+
+    const officialAgg = new Map<string, { name: string; title: string | null; party: string | null; state: string | null; story_count: number; inferred: boolean }>();
+
+    const stories = (storyRows || []).map((s) => {
+      const level = s.attribution_level as 'named' | 'first_name_only' | 'anonymous';
+      const revoked = (s.status as string) === 'revoked';
+      const snapshot = (s.consent_usage_snapshot ?? {}) as { granted_uses?: string[] };
+      const grantedValues = snapshot.granted_uses ?? [];
+
+      // Officials representing this storyteller: exact when shared at submit
+      // time, otherwise inferred senators from the shared state.
+      let reps: StoryRep[] = [];
+      if (!revoked) {
+        const shared = s.shared_reps as Array<{ name?: string; title?: string | null; party?: string | null; state?: string | null }> | null;
+        if (Array.isArray(shared) && shared.length > 0) {
+          reps = shared
+            .filter((r) => typeof r?.name === 'string' && r.name)
+            .map((r) => ({ name: r.name as string, title: r.title ?? null, party: r.party ?? null, state: r.state ?? null, inferred: false }));
+        } else {
+          const code = stateCodeOf((s.state as string | null) ?? null);
+          if (code) reps = senatorsFor(code);
+        }
+        for (const r of reps) {
+          const key = `${r.name}|${r.state ?? ''}`;
+          const existing = officialAgg.get(key);
+          if (existing) {
+            existing.story_count += 1;
+            existing.inferred = existing.inferred && r.inferred;
+          } else {
+            officialAgg.set(key, { name: r.name, title: r.title, party: r.party, state: r.state, story_count: 1, inferred: r.inferred });
+          }
+        }
+      }
+
+      return {
+        id: s.id as string,
+        created_at: s.created_at as string,
+        attribution_level: level,
+        display_name: level === 'anonymous' ? 'Anonymous' : ((s.storyteller_name as string | null) || 'Unnamed'),
+        // Revoked stories expose no content or identity.
+        city: revoked ? null : ((s.city as string | null) ?? null),
+        state: revoked ? null : ((s.state as string | null) ?? null),
+        email: revoked ? null : ((s.storyteller_email as string | null) ?? null),
+        title: revoked ? null : ((s.title as string | null) ?? null),
+        body: revoked ? '' : ((s.body as string | null) ?? ''),
+        granted_uses: revoked ? [] : usageLabels(grantedValues),
+        granted_use_values: revoked ? [] : grantedValues,
+        officials: reps.map((r) => r.name),
+        revoked,
+        edited_at: (s.edited_at as string | null) ?? null,
+      };
+    });
+
     const storyAnalytics = {
       kind: 'storytelling' as const,
       total_stories: campaign.story_count || 0,
       campaign_slug: campaign.slug as string,
       subjects: (subjectRows || []).map((s) => ({ title: s.title as string, created_at: s.created_at as string })),
-      stories: (storyRows || []).map((s) => {
-        const level = s.attribution_level as 'named' | 'first_name_only' | 'anonymous';
-        const revoked = (s.status as string) === 'revoked';
-        const snapshot = (s.consent_usage_snapshot ?? {}) as { granted_uses?: string[] };
-        return {
-          id: s.id as string,
-          created_at: s.created_at as string,
-          attribution_level: level,
-          display_name: level === 'anonymous' ? 'Anonymous' : ((s.storyteller_name as string | null) || 'Unnamed'),
-          // Revoked stories expose no content or identity.
-          city: revoked ? null : ((s.city as string | null) ?? null),
-          state: revoked ? null : ((s.state as string | null) ?? null),
-          email: revoked ? null : ((s.storyteller_email as string | null) ?? null),
-          title: revoked ? null : ((s.title as string | null) ?? null),
-          body: revoked ? '' : ((s.body as string | null) ?? ''),
-          granted_uses: revoked ? [] : usageLabels(snapshot.granted_uses ?? []),
-          revoked,
-          edited_at: (s.edited_at as string | null) ?? null,
-        };
-      }),
+      stories,
+      officials: Array.from(officialAgg.values()).sort((a, b) => b.story_count - a.story_count),
     };
 
     return (
@@ -139,10 +208,10 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
       .select('created_at')
       .eq('campaign_id', campaign.id)
       .gte('created_at', new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString()),
-    // Delivery breakdown
+    // Delivery breakdown + officials contacted
     admin
       .from('messages')
-      .select('delivery_method')
+      .select('delivery_method, legislator_name, legislator_party')
       .eq('campaign_id', campaign.id),
   ]);
 
@@ -159,6 +228,22 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
     const method = msg.delivery_method || 'unknown';
     deliveryBreakdown[method] = (deliveryBreakdown[method] || 0) + 1;
   }
+
+  // Officials contacted — which lawmakers this campaign's messages went to.
+  const officialCounts = new Map<string, { name: string; party: string | null; count: number }>();
+  for (const msg of deliveryBreakdownResult.data || []) {
+    const name = (msg.legislator_name || '').trim();
+    if (!name) continue;
+    const existing = officialCounts.get(name);
+    if (existing) {
+      existing.count += 1;
+    } else {
+      officialCounts.set(name, { name, party: msg.legislator_party || null, count: 1 });
+    }
+  }
+  const officialsContacted = Array.from(officialCounts.values())
+    .sort((a, b) => b.count - a.count)
+    .slice(0, 15);
 
   // Top states
   const stateCounts: Record<string, number> = {};
@@ -186,6 +271,7 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
     daily_counts: dailyCounts,
     delivery_breakdown: deliveryBreakdown,
     top_states: topStates,
+    officials_contacted: officialsContacted,
     avg_messages_per_action: totalActions > 0 ? Math.round((totalMessages / totalActions) * 10) / 10 : 0,
   };
 

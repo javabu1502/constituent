@@ -186,9 +186,11 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
     }
     setSubmitting(true);
     try {
-      // Only if they leave sharing on do we derive city/state + match reps. We keep
-      // just the city/state + rep names for the email — never the street, never stored.
+      // Only if they leave sharing on do we derive city/state + match reps.
+      // The consent covers city, state, and representatives — never the street.
       let location: { cityState: string; reps: string[] } | null = null;
+      type SharedRep = { name: string; title: string | null; level: 'federal' | 'state'; chamber: string | null; party: string | null; state: string | null };
+      let sharedReps: SharedRep[] = [];
       if (shareLocation) {
         const reps: string[] = [];
         try {
@@ -202,12 +204,21 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
             for (const o of (repData.officials || []) as Official[]) {
               if (o.level === 'federal' || o.level === 'state') {
                 reps.push(o.title ? `${o.name} (${o.title})` : o.name);
+                sharedReps.push({
+                  name: o.name,
+                  title: o.title || null,
+                  level: o.level,
+                  chamber: o.chamber || null,
+                  party: o.party || null,
+                  state: o.state || null,
+                });
               }
             }
           }
         } catch {
           // rep lookup is best-effort — still share city/state
         }
+        sharedReps = sharedReps.slice(0, 30);
         location = { cityState: `${address.city.trim()}, ${address.state.trim()}`, reps };
       }
       setLocationInfo(location);
@@ -227,6 +238,7 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
           store: true,
           city: shareLocation && attribution !== 'anonymous' ? address.city.trim() : null,
           state: shareLocation && attribution !== 'anonymous' ? address.state.trim() : null,
+          shared_reps: shareLocation && attribution !== 'anonymous' && sharedReps.length ? sharedReps : null,
           storyteller_email:
             attribution === 'anonymous' ? null : storytellerEmail.trim() || null,
         }),

@@ -146,6 +146,22 @@ export const submitStorySchema = z.object({
   city: z.string().max(100).nullish(),
   state: z.string().max(50).nullish(),
   storyteller_email: z.string().email().max(254).nullish(),
+  // Representatives matched from the storyteller's address at submit time.
+  // Sent only when location sharing is on (the consent covers "city, state,
+  // and representatives") and never for anonymous attribution.
+  shared_reps: z
+    .array(
+      z.object({
+        name: z.string().min(1).max(200),
+        title: z.string().max(120).nullish(),
+        level: z.enum(['federal', 'state']),
+        chamber: z.string().max(20).nullish(),
+        party: z.string().max(60).nullish(),
+        state: z.string().max(50).nullish(),
+      })
+    )
+    .max(30)
+    .nullish(),
 });
 
 export const generateCommentSchema = z.object({

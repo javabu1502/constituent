@@ -69,6 +69,7 @@ export async function POST(request: NextRequest) {
     city,
     state,
     storyteller_email,
+    shared_reps,
   } = parsed.data;
 
   const admin = createAdminClient();
@@ -154,6 +155,7 @@ export async function POST(request: NextRequest) {
       storyteller_email: emailToStore,
       city: isAnon ? null : city?.trim() || null,
       state: isAnon ? null : state?.trim() || null,
+      shared_reps: isAnon ? null : shared_reps?.length ? shared_reps : null,
       consent_usage_snapshot: {
         usage_statement: campaign.usage_statement ?? null,
         granted_uses,

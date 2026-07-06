@@ -9,6 +9,7 @@ import {
 } from '@/lib/legislators';
 import ProfileClient from './ProfileClient';
 import RepPublicData from './RepPublicData';
+import { RepPhoto } from './RepPhoto';
 
 // Build a state code → slug map
 const STATE_SLUG_MAP: Record<string, string> = {};
@@ -193,26 +194,7 @@ export default async function RepProfilePage({ params }: RepPageProps) {
         <div className="flex flex-col sm:flex-row gap-6">
           {/* Photo */}
           <div className="shrink-0 self-center sm:self-start">
-            <img
-              src={bio.photoUrl}
-              alt={fullName}
-              width={225}
-              height={275}
-              className="w-[150px] h-[183px] sm:w-[225px] sm:h-[275px] object-cover rounded-lg border border-gray-200 dark:border-gray-600"
-              onError={(e) => {
-                const target = e.currentTarget;
-                target.style.display = 'none';
-                const fallback = target.nextElementSibling;
-                if (fallback) (fallback as HTMLElement).style.display = 'flex';
-              }}
-            />
-            <div
-              className="w-[150px] h-[183px] sm:w-[225px] sm:h-[275px] rounded-lg bg-gray-200 dark:bg-gray-600 items-center justify-center hidden"
-            >
-              <span className="text-gray-500 dark:text-gray-400 text-5xl font-medium">
-                {fullName.charAt(0)}
-              </span>
-            </div>
+            <RepPhoto src={bio.photoUrl} alt={fullName} />
           </div>
 
           {/* Info */}
