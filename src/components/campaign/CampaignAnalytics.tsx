@@ -87,8 +87,8 @@ function stateCode(raw: string | null): string | null {
 const PRESS_USE = 'shared_with_media';
 const CONTACT_USE = 'contact_me_followup';
 
-/** Shared 30-day bar chart for both campaign types. */
-function DailyBarChart({ counts, unit }: { counts: Record<string, number>; unit: string }) {
+/** Shared 30-day bar chart — used by both campaign types and the public /trends page. */
+export function DailyBarChart({ counts, unit }: { counts: Record<string, number>; unit: string }) {
   const today = new Date();
   const dates: string[] = [];
   for (let i = 29; i >= 0; i--) {

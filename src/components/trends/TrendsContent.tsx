@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { CivicNews } from '@/components/news/CivicNews';
+import { DailyBarChart } from '@/components/campaign/CampaignAnalytics';
 
 
 interface Subtopic {
@@ -16,15 +17,48 @@ interface IssueWithSubtopics {
   subtopics: Subtopic[];
 }
 
+interface IssueTrend {
+  recent: number; // messages in the last 7 days
+  previous: number; // messages in the 7 days before that
+}
+
 interface TrendsData {
   issues: IssueWithSubtopics[];
   stats: {
     totalMessages: number;
     messagesThisMonth: number;
     statesRepresented: number;
+    officialsContacted: number;
+    storiesShared: number;
+    activeCampaigns: number;
   };
   stateIssues?: IssueWithSubtopics[];
   userState?: string;
+  dailyCounts?: Record<string, number>;
+  issueTrends?: Record<string, IssueTrend>;
+  topStates?: Array<{ state: string; count: number }>;
+}
+
+function TrendBadge({ trend }: { trend?: IssueTrend }) {
+  if (!trend || (trend.recent === 0 && trend.previous === 0)) return null;
+  let label: string | null = null;
+  let cls = '';
+  if (trend.previous === 0 && trend.recent > 0) {
+    label = 'New';
+    cls = 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300';
+  } else if (trend.recent >= trend.previous * 1.25) {
+    label = '↑ Rising';
+    cls = 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300';
+  } else if (trend.recent <= trend.previous * 0.75) {
+    label = '↓ Cooling';
+    cls = 'bg-gray-100 text-gray-500 dark:bg-gray-700 dark:text-gray-400';
+  }
+  if (!label) return null;
+  return (
+    <span className={`px-1.5 py-0.5 text-[10px] font-medium rounded-full shrink-0 ${cls}`}>
+      {label}
+    </span>
+  );
 }
 
 interface TopRep {
@@ -62,12 +96,14 @@ function IssueBar({
   maxCount,
   gradientFrom,
   gradientTo,
+  trend,
 }: {
   issue: IssueWithSubtopics;
   rank: number;
   maxCount: number;
   gradientFrom: string;
   gradientTo: string;
+  trend?: IssueTrend;
 }) {
   const [expanded, setExpanded] = useState(false);
   const hasSubtopics = issue.subtopics.length > 0;
@@ -86,8 +122,11 @@ function IssueBar({
         </span>
         <div className="flex-1 min-w-0">
           <div className="flex items-center justify-between mb-1">
-            <span className="text-sm font-medium text-gray-900 dark:text-white truncate">
-              {issue.issue_area}
+            <span className="flex items-center gap-2 min-w-0">
+              <span className="text-sm font-medium text-gray-900 dark:text-white truncate">
+                {issue.issue_area}
+              </span>
+              <TrendBadge trend={trend} />
             </span>
             <div className="flex items-center gap-2 ml-2 shrink-0">
               <span className="text-sm text-gray-500 dark:text-gray-400">
@@ -180,25 +219,43 @@ export function TrendsContent() {
         </p>
       </div>
 
-      {/* Stats */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5 text-center">
-          <div className="text-3xl font-bold text-purple-600 dark:text-purple-400">
+      {/* Stats — use, impact, and reach at a glance */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4 text-center">
+          <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">
             {data?.stats.totalMessages.toLocaleString() ?? '-'}
           </div>
-          <div className="text-sm text-gray-600 dark:text-gray-400 mt-1">Messages Sent</div>
+          <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">Messages Sent</div>
         </div>
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5 text-center">
-          <div className="text-3xl font-bold text-purple-600 dark:text-purple-400">
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4 text-center">
+          <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">
             {data?.stats.messagesThisMonth.toLocaleString() ?? '-'}
           </div>
-          <div className="text-sm text-gray-600 dark:text-gray-400 mt-1">This Month</div>
+          <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">This Month</div>
         </div>
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5 text-center">
-          <div className="text-3xl font-bold text-purple-600 dark:text-purple-400">
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4 text-center">
+          <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">
+            {data?.stats.officialsContacted?.toLocaleString() ?? '-'}
+          </div>
+          <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">Officials Contacted</div>
+        </div>
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4 text-center">
+          <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">
             {data?.stats.statesRepresented ?? '-'}
           </div>
-          <div className="text-sm text-gray-600 dark:text-gray-400 mt-1">States Active</div>
+          <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">States Active</div>
+        </div>
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4 text-center">
+          <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">
+            {data?.stats.storiesShared?.toLocaleString() ?? '-'}
+          </div>
+          <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">Stories Shared</div>
+        </div>
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4 text-center">
+          <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">
+            {data?.stats.activeCampaigns?.toLocaleString() ?? '-'}
+          </div>
+          <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">Campaigns</div>
         </div>
       </div>
 
@@ -246,9 +303,20 @@ export function TrendsContent() {
         </div>
       </div>
 
+      {/* Activity over time */}
+      {data?.dailyCounts && Object.keys(data.dailyCounts).length > 0 && (
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Activity (Last 30 Days)</h2>
+          <DailyBarChart counts={data.dailyCounts} unit="message" />
+        </div>
+      )}
+
       {/* Issue Rankings */}
       <div>
-        <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Top Issues</h2>
+        <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">Top Issues</h2>
+        <p className="text-xs text-gray-500 dark:text-gray-400 mb-4">
+          Rising and cooling compare the last 7 days to the 7 before.
+        </p>
         {loading ? (
           <div className="space-y-3 animate-pulse">
             {[1, 2, 3, 4, 5].map((i) => (
@@ -269,6 +337,7 @@ export function TrendsContent() {
                 maxCount={maxCount}
                 gradientFrom="from-purple-500"
                 gradientTo="to-purple-600"
+                trend={data.issueTrends?.[issue.issue_area]}
               />
             ))}
           </div>
@@ -299,6 +368,34 @@ export function TrendsContent() {
               ))}
             </div>
           )}
+        </div>
+      )}
+
+      {/* Where messages come from */}
+      {data?.topStates && data.topStates.length > 0 && (
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">Most Active States</h2>
+          <p className="text-xs text-gray-500 dark:text-gray-400 mb-4">
+            Where messages are coming from — {data.stats.statesRepresented} state{data.stats.statesRepresented !== 1 ? 's' : ''} active in total.
+          </p>
+          <div className="space-y-3">
+            {data.topStates.map(({ state, count }) => (
+              <div key={state}>
+                <div className="flex items-center justify-between text-sm mb-1">
+                  <span className="font-medium text-gray-700 dark:text-gray-300">{state}</span>
+                  <span className="text-gray-500 dark:text-gray-400">
+                    {count.toLocaleString()} message{count !== 1 ? 's' : ''}
+                  </span>
+                </div>
+                <div className="w-full bg-gray-100 dark:bg-gray-700 rounded-full h-2">
+                  <div
+                    className="h-2 rounded-full bg-purple-500 dark:bg-purple-400 transition-all"
+                    style={{ width: `${(count / (data.topStates![0]?.count || 1)) * 100}%` }}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       )}
 

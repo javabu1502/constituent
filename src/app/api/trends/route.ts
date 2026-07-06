@@ -55,29 +55,81 @@ export async function GET(req: NextRequest) {
 
   // Stats queries — run all in parallel with the issues query
   const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
+  const fourteenDaysAgo = new Date(Date.now() - 14 * 24 * 60 * 60 * 1000).toISOString();
+  const sevenDaysAgo = Date.now() - 7 * 24 * 60 * 60 * 1000;
+
+  // Recent messages respect the level/state filters (like the issue list) so
+  // the activity chart and rising/cooling badges match what's on screen.
+  let recentQuery = admin
+    .from('messages')
+    .select('issue_area, created_at')
+    .gte('created_at', thirtyDaysAgo)
+    .limit(10000);
+  if (level !== 'all') recentQuery = recentQuery.eq('legislator_level', level);
+  if (stateParam) recentQuery = recentQuery.eq('advocate_state', stateParam);
 
   const [
     { data: filteredMessages },
     { count: totalMessages },
     { count: messagesThisMonth },
     { data: stateData },
+    { data: recentMessages },
+    { data: officialData },
+    { data: campaignData },
   ] = await Promise.all([
     issueQuery,
     admin.from('messages').select('*', { count: 'exact', head: true }),
     admin.from('messages').select('*', { count: 'exact', head: true }).gte('created_at', thirtyDaysAgo),
     admin.from('messages').select('advocate_state').limit(10000),
+    recentQuery,
+    admin.from('messages').select('legislator_name').limit(10000),
+    admin.from('campaigns').select('story_count').eq('approval_status', 'approved'),
   ]);
 
   const issues = aggregateIssues(filteredMessages || []);
 
-  const uniqueStates = new Set(
-    (stateData || []).map((m) => m.advocate_state).filter(Boolean)
+  // Reach: how activity is spread across the country.
+  const stateCounts: Record<string, number> = {};
+  for (const m of stateData || []) {
+    if (m.advocate_state) stateCounts[m.advocate_state] = (stateCounts[m.advocate_state] || 0) + 1;
+  }
+  const topStates = Object.entries(stateCounts)
+    .map(([state, count]) => ({ state, count }))
+    .sort((a, b) => b.count - a.count)
+    .slice(0, 5);
+
+  // Use: messages per day for the 30-day activity chart.
+  const dailyCounts: Record<string, number> = {};
+  // Impact: per-issue momentum — last 7 days vs the 7 before that.
+  const issueTrends: Record<string, { recent: number; previous: number }> = {};
+  for (const m of recentMessages || []) {
+    const ts = new Date(m.created_at).getTime();
+    const day = new Date(m.created_at).toISOString().split('T')[0];
+    dailyCounts[day] = (dailyCounts[day] || 0) + 1;
+    if (m.issue_area && m.created_at >= fourteenDaysAgo) {
+      const t = issueTrends[m.issue_area] ?? { recent: 0, previous: 0 };
+      if (ts >= sevenDaysAgo) t.recent += 1;
+      else t.previous += 1;
+      issueTrends[m.issue_area] = t;
+    }
+  }
+
+  const uniqueOfficials = new Set(
+    (officialData || []).map((m) => m.legislator_name).filter(Boolean)
+  );
+
+  const storiesShared = (campaignData || []).reduce(
+    (sum, c) => sum + (Number(c.story_count) || 0),
+    0
   );
 
   const stats = {
     totalMessages: totalMessages ?? 0,
     messagesThisMonth: messagesThisMonth ?? 0,
-    statesRepresented: uniqueStates.size,
+    statesRepresented: Object.keys(stateCounts).length,
+    officialsContacted: uniqueOfficials.size,
+    storiesShared,
+    activeCampaigns: campaignData?.length ?? 0,
   };
 
   // State-specific data for authenticated users
@@ -115,7 +167,7 @@ export async function GET(req: NextRequest) {
   }
 
   return NextResponse.json(
-    { issues, stats, stateIssues, userState },
+    { issues, stats, stateIssues, userState, dailyCounts, issueTrends, topStates },
     {
       headers: {
         'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=600',
