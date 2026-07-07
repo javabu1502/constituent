@@ -16,6 +16,7 @@ import {
 } from '@/lib/delivery';
 import { useTurnstile } from '@/components/ui/Turnstile';
 import { SupportNudge } from '@/components/ui/SupportNudge';
+import { SocialShare } from '@/components/ui/SocialShare';
 
 type Step = 'form' | 'loading' | 'review' | 'done';
 
@@ -421,43 +422,17 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
       <SupportNudge />
 
       {/* Share section */}
-      <div className="mb-6">
-        <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
-          Spread the word and multiply your impact:
-        </p>
-        <div className="grid grid-cols-2 gap-2">
-          <ShareButton slug={campaign.slug} />
-          <a
-            href={`https://x.com/intent/tweet?text=${encodeURIComponent(`I just took action on "${campaign.headline}" - you should too!`)}&url=${encodeURIComponent(typeof window !== 'undefined' ? `${window.location.origin}/campaign/${campaign.slug}` : `/campaign/${campaign.slug}`)}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="py-3 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg font-medium transition-colors text-center text-sm"
-          >
-            Share on X
-          </a>
-          <a
-            href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(typeof window !== 'undefined' ? `${window.location.origin}/campaign/${campaign.slug}` : `/campaign/${campaign.slug}`)}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="py-3 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg font-medium transition-colors text-center text-sm"
-          >
-            Share on Facebook
-          </a>
-          <a
-            href={`https://wa.me/?text=${encodeURIComponent(`I just took action on "${campaign.headline}" - join me! ${typeof window !== 'undefined' ? `${window.location.origin}/campaign/${campaign.slug}` : `/campaign/${campaign.slug}`}`)}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="py-3 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg font-medium transition-colors text-center text-sm"
-          >
-            Share on WhatsApp
-          </a>
-        </div>
-        <a
-          href={`mailto:?subject=${encodeURIComponent(`Take action: ${campaign.headline}`)}&body=${encodeURIComponent(`I just took action on "${campaign.headline}" through My Democracy. You should too!\n\n${typeof window !== 'undefined' ? `${window.location.origin}/campaign/${campaign.slug}` : `/campaign/${campaign.slug}`}`)}`}
-          className="block w-full mt-2 py-3 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg font-medium transition-colors text-center text-sm"
-        >
-          Share via Email
-        </a>
+      <div className="mb-6 text-left">
+        <SocialShare
+          url={
+            campaign.custom_domain
+              ? `https://${campaign.custom_domain}/`
+              : `https://www.mydemocracy.app/campaign/${campaign.slug}`
+          }
+          text={`I just took action on "${campaign.headline}" — join me!`}
+          title={`Take action: ${campaign.headline}`}
+          prompt="Spread the word and multiply your impact"
+        />
       </div>
 
       <Link
@@ -471,30 +446,6 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
 }
 
 // Sub-components
-
-function ShareButton({ slug }: { slug: string }) {
-  const [copied, setCopied] = useState(false);
-
-  const handleCopy = async () => {
-    const url = `${window.location.origin}/campaign/${slug}`;
-    try {
-      await navigator.clipboard.writeText(url);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
-      console.error('Failed to copy:', err);
-    }
-  };
-
-  return (
-    <button
-      onClick={handleCopy}
-      className="w-full py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-medium transition-colors"
-    >
-      {copied ? 'Link Copied!' : 'Copy Campaign Link'}
-    </button>
-  );
-}
 
 function getPartyColors(party: string): { bg: string; text: string } {
   const p = party.toLowerCase();
