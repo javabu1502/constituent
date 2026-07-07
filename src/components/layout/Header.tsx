@@ -30,13 +30,16 @@ export async function Header() {
               Write to Your Officials
             </Link>
             <NavDropdown
-              label="Campaigns"
+              label="Take Action"
               emphasis
               menuWidthClass="w-60"
               items={[
                 { href: '/campaigns', label: 'Browse Campaigns' },
                 { href: '/campaign/create?type=advocacy', label: 'Start an Advocacy Campaign' },
                 { href: '/campaign/create?type=storytelling', label: 'Start a Storytelling Campaign' },
+                { href: '/vote', label: 'Vote' },
+                // Regulations (public comment) temporarily hidden — restore to bring it back.
+                // { href: '/regulations', label: 'Regulations' },
               ]}
             />
             <NavDropdown
@@ -46,14 +49,6 @@ export async function Header() {
                 { href: '/legislators', label: 'Legislators' },
                 { href: '/news', label: 'News' },
                 { href: '/trends', label: 'Trends' },
-              ]}
-            />
-            <NavDropdown
-              label="Take Action"
-              items={[
-                { href: '/vote', label: 'Vote' },
-                // Regulations (public comment) temporarily hidden — restore to bring it back.
-                // { href: '/regulations', label: 'Regulations' },
               ]}
             />
             <NavDropdown
