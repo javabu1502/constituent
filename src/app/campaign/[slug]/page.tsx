@@ -52,8 +52,45 @@ export default async function CampaignPage({ params }: PageProps) {
   const campaign = data as Campaign;
   const isStory = campaign.campaign_type === 'storytelling';
 
+  // White-label branding (unlisted campaigns only — the insert enforces this)
+  const branded = !!(campaign.org_name || campaign.org_logo_url);
+  const brandColor = campaign.brand_color || null;
+
   return (
     <div className="max-w-2xl mx-auto px-4 py-8">
+      {/* Organization branding banner */}
+      {branded && (
+        <div
+          className="mb-6 p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm flex items-center gap-4"
+          style={brandColor ? { borderTop: `4px solid ${brandColor}` } : undefined}
+        >
+          {campaign.org_logo_url && (
+            <img
+              src={campaign.org_logo_url}
+              alt={campaign.org_name ? `${campaign.org_name} logo` : 'Organization logo'}
+              className="h-12 max-w-[180px] object-contain shrink-0"
+            />
+          )}
+          {campaign.org_name && (
+            <div className="min-w-0">
+              <p className="text-xs text-gray-500 dark:text-gray-400">A campaign by</p>
+              {campaign.org_url ? (
+                <a
+                  href={campaign.org_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-base font-semibold text-gray-900 dark:text-white hover:underline"
+                >
+                  {campaign.org_name}
+                </a>
+              ) : (
+                <p className="text-base font-semibold text-gray-900 dark:text-white">{campaign.org_name}</p>
+              )}
+            </div>
+          )}
+        </div>
+      )}
+
       {/* Campaign header */}
       <div className="mb-8">
         <div className="flex items-center gap-2 mb-3">
