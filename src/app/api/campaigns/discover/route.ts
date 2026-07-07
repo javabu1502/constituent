@@ -18,6 +18,11 @@ export async function GET(request: NextRequest) {
     .from('campaigns')
     .select('id, slug, headline, description, issue_area, action_count, created_at')
     .eq('status', 'active')
+    // Discovery surfaces only public, approved advocacy campaigns —
+    // unlisted campaigns (all storytelling ones) are link-only.
+    .eq('visibility', 'public')
+    .eq('campaign_type', 'advocacy')
+    .eq('approval_status', 'approved')
     .order(sort === 'popular' ? 'action_count' : 'created_at', { ascending: false })
     .limit(limit);
 

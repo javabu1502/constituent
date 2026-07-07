@@ -61,9 +61,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   let campaignPages: MetadataRoute.Sitemap = [];
   try {
     const admin = createAdminClient();
+    // Only public, approved advocacy campaigns belong in the sitemap —
+    // unlisted campaigns (all storytelling ones) are shared by link only
+    // and must never be handed to search engines.
     const { data: campaigns } = await admin
       .from('campaigns')
       .select('slug, created_at')
+      .eq('visibility', 'public')
+      .eq('campaign_type', 'advocacy')
+      .eq('approval_status', 'approved')
+      .eq('status', 'active')
       .order('created_at', { ascending: false });
 
     if (campaigns) {

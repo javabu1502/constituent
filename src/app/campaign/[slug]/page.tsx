@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const admin = createAdminClient();
   const { data: campaign } = await admin
     .from('campaigns')
-    .select('headline, description')
+    .select('headline, description, visibility')
     .eq('slug', slug)
     .eq('approval_status', 'approved')
     .single();
@@ -27,6 +27,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: `${campaign.headline} | My Democracy`,
     description: campaign.description,
+    // Unlisted campaigns (all storytelling ones) are shared by link only —
+    // keep them out of search engines even if the link circulates.
+    robots: campaign.visibility === 'unlisted' ? { index: false, follow: false } : undefined,
     openGraph: {
       title: campaign.headline,
       description: campaign.description,
