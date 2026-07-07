@@ -42,6 +42,14 @@ vi.mock('@/lib/rate-limit', () => ({
   getClientIp: vi.fn(() => '127.0.0.1'),
 }));
 
+vi.mock('@/lib/turnstile', () => ({
+  verifyTurnstile: vi.fn(() => Promise.resolve(true)),
+}));
+
+vi.mock('@/lib/usage-quota', () => ({
+  resolveUsageIdentity: vi.fn(async () => ({ userId: null, ipHash: 'test-hash' })),
+}));
+
 const validBody = {
   participant_name: 'John Doe',
   participant_city: 'Sacramento',
@@ -56,6 +64,7 @@ describe('POST /api/campaigns/[slug]/participate', () => {
     mockSingle.mockResolvedValue({ data: { id: 'campaign-uuid-123' }, error: null });
     mockInsert.mockResolvedValue({ error: null });
     mockRpc.mockResolvedValue({ error: null });
+    process.env.TURNSTILE_SECRET_KEY = '';
   });
 
   it('returns 200 with success for valid participation', async () => {
@@ -100,6 +109,23 @@ describe('POST /api/campaigns/[slug]/participate', () => {
 
     const res = await POST(req, params);
     expect(res.status).toBe(429);
+  });
+
+  it('returns 403 when anonymous Turnstile verification fails', async () => {
+    process.env.TURNSTILE_SECRET_KEY = 'test-secret';
+    const { verifyTurnstile } = await import('@/lib/turnstile');
+    vi.mocked(verifyTurnstile).mockResolvedValueOnce(false);
+
+    const { POST } = await import('../campaigns/[slug]/participate/route');
+    const req = new NextRequest('http://localhost/api/campaigns/test-campaign/participate', {
+      method: 'POST',
+      body: JSON.stringify(validBody),
+      headers: { 'Content-Type': 'application/json' },
+    });
+    const params = { params: Promise.resolve({ slug: 'test-campaign' }) };
+
+    const res = await POST(req, params);
+    expect(res.status).toBe(403);
   });
 
   it('returns 404 when campaign is not found', async () => {

@@ -8,6 +8,7 @@ import { US_STATES } from '@/lib/constants';
 import { PARTY_COLORS, DEFAULT_PARTY_COLOR } from '@/lib/constants';
 import type { Official, LocalOfficial, FeedBill, RepVote, RepNewsArticle, BillAction } from '@/lib/types';
 import { AddressAutocomplete, type ParsedAddress } from '@/components/ui/AddressAutocomplete';
+import { useTurnstile } from '@/components/ui/Turnstile';
 
 type ActivityTab = 'legislation' | 'votes' | 'news';
 type PageTab = 'state' | 'local';
@@ -447,6 +448,7 @@ function LocalOfficialsTab() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [searched, setSearched] = useState(false);
+  const { getToken, TurnstileWidget } = useTurnstile();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -458,10 +460,11 @@ function LocalOfficialsTab() {
     setError(null);
     setSearched(true);
     try {
+      const turnstileToken = await getToken();
       const res = await fetch('/api/local-officials', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(address),
+        body: JSON.stringify({ ...address, turnstileToken: turnstileToken || undefined }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Lookup failed');
@@ -485,6 +488,7 @@ function LocalOfficialsTab() {
 
   return (
     <div>
+      <TurnstileWidget />
       <form onSubmit={handleSubmit} className="mb-6">
         <AddressAutocomplete onAddressChange={setAddress} label="Enter your address to find local officials" />
         {error && (

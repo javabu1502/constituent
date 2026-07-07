@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createAdminClient } from '@/lib/supabase';
 import { campaignParticipateSchema, parseBody } from '@/lib/schemas';
 import { writeLimiter, getClientIp } from '@/lib/rate-limit';
+import { verifyTurnstile } from '@/lib/turnstile';
+import { resolveUsageIdentity } from '@/lib/usage-quota';
 
 /**
  * POST /api/campaigns/[slug]/participate
@@ -31,7 +33,14 @@ export async function POST(
     return NextResponse.json({ error: parsed.error }, { status: 400 });
   }
 
-  const { participant_name, participant_city, participant_state, messages_sent } = parsed.data;
+  const { participant_name, participant_city, participant_state, messages_sent, turnstileToken } = parsed.data;
+  const identity = await resolveUsageIdentity(ip);
+  if (process.env.TURNSTILE_SECRET_KEY) {
+    const valid = await verifyTurnstile(turnstileToken || '', { strict: !identity.userId });
+    if (!valid) {
+      return NextResponse.json({ error: 'CAPTCHA verification failed' }, { status: 403 });
+    }
+  }
 
   const admin = createAdminClient();
 

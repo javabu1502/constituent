@@ -3,6 +3,8 @@ import { callClaude, extractJSON, stripTags } from '@/lib/claude';
 import { createAdminClient } from '@/lib/supabase';
 import type { BillSummary } from '@/lib/types';
 import { summaryLimiter, getClientIp } from '@/lib/rate-limit';
+import { verifyTurnstile } from '@/lib/turnstile';
+import { enforceDailyQuota, resolveUsageIdentity } from '@/lib/usage-quota';
 
 interface BillSummaryRequest {
   bill_number: string;
@@ -15,6 +17,7 @@ interface BillSummaryRequest {
   committee?: string;
   level: 'federal' | 'state';
   userIssues?: string[];
+  turnstileToken?: string;
 }
 
 const SUMMARY_SYSTEM_PROMPT = `You are a nonpartisan legislative analyst. Explain legislation in plain language for everyday citizens.
@@ -46,7 +49,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Invalid request body' }, { status: 400 });
   }
 
-  const { bill_number, title, description, sponsors, status, last_action, policy_area, committee, level, userIssues } = body;
+  const { bill_number, title, description, sponsors, status, last_action, policy_area, committee, level, userIssues, turnstileToken } = body;
 
   if (!bill_number || !title) {
     return NextResponse.json({ error: 'bill_number and title are required' }, { status: 400 });
@@ -54,6 +57,21 @@ export async function POST(request: NextRequest) {
 
   const cacheKey = `bill-summary-${level}-${bill_number}`;
   const admin = createAdminClient();
+  const identity = await resolveUsageIdentity(ip);
+
+  const enforceAiGate = async () => {
+    if (process.env.TURNSTILE_SECRET_KEY) {
+      const valid = await verifyTurnstile(turnstileToken || '', { strict: !identity.userId });
+      if (!valid) {
+        return NextResponse.json({ error: 'CAPTCHA verification failed' }, { status: 403 });
+      }
+    }
+    const { allowed: dailyOk } = await enforceDailyQuota(ip, 'bill_summary', identity);
+    if (!dailyOk) {
+      return NextResponse.json({ error: 'Daily summary limit reached. Try again tomorrow.' }, { status: 429 });
+    }
+    return null;
+  };
 
   // Check cache
   const { data: cached } = await admin
@@ -68,6 +86,8 @@ export async function POST(request: NextRequest) {
 
     // If cached and user has issues, generate personal_relevance only
     if (userIssues && userIssues.length > 0 && !cachedSummary.personal_relevance) {
+      const gateResponse = await enforceAiGate();
+      if (gateResponse) return gateResponse;
       try {
         const relevancePrompt = `BILL: ${bill_number} - ${title}\nSUMMARY: ${cachedSummary.summary}\nUSER CONCERNS: ${userIssues.join(', ')}`;
         const rawRelevance = await callClaude(RELEVANCE_SYSTEM_PROMPT, relevancePrompt, 200);
@@ -84,6 +104,9 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ summary: cachedSummary, cached: true });
   }
+
+  const gateResponse = await enforceAiGate();
+  if (gateResponse) return gateResponse;
 
   // Generate fresh summary
   try {

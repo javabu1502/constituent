@@ -3,7 +3,8 @@ import { createAdminClient } from '@/lib/supabase';
 import { createClient } from '@/lib/supabase/server';
 import { trackSendSchema, parseBody } from '@/lib/schemas';
 import { writeLimiter, getClientIp } from '@/lib/rate-limit';
-import { checkLegislatorCooldown } from '@/lib/usage-quota';
+import { checkLegislatorCooldown, resolveUsageIdentity } from '@/lib/usage-quota';
+import { verifyTurnstile } from '@/lib/turnstile';
 
 /**
  * POST /api/track-send
@@ -35,6 +36,13 @@ export async function POST(request: NextRequest) {
   }
 
   const body = parsed.data;
+  const identity = await resolveUsageIdentity(ip);
+  if (process.env.TURNSTILE_SECRET_KEY) {
+    const valid = await verifyTurnstile(body.turnstileToken || '', { strict: !identity.userId });
+    if (!valid) {
+      return NextResponse.json({ error: 'CAPTCHA verification failed' }, { status: 403 });
+    }
+  }
 
   // If user_id is provided, verify it matches the authenticated user
   let verifiedUserId: string | null = body.user_id || null;

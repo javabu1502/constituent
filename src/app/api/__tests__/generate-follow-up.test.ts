@@ -2,7 +2,8 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { NextRequest } from 'next/server';
 
 const mockSingle = vi.fn();
-const mockEq2 = vi.fn(() => ({ single: mockSingle }));
+const mockEq3 = vi.fn(() => ({ single: mockSingle }));
+const mockEq2 = vi.fn(() => ({ eq: mockEq3, single: mockSingle }));
 const mockEq = vi.fn(() => ({ eq: mockEq2, single: mockSingle }));
 const mockSelect = vi.fn(() => ({ eq: mockEq }));
 const mockInsert = vi.fn();
@@ -88,6 +89,9 @@ describe('POST /api/generate-follow-up', () => {
   beforeEach(() => {
     vi.clearAllMocks();
     mockGenerateLimiter.check.mockReturnValue({ success: true });
+    mockEq.mockClear();
+    mockEq2.mockClear();
+    mockEq3.mockClear();
     mockSingle.mockResolvedValue({ data: originalMessage, error: null });
     process.env.ANTHROPIC_API_KEY = 'test-key';
     process.env.TURNSTILE_SECRET_KEY = '';
@@ -119,6 +123,25 @@ describe('POST /api/generate-follow-up', () => {
     expect(data.officialName).toBe('Sen. Jane Smith');
     expect(data.subject).toBeTruthy();
     expect(data.body).toBeTruthy();
+    expect(mockEq).toHaveBeenCalledWith('id', validBody.originalMessageId);
+    expect(mockEq2).toHaveBeenCalledWith('user_id', 'test-user-id');
+  });
+
+  it('does not load another user message by id', async () => {
+    mockSingle.mockResolvedValue({ data: null, error: { message: 'Not found', code: 'PGRST116' } });
+
+    const { POST } = await import('../generate-follow-up/route');
+    const req = new NextRequest('http://localhost/api/generate-follow-up', {
+      method: 'POST',
+      body: JSON.stringify(validBody),
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    const res = await POST(req);
+    expect(res.status).toBe(404);
+    expect(mockEq).toHaveBeenCalledWith('id', validBody.originalMessageId);
+    expect(mockEq2).toHaveBeenCalledWith('user_id', 'test-user-id');
+    expect(fetch).not.toHaveBeenCalled();
   });
 
   it('returns 400 for invalid JSON', async () => {
