@@ -60,10 +60,26 @@ export async function POST(request: NextRequest) {
     target_level, message_template, distribution_plan,
     bill_level, bill_state, bill_ref, bill_title, bill_url,
     story_prompt, usage_statement, usage_tags, attribution_options, edit_revoke_policy, recipient_email,
+    org_name, org_url, org_logo_url, brand_color, custom_domain,
   } = parsed.data;
 
   const isStory = campaign_type === 'storytelling';
   const slug = slugify(headline).slice(0, 50) + '-' + randomSuffix();
+
+  // White-label branding is for unlisted (privately shared) campaigns only,
+  // and the logo must live in OUR storage bucket — never an arbitrary host.
+  const isUnlisted = isStory || (visibility || 'public') === 'unlisted';
+  const logoPrefix = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/campaign-logos/`;
+  const safeLogoUrl = org_logo_url && org_logo_url.startsWith(logoPrefix) ? org_logo_url : null;
+  const branding = isUnlisted
+    ? {
+        org_name: org_name?.trim() || null,
+        org_url: org_url || null,
+        org_logo_url: safeLogoUrl,
+        brand_color: brand_color || null,
+        custom_domain: custom_domain?.toLowerCase() || null,
+      }
+    : { org_name: null, org_url: null, org_logo_url: null, brand_color: null, custom_domain: null };
 
   const admin = createAdminClient();
   const { data: campaign, error } = await admin
@@ -93,12 +109,16 @@ export async function POST(request: NextRequest) {
       attribution_options: isStory ? attribution_options : null,
       edit_revoke_policy: isStory ? edit_revoke_policy : null,
       recipient_email: isStory ? (recipient_email || user.email || null) : null,
+      ...branding,
       status: 'pending',
     })
     .select()
     .single();
 
   if (error) {
+    if (error.code === '23505' && error.message?.includes('custom_domain')) {
+      return NextResponse.json({ error: 'That custom domain is already in use by another campaign' }, { status: 409 });
+    }
     console.error('[campaigns] Insert error:', error);
     return NextResponse.json({ error: 'Failed to create campaign' }, { status: 500 });
   }

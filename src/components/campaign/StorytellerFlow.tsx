@@ -6,6 +6,7 @@ import { createClient } from '@/lib/supabase/client';
 import { trackEvent } from '@/lib/analytics';
 import { Button } from '@/components/ui/Button';
 import { SupportNudge } from '@/components/ui/SupportNudge';
+import { SocialShare } from '@/components/ui/SocialShare';
 import { MicButton } from '@/components/chat/MicButton';
 import { AddressAutocomplete, type ParsedAddress } from '@/components/ui/AddressAutocomplete';
 import { STORY_USAGE_OPTIONS, usageLabels } from '@/lib/story-usage';
@@ -692,6 +693,23 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
           </p>
         </div>
       )}
+
+      {/* Invite others — links to the campaign, never to their story */}
+      <div className="mb-6 text-left">
+        <SocialShare
+          url={
+            campaign.custom_domain
+              ? `https://${campaign.custom_domain}/`
+              : `https://www.mydemocracy.app/campaign/${campaign.slug}`
+          }
+          text={`I just shared my story with "${campaign.headline}". Your story matters too — add yours:`}
+          title={`Share your story: ${campaign.headline}`}
+          prompt="Stories are stronger together — invite others to share theirs"
+        />
+        <p className="text-[11px] text-gray-400 dark:text-gray-500 mt-2 text-center">
+          This shares a link to the campaign — never your story.
+        </p>
+      </div>
 
       <SupportNudge />
     </div>

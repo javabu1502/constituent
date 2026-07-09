@@ -64,27 +64,6 @@ export function MobileNav({ user }: { user: User | null }) {
           >
             Write to Your Officials
           </Link>
-          <Link
-            href="/campaigns"
-            onClick={() => setOpen(false)}
-            className="block px-4 py-3 text-sm font-semibold text-purple-700 dark:text-purple-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
-          >
-            Campaigns
-          </Link>
-          <Link
-            href="/campaign/create?type=advocacy"
-            onClick={() => setOpen(false)}
-            className="block pl-7 pr-4 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
-          >
-            Start an Advocacy Campaign
-          </Link>
-          <Link
-            href="/campaign/create?type=storytelling"
-            onClick={() => setOpen(false)}
-            className="block pl-7 pr-4 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
-          >
-            Start a Storytelling Campaign
-          </Link>
           <a
             href="https://buymeacoffee.com/mydemocracy"
             target="_blank"
@@ -98,16 +77,19 @@ export function MobileNav({ user }: { user: User | null }) {
             Donate
           </a>
 
+          <p className="px-4 pt-3 pb-1 text-xs font-medium text-gray-400 dark:text-gray-500 uppercase tracking-wider">Take Action</p>
+          <Link href="/campaigns" onClick={() => setOpen(false)} className="block px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">Browse Campaigns</Link>
+          <Link href="/campaign/create?type=advocacy" onClick={() => setOpen(false)} className="block px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">Start an Advocacy Campaign</Link>
+          <Link href="/campaign/create?type=storytelling" onClick={() => setOpen(false)} className="block px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">Start a Storytelling Campaign</Link>
+          <Link href="/vote" onClick={() => setOpen(false)} className="block px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">Vote</Link>
+          {/* Regulations (public comment) temporarily hidden — restore to bring it back.
+          <Link href="/regulations" onClick={() => setOpen(false)} className="block px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">Regulations</Link> */}
+
           <p className="px-4 pt-3 pb-1 text-xs font-medium text-gray-400 dark:text-gray-500 uppercase tracking-wider">Explore</p>
           <Link href="/states" onClick={() => setOpen(false)} className="block px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">States</Link>
           <Link href="/legislators" onClick={() => setOpen(false)} className="block px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">Legislators</Link>
           <Link href="/news" onClick={() => setOpen(false)} className="block px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">News</Link>
           <Link href="/trends" onClick={() => setOpen(false)} className="block px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">Trends</Link>
-
-          <p className="px-4 pt-3 pb-1 text-xs font-medium text-gray-400 dark:text-gray-500 uppercase tracking-wider">Take Action</p>
-          <Link href="/vote" onClick={() => setOpen(false)} className="block px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">Vote</Link>
-          {/* Regulations (public comment) temporarily hidden — restore to bring it back.
-          <Link href="/regulations" onClick={() => setOpen(false)} className="block px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">Regulations</Link> */}
 
           <p className="px-4 pt-3 pb-1 text-xs font-medium text-gray-400 dark:text-gray-500 uppercase tracking-wider">Learn</p>
           <Link href="/guides" onClick={() => setOpen(false)} className="block px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">Guides</Link>

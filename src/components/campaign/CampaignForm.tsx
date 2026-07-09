@@ -38,7 +38,37 @@ export function CampaignForm({ initialType }: { initialType?: 'advocacy' | 'stor
   const [campaignType] = useState<'advocacy' | 'storytelling'>(
     initialType ?? (searchParams.get('type') === 'storytelling' ? 'storytelling' : 'advocacy')
   );
-  const visibility: 'public' | 'unlisted' = 'public';
+  // Advocacy campaigns choose; storytelling is always unlisted.
+  const [visibility, setVisibility] = useState<'public' | 'unlisted'>('public');
+
+  // White-label branding — for unlisted (privately shared) campaigns only.
+  const [orgName, setOrgName] = useState('');
+  const [orgUrl, setOrgUrl] = useState('');
+  const [brandColor, setBrandColor] = useState('');
+  const [logoUrl, setLogoUrl] = useState('');
+  const [logoUploading, setLogoUploading] = useState(false);
+  const [logoError, setLogoError] = useState<string | null>(null);
+  const [customDomain, setCustomDomain] = useState('');
+
+  const isUnlisted = campaignType === 'storytelling' || visibility === 'unlisted';
+
+  const handleLogoUpload = async (file: File | null) => {
+    if (!file) return;
+    setLogoError(null);
+    setLogoUploading(true);
+    try {
+      const form = new FormData();
+      form.append('file', file);
+      const res = await fetch('/api/campaigns/logo', { method: 'POST', body: form });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Upload failed');
+      setLogoUrl(data.url);
+    } catch (err) {
+      setLogoError(err instanceof Error ? err.message : 'Upload failed');
+    } finally {
+      setLogoUploading(false);
+    }
+  };
 
   // Storytelling fields
   const [storyPrompt, setStoryPrompt] = useState('');
@@ -204,12 +234,22 @@ export function CampaignForm({ initialType }: { initialType?: 'advocacy' | 'stor
     setIsSubmitting(true);
 
     try {
+      const brandingBody = isUnlisted
+        ? {
+            org_name: orgName.trim() || null,
+            org_url: orgUrl.trim() || null,
+            org_logo_url: logoUrl || null,
+            brand_color: brandColor || null,
+            custom_domain: customDomain.trim().toLowerCase() || null,
+          }
+        : {};
       const sharedBody = {
         campaign_type: campaignType,
         headline: headline.trim(),
         description: description.trim(),
         issue_area: issueCategory || issueArea,
         issue_subtopic: issueCategory ? issueArea : null,
+        ...brandingBody,
       };
       const body = campaignType === 'advocacy'
         ? {
@@ -532,6 +572,41 @@ export function CampaignForm({ initialType }: { initialType?: 'advocacy' | 'stor
         </p>
       </div>
 
+      {/* Visibility */}
+      <div>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          Visibility
+        </label>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          <label className={`flex items-start gap-3 p-3 rounded-xl border cursor-pointer transition-colors ${visibility === 'public' ? 'border-purple-500 bg-purple-50 dark:bg-purple-900/20' : 'border-gray-200 dark:border-gray-600 hover:border-gray-400'}`}>
+            <input
+              type="radio"
+              name="visibility"
+              checked={visibility === 'public'}
+              onChange={() => setVisibility('public')}
+              className="mt-1 h-4 w-4 text-purple-600 focus:ring-purple-500"
+            />
+            <span>
+              <span className="block text-sm font-medium text-gray-800 dark:text-gray-200">Public</span>
+              <span className="block text-xs text-gray-500 dark:text-gray-400">Listed in the campaign directory for anyone to find.</span>
+            </span>
+          </label>
+          <label className={`flex items-start gap-3 p-3 rounded-xl border cursor-pointer transition-colors ${visibility === 'unlisted' ? 'border-purple-500 bg-purple-50 dark:bg-purple-900/20' : 'border-gray-200 dark:border-gray-600 hover:border-gray-400'}`}>
+            <input
+              type="radio"
+              name="visibility"
+              checked={visibility === 'unlisted'}
+              onChange={() => setVisibility('unlisted')}
+              className="mt-1 h-4 w-4 text-purple-600 focus:ring-purple-500"
+            />
+            <span>
+              <span className="block text-sm font-medium text-gray-800 dark:text-gray-200">Private (share by link)</span>
+              <span className="block text-xs text-gray-500 dark:text-gray-400">Only people with the link can see it — and you can add your organization&apos;s branding.</span>
+            </span>
+          </label>
+        </div>
+      </div>
+
         </>
       )}
 
@@ -612,6 +687,94 @@ export function CampaignForm({ initialType }: { initialType?: 'advocacy' | 'stor
           </div>
 
         </>
+      )}
+
+      {/* White-label branding — private campaigns only */}
+      {isUnlisted && (
+        <div className="p-4 border border-gray-200 dark:border-gray-600 rounded-xl space-y-4">
+          <div>
+            <p className="text-sm font-semibold text-gray-800 dark:text-gray-200">Organization branding <span className="text-gray-400 dark:text-gray-500 font-normal">(optional)</span></p>
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
+              Since this campaign is shared privately, you can present it under your organization&apos;s identity.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Organization name</label>
+              <input
+                type="text"
+                value={orgName}
+                onChange={(e) => setOrgName(e.target.value)}
+                maxLength={120}
+                placeholder="e.g. Nevada Housing Coalition"
+                className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Organization website</label>
+              <input
+                type="url"
+                value={orgUrl}
+                onChange={(e) => setOrgUrl(e.target.value)}
+                maxLength={300}
+                placeholder="https://yourorg.org"
+                className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400"
+              />
+            </div>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-4">
+            <div>
+              <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Logo (PNG/JPEG/WebP, max 1 MB)</label>
+              <input
+                type="file"
+                accept="image/png,image/jpeg,image/webp"
+                onChange={(e) => handleLogoUpload(e.target.files?.[0] ?? null)}
+                className="text-xs text-gray-600 dark:text-gray-300 file:mr-3 file:px-3 file:py-1.5 file:rounded-lg file:border-0 file:bg-purple-600 file:text-white file:text-xs file:font-medium hover:file:bg-purple-700 file:cursor-pointer"
+              />
+              {logoUploading && <p className="text-xs text-gray-500 mt-1">Uploading…</p>}
+              {logoError && <p className="text-xs text-red-600 dark:text-red-400 mt-1">{logoError}</p>}
+            </div>
+            {logoUrl && (
+                <img src={logoUrl} alt="Organization logo preview" className="h-12 max-w-[160px] object-contain rounded border border-gray-200 dark:border-gray-600 bg-white p-1" />
+            )}
+            <div>
+              <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Brand color</label>
+              <div className="flex items-center gap-2">
+                <input
+                  type="color"
+                  value={brandColor || '#6A39C9'}
+                  onChange={(e) => setBrandColor(e.target.value)}
+                  className="w-9 h-9 rounded cursor-pointer border border-gray-300 dark:border-gray-600 bg-transparent"
+                  aria-label="Brand color"
+                />
+                {brandColor && (
+                  <button type="button" onClick={() => setBrandColor('')} className="text-xs text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+                    Reset
+                  </button>
+                )}
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Custom domain <span className="text-gray-400 font-normal">(optional)</span></label>
+            <input
+              type="text"
+              value={customDomain}
+              onChange={(e) => setCustomDomain(e.target.value)}
+              maxLength={253}
+              placeholder="action.yourorg.org"
+              className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400"
+            />
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+              Serve this campaign directly on your own domain. After approval, point a CNAME record for that domain
+              to <code className="px-1 bg-gray-100 dark:bg-gray-700 rounded">cname.vercel-dns.com</code> and we&apos;ll
+              finish the connection — we&apos;ll reach out with confirmation.
+            </p>
+          </div>
+        </div>
       )}
 
       <Button type="submit" isLoading={isSubmitting} className="w-full" size="lg">

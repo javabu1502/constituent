@@ -323,6 +323,12 @@ export interface Campaign {
   attribution_options: AttributionLevel[] | null;
   edit_revoke_policy: string | null;
   recipient_email: string | null;
+  // White-label branding (unlisted campaigns only)
+  org_name?: string | null;
+  org_url?: string | null;
+  org_logo_url?: string | null;
+  brand_color?: string | null;
+  custom_domain?: string | null;
 }
 
 export type AttributionLevel = 'named' | 'first_name_only' | 'anonymous';

@@ -98,6 +98,18 @@ export const createCampaignSchema = z.object({
   attribution_options: z.array(z.enum(['named', 'first_name_only', 'anonymous'])).optional(),
   edit_revoke_policy: z.string().max(2000).optional(),
   recipient_email: z.string().email().max(200).nullish(),
+  // White-label branding — honored only for unlisted campaigns (the route
+  // drops these for public ones). Logo URL must point at our storage bucket
+  // (verified in the route), never an arbitrary host.
+  org_name: z.string().max(120).nullish(),
+  org_url: z.string().url().max(300).nullish(),
+  org_logo_url: z.string().url().max(500).nullish(),
+  brand_color: z.string().regex(/^#[0-9a-fA-F]{6}$/, 'Use a hex color like #6A39C9').nullish(),
+  custom_domain: z
+    .string()
+    .max(253)
+    .regex(/^(?!-)[a-z0-9-]{1,63}(?<!-)(\.(?!-)[a-z0-9-]{1,63}(?<!-))+$/i, 'Enter a bare domain like action.yourorg.org')
+    .nullish(),
 }).superRefine((data, ctx) => {
   if (data.campaign_type === 'storytelling') {
     if (!data.usage_tags || data.usage_tags.length < 1) {
