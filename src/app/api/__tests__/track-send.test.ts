@@ -20,6 +20,11 @@ vi.mock('@/lib/supabase/server', () => ({
 
 vi.mock('@/lib/usage-quota', () => ({
   checkLegislatorCooldown: vi.fn(async () => ({ allowed: true })),
+  resolveUsageIdentity: vi.fn(async () => ({ userId: null, ipHash: 'test-hash' })),
+}));
+
+vi.mock('@/lib/turnstile', () => ({
+  verifyTurnstile: vi.fn(() => Promise.resolve(true)),
 }));
 
 vi.mock('@/lib/env', () => ({
@@ -57,6 +62,7 @@ describe('POST /api/track-send', () => {
     mockSelect.mockReturnValue({ single: mockSingle });
     mockInsert.mockReturnValue({ select: mockSelect });
     mockGetUser.mockResolvedValue({ data: { user: null } });
+    process.env.TURNSTILE_SECRET_KEY = '';
   });
 
   it('returns 200 with success and shareId for valid request', async () => {
@@ -123,6 +129,22 @@ describe('POST /api/track-send', () => {
 
     const res = await POST(req);
     expect(res.status).toBe(500);
+  });
+
+  it('returns 403 when anonymous Turnstile verification fails', async () => {
+    process.env.TURNSTILE_SECRET_KEY = 'test-secret';
+    const { verifyTurnstile } = await import('@/lib/turnstile');
+    vi.mocked(verifyTurnstile).mockResolvedValueOnce(false);
+
+    const { POST } = await import('../track-send/route');
+    const req = new NextRequest('http://localhost/api/track-send', {
+      method: 'POST',
+      body: JSON.stringify(validBody),
+      headers: { 'Content-Type': 'application/json' },
+    });
+
+    const res = await POST(req);
+    expect(res.status).toBe(403);
   });
 
   it('accepts optional fields (advocate_email, user_id)', async () => {

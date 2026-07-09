@@ -4,6 +4,7 @@ import { generateFollowUpSchema, parseBody } from '@/lib/schemas';
 import { generateLimiter, getClientIp } from '@/lib/rate-limit';
 import { verifyTurnstile } from '@/lib/turnstile';
 import { enforceDailyQuota, resolveUsageIdentity } from '@/lib/usage-quota';
+import { createClient } from '@/lib/supabase/server';
 
 export async function POST(request: NextRequest) {
   const ip = getClientIp(request);
@@ -34,6 +35,12 @@ export async function POST(request: NextRequest) {
 
   const { originalMessageId, followUpType, senderName, additionalContext, turnstileToken } = parsed.data;
 
+  const authClient = await createClient();
+  const { data: { user } } = await authClient.auth.getUser();
+  if (!user) {
+    return NextResponse.json({ error: 'Authentication required' }, { status: 401 });
+  }
+
   // Resolve who this request is (user or hashed IP) once, for the bot + cost checks
   const identity = await resolveUsageIdentity(ip);
 
@@ -60,6 +67,7 @@ export async function POST(request: NextRequest) {
     .from('messages')
     .select('legislator_name, legislator_party, issue_area, issue_subtopic, delivery_method, message_body, created_at')
     .eq('id', originalMessageId)
+    .eq('user_id', user.id)
     .single();
 
   if (fetchError || !originalMsg) {

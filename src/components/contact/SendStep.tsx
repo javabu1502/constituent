@@ -14,6 +14,7 @@ import {
   type DeliveryInfo,
 } from '@/lib/delivery';
 import { PHONE_TIPS } from '@/lib/phone-tips';
+import { useTurnstile } from '@/components/ui/Turnstile';
 
 interface SendStepProps {
   state: ContactState;
@@ -430,6 +431,7 @@ export function SendStep({ state, dispatch, onBack }: SendStepProps) {
   const { selectedReps, messages, contactMethod } = state;
   const [completedCalls, setCompletedCalls] = useState<Set<string>>(new Set());
   const [userId, setUserId] = useState<string | null>(null);
+  const { getToken, TurnstileWidget } = useTurnstile();
 
   useEffect(() => {
     const supabase = createClient();
@@ -466,11 +468,12 @@ export function SendStep({ state, dispatch, onBack }: SendStepProps) {
     return { emailCount, formCount, phoneCount };
   }, [deliveryInfoMap]);
 
-  const trackSend = (official: Official, deliveryStatus: string) => {
+  const trackSend = async (official: Official, deliveryStatus: string) => {
     const msg = messages[official.name];
     const deliveryInfo = deliveryInfoMap.get(official.id);
     if (!msg || !deliveryInfo) return;
 
+    const turnstileToken = await getToken();
     fetch('/api/track-send', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -491,6 +494,7 @@ export function SendStep({ state, dispatch, onBack }: SendStepProps) {
         delivery_method: contactMethod === 'phone' ? 'phone' : deliveryInfo.method,
         delivery_status: deliveryStatus,
         user_id: userId || undefined,
+        turnstileToken: turnstileToken || undefined,
       }),
     })
       .then((res) => res.ok ? res.json() : null)
@@ -512,6 +516,7 @@ export function SendStep({ state, dispatch, onBack }: SendStepProps) {
 
   return (
     <div className="p-6 sm:p-8">
+      <TurnstileWidget />
       {/* Header */}
       <div className="text-center mb-6">
         <div className={`w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-3 ${

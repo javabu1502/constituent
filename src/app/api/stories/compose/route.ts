@@ -4,6 +4,7 @@ import { STORY_COMPOSE_PROMPT } from '@/lib/story-interview-prompt';
 import { storyChatSchema, parseBody } from '@/lib/schemas';
 import { chatLimiter, getClientIp } from '@/lib/rate-limit';
 import { enforceDailyQuota, resolveUsageIdentity } from '@/lib/usage-quota';
+import { verifyTurnstile } from '@/lib/turnstile';
 
 /**
  * POST /api/stories/compose
@@ -33,9 +34,15 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: parsed.error }, { status: 400 });
   }
 
-  const { messages } = parsed.data;
+  const { messages, turnstileToken } = parsed.data;
 
   const identity = await resolveUsageIdentity(ip);
+  if (process.env.TURNSTILE_SECRET_KEY) {
+    const valid = await verifyTurnstile(turnstileToken || '', { strict: !identity.userId });
+    if (!valid) {
+      return NextResponse.json({ error: 'CAPTCHA verification failed' }, { status: 403 });
+    }
+  }
   const { allowed } = await enforceDailyQuota(ip, 'chat', identity);
   if (!allowed) {
     return NextResponse.json({ error: 'Daily limit reached. Try again tomorrow.' }, { status: 429 });

@@ -2,6 +2,41 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase';
 
+function publicCampaign(campaign: Record<string, unknown>) {
+  return {
+    id: campaign.id,
+    slug: campaign.slug,
+    headline: campaign.headline,
+    description: campaign.description,
+    issue_area: campaign.issue_area,
+    issue_subtopic: campaign.issue_subtopic,
+    target_level: campaign.target_level,
+    status: campaign.status,
+    campaign_type: campaign.campaign_type,
+    visibility: campaign.visibility,
+    message_template: campaign.message_template,
+    bill_level: campaign.bill_level,
+    bill_state: campaign.bill_state,
+    bill_ref: campaign.bill_ref,
+    bill_title: campaign.bill_title,
+    bill_url: campaign.bill_url,
+    story_prompt: campaign.story_prompt,
+    usage_statement: campaign.usage_statement,
+    usage_tags: campaign.usage_tags,
+    attribution_options: campaign.attribution_options,
+    edit_revoke_policy: campaign.edit_revoke_policy,
+    action_count: campaign.action_count,
+    story_count: campaign.story_count,
+    created_at: campaign.created_at,
+    // White-label branding (public-facing by design on unlisted campaigns)
+    org_name: campaign.org_name,
+    org_url: campaign.org_url,
+    org_logo_url: campaign.org_logo_url,
+    brand_color: campaign.brand_color,
+    custom_domain: campaign.custom_domain,
+  };
+}
+
 /**
  * GET /api/campaigns/[slug]
  * Get campaign by slug. Public for active campaigns.
@@ -116,7 +151,7 @@ export async function GET(
     });
   }
 
-  return NextResponse.json(campaign);
+  return NextResponse.json(publicCampaign(campaign));
 }
 
 /**

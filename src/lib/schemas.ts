@@ -69,6 +69,7 @@ export const trackSendSchema = z.object({
   delivery_status: z.enum(['drafted', 'sent', 'opened', 'copied']),
   user_id: z.string().uuid().optional(),
   campaign_id: z.string().uuid().optional(),
+  turnstileToken: z.string().optional(),
 });
 
 export const createCampaignSchema = z.object({
@@ -222,7 +223,8 @@ export const campaignParticipateSchema = z.object({
   participant_name: z.string().min(1).max(200),
   participant_city: z.string().min(1).max(100),
   participant_state: z.string().min(1).max(50),
-  messages_sent: z.number().int().min(0).max(1000).optional(),
+  messages_sent: z.number().int().min(0).max(20).optional(),
+  turnstileToken: z.string().optional(),
 });
 
 // --- Helper ---

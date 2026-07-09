@@ -8,6 +8,7 @@ const DAILY_LIMITS: Record<string, number> = {
   generate_follow_up: 10,
   generate_comment: 10,
   research: 15,
+  bill_summary: 15,
   chat: 50,
 };
 

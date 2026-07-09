@@ -13,6 +13,7 @@ declare global {
           'expired-callback'?: () => void;
           'error-callback'?: () => void;
           size?: 'invisible' | 'normal' | 'compact';
+          execution?: 'render' | 'execute';
         }
       ) => string;
       reset: (widgetId: string) => void;
@@ -24,10 +25,6 @@ declare global {
 
 export interface TurnstileRef {
   getToken: () => Promise<string>;
-}
-
-interface TurnstileProps {
-  onToken?: (token: string) => void;
 }
 
 /**
@@ -70,6 +67,7 @@ export function useTurnstile() {
         'expired-callback': () => setToken(null),
         'error-callback': () => setToken(null),
         size: 'invisible',
+        execution: 'execute',
       });
     };
 
@@ -103,6 +101,7 @@ export function useTurnstile() {
       resolveRef.current = resolve;
       if (widgetIdRef.current && window.turnstile) {
         window.turnstile.reset(widgetIdRef.current);
+        window.turnstile.execute(widgetIdRef.current);
       }
       // If Turnstile doesn't respond in 5 seconds, proceed without token
       setTimeout(() => {

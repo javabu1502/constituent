@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase';
+import { lookupLimiter, getClientIp } from '@/lib/rate-limit';
+import { verifyTurnstile } from '@/lib/turnstile';
+import { resolveUsageIdentity } from '@/lib/usage-quota';
 
 const CACHE_TTL_MS = 24 * 60 * 60 * 1000; // 24 hours
 
@@ -10,6 +13,12 @@ const CACHE_TTL_MS = 24 * 60 * 60 * 1000; // 24 hours
  * Only returns data near elections. Returns { available: false } otherwise.
  */
 export async function GET(request: NextRequest) {
+  const ip = getClientIp(request);
+  const { success, retryAfter } = lookupLimiter.check(ip);
+  if (!success) {
+    return NextResponse.json({ error: 'Too many requests' }, { status: 429, headers: { 'Retry-After': String(retryAfter) } });
+  }
+
   const address = request.nextUrl.searchParams.get('address');
 
   if (!address) {
@@ -34,6 +43,14 @@ export async function GET(request: NextRequest) {
 
     const fullAddress = `${profile.street}, ${profile.city}, ${profile.state} ${profile.zip}`;
     return fetchVoterInfo(fullAddress);
+  }
+
+  const identity = await resolveUsageIdentity(ip);
+  if (process.env.TURNSTILE_SECRET_KEY) {
+    const valid = await verifyTurnstile(request.nextUrl.searchParams.get('turnstileToken') || '', { strict: !identity.userId });
+    if (!valid) {
+      return NextResponse.json({ error: 'CAPTCHA verification failed' }, { status: 403 });
+    }
   }
 
   return fetchVoterInfo(address);

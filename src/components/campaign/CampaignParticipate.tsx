@@ -172,11 +172,12 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
   }, [officials]);
 
   // Track send for a single official
-  const trackSend = (official: Official, deliveryStatus: string) => {
+  const trackSend = async (official: Official, deliveryStatus: string) => {
     const msg = messages[official.name];
     if (!msg) return;
 
     setSentCount((c) => c + 1);
+    const turnstileToken = await getToken();
 
     fetch('/api/track-send', {
       method: 'POST',
@@ -196,6 +197,7 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
         delivery_method: 'email',
         delivery_status: deliveryStatus,
         campaign_id: campaign.id,
+        turnstileToken: turnstileToken || undefined,
       }),
     }).catch((err) => console.error('[track-send] Failed:', err));
   };
@@ -203,6 +205,7 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
   // Complete participation
   const handleDone = async () => {
     setStep('done');
+    const turnstileToken = await getToken();
 
     fetch(`/api/campaigns/${campaign.slug}/participate`, {
       method: 'POST',
@@ -212,6 +215,7 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
         participant_city: city.trim(),
         participant_state: state,
         messages_sent: sentCount,
+        turnstileToken: turnstileToken || undefined,
       }),
     }).catch((err) => console.error('[participate] Failed:', err));
 
