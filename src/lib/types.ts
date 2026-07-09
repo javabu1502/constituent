@@ -323,6 +323,9 @@ export interface Campaign {
   attribution_options: AttributionLevel[] | null;
   edit_revoke_policy: string | null;
   recipient_email: string | null;
+  // Neutral framing: fair case for/against the campaign question
+  case_for?: string | null;
+  case_against?: string | null;
   // White-label branding (unlisted campaigns only)
   org_name?: string | null;
   org_url?: string | null;

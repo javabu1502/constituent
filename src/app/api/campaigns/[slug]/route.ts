@@ -34,6 +34,9 @@ function publicCampaign(campaign: Record<string, unknown>) {
     org_logo_url: campaign.org_logo_url,
     brand_color: campaign.brand_color,
     custom_domain: campaign.custom_domain,
+    // Neutral framing
+    case_for: campaign.case_for,
+    case_against: campaign.case_against,
   };
 }
 

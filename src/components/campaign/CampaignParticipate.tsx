@@ -18,7 +18,8 @@ import { useTurnstile } from '@/components/ui/Turnstile';
 import { SupportNudge } from '@/components/ui/SupportNudge';
 import { SocialShare } from '@/components/ui/SocialShare';
 
-type Step = 'form' | 'loading' | 'review' | 'done';
+type Step = 'stance' | 'form' | 'loading' | 'review' | 'done';
+type Stance = 'support' | 'oppose' | 'undecided';
 
 interface OfficialMessage {
   subject: string;
@@ -26,7 +27,10 @@ interface OfficialMessage {
 }
 
 export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
-  const [step, setStep] = useState<Step>('form');
+  // Neutral infrastructure: the participant picks their OWN position first,
+  // and the generated message carries that stance — not the campaign's.
+  const [step, setStep] = useState<Step>('stance');
+  const [stance, setStance] = useState<Stance | null>(null);
 
   // Form fields
   const [name, setName] = useState('');
@@ -113,10 +117,16 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
 
       setOfficials(filtered);
 
-      // Generate messages
-      let ask = campaign.message_template
-        ? `${campaign.headline}. ${campaign.message_template}`
-        : campaign.headline;
+      // Generate messages that carry the PARTICIPANT's stance — the platform
+      // is neutral infrastructure and never supplies the position itself.
+      let ask: string;
+      if (stance === 'support') {
+        ask = `The constituent SUPPORTS this position: "${campaign.headline}". Write a respectful message expressing clear support and asking the official to support it too.`;
+      } else if (stance === 'oppose') {
+        ask = `The constituent OPPOSES this position: "${campaign.headline}". Write a respectful message expressing clear opposition and asking the official to oppose it.`;
+      } else {
+        ask = `The constituent is still forming a view on: "${campaign.headline}". Write a respectful message asking the official to share their position and reasoning on this issue.`;
+      }
       // Ground the message in the campaign's related bill (if any) — the
       // generate-message route runs detectBillReferences over the ask.
       if (campaign.bill_ref) {
@@ -223,9 +233,73 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
   };
 
   // Step 1: Form
+  if (step === 'stance') {
+    const stanceButton = (value: Stance, label: string, help: string) => (
+      <button
+        type="button"
+        onClick={() => {
+          setStance(value);
+          trackEvent('campaign_stance_selected', { campaign: campaign.slug, stance: value });
+          setStep('form');
+        }}
+        className="w-full p-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:border-purple-500 hover:bg-purple-50 dark:hover:bg-purple-900/20 text-left transition-colors"
+      >
+        <span className="block text-base font-semibold text-gray-900 dark:text-white">{label}</span>
+        <span className="block text-sm text-gray-500 dark:text-gray-400 mt-0.5">{help}</span>
+      </button>
+    );
+
+    return (
+      <div className="space-y-5">
+        <div>
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Where do you stand?</h3>
+          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+            Your message will carry <em>your</em> position — My Democracy doesn&rsquo;t take a side.
+          </p>
+        </div>
+
+        {campaign.case_for && campaign.case_against && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="p-3 bg-gray-50 dark:bg-gray-700/50 rounded-xl">
+              <p className="text-[11px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-1">The case for</p>
+              <p className="text-xs text-gray-600 dark:text-gray-300 leading-relaxed">{campaign.case_for}</p>
+            </div>
+            <div className="p-3 bg-gray-50 dark:bg-gray-700/50 rounded-xl">
+              <p className="text-[11px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-1">The case against</p>
+              <p className="text-xs text-gray-600 dark:text-gray-300 leading-relaxed">{campaign.case_against}</p>
+            </div>
+          </div>
+        )}
+
+        <div className="space-y-2">
+          {stanceButton('support', 'I support this', 'Your message will express clear support and ask your officials to support it too.')}
+          {stanceButton('oppose', 'I oppose this', 'Your message will express clear opposition and ask your officials to oppose it.')}
+          {stanceButton('undecided', 'I’m still deciding', 'Your message will ask your officials where they stand and why.')}
+        </div>
+      </div>
+    );
+  }
+
   if (step === 'form') {
     return (
       <form onSubmit={handleFormSubmit} className="space-y-5">
+        {stance && (
+          <div className="flex items-center justify-between gap-2 p-3 bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-700 rounded-xl">
+            <p className="text-xs text-purple-900 dark:text-purple-200">
+              Your position:{' '}
+              <span className="font-semibold">
+                {stance === 'support' ? 'Support' : stance === 'oppose' ? 'Oppose' : 'Still deciding'}
+              </span>
+            </p>
+            <button
+              type="button"
+              onClick={() => setStep('stance')}
+              className="text-xs font-medium text-purple-600 dark:text-purple-400 hover:underline shrink-0"
+            >
+              Change
+            </button>
+          </div>
+        )}
         {profileLoaded && (
           <div className="p-3 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-xl">
             <p className="text-xs text-green-700 dark:text-green-300 flex items-center gap-1.5">

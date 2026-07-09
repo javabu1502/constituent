@@ -43,7 +43,7 @@ export default async function CampaignPage({ params }: PageProps) {
 
   const { data, error } = await admin
     .from('campaigns')
-    .select('id, slug, headline, description, issue_area, issue_subtopic, target_level, status, campaign_type, visibility, message_template, bill_level, bill_state, bill_ref, bill_title, bill_url, story_prompt, usage_statement, usage_tags, attribution_options, edit_revoke_policy, action_count, story_count, created_at, org_name, org_url, org_logo_url, brand_color, custom_domain')
+    .select('id, slug, headline, description, issue_area, issue_subtopic, target_level, status, campaign_type, visibility, message_template, bill_level, bill_state, bill_ref, bill_title, bill_url, story_prompt, usage_statement, usage_tags, attribution_options, edit_revoke_policy, action_count, story_count, created_at, org_name, org_url, org_logo_url, brand_color, custom_domain, case_for, case_against')
     .eq('slug', slug)
     .eq('approval_status', 'approved')
     .single();
@@ -118,6 +118,27 @@ export default async function CampaignPage({ params }: PageProps) {
         <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
           {campaign.description}
         </p>
+
+        {/* Where do you stand? — both sides, visually equal, neither emphasized */}
+        {campaign.case_for && campaign.case_against && (
+          <div className="mt-6">
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Where do you stand?</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm">
+                <p className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">The case for</p>
+                <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">{campaign.case_for}</p>
+              </div>
+              <div className="p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm">
+                <p className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">The case against</p>
+                <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">{campaign.case_against}</p>
+              </div>
+            </div>
+            <p className="text-xs text-gray-400 dark:text-gray-500 mt-2">
+              My Democracy doesn&rsquo;t take a side — you choose your position below, and your message carries it.
+            </p>
+          </div>
+        )}
+
         {/* Related bill */}
         {campaign.bill_url && (
           <a
