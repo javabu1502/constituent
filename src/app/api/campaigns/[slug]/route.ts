@@ -28,6 +28,12 @@ function publicCampaign(campaign: Record<string, unknown>) {
     action_count: campaign.action_count,
     story_count: campaign.story_count,
     created_at: campaign.created_at,
+    // White-label branding (public-facing by design on unlisted campaigns)
+    org_name: campaign.org_name,
+    org_url: campaign.org_url,
+    org_logo_url: campaign.org_logo_url,
+    brand_color: campaign.brand_color,
+    custom_domain: campaign.custom_domain,
   };
 }
 
