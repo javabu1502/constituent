@@ -17,6 +17,7 @@ declare global {
         }
       ) => string;
       reset: (widgetId: string) => void;
+      remove?: (widgetId: string) => void;
       getResponse: (widgetId: string) => string | undefined;
       execute: (container: HTMLElement | string, options?: Record<string, unknown>) => void;
     };
@@ -39,25 +40,35 @@ export interface TurnstileRef {
 export function useTurnstile() {
   const [token, setToken] = useState<string | null>(null);
   const widgetIdRef = useRef<string | null>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
   const resolveRef = useRef<((token: string) => void) | null>(null);
+  // The container is STATE, not a ref: the widget must (re)render whenever a
+  // <TurnstileWidget /> actually enters the DOM. The old code tried exactly
+  // once at hook mount — if the widget JSX wasn't rendered on that step yet
+  // (e.g. the hook mounts on a stance step and the widget appears on the
+  // form step), the one-shot init no-oped and every token came back empty,
+  // 403ing all anonymous requests.
+  const [container, setContainer] = useState<HTMLDivElement | null>(null);
   const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
+  // Load the Turnstile script once
   useEffect(() => {
     if (!siteKey) return;
-
-    // Load the Turnstile script if not already loaded
     if (!document.querySelector('script[src*="turnstile"]')) {
       const script = document.createElement('script');
       script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
       script.async = true;
       document.head.appendChild(script);
     }
+  }, [siteKey]);
 
+  // Render the widget into whichever container is currently mounted.
+  useEffect(() => {
+    if (!siteKey || !container) return;
+
+    let cancelled = false;
     const initWidget = () => {
-      if (!window.turnstile || !containerRef.current || widgetIdRef.current) return;
-
-      widgetIdRef.current = window.turnstile.render(containerRef.current, {
+      if (cancelled || !window.turnstile || widgetIdRef.current) return;
+      widgetIdRef.current = window.turnstile.render(container, {
         sitekey: siteKey,
         callback: (t: string) => {
           setToken(t);
@@ -71,16 +82,42 @@ export function useTurnstile() {
       });
     };
 
-    // Wait for script to load
+    if (window.turnstile) {
+      initWidget();
+      return () => {
+        cancelled = true;
+        if (widgetIdRef.current) {
+          try {
+            window.turnstile?.remove?.(widgetIdRef.current);
+          } catch {
+            // widget already gone with its DOM node
+          }
+          widgetIdRef.current = null;
+        }
+      };
+    }
+
+    // Script still loading — poll until it's ready
     const interval = setInterval(() => {
       if (window.turnstile) {
-        initWidget();
         clearInterval(interval);
+        initWidget();
       }
     }, 100);
 
-    return () => clearInterval(interval);
-  }, [siteKey]);
+    return () => {
+      cancelled = true;
+      clearInterval(interval);
+      if (widgetIdRef.current) {
+        try {
+          window.turnstile?.remove?.(widgetIdRef.current);
+        } catch {
+          // widget already gone with its DOM node
+        }
+        widgetIdRef.current = null;
+      }
+    };
+  }, [siteKey, container]);
 
   const getToken = useCallback(async (): Promise<string> => {
     if (!siteKey) return '';
@@ -115,7 +152,7 @@ export function useTurnstile() {
 
   const TurnstileWidget = useCallback(() => {
     if (!siteKey) return null;
-    return <div ref={containerRef} />;
+    return <div ref={setContainer} />;
   }, [siteKey]);
 
   return { getToken, TurnstileWidget };
