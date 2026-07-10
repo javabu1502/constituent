@@ -5,6 +5,8 @@ import { useState } from 'react';
 interface SocialShareProps {
   /** Absolute URL to share. */
   url: string;
+  /** Append utm_source=<platform> per network (attribution + OG cache-bust). */
+  appendUtmSource?: boolean;
   /** Message shown alongside the link on networks that support text. */
   text: string;
   /** Title for native share / email subject. Defaults to the text. */
@@ -19,12 +21,14 @@ interface SocialShareProps {
  * on mobile. Shares always link to the campaign or share page — never to
  * anyone's personal content.
  */
-export function SocialShare({ url, text, title, prompt = 'Spread the word' }: SocialShareProps) {
+export function SocialShare({ url, text, title, prompt = 'Spread the word', appendUtmSource = false }: SocialShareProps) {
+  const urlFor = (platform: string) =>
+    appendUtmSource ? `${url}${url.includes('?') ? '&' : '?'}utm_source=${platform}` : url;
   const [copied, setCopied] = useState(false);
 
   const copyLink = async () => {
     try {
-      await navigator.clipboard.writeText(url);
+      await navigator.clipboard.writeText(urlFor('copy'));
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
@@ -35,7 +39,7 @@ export function SocialShare({ url, text, title, prompt = 'Spread the word' }: So
   const nativeShare = async () => {
     if (navigator.share) {
       try {
-        await navigator.share({ title: title || text, text, url });
+        await navigator.share({ title: title || text, text, url: urlFor('native') });
       } catch {
         // user cancelled
       }
@@ -50,7 +54,7 @@ export function SocialShare({ url, text, title, prompt = 'Spread the word' }: So
       <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3 text-center">{prompt}</p>
       <div className="grid grid-cols-3 gap-2">
         <a
-          href={`https://x.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`}
+          href={`https://x.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(urlFor('x'))}`}
           target="_blank"
           rel="noopener noreferrer"
           className={buttonClass}
@@ -61,7 +65,7 @@ export function SocialShare({ url, text, title, prompt = 'Spread the word' }: So
           X
         </a>
         <a
-          href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`}
+          href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(urlFor('facebook'))}`}
           target="_blank"
           rel="noopener noreferrer"
           className={buttonClass}
@@ -72,7 +76,7 @@ export function SocialShare({ url, text, title, prompt = 'Spread the word' }: So
           Facebook
         </a>
         <a
-          href={`https://bsky.app/intent/compose?text=${encodeURIComponent(`${text} ${url}`)}`}
+          href={`https://bsky.app/intent/compose?text=${encodeURIComponent(`${text} ${urlFor('bluesky')}`)}`}
           target="_blank"
           rel="noopener noreferrer"
           className={buttonClass}
@@ -83,7 +87,7 @@ export function SocialShare({ url, text, title, prompt = 'Spread the word' }: So
           Bluesky
         </a>
         <a
-          href={`https://wa.me/?text=${encodeURIComponent(`${text} ${url}`)}`}
+          href={`https://wa.me/?text=${encodeURIComponent(`${text} ${urlFor('whatsapp')}`)}`}
           target="_blank"
           rel="noopener noreferrer"
           className={buttonClass}
@@ -94,7 +98,7 @@ export function SocialShare({ url, text, title, prompt = 'Spread the word' }: So
           WhatsApp
         </a>
         <a
-          href={`mailto:?subject=${encodeURIComponent(title || text)}&body=${encodeURIComponent(`${text}\n\n${url}`)}`}
+          href={`mailto:?subject=${encodeURIComponent(title || text)}&body=${encodeURIComponent(`${text}\n\n${urlFor('email')}`)}`}
           className={buttonClass}
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">

@@ -45,6 +45,10 @@ function publicCampaign(campaign: Record<string, unknown>) {
     bill_congress: campaign.bill_congress,
     bill_type: campaign.bill_type,
     bill_number: campaign.bill_number,
+    // Reader-poll aggregates
+    support_count: campaign.support_count,
+    oppose_count: campaign.oppose_count,
+    undecided_count: campaign.undecided_count,
   };
 }
 

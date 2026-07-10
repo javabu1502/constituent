@@ -78,6 +78,8 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
   const [officials, setOfficials] = useState<Official[]>([]);
   const [messages, setMessages] = useState<Record<string, OfficialMessage>>({});
   const [sentCount, setSentCount] = useState(0);
+  // Reader-poll aggregates, fetched fresh after this participant is counted.
+  const [pollResults, setPollResults] = useState<{ support: number; oppose: number; undecided: number } | null>(null);
 
   // Step 1: Form submission
   const handleFormSubmit = async (e: React.FormEvent) => {
@@ -221,21 +223,42 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
   // Complete participation
   const handleDone = async () => {
     setStep('done');
+    trackEvent('campaign_action', { campaign: campaign.slug, issue: campaign.issue_area });
     const turnstileToken = await getToken();
 
-    fetch(`/api/campaigns/${campaign.slug}/participate`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        participant_name: name.trim(),
-        participant_city: city.trim(),
-        participant_state: state,
-        messages_sent: sentCount,
-        turnstileToken: turnstileToken || undefined,
-      }),
-    }).catch((err) => console.error('[participate] Failed:', err));
+    try {
+      // Record participation (including the reader-poll stance), then pull
+      // fresh aggregates for the results reveal. The UI is already on the
+      // done step — none of this blocks it.
+      await fetch(`/api/campaigns/${campaign.slug}/participate`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          participant_name: name.trim(),
+          participant_city: city.trim(),
+          participant_state: state,
+          messages_sent: sentCount,
+          stance: stance ?? undefined,
+          turnstileToken: turnstileToken || undefined,
+        }),
+      });
+    } catch (err) {
+      console.error('[participate] Failed:', err);
+    }
 
-    trackEvent('campaign_action', { campaign: campaign.slug, issue: campaign.issue_area });
+    try {
+      const res = await fetch(`/api/campaigns/${campaign.slug}`);
+      if (res.ok) {
+        const data = await res.json();
+        setPollResults({
+          support: Number(data.support_count) || 0,
+          oppose: Number(data.oppose_count) || 0,
+          undecided: Number(data.undecided_count) || 0,
+        });
+      }
+    } catch {
+      // Results reveal is best-effort.
+    }
   };
 
   // Step 1: Form
@@ -513,19 +536,77 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
         Your voice matters. Every message counts toward making a difference.
       </p>
 
+      {/* Reader-poll results — revealed only AFTER this reader picked and acted */}
+      {stance && pollResults && (() => {
+        const total = pollResults.support + pollResults.oppose + pollResults.undecided;
+        const rows: Array<{ key: Stance; label: string; count: number }> = [
+          { key: 'support', label: 'Support', count: pollResults.support },
+          { key: 'oppose', label: 'Oppose', count: pollResults.oppose },
+          { key: 'undecided', label: 'Still deciding', count: pollResults.undecided },
+        ];
+        const pct = (n: number) => (total > 0 ? Math.round((n / total) * 100) : 0);
+        const ownPct = pct(rows.find((r) => r.key === stance)?.count ?? 0);
+        return (
+          <div className="mb-6 p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm text-left">
+            <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-1">
+              How My Democracy readers have landed so far
+            </h4>
+            {total < 20 ? (
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                Be one of the first to weigh in — results appear once more readers have.
+              </p>
+            ) : (
+              <>
+                <p className="text-xs text-purple-600 dark:text-purple-400 font-medium mb-3">
+                  You&rsquo;re with the {ownPct}%.
+                </p>
+                <div className="space-y-2.5">
+                  {rows.map(({ key, label, count }) => (
+                    <div key={key}>
+                      <div className="flex items-center justify-between text-xs mb-1">
+                        <span className={key === stance ? 'font-semibold text-purple-700 dark:text-purple-300' : 'font-medium text-gray-600 dark:text-gray-400'}>
+                          {label}{key === stance ? ' — your position' : ''}
+                        </span>
+                        <span className="text-gray-500 dark:text-gray-400">{pct(count)}%</span>
+                      </div>
+                      <div className="w-full bg-gray-100 dark:bg-gray-700 rounded-full h-2.5">
+                        <div
+                          className={`h-2.5 rounded-full transition-all ${key === stance ? 'bg-purple-600 dark:bg-purple-400' : 'bg-gray-300 dark:bg-gray-500'}`}
+                          style={{ width: `${pct(count)}%` }}
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <p className="text-[11px] text-gray-400 dark:text-gray-500 mt-3">
+                  {total.toLocaleString()} reader{total !== 1 ? 's have' : ' has'} weighed in. A reader poll, not a scientific survey.
+                </p>
+              </>
+            )}
+          </div>
+        );
+      })()}
+
       <SupportNudge />
 
-      {/* Share section */}
+      {/* Share section — opt-in; shares your position, never your name */}
       <div className="mb-6 text-left">
         <SocialShare
           url={
-            campaign.custom_domain
-              ? `https://${campaign.custom_domain}/`
-              : `https://www.mydemocracy.app/campaign/${campaign.slug}`
+            stance
+              ? `${campaign.custom_domain ? `https://${campaign.custom_domain}/` : `https://www.mydemocracy.app/campaign/${campaign.slug}`}?from=stance&pos=${stance}`
+              : campaign.custom_domain
+                ? `https://${campaign.custom_domain}/`
+                : `https://www.mydemocracy.app/campaign/${campaign.slug}`
           }
-          text={`I just took action on "${campaign.headline}" — join me!`}
-          title={`Take action: ${campaign.headline}`}
-          prompt="Spread the word and multiply your impact"
+          text={
+            stance
+              ? `I just weighed in on "${campaign.headline}". Where do you stand? 👇`
+              : `I just took action on "${campaign.headline}" — join me!`
+          }
+          title={campaign.headline}
+          prompt="Share where you stand — your position, never your name"
+          appendUtmSource
         />
       </div>
 

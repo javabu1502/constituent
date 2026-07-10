@@ -333,6 +333,10 @@ export interface Campaign {
   source_against_url?: string | null;
   // Bill-specific campaigns: bill appears ONLY when is_bill_specific is true;
   // identifiers are stored dormant otherwise.
+  // Reader-poll aggregates (public; individual stances are never exposed)
+  support_count?: number;
+  oppose_count?: number;
+  undecided_count?: number;
   is_bill_specific?: boolean;
   bill_congress?: number | null;
   bill_type?: string | null;

@@ -224,6 +224,9 @@ export const campaignParticipateSchema = z.object({
   participant_city: z.string().min(1).max(100),
   participant_state: z.string().min(1).max(50),
   messages_sent: z.number().int().min(0).max(20).optional(),
+  // Reader-poll stance: stored on the action row (never exposed individually)
+  // and rolled up into public aggregate counters.
+  stance: z.enum(['support', 'oppose', 'undecided']).optional(),
   turnstileToken: z.string().optional(),
 });
 

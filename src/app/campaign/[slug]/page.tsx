@@ -9,10 +9,14 @@ import type { Campaign } from '@/lib/types';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+const STANCE_POSITIONS = new Set(['support', 'oppose', 'undecided']);
+
+export async function generateMetadata({ params, searchParams }: PageProps): Promise<Metadata> {
   const { slug } = await params;
+  const sp = await searchParams;
   const admin = createAdminClient();
   const { data: campaign } = await admin
     .from('campaigns')
@@ -25,6 +29,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return { title: 'Campaign Not Found' };
   }
 
+  // Stance share links (?from=stance&pos=...) get the personalized card —
+  // the sharer's side lit up, both sides visible. Everyone else gets the
+  // default neutral card from the opengraph-image file convention.
+  const pos = typeof sp.pos === 'string' && sp.from === 'stance' && STANCE_POSITIONS.has(sp.pos) ? sp.pos : null;
+  const stanceImage = pos
+    ? [{ url: `https://www.mydemocracy.app/campaign/${slug}/stance/${pos}`, width: 1200, height: 630 }]
+    : undefined;
+
   return {
     title: `${campaign.headline} | My Democracy`,
     description: campaign.description,
@@ -34,7 +46,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     openGraph: {
       title: campaign.headline,
       description: campaign.description,
+      ...(stanceImage ? { images: stanceImage } : {}),
     },
+    ...(stanceImage
+      ? { twitter: { card: 'summary_large_image' as const, images: stanceImage.map((i) => i.url) } }
+      : {}),
   };
 }
 
@@ -44,7 +60,7 @@ export default async function CampaignPage({ params }: PageProps) {
 
   const { data, error } = await admin
     .from('campaigns')
-    .select('id, slug, headline, description, issue_area, issue_subtopic, target_level, status, campaign_type, visibility, message_template, bill_level, bill_state, bill_ref, bill_title, bill_url, story_prompt, usage_statement, usage_tags, attribution_options, edit_revoke_policy, action_count, story_count, created_at, org_name, org_url, org_logo_url, brand_color, custom_domain, case_for, case_against, source_for_label, source_for_url, source_against_label, source_against_url, is_bill_specific, bill_congress, bill_type, bill_number')
+    .select('id, slug, headline, description, issue_area, issue_subtopic, target_level, status, campaign_type, visibility, message_template, bill_level, bill_state, bill_ref, bill_title, bill_url, story_prompt, usage_statement, usage_tags, attribution_options, edit_revoke_policy, action_count, story_count, created_at, org_name, org_url, org_logo_url, brand_color, custom_domain, case_for, case_against, source_for_label, source_for_url, source_against_label, source_against_url, is_bill_specific, bill_congress, bill_type, bill_number, support_count, oppose_count, undecided_count')
     .eq('slug', slug)
     .eq('approval_status', 'approved')
     .single();

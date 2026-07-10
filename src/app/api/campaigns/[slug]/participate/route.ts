@@ -33,7 +33,7 @@ export async function POST(
     return NextResponse.json({ error: parsed.error }, { status: 400 });
   }
 
-  const { participant_name, participant_city, participant_state, messages_sent, turnstileToken } = parsed.data;
+  const { participant_name, participant_city, participant_state, messages_sent, stance, turnstileToken } = parsed.data;
   const identity = await resolveUsageIdentity(ip);
   if (process.env.TURNSTILE_SECRET_KEY) {
     const valid = await verifyTurnstile(turnstileToken || '', { strict: !identity.userId });
@@ -56,7 +56,8 @@ export async function POST(
     return NextResponse.json({ error: 'Campaign not found' }, { status: 404 });
   }
 
-  // Insert campaign action
+  // Insert campaign action (stance is stored here but never exposed
+  // individually — reads go through the service-role client only)
   const { error: actionError } = await admin
     .from('campaign_actions')
     .insert({
@@ -65,6 +66,7 @@ export async function POST(
       participant_city,
       participant_state,
       messages_sent: messages_sent || 0,
+      stance: stance || null,
     });
 
   if (actionError) {
@@ -79,6 +81,17 @@ export async function POST(
 
   if (rpcError) {
     console.error('[participate] RPC error:', rpcError);
+  }
+
+  // Roll the stance into the public aggregate counters (atomic RPC)
+  if (stance) {
+    const { error: stanceRpcError } = await admin.rpc('increment_campaign_stance_count', {
+      campaign_slug: slug,
+      stance_value: stance,
+    });
+    if (stanceRpcError) {
+      console.error('[participate] stance RPC error:', stanceRpcError);
+    }
   }
 
   return NextResponse.json({ success: true, campaign_id: campaign.id });
