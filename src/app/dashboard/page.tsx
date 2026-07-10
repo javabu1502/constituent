@@ -57,12 +57,24 @@ export default async function DashboardPage() {
 
   const admin = createAdminClient();
 
+  // Claim anonymous sends made with this verified email BEFORE querying:
+  // ownership becomes an explicit user_id instead of live email matching
+  // (audit: the OR-match ran on every load and never converged), and claimed
+  // messages become eligible for the owner-scoped follow-up flow.
+  if (user.email) {
+    await admin
+      .from('messages')
+      .update({ user_id: user.id })
+      .is('user_id', null)
+      .eq('advocate_email', user.email);
+  }
+
   // Fetch profile, messages, campaigns, and the user's own stories in parallel
   const [profileResult, messagesResult, campaignsResult, storiesResult] = await Promise.all([
     admin.from('profiles').select('*').eq('user_id', user.id).single(),
     admin.from('messages')
       .select('id,delivery_method,issue_area,issue_subtopic,legislator_name,legislator_party,delivery_status,created_at,message_body')
-      .or(`user_id.eq.${user.id},advocate_email.eq.${user.email}`)
+      .eq('user_id', user.id)
       .order('created_at', { ascending: false })
       .limit(100),
     admin.from('campaigns').select('*').eq('creator_id', user.id).order('created_at', { ascending: false }),

@@ -71,7 +71,7 @@ export async function POST(request: NextRequest) {
             .single();
 
           const unsubToken = generateUnsubscribeToken(sub.user_id);
-          const unsubscribeUrl = `${baseUrl}/api/notifications/unsubscribe?uid=${sub.user_id}&token=${unsubToken}`;
+          const unsubscribeUrl = `${baseUrl}/api/notifications/unsubscribe?uid=${sub.user_id}&token=${unsubToken}&list=reminders`;
 
           const html = renderFollowUpHtml(
             {

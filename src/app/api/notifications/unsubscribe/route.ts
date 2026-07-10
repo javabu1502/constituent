@@ -21,10 +21,18 @@ export async function GET(request: NextRequest) {
     });
   }
 
+  // Which list this link came from — an unsubscribe must clear the flag for
+  // the email the person actually received, not always the digest.
+  const list = searchParams.get('list') === 'reminders' ? 'reminders' : 'digest';
+  const update =
+    list === 'reminders'
+      ? { follow_up_reminders: false, updated_at: new Date().toISOString() }
+      : { weekly_digest: false, updated_at: new Date().toISOString() };
+
   const admin = createAdminClient();
   const { error } = await admin
     .from('notification_preferences')
-    .update({ weekly_digest: false, updated_at: new Date().toISOString() })
+    .update(update)
     .eq('user_id', userId);
 
   if (error) {
@@ -35,7 +43,8 @@ export async function GET(request: NextRequest) {
     });
   }
 
-  return new NextResponse(renderHtml('You have been unsubscribed from weekly digests.', true), {
+  const label = list === 'reminders' ? 'follow-up reminders' : 'weekly digests';
+  return new NextResponse(renderHtml(`You have been unsubscribed from ${label}.`, true), {
     status: 200,
     headers: { 'Content-Type': 'text/html' },
   });
