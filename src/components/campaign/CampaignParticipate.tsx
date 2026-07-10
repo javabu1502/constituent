@@ -200,12 +200,42 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
         }),
       });
 
-      const msgData = await msgRes.json();
-      if (!msgRes.ok) throw new FriendlyError(msgData.error || 'Failed to generate messages');
+      if (!msgRes.ok) {
+        // Error responses are plain JSON with a friendly message.
+        const errData = await msgRes.json().catch(() => null);
+        throw new FriendlyError(errData?.error || 'Failed to generate messages');
+      }
 
+      // Success responses are an SSE stream: one `data: {officialName,
+      // subject, body}` line per official, then `data: [DONE]`. Parsing this
+      // as JSON was the long-standing breakage in this flow — the contact
+      // flow always streamed; this one never did.
+      const reader = msgRes.body?.getReader();
+      if (!reader) throw new Error('No response stream');
+      const decoder = new TextDecoder();
+      let buffer = '';
       const msgMap: Record<string, OfficialMessage> = {};
-      for (const msg of Array.isArray(msgData.messages) ? msgData.messages : []) {
-        msgMap[msg.officialName] = { subject: msg.subject, body: msg.body };
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        buffer += decoder.decode(value, { stream: true });
+        const lines = buffer.split('\n');
+        buffer = lines.pop() || '';
+        for (const line of lines) {
+          if (!line.startsWith('data: ')) continue;
+          const data = line.slice(6).trim();
+          if (data === '[DONE]') continue;
+          try {
+            const msg = JSON.parse(data) as { officialName: string; subject: string; body: string };
+            msgMap[msg.officialName] = { subject: msg.subject, body: msg.body };
+          } catch {
+            // Skip malformed lines
+          }
+        }
+      }
+
+      if (Object.keys(msgMap).length === 0) {
+        throw new FriendlyError('We couldn\'t draft your messages just now. Please try again.');
       }
       setMessages(msgMap);
       setStep('review');
