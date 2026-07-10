@@ -1,7 +1,7 @@
 import { ImageResponse } from 'next/og';
 
 export const runtime = 'nodejs';
-export const alt = 'Where do you stand? | My Democracy';
+export const alt = 'Weigh in | My Democracy';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
@@ -107,7 +107,7 @@ export default async function OgImage({ params }: { params: Promise<{ slug: stri
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
             <ScaleIcon />
             <div style={{ display: 'flex', color: '#DDD6FE', fontSize: 26, fontWeight: 600, letterSpacing: 4 }}>
-              {isStory ? 'SHARE YOUR STORY' : 'WHERE DO YOU STAND?'}
+              {isStory ? 'SHARE YOUR STORY' : 'WEIGH IN'}
             </div>
           </div>
           <div

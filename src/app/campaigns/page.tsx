@@ -29,7 +29,7 @@ export default function CampaignsPage() {
         <p className="text-sm text-gray-500 dark:text-gray-500 mt-2">
           Just want to weigh in on national issues yourself?{' '}
           <Link href="/issues" className="text-purple-600 dark:text-purple-400 hover:underline font-medium">
-            Head to Where Do You Stand &rarr;
+            Head to Weigh In &rarr;
           </Link>
         </p>
       </div>

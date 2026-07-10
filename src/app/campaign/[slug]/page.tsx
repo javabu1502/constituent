@@ -156,7 +156,7 @@ export default async function CampaignPage({ params }: PageProps) {
         {/* Where do you stand? — both sides, visually equal, neither emphasized */}
         {campaign.case_for && campaign.case_against && (
           <div className="mt-6">
-            <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Where do you stand?</h2>
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Weigh in</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div className="p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm flex flex-col">
                 <p className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">The case for</p>

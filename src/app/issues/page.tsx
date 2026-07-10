@@ -4,14 +4,14 @@ import { createAdminClient } from '@/lib/supabase';
 import { CampaignFilters } from '@/components/campaign/CampaignFilters';
 
 export const metadata: Metadata = {
-  title: 'Where Do You Stand? | My Democracy',
+  title: 'Weigh In | My Democracy',
   description:
     'The questions being decided in Washington right now. Read both sides, pick your position, and send it to the people who represent you.',
   alternates: {
     canonical: 'https://www.mydemocracy.app/issues',
   },
   openGraph: {
-    title: 'Where Do You Stand? | My Democracy',
+    title: 'Weigh In | My Democracy',
     description:
       'The questions being decided in Washington right now. Read both sides, pick your position, and send it to the people who represent you.',
   },
@@ -42,7 +42,7 @@ export default async function IssuesPage() {
     <div className="max-w-5xl mx-auto px-4 py-8">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Where Do You Stand?</h1>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Weigh In</h1>
           <p className="text-gray-600 dark:text-gray-400 mt-1">
             The questions being decided in Washington right now. Read both sides, pick your position,
             and send it to the people who represent you. We don&rsquo;t take sides — you do.

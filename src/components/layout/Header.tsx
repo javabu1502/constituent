@@ -34,7 +34,7 @@ export async function Header() {
               emphasis
               menuWidthClass="w-60"
               items={[
-                { href: '/issues', label: 'Where Do You Stand?' },
+                { href: '/issues', label: 'Weigh In' },
                 { href: '/campaigns', label: 'Run a Campaign' },
                 { href: '/vote', label: 'Vote' },
                 // Regulations (public comment) temporarily hidden — restore to bring it back.

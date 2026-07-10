@@ -281,7 +281,7 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
     return (
       <div className="space-y-5">
         <div>
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Where do you stand?</h3>
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Weigh in</h3>
           <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
             Your message will carry <em>your</em> position — My Democracy doesn&rsquo;t take a side.
           </p>
@@ -601,7 +601,7 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
           }
           text={
             stance
-              ? `I just weighed in on "${campaign.headline}". Where do you stand? 👇`
+              ? `I just weighed in on "${campaign.headline}". Where do you land? 👇`
               : `I just took action on "${campaign.headline}" — join me!`
           }
           title={campaign.headline}
