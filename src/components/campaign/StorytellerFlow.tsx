@@ -7,6 +7,7 @@ import { trackEvent } from '@/lib/analytics';
 import { Button } from '@/components/ui/Button';
 import { SupportNudge } from '@/components/ui/SupportNudge';
 import { SocialShare } from '@/components/ui/SocialShare';
+import { useTurnstile } from '@/components/ui/Turnstile';
 import { MicButton } from '@/components/chat/MicButton';
 import { AddressAutocomplete, type ParsedAddress } from '@/components/ui/AddressAutocomplete';
 import { STORY_USAGE_OPTIONS, usageLabels } from '@/lib/story-usage';
@@ -76,6 +77,7 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
   const [flagged, setFlagged] = useState<string[]>([]);
 
   const scrollRef = useRef<HTMLDivElement>(null);
+  const { getToken, TurnstileWidget } = useTurnstile();
 
   useEffect(() => {
     async function loadAuth() {
@@ -114,7 +116,7 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
       const res = await fetch('/api/chat/story-interview', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ campaignSlug: campaign.slug, messages: next.slice(-30) }),
+        body: JSON.stringify({ campaignSlug: campaign.slug, messages: next.slice(-30), turnstileToken: (await getToken().catch(() => '')) || undefined }),
       });
       if (!res.ok || !res.body) {
         throw new Error((await res.text().catch(() => '')) || 'Sorry — we couldn’t connect just now. Please try again.');
@@ -152,7 +154,7 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
       const res = await fetch('/api/stories/compose', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ campaignSlug: campaign.slug, messages: messages.slice(-40) }),
+        body: JSON.stringify({ campaignSlug: campaign.slug, messages: messages.slice(-40), turnstileToken: (await getToken().catch(() => '')) || undefined }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Could not compose your story');
@@ -336,6 +338,7 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
     const canCompose = answerCount >= 3;
     return (
       <div className="space-y-4">
+        <TurnstileWidget />
         <div
           ref={scrollRef}
           className="h-80 overflow-y-auto space-y-3 p-1"
@@ -402,6 +405,7 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
   if (step === 'review') {
     return (
       <div className="space-y-4">
+        <TurnstileWidget />
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Title <span className="text-gray-400 font-normal">(optional)</span></label>
           <input
@@ -436,6 +440,7 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
   if (step === 'consent') {
     return (
       <div className="space-y-5">
+        <TurnstileWidget />
         <h3 className="text-lg font-semibold text-gray-900 dark:text-white">How you’re credited & your consent</h3>
 
         {/* Attribution */}

@@ -107,6 +107,17 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
     if (!state) { setError('Please select your state'); return; }
     if (!zip.trim()) { setError('Please enter your ZIP code'); return; }
 
+    // Mint the CAPTCHA token BEFORE leaving the form step: the invisible
+    // Turnstile widget lives in the form's JSX, and switching to 'loading'
+    // unmounts it — getToken() after that times out to an empty token and
+    // anonymous users get a 403 from the AI routes.
+    let turnstileToken = '';
+    try {
+      turnstileToken = await getToken();
+    } catch (tokenErr) {
+      console.error('[participate] turnstile token failed:', tokenErr);
+    }
+
     setStep('loading');
 
     // Normalize before lookup: 2-letter state code (autofill may have stored
@@ -165,13 +176,6 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
         };
         const ref = `${typeLabels[campaign.bill_type.toLowerCase()] ?? campaign.bill_type.toUpperCase()} ${campaign.bill_number}`;
         ask += ` Specifically regarding ${ref}${campaign.bill_title ? `, the ${campaign.bill_title}` : ''}.`;
-      }
-
-      let turnstileToken = '';
-      try {
-        turnstileToken = await getToken();
-      } catch (tokenErr) {
-        console.error('[participate] turnstile token failed:', tokenErr);
       }
 
       const msgRes = await fetch('/api/generate-message', {
@@ -507,6 +511,7 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
   if (step === 'review') {
     return (
       <div className="space-y-4">
+        <TurnstileWidget />
         <div className="text-center mb-2">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
             {officials.length} Message{officials.length !== 1 ? 's' : ''} Ready
