@@ -83,14 +83,14 @@ export function CampaignFilters({ campaigns }: { campaigns: Campaign[] }) {
 
       {/* Results count */}
       <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
-        {sorted.length} campaign{sorted.length !== 1 ? 's' : ''}
+        {sorted.length} issue{sorted.length !== 1 ? 's' : ''}
         {activeIssue ? ` in ${activeIssue}` : ''}
       </p>
 
       {/* Grid */}
       {sorted.length === 0 ? (
         <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm p-8 text-center">
-          <p className="text-gray-600 dark:text-gray-400">No campaigns match this filter.</p>
+          <p className="text-gray-600 dark:text-gray-400">No issues match this filter.</p>
           <button
             onClick={() => setActiveIssue(null)}
             className="mt-3 text-sm text-purple-600 dark:text-purple-400 hover:underline"

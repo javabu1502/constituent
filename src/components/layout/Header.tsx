@@ -34,9 +34,8 @@ export async function Header() {
               emphasis
               menuWidthClass="w-60"
               items={[
-                { href: '/campaigns', label: 'Browse Campaigns' },
-                { href: '/campaign/create?type=advocacy', label: 'Start an Advocacy Campaign' },
-                { href: '/campaign/create?type=storytelling', label: 'Start a Storytelling Campaign' },
+                { href: '/issues', label: 'Where Do You Stand?' },
+                { href: '/campaigns', label: 'Run a Campaign' },
                 { href: '/vote', label: 'Vote' },
                 // Regulations (public comment) temporarily hidden — restore to bring it back.
                 // { href: '/regulations', label: 'Regulations' },

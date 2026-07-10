@@ -122,7 +122,7 @@ export default async function HomePage() {
                   <div className="text-2xl sm:text-3xl font-bold text-purple-700 dark:text-purple-300">
                     {totalCampaigns}
                   </div>
-                  <div className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Active Campaigns</div>
+                  <div className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Open Issues</div>
                 </div>
               )}
             </div>

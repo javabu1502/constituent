@@ -174,7 +174,7 @@ function NewsCard({ article, isMyRep, weeklyWrites }: { article: NewsArticle; is
             className="text-xs font-medium text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300"
             title={article.campaign.headline}
           >
-            Join the campaign &rarr;
+            Weigh in &rarr;
           </Link>
         ) : article.topic ? (
           <Link
@@ -399,7 +399,7 @@ export function CivicNews({ limit, compact = false, showLegend = false, showFilt
                   <>
                     {' · '}
                     <Link href={`/campaign/${article.campaign.slug}`} className="text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 font-medium">
-                      Join the campaign &rarr;
+                      Weigh in &rarr;
                     </Link>
                   </>
                 ) : article.topic ? (
