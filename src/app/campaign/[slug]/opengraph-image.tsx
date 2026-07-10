@@ -8,7 +8,6 @@ export const contentType = 'image/png';
 interface CampaignRow {
   headline?: string;
   issue_area?: string;
-  campaign_type?: string;
 }
 
 async function fetchCampaign(slug: string): Promise<CampaignRow | null> {
@@ -17,7 +16,7 @@ async function fetchCampaign(slug: string): Promise<CampaignRow | null> {
     const key = process.env.SUPABASE_SECRET_KEY;
     if (!base || !key) return null;
     const res = await fetch(
-      `${base}/rest/v1/campaigns?slug=eq.${encodeURIComponent(slug)}&approval_status=eq.approved&select=headline,issue_area,campaign_type&limit=1`,
+      `${base}/rest/v1/campaigns?slug=eq.${encodeURIComponent(slug)}&approval_status=eq.approved&select=headline,issue_area&limit=1`,
       { headers: { apikey: key, Authorization: `Bearer ${key}` } }
     );
     if (!res.ok) return null;
@@ -45,7 +44,6 @@ export default async function OgImage({ params }: { params: Promise<{ slug: stri
   const { slug } = await params;
   const campaign = await fetchCampaign(slug);
   const headline = campaign?.headline ?? 'Make your voice heard';
-  const isStory = campaign?.campaign_type === 'storytelling';
 
   return new ImageResponse(
     (
@@ -107,7 +105,7 @@ export default async function OgImage({ params }: { params: Promise<{ slug: stri
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
             <ScaleIcon />
             <div style={{ display: 'flex', color: '#DDD6FE', fontSize: 26, fontWeight: 600, letterSpacing: 4 }}>
-              {isStory ? 'SHARE YOUR STORY' : 'WEIGH IN'}
+              WEIGH IN
             </div>
           </div>
           <div
@@ -125,9 +123,7 @@ export default async function OgImage({ params }: { params: Promise<{ slug: stri
         </div>
 
         {/* Balanced footer strip: THE CASE FOR / vs / THE CASE AGAINST */}
-        {isStory ? (
-          <div style={{ display: 'flex', color: 'rgba(255,255,255,0.65)', fontSize: 22 }}>mydemocracy.app</div>
-        ) : (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
             <div
               style={{
@@ -182,7 +178,10 @@ export default async function OgImage({ params }: { params: Promise<{ slug: stri
               THE CASE AGAINST
             </div>
           </div>
-        )}
+          <div style={{ display: 'flex', justifyContent: 'flex-end', color: 'rgba(255,255,255,0.6)', fontSize: 20 }}>
+            mydemocracy.app
+          </div>
+        </div>
       </div>
     ),
     { ...size }

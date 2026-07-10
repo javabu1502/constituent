@@ -35,10 +35,10 @@ export function CampaignFilters({ campaigns }: { campaigns: Campaign[] }) {
     <div>
       {/* Filter bar */}
       <div className="flex flex-col sm:flex-row sm:items-center gap-3 mb-6">
-        <div className="flex flex-wrap gap-2 flex-1">
+        <div className="flex flex-nowrap gap-2 flex-1 overflow-x-auto pb-2 -mx-1 px-1 scrollbar-thin min-w-0">
           <button
             onClick={() => setActiveIssue(null)}
-            className={`px-3 py-1.5 text-sm font-medium rounded-full transition-colors ${
+            className={`px-3 py-1.5 text-sm font-medium rounded-full whitespace-nowrap shrink-0 transition-colors ${
               !activeIssue
                 ? 'bg-purple-600 text-white'
                 : 'bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
@@ -50,7 +50,7 @@ export function CampaignFilters({ campaigns }: { campaigns: Campaign[] }) {
             <button
               key={area}
               onClick={() => setActiveIssue(area === activeIssue ? null : area)}
-              className={`px-3 py-1.5 text-sm font-medium rounded-full transition-colors ${
+              className={`px-3 py-1.5 text-sm font-medium rounded-full whitespace-nowrap shrink-0 transition-colors ${
                 activeIssue === area
                   ? 'bg-purple-600 text-white'
                   : 'bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'

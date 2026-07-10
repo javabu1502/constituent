@@ -281,34 +281,11 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
     return (
       <div className="space-y-5">
         <div>
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Weigh in</h3>
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white">What&rsquo;s your position?</h3>
           <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-            Your message will carry <em>your</em> position — My Democracy doesn&rsquo;t take a side.
+            Both sides are laid out above. Your message will carry <em>your</em> position — My Democracy doesn&rsquo;t take a side.
           </p>
         </div>
-
-        {campaign.case_for && campaign.case_against && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div className="p-3 bg-gray-50 dark:bg-gray-700/50 rounded-xl flex flex-col">
-              <p className="text-[11px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-1">The case for</p>
-              <p className="text-xs text-gray-600 dark:text-gray-300 leading-relaxed flex-1">{campaign.case_for}</p>
-              {campaign.source_for_url && campaign.source_for_label && (
-                <a href={campaign.source_for_url} target="_blank" rel="noopener noreferrer" className="mt-2 text-[11px] text-gray-500 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 hover:underline">
-                  Source: {campaign.source_for_label} &rarr;
-                </a>
-              )}
-            </div>
-            <div className="p-3 bg-gray-50 dark:bg-gray-700/50 rounded-xl flex flex-col">
-              <p className="text-[11px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-1">The case against</p>
-              <p className="text-xs text-gray-600 dark:text-gray-300 leading-relaxed flex-1">{campaign.case_against}</p>
-              {campaign.source_against_url && campaign.source_against_label && (
-                <a href={campaign.source_against_url} target="_blank" rel="noopener noreferrer" className="mt-2 text-[11px] text-gray-500 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 hover:underline">
-                  Source: {campaign.source_against_label} &rarr;
-                </a>
-              )}
-            </div>
-          </div>
-        )}
 
         <div className="space-y-2">
           {stanceButton('support', 'I support this', 'Your message will express clear support and ask your officials to support it too.')}
