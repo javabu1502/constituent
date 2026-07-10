@@ -34,31 +34,20 @@ export function CampaignFilters({ campaigns }: { campaigns: Campaign[] }) {
   return (
     <div>
       {/* Filter bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center gap-3 mb-6">
-        <div className="flex flex-nowrap gap-2 flex-1 overflow-x-auto pb-2 -mx-1 px-1 scrollbar-thin min-w-0">
-          <button
-            onClick={() => setActiveIssue(null)}
-            className={`px-3 py-1.5 text-sm font-medium rounded-full whitespace-nowrap shrink-0 transition-colors ${
-              !activeIssue
-                ? 'bg-purple-600 text-white'
-                : 'bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
-            }`}
+      <div className="flex flex-row items-center gap-3 mb-6 flex-wrap">
+        <div className="flex-1 min-w-[180px]">
+          <label htmlFor="topic-filter" className="sr-only">Filter by topic</label>
+          <select
+            id="topic-filter"
+            value={activeIssue ?? ''}
+            onChange={(e) => setActiveIssue(e.target.value || null)}
+            className="w-full sm:w-auto sm:min-w-[240px] px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-purple-600"
           >
-            All
-          </button>
-          {issueAreas.map((area) => (
-            <button
-              key={area}
-              onClick={() => setActiveIssue(area === activeIssue ? null : area)}
-              className={`px-3 py-1.5 text-sm font-medium rounded-full whitespace-nowrap shrink-0 transition-colors ${
-                activeIssue === area
-                  ? 'bg-purple-600 text-white'
-                  : 'bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
-              }`}
-            >
-              {area}
-            </button>
-          ))}
+            <option value="">All topics</option>
+            {issueAreas.map((area) => (
+              <option key={area} value={area}>{area}</option>
+            ))}
+          </select>
         </div>
         <div className="flex items-center gap-1 text-sm shrink-0">
           <span className="text-gray-400 dark:text-gray-500 mr-1">Sort:</span>
