@@ -43,7 +43,7 @@ export default async function CampaignPage({ params }: PageProps) {
 
   const { data, error } = await admin
     .from('campaigns')
-    .select('id, slug, headline, description, issue_area, issue_subtopic, target_level, status, campaign_type, visibility, message_template, bill_level, bill_state, bill_ref, bill_title, bill_url, story_prompt, usage_statement, usage_tags, attribution_options, edit_revoke_policy, action_count, story_count, created_at, org_name, org_url, org_logo_url, brand_color, custom_domain, case_for, case_against')
+    .select('id, slug, headline, description, issue_area, issue_subtopic, target_level, status, campaign_type, visibility, message_template, bill_level, bill_state, bill_ref, bill_title, bill_url, story_prompt, usage_statement, usage_tags, attribution_options, edit_revoke_policy, action_count, story_count, created_at, org_name, org_url, org_logo_url, brand_color, custom_domain, case_for, case_against, source_for_label, source_for_url, source_against_label, source_against_url')
     .eq('slug', slug)
     .eq('approval_status', 'approved')
     .single();
@@ -124,13 +124,33 @@ export default async function CampaignPage({ params }: PageProps) {
           <div className="mt-6">
             <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Where do you stand?</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div className="p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm">
+              <div className="p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm flex flex-col">
                 <p className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">The case for</p>
-                <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">{campaign.case_for}</p>
+                <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed flex-1">{campaign.case_for}</p>
+                {campaign.source_for_url && campaign.source_for_label && (
+                  <a
+                    href={campaign.source_for_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-3 text-xs text-purple-600 dark:text-purple-400 hover:underline"
+                  >
+                    Go deeper: {campaign.source_for_label} &rarr;
+                  </a>
+                )}
               </div>
-              <div className="p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm">
+              <div className="p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm flex flex-col">
                 <p className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">The case against</p>
-                <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">{campaign.case_against}</p>
+                <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed flex-1">{campaign.case_against}</p>
+                {campaign.source_against_url && campaign.source_against_label && (
+                  <a
+                    href={campaign.source_against_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-3 text-xs text-purple-600 dark:text-purple-400 hover:underline"
+                  >
+                    Go deeper: {campaign.source_against_label} &rarr;
+                  </a>
+                )}
               </div>
             </div>
             <p className="text-xs text-gray-400 dark:text-gray-500 mt-2">
@@ -147,9 +167,9 @@ export default async function CampaignPage({ params }: PageProps) {
             rel="noopener noreferrer"
             className="mt-4 inline-flex items-center gap-2 text-sm text-purple-700 dark:text-purple-300 hover:underline"
           >
-            📄 About this bill:{' '}
+            {campaign.bill_title?.startsWith('No single bill') ? '📚 Context: ' : '📄 The bill: '}
             <span className="font-medium">
-              {campaign.bill_ref ? `${campaign.bill_ref} — ` : ''}{campaign.bill_title || 'View bill'}
+              {campaign.bill_ref && campaign.bill_title && !campaign.bill_title.includes(campaign.bill_ref) ? `${campaign.bill_ref} — ` : ''}{campaign.bill_title || 'View bill'}
             </span>
             {campaign.bill_level === 'state' && campaign.bill_state ? ` (${campaign.bill_state})` : ''}
           </a>

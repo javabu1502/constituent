@@ -326,6 +326,11 @@ export interface Campaign {
   // Neutral framing: fair case for/against the campaign question
   case_for?: string | null;
   case_against?: string | null;
+  // One credible source per side, labeled by lean/stance
+  source_for_label?: string | null;
+  source_for_url?: string | null;
+  source_against_label?: string | null;
+  source_against_url?: string | null;
   // White-label branding (unlisted campaigns only)
   org_name?: string | null;
   org_url?: string | null;

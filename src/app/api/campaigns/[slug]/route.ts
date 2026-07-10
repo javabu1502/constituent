@@ -37,6 +37,10 @@ function publicCampaign(campaign: Record<string, unknown>) {
     // Neutral framing
     case_for: campaign.case_for,
     case_against: campaign.case_against,
+    source_for_label: campaign.source_for_label,
+    source_for_url: campaign.source_for_url,
+    source_against_label: campaign.source_against_label,
+    source_against_url: campaign.source_against_url,
   };
 }
 
