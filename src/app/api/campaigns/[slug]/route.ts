@@ -41,6 +41,10 @@ function publicCampaign(campaign: Record<string, unknown>) {
     source_for_url: campaign.source_for_url,
     source_against_label: campaign.source_against_label,
     source_against_url: campaign.source_against_url,
+    is_bill_specific: campaign.is_bill_specific,
+    bill_congress: campaign.bill_congress,
+    bill_type: campaign.bill_type,
+    bill_number: campaign.bill_number,
   };
 }
 

@@ -331,6 +331,12 @@ export interface Campaign {
   source_for_url?: string | null;
   source_against_label?: string | null;
   source_against_url?: string | null;
+  // Bill-specific campaigns: bill appears ONLY when is_bill_specific is true;
+  // identifiers are stored dormant otherwise.
+  is_bill_specific?: boolean;
+  bill_congress?: number | null;
+  bill_type?: string | null;
+  bill_number?: string | null;
   // White-label branding (unlisted campaigns only)
   org_name?: string | null;
   org_url?: string | null;

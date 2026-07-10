@@ -127,10 +127,16 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
       } else {
         ask = `The constituent is still forming a view on: "${campaign.headline}". Write a respectful message asking the official to share their position and reasoning on this issue.`;
       }
-      // Ground the message in the campaign's related bill (if any) — the
+      // Reference the bill ONLY when the campaign is explicitly flagged as an
+      // action on a specific bill — neutral issues never name one. The
       // generate-message route runs detectBillReferences over the ask.
-      if (campaign.bill_ref) {
-        ask += ` Specifically regarding ${campaign.bill_ref}.`;
+      if (campaign.is_bill_specific && campaign.bill_type && campaign.bill_number) {
+        const typeLabels: Record<string, string> = {
+          hr: 'H.R.', s: 'S.', hres: 'H.Res.', sres: 'S.Res.',
+          hjres: 'H.J.Res.', sjres: 'S.J.Res.', hconres: 'H.Con.Res.', sconres: 'S.Con.Res.',
+        };
+        const ref = `${typeLabels[campaign.bill_type.toLowerCase()] ?? campaign.bill_type.toUpperCase()} ${campaign.bill_number}`;
+        ask += ` Specifically regarding ${ref}${campaign.bill_title ? `, the ${campaign.bill_title}` : ''}.`;
       }
 
       const turnstileToken = await getToken();
@@ -264,8 +270,8 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
               <p className="text-[11px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-1">The case for</p>
               <p className="text-xs text-gray-600 dark:text-gray-300 leading-relaxed flex-1">{campaign.case_for}</p>
               {campaign.source_for_url && campaign.source_for_label && (
-                <a href={campaign.source_for_url} target="_blank" rel="noopener noreferrer" className="mt-2 text-[11px] text-purple-600 dark:text-purple-400 hover:underline">
-                  {campaign.source_for_label} &rarr;
+                <a href={campaign.source_for_url} target="_blank" rel="noopener noreferrer" className="mt-2 text-[11px] text-gray-500 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 hover:underline">
+                  Source: {campaign.source_for_label} &rarr;
                 </a>
               )}
             </div>
@@ -273,8 +279,8 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
               <p className="text-[11px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-1">The case against</p>
               <p className="text-xs text-gray-600 dark:text-gray-300 leading-relaxed flex-1">{campaign.case_against}</p>
               {campaign.source_against_url && campaign.source_against_label && (
-                <a href={campaign.source_against_url} target="_blank" rel="noopener noreferrer" className="mt-2 text-[11px] text-purple-600 dark:text-purple-400 hover:underline">
-                  {campaign.source_against_label} &rarr;
+                <a href={campaign.source_against_url} target="_blank" rel="noopener noreferrer" className="mt-2 text-[11px] text-gray-500 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 hover:underline">
+                  Source: {campaign.source_against_label} &rarr;
                 </a>
               )}
             </div>
