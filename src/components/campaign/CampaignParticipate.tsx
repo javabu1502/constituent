@@ -21,6 +21,19 @@ import { SocialShare } from '@/components/ui/SocialShare';
 type Step = 'stance' | 'form' | 'loading' | 'review' | 'done';
 type Stance = 'support' | 'oppose' | 'undecided';
 
+/** Errors whose message is safe to show users (our own API copy). Anything
+ * else — WebKit URL/pattern DOMExceptions, network noise — stays in the
+ * console and the user sees actionable guidance instead. */
+class FriendlyError extends Error {}
+
+/** Map a full state name (bad autofill / legacy profile values) to its code. */
+function toStateCode(value: string): string {
+  const v = value.trim();
+  if (/^[A-Za-z]{2}$/.test(v)) return v.toUpperCase();
+  const match = US_STATES.find((s) => s.name.toLowerCase() === v.toLowerCase());
+  return match ? match.code : v;
+}
+
 interface OfficialMessage {
   subject: string;
   body: string;
@@ -65,7 +78,7 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
 
         if (profile.street && !street) setStreet(profile.street);
         if (profile.city && !city) setCity(profile.city);
-        if (profile.state && !state) setState(profile.state);
+        if (profile.state && !state) setState(toStateCode(profile.state));
         if (profile.zip && !zip) setZip(profile.zip);
         setProfileLoaded(true);
       } catch {
@@ -96,16 +109,22 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
 
     setStep('loading');
 
+    // Normalize before lookup: 2-letter state code (autofill may have stored
+    // a full name) and a plain 5-digit ZIP (the Census geocoder is happiest
+    // without the +4; we keep the user's full ZIP for display).
+    const stateCode = toStateCode(state);
+    const zip5 = zip.trim().match(/^\d{5}/)?.[0] ?? zip.trim();
+
     try {
       // Fetch representatives
       const repRes = await fetch('/api/representatives', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ street: street.trim(), city: city.trim(), state, zip: zip.trim() }),
+        body: JSON.stringify({ street: street.trim(), city: city.trim(), state: stateCode, zip: zip5 }),
       });
 
       const repData = await repRes.json();
-      if (!repRes.ok) throw new Error(repData.error || 'Failed to find representatives');
+      if (!repRes.ok) throw new FriendlyError(repData.error || 'Failed to find representatives');
 
       // Filter by campaign target level
       let filtered: Official[] = repData.officials || [];
@@ -116,7 +135,7 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
       }
 
       if (filtered.length === 0) {
-        throw new Error('No representatives found for your address at the targeted level');
+        throw new FriendlyError('No representatives found for your address at the targeted level');
       }
 
       setOfficials(filtered);
@@ -148,7 +167,12 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
         ask += ` Specifically regarding ${ref}${campaign.bill_title ? `, the ${campaign.bill_title}` : ''}.`;
       }
 
-      const turnstileToken = await getToken();
+      let turnstileToken = '';
+      try {
+        turnstileToken = await getToken();
+      } catch (tokenErr) {
+        console.error('[participate] turnstile token failed:', tokenErr);
+      }
 
       const msgRes = await fetch('/api/generate-message', {
         method: 'POST',
@@ -166,23 +190,31 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
           ask,
           personalWhy: personalWhy.trim() || undefined,
           senderName: name.trim(),
-          address: { street: street.trim(), city: city.trim(), state, zip: zip.trim() },
+          address: { street: street.trim(), city: city.trim(), state: stateCode, zip: zip5 },
           contactMethod: 'email',
           turnstileToken,
         }),
       });
 
       const msgData = await msgRes.json();
-      if (!msgRes.ok) throw new Error(msgData.error || 'Failed to generate messages');
+      if (!msgRes.ok) throw new FriendlyError(msgData.error || 'Failed to generate messages');
 
       const msgMap: Record<string, OfficialMessage> = {};
-      for (const msg of msgData.messages) {
+      for (const msg of Array.isArray(msgData.messages) ? msgData.messages : []) {
         msgMap[msg.officialName] = { subject: msg.subject, body: msg.body };
       }
       setMessages(msgMap);
       setStep('review');
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Something went wrong');
+      // Full detail (message + stack) stays in the console for debugging;
+      // users never see raw runtime exceptions like WebKit's
+      // "The string did not match the expected pattern."
+      console.error('[participate] submit failed:', err, err instanceof Error ? err.stack : '');
+      setError(
+        err instanceof FriendlyError
+          ? err.message
+          : "We couldn't look up your officials. Double-check your address, or try just your 5-digit ZIP."
+      );
       setStep('form');
     }
   };
@@ -191,7 +223,11 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
   const deliveryInfoMap = useMemo(() => {
     const map = new Map<string, DeliveryInfo>();
     for (const official of officials) {
-      map.set(official.id, determineDeliveryMethod(official, 'email'));
+      try {
+        map.set(official.id, determineDeliveryMethod(official, 'email'));
+      } catch (err) {
+        console.error('[participate] delivery method failed for', official.name, err);
+      }
     }
     return map;
   }, [officials]);
