@@ -12,7 +12,8 @@ declare global {
           callback: (token: string) => void;
           'expired-callback'?: () => void;
           'error-callback'?: () => void;
-          size?: 'invisible' | 'normal' | 'compact';
+          size?: 'normal' | 'flexible' | 'compact';
+          appearance?: 'always' | 'execute' | 'interaction-only';
           execution?: 'render' | 'execute';
         }
       ) => string;
@@ -77,7 +78,11 @@ export function useTurnstile() {
         },
         'expired-callback': () => setToken(null),
         'error-callback': () => setToken(null),
-        size: 'invisible',
+        // Cloudflare removed size:'invisible' (render() now THROWS on it,
+        // which silently killed every widget and 403'd all anonymous users).
+        // Invisibility now comes from appearance:'interaction-only' — the
+        // widget stays hidden unless a challenge actually needs interaction.
+        appearance: 'interaction-only',
         execution: 'execute',
       });
     };
