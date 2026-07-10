@@ -66,6 +66,16 @@ export default async function CampaignPage({ params }: PageProps) {
   const billCard = billSpecific
     ? await fetchBillCard(campaign.bill_congress!, campaign.bill_type!, campaign.bill_number!)
     : null;
+  if (!billSpecific) {
+    // Dormant bill identifiers must not reach the client at all — not even in
+    // serialized props. Neutral issues carry no bill reference anywhere.
+    campaign.bill_ref = null;
+    campaign.bill_title = null;
+    campaign.bill_url = null;
+    campaign.bill_congress = null;
+    campaign.bill_type = null;
+    campaign.bill_number = null;
+  }
 
   return (
     <div className="max-w-2xl mx-auto px-4 py-8">
