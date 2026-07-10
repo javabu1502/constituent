@@ -333,6 +333,8 @@ export interface Campaign {
   source_against_url?: string | null;
   // Bill-specific campaigns: bill appears ONLY when is_bill_specific is true;
   // identifiers are stored dormant otherwise.
+  // Curated My Democracy weigh-in (public/promoted) vs user-created (unlisted)
+  is_official?: boolean;
   // Reader-poll aggregates (public; individual stances are never exposed)
   support_count?: number;
   oppose_count?: number;

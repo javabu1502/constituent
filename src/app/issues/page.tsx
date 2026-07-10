@@ -25,7 +25,8 @@ export default async function IssuesPage() {
     .eq('status', 'active')
     .eq('approval_status', 'approved')
     .eq('visibility', 'public')
-    .eq('campaign_type', 'advocacy') // storytelling campaigns are link-only, never listed
+    .eq('campaign_type', 'advocacy')
+    .eq('is_official', true) // user-created campaigns are link-only, never listed
     .order('created_at', { ascending: false })
     .limit(50);
 
@@ -35,6 +36,7 @@ export default async function IssuesPage() {
     .select('action_count')
     .eq('approval_status', 'approved')
     .eq('campaign_type', 'advocacy')
+    .eq('is_official', true)
     .limit(2000);
   const totalActions = (totalsRows ?? []).reduce((sum, r) => sum + (Number(r.action_count) || 0), 0);
 

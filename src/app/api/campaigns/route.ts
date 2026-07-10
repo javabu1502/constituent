@@ -56,7 +56,7 @@ export async function POST(request: NextRequest) {
   }
 
   const {
-    campaign_type, visibility, headline, description, issue_area, issue_subtopic,
+    campaign_type, headline, description, issue_area, issue_subtopic,
     target_level, message_template, distribution_plan,
     bill_level, bill_state, bill_ref, bill_title, bill_url,
     story_prompt, usage_statement, usage_tags, attribution_options, edit_revoke_policy, recipient_email,
@@ -66,20 +66,19 @@ export async function POST(request: NextRequest) {
   const isStory = campaign_type === 'storytelling';
   const slug = slugify(headline).slice(0, 50) + '-' + randomSuffix();
 
-  // White-label branding is for unlisted (privately shared) campaigns only,
-  // and the logo must live in OUR storage bucket — never an arbitrary host.
-  const isUnlisted = isStory || (visibility || 'public') === 'unlisted';
+  // User-created campaigns are ALWAYS unlisted (link-only): never in the
+  // public directory, never promoted. Official/public is a curated flag set
+  // only by My Democracy, separate from approval. Branding is available to
+  // every user campaign; the logo must live in OUR storage bucket.
   const logoPrefix = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/campaign-logos/`;
   const safeLogoUrl = org_logo_url && org_logo_url.startsWith(logoPrefix) ? org_logo_url : null;
-  const branding = isUnlisted
-    ? {
-        org_name: org_name?.trim() || null,
-        org_url: org_url || null,
-        org_logo_url: safeLogoUrl,
-        brand_color: brand_color || null,
-        custom_domain: custom_domain?.toLowerCase() || null,
-      }
-    : { org_name: null, org_url: null, org_logo_url: null, brand_color: null, custom_domain: null };
+  const branding = {
+    org_name: org_name?.trim() || null,
+    org_url: org_url || null,
+    org_logo_url: safeLogoUrl,
+    brand_color: brand_color || null,
+    custom_domain: custom_domain?.toLowerCase() || null,
+  };
 
   const admin = createAdminClient();
   const { data: campaign, error } = await admin
@@ -88,8 +87,8 @@ export async function POST(request: NextRequest) {
       creator_id: user.id,
       slug,
       campaign_type,
-      // Storytelling is always unlisted; advocacy creator chooses
-      visibility: isStory ? 'unlisted' : (visibility || 'public'),
+      // All user-created campaigns are unlisted; is_official stays false.
+      visibility: 'unlisted',
       approval_status: 'pending',
       headline,
       description,

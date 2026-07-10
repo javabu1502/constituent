@@ -399,6 +399,7 @@ async function fetchCampaignsByIssue(supabase: ReturnType<typeof createAdminClie
       .select('slug, headline, issue_area, action_count, story_count')
       .eq('approval_status', 'approved')
       .eq('status', 'active')
+      .eq('is_official', true)
       .limit(200);
     for (const c of data || []) {
       const issue = (c.issue_area || '').trim().toLowerCase();

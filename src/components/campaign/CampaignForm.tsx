@@ -38,8 +38,6 @@ export function CampaignForm({ initialType }: { initialType?: 'advocacy' | 'stor
   const [campaignType] = useState<'advocacy' | 'storytelling'>(
     initialType ?? (searchParams.get('type') === 'storytelling' ? 'storytelling' : 'advocacy')
   );
-  // Advocacy campaigns choose; storytelling is always unlisted.
-  const [visibility, setVisibility] = useState<'public' | 'unlisted'>('public');
 
   // White-label branding — for unlisted (privately shared) campaigns only.
   const [orgName, setOrgName] = useState('');
@@ -50,7 +48,6 @@ export function CampaignForm({ initialType }: { initialType?: 'advocacy' | 'stor
   const [logoError, setLogoError] = useState<string | null>(null);
   const [customDomain, setCustomDomain] = useState('');
 
-  const isUnlisted = campaignType === 'storytelling' || visibility === 'unlisted';
 
   const handleLogoUpload = async (file: File | null) => {
     if (!file) return;
@@ -234,15 +231,13 @@ export function CampaignForm({ initialType }: { initialType?: 'advocacy' | 'stor
     setIsSubmitting(true);
 
     try {
-      const brandingBody = isUnlisted
-        ? {
-            org_name: orgName.trim() || null,
-            org_url: orgUrl.trim() || null,
-            org_logo_url: logoUrl || null,
-            brand_color: brandColor || null,
-            custom_domain: customDomain.trim().toLowerCase() || null,
-          }
-        : {};
+      const brandingBody = {
+        org_name: orgName.trim() || null,
+        org_url: orgUrl.trim() || null,
+        org_logo_url: logoUrl || null,
+        brand_color: brandColor || null,
+        custom_domain: customDomain.trim().toLowerCase() || null,
+      };
       const sharedBody = {
         campaign_type: campaignType,
         headline: headline.trim(),
@@ -254,7 +249,6 @@ export function CampaignForm({ initialType }: { initialType?: 'advocacy' | 'stor
       const body = campaignType === 'advocacy'
         ? {
             ...sharedBody,
-            visibility,
             target_level: targetLevel,
             message_template: messageTemplate.trim() || null,
             distribution_plan: distributionPlan.trim(),
@@ -572,39 +566,12 @@ export function CampaignForm({ initialType }: { initialType?: 'advocacy' | 'stor
         </p>
       </div>
 
-      {/* Visibility */}
-      <div>
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-          Visibility
-        </label>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-          <label className={`flex items-start gap-3 p-3 rounded-xl border cursor-pointer transition-colors ${visibility === 'public' ? 'border-purple-500 bg-purple-50 dark:bg-purple-900/20' : 'border-gray-200 dark:border-gray-600 hover:border-gray-400'}`}>
-            <input
-              type="radio"
-              name="visibility"
-              checked={visibility === 'public'}
-              onChange={() => setVisibility('public')}
-              className="mt-1 h-4 w-4 text-purple-600 focus:ring-purple-500"
-            />
-            <span>
-              <span className="block text-sm font-medium text-gray-800 dark:text-gray-200">Public</span>
-              <span className="block text-xs text-gray-500 dark:text-gray-400">Listed in the campaign directory for anyone to find.</span>
-            </span>
-          </label>
-          <label className={`flex items-start gap-3 p-3 rounded-xl border cursor-pointer transition-colors ${visibility === 'unlisted' ? 'border-purple-500 bg-purple-50 dark:bg-purple-900/20' : 'border-gray-200 dark:border-gray-600 hover:border-gray-400'}`}>
-            <input
-              type="radio"
-              name="visibility"
-              checked={visibility === 'unlisted'}
-              onChange={() => setVisibility('unlisted')}
-              className="mt-1 h-4 w-4 text-purple-600 focus:ring-purple-500"
-            />
-            <span>
-              <span className="block text-sm font-medium text-gray-800 dark:text-gray-200">Private (share by link)</span>
-              <span className="block text-xs text-gray-500 dark:text-gray-400">Only people with the link can see it — and you can add your organization&apos;s branding.</span>
-            </span>
-          </label>
-        </div>
+      {/* User campaigns are always link-only */}
+      <div className="p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700 rounded-xl">
+        <p className="text-sm text-blue-800 dark:text-blue-300">
+          Your campaign is <strong>shared by link only</strong> — it won&apos;t appear in the public directory,
+          and it&apos;s written in your voice, for your cause. You can brand it as your own below.
+        </p>
       </div>
 
         </>
@@ -689,8 +656,8 @@ export function CampaignForm({ initialType }: { initialType?: 'advocacy' | 'stor
         </>
       )}
 
-      {/* White-label branding — private campaigns only */}
-      {isUnlisted && (
+      {/* White-label branding — available on every campaign */}
+      {true && (
         <div className="p-4 border border-gray-200 dark:border-gray-600 rounded-xl space-y-4">
           <div>
             <p className="text-sm font-semibold text-gray-800 dark:text-gray-200">Organization branding <span className="text-gray-400 dark:text-gray-500 font-normal">(optional)</span></p>

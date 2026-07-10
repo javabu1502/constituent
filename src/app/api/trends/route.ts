@@ -83,7 +83,7 @@ export async function GET(req: NextRequest) {
     admin.from('messages').select('advocate_state').limit(10000),
     recentQuery,
     admin.from('messages').select('legislator_name').limit(10000),
-    admin.from('campaigns').select('story_count').eq('approval_status', 'approved'),
+    admin.from('campaigns').select('story_count').eq('approval_status', 'approved').eq('is_official', true),
   ]);
 
   const issues = aggregateIssues(filteredMessages || []);

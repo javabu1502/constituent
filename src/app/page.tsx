@@ -57,7 +57,7 @@ export default async function HomePage() {
     const [msgResult, stateResult, campResult] = await Promise.all([
       admin.from('messages').select('*', { count: 'exact', head: true }),
       admin.from('messages').select('advocate_state'),
-      admin.from('campaigns').select('*', { count: 'exact', head: true }).eq('status', 'active'),
+      admin.from('campaigns').select('*', { count: 'exact', head: true }).eq('status', 'active').eq('is_official', true),
     ]);
     totalMessages = msgResult.count ?? 0;
     const uniqueStates = new Set((stateResult.data ?? []).map(r => r.advocate_state).filter(Boolean));

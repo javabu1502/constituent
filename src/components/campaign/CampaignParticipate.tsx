@@ -27,9 +27,11 @@ interface OfficialMessage {
 }
 
 export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
-  // Neutral infrastructure: the participant picks their OWN position first,
-  // and the generated message carries that stance — not the campaign's.
-  const [step, setStep] = useState<Step>('stance');
+  // Official weigh-ins are neutral: the participant picks their OWN position
+  // first and the message carries that stance. User-created campaigns are
+  // the creator's own directional ask — no stance step, no poll.
+  const isOfficial = !!campaign.is_official;
+  const [step, setStep] = useState<Step>(isOfficial ? 'stance' : 'form');
   const [stance, setStance] = useState<Stance | null>(null);
 
   // Form fields
@@ -119,10 +121,15 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
 
       setOfficials(filtered);
 
-      // Generate messages that carry the PARTICIPANT's stance — the platform
-      // is neutral infrastructure and never supplies the position itself.
+      // Official weigh-ins: the message carries the PARTICIPANT's stance —
+      // the platform never supplies a position. User-created campaigns carry
+      // the CREATOR's ask, in their voice.
       let ask: string;
-      if (stance === 'support') {
+      if (!isOfficial) {
+        ask = campaign.message_template
+          ? `${campaign.headline}. ${campaign.message_template}`
+          : campaign.headline;
+      } else if (stance === 'support') {
         ask = `The constituent SUPPORTS this position: "${campaign.headline}". Write a respectful message expressing clear support and asking the official to support it too.`;
       } else if (stance === 'oppose') {
         ask = `The constituent OPPOSES this position: "${campaign.headline}". Write a respectful message expressing clear opposition and asking the official to oppose it.`;
@@ -238,7 +245,7 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
           participant_city: city.trim(),
           participant_state: state,
           messages_sent: sentCount,
-          stance: stance ?? undefined,
+          stance: isOfficial ? stance ?? undefined : undefined,
           turnstileToken: turnstileToken || undefined,
         }),
       });
@@ -246,6 +253,7 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
       console.error('[participate] Failed:', err);
     }
 
+    if (!isOfficial) return;
     try {
       const res = await fetch(`/api/campaigns/${campaign.slug}`);
       if (res.ok) {

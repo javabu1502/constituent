@@ -60,7 +60,7 @@ export default async function CampaignPage({ params }: PageProps) {
 
   const { data, error } = await admin
     .from('campaigns')
-    .select('id, slug, headline, description, issue_area, issue_subtopic, target_level, status, campaign_type, visibility, message_template, bill_level, bill_state, bill_ref, bill_title, bill_url, story_prompt, usage_statement, usage_tags, attribution_options, edit_revoke_policy, action_count, story_count, created_at, org_name, org_url, org_logo_url, brand_color, custom_domain, case_for, case_against, source_for_label, source_for_url, source_against_label, source_against_url, is_bill_specific, bill_congress, bill_type, bill_number, support_count, oppose_count, undecided_count')
+    .select('id, slug, headline, description, issue_area, issue_subtopic, target_level, status, campaign_type, visibility, message_template, bill_level, bill_state, bill_ref, bill_title, bill_url, story_prompt, usage_statement, usage_tags, attribution_options, edit_revoke_policy, action_count, story_count, created_at, org_name, org_url, org_logo_url, brand_color, custom_domain, case_for, case_against, source_for_label, source_for_url, source_against_label, source_against_url, is_bill_specific, bill_congress, bill_type, bill_number, support_count, oppose_count, undecided_count, is_official')
     .eq('slug', slug)
     .eq('approval_status', 'approved')
     .single();
@@ -154,7 +154,7 @@ export default async function CampaignPage({ params }: PageProps) {
         </p>
 
         {/* Where do you stand? — both sides, visually equal, neither emphasized */}
-        {campaign.case_for && campaign.case_against && (
+        {campaign.is_official && campaign.case_for && campaign.case_against && (
           <div className="mt-6">
             <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Weigh in</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">

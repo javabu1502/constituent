@@ -23,6 +23,7 @@ export async function GET(request: NextRequest) {
     .eq('visibility', 'public')
     .eq('campaign_type', 'advocacy')
     .eq('approval_status', 'approved')
+    .eq('is_official', true)
     .order(sort === 'popular' ? 'action_count' : 'created_at', { ascending: false })
     .limit(limit);
 

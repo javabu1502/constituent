@@ -72,6 +72,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       .eq('campaign_type', 'advocacy')
       .eq('approval_status', 'approved')
       .eq('status', 'active')
+      .eq('is_official', true)
       .order('created_at', { ascending: false });
 
     if (campaigns) {
