@@ -31,26 +31,31 @@ export async function generateMetadata({ params, searchParams }: PageProps): Pro
 
   // Stance share links (?from=stance&pos=...) get the personalized card —
   // the sharer's side lit up, both sides visible. Everyone else gets the
-  // default neutral card from the opengraph-image file convention.
+  // campaign's own neutral card. Twitter meta is set EXPLICITLY: without it,
+  // X inherits the site-wide generic image/title from the root layout.
   const pos = typeof sp.pos === 'string' && sp.from === 'stance' && STANCE_POSITIONS.has(sp.pos) ? sp.pos : null;
-  const stanceImage = pos
-    ? [{ url: `https://www.mydemocracy.app/campaign/${slug}/stance/${pos}`, width: 1200, height: 630 }]
-    : undefined;
+  const imageUrl = pos
+    ? `https://www.mydemocracy.app/campaign/${slug}/stance/${pos}`
+    : `https://www.mydemocracy.app/campaign/${slug}/opengraph-image`;
 
   return {
     title: `${campaign.headline} | My Democracy`,
     description: campaign.description,
+    alternates: { canonical: `https://www.mydemocracy.app/campaign/${slug}` },
     // Unlisted campaigns (all storytelling ones) are shared by link only —
     // keep them out of search engines even if the link circulates.
     robots: campaign.visibility === 'unlisted' ? { index: false, follow: false } : undefined,
     openGraph: {
       title: campaign.headline,
       description: campaign.description,
-      ...(stanceImage ? { images: stanceImage } : {}),
+      ...(pos ? { images: [{ url: imageUrl, width: 1200, height: 630 }] } : {}),
     },
-    ...(stanceImage
-      ? { twitter: { card: 'summary_large_image' as const, images: stanceImage.map((i) => i.url) } }
-      : {}),
+    twitter: {
+      card: 'summary_large_image',
+      title: campaign.headline,
+      description: campaign.description,
+      images: [imageUrl],
+    },
   };
 }
 
