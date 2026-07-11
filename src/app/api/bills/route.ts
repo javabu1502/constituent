@@ -1,11 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { openstatesRestFetch } from '@/lib/openstates-api';
+import { US_STATES } from '@/lib/constants';
 
 /**
  * GET /api/bills?state=NV&query=housing&page=1
  *
- * Searches state legislation via the Open States GraphQL API (v3).
- * Requires OPENSTATES_API_KEY env var.
- * Returns simplified bill objects: id, title, identifier, session, subjects, status, url.
+ * Searches state legislation via the Open States v3 REST API (GraphQL was
+ * retired). Requires OPENSTATES_API_KEY. Page-based pagination.
+ * Returns simplified bill objects: id, title, identifier, session, subjects,
+ * status, url, sponsor, latest action.
  */
 
 interface BillResult {
@@ -21,57 +24,30 @@ interface BillResult {
   latestActionDate: string | null;
 }
 
-const GRAPHQL_ENDPOINT = 'https://v3.openstates.org/graphql';
+interface OpenStatesBill {
+  id: string;
+  identifier: string;
+  title: string;
+  session: string;
+  subject: string[] | null;
+  updated_at: string;
+  openstates_url: string;
+  latest_action_description: string | null;
+  latest_action_date: string | null;
+  sponsorships?: Array<{ name?: string }> | null;
+}
 
-const BILLS_QUERY = `
-  query SearchBills($state: String!, $query: String!, $first: Int!, $after: String) {
-    bills(
-      jurisdiction: $state
-      searchQuery: $query
-      first: $first
-      after: $after
-      sort: "updated_desc"
-    ) {
-      edges {
-        node {
-          id
-          identifier
-          title
-          session {
-            identifier
-          }
-          subject
-          updatedAt
-          openstatesUrl
-          sponsorships(first: 1) {
-            edges {
-              node {
-                name
-              }
-            }
-          }
-          actions(last: 1) {
-            edges {
-              node {
-                description
-                date
-              }
-            }
-          }
-        }
-      }
-      pageInfo {
-        hasNextPage
-        endCursor
-      }
-      totalCount
-    }
+/** v3 REST wants the full jurisdiction name ("Nevada"), not a 2-letter code. */
+function jurisdictionName(state: string): string | null {
+  const s = state.trim();
+  if (/^[A-Za-z]{2}$/.test(s)) {
+    return US_STATES.find((x) => x.code === s.toUpperCase())?.name ?? null;
   }
-`;
+  return US_STATES.find((x) => x.name.toLowerCase() === s.toLowerCase())?.name ?? s;
+}
 
 export async function GET(request: NextRequest) {
-  const apiKey = process.env.OPENSTATES_API_KEY;
-  if (!apiKey) {
+  if (!process.env.OPENSTATES_API_KEY) {
     return NextResponse.json(
       { error: 'Bill search is not configured. Missing OPENSTATES_API_KEY.' },
       { status: 503 }
@@ -81,7 +57,7 @@ export async function GET(request: NextRequest) {
   const { searchParams } = request.nextUrl;
   const state = searchParams.get('state');
   const query = searchParams.get('query');
-  const after = searchParams.get('after') || null;
+  const page = Math.max(1, parseInt(searchParams.get('page') || '1', 10) || 1);
 
   if (!state || !query) {
     return NextResponse.json(
@@ -90,30 +66,24 @@ export async function GET(request: NextRequest) {
     );
   }
 
-  // Open States uses lowercase two-letter jurisdiction codes
-  const jurisdiction = state.length === 2 ? state.toLowerCase() : state.toLowerCase();
+  const jurisdiction = jurisdictionName(state);
+  if (!jurisdiction) {
+    return NextResponse.json({ error: 'Unknown state' }, { status: 400 });
+  }
 
   try {
-    const response = await fetch(GRAPHQL_ENDPOINT, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-API-KEY': apiKey,
-      },
-      body: JSON.stringify({
-        query: BILLS_QUERY,
-        variables: {
-          state: jurisdiction,
-          query,
-          first: 10,
-          after,
-        },
-      }),
+    const response = await openstatesRestFetch('/bills', {
+      jurisdiction,
+      q: query,
+      sort: 'latest_action_desc',
+      per_page: '10',
+      page: String(page),
+      include: 'sponsorships',
     });
 
     if (!response.ok) {
       const errText = await response.text();
-      console.error('[bills] Open States API error:', response.status, errText);
+      console.error('[bills] Open States API error:', response.status, errText.slice(0, 300));
       return NextResponse.json(
         { error: 'Failed to search bills' },
         { status: 502 }
@@ -121,56 +91,27 @@ export async function GET(request: NextRequest) {
     }
 
     const data = await response.json();
+    const results: OpenStatesBill[] = Array.isArray(data.results) ? data.results : [];
+    const pagination = data.pagination ?? { page, max_page: page, total_items: results.length };
 
-    if (data.errors) {
-      console.error('[bills] GraphQL errors:', data.errors);
-      return NextResponse.json(
-        { error: 'Failed to search bills' },
-        { status: 502 }
-      );
-    }
-
-    const billsData = data.data?.bills;
-    if (!billsData) {
-      return NextResponse.json({ bills: [], totalCount: 0, hasNextPage: false, endCursor: null });
-    }
-
-    const bills: BillResult[] = billsData.edges.map((edge: { node: Record<string, unknown> }) => {
-      const node = edge.node as {
-        id: string;
-        identifier: string;
-        title: string;
-        session: { identifier: string };
-        subject: string[];
-        updatedAt: string;
-        openstatesUrl: string;
-        sponsorships: { edges: { node: { name: string } }[] };
-        actions: { edges: { node: { description: string; date: string } }[] };
-      };
-
-      const sponsor = node.sponsorships?.edges?.[0]?.node?.name || null;
-      const latestAction = node.actions?.edges?.[0]?.node?.description || null;
-      const latestActionDate = node.actions?.edges?.[0]?.node?.date || null;
-
-      return {
-        id: node.id,
-        identifier: node.identifier,
-        title: node.title,
-        session: node.session?.identifier || '',
-        subjects: node.subject || [],
-        updatedAt: node.updatedAt,
-        url: node.openstatesUrl || `https://openstates.org/${jurisdiction}/bills/${node.session?.identifier}/${node.identifier}/`,
-        sponsor,
-        latestAction,
-        latestActionDate,
-      };
-    });
+    const bills: BillResult[] = results.map((b) => ({
+      id: b.id,
+      identifier: b.identifier,
+      title: b.title,
+      session: b.session || '',
+      subjects: b.subject || [],
+      updatedAt: b.updated_at,
+      url: b.openstates_url,
+      sponsor: b.sponsorships?.[0]?.name || null,
+      latestAction: b.latest_action_description || null,
+      latestActionDate: b.latest_action_date || null,
+    }));
 
     return NextResponse.json({
       bills,
-      totalCount: billsData.totalCount,
-      hasNextPage: billsData.pageInfo.hasNextPage,
-      endCursor: billsData.pageInfo.endCursor,
+      totalCount: pagination.total_items ?? bills.length,
+      hasNextPage: (pagination.page ?? page) < (pagination.max_page ?? page),
+      page: pagination.page ?? page,
     });
   } catch (err) {
     console.error('[bills] Error:', err);

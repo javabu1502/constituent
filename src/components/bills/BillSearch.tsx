@@ -37,7 +37,7 @@ export function BillSearch({ stateCode, stateName }: BillSearchProps) {
   const [loading, setLoading] = useState(false);
   const [searched, setSearched] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [endCursor, setEndCursor] = useState<string | null>(null);
+  const [page, setPage] = useState(1);
   const [hasNextPage, setHasNextPage] = useState(false);
 
   const search = useCallback(async (append = false) => {
@@ -50,9 +50,8 @@ export function BillSearch({ stateCode, stateName }: BillSearchProps) {
         state: stateCode,
         query: query.trim(),
       });
-      if (append && endCursor) {
-        params.set('after', endCursor);
-      }
+      // v3 REST is page-based: page 1 for a fresh search, next page to append.
+      params.set('page', String(append ? page + 1 : 1));
 
       const res = await fetch(`/api/bills?${params}`);
       const data = await res.json();
@@ -65,19 +64,19 @@ export function BillSearch({ stateCode, stateName }: BillSearchProps) {
       setBills((prev) => (append ? [...prev, ...data.bills] : data.bills));
       setTotalCount(data.totalCount);
       setHasNextPage(data.hasNextPage);
-      setEndCursor(data.endCursor);
+      setPage(data.page ?? (append ? page + 1 : 1));
       setSearched(true);
     } catch {
       setError('Failed to search bills. Please try again.');
     } finally {
       setLoading(false);
     }
-  }, [query, stateCode, endCursor]);
+  }, [query, stateCode, page]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setBills([]);
-    setEndCursor(null);
+    setPage(1);
     search(false);
   };
 
@@ -208,7 +207,7 @@ export function BillSearch({ stateCode, stateName }: BillSearchProps) {
                 onClick={() => {
                   setQuery(term);
                   setBills([]);
-                  setEndCursor(null);
+                  setPage(1);
                   // Trigger search after state update
                   setTimeout(() => {
                     const form = document.querySelector('form');

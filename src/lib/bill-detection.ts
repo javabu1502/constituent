@@ -1,5 +1,6 @@
 import { congressFetch } from '@/lib/congress-api';
-import { openstatesFetch } from '@/lib/openstates-api';
+import { openstatesRestFetch } from '@/lib/openstates-api';
+import { US_STATES } from '@/lib/constants';
 import { cacheGet, cacheSet, TTL } from '@/lib/cache';
 
 // Pure parsing lives in @/lib/bills (no server deps, client-safe).
@@ -84,43 +85,34 @@ export async function fetchFederalBillDetails(billType: string, billNumber: stri
 
 export async function fetchStateBillDetails(identifier: string, state?: string): Promise<BillDetails | null> {
   if (!process.env.OPENSTATES_API_KEY) return null;
+  // v3 REST needs a jurisdiction (full state name) to search bills.
+  const jurisdiction = state
+    ? US_STATES.find((s) => s.code === state.toUpperCase())?.name ?? null
+    : null;
+  if (!jurisdiction) return null;
 
-  const cacheKey = `bill-state-${state || 'any'}-${identifier}`;
+  const cacheKey = `bill-state-${state}-${identifier}`;
   const cached = cacheGet<BillDetails>(cacheKey);
   if (cached) return cached;
 
   try {
-    const query = `
-      query($search: String!, $jurisdiction: String, $first: Int) {
-        bills(searchQuery: $search, jurisdiction: $jurisdiction, first: $first) {
-          edges {
-            node {
-              identifier
-              title
-              latestAction { description }
-              sponsorships { name }
-              abstracts { abstract }
-            }
-          }
-        }
-      }
-    `;
-
-    const jurisdiction = state ? `ocd-jurisdiction/country:us/state:${state.toLowerCase()}/government` : undefined;
-    const res = await openstatesFetch(query, { search: identifier, jurisdiction, first: 1 });
+    const res = await openstatesRestFetch('/bills', {
+      jurisdiction,
+      q: identifier,
+      per_page: '1',
+      include: ['sponsorships', 'abstracts'],
+    });
     if (!res.ok) return null;
 
     const data = await res.json();
-    const edges = data.data?.bills?.edges;
-    if (!edges || edges.length === 0) return null;
-
-    const bill = edges[0].node;
+    const bill = Array.isArray(data.results) ? data.results[0] : null;
+    if (!bill) return null;
 
     const result: BillDetails = {
       billNumber: bill.identifier || identifier,
       title: bill.title || 'Untitled',
-      sponsors: (bill.sponsorships || []).map((s: { name: string }) => s.name).slice(0, 5),
-      status: bill.latestAction?.description || 'Unknown',
+      sponsors: (bill.sponsorships || []).map((s: { name?: string }) => s.name).filter(Boolean).slice(0, 5),
+      status: bill.latest_action_description || 'Unknown',
       summary: (bill.abstracts?.[0]?.abstract || '').slice(0, 500),
       level: 'state',
     };
