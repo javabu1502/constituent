@@ -16,3 +16,4 @@
 3. how-to-fund-farms-and-food-aid-fm7b26 — Farm, Food, and National Security Act (H.R. 7567)
 4. proof-of-citizenship-to-register-save-sv9k4x — SAVE America Act (H.R. 7296)
 5. fresh-produce-benefit-fb9x2k — Fresh Bucks for Fresh Produce Act (H.R. 9581)
+6. public-stake-in-big-ai-companies-ai7swf — American A.I. Sovereign Wealth Fund Act (S. 4825)
