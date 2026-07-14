@@ -11,19 +11,37 @@ interface Campaign {
   issue_area: string;
   action_count: number;
   created_at: string;
+  is_bill_specific?: boolean;
+  bill_type?: string | null;
+  bill_number?: string | null;
+}
+
+const BILL_TYPE_LABELS: Record<string, string> = {
+  hr: 'H.R.', s: 'S.', hres: 'H.Res.', sres: 'S.Res.',
+  hjres: 'H.J.Res.', sjres: 'S.J.Res.', hconres: 'H.Con.Res.', sconres: 'S.Con.Res.',
+};
+
+function billRef(c: Campaign): string | null {
+  if (!c.is_bill_specific || !c.bill_type || !c.bill_number) return null;
+  return `${BILL_TYPE_LABELS[c.bill_type.toLowerCase()] ?? c.bill_type.toUpperCase()} ${c.bill_number}`;
 }
 
 export function CampaignFilters({ campaigns }: { campaigns: Campaign[] }) {
   const [activeIssue, setActiveIssue] = useState<string | null>(null);
+  const [kind, setKind] = useState<'all' | 'legislation' | 'policy'>('all');
   const [sort, setSort] = useState<'recent' | 'popular'>('recent');
 
   // Extract unique issue areas
   const issueAreas = Array.from(new Set(campaigns.map((c) => c.issue_area))).sort();
 
-  // Filter
-  const filtered = activeIssue
-    ? campaigns.filter((c) => c.issue_area === activeIssue)
-    : campaigns;
+  // Filter: topic + kind. Legislation = weigh-ins on a specific bill in
+  // Congress; Policy = issue-level questions.
+  const filtered = campaigns.filter((c) => {
+    if (activeIssue && c.issue_area !== activeIssue) return false;
+    if (kind === 'legislation' && !c.is_bill_specific) return false;
+    if (kind === 'policy' && c.is_bill_specific) return false;
+    return true;
+  });
 
   // Sort
   const sorted = [...filtered].sort((a, b) => {
@@ -48,6 +66,21 @@ export function CampaignFilters({ campaigns }: { campaigns: Campaign[] }) {
               <option key={area} value={area}>{area}</option>
             ))}
           </select>
+        </div>
+        <div className="flex items-center gap-1 shrink-0" role="group" aria-label="Filter by kind">
+          {([['all', 'All'], ['legislation', 'Legislation'], ['policy', 'Policy']] as const).map(([val, label]) => (
+            <button
+              key={val}
+              onClick={() => setKind(val)}
+              className={`px-3 py-1.5 text-sm font-medium rounded-full transition-colors ${
+                kind === val
+                  ? 'bg-purple-600 text-white'
+                  : 'bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
+              }`}
+            >
+              {label}
+            </button>
+          ))}
         </div>
         <div className="flex items-center gap-1 text-sm shrink-0">
           <span className="text-gray-400 dark:text-gray-500 mr-1">Sort:</span>
@@ -95,9 +128,16 @@ export function CampaignFilters({ campaigns }: { campaigns: Campaign[] }) {
               href={`/campaign/${campaign.slug}`}
               className="block bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5 hover:shadow-md hover:border-purple-300 dark:hover:border-purple-700 transition-all"
             >
-              <div className="flex items-center justify-between mb-3">
-                <span className="px-2.5 py-1 text-xs font-medium rounded-full bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300">
-                  {campaign.issue_area}
+              <div className="flex items-center justify-between mb-3 gap-2">
+                <span className="flex items-center gap-1.5 min-w-0">
+                  <span className="px-2.5 py-1 text-xs font-medium rounded-full bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300 truncate">
+                    {campaign.issue_area}
+                  </span>
+                  {billRef(campaign) && (
+                    <span className="px-2 py-1 text-xs font-semibold rounded-full bg-indigo-100 text-indigo-700 dark:bg-indigo-900/40 dark:text-indigo-300 shrink-0">
+                      📄 {billRef(campaign)}
+                    </span>
+                  )}
                 </span>
                 <div className="flex items-center gap-1 text-gray-500 dark:text-gray-400">
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

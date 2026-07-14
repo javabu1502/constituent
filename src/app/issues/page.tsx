@@ -21,7 +21,7 @@ export default async function IssuesPage() {
   const admin = createAdminClient();
   const { data: issues } = await admin
     .from('campaigns')
-    .select('id, slug, headline, description, issue_area, action_count, created_at')
+    .select('id, slug, headline, description, issue_area, action_count, created_at, is_bill_specific, bill_type, bill_number')
     .eq('status', 'active')
     .eq('approval_status', 'approved')
     .eq('visibility', 'public')
