@@ -89,15 +89,8 @@ export const CITATIONS = [
     source_against_label: "Heritage Foundation (opposes extension)",
     source_against_url: "https://www.heritage.org/health-care-reform/commentary/extending-enhanced-obamacare-subsidies-would-be-costly-ineffective",
   },
-  {
-    slug: "prevent-voter-suppression-vote-no-on-the-save-act-bqq31c",
-    bill_title: "SAVE Act, H.R. 22",
-    bill_url: `${C}/house-bill/22`,
-    source_for_label: "Heritage Foundation (supports the requirement)",
-    source_for_url: "https://www.heritage.org/press/heritage-applauds-house-passage-legislation-protect-elections",
-    source_against_label: "League of Women Voters (opposes as a barrier)",
-    source_against_url: "https://www.lwv.org/save-act",
-  },
+  // prevent-voter-suppression-vote-no-on-the-save-act-bqq31c removed 2026-07-16
+  // (legacy directional slug deleted from DB; proof-of-citizenship-to-register-save-sv9k4x is the live SAVE campaign)
   {
     slug: "stop-the-medicaid-coverage-cliff-5r9t2v",
     bill_title: "One Big Beautiful Bill Act, H.R. 1 (P.L. 119-21)",
