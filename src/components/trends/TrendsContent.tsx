@@ -61,6 +61,17 @@ function TrendBadge({ trend }: { trend?: IssueTrend }) {
   );
 }
 
+// Party is stored inconsistently across sources ('Democrat', 'Democratic',
+// 'Republican', 'D'/'R'/'I'), so key off the first letter rather than an
+// exact string — otherwise 'Democrat' fails an === 'Democratic' check and
+// every Democrat falls through to the Independent label.
+function partyBadge(party: string): { letter: 'D' | 'R' | 'I'; className: string } {
+  const first = (party || '').trim().charAt(0).toUpperCase();
+  if (first === 'D') return { letter: 'D', className: 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400' };
+  if (first === 'R') return { letter: 'R', className: 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400' };
+  return { letter: 'I', className: 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300' };
+}
+
 interface TopRep {
   legislatorId: string;
   name: string;
@@ -420,12 +431,8 @@ export function TrendsContent() {
                     <span className="text-sm font-medium text-gray-900 dark:text-white flex-1 truncate">
                       {rep.name}
                     </span>
-                    <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${
-                      rep.party === 'Democratic' ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400' :
-                      rep.party === 'Republican' ? 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400' :
-                      'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'
-                    }`}>
-                      {rep.party === 'Democratic' ? 'D' : rep.party === 'Republican' ? 'R' : 'I'}
+                    <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${partyBadge(rep.party).className}`}>
+                      {partyBadge(rep.party).letter}
                     </span>
                     <span className="text-sm text-gray-500 dark:text-gray-400 shrink-0">
                       {rep.count.toLocaleString()} messages
@@ -452,12 +459,8 @@ export function TrendsContent() {
                     <span className="text-sm font-medium text-gray-900 dark:text-white flex-1 truncate">
                       {rep.name}
                     </span>
-                    <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${
-                      rep.party === 'Democratic' ? 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400' :
-                      rep.party === 'Republican' ? 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400' :
-                      'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300'
-                    }`}>
-                      {rep.party === 'Democratic' ? 'D' : rep.party === 'Republican' ? 'R' : 'I'}
+                    <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${partyBadge(rep.party).className}`}>
+                      {partyBadge(rep.party).letter}
                     </span>
                     <span className="text-sm text-gray-500 dark:text-gray-400 shrink-0">
                       {rep.count.toLocaleString()} messages
