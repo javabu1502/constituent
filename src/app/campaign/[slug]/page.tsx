@@ -270,7 +270,10 @@ export default async function CampaignPage({ params }: PageProps) {
               <span className="text-sm text-purple-600 dark:text-purple-400">
                 {isStory
                   ? `${(campaign.story_count === 1) ? 'person has' : 'people have'} shared their story`
-                  : `${(campaign.action_count === 1) ? 'person has' : 'people have'} taken action`}
+                  // action_count counts officials engaged (one send = one
+                  // action), not distinct people — a person contacting all
+                  // three of their members is three actions.
+                  : `${(campaign.action_count === 1) ? 'action taken' : 'actions taken'}`}
               </span>
             </div>
             <CopyLinkButton slug={campaign.slug} />

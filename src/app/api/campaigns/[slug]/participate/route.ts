@@ -33,7 +33,7 @@ export async function POST(
     return NextResponse.json({ error: parsed.error }, { status: 400 });
   }
 
-  const { participant_name, participant_city, participant_state, messages_sent, stance, turnstileToken } = parsed.data;
+  const { participant_name, participant_city, participant_state, messages_sent, stance, action_id, turnstileToken } = parsed.data;
   const identity = await resolveUsageIdentity(ip);
   if (process.env.TURNSTILE_SECRET_KEY) {
     const valid = await verifyTurnstile(turnstileToken || '', { strict: !identity.userId });
@@ -56,9 +56,47 @@ export async function POST(
     return NextResponse.json({ error: 'Campaign not found' }, { status: 404 });
   }
 
+  // Follow-up engagement: the same participant engaged another official.
+  // Each official engaged counts as an action publicly, but stays on the
+  // participant's single row (stance was already counted on the insert).
+  if (action_id) {
+    const { data: existing, error: findError } = await admin
+      .from('campaign_actions')
+      .select('id, messages_sent')
+      .eq('id', action_id)
+      .eq('campaign_id', campaign.id)
+      .single();
+
+    if (findError || !existing) {
+      return NextResponse.json({ error: 'Action not found' }, { status: 404 });
+    }
+
+    // Mirrors the schema's messages_sent cap
+    if ((existing.messages_sent || 0) < 20) {
+      const { error: updateError } = await admin
+        .from('campaign_actions')
+        .update({ messages_sent: (existing.messages_sent || 0) + 1 })
+        .eq('id', action_id);
+
+      if (updateError) {
+        console.error('[participate] Update error:', updateError);
+        return NextResponse.json({ error: 'Failed to record participation' }, { status: 500 });
+      }
+
+      const { error: rpcError } = await admin.rpc('increment_campaign_action_count', {
+        campaign_slug: slug,
+      });
+      if (rpcError) {
+        console.error('[participate] RPC error:', rpcError);
+      }
+    }
+
+    return NextResponse.json({ success: true, campaign_id: campaign.id, action_id });
+  }
+
   // Insert campaign action (stance is stored here but never exposed
   // individually — reads go through the service-role client only)
-  const { error: actionError } = await admin
+  const { data: inserted, error: actionError } = await admin
     .from('campaign_actions')
     .insert({
       campaign_id: campaign.id,
@@ -67,7 +105,9 @@ export async function POST(
       participant_state,
       messages_sent: messages_sent || 0,
       stance: stance || null,
-    });
+    })
+    .select('id')
+    .single();
 
   if (actionError) {
     console.error('[participate] Insert error:', actionError);
@@ -94,5 +134,5 @@ export async function POST(
     }
   }
 
-  return NextResponse.json({ success: true, campaign_id: campaign.id });
+  return NextResponse.json({ success: true, campaign_id: campaign.id, action_id: inserted?.id ?? null });
 }

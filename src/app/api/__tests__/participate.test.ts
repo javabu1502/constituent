@@ -1,11 +1,21 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { NextRequest } from 'next/server';
 
-const mockInsert = vi.fn();
 const mockSingle = vi.fn();
 const mockEq2 = vi.fn(() => ({ single: mockSingle }));
 const mockEq1 = vi.fn(() => ({ eq: mockEq2 }));
 const mockSelect = vi.fn(() => ({ eq: mockEq1 }));
+// campaign_actions: insert().select('id').single()
+const mockActionInsertSingle = vi.fn();
+const mockInsert = vi.fn(() => ({ select: vi.fn(() => ({ single: mockActionInsertSingle })) }));
+// campaign_actions: select().eq(id).eq(campaign_id).single() — action_id lookup
+const mockActionLookupSingle = vi.fn();
+const mockActionsSelect = vi.fn(() => ({
+  eq: vi.fn(() => ({ eq: vi.fn(() => ({ single: mockActionLookupSingle })) })),
+}));
+// campaign_actions: update().eq(id)
+const mockActionUpdateEq = vi.fn();
+const mockUpdate = vi.fn(() => ({ eq: mockActionUpdateEq }));
 const mockRpc = vi.fn();
 
 vi.mock('@/lib/supabase', () => ({
@@ -15,7 +25,7 @@ vi.mock('@/lib/supabase', () => ({
         return { select: mockSelect };
       }
       if (table === 'campaign_actions') {
-        return { insert: mockInsert };
+        return { insert: mockInsert, select: mockActionsSelect, update: mockUpdate };
       }
       return { insert: vi.fn(), select: vi.fn() };
     }),
@@ -62,7 +72,9 @@ describe('POST /api/campaigns/[slug]/participate', () => {
     vi.clearAllMocks();
     mockWriteLimiter.check.mockReturnValue({ success: true });
     mockSingle.mockResolvedValue({ data: { id: 'campaign-uuid-123' }, error: null });
-    mockInsert.mockResolvedValue({ error: null });
+    mockActionInsertSingle.mockResolvedValue({ data: { id: 'action-uuid-1' }, error: null });
+    mockActionLookupSingle.mockResolvedValue({ data: { id: 'action-uuid-1', messages_sent: 1 }, error: null });
+    mockActionUpdateEq.mockResolvedValue({ error: null });
     mockRpc.mockResolvedValue({ error: null });
     process.env.TURNSTILE_SECRET_KEY = '';
   });
@@ -81,6 +93,45 @@ describe('POST /api/campaigns/[slug]/participate', () => {
     const data = await res.json();
     expect(data.success).toBe(true);
     expect(data.campaign_id).toBe('campaign-uuid-123');
+    expect(data.action_id).toBe('action-uuid-1');
+  });
+
+  it('increments an existing action when action_id is provided', async () => {
+    const { POST } = await import('../campaigns/[slug]/participate/route');
+    const req = new NextRequest('http://localhost/api/campaigns/test-campaign/participate', {
+      method: 'POST',
+      body: JSON.stringify({ ...validBody, action_id: '123e4567-e89b-12d3-a456-426614174000' }),
+      headers: { 'Content-Type': 'application/json' },
+    });
+    const params = { params: Promise.resolve({ slug: 'test-campaign' }) };
+
+    const res = await POST(req, params);
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.success).toBe(true);
+    // Bumps messages_sent + public action count on the existing row —
+    // no second participant row, and stance is never re-counted.
+    expect(mockUpdate).toHaveBeenCalledWith({ messages_sent: 2 });
+    expect(mockInsert).not.toHaveBeenCalled();
+    expect(mockRpc).toHaveBeenCalledWith('increment_campaign_action_count', {
+      campaign_slug: 'test-campaign',
+    });
+    expect(mockRpc).not.toHaveBeenCalledWith('increment_campaign_stance_count', expect.anything());
+  });
+
+  it('returns 404 when action_id does not belong to the campaign', async () => {
+    mockActionLookupSingle.mockResolvedValue({ data: null, error: { message: 'Not found' } });
+
+    const { POST } = await import('../campaigns/[slug]/participate/route');
+    const req = new NextRequest('http://localhost/api/campaigns/test-campaign/participate', {
+      method: 'POST',
+      body: JSON.stringify({ ...validBody, action_id: '123e4567-e89b-12d3-a456-426614174000' }),
+      headers: { 'Content-Type': 'application/json' },
+    });
+    const params = { params: Promise.resolve({ slug: 'test-campaign' }) };
+
+    const res = await POST(req, params);
+    expect(res.status).toBe(404);
   });
 
   it('returns 400 for invalid JSON', async () => {
@@ -144,7 +195,7 @@ describe('POST /api/campaigns/[slug]/participate', () => {
   });
 
   it('returns 500 when campaign action insert fails', async () => {
-    mockInsert.mockResolvedValue({ error: { message: 'Insert failed' } });
+    mockActionInsertSingle.mockResolvedValue({ data: null, error: { message: 'Insert failed' } });
 
     const { POST } = await import('../campaigns/[slug]/participate/route');
     const req = new NextRequest('http://localhost/api/campaigns/test-campaign/participate', {

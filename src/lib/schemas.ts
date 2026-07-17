@@ -234,6 +234,10 @@ export const campaignParticipateSchema = z.object({
   // Reader-poll stance: stored on the action row (never exposed individually)
   // and rolled up into public aggregate counters.
   stance: z.enum(['support', 'oppose', 'undecided']).optional(),
+  // Set on follow-up calls when the same participant engages another
+  // official: bumps that row's messages_sent + the public action count
+  // instead of inserting a second participant row (stance counted once).
+  action_id: z.string().uuid().optional(),
   turnstileToken: z.string().optional(),
 });
 

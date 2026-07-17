@@ -266,37 +266,48 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
     return map;
   }, [officials]);
 
-  // Record the participation (action count + reader-poll stance) exactly once.
-  // Product decision: opening a message into mail/form/phone counts as sent —
-  // we don't ask people to come back and confirm, so this fires on the FIRST
-  // send click rather than waiting for the Done button (most people never
-  // return to click it). Done remains a fallback for the no-send path.
-  const participationRecordedRef = useRef(false);
-  const recordParticipation = async (messagesSent: number) => {
-    if (participationRecordedRef.current) return;
-    participationRecordedRef.current = true;
-    trackEvent('campaign_action', { campaign: campaign.slug, issue: campaign.issue_area });
-    const turnstileToken = await getToken();
-    try {
-      const res = await fetch(`/api/campaigns/${campaign.slug}/participate`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          participant_name: name.trim(),
-          participant_city: city.trim(),
-          participant_state: state,
-          // Snapshot at record time; per-official sends live in `messages`.
-          messages_sent: messagesSent,
-          stance: isOfficial ? stance ?? undefined : undefined,
-          turnstileToken: turnstileToken || undefined,
-        }),
-      });
-      if (!res.ok) {
-        console.error('[participate] Failed:', res.status, await res.text());
+  // Product decisions encoded here: opening a message into mail/form/phone
+  // counts as sent (we never ask people to come back and confirm), and EACH
+  // official engaged counts as an action. The first send click inserts the
+  // participation row (stance counted once) and returns its id; every
+  // further official bumps that row's messages_sent + the public action
+  // count. Calls are serialized through a promise chain so follow-up clicks
+  // see the action_id from the first, and each runs while the review step's
+  // Turnstile widget is still mounted.
+  const actionIdRef = useRef<string | null>(null);
+  const participationChainRef = useRef<Promise<void>>(Promise.resolve());
+  const recordEngagement = (initialMessagesSent = 1) => {
+    participationChainRef.current = participationChainRef.current.then(async () => {
+      const isFirst = !actionIdRef.current;
+      if (isFirst) {
+        trackEvent('campaign_action', { campaign: campaign.slug, issue: campaign.issue_area });
       }
-    } catch (err) {
-      console.error('[participate] Failed:', err);
-    }
+      const turnstileToken = await getToken();
+      try {
+        const res = await fetch(`/api/campaigns/${campaign.slug}/participate`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            participant_name: name.trim(),
+            participant_city: city.trim(),
+            participant_state: state,
+            messages_sent: isFirst ? initialMessagesSent : undefined,
+            stance: isFirst && isOfficial ? stance ?? undefined : undefined,
+            action_id: actionIdRef.current ?? undefined,
+            turnstileToken: turnstileToken || undefined,
+          }),
+        });
+        if (!res.ok) {
+          console.error('[participate] Failed:', res.status, await res.text());
+          return;
+        }
+        const data = await res.json();
+        if (data?.action_id) actionIdRef.current = data.action_id;
+      } catch (err) {
+        console.error('[participate] Failed:', err);
+      }
+    });
+    return participationChainRef.current;
   };
 
   // Track send for a single official
@@ -335,19 +346,22 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
       })
       .catch((err) => console.error('[track-send] Failed:', err));
 
-    // Opened-into-mail counts as sent: record the participation now, while
-    // the user (and the Turnstile widget) are still on the review step.
-    void recordParticipation(1);
+    // Opened-into-mail counts as sent: record this official's engagement
+    // now, while the user (and the Turnstile widget) are on the review step.
+    void recordEngagement();
   };
 
   // Complete participation
   const handleDone = async () => {
-    // Participation is normally already recorded by the first send click;
-    // this covers the generated-but-never-clicked-send path. Must run BEFORE
+    // Engagements are normally already recorded per send click; this covers
+    // the generated-but-never-clicked-send path. Must complete BEFORE
     // setStep('done') — the done step unmounts the TurnstileWidget, and
     // getToken() after that times out to an empty token, which 403s the
     // anonymous participate call. Same ordering rule as handleSubmit.
-    await recordParticipation(sentCount);
+    await participationChainRef.current;
+    if (!actionIdRef.current) {
+      await recordEngagement(sentCount);
+    }
     setStep('done');
 
     if (!isOfficial) return;
