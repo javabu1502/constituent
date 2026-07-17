@@ -12,20 +12,25 @@ interface CampaignRow {
   campaign_type?: string;
 }
 
-async function fetchCampaign(slug: string): Promise<CampaignRow | null> {
+// Distinguishes "the query worked and there is no such campaign" from
+// "the lookup failed" — a deleted campaign must 404, but a transient
+// Supabase error should NOT 404 the share card of a live campaign.
+type CampaignLookup = { ok: true; campaign: CampaignRow | null } | { ok: false };
+
+async function fetchCampaign(slug: string): Promise<CampaignLookup> {
   try {
     const base = process.env.NEXT_PUBLIC_SUPABASE_URL;
     const key = process.env.SUPABASE_SECRET_KEY;
-    if (!base || !key) return null;
+    if (!base || !key) return { ok: false };
     const res = await fetch(
       `${base}/rest/v1/campaigns?slug=eq.${encodeURIComponent(slug)}&approval_status=eq.approved&select=headline,issue_area,is_official,campaign_type&limit=1`,
       { headers: { apikey: key, Authorization: `Bearer ${key}` } }
     );
-    if (!res.ok) return null;
+    if (!res.ok) return { ok: false };
     const rows = (await res.json()) as CampaignRow[];
-    return rows?.[0] ?? null;
+    return { ok: true, campaign: rows?.[0] ?? null };
   } catch {
-    return null;
+    return { ok: false };
   }
 }
 
@@ -44,7 +49,14 @@ function ScaleIcon() {
 
 export default async function OgImage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const campaign = await fetchCampaign(slug);
+  const lookup = await fetchCampaign(slug);
+  // No campaign, no card: a generic fallback here means deleted/unknown
+  // campaigns keep serving a legitimate-looking share preview that leads
+  // to a 404 page. Match the page and 404 (but only on a confirmed miss).
+  if (lookup.ok && !lookup.campaign) {
+    return new Response('Not found', { status: 404 });
+  }
+  const campaign = lookup.ok ? lookup.campaign : null;
   const headline = campaign?.headline ?? 'Make your voice heard';
   // Official weigh-ins get the neutral both-sides card; user-created
   // campaigns are the creator's own cause — no case-for/against framing.

@@ -11,20 +11,25 @@ interface CampaignRow {
   issue_area?: string;
 }
 
-async function fetchCampaign(slug: string): Promise<CampaignRow | null> {
+// Distinguishes "the query worked and there is no such campaign" from
+// "the lookup failed" — a deleted campaign must 404, but a transient
+// Supabase error should NOT 404 the share card of a live campaign.
+type CampaignLookup = { ok: true; campaign: CampaignRow | null } | { ok: false };
+
+async function fetchCampaign(slug: string): Promise<CampaignLookup> {
   try {
     const base = process.env.NEXT_PUBLIC_SUPABASE_URL;
     const key = process.env.SUPABASE_SECRET_KEY;
-    if (!base || !key) return null;
+    if (!base || !key) return { ok: false };
     const res = await fetch(
       `${base}/rest/v1/campaigns?slug=eq.${encodeURIComponent(slug)}&approval_status=eq.approved&select=headline,issue_area&limit=1`,
       { headers: { apikey: key, Authorization: `Bearer ${key}` } }
     );
-    if (!res.ok) return null;
+    if (!res.ok) return { ok: false };
     const rows = (await res.json()) as CampaignRow[];
-    return rows?.[0] ?? null;
+    return { ok: true, campaign: rows?.[0] ?? null };
   } catch {
-    return null;
+    return { ok: false };
   }
 }
 
@@ -61,7 +66,13 @@ export async function GET(
   const { slug, position } = await params;
   const pos = POSITIONS.has(position) ? (position as 'support' | 'oppose' | 'undecided') : 'undecided';
 
-  const campaign = await fetchCampaign(slug);
+  const lookup = await fetchCampaign(slug);
+  // Confirmed-missing campaign -> 404, matching the page (and the plain OG
+  // route); lookup errors keep the generic-card fallback.
+  if (lookup.ok && !lookup.campaign) {
+    return new Response('Not found', { status: 404 });
+  }
+  const campaign = lookup.ok ? lookup.campaign : null;
   const headline = campaign?.headline ?? 'Make your voice heard';
 
   const kicker =
