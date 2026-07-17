@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
 import Link from 'next/link';
 import { createClient } from '@/lib/supabase/client';
 import { trackEvent } from '@/lib/analytics';
@@ -266,6 +266,39 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
     return map;
   }, [officials]);
 
+  // Record the participation (action count + reader-poll stance) exactly once.
+  // Product decision: opening a message into mail/form/phone counts as sent —
+  // we don't ask people to come back and confirm, so this fires on the FIRST
+  // send click rather than waiting for the Done button (most people never
+  // return to click it). Done remains a fallback for the no-send path.
+  const participationRecordedRef = useRef(false);
+  const recordParticipation = async (messagesSent: number) => {
+    if (participationRecordedRef.current) return;
+    participationRecordedRef.current = true;
+    trackEvent('campaign_action', { campaign: campaign.slug, issue: campaign.issue_area });
+    const turnstileToken = await getToken();
+    try {
+      const res = await fetch(`/api/campaigns/${campaign.slug}/participate`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          participant_name: name.trim(),
+          participant_city: city.trim(),
+          participant_state: state,
+          // Snapshot at record time; per-official sends live in `messages`.
+          messages_sent: messagesSent,
+          stance: isOfficial ? stance ?? undefined : undefined,
+          turnstileToken: turnstileToken || undefined,
+        }),
+      });
+      if (!res.ok) {
+        console.error('[participate] Failed:', res.status, await res.text());
+      }
+    } catch (err) {
+      console.error('[participate] Failed:', err);
+    }
+  };
+
   // Track send for a single official
   const trackSend = async (official: Official, deliveryStatus: string) => {
     const msg = messages[official.name];
@@ -301,40 +334,21 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
         }
       })
       .catch((err) => console.error('[track-send] Failed:', err));
+
+    // Opened-into-mail counts as sent: record the participation now, while
+    // the user (and the Turnstile widget) are still on the review step.
+    void recordParticipation(1);
   };
 
   // Complete participation
   const handleDone = async () => {
-    // Mint the token BEFORE leaving the review step — setStep('done')
-    // unmounts the TurnstileWidget (the done step doesn't render one), and
+    // Participation is normally already recorded by the first send click;
+    // this covers the generated-but-never-clicked-send path. Must run BEFORE
+    // setStep('done') — the done step unmounts the TurnstileWidget, and
     // getToken() after that times out to an empty token, which 403s the
     // anonymous participate call. Same ordering rule as handleSubmit.
-    const turnstileToken = await getToken();
+    await recordParticipation(sentCount);
     setStep('done');
-    trackEvent('campaign_action', { campaign: campaign.slug, issue: campaign.issue_area });
-
-    try {
-      // Record participation (including the reader-poll stance), then pull
-      // fresh aggregates for the results reveal. The UI is already on the
-      // done step — none of this blocks it.
-      const res = await fetch(`/api/campaigns/${campaign.slug}/participate`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          participant_name: name.trim(),
-          participant_city: city.trim(),
-          participant_state: state,
-          messages_sent: sentCount,
-          stance: isOfficial ? stance ?? undefined : undefined,
-          turnstileToken: turnstileToken || undefined,
-        }),
-      });
-      if (!res.ok) {
-        console.error('[participate] Failed:', res.status, await res.text());
-      }
-    } catch (err) {
-      console.error('[participate] Failed:', err);
-    }
 
     if (!isOfficial) return;
     try {
