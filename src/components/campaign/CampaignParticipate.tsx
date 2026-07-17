@@ -773,18 +773,23 @@ function OfficialSendCard({
       {/* Actions */}
       <div className="space-y-2">
         {deliveryInfo.method === 'staffer_email' && mailtoLink ? (
-          <button
-            onClick={() => {
-              window.open(mailtoLink, '_blank');
-              onSend('email_opened');
-            }}
-            className="flex items-center justify-center gap-2 w-full py-2.5 bg-purple-600 hover:bg-purple-700 text-white rounded-lg text-sm font-medium transition-colors"
-          >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-            </svg>
-            Send Email{deliveryInfo.stafferName ? ` to ${deliveryInfo.stafferName}` : ''}
-          </button>
+          <>
+            <button
+              onClick={() => {
+                window.open(mailtoLink, '_blank');
+                onSend('email_opened');
+              }}
+              className="flex items-center justify-center gap-2 w-full py-2.5 bg-purple-600 hover:bg-purple-700 text-white rounded-lg text-sm font-medium transition-colors"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              Send Email{deliveryInfo.stafferName ? ` to ${deliveryInfo.stafferName}` : ''}
+            </button>
+            {!deliveryInfo.captchaBlocked && deliveryInfo.note && (
+              <p className="text-xs text-gray-500 dark:text-gray-400">{deliveryInfo.note}</p>
+            )}
+          </>
         ) : deliveryInfo.method === 'contact_form' && deliveryInfo.contactFormUrl ? (
           <a
             href={deliveryInfo.contactFormUrl}

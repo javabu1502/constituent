@@ -98,6 +98,13 @@ export function determineDeliveryMethod(
 
   // Priority 1: Staffer email
   if (official.email) {
+    // People reasonably ask why they're emailing "Seth" instead of the
+    // senator — explain that staff are the front door for constituent mail.
+    const stafferNote = official.stafferFirstName
+      ? official.level === 'federal'
+        ? `Why ${official.stafferFirstName}? Members of Congress don't publish direct email addresses — their staff receive constituent messages, log each one, and report the tallies to the member. Emailing ${official.stafferFirstName} is how your message gets counted.`
+        : `Why ${official.stafferFirstName}? Most elected officials route constituent email through their staff, who log each message and pass the tallies to the official.`
+      : null;
     return {
       method: 'staffer_email',
       methodLabel: official.stafferFirstName
@@ -112,7 +119,7 @@ export function determineDeliveryMethod(
       captchaBlocked,
       note: captchaBlocked
         ? 'Automated form delivery unavailable — using email instead'
-        : null,
+        : stafferNote,
     };
   }
 

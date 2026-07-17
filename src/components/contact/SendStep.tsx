@@ -304,6 +304,9 @@ function OfficialCard({ official, message, deliveryInfo, contactMethod, isCallCo
             <p className="text-[10px] text-gray-400 dark:text-gray-500 text-center">
               Opens your email app with the message pre-filled. Just hit send.
             </p>
+            {!deliveryInfo.captchaBlocked && deliveryInfo.note && (
+              <p className="text-xs text-gray-500 dark:text-gray-400">{deliveryInfo.note}</p>
+            )}
           </>
         ) : deliveryInfo.method === 'contact_form' && deliveryInfo.contactFormUrl ? (
           // Contact form - copy message then open form
