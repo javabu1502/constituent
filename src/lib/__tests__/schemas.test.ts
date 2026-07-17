@@ -158,6 +158,25 @@ describe('trackSendSchema', () => {
     });
     expect(result.success).toBe(false);
   });
+
+  // Regression: these are the statuses the send UIs actually emit
+  // (OfficialSendCard in CampaignParticipate, OfficialCard in SendStep).
+  // From 2026-03-04 to 2026-07-16 the enum covered none of them, so every
+  // track-send 400'd and send tracking silently recorded nothing.
+  it.each([
+    'initiated',
+    'email_opened',
+    'email_copied',
+    'form_opened',
+    'website_opened',
+    'called',
+  ])('accepts client-emitted delivery_status %s', (delivery_status) => {
+    const result = trackSendSchema.safeParse({
+      ...validTrackSend,
+      delivery_status,
+    });
+    expect(result.success).toBe(true);
+  });
 });
 
 // --- createCampaignSchema ---

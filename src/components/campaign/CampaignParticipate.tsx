@@ -294,20 +294,30 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
         campaign_id: campaign.id,
         turnstileToken: turnstileToken || undefined,
       }),
-    }).catch((err) => console.error('[track-send] Failed:', err));
+    })
+      .then(async (res) => {
+        if (!res.ok) {
+          console.error('[track-send] Failed:', res.status, await res.text());
+        }
+      })
+      .catch((err) => console.error('[track-send] Failed:', err));
   };
 
   // Complete participation
   const handleDone = async () => {
+    // Mint the token BEFORE leaving the review step — setStep('done')
+    // unmounts the TurnstileWidget (the done step doesn't render one), and
+    // getToken() after that times out to an empty token, which 403s the
+    // anonymous participate call. Same ordering rule as handleSubmit.
+    const turnstileToken = await getToken();
     setStep('done');
     trackEvent('campaign_action', { campaign: campaign.slug, issue: campaign.issue_area });
-    const turnstileToken = await getToken();
 
     try {
       // Record participation (including the reader-poll stance), then pull
       // fresh aggregates for the results reveal. The UI is already on the
       // done step — none of this blocks it.
-      await fetch(`/api/campaigns/${campaign.slug}/participate`, {
+      const res = await fetch(`/api/campaigns/${campaign.slug}/participate`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -319,6 +329,9 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
           turnstileToken: turnstileToken || undefined,
         }),
       });
+      if (!res.ok) {
+        console.error('[participate] Failed:', res.status, await res.text());
+      }
     } catch (err) {
       console.error('[participate] Failed:', err);
     }

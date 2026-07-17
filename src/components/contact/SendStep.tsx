@@ -497,7 +497,13 @@ export function SendStep({ state, dispatch, onBack }: SendStepProps) {
         turnstileToken: turnstileToken || undefined,
       }),
     })
-      .then((res) => res.ok ? res.json() : null)
+      .then(async (res) => {
+        if (!res.ok) {
+          console.error('[track-send] Failed:', res.status, await res.text());
+          return null;
+        }
+        return res.json();
+      })
       .then((data) => {
         if (data?.shareId) {
           dispatch({ type: 'SET_SHARE_ID', payload: data.shareId });

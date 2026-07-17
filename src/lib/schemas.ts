@@ -66,7 +66,14 @@ export const trackSendSchema = z.object({
   issue_subtopic: z.string().min(1).max(200),
   message_body: z.string().min(1).max(10000),
   delivery_method: z.enum(['email', 'phone', 'webform']),
-  delivery_status: z.enum(['drafted', 'sent', 'opened', 'copied']),
+  // Must cover every status the clients emit (OfficialSendCard in
+  // CampaignParticipate + OfficialCard in SendStep) — a value missing here
+  // 400s the request, and the fire-and-forget clients drop that silently.
+  delivery_status: z.enum([
+    'drafted', 'sent', 'opened', 'copied', // legacy values, kept for compat
+    'initiated', 'email_opened', 'email_copied',
+    'form_opened', 'website_opened', 'called',
+  ]),
   user_id: z.string().uuid().optional(),
   campaign_id: z.string().uuid().optional(),
   turnstileToken: z.string().optional(),
