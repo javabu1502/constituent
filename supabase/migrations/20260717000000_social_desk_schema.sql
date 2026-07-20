@@ -93,7 +93,8 @@ create table if not exists social_config (
 );
 insert into social_config (key, value) values
   ('killswitch', '{"is_paused": true, "reason": "not launched yet"}'::jsonb),
-  ('circuit_breaker', '{"tripped": false, "error_count": 0, "window_started_at": null}'::jsonb)
+  ('circuit_breaker', '{"tripped": false, "consecutive_failures": 0, "error_count": 0}'::jsonb),
+  ('mode', '{"mode": "gated"}'::jsonb)
 on conflict (key) do nothing;
 
 alter table social_signals enable row level security;

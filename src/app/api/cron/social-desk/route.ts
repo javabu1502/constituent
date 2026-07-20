@@ -1,11 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createAdminClient } from '@/lib/supabase';
-import { getKillSwitch } from '@/lib/social/config';
+import { getKillSwitch, getMode } from '@/lib/social/config';
 import { scoutCampaigns, nextSignal, markSignalUsed } from '@/lib/social/scout';
 import { loadBrandBrain } from '@/lib/social/brand-brain';
 import { writePost } from '@/lib/social/writer';
 import { runGuardrails, isNearDuplicate } from '@/lib/social/guardrails';
 import { graphemeLength, BLUESKY_MAX_GRAPHEMES } from '@/lib/social/bluesky';
+import { publishDraft } from '@/lib/social/publisher';
+import { isTripped } from '@/lib/social/circuit-breaker';
+import { canPostNow } from '@/lib/social/cadence';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -94,6 +97,28 @@ export async function GET(request: NextRequest) {
 
   await markSignalUsed(signal.id);
 
+  // Autonomous mode: publish a clean draft right away, still gated by cadence
+  // and the circuit breaker. Gated mode leaves it pending_approval for review.
+  let published: { attempted: boolean; ok?: boolean; status?: string; reason?: string; uri?: string } = {
+    attempted: false,
+  };
+  if (status === 'pending_approval' && inserted?.id) {
+    const mode = await getMode();
+    if (mode === 'autonomous') {
+      if (await isTripped()) {
+        published = { attempted: false, reason: 'circuit breaker tripped' };
+      } else {
+        const cadence = await canPostNow('bluesky');
+        if (!cadence.allowed) {
+          published = { attempted: false, reason: cadence.reason };
+        } else {
+          const result = await publishDraft(inserted.id);
+          published = { attempted: true, ok: result.ok, status: result.status, reason: result.reason, uri: result.uri };
+        }
+      }
+    }
+  }
+
   return NextResponse.json({
     ok: true,
     scouted,
@@ -104,6 +129,7 @@ export async function GET(request: NextRequest) {
     guardrail_passed: gate.passed,
     duplicate,
     skipReason,
+    published,
     draft: draft.text,
   });
 }

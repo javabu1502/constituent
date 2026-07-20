@@ -1,6 +1,8 @@
 import { describe, it, expect } from 'vitest';
 import { runGuardrails, isNearDuplicate, LOCAL_COVERAGE } from '../guardrails';
 import { linkFacets, graphemeLength, buildPostRecord, BLUESKY_MAX_GRAPHEMES } from '../bluesky';
+import { canPost, MAX_POSTS_PER_DAY, MIN_GAP_MINUTES } from '../cadence';
+import { nextStateOnError, CONSECUTIVE_FAIL_LIMIT } from '../circuit-breaker';
 
 describe('guardrails: nonpartisan gate', () => {
   it('blocks "vote no on the bill"', () => {
@@ -111,5 +113,45 @@ describe('bluesky: link facets + record building', () => {
 
   it('throws on over-limit posts', () => {
     expect(() => buildPostRecord('x'.repeat(BLUESKY_MAX_GRAPHEMES + 1))).toThrow(/over the/);
+  });
+});
+
+describe('cadence', () => {
+  const now = 1_800_000_000_000;
+  const min = 60_000;
+
+  it('allows a first post', () => {
+    expect(canPost([], now).allowed).toBe(true);
+  });
+
+  it('blocks when the daily cap is hit', () => {
+    const times = Array.from({ length: MAX_POSTS_PER_DAY }, (_, i) => now - i * 60 * min);
+    expect(canPost(times, now).allowed).toBe(false);
+  });
+
+  it('blocks when the last post is too recent', () => {
+    const r = canPost([now - (MIN_GAP_MINUTES - 5) * min], now);
+    expect(r.allowed).toBe(false);
+    expect(r.reason).toMatch(/too soon/);
+  });
+
+  it('allows once the min gap has passed', () => {
+    expect(canPost([now - (MIN_GAP_MINUTES + 5) * min], now).allowed).toBe(true);
+  });
+
+  it('ignores posts older than 24h for the daily cap', () => {
+    const old = Array.from({ length: MAX_POSTS_PER_DAY }, (_, i) => now - (25 * 60 + i) * min);
+    expect(canPost(old, now).allowed).toBe(true);
+  });
+});
+
+describe('circuit breaker', () => {
+  it('trips after N consecutive failures', () => {
+    let s = { tripped: false, consecutive_failures: 0, error_count: 0 };
+    for (let i = 0; i < CONSECUTIVE_FAIL_LIMIT - 1; i++) s = nextStateOnError(s, 'boom');
+    expect(s.tripped).toBe(false);
+    s = nextStateOnError(s, 'boom');
+    expect(s.tripped).toBe(true);
+    expect(s.error_count).toBe(CONSECUTIVE_FAIL_LIMIT);
   });
 });

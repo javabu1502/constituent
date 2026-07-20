@@ -33,3 +33,21 @@ export async function setKillSwitch(isPaused: boolean, reason?: string): Promise
     .update({ value: { is_paused: isPaused, reason: reason ?? null }, updated_at: new Date().toISOString() })
     .eq('key', 'killswitch');
 }
+
+export type Mode = 'gated' | 'autonomous';
+
+/**
+ * Posting mode. 'gated' (default): drafts wait for manual approval via
+ * /api/social/publish. 'autonomous': the pipeline publishes clean drafts
+ * itself, still subject to cadence + circuit breaker + kill switch.
+ * Missing/unknown -> 'gated' (the safe default).
+ */
+export async function getMode(): Promise<Mode> {
+  try {
+    const admin = createAdminClient();
+    const { data } = await admin.from('social_config').select('value').eq('key', 'mode').maybeSingle();
+    return (data?.value as { mode?: string } | null)?.mode === 'autonomous' ? 'autonomous' : 'gated';
+  } catch {
+    return 'gated';
+  }
+}
