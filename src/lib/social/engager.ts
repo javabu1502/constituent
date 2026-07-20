@@ -43,7 +43,7 @@ export function isLikelyElectedOfficial(handle: string, display: string): boolea
 // case that produced nonsense replies.)
 export function looksLikeOrgOrBot(handle: string, display: string): boolean {
   const s = `${handle} ${display}`.toLowerCase();
-  return /(news|bot\b|\bdata|media|press|daily|report|\.ai\b|wire|times|gazette|tribune|magazine|podcast|newsletter|feed|official|weather)/.test(s);
+  return /(news|bot\b|\bdata|media|press|daily|report|\.ai\b|wire|times|gazette|tribune|magazine|podcast|newsletter|feed|official|weather|rally|coalition|\baction\b|\bpac\b|\bmarch\b|protest|standup|forscience|resist|indivisible|\.org\b|caucus|committee|campaign\b|foundation|institute|nonprofit|alliance|network)/.test(s);
 }
 
 // First-person voice: someone talking about their own life, which is what we
@@ -65,7 +65,12 @@ Write ONE reply to the post below. Rules:
 - No em dashes. No AI tells. No narrating their emotions. Sound like the
   approved examples.
 - 280 graphemes max. Include the action link inline: https://mydemocracy.app
-- If there is genuinely no clean way to help, return {"skip": true}.
+- INVENT NOTHING. Only reference details the post literally states. Do not
+  assume family members, jobs, locations, or specifics they did not write.
+- RELEVANCE: only reply if this is clearly a person venting a real pocketbook
+  or policy frustration you can redirect to their officials. If the post is a
+  joke, quote, lyric, slogan, meme, news headline, or not actually about a
+  civic grievance, return {"skip": true}.
 
 Return ONLY JSON: {"text": "<reply>"} or {"skip": true}.
 `;
@@ -105,6 +110,16 @@ export async function runEngager(brandBrain: string, session: BlueskySession, pe
   const { data: existing } = await admin.from('social_replies').select('target_uri').in('target_uri', uris);
   const have = new Set((existing ?? []).map((r) => r.target_uri));
 
+  // Per-author cap: at most one reply per account per day, so we never stack
+  // multiple replies on the same person or org.
+  const since24h = new Date(Date.now() - 24 * 60 * 60_000).toISOString();
+  const { data: recentAuthors } = await admin
+    .from('social_replies')
+    .select('target_author')
+    .neq('status', 'skipped')
+    .gte('created_at', since24h);
+  const authorsHandled = new Set((recentAuthors ?? []).map((r) => r.target_author));
+
   for (const c of candidates) {
     if (have.has(c.uri)) continue;
     if (c.authorHandle === OWN_HANDLE) continue; // never reply to ourselves
@@ -119,6 +134,10 @@ export async function runEngager(brandBrain: string, session: BlueskySession, pe
       continue;
     }
     if (c.lane === 'grievance' && !hasFirstPersonVoice(c.text)) {
+      result.skipped++;
+      continue;
+    }
+    if (authorsHandled.has(c.authorHandle)) {
       result.skipped++;
       continue;
     }
@@ -175,6 +194,7 @@ export async function runEngager(brandBrain: string, session: BlueskySession, pe
       result.skipped++;
       continue;
     }
+    authorsHandled.add(c.authorHandle);
     result.drafted++;
     if (requiresHuman) result.gated++;
   }
