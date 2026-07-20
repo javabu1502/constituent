@@ -42,28 +42,39 @@ export async function scoutCampaigns(limit = 10): Promise<number> {
 
   if (error || !campaigns?.length) return 0;
 
-  let inserted = 0;
-  for (const c of campaigns) {
-    const { error: insErr, count } = await admin
-      .from('social_signals')
-      .upsert(
-        {
-          source: 'weigh_in',
-          external_ref: c.slug,
-          title: c.headline,
-          summary: c.description,
-          url: `${SITE}/campaign/${c.slug}`,
-          issue_area: c.issue_area,
-          classification: 'actionable',
-          campaign_slug: c.slug,
-          status: 'new',
-          metadata: { is_bill_specific: c.is_bill_specific },
-        },
-        { onConflict: 'source,external_ref', ignoreDuplicates: true, count: 'exact' },
-      );
-    if (!insErr && count) inserted += count;
+  // Skip slugs we've already ingested. We select-then-insert rather than
+  // upsert: the dedup index is partial (external_ref not null), which
+  // supabase-js can't target via onConflict.
+  const slugs = campaigns.map((c) => c.slug);
+  const { data: existing } = await admin
+    .from('social_signals')
+    .select('external_ref')
+    .eq('source', 'weigh_in')
+    .in('external_ref', slugs);
+  const have = new Set((existing ?? []).map((r) => r.external_ref));
+
+  const rows = campaigns
+    .filter((c) => !have.has(c.slug))
+    .map((c) => ({
+      source: 'weigh_in',
+      external_ref: c.slug,
+      title: c.headline,
+      summary: c.description,
+      url: `${SITE}/campaign/${c.slug}`,
+      issue_area: c.issue_area,
+      classification: 'actionable',
+      campaign_slug: c.slug,
+      status: 'new',
+      metadata: { is_bill_specific: c.is_bill_specific },
+    }));
+
+  if (!rows.length) return 0;
+  const { error: insErr } = await admin.from('social_signals').insert(rows);
+  if (insErr) {
+    console.error('[scout] insert failed:', insErr.message);
+    return 0;
   }
-  return inserted;
+  return rows.length;
 }
 
 /** Pick the highest-priority unused signal (freshest actionable one for v1). */
