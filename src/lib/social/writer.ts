@@ -5,7 +5,10 @@
  * writer with no code change.
  */
 import { callClaude, deDash, extractJSON } from '@/lib/claude';
+import { graphemeLength } from './bluesky';
 import type { Signal } from './scout';
+
+const SOFT_LIMIT = 280;
 
 export interface Draft {
   text: string;
@@ -58,5 +61,25 @@ export async function writePost(brandBrain: string, signal: Signal): Promise<Dra
 
   // Backstop the brand's hardest rule regardless of what the model returned.
   text = deDash(text).trim();
+
+  // One shorten pass if it's over length (the brief lane tends to run long),
+  // so a good draft isn't thrown away by the length gate.
+  if (graphemeLength(text) > SOFT_LIMIT) {
+    try {
+      const shorter = await callClaude(
+        `${brandBrain}\n\n---\nShorten this Bluesky post to UNDER ${SOFT_LIMIT} graphemes. Keep the link, the voice, and the facts. Drop the least essential item if needed. No em dashes. Return ONLY JSON: {"text": "<post>"}`,
+        text,
+        300,
+      );
+      const parsed = extractJSON(shorter) as { text?: string } | null;
+      if (parsed?.text) {
+        const trimmed = deDash(parsed.text).trim();
+        if (graphemeLength(trimmed) < graphemeLength(text)) text = trimmed;
+      }
+    } catch {
+      // keep the original; the length guardrail will gate it if still over
+    }
+  }
+
   return { text, lane };
 }
