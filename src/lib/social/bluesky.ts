@@ -79,6 +79,78 @@ export function linkFacets(text: string): Facet[] {
   return facets;
 }
 
+async function xrpcGet<T>(method: string, params: Record<string, string> | URLSearchParams, token?: string): Promise<T> {
+  const qs = (params instanceof URLSearchParams ? params : new URLSearchParams(params)).toString();
+  const res = await fetch(`${PDS}/${method}?${qs}`, {
+    headers: token ? { Authorization: `Bearer ${token}` } : {},
+  });
+  const json = await res.json();
+  if (!res.ok) throw new Error(`Bluesky ${method} failed (${res.status}): ${json.error} ${json.message ?? ''}`.trim());
+  return json as T;
+}
+
+export interface FoundPost {
+  uri: string;
+  cid: string;
+  authorHandle: string;
+  authorDisplay: string;
+  text: string;
+  /** Thread root ref if this post is itself a reply (else the post is root). */
+  root?: { uri: string; cid: string };
+  likeCount: number;
+}
+
+/** Search recent posts by keyword (for the Engager's listening layer). */
+export async function searchPosts(session: BlueskySession, q: string, limit = 15): Promise<FoundPost[]> {
+  const data = await xrpcGet<{ posts: Array<Record<string, unknown>> }>(
+    'app.bsky.feed.searchPosts',
+    { q, limit: String(limit), sort: 'latest' },
+    session.accessJwt,
+  );
+  return (data.posts ?? []).map((p) => {
+    const author = (p.author as Record<string, unknown>) ?? {};
+    const record = (p.record as Record<string, unknown>) ?? {};
+    const reply = record.reply as { root?: { uri: string; cid: string } } | undefined;
+    return {
+      uri: p.uri as string,
+      cid: p.cid as string,
+      authorHandle: (author.handle as string) ?? '',
+      authorDisplay: (author.displayName as string) ?? '',
+      text: (record.text as string) ?? '',
+      root: reply?.root,
+      likeCount: (p.likeCount as number) ?? 0,
+    };
+  });
+}
+
+/** Fetch engagement counts for a set of post URIs (Analyst). */
+export async function getPostMetrics(
+  session: BlueskySession,
+  uris: string[],
+): Promise<Record<string, { likeCount: number; repostCount: number; replyCount: number }>> {
+  if (!uris.length) return {};
+  const out: Record<string, { likeCount: number; repostCount: number; replyCount: number }> = {};
+  // getPosts takes up to 25 uris per call
+  for (let i = 0; i < uris.length; i += 25) {
+    const batch = uris.slice(i, i + 25);
+    const params = new URLSearchParams();
+    batch.forEach((u) => params.append('uris', u));
+    const data = await xrpcGet<{ posts: Array<Record<string, unknown>> }>(
+      'app.bsky.feed.getPosts',
+      params,
+      session.accessJwt,
+    ).catch(() => ({ posts: [] as Array<Record<string, unknown>> }));
+    for (const p of data.posts ?? []) {
+      out[p.uri as string] = {
+        likeCount: (p.likeCount as number) ?? 0,
+        repostCount: (p.repostCount as number) ?? 0,
+        replyCount: (p.replyCount as number) ?? 0,
+      };
+    }
+  }
+  return out;
+}
+
 async function xrpc<T>(method: string, body: unknown, token?: string): Promise<T> {
   const res = await fetch(`${PDS}/${method}`, {
     method: 'POST',

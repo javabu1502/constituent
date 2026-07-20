@@ -159,6 +159,19 @@ export function runGuardrails(input: GuardrailInput): GateReport {
   return { passed, checks };
 }
 
+// Skip discipline for REPLIES: never reply into grief pile-ups on tragedies or
+// pure rage-bait. "When in doubt, sit it out."
+const REPLY_SKIP_PATTERNS: Array<{ re: RegExp; reason: string }> = [
+  { re: /\b(died|dead|killed|death|passed away|rip|shooting|shooter|massacre|murdered?|suicide|funeral)\b/i, reason: 'grief/tragedy' },
+  { re: /\b(should be (arrested|jailed|executed|shot|hanged)|throw them in jail|lock (him|her|them) up)\b/i, reason: 'rage-bait' },
+  { re: /\b(f[u*]ck|c[u*]nt|retard|sl[u*]t)\b/i, reason: 'abusive language' },
+];
+
+export function replyShouldSkip(targetText: string): { skip: boolean; reason?: string } {
+  const hit = REPLY_SKIP_PATTERNS.find((p) => p.re.test(targetText));
+  return hit ? { skip: true, reason: hit.reason } : { skip: false };
+}
+
 /** Token-Jaccard near-duplicate check against recently posted bodies. */
 export function isNearDuplicate(text: string, recent: string[], threshold = 0.8): boolean {
   const toks = (s: string) => new Set(normalize(s).split(' ').filter(Boolean));

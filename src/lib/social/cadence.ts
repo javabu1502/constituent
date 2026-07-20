@@ -37,6 +37,9 @@ export function canPost(
   return { allowed: true };
 }
 
+export const MAX_REPLIES_PER_DAY = 12;
+export const MIN_REPLY_GAP_MINUTES = 10;
+
 /** DB-backed cadence check for a platform. */
 export async function canPostNow(platform: string): Promise<CadenceDecision> {
   const admin = createAdminClient();
@@ -51,4 +54,19 @@ export async function canPostNow(platform: string): Promise<CadenceDecision> {
     .map((r) => (r.posted_at ? new Date(r.posted_at as string).getTime() : 0))
     .filter(Boolean);
   return canPost(times, Date.now());
+}
+
+/** DB-backed reply cadence (separate, tighter cap than original posts). */
+export async function canReplyNow(): Promise<CadenceDecision> {
+  const admin = createAdminClient();
+  const since = new Date(Date.now() - 24 * 60 * 60_000).toISOString();
+  const { data } = await admin
+    .from('social_replies')
+    .select('posted_at')
+    .eq('status', 'posted')
+    .gte('posted_at', since);
+  const times = (data ?? [])
+    .map((r) => (r.posted_at ? new Date(r.posted_at as string).getTime() : 0))
+    .filter(Boolean);
+  return canPost(times, Date.now(), { maxPerDay: MAX_REPLIES_PER_DAY, minGapMinutes: MIN_REPLY_GAP_MINUTES });
 }

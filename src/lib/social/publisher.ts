@@ -8,7 +8,7 @@ import { createAdminClient } from '@/lib/supabase';
 import { getKillSwitch } from './config';
 import { isTripped, recordSuccess, recordFailure } from './circuit-breaker';
 import { runGuardrails } from './guardrails';
-import { post as blueskyPost, graphemeLength, BLUESKY_MAX_GRAPHEMES } from './bluesky';
+import { post as blueskyPost, graphemeLength, BLUESKY_MAX_GRAPHEMES, createSession, getBlueskyCreds } from './bluesky';
 
 export interface PublishResult {
   ok: boolean;
@@ -84,5 +84,70 @@ export async function publishDraft(
       status: 'failed',
       reason: breaker.tripped ? `${msg} (circuit breaker tripped)` : msg,
     };
+  }
+}
+
+export interface ReplyResult {
+  ok: boolean;
+  replyId: string;
+  status: string;
+  reason?: string;
+  uri?: string;
+}
+
+/**
+ * Publish an approved reply from social_replies. Same safety chain as posts.
+ * Elected-official replies must already be approved (requires_human handling
+ * happens upstream in the Engager); this refuses anything not approved.
+ */
+export async function publishReply(replyId: string, opts: { dryRun?: boolean } = {}): Promise<ReplyResult> {
+  const admin = createAdminClient();
+  const dryRun = opts.dryRun ?? process.env.SOCIAL_DRY_RUN === 'true';
+
+  const { data: row, error } = await admin
+    .from('social_replies')
+    .select('id, draft_body, status, target_uri, requires_human')
+    .eq('id', replyId)
+    .maybeSingle();
+  if (error || !row) return { ok: false, replyId, status: 'not_found', reason: 'reply not found' };
+  if (!['approved', 'pending_post'].includes(row.status as string)) {
+    return { ok: false, replyId, status: row.status as string, reason: `not publishable from ${row.status}` };
+  }
+
+  const kill = await getKillSwitch();
+  if (kill.is_paused) return { ok: false, replyId, status: row.status as string, reason: 'kill switch paused' };
+  if (await isTripped()) return { ok: false, replyId, status: row.status as string, reason: 'circuit breaker tripped' };
+
+  const gate = runGuardrails({ text: row.draft_body as string, maxLength: BLUESKY_MAX_GRAPHEMES, graphemeLength });
+  if (!gate.passed) {
+    await admin.from('social_replies').update({ status: 'skipped', guardrail_report: gate }).eq('id', replyId);
+    return { ok: false, replyId, status: 'skipped', reason: 'guardrail block' };
+  }
+
+  if (dryRun) {
+    await admin.from('social_replies').update({ status: 'approved', dry_run: true }).eq('id', replyId);
+    return { ok: true, replyId, status: 'approved', reason: 'dry run — not sent' };
+  }
+
+  try {
+    // The stored target_uri/cid + root live on the reply row's metadata; the
+    // Engager writes a fully-formed reply ref there.
+    const { data: meta } = await admin.from('social_replies').select('guardrail_report').eq('id', replyId).maybeSingle();
+    const ref = (meta?.guardrail_report as { replyRef?: { root: { uri: string; cid: string }; parent: { uri: string; cid: string } } } | null)?.replyRef;
+    const creds = getBlueskyCreds();
+    if (!creds) throw new Error('BLUESKY creds not set');
+    const session = await createSession(creds.handle, creds.appPassword);
+    const result = await blueskyPost(row.draft_body as string, { dryRun: false, reply: ref, session });
+    await admin
+      .from('social_replies')
+      .update({ status: 'posted', dry_run: false, posted_at: new Date().toISOString(), external_post_id: result.uri })
+      .eq('id', replyId);
+    await recordSuccess();
+    return { ok: true, replyId, status: 'posted', uri: result.uri };
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : String(err);
+    await recordFailure(msg);
+    await admin.from('social_replies').update({ status: 'failed' }).eq('id', replyId);
+    return { ok: false, replyId, status: 'failed', reason: msg };
   }
 }

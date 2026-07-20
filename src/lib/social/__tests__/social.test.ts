@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { runGuardrails, isNearDuplicate, LOCAL_COVERAGE } from '../guardrails';
+import { runGuardrails, isNearDuplicate, LOCAL_COVERAGE, replyShouldSkip } from '../guardrails';
+import { isLikelyElectedOfficial } from '../engager';
 import { linkFacets, graphemeLength, buildPostRecord, BLUESKY_MAX_GRAPHEMES } from '../bluesky';
 import { canPost, MAX_POSTS_PER_DAY, MIN_GAP_MINUTES } from '../cadence';
 import { nextStateOnError, CONSECUTIVE_FAIL_LIMIT } from '../circuit-breaker';
@@ -153,5 +154,28 @@ describe('circuit breaker', () => {
     s = nextStateOnError(s, 'boom');
     expect(s.tripped).toBe(true);
     expect(s.error_count).toBe(CONSECUTIVE_FAIL_LIMIT);
+  });
+});
+
+describe('engager: reply skip discipline', () => {
+  it('skips grief/tragedy posts', () => {
+    expect(replyShouldSkip('my neighbor died in the shooting yesterday').skip).toBe(true);
+  });
+  it('skips rage-bait', () => {
+    expect(replyShouldSkip('they should be arrested and thrown in jail').skip).toBe(true);
+  });
+  it('does not skip an ordinary grievance', () => {
+    expect(replyShouldSkip('gas is $90 a tank and rent went up again').skip).toBe(false);
+  });
+});
+
+describe('engager: elected-official gating', () => {
+  it('flags obvious officials', () => {
+    expect(isLikelyElectedOfficial('senjohndoe.bsky.social', 'Sen. John Doe')).toBe(true);
+    expect(isLikelyElectedOfficial('repjane', 'Rep. Jane Smith')).toBe(true);
+    expect(isLikelyElectedOfficial('governor.wv.gov', 'WV Governor')).toBe(true);
+  });
+  it('does not flag ordinary citizens', () => {
+    expect(isLikelyElectedOfficial('coffee_lover_92', 'Dana')).toBe(false);
   });
 });

@@ -51,3 +51,24 @@ export async function getMode(): Promise<Mode> {
     return 'gated';
   }
 }
+
+export interface ReplyConfig {
+  enabled: boolean;
+  mode: Mode;
+}
+
+/**
+ * Reply engine config. Separate from posting because replying to strangers is
+ * higher-risk: it ships disabled, and even enabled defaults to gated. Elected
+ * officials are ALWAYS human-gated regardless of this. Missing -> off/gated.
+ */
+export async function getReplyConfig(): Promise<ReplyConfig> {
+  try {
+    const admin = createAdminClient();
+    const { data } = await admin.from('social_config').select('value').eq('key', 'reply_config').maybeSingle();
+    const v = (data?.value as { enabled?: boolean; mode?: string } | null) ?? {};
+    return { enabled: v.enabled === true, mode: v.mode === 'autonomous' ? 'autonomous' : 'gated' };
+  } catch {
+    return { enabled: false, mode: 'gated' };
+  }
+}

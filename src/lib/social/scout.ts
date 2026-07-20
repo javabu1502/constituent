@@ -77,7 +77,11 @@ export async function scoutCampaigns(limit = 10): Promise<number> {
   return rows.length;
 }
 
-/** Pick the highest-priority unused signal (freshest actionable one for v1). */
+/**
+ * Pick the next unused signal, biased toward issue-area balance: prefer the
+ * freshest 'new' signal whose issue_area wasn't in the last few posts, so the
+ * feed doesn't stack the same topic. Falls back to the freshest new signal.
+ */
 export async function nextSignal(): Promise<Signal | null> {
   const admin = createAdminClient();
   const { data, error } = await admin
@@ -85,10 +89,19 @@ export async function nextSignal(): Promise<Signal | null> {
     .select('id, source, external_ref, title, summary, url, issue_area, classification, campaign_slug, status')
     .eq('status', 'new')
     .order('created_at', { ascending: false })
-    .limit(1)
-    .maybeSingle();
-  if (error || !data) return null;
-  return data as Signal;
+    .limit(20);
+  if (error || !data?.length) return null;
+
+  const { data: recent } = await admin
+    .from('social_posts')
+    .select('issue_area')
+    .eq('status', 'posted')
+    .order('posted_at', { ascending: false })
+    .limit(4);
+  const recentIssues = new Set((recent ?? []).map((r) => r.issue_area).filter(Boolean));
+
+  const fresh = (data as Signal[]).find((s) => !recentIssues.has(s.issue_area));
+  return fresh ?? (data[0] as Signal);
 }
 
 export async function markSignalUsed(id: string): Promise<void> {
