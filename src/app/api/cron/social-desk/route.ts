@@ -104,9 +104,10 @@ export async function GET(request: NextRequest) {
   let published: { attempted: boolean; ok?: boolean; status?: string; reason?: string; uri?: string } = {
     attempted: false,
   };
-  // The news lane is always gated for review, even in autonomous mode — an
-  // unsupervised paraphrase of breaking news is the one thing we don't ship.
-  if (status === 'pending_approval' && inserted?.id && !isNews) {
+  // News follows the global posting mode (autonomous by user choice). Its
+  // extra protection is the strict-accuracy guardrail above (bill/figure not
+  // in source -> blocked), not a separate gate.
+  if (status === 'pending_approval' && inserted?.id) {
     const mode = await getMode();
     if (mode === 'autonomous') {
       if (await isTripped()) {
