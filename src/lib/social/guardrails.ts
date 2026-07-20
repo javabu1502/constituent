@@ -81,6 +81,8 @@ export interface GuardrailInput {
   /** Hard length limit for the platform (graphemes). */
   maxLength?: number;
   graphemeLength?: (s: string) => number;
+  /** Escalate the accuracy-traceability check from warn to block (news lane). */
+  strictAccuracy?: boolean;
 }
 
 export function runGuardrails(input: GuardrailInput): GateReport {
@@ -130,7 +132,12 @@ export function runGuardrails(input: GuardrailInput): GateReport {
       : unsourcedNum
         ? `figure ${unsourcedNum} not in source`
         : undefined;
-    checks.push({ name: 'accuracy_traceable', passed: !problem, severity: 'warn', reason: problem });
+    checks.push({
+      name: 'accuracy_traceable',
+      passed: !problem,
+      severity: input.strictAccuracy ? 'block' : 'warn',
+      reason: problem,
+    });
   }
 
   // 5. Coverage-match (block): a local-action CTA needs a covered state.

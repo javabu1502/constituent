@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createAdminClient } from '@/lib/supabase';
 import { getKillSwitch, getMode } from '@/lib/social/config';
-import { scoutCampaigns, nextSignal, markSignalUsed } from '@/lib/social/scout';
+import { scoutCampaigns, scoutNews, nextSignal, markSignalUsed } from '@/lib/social/scout';
 import { loadBrandBrain } from '@/lib/social/brand-brain';
 import { writePost } from '@/lib/social/writer';
 import { runGuardrails, isNearDuplicate } from '@/lib/social/guardrails';
@@ -39,7 +39,7 @@ export async function GET(request: NextRequest) {
   }
 
   const admin = createAdminClient();
-  const scouted = await scoutCampaigns();
+  const scouted = (await scoutCampaigns()) + (await scoutNews());
 
   const signal = await nextSignal();
   if (!signal) {
@@ -50,11 +50,13 @@ export async function GET(request: NextRequest) {
   const draft = await writePost(brandBrain, signal);
 
   // Guardrails + near-duplicate check against recent drafts/posts.
+  const isNews = signal.source === 'news';
   const gate = runGuardrails({
     text: draft.text,
     sourceText: `${signal.title ?? ''}\n${signal.summary ?? ''}`,
     maxLength: BLUESKY_MAX_GRAPHEMES,
     graphemeLength,
+    strictAccuracy: isNews, // news claims must trace to the source or they're blocked
   });
   const { data: recentRows } = await admin
     .from('social_posts')
@@ -102,7 +104,9 @@ export async function GET(request: NextRequest) {
   let published: { attempted: boolean; ok?: boolean; status?: string; reason?: string; uri?: string } = {
     attempted: false,
   };
-  if (status === 'pending_approval' && inserted?.id) {
+  // The news lane is always gated for review, even in autonomous mode — an
+  // unsupervised paraphrase of breaking news is the one thing we don't ship.
+  if (status === 'pending_approval' && inserted?.id && !isNews) {
     const mode = await getMode();
     if (mode === 'autonomous') {
       if (await isTripped()) {

@@ -66,6 +66,16 @@ describe('guardrails: accuracy traceability', () => {
     const r = runGuardrails({ text: 'H.R. 139 just passed', sourceText: 'H.R. 139 passed the House 308-117' });
     expect(r.checks.find((c) => c.name === 'accuracy_traceable')?.passed).toBe(true);
   });
+
+  it('BLOCKS an unsourced figure under strictAccuracy (news lane)', () => {
+    const r = runGuardrails({
+      text: 'H.R. 999 just passed',
+      sourceText: 'H.R. 139 passed the House',
+      strictAccuracy: true,
+    });
+    expect(r.passed).toBe(false);
+    expect(r.checks.find((c) => c.name === 'accuracy_traceable')?.severity).toBe('block');
+  });
 });
 
 describe('guardrails: length + dedup', () => {

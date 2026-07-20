@@ -78,6 +78,84 @@ export async function scoutCampaigns(limit = 10): Promise<number> {
 }
 
 /**
+ * Scout the /news system. Two signal types, both kept low-risk:
+ *  - the daily brief -> ONE informational signal/day (context only, no CTA);
+ *  - civic articles the news system already matched to one of our weigh-in
+ *    campaigns -> actionable signals linking to that campaign.
+ * Un-matched raw articles are intentionally skipped: paraphrasing arbitrary
+ * news is the accuracy risk we don't take autonomously. News signals are
+ * always gated downstream regardless of posting mode.
+ */
+export async function scoutNews(): Promise<number> {
+  const admin = createAdminClient();
+  type Candidate = Omit<Signal, 'id' | 'status'> & { metadata?: Record<string, unknown> };
+  const candidates: Candidate[] = [];
+
+  try {
+    const res = await fetch(`${SITE}/api/news/brief`, { cache: 'no-store' });
+    if (res.ok) {
+      const { brief } = (await res.json()) as { brief?: { bullets?: string[]; generatedAt?: string } };
+      if (brief?.bullets?.length) {
+        const day = (brief.generatedAt ?? new Date().toISOString()).slice(0, 10);
+        candidates.push({
+          source: 'news',
+          external_ref: `brief-${day}`,
+          title: 'Daily civic brief',
+          summary: brief.bullets.join(' • '),
+          url: `${SITE}/issues`,
+          issue_area: null,
+          classification: 'informational',
+          campaign_slug: null,
+        });
+      }
+    }
+  } catch {
+    // brief unavailable this run — fine
+  }
+
+  try {
+    const res = await fetch(`${SITE}/api/news/civic`, { cache: 'no-store' });
+    if (res.ok) {
+      const { articles } = (await res.json()) as {
+        articles?: Array<{ title: string; link: string; topic?: { issueCategory?: string }; campaign?: { slug: string } | null }>;
+      };
+      for (const a of (articles ?? []).filter((x) => x.campaign?.slug)) {
+        candidates.push({
+          source: 'news',
+          external_ref: a.link,
+          title: a.title,
+          summary: a.title,
+          url: `${SITE}/campaign/${a.campaign!.slug}`,
+          issue_area: a.topic?.issueCategory ?? null,
+          classification: 'actionable',
+          campaign_slug: a.campaign!.slug,
+        });
+      }
+    }
+  } catch {
+    // civic feed unavailable this run — fine
+  }
+
+  if (!candidates.length) return 0;
+  const refs = candidates.map((c) => c.external_ref).filter(Boolean) as string[];
+  const { data: existing } = await admin
+    .from('social_signals')
+    .select('external_ref')
+    .eq('source', 'news')
+    .in('external_ref', refs);
+  const have = new Set((existing ?? []).map((r) => r.external_ref));
+
+  const rows = candidates.filter((c) => !have.has(c.external_ref)).map((c) => ({ ...c, status: 'new', metadata: {} }));
+  if (!rows.length) return 0;
+  const { error } = await admin.from('social_signals').insert(rows);
+  if (error) {
+    console.error('[scout-news] insert failed:', error.message);
+    return 0;
+  }
+  return rows.length;
+}
+
+/**
  * Pick the next unused signal, biased toward issue-area balance: prefer the
  * freshest 'new' signal whose issue_area wasn't in the last few posts, so the
  * feed doesn't stack the same topic. Falls back to the freshest new signal.
