@@ -38,6 +38,22 @@ export function isLikelyElectedOfficial(handle: string, display: string): boolea
   );
 }
 
+// News outlets, bots, orgs, and aggregators: skip entirely. We reply to people
+// venting, not to headlines. (Also filters the "empty text = a headline card"
+// case that produced nonsense replies.)
+export function looksLikeOrgOrBot(handle: string, display: string): boolean {
+  const s = `${handle} ${display}`.toLowerCase();
+  return /(news|bot\b|\bdata|media|press|daily|report|\.ai\b|wire|times|gazette|tribune|magazine|podcast|newsletter|feed|official|weather)/.test(s);
+}
+
+// First-person voice: someone talking about their own life, which is what we
+// can legitimately redirect to their reps. Filters news headlines and slogans.
+export function hasFirstPersonVoice(text: string): boolean {
+  return /\b(i|i'm|im|i've|ive|my|me|myself|we|we're|were|our|us|can't afford|cant afford|paying|paycheck)\b/i.test(text);
+}
+
+const MIN_TARGET_LEN = 20;
+
 const REPLY_INSTRUCTIONS = `
 You are the Engager stage of the My Democracy Social Desk. Obey the brand brain
 above, especially the reply doctrine and the four non-negotiables.
@@ -92,6 +108,20 @@ export async function runEngager(brandBrain: string, session: BlueskySession, pe
   for (const c of candidates) {
     if (have.has(c.uri)) continue;
     if (c.authorHandle === OWN_HANDLE) continue; // never reply to ourselves
+
+    // Precision filters: real people, real posts, in their own voice.
+    if (c.text.trim().length < MIN_TARGET_LEN) {
+      result.skipped++;
+      continue;
+    }
+    if (looksLikeOrgOrBot(c.authorHandle, c.authorDisplay)) {
+      result.skipped++;
+      continue;
+    }
+    if (c.lane === 'grievance' && !hasFirstPersonVoice(c.text)) {
+      result.skipped++;
+      continue;
+    }
 
     const skip = replyShouldSkip(c.text);
     if (skip.skip) {

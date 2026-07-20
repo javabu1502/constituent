@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { runGuardrails, isNearDuplicate, LOCAL_COVERAGE, replyShouldSkip } from '../guardrails';
-import { isLikelyElectedOfficial } from '../engager';
+import { isLikelyElectedOfficial, looksLikeOrgOrBot, hasFirstPersonVoice } from '../engager';
 import { linkFacets, graphemeLength, buildPostRecord, BLUESKY_MAX_GRAPHEMES } from '../bluesky';
 import { canPost, MAX_POSTS_PER_DAY, MIN_GAP_MINUTES } from '../cadence';
 import { nextStateOnError, CONSECUTIVE_FAIL_LIMIT } from '../circuit-breaker';
@@ -187,5 +187,18 @@ describe('engager: elected-official gating', () => {
   });
   it('does not flag ordinary citizens', () => {
     expect(isLikelyElectedOfficial('coffee_lover_92', 'Dana')).toBe(false);
+  });
+});
+
+describe('engager: precision filters', () => {
+  it('skips news/bot/org accounts', () => {
+    expect(looksLikeOrgOrBot('bigearthdata.ai', 'Big Earth Data')).toBe(true);
+    expect(looksLikeOrgOrBot('kera.news', 'KERA News')).toBe(true);
+    expect(looksLikeOrgOrBot('weatherbot', 'Weather Bot')).toBe(true);
+    expect(looksLikeOrgOrBot('dana_smith', 'Dana')).toBe(false);
+  });
+  it('requires first-person voice for grievances', () => {
+    expect(hasFirstPersonVoice('my rent went up again and I can barely cover it')).toBe(true);
+    expect(hasFirstPersonVoice('North Texas temperatures rise, so do prices')).toBe(false);
   });
 });
