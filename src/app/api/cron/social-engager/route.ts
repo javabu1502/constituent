@@ -42,11 +42,33 @@ export async function GET(request: NextRequest) {
   const published: Array<{ replyId: string; ok: boolean; reason?: string }> = [];
   if (reply.mode === 'autonomous') {
     const admin = createAdminClient();
+    // Replies go stale fast: a draft that never cleared cadence within 24h
+    // would land on a days-old thread, so expire it instead of posting late.
+    const cutoff = new Date(Date.now() - 24 * 60 * 60_000).toISOString();
+    const { data: stale } = await admin
+      .from('social_replies')
+      .select('id, guardrail_report')
+      .eq('status', 'pending_post')
+      .lt('created_at', cutoff);
+    for (const row of stale ?? []) {
+      await admin
+        .from('social_replies')
+        .update({
+          status: 'skipped',
+          guardrail_report: {
+            ...((row.guardrail_report as Record<string, unknown>) ?? {}),
+            skipReason: 'expired: cadence never allowed replying within 24h',
+          },
+        })
+        .eq('id', row.id);
+    }
+
     const { data: ready } = await admin
       .from('social_replies')
       .select('id')
       .eq('status', 'pending_post')
       .eq('requires_human', false)
+      .gte('created_at', cutoff)
       .order('created_at', { ascending: true })
       .limit(3);
     for (const r of ready ?? []) {
