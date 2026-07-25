@@ -8,6 +8,7 @@ import { createAdminClient } from '@/lib/supabase';
 import { getKillSwitch } from './config';
 import { isTripped, recordSuccess, recordFailure } from './circuit-breaker';
 import { runGuardrails } from './guardrails';
+import { canPostNow } from './cadence';
 import { post as blueskyPost, graphemeLength, BLUESKY_MAX_GRAPHEMES, createSession, getBlueskyCreds } from './bluesky';
 
 export interface PublishResult {
@@ -85,6 +86,59 @@ export async function publishDraft(
       reason: breaker.tripped ? `${msg} (circuit breaker tripped)` : msg,
     };
   }
+}
+
+export interface SweepResult {
+  published: number;
+  expired: number;
+  reason?: string;
+}
+
+/**
+ * Drain the autonomous backlog. A draft that clears guardrails while the
+ * cadence gate is closed lands in pending_approval and, without this sweep,
+ * waits for manual approval forever. Publishes the oldest fresh draft if
+ * cadence allows, and expires drafts older than 24h — a stale daily brief
+ * should not post a day late.
+ */
+export async function sweepPendingDrafts(): Promise<SweepResult> {
+  const admin = createAdminClient();
+  const cutoff = new Date(Date.now() - 24 * 60 * 60_000).toISOString();
+
+  const { data: stale } = await admin
+    .from('social_posts')
+    .select('id, guardrail_report')
+    .eq('status', 'pending_approval')
+    .lt('created_at', cutoff);
+  for (const row of stale ?? []) {
+    await admin
+      .from('social_posts')
+      .update({
+        status: 'skipped',
+        guardrail_report: {
+          ...((row.guardrail_report as Record<string, unknown>) ?? {}),
+          skipReason: 'expired: cadence never allowed posting within 24h',
+        },
+      })
+      .eq('id', row.id);
+  }
+  const expired = (stale ?? []).length;
+
+  const { data: next } = await admin
+    .from('social_posts')
+    .select('id')
+    .eq('status', 'pending_approval')
+    .gte('created_at', cutoff)
+    .order('created_at', { ascending: true })
+    .limit(1)
+    .maybeSingle();
+  if (!next) return { published: 0, expired };
+
+  const cadence = await canPostNow('bluesky');
+  if (!cadence.allowed) return { published: 0, expired, reason: cadence.reason };
+
+  const result = await publishDraft(next.id as string);
+  return { published: result.ok ? 1 : 0, expired, reason: result.ok ? undefined : result.reason };
 }
 
 export interface ReplyResult {

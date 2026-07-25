@@ -6,7 +6,7 @@ import { loadBrandBrain } from '@/lib/social/brand-brain';
 import { writePost } from '@/lib/social/writer';
 import { runGuardrails, isNearDuplicate } from '@/lib/social/guardrails';
 import { graphemeLength, BLUESKY_MAX_GRAPHEMES } from '@/lib/social/bluesky';
-import { publishDraft } from '@/lib/social/publisher';
+import { publishDraft, sweepPendingDrafts, type SweepResult } from '@/lib/social/publisher';
 import { isTripped } from '@/lib/social/circuit-breaker';
 import { canPostNow } from '@/lib/social/cadence';
 
@@ -24,8 +24,10 @@ function contentHash(s: string): string {
 /**
  * GET /api/cron/social-desk
  * One run of the pipeline: Scout -> Writer -> Guardrail. Produces a
- * pending_approval draft in social_posts. It NEVER publishes — going live is a
- * separate, deliberate step. Kill switch halts it entirely.
+ * pending_approval draft in social_posts. In gated mode going live is a
+ * separate, deliberate step; in autonomous mode a clean draft publishes
+ * immediately (cadence permitting) and the cadence-blocked backlog is swept
+ * each run. Kill switch halts it entirely.
  */
 export async function GET(request: NextRequest) {
   const auth = request.headers.get('authorization');
@@ -38,12 +40,20 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ ok: true, skipped: 'paused', reason: kill.reason });
   }
 
+  // Autonomous mode: drain the backlog first, so drafts that hit a closed
+  // cadence gate at creation still go out on a later run instead of waiting
+  // for manual approval that autonomous mode does not expect.
+  let swept: SweepResult | null = null;
+  if ((await getMode()) === 'autonomous' && !(await isTripped())) {
+    swept = await sweepPendingDrafts();
+  }
+
   const admin = createAdminClient();
   const scouted = (await scoutCampaigns()) + (await scoutNews());
 
   const signal = await nextSignal();
   if (!signal) {
-    return NextResponse.json({ ok: true, scouted, skipped: 'no signal' });
+    return NextResponse.json({ ok: true, scouted, swept, skipped: 'no signal' });
   }
 
   const brandBrain = await loadBrandBrain();
@@ -127,6 +137,7 @@ export async function GET(request: NextRequest) {
   return NextResponse.json({
     ok: true,
     scouted,
+    swept,
     post_id: inserted?.id,
     status,
     lane: draft.lane,

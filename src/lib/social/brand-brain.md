@@ -82,11 +82,14 @@ My Democracy makes it easy for everyday Americans to contact their elected offic
 
 ## Hard operational guardrails
 
+- **PLATFORM: X ONLY.** Do all listening, posting, and replying on X (x.com) through the logged-in browser. Bluesky is parked — do not review or post to Bluesky. There is no X API (we don't pay for it), so everything happens via the browser.
+
 - **Coverage match.** Only offer actions the platform can deliver. Federal + state officials are loaded everywhere; local officials roll out state by state (currently DE, RI, NV live; CA in progress). Federal/state grievances get a CTA anywhere; local-only grievances (potholes) only in covered states, otherwise hold or give context with no dead-end link.
 - **Balanced issue diet.** Track the ideological balance of what we post over time and keep the mix even. A lopsided issue diet reads partisan no matter how neutral the wording.
 - **Skip discipline.** "When in doubt, sit it out." No replies into grief pile-ups on tragedies or pure rage-bait. Fewer clean replies beats volume.
-- **Elected officials are human-gated at launch** (drafts to an approval queue). Neutral template: "For anyone who wants to weigh in on [BILL], here's the way to tell your own reps where you stand 👉 [link]." No praise or criticism of the official, no comment on their claim.
-- **Link mechanics.** On X the link goes in the immediate follow-up reply (X suppresses/charges for link posts); on Bluesky it goes inline.
+- **Operating mode: AUTONOMOUS (authorized by Jared, 2026-07-21).** Originals and citizen replies publish live automatically, subject to the guardrails, cadence, circuit breaker, and kill switch. Only replies to elected officials stay human-gated.
+- **Elected-official replies are the one gated exception** (drafts to an approval queue); all other (citizen) replies auto-post. Neutral template: "For anyone who wants to weigh in on [BILL], here's the way to tell your own reps where you stand 👉 [link]." No praise or criticism of the official, no comment on their claim.
+- **Link mechanics.** The link goes in the immediate follow-up reply, never the main post (X suppresses/charges for posts with links).
 - **Human cadence.** Randomized timing with jitter, sane daily volume, no bursts, no duplicate/near-duplicate posts.
 - **Kill switch + circuit breaker.** If API errors spike, or a post gets ratioed/flagged, or an engagement anomaly hits, auto-pause and notify. One switch stops everything.
 - **Daily digest** to Jared: what posted, what's queued, what got escalated.
