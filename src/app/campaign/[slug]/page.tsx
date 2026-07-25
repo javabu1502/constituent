@@ -147,7 +147,11 @@ export default async function CampaignPage({ params }: PageProps) {
             </span>
           ) : (
             <span className="px-3 py-1 text-xs font-medium rounded-full bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-400 capitalize">
-              {campaign.target_level === 'both' ? 'Federal & State' : campaign.target_level}
+              {campaign.target_level === 'both'
+                ? 'Federal & State'
+                : campaign.target_level === 'state' && campaign.bill_state
+                  ? `State · ${campaign.bill_state}`
+                  : campaign.target_level}
             </span>
           )}
         </div>

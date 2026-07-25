@@ -6,14 +6,14 @@ import { CampaignFilters } from '@/components/campaign/CampaignFilters';
 export const metadata: Metadata = {
   title: 'Weigh In | My Democracy',
   description:
-    'The questions being decided in Washington right now. Read both sides, pick your position, and send it to the people who represent you.',
+    'The questions being decided in Washington and the states right now. Read both sides, pick your position, and send it to the people who represent you.',
   alternates: {
     canonical: 'https://www.mydemocracy.app/issues',
   },
   openGraph: {
     title: 'Weigh In | My Democracy',
     description:
-      'The questions being decided in Washington right now. Read both sides, pick your position, and send it to the people who represent you.',
+      'The questions being decided in Washington and the states right now. Read both sides, pick your position, and send it to the people who represent you.',
   },
 };
 
@@ -21,7 +21,7 @@ export default async function IssuesPage() {
   const admin = createAdminClient();
   const { data: issues } = await admin
     .from('campaigns')
-    .select('id, slug, headline, description, issue_area, action_count, created_at, is_bill_specific, bill_type, bill_number')
+    .select('id, slug, headline, description, issue_area, action_count, created_at, is_bill_specific, bill_type, bill_number, target_level, bill_state, bill_ref')
     .eq('status', 'active')
     .eq('approval_status', 'approved')
     .eq('visibility', 'public')
@@ -46,7 +46,7 @@ export default async function IssuesPage() {
         <div>
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Weigh In</h1>
           <p className="text-gray-600 dark:text-gray-400 mt-1">
-            The questions being decided in Washington right now. Read both sides, pick your position,
+            The questions being decided in Washington and the states right now. Read both sides, pick your position,
             and send it to the people who represent you. We don&rsquo;t take sides — you do.
           </p>
           {totalActions > 0 && (

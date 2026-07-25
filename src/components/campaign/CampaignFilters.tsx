@@ -14,6 +14,9 @@ interface Campaign {
   is_bill_specific?: boolean;
   bill_type?: string | null;
   bill_number?: string | null;
+  target_level?: 'federal' | 'state' | 'both' | null;
+  bill_state?: string | null;
+  bill_ref?: string | null;
 }
 
 const BILL_TYPE_LABELS: Record<string, string> = {
@@ -21,25 +24,66 @@ const BILL_TYPE_LABELS: Record<string, string> = {
   hjres: 'H.J.Res.', sjres: 'S.J.Res.', hconres: 'H.Con.Res.', sconres: 'S.Con.Res.',
 };
 
+const STATE_NAMES: Record<string, string> = {
+  AL: 'Alabama', AK: 'Alaska', AZ: 'Arizona', AR: 'Arkansas', CA: 'California',
+  CO: 'Colorado', CT: 'Connecticut', DE: 'Delaware', FL: 'Florida', GA: 'Georgia',
+  HI: 'Hawaii', ID: 'Idaho', IL: 'Illinois', IN: 'Indiana', IA: 'Iowa',
+  KS: 'Kansas', KY: 'Kentucky', LA: 'Louisiana', ME: 'Maine', MD: 'Maryland',
+  MA: 'Massachusetts', MI: 'Michigan', MN: 'Minnesota', MS: 'Mississippi', MO: 'Missouri',
+  MT: 'Montana', NE: 'Nebraska', NV: 'Nevada', NH: 'New Hampshire', NJ: 'New Jersey',
+  NM: 'New Mexico', NY: 'New York', NC: 'North Carolina', ND: 'North Dakota', OH: 'Ohio',
+  OK: 'Oklahoma', OR: 'Oregon', PA: 'Pennsylvania', RI: 'Rhode Island', SC: 'South Carolina',
+  SD: 'South Dakota', TN: 'Tennessee', TX: 'Texas', UT: 'Utah', VT: 'Vermont',
+  VA: 'Virginia', WA: 'Washington', WV: 'West Virginia', WI: 'Wisconsin', WY: 'Wyoming',
+  DC: 'District of Columbia',
+};
+
+function levelTag(c: Campaign): string | null {
+  if (c.target_level === 'federal') return 'Federal';
+  if (c.target_level === 'state') return c.bill_state ?? 'State';
+  if (c.target_level === 'both') return 'Fed + State';
+  return null;
+}
+
 function billRef(c: Campaign): string | null {
-  if (!c.is_bill_specific || !c.bill_type || !c.bill_number) return null;
-  return `${BILL_TYPE_LABELS[c.bill_type.toLowerCase()] ?? c.bill_type.toUpperCase()} ${c.bill_number}`;
+  // Federal bill-specific: rendered from the Congress.gov linkage fields.
+  if (c.is_bill_specific && c.bill_type && c.bill_number) {
+    return `${BILL_TYPE_LABELS[c.bill_type.toLowerCase()] ?? c.bill_type.toUpperCase()} ${c.bill_number}`;
+  }
+  // State (or other non-Congress.gov) bills: rendered from the stored ref.
+  if (c.bill_ref) return c.bill_state ? `${c.bill_state} ${c.bill_ref}` : c.bill_ref;
+  return null;
 }
 
 export function CampaignFilters({ campaigns }: { campaigns: Campaign[] }) {
   const [activeIssue, setActiveIssue] = useState<string | null>(null);
   const [kind, setKind] = useState<'all' | 'legislation' | 'policy'>('all');
+  const [level, setLevel] = useState<'all' | 'federal' | 'state'>('all');
+  const [stateFilter, setStateFilter] = useState<string | null>(null);
   const [sort, setSort] = useState<'recent' | 'popular'>('recent');
 
   // Extract unique issue areas
   const issueAreas = Array.from(new Set(campaigns.map((c) => c.issue_area))).sort();
 
-  // Filter: topic + kind. Legislation = weigh-ins on a specific bill in
-  // Congress; Policy = issue-level questions.
+  // States that actually have campaigns, for the state dropdown.
+  const statesWithCampaigns = Array.from(
+    new Set(campaigns.map((c) => c.bill_state).filter((s): s is string => !!s))
+  ).sort();
+
+  // Filter: topic + kind + level. Legislation = weigh-ins on a specific bill
+  // (Congress or a statehouse); Policy = issue-level questions. Level uses
+  // target_level, with 'both' counting at either level; a specific state
+  // matches on bill_state.
+  const isBill = (c: Campaign) => !!c.is_bill_specific || !!c.bill_ref;
   const filtered = campaigns.filter((c) => {
     if (activeIssue && c.issue_area !== activeIssue) return false;
-    if (kind === 'legislation' && !c.is_bill_specific) return false;
-    if (kind === 'policy' && c.is_bill_specific) return false;
+    if (kind === 'legislation' && !isBill(c)) return false;
+    if (kind === 'policy' && isBill(c)) return false;
+    if (level === 'federal' && !(c.target_level === 'federal' || c.target_level === 'both')) return false;
+    if (level === 'state') {
+      if (!(c.target_level === 'state' || c.target_level === 'both')) return false;
+      if (stateFilter && c.bill_state !== stateFilter) return false;
+    }
     return true;
   });
 
@@ -67,6 +111,40 @@ export function CampaignFilters({ campaigns }: { campaigns: Campaign[] }) {
             ))}
           </select>
         </div>
+        <div className="flex items-center gap-1 shrink-0" role="group" aria-label="Filter by level">
+          {([['all', 'All levels'], ['federal', 'Federal'], ['state', 'State']] as const).map(([val, label]) => (
+            <button
+              key={val}
+              onClick={() => {
+                setLevel(val);
+                if (val !== 'state') setStateFilter(null);
+              }}
+              className={`px-3 py-1.5 text-sm font-medium rounded-full transition-colors ${
+                level === val
+                  ? 'bg-purple-600 text-white'
+                  : 'bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
+              }`}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+        {level === 'state' && (
+          <div className="shrink-0">
+            <label htmlFor="state-filter" className="sr-only">Filter by state</label>
+            <select
+              id="state-filter"
+              value={stateFilter ?? ''}
+              onChange={(e) => setStateFilter(e.target.value || null)}
+              className="px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-purple-600"
+            >
+              <option value="">All states</option>
+              {statesWithCampaigns.map((s) => (
+                <option key={s} value={s}>{STATE_NAMES[s] ?? s}</option>
+              ))}
+            </select>
+          </div>
+        )}
         <div className="flex items-center gap-1 shrink-0" role="group" aria-label="Filter by kind">
           {([['all', 'All'], ['legislation', 'Legislation'], ['policy', 'Policy']] as const).map(([val, label]) => (
             <button
@@ -133,6 +211,11 @@ export function CampaignFilters({ campaigns }: { campaigns: Campaign[] }) {
                   <span className="px-2.5 py-1 text-xs font-medium rounded-full bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300 truncate">
                     {campaign.issue_area}
                   </span>
+                  {levelTag(campaign) && (
+                    <span className="px-2 py-1 text-xs font-semibold rounded-full bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300 shrink-0">
+                      {levelTag(campaign)}
+                    </span>
+                  )}
                   {billRef(campaign) && (
                     <span className="px-2 py-1 text-xs font-semibold rounded-full bg-indigo-100 text-indigo-700 dark:bg-indigo-900/40 dark:text-indigo-300 shrink-0">
                       📄 {billRef(campaign)}
