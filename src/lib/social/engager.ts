@@ -14,14 +14,27 @@ import { searchPosts, type BlueskySession, type FoundPost } from './bluesky';
 import { replyShouldSkip, runGuardrails } from './guardrails';
 import { graphemeLength, BLUESKY_MAX_GRAPHEMES } from './bluesky';
 
-// Narrow, high-intent listening queries per lane. Kept curated on purpose.
+// Narrow, high-intent listening queries per lane. Kept curated on purpose:
+// wider coverage than launch, but still only posts where pointing someone at
+// their reps (or answering a civic how-do-I question) is a genuine favor.
 export const LANE_QUERIES: Array<{ lane: string; q: string }> = [
   { lane: 'act-now', q: '"someone should do something"' },
   { lane: 'act-now', q: '"call your representative"' },
+  { lane: 'act-now', q: '"call your senators"' },
   { lane: 'act-now', q: '"contact your reps"' },
+  { lane: 'act-now', q: '"email your representative"' },
   { lane: 'grievance', q: 'gas prices brutal' },
   { lane: 'grievance', q: 'rent too expensive' },
   { lane: 'grievance', q: 'groceries so expensive' },
+  { lane: 'grievance', q: "can't afford rent" },
+  { lane: 'grievance', q: 'health insurance premium up' },
+  { lane: 'grievance', q: 'childcare costs insane' },
+  { lane: 'grievance', q: 'electric bill doubled' },
+  { lane: 'grievance', q: 'student loan payment brutal' },
+  { lane: 'civic-question', q: '"who is my representative"' },
+  { lane: 'civic-question', q: '"who represents me"' },
+  { lane: 'civic-question', q: '"how to contact your representative"' },
+  { lane: 'civic-question', q: '"does calling your representative"' },
 ];
 
 const OWN_HANDLE = process.env.BLUESKY_HANDLE ?? '';
@@ -67,10 +80,12 @@ Write ONE reply to the post below. Rules:
 - 280 graphemes max. Include the action link inline: https://mydemocracy.app
 - INVENT NOTHING. Only reference details the post literally states. Do not
   assume family members, jobs, locations, or specifics they did not write.
-- RELEVANCE: only reply if this is clearly a person venting a real pocketbook
-  or policy frustration you can redirect to their officials. If the post is a
-  joke, quote, lyric, slogan, meme, news headline, or not actually about a
-  civic grievance, return {"skip": true}.
+- RELEVANCE: only reply if this is clearly (a) a person venting a real
+  pocketbook or policy frustration you can redirect to their officials, or
+  (b) a person genuinely asking a civic how-do-I question (who represents me,
+  how to contact reps, does contacting them matter) you can plainly answer.
+  If the post is a joke, quote, lyric, slogan, meme, news headline, or neither
+  of those, return {"skip": true}.
 
 Return ONLY JSON: {"text": "<reply>"} or {"skip": true}.
 `;
@@ -148,24 +163,44 @@ export async function runEngager(brandBrain: string, session: BlueskySession, pe
       continue;
     }
 
+    // Record a target we decided against so later runs don't re-scan it and
+    // pay another Claude call for the same post. Skipped rows don't count
+    // toward the per-author cap.
+    const recordSkip = async (skipReason: string) => {
+      await admin.from('social_replies').insert({
+        platform: 'bluesky',
+        lane: c.lane,
+        target_uri: c.uri,
+        target_author: c.authorHandle,
+        target_text: c.text,
+        draft_body: '',
+        requires_human: false,
+        status: 'skipped',
+        guardrail_report: { skipReason },
+      });
+    };
+
     // Draft the reply.
     let text = '';
     try {
       const raw = await callClaude(`${brandBrain}\n\n---\n${REPLY_INSTRUCTIONS}`, `POST by @${c.authorHandle}: ${c.text}`, 300);
       const parsed = extractJSON(raw) as { text?: string; skip?: boolean } | null;
       if (parsed?.skip || !parsed?.text) {
+        await recordSkip('writer skip: not a real grievance or civic question');
         result.skipped++;
         continue;
       }
       text = deDash(parsed.text).trim();
     } catch {
-      result.skipped++;
+      result.skipped++; // transient API failure: leave unrecorded so we retry
       continue;
     }
 
     // Guardrail the draft before it's ever stored as postable.
     const gate = runGuardrails({ text, maxLength: BLUESKY_MAX_GRAPHEMES, graphemeLength });
     if (!gate.passed) {
+      const reasons = gate.checks.filter((ch) => !ch.passed).map((ch) => ch.reason).join('; ');
+      await recordSkip(`guardrail: ${reasons}`);
       result.skipped++;
       continue;
     }
