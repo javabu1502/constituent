@@ -59,6 +59,25 @@ export async function GET(request: NextRequest) {
   const brandBrain = await loadBrandBrain();
   const draft = await writePost(brandBrain, signal);
 
+  // Writer skip: record it for the digest and consume the signal so the next
+  // run moves on. Skips never carry publishable text.
+  if ('skip' in draft) {
+    await admin.from('social_posts').insert({
+      platform: 'bluesky',
+      lane: 'none',
+      body: '',
+      content_hash: contentHash(''),
+      signal_id: signal.id,
+      campaign_slug: signal.campaign_slug,
+      issue_area: signal.issue_area,
+      status: 'skipped',
+      dry_run: process.env.SOCIAL_DRY_RUN === 'true',
+      guardrail_report: { skipReason: `writer skip: ${draft.reason}` },
+    });
+    await markSignalUsed(signal.id);
+    return NextResponse.json({ ok: true, scouted, swept, skipped: 'writer skip', reason: draft.reason });
+  }
+
   // Guardrails + near-duplicate check against recent drafts/posts.
   const isNews = signal.source === 'news';
   const gate = runGuardrails({

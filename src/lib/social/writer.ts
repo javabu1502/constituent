@@ -34,11 +34,20 @@ Write ONE Bluesky post about the item below. Hard rules:
   contact a city council, mayor, school board, county board, or "local
   officials"; point the CTA at the linked campaign instead.
 - Match a posting lane from the brand brain (news drop / by-the-numbers / bill on the move / rolling brief).
+- If the item can't be posted under these rules (source/campaign mismatch,
+  partisan-only framing, unverifiable claims), do NOT explain in prose.
+  Return ONLY JSON: {"skip": true, "reason": "<short internal note>"}
 
-Return ONLY JSON: {"text": "<the post>", "lane": "<lane name>"}
+Return ONLY JSON: {"text": "<the post>", "lane": "<lane name>"} or {"skip": true, "reason": "<why>"}
 `;
 
-export async function writePost(brandBrain: string, signal: Signal): Promise<Draft> {
+/** A skipped signal: the writer declined instead of drafting. Never publish. */
+export interface WriterSkip {
+  skip: true;
+  reason: string;
+}
+
+export async function writePost(brandBrain: string, signal: Signal): Promise<Draft | WriterSkip> {
   const item = [
     `TITLE: ${signal.title ?? ''}`,
     `SUMMARY: ${signal.summary ?? ''}`,
@@ -54,15 +63,17 @@ export async function writePost(brandBrain: string, signal: Signal): Promise<Dra
     400,
   );
 
-  let text = '';
-  let lane = 'rolling brief';
-  const parsed = extractJSON(raw) as { text?: string; lane?: string } | null;
-  if (parsed && typeof parsed.text === 'string') {
-    text = parsed.text;
-    if (typeof parsed.lane === 'string') lane = parsed.lane;
-  } else {
-    text = raw.trim();
+  // Anything that isn't a clean {"text": ...} is a skip, never a post body:
+  // a structured {"skip": true}, prose refusals, meta notes, and parse failures
+  // all land here. Raw model output must not reach the publish path (leaked
+  // "SKIP, INPUT MISMATCH: ..." notes were published verbatim in July 2026).
+  const parsed = extractJSON(raw) as { text?: string; lane?: string; skip?: boolean; reason?: string } | null;
+  if (!parsed || parsed.skip || typeof parsed.text !== 'string' || !parsed.text.trim()) {
+    return { skip: true, reason: parsed?.reason ?? 'writer returned no usable draft' };
   }
+
+  let text = parsed.text;
+  const lane = typeof parsed.lane === 'string' ? parsed.lane : 'rolling brief';
 
   // Backstop the brand's hardest rule regardless of what the model returned.
   text = deDash(text).trim();

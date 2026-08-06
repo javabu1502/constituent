@@ -49,6 +49,22 @@ const VOICE_TELLS: Array<{ re: RegExp; reason: string }> = [
 // in covered states.
 const LOCAL_ACTION_CUES = /\b(city council|town council|mayor|your (city|town)|local officials?|school board|county (board|commission))\b/i;
 
+// Writer meta/refusal output. The writer sometimes answers with an internal
+// note ("SKIP, INPUT MISMATCH: ...") instead of a post; that text must never
+// publish. The writer now returns a structured skip, this is the backstop.
+const META_OUTPUT_PATTERNS: Array<{ re: RegExp; reason: string }> = [
+  { re: /^\s*skip\b/i, reason: 'starts with a SKIP directive' },
+  { re: /\binput mismatch\b/i, reason: 'writer mismatch note' },
+  { re: /\bflagged for human review\b/i, reason: 'review-hold note' },
+  // NOTE: "guardrails" alone is legit civic vocabulary (AI policy posts) — only
+  // block pipeline-specific internals.
+  { re: /\b(brand brain|writer stage|social desk|requeue)\b/i, reason: 'references pipeline internals' },
+  { re: /\b(cannot|can't) (write|post|draft)\b/i, reason: 'refusal phrasing' },
+  { re: /\bas an ai\b/i, reason: 'assistant self-reference' },
+  { re: /\bwe do not post\b/i, reason: 'policy note, not a post' },
+  { re: /\bdoes(n't| not) meet the (factual|sourcing|editorial) standard\b/i, reason: 'editorial-standard note' },
+];
+
 function normalize(s: string): string {
   return s
     .toLowerCase()
@@ -98,7 +114,16 @@ export function runGuardrails(input: GuardrailInput): GateReport {
     reason: partisanHit ? `partisan/directive phrasing: ${partisanHit}` : undefined,
   });
 
-  // 2. No em dashes (block) — hard brand rule; pipeline de-dashes first, so a
+  // 2. Meta output (block): internal writer notes are never publishable copy.
+  const metaHit = META_OUTPUT_PATTERNS.find((p) => p.re.test(text));
+  checks.push({
+    name: 'no_meta_output',
+    passed: !metaHit,
+    severity: 'block',
+    reason: metaHit ? `writer meta/refusal text: ${metaHit.reason}` : undefined,
+  });
+
+  // 3. No em dashes (block) — hard brand rule; pipeline de-dashes first, so a
   //    hit here means something slipped through.
   const hasEmDash = /[—–]/.test(text);
   checks.push({
@@ -108,7 +133,7 @@ export function runGuardrails(input: GuardrailInput): GateReport {
     reason: hasEmDash ? 'contains an em/en dash' : undefined,
   });
 
-  // 3. Voice tells (warn)
+  // 4. Voice tells (warn)
   const voiceHit = VOICE_TELLS.find((v) => v.re.test(text));
   checks.push({
     name: 'voice_tells',
@@ -117,7 +142,7 @@ export function runGuardrails(input: GuardrailInput): GateReport {
     reason: voiceHit?.reason,
   });
 
-  // 4. Accuracy: any bill number in the post must appear in the source (warn —
+  // 5. Accuracy: any bill number in the post must appear in the source (warn —
   //    heuristic can miss paraphrase, so it flags for review rather than blocks).
   if (input.sourceText) {
     const src = normalize(input.sourceText);
@@ -140,7 +165,7 @@ export function runGuardrails(input: GuardrailInput): GateReport {
     });
   }
 
-  // 5. Coverage-match (block): a local-action CTA needs a covered state.
+  // 6. Coverage-match (block): a local-action CTA needs a covered state.
   if (input.localAction || LOCAL_ACTION_CUES.test(text)) {
     const covered = input.targetState ? LOCAL_COVERAGE.has(input.targetState.toUpperCase()) : false;
     checks.push({
@@ -151,7 +176,7 @@ export function runGuardrails(input: GuardrailInput): GateReport {
     });
   }
 
-  // 6. Length (block)
+  // 7. Length (block)
   if (input.maxLength) {
     const len = (input.graphemeLength ?? ((s: string) => [...s].length))(text);
     checks.push({

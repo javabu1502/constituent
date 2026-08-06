@@ -202,3 +202,30 @@ describe('engager: precision filters', () => {
     expect(hasFirstPersonVoice('North Texas temperatures rise, so do prices')).toBe(false);
   });
 });
+
+describe('guardrails: no meta/refusal output', () => {
+  it('blocks a leaked SKIP note', () => {
+    const r = runGuardrails({ text: 'SKIP, INPUT MISMATCH: The news item does not connect to the linked campaign.' });
+    const c = r.checks.find((x) => x.name === 'no_meta_output');
+    expect(r.passed).toBe(false);
+    expect(c?.passed).toBe(false);
+  });
+  it('blocks a review-hold note', () => {
+    const r = runGuardrails({ text: "Flagged for human review, sourcing doesn't meet the factual standard for a news-drop post." });
+    expect(r.passed).toBe(false);
+  });
+  it('blocks pipeline-internals references', () => {
+    const r = runGuardrails({ text: 'brand brain prohibits all bluesky activity. platform is parked. requeue if policy changes.' });
+    expect(r.passed).toBe(false);
+  });
+  it('still allows a real post about AI guardrails', () => {
+    const r = runGuardrails({ text: 'Congress is weighing guardrails for AI systems. tell your reps where you stand: link' });
+    const c = r.checks.find((x) => x.name === 'no_meta_output');
+    expect(c?.passed).toBe(true);
+  });
+  it('does not block a post that merely contains the word skip mid-sentence', () => {
+    const r = runGuardrails({ text: 'lawmakers may skip the August recess to finish the funding bill. here is what that means: link' });
+    const c = r.checks.find((x) => x.name === 'no_meta_output');
+    expect(c?.passed).toBe(true);
+  });
+});
