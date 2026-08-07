@@ -78,12 +78,17 @@ export function useTurnstile() {
         },
         'expired-callback': () => setToken(null),
         'error-callback': () => setToken(null),
-        // Cloudflare removed size:'invisible' (render() now THROWS on it,
-        // which silently killed every widget and 403'd all anonymous users).
-        // Invisibility now comes from appearance:'interaction-only' — the
-        // widget stays hidden unless a challenge actually needs interaction.
-        appearance: 'interaction-only',
-        execution: 'execute',
+        // Solve PROACTIVELY at render (default execution) and keep the widget
+        // visible ('always'). The previous appearance:'interaction-only' +
+        // execution:'execute' combo produced NO token on networks where
+        // Cloudflare withholds a silent pass (VPNs, fresh browsers, shared
+        // demo/training WiFi): the deferred challenge never fired a callback,
+        // getToken() timed out to an empty string, and every anonymous request
+        // 403'd with "CAPTCHA verification failed". A managed 'always' widget
+        // auto-passes for most users (no click) and yields a token before the
+        // user reaches submit. Verified against the live sitekey: this config
+        // returns a token in <1s that passes server-side siteverify.
+        appearance: 'always',
       });
     };
 
@@ -138,20 +143,22 @@ export function useTurnstile() {
       return current;
     }
 
-    // Wait for token with a timeout so we don't hang forever
+    // No cached token yet (first use, or it expired): reset to kick off a
+    // fresh proactive solve and wait for the callback. The window is generous
+    // because a managed challenge that needs interaction can take several
+    // seconds; a 5s cutoff used to fire first and send an empty token, which
+    // the strict server path rejects as "CAPTCHA verification failed".
     return new Promise((resolve) => {
       resolveRef.current = resolve;
       if (widgetIdRef.current && window.turnstile) {
         window.turnstile.reset(widgetIdRef.current);
-        window.turnstile.execute(widgetIdRef.current);
       }
-      // If Turnstile doesn't respond in 5 seconds, proceed without token
       setTimeout(() => {
         if (resolveRef.current === resolve) {
           resolveRef.current = null;
           resolve('');
         }
-      }, 5000);
+      }, 20000);
     });
   }, [siteKey, token]);
 
