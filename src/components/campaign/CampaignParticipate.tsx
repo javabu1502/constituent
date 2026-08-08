@@ -39,6 +39,47 @@ interface OfficialMessage {
   body: string;
 }
 
+/** Starter draft for when AI generation is unavailable (CAPTCHA failure,
+ * outage, daily quota). Neutral scaffolding only: official weigh-ins carry
+ * the PARTICIPANT's stance, and the bracketed prompt is theirs to fill —
+ * the platform never supplies a position. */
+function buildFallbackMessage(
+  campaign: Campaign,
+  official: Official,
+  opts: {
+    stance: Stance | null;
+    personalWhy: string;
+    senderName: string;
+    city: string;
+    stateCode: string;
+    zip: string;
+  }
+): OfficialMessage {
+  let topic = `"${campaign.headline}"`;
+  if (campaign.is_bill_specific && campaign.bill_type && campaign.bill_number) {
+    const typeLabels: Record<string, string> = {
+      hr: 'H.R.', s: 'S.', hres: 'H.Res.', sres: 'S.Res.',
+      hjres: 'H.J.Res.', sjres: 'S.J.Res.', hconres: 'H.Con.Res.', sconres: 'S.Con.Res.',
+    };
+    topic += ` (${typeLabels[campaign.bill_type.toLowerCase()] ?? campaign.bill_type.toUpperCase()} ${campaign.bill_number})`;
+  }
+  const lastName = official.lastName || official.name.split(' ').pop();
+  const opening =
+    opts.stance === 'support'
+      ? `I am writing to express my support for ${topic}, and to ask for yours.`
+      : opts.stance === 'oppose'
+        ? `I am writing to express my opposition to ${topic}, and to ask you to oppose it as well.`
+        : `I am writing about ${topic}.`;
+  const body = [
+    `Dear ${official.title} ${lastName},`,
+    `I am your constituent from ${opts.city}, ${opts.stateCode}. ${opening}`,
+    opts.personalWhy.trim() || '[Add a sentence or two about why this matters to you and what you would like them to do.]',
+    'Thank you for your time and service.',
+    `Sincerely,\n${opts.senderName}\n${opts.city}, ${opts.stateCode} ${opts.zip}`,
+  ].join('\n\n');
+  return { subject: `Constituent message: ${campaign.headline}`, body };
+}
+
 export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
   // Official weigh-ins are neutral: the participant picks their OWN position
   // first and the message carries that stance. User-created campaigns are
@@ -56,6 +97,9 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
   const [personalWhy, setPersonalWhy] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
+  // True when any review message is a manual-compose starter draft instead
+  // of an AI draft — the review step then opens editors and says so.
+  const [usedFallback, setUsedFallback] = useState(false);
   const [profileLoaded, setProfileLoaded] = useState(false);
   const { getToken, TurnstileWidget } = useTurnstile();
 
@@ -182,65 +226,82 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
         ask += ` Specifically regarding ${ref}${campaign.bill_title ? `, the ${campaign.bill_title}` : ''}.`;
       }
 
-      const msgRes = await fetch('/api/generate-message', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          officials: filtered.map((o: Official) => ({
-            name: o.name,
-            lastName: o.lastName,
-            stafferFirstName: o.stafferFirstName,
-            title: o.title,
-            party: o.party,
-            state: o.state,
-          })),
-          issue: campaign.issue_subtopic || campaign.issue_area,
-          ask,
-          personalWhy: personalWhy.trim() || undefined,
-          senderName: name.trim(),
-          address: { street: street.trim(), city: city.trim(), state: stateCode, zip: zip5 },
-          contactMethod: 'email',
-          turnstileToken,
-        }),
-      });
-
-      if (!msgRes.ok) {
-        // Error responses are plain JSON with a friendly message.
-        const errData = await msgRes.json().catch(() => null);
-        throw new FriendlyError(errData?.error || 'Failed to generate messages');
-      }
-
-      // Success responses are an SSE stream: one `data: {officialName,
-      // subject, body}` line per official, then `data: [DONE]`. Parsing this
-      // as JSON was the long-standing breakage in this flow — the contact
-      // flow always streamed; this one never did.
-      const reader = msgRes.body?.getReader();
-      if (!reader) throw new Error('No response stream');
-      const decoder = new TextDecoder();
-      let buffer = '';
       const msgMap: Record<string, OfficialMessage> = {};
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-        buffer += decoder.decode(value, { stream: true });
-        const lines = buffer.split('\n');
-        buffer = lines.pop() || '';
-        for (const line of lines) {
-          if (!line.startsWith('data: ')) continue;
-          const data = line.slice(6).trim();
-          if (data === '[DONE]') continue;
-          try {
-            const msg = JSON.parse(data) as { officialName: string; subject: string; body: string };
-            msgMap[msg.officialName] = { subject: msg.subject, body: msg.body };
-          } catch {
-            // Skip malformed lines
+      try {
+        const msgRes = await fetch('/api/generate-message', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            officials: filtered.map((o: Official) => ({
+              name: o.name,
+              lastName: o.lastName,
+              stafferFirstName: o.stafferFirstName,
+              title: o.title,
+              party: o.party,
+              state: o.state,
+            })),
+            issue: campaign.issue_subtopic || campaign.issue_area,
+            ask,
+            personalWhy: personalWhy.trim() || undefined,
+            senderName: name.trim(),
+            address: { street: street.trim(), city: city.trim(), state: stateCode, zip: zip5 },
+            contactMethod: 'email',
+            turnstileToken,
+          }),
+        });
+
+        if (!msgRes.ok) {
+          const errData = await msgRes.json().catch(() => null);
+          throw new Error(errData?.error || `generate-message ${msgRes.status}`);
+        }
+
+        // Success responses are an SSE stream: one `data: {officialName,
+        // subject, body}` line per official, then `data: [DONE]`. Parsing this
+        // as JSON was the long-standing breakage in this flow — the contact
+        // flow always streamed; this one never did.
+        const reader = msgRes.body?.getReader();
+        if (!reader) throw new Error('No response stream');
+        const decoder = new TextDecoder();
+        let buffer = '';
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          buffer += decoder.decode(value, { stream: true });
+          const lines = buffer.split('\n');
+          buffer = lines.pop() || '';
+          for (const line of lines) {
+            if (!line.startsWith('data: ')) continue;
+            const data = line.slice(6).trim();
+            if (data === '[DONE]') continue;
+            try {
+              const msg = JSON.parse(data) as { officialName: string; subject: string; body: string };
+              msgMap[msg.officialName] = { subject: msg.subject, body: msg.body };
+            } catch {
+              // Skip malformed lines
+            }
           }
         }
+      } catch (genErr) {
+        // AI drafting failed (CAPTCHA, outage, quota) — don't bounce back to
+        // the form. Officials were found, so fall through to review with
+        // starter drafts the participant writes themselves. This is what the
+        // July–August Turnstile outage taught us: an AI failure must never
+        // block sending entirely.
+        console.error('[participate] message generation failed, using manual compose:', genErr);
       }
 
-      if (Object.keys(msgMap).length === 0) {
-        throw new FriendlyError('We couldn\'t draft your messages just now. Please try again.');
+      // Starter drafts for every official the AI didn't cover (all of them,
+      // when generation failed outright).
+      let fallback = false;
+      for (const o of filtered) {
+        if (!msgMap[o.name]) {
+          msgMap[o.name] = buildFallbackMessage(campaign, o, {
+            stance, personalWhy, senderName: name.trim(), city: city.trim(), stateCode, zip: zip5,
+          });
+          fallback = true;
+        }
       }
+      setUsedFallback(fallback);
       setMessages(msgMap);
       setStep('review');
     } catch (err) {
@@ -255,6 +316,10 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
       );
       setStep('form');
     }
+  };
+
+  const updateMessage = (officialName: string, patch: Partial<OfficialMessage>) => {
+    setMessages((prev) => ({ ...prev, [officialName]: { ...prev[officialName], ...patch } }));
   };
 
   // Delivery info for each official
@@ -598,6 +663,17 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
           </p>
         </div>
 
+        {usedFallback && (
+          <div className="p-3 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded-xl">
+            <p className="text-sm text-amber-800 dark:text-amber-300 font-medium">
+              Our AI writer isn&apos;t available right now, so we&apos;ve started each message for you.
+            </p>
+            <p className="text-xs text-amber-700 dark:text-amber-400 mt-1">
+              Please make it your own before sending — personal words carry the most weight with officials.
+            </p>
+          </div>
+        )}
+
         {officials.map((official) => {
           const msg = messages[official.name];
           const deliveryInfo = deliveryInfoMap.get(official.id);
@@ -615,6 +691,8 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
               deliveryInfo={deliveryInfo}
               mailtoLink={mailtoLink}
               onSend={(status) => trackSend(official, status)}
+              onEdit={(patch) => updateMessage(official.name, patch)}
+              startOpen={usedFallback}
             />
           );
         })}
@@ -738,14 +816,21 @@ function OfficialSendCard({
   deliveryInfo,
   mailtoLink,
   onSend,
+  onEdit,
+  startOpen,
 }: {
   official: Official;
   message: OfficialMessage;
   deliveryInfo: DeliveryInfo;
   mailtoLink: string | null;
   onSend: (status: string) => void;
+  onEdit: (patch: Partial<OfficialMessage>) => void;
+  startOpen: boolean;
 }) {
   const [copied, setCopied] = useState(false);
+  // Starter drafts open ready to write; AI drafts start collapsed. Track
+  // open state ourselves so re-renders from typing don't fight the toggle.
+  const [editOpen, setEditOpen] = useState(startOpen);
   const partyColors = getPartyColors(official.party);
 
   const copyMessage = async () => {
@@ -856,17 +941,37 @@ function OfficialSendCard({
         </button>
       </div>
 
-      {/* Message preview */}
-      <details className="mt-3 group">
+      {/* Message editor — edits flow back up so mailto/copy use them */}
+      <details
+        className="mt-3 group"
+        open={editOpen}
+        onToggle={(e) => setEditOpen((e.target as HTMLDetailsElement).open)}
+      >
         <summary className="cursor-pointer text-xs font-medium text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 flex items-center gap-1">
           <svg className="w-3 h-3 transition-transform group-open:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>
-          Preview message
+          View &amp; edit message
         </summary>
-        <div className="mt-2 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600 text-xs text-gray-600 dark:text-gray-300 whitespace-pre-line max-h-32 overflow-y-auto">
-          <p className="font-medium mb-1">Subject: {message.subject}</p>
-          {message.body}
+        <div className="mt-2 space-y-2">
+          <div>
+            <label className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">Subject</label>
+            <input
+              type="text"
+              value={message.subject}
+              onChange={(e) => onEdit({ subject: e.target.value })}
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-sm text-gray-900 dark:text-white"
+            />
+          </div>
+          <div>
+            <label className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">Message</label>
+            <textarea
+              value={message.body}
+              onChange={(e) => onEdit({ body: e.target.value })}
+              rows={10}
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent resize-y bg-white dark:bg-gray-700 text-sm leading-relaxed text-gray-900 dark:text-white"
+            />
+          </div>
         </div>
       </details>
     </div>
