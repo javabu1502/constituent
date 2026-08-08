@@ -8,7 +8,7 @@ import type { Campaign } from '@/lib/types';
 import type { Official } from '@/lib/types';
 import { US_STATES } from '@/lib/constants';
 import { Button } from '@/components/ui/Button';
-import { formatPhone } from '@/lib/utils';
+import { formatPhone, salutationTitle } from '@/lib/utils';
 import {
   determineDeliveryMethod,
   generateMailtoLink,
@@ -64,6 +64,7 @@ function buildFallbackMessage(
     topic += ` (${typeLabels[campaign.bill_type.toLowerCase()] ?? campaign.bill_type.toUpperCase()} ${campaign.bill_number})`;
   }
   const lastName = official.lastName || official.name.split(' ').pop();
+  const salutation = salutationTitle(official.title);
   const opening =
     opts.stance === 'support'
       ? `I am writing to express my support for ${topic}, and to ask for yours.`
@@ -71,7 +72,7 @@ function buildFallbackMessage(
         ? `I am writing to express my opposition to ${topic}, and to ask you to oppose it as well.`
         : `I am writing about ${topic}.`;
   const body = [
-    `Dear ${official.title} ${lastName},`,
+    `Dear ${salutation} ${lastName},`,
     `I am your constituent from ${opts.city}, ${opts.stateCode}. ${opening}`,
     opts.personalWhy.trim() || '[Add a sentence or two about why this matters to you and what you would like them to do.]',
     'Thank you for your time and service.',

@@ -5,6 +5,7 @@ import type { ContactState, ContactAction, OfficialMessage } from './ContactFlow
 import { Button } from '@/components/ui/Button';
 import { PHONE_TIPS } from '@/lib/phone-tips';
 import { useTurnstile } from '@/components/ui/Turnstile';
+import { salutationTitle } from '@/lib/utils';
 
 interface MessageStepProps {
   state: ContactState;
@@ -23,6 +24,49 @@ function getPartyColors(party: string): { bg: string; text: string } {
   return { bg: 'bg-gray-100', text: 'text-gray-700' };
 }
 
+/** Starter draft for when AI generation is unavailable (CAPTCHA failure,
+ * outage, daily quota). Built entirely from the user's own words — their
+ * issue, ask, and story — so it still reads as their message. */
+function buildFallbackMessage(
+  rep: ContactState['selectedReps'][number],
+  opts: {
+    contactMethod: ContactState['contactMethod'];
+    issue: string;
+    ask: string;
+    personalWhy: string;
+    userName: string;
+    address: ContactState['address'];
+  }
+): OfficialMessage {
+  const lastName = rep.lastName || rep.name.split(' ').pop();
+  const salutation = salutationTitle(rep.title);
+  const storyOrPrompt =
+    opts.personalWhy.trim() || '[Add a sentence or two about why this matters to you personally.]';
+  const from = opts.address ? ` from ${opts.address.city}, ${opts.address.state}` : '';
+
+  if (opts.contactMethod === 'phone') {
+    const body = [
+      `Hi, my name is ${opts.userName}, and I'm a constituent${from}.`,
+      `I'm calling about ${opts.issue.trim()}. ${opts.ask.trim()}`,
+      storyOrPrompt,
+      `Thank you for passing my concerns along to ${salutation} ${lastName}.`,
+    ].join('\n\n');
+    return { subject: `Call script: ${opts.issue.trim()}`, body };
+  }
+
+  const signature = opts.address
+    ? `${opts.userName}\n${opts.address.city}, ${opts.address.state} ${opts.address.zip}`
+    : opts.userName;
+  const body = [
+    `Dear ${salutation} ${lastName},`,
+    `I am your constituent${from}. I am writing about ${opts.issue.trim()}. ${opts.ask.trim()}`,
+    storyOrPrompt,
+    'Thank you for your time and service.',
+    `Sincerely,\n${signature}`,
+  ].join('\n\n');
+  return { subject: `Constituent message: ${opts.issue.trim().slice(0, 100)}`, body };
+}
+
 export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
   const { selectedReps, userName, issue, ask, personalWhy, messages, contactMethod, address } = state;
   const [reviewIndex, setReviewIndex] = useState(0);
@@ -31,6 +75,9 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
   const [suggestionInput, setSuggestionInput] = useState('');
   const [showSuggestionInput, setShowSuggestionInput] = useState(false);
   const [isRevising, setIsRevising] = useState(false);
+  // True when any message is a manual-compose starter draft instead of an
+  // AI draft — shown as an amber notice instead of the red error.
+  const [usedFallback, setUsedFallback] = useState(false);
   const { getToken, TurnstileWidget } = useTurnstile();
 
   const currentRep = selectedReps[reviewIndex];
@@ -40,6 +87,10 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
     setIsGenerating(true);
     dispatch({ type: 'SET_ERROR', payload: null });
 
+    // Names that arrived over THIS stream — the `messages` closure is stale
+    // once dispatches start, so the fallback below needs its own record of
+    // what the AI actually delivered.
+    const received = new Set<string>();
     try {
       const turnstileToken = await getToken();
       const response = await fetch('/api/generate-message', {
@@ -102,6 +153,7 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
 
           try {
             const msg = JSON.parse(data) as { officialName: string; subject: string; body: string };
+            received.add(msg.officialName);
             dispatch({
               type: 'SET_MESSAGE',
               payload: { officialName: msg.officialName, message: { subject: msg.subject, body: msg.body } },
@@ -112,8 +164,30 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
         }
       }
     } catch (err) {
+      // AI drafting failed — don't leave the user at a dead end. Fill every
+      // rep that has no message (neither from this stream nor an earlier
+      // attempt — never clobber AI drafts or user edits) with a starter
+      // draft built from their own issue/ask/story, and say so. The red
+      // error + Try Again only remains for the no-gaps case.
       console.error('Error generating messages:', err);
-      dispatch({ type: 'SET_ERROR', payload: err instanceof Error ? err.message : 'Failed to generate messages' });
+      let filled = false;
+      for (const rep of selectedReps) {
+        if (!received.has(rep.name) && !messages[rep.name]) {
+          dispatch({
+            type: 'SET_MESSAGE',
+            payload: {
+              officialName: rep.name,
+              message: buildFallbackMessage(rep, { contactMethod, issue, ask, personalWhy, userName, address }),
+            },
+          });
+          filled = true;
+        }
+      }
+      if (filled) {
+        setUsedFallback(true);
+      } else {
+        dispatch({ type: 'SET_ERROR', payload: err instanceof Error ? err.message : 'Failed to generate messages' });
+      }
     } finally {
       setIsGenerating(false);
     }
@@ -405,6 +479,17 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
               {loadedCount} of {selectedReps.length} {contactMethod === 'phone' ? 'scripts' : 'messages'} ready
             </p>
           </div>
+        </div>
+      )}
+
+      {usedFallback && (
+        <div className="mb-4 p-3 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded-xl">
+          <p className="text-sm text-amber-800 dark:text-amber-300 font-medium">
+            Our AI writer isn&apos;t available right now, so we&apos;ve started each {contactMethod === 'phone' ? 'script' : 'message'} for you.
+          </p>
+          <p className="text-xs text-amber-700 dark:text-amber-400 mt-1">
+            Please make it your own before sending — personal words carry the most weight with officials.
+          </p>
         </div>
       )}
 

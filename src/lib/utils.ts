@@ -35,6 +35,17 @@ export function formatPhone(phone: string): string {
 }
 
 /**
+ * Salutation form of an official's title: "U.S. Senator (junior)" →
+ * "Senator", "State Representative, District 75" → "Representative".
+ * Unrecognized titles keep their text minus any parenthetical.
+ */
+export function salutationTitle(title: string): string {
+  if (/senator/i.test(title)) return 'Senator';
+  if (/representative/i.test(title)) return 'Representative';
+  return title.replace(/\s*\(.*?\)/g, '').split(',')[0].trim();
+}
+
+/**
  * Generate a mailto: link with subject and body
  */
 export function generateMailtoLink(
