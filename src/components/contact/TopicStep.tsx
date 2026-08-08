@@ -766,9 +766,11 @@ export function TopicStep({ state, dispatch, onBack }: TopicStepProps) {
           value={personalWhy}
           onChange={(e) => dispatch({ type: 'SET_PERSONAL_WHY', payload: e.target.value })}
           placeholder='e.g., "This affects my daily commute and my kids&#39; school bus route"'
-          rows={3}
-          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent resize-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
+          rows={5}
+          maxLength={2000}
+          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent resize-y bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
         />
+        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{personalWhy.length}/2000 characters</p>
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
           Personal stories drive policy. Congressional staff track constituent concerns and often share compelling stories directly with legislators.
           {' '}<a href="/guides/tell-your-story" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">Read the full guide</a>.

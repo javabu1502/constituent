@@ -28,7 +28,7 @@ export const generateMessageSchema = z.object({
   issue: z.string().min(1).max(500),
   issueCategory: z.string().max(200).optional(),
   ask: z.string().min(1).max(1000),
-  personalWhy: z.string().max(2000).optional(),
+  personalWhy: z.string().max(2000, 'Your personal story is a bit long — please keep it under 2,000 characters.').optional(),
   senderName: z.string().min(1).max(200),
   address: addressSchema.optional(),
   contactMethod: z.enum(['email', 'phone']).optional(),
@@ -254,8 +254,11 @@ export function parseBody<T>(
   if (result.success) {
     return { success: true, data: result.data };
   }
+  // Routes return this error string directly to the client, so custom schema
+  // messages written as full sentences (ending in '.') are shown as-is;
+  // zod's default messages keep the field path so failures stay debuggable.
   const message = result.error.issues
-    .map((i) => `${i.path.join('.')}: ${i.message}`)
+    .map((i) => (i.message.endsWith('.') ? i.message : `${i.path.join('.')}: ${i.message}`))
     .join('; ');
   return { success: false, error: message };
 }

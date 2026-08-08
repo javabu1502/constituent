@@ -55,6 +55,7 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
   const [zip, setZip] = useState('');
   const [personalWhy, setPersonalWhy] = useState('');
   const [error, setError] = useState<string | null>(null);
+  const [submitting, setSubmitting] = useState(false);
   const [profileLoaded, setProfileLoaded] = useState(false);
   const { getToken, TurnstileWidget } = useTurnstile();
 
@@ -110,7 +111,9 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
     // Mint the CAPTCHA token BEFORE leaving the form step: the invisible
     // Turnstile widget lives in the form's JSX, and switching to 'loading'
     // unmounts it — getToken() after that times out to an empty token and
-    // anonymous users get a 403 from the AI routes.
+    // anonymous users get a 403 from the AI routes. Minting can take seconds
+    // on cautious networks, so the button shows a busy state the whole time.
+    setSubmitting(true);
     let turnstileToken = '';
     try {
       turnstileToken = await getToken();
@@ -119,6 +122,7 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
     }
 
     setStep('loading');
+    setSubmitting(false);
 
     // Normalize before lookup: 2-letter state code (autofill may have stored
     // a full name) and a plain 5-digit ZIP (the Census geocoder is happiest
@@ -535,9 +539,11 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
             value={personalWhy}
             onChange={(e) => setPersonalWhy(e.target.value)}
             placeholder="Share your personal connection to this issue..."
-            rows={3}
-            className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent resize-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
+            rows={5}
+            maxLength={2000}
+            className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent resize-y bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
           />
+          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{personalWhy.length}/2000 characters</p>
         </div>
 
         <div className="p-3 bg-purple-50 dark:bg-purple-900/30 border border-purple-200 dark:border-purple-700 rounded-xl">
@@ -548,7 +554,7 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
 
         <TurnstileWidget />
 
-        <Button type="submit" className="w-full" size="lg">
+        <Button type="submit" className="w-full" size="lg" isLoading={submitting}>
           Find My Officials
         </Button>
 
