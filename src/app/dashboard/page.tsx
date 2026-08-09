@@ -12,7 +12,6 @@ import { CopyLinkButton } from '@/components/campaign/CopyLinkButton';
 import { DeleteCampaignButton } from '@/components/campaign/DeleteCampaignButton';
 import { CollapsibleSection } from '@/components/ui/CollapsibleSection';
 import { GettingStartedChecklist } from '@/components/dashboard/GettingStartedChecklist';
-import { WelcomeTour } from '@/components/dashboard/WelcomeTour';
 import { FollowUpButton } from '@/components/dashboard/FollowUpButton';
 import { MyStoriesSection } from '@/components/dashboard/MyStoriesSection';
 
@@ -145,7 +144,6 @@ export default async function DashboardPage() {
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-8">
-      <WelcomeTour />
       {/* Header with inline activity stats */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
         <div>
