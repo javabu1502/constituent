@@ -15,7 +15,11 @@ export * from './constants';
 export * from './types';
 export { buildCampaignId } from './campaign-id';
 export { buildCwcXml, CwcValidationError, newDeliveryId, today, formatPhone } from './xml';
-export { validateHouse, sendHouse, getActiveOffices, checkEgressIp, type CwcResult } from './client';
+export {
+  validateHouse, sendHouse, getActiveOffices,
+  sendSenate, getActiveOfficesSenate,
+  checkEgressIp, type CwcResult,
+} from './client';
 export {
   resolveOfficeCode,
   houseOfficeCode,

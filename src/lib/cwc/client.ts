@@ -117,8 +117,57 @@ function parseErrors(body: string): string[] | undefined {
   return out.length ? out : undefined;
 }
 
-// Senate send/validate intentionally omitted until the Senate testing key +
-// exact endpoints are issued (SCWC_TEST_URL / SCWC_PRODUCTION_URL). The XML
-// builder already targets the Senate schema, so wiring is a small addition.
+// --- Senate ---
+// Fully env-driven so that when George issues the testing key + endpoints, we
+// only set SCWC_TEST_URL / SCWC_TEST_API_KEY (and the prod pair) — no code
+// change. The XML builder already targets the Senate RNG.
+
+function requireSenateKey(mode: Mode): string {
+  return requireKey(mode === 'production' ? 'SCWC_API_KEY' : 'SCWC_TEST_API_KEY');
+}
+
+/**
+ * POST XML to the Senate CWC endpoint. The Senate has separate test and prod
+ * hosts (test messages stay in the SAA sandbox for review, they don't reach
+ * offices). The full endpoint URL comes from env; the apikey is appended as a
+ * query param per the Senate technical docs. Senate returns 201 Created on
+ * success. Routed through the static-IP proxy like the House path.
+ */
+async function postSenate(xml: string, mode: Mode): Promise<CwcResult> {
+  const base = senateBase(mode); // throws if SCWC_*_URL not configured
+  const apiKey = requireSenateKey(mode);
+  const sep = base.includes('?') ? '&' : '?';
+  const res = await undiciFetch(`${base}${sep}apikey=${encodeURIComponent(apiKey)}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/xml' },
+    body: xml,
+    dispatcher: cwcDispatcher(),
+  });
+  const raw = await res.text();
+  return { ok: res.status >= 200 && res.status < 300, status: res.status, errors: parseErrors(raw), raw };
+}
+
+/**
+ * Send a delivery to the Senate. mode 'uat' posts to the TEST endpoint (stays in
+ * the SAA sandbox — safe; email saacwc@saa.senate.gov when a batch is ready for
+ * review). There is no separate Senate validate endpoint — the test env IS the
+ * validation path.
+ */
+export function sendSenate(delivery: CwcDelivery, mode: Mode = 'uat'): Promise<CwcResult> {
+  return postSenate(buildCwcXml(delivery), mode);
+}
+
+/** Senate active offices (voluntary participation, ~half). Endpoint from env
+ *  (SCWC_OFFICES_URL); George also provides a downloadable JSON in SOAPBox. */
+export async function getActiveOfficesSenate(): Promise<unknown> {
+  const url = process.env.SCWC_OFFICES_URL;
+  if (!url) throw new Error('SCWC_OFFICES_URL not set (Senate Get Active Offices endpoint)');
+  const apiKey = process.env.SCWC_TEST_API_KEY || process.env.SCWC_API_KEY || '';
+  const full = apiKey ? `${url}${url.includes('?') ? '&' : '?'}apikey=${encodeURIComponent(apiKey)}` : url;
+  const res = await undiciFetch(full, { dispatcher: cwcDispatcher() });
+  if (res.status < 200 || res.status >= 300) throw new Error(`getActiveOfficesSenate failed: HTTP ${res.status}`);
+  return res.json();
+}
+
 export type { Chamber };
 export { senateBase };
