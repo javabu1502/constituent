@@ -49,9 +49,13 @@ The House mandates CWC for all 435 offices, but the Senate is voluntary
 3. Cache the active-offices list (refresh ~daily); George emails delivery
    agents when a new office joins.
 
-This slots into the existing `determineDeliveryMethod` as a new preferred
-channel, so the fallback for the ~46 non-participating Senate offices is
-unchanged from current behavior. Not built yet — proposed design.
+**Router built (`delivery-router.ts`):** `chooseDeliveryChannel(official, {activeOfficeCodes, captchaBlockedIds})` picks CWC if the seat participates, else automate its contact webform (unless CAPTCHA-blocked), else email, else phone. `routeDelivery()` returns coverage counts. Pure decision fn (no Playwright import). 7 tests.
+
+**Still to build for the ~46 non-participating Senate offices (decision: go native webform, not just fallback):**
+1. Server-side **webform sender** wrapping `src/lib/form-automation` (`submitToRepresentative`, Claude Vision + Playwright — already exists) to fill + submit an office's contact form. Must handle Senate forms' address/constituency verification step (`form-automation/test-amodei.ts` has the multi-step pattern) and verify submission via the Vision checker.
+2. Feed live `getActiveOffices()` into `chooseDeliveryChannel` at send time.
+3. Build a **CAPTCHA map** (`form-automation/audit.ts`) → `captchaBlockedIds`, so CAPTCHA offices route to email.
+4. Rate-limit both paths.
 
 ## Correct-official verification (`verify.ts`) ✅ built
 

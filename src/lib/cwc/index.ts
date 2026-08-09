@@ -31,3 +31,10 @@ export {
   type VerifyReason,
   type ConstituentAddress,
 } from './verify';
+export {
+  chooseDeliveryChannel,
+  routeDelivery,
+  type DeliveryChannel,
+  type ChannelDecision,
+  type RouteOptions,
+} from './delivery-router';
