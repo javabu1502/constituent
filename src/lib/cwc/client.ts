@@ -1,5 +1,5 @@
 import { ProxyAgent, fetch as undiciFetch } from 'undici';
-import { CWC_ENDPOINTS, type Chamber } from './constants';
+import { CWC_ENDPOINTS, MAX_MESSAGES_PER_SECOND, type Chamber } from './constants';
 import { buildCwcXml } from './xml';
 import type { CwcDelivery } from './types';
 
@@ -167,6 +167,62 @@ export async function getActiveOfficesSenate(): Promise<unknown> {
   const res = await undiciFetch(full, { dispatcher: cwcDispatcher() });
   if (res.status < 200 || res.status >= 300) throw new Error(`getActiveOfficesSenate failed: HTTP ${res.status}`);
   return res.json();
+}
+
+// --- George's operational rules: active-offices filter + rate-limited batch ---
+
+/** Parse an active-offices API response (shape varies) into a Set of codes. */
+function parseOfficeCodes(data: unknown): Set<string> {
+  const codes = new Set<string>();
+  const add = (v: unknown) => { if (typeof v === 'string' && v.trim()) codes.add(v.trim()); };
+  const arr = Array.isArray(data)
+    ? data
+    : data && typeof data === 'object' && Array.isArray((data as { offices?: unknown[] }).offices)
+      ? (data as { offices: unknown[] }).offices
+      : [];
+  for (const item of arr) {
+    if (typeof item === 'string') add(item);
+    else if (item && typeof item === 'object') {
+      const o = item as Record<string, unknown>;
+      add(o.code ?? o.officeCode ?? o.office_code ?? o.id ?? o.MemberOffice ?? o.member_office);
+    }
+  }
+  return codes;
+}
+
+/**
+ * Fetch the currently-participating offices as a Set of codes, ready to hand to
+ * the delivery router. George requires running this before campaigns and only
+ * sending to listed offices. (Needs live API access to actually fetch.)
+ */
+export async function loadActiveOfficeCodes(chamber: 'house' | 'senate', mode: Mode = 'uat'): Promise<Set<string>> {
+  const data = chamber === 'house' ? await getActiveOffices(mode) : await getActiveOfficesSenate();
+  return parseOfficeCodes(data);
+}
+
+/**
+ * Send many deliveries while honoring George's 5–10 messages/second ceiling.
+ * Sequential with fixed spacing (default 5/sec) so we never spike the endpoint;
+ * one failure never aborts the batch — it's captured per-item.
+ */
+export async function sendBatch<T extends CwcDelivery>(
+  deliveries: T[],
+  send: (d: T) => Promise<CwcResult>,
+  opts: { maxPerSecond?: number } = {},
+): Promise<Array<{ delivery: T; result?: CwcResult; error?: string }>> {
+  const rate = Math.max(1, Math.min(10, opts.maxPerSecond ?? MAX_MESSAGES_PER_SECOND));
+  const gapMs = Math.ceil(1000 / rate);
+  const out: Array<{ delivery: T; result?: CwcResult; error?: string }> = [];
+  for (let i = 0; i < deliveries.length; i++) {
+    const d = deliveries[i];
+    try {
+      out.push({ delivery: d, result: await send(d) });
+    } catch (e) {
+      out.push({ delivery: d, error: (e as Error).message });
+    }
+    if (i < deliveries.length - 1) await new Promise((r) => setTimeout(r, gapMs));
+  }
+  return out;
 }
 
 export type { Chamber };

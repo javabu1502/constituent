@@ -18,8 +18,10 @@ export { buildCwcXml, CwcValidationError, newDeliveryId, today, formatPhone } fr
 export {
   validateHouse, sendHouse, getActiveOffices,
   sendSenate, getActiveOfficesSenate,
+  loadActiveOfficeCodes, sendBatch,
   checkEgressIp, type CwcResult,
 } from './client';
+export { stripSignatureBlock, blocksFederalDelivery } from './content';
 export {
   resolveOfficeCode,
   houseOfficeCode,
