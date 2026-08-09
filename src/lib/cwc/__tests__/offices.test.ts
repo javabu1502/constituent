@@ -25,6 +25,9 @@ describe('houseOfficeCode', () => {
   it('parses a district embedded like NY-12', () => {
     expect(houseOfficeCode('NY', 'NY-12')).toEqual({ ok: true, code: 'HNY12' });
   });
+  it('remaps American Samoa to the AQ00 office code (not HAS00)', () => {
+    expect(houseOfficeCode('AS', undefined)).toEqual({ ok: true, code: 'HAQ00' });
+  });
   it('rejects an unknown state', () => {
     const r = houseOfficeCode('ZZ', '1');
     expect(r.ok).toBe(false);

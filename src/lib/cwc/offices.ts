@@ -49,7 +49,11 @@ export function houseOfficeCode(state: string, district: string | number | undef
   const digits = district === undefined ? '' : String(district).match(/\d+/)?.[0] ?? '';
   const dd = digits === '' ? '00' : digits.padStart(2, '0');
   if (dd.length !== 2) return { ok: false, reason: `district "${district}" out of range` };
-  return { ok: true, code: `H${st}${dd}` };
+  // American Samoa's House office code is AQ00, not AS00 — the House remapped it
+  // to avoid a clash with the Armed Services (AS) committee name. The
+  // constituent's StateAbbreviation stays "AS"; only the office code changes.
+  const officeSt = st === 'AS' ? 'AQ' : st;
+  return { ok: true, code: `H${officeSt}${dd}` };
 }
 
 /** Senate seat code from a state + senate class (1/2/3). Cross-checked against

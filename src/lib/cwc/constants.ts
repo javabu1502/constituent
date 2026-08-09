@@ -68,14 +68,17 @@ export const LOC_TOPICS = [
 export type LocTopic = (typeof LOC_TOPICS)[number];
 export const LOC_TOPIC_SET: ReadonlySet<string> = new Set(LOC_TOPICS);
 
-// Accepted <BillTypeAbbreviation> values, transcribed literally from the
-// Senate RNG alternation. NOTE the schema lists "H.Con.Res" WITHOUT a trailing
-// period (a quirk of that schema); emitting "H.Con.Res." would fail Senate
-// validation, so we keep the exact literals. Verify against the House RNG
-// during UAT — if it differs, this map is the single place to change.
+// Accepted <BillTypeAbbreviation> values. The Senate RNG alternation writes the
+// H.Con.Res branch without a trailing period, but in a RelaxNG token pattern the
+// alternation is whole-value and `.` means "any char", so "H.Con.Res." matches
+// too — and that trailing-period form is the packet's canonical spelling and
+// consistent with every sibling type, so we emit it.
+// CAUTION: the House sample XML uses LOWERCASE ("hr", "s"). These Title-case
+// values are Senate-correct; confirm House casing against /v2/validate before
+// House go-live and make this chamber-aware if the House schema is strict.
 export const BILL_TYPE_ABBREVIATIONS = {
   hamdt: 'H.Amdt.',
-  hconres: 'H.Con.Res',
+  hconres: 'H.Con.Res.',
   hjres: 'H.J.Res.',
   hr: 'H.R.',
   hres: 'H.Res.',
