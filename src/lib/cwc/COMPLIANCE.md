@@ -36,6 +36,33 @@ module · 🟡 pending (upstream product/recipient work) · 📋 process step.
 - 📋 **Separate test/prod endpoints + keys**; Senate test env accepts all 100 offices but keeps them in the sandbox.
 - 📋 **House: 72-hour response SLA** to CAO comms (2 hours for emergencies).
 
+## Delivery routing — CWC vs. fallback (the "~46 other offices")
+
+The House mandates CWC for all 435 offices, but the Senate is voluntary
+(~54 participating, ~46 not). We need a per-recipient router:
+
+1. `verifyConstituent(address, official)` — confirm they're represented (below).
+2. Look up the office code in the live `getActiveOffices()` list.
+   - **Participating** → send via CWC (this module).
+   - **Not participating** → fall back to the existing `src/lib/delivery`
+     path (staffer email / webform / phone) — same as today.
+3. Cache the active-offices list (refresh ~daily); George emails delivery
+   agents when a new office joins.
+
+This slots into the existing `determineDeliveryMethod` as a new preferred
+channel, so the fallback for the ~46 non-participating Senate offices is
+unchanged from current behavior. Not built yet — proposed design.
+
+## Correct-official verification (`verify.ts`) ✅ built
+
+- Re-geocodes the constituent's full street address and requires it to produce
+  the SAME seat code as the target, else refuses. Senate = state match; House =
+  district match (unresolved district vs numbered target = mismatch = block).
+- **CWC path: hard-block** on any failure. **Production (mailto/webform):
+  warn-and-confirm** — surface the mismatch and let the user fix a typo'd
+  address. Same guard, caller chooses strictness. Production wiring is a
+  separate reviewable change (does not silently alter the live flow).
+
 ## Not started (next milestones)
 
 - Recipient resolution (address → correct office code, incl. House ZIP+4 district).

@@ -25,3 +25,9 @@ export {
   SENATE_SEAT_CODES,
   type OfficeResolution,
 } from './offices';
+export {
+  verifyConstituent,
+  type VerifyResult,
+  type VerifyReason,
+  type ConstituentAddress,
+} from './verify';
