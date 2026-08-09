@@ -78,8 +78,11 @@ export function buildCwcXml(delivery: CwcDelivery): string {
   let contactPhone: string | null = null;
 
   // --- Message ---
-  if ((m.subject?.trim().length ?? 0) < FIELD_LIMITS.subjectMin) {
+  const subjectLen = m.subject?.trim().length ?? 0;
+  if (subjectLen < FIELD_LIMITS.subjectMin) {
     problems.push(`message.subject must be ≥${FIELD_LIMITS.subjectMin} chars`);
+  } else if (subjectLen > FIELD_LIMITS.subjectMax) {
+    problems.push(`message.subject must be ≤${FIELD_LIMITS.subjectMax} chars`);
   }
   if (!m.topics?.length) {
     problems.push('message.topics must include at least one Library of Congress topic');

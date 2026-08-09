@@ -123,6 +123,21 @@ describe('buildCwcXml', () => {
     expect(xml).toContain('<ProOrCon>Pro</ProOrCon>');
   });
 
+  it('emits H.Con.Res WITHOUT a trailing period (the Senate RNG branch has none)', () => {
+    const xml = buildCwcXml(
+      validDelivery({
+        message: {
+          subject: 'Regarding this resolution',
+          topics: ['Government Operations and Politics'],
+          bills: [{ congress: 119, type: 'hconres', number: 12 }],
+          constituentMessage: 'I want to weigh in on this concurrent resolution.',
+        },
+      }),
+    );
+    expect(xml).toContain('<BillTypeAbbreviation>H.Con.Res</BillTypeAbbreviation>');
+    expect(xml).not.toContain('H.Con.Res.'); // the trailing-dot form is rejected by the RNG
+  });
+
   it('orders OrganizationStatement before ConstituentMessage when both present', () => {
     const xml = buildCwcXml(
       validDelivery({

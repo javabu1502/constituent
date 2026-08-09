@@ -54,7 +54,11 @@ export async function GET(request: NextRequest) {
 
   const sp = request.nextUrl.searchParams;
   const chamber = sp.get('chamber') === 'senate' ? 'senate' : 'house';
-  const action = (sp.get('action') ?? 'preview') as 'preview' | 'validate' | 'send';
+  const rawAction = sp.get('action') ?? 'preview';
+  // Anything not explicitly validate/send is treated as the no-network preview,
+  // so a typo can never trigger a submission.
+  const action: 'preview' | 'validate' | 'send' =
+    rawAction === 'validate' || rawAction === 'send' ? rawAction : 'preview';
 
   let xml: string;
   try {

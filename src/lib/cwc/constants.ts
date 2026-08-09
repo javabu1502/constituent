@@ -68,17 +68,18 @@ export const LOC_TOPICS = [
 export type LocTopic = (typeof LOC_TOPICS)[number];
 export const LOC_TOPIC_SET: ReadonlySet<string> = new Set(LOC_TOPICS);
 
-// Accepted <BillTypeAbbreviation> values. The Senate RNG alternation writes the
-// H.Con.Res branch without a trailing period, but in a RelaxNG token pattern the
-// alternation is whole-value and `.` means "any char", so "H.Con.Res." matches
-// too — and that trailing-period form is the packet's canonical spelling and
-// consistent with every sibling type, so we emit it.
+// Accepted <BillTypeAbbreviation> values, matching the Senate RNG alternation
+// EXACTLY. RelaxNG/XSD `pattern` is a whole-string (anchored) match, so the
+// H.Con.Res branch — which the schema writes WITHOUT a trailing period — only
+// accepts the 9-char literal "H.Con.Res"; "H.Con.Res." (10 chars) matches no
+// branch and is REJECTED. So H.Con.Res must NOT have a trailing dot, even though
+// every sibling type does. (Verified: "H.Con.Res." → fails, "H.Con.Res" → passes.)
 // CAUTION: the House sample XML uses LOWERCASE ("hr", "s"). These Title-case
 // values are Senate-correct; confirm House casing against /v2/validate before
 // House go-live and make this chamber-aware if the House schema is strict.
 export const BILL_TYPE_ABBREVIATIONS = {
   hamdt: 'H.Amdt.',
-  hconres: 'H.Con.Res.',
+  hconres: 'H.Con.Res',
   hjres: 'H.J.Res.',
   hr: 'H.R.',
   hres: 'H.Res.',
