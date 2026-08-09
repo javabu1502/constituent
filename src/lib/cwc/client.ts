@@ -17,7 +17,9 @@ let cachedProxy: ProxyAgent | null | undefined;
 
 function cwcDispatcher(): ProxyAgent | undefined {
   if (cachedProxy === undefined) {
-    const url = process.env.QUOTAGUARDSTATIC_URL;
+    // QuotaGuard Shield HTTPS proxy (TLS to the proxy on :9294). undici's
+    // ProxyAgent handles the CONNECT tunnel for HTTPS destinations.
+    const url = process.env.QUOTAGUARD_URL;
     cachedProxy = url ? new ProxyAgent(url) : null;
   }
   return cachedProxy ?? undefined;
@@ -70,6 +72,23 @@ export function validateHouse(delivery: CwcDelivery, mode: Mode = 'uat'): Promis
 /** Queue a delivery for actual delivery to a House office. */
 export function sendHouse(delivery: CwcDelivery, mode: Mode = 'uat'): Promise<CwcResult> {
   return postHouse('/v2/message', buildCwcXml(delivery), mode);
+}
+
+/**
+ * Fetch the list of offices currently accepting CWC mail. George requires this
+ * be run before campaigns and that we only send to listed offices — Senate
+ * participation is voluntary (~half of offices), and sending to a
+ * non-participating office errors. Routed through the static-IP proxy.
+ * Returns the raw JSON array from the House `/v2/offices` endpoint.
+ */
+export async function getActiveOffices(mode: Mode = 'uat'): Promise<unknown> {
+  const apiKey = requireKey(mode === 'production' ? 'CWC_HOUSE_API_KEY' : 'CWC_HOUSE_UAT_API_KEY');
+  const url = `${houseBase(mode)}/v2/offices?apikey=${encodeURIComponent(apiKey)}`;
+  const res = await undiciFetch(url, { dispatcher: cwcDispatcher() });
+  if (res.status < 200 || res.status >= 300) {
+    throw new Error(`getActiveOffices failed: HTTP ${res.status}`);
+  }
+  return res.json();
 }
 
 /**

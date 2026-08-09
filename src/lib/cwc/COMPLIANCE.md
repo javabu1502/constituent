@@ -24,13 +24,13 @@ module · 🟡 pending (upstream product/recipient work) · 📋 process step.
 - ✅ **AI-personalized text → `ConstituentMessage`; untouched template → `OrganizationStatement`.** Both supported; be consistent.
 - 🟡 **Do NOT repeat the constituent's name/mailing address in the message body/closing** (breaks office dedup/grouping). The builder already keeps name/address in structured tags only — but `generate-message` currently writes a signed closing. **Action: strip name/address from the generated body on the CWC path.**
 - 🟡 **Ask the constituent pro/con when a bill is referenced.** Weigh-ins already capture stance; the contact flow needs it wired to `message.stance`.
-- 🟡 **Only send from real constituents of that office.** Senate = by state (easy). House = **resolve ZIP+4 → correct district** or the House rejects it (wrong member). Recipient-resolution work, upstream of this module.
+- 🟡 **Only send from real constituents of that office.** `offices.ts` now resolves office codes safely: Senate is deterministic (state + senate class, cross-checked against the static seat table), House is state + district. Both refuse to guess (explicit failure, never a wrong code). REMAINING RISK: the House district itself must come from an accurate **ZIP+4 → district** lookup upstream; at split-ZIP boundaries a 5-digit ZIP can map to the wrong district. Must feed `resolveOfficeCode` from address-accurate rep resolution, not a raw ZIP.
 - 🟡 **Don't send federal offices about state bills.** Product/UX guard.
 
 ## Operational rules
 
 - ✅ **Rate limit 5–10 msg/sec** — `MAX_MESSAGES_PER_SECOND` constant; the batch sender (TODO) must honor it.
-- 🟡 **Run Get Active Offices before campaigns; only send to listed offices** (Senate participation is voluntary, ~50/100). Need to fetch `/offices` and filter. TODO.
+- 🟡 **Run Get Active Offices before campaigns; only send to listed offices** (Senate participation is voluntary, ~50/100). `getActiveOffices()` added in `client.ts`; still need to call it pre-campaign and filter recipients against it.
 - ✅ **Proxy scoped to CWC only**, Node runtime, both static IPs whitelisted (`client.ts`, README).
 - 📋 **Notify `saacwc@saa.senate.gov` when test messages are ready for review** (Senate).
 - 📋 **Separate test/prod endpoints + keys**; Senate test env accepts all 100 offices but keeps them in the sandbox.

@@ -44,7 +44,7 @@ const result = await validateHouse(delivery);  // checks XML, sends nothing
 | `CWC_ACK_EMAIL` `CWC_CONTACT_NAME` `CWC_CONTACT_EMAIL` `CWC_CONTACT_PHONE` | Delivery-agent contact block |
 | `CWC_HOUSE_UAT_API_KEY` / `CWC_HOUSE_API_KEY` | House test / production API keys |
 | `SCWC_TEST_URL` / `SCWC_PRODUCTION_URL` | Senate endpoints (issued with the Senate key) |
-| `QUOTAGUARDSTATIC_URL` | QuotaGuard proxy connection string (static-IP egress) |
+| `QUOTAGUARD_URL` | QuotaGuard proxy connection string (static-IP egress) |
 
 Secrets live only in Vercel env / `.env.local`, never in the repo.
 
@@ -52,18 +52,18 @@ Secrets live only in Vercel env / `.env.local`, never in the repo.
 
 The House **requires** our traffic to originate from fixed IPs
 (`52.54.159.237`, `52.73.143.252`). Vercel's serverless egress is dynamic, so we
-route CWC calls through QuotaGuard's proxy.
+route CWC calls through QuotaGuard **Shield**'s proxy.
 
-1. **Sign in** at quotaguard.com and open your **QuotaGuard Static** instance.
-2. Copy the **Connection String** (looks like
-   `http://user:pass@xxx.quotaguard.com:9293`) and confirm the two listed
-   static IPs are `52.54.159.237` and `52.73.143.252`.
+1. **Sign in** at quotaguard.com and open your **QuotaGuard Shield** instance.
+2. Under **Connection Information**, copy the **CONNECTION URL** (an HTTPS proxy
+   like `https://user:pass@us-east-shield-02.quotaguard.com:9294`) and confirm
+   the two IPs listed are `52.54.159.237` and `52.73.143.252`. Both must be
+   whitelisted — traffic can route through either at any time.
 3. In **Vercel → constituent → Settings → Environment Variables**, add
-   `QUOTAGUARDSTATIC_URL` = that connection string (Production + Preview). Save.
+   `QUOTAGUARD_URL` = that connection URL (Production + Preview). Save.
 4. Redeploy so the variable is available to functions.
 5. Verify egress: call `checkEgressIp()` from a Node-runtime route — it should
-   return one of the two IPs (QuotaGuard load-balances across both, which is why
-   **both** must be whitelisted with the House).
+   return one of the two IPs.
 
 Notes: the proxy is attached **only** to CWC requests (a per-request undici
 dispatcher), never globally — other traffic (Supabase, Anthropic, Congress.gov)
