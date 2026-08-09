@@ -60,7 +60,10 @@ export async function GET() {
       { senate, house },
       {
         headers: {
-          'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400',
+          // Short CDN window so newly-sent messages surface within a minute
+          // (the previous 1h s-maxage made the list read as "not updating").
+          // SWR still absorbs traffic spikes without hammering the DB.
+          'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=300',
         },
       }
     );
