@@ -5,7 +5,7 @@ import { isTripped } from '@/lib/social/circuit-breaker';
 import { canReplyNow } from '@/lib/social/cadence';
 import { loadBrandBrain } from '@/lib/social/brand-brain';
 import { createSession, getBlueskyCreds } from '@/lib/social/bluesky';
-import { runEngager } from '@/lib/social/engager';
+import { runEngager, runInboundEngager } from '@/lib/social/engager';
 import { publishReply } from '@/lib/social/publisher';
 
 export const runtime = 'nodejs';
@@ -36,7 +36,18 @@ export async function GET(request: NextRequest) {
 
   const brandBrain = await loadBrandBrain();
   const session = await createSession(creds.handle, creds.appPassword);
-  const drafted = await runEngager(brandBrain, session);
+  // Outbound: find strangers' posts worth joining. Inbound: reply to people
+  // engaging with US (replies/mentions/quotes) — otherwise we ignore everyone
+  // who talks to us. Both feed the same social_replies queue + publish path.
+  const searchDrafted = await runEngager(brandBrain, session);
+  const inboundDrafted = await runInboundEngager(brandBrain, session);
+  const drafted = {
+    scanned: searchDrafted.scanned + inboundDrafted.scanned,
+    drafted: searchDrafted.drafted + inboundDrafted.drafted,
+    gated: searchDrafted.gated + inboundDrafted.gated,
+    skipped: searchDrafted.skipped + inboundDrafted.skipped,
+    inbound: inboundDrafted,
+  };
 
   // Autonomous reply mode: post a few ready citizen replies, cadence-gated.
   const published: Array<{ replyId: string; ok: boolean; reason?: string }> = [];

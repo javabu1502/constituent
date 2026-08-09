@@ -10,7 +10,7 @@
  */
 import { createAdminClient } from '@/lib/supabase';
 import { callClaude, deDash, extractJSON } from '@/lib/claude';
-import { searchPosts, type BlueskySession, type FoundPost } from './bluesky';
+import { searchPosts, listNotifications, type BlueskySession, type FoundPost } from './bluesky';
 import { replyShouldSkip, runGuardrails } from './guardrails';
 import { graphemeLength, BLUESKY_MAX_GRAPHEMES } from './bluesky';
 
@@ -95,6 +95,158 @@ export interface EngagerResult {
   drafted: number;
   gated: number;
   skipped: number;
+}
+
+// Reply instructions for INBOUND conversation — someone replied to, mentioned,
+// or quoted us. Unlike the search lanes, this person is already talking to us,
+// so we answer the substance instead of forcing a grievance/civic frame. Same
+// non-negotiables: nonpartisan, invent nothing, no AI tells.
+const INBOUND_INSTRUCTIONS = `
+You are the Engager stage of the My Democracy Social Desk, handling INBOUND
+replies/mentions — someone is talking TO us on Bluesky. Obey the brand brain
+above, especially the reply doctrine and the four non-negotiables.
+
+Write ONE reply to the message below. Rules:
+- They engaged with us, so respond to what they actually said. Be warm, plain,
+  and useful. If they ask something, answer it; if they share a frustration,
+  point to the fast way to act.
+- Stay strictly nonpartisan. Never adopt their framing as fact, never blame a
+  party or figure, never take a side on a bill. We inform; the citizen decides.
+- No em dashes. No AI tells. Do not narrate their emotions.
+- 280 graphemes max. Include https://mydemocracy.app when pointing them to act.
+- INVENT NOTHING. Only reference what the message literally says.
+- SKIP (return {"skip": true}) if a reply adds nothing or would be unwise: a
+  bare thanks/emoji/ack, spam, trolling, abuse, or anything you cannot answer
+  nonpartisanly and truthfully.
+
+Return ONLY JSON: {"text": "<reply>"} or {"skip": true}.
+`;
+
+/**
+ * Inbound engager — reply to people who reply to, mention, or quote US.
+ * Reuses the search engager's guardrails, official-gating, per-author cap, and
+ * de-dup (social_replies.target_uri), so inbound replies get the same safety
+ * pipeline. Runs alongside runEngager on the social-engager cron.
+ */
+export async function runInboundEngager(brandBrain: string, session: BlueskySession): Promise<EngagerResult> {
+  const admin = createAdminClient();
+  const result: EngagerResult = { scanned: 0, drafted: 0, gated: 0, skipped: 0 };
+
+  let notifications;
+  try {
+    notifications = await listNotifications(session, 50);
+  } catch {
+    return result; // transient API failure — try again next run
+  }
+  // People engaging with us; never react to our own posts.
+  const candidates = notifications.filter((n) => n.authorHandle && n.authorHandle !== OWN_HANDLE);
+  result.scanned = candidates.length;
+  if (!candidates.length) return result;
+
+  // Skip anything we've already handled (dedup on the inbound post uri).
+  const uris = candidates.map((c) => c.uri);
+  const { data: existing } = await admin.from('social_replies').select('target_uri').in('target_uri', uris);
+  const have = new Set((existing ?? []).map((r) => r.target_uri));
+
+  // Same per-author daily cap as the search path (shared social_replies table).
+  const since24h = new Date(Date.now() - 24 * 60 * 60_000).toISOString();
+  const { data: recentAuthors } = await admin
+    .from('social_replies')
+    .select('target_author')
+    .neq('status', 'skipped')
+    .gte('created_at', since24h);
+  const authorsHandled = new Set((recentAuthors ?? []).map((r) => r.target_author));
+
+  for (const c of candidates) {
+    if (have.has(c.uri)) continue;
+    if (authorsHandled.has(c.authorHandle)) {
+      result.skipped++;
+      continue;
+    }
+
+    const recordSkip = async (skipReason: string) => {
+      await admin.from('social_replies').insert({
+        platform: 'bluesky',
+        lane: `inbound-${c.reason}`,
+        target_uri: c.uri,
+        target_author: c.authorHandle,
+        target_text: c.text,
+        draft_body: '',
+        requires_human: false,
+        status: 'skipped',
+        guardrail_report: { skipReason },
+      });
+    };
+
+    // Fast local skips before spending a Claude call.
+    const skip = replyShouldSkip(c.text);
+    if (skip.skip) {
+      await recordSkip(`inbound skip: ${skip.reason ?? 'skip discipline'}`);
+      result.skipped++;
+      continue;
+    }
+
+    let text = '';
+    try {
+      const raw = await callClaude(
+        `${brandBrain}\n\n---\n${INBOUND_INSTRUCTIONS}`,
+        `Someone ${c.reason === 'reply' ? 'replied to us' : c.reason === 'quote' ? 'quoted us' : 'mentioned us'} — @${c.authorHandle}: ${c.text}`,
+        300,
+      );
+      const parsed = extractJSON(raw) as { text?: string; skip?: boolean } | null;
+      if (parsed?.skip || !parsed?.text) {
+        await recordSkip('writer skip: nothing useful to add');
+        result.skipped++;
+        continue;
+      }
+      text = deDash(parsed.text).trim();
+    } catch {
+      result.skipped++; // transient — leave unrecorded to retry
+      continue;
+    }
+
+    const gate = runGuardrails({ text, maxLength: BLUESKY_MAX_GRAPHEMES, graphemeLength });
+    if (!gate.passed) {
+      const reasons = gate.checks.filter((ch) => !ch.passed).map((ch) => ch.reason).join('; ');
+      await recordSkip(`guardrail: ${reasons}`);
+      result.skipped++;
+      continue;
+    }
+
+    // Officials and org/press accounts that engage us go to the human queue;
+    // clear individuals get an autonomous reply (when reply mode allows).
+    const requiresHuman =
+      isLikelyElectedOfficial(c.authorHandle, c.authorDisplay) ||
+      looksLikeOrgOrBot(c.authorHandle, c.authorDisplay);
+    const status = requiresHuman ? 'pending_approval' : 'pending_post';
+    // Thread onto their post: parent is their reply; root is the thread root
+    // (theirs if they carry one, else their post starts the thread with us).
+    const replyRef = {
+      root: c.root ?? { uri: c.uri, cid: c.cid },
+      parent: { uri: c.uri, cid: c.cid },
+    };
+
+    const { error } = await admin.from('social_replies').insert({
+      platform: 'bluesky',
+      lane: `inbound-${c.reason}`,
+      target_uri: c.uri,
+      target_author: c.authorHandle,
+      target_text: c.text,
+      draft_body: text,
+      requires_human: requiresHuman,
+      status,
+      guardrail_report: { ...gate, replyRef },
+    });
+    if (error) {
+      result.skipped++;
+      continue;
+    }
+    authorsHandled.add(c.authorHandle);
+    result.drafted++;
+    if (requiresHuman) result.gated++;
+  }
+
+  return result;
 }
 
 export async function runEngager(brandBrain: string, session: BlueskySession, perQuery = 5): Promise<EngagerResult> {

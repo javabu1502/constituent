@@ -151,6 +151,53 @@ export async function getPostMetrics(
   return out;
 }
 
+export interface InboundNotification {
+  /** The reply/mention/quote post itself (what we thread our response onto). */
+  uri: string;
+  cid: string;
+  authorHandle: string;
+  authorDisplay: string;
+  text: string;
+  reason: 'reply' | 'mention' | 'quote';
+  /** Thread root, if their post carries one; else their post is the root. */
+  root?: { uri: string; cid: string };
+  isRead: boolean;
+  indexedAt: string;
+}
+
+/**
+ * Fetch notifications and keep only the ones that are people ENGAGING WITH US —
+ * replies, mentions, and quote-posts. This is how the Social Desk sees inbound
+ * conversation on our own posts (search only ever surfaces strangers' posts).
+ * Likes/reposts/follows are dropped (nothing to reply to).
+ */
+export async function listNotifications(session: BlueskySession, limit = 50): Promise<InboundNotification[]> {
+  const data = await xrpcGet<{ notifications: Array<Record<string, unknown>> }>(
+    'app.bsky.notification.listNotifications',
+    { limit: String(limit) },
+    session.accessJwt,
+  );
+  const kept = new Set(['reply', 'mention', 'quote']);
+  return (data.notifications ?? [])
+    .filter((n) => kept.has(n.reason as string))
+    .map((n) => {
+      const author = (n.author as Record<string, unknown>) ?? {};
+      const record = (n.record as Record<string, unknown>) ?? {};
+      const reply = record.reply as { root?: { uri: string; cid: string } } | undefined;
+      return {
+        uri: n.uri as string,
+        cid: n.cid as string,
+        authorHandle: (author.handle as string) ?? '',
+        authorDisplay: (author.displayName as string) ?? '',
+        text: (record.text as string) ?? '',
+        reason: n.reason as InboundNotification['reason'],
+        root: reply?.root,
+        isRead: (n.isRead as boolean) ?? false,
+        indexedAt: (n.indexedAt as string) ?? '',
+      };
+    });
+}
+
 async function xrpc<T>(method: string, body: unknown, token?: string): Promise<T> {
   const res = await fetch(`${PDS}/${method}`, {
     method: 'POST',
