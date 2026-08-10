@@ -10,7 +10,7 @@
  */
 import { createAdminClient } from '@/lib/supabase';
 import { callClaude, deDash, extractJSON } from '@/lib/claude';
-import { searchPosts, listNotifications, type BlueskySession, type FoundPost } from './bluesky';
+import { searchPosts, listNotifications, like, follow, getFollowing, type BlueskySession, type FoundPost } from './bluesky';
 import { replyShouldSkip, runGuardrails } from './guardrails';
 import { graphemeLength, BLUESKY_MAX_GRAPHEMES } from './bluesky';
 
@@ -88,6 +88,13 @@ export function hasFirstPersonVoice(text: string): boolean {
 
 const MIN_TARGET_LEN = 12;
 
+// Per-run engagement caps. Kept modest so the account reads as an attentive
+// participant, not a spray-and-pray bot (aggressive liking/following trips
+// platform spam heuristics and looks untrustworthy). The 2h cron makes these
+// the daily ceiling only in the unlikely event every run saturates them.
+const LIKE_CAP = 15;
+const FOLLOW_CAP = 10;
+
 const REPLY_INSTRUCTIONS = `
 You are the Engager stage of the My Democracy Social Desk. Obey the brand brain
 above, especially the reply doctrine and the four non-negotiables.
@@ -116,6 +123,8 @@ export interface EngagerResult {
   drafted: number;
   gated: number;
   skipped: number;
+  liked: number;
+  followed: number;
 }
 
 // Reply instructions for INBOUND conversation — someone replied to, mentioned,
@@ -151,7 +160,7 @@ Return ONLY JSON: {"text": "<reply>"} or {"skip": true}.
  */
 export async function runInboundEngager(brandBrain: string, session: BlueskySession): Promise<EngagerResult> {
   const admin = createAdminClient();
-  const result: EngagerResult = { scanned: 0, drafted: 0, gated: 0, skipped: 0 };
+  const result: EngagerResult = { scanned: 0, drafted: 0, gated: 0, skipped: 0, liked: 0, followed: 0 };
 
   let notifications;
   try {
@@ -272,7 +281,7 @@ export async function runInboundEngager(brandBrain: string, session: BlueskySess
 
 export async function runEngager(brandBrain: string, session: BlueskySession, perQuery = 8): Promise<EngagerResult> {
   const admin = createAdminClient();
-  const result: EngagerResult = { scanned: 0, drafted: 0, gated: 0, skipped: 0 };
+  const result: EngagerResult = { scanned: 0, drafted: 0, gated: 0, skipped: 0, liked: 0, followed: 0 };
 
   // Candidates across all lane queries, de-duplicated by uri.
   const seen = new Set<string>();
@@ -308,6 +317,10 @@ export async function runEngager(brandBrain: string, session: BlueskySession, pe
     .gte('created_at', since24h);
   const authorsHandled = new Set((recentAuthors ?? []).map((r) => r.target_author));
 
+  // Accounts we already follow, so proactive follows never double-follow.
+  // Best-effort: if this fails we just skip follows this run.
+  const following = await getFollowing(session).catch(() => new Set<string>());
+
   for (const c of candidates) {
     if (have.has(c.uri)) continue;
     if (c.authorHandle === OWN_HANDLE) continue; // never reply to ourselves
@@ -334,6 +347,34 @@ export async function runEngager(brandBrain: string, session: BlueskySession, pe
     if (skip.skip) {
       result.skipped++;
       continue;
+    }
+
+    // This is a genuine, relevant civic post by a real person. Engage lightly
+    // even if the reply draft later fails: a like (visibility + notifies them)
+    // and, for individuals, a proactive follow. Both capped, both non-fatal.
+    // This is where reach converts into a real, neutral audience — we only ever
+    // engage people already talking about civic frustrations or questions.
+    if (result.liked < LIKE_CAP) {
+      try {
+        await like(session, { uri: c.uri, cid: c.cid });
+        result.liked++;
+      } catch {
+        /* non-fatal — a missed like is nothing */
+      }
+    }
+    if (
+      result.followed < FOLLOW_CAP &&
+      c.authorDid &&
+      !following.has(c.authorDid) &&
+      !isLikelyElectedOfficial(c.authorHandle, c.authorDisplay)
+    ) {
+      try {
+        await follow(session, c.authorDid);
+        following.add(c.authorDid);
+        result.followed++;
+      } catch {
+        /* non-fatal */
+      }
     }
 
     // Record a target we decided against so later runs don't re-scan it and

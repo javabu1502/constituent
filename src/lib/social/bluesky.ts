@@ -94,6 +94,7 @@ export interface FoundPost {
   cid: string;
   authorHandle: string;
   authorDisplay: string;
+  authorDid: string;
   text: string;
   /** Thread root ref if this post is itself a reply (else the post is root). */
   root?: { uri: string; cid: string };
@@ -116,6 +117,7 @@ export async function searchPosts(session: BlueskySession, q: string, limit = 15
       cid: p.cid as string,
       authorHandle: (author.handle as string) ?? '',
       authorDisplay: (author.displayName as string) ?? '',
+      authorDid: (author.did as string) ?? '',
       text: (record.text as string) ?? '',
       root: reply?.root,
       likeCount: (p.likeCount as number) ?? 0,
@@ -272,6 +274,71 @@ export async function follow(session: BlueskySession, subjectDid: string): Promi
     },
     session.accessJwt,
   );
+}
+
+// --- Engagement (likes + reposts) ---
+
+/**
+ * Like a post by its strong ref (uri + cid). A like is the lowest-risk form of
+ * engagement — no content is published under our brand — and it notifies the
+ * author, which is how we get on relevant civic accounts' radar.
+ */
+export async function like(session: BlueskySession, subject: { uri: string; cid: string }): Promise<{ uri: string; cid: string }> {
+  return xrpc<{ uri: string; cid: string }>(
+    'com.atproto.repo.createRecord',
+    {
+      repo: session.did,
+      collection: 'app.bsky.feed.like',
+      record: { $type: 'app.bsky.feed.like', subject, createdAt: new Date().toISOString() },
+    },
+    session.accessJwt,
+  );
+}
+
+/**
+ * Repost a post by its strong ref (uri + cid). Unlike a like, a repost
+ * AMPLIFIES someone else's content under our brand, so callers must vet the
+ * source and content first (neutrality/accuracy) — we only repost from a
+ * curated trusted-source allowlist.
+ */
+export async function repost(session: BlueskySession, subject: { uri: string; cid: string }): Promise<{ uri: string; cid: string }> {
+  return xrpc<{ uri: string; cid: string }>(
+    'com.atproto.repo.createRecord',
+    {
+      repo: session.did,
+      collection: 'app.bsky.feed.repost',
+      record: { $type: 'app.bsky.feed.repost', subject, createdAt: new Date().toISOString() },
+    },
+    session.accessJwt,
+  );
+}
+
+/** Recent posts from one account's feed (for the trusted-source reposter). */
+export async function getAuthorFeed(session: BlueskySession, actor: string, limit = 10): Promise<FoundPost[]> {
+  const data = await xrpcGet<{ feed?: Array<{ post?: Record<string, unknown> }> }>(
+    'app.bsky.feed.getAuthorFeed',
+    { actor, limit: String(limit), filter: 'posts_no_replies' },
+    session.accessJwt,
+  );
+  const out: FoundPost[] = [];
+  for (const item of data.feed ?? []) {
+    const p = item.post;
+    if (!p) continue;
+    const author = (p.author as Record<string, unknown>) ?? {};
+    const record = (p.record as Record<string, unknown>) ?? {};
+    // Skip reposts-of-reposts and posts that are themselves replies.
+    if (record.reply) continue;
+    out.push({
+      uri: p.uri as string,
+      cid: p.cid as string,
+      authorHandle: (author.handle as string) ?? '',
+      authorDisplay: (author.displayName as string) ?? '',
+      authorDid: (author.did as string) ?? '',
+      text: (record.text as string) ?? '',
+      likeCount: (p.likeCount as number) ?? 0,
+    });
+  }
+  return out;
 }
 
 /**

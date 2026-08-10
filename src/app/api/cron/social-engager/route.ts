@@ -50,6 +50,8 @@ export async function GET(request: NextRequest) {
     drafted: searchDrafted.drafted + inboundDrafted.drafted,
     gated: searchDrafted.gated + inboundDrafted.gated,
     skipped: searchDrafted.skipped + inboundDrafted.skipped,
+    liked: searchDrafted.liked + inboundDrafted.liked,
+    followed: searchDrafted.followed + inboundDrafted.followed,
     inbound: inboundDrafted,
   };
 
