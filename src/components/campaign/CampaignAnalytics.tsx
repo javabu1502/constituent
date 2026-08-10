@@ -38,6 +38,18 @@ interface AdvocacyAnalytics {
   cities_count: number;
   avg_messages_per_action: number;
   stance_split?: { support: number; oppose: number };
+  campaign_slug?: string;
+  messages?: Array<{
+    created_at: string;
+    name: string | null;
+    city: string | null;
+    state: string | null;
+    official: string | null;
+    party: string | null;
+    method: string | null;
+    status: string | null;
+    body: string;
+  }>;
 }
 
 interface StoryListItem {
@@ -546,6 +558,111 @@ function StorytellingAnalytics({ analytics, campaignName, insightsPanel }: { ana
   );
 }
 
+/** Browse + search the individual messages, and export them (filtered) to CSV.
+ * The "dig deeper" companion to the aggregate charts. */
+function MessageBrowser({ messages, slug }: { messages: NonNullable<AdvocacyAnalytics['messages']>; slug: string }) {
+  const [q, setQ] = useState('');
+  const [stateFilter, setStateFilter] = useState('');
+  const [officialFilter, setOfficialFilter] = useState('');
+  const [statusFilter, setStatusFilter] = useState('');
+
+  const uniq = (vals: Array<string | null>) => [...new Set(vals.filter((v): v is string => !!v))].sort();
+  const states = useMemo(() => uniq(messages.map((m) => m.state)), [messages]);
+  const officials = useMemo(() => uniq(messages.map((m) => m.official)), [messages]);
+  const statuses = useMemo(() => uniq(messages.map((m) => m.status)), [messages]);
+
+  const filtered = useMemo(
+    () =>
+      messages.filter((m) => {
+        if (stateFilter && m.state !== stateFilter) return false;
+        if (officialFilter && m.official !== officialFilter) return false;
+        if (statusFilter && m.status !== statusFilter) return false;
+        if (q.trim()) {
+          const hay = `${m.name ?? ''} ${m.city ?? ''} ${m.state ?? ''} ${m.official ?? ''} ${m.body}`.toLowerCase();
+          if (!hay.includes(q.trim().toLowerCase())) return false;
+        }
+        return true;
+      }),
+    [messages, q, stateFilter, officialFilter, statusFilter],
+  );
+
+  const exportHref = useMemo(() => {
+    const p = new URLSearchParams();
+    if (q.trim()) p.set('q', q.trim());
+    if (stateFilter) p.set('state', stateFilter);
+    if (officialFilter) p.set('official', officialFilter);
+    if (statusFilter) p.set('status', statusFilter);
+    const qs = p.toString();
+    return `/api/campaigns/${slug}/messages/export${qs ? `?${qs}` : ''}`;
+  }, [slug, q, stateFilter, officialFilter, statusFilter]);
+
+  const selectClass =
+    'px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-purple-600';
+
+  return (
+    <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
+      <div className="flex items-center justify-between gap-3 mb-1">
+        <h3 className="text-base font-semibold text-gray-900 dark:text-white">Messages</h3>
+        <a
+          href={exportHref}
+          className="shrink-0 text-sm font-medium px-3 py-1.5 rounded-lg border border-purple-300 dark:border-purple-700 text-purple-700 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/20 transition-colors"
+        >
+          Download CSV
+        </a>
+      </div>
+      <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">
+        Read every message and export the raw data. Showing {filtered.length.toLocaleString()} of {messages.length.toLocaleString()}.
+      </p>
+      <div className="flex flex-wrap gap-2 mb-4">
+        <input
+          value={q}
+          onChange={(e) => setQ(e.target.value)}
+          placeholder="Search names, cities, officials, message text…"
+          className="flex-1 min-w-[12rem] px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400"
+        />
+        <select value={stateFilter} onChange={(e) => setStateFilter(e.target.value)} className={selectClass}>
+          <option value="">All states</option>
+          {states.map((s) => (
+            <option key={s} value={s}>{s}</option>
+          ))}
+        </select>
+        <select value={officialFilter} onChange={(e) => setOfficialFilter(e.target.value)} className={selectClass}>
+          <option value="">All officials</option>
+          {officials.map((o) => (
+            <option key={o} value={o}>{o}</option>
+          ))}
+        </select>
+        <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} className={selectClass}>
+          <option value="">All statuses</option>
+          {statuses.map((s) => (
+            <option key={s} value={s}>{s}</option>
+          ))}
+        </select>
+      </div>
+      <div className="max-h-[34rem] overflow-y-auto space-y-2">
+        {filtered.slice(0, 300).map((m, i) => (
+          <details key={i} className="group border border-gray-200 dark:border-gray-700 rounded-lg p-3">
+            <summary className="cursor-pointer list-none flex items-center justify-between gap-2">
+              <span className="text-sm text-gray-900 dark:text-white">
+                <span className="font-medium">{m.name || 'Constituent'}</span>
+                {(m.city || m.state) && <span className="text-gray-500 dark:text-gray-400"> · {[m.city, m.state].filter(Boolean).join(', ')}</span>}
+                {m.official && <span className="text-gray-500 dark:text-gray-400"> → {m.official}</span>}
+              </span>
+              <span className="text-xs text-gray-400 dark:text-gray-500 shrink-0">
+                {m.created_at ? new Date(m.created_at).toLocaleDateString() : ''}
+              </span>
+            </summary>
+            <p className="mt-2 text-sm text-gray-700 dark:text-gray-300 whitespace-pre-wrap">{m.body || <span className="italic text-gray-400">No message text recorded.</span>}</p>
+          </details>
+        ))}
+        {filtered.length > 300 && (
+          <p className="text-xs text-gray-400 dark:text-gray-500 pt-1">Showing the first 300 on screen — the CSV export includes all {filtered.length.toLocaleString()}.</p>
+        )}
+      </div>
+    </div>
+  );
+}
+
 export function CampaignAnalytics({ analytics, campaignName, insightsPanel }: CampaignAnalyticsProps) {
   if (analytics.kind === 'storytelling') {
     return <StorytellingAnalytics analytics={analytics} campaignName={campaignName} insightsPanel={insightsPanel} />;
@@ -898,6 +1015,11 @@ export function CampaignAnalytics({ analytics, campaignName, insightsPanel }: Ca
           )}
         </div>
       </div>
+
+      {/* Message browser + CSV export — read every message, dig deeper */}
+      {analytics.campaign_slug && analytics.messages && analytics.messages.length > 0 && (
+        <MessageBrowser messages={analytics.messages} slug={analytics.campaign_slug} />
+      )}
 
       {/* Recent activity pulse */}
       {analytics.recent_actions.length > 0 && (

@@ -214,8 +214,9 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
   const [messagesResult, actionsResult] = await Promise.all([
     admin
       .from('messages')
-      .select('delivery_method, delivery_status, legislator_name, legislator_party, legislator_level, legislator_chamber, advocate_city, advocate_state, created_at')
+      .select('advocate_name, delivery_method, delivery_status, legislator_name, legislator_party, legislator_level, legislator_chamber, advocate_city, advocate_state, message_body, created_at')
       .eq('campaign_id', campaign.id)
+      .order('created_at', { ascending: false })
       .limit(10000),
     admin
       .from('campaign_actions')
@@ -352,6 +353,19 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
       support: Number(campaign.support_count) || 0,
       oppose: Number(campaign.oppose_count) || 0,
     },
+    campaign_slug: campaign.slug as string,
+    // Individual messages for the browser + CSV export ("dig deeper").
+    messages: campaignMessages.map((m) => ({
+      created_at: m.created_at as string,
+      name: (m.advocate_name as string | null) ?? null,
+      city: (m.advocate_city as string | null) ?? null,
+      state: (m.advocate_state as string | null) ?? null,
+      official: (m.legislator_name as string | null) ?? null,
+      party: (m.legislator_party as string | null) ?? null,
+      method: (m.delivery_method as string | null) ?? null,
+      status: (m.delivery_status as string | null) ?? null,
+      body: (m.message_body as string | null) ?? '',
+    })),
   };
 
   return (
