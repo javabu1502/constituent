@@ -35,6 +35,22 @@ export const LANE_QUERIES: Array<{ lane: string; q: string }> = [
   { lane: 'civic-question', q: '"who represents me"' },
   { lane: 'civic-question', q: '"how to contact your representative"' },
   { lane: 'civic-question', q: '"does calling your representative"' },
+  // Widened 2026-08 for growth — more phrasings and pocketbook topics so the
+  // engager actually finds real people to help (it was drafting ~0/run).
+  { lane: 'act-now', q: '"how do I contact my senator"' },
+  { lane: 'act-now', q: '"wish I could do something about"' },
+  { lane: 'act-now', q: '"we need to call our reps"' },
+  { lane: 'grievance', q: 'insurance denied my claim' },
+  { lane: 'grievance', q: 'prescription too expensive' },
+  { lane: 'grievance', q: 'medical bills bankrupt' },
+  { lane: 'grievance', q: 'housing so unaffordable' },
+  { lane: 'grievance', q: 'wages not keeping up' },
+  { lane: 'grievance', q: 'property taxes crushing' },
+  { lane: 'grievance', q: 'daycare waitlist' },
+  { lane: 'grievance', q: 'social security worried' },
+  { lane: 'civic-question', q: '"does contacting congress"' },
+  { lane: 'civic-question', q: '"how do bills become law"' },
+  { lane: 'civic-question', q: '"is my vote worth"' },
 ];
 
 const OWN_HANDLE = process.env.BLUESKY_HANDLE ?? '';
@@ -56,7 +72,12 @@ export function isLikelyElectedOfficial(handle: string, display: string): boolea
 // case that produced nonsense replies.)
 export function looksLikeOrgOrBot(handle: string, display: string): boolean {
   const s = `${handle} ${display}`.toLowerCase();
-  return /(news|bot\b|\bdata|media|press|daily|report|\.ai\b|wire|times|gazette|tribune|magazine|podcast|newsletter|feed|official|weather|rally|coalition|\baction\b|\bpac\b|\bmarch\b|protest|standup|forscience|resist|indivisible|\.org\b|caucus|committee|campaign\b|foundation|institute|nonprofit|alliance|network)/.test(s);
+  // Tuned 2026-08: keep the HARD org/news/bot signals, but drop terms that
+  // over-matched real people (data, daily, report, official, action, march,
+  // rally, coalition, alliance, network, campaign, resist, indivisible, feed,
+  // weather, standup, forscience). The engager was drafting ~0 because this
+  // filter was too broad; growth needs it to actually reach humans.
+  return /(\bnews\b|bot\b|media\b|\bpress\b|\.ai\b|wire\b|times\b|gazette|tribune|magazine|podcast|newsletter|\.gov\b|\bpac\b|caucus|committee|foundation|institute|nonprofit|\.org\b|newspaper|headlines)/.test(s);
 }
 
 // First-person voice: someone talking about their own life, which is what we
@@ -65,7 +86,7 @@ export function hasFirstPersonVoice(text: string): boolean {
   return /\b(i|i'm|im|i've|ive|my|me|myself|we|we're|were|our|us|can't afford|cant afford|paying|paycheck)\b/i.test(text);
 }
 
-const MIN_TARGET_LEN = 20;
+const MIN_TARGET_LEN = 12;
 
 const REPLY_INSTRUCTIONS = `
 You are the Engager stage of the My Democracy Social Desk. Obey the brand brain
@@ -249,7 +270,7 @@ export async function runInboundEngager(brandBrain: string, session: BlueskySess
   return result;
 }
 
-export async function runEngager(brandBrain: string, session: BlueskySession, perQuery = 5): Promise<EngagerResult> {
+export async function runEngager(brandBrain: string, session: BlueskySession, perQuery = 8): Promise<EngagerResult> {
   const admin = createAdminClient();
   const result: EngagerResult = { scanned: 0, drafted: 0, gated: 0, skipped: 0 };
 

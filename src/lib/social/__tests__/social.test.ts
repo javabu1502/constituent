@@ -198,6 +198,24 @@ describe('cadence', () => {
   });
 });
 
+describe('engager: tuned org/bot filter (growth)', () => {
+  it('still skips clear orgs, news outlets, and bots', () => {
+    expect(looksLikeOrgOrBot('dailywire', 'The Daily Wire')).toBe(true);
+    expect(looksLikeOrgOrBot('somepac', 'Freedom PAC')).toBe(true);
+    expect(looksLikeOrgOrBot('cnnbrk', 'CNN Breaking News')).toBe(true);
+    expect(looksLikeOrgOrBot('weatherbot', 'Weather Bot')).toBe(true);
+    expect(looksLikeOrgOrBot('brookings', 'Brookings Institute')).toBe(true);
+  });
+  it('no longer over-filters real people whose names contain common words', () => {
+    // These were wrongly skipped by the old broad filter (action/daily/network/report/official).
+    expect(looksLikeOrgOrBot('actionjackson', 'Action Jackson')).toBe(false);
+    expect(looksLikeOrgOrBot('dailyjane', 'Jane (posts daily)')).toBe(false);
+    expect(looksLikeOrgOrBot('mike_network', 'Mike')).toBe(false);
+    expect(looksLikeOrgOrBot('reportcardmom', 'Tired Mom')).toBe(false);
+    expect(looksLikeOrgOrBot('officialkevin', 'Kevin')).toBe(false);
+  });
+});
+
 describe('circuit breaker', () => {
   it('trips after N consecutive failures', () => {
     let s = { tripped: false, consecutive_failures: 0, error_count: 0 };

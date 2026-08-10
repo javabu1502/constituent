@@ -6,6 +6,7 @@ import { canReplyNow } from '@/lib/social/cadence';
 import { loadBrandBrain } from '@/lib/social/brand-brain';
 import { createSession, getBlueskyCreds } from '@/lib/social/bluesky';
 import { runEngager, runInboundEngager } from '@/lib/social/engager';
+import { runFollower } from '@/lib/social/follower';
 import { publishReply } from '@/lib/social/publisher';
 
 export const runtime = 'nodejs';
@@ -41,6 +42,9 @@ export async function GET(request: NextRequest) {
   // who talks to us. Both feed the same social_replies queue + publish path.
   const searchDrafted = await runEngager(brandBrain, session);
   const inboundDrafted = await runInboundEngager(brandBrain, session);
+  // Network growth: follow back followers + the people we've actually replied
+  // to, so the account stops broadcasting into the void. Non-fatal.
+  const followed = await runFollower(session, { maxPerRun: 20 }).catch(() => null);
   const drafted = {
     scanned: searchDrafted.scanned + inboundDrafted.scanned,
     drafted: searchDrafted.drafted + inboundDrafted.drafted,
@@ -91,5 +95,5 @@ export async function GET(request: NextRequest) {
     }
   }
 
-  return NextResponse.json({ ok: true, mode: reply.mode, ...drafted, published });
+  return NextResponse.json({ ok: true, mode: reply.mode, ...drafted, published, followed });
 }

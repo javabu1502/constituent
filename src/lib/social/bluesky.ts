@@ -221,6 +221,59 @@ export async function createSession(handle: string, appPassword: string): Promis
   });
 }
 
+// --- Following (network growth) ---
+
+/** Resolve a handle (e.g. "someone.bsky.social") to its DID. */
+export async function resolveHandle(handle: string): Promise<string | null> {
+  try {
+    const d = await xrpcGet<{ did: string }>('com.atproto.identity.resolveHandle', { handle });
+    return d.did ?? null;
+  } catch {
+    return null;
+  }
+}
+
+/** DIDs we already follow (paginated), so we never double-follow. */
+export async function getFollowing(session: BlueskySession, actor?: string): Promise<Set<string>> {
+  const dids = new Set<string>();
+  let cursor: string | undefined;
+  do {
+    const params: Record<string, string> = { actor: actor ?? session.did, limit: '100' };
+    if (cursor) params.cursor = cursor;
+    const data = await xrpcGet<{ follows?: Array<{ did: string }>; cursor?: string }>('app.bsky.graph.getFollows', params, session.accessJwt);
+    for (const f of data.follows ?? []) dids.add(f.did);
+    cursor = data.cursor;
+  } while (cursor && dids.size < 2000);
+  return dids;
+}
+
+/** Accounts that follow us (did + handle), for follow-back. */
+export async function getFollowers(session: BlueskySession, actor?: string): Promise<Array<{ did: string; handle: string }>> {
+  const out: Array<{ did: string; handle: string }> = [];
+  let cursor: string | undefined;
+  do {
+    const params: Record<string, string> = { actor: actor ?? session.did, limit: '100' };
+    if (cursor) params.cursor = cursor;
+    const data = await xrpcGet<{ followers?: Array<{ did: string; handle: string }>; cursor?: string }>('app.bsky.graph.getFollowers', params, session.accessJwt);
+    for (const f of data.followers ?? []) out.push({ did: f.did, handle: f.handle });
+    cursor = data.cursor;
+  } while (cursor && out.length < 1000);
+  return out;
+}
+
+/** Follow an account by DID. */
+export async function follow(session: BlueskySession, subjectDid: string): Promise<{ uri: string; cid: string }> {
+  return xrpc<{ uri: string; cid: string }>(
+    'com.atproto.repo.createRecord',
+    {
+      repo: session.did,
+      collection: 'app.bsky.graph.follow',
+      record: { $type: 'app.bsky.graph.follow', subject: subjectDid, createdAt: new Date().toISOString() },
+    },
+    session.accessJwt,
+  );
+}
+
 /**
  * Build a post record from text (+ optional reply ref). Adds link facets and
  * computes the grapheme count. Throws if it exceeds the platform limit — the
