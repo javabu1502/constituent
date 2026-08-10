@@ -479,7 +479,6 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
         <div className="space-y-2">
           {stanceButton('support', 'I support this', 'Your message will express clear support and ask your officials to support it too.')}
           {stanceButton('oppose', 'I oppose this', 'Your message will express clear opposition and ask your officials to oppose it.')}
-          {stanceButton('undecided', 'I’m still deciding', 'Your message will ask your officials where they stand and why.')}
         </div>
       </div>
     );
@@ -724,7 +723,11 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
         const rows: Array<{ key: Stance; label: string; count: number }> = [
           { key: 'support', label: 'Support', count: pollResults.support },
           { key: 'oppose', label: 'Oppose', count: pollResults.oppose },
-          { key: 'undecided', label: 'Still deciding', count: pollResults.undecided },
+          // "Still deciding" is no longer an option; only show it if older
+          // campaigns still carry historical undecided counts.
+          ...(pollResults.undecided > 0
+            ? [{ key: 'undecided' as Stance, label: 'Still deciding', count: pollResults.undecided }]
+            : []),
         ];
         const pct = (n: number) => (total > 0 ? Math.round((n / total) * 100) : 0);
         const ownPct = pct(rows.find((r) => r.key === stance)?.count ?? 0);
