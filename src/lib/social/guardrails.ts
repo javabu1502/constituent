@@ -37,6 +37,18 @@ const PARTISAN_PATTERNS: RegExp[] = [
   /\byou should (support|oppose|back|reject)\b/i,
 ];
 
+/**
+ * True if the text carries partisan/directive phrasing. Exposed for the
+ * reposter: we only amplify content from trusted sources that reads neutral,
+ * so a trusted account's occasional pointed post is never reposted under our
+ * brand. This is the nonpartisan check alone — not the full draft guardrails
+ * (which also gate length, em dashes, coverage), none of which should apply to
+ * someone else's post we're merely resharing.
+ */
+export function isPartisan(text: string): boolean {
+  return PARTISAN_PATTERNS.some((re) => re.test(text));
+}
+
 // AI/voice tells the brand brain bans outright.
 const VOICE_TELLS: Array<{ re: RegExp; reason: string }> = [
   { re: /\byou (clearly|obviously) (feel|care)\b/i, reason: 'narrates the reader\'s emotions' },

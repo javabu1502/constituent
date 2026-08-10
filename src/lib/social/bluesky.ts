@@ -99,6 +99,8 @@ export interface FoundPost {
   /** Thread root ref if this post is itself a reply (else the post is root). */
   root?: { uri: string; cid: string };
   likeCount: number;
+  /** ISO timestamp the post was indexed (set by getAuthorFeed for recency). */
+  indexedAt?: string;
 }
 
 /** Search recent posts by keyword (for the Engager's listening layer). */
@@ -336,6 +338,7 @@ export async function getAuthorFeed(session: BlueskySession, actor: string, limi
       authorDid: (author.did as string) ?? '',
       text: (record.text as string) ?? '',
       likeCount: (p.likeCount as number) ?? 0,
+      indexedAt: (p.indexedAt as string) ?? (record.createdAt as string) ?? '',
     });
   }
   return out;
