@@ -783,8 +783,9 @@ export function CampaignAnalytics({ analytics, campaignName, insightsPanel }: Ca
       {/* AI-themed insights — what constituents are actually saying */}
       {insightsPanel}
 
-      {/* Where participants stand — only official weigh-ins capture a stance */}
-      {analytics.stance_split && analytics.stance_split.support + analytics.stance_split.oppose > 0 && (() => {
+      {/* Where participants stand — only neutral weigh-ins with a genuine
+          two-way split. Directional campaigns (one side only) never show this. */}
+      {analytics.stance_split && analytics.stance_split.support > 0 && analytics.stance_split.oppose > 0 && (() => {
         const { support, oppose } = analytics.stance_split;
         const total = support + oppose;
         const supportPct = Math.round((support / total) * 100);
