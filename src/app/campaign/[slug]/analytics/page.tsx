@@ -3,6 +3,8 @@ import { redirect, notFound } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase';
 import { CampaignAnalytics } from '@/components/campaign/CampaignAnalytics';
+import { CampaignInsightsPanel } from '@/components/campaign/CampaignInsightsPanel';
+import { getCachedInsights } from '@/lib/insights';
 import { usageLabels } from '@/lib/story-usage';
 import { findSenators } from '@/lib/legislators';
 import { US_STATES } from '@/lib/constants';
@@ -58,6 +60,20 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
   if (campaign.creator_id !== user.id) {
     redirect(`/campaign/${slug}`);
   }
+
+  // AI-themed insights panel (owner-only). Reads the cached snapshot here;
+  // generation happens on demand via the panel's button. Storytelling themes
+  // stories, everything else themes the constituent messages.
+  const insightsKind = campaign.campaign_type === 'storytelling' ? 'stories' : 'messages';
+  const cachedInsights = await getCachedInsights(campaign.id, insightsKind);
+  const insightsPanel = (
+    <CampaignInsightsPanel
+      slug={slug}
+      initial={cachedInsights?.insights ?? null}
+      initialStale={cachedInsights?.stale ?? false}
+      kind={insightsKind}
+    />
+  );
 
   // ----- Storytelling campaigns: running count + non-identifying subjects -----
   if (campaign.campaign_type === 'storytelling') {
@@ -184,7 +200,7 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Campaign Analytics</h1>
           <p className="text-gray-600 dark:text-gray-400 mt-1">{campaign.headline}</p>
         </div>
-        <CampaignAnalytics analytics={storyAnalytics} campaignName={campaign.headline} />
+        <CampaignAnalytics analytics={storyAnalytics} campaignName={campaign.headline} insightsPanel={insightsPanel} />
       </div>
     );
   }
@@ -347,7 +363,7 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
         </p>
       </div>
 
-      <CampaignAnalytics analytics={analytics} campaignName={campaign.headline} />
+      <CampaignAnalytics analytics={analytics} campaignName={campaign.headline} insightsPanel={insightsPanel} />
     </div>
   );
 }

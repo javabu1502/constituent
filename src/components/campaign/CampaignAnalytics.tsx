@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useMemo, useState, type ReactNode } from 'react';
 import { STORY_USAGE_OPTIONS } from '@/lib/story-usage';
 import { US_STATES } from '@/lib/constants';
 
@@ -78,6 +78,8 @@ interface StoryAnalytics {
 interface CampaignAnalyticsProps {
   analytics: AdvocacyAnalytics | StoryAnalytics;
   campaignName: string;
+  /** AI-themed insights panel, injected by the analytics page (owner-only). */
+  insightsPanel?: ReactNode;
 }
 
 function attributionBadge(level: StoryListItem['attribution_level']): string {
@@ -172,7 +174,7 @@ function photoRequestMailto(story: StoryListItem, campaignName: string): string 
   return `mailto:${story.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
 
-function StorytellingAnalytics({ analytics, campaignName }: { analytics: StoryAnalytics; campaignName: string }) {
+function StorytellingAnalytics({ analytics, campaignName, insightsPanel }: { analytics: StoryAnalytics; campaignName: string; insightsPanel?: ReactNode }) {
   const [q, setQ] = useState('');
   const [stateFilter, setStateFilter] = useState('');
   const [cityFilter, setCityFilter] = useState('');
@@ -295,6 +297,9 @@ function StorytellingAnalytics({ analytics, campaignName }: { analytics: StoryAn
           <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">Agreed to follow-up contact</p>
         </div>
       </div>
+
+      {/* AI-themed insights — what constituents are actually saying */}
+      {insightsPanel}
 
       {/* Use over time */}
       <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
@@ -540,9 +545,9 @@ function StorytellingAnalytics({ analytics, campaignName }: { analytics: StoryAn
   );
 }
 
-export function CampaignAnalytics({ analytics, campaignName }: CampaignAnalyticsProps) {
+export function CampaignAnalytics({ analytics, campaignName, insightsPanel }: CampaignAnalyticsProps) {
   if (analytics.kind === 'storytelling') {
-    return <StorytellingAnalytics analytics={analytics} campaignName={campaignName} />;
+    return <StorytellingAnalytics analytics={analytics} campaignName={campaignName} insightsPanel={insightsPanel} />;
   }
 
   const maxTopState = analytics.top_states.length > 0 ? analytics.top_states[0].count : 1;
@@ -656,6 +661,9 @@ export function CampaignAnalytics({ analytics, campaignName }: CampaignAnalytics
           </p>
         </div>
       </div>
+
+      {/* AI-themed insights — what constituents are actually saying */}
+      {insightsPanel}
 
       {/* Daily activity chart */}
       <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
