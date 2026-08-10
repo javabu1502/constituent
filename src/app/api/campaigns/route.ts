@@ -57,7 +57,7 @@ export async function POST(request: NextRequest) {
 
   const {
     campaign_type, headline, description, issue_area, issue_subtopic,
-    target_level, message_template, distribution_plan,
+    target_level, direction, message_template, distribution_plan,
     bill_level, bill_state, bill_ref, bill_title, bill_url,
     story_prompt, usage_statement, usage_tags, attribution_options, edit_revoke_policy, recipient_email,
     org_name, org_url, org_logo_url, brand_color, custom_domain,
@@ -95,6 +95,7 @@ export async function POST(request: NextRequest) {
       issue_area,
       issue_subtopic: issue_subtopic || null,
       target_level: isStory ? 'federal' : target_level,
+      direction: isStory ? null : (direction || null),
       message_template: isStory ? null : (message_template || null),
       distribution_plan: isStory ? null : distribution_plan,
       bill_level: isStory ? null : (bill_level || null),

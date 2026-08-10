@@ -297,6 +297,8 @@ export interface Campaign {
   issue_area: string;
   issue_subtopic: string | null;
   target_level: 'federal' | 'state' | 'both';
+  /** User/advocacy campaigns are directional (one way); null for neutral official weigh-ins + storytelling. */
+  direction?: 'support' | 'oppose' | null;
   message_template: string | null;
   status: 'active' | 'paused' | 'archived';
   action_count: number;

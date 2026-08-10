@@ -28,6 +28,7 @@ export function CampaignForm({ initialType }: { initialType?: 'advocacy' | 'stor
   const [issueArea, setIssueArea] = useState(searchParams.get('issue') || '');
   const [issueCategory, setIssueCategory] = useState(searchParams.get('category') || '');
   const [targetLevel, setTargetLevel] = useState<'federal' | 'state' | 'both'>('federal');
+  const [direction, setDirection] = useState<'support' | 'oppose' | ''>('');
   const [messageTemplate, setMessageTemplate] = useState('');
   const [distributionPlan, setDistributionPlan] = useState('');
 
@@ -213,6 +214,10 @@ export function CampaignForm({ initialType }: { initialType?: 'advocacy' | 'stor
       return;
     }
     if (campaignType === 'advocacy') {
+      if (!direction) {
+        setError('Please choose whether this campaign asks people to support or oppose');
+        return;
+      }
       if (!issueArea.trim()) {
         setError('Please select an issue area');
         return;
@@ -250,6 +255,7 @@ export function CampaignForm({ initialType }: { initialType?: 'advocacy' | 'stor
         ? {
             ...sharedBody,
             target_level: targetLevel,
+            direction,
             message_template: messageTemplate.trim() || null,
             distribution_plan: distributionPlan.trim(),
             ...(resolvedBill
@@ -529,6 +535,37 @@ export function CampaignForm({ initialType }: { initialType?: 'advocacy' | 'stor
             )}
           </>
         )}
+      </div>
+
+      {/* Direction — advocacy campaigns are one-way by design */}
+      <div>
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          What position is this campaign taking? <span className="text-red-500">*</span>
+        </label>
+        <div className="grid grid-cols-2 gap-3">
+          {(['support', 'oppose'] as const).map((d) => (
+            <button
+              key={d}
+              type="button"
+              onClick={() => setDirection(d)}
+              className={`px-4 py-3 rounded-xl border-2 text-left transition-colors ${
+                direction === d
+                  ? d === 'support'
+                    ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-900/20'
+                    : 'border-rose-500 bg-rose-50 dark:bg-rose-900/20'
+                  : 'border-gray-200 dark:border-gray-600 hover:border-gray-300 dark:hover:border-gray-500'
+              }`}
+            >
+              <span className="block text-base font-semibold text-gray-900 dark:text-white capitalize">{d}</span>
+              <span className="block text-xs text-gray-500 dark:text-gray-400 mt-0.5">
+                Ask constituents to {d === 'support' ? 'support' : 'oppose'} it
+              </span>
+            </button>
+          ))}
+        </div>
+        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+          Your campaign advocates one position. Every participant&apos;s message will make the case to {direction || 'your chosen side'}.
+        </p>
       </div>
 
       {/* Message Template (optional) */}

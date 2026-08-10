@@ -90,6 +90,8 @@ export const createCampaignSchema = z.object({
   issue_subtopic: z.string().max(200).nullish(),
   // Advocacy fields
   target_level: z.enum(['federal', 'state', 'both']).optional(),
+  // Directional stance for advocacy campaigns (one way only, chosen at creation).
+  direction: z.enum(['support', 'oppose']).optional(),
   message_template: z.string().max(2000).nullish(),
   distribution_plan: z.string().max(1000).nullish(),
   // Optional related bill (federal or state) — all-or-nothing, resolved client-side
@@ -128,6 +130,9 @@ export const createCampaignSchema = z.object({
     }
     if (!data.target_level) {
       ctx.addIssue({ code: 'custom', path: ['target_level'], message: 'Target level is required' });
+    }
+    if (!data.direction) {
+      ctx.addIssue({ code: 'custom', path: ['direction'], message: 'Choose whether the campaign supports or opposes' });
     }
     if (!data.distribution_plan || data.distribution_plan.trim().length < 10) {
       ctx.addIssue({ code: 'custom', path: ['distribution_plan'], message: 'Distribution plan must be at least 10 characters' });

@@ -205,9 +205,19 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
       // the CREATOR's ask, in their voice.
       let ask: string;
       if (!isOfficial) {
-        ask = campaign.message_template
-          ? `${campaign.headline}. ${campaign.message_template}`
-          : campaign.headline;
+        // User/advocacy campaigns are directional — one way only, chosen by the
+        // creator. Build the ask to clearly advocate that position. Legacy
+        // campaigns (no direction stored) fall back to the creator's own copy.
+        if (campaign.direction) {
+          const advocate = campaign.direction === 'oppose'
+            ? 'opposition, and ask the official to oppose it'
+            : 'support, and ask the official to support it too';
+          ask = `The constituent ${campaign.direction.toUpperCase()}S this position: "${campaign.headline}". Write a respectful message expressing clear ${advocate}.${campaign.message_template ? ` Campaign talking points: ${campaign.message_template}` : ''}`;
+        } else {
+          ask = campaign.message_template
+            ? `${campaign.headline}. ${campaign.message_template}`
+            : campaign.headline;
+        }
       } else if (stance === 'support') {
         ask = `The constituent SUPPORTS this position: "${campaign.headline}". Write a respectful message expressing clear support and asking the official to support it too.`;
       } else if (stance === 'oppose') {
