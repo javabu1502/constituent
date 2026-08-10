@@ -37,6 +37,7 @@ interface AdvocacyAnalytics {
   recent_actions: RecentAction[];
   cities_count: number;
   avg_messages_per_action: number;
+  stance_split?: { support: number; oppose: number };
 }
 
 interface StoryListItem {
@@ -664,6 +665,38 @@ export function CampaignAnalytics({ analytics, campaignName, insightsPanel }: Ca
 
       {/* AI-themed insights — what constituents are actually saying */}
       {insightsPanel}
+
+      {/* Where participants stand — only official weigh-ins capture a stance */}
+      {analytics.stance_split && analytics.stance_split.support + analytics.stance_split.oppose > 0 && (() => {
+        const { support, oppose } = analytics.stance_split;
+        const total = support + oppose;
+        const supportPct = Math.round((support / total) * 100);
+        const opposePct = 100 - supportPct;
+        return (
+          <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
+            <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-1">Where participants stand</h3>
+            <p className="text-xs text-gray-500 dark:text-gray-400 mb-4">
+              The position each participant chose before their message was written. {total.toLocaleString()} took a position.
+            </p>
+            <div className="flex h-3 w-full overflow-hidden rounded-full">
+              <div className="bg-emerald-500" style={{ width: `${supportPct}%` }} />
+              <div className="bg-rose-500" style={{ width: `${opposePct}%` }} />
+            </div>
+            <div className="mt-3 flex items-center justify-between text-sm">
+              <div className="flex items-center gap-2">
+                <span className="inline-block h-2.5 w-2.5 rounded-full bg-emerald-500" />
+                <span className="font-semibold text-gray-900 dark:text-white">Support</span>
+                <span className="text-gray-500 dark:text-gray-400">{support.toLocaleString()} ({supportPct}%)</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-gray-500 dark:text-gray-400">{oppose.toLocaleString()} ({opposePct}%)</span>
+                <span className="font-semibold text-gray-900 dark:text-white">Oppose</span>
+                <span className="inline-block h-2.5 w-2.5 rounded-full bg-rose-500" />
+              </div>
+            </div>
+          </div>
+        );
+      })()}
 
       {/* Daily activity chart */}
       <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">

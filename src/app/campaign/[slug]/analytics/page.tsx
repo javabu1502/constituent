@@ -341,6 +341,12 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
     recent_actions: recentActions,
     cities_count: cityCounts.size,
     avg_messages_per_action: totalActions > 0 ? Math.round((totalMessages / totalActions) * 10) / 10 : 0,
+    // Where participants landed. Only official weigh-ins run the stance step, so
+    // this is 0/0 (hidden) for directional user campaigns.
+    stance_split: {
+      support: Number(campaign.support_count) || 0,
+      oppose: Number(campaign.oppose_count) || 0,
+    },
   };
 
   return (
