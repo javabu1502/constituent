@@ -196,9 +196,14 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
             &larr; Back to Dashboard
           </Link>
         </div>
-        <div className="mb-8">
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Campaign Analytics</h1>
-          <p className="text-gray-600 dark:text-gray-400 mt-1">{campaign.headline}</p>
+        <div className="mb-8 flex items-start justify-between gap-3">
+          <div>
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Campaign Analytics</h1>
+            <p className="text-gray-600 dark:text-gray-400 mt-1">{campaign.headline}</p>
+          </div>
+          <Link href={`/campaign/${slug}/report`} className="shrink-0 text-sm font-medium px-4 py-2 rounded-lg bg-purple-600 hover:bg-purple-700 text-white transition-colors">
+            View impact report
+          </Link>
         </div>
         <CampaignAnalytics analytics={storyAnalytics} campaignName={campaign.headline} insightsPanel={insightsPanel} />
       </div>
@@ -360,13 +365,18 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
         </Link>
       </div>
 
-      <div className="mb-8">
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-          Campaign Analytics
-        </h1>
-        <p className="text-gray-600 dark:text-gray-400 mt-1">
-          {campaign.headline}
-        </p>
+      <div className="mb-8 flex items-start justify-between gap-3">
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+            Campaign Analytics
+          </h1>
+          <p className="text-gray-600 dark:text-gray-400 mt-1">
+            {campaign.headline}
+          </p>
+        </div>
+        <Link href={`/campaign/${slug}/report`} className="shrink-0 text-sm font-medium px-4 py-2 rounded-lg bg-purple-600 hover:bg-purple-700 text-white transition-colors">
+          View impact report
+        </Link>
       </div>
 
       <CampaignAnalytics analytics={analytics} campaignName={campaign.headline} insightsPanel={insightsPanel} />
