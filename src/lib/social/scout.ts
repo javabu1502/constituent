@@ -123,18 +123,22 @@ export async function scoutNews(): Promise<number> {
     const res = await fetch(`${SITE}/api/news/civic`, { cache: 'no-store' });
     if (res.ok) {
       const { articles } = (await res.json()) as {
-        articles?: Array<{ title: string; link: string; topic?: { issueCategory?: string }; campaign?: { slug: string } | null }>;
+        articles?: Array<{ title: string; link: string; source?: string; topic?: { issueCategory?: string }; campaign?: { slug: string } | null }>;
       };
       for (const a of (articles ?? []).filter((x) => x.campaign?.slug)) {
+        // Carry the outlet so the writer can attribute the claim ("via AP") —
+        // honest, and required if we ever post to platforms that mandate it.
+        const outlet = a.source?.trim() || '';
         candidates.push({
           source: 'news',
           external_ref: a.link,
           title: a.title,
-          summary: a.title,
+          summary: outlet ? `${a.title} (via ${outlet})` : a.title,
           url: `${SITE}/campaign/${a.campaign!.slug}`,
           issue_area: a.topic?.issueCategory ?? null,
           classification: 'actionable',
           campaign_slug: a.campaign!.slug,
+          metadata: outlet ? { outlet } : {},
         });
       }
     }

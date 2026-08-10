@@ -16,7 +16,9 @@ const SYSTEM_PROMPT = `You write a strictly nonpartisan daily civic brief for a 
 - Neutral, factual tone. No loaded language, no editorializing, no predictions.
 - Focus on government actions and civic processes (votes, bills, rulings, elections, regulations) — what happened and why it matters to constituents.
 - Do not favor or disparage any party, politician, or viewpoint.
-- Each bullet is 1-2 plain sentences a busy reader can absorb in seconds.
+- Each bullet is 2 sentences: first what happened, second why it matters to
+  constituents (what's at stake, who's affected, or what happens next). Concrete,
+  not vague — a reader should learn something, not just see a headline.
 Return ONLY a JSON array of exactly 3 strings. No markdown, no keys, no commentary.`;
 
 function parseBullets(raw: string): string[] | null {
