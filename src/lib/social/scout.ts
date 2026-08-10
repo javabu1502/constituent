@@ -8,8 +8,14 @@
  * risk that we want the loop proven before we take on.
  */
 import { createAdminClient } from '@/lib/supabase';
+import { fetchBillCard } from '@/lib/congress-api';
+import { CURRENT_CONGRESS } from '@/lib/votes';
 
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.mydemocracy.app';
+
+// How recent a bill's latest action must be to count as a real-time signal.
+// 4 days covers weekend/cron gaps without resurfacing stale movement.
+const LEGISLATIVE_FRESHNESS_DAYS = 4;
 
 export interface Signal {
   id: string;
@@ -150,6 +156,79 @@ export async function scoutNews(): Promise<number> {
   const { error } = await admin.from('social_signals').insert(rows);
   if (error) {
     console.error('[scout-news] insert failed:', error.message);
+    return 0;
+  }
+  return rows.length;
+}
+
+/**
+ * Real-time legislative feed. Every bill-specific weigh-in campaign tracks an
+ * actual bill; when that bill MOVES on Congress.gov (reported out of committee,
+ * floor vote, passed a chamber, signed), that's the most timely, most
+ * actionable thing we can post — a bill our users can weigh in on RIGHT NOW
+ * just changed status. We poll each tracked bill's latest action and, when it
+ * landed within the freshness window, emit an actionable signal linking to the
+ * campaign. The exact Congress.gov action text rides along in the summary so
+ * the downstream accuracy guardrail can verify every claim against source.
+ * fetchBillCard day-caches per bill, so re-runs don't hammer the API.
+ */
+export async function scoutLegislativeActions(limit = 30): Promise<number> {
+  const admin = createAdminClient();
+
+  const { data: campaigns, error } = await admin
+    .from('campaigns')
+    .select('slug, headline, issue_area, bill_congress, bill_type, bill_number')
+    .eq('is_official', true)
+    .eq('status', 'active')
+    .eq('approval_status', 'approved')
+    .eq('is_bill_specific', true)
+    .not('bill_type', 'is', null)
+    .not('bill_number', 'is', null)
+    .limit(limit);
+
+  if (error || !campaigns?.length) return 0;
+
+  const cutoff = new Date(Date.now() - LEGISLATIVE_FRESHNESS_DAYS * 24 * 60 * 60_000);
+  type Candidate = Omit<Signal, 'id' | 'status'> & { metadata?: Record<string, unknown> };
+  const candidates: Candidate[] = [];
+
+  for (const c of campaigns) {
+    const congress = Number(c.bill_congress) || CURRENT_CONGRESS;
+    const card = await fetchBillCard(congress, String(c.bill_type), String(c.bill_number)).catch(() => null);
+    if (!card?.latestAction || !card.latestActionDate) continue;
+    // Only surface genuinely recent movement.
+    const actionDate = new Date(card.latestActionDate);
+    if (isNaN(actionDate.getTime()) || actionDate < cutoff) continue;
+
+    candidates.push({
+      source: 'legislative',
+      external_ref: `bill-action-${c.slug}-${card.latestActionDate}`,
+      title: `${card.ref}: ${card.latestAction}`,
+      summary: `${card.ref} — ${card.latestAction} (${card.latestActionDate}). Weigh-in: ${c.headline}`,
+      url: `${SITE}/campaign/${c.slug}`,
+      issue_area: c.issue_area,
+      classification: 'actionable',
+      campaign_slug: c.slug,
+      metadata: { bill_ref: card.ref, action_date: card.latestActionDate, bill_url: card.url },
+    });
+  }
+
+  if (!candidates.length) return 0;
+  const refs = candidates.map((c) => c.external_ref).filter(Boolean) as string[];
+  const { data: existing } = await admin
+    .from('social_signals')
+    .select('external_ref')
+    .eq('source', 'legislative')
+    .in('external_ref', refs);
+  const have = new Set((existing ?? []).map((r) => r.external_ref));
+
+  const rows = candidates
+    .filter((c) => !have.has(c.external_ref))
+    .map((c) => ({ ...c, status: 'new', metadata: c.metadata ?? {} }));
+  if (!rows.length) return 0;
+  const { error: insErr } = await admin.from('social_signals').insert(rows);
+  if (insErr) {
+    console.error('[scout-legislative] insert failed:', insErr.message);
     return 0;
   }
   return rows.length;

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createAdminClient } from '@/lib/supabase';
 import { getKillSwitch, getMode } from '@/lib/social/config';
-import { scoutCampaigns, scoutNews, nextSignal, markSignalUsed } from '@/lib/social/scout';
+import { scoutCampaigns, scoutNews, scoutLegislativeActions, nextSignal, markSignalUsed } from '@/lib/social/scout';
 import { loadBrandBrain } from '@/lib/social/brand-brain';
 import { writePost } from '@/lib/social/writer';
 import { runGuardrails, isNearDuplicate } from '@/lib/social/guardrails';
@@ -49,7 +49,7 @@ export async function GET(request: NextRequest) {
   }
 
   const admin = createAdminClient();
-  const scouted = (await scoutCampaigns()) + (await scoutNews());
+  const scouted = (await scoutCampaigns()) + (await scoutNews()) + (await scoutLegislativeActions());
 
   const signal = await nextSignal();
   if (!signal) {
@@ -79,13 +79,15 @@ export async function GET(request: NextRequest) {
   }
 
   // Guardrails + near-duplicate check against recent drafts/posts.
-  const isNews = signal.source === 'news';
+  // News and legislative-action signals both carry external factual claims
+  // (a headline, a bill's status) that must trace to their source text.
+  const isFactual = signal.source === 'news' || signal.source === 'legislative';
   const gate = runGuardrails({
     text: draft.text,
     sourceText: `${signal.title ?? ''}\n${signal.summary ?? ''}`,
     maxLength: BLUESKY_MAX_GRAPHEMES,
     graphemeLength,
-    strictAccuracy: isNews, // news claims must trace to the source or they're blocked
+    strictAccuracy: isFactual, // factual claims must trace to the source or they're blocked
   });
   const { data: recentRows } = await admin
     .from('social_posts')

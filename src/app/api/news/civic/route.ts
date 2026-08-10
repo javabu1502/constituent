@@ -120,7 +120,7 @@ const DIRECT_FEEDS: { url: string; sourceName: string }[] = [
 ];
 
 const CACHE_KEY = 'civic-news';
-const CACHE_TTL_MS = 2 * 60 * 60 * 1000; // 2 hours
+const CACHE_TTL_MS = 45 * 60 * 1000; // 45 min — fresh enough to feel real-time without hammering feeds
 
 // Keyword-to-policy-area classification (checked against title + description)
 const TOPIC_PATTERNS: { pattern: RegExp; topic: ArticleTopic }[] = [
@@ -387,6 +387,33 @@ function detectBill(title: string): NewsArticle['bill'] {
   }
 }
 
+// Align the article-classifier's topic labels to the campaigns' issue_area
+// values. Without this most topics (guns, labor, economy, tech, housing, taxes)
+// never matched a campaign, so news never surfaced a "weigh in" CTA — the
+// classifier says "Gun Violence"/"Worker Rights" while campaigns are keyed
+// "guns"/"labor". Keyed by topic.issue (lower-cased).
+const TOPIC_TO_ISSUE_AREA: Record<string, string> = {
+  immigration: 'immigration',
+  healthcare: 'healthcare',
+  'climate change': 'environment',
+  'gun violence': 'guns',
+  education: 'education',
+  'tax reform': 'taxation',
+  'affordable housing': 'housing',
+  'social security': 'economy',
+  veterans: 'veterans',
+  elections: 'civil rights',
+  'supreme court': 'civil rights',
+  'cost of living': 'economy',
+  infrastructure: 'infrastructure',
+  'criminal justice reform': 'civil rights',
+  'child care': 'economy',
+  'ai & tech': 'technology',
+  'foreign policy': 'foreign policy',
+  'worker rights': 'labor',
+  'civil rights': 'civil rights',
+};
+
 /**
  * Map each issue to the most active approved campaign on that issue, so news
  * about a topic can recruit readers into an existing campaign.
@@ -516,7 +543,9 @@ export async function GET(request: NextRequest) {
     const articles = diverseArticles.slice(0, 40).map((a) => ({
       ...a,
       bill: detectBill(a.title),
-      campaign: a.topic ? campaignsByIssue.get(a.topic.issue.toLowerCase()) ?? null : null,
+      campaign: a.topic
+        ? campaignsByIssue.get(TOPIC_TO_ISSUE_AREA[a.topic.issue.toLowerCase()] ?? a.topic.issue.toLowerCase()) ?? null
+        : null,
     }));
 
     // Cache result
