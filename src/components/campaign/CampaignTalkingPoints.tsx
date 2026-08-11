@@ -8,10 +8,12 @@ export function CampaignTalkingPoints({
   template,
   orgName,
   accent,
+  subtitle,
 }: {
   template: string;
   orgName: string | null;
   accent?: string | null;
+  subtitle?: string;
 }) {
   const color = accent || '#7C3AED';
   return (
@@ -23,8 +25,8 @@ export function CampaignTalkingPoints({
         </h2>
       </div>
       <p className="text-xs text-gray-500 dark:text-gray-400 mb-4">
-        These points are woven into every message this campaign sends. The rest of your message is written in your own
-        words — you review and edit everything before it goes anywhere.
+        {subtitle ??
+          'These points are woven into every message this campaign sends. The rest of your message is written in your own words — you review and edit everything before it goes anywhere.'}
       </p>
       <blockquote className="border-l-4 pl-4 py-1 text-sm text-gray-700 dark:text-gray-300 whitespace-pre-line" style={{ borderColor: color }}>
         {template}

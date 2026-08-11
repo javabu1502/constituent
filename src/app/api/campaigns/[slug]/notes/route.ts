@@ -16,6 +16,7 @@ const noteSchema = z.object({
   body: z.string().min(1).max(5000),
   legislator_id: z.string().max(120).nullish(),
   legislator_name: z.string().max(200).nullish(),
+  stakeholder_id: z.string().uuid().nullish(),
 });
 
 async function loadOwned(slug: string) {
@@ -53,9 +54,10 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ slu
       campaign_id: res.campaign.id,
       legislator_id: parsed.data.legislator_id ?? null,
       legislator_name: parsed.data.legislator_name ?? null,
+      stakeholder_id: parsed.data.stakeholder_id ?? null,
       body: parsed.data.body.trim(),
     })
-    .select('id, legislator_id, legislator_name, body, created_at')
+    .select('id, legislator_id, legislator_name, stakeholder_id, body, created_at')
     .single();
   if (error) {
     console.error('[notes] insert failed:', error);

@@ -36,7 +36,7 @@ function msg(overrides: Partial<ReportSourceRows['messages'][number]> = {}) {
 }
 
 function emptyRows(): ReportSourceRows {
-  return { messages: [], actions: [], stories: null, socialPosts: [], insights: null, stages: null, orgEffort: null };
+  return { messages: [], actions: [], stories: null, socialPosts: [], insights: null, stages: null, orgEffort: null, coalition: null };
 }
 
 describe('assembleCampaignReport', () => {
@@ -178,6 +178,16 @@ describe('assembleCampaignReport', () => {
     const report = assembleCampaignReport(campaign, rows, NOW);
     expect(report.orgEffort?.meetings).toBe(14);
     expect(report.orgEffort?.whip?.committed).toBe(3);
+  });
+
+  it('judges outcome against the campaign goal (oppose + dead bill = win)', () => {
+    const passSupport = assembleCampaignReport({ ...campaign, direction: 'support' as const, outcome: 'passed' }, emptyRows(), NOW);
+    expect(passSupport.outcome).toEqual({ result: 'passed', note: null, goalMet: true });
+    const killOppose = assembleCampaignReport({ ...campaign, direction: 'oppose' as const, outcome: 'died_committee' }, emptyRows(), NOW);
+    expect(killOppose.outcome?.goalMet).toBe(true);
+    const lostOppose = assembleCampaignReport({ ...campaign, direction: 'oppose' as const, outcome: 'passed' }, emptyRows(), NOW);
+    expect(lostOppose.outcome?.goalMet).toBe(false);
+    expect(assembleCampaignReport(campaign, emptyRows(), NOW).outcome).toBeNull();
   });
 
   it('keeps the report JSON-serializable end to end', () => {

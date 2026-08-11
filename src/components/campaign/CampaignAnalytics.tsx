@@ -560,11 +560,79 @@ function StorytellingAnalytics({ analytics, campaignName, insightsPanel }: { ana
 
 /** Browse + search the individual messages, and export them (filtered) to CSV.
  * The "dig deeper" companion to the aggregate charts. */
+/**
+ * Advocate overview — click a name in the message browser to see one
+ * person's whole record: every official they wrote, when, and a ready-made
+ * shout-out. Recognition is the retention engine for advocacy orgs, so this
+ * makes thanking an advocate a ten-second act.
+ */
+function AdvocateOverview({
+  advocate,
+  messages,
+  onClose,
+}: {
+  advocate: { name: string; city: string | null };
+  messages: NonNullable<AdvocacyAnalytics['messages']>;
+  onClose: () => void;
+}) {
+  const [copied, setCopied] = useState(false);
+  const theirs = messages
+    .filter((m) => m.name === advocate.name && (m.city ?? null) === advocate.city)
+    .sort((a, b) => String(a.created_at).localeCompare(String(b.created_at)));
+  const officials = [...new Set(theirs.map((m) => m.official).filter(Boolean))] as string[];
+  const first = theirs[0]?.created_at ? new Date(theirs[0].created_at) : null;
+  const last = theirs[theirs.length - 1]?.created_at ? new Date(theirs[theirs.length - 1].created_at) : null;
+  const fmt = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  const firstName = advocate.name.split(' ')[0];
+
+  const shoutOut = `Shout-out to ${firstName}${advocate.city ? ` from ${advocate.city}` : ''}, who has sent ${theirs.length} message${theirs.length !== 1 ? 's' : ''} to ${officials.length} lawmaker${officials.length !== 1 ? 's' : ''} in this campaign. Advocacy runs on people like ${firstName}. 🙌`;
+
+  return (
+    <div className="mb-4 p-4 rounded-xl border-2 border-purple-200 dark:border-purple-800 bg-purple-50/50 dark:bg-purple-900/10">
+      <div className="flex items-start justify-between gap-2 mb-2">
+        <div>
+          <h4 className="text-sm font-semibold text-gray-900 dark:text-white">
+            {advocate.name}
+            {advocate.city && <span className="font-normal text-gray-500 dark:text-gray-400"> · {advocate.city}</span>}
+          </h4>
+          <p className="text-xs text-gray-500 dark:text-gray-400">
+            {theirs.length} message{theirs.length !== 1 ? 's' : ''} to {officials.length} official{officials.length !== 1 ? 's' : ''}
+            {first && last && ` · active ${fmt(first)}${+first !== +last ? ` – ${fmt(last)}` : ''}`}
+          </p>
+        </div>
+        <button type="button" onClick={onClose} className="text-xs text-gray-500 dark:text-gray-400 hover:underline shrink-0">
+          Close
+        </button>
+      </div>
+      <ul className="space-y-1 mb-3">
+        {theirs.map((m, i) => (
+          <li key={i} className="text-xs text-gray-600 dark:text-gray-400">
+            <span className="text-gray-400 dark:text-gray-500 mr-1.5">{m.created_at ? fmt(new Date(m.created_at)) : ''}</span>
+            wrote {m.official || 'an official'}
+          </li>
+        ))}
+      </ul>
+      <button
+        type="button"
+        onClick={() => {
+          void navigator.clipboard.writeText(shoutOut);
+          setCopied(true);
+          setTimeout(() => setCopied(false), 2000);
+        }}
+        className="text-xs font-medium px-3 py-1.5 rounded-lg bg-purple-600 hover:bg-purple-700 text-white transition-colors"
+      >
+        {copied ? 'Copied!' : 'Copy a shout-out to recognize them'}
+      </button>
+    </div>
+  );
+}
+
 function MessageBrowser({ messages, slug }: { messages: NonNullable<AdvocacyAnalytics['messages']>; slug: string }) {
   const [q, setQ] = useState('');
   const [stateFilter, setStateFilter] = useState('');
   const [officialFilter, setOfficialFilter] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
+  const [advocate, setAdvocate] = useState<{ name: string; city: string | null } | null>(null);
 
   const uniq = (vals: Array<string | null>) => [...new Set(vals.filter((v): v is string => !!v))].sort();
   const states = useMemo(() => uniq(messages.map((m) => m.state)), [messages]);
@@ -639,12 +707,25 @@ function MessageBrowser({ messages, slug }: { messages: NonNullable<AdvocacyAnal
           ))}
         </select>
       </div>
+      {advocate && <AdvocateOverview advocate={advocate} messages={messages} onClose={() => setAdvocate(null)} />}
+
       <div className="max-h-[34rem] overflow-y-auto space-y-2">
         {filtered.slice(0, 300).map((m, i) => (
           <details key={i} className="group border border-gray-200 dark:border-gray-700 rounded-lg p-3">
             <summary className="cursor-pointer list-none flex items-center justify-between gap-2">
               <span className="text-sm text-gray-900 dark:text-white">
-                <span className="font-medium">{m.name || 'Constituent'}</span>
+                {m.name ? (
+                  <button
+                    type="button"
+                    onClick={(e) => { e.preventDefault(); setAdvocate({ name: m.name!, city: m.city ?? null }); }}
+                    className="font-medium text-purple-700 dark:text-purple-300 hover:underline"
+                    title="See this advocate's activity"
+                  >
+                    {m.name}
+                  </button>
+                ) : (
+                  <span className="font-medium">Constituent</span>
+                )}
                 {(m.city || m.state) && <span className="text-gray-500 dark:text-gray-400"> · {[m.city, m.state].filter(Boolean).join(', ')}</span>}
                 {m.official && <span className="text-gray-500 dark:text-gray-400"> → {m.official}</span>}
               </span>

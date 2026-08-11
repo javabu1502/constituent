@@ -27,6 +27,14 @@ const DELIVERY_LABELS: Record<string, string> = {
 
 const STAGE_LABELS: Record<string, string> = STAGE_GOAL_LABELS;
 
+const OUTCOME_LABELS: Record<string, string> = {
+  passed: 'Legislation passed',
+  failed: 'Legislation failed',
+  died_committee: 'Died in committee',
+  vetoed: 'Vetoed',
+  withdrawn: 'Withdrawn',
+};
+
 function Stat({ label, value, sub }: { label: string; value: string | number; sub?: string }) {
   return (
     <div className="rounded-xl border border-gray-200 dark:border-gray-700 p-4 print:border-gray-300">
@@ -49,7 +57,7 @@ export default async function CampaignReportPage({ params }: PageProps) {
   const admin = createAdminClient();
   const { data: campaign } = await admin
     .from('campaigns')
-    .select('id, slug, headline, org_name, brand_color, is_official, direction, campaign_type, support_count, oppose_count, created_at, creator_id')
+    .select('id, slug, headline, org_name, brand_color, is_official, direction, campaign_type, support_count, oppose_count, created_at, creator_id, outcome, outcome_note')
     .eq('slug', slug)
     .single();
   if (!campaign) notFound();
@@ -90,6 +98,18 @@ export default async function CampaignReportPage({ params }: PageProps) {
             Active since {started} · Report generated {generated}
           </p>
         </div>
+
+        {/* Outcome banner — judged against the campaign's goal */}
+        {report.outcome && (
+          <div className={`rounded-xl border-2 p-4 ${report.outcome.goalMet
+            ? 'border-emerald-300 dark:border-emerald-700 bg-emerald-50 dark:bg-emerald-900/20'
+            : 'border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700/30'}`}>
+            <p className={`text-sm font-bold uppercase tracking-wide ${report.outcome.goalMet ? 'text-emerald-700 dark:text-emerald-300' : 'text-gray-700 dark:text-gray-300'}`}>
+              {report.outcome.goalMet ? '✓ Goal achieved' : 'Outcome'} · {OUTCOME_LABELS[report.outcome.result] ?? report.outcome.result}
+            </p>
+            {report.outcome.note && <p className="text-sm text-gray-700 dark:text-gray-300 mt-1">{report.outcome.note}</p>}
+          </div>
+        )}
 
         {/* Reach */}
         <section>
@@ -302,6 +322,37 @@ export default async function CampaignReportPage({ params }: PageProps) {
                   />
                 </>
               )}
+            </div>
+          </section>
+        )}
+
+        {/* Coalition — who else was in the fight */}
+        {report.coalition && (
+          <section>
+            <h2 className="text-base font-semibold mb-3">Coalition landscape</h2>
+            <div className="grid md:grid-cols-2 gap-4">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-wide text-emerald-600 dark:text-emerald-400 mb-2">
+                  Supporting ({report.coalition.supporters.length})
+                </p>
+                {report.coalition.supporters.map((s) => (
+                  <div key={s.name} className="mb-2">
+                    <p className="text-sm font-medium">{s.name}</p>
+                    {s.statement && <p className="text-xs text-gray-500 dark:text-gray-400 italic">&ldquo;{s.statement}&rdquo;</p>}
+                  </div>
+                ))}
+              </div>
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-wide text-rose-600 dark:text-rose-400 mb-2">
+                  Opposing ({report.coalition.opponents.length})
+                </p>
+                {report.coalition.opponents.map((s) => (
+                  <div key={s.name} className="mb-2">
+                    <p className="text-sm font-medium">{s.name}</p>
+                    {s.statement && <p className="text-xs text-gray-500 dark:text-gray-400 italic">&ldquo;{s.statement}&rdquo;</p>}
+                  </div>
+                ))}
+              </div>
             </div>
           </section>
         )}

@@ -120,12 +120,15 @@ export async function getCachedInsights(campaignId: string, kind: InsightKind): 
   const admin = createAdminClient();
   const { data } = await admin
     .from('campaign_insights')
-    .select('insights, source_count, created_at')
+    .select('insights, source_count, created_at, model_version')
     .eq('campaign_id', campaignId)
     .eq('kind', kind)
     .maybeSingle();
   if (!data?.insights) return null;
-  const stale = Date.now() - new Date(data.created_at as string).getTime() > FRESH_MS;
+  // Older-version snapshots (e.g. pre-drill-down) surface as stale so the
+  // owner sees the refresh hint and picks up the new format.
+  const stale =
+    Date.now() - new Date(data.created_at as string).getTime() > FRESH_MS || data.model_version !== MODEL_VERSION;
   const insights = data.insights as CampaignInsights;
   return { insights, stale };
 }
@@ -146,8 +149,11 @@ export async function generateCampaignInsights(campaignId: string, kind: Insight
 
   let raw: string;
   try {
-    raw = await callClaude(SYSTEM_PROMPT, `${sources.length} ${noun} for this campaign:\n\n${numbered}\n\nProduce the themed read.`, 1200);
-  } catch {
+    // v2 returns up to 6 verbatim quotes per theme — needs real headroom or
+    // the JSON truncates and parsing fails.
+    raw = await callClaude(SYSTEM_PROMPT, `${sources.length} ${noun} for this campaign:\n\n${numbered}\n\nProduce the themed read.`, 4000);
+  } catch (err) {
+    console.error('[insights] generation failed:', err);
     return null;
   }
 

@@ -208,6 +208,18 @@ export default async function DashboardPage() {
                             Storytelling
                           </span>
                         )}
+                        {campaign.outcome && (
+                          <span className={`px-2.5 py-1 text-xs font-semibold rounded-full ${
+                            (campaign.direction === 'oppose' ? campaign.outcome !== 'passed' : campaign.outcome === 'passed')
+                              ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300'
+                              : 'bg-gray-200 text-gray-600 dark:bg-gray-700 dark:text-gray-300'
+                          }`}>
+                            {String(campaign.outcome) === 'passed' ? (campaign.direction === 'oppose' ? 'Passed (lost)' : 'Passed ✓') :
+                             String(campaign.outcome) === 'died_committee' ? (campaign.direction === 'oppose' ? 'Stopped ✓' : 'Died in committee') :
+                             String(campaign.outcome) === 'failed' ? (campaign.direction === 'oppose' ? 'Defeated ✓' : 'Failed') :
+                             String(campaign.outcome) === 'vetoed' ? 'Vetoed' : 'Withdrawn'}
+                          </span>
+                        )}
                         {ab && (
                           <span className={`px-2.5 py-1 text-xs font-medium rounded-full ${ab.cls}`}>{ab.label}</span>
                         )}
@@ -285,6 +297,15 @@ export default async function DashboardPage() {
   if (accountType === 'organization') {
     const totalActions = allCampaigns.reduce((n, c) => n + (Number(c.action_count) || 0), 0);
     const totalStories = allCampaigns.reduce((n, c) => n + (Number(c.story_count) || 0), 0);
+    // Portfolio scoreboard: outcomes judged against each campaign's goal.
+    let wins = 0;
+    let losses = 0;
+    let ongoing = 0;
+    for (const c of topLevelCampaigns) {
+      if (!c.outcome) { ongoing += 1; continue; }
+      const met = c.direction === 'oppose' ? c.outcome !== 'passed' : c.outcome === 'passed';
+      if (met) wins += 1; else losses += 1;
+    }
     return (
       <div className="max-w-6xl mx-auto px-4 py-8">
         <div className="mb-8 flex items-start justify-between gap-3">
@@ -292,6 +313,13 @@ export default async function DashboardPage() {
             <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Organization Dashboard</h1>
             <p className="text-gray-600 dark:text-gray-400 mt-1">
               {(profile?.name as string) || user.email} · advocacy account
+              {(wins + losses > 0) && (
+                <span className="ml-2 text-sm">
+                  · record: <span className="font-semibold text-emerald-600 dark:text-emerald-400">{wins} won</span>
+                  {losses > 0 && <> · <span className="font-semibold text-gray-500">{losses} lost</span></>}
+                  {ongoing > 0 && <> · {ongoing} ongoing</>}
+                </span>
+              )}
             </p>
           </div>
           <Link href="/campaign/create" className="shrink-0 text-sm font-medium px-4 py-2 rounded-lg bg-purple-600 hover:bg-purple-700 text-white transition-colors">

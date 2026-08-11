@@ -6,6 +6,8 @@ import { CampaignAnalytics } from '@/components/campaign/CampaignAnalytics';
 import { CampaignStages } from '@/components/campaign/CampaignStages';
 import { BillStatusPanel } from '@/components/campaign/BillStatusPanel';
 import { WhipBoard } from '@/components/campaign/WhipBoard';
+import { CoalitionPanel } from '@/components/campaign/CoalitionPanel';
+import { CampaignTalkingPoints } from '@/components/campaign/CampaignTalkingPoints';
 import { CampaignInsightsPanel } from '@/components/campaign/CampaignInsightsPanel';
 import { getCachedInsights } from '@/lib/insights';
 import { usageLabels } from '@/lib/story-usage';
@@ -421,6 +423,19 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
       )}
 
       {!campaign.parent_campaign_id && <WhipBoard slug={slug} />}
+
+      {!campaign.parent_campaign_id && <CoalitionPanel slug={slug} initialOutcome={campaign.outcome ?? null} />}
+
+      {campaign.message_template && (
+        <CampaignTalkingPoints
+          template={campaign.message_template}
+          orgName={campaign.org_name ?? null}
+          accent={campaign.brand_color ?? null}
+          subtitle={
+            'Your framing, side by side with reality: compare these points against "What constituents are saying" below — when their own words echo yours, the talking points are landing.'
+          }
+        />
+      )}
 
       <CampaignStages
         campaign={{

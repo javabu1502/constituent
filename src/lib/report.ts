@@ -69,6 +69,13 @@ export interface CampaignReport {
     meetings: number;
     whip: { for: number; committed: number; uncommitted: number; against: number } | null;
   } | null;
+  /** How the legislation ended, judged against the campaign's goal. */
+  outcome: { result: string; note: string | null; goalMet: boolean } | null;
+  /** Coalition map: who else was in the fight. */
+  coalition: {
+    supporters: { name: string; statement: string | null }[];
+    opponents: { name: string; statement: string | null }[];
+  } | null;
   insights: CampaignInsights | null;
   generatedAt: string;
 }
@@ -84,6 +91,8 @@ type CampaignRow = {
   support_count: number | null;
   oppose_count: number | null;
   created_at: string;
+  outcome?: string | null;
+  outcome_note?: string | null;
 };
 
 type MessageRow = {
@@ -126,6 +135,7 @@ export interface ReportSourceRows {
   stages: { slug: string; headline: string; goal: string; constituents: number; messages: number }[] | null;
   /** Org-side effort (notes + whip), pre-counted by the fetch layer. */
   orgEffort: CampaignReport['orgEffort'];
+  coalition: CampaignReport['coalition'];
 }
 
 const DAY_MS = 24 * 60 * 60 * 1000;
@@ -334,6 +344,16 @@ export function assembleCampaignReport(campaign: CampaignRow, rows: ReportSource
     social,
     stages: rows.stages,
     orgEffort: rows.orgEffort,
+    // Outcome is judged against the campaign's GOAL: an oppose campaign that
+    // kills a bill has WON.
+    outcome: campaign.outcome
+      ? {
+          result: campaign.outcome,
+          note: campaign.outcome_note ?? null,
+          goalMet: campaign.direction === 'oppose' ? campaign.outcome !== 'passed' : campaign.outcome === 'passed',
+        }
+      : null,
+    coalition: rows.coalition,
     insights: rows.insights,
     generatedAt: new Date(nowMs).toISOString(),
   };
@@ -409,10 +429,14 @@ export async function buildCampaignReport(campaign: CampaignRow, nowMs: number):
   }
 
   // Org-side effort: meeting notes + whip standing (kept on the parent).
-  const [{ count: noteCount }, { data: positionRows }] = await Promise.all([
+  const [{ count: noteCount }, { data: positionRows }, { data: stakeholderRows }] = await Promise.all([
     admin.from('campaign_notes').select('id', { count: 'exact', head: true }).eq('campaign_id', campaign.id),
     admin.from('legislator_positions').select('position').eq('campaign_id', campaign.id),
+    admin.from('campaign_stakeholders').select('name, side, statement').eq('campaign_id', campaign.id).order('created_at'),
   ]);
+  const supporters = (stakeholderRows ?? []).filter((s) => s.side === 'support').map((s) => ({ name: s.name as string, statement: (s.statement as string) ?? null }));
+  const opponents = (stakeholderRows ?? []).filter((s) => s.side === 'oppose').map((s) => ({ name: s.name as string, statement: (s.statement as string) ?? null }));
+  const coalition = supporters.length + opponents.length > 0 ? { supporters, opponents } : null;
   let orgEffort: CampaignReport['orgEffort'] = null;
   const whipTally = { for: 0, committed: 0, uncommitted: 0, against: 0 };
   for (const p of positionRows ?? []) {
@@ -433,6 +457,7 @@ export async function buildCampaignReport(campaign: CampaignRow, nowMs: number):
       insights: insightsRes?.insights ?? null,
       stages,
       orgEffort,
+      coalition,
     },
     nowMs
   );
