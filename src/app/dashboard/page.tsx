@@ -182,7 +182,7 @@ export default async function DashboardPage() {
               return (
               <div
                 key={campaign.id}
-                className={`bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5${stages.length > 0 ? ' sm:col-span-2' : ''}`}
+                className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5"
               >
                 {(() => {
                   const isStory = campaign.campaign_type === 'storytelling';
