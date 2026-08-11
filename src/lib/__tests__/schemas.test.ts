@@ -188,9 +188,64 @@ describe('createCampaignSchema', () => {
       description: 'A campaign to protect local parks from development.',
       issue_area: 'Environment',
       target_level: 'state',
+      direction: 'support',
       distribution_plan: 'Share with our neighborhood association and local environmental groups.',
     });
     expect(result.success).toBe(true);
+  });
+
+  it('accepts a committee stage with parent + committee', () => {
+    const result = createCampaignSchema.safeParse({
+      headline: 'Pass Energy & Commerce',
+      description: 'Committee-stage push for our parks bill.',
+      issue_area: 'Environment',
+      target_level: 'federal',
+      direction: 'support',
+      distribution_plan: 'Share with our neighborhood association and local environmental groups.',
+      parent_campaign_id: '4c3f0f9e-58a5-4f5e-9f2e-0d5cbe6f7a11',
+      stage_goal: 'committee',
+      target_committee: 'HSIF',
+    });
+    expect(result.success).toBe(true);
+  });
+
+  it('rejects a stage goal without a parent campaign', () => {
+    const result = createCampaignSchema.safeParse({
+      headline: 'Pass Energy & Commerce',
+      description: 'Committee-stage push for our parks bill.',
+      issue_area: 'Environment',
+      target_level: 'federal',
+      direction: 'support',
+      distribution_plan: 'Share with our neighborhood association and local environmental groups.',
+      stage_goal: 'committee',
+      target_committee: 'HSIF',
+    });
+    expect(result.success).toBe(false);
+  });
+
+  it('rejects a committee stage without a committee', () => {
+    const result = createCampaignSchema.safeParse({
+      headline: 'Pass Energy & Commerce',
+      description: 'Committee-stage push for our parks bill.',
+      issue_area: 'Environment',
+      target_level: 'federal',
+      direction: 'support',
+      distribution_plan: 'Share with our neighborhood association and local environmental groups.',
+      parent_campaign_id: '4c3f0f9e-58a5-4f5e-9f2e-0d5cbe6f7a11',
+      stage_goal: 'committee',
+    });
+    expect(result.success).toBe(false);
+  });
+
+  it('rejects an advocacy campaign missing direction', () => {
+    const result = createCampaignSchema.safeParse({
+      headline: 'Save Our Parks',
+      description: 'A campaign to protect local parks from development.',
+      issue_area: 'Environment',
+      target_level: 'state',
+      distribution_plan: 'Share with our neighborhood association and local environmental groups.',
+    });
+    expect(result.success).toBe(false);
   });
 
   it('rejects headline under 3 chars', () => {

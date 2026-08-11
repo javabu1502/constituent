@@ -5,6 +5,7 @@ import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase';
 import { buildCampaignReport } from '@/lib/report';
 import { PrintReportButton } from '@/components/campaign/PrintReportButton';
+import { STAGE_GOAL_LABELS } from '@/lib/stages';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -16,6 +17,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { data } = await admin.from('campaigns').select('headline').eq('slug', slug).single();
   return { title: data ? `Impact Report — ${data.headline}` : 'Impact Report', robots: { index: false } };
 }
+
+const DELIVERY_LABELS: Record<string, string> = {
+  email: 'Email',
+  webform: 'Web form',
+  phone: 'Phone',
+  cwc: 'Direct to Congress (CWC)',
+};
+
+const STAGE_LABELS: Record<string, string> = STAGE_GOAL_LABELS;
 
 function Stat({ label, value, sub }: { label: string; value: string | number; sub?: string }) {
   return (
@@ -49,7 +59,7 @@ export default async function CampaignReportPage({ params }: PageProps) {
   const accent = (campaign.brand_color as string) || '#7C3AED';
   const started = new Date(report.campaign.startDate).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
   const generated = new Date(report.generatedAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-  const maxMomentum = Math.max(1, ...report.momentum.map((d) => d.count));
+  const totalGrowth = report.growth.length ? report.growth[report.growth.length - 1].cumulative : 0;
   const stanceTotal = report.stance ? report.stance.support + report.stance.oppose : 0;
 
   return (
@@ -87,7 +97,11 @@ export default async function CampaignReportPage({ params }: PageProps) {
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
             <Stat label="Constituents mobilized" value={report.reach.constituents.toLocaleString()} />
             <Stat label="Messages to officials" value={report.reach.messages.toLocaleString()} />
-            <Stat label="Officials contacted" value={report.reach.officialsContacted.toLocaleString()} />
+            <Stat
+              label="Officials contacted"
+              value={report.reach.officialsContacted.toLocaleString()}
+              sub={report.officialLevels ? `${report.officialLevels.federal} federal · ${report.officialLevels.state} state` : undefined}
+            />
             <Stat label="States reached" value={report.reach.statesReached.toLocaleString()} />
             <Stat label="Cities reached" value={report.reach.citiesReached.toLocaleString()} />
             <Stat
@@ -98,15 +112,21 @@ export default async function CampaignReportPage({ params }: PageProps) {
           </div>
         </section>
 
-        {/* Momentum */}
-        <section>
-          <h2 className="text-base font-semibold mb-3">Momentum (last 30 days)</h2>
-          <div className="flex items-end gap-0.5 h-24">
-            {report.momentum.map((d) => (
-              <div key={d.date} className="flex-1 rounded-t" style={{ height: `${(d.count / maxMomentum) * 100}%`, minHeight: d.count > 0 ? 2 : 0, backgroundColor: accent, opacity: d.count > 0 ? 1 : 0.15 }} title={`${d.date}: ${d.count}`} />
-            ))}
-          </div>
-        </section>
+        {/* Growth — cumulative since launch, so the trajectory reads at any volume */}
+        {totalGrowth > 0 && (
+          <section>
+            <h2 className="text-base font-semibold mb-3">Participation growth since launch</h2>
+            <div className="flex items-end gap-0.5 h-24">
+              {report.growth.map((d) => (
+                <div key={d.date} className="flex-1 rounded-t" style={{ height: `${(d.cumulative / totalGrowth) * 100}%`, minHeight: d.cumulative > 0 ? 2 : 0, backgroundColor: accent, opacity: 0.85 }} title={`${d.date}: ${d.cumulative.toLocaleString()} total`} />
+              ))}
+            </div>
+            <div className="mt-1 flex justify-between text-[11px] text-gray-400 dark:text-gray-500">
+              <span>Launch · {started}</span>
+              <span>{totalGrowth.toLocaleString()} total participants</span>
+            </div>
+          </section>
+        )}
 
         {/* Stance (neutral campaigns only) */}
         {report.stance && (
@@ -119,6 +139,72 @@ export default async function CampaignReportPage({ params }: PageProps) {
             <div className="mt-2 flex justify-between text-sm">
               <span>Support {report.stance.support.toLocaleString()} ({Math.round((report.stance.support / stanceTotal) * 100)}%)</span>
               <span>Oppose {report.stance.oppose.toLocaleString()} ({100 - Math.round((report.stance.support / stanceTotal) * 100)}%)</span>
+            </div>
+          </section>
+        )}
+
+        {/* Legislative journey — per-stage funnel (parent campaigns only) */}
+        {report.stages && report.stages.length > 0 && (
+          <section>
+            <h2 className="text-base font-semibold mb-1">Legislative journey</h2>
+            <p className="text-[11px] text-gray-400 dark:text-gray-500 mb-3">
+              This initiative runs in stages that follow the bill through Congress; each stage targets the officials who
+              matter at that step.
+            </p>
+            <div className="space-y-1.5">
+              {report.stages.map((s) => (
+                <div key={s.slug} className="flex justify-between gap-3 text-sm border-b border-gray-100 dark:border-gray-700 pb-1.5">
+                  <span>
+                    <span className="font-medium">{STAGE_LABELS[s.goal] ?? 'Stage'}</span>
+                    <span className="text-gray-500 dark:text-gray-400"> — {s.headline}</span>
+                  </span>
+                  <span className="shrink-0 text-gray-500 dark:text-gray-400">
+                    {s.constituents.toLocaleString()} participants · {s.messages.toLocaleString()} messages
+                  </span>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* Cross-party reach — funders read this as credibility, not politics */}
+        {report.parties && (
+          <section>
+            <h2 className="text-base font-semibold mb-3">Engagement across the aisle</h2>
+            {(() => {
+              const total = report.parties.democratic + report.parties.republican + report.parties.other;
+              const pct = (n: number) => Math.round((n / total) * 100);
+              return (
+                <>
+                  <div className="flex h-3 w-full overflow-hidden rounded-full">
+                    {report.parties.democratic > 0 && <div className="bg-blue-500" style={{ width: `${pct(report.parties.democratic)}%` }} />}
+                    {report.parties.republican > 0 && <div className="bg-red-500" style={{ width: `${pct(report.parties.republican)}%` }} />}
+                    {report.parties.other > 0 && <div className="bg-gray-400" style={{ width: `${pct(report.parties.other)}%` }} />}
+                  </div>
+                  <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-sm">
+                    <span>Democratic officials: {report.parties.democratic.toLocaleString()} ({pct(report.parties.democratic)}%)</span>
+                    <span>Republican officials: {report.parties.republican.toLocaleString()} ({pct(report.parties.republican)}%)</span>
+                    {report.parties.other > 0 && <span>Independent/other: {report.parties.other.toLocaleString()} ({pct(report.parties.other)}%)</span>}
+                  </div>
+                </>
+              );
+            })()}
+          </section>
+        )}
+
+        {/* Story impact (storytelling campaigns) */}
+        {report.storyImpact && report.storyImpact.total > 0 && (
+          <section>
+            <h2 className="text-base font-semibold mb-3">Story collection</h2>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              <Stat
+                label="Stories shared"
+                value={report.storyImpact.total.toLocaleString()}
+                sub={`${report.storyImpact.named} named · ${report.storyImpact.firstNameOnly} first name · ${report.storyImpact.anonymous} anonymous`}
+              />
+              <Stat label="Press-ready" value={report.storyImpact.pressReady.toLocaleString()} sub="consented to media use" />
+              <Stat label="Open to follow-up" value={report.storyImpact.contactable.toLocaleString()} sub="reachable with consent" />
+              <Stat label="States represented" value={report.storyImpact.statesReached.toLocaleString()} />
             </div>
           </section>
         )}
@@ -169,6 +255,42 @@ export default async function CampaignReportPage({ params }: PageProps) {
                 </span>
               ))}
             </div>
+          </section>
+        )}
+
+        {/* Delivery channels */}
+        {report.delivery.length > 0 && (
+          <section>
+            <h2 className="text-base font-semibold mb-3">How messages were delivered</h2>
+            <div className="flex flex-wrap gap-2">
+              {report.delivery.map((d) => (
+                <span key={d.method} className="text-sm px-2.5 py-1 rounded-full border border-gray-200 dark:border-gray-700">
+                  {DELIVERY_LABELS[d.method] ?? d.method} · {d.count.toLocaleString()}
+                </span>
+              ))}
+              {report.intents && (
+                <>
+                  <span className="text-sm px-2.5 py-1 rounded-full border border-gray-200 dark:border-gray-700">
+                    Persuade · {report.intents.persuade.toLocaleString()}
+                  </span>
+                  <span className="text-sm px-2.5 py-1 rounded-full border border-gray-200 dark:border-gray-700">
+                    Thank-you · {report.intents.thank.toLocaleString()}
+                  </span>
+                </>
+              )}
+            </div>
+          </section>
+        )}
+
+        {/* Social amplification */}
+        {report.social && (
+          <section>
+            <h2 className="text-base font-semibold mb-3">Social amplification</h2>
+            <p className="text-sm text-gray-700 dark:text-gray-300">
+              My Democracy amplified this campaign in {report.social.posts.toLocaleString()} social {report.social.posts === 1 ? 'post' : 'posts'}, earning{' '}
+              {report.social.likes.toLocaleString()} likes, {report.social.reposts.toLocaleString()} reposts, and {report.social.replies.toLocaleString()}{' '}
+              replies.
+            </p>
           </section>
         )}
 

@@ -419,6 +419,15 @@ async function generateForOfficial(
 
   const toneInstructions = buildToneInstructions(tone);
 
+  // Stage campaigns map intent per official: an official already on the bill
+  // gets gratitude that reinforces, not a pitch that ignores what they did.
+  const intentInstructions =
+    official.intent === 'thank'
+      ? `\n- THIS IS A THANK-YOU MESSAGE: this official has ALREADY taken the action the campaign asks for (e.g. cosponsored the bill or cast the vote). Express genuine, specific gratitude for that action. Do NOT lobby them as if they were undecided. Ask them to keep championing it — urge colleagues to join, push for a hearing or a floor vote.`
+      : official.intent === 'persuade'
+        ? `\n- This official has NOT yet taken the action the campaign asks for. Make the constituent's case directly and end with the specific ask (e.g. cosponsor the bill).`
+        : '';
+
   const emailSystemPrompt = `You are an expert constituent letter writer. Write a compelling, personalized letter from a constituent to ONE specific elected official.
 
 Use your knowledge of this official's party affiliation, state, and likely positions to tailor the letter specifically to them.
@@ -435,7 +444,7 @@ Writing guidelines:
 - Keep the letter between 170-300 words (each request sets an exact target — follow it)
 - Do NOT include a greeting line (no "Dear Senator") or signature block (no "Sincerely") — the app handles those
 - Write in first person
-- Be direct and specific to THIS official, not generic${stafferNote}${stateNote}${voteInstructions}${districtInstructions}${billInstructions}${newsInstructions}${toneInstructions}
+- Be direct and specific to THIS official, not generic${stafferNote}${stateNote}${voteInstructions}${districtInstructions}${billInstructions}${newsInstructions}${toneInstructions}${intentInstructions}
 
 DATA-DRIVEN WRITING:
 - Use specific numbers from the KEY STATISTICS provided — they add credibility
@@ -475,7 +484,7 @@ Writing guidelines:
 - If the official likely SUPPORTS the position: acknowledge that and urge continued action
 - If the official likely OPPOSES it: respectfully urge reconsideration
 - Work ONE key statistic into the script naturally — e.g. "I'm concerned because over 48,000 Americans die from gun violence each year"
-- End with a clear, specific ask — not a vague "please consider"${stateNote ? stateNote.replace('email', 'call') : ''}${voteInstructions}${districtInstructions}${billInstructions}${newsInstructions}${toneInstructions}
+- End with a clear, specific ask — not a vague "please consider"${stateNote ? stateNote.replace('email', 'call') : ''}${voteInstructions}${districtInstructions}${billInstructions}${newsInstructions}${toneInstructions}${intentInstructions}
 
 DATA-DRIVEN WRITING:
 - Use specific numbers from the KEY STATISTICS provided — they add credibility

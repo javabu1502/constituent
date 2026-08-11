@@ -91,6 +91,7 @@ export async function POST(request: NextRequest) {
       message_body: verifiedUserId ? body.message_body : '',
       delivery_method: body.delivery_method,
       delivery_status: body.delivery_status,
+      message_intent: body.message_intent || null,
       user_id: verifiedUserId,
       campaign_id: body.campaign_id || null,
     }).select('id').single();

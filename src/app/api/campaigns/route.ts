@@ -4,6 +4,8 @@ import { createAdminClient } from '@/lib/supabase';
 import { createCampaignSchema, parseBody } from '@/lib/schemas';
 import { profileLimiter, getClientIp } from '@/lib/rate-limit';
 import { sendAdminNotification } from '@/lib/resend';
+import { getCommitteeMembers } from '@/lib/committees';
+import { getStateCommitteeMembers } from '@/lib/state-committees';
 
 function escapeHtml(str: string): string {
   return str
@@ -61,10 +63,44 @@ export async function POST(request: NextRequest) {
     bill_level, bill_state, bill_ref, bill_title, bill_url,
     story_prompt, usage_statement, usage_tags, attribution_options, edit_revoke_policy, recipient_email,
     org_name, org_url, org_logo_url, brand_color, custom_domain,
+    parent_campaign_id, stage_goal, target_committee, target_committee_state,
   } = parsed.data;
 
   const isStory = campaign_type === 'storytelling';
   const slug = slugify(headline).slice(0, 50) + '-' + randomSuffix();
+
+  // Stage campaigns: verify the parent before anything is written. Only the
+  // parent's creator can add stages, and nesting is one level deep — a stage
+  // cannot grow stages of its own.
+  let parent: { bill_level: string | null; bill_state: string | null; bill_ref: string | null; bill_title: string | null; bill_url: string | null; issue_area: string | null; issue_subtopic: string | null } | null = null;
+  if (parent_campaign_id) {
+    const { data: parentRow } = await createAdminClient()
+      .from('campaigns')
+      .select('creator_id, parent_campaign_id, campaign_type, bill_level, bill_state, bill_ref, bill_title, bill_url, issue_area, issue_subtopic')
+      .eq('id', parent_campaign_id)
+      .single();
+    if (!parentRow) {
+      return NextResponse.json({ error: 'Parent campaign not found' }, { status: 404 });
+    }
+    if (parentRow.creator_id !== user.id) {
+      return NextResponse.json({ error: 'Only the campaign owner can add stages' }, { status: 403 });
+    }
+    if (parentRow.parent_campaign_id) {
+      return NextResponse.json({ error: 'Stages cannot have stages of their own' }, { status: 400 });
+    }
+    if (isStory) {
+      return NextResponse.json({ error: 'Stages must be advocacy campaigns' }, { status: 400 });
+    }
+    if (target_committee) {
+      const roster = target_committee_state
+        ? getStateCommitteeMembers(target_committee_state, target_committee)
+        : getCommitteeMembers(target_committee).map((m) => m.bioguide);
+      if (roster.length === 0) {
+        return NextResponse.json({ error: 'Unknown committee' }, { status: 400 });
+      }
+    }
+    parent = parentRow;
+  }
 
   // User-created campaigns are ALWAYS unlisted (link-only): never in the
   // public directory, never promoted. Official/public is a curated flag set
@@ -98,11 +134,17 @@ export async function POST(request: NextRequest) {
       direction: isStory ? null : (direction || null),
       message_template: isStory ? null : (message_template || null),
       distribution_plan: isStory ? null : distribution_plan,
-      bill_level: isStory ? null : (bill_level || null),
-      bill_state: !isStory && bill_level === 'state' ? (bill_state || null) : null,
-      bill_ref: isStory ? null : (bill_ref || null),
-      bill_title: isStory ? null : (bill_title || null),
-      bill_url: isStory ? null : (bill_url || null),
+      // Stages inherit the parent's bill unless they set their own.
+      bill_level: isStory ? null : (bill_level || parent?.bill_level || null),
+      bill_state: !isStory && (bill_level || parent?.bill_level) === 'state' ? (bill_state || parent?.bill_state || null) : null,
+      bill_ref: isStory ? null : (bill_ref || parent?.bill_ref || null),
+      bill_title: isStory ? null : (bill_title || parent?.bill_title || null),
+      bill_url: isStory ? null : (bill_url || parent?.bill_url || null),
+      parent_campaign_id: parent_campaign_id || null,
+      stage_goal: parent_campaign_id ? (stage_goal || 'custom') : null,
+      target_filter: target_committee
+        ? { type: 'committee', committee_id: target_committee, ...(target_committee_state ? { state: target_committee_state.toUpperCase() } : {}) }
+        : null,
       story_prompt: isStory ? (story_prompt || null) : null,
       usage_statement: isStory ? usage_statement : null,
       usage_tags: isStory ? (usage_tags || []) : null,

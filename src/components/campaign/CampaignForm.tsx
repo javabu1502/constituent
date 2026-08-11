@@ -40,6 +40,26 @@ export function CampaignForm({ initialType }: { initialType?: 'advocacy' | 'stor
     initialType ?? (searchParams.get('type') === 'storytelling' ? 'storytelling' : 'advocacy')
   );
 
+  // Stage mode: arriving via "Add a stage" on a parent campaign
+  // (?parent=<id>&parent_name=<headline>&goal=<stage_goal>). The stage becomes
+  // its own campaign linked to the parent; committee stages pick the committee
+  // so messages only go to its members.
+  const parentCampaignId = searchParams.get('parent') || '';
+  const parentName = searchParams.get('parent_name') || '';
+  // 2-letter code when the parent is a state-bill campaign: the committee
+  // picker then offers that state legislature's committees instead of Congress.
+  const stageState = (searchParams.get('state') || '').toUpperCase().slice(0, 2);
+  const [stageGoal, setStageGoal] = useState<string>(searchParams.get('goal') || '');
+  const [targetCommittee, setTargetCommittee] = useState('');
+  const [committees, setCommittees] = useState<{ id: string; name: string; chamber: string }[]>([]);
+  useEffect(() => {
+    if (stageGoal !== 'committee' || committees.length > 0) return;
+    fetch(`/api/committees${stageState ? `?state=${stageState}` : ''}`)
+      .then((r) => r.json())
+      .then((d) => setCommittees((d.committees || []).filter((c: { chamber: string }) => c.chamber !== 'joint')))
+      .catch(() => {});
+  }, [stageGoal, committees.length, stageState]);
+
   // White-label branding — for unlisted (privately shared) campaigns only.
   const [orgName, setOrgName] = useState('');
   const [orgUrl, setOrgUrl] = useState('');
@@ -214,6 +234,14 @@ export function CampaignForm({ initialType }: { initialType?: 'advocacy' | 'stor
       return;
     }
     if (campaignType === 'advocacy') {
+      if (parentCampaignId && !stageGoal) {
+        setError('Please choose what this stage is trying to achieve');
+        return;
+      }
+      if (stageGoal === 'committee' && !targetCommittee) {
+        setError('Please pick the committee this stage targets');
+        return;
+      }
       if (!direction) {
         setError('Please choose whether this campaign asks people to support or oppose');
         return;
@@ -258,6 +286,15 @@ export function CampaignForm({ initialType }: { initialType?: 'advocacy' | 'stor
             direction,
             message_template: messageTemplate.trim() || null,
             distribution_plan: distributionPlan.trim(),
+            ...(parentCampaignId
+              ? {
+                  parent_campaign_id: parentCampaignId,
+                  stage_goal: stageGoal || 'custom',
+                  ...(stageGoal === 'committee' && targetCommittee
+                    ? { target_committee: targetCommittee, ...(stageState ? { target_committee_state: stageState } : {}) }
+                    : {}),
+                }
+              : {}),
             ...(resolvedBill
               ? {
                   bill_level: resolvedBill.level,
@@ -330,6 +367,85 @@ export function CampaignForm({ initialType }: { initialType?: 'advocacy' | 'stor
       {error && (
         <div className="p-4 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 rounded-xl">
           <p className="text-sm text-red-700 dark:text-red-300">{error}</p>
+        </div>
+      )}
+
+      {/* Stage mode — this campaign is one step of a parent initiative */}
+      {parentCampaignId && campaignType === 'advocacy' && (
+        <div className="p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700 rounded-xl space-y-3">
+          <p className="text-sm text-blue-800 dark:text-blue-300">
+            <span className="font-semibold">Adding a stage{parentName ? ` to “${parentName}”` : ''}.</span> Stages follow a
+            bill through Congress — each one targets the officials who matter at that step, and results roll up to the
+            parent campaign.
+          </p>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              What is this stage trying to achieve? <span className="text-red-500">*</span>
+            </label>
+            <select
+              value={stageGoal}
+              onChange={(e) => setStageGoal(e.target.value)}
+              className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm"
+            >
+              <option value="">Choose a goal…</option>
+              <option value="cosponsor">Recruit cosponsors</option>
+              <option value="committee">Pass committee</option>
+              <option value="floor_house">House floor vote</option>
+              <option value="floor_senate">Senate floor vote</option>
+              <option value="thank_you">Thank officials</option>
+              <option value="custom">Something else</option>
+            </select>
+          </div>
+          {stageGoal === 'committee' && (
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Which committee? <span className="text-red-500">*</span>
+              </label>
+              <select
+                value={targetCommittee}
+                onChange={(e) => setTargetCommittee(e.target.value)}
+                className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm"
+              >
+                <option value="">Choose a committee…</option>
+                {stageState ? (
+                  <>
+                    <optgroup label={`${stageState} House / Assembly`}>
+                      {committees.filter((c) => c.chamber === 'lower').map((c) => (
+                        <option key={c.id} value={c.id}>{c.name}</option>
+                      ))}
+                    </optgroup>
+                    <optgroup label={`${stageState} Senate`}>
+                      {committees.filter((c) => c.chamber === 'upper').map((c) => (
+                        <option key={c.id} value={c.id}>{c.name}</option>
+                      ))}
+                    </optgroup>
+                    <optgroup label="Chamber-wide / Joint">
+                      {committees.filter((c) => c.chamber === 'legislature').map((c) => (
+                        <option key={c.id} value={c.id}>{c.name}</option>
+                      ))}
+                    </optgroup>
+                  </>
+                ) : (
+                  <>
+                    <optgroup label="House">
+                      {committees.filter((c) => c.chamber === 'house').map((c) => (
+                        <option key={c.id} value={c.id}>{c.name}</option>
+                      ))}
+                    </optgroup>
+                    <optgroup label="Senate">
+                      {committees.filter((c) => c.chamber === 'senate').map((c) => (
+                        <option key={c.id} value={c.id}>{c.name}</option>
+                      ))}
+                    </optgroup>
+                  </>
+                )}
+              </select>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                Messages for this stage only go to members of this committee — participants whose reps aren&apos;t on it
+                will be shown other ways to help.
+              </p>
+            </div>
+          )}
         </div>
       )}
 

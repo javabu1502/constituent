@@ -3,6 +3,7 @@ import { redirect, notFound } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase';
 import { CampaignAnalytics } from '@/components/campaign/CampaignAnalytics';
+import { CampaignStages } from '@/components/campaign/CampaignStages';
 import { CampaignInsightsPanel } from '@/components/campaign/CampaignInsightsPanel';
 import { getCachedInsights } from '@/lib/insights';
 import { usageLabels } from '@/lib/story-usage';
@@ -392,6 +393,17 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
           View impact report
         </Link>
       </div>
+
+      <CampaignStages
+        campaign={{
+          id: campaign.id,
+          slug,
+          headline: campaign.headline,
+          parent_campaign_id: campaign.parent_campaign_id ?? null,
+          bill_level: campaign.bill_level ?? null,
+          bill_state: campaign.bill_state ?? null,
+        }}
+      />
 
       <CampaignAnalytics analytics={analytics} campaignName={campaign.headline} insightsPanel={insightsPanel} />
     </div>

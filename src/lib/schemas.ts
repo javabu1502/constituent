@@ -12,6 +12,9 @@ const officialSchema = z.object({
   state: z.string().min(1).max(50),
   level: z.enum(['federal', 'state']).optional(),
   district: z.string().max(20).optional(),
+  // Stage campaigns: per-official message intent — thank a rep who's already
+  // on the bill, persuade one who isn't.
+  intent: z.enum(['persuade', 'thank']).optional(),
 });
 
 const addressSchema = z.object({
@@ -66,6 +69,8 @@ export const trackSendSchema = z.object({
   issue_subtopic: z.string().min(1).max(200),
   message_body: z.string().min(1).max(10000),
   delivery_method: z.enum(['email', 'phone', 'webform']),
+  // Stage campaigns: whether this message thanked or tried to persuade.
+  message_intent: z.enum(['persuade', 'thank']).optional(),
   // Must cover every status the clients emit (OfficialSendCard in
   // CampaignParticipate + OfficialCard in SendStep) — a value missing here
   // 400s the request, and the fire-and-forget clients drop that silently.
@@ -119,7 +124,31 @@ export const createCampaignSchema = z.object({
     .max(253)
     .regex(/^(?!-)[a-z0-9-]{1,63}(?<!-)(\.(?!-)[a-z0-9-]{1,63}(?<!-))+$/i, 'Enter a bare domain like action.yourorg.org')
     .nullish(),
+  // Stage campaigns: this campaign is one step of a parent initiative's
+  // legislative journey. Parent ownership + one-level nesting enforced in the
+  // route; committee stages carry the committee to target.
+  parent_campaign_id: z.string().uuid().optional(),
+  stage_goal: z.enum(['cosponsor', 'committee', 'floor_house', 'floor_senate', 'thank_you', 'custom']).optional(),
+  // Congressional thomas_id (HSIF) or a state committee uuid; state committees
+  // also send target_committee_state so the route knows which roster to check.
+  target_committee: z
+    .string()
+    .regex(/^([HS][A-Z]{3}\d{0,2}|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$/i, 'Unknown committee id')
+    .optional(),
+  target_committee_state: z.string().length(2).optional(),
 }).superRefine((data, ctx) => {
+  if (data.stage_goal && !data.parent_campaign_id) {
+    ctx.addIssue({ code: 'custom', path: ['stage_goal'], message: 'A stage goal requires a parent campaign' });
+  }
+  if (data.stage_goal === 'committee' && !data.target_committee) {
+    ctx.addIssue({ code: 'custom', path: ['target_committee'], message: 'Committee stages must name the committee to target' });
+  }
+  if (data.target_committee && data.stage_goal !== 'committee') {
+    ctx.addIssue({ code: 'custom', path: ['target_committee'], message: 'Committee targeting is only for committee stages' });
+  }
+  if (data.target_committee_state && !data.target_committee) {
+    ctx.addIssue({ code: 'custom', path: ['target_committee_state'], message: 'A committee state requires a committee' });
+  }
   if (data.campaign_type === 'storytelling') {
     if (!data.usage_tags || data.usage_tags.length < 1) {
       ctx.addIssue({ code: 'custom', path: ['usage_tags'], message: 'Select at least one way you’d like to use these stories' });

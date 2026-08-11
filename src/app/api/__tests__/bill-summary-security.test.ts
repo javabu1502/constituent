@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { NextRequest } from 'next/server';
 
 const mockSummaryLimiter = { check: vi.fn((): { success: boolean; retryAfter?: number } => ({ success: true })) };
-const mockSingle = vi.fn(async () => ({ data: null, error: null }));
+const mockSingle = vi.fn(async (): Promise<{ data: unknown; error: unknown }> => ({ data: null, error: null }));
 
 vi.mock('@/lib/rate-limit', () => ({
   summaryLimiter: mockSummaryLimiter,

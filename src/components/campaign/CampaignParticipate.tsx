@@ -9,6 +9,7 @@ import type { Official } from '@/lib/types';
 import { US_STATES } from '@/lib/constants';
 import { Button } from '@/components/ui/Button';
 import { formatPhone, salutationTitle } from '@/lib/utils';
+import { detectBillReferences } from '@/lib/bills';
 import {
   determineDeliveryMethod,
   generateMailtoLink,
@@ -18,7 +19,7 @@ import { useTurnstile } from '@/components/ui/Turnstile';
 import { SupportNudge } from '@/components/ui/SupportNudge';
 import { SocialShare } from '@/components/ui/SocialShare';
 
-type Step = 'stance' | 'form' | 'loading' | 'review' | 'done';
+type Step = 'stance' | 'form' | 'loading' | 'review' | 'done' | 'noTarget';
 type Stance = 'support' | 'oppose' | 'undecided';
 
 /** Errors whose message is safe to show users (our own API copy). Anything
@@ -137,6 +138,11 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
 
   // Data from API calls
   const [officials, setOfficials] = useState<Official[]>([]);
+  // Committee name shown when none of the participant's reps sit on the
+  // stage's targeted committee (the 'noTarget' step).
+  const [noTargetName, setNoTargetName] = useState('');
+  // Per-official message intent (stage campaigns): thank vs persuade.
+  const [intentByOfficial, setIntentByOfficial] = useState<Record<string, 'persuade' | 'thank'>>({});
   const [messages, setMessages] = useState<Record<string, OfficialMessage>>({});
   const [sentCount, setSentCount] = useState(0);
   // Reader-poll aggregates, fetched fresh after this participant is counted.
@@ -194,9 +200,88 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
         filtered = filtered.filter((o: Official) => o.level === 'state');
       }
 
+      // Stage targeting: only contact the officials who matter at this step
+      // of the legislative journey. Floor stages narrow to the chamber that's
+      // voting (house/lower vs senate/upper covers Congress and the states);
+      // committee stages narrow to the committee's members — a message to an
+      // office that isn't involved hurts the campaign's credibility.
+      if (campaign.stage_goal === 'floor_house') {
+        filtered = filtered.filter((o: Official) => o.chamber === 'house' || o.chamber === 'lower');
+      } else if (campaign.stage_goal === 'floor_senate') {
+        filtered = filtered.filter((o: Official) => o.chamber === 'senate' || o.chamber === 'upper');
+      }
+      if (campaign.target_filter?.type === 'committee' && campaign.target_filter.committee_id) {
+        const cmteState = campaign.target_filter.state;
+        const cmteRes = await fetch(
+          `/api/committees/${campaign.target_filter.committee_id}/members${cmteState ? `?state=${cmteState}` : ''}`
+        );
+        const cmteData = await cmteRes.json();
+        if (!cmteRes.ok) {
+          throw new FriendlyError('We couldn’t load the committee roster for this campaign. Please try again.');
+        }
+        const roster = new Set<string>(cmteData.memberIds || []);
+        filtered = filtered.filter((o: Official) => (cmteState ? o.level === 'state' : o.level === 'federal') && roster.has(o.id));
+        if (filtered.length === 0) {
+          setNoTargetName(cmteData.committee?.name || 'the targeted committee');
+          setStep('noTarget');
+          return;
+        }
+      }
+
       if (filtered.length === 0) {
         throw new FriendlyError('No representatives found for your address at the targeted level');
       }
+
+      // Message mapping: on cosponsor stages, officials already on the bill
+      // get a thank-you instead of a pitch; thank_you stages thank everyone.
+      // Fails open (no intent) — a sponsor-lookup hiccup shouldn't block anyone.
+      const intents: Record<string, 'persuade' | 'thank'> = {};
+      if (campaign.stage_goal === 'thank_you') {
+        for (const o of filtered) intents[o.id] = 'thank';
+      } else if (campaign.stage_goal === 'cosponsor') {
+        try {
+          if (campaign.bill_level === 'state' && campaign.bill_state && campaign.bill_ref) {
+            const csRes = await fetch(
+              `/api/bills/state-sponsors?state=${campaign.bill_state}&ref=${encodeURIComponent(campaign.bill_ref)}`
+            );
+            if (csRes.ok) {
+              const onBill = new Set<string>((await csRes.json()).memberIds || []);
+              for (const o of filtered) {
+                if (o.level === 'state') intents[o.id] = onBill.has(o.id) ? 'thank' : 'persuade';
+              }
+            }
+          } else {
+            // Federal: official weigh-ins store congress/type/number; user
+            // campaigns store bill_ref ("H.R. 1234"), which we parse. Bills in
+            // campaigns are current, so the ref path assumes this Congress.
+            let congress = campaign.bill_congress ? String(campaign.bill_congress) : '';
+            let type = campaign.bill_type || '';
+            let number = campaign.bill_number || '';
+            if (!(congress && type && number) && campaign.bill_ref) {
+              const fed = detectBillReferences(campaign.bill_ref).find((r) => r.level === 'federal');
+              if (fed) {
+                congress = '119';
+                type = fed.type;
+                number = fed.number;
+              }
+            }
+            if (congress && type && number) {
+              const csRes = await fetch(
+                `/api/bills/cosponsors?congress=${congress}&type=${encodeURIComponent(type)}&number=${encodeURIComponent(number)}`
+              );
+              if (csRes.ok) {
+                const onBill = new Set<string>((await csRes.json()).bioguides || []);
+                for (const o of filtered) {
+                  if (o.level === 'federal') intents[o.id] = onBill.has(o.id) ? 'thank' : 'persuade';
+                }
+              }
+            }
+          }
+        } catch (csErr) {
+          console.warn('[participate] sponsor lookup failed, generating without intent:', csErr);
+        }
+      }
+      setIntentByOfficial(intents);
 
       setOfficials(filtered);
 
@@ -250,6 +335,7 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
               title: o.title,
               party: o.party,
               state: o.state,
+              intent: intents[o.id],
             })),
             issue: campaign.issue_subtopic || campaign.issue_area,
             ask,
@@ -415,6 +501,7 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
         message_body: msg.body,
         delivery_method: 'email',
         delivery_status: deliveryStatus,
+        message_intent: intentByOfficial[official.id],
         campaign_id: campaign.id,
         turnstileToken: turnstileToken || undefined,
       }),
@@ -655,6 +742,40 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
         </div>
         <p className="text-gray-600 dark:text-gray-300 mt-4 font-medium">Finding your officials...</p>
         <p className="text-gray-400 dark:text-gray-500 text-sm mt-1">Generating personalized messages</p>
+      </div>
+    );
+  }
+
+  // Committee stage, but none of this participant's reps sit on the
+  // committee: never send to uninvolved offices — offer other ways to help.
+  if (step === 'noTarget') {
+    const shareUrl = campaign.custom_domain
+      ? `https://${campaign.custom_domain}/`
+      : `https://www.mydemocracy.app/campaign/${campaign.slug}`;
+    return (
+      <div className="max-w-xl mx-auto py-8 text-center">
+        <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
+          <svg className="w-8 h-8 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+        </div>
+        <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+          Your representatives aren&apos;t on {noTargetName}
+        </h3>
+        <p className="text-gray-600 dark:text-gray-300 mb-6">
+          This stage of the campaign targets only the members of {noTargetName}, so their offices hear from the
+          constituents they represent. Your voice still matters here — the biggest thing you can do right now is get
+          this in front of people whose representatives <em>are</em> on the committee.
+        </p>
+        <div className="mb-6 text-left">
+          <SocialShare url={shareUrl} text={`"${campaign.headline}" is in front of ${noTargetName} right now — if your rep is on the committee, they need to hear from you.`} />
+        </div>
+        <button
+          onClick={() => setStep('form')}
+          className="text-sm text-purple-600 dark:text-purple-400 hover:underline"
+        >
+          &larr; Try a different address
+        </button>
       </div>
     );
   }
