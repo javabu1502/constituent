@@ -54,9 +54,17 @@ export default async function HomePage() {
   let totalCampaigns = 0;
   try {
     const admin = createAdminClient();
+    // Demo/sandbox campaigns (slug prefix "demo-") never count toward public
+    // social proof — same rule as /api/trends.
+    const { data: demoCampaigns } = await admin.from('campaigns').select('id').like('slug', 'demo-%');
+    const demoIds = (demoCampaigns ?? []).map((c) => c.id as string);
+    const demoFilter = demoIds.length ? `campaign_id.is.null,campaign_id.not.in.(${demoIds.join(',')})` : null;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const excludeDemo = <T,>(q: T): T => (demoFilter ? (q as any).or(demoFilter) : q);
+
     const [msgResult, stateResult, campResult] = await Promise.all([
-      admin.from('messages').select('*', { count: 'exact', head: true }),
-      admin.from('messages').select('advocate_state'),
+      excludeDemo(admin.from('messages').select('*', { count: 'exact', head: true })),
+      excludeDemo(admin.from('messages').select('advocate_state')),
       admin.from('campaigns').select('*', { count: 'exact', head: true }).eq('status', 'active').eq('is_official', true),
     ]);
     totalMessages = msgResult.count ?? 0;
