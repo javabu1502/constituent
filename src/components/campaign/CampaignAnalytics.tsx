@@ -93,6 +93,9 @@ interface CampaignAnalyticsProps {
   campaignName: string;
   /** AI-themed insights panel, injected by the analytics page (owner-only). */
   insightsPanel?: ReactNode;
+  /** Parent campaigns render the whip board, which already lists every
+   * legislator with message counts — hide the redundant officials panel. */
+  hideOfficialsPanel?: boolean;
 }
 
 function attributionBadge(level: StoryListItem['attribution_level']): string {
@@ -744,7 +747,7 @@ function MessageBrowser({ messages, slug }: { messages: NonNullable<AdvocacyAnal
   );
 }
 
-export function CampaignAnalytics({ analytics, campaignName, insightsPanel }: CampaignAnalyticsProps) {
+export function CampaignAnalytics({ analytics, campaignName, insightsPanel, hideOfficialsPanel }: CampaignAnalyticsProps) {
   if (analytics.kind === 'storytelling') {
     return <StorytellingAnalytics analytics={analytics} campaignName={campaignName} insightsPanel={insightsPanel} />;
   }
@@ -905,8 +908,9 @@ export function CampaignAnalytics({ analytics, campaignName, insightsPanel }: Ca
         <DailyBarChart counts={analytics.daily_counts} unit="action" />
       </div>
 
-      {/* Officials contacted — where this campaign's pressure is landing */}
-      {analytics.officials_contacted.length > 0 && (
+      {/* Officials contacted — where this campaign's pressure is landing.
+          Hidden on parents: the whip board is the one legislators section. */}
+      {!hideOfficialsPanel && analytics.officials_contacted.length > 0 && (
         <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
           <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-1">Officials Contacted</h3>
           <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">

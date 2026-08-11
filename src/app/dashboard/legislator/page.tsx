@@ -47,10 +47,18 @@ export default async function LegislatorIntelPage({
   // Everything scopes to this org's campaigns.
   const { data: campaigns } = await admin
     .from('campaigns')
-    .select('id, slug, headline, bill_ref, bill_state, direction, outcome, parent_campaign_id')
+    .select('id, slug, headline, bill_ref, bill_state, direction, outcome, parent_campaign_id, campaign_type, created_at')
     .eq('creator_id', user.id);
   const campaignById = new Map((campaigns ?? []).map((c) => [c.id as string, c]));
   const campaignIds = [...campaignById.keys()];
+  // Stage activity rolls up to its parent so each initiative is one row.
+  const topOf = (cid: string): string => {
+    const c = campaignById.get(cid);
+    return (c?.parent_campaign_id as string | null) ?? cid;
+  };
+  const topLevel = (campaigns ?? [])
+    .filter((c) => !c.parent_campaign_id && c.campaign_type !== 'storytelling')
+    .sort((a, b) => String(b.created_at).localeCompare(String(a.created_at)));
 
   const [{ data: positions }, { data: notes }, { data: messages }] = await Promise.all([
     admin
@@ -98,8 +106,13 @@ export default async function LegislatorIntelPage({
 
   const msgs = messages ?? [];
   const thankCount = msgs.filter((m) => m.message_intent === 'thank').length;
+  // Message counts roll stage activity up to the initiative.
   const msgByCampaign = new Map<string, number>();
-  for (const m of msgs) msgByCampaign.set(m.campaign_id, (msgByCampaign.get(m.campaign_id) || 0) + 1);
+  for (const m of msgs) {
+    const top = topOf(m.campaign_id);
+    msgByCampaign.set(top, (msgByCampaign.get(top) || 0) + 1);
+  }
+  const positionByCampaign = new Map((positions ?? []).map((p) => [topOf(p.campaign_id as string), p]));
 
   const fmt = (iso: string) => new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
   const chamberLabel = chamber === 'lower' ? 'Assembly / House' : chamber === 'upper' ? 'Senate' : chamber;
@@ -127,35 +140,40 @@ export default async function LegislatorIntelPage({
         )}
       </div>
 
-      {/* Your bills, their status */}
+      {/* Every campaign the org runs, with this legislator's standing on each */}
       <section className="mb-8 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-5">
-        <h2 className="text-base font-semibold text-gray-900 dark:text-white mb-3">Your campaigns &amp; where they stand</h2>
-        {(positions ?? []).length === 0 ? (
-          <p className="text-sm text-gray-500 dark:text-gray-400">No whip positions recorded yet — set one from a campaign&apos;s whip board.</p>
-        ) : (
-          <ul className="divide-y divide-gray-100 dark:divide-gray-700">
-            {(positions ?? []).map((p) => {
-              const c = campaignById.get(p.campaign_id as string);
-              if (!c) return null;
-              return (
-                <li key={p.campaign_id as string} className="py-2.5 flex items-center justify-between gap-3">
-                  <div className="min-w-0">
-                    <Link href={`/campaign/${c.slug}/analytics`} className="text-sm font-medium text-gray-900 dark:text-white hover:underline">
-                      {c.bill_ref ? `${c.bill_ref} — ` : ''}{c.headline}
-                    </Link>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">
-                      {c.outcome ? OUTCOME_LABELS[c.outcome as string] ?? c.outcome : 'Ongoing'}
-                      {msgByCampaign.get(p.campaign_id as string) ? ` · ${msgByCampaign.get(p.campaign_id as string)} constituent message${msgByCampaign.get(p.campaign_id as string) !== 1 ? 's' : ''} to them` : ''}
-                    </p>
-                  </div>
+        <h2 className="text-base font-semibold text-gray-900 dark:text-white mb-1">Across all your campaigns</h2>
+        <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">
+          Every bill you&apos;re working, with your whip read and the constituent pressure they received on each.
+        </p>
+        <ul className="divide-y divide-gray-100 dark:divide-gray-700">
+          {topLevel.map((c) => {
+            const p = positionByCampaign.get(c.id as string);
+            const mc = msgByCampaign.get(c.id as string) ?? 0;
+            return (
+              <li key={c.id as string} className="py-2.5 flex items-center justify-between gap-3">
+                <div className="min-w-0">
+                  <Link href={`/campaign/${c.slug}/analytics`} className="text-sm font-medium text-gray-900 dark:text-white hover:underline">
+                    {c.bill_ref ? `${c.bill_ref} — ` : ''}{c.headline}
+                  </Link>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">
+                    {c.outcome ? OUTCOME_LABELS[c.outcome as string] ?? c.outcome : 'Ongoing'}
+                    {mc > 0 ? ` · ${mc} constituent message${mc !== 1 ? 's' : ''} to them` : ' · no constituent messages to them'}
+                  </p>
+                </div>
+                {p ? (
                   <span className={`shrink-0 px-2.5 py-1 text-xs font-semibold rounded-full ${POSITION_STYLES[p.position as string] ?? ''}`}>
                     {POSITION_LABELS[p.position as string] ?? p.position}
                   </span>
-                </li>
-              );
-            })}
-          </ul>
-        )}
+                ) : (
+                  <span className="shrink-0 px-2.5 py-1 text-xs rounded-full border border-dashed border-gray-300 dark:border-gray-600 text-gray-400 dark:text-gray-500">
+                    not whipped yet
+                  </span>
+                )}
+              </li>
+            );
+          })}
+        </ul>
       </section>
 
       {/* Constituent pressure */}

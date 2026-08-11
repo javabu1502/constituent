@@ -220,9 +220,17 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
   // activity plus every stage's, matching the impact report's roll-up.
   const { data: childCampaigns } = await admin
     .from('campaigns')
-    .select('id')
+    .select('id, target_filter')
     .eq('parent_campaign_id', campaign.id);
   const analyticsCampaignIds = [campaign.id, ...(childCampaigns ?? []).map((c) => c.id as string)];
+
+  // The whip board replaces the officials panel wherever it can build a
+  // roster (state campaigns, or a committee-targeted stage). Elsewhere the
+  // classic officials panel stays.
+  const hasWhipBoard =
+    !campaign.parent_campaign_id &&
+    (!!campaign.bill_state ||
+      (childCampaigns ?? []).some((c) => (c.target_filter as { type?: string } | null)?.type === 'committee'));
 
   const [messagesResult, actionsResult] = await Promise.all([
     admin
@@ -422,7 +430,7 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
         />
       )}
 
-      {!campaign.parent_campaign_id && <WhipBoard slug={slug} />}
+      {hasWhipBoard && <WhipBoard slug={slug} />}
 
       {!campaign.parent_campaign_id && <CoalitionPanel slug={slug} initialOutcome={campaign.outcome ?? null} />}
 
@@ -448,7 +456,12 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
         }}
       />
 
-      <CampaignAnalytics analytics={analytics} campaignName={campaign.headline} insightsPanel={insightsPanel} />
+      <CampaignAnalytics
+        analytics={analytics}
+        campaignName={campaign.headline}
+        insightsPanel={insightsPanel}
+        hideOfficialsPanel={hasWhipBoard}
+      />
     </div>
   );
 }

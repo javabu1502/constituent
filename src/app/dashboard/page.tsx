@@ -186,9 +186,9 @@ export default async function DashboardPage() {
               >
                 {(() => {
                   const isStory = campaign.campaign_type === 'storytelling';
-                  const count = isStory
-                    ? Number(campaign.story_count)
-                    : Number(campaign.action_count) + stages.reduce((n, s) => n + (Number(s.action_count) || 0), 0);
+                  // A parent's action_count IS the initiative total (stages
+                  // included) — never add stage counts on top of it.
+                  const count = isStory ? Number(campaign.story_count) : Number(campaign.action_count);
                   const approval = String(campaign.approval_status || 'approved');
                   const approvalBadge: Record<string, { label: string; cls: string }> = {
                     pending: { label: 'Pending review', cls: 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-300' },
@@ -295,8 +295,9 @@ export default async function DashboardPage() {
   // the reach those campaigns earned. Orgs have no elected officials of their
   // own and never send constituent messages, so none of those sections render.
   if (accountType === 'organization') {
-    const totalActions = allCampaigns.reduce((n, c) => n + (Number(c.action_count) || 0), 0);
-    const totalStories = allCampaigns.reduce((n, c) => n + (Number(c.story_count) || 0), 0);
+    // Sum initiative totals only (parents already include their stages).
+    const totalActions = topLevelCampaigns.reduce((n, c) => n + (Number(c.action_count) || 0), 0);
+    const totalStories = topLevelCampaigns.reduce((n, c) => n + (Number(c.story_count) || 0), 0);
     // Portfolio scoreboard: outcomes judged against each campaign's goal.
     let wins = 0;
     let losses = 0;
