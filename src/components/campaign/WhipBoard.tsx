@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useState, useCallback } from 'react';
+import Link from 'next/link';
 
 /**
  * The whip board — the org's vote count for a campaign initiative. Every
@@ -25,7 +26,7 @@ type Note = { id: string; legislator_id: string | null; legislator_name: string 
 
 const POSITIONS = ['for', 'committed', 'uncommitted', 'against'] as const;
 const POSITION_LABELS: Record<string, string> = {
-  for: 'For', committed: 'Committed', uncommitted: 'Uncommitted', against: 'Against',
+  for: 'Leaning yes', committed: 'Committed', uncommitted: 'Uncommitted', against: 'Opposed',
 };
 const POSITION_STYLES: Record<string, string> = {
   for: 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300',
@@ -132,7 +133,11 @@ export function WhipBoard({ slug }: { slug: string }) {
         </div>
       </div>
       <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">
-        Your read on every legislator — sponsor status syncs automatically; positions and notes are yours alone.
+        Your private vote count, relative to YOUR campaign&apos;s ask. <span className="font-medium">Leaning yes</span> = favorable
+        signals but no promise · <span className="font-medium">Committed</span> = told you they&apos;re with you (the only yes you
+        can bank) · <span className="font-medium">Uncommitted</span> = still winnable — your to-do list ·{' '}
+        <span className="font-medium">Opposed</span> = against your ask. Sponsor badges sync automatically from the bill record.
+        Click a name for full intel.
       </p>
 
       {committeeTally && committee && (
@@ -167,7 +172,13 @@ export function WhipBoard({ slug }: { slug: string }) {
           <li key={r.id} className="py-2">
             <div className="flex items-center justify-between gap-2">
               <div className="min-w-0 flex items-center gap-2">
-                <span className="text-sm font-medium text-gray-900 dark:text-white truncate">{r.name}</span>
+                <Link
+                  href={`/dashboard/legislator?id=${encodeURIComponent(r.id)}`}
+                  className="text-sm font-medium text-purple-700 dark:text-purple-300 hover:underline truncate"
+                  title="Full intel on this legislator"
+                >
+                  {r.name}
+                </Link>
                 {r.party && <span className="text-xs text-gray-400 shrink-0">({r.party.charAt(0)})</span>}
                 {r.sponsor && (
                   <span className="shrink-0 px-1.5 py-0.5 text-[10px] font-semibold rounded bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300">
