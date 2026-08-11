@@ -50,7 +50,8 @@ export function CampaignForm({ initialType }: { initialType?: 'advocacy' | 'stor
   // picker then offers that state legislature's committees instead of Congress.
   const stageState = (searchParams.get('state') || '').toUpperCase().slice(0, 2);
   const [stageGoal, setStageGoal] = useState<string>(searchParams.get('goal') || '');
-  const [targetCommittee, setTargetCommittee] = useState('');
+  // Preselected by the live-bill-status "Add this stage" suggestion.
+  const [targetCommittee, setTargetCommittee] = useState(searchParams.get('committee') || '');
   const [committees, setCommittees] = useState<{ id: string; name: string; chamber: string }[]>([]);
   useEffect(() => {
     if (stageGoal !== 'committee' || committees.length > 0) return;

@@ -4,6 +4,7 @@ import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase';
 import { CampaignAnalytics } from '@/components/campaign/CampaignAnalytics';
 import { CampaignStages } from '@/components/campaign/CampaignStages';
+import { BillStatusPanel } from '@/components/campaign/BillStatusPanel';
 import { CampaignInsightsPanel } from '@/components/campaign/CampaignInsightsPanel';
 import { getCachedInsights } from '@/lib/insights';
 import { usageLabels } from '@/lib/story-usage';
@@ -212,17 +213,25 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
   }
 
   // ----- Advocacy campaigns: action/message analytics -----
+  // A parent campaign's analytics cover the whole initiative — its own
+  // activity plus every stage's, matching the impact report's roll-up.
+  const { data: childCampaigns } = await admin
+    .from('campaigns')
+    .select('id')
+    .eq('parent_campaign_id', campaign.id);
+  const analyticsCampaignIds = [campaign.id, ...(childCampaigns ?? []).map((c) => c.id as string)];
+
   const [messagesResult, actionsResult] = await Promise.all([
     admin
       .from('messages')
       .select('advocate_name, delivery_method, delivery_status, legislator_name, legislator_party, legislator_level, legislator_chamber, advocate_city, advocate_state, message_body, created_at')
-      .eq('campaign_id', campaign.id)
+      .in('campaign_id', analyticsCampaignIds)
       .order('created_at', { ascending: false })
       .limit(10000),
     admin
       .from('campaign_actions')
       .select('participant_name, participant_city, participant_state, messages_sent, created_at')
-      .eq('campaign_id', campaign.id)
+      .in('campaign_id', analyticsCampaignIds)
       .order('created_at', { ascending: false })
       .limit(10000),
   ]);
@@ -393,6 +402,22 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
           View impact report
         </Link>
       </div>
+
+      {!campaign.parent_campaign_id && (
+        <BillStatusPanel
+          campaign={{
+            id: campaign.id,
+            slug,
+            headline: campaign.headline,
+            bill_ref: campaign.bill_ref ?? null,
+            bill_level: campaign.bill_level ?? null,
+            bill_state: campaign.bill_state ?? null,
+            bill_congress: campaign.bill_congress ?? null,
+            bill_type: campaign.bill_type ?? null,
+            bill_number: campaign.bill_number ?? null,
+          }}
+        />
+      )}
 
       <CampaignStages
         campaign={{

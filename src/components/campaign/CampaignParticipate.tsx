@@ -19,7 +19,7 @@ import { useTurnstile } from '@/components/ui/Turnstile';
 import { SupportNudge } from '@/components/ui/SupportNudge';
 import { SocialShare } from '@/components/ui/SocialShare';
 
-type Step = 'stance' | 'form' | 'loading' | 'review' | 'done' | 'noTarget';
+type Step = 'stance' | 'form' | 'loading' | 'review' | 'done' | 'noTarget' | 'wrongState';
 type Stance = 'support' | 'oppose' | 'undecided';
 
 /** Errors whose message is safe to show users (our own API copy). Anything
@@ -82,7 +82,13 @@ function buildFallbackMessage(
   return { subject: `Constituent message: ${campaign.headline}`, body };
 }
 
-export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
+export function CampaignParticipate({
+  campaign,
+  parentCampaign = null,
+}: {
+  campaign: Campaign;
+  parentCampaign?: { slug: string; headline: string } | null;
+}) {
   // Official weigh-ins are neutral: the participant picks their OWN position
   // first and the message carries that stance. User-created campaigns are
   // the creator's own directional ask — no stance step, no poll.
@@ -180,6 +186,17 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
     // without the +4; we keep the user's full ZIP for display).
     const stateCode = toStateCode(state);
     const zip5 = zip.trim().match(/^\d{5}/)?.[0] ?? zip.trim();
+
+    // State-bill campaigns are for that state's constituents: a Californian's
+    // legislators have no vote on a Nevada bill, so their message would land
+    // on the wrong desks. Check BEFORE any lookups.
+    const requiredState =
+      campaign.target_level === 'state' ? campaign.bill_state || campaign.target_filter?.state || null : null;
+    if (requiredState && stateCode !== requiredState) {
+      setStep('wrongState');
+      setSubmitting(false);
+      return;
+    }
 
     try {
       // Fetch representatives
@@ -764,9 +781,16 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
         </h3>
         <p className="text-gray-600 dark:text-gray-300 mb-6">
           This stage of the campaign targets only the members of {noTargetName}, so their offices hear from the
-          constituents they represent. Your voice still matters here — the biggest thing you can do right now is get
-          this in front of people whose representatives <em>are</em> on the committee.
+          constituents they represent. Your voice still matters — here are the best ways to help right now.
         </p>
+        {parentCampaign && (
+          <Link
+            href={`/campaign/${parentCampaign.slug}`}
+            className="inline-block mb-4 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white text-sm font-medium rounded-lg transition-colors"
+          >
+            Send a broader message to your own legislators instead
+          </Link>
+        )}
         <div className="mb-6 text-left">
           <SocialShare url={shareUrl} text={`"${campaign.headline}" is in front of ${noTargetName} right now — if your rep is on the committee, they need to hear from you.`} />
         </div>
@@ -775,6 +799,49 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
           className="text-sm text-purple-600 dark:text-purple-400 hover:underline"
         >
           &larr; Try a different address
+        </button>
+      </div>
+    );
+  }
+
+  // State-bill campaign, participant from another state: their legislators
+  // have no vote here — don't generate an irrelevant message. Explain why and
+  // offer ways to stay useful.
+  if (step === 'wrongState') {
+    const requiredState = campaign.bill_state || campaign.target_filter?.state || '';
+    const stateName = US_STATES.find((s) => s.code === requiredState)?.name || requiredState;
+    const shareUrl = campaign.custom_domain
+      ? `https://${campaign.custom_domain}/`
+      : `https://www.mydemocracy.app/campaign/${campaign.slug}`;
+    return (
+      <div className="max-w-xl mx-auto py-8 text-center">
+        <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
+          <svg className="w-8 h-8 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+        </div>
+        <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+          This campaign is for {stateName} constituents
+        </h3>
+        <p className="text-gray-600 dark:text-gray-300 mb-6">
+          It&apos;s about a bill in the {stateName} legislature, and only {stateName} legislators vote on it — your
+          own state legislators aren&apos;t part of this decision. The most useful thing you can do is pass it along
+          to people in {stateName}, or find an issue where <em>your</em> officials are the ones deciding.
+        </p>
+        <div className="flex flex-col sm:flex-row gap-3 justify-center mb-6">
+          <Link
+            href="/issues"
+            className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white text-sm font-medium rounded-lg transition-colors"
+          >
+            Find an issue for your state
+          </Link>
+        </div>
+        <div className="mb-6 text-left">
+          <SocialShare url={shareUrl} text={`${stateName} friends: "${campaign.headline}" needs your voice — your legislators are the ones deciding.`} />
+        </div>
+        <button onClick={() => setStep('form')} className="text-sm text-purple-600 dark:text-purple-400 hover:underline">
+          &larr; I entered the wrong address
         </button>
       </div>
     );

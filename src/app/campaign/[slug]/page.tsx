@@ -78,6 +78,20 @@ export default async function CampaignPage({ params }: PageProps) {
   const campaign = data as Campaign;
   const isStory = campaign.campaign_type === 'storytelling';
 
+  // Stage campaigns carry their parent so the participate flow can offer the
+  // broader action to people who can't act on this narrow stage (e.g. their
+  // rep isn't on the targeted committee).
+  let parentCampaign: { slug: string; headline: string } | null = null;
+  if (campaign.parent_campaign_id) {
+    const { data: parentRow } = await admin
+      .from('campaigns')
+      .select('slug, headline')
+      .eq('id', campaign.parent_campaign_id)
+      .eq('approval_status', 'approved')
+      .single();
+    parentCampaign = parentRow ?? null;
+  }
+
   // White-label branding (unlisted campaigns only — the insert enforces this)
   const branded = !!(campaign.org_name || campaign.org_logo_url);
   const brandColor = campaign.brand_color || null;
@@ -321,7 +335,7 @@ export default async function CampaignPage({ params }: PageProps) {
         <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">
           {isStory ? 'Share Your Story' : 'Take Action'}
         </h2>
-        {isStory ? <StorytellerFlow campaign={campaign} /> : <CampaignParticipate campaign={campaign} />}
+        {isStory ? <StorytellerFlow campaign={campaign} /> : <CampaignParticipate campaign={campaign} parentCampaign={parentCampaign} />}
       </div>
     </div>
   );
