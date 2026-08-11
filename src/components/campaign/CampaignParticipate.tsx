@@ -861,6 +861,20 @@ export function CampaignParticipate({
           </p>
         </div>
 
+        {campaign.message_template && (
+          <details className="p-3 bg-gray-50 dark:bg-gray-700/40 border border-gray-200 dark:border-gray-600 rounded-xl">
+            <summary className="text-sm font-medium text-gray-700 dark:text-gray-300 cursor-pointer select-none">
+              See the campaign&apos;s talking points woven into your messages
+            </summary>
+            <p className="mt-2 text-sm text-gray-600 dark:text-gray-400 whitespace-pre-line border-l-2 border-purple-400 pl-3">
+              {campaign.message_template}
+            </p>
+            <p className="mt-2 text-xs text-gray-500 dark:text-gray-400">
+              Everything else is written for your voice — edit anything before you send.
+            </p>
+          </details>
+        )}
+
         {usedFallback && (
           <div className="p-3 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded-xl">
             <p className="text-sm text-amber-800 dark:text-amber-300 font-medium">

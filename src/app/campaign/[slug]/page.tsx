@@ -4,6 +4,7 @@ import { createAdminClient } from '@/lib/supabase';
 import { CampaignParticipate } from '@/components/campaign/CampaignParticipate';
 import { StorytellerFlow } from '@/components/campaign/StorytellerFlow';
 import { BillJourney } from '@/components/campaign/BillJourney';
+import { CampaignTalkingPoints } from '@/components/campaign/CampaignTalkingPoints';
 import { CopyLinkButton } from '@/components/campaign/CopyLinkButton';
 import { fetchBillCard } from '@/lib/congress-api';
 import type { Campaign } from '@/lib/types';
@@ -316,6 +317,11 @@ export default async function CampaignPage({ params }: PageProps) {
           })()}
         </div>
       </div>
+
+      {/* The campaign's contributed language, in the open (two-block model) */}
+      {!isStory && campaign.message_template && (
+        <CampaignTalkingPoints template={campaign.message_template} orgName={campaign.org_name ?? null} accent={campaign.brand_color ?? null} />
+      )}
 
       {/* Bill journey — parent campaigns show where the legislation stands */}
       {!isStory && !campaign.parent_campaign_id && (
