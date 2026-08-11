@@ -55,16 +55,20 @@ Rules:
 Return ONLY JSON, no markdown:
 {"summary":"...","themes":[{"label":"...","prevalence":0,"quote":"..."}]}`;
 
-/** Pull the raw text to theme for a campaign. Returns [] if the table/columns
- * aren't reachable (kept defensive so analytics never hard-fails). */
+/** Pull the raw text to theme for a campaign. A parent campaign themes the
+ * whole initiative — its own material plus every stage's. Returns [] if the
+ * table/columns aren't reachable (kept defensive so analytics never
+ * hard-fails). */
 async function gatherSources(campaignId: string, kind: InsightKind): Promise<string[]> {
   const admin = createAdminClient();
   try {
+    const { data: children } = await admin.from('campaigns').select('id').eq('parent_campaign_id', campaignId);
+    const ids = [campaignId, ...(children ?? []).map((c) => c.id as string)];
     if (kind === 'stories') {
       const { data } = await admin
         .from('stories')
         .select('body, created_at')
-        .eq('campaign_id', campaignId)
+        .in('campaign_id', ids)
         .eq('status', 'active')
         .order('created_at', { ascending: false })
         .limit(MAX_SOURCES);
@@ -73,7 +77,7 @@ async function gatherSources(campaignId: string, kind: InsightKind): Promise<str
     const { data } = await admin
       .from('messages')
       .select('message_body, created_at')
-      .eq('campaign_id', campaignId)
+      .in('campaign_id', ids)
       .order('created_at', { ascending: false })
       .limit(MAX_SOURCES);
     return (data ?? []).map((r) => String(r.message_body ?? '').trim()).filter(Boolean);
