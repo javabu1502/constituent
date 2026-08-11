@@ -340,18 +340,28 @@ export async function buildCampaignReport(campaign: CampaignRow, nowMs: number):
   const admin = createAdminClient();
   const isStorytelling = campaign.campaign_type === 'storytelling';
 
+  // A parent campaign's report covers the whole initiative: its own activity
+  // plus every stage's. Children are fetched first so the reach/momentum
+  // queries can include their ids.
+  const { data: children } = await admin
+    .from('campaigns')
+    .select('id, slug, headline, stage_goal, created_at')
+    .eq('parent_campaign_id', campaign.id)
+    .order('created_at', { ascending: true });
+  const campaignIds = [campaign.id, ...(children ?? []).map((c) => c.id as string)];
+
   const [{ data: messages }, { data: actions }, storiesRes, { data: socialPosts }, insightsRes] = await Promise.all([
     admin
       .from('messages')
       .select(
         'legislator_name, legislator_party, legislator_level, legislator_chamber, advocate_city, advocate_state, delivery_method, message_intent, created_at'
       )
-      .eq('campaign_id', campaign.id)
+      .in('campaign_id', campaignIds)
       .limit(5000),
     admin
       .from('campaign_actions')
       .select('participant_city, participant_state, messages_sent, created_at')
-      .eq('campaign_id', campaign.id)
+      .in('campaign_id', campaignIds)
       .limit(5000),
     isStorytelling
       ? admin
@@ -368,11 +378,6 @@ export async function buildCampaignReport(campaign: CampaignRow, nowMs: number):
   // Stage roll-up (parent campaigns only): each child stage with its reach,
   // in legislative-journey order.
   let stages: ReportSourceRows['stages'] = null;
-  const { data: children } = await admin
-    .from('campaigns')
-    .select('id, slug, headline, stage_goal, created_at')
-    .eq('parent_campaign_id', campaign.id)
-    .order('created_at', { ascending: true });
   if (children && children.length > 0) {
     const counted = await Promise.all(
       children.map(async (c) => {
