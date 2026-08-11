@@ -5,6 +5,8 @@ import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase';
 import { truncate } from '@/lib/utils';
 import { STAGE_GOAL_LABELS, stageOrder, type StageGoal } from '@/lib/stages';
+import { LegislatorSearch } from '@/components/dashboard/LegislatorSearch';
+import { getStateLegislators } from '@/lib/state-legislators';
 import { MyRepresentativesSection } from '@/components/dashboard/MyRepresentativesSection';
 import { LocalOfficialsSection } from '@/components/dashboard/LocalOfficialsSection';
 import { RepActivitySection } from '@/components/dashboard/RepActivitySection';
@@ -255,6 +257,14 @@ export default async function DashboardPage() {
                   >
                     Analytics
                   </Link>
+                  {campaign.campaign_type !== 'storytelling' && (
+                    <Link
+                      href={`/campaign/${campaign.slug}/report`}
+                      className="px-3 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 text-sm font-medium rounded-lg transition-colors"
+                    >
+                      Report
+                    </Link>
+                  )}
                   <CopyLinkButton slug={campaign.slug as string} />
                   <DeleteCampaignButton slug={campaign.slug as string} headline={campaign.headline as string} />
                 </div>
@@ -295,6 +305,11 @@ export default async function DashboardPage() {
   // the reach those campaigns earned. Orgs have no elected officials of their
   // own and never send constituent messages, so none of those sections render.
   if (accountType === 'organization') {
+    // Member lookup roster: every legislator in the states this org works.
+    const rosterStates = [...new Set(allCampaigns.map((c) => c.bill_state as string | null).filter(Boolean))] as string[];
+    const legislatorRoster = rosterStates.flatMap((st) =>
+      getStateLegislators(st).map((l) => ({ id: l.id, name: l.name, party: l.party ?? null, chamber: l.chamber ?? null, state: st }))
+    );
     // Sum initiative totals only (parents already include their stages).
     const totalActions = topLevelCampaigns.reduce((n, c) => n + (Number(c.action_count) || 0), 0);
     const totalStories = topLevelCampaigns.reduce((n, c) => n + (Number(c.story_count) || 0), 0);
@@ -323,10 +338,17 @@ export default async function DashboardPage() {
               )}
             </p>
           </div>
-          <Link href="/campaign/create" className="shrink-0 text-sm font-medium px-4 py-2 rounded-lg bg-purple-600 hover:bg-purple-700 text-white transition-colors">
-            + New campaign
-          </Link>
+          <div className="shrink-0 flex items-center gap-2">
+            <Link href="/dashboard/report" className="text-sm font-medium px-4 py-2 rounded-lg border border-purple-300 dark:border-purple-700 text-purple-700 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/20 transition-colors">
+              Organization report
+            </Link>
+            <Link href="/campaign/create" className="text-sm font-medium px-4 py-2 rounded-lg bg-purple-600 hover:bg-purple-700 text-white transition-colors">
+              + New campaign
+            </Link>
+          </div>
         </div>
+
+        <LegislatorSearch roster={legislatorRoster} />
 
         <div className="grid grid-cols-3 gap-4 mb-10">
           <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">

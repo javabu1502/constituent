@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState, useCallback } from 'react';
 import Link from 'next/link';
+import { WHIP_POSITIONS, WHIP_LABELS, WHIP_STYLES, isSupportive, emptyWhipTally } from '@/lib/whip';
 
 /**
  * The whip board — the org's vote count for a campaign initiative. Every
@@ -24,17 +25,6 @@ type Row = {
 
 type Note = { id: string; legislator_id: string | null; legislator_name: string | null; body: string; created_at: string };
 
-const POSITIONS = ['for', 'committed', 'uncommitted', 'against'] as const;
-const POSITION_LABELS: Record<string, string> = {
-  for: 'Leaning yes', committed: 'Committed', uncommitted: 'Uncommitted', against: 'Opposed',
-};
-const POSITION_STYLES: Record<string, string> = {
-  for: 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300',
-  committed: 'bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300',
-  uncommitted: 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300',
-  against: 'bg-rose-100 text-rose-800 dark:bg-rose-900/40 dark:text-rose-300',
-};
-
 export function WhipBoard({ slug }: { slug: string }) {
   const [rows, setRows] = useState<Row[]>([]);
   const [notes, setNotes] = useState<Note[]>([]);
@@ -44,6 +34,7 @@ export function WhipBoard({ slug }: { slug: string }) {
   const [committeeOnly, setCommitteeOnly] = useState(false);
   const [openLegislator, setOpenLegislator] = useState<string | null>(null);
   const [noteDraft, setNoteDraft] = useState('');
+  const [noteHours, setNoteHours] = useState('');
   const [savingNote, setSavingNote] = useState(false);
 
   const load = useCallback(async () => {
@@ -80,13 +71,19 @@ export function WhipBoard({ slug }: { slug: string }) {
       const res = await fetch(`/api/campaigns/${slug}/notes`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ body: noteDraft.trim(), legislator_id: row?.id ?? null, legislator_name: row?.name ?? null }),
+        body: JSON.stringify({
+          body: noteDraft.trim(),
+          legislator_id: row?.id ?? null,
+          legislator_name: row?.name ?? null,
+          hours: noteHours.trim() ? Number(noteHours) : null,
+        }),
       });
       if (res.ok) {
         const { note } = await res.json();
         setNotes((prev) => [note, ...prev]);
         if (row) setRows((prev) => prev.map((r) => (r.id === row.id ? { ...r, noteCount: r.noteCount + 1 } : r)));
         setNoteDraft('');
+        setNoteHours('');
       }
     } finally {
       setSavingNote(false);
@@ -94,7 +91,7 @@ export function WhipBoard({ slug }: { slug: string }) {
   };
 
   const tally = useMemo(() => {
-    const t = { for: 0, committed: 0, uncommitted: 0, against: 0 };
+    const t = emptyWhipTally();
     for (const r of rows) if (r.position && r.position in t) t[r.position as keyof typeof t] += 1;
     return t;
   }, [rows]);
@@ -103,7 +100,7 @@ export function WhipBoard({ slug }: { slug: string }) {
     if (!committee) return null;
     let supportive = 0;
     for (const r of rows) {
-      if (r.onCommittee && (r.position === 'for' || r.position === 'committed' || r.sponsor)) supportive += 1;
+      if (r.onCommittee && (isSupportive(r.position) || r.sponsor)) supportive += 1;
     }
     return { supportive, size: committee.size, majority: Math.floor(committee.size / 2) + 1 };
   }, [rows, committee]);
@@ -125,19 +122,18 @@ export function WhipBoard({ slug }: { slug: string }) {
       <div className="flex flex-wrap items-center justify-between gap-2 mb-1">
         <h2 className="text-base font-semibold text-gray-900 dark:text-white">Whip count</h2>
         <div className="flex flex-wrap gap-1.5 text-xs">
-          {POSITIONS.map((p) => (
-            <span key={p} className={`px-2 py-0.5 rounded-full font-medium ${POSITION_STYLES[p]}`}>
-              {POSITION_LABELS[p]} {tally[p]}
+          {WHIP_POSITIONS.map((p) => (
+            <span key={p} className={`px-2 py-0.5 rounded-full font-medium ${WHIP_STYLES[p]}`}>
+              {WHIP_LABELS[p]} {tally[p]}
             </span>
           ))}
         </div>
       </div>
       <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">
-        Your private vote count, relative to YOUR campaign&apos;s ask. <span className="font-medium">Leaning yes</span> = favorable
-        signals but no promise · <span className="font-medium">Committed</span> = told you they&apos;re with you (the only yes you
-        can bank) · <span className="font-medium">Uncommitted</span> = still winnable — your to-do list ·{' '}
-        <span className="font-medium">Opposed</span> = against your ask. Sponsor badges sync automatically from the bill record.
-        Click a name for full intel.
+        Your private vote count, relative to YOUR campaign&apos;s ask. <span className="font-medium">Yes / No</span> = they
+        told you how they&apos;ll vote · <span className="font-medium">Leaning</span> = your read, no promise yet ·{' '}
+        <span className="font-medium">Uncommitted</span> = still winnable — your to-do list. Sponsor badges sync
+        automatically from the bill record. Click a name for full intel; log hours on notes to track lobbying time.
       </p>
 
       {committeeTally && committee && (
@@ -200,11 +196,11 @@ export function WhipBoard({ slug }: { slug: string }) {
                 <select
                   value={r.position ?? ''}
                   onChange={(e) => e.target.value && setPosition(r, e.target.value)}
-                  className={`text-xs rounded-lg border border-gray-200 dark:border-gray-600 px-1.5 py-1 ${r.position ? POSITION_STYLES[r.position] : 'bg-white dark:bg-gray-900 text-gray-500 dark:text-gray-400'}`}
+                  className={`text-xs rounded-lg border border-gray-200 dark:border-gray-600 px-1.5 py-1 ${r.position ? WHIP_STYLES[r.position as keyof typeof WHIP_STYLES] : 'bg-white dark:bg-gray-900 text-gray-500 dark:text-gray-400'}`}
                 >
                   <option value="">— set —</option>
-                  {POSITIONS.map((p) => (
-                    <option key={p} value={p}>{POSITION_LABELS[p]}</option>
+                  {WHIP_POSITIONS.map((p) => (
+                    <option key={p} value={p}>{WHIP_LABELS[p]}</option>
                   ))}
                 </select>
                 <button
@@ -235,6 +231,17 @@ export function WhipBoard({ slug }: { slug: string }) {
                     onKeyDown={(e) => { if (e.key === 'Enter') void addNote(r); }}
                     placeholder={`Meeting note about ${r.name.split(' ').pop()}…`}
                     className="flex-1 px-2.5 py-1.5 text-sm rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
+                  />
+                  <input
+                    type="number"
+                    min="0"
+                    max="24"
+                    step="0.25"
+                    value={noteHours}
+                    onChange={(e) => setNoteHours(e.target.value)}
+                    placeholder="hrs"
+                    title="Lobbying hours spent on this touchpoint"
+                    className="w-16 px-2 py-1.5 text-sm rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
                   />
                   <button
                     type="button"

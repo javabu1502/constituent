@@ -174,10 +174,11 @@ describe('assembleCampaignReport', () => {
 
   it('passes org effort (meetings + whip) through for the direct-advocacy section', () => {
     const rows = emptyRows();
-    rows.orgEffort = { meetings: 14, whip: { for: 5, committed: 3, uncommitted: 4, against: 2 } };
+    rows.orgEffort = { meetings: 14, hours: 9.5, whip: { yes: 5, leaning_yes: 3, uncommitted: 4, leaning_no: 1, no: 2 } };
     const report = assembleCampaignReport(campaign, rows, NOW);
     expect(report.orgEffort?.meetings).toBe(14);
-    expect(report.orgEffort?.whip?.committed).toBe(3);
+    expect(report.orgEffort?.hours).toBe(9.5);
+    expect(report.orgEffort?.whip?.leaning_yes).toBe(3);
   });
 
   it('judges outcome against the campaign goal (oppose + dead bill = win)', () => {

@@ -22,7 +22,7 @@ const positionSchema = z.object({
   legislator_name: z.string().min(1).max(200),
   legislator_party: z.string().max(50).nullish(),
   legislator_chamber: z.string().max(20).nullish(),
-  position: z.enum(['for', 'against', 'committed', 'uncommitted']),
+  position: z.enum(['leaning_yes', 'yes', 'uncommitted', 'leaning_no', 'no']),
 });
 
 async function loadOwnedCampaign(slug: string) {

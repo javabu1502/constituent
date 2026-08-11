@@ -5,6 +5,8 @@ import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase';
 import { listStateCommittees } from '@/lib/state-committees';
 import { getCommitteesForMember } from '@/lib/legislators';
+import { getStateLegislators } from '@/lib/state-legislators';
+import { WHIP_LABELS as POSITION_LABELS, WHIP_STYLES as POSITION_STYLES } from '@/lib/whip';
 
 export const metadata: Metadata = { title: 'Legislator Intel | My Democracy', robots: { index: false } };
 
@@ -15,15 +17,6 @@ export const metadata: Metadata = { title: 'Legislator Intel | My Democracy', ro
  * meeting prepared" page.
  */
 
-const POSITION_LABELS: Record<string, string> = {
-  for: 'Leaning yes', committed: 'Committed', uncommitted: 'Uncommitted', against: 'Opposed',
-};
-const POSITION_STYLES: Record<string, string> = {
-  for: 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-300',
-  committed: 'bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300',
-  uncommitted: 'bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300',
-  against: 'bg-rose-100 text-rose-800 dark:bg-rose-900/40 dark:text-rose-300',
-};
 const OUTCOME_LABELS: Record<string, string> = {
   passed: 'Passed', failed: 'Failed', died_committee: 'Died in committee', vetoed: 'Vetoed', withdrawn: 'Withdrawn',
 };
@@ -84,11 +77,24 @@ export default async function LegislatorIntelPage({
       : Promise.resolve({ data: [] as { campaign_id: string; advocate_name: string | null; advocate_city: string | null; message_intent: string | null; created_at: string }[] }),
   ]);
 
-  // Identity: whip rows first, message rows as fallback.
+  // Identity: whip rows first, then the state rosters (search can land on a
+  // legislator the org hasn't whipped anywhere yet).
   const first = positions?.[0];
-  const name = first?.legislator_name ?? 'Legislator';
-  const party = first?.legislator_party ?? null;
-  const chamber = first?.legislator_chamber ?? null;
+  let name = first?.legislator_name ?? 'Legislator';
+  let party = first?.legislator_party ?? null;
+  let chamber = first?.legislator_chamber ?? null;
+  if (!first && id.startsWith('ocd-person/')) {
+    const states = [...new Set((campaigns ?? []).map((c) => c.bill_state as string | null).filter(Boolean))] as string[];
+    for (const st of states) {
+      const leg = getStateLegislators(st).find((l) => l.id === id);
+      if (leg) {
+        name = leg.name;
+        party = leg.party ?? null;
+        chamber = leg.chamber ?? null;
+        break;
+      }
+    }
+  }
 
   // Committee memberships: federal ids resolve directly; state ids scan the
   // states this org campaigns in.
@@ -162,8 +168,8 @@ export default async function LegislatorIntelPage({
                   </p>
                 </div>
                 {p ? (
-                  <span className={`shrink-0 px-2.5 py-1 text-xs font-semibold rounded-full ${POSITION_STYLES[p.position as string] ?? ''}`}>
-                    {POSITION_LABELS[p.position as string] ?? p.position}
+                  <span className={`shrink-0 px-2.5 py-1 text-xs font-semibold rounded-full ${POSITION_STYLES[p.position as keyof typeof POSITION_STYLES] ?? ''}`}>
+                    {POSITION_LABELS[p.position as keyof typeof POSITION_LABELS] ?? p.position}
                   </span>
                 ) : (
                   <span className="shrink-0 px-2.5 py-1 text-xs rounded-full border border-dashed border-gray-300 dark:border-gray-600 text-gray-400 dark:text-gray-500">

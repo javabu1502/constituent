@@ -10,6 +10,7 @@
 import { createAdminClient } from '@/lib/supabase';
 import { getCachedInsights, type CampaignInsights } from '@/lib/insights';
 import { stageOrder } from '@/lib/stages';
+import { emptyWhipTally, type WhipPosition } from '@/lib/whip';
 
 export interface ReportOfficial {
   name: string;
@@ -64,10 +65,11 @@ export interface CampaignReport {
   social: { posts: number; likes: number; reposts: number; replies: number } | null;
   /** Parent campaigns only: per-stage funnel down the legislative journey. */
   stages: { slug: string; headline: string; goal: string; constituents: number; messages: number }[] | null;
-  /** The org's own advocacy work: meeting notes logged + whip standing. */
+  /** The org's own advocacy work: touchpoints, lobbying hours, whip standing. */
   orgEffort: {
     meetings: number;
-    whip: { for: number; committed: number; uncommitted: number; against: number } | null;
+    hours: number;
+    whip: Record<WhipPosition, number> | null;
   } | null;
   /** How the legislation ended, judged against the campaign's goal. */
   outcome: { result: string; note: string | null; goalMet: boolean } | null;
@@ -429,22 +431,27 @@ export async function buildCampaignReport(campaign: CampaignRow, nowMs: number):
   }
 
   // Org-side effort: meeting notes + whip standing (kept on the parent).
-  const [{ count: noteCount }, { data: positionRows }, { data: stakeholderRows }] = await Promise.all([
-    admin.from('campaign_notes').select('id', { count: 'exact', head: true }).eq('campaign_id', campaign.id),
+  const [{ data: noteRows }, { data: positionRows }, { data: stakeholderRows }] = await Promise.all([
+    admin.from('campaign_notes').select('hours').eq('campaign_id', campaign.id).limit(2000),
     admin.from('legislator_positions').select('position').eq('campaign_id', campaign.id),
     admin.from('campaign_stakeholders').select('name, side, statement').eq('campaign_id', campaign.id).order('created_at'),
   ]);
+  const noteCount = (noteRows ?? []).length;
+  const lobbyingHours = (noteRows ?? []).reduce((n, r) => n + (Number(r.hours) || 0), 0);
   const supporters = (stakeholderRows ?? []).filter((s) => s.side === 'support').map((s) => ({ name: s.name as string, statement: (s.statement as string) ?? null }));
   const opponents = (stakeholderRows ?? []).filter((s) => s.side === 'oppose').map((s) => ({ name: s.name as string, statement: (s.statement as string) ?? null }));
   const coalition = supporters.length + opponents.length > 0 ? { supporters, opponents } : null;
   let orgEffort: CampaignReport['orgEffort'] = null;
-  const whipTally = { for: 0, committed: 0, uncommitted: 0, against: 0 };
+  const whipTally = emptyWhipTally();
+  let positioned = 0;
   for (const p of positionRows ?? []) {
-    if (p.position in whipTally) whipTally[p.position as keyof typeof whipTally] += 1;
+    if (p.position in whipTally) {
+      whipTally[p.position as WhipPosition] += 1;
+      positioned += 1;
+    }
   }
-  const positioned = whipTally.for + whipTally.committed + whipTally.uncommitted + whipTally.against;
-  if ((noteCount ?? 0) > 0 || positioned > 0) {
-    orgEffort = { meetings: noteCount ?? 0, whip: positioned > 0 ? whipTally : null };
+  if (noteCount > 0 || positioned > 0) {
+    orgEffort = { meetings: noteCount, hours: Math.round(lobbyingHours * 4) / 4, whip: positioned > 0 ? whipTally : null };
   }
 
   return assembleCampaignReport(

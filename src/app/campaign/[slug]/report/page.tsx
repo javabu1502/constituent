@@ -307,18 +307,22 @@ export default async function CampaignReportPage({ params }: PageProps) {
           <section>
             <h2 className="text-base font-semibold mb-3">Direct advocacy</h2>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-              <Stat label="Lawmaker & stakeholder touchpoints" value={report.orgEffort.meetings.toLocaleString()} sub="meetings and conversations logged" />
+              <Stat
+                label="Lawmaker & stakeholder touchpoints"
+                value={report.orgEffort.meetings.toLocaleString()}
+                sub={report.orgEffort.hours > 0 ? `${report.orgEffort.hours.toLocaleString()} lobbying hours logged` : 'meetings and conversations logged'}
+              />
               {report.orgEffort.whip && (
                 <>
                   <Stat
                     label="Supportive legislators"
-                    value={(report.orgEffort.whip.for + report.orgEffort.whip.committed).toLocaleString()}
-                    sub={`${report.orgEffort.whip.for} for · ${report.orgEffort.whip.committed} committed`}
+                    value={(report.orgEffort.whip.yes + report.orgEffort.whip.leaning_yes).toLocaleString()}
+                    sub={`${report.orgEffort.whip.yes} yes · ${report.orgEffort.whip.leaning_yes} leaning yes`}
                   />
                   <Stat
-                    label="Still being worked"
-                    value={report.orgEffort.whip.uncommitted.toLocaleString()}
-                    sub={`${report.orgEffort.whip.against} opposed`}
+                    label="Still in play"
+                    value={(report.orgEffort.whip.uncommitted + report.orgEffort.whip.leaning_no).toLocaleString()}
+                    sub={`${report.orgEffort.whip.no} firm no`}
                   />
                 </>
               )}
