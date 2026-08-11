@@ -45,6 +45,20 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Too many requests' }, { status: 429, headers: { 'Retry-After': String(retryAfter) } });
   }
 
+  // Campaigns are run by advocacy organizations; constituent accounts use the
+  // contact/story flows instead.
+  const { data: creatorProfile } = await createAdminClient()
+    .from('profiles')
+    .select('account_type')
+    .eq('user_id', user.id)
+    .single();
+  if (creatorProfile?.account_type !== 'organization') {
+    return NextResponse.json(
+      { error: 'Campaign creation is available to advocacy organization accounts' },
+      { status: 403 }
+    );
+  }
+
   let raw: unknown;
   try {
     raw = await request.json();

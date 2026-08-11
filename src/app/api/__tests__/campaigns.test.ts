@@ -25,6 +25,15 @@ vi.mock('@/lib/supabase', () => ({
           })),
         };
       }
+      if (table === 'profiles') {
+        return {
+          select: vi.fn(() => ({
+            eq: vi.fn(() => ({
+              single: vi.fn(async () => ({ data: { account_type: 'organization' }, error: null })),
+            })),
+          })),
+        };
+      }
       return {};
     }),
   })),

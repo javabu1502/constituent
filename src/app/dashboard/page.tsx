@@ -4,6 +4,7 @@ import { redirect } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase';
 import { truncate } from '@/lib/utils';
+import { STAGE_GOAL_LABELS, stageOrder, type StageGoal } from '@/lib/stages';
 import { MyRepresentativesSection } from '@/components/dashboard/MyRepresentativesSection';
 import { LocalOfficialsSection } from '@/components/dashboard/LocalOfficialsSection';
 import { RepActivitySection } from '@/components/dashboard/RepActivitySection';
@@ -119,6 +120,27 @@ export default async function DashboardPage() {
 
   const campaigns = campaignsResult.data;
 
+  // Stage campaigns nest under their parent so each initiative reads as ONE
+  // narrative — the parent card carries the whole journey, not six siblings.
+  type CampRow = Record<string, string | number | null>;
+  const allCampaigns = (campaigns ?? []) as CampRow[];
+  const stagesByParent = new Map<string, CampRow[]>();
+  for (const c of allCampaigns) {
+    const pid = c.parent_campaign_id as string | null;
+    if (pid) {
+      if (!stagesByParent.has(pid)) stagesByParent.set(pid, []);
+      stagesByParent.get(pid)!.push(c);
+    }
+  }
+  for (const list of stagesByParent.values()) {
+    list.sort(
+      (a, b) =>
+        stageOrder((a.stage_goal as string) || null) - stageOrder((b.stage_goal as string) || null) ||
+        String(a.created_at).localeCompare(String(b.created_at))
+    );
+  }
+  const topLevelCampaigns = allCampaigns.filter((c) => !c.parent_campaign_id);
+
   const myStories = (storiesResult.data ?? []).map((s: Record<string, unknown>) => {
     const body = (s.body as string | null) ?? '';
     type CampRel = { headline?: string };
@@ -142,6 +164,168 @@ export default async function DashboardPage() {
     : null;
 
   const recentMessages = messages?.slice(0, 5) ?? [];
+
+  const accountType = ((profile as Record<string, unknown> | null)?.account_type as string) ?? 'constituent';
+
+  const campaignsSection = campaigns && campaigns.length > 0 ? (
+        <section id="campaigns" className="mb-10 scroll-mt-24">
+          <div className="flex items-center justify-between mb-1">
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-white">My Campaigns</h2>
+            <Link href="/campaign/create" className="text-sm text-purple-600 dark:text-purple-400 hover:underline font-medium">
+              + New campaign
+            </Link>
+          </div>
+          <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">Campaigns you&rsquo;re running — check analytics to see your reach.</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {topLevelCampaigns.map((campaign) => {
+              const stages = stagesByParent.get(campaign.id as string) ?? [];
+              return (
+              <div
+                key={campaign.id}
+                className={`bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5${stages.length > 0 ? ' sm:col-span-2' : ''}`}
+              >
+                {(() => {
+                  const isStory = campaign.campaign_type === 'storytelling';
+                  const count = isStory
+                    ? Number(campaign.story_count)
+                    : Number(campaign.action_count) + stages.reduce((n, s) => n + (Number(s.action_count) || 0), 0);
+                  const approval = String(campaign.approval_status || 'approved');
+                  const approvalBadge: Record<string, { label: string; cls: string }> = {
+                    pending: { label: 'Pending review', cls: 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-300' },
+                    rejected: { label: 'Needs changes', cls: 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300' },
+                  };
+                  const ab = approvalBadge[approval];
+                  return (
+                    <div className="flex items-start justify-between mb-3">
+                      <div className="flex flex-wrap items-center gap-1.5">
+                        {campaign.issue_area && (
+                          <span className="px-2.5 py-1 text-xs font-medium rounded-full bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300">
+                            {campaign.issue_area}
+                          </span>
+                        )}
+                        {isStory && (
+                          <span className="px-2.5 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300">
+                            Storytelling
+                          </span>
+                        )}
+                        {ab && (
+                          <span className={`px-2.5 py-1 text-xs font-medium rounded-full ${ab.cls}`}>{ab.label}</span>
+                        )}
+                      </div>
+                      <div className="flex items-center gap-1.5 text-purple-600 dark:text-purple-400">
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        <span className="text-sm font-bold">{count}</span>
+                        <span className="text-xs text-gray-500 dark:text-gray-400">
+                          {isStory ? `stor${count === 1 ? 'y' : 'ies'}` : `action${count !== 1 ? 's' : ''}`}
+                        </span>
+                      </div>
+                    </div>
+                  );
+                })()}
+                <h3 className="font-semibold text-gray-900 dark:text-white mb-1 line-clamp-1">
+                  {campaign.headline}
+                </h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 line-clamp-2">
+                  {campaign.description}
+                </p>
+                <div className="flex items-center gap-2">
+                  <Link
+                    href={`/campaign/${campaign.slug}`}
+                    className="flex-1 text-center px-3 py-2 bg-purple-600 hover:bg-purple-700 text-white text-sm font-medium rounded-lg transition-colors"
+                  >
+                    View Campaign
+                  </Link>
+                  <Link
+                    href={`/campaign/${campaign.slug}/analytics`}
+                    className="px-3 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 text-sm font-medium rounded-lg transition-colors"
+                  >
+                    Analytics
+                  </Link>
+                  <CopyLinkButton slug={campaign.slug as string} />
+                  <DeleteCampaignButton slug={campaign.slug as string} headline={campaign.headline as string} />
+                </div>
+
+                {/* The initiative's journey: its stages, in legislative order */}
+                {stages.length > 0 && (
+                  <div className="mt-4 border-t border-gray-100 dark:border-gray-700 pt-3">
+                    <p className="text-xs font-semibold uppercase tracking-wide text-gray-400 dark:text-gray-500 mb-2">
+                      Journey · {stages.length} stage{stages.length !== 1 ? 's' : ''}
+                    </p>
+                    <ol className="space-y-1.5">
+                      {stages.map((s, i) => (
+                        <li key={s.id} className="flex items-center justify-between gap-3 text-sm">
+                          <span className="flex items-center gap-2 min-w-0">
+                            <span className="shrink-0 w-5 h-5 rounded-full bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300 text-[11px] font-bold flex items-center justify-center">
+                              {i + 1}
+                            </span>
+                            <Link href={`/campaign/${s.slug}/analytics`} className="truncate text-gray-900 dark:text-white hover:underline">
+                              {STAGE_GOAL_LABELS[((s.stage_goal as string) || 'custom') as StageGoal] ?? 'Stage'}
+                            </Link>
+                            <span className="truncate text-gray-500 dark:text-gray-400 hidden md:inline">— {s.headline}</span>
+                          </span>
+                          <span className="shrink-0 text-xs text-gray-500 dark:text-gray-400">
+                            {Number(s.action_count) || 0} action{Number(s.action_count) !== 1 ? 's' : ''}
+                          </span>
+                        </li>
+                      ))}
+                    </ol>
+                  </div>
+                )}
+              </div>
+            );})}
+          </div>
+        </section>
+  ) : null;
+
+  // Advocacy organizations get an org-shaped dashboard: their campaigns and
+  // the reach those campaigns earned. Orgs have no elected officials of their
+  // own and never send constituent messages, so none of those sections render.
+  if (accountType === 'organization') {
+    const totalActions = allCampaigns.reduce((n, c) => n + (Number(c.action_count) || 0), 0);
+    const totalStories = allCampaigns.reduce((n, c) => n + (Number(c.story_count) || 0), 0);
+    return (
+      <div className="max-w-6xl mx-auto px-4 py-8">
+        <div className="mb-8 flex items-start justify-between gap-3">
+          <div>
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Organization Dashboard</h1>
+            <p className="text-gray-600 dark:text-gray-400 mt-1">
+              {(profile?.name as string) || user.email} · advocacy account
+            </p>
+          </div>
+          <Link href="/campaign/create" className="shrink-0 text-sm font-medium px-4 py-2 rounded-lg bg-purple-600 hover:bg-purple-700 text-white transition-colors">
+            + New campaign
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-3 gap-4 mb-10">
+          <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
+            <p className="text-sm text-gray-500 dark:text-gray-400">Campaigns</p>
+            <p className="text-3xl font-bold text-gray-900 dark:text-white mt-1">{topLevelCampaigns.length}</p>
+          </div>
+          <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
+            <p className="text-sm text-gray-500 dark:text-gray-400">Constituent actions</p>
+            <p className="text-3xl font-bold text-gray-900 dark:text-white mt-1">{totalActions.toLocaleString()}</p>
+          </div>
+          <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
+            <p className="text-sm text-gray-500 dark:text-gray-400">Stories collected</p>
+            <p className="text-3xl font-bold text-gray-900 dark:text-white mt-1">{totalStories.toLocaleString()}</p>
+          </div>
+        </div>
+
+        {campaignsSection ?? (
+          <div className="text-center py-16 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700">
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">No campaigns yet</h2>
+            <p className="text-gray-600 dark:text-gray-400 mb-4">Launch your first campaign to start mobilizing constituents.</p>
+            <Link href="/campaign/create" className="inline-block px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white text-sm font-medium rounded-lg">
+              Create a campaign
+            </Link>
+          </div>
+        )}
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-8">
@@ -204,7 +388,7 @@ export default async function DashboardPage() {
             </a>
             <a href={campaigns && campaigns.length > 0 ? '#campaigns' : '/campaign/create'} className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4 hover:border-purple-300 dark:hover:border-purple-600 transition-colors">
               <p className="text-sm text-gray-500 dark:text-gray-400">My Campaigns</p>
-              <p className="text-3xl font-bold text-gray-900 dark:text-white mt-1">{campaigns?.length ?? 0}</p>
+              <p className="text-3xl font-bold text-gray-900 dark:text-white mt-1">{topLevelCampaigns.length}</p>
               <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
                 {campaigns && campaigns.length > 0 ? 'created by you' : 'start your first one'}
               </p>
@@ -213,87 +397,7 @@ export default async function DashboardPage() {
         </section>
       )}
 
-      {/* PRIMARY: My Campaigns — creators check on their campaigns first */}
-      {campaigns && campaigns.length > 0 && (
-        <section id="campaigns" className="mb-10 scroll-mt-24">
-          <div className="flex items-center justify-between mb-1">
-            <h2 className="text-lg font-semibold text-gray-900 dark:text-white">My Campaigns</h2>
-            <Link href="/campaign/create" className="text-sm text-purple-600 dark:text-purple-400 hover:underline font-medium">
-              + New campaign
-            </Link>
-          </div>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">Campaigns you&rsquo;re running — check analytics to see your reach.</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {campaigns.map((campaign: Record<string, string | number>) => (
-              <div
-                key={campaign.id}
-                className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5"
-              >
-                {(() => {
-                  const isStory = campaign.campaign_type === 'storytelling';
-                  const count = isStory ? Number(campaign.story_count) : Number(campaign.action_count);
-                  const approval = String(campaign.approval_status || 'approved');
-                  const approvalBadge: Record<string, { label: string; cls: string }> = {
-                    pending: { label: 'Pending review', cls: 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-300' },
-                    rejected: { label: 'Needs changes', cls: 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300' },
-                  };
-                  const ab = approvalBadge[approval];
-                  return (
-                    <div className="flex items-start justify-between mb-3">
-                      <div className="flex flex-wrap items-center gap-1.5">
-                        {campaign.issue_area && (
-                          <span className="px-2.5 py-1 text-xs font-medium rounded-full bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300">
-                            {campaign.issue_area}
-                          </span>
-                        )}
-                        {isStory && (
-                          <span className="px-2.5 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300">
-                            Storytelling
-                          </span>
-                        )}
-                        {ab && (
-                          <span className={`px-2.5 py-1 text-xs font-medium rounded-full ${ab.cls}`}>{ab.label}</span>
-                        )}
-                      </div>
-                      <div className="flex items-center gap-1.5 text-purple-600 dark:text-purple-400">
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
-                        </svg>
-                        <span className="text-sm font-bold">{count}</span>
-                        <span className="text-xs text-gray-500 dark:text-gray-400">
-                          {isStory ? `stor${count === 1 ? 'y' : 'ies'}` : `action${count !== 1 ? 's' : ''}`}
-                        </span>
-                      </div>
-                    </div>
-                  );
-                })()}
-                <h3 className="font-semibold text-gray-900 dark:text-white mb-1 line-clamp-1">
-                  {campaign.headline}
-                </h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 line-clamp-2">
-                  {campaign.description}
-                </p>
-                <div className="flex items-center gap-2">
-                  <Link
-                    href={`/campaign/${campaign.slug}`}
-                    className="flex-1 text-center px-3 py-2 bg-purple-600 hover:bg-purple-700 text-white text-sm font-medium rounded-lg transition-colors"
-                  >
-                    View Campaign
-                  </Link>
-                  <Link
-                    href={`/campaign/${campaign.slug}/analytics`}
-                    className="px-3 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 text-sm font-medium rounded-lg transition-colors"
-                  >
-                    Analytics
-                  </Link>
-                  <CopyLinkButton slug={campaign.slug as string} />
-                  <DeleteCampaignButton slug={campaign.slug as string} headline={campaign.headline as string} />
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
+      {campaignsSection}
 
       {/* PRIMARY: My Representatives */}
       <section className="mb-10">

@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import { createAdminClient } from '@/lib/supabase';
 import { CampaignParticipate } from '@/components/campaign/CampaignParticipate';
 import { StorytellerFlow } from '@/components/campaign/StorytellerFlow';
+import { BillJourney } from '@/components/campaign/BillJourney';
 import { CopyLinkButton } from '@/components/campaign/CopyLinkButton';
 import { fetchBillCard } from '@/lib/congress-api';
 import type { Campaign } from '@/lib/types';
@@ -301,6 +302,19 @@ export default async function CampaignPage({ params }: PageProps) {
           })()}
         </div>
       </div>
+
+      {/* Bill journey — parent campaigns show where the legislation stands */}
+      {!isStory && !campaign.parent_campaign_id && (
+        <BillJourney
+          campaign={{
+            id: campaign.id,
+            bill_ref: campaign.bill_ref ?? null,
+            bill_level: campaign.bill_level ?? null,
+            bill_state: campaign.bill_state ?? null,
+            bill_title: campaign.bill_title ?? null,
+          }}
+        />
+      )}
 
       {/* Participation form */}
       <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm p-6 sm:p-8">

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { createClient } from '@/lib/supabase/server';
+import { createAdminClient } from '@/lib/supabase';
 import { CampaignForm } from '@/components/campaign/CampaignForm';
 
 export const metadata: Metadata = {
@@ -43,6 +44,44 @@ export default async function CreateCampaignPage({
   const isStory = type === 'storytelling';
   const copy = isStory ? COPY.storytelling : COPY.advocacy;
   const createPath = `/campaign/create${isStory ? '?type=storytelling' : '?type=advocacy'}`;
+
+  // Campaigns are run by advocacy organizations. Signed-in constituents get a
+  // clear explanation + how to get an org account, not a mystery 403.
+  if (user) {
+    const admin = createAdminClient();
+    const { data: creatorProfile } = await admin
+      .from('profiles')
+      .select('account_type')
+      .eq('user_id', user.id)
+      .single();
+    if (creatorProfile?.account_type !== 'organization') {
+      return (
+        <div className="max-w-2xl mx-auto px-4 py-12 text-center">
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">Campaigns are for advocacy organizations</h1>
+          <p className="text-gray-600 dark:text-gray-400 mb-6 max-w-lg mx-auto">
+            Running a campaign on My Democracy is for advocacy groups, nonprofits, and civic organizations. As an
+            individual, the fastest way to be heard is to weigh in on an active issue or contact your officials
+            directly — it takes about two minutes.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center mb-8">
+            <Link href="/issues" className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white text-sm font-medium rounded-lg">
+              Weigh in on an issue
+            </Link>
+            <Link href="/contact" className="px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 text-sm font-medium rounded-lg">
+              Contact your officials
+            </Link>
+          </div>
+          <p className="text-sm text-gray-500 dark:text-gray-400">
+            Represent an organization?{' '}
+            <a href="mailto:hello@mydemocracy.app?subject=Advocacy%20organization%20account" className="text-purple-600 dark:text-purple-400 hover:underline">
+              Get in touch about an organization account
+            </a>
+            .
+          </p>
+        </div>
+      );
+    }
+  }
 
   // Logged-out visitors get a public explainer + sign-in CTA instead of a cold
   // redirect to the login box, so they understand what they clicked on.
