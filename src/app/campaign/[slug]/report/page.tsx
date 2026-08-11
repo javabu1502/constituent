@@ -282,6 +282,30 @@ export default async function CampaignReportPage({ params }: PageProps) {
           </section>
         )}
 
+        {/* Organizational advocacy — the org's own work alongside the grassroots */}
+        {report.orgEffort && (
+          <section>
+            <h2 className="text-base font-semibold mb-3">Direct advocacy</h2>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+              <Stat label="Lawmaker & stakeholder touchpoints" value={report.orgEffort.meetings.toLocaleString()} sub="meetings and conversations logged" />
+              {report.orgEffort.whip && (
+                <>
+                  <Stat
+                    label="Supportive legislators"
+                    value={(report.orgEffort.whip.for + report.orgEffort.whip.committed).toLocaleString()}
+                    sub={`${report.orgEffort.whip.for} for · ${report.orgEffort.whip.committed} committed`}
+                  />
+                  <Stat
+                    label="Still being worked"
+                    value={report.orgEffort.whip.uncommitted.toLocaleString()}
+                    sub={`${report.orgEffort.whip.against} opposed`}
+                  />
+                </>
+              )}
+            </div>
+          </section>
+        )}
+
         {/* Social amplification */}
         {report.social && (
           <section>

@@ -102,6 +102,28 @@ export function CampaignInsightsPanel({
                 {t.quote && (
                   <p className="text-sm text-gray-600 dark:text-gray-400 italic mt-0.5">&ldquo;{t.quote}&rdquo;</p>
                 )}
+                {t.quotes && t.quotes.length > 0 && (
+                  <details className="mt-1.5">
+                    <summary className="text-xs font-medium text-purple-600 dark:text-purple-400 cursor-pointer select-none">
+                      See {t.quotes.length} more direct quote{t.quotes.length !== 1 ? 's' : ''}
+                    </summary>
+                    <ul className="mt-2 space-y-2">
+                      {t.quotes.map((q, qi) => (
+                        <li key={qi} className="flex items-start justify-between gap-2 text-sm text-gray-600 dark:text-gray-400 italic bg-gray-50 dark:bg-gray-700/40 rounded-lg px-3 py-2">
+                          <span>&ldquo;{q}&rdquo;</span>
+                          <button
+                            type="button"
+                            onClick={() => navigator.clipboard.writeText(`"${q}"`)}
+                            className="shrink-0 not-italic text-[11px] font-medium text-purple-600 dark:text-purple-400 hover:underline"
+                            title="Copy quote"
+                          >
+                            Copy
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  </details>
+                )}
               </div>
             ))}
           </div>

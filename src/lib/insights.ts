@@ -24,6 +24,8 @@ export interface InsightTheme {
   prevalence: number;
   /** One short verbatim, de-identified excerpt illustrating the theme. */
   quote: string;
+  /** Additional verbatim de-identified excerpts for the drill-down view. */
+  quotes?: string[];
 }
 
 export interface CampaignInsights {
@@ -39,7 +41,7 @@ export const MIN_SOURCES = 3;
 const FRESH_MS = 24 * 60 * 60 * 1000;
 const MAX_SOURCES = 200; // cap the LLM input
 const PER_SOURCE_CHARS = 700; // truncate each story/message so the prompt stays bounded
-const MODEL_VERSION = 'insights-v1';
+const MODEL_VERSION = 'insights-v2'; // v2: per-theme drill-down quotes
 
 const SYSTEM_PROMPT = `You are an analyst for a strictly NONPARTISAN civic-engagement platform. You are given a set of constituent submissions to ONE campaign — either personal STORIES or messages people sent their elected officials. Produce a neutral, faithful thematic read the campaign organizer can act on.
 
@@ -48,12 +50,14 @@ Rules:
 - Identify the 3 to 6 most common THEMES across the submissions. For each theme give:
   - "label": a short plain-language name (2-5 words),
   - "prevalence": an integer estimate of how many submissions touch it,
-  - "quote": ONE short verbatim excerpt (<= 160 characters) that illustrates it.
+  - "quote": the single BEST short verbatim excerpt (<= 160 characters) that illustrates it,
+  - "quotes": 2 to 5 MORE verbatim excerpts (each <= 240 characters, from DIFFERENT submissions than the main quote when possible) for the organizer's drill-down — the strongest, most human language people actually used.
+- Every quote must be VERBATIM from a submission (light truncation with ... is fine; never paraphrase or compose).
 - DE-IDENTIFY: never include a person's name, email, street address, or any identifying detail in the summary or any quote. Themes and representative language only.
 - "summary": 2-3 plain sentences on what constituents are saying overall and why it matters to the organizer.
 
 Return ONLY JSON, no markdown:
-{"summary":"...","themes":[{"label":"...","prevalence":0,"quote":"..."}]}`;
+{"summary":"...","themes":[{"label":"...","prevalence":0,"quote":"...","quotes":["...","..."]}]}`;
 
 /** Pull the raw text to theme for a campaign. A parent campaign themes the
  * whole initiative — its own material plus every stage's. Returns [] if the
@@ -91,11 +95,18 @@ function coerceInsights(raw: unknown, sourceCount: number, kind: InsightKind): C
   if (!obj || typeof obj.summary !== 'string' || !Array.isArray(obj.themes)) return null;
   const themes: InsightTheme[] = obj.themes
     .map((t) => {
-      const tt = t as { label?: unknown; prevalence?: unknown; quote?: unknown };
+      const tt = t as { label?: unknown; prevalence?: unknown; quote?: unknown; quotes?: unknown };
+      const extraQuotes = Array.isArray(tt.quotes)
+        ? tt.quotes
+            .filter((q): q is string => typeof q === 'string' && q.trim().length > 0)
+            .map((q) => q.trim().slice(0, 280))
+            .slice(0, 5)
+        : [];
       return {
         label: typeof tt.label === 'string' ? tt.label.trim() : '',
         prevalence: Number.isFinite(Number(tt.prevalence)) ? Math.max(0, Math.round(Number(tt.prevalence))) : 0,
         quote: typeof tt.quote === 'string' ? tt.quote.trim().slice(0, 200) : '',
+        ...(extraQuotes.length ? { quotes: extraQuotes } : {}),
       };
     })
     .filter((t) => t.label)

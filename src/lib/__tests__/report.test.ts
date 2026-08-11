@@ -36,7 +36,7 @@ function msg(overrides: Partial<ReportSourceRows['messages'][number]> = {}) {
 }
 
 function emptyRows(): ReportSourceRows {
-  return { messages: [], actions: [], stories: null, socialPosts: [], insights: null, stages: null };
+  return { messages: [], actions: [], stories: null, socialPosts: [], insights: null, stages: null, orgEffort: null };
 }
 
 describe('assembleCampaignReport', () => {
@@ -170,6 +170,14 @@ describe('assembleCampaignReport', () => {
     const report = assembleCampaignReport(campaign, rows, NOW);
     expect(report.stages).toHaveLength(2);
     expect(report.stages![0].goal).toBe('cosponsor');
+  });
+
+  it('passes org effort (meetings + whip) through for the direct-advocacy section', () => {
+    const rows = emptyRows();
+    rows.orgEffort = { meetings: 14, whip: { for: 5, committed: 3, uncommitted: 4, against: 2 } };
+    const report = assembleCampaignReport(campaign, rows, NOW);
+    expect(report.orgEffort?.meetings).toBe(14);
+    expect(report.orgEffort?.whip?.committed).toBe(3);
   });
 
   it('keeps the report JSON-serializable end to end', () => {

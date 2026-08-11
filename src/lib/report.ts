@@ -64,6 +64,11 @@ export interface CampaignReport {
   social: { posts: number; likes: number; reposts: number; replies: number } | null;
   /** Parent campaigns only: per-stage funnel down the legislative journey. */
   stages: { slug: string; headline: string; goal: string; constituents: number; messages: number }[] | null;
+  /** The org's own advocacy work: meeting notes logged + whip standing. */
+  orgEffort: {
+    meetings: number;
+    whip: { for: number; committed: number; uncommitted: number; against: number } | null;
+  } | null;
   insights: CampaignInsights | null;
   generatedAt: string;
 }
@@ -119,6 +124,8 @@ export interface ReportSourceRows {
   insights: CampaignInsights | null;
   /** Pre-counted child stages in journey order; null = not a parent. */
   stages: { slug: string; headline: string; goal: string; constituents: number; messages: number }[] | null;
+  /** Org-side effort (notes + whip), pre-counted by the fetch layer. */
+  orgEffort: CampaignReport['orgEffort'];
 }
 
 const DAY_MS = 24 * 60 * 60 * 1000;
@@ -326,6 +333,7 @@ export function assembleCampaignReport(campaign: CampaignRow, rows: ReportSource
     storyImpact,
     social,
     stages: rows.stages,
+    orgEffort: rows.orgEffort,
     insights: rows.insights,
     generatedAt: new Date(nowMs).toISOString(),
   };
@@ -400,6 +408,21 @@ export async function buildCampaignReport(campaign: CampaignRow, nowMs: number):
       .map(({ slug, headline, goal, constituents, messages: m }) => ({ slug, headline, goal, constituents, messages: m }));
   }
 
+  // Org-side effort: meeting notes + whip standing (kept on the parent).
+  const [{ count: noteCount }, { data: positionRows }] = await Promise.all([
+    admin.from('campaign_notes').select('id', { count: 'exact', head: true }).eq('campaign_id', campaign.id),
+    admin.from('legislator_positions').select('position').eq('campaign_id', campaign.id),
+  ]);
+  let orgEffort: CampaignReport['orgEffort'] = null;
+  const whipTally = { for: 0, committed: 0, uncommitted: 0, against: 0 };
+  for (const p of positionRows ?? []) {
+    if (p.position in whipTally) whipTally[p.position as keyof typeof whipTally] += 1;
+  }
+  const positioned = whipTally.for + whipTally.committed + whipTally.uncommitted + whipTally.against;
+  if ((noteCount ?? 0) > 0 || positioned > 0) {
+    orgEffort = { meetings: noteCount ?? 0, whip: positioned > 0 ? whipTally : null };
+  }
+
   return assembleCampaignReport(
     campaign,
     {
@@ -409,6 +432,7 @@ export async function buildCampaignReport(campaign: CampaignRow, nowMs: number):
       socialPosts: (socialPosts ?? []) as SocialPostRow[],
       insights: insightsRes?.insights ?? null,
       stages,
+      orgEffort,
     },
     nowMs
   );

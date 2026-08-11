@@ -5,6 +5,7 @@ import { createAdminClient } from '@/lib/supabase';
 import { CampaignAnalytics } from '@/components/campaign/CampaignAnalytics';
 import { CampaignStages } from '@/components/campaign/CampaignStages';
 import { BillStatusPanel } from '@/components/campaign/BillStatusPanel';
+import { WhipBoard } from '@/components/campaign/WhipBoard';
 import { CampaignInsightsPanel } from '@/components/campaign/CampaignInsightsPanel';
 import { getCachedInsights } from '@/lib/insights';
 import { usageLabels } from '@/lib/story-usage';
@@ -418,6 +419,8 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
           }}
         />
       )}
+
+      {!campaign.parent_campaign_id && <WhipBoard slug={slug} />}
 
       <CampaignStages
         campaign={{
