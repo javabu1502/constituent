@@ -243,7 +243,8 @@ export function CampaignForm({ initialType }: { initialType?: 'advocacy' | 'stor
         setError('Please pick the committee this stage targets');
         return;
       }
-      if (!direction) {
+      // Stages inherit the parent's position — only standalone campaigns pick.
+      if (!direction && !parentCampaignId) {
         setError('Please choose whether this campaign asks people to support or oppose');
         return;
       }
@@ -284,7 +285,7 @@ export function CampaignForm({ initialType }: { initialType?: 'advocacy' | 'stor
         ? {
             ...sharedBody,
             target_level: targetLevel,
-            direction,
+            direction: direction || undefined,
             message_template: messageTemplate.trim() || null,
             distribution_plan: distributionPlan.trim(),
             ...(parentCampaignId
@@ -654,7 +655,10 @@ export function CampaignForm({ initialType }: { initialType?: 'advocacy' | 'stor
         )}
       </div>
 
-      {/* Direction — advocacy campaigns are one-way by design */}
+      {/* Direction — advocacy campaigns are one-way by design. Stages don't
+          ask: a cosponsor push or a thank-you can't "oppose" its own
+          initiative — the position carries over from the parent campaign. */}
+      {!parentCampaignId && (
       <div>
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
           What position is this campaign taking? <span className="text-red-500">*</span>
@@ -684,12 +688,20 @@ export function CampaignForm({ initialType }: { initialType?: 'advocacy' | 'stor
           Your campaign advocates one position. Every participant&apos;s message will make the case to {direction || 'your chosen side'}.
         </p>
       </div>
+      )}
 
       {/* Message Template (optional) */}
       <div>
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-          Message Template <span className="text-gray-400 dark:text-gray-500 font-normal">(optional)</span>
+          {parentCampaignId ? 'Talking points for this stage' : 'Message Template'}{' '}
+          <span className="text-gray-400 dark:text-gray-500 font-normal">(optional)</span>
         </label>
+        {parentCampaignId && (
+          <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">
+            Each stage can carry its own talking points — cite the hearing date at the committee stage, the committee
+            vote at the floor stage. Leave blank to reuse the parent campaign&apos;s points.
+          </p>
+        )}
         <textarea
           value={messageTemplate}
           onChange={(e) => setMessageTemplate(e.target.value)}

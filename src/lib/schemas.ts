@@ -160,7 +160,9 @@ export const createCampaignSchema = z.object({
     if (!data.target_level) {
       ctx.addIssue({ code: 'custom', path: ['target_level'], message: 'Target level is required' });
     }
-    if (!data.direction) {
+    // Stages inherit the parent's direction — a thank-you or cosponsor stage
+    // can't take a different position than its own initiative.
+    if (!data.direction && !data.parent_campaign_id) {
       ctx.addIssue({ code: 'custom', path: ['direction'], message: 'Choose whether the campaign supports or opposes' });
     }
     if (!data.distribution_plan || data.distribution_plan.trim().length < 10) {

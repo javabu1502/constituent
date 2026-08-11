@@ -194,6 +194,19 @@ describe('createCampaignSchema', () => {
     expect(result.success).toBe(true);
   });
 
+  it('accepts a stage without direction (inherited from the parent)', () => {
+    const result = createCampaignSchema.safeParse({
+      headline: 'Thank your legislators',
+      description: 'Thank-you stage for our initiative.',
+      issue_area: 'Environment',
+      target_level: 'state',
+      distribution_plan: 'Share with our neighborhood association and local environmental groups.',
+      parent_campaign_id: '4c3f0f9e-58a5-4f5e-9f2e-0d5cbe6f7a11',
+      stage_goal: 'thank_you',
+    });
+    expect(result.success).toBe(true);
+  });
+
   it('accepts a committee stage with parent + committee', () => {
     const result = createCampaignSchema.safeParse({
       headline: 'Pass Energy & Commerce',

@@ -86,11 +86,11 @@ export async function POST(request: NextRequest) {
   // Stage campaigns: verify the parent before anything is written. Only the
   // parent's creator can add stages, and nesting is one level deep — a stage
   // cannot grow stages of its own.
-  let parent: { bill_level: string | null; bill_state: string | null; bill_ref: string | null; bill_title: string | null; bill_url: string | null; issue_area: string | null; issue_subtopic: string | null } | null = null;
+  let parent: { bill_level: string | null; bill_state: string | null; bill_ref: string | null; bill_title: string | null; bill_url: string | null; issue_area: string | null; issue_subtopic: string | null; direction: string | null; message_template: string | null } | null = null;
   if (parent_campaign_id) {
     const { data: parentRow } = await createAdminClient()
       .from('campaigns')
-      .select('creator_id, parent_campaign_id, campaign_type, bill_level, bill_state, bill_ref, bill_title, bill_url, issue_area, issue_subtopic')
+      .select('creator_id, parent_campaign_id, campaign_type, bill_level, bill_state, bill_ref, bill_title, bill_url, issue_area, issue_subtopic, direction, message_template')
       .eq('id', parent_campaign_id)
       .single();
     if (!parentRow) {
@@ -145,8 +145,10 @@ export async function POST(request: NextRequest) {
       issue_area,
       issue_subtopic: issue_subtopic || null,
       target_level: isStory ? 'federal' : target_level,
-      direction: isStory ? null : (direction || null),
-      message_template: isStory ? null : (message_template || null),
+      // Stages inherit position and talking points from the parent unless
+      // they bring their own (talking points usually DO change per stage).
+      direction: isStory ? null : (direction || parent?.direction || null),
+      message_template: isStory ? null : (message_template || parent?.message_template || null),
       distribution_plan: isStory ? null : distribution_plan,
       // Stages inherit the parent's bill unless they set their own.
       bill_level: isStory ? null : (bill_level || parent?.bill_level || null),
