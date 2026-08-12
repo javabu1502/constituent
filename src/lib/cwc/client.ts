@@ -160,7 +160,7 @@ export function sendSenate(delivery: CwcDelivery, mode: Mode = 'uat'): Promise<C
 /** Senate active offices (voluntary participation, ~half). Endpoint from env
  *  (SCWC_OFFICES_URL); George also provides a downloadable JSON in SOAPBox. */
 export async function getActiveOfficesSenate(): Promise<unknown> {
-  const url = process.env.SCWC_OFFICES_URL;
+  const url = CWC_ENDPOINTS.senate.activeOffices;
   if (!url) throw new Error('SCWC_OFFICES_URL not set (Senate Get Active Offices endpoint)');
   const apiKey = process.env.SCWC_TEST_API_KEY || process.env.SCWC_API_KEY || '';
   const full = apiKey ? `${url}${url.includes('?') ? '&' : '?'}apikey=${encodeURIComponent(apiKey)}` : url;

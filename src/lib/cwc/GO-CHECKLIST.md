@@ -25,16 +25,31 @@ uses UAT and `/v2/validate`; the Senate uses its test sandbox.
    bill-type casing to lowercase (`hr`, `s`) — see `constants.ts` note.
 6. **Test message to UAT sandbox:** `?action=send` → House UAT `/v2/message`.
 
-## Senate — ready to finish the moment George emails Monday
+## Senate — KEY RECEIVED 2026-08-12 ("Approved for Testing")
 
-Code is already env-driven; only these values are missing:
-1. **Set env in Vercel:** `SCWC_TEST_URL` = test endpoint, `SCWC_TEST_API_KEY` =
-   testing key (later `SCWC_PRODUCTION_URL` + `SCWC_API_KEY`), `SCWC_OFFICES_URL`
-   = Get Active Offices endpoint.
-2. **Test to sandbox:** `/api/admin/cwc-test?chamber=senate&action=send` → posts
-   to the Senate TEST env (stays in the SAA sandbox).
-3. **Email `saacwc@saa.senate.gov`** that test messages are ready for review
-   (required by George).
+Endpoints are now hardcoded defaults from the SOAPBox Technical Information
+page (env vars still override). Testing key is in Vercel prod as
+`SCWC_TEST_API_KEY`. Production key: not yet assigned — comes AFTER passing
+testing.
+
+**HARD GATE (Jared, 2026-08-12): no requests to House OR Senate — not even a
+validate or an offices fetch — until Lee has reviewed this PR.**
+
+Official acceptance path (from the SOAPBox doc), once Lee approves:
+1. Authenticate to the testing endpoint with `SCWC_TEST_API_KEY`.
+2. `GET api/active_offices` — refresh participating offices (required
+   regularly; unlisted offices reject).
+3. POST multiple test campaigns exercising the 100 test Member office codes
+   from the technical documentation (Content-Type `application/xml`; expect
+   `201 Created`; a `400` body explains validation failures; `409` = reused
+   DeliveryId).
+4. **Email `saacwc@saa.senate.gov`** that campaigns are in the testing
+   environment; follow SCWC Admin guidance.
+5. Pass testing → "Approved for Production" → retrieve prod key into
+   `SCWC_API_KEY`, re-run getoffices, maintain compliance.
+
+Note: testing office codes do NOT indicate production participation. SCWC
+maintenance windows: Sun 12a–6a and Wed 5a–7a ET (intermittent outages).
 
 ## Before REAL production sends (not needed for testing)
 

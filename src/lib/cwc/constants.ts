@@ -16,10 +16,17 @@ export const CWC_ENDPOINTS = {
     production: 'https://cwc.house.gov',
   },
   senate: {
-    // TODO: confirm exact hosts from the SOAPBox Technical Information page
-    // once the Senate testing key is issued.
-    test: process.env.SCWC_TEST_URL ?? '',
-    production: process.env.SCWC_PRODUCTION_URL ?? '',
+    // Confirmed from the SOAPBox Technical Information page (2026-08-12,
+    // saved in docs/Jared Shared Resources — marked proprietary, keep out of
+    // public docs). Key goes in ?apikey=; Content-Type MUST be
+    // application/xml (else 415). Success = 201 Created; 400 body explains
+    // validation failures; 409 = duplicate DeliveryId. SCWC maintenance
+    // windows: Sun 12a–6a + Wed 5a–7a ET — expect intermittent outages.
+    test: process.env.SCWC_TEST_URL ?? 'https://soapbox.senate.gov/api/testing-messages/',
+    production: process.env.SCWC_PRODUCTION_URL ?? 'https://soapbox.senate.gov/api/production-messages/',
+    // Participating offices — the doc requires querying this regularly and
+    // before large campaigns; messages to unlisted offices are rejected.
+    activeOffices: process.env.SCWC_OFFICES_URL ?? 'https://soapbox.senate.gov/api/active_offices',
   },
 } as const;
 
