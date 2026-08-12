@@ -33,7 +33,7 @@ export async function POST(
     return NextResponse.json({ error: parsed.error }, { status: 400 });
   }
 
-  const { participant_name, participant_city, participant_state, messages_sent, stance, action_id, turnstileToken } = parsed.data;
+  const { participant_name, participant_email, participant_city, participant_state, messages_sent, stance, action_id, turnstileToken } = parsed.data;
   const identity = await resolveUsageIdentity(ip);
   if (process.env.TURNSTILE_SECRET_KEY) {
     const valid = await verifyTurnstile(turnstileToken || '', { strict: !identity.userId });
@@ -101,6 +101,7 @@ export async function POST(
     .insert({
       campaign_id: campaign.id,
       participant_name,
+      participant_email: participant_email?.trim().toLowerCase() || null,
       participant_city,
       participant_state,
       messages_sent: messages_sent || 0,

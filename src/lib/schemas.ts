@@ -136,6 +136,8 @@ export const createCampaignSchema = z.object({
     .regex(/^([HS][A-Z]{3}\d{0,2}|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$/i, 'Unknown committee id')
     .optional(),
   target_committee_state: z.string().length(2).optional(),
+  // Stage creation: email everyone who already acted on the initiative.
+  notify_supporters: z.boolean().optional(),
 }).superRefine((data, ctx) => {
   if (data.stage_goal && !data.parent_campaign_id) {
     ctx.addIssue({ code: 'custom', path: ['stage_goal'], message: 'A stage goal requires a parent campaign' });
@@ -264,6 +266,8 @@ export const profileUpdateSchema = z
 
 export const campaignParticipateSchema = z.object({
   participant_name: z.string().min(1).max(200),
+  // Collected on org campaigns (with notice) for advance-the-campaign emails.
+  participant_email: z.string().email().max(254).nullish(),
   participant_city: z.string().min(1).max(100),
   participant_state: z.string().min(1).max(50),
   messages_sent: z.number().int().min(0).max(20).optional(),

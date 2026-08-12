@@ -5,6 +5,7 @@ import { createCampaignSchema, parseBody } from '@/lib/schemas';
 import { profileLimiter, getClientIp } from '@/lib/rate-limit';
 import { sendAdminNotification } from '@/lib/resend';
 import { getCommitteeMembers } from '@/lib/committees';
+import { sendStageAdvanceEmails } from '@/lib/campaign-updates';
 import { getStateCommitteeMembers } from '@/lib/state-committees';
 
 function escapeHtml(str: string): string {
@@ -26,6 +27,8 @@ function slugify(text: string): string {
 function randomSuffix(): string {
   return Math.random().toString(36).substring(2, 8);
 }
+
+export const maxDuration = 60; // stage creation may fan out supporter emails
 
 /**
  * POST /api/campaigns
@@ -77,7 +80,7 @@ export async function POST(request: NextRequest) {
     bill_level, bill_state, bill_ref, bill_title, bill_url,
     story_prompt, usage_statement, usage_tags, attribution_options, edit_revoke_policy, recipient_email,
     org_name, org_url, org_logo_url, brand_color, custom_domain,
-    parent_campaign_id, stage_goal, target_committee, target_committee_state,
+    parent_campaign_id, stage_goal, target_committee, target_committee_state, notify_supporters,
   } = parsed.data;
 
   const isStory = campaign_type === 'storytelling';
@@ -86,11 +89,11 @@ export async function POST(request: NextRequest) {
   // Stage campaigns: verify the parent before anything is written. Only the
   // parent's creator can add stages, and nesting is one level deep — a stage
   // cannot grow stages of its own.
-  let parent: { bill_level: string | null; bill_state: string | null; bill_ref: string | null; bill_title: string | null; bill_url: string | null; issue_area: string | null; issue_subtopic: string | null; direction: string | null; message_template: string | null } | null = null;
+  let parent: { bill_level: string | null; bill_state: string | null; bill_ref: string | null; bill_title: string | null; bill_url: string | null; issue_area: string | null; issue_subtopic: string | null; direction: string | null; message_template: string | null; slug: string; headline: string; org_name: string | null } | null = null;
   if (parent_campaign_id) {
     const { data: parentRow } = await createAdminClient()
       .from('campaigns')
-      .select('creator_id, parent_campaign_id, campaign_type, bill_level, bill_state, bill_ref, bill_title, bill_url, issue_area, issue_subtopic, direction, message_template')
+      .select('creator_id, parent_campaign_id, campaign_type, bill_level, bill_state, bill_ref, bill_title, bill_url, issue_area, issue_subtopic, direction, message_template, slug, headline, org_name')
       .eq('id', parent_campaign_id)
       .single();
     if (!parentRow) {
@@ -181,6 +184,27 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Failed to create campaign' }, { status: 500 });
   }
 
+  // Advance-the-campaign: a new stage re-engages everyone who already acted
+  // on the initiative. Awaited so serverless doesn't kill the batch; failures
+  // never break creation.
+  let supporterNotify: { eligible: number; sent: number } | null = null;
+  if (parent && parent_campaign_id && notify_supporters) {
+    try {
+      const r = await sendStageAdvanceEmails({
+        parentId: parent_campaign_id,
+        parentSlug: parent.slug,
+        parentHeadline: parent.headline,
+        orgName: parent.org_name,
+        billRef: parent.bill_ref,
+        stageSlug: campaign.slug as string,
+        stageHeadline: headline,
+      });
+      supporterNotify = { eligible: r.eligible, sent: r.sent };
+    } catch (err) {
+      console.error('[campaigns] supporter notify failed:', err);
+    }
+  }
+
   // Ping the admin that a new campaign is awaiting approval (fire-and-forget)
   void sendAdminNotification(
     `New campaign awaiting approval: ${headline}`,
@@ -198,7 +222,7 @@ export async function POST(request: NextRequest) {
      <p>Status is <strong>pending</strong> — review and approve it in the admin dashboard.</p>`
   );
 
-  return NextResponse.json(campaign);
+  return NextResponse.json({ ...campaign, supporter_notify: supporterNotify });
 }
 
 /**

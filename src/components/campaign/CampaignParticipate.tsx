@@ -98,6 +98,10 @@ export function CampaignParticipate({
 
   // Form fields
   const [name, setName] = useState('');
+  // Org campaigns collect email (with notice) so the campaign can re-engage
+  // participants when the bill advances. Official weigh-ins stay email-free.
+  const collectEmail = !campaign.is_official && campaign.campaign_type !== 'storytelling';
+  const [email, setEmail] = useState('');
   const [street, setStreet] = useState('');
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
@@ -160,6 +164,10 @@ export function CampaignParticipate({
     setError(null);
 
     if (!name.trim()) { setError('Please enter your name'); return; }
+    if (collectEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+      setError('Please enter your email so the campaign can update you when the bill moves');
+      return;
+    }
     if (!street.trim()) { setError('Please enter your street address'); return; }
     if (!city.trim()) { setError('Please enter your city'); return; }
     if (!state) { setError('Please select your state'); return; }
@@ -472,6 +480,7 @@ export function CampaignParticipate({
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             participant_name: name.trim(),
+            participant_email: collectEmail && email.trim() ? email.trim() : undefined,
             participant_city: city.trim(),
             participant_state: state,
             messages_sent: isFirst ? initialMessagesSent : undefined,
@@ -506,6 +515,7 @@ export function CampaignParticipate({
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         advocate_name: name.trim(),
+        advocate_email: collectEmail && email.trim() ? email.trim() : undefined,
         advocate_city: city.trim(),
         advocate_state: state,
         legislator_name: official.name,
@@ -646,6 +656,25 @@ export function CampaignParticipate({
             className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
           />
         </div>
+
+        {collectEmail && (
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              Email <span className="text-red-500">*</span>
+            </label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="you@example.com"
+              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
+            />
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+              {campaign.org_name || 'The campaign organizer'} will email you when this bill moves to its next step, so
+              you can act again when it counts. Unsubscribe anytime.
+            </p>
+          </div>
+        )}
 
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">

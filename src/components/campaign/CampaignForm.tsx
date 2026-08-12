@@ -50,6 +50,8 @@ export function CampaignForm({ initialType }: { initialType?: 'advocacy' | 'stor
   // picker then offers that state legislature's committees instead of Congress.
   const stageState = (searchParams.get('state') || '').toUpperCase().slice(0, 2);
   const [stageGoal, setStageGoal] = useState<string>(searchParams.get('goal') || '');
+  const supportersReachable = Number(searchParams.get('supporters') || '0') || 0;
+  const [notifySupporters, setNotifySupporters] = useState(true);
   // Preselected by the live-bill-status "Add this stage" suggestion.
   const [targetCommittee, setTargetCommittee] = useState(searchParams.get('committee') || '');
   const [committees, setCommittees] = useState<{ id: string; name: string; chamber: string }[]>([]);
@@ -292,6 +294,7 @@ export function CampaignForm({ initialType }: { initialType?: 'advocacy' | 'stor
               ? {
                   parent_campaign_id: parentCampaignId,
                   stage_goal: stageGoal || 'custom',
+                  notify_supporters: notifySupporters,
                   ...(stageGoal === 'committee' && targetCommittee
                     ? { target_committee: targetCommittee, ...(stageState ? { target_committee_state: stageState } : {}) }
                     : {}),
@@ -398,6 +401,15 @@ export function CampaignForm({ initialType }: { initialType?: 'advocacy' | 'stor
               <option value="custom">Something else</option>
             </select>
           </div>
+          <label className="flex items-start gap-2 text-sm text-gray-700 dark:text-gray-300 cursor-pointer select-none">
+            <input type="checkbox" checked={notifySupporters} onChange={(e) => setNotifySupporters(e.target.checked)} className="mt-0.5" />
+            <span>
+              Email everyone who already acted on this campaign
+              {supportersReachable > 0 ? ` (${supportersReachable.toLocaleString()} reachable supporters)` : ''} — &ldquo;the
+              bill moved, here&apos;s the next action.&rdquo;
+              <span className="block text-xs text-gray-500 dark:text-gray-400">Your past supporters are your fastest surge. Every email includes one-click unsubscribe.</span>
+            </span>
+          </label>
           {stageGoal === 'committee' && (
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">

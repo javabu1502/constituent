@@ -60,6 +60,16 @@ export async function CampaignStages({
     .order('created_at', { ascending: true });
   const stages = (data ?? []) as StageCampaign[];
 
+  // How many past participants the advance-the-campaign email can reach.
+  const initiativeIds = [campaign.id, ...stages.map((s) => s.id)];
+  const { data: emailRows } = await admin
+    .from('campaign_actions')
+    .select('participant_email')
+    .in('campaign_id', initiativeIds)
+    .not('participant_email', 'is', null)
+    .limit(10000);
+  const reachable = new Set((emailRows ?? []).map((r) => String(r.participant_email).toLowerCase())).size;
+
   const counts = await Promise.all(
     stages.map(async (s) => {
       const [{ count: actions }, { count: messages }] = await Promise.all([
@@ -81,7 +91,7 @@ export async function CampaignStages({
         <Link
           href={`/campaign/create?type=advocacy&parent=${campaign.id}&parent_name=${encodeURIComponent(campaign.headline)}${
             campaign.bill_level === 'state' && campaign.bill_state ? `&state=${campaign.bill_state}` : ''
-          }`}
+          }${reachable > 0 ? `&supporters=${reachable}` : ''}`}
           className="text-sm font-medium px-3 py-1.5 rounded-lg border border-purple-300 dark:border-purple-700 text-purple-700 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/20 transition-colors"
         >
           + Add a stage
