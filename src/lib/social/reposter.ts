@@ -37,6 +37,28 @@ const REPOST_CAP = 2; // per run — amplification stays deliberately rare
 const FRESH_HOURS = 36; // only reshare genuinely recent posts
 const MIN_LEN = 40; // skip one-liners / link-only cards
 
+// Trusted HANDLE is not trusted CONTENT: advocacy orgs post wins and outrage,
+// data orgs post charged news (2026-08-12: a govtrack.us post about an ICE
+// agent outside Rep. Omar's town hall got amplified under our name). Reposts
+// must match a POSITIVE civic-utility allowlist — process, dates, data — and
+// must not read like breaking news or a victory lap. Fewer reposts, all safe.
+const REPOST_ALLOWLIST = [
+  /\d+\s+bills?\s+(?:were\s+)?introduced/i,
+  /polls?\s+(?:are\s+)?open/i,
+  /election\s+day|primary\s+(?:day|election)/i,
+  /register(?:ed)?\s+to\s+vote|voter\s+registration|registration\s+deadline/i,
+  /how\s+(?:a\s+bill|congress|elections?|voting)\s+works?/i,
+  /turnout|ballot\s+(?:measure|initiative|drop)/i,
+  /%\s+of\s+(?:americans|u\.?s\.?\s+adults|voters)|survey\s+(?:of|found)|we\s+found/i,
+  /committee\s+(?:hearing|schedule)s?\b/i,
+];
+const REPOST_BLOCKLIST = /\bNEW:|\bBREAKING\b|\bWIN!|victor(?:y|ies)|\bdemand(?:s|ing)?\b|should\s+not\s+be|must\s+(?:not\s+)?\b|outrage|slam(?:s|med)?|blast(?:s|ed)?|\bICE\b|deport|executive\s+order/i;
+
+export function isRepostSafe(text: string): boolean {
+  if (REPOST_BLOCKLIST.test(text)) return false;
+  return REPOST_ALLOWLIST.some((re) => re.test(text));
+}
+
 export interface ReposterResult {
   reposted: number;
   scanned: number;
@@ -71,6 +93,7 @@ export async function runReposter(session: BlueskySession, opts: { maxPerRun?: n
       if (p.text.trim().length < MIN_LEN) continue;
       if (p.indexedAt && new Date(p.indexedAt).getTime() < cutoff) continue;
       if (isPartisan(p.text) || replyShouldSkip(p.text).skip) continue;
+      if (!isRepostSafe(p.text)) continue;
       candidates.push({ uri: p.uri, cid: p.cid, text: p.text, source: handle });
       break; // newest qualifying only — don't flood from one source
     }

@@ -108,6 +108,9 @@ Write ONE reply to the post below. Rules:
 - 280 graphemes max. Include the action link inline: https://mydemocracy.app
 - INVENT NOTHING. Only reference details the post literally states. Do not
   assume family members, jobs, locations, or specifics they did not write.
+- The app connects people ONLY to their own elected officials. NEVER name a
+  specific person as someone they can message through the app. Say "your
+  representatives" / "your senators", never "put it in [Name]'s inbox".
 - RELEVANCE: only reply if this is clearly (a) a person venting a real
   pocketbook or policy frustration you can redirect to their officials, or
   (b) a person genuinely asking a civic how-do-I question (who represents me,
