@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase';
 import { getStateLegislators } from '@/lib/state-legislators';
+import { getAllFederalLegislators } from '@/lib/legislators';
 import { getStateCommittee } from '@/lib/state-committees';
 import { getCommittee, getCommitteeMembers } from '@/lib/committees';
 import { openstatesRestFetch } from '@/lib/openstates-api';
@@ -98,8 +99,8 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ slu
     }
   }
 
-  // Roster: state campaigns get the full legislature; federal falls back to
-  // committee members + anyone already positioned/messaged.
+  // Roster: state campaigns get the full legislature; federal campaigns get
+  // the full Congress (House + Senate, keyed by bioguide).
   const stateCode = campaign.bill_state || committeeFilter?.state || null;
   type RosterRow = { id: string; name: string; party: string | null; chamber: string | null };
   const roster = new Map<string, RosterRow>();
@@ -107,9 +108,9 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ slu
     for (const l of getStateLegislators(stateCode)) {
       roster.set(l.id, { id: l.id, name: l.name, party: l.party ?? null, chamber: l.chamber ?? null });
     }
-  } else if (committeeFilter?.committee_id) {
-    for (const m of getCommitteeMembers(committeeFilter.committee_id)) {
-      roster.set(m.bioguide, { id: m.bioguide, name: m.name, party: m.party, chamber: null });
+  } else {
+    for (const l of getAllFederalLegislators()) {
+      roster.set(l.id, { id: l.id, name: l.name, party: l.party ?? null, chamber: l.chamber ?? null });
     }
   }
 

@@ -6,6 +6,7 @@ import { createAdminClient } from '@/lib/supabase';
 import { listStateCommittees } from '@/lib/state-committees';
 import { getCommitteesForMember } from '@/lib/legislators';
 import { getStateLegislators } from '@/lib/state-legislators';
+import { getAllFederalLegislators } from '@/lib/legislators';
 import { WHIP_LABELS as POSITION_LABELS, WHIP_STYLES as POSITION_STYLES } from '@/lib/whip';
 import { LogMeeting } from '@/components/dashboard/LogMeeting';
 
@@ -84,6 +85,14 @@ export default async function LegislatorIntelPage({
   let name = first?.legislator_name ?? 'Legislator';
   let party = first?.legislator_party ?? null;
   let chamber = first?.legislator_chamber ?? null;
+  if (!first && !id.startsWith('ocd-person/')) {
+    const fed = getAllFederalLegislators().find((l) => l.id === id);
+    if (fed) {
+      name = fed.name;
+      party = fed.party ?? null;
+      chamber = fed.chamber ?? null;
+    }
+  }
   if (!first && id.startsWith('ocd-person/')) {
     const states = [...new Set((campaigns ?? []).map((c) => c.bill_state as string | null).filter(Boolean))] as string[];
     for (const st of states) {
@@ -127,7 +136,11 @@ export default async function LegislatorIntelPage({
   const positionByCampaign = new Map((positions ?? []).map((p) => [topOf(p.campaign_id as string), p]));
 
   const fmt = (iso: string) => new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-  const chamberLabel = chamber === 'lower' ? 'Assembly / House' : chamber === 'upper' ? 'Senate' : chamber;
+  const chamberLabel =
+    chamber === 'lower' ? 'Assembly / House'
+    : chamber === 'upper' || chamber === 'senate' ? 'Senate'
+    : chamber === 'house' ? 'U.S. House'
+    : chamber;
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">

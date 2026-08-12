@@ -227,10 +227,7 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
   // The whip board replaces the officials panel wherever it can build a
   // roster (state campaigns, or a committee-targeted stage). Elsewhere the
   // classic officials panel stays.
-  const hasWhipBoard =
-    !campaign.parent_campaign_id &&
-    (!!campaign.bill_state ||
-      (childCampaigns ?? []).some((c) => (c.target_filter as { type?: string } | null)?.type === 'committee'));
+  const hasWhipBoard = !campaign.parent_campaign_id && campaign.campaign_type !== 'storytelling';
 
   const [messagesResult, actionsResult] = await Promise.all([
     admin

@@ -7,7 +7,7 @@
  */
 import { openstatesRestFetch } from '@/lib/openstates-api';
 import { congressFetch } from '@/lib/congress-api';
-import { detectBillReferences } from '@/lib/bills';
+import { detectBillReferences, CURRENT_CONGRESS } from '@/lib/bills';
 import type { StageGoal } from '@/lib/stages';
 
 export interface BillAction {
@@ -141,7 +141,7 @@ export async function fetchBillStatus(campaign: {
       if (!(congress && type && number) && campaign.bill_ref) {
         const fed = detectBillReferences(campaign.bill_ref).find((r) => r.level === 'federal');
         if (fed) {
-          congress = '119';
+          congress = String(CURRENT_CONGRESS);
           type = fed.type;
           number = fed.number;
         }

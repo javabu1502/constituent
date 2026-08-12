@@ -42,7 +42,7 @@ export function LegislatorSearch({
             >
               <span className="font-medium text-gray-900 dark:text-white">{r.name}</span>
               <span className="text-xs text-gray-500 dark:text-gray-400 shrink-0">
-                {[r.party ? r.party.charAt(0) : null, r.chamber === 'lower' ? 'Assembly/House' : r.chamber === 'upper' ? 'Senate' : null, r.state]
+                {[r.party ? r.party.charAt(0) : null, r.chamber === 'lower' || r.chamber === 'house' ? 'House' : r.chamber === 'upper' || r.chamber === 'senate' ? 'Senate' : null, r.state]
                   .filter(Boolean)
                   .join(' · ')}
               </span>

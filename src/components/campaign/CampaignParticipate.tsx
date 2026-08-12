@@ -9,7 +9,7 @@ import type { Official } from '@/lib/types';
 import { US_STATES } from '@/lib/constants';
 import { Button } from '@/components/ui/Button';
 import { formatPhone, salutationTitle } from '@/lib/utils';
-import { detectBillReferences } from '@/lib/bills';
+import { detectBillReferences, CURRENT_CONGRESS } from '@/lib/bills';
 import {
   determineDeliveryMethod,
   generateMailtoLink,
@@ -285,7 +285,7 @@ export function CampaignParticipate({
             if (!(congress && type && number) && campaign.bill_ref) {
               const fed = detectBillReferences(campaign.bill_ref).find((r) => r.level === 'federal');
               if (fed) {
-                congress = '119';
+                congress = String(CURRENT_CONGRESS);
                 type = fed.type;
                 number = fed.number;
               }

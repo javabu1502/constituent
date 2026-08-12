@@ -7,6 +7,7 @@ import { truncate } from '@/lib/utils';
 import { STAGE_GOAL_LABELS, stageOrder, type StageGoal } from '@/lib/stages';
 import { LegislatorSearch } from '@/components/dashboard/LegislatorSearch';
 import { getStateLegislators } from '@/lib/state-legislators';
+import { getAllFederalLegislators } from '@/lib/legislators';
 import { MyRepresentativesSection } from '@/components/dashboard/MyRepresentativesSection';
 import { LocalOfficialsSection } from '@/components/dashboard/LocalOfficialsSection';
 import { RepActivitySection } from '@/components/dashboard/RepActivitySection';
@@ -169,17 +170,9 @@ export default async function DashboardPage() {
 
   const accountType = ((profile as Record<string, unknown> | null)?.account_type as string) ?? 'constituent';
 
-  const campaignsSection = campaigns && campaigns.length > 0 ? (
-        <section id="campaigns" className="mb-10 scroll-mt-24">
-          <div className="flex items-center justify-between mb-1">
-            <h2 className="text-lg font-semibold text-gray-900 dark:text-white">My Campaigns</h2>
-            <Link href="/campaign/create" className="text-sm text-purple-600 dark:text-purple-400 hover:underline font-medium">
-              + New campaign
-            </Link>
-          </div>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">Campaigns you&rsquo;re running — check analytics to see your reach.</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {topLevelCampaigns.map((campaign) => {
+  // One campaign card, shared by the constituent view and the org's grouped
+  // (Federal / State) sections.
+  const renderCampaignCard = (campaign: CampRow) => {
               const stages = stagesByParent.get(campaign.id as string) ?? [];
               return (
               <div
@@ -203,6 +196,11 @@ export default async function DashboardPage() {
                         {campaign.issue_area && (
                           <span className="px-2.5 py-1 text-xs font-medium rounded-full bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300">
                             {campaign.issue_area}
+                          </span>
+                        )}
+                        {campaign.campaign_type !== 'storytelling' && (
+                          <span className="px-2.5 py-1 text-xs font-medium rounded-full bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-300">
+                            {campaign.bill_state ? `State · ${campaign.bill_state}` : 'Federal'}
                           </span>
                         )}
                         {isStory && (
@@ -296,7 +294,20 @@ export default async function DashboardPage() {
                   </div>
                 )}
               </div>
-            );})}
+            );
+  };
+
+  const campaignsSection = campaigns && campaigns.length > 0 ? (
+        <section id="campaigns" className="mb-10 scroll-mt-24">
+          <div className="flex items-center justify-between mb-1">
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-white">My Campaigns</h2>
+            <Link href="/campaign/create" className="text-sm text-purple-600 dark:text-purple-400 hover:underline font-medium">
+              + New campaign
+            </Link>
+          </div>
+          <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">Campaigns you&rsquo;re running — check analytics to see your reach.</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {topLevelCampaigns.map(renderCampaignCard)}
           </div>
         </section>
   ) : null;
@@ -305,11 +316,31 @@ export default async function DashboardPage() {
   // the reach those campaigns earned. Orgs have no elected officials of their
   // own and never send constituent messages, so none of those sections render.
   if (accountType === 'organization') {
-    // Member lookup roster: every legislator in the states this org works.
+    // Member lookup roster: every legislator in the states this org works,
+    // plus all of Congress when it runs federal campaigns. Most orgs live in
+    // one world or the other — the roster follows their portfolio.
     const rosterStates = [...new Set(allCampaigns.map((c) => c.bill_state as string | null).filter(Boolean))] as string[];
-    const legislatorRoster = rosterStates.flatMap((st) =>
-      getStateLegislators(st).map((l) => ({ id: l.id, name: l.name, party: l.party ?? null, chamber: l.chamber ?? null, state: st }))
+    const hasFederal = topLevelCampaigns.some(
+      (c) => c.campaign_type !== 'storytelling' && !c.bill_state && (c.bill_level === 'federal' || c.target_level === 'federal' || c.target_level === 'both' || !c.target_level)
     );
+    const legislatorRoster = [
+      ...rosterStates.flatMap((st) =>
+        getStateLegislators(st).map((l) => ({ id: l.id, name: l.name, party: l.party ?? null, chamber: l.chamber ?? null, state: st }))
+      ),
+      ...(hasFederal
+        ? getAllFederalLegislators().map((l) => ({ id: l.id, name: l.name, party: l.party ?? null, chamber: l.chamber ?? null, state: 'US' }))
+        : []),
+    ];
+    // Federal and state portfolios render as separate sections.
+    const federalCampaigns = topLevelCampaigns.filter((c) => c.campaign_type !== 'storytelling' && !c.bill_state);
+    const stateGroups = new Map<string, CampRow[]>();
+    for (const c of topLevelCampaigns) {
+      if (c.campaign_type === 'storytelling' || !c.bill_state) continue;
+      const st = c.bill_state as string;
+      if (!stateGroups.has(st)) stateGroups.set(st, []);
+      stateGroups.get(st)!.push(c);
+    }
+    const storytellingCampaigns = topLevelCampaigns.filter((c) => c.campaign_type === 'storytelling');
     // Sum initiative totals only (parents already include their stages).
     const totalActions = topLevelCampaigns.reduce((n, c) => n + (Number(c.action_count) || 0), 0);
     const totalStories = topLevelCampaigns.reduce((n, c) => n + (Number(c.story_count) || 0), 0);
@@ -365,7 +396,7 @@ export default async function DashboardPage() {
           </div>
         </div>
 
-        {campaignsSection ?? (
+        {topLevelCampaigns.length === 0 ? (
           <div className="text-center py-16 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700">
             <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">No campaigns yet</h2>
             <p className="text-gray-600 dark:text-gray-400 mb-4">Launch your first campaign to start mobilizing constituents.</p>
@@ -373,6 +404,27 @@ export default async function DashboardPage() {
               Create a campaign
             </Link>
           </div>
+        ) : (
+          <>
+            {federalCampaigns.length > 0 && (
+              <section className="mb-10">
+                <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Federal campaigns</h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">{federalCampaigns.map(renderCampaignCard)}</div>
+              </section>
+            )}
+            {[...stateGroups.entries()].map(([st, list]) => (
+              <section key={st} className="mb-10">
+                <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">State campaigns · {st}</h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">{list.map(renderCampaignCard)}</div>
+              </section>
+            ))}
+            {storytellingCampaigns.length > 0 && (
+              <section className="mb-10">
+                <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Storytelling campaigns</h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">{storytellingCampaigns.map(renderCampaignCard)}</div>
+              </section>
+            )}
+          </>
         )}
       </div>
     );
