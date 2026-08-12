@@ -19,7 +19,15 @@
    "ocd-person/e171a437-11bc-4200-ae58-f6f8c4971f39",
    "ocd-person/1e5a518e-ddf5-4976-b239-9a5324339a47",
    "ocd-person/71fb3504-679f-419d-86bf-d1ae7d573244"
-  ]
+  ],
+  "roles": {
+   "ocd-person/dba46a90-f765-4508-a9e1-9bfdeb4a03dd": "vice chair",
+   "ocd-person/fcf63a22-3979-4cbf-a719-0d414d13e1ac": "vice chair",
+   "ocd-person/e823b348-fd0f-410b-b3c1-62fe7a2982f6": "co-chair",
+   "ocd-person/fee3a7d8-7e51-4c5a-af29-190694152ccc": "co-chair",
+   "ocd-person/5af50689-4e90-49b1-8544-7a00048dad99": "ranking republican member",
+   "ocd-person/b1ab473b-e7ff-4c53-96af-ee796c89f4dd": "ranking republican member"
+  }
  },
  {
   "id": "ca5358ab-0588-4912-8ac0-ae3268bf931d",
@@ -80,7 +88,17 @@
    "ocd-person/ca470373-9e97-47c5-ab96-96e3f93cee08",
    "ocd-person/caaba025-7a5a-401d-8714-73f627651196",
    "ocd-person/9e9d6f02-ee29-4ff3-a6fe-1b8a0cec0612"
-  ]
+  ],
+  "roles": {
+   "ocd-person/fcc3d3fa-4b4d-4d3c-b512-003a58657a85": "vice chair",
+   "ocd-person/2c22d680-9e92-423b-a943-20571186c91a": "vice chair",
+   "ocd-person/34ca88f1-c2bc-430e-9f7c-93e8f3563e33": "vice chair",
+   "ocd-person/8872e78b-25b4-406b-84b2-949c700f7b56": "vice chair",
+   "ocd-person/aec1fe1b-02ac-4802-be69-8714ec0b848e": "co-chair",
+   "ocd-person/59460c80-5324-423f-a06c-158d69a30b02": "co-chair",
+   "ocd-person/a648c360-3b9e-408d-ba2a-c171edada365": "ranking republican member",
+   "ocd-person/cbdde335-cd3e-4769-b477-5893c46d96b6": "ranking republican member"
+  }
  },
  {
   "id": "c3fcd379-d6e4-4204-8b04-a43bcfd0b185",
@@ -101,7 +119,13 @@
    "ocd-person/e823b348-fd0f-410b-b3c1-62fe7a2982f6",
    "ocd-person/ab33209c-a8c8-4a6e-a480-ef298eeaa74a",
    "ocd-person/98ba1778-693a-41a5-9f4a-94f10d1c9fcd"
-  ]
+  ],
+  "roles": {
+   "ocd-person/33a50ad7-61f8-4e5a-92fc-a24efddc15f1": "co-chair",
+   "ocd-person/fcf63a22-3979-4cbf-a719-0d414d13e1ac": "co-chair",
+   "ocd-person/58a9b2fa-cd93-420c-a9bc-6326a75a218a": "ranking member",
+   "ocd-person/8bf7e55e-afc1-4f5c-99c3-9b7a1356fbc3": "ranking member"
+  }
  },
  {
   "id": "3880cd2b-f2f9-4c2e-a70b-0adddb5d20f3",
@@ -126,7 +150,15 @@
    "ocd-person/5d963d6d-74c1-4282-9ad4-592c3760bead",
    "ocd-person/7af92839-ae80-4370-a84a-e63799ed5a48",
    "ocd-person/5a41c633-8d04-43c6-b3c2-64cbbbbefcc4"
-  ]
+  ],
+  "roles": {
+   "ocd-person/5e2acad1-d976-4a7d-997b-52b5b400a654": "vice chair",
+   "ocd-person/53fa49be-9042-4e23-a1ff-a85f98a3d9f7": "vice chair",
+   "ocd-person/5310d199-fa92-40aa-8d0b-efad6d3027b2": "co-chair",
+   "ocd-person/fcc3d3fa-4b4d-4d3c-b512-003a58657a85": "co-chair",
+   "ocd-person/087a813d-b14a-4205-a08f-cec795647318": "ranking republican member",
+   "ocd-person/78bb88a9-cde1-4691-aa7a-e423ee16a147": "ranking republican member"
+  }
  },
  {
   "id": "e463cf53-613f-4155-9e46-581f30ec64eb",
@@ -154,7 +186,15 @@
    "ocd-person/d71060b1-2bb9-4239-ab9b-fad7d1a4d903",
    "ocd-person/109295ad-521f-463a-b0af-66c9f0598a97",
    "ocd-person/fcf63a22-3979-4cbf-a719-0d414d13e1ac"
-  ]
+  ],
+  "roles": {
+   "ocd-person/277414ca-35b8-41dd-ae2e-e99fe9ecdb9b": "vice chair",
+   "ocd-person/7af92839-ae80-4370-a84a-e63799ed5a48": "vice chair",
+   "ocd-person/2c22d680-9e92-423b-a943-20571186c91a": "co-chair",
+   "ocd-person/77dbf0fd-d45c-445c-9966-0135fff8feaa": "co-chair",
+   "ocd-person/3dac820b-e022-4ee6-a5d5-4b194f8988ec": "ranking member",
+   "ocd-person/ca8be710-988a-4415-bc37-6d3a92d1afcd": "ranking member"
+  }
  },
  {
   "id": "241a41f0-5e09-40cc-b346-1004b6a7cdbf",
@@ -208,7 +248,15 @@
    "ocd-person/ca470373-9e97-47c5-ab96-96e3f93cee08",
    "ocd-person/caaba025-7a5a-401d-8714-73f627651196",
    "ocd-person/5a41c633-8d04-43c6-b3c2-64cbbbbefcc4"
-  ]
+  ],
+  "roles": {
+   "ocd-person/102845da-9b93-400d-b58a-fa3e7df1806e": "vice chair",
+   "ocd-person/ac2991dd-302d-430f-8878-0fbd393a5909": "vice chair",
+   "ocd-person/83a4e876-4df7-48ef-8a84-7d7940585af9": "co-chair",
+   "ocd-person/15c5ac01-eb03-4dd3-8ab6-d162e7420559": "co-chair",
+   "ocd-person/58a9b2fa-cd93-420c-a9bc-6326a75a218a": "ranking member",
+   "ocd-person/cddc0b8f-51e5-4ed1-af05-41de718801f3": "ranking member"
+  }
  },
  {
   "id": "a99e4b30-fbc5-4be9-8bc6-c2816067750c",
@@ -262,7 +310,15 @@
    "ocd-person/ca470373-9e97-47c5-ab96-96e3f93cee08",
    "ocd-person/caaba025-7a5a-401d-8714-73f627651196",
    "ocd-person/5a41c633-8d04-43c6-b3c2-64cbbbbefcc4"
-  ]
+  ],
+  "roles": {
+   "ocd-person/102845da-9b93-400d-b58a-fa3e7df1806e": "vice chair",
+   "ocd-person/ac2991dd-302d-430f-8878-0fbd393a5909": "vice chair",
+   "ocd-person/83a4e876-4df7-48ef-8a84-7d7940585af9": "co-chair",
+   "ocd-person/15c5ac01-eb03-4dd3-8ab6-d162e7420559": "co-chair",
+   "ocd-person/58a9b2fa-cd93-420c-a9bc-6326a75a218a": "ranking member",
+   "ocd-person/cddc0b8f-51e5-4ed1-af05-41de718801f3": "ranking member"
+  }
  },
  {
   "id": "e0ca02b4-b8aa-4a75-aa14-a21da5a650d4",
@@ -296,7 +352,15 @@
    "ocd-person/1a01451b-8c85-4bde-9cef-ab083d99ae84",
    "ocd-person/09dcfeba-575f-44d2-9566-1ba8471c0b4f",
    "ocd-person/17c7aeb7-7f31-4ca3-9d8c-041451663ff0"
-  ]
+  ],
+  "roles": {
+   "ocd-person/f37ce303-e106-4972-b453-4287b7915762": "vice chair",
+   "ocd-person/37cdaa0f-2531-44f6-95d0-41f9eefa6c97": "vice chair",
+   "ocd-person/22b7b95d-3488-4c14-8365-c5157b3cb099": "co-chair",
+   "ocd-person/109295ad-521f-463a-b0af-66c9f0598a97": "co-chair",
+   "ocd-person/c5800b0c-c84a-4e63-83fa-8aaad9b6535f": "ranking republican member",
+   "ocd-person/fd032e0e-7926-4f81-9477-6fdee260014b": "ranking republican member"
+  }
  },
  {
   "id": "b38ffc3c-e550-493d-86da-c4a3c4fe4bb3",
@@ -337,7 +401,14 @@
    "ocd-person/ca9357d4-dffa-456a-a715-d4a7671c1f84",
    "ocd-person/23d08488-597c-4c35-b41a-f8aef1c264c4",
    "ocd-person/03642345-7acb-4294-91b5-84dcc3c18cc7"
-  ]
+  ],
+  "roles": {
+   "ocd-person/e823b348-fd0f-410b-b3c1-62fe7a2982f6": "vice chair",
+   "ocd-person/7e0711c4-57d1-405e-afe7-33df0bf064d6": "co-chair",
+   "ocd-person/bdc5f5a0-0285-45d2-a6fd-d29d8b31cd43": "co-chair",
+   "ocd-person/72191c68-6a23-4fa2-93d4-ba8dc07c2025": "ranking republican member",
+   "ocd-person/f0f89d15-9682-4a2e-8096-57700ac5b8dc": "ranking republican member"
+  }
  },
  {
   "id": "c990cec6-780d-47bf-9f81-a7b18d0f59e0",
@@ -366,7 +437,15 @@
    "ocd-person/f0f89d15-9682-4a2e-8096-57700ac5b8dc",
    "ocd-person/cbdde335-cd3e-4769-b477-5893c46d96b6",
    "ocd-person/bc3200fa-f97b-433f-bb0b-ac15f71b2e92"
-  ]
+  ],
+  "roles": {
+   "ocd-person/97e1ed70-218e-41d6-abad-73cf8c717c5b": "vice chair",
+   "ocd-person/2d21e401-cb76-4001-b836-e57f667f550f": "vice chair",
+   "ocd-person/7836916c-08a2-430a-99eb-580f7cf50e81": "co-chair",
+   "ocd-person/d44bd84a-b02c-4c1b-94ee-05c8b1008e57": "co-chair",
+   "ocd-person/12835342-bb95-428a-ace3-78c51c3e8443": "ranking republican member",
+   "ocd-person/58a9b2fa-cd93-420c-a9bc-6326a75a218a": "ranking republican member"
+  }
  },
  {
   "id": "5d353837-f3e2-48a5-b7f4-d2c0a9621855",
@@ -428,7 +507,17 @@
    "ocd-person/b57c3599-c0b0-4fd3-a48c-2bfd32d95071",
    "ocd-person/b1ab473b-e7ff-4c53-96af-ee796c89f4dd",
    "ocd-person/5a41c633-8d04-43c6-b3c2-64cbbbbefcc4"
-  ]
+  ],
+  "roles": {
+   "ocd-person/749be8b3-0b40-41ec-8670-7dfbfbc90b6e": "chair",
+   "ocd-person/283ad876-68be-4235-a108-e0aedbadde40": "chair",
+   "ocd-person/bb280880-afa9-43f3-91bf-b05af25b023d": "vice chair",
+   "ocd-person/adb6f661-e282-42a5-8b55-cb1e5f56aa5a": "vice chair",
+   "ocd-person/fcf63a22-3979-4cbf-a719-0d414d13e1ac": "vice chair",
+   "ocd-person/09dcfeba-575f-44d2-9566-1ba8471c0b4f": "vice chair",
+   "ocd-person/df318645-047c-46a5-be61-682a7272e6b6": "ranking member",
+   "ocd-person/c5800b0c-c84a-4e63-83fa-8aaad9b6535f": "ranking member"
+  }
  },
  {
   "id": "9db80d43-82f3-4c4f-bd1c-ec496de26cb4",
@@ -458,7 +547,15 @@
    "ocd-person/bdc5f5a0-0285-45d2-a6fd-d29d8b31cd43",
    "ocd-person/2d581ca4-1fb8-4e7c-9f33-060db9ed895e",
    "ocd-person/d458d504-9053-4709-bf43-d955083a18ab"
-  ]
+  ],
+  "roles": {
+   "ocd-person/36b9eb8c-9fd8-4f6e-ba6b-fddb03bf3be3": "vice chair",
+   "ocd-person/749be8b3-0b40-41ec-8670-7dfbfbc90b6e": "vice chair",
+   "ocd-person/f37ce303-e106-4972-b453-4287b7915762": "co-chair",
+   "ocd-person/273e9a65-2254-43f1-ae88-744e1fa3738a": "co-chair",
+   "ocd-person/01bfbaf3-d536-45f0-8478-96cd8fbd4518": "ranking member",
+   "ocd-person/ca523a61-6db3-47c6-bf1f-8fd7638e999f": "ranking member"
+  }
  },
  {
   "id": "9c47ce33-fe11-4445-b70a-1c3dfdb4aac1",
@@ -485,7 +582,16 @@
    "ocd-person/2f3d7307-89cd-4dac-a9ca-4b12d7bf777e",
    "ocd-person/467c2737-7494-44d0-a370-c38c178740e9",
    "ocd-person/a0e90d7c-cc41-469e-a27a-7efa009ef801"
-  ]
+  ],
+  "roles": {
+   "ocd-person/ff1c4d90-5cc3-4ff9-8f31-454d03803816": "vice chair",
+   "ocd-person/d16242a4-d3e1-45b3-9f95-8741980310cc": "vice chair",
+   "ocd-person/98ba1778-693a-41a5-9f4a-94f10d1c9fcd": "vice chair",
+   "ocd-person/77713b68-e8ef-455e-80a6-1614488fb71a": "co-chair",
+   "ocd-person/9c5e5d75-a622-41d2-b607-2adbc12ee11f": "co-chair",
+   "ocd-person/c60ec8d2-fcc3-414e-a122-cca6aeef901d": "ranking republican member",
+   "ocd-person/0cdb540d-c360-4981-b7a9-2a67e2f91121": "ranking republican member"
+  }
  },
  {
   "id": "484e5bc4-36be-4827-9795-3c24327001cf",
@@ -504,7 +610,15 @@
    "ocd-person/ca523a61-6db3-47c6-bf1f-8fd7638e999f",
    "ocd-person/bdc5f5a0-0285-45d2-a6fd-d29d8b31cd43",
    "ocd-person/5a41c633-8d04-43c6-b3c2-64cbbbbefcc4"
-  ]
+  ],
+  "roles": {
+   "ocd-person/2ed1f7b0-a1e3-4754-93a5-46b5a3fb9836": "chair",
+   "ocd-person/2d581ca4-1fb8-4e7c-9f33-060db9ed895e": "chair",
+   "ocd-person/83a4e876-4df7-48ef-8a84-7d7940585af9": "vice chair",
+   "ocd-person/f086a8e8-70ea-40bc-a77f-2012b74f3a00": "vice chair",
+   "ocd-person/79d4059c-5faa-443f-a842-7b494ea2d57e": "ranking member",
+   "ocd-person/0cdb540d-c360-4981-b7a9-2a67e2f91121": "ranking member"
+  }
  },
  {
   "id": "066f953f-3635-4684-8d8c-55c16ab0d0ed",
@@ -530,7 +644,15 @@
    "ocd-person/dba46a90-f765-4508-a9e1-9bfdeb4a03dd",
    "ocd-person/755c489b-dcb4-4037-8df7-d9e62006e844",
    "ocd-person/d458d504-9053-4709-bf43-d955083a18ab"
-  ]
+  ],
+  "roles": {
+   "ocd-person/3969673d-4a3e-487e-a572-42ce9f79e6dd": "vice chair",
+   "ocd-person/2d581ca4-1fb8-4e7c-9f33-060db9ed895e": "vice chair",
+   "ocd-person/a33a2113-e60b-4000-9dc7-eb58a775d986": "co-chair",
+   "ocd-person/63a8e4ab-dfcd-4a69-8317-53b8e9a69729": "co-chair",
+   "ocd-person/ca8be710-988a-4415-bc37-6d3a92d1afcd": "ranking republican member",
+   "ocd-person/a0e90d7c-cc41-469e-a27a-7efa009ef801": "ranking republican member"
+  }
  },
  {
   "id": "57847574-55a8-438f-a26a-e493559e76b2",
@@ -557,7 +679,15 @@
    "ocd-person/686df3d6-3199-4d48-a27e-7b3e7c65de66",
    "ocd-person/755c489b-dcb4-4037-8df7-d9e62006e844",
    "ocd-person/ca470373-9e97-47c5-ab96-96e3f93cee08"
-  ]
+  ],
+  "roles": {
+   "ocd-person/3be9e2dc-7ffa-40fb-90c8-d25fe4970dee": "vice chair",
+   "ocd-person/86852522-4c4d-46ae-8a59-d81a16ad179a": "vice chair",
+   "ocd-person/e171a437-11bc-4200-ae58-f6f8c4971f39": "co-chair",
+   "ocd-person/caaba025-7a5a-401d-8714-73f627651196": "co-chair",
+   "ocd-person/0cdb540d-c360-4981-b7a9-2a67e2f91121": "ranking republican member",
+   "ocd-person/bc3200fa-f97b-433f-bb0b-ac15f71b2e92": "ranking republican member"
+  }
  },
  {
   "id": "f70e86c7-37ab-47e7-9f90-8f436d330df5",
@@ -588,7 +718,15 @@
    "ocd-person/77dbf0fd-d45c-445c-9966-0135fff8feaa",
    "ocd-person/454e5979-c5bb-4f4e-9f3d-dc11f5e5b6ca",
    "ocd-person/bc3200fa-f97b-433f-bb0b-ac15f71b2e92"
-  ]
+  ],
+  "roles": {
+   "ocd-person/5310d199-fa92-40aa-8d0b-efad6d3027b2": "vice chair",
+   "ocd-person/5d963d6d-74c1-4282-9ad4-592c3760bead": "vice chair",
+   "ocd-person/26149cc4-f15a-46fb-a9a5-7bc0544dc287": "co-chair",
+   "ocd-person/f55ef0f9-f0ed-48ba-80b9-23ac643626cc": "co-chair",
+   "ocd-person/fc3cb4e1-f784-46ac-9d54-1dd44cb817b0": "ranking republican member",
+   "ocd-person/f0f89d15-9682-4a2e-8096-57700ac5b8dc": "ranking republican member"
+  }
  },
  {
   "id": "d75a7ffd-8de8-42b8-87ce-b00c7b6b6aa3",
@@ -609,7 +747,15 @@
    "ocd-person/77dbf0fd-d45c-445c-9966-0135fff8feaa",
    "ocd-person/cbdde335-cd3e-4769-b477-5893c46d96b6",
    "ocd-person/8bf7e55e-afc1-4f5c-99c3-9b7a1356fbc3"
-  ]
+  ],
+  "roles": {
+   "ocd-person/629f89a2-138d-43b1-a39f-b420bd7bc061": "vice chair",
+   "ocd-person/686df3d6-3199-4d48-a27e-7b3e7c65de66": "vice chair",
+   "ocd-person/bb280880-afa9-43f3-91bf-b05af25b023d": "co-chair",
+   "ocd-person/d71060b1-2bb9-4239-ab9b-fad7d1a4d903": "co-chair",
+   "ocd-person/e9c9ef28-807a-4efe-983f-d194c54ed41a": "ranking member",
+   "ocd-person/b1ab473b-e7ff-4c53-96af-ee796c89f4dd": "ranking republican member"
+  }
  },
  {
   "id": "251a1cd9-6c82-4372-8ed6-db33f0c99097",
@@ -626,7 +772,13 @@
    "ocd-person/5c3f590e-c576-43b7-ab1a-5607efbf7ad7",
    "ocd-person/ac2991dd-302d-430f-8878-0fbd393a5909",
    "ocd-person/2d581ca4-1fb8-4e7c-9f33-060db9ed895e"
-  ]
+  ],
+  "roles": {
+   "ocd-person/5310d199-fa92-40aa-8d0b-efad6d3027b2": "co-chair",
+   "ocd-person/63461ed0-da6d-4423-82bc-5b83c2a811cf": "co-chair",
+   "ocd-person/58a9b2fa-cd93-420c-a9bc-6326a75a218a": "ranking republican member",
+   "ocd-person/96fa444a-7e86-4ead-9d2e-c3ffef258be2": "ranking republican member"
+  }
  },
  {
   "id": "e5b545cb-0dde-42d6-870e-d75c90e6bea7",
@@ -675,7 +827,16 @@
    "ocd-person/03642345-7acb-4294-91b5-84dcc3c18cc7",
    "ocd-person/59460c80-5324-423f-a06c-158d69a30b02",
    "ocd-person/9e9d6f02-ee29-4ff3-a6fe-1b8a0cec0612"
-  ]
+  ],
+  "roles": {
+   "ocd-person/cab156d4-4d6c-4c5f-ae17-c380f063d2b0": "vice chair",
+   "ocd-person/77713b68-e8ef-455e-80a6-1614488fb71a": "vice chair",
+   "ocd-person/2d581ca4-1fb8-4e7c-9f33-060db9ed895e": "vice chair",
+   "ocd-person/102845da-9b93-400d-b58a-fa3e7df1806e": "co-chair",
+   "ocd-person/cb252e7b-fffb-4bda-b951-d2b54a3c37e3": "co-chair",
+   "ocd-person/02ce0fa3-ac25-42dd-9f5e-ee44b7e9d542": "ranking member",
+   "ocd-person/da65a738-37c7-41c1-8cd4-abae65ef0167": "ranking member"
+  }
  },
  {
   "id": "c2e03f5d-d17b-456f-babb-eb0d7eb1a634",
@@ -696,7 +857,15 @@
    "ocd-person/91e5bc44-6a8d-410d-bab5-5eb34b90d368",
    "ocd-person/f55ef0f9-f0ed-48ba-80b9-23ac643626cc",
    "ocd-person/2f3d7307-89cd-4dac-a9ca-4b12d7bf777e"
-  ]
+  ],
+  "roles": {
+   "ocd-person/56582153-80dd-4de6-9b79-2427316eeb6c": "vice chair",
+   "ocd-person/bb280880-afa9-43f3-91bf-b05af25b023d": "vice chair",
+   "ocd-person/34ca88f1-c2bc-430e-9f7c-93e8f3563e33": "co-chair",
+   "ocd-person/140d2d97-aae9-433a-b012-ce3775aa81a8": "co-chair",
+   "ocd-person/0cdb540d-c360-4981-b7a9-2a67e2f91121": "ranking member",
+   "ocd-person/755c489b-dcb4-4037-8df7-d9e62006e844": "ranking member"
+  }
  },
  {
   "id": "d46371c8-eaca-44e1-a271-1957430a2e6e",
@@ -726,7 +895,15 @@
    "ocd-person/ca523a61-6db3-47c6-bf1f-8fd7638e999f",
    "ocd-person/bdc5f5a0-0285-45d2-a6fd-d29d8b31cd43",
    "ocd-person/03642345-7acb-4294-91b5-84dcc3c18cc7"
-  ]
+  ],
+  "roles": {
+   "ocd-person/7836916c-08a2-430a-99eb-580f7cf50e81": "vice chair",
+   "ocd-person/94b3daf5-cbc7-4016-9297-8c0b8bc54944": "vice chair",
+   "ocd-person/2d21e401-cb76-4001-b836-e57f667f550f": "co-chair",
+   "ocd-person/2a91c3d6-433a-4e8f-b5a5-38fc80b8ea57": "co-chair",
+   "ocd-person/f0f89d15-9682-4a2e-8096-57700ac5b8dc": "ranking republican member",
+   "ocd-person/1d02baaa-ab25-4607-b33f-40948893f928": "ranking republican member"
+  }
  },
  {
   "id": "83efaf37-7756-476d-8d12-7bfc9ed57405",
@@ -748,7 +925,13 @@
    "ocd-person/71c15656-a6f4-4b95-9537-69a82b2cb54c",
    "ocd-person/9ddc7811-2c18-44e0-b0c9-dccded290a3e",
    "ocd-person/ca523a61-6db3-47c6-bf1f-8fd7638e999f"
-  ]
+  ],
+  "roles": {
+   "ocd-person/88d052d8-3d97-4e23-8abd-53311294acfd": "co-chair",
+   "ocd-person/2d581ca4-1fb8-4e7c-9f33-060db9ed895e": "co-chair",
+   "ocd-person/da65a738-37c7-41c1-8cd4-abae65ef0167": "ranking republican member",
+   "ocd-person/53fa49be-9042-4e23-a1ff-a85f98a3d9f7": "ranking republican member"
+  }
  },
  {
   "id": "e3b1de60-5f07-424f-a407-d57c4c4a14b3",
@@ -778,7 +961,15 @@
    "ocd-person/b57c3599-c0b0-4fd3-a48c-2bfd32d95071",
    "ocd-person/8bf7e55e-afc1-4f5c-99c3-9b7a1356fbc3",
    "ocd-person/b1ab473b-e7ff-4c53-96af-ee796c89f4dd"
-  ]
+  ],
+  "roles": {
+   "ocd-person/e8ce793e-671a-41fa-818a-42b534fa9c6b": "vice chair",
+   "ocd-person/109295ad-521f-463a-b0af-66c9f0598a97": "vice chair",
+   "ocd-person/2a3c062a-ac41-4295-9c26-195f78369242": "co-chair",
+   "ocd-person/277414ca-35b8-41dd-ae2e-e99fe9ecdb9b": "co-chair",
+   "ocd-person/1a60b520-6887-4830-b33e-78520b7b53aa": "ranking republican member",
+   "ocd-person/391a83ee-0e23-4669-b3ae-b29bd9c77294": "ranking republican member"
+  }
  },
  {
   "id": "35683761-abe5-4f85-9d1d-a6588243d818",
@@ -818,7 +1009,16 @@
    "ocd-person/606b5b0a-a9f3-4625-8224-e7f66bd3eed4",
    "ocd-person/7af92839-ae80-4370-a84a-e63799ed5a48",
    "ocd-person/fd032e0e-7926-4f81-9477-6fdee260014b"
-  ]
+  ],
+  "roles": {
+   "ocd-person/83a4e876-4df7-48ef-8a84-7d7940585af9": "vice chair",
+   "ocd-person/75ee19d6-dea2-4ef3-9682-0bfa9f53fb38": "vice chair",
+   "ocd-person/e171a437-11bc-4200-ae58-f6f8c4971f39": "vice chair",
+   "ocd-person/dfc1bead-50cd-4c34-9dc6-5d80c7a09589": "co-chair",
+   "ocd-person/686df3d6-3199-4d48-a27e-7b3e7c65de66": "co-chair",
+   "ocd-person/a648c360-3b9e-408d-ba2a-c171edada365": "ranking member",
+   "ocd-person/71c15656-a6f4-4b95-9537-69a82b2cb54c": "ranking member"
+  }
  },
  {
   "id": "a5d348d3-fb97-4545-a42b-4a956531f83c",
@@ -855,7 +1055,15 @@
    "ocd-person/57900db1-ade5-4107-8025-a0c664f41a32",
    "ocd-person/98ba1778-693a-41a5-9f4a-94f10d1c9fcd",
    "ocd-person/ed6fd366-fcec-4d7c-91fc-847667f604c9"
-  ]
+  ],
+  "roles": {
+   "ocd-person/a33a2113-e60b-4000-9dc7-eb58a775d986": "vice chair",
+   "ocd-person/1e5a518e-ddf5-4976-b239-9a5324339a47": "vice chair",
+   "ocd-person/3be9e2dc-7ffa-40fb-90c8-d25fe4970dee": "co-chair",
+   "ocd-person/50e78f89-a9e7-43f5-9566-a9f2cb23a5c9": "co-chair",
+   "ocd-person/d8829ada-0b6e-4cbf-8aa6-e88c70d76e89": "ranking republican member",
+   "ocd-person/ca523a61-6db3-47c6-bf1f-8fd7638e999f": "ranking republican member"
+  }
  },
  {
   "id": "3409d480-bf54-4c7a-9b99-7418fe0ff665",
@@ -899,7 +1107,15 @@
    "ocd-person/03642345-7acb-4294-91b5-84dcc3c18cc7",
    "ocd-person/fd032e0e-7926-4f81-9477-6fdee260014b",
    "ocd-person/9e9d6f02-ee29-4ff3-a6fe-1b8a0cec0612"
-  ]
+  ],
+  "roles": {
+   "ocd-person/4e77c536-5645-4e15-99b2-00a781896717": "vice chair",
+   "ocd-person/bdc5f5a0-0285-45d2-a6fd-d29d8b31cd43": "vice chair",
+   "ocd-person/b43c741a-89b2-4e46-abfc-1d75f26189fe": "co-chair",
+   "ocd-person/5e2acad1-d976-4a7d-997b-52b5b400a654": "co-chair",
+   "ocd-person/f0517411-fc60-49ad-86e6-1f025ab4579b": "ranking republican member",
+   "ocd-person/b1ab473b-e7ff-4c53-96af-ee796c89f4dd": "ranking republican member"
+  }
  },
  {
   "id": "a6ed4b8a-b050-426a-817e-b91dfbbfc9f7",
@@ -929,6 +1145,14 @@
    "ocd-person/1e5a518e-ddf5-4976-b239-9a5324339a47",
    "ocd-person/50e78f89-a9e7-43f5-9566-a9f2cb23a5c9",
    "ocd-person/ca523a61-6db3-47c6-bf1f-8fd7638e999f"
-  ]
+  ],
+  "roles": {
+   "ocd-person/b666accd-c7f7-41e9-ade0-f64f6e438669": "vice chair",
+   "ocd-person/f55ef0f9-f0ed-48ba-80b9-23ac643626cc": "vice chair",
+   "ocd-person/784a12cd-3ecc-4fed-8b47-4e090038c2f8": "co-chair",
+   "ocd-person/98ba1778-693a-41a5-9f4a-94f10d1c9fcd": "co-chair",
+   "ocd-person/1a60b520-6887-4830-b33e-78520b7b53aa": "ranking member",
+   "ocd-person/135d2f43-c892-4a34-9651-a523e85dd6de": "ranking member"
+  }
  }
 ]

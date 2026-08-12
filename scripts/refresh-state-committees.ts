@@ -45,6 +45,8 @@ interface StateCommittee {
   classification: string;
   /** Full ocd-person ids — match StateLegislator.id / Official.id. */
   members: string[];
+  /** Leadership roles keyed by person id (chair, vice chair, ...); plain members omitted. */
+  roles: Record<string, string>;
 }
 
 async function main() {
@@ -83,12 +85,17 @@ async function main() {
             const members = (raw.members ?? [])
               .map((m) => m.person_id)
               .filter((id): id is string => !!id && id.startsWith('ocd-person/'));
+            const roles: Record<string, string> = {};
+            for (const m of raw.members ?? []) {
+              if (m.person_id && m.role && m.role.toLowerCase() !== 'member') roles[m.person_id] = m.role.toLowerCase();
+            }
             committees.push({
               id: raw.id.replace(/^ocd-organization\//, ''),
               name: raw.name,
               chamber: raw.chamber ?? 'legislature',
               classification: raw.classification ?? 'committee',
               members,
+              roles,
             });
           } catch (err) {
             console.warn(`  Skipping unparseable ${state}/${file}:`, err);

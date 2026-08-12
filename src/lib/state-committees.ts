@@ -19,6 +19,8 @@ export interface StateCommittee {
   classification: string;
   /** Full ocd-person ids. */
   members: string[];
+  /** Leadership roles keyed by person id ('chair', 'vice chair', ...). */
+  roles?: Record<string, string>;
 }
 
 const cache = new Map<string, StateCommittee[]>();
@@ -61,6 +63,11 @@ export function getStateCommitteeMembers(stateCode: string, id: string): string[
 
 export function isStateCommitteeMember(personId: string, stateCode: string, committeeId: string): boolean {
   return getStateCommitteeMembers(stateCode, committeeId).includes(personId);
+}
+
+/** 'chair' / 'vice chair' / null for a member of a committee. */
+export function getStateCommitteeRole(stateCode: string, committeeId: string, personId: string): string | null {
+  return getStateCommittee(stateCode, committeeId)?.roles?.[personId] ?? null;
 }
 
 /** Clear cache (tests / after a data refresh). */

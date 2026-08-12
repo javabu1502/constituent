@@ -7,6 +7,7 @@ import { listStateCommittees } from '@/lib/state-committees';
 import { getCommitteesForMember } from '@/lib/legislators';
 import { getStateLegislators } from '@/lib/state-legislators';
 import { WHIP_LABELS as POSITION_LABELS, WHIP_STYLES as POSITION_STYLES } from '@/lib/whip';
+import { LogMeeting } from '@/components/dashboard/LogMeeting';
 
 export const metadata: Metadata = { title: 'Legislator Intel | My Democracy', robots: { index: false } };
 
@@ -61,7 +62,7 @@ export default async function LegislatorIntelPage({
       .eq('legislator_id', id),
     admin
       .from('campaign_notes')
-      .select('campaign_id, body, created_at')
+      .select('campaign_id, body, hours, created_at')
       .eq('creator_id', user.id)
       .eq('legislator_id', id)
       .order('created_at', { ascending: false })
@@ -103,7 +104,12 @@ export default async function LegislatorIntelPage({
     const states = [...new Set((campaigns ?? []).map((c) => c.bill_state as string | null).filter(Boolean))] as string[];
     for (const st of states) {
       for (const c of listStateCommittees(st)) {
-        if (c.members.includes(id)) committees.push(`${c.name} (${c.chamber === 'lower' ? 'Assembly' : c.chamber === 'upper' ? 'Senate' : 'Joint'})`);
+        if (c.members.includes(id)) {
+          const role = c.roles?.[id];
+          committees.push(
+            `${c.name} (${c.chamber === 'lower' ? 'Assembly' : c.chamber === 'upper' ? 'Senate' : 'Joint'})${role ? ` — ${role.replace(/\b\w/g, (ch) => ch.toUpperCase())}` : ''}`
+          );
+        }
       }
     }
   } else {
@@ -145,6 +151,16 @@ export default async function LegislatorIntelPage({
           </div>
         )}
       </div>
+
+      <LogMeeting
+        legislator={{ id, name, party, chamber }}
+        bills={topLevel.map((c) => ({
+          slug: c.slug as string,
+          billRef: (c.bill_ref as string) ?? null,
+          headline: c.headline as string,
+          position: (positionByCampaign.get(c.id as string)?.position as string) ?? null,
+        }))}
+      />
 
       {/* Every campaign the org runs, with this legislator's standing on each */}
       <section className="mb-8 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-5">
@@ -209,7 +225,7 @@ export default async function LegislatorIntelPage({
       <section className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-5">
         <h2 className="text-base font-semibold text-gray-900 dark:text-white mb-1">Meeting notes</h2>
         <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">
-          Every conversation your team has logged with this lawmaker. Add new notes from the campaign whip board.
+          Every conversation your team has logged with this lawmaker, across all campaigns.
         </p>
         {(notes ?? []).length === 0 ? (
           <p className="text-sm text-gray-500 dark:text-gray-400">No notes yet.</p>
@@ -220,6 +236,7 @@ export default async function LegislatorIntelPage({
                 <p className="text-xs text-gray-400 dark:text-gray-500">
                   {fmt(n.created_at)}
                   {campaignById.get(n.campaign_id) ? ` · ${campaignById.get(n.campaign_id)!.bill_ref ?? campaignById.get(n.campaign_id)!.headline}` : ''}
+                  {n.hours ? ` · ${n.hours}h` : ''}
                 </p>
                 <p className="text-sm text-gray-700 dark:text-gray-300">{n.body}</p>
               </li>

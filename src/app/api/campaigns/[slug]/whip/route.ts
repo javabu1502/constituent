@@ -82,15 +82,19 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ slu
     (c) => (c.target_filter as { type?: string } | null)?.type === 'committee'
   );
   const committeeFilter = committeeStage?.target_filter as { committee_id?: string; state?: string } | null;
-  let committee: { id: string; name: string; members: Set<string> } | null = null;
+  let committee: { id: string; name: string; members: Set<string>; roles: Record<string, string> } | null = null;
   if (committeeFilter?.committee_id) {
     if (committeeFilter.state) {
       const c = getStateCommittee(committeeFilter.state, committeeFilter.committee_id);
-      if (c) committee = { id: c.id, name: c.name, members: new Set(c.members) };
+      if (c) committee = { id: c.id, name: c.name, members: new Set(c.members), roles: c.roles ?? {} };
     } else {
       const c = getCommittee(committeeFilter.committee_id);
-      const members = getCommitteeMembers(committeeFilter.committee_id).map((m) => m.bioguide);
-      if (c && members.length) committee = { id: c.id, name: c.name, members: new Set(members) };
+      const members = getCommitteeMembers(committeeFilter.committee_id);
+      if (c && members.length) {
+        const roles: Record<string, string> = {};
+        for (const m of members) if (m.title) roles[m.bioguide] = m.title.toLowerCase();
+        committee = { id: c.id, name: c.name, members: new Set(members.map((m) => m.bioguide)), roles };
+      }
     }
   }
 
@@ -109,12 +113,21 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ slu
     }
   }
 
-  const [{ data: positions }, { data: notes }, { data: msgs }, sponsorIds] = await Promise.all([
+  // Legislator notes are shown ORG-WIDE: what you learned about a lawmaker on
+  // one bill travels with them to every board, tagged with its source bill.
+  const [{ data: positions }, { data: rawNotes }, { data: msgs }, { data: orgCampaigns }, sponsorIds] = await Promise.all([
     admin.from('legislator_positions').select('legislator_id, legislator_name, legislator_party, legislator_chamber, position, updated_at').eq('campaign_id', campaign.id),
-    admin.from('campaign_notes').select('id, legislator_id, legislator_name, body, created_at').eq('campaign_id', campaign.id).order('created_at', { ascending: false }).limit(500),
+    admin.from('campaign_notes').select('id, campaign_id, legislator_id, legislator_name, body, hours, created_at').eq('creator_id', res.userId).not('legislator_id', 'is', null).order('created_at', { ascending: false }).limit(500),
     admin.from('messages').select('legislator_id').in('campaign_id', initiativeIds).limit(10000),
+    admin.from('campaigns').select('id, bill_ref, parent_campaign_id').eq('creator_id', res.userId),
     stateCode && campaign.bill_ref ? stateSponsorIds(stateCode, campaign.bill_ref) : Promise.resolve(new Set<string>()),
   ]);
+  const billRefById = new Map((orgCampaigns ?? []).map((c) => [c.id as string, (c.bill_ref as string) ?? null]));
+  const notes = (rawNotes ?? []).map((n) => ({
+    ...n,
+    fromThisCampaign: initiativeIds.includes(n.campaign_id as string),
+    billRef: billRefById.get(n.campaign_id as string) ?? null,
+  }));
 
   // Anyone positioned or messaged joins the roster even if outside it.
   for (const p of positions ?? []) {
@@ -139,6 +152,7 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ slu
       position: positionById.get(r.id) ?? null,
       sponsor: sponsorIds.has(r.id),
       onCommittee: committee?.members.has(r.id) ?? false,
+      committeeRole: committee?.roles[r.id] ?? null,
       messages: msgCounts.get(r.id) ?? 0,
       noteCount: noteCounts.get(r.id) ?? 0,
     }))
@@ -146,7 +160,7 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ slu
 
   return NextResponse.json({
     rows,
-    notes: notes ?? [],
+    notes,
     committee: committee ? { id: committee.id, name: committee.name, size: committee.members.size } : null,
   });
 }

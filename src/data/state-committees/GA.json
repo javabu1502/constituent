@@ -11,7 +11,10 @@
    "ocd-person/cb7d8c1d-3c26-4f35-8d37-d1cf8a7ce207",
    "ocd-person/81b84318-8c9f-467f-a7c1-776d9c415f51",
    "ocd-person/314d7845-ba55-4bd4-809a-c7c7aea26690"
-  ]
+  ],
+  "roles": {
+   "ocd-person/44a51125-9e82-41f6-8d4f-a646895b5994": "chair"
+  }
  },
  {
   "id": "7ea08659-583d-4ad7-bf25-e0237e0c2975",
@@ -53,7 +56,12 @@
    "ocd-person/c5766526-3a5a-4d33-b5ff-a0d1d358d7ae",
    "ocd-person/9fe70ed7-31a0-4732-92b1-54d2a79a4654",
    "ocd-person/4b162447-89a7-4ffc-acbf-617e1ad87e2a"
-  ]
+  ],
+  "roles": {
+   "ocd-person/f863b50d-c865-463a-830a-e5648837d9f7": "chair",
+   "ocd-person/c862c17f-ed00-41d7-97e5-1138f451a96c": "vice chair",
+   "ocd-person/9bcfa0eb-ee7d-4762-9555-7bc4a67d6417": "secretary"
+  }
  },
  {
   "id": "cbc40549-4d4f-4b16-a1d8-0651a8bcf1f6",
@@ -71,7 +79,15 @@
    "ocd-person/fcd57129-480c-4fba-a0d1-7fb369706611",
    "ocd-person/918888ac-edc7-4178-9133-d058f0f21010",
    "ocd-person/069fb4fa-766b-40e4-90b7-ce96b4fa2ace"
-  ]
+  ],
+  "roles": {
+   "ocd-person/b90b899d-87f0-43a5-9d15-6e310187ac41": "chair",
+   "ocd-person/e11cecf4-f2e5-49d9-ba9e-47681f779438": "vice chair",
+   "ocd-person/60bb96c4-f20c-4918-b88b-d7857341e5f4": "ex-officio",
+   "ocd-person/6be704ef-6250-4e08-86d3-f5fa2e1eebf3": "ex-officio",
+   "ocd-person/cbcdfca3-e47d-4b32-9164-ec0709a134bf": "ex-officio",
+   "ocd-person/44a51125-9e82-41f6-8d4f-a646895b5994": "secretary"
+  }
  },
  {
   "id": "ffa1031f-825c-46d6-859d-0805910c0088",
@@ -160,7 +176,14 @@
    "ocd-person/9deeb60b-4d1e-42b8-8052-d2808a30ea9a",
    "ocd-person/546d682f-b256-4060-8fd3-084d7f118d43",
    "ocd-person/97a002db-6151-4fdf-9bce-013a6344764f"
-  ]
+  ],
+  "roles": {
+   "ocd-person/c81779f3-65bf-4714-b295-79cac3b0da28": "chair",
+   "ocd-person/97a40ea4-674f-4b84-8fd3-8bc2f3b4a35d": "vice chair",
+   "ocd-person/ee145624-3295-4db4-b3ce-9d1583e4ef6e": "ex-officio",
+   "ocd-person/6ac8933e-8dde-4902-8eec-61cc5a91c844": "ex-officio",
+   "ocd-person/9103b29e-964b-4637-9304-0e73216d7796": "secretary"
+  }
  },
  {
   "id": "3f635d98-1b7c-448b-b252-401d3c4557b4",
@@ -200,7 +223,17 @@
    "ocd-person/2abbbe23-8cb6-4f33-afaf-38ce88a4e10c",
    "ocd-person/e2c141e9-9e04-4e2b-8e5b-57db594c7abc",
    "ocd-person/d9f1ea57-7b90-484a-9664-927a36c87e0c"
-  ]
+  ],
+  "roles": {
+   "ocd-person/e9c5a2fc-3354-49e1-ac29-783502155fe7": "chair",
+   "ocd-person/1f7d013a-8861-4e08-b6bf-7c8d36f8107c": "vice chair",
+   "ocd-person/b11d0191-cd84-4a93-add6-ee65494caff2": "ex officio",
+   "ocd-person/4b05e770-4423-4b64-8ae1-9600e8c73244": "ex officio",
+   "ocd-person/4cf7c975-678b-4e21-9877-6d22d7b37916": "ex officio",
+   "ocd-person/918888ac-edc7-4178-9133-d058f0f21010": "ex officio",
+   "ocd-person/b90b899d-87f0-43a5-9d15-6e310187ac41": "ex officio",
+   "ocd-person/17a7e011-73f2-4ac5-8470-3436b47a6744": "secretary"
+  }
  },
  {
   "id": "09e33677-7d9e-4735-b8b4-38b322670d23",
@@ -211,7 +244,8 @@
    "ocd-person/fd2717f1-6294-4601-a027-8fc41195372c",
    "ocd-person/1f7d013a-8861-4e08-b6bf-7c8d36f8107c",
    "ocd-person/cb7d8c1d-3c26-4f35-8d37-d1cf8a7ce207"
-  ]
+  ],
+  "roles": {}
  },
  {
   "id": "db01f3a7-5f3c-477b-abc2-2706e9a83981",
@@ -229,7 +263,13 @@
    "ocd-person/ae6e08e3-6971-4cd2-982a-48d650a343d5",
    "ocd-person/8798a822-fee8-4546-bcdd-455f788bef44",
    "ocd-person/516cb969-9467-490f-9a05-02c3e7decae3"
-  ]
+  ],
+  "roles": {
+   "ocd-person/98850c9f-1c37-4177-9ad8-17d2b4d3c8d4": "chair",
+   "ocd-person/011995be-4dd0-43b2-ae75-57ae45f53576": "vice chair",
+   "ocd-person/078246e9-90b8-43aa-bb92-d7016f517b8e": "ex-officio",
+   "ocd-person/584267b0-e40b-4d6e-a7fe-4c076eb6214c": "secretary"
+  }
  },
  {
   "id": "11b1c0ee-fc7b-46d9-8d79-8fe431035e87",
@@ -260,7 +300,11 @@
    "ocd-person/aa7405f9-5c37-4ce8-a7eb-ac5949a6e776",
    "ocd-person/9dfc8ec3-0935-4d1d-877d-e05cf7a5dca5",
    "ocd-person/97a002db-6151-4fdf-9bce-013a6344764f"
-  ]
+  ],
+  "roles": {
+   "ocd-person/3252da04-a17e-4298-b19d-9dd2fbf29ded": "chair",
+   "ocd-person/72370a62-92f4-46f1-ab7b-193a643085b8": "secretary"
+  }
  },
  {
   "id": "4cb3e8db-1c12-4de2-86a3-d6a547bace43",
@@ -285,7 +329,12 @@
    "ocd-person/2a66b922-b812-4c45-9786-478187cd5e33",
    "ocd-person/3194a8e0-aaf8-4686-b2c9-a22521f85fff",
    "ocd-person/9deeb60b-4d1e-42b8-8052-d2808a30ea9a"
-  ]
+  ],
+  "roles": {
+   "ocd-person/80f4bbdf-02f3-4233-8456-e550e7e745af": "chair",
+   "ocd-person/c4c6c741-0cb4-4179-b46d-9983421b8fdd": "vice chair",
+   "ocd-person/b39e2164-d570-45f2-b271-5e2fbe99c8d6": "secretary"
+  }
  },
  {
   "id": "5e47d695-cf2a-4396-8848-e50216e99450",
@@ -302,7 +351,14 @@
    "ocd-person/2f8621bc-0548-457c-8b0d-9148e14b77fe",
    "ocd-person/918888ac-edc7-4178-9133-d058f0f21010",
    "ocd-person/218a4fc4-a568-4b78-b350-0d60c6b12d4c"
-  ]
+  ],
+  "roles": {
+   "ocd-person/fc31ab02-026c-4173-86db-570c0b297c64": "chair",
+   "ocd-person/60bb96c4-f20c-4918-b88b-d7857341e5f4": "vice chair",
+   "ocd-person/3a5721a0-d848-40d0-a48a-66b797e7d7d9": "ex officio",
+   "ocd-person/1ac93f89-f367-4de3-82ba-79fa78d4d134": "ex officio",
+   "ocd-person/81b84318-8c9f-467f-a7c1-776d9c415f51": "secretary"
+  }
  },
  {
   "id": "3985938e-da58-4d36-b85c-420c6a602245",
@@ -325,7 +381,12 @@
    "ocd-person/c5766526-3a5a-4d33-b5ff-a0d1d358d7ae",
    "ocd-person/6e5432a3-09ed-4813-b11d-e97222bb7e4d",
    "ocd-person/6ac8933e-8dde-4902-8eec-61cc5a91c844"
-  ]
+  ],
+  "roles": {
+   "ocd-person/6552dd8d-1020-4bbb-abfc-88975573ebd4": "chair",
+   "ocd-person/56f28f8a-9296-4e69-9bd4-d0101a42b359": "vice chair",
+   "ocd-person/72370a62-92f4-46f1-ab7b-193a643085b8": "secretary"
+  }
  },
  {
   "id": "7688c988-561d-4de0-88c3-b9729a62b3db",
@@ -355,7 +416,12 @@
    "ocd-person/9007dcd9-3246-4cf3-9185-7478b3a9ad7a",
    "ocd-person/e6ae8d30-4b1b-4b06-8918-2be6fa7f8108",
    "ocd-person/3194a8e0-aaf8-4686-b2c9-a22521f85fff"
-  ]
+  ],
+  "roles": {
+   "ocd-person/97a40ea4-674f-4b84-8fd3-8bc2f3b4a35d": "chair",
+   "ocd-person/8f76af22-98dc-4e1e-ba99-75b87c1129d6": "vice chair",
+   "ocd-person/562e162f-2a60-441c-956b-11db12eef266": "secretary"
+  }
  },
  {
   "id": "460fb5ad-6bfc-49d4-bccf-ab9056ed97bb",
@@ -388,7 +454,12 @@
    "ocd-person/99082062-acd6-4c6b-bb45-2cfa071f19fc",
    "ocd-person/cabc1e6f-ba7c-4063-a778-707579f91ec8",
    "ocd-person/e3b1be9c-b244-4466-9192-adc365a31cfb"
-  ]
+  ],
+  "roles": {
+   "ocd-person/0e45048c-c1a4-415f-9ee4-5d09ea857e2e": "chair",
+   "ocd-person/ad18dba4-9247-4542-95b1-2ccef815dbc7": "vice chair",
+   "ocd-person/933a841a-19d6-42c2-a046-991ff9903a23": "secretary"
+  }
  },
  {
   "id": "32ababb5-35f6-4113-a92e-4eeabc6d42bc",
@@ -434,7 +505,11 @@
    "ocd-person/9dfc8ec3-0935-4d1d-877d-e05cf7a5dca5",
    "ocd-person/9deeb60b-4d1e-42b8-8052-d2808a30ea9a",
    "ocd-person/6f986b42-14f6-4147-9466-c49294331db9"
-  ]
+  ],
+  "roles": {
+   "ocd-person/aeaeb854-ff9c-47cb-8069-395b60ba05b2": "chair",
+   "ocd-person/909e9026-e549-494b-be99-e8562a389e0c": "vice chair"
+  }
  },
  {
   "id": "c3ebb74e-91e0-49e7-ba5b-0e26dc76509b",
@@ -457,7 +532,15 @@
    "ocd-person/5b6e0e37-802b-4103-b401-551532aba2e7",
    "ocd-person/93f45299-bfa2-4458-844a-5c6b9bdd8c1d",
    "ocd-person/d9f1ea57-7b90-484a-9664-927a36c87e0c"
-  ]
+  ],
+  "roles": {
+   "ocd-person/6be704ef-6250-4e08-86d3-f5fa2e1eebf3": "chair",
+   "ocd-person/9e417b67-da09-4516-b858-6b2458f53633": "vice chair",
+   "ocd-person/fd2717f1-6294-4601-a027-8fc41195372c": "ex officio",
+   "ocd-person/17a7e011-73f2-4ac5-8470-3436b47a6744": "ex officio",
+   "ocd-person/011995be-4dd0-43b2-ae75-57ae45f53576": "ex officio",
+   "ocd-person/acc7c167-6251-4ce8-8021-511acfa291ef": "secretary"
+  }
  },
  {
   "id": "7550f92d-f6ad-44bd-8e7f-f07eef4a3206",
@@ -487,7 +570,12 @@
    "ocd-person/702658f4-8382-479a-9416-79928239d5e7",
    "ocd-person/45567c87-3ba6-49ec-9ea2-5ebb880aa94c",
    "ocd-person/97a002db-6151-4fdf-9bce-013a6344764f"
-  ]
+  ],
+  "roles": {
+   "ocd-person/d79c3e9b-b73d-416b-9bfd-8a0338d8256c": "chair",
+   "ocd-person/3646e872-85a6-4383-97c5-36ff96ca7113": "vice chair",
+   "ocd-person/91abe321-5ea4-4f17-b8d8-573d7cb913e6": "secretary"
+  }
  },
  {
   "id": "9a242825-c137-4d4f-a5f8-0c6af274e603",
@@ -509,7 +597,16 @@
    "ocd-person/2abbbe23-8cb6-4f33-afaf-38ce88a4e10c",
    "ocd-person/516cb969-9467-490f-9a05-02c3e7decae3",
    "ocd-person/93f45299-bfa2-4458-844a-5c6b9bdd8c1d"
-  ]
+  ],
+  "roles": {
+   "ocd-person/449db918-10b7-4fa7-a047-eb9de416dce3": "chair",
+   "ocd-person/1ac93f89-f367-4de3-82ba-79fa78d4d134": "vice chair",
+   "ocd-person/60bb96c4-f20c-4918-b88b-d7857341e5f4": "ex-officio",
+   "ocd-person/17a7e011-73f2-4ac5-8470-3436b47a6744": "ex-officio",
+   "ocd-person/777f58bb-9d6b-4755-ab7b-b94d11629cb5": "ex-officio",
+   "ocd-person/1f7d013a-8861-4e08-b6bf-7c8d36f8107c": "ex-officio",
+   "ocd-person/ae6e08e3-6971-4cd2-982a-48d650a343d5": "ex-officio"
+  }
  },
  {
   "id": "666b8264-4440-44d7-ac3c-f126b896a820",
@@ -548,7 +645,12 @@
    "ocd-person/45567c87-3ba6-49ec-9ea2-5ebb880aa94c",
    "ocd-person/6ac8933e-8dde-4902-8eec-61cc5a91c844",
    "ocd-person/546d682f-b256-4060-8fd3-084d7f118d43"
-  ]
+  ],
+  "roles": {
+   "ocd-person/81dde544-49e9-4fb0-9313-32eacaf6194b": "chair",
+   "ocd-person/9103b29e-964b-4637-9304-0e73216d7796": "vice chair",
+   "ocd-person/56f28f8a-9296-4e69-9bd4-d0101a42b359": "secretary"
+  }
  },
  {
   "id": "37221b52-2fa7-48b5-8c00-5cec462d8773",
@@ -566,7 +668,10 @@
    "ocd-person/2ba0916f-40b1-4255-9496-94b12ccabd1e",
    "ocd-person/432ef767-d4c8-4736-b2ac-96397205fb3d",
    "ocd-person/6e5432a3-09ed-4813-b11d-e97222bb7e4d"
-  ]
+  ],
+  "roles": {
+   "ocd-person/d40576ac-fbc0-4b42-98ee-f6362063784d": "chair"
+  }
  },
  {
   "id": "487fcef8-0ebb-4cbc-a0de-9151677e0b29",
@@ -587,7 +692,16 @@
    "ocd-person/078246e9-90b8-43aa-bb92-d7016f517b8e",
    "ocd-person/918888ac-edc7-4178-9133-d058f0f21010",
    "ocd-person/bf2c1ec5-d995-4605-85ac-139adb037d99"
-  ]
+  ],
+  "roles": {
+   "ocd-person/cbcdfca3-e47d-4b32-9164-ec0709a134bf": "chair",
+   "ocd-person/c7860bae-9d9c-449c-9903-20230eec50ac": "vice chair",
+   "ocd-person/d7bfd125-d343-4acd-a4dc-480daf241af3": "ex officio",
+   "ocd-person/cb7d8c1d-3c26-4f35-8d37-d1cf8a7ce207": "ex officio",
+   "ocd-person/2f8621bc-0548-457c-8b0d-9148e14b77fe": "ex officio",
+   "ocd-person/6da7fe11-4436-4854-8e1b-4c45dc4cdaac": "ex officio",
+   "ocd-person/73918c45-83c1-4d52-a84d-3ad7ad8de40b": "secretary"
+  }
  },
  {
   "id": "e6d29672-461c-45c6-a514-bd5d6055f2ed",
@@ -610,7 +724,16 @@
    "ocd-person/314d7845-ba55-4bd4-809a-c7c7aea26690",
    "ocd-person/2abbbe23-8cb6-4f33-afaf-38ce88a4e10c",
    "ocd-person/e2c141e9-9e04-4e2b-8e5b-57db594c7abc"
-  ]
+  ],
+  "roles": {
+   "ocd-person/b11d0191-cd84-4a93-add6-ee65494caff2": "chair",
+   "ocd-person/ac1cac30-3fec-4c56-b172-b483db465a6b": "vice chair",
+   "ocd-person/4dc87191-fa52-4c2f-bc9c-8823a8b4c882": "ex officio",
+   "ocd-person/e9c5a2fc-3354-49e1-ac29-783502155fe7": "ex officio",
+   "ocd-person/1f7d013a-8861-4e08-b6bf-7c8d36f8107c": "ex officio",
+   "ocd-person/e11cecf4-f2e5-49d9-ba9e-47681f779438": "ex officio",
+   "ocd-person/449db918-10b7-4fa7-a047-eb9de416dce3": "secretary"
+  }
  },
  {
   "id": "cb279d78-c8f0-4946-ac93-a53d00e3f064",
@@ -634,7 +757,12 @@
    "ocd-person/e6ae8d30-4b1b-4b06-8918-2be6fa7f8108",
    "ocd-person/80f4bbdf-02f3-4233-8456-e550e7e745af",
    "ocd-person/3194a8e0-aaf8-4686-b2c9-a22521f85fff"
-  ]
+  ],
+  "roles": {
+   "ocd-person/9dfc8ec3-0935-4d1d-877d-e05cf7a5dca5": "chair",
+   "ocd-person/3b2b9f31-6859-4582-8d82-581597c0c178": "vice chair",
+   "ocd-person/38c596a4-df69-4a56-9329-be73f26bc7d5": "secretary"
+  }
  },
  {
   "id": "6d003c8c-f0a2-4650-9f1d-e670c55d4ad5",
@@ -655,7 +783,15 @@
    "ocd-person/57ad1f65-9969-4be2-b262-684bf53123fb",
    "ocd-person/069fb4fa-766b-40e4-90b7-ce96b4fa2ace",
    "ocd-person/5b6e0e37-802b-4103-b401-551532aba2e7"
-  ]
+  ],
+  "roles": {
+   "ocd-person/93f45299-bfa2-4458-844a-5c6b9bdd8c1d": "chair",
+   "ocd-person/e9c5a2fc-3354-49e1-ac29-783502155fe7": "vice chair",
+   "ocd-person/584267b0-e40b-4d6e-a7fe-4c076eb6214c": "ex-officio",
+   "ocd-person/ac1cac30-3fec-4c56-b172-b483db465a6b": "ex-officio",
+   "ocd-person/fc31ab02-026c-4173-86db-570c0b297c64": "ex-officio",
+   "ocd-person/6da7fe11-4436-4854-8e1b-4c45dc4cdaac": "secretary"
+  }
  },
  {
   "id": "0372ca46-58e1-417c-9c7a-b01e5e014e10",
@@ -683,7 +819,12 @@
    "ocd-person/9007dcd9-3246-4cf3-9185-7478b3a9ad7a",
    "ocd-person/5474fbe2-6cdb-4ad2-9831-cdffaca442af",
    "ocd-person/99082062-acd6-4c6b-bb45-2cfa071f19fc"
-  ]
+  ],
+  "roles": {
+   "ocd-person/546d682f-b256-4060-8fd3-084d7f118d43": "chair",
+   "ocd-person/933a841a-19d6-42c2-a046-991ff9903a23": "vice chair",
+   "ocd-person/cf955c60-cbda-4414-9266-3d8dca3553fe": "secretary"
+  }
  },
  {
   "id": "bb02f062-bfae-412f-9e76-e30e1c215d7e",
@@ -716,7 +857,13 @@
    "ocd-person/432ef767-d4c8-4736-b2ac-96397205fb3d",
    "ocd-person/45567c87-3ba6-49ec-9ea2-5ebb880aa94c",
    "ocd-person/e3b1be9c-b244-4466-9192-adc365a31cfb"
-  ]
+  ],
+  "roles": {
+   "ocd-person/69493144-3e3e-49a8-9e1f-f9a948fd0ff3": "chair",
+   "ocd-person/6ac8933e-8dde-4902-8eec-61cc5a91c844": "vice chair",
+   "ocd-person/15db25fc-273b-467f-b8f9-897337f40b65": "ex-officio",
+   "ocd-person/f8db50e0-08ab-406c-ac8b-39c7038ef5ca": "secretary"
+  }
  },
  {
   "id": "3b997f42-35dd-4c20-a1b0-8836250b35cf",
@@ -741,7 +888,16 @@
    "ocd-person/8798a822-fee8-4546-bcdd-455f788bef44",
    "ocd-person/218a4fc4-a568-4b78-b350-0d60c6b12d4c",
    "ocd-person/2abbbe23-8cb6-4f33-afaf-38ce88a4e10c"
-  ]
+  ],
+  "roles": {
+   "ocd-person/fd2717f1-6294-4601-a027-8fc41195372c": "chair",
+   "ocd-person/fc31ab02-026c-4173-86db-570c0b297c64": "vice chair",
+   "ocd-person/4dc87191-fa52-4c2f-bc9c-8823a8b4c882": "ex officio",
+   "ocd-person/011995be-4dd0-43b2-ae75-57ae45f53576": "ex officio",
+   "ocd-person/6da7fe11-4436-4854-8e1b-4c45dc4cdaac": "ex officio",
+   "ocd-person/b90b899d-87f0-43a5-9d15-6e310187ac41": "ex officio",
+   "ocd-person/777f58bb-9d6b-4755-ab7b-b94d11629cb5": "secretary"
+  }
  },
  {
   "id": "5084a536-3451-4321-9cc3-580d15babdef",
@@ -755,7 +911,10 @@
    "ocd-person/bf68b3dc-ca81-49f9-8e33-fe27317183d3",
    "ocd-person/69493144-3e3e-49a8-9e1f-f9a948fd0ff3",
    "ocd-person/15db25fc-273b-467f-b8f9-897337f40b65"
-  ]
+  ],
+  "roles": {
+   "ocd-person/842218b5-88ae-4ba8-8395-756bf3340e16": "chair"
+  }
  },
  {
   "id": "0a7df823-92b4-4b4b-a1af-b9371c3dfc98",
@@ -786,7 +945,12 @@
    "ocd-person/99ef9b20-6b1f-4831-8e58-a523de606cda",
    "ocd-person/cf955c60-cbda-4414-9266-3d8dca3553fe",
    "ocd-person/6ac8933e-8dde-4902-8eec-61cc5a91c844"
-  ]
+  ],
+  "roles": {
+   "ocd-person/42517dd7-eccb-4d22-a795-cbd010b69ee6": "chair",
+   "ocd-person/72370a62-92f4-46f1-ab7b-193a643085b8": "vice chair",
+   "ocd-person/97a40ea4-674f-4b84-8fd3-8bc2f3b4a35d": "secretary"
+  }
  },
  {
   "id": "b306a5db-5dbf-4cff-8b54-4d3c4fcb69ec",
@@ -804,7 +968,13 @@
    "ocd-person/bf2c1ec5-d995-4605-85ac-139adb037d99",
    "ocd-person/c7860bae-9d9c-449c-9903-20230eec50ac",
    "ocd-person/218a4fc4-a568-4b78-b350-0d60c6b12d4c"
-  ]
+  ],
+  "roles": {
+   "ocd-person/918888ac-edc7-4178-9133-d058f0f21010": "chair",
+   "ocd-person/449db918-10b7-4fa7-a047-eb9de416dce3": "vice chair",
+   "ocd-person/98850c9f-1c37-4177-9ad8-17d2b4d3c8d4": "ex-officio",
+   "ocd-person/1ac93f89-f367-4de3-82ba-79fa78d4d134": "secretary"
+  }
  },
  {
   "id": "e7a8721f-2e7b-4312-b194-e77c47be4680",
@@ -835,7 +1005,12 @@
    "ocd-person/21c6cae1-bcd2-4403-ad39-af04b64ce55c",
    "ocd-person/15db25fc-273b-467f-b8f9-897337f40b65",
    "ocd-person/e6ae8d30-4b1b-4b06-8918-2be6fa7f8108"
-  ]
+  ],
+  "roles": {
+   "ocd-person/38c596a4-df69-4a56-9329-be73f26bc7d5": "chair",
+   "ocd-person/f4f9be12-5d7c-4fae-8b7b-9e9d19d2282f": "vice chair",
+   "ocd-person/1a9598cc-056f-4725-a3fb-64c3f0fd26ed": "secretary"
+  }
  },
  {
   "id": "7eb8b66c-f0e9-48c0-8d13-d5ea6e7d2be0",
@@ -856,7 +1031,12 @@
    "ocd-person/f4f9be12-5d7c-4fae-8b7b-9e9d19d2282f",
    "ocd-person/2ba0916f-40b1-4255-9496-94b12ccabd1e",
    "ocd-person/546d682f-b256-4060-8fd3-084d7f118d43"
-  ]
+  ],
+  "roles": {
+   "ocd-person/adefd0ba-43cd-4aae-9321-12f67e57ac8a": "chair",
+   "ocd-person/8f76af22-98dc-4e1e-ba99-75b87c1129d6": "vice chair",
+   "ocd-person/9103b29e-964b-4637-9304-0e73216d7796": "secretary"
+  }
  },
  {
   "id": "e2888b3c-9d72-4fc8-be54-e64b93cfdfbe",
@@ -874,7 +1054,12 @@
    "ocd-person/5d77204f-89e7-43df-bccb-a08b9956132d",
    "ocd-person/d291834f-70cd-48b5-b7db-b05d23d74a4c",
    "ocd-person/6e5432a3-09ed-4813-b11d-e97222bb7e4d"
-  ]
+  ],
+  "roles": {
+   "ocd-person/91abe321-5ea4-4f17-b8d8-573d7cb913e6": "chair",
+   "ocd-person/be05ace3-ea73-4f3f-85ae-c5ed313d4cbe": "vice chair",
+   "ocd-person/cf955c60-cbda-4414-9266-3d8dca3553fe": "secretary"
+  }
  },
  {
   "id": "8d138bd7-8a77-4d1c-b1c5-3002a4e42fbb",
@@ -907,7 +1092,12 @@
    "ocd-person/80f4bbdf-02f3-4233-8456-e550e7e745af",
    "ocd-person/4b162447-89a7-4ffc-acbf-617e1ad87e2a",
    "ocd-person/e3b1be9c-b244-4466-9192-adc365a31cfb"
-  ]
+  ],
+  "roles": {
+   "ocd-person/f33d979c-554c-433e-ad0f-837eef1da589": "chair",
+   "ocd-person/d40576ac-fbc0-4b42-98ee-f6362063784d": "vice chair",
+   "ocd-person/0f5a9273-2fc6-458f-af59-b75070a1dc76": "secretary"
+  }
  },
  {
   "id": "e26d628c-bd8c-4b9c-b85f-97f6e35de8dc",
@@ -926,7 +1116,14 @@
    "ocd-person/011995be-4dd0-43b2-ae75-57ae45f53576",
    "ocd-person/57ad1f65-9969-4be2-b262-684bf53123fb",
    "ocd-person/6da7fe11-4436-4854-8e1b-4c45dc4cdaac"
-  ]
+  ],
+  "roles": {
+   "ocd-person/078246e9-90b8-43aa-bb92-d7016f517b8e": "chair",
+   "ocd-person/44a51125-9e82-41f6-8d4f-a646895b5994": "vice chair",
+   "ocd-person/314d7845-ba55-4bd4-809a-c7c7aea26690": "ex officio",
+   "ocd-person/e2c141e9-9e04-4e2b-8e5b-57db594c7abc": "ex officio",
+   "ocd-person/fc31ab02-026c-4173-86db-570c0b297c64": "secretary"
+  }
  },
  {
   "id": "38ed7033-3823-4545-823e-233506ac5f06",
@@ -955,7 +1152,12 @@
    "ocd-person/84eb7371-a332-4534-b3b3-542500c798f8",
    "ocd-person/d291834f-70cd-48b5-b7db-b05d23d74a4c",
    "ocd-person/4ab15127-5b7a-40bc-8807-26e8e8a73397"
-  ]
+  ],
+  "roles": {
+   "ocd-person/99082062-acd6-4c6b-bb45-2cfa071f19fc": "chair",
+   "ocd-person/6552dd8d-1020-4bbb-abfc-88975573ebd4": "vice chair",
+   "ocd-person/f4f9be12-5d7c-4fae-8b7b-9e9d19d2282f": "secretary"
+  }
  },
  {
   "id": "bea7cf21-1d4d-4295-b2bc-d6705ebaa6d1",
@@ -966,7 +1168,11 @@
    "ocd-person/7f88fadb-2f51-48c7-8ae5-e20cd2f33e4a",
    "ocd-person/acc7c167-6251-4ce8-8021-511acfa291ef",
    "ocd-person/8798a822-fee8-4546-bcdd-455f788bef44"
-  ]
+  ],
+  "roles": {
+   "ocd-person/7f88fadb-2f51-48c7-8ae5-e20cd2f33e4a": "vice chair",
+   "ocd-person/acc7c167-6251-4ce8-8021-511acfa291ef": "secretary"
+  }
  },
  {
   "id": "18d1d8b5-2496-4f60-adbb-2ff263f6176a",
@@ -992,7 +1198,12 @@
    "ocd-person/2ba0916f-40b1-4255-9496-94b12ccabd1e",
    "ocd-person/15db25fc-273b-467f-b8f9-897337f40b65",
    "ocd-person/546d682f-b256-4060-8fd3-084d7f118d43"
-  ]
+  ],
+  "roles": {
+   "ocd-person/7767ee85-7961-45ba-adc2-c3606b1c39b8": "chair",
+   "ocd-person/be05ace3-ea73-4f3f-85ae-c5ed313d4cbe": "vice chair",
+   "ocd-person/fc1a5e1f-6ce4-47ab-987b-095afa166359": "secretary"
+  }
  },
  {
   "id": "29827ae5-3f3c-4d87-acee-1e6675cd8b51",
@@ -1007,7 +1218,11 @@
    "ocd-person/73918c45-83c1-4d52-a84d-3ad7ad8de40b",
    "ocd-person/44a51125-9e82-41f6-8d4f-a646895b5994",
    "ocd-person/e2c141e9-9e04-4e2b-8e5b-57db594c7abc"
-  ]
+  ],
+  "roles": {
+   "ocd-person/e9c5a2fc-3354-49e1-ac29-783502155fe7": "co-chair",
+   "ocd-person/c81779f3-65bf-4714-b295-79cac3b0da28": "co-chair"
+  }
  },
  {
   "id": "54411e35-e34f-4c19-9d9b-5597c72eab0a",
@@ -1022,7 +1237,11 @@
    "ocd-person/d7bfd125-d343-4acd-a4dc-480daf241af3",
    "ocd-person/2f8621bc-0548-457c-8b0d-9148e14b77fe",
    "ocd-person/e2c141e9-9e04-4e2b-8e5b-57db594c7abc"
-  ]
+  ],
+  "roles": {
+   "ocd-person/4dc87191-fa52-4c2f-bc9c-8823a8b4c882": "chair",
+   "ocd-person/1f7d013a-8861-4e08-b6bf-7c8d36f8107c": "vice chair"
+  }
  },
  {
   "id": "9b0d5e83-9c34-4768-8d75-6ba42e57aa1f",
@@ -1047,7 +1266,14 @@
    "ocd-person/fa5d8d09-a0b9-4ba4-93da-a24902530416",
    "ocd-person/45567c87-3ba6-49ec-9ea2-5ebb880aa94c",
    "ocd-person/6ac8933e-8dde-4902-8eec-61cc5a91c844"
-  ]
+  ],
+  "roles": {
+   "ocd-person/432ef767-d4c8-4736-b2ac-96397205fb3d": "chair",
+   "ocd-person/0f4f3c5a-1192-4ec1-9698-4aef005b4875": "vice chair",
+   "ocd-person/d40576ac-fbc0-4b42-98ee-f6362063784d": "ex-officio",
+   "ocd-person/4b162447-89a7-4ffc-acbf-617e1ad87e2a": "ex-officio",
+   "ocd-person/29210f3f-ec97-47c8-9492-b81154275109": "secretary"
+  }
  },
  {
   "id": "61f421e3-0329-4767-bf5c-758b279a9d69",
@@ -1067,7 +1293,14 @@
    "ocd-person/3f15ad5e-877d-44aa-b5b3-b24587c42685",
    "ocd-person/d7bfd125-d343-4acd-a4dc-480daf241af3",
    "ocd-person/314d7845-ba55-4bd4-809a-c7c7aea26690"
-  ]
+  ],
+  "roles": {
+   "ocd-person/3a5721a0-d848-40d0-a48a-66b797e7d7d9": "chair",
+   "ocd-person/4dc87191-fa52-4c2f-bc9c-8823a8b4c882": "vice chair",
+   "ocd-person/e2c141e9-9e04-4e2b-8e5b-57db594c7abc": "ex-officio",
+   "ocd-person/516cb969-9467-490f-9a05-02c3e7decae3": "ex-officio",
+   "ocd-person/93f45299-bfa2-4458-844a-5c6b9bdd8c1d": "secretary"
+  }
  },
  {
   "id": "51dd9e40-f169-4d5a-9443-276c8a6130dc",
@@ -1095,7 +1328,12 @@
    "ocd-person/2a66b922-b812-4c45-9786-478187cd5e33",
    "ocd-person/4b162447-89a7-4ffc-acbf-617e1ad87e2a",
    "ocd-person/97a002db-6151-4fdf-9bce-013a6344764f"
-  ]
+  ],
+  "roles": {
+   "ocd-person/e4e40f68-0970-4392-b739-3c68f749bcdc": "chair",
+   "ocd-person/0f288c5b-484a-4b70-8209-0a23f922edd1": "vice chair",
+   "ocd-person/b278b399-5ca3-4cd7-bc19-4053166577a2": "secretary"
+  }
  },
  {
   "id": "e04489aa-cefe-4b13-adf1-309e6063da58",
@@ -1120,7 +1358,13 @@
    "ocd-person/15db25fc-273b-467f-b8f9-897337f40b65",
    "ocd-person/9007dcd9-3246-4cf3-9185-7478b3a9ad7a",
    "ocd-person/6f986b42-14f6-4147-9466-c49294331db9"
-  ]
+  ],
+  "roles": {
+   "ocd-person/4b162447-89a7-4ffc-acbf-617e1ad87e2a": "chair",
+   "ocd-person/b824f8fd-7343-449d-8027-fcd0afaf1949": "vice chair",
+   "ocd-person/432ef767-d4c8-4736-b2ac-96397205fb3d": "ex officio",
+   "ocd-person/64721c9b-451c-4bc9-9040-4ca232ffd746": "secretary"
+  }
  },
  {
   "id": "b8e2d901-e973-4fc1-ab8e-d4dc7d6836b4",
@@ -1135,7 +1379,12 @@
    "ocd-person/6552dd8d-1020-4bbb-abfc-88975573ebd4",
    "ocd-person/e6ca1b23-0972-4df6-ab04-6186cf9da814",
    "ocd-person/91abe321-5ea4-4f17-b8d8-573d7cb913e6"
-  ]
+  ],
+  "roles": {
+   "ocd-person/b824f8fd-7343-449d-8027-fcd0afaf1949": "chair",
+   "ocd-person/f8db50e0-08ab-406c-ac8b-39c7038ef5ca": "ex-officio",
+   "ocd-person/ee145624-3295-4db4-b3ce-9d1583e4ef6e": "ex-officio"
+  }
  },
  {
   "id": "2b8c68f0-657d-4277-8d0b-0b3f78fa0d86",
@@ -1150,7 +1399,10 @@
    "ocd-person/2abbbe23-8cb6-4f33-afaf-38ce88a4e10c",
    "ocd-person/e2c141e9-9e04-4e2b-8e5b-57db594c7abc",
    "ocd-person/d9f1ea57-7b90-484a-9664-927a36c87e0c"
-  ]
+  ],
+  "roles": {
+   "ocd-person/9e417b67-da09-4516-b858-6b2458f53633": "vice chair"
+  }
  },
  {
   "id": "1ecfd78a-29bb-4325-9a17-a3988ea3406f",
@@ -1171,7 +1423,12 @@
    "ocd-person/6552dd8d-1020-4bbb-abfc-88975573ebd4",
    "ocd-person/bc40f904-9c20-41d0-80d5-e5645d3e6935",
    "ocd-person/9deeb60b-4d1e-42b8-8052-d2808a30ea9a"
-  ]
+  ],
+  "roles": {
+   "ocd-person/a34c9a5a-f307-4c07-b766-3b3b1148d7b1": "chair",
+   "ocd-person/9103b29e-964b-4637-9304-0e73216d7796": "vice chair",
+   "ocd-person/1a9598cc-056f-4725-a3fb-64c3f0fd26ed": "secretary"
+  }
  },
  {
   "id": "dbbecd81-da59-4e17-9ccb-86a5b4cb683b",
@@ -1206,7 +1463,12 @@
    "ocd-person/3252da04-a17e-4298-b19d-9dd2fbf29ded",
    "ocd-person/f863b50d-c865-463a-830a-e5648837d9f7",
    "ocd-person/e3b1be9c-b244-4466-9192-adc365a31cfb"
-  ]
+  ],
+  "roles": {
+   "ocd-person/945875f7-f3c5-4c75-acd6-a195a0f76b12": "chair",
+   "ocd-person/9deeb60b-4d1e-42b8-8052-d2808a30ea9a": "vice chair",
+   "ocd-person/1da20ad9-1a05-42ab-addb-7fbf295a0e5d": "secretary"
+  }
  },
  {
   "id": "393f7364-726b-4a11-a0e5-50f9eb13f4e2",
@@ -1227,7 +1489,15 @@
    "ocd-person/57ad1f65-9969-4be2-b262-684bf53123fb",
    "ocd-person/5b6e0e37-802b-4103-b401-551532aba2e7",
    "ocd-person/516cb969-9467-490f-9a05-02c3e7decae3"
-  ]
+  ],
+  "roles": {
+   "ocd-person/e11cecf4-f2e5-49d9-ba9e-47681f779438": "chair",
+   "ocd-person/cb7d8c1d-3c26-4f35-8d37-d1cf8a7ce207": "vice chair",
+   "ocd-person/9e417b67-da09-4516-b858-6b2458f53633": "ex-officio",
+   "ocd-person/81b84318-8c9f-467f-a7c1-776d9c415f51": "ex-officio",
+   "ocd-person/cbcdfca3-e47d-4b32-9164-ec0709a134bf": "ex-officio",
+   "ocd-person/b90b899d-87f0-43a5-9d15-6e310187ac41": "secretary"
+  }
  },
  {
   "id": "714c72b7-f8c5-42b3-b9c0-61fd586ad171",
@@ -1256,7 +1526,13 @@
    "ocd-person/91abe321-5ea4-4f17-b8d8-573d7cb913e6",
    "ocd-person/e6ae8d30-4b1b-4b06-8918-2be6fa7f8108",
    "ocd-person/9fe70ed7-31a0-4732-92b1-54d2a79a4654"
-  ]
+  ],
+  "roles": {
+   "ocd-person/15db25fc-273b-467f-b8f9-897337f40b65": "chair",
+   "ocd-person/47fd36f3-f5d4-4ef6-a429-1ffc7681e233": "vice chair",
+   "ocd-person/69493144-3e3e-49a8-9e1f-f9a948fd0ff3": "ex-officio",
+   "ocd-person/e6ca1b23-0972-4df6-ab04-6186cf9da814": "secretary"
+  }
  },
  {
   "id": "5b28cb2a-a9cd-4084-b987-3386953afc15",
@@ -1276,7 +1552,16 @@
    "ocd-person/0a816fbf-e5ec-4056-8b3e-08184400e71b",
    "ocd-person/2f8621bc-0548-457c-8b0d-9148e14b77fe",
    "ocd-person/b90b899d-87f0-43a5-9d15-6e310187ac41"
-  ]
+  ],
+  "roles": {
+   "ocd-person/ac1cac30-3fec-4c56-b172-b483db465a6b": "chair",
+   "ocd-person/6da7fe11-4436-4854-8e1b-4c45dc4cdaac": "vice chair",
+   "ocd-person/3a5721a0-d848-40d0-a48a-66b797e7d7d9": "ex-officio",
+   "ocd-person/1ac93f89-f367-4de3-82ba-79fa78d4d134": "ex-officio",
+   "ocd-person/2abbbe23-8cb6-4f33-afaf-38ce88a4e10c": "ex-officio",
+   "ocd-person/93f45299-bfa2-4458-844a-5c6b9bdd8c1d": "ex-officio",
+   "ocd-person/c7860bae-9d9c-449c-9903-20230eec50ac": "secretary"
+  }
  },
  {
   "id": "b1800ea3-0f28-44bb-aba7-b6e9d1efcc8a",
@@ -1307,7 +1592,12 @@
    "ocd-person/aa7405f9-5c37-4ce8-a7eb-ac5949a6e776",
    "ocd-person/546d682f-b256-4060-8fd3-084d7f118d43",
    "ocd-person/6f986b42-14f6-4147-9466-c49294331db9"
-  ]
+  ],
+  "roles": {
+   "ocd-person/e1a9102d-f845-47f5-882e-e344eef060ec": "chair",
+   "ocd-person/fc1a5e1f-6ce4-47ab-987b-095afa166359": "vice chair",
+   "ocd-person/47fd36f3-f5d4-4ef6-a429-1ffc7681e233": "secretary"
+  }
  },
  {
   "id": "0153a0a6-0885-4cd9-89df-802a703b4fc5",
@@ -1329,7 +1619,12 @@
    "ocd-person/8e209d95-2333-4aa2-a628-1bdcec0674f5",
    "ocd-person/7ac30a66-1649-4a8c-a72f-a4b9a7ab1534",
    "ocd-person/21c6cae1-bcd2-4403-ad39-af04b64ce55c"
-  ]
+  ],
+  "roles": {
+   "ocd-person/29210f3f-ec97-47c8-9492-b81154275109": "chair",
+   "ocd-person/64721c9b-451c-4bc9-9040-4ca232ffd746": "vice chair",
+   "ocd-person/0f4f3c5a-1192-4ec1-9698-4aef005b4875": "secretary"
+  }
  },
  {
   "id": "c0f13d48-aef6-413b-a148-300e099c779c",
@@ -1352,7 +1647,14 @@
    "ocd-person/314d7845-ba55-4bd4-809a-c7c7aea26690",
    "ocd-person/e2c141e9-9e04-4e2b-8e5b-57db594c7abc",
    "ocd-person/d9f1ea57-7b90-484a-9664-927a36c87e0c"
-  ]
+  ],
+  "roles": {
+   "ocd-person/011995be-4dd0-43b2-ae75-57ae45f53576": "chair",
+   "ocd-person/60bb96c4-f20c-4918-b88b-d7857341e5f4": "vice chair",
+   "ocd-person/1f7d013a-8861-4e08-b6bf-7c8d36f8107c": "ex officio",
+   "ocd-person/44a51125-9e82-41f6-8d4f-a646895b5994": "ex officio",
+   "ocd-person/4dc87191-fa52-4c2f-bc9c-8823a8b4c882": "secretary"
+  }
  },
  {
   "id": "a472beee-3085-47d7-9326-34916630d027",
@@ -1381,7 +1683,12 @@
    "ocd-person/4d1f5379-01e9-4f58-9868-42acc07ec7a8",
    "ocd-person/2a66b922-b812-4c45-9786-478187cd5e33",
    "ocd-person/15db25fc-273b-467f-b8f9-897337f40b65"
-  ]
+  ],
+  "roles": {
+   "ocd-person/bb48e87c-29db-4a4d-a278-fa299be2020e": "chair",
+   "ocd-person/ec6cf250-ebcc-4dda-89a5-12da9ebbe51a": "vice chair",
+   "ocd-person/be05ace3-ea73-4f3f-85ae-c5ed313d4cbe": "secretary"
+  }
  },
  {
   "id": "3b19f94f-9e1b-49f0-897c-005fafef2f85",
@@ -1403,7 +1710,16 @@
    "ocd-person/81b84318-8c9f-467f-a7c1-776d9c415f51",
    "ocd-person/e2c141e9-9e04-4e2b-8e5b-57db594c7abc",
    "ocd-person/d9f1ea57-7b90-484a-9664-927a36c87e0c"
-  ]
+  ],
+  "roles": {
+   "ocd-person/4dc87191-fa52-4c2f-bc9c-8823a8b4c882": "chair",
+   "ocd-person/98850c9f-1c37-4177-9ad8-17d2b4d3c8d4": "vice chair",
+   "ocd-person/4cf7c975-678b-4e21-9877-6d22d7b37916": "ex officio",
+   "ocd-person/9e417b67-da09-4516-b858-6b2458f53633": "ex officio",
+   "ocd-person/ac1cac30-3fec-4c56-b172-b483db465a6b": "ex officio",
+   "ocd-person/44a51125-9e82-41f6-8d4f-a646895b5994": "ex officio",
+   "ocd-person/c7860bae-9d9c-449c-9903-20230eec50ac": "secretary"
+  }
  },
  {
   "id": "ec0fef86-03ed-45e8-8a64-bb133677df63",
@@ -1427,7 +1743,12 @@
    "ocd-person/9fe70ed7-31a0-4732-92b1-54d2a79a4654",
    "ocd-person/45567c87-3ba6-49ec-9ea2-5ebb880aa94c",
    "ocd-person/546d682f-b256-4060-8fd3-084d7f118d43"
-  ]
+  ],
+  "roles": {
+   "ocd-person/933a841a-19d6-42c2-a046-991ff9903a23": "chair",
+   "ocd-person/cba2f06c-773c-49d3-949c-b1a2db377c21": "vice chair",
+   "ocd-person/3646e872-85a6-4383-97c5-36ff96ca7113": "secretary"
+  }
  },
  {
   "id": "4af683e3-8dac-4e89-bb73-19bc78c445f1",
@@ -1451,7 +1772,12 @@
    "ocd-person/3252da04-a17e-4298-b19d-9dd2fbf29ded",
    "ocd-person/fa5d8d09-a0b9-4ba4-93da-a24902530416",
    "ocd-person/80f4bbdf-02f3-4233-8456-e550e7e745af"
-  ]
+  ],
+  "roles": {
+   "ocd-person/713cac52-0a57-4baa-8273-6eeca5b491df": "chair",
+   "ocd-person/6971bb34-9ea4-4bdc-971e-c1a2c5de344c": "vice chair",
+   "ocd-person/0f288c5b-484a-4b70-8209-0a23f922edd1": "secretary"
+  }
  },
  {
   "id": "d62cf694-ab0e-4d79-a66e-34729531eaff",
@@ -1468,7 +1794,14 @@
    "ocd-person/b83b0486-773f-4979-a1ce-e2f7f3e6d7e1",
    "ocd-person/8798a822-fee8-4546-bcdd-455f788bef44",
    "ocd-person/b90b899d-87f0-43a5-9d15-6e310187ac41"
-  ]
+  ],
+  "roles": {
+   "ocd-person/c7860bae-9d9c-449c-9903-20230eec50ac": "chair",
+   "ocd-person/078246e9-90b8-43aa-bb92-d7016f517b8e": "vice chair",
+   "ocd-person/b11d0191-cd84-4a93-add6-ee65494caff2": "exofficio",
+   "ocd-person/bf2c1ec5-d995-4605-85ac-139adb037d99": "exofficio",
+   "ocd-person/6be704ef-6250-4e08-86d3-f5fa2e1eebf3": "secretary"
+  }
  },
  {
   "id": "f4826e8e-e34c-4d06-9b10-73fd7567bbcd",
@@ -1509,7 +1842,15 @@
    "ocd-person/fa5d8d09-a0b9-4ba4-93da-a24902530416",
    "ocd-person/432ef767-d4c8-4736-b2ac-96397205fb3d",
    "ocd-person/6e5432a3-09ed-4813-b11d-e97222bb7e4d"
-  ]
+  ],
+  "roles": {
+   "ocd-person/842218b5-88ae-4ba8-8395-756bf3340e16": "chair",
+   "ocd-person/29210f3f-ec97-47c8-9492-b81154275109": "vice chair",
+   "ocd-person/3ff894cb-f2e4-47d0-9f67-b125245a10c3": "ex-officio",
+   "ocd-person/dbce462d-74e3-42d3-bd6c-3b9f8eeb69fe": "ex-officio",
+   "ocd-person/2ba0916f-40b1-4255-9496-94b12ccabd1e": "ex-officio",
+   "ocd-person/6ac8933e-8dde-4902-8eec-61cc5a91c844": "secretary"
+  }
  },
  {
   "id": "b5ca76af-7b0f-4d0f-ab42-95f1764802db",
@@ -1537,7 +1878,19 @@
    "ocd-person/2f8621bc-0548-457c-8b0d-9148e14b77fe",
    "ocd-person/44a51125-9e82-41f6-8d4f-a646895b5994",
    "ocd-person/e11cecf4-f2e5-49d9-ba9e-47681f779438"
-  ]
+  ],
+  "roles": {
+   "ocd-person/81b84318-8c9f-467f-a7c1-776d9c415f51": "chair",
+   "ocd-person/fd2717f1-6294-4601-a027-8fc41195372c": "vice chair",
+   "ocd-person/d7bfd125-d343-4acd-a4dc-480daf241af3": "ex officio",
+   "ocd-person/cb7d8c1d-3c26-4f35-8d37-d1cf8a7ce207": "ex officio",
+   "ocd-person/fc31ab02-026c-4173-86db-570c0b297c64": "ex officio",
+   "ocd-person/6da7fe11-4436-4854-8e1b-4c45dc4cdaac": "ex officio",
+   "ocd-person/c7860bae-9d9c-449c-9903-20230eec50ac": "ex officio",
+   "ocd-person/314d7845-ba55-4bd4-809a-c7c7aea26690": "ex officio",
+   "ocd-person/e2c141e9-9e04-4e2b-8e5b-57db594c7abc": "ex officio",
+   "ocd-person/4dc87191-fa52-4c2f-bc9c-8823a8b4c882": "secretary"
+  }
  },
  {
   "id": "bb6c2e93-303f-46b3-a4b2-88ce56afabfa",
@@ -1560,7 +1913,12 @@
    "ocd-person/f4f9be12-5d7c-4fae-8b7b-9e9d19d2282f",
    "ocd-person/af51c2db-8871-45a4-803d-314fa2b9d18d",
    "ocd-person/ee145624-3295-4db4-b3ce-9d1583e4ef6e"
-  ]
+  ],
+  "roles": {
+   "ocd-person/df874c28-6403-42c1-9cbb-0855508cda85": "chair",
+   "ocd-person/c862c17f-ed00-41d7-97e5-1138f451a96c": "vice chair",
+   "ocd-person/5061bc6b-83af-46d0-a78d-30ebe10a63db": "secretary"
+  }
  },
  {
   "id": "3ec9920c-d6f8-4832-b9bc-a3a5b270e3d8",
@@ -1572,7 +1930,12 @@
    "ocd-person/1ac93f89-f367-4de3-82ba-79fa78d4d134",
    "ocd-person/6be704ef-6250-4e08-86d3-f5fa2e1eebf3",
    "ocd-person/0a816fbf-e5ec-4056-8b3e-08184400e71b"
-  ]
+  ],
+  "roles": {
+   "ocd-person/777f58bb-9d6b-4755-ab7b-b94d11629cb5": "chair",
+   "ocd-person/1ac93f89-f367-4de3-82ba-79fa78d4d134": "vice chair",
+   "ocd-person/6be704ef-6250-4e08-86d3-f5fa2e1eebf3": "secretary"
+  }
  },
  {
   "id": "99a0cbaa-17a3-455b-9ec3-38c2caad873d",
@@ -1605,7 +1968,12 @@
    "ocd-person/80f4bbdf-02f3-4233-8456-e550e7e745af",
    "ocd-person/3194a8e0-aaf8-4686-b2c9-a22521f85fff",
    "ocd-person/4b162447-89a7-4ffc-acbf-617e1ad87e2a"
-  ]
+  ],
+  "roles": {
+   "ocd-person/1831cc73-e694-4cea-83a4-b55c3495f76a": "chair",
+   "ocd-person/08ee45fd-d3f4-4129-9e7c-27cf52533ed2": "vice chair",
+   "ocd-person/27365f19-a138-4a9e-9f6e-11352932e5d5": "secretary"
+  }
  },
  {
   "id": "f99239e8-f6a5-46cb-901e-7988c7a09579",
@@ -1623,7 +1991,10 @@
    "ocd-person/bf2c1ec5-d995-4605-85ac-139adb037d99",
    "ocd-person/cbcdfca3-e47d-4b32-9164-ec0709a134bf",
    "ocd-person/e2c141e9-9e04-4e2b-8e5b-57db594c7abc"
-  ]
+  ],
+  "roles": {
+   "ocd-person/e9c5a2fc-3354-49e1-ac29-783502155fe7": "chair"
+  }
  },
  {
   "id": "843530e9-fff7-4a21-a11c-f44d32faafad",
@@ -1643,7 +2014,12 @@
    "ocd-person/bc40f904-9c20-41d0-80d5-e5645d3e6935",
    "ocd-person/cabc1e6f-ba7c-4063-a778-707579f91ec8",
    "ocd-person/9dfc8ec3-0935-4d1d-877d-e05cf7a5dca5"
-  ]
+  ],
+  "roles": {
+   "ocd-person/7ac30a66-1649-4a8c-a72f-a4b9a7ab1534": "chair",
+   "ocd-person/8b4b00cb-6f78-4b69-b788-796b19d94752": "vice chair",
+   "ocd-person/6552dd8d-1020-4bbb-abfc-88975573ebd4": "secretary"
+  }
  },
  {
   "id": "ceb80c38-8ebe-4bf3-9c8f-fd086fc16db3",
@@ -1662,7 +2038,15 @@
    "ocd-person/ae6e08e3-6971-4cd2-982a-48d650a343d5",
    "ocd-person/8798a822-fee8-4546-bcdd-455f788bef44",
    "ocd-person/516cb969-9467-490f-9a05-02c3e7decae3"
-  ]
+  ],
+  "roles": {
+   "ocd-person/17a7e011-73f2-4ac5-8470-3436b47a6744": "chair",
+   "ocd-person/777f58bb-9d6b-4755-ab7b-b94d11629cb5": "vice chair",
+   "ocd-person/9e417b67-da09-4516-b858-6b2458f53633": "ex-officio",
+   "ocd-person/6da7fe11-4436-4854-8e1b-4c45dc4cdaac": "ex-officio",
+   "ocd-person/c7860bae-9d9c-449c-9903-20230eec50ac": "ex-officio",
+   "ocd-person/cbcdfca3-e47d-4b32-9164-ec0709a134bf": "secretary"
+  }
  },
  {
   "id": "21e5217d-31fa-46ad-b544-6609237ac334",
@@ -1675,7 +2059,12 @@
    "ocd-person/df023a79-0194-4d1a-8755-5dee4053e1cc",
    "ocd-person/069fb4fa-766b-40e4-90b7-ce96b4fa2ace",
    "ocd-person/218a4fc4-a568-4b78-b350-0d60c6b12d4c"
-  ]
+  ],
+  "roles": {
+   "ocd-person/4cf7c975-678b-4e21-9877-6d22d7b37916": "chair",
+   "ocd-person/e9c5a2fc-3354-49e1-ac29-783502155fe7": "vice chair",
+   "ocd-person/df023a79-0194-4d1a-8755-5dee4053e1cc": "secretary"
+  }
  },
  {
   "id": "0f1dafb2-91b3-4742-9764-531668de471e",
@@ -1701,7 +2090,12 @@
    "ocd-person/9007dcd9-3246-4cf3-9185-7478b3a9ad7a",
    "ocd-person/9dfc8ec3-0935-4d1d-877d-e05cf7a5dca5",
    "ocd-person/97a002db-6151-4fdf-9bce-013a6344764f"
-  ]
+  ],
+  "roles": {
+   "ocd-person/f8db50e0-08ab-406c-ac8b-39c7038ef5ca": "chair",
+   "ocd-person/af51c2db-8871-45a4-803d-314fa2b9d18d": "vice chair",
+   "ocd-person/c862c17f-ed00-41d7-97e5-1138f451a96c": "secretary"
+  }
  },
  {
   "id": "d077d945-b179-4453-81a1-33e461fa0a92",
@@ -1721,7 +2115,12 @@
    "ocd-person/91abe321-5ea4-4f17-b8d8-573d7cb913e6",
    "ocd-person/99082062-acd6-4c6b-bb45-2cfa071f19fc",
    "ocd-person/aa7405f9-5c37-4ce8-a7eb-ac5949a6e776"
-  ]
+  ],
+  "roles": {
+   "ocd-person/570a213a-a475-4fd3-ac36-23e1bd1190be": "chair",
+   "ocd-person/3b2b9f31-6859-4582-8d82-581597c0c178": "vice chair",
+   "ocd-person/68185f1d-fa54-4571-b305-fcd6c7dc024e": "secretary"
+  }
  },
  {
   "id": "897d8978-c620-41d3-a07b-80e0ce5ef31c",
@@ -1749,7 +2148,12 @@
    "ocd-person/702658f4-8382-479a-9416-79928239d5e7",
    "ocd-person/ee145624-3295-4db4-b3ce-9d1583e4ef6e",
    "ocd-person/fa5d8d09-a0b9-4ba4-93da-a24902530416"
-  ]
+  ],
+  "roles": {
+   "ocd-person/45567c87-3ba6-49ec-9ea2-5ebb880aa94c": "chair",
+   "ocd-person/933a841a-19d6-42c2-a046-991ff9903a23": "vice chair",
+   "ocd-person/c0b205e2-1542-4802-896d-fa7b2b6fc4d9": "secretary"
+  }
  },
  {
   "id": "8f7233ee-3b43-4b68-9e67-84a2531ebc0d",
@@ -1799,7 +2203,12 @@
    "ocd-person/e6ae8d30-4b1b-4b06-8918-2be6fa7f8108",
    "ocd-person/9deeb60b-4d1e-42b8-8052-d2808a30ea9a",
    "ocd-person/97a002db-6151-4fdf-9bce-013a6344764f"
-  ]
+  ],
+  "roles": {
+   "ocd-person/4d1f5379-01e9-4f58-9868-42acc07ec7a8": "chair",
+   "ocd-person/7767ee85-7961-45ba-adc2-c3606b1c39b8": "vice chair",
+   "ocd-person/3a323603-753e-4380-993c-9bb2a7fc55f3": "secretary"
+  }
  },
  {
   "id": "6a554b11-d577-45fc-87ce-6c144592bb61",
@@ -1821,7 +2230,16 @@
    "ocd-person/ae6e08e3-6971-4cd2-982a-48d650a343d5",
    "ocd-person/314d7845-ba55-4bd4-809a-c7c7aea26690",
    "ocd-person/e2c141e9-9e04-4e2b-8e5b-57db594c7abc"
-  ]
+  ],
+  "roles": {
+   "ocd-person/1f7d013a-8861-4e08-b6bf-7c8d36f8107c": "chair",
+   "ocd-person/17a7e011-73f2-4ac5-8470-3436b47a6744": "vice chair",
+   "ocd-person/584267b0-e40b-4d6e-a7fe-4c076eb6214c": "ex-officio",
+   "ocd-person/44a51125-9e82-41f6-8d4f-a646895b5994": "ex-officio",
+   "ocd-person/918888ac-edc7-4178-9133-d058f0f21010": "ex-officio",
+   "ocd-person/516cb969-9467-490f-9a05-02c3e7decae3": "ex-officio",
+   "ocd-person/cb7d8c1d-3c26-4f35-8d37-d1cf8a7ce207": "secretary"
+  }
  },
  {
   "id": "e71889eb-56a4-4388-bf98-eb5e22eca729",
@@ -1844,7 +2262,12 @@
    "ocd-person/2a66b922-b812-4c45-9786-478187cd5e33",
    "ocd-person/c5766526-3a5a-4d33-b5ff-a0d1d358d7ae",
    "ocd-person/e3b1be9c-b244-4466-9192-adc365a31cfb"
-  ]
+  ],
+  "roles": {
+   "ocd-person/a53e6bbd-a5b8-436b-94ae-bebf957c5b61": "chair",
+   "ocd-person/18427775-e3e7-4730-bb6f-722616e6aebe": "vice chair",
+   "ocd-person/eff357d0-3187-4a7b-93fe-2d54d010b093": "secretary"
+  }
  },
  {
   "id": "fb603394-b00f-443e-a43a-2b9792855f3b",
@@ -1861,7 +2284,12 @@
    "ocd-person/57ad1f65-9969-4be2-b262-684bf53123fb",
    "ocd-person/069fb4fa-766b-40e4-90b7-ce96b4fa2ace",
    "ocd-person/5b6e0e37-802b-4103-b401-551532aba2e7"
-  ]
+  ],
+  "roles": {
+   "ocd-person/7f88fadb-2f51-48c7-8ae5-e20cd2f33e4a": "chair",
+   "ocd-person/2abbbe23-8cb6-4f33-afaf-38ce88a4e10c": "vice chair",
+   "ocd-person/4b05e770-4423-4b64-8ae1-9600e8c73244": "secretary"
+  }
  },
  {
   "id": "380ff567-532b-487e-83ed-cf38baf69399",
@@ -1880,7 +2308,17 @@
    "ocd-person/584267b0-e40b-4d6e-a7fe-4c076eb6214c",
    "ocd-person/0a816fbf-e5ec-4056-8b3e-08184400e71b",
    "ocd-person/d9f1ea57-7b90-484a-9664-927a36c87e0c"
-  ]
+  ],
+  "roles": {
+   "ocd-person/1ac93f89-f367-4de3-82ba-79fa78d4d134": "chair",
+   "ocd-person/4cf7c975-678b-4e21-9877-6d22d7b37916": "vice chair",
+   "ocd-person/449db918-10b7-4fa7-a047-eb9de416dce3": "ex-officio",
+   "ocd-person/777f58bb-9d6b-4755-ab7b-b94d11629cb5": "ex-officio",
+   "ocd-person/cb7d8c1d-3c26-4f35-8d37-d1cf8a7ce207": "ex-officio",
+   "ocd-person/fc31ab02-026c-4173-86db-570c0b297c64": "ex-officio",
+   "ocd-person/314d7845-ba55-4bd4-809a-c7c7aea26690": "ex-officio",
+   "ocd-person/b83b0486-773f-4979-a1ce-e2f7f3e6d7e1": "secretary"
+  }
  },
  {
   "id": "de36f60f-5cd9-4e6c-aabc-55b9dbe2c95d",
@@ -1922,6 +2360,13 @@
    "ocd-person/45567c87-3ba6-49ec-9ea2-5ebb880aa94c",
    "ocd-person/9deeb60b-4d1e-42b8-8052-d2808a30ea9a",
    "ocd-person/6f986b42-14f6-4147-9466-c49294331db9"
-  ]
+  ],
+  "roles": {
+   "ocd-person/ee145624-3295-4db4-b3ce-9d1583e4ef6e": "chair",
+   "ocd-person/6ac8933e-8dde-4902-8eec-61cc5a91c844": "vice chair",
+   "ocd-person/9103b29e-964b-4637-9304-0e73216d7796": "ex-officio",
+   "ocd-person/c81779f3-65bf-4714-b295-79cac3b0da28": "ex-officio",
+   "ocd-person/9dfc8ec3-0935-4d1d-877d-e05cf7a5dca5": "secretary"
+  }
  }
 ]

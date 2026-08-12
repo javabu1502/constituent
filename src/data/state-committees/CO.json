@@ -12,7 +12,11 @@
    "ocd-person/c0cfa7d3-2c5e-4b68-8692-2e1b6f1b3372",
    "ocd-person/4d753f6e-b7e3-420d-a684-e9a27f7ab27b",
    "ocd-person/45cd06eb-9967-4468-9e4e-677549e7638d"
-  ]
+  ],
+  "roles": {
+   "ocd-person/4be512fb-5ebc-422c-a858-d250cb5568ad": "chair",
+   "ocd-person/c06af980-c553-4f79-a39d-295b7226f029": "vice chair"
+  }
  },
  {
   "id": "4b8f47a3-6ca1-47f9-859a-198d20c051ee",
@@ -33,7 +37,11 @@
    "ocd-person/c1a18202-08ad-487f-99bb-b1a606c15a22",
    "ocd-person/489b3afa-1e08-40f4-918a-f01c186b6f73",
    "ocd-person/f3cd2006-7729-41b0-a009-0c5cf64e95e0"
-  ]
+  ],
+  "roles": {
+   "ocd-person/7631027c-2467-4112-8f03-abad6c6ed8f2": "chair",
+   "ocd-person/851b5f31-0694-4674-a3b8-468b6eb1f0a8": "vice chair"
+  }
  },
  {
   "id": "6e777480-0559-443a-a819-d0f3c7c24560",
@@ -52,7 +60,11 @@
    "ocd-person/5dae0c7f-430e-42a2-906d-9e177782f91b",
    "ocd-person/66254480-6178-4312-8a18-268ec84153cc",
    "ocd-person/e8a7d2a2-1907-450d-8c61-8c328839e922"
-  ]
+  ],
+  "roles": {
+   "ocd-person/f376a75e-e0b0-4bf7-95b1-0931ade3bdb8": "chair",
+   "ocd-person/c8c1a9c5-c7c2-4894-8829-fc83251bcaf2": "vice chair"
+  }
  },
  {
   "id": "b7a22dfd-b67c-4807-b403-8080d560d735",
@@ -67,7 +79,11 @@
    "ocd-person/f72691ec-a5a0-413b-a344-e452009551a2",
    "ocd-person/8dae5ba5-6741-4aca-8c1e-24f014fda187",
    "ocd-person/c9fd6b10-91a3-44ec-ac6a-48f73eee3ed1"
-  ]
+  ],
+  "roles": {
+   "ocd-person/829879ea-a9a3-42b6-8f5f-d209b1cc961d": "chair",
+   "ocd-person/c2cade07-9c95-4439-938c-77ac4ed44fab": "vice chair"
+  }
  },
  {
   "id": "11d38fec-5717-4d94-a2ee-4c75d33d14d2",
@@ -79,7 +95,11 @@
    "ocd-person/fa9b604d-5981-4de1-97bc-9400e03909c9",
    "ocd-person/b4002b84-79a0-481a-94a8-00136c2dabb6",
    "ocd-person/9b1256a4-11c6-4c9e-81e6-2e0a3c5871be"
-  ]
+  ],
+  "roles": {
+   "ocd-person/ab377224-ab70-4c20-a535-baa429520e7c": "chair",
+   "ocd-person/fa9b604d-5981-4de1-97bc-9400e03909c9": "vice chair"
+  }
  },
  {
   "id": "e71d6bcc-982e-4280-8fc4-421ab4526d69",
@@ -91,7 +111,11 @@
    "ocd-person/4aba3e11-9554-405d-b926-5435eb77fa26",
    "ocd-person/64f01ef4-238f-4e48-9657-e221e0d030c0",
    "ocd-person/473bd095-778d-4418-8e61-96a2b8005c8e"
-  ]
+  ],
+  "roles": {
+   "ocd-person/e4e1f1a9-7134-4d90-9fed-2aa7a0e3a307": "chair",
+   "ocd-person/4aba3e11-9554-405d-b926-5435eb77fa26": "vice chair"
+  }
  },
  {
   "id": "2c85f4ed-d294-41bc-a1ce-79d56542860e",
@@ -105,7 +129,11 @@
    "ocd-person/829879ea-a9a3-42b6-8f5f-d209b1cc961d",
    "ocd-person/f376a75e-e0b0-4bf7-95b1-0931ade3bdb8",
    "ocd-person/5dae0c7f-430e-42a2-906d-9e177782f91b"
-  ]
+  ],
+  "roles": {
+   "ocd-person/c8c1a9c5-c7c2-4894-8829-fc83251bcaf2": "chair",
+   "ocd-person/c2cade07-9c95-4439-938c-77ac4ed44fab": "vice chair"
+  }
  },
  {
   "id": "9176cc74-0cd4-404d-929b-17ab72c60b7f",
@@ -126,7 +154,11 @@
    "ocd-person/e7b1210b-3400-4ad4-a461-a55023e54042",
    "ocd-person/b44045eb-e2fb-4723-9e91-d68fb55c0bf7",
    "ocd-person/851b5f31-0694-4674-a3b8-468b6eb1f0a8"
-  ]
+  ],
+  "roles": {
+   "ocd-person/64f01ef4-238f-4e48-9657-e221e0d030c0": "chair",
+   "ocd-person/56e058a4-2a75-4864-8d5e-18c1c98f6960": "vice chair"
+  }
  },
  {
   "id": "dfca5261-ebdf-4422-84f1-c5e993e7e65f",
@@ -139,7 +171,11 @@
    "ocd-person/506f18ea-3611-408b-aa0e-73adf9681efe",
    "ocd-person/c9fd6b10-91a3-44ec-ac6a-48f73eee3ed1",
    "ocd-person/c0cfa7d3-2c5e-4b68-8692-2e1b6f1b3372"
-  ]
+  ],
+  "roles": {
+   "ocd-person/c06af980-c553-4f79-a39d-295b7226f029": "chair",
+   "ocd-person/4d753f6e-b7e3-420d-a684-e9a27f7ab27b": "vice chair"
+  }
  },
  {
   "id": "700d48b3-8939-4ab9-891d-07498674c7de",
@@ -153,7 +189,11 @@
    "ocd-person/2582d3dd-20c0-4d15-83a0-3b6dab1e98d2",
    "ocd-person/4d753f6e-b7e3-420d-a684-e9a27f7ab27b",
    "ocd-person/f3cd2006-7729-41b0-a009-0c5cf64e95e0"
-  ]
+  ],
+  "roles": {
+   "ocd-person/ebf0c3de-2f58-436f-af67-12863f9cb552": "chair",
+   "ocd-person/489b3afa-1e08-40f4-918a-f01c186b6f73": "vice chair"
+  }
  },
  {
   "id": "35ddd19e-2ba5-4813-a824-d163b17dcae7",
@@ -163,7 +203,10 @@
   "members": [
    "ocd-person/4a72c7ee-c3e5-4c61-8e79-3301cb70a599",
    "ocd-person/faaae748-7c57-47df-bdf7-1811e0a61458"
-  ]
+  ],
+  "roles": {
+   "ocd-person/4a72c7ee-c3e5-4c61-8e79-3301cb70a599": "vice chair"
+  }
  },
  {
   "id": "4c9585c5-3032-4388-b711-8969a907f9aa",
@@ -179,7 +222,11 @@
    "ocd-person/ebf0c3de-2f58-436f-af67-12863f9cb552",
    "ocd-person/d5ec869e-db7a-480f-b270-428805b90cee",
    "ocd-person/5dae0c7f-430e-42a2-906d-9e177782f91b"
-  ]
+  ],
+  "roles": {
+   "ocd-person/829879ea-a9a3-42b6-8f5f-d209b1cc961d": "chair",
+   "ocd-person/f376a75e-e0b0-4bf7-95b1-0931ade3bdb8": "vice chair"
+  }
  },
  {
   "id": "8ef351d2-f50d-4e1f-81b0-08f2f75b794f",
@@ -200,7 +247,11 @@
    "ocd-person/9e1ed481-cc42-4186-a8fe-891abba60162",
    "ocd-person/489b3afa-1e08-40f4-918a-f01c186b6f73",
    "ocd-person/561892b1-c618-43cb-9767-9237514f0a92"
-  ]
+  ],
+  "roles": {
+   "ocd-person/c1a18202-08ad-487f-99bb-b1a606c15a22": "chair",
+   "ocd-person/27716b46-14de-4097-a29c-1a882ae3cd3a": "vice chair"
+  }
  },
  {
   "id": "b35c17f0-6ec7-4f20-8228-9005844c2257",
@@ -215,7 +266,11 @@
    "ocd-person/c2cade07-9c95-4439-938c-77ac4ed44fab",
    "ocd-person/fce5c955-f43d-4f80-bad5-8369223bc0ea",
    "ocd-person/fb530f21-a08e-473c-b215-9a4de6a86ee9"
-  ]
+  ],
+  "roles": {
+   "ocd-person/f72691ec-a5a0-413b-a344-e452009551a2": "chair",
+   "ocd-person/2718c918-a38c-49c2-a120-5503164f959f": "vice chair"
+  }
  },
  {
   "id": "238f15f8-d0ab-4a47-b158-e7d56ce087c3",
@@ -236,7 +291,11 @@
    "ocd-person/8de5b6ec-a488-4f1f-b96d-d78b90cb7fe7",
    "ocd-person/ce4bd827-c1bc-4736-a580-f4f0215e727d",
    "ocd-person/cba33581-a61a-41c5-9773-c949f2b06d0a"
-  ]
+  ],
+  "roles": {
+   "ocd-person/45c957a4-0017-4c0c-8650-393d656fc5a0": "chair",
+   "ocd-person/bd50bf12-cf63-4a3d-a887-93008333e694": "vice chair"
+  }
  },
  {
   "id": "896030fd-e949-4d06-9000-dfb4309cdd50",
@@ -249,7 +308,11 @@
    "ocd-person/d2b25169-0772-4e97-aa9e-49f82f0f5d08",
    "ocd-person/d450c0d3-b829-4855-ad0d-1228c5284a4f",
    "ocd-person/09af4a19-c07e-49b2-b320-104f3784705b"
-  ]
+  ],
+  "roles": {
+   "ocd-person/7631027c-2467-4112-8f03-abad6c6ed8f2": "chair",
+   "ocd-person/9e529237-916b-407c-a60e-abd8e0708329": "vice chair"
+  }
  },
  {
   "id": "00654910-47da-44df-94d9-1ba42a10a58d",
@@ -263,7 +326,11 @@
    "ocd-person/544a4247-320e-456a-b5dd-f0373bdad788",
    "ocd-person/d8b6809c-61d9-4ea3-b21b-c846051468c2",
    "ocd-person/ab377224-ab70-4c20-a535-baa429520e7c"
-  ]
+  ],
+  "roles": {
+   "ocd-person/53facaaf-5673-4c76-b15a-6b5061965ae1": "chair",
+   "ocd-person/e4e1f1a9-7134-4d90-9fed-2aa7a0e3a307": "vice chair"
+  }
  },
  {
   "id": "b43f88fc-5e87-4387-8417-f55706b52da6",
@@ -282,7 +349,11 @@
    "ocd-person/56e058a4-2a75-4864-8d5e-18c1c98f6960",
    "ocd-person/561892b1-c618-43cb-9767-9237514f0a92",
    "ocd-person/e8a7d2a2-1907-450d-8c61-8c328839e922"
-  ]
+  ],
+  "roles": {
+   "ocd-person/09af4a19-c07e-49b2-b320-104f3784705b": "chair",
+   "ocd-person/fa9b604d-5981-4de1-97bc-9400e03909c9": "vice chair"
+  }
  },
  {
   "id": "3d86813f-79a5-409b-b34a-15588d140412",
@@ -299,7 +370,11 @@
    "ocd-person/fce5c955-f43d-4f80-bad5-8369223bc0ea",
    "ocd-person/5dbb7ac2-a4c8-42b8-bfb1-1b012737fa74",
    "ocd-person/fb530f21-a08e-473c-b215-9a4de6a86ee9"
-  ]
+  ],
+  "roles": {
+   "ocd-person/0ddf3b75-c450-419e-8235-553157770e49": "chair",
+   "ocd-person/2718c918-a38c-49c2-a120-5503164f959f": "vice chair"
+  }
  },
  {
   "id": "59166cc3-ddd6-426d-a86c-ef165aace7f2",
@@ -320,7 +395,11 @@
    "ocd-person/e1a861fa-2163-4ef5-a891-fc9d36c2504b",
    "ocd-person/9e1ed481-cc42-4186-a8fe-891abba60162",
    "ocd-person/d5be5146-f7a9-46eb-86f9-b0d1cebc4e9c"
-  ]
+  ],
+  "roles": {
+   "ocd-person/d5ec869e-db7a-480f-b270-428805b90cee": "chair",
+   "ocd-person/b44045eb-e2fb-4723-9e91-d68fb55c0bf7": "vice chair"
+  }
  },
  {
   "id": "7f482102-d2ea-4db7-8a23-446f8d736fbb",
@@ -335,7 +414,11 @@
    "ocd-person/fce5c955-f43d-4f80-bad5-8369223bc0ea",
    "ocd-person/b680cb39-442c-4dd2-81bd-88696cfe9df2",
    "ocd-person/fb530f21-a08e-473c-b215-9a4de6a86ee9"
-  ]
+  ],
+  "roles": {
+   "ocd-person/ebf0c3de-2f58-436f-af67-12863f9cb552": "chair",
+   "ocd-person/506f18ea-3611-408b-aa0e-73adf9681efe": "vice chair"
+  }
  },
  {
   "id": "bf4761ec-493b-40d0-b6f1-4c7f496a5b08",
@@ -351,7 +434,11 @@
    "ocd-person/8e95ac06-ddbb-4f6c-ba7e-854a92860be4",
    "ocd-person/fa06bf42-5305-4b04-95d0-a63f94ae8913",
    "ocd-person/9e1ed481-cc42-4186-a8fe-891abba60162"
-  ]
+  ],
+  "roles": {
+   "ocd-person/4be512fb-5ebc-422c-a858-d250cb5568ad": "chair",
+   "ocd-person/64f01ef4-238f-4e48-9657-e221e0d030c0": "vice chair"
+  }
  },
  {
   "id": "aafc8ed7-d5a0-4e29-958d-6dcde59f0b06",
@@ -370,7 +457,11 @@
    "ocd-person/04df7ed2-3683-4e00-ae08-9660cd6d878b",
    "ocd-person/cba33581-a61a-41c5-9773-c949f2b06d0a",
    "ocd-person/e8a7d2a2-1907-450d-8c61-8c328839e922"
-  ]
+  ],
+  "roles": {
+   "ocd-person/d2b25169-0772-4e97-aa9e-49f82f0f5d08": "chair",
+   "ocd-person/9c2accab-1bbf-495c-8036-137e48ba684d": "vice chair"
+  }
  },
  {
   "id": "b22717e3-bfa9-4c07-907a-e5234d57c6f8",
@@ -385,7 +476,11 @@
    "ocd-person/2de0a3a1-a1e3-477f-88b9-3212fa52fb9c",
    "ocd-person/e5055578-02cb-435c-9fe0-b877318e3b1b",
    "ocd-person/4d753f6e-b7e3-420d-a684-e9a27f7ab27b"
-  ]
+  ],
+  "roles": {
+   "ocd-person/b680cb39-442c-4dd2-81bd-88696cfe9df2": "chair",
+   "ocd-person/4be512fb-5ebc-422c-a858-d250cb5568ad": "vice chair"
+  }
  },
  {
   "id": "e2b7b3ac-5c9f-4911-83da-e37d3ef8b695",
@@ -403,7 +498,11 @@
    "ocd-person/b680cb39-442c-4dd2-81bd-88696cfe9df2",
    "ocd-person/56e058a4-2a75-4864-8d5e-18c1c98f6960",
    "ocd-person/3e7145a3-8729-497c-a168-db98d22cf015"
-  ]
+  ],
+  "roles": {
+   "ocd-person/d2b25169-0772-4e97-aa9e-49f82f0f5d08": "chair",
+   "ocd-person/fce5c955-f43d-4f80-bad5-8369223bc0ea": "vice chair"
+  }
  },
  {
   "id": "272c0b07-d994-470a-882a-e856cc275a6e",
@@ -419,7 +518,11 @@
    "ocd-person/fe11081d-5ca9-4f88-a143-04aed94e45f9",
    "ocd-person/45cd06eb-9967-4468-9e4e-677549e7638d",
    "ocd-person/dbe86f29-2ecb-449e-aaf6-3fc91baf2e0e"
-  ]
+  ],
+  "roles": {
+   "ocd-person/fce5c955-f43d-4f80-bad5-8369223bc0ea": "chair",
+   "ocd-person/b680cb39-442c-4dd2-81bd-88696cfe9df2": "vice chair"
+  }
  },
  {
   "id": "ebafa1b0-2591-4740-86a7-4b9625b2fce7",
@@ -445,7 +548,11 @@
    "ocd-person/ab377224-ab70-4c20-a535-baa429520e7c",
    "ocd-person/09af4a19-c07e-49b2-b320-104f3784705b",
    "ocd-person/561892b1-c618-43cb-9767-9237514f0a92"
-  ]
+  ],
+  "roles": {
+   "ocd-person/53facaaf-5673-4c76-b15a-6b5061965ae1": "chair",
+   "ocd-person/e4e1f1a9-7134-4d90-9fed-2aa7a0e3a307": "vice chair"
+  }
  },
  {
   "id": "3bf2ffe3-270a-455c-b3c5-18224e10ae45",
@@ -455,7 +562,8 @@
   "members": [
    "ocd-person/bd50bf12-cf63-4a3d-a887-93008333e694",
    "ocd-person/9b1256a4-11c6-4c9e-81e6-2e0a3c5871be"
-  ]
+  ],
+  "roles": {}
  },
  {
   "id": "4336c823-afc1-4cec-b859-2cae8ad4dfa6",
@@ -467,7 +575,10 @@
    "ocd-person/2d0d060c-6d5f-45da-a069-fe2be14547eb",
    "ocd-person/d7569723-ddde-4706-a857-422804198fa8",
    "ocd-person/4a72c7ee-c3e5-4c61-8e79-3301cb70a599"
-  ]
+  ],
+  "roles": {
+   "ocd-person/faaae748-7c57-47df-bdf7-1811e0a61458": "chair"
+  }
  },
  {
   "id": "dc73ccb4-0d76-41fe-8139-ad10313d6f13",
@@ -481,7 +592,10 @@
    "ocd-person/0c428ee3-a327-4906-96c9-c46da7dfd7f1",
    "ocd-person/ebf0c3de-2f58-436f-af67-12863f9cb552",
    "ocd-person/c9fd6b10-91a3-44ec-ac6a-48f73eee3ed1"
-  ]
+  ],
+  "roles": {
+   "ocd-person/56e058a4-2a75-4864-8d5e-18c1c98f6960": "chair"
+  }
  },
  {
   "id": "4f17ddf6-4301-458c-970a-3a62379658e7",
@@ -496,7 +610,11 @@
    "ocd-person/b4002b84-79a0-481a-94a8-00136c2dabb6",
    "ocd-person/4a72c7ee-c3e5-4c61-8e79-3301cb70a599",
    "ocd-person/dbe86f29-2ecb-449e-aaf6-3fc91baf2e0e"
-  ]
+  ],
+  "roles": {
+   "ocd-person/473bd095-778d-4418-8e61-96a2b8005c8e": "chair",
+   "ocd-person/5dbb7ac2-a4c8-42b8-bfb1-1b012737fa74": "vice chair"
+  }
  },
  {
   "id": "0b3fe81e-a591-4d14-87d9-1dd4baa411e0",
@@ -514,7 +632,10 @@
    "ocd-person/b4002b84-79a0-481a-94a8-00136c2dabb6",
    "ocd-person/fe11081d-5ca9-4f88-a143-04aed94e45f9",
    "ocd-person/5dae0c7f-430e-42a2-906d-9e177782f91b"
-  ]
+  ],
+  "roles": {
+   "ocd-person/ef2507af-95ba-4a2f-84d5-84771785bfc2": "chair"
+  }
  },
  {
   "id": "07ad16f7-47c4-436f-80cf-750f6a69073c",
@@ -532,7 +653,10 @@
    "ocd-person/b4002b84-79a0-481a-94a8-00136c2dabb6",
    "ocd-person/fe11081d-5ca9-4f88-a143-04aed94e45f9",
    "ocd-person/5dae0c7f-430e-42a2-906d-9e177782f91b"
-  ]
+  ],
+  "roles": {
+   "ocd-person/ef2507af-95ba-4a2f-84d5-84771785bfc2": "chair"
+  }
  },
  {
   "id": "b18f8912-c50d-4930-a494-553fd313e6ce",
@@ -544,7 +668,8 @@
    "ocd-person/0c428ee3-a327-4906-96c9-c46da7dfd7f1",
    "ocd-person/fb530f21-a08e-473c-b215-9a4de6a86ee9",
    "ocd-person/e8a7d2a2-1907-450d-8c61-8c328839e922"
-  ]
+  ],
+  "roles": {}
  },
  {
   "id": "768df0a3-a787-461d-8416-dbaa9590414d",
@@ -562,7 +687,11 @@
    "ocd-person/64f01ef4-238f-4e48-9657-e221e0d030c0",
    "ocd-person/66254480-6178-4312-8a18-268ec84153cc",
    "ocd-person/3e7145a3-8729-497c-a168-db98d22cf015"
-  ]
+  ],
+  "roles": {
+   "ocd-person/655c629d-72f6-45d1-bd8f-a241e200d089": "chair",
+   "ocd-person/faaae748-7c57-47df-bdf7-1811e0a61458": "vice chair"
+  }
  },
  {
   "id": "c795be5a-afeb-4bba-bf65-fc0855612bab",
@@ -575,7 +704,11 @@
    "ocd-person/e5055578-02cb-435c-9fe0-b877318e3b1b",
    "ocd-person/45cd06eb-9967-4468-9e4e-677549e7638d",
    "ocd-person/dbe86f29-2ecb-449e-aaf6-3fc91baf2e0e"
-  ]
+  ],
+  "roles": {
+   "ocd-person/f0fa561d-39cf-48f3-ae8c-84b4d30d2662": "chair",
+   "ocd-person/dc9056b8-fb9c-4a66-99b8-210acce64bff": "vice chair"
+  }
  },
  {
   "id": "77d2e72c-e5fc-436b-9878-6e5cca8f16ee",
@@ -592,7 +725,8 @@
    "ocd-person/ebf0c3de-2f58-436f-af67-12863f9cb552",
    "ocd-person/2de0a3a1-a1e3-477f-88b9-3212fa52fb9c",
    "ocd-person/b44045eb-e2fb-4723-9e91-d68fb55c0bf7"
-  ]
+  ],
+  "roles": {}
  },
  {
   "id": "28bb7b07-edaf-4bad-b781-4fd103b9783e",
@@ -608,7 +742,11 @@
    "ocd-person/9c2accab-1bbf-495c-8036-137e48ba684d",
    "ocd-person/3e7145a3-8729-497c-a168-db98d22cf015",
    "ocd-person/473bd095-778d-4418-8e61-96a2b8005c8e"
-  ]
+  ],
+  "roles": {
+   "ocd-person/2372415a-2aea-4423-8a3a-bed2d40493a6": "chair",
+   "ocd-person/a34a6b10-12d9-4109-86d1-76c311463333": "vice chair"
+  }
  },
  {
   "id": "d8fc0cc5-2e2c-40af-82a1-0d82204140f6",
@@ -622,7 +760,11 @@
    "ocd-person/b4002b84-79a0-481a-94a8-00136c2dabb6",
    "ocd-person/04df7ed2-3683-4e00-ae08-9660cd6d878b",
    "ocd-person/ab377224-ab70-4c20-a535-baa429520e7c"
-  ]
+  ],
+  "roles": {
+   "ocd-person/2718c918-a38c-49c2-a120-5503164f959f": "chair",
+   "ocd-person/fa9b604d-5981-4de1-97bc-9400e03909c9": "vice chair"
+  }
  },
  {
   "id": "2ab19489-f597-44a7-a6d3-bd1de5be3354",
@@ -639,7 +781,11 @@
    "ocd-person/dc9056b8-fb9c-4a66-99b8-210acce64bff",
    "ocd-person/473bd095-778d-4418-8e61-96a2b8005c8e",
    "ocd-person/dbe86f29-2ecb-449e-aaf6-3fc91baf2e0e"
-  ]
+  ],
+  "roles": {
+   "ocd-person/5226ebdd-0710-49da-b446-61fac19765ce": "chair",
+   "ocd-person/4a72c7ee-c3e5-4c61-8e79-3301cb70a599": "vice chair"
+  }
  },
  {
   "id": "b9c58b3d-f296-423b-9320-75bae3a2ffc2",
@@ -669,7 +815,11 @@
    "ocd-person/dc9056b8-fb9c-4a66-99b8-210acce64bff",
    "ocd-person/473bd095-778d-4418-8e61-96a2b8005c8e",
    "ocd-person/dbe86f29-2ecb-449e-aaf6-3fc91baf2e0e"
-  ]
+  ],
+  "roles": {
+   "ocd-person/5226ebdd-0710-49da-b446-61fac19765ce": "chair",
+   "ocd-person/8e6bc6cb-fe7e-4640-a938-eb32536e95c5": "vice chair"
+  }
  },
  {
   "id": "780212c3-6492-4722-aafa-53cd7f42f9a6",
@@ -690,7 +840,11 @@
    "ocd-person/2582d3dd-20c0-4d15-83a0-3b6dab1e98d2",
    "ocd-person/fe11081d-5ca9-4f88-a143-04aed94e45f9",
    "ocd-person/9b1256a4-11c6-4c9e-81e6-2e0a3c5871be"
-  ]
+  ],
+  "roles": {
+   "ocd-person/8e6bc6cb-fe7e-4640-a938-eb32536e95c5": "chair",
+   "ocd-person/ef2507af-95ba-4a2f-84d5-84771785bfc2": "vice chair"
+  }
  },
  {
   "id": "eff97247-a7c3-4832-b84c-bebcdd6fdd6c",
@@ -703,7 +857,10 @@
    "ocd-person/829879ea-a9a3-42b6-8f5f-d209b1cc961d",
    "ocd-person/9e1ed481-cc42-4186-a8fe-891abba60162",
    "ocd-person/45cd06eb-9967-4468-9e4e-677549e7638d"
-  ]
+  ],
+  "roles": {
+   "ocd-person/09ef4f5a-7c9d-463a-8ab6-52c861f97a74": "chair"
+  }
  },
  {
   "id": "8fb20769-49d7-4096-8067-b8bebbb1b35b",
@@ -713,7 +870,8 @@
   "members": [
    "ocd-person/a34a6b10-12d9-4109-86d1-76c311463333",
    "ocd-person/5dbb7ac2-a4c8-42b8-bfb1-1b012737fa74"
-  ]
+  ],
+  "roles": {}
  },
  {
   "id": "77fb2422-5ed7-4e38-8bad-b302c24fe1b3",
@@ -731,7 +889,11 @@
    "ocd-person/27716b46-14de-4097-a29c-1a882ae3cd3a",
    "ocd-person/9e529237-916b-407c-a60e-abd8e0708329",
    "ocd-person/f3cd2006-7729-41b0-a009-0c5cf64e95e0"
-  ]
+  ],
+  "roles": {
+   "ocd-person/7631027c-2467-4112-8f03-abad6c6ed8f2": "chair",
+   "ocd-person/4be512fb-5ebc-422c-a858-d250cb5568ad": "vice chair"
+  }
  },
  {
   "id": "7b3a15e8-2d2b-4b93-af75-8a6c8ae4287a",
@@ -749,7 +911,11 @@
    "ocd-person/9b1256a4-11c6-4c9e-81e6-2e0a3c5871be",
    "ocd-person/851b5f31-0694-4674-a3b8-468b6eb1f0a8",
    "ocd-person/473bd095-778d-4418-8e61-96a2b8005c8e"
-  ]
+  ],
+  "roles": {
+   "ocd-person/bd50bf12-cf63-4a3d-a887-93008333e694": "chair",
+   "ocd-person/5226ebdd-0710-49da-b446-61fac19765ce": "vice chair"
+  }
  },
  {
   "id": "b68ab358-e972-4403-8882-b04ebe57739a",
@@ -764,7 +930,8 @@
    "ocd-person/27716b46-14de-4097-a29c-1a882ae3cd3a",
    "ocd-person/9e529237-916b-407c-a60e-abd8e0708329",
    "ocd-person/ef2507af-95ba-4a2f-84d5-84771785bfc2"
-  ]
+  ],
+  "roles": {}
  },
  {
   "id": "81bd7413-0a2b-49b5-81ac-95911fbe0f4c",
@@ -776,7 +943,8 @@
    "ocd-person/715df6f2-cef6-4b88-b745-0207c8ffb4ff",
    "ocd-person/4be512fb-5ebc-422c-a858-d250cb5568ad",
    "ocd-person/fce5c955-f43d-4f80-bad5-8369223bc0ea"
-  ]
+  ],
+  "roles": {}
  },
  {
   "id": "f9b3cf7d-daac-449a-8d6c-8b6499633691",
@@ -789,6 +957,10 @@
    "ocd-person/5a396024-8dcf-438c-beca-a730e972d9d8",
    "ocd-person/2372415a-2aea-4423-8a3a-bed2d40493a6",
    "ocd-person/c1a18202-08ad-487f-99bb-b1a606c15a22"
-  ]
+  ],
+  "roles": {
+   "ocd-person/f0fa561d-39cf-48f3-ae8c-84b4d30d2662": "chair",
+   "ocd-person/d5be5146-f7a9-46eb-86f9-b0d1cebc4e9c": "chair"
+  }
  }
 ]

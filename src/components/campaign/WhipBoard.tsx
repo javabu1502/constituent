@@ -19,11 +19,27 @@ type Row = {
   position: string | null;
   sponsor: boolean;
   onCommittee: boolean;
+  committeeRole: string | null;
   messages: number;
   noteCount: number;
 };
 
-type Note = { id: string; legislator_id: string | null; legislator_name: string | null; body: string; created_at: string };
+type Note = {
+  id: string;
+  legislator_id: string | null;
+  legislator_name: string | null;
+  body: string;
+  created_at: string;
+  billRef?: string | null;
+  fromThisCampaign?: boolean;
+};
+
+// lower/house -> House side, upper/senate -> Senate side.
+function chamberOf(chamber: string | null): 'house' | 'senate' | null {
+  if (chamber === 'lower' || chamber === 'house') return 'house';
+  if (chamber === 'upper' || chamber === 'senate') return 'senate';
+  return null;
+}
 
 export function WhipBoard({ slug }: { slug: string }) {
   const [rows, setRows] = useState<Row[]>([]);
@@ -31,6 +47,7 @@ export function WhipBoard({ slug }: { slug: string }) {
   const [committee, setCommittee] = useState<{ id: string; name: string; size: number } | null>(null);
   const [loaded, setLoaded] = useState(false);
   const [search, setSearch] = useState('');
+  const [chamberFilter, setChamberFilter] = useState('');
   const [committeeOnly, setCommitteeOnly] = useState(false);
   const [openLegislator, setOpenLegislator] = useState<string | null>(null);
   const [noteDraft, setNoteDraft] = useState('');
@@ -109,10 +126,11 @@ export function WhipBoard({ slug }: { slug: string }) {
     const q = search.trim().toLowerCase();
     return rows.filter((r) => {
       if (committeeOnly && !r.onCommittee) return false;
+      if (chamberFilter && chamberOf(r.chamber) !== chamberFilter) return false;
       if (q && !r.name.toLowerCase().includes(q)) return false;
       return true;
     });
-  }, [rows, search, committeeOnly]);
+  }, [rows, search, chamberFilter, committeeOnly]);
 
   if (!loaded) return null;
   if (rows.length === 0) return null;
@@ -155,6 +173,15 @@ export function WhipBoard({ slug }: { slug: string }) {
           placeholder="Search legislators…"
           className="flex-1 min-w-40 px-3 py-1.5 text-sm rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
         />
+        <select
+          value={chamberFilter}
+          onChange={(e) => setChamberFilter(e.target.value)}
+          className="px-2 py-1.5 text-xs rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
+        >
+          <option value="">Both chambers</option>
+          <option value="house">House / Assembly</option>
+          <option value="senate">Senate</option>
+        </select>
         {committee && (
           <label className="flex items-center gap-1.5 text-xs text-gray-600 dark:text-gray-400 cursor-pointer select-none">
             <input type="checkbox" checked={committeeOnly} onChange={(e) => setCommitteeOnly(e.target.checked)} />
@@ -176,6 +203,15 @@ export function WhipBoard({ slug }: { slug: string }) {
                   {r.name}
                 </Link>
                 {r.party && <span className="text-xs text-gray-400 shrink-0">({r.party.charAt(0)})</span>}
+                {chamberOf(r.chamber) && (
+                  <span className={`shrink-0 px-1.5 py-0.5 text-[10px] font-semibold rounded ${
+                    chamberOf(r.chamber) === 'senate'
+                      ? 'bg-indigo-100 text-indigo-700 dark:bg-indigo-900/40 dark:text-indigo-300'
+                      : 'bg-sky-100 text-sky-700 dark:bg-sky-900/40 dark:text-sky-300'
+                  }`}>
+                    {chamberOf(r.chamber) === 'senate' ? 'Senate' : 'House'}
+                  </span>
+                )}
                 {r.sponsor && (
                   <span className="shrink-0 px-1.5 py-0.5 text-[10px] font-semibold rounded bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300">
                     Sponsor
@@ -183,7 +219,7 @@ export function WhipBoard({ slug }: { slug: string }) {
                 )}
                 {r.onCommittee && (
                   <span className="shrink-0 px-1.5 py-0.5 text-[10px] font-semibold rounded bg-purple-100 text-purple-700 dark:bg-purple-900/40 dark:text-purple-300">
-                    Committee
+                    {r.committeeRole ? r.committeeRole.replace(/\b\w/g, (c) => c.toUpperCase()) : 'Committee'}
                   </span>
                 )}
               </div>
@@ -220,6 +256,9 @@ export function WhipBoard({ slug }: { slug: string }) {
                     <span className="text-[11px] text-gray-400 dark:text-gray-500 mr-2">
                       {new Date(n.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
                     </span>
+                    {n.fromThisCampaign === false && n.billRef && (
+                      <span className="text-[10px] font-semibold text-purple-500 dark:text-purple-400 mr-1.5">[{n.billRef}]</span>
+                    )}
                     {n.body}
                   </div>
                 ))}
