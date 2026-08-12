@@ -121,6 +121,7 @@ type StoryRow = {
   storyteller_email: string | null;
   state: string | null;
   consent_usage_snapshot: { granted_uses?: string[] } | null;
+  created_at: string;
 };
 
 type SocialPostRow = {
@@ -179,6 +180,12 @@ export function assembleCampaignReport(campaign: CampaignRow, rows: ReportSource
     if (a.participant_state) stateAgg.set(a.participant_state, (stateAgg.get(a.participant_state) || 0) + 1);
     if (a.participant_city) cities.add(`${a.participant_city}|${a.participant_state ?? ''}`);
   }
+  // Storytelling: story states are the reach geography.
+  if (campaign.campaign_type === 'storytelling' && rows.stories) {
+    for (const st of rows.stories) {
+      if (st.state) stateAgg.set(st.state.trim().toUpperCase(), (stateAgg.get(st.state.trim().toUpperCase()) || 0) + 1);
+    }
+  }
   // Fall back to message locations if actions carry no geography.
   if (stateAgg.size === 0) {
     for (const m of msgs) {
@@ -190,7 +197,11 @@ export function assembleCampaignReport(campaign: CampaignRow, rows: ReportSource
   // Growth: cumulative participation since launch. Bucket the campaign's
   // lifetime into ≤30 slices so a week-old and a year-old campaign both fill
   // the chart; cumulative (not per-day) so sparse activity still draws a line.
-  const actionSource = acts.length ? acts : msgs;
+  // Storytelling campaigns count STORIES — that's their unit of participation.
+  const isStorytellingReport = campaign.campaign_type === 'storytelling' && rows.stories !== null;
+  const actionSource = isStorytellingReport
+    ? (rows.stories ?? []).map((st) => ({ created_at: st.created_at }))
+    : acts.length ? acts : msgs;
   const launchMs = Math.min(new Date(campaign.created_at).getTime(), nowMs);
   const spanDays = Math.max(1, Math.ceil((nowMs - launchMs) / DAY_MS));
   const bucketDays = Math.max(1, Math.ceil(spanDays / 30));
@@ -323,7 +334,7 @@ export function assembleCampaignReport(campaign: CampaignRow, rows: ReportSource
       startDate: campaign.created_at,
     },
     reach: {
-      constituents: totalActions,
+      constituents: isStorytellingReport ? (rows.stories ?? []).length : totalActions,
       messages: totalMessages,
       officialsContacted: officialAgg.size,
       statesReached: stateAgg.size,
@@ -396,7 +407,7 @@ export async function buildCampaignReport(campaign: CampaignRow, nowMs: number):
     isStorytelling
       ? admin
           .from('stories')
-          .select('attribution_level, storyteller_email, state, consent_usage_snapshot')
+          .select('attribution_level, storyteller_email, state, consent_usage_snapshot, created_at')
           .eq('campaign_id', campaign.id)
           .eq('status', 'active')
           .limit(5000)

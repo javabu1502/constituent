@@ -64,6 +64,7 @@ export default async function CampaignReportPage({ params }: PageProps) {
   if (campaign.creator_id !== user.id) redirect(`/campaign/${slug}`);
 
   const report = await buildCampaignReport(campaign, Date.now());
+  const isStorytelling = campaign.campaign_type === 'storytelling';
   const accent = (campaign.brand_color as string) || '#7C3AED';
   const started = new Date(report.campaign.startDate).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
   const generated = new Date(report.generatedAt).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
@@ -115,15 +116,17 @@ export default async function CampaignReportPage({ params }: PageProps) {
         <section>
           <h2 className="text-base font-semibold mb-3">Reach &amp; mobilization</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-            <Stat label="Constituents mobilized" value={report.reach.constituents.toLocaleString()} />
-            <Stat label="Messages to officials" value={report.reach.messages.toLocaleString()} />
-            <Stat
-              label="Officials contacted"
-              value={report.reach.officialsContacted.toLocaleString()}
-              sub={report.officialLevels ? `${report.officialLevels.federal} federal · ${report.officialLevels.state} state` : undefined}
-            />
+            <Stat label={isStorytelling ? 'Stories shared' : 'Constituents mobilized'} value={report.reach.constituents.toLocaleString()} />
+            {!isStorytelling && <Stat label="Messages to officials" value={report.reach.messages.toLocaleString()} />}
+            {!isStorytelling && (
+              <Stat
+                label="Officials contacted"
+                value={report.reach.officialsContacted.toLocaleString()}
+                sub={report.officialLevels ? `${report.officialLevels.federal} federal · ${report.officialLevels.state} state` : undefined}
+              />
+            )}
             <Stat label="States reached" value={report.reach.statesReached.toLocaleString()} />
-            <Stat label="Cities reached" value={report.reach.citiesReached.toLocaleString()} />
+            {!isStorytelling && <Stat label="Cities reached" value={report.reach.citiesReached.toLocaleString()} />}
             <Stat
               label="Last 30 days"
               value={report.reach.last30Days.toLocaleString()}
@@ -135,7 +138,7 @@ export default async function CampaignReportPage({ params }: PageProps) {
         {/* Growth — cumulative since launch, so the trajectory reads at any volume */}
         {totalGrowth > 0 && (
           <section>
-            <h2 className="text-base font-semibold mb-3">Participation growth since launch</h2>
+            <h2 className="text-base font-semibold mb-3">{isStorytelling ? 'Story collection growth since launch' : 'Participation growth since launch'}</h2>
             <div className="flex items-end gap-0.5 h-24">
               {report.growth.map((d) => (
                 <div key={d.date} className="flex-1 rounded-t" style={{ height: `${(d.cumulative / totalGrowth) * 100}%`, minHeight: d.cumulative > 0 ? 2 : 0, backgroundColor: accent, opacity: 0.85 }} title={`${d.date}: ${d.cumulative.toLocaleString()} total`} />
@@ -143,7 +146,7 @@ export default async function CampaignReportPage({ params }: PageProps) {
             </div>
             <div className="mt-1 flex justify-between text-[11px] text-gray-400 dark:text-gray-500">
               <span>Launch · {started}</span>
-              <span>{totalGrowth.toLocaleString()} total participants</span>
+              <span>{totalGrowth.toLocaleString()} total {isStorytelling ? 'stories' : 'participants'}</span>
             </div>
           </section>
         )}

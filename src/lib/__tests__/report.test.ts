@@ -110,6 +110,7 @@ describe('assembleCampaignReport', () => {
         storyteller_email: 'a@example.com',
         state: 'nv',
         consent_usage_snapshot: { granted_uses: ['shared_with_media', 'contact_me_followup'] },
+        created_at: '2026-07-05T00:00:00Z',
       },
       {
         attribution_level: 'first_name_only',
@@ -117,8 +118,9 @@ describe('assembleCampaignReport', () => {
         state: 'NV',
         // contact granted but no email on file -> NOT contactable
         consent_usage_snapshot: { granted_uses: ['contact_me_followup'] },
+        created_at: '2026-07-20T00:00:00Z',
       },
-      { attribution_level: 'anonymous', storyteller_email: null, state: 'CA', consent_usage_snapshot: null },
+      { attribution_level: 'anonymous', storyteller_email: null, state: 'CA', consent_usage_snapshot: null, created_at: '2026-08-01T00:00:00Z' },
     ];
     const report = assembleCampaignReport({ ...campaign, campaign_type: 'storytelling' }, rows, NOW);
     expect(report.storyImpact).toEqual({
@@ -130,6 +132,18 @@ describe('assembleCampaignReport', () => {
       contactable: 1,
       statesReached: 2, // nv and NV normalize to one state
     });
+  });
+
+  it('storytelling reports count stories as participation and geography', () => {
+    const rows = emptyRows();
+    rows.stories = [
+      { attribution_level: 'named', storyteller_email: null, state: 'NV', consent_usage_snapshot: null, created_at: '2026-07-05T00:00:00Z' },
+      { attribution_level: 'anonymous', storyteller_email: null, state: 'CA', consent_usage_snapshot: null, created_at: '2026-08-01T00:00:00Z' },
+    ];
+    const report = assembleCampaignReport({ ...campaign, campaign_type: 'storytelling' }, rows, NOW);
+    expect(report.reach.constituents).toBe(2);
+    expect(report.reach.statesReached).toBe(2);
+    expect(report.growth[report.growth.length - 1].cumulative).toBe(2);
   });
 
   it('sums social metrics and tolerates posts with none yet', () => {

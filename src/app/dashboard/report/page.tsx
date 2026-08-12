@@ -39,11 +39,12 @@ export default async function OrgReportPage() {
 
   const { data: campaigns } = await admin
     .from('campaigns')
-    .select('id, slug, headline, bill_ref, direction, outcome, action_count, parent_campaign_id, campaign_type, org_name, created_at')
+    .select('id, slug, headline, bill_ref, direction, outcome, action_count, story_count, parent_campaign_id, campaign_type, org_name, created_at')
     .eq('creator_id', user.id)
     .order('created_at', { ascending: true });
   const all = campaigns ?? [];
   const topLevel = all.filter((c) => !c.parent_campaign_id && c.campaign_type !== 'storytelling');
+  const storytelling = all.filter((c) => !c.parent_campaign_id && c.campaign_type === 'storytelling');
   const allIds = all.map((c) => c.id as string);
   const topOf = new Map(all.map((c) => [c.id as string, (c.parent_campaign_id as string | null) ?? (c.id as string)]));
 
@@ -131,6 +132,23 @@ export default async function OrgReportPage() {
             <Stat label="Coalition partners" value={supporterOrgs.toLocaleString()} sub={`${opponentOrgs} opposing orgs tracked`} />
           </div>
         </section>
+
+        {/* Story collection — the qualitative arm of the portfolio */}
+        {storytelling.length > 0 && (
+          <section>
+            <h2 className="text-base font-semibold mb-3">Story collection</h2>
+            <div className="space-y-1.5">
+              {storytelling.map((c) => (
+                <div key={c.id as string} className="flex items-center justify-between gap-3 text-sm border-b border-gray-100 dark:border-gray-700 pb-1.5">
+                  <span className="font-medium min-w-0">{c.headline}</span>
+                  <span className="shrink-0 text-xs text-gray-500 dark:text-gray-400">
+                    {Number(c.story_count || 0).toLocaleString()} stories collected
+                  </span>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* Per-campaign table */}
         <section>

@@ -210,6 +210,7 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
             View impact report
           </Link>
         </div>
+        <CoalitionPanel slug={slug} initialOutcome={campaign.outcome ?? null} />
         <CampaignAnalytics analytics={storyAnalytics} campaignName={campaign.headline} insightsPanel={insightsPanel} />
       </div>
     );
