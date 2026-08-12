@@ -73,9 +73,9 @@ export default async function CreateCampaignPage({
           </div>
           <p className="text-sm text-gray-500 dark:text-gray-400">
             Represent an organization?{' '}
-            <a href="mailto:hello@mydemocracy.app?subject=Advocacy%20organization%20account" className="text-purple-600 dark:text-purple-400 hover:underline">
-              Get in touch about an organization account
-            </a>
+            <Link href="/campaigns#apply" className="text-purple-600 dark:text-purple-400 hover:underline">
+              Apply for the advocacy platform pilot
+            </Link>
             .
           </p>
         </div>
