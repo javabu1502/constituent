@@ -424,7 +424,7 @@ export function TopicStep({ state, dispatch, onBack }: TopicStepProps) {
       return;
     }
     dispatch({ type: 'SET_ERROR', payload: null });
-    dispatch({ type: 'GO_TO_STEP', payload: 'message' });
+    dispatch({ type: 'GO_TO_STEP', payload: 'compose' });
   };
 
   return (

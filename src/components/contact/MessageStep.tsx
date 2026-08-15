@@ -5,6 +5,7 @@ import type { ContactState, ContactAction, OfficialMessage } from './ContactFlow
 import { Button } from '@/components/ui/Button';
 import { PHONE_TIPS } from '@/lib/phone-tips';
 import { useTurnstile } from '@/components/ui/Turnstile';
+import { buildEnvelope } from '@/lib/envelope';
 import { salutationTitle } from '@/lib/utils';
 
 interface MessageStepProps {
@@ -395,10 +396,31 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
     });
   };
 
-  // Generate messages on mount if not already present
+  // Build messages on mount if not already present. Message-first path: the
+  // constituent already approved a core message, so each selected official
+  // gets an instant deterministic envelope around it (no AI call). Legacy
+  // path (restored drafts without a core) still generates per official.
   useEffect(() => {
     const repsNeedingMessages = selectedReps.filter(rep => !messages[rep.name]);
     if (repsNeedingMessages.length === 0) return;
+    if (state.coreMessage?.trim()) {
+      const built: Record<string, { subject: string; body: string }> = {};
+      for (const rep of repsNeedingMessages) {
+        built[rep.name] = buildEnvelope(state.coreMessage.trim(), rep, {
+          committeeName: null,
+          verb: null,
+          billRef: null,
+          stageGoal: undefined,
+          headline: state.issue || state.issueCategory || 'this issue',
+          senderName: state.userName || 'A constituent',
+          city: state.address?.city ?? '',
+          stateCode: state.address?.state ?? '',
+          zip: state.address?.zip ?? '',
+        });
+      }
+      dispatch({ type: 'SET_MESSAGES', payload: { ...messages, ...built } });
+      return;
+    }
     generateMessages();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

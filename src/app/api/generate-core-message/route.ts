@@ -20,12 +20,18 @@ export const runtime = 'nodejs';
  * and no name/address (the CWC rule) — those live in the envelope.
  */
 
-const coreSchema = z.object({
-  campaignSlug: z.string().min(1).max(120),
-  stance: z.enum(['support', 'oppose', 'undecided']).optional(),
-  personalWhy: z.string().max(2000).optional(),
-  turnstileToken: z.string().optional(),
-});
+const coreSchema = z
+  .object({
+    campaignSlug: z.string().min(1).max(120).optional(),
+    // Freeform mode (the general contact flow): no campaign, just the
+    // constituent's issue and what they want to say.
+    issue: z.string().max(500).optional(),
+    ask: z.string().max(1000).optional(),
+    stance: z.enum(['support', 'oppose', 'undecided']).optional(),
+    personalWhy: z.string().max(2000).optional(),
+    turnstileToken: z.string().optional(),
+  })
+  .refine((d) => d.campaignSlug || d.issue, { message: 'campaignSlug or issue required' });
 
 export async function POST(request: NextRequest) {
   let raw: unknown;
@@ -48,18 +54,33 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Daily message limit reached. Try again tomorrow.' }, { status: 429 });
   }
 
-  const admin = createAdminClient();
-  const { data: campaign } = await admin
-    .from('campaigns')
-    .select('headline, description, direction, message_template, is_official, bill_ref, bill_title, issue_area')
-    .eq('slug', parsed.data.campaignSlug)
-    .eq('approval_status', 'approved')
-    .single();
-  if (!campaign) return NextResponse.json({ error: 'Campaign not found' }, { status: 404 });
+  let campaign: {
+    headline: string;
+    description: string;
+    direction: string | null;
+    message_template: string | null;
+    is_official: boolean | null;
+    bill_ref: string | null;
+    bill_title: string | null;
+  } | null = null;
+  if (parsed.data.campaignSlug) {
+    const admin = createAdminClient();
+    const { data } = await admin
+      .from('campaigns')
+      .select('headline, description, direction, message_template, is_official, bill_ref, bill_title, issue_area')
+      .eq('slug', parsed.data.campaignSlug)
+      .eq('approval_status', 'approved')
+      .single();
+    if (!data) return NextResponse.json({ error: 'Campaign not found' }, { status: 404 });
+    campaign = data;
+  }
 
   // Official weigh-ins carry the PARTICIPANT's stance; org campaigns carry
-  // the campaign's own direction.
-  const position = campaign.is_official
+  // the campaign's own direction; freeform mode carries whatever the
+  // constituent asked for, in their ask.
+  const position = !campaign
+    ? 'This is the constituent\'s own issue. Take exactly the position their goal and words imply — nothing more, nothing less.'
+    : campaign.is_official
     ? parsed.data.stance && parsed.data.stance !== 'undecided'
       ? `The constituent ${parsed.data.stance.toUpperCase()}S this. Argue their side clearly.`
       : 'The constituent is still weighing this. Write a thoughtful message urging serious attention to the issue without taking a side for them.'
@@ -77,17 +98,22 @@ export async function POST(request: NextRequest) {
 
 Return ONLY JSON: {"body": "..."}`;
 
-  const user = `CAMPAIGN: ${campaign.headline}
+  const user = campaign
+    ? `CAMPAIGN: ${campaign.headline}
 ${campaign.bill_ref ? `BILL: ${campaign.bill_ref}${campaign.bill_title ? ` — ${campaign.bill_title}` : ''}` : ''}
 ABOUT: ${campaign.description}
 ${campaign.message_template ? `CAMPAIGN TALKING POINTS: ${campaign.message_template}` : ''}
-POSITION: ${position}
-${parsed.data.personalWhy?.trim() ? `THE CONSTITUENT'S OWN WORDS ABOUT WHY THIS MATTERS TO THEM: """${parsed.data.personalWhy.trim()}"""` : 'The constituent did not share a personal story — build the case from the campaign material alone.'}
+POSITION: ${position}`
+    : `ISSUE: ${parsed.data.issue}
+${parsed.data.ask ? `THE CONSTITUENT'S GOAL: ${parsed.data.ask}` : ''}
+POSITION: ${position}`;
+  const user2 = `${user}
+${parsed.data.personalWhy?.trim() ? `THE CONSTITUENT'S OWN WORDS ABOUT WHY THIS MATTERS TO THEM: """${parsed.data.personalWhy.trim()}"""` : 'The constituent did not share a personal story — build the case from the material above alone.'}
 
 Draft the core message.`;
 
   try {
-    const rawOut = await callClaude(system, user, 700);
+    const rawOut = await callClaude(system, user2, 700);
     const out = extractJSON(rawOut) as { body?: string } | null;
     const body = deDash(String(out?.body ?? '').trim());
     if (!body || body.length < 40) {

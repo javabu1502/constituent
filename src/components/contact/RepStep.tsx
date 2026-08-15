@@ -174,7 +174,7 @@ export function RepStep({ state, dispatch, onBack }: RepStepProps) {
     clearInterviewResult();
     setIsOpen(false);
     if (recommended.length > 0) {
-      dispatch({ type: 'GO_TO_STEP', payload: 'topic' });
+      dispatch({ type: 'GO_TO_STEP', payload: 'message' });
     }
   }, [interviewResult, officials, dispatch, clearInterviewResult, setIsOpen]);
 
@@ -235,7 +235,7 @@ export function RepStep({ state, dispatch, onBack }: RepStepProps) {
       dispatch({ type: 'SET_ERROR', payload: 'Please select at least one official' });
       return;
     }
-    dispatch({ type: 'GO_TO_STEP', payload: 'topic' });
+    dispatch({ type: 'GO_TO_STEP', payload: 'message' });
   };
 
   return (

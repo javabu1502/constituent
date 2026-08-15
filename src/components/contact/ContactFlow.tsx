@@ -12,6 +12,7 @@ import { MessageStep } from './MessageStep';
 import { SendStep } from './SendStep';
 import { SupportNudge } from '@/components/ui/SupportNudge';
 import { ShareActions } from './ShareActions';
+import { ComposeStep } from './ComposeStep';
 import { useAutoSave, type SavedDraft } from '@/hooks/useAutoSave';
 import { trackEvent } from '@/lib/analytics';
 
@@ -23,7 +24,7 @@ export interface OfficialMessage {
 
 // State shape
 export interface ContactState {
-  step: 'address' | 'representative' | 'topic' | 'message' | 'send' | 'success';
+  step: 'topic' | 'compose' | 'address' | 'representative' | 'message' | 'send' | 'success';
   shareId: string | null;
   address: Address | null;
   officials: Official[];
@@ -37,6 +38,8 @@ export interface ContactState {
   issueCategory: string;
   ask: string;
   personalWhy: string;
+  // Message-first: the approved core message, drafted before address/officials.
+  coreMessage: string;
   // Per-official messages keyed by official name (like PoliAct)
   messages: Record<string, OfficialMessage>;
   // Per-official loading states
@@ -59,6 +62,7 @@ type ContactAction =
   | { type: 'SET_ISSUE'; payload: { issue: string; category: string } }
   | { type: 'SET_ASK'; payload: string }
   | { type: 'SET_PERSONAL_WHY'; payload: string }
+  | { type: 'SET_CORE'; payload: string }
   | { type: 'SET_MESSAGE'; payload: { officialName: string; message: OfficialMessage } }
   | { type: 'SET_MESSAGES'; payload: Record<string, OfficialMessage> }
   | { type: 'UPDATE_MESSAGE'; payload: { officialName: string; field: 'subject' | 'body'; value: string } }
@@ -70,7 +74,7 @@ type ContactAction =
   | { type: 'RESET' };
 
 const initialState: ContactState = {
-  step: 'address',
+  step: 'topic',
   address: null,
   officials: [],
   selectedReps: [],
@@ -82,6 +86,7 @@ const initialState: ContactState = {
   issueCategory: '',
   ask: '',
   personalWhy: '',
+  coreMessage: '',
   messages: {},
   loadingIds: new Set(),
   isLoading: false,
@@ -119,6 +124,8 @@ function contactReducer(state: ContactState, action: ContactAction): ContactStat
       return { ...state, issue: action.payload.issue, issueCategory: action.payload.category };
     case 'SET_ASK':
       return { ...state, ask: action.payload };
+    case 'SET_CORE':
+      return { ...state, coreMessage: action.payload };
     case 'SET_PERSONAL_WHY':
       return { ...state, personalWhy: action.payload };
     case 'SET_MESSAGE':
@@ -166,21 +173,23 @@ function contactReducer(state: ContactState, action: ContactAction): ContactStat
   }
 }
 
-const STEPS = ['address', 'representative', 'topic', 'message', 'send'] as const;
+const STEPS = ['topic', 'compose', 'address', 'representative', 'message', 'send'] as const;
 const STEP_LABELS: Record<string, string> = {
-  address: 'Address',
-  representative: 'Who to Contact',
   topic: 'Your Issue',
+  compose: 'Your Message',
+  address: 'Delivery',
+  representative: 'Who to Contact',
   message: 'Review',
   send: 'Send',
   success: 'Done',
 };
 
 const STEP_DESCRIPTIONS: Record<string, string> = {
-  address: 'We use your address to find the people who represent you.',
-  representative: 'Pick who you want to write to.',
-  topic: 'Tell us what matters to you. AI will draft a message for each person you selected.',
-  message: 'Read over the messages and make any changes before sending.',
+  topic: 'Tell us what matters to you.',
+  compose: 'See and approve your message — before we ask for anything else.',
+  address: 'Your address finds the people who represent you.',
+  representative: 'Pick who receives it.',
+  message: 'Each official gets your approved message with their own greeting. Final look.',
   send: 'Send your messages.',
 };
 
@@ -450,7 +459,7 @@ export function ContactFlow() {
   return (
     <div className="w-full max-w-2xl mx-auto">
       {/* Resume draft banner */}
-      {savedDraft && !hasDeepLink && state.step === 'address' && (
+      {savedDraft && !hasDeepLink && state.step === 'topic' && (
         <div className="mb-4 mx-4 p-4 bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-700 rounded-xl flex items-center justify-between gap-4">
           <div className="min-w-0">
             <p className="text-sm font-medium text-purple-900 dark:text-purple-100">
@@ -547,6 +556,9 @@ export function ContactFlow() {
 
       {/* Step content card */}
       <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm overflow-hidden">
+        {state.step === 'compose' && (
+          <ComposeStep state={state} dispatch={wrappedDispatch} />
+        )}
         {state.step === 'address' && (
           <AddressStep state={state} dispatch={wrappedDispatch} />
         )}

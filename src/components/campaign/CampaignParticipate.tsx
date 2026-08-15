@@ -9,6 +9,7 @@ import type { Official } from '@/lib/types';
 import { US_STATES } from '@/lib/constants';
 import { Button } from '@/components/ui/Button';
 import { formatPhone, salutationTitle } from '@/lib/utils';
+import { buildEnvelope } from '@/lib/envelope';
 import { detectBillReferences, CURRENT_CONGRESS } from '@/lib/bills';
 import {
   determineDeliveryMethod,
@@ -80,70 +81,6 @@ function buildFallbackMessage(
     `Sincerely,\n${opts.senderName}\n${opts.city}, ${opts.stateCode} ${opts.zip}`,
   ].join('\n\n');
   return { subject: `Constituent message: ${campaign.headline}`, body };
-}
-
-/**
- * Message-first envelope: wraps the constituent's APPROVED core (never
- * altered) with a greeting, an official-specific relevance line, the
- * intent-correct ask, and a signature. Deterministic — no second AI pass,
- * no per-official hallucination risk.
- */
-function buildEnvelope(
-  core: string,
-  official: Official,
-  opts: {
-    intent?: 'persuade' | 'thank';
-    committeeName: string | null;
-    verb: 'support' | 'oppose' | null;
-    billRef: string | null;
-    stageGoal: string | null | undefined;
-    headline: string;
-    senderName: string;
-    city: string;
-    stateCode: string;
-    zip: string;
-  }
-): OfficialMessage {
-  const lastName = official.lastName || official.name.split(' ').pop() || official.name;
-  const sal = salutationTitle(official.title);
-  const target = opts.billRef ?? 'this issue';
-  const voteWord = opts.verb === 'oppose' ? 'no' : 'yes';
-
-  let subject: string;
-  let opener: string;
-  let closer: string;
-  if (opts.intent === 'thank') {
-    subject = opts.billRef ? `Thank you for standing with us on ${opts.billRef}` : 'Thank you for your leadership';
-    opener = `Thank you for your support on ${target}. As your constituent, I wanted you to hear directly that it matters.`;
-    closer = 'Thank you again for your leadership, and please keep championing this.';
-  } else {
-    subject = opts.billRef
-      ? opts.stageGoal === 'cosponsor'
-        ? `Please cosponsor ${opts.billRef}`
-        : `Please ${opts.verb === 'oppose' ? 'oppose' : 'support'} ${opts.billRef}`
-      : `A constituent message: ${opts.headline.slice(0, 60)}`;
-    if (opts.committeeName) {
-      opener = `As a member of the ${opts.committeeName}, you are one of the few people deciding what happens to ${target}.`;
-    } else if (opts.stageGoal === 'floor_house' || opts.stageGoal === 'floor_senate') {
-      opener = `${target} is coming to your chamber for a vote, and your vote is the one that speaks for me.`;
-    } else {
-      opener = `I am writing to you as your constituent because your vote speaks for me on ${target}.`;
-    }
-    if (opts.stageGoal === 'cosponsor' && opts.billRef) {
-      closer = `I respectfully ask you to cosponsor ${opts.billRef}.`;
-    } else if (opts.committeeName) {
-      closer = `I respectfully ask you to vote ${voteWord} when it comes before your committee.`;
-    } else if (opts.billRef && opts.verb) {
-      closer = `I respectfully ask you to vote ${voteWord} on ${opts.billRef}.`;
-    } else {
-      closer = `I respectfully ask for your ${opts.verb === 'oppose' ? 'opposition to this' : 'support on this'}.`;
-    }
-  }
-
-  return {
-    subject,
-    body: `Dear ${sal} ${lastName},\n\n${opener}\n\n${core}\n\n${closer}\n\nSincerely,\n${opts.senderName}\n${opts.city}, ${opts.stateCode} ${opts.zip}`,
-  };
 }
 
 export function CampaignParticipate({
