@@ -87,12 +87,12 @@ const RULES: JurisdictionRule[] = [
     },
   },
   {
-    pattern: /\btax|irs|tariff|budget|spending|deficit|social security|medicare tax/i,
+    pattern: /(?<!property )\btax(?!i)|\birs\b|tariff|budget|spending|deficit/i,
     guidance: {
       weights: { federal: 2, state: 2, local: 1 },
       why: {
-        federal: 'Federal taxes, Social Security, and the national budget are Congress’s job.',
-        state: 'State income, sales, and property tax rules are set by your state legislature.',
+        federal: 'Federal taxes and the national budget are Congress’s job.',
+        state: 'State income and sales tax rules are set by your state legislature.',
       },
     },
   },
@@ -142,7 +142,7 @@ const RULES: JurisdictionRule[] = [
   {
     pattern: /economy|jobs|wage|inflation|worker|labor|union|small business|employment/i,
     guidance: {
-      weights: { federal: 2, state: 2, local: 0 },
+      weights: { federal: 2, state: 2, local: 1 },
       why: {
         federal: 'Congress shapes national economic policy, labor law, and the minimum wage floor.',
         state: 'States set their own minimum wage, worker protections, and business rules.',
@@ -178,10 +178,129 @@ const RULES: JurisdictionRule[] = [
       },
     },
   },
+  {
+    // States have ZERO Social Security authority — this must never route to
+    // a state legislator (it previously lived inside the tax rule, wrongly).
+    pattern: /social security|\bssi\b|\bssdi\b|\busps\b|postal service|post office/i,
+    guidance: {
+      weights: { federal: 2, state: 0, local: 0 },
+      why: { federal: 'Social Security and the Postal Service are entirely federal — only Congress can act.' },
+    },
+  },
+  {
+    pattern: /property tax/i,
+    guidance: {
+      weights: { federal: 0, state: 2, local: 2 },
+      why: {
+        local: 'Property tax rates are set by counties, cities, and school districts.',
+        state: 'States set the rules those local rates operate under.',
+      },
+    },
+  },
+  {
+    pattern: /\bai\b|artificial intelligence|social media|data privacy|big tech|crypto|online safety|deepfake/i,
+    guidance: {
+      weights: { federal: 2, state: 2, local: 0 },
+      why: {
+        federal: 'National tech, privacy, and platform rules run through Congress.',
+        state: 'States are actively passing their own privacy and online-safety laws.',
+      },
+    },
+  },
+  {
+    pattern: /farm|agricultur|\bsnap\b|food stamp|food assist|school meal|school breakfast|school lunch|nutrition/i,
+    guidance: {
+      weights: { federal: 2, state: 2, local: 0 },
+      why: {
+        federal: 'The Farm Bill, SNAP, and school-meal funding are federal.',
+        state: 'States administer the programs and set their own supplements.',
+      },
+    },
+  },
+  {
+    pattern: /marijuana|cannabis/i,
+    guidance: {
+      weights: { federal: 1, state: 2, local: 1 },
+      why: {
+        state: 'Legalization, licensing, and taxation are state decisions.',
+        federal: 'Congress controls federal scheduling and banking access.',
+      },
+    },
+  },
+  {
+    pattern: /utilit|electric bill|power compan|energy bill|water bill|rate hike/i,
+    guidance: {
+      weights: { federal: 1, state: 2, local: 1 },
+      why: { state: 'State utility commissions approve rates and regulate providers.' },
+    },
+  },
+  {
+    pattern: /\bdmv\b|driver'?s? licen|professional licen|occupational licen|barber licen|nursing licen/i,
+    guidance: {
+      weights: { federal: 0, state: 2, local: 0 },
+      why: { state: 'Licensing — from driving to professions — is purely state-run.' },
+    },
+  },
+  {
+    // The purely local layer: if it involves a truck, a sidewalk, or a park,
+    // a US senator cannot help.
+    pattern: /trash|garbage|sewer|sidewalk|streetlight|street light|noise complaint|\bparks?\b|library|snow removal|code enforcement|animal control|zoning permit|building permit/i,
+    guidance: {
+      weights: { federal: 0, state: 1, local: 2 },
+      why: {
+        local: 'City and county government runs these services directly.',
+        state: 'State law sets the framework local governments operate under.',
+      },
+    },
+  },
+  {
+    pattern: /supreme court|federal judge|judicial nominee|court packing/i,
+    guidance: {
+      weights: { federal: 2, state: 1, local: 0 },
+      why: { federal: 'Federal judges are nominated and confirmed in Washington.' },
+    },
+  },
+  {
+    pattern: /senior|aging|nursing home|elder abuse|retirement/i,
+    guidance: {
+      weights: { federal: 2, state: 2, local: 0 },
+      why: {
+        federal: 'Social Security and Medicare are federal.',
+        state: 'States license and inspect nursing homes and run aging services.',
+      },
+    },
+  },
+  {
+    pattern: /marriage|divorce|custody|family court|child support/i,
+    guidance: {
+      weights: { federal: 0, state: 2, local: 0 },
+      why: { state: 'Family law is state law.' },
+    },
+  },
+  {
+    pattern: /hunting|fishing|wildlife|\bdeer\b|game commission/i,
+    guidance: {
+      weights: { federal: 1, state: 2, local: 0 },
+      why: { state: 'Fish and wildlife rules are set by state agencies and legislatures.' },
+    },
+  },
+  {
+    pattern: /daylight saving/i,
+    guidance: {
+      weights: { federal: 2, state: 1, local: 0 },
+      why: {
+        federal: 'Permanent daylight saving time requires an act of Congress.',
+        state: 'States can opt out to permanent standard time.',
+      },
+    },
+  },
 ];
 
+// Safe default: unknown issues go to federal + state — never local. With
+// auto-routing, a false local match means a city council member gets a
+// message about something they cannot touch; the reverse costs nothing.
 const DEFAULT_GUIDANCE: JurisdictionGuidance = {
-  weights: { federal: 1, state: 1, local: 1 },
+  weights: { federal: 1, state: 1, local: 0 },
   why: {},
 };
 
@@ -192,10 +311,22 @@ const DEFAULT_GUIDANCE: JurisdictionGuidance = {
 export function getJurisdiction(issueText: string): JurisdictionGuidance {
   const text = (issueText || '').trim();
   if (!text) return DEFAULT_GUIDANCE;
-  for (const rule of RULES) {
-    if (rule.pattern.test(text)) return rule.guidance;
+  // Merge EVERY matching rule (max weight per level) instead of stopping at
+  // the first hit: "drug costs" is healthcare even though a policing rule
+  // also mentions drugs, and "school shooting" is guns AND education. With
+  // first-match, rule ORDER silently decided who got the message.
+  const matched = RULES.filter((rule) => rule.pattern.test(text));
+  if (matched.length === 0) return DEFAULT_GUIDANCE;
+  const merged: JurisdictionGuidance = { weights: { federal: 0, state: 0, local: 0 }, why: {} };
+  for (const rule of matched) {
+    for (const level of ['federal', 'state', 'local'] as GovLevel[]) {
+      if (rule.guidance.weights[level] > merged.weights[level]) {
+        merged.weights[level] = rule.guidance.weights[level];
+        if (rule.guidance.why[level]) merged.why[level] = rule.guidance.why[level];
+      }
+    }
   }
-  return DEFAULT_GUIDANCE;
+  return merged;
 }
 
 export function matchLabelForLevel(guidance: JurisdictionGuidance, level: GovLevel): 'best' | 'also' | 'low' {

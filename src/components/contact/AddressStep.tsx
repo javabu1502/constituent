@@ -67,12 +67,16 @@ export function AddressStep({ state, dispatch }: AddressStepProps) {
       // jurisdiction decides which levels matter (best/also); 'low'-relevance
       // levels are dropped so a federal tax story doesn't email the school
       // board. Fallback: everyone we found.
-      const guidance = getJurisdiction(state.issueCategory || state.issue || '');
-      const relevant = (data.officials as Official[]).filter((o) => {
+      const guidance = getJurisdiction(`${state.issue || ''} ${state.issueCategory || ''}`);
+      const all = data.officials as Official[];
+      const relevant = all.filter((o) => {
         const label = matchLabelForLevel(guidance, (o.level as GovLevel) ?? 'federal');
         return label === 'best' || label === 'also';
       });
-      dispatch({ type: 'SELECT_REPS', payload: relevant.length > 0 ? relevant : (data.officials as Official[]) });
+      // Fallback ladder: jurisdiction match -> non-local officials -> everyone.
+      // Never blast local officials with an issue we couldn't classify.
+      const nonLocal = all.filter((o) => o.level !== 'local');
+      dispatch({ type: 'SELECT_REPS', payload: relevant.length > 0 ? relevant : nonLocal.length > 0 ? nonLocal : all });
 
       // Save address + officials to profile for logged-in users (fire-and-forget)
       fetch('/api/profile', {
