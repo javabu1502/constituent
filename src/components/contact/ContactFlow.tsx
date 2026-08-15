@@ -261,8 +261,12 @@ export function ContactFlow() {
       dispatch({ type: 'SET_LOADING', payload: false });
     }
 
-    // Navigate to saved step
-    dispatch({ type: 'GO_TO_STEP', payload: draft.step as ContactState['step'] });
+    // Navigate to saved step. Drafts saved before the message-first flow may
+    // point at retired steps — land them where the current flow makes sense.
+    const savedStep = draft.step as ContactState['step'];
+    const step: ContactState['step'] =
+      savedStep === 'representative' || savedStep === 'compose' ? 'topic' : savedStep;
+    dispatch({ type: 'GO_TO_STEP', payload: step });
   }, [dismissDraft]);
 
   // Auto-fill from user profile and handle repId deep-linking
@@ -341,9 +345,8 @@ export function ContactFlow() {
                 return;
               }
             }
-
-            // No repId - skip to rep selection step
-            dispatch({ type: 'GO_TO_STEP', payload: 'representative' });
+            // Message-first: stay on the story step. The saved address just
+            // pre-fills the address step to a one-click confirm later.
           } else {
             // Has address but no cached reps - fetch them and skip
             fetch('/api/profile/representatives', { method: 'POST' })
@@ -365,8 +368,7 @@ export function ContactFlow() {
                       return;
                     }
                   }
-
-                  dispatch({ type: 'GO_TO_STEP', payload: 'representative' });
+                  // Message-first: stay on the story step (see above).
                 }
               })
               .catch(() => {});

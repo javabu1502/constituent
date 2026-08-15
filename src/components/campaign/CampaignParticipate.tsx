@@ -98,6 +98,9 @@ export function CampaignParticipate({
   // Message-first: the constituent's approved core message, drafted before we
   // know who their officials are.
   const [coreDraft, setCoreDraft] = useState('');
+  // AI-drafted subject from the same call — used only when the campaign has
+  // no bill ref to build a precise subject from.
+  const [coreSubject, setCoreSubject] = useState<string | null>(null);
   const [coreStatus, setCoreStatus] = useState<'idle' | 'drafting'>('idle');
   const [stance, setStance] = useState<Stance | null>(null);
 
@@ -157,6 +160,7 @@ export function CampaignParticipate({
       const data = await res.json();
       if (!res.ok) throw new FriendlyError(data.error || 'Drafting failed');
       setCoreDraft(data.body);
+      setCoreSubject(typeof data.subject === 'string' ? data.subject : null);
       fireFunnel('participate_core_generated');
     } catch (err) {
       setError(err instanceof FriendlyError ? err.message : 'We could not draft your message — you can write it yourself below, or try again.');
@@ -391,6 +395,7 @@ export function CampaignParticipate({
             city: city.trim(),
             stateCode,
             zip: zip5,
+            coreSubject,
           });
         } else {
           msgMap[o.name] = buildFallbackMessage(campaign, o, {

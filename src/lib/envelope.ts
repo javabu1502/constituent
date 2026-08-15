@@ -27,6 +27,9 @@ export function buildEnvelope(
     city: string;
     stateCode: string;
     zip: string;
+    /** AI-drafted subject from the core pass — used only when no bill ref
+     * gives us a precise ask to put in the subject line. */
+    coreSubject?: string | null;
   }
 ): OfficialMessage {
   const lastName = official.lastName || official.name.split(' ').pop() || official.name;
@@ -46,7 +49,10 @@ export function buildEnvelope(
       ? opts.stageGoal === 'cosponsor'
         ? `Please cosponsor ${opts.billRef}`
         : `Please ${opts.verb === 'oppose' ? 'oppose' : 'support'} ${opts.billRef}`
-      : `A constituent message: ${opts.headline.slice(0, 60)}`;
+      : opts.coreSubject?.trim() ||
+        (opts.city
+          ? `From your constituent in ${opts.city}: ${opts.headline.slice(0, 60)}`
+          : `From your constituent: ${opts.headline.slice(0, 60)}`);
     if (opts.committeeName) {
       opener = `As a member of the ${opts.committeeName}, you are one of the few people deciding what happens to ${target}.`;
     } else if (opts.stageGoal === 'floor_house' || opts.stageGoal === 'floor_senate') {

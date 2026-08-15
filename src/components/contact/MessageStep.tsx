@@ -73,6 +73,10 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
   const { selectedReps, userName, issue, ask, personalWhy, messages, contactMethod, address } = state;
   const [reviewIndex, setReviewIndex] = useState(0);
   const [isGenerating, setIsGenerating] = useState(false);
+  // Message-first path: true while the ONE core message is being drafted,
+  // before any envelopes exist. Without it the step renders an empty review
+  // screen for several seconds and the content pops in — jarring.
+  const [isDraftingCore, setIsDraftingCore] = useState(false);
   const [feedback, setFeedback] = useState<Record<string, 'positive' | 'negative'>>({});
   const [suggestionInput, setSuggestionInput] = useState('');
   const [showSuggestionInput, setShowSuggestionInput] = useState(false);
@@ -409,6 +413,7 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
       // envelope it per official. Falls back to legacy per-official
       // generation if core drafting fails.
       void (async () => {
+        setIsDraftingCore(true);
         try {
           const turnstileToken = await getToken().catch(() => '');
           const res = await fetch('/api/generate-core-message', {
@@ -453,12 +458,15 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
               city: state.address?.city ?? '',
               stateCode: state.address?.state ?? '',
               zip: state.address?.zip ?? '',
+              coreSubject: typeof data.subject === 'string' ? data.subject : null,
             });
           }
           dispatch({ type: 'SET_MESSAGES', payload: { ...messages, ...built } });
         } catch (err) {
           console.error('[contact] core drafting failed, using legacy generation:', err);
           generateMessages();
+        } finally {
+          setIsDraftingCore(false);
         }
       })();
       return;
@@ -514,7 +522,7 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
   ).length;
 
   // Show full-screen spinner only when generating AND no messages have arrived yet
-  if (isGenerating && loadedCount === 0) {
+  if ((isGenerating || isDraftingCore) && loadedCount === 0) {
     return (
       <div className="p-6 sm:p-8">
         <div className="flex flex-col items-center justify-center py-16">
@@ -527,12 +535,16 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
             </div>
           </div>
           <p className="text-gray-600 dark:text-gray-300 mt-4 font-medium">
-            {contactMethod === 'phone'
+            {isDraftingCore
+              ? 'Writing your message...'
+              : contactMethod === 'phone'
               ? `Writing ${selectedReps.length} script${selectedReps.length > 1 ? 's' : ''}...`
               : `Writing ${selectedReps.length} message${selectedReps.length > 1 ? 's' : ''}...`}
           </p>
           <p className="text-gray-400 dark:text-gray-500 text-sm mt-1">
-            {loadedCount} of {selectedReps.length} complete
+            {isDraftingCore
+              ? `One message from your story, addressed to each of your ${selectedReps.length} official${selectedReps.length > 1 ? 's' : ''}`
+              : `${loadedCount} of ${selectedReps.length} complete`}
           </p>
         </div>
       </div>
@@ -552,6 +564,29 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
             : 'Edit as needed, then continue'}
         </p>
       </div>
+
+      {/* Who this goes to, and why — the bridge between the address they just
+          entered and the officials they're suddenly looking at. */}
+      {selectedReps.length > 0 && (
+        <div className="mb-4 p-3 bg-gray-50 dark:bg-gray-700/40 border border-gray-200 dark:border-gray-600 rounded-xl">
+          <p className="text-xs text-gray-600 dark:text-gray-300">
+            From your address and your issue, this goes to the {selectedReps.length === 1 ? 'official' : `${selectedReps.length} officials`} who can actually act on it:
+          </p>
+          <div className="flex flex-wrap gap-1.5 mt-2">
+            {selectedReps.map((rep) => (
+              <span
+                key={rep.id}
+                className="inline-flex items-center gap-1 px-2 py-0.5 text-xs rounded-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-200"
+              >
+                {rep.name}
+                <span className="text-gray-400 dark:text-gray-500">
+                  · {rep.level === 'federal' ? 'Federal' : rep.level === 'local' ? 'Local' : 'State'}
+                </span>
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
 
       {isGenerating && loadedCount > 0 && (
         <div className="mb-4 p-3 bg-purple-50 dark:bg-purple-900/30 border border-purple-200 dark:border-purple-700 rounded-xl">

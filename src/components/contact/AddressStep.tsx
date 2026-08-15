@@ -170,7 +170,7 @@ export function AddressStep({ state, dispatch }: AddressStepProps) {
       </form>
 
       <p className="text-xs text-gray-500 dark:text-gray-400 text-center mt-6">
-        Used only to look up your officials. Never stored or shared.
+        Used to look up your officials, and included in your signature so they know you&apos;re a constituent. Saved to your profile only if you have an account.
       </p>
     </div>
   );
