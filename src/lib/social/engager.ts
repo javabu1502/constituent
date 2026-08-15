@@ -105,7 +105,7 @@ Write ONE reply to the post below. Rules:
 - Confirm the feeling briefly, point to the fast way to act. Vary the closer.
 - No em dashes. No AI tells. No narrating their emotions. Sound like the
   approved examples.
-- 280 graphemes max. Include the action link inline: https://mydemocracy.app
+- 280 graphemes max. Include the provided ACTION LINK inline, exactly as given.
 - INVENT NOTHING. Only reference details the post literally states. Do not
   assume family members, jobs, locations, or specifics they did not write.
 - The app connects people ONLY to their own elected officials. NEVER name a
@@ -120,6 +120,68 @@ Write ONE reply to the post below. Rules:
 
 Return ONLY JSON: {"text": "<reply>"} or {"skip": true}.
 `;
+
+// --- Deep links: reply with the RELEVANT weigh-in, not the homepage --------
+// A person venting about insulin costs should land on the drug-pricing
+// weigh-in, not on the front door. Deterministic keyword overlap against
+// active FEDERAL official weigh-ins (state ones are excluded — we don't know
+// the poster's state). Falls back to /issues when nothing matches confidently.
+
+export interface LinkableCampaign {
+  slug: string;
+  headline: string;
+  issue_subtopic: string | null;
+}
+
+const MATCH_STOPWORDS = new Set(['should', 'would', 'could', 'about', 'their', 'there', 'these', 'those', 'congress', 'federal', 'government', 'people', 'right', 'rights', 'every', 'other', 'still', 'because', 'being', 'have', 'that', 'this', 'with', 'from', 'they', 'them', 'your', 'will', 'what', 'when', 'make', 'more', 'need']);
+
+function matchTokens(text: string): Set<string> {
+  return new Set(
+    text
+      .toLowerCase()
+      .replace(/[^a-z\s]/g, ' ')
+      .split(/\s+/)
+      .filter((w) => w.length > 3 && !MATCH_STOPWORDS.has(w))
+  );
+}
+
+/** Best weigh-in for a post's text, or null when the match isn't confident. */
+export function bestCampaignFor(postText: string, campaigns: LinkableCampaign[]): LinkableCampaign | null {
+  const post = matchTokens(postText);
+  if (post.size === 0) return null;
+  let best: LinkableCampaign | null = null;
+  let bestScore = 0;
+  for (const c of campaigns) {
+    const target = matchTokens(`${c.headline} ${c.issue_subtopic ?? ''}`);
+    let score = 0;
+    for (const t of target) if (post.has(t)) score += 1;
+    if (score > bestScore) {
+      bestScore = score;
+      best = c;
+    }
+  }
+  return bestScore >= 2 ? best : null;
+}
+
+async function loadLinkableCampaigns(): Promise<LinkableCampaign[]> {
+  const admin = createAdminClient();
+  const { data } = await admin
+    .from('campaigns')
+    .select('slug, headline, issue_subtopic')
+    .eq('is_official', true)
+    .eq('status', 'active')
+    .eq('approval_status', 'approved')
+    .is('bill_state', null)
+    .limit(200);
+  return (data ?? []) as LinkableCampaign[];
+}
+
+function actionLinkFor(postText: string, campaigns: LinkableCampaign[]): string {
+  const match = bestCampaignFor(postText, campaigns);
+  return match
+    ? `https://mydemocracy.app/campaign/${match.slug}?utm_source=bsky-reply`
+    : 'https://mydemocracy.app/issues?utm_source=bsky-reply';
+}
 
 export interface EngagerResult {
   scanned: number;
@@ -146,7 +208,7 @@ Write ONE reply to the message below. Rules:
 - Stay strictly nonpartisan. Never adopt their framing as fact, never blame a
   party or figure, never take a side on a bill. We inform; the citizen decides.
 - No em dashes. No AI tells. Do not narrate their emotions.
-- 280 graphemes max. Include https://mydemocracy.app when pointing them to act.
+- 280 graphemes max. When pointing them to act, include the provided ACTION LINK exactly as given.
 - INVENT NOTHING. Only reference what the message literally says.
 - SKIP (return {"skip": true}) if a reply adds nothing or would be unwise: a
   bare thanks/emoji/ack, spam, trolling, abuse, or anything you cannot answer
@@ -164,6 +226,7 @@ Return ONLY JSON: {"text": "<reply>"} or {"skip": true}.
 export async function runInboundEngager(brandBrain: string, session: BlueskySession): Promise<EngagerResult> {
   const admin = createAdminClient();
   const result: EngagerResult = { scanned: 0, drafted: 0, gated: 0, skipped: 0, liked: 0, followed: 0 };
+  const linkableCampaigns = await loadLinkableCampaigns();
 
   let notifications;
   try {
@@ -223,7 +286,7 @@ export async function runInboundEngager(brandBrain: string, session: BlueskySess
     try {
       const raw = await callClaude(
         `${brandBrain}\n\n---\n${INBOUND_INSTRUCTIONS}`,
-        `Someone ${c.reason === 'reply' ? 'replied to us' : c.reason === 'quote' ? 'quoted us' : 'mentioned us'} — @${c.authorHandle}: ${c.text}`,
+        `Someone ${c.reason === 'reply' ? 'replied to us' : c.reason === 'quote' ? 'quoted us' : 'mentioned us'} — @${c.authorHandle}: ${c.text}\n\nACTION LINK: ${actionLinkFor(c.text, linkableCampaigns)}`,
         300,
       );
       const parsed = extractJSON(raw) as { text?: string; skip?: boolean } | null;
@@ -285,6 +348,7 @@ export async function runInboundEngager(brandBrain: string, session: BlueskySess
 export async function runEngager(brandBrain: string, session: BlueskySession, perQuery = 8): Promise<EngagerResult> {
   const admin = createAdminClient();
   const result: EngagerResult = { scanned: 0, drafted: 0, gated: 0, skipped: 0, liked: 0, followed: 0 };
+  const linkableCampaigns = await loadLinkableCampaigns();
 
   // Candidates across all lane queries, de-duplicated by uri.
   const seen = new Set<string>();
@@ -400,7 +464,11 @@ export async function runEngager(brandBrain: string, session: BlueskySession, pe
     // Draft the reply.
     let text = '';
     try {
-      const raw = await callClaude(`${brandBrain}\n\n---\n${REPLY_INSTRUCTIONS}`, `POST by @${c.authorHandle}: ${c.text}`, 300);
+      const raw = await callClaude(
+        `${brandBrain}\n\n---\n${REPLY_INSTRUCTIONS}`,
+        `POST by @${c.authorHandle}: ${c.text}\n\nACTION LINK: ${actionLinkFor(c.text, linkableCampaigns)}`,
+        300,
+      );
       const parsed = extractJSON(raw) as { text?: string; skip?: boolean } | null;
       if (parsed?.skip || !parsed?.text) {
         await recordSkip('writer skip: not a real grievance or civic question');

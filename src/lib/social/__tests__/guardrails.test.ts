@@ -42,3 +42,26 @@ describe('repost safety (trusted handle is not trusted content)', () => {
     expect(isRepostSafe('62% of U.S. adults say local news matters, our survey found.')).toBe(true);
   });
 });
+
+describe('reply deep-linking matcher', () => {
+  const campaigns = [
+    { slug: 'insulin-pricing', headline: 'Should Medicare Negotiate More Drug Prices?', issue_subtopic: 'insulin prescription drug prices' },
+    { slug: 'housing-shortage', headline: 'How Should Washington Tackle the Housing Shortage?', issue_subtopic: 'rent housing affordability' },
+    { slug: 'minimum-wage', headline: 'Should Congress Raise the Federal Minimum Wage to $17 by 2031?', issue_subtopic: 'minimum wage workers' },
+  ];
+
+  it('routes a rent grievance to the housing weigh-in', async () => {
+    const { bestCampaignFor } = await import('../engager');
+    expect(bestCampaignFor('my landlord just raised the rent again, housing costs are eating my whole paycheck', campaigns)?.slug).toBe('housing-shortage');
+  });
+
+  it('routes insulin talk to drug pricing', async () => {
+    const { bestCampaignFor } = await import('../engager');
+    expect(bestCampaignFor('rationing insulin because prescription prices keep climbing is insane', campaigns)?.slug).toBe('insulin-pricing');
+  });
+
+  it('returns null when nothing matches confidently', async () => {
+    const { bestCampaignFor } = await import('../engager');
+    expect(bestCampaignFor('what a beautiful sunset tonight over the lake', campaigns)).toBeNull();
+  });
+});
