@@ -115,6 +115,24 @@ export function CampaignParticipate({
   const [profileLoaded, setProfileLoaded] = useState(false);
   const { getToken, TurnstileWidget } = useTurnstile();
 
+  // Funnel telemetry: one event per step reached, so we can finally see WHERE
+  // visitors drop between landing and a sent message (49 sends all-time says
+  // the funnel leaks badly; until now nothing measured the middle).
+  const funnelFired = useRef<Set<string>>(new Set());
+  const fireFunnel = (event: string) => {
+    if (funnelFired.current.has(event)) return;
+    funnelFired.current.add(event);
+    trackEvent(event, { campaign: campaign.slug });
+  };
+  useEffect(() => {
+    if (step === 'form') fireFunnel('participate_form_viewed');
+    if (step === 'loading') fireFunnel('participate_submitted');
+    if (step === 'review') fireFunnel('participate_generated');
+    if (step === 'noTarget') fireFunnel('participate_no_target');
+    if (step === 'wrongState') fireFunnel('participate_wrong_state');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [step]);
+
   // Auto-fill from profile for logged-in users
   useEffect(() => {
     async function loadProfile() {
@@ -508,6 +526,7 @@ export function CampaignParticipate({
     if (!msg) return;
 
     setSentCount((c) => c + 1);
+    fireFunnel('participate_send_clicked');
     const turnstileToken = await getToken();
 
     fetch('/api/track-send', {
