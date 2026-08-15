@@ -245,10 +245,15 @@ export async function scoutLegislativeActions(limit = 30): Promise<number> {
  */
 export async function nextSignal(): Promise<Signal | null> {
   const admin = createAdminClient();
+  // Score outranks recency: editorial uplift signals (score 10) must beat the
+  // constant stream of news signals or they starve in the queue forever
+  // (2026-08-15: the 08-12 Flock/AI uplift signals never posted for exactly
+  // this reason — created_at ordering pushed them out of the window).
   const { data, error } = await admin
     .from('social_signals')
     .select('id, source, external_ref, title, summary, url, issue_area, classification, campaign_slug, status')
     .eq('status', 'new')
+    .order('score', { ascending: false })
     .order('created_at', { ascending: false })
     .limit(20);
   if (error || !data?.length) return null;
