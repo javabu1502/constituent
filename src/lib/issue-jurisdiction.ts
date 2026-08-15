@@ -329,6 +329,28 @@ export function getJurisdiction(issueText: string): JurisdictionGuidance {
   return merged;
 }
 
+/** Did any hand-audited rule match? When true, rules are authoritative and
+ * AI classification is ignored — the deterministic table is the guardrail. */
+export function hasJurisdictionRule(issueText: string): boolean {
+  const text = (issueText || '').trim();
+  if (!text) return false;
+  return RULES.some((rule) => rule.pattern.test(text));
+}
+
+/** Clamp an AI-proposed jurisdiction into a valid guidance object, or null
+ * if the shape is unusable. Used ONLY when no deterministic rule matched. */
+export function sanitizeAiJurisdiction(raw: unknown): JurisdictionGuidance | null {
+  const o = raw as Record<string, unknown> | null;
+  if (!o || typeof o !== 'object') return null;
+  const clamp = (v: unknown): 0 | 1 | 2 => {
+    const n = Number(v);
+    return n >= 2 ? 2 : n >= 1 ? 1 : 0;
+  };
+  const weights = { federal: clamp(o.federal), state: clamp(o.state), local: clamp(o.local) };
+  if (weights.federal + weights.state + weights.local === 0) return null;
+  return { weights, why: {} };
+}
+
 export function matchLabelForLevel(guidance: JurisdictionGuidance, level: GovLevel): 'best' | 'also' | 'low' {
   const w = guidance.weights[level];
   return w === 2 ? 'best' : w === 1 ? 'also' : 'low';

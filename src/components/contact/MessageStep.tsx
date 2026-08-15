@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/Button';
 import { PHONE_TIPS } from '@/lib/phone-tips';
 import { useTurnstile } from '@/components/ui/Turnstile';
 import { buildEnvelope } from '@/lib/envelope';
+import { hasJurisdictionRule, sanitizeAiJurisdiction } from '@/lib/issue-jurisdiction';
 import { salutationTitle } from '@/lib/utils';
 
 interface MessageStepProps {
@@ -423,8 +424,25 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
           const data = await res.json();
           if (!res.ok || !data.body) throw new Error(data.error || 'core drafting failed');
           dispatch({ type: 'SET_CORE', payload: data.body });
+
+          // AI jurisdiction refinement — ONLY when no hand-audited rule
+          // matched the issue text (the rules are the guardrail; the AI
+          // catches phrasing the patterns can't).
+          let recipients = repsNeedingMessages;
+          const issueText = `${state.issue || ''} ${state.issueCategory || ''}`;
+          if (data.jurisdiction && !hasJurisdictionRule(issueText)) {
+            const ai = sanitizeAiJurisdiction(data.jurisdiction);
+            if (ai) {
+              const refined = recipients.filter((rep) => ai.weights[(rep.level as 'federal' | 'state' | 'local') ?? 'federal'] > 0);
+              if (refined.length > 0 && refined.length < recipients.length) {
+                recipients = refined;
+                dispatch({ type: 'SELECT_REPS', payload: refined });
+              }
+            }
+          }
+
           const built: Record<string, { subject: string; body: string }> = {};
-          for (const rep of repsNeedingMessages) {
+          for (const rep of recipients) {
             built[rep.name] = buildEnvelope(String(data.body).trim(), rep, {
               committeeName: null,
               verb: null,

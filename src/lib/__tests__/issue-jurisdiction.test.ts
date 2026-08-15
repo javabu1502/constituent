@@ -60,3 +60,19 @@ describe('issue jurisdiction routing (auto-selection is load-bearing now)', () =
     expect(matchLabelForLevel(g, 'local')).toBe('low');
   });
 });
+
+describe('AI jurisdiction guardrails', () => {
+  it('rules stay authoritative: known issues report a rule hit', async () => {
+    const { hasJurisdictionRule } = await import('../issue-jurisdiction');
+    expect(hasJurisdictionRule('social security delays')).toBe(true);
+    expect(hasJurisdictionRule('a totally novel grievance xyzzy')).toBe(false);
+  });
+
+  it('sanitizes AI weights: clamps values, rejects garbage and all-zeros', async () => {
+    const { sanitizeAiJurisdiction } = await import('../issue-jurisdiction');
+    expect(sanitizeAiJurisdiction({ federal: 5, state: '1', local: -3 })?.weights).toEqual({ federal: 2, state: 1, local: 0 });
+    expect(sanitizeAiJurisdiction({ federal: 0, state: 0, local: 0 })).toBeNull();
+    expect(sanitizeAiJurisdiction('nonsense')).toBeNull();
+    expect(sanitizeAiJurisdiction(null)).toBeNull();
+  });
+});

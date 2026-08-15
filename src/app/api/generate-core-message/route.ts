@@ -5,6 +5,7 @@ import { callClaude, deDash, extractJSON } from '@/lib/claude';
 import { verifyTurnstile } from '@/lib/turnstile';
 import { getClientIp } from '@/lib/rate-limit';
 import { enforceDailyQuota, resolveUsageIdentity } from '@/lib/usage-quota';
+import { sanitizeAiJurisdiction } from '@/lib/issue-jurisdiction';
 
 export const runtime = 'nodejs';
 
@@ -96,7 +97,12 @@ export async function POST(request: NextRequest) {
 - If the constituent shared a personal story, it is the heart of the message — lead with it and keep their meaning exactly.
 - Invent nothing about the constituent.
 
-Return ONLY JSON: {"body": "..."}`;
+Also classify which levels of government have real authority over this issue.
+Weights: 2 = primary authority, 1 = shares authority, 0 = no meaningful
+authority. Be strict about 0s: a US senator cannot fix trash pickup; a city
+council cannot fix Social Security.
+
+Return ONLY JSON: {"body": "...", "jurisdiction": {"federal": 0|1|2, "state": 0|1|2, "local": 0|1|2}}`;
 
   const user = campaign
     ? `CAMPAIGN: ${campaign.headline}
@@ -113,13 +119,16 @@ ${parsed.data.personalWhy?.trim() ? `THE CONSTITUENT'S OWN WORDS ABOUT WHY THIS 
 Draft the core message.`;
 
   try {
-    const rawOut = await callClaude(system, user2, 700);
-    const out = extractJSON(rawOut) as { body?: string } | null;
+    const rawOut = await callClaude(system, user2, 800);
+    const out = extractJSON(rawOut) as { body?: string; jurisdiction?: unknown } | null;
     const body = deDash(String(out?.body ?? '').trim());
     if (!body || body.length < 40) {
       return NextResponse.json({ error: 'Could not draft a message — please try again' }, { status: 502 });
     }
-    return NextResponse.json({ body });
+    // AI jurisdiction is advisory: the client applies it ONLY when no
+    // deterministic rule matched the issue text.
+    const jurisdiction = sanitizeAiJurisdiction(out?.jurisdiction)?.weights ?? null;
+    return NextResponse.json({ body, jurisdiction });
   } catch (err) {
     console.error('[generate-core] failed:', err);
     return NextResponse.json({ error: 'Message drafting is unavailable right now' }, { status: 503 });
