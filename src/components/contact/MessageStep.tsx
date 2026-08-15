@@ -403,6 +403,48 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
   useEffect(() => {
     const repsNeedingMessages = selectedReps.filter(rep => !messages[rep.name]);
     if (repsNeedingMessages.length === 0) return;
+    if (!state.coreMessage?.trim()) {
+      // Message-first: draft the ONE core message now (story + goal), then
+      // envelope it per official. Falls back to legacy per-official
+      // generation if core drafting fails.
+      void (async () => {
+        try {
+          const turnstileToken = await getToken().catch(() => '');
+          const res = await fetch('/api/generate-core-message', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              issue: state.issue || state.issueCategory || 'an issue that matters to me',
+              ask: state.ask || undefined,
+              personalWhy: state.personalWhy?.trim() || undefined,
+              turnstileToken: turnstileToken || undefined,
+            }),
+          });
+          const data = await res.json();
+          if (!res.ok || !data.body) throw new Error(data.error || 'core drafting failed');
+          dispatch({ type: 'SET_CORE', payload: data.body });
+          const built: Record<string, { subject: string; body: string }> = {};
+          for (const rep of repsNeedingMessages) {
+            built[rep.name] = buildEnvelope(String(data.body).trim(), rep, {
+              committeeName: null,
+              verb: null,
+              billRef: null,
+              stageGoal: undefined,
+              headline: state.issue || state.issueCategory || 'this issue',
+              senderName: state.userName || 'A constituent',
+              city: state.address?.city ?? '',
+              stateCode: state.address?.state ?? '',
+              zip: state.address?.zip ?? '',
+            });
+          }
+          dispatch({ type: 'SET_MESSAGES', payload: { ...messages, ...built } });
+        } catch (err) {
+          console.error('[contact] core drafting failed, using legacy generation:', err);
+          generateMessages();
+        }
+      })();
+      return;
+    }
     if (state.coreMessage?.trim()) {
       const built: Record<string, { subject: string; body: string }> = {};
       for (const rep of repsNeedingMessages) {

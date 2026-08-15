@@ -2,6 +2,8 @@
 
 import { useState, useCallback } from 'react';
 import type { ContactState, ContactAction } from './ContactFlow';
+import { getJurisdiction, matchLabelForLevel, type GovLevel } from '@/lib/issue-jurisdiction';
+import type { Official } from '@/lib/types';
 import { Button } from '@/components/ui/Button';
 import { AddressAutocomplete, type ParsedAddress } from '@/components/ui/AddressAutocomplete';
 
@@ -61,6 +63,17 @@ export function AddressStep({ state, dispatch }: AddressStepProps) {
 
       dispatch({ type: 'SET_OFFICIALS', payload: data.officials });
 
+      // No recipient picker: map the story to the RIGHT officials. Issue
+      // jurisdiction decides which levels matter (best/also); 'low'-relevance
+      // levels are dropped so a federal tax story doesn't email the school
+      // board. Fallback: everyone we found.
+      const guidance = getJurisdiction(state.issueCategory || state.issue || '');
+      const relevant = (data.officials as Official[]).filter((o) => {
+        const label = matchLabelForLevel(guidance, (o.level as GovLevel) ?? 'federal');
+        return label === 'best' || label === 'also';
+      });
+      dispatch({ type: 'SELECT_REPS', payload: relevant.length > 0 ? relevant : (data.officials as Official[]) });
+
       // Save address + officials to profile for logged-in users (fire-and-forget)
       fetch('/api/profile', {
         method: 'PATCH',
@@ -71,7 +84,7 @@ export function AddressStep({ state, dispatch }: AddressStepProps) {
         }),
       }).catch(() => {}); // Silently ignore for anonymous users (401)
 
-      dispatch({ type: 'GO_TO_STEP', payload: 'representative' });
+      dispatch({ type: 'GO_TO_STEP', payload: 'message' });
     } catch (err) {
       dispatch({
         type: 'SET_ERROR',

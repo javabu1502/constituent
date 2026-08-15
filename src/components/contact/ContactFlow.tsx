@@ -12,7 +12,6 @@ import { MessageStep } from './MessageStep';
 import { SendStep } from './SendStep';
 import { SupportNudge } from '@/components/ui/SupportNudge';
 import { ShareActions } from './ShareActions';
-import { ComposeStep } from './ComposeStep';
 import { useAutoSave, type SavedDraft } from '@/hooks/useAutoSave';
 import { trackEvent } from '@/lib/analytics';
 
@@ -173,23 +172,19 @@ function contactReducer(state: ContactState, action: ContactAction): ContactStat
   }
 }
 
-const STEPS = ['topic', 'compose', 'address', 'representative', 'message', 'send'] as const;
+const STEPS = ['topic', 'address', 'message', 'send'] as const;
 const STEP_LABELS: Record<string, string> = {
-  topic: 'Your Issue',
-  compose: 'Your Message',
-  address: 'Delivery',
-  representative: 'Who to Contact',
+  topic: 'Your Story',
+  address: 'Your Address',
   message: 'Review',
   send: 'Send',
   success: 'Done',
 };
 
 const STEP_DESCRIPTIONS: Record<string, string> = {
-  topic: 'Tell us what matters to you.',
-  compose: 'See and approve your message — before we ask for anything else.',
-  address: 'Your address finds the people who represent you.',
-  representative: 'Pick who receives it.',
-  message: 'Each official gets your approved message with their own greeting. Final look.',
+  topic: 'Tell us what matters to you and why.',
+  address: 'Your address maps you to the officials who actually represent you.',
+  message: 'Your message, addressed to your officials. Edit anything before it goes.',
   send: 'Send your messages.',
 };
 
@@ -556,13 +551,10 @@ export function ContactFlow() {
 
       {/* Step content card */}
       <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm overflow-hidden">
-        {state.step === 'compose' && (
-          <ComposeStep state={state} dispatch={wrappedDispatch} />
-        )}
         {state.step === 'address' && (
           <AddressStep state={state} dispatch={wrappedDispatch} />
         )}
-        {state.step === 'representative' && (
+        {false && state.step === 'representative' && (
           <RepStep state={state} dispatch={wrappedDispatch} onBack={goBack} />
         )}
         {state.step === 'topic' && (
