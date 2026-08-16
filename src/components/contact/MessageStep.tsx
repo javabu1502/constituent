@@ -7,6 +7,7 @@ import { PHONE_TIPS } from '@/lib/phone-tips';
 import { useTurnstile } from '@/components/ui/Turnstile';
 import { buildEnvelope } from '@/lib/envelope';
 import { hasJurisdictionRule, sanitizeAiJurisdiction } from '@/lib/issue-jurisdiction';
+import { detectCasework } from '@/lib/casework';
 import { salutationTitle } from '@/lib/utils';
 
 interface MessageStepProps {
@@ -594,6 +595,23 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
             : 'Edit as needed, then continue'}
         </p>
       </div>
+
+      {/* Personal-case detection: casework is what congressional offices are
+          genuinely FOR, but an email alone can't start it — tell them how. */}
+      {(() => {
+        const cw = detectCasework(`${state.issue || ''} ${state.ask || ''} ${state.personalWhy || ''}`);
+        if (!cw.isCasework) return null;
+        return (
+          <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700 rounded-xl">
+            <p className="text-sm text-blue-800 dark:text-blue-200 font-medium">
+              This sounds like a personal case — {cw.level === 'state' ? 'your state legislator&apos;s office' : 'congressional offices'} have caseworkers for exactly this.
+            </p>
+            <p className="text-xs text-blue-700 dark:text-blue-300 mt-1">
+              Sending this message is a good first step. Ask for &quot;casework help&quot; in your message — their office will usually send you a privacy release form so they can contact the agency on your behalf.
+            </p>
+          </div>
+        );
+      })()}
 
       {/* Who this goes to, and why — the bridge between the address they just
           entered and the officials they're suddenly looking at. */}

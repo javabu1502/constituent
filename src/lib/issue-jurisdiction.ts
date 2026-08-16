@@ -9,6 +9,9 @@
  * Client-safe: pure data + string matching, no server deps.
  */
 
+import { detectBillRefs } from './bill-refs';
+import { detectCasework } from './casework';
+
 export type GovLevel = 'federal' | 'state' | 'local';
 
 export interface JurisdictionGuidance {
@@ -23,6 +26,56 @@ interface JurisdictionRule {
 }
 
 const RULES: JurisdictionRule[] = [
+  {
+    // Federal agencies and services — casework territory. A state legislator
+    // cannot chase an IRS refund or expedite a passport.
+    pattern: /\birs\b|tax refund|internal revenue|passport|state department|\btsa\b|air traffic|\bfaa\b|airline|amtrak|federal student aid|\bfafsa\b|uscis|green card|customs/i,
+    guidance: {
+      weights: { federal: 2, state: 0, local: 0 },
+      why: { federal: 'These are federal agencies — congressional offices have caseworkers who deal with them directly.' },
+    },
+  },
+  {
+    // Congress regulating itself.
+    pattern: /members? of congress|congressional (?:stock|ethics|term|pay)|stock trading ban|insider trading by congress|filibuster|electoral college/i,
+    guidance: {
+      weights: { federal: 2, state: 0, local: 0 },
+      why: { federal: 'Only Congress can set rules for Congress.' },
+    },
+  },
+  {
+    // Unemployment INSURANCE is state-administered; \bemployment\b in the
+    // economy rule no longer swallows this word.
+    pattern: /unemployment/i,
+    guidance: {
+      weights: { federal: 1, state: 2, local: 0 },
+      why: {
+        state: 'Unemployment insurance is run by your state — benefits, eligibility, and the offices that pay claims.',
+        federal: 'Congress sets the federal framework and funds extensions.',
+      },
+    },
+  },
+  {
+    pattern: /data center/i,
+    guidance: {
+      weights: { federal: 1, state: 2, local: 2 },
+      why: {
+        state: 'State utility commissions decide who pays for the grid demand.',
+        local: 'Siting and zoning approvals happen at the county and city level.',
+      },
+    },
+  },
+  {
+    pattern: /tap water|\btaps?\b|faucet|drinking water|water quality|lead pipe/i,
+    guidance: {
+      weights: { federal: 1, state: 2, local: 2 },
+      why: {
+        local: 'Your water utility answers to local government.',
+        state: 'State environmental agencies enforce drinking-water standards.',
+        federal: 'The EPA sets the national standards.',
+      },
+    },
+  },
   {
     pattern: /immigra|border|asylum|visa|daca|refugee|deport|citizenship/i,
     guidance: {
@@ -57,13 +110,50 @@ const RULES: JurisdictionRule[] = [
     },
   },
   {
-    pattern: /education|school|student loan|teacher|tuition|college|curriculum|book ban/i,
+    // K-12: school boards genuinely decide things here.
+    pattern: /k-?12|\bschools?\b|teacher|curriculum|book ban|early childhood education|classroom|school board/i,
     guidance: {
       weights: { federal: 1, state: 2, local: 2 },
       why: {
         state: 'States set school funding, standards, and teacher policy — the biggest levers in education.',
         local: 'School boards and local officials decide budgets, curriculum details, and district policy.',
-        federal: 'Congress handles student loans and federal education funding.',
+        federal: 'Congress handles federal education funding.',
+      },
+    },
+  },
+  {
+    // Higher ed and student loans: the loan system is federal; the school
+    // board has nothing to do with it, so this is a separate rule from K-12.
+    pattern: /student loan|student debt|loan forgiveness|pell grant|tuition|college|higher education|universit/i,
+    guidance: {
+      weights: { federal: 2, state: 2, local: 0 },
+      why: {
+        federal: 'Student loans, Pell grants, and loan forgiveness are federal programs.',
+        state: 'States fund public universities and set in-state tuition policy.',
+      },
+    },
+  },
+  {
+    // Bare "education" (often just the category word): shared, but local only
+    // when a K-12 phrasing above says so.
+    pattern: /education/i,
+    guidance: {
+      weights: { federal: 1, state: 2, local: 1 },
+      why: {
+        state: 'States hold the biggest levers in education policy.',
+        federal: 'Congress handles federal education funding.',
+      },
+    },
+  },
+  {
+    // Broadband buildout money is federal (with state programs); removed
+    // from the infrastructure rule so the school board isn't cc'd.
+    pattern: /broadband|rural internet/i,
+    guidance: {
+      weights: { federal: 2, state: 2, local: 1 },
+      why: {
+        federal: 'Congress funds the broadband buildout programs.',
+        state: 'States run the broadband offices that award that money.',
       },
     },
   },
@@ -91,7 +181,8 @@ const RULES: JurisdictionRule[] = [
     },
   },
   {
-    pattern: /housing|rent|homeless|zoning|eviction|mortgage|affordable hous/i,
+    // \brent\b with suffixes: the bare token matched "diffe-rent".
+    pattern: /housing|\brent(?:s|al|ers?|ing)?\b|homeless|zoning|eviction|mortgage|affordable hous|landlord|tenant|security deposit|apartment/i,
     guidance: {
       weights: { federal: 1, state: 2, local: 2 },
       why: {
@@ -142,7 +233,7 @@ const RULES: JurisdictionRule[] = [
   {
     // \b on road/rail/traffic: bare tokens matched "abroad", "trail", and
     // "trafficking".
-    pattern: /\broads?\b|bridge|transit|infrastructure|broadband|highway|\brails?\b|railroad|\btraffic\b|pothole|transportation/i,
+    pattern: /\broads?\b|bridge|transit|infrastructure|highway|\brails?\b|railroad|(?<!air )\btraffic\b|pothole|transportation/i,
     guidance: {
       weights: { federal: 1, state: 2, local: 2 },
       why: {
@@ -164,7 +255,7 @@ const RULES: JurisdictionRule[] = [
     },
   },
   {
-    pattern: /econom|jobs|wage|inflation|worker|labor|union|small business|employment|cost of living|recession|debt ceiling|national debt|government shutdown|public finance/i,
+    pattern: /econom|jobs|wage|inflation|worker|labor|union|small business|\bemployment\b|cost of living|recession|debt ceiling|national debt|government shutdown|public finance/i,
     guidance: {
       weights: { federal: 2, state: 2, local: 1 },
       why: {
@@ -274,14 +365,14 @@ const RULES: JurisdictionRule[] = [
     },
   },
   {
-    pattern: /utilit|electric bill|power compan|energy bill|water bill|rate hike/i,
+    pattern: /utilit|electric bill|power compan|energy bill|water bill|power bill|rate hike/i,
     guidance: {
       weights: { federal: 1, state: 2, local: 1 },
       why: { state: 'State utility commissions approve rates and regulate providers.' },
     },
   },
   {
-    pattern: /\bdmv\b|driver'?s? licen|professional licen|occupational licen|barber licen|nursing licen/i,
+    pattern: /\bdmv\b|driver'?s? licen|vehicle registration|car registration|professional licen|occupational licen|barber licen|nursing licen/i,
     guidance: {
       weights: { federal: 0, state: 2, local: 0 },
       why: { state: 'Licensing — from driving to professions — is purely state-run.' },
@@ -290,7 +381,7 @@ const RULES: JurisdictionRule[] = [
   {
     // The purely local layer: if it involves a truck, a sidewalk, or a park,
     // a US senator cannot help.
-    pattern: /trash|garbage|sewer|sidewalk|streetlight|street light|noise complaint|\bparks?\b|library|snow removal|code enforcement|animal control|zoning permit|building permit/i,
+    pattern: /trash|garbage|sewer|sidewalk|streetlight|street light|noise complaint|\bparks?\b|library|snow removal|code enforcement|animal control|zoning permit|building permit|speed bump|crosswalk|stop sign/i,
     guidance: {
       weights: { federal: 0, state: 1, local: 2 },
       why: {
@@ -352,15 +443,49 @@ const DEFAULT_GUIDANCE: JurisdictionGuidance = {
 
 /**
  * Best-effort mapping from a free-text issue to the levels of government that
- * handle it. Falls back to "all levels somewhat relevant" for unknown issues.
+ * handle it. Signal priority: an explicit bill reference beats casework
+ * detection beats topic rules beats the default — naming "AB 156" or "my VA
+ * claim" says more about the right recipient than any topic word.
  */
 export function getJurisdiction(issueText: string): JurisdictionGuidance {
   const text = (issueText || '').trim();
   if (!text) return DEFAULT_GUIDANCE;
-  // Merge EVERY matching rule (max weight per level) instead of stopping at
-  // the first hit: "drug costs" is healthcare even though a policing rule
-  // also mentions drugs, and "school shooting" is guns AND education. With
-  // first-match, rule ORDER silently decided who got the message.
+
+  // 1. Explicit bill references: the strongest signal there is. Exclusive —
+  // "support AB 156" must not also email Congress, whatever topic words say.
+  const refs = detectBillRefs(text);
+  if (refs.federal.length > 0 || refs.state.length > 0) {
+    return {
+      weights: {
+        federal: refs.federal.length > 0 ? 2 : 0,
+        state: refs.state.length > 0 ? 2 : 0,
+        local: 0,
+      },
+      why: {
+        ...(refs.federal.length > 0 ? { federal: `You named a federal bill (${refs.federal[0]}) — that goes to Congress.` } : {}),
+        ...(refs.state.length > 0 ? { state: `You named a state bill (${refs.state[0]}) — that goes to your state legislature.` } : {}),
+      },
+    };
+  }
+
+  // 2. Casework: a personal case with an agency routes to the ONE level whose
+  // offices actually have caseworkers for it.
+  const casework = detectCasework(text);
+  if (casework.isCasework && casework.level) {
+    return {
+      weights: { federal: casework.level === 'federal' ? 2 : 0, state: casework.level === 'state' ? 2 : 0, local: 0 },
+      why:
+        casework.level === 'federal'
+          ? { federal: 'This reads like a personal case with a federal agency — congressional caseworkers handle exactly this.' }
+          : { state: 'This reads like a personal case with a state agency — your state legislator’s office can intervene.' },
+    };
+  }
+
+  // 3. Topic rules: merge EVERY matching rule (max weight per level) instead
+  // of stopping at the first hit: "drug costs" is healthcare even though a
+  // policing rule also mentions drugs, and "school shooting" is guns AND
+  // education. With first-match, rule ORDER silently decided who got the
+  // message.
   const matched = RULES.filter((rule) => rule.pattern.test(text));
   if (matched.length === 0) return DEFAULT_GUIDANCE;
   const merged: JurisdictionGuidance = { weights: { federal: 0, state: 0, local: 0 }, why: {} };
@@ -375,12 +500,30 @@ export function getJurisdiction(issueText: string): JurisdictionGuidance {
   return merged;
 }
 
-/** Did any hand-audited rule match? When true, rules are authoritative and
- * AI classification is ignored — the deterministic table is the guardrail. */
+/** Did any deterministic signal match (bill ref, casework, or topic rule)?
+ * When true, the table is authoritative and AI classification is ignored. */
 export function hasJurisdictionRule(issueText: string): boolean {
   const text = (issueText || '').trim();
   if (!text) return false;
+  const refs = detectBillRefs(text);
+  if (refs.federal.length > 0 || refs.state.length > 0) return true;
+  if (detectCasework(text).isCasework) return true;
   return RULES.some((rule) => rule.pattern.test(text));
+}
+
+/**
+ * The SELECTION policy: which levels actually receive the message. Primary
+ * (weight 2) levels only; weight 1 means "shares authority" and is context
+ * for the why-lines, NOT a mailing list. This is what put an open-borders
+ * message in a state senator's inbox — immigration carries state weight 1
+ * for licenses and tuition, and the old policy mailed every level >= 1.
+ * Fallback: if nothing is primary, weight-1 levels are better than nobody.
+ */
+export function selectLevels(guidance: JurisdictionGuidance): GovLevel[] {
+  const levels: GovLevel[] = ['federal', 'state', 'local'];
+  const primary = levels.filter((l) => guidance.weights[l] === 2);
+  if (primary.length > 0) return primary;
+  return levels.filter((l) => guidance.weights[l] === 1);
 }
 
 /** Clamp an AI-proposed jurisdiction into a valid guidance object, or null
