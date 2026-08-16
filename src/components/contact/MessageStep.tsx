@@ -8,6 +8,7 @@ import { useTurnstile } from '@/components/ui/Turnstile';
 import { buildEnvelope } from '@/lib/envelope';
 import { hasJurisdictionRule, sanitizeAiJurisdiction } from '@/lib/issue-jurisdiction';
 import { detectCasework } from '@/lib/casework';
+import { auditMessageQuality } from '@/lib/message-quality';
 import { salutationTitle } from '@/lib/utils';
 
 interface MessageStepProps {
@@ -105,6 +106,8 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
   // True when any message is a manual-compose starter draft instead of an
   // AI draft — shown as an amber notice instead of the red error.
   const [usedFallback, setUsedFallback] = useState(false);
+  // Best-practice warnings (non-blocking) surfaced on first Continue click.
+  const [qualityWarnings, setQualityWarnings] = useState<string[]>([]);
   const { getToken, TurnstileWidget } = useTurnstile();
 
   const currentRep = selectedReps[reviewIndex];
@@ -524,7 +527,8 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
   };
 
   const handleContinue = () => {
-    // Check all messages have content
+    // Check all messages have content and pass the best-practice gate.
+    const warnings: string[] = [];
     for (const rep of selectedReps) {
       const msg = messages[rep.name];
       if (!msg?.body?.trim()) {
@@ -535,6 +539,22 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
         setReviewIndex(selectedReps.indexOf(rep));
         return;
       }
+      const issues = auditMessageQuality(msg.body, { source: 'user' });
+      const block = issues.find((i) => i.level === 'block');
+      if (block) {
+        dispatch({ type: 'SET_ERROR', payload: `Message for ${rep.name}: ${block.detail}` });
+        setReviewIndex(selectedReps.indexOf(rep));
+        return;
+      }
+      for (const w of issues) {
+        if (w.level === 'warn' && !warnings.includes(w.detail)) warnings.push(w.detail);
+      }
+    }
+    // Warnings inform but never block — it's their message. Shown once; a
+    // second click proceeds.
+    if (warnings.length > 0 && qualityWarnings.length === 0) {
+      setQualityWarnings(warnings);
+      return;
     }
     dispatch({ type: 'SET_ERROR', payload: null });
     dispatch({ type: 'GO_TO_STEP', payload: 'send' });
@@ -634,6 +654,20 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
               {loadedCount} of {selectedReps.length} {contactMethod === 'phone' ? 'scripts' : 'messages'} ready
             </p>
           </div>
+        </div>
+      )}
+
+      {qualityWarnings.length > 0 && (
+        <div className="mb-4 p-3 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded-xl">
+          <p className="text-sm text-amber-800 dark:text-amber-300 font-medium">A quick check before you send:</p>
+          <ul className="text-xs text-amber-700 dark:text-amber-400 mt-1 space-y-1 list-disc pl-4">
+            {qualityWarnings.map((w) => (
+              <li key={w}>{w}</li>
+            ))}
+          </ul>
+          <p className="text-xs text-amber-700 dark:text-amber-400 mt-2">
+            These are suggestions, not rules — edit above, or continue as-is.
+          </p>
         </div>
       )}
 

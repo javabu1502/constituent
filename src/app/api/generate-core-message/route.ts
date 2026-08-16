@@ -7,6 +7,7 @@ import { getClientIp } from '@/lib/rate-limit';
 import { enforceDailyQuota, resolveUsageIdentity } from '@/lib/usage-quota';
 import { sanitizeAiJurisdiction } from '@/lib/issue-jurisdiction';
 import { validateCampaignAsk } from '@/lib/envelope';
+import { auditMessageQuality, hasBlockingIssue } from '@/lib/message-quality';
 
 export const runtime = 'nodejs';
 
@@ -95,9 +96,12 @@ export async function POST(request: NextRequest) {
 - Do NOT include a greeting, sign-off, the constituent's name, or their address anywhere.
 - Do NOT include a final "I ask you to vote..." sentence — the ask is added later.
 - First person, 110–180 words, plain human language. No em dashes. No AI-sounding phrases.
+- ONE issue only — the one given. Do not drift into other topics.
 - Weave the campaign's talking points in naturally where they strengthen the case; never paste them verbatim as a list.
 - If the constituent shared a personal story, it is the heart of the message — lead with it and keep their meaning exactly.
-- Invent nothing about the constituent.
+- Invent nothing about the constituent, and invent no statistics, studies, or figures. If the campaign talking points supply a number you may use it; otherwise argue from the constituent's experience and plain reasoning — never "studies show".
+- Respectful and firm. No insults, no partisan name-calling, no threats, and no "or you'll lose my vote" — offices discount those.
+- No ALL-CAPS words, no stacked exclamation points.
 
 Also write "subject": an email subject line in the constituent's own voice — specific to their actual concern, under 80 characters, no official's name. Never generic labels like "A constituent message", "Regarding my concerns", or a bare topic word. Good: "Groceries in our house cost a third more than in 2022". Bad: "A constituent message: Inflation".
 
@@ -141,10 +145,21 @@ ${parsed.data.personalWhy?.trim() ? `THE CONSTITUENT'S OWN WORDS ABOUT WHY THIS 
 Draft the core message.`;
 
   try {
-    const rawOut = await callClaude(system, user2, 1100);
-    const out = extractJSON(rawOut) as { body?: string; subject?: unknown; opening?: unknown; ask?: unknown; jurisdiction?: unknown } | null;
-    const body = deDash(String(out?.body ?? '').trim());
-    if (!body || body.length < 40) {
+    // Quality gate with one retry: a draft that trips a blocking check
+    // (threats, AI leakage, placeholders) is regenerated once, then refused —
+    // a bad draft must never be the thing we show a constituent.
+    type CoreOut = { body?: string; subject?: unknown; opening?: unknown; ask?: unknown; jurisdiction?: unknown } | null;
+    let out: CoreOut = null;
+    let body = '';
+    for (let attempt = 0; attempt < 2; attempt++) {
+      const rawOut = await callClaude(system, user2, 1100);
+      out = extractJSON(rawOut) as CoreOut;
+      body = deDash(String(out?.body ?? '').trim());
+      if (!body || body.length < 40) continue;
+      if (!hasBlockingIssue(auditMessageQuality(body, { source: 'ai' }))) break;
+      body = '';
+    }
+    if (!body) {
       return NextResponse.json({ error: 'Could not draft a message — please try again' }, { status: 502 });
     }
     // Frame fields are best-effort: null (deterministic seeded pools
