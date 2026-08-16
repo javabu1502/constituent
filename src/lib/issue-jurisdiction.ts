@@ -68,7 +68,9 @@ const RULES: JurisdictionRule[] = [
     },
   },
   {
-    pattern: /climate|environment|clean energy|emission|pollution|epa|renewable|drilling|wildfire/i,
+    // \bepa\b: the bare token matched "S-epa-ration" and pulled immigration
+    // family-separation stories into environmental routing.
+    pattern: /climate|environment|clean energy|emission|pollution|\bepa\b|renewable|drilling|wildfire|\benergy\b|global warming|greenhouse/i,
     guidance: {
       weights: { federal: 2, state: 2, local: 1 },
       why: {
@@ -79,7 +81,7 @@ const RULES: JurisdictionRule[] = [
     },
   },
   {
-    pattern: /gun|firearm|second amendment|shooting|red flag/i,
+    pattern: /\bguns?\b|firearm|second amendment|shooting|red flag/i,
     guidance: {
       weights: { federal: 1, state: 2, local: 0 },
       why: {
@@ -100,7 +102,11 @@ const RULES: JurisdictionRule[] = [
     },
   },
   {
-    pattern: /(?<!property )\btax(?!i)|\birs\b|tariff|budget|spending|deficit/i,
+    // Two lookbehinds: "Property Tax" followed by its own category word
+    // "Taxation" must not re-trigger federal weight. Bare "spending" pulled
+    // Defense Spending toward state legislators — only fiscal-process
+    // phrasings belong here.
+    pattern: /(?<!property )(?<!property tax )\btax(?!i)|\birs\b|tariff|budget|government spending|federal spending|spending bill|deficit/i,
     guidance: {
       weights: { federal: 2, state: 2, local: 1 },
       why: {
@@ -123,7 +129,7 @@ const RULES: JurisdictionRule[] = [
     // Bare "drug" is too greedy — it pulled Medicare drug coverage into
     // city-council territory. Only drug-CRIME phrasings belong here; pricing
     // and coverage phrasings are handled by the health rules above.
-    pattern: /police|crime|criminal justice|prison|sentencing|bail|public safety|drug traffick|drug deal|drug abuse|drug overdose|drug epidemic|illegal drug|fentanyl|opioid/i,
+    pattern: /police|crime|criminal justice|law enforcement|prison|sentencing|bail|public safety|drug traffick|drug deal|drug abuse|drug overdose|drug epidemic|illegal drug|fentanyl|opioid|human traffick/i,
     guidance: {
       weights: { federal: 1, state: 2, local: 2 },
       why: {
@@ -134,7 +140,9 @@ const RULES: JurisdictionRule[] = [
     },
   },
   {
-    pattern: /road|bridge|transit|infrastructure|broadband|highway|rail|traffic|pothole/i,
+    // \b on road/rail/traffic: bare tokens matched "abroad", "trail", and
+    // "trafficking".
+    pattern: /\broads?\b|bridge|transit|infrastructure|broadband|highway|\brails?\b|railroad|\btraffic\b|pothole|transportation/i,
     guidance: {
       weights: { federal: 1, state: 2, local: 2 },
       why: {
@@ -156,7 +164,7 @@ const RULES: JurisdictionRule[] = [
     },
   },
   {
-    pattern: /economy|jobs|wage|inflation|worker|labor|union|small business|employment/i,
+    pattern: /econom|jobs|wage|inflation|worker|labor|union|small business|employment|cost of living|recession|debt ceiling|national debt|government shutdown|public finance/i,
     guidance: {
       weights: { federal: 2, state: 2, local: 1 },
       why: {
@@ -176,7 +184,9 @@ const RULES: JurisdictionRule[] = [
     },
   },
   {
-    pattern: /foreign|ukraine|israel|china|nato|war|sanction|trade deal/i,
+    // \bwar\b: bare "war" matched "global warming". The country list mirrors
+    // the issue picker — Iran and Russia were missing and fell to the default.
+    pattern: /foreign|ukraine|israel|palestin|china|russia|\biran\b|taiwan|venezuela|north korea|\bnato\b|\bwar\b|sanction|trade deal|international affairs/i,
     guidance: {
       weights: { federal: 2, state: 0, local: 0 },
       why: {
@@ -185,7 +195,27 @@ const RULES: JurisdictionRule[] = [
     },
   },
   {
-    pattern: /child care|childcare|family leave|foster|adoption/i,
+    // Defense and national security are federal-only — a state legislator
+    // has no vote on the Pentagon budget. Veterans issues stay in their own
+    // rule (states run veterans homes), and the merge keeps that state weight.
+    pattern: /defense|\bmilitary\b|armed forces|national security|pentagon/i,
+    guidance: {
+      weights: { federal: 2, state: 0, local: 0 },
+      why: { federal: 'Defense and national security run entirely through Congress.' },
+    },
+  },
+  {
+    pattern: /social welfare|safety net|\bwic\b|\btanf\b|universal basic income|disability benefit|welfare program/i,
+    guidance: {
+      weights: { federal: 2, state: 2, local: 0 },
+      why: {
+        federal: 'Congress funds and sets the rules for the big safety-net programs.',
+        state: 'States administer them and decide eligibility details and supplements.',
+      },
+    },
+  },
+  {
+    pattern: /child care|childcare|family leave|foster|adoption|\bfamilies\b|fertility|screen time/i,
     guidance: {
       weights: { federal: 1, state: 2, local: 1 },
       why: {
@@ -214,7 +244,7 @@ const RULES: JurisdictionRule[] = [
     },
   },
   {
-    pattern: /\bai\b|artificial intelligence|social media|data privacy|big tech|crypto|online safety|deepfake/i,
+    pattern: /\bai\b|artificial intelligence|social media|data privacy|big tech|crypto|online safety|child safety|deepfake|\btechnology\b|telecommunication|cybersecurit|net neutrality|age verif|autonomous vehicle|semiconductor/i,
     guidance: {
       weights: { federal: 2, state: 2, local: 0 },
       why: {

@@ -98,3 +98,30 @@ describe('federal-only health programs', () => {
     expect(w.federal).toBe(2);
   });
 });
+
+describe('every selectable issue routes through a hand-audited rule', () => {
+  it('no curated issue falls to the default guidance', async () => {
+    const { hasJurisdictionRule } = await import('../issue-jurisdiction');
+    const { POPULAR_TOPICS } = await import('../popular-topics');
+    const misses: string[] = [];
+    for (const topic of POPULAR_TOPICS) {
+      for (const sub of topic.subtopics) {
+        if (!hasJurisdictionRule(`${sub.label} ${sub.category}`)) misses.push(`${sub.label} [${sub.category}]`);
+      }
+    }
+    expect(misses).toEqual([]);
+  });
+
+  it('audit regressions stay fixed', async () => {
+    const { getJurisdiction } = await import('../issue-jurisdiction');
+    // "Separation" contains "epa" — must not hit the climate rule.
+    expect(getJurisdiction('Family Separation Immigration').weights).toEqual({ federal: 2, state: 1, local: 0 });
+    // Bare "spending" pulled defense toward state legislators.
+    expect(getJurisdiction('Defense Spending Armed Forces and National Security').weights).toEqual({ federal: 2, state: 0, local: 0 });
+    // The category word "Taxation" must not give property tax federal weight.
+    expect(getJurisdiction('Property Tax Taxation').weights).toEqual({ federal: 0, state: 2, local: 2 });
+    // Countries missing from the foreign-policy list fell to the default.
+    expect(getJurisdiction('Iran International Affairs').weights).toEqual({ federal: 2, state: 0, local: 0 });
+    expect(getJurisdiction('global warming').weights.state).toBe(2);
+  });
+});
