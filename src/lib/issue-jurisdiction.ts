@@ -34,11 +34,24 @@ const RULES: JurisdictionRule[] = [
     },
   },
   {
-    pattern: /health|medicare|medicaid|insurance|prescription|drug price|mental health|reproductive|abortion|hospital/i,
+    // Purely federal health programs. Medicare deliberately lives here and
+    // NOT in the shared healthcare rule below: a state legislator can no more
+    // change Medicare or ACA subsidies than fix Social Security. (Merge takes
+    // the max per level, so it must not appear in both.)
+    pattern: /medicare|\baca\b|obamacare|affordable care act|premium tax credit|marketplace subsid/i,
+    guidance: {
+      weights: { federal: 2, state: 0, local: 0 },
+      why: {
+        federal: 'Medicare and the ACA are federal programs — only Congress can change their funding, subsidies, or rules.',
+      },
+    },
+  },
+  {
+    pattern: /health|medicaid|insurance|prescription|drug price|mental health|reproductive|abortion|hospital/i,
     guidance: {
       weights: { federal: 2, state: 2, local: 0 },
       why: {
-        federal: 'Congress controls Medicare, the ACA, and drug pricing policy.',
+        federal: 'Congress sets national health programs and drug pricing policy.',
         state: 'States run Medicaid, regulate insurers and hospitals, and set many care access laws.',
       },
     },
@@ -107,7 +120,10 @@ const RULES: JurisdictionRule[] = [
     },
   },
   {
-    pattern: /police|crime|criminal justice|prison|sentencing|bail|public safety|drug|fentanyl/i,
+    // Bare "drug" is too greedy — it pulled Medicare drug coverage into
+    // city-council territory. Only drug-CRIME phrasings belong here; pricing
+    // and coverage phrasings are handled by the health rules above.
+    pattern: /police|crime|criminal justice|prison|sentencing|bail|public safety|drug traffick|drug deal|drug abuse|drug overdose|drug epidemic|illegal drug|fentanyl|opioid/i,
     guidance: {
       weights: { federal: 1, state: 2, local: 2 },
       why: {

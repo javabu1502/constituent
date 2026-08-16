@@ -76,3 +76,25 @@ describe('AI jurisdiction guardrails', () => {
     expect(sanitizeAiJurisdiction(null)).toBeNull();
   });
 });
+
+describe('federal-only health programs', () => {
+  it('ACA and Medicare never route to state legislators', async () => {
+    const { getJurisdiction } = await import('../issue-jurisdiction');
+    expect(getJurisdiction('protect ACA subsidies').weights).toEqual({ federal: 2, state: 0, local: 0 });
+    expect(getJurisdiction('Obamacare premium costs').weights).toEqual({ federal: 2, state: 0, local: 0 });
+    expect(getJurisdiction('Medicare drug coverage').weights.state).toBe(0);
+  });
+
+  it('Medicaid and insurance regulation stay shared with states', async () => {
+    const { getJurisdiction } = await import('../issue-jurisdiction');
+    expect(getJurisdiction('expand Medicaid in our state').weights).toEqual({ federal: 2, state: 2, local: 0 });
+    // Mixed mention: max-merge keeps both levels in play.
+    expect(getJurisdiction('Medicare and Medicaid cuts').weights).toEqual({ federal: 2, state: 2, local: 0 });
+  });
+
+  it('ACA health insurance phrasing keeps federal primary', async () => {
+    const { getJurisdiction } = await import('../issue-jurisdiction');
+    const w = getJurisdiction('ACA health insurance subsidies expiring').weights;
+    expect(w.federal).toBe(2);
+  });
+});
