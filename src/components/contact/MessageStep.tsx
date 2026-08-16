@@ -480,6 +480,8 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
               stateCode: state.address?.state ?? '',
               zip: state.address?.zip ?? '',
               coreSubject: typeof data.subject === 'string' ? data.subject : null,
+              coreOpening: typeof data.opening === 'string' ? data.opening : null,
+              coreAsk: typeof data.ask === 'string' ? data.ask : null,
             });
           }
           dispatch({ type: 'SET_MESSAGES', payload: { ...messages, ...built } });

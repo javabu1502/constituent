@@ -6,6 +6,7 @@ import { verifyTurnstile } from '@/lib/turnstile';
 import { getClientIp } from '@/lib/rate-limit';
 import { enforceDailyQuota, resolveUsageIdentity } from '@/lib/usage-quota';
 import { sanitizeAiJurisdiction } from '@/lib/issue-jurisdiction';
+import { validateCampaignAsk } from '@/lib/envelope';
 
 export const runtime = 'nodejs';
 
@@ -63,12 +64,13 @@ export async function POST(request: NextRequest) {
     is_official: boolean | null;
     bill_ref: string | null;
     bill_title: string | null;
+    stage_goal?: string | null;
   } | null = null;
   if (parsed.data.campaignSlug) {
     const admin = createAdminClient();
     const { data } = await admin
       .from('campaigns')
-      .select('headline, description, direction, message_template, is_official, bill_ref, bill_title, issue_area')
+      .select('headline, description, direction, message_template, is_official, bill_ref, bill_title, issue_area, stage_goal')
       .eq('slug', parsed.data.campaignSlug)
       .eq('approval_status', 'approved')
       .single();
@@ -99,19 +101,37 @@ export async function POST(request: NextRequest) {
 
 Also write "subject": an email subject line in the constituent's own voice — specific to their actual concern, under 80 characters, no official's name. Never generic labels like "A constituent message", "Regarding my concerns", or a bare topic word. Good: "Groceries in our house cost a third more than in 2022". Bad: "A constituent message: Inflation".
 
+Also write "opening": one or two sentences that open the email, before the core — the constituent introducing why they are writing, in their own voice. No official's name, title, chamber, or committee (unknown at this point). Do NOT use stock phrasings like "I am writing to you as your constituent" — make it natural and specific to this person and issue. Vary sentence structure freely.
+
+Also write "ask": the single closing request sentence of the email. In the constituent's voice, matching their position exactly. No greeting, no sign-off, no official's name.
+
 Also classify which levels of government have real authority over this issue.
 Weights: 2 = primary authority, 1 = shares authority, 0 = no meaningful
 authority. Be strict about 0s: a US senator cannot fix trash pickup; a city
 council cannot fix Social Security.
 
-Return ONLY JSON: {"body": "...", "subject": "...", "jurisdiction": {"federal": 0|1|2, "state": 0|1|2, "local": 0|1|2}}`;
+Return ONLY JSON: {"body": "...", "subject": "...", "opening": "...", "ask": "...", "jurisdiction": {"federal": 0|1|2, "state": 0|1|2, "local": 0|1|2}}`;
+
+  // The precise action the ask sentence must carry (validated after).
+  const stanceVerb =
+    campaign?.is_official && parsed.data.stance && parsed.data.stance !== 'undecided'
+      ? parsed.data.stance
+      : campaign && !campaign.is_official
+      ? campaign.direction === 'oppose' ? 'oppose' : 'support'
+      : null;
+  const askInstruction = campaign?.bill_ref
+    ? `THE ASK SENTENCE MUST: name ${campaign.bill_ref} and ask them to ${
+        campaign.stage_goal === 'cosponsor' ? `cosponsor it` : stanceVerb === 'oppose' ? 'oppose it / vote no' : 'support it / vote yes'
+      }.`
+    : '';
 
   const user = campaign
     ? `CAMPAIGN: ${campaign.headline}
 ${campaign.bill_ref ? `BILL: ${campaign.bill_ref}${campaign.bill_title ? ` — ${campaign.bill_title}` : ''}` : ''}
 ABOUT: ${campaign.description}
 ${campaign.message_template ? `CAMPAIGN TALKING POINTS: ${campaign.message_template}` : ''}
-POSITION: ${position}`
+POSITION: ${position}
+${askInstruction}`
     : `ISSUE: ${parsed.data.issue}
 ${parsed.data.ask ? `THE CONSTITUENT'S GOAL: ${parsed.data.ask}` : ''}
 POSITION: ${position}`;
@@ -121,20 +141,34 @@ ${parsed.data.personalWhy?.trim() ? `THE CONSTITUENT'S OWN WORDS ABOUT WHY THIS 
 Draft the core message.`;
 
   try {
-    const rawOut = await callClaude(system, user2, 900);
-    const out = extractJSON(rawOut) as { body?: string; subject?: unknown; jurisdiction?: unknown } | null;
+    const rawOut = await callClaude(system, user2, 1100);
+    const out = extractJSON(rawOut) as { body?: string; subject?: unknown; opening?: unknown; ask?: unknown; jurisdiction?: unknown } | null;
     const body = deDash(String(out?.body ?? '').trim());
     if (!body || body.length < 40) {
       return NextResponse.json({ error: 'Could not draft a message — please try again' }, { status: 502 });
     }
-    // Subject is best-effort: null (deterministic fallback client-side) beats
-    // a generic or degenerate one slipping through.
+    // Frame fields are best-effort: null (deterministic seeded pools
+    // client-side) beats a generic or wrong one slipping through.
     const rawSubject = deDash(String(out?.subject ?? '')).replace(/^["'\s]+|["'\s]+$/g, '');
     const subject = rawSubject.length >= 8 && !/constituent message/i.test(rawSubject) ? rawSubject.slice(0, 90) : null;
+    const rawOpening = deDash(String(out?.opening ?? '').trim());
+    const opening =
+      rawOpening.length >= 20 && rawOpening.length <= 400 && !/^dear\b/i.test(rawOpening) && !/i am writing to you as your constituent because your vote/i.test(rawOpening)
+        ? rawOpening
+        : null;
+    const rawAsk = deDash(String(out?.ask ?? '').trim());
+    // Campaign asks must name the bill and match the direction exactly —
+    // anything off falls back to the deterministic closers.
+    const ask =
+      rawAsk.length >= 10 && rawAsk.length <= 300 && !/^dear\b/i.test(rawAsk)
+        ? campaign?.bill_ref
+          ? validateCampaignAsk(rawAsk, campaign.bill_ref, stanceVerb, campaign.stage_goal) ? rawAsk : null
+          : rawAsk
+        : null;
     // AI jurisdiction is advisory: the client applies it ONLY when no
     // deterministic rule matched the issue text.
     const jurisdiction = sanitizeAiJurisdiction(out?.jurisdiction)?.weights ?? null;
-    return NextResponse.json({ body, subject, jurisdiction });
+    return NextResponse.json({ body, subject, opening, ask, jurisdiction });
   } catch (err) {
     console.error('[generate-core] failed:', err);
     return NextResponse.json({ error: 'Message drafting is unavailable right now' }, { status: 503 });
