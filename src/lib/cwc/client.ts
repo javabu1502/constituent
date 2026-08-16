@@ -1,5 +1,5 @@
 import { ProxyAgent, fetch as undiciFetch } from 'undici';
-import { CWC_ENDPOINTS, MAX_MESSAGES_PER_SECOND, type Chamber } from './constants';
+import { CWC_ENDPOINTS, MAX_MESSAGES_PER_SECOND, isInScwcMaintenanceWindow, type Chamber } from './constants';
 import { buildCwcXml } from './xml';
 import type { CwcDelivery } from './types';
 
@@ -204,12 +204,22 @@ export async function loadActiveOfficeCodes(chamber: 'house' | 'senate', mode: M
  * Send many deliveries while honoring George's 5–10 messages/second ceiling.
  * Sequential with fixed spacing (default 5/sec) so we never spike the endpoint;
  * one failure never aborts the batch — it's captured per-item.
+ *
+ * Refuses to START during an SCWC maintenance window (Sun 12a–6a, Wed 5a–7a
+ * ET) — sends there hit intermittent outages and burn DeliveryIds on retries.
+ * Pass `ignoreMaintenanceWindow: true` only for House-only batches (the
+ * windows are Senate infrastructure); `now` is injectable for tests.
  */
 export async function sendBatch<T extends CwcDelivery>(
   deliveries: T[],
   send: (d: T) => Promise<CwcResult>,
-  opts: { maxPerSecond?: number } = {},
+  opts: { maxPerSecond?: number; ignoreMaintenanceWindow?: boolean; now?: Date } = {},
 ): Promise<Array<{ delivery: T; result?: CwcResult; error?: string }>> {
+  if (!opts.ignoreMaintenanceWindow && isInScwcMaintenanceWindow(opts.now ?? new Date())) {
+    throw new Error(
+      'SCWC maintenance window in progress (Sun 12a–6a / Wed 5a–7a US Eastern) — batch aborted; retry after the window',
+    );
+  }
   const rate = Math.max(1, Math.min(10, opts.maxPerSecond ?? MAX_MESSAGES_PER_SECOND));
   const gapMs = Math.ceil(1000 / rate);
   const out: Array<{ delivery: T; result?: CwcResult; error?: string }> = [];

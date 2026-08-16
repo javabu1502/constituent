@@ -21,7 +21,19 @@ export {
   loadActiveOfficeCodes, sendBatch,
   checkEgressIp, type CwcResult,
 } from './client';
-export { stripSignatureBlock, blocksFederalDelivery } from './content';
+export {
+  stripSignatureBlock, blocksFederalDelivery,
+  containsSignatureBlock, cwcSendableProblems, assertCwcSendable, CwcComplianceError,
+} from './content';
+export {
+  getOrCreateDeliveryId, recordDeliveryResult, statusFromHttp, xmlSha256,
+  setDeliveryLogClientFactory,
+  type CwcEnvironment, type CwcDeliveryStatus, type DeliveryLogRow,
+} from './delivery-log';
+export {
+  sendCwcDelivery, getActiveOfficeCodesCached, clearActiveOfficeCache,
+  type SendCwcOptions, type SendCwcOutcome, type ActiveOfficeOptions,
+} from './send';
 export {
   resolveOfficeCode,
   houseOfficeCode,
@@ -29,6 +41,7 @@ export {
   senateSeatCodesForState,
   isValidOfficeCode,
   SENATE_SEAT_CODES,
+  SENATE_TEST_OFFICE_CODES,
   type OfficeResolution,
 } from './offices';
 export {

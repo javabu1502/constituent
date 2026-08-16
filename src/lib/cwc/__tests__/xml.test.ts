@@ -152,6 +152,66 @@ describe('buildCwcXml', () => {
     expect(xml.indexOf('<OrganizationStatement>')).toBeLessThan(xml.indexOf('<ConstituentMessage>'));
   });
 
+  it('strips the signature block (name + address) from the body before render', () => {
+    const xml = buildCwcXml(
+      validDelivery({
+        message: {
+          subject: 'Please support lowering insulin prices',
+          topics: ['Health'],
+          constituentMessage:
+            'Dear Senator Smith,\n\nAs a nurse, I see insulin costs hurt my patients.\n\nSincerely,\nJane Doe\nNew York, NY 10118',
+        },
+      }),
+    );
+    const body = xml.match(/<ConstituentMessage>([\s\S]*?)<\/ConstituentMessage>/)![1];
+    expect(body).toContain('insulin costs hurt my patients');
+    expect(body).not.toContain('Sincerely');
+    expect(body).not.toContain('Jane Doe'); // name lives ONLY in <Constituent> tags
+    expect(body).not.toContain('10118'); // address/zip must not survive in the body
+    // The name/zip still appear in their structured tags.
+    expect(xml).toContain('<LastName>Doe</LastName>');
+    expect(xml).toContain('<Zip>10118-0110</Zip>');
+  });
+
+  it('honors an externally supplied deliveryId (idempotent retry path)', () => {
+    const id = 'a'.repeat(32);
+    const xml = buildCwcXml(validDelivery({ deliveryId: id }));
+    expect(xml).toContain(`<DeliveryId>${id}</DeliveryId>`);
+  });
+
+  it('rejects a MoreInfo value that does not parse as a URL', () => {
+    const withUrl = (moreInfoUrl: string) =>
+      validDelivery({ message: { ...validDelivery().message, moreInfoUrl } });
+    expect(() => buildCwcXml(withUrl('not a url'))).toThrow(/does not parse as a URL/);
+    expect(() => buildCwcXml(withUrl('ftp://example.com/x'))).toThrow(/does not parse as a URL/);
+    expect(buildCwcXml(withUrl('https://mydemocracy.app/c/insulin'))).toContain(
+      '<MoreInfo>https://mydemocracy.app/c/insulin</MoreInfo>',
+    );
+  });
+
+  it('enforces organization minimum lengths when the fields are present', () => {
+    const org = (organization: NonNullable<CwcDelivery['organization']>) => validDelivery({ organization });
+    expect(() => buildCwcXml(org({ name: 'AB' }))).toThrow(/organization\.name must be ≥3/);
+    expect(() => buildCwcXml(org({ name: 'Coalition', contactName: 'X' }))).toThrow(/contactName must be ≥2/);
+    expect(() => buildCwcXml(org({ name: 'Coalition', about: 'tiny' }))).toThrow(/about must be ≥6/);
+    expect(() => buildCwcXml(org({ name: 'Coalition', contactName: 'Jo', about: 'A real about line.' }))).not.toThrow();
+  });
+
+  it('requires DeliveryAgentContactName ≥6 chars (env)', () => {
+    process.env.CWC_CONTACT_NAME = 'Jared';
+    expect(() => buildCwcXml(validDelivery())).toThrow(/CWC_CONTACT_NAME must be ≥6/);
+  });
+
+  it('drops Address2 / ConstituentOrganization under 2 chars instead of erroring', () => {
+    const c = validDelivery().constituent;
+    const short = buildCwcXml(validDelivery({ constituent: { ...c, address2: 'A', constituentOrganization: 'B' } }));
+    expect(short).not.toContain('<Address2>');
+    expect(short).not.toContain('<ConstituentOrganization>');
+    const kept = buildCwcXml(validDelivery({ constituent: { ...c, address2: '4B', constituentOrganization: 'NY Nurses' } }));
+    expect(kept).toContain('<Address2>4B</Address2>');
+    expect(kept).toContain('<ConstituentOrganization>NY Nurses</ConstituentOrganization>');
+  });
+
   it('collects multiple problems into one error', () => {
     try {
       buildCwcXml(

@@ -3,6 +3,7 @@ import { createClient } from '@/lib/supabase/server';
 import {
   buildCwcXml, buildCampaignId, checkEgressIp,
   validateHouse, sendHouse, sendSenate,
+  cwcSendableProblems,
   type CwcDelivery,
 } from '@/lib/cwc';
 
@@ -60,9 +61,18 @@ export async function GET(request: NextRequest) {
   const action: 'preview' | 'validate' | 'send' =
     rawAction === 'validate' || rawAction === 'send' ? rawAction : 'preview';
 
+  const sample = sampleDelivery(chamber);
+
+  // Pre-send compliance gate (state-bill block, bill⇒stance, signature check)
+  // runs on EVERY action — a preview that would fail the gate should say so.
+  const gateProblems = cwcSendableProblems({ message: sample.message, billLevel: 'federal' });
+  if (gateProblems.length) {
+    return NextResponse.json({ error: 'Compliance gate failed', problems: gateProblems }, { status: 400 });
+  }
+
   let xml: string;
   try {
-    xml = buildCwcXml(sampleDelivery(chamber));
+    xml = buildCwcXml(sample);
   } catch (e) {
     return NextResponse.json({ error: 'XML build failed', detail: (e as Error).message }, { status: 400 });
   }
@@ -79,9 +89,9 @@ export async function GET(request: NextRequest) {
     let result;
     if (action === 'validate') {
       if (chamber !== 'house') return NextResponse.json({ error: 'validate is House-only; Senate test env is send-only' }, { status: 400 });
-      result = await validateHouse(sampleDelivery(chamber), 'uat');
+      result = await validateHouse(sample, 'uat');
     } else {
-      result = chamber === 'house' ? await sendHouse(sampleDelivery(chamber), 'uat') : await sendSenate(sampleDelivery(chamber), 'uat');
+      result = chamber === 'house' ? await sendHouse(sample, 'uat') : await sendSenate(sample, 'uat');
     }
     return NextResponse.json({ chamber, action, egressIp, result, xml });
   } catch (e) {

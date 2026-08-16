@@ -112,8 +112,32 @@ export const FIELD_LIMITS = {
   subjectMax: 500,
   messageMin: 6,
   messageMax: 10_000,
+  organizationAboutMin: 6,
   organizationAboutMax: 500,
+  organizationMin: 3,
+  organizationContactNameMin: 2,
+  deliveryAgentContactNameMin: 6,
 } as const;
 
 // Production send-rate ceiling George gave us: 5–10 messages/second.
 export const MAX_MESSAGES_PER_SECOND = 5;
+
+/**
+ * SCWC scheduled maintenance windows (SOAPBox Technical Information page):
+ * Sunday 12:00a–6:00a and Wednesday 5:00a–7:00a, US Eastern. Sends during a
+ * window hit intermittent outages, so the batch sender refuses to start.
+ * Evaluated in America/New_York so EST/EDT shifts are handled by Intl.
+ */
+export function isInScwcMaintenanceWindow(date: Date = new Date()): boolean {
+  const parts = new Intl.DateTimeFormat('en-US', {
+    timeZone: 'America/New_York',
+    weekday: 'short',
+    hour: 'numeric',
+    hour12: false,
+  }).formatToParts(date);
+  const weekday = parts.find((p) => p.type === 'weekday')?.value;
+  const hour = Number(parts.find((p) => p.type === 'hour')?.value) % 24; // "24" → 0
+  if (weekday === 'Sun' && hour < 6) return true; // Sun 12:00a–5:59a
+  if (weekday === 'Wed' && hour >= 5 && hour < 7) return true; // Wed 5:00a–6:59a
+  return false;
+}

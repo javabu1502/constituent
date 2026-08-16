@@ -6,6 +6,7 @@ import {
   FIELD_LIMITS,
   LOC_TOPIC_SET,
 } from './constants';
+import { stripSignatureBlock } from './content';
 import type { CwcDelivery } from './types';
 
 /** Raised when a delivery can't produce schema-valid XML. Message lists every
@@ -90,14 +91,22 @@ export function buildCwcXml(delivery: CwcDelivery): string {
   for (const t of m.topics ?? []) {
     if (!LOC_TOPIC_SET.has(t)) problems.push(`message topic "${t}" is not a valid LOC policy area`);
   }
-  const hasOrgStatement = !!m.organizationStatement?.trim();
-  const hasConstituentMessage = !!m.constituentMessage?.trim();
+  // George's grouping rule: the constituent's name/address must never ride in
+  // the body (it's already in the structured <Constituent> tags, and signature
+  // blocks break the offices' ~80%-similarity campaign grouping). Strip the
+  // closing block HERE, at the last common point before render, so every send
+  // path gets it regardless of what upstream generation produced.
+  const orgStatement = m.organizationStatement ? stripSignatureBlock(m.organizationStatement) : m.organizationStatement;
+  const constituentMessage = m.constituentMessage ? stripSignatureBlock(m.constituentMessage) : m.constituentMessage;
+
+  const hasOrgStatement = !!orgStatement?.trim();
+  const hasConstituentMessage = !!constituentMessage?.trim();
   if (!hasOrgStatement && !hasConstituentMessage) {
     problems.push('message must include organizationStatement and/or constituentMessage');
   }
   for (const [label, text] of [
-    ['organizationStatement', m.organizationStatement],
-    ['constituentMessage', m.constituentMessage],
+    ['organizationStatement', orgStatement],
+    ['constituentMessage', constituentMessage],
   ] as const) {
     if (text && (text.length < FIELD_LIMITS.messageMin || text.length > FIELD_LIMITS.messageMax)) {
       problems.push(`message.${label} must be ${FIELD_LIMITS.messageMin}-${FIELD_LIMITS.messageMax} chars`);
@@ -107,6 +116,16 @@ export function buildCwcXml(delivery: CwcDelivery): string {
     if (!(bill.type in BILL_TYPE_ABBREVIATIONS)) problems.push(`bill type "${bill.type}" is unknown`);
     if (!Number.isInteger(bill.congress) || bill.congress < 1) problems.push('bill.congress must be a positive integer');
     if (!Number.isInteger(bill.number) || bill.number < 1) problems.push('bill.number must be a positive integer');
+  }
+  if (m.moreInfoUrl && !isUrl(m.moreInfoUrl)) {
+    problems.push(`message.moreInfoUrl "${m.moreInfoUrl}" does not parse as a URL`);
+  }
+
+  // --- Organization (schema minimum lengths when the tag is present) ---
+  if (org?.name && org.name.trim().length < 3) problems.push('organization.name must be ≥3 chars when present');
+  if (org?.contactName && org.contactName.trim().length < 2) problems.push('organization.contactName must be ≥2 chars when present');
+  if (org?.about && org.about.trim().length < FIELD_LIMITS.organizationAboutMin) {
+    problems.push(`organization.about must be ≥${FIELD_LIMITS.organizationAboutMin} chars when present`);
   }
 
   if (problems.length) throw new CwcValidationError(problems);
@@ -123,7 +142,7 @@ export function buildCwcXml(delivery: CwcDelivery): string {
   L.push(tag('DeliveryAgent', requireEnv('CWC_DELIVERY_AGENT')));
   L.push(tag('DeliveryAgentAckEmailAddress', requireEnv('CWC_ACK_EMAIL')));
   L.push('<DeliveryAgentContact>');
-  L.push(tag('DeliveryAgentContactName', requireEnv('CWC_CONTACT_NAME')));
+  L.push(tag('DeliveryAgentContactName', requireContactName()));
   L.push(tag('DeliveryAgentContactEmail', requireEnv('CWC_CONTACT_EMAIL')));
   L.push(tag('DeliveryAgentContactPhone', requireAgentPhone()));
   L.push('</DeliveryAgentContact>');
@@ -155,9 +174,11 @@ export function buildCwcXml(delivery: CwcDelivery): string {
   L.push(tag('LastName', c.lastName.trim()));
   if (c.suffix?.trim()) L.push(tag('Suffix', c.suffix.trim()));
   if (c.title?.trim()) L.push(tag('Title', c.title.trim()));
-  if (c.constituentOrganization?.trim()) L.push(tag('ConstituentOrganization', c.constituentOrganization.trim()));
+  // Optional tags with a schema minimum of 2 chars are DROPPED (not errored)
+  // when shorter — a 1-char Address2/"organization" is noise, not signal.
+  if ((c.constituentOrganization?.trim().length ?? 0) >= 2) L.push(tag('ConstituentOrganization', c.constituentOrganization!.trim()));
   L.push(tag('Address1', c.address1.trim()));
-  if (c.address2?.trim()) L.push(tag('Address2', c.address2.trim()));
+  if ((c.address2?.trim().length ?? 0) >= 2) L.push(tag('Address2', c.address2!.trim()));
   L.push(tag('City', c.city.trim()));
   L.push(tag('StateAbbreviation', c.state));
   L.push(tag('Zip', c.zip));
@@ -190,8 +211,8 @@ export function buildCwcXml(delivery: CwcDelivery): string {
   if (m.moreInfoUrl) L.push(tag('MoreInfo', m.moreInfoUrl));
   // Order matters here: the schema's choice allows either or both, but when
   // both are present OrganizationStatement must precede ConstituentMessage.
-  if (hasOrgStatement) L.push(tag('OrganizationStatement', m.organizationStatement!.trim()));
-  if (hasConstituentMessage) L.push(tag('ConstituentMessage', m.constituentMessage!.trim()));
+  if (hasOrgStatement) L.push(tag('OrganizationStatement', orgStatement!.trim()));
+  if (hasConstituentMessage) L.push(tag('ConstituentMessage', constituentMessage!.trim()));
   L.push('</Message>');
 
   L.push('</CWC>');
@@ -206,10 +227,30 @@ function isEmail(s: string | undefined): boolean {
   return !!s && /^[^@]+@[^.]+\..+$/.test(s.trim());
 }
 
+/** <MoreInfo> must be a real URL (offices click it). */
+function isUrl(s: string): boolean {
+  try {
+    const u = new URL(s.trim());
+    return u.protocol === 'http:' || u.protocol === 'https:';
+  } catch {
+    return false;
+  }
+}
+
 function requireEnv(name: string): string {
   const v = process.env[name];
   if (!v) throw new CwcValidationError([`env ${name} is not set (delivery-agent identity)`]);
   return v;
+}
+
+function requireContactName(): string {
+  const name = requireEnv('CWC_CONTACT_NAME');
+  if (name.trim().length < FIELD_LIMITS.deliveryAgentContactNameMin) {
+    throw new CwcValidationError([
+      `env CWC_CONTACT_NAME must be ≥${FIELD_LIMITS.deliveryAgentContactNameMin} chars (schema minimum for DeliveryAgentContactName)`,
+    ]);
+  }
+  return name;
 }
 
 function requireAgentPhone(): string {

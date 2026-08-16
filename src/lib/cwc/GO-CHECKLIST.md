@@ -39,24 +39,44 @@ Official acceptance path (from the SOAPBox doc), once Lee approves:
 1. Authenticate to the testing endpoint with `SCWC_TEST_API_KEY`.
 2. `GET api/active_offices` — refresh participating offices (required
    regularly; unlisted offices reject).
-3. POST multiple test campaigns exercising the 100 test Member office codes
-   from the technical documentation (Content-Type `application/xml`; expect
-   `201 Created`; a `400` body explains validation failures; `409` = reused
-   DeliveryId).
-4. **Email `saacwc@saa.senate.gov`** that campaigns are in the testing
+3. Run the acceptance harness: `CWC_ACCEPTANCE_CONFIRM=YES
+   CWC_ACCEPTANCE_ENV=test npx tsx scripts/cwc-acceptance-run.ts` — 3 distinct
+   campaigns (bill+Pro, same-bill+Con, no-bill) × all 100 test office codes,
+   rate-limited via `sendBatch`, every result logged to `cwc_deliveries`
+   (expect `201 Created`; `400` body explains validation failures; `409` =
+   reused DeliveryId, i.e. an idempotent retry of a message that already
+   landed). Re-running retries with the SAME DeliveryIds — safe.
+4. Apply the migration first: `supabase/migrations/20260817000000_cwc_deliveries.sql`.
+5. **Email `saacwc@saa.senate.gov`** that campaigns are in the testing
    environment; follow SCWC Admin guidance.
-5. Pass testing → "Approved for Production" → retrieve prod key into
+6. Pass testing → "Approved for Production" → retrieve prod key into
    `SCWC_API_KEY`, re-run getoffices, maintain compliance.
 
 Note: testing office codes do NOT indicate production participation. SCWC
-maintenance windows: Sun 12a–6a and Wed 5a–7a ET (intermittent outages).
+maintenance windows: Sun 12a–6a and Wed 5a–7a ET — `sendBatch` and
+`sendCwcDelivery` refuse to start inside them automatically.
 
-## Before REAL production sends (not needed for testing)
+## Now wired in code (was "before production", done on this branch)
 
-- Strip the constituent's name/address from the generated message body (George's
-  office-grouping rule) — currently in the message-generation path, not the CWC
-  builder.
-- Wire `getActiveOffices()` into recipient filtering so we only send to
-  participating offices.
-- Enforce the 5–10 msg/sec rate limit in the batch sender.
-- Confirm House bill-type casing against `/v2/validate`.
+- ✅ Signature strip: `buildCwcXml` strips the closing/name/address block from
+  the body on every path; the gate flags anything that survives.
+- ✅ Pre-send gate `assertCwcSendable`: state-bill block, bill⇒ProOrCon,
+  signature check — wired into `sendCwcDelivery` + the admin test route.
+- ✅ Active-offices filtering: `getActiveOfficeCodesCached` (12h TTL,
+  force-refresh) inside `sendCwcDelivery`; unlisted offices fall back to the
+  delivery-router webform/email path.
+- ✅ Delivery log + idempotent retry: `cwc_deliveries` table (service-role
+  only) + `delivery-log.ts`; DeliveryIds are minted once and reused, 400/500s
+  recorded for the SOAPBox monitoring requirement.
+- ✅ Rate limit: `sendBatch` enforces 5/sec and is used by the harness.
+- ✅ Maintenance windows: `isInScwcMaintenanceWindow` + batch/send guards.
+
+## Still process-side (not code)
+
+- Confirm SOAPBox account fields exactly match the access application
+  (company legal name = `CWC_DELIVERY_AGENT`, contact name/email/phone).
+- American Samoa: we emit `HAQ00` (House AQ remap). Confirm AQ00 vs HAS00
+  expectations with the chambers before AS traffic.
+- Confirm House bill-type casing against `/v2/validate` (Title-case vs the
+  lowercase in House sample XML) before House go-live.
+- Apply the `cwc_deliveries` migration in Supabase before any logged send.

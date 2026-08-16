@@ -36,6 +36,18 @@ export const SENATE_SEAT_CODES: Readonly<Record<string, readonly [string, string
   WV: ['SWV01', 'SWV02'], WY: ['SWY01', 'SWY02'],
 };
 
+/**
+ * The 100 Senate office codes, flattened — this IS the SCWC test-environment
+ * office list. Per the SOAPBox Technical Information page (acceptance
+ * requirements), the testing endpoint accepts ALL 100 Member offices (messages
+ * stay in the SAA sandbox), and acceptance testing must exercise every one.
+ * Production participation is voluntary and MUST come from Get Active Offices
+ * instead — never from this list.
+ */
+export const SENATE_TEST_OFFICE_CODES: readonly string[] = Object.values(SENATE_SEAT_CODES)
+  .flat()
+  .sort();
+
 export type OfficeResolution =
   | { ok: true; code: string }
   | { ok: false; reason: string };
