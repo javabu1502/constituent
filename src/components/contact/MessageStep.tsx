@@ -15,6 +15,26 @@ interface MessageStepProps {
   onBack: () => void;
 }
 
+/** Compact name + level chips — shown while drafting and on the review
+ * banner so the user always sees exactly who is receiving this. */
+function RecipientChips({ reps }: { reps: ContactState['selectedReps'] }) {
+  return (
+    <div className="flex flex-wrap justify-center gap-1.5">
+      {reps.map((rep) => (
+        <span
+          key={rep.id}
+          className="inline-flex items-center gap-1 px-2 py-0.5 text-xs rounded-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-200"
+        >
+          {rep.name}
+          <span className="text-gray-400 dark:text-gray-500">
+            · {rep.level === 'federal' ? 'Federal' : rep.level === 'local' ? 'Local' : 'State'}
+          </span>
+        </span>
+      ))}
+    </div>
+  );
+}
+
 function getPartyColors(party: string): { bg: string; text: string } {
   const p = party.toLowerCase();
   if (p.includes('democrat')) {
@@ -541,11 +561,21 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
               ? `Writing ${selectedReps.length} script${selectedReps.length > 1 ? 's' : ''}...`
               : `Writing ${selectedReps.length} message${selectedReps.length > 1 ? 's' : ''}...`}
           </p>
-          <p className="text-gray-400 dark:text-gray-500 text-sm mt-1">
-            {isDraftingCore
-              ? `One message from your story, addressed to each of your ${selectedReps.length} official${selectedReps.length > 1 ? 's' : ''}`
-              : `${loadedCount} of ${selectedReps.length} complete`}
-          </p>
+          {isDraftingCore ? (
+            <div className="mt-4 max-w-md">
+              <p className="text-gray-400 dark:text-gray-500 text-sm text-center mb-2">
+                One message from your story, addressed to:
+              </p>
+              <RecipientChips reps={selectedReps} />
+              <p className="text-gray-400 dark:text-gray-500 text-xs text-center mt-2">
+                If any of them can&apos;t act on your issue, we&apos;ll drop them before you review.
+              </p>
+            </div>
+          ) : (
+            <p className="text-gray-400 dark:text-gray-500 text-sm mt-1">
+              {loadedCount} of {selectedReps.length} complete
+            </p>
+          )}
         </div>
       </div>
     );
@@ -569,22 +599,10 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
           entered and the officials they're suddenly looking at. */}
       {selectedReps.length > 0 && (
         <div className="mb-4 p-3 bg-gray-50 dark:bg-gray-700/40 border border-gray-200 dark:border-gray-600 rounded-xl">
-          <p className="text-xs text-gray-600 dark:text-gray-300">
+          <p className="text-xs text-gray-600 dark:text-gray-300 mb-2">
             From your address and your issue, this goes to the {selectedReps.length === 1 ? 'official' : `${selectedReps.length} officials`} who can actually act on it:
           </p>
-          <div className="flex flex-wrap gap-1.5 mt-2">
-            {selectedReps.map((rep) => (
-              <span
-                key={rep.id}
-                className="inline-flex items-center gap-1 px-2 py-0.5 text-xs rounded-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-200"
-              >
-                {rep.name}
-                <span className="text-gray-400 dark:text-gray-500">
-                  · {rep.level === 'federal' ? 'Federal' : rep.level === 'local' ? 'Local' : 'State'}
-                </span>
-              </span>
-            ))}
-          </div>
+          <RecipientChips reps={selectedReps} />
         </div>
       )}
 
