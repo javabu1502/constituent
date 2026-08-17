@@ -384,7 +384,7 @@ async function generateForOfficial(
   const officialLastName = official.lastName || official.name.split(' ').pop();
 
   const constituentContext = isState && official.district
-    ? `${official.state} ${titleLower.includes('senator') ? 'Senate' : 'Assembly'} District ${official.district}`
+    ? `${official.state} ${titleLower.includes('senator') ? 'Senate' : 'state legislature'} District ${official.district}`
     : official.state;
 
   const stafferNote = official.stafferFirstName

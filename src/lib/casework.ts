@@ -16,7 +16,7 @@ export interface CaseworkSignal {
 
 // A personal stake in a specific case, not a general opinion.
 const PERSONAL = [
-  /\b(?:my|our|his|her|husband'?s?|wife'?s?|son'?s?|daughter'?s?|mother'?s?|father'?s?|mom'?s?|dad'?s?)\b[^.!?]{0,60}\b(?:claim|case|application|benefits?|check|refund|paperwork|status|appeal|approval|renewal)\b/i,
+  /\b(?:my|our|his|her|husband'?s?|wife'?s?|son'?s?|daughter'?s?|mother'?s?|father'?s?|mom'?s?|dad'?s?|grandmother'?s?|grandfather'?s?|grandma'?s?|grandpa'?s?)\b[^.!?]{0,60}\b(?:claim|case|application|benefits?|check|refund|paperwork|status|appeal|approval|renewal)\b/i,
   /\b(?:i|we)\s+(?:applied|filed|was denied|were denied|got denied|have been waiting|am waiting|can'?t get|cannot get|haven'?t (?:received|gotten|heard))\b/i,
   /\bhelp (?:me|us|my|our)\b/i,
   /\bno one (?:answers|responds|calls back|will help)\b/i,
