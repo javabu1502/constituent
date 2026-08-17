@@ -196,12 +196,18 @@ export function ContactFlow() {
   const [wasReset, setWasReset] = useState(false);
 
   // Wrap dispatch to detect RESET and clear auto-save
+  const firstTouch = useRef(false);
   const wrappedDispatch = useCallback((action: ContactAction) => {
     if (action.type === 'RESET') {
       setWasReset(true);
     }
     if (action.type === 'GO_TO_STEP') {
       trackEvent('contact_step', { step: action.payload });
+    }
+    // First real interaction (typing/picking) — the human-vs-bounce line.
+    if (!firstTouch.current && (action.type === 'SET_ISSUE' || action.type === 'SET_PERSONAL_WHY' || action.type === 'SET_ASK')) {
+      firstTouch.current = true;
+      trackEvent('contact_engaged', { via: action.type });
     }
     dispatch(action);
   }, []);
@@ -273,6 +279,16 @@ export function ContactFlow() {
   useEffect(() => {
     if (profileLoaded.current) return;
     profileLoaded.current = true;
+
+    // Landing beacon: fires once per mount, BEFORE any interaction. Without
+    // it, a human who lands on /contact and bounces at the first screen is
+    // invisible in the funnel — indistinguishable from a bot. Vercel counts
+    // the pageview; this tells us the app actually booted for them, and the
+    // deep-link flag splits organic arrivals from our own campaign links.
+    trackEvent('contact_landed', {
+      deepLink: searchParams.has('issue') || searchParams.has('ask') || searchParams.has('repId'),
+      utmSource: searchParams.get('utm_source') ?? 'none',
+    });
 
     // Read deep-link params
     const deepIssue = searchParams.get('issue');
