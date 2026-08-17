@@ -109,3 +109,76 @@ export function auditMessageQuality(
 export function hasBlockingIssue(issues: QualityIssue[]): boolean {
   return issues.some((i) => i.level === 'block');
 }
+
+/**
+ * Identity fabrication check: an AI draft must never claim the constituent
+ * IS someone — a veteran, a parent, a nurse — unless the constituent's own
+ * words support it. "Support VA healthcare" as an issue does not make the
+ * sender a veteran; a draft that says "I served this country" for someone
+ * who didn't is the single worst thing this system can produce.
+ *
+ * Each entry pairs the claim pattern (tested against the DRAFT) with a
+ * support pattern (tested against the USER's own text). Claim without
+ * support = fabrication.
+ */
+const IDENTITY_CLAIMS: { label: string; claim: RegExp; support: RegExp }[] = [
+  {
+    label: 'veteran / military service',
+    claim: /\bi(?:'m| am) (?:a |an )?(?:proud |disabled )?veteran\b|\bi served\b|\bwhen (?:the country|america) needed (?:us|me)\b|\bmy (?:deployment|unit|time in uniform|service to this country)\b|\bwe (?:wore|earned) the uniform\b|\bwhen we come home\b/i,
+    support: /(?:\bi\b|\bmy\b|\bwe\b)[^.!?\n]{0,40}\b(?:veteran|served?|military|army|navy|air force|marines?|coast guard|deploy\w*|enlist\w*|uniform)\b|\bas a veteran\b/i,
+  },
+  {
+    label: 'parent',
+    claim: /\bmy (?:kids?|children|son|daughter|baby)\b|\bas a (?:mom|dad|mother|father|parent)\b|\bi(?:'m| am) (?:a |an )?(?:single )?(?:mom|dad|mother|father|parent)\b/i,
+    support: /(?:\bmy\b|\bour\b)[^.!?\n]{0,25}\b(?:kids?|children|son|daughter|baby|famil\w*)\b|\bi(?:'m| am)[^.!?\n]{0,15}\b(?:pregnant|a (?:mom|dad|mother|father|parent))\b|\bas a (?:mom|dad|mother|father|parent)\b/i,
+  },
+  {
+    label: 'teacher',
+    claim: /\bi(?:'m| am) a (?:school ?)?teacher\b|\bmy (?:students|classroom)\b|\bi teach\b/i,
+    support: /(?:\bi\b|\bmy\b)[^.!?\n]{0,30}\b(?:teach\w*|classroom|students)\b|\bas a teacher\b/i,
+  },
+  {
+    label: 'healthcare worker',
+    claim: /\bi(?:'m| am) a (?:nurse|doctor|physician|paramedic|caregiver)\b|\bmy patients\b/i,
+    support: /(?:\bi\b|\bmy\b)[^.!?\n]{0,30}\b(?:nurse|doctor|physician|paramedic|caregiver|patients)\b/i,
+  },
+  {
+    label: 'business owner',
+    claim: /\bi (?:own|run|operate) (?:a|my) (?:small )?(?:business|shop|store|restaurant|farm)\b|\bmy (?:employees|business|storefront)\b/i,
+    support: /(?:\bi\b|\bmy\b)[^.!?\n]{0,30}\b(?:business|shop|store|restaurant|employees|self.?employed)\b/i,
+  },
+  {
+    label: 'farmer / rancher',
+    claim: /\bi(?:'m| am) a (?:farmer|rancher|grower)\b|\bmy (?:farm|ranch|crops|herd|acres)\b/i,
+    support: /(?:\bi\b|\bmy\b)[^.!?\n]{0,30}\b(?:farm\w*|ranch\w*|crops|cattle|herd|acres)\b/i,
+  },
+  {
+    label: 'immigrant',
+    claim: /\bi(?:'m| am) an immigrant\b|\bwhen i (?:came|moved|immigrated) to (?:this country|america|the us)\b|\bi became a citizen\b/i,
+    support: /(?:\bi\b|\bmy\b|\bwe\b)[^.!?\n]{0,40}\b(?:immigra\w*|refugee|visa|green card|naturaliz\w*|citizen\w*)\b|\bi came to (?:this country|america)\b/i,
+  },
+  {
+    label: 'disability',
+    claim: /\bi(?:'m| am) disabled\b|\bmy (?:disability|wheelchair|chronic (?:illness|condition))\b|\bi live with a disability\b/i,
+    support: /(?:\bi\b|\bmy\b)[^.!?\n]{0,30}\b(?:disab\w*|wheelchair|chronic)\b/i,
+  },
+  {
+    label: 'senior / retiree',
+    claim: /\bi(?:'m| am) (?:a senior|retired|an? (?:older|elderly))\b|\bmy retirement\b|\bon a fixed income\b/i,
+    support: /(?:\bi\b|\bmy\b)[^.!?\n]{0,30}\b(?:retir\w*|senior|fixed income)\b|\bi(?:'m| am) \d{2}\b/i,
+  },
+];
+
+/** Returns the labels of identity claims in `draft` that the constituent's
+ * own words (`userText`) do not support. Any result should block an AI
+ * draft and trigger a corrective retry. */
+export function detectUnsupportedIdentityClaims(draft: string, userText: string): string[] {
+  const d = (draft || '').trim();
+  const u = (userText || '').trim();
+  if (!d) return [];
+  const out: string[] = [];
+  for (const { label, claim, support } of IDENTITY_CLAIMS) {
+    if (claim.test(d) && !support.test(u)) out.push(label);
+  }
+  return out;
+}

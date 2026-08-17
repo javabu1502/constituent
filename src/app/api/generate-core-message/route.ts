@@ -7,7 +7,7 @@ import { getClientIp } from '@/lib/rate-limit';
 import { enforceDailyQuota, resolveUsageIdentity } from '@/lib/usage-quota';
 import { sanitizeAiJurisdiction } from '@/lib/issue-jurisdiction';
 import { validateCampaignAsk } from '@/lib/envelope';
-import { auditMessageQuality, hasBlockingIssue } from '@/lib/message-quality';
+import { auditMessageQuality, hasBlockingIssue, detectUnsupportedIdentityClaims } from '@/lib/message-quality';
 
 export const runtime = 'nodejs';
 
@@ -100,6 +100,7 @@ export async function POST(request: NextRequest) {
 - Weave the campaign's talking points in naturally where they strengthen the case; never paste them verbatim as a list.
 - If the constituent shared a personal story, it is the heart of the message — lead with it and keep their meaning exactly.
 - Invent nothing about the constituent, and invent no statistics, studies, or figures. If the campaign talking points supply a number you may use it; otherwise argue from the constituent's experience and plain reasoning — never "studies show".
+- NEVER claim an identity, profession, or lived experience for the constituent that their own words do not state. Caring about veterans does not make them a veteran; caring about schools does not give them children. If they shared no personal stake, write as a concerned constituent about the people affected ("veterans in my community"), never in a borrowed first person ("I served", "my kids").
 - Respectful and firm. No insults, no partisan name-calling, no threats, and no "or you'll lose my vote" — offices discount those.
 - No ALL-CAPS words, no stacked exclamation points.
 
@@ -148,14 +149,28 @@ Draft the core message.`;
     // Quality gate with one retry: a draft that trips a blocking check
     // (threats, AI leakage, placeholders) is regenerated once, then refused —
     // a bad draft must never be the thing we show a constituent.
+    // Everything the constituent actually said — the ONLY licence for any
+    // first-person identity claim in the draft.
+    const userOwnWords = [parsed.data.issue, parsed.data.ask, parsed.data.personalWhy].filter(Boolean).join(' ');
+
     type CoreOut = { body?: string; subject?: unknown; opening?: unknown; ask?: unknown; jurisdiction?: unknown } | null;
     let out: CoreOut = null;
     let body = '';
+    let correction = '';
     for (let attempt = 0; attempt < 2; attempt++) {
-      const rawOut = await callClaude(system, user2, 1100);
+      const rawOut = await callClaude(correction ? `${system}\n\n${correction}` : system, user2, 1100);
       out = extractJSON(rawOut) as CoreOut;
       body = deDash(String(out?.body ?? '').trim());
       if (!body || body.length < 40) continue;
+      const draftFull = [String(out?.opening ?? ''), body, String(out?.ask ?? '')].join(' ');
+      const fabricated = detectUnsupportedIdentityClaims(draftFull, userOwnWords);
+      if (fabricated.length > 0) {
+        // Retry with the specific correction — this is the one failure the
+        // system can never ship (a false "I'm a veteran" in someone's name).
+        correction = `YOUR PREVIOUS DRAFT FALSELY CLAIMED the constituent has this identity/experience: ${fabricated.join('; ')}. They said no such thing. Rewrite WITHOUT any first-person identity claims — speak about the people affected, not as one of them.`;
+        body = '';
+        continue;
+      }
       if (!hasBlockingIssue(auditMessageQuality(body, { source: 'ai' }))) break;
       body = '';
     }

@@ -17,22 +17,35 @@ interface MessageStepProps {
   onBack: () => void;
 }
 
-/** Compact name + level chips — shown while drafting and on the review
- * banner so the user always sees exactly who is receiving this. */
+/** Recipients grouped by level of government — shown while drafting and on
+ * the review banner so the user always sees exactly who is receiving this
+ * and at which level. */
+const LEVEL_GROUPS: { level: string; label: string }[] = [
+  { level: 'federal', label: 'Congress' },
+  { level: 'state', label: 'State Legislature' },
+  { level: 'local', label: 'Local' },
+];
+
 function RecipientChips({ reps }: { reps: ContactState['selectedReps'] }) {
   return (
-    <div className="flex flex-wrap justify-center gap-1.5">
-      {reps.map((rep) => (
-        <span
-          key={rep.id}
-          className="inline-flex items-center gap-1 px-2 py-0.5 text-xs rounded-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-200"
-        >
-          {rep.name}
-          <span className="text-gray-400 dark:text-gray-500">
-            · {rep.level === 'federal' ? 'Federal' : rep.level === 'local' ? 'Local' : 'State'}
-          </span>
-        </span>
-      ))}
+    <div className="space-y-1.5">
+      {LEVEL_GROUPS.map(({ level, label }) => {
+        const group = reps.filter((r) => ((r.level as string) ?? 'federal') === level);
+        if (group.length === 0) return null;
+        return (
+          <div key={level} className="flex flex-wrap items-center justify-center gap-1.5">
+            <span className="text-xs font-medium text-gray-500 dark:text-gray-400">{label}:</span>
+            {group.map((rep) => (
+              <span
+                key={rep.id}
+                className="inline-flex items-center px-2 py-0.5 text-xs rounded-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-200"
+              >
+                {rep.name}
+              </span>
+            ))}
+          </div>
+        );
+      })}
     </div>
   );
 }
@@ -586,12 +599,12 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
           </p>
           {isDraftingCore ? (
             <div className="mt-4 max-w-md">
-              <p className="text-gray-400 dark:text-gray-500 text-sm text-center mb-2">
-                One message from your story, addressed to:
+              <p className="text-gray-500 dark:text-gray-400 text-sm text-center mb-3">
+                We&apos;re writing one message from your words. Each of these officials will get their own copy:
               </p>
               <RecipientChips reps={selectedReps} />
-              <p className="text-gray-400 dark:text-gray-500 text-xs text-center mt-2">
-                If any of them can&apos;t act on your issue, we&apos;ll drop them before you review.
+              <p className="text-gray-400 dark:text-gray-500 text-xs text-center mt-3">
+                Final check as we write: anyone without real authority over your issue is removed from this list before you review.
               </p>
             </div>
           ) : (

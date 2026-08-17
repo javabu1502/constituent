@@ -40,3 +40,38 @@ describe('auditMessageQuality', () => {
     expect(auditMessageQuality(noAsk).map((i) => i.code)).toContain('no_ask');
   });
 });
+
+describe('detectUnsupportedIdentityClaims (the fabricated-veteran bug)', () => {
+  it('flags "I served this country" when the user only asked for VA hospitals', async () => {
+    const { detectUnsupportedIdentityClaims } = await import('../message-quality');
+    const draft = "I'm a veteran, and access to VA healthcare is something I feel strongly about. I served this country, and so did thousands of others. When we come home, we deserve care.";
+    const claims = detectUnsupportedIdentityClaims(draft, "we need more VA hospitals it's the right thing to do");
+    expect(claims).toContain('veteran / military service');
+  });
+
+  it('writing ABOUT veterans does not license writing AS one', async () => {
+    const { detectUnsupportedIdentityClaims } = await import('../message-quality');
+    const claims = detectUnsupportedIdentityClaims('I served this country and earned these benefits.', 'veterans deserve better healthcare access');
+    expect(claims).toContain('veteran / military service');
+  });
+
+  it('first-person support in the user own words licenses the claim', async () => {
+    const { detectUnsupportedIdentityClaims } = await import('../message-quality');
+    expect(detectUnsupportedIdentityClaims("I'm a veteran and the drive to the VA is brutal.", 'I served in the Army and now drive 3 hours to the VA')).toEqual([]);
+    expect(detectUnsupportedIdentityClaims('As a mom, my kids need this program.', "my daughter's daycare closed last month")).toEqual([]);
+  });
+
+  it('flags borrowed parenthood and profession claims', async () => {
+    const { detectUnsupportedIdentityClaims } = await import('../message-quality');
+    expect(detectUnsupportedIdentityClaims('As a mother, my kids deserve safe schools.', 'schools need more funding')).toContain('parent');
+    // Caring about teacher pay does not make the writer a teacher.
+    expect(detectUnsupportedIdentityClaims('I teach in this district and my students are struggling.', 'teacher pay is too low here')).toContain('teacher');
+    expect(detectUnsupportedIdentityClaims('I teach in this district and my students are struggling.', 'I teach middle school and my pay has been flat for years')).not.toContain('teacher');
+    expect(detectUnsupportedIdentityClaims('My patients cannot afford insulin.', 'insulin prices are out of control')).toContain('healthcare worker');
+  });
+
+  it('clean issue-based drafts pass', async () => {
+    const { detectUnsupportedIdentityClaims } = await import('../message-quality');
+    expect(detectUnsupportedIdentityClaims('Veterans in my community drive hours for care they earned. That is not a system working as it should.', 'we need more VA hospitals')).toEqual([]);
+  });
+});
