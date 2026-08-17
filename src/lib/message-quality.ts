@@ -137,7 +137,7 @@ const IDENTITY_CLAIMS: { label: string; claim: RegExp; support: RegExp }[] = [
   {
     label: 'parent',
     claim: /\bmy (?:kids?|children|son|daughter|baby)\b|\bas a (?:mom|dad|mother|father|parent)\b|\bi(?:'m| am) (?:a |an )?(?:single )?(?:mom|dad|mother|father|parent)\b/i,
-    support: /(?:\bmy\b|\bour\b)[^.!?\n]{0,25}\b(?:kids?|children|son|daughter|baby|famil\w*)\b|\bi (?:have|raise|am raising)[^.!?\n]{0,20}\b(?:kids?|children|a son|a daughter|a baby)\b|\bi(?:'m| am)[^.!?\n]{0,15}\b(?:pregnant|a (?:mom|dad|mother|father|parent))\b|\bas a (?:mom|dad|mother|father|parent)\b/i,
+    support: /(?:\bmy\b|\bour\b)[^.!?\n]{0,25}\b(?:kids?|children|son|daughter|baby|famil\w*)\b|\bi (?:have|raise|am raising)[^.!?\n]{0,20}\b(?:kids?|children|a son|a daughter|a baby)\b|\bi(?:'m| am)[^.!?\n]{0,15}\b(?:pregnant|a (?:mom|dad|mother|father|parent))\b|\bas a (?:mom|dad|mother|father|parent)\|\b(?:mi|nuestr[oa])s?[^.!?\n]{0,20}\b(?:hij[oa]s?|niñ[oa]s?|bebé|familia)\b/i,
   },
   {
     label: 'teacher',
@@ -177,7 +177,7 @@ const IDENTITY_CLAIMS: { label: string; claim: RegExp; support: RegExp }[] = [
   {
     label: 'patient / chronic illness',
     claim: /\bi(?:'m| am) (?:a )?diabetic\b|\bi have (?:type [12] (?:or type [12] )?)?diabetes\b|\bmy (?:insulin|diagnosis|chemo\w*|prescriptions?)\b|\bi was diagnosed\b|\bi(?:'m| am) (?:a cancer survivor|in remission)\b|\bmedication (?:that keeps|keeping) me alive\b/i,
-    support: /(?:\bi\b|\bmy\b)[^.!?\n]{0,40}\b(?:diabet\w*|insulin|diagnos\w*|cancer|chemo\w*|chronic|condition|prescri\w*|medication|patient|remission|covid)\b/i,
+    support: /(?:\bi\b|\bmy\b)[^.!?\n]{0,40}\b(?:diabet\w*|insulin|diagnos\w*|cancer|chemo\w*|chronic|condition|prescri\w*|medication|patient|remission|covid)\|\bmi[^.!?\n]{0,20}\b(?:salud|enfermedad|medicina|diabetes)\b/i,
   },
   {
     label: 'bereaved / lost a loved one',
@@ -202,7 +202,7 @@ const IDENTITY_CLAIMS: { label: string; claim: RegExp; support: RegExp }[] = [
   {
     label: 'renter / homeowner',
     claim: /\bmy (?:landlord|lease|mortgage|property tax(?:es)?|hoa)\b|\bmy rent (?:went up|jumped|doubled|increase)\b|\bi(?:'m| am) a (?:renter|tenant|homeowner)\b|\bi (?:own|rent) (?:my|an?) (?:apartment|home|house|place)\b/i,
-    support: /(?:\bi\b|\bmy\b|\bour\b)[^.!?\n]{0,40}\b(?:rent\w*|lease|landlord|tenant|mortgage|homeowner|property tax\w*|evict\w*)\b/i,
+    support: /(?:\bi\b|\bmy\b|\bour\b)[^.!?\n]{0,40}\b(?:rent\w*|lease|landlord|tenant|mortgage|homeowner|property tax\w*|evict\w*)\|\b(?:mi|nuestra)[^.!?\n]{0,20}\b(?:renta|alquiler|casero|casa|apartamento)\b/i,
   },
   {
     label: 'student loan borrower',

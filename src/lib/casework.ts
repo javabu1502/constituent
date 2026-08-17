@@ -23,7 +23,7 @@ const PERSONAL = [
 ];
 
 const FEDERAL_AGENCY =
-  /social security|\bssa\b|\bssdi\b|\bssi\b|medicare|(?<!\bin )(?<!\bto )(?<!\bfrom )(?<!near )\bva\b(?! beach)|veterans affairs|\birs\b|(?<!state )(?<!property )tax refund|internal revenue|uscis|green card|immigration case|naturalization|passport|state department|customs (?:agents?|officers?|enforcement|seiz\w*)|\bcbp\b|military records|discharge upgrade|federal student aid|\bfafsa\b|\bhud\b|\bsba\b|\bfema\b|disaster assistance|\busps\b|postal|mail delivery/i;
+  /social security|\bssa\b|\bssdi\b|\bssi\b|medicare|(?<!\bin )(?<!\bto )(?<!\bfrom )(?<!near )\bva\b(?! beach)|veterans affairs|\birs\b|(?<!state )(?<!property )tax refund|internal revenue|uscis|green card|immigration case|naturalization|passport|state department|customs (?:agents?|officers?|enforcement|seiz\w*)|\bcbp\b|military records|discharge upgrade|federal student aid|\bfafsa\b|\bpslf\b|public service loan forgiveness|loan servicer|\bhud\b|\bsba\b|\bfema\b|disaster assistance|\busps\b|postal|mail delivery/i;
 
 const STATE_AGENCY =
   /\bdmv\b|driver'?s? licen|vehicle registration|unemployment|workers'? comp|state medicaid|food stamps|\bsnap\b|\bwic\b|welfare office|licensing board|professional licen|child support enforcement|state tax|state benefits/i;

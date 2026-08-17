@@ -32,7 +32,7 @@ const RULES: JurisdictionRule[] = [
   {
     // Federal agencies and services — casework territory. A state legislator
     // cannot chase an IRS refund or expedite a passport.
-    pattern: /\birs\b|tax refund|internal revenue|passport|state department(?! of )|\btsa\b|air traffic|\bfaa\b|airline|amtrak|federal student aid|\bfafsa\b|uscis|green card|customs (?:agents?|officers?|enforcement|seiz\w*)|\bcbp\b/i,
+    pattern: /\birs\b|(?<!state )(?<!property )tax refund|internal revenue|passport|state department(?! of )|\btsa\b|air traffic|\bfaa\b|airline|amtrak|federal student aid|\bfafsa\b|uscis|green card|customs (?:agents?|officers?|enforcement|seiz\w*)|\bcbp\b/i,
     guidance: {
       weights: { federal: 2, state: 0, local: 0 },
       why: { federal: 'These are federal agencies — congressional offices have caseworkers who deal with them directly.' },
@@ -40,11 +40,12 @@ const RULES: JurisdictionRule[] = [
   },
   {
     // Congress regulating itself.
-    pattern: /members? of congress|congressional (?:stock|ethics|term|pay)|stock trading ban|insider trading by congress|filibuster|electoral college/i,
+    pattern: /members? of congress|congressional (?:stock|ethics|term|pay)|term limits? (?:for|on) congress|stock trading ban|insider trading by congress|filibuster|electoral college/i,
     guidance: {
       weights: { federal: 2, state: 0, local: 0 },
       why: { federal: 'Only Congress can set rules for Congress.' },
     },
+    exclusive: true,
   },
   {
     // Unemployment INSURANCE is state-administered; \bemployment\b in the
@@ -262,7 +263,7 @@ const RULES: JurisdictionRule[] = [
     },
   },
   {
-    pattern: /econom|jobs|wage|trabajo|empleo|inflation|worker|labor|union|small business|\bemployment\b|cost of living|recession|debt ceiling|national debt|government shutdown|public finance|gas prices|price of gas/i,
+    pattern: /econom|jobs|wage|desempleo|salario|sueldo|inflation|worker|labor|union|small business|\bemployment\b|cost of living|recession|debt ceiling|national debt|government shutdown|public finance|gas prices|price of gas/i,
     guidance: {
       weights: { federal: 2, state: 2, local: 1 },
       why: {
@@ -327,7 +328,7 @@ const RULES: JurisdictionRule[] = [
   {
     // States have ZERO Social Security authority — this must never route to
     // a state legislator (it previously lived inside the tax rule, wrongly).
-    pattern: /social security|\bssi\b|\bssdi\b|\busps\b|postal service|post office/i,
+    pattern: /social security|\bssi\b|\bssdi\b|\busps\b|postal service|post office|mail carrier|mail delivery|mailman/i,
     guidance: {
       weights: { federal: 2, state: 0, local: 0 },
       why: { federal: 'Social Security and the Postal Service are entirely federal — only Congress can act.' },
@@ -408,13 +409,22 @@ const RULES: JurisdictionRule[] = [
     },
   },
   {
-    pattern: /senior|\baging\b(?! (?:water|pipes?|mains?|infrastructure|bridges?|roads?|grid))|nursing home|elder abuse|retirement/i,
+    pattern: /nursing home|elder abuse|aging services|assisted living/i,
     guidance: {
       weights: { federal: 2, state: 2, local: 0 },
       why: {
-        federal: 'Social Security and Medicare are federal.',
+        federal: 'Federal law sets nursing-home standards and funding.',
         state: 'States license and inspect nursing homes and run aging services.',
       },
+    },
+  },
+  {
+    // Seniors' income issues (Social Security, retirement) are federal-led;
+    // state weight here mailed pension complaints to state legislators.
+    pattern: /senior|\baging\b(?! (?:water|pipes?|mains?|infrastructure|bridges?|roads?|grid))|retirement/i,
+    guidance: {
+      weights: { federal: 2, state: 1, local: 0 },
+      why: { federal: 'Social Security, Medicare, and retirement policy are federal.' },
     },
   },
   {
@@ -578,21 +588,28 @@ export function getJurisdiction(issueText: string): JurisdictionGuidance {
   // Idiom-contamination guard: when a federal-exclusive topic matched, other
   // rules may only add state/local weight on MULTIPLE distinct hits — one
   // stray token ("bail on seniors") is noise, two are a real second topic.
-  // Two distinct hits, or one long unambiguous topic word ("Medicaid",
-  // "insurance"), count as a real second topic; a lone short token ("bail",
-  // "war", "school") next to an exclusive topic is treated as idiom noise.
-  const hasStrongHit = (re: RegExp): boolean => {
+  // A "strong" hit means a real second topic, not idiom noise: two distinct
+  // word STEMS (farm+farmers is one), an unambiguous topic word from the
+  // whitelist, or a federal-program acronym. Bare length was a hole — one
+  // 8-char word ("mortgage", "retirement") defeated the exclusive gate.
+  const STRONG_TOKENS = /medicaid|insurance|unemployment|student (?:loans?|debt)|child ?care|prescription|property tax/i;
+  const STRONG_ACRONYMS = /\b(?:ssi|ssdi|usps|aca|irs|nato|fema|tariffs?)\b/i;
+  const hasStrongHit = (re: RegExp, forExclusive = false): boolean => {
     const g = new RegExp(re.source, re.flags.includes('g') ? re.flags : re.flags + 'g');
-    const seen = new Set<string>();
-    let longest = 0;
+    const stems = new Set<string>();
     for (const m of text.matchAll(g)) {
-      seen.add(m[0].toLowerCase());
-      longest = Math.max(longest, m[0].trim().length);
+      const tok = m[0].trim().toLowerCase();
+      if (STRONG_TOKENS.test(tok) || STRONG_ACRONYMS.test(tok)) return true;
+      // Long single words ("medicare", "obamacare") activate the exclusive
+      // gate, but do NOT let a competing rule punch through it — that
+      // asymmetry is the point ("mortgage" must not defeat the Fed rule).
+      if (forExclusive && tok.length >= 8) return true;
+      if (tok.length >= 5) stems.add(tok.slice(0, 5));
     }
-    return seen.size >= 2 || longest >= 8;
+    return stems.size >= 2;
   };
 
-  const hasExclusive = matched.some((r) => r.exclusive && hasStrongHit(r.pattern));
+  const hasExclusive = matched.some((r) => r.exclusive && hasStrongHit(r.pattern, true));
   const merged: JurisdictionGuidance = { weights: { federal: 0, state: 0, local: 0 }, why: {} };
   for (const rule of matched) {
     const gated = hasExclusive && !rule.exclusive && !hasStrongHit(rule.pattern);
