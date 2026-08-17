@@ -86,3 +86,16 @@ describe('casework detection', () => {
     expect(detectCasework('the VA needs more funding').isCasework).toBe(false);
   });
 });
+
+describe('VA healthcare routes federal-only (Jared caught state legislators receiving it)', () => {
+  it('VA phrasings never select state', async () => {
+    const { getJurisdiction, selectLevels } = await import('../issue-jurisdiction');
+    expect(selectLevels(getJurisdiction('access to VA healthcare, build more VA hospitals'))).toEqual(['federal']);
+    expect(selectLevels(getJurisdiction('VA Healthcare Armed Forces and National Security'))).toEqual(['federal']);
+  });
+  it('plain healthcare and hospitals keep state weight', async () => {
+    const { getJurisdiction } = await import('../issue-jurisdiction');
+    expect(getJurisdiction('our rural hospital is closing').weights.state).toBe(2);
+    expect(getJurisdiction('healthcare costs are crushing us').weights.state).toBe(2);
+  });
+});

@@ -100,7 +100,10 @@ const RULES: JurisdictionRule[] = [
     },
   },
   {
-    pattern: /health|medicaid|insurance|prescription|drug price|mental health|reproductive|abortion|hospital/i,
+    // Lookbehinds: "VA healthcare" and "VA hospital" are federal-agency
+    // matters (Congress funds VA construction; states only run their own
+    // veterans homes) — they must not inherit this rule's state weight.
+    pattern: /(?<!\bva )health|medicaid|insurance|prescription|drug price|mental health|reproductive|abortion|(?<!\bva )hospital/i,
     guidance: {
       weights: { federal: 2, state: 2, local: 0 },
       why: {
