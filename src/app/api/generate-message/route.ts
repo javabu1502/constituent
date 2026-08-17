@@ -12,6 +12,7 @@ import { generateMessageSchema, parseBody } from '@/lib/schemas';
 import { generateLimiter, getClientIp } from '@/lib/rate-limit';
 import { verifyTurnstile } from '@/lib/turnstile';
 import { enforceDailyQuota, resolveUsageIdentity } from '@/lib/usage-quota';
+import { scrubUnsupportedIdentityClaims } from '@/lib/message-quality';
 
 type GenerateRequest = z.infer<typeof generateMessageSchema>;
 type OfficialInput = GenerateRequest['officials'][number];
@@ -336,7 +337,7 @@ function buildToneInstructions(tone: Tone): string {
     case 'personal':
       return `\n\nTONE — PERSONAL:
 - Lead with the personal story, use conversational language, show vulnerability
-- Frame statistics personally (e.g. "I'm one of 43 million...")
+- Keep it personal and concrete, using ONLY experiences and facts the constituent actually shared — never claim an identity or experience for them
 - Prioritize emotional connection over formality`;
     case 'passionate':
       return `\n\nTONE — PASSIONATE:
@@ -477,6 +478,7 @@ Writing guidelines:
 - Keep it under 150 words
 - Conversational, first-person tone — NOT bullet points
 - Structure: issue statement → personal connection → specific ask
+- NEVER claim an identity, profession, or lived experience the constituent's own words do not state (no borrowed "I'm a veteran", "my kids", "my patients"). Invent no statistics or figures.
 - Do NOT include the opening line (e.g. "Hi, my name is...") or closing ("Thank you for your time.") — the app handles those
 - IMPORTANT: The app already introduces the caller with their name and location. Do NOT mention the caller's city, state, or location anywhere in the script. Never say "as a [city] resident", "here in [state]", "in my community", or any other location reference. The caller's location is already established.
 - Write as a flowing, natural script the caller reads aloud
@@ -614,7 +616,7 @@ Respond with ONLY this JSON:
       script = strippedText;
     }
 
-    const cleanedScript = deDash(cleanText(script));
+    const cleanedScript = scrubUnsupportedIdentityClaims(deDash(cleanText(script)), `${issue} ${ask} ${personalWhy || ''}`);
 
     // Build phone opening and closing
     const opening = `Hi, my name is ${senderName} and I'm a constituent${locationStr ? ` from ${locationStr}` : ''}.`;
@@ -639,6 +641,9 @@ Respond with ONLY this JSON:
     subj = 'Reaching Out About an Important Issue';
     body = strippedText;
   }
+
+  // Legacy path has no retry loop — scrub fabricated identity sentences.
+  body = scrubUnsupportedIdentityClaims(body, `${issue} ${ask} ${personalWhy || ''}`);
 
   const cleanedBody = deDash(cleanText(body));
   const cleanedSubject = deDash(cleanText(subj).replace(/\n/g, ' '));

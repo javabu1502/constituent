@@ -108,8 +108,34 @@ const THANKS_CLOSERS = [
   `Thank you again for your leadership, and please keep championing this.`,
   `Please keep pushing — you have constituents behind you.`,
   `Thank you again. Please see this through to the finish.`,
-  `Gratitude is rare in your inbox, I imagine — please know this vote earned it.`,
+  `Gratitude is rare in your inbox, I imagine — please know this stand earned it.`,
 ];
+
+// Openers for officials who do not VOTE on legislation — mayors, county
+// executives, commissioners, governors. "Your vote speaks for me" to a mayor
+// reads as a form letter that doesn't know who it's talking to.
+const OPENERS_EXECUTIVE = [
+  (t: string) => `As one of your constituents, I want you to know where I stand on ${t}.`,
+  (t: string) => `You represent me, and I wanted to reach you directly about ${t}.`,
+  (t: string) => `I'm reaching out as someone you serve, because ${t} affects my family directly.`,
+  (t: string) => `I don't write to elected officials often, but ${t} matters enough to me that I am writing now.`,
+  (t: string) => `As a resident you represent, I'm asking you to hear me out on ${t}.`,
+];
+
+// Direction-neutral closers: used when we don't know support vs oppose —
+// defaulting an opposer to "I ask for your support" inverts their position.
+const CLOSERS_NEUTRAL = [
+  `I ask you to act on this, and to weigh what I've shared here when you do.`,
+  `Please take this seriously and act on it — I will be following what you do.`,
+  `I'm asking you to give this your attention and to act with constituents like me in mind.`,
+  `Please treat this with the urgency it deserves.`,
+  `I hope what I've shared here informs what you do next on this.`,
+];
+
+const EXECUTIVE_TITLE = /mayor|executive|commissioner|supervisor|governor|council|clerk|assessor|treasurer|attorney|sheriff|auditor|controller/i;
+// Non-voting House delegations: delegates and the resident commissioner can
+// cosponsor and speak, but cannot cast floor votes.
+const NON_VOTING = new Set(['DC', 'PR', 'GU', 'VI', 'AS', 'MP']);
 
 /**
  * Validate an AI-written ask against a campaign's precise ask: it must name
@@ -164,6 +190,8 @@ export function buildEnvelope(
   const voteWord = opts.verb === 'oppose' ? 'no' : 'yes';
   const seed = `${opts.senderName}|${opts.zip}|${opts.headline}`;
   const pick = <T,>(pool: T[]): T => pool[seededIndex(seed, pool.length)];
+  const isExecutive = official.level === 'local' || EXECUTIVE_TITLE.test(official.title || '');
+  const isNonVotingDelegate = official.level === 'federal' && NON_VOTING.has((official.state || '').toUpperCase());
 
   let subject: string;
   let opener: string;
@@ -186,10 +214,10 @@ export function buildEnvelope(
     // seeded pools; everywhere else the sender's own AI-written opening wins.
     if (opts.committeeName) {
       opener = pick(OPENERS_COMMITTEE)(opts.committeeName, target);
-    } else if (opts.stageGoal === 'floor_house' || opts.stageGoal === 'floor_senate') {
+    } else if ((opts.stageGoal === 'floor_house' || opts.stageGoal === 'floor_senate') && !isNonVotingDelegate) {
       opener = pick(OPENERS_FLOOR)(target);
     } else {
-      opener = opts.coreOpening?.trim() || pick(OPENERS_DEFAULT)(target);
+      opener = opts.coreOpening?.trim() || pick(isExecutive || isNonVotingDelegate ? OPENERS_EXECUTIVE : OPENERS_DEFAULT)(target);
     }
 
     // Closers: committee asks stay pooled (they reference the committee);
@@ -200,8 +228,13 @@ export function buildEnvelope(
       closer = opts.coreAsk.trim();
     } else if (opts.stageGoal === 'cosponsor' && opts.billRef) {
       closer = pick(CLOSERS_COSPONSOR)(opts.billRef);
+    } else if (isNonVotingDelegate && opts.billRef) {
+      // Delegates cannot cast floor votes — but they can cosponsor and speak.
+      closer = pick(CLOSERS_COSPONSOR)(opts.billRef);
     } else if (opts.billRef && opts.verb) {
       closer = pick(CLOSERS_BILL_VOTE)(voteWord, opts.billRef);
+    } else if (!opts.verb) {
+      closer = pick(CLOSERS_NEUTRAL);
     } else {
       closer = pick(opts.verb === 'oppose' ? CLOSERS_DEFAULT_OPPOSE : CLOSERS_DEFAULT_SUPPORT);
     }

@@ -101,7 +101,7 @@ function buildFallbackMessage(
     'Thank you for your time and service.',
     `Sincerely,\n${signature}`,
   ].join('\n\n');
-  return { subject: `Constituent message: ${opts.issue.trim().slice(0, 100)}`, body };
+  return { subject: `From your constituent: ${opts.issue.trim().slice(0, 100)}`, body };
 }
 
 export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {

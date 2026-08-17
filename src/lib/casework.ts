@@ -23,7 +23,7 @@ const PERSONAL = [
 ];
 
 const FEDERAL_AGENCY =
-  /social security|\bssa\b|\bssdi\b|\bssi\b|medicare|\bva\b|veterans affairs|\birs\b|tax refund|internal revenue|uscis|green card|immigration case|naturalization|passport|state department|customs|military records|discharge upgrade|federal student aid|\bfafsa\b|\bhud\b|\bsba\b|\bfema\b|disaster assistance|\busps\b|postal|mail delivery/i;
+  /social security|\bssa\b|\bssdi\b|\bssi\b|medicare|\bva\b|veterans affairs|\birs\b|(?<!state )tax refund|internal revenue|uscis|green card|immigration case|naturalization|passport|state department|customs|military records|discharge upgrade|federal student aid|\bfafsa\b|\bhud\b|\bsba\b|\bfema\b|disaster assistance|\busps\b|postal|mail delivery/i;
 
 const STATE_AGENCY =
   /\bdmv\b|driver'?s? licen|vehicle registration|unemployment|workers'? comp|state medicaid|food stamps|\bsnap\b|\bwic\b|welfare office|licensing board|professional licen|child support enforcement|state tax|state benefits/i;

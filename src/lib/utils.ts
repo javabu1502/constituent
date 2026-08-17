@@ -40,9 +40,25 @@ export function formatPhone(phone: string): string {
  * Unrecognized titles keep their text minus any parenthetical.
  */
 export function salutationTitle(title: string): string {
-  if (/senator/i.test(title)) return 'Senator';
-  if (/representative/i.test(title)) return 'Representative';
-  return title.replace(/\s*\(.*?\)/g, '').split(',')[0].trim();
+  const t = title || '';
+  if (/senator/i.test(t)) return 'Senator';
+  if (/representative|congress/i.test(t)) return 'Representative';
+  if (/assembly/i.test(t)) return 'Assemblymember';
+  if (/delegate/i.test(t)) return 'Delegate';
+  if (/governor/i.test(t)) return 'Governor';
+  if (/mayor/i.test(t)) return 'Mayor';
+  if (/council/i.test(t)) return 'Councilmember';
+  if (/commissioner/i.test(t)) return 'Commissioner';
+  if (/supervisor/i.test(t)) return 'Supervisor';
+  if (/executive/i.test(t)) return 'Executive';
+  if (/attorney general/i.test(t)) return 'Attorney General';
+  if (/treasurer/i.test(t)) return 'Treasurer';
+  if (/clerk/i.test(t)) return 'Clerk';
+  if (/sheriff/i.test(t)) return 'Sheriff';
+  // Unrecognized long office names ("Seattle City Council - District 3")
+  // make mangled salutations — fall back to a neutral honorific.
+  const cleaned = t.replace(/\s*\(.*?\)/g, '').split(',')[0].trim();
+  return cleaned.split(/\s+/).length > 3 ? 'Honorable' : cleaned;
 }
 
 /**
