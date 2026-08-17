@@ -131,7 +131,7 @@ export function hasBlockingIssue(issues: QualityIssue[]): boolean {
 const IDENTITY_CLAIMS: { label: string; claim: RegExp; support: RegExp }[] = [
   {
     label: 'veteran / military service',
-    claim: /\bi(?:'m| am) (?:a |an )?(?:proud |disabled )?veteran\b|\bi served\b|\bwhen (?:the country|america) needed (?:us|me)\b|\bmy (?:deployment|unit|time in uniform|service to this country)\b|\bwe (?:wore|earned) the uniform\b|\bwhen we come home\b/i,
+    claim: /\bi(?:'m| am) (?:a |an )?(?:proud |disabled )?veteran\b|\bi served\b(?! time)|\bwhen (?:the country|america) needed (?:us|me)\b|\bmy (?:deployment|unit|time in uniform|service to this country)\b|\bwe (?:wore|earned) the uniform\b|\bwhen we come home\b/i,
     support: /(?:\bi\b|\bmy\b|\bwe\b)[^.!?\n]{0,40}\b(?:veteran|served?|military|army|navy|air force|marines?|coast guard|deploy\w*|enlist\w*|uniform)\b|\bas a veteran\b/i,
   },
   {
@@ -201,7 +201,7 @@ const IDENTITY_CLAIMS: { label: string; claim: RegExp; support: RegExp }[] = [
   },
   {
     label: 'renter / homeowner',
-    claim: /\bmy (?:landlord|lease|mortgage|property tax(?:es)?)\b|\bmy rent (?:went up|jumped|doubled|increase)\b|\bi(?:'m| am) a (?:renter|tenant|homeowner)\b|\bi rent (?:my|an?) (?:apartment|home|house|place)\b/i,
+    claim: /\bmy (?:landlord|lease|mortgage|property tax(?:es)?|hoa)\b|\bmy rent (?:went up|jumped|doubled|increase)\b|\bi(?:'m| am) a (?:renter|tenant|homeowner)\b|\bi (?:own|rent) (?:my|an?) (?:apartment|home|house|place)\b/i,
     support: /(?:\bi\b|\bmy\b|\bour\b)[^.!?\n]{0,40}\b(?:rent\w*|lease|landlord|tenant|mortgage|homeowner|property tax\w*|evict\w*)\b/i,
   },
   {
@@ -218,6 +218,36 @@ const IDENTITY_CLAIMS: { label: string; claim: RegExp; support: RegExp }[] = [
     label: 'personal connection / anecdote',
     claim: /\bpeople i know\b|\bsomeone i (?:know|love)\b|\bmy (?:friends?|neighbors?|coworkers?)\b[^.!?\n]{0,40}\b(?:died|lost|struggl\w*|can(?:'|no)t afford|was)\b|\bhappened to (?:me|us|my family)\b|\bmy (?:heat|power|water|electricity) was (?:shut|cut|turned) off\b/i,
     support: /(?:\bi\b|\bmy\b|\bwe\b)[^.!?\n]{0,50}\b(?:friends?|neighbors?|coworkers?|know|someone|happened|shut ?off|cut ?off)\b/i,
+  },
+  {
+    label: 'formerly incarcerated',
+    claim: /\bi (?:was|got) (?:incarcerated|locked up|convicted)\b|\bwhen i was (?:in prison|inside|incarcerated)\b|\bas a felon\b|\bmy (?:conviction|parole|probation)\b|\bi served time\b/i,
+    support: /(?:\bi\b|\bmy\b)[^.!?\n]{0,40}\b(?:incarcerat\w*|prison|felon\w*|convict\w*|parole|probation|record|served time|locked up)\b/i,
+  },
+  {
+    label: 'tribal identity',
+    claim: /\bmy (?:tribe|reservation)\b|\bas a (?:native|tribal|indigenous) (?:american|person|member|citizen)\b|\bon my reservation\b/i,
+    support: /(?:\bi\b|\bmy\b|\bour\b|\bwe\b)[^.!?\n]{0,40}\b(?:tribe|tribal|reservation|indigenous|native american)\b/i,
+  },
+  {
+    label: 'addiction recovery',
+    claim: /\bin my recovery\b|\bi(?:'ve| have) been (?:sober|clean)\b|\bmy (?:sobriety|addiction|sponsor)\b|\bi(?:'m| am) in recovery\b/i,
+    support: /(?:\bi\b|\bmy\b)[^.!?\n]{0,40}\b(?:recover\w*|sober\w*|clean|addict\w*|rehab|sponsor)\b/i,
+  },
+  {
+    label: 'foster care alum',
+    claim: /\bwhen i aged out of foster care\b|\bi grew up in (?:foster care|the system)\b|\bmy foster (?:parents|family|home)\b/i,
+    support: /(?:\bi\b|\bmy\b)[^.!?\n]{0,40}\b(?:foster|aged out|group home|the system)\b/i,
+  },
+  {
+    label: 'grandparent caregiver',
+    claim: /\bmy grand(?:kids?|children|son|daughter)\b|\bi(?:'m| am) raising my grand\w+\b/i,
+    support: /(?:\bmy\b|\bour\b)[^.!?\n]{0,30}\bgrand(?:kids?|children|son|daughter)\b/i,
+  },
+  {
+    label: 'gig worker',
+    claim: /\bi drive for (?:a )?(?:rideshare|uber|lyft|doordash|delivery)\b|\bmy (?:rideshare|delivery) (?:app|gig|shifts?)\b|\bas a gig worker\b/i,
+    support: /(?:\bi\b|\bmy\b)[^.!?\n]{0,40}\b(?:gig|rideshare|uber|lyft|doordash|deliver\w*|driving)\b/i,
   },
 ];
 

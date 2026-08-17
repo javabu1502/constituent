@@ -22,7 +22,7 @@ export interface BillRefs {
 const FEDERAL_PATTERNS = [
   // Digit-lookbehind kills durations ("2 hr 45 min"); lookahead kills "hr 7 days".
   /(?<!\d[\s-])\bh\.?\s?r\.?\s?(\d{1,5})\b(?!\s?(?:min|mins?|hrs?|hours?|days?)\b)/gi, // H.R. 22, HR 40
-  /\b[sS]\.\s?(\d{1,5})\b/g, // S. 1332 (dot required — bare "s 12" is noise)
+  /\b[sS]\.\s?(\d{1,5})\b(?!\s?[NSEW]\b)/g, // S. 1332; grid addresses ('400 S. 500 W') excluded
   /\b[hs]\.?\s?j\.?\s?res\.?\s?(\d{1,4})\b/gi,
   /\b[hs]\.?\s?con\.?\s?res\.?\s?(\d{1,4})\b/gi,
   /\b[hs]\.?\s?res\.?\s?(\d{1,4})\b/gi,
@@ -36,7 +36,7 @@ const STATE_PATTERNS = [
   /(?<!\d[\s-])\blb\s?-?\s?(\d{1,4})\b(?!\s?oz\b)/gi,
   /\bassembly bill\s?(?:no\.?\s?)?(\d{1,4})\b/gi,
   // Ballot measures are state-level questions.
-  /\b(?:question|proposition|prop\.?)\s?(\d{1,3})\b(?!\s?(?:you|u|ya|me)\b)/gi,
+  /(?<!no )\b(?:question|proposition|prop\.?)\s?(\d{1,3})\b(?!\s?(?:you|u|ya|me|many|much)\b)/gi,
 ];
 
 const AMBIGUOUS_PATTERNS = [/\b(?:senate|house) bill\s?(?:no\.?\s?)?(\d{1,4})\b/gi];

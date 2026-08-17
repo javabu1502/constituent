@@ -23,13 +23,16 @@ export interface JurisdictionGuidance {
 interface JurisdictionRule {
   pattern: RegExp;
   guidance: JurisdictionGuidance;
+  /** Federal-exclusive topics: competing rules need MULTIPLE distinct token
+   * hits to add state/local weight when one of these matches. */
+  exclusive?: boolean;
 }
 
 const RULES: JurisdictionRule[] = [
   {
     // Federal agencies and services — casework territory. A state legislator
     // cannot chase an IRS refund or expedite a passport.
-    pattern: /\birs\b|tax refund|internal revenue|passport|state department(?! of )|\btsa\b|air traffic|\bfaa\b|airline|amtrak|federal student aid|\bfafsa\b|uscis|green card|customs(?! and )/i,
+    pattern: /\birs\b|tax refund|internal revenue|passport|state department(?! of )|\btsa\b|air traffic|\bfaa\b|airline|amtrak|federal student aid|\bfafsa\b|uscis|green card|customs (?:agents?|officers?|enforcement|seiz\w*)|\bcbp\b/i,
     guidance: {
       weights: { federal: 2, state: 0, local: 0 },
       why: { federal: 'These are federal agencies — congressional offices have caseworkers who deal with them directly.' },
@@ -66,7 +69,7 @@ const RULES: JurisdictionRule[] = [
     },
   },
   {
-    pattern: /tap water|out of (?:our|my|the) taps?\b|faucet|drinking water|water quality|lead pipe/i,
+    pattern: /tap water|agua (?:de la llave|del grifo|potable)|out of (?:our|my|the) taps?\b|faucet|drinking water|water quality|lead pipe/i,
     guidance: {
       weights: { federal: 1, state: 2, local: 2 },
       why: {
@@ -77,7 +80,7 @@ const RULES: JurisdictionRule[] = [
     },
   },
   {
-    pattern: /immigra|border(?!line)|asylum|\bvisa\b(?! ?(?:card|bill|statement|debit|credit|gift))|daca|refugee|deport|citizenship|\bice\b (?:raid|agent|detain|took|arrest)|la migra/i,
+    pattern: /immigra|\bborders?\b(?! ?collie)|asylum|\bvisa\b(?! ?(?:card|bill|statement|debit|credit|gift|rewards?|points?))|daca|refugee|deport|citizenship|\bice\b (?:raids?|agents?|detain\w*|arrest\w*)|\bice took (?:my|our|his|her|him|them)\b|la migra/i,
     guidance: {
       weights: { federal: 2, state: 1, local: 0 },
       why: {
@@ -98,12 +101,13 @@ const RULES: JurisdictionRule[] = [
         federal: 'Medicare and the ACA are federal programs — only Congress can change their funding, subsidies, or rules.',
       },
     },
+    exclusive: true,
   },
   {
     // Lookbehinds: "VA healthcare" and "VA hospital" are federal-agency
     // matters (Congress funds VA construction; states only run their own
     // veterans homes) — they must not inherit this rule's state weight.
-    pattern: /(?<!\bva )health|medicaid|(?<!car )(?<!auto )(?<!home )(?<!homeowners )(?<!renters )(?<!life )insurance|prescription|drug price|mental health|reproductive|abortion|(?<!\bva )hospital|seguro m[eé]dico|\bsalud\b/i,
+    pattern: /(?<!\bva )health|medicaid|(?<!car )(?<!auto )(?<!home )(?<!homeowners )(?<!renters )(?<!life )(?<!pet )(?<!flood )(?<!travel )(?<!title )insurance|prescription|insulin|epipen|copay|drug price|mental health|reproductive|abortion|(?<!\bva )hospital|seguro m[eé]dico|\bsalud\b/i,
     guidance: {
       weights: { federal: 2, state: 2, local: 0 },
       why: {
@@ -114,7 +118,7 @@ const RULES: JurisdictionRule[] = [
   },
   {
     // K-12: school boards genuinely decide things here.
-    pattern: /k-?12|\bschools?\b|escuelas?|teacher|curriculum|book ban|early childhood education|classroom|school board/i,
+    pattern: /k-?12|(?<!old )\bschools?\b(?! of hard knocks)|escuelas?|teacher|curriculum|book ban|early childhood education|classroom|school board/i,
     guidance: {
       weights: { federal: 1, state: 2, local: 2 },
       why: {
@@ -127,7 +131,7 @@ const RULES: JurisdictionRule[] = [
   {
     // Higher ed and student loans: the loan system is federal; the school
     // board has nothing to do with it, so this is a separate rule from K-12.
-    pattern: /student loan|student debt|loan forgiveness|pell grant|tuition|(?<!electoral )college|higher education|universit/i,
+    pattern: /student loan|student debt|loan forgiveness|pell grant|tuition|(?<!electoral )college(?! football| basketball| sports)|higher education|universit/i,
     guidance: {
       weights: { federal: 2, state: 2, local: 0 },
       why: {
@@ -163,7 +167,7 @@ const RULES: JurisdictionRule[] = [
   {
     // \bepa\b: the bare token matched "S-epa-ration" and pulled immigration
     // family-separation stories into environmental routing.
-    pattern: /(?<!political )climate|(?<!learning )(?<!work )(?<!home )environment|clean energy|emission|pollution|\bepa\b|renewable|drilling|wildfire|\benergy\b|global warming|greenhouse gas|greenhouse emission/i,
+    pattern: /(?<!political )climate|(?<!learning )(?<!work )(?<!home )environment(?!\s+(?:at|in|around)\b)|clean energy|\bemissions?\b(?! test| inspection)|pollution|\bepa\b|renewable|(?:oil|gas|offshore|arctic) drilling|drilling (?:permits?|leases?|rigs?)|wildfire|\benergy\b(?! drinks?)|global warming|greenhouse gas|greenhouse emission/i,
     guidance: {
       weights: { federal: 2, state: 2, local: 1 },
       why: {
@@ -174,7 +178,7 @@ const RULES: JurisdictionRule[] = [
     },
   },
   {
-    pattern: /\bguns?\b|firearm|second amendment|shooting|school shooter|gun violence|(?:was|got|been) shot\b|red flag/i,
+    pattern: /\bguns?\b|firearm|second amendment|shooting|school shooter|gun violence|(?:was|got|been) shot\b(?! down)|red[- ]flag (?:law|order)s?/i,
     guidance: {
       weights: { federal: 1, state: 2, local: 0 },
       why: {
@@ -185,7 +189,7 @@ const RULES: JurisdictionRule[] = [
   },
   {
     // \brent\b with suffixes: the bare token matched "diffe-rent".
-    pattern: /housing|\brent(?:s|al|ers?|ing)?\b|\brenta\b|alquiler|homeless|zoning|eviction|mortgage|affordable hous|landlord|tenant|security deposit|apartment|section 8|housing voucher|public housing|housing authority/i,
+    pattern: /housing|\brent(?:s|al|ers?|ing)?\b|\brenta\b|alquiler|homeless|zoning|eviction|mortgage|affordable hous|landlord|tenant|security deposit|apartment|section 8\b(?! discharge)|housing voucher|public housing|housing authority/i,
     guidance: {
       weights: { federal: 1, state: 2, local: 2 },
       why: {
@@ -200,7 +204,7 @@ const RULES: JurisdictionRule[] = [
     // "Taxation" must not re-trigger federal weight. Bare "spending" pulled
     // Defense Spending toward state legislators — only fiscal-process
     // phrasings belong here.
-    pattern: /(?<!property )(?<!property tax )\btax(?!i)(?!payer)|\birs\b|budget|government spending|federal spending|spending bill|(?<!attention )deficit|impuestos/i,
+    pattern: /(?<!property )(?<!property tax )\btax(?!i)(?!payer)(?!es on (?:my|our|the) (?:property|house|home))|\birs\b|budget|government spending|federal spending|spending bill|(?<!attention )(?<!hearing )(?<!sleep )deficit|impuestos/i,
     guidance: {
       weights: { federal: 2, state: 2, local: 1 },
       why: {
@@ -210,7 +214,7 @@ const RULES: JurisdictionRule[] = [
     },
   },
   {
-    pattern: /veteran|(?<!\bin )(?<!\bto )(?<!\bfrom )\bva\b|military famil|servicemember/i,
+    pattern: /veterans?\b(?! (?:teacher|educator|reporter|lawmaker|officer)s?\b)|\bnavy\b|\barmy\b|\bmarines?\b|coast guard|survivor benefits|discharge upgrade|(?<!\bin )(?<!\bto )(?<!\bfrom )(?<!near )\bva\b(?! beach)|military famil|servicemember/i,
     guidance: {
       weights: { federal: 2, state: 1, local: 0 },
       why: {
@@ -223,7 +227,7 @@ const RULES: JurisdictionRule[] = [
     // Bare "drug" is too greedy — it pulled Medicare drug coverage into
     // city-council territory. Only drug-CRIME phrasings belong here; pricing
     // and coverage phrasings are handled by the health rules above.
-    pattern: /police|\bcops?\b|policing|public defender|crime|criminal justice|law enforcement|prison|sentencing|\bbail\b(?! ?out)|public safety|drug traffick|drug deal|drug abuse|drug overdose|drug epidemic|illegal drug|fentanyl|opioid|human traffick/i,
+    pattern: /police|polic[ií]as?\b|\bcops?\b(?![- ]out)|policing|public defender|(?<!it's a )(?<!it is a )\bcrimes?\b|criminal justice|law enforcement|prison|sentencing|\bbail\b(?! ?out| on)|public safety|drug traffick|drug deal|drug abuse|drug overdose|drug epidemic|illegal drug|fentanyl|opioid|human traffick/i,
     guidance: {
       weights: { federal: 1, state: 2, local: 2 },
       why: {
@@ -258,7 +262,7 @@ const RULES: JurisdictionRule[] = [
     },
   },
   {
-    pattern: /econom|jobs|wage|inflation|worker|labor|union|small business|\bemployment\b|cost of living|recession|debt ceiling|national debt|government shutdown|public finance|gas prices|price of gas/i,
+    pattern: /econom|jobs|wage|trabajo|empleo|inflation|worker|labor|union|small business|\bemployment\b|cost of living|recession|debt ceiling|national debt|government shutdown|public finance|gas prices|price of gas/i,
     guidance: {
       weights: { federal: 2, state: 2, local: 1 },
       why: {
@@ -280,23 +284,25 @@ const RULES: JurisdictionRule[] = [
   {
     // \bwar\b: bare "war" matched "global warming". The country list mirrors
     // the issue picker — Iran and Russia were missing and fell to the default.
-    pattern: /foreign|ukraine|israel|palestin|(?<!'s )china|russia|\biran\b|taiwan|venezuela|north korea|\bnato\b|\bwars?\b(?! on )|sanction|trade deal|tariff|international affairs/i,
+    pattern: /foreign|ukraine|israel|palestin|(?<!'s )(?<!fine )(?<!bone )\bchina\b(?!town)|\bchinese\b|\brussia\b|\brussians?\b(?! roulette)|\biran\b|taiwan|venezuela|north korea|\bnato\b|\bwar (?:in|with|against)\b|go(?:ing)? to war|\bwarfare\b|world war|war on terror|forever wars?|trade wars?|foreign wars?|\bsanctions?\b(?!ed)|war on terror|trade deal|tariff|international affairs/i,
     guidance: {
       weights: { federal: 2, state: 0, local: 0 },
       why: {
         federal: 'Foreign policy is entirely federal — only your members of Congress have a vote here.',
       },
     },
+    exclusive: true,
   },
   {
     // Defense and national security are federal-only — a state legislator
     // has no vote on the Pentagon budget. Veterans issues stay in their own
     // rule (states run veterans homes), and the merge keeps that state weight.
-    pattern: /(?<!self )(?<!self-)defense|\bmilitary\b|armed forces|national security|pentagon/i,
+    pattern: /(?<!self )(?<!self-)defense(?! attorney| lawyer| counsel)|\bmilitary\b|armed forces|national security|pentagon/i,
     guidance: {
       weights: { federal: 2, state: 0, local: 0 },
       why: { federal: 'Defense and national security run entirely through Congress.' },
     },
+    exclusive: true,
   },
   {
     pattern: /social welfare|safety net|\bwic\b|\btanf\b|universal basic income|disability benefit|welfare program/i,
@@ -309,7 +315,7 @@ const RULES: JurisdictionRule[] = [
     },
   },
   {
-    pattern: /child care|childcare|family leave|foster|adoption|\bfamilies\b|fertility|screen time/i,
+    pattern: /child care|childcare|family leave|foster (?:care|child\w*|kids?|youth|famil\w*|parents?|homes?|system)|\badoption\b(?! of )|\bfamilies\b|fertility|screen time/i,
     guidance: {
       weights: { federal: 1, state: 2, local: 1 },
       why: {
@@ -326,9 +332,10 @@ const RULES: JurisdictionRule[] = [
       weights: { federal: 2, state: 0, local: 0 },
       why: { federal: 'Social Security and the Postal Service are entirely federal — only Congress can act.' },
     },
+    exclusive: true,
   },
   {
-    pattern: /property tax/i,
+    pattern: /property tax|taxes on (?:my|our|the) (?:property|house|home)/i,
     guidance: {
       weights: { federal: 0, state: 2, local: 2 },
       why: {
@@ -348,7 +355,7 @@ const RULES: JurisdictionRule[] = [
     },
   },
   {
-    pattern: /farm|agricultur|\bsnap\b(?! out)|food stamp|food assist|school meal|school breakfast|school lunch|nutrition/i,
+    pattern: /\bfarms?\b|\bfarming\b|\bfarmers?\b(?! market)|agricultur|(?<!cold )\bsnap\b(?! out| decision)|food stamp|food assist|school meal|school breakfast|school lunch|nutrition/i,
     guidance: {
       weights: { federal: 2, state: 2, local: 0 },
       why: {
@@ -358,7 +365,7 @@ const RULES: JurisdictionRule[] = [
     },
   },
   {
-    pattern: /marijuana|cannabis|\bweed\b(?!s\b| ?(?:killer|whack))/i,
+    pattern: /marijuana|cannabis|\bweed\b(?!s\b| out| ?(?:killer|whack))/i,
     guidance: {
       weights: { federal: 1, state: 2, local: 1 },
       why: {
@@ -368,7 +375,7 @@ const RULES: JurisdictionRule[] = [
     },
   },
   {
-    pattern: /utilit|electric bill|power compan|energy bill|water bill|power bill|rate hike/i,
+    pattern: /utilit|electric bill|power compan|energy bill|water bill|power bill|(?<!interest )rate hike/i,
     guidance: {
       weights: { federal: 1, state: 2, local: 1 },
       why: { state: 'State utility commissions approve rates and regulate providers.' },
@@ -384,7 +391,7 @@ const RULES: JurisdictionRule[] = [
   {
     // The purely local layer: if it involves a truck, a sidewalk, or a park,
     // a US senator cannot help.
-    pattern: /trash|garbage (?:pickup|collection|truck|service|cans?|day)|sewer|sidewalk|streetlight|street light|noise complaint|(?<!national )(?<!rosa )\bparks?\b|\btrails?\b|library|snow removal|code enforcement|animal control|zoning permit|building permit|speed bump|crosswalk|stop sign/i,
+    pattern: /trash|\bbasura\b|garbage (?:pickup|collection|truck|service|cans?|day)|sewer|sidewalk|streetlight|street light|noise complaint|(?<!national )(?<!rosa )\bparks?\b|\btrails?\b|library|snow removal|code enforcement|animal control|zoning permit|building permit|speed bump|crosswalk|stop sign/i,
     guidance: {
       weights: { federal: 0, state: 1, local: 2 },
       why: {
@@ -394,14 +401,14 @@ const RULES: JurisdictionRule[] = [
     },
   },
   {
-    pattern: /supreme court|federal judge|judicial nominee|court packing/i,
+    pattern: /(?<!state )supreme court|federal judge|judicial nominee|court packing/i,
     guidance: {
       weights: { federal: 2, state: 1, local: 0 },
       why: { federal: 'Federal judges are nominated and confirmed in Washington.' },
     },
   },
   {
-    pattern: /senior|\baging\b|nursing home|elder abuse|retirement/i,
+    pattern: /senior|\baging\b(?! (?:water|pipes?|mains?|infrastructure|bridges?|roads?|grid))|nursing home|elder abuse|retirement/i,
     guidance: {
       weights: { federal: 2, state: 2, local: 0 },
       why: {
@@ -418,7 +425,7 @@ const RULES: JurisdictionRule[] = [
     },
   },
   {
-    pattern: /hunting|fishing|wildlife|\bdeer\b|game commission/i,
+    pattern: /hunting|fishing(?! for (?:excuses|compliments|votes))|wildlife|\bdeer\b|game commission/i,
     guidance: {
       weights: { federal: 1, state: 2, local: 0 },
       why: { state: 'Fish and wildlife rules are set by state agencies and legislatures.' },
@@ -439,6 +446,52 @@ const RULES: JurisdictionRule[] = [
 // Safe default: unknown issues go to federal + state — never local. With
 // auto-routing, a false local match means a city council member gets a
 // message about something they cannot touch; the reverse costs nothing.
+RULES.push({
+  // Disasters: FEMA is federal, states run emergency management.
+  pattern: /\bfema\b|flood(?:ing|s)?\b|hurricane|tornado|earthquake|disaster (?:relief|aid|assistance|declaration)|wildfire recovery/i,
+  guidance: {
+    weights: { federal: 2, state: 1, local: 0 },
+    why: { federal: 'FEMA and federal disaster declarations run through Washington.', state: 'State emergency management coordinates response and some aid.' },
+  },
+});
+
+RULES.push({
+  // Monetary policy: nobody's state legislator moves interest rates.
+  pattern: /federal reserve|\bthe fed\b|interest rates?|rate hikes? by the fed|monetary policy/i,
+  guidance: {
+    weights: { federal: 2, state: 0, local: 0 },
+    why: { federal: 'Monetary policy is the Federal Reserve, overseen by Congress.' },
+  },
+  exclusive: true,
+});
+
+RULES.push({
+  // Fire and EMS are local services under state frameworks.
+  pattern: /fire department|firefighters?|fire station|\bambulances?\b|\bems\b|paramedics?\b/i,
+  guidance: {
+    weights: { federal: 0, state: 1, local: 2 },
+    why: { local: 'Fire departments and EMS answer to city and county government.' },
+  },
+});
+
+RULES.push({
+  // Naming the local government IS the routing signal.
+  pattern: /\bmayor\b|city hall|city council|county commission|town council|board of supervisors|\balderman\b/i,
+  guidance: {
+    weights: { federal: 0, state: 0, local: 2 },
+    why: { local: 'You named your local government — that is who decides this.' },
+  },
+});
+
+RULES.push({
+  // Heating assistance: federal LIHEAP dollars, state-administered.
+  pattern: /heating assistance|\bliheap\b|energy assistance program|utility assistance/i,
+  guidance: {
+    weights: { federal: 2, state: 2, local: 0 },
+    why: { federal: 'Congress funds LIHEAP.', state: 'States run the program and set eligibility.' },
+  },
+});
+
 RULES.push({
   // The drug-policy debate spans federal scheduling and state enforcement.
   pattern: /war on drugs|drug polic(?:y|ies)|decriminaliz/i,
@@ -522,9 +575,29 @@ export function getJurisdiction(issueText: string): JurisdictionGuidance {
   // message.
   const matched = RULES.filter((rule) => rule.pattern.test(text));
   if (matched.length === 0) return DEFAULT_GUIDANCE;
+  // Idiom-contamination guard: when a federal-exclusive topic matched, other
+  // rules may only add state/local weight on MULTIPLE distinct hits — one
+  // stray token ("bail on seniors") is noise, two are a real second topic.
+  // Two distinct hits, or one long unambiguous topic word ("Medicaid",
+  // "insurance"), count as a real second topic; a lone short token ("bail",
+  // "war", "school") next to an exclusive topic is treated as idiom noise.
+  const hasStrongHit = (re: RegExp): boolean => {
+    const g = new RegExp(re.source, re.flags.includes('g') ? re.flags : re.flags + 'g');
+    const seen = new Set<string>();
+    let longest = 0;
+    for (const m of text.matchAll(g)) {
+      seen.add(m[0].toLowerCase());
+      longest = Math.max(longest, m[0].trim().length);
+    }
+    return seen.size >= 2 || longest >= 8;
+  };
+
+  const hasExclusive = matched.some((r) => r.exclusive && hasStrongHit(r.pattern));
   const merged: JurisdictionGuidance = { weights: { federal: 0, state: 0, local: 0 }, why: {} };
   for (const rule of matched) {
+    const gated = hasExclusive && !rule.exclusive && !hasStrongHit(rule.pattern);
     for (const level of ['federal', 'state', 'local'] as GovLevel[]) {
+      if (gated && level !== 'federal') continue;
       if (rule.guidance.weights[level] > merged.weights[level]) {
         merged.weights[level] = rule.guidance.weights[level];
         if (rule.guidance.why[level]) merged.why[level] = rule.guidance.why[level];
