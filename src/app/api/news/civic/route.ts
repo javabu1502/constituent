@@ -420,7 +420,7 @@ const TOPIC_TO_ISSUE_AREA: Record<string, string> = {
 const US_SIGNAL = /\b(?:congress|senate|house of representatives|federal|white house|supreme court|u\.s\.|\bus\b|american|washington|governor|state legislature|legislature|ballot|midterm|medicare|medicaid|social security|irs|epa|fda|pentagon)\b/i;
 const FOREIGN_SIGNAL = /\b(?:nigeria|anambra|\buk\b|britain|british|canada|canadian|australia|india|kenya|ghana|philippines|pakistan|brazil|mexico city|european union|\beu\b|germany|france|japan|beijing|moscow)\b/i;
 
-export function isUsCivicRelevant(text: string): boolean {
+function isUsCivicRelevant(text: string): boolean {
   if (US_SIGNAL.test(text)) return true;
   return !FOREIGN_SIGNAL.test(text);
 }
