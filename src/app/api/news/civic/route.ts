@@ -414,6 +414,17 @@ const TOPIC_TO_ISSUE_AREA: Record<string, string> = {
   'civil rights': 'civil rights',
 };
 
+/** A campaign CTA on a non-US story is how "Anambra state education policy"
+ * got attached to the Pell campaign. Affirmative US signal required; a clearly
+ * foreign dateline without one disqualifies the article entirely. */
+const US_SIGNAL = /\b(?:congress|senate|house of representatives|federal|white house|supreme court|u\.s\.|\bus\b|american|washington|governor|state legislature|legislature|ballot|midterm|medicare|medicaid|social security|irs|epa|fda|pentagon)\b/i;
+const FOREIGN_SIGNAL = /\b(?:nigeria|anambra|\buk\b|britain|british|canada|canadian|australia|india|kenya|ghana|philippines|pakistan|brazil|mexico city|european union|\beu\b|germany|france|japan|beijing|moscow)\b/i;
+
+export function isUsCivicRelevant(text: string): boolean {
+  if (US_SIGNAL.test(text)) return true;
+  return !FOREIGN_SIGNAL.test(text);
+}
+
 /**
  * Map each issue to the most active approved campaign on that issue, so news
  * about a topic can recruit readers into an existing campaign.
@@ -543,9 +554,10 @@ export async function GET(request: NextRequest) {
     const articles = diverseArticles.slice(0, 40).map((a) => ({
       ...a,
       bill: detectBill(a.title),
-      campaign: a.topic
-        ? campaignsByIssue.get(TOPIC_TO_ISSUE_AREA[a.topic.issue.toLowerCase()] ?? a.topic.issue.toLowerCase()) ?? null
-        : null,
+      campaign:
+        a.topic && isUsCivicRelevant(a.title)
+          ? campaignsByIssue.get(TOPIC_TO_ISSUE_AREA[a.topic.issue.toLowerCase()] ?? a.topic.issue.toLowerCase()) ?? null
+          : null,
     }));
 
     // Cache result

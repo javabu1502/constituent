@@ -14,6 +14,8 @@ const SOFT_LIMIT = 280;
 export interface Draft {
   text: string;
   lane: string;
+  /** Story is good but the campaign link isn't — link the issues page. */
+  genericLink?: boolean;
 }
 
 const WRITER_INSTRUCTIONS = `
@@ -43,11 +45,15 @@ Write ONE Bluesky post about the item below. Hard rules:
   contact a city council, mayor, school board, county board, or "local
   officials"; point the CTA at the linked campaign instead.
 - Match a posting lane from the brand brain (news drop / by-the-numbers / bill on the move / rolling brief).
-- If the item can't be posted under these rules (source/campaign mismatch,
-  partisan-only framing, unverifiable claims), do NOT explain in prose.
+- CAMPAIGN LINK MISMATCH: if the linked campaign does not fit the story but
+  the story itself is solid, verifiable US civic news, DRAFT IT ANYWAY and set
+  "genericLink": true — the post will link to the issues page instead. Only
+  skip when the story itself fails the rules (partisan-only framing,
+  unverifiable claims, not US civic news).
+- If the item can't be posted under these rules, do NOT explain in prose.
   Return ONLY JSON: {"skip": true, "reason": "<short internal note>"}
 
-Return ONLY JSON: {"text": "<the post>", "lane": "<lane name>"} or {"skip": true, "reason": "<why>"}
+Return ONLY JSON: {"text": "<the post>", "lane": "<lane name>", "genericLink": true|false} or {"skip": true, "reason": "<why>"}
 `;
 
 /** A skipped signal: the writer declined instead of drafting. Never publish. */
@@ -76,7 +82,7 @@ export async function writePost(brandBrain: string, signal: Signal): Promise<Dra
   // a structured {"skip": true}, prose refusals, meta notes, and parse failures
   // all land here. Raw model output must not reach the publish path (leaked
   // "SKIP, INPUT MISMATCH: ..." notes were published verbatim in July 2026).
-  const parsed = extractJSON(raw) as { text?: string; lane?: string; skip?: boolean; reason?: string } | null;
+  const parsed = extractJSON(raw) as { text?: string; lane?: string; skip?: boolean; reason?: string; genericLink?: boolean } | null;
   if (!parsed || parsed.skip || typeof parsed.text !== 'string' || !parsed.text.trim()) {
     return { skip: true, reason: parsed?.reason ?? 'writer returned no usable draft' };
   }
@@ -108,5 +114,5 @@ export async function writePost(brandBrain: string, signal: Signal): Promise<Dra
     }
   }
 
-  return { text, lane };
+  return { text, lane, genericLink: parsed.genericLink === true };
 }

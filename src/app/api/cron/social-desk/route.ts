@@ -135,11 +135,13 @@ export async function GET(request: NextRequest) {
       platform: 'bluesky',
       lane: draft.lane,
       body: draft.text,
-      link_url: signal.url,
+      // Writer flagged a campaign-link mismatch on a good story: send readers
+      // to the issues page rather than an unrelated campaign.
+      link_url: draft.genericLink ? `${process.env.NEXT_PUBLIC_SITE_URL || 'https://www.mydemocracy.app'}/issues` : signal.url,
       issue_area: signal.issue_area,
       content_hash: contentHash(draft.text),
       signal_id: signal.id,
-      campaign_slug: signal.campaign_slug,
+      campaign_slug: draft.genericLink ? null : signal.campaign_slug,
       status,
       dry_run: process.env.SOCIAL_DRY_RUN === 'true',
       guardrail_report: { ...gate, duplicate, skipReason },
