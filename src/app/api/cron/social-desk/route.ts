@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createAdminClient } from '@/lib/supabase';
 import { getKillSwitch, getMode } from '@/lib/social/config';
 import { scoutCampaigns, scoutNews, scoutLegislativeActions, nextSignal, markSignalUsed } from '@/lib/social/scout';
+import { scoutElections } from '@/lib/social/elections';
 import { loadBrandBrain } from '@/lib/social/brand-brain';
 import { writePost } from '@/lib/social/writer';
 import { runGuardrails, isNearDuplicate } from '@/lib/social/guardrails';
@@ -49,15 +50,37 @@ export async function GET(request: NextRequest) {
   }
 
   const admin = createAdminClient();
-  const scouted = (await scoutCampaigns()) + (await scoutNews()) + (await scoutLegislativeActions());
+  const scouted = (await scoutCampaigns()) + (await scoutNews()) + (await scoutLegislativeActions()) + (await scoutElections());
 
-  const signal = await nextSignal();
+  // One bad signal must not kill the whole run: the writer's "when in doubt,
+  // sit it out" doctrine skipped 3 straight DAYS of runs because each 2-hour
+  // cycle drew exactly one (often junk) signal and gave up. Try up to 4.
+  const brandBrain = await loadBrandBrain();
+  let signal = await nextSignal();
   if (!signal) {
     return NextResponse.json({ ok: true, scouted, swept, skipped: 'no signal' });
   }
-
-  const brandBrain = await loadBrandBrain();
-  const draft = await writePost(brandBrain, signal);
+  let draft = await writePost(brandBrain, signal);
+  let attempts = 1;
+  while ('skip' in draft && attempts < 4) {
+    await admin.from('social_posts').insert({
+      platform: 'bluesky',
+      lane: 'none',
+      body: '',
+      content_hash: contentHash(''),
+      signal_id: signal.id,
+      campaign_slug: signal.campaign_slug,
+      issue_area: signal.issue_area,
+      status: 'skipped',
+      dry_run: process.env.SOCIAL_DRY_RUN === 'true',
+      guardrail_report: { skipReason: `writer skip: ${draft.reason}` },
+    });
+    await markSignalUsed(signal.id);
+    signal = await nextSignal();
+    if (!signal) return NextResponse.json({ ok: true, scouted, swept, skipped: 'no signal after retries', attempts });
+    draft = await writePost(brandBrain, signal);
+    attempts++;
+  }
 
   // Writer skip: record it for the digest and consume the signal so the next
   // run moves on. Skips never carry publishable text.
