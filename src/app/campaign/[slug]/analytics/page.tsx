@@ -210,7 +210,8 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
             View impact report
           </Link>
         </div>
-        <CoalitionPanel slug={slug} initialOutcome={campaign.outcome ?? null} />
+        {/* No coalition/outcome tracking here: storytelling campaigns collect
+            stories, they don't whip a bill to an outcome. */}
         <CampaignAnalytics analytics={storyAnalytics} campaignName={campaign.headline} insightsPanel={insightsPanel} />
       </div>
     );
