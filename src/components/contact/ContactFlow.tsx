@@ -32,6 +32,9 @@ export interface ContactState {
   tone: 'professional' | 'personal' | 'passionate';
   // Topic form fields
   userName: string;
+  // CWC-valid title (Mr./Mrs./Miss/Ms./Dr.) — only collected when CWC
+  // delivery is enabled; empty otherwise.
+  userPrefix: string;
   userEmail: string;
   issue: string;
   issueCategory: string;
@@ -57,6 +60,7 @@ type ContactAction =
   | { type: 'SET_CONTACT_METHOD'; payload: 'email' | 'phone' }
   | { type: 'SET_TONE'; payload: 'professional' | 'personal' | 'passionate' }
   | { type: 'SET_USER_NAME'; payload: string }
+  | { type: 'SET_USER_PREFIX'; payload: string }
   | { type: 'SET_USER_EMAIL'; payload: string }
   | { type: 'SET_ISSUE'; payload: { issue: string; category: string } }
   | { type: 'SET_ASK'; payload: string }
@@ -80,6 +84,7 @@ const initialState: ContactState = {
   contactMethod: 'email',
   tone: 'professional',
   userName: '',
+  userPrefix: '',
   userEmail: '',
   issue: '',
   issueCategory: '',
@@ -117,6 +122,8 @@ function contactReducer(state: ContactState, action: ContactAction): ContactStat
       return { ...state, tone: action.payload, messages: {} };
     case 'SET_USER_NAME':
       return { ...state, userName: action.payload };
+    case 'SET_USER_PREFIX':
+      return { ...state, userPrefix: action.payload };
     case 'SET_USER_EMAIL':
       return { ...state, userEmail: action.payload };
     case 'SET_ISSUE':
@@ -230,6 +237,7 @@ export function ContactFlow() {
     dispatch({ type: 'SET_CONTACT_METHOD', payload: draft.contactMethod });
     if (draft.tone) dispatch({ type: 'SET_TONE', payload: draft.tone });
     if (draft.userName) dispatch({ type: 'SET_USER_NAME', payload: draft.userName });
+    if (draft.userPrefix) dispatch({ type: 'SET_USER_PREFIX', payload: draft.userPrefix });
     if (draft.userEmail) dispatch({ type: 'SET_USER_EMAIL', payload: draft.userEmail });
     if (draft.issue) {
       dispatch({ type: 'SET_ISSUE', payload: { issue: draft.issue, category: draft.issueCategory } });
