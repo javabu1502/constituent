@@ -13,6 +13,7 @@ export interface SavedDraft {
   contactMethod: 'email' | 'phone';
   tone: 'professional' | 'personal' | 'passionate';
   userName: string;
+  userPrefix?: string;
   userEmail: string;
   issue: string;
   issueCategory: string;
@@ -29,6 +30,7 @@ interface AutoSaveState {
   contactMethod: 'email' | 'phone';
   tone: 'professional' | 'personal' | 'passionate';
   userName: string;
+  userPrefix?: string;
   userEmail: string;
   issue: string;
   issueCategory: string;
@@ -93,6 +95,7 @@ export function useAutoSave(
         contactMethod: state.contactMethod,
         tone: state.tone,
         userName: state.userName,
+        userPrefix: state.userPrefix,
         userEmail: state.userEmail,
         issue: state.issue,
         issueCategory: state.issueCategory,
@@ -117,7 +120,7 @@ export function useAutoSave(
     };
   }, [
     state.step, state.address, state.selectedReps, state.contactMethod, state.tone,
-    state.userName, state.userEmail, state.issue, state.issueCategory,
+    state.userName, state.userPrefix, state.userEmail, state.issue, state.issueCategory,
     state.ask, state.personalWhy, state.messages,
   ]);
 

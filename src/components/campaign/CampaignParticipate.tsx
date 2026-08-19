@@ -19,6 +19,7 @@ import {
 import { useTurnstile } from '@/components/ui/Turnstile';
 import { SupportNudge } from '@/components/ui/SupportNudge';
 import { SocialShare } from '@/components/ui/SocialShare';
+import { CWC_PREFIXES, CWC_ENABLED } from '@/lib/cwc-prefixes';
 
 type Step = 'stance' | 'compose' | 'form' | 'loading' | 'review' | 'done' | 'noTarget' | 'wrongState';
 type Stance = 'support' | 'oppose' | 'undecided';
@@ -109,6 +110,12 @@ export function CampaignParticipate({
 
   // Form fields
   const [name, setName] = useState('');
+  // CWC delivery (federal targets only) needs fields mailto never did: a
+  // Senate-valid title and the constituent's email (offices reply to it).
+  // Collected up front once the flag is on so the payload is complete when
+  // the delivery path ships; state-only campaigns never see these fields.
+  const cwcFields = CWC_ENABLED && campaign.target_level !== 'state';
+  const [prefix, setPrefix] = useState('');
   // Org campaigns collect email (with notice) so the campaign can re-engage
   // participants when the bill advances. Official weigh-ins stay email-free.
   const collectEmail = !campaign.is_official && campaign.campaign_type !== 'storytelling';
@@ -222,9 +229,14 @@ export function CampaignParticipate({
     e.preventDefault();
     setError(null);
 
+    if (cwcFields && !prefix) { setError('Please select a title — congressional offices require one to accept your message'); return; }
     if (!name.trim()) { setError('Please enter your name'); return; }
     if (collectEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
       setError('Please enter your email so the campaign can update you when the bill moves');
+      return;
+    }
+    if (cwcFields && !collectEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+      setError('Please enter your email — congressional offices require it for delivery');
       return;
     }
     if (!street.trim()) { setError('Please enter your street address'); return; }
@@ -708,18 +720,55 @@ export function CampaignParticipate({
           </div>
         )}
 
-        <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-            Your Name <span className="text-red-500">*</span>
-          </label>
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="Your full name"
-            className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
-          />
+        <div className={cwcFields ? 'grid grid-cols-[7rem_1fr] gap-3' : undefined}>
+          {cwcFields && (
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Title <span className="text-red-500">*</span>
+              </label>
+              <select
+                value={prefix}
+                onChange={(e) => setPrefix(e.target.value)}
+                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              >
+                <option value="">Title</option>
+                {CWC_PREFIXES.map((p) => (
+                  <option key={p} value={p}>{p}</option>
+                ))}
+              </select>
+            </div>
+          )}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              Your Name <span className="text-red-500">*</span>
+            </label>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Your full name"
+              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
+            />
+          </div>
         </div>
+
+        {cwcFields && !collectEmail && (
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              Email <span className="text-red-500">*</span>
+            </label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="you@example.com"
+              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
+            />
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+              Congressional offices require an email address to accept and reply to your message. Never shared or sold.
+            </p>
+          </div>
+        )}
 
         {collectEmail && (
           <div>

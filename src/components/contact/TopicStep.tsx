@@ -10,6 +10,7 @@ import { getTopicContext } from '@/data/topic-content';
 import { ADVOCACY_ORGS, SUBTOPIC_ORGS } from '@/data/advocacy-orgs';
 import { STORY_PROMPTS, DEFAULT_STORY_PROMPTS } from '@/data/story-prompts';
 import { useChatContext } from '@/components/chat/ChatProvider';
+import { CWC_PREFIXES, CWC_ENABLED } from '@/lib/cwc-prefixes';
 
 interface TopicStepProps {
   state: ContactState;
@@ -547,18 +548,37 @@ export function TopicStep({ state, dispatch, onBack }: TopicStepProps) {
         </div>
       </div>
 
-      {/* Your Name */}
-      <div className="mb-5">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-          Your Name <span className="text-red-500">*</span>
-        </label>
-        <input
-          type="text"
-          value={userName}
-          onChange={(e) => dispatch({ type: 'SET_USER_NAME', payload: e.target.value })}
-          placeholder="Your full name"
-          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
-        />
+      {/* Your Name (+ CWC title when congressional delivery is enabled) */}
+      <div className={`mb-5 ${CWC_ENABLED ? 'grid grid-cols-[7rem_1fr] gap-3' : ''}`}>
+        {CWC_ENABLED && (
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              Title <span className="text-red-500">*</span>
+            </label>
+            <select
+              value={state.userPrefix}
+              onChange={(e) => dispatch({ type: 'SET_USER_PREFIX', payload: e.target.value })}
+              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+            >
+              <option value="">Title</option>
+              {CWC_PREFIXES.map((p) => (
+                <option key={p} value={p}>{p}</option>
+              ))}
+            </select>
+          </div>
+        )}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            Your Name <span className="text-red-500">*</span>
+          </label>
+          <input
+            type="text"
+            value={userName}
+            onChange={(e) => dispatch({ type: 'SET_USER_NAME', payload: e.target.value })}
+            placeholder="Your full name"
+            className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
+          />
+        </div>
       </div>
 
       {/* Your Email */}
