@@ -10,15 +10,19 @@
  */
 import { createAdminClient } from '@/lib/supabase';
 import { callClaude, deDash, extractJSON } from '@/lib/claude';
-import { searchPosts, listNotifications, like, follow, getFollowing, type BlueskySession, type FoundPost } from './bluesky';
-import { replyShouldSkip, runGuardrails } from './guardrails';
+import { searchPosts, listNotifications, like, follow, getFollowing, getPostTexts, type BlueskySession, type FoundPost } from './bluesky';
+import { replyShouldSkip, runGuardrails, isNearDuplicate } from './guardrails';
 import { graphemeLength, BLUESKY_MAX_GRAPHEMES } from './bluesky';
 
 // Narrow, high-intent listening queries per lane. Kept curated on purpose:
 // wider coverage than launch, but still only posts where pointing someone at
 // their reps (or answering a civic how-do-I question) is a genuine favor.
+// NOTE: '"someone should do something"' was removed 2026-08-25 — on Bluesky
+// that exact phrase is overwhelmingly sarcasm about a quoted post or image the
+// searcher can't see (we replied earnestly to a joke about Canadian Tire hats
+// and one about doing cardio). Don't re-add bare deictic phrases; queries must
+// contain the TOPIC, not just the impulse.
 export const LANE_QUERIES: Array<{ lane: string; q: string }> = [
-  { lane: 'act-now', q: '"someone should do something"' },
   { lane: 'act-now', q: '"call your representative"' },
   { lane: 'act-now', q: '"call your senators"' },
   { lane: 'act-now', q: '"contact your reps"' },
@@ -117,6 +121,18 @@ Write ONE reply to the post below. Rules:
   how to contact reps, does contacting them matter) you can plainly answer.
   If the post is a joke, quote, lyric, slogan, meme, news headline, or neither
   of those, return {"skip": true}.
+- CONTEXT: the post may come with THREAD CONTEXT (the post it replies to) or
+  EMBED CONTEXT (what it quotes, links, or shows in an image). Read them first;
+  they are what "this"/"that" refers to. If the context shows the post is
+  sarcasm, a joke, or about something no US official controls, skip. If the
+  post's meaning depends on something you were NOT given (it says "this"/"that"
+  or reacts to something invisible), skip — never guess the referent.
+- US ONLY: the app connects US constituents to US officials. If anything in the
+  post or context suggests the person is outside the US (non-US places,
+  currencies, parties, spellings like "labour"), skip.
+- TONE: never mock the poster, their effort, or their post. No snark about
+  "less effort than the post" or similar — we are a helpful civic neighbor,
+  not a reply guy.
 
 Return ONLY JSON: {"text": "<reply>"} or {"skip": true}.
 `;
@@ -210,6 +226,9 @@ Write ONE reply to the message below. Rules:
 - No em dashes. No AI tells. Do not narrate their emotions.
 - 280 graphemes max. When pointing them to act, include the provided ACTION LINK exactly as given.
 - INVENT NOTHING. Only reference what the message literally says.
+- If OUR POST they're responding to is provided, read it first — their message
+  only makes sense in that context. If their message reacts to something you
+  were not given, skip rather than guess what they mean.
 - SKIP (return {"skip": true}) if a reply adds nothing or would be unwise: a
   bare thanks/emoji/ack, spam, trolling, abuse, or anything you cannot answer
   nonpartisanly and truthfully.
@@ -253,6 +272,13 @@ export async function runInboundEngager(brandBrain: string, session: BlueskySess
     .gte('created_at', since24h);
   const authorsHandled = new Set((recentAuthors ?? []).map((r) => r.target_author));
 
+  // For replies, fetch the post of OURS they're responding to — answering
+  // "what they actually said" requires knowing what it was said in response to.
+  const inboundParentUris = [...new Set(candidates.filter((c) => c.parent?.uri && !have.has(c.uri)).map((c) => c.parent!.uri))];
+  const inboundParents = await getPostTexts(session, inboundParentUris).catch(
+    () => ({}) as Record<string, { authorHandle: string; text: string }>,
+  );
+
   for (const c of candidates) {
     if (have.has(c.uri)) continue;
     if (authorsHandled.has(c.authorHandle)) {
@@ -282,11 +308,12 @@ export async function runInboundEngager(brandBrain: string, session: BlueskySess
       continue;
     }
 
+    const ourPost = c.parent ? inboundParents[c.parent.uri] : undefined;
     let text = '';
     try {
       const raw = await callClaude(
         `${brandBrain}\n\n---\n${INBOUND_INSTRUCTIONS}`,
-        `Someone ${c.reason === 'reply' ? 'replied to us' : c.reason === 'quote' ? 'quoted us' : 'mentioned us'} — @${c.authorHandle}: ${c.text}\n\nACTION LINK: ${actionLinkFor(c.text, linkableCampaigns)}`,
+        `Someone ${c.reason === 'reply' ? 'replied to us' : c.reason === 'quote' ? 'quoted us' : 'mentioned us'} — @${c.authorHandle}: ${c.text}\n${ourPost?.text ? `\nTHEY ARE RESPONDING TO OUR POST: ${ourPost.text}\n` : ''}\nACTION LINK: ${actionLinkFor(c.text, linkableCampaigns)}`,
         300,
       );
       const parsed = extractJSON(raw) as { text?: string; skip?: boolean } | null;
@@ -388,6 +415,27 @@ export async function runEngager(brandBrain: string, session: BlueskySession, pe
   // Best-effort: if this fails we just skip follows this run.
   const following = await getFollowing(session).catch(() => new Set<string>());
 
+  // Recent reply bodies for near-duplicate suppression: the writer converges
+  // on the same phrasing for similar posts, and identical replies sprayed at
+  // different people read as bot spam.
+  const since7d = new Date(Date.now() - 7 * 24 * 60 * 60_000).toISOString();
+  const { data: recentReplies } = await admin
+    .from('social_replies')
+    .select('draft_body')
+    .neq('status', 'skipped')
+    .neq('draft_body', '')
+    .gte('created_at', since7d)
+    .limit(100);
+  const recentBodies = (recentReplies ?? []).map((r) => r.draft_body as string);
+
+  // Thread context: many search hits are themselves replies mid-conversation.
+  // Fetch every candidate's parent post in one batch so the writer can see
+  // what "this" refers to instead of guessing.
+  const parentUris = [...new Set(candidates.filter((c) => c.parent?.uri && !have.has(c.uri)).map((c) => c.parent!.uri))];
+  const parentTexts = await getPostTexts(session, parentUris).catch(
+    () => ({}) as Record<string, { authorHandle: string; text: string }>,
+  );
+
   for (const c of candidates) {
     if (have.has(c.uri)) continue;
     if (c.authorHandle === OWN_HANDLE) continue; // never reply to ourselves
@@ -416,34 +464,6 @@ export async function runEngager(brandBrain: string, session: BlueskySession, pe
       continue;
     }
 
-    // This is a genuine, relevant civic post by a real person. Engage lightly
-    // even if the reply draft later fails: a like (visibility + notifies them)
-    // and, for individuals, a proactive follow. Both capped, both non-fatal.
-    // This is where reach converts into a real, neutral audience — we only ever
-    // engage people already talking about civic frustrations or questions.
-    if (result.liked < LIKE_CAP) {
-      try {
-        await like(session, { uri: c.uri, cid: c.cid });
-        result.liked++;
-      } catch {
-        /* non-fatal — a missed like is nothing */
-      }
-    }
-    if (
-      result.followed < FOLLOW_CAP &&
-      c.authorDid &&
-      !following.has(c.authorDid) &&
-      !isLikelyElectedOfficial(c.authorHandle, c.authorDisplay)
-    ) {
-      try {
-        await follow(session, c.authorDid);
-        following.add(c.authorDid);
-        result.followed++;
-      } catch {
-        /* non-fatal */
-      }
-    }
-
     // Record a target we decided against so later runs don't re-scan it and
     // pay another Claude call for the same post. Skipped rows don't count
     // toward the per-author cap.
@@ -461,12 +481,25 @@ export async function runEngager(brandBrain: string, session: BlueskySession, pe
       });
     };
 
+    // Assemble the conversation the post actually lives in. A mid-thread reply
+    // or bare quote-post is meaningless without this; if the referent is
+    // invisible even to us, no reply can be safely drafted.
+    const parentCtx = c.parent ? parentTexts[c.parent.uri] : undefined;
+    if (c.parent && !parentCtx?.text) {
+      await recordSkip('context: mid-thread reply with unfetchable parent');
+      result.skipped++;
+      continue;
+    }
+    const contextLines: string[] = [];
+    if (parentCtx?.text) contextLines.push(`THREAD CONTEXT — they are replying to @${parentCtx.authorHandle}: ${parentCtx.text}`);
+    if (c.embedText) contextLines.push(`EMBED CONTEXT — their post ${c.embedText}`);
+
     // Draft the reply.
     let text = '';
     try {
       const raw = await callClaude(
         `${brandBrain}\n\n---\n${REPLY_INSTRUCTIONS}`,
-        `POST by @${c.authorHandle}: ${c.text}\n\nACTION LINK: ${actionLinkFor(c.text, linkableCampaigns)}`,
+        `POST by @${c.authorHandle}: ${c.text}\n${contextLines.length ? `\n${contextLines.join('\n')}\n` : ''}\nACTION LINK: ${actionLinkFor(c.text, linkableCampaigns)}`,
         300,
       );
       const parsed = extractJSON(raw) as { text?: string; skip?: boolean } | null;
@@ -488,6 +521,40 @@ export async function runEngager(brandBrain: string, session: BlueskySession, pe
       await recordSkip(`guardrail: ${reasons}`);
       result.skipped++;
       continue;
+    }
+
+    // Template suppression: near-identical replies to different people read as
+    // spam (three users got "you can be the someone" verbatim before this).
+    if (isNearDuplicate(text, recentBodies)) {
+      await recordSkip('near-duplicate of a recent reply');
+      result.skipped++;
+      continue;
+    }
+
+    // The draft survived every gate — THIS is a post worth engaging. Like it
+    // (visibility + notifies them) and, for individuals, follow. Doing this
+    // only after the writer accepts keeps us from liking sarcasm and jokes.
+    if (result.liked < LIKE_CAP) {
+      try {
+        await like(session, { uri: c.uri, cid: c.cid });
+        result.liked++;
+      } catch {
+        /* non-fatal — a missed like is nothing */
+      }
+    }
+    if (
+      result.followed < FOLLOW_CAP &&
+      c.authorDid &&
+      !following.has(c.authorDid) &&
+      !isLikelyElectedOfficial(c.authorHandle, c.authorDisplay)
+    ) {
+      try {
+        await follow(session, c.authorDid);
+        following.add(c.authorDid);
+        result.followed++;
+      } catch {
+        /* non-fatal */
+      }
     }
 
     const requiresHuman = isLikelyElectedOfficial(c.authorHandle, c.authorDisplay);
@@ -515,6 +582,7 @@ export async function runEngager(brandBrain: string, session: BlueskySession, pe
       continue;
     }
     authorsHandled.add(c.authorHandle);
+    recentBodies.push(text); // same-run drafts count toward near-dup too
     result.drafted++;
     if (requiresHuman) result.gated++;
   }

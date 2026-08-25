@@ -98,9 +98,49 @@ export interface FoundPost {
   text: string;
   /** Thread root ref if this post is itself a reply (else the post is root). */
   root?: { uri: string; cid: string };
+  /** Direct parent ref if this post is itself a reply. */
+  parent?: { uri: string; cid: string };
+  /** What the post's embed shows (quoted post text, image alts, link card). */
+  embedText?: string;
   likeCount: number;
   /** ISO timestamp the post was indexed (set by getAuthorFeed for recency). */
   indexedAt?: string;
+}
+
+/**
+ * Flatten a hydrated embed view into readable context. A post whose text is
+ * "someone should do something about this" carries its entire meaning in the
+ * quoted post or image — a reply drafted without this context is a coin flip.
+ */
+export function extractEmbedText(embed: Record<string, unknown> | undefined | null): string {
+  if (!embed) return '';
+  const type = (embed.$type as string) ?? '';
+  const parts: string[] = [];
+  if (type.startsWith('app.bsky.embed.record')) {
+    // Quote-post (possibly recordWithMedia). The quoted record's text lives at
+    // embed.record.value.text (viewRecord) — one level deeper for withMedia.
+    const rec = (embed.record as Record<string, unknown>) ?? {};
+    const inner = (rec.record as Record<string, unknown>) ?? rec; // withMedia nests once more
+    const value = (inner.value as Record<string, unknown>) ?? {};
+    const quotedAuthor = ((inner.author as Record<string, unknown>) ?? {}).handle;
+    if (typeof value.text === 'string' && value.text) {
+      parts.push(`quotes @${quotedAuthor ?? '?'}: ${value.text}`);
+    }
+    const media = (embed.media as Record<string, unknown>) ?? null;
+    if (media) parts.push(extractEmbedText(media));
+  } else if (type.startsWith('app.bsky.embed.images')) {
+    const images = (embed.images as Array<Record<string, unknown>>) ?? [];
+    const alts = images.map((i) => (i.alt as string) ?? '').filter(Boolean);
+    parts.push(alts.length ? `image: ${alts.join(' | ')}` : 'image (no description)');
+  } else if (type.startsWith('app.bsky.embed.video')) {
+    parts.push('video');
+  } else if (type.startsWith('app.bsky.embed.external')) {
+    const ext = (embed.external as Record<string, unknown>) ?? {};
+    const title = (ext.title as string) ?? '';
+    const desc = (ext.description as string) ?? '';
+    if (title || desc) parts.push(`link: ${[title, desc].filter(Boolean).join(' — ')}`);
+  }
+  return parts.filter(Boolean).join(' ');
 }
 
 /** Search recent posts by keyword (for the Engager's listening layer). */
@@ -113,7 +153,7 @@ export async function searchPosts(session: BlueskySession, q: string, limit = 15
   return (data.posts ?? []).map((p) => {
     const author = (p.author as Record<string, unknown>) ?? {};
     const record = (p.record as Record<string, unknown>) ?? {};
-    const reply = record.reply as { root?: { uri: string; cid: string } } | undefined;
+    const reply = record.reply as { root?: { uri: string; cid: string }; parent?: { uri: string; cid: string } } | undefined;
     return {
       uri: p.uri as string,
       cid: p.cid as string,
@@ -122,9 +162,46 @@ export async function searchPosts(session: BlueskySession, q: string, limit = 15
       authorDid: (author.did as string) ?? '',
       text: (record.text as string) ?? '',
       root: reply?.root,
+      parent: reply?.parent,
+      embedText: extractEmbedText(p.embed as Record<string, unknown> | undefined),
       likeCount: (p.likeCount as number) ?? 0,
     };
   });
+}
+
+/**
+ * Batch-fetch the text of specific posts (thread parents, quoted posts) so
+ * reply drafting can see the conversation a candidate post lives in.
+ */
+export async function getPostTexts(
+  session: BlueskySession,
+  uris: string[],
+): Promise<Record<string, { authorHandle: string; text: string }>> {
+  const out: Record<string, { authorHandle: string; text: string }> = {};
+  if (!uris.length) return out;
+  for (let i = 0; i < uris.length; i += 25) {
+    const batch = uris.slice(i, i + 25);
+    const params = new URLSearchParams();
+    batch.forEach((u) => params.append('uris', u));
+    const data = await xrpcGet<{ posts: Array<Record<string, unknown>> }>(
+      'app.bsky.feed.getPosts',
+      params,
+      session.accessJwt,
+    ).catch(() => ({ posts: [] as Array<Record<string, unknown>> }));
+    for (const p of data.posts ?? []) {
+      const author = (p.author as Record<string, unknown>) ?? {};
+      const record = (p.record as Record<string, unknown>) ?? {};
+      const embedText = extractEmbedText(p.embed as Record<string, unknown> | undefined);
+      const text = [(record.text as string) ?? '', embedText ? `[${embedText}]` : '']
+        .filter(Boolean)
+        .join(' ');
+      out[p.uri as string] = {
+        authorHandle: (author.handle as string) ?? '',
+        text,
+      };
+    }
+  }
+  return out;
 }
 
 /** Fetch engagement counts for a set of post URIs (Analyst). */
@@ -165,6 +242,8 @@ export interface InboundNotification {
   reason: 'reply' | 'mention' | 'quote';
   /** Thread root, if their post carries one; else their post is the root. */
   root?: { uri: string; cid: string };
+  /** Direct parent — for replies, the post of OURS they're responding to. */
+  parent?: { uri: string; cid: string };
   isRead: boolean;
   indexedAt: string;
 }
@@ -187,7 +266,7 @@ export async function listNotifications(session: BlueskySession, limit = 50): Pr
     .map((n) => {
       const author = (n.author as Record<string, unknown>) ?? {};
       const record = (n.record as Record<string, unknown>) ?? {};
-      const reply = record.reply as { root?: { uri: string; cid: string } } | undefined;
+      const reply = record.reply as { root?: { uri: string; cid: string }; parent?: { uri: string; cid: string } } | undefined;
       return {
         uri: n.uri as string,
         cid: n.cid as string,
@@ -196,6 +275,7 @@ export async function listNotifications(session: BlueskySession, limit = 50): Pr
         text: (record.text as string) ?? '',
         reason: n.reason as InboundNotification['reason'],
         root: reply?.root,
+        parent: reply?.parent,
         isRead: (n.isRead as boolean) ?? false,
         indexedAt: (n.indexedAt as string) ?? '',
       };
