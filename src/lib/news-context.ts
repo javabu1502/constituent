@@ -3,7 +3,7 @@
  *
  * Queries Google News RSS (free, no key) for an issue, returns a compact block
  * of "[date] — headline (source)" lines from roughly the last few weeks. Cached
- * per normalized query (~45 min) in feed_cache, rate-limited, and fails open
+ * per normalized query (~45 min) in content_cache, rate-limited, and fails open
  * (returns '') so a news outage can never block message/chat generation.
  *
  * The returned block is FACTUAL GROUNDING only — callers frame it with
@@ -98,12 +98,11 @@ export async function fetchRecentNews(query: string): Promise<string> {
   if (admin) {
     try {
       const { data: cached } = await admin
-        .from('feed_cache')
-        .select('data, fetched_at')
-        .eq('user_id', 'public')
-        .eq('feed_type', cacheKey)
+        .from('content_cache')
+        .select('data, created_at')
+        .eq('cache_key', cacheKey)
         .single();
-      if (cached && Date.now() - new Date(cached.fetched_at).getTime() < NEWS_CACHE_TTL_MS) {
+      if (cached && Date.now() - new Date(cached.created_at).getTime() < NEWS_CACHE_TTL_MS) {
         const block = (cached.data as { block?: string })?.block;
         if (typeof block === 'string') return block;
       }
@@ -153,9 +152,9 @@ export async function fetchRecentNews(query: string): Promise<string> {
     // Cache the rendered block (best-effort)
     if (admin) {
       try {
-        await admin.from('feed_cache').upsert(
-          { user_id: 'public', feed_type: cacheKey, data: { block }, fetched_at: new Date().toISOString() },
-          { onConflict: 'user_id,feed_type' }
+        await admin.from('content_cache').upsert(
+          { cache_key: cacheKey, data: { block }, created_at: new Date().toISOString() },
+          { onConflict: 'cache_key' }
         );
       } catch {
         // caching is best-effort

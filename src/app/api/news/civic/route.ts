@@ -122,6 +122,18 @@ const DIRECT_FEEDS: { url: string; sourceName: string }[] = [
 const CACHE_KEY = 'civic-news';
 const CACHE_TTL_MS = 45 * 60 * 1000; // 45 min — fresh enough to feel real-time without hammering feeds
 
+// Hard freshness ceiling on every article. Google News queries carry when:3d,
+// but the direct RSS feeds have no date filter at all — a feed serving archive
+// items can inject year-old stories into "today's" pool. Items with no
+// parsable pubDate are dropped too: an undatable item can't be proven fresh.
+const MAX_ARTICLE_AGE_MS = 72 * 60 * 60 * 1000;
+
+function isFresh(article: NewsArticle): boolean {
+  const t = Date.parse(article.pubDate);
+  if (Number.isNaN(t)) return false;
+  return Date.now() - t < MAX_ARTICLE_AGE_MS;
+}
+
 // Keyword-to-policy-area classification (checked against title + description)
 const TOPIC_PATTERNS: { pattern: RegExp; topic: ArticleTopic }[] = [
   { pattern: /immigra|border\s+(wall|patrol|crisis|security)|asylum|migrant|deport|visa|daca|refugee|undocumented/i, topic: { issue: 'Immigration', issueCategory: 'Immigration' } },
@@ -470,7 +482,7 @@ export async function GET(request: NextRequest) {
 
     // Check cache
     const { data: cached } = await supabase
-      .from('feed_cache')
+      .from('content_cache')
       .select('data, created_at')
       .eq('cache_key', cacheKey)
       .single();
@@ -530,6 +542,7 @@ export async function GET(request: NextRequest) {
     for (const result of results) {
       if (result.status !== 'fulfilled') continue;
       for (const article of result.value) {
+        if (!isFresh(article)) continue;
         const key = normalizeTitle(article.title);
         if (seen.has(key)) continue;
         seen.add(key);
@@ -562,7 +575,7 @@ export async function GET(request: NextRequest) {
 
     // Cache result
     await supabase
-      .from('feed_cache')
+      .from('content_cache')
       .upsert(
         { cache_key: cacheKey, data: { articles }, created_at: new Date().toISOString() },
         { onConflict: 'cache_key' }

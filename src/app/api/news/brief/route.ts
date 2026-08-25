@@ -9,8 +9,13 @@ const NEWS_CACHE_KEY = 'civic-news';
 interface CachedArticle {
   title: string;
   source: string;
+  pubDate?: string;
   topic?: { issue: string } | null;
 }
+
+// Headlines older than this never reach the model — the brief claims to cover
+// "today", so day-before-yesterday is the absolute floor.
+const MAX_HEADLINE_AGE_MS = 48 * 60 * 60 * 1000;
 
 const SYSTEM_PROMPT = `You write a strictly nonpartisan daily civic brief for a civic-engagement site. Rules:
 - Neutral, factual tone. No loaded language, no editorializing, no predictions.
@@ -19,6 +24,12 @@ const SYSTEM_PROMPT = `You write a strictly nonpartisan daily civic brief for a 
 - Each bullet is 2 sentences: first what happened, second why it matters to
   constituents (what's at stake, who's affected, or what happens next). Concrete,
   not vague — a reader should learn something, not just see a headline.
+- USE ONLY THE HEADLINES PROVIDED. Your own knowledge of politics is months out
+  of date and events you "remember" (confirmations, appointments, bill passages,
+  executive orders) may be from a previous year — reporting them as today's news
+  is a serious factual error. Never add an event, name, number, quote, or
+  outcome that is not in the headline list. If a headline is thin, write a thin
+  bullet; never pad it with background from memory.
 Return ONLY a JSON array of exactly 3 strings. No markdown, no keys, no commentary.`;
 
 function parseBullets(raw: string): string[] | null {
@@ -46,7 +57,7 @@ export async function GET(request: NextRequest) {
     const supabase = createAdminClient();
 
     const { data: cachedBrief } = await supabase
-      .from('feed_cache')
+      .from('content_cache')
       .select('data, created_at')
       .eq('cache_key', BRIEF_CACHE_KEY)
       .single();
@@ -61,7 +72,7 @@ export async function GET(request: NextRequest) {
     // Source headlines: the cached civic-news feed; populate it if needed.
     let articles: CachedArticle[] = [];
     const { data: cachedNews } = await supabase
-      .from('feed_cache')
+      .from('content_cache')
       .select('data')
       .eq('cache_key', NEWS_CACHE_KEY)
       .single();
@@ -81,18 +92,28 @@ export async function GET(request: NextRequest) {
       }
     }
 
-    if (articles.length < 5) {
+    // Belt and braces on top of the civic feed's own freshness filter: only
+    // headlines we can date within the window may inform "today's" brief.
+    const fresh = articles.filter((a) => {
+      const t = Date.parse(a.pubDate ?? '');
+      return !Number.isNaN(t) && Date.now() - t < MAX_HEADLINE_AGE_MS;
+    });
+
+    if (fresh.length < 5) {
       return NextResponse.json({ brief: null });
     }
 
-    const headlines = articles
+    const headlines = fresh
       .slice(0, 25)
-      .map((a) => `- ${a.title} (${a.source}${a.topic?.issue ? `, ${a.topic.issue}` : ''})`)
+      .map((a) => {
+        const day = new Date(Date.parse(a.pubDate!)).toISOString().slice(0, 10);
+        return `- [${day}] ${a.title} (${a.source}${a.topic?.issue ? `, ${a.topic.issue}` : ''})`;
+      })
       .join('\n');
 
     const raw = await callClaude(
       SYSTEM_PROMPT,
-      `Today's civic and political headlines from a politically balanced set of sources:\n\n${headlines}\n\nWrite the 3-bullet daily civic brief.`,
+      `Today is ${new Date().toISOString().slice(0, 10)}. These are today's civic and political headlines from a politically balanced set of sources (each dated):\n\n${headlines}\n\nWrite the 3-bullet daily civic brief using ONLY these headlines.`,
       500
     );
 
@@ -104,7 +125,7 @@ export async function GET(request: NextRequest) {
     const payload = { brief: { bullets, generatedAt: new Date().toISOString() } };
 
     await supabase
-      .from('feed_cache')
+      .from('content_cache')
       .upsert(
         { cache_key: BRIEF_CACHE_KEY, data: payload, created_at: new Date().toISOString() },
         { onConflict: 'cache_key' }
