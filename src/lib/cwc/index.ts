@@ -35,6 +35,10 @@ export {
   type SendCwcOptions, type SendCwcOutcome, type ActiveOfficeOptions,
 } from './send';
 export {
+  acquireSendPermit, ratePermitScope, setRatePermitClientFactory,
+  type AcquirePermitOptions,
+} from './rate-permit';
+export {
   resolveOfficeCode,
   houseOfficeCode,
   senateOfficeCode,

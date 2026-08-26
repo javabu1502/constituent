@@ -205,6 +205,11 @@ export async function loadActiveOfficeCodes(chamber: 'house' | 'senate', mode: M
  * Sequential with fixed spacing (default 5/sec) so we never spike the endpoint;
  * one failure never aborts the batch — it's captured per-item.
  *
+ * NOTE: this spacing is per-process COURTESY pacing only — it cannot hold the
+ * ceiling across concurrent serverless instances. The authoritative limiter is
+ * the Postgres rate-permit allocator inside sendCwcDelivery (rate-permit.ts);
+ * pass a `send` that goes through sendCwcDelivery for any real batch.
+ *
  * Refuses to START during an SCWC maintenance window (Sun 12a–6a, Wed 5a–7a
  * ET) — sends there hit intermittent outages and burn DeliveryIds on retries.
  * Pass `ignoreMaintenanceWindow: true` only for House-only batches (the

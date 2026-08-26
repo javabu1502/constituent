@@ -4,6 +4,7 @@ import {
   buildCwcXml, buildCampaignId, checkEgressIp,
   validateHouse, sendHouse, sendSenate,
   cwcSendableProblems,
+  acquireSendPermit, ratePermitScope,
   type CwcDelivery,
 } from '@/lib/cwc';
 
@@ -91,6 +92,9 @@ export async function GET(request: NextRequest) {
       if (chamber !== 'house') return NextResponse.json({ error: 'validate is House-only; Senate test env is send-only' }, { status: 400 });
       result = await validateHouse(sample, 'uat');
     } else {
+      // Even a sandbox send claims a shared rate slot: parallel test requests
+      // must not be the thing that exceeds the CWC ceiling.
+      await acquireSendPermit(ratePermitScope(chamber, 'test'));
       result = chamber === 'house' ? await sendHouse(sample, 'uat') : await sendSenate(sample, 'uat');
     }
     return NextResponse.json({ chamber, action, egressIp, result, xml });

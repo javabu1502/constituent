@@ -9,6 +9,7 @@ import {
   xmlSha256,
   type CwcEnvironment,
 } from './delivery-log';
+import { acquireSendPermit, ratePermitScope, type AcquirePermitOptions } from './rate-permit';
 import type { CwcDelivery } from './types';
 
 /**
@@ -21,7 +22,10 @@ import type { CwcDelivery } from './types';
  *                           falls back to the delivery-router webform/email
  *                           path); cached 12h with force-refresh.
  *   4. Delivery log       — mint-or-REUSE the DeliveryId (idempotent retry).
- *   5. Build + send       — XML with the logged id; outcome recorded.
+ *   5. Rate permit        — claim a send slot from the Postgres allocator,
+ *                           the ONLY limiter that holds across serverless
+ *                           instances (sendBatch's spacing is per-process).
+ *   6. Build + send       — XML with the logged id; outcome recorded.
  */
 
 const ACTIVE_OFFICES_TTL_MS = 12 * 60 * 60 * 1000; // ~12h; George emails when offices join
@@ -82,6 +86,9 @@ export interface SendCwcOptions {
   /** Test seam — defaults to sendSenate/sendHouse. */
   sender?: (delivery: CwcDelivery, mode: Mode) => Promise<CwcResult>;
   now?: Date;
+  /** Cross-instance rate permit; injectable for tests. `false` disables
+   *  (ONLY for offline preview/validate paths that never POST a message). */
+  ratePermit?: AcquirePermitOptions | false;
 }
 
 export type SendCwcOutcome =
@@ -138,7 +145,14 @@ export async function sendCwcDelivery(
     { campaignId: delivery.campaignId, chamber: delivery.chamber },
   );
 
-  // 5. Build with the logged id, send, record the outcome (incl. 400/500s).
+  // 5. Claim a send slot from the shared allocator — this, not sendBatch's
+  //    per-process spacing, is what holds the aggregate rate under the CWC
+  //    ceiling when multiple serverless instances send concurrently.
+  if (opts.ratePermit !== false) {
+    await acquireSendPermit(ratePermitScope(delivery.chamber, opts.environment), opts.ratePermit);
+  }
+
+  // 6. Build with the logged id, send, record the outcome (incl. 400/500s).
   const toSend: CwcDelivery = { ...delivery, deliveryId };
   const xml = buildCwcXml(toSend);
   const sender = opts.sender ?? (delivery.chamber === 'senate' ? sendSenate : sendHouse);

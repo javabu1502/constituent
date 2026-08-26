@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { getActiveOfficeCodesCached, clearActiveOfficeCache, sendCwcDelivery } from '../send';
 import { setDeliveryLogClientFactory } from '../delivery-log';
+import { setRatePermitClientFactory } from '../rate-permit';
 import { CwcComplianceError } from '../content';
 import type { CwcDelivery } from '../types';
 import type { CwcResult } from '../client';
@@ -74,8 +75,27 @@ describe('sendCwcDelivery orchestration', () => {
     } as unknown as ReturnType<typeof import('@/lib/supabase').createAdminClient>;
   }
 
-  beforeEach(() => { rows = []; setDeliveryLogClientFactory(fakeDb); });
-  afterEach(() => setDeliveryLogClientFactory());
+  // Rate-permit allocator stub: immediate slot, records each claim.
+  let permitClaims: Array<{ scope: string; gapMs: number }>;
+  function fakePermitDb() {
+    return {
+      rpc: async (_fn: string, args: { p_scope: string; p_min_gap_ms: number }) => {
+        permitClaims.push({ scope: args.p_scope, gapMs: args.p_min_gap_ms });
+        return { data: new Date(0).toISOString(), error: null };
+      },
+    } as unknown as ReturnType<typeof import('@/lib/supabase').createAdminClient>;
+  }
+
+  beforeEach(() => {
+    rows = [];
+    permitClaims = [];
+    setDeliveryLogClientFactory(fakeDb);
+    setRatePermitClientFactory(fakePermitDb);
+  });
+  afterEach(() => {
+    setDeliveryLogClientFactory();
+    setRatePermitClientFactory();
+  });
 
   const delivery: CwcDelivery = {
     chamber: 'senate',
@@ -94,6 +114,31 @@ describe('sendCwcDelivery orchestration', () => {
   const activeLoader = async () => new Set(['SNY01']);
   const okSender = async (): Promise<CwcResult> => ({ ok: true, status: 201 });
   const friday = new Date('2026-08-14T16:00:00Z');
+
+  it('claims a shared rate-permit slot for the right scope before sending', async () => {
+    await sendCwcDelivery(delivery, {
+      messageKey: 'user1:campaign-1',
+      environment: 'test',
+      billLevel: 'federal',
+      activeOffices: { loader: activeLoader },
+      sender: okSender,
+      now: friday,
+    });
+    expect(permitClaims).toEqual([{ scope: 'cwc:senate:test', gapMs: 200 }]);
+  });
+
+  it('skips the rate permit only when explicitly disabled', async () => {
+    await sendCwcDelivery(delivery, {
+      messageKey: 'user1:campaign-1',
+      environment: 'test',
+      billLevel: 'federal',
+      activeOffices: { loader: activeLoader },
+      sender: okSender,
+      now: friday,
+      ratePermit: false,
+    });
+    expect(permitClaims).toEqual([]);
+  });
 
   it('sends through every gate and records the outcome', async () => {
     const outcome = await sendCwcDelivery(delivery, {
