@@ -25,6 +25,44 @@ function cwcDispatcher(): ProxyAgent | undefined {
   return cachedProxy ?? undefined;
 }
 
+/**
+ * FAIL-CLOSED egress guard: production CWC traffic must exit from the
+ * whitelisted static IPs. Without QUOTAGUARD_URL the request would silently go
+ * out from an ephemeral serverless IP — at best rejected by the whitelist, at
+ * worst accepted and eroding the IP-trust story we gave the SAA. Refuse
+ * instead. CWC_ALLOW_DIRECT_EGRESS=true is the explicit, documented override
+ * for local diagnostics only.
+ */
+export function assertProxiedEgress(mode: Mode): void {
+  if (mode !== 'production') return;
+  if (process.env.QUOTAGUARD_URL) return;
+  if (process.env.CWC_ALLOW_DIRECT_EGRESS === 'true') return;
+  throw new Error(
+    'QUOTAGUARD_URL is not set — refusing to send production CWC traffic from an ephemeral IP. Set QUOTAGUARD_URL (QuotaGuard Shield), or CWC_ALLOW_DIRECT_EGRESS=true to knowingly bypass for diagnostics.',
+  );
+}
+
+// Env-overridable endpoints (the Senate URLs) must never be able to point CWC
+// traffic — constituent PII plus our API key — anywhere but congressional
+// infrastructure over TLS. A typo'd or tampered env var fails loudly here.
+const ALLOWED_CWC_HOST = /(^|\.)house\.gov$|(^|\.)senate\.gov$/i;
+
+export function assertCwcUrl(url: string, label: string): string {
+  let parsed: URL;
+  try {
+    parsed = new URL(url);
+  } catch {
+    throw new Error(`${label} is not a valid URL: ${JSON.stringify(url)}`);
+  }
+  if (parsed.protocol !== 'https:') {
+    throw new Error(`${label} must be https:// — got ${parsed.protocol}//`);
+  }
+  if (!ALLOWED_CWC_HOST.test(parsed.hostname)) {
+    throw new Error(`${label} host ${parsed.hostname} is not a house.gov/senate.gov host — refusing to send CWC traffic there`);
+  }
+  return url;
+}
+
 export interface CwcResult {
   ok: boolean;
   status: number;
@@ -37,13 +75,13 @@ export interface CwcResult {
 type Mode = 'uat' | 'production';
 
 function houseBase(mode: Mode): string {
-  return mode === 'production' ? CWC_ENDPOINTS.house.production : CWC_ENDPOINTS.house.uat;
+  return assertCwcUrl(mode === 'production' ? CWC_ENDPOINTS.house.production : CWC_ENDPOINTS.house.uat, `House ${mode} endpoint`);
 }
 
 function senateBase(mode: Mode): string {
   const base = mode === 'production' ? CWC_ENDPOINTS.senate.production : CWC_ENDPOINTS.senate.test;
   if (!base) throw new Error(`Senate ${mode} endpoint not configured (set SCWC_${mode === 'production' ? 'PRODUCTION' : 'TEST'}_URL)`);
-  return base;
+  return assertCwcUrl(base, `Senate ${mode} endpoint (SCWC_${mode === 'production' ? 'PRODUCTION' : 'TEST'}_URL)`);
 }
 
 /**
@@ -52,6 +90,7 @@ function senateBase(mode: Mode): string {
  * query string per the House docs, sourced from env.
  */
 async function postHouse(path: '/v2/validate' | '/v2/message', xml: string, mode: Mode): Promise<CwcResult> {
+  assertProxiedEgress(mode);
   const apiKey = requireKey(mode === 'production' ? 'CWC_HOUSE_API_KEY' : 'CWC_HOUSE_UAT_API_KEY');
   const url = `${houseBase(mode)}${path}?apikey=${encodeURIComponent(apiKey)}`;
   const res = await undiciFetch(url, {
@@ -82,6 +121,7 @@ export function sendHouse(delivery: CwcDelivery, mode: Mode = 'uat'): Promise<Cw
  * Returns the raw JSON array from the House `/v2/offices` endpoint.
  */
 export async function getActiveOffices(mode: Mode = 'uat'): Promise<unknown> {
+  assertProxiedEgress(mode);
   const apiKey = requireKey(mode === 'production' ? 'CWC_HOUSE_API_KEY' : 'CWC_HOUSE_UAT_API_KEY');
   const url = `${houseBase(mode)}/v2/offices?apikey=${encodeURIComponent(apiKey)}`;
   const res = await undiciFetch(url, { dispatcher: cwcDispatcher() });
@@ -134,7 +174,8 @@ function requireSenateKey(mode: Mode): string {
  * success. Routed through the static-IP proxy like the House path.
  */
 async function postSenate(xml: string, mode: Mode): Promise<CwcResult> {
-  const base = senateBase(mode); // throws if SCWC_*_URL not configured
+  assertProxiedEgress(mode);
+  const base = senateBase(mode); // throws if SCWC_*_URL not configured or not a senate.gov https URL
   const apiKey = requireSenateKey(mode);
   const sep = base.includes('?') ? '&' : '?';
   const res = await undiciFetch(`${base}${sep}apikey=${encodeURIComponent(apiKey)}`, {
@@ -159,9 +200,11 @@ export function sendSenate(delivery: CwcDelivery, mode: Mode = 'uat'): Promise<C
 
 /** Senate active offices (voluntary participation, ~half). Endpoint from env
  *  (SCWC_OFFICES_URL); George also provides a downloadable JSON in SOAPBox. */
-export async function getActiveOfficesSenate(): Promise<unknown> {
+export async function getActiveOfficesSenate(mode: Mode = 'uat'): Promise<unknown> {
+  assertProxiedEgress(mode);
   const url = CWC_ENDPOINTS.senate.activeOffices;
   if (!url) throw new Error('SCWC_OFFICES_URL not set (Senate Get Active Offices endpoint)');
+  assertCwcUrl(url, 'Senate active-offices endpoint (SCWC_OFFICES_URL)');
   const apiKey = process.env.SCWC_TEST_API_KEY || process.env.SCWC_API_KEY || '';
   const full = apiKey ? `${url}${url.includes('?') ? '&' : '?'}apikey=${encodeURIComponent(apiKey)}` : url;
   const res = await undiciFetch(full, { dispatcher: cwcDispatcher() });
@@ -196,7 +239,7 @@ function parseOfficeCodes(data: unknown): Set<string> {
  * sending to listed offices. (Needs live API access to actually fetch.)
  */
 export async function loadActiveOfficeCodes(chamber: 'house' | 'senate', mode: Mode = 'uat'): Promise<Set<string>> {
-  const data = chamber === 'house' ? await getActiveOffices(mode) : await getActiveOfficesSenate();
+  const data = chamber === 'house' ? await getActiveOffices(mode) : await getActiveOfficesSenate(mode);
   return parseOfficeCodes(data);
 }
 
