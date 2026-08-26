@@ -12,7 +12,7 @@ import { generateMessageSchema, parseBody } from '@/lib/schemas';
 import { generateLimiter, getClientIp } from '@/lib/rate-limit';
 import { verifyTurnstile } from '@/lib/turnstile';
 import { enforceDailyQuota, resolveUsageIdentity } from '@/lib/usage-quota';
-import { scrubUnsupportedIdentityClaims } from '@/lib/message-quality';
+import { scrubUnsupportedIdentityClaims, stripUnsourcedStats } from '@/lib/message-quality';
 
 type GenerateRequest = z.infer<typeof generateMessageSchema>;
 type OfficialInput = GenerateRequest['officials'][number];
@@ -350,6 +350,41 @@ function buildToneInstructions(tone: Tone): string {
   }
 }
 
+/** Minimal JSON string unescape for streaming partials. */
+function unescapeJsonString(s: string): string {
+  return s
+    .replace(/\\n/g, '\n')
+    .replace(/\\r/g, '\r')
+    .replace(/\\t/g, '\t')
+    .replace(/\\"/g, '"')
+    .replace(/\\\\/g, '\\');
+}
+
+/** Best-effort extraction of subject/body from a partial JSON string while streaming. */
+function extractPartial(raw: string): { subject: string; body: string } {
+  let subject = '';
+  const subjMatch = raw.match(/"subject"\s*:\s*"((?:[^"\\]|\\.)*)"/);
+  if (subjMatch) subject = unescapeJsonString(subjMatch[1]);
+
+  let body = '';
+  const key = raw.includes('"script"') ? '"script"' : '"body"';
+  const keyIdx = raw.indexOf(key);
+  if (keyIdx !== -1) {
+    const colonIdx = raw.indexOf(':', keyIdx + key.length);
+    const quoteIdx = colonIdx !== -1 ? raw.indexOf('"', colonIdx + 1) : -1;
+    if (quoteIdx !== -1) {
+      let rest = raw.slice(quoteIdx + 1);
+      let end = -1;
+      for (let i = 0; i < rest.length; i++) {
+        if (rest[i] === '"' && rest[i - 1] !== '\\') { end = i; break; }
+      }
+      if (end !== -1) rest = rest.slice(0, end);
+      body = unescapeJsonString(rest);
+    }
+  }
+  return { subject, body };
+}
+
 async function generateForOfficial(
   apiKey: string,
   official: OfficialInput,
@@ -365,6 +400,7 @@ async function generateForOfficial(
   tone: Tone = 'professional',
   billDetails?: string,
   newsContext?: string,
+  onPartial?: (msg: OfficialMessage) => void,
 ): Promise<OfficialMessage> {
   const isState = official.level === 'state';
   const titleLower = official.title.toLowerCase();
@@ -572,6 +608,13 @@ Respond with ONLY this JSON:
   // Build messages with few-shot examples
   const fewShotMessages = buildFewShotMessages(contactMethod);
 
+  // Everything the constituent actually said, plus every data block we
+  // supplied — the ONLY licence for identity claims and statistics.
+  const userOwnWords = `${issue} ${ask} ${personalWhy || ''}`;
+  const allowedStatSource = [topicData, voteContext, districtContext, billDetails, newsContext, userOwnWords]
+    .filter(Boolean)
+    .join(' ');
+
   const response = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
     headers: {
@@ -582,26 +625,59 @@ Respond with ONLY this JSON:
     body: JSON.stringify({
       model: process.env.CLAUDE_MODEL || 'claude-sonnet-4-6',
       max_tokens: 1200,
+      stream: true,
       system: systemPrompt,
       messages: [...fewShotMessages, { role: 'user', content: userPrompt }],
     }),
   });
 
-  if (!response.ok) {
-    const errText = await response.text();
+  if (!response.ok || !response.body) {
+    const errText = response.body ? await response.text() : '';
     console.error(`Anthropic API error for ${official.name}:`, response.status, errText);
     throw new Error(`API error ${response.status}`);
   }
 
-  const data = await response.json();
-  const textParts: string[] = [];
-  for (const block of (data.content || [])) {
-    if (block.type === 'text' && block.text) {
-      textParts.push(block.text);
+  // Read the Anthropic SSE stream, accumulating text deltas and emitting
+  // best-effort partial updates so the client renders the letter as it
+  // writes. Partials pass the same identity-scrub and stat-strip as finals —
+  // a fabricated claim must never render, even transiently.
+  const streamReader = response.body.getReader();
+  const streamDecoder = new TextDecoder();
+  let sseBuffer = '';
+  let rawText = '';
+  while (true) {
+    const { done, value } = await streamReader.read();
+    if (done) break;
+    sseBuffer += streamDecoder.decode(value, { stream: true });
+    const sseLines = sseBuffer.split('\n');
+    sseBuffer = sseLines.pop() || '';
+    for (const sseLine of sseLines) {
+      const trimmed = sseLine.trim();
+      if (!trimmed.startsWith('data:')) continue;
+      const payload = trimmed.slice(5).trim();
+      if (!payload || payload === '[DONE]') continue;
+      try {
+        const evt = JSON.parse(payload);
+        if (evt.type === 'content_block_delta' && evt.delta?.type === 'text_delta' && evt.delta.text) {
+          rawText += evt.delta.text;
+          if (onPartial) {
+            const partial = extractPartial(rawText);
+            if (partial.body) {
+              const safeBody = stripUnsourcedStats(
+                scrubUnsupportedIdentityClaims(partial.body, userOwnWords),
+                allowedStatSource,
+              );
+              if (safeBody) {
+                onPartial({ officialName: official.name, subject: partial.subject, body: safeBody });
+              }
+            }
+          }
+        }
+      } catch {
+        // Ignore keepalive/non-JSON lines
+      }
     }
   }
-
-  const rawText = textParts.join('\n');
   const strippedText = stripTags(rawText);
   const parsed = extractJSON(strippedText) as { subject?: string; body?: string; script?: string } | null;
 
@@ -616,7 +692,10 @@ Respond with ONLY this JSON:
       script = strippedText;
     }
 
-    const cleanedScript = scrubUnsupportedIdentityClaims(deDash(cleanText(script)), `${issue} ${ask} ${personalWhy || ''}`);
+    const cleanedScript = stripUnsourcedStats(
+      scrubUnsupportedIdentityClaims(deDash(cleanText(script)), userOwnWords),
+      allowedStatSource,
+    );
 
     // Build phone opening and closing
     const opening = `Hi, my name is ${senderName} and I'm a constituent${locationStr ? ` from ${locationStr}` : ''}.`;
@@ -642,8 +721,9 @@ Respond with ONLY this JSON:
     body = strippedText;
   }
 
-  // Legacy path has no retry loop — scrub fabricated identity sentences.
-  body = scrubUnsupportedIdentityClaims(body, `${issue} ${ask} ${personalWhy || ''}`);
+  // Legacy path has no retry loop — scrub fabricated identity sentences and
+  // drop any statistic whose number isn't in the data we supplied.
+  body = stripUnsourcedStats(scrubUnsupportedIdentityClaims(body, userOwnWords), allowedStatSource);
 
   const cleanedBody = deDash(cleanText(body));
   const cleanedSubject = deDash(cleanText(subj).replace(/\n/g, ' '));
@@ -887,6 +967,7 @@ ${contactMethod === 'phone' ? '{"script": "the revised phone script"}' : '{"subj
             const result = await generateForOfficial(
               apiKey, official, issue, ask, personalWhy, senderName, address, method,
               topicDataBlock, voteContext, districtContext, selectedTone, billDetailsBlock, newsContext,
+              enqueueMessage,
             );
             enqueueMessage(result);
             return result;

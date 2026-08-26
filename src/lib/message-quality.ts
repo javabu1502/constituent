@@ -275,3 +275,39 @@ export function scrubUnsupportedIdentityClaims(text: string, userText: string): 
   const kept = sentences.filter((s) => detectUnsupportedIdentityClaims(s, userText).length === 0);
   return kept.join(' ').trim();
 }
+
+// A statistic-shaped claim: a percentage, a dollar amount, or a count scaled
+// by thousand/million/billion/trillion. Bare small numbers ("three kids",
+// "District 12", "H.R. 1234") deliberately don't match.
+const STAT_SHAPE =
+  /\$\s?\d[\d,]*(?:\.\d+)?\s*(?:trillion|billion|million|thousand)?|\d[\d,]*(?:\.\d+)?\s*%|\d[\d,]*(?:\.\d+)?\s*percent\b|\d[\d,]*(?:\.\d+)?\s*(?:trillion|billion|million)\b/gi;
+
+function numbersIn(text: string): Set<string> {
+  return new Set(
+    ((text || '').match(/\d[\d,]*(?:\.\d+)?/g) || []).map((s) => s.replace(/,/g, ''))
+  );
+}
+
+/** Returns the statistic-shaped claims in `draft` whose numbers do not appear
+ * anywhere in `allowedSource` (the data we supplied plus the constituent's own
+ * words). Any result means the model recalled or invented a figure. */
+export function detectUnsourcedStats(draft: string, allowedSource: string): string[] {
+  const allowed = numbersIn(allowedSource);
+  const out: string[] = [];
+  for (const m of (draft || '').match(STAT_SHAPE) || []) {
+    const digits = m.replace(/[^\d.]/g, '');
+    if (digits.length === 0 || !allowed.has(digits)) out.push(m.trim());
+  }
+  return out;
+}
+
+/** Backstop against hallucinated figures: drop any sentence containing a
+ * statistic whose number does not appear in `allowedSource`. The prompt is the
+ * primary guard; this guarantees an unsourced number never reaches an office.
+ * Falls back to the original text rather than returning nothing. */
+export function stripUnsourcedStats(text: string, allowedSource: string): string {
+  if (detectUnsourcedStats(text, allowedSource).length === 0) return text;
+  const sentences = (text || '').split(/(?<=[.!?])\s+/);
+  const kept = sentences.filter((s) => detectUnsourcedStats(s, allowedSource).length === 0);
+  return kept.join(' ').trim() || text;
+}

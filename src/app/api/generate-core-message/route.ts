@@ -7,7 +7,13 @@ import { getClientIp } from '@/lib/rate-limit';
 import { enforceDailyQuota, resolveUsageIdentity } from '@/lib/usage-quota';
 import { sanitizeAiJurisdiction } from '@/lib/issue-jurisdiction';
 import { validateCampaignAsk } from '@/lib/envelope';
-import { auditMessageQuality, hasBlockingIssue, detectUnsupportedIdentityClaims } from '@/lib/message-quality';
+import {
+  auditMessageQuality,
+  hasBlockingIssue,
+  detectUnsupportedIdentityClaims,
+  detectUnsourcedStats,
+  stripUnsourcedStats,
+} from '@/lib/message-quality';
 
 export const runtime = 'nodejs';
 
@@ -152,6 +158,12 @@ Draft the core message.`;
     // Everything the constituent actually said — the ONLY licence for any
     // first-person identity claim in the draft.
     const userOwnWords = [parsed.data.issue, parsed.data.ask, parsed.data.personalWhy].filter(Boolean).join(' ');
+    // The only licensed sources for any statistic in the draft: the campaign's
+    // own material and the constituent's own words.
+    const statSource = [
+      campaign?.headline, campaign?.description, campaign?.message_template,
+      campaign?.bill_ref, campaign?.bill_title, userOwnWords,
+    ].filter(Boolean).join(' ');
 
     type CoreOut = { body?: string; subject?: unknown; opening?: unknown; ask?: unknown; jurisdiction?: unknown } | null;
     let out: CoreOut = null;
@@ -176,6 +188,22 @@ Draft the core message.`;
         body = '';
         continue;
       }
+      const unsourced = detectUnsourcedStats(body, statSource);
+      if (unsourced.length > 0) {
+        if (attempt === 0) {
+          correction = `YOUR PREVIOUS DRAFT ASSERTED figures the source material does not contain: ${unsourced.join('; ')}. Do not recall numbers from memory. Rewrite WITHOUT those figures — argue from the constituent's experience and plain reasoning.`;
+          body = '';
+          continue;
+        }
+        // Final attempt: strip the offending sentences rather than refuse —
+        // losing a sentence beats losing the draft. If that guts the body,
+        // fall through to the refusal path.
+        body = stripUnsourcedStats(body, statSource);
+        if (detectUnsourcedStats(body, statSource).length > 0 || body.length < 40) {
+          body = '';
+          continue;
+        }
+      }
       if (!hasBlockingIssue(auditMessageQuality(body, { source: 'ai' }))) break;
       body = '';
     }
@@ -185,17 +213,20 @@ Draft the core message.`;
     // Frame fields are best-effort: null (deterministic seeded pools
     // client-side) beats a generic or wrong one slipping through.
     const rawSubject = deDash(String(out?.subject ?? '')).replace(/^["'\s]+|["'\s]+$/g, '');
-    const subject = rawSubject.length >= 8 && !/constituent message/i.test(rawSubject) ? rawSubject.slice(0, 90) : null;
+    const subject =
+      rawSubject.length >= 8 && !/constituent message/i.test(rawSubject) && detectUnsourcedStats(rawSubject, statSource).length === 0
+        ? rawSubject.slice(0, 90)
+        : null;
     const rawOpening = deDash(String(out?.opening ?? '').trim());
     const opening =
-      rawOpening.length >= 20 && rawOpening.length <= 400 && !/^dear\b/i.test(rawOpening) && !/i am writing to you as your constituent because your vote/i.test(rawOpening)
+      rawOpening.length >= 20 && rawOpening.length <= 400 && !/^dear\b/i.test(rawOpening) && !/i am writing to you as your constituent because your vote/i.test(rawOpening) && detectUnsourcedStats(rawOpening, statSource).length === 0
         ? rawOpening
         : null;
     const rawAsk = deDash(String(out?.ask ?? '').trim());
     // Campaign asks must name the bill and match the direction exactly —
     // anything off falls back to the deterministic closers.
     const ask =
-      rawAsk.length >= 10 && rawAsk.length <= 300 && !/^dear\b/i.test(rawAsk)
+      rawAsk.length >= 10 && rawAsk.length <= 300 && !/^dear\b/i.test(rawAsk) && detectUnsourcedStats(rawAsk, statSource).length === 0
         ? campaign?.bill_ref
           ? validateCampaignAsk(rawAsk, campaign.bill_ref, stanceVerb, campaign.stage_goal) ? rawAsk : null
           : rawAsk

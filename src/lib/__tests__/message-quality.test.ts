@@ -75,3 +75,36 @@ describe('detectUnsupportedIdentityClaims (the fabricated-veteran bug)', () => {
     expect(detectUnsupportedIdentityClaims('Veterans in my community drive hours for care they earned. That is not a system working as it should.', 'we need more VA hospitals')).toEqual([]);
   });
 });
+
+describe('detectUnsourcedStats / stripUnsourcedStats', () => {
+  const SOURCE = 'Talking points: 43 million Americans carry student loan debt. The program costs $1.6 trillion. Support H.R. 1234.';
+
+  it('licenses figures present in the source material', async () => {
+    const { detectUnsourcedStats } = await import('../message-quality');
+    expect(detectUnsourcedStats('With 43 million Americans in debt, the $1.6 trillion total keeps growing.', SOURCE)).toEqual([]);
+  });
+
+  it('flags percentages, dollar amounts, and scaled counts absent from the source', async () => {
+    const { detectUnsourcedStats } = await import('../message-quality');
+    expect(detectUnsourcedStats('Some 87% of borrowers struggle.', SOURCE)).toEqual(['87%']);
+    expect(detectUnsourcedStats('It costs taxpayers $2.3 billion a year.', SOURCE)).toEqual(['$2.3 billion']);
+    expect(detectUnsourcedStats('Over 12 million families are affected.', SOURCE)).toEqual(['12 million']);
+  });
+
+  it('ignores non-statistic numbers like bill refs and small counts', async () => {
+    const { detectUnsourcedStats } = await import('../message-quality');
+    expect(detectUnsourcedStats('Please cosponsor H.R. 9999. My three kids and District 12 depend on it.', SOURCE)).toEqual([]);
+  });
+
+  it('strips only the offending sentences and keeps the rest', async () => {
+    const { stripUnsourcedStats } = await import('../message-quality');
+    const draft = 'Student debt is crushing families. Some 87% of borrowers report stress. Please act now.';
+    expect(stripUnsourcedStats(draft, SOURCE)).toBe('Student debt is crushing families. Please act now.');
+  });
+
+  it('falls back to the original text rather than returning nothing', async () => {
+    const { stripUnsourcedStats } = await import('../message-quality');
+    const draft = 'Some 87% of borrowers report stress about the $9 trillion problem.';
+    expect(stripUnsourcedStats(draft, SOURCE)).toBe(draft);
+  });
+});
