@@ -76,3 +76,56 @@ describe('verifyConstituent — refusals', () => {
     if (!r.ok) expect(r.reason).toBe('GEOCODE_FAILED');
   });
 });
+
+describe('verifyConstituentForOffice (delivery-shaped, mandatory in production)', () => {
+  const delivery = (o: Record<string, unknown> = {}) => ({
+    chamber: 'senate',
+    officeCode: 'SNY01',
+    campaignId: 'c',
+    constituent: {
+      prefix: 'Ms.', firstName: 'Jane', lastName: 'Doe',
+      address1: '350 5th Ave', city: 'New York', state: 'NY', zip: '10118',
+      email: 'jane@example.com',
+    },
+    message: { subject: 'S', topics: ['Health'], constituentMessage: 'Body.' },
+    ...o,
+  }) as import('../types').CwcDelivery;
+
+  it('senate: passes when the address state matches the seat state', async () => {
+    mockGeo.mockResolvedValue(geo({ stateCode: 'NY' }));
+    const { verifyConstituentForOffice } = await import('../verify');
+    const r = await verifyConstituentForOffice(delivery());
+    expect(r).toEqual({ ok: true, officeCode: 'SNY01' });
+  });
+
+  it('senate: refuses when the address geocodes to another state', async () => {
+    mockGeo.mockResolvedValue(geo({ stateCode: 'NJ' }));
+    const { verifyConstituentForOffice } = await import('../verify');
+    const r = await verifyConstituentForOffice(delivery());
+    expect(r.ok).toBe(false);
+    if (!r.ok) expect(r.reason).toBe('STATE_MISMATCH');
+  });
+
+  it('house: refuses a district mismatch between address and target seat', async () => {
+    mockGeo.mockResolvedValue(geo({ stateCode: 'NY', congressionalDistrict: '10' }));
+    const { verifyConstituentForOffice } = await import('../verify');
+    const r = await verifyConstituentForOffice(delivery({ chamber: 'house', officeCode: 'HNY12' }));
+    expect(r.ok).toBe(false);
+    if (!r.ok) expect(r.reason).toBe('DISTRICT_MISMATCH');
+  });
+
+  it('house: passes when the geocoded district produces the exact seat', async () => {
+    mockGeo.mockResolvedValue(geo({ stateCode: 'NY', congressionalDistrict: '12' }));
+    const { verifyConstituentForOffice } = await import('../verify');
+    const r = await verifyConstituentForOffice(delivery({ chamber: 'house', officeCode: 'HNY12' }));
+    expect(r).toEqual({ ok: true, officeCode: 'HNY12' });
+  });
+
+  it('fails closed when geocoding errors', async () => {
+    mockGeo.mockResolvedValue({ error: 'No match', code: 'NO_MATCH' });
+    const { verifyConstituentForOffice } = await import('../verify');
+    const r = await verifyConstituentForOffice(delivery());
+    expect(r.ok).toBe(false);
+    if (!r.ok) expect(r.reason).toBe('GEOCODE_FAILED');
+  });
+});

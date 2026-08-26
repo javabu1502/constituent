@@ -6,6 +6,10 @@ import {
   cwcSendableProblems,
   assertCwcSendable,
   CwcComplianceError,
+  redactConstituentPii,
+  containsConstituentPii,
+  placeMessage,
+  type PiiFields,
 } from '../content';
 import { sendBatch } from '../client';
 import type { CwcDelivery, CwcMessageContent } from '../types';
@@ -29,6 +33,84 @@ describe('stripSignatureBlock', () => {
   it('does not over-strip when "thanks" appears mid-message', () => {
     const body = 'Thanks to this program my mother got care. Please keep it.';
     expect(stripSignatureBlock(body)).toBe(body);
+  });
+});
+
+// Each case below was a documented DEFEAT of the pattern-only stripper in the
+// 2026-08-26 audit — the value-aware pipeline must handle all of them.
+describe('redaction pipeline vs the audit defeat list', () => {
+  const jane: PiiFields = {
+    firstName: 'Jane', lastName: 'Doe',
+    address1: '350 5th Ave', city: 'New York', state: 'NY', zip: '10118-0110',
+  };
+  const clean = (body: string) => redactConstituentPii(stripSignatureBlock(body), jane);
+
+  it('CRLF (Windows-pasted) closings still strip', () => {
+    expect(stripSignatureBlock('My message.\r\n\r\nSincerely,\r\nJane Doe')).toBe('My message.');
+  });
+
+  it('"Respectfully yours," / "Kind regards," / "— Jane" variants strip', () => {
+    expect(stripSignatureBlock('Body.\n\nRespectfully yours,\nJane Doe')).toBe('Body.');
+    expect(stripSignatureBlock('Body.\n\nKind regards,\nJane')).toBe('Body.');
+    expect(stripSignatureBlock('Body.\n\n— Jane Doe')).toBe('Body.');
+  });
+
+  it('name on the SAME line as the closing strips', () => {
+    expect(stripSignatureBlock('Body.\n\nSincerely, Jane Doe')).toBe('Body.');
+  });
+
+  it('a top-of-letter business-format address block is redacted (value-aware)', () => {
+    const body = 'Jane Doe\n350 5th Ave\nNew York, NY 10118\n\nPlease support the bill.';
+    expect(clean(body)).toBe('Please support the bill.');
+  });
+
+  it('a mid-message "Thank you." no longer deletes the content after it', () => {
+    const body = 'Thank you.\n\nNow, the reason I write: please protect coverage for my family.';
+    expect(clean(body)).toContain('please protect coverage');
+  });
+
+  it('inline "My name is Jane Doe" is caught by the gate, not chopped', () => {
+    const body = 'My name is Jane Doe and I live at 350 5th Ave. Please support the bill.';
+    expect(containsConstituentPii(body, jane)).toBe(true);
+    const problems = cwcSendableProblems({
+      message: { subject: 'S', topics: ['Health'], constituentMessage: body },
+      billLevel: 'none',
+      constituent: jane,
+    });
+    expect(problems.join()).toMatch(/name or street address inline/);
+  });
+
+  it("someone ELSE's name mid-story is NOT the constituent's PII", () => {
+    const body = 'My neighbor John Smith lost his coverage last year.';
+    expect(containsConstituentPii(body, jane)).toBe(false);
+  });
+
+  it('redaction only drops whole PII lines, never prose', () => {
+    const body = 'Please act now.\nJane Doe\nMy family depends on this program.';
+    expect(clean(body)).toBe('Please act now.\nMy family depends on this program.');
+  });
+});
+
+describe('placeMessage (George rule C: template → Organization, edited → Constituent)', () => {
+  const template = 'Please support S. 2296 to lower insulin prices.';
+
+  it('untouched template goes to OrganizationStatement', () => {
+    expect(placeMessage({ text: template, template })).toEqual({ organizationStatement: template });
+  });
+
+  it('whitespace/case-only differences still count as untouched', () => {
+    expect(placeMessage({ text: `  ${template.toUpperCase()}  `, template })).toEqual({
+      organizationStatement: `  ${template.toUpperCase()}  `,
+    });
+  });
+
+  it('any real edit routes to ConstituentMessage', () => {
+    const edited = `${template} As a nurse, I see this daily.`;
+    expect(placeMessage({ text: edited, template })).toEqual({ constituentMessage: edited });
+  });
+
+  it('no template at all → ConstituentMessage', () => {
+    expect(placeMessage({ text: 'My own words.' })).toEqual({ constituentMessage: 'My own words.' });
   });
 });
 

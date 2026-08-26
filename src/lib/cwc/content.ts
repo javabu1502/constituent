@@ -30,6 +30,7 @@ function isSignatureishLine(line: string): boolean {
   const l = line.trim();
   if (!l) return true;
   if (l.length > 64) return false;
+  if (l.split(/\s+/).length > 8) return false; // names/addresses are short; prose isn't
   if (/[.!?]\s/.test(l)) return false; // sentence boundary mid-line
   if (/[!?]$/.test(l)) return false;
   return true;

@@ -248,3 +248,28 @@ describe('buildCampaignId', () => {
     expect(a).toMatch(/^[a-f0-9]{64}$/);
   });
 });
+
+describe('PII redaction at render (belt-and-suspenders)', () => {
+  it('a signature block that reaches the builder never lands in the XML', () => {
+    const d = validDelivery();
+    d.message = {
+      ...d.message,
+      constituentMessage: 'Please support the bill.\n\nSincerely,\nJane Doe\n350 5th Ave\nNew York, NY 10118',
+    };
+    const xml = buildCwcXml(d);
+    const body = /<ConstituentMessage>([\s\S]*?)<\/ConstituentMessage>/.exec(xml)?.[1] ?? '';
+    expect(body).toContain('Please support the bill.');
+    expect(body).not.toMatch(/Jane Doe|350 5th Ave|10118/);
+  });
+
+  it('a top-of-letter address block is redacted using the constituent values', () => {
+    const d = validDelivery();
+    d.message = {
+      ...d.message,
+      constituentMessage: 'Jane Doe\n350 5th Ave\nNew York, NY 10118\n\nPlease support the bill.',
+    };
+    const body = /<ConstituentMessage>([\s\S]*?)<\/ConstituentMessage>/.exec(buildCwcXml(d))?.[1] ?? '';
+    expect(body).toContain('Please support the bill.');
+    expect(body).not.toMatch(/Jane Doe|350 5th Ave/);
+  });
+});
