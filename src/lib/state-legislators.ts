@@ -39,7 +39,8 @@ export interface StateLegislator {
 }
 
 // Map ordinal words to numeric ordinals for district normalization.
-// Covers up to 25th which exceeds any US state legislative district ordinal.
+// Must cover the HIGHEST state legislative district ordinal. Massachusetts House
+// districts go up to the 37th (e.g. "Thirty-seventh Middlesex"), so cover through 40th.
 const ORDINAL_WORDS: Record<string, string> = {
   first: '1st',
   second: '2nd',
@@ -66,6 +67,21 @@ const ORDINAL_WORDS: Record<string, string> = {
   'twenty-third': '23rd',
   'twenty-fourth': '24th',
   'twenty-fifth': '25th',
+  'twenty-sixth': '26th',
+  'twenty-seventh': '27th',
+  'twenty-eighth': '28th',
+  'twenty-ninth': '29th',
+  thirtieth: '30th',
+  'thirty-first': '31st',
+  'thirty-second': '32nd',
+  'thirty-third': '33rd',
+  'thirty-fourth': '34th',
+  'thirty-fifth': '35th',
+  'thirty-sixth': '36th',
+  'thirty-seventh': '37th',
+  'thirty-eighth': '38th',
+  'thirty-ninth': '39th',
+  fortieth: '40th',
 };
 
 /**
@@ -86,10 +102,13 @@ function normalizeDistrict(district: string): string {
   // Collapse multiple spaces
   d = d.replace(/\s+/g, ' ');
 
-  // Convert ordinal words to numeric ordinals
-  for (const [word, num] of Object.entries(ORDINAL_WORDS)) {
-    // word may contain hyphens (already converted to spaces above)
-    const pattern = word.replace(/-/g, ' ');
+  // Convert ordinal words to numeric ordinals. Process longer (compound) words
+  // first so "twenty-first" is matched before "first" — otherwise the single-word
+  // replacement clobbers the compound (e.g. "twenty first" → "twenty 1st").
+  const ordinalEntries = Object.entries(ORDINAL_WORDS)
+    .map(([word, num]) => ({ pattern: word.replace(/-/g, ' '), num }))
+    .sort((a, b) => b.pattern.length - a.pattern.length);
+  for (const { pattern, num } of ordinalEntries) {
     d = d.replace(new RegExp(`\\b${pattern}\\b`, 'g'), num);
   }
 
