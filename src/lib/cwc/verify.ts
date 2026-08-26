@@ -1,5 +1,6 @@
 import { geocodeAddress } from '@/lib/geocode';
 import type { Official } from '@/lib/types';
+import type { CwcDelivery } from './types';
 import { houseOfficeCode, resolveOfficeCode } from './offices';
 
 /**
@@ -73,4 +74,47 @@ export async function verifyConstituent(
     };
   }
   return { ok: true, officeCode: target.code };
+}
+
+/**
+ * Delivery-shaped verification for the send path: the constituent's address
+ * (from the delivery's own <Constituent> block) must geocode to the seat the
+ * delivery targets. `sendCwcDelivery` runs this MANDATORILY in production —
+ * George's cardinal rule ("never send to an office the person isn't
+ * represented by") is enforced in the pipe, not by caller discipline.
+ */
+export async function verifyConstituentForOffice(delivery: CwcDelivery): Promise<VerifyResult> {
+  const { constituent: c, officeCode, chamber } = delivery;
+
+  const geo = await geocodeAddress(c.address1, c.city, c.state, c.zip);
+  if ('error' in geo) {
+    return { ok: false, reason: 'GEOCODE_FAILED', detail: geo.error };
+  }
+
+  // Senators represent the whole state — the seat's state letters must match.
+  if (chamber === 'senate') {
+    const seatState = officeCode.slice(1, 3).toUpperCase();
+    if (geo.stateCode.toUpperCase() !== seatState) {
+      return {
+        ok: false,
+        reason: 'STATE_MISMATCH',
+        detail: `address is in ${geo.stateCode}, but the delivery targets ${officeCode} (${seatState})`,
+      };
+    }
+    return { ok: true, officeCode };
+  }
+
+  // House: the district the address geocodes to must produce this exact seat.
+  const fromGeo = houseOfficeCode(geo.stateCode, geo.congressionalDistrict);
+  if (!fromGeo.ok) {
+    return { ok: false, reason: 'UNRESOLVED', detail: fromGeo.reason };
+  }
+  if (fromGeo.code !== officeCode) {
+    return {
+      ok: false,
+      reason: 'DISTRICT_MISMATCH',
+      detail: `address maps to ${fromGeo.code}, but the delivery targets ${officeCode}`,
+    };
+  }
+  return { ok: true, officeCode };
 }

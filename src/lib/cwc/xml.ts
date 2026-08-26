@@ -6,7 +6,7 @@ import {
   FIELD_LIMITS,
   LOC_TOPIC_SET,
 } from './constants';
-import { stripSignatureBlock } from './content';
+import { stripSignatureBlock, redactConstituentPii } from './content';
 import type { CwcDelivery } from './types';
 
 /** Raised when a delivery can't produce schema-valid XML. Message lists every
@@ -20,6 +20,11 @@ export class CwcValidationError extends Error {
 
 const escapeXml = (s: string): string =>
   s
+    // XML 1.0 cannot carry these at all (even escaped) — they make the whole
+    // document ill-formed and the endpoint 400s. Common in PDF-pasted text.
+    .replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g, '')
+    .replace(/[\uD800-\uDBFF](?![\uDC00-\uDFFF])/g, '')
+    .replace(/(?<![\uD800-\uDBFF])[\uDC00-\uDFFF]/g, '')
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
@@ -75,6 +80,15 @@ export function buildCwcXml(delivery: CwcDelivery): string {
   if (!CWC_STATE_CODES.has(c.state)) problems.push(`constituent.state "${c.state}" is not a valid code`);
   if (!/^\d{5}(-\d{4})?$/.test(c.zip)) problems.push(`constituent.zip "${c.zip}" must be 5-digit or ZIP+4`);
   if (!isEmail(c.email)) problems.push(`constituent.email "${c.email}" is invalid`);
+  // RNG maxLength=500 on every name/address string — reject rather than send
+  // schema-invalid XML (these are user-controlled fields).
+  for (const [label, value] of [
+    ['firstName', c.firstName], ['middleName', c.middleName], ['lastName', c.lastName],
+    ['suffix', c.suffix], ['title', c.title], ['constituentOrganization', c.constituentOrganization],
+    ['address1', c.address1], ['address2', c.address2], ['city', c.city],
+  ] as const) {
+    if (value && value.length > 500) problems.push(`constituent.${label} exceeds the schema maximum of 500 chars`);
+  }
 
   let contactPhone: string | null = null;
 
@@ -96,8 +110,13 @@ export function buildCwcXml(delivery: CwcDelivery): string {
   // blocks break the offices' ~80%-similarity campaign grouping). Strip the
   // closing block HERE, at the last common point before render, so every send
   // path gets it regardless of what upstream generation produced.
-  const orgStatement = m.organizationStatement ? stripSignatureBlock(m.organizationStatement) : m.organizationStatement;
-  const constituentMessage = m.constituentMessage ? stripSignatureBlock(m.constituentMessage) : m.constituentMessage;
+  // stripSignatureBlock is the cosmetic pass; redactConstituentPii uses the
+  // ACTUAL name/address from the structured tags, so a signature the pattern
+  // misses (CRLF paste, unusual closing, top-of-letter block) still never ships.
+  const cleanBody = (text: string | undefined) =>
+    text ? redactConstituentPii(stripSignatureBlock(text), c) : text;
+  const orgStatement = cleanBody(m.organizationStatement);
+  const constituentMessage = cleanBody(m.constituentMessage);
 
   const hasOrgStatement = !!orgStatement?.trim();
   const hasConstituentMessage = !!constituentMessage?.trim();
@@ -126,6 +145,19 @@ export function buildCwcXml(delivery: CwcDelivery): string {
   if (org?.contactName && org.contactName.trim().length < 2) problems.push('organization.contactName must be ≥2 chars when present');
   if (org?.about && org.about.trim().length < FIELD_LIMITS.organizationAboutMin) {
     problems.push(`organization.about must be ≥${FIELD_LIMITS.organizationAboutMin} chars when present`);
+  }
+
+  if (delivery.campaignId.length < 2 || delivery.campaignId.length > 500) {
+    problems.push('campaignId must be 2-500 chars (schema)');
+  }
+  if (delivery.deliveryId !== undefined && !/^[a-zA-Z0-9]{32}$/.test(delivery.deliveryId)) {
+    problems.push('deliveryId override must be a 32-char alphanumeric GUID');
+  }
+  if (delivery.deliveryDate !== undefined && !/^\d{8}$/.test(delivery.deliveryDate)) {
+    problems.push('deliveryDate override must be YYYYMMDD');
+  }
+  if (org?.contactEmail && !isEmail(org.contactEmail)) {
+    problems.push(`organization.contactEmail "${org.contactEmail}" is invalid`);
   }
 
   if (problems.length) throw new CwcValidationError(problems);

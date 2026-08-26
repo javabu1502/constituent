@@ -10,6 +10,7 @@ import {
   type CwcEnvironment,
 } from './delivery-log';
 import { acquireSendPermit, ratePermitScope, type AcquirePermitOptions } from './rate-permit';
+import { verifyConstituentForOffice } from './verify';
 import type { CwcDelivery } from './types';
 
 /**
@@ -77,8 +78,10 @@ export interface SendCwcOptions {
   /** Stable key for the logical message (e.g. `userId:campaignId`). */
   messageKey: string;
   environment: CwcEnvironment;
-  /** Campaign-level bill scope for the state-bill gate. */
-  billLevel?: 'federal' | 'state' | null;
+  /** Campaign-level bill scope for the state-bill gate. FAIL-CLOSED: only an
+   *  explicit 'federal' (federal bill) or 'none' (no bill) is sendable —
+   *  'state', null, or omitted all refuse (the gate throws). */
+  billLevel?: 'federal' | 'state' | 'none' | null;
   /** Skip the active-offices check — ONLY for the Senate TEST env, where all
    *  100 offices accept and the list does not indicate participation. */
   skipActiveOfficeCheck?: boolean;
@@ -89,12 +92,20 @@ export interface SendCwcOptions {
   /** Cross-instance rate permit; injectable for tests. `false` disables
    *  (ONLY for offline preview/validate paths that never POST a message). */
   ratePermit?: AcquirePermitOptions | false;
+  /** Constituent-verification seam. PRODUCTION always verifies (no opt-out):
+   *  the constituent's address must geocode to this delivery's seat, or we
+   *  refuse (George's cardinal rule). In the test env verification defaults
+   *  OFF (fixture constituents aren't real); pass `true` to exercise it.
+   *  `verifier` is the test seam. */
+  verifyConstituent?: boolean;
+  verifier?: (delivery: CwcDelivery) => Promise<import('./verify').VerifyResult>;
 }
 
 export type SendCwcOutcome =
   | { sent: true; deliveryId: string; retried: boolean; result: CwcResult }
   | { sent: false; fallback: 'router'; reason: string }
-  | { sent: false; fallback: 'retry-later'; reason: string };
+  | { sent: false; fallback: 'retry-later'; reason: string }
+  | { sent: false; fallback: 'not-constituent'; reason: string };
 
 /**
  * Deliver one message via CWC with every gate applied. Returns `sent: false`
@@ -107,10 +118,26 @@ export async function sendCwcDelivery(
   delivery: CwcDelivery,
   opts: SendCwcOptions,
 ): Promise<SendCwcOutcome> {
-  // 1. Compliance gate (throws with the full problem list).
-  assertCwcSendable({ message: delivery.message, billLevel: opts.billLevel });
+  // 1. Compliance gate (throws with the full problem list). Passing the
+  //    constituent enables the value-aware PII checks (name/address in body).
+  assertCwcSendable({ message: delivery.message, billLevel: opts.billLevel, constituent: delivery.constituent });
 
   const mode: Mode = opts.environment === 'production' ? 'production' : 'uat';
+
+  // 1b. Constituent verification — the address must geocode to THIS seat.
+  //     Mandatory in production (no opt-out); test env opts in via flag.
+  const shouldVerify = opts.environment === 'production' || opts.verifyConstituent === true;
+  if (shouldVerify) {
+    const verifier = opts.verifier ?? verifyConstituentForOffice;
+    const verdict = await verifier(delivery);
+    if (!verdict.ok) {
+      return {
+        sent: false,
+        fallback: 'not-constituent',
+        reason: `constituent verification failed (${verdict.reason}): ${verdict.detail}`,
+      };
+    }
+  }
 
   // 2. SCWC maintenance windows (Senate infrastructure).
   if (delivery.chamber === 'senate' && isInScwcMaintenanceWindow(opts.now ?? new Date())) {
