@@ -24,6 +24,8 @@ export {
 export {
   stripSignatureBlock, blocksFederalDelivery,
   containsSignatureBlock, cwcSendableProblems, assertCwcSendable, CwcComplianceError,
+  redactConstituentPii, containsConstituentPii, placeMessage, normalizeBodyText,
+  type PiiFields,
 } from './content';
 export {
   getOrCreateDeliveryId, recordDeliveryResult, statusFromHttp, xmlSha256,
@@ -36,6 +38,7 @@ export {
 } from './send';
 export {
   acquireSendPermit, ratePermitScope, setRatePermitClientFactory,
+  RatePermitBackpressureError,
   type AcquirePermitOptions,
 } from './rate-permit';
 export {
@@ -50,6 +53,7 @@ export {
 } from './offices';
 export {
   verifyConstituent,
+  verifyConstituentForOffice,
   type VerifyResult,
   type VerifyReason,
   type ConstituentAddress,

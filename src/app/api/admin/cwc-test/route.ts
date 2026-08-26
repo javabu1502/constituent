@@ -2,9 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
 import {
   buildCwcXml, buildCampaignId, checkEgressIp,
-  validateHouse, sendHouse, sendSenate,
+  validateHouse, sendCwcDelivery,
   cwcSendableProblems,
-  acquireSendPermit, ratePermitScope,
   type CwcDelivery,
 } from '@/lib/cwc';
 
@@ -66,7 +65,7 @@ export async function GET(request: NextRequest) {
 
   // Pre-send compliance gate (state-bill block, bill⇒stance, signature check)
   // runs on EVERY action — a preview that would fail the gate should say so.
-  const gateProblems = cwcSendableProblems({ message: sample.message, billLevel: 'federal' });
+  const gateProblems = cwcSendableProblems({ message: sample.message, billLevel: 'none', constituent: sample.constituent });
   if (gateProblems.length) {
     return NextResponse.json({ error: 'Compliance gate failed', problems: gateProblems }, { status: 400 });
   }
@@ -87,17 +86,29 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    let result;
     if (action === 'validate') {
       if (chamber !== 'house') return NextResponse.json({ error: 'validate is House-only; Senate test env is send-only' }, { status: 400 });
-      result = await validateHouse(sample, 'uat');
-    } else {
-      // Even a sandbox send claims a shared rate slot: parallel test requests
-      // must not be the thing that exceeds the CWC ceiling.
-      await acquireSendPermit(ratePermitScope(chamber, 'test'));
-      result = chamber === 'house' ? await sendHouse(sample, 'uat') : await sendSenate(sample, 'uat');
+      // validateHouse claims a rate permit inside the client POST like any
+      // other CWC call — parallel test requests can't exceed the ceiling.
+      const result = await validateHouse(sample, 'uat');
+      return NextResponse.json({ chamber, action, egressIp, result, xml });
     }
-    return NextResponse.json({ chamber, action, egressIp, result, xml });
+    // Sandbox send goes through the SAME gated path as production
+    // (sendCwcDelivery): compliance gate, idempotent DeliveryId, rate permit
+    // at the POST choke point, outcome + raw response logged. messageKey is
+    // day-scoped so repeated same-day tests retry the same id (409 = landed)
+    // instead of minting sandbox duplicates.
+    const day = new Date().toISOString().slice(0, 10);
+    const outcome = await sendCwcDelivery(sample, {
+      messageKey: `admin-cwc-test:${chamber}:${day}`,
+      environment: 'test',
+      billLevel: 'none',
+      skipActiveOfficeCheck: true, // test sandbox — the list doesn't indicate participation
+    });
+    if (!outcome.sent) {
+      return NextResponse.json({ chamber, action, egressIp, deferred: outcome.fallback, reason: outcome.reason, xml }, { status: 503 });
+    }
+    return NextResponse.json({ chamber, action, egressIp, deliveryId: outcome.deliveryId, retried: outcome.retried, result: outcome.result, xml });
   } catch (e) {
     return NextResponse.json({ chamber, action, egressIp, error: (e as Error).message, xml }, { status: 502 });
   }

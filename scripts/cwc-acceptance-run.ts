@@ -14,11 +14,15 @@
  *   1. federal bill + Pro
  *   2. the SAME bill + Con (distinct campaign id — stance is in the key)
  *   3. no-bill topic campaign
- * Each campaign goes to all 100 codes via sendBatch (rate-limited to the
- * 5/sec ceiling; refuses to start inside an SCWC maintenance window). Every
- * result is logged to cwc_deliveries with an idempotent DeliveryId, so
- * re-running after a partial failure retries with the SAME ids (409 = the
- * prior attempt landed) instead of duplicating.
+ * Each campaign goes to all 100 codes through sendCwcDelivery — the SAME
+ * gated path production uses (compliance gate, maintenance-window deferral,
+ * idempotent DeliveryId, cross-instance rate permit at the POST choke point,
+ * outcome + raw response logged). Re-running after a partial failure retries
+ * with the SAME ids (409 = the prior attempt landed) instead of duplicating.
+ * The ONLY departures from the production path, both inherent to the SCWC
+ * test env: skipActiveOfficeCheck (all 100 test offices accept; the list
+ * does not indicate participation) and constituent verification off
+ * (fixture constituents are not real people).
  *
  * SAFETY — the script refuses to run unless BOTH hold:
  *   CWC_ACCEPTANCE_CONFIRM=YES
@@ -32,17 +36,10 @@
 
 import * as path from 'path';
 import dotenv from 'dotenv';
-import { sendBatch, sendSenate, type CwcResult } from '../src/lib/cwc/client';
-import { buildCwcXml } from '../src/lib/cwc/xml';
 import { buildCampaignId } from '../src/lib/cwc/campaign-id';
 import { assertCwcSendable } from '../src/lib/cwc/content';
 import { SENATE_TEST_OFFICE_CODES } from '../src/lib/cwc/offices';
-import {
-  getOrCreateDeliveryId,
-  recordDeliveryResult,
-  statusFromHttp,
-  xmlSha256,
-} from '../src/lib/cwc/delivery-log';
+import { sendCwcDelivery } from '../src/lib/cwc/send';
 import type { CwcDelivery, CwcMessageContent } from '../src/lib/cwc/types';
 import { ALLOWED_PREFIXES } from '../src/lib/cwc/constants';
 
@@ -50,7 +47,7 @@ dotenv.config({ path: path.resolve(__dirname, '../.env.local') });
 
 // ---- SAFETY GATES (both required; environment is hardcoded to test) ----
 const ENVIRONMENT = 'test' as const; // never production — prod acceptance does not exist
-const MODE = 'uat' as const; // sendSenate 'uat' = the SCWC TESTING endpoint
+// environment 'test' → sendCwcDelivery uses the SCWC TESTING endpoint (mode 'uat')
 
 if (process.env.CWC_ACCEPTANCE_CONFIRM !== 'YES') {
   console.error('Refusing to run: set CWC_ACCEPTANCE_CONFIRM=YES to confirm a test-environment acceptance run.');
@@ -148,52 +145,52 @@ async function run(): Promise<void> {
   const summary: Array<Record<string, string | number>> = [];
 
   for (const campaign of CAMPAIGNS) {
+    // billLevel is EXPLICIT either way — the gate fails closed on unknown.
+    const billLevel = campaign.message.bills ? ('federal' as const) : ('none' as const);
     // Compliance gate up front — a gate failure should stop the whole run.
-    assertCwcSendable({ message: campaign.message, billLevel: campaign.message.bills ? 'federal' : null });
+    assertCwcSendable({ message: campaign.message, billLevel });
 
     const deliveries = buildDeliveries(campaign);
-    const counts = { delivered: 0, rejected: 0, error: 0 };
+    const counts = { delivered: 0, rejected: 0, deferred: 0, error: 0 };
 
-    // sendBatch enforces the 5/sec ceiling and refuses to start inside an
-    // SCWC maintenance window. Each send logs to cwc_deliveries with an
-    // idempotent DeliveryId (reused on re-run — never regenerated).
-    const results = await sendBatch(deliveries, async (d): Promise<CwcResult> => {
+    // Every send goes through sendCwcDelivery — the production path. Pacing
+    // comes from the shared rate-permit allocator at the POST choke point;
+    // maintenance windows surface as retry-later outcomes; each send logs to
+    // cwc_deliveries with an idempotent DeliveryId (reused on re-run).
+    for (const d of deliveries) {
       const messageKey = `scwc-acceptance:${campaign.slug}:${d.officeCode}`;
-      const { deliveryId } = await getOrCreateDeliveryId(messageKey, d.officeCode, ENVIRONMENT, {
-        campaignId: d.campaignId,
-        chamber: 'senate',
-      });
-      const toSend: CwcDelivery = { ...d, deliveryId };
-      const xml = buildCwcXml(toSend);
       try {
-        const result = await sendSenate(toSend, MODE);
-        await recordDeliveryResult(deliveryId, {
-          status: statusFromHttp(result.status),
-          httpStatus: result.status,
-          errors: result.errors ?? null,
-          xmlSha256: xmlSha256(xml),
+        const outcome = await sendCwcDelivery(d, {
+          messageKey,
+          environment: ENVIRONMENT,
+          billLevel,
+          skipActiveOfficeCheck: true, // SCWC test env: all 100 offices accept
         });
-        return result;
+        if (outcome.sent && (outcome.result.ok || outcome.result.status === 409)) counts.delivered++;
+        else if (!outcome.sent && outcome.fallback === 'retry-later') {
+          counts.deferred++;
+          console.warn(`  DEFERRED ${d.officeCode}: ${outcome.reason}`);
+        } else if (outcome.sent) counts.rejected++;
+        else {
+          counts.error++;
+          console.error(`  UNEXPECTED fallback for ${d.officeCode}: ${outcome.fallback} — ${outcome.reason}`);
+        }
       } catch (e) {
-        await recordDeliveryResult(deliveryId, { status: 'error', errors: [(e as Error).message], xmlSha256: xmlSha256(xml) });
-        throw e;
+        counts.error++;
+        console.error(`  ERROR ${d.officeCode}: ${(e as Error).message}`);
       }
-    });
-
-    for (const r of results) {
-      if (r.error) counts.error++;
-      else if (r.result && (r.result.ok || r.result.status === 409)) counts.delivered++;
-      else counts.rejected++;
     }
+
     summary.push({
       campaign: campaign.slug,
       campaignId: `${campaign.campaignId.slice(0, 12)}…`,
       offices: deliveries.length,
       delivered: counts.delivered,
       rejected: counts.rejected,
+      deferred: counts.deferred,
       error: counts.error,
     });
-    console.log(`  ${campaign.slug}: delivered=${counts.delivered} rejected=${counts.rejected} error=${counts.error}`);
+    console.log(`  ${campaign.slug}: delivered=${counts.delivered} rejected=${counts.rejected} deferred=${counts.deferred} error=${counts.error}`);
   }
 
   console.log('\nAcceptance run summary:');
