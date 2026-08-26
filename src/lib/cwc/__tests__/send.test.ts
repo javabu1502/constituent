@@ -115,30 +115,9 @@ describe('sendCwcDelivery orchestration', () => {
   const okSender = async (): Promise<CwcResult> => ({ ok: true, status: 201 });
   const friday = new Date('2026-08-14T16:00:00Z');
 
-  it('claims a shared rate-permit slot for the right scope before sending', async () => {
-    await sendCwcDelivery(delivery, {
-      messageKey: 'user1:campaign-1',
-      environment: 'test',
-      billLevel: 'federal',
-      activeOffices: { loader: activeLoader },
-      sender: okSender,
-      now: friday,
-    });
-    expect(permitClaims).toEqual([{ scope: 'cwc:senate:test', gapMs: 200 }]);
-  });
-
-  it('skips the rate permit only when explicitly disabled', async () => {
-    await sendCwcDelivery(delivery, {
-      messageKey: 'user1:campaign-1',
-      environment: 'test',
-      billLevel: 'federal',
-      activeOffices: { loader: activeLoader },
-      sender: okSender,
-      now: friday,
-      ratePermit: false,
-    });
-    expect(permitClaims).toEqual([]);
-  });
+  // The rate permit is claimed inside the client POST (postHouse/postSenate)
+  // — see client.test.ts for the choke-point tests. A custom `sender` (as
+  // used throughout this file) bypasses it by design as a test seam.
 
   it('sends through every gate and records the outcome', async () => {
     const outcome = await sendCwcDelivery(delivery, {
@@ -203,6 +182,22 @@ describe('sendCwcDelivery orchestration', () => {
         activeOffices: { loader: activeLoader }, sender: okSender, now: friday,
       }),
     ).rejects.toThrow(CwcComplianceError);
+  });
+
+  it('maps rate-permit backpressure to retry-later (no error recorded, id kept for reuse)', async () => {
+    const { RatePermitBackpressureError } = await import('../rate-permit');
+    const busySender = async (): Promise<CwcResult> => {
+      throw new RatePermitBackpressureError('cwc:senate:test', 45_000);
+    };
+    const outcome = await sendCwcDelivery(delivery, {
+      messageKey: 'user1:campaign-1', environment: 'test', billLevel: 'federal',
+      activeOffices: { loader: activeLoader }, sender: busySender, now: friday,
+    });
+    expect(outcome).toMatchObject({ sent: false, fallback: 'retry-later' });
+    // The minted row stays pending — NOT flipped to error — so the retry
+    // reuses the same DeliveryId.
+    expect(rows).toHaveLength(1);
+    expect(rows[0].status).not.toBe('error');
   });
 
   it('records 400-class rejections for monitoring', async () => {

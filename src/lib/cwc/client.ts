@@ -1,7 +1,22 @@
 import { ProxyAgent, fetch as undiciFetch } from 'undici';
 import { CWC_ENDPOINTS, MAX_MESSAGES_PER_SECOND, isInScwcMaintenanceWindow, type Chamber } from './constants';
+import { acquireSendPermit, ratePermitScope, type AcquirePermitOptions } from './rate-permit';
 import { buildCwcXml } from './xml';
 import type { CwcDelivery } from './types';
+
+/**
+ * Rate-permit pass-through for the POST helpers. The permit is claimed HERE —
+ * at the network choke point — so the raw sendHouse/sendSenate/validateHouse
+ * exports cannot bypass the cross-instance limiter (audit 2026-08-26).
+ * `false` skips the claim and is ONLY for callers that verifiably do not hit
+ * a CWC endpoint (none today — the validate endpoint counts too).
+ */
+export type RatePermitOption = AcquirePermitOptions | false;
+
+async function claimSendSlot(chamber: Chamber, mode: Mode, ratePermit?: RatePermitOption): Promise<void> {
+  if (ratePermit === false) return;
+  await acquireSendPermit(ratePermitScope(chamber, mode === 'production' ? 'production' : 'test'), ratePermit);
+}
 
 /**
  * Outbound CWC calls must exit from our fixed QuotaGuard IPs (the House
@@ -89,10 +104,11 @@ function senateBase(mode: Mode): string {
  * NOT save) or `/v2/message` (queues for delivery). The API key goes in the
  * query string per the House docs, sourced from env.
  */
-async function postHouse(path: '/v2/validate' | '/v2/message', xml: string, mode: Mode): Promise<CwcResult> {
+async function postHouse(path: '/v2/validate' | '/v2/message', xml: string, mode: Mode, ratePermit?: RatePermitOption): Promise<CwcResult> {
   assertProxiedEgress(mode);
   const apiKey = requireKey(mode === 'production' ? 'CWC_HOUSE_API_KEY' : 'CWC_HOUSE_UAT_API_KEY');
   const url = `${houseBase(mode)}${path}?apikey=${encodeURIComponent(apiKey)}`;
+  await claimSendSlot('house', mode, ratePermit);
   const res = await undiciFetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/xml' },
@@ -103,14 +119,15 @@ async function postHouse(path: '/v2/validate' | '/v2/message', xml: string, mode
   return { ok: res.status >= 200 && res.status < 300, status: res.status, errors: parseErrors(raw), raw };
 }
 
-/** Validate a delivery's XML against the House schema without sending it. */
-export function validateHouse(delivery: CwcDelivery, mode: Mode = 'uat'): Promise<CwcResult> {
-  return postHouse('/v2/validate', buildCwcXml(delivery), mode);
+/** Validate a delivery's XML against the House schema without sending it.
+ *  Still claims a rate permit — the validate endpoint is CWC traffic too. */
+export function validateHouse(delivery: CwcDelivery, mode: Mode = 'uat', ratePermit?: RatePermitOption): Promise<CwcResult> {
+  return postHouse('/v2/validate', buildCwcXml(delivery), mode, ratePermit);
 }
 
 /** Queue a delivery for actual delivery to a House office. */
-export function sendHouse(delivery: CwcDelivery, mode: Mode = 'uat'): Promise<CwcResult> {
-  return postHouse('/v2/message', buildCwcXml(delivery), mode);
+export function sendHouse(delivery: CwcDelivery, mode: Mode = 'uat', ratePermit?: RatePermitOption): Promise<CwcResult> {
+  return postHouse('/v2/message', buildCwcXml(delivery), mode, ratePermit);
 }
 
 /**
@@ -173,11 +190,12 @@ function requireSenateKey(mode: Mode): string {
  * query param per the Senate technical docs. Senate returns 201 Created on
  * success. Routed through the static-IP proxy like the House path.
  */
-async function postSenate(xml: string, mode: Mode): Promise<CwcResult> {
+async function postSenate(xml: string, mode: Mode, ratePermit?: RatePermitOption): Promise<CwcResult> {
   assertProxiedEgress(mode);
   const base = senateBase(mode); // throws if SCWC_*_URL not configured or not a senate.gov https URL
   const apiKey = requireSenateKey(mode);
   const sep = base.includes('?') ? '&' : '?';
+  await claimSendSlot('senate', mode, ratePermit);
   const res = await undiciFetch(`${base}${sep}apikey=${encodeURIComponent(apiKey)}`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/xml' },
@@ -194,8 +212,8 @@ async function postSenate(xml: string, mode: Mode): Promise<CwcResult> {
  * review). There is no separate Senate validate endpoint — the test env IS the
  * validation path.
  */
-export function sendSenate(delivery: CwcDelivery, mode: Mode = 'uat'): Promise<CwcResult> {
-  return postSenate(buildCwcXml(delivery), mode);
+export function sendSenate(delivery: CwcDelivery, mode: Mode = 'uat', ratePermit?: RatePermitOption): Promise<CwcResult> {
+  return postSenate(buildCwcXml(delivery), mode, ratePermit);
 }
 
 /** Senate active offices (voluntary participation, ~half). Endpoint from env
@@ -250,8 +268,8 @@ export async function loadActiveOfficeCodes(chamber: 'house' | 'senate', mode: M
  *
  * NOTE: this spacing is per-process COURTESY pacing only — it cannot hold the
  * ceiling across concurrent serverless instances. The authoritative limiter is
- * the Postgres rate-permit allocator inside sendCwcDelivery (rate-permit.ts);
- * pass a `send` that goes through sendCwcDelivery for any real batch.
+ * the Postgres rate-permit allocator claimed inside postHouse/postSenate (the
+ * network choke point), so every path — including this one — pays it.
  *
  * Refuses to START during an SCWC maintenance window (Sun 12a–6a, Wed 5a–7a
  * ET) — sends there hit intermittent outages and burn DeliveryIds on retries.

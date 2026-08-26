@@ -9,7 +9,7 @@ import {
   xmlSha256,
   type CwcEnvironment,
 } from './delivery-log';
-import { acquireSendPermit, ratePermitScope, type AcquirePermitOptions } from './rate-permit';
+import { RatePermitBackpressureError, type AcquirePermitOptions } from './rate-permit';
 import { verifyConstituentForOffice } from './verify';
 import type { CwcDelivery } from './types';
 
@@ -23,10 +23,11 @@ import type { CwcDelivery } from './types';
  *                           falls back to the delivery-router webform/email
  *                           path); cached 12h with force-refresh.
  *   4. Delivery log       — mint-or-REUSE the DeliveryId (idempotent retry).
- *   5. Rate permit        — claim a send slot from the Postgres allocator,
- *                           the ONLY limiter that holds across serverless
- *                           instances (sendBatch's spacing is per-process).
- *   6. Build + send       — XML with the logged id; outcome recorded.
+ *   5. Build + send       — XML with the logged id; outcome recorded. The
+ *                           cross-instance rate permit is claimed INSIDE the
+ *                           client POST (postHouse/postSenate) so no path —
+ *                           this one or the raw exports — can skip it; a
+ *                           deep-queue refusal surfaces here as retry-later.
  */
 
 const ACTIVE_OFFICES_TTL_MS = 12 * 60 * 60 * 1000; // ~12h; George emails when offices join
@@ -89,8 +90,9 @@ export interface SendCwcOptions {
   /** Test seam — defaults to sendSenate/sendHouse. */
   sender?: (delivery: CwcDelivery, mode: Mode) => Promise<CwcResult>;
   now?: Date;
-  /** Cross-instance rate permit; injectable for tests. `false` disables
-   *  (ONLY for offline preview/validate paths that never POST a message). */
+  /** Cross-instance rate permit options, forwarded to the client POST where
+   *  the permit is claimed. `false` skips the claim — ONLY for paths that
+   *  verifiably never hit a CWC endpoint. */
   ratePermit?: AcquirePermitOptions | false;
   /** Constituent-verification seam. PRODUCTION always verifies (no opt-out):
    *  the constituent's address must geocode to this delivery's seat, or we
@@ -172,17 +174,15 @@ export async function sendCwcDelivery(
     { campaignId: delivery.campaignId, chamber: delivery.chamber },
   );
 
-  // 5. Claim a send slot from the shared allocator — this, not sendBatch's
-  //    per-process spacing, is what holds the aggregate rate under the CWC
-  //    ceiling when multiple serverless instances send concurrently.
-  if (opts.ratePermit !== false) {
-    await acquireSendPermit(ratePermitScope(delivery.chamber, opts.environment), opts.ratePermit);
-  }
-
-  // 6. Build with the logged id, send, record the outcome (incl. 400/500s).
+  // 5. Build with the logged id, send, record the outcome (incl. 400/500s).
+  //    The default sender claims the cross-instance rate permit inside the
+  //    client POST; a custom `sender` (test seam) bypasses it by design.
   const toSend: CwcDelivery = { ...delivery, deliveryId };
   const xml = buildCwcXml(toSend);
-  const sender = opts.sender ?? (delivery.chamber === 'senate' ? sendSenate : sendHouse);
+  const sender =
+    opts.sender ??
+    ((d: CwcDelivery, m: Mode) =>
+      d.chamber === 'senate' ? sendSenate(d, m, opts.ratePermit) : sendHouse(d, m, opts.ratePermit));
   try {
     const result = await sender(toSend, mode);
     await recordDeliveryResult(deliveryId, {
@@ -193,6 +193,11 @@ export async function sendCwcDelivery(
     });
     return { sent: true, deliveryId, retried: existing, result };
   } catch (e) {
+    if (e instanceof RatePermitBackpressureError) {
+      // The queue is deep, not broken: nothing was sent, the DeliveryId is
+      // logged and will be REUSED on retry. Don't record an error outcome.
+      return { sent: false, fallback: 'retry-later', reason: e.message };
+    }
     await recordDeliveryResult(deliveryId, {
       status: 'error',
       errors: [(e as Error).message],

@@ -1,5 +1,5 @@
 import { describe, it, expect, afterEach, vi } from 'vitest';
-import { acquireSendPermit, ratePermitScope, setRatePermitClientFactory } from '../rate-permit';
+import { acquireSendPermit, ratePermitScope, setRatePermitClientFactory, RatePermitBackpressureError } from '../rate-permit';
 
 // The allocator itself is Postgres (allocate_rate_permit) — tests stub the
 // RPC and verify the wrapper's slot math, fallback, and skew guard.
@@ -48,9 +48,9 @@ describe('acquireSendPermit', () => {
   it('passes the gap derived from maxPerSecond to the allocator (clamped 1–10/sec)', async () => {
     const rpc = stubRpc(() => ({ data: new Date(0).toISOString(), error: null }));
     await acquireSendPermit('s', { maxPerSecond: 2, now: () => 0, sleep: async () => {} });
-    expect(rpc).toHaveBeenCalledWith('allocate_rate_permit', { p_scope: 's', p_min_gap_ms: 500 });
+    expect(rpc).toHaveBeenCalledWith('allocate_rate_permit', { p_scope: 's', p_min_gap_ms: 500, p_max_wait_ms: 30_000 });
     await acquireSendPermit('s', { maxPerSecond: 99, now: () => 0, sleep: async () => {} });
-    expect(rpc).toHaveBeenLastCalledWith('allocate_rate_permit', { p_scope: 's', p_min_gap_ms: 100 });
+    expect(rpc).toHaveBeenLastCalledWith('allocate_rate_permit', { p_scope: 's', p_min_gap_ms: 100, p_max_wait_ms: 30_000 });
   });
 
   it('falls back to one local gap when the allocator errors (fail-open)', async () => {
@@ -63,13 +63,35 @@ describe('acquireSendPermit', () => {
     expect(console.error).toHaveBeenCalled();
   });
 
-  it('treats an implausible slot (clock skew) as a local-gap fallback', async () => {
-    vi.spyOn(console, 'error').mockImplementation(() => {});
+  it('defers (throws backpressure) when the queue horizon exceeds maxWaitMs — never bursts', async () => {
     const t0 = 0;
     stubRpc(() => ({ data: new Date(t0 + 60_000).toISOString(), error: null }));
     const sleep = vi.fn(async () => {});
-    const waited = await acquireSendPermit('cwc:house:test', { now: () => t0, sleep });
-    expect(waited).toBe(200);
-    expect(sleep).toHaveBeenCalledWith(200);
+    await expect(acquireSendPermit('cwc:house:test', { now: () => t0, sleep })).rejects.toThrow(RatePermitBackpressureError);
+    expect(sleep).not.toHaveBeenCalled(); // the old behavior slept a token gap and SENT anyway
+  });
+
+  it('carries the horizon so callers can schedule the retry', async () => {
+    const t0 = 0;
+    stubRpc(() => ({ data: new Date(t0 + 45_000).toISOString(), error: null }));
+    const err = await acquireSendPermit('cwc:senate:production', { now: () => t0, sleep: async () => {} }).catch((e) => e);
+    expect(err).toBeInstanceOf(RatePermitBackpressureError);
+    expect((err as RatePermitBackpressureError).retryAfterMs).toBe(45_000);
+  });
+
+  it('honors a caller-raised maxWaitMs instead of deferring', async () => {
+    const t0 = 0;
+    stubRpc(() => ({ data: new Date(t0 + 60_000).toISOString(), error: null }));
+    const sleep = vi.fn(async () => {});
+    const waited = await acquireSendPermit('cwc:house:test', { now: () => t0, sleep, maxWaitMs: 120_000 });
+    expect(waited).toBe(60_000);
+    expect(sleep).toHaveBeenCalledWith(60_000);
+  });
+
+  it('flags a >10min horizon as possible row corruption (but still defers)', async () => {
+    vi.spyOn(console, 'error').mockImplementation(() => {});
+    stubRpc(() => ({ data: new Date(3_600_000).toISOString(), error: null }));
+    await expect(acquireSendPermit('cwc:house:test', { now: () => 0, sleep: async () => {} })).rejects.toThrow(RatePermitBackpressureError);
+    expect(console.error).toHaveBeenCalledWith(expect.stringContaining('corruption'));
   });
 });
