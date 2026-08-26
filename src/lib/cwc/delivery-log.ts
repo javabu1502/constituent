@@ -89,13 +89,20 @@ export async function getOrCreateDeliveryId(
 }
 
 /** Map an HTTP response code to our delivery status. 409 = duplicate
- *  DeliveryId, meaning a prior attempt already landed → delivered. */
+ *  DeliveryId, meaning a prior attempt already landed → delivered. 429 is
+ *  rate-limiting, not a verdict on the message: the row stays 'pending' so
+ *  the retry reuses the same DeliveryId (sendCwcDelivery maps it to
+ *  retry-later rather than reporting a rejection). */
 export function statusFromHttp(httpStatus: number): CwcDeliveryStatus {
   if (httpStatus === 409) return 'delivered';
+  if (httpStatus === 429) return 'pending';
   if (httpStatus >= 200 && httpStatus < 300) return 'delivered';
   if (httpStatus >= 400 && httpStatus < 500) return 'rejected';
   return 'error';
 }
+
+/** Keep raw response bodies bounded — 8KB is plenty to debug any CWC error. */
+const RAW_RESPONSE_MAX = 8 * 1024;
 
 /** Record the outcome of a send attempt against its logged row. 400/500-class
  *  statuses land here too — that IS the monitoring SOAPBox requires. */
@@ -105,6 +112,9 @@ export async function recordDeliveryResult(
     status: CwcDeliveryStatus;
     httpStatus?: number;
     errors?: string[] | null;
+    /** Raw response body — persisted (8KB-truncated) so a failing campaign
+     *  can be debugged from the log alone, not just the parsed <Error>s. */
+    raw?: string | null;
     xmlSha256?: string;
   },
 ): Promise<void> {
@@ -115,6 +125,7 @@ export async function recordDeliveryResult(
     errors: outcome.errors?.length ? outcome.errors : null,
     updated_at: new Date().toISOString(),
   };
+  if (outcome.raw != null) update.raw_response = outcome.raw.slice(0, RAW_RESPONSE_MAX);
   if (outcome.xmlSha256) update.xml_sha256 = outcome.xmlSha256;
   const { error } = await db.from('cwc_deliveries').update(update).eq('delivery_id', deliveryId);
   if (error) throw new Error(`cwc_deliveries update failed: ${error.message}`);

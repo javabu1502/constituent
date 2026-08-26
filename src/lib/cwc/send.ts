@@ -66,6 +66,14 @@ export async function getActiveOfficeCodesCached(
   }
   const loader = opts.loader ?? loadActiveOfficeCodes;
   const codes = await loader(chamber, mode);
+  // FAIL-CLOSED on an empty list: neither chamber's participating set is ever
+  // genuinely empty, so an empty result means the fetch/parse broke. Caching
+  // it would silently divert EVERY send to the webform/email fallback for 12h.
+  if (codes.size === 0) {
+    throw new Error(
+      `active-offices list for ${chamber} (${mode}) came back EMPTY — refusing to treat every office as non-participating; likely an API/parse failure`,
+    );
+  }
   officeCache.set(key, { codes, fetchedAt: now });
   return codes;
 }
@@ -189,8 +197,18 @@ export async function sendCwcDelivery(
       status: statusFromHttp(result.status),
       httpStatus: result.status,
       errors: result.errors ?? null,
+      raw: result.raw ?? null,
       xmlSha256: xmlSha256(xml),
     });
+    if (result.status === 429) {
+      // Endpoint-side rate limiting: the message did NOT land and is not
+      // rejected — the row stays pending and the retry reuses the same id.
+      return {
+        sent: false,
+        fallback: 'retry-later',
+        reason: `CWC endpoint rate-limited the send (429)${result.raw ? `: ${result.raw.slice(0, 200)}` : ''}`,
+      };
+    }
     return { sent: true, deliveryId, retried: existing, result };
   } catch (e) {
     if (e instanceof RatePermitBackpressureError) {

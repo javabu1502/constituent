@@ -138,6 +138,7 @@ describe('statusFromHttp', () => {
   it('maps response classes to delivery statuses (409 = already delivered)', () => {
     expect(statusFromHttp(201)).toBe('delivered');
     expect(statusFromHttp(409)).toBe('delivered'); // duplicate DeliveryId → prior attempt landed
+    expect(statusFromHttp(429)).toBe('pending'); // rate-limited, not a verdict — retry reuses the id
     expect(statusFromHttp(400)).toBe('rejected');
     expect(statusFromHttp(415)).toBe('rejected');
     expect(statusFromHttp(500)).toBe('error');

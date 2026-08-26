@@ -36,6 +36,16 @@ describe('getActiveOfficeCodesCached', () => {
     expect(loader).toHaveBeenCalledTimes(3);
   });
 
+  it('fails closed on an EMPTY office list instead of caching it', async () => {
+    // An empty set means the fetch/parse broke — caching it would divert
+    // every send to the webform fallback for 12h.
+    const empty = vi.fn(async () => new Set<string>());
+    await expect(getActiveOfficeCodesCached('senate', { loader: empty })).rejects.toThrow(/EMPTY/);
+    // Not cached: the next call retries the loader rather than serving {}.
+    const recovered = vi.fn(async () => new Set(['SNY01']));
+    await expect(getActiveOfficeCodesCached('senate', { loader: recovered })).resolves.toBeTruthy();
+  });
+
   it('caches per chamber+mode', async () => {
     const loader = vi.fn(async (chamber: string) => new Set([chamber === 'senate' ? 'SNY01' : 'HNY12']));
     const senate = await getActiveOfficeCodesCached('senate', { loader });
@@ -200,13 +210,26 @@ describe('sendCwcDelivery orchestration', () => {
     expect(rows[0].status).not.toBe('error');
   });
 
-  it('records 400-class rejections for monitoring', async () => {
-    const rejectSender = async (): Promise<CwcResult> => ({ ok: false, status: 400, errors: ['bad state'] });
+  it('records 400-class rejections for monitoring, with the raw body persisted', async () => {
+    const rejectSender = async (): Promise<CwcResult> => ({ ok: false, status: 400, errors: ['bad state'], raw: '<Errors><Error>bad state</Error></Errors>' });
     const outcome = await sendCwcDelivery(delivery, {
       messageKey: 'user1:campaign-1', environment: 'test', billLevel: 'federal',
       activeOffices: { loader: activeLoader }, sender: rejectSender, now: friday,
     });
     expect(outcome.sent).toBe(true); // the POST happened; the outcome is logged
-    expect(rows[0]).toMatchObject({ status: 'rejected', http_status: 400, errors: ['bad state'] });
+    expect(rows[0]).toMatchObject({
+      status: 'rejected', http_status: 400, errors: ['bad state'],
+      raw_response: '<Errors><Error>bad state</Error></Errors>',
+    });
+  });
+
+  it('maps an endpoint 429 to retry-later and keeps the row pending for id reuse', async () => {
+    const limitedSender = async (): Promise<CwcResult> => ({ ok: false, status: 429, raw: 'slow down' });
+    const outcome = await sendCwcDelivery(delivery, {
+      messageKey: 'user1:campaign-1', environment: 'test', billLevel: 'federal',
+      activeOffices: { loader: activeLoader }, sender: limitedSender, now: friday,
+    });
+    expect(outcome).toMatchObject({ sent: false, fallback: 'retry-later' });
+    expect(rows[0]).toMatchObject({ status: 'pending', http_status: 429 });
   });
 });
