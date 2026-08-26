@@ -36,7 +36,13 @@ describe('blocksFederalDelivery', () => {
   it('blocks state-bill campaigns from federal delivery', () => {
     expect(blocksFederalDelivery({ billLevel: 'state' })).toBe(true);
     expect(blocksFederalDelivery({ billLevel: 'federal' })).toBe(false);
-    expect(blocksFederalDelivery({ billLevel: null })).toBe(false);
+    expect(blocksFederalDelivery({ billLevel: 'none' })).toBe(false);
+  });
+
+  it('fails closed on an unknown bill level', () => {
+    // "We don't know" must never default to "send it to Congress".
+    expect(blocksFederalDelivery({ billLevel: null })).toBe(true);
+    expect(blocksFederalDelivery({})).toBe(true);
   });
 });
 
@@ -77,7 +83,7 @@ describe('assertCwcSendable (pre-send compliance gate)', () => {
     expect(() => assertCwcSendable({ message: noStance, billLevel: 'federal' })).toThrow(/stance/);
     // No bill referenced → no stance required.
     const noBill = { ...cleanMessage, bills: undefined, stance: undefined };
-    expect(() => assertCwcSendable({ message: noBill })).not.toThrow();
+    expect(() => assertCwcSendable({ message: noBill, billLevel: 'none' })).not.toThrow();
   });
 
   it('(c) flags a signature block that survives stripping', () => {

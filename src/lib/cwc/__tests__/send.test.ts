@@ -160,7 +160,7 @@ describe('sendCwcDelivery orchestration', () => {
 
   it('reuses the SAME DeliveryId on retry (idempotent — no duplicates)', async () => {
     const opts = {
-      messageKey: 'user1:campaign-1', environment: 'test' as const,
+      messageKey: 'user1:campaign-1', environment: 'test' as const, billLevel: 'federal' as const,
       activeOffices: { loader: activeLoader }, sender: okSender, now: friday,
     };
     const first = await sendCwcDelivery(delivery, opts);
@@ -178,7 +178,7 @@ describe('sendCwcDelivery orchestration', () => {
     const outcome = await sendCwcDelivery(
       { ...delivery, officeCode: 'SNY03' },
       {
-        messageKey: 'user1:campaign-1', environment: 'test',
+        messageKey: 'user1:campaign-1', environment: 'test', billLevel: 'federal',
         activeOffices: { loader: activeLoader }, sender, now: friday,
       },
     );
@@ -189,7 +189,7 @@ describe('sendCwcDelivery orchestration', () => {
 
   it('defers Senate sends during an SCWC maintenance window', async () => {
     const outcome = await sendCwcDelivery(delivery, {
-      messageKey: 'user1:campaign-1', environment: 'test',
+      messageKey: 'user1:campaign-1', environment: 'test', billLevel: 'federal',
       activeOffices: { loader: activeLoader }, sender: okSender,
       now: new Date('2026-08-16T07:30:00Z'), // Sun 3:30a EDT
     });
@@ -208,7 +208,7 @@ describe('sendCwcDelivery orchestration', () => {
   it('records 400-class rejections for monitoring', async () => {
     const rejectSender = async (): Promise<CwcResult> => ({ ok: false, status: 400, errors: ['bad state'] });
     const outcome = await sendCwcDelivery(delivery, {
-      messageKey: 'user1:campaign-1', environment: 'test',
+      messageKey: 'user1:campaign-1', environment: 'test', billLevel: 'federal',
       activeOffices: { loader: activeLoader }, sender: rejectSender, now: friday,
     });
     expect(outcome.sent).toBe(true); // the POST happened; the outcome is logged

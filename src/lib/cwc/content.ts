@@ -230,6 +230,10 @@ export function cwcSendableProblems(input: {
     const cleaned = input.constituent
       ? redactConstituentPii(stripSignatureBlock(text), input.constituent)
       : stripSignatureBlock(text);
+    if (!cleaned.trim()) {
+      problems.push(`message.${label} is only a signature block / name-address lines — nothing remains after stripping, so there is no message to deliver`);
+      continue;
+    }
     if (containsSignatureBlock(cleaned)) {
       problems.push(`message.${label} still contains a signature block after stripping — remove the closing/name/address from the body`);
     }
