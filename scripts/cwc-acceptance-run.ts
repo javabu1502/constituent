@@ -84,7 +84,7 @@ interface AcceptanceCampaign {
 const CAMPAIGNS: AcceptanceCampaign[] = [
   {
     slug: 'bill-pro',
-    campaignId: buildCampaignId({ topicKey: 'Health / SCWC acceptance — insulin pricing', bill: ACCEPTANCE_BILL, stance: 'pro' }),
+    campaignId: buildCampaignId({ campaignRef: 'scwc-acceptance-insulin', bill: ACCEPTANCE_BILL, stance: 'pro' }),
     message: {
       subject: 'SCWC acceptance test — support for S. 2296 (please disregard)',
       topics: ['Health'],
@@ -96,7 +96,7 @@ const CAMPAIGNS: AcceptanceCampaign[] = [
   },
   {
     slug: 'bill-con',
-    campaignId: buildCampaignId({ topicKey: 'Health / SCWC acceptance — insulin pricing', bill: ACCEPTANCE_BILL, stance: 'con' }),
+    campaignId: buildCampaignId({ campaignRef: 'scwc-acceptance-insulin', bill: ACCEPTANCE_BILL, stance: 'con' }),
     message: {
       subject: 'SCWC acceptance test — opposition to S. 2296 (please disregard)',
       topics: ['Health'],
@@ -108,7 +108,7 @@ const CAMPAIGNS: AcceptanceCampaign[] = [
   },
   {
     slug: 'no-bill',
-    campaignId: buildCampaignId({ topicKey: 'Government Operations and Politics / SCWC acceptance — connectivity' }),
+    campaignId: buildCampaignId({ campaignRef: 'scwc-acceptance-connectivity' }),
     message: {
       subject: 'SCWC acceptance test — general connectivity (please disregard)',
       topics: ['Government Operations and Politics'],

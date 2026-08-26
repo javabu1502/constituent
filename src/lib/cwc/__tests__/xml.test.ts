@@ -16,7 +16,7 @@ function validDelivery(overrides: Partial<CwcDelivery> = {}): CwcDelivery {
   return {
     chamber: 'senate',
     officeCode: 'SNY01',
-    campaignId: buildCampaignId({ topicKey: 'Health / Insulin pricing', stance: 'pro' }),
+    campaignId: buildCampaignId({ campaignRef: 'test-insulin-pricing', stance: 'pro' }),
     constituent: {
       prefix: 'Ms.',
       firstName: 'Jane',
@@ -238,10 +238,10 @@ describe('formatPhone', () => {
 
 describe('buildCampaignId', () => {
   it('is stable for the same inputs and differs by stance and subtopic', () => {
-    const a = buildCampaignId({ topicKey: 'Health / Insulin', stance: 'pro' });
-    const b = buildCampaignId({ topicKey: 'Health / Insulin', stance: 'pro' });
-    const con = buildCampaignId({ topicKey: 'Health / Insulin', stance: 'con' });
-    const other = buildCampaignId({ topicKey: 'Health / Vaccines', stance: 'pro' });
+    const a = buildCampaignId({ campaignRef: 'test-insulin-pricing', stance: 'pro' });
+    const b = buildCampaignId({ campaignRef: 'test-insulin-pricing', stance: 'pro' });
+    const con = buildCampaignId({ campaignRef: 'test-insulin-pricing', stance: 'con' });
+    const other = buildCampaignId({ campaignRef: 'test-vaccines', stance: 'pro' });
     expect(a).toBe(b);
     expect(a).not.toBe(con);
     expect(a).not.toBe(other);

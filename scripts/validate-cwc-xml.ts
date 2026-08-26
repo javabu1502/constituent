@@ -17,7 +17,7 @@ process.env.CWC_CONTACT_PHONE ||= '815-988-4475';
 const base = {
   chamber: 'senate' as const,
   officeCode: 'SNY01',
-  campaignId: buildCampaignId({ topicKey: 'Health / Insulin', stance: 'pro' }),
+  campaignId: buildCampaignId({ campaignRef: 'validate-insulin', stance: 'pro' }),
   constituent: {
     prefix: 'Ms.' as const, firstName: 'Jane', lastName: 'Doe',
     address1: '350 5th Ave', city: 'New York', state: 'NY', zip: '10118-0110', email: 'jane.doe@example.com',

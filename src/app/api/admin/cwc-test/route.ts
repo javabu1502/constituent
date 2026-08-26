@@ -26,7 +26,7 @@ function sampleDelivery(chamber: 'house' | 'senate'): CwcDelivery {
   return {
     chamber,
     officeCode: isHouse ? 'HNY12' : 'SNY01',
-    campaignId: buildCampaignId({ topicKey: 'CWC connectivity test', stance: 'pro' }),
+    campaignId: buildCampaignId({ campaignRef: 'admin-cwc-connectivity-test', stance: 'pro' }),
     constituent: {
       prefix: 'Ms.', firstName: 'Test', lastName: 'Constituent',
       address1: '350 5th Ave', city: 'New York', state: 'NY', zip: '10118-0110',
