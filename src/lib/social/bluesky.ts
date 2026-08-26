@@ -22,6 +22,23 @@ interface Facet {
   features: Array<{ $type: string; uri: string }>;
 }
 
+interface BlobRef {
+  $type: 'blob';
+  ref: { $link: string };
+  mimeType: string;
+  size: number;
+}
+
+export interface ExternalEmbed {
+  $type: 'app.bsky.embed.external';
+  external: {
+    uri: string;
+    title: string;
+    description: string;
+    thumb?: BlobRef;
+  };
+}
+
 export interface PostRecord {
   $type: 'app.bsky.feed.post';
   text: string;
@@ -32,6 +49,7 @@ export interface PostRecord {
     root: { uri: string; cid: string };
     parent: { uri: string; cid: string };
   };
+  embed?: ExternalEmbed;
 }
 
 export interface PostResult {
@@ -424,6 +442,79 @@ export async function getAuthorFeed(session: BlueskySession, actor: string, limi
   return out;
 }
 
+/** Upload raw image bytes; returns the blob ref for use in an embed. */
+export async function uploadBlob(
+  session: BlueskySession,
+  bytes: ArrayBuffer,
+  mimeType: string,
+): Promise<BlobRef> {
+  const res = await fetch(`${PDS}/com.atproto.repo.uploadBlob`, {
+    method: 'POST',
+    headers: { 'Content-Type': mimeType, Authorization: `Bearer ${session.accessJwt}` },
+    body: bytes,
+  });
+  const json = await res.json();
+  if (!res.ok) throw new Error(`Bluesky uploadBlob failed (${res.status}): ${json.error ?? ''}`);
+  return json.blob as BlobRef;
+}
+
+// Bluesky rejects image blobs over ~976KB; stay under with margin.
+const MAX_THUMB_BYTES = 900 * 1024;
+
+export function ogTag(html: string, property: string): string {
+  const re = new RegExp(
+    `<meta[^>]+(?:property|name)=["']${property}["'][^>]+content=["']([^"']*)["']|<meta[^>]+content=["']([^"']*)["'][^>]+(?:property|name)=["']${property}["']`,
+    'i',
+  );
+  const m = html.match(re);
+  return (m?.[1] ?? m?.[2] ?? '').trim();
+}
+
+/**
+ * Build an external-link card for a URL: fetch the page's OpenGraph metadata
+ * and (when small enough) upload its og:image as the card thumbnail. Bare
+ * links get near-zero engagement on Bluesky compared to cards, and our own
+ * pages already serve custom OG images. Best-effort: any failure returns null
+ * and the post simply goes out without a card.
+ */
+export async function fetchLinkCard(session: BlueskySession, url: string): Promise<ExternalEmbed | null> {
+  try {
+    const res = await fetch(url, {
+      signal: AbortSignal.timeout(8000),
+      headers: { 'User-Agent': 'Mozilla/5.0 (compatible; MyDemocracy/1.0)' },
+    });
+    if (!res.ok) return null;
+    const html = (await res.text()).slice(0, 200_000);
+
+    const title = ogTag(html, 'og:title') || html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1]?.trim() || url;
+    const description = ogTag(html, 'og:description') || ogTag(html, 'description');
+
+    let thumb: BlobRef | undefined;
+    const imageUrl = ogTag(html, 'og:image');
+    if (imageUrl) {
+      try {
+        const imgRes = await fetch(new URL(imageUrl, url), { signal: AbortSignal.timeout(8000) });
+        const mime = imgRes.headers.get('content-type') ?? '';
+        if (imgRes.ok && mime.startsWith('image/')) {
+          const bytes = await imgRes.arrayBuffer();
+          if (bytes.byteLength > 0 && bytes.byteLength <= MAX_THUMB_BYTES) {
+            thumb = await uploadBlob(session, bytes, mime.split(';')[0]);
+          }
+        }
+      } catch {
+        // no thumb — a card with title/description still beats a bare link
+      }
+    }
+
+    return {
+      $type: 'app.bsky.embed.external',
+      external: { uri: url, title: title.slice(0, 300), description: description.slice(0, 1000), ...(thumb ? { thumb } : {}) },
+    };
+  } catch {
+    return null;
+  }
+}
+
 /**
  * Build a post record from text (+ optional reply ref). Adds link facets and
  * computes the grapheme count. Throws if it exceeds the platform limit — the
@@ -455,7 +546,7 @@ export function buildPostRecord(
  */
 export async function post(
   text: string,
-  opts: { dryRun?: boolean; reply?: PostRecord['reply']; session?: BlueskySession } = {},
+  opts: { dryRun?: boolean; reply?: PostRecord['reply']; session?: BlueskySession; linkCardUrl?: string } = {},
 ): Promise<PostResult> {
   const { record, graphemes } = buildPostRecord(text, { reply: opts.reply });
 
@@ -468,6 +559,13 @@ export async function post(
     const creds = getBlueskyCreds();
     if (!creds) throw new Error('BLUESKY_HANDLE / BLUESKY_APP_PASSWORD not set');
     session = await createSession(creds.handle, creds.appPassword);
+  }
+
+  // Attach a link card when the caller provides a destination URL; failures
+  // fall back to the bare post rather than blocking it.
+  if (opts.linkCardUrl) {
+    const card = await fetchLinkCard(session, opts.linkCardUrl);
+    if (card) record.embed = card;
   }
 
   const result = await xrpc<{ uri: string; cid: string }>(

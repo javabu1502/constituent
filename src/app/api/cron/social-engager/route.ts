@@ -84,15 +84,29 @@ export async function GET(request: NextRequest) {
         .eq('id', row.id);
     }
 
-    const { data: ready } = await admin
+    // Inbound first: people already talking to us are the warmest audience,
+    // and under a shared FIFO they competed with cold outbound replies for the
+    // 3 slots/run and regularly expired unanswered (bug reports included).
+    const { data: readyInbound } = await admin
       .from('social_replies')
       .select('id')
       .eq('status', 'pending_post')
       .eq('requires_human', false)
+      .like('lane', 'inbound-%')
       .gte('created_at', cutoff)
       .order('created_at', { ascending: true })
       .limit(3);
-    for (const r of ready ?? []) {
+    const { data: readyOutbound } = await admin
+      .from('social_replies')
+      .select('id')
+      .eq('status', 'pending_post')
+      .eq('requires_human', false)
+      .not('lane', 'like', 'inbound-%')
+      .gte('created_at', cutoff)
+      .order('created_at', { ascending: true })
+      .limit(3);
+    const ready = [...(readyInbound ?? []), ...(readyOutbound ?? [])].slice(0, 3);
+    for (const r of ready) {
       const cadence = await canReplyNow();
       if (!cadence.allowed) break;
       const res = await publishReply(r.id as string);

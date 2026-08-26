@@ -31,7 +31,7 @@ export async function publishDraft(
 
   const { data: row, error } = await admin
     .from('social_posts')
-    .select('id, platform, body, status')
+    .select('id, platform, body, status, link_url')
     .eq('id', postId)
     .maybeSingle();
   if (error || !row) return { ok: false, postId, status: 'not_found', reason: 'post not found' };
@@ -59,7 +59,12 @@ export async function publishDraft(
   }
 
   try {
-    const result = await blueskyPost(row.body as string, { dryRun: false });
+    const result = await blueskyPost(row.body as string, {
+      dryRun: false,
+      // Cards lift click-through vs bare links; replies stay card-free (a big
+      // banner in a conversation thread reads as spam).
+      linkCardUrl: (row.link_url as string) || undefined,
+    });
     await admin
       .from('social_posts')
       .update({

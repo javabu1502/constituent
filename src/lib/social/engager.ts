@@ -217,10 +217,22 @@ You are the Engager stage of the My Democracy Social Desk, handling INBOUND
 replies/mentions — someone is talking TO us on Bluesky. Obey the brand brain
 above, especially the reply doctrine and the four non-negotiables.
 
-Write ONE reply to the message below. Rules:
-- They engaged with us, so respond to what they actually said. Be warm, plain,
-  and useful. If they ask something, answer it; if they share a frustration,
-  point to the fast way to act.
+Write ONE reply to the message below. DEFAULT TO REPLYING — this person chose
+to talk to us, and silence reads as a bot that broadcasts and never listens.
+Rules:
+- ALWAYS reply (never skip) when they: ask a question about the app or how to
+  use it; report a problem or bug ("couldn't send", "got an error" — thank
+  them plainly and say the team is looking at it, never promise a fix or a
+  timeline); ask a civic how-do-I question; or continue the conversation with
+  real substance.
+- If they are CORRECTING something we posted (a date, a fact, "get your facts
+  straight"), draft a gracious reply that thanks them and takes the flag
+  seriously. Do NOT argue, do NOT confirm or deny the correction (you cannot
+  verify it), and set "flag": "correction" in your JSON so a human reviews it
+  before it posts.
+- If they share a hard personal situation in response to our prompt, a short,
+  warm, human acknowledgment is the reply — no link, no call to action, no
+  advice. One or two plain sentences.
 - Stay strictly nonpartisan. Never adopt their framing as fact, never blame a
   party or figure, never take a side on a bill. We inform; the citizen decides.
 - No em dashes. No AI tells. Do not narrate their emotions.
@@ -229,11 +241,11 @@ Write ONE reply to the message below. Rules:
 - If OUR POST they're responding to is provided, read it first — their message
   only makes sense in that context. If their message reacts to something you
   were not given, skip rather than guess what they mean.
-- SKIP (return {"skip": true}) if a reply adds nothing or would be unwise: a
-  bare thanks/emoji/ack, spam, trolling, abuse, or anything you cannot answer
-  nonpartisanly and truthfully.
+- SKIP (return {"skip": true}) ONLY for: a bare thanks/emoji/ack with nothing
+  to answer, spam or fundraising links, trolling or abuse, someone clearly
+  outside the US, or anything you cannot answer nonpartisanly and truthfully.
 
-Return ONLY JSON: {"text": "<reply>"} or {"skip": true}.
+Return ONLY JSON: {"text": "<reply>", "flag": "correction" | null} or {"skip": true}.
 `;
 
 /**
@@ -263,14 +275,22 @@ export async function runInboundEngager(brandBrain: string, session: BlueskySess
   const { data: existing } = await admin.from('social_replies').select('target_uri').in('target_uri', uris);
   const have = new Set((existing ?? []).map((r) => r.target_uri));
 
-  // Same per-author daily cap as the search path (shared social_replies table).
+  // Inbound is a CONVERSATION, so it gets its own per-author allowance instead
+  // of the search path's one-per-day cap (which made holding any 2-turn
+  // exchange impossible — every follow-up from the same person was dropped).
+  // Cap 3 inbound replies per author per day so bot loops can't run away.
+  const INBOUND_PER_AUTHOR_CAP = 3;
   const since24h = new Date(Date.now() - 24 * 60 * 60_000).toISOString();
-  const { data: recentAuthors } = await admin
+  const { data: recentInbound } = await admin
     .from('social_replies')
     .select('target_author')
+    .like('lane', 'inbound-%')
     .neq('status', 'skipped')
     .gte('created_at', since24h);
-  const authorsHandled = new Set((recentAuthors ?? []).map((r) => r.target_author));
+  const inboundCount = new Map<string, number>();
+  for (const r of recentInbound ?? []) {
+    inboundCount.set(r.target_author, (inboundCount.get(r.target_author) ?? 0) + 1);
+  }
 
   // For replies, fetch the post of OURS they're responding to — answering
   // "what they actually said" requires knowing what it was said in response to.
@@ -281,7 +301,7 @@ export async function runInboundEngager(brandBrain: string, session: BlueskySess
 
   for (const c of candidates) {
     if (have.has(c.uri)) continue;
-    if (authorsHandled.has(c.authorHandle)) {
+    if ((inboundCount.get(c.authorHandle) ?? 0) >= INBOUND_PER_AUTHOR_CAP) {
       result.skipped++;
       continue;
     }
@@ -310,19 +330,21 @@ export async function runInboundEngager(brandBrain: string, session: BlueskySess
 
     const ourPost = c.parent ? inboundParents[c.parent.uri] : undefined;
     let text = '';
+    let isCorrection = false;
     try {
       const raw = await callClaude(
         `${brandBrain}\n\n---\n${INBOUND_INSTRUCTIONS}`,
         `Someone ${c.reason === 'reply' ? 'replied to us' : c.reason === 'quote' ? 'quoted us' : 'mentioned us'} — @${c.authorHandle}: ${c.text}\n${ourPost?.text ? `\nTHEY ARE RESPONDING TO OUR POST: ${ourPost.text}\n` : ''}\nACTION LINK: ${actionLinkFor(c.text, linkableCampaigns)}`,
         300,
       );
-      const parsed = extractJSON(raw) as { text?: string; skip?: boolean } | null;
+      const parsed = extractJSON(raw) as { text?: string; skip?: boolean; flag?: string | null } | null;
       if (parsed?.skip || !parsed?.text) {
         await recordSkip('writer skip: nothing useful to add');
         result.skipped++;
         continue;
       }
       text = deDash(parsed.text).trim();
+      isCorrection = parsed.flag === 'correction';
     } catch {
       result.skipped++; // transient — leave unrecorded to retry
       continue;
@@ -336,11 +358,14 @@ export async function runInboundEngager(brandBrain: string, session: BlueskySess
       continue;
     }
 
-    // Officials and org/press accounts that engage us go to the human queue;
-    // clear individuals get an autonomous reply (when reply mode allows).
+    // Officials and org/press accounts that engage us go to the human queue,
+    // as do accuracy corrections (the writer can't verify them, and a wrong
+    // gracious-acknowledgment is worse than a slow right one); clear
+    // individuals get an autonomous reply (when reply mode allows).
     const requiresHuman =
       isLikelyElectedOfficial(c.authorHandle, c.authorDisplay) ||
-      looksLikeOrgOrBot(c.authorHandle, c.authorDisplay);
+      looksLikeOrgOrBot(c.authorHandle, c.authorDisplay) ||
+      isCorrection;
     const status = requiresHuman ? 'pending_approval' : 'pending_post';
     // Thread onto their post: parent is their reply; root is the thread root
     // (theirs if they carry one, else their post starts the thread with us).
@@ -364,7 +389,7 @@ export async function runInboundEngager(brandBrain: string, session: BlueskySess
       result.skipped++;
       continue;
     }
-    authorsHandled.add(c.authorHandle);
+    inboundCount.set(c.authorHandle, (inboundCount.get(c.authorHandle) ?? 0) + 1);
     result.drafted++;
     if (requiresHuman) result.gated++;
   }
