@@ -45,11 +45,17 @@ Write ONE Bluesky post about the item below. Hard rules:
   contact a city council, mayor, school board, county board, or "local
   officials"; point the CTA at the linked campaign instead.
 - Match a posting lane from the brand brain (news drop / by-the-numbers / bill on the move / rolling brief).
-- CAMPAIGN LINK MISMATCH: if the linked campaign does not fit the story but
-  the story itself is solid, verifiable US civic news, DRAFT IT ANYWAY and set
-  "genericLink": true — the post will link to the issues page instead. Only
-  skip when the story itself fails the rules (partisan-only framing,
-  unverifiable claims, not US civic news).
+- CAMPAIGN LINK FIT: LINK goes to the campaign page named in CAMPAIGN PAGE.
+  Judge fit on the story's SPECIFIC subject, not broad adjacency — a defense
+  budget story does NOT fit a veterans-benefits campaign; a drug-pricing story
+  does NOT fit a general healthcare campaign. If the campaign does not clearly
+  cover the story's subject but the story is solid, verifiable US civic news,
+  DRAFT IT ANYWAY, set "genericLink": true, AND use ${'https://www.mydemocracy.app/issues'}
+  as the inline link in the post text instead of LINK (the mismatched campaign
+  URL must not appear anywhere in the post). Phrase the CTA generically
+  ("weigh in on what's moving") — never promise a campaign specific to this
+  story. Only skip when the story itself fails the rules (partisan-only
+  framing, unverifiable claims, not US civic news).
 - If the item can't be posted under these rules, do NOT explain in prose.
   Return ONLY JSON: {"skip": true, "reason": "<short internal note>"}
 
@@ -63,10 +69,19 @@ export interface WriterSkip {
 }
 
 export async function writePost(brandBrain: string, signal: Signal): Promise<Draft | WriterSkip> {
+  const campaignTitle =
+    (signal.metadata as Record<string, unknown> | null | undefined)?.campaign_title;
   const item = [
     `TITLE: ${signal.title ?? ''}`,
     `SUMMARY: ${signal.summary ?? ''}`,
     `LINK: ${signal.url ?? ''}`,
+    `CAMPAIGN PAGE: ${
+      typeof campaignTitle === 'string' && campaignTitle
+        ? campaignTitle
+        : signal.campaign_slug
+          ? `(title unknown — slug "${signal.campaign_slug}"; judge fit cautiously and prefer genericLink)`
+          : '(none — LINK is not a campaign page)'
+    }`,
     `ISSUE AREA: ${signal.issue_area ?? ''}`,
     `CLASSIFICATION: ${signal.classification ?? 'actionable'}`,
     `SOURCE: ${signal.source ?? ''}`,
@@ -90,7 +105,25 @@ export async function writePost(brandBrain: string, signal: Signal): Promise<Dra
   let text = parsed.text;
   const lane = typeof parsed.lane === 'string' ? parsed.lane : 'rolling brief';
 
-  // Backstop the brand's hardest rule regardless of what the model returned.
+  // No-em-dash rule, done RIGHT: mechanical dash→comma replacement produced
+  // published word salad ("13 unresolved issues, troop pay, procurement, and
+  // more, before a final bill lands" — 2026-08 FY27 defense post), because
+  // appositive dashes often carry a clause whose grammar collapses without
+  // them. Ask the model to RESTRUCTURE the sentence first; deDash stays as
+  // the last-resort backstop only if dashes survive the rewrite.
+  if (/[—–]/.test(text)) {
+    try {
+      const rewritten = await callClaude(
+        `${brandBrain}\n\n---\nRewrite this Bluesky post with NO em or en dashes. RESTRUCTURE into complete grammatical sentences (split sentences, use a colon, or reword) — do NOT just swap dashes for commas. Keep the link, facts, length, and voice. Return ONLY JSON: {"text": "<post>"}`,
+        text,
+        350,
+      );
+      const cleaned = (extractJSON(rewritten) as { text?: string } | null)?.text?.trim();
+      if (cleaned && !/[—–]/.test(cleaned)) text = cleaned;
+    } catch {
+      // fall through to the mechanical backstop
+    }
+  }
   text = deDash(text).trim();
 
   // Shorten passes if it's over length (the brief lane tends to run long), so
@@ -112,6 +145,25 @@ export async function writePost(brandBrain: string, signal: Signal): Promise<Dra
     } catch {
       // keep the current text; the length guardrail will gate it if still over
     }
+  }
+
+  // Coherence gate — the last line of defense for GRAMMAR, which none of the
+  // structural guardrails check (the FY27 word-salad post passed them all:
+  // no dashes left, every word traced to the source). Blocks only on an
+  // explicit "ok": false so a flaky judge can't silence the account; the
+  // structural guardrails still run downstream either way.
+  try {
+    const review = await callClaude(
+      'You are a copy editor. Judge ONLY whether this social post reads as coherent, complete, grammatical English a careful human would publish. Every sentence must have its verb; no truncated fragments or comma-spliced word lists. Do not judge opinions, style, or length. Return ONLY JSON: {"ok": true} or {"ok": false, "reason": "<what is broken>"}',
+      text,
+      120,
+    );
+    const verdict = extractJSON(review) as { ok?: boolean; reason?: string } | null;
+    if (verdict?.ok === false) {
+      return { skip: true, reason: `incoherent draft: ${verdict.reason ?? 'failed copy-edit check'}` };
+    }
+  } catch {
+    // judge unavailable — let the structural guardrails decide as before
   }
 
   return { text, lane, genericLink: parsed.genericLink === true };

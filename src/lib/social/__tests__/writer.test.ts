@@ -51,3 +51,71 @@ describe('writer: refusals become skips, never post bodies', () => {
     expect(out).toMatchObject({ text: 'H.R. 139 is moving. weigh in: link', lane: 'bill on the move' });
   });
 });
+
+describe('writer: dash handling restructures, never comma-splices (FY27 word-salad bug)', () => {
+  beforeEach(() => mockCall.mockReset());
+
+  it('sends a dashed draft back for grammatical restructuring', async () => {
+    mockCall
+      .mockResolvedValueOnce('{"text": "13 unresolved issues — troop pay, procurement, and more — before a final bill lands. link", "lane": "news drop"}')
+      .mockResolvedValueOnce('{"text": "13 issues are still unresolved before a final bill lands, including troop pay and procurement. link"}')
+      .mockResolvedValue('{"ok": true}');
+    const out = await writePost('brand brain', SIGNAL);
+    expect('text' in out).toBe(true);
+    if ('text' in out) {
+      expect(out.text).toBe('13 issues are still unresolved before a final bill lands, including troop pay and procurement. link');
+      expect(out.text).not.toMatch(/[—–]/);
+    }
+    // second call was the rewrite pass
+    expect(mockCall.mock.calls[1][0]).toContain('RESTRUCTURE');
+  });
+
+  it('falls back to mechanical deDash only when the rewrite still has dashes', async () => {
+    mockCall
+      .mockResolvedValueOnce('{"text": "A — B. link", "lane": "news drop"}')
+      .mockResolvedValueOnce('{"text": "A — B. link"}')
+      .mockResolvedValue('{"ok": true}');
+    const out = await writePost('brand brain', SIGNAL);
+    if ('text' in out) expect(out.text).toBe('A, B. link');
+  });
+});
+
+describe('writer: coherence gate', () => {
+  beforeEach(() => mockCall.mockReset());
+
+  it('skips a draft the copy-edit judge explicitly rejects', async () => {
+    mockCall
+      .mockResolvedValueOnce('{"text": "13 unresolved issues, troop pay, procurement, and more, before a final bill lands. link", "lane": "news drop"}')
+      .mockResolvedValueOnce('{"ok": false, "reason": "sentence has no verb"}');
+    const out = await writePost('brand brain', SIGNAL);
+    expect(out).toMatchObject({ skip: true, reason: 'incoherent draft: sentence has no verb' });
+  });
+
+  it('fails open when the judge returns junk (structural guardrails still gate downstream)', async () => {
+    mockCall
+      .mockResolvedValueOnce('{"text": "A clean coherent post. link", "lane": "news drop"}')
+      .mockResolvedValueOnce('not json at all');
+    const out = await writePost('brand brain', SIGNAL);
+    expect('text' in out).toBe(true);
+  });
+});
+
+describe('writer: campaign link fit context', () => {
+  beforeEach(() => mockCall.mockReset());
+
+  it('shows the writer the campaign TITLE, not just the slug', async () => {
+    mockCall.mockResolvedValue('{"text": "ok. link", "lane": "news drop"}');
+    await writePost('brand brain', {
+      ...SIGNAL,
+      metadata: { campaign_title: 'Support expanded veterans healthcare' },
+    } as unknown as Signal);
+    expect(mockCall.mock.calls[0][1]).toContain('CAMPAIGN PAGE: Support expanded veterans healthcare');
+  });
+
+  it('flags an unknown title so the writer judges cautiously', async () => {
+    mockCall.mockResolvedValue('{"text": "ok. link", "lane": "news drop"}');
+    await writePost('brand brain', SIGNAL);
+    expect(mockCall.mock.calls[0][1]).toContain('title unknown');
+    expect(mockCall.mock.calls[0][1]).toContain('prefer genericLink');
+  });
+});

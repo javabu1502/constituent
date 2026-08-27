@@ -28,6 +28,10 @@ export interface Signal {
   classification: string | null;
   campaign_slug: string | null;
   status: string;
+  /** Extra context per source: `outlet` (attribution), `campaign_title` (what
+   *  the linked campaign page is actually about — the writer needs it to judge
+   *  link fit; slugs alone let a defense story pass as a veterans campaign). */
+  metadata?: Record<string, unknown> | null;
 }
 
 /**
@@ -147,6 +151,19 @@ export async function scoutNews(): Promise<number> {
   }
 
   if (!candidates.length) return 0;
+
+  // Attach each matched campaign's TITLE so the writer can judge link fit
+  // against what the campaign is actually about, not a slug fragment.
+  const matchedSlugs = [...new Set(candidates.map((c) => c.campaign_slug).filter(Boolean))] as string[];
+  if (matchedSlugs.length) {
+    const { data: titled } = await admin.from('campaigns').select('slug, title').in('slug', matchedSlugs);
+    const titleBySlug = new Map((titled ?? []).map((c) => [c.slug as string, c.title as string]));
+    for (const c of candidates) {
+      const title = c.campaign_slug ? titleBySlug.get(c.campaign_slug) : undefined;
+      if (title) c.metadata = { ...(c.metadata ?? {}), campaign_title: title };
+    }
+  }
+
   const refs = candidates.map((c) => c.external_ref).filter(Boolean) as string[];
   const { data: existing } = await admin
     .from('social_signals')
@@ -155,7 +172,9 @@ export async function scoutNews(): Promise<number> {
     .in('external_ref', refs);
   const have = new Set((existing ?? []).map((r) => r.external_ref));
 
-  const rows = candidates.filter((c) => !have.has(c.external_ref)).map((c) => ({ ...c, status: 'new', metadata: {} }));
+  // Preserve candidate metadata (outlet, campaign_title) — a literal {} here
+  // silently wiped it for every news signal.
+  const rows = candidates.filter((c) => !have.has(c.external_ref)).map((c) => ({ ...c, status: 'new', metadata: c.metadata ?? {} }));
   if (!rows.length) return 0;
   const { error } = await admin.from('social_signals').insert(rows);
   if (error) {
@@ -251,7 +270,7 @@ export async function nextSignal(): Promise<Signal | null> {
   // this reason — created_at ordering pushed them out of the window).
   const { data, error } = await admin
     .from('social_signals')
-    .select('id, source, external_ref, title, summary, url, issue_area, classification, campaign_slug, status')
+    .select('id, source, external_ref, title, summary, url, issue_area, classification, campaign_slug, status, metadata')
     .eq('status', 'new')
     .order('score', { ascending: false })
     .order('created_at', { ascending: false })
