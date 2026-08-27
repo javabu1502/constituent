@@ -42,6 +42,10 @@ export {
   type AcquirePermitOptions,
 } from './rate-permit';
 export {
+  enqueueCwcDeliveries, processCwcSendQueue, setSendQueueClientFactory,
+  type QueueItem, type SendQueueJob, type ProcessQueueOptions, type ProcessQueueSummary,
+} from './queue';
+export {
   resolveOfficeCode,
   houseOfficeCode,
   senateOfficeCode,

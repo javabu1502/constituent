@@ -92,8 +92,24 @@ in production)** → maintenance window (Senate) → active-offices check (refus
 permit claimed at the POST choke point; backpressure and endpoint 429s both
 surface as `retry-later`) → outcome + raw response recorded.
 
+## Durable send queue (`queue.ts` + `cwc_send_queue`) ✅ built
+
+Lee's PR #3 agreed approach: Vercel serverless stays the runner; Postgres
+provides the job locking (no Redis). One row per (message × office × env) —
+idempotent enqueue (gated at the boundary, fail-closed billLevel enforced by
+a check constraint). Workers claim bounded batches via `claim_cwc_send_jobs`
+(**FOR UPDATE SKIP LOCKED** leases — concurrent workers never contend or
+double-claim; no 60s request held open for a whole campaign). Exactly-once =
+lease + delivery-log mint-once DeliveryId: a job reclaimed after a worker
+died mid-send retries with the SAME id → Senate 409 → recorded delivered,
+never duplicated at the office. Attempts burn at claim time; deferrals
+(backpressure/maintenance/429) give the attempt back; compliance errors fail
+terminally; transient errors back off exponentially (1m→15m cap) until the
+budget is spent. NOT yet wired to any cron/route — the hard no-send gate
+holds; the production drainer route ships with the contact-flow caller.
+
 ## Not started (next milestones)
 
 - Recipient resolution (address → correct office code, incl. House ZIP+4 district) fed from address-accurate rep resolution.
-- Production API route that calls `sendCwcDelivery` from the app's contact flow.
+- Production API route that enqueues via `enqueueCwcDeliveries` + a cron drainer route calling `processCwcSendQueue`.
 - Webform sender for the ~46 non-participating Senate offices (form-automation wrap).
