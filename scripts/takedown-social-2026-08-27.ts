@@ -20,6 +20,20 @@ dotenv.config({ path: path.resolve(__dirname, '../.env.local') });
 const NEEDLE = '13 unresolved issues';
 const DELETE = process.argv.includes('--delete');
 
+/**
+ * Leftover joke replies from the 08-25 incident — that takedown script never
+ * made it into the repo, and a 2026-08-27 public-feed audit confirmed all
+ * three audited replies are STILL LIVE, plus a fourth in the same
+ * invisible-referent class (replying earnestly to context-free "someone
+ * should do something" posts). URIs verified against the live feed 08-27.
+ */
+const LEFTOVER_REPLY_URIS = [
+  'at://did:plc:ckg7cyuly4f4wilw5hdqz7a4/app.bsky.feed.post/3mturmzasur2o', // 08-25 @meik2 "you can be the someone"
+  'at://did:plc:ckg7cyuly4f4wilw5hdqz7a4/app.bsky.feed.post/3mtpxf4aagr2u', // 08-23 @niedermeyer
+  'at://did:plc:ckg7cyuly4f4wilw5hdqz7a4/app.bsky.feed.post/3mtna7rq4wx2v', // 08-22 @lynn.cat
+  'at://did:plc:ckg7cyuly4f4wilw5hdqz7a4/app.bsky.feed.post/3mtg4a2b3rn2y', // 08-19 @eradicatemes (same class)
+];
+
 async function xrpcDelete(session: { did: string; accessJwt: string }, uri: string): Promise<void> {
   // at://did:plc:xxx/app.bsky.feed.post/rkey
   const m = /^at:\/\/([^/]+)\/([^/]+)\/(.+)$/.exec(uri);
@@ -41,16 +55,16 @@ async function run(): Promise<void> {
     .ilike('body', `%${NEEDLE}%`)
     .order('posted_at', { ascending: false });
   if (error) throw new Error(`lookup failed: ${error.message}`);
-  if (!rows?.length) {
-    console.log(`No posted rows matching "${NEEDLE}".`);
-    return;
-  }
+  const matches = rows ?? [];
+  if (!matches.length) console.log(`No posted rows matching "${NEEDLE}" — continuing to the pinned 08-25 leftovers.`);
 
-  for (const row of rows) {
+  for (const row of matches) {
     console.log(`\n[${row.posted_at}] ${row.external_post_id}\n  campaign: ${row.campaign_slug ?? '(none)'} link: ${row.link_url ?? '?'}\n  ${row.body}`);
   }
   if (!DELETE) {
-    console.log(`\nDry run: ${rows.length} match(es). Re-run with --delete to remove from Bluesky.`);
+    console.log(`\nPlus ${LEFTOVER_REPLY_URIS.length} pinned leftover replies from the 08-25 incident:`);
+    for (const uri of LEFTOVER_REPLY_URIS) console.log(`  ${uri}`);
+    console.log(`\nDry run: ${matches.length} match(es) + ${LEFTOVER_REPLY_URIS.length} pinned. Re-run with --delete to remove from Bluesky.`);
     return;
   }
 
@@ -58,7 +72,7 @@ async function run(): Promise<void> {
   if (!creds) throw new Error('BLUESKY_HANDLE / BLUESKY_APP_PASSWORD not set');
   const session = await createSession(creds.handle, creds.appPassword);
 
-  for (const row of rows) {
+  for (const row of matches) {
     if (!row.external_post_id) {
       console.log(`Skipping ${row.id}: no external_post_id recorded`);
       continue;
@@ -69,6 +83,21 @@ async function run(): Promise<void> {
       .update({ status: 'deleted', guardrail_report: { takedown: '2026-08-27 word-salad + link mismatch (fixed in fcac591)' } })
       .eq('id', row.id);
     console.log(`Deleted ${row.external_post_id}`);
+  }
+
+  // The 08-25 leftovers (URIs pinned above; already re-verified live).
+  for (const uri of LEFTOVER_REPLY_URIS) {
+    try {
+      await xrpcDelete(session, uri);
+      console.log(`Deleted leftover reply ${uri}`);
+    } catch (e) {
+      // Already gone is success for a takedown.
+      console.log(`Leftover reply ${uri}: ${(e as Error).message}`);
+    }
+    await admin
+      .from('social_replies')
+      .update({ status: 'deleted', guardrail_report: { takedown: '2026-08-27: 08-25 invisible-referent joke replies, verified still live' } })
+      .eq('external_post_id', uri);
   }
 }
 
