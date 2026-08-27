@@ -141,3 +141,28 @@ export function isInScwcMaintenanceWindow(date: Date = new Date()): boolean {
   if (weekday === 'Wed' && hour >= 5 && hour < 7) return true; // Wed 5:00a–6:59a
   return false;
 }
+
+/**
+ * House CWC daily maintenance window: 12:00a–6:00a US Eastern, EVERY day
+ * (House CWC documentation). Same Intl-based evaluation as the SCWC windows
+ * so EST/EDT transitions are handled correctly. The 2026-08-26 audit flagged
+ * this as unhandled — Senate windows were checked, House's never was.
+ */
+export function isInHouseMaintenanceWindow(date: Date = new Date()): boolean {
+  const hour =
+    Number(
+      new Intl.DateTimeFormat('en-US', {
+        timeZone: 'America/New_York',
+        hour: 'numeric',
+        hour12: false,
+      })
+        .formatToParts(date)
+        .find((p) => p.type === 'hour')?.value,
+    ) % 24; // "24" → 0
+  return hour < 6; // 12:00a–5:59a ET daily
+}
+
+/** Chamber-aware window check — the send path's single entry point. */
+export function isInMaintenanceWindow(chamber: Chamber, date: Date = new Date()): boolean {
+  return chamber === 'senate' ? isInScwcMaintenanceWindow(date) : isInHouseMaintenanceWindow(date);
+}

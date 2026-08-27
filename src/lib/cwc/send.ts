@@ -1,4 +1,4 @@
-import { isInScwcMaintenanceWindow, type Chamber } from './constants';
+import { isInMaintenanceWindow, type Chamber } from './constants';
 import { loadActiveOfficeCodes, sendHouse, sendSenate, type CwcResult } from './client';
 import { assertCwcSendable } from './content';
 import { buildCwcXml } from './xml';
@@ -149,12 +149,16 @@ export async function sendCwcDelivery(
     }
   }
 
-  // 2. SCWC maintenance windows (Senate infrastructure).
-  if (delivery.chamber === 'senate' && isInScwcMaintenanceWindow(opts.now ?? new Date())) {
+  // 2. Maintenance windows, chamber-aware: SCWC Sun 12a–6a + Wed 5a–7a ET;
+  //    House DAILY 12a–6a ET (audit 2026-08-26 — previously unchecked).
+  if (isInMaintenanceWindow(delivery.chamber, opts.now ?? new Date())) {
     return {
       sent: false,
       fallback: 'retry-later',
-      reason: 'SCWC maintenance window (Sun 12a–6a / Wed 5a–7a US Eastern)',
+      reason:
+        delivery.chamber === 'senate'
+          ? 'SCWC maintenance window (Sun 12a–6a / Wed 5a–7a US Eastern)'
+          : 'House CWC maintenance window (daily 12a–6a US Eastern)',
     };
   }
 

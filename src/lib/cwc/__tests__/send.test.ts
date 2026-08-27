@@ -233,3 +233,27 @@ describe('sendCwcDelivery orchestration', () => {
     expect(rows[0]).toMatchObject({ status: 'pending', http_status: 429 });
   });
 });
+
+describe('House maintenance window in sendCwcDelivery', () => {
+  it('defers House sends during the daily 12a-6a ET window', async () => {
+    const { sendCwcDelivery: send } = await import('../send');
+    const outcome = await send(
+      {
+        chamber: 'house', officeCode: 'HNY12', campaignId: 'campaign-1',
+        constituent: {
+          prefix: 'Ms.', firstName: 'Jane', lastName: 'Doe',
+          address1: '350 5th Ave', city: 'New York', state: 'NY', zip: '10118-0110', email: 'jane@example.com',
+        },
+        message: { subject: 'Please support lowering insulin prices', topics: ['Health'], constituentMessage: 'As a nurse, I see insulin costs hurt my patients.' },
+      },
+      {
+        messageKey: 'user1:campaign-1', environment: 'test', billLevel: 'federal',
+        activeOffices: { loader: async () => new Set(['HNY12']) },
+        sender: async () => ({ ok: true, status: 200 }),
+        now: new Date('2026-08-14T05:30:00Z'), // Fri 1:30a EDT — House window, no SCWC window
+      },
+    );
+    expect(outcome).toMatchObject({ sent: false, fallback: 'retry-later' });
+    if (!outcome.sent) expect(outcome.reason).toMatch(/House CWC maintenance/);
+  });
+});
