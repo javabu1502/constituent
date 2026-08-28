@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { runGuardrails, uncoveredContactTargets } from '../guardrails';
+import { runGuardrails, uncoveredContactTargets, replyShouldSkip } from '../guardrails';
 import { isRepostSafe } from '../reposter';
 
 describe('named contact targets', () => {
@@ -63,5 +63,25 @@ describe('reply deep-linking matcher', () => {
   it('returns null when nothing matches confidently', async () => {
     const { bestCampaignFor } = await import('../engager');
     expect(bestCampaignFor('what a beautiful sunset tonight over the lake', campaigns)).toBeNull();
+  });
+});
+
+describe('replyShouldSkip: deictic "someone should do something" meme (hard skip)', () => {
+  it('skips every observed live variant of the meme', () => {
+    for (const t of [
+      'Someone should do something!',
+      'omg someone should do something!',
+      'ugh i know someone should do something about this',
+      'someone should do something about that, not me though, i\'m too busy',
+      'Wow someone should do something about that',
+      'someone really needs to do something about it',
+    ]) {
+      expect(replyShouldSkip(t).skip, t).toBe(true);
+    }
+  });
+
+  it('still allows the phrase with a NAMED topic (real civic intent)', () => {
+    expect(replyShouldSkip('someone should do something about insulin prices, my mom pays $400 a month').skip).toBe(false);
+    expect(replyShouldSkip('someone should do something about the housing crisis in my city').skip).toBe(false);
   });
 });

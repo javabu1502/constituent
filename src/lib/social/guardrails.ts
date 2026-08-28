@@ -278,7 +278,22 @@ const REPLY_SKIP_PATTERNS: Array<{ re: RegExp; reason: string }> = [
   { re: /\b(f[u*]ck|c[u*]nt|retard|sl[u*]t)\b/i, reason: 'abusive language' },
 ];
 
+// The "someone should do something (about this/that)" meme: on Bluesky this
+// phrasing is overwhelmingly sarcasm about a quoted post, image, or vibe the
+// account can't see. The lane query was removed 2026-08-25 and the model is
+// instructed to skip invisible referents — and it still recurred (08-28,
+// after a rollback deploy re-ran the old code). Model judgment is not a
+// reliable sole defense against this meme, so it is now a DETERMINISTIC skip:
+// the phrase with a bare deictic referent (or none) can never be replied to.
+// A post that names an actual topic after the phrase ("someone should do
+// something about insulin prices") still passes to the model's judgment.
+const DEICTIC_MEME_RE =
+  /\bsomeone (really |seriously )?(should|needs? to|ought to|has to|had better) do something\b(?!,? about (?!(this|that|it)\b)\w)/i;
+
 export function replyShouldSkip(targetText: string): { skip: boolean; reason?: string } {
+  if (DEICTIC_MEME_RE.test(targetText)) {
+    return { skip: true, reason: 'deictic "someone should do something" meme — referent invisible, near-certain sarcasm' };
+  }
   const hit = REPLY_SKIP_PATTERNS.find((p) => p.re.test(targetText));
   return hit ? { skip: true, reason: hit.reason } : { skip: false };
 }
