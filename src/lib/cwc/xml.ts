@@ -34,8 +34,10 @@ const escapeXml = (s: string): string =>
 /** A 32-char alphanumeric GUID (schema: [a-zA-Z0-9]{32}). */
 export const newDeliveryId = (): string => randomUUID().replace(/-/g, '');
 
-/** Today in YYYYMMDD (UTC), matching the schema's [0-9]{8}. */
-export const today = (): string => new Date().toISOString().slice(0, 10).replace(/-/g, '');
+/** Today in YYYYMMDD, US Eastern — congressional systems live in DC time. A
+ *  UTC date would stamp TOMORROW on any send after ~8pm ET (audit 08-31). */
+export const today = (date: Date = new Date()): string =>
+  new Intl.DateTimeFormat('en-CA', { timeZone: 'America/New_York' }).format(date).replace(/-/g, '');
 
 /** Normalize a phone to XXX-XXX-XXXX, or null if it isn't 10 digits. */
 export function formatPhone(raw: string): string | null {

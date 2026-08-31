@@ -15,9 +15,14 @@ export * from './constants';
 export * from './types';
 export { buildCampaignId } from './campaign-id';
 export { buildCwcXml, CwcValidationError, newDeliveryId, today, formatPhone } from './xml';
+// NOTE: sendHouse/sendSenate are deliberately NOT re-exported (compliance
+// verification 2026-08-31): they hit live endpoints with only XML validation
+// and the rate permit — every real send must go through sendCwcDelivery,
+// where George's gates (state-bill, stance, PII, constituent verification,
+// active offices, maintenance windows, idempotent ids) are mandatory.
 export {
-  validateHouse, sendHouse, getActiveOffices,
-  sendSenate, getActiveOfficesSenate,
+  validateHouse, getActiveOffices,
+  getActiveOfficesSenate,
   loadActiveOfficeCodes, sendBatch,
   checkEgressIp, type CwcResult,
 } from './client';

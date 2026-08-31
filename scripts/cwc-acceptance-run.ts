@@ -115,16 +115,50 @@ const CAMPAIGNS: AcceptanceCampaign[] = [
   },
 ];
 
-/** A clearly-fake test constituent whose state matches the office code. */
+// Capital city + a real zip for each state, so SCWC admins reading the test
+// messages see internally consistent constituents (a WY address with zip
+// 12345 reads sloppy during human evaluation; schema-valid isn't the bar).
+const STATE_CITY_ZIP: Record<string, { city: string; zip: string }> = {
+  AL: { city: 'Montgomery', zip: '36104' }, AK: { city: 'Juneau', zip: '99801' },
+  AZ: { city: 'Phoenix', zip: '85007' }, AR: { city: 'Little Rock', zip: '72201' },
+  CA: { city: 'Sacramento', zip: '95814' }, CO: { city: 'Denver', zip: '80203' },
+  CT: { city: 'Hartford', zip: '06106' }, DE: { city: 'Dover', zip: '19901' },
+  FL: { city: 'Tallahassee', zip: '32301' }, GA: { city: 'Atlanta', zip: '30334' },
+  HI: { city: 'Honolulu', zip: '96813' }, ID: { city: 'Boise', zip: '83702' },
+  IL: { city: 'Springfield', zip: '62701' }, IN: { city: 'Indianapolis', zip: '46204' },
+  IA: { city: 'Des Moines', zip: '50319' }, KS: { city: 'Topeka', zip: '66612' },
+  KY: { city: 'Frankfort', zip: '40601' }, LA: { city: 'Baton Rouge', zip: '70802' },
+  ME: { city: 'Augusta', zip: '04330' }, MD: { city: 'Annapolis', zip: '21401' },
+  MA: { city: 'Boston', zip: '02133' }, MI: { city: 'Lansing', zip: '48933' },
+  MN: { city: 'Saint Paul', zip: '55155' }, MS: { city: 'Jackson', zip: '39201' },
+  MO: { city: 'Jefferson City', zip: '65101' }, MT: { city: 'Helena', zip: '59601' },
+  NE: { city: 'Lincoln', zip: '68508' }, NV: { city: 'Carson City', zip: '89701' },
+  NH: { city: 'Concord', zip: '03301' }, NJ: { city: 'Trenton', zip: '08608' },
+  NM: { city: 'Santa Fe', zip: '87501' }, NY: { city: 'Albany', zip: '12207' },
+  NC: { city: 'Raleigh', zip: '27601' }, ND: { city: 'Bismarck', zip: '58501' },
+  OH: { city: 'Columbus', zip: '43215' }, OK: { city: 'Oklahoma City', zip: '73102' },
+  OR: { city: 'Salem', zip: '97301' }, PA: { city: 'Harrisburg', zip: '17101' },
+  RI: { city: 'Providence', zip: '02903' }, SC: { city: 'Columbia', zip: '29201' },
+  SD: { city: 'Pierre', zip: '57501' }, TN: { city: 'Nashville', zip: '37219' },
+  TX: { city: 'Austin', zip: '78701' }, UT: { city: 'Salt Lake City', zip: '84111' },
+  VT: { city: 'Montpelier', zip: '05602' }, VA: { city: 'Richmond', zip: '23219' },
+  WA: { city: 'Olympia', zip: '98501' }, WV: { city: 'Charleston', zip: '25301' },
+  WI: { city: 'Madison', zip: '53703' }, WY: { city: 'Cheyenne', zip: '82001' },
+};
+
+/** A clearly-labeled test constituent whose city/state/zip are consistent. */
 function testConstituent(officeCode: string, i: number): CwcDelivery['constituent'] {
+  const state = officeCode.slice(1, 3); // seat code embeds the state
+  const loc = STATE_CITY_ZIP[state];
+  if (!loc) throw new Error(`no city/zip fixture for state ${state} (office ${officeCode})`);
   return {
     prefix: ALLOWED_PREFIXES[i % ALLOWED_PREFIXES.length],
     firstName: 'Scwc',
     lastName: `Acceptance${i}`,
     address1: '123 Test Harness Way',
-    city: 'Testville',
-    state: officeCode.slice(1, 3), // seat code embeds the state
-    zip: '12345',
+    city: loc.city,
+    state,
+    zip: loc.zip,
     email: `scwc.acceptance.${i}@example.com`,
   };
 }
@@ -166,7 +200,13 @@ async function run(): Promise<void> {
           billLevel,
           skipActiveOfficeCheck: true, // SCWC test env: all 100 offices accept
         });
-        if (outcome.sent && (outcome.result.ok || outcome.result.status === 409)) counts.delivered++;
+        if (outcome.sent && outcome.result.status === 409 && !outcome.retried) {
+          // 409 means duplicate DeliveryId. On a RETRY that's success (the
+          // prior attempt landed) — but on a fresh id it means a collision or
+          // a mint bug, which acceptance must not paper over.
+          counts.error++;
+          console.error(`  409 ON FRESH DeliveryId for ${d.officeCode} — collision/mint bug, investigate before continuing`);
+        } else if (outcome.sent && (outcome.result.ok || outcome.result.status === 409)) counts.delivered++;
         else if (!outcome.sent && outcome.fallback === 'retry-later') {
           counts.deferred++;
           console.warn(`  DEFERRED ${d.officeCode}: ${outcome.reason}`);

@@ -134,6 +134,13 @@ export async function sendCwcDelivery(
 
   const mode: Mode = opts.environment === 'production' ? 'production' : 'uat';
 
+  // The active-offices skip exists ONLY because the SCWC test env accepts all
+  // 100 offices (the list doesn't indicate participation there). In
+  // production it would send to non-participating offices — hard error.
+  if (opts.skipActiveOfficeCheck && opts.environment === 'production') {
+    throw new Error('skipActiveOfficeCheck is a TEST-environment escape hatch — production must check Get Active Offices');
+  }
+
   // 1b. Constituent verification — the address must geocode to THIS seat.
   //     Mandatory in production (no opt-out); test env opts in via flag.
   const shouldVerify = opts.environment === 'production' || opts.verifyConstituent === true;
