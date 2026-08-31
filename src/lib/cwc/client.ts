@@ -155,7 +155,15 @@ export async function getActiveOffices(mode: Mode = 'uat'): Promise<unknown> {
  */
 export async function checkEgressIp(): Promise<string> {
   const res = await undiciFetch('https://ip.quotaguard.com', { dispatcher: cwcDispatcher() });
-  return (await res.text()).trim();
+  const raw = (await res.text()).trim();
+  // The echo service returns {"ip":"x.x.x.x"} — return the bare IP either way.
+  try {
+    const parsed = JSON.parse(raw) as { ip?: string };
+    if (typeof parsed.ip === 'string') return parsed.ip;
+  } catch {
+    // plain-text response — fall through
+  }
+  return raw;
 }
 
 function requireKey(name: string): string {
