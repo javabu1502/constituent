@@ -11,7 +11,7 @@
 import { createAdminClient } from '@/lib/supabase';
 import { callClaude, deDash, extractJSON } from '@/lib/claude';
 import { searchPosts, listNotifications, like, follow, getFollowing, getPostTexts, type BlueskySession, type FoundPost } from './bluesky';
-import { replyShouldSkip, runGuardrails, isNearDuplicate } from './guardrails';
+import { replyShouldSkip, runGuardrails, isNearDuplicate, sharesCatchphrase } from './guardrails';
 import { graphemeLength, BLUESKY_MAX_GRAPHEMES } from './bluesky';
 
 // Narrow, high-intent listening queries per lane. Kept curated on purpose:
@@ -106,7 +106,11 @@ above, especially the reply doctrine and the four non-negotiables.
 Write ONE reply to the post below. Rules:
 - Meet them where they are: if they stated a view, help them tell their reps
   THAT view. Never adopt their framing as fact, never blame a party or figure.
-- Confirm the feeling briefly, point to the fast way to act. Vary the closer.
+- Confirm the feeling briefly, point to the fast way to act.
+- VARIETY IS A HARD RULE: your RECENT REPLIES are provided below the post.
+  Reusing a quip, opener, or closer across replies reads botlike and is the
+  account's most damaging habit (audit: one quip shipped 25 times). Write
+  THIS reply fresh — no distinctive phrase may echo the recent ones.
 - No em dashes. No AI tells. No narrating their emotions. Sound like the
   approved examples.
 - 280 graphemes max. Include the provided ACTION LINK inline, exactly as given.
@@ -522,9 +526,13 @@ export async function runEngager(brandBrain: string, session: BlueskySession, pe
     // Draft the reply.
     let text = '';
     try {
+      const antiEcho = recentBodies
+        .slice(-8)
+        .map((b) => `- ${b.replace(/https?:\/\/\S+/g, '').trim().slice(0, 110)}`)
+        .join('\n');
       const raw = await callClaude(
         `${brandBrain}\n\n---\n${REPLY_INSTRUCTIONS}`,
-        `POST by @${c.authorHandle}: ${c.text}\n${contextLines.length ? `\n${contextLines.join('\n')}\n` : ''}\nACTION LINK: ${actionLinkFor(c.text, linkableCampaigns)}`,
+        `POST by @${c.authorHandle}: ${c.text}\n${contextLines.length ? `\n${contextLines.join('\n')}\n` : ''}\nACTION LINK: ${actionLinkFor(c.text, linkableCampaigns)}${antiEcho ? `\n\nRECENT REPLIES (share NO distinctive phrase with these):\n${antiEcho}` : ''}`,
         300,
       );
       const parsed = extractJSON(raw) as { text?: string; skip?: boolean } | null;
@@ -552,6 +560,14 @@ export async function runEngager(brandBrain: string, session: BlueskySession, pe
     // spam (three users got "you can be the someone" verbatim before this).
     if (isNearDuplicate(text, recentBodies)) {
       await recordSkip('near-duplicate of a recent reply');
+      result.skipped++;
+      continue;
+    }
+    // Near-dup catches whole-body clones; this catches the TEMPLATE pattern —
+    // the same quip stitched onto different posts (audit 2026-09-01).
+    const echo = sharesCatchphrase(text, recentBodies);
+    if (echo.shared) {
+      await recordSkip(`recycled phrasing: "${echo.phrase}"`);
       result.skipped++;
       continue;
     }

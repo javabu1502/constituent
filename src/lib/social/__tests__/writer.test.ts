@@ -119,3 +119,14 @@ describe('writer: campaign link fit context', () => {
     expect(mockCall.mock.calls[0][1]).toContain('prefer genericLink');
   });
 });
+
+describe('normalizeLane (analytics fragmentation fix)', () => {
+  it('clamps free-texted variants to the canonical set', async () => {
+    const { normalizeLane } = await import('../writer');
+    expect(normalizeLane('real-time civic news drops')).toBe('news drop');
+    expect(normalizeLane('Rolling Civic Brief')).toBe('rolling brief');
+    expect(normalizeLane('bill on the move')).toBe('bill on the move');
+    expect(normalizeLane('election-reminder')).toBe('election reminder');
+    expect(normalizeLane('something weird')).toBe('news drop');
+  });
+});

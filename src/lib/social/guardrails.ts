@@ -298,6 +298,33 @@ export function replyShouldSkip(targetText: string): { skip: boolean; reason?: s
   return hit ? { skip: true, reason: hit.reason } : { skip: false };
 }
 
+/**
+ * Catchphrase-reuse check: the 2026-09-01 audit found the reply writer had
+ * quietly built a template farm ("you can be the someone" ×25, "if this is
+ * you" ×15, "less effort than the post" ×21 live) — each reply passed the
+ * near-dup Jaccard check because only the QUIP repeats, not the whole body.
+ * This blocks the THIRD use of any distinctive 4-gram within the recent
+ * window: one echo is coincidence, two is a template forming.
+ */
+export function sharesCatchphrase(text: string, recent: string[]): { shared: boolean; phrase?: string } {
+  const grams = (s: string) => {
+    const toks = normalize(s.replace(/https?:\/\/\S+/g, ' ')).split(' ').filter(Boolean);
+    const out = new Set<string>();
+    for (let i = 0; i + 4 <= toks.length; i++) out.add(toks.slice(i, i + 4).join(' '));
+    return out;
+  };
+  const mine = grams(text);
+  if (mine.size === 0) return { shared: false };
+  const counts = new Map<string, number>();
+  for (const r of recent) {
+    for (const g of grams(r)) {
+      if (mine.has(g)) counts.set(g, (counts.get(g) ?? 0) + 1);
+    }
+  }
+  for (const [g, n] of counts) if (n >= 2) return { shared: true, phrase: g };
+  return { shared: false };
+}
+
 /** Token-Jaccard near-duplicate check against recently posted bodies. */
 export function isNearDuplicate(text: string, recent: string[], threshold = 0.8): boolean {
   const toks = (s: string) => new Set(normalize(s).split(' ').filter(Boolean));

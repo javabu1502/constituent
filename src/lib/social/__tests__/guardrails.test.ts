@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { runGuardrails, uncoveredContactTargets, replyShouldSkip } from '../guardrails';
+import { runGuardrails, uncoveredContactTargets, replyShouldSkip, sharesCatchphrase } from '../guardrails';
 import { isRepostSafe } from '../reposter';
 
 describe('named contact targets', () => {
@@ -83,5 +83,36 @@ describe('replyShouldSkip: deictic "someone should do something" meme (hard skip
   it('still allows the phrase with a NAMED topic (real civic intent)', () => {
     expect(replyShouldSkip('someone should do something about insulin prices, my mom pays $400 a month').skip).toBe(false);
     expect(replyShouldSkip('someone should do something about the housing crisis in my city').skip).toBe(false);
+  });
+});
+
+describe('sharesCatchphrase (template-farm suppression, 2026-09-01 audit)', () => {
+  const recent = [
+    'you can be the someone, and it takes less effort than the post did. here:',
+    'you can be the someone. less effort than the post was 👉',
+    'totally different reply about insulin prices and your reps.',
+  ];
+
+  it('blocks the third use of an established quip', () => {
+    const r = sharesCatchphrase('you can be the someone — go tell your reps', recent);
+    expect(r.shared).toBe(true);
+    expect(r.phrase).toContain('you can be the');
+  });
+
+  it('allows a fresh reply that shares no 4-gram with recent ones', () => {
+    expect(sharesCatchphrase('markups this week are where that decision actually gets made', recent).shared).toBe(false);
+  });
+
+  it('one echo is not a template — only repeated patterns block', () => {
+    const once = ['a phrase used exactly once before in some reply'];
+    expect(sharesCatchphrase('a phrase used exactly once before, again', once).shared).toBe(false);
+  });
+
+  it('ignores URLs when comparing', () => {
+    const r = sharesCatchphrase(
+      'see https://mydemocracy.app/issues?utm_source=bsky-reply now',
+      ['go https://mydemocracy.app/issues?utm_source=bsky-reply ok', 'also https://mydemocracy.app/issues?utm_source=bsky-reply yes'],
+    );
+    expect(r.shared).toBe(false);
   });
 });

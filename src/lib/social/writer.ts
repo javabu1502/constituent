@@ -68,6 +68,23 @@ export interface WriterSkip {
   reason: string;
 }
 
+// The model free-texts lane names ("real-time civic news drops", "rolling
+// civic brief"…), fragmenting per-lane analytics (audit 2026-09-01: 8 label
+// variants for 4 lanes). Clamp to the brand brain's canonical set.
+const CANONICAL_LANES = ['news drop', 'by-the-numbers', 'bill on the move', 'rolling brief', 'election reminder'] as const;
+
+export function normalizeLane(lane: string): string {
+  const s = lane.trim().toLowerCase().replace(/-/g, ' ');
+  const exact = CANONICAL_LANES.find((l) => l === s);
+  if (exact) return exact;
+  if (s.includes('brief')) return 'rolling brief';
+  if (s.includes('bill')) return 'bill on the move';
+  if (s.includes('number')) return 'by-the-numbers';
+  if (s.includes('election')) return 'election reminder';
+  if (s.includes('news')) return 'news drop';
+  return 'news drop';
+}
+
 export async function writePost(brandBrain: string, signal: Signal): Promise<Draft | WriterSkip> {
   const campaignTitle =
     (signal.metadata as Record<string, unknown> | null | undefined)?.campaign_title;
@@ -103,7 +120,7 @@ export async function writePost(brandBrain: string, signal: Signal): Promise<Dra
   }
 
   let text = parsed.text;
-  const lane = typeof parsed.lane === 'string' ? parsed.lane : 'rolling brief';
+  const lane = normalizeLane(typeof parsed.lane === 'string' ? parsed.lane : 'rolling brief');
 
   // No-em-dash rule, done RIGHT: mechanical dash→comma replacement produced
   // published word salad ("13 unresolved issues, troop pay, procurement, and
