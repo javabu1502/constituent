@@ -30,6 +30,11 @@ Write ONE Bluesky post about the item below. Hard rules:
 - Only claim what the item states. Invent nothing. This is strict for news.
 - ATTRIBUTION: if the item names an outlet (e.g. "via AP", "via Politico"),
   credit it in the post. Never present a reported claim as if it were ours.
+- LABELS AND DIRECTION: a number must keep the source's exact label (do not
+  call a figure "the Fed's preferred gauge" unless the source does); who did
+  what, and which way they pushed, must match the source. Never compress two
+  opposing pushes into one. Never assert momentum ("moving", "advancing")
+  the source doesn't state.
 - CLASSIFICATION handling: if 'actionable', include a clear CTA to weigh in on
   the linked campaign. If 'informational' (e.g. the daily brief), give context
   only and a soft "weigh in on what's moving" link, NO invented specific action.
@@ -164,16 +169,25 @@ export async function writePost(brandBrain: string, signal: Signal): Promise<Dra
     }
   }
 
-  // Coherence gate — the last line of defense for GRAMMAR, which none of the
-  // structural guardrails check (the FY27 word-salad post passed them all:
-  // no dashes left, every word traced to the source). Blocks only on an
-  // explicit "ok": false so a flaky judge can't silence the account; the
-  // structural guardrails still run downstream either way.
+  // Coherence + claim-support gate. Coherence is the last line of defense for
+  // GRAMMAR (the FY27 word-salad post passed every structural guardrail).
+  // For FACTUAL signals (news/legislative) the same judge also verifies the
+  // post against the source item: the 2026-09-01 fact-check found the two
+  // real-world errors were LABEL/DIRECTION errors — a correct number pinned
+  // to the wrong metric ("Fed's preferred gauge" on the headline-PCE figure)
+  // and an actor/direction flip ("both parties pressure into discounting"
+  // when they pushed opposite ways) — which the regex traceability check is
+  // structurally blind to. Blocks only on an explicit "ok": false so a flaky
+  // judge can't silence the account.
+  const isFactual = signal.source === 'news' || signal.source === 'legislative';
   try {
+    const factualCriteria = isFactual
+      ? ` ALSO verify the post against the SOURCE ITEM. Rules: every number must be attached to the SAME metric/entity the source attaches it to; actors and the DIRECTION of actions must match the source (who is pushing what, for or against); no factual claim may go beyond what the source states; do not assert current momentum ("moving", "advancing", "just passed") unless the source says so. A post that is accurate but incomplete is fine — only flag claims the source does not support or contradicts.\n\nSOURCE ITEM:\n${item}\n\nPOST:`
+      : '';
     const review = await callClaude(
-      'You are a copy editor. Judge ONLY whether this social post reads as coherent, complete, grammatical English a careful human would publish. Every sentence must have its verb; no truncated fragments or comma-spliced word lists. Do not judge opinions, style, or length. Return ONLY JSON: {"ok": true} or {"ok": false, "reason": "<what is broken>"}',
+      `You are a copy editor and fact-alignment checker. Judge whether this social post (1) reads as coherent, complete, grammatical English a careful human would publish — every sentence has its verb, no truncated fragments or comma-spliced word lists.${isFactual ? ' (2) makes only claims the SOURCE ITEM supports, per the rules below.' : ''} Do not judge opinions, style, or length. Return ONLY JSON: {"ok": true} or {"ok": false, "reason": "<what is broken>"}${factualCriteria ? `\n${factualCriteria}` : ''}`,
       text,
-      120,
+      150,
     );
     const verdict = extractJSON(review) as { ok?: boolean; reason?: string } | null;
     if (verdict?.ok === false) {

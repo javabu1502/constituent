@@ -130,3 +130,36 @@ describe('normalizeLane (analytics fragmentation fix)', () => {
     expect(normalizeLane('something weird')).toBe('news drop');
   });
 });
+
+describe('claim-support gate for factual signals (2026-09-01 fact-check)', () => {
+  beforeEach(() => mockCall.mockReset());
+  const newsSignal = { ...SIGNAL, source: 'news', summary: "Fed's preferred inflation gauge shows core prices rose 3.3% annually in July (via CNBC)" } as unknown as Signal;
+
+  it('news signals get the source-alignment judge; a mislabeled number is skipped', async () => {
+    mockCall
+      .mockResolvedValueOnce('{"text": "the Fed\'s preferred gauge held at 3.7% in July. link", "lane": "by-the-numbers"}')
+      .mockResolvedValueOnce('{"ok": false, "reason": "3.7% is headline PCE; the source attaches 3.3% to the preferred (core) gauge"}');
+    const out = await writePost('brand brain', newsSignal);
+    expect(out).toMatchObject({ skip: true });
+    if ('skip' in out) expect(out.reason).toContain('headline PCE');
+    // The judge saw the source item
+    expect(mockCall.mock.calls[1][0]).toContain('SOURCE ITEM');
+    expect(mockCall.mock.calls[1][0]).toContain('DIRECTION');
+  });
+
+  it('non-factual signals keep the coherence-only judge (no source block)', async () => {
+    mockCall
+      .mockResolvedValueOnce('{"text": "clean post. link", "lane": "news drop"}')
+      .mockResolvedValueOnce('{"ok": true}');
+    await writePost('brand brain', SIGNAL); // source: 'campaign'
+    expect(mockCall.mock.calls[1][0]).not.toContain('SOURCE ITEM');
+  });
+
+  it('a supported factual post passes', async () => {
+    mockCall
+      .mockResolvedValueOnce('{"text": "core prices rose 3.3% annually in July, via CNBC. link", "lane": "by-the-numbers"}')
+      .mockResolvedValueOnce('{"ok": true}');
+    const out = await writePost('brand brain', newsSignal);
+    expect('text' in out).toBe(true);
+  });
+});
