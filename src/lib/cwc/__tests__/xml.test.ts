@@ -1,0 +1,275 @@
+import { describe, it, expect, beforeEach } from 'vitest';
+import { buildCwcXml, CwcValidationError, formatPhone, newDeliveryId } from '../xml';
+import { buildCampaignId } from '../campaign-id';
+import type { CwcDelivery } from '../types';
+
+// Delivery-agent identity comes from env; set it for the builder.
+beforeEach(() => {
+  process.env.CWC_DELIVERY_AGENT = 'My Democracy LLC';
+  process.env.CWC_ACK_EMAIL = 'ack@mydemocracy.app';
+  process.env.CWC_CONTACT_NAME = 'Jared Busker';
+  process.env.CWC_CONTACT_EMAIL = 'jared@busker.consulting';
+  process.env.CWC_CONTACT_PHONE = '202-555-0142';
+});
+
+function validDelivery(overrides: Partial<CwcDelivery> = {}): CwcDelivery {
+  return {
+    chamber: 'senate',
+    officeCode: 'SNY01',
+    campaignId: buildCampaignId({ campaignRef: 'test-insulin-pricing', stance: 'pro' }),
+    constituent: {
+      prefix: 'Ms.',
+      firstName: 'Jane',
+      lastName: 'Doe',
+      address1: '350 5th Ave',
+      city: 'New York',
+      state: 'NY',
+      zip: '10118-0110',
+      email: 'jane.doe@example.com',
+    },
+    message: {
+      subject: 'Please support lowering insulin prices',
+      topics: ['Health'],
+      constituentMessage: 'As a nurse, I see the cost of insulin hurt my patients every week.',
+    },
+    ...overrides,
+  };
+}
+
+describe('buildCwcXml', () => {
+  it('renders a valid Senate delivery with each tag on its own line', () => {
+    const xml = buildCwcXml(validDelivery());
+    expect(xml.startsWith('<?xml version="1.0" encoding="UTF-8" ?>\n<CWC>')).toBe(true);
+    expect(xml).toContain('<CWCVersion>2.0</CWCVersion>');
+    expect(xml).toContain('<MemberOffice>SNY01</MemberOffice>');
+    expect(xml).toContain('<DeliveryAgent>My Democracy LLC</DeliveryAgent>');
+    // one tag per line: no line carries two closing tags
+    for (const line of xml.split('\n')) {
+      expect((line.match(/<\/[A-Za-z]/g) || []).length).toBeLessThanOrEqual(1);
+    }
+  });
+
+  it('generates a 32-char alphanumeric DeliveryId', () => {
+    expect(newDeliveryId()).toMatch(/^[a-zA-Z0-9]{32}$/);
+    const xml = buildCwcXml(validDelivery());
+    const id = xml.match(/<DeliveryId>([^<]+)<\/DeliveryId>/)![1];
+    expect(id).toMatch(/^[a-zA-Z0-9]{32}$/);
+  });
+
+  it('escapes XML-special characters in text content', () => {
+    const xml = buildCwcXml(
+      validDelivery({
+        message: {
+          subject: 'Fund R&D <now>',
+          topics: ['Science, Technology, Communications'],
+          constituentMessage: 'Support "science" & progress <for all>',
+        },
+      }),
+    );
+    expect(xml).toContain('<Subject>Fund R&amp;D &lt;now&gt;</Subject>');
+    expect(xml).toContain('&quot;science&quot; &amp; progress &lt;for all&gt;');
+  });
+
+  it('rejects a prefix outside the five allowed values', () => {
+    // @ts-expect-error deliberately invalid prefix
+    const bad = validDelivery({ constituent: { ...validDelivery().constituent, prefix: 'Mx.' } });
+    expect(() => buildCwcXml(bad)).toThrow(CwcValidationError);
+    try {
+      buildCwcXml(bad);
+    } catch (e) {
+      expect((e as CwcValidationError).problems.join()).toMatch(/prefix/);
+    }
+  });
+
+  it('rejects a House code used on a Senate delivery and vice versa', () => {
+    expect(() => buildCwcXml(validDelivery({ officeCode: 'HNY12' }))).toThrow(/seat code/);
+    expect(() => buildCwcXml(validDelivery({ chamber: 'house', officeCode: 'HNY12' }))).not.toThrow();
+    expect(() => buildCwcXml(validDelivery({ chamber: 'house', officeCode: 'SNY01' }))).toThrow(/seat code/);
+  });
+
+  it('requires at least one of organizationStatement / constituentMessage', () => {
+    expect(() =>
+      buildCwcXml(validDelivery({ message: { subject: 'A subject line', topics: ['Health'] } })),
+    ).toThrow(/organizationStatement and\/or constituentMessage/);
+  });
+
+  it('rejects an unknown Library of Congress topic', () => {
+    expect(() =>
+      // @ts-expect-error invalid topic
+      buildCwcXml(validDelivery({ message: { ...validDelivery().message, topics: ['Healthcare'] } })),
+    ).toThrow(/not a valid LOC policy area/);
+  });
+
+  it('enforces the 6-char minimum subject length', () => {
+    expect(() =>
+      buildCwcXml(validDelivery({ message: { ...validDelivery().message, subject: 'Hi' } })),
+    ).toThrow(/subject must be/);
+  });
+
+  it('emits schema-exact bill type abbreviations and pro/con', () => {
+    const xml = buildCwcXml(
+      validDelivery({
+        message: {
+          subject: 'Support this bill',
+          topics: ['Health'],
+          bills: [{ congress: 118, type: 'hr', number: 233 }],
+          stance: 'pro',
+          constituentMessage: 'I support this measure for my community.',
+        },
+      }),
+    );
+    expect(xml).toContain('<BillTypeAbbreviation>H.R.</BillTypeAbbreviation>');
+    expect(xml).toContain('<BillCongress>118</BillCongress>');
+    expect(xml).toContain('<ProOrCon>Pro</ProOrCon>');
+  });
+
+  it('emits H.Con.Res WITHOUT a trailing period (the Senate RNG branch has none)', () => {
+    const xml = buildCwcXml(
+      validDelivery({
+        message: {
+          subject: 'Regarding this resolution',
+          topics: ['Government Operations and Politics'],
+          bills: [{ congress: 119, type: 'hconres', number: 12 }],
+          constituentMessage: 'I want to weigh in on this concurrent resolution.',
+        },
+      }),
+    );
+    expect(xml).toContain('<BillTypeAbbreviation>H.Con.Res</BillTypeAbbreviation>');
+    expect(xml).not.toContain('H.Con.Res.'); // the trailing-dot form is rejected by the RNG
+  });
+
+  it('orders OrganizationStatement before ConstituentMessage when both present', () => {
+    const xml = buildCwcXml(
+      validDelivery({
+        message: {
+          subject: 'Support this bill',
+          topics: ['Health'],
+          organizationStatement: 'Our coalition urges support for affordable insulin.',
+          constituentMessage: 'My family is directly affected by insulin costs.',
+        },
+      }),
+    );
+    expect(xml.indexOf('<OrganizationStatement>')).toBeLessThan(xml.indexOf('<ConstituentMessage>'));
+  });
+
+  it('strips the signature block (name + address) from the body before render', () => {
+    const xml = buildCwcXml(
+      validDelivery({
+        message: {
+          subject: 'Please support lowering insulin prices',
+          topics: ['Health'],
+          constituentMessage:
+            'Dear Senator Smith,\n\nAs a nurse, I see insulin costs hurt my patients.\n\nSincerely,\nJane Doe\nNew York, NY 10118',
+        },
+      }),
+    );
+    const body = xml.match(/<ConstituentMessage>([\s\S]*?)<\/ConstituentMessage>/)![1];
+    expect(body).toContain('insulin costs hurt my patients');
+    expect(body).not.toContain('Sincerely');
+    expect(body).not.toContain('Jane Doe'); // name lives ONLY in <Constituent> tags
+    expect(body).not.toContain('10118'); // address/zip must not survive in the body
+    // The name/zip still appear in their structured tags.
+    expect(xml).toContain('<LastName>Doe</LastName>');
+    expect(xml).toContain('<Zip>10118-0110</Zip>');
+  });
+
+  it('honors an externally supplied deliveryId (idempotent retry path)', () => {
+    const id = 'a'.repeat(32);
+    const xml = buildCwcXml(validDelivery({ deliveryId: id }));
+    expect(xml).toContain(`<DeliveryId>${id}</DeliveryId>`);
+  });
+
+  it('rejects a MoreInfo value that does not parse as a URL', () => {
+    const withUrl = (moreInfoUrl: string) =>
+      validDelivery({ message: { ...validDelivery().message, moreInfoUrl } });
+    expect(() => buildCwcXml(withUrl('not a url'))).toThrow(/does not parse as a URL/);
+    expect(() => buildCwcXml(withUrl('ftp://example.com/x'))).toThrow(/does not parse as a URL/);
+    expect(buildCwcXml(withUrl('https://mydemocracy.app/c/insulin'))).toContain(
+      '<MoreInfo>https://mydemocracy.app/c/insulin</MoreInfo>',
+    );
+  });
+
+  it('enforces organization minimum lengths when the fields are present', () => {
+    const org = (organization: NonNullable<CwcDelivery['organization']>) => validDelivery({ organization });
+    expect(() => buildCwcXml(org({ name: 'AB' }))).toThrow(/organization\.name must be ≥3/);
+    expect(() => buildCwcXml(org({ name: 'Coalition', contactName: 'X' }))).toThrow(/contactName must be ≥2/);
+    expect(() => buildCwcXml(org({ name: 'Coalition', about: 'tiny' }))).toThrow(/about must be ≥6/);
+    expect(() => buildCwcXml(org({ name: 'Coalition', contactName: 'Jo', about: 'A real about line.' }))).not.toThrow();
+  });
+
+  it('requires DeliveryAgentContactName ≥6 chars (env)', () => {
+    process.env.CWC_CONTACT_NAME = 'Jared';
+    expect(() => buildCwcXml(validDelivery())).toThrow(/CWC_CONTACT_NAME must be ≥6/);
+  });
+
+  it('drops Address2 / ConstituentOrganization under 2 chars instead of erroring', () => {
+    const c = validDelivery().constituent;
+    const short = buildCwcXml(validDelivery({ constituent: { ...c, address2: 'A', constituentOrganization: 'B' } }));
+    expect(short).not.toContain('<Address2>');
+    expect(short).not.toContain('<ConstituentOrganization>');
+    const kept = buildCwcXml(validDelivery({ constituent: { ...c, address2: '4B', constituentOrganization: 'NY Nurses' } }));
+    expect(kept).toContain('<Address2>4B</Address2>');
+    expect(kept).toContain('<ConstituentOrganization>NY Nurses</ConstituentOrganization>');
+  });
+
+  it('collects multiple problems into one error', () => {
+    try {
+      buildCwcXml(
+        validDelivery({
+          officeCode: 'ZZ99',
+          constituent: { ...validDelivery().constituent, state: 'ZZ', zip: 'abcde', email: 'nope' },
+        }),
+      );
+      throw new Error('should have thrown');
+    } catch (e) {
+      const problems = (e as CwcValidationError).problems;
+      expect(problems.length).toBeGreaterThanOrEqual(4);
+    }
+  });
+});
+
+describe('formatPhone', () => {
+  it('normalizes to XXX-XXX-XXXX and strips a leading country code', () => {
+    expect(formatPhone('(202) 555-0142')).toBe('202-555-0142');
+    expect(formatPhone('1-202-555-0142')).toBe('202-555-0142');
+    expect(formatPhone('555-0142')).toBeNull();
+  });
+});
+
+describe('buildCampaignId', () => {
+  it('is stable for the same inputs and differs by stance and subtopic', () => {
+    const a = buildCampaignId({ campaignRef: 'test-insulin-pricing', stance: 'pro' });
+    const b = buildCampaignId({ campaignRef: 'test-insulin-pricing', stance: 'pro' });
+    const con = buildCampaignId({ campaignRef: 'test-insulin-pricing', stance: 'con' });
+    const other = buildCampaignId({ campaignRef: 'test-vaccines', stance: 'pro' });
+    expect(a).toBe(b);
+    expect(a).not.toBe(con);
+    expect(a).not.toBe(other);
+    expect(a).toMatch(/^[a-f0-9]{64}$/);
+  });
+});
+
+describe('PII redaction at render (belt-and-suspenders)', () => {
+  it('a signature block that reaches the builder never lands in the XML', () => {
+    const d = validDelivery();
+    d.message = {
+      ...d.message,
+      constituentMessage: 'Please support the bill.\n\nSincerely,\nJane Doe\n350 5th Ave\nNew York, NY 10118',
+    };
+    const xml = buildCwcXml(d);
+    const body = /<ConstituentMessage>([\s\S]*?)<\/ConstituentMessage>/.exec(xml)?.[1] ?? '';
+    expect(body).toContain('Please support the bill.');
+    expect(body).not.toMatch(/Jane Doe|350 5th Ave|10118/);
+  });
+
+  it('a top-of-letter address block is redacted using the constituent values', () => {
+    const d = validDelivery();
+    d.message = {
+      ...d.message,
+      constituentMessage: 'Jane Doe\n350 5th Ave\nNew York, NY 10118\n\nPlease support the bill.',
+    };
+    const body = /<ConstituentMessage>([\s\S]*?)<\/ConstituentMessage>/.exec(buildCwcXml(d))?.[1] ?? '';
+    expect(body).toContain('Please support the bill.');
+    expect(body).not.toMatch(/Jane Doe|350 5th Ave/);
+  });
+});
