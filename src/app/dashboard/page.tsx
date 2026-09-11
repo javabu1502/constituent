@@ -13,6 +13,7 @@ import { LocalOfficialsSection } from '@/components/dashboard/LocalOfficialsSect
 import { RepActivitySection } from '@/components/dashboard/RepActivitySection';
 import { VoterInfoCard } from '@/components/dashboard/VoterInfoCard';
 import { CopyLinkButton } from '@/components/campaign/CopyLinkButton';
+import { EmbedCodeButton } from '@/components/campaign/EmbedCodeButton';
 import { DeleteCampaignButton } from '@/components/campaign/DeleteCampaignButton';
 import { CollapsibleSection } from '@/components/ui/CollapsibleSection';
 import { GettingStartedChecklist } from '@/components/dashboard/GettingStartedChecklist';
@@ -264,6 +265,7 @@ export default async function DashboardPage() {
                     </Link>
                   )}
                   <CopyLinkButton slug={campaign.slug as string} />
+                  <EmbedCodeButton slug={campaign.slug as string} />
                   <DeleteCampaignButton slug={campaign.slug as string} headline={campaign.headline as string} />
                 </div>
 

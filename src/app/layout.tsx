@@ -6,6 +6,7 @@ import { Footer } from '@/components/layout/Footer';
 import { ChatProvider } from '@/components/chat/ChatProvider';
 import { ChatButton } from '@/components/chat/ChatButton';
 import { ChatPanel } from '@/components/chat/ChatPanel';
+import { NotInEmbed } from '@/components/layout/NotInEmbed';
 import './globals.css';
 
 const geistSans = Geist({
@@ -64,11 +65,15 @@ export default function RootLayout({
           Skip to main content
         </a>
         <ChatProvider>
-          <Header />
+          <NotInEmbed>
+            <Header />
+          </NotInEmbed>
           <main id="main-content" className="flex-1">{children}</main>
-          <Footer />
-          <ChatPanel />
-          <ChatButton />
+          <NotInEmbed>
+            <Footer />
+            <ChatPanel />
+            <ChatButton />
+          </NotInEmbed>
         </ChatProvider>
         <Analytics />
       </body>
