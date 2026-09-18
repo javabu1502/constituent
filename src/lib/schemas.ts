@@ -173,6 +173,40 @@ export const createCampaignSchema = z.object({
   }
 });
 
+// Campaign edits: same per-field rules as creation, but everything optional —
+// the route merges changes onto the existing row. Nullable fields use null to
+// clear. Stage/parent structure and campaign_type are not editable.
+export const updateCampaignSchema = z
+  .object({
+    headline: z.string().min(3).max(100).optional(),
+    description: z.string().min(10).max(500).optional(),
+    issue_area: z.string().max(200).optional(),
+    issue_subtopic: z.string().max(200).nullish(),
+    target_level: z.enum(['federal', 'state', 'both']).optional(),
+    direction: z.enum(['support', 'oppose']).optional(),
+    message_template: z.string().max(2000).nullish(),
+    distribution_plan: z.string().min(10).max(1000).optional(),
+    bill_level: z.enum(['federal', 'state']).nullish(),
+    bill_state: z.string().length(2).nullish(),
+    bill_ref: z.string().max(60).nullish(),
+    bill_title: z.string().max(500).nullish(),
+    bill_url: z.string().max(1000).nullish(),
+    story_prompt: z.string().max(2000).nullish(),
+    usage_tags: z.array(z.string().max(60)).max(20).optional(),
+    org_name: z.string().max(120).nullish(),
+    org_url: z.string().url().max(300).nullish(),
+    org_logo_url: z.string().url().max(500).nullish(),
+    brand_color: z.string().regex(/^#[0-9a-fA-F]{6}$/, 'Use a hex color like #6A39C9').nullish(),
+    custom_domain: z
+      .string()
+      .max(253)
+      .regex(/^(?!-)[a-z0-9-]{1,63}(?<!-)(\.(?!-)[a-z0-9-]{1,63}(?<!-))+$/i, 'Enter a bare domain like action.yourorg.org')
+      .nullish(),
+  })
+  .refine((data) => Object.values(data).some((v) => v !== undefined), {
+    message: 'At least one field is required',
+  });
+
 export const storyChatSchema = z.object({
   campaignSlug: z.string().min(1).max(120),
   messages: z
@@ -259,6 +293,11 @@ export const profileUpdateSchema = z
     zip: z.string().regex(/^\d{5}(-\d{4})?$/).optional(),
     representatives: z.unknown().optional(),
     local_officials: z.unknown().optional(),
+    // Account-level org identity (defaults for campaign branding). Null clears.
+    org_name: z.string().trim().max(120).nullable().optional(),
+    org_url: z.string().trim().url().max(300).nullable().optional(),
+    org_logo_url: z.string().max(500).nullable().optional(),
+    brand_color: z.string().regex(/^#[0-9a-fA-F]{6}$/).nullable().optional(),
   })
   .refine((data) => Object.values(data).some((v) => v !== undefined), {
     message: 'At least one field is required',

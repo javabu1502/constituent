@@ -19,25 +19,46 @@ interface ResolvedBill {
   url: string;
 }
 
-export function CampaignForm({ initialType }: { initialType?: 'advocacy' | 'storytelling' } = {}) {
+export interface CampaignEditInitial {
+  campaignType: 'advocacy' | 'storytelling';
+  headline: string;
+  description: string;
+  issueArea: string;
+  issueCategory: string;
+  targetLevel: 'federal' | 'state' | 'both';
+  direction: 'support' | 'oppose' | '';
+  messageTemplate: string;
+  distributionPlan: string;
+  storyPrompt: string;
+  usageTags: string[];
+  resolvedBill: ResolvedBill | null;
+}
+
+export function CampaignForm({
+  initialType,
+  edit,
+}: {
+  initialType?: 'advocacy' | 'storytelling';
+  edit?: { slug: string; wasApproved: boolean; initial: CampaignEditInitial };
+} = {}) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const [headline, setHeadline] = useState(searchParams.get('ask') || '');
-  const [description, setDescription] = useState('');
-  const [issueArea, setIssueArea] = useState(searchParams.get('issue') || '');
-  const [issueCategory, setIssueCategory] = useState(searchParams.get('category') || '');
-  const [targetLevel, setTargetLevel] = useState<'federal' | 'state' | 'both'>('federal');
-  const [direction, setDirection] = useState<'support' | 'oppose' | ''>('');
-  const [messageTemplate, setMessageTemplate] = useState('');
-  const [distributionPlan, setDistributionPlan] = useState('');
+  const [headline, setHeadline] = useState(edit?.initial.headline ?? (searchParams.get('ask') || ''));
+  const [description, setDescription] = useState(edit?.initial.description ?? '');
+  const [issueArea, setIssueArea] = useState(edit?.initial.issueArea ?? (searchParams.get('issue') || ''));
+  const [issueCategory, setIssueCategory] = useState(edit?.initial.issueCategory ?? (searchParams.get('category') || ''));
+  const [targetLevel, setTargetLevel] = useState<'federal' | 'state' | 'both'>(edit?.initial.targetLevel ?? 'federal');
+  const [direction, setDirection] = useState<'support' | 'oppose' | ''>(edit?.initial.direction ?? '');
+  const [messageTemplate, setMessageTemplate] = useState(edit?.initial.messageTemplate ?? '');
+  const [distributionPlan, setDistributionPlan] = useState(edit?.initial.distributionPlan ?? '');
 
   // Campaign type is fixed by the entry point (?type=advocacy|storytelling);
   // each type has its own track below. Advocacy campaigns are always public.
   // Fixed by the entry point. Prefer the server-provided prop (reliable on SSR);
   // fall back to the URL param so the component still works if used standalone.
   const [campaignType] = useState<'advocacy' | 'storytelling'>(
-    initialType ?? (searchParams.get('type') === 'storytelling' ? 'storytelling' : 'advocacy')
+    edit?.initial.campaignType ?? initialType ?? (searchParams.get('type') === 'storytelling' ? 'storytelling' : 'advocacy')
   );
 
   // Stage mode: arriving via "Add a stage" on a parent campaign
@@ -63,43 +84,19 @@ export function CampaignForm({ initialType }: { initialType?: 'advocacy' | 'stor
       .catch(() => {});
   }, [stageGoal, committees.length, stageState]);
 
-  // White-label branding — for unlisted (privately shared) campaigns only.
-  const [orgName, setOrgName] = useState('');
-  const [orgUrl, setOrgUrl] = useState('');
-  const [brandColor, setBrandColor] = useState('');
-  const [logoUrl, setLogoUrl] = useState('');
-  const [logoUploading, setLogoUploading] = useState(false);
-  const [logoError, setLogoError] = useState<string | null>(null);
-  const [customDomain, setCustomDomain] = useState('');
-
-
-  const handleLogoUpload = async (file: File | null) => {
-    if (!file) return;
-    setLogoError(null);
-    setLogoUploading(true);
-    try {
-      const form = new FormData();
-      form.append('file', file);
-      const res = await fetch('/api/campaigns/logo', { method: 'POST', body: form });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || 'Upload failed');
-      setLogoUrl(data.url);
-    } catch (err) {
-      setLogoError(err instanceof Error ? err.message : 'Upload failed');
-    } finally {
-      setLogoUploading(false);
-    }
-  };
+  // Branding is NOT collected here — campaigns automatically carry the org's
+  // identity from /dashboard/settings, and orgs wanting the flow on their own
+  // site use the embed widget.
 
   // Storytelling fields
-  const [storyPrompt, setStoryPrompt] = useState('');
-  const [usageTags, setUsageTags] = useState<string[]>([]);
+  const [storyPrompt, setStoryPrompt] = useState(edit?.initial.storyPrompt ?? '');
+  const [usageTags, setUsageTags] = useState<string[]>(edit?.initial.usageTags ?? []);
 
   // Optional related bill
-  const [billLevel, setBillLevel] = useState<BillLevel>('');
-  const [billState, setBillState] = useState('');
-  const [billQuery, setBillQuery] = useState('');
-  const [resolvedBill, setResolvedBill] = useState<ResolvedBill | null>(null);
+  const [billLevel, setBillLevel] = useState<BillLevel>(edit?.initial.resolvedBill?.level ?? '');
+  const [billState, setBillState] = useState(edit?.initial.resolvedBill?.state ?? '');
+  const [billQuery, setBillQuery] = useState(edit?.initial.resolvedBill?.ref ?? '');
+  const [resolvedBill, setResolvedBill] = useState<ResolvedBill | null>(edit?.initial.resolvedBill ?? null);
   const [billStatus, setBillStatus] = useState<'idle' | 'resolving' | 'notfound' | 'error'>('idle');
 
   // Suggestion from headline/description text
@@ -112,6 +109,101 @@ export function CampaignForm({ initialType }: { initialType?: 'advocacy' | 'stor
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
+
+  // Validation errors live next to the field they describe, not in one box at
+  // the top of a long form.
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
+  const clearFieldError = (field: string) =>
+    setFieldErrors((prev) => {
+      if (!(field in prev)) return prev;
+      const next = { ...prev };
+      delete next[field];
+      return next;
+    });
+  const FieldError = ({ field }: { field: string }) =>
+    fieldErrors[field] ? (
+      <p className="text-sm text-red-600 dark:text-red-400 mt-1">{fieldErrors[field]}</p>
+    ) : null;
+
+  // Draft persistence — a refresh or crash shouldn't cost the org its work.
+  // Stage mode is skipped: those forms carry URL context (parent, goal,
+  // committee) that a stale draft would fight with.
+  const draftKey = `campaign-draft:${campaignType}`;
+  const skipDraft = !!parentCampaignId || !!edit;
+  const [draftRestored, setDraftRestored] = useState(false);
+  useEffect(() => {
+    if (skipDraft) return;
+    try {
+      const raw = localStorage.getItem(draftKey);
+      if (!raw) return;
+      const d = JSON.parse(raw);
+      // URL prefills (?ask, ?issue) win over the stored draft.
+      if (d.headline && !searchParams.get('ask')) setHeadline(d.headline);
+      if (d.description) setDescription(d.description);
+      if (d.issueArea && !searchParams.get('issue')) {
+        setIssueArea(d.issueArea);
+        setIssueCategory(d.issueCategory || '');
+      }
+      if (d.targetLevel) setTargetLevel(d.targetLevel);
+      if (d.direction) setDirection(d.direction);
+      if (d.messageTemplate) setMessageTemplate(d.messageTemplate);
+      if (d.distributionPlan) setDistributionPlan(d.distributionPlan);
+      if (d.storyPrompt) setStoryPrompt(d.storyPrompt);
+      if (Array.isArray(d.usageTags) && d.usageTags.length > 0) setUsageTags(d.usageTags);
+      if (d.billLevel) setBillLevel(d.billLevel);
+      if (d.billState) setBillState(d.billState);
+      if (d.billQuery) setBillQuery(d.billQuery);
+      if (d.resolvedBill) setResolvedBill(d.resolvedBill);
+      setDraftRestored(true);
+    } catch {
+      // corrupt draft — ignore it
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  useEffect(() => {
+    if (skipDraft || submitted) return;
+    const timer = setTimeout(() => {
+      const hasContent =
+        headline.trim() || description.trim() || messageTemplate.trim() || distributionPlan.trim() || storyPrompt.trim();
+      if (!hasContent) return;
+      try {
+        localStorage.setItem(
+          draftKey,
+          JSON.stringify({
+            headline, description, issueArea, issueCategory, targetLevel, direction,
+            messageTemplate, distributionPlan, storyPrompt, usageTags,
+            billLevel, billState, billQuery, resolvedBill,
+          })
+        );
+      } catch {
+        // storage full/unavailable — drafts are best-effort
+      }
+    }, 800);
+    return () => clearTimeout(timer);
+  }, [
+    skipDraft, submitted, draftKey, headline, description, issueArea, issueCategory, targetLevel,
+    direction, messageTemplate, distributionPlan, storyPrompt, usageTags,
+    billLevel, billState, billQuery, resolvedBill,
+  ]);
+  const discardDraft = () => {
+    try { localStorage.removeItem(draftKey); } catch { /* best-effort */ }
+    setHeadline(searchParams.get('ask') || '');
+    setDescription('');
+    setIssueArea(searchParams.get('issue') || '');
+    setIssueCategory(searchParams.get('category') || '');
+    setTargetLevel('federal');
+    setDirection('');
+    setMessageTemplate('');
+    setDistributionPlan('');
+    setStoryPrompt('');
+    setUsageTags([]);
+    setBillLevel('');
+    setBillState('');
+    setBillQuery('');
+    setResolvedBill(null);
+    setFieldErrors({});
+    setDraftRestored(false);
+  };
 
   // Reset any prior resolution when the bill inputs change
   const resetBill = () => {
@@ -228,60 +320,56 @@ export function CampaignForm({ initialType }: { initialType?: 'advocacy' | 'stor
     e.preventDefault();
     setError(null);
 
+    // Collect every problem at once, in the form's visual order, so one
+    // submit shows everything that needs fixing.
+    const errs: Record<string, string> = {};
+    if (campaignType === 'advocacy' && parentCampaignId && !stageGoal) {
+      errs.stageGoal = 'Choose what this stage is trying to achieve';
+    }
+    if (campaignType === 'advocacy' && stageGoal === 'committee' && !targetCommittee) {
+      errs.targetCommittee = 'Pick the committee this stage targets';
+    }
     if (!headline.trim() || headline.trim().length < 3) {
-      setError('Headline must be at least 3 characters');
-      return;
+      errs.headline = 'Headline must be at least 3 characters';
     }
     if (!description.trim() || description.trim().length < 10) {
-      setError('Description must be at least 10 characters');
-      return;
+      errs.description = 'Description must be at least 10 characters';
     }
     if (campaignType === 'advocacy') {
-      if (parentCampaignId && !stageGoal) {
-        setError('Please choose what this stage is trying to achieve');
-        return;
-      }
-      if (stageGoal === 'committee' && !targetCommittee) {
-        setError('Please pick the committee this stage targets');
-        return;
+      if (!issueArea.trim()) {
+        errs.issueArea = 'Select an issue area';
       }
       // Stages inherit the parent's position — only standalone campaigns pick.
       if (!direction && !parentCampaignId) {
-        setError('Please choose whether this campaign asks people to support or oppose');
-        return;
-      }
-      if (!issueArea.trim()) {
-        setError('Please select an issue area');
-        return;
+        errs.direction = 'Choose whether this campaign asks people to support or oppose';
       }
       if (!distributionPlan.trim() || distributionPlan.trim().length < 10) {
-        setError('Please describe your distribution plan (at least 10 characters)');
-        return;
+        errs.distributionPlan = 'Describe your distribution plan (at least 10 characters)';
       }
     } else {
       if (usageTags.length < 1) {
-        setError('Select at least one way you’d like to use these stories');
-        return;
+        errs.usageTags = 'Select at least one way you’d like to use these stories';
       }
+    }
+    setFieldErrors(errs);
+    const firstError = Object.keys(errs)[0];
+    if (firstError) {
+      setTimeout(() => {
+        document.querySelector(`[data-field="${firstError}"]`)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 0);
+      return;
     }
 
     setIsSubmitting(true);
 
     try {
-      const brandingBody = {
-        org_name: orgName.trim() || null,
-        org_url: orgUrl.trim() || null,
-        org_logo_url: logoUrl || null,
-        brand_color: brandColor || null,
-        custom_domain: customDomain.trim().toLowerCase() || null,
-      };
+      // Branding is applied server-side from the org's profile settings.
       const sharedBody = {
         campaign_type: campaignType,
         headline: headline.trim(),
         description: description.trim(),
         issue_area: issueCategory || issueArea,
         issue_subtopic: issueCategory ? issueArea : null,
-        ...brandingBody,
       };
       const body = campaignType === 'advocacy'
         ? {
@@ -320,22 +408,50 @@ export function CampaignForm({ initialType }: { initialType?: 'advocacy' | 'stor
             recipient_email: null,
           };
 
-      const res = await fetch('/api/campaigns', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body),
-      });
+      // Edits go to PATCH on the existing campaign; stage/parent structure,
+      // campaign type, and story policy fields are fixed at creation.
+      const editBody = campaignType === 'advocacy'
+        ? {
+            ...sharedBody,
+            target_level: targetLevel,
+            ...(direction ? { direction } : {}),
+            message_template: messageTemplate.trim() || null,
+            distribution_plan: distributionPlan.trim(),
+            // Explicit nulls clear a previously linked bill.
+            bill_level: resolvedBill?.level ?? null,
+            bill_state: resolvedBill?.level === 'state' ? (resolvedBill.state ?? null) : null,
+            bill_ref: resolvedBill?.ref ?? null,
+            bill_title: resolvedBill?.title ?? null,
+            bill_url: resolvedBill?.url ?? null,
+          }
+        : {
+            ...sharedBody,
+            story_prompt: storyPrompt.trim() || null,
+            usage_tags: usageTags,
+          };
+      const res = edit
+        ? await fetch(`/api/campaigns/${edit.slug}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(editBody),
+          })
+        : await fetch('/api/campaigns', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body),
+          });
 
       const data = await res.json();
 
       if (!res.ok) {
-        throw new Error(data.error || 'Failed to create campaign');
+        throw new Error(data.error || (edit ? 'Failed to save changes' : 'Failed to create campaign'));
       }
 
-      trackEvent('campaign_created', { issue: issueArea });
+      trackEvent(edit ? 'campaign_edited' : 'campaign_created', { issue: issueArea });
+      try { localStorage.removeItem(draftKey); } catch { /* best-effort */ }
       setSubmitted(true);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to create campaign');
+      setError(err instanceof Error ? err.message : (edit ? 'Failed to save changes' : 'Failed to create campaign'));
       setIsSubmitting(false);
     }
   };
@@ -348,9 +464,14 @@ export function CampaignForm({ initialType }: { initialType?: 'advocacy' | 'stor
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
         </div>
-        <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Campaign Submitted for Review</h3>
+        <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+          {edit ? 'Changes Submitted for Review' : 'Campaign Submitted for Review'}
+        </h3>
         <p className="text-gray-600 dark:text-gray-300 mb-6">
-          Your campaign has been submitted and is pending approval. We review campaigns to ensure quality and safety. You&apos;ll be able to see its status on your{' '}
+          {edit
+            ? 'Your changes have been saved and the campaign is back in review. '
+            : 'Your campaign has been submitted and is pending approval. We review campaigns to ensure quality and safety. '}
+          You&apos;ll be able to see its status on your{' '}
           <Link href="/dashboard" className="text-purple-600 dark:text-purple-400 underline hover:text-purple-800 dark:hover:text-purple-200">dashboard</Link>.
         </p>
         <Button onClick={() => router.push('/dashboard')} variant="secondary">Go to Dashboard</Button>
@@ -360,18 +481,40 @@ export function CampaignForm({ initialType }: { initialType?: 'advocacy' | 'stor
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="flex items-center gap-2 p-3 bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-700 rounded-xl">
-        <svg className="w-4 h-4 text-purple-600 dark:text-purple-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-        <p className="text-sm text-purple-700 dark:text-purple-300">
-          Campaigns are reviewed before going live. Strong campaigns have a clear ask, a defined audience, and a plan for getting the word out.
-        </p>
-      </div>
+      {edit ? (
+        <div className="p-3 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded-xl">
+          <p className="text-sm text-amber-800 dark:text-amber-300">
+            Saved changes go back through review.
+            {edit.wasApproved && ' Your campaign page will be temporarily offline until the changes are approved — your link and results are unaffected.'}
+          </p>
+        </div>
+      ) : (
+        <div className="flex items-center gap-2 p-3 bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-700 rounded-xl">
+          <svg className="w-4 h-4 text-purple-600 dark:text-purple-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <p className="text-sm text-purple-700 dark:text-purple-300">
+            Campaigns are reviewed before going live. Strong campaigns have a clear ask, a defined audience, and a plan for getting the word out.
+          </p>
+        </div>
+      )}
 
       {error && (
         <div className="p-4 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 rounded-xl">
           <p className="text-sm text-red-700 dark:text-red-300">{error}</p>
+        </div>
+      )}
+
+      {draftRestored && (
+        <div className="flex items-center justify-between gap-3 p-3 bg-gray-50 dark:bg-gray-700/50 border border-gray-200 dark:border-gray-600 rounded-xl">
+          <p className="text-sm text-gray-600 dark:text-gray-300">We restored your unsubmitted draft.</p>
+          <button
+            type="button"
+            onClick={discardDraft}
+            className="text-sm text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 underline shrink-0"
+          >
+            Start fresh
+          </button>
         </div>
       )}
 
@@ -383,13 +526,13 @@ export function CampaignForm({ initialType }: { initialType?: 'advocacy' | 'stor
             bill through Congress — each one targets the officials who matter at that step, and results roll up to the
             parent campaign.
           </p>
-          <div>
+          <div data-field="stageGoal">
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               What is this stage trying to achieve? <span className="text-red-500">*</span>
             </label>
             <select
               value={stageGoal}
-              onChange={(e) => setStageGoal(e.target.value)}
+              onChange={(e) => { setStageGoal(e.target.value); clearFieldError('stageGoal'); }}
               className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm"
             >
               <option value="">Choose a goal…</option>
@@ -400,6 +543,7 @@ export function CampaignForm({ initialType }: { initialType?: 'advocacy' | 'stor
               <option value="thank_you">Thank officials</option>
               <option value="custom">Something else</option>
             </select>
+            <FieldError field="stageGoal" />
           </div>
           <label className="flex items-start gap-2 text-sm text-gray-700 dark:text-gray-300 cursor-pointer select-none">
             <input type="checkbox" checked={notifySupporters} onChange={(e) => setNotifySupporters(e.target.checked)} className="mt-0.5" />
@@ -411,13 +555,13 @@ export function CampaignForm({ initialType }: { initialType?: 'advocacy' | 'stor
             </span>
           </label>
           {stageGoal === 'committee' && (
-            <div>
+            <div data-field="targetCommittee">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Which committee? <span className="text-red-500">*</span>
               </label>
               <select
                 value={targetCommittee}
-                onChange={(e) => setTargetCommittee(e.target.value)}
+                onChange={(e) => { setTargetCommittee(e.target.value); clearFieldError('targetCommittee'); }}
                 className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm"
               >
                 <option value="">Choose a committee…</option>
@@ -458,20 +602,21 @@ export function CampaignForm({ initialType }: { initialType?: 'advocacy' | 'stor
                 Messages for this stage only go to members of this committee — participants whose reps aren&apos;t on it
                 will be shown other ways to help.
               </p>
+              <FieldError field="targetCommittee" />
             </div>
           )}
         </div>
       )}
 
       {/* Headline */}
-      <div>
+      <div data-field="headline">
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
           Campaign Headline <span className="text-red-500">*</span>
         </label>
         <input
           type="text"
           value={headline}
-          onChange={(e) => setHeadline(e.target.value)}
+          onChange={(e) => { setHeadline(e.target.value); clearFieldError('headline'); }}
           placeholder={campaignType === 'storytelling'
             ? 'e.g., Tell your story: how housing costs hit your family'
             : 'e.g., Protect our local parks funding'}
@@ -479,16 +624,17 @@ export function CampaignForm({ initialType }: { initialType?: 'advocacy' | 'stor
           className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
         />
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{headline.length}/100 characters</p>
+        <FieldError field="headline" />
       </div>
 
       {/* Description */}
-      <div>
+      <div data-field="description">
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
           Description <span className="text-red-500">*</span>
         </label>
         <textarea
           value={description}
-          onChange={(e) => setDescription(e.target.value)}
+          onChange={(e) => { setDescription(e.target.value); clearFieldError('description'); }}
           placeholder={campaignType === 'storytelling'
             ? 'e.g., We’re collecting personal stories about how rising housing costs are affecting families in our community, to share with legislators and show why this issue matters.'
             : 'Explain the issue and why people should take action...'}
@@ -497,12 +643,13 @@ export function CampaignForm({ initialType }: { initialType?: 'advocacy' | 'stor
           className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent resize-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
         />
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{description.length}/500 characters</p>
+        <FieldError field="description" />
       </div>
 
       {campaignType === 'advocacy' && (
         <>
       {/* Issue Area (advocacy only — storytelling uses the story prompt for its topic) */}
-      <div>
+      <div data-field="issueArea">
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
           Issue Area <span className="text-red-500">*</span>
         </label>
@@ -512,8 +659,10 @@ export function CampaignForm({ initialType }: { initialType?: 'advocacy' | 'stor
           onChange={(issue, category) => {
             setIssueArea(issue);
             setIssueCategory(category);
+            clearFieldError('issueArea');
           }}
         />
+        <FieldError field="issueArea" />
       </div>
 
       {/* Target Level */}
@@ -671,7 +820,7 @@ export function CampaignForm({ initialType }: { initialType?: 'advocacy' | 'stor
           ask: a cosponsor push or a thank-you can't "oppose" its own
           initiative — the position carries over from the parent campaign. */}
       {!parentCampaignId && (
-      <div>
+      <div data-field="direction">
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
           What position is this campaign taking? <span className="text-red-500">*</span>
         </label>
@@ -680,7 +829,7 @@ export function CampaignForm({ initialType }: { initialType?: 'advocacy' | 'stor
             <button
               key={d}
               type="button"
-              onClick={() => setDirection(d)}
+              onClick={() => { setDirection(d); clearFieldError('direction'); }}
               className={`px-4 py-3 rounded-xl border-2 text-left transition-colors ${
                 direction === d
                   ? d === 'support'
@@ -699,6 +848,7 @@ export function CampaignForm({ initialType }: { initialType?: 'advocacy' | 'stor
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
           Your campaign advocates one position. Every participant&apos;s message will make the case to {direction || 'your chosen side'}.
         </p>
+        <FieldError field="direction" />
       </div>
       )}
 
@@ -727,13 +877,13 @@ export function CampaignForm({ initialType }: { initialType?: 'advocacy' | 'stor
       </div>
 
       {/* Distribution Plan */}
-      <div>
+      <div data-field="distributionPlan">
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
           Distribution &amp; Engagement Plan <span className="text-red-500">*</span>
         </label>
         <textarea
           value={distributionPlan}
-          onChange={(e) => setDistributionPlan(e.target.value)}
+          onChange={(e) => { setDistributionPlan(e.target.value); clearFieldError('distributionPlan'); }}
           placeholder="How will you get people involved? e.g., sharing in community groups, social media outreach, partnering with local organizations..."
           rows={4}
           maxLength={1000}
@@ -742,13 +892,16 @@ export function CampaignForm({ initialType }: { initialType?: 'advocacy' | 'stor
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
           Campaigns with a clear outreach strategy are more likely to be approved. ({distributionPlan.length}/1000)
         </p>
+        <FieldError field="distributionPlan" />
       </div>
 
       {/* User campaigns are always link-only */}
       <div className="p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700 rounded-xl">
         <p className="text-sm text-blue-800 dark:text-blue-300">
           Your campaign is <strong>shared by link only</strong> — it won&apos;t appear in the public directory,
-          and it&apos;s written in your voice, for your cause. You can brand it as your own below.
+          and it&apos;s written in your voice, for your cause. It carries your branding from{' '}
+          <Link href="/dashboard/settings" className="underline hover:text-blue-900 dark:hover:text-blue-200">organization settings</Link>,
+          and you can embed it on your own site from the dashboard.
         </p>
       </div>
 
@@ -781,7 +934,7 @@ export function CampaignForm({ initialType }: { initialType?: 'advocacy' | 'stor
           </div>
 
           {/* Intended uses (checkboxes) */}
-          <div>
+          <div data-field="usageTags">
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               How would you like to use these stories? <span className="text-red-500">*</span>
             </label>
@@ -801,7 +954,7 @@ export function CampaignForm({ initialType }: { initialType?: 'advocacy' | 'stor
                     <input
                       type="checkbox"
                       checked={on}
-                      onChange={() => setUsageTags((prev) => on ? prev.filter((t) => t !== opt.value) : [...prev, opt.value])}
+                      onChange={() => { setUsageTags((prev) => on ? prev.filter((t) => t !== opt.value) : [...prev, opt.value]); clearFieldError('usageTags'); }}
                       className="mt-1 h-4 w-4 rounded text-purple-600 focus:ring-purple-500"
                     />
                     <span>
@@ -812,6 +965,7 @@ export function CampaignForm({ initialType }: { initialType?: 'advocacy' | 'stor
                 );
               })}
             </div>
+            <FieldError field="usageTags" />
           </div>
 
           {/* Attribution is always the storyteller's choice (named / first name only /
@@ -834,96 +988,10 @@ export function CampaignForm({ initialType }: { initialType?: 'advocacy' | 'stor
         </>
       )}
 
-      {/* White-label branding — available on every campaign */}
-      {true && (
-        <div className="p-4 border border-gray-200 dark:border-gray-600 rounded-xl space-y-4">
-          <div>
-            <p className="text-sm font-semibold text-gray-800 dark:text-gray-200">Organization branding <span className="text-gray-400 dark:text-gray-500 font-normal">(optional)</span></p>
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
-              Since this campaign is shared privately, you can present it under your organization&apos;s identity.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div>
-              <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Organization name</label>
-              <input
-                type="text"
-                value={orgName}
-                onChange={(e) => setOrgName(e.target.value)}
-                maxLength={120}
-                placeholder="e.g. Nevada Housing Coalition"
-                className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400"
-              />
-            </div>
-            <div>
-              <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Organization website</label>
-              <input
-                type="url"
-                value={orgUrl}
-                onChange={(e) => setOrgUrl(e.target.value)}
-                maxLength={300}
-                placeholder="https://yourorg.org"
-                className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400"
-              />
-            </div>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-4">
-            <div>
-              <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Logo (PNG/JPEG/WebP, max 1 MB)</label>
-              <input
-                type="file"
-                accept="image/png,image/jpeg,image/webp"
-                onChange={(e) => handleLogoUpload(e.target.files?.[0] ?? null)}
-                className="text-xs text-gray-600 dark:text-gray-300 file:mr-3 file:px-3 file:py-1.5 file:rounded-lg file:border-0 file:bg-purple-600 file:text-white file:text-xs file:font-medium hover:file:bg-purple-700 file:cursor-pointer"
-              />
-              {logoUploading && <p className="text-xs text-gray-500 mt-1">Uploading…</p>}
-              {logoError && <p className="text-xs text-red-600 dark:text-red-400 mt-1">{logoError}</p>}
-            </div>
-            {logoUrl && (
-                <img src={logoUrl} alt="Organization logo preview" className="h-12 max-w-[160px] object-contain rounded border border-gray-200 dark:border-gray-600 bg-white p-1" />
-            )}
-            <div>
-              <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Brand color</label>
-              <div className="flex items-center gap-2">
-                <input
-                  type="color"
-                  value={brandColor || '#6A39C9'}
-                  onChange={(e) => setBrandColor(e.target.value)}
-                  className="w-9 h-9 rounded cursor-pointer border border-gray-300 dark:border-gray-600 bg-transparent"
-                  aria-label="Brand color"
-                />
-                {brandColor && (
-                  <button type="button" onClick={() => setBrandColor('')} className="text-xs text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
-                    Reset
-                  </button>
-                )}
-              </div>
-            </div>
-          </div>
-
-          <div>
-            <label className="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1">Custom domain <span className="text-gray-400 font-normal">(optional)</span></label>
-            <input
-              type="text"
-              value={customDomain}
-              onChange={(e) => setCustomDomain(e.target.value)}
-              maxLength={253}
-              placeholder="action.yourorg.org"
-              className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400"
-            />
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-              Serve this campaign directly on your own domain. After approval, point a CNAME record for that domain
-              to <code className="px-1 bg-gray-100 dark:bg-gray-700 rounded">cname.vercel-dns.com</code> and we&apos;ll
-              finish the connection — we&apos;ll reach out with confirmation.
-            </p>
-          </div>
-        </div>
-      )}
-
       <Button type="submit" isLoading={isSubmitting} className="w-full" size="lg">
-        {campaignType === 'storytelling' ? 'Submit Storytelling Campaign for Review' : 'Submit Advocacy Campaign for Review'}
+        {edit
+          ? 'Save Changes'
+          : campaignType === 'storytelling' ? 'Submit Storytelling Campaign for Review' : 'Submit Advocacy Campaign for Review'}
       </Button>
     </form>
   );

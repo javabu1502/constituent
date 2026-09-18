@@ -49,10 +49,11 @@ export async function POST(request: NextRequest) {
   }
 
   // Campaigns are run by advocacy organizations; constituent accounts use the
-  // contact/story flows instead.
+  // contact/story flows instead. Org identity fields become the campaign's
+  // branding — the form no longer collects branding per campaign.
   const { data: creatorProfile } = await createAdminClient()
     .from('profiles')
-    .select('account_type')
+    .select('account_type, org_name, org_url, org_logo_url, brand_color')
     .eq('user_id', user.id)
     .single();
   if (creatorProfile?.account_type !== 'organization') {
@@ -125,11 +126,13 @@ export async function POST(request: NextRequest) {
   // every user campaign; the logo must live in OUR storage bucket.
   const logoPrefix = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/campaign-logos/`;
   const safeLogoUrl = org_logo_url && org_logo_url.startsWith(logoPrefix) ? org_logo_url : null;
+  // Body values (admin scripts) win; otherwise the org's profile identity
+  // applies automatically. Profile logo URLs were bucket-checked at save time.
   const branding = {
-    org_name: org_name?.trim() || null,
-    org_url: org_url || null,
-    org_logo_url: safeLogoUrl,
-    brand_color: brand_color || null,
+    org_name: org_name?.trim() || creatorProfile.org_name || null,
+    org_url: org_url || creatorProfile.org_url || null,
+    org_logo_url: safeLogoUrl || creatorProfile.org_logo_url || null,
+    brand_color: brand_color || creatorProfile.brand_color || null,
     custom_domain: custom_domain?.toLowerCase() || null,
   };
 

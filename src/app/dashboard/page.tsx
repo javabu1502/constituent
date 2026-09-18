@@ -243,6 +243,15 @@ export default async function DashboardPage() {
                 <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 line-clamp-2">
                   {campaign.description}
                 </p>
+                {/* The reviewer's note is the org's only signal for WHAT to
+                    change — without it "Needs changes" is a dead end. */}
+                {String(campaign.approval_status) === 'rejected' && campaign.review_note && (
+                  <div className="mb-4 p-3 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
+                    <p className="text-sm text-red-800 dark:text-red-300">
+                      <span className="font-semibold">Reviewer note:</span> {campaign.review_note}
+                    </p>
+                  </div>
+                )}
                 <div className="flex items-center gap-2">
                   <Link
                     href={`/campaign/${campaign.slug}`}
@@ -266,6 +275,15 @@ export default async function DashboardPage() {
                   )}
                   <CopyLinkButton slug={campaign.slug as string} />
                   <EmbedCodeButton slug={campaign.slug as string} />
+                  <Link
+                    href={`/campaign/${campaign.slug}/edit`}
+                    className="p-2 text-gray-400 hover:text-purple-600 dark:text-gray-500 dark:hover:text-purple-400 transition-colors rounded-lg hover:bg-purple-50 dark:hover:bg-purple-900/20"
+                    title="Edit campaign"
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                    </svg>
+                  </Link>
                   <DeleteCampaignButton slug={campaign.slug as string} headline={campaign.headline as string} />
                 </div>
 
@@ -361,7 +379,7 @@ export default async function DashboardPage() {
           <div>
             <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Organization Dashboard</h1>
             <p className="text-gray-600 dark:text-gray-400 mt-1">
-              {(profile?.name as string) || user.email} · advocacy account
+              {(profile?.org_name as string) || (profile?.name as string) || user.email} · advocacy account
               {(wins + losses > 0) && (
                 <span className="ml-2 text-sm">
                   · record: <span className="font-semibold text-emerald-600 dark:text-emerald-400">{wins} won</span>
@@ -372,6 +390,9 @@ export default async function DashboardPage() {
             </p>
           </div>
           <div className="shrink-0 flex items-center gap-2">
+            <Link href="/dashboard/settings" className="text-sm font-medium px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+              Settings
+            </Link>
             <Link href="/dashboard/report" className="text-sm font-medium px-4 py-2 rounded-lg border border-purple-300 dark:border-purple-700 text-purple-700 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/20 transition-colors">
               Organization report
             </Link>
@@ -399,12 +420,36 @@ export default async function DashboardPage() {
         </div>
 
         {topLevelCampaigns.length === 0 ? (
-          <div className="text-center py-16 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700">
-            <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">No campaigns yet</h2>
-            <p className="text-gray-600 dark:text-gray-400 mb-4">Launch your first campaign to start mobilizing constituents.</p>
-            <Link href="/campaign/create" className="inline-block px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white text-sm font-medium rounded-lg">
-              Create a campaign
-            </Link>
+          // First run: a new org lands here with no guidance otherwise. This
+          // card disappears forever once the first campaign exists.
+          <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-8 max-w-2xl mx-auto">
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">Welcome to your advocacy dashboard</h2>
+            <p className="text-gray-600 dark:text-gray-400 mb-6">Here&rsquo;s how campaigns work on My Democracy:</p>
+            <ol className="space-y-4 mb-8">
+              {[
+                ['Create a campaign', 'Set the ask, link a bill, and add talking points. We review every campaign before it goes live.'],
+                ['Share your link', 'Supporters open it and send AI-personalized messages to their own representatives — it takes them about two minutes.'],
+                ['Track results', 'Actions, analytics, a whip board for legislator positions, and funder-ready reports all live on this dashboard.'],
+              ].map(([title, body], i) => (
+                <li key={title} className="flex items-start gap-3">
+                  <span className="shrink-0 w-6 h-6 rounded-full bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300 text-sm font-bold flex items-center justify-center mt-0.5">
+                    {i + 1}
+                  </span>
+                  <span>
+                    <span className="block font-medium text-gray-900 dark:text-white">{title}</span>
+                    <span className="block text-sm text-gray-600 dark:text-gray-400">{body}</span>
+                  </span>
+                </li>
+              ))}
+            </ol>
+            <div className="flex flex-col sm:flex-row gap-3">
+              <Link href="/campaign/create" className="text-center px-4 py-2.5 bg-purple-600 hover:bg-purple-700 text-white text-sm font-medium rounded-lg">
+                Create your first campaign
+              </Link>
+              <Link href="/dashboard/settings" className="text-center px-4 py-2.5 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 text-sm font-medium rounded-lg">
+                Set up your organization
+              </Link>
+            </div>
           </div>
         ) : (
           <>

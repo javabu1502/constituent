@@ -68,6 +68,14 @@ export async function PATCH(request: NextRequest) {
     }
   }
 
+  // The org logo must live in OUR storage bucket (same rule as campaigns).
+  if (typeof updates.org_logo_url === 'string' && updates.org_logo_url) {
+    const logoPrefix = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/campaign-logos/`;
+    if (!updates.org_logo_url.startsWith(logoPrefix)) {
+      return NextResponse.json({ error: 'Logo must be uploaded through the logo uploader' }, { status: 400 });
+    }
+  }
+
   const admin = createAdminClient();
   const { data: profile, error } = await admin
     .from('profiles')

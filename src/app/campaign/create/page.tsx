@@ -137,6 +137,41 @@ export default async function CreateCampaignPage({
     );
   }
 
+  // No type chosen yet: let the org pick which kind of campaign to run —
+  // defaulting silently to advocacy buried storytelling entirely.
+  if (!type) {
+    return (
+      <div className="max-w-2xl mx-auto px-4 py-8">
+        <div className="text-center mb-8">
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Start a Campaign</h1>
+          <p className="text-gray-600 dark:text-gray-400 mt-2">What kind of campaign do you want to run?</p>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <Link
+            href="/campaign/create?type=advocacy"
+            className="bg-white dark:bg-gray-800 rounded-2xl border-2 border-gray-200 dark:border-gray-700 hover:border-purple-500 dark:hover:border-purple-500 shadow-sm p-6 transition-colors"
+          >
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Advocacy</h2>
+            <p className="text-sm text-gray-600 dark:text-gray-400">
+              Mobilize supporters to contact their representatives about a bill or issue. Each person sends an
+              AI-personalized message to their own officials.
+            </p>
+          </Link>
+          <Link
+            href="/campaign/create?type=storytelling"
+            className="bg-white dark:bg-gray-800 rounded-2xl border-2 border-gray-200 dark:border-gray-700 hover:border-purple-500 dark:hover:border-purple-500 shadow-sm p-6 transition-colors"
+          >
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Storytelling</h2>
+            <p className="text-sm text-gray-600 dark:text-gray-400">
+              Collect personal stories from your supporters — guided, consent-tracked, and delivered to your
+              dashboard to share with media and legislators.
+            </p>
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="max-w-2xl mx-auto px-4 py-8">
       <div className="text-center mb-8">
