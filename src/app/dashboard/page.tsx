@@ -14,6 +14,7 @@ import { RepActivitySection } from '@/components/dashboard/RepActivitySection';
 import { VoterInfoCard } from '@/components/dashboard/VoterInfoCard';
 import { CopyLinkButton } from '@/components/campaign/CopyLinkButton';
 import { EmbedCodeButton } from '@/components/campaign/EmbedCodeButton';
+import { QrCodeButton } from '@/components/campaign/QrCodeButton';
 import { DeleteCampaignButton } from '@/components/campaign/DeleteCampaignButton';
 import { CollapsibleSection } from '@/components/ui/CollapsibleSection';
 import { GettingStartedChecklist } from '@/components/dashboard/GettingStartedChecklist';
@@ -275,6 +276,7 @@ export default async function DashboardPage() {
                   )}
                   <CopyLinkButton slug={campaign.slug as string} />
                   <EmbedCodeButton slug={campaign.slug as string} />
+                  <QrCodeButton slug={campaign.slug as string} />
                   <Link
                     href={`/campaign/${campaign.slug}/edit`}
                     className="p-2 text-gray-400 hover:text-purple-600 dark:text-gray-500 dark:hover:text-purple-400 transition-colors rounded-lg hover:bg-purple-50 dark:hover:bg-purple-900/20"
