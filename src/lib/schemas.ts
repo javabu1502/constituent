@@ -220,6 +220,14 @@ export const storyChatSchema = z.object({
   turnstileToken: z.string().optional(),
 });
 
+// Compose accepts an optional revision: the storyteller's current draft plus
+// a plain-language edit request ("make it shorter", "mention my daughter").
+export const storyComposeSchema = storyChatSchema.extend({
+  currentTitle: z.string().max(120).optional(),
+  currentBody: z.string().max(8000).optional(),
+  revisionNote: z.string().min(3).max(500).optional(),
+});
+
 export const submitStorySchema = z.object({
   campaignSlug: z.string().min(1).max(120),
   title: z.string().max(120).nullish(),

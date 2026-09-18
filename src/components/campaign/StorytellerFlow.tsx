@@ -50,6 +50,10 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
 
+  // AI edit on the review step: a plain-language request applied to the draft.
+  const [reviseNote, setReviseNote] = useState('');
+  const [revising, setRevising] = useState(false);
+
   // Consent / attribution — both are the storyteller's choice.
   const allowedAttribution: AttributionLevel[] = ['named', 'first_name_only', 'anonymous'];
   // The storyteller grants from the uses the campaign asked for (fallback: all).
@@ -59,7 +63,9 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
   const [attribution, setAttribution] = useState<AttributionLevel>('named');
   const [storytellerName, setStorytellerName] = useState('');
   const [storytellerEmail, setStorytellerEmail] = useState('');
-  const [grantedUses, setGrantedUses] = useState<string[]>([]);
+  // All of the campaign's requested uses start checked; the storyteller
+  // unchecks anything they're not comfortable with.
+  const [grantedUses, setGrantedUses] = useState<string[]>(() => availableUses.map((o) => o.value));
   const [consentTruthful, setConsentTruthful] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
@@ -165,6 +171,37 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
       setError(err instanceof Error ? err.message : 'Could not compose your story');
     } finally {
       setComposing(false);
+    }
+  };
+
+  // --- AI revision of the draft (review step) ---
+  const reviseStory = async () => {
+    const note = reviseNote.trim();
+    if (!note || revising) return;
+    setError(null);
+    setRevising(true);
+    try {
+      const res = await fetch('/api/stories/compose', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          campaignSlug: campaign.slug,
+          messages: messages.slice(-40),
+          currentTitle: title,
+          currentBody: body,
+          revisionNote: note,
+          turnstileToken: (await getToken().catch(() => '')) || undefined,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Could not make that edit');
+      if (data.title) setTitle(data.title);
+      setBody(data.body || body);
+      setReviseNote('');
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Could not make that edit');
+    } finally {
+      setRevising(false);
     }
   };
 
@@ -427,10 +464,35 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
             className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 resize-y bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm leading-relaxed"
           />
         </div>
+
+        {/* AI edit: type a request instead of editing by hand */}
+        <div className="p-3 bg-gray-50 dark:bg-gray-700/40 border border-gray-200 dark:border-gray-600 rounded-xl">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            Want a change made for you?
+          </label>
+          <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">
+            Describe the edit and it happens, using only what you shared. Nothing gets made up.
+          </p>
+          <div className="flex gap-2">
+            <input
+              type="text"
+              value={reviseNote}
+              onChange={(e) => setReviseNote(e.target.value)}
+              onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); reviseStory(); } }}
+              maxLength={500}
+              placeholder={'e.g. "Make it shorter" or "Start with the part about my son"'}
+              className="flex-1 px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400"
+            />
+            <Button type="button" variant="secondary" onClick={reviseStory} isLoading={revising} disabled={reviseNote.trim().length < 3}>
+              Make the edit
+            </Button>
+          </div>
+        </div>
+
         {error && <p className="text-sm text-red-600 dark:text-red-400">{error}</p>}
         <div className="flex gap-2">
           <Button variant="secondary" onClick={() => setStep('interview')} className="flex-1">Back to the questions</Button>
-          <Button onClick={() => { setError(null); setStep('consent'); }} disabled={body.trim().length < 20} className="flex-1">Continue</Button>
+          <Button onClick={() => { setError(null); setStep('consent'); }} disabled={body.trim().length < 20 || revising} className="flex-1">Continue</Button>
         </div>
       </div>
     );
@@ -543,7 +605,7 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">How is it OK to use your story?</label>
           <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">
-            You’re in control. Check only the uses you’re comfortable with — we pass your choices to the campaign and they should only use your story in the ways you allow. Pick at least one.
+            You’re in control. Uncheck anything you’re not comfortable with; the campaign should only use your story in the ways you allow. Keep at least one checked.
           </p>
           <div className="space-y-2">
             {availableUses.map((opt) => {
@@ -618,7 +680,7 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
         <div className="flex gap-2">
           <Button variant="secondary" onClick={() => setStep('review')} className="flex-1">Back</Button>
           <Button onClick={submitStory} isLoading={submitting} disabled={grantedUses.length < 1 || !consentTruthful} className="flex-1">
-            Prepare my email
+            Submit story
           </Button>
         </div>
       </div>

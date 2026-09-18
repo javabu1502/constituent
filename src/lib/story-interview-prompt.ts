@@ -107,3 +107,20 @@ Respond with ONLY this JSON, nothing else:
   "title": "a short, topical, non-identifying title (max 80 chars)",
   "body": "the full story text"
 }`;
+
+export const STORY_REVISE_PROMPT = `You revise a first-person personal story at the storyteller's request, for a storytelling advocacy campaign. You get the interview transcript (the source of truth for facts), the current draft, and the storyteller's edit request.
+
+Make the change they asked for and keep everything else as close to the current draft as possible. This is THEIR story: keep first person, keep their distinctive words and phrasing, and do NOT invent facts, names, places, numbers, or events that are not in the transcript or the draft. If the request asks you to add a fact you don't have, work with what they gave you rather than fabricate. If the request is about tone or length, adjust while preserving their specifics.
+
+Sound like a real person, not AI. Specifically:
+- Do NOT use em dashes or en dashes (— or –). Use periods, commas, or simple words like "and" / "but" instead.
+- Avoid polished marketing cadence and clichés. Plain, everyday language.
+- Vary sentence length. A little plain or imperfect reads as human.
+
+Keep the title unless the edit request asks to change it (same rules: short, topical, non-identifying, max 80 chars). No salutation or signature.
+
+Respond with ONLY this JSON, nothing else:
+{
+  "title": "the title (max 80 chars)",
+  "body": "the full revised story text"
+}`;
