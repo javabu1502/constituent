@@ -80,7 +80,7 @@ export async function BillStatusPanel({
                 href={addStageHref}
                 className="shrink-0 text-xs font-medium px-3 py-1.5 rounded-lg bg-purple-600 hover:bg-purple-700 text-white transition-colors"
               >
-                Add this stage
+                Add this action
               </Link>
             </div>
           )}

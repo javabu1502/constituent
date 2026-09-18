@@ -136,9 +136,39 @@ export const createCampaignSchema = z.object({
     .regex(/^([HS][A-Z]{3}\d{0,2}|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$/i, 'Unknown committee id')
     .optional(),
   target_committee_state: z.string().length(2).optional(),
+  // Narrow targeting beyond level: a hand-picked officials list (ids matched
+  // against each participant's resolved reps) or a party+chamber slice.
+  // At most one of committee / officials / party applies.
+  target_officials: z
+    .array(
+      z.object({
+        id: z.string().min(1).max(60),
+        name: z.string().min(1).max(120),
+        level: z.enum(['federal', 'state']),
+        state: z.string().length(2),
+      })
+    )
+    .min(1)
+    .max(100)
+    .optional(),
+  target_party: z
+    .object({
+      party: z.enum(['D', 'R', 'I']),
+      chamber: z.enum(['house', 'senate', 'both']),
+      level: z.enum(['federal', 'state']),
+      state: z.string().length(2).optional(),
+    })
+    .optional(),
   // Stage creation: email everyone who already acted on the initiative.
   notify_supporters: z.boolean().optional(),
 }).superRefine((data, ctx) => {
+  const modes = [data.target_committee, data.target_officials, data.target_party].filter(Boolean).length;
+  if (modes > 1) {
+    ctx.addIssue({ code: 'custom', path: ['target_officials'], message: 'Pick one targeting mode: committee, specific officials, or party' });
+  }
+  if ((data.target_officials || data.target_party) && data.campaign_type === 'storytelling') {
+    ctx.addIssue({ code: 'custom', path: ['target_officials'], message: 'Targeting applies to advocacy campaigns' });
+  }
   if (data.stage_goal && !data.parent_campaign_id) {
     ctx.addIssue({ code: 'custom', path: ['stage_goal'], message: 'A stage goal requires a parent campaign' });
   }

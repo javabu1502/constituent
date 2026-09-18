@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase';
 import { truncate } from '@/lib/utils';
-import { STAGE_GOAL_LABELS, stageOrder, type StageGoal } from '@/lib/stages';
+import { stageOrder } from '@/lib/stages';
 import { LegislatorSearch } from '@/components/dashboard/LegislatorSearch';
 import { getStateLegislators } from '@/lib/state-legislators';
 import { getAllFederalLegislators } from '@/lib/legislators';
@@ -13,9 +13,6 @@ import { LocalOfficialsSection } from '@/components/dashboard/LocalOfficialsSect
 import { RepActivitySection } from '@/components/dashboard/RepActivitySection';
 import { VoterInfoCard } from '@/components/dashboard/VoterInfoCard';
 import { CopyLinkButton } from '@/components/campaign/CopyLinkButton';
-import { EmbedCodeButton } from '@/components/campaign/EmbedCodeButton';
-import { QrCodeButton } from '@/components/campaign/QrCodeButton';
-import { DeleteCampaignButton } from '@/components/campaign/DeleteCampaignButton';
 import { CollapsibleSection } from '@/components/ui/CollapsibleSection';
 import { GettingStartedChecklist } from '@/components/dashboard/GettingStartedChecklist';
 import { WelcomeTour } from '@/components/dashboard/WelcomeTour';
@@ -253,6 +250,9 @@ export default async function DashboardPage() {
                     </p>
                   </div>
                 )}
+                {/* Three buttons, no more. Everything else (analytics, report,
+                    embed, QR, edit, delete, the actions list) lives on Manage —
+                    the card got unusably busy (Jared, 09-18). */}
                 <div className="flex items-center gap-2">
                   <Link
                     href={`/campaign/${campaign.slug}`}
@@ -261,59 +261,17 @@ export default async function DashboardPage() {
                     View Campaign
                   </Link>
                   <Link
-                    href={`/campaign/${campaign.slug}/analytics`}
-                    className="px-3 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 text-sm font-medium rounded-lg transition-colors"
+                    href={`/campaign/${campaign.slug}/manage`}
+                    className="flex-1 text-center px-3 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 text-sm font-medium rounded-lg transition-colors"
                   >
-                    Analytics
+                    Manage
                   </Link>
-                  {campaign.campaign_type !== 'storytelling' && (
-                    <Link
-                      href={`/campaign/${campaign.slug}/report`}
-                      className="px-3 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 text-sm font-medium rounded-lg transition-colors"
-                    >
-                      Report
-                    </Link>
-                  )}
                   <CopyLinkButton slug={campaign.slug as string} />
-                  <EmbedCodeButton slug={campaign.slug as string} />
-                  <QrCodeButton slug={campaign.slug as string} />
-                  <Link
-                    href={`/campaign/${campaign.slug}/edit`}
-                    className="p-2 text-gray-400 hover:text-purple-600 dark:text-gray-500 dark:hover:text-purple-400 transition-colors rounded-lg hover:bg-purple-50 dark:hover:bg-purple-900/20"
-                    title="Edit campaign"
-                  >
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                    </svg>
-                  </Link>
-                  <DeleteCampaignButton slug={campaign.slug as string} headline={campaign.headline as string} />
                 </div>
-
-                {/* The initiative's journey: its stages, in legislative order */}
                 {stages.length > 0 && (
-                  <div className="mt-4 border-t border-gray-100 dark:border-gray-700 pt-3">
-                    <p className="text-xs font-semibold uppercase tracking-wide text-gray-400 dark:text-gray-500 mb-2">
-                      Journey · {stages.length} stage{stages.length !== 1 ? 's' : ''}
-                    </p>
-                    <ol className="space-y-1.5">
-                      {stages.map((s, i) => (
-                        <li key={s.id} className="flex items-center justify-between gap-3 text-sm">
-                          <span className="flex items-center gap-2 min-w-0">
-                            <span className="shrink-0 w-5 h-5 rounded-full bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300 text-[11px] font-bold flex items-center justify-center">
-                              {i + 1}
-                            </span>
-                            <Link href={`/campaign/${s.slug}/analytics`} className="truncate text-gray-900 dark:text-white hover:underline">
-                              {STAGE_GOAL_LABELS[((s.stage_goal as string) || 'custom') as StageGoal] ?? 'Stage'}
-                            </Link>
-                            <span className="truncate text-gray-500 dark:text-gray-400 hidden md:inline">— {s.headline}</span>
-                          </span>
-                          <span className="shrink-0 text-xs text-gray-500 dark:text-gray-400">
-                            {Number(s.action_count) || 0} action{Number(s.action_count) !== 1 ? 's' : ''}
-                          </span>
-                        </li>
-                      ))}
-                    </ol>
-                  </div>
+                  <p className="mt-3 text-xs text-gray-500 dark:text-gray-400">
+                    {stages.length} action{stages.length !== 1 ? 's' : ''} in this campaign
+                  </p>
                 )}
               </div>
             );

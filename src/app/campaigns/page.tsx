@@ -5,7 +5,7 @@ import { OrgAccessForm } from '@/components/campaign/OrgAccessForm';
 export const metadata: Metadata = {
   title: 'Advocacy Platform | My Democracy',
   description:
-    'Run your whole legislative campaign in one place: authentic constituent messages, stage-by-stage bill tracking, whip counts, story collection, and funder-ready impact reports. Now onboarding pilot organizations.',
+    'Run your whole legislative campaign in one place: authentic constituent messages, step-by-step bill tracking, whip counts, story collection, and funder-ready impact reports. Now onboarding pilot organizations.',
   alternates: { canonical: 'https://www.mydemocracy.app/campaigns' },
   openGraph: {
     title: 'Advocacy Platform | My Democracy',
@@ -19,7 +19,7 @@ const PILLARS = [
     title: 'Take Action',
     lead: 'Campaigns that follow the bill.',
     points: [
-      'Stages for each step: cosponsors, committee, floor votes, thank-yous',
+      'Actions for each step: cosponsors, committee, floor votes, thank-yous',
       'Committee-true targeting: messages only reach the officials who actually decide',
       'Every message unique, in the constituent’s own voice; your talking points woven in, visibly',
       'Supporters re-engaged automatically when the bill moves',

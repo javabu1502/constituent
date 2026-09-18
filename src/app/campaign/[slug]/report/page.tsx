@@ -171,14 +171,14 @@ export default async function CampaignReportPage({ params }: PageProps) {
           <section>
             <h2 className="text-base font-semibold mb-1">Legislative journey</h2>
             <p className="text-[11px] text-gray-400 dark:text-gray-500 mb-3">
-              This initiative runs in stages that follow the bill through Congress; each stage targets the officials who
-              matter at that step.
+              This initiative runs a series of actions that follow the bill through Congress; each action targets the
+              officials who matter at that step.
             </p>
             <div className="space-y-1.5">
               {report.stages.map((s) => (
                 <div key={s.slug} className="flex justify-between gap-3 text-sm border-b border-gray-100 dark:border-gray-700 pb-1.5">
                   <span>
-                    <span className="font-medium">{STAGE_LABELS[s.goal] ?? 'Stage'}</span>
+                    <span className="font-medium">{STAGE_LABELS[s.goal] ?? 'Action'}</span>
                     <span className="text-gray-500 dark:text-gray-400"> — {s.headline}</span>
                   </span>
                   <span className="shrink-0 text-gray-500 dark:text-gray-400">

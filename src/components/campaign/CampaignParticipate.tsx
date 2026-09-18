@@ -314,6 +314,39 @@ export function CampaignParticipate({
         }
       }
 
+      // Hand-picked officials: messages go only to the campaign's chosen
+      // targets. A participant none of whose reps are targeted still gets
+      // the other-ways-to-help path instead of a dead end.
+      if (campaign.target_filter?.type === 'officials' && campaign.target_filter.officials?.length) {
+        const roster = new Set(campaign.target_filter.officials.map((t) => t.id));
+        filtered = filtered.filter((o: Official) => roster.has(o.id));
+        if (filtered.length === 0) {
+          setNoTargetName('the officials this campaign is targeting');
+          setStep('noTarget');
+          return;
+        }
+      }
+
+      // Party slice: e.g. House Democrats, or one state's Republicans.
+      if (campaign.target_filter?.type === 'party' && campaign.target_filter.party) {
+        const f = campaign.target_filter;
+        const wantParty = f.party as string;
+        filtered = filtered.filter((o: Official) => {
+          if (f.level && o.level !== f.level) return false;
+          if (f.state && o.state !== f.state) return false;
+          if (f.chamber && f.chamber !== 'both') {
+            const houseLike = o.chamber === 'house' || o.chamber === 'lower';
+            if (f.chamber === 'house' ? !houseLike : houseLike) return false;
+          }
+          return (o.party || '').charAt(0).toUpperCase() === wantParty;
+        });
+        if (filtered.length === 0) {
+          setNoTargetName('the officials this campaign is targeting');
+          setStep('noTarget');
+          return;
+        }
+      }
+
       if (filtered.length === 0) {
         throw new FriendlyError('No representatives found for your address at the targeted level');
       }

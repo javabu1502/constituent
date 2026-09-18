@@ -12,7 +12,7 @@ export const STAGE_GOAL_LABELS: Record<StageGoal, string> = {
   floor_house: 'House floor vote',
   floor_senate: 'Senate floor vote',
   thank_you: 'Thank officials',
-  custom: 'Custom stage',
+  custom: 'Custom action',
 };
 
 /** Journey order for funnels; unknown/custom goals sort last, then by creation. */

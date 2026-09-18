@@ -9,6 +9,7 @@ import { IssuePicker } from '@/components/ui/IssuePicker';
 import { US_STATES } from '@/lib/constants';
 import { detectBillReferences } from '@/lib/bills';
 import { STORY_USAGE_OPTIONS } from '@/lib/story-usage';
+import { TargetPicker, type TargetMode, type TargetOfficial, type TargetParty } from '@/components/campaign/TargetPicker';
 
 type BillLevel = '' | 'federal' | 'state';
 interface ResolvedBill {
@@ -48,6 +49,13 @@ export function CampaignForm({
   const [issueArea, setIssueArea] = useState(edit?.initial.issueArea ?? (searchParams.get('issue') || ''));
   const [issueCategory, setIssueCategory] = useState(edit?.initial.issueCategory ?? (searchParams.get('category') || ''));
   const [targetLevel, setTargetLevel] = useState<'federal' | 'state' | 'both'>(edit?.initial.targetLevel ?? 'federal');
+
+  // Narrow targeting: everyone at the level (default), specific officials,
+  // or a party slice. Fixed at creation; committee actions use the committee
+  // picker instead.
+  const [targetMode, setTargetMode] = useState<TargetMode>('all');
+  const [targetOfficials, setTargetOfficials] = useState<TargetOfficial[]>([]);
+  const [targetParty, setTargetParty] = useState<TargetParty>({ party: 'D', chamber: 'both', level: 'federal' });
   const [direction, setDirection] = useState<'support' | 'oppose' | ''>(edit?.initial.direction ?? '');
   const [messageTemplate, setMessageTemplate] = useState(edit?.initial.messageTemplate ?? '');
 
@@ -364,12 +372,22 @@ export function CampaignForm({
         issue_area: issueCategory || issueArea,
         issue_subtopic: issueCategory ? issueArea : null,
       };
+      // Narrow targeting (create only; committee actions carry their own).
+      const targetingBody =
+        stageGoal === 'committee'
+          ? {}
+          : targetMode === 'officials' && targetOfficials.length > 0
+            ? { target_officials: targetOfficials }
+            : targetMode === 'party'
+              ? { target_party: targetParty }
+              : {};
       const body = campaignType === 'advocacy'
         ? {
             ...sharedBody,
             target_level: targetLevel,
             direction: direction || undefined,
             message_template: messageTemplate.trim() || null,
+            ...(edit ? {} : targetingBody),
             ...(parentCampaignId
               ? {
                   parent_campaign_id: parentCampaignId,
@@ -684,6 +702,20 @@ export function CampaignForm({
           ))}
         </div>
       </div>
+
+      {/* Narrow targeting — hidden in edit mode (targeting is fixed at
+          creation) and on committee actions (the committee picker rules). */}
+      {!edit && stageGoal !== 'committee' && (
+        <TargetPicker
+          mode={targetMode}
+          officials={targetOfficials}
+          party={targetParty}
+          billState={billState || stageState || undefined}
+          onModeChange={setTargetMode}
+          onOfficialsChange={setTargetOfficials}
+          onPartyChange={setTargetParty}
+        />
+      )}
 
       {/* Related Bill (optional) */}
       <div>

@@ -44,7 +44,7 @@ export async function CampaignStages({
     if (!parent) return null;
     return (
       <div className="mb-6 p-4 rounded-xl border border-blue-200 dark:border-blue-800 bg-blue-50 dark:bg-blue-900/20 text-sm text-blue-800 dark:text-blue-300">
-        This campaign is a stage of{' '}
+        This campaign is an action within{' '}
         <Link href={`/campaign/${parent.slug}/analytics`} className="font-semibold underline hover:no-underline">
           {parent.headline}
         </Link>
@@ -87,22 +87,22 @@ export async function CampaignStages({
   return (
     <div className="mb-8 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-5">
       <div className="flex items-center justify-between gap-3 mb-1">
-        <h2 className="text-base font-semibold text-gray-900 dark:text-white">Stages</h2>
+        <h2 className="text-base font-semibold text-gray-900 dark:text-white">Actions</h2>
         <Link
           href={`/campaign/create?type=advocacy&parent=${campaign.id}&parent_name=${encodeURIComponent(campaign.headline)}${
             campaign.bill_level === 'state' && campaign.bill_state ? `&state=${campaign.bill_state}` : ''
           }${reachable > 0 ? `&supporters=${reachable}` : ''}`}
           className="text-sm font-medium px-3 py-1.5 rounded-lg border border-purple-300 dark:border-purple-700 text-purple-700 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/20 transition-colors"
         >
-          + Add a stage
+          + Add an action
         </Link>
       </div>
       <p className="text-xs text-gray-500 dark:text-gray-400 mb-4">
-        Follow the bill through Congress: recruit cosponsors, target the committee, then each floor vote — every stage
+        Follow the bill through Congress: recruit cosponsors, target the committee, then each floor vote. Every action
         reaches only the officials who matter at that step.
       </p>
       {ordered.length === 0 ? (
-        <p className="text-sm text-gray-500 dark:text-gray-400">No stages yet.</p>
+        <p className="text-sm text-gray-500 dark:text-gray-400">No actions yet.</p>
       ) : (
         <ul className="divide-y divide-gray-100 dark:divide-gray-700">
           {ordered.map((s) => {
@@ -119,7 +119,7 @@ export async function CampaignStages({
                     {s.headline}
                   </Link>
                   <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
-                    {STAGE_GOAL_LABELS[(s.stage_goal ?? 'custom') as StageGoal] ?? 'Custom stage'}
+                    {STAGE_GOAL_LABELS[(s.stage_goal ?? 'custom') as StageGoal] ?? 'Custom action'}
                     {committee ? ` · ${committee.name}` : ''}
                     {s.status === 'pending' ? ' · pending approval' : ''}
                   </p>

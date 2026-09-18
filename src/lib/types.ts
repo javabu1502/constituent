@@ -354,8 +354,19 @@ export interface Campaign {
   // Stage campaigns: one step of a parent initiative's legislative journey.
   parent_campaign_id?: string | null;
   stage_goal?: 'cosponsor' | 'committee' | 'floor_house' | 'floor_senate' | 'thank_you' | 'custom' | null;
-  /** Targeting rule limiting which officials this stage contacts. */
-  target_filter?: { type?: string; committee_id?: string; state?: string } | null;
+  /** Targeting rule limiting which officials this campaign/action contacts.
+   *  type 'committee' -> committee_id (+state for state committees);
+   *  type 'officials' -> hand-picked list (ids matched against the
+   *  participant's resolved reps); type 'party' -> party/chamber/level slice. */
+  target_filter?: {
+    type?: string;
+    committee_id?: string;
+    state?: string;
+    officials?: { id: string; name: string; level: 'federal' | 'state'; state: string }[];
+    party?: 'D' | 'R' | 'I';
+    chamber?: 'house' | 'senate' | 'both';
+    level?: 'federal' | 'state';
+  } | null;
 }
 
 export type AttributionLevel = 'named' | 'first_name_only' | 'anonymous';
