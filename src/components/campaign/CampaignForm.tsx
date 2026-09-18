@@ -39,7 +39,7 @@ export function CampaignForm({
   edit,
 }: {
   initialType?: 'advocacy' | 'storytelling';
-  edit?: { slug: string; wasApproved: boolean; initial: CampaignEditInitial };
+  edit?: { slug: string; initial: CampaignEditInitial };
 } = {}) {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -114,6 +114,8 @@ export function CampaignForm({
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  // Submission navigates straight to the manage page; guards double-saves of
+  // the draft while the redirect is in flight.
   const [submitted, setSubmitted] = useState(false);
 
   // Validation errors live next to the field they describe, not in one box at
@@ -457,57 +459,19 @@ export function CampaignForm({
       }
 
       trackEvent(edit ? 'campaign_edited' : 'campaign_created', { issue: issueArea });
-      try { localStorage.removeItem(draftKey); } catch { /* best-effort */ }
       setSubmitted(true);
+      try { localStorage.removeItem(draftKey); } catch { /* best-effort */ }
+      // Live immediately — straight to the campaign's manage page (a new
+      // action's manage route forwards to its parent's page).
+      router.push(`/campaign/${data.slug}/manage`);
     } catch (err) {
       setError(err instanceof Error ? err.message : (edit ? 'Failed to save changes' : 'Failed to create campaign'));
       setIsSubmitting(false);
     }
   };
 
-  if (submitted) {
-    return (
-      <div className="text-center py-8">
-        <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-yellow-100 dark:bg-yellow-900/30 flex items-center justify-center">
-          <svg className="w-8 h-8 text-yellow-600 dark:text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-        </div>
-        <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-          {edit ? 'Changes Submitted for Review' : 'Campaign Submitted for Review'}
-        </h3>
-        <p className="text-gray-600 dark:text-gray-300 mb-6">
-          {edit
-            ? 'Your changes have been saved and the campaign is back in review. '
-            : 'Your campaign has been submitted and is pending approval. We review campaigns to ensure quality and safety. '}
-          You&apos;ll be able to see its status on your{' '}
-          <Link href="/dashboard" className="text-purple-600 dark:text-purple-400 underline hover:text-purple-800 dark:hover:text-purple-200">dashboard</Link>.
-        </p>
-        <Button onClick={() => router.push('/dashboard')} variant="secondary">Go to Dashboard</Button>
-      </div>
-    );
-  }
-
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      {edit ? (
-        <div className="p-3 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded-xl">
-          <p className="text-sm text-amber-800 dark:text-amber-300">
-            Saved changes go back through review.
-            {edit.wasApproved && ' Your campaign page will be temporarily offline until the changes are approved. Your link and results are unaffected.'}
-          </p>
-        </div>
-      ) : (
-        <div className="flex items-center gap-2 p-3 bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-700 rounded-xl">
-          <svg className="w-4 h-4 text-purple-600 dark:text-purple-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-          <p className="text-sm text-purple-700 dark:text-purple-300">
-            Campaigns are reviewed before going live. Strong campaigns have a clear ask, a defined audience, and a plan for getting the word out.
-          </p>
-        </div>
-      )}
-
       {error && (
         <div className="p-4 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 rounded-xl">
           <p className="text-sm text-red-700 dark:text-red-300">{error}</p>
@@ -993,10 +957,13 @@ export function CampaignForm({
       )}
 
       <Button type="submit" isLoading={isSubmitting} className="w-full" size="lg">
-        {edit
-          ? 'Save Changes'
-          : campaignType === 'storytelling' ? 'Submit Storytelling Campaign for Review' : 'Submit Advocacy Campaign for Review'}
+        {edit ? 'Save Changes' : 'Launch Campaign'}
       </Button>
+      {!edit && (
+        <p className="text-xs text-gray-500 dark:text-gray-400 text-center">
+          Your campaign goes live as soon as you launch it.
+        </p>
+      )}
     </form>
   );
 }

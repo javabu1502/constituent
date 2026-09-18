@@ -77,7 +77,6 @@ export default async function EditCampaignPage({
         <CampaignForm
           edit={{
             slug,
-            wasApproved: campaign.approval_status === 'approved',
             initial,
           }}
         />

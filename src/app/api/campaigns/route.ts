@@ -146,7 +146,10 @@ export async function POST(request: NextRequest) {
       campaign_type,
       // All user-created campaigns are unlisted; is_official stays false.
       visibility: 'unlisted',
-      approval_status: 'pending',
+      // Orgs are hand-approved at the account level (Jared, 09-18), so their
+      // campaigns launch live. Review moved from per-campaign to per-org.
+      approval_status: 'approved',
+      approved_at: new Date().toISOString(),
       headline,
       description,
       issue_area,
@@ -179,7 +182,7 @@ export async function POST(request: NextRequest) {
       edit_revoke_policy: isStory ? edit_revoke_policy : null,
       recipient_email: isStory ? (recipient_email || user.email || null) : null,
       ...branding,
-      status: 'pending',
+      status: 'active',
     })
     .select()
     .single();
@@ -213,21 +216,22 @@ export async function POST(request: NextRequest) {
     }
   }
 
-  // Ping the admin that a new campaign is awaiting approval (fire-and-forget)
+  // FYI ping: org campaigns launch live without review, so this is
+  // awareness only, not a to-do (fire-and-forget).
   void sendAdminNotification(
-    `New campaign awaiting approval: ${headline}`,
-    `<h2>New campaign submitted</h2>
+    `New campaign live: ${headline}`,
+    `<h2>New org campaign launched</h2>
      <p><strong>${escapeHtml(headline)}</strong></p>
      <p>${escapeHtml(description)}</p>
      <ul>
        <li>Type: ${escapeHtml(campaign_type)}</li>
        <li>Issue: ${escapeHtml(issue_area)}${issue_subtopic ? ` / ${escapeHtml(issue_subtopic)}` : ''}</li>
        ${isStory
-         ? `<li>Story prompt: ${escapeHtml(story_prompt || '—')}</li><li>Usage: ${escapeHtml(usage_statement || '')}</li>`
-         : `<li>Target level: ${escapeHtml(target_level || '')}</li><li>Distribution plan: ${escapeHtml(distribution_plan || '')}</li>`}
+         ? `<li>Story prompt: ${escapeHtml(story_prompt || '(none)')}</li>`
+         : `<li>Target level: ${escapeHtml(target_level || '')}</li>`}
        <li>Slug: ${escapeHtml(slug)}</li>
      </ul>
-     <p>Status is <strong>pending</strong> — review and approve it in the admin dashboard.</p>`
+     <p>Live immediately. Org accounts are pre-approved; no action needed.</p>`
   );
 
   return NextResponse.json({ ...campaign, supporter_notify: supporterNotify });

@@ -175,12 +175,10 @@ export async function GET(
 
 /**
  * PATCH /api/campaigns/[slug]
- * Edit a campaign. Only the creator can edit; stages are not editable here.
- *
- * Every edit re-enters review (approval_status/status back to 'pending'), so
- * an approved campaign can't silently become something else after approval —
- * the page goes offline until the changes are re-approved. The slug never
- * changes, so shared links survive the edit.
+ * Edit a campaign. Only the creator can edit; actions (children) are not
+ * editable here. Org accounts are vetted at the account level (Jared,
+ * 09-18), so edits apply immediately and the campaign stays live. The slug
+ * never changes, so shared links survive the edit.
  */
 export async function PATCH(
   request: NextRequest,
@@ -261,14 +259,7 @@ export async function PATCH(
 
   const { data: updated, error } = await admin
     .from('campaigns')
-    .update({
-      ...updates,
-      // Back through review: the old review verdict described the old content.
-      approval_status: 'pending',
-      status: 'pending',
-      approved_at: null,
-      review_note: null,
-    })
+    .update(updates)
     .eq('id', campaign.id)
     .select()
     .single();
@@ -281,14 +272,8 @@ export async function PATCH(
     return NextResponse.json({ error: 'Failed to update campaign' }, { status: 500 });
   }
 
-  void sendAdminNotification(
-    `Edited campaign awaiting re-approval: ${updated.headline}`,
-    `<h2>Campaign edited</h2>
-     <p><strong>${String(updated.headline).replace(/</g, '&lt;')}</strong> (was: ${String(campaign.headline).replace(/</g, '&lt;')})</p>
-     <p>Slug: ${slug}</p>
-     <p>The creator edited this campaign. It's back to <strong>pending</strong> and its page is offline until re-approved.</p>`
-  );
-
+  // No admin email on edits: campaigns stay live and Jared asked for less
+  // inbox noise. Edits are visible in the DB if ever needed.
   return NextResponse.json(updated);
 }
 

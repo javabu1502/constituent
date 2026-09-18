@@ -97,16 +97,12 @@ describe('PATCH /api/campaigns/[slug]', () => {
     expect(res.status).toBe(400);
   });
 
-  it('every edit re-enters review: approval + status pending, verdict cleared', async () => {
+  it('edits apply in place: the campaign stays live (orgs are account-vetted)', async () => {
     const res = await callPatch({ headline: 'New headline' });
     expect(res.status).toBe(200);
-    expect(mockUpdatePayload.value).toMatchObject({
-      headline: 'New headline',
-      approval_status: 'pending',
-      status: 'pending',
-      approved_at: null,
-      review_note: null,
-    });
+    expect(mockUpdatePayload.value).toMatchObject({ headline: 'New headline' });
+    expect(mockUpdatePayload.value).not.toHaveProperty('approval_status');
+    expect(mockUpdatePayload.value).not.toHaveProperty('status');
   });
 
   it('drops story-only fields on advocacy campaigns', async () => {

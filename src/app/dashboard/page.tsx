@@ -250,19 +250,13 @@ export default async function DashboardPage() {
                     </p>
                   </div>
                 )}
-                {/* Three buttons, no more. Everything else (analytics, report,
-                    embed, QR, edit, delete, the actions list) lives on Manage —
-                    the card got unusably busy (Jared, 09-18). */}
+                {/* Two buttons, no more. Everything else (view, analytics,
+                    report, embed, QR, edit, delete, the actions list) lives on
+                    Manage — the card got unusably busy (Jared, 09-18). */}
                 <div className="flex items-center gap-2">
                   <Link
-                    href={`/campaign/${campaign.slug}`}
-                    className="flex-1 text-center px-3 py-2 bg-purple-600 hover:bg-purple-700 text-white text-sm font-medium rounded-lg transition-colors"
-                  >
-                    View Campaign
-                  </Link>
-                  <Link
                     href={`/campaign/${campaign.slug}/manage`}
-                    className="flex-1 text-center px-3 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 text-sm font-medium rounded-lg transition-colors"
+                    className="flex-1 text-center px-3 py-2 bg-purple-600 hover:bg-purple-700 text-white text-sm font-medium rounded-lg transition-colors"
                   >
                     Manage
                   </Link>
