@@ -173,7 +173,16 @@ export function buildCwcXml(delivery: CwcDelivery): string {
   L.push('<Delivery>');
   L.push(tag('DeliveryId', delivery.deliveryId ?? newDeliveryId()));
   L.push(tag('DeliveryDate', delivery.deliveryDate ?? today()));
-  L.push(tag('DeliveryAgent', requireEnv('CWC_DELIVERY_AGENT')));
+  // The chambers registered DIFFERENT vendor strings for us and each
+  // validates <DeliveryAgent> against its own record: Senate = the SOAPBox
+  // company legal name ("My Democracy LLC"); House = "MyDemocracy" (probed
+  // /v2/message in UAT 2026-09-18; every other variant got
+  // "DeliveryAgent Mismatch").
+  const deliveryAgent =
+    delivery.chamber === 'house'
+      ? process.env.CWC_HOUSE_DELIVERY_AGENT || requireEnv('CWC_DELIVERY_AGENT')
+      : requireEnv('CWC_DELIVERY_AGENT');
+  L.push(tag('DeliveryAgent', deliveryAgent));
   L.push(tag('DeliveryAgentAckEmailAddress', requireEnv('CWC_ACK_EMAIL')));
   L.push('<DeliveryAgentContact>');
   L.push(tag('DeliveryAgentContactName', requireContactName()));

@@ -49,6 +49,18 @@ describe('buildCwcXml', () => {
     }
   });
 
+  it('House deliveries use the House-registered vendor string (CWC_HOUSE_DELIVERY_AGENT)', () => {
+    process.env.CWC_HOUSE_DELIVERY_AGENT = 'MyDemocracy';
+    try {
+      const xml = buildCwcXml(validDelivery({ chamber: 'house', officeCode: 'HNY01' }));
+      expect(xml).toContain('<DeliveryAgent>MyDemocracy</DeliveryAgent>');
+      // Senate deliveries keep the SOAPBox legal name regardless.
+      expect(buildCwcXml(validDelivery())).toContain('<DeliveryAgent>My Democracy LLC</DeliveryAgent>');
+    } finally {
+      delete process.env.CWC_HOUSE_DELIVERY_AGENT;
+    }
+  });
+
   it('generates a 32-char alphanumeric DeliveryId', () => {
     expect(newDeliveryId()).toMatch(/^[a-zA-Z0-9]{32}$/);
     const xml = buildCwcXml(validDelivery());
