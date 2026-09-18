@@ -13,6 +13,7 @@ import {
   detectUnsupportedIdentityClaims,
   detectUnsourcedStats,
   stripUnsourcedStats,
+  sharesVerbatimRun,
 } from '@/lib/message-quality';
 
 export const runtime = 'nodejs';
@@ -103,7 +104,7 @@ export async function POST(request: NextRequest) {
 - Do NOT include a final "I ask you to vote..." sentence — the ask is added later.
 - First person, 110–180 words, plain human language. No em dashes. No AI-sounding phrases.
 - ONE issue only — the one given. Do not drift into other topics.
-- Weave the campaign's talking points in naturally where they strengthen the case; never paste them verbatim as a list.
+- Weave the campaign's talking points in naturally where they strengthen the case; never paste them verbatim as a list. If the talking points are long, pick the two or three strongest and let the rest go — a short message that lands beats a compressed summary of everything.
 - If the constituent shared a personal story, it is the heart of the message — lead with it and keep their meaning exactly. Do not add specifics they never wrote — no diagnoses, insurance status, dollar amounts, or dates beyond their words.
 - Invent nothing about the constituent, and invent no statistics, studies, or figures. If the campaign talking points supply a number you may use it; otherwise argue from the constituent's experience and plain reasoning — never "studies show".
 - NEVER claim an identity, profession, or lived experience for the constituent that their own words do not state. Caring about veterans does not make them a veteran; caring about schools does not give them children. If they shared no personal stake, write as a concerned constituent about the people affected ("veterans in my community"), never in a borrowed first person ("I served", "my kids"). And never assert that specific harms or events have happened in their own community ("families here are burying their children") unless they said so — concern is theirs to feel; events are theirs to report.
@@ -177,6 +178,14 @@ Draft the core message.`;
       const draftFull = [String(out?.opening ?? ''), body, String(out?.ask ?? '')].join(' ');
       if (body.split(/\s+/).length > 220) {
         correction = 'Your previous draft ran long. Rewrite it UNDER 180 words, keeping the strongest details of the story.';
+        body = '';
+        continue;
+      }
+      // Pasted talking points = identical paragraphs across every
+      // participant, the form-letter fingerprint offices dedupe on.
+      if (campaign?.message_template && sharesVerbatimRun(campaign.message_template, body)) {
+        correction =
+          "YOUR PREVIOUS DRAFT COPIED the campaign talking points word for word. Do not paste them. Make their strongest two or three points in fresh wording, in the constituent's voice.";
         body = '';
         continue;
       }

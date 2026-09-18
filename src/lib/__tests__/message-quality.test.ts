@@ -108,3 +108,26 @@ describe('detectUnsourcedStats / stripUnsourcedStats', () => {
     expect(stripUnsourcedStats(draft, SOURCE)).toBe(draft);
   });
 });
+
+describe('sharesVerbatimRun', () => {
+  const TEMPLATE =
+    'Please vote yes on AB 410. Nevada youth who age out of foster care at eighteen have no guaranteed housing, and roughly one in four experiences homelessness within two years. AB 410 funds transitional housing vouchers bridging ages eighteen to twenty one.';
+
+  it('flags a draft that pastes a long run from the talking points', async () => {
+    const { sharesVerbatimRun } = await import('../message-quality');
+    const draft = `I care about this deeply. Nevada youth who age out of foster care at eighteen have no guaranteed housing, and roughly one in four experiences homelessness within two years. That is why I am writing.`;
+    expect(sharesVerbatimRun(TEMPLATE, draft)).toBe(true);
+  });
+
+  it('passes a draft that weaves the same facts in fresh wording', async () => {
+    const { sharesVerbatimRun } = await import('../message-quality');
+    const draft = `When a Nevada kid leaves foster care at eighteen, nothing guarantees them a roof. A quarter of them end up homeless within two years. The vouchers in AB 410 would bridge that gap until twenty one, and I am asking for a yes vote.`;
+    expect(sharesVerbatimRun(TEMPLATE, draft)).toBe(false);
+  });
+
+  it('ignores punctuation and case when matching', async () => {
+    const { sharesVerbatimRun } = await import('../message-quality');
+    const draft = `NEVADA YOUTH, who age out of foster care at eighteen, have no guaranteed housing; and roughly one in four experiences homelessness within two years!`;
+    expect(sharesVerbatimRun(TEMPLATE, draft)).toBe(true);
+  });
+});

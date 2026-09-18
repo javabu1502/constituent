@@ -21,6 +21,18 @@ export interface OfficialMessage {
   body: string;
 }
 
+/** Em/en dashes are the loudest AI tell; the core is scrubbed server-side,
+ *  but AI-drafted openers/asks and future pool edits flow through here too.
+ *  Local copy of claude.ts deDash — this module must stay client-safe. */
+function stripDashes(text: string): string {
+  return text
+    .replace(/\s*[—–]\s*/g, ', ')
+    .replace(/,\s*,/g, ',')
+    .replace(/\s+([.,;:!?])/g, '$1')
+    .replace(/,(\s*[.;:!?])/g, '$1')
+    .replace(/[ \t]{2,}/g, ' ');
+}
+
 /** Deterministic per-sender index — djb2 over the sender identity. */
 function seededIndex(seed: string, poolSize: number): number {
   let h = 5381;
@@ -44,7 +56,7 @@ const OPENERS_COMMITTEE = [
   (c: string, t: string) => `You sit on the ${c}, which means ${t} is in your hands before it reaches anyone else.`,
   (c: string, t: string) => `Because you serve on the ${c}, your voice carries more weight than most on ${t}.`,
   (c: string, t: string) => `${t} is coming before the ${c}, and as a member, you will help decide its fate.`,
-  (c: string, t: string) => `Few people have a real say over ${t} right now — as a member of the ${c}, you do.`,
+  (c: string, t: string) => `Few people have a real say over ${t} right now. As a member of the ${c}, you do.`,
 ];
 
 const OPENERS_FLOOR = [
@@ -60,15 +72,15 @@ const CLOSERS_COSPONSOR = [
   (b: string) => `Please add your name as a cosponsor of ${b}.`,
   (b: string) => `I'm asking you to put your name on ${b} as a cosponsor.`,
   (b: string) => `Cosponsoring ${b} would tell constituents like me that you're listening.`,
-  (b: string) => `Please consider becoming a cosponsor of ${b} — it would mean a great deal to me.`,
+  (b: string) => `Please consider becoming a cosponsor of ${b}. It would mean a great deal to me.`,
 ];
 
 const CLOSERS_COMMITTEE = [
   (v: string) => `I respectfully ask you to vote ${v} when it comes before your committee.`,
   (v: string) => `When your committee takes this up, please vote ${v}.`,
-  (v: string) => `Please vote ${v} in committee — that vote matters more than most people realize.`,
+  (v: string) => `Please vote ${v} in committee. That vote matters more than most people realize.`,
   (v: string) => `As this moves through your committee, I'm asking for your ${v} vote.`,
-  (v: string) => `Your committee vote is the one I'm counting on — please vote ${v}.`,
+  (v: string) => `Your committee vote is the one I'm counting on. Please vote ${v}.`,
 ];
 
 const CLOSERS_BILL_VOTE = [
@@ -99,16 +111,16 @@ const CLOSERS_DEFAULT_OPPOSE = [
 
 const THANKS_OPENERS = [
   (t: string) => `Thank you for your support on ${t}. As your constituent, I wanted you to hear directly that it matters.`,
-  (t: string) => `I saw where you stood on ${t}, and I wanted to say thank you — constituents notice.`,
+  (t: string) => `I saw where you stood on ${t}, and I wanted to say thank you. Constituents notice.`,
   (t: string) => `As someone you represent, thank you for standing up on ${t}.`,
   (t: string) => `Your support on ${t} did not go unnoticed in my household. Thank you.`,
 ];
 
 const THANKS_CLOSERS = [
   `Thank you again for your leadership, and please keep championing this.`,
-  `Please keep pushing — you have constituents behind you.`,
+  `Please keep pushing. You have constituents behind you.`,
   `Thank you again. Please see this through to the finish.`,
-  `Gratitude is rare in your inbox, I imagine — please know this stand earned it.`,
+  `Gratitude is rare in your inbox, I imagine. Please know this stand earned it.`,
 ];
 
 // Openers for officials who do not VOTE on legislation — mayors, county
@@ -126,7 +138,7 @@ const OPENERS_EXECUTIVE = [
 // defaulting an opposer to "I ask for your support" inverts their position.
 const CLOSERS_NEUTRAL = [
   `I ask you to act on this, and to weigh what I've shared here when you do.`,
-  `Please take this seriously and act on it — I will be following what you do.`,
+  `Please take this seriously and act on it. I will be following what you do.`,
   `I'm asking you to give this your attention and to act with constituents like me in mind.`,
   `Please treat this with the urgency it deserves.`,
   `I hope what I've shared here informs what you do next on this.`,
@@ -240,8 +252,10 @@ export function buildEnvelope(
     }
   }
 
+  // The core is the constituent's approved text and is NEVER altered; the
+  // frame (subject, opener, closer) is ours to scrub.
   return {
-    subject,
-    body: `Dear ${sal} ${lastName},\n\n${opener}\n\n${core}\n\n${closer}\n\nSincerely,\n${opts.senderName}\n${opts.city}, ${opts.stateCode} ${opts.zip}`,
+    subject: stripDashes(subject),
+    body: `Dear ${sal} ${lastName},\n\n${stripDashes(opener)}\n\n${core}\n\n${stripDashes(closer)}\n\nSincerely,\n${opts.senderName}\n${opts.city}, ${opts.stateCode} ${opts.zip}`,
   };
 }

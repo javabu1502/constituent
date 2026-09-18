@@ -460,7 +460,7 @@ async function generateForOfficial(
   // gets gratitude that reinforces, not a pitch that ignores what they did.
   const intentInstructions =
     official.intent === 'thank'
-      ? `\n- THIS IS A THANK-YOU MESSAGE: this official has ALREADY taken the action the campaign asks for (e.g. cosponsored the bill or cast the vote). Express genuine, specific gratitude for that action. Do NOT lobby them as if they were undecided. Ask them to keep championing it — urge colleagues to join, push for a hearing or a floor vote.`
+      ? `\n- THIS IS A THANK-YOU MESSAGE: this official has ALREADY taken the action the campaign asks for (e.g. cosponsored the bill or cast the vote). Shift the whole voice: warm, specific, and glad — a letter someone writes because they WANT to, with none of the urgency or pressure of a persuasion letter. Name the action being thanked. Do NOT lobby them as if they were undecided. Ask them to keep championing it — urge colleagues to join, push for a hearing or a floor vote.`
       : official.intent === 'persuade'
         ? `\n- This official has NOT yet taken the action the campaign asks for. Make the constituent's case directly and end with the specific ask (e.g. cosponsor the bill).`
         : '';
@@ -480,6 +480,7 @@ Writing guidelines:
 - Maintain a respectful, firm tone
 - Keep the letter between 170-300 words (each request sets an exact target — follow it)
 - Do NOT include a greeting line (no "Dear Senator") or signature block (no "Sincerely") — the app handles those
+- NEVER include the sender's name, street, city, state, or ZIP anywhere in the letter body — those live in the signature the app adds, and repeating them inside the letter breaks how offices process mail
 - Write in first person
 - Be direct and specific to THIS official, not generic${stafferNote}${stateNote}${voteInstructions}${districtInstructions}${billInstructions}${newsInstructions}${toneInstructions}${intentInstructions}
 

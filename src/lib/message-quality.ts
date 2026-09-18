@@ -311,3 +311,35 @@ export function stripUnsourcedStats(text: string, allowedSource: string): string
   const kept = sentences.filter((s) => detectUnsourcedStats(s, allowedSource).length === 0);
   return kept.join(' ').trim() || text;
 }
+
+/** True when the draft copies a long verbatim run from the campaign's
+ * talking points. Weaving is fine; a shared run of `minWords` consecutive
+ * words means the model pasted, and identical paragraphs across a
+ * campaign's participants are the exact form-letter fingerprint
+ * congressional offices dedupe on. Word-level compare, punctuation and
+ * case ignored. */
+export function sharesVerbatimRun(template: string, draft: string, minWords = 18): boolean {
+  const norm = (s: string) =>
+    (s || '')
+      .toLowerCase()
+      .replace(/[^a-z0-9\s]/g, ' ')
+      .split(/\s+/)
+      .filter(Boolean);
+  const t = norm(template);
+  const d = norm(draft);
+  if (t.length < minWords || d.length < minWords) return false;
+  const positions = new Map<string, number[]>();
+  d.forEach((w, i) => {
+    const arr = positions.get(w);
+    if (arr) arr.push(i);
+    else positions.set(w, [i]);
+  });
+  for (let i = 0; i + minWords <= t.length; i++) {
+    for (const j of positions.get(t[i]) ?? []) {
+      let k = 0;
+      while (i + k < t.length && j + k < d.length && t[i + k] === d[j + k]) k++;
+      if (k >= minWords) return true;
+    }
+  }
+  return false;
+}
