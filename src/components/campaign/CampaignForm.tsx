@@ -28,7 +28,6 @@ export interface CampaignEditInitial {
   targetLevel: 'federal' | 'state' | 'both';
   direction: 'support' | 'oppose' | '';
   messageTemplate: string;
-  distributionPlan: string;
   storyPrompt: string;
   usageTags: string[];
   resolvedBill: ResolvedBill | null;
@@ -51,7 +50,6 @@ export function CampaignForm({
   const [targetLevel, setTargetLevel] = useState<'federal' | 'state' | 'both'>(edit?.initial.targetLevel ?? 'federal');
   const [direction, setDirection] = useState<'support' | 'oppose' | ''>(edit?.initial.direction ?? '');
   const [messageTemplate, setMessageTemplate] = useState(edit?.initial.messageTemplate ?? '');
-  const [distributionPlan, setDistributionPlan] = useState(edit?.initial.distributionPlan ?? '');
 
   // Campaign type is fixed by the entry point (?type=advocacy|storytelling);
   // each type has its own track below. Advocacy campaigns are always public.
@@ -147,7 +145,6 @@ export function CampaignForm({
       if (d.targetLevel) setTargetLevel(d.targetLevel);
       if (d.direction) setDirection(d.direction);
       if (d.messageTemplate) setMessageTemplate(d.messageTemplate);
-      if (d.distributionPlan) setDistributionPlan(d.distributionPlan);
       if (d.storyPrompt) setStoryPrompt(d.storyPrompt);
       if (Array.isArray(d.usageTags) && d.usageTags.length > 0) setUsageTags(d.usageTags);
       if (d.billLevel) setBillLevel(d.billLevel);
@@ -164,14 +161,14 @@ export function CampaignForm({
     if (skipDraft || submitted) return;
     const timer = setTimeout(() => {
       const hasContent =
-        headline.trim() || description.trim() || messageTemplate.trim() || distributionPlan.trim() || storyPrompt.trim();
+        headline.trim() || description.trim() || messageTemplate.trim() || storyPrompt.trim();
       if (!hasContent) return;
       try {
         localStorage.setItem(
           draftKey,
           JSON.stringify({
             headline, description, issueArea, issueCategory, targetLevel, direction,
-            messageTemplate, distributionPlan, storyPrompt, usageTags,
+            messageTemplate, storyPrompt, usageTags,
             billLevel, billState, billQuery, resolvedBill,
           })
         );
@@ -182,7 +179,7 @@ export function CampaignForm({
     return () => clearTimeout(timer);
   }, [
     skipDraft, submitted, draftKey, headline, description, issueArea, issueCategory, targetLevel,
-    direction, messageTemplate, distributionPlan, storyPrompt, usageTags,
+    direction, messageTemplate, storyPrompt, usageTags,
     billLevel, billState, billQuery, resolvedBill,
   ]);
   const discardDraft = () => {
@@ -194,7 +191,6 @@ export function CampaignForm({
     setTargetLevel('federal');
     setDirection('');
     setMessageTemplate('');
-    setDistributionPlan('');
     setStoryPrompt('');
     setUsageTags([]);
     setBillLevel('');
@@ -343,9 +339,6 @@ export function CampaignForm({
       if (!direction && !parentCampaignId) {
         errs.direction = 'Choose whether this campaign asks people to support or oppose';
       }
-      if (!distributionPlan.trim() || distributionPlan.trim().length < 10) {
-        errs.distributionPlan = 'Describe your distribution plan (at least 10 characters)';
-      }
     } else {
       if (usageTags.length < 1) {
         errs.usageTags = 'Select at least one way you’d like to use these stories';
@@ -377,7 +370,6 @@ export function CampaignForm({
             target_level: targetLevel,
             direction: direction || undefined,
             message_template: messageTemplate.trim() || null,
-            distribution_plan: distributionPlan.trim(),
             ...(parentCampaignId
               ? {
                   parent_campaign_id: parentCampaignId,
@@ -416,7 +408,6 @@ export function CampaignForm({
             target_level: targetLevel,
             ...(direction ? { direction } : {}),
             message_template: messageTemplate.trim() || null,
-            distribution_plan: distributionPlan.trim(),
             // Explicit nulls clear a previously linked bill.
             bill_level: resolvedBill?.level ?? null,
             bill_state: resolvedBill?.level === 'state' ? (resolvedBill.state ?? null) : null,
@@ -874,25 +865,6 @@ export function CampaignForm({
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
           This message will be woven into every participant&apos;s personalized letter, combined with their own personal reasons for caring. The AI will make each letter unique.
         </p>
-      </div>
-
-      {/* Distribution Plan */}
-      <div data-field="distributionPlan">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-          Distribution &amp; Engagement Plan <span className="text-red-500">*</span>
-        </label>
-        <textarea
-          value={distributionPlan}
-          onChange={(e) => { setDistributionPlan(e.target.value); clearFieldError('distributionPlan'); }}
-          placeholder="How will you get people involved? e.g., sharing in community groups, social media outreach, partnering with local organizations..."
-          rows={4}
-          maxLength={1000}
-          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent resize-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
-        />
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-          Campaigns with a clear outreach strategy are more likely to be approved. ({distributionPlan.length}/1000)
-        </p>
-        <FieldError field="distributionPlan" />
       </div>
 
       {/* User campaigns are always link-only */}

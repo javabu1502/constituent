@@ -167,9 +167,8 @@ export const createCampaignSchema = z.object({
     if (!data.direction && !data.parent_campaign_id) {
       ctx.addIssue({ code: 'custom', path: ['direction'], message: 'Choose whether the campaign supports or opposes' });
     }
-    if (!data.distribution_plan || data.distribution_plan.trim().length < 10) {
-      ctx.addIssue({ code: 'custom', path: ['distribution_plan'], message: 'Distribution plan must be at least 10 characters' });
-    }
+    // distribution_plan is no longer collected (dropped from the form
+    // 2026-09-18); the column stays for campaigns that have one.
   }
 });
 

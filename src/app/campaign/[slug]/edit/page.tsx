@@ -50,7 +50,6 @@ export default async function EditCampaignPage({
     targetLevel: (campaign.target_level as 'federal' | 'state' | 'both') ?? 'federal',
     direction: (campaign.direction as 'support' | 'oppose' | null) ?? '',
     messageTemplate: campaign.message_template ?? '',
-    distributionPlan: campaign.distribution_plan ?? '',
     storyPrompt: campaign.story_prompt ?? '',
     usageTags: campaign.usage_tags ?? [],
     resolvedBill: campaign.bill_ref
