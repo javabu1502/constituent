@@ -24,7 +24,7 @@ export function ChatSuggestions() {
           What do you want to say?
         </h3>
         <p className="text-xs text-gray-400 dark:text-gray-500 mb-4">
-          Share as much or as little as you want — you review everything before it&apos;s sent.
+          Share as much or as little as you want. You review everything before it&apos;s sent.
         </p>
         <div className="flex flex-wrap justify-center gap-2">
           {INTERVIEW_SUGGESTIONS.map((q) => (

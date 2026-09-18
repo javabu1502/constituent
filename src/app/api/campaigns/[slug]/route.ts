@@ -215,7 +215,7 @@ export async function PATCH(
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
   }
   if (campaign.parent_campaign_id) {
-    return NextResponse.json({ error: 'Stages are not editable — edit the parent campaign' }, { status: 400 });
+    return NextResponse.json({ error: 'Stages are not editable. Edit the parent campaign instead.' }, { status: 400 });
   }
 
   let raw: unknown;
@@ -286,7 +286,7 @@ export async function PATCH(
     `<h2>Campaign edited</h2>
      <p><strong>${String(updated.headline).replace(/</g, '&lt;')}</strong> (was: ${String(campaign.headline).replace(/</g, '&lt;')})</p>
      <p>Slug: ${slug}</p>
-     <p>The creator edited this campaign — it's back to <strong>pending</strong> and its page is offline until re-approved.</p>`
+     <p>The creator edited this campaign. It's back to <strong>pending</strong> and its page is offline until re-approved.</p>`
   );
 
   return NextResponse.json(updated);

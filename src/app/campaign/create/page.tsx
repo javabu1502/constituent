@@ -15,7 +15,7 @@ const COPY = {
     subtitle: 'Create a shareable page so others can contact their representatives about your issue.',
     what: 'Rally people to contact their elected officials about an issue you care about. You set the issue and talking points; each supporter sends their own message to their own representatives.',
     points: [
-      'Share one link — supporters take action in minutes.',
+      'Share one link. Supporters take action in minutes.',
       'Every message is personalized and routed to the right officials.',
       'Track how many people have taken action.',
     ],
@@ -23,11 +23,11 @@ const COPY = {
   storytelling: {
     heading: 'Start a Storytelling Campaign',
     subtitle: 'Collect personal stories from your supporters. Each person is guided step by step, and their story is saved to your campaign dashboard.',
-    what: 'Collect personal stories from your supporters. A guided chat helps each person write their story in their own words — then they choose how they’re credited, and it’s saved to your dashboard.',
+    what: 'Collect personal stories from your supporters. A guided chat helps each person write their story in their own words. They choose how they’re credited, and it’s saved to your dashboard.',
     points: [
-      'Share a private link — supporters write their story with guided help.',
+      'Share a private link. Supporters write their story with guided help.',
       'They choose how they’re credited and how their story may be used.',
-      'Every story lands in your dashboard — read them all and download as a spreadsheet.',
+      'Every story lands in your dashboard, where you can read them all and download a spreadsheet.',
     ],
   },
 };
@@ -61,7 +61,7 @@ export default async function CreateCampaignPage({
           <p className="text-gray-600 dark:text-gray-400 mb-6 max-w-lg mx-auto">
             Running a campaign on My Democracy is for advocacy groups, nonprofits, and civic organizations. As an
             individual, the fastest way to be heard is to weigh in on an active issue or contact your officials
-            directly — it takes about two minutes.
+            directly. It takes about two minutes.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center mb-8">
             <Link href="/issues" className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white text-sm font-medium rounded-lg">
@@ -108,7 +108,7 @@ export default async function CreateCampaignPage({
 
           <div className="mt-6 p-4 bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-700 rounded-xl">
             <p className="text-sm text-purple-800 dark:text-purple-200 mb-3">
-              Creating a campaign is free — you just need an account so you can manage it and see responses.
+              Creating a campaign is free. You just need an account so you can manage it and see responses.
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
               <Link
@@ -163,7 +163,7 @@ export default async function CreateCampaignPage({
           >
             <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Storytelling</h2>
             <p className="text-sm text-gray-600 dark:text-gray-400">
-              Collect personal stories from your supporters — guided, consent-tracked, and delivered to your
+              Collect personal stories from your supporters: guided, consent-tracked, and delivered to your
               dashboard to share with media and legislators.
             </p>
           </Link>

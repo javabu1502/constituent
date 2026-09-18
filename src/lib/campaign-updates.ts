@@ -107,7 +107,7 @@ export async function sendStageAdvanceEmails(args: {
         <p style="font-size:13px;color:#7C3AED;font-weight:600;margin:0 0 4px">${escapeHtml(args.orgName || 'My Democracy')}</p>
         <h2 style="margin:0 0 12px;font-size:20px">${escapeHtml(args.billRef ? `${args.billRef} just moved.` : 'The campaign just moved.')}</h2>
         <p style="font-size:15px;line-height:1.5">${escapeHtml(name ? `${name.split(' ')[0]}, you` : 'You')} took action on
-        &ldquo;${escapeHtml(args.parentHeadline)}&rdquo; — thank you. The bill has moved, and there&rsquo;s a new step:</p>
+        &ldquo;${escapeHtml(args.parentHeadline)}&rdquo;. Thank you. The bill has moved, and there&rsquo;s a new step:</p>
         <p style="font-size:16px;font-weight:600;margin:16px 0 8px">${escapeHtml(args.stageHeadline)}</p>
         <p style="margin:20px 0">
           <a href="${stageUrl}" style="background:#7C3AED;color:#fff;text-decoration:none;padding:10px 18px;border-radius:8px;font-size:15px;font-weight:600">Take the next action</a>

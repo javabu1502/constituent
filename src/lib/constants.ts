@@ -8,7 +8,7 @@ import type { Topic } from './types';
 export const BRAND = {
   name: 'My Democracy',
   tagline: 'Contact Your Elected Officials',
-  description: 'Find out who represents you and write to them — your words, sent to the right offices.',
+  description: 'Find out who represents you and write to them. Your words, sent to the right offices.',
   colors: {
     primary: '#6A39C9',
     primaryHover: '#5A2EB0',

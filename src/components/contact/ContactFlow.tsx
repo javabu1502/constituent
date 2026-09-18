@@ -421,7 +421,7 @@ export function ContactFlow() {
             </div>
             <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Sent</h3>
             <p className="text-gray-600 dark:text-gray-300 mb-6">
-              Offices tally constituent messages by issue — yours is now in the count.
+              Offices tally constituent messages by issue. Yours is now in the count.
             </p>
             <div className="p-4 bg-purple-50 dark:bg-purple-900/30 border border-purple-200 dark:border-purple-700 rounded-xl mb-6">
               <p className="text-sm text-purple-800 dark:text-purple-200">

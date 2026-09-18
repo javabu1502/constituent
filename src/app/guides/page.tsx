@@ -6,14 +6,14 @@ import type { ReactNode } from 'react';
 
 export const metadata: Metadata = {
   title: 'Civic Engagement Guides | My Democracy',
-  description: 'How to contact your elected officials, write letters that get read, and follow up — practical guides with no fluff.',
+  description: 'How to contact your elected officials, write letters that get read, and follow up. Practical guides with no fluff.',
   keywords: ['civic engagement', 'contact congress', 'write to officials', 'how to contact senator', 'state legislature', 'advocacy guide'],
   alternates: {
     canonical: 'https://www.mydemocracy.app/guides',
   },
   openGraph: {
     title: 'Civic Engagement Guides | My Democracy',
-    description: 'How to contact your elected officials, write letters that get read, and follow up — practical guides with no fluff.',
+    description: 'How to contact your elected officials, write letters that get read, and follow up. Practical guides with no fluff.',
     type: 'website',
   },
 };
@@ -214,7 +214,7 @@ export default function GuidesPage() {
           Civic Engagement Guides
         </h1>
         <p className="text-lg text-gray-600 dark:text-gray-300 mb-10">
-          Practical guides to contacting your officials — from your first letter to a town hall question.
+          Practical guides to contacting your officials, from your first letter to a town hall question.
         </p>
 
         <GuidesGrid icons={guideIcons} />

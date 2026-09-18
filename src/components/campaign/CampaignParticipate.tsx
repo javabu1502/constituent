@@ -998,7 +998,7 @@ export function CampaignParticipate({
       </div>
       <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Sent</h3>
       <p className="text-gray-600 dark:text-gray-300 mb-6">
-        Offices tally constituent messages by issue — yours is now in the count.
+        Offices tally constituent messages by issue. Yours is now in the count.
       </p>
 
       {/* Reader-poll results — revealed only AFTER this reader picked and acted */}

@@ -772,7 +772,7 @@ export function TopicStep({ state, dispatch, onBack }: TopicStepProps) {
         />
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{personalWhy.length}/2000 characters</p>
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
-          Staff read personal stories and pass the memorable ones to the member — a specific detail from your life outweighs a page of talking points.
+          Staff read personal stories and pass the memorable ones to the member. A specific detail from your life outweighs a page of talking points.
           {' '}<a href="/guides/tell-your-story" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">Read the full guide</a>.
         </p>
       </div>
@@ -781,8 +781,8 @@ export function TopicStep({ state, dispatch, onBack }: TopicStepProps) {
       <div className="mb-6 p-3 bg-purple-50 dark:bg-purple-900/30 border border-purple-200 dark:border-purple-700 rounded-xl">
         <p className="text-xs text-purple-700 dark:text-purple-300">
           {contactMethod === 'phone'
-            ? 'Each official gets a separate script built from your reasons — worded for where that official stands.'
-            : 'Each official gets a separate letter built from your reasons — worded for where that official stands.'}
+            ? 'Each official gets a separate script built from your reasons, worded for where that official stands.'
+            : 'Each official gets a separate letter built from your reasons, worded for where that official stands.'}
           {' '}
           <a href="/about/ai-tailoring" target="_blank" rel="noopener noreferrer" className="underline hover:text-purple-900 dark:hover:text-purple-100">
             How does this work?

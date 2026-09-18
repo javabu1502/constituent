@@ -394,7 +394,7 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
           <p className="text-xs text-gray-400 dark:text-gray-500 text-center mt-1.5">
             {canCompose
               ? 'Ready whenever you are — you’ll be able to edit it and choose how you’re credited before anything is sent.'
-              : 'Answer a few more questions first — the draft works better with specifics to draw from.'}
+              : 'Answer a few more questions first. The draft works better with specifics to draw from.'}
           </p>
         </div>
       </div>

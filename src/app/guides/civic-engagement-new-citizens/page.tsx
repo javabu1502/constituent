@@ -152,7 +152,7 @@ export default function CivicEngagementNewCitizensGuidePage() {
             </h2>
             <div className="pl-10 text-gray-600 dark:text-gray-300 space-y-3">
               <p>
-                Civic engagement goes well beyond voting. You can participate at the local, state, and federal levels — often with more effect locally, where fewer people show up.
+                Civic engagement goes well beyond voting. You can participate at the local, state, and federal levels, and local participation often counts most because fewer people show up.
               </p>
               <p>
                 <strong className="text-gray-900 dark:text-white">Ways to get involved:</strong>

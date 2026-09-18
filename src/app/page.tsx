@@ -30,7 +30,7 @@ const faqItems = [
   {
     question: 'How does My Democracy work?',
     answer:
-      'Enter your address to find your elected officials at every level of government. Pick the issue you care about and say why it matters to you — you get a draft letter for each official, which you edit and send by email or phone.',
+      'Enter your address to find your elected officials at every level of government. Pick the issue you care about and say why it matters to you. You get a draft letter for each official, which you edit and send by email or phone.',
   },
 ];
 
@@ -271,7 +271,7 @@ export default async function HomePage() {
                 Bill Tracking
               </h3>
               <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
-                Follow bills in plain English — what they do and where they are in the process.
+                Follow bills in plain English: what they do and where they are in the process.
               </p>
             </Link>
 
@@ -322,7 +322,7 @@ export default async function HomePage() {
           </h2>
           <p className="text-gray-600 dark:text-gray-300 mb-8 max-w-xl mx-auto leading-relaxed">
             Join a campaign and contact your representatives, or create a shareable page
-            so your supporters can write to theirs — each person in their own words.
+            so your supporters can write to theirs, each person in their own words.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/campaigns">
