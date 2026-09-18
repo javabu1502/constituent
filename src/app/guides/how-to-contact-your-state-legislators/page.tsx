@@ -36,7 +36,7 @@ export default function ContactStateLegislatorsGuidePage() {
 
         <div className="prose prose-gray dark:prose-invert max-w-none">
           <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
-            While Congress gets most of the attention, your state legislators often have more direct impact on your daily life. Here&apos;s how to find them and make your voice heard at the state level.
+            While Congress gets most of the attention, your state legislators often have more direct impact on your daily life. Here&apos;s how to find them and reach them.
           </p>
 
           {/* Why State Government Matters */}

@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Federal Regulations & Public Comment | My Democracy',
-    description: 'Browse open federal regulations and submit public comments. Your voice matters in the rulemaking process.',
+    description: 'Browse federal regulations open for public comment and submit yours before the deadline.',
     type: 'website',
   },
 };

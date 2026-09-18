@@ -152,7 +152,7 @@ export default function CivicEngagementNewCitizensGuidePage() {
             </h2>
             <div className="pl-10 text-gray-600 dark:text-gray-300 space-y-3">
               <p>
-                Civic engagement goes well beyond voting. There are many ways to participate in your community and make your voice heard at the local, state, and federal levels.
+                Civic engagement goes well beyond voting. You can participate at the local, state, and federal levels — often with more effect locally, where fewer people show up.
               </p>
               <p>
                 <strong className="text-gray-900 dark:text-white">Ways to get involved:</strong>
@@ -224,7 +224,7 @@ export default function CivicEngagementNewCitizensGuidePage() {
         {/* CTA Section */}
         <div className="mt-10 bg-purple-50 dark:bg-purple-900/20 rounded-2xl p-8 text-center">
           <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
-            Ready to make your voice heard?
+            Ready for your first message?
           </h2>
           <p className="text-gray-600 dark:text-gray-300 mb-6">
             Find your officials and start engaging with the people who represent you in government.

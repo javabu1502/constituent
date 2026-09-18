@@ -936,7 +936,7 @@ export function CampaignParticipate({
         {campaign.message_template && (
           <details className="p-3 bg-gray-50 dark:bg-gray-700/40 border border-gray-200 dark:border-gray-600 rounded-xl">
             <summary className="text-sm font-medium text-gray-700 dark:text-gray-300 cursor-pointer select-none">
-              See the campaign&apos;s talking points woven into your messages
+              See the talking points your messages will include
             </summary>
             <p className="mt-2 text-sm text-gray-600 dark:text-gray-400 whitespace-pre-line border-l-2 border-purple-400 pl-3">
               {campaign.message_template}
@@ -996,9 +996,9 @@ export function CampaignParticipate({
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
         </svg>
       </div>
-      <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Thank You!</h3>
+      <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Sent</h3>
       <p className="text-gray-600 dark:text-gray-300 mb-6">
-        Your voice matters. Every message counts toward making a difference.
+        Offices tally constituent messages by issue — yours is now in the count.
       </p>
 
       {/* Reader-poll results — revealed only AFTER this reader picked and acted */}

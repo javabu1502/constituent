@@ -23,7 +23,7 @@ import { MyStoriesSection } from '@/components/dashboard/MyStoriesSection';
 
 export const metadata: Metadata = {
   title: 'Dashboard | My Democracy',
-  description: 'Your personalized civic hub. View your elected officials, activity, and message history.',
+  description: 'Your elected officials, their latest activity, and your message history in one place.',
 };
 
 function getPartyBadgeClass(party: string) {
@@ -428,7 +428,7 @@ export default async function DashboardPage() {
             <ol className="space-y-4 mb-8">
               {[
                 ['Create a campaign', 'Set the ask, link a bill, and add talking points. We review every campaign before it goes live.'],
-                ['Share your link', 'Supporters open it and send AI-personalized messages to their own representatives — it takes them about two minutes.'],
+                ['Share your link', 'Supporters open it and write to their own representatives — it takes them about two minutes.'],
                 ['Track results', 'Actions, analytics, a whip board for legislator positions, and funder-ready reports all live on this dashboard.'],
               ].map(([title, body], i) => (
                 <li key={title} className="flex items-start gap-3">

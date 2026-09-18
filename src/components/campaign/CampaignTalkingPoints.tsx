@@ -26,7 +26,7 @@ export function CampaignTalkingPoints({
       </div>
       <p className="text-xs text-gray-500 dark:text-gray-400 mb-4">
         {subtitle ??
-          'These points are woven into every message this campaign sends. The rest of your message is written in your own words — you review and edit everything before it goes anywhere.'}
+          'Your message includes these points plus your own reasons, in your own words. You edit the draft before sending.'}
       </p>
       <blockquote className="border-l-4 pl-4 py-1 text-sm text-gray-700 dark:text-gray-300 whitespace-pre-line" style={{ borderColor: color }}>
         {template}

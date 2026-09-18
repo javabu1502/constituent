@@ -13,7 +13,7 @@ export function ShareActions({ shareId, repName, issue }: ShareActionsProps) {
     <div className="mt-6">
       <SocialShare
         url={`https://www.mydemocracy.app/share/${shareId}`}
-        text={`I just contacted ${repName} about ${issue}. Make your voice heard too!`}
+        text={`I just contacted ${repName} about ${issue}. Write to yours too:`}
         title="I contacted my rep"
         prompt="Spread the word"
       />

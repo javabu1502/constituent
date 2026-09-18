@@ -600,11 +600,11 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
           {isDraftingCore ? (
             <div className="mt-4 max-w-md">
               <p className="text-gray-500 dark:text-gray-400 text-sm text-center mb-3">
-                We&apos;re writing one message from your words. Each of these officials will get their own copy:
+                Drafting your message. Each of these officials gets their own copy:
               </p>
               <RecipientChips reps={selectedReps} />
               <p className="text-gray-400 dark:text-gray-500 text-xs text-center mt-3">
-                Final check as we write: anyone without real authority over your issue is removed from this list before you review.
+                Officials with no authority over this issue are dropped from the list before you review.
               </p>
             </div>
           ) : (

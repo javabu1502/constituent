@@ -30,7 +30,7 @@ const faqItems = [
   {
     question: 'How does My Democracy work?',
     answer:
-      'First, enter your address to find your elected officials at every level of government. Next, pick the issue you care about and our AI writes a personalized message on your behalf. Finally, send it directly to your officials via email or phone, all in a few minutes.',
+      'Enter your address to find your elected officials at every level of government. Pick the issue you care about and say why it matters to you — you get a draft letter for each official, which you edit and send by email or phone.',
   },
 ];
 
@@ -89,9 +89,9 @@ export default async function HomePage() {
       <section className="py-16 sm:py-24 px-4 bg-gradient-to-b from-purple-50 via-purple-50/50 to-white dark:from-gray-800 dark:via-gray-800/50 dark:to-gray-900">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
-            Your voice matters.
+            Your representatives are voting.
             <br />
-            <span className="text-purple-600 dark:text-purple-400">Make it heard.</span>
+            <span className="text-purple-600 dark:text-purple-400">Weigh in.</span>
           </h1>
           <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 mb-10 max-w-2xl mx-auto leading-relaxed">
             See the big questions your representatives are deciding,
@@ -158,7 +158,7 @@ export default async function HomePage() {
               </div>
               <h3 className="font-semibold text-gray-900 dark:text-white mb-1">Pick your issue</h3>
               <p className="text-sm text-gray-500 dark:text-gray-400">
-                Choose a topic you care about and AI writes a personalized message for each official.
+                Pick the issue, add why you care, and get a distinct letter for each official.
               </p>
             </div>
             <div className="text-center">
@@ -271,7 +271,7 @@ export default async function HomePage() {
                 Bill Tracking
               </h3>
               <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
-                Track legislation with AI-powered summaries so you always know what&apos;s at stake.
+                Follow bills in plain English — what they do and where they are in the process.
               </p>
             </Link>
 
@@ -321,9 +321,8 @@ export default async function HomePage() {
             Campaigns: Rally Others Around Your Issue
           </h2>
           <p className="text-gray-600 dark:text-gray-300 mb-8 max-w-xl mx-auto leading-relaxed">
-            Join a campaign and contact your representatives in minutes, or create a shareable
-            campaign page so anyone can take action on the issue you care about — with
-            AI-personalized messages for each participant.
+            Join a campaign and contact your representatives, or create a shareable page
+            so your supporters can write to theirs — each person in their own words.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/campaigns">
@@ -347,7 +346,7 @@ export default async function HomePage() {
             Learn &amp; Take Action
           </h2>
           <p className="text-gray-500 dark:text-gray-400 text-center mb-12 max-w-xl mx-auto">
-            Guides to help you make the most of your civic engagement
+            Short guides on contacting officials, following bills, and voting
           </p>
 
           <div className="grid sm:grid-cols-2 gap-6">

@@ -49,7 +49,7 @@ export function renderFollowUpHtml(
   <p style="font-size:15px;">Hi ${escapeHtml(data.userName)},</p>
   <p style="font-size:14px;color:#4b5563;">
     You sent ${data.messages.length} message${data.messages.length > 1 ? 's' : ''} to your officials that ${data.messages.length > 1 ? "haven't" : "hasn't"} received a response yet.
-    Following up can make a real difference — officials pay attention when constituents persist.
+    Offices log repeat contacts. A short follow-up tells them the issue hasn&rsquo;t gone away.
   </p>
 
   <table style="width:100%;border-collapse:collapse;margin:16px 0;">

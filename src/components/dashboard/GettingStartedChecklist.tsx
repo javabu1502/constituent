@@ -26,7 +26,7 @@ const steps = [
   {
     key: 'message',
     title: 'Send your first message',
-    description: 'Pick what matters to you, and AI drafts a message. You review and edit before anything is sent.',
+    description: 'Pick an issue, say why you care, and edit the draft before it goes out.',
     doneText: 'First message sent',
     href: '/contact',
   },
@@ -129,9 +129,6 @@ export function GettingStartedChecklist({ hasAddress, hasReps, hasMessages }: Ge
         })}
       </div>
 
-      <p className="text-xs text-gray-500 dark:text-gray-400 mt-4 text-center">
-        Most people complete all 3 steps in under 5 minutes.
-      </p>
     </div>
   );
 }

@@ -36,7 +36,7 @@ export default function BillBecomesLawGuidePage() {
 
         <div className="prose prose-gray dark:prose-invert max-w-none">
           <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
-            Understanding the legislative process helps you know when and how to make your voice heard. Here&apos;s how laws are made at both federal and state levels.
+            Knowing the legislative process tells you when a message still changes minds — and when a bill is already past that point. Here&apos;s how laws are made at both federal and state levels.
           </p>
 
           {/* Federal Legislative Process */}

@@ -234,7 +234,7 @@ export default function ImpeachmentGuidePage() {
             Want to hold your officials accountable?
           </h2>
           <p className="text-gray-600 dark:text-gray-300 mb-6">
-            Contact your representatives and senators to make your voice heard.
+            Tell your representatives and senators where you stand.
           </p>
           <Link
             href="/guides/how-to-contact-your-congressman"

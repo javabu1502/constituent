@@ -236,7 +236,7 @@ export default function RegisterToVotePage() {
         {/* CTA */}
         <div className="mt-10 bg-purple-50 dark:bg-purple-900/20 rounded-2xl p-8 text-center">
           <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
-            Registered? Now make your voice heard.
+            Registered? Write to the people on your ballot.
           </h2>
           <p className="text-gray-600 dark:text-gray-300 mb-6">
             Contact your officials about the issues that matter to you.

@@ -13,7 +13,7 @@ const COPY = {
   advocacy: {
     heading: 'Start an Advocacy Campaign',
     subtitle: 'Create a shareable page so others can contact their representatives about your issue.',
-    what: 'Rally people to contact their elected officials about an issue you care about. You set the issue and talking points; each supporter gets an AI-personalized message to send to their own representatives.',
+    what: 'Rally people to contact their elected officials about an issue you care about. You set the issue and talking points; each supporter sends their own message to their own representatives.',
     points: [
       'Share one link — supporters take action in minutes.',
       'Every message is personalized and routed to the right officials.',
@@ -153,8 +153,8 @@ export default async function CreateCampaignPage({
           >
             <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Advocacy</h2>
             <p className="text-sm text-gray-600 dark:text-gray-400">
-              Mobilize supporters to contact their representatives about a bill or issue. Each person sends an
-              AI-personalized message to their own officials.
+              Mobilize supporters to contact their representatives about a bill or issue. Each person sends
+              their own message to their own officials.
             </p>
           </Link>
           <Link

@@ -177,8 +177,8 @@ export default function StartAPetitionGuidePage() {
         </div>
 
         <div className="mt-10 bg-purple-50 dark:bg-purple-900/20 rounded-2xl p-8 text-center">
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">Ready to make your voice heard?</h2>
-          <p className="text-gray-600 dark:text-gray-300 mb-6">Pair your petition with a direct message to your elected officials for maximum impact.</p>
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">Petition live?</h2>
+          <p className="text-gray-600 dark:text-gray-300 mb-6">Pair it with a direct message — officials weigh signatures and letters differently, and the letter usually lands harder.</p>
           <Link href="/contact" className="inline-flex items-center gap-2 px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg transition-colors">
             Write to Your Officials
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
