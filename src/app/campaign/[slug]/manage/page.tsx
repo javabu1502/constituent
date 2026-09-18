@@ -173,15 +173,15 @@ export default async function ManageCampaignPage({
           </Link>
         </div>
         <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
-          Each action is one step of this campaign, aimed at the officials who matter at that step.
+          Break your campaign into actions, like a cosponsor push or a committee vote. Each one has its own targets and share link.
         </p>
 
         {actions.length === 0 ? (
           <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-8 text-center">
             <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-2">No actions yet</h3>
             <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 max-w-md mx-auto">
-              Actions follow your bill through each step: recruit cosponsors, target the committee, push each floor
-              vote, or thank supporters after a win.
+              Start with a cosponsor push or a committee vote. When the bill moves, add the next action and your past
+              supporters get invited back.
             </p>
             <Link
               href={addActionHref}

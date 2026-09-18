@@ -495,9 +495,8 @@ export function CampaignForm({
       {parentCampaignId && campaignType === 'advocacy' && (
         <div className="p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700 rounded-xl space-y-3">
           <p className="text-sm text-blue-800 dark:text-blue-300">
-            <span className="font-semibold">Adding a stage{parentName ? ` to “${parentName}”` : ''}.</span> Stages follow a
-            bill through Congress — each one targets the officials who matter at that step, and results roll up to the
-            parent campaign.
+            <span className="font-semibold">Adding an action{parentName ? ` to “${parentName}”` : ''}.</span> This
+            action only messages the officials involved in its step, and its results count toward the campaign total.
           </p>
           <div data-field="stageGoal">
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">

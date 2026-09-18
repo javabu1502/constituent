@@ -98,8 +98,8 @@ export async function CampaignStages({
         </Link>
       </div>
       <p className="text-xs text-gray-500 dark:text-gray-400 mb-4">
-        Follow the bill through Congress: recruit cosponsors, target the committee, then each floor vote. Every action
-        reaches only the officials who matter at that step.
+        Follow the bill: recruit cosponsors, win the committee, then each floor vote. Each action only messages the
+        officials involved in that step.
       </p>
       {ordered.length === 0 ? (
         <p className="text-sm text-gray-500 dark:text-gray-400">No actions yet.</p>

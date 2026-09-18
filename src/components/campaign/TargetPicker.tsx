@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { US_STATES } from '@/lib/constants';
 
 export interface TargetOfficial {
@@ -25,6 +25,16 @@ interface SavedList {
   officials: TargetOfficial[];
 }
 
+interface RosterRow {
+  id: string;
+  name: string;
+  level: 'federal' | 'state';
+  party: string | null;
+  state: string;
+  district: string | null;
+  chamber?: string | null;
+}
+
 /**
  * Who should messages go to? Defaults to everyone at the campaign's level;
  * orgs can narrow to hand-picked officials (with saved, reusable lists) or a
@@ -47,15 +57,17 @@ export function TargetPicker({
   onOfficialsChange: (o: TargetOfficial[]) => void;
   onPartyChange: (p: TargetParty) => void;
 }) {
-  const [query, setQuery] = useState('');
-  const [searchState, setSearchState] = useState(billState || '');
-  const [results, setResults] = useState<{ id: string; name: string; title: string; level: 'federal' | 'state'; party: string | null; state: string }[]>([]);
-  const [searching, setSearching] = useState(false);
+  // Browsable roster: people pick from checkboxes, they don't recall names.
+  const [scope, setScope] = useState<'us-senate' | 'us-house' | 'state'>(billState ? 'state' : 'us-senate');
+  const [rosterState, setRosterState] = useState(billState || '');
+  const [stateFilter, setStateFilter] = useState('');
+  const [nameFilter, setNameFilter] = useState('');
+  const [roster, setRoster] = useState<RosterRow[]>([]);
+  const [loadingRoster, setLoadingRoster] = useState(false);
   const [lists, setLists] = useState<SavedList[]>([]);
   const [saveName, setSaveName] = useState('');
   const [savingList, setSavingList] = useState(false);
   const [listError, setListError] = useState<string | null>(null);
-  const searchTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     if (mode !== 'officials') return;
@@ -66,34 +78,32 @@ export function TargetPicker({
   }, [mode]);
 
   useEffect(() => {
-    if (searchTimer.current) clearTimeout(searchTimer.current);
-    const q = query.trim();
-    if (q.length < 2) {
-      setResults([]);
+    if (mode !== 'officials') return;
+    if (scope === 'state' && rosterState.length !== 2) {
+      setRoster([]);
       return;
     }
-    searchTimer.current = setTimeout(async () => {
-      setSearching(true);
-      try {
-        const res = await fetch(`/api/legislators/search?q=${encodeURIComponent(q)}${searchState ? `&state=${searchState}` : ''}`);
-        const data = await res.json();
-        setResults(res.ok ? data.results || [] : []);
-      } catch {
-        setResults([]);
-      } finally {
-        setSearching(false);
-      }
-    }, 350);
-    return () => {
-      if (searchTimer.current) clearTimeout(searchTimer.current);
-    };
-  }, [query, searchState]);
+    setLoadingRoster(true);
+    fetch(`/api/legislators/roster?scope=${scope}${scope === 'state' ? `&state=${rosterState}` : ''}`)
+      .then((r) => (r.ok ? r.json() : { roster: [] }))
+      .then((d) => setRoster(d.roster || []))
+      .catch(() => setRoster([]))
+      .finally(() => setLoadingRoster(false));
+  }, [mode, scope, rosterState]);
 
-  const addOfficial = (r: { id: string; name: string; level: 'federal' | 'state'; state: string }) => {
-    if (officials.some((o) => o.id === r.id)) return;
-    onOfficialsChange([...officials, { id: r.id, name: r.name, level: r.level, state: r.state }]);
-    setQuery('');
-    setResults([]);
+  const visible = useMemo(() => {
+    const nf = nameFilter.trim().toLowerCase();
+    return roster.filter(
+      (r) => (!stateFilter || r.state === stateFilter) && (!nf || r.name.toLowerCase().includes(nf))
+    );
+  }, [roster, stateFilter, nameFilter]);
+
+  const toggleOfficial = (r: RosterRow) => {
+    if (officials.some((o) => o.id === r.id)) {
+      onOfficialsChange(officials.filter((o) => o.id !== r.id));
+    } else {
+      onOfficialsChange([...officials, { id: r.id, name: r.name, level: r.level, state: r.state }]);
+    }
   };
 
   const saveList = async () => {
@@ -160,40 +170,69 @@ export function TargetPicker({
             </select>
           )}
 
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
+            <select
+              value={scope}
+              onChange={(e) => setScope(e.target.value as typeof scope)}
+              className={inputClass}
+              aria-label="Which body"
+            >
+              <option value="us-senate">U.S. Senate</option>
+              <option value="us-house">U.S. House</option>
+              <option value="state">A state legislature</option>
+            </select>
+            {scope === 'state' ? (
+              <select value={rosterState} onChange={(e) => setRosterState(e.target.value)} className={inputClass} aria-label="State">
+                <option value="">Pick a state…</option>
+                {US_STATES.map((s) => (
+                  <option key={s.code} value={s.code}>{s.name}</option>
+                ))}
+              </select>
+            ) : (
+              <select value={stateFilter} onChange={(e) => setStateFilter(e.target.value)} className={inputClass} aria-label="Filter by state">
+                <option value="">All states</option>
+                {US_STATES.map((s) => (
+                  <option key={s.code} value={s.code}>{s.code} only</option>
+                ))}
+              </select>
+            )}
             <input
               type="text"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search by name, e.g. Rosen"
-              className={`${inputClass} flex-1`}
+              value={nameFilter}
+              onChange={(e) => setNameFilter(e.target.value)}
+              placeholder="Filter the list"
+              className={`${inputClass} flex-1 min-w-[10rem]`}
             />
-            <select value={searchState} onChange={(e) => setSearchState(e.target.value)} className={inputClass} aria-label="Include a state legislature">
-              <option value="">Federal only</option>
-              {US_STATES.map((s) => (
-                <option key={s.code} value={s.code}>+ {s.code} legislature</option>
-              ))}
-            </select>
           </div>
 
-          {searching && <p className="text-xs text-gray-400">Searching…</p>}
-          {results.length > 0 && (
-            <ul className="border border-gray-200 dark:border-gray-600 rounded-lg divide-y divide-gray-100 dark:divide-gray-700 max-h-56 overflow-y-auto">
-              {results.map((r) => (
-                <li key={r.id}>
-                  <button
-                    type="button"
-                    onClick={() => addOfficial(r)}
-                    className="w-full text-left px-3 py-2 text-sm hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center justify-between gap-2"
-                  >
-                    <span className="text-gray-900 dark:text-white">{r.name}</span>
-                    <span className="text-xs text-gray-500 dark:text-gray-400 shrink-0">
-                      {r.title}{r.party ? `, ${r.party.charAt(0)}` : ''}, {r.state}
-                    </span>
-                  </button>
-                </li>
-              ))}
+          {loadingRoster ? (
+            <p className="text-xs text-gray-400">Loading the list…</p>
+          ) : visible.length > 0 ? (
+            <ul className="border border-gray-200 dark:border-gray-600 rounded-lg divide-y divide-gray-100 dark:divide-gray-700 max-h-64 overflow-y-auto">
+              {visible.map((r) => {
+                const checked = officials.some((o) => o.id === r.id);
+                return (
+                  <li key={r.id}>
+                    <label className="flex items-center gap-3 px-3 py-2 text-sm cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700">
+                      <input
+                        type="checkbox"
+                        checked={checked}
+                        onChange={() => toggleOfficial(r)}
+                        className="h-4 w-4 rounded text-purple-600 focus:ring-purple-500"
+                      />
+                      <span className="flex-1 text-gray-900 dark:text-white">{r.name}</span>
+                      <span className="text-xs text-gray-500 dark:text-gray-400 shrink-0">
+                        {r.party ? `${r.party.charAt(0)}, ` : ''}{r.state}{r.district ? `-${r.district}` : ''}
+                      </span>
+                    </label>
+                  </li>
+                );
+              })}
             </ul>
+          ) : (
+            <p className="text-xs text-gray-400">
+              {scope === 'state' && rosterState.length !== 2 ? 'Pick a state to see its legislators.' : 'No one matches that filter.'}
+            </p>
           )}
 
           {officials.length > 0 && (
@@ -233,7 +272,7 @@ export function TargetPicker({
               </div>
               {listError && <p className="text-xs text-red-600 dark:text-red-400">{listError}</p>}
               <p className="text-xs text-gray-500 dark:text-gray-400">
-                Participants whose representatives are on this list write to them. Everyone else is shown other ways to help.
+                Supporters write to whichever of these officials represent them. If none do, they can still share the campaign.
               </p>
             </>
           )}
@@ -265,7 +304,7 @@ export function TargetPicker({
             </select>
           </div>
           <p className="text-xs text-gray-500 dark:text-gray-400">
-            Participants write only to their own representatives who match. Everyone else is shown other ways to help.
+            Supporters write to their own representatives who match this. If none match, they can still share the campaign.
           </p>
         </div>
       )}
