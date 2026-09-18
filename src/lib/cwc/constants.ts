@@ -81,9 +81,10 @@ export const LOC_TOPIC_SET: ReadonlySet<string> = new Set(LOC_TOPICS);
 // accepts the 9-char literal "H.Con.Res"; "H.Con.Res." (10 chars) matches no
 // branch and is REJECTED. So H.Con.Res must NOT have a trailing dot, even though
 // every sibling type does. (Verified: "H.Con.Res." → fails, "H.Con.Res" → passes.)
-// CAUTION: the House sample XML uses LOWERCASE ("hr", "s"). These Title-case
-// values are Senate-correct; confirm House casing against /v2/validate before
-// House go-live and make this chamber-aware if the House schema is strict.
+// RESOLVED 2026-09-18 (house-uat-probe vs /v2/validate): the House is strict
+// about its LOWERCASE sample-XML forms — "H.Con.Res"/"H.R." are rejected,
+// "hconres"/"hr" accepted. The builder is chamber-aware: House emits the
+// lowercase key itself; Senate emits these Title-case RNG values.
 export const BILL_TYPE_ABBREVIATIONS = {
   hamdt: 'H.Amdt.',
   hconres: 'H.Con.Res',

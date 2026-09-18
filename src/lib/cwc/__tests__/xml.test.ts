@@ -138,6 +138,23 @@ describe('buildCwcXml', () => {
     expect(xml).not.toContain('H.Con.Res.'); // the trailing-dot form is rejected by the RNG
   });
 
+  it('House deliveries emit lowercase bill types (House /v2/validate rejects Title-case, probed 2026-09-18)', () => {
+    const xml = buildCwcXml(
+      validDelivery({
+        chamber: 'house',
+        officeCode: 'HNY01',
+        message: {
+          subject: 'Regarding this resolution',
+          topics: ['Government Operations and Politics'],
+          bills: [{ congress: 119, type: 'hconres', number: 12 }],
+          constituentMessage: 'I want to weigh in on this concurrent resolution.',
+        },
+      }),
+    );
+    expect(xml).toContain('<BillTypeAbbreviation>hconres</BillTypeAbbreviation>');
+    expect(xml).not.toContain('H.Con.Res');
+  });
+
   it('orders OrganizationStatement before ConstituentMessage when both present', () => {
     const xml = buildCwcXml(
       validDelivery({

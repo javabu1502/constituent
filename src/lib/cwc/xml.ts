@@ -235,7 +235,11 @@ export function buildCwcXml(delivery: CwcDelivery): string {
     for (const bill of m.bills) {
       L.push('<Bill>');
       L.push(tag('BillCongress', String(bill.congress)));
-      L.push(tag('BillTypeAbbreviation', BILL_TYPE_ABBREVIATIONS[bill.type]));
+      // The two chambers disagree on casing: the House validator accepts ONLY
+      // the lowercase sample-XML forms ("hr", "hconres" — our type keys),
+      // rejecting the Title-case Senate-RNG forms (probed /v2/validate
+      // 2026-09-18); the Senate RNG accepts only Title-case.
+      L.push(tag('BillTypeAbbreviation', delivery.chamber === 'house' ? bill.type : BILL_TYPE_ABBREVIATIONS[bill.type]));
       L.push(tag('BillNumber', String(bill.number)));
       L.push('</Bill>');
     }
