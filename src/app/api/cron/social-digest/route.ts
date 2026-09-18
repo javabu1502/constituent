@@ -44,22 +44,35 @@ export async function GET(request: NextRequest) {
           .join('')}</ul>`
       : '<p style="color:#888">none</p>';
 
+  // Only email when something needs Jared: an approval waiting or a failure.
+  // The all-quiet "10 posted" days were going straight to trash unread
+  // (2026-09-18), so routine activity stays out of the inbox. Full history
+  // lives in social_posts either way.
+  if (pending.length === 0 && failed.length === 0) {
+    return NextResponse.json({
+      ok: true,
+      emailed: false,
+      counts: { posted: posted.length, pending: 0, skipped: skipped.length, failed: 0 },
+    });
+  }
+
   const html = `
     <h2>My Democracy — Social Desk daily digest</h2>
     <p>Last 24h. Kill switch and mode live in Supabase <code>social_config</code>.</p>
-    <h3>Posted (${posted.length})</h3>${list(posted)}
     <h3>Awaiting your approval (${pending.length})</h3>${list(pending)}
-    <h3>Skipped by guardrails (${skipped.length})</h3>${list(skipped, true)}
     <h3>Failed (${failed.length})</h3>${list(failed, true)}
+    <h3>Posted (${posted.length})</h3>${list(posted)}
+    <h3>Skipped by guardrails (${skipped.length})</h3>${list(skipped, true)}
   `;
 
   await sendAdminNotification(
-    `Social Desk digest: ${posted.length} posted, ${pending.length} awaiting approval`,
+    `Social Desk: ${pending.length} awaiting approval${failed.length ? `, ${failed.length} failed` : ''}`,
     html,
   );
 
   return NextResponse.json({
     ok: true,
+    emailed: true,
     counts: { posted: posted.length, pending: pending.length, skipped: skipped.length, failed: failed.length },
   });
 }

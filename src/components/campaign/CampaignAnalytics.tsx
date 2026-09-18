@@ -197,6 +197,10 @@ function StorytellingAnalytics({ analytics, campaignName, insightsPanel }: { ana
   const [attributionFilter, setAttributionFilter] = useState('');
   const [useFilter, setUseFilter] = useState('');
   const [officialFilter, setOfficialFilter] = useState('');
+  // "Reachable" stat expands into the actual contact list, so getting an
+  // email address never requires the CSV export.
+  const [showReachable, setShowReachable] = useState(false);
+  const [copiedEmails, setCopiedEmails] = useState(false);
 
   const active = useMemo(() => analytics.stories.filter((s) => !s.revoked), [analytics.stories]);
 
@@ -307,12 +311,63 @@ function StorytellingAnalytics({ analytics, campaignName, insightsPanel }: { ana
           <p className="text-3xl font-bold text-gray-900 dark:text-white mt-1">{pressReady}</p>
           <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">OK to share with media</p>
         </div>
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
+        <button
+          type="button"
+          onClick={() => setShowReachable((v) => !v)}
+          disabled={contactable === 0}
+          className={`bg-white dark:bg-gray-800 rounded-xl border shadow-sm p-5 text-left transition-colors ${
+            showReachable
+              ? 'border-purple-500'
+              : 'border-gray-200 dark:border-gray-700'
+          } ${contactable > 0 ? 'hover:border-purple-400 dark:hover:border-purple-500 cursor-pointer' : ''}`}
+        >
           <p className="text-sm text-gray-500 dark:text-gray-400">Reachable</p>
           <p className="text-3xl font-bold text-gray-900 dark:text-white mt-1">{contactable}</p>
-          <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">Agreed to follow-up contact</p>
-        </div>
+          <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
+            {contactable > 0 ? (showReachable ? 'Agreed to follow-up. Hide emails' : 'Agreed to follow-up. See emails') : 'Agreed to follow-up contact'}
+          </p>
+        </button>
       </div>
+
+      {/* The reachable list: who agreed to follow-up, with one-click emails */}
+      {showReachable && contactable > 0 && (
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
+          <div className="flex items-center justify-between gap-3 mb-3">
+            <h3 className="text-base font-semibold text-gray-900 dark:text-white">Reachable storytellers</h3>
+            <button
+              type="button"
+              onClick={async () => {
+                const emails = active.filter((s) => !!s.email).map((s) => s.email as string);
+                try {
+                  await navigator.clipboard.writeText([...new Set(emails)].join(', '));
+                  setCopiedEmails(true);
+                  setTimeout(() => setCopiedEmails(false), 2000);
+                } catch {
+                  // clipboard unavailable; the addresses are visible below
+                }
+              }}
+              className="px-3 py-1.5 text-sm font-medium border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg transition-colors"
+            >
+              {copiedEmails ? 'Copied!' : 'Copy all emails'}
+            </button>
+          </div>
+          <ul className="divide-y divide-gray-100 dark:divide-gray-700">
+            {active.filter((s) => !!s.email).map((s) => (
+              <li key={s.id} className="py-2 flex flex-wrap items-center justify-between gap-2">
+                <span className="text-sm text-gray-900 dark:text-white">
+                  {s.display_name}
+                  {(s.city || s.state) && (
+                    <span className="text-xs text-gray-500 dark:text-gray-400"> · {[s.city, s.state].filter(Boolean).join(', ')}</span>
+                  )}
+                </span>
+                <a href={`mailto:${s.email}`} className="text-sm text-purple-600 dark:text-purple-400 hover:underline">
+                  {s.email}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
 
       {/* AI-themed insights — what constituents are actually saying */}
       {insightsPanel}
