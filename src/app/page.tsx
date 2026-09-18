@@ -89,9 +89,12 @@ export default async function HomePage() {
       <section className="py-16 sm:py-24 px-4 bg-gradient-to-b from-purple-50 via-purple-50/50 to-white dark:from-gray-800 dark:via-gray-800/50 dark:to-gray-900">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
-            Your representatives are voting.
+            {/* Jared's call (2026-09-18): keep the original hero. It reads
+                warm, it's his, and one deliberate use of a familiar line is
+                not the recycled-everywhere problem the copy pass fixed. */}
+            Your voice matters.
             <br />
-            <span className="text-purple-600 dark:text-purple-400">Weigh in.</span>
+            <span className="text-purple-600 dark:text-purple-400">Make it heard.</span>
           </h1>
           <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 mb-10 max-w-2xl mx-auto leading-relaxed">
             See the big questions your representatives are deciding,

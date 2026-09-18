@@ -3,6 +3,7 @@
 import { useMemo, useState, type ReactNode } from 'react';
 import { STORY_USAGE_OPTIONS } from '@/lib/story-usage';
 import { US_STATES } from '@/lib/constants';
+import { CollapsibleSection } from '@/components/ui/CollapsibleSection';
 
 interface OfficialContacted {
   name: string;
@@ -369,19 +370,23 @@ function StorytellingAnalytics({ analytics, campaignName, insightsPanel }: { ana
         </div>
       )}
 
-      {/* AI-themed insights — what constituents are actually saying */}
-      {insightsPanel}
+      {/* The middle sections collapse so the stories are one scroll away —
+          reading stories is the page's main job. */}
+      {insightsPanel && (
+        <CollapsibleSection title="What Constituents Are Saying" defaultOpen={false}>
+          {insightsPanel}
+        </CollapsibleSection>
+      )}
 
-      {/* Use over time */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
-        <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-4">Stories Over Time (Last 30 Days)</h3>
-        <DailyBarChart counts={dailyCounts} unit="story" />
-      </div>
-
-      {/* By elected official — target your outreach */}
-      {analytics.officials.length > 0 && (
+      <CollapsibleSection title="Stories Over Time" defaultOpen={false}>
         <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
-          <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-1">By Elected Official</h3>
+          <DailyBarChart counts={dailyCounts} unit="story" />
+        </div>
+      </CollapsibleSection>
+
+      {analytics.officials.length > 0 && (
+        <CollapsibleSection title="By Elected Official" badge={`${analytics.officials.length}`} defaultOpen={false}>
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
           <p className="text-xs text-gray-500 dark:text-gray-400 mb-4">
             Every official — federal, state, and local — matched from your storytellers&rsquo; addresses, with how many
             storytellers each represents. Click one to pull up their constituents&rsquo; stories, then bring exactly those
@@ -436,6 +441,7 @@ function StorytellingAnalytics({ analytics, campaignName, insightsPanel }: { ana
             );
           })}
         </div>
+        </CollapsibleSection>
       )}
 
       {/* Story browser */}
@@ -919,8 +925,13 @@ export function CampaignAnalytics({ analytics, campaignName, insightsPanel, hide
         </div>
       </div>
 
-      {/* AI-themed insights — what constituents are actually saying */}
-      {insightsPanel}
+      {/* Middle sections collapse so the messages are one scroll away —
+          reading what constituents sent is the page's main job. */}
+      {insightsPanel && (
+        <CollapsibleSection title="What Constituents Are Saying" defaultOpen={false}>
+          {insightsPanel}
+        </CollapsibleSection>
+      )}
 
       {/* Where participants stand — only neutral weigh-ins with a genuine
           two-way split. Directional campaigns (one side only) never show this. */}
@@ -956,18 +967,17 @@ export function CampaignAnalytics({ analytics, campaignName, insightsPanel, hide
       })()}
 
       {/* Daily activity chart */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
-        <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-4">
-          Daily Activity (Last 30 Days)
-        </h3>
-        <DailyBarChart counts={analytics.daily_counts} unit="action" />
-      </div>
+      <CollapsibleSection title="Daily Activity" defaultOpen={false}>
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
+          <DailyBarChart counts={analytics.daily_counts} unit="action" />
+        </div>
+      </CollapsibleSection>
 
       {/* Officials contacted — where this campaign's pressure is landing.
           Hidden on parents: the whip board is the one legislators section. */}
       {!hideOfficialsPanel && analytics.officials_contacted.length > 0 && (
+        <CollapsibleSection title="Officials Contacted" badge={`${analytics.officials_contacted.length}`} defaultOpen={false}>
         <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
-          <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-1">Officials Contacted</h3>
           <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">
             Which lawmakers your campaign&rsquo;s messages went to — use this to see where pressure is landing and
             which offices to target next.
@@ -1027,9 +1037,11 @@ export function CampaignAnalytics({ analytics, campaignName, insightsPanel, hide
             ))}
           </div>
         </div>
+        </CollapsibleSection>
       )}
 
       {/* Outcomes and Delivery methods side by side */}
+      <CollapsibleSection title="Outcomes and Delivery" defaultOpen={false}>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {/* Message outcomes — how far each message got */}
         <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
@@ -1095,8 +1107,10 @@ export function CampaignAnalytics({ analytics, campaignName, insightsPanel, hide
           )}
         </div>
       </div>
+      </CollapsibleSection>
 
       {/* Top states and Top cities side by side */}
+      <CollapsibleSection title="Top States and Cities" defaultOpen={false}>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
           <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-4">
@@ -1156,6 +1170,7 @@ export function CampaignAnalytics({ analytics, campaignName, insightsPanel, hide
           )}
         </div>
       </div>
+      </CollapsibleSection>
 
       {/* Message browser + CSV export — read every message, dig deeper */}
       {analytics.campaign_slug && analytics.messages && analytics.messages.length > 0 && (
