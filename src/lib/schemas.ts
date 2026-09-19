@@ -186,7 +186,9 @@ export const createCampaignSchema = z.object({
       ctx.addIssue({ code: 'custom', path: ['usage_tags'], message: 'Select at least one way you’d like to use these stories' });
     }
   } else {
-    if (!data.issue_area || data.issue_area.trim().length < 1) {
+    // Actions inherit the parent campaign's issue area; only standalone
+    // campaigns pick one.
+    if ((!data.issue_area || data.issue_area.trim().length < 1) && !data.parent_campaign_id) {
       ctx.addIssue({ code: 'custom', path: ['issue_area'], message: 'Issue area is required' });
     }
     if (!data.target_level) {

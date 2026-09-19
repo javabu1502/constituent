@@ -342,7 +342,7 @@ export function CampaignForm({
       errs.description = 'Description must be at least 10 characters';
     }
     if (campaignType === 'advocacy') {
-      if (!issueArea.trim()) {
+      if (!issueArea.trim() && !parentCampaignId) {
         errs.issueArea = 'Select an issue area';
       }
       // Stages inherit the parent's position — only standalone campaigns pick.
@@ -620,7 +620,9 @@ export function CampaignForm({
 
       {campaignType === 'advocacy' && (
         <>
-      {/* Issue Area (advocacy only — storytelling uses the story prompt for its topic) */}
+      {/* Issue Area (advocacy only — storytelling uses the story prompt for
+          its topic; actions inherit the parent campaign's issue) */}
+      {!parentCampaignId && (
       <div data-field="issueArea">
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
           Issue Area <span className="text-red-500">*</span>
@@ -636,6 +638,7 @@ export function CampaignForm({
         />
         <FieldError field="issueArea" />
       </div>
+      )}
 
       {/* Target Level */}
       <div>

@@ -152,8 +152,9 @@ export async function POST(request: NextRequest) {
       approved_at: new Date().toISOString(),
       headline,
       description,
-      issue_area,
-      issue_subtopic: issue_subtopic || null,
+      // Actions carry the campaign's issue; it is set once on the parent.
+      issue_area: parent ? parent.issue_area : issue_area,
+      issue_subtopic: parent ? parent.issue_subtopic : issue_subtopic || null,
       target_level: isStory ? 'federal' : target_level,
       // Stages inherit position and talking points from the parent unless
       // they bring their own (talking points usually DO change per stage).
