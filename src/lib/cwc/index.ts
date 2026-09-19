@@ -1,0 +1,76 @@
+// Communicating With Congress (CWC) delivery module.
+//
+// Build a spec-compliant XML payload (to the strict Senate schema, which the
+// House also accepts) and send it through our whitelisted static IPs.
+//
+//   const xml = buildCwcXml(delivery);              // validate + render
+//   const result = await validateHouse(delivery);   // check, nothing sent
+//   const sent = await sendHouse(delivery);         // queue for delivery
+//
+// Required env: QUOTAGUARD_URL, CWC_DELIVERY_AGENT, CWC_ACK_EMAIL,
+// CWC_CONTACT_NAME, CWC_CONTACT_EMAIL, CWC_CONTACT_PHONE, CWC_HOUSE_UAT_API_KEY
+// (and CWC_HOUSE_API_KEY for production).
+
+export * from './constants';
+export * from './types';
+export { buildCampaignId } from './campaign-id';
+export { buildCwcXml, CwcValidationError, newDeliveryId, today, formatPhone } from './xml';
+// NOTE: sendHouse/sendSenate are deliberately NOT re-exported (compliance
+// verification 2026-08-31): they hit live endpoints with only XML validation
+// and the rate permit — every real send must go through sendCwcDelivery,
+// where George's gates (state-bill, stance, PII, constituent verification,
+// active offices, maintenance windows, idempotent ids) are mandatory.
+export {
+  validateHouse, getActiveOffices,
+  getActiveOfficesSenate,
+  loadActiveOfficeCodes, sendBatch,
+  checkEgressIp, type CwcResult,
+} from './client';
+export {
+  stripSignatureBlock, blocksFederalDelivery,
+  containsSignatureBlock, cwcSendableProblems, assertCwcSendable, CwcComplianceError,
+  redactConstituentPii, containsConstituentPii, placeMessage, normalizeBodyText,
+  type PiiFields,
+} from './content';
+export {
+  getOrCreateDeliveryId, recordDeliveryResult, statusFromHttp, xmlSha256,
+  setDeliveryLogClientFactory,
+  type CwcEnvironment, type CwcDeliveryStatus, type DeliveryLogRow,
+} from './delivery-log';
+export {
+  sendCwcDelivery, getActiveOfficeCodesCached, clearActiveOfficeCache,
+  type SendCwcOptions, type SendCwcOutcome, type ActiveOfficeOptions,
+} from './send';
+export {
+  acquireSendPermit, ratePermitScope, setRatePermitClientFactory,
+  RatePermitBackpressureError,
+  type AcquirePermitOptions,
+} from './rate-permit';
+export {
+  enqueueCwcDeliveries, processCwcSendQueue, setSendQueueClientFactory,
+  type QueueItem, type SendQueueJob, type ProcessQueueOptions, type ProcessQueueSummary,
+} from './queue';
+export {
+  resolveOfficeCode,
+  houseOfficeCode,
+  senateOfficeCode,
+  senateSeatCodesForState,
+  isValidOfficeCode,
+  SENATE_SEAT_CODES,
+  SENATE_TEST_OFFICE_CODES,
+  type OfficeResolution,
+} from './offices';
+export {
+  verifyConstituent,
+  verifyConstituentForOffice,
+  type VerifyResult,
+  type VerifyReason,
+  type ConstituentAddress,
+} from './verify';
+export {
+  chooseDeliveryChannel,
+  routeDelivery,
+  type DeliveryChannel,
+  type ChannelDecision,
+  type RouteOptions,
+} from './delivery-router';
