@@ -1,6 +1,13 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
+import { notFound } from 'next/navigation';
+
+// UNPUBLISHED until Jared approves the real bio + photo (2026-09-21): the
+// page still carries scaffold placeholder copy and must not be public.
+// Approved draft lives in the session notes; delete the notFound() gate
+// once the bio facts and photo land.
+const TEAM_PAGE_LIVE = false;
 
 export const metadata: Metadata = {
   title: 'Team | My Democracy',
@@ -20,6 +27,7 @@ function SectionIcon({ children }: { children: ReactNode }) {
 }
 
 export default function TeamPage() {
+  if (!TEAM_PAGE_LIVE) notFound();
   return (
     <div className="py-12 px-4">
       <div className="max-w-3xl mx-auto">

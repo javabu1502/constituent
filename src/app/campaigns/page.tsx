@@ -167,14 +167,6 @@ export default function CampaignsPage() {
         <OrgAccessForm />
       </div>
 
-      {/* Founder trust */}
-      <p className="text-center text-sm text-gray-500 dark:text-gray-400 mb-4">
-        My Democracy is independent and founder-led.{' '}
-        <Link href="/team" className="text-purple-600 dark:text-purple-400 hover:underline font-medium">
-          Meet the founder and read why it exists →
-        </Link>
-      </p>
-
       {/* Constituent redirect */}
       <p className="text-center text-sm text-gray-500 dark:text-gray-400">
         Just want to contact your own officials or weigh in on an issue? That&apos;s free, always.{' '}
