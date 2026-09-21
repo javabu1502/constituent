@@ -118,6 +118,12 @@ export function CampaignParticipate({
   const [state, setState] = useState('');
   const [zip, setZip] = useState('');
   const [personalWhy, setPersonalWhy] = useState('');
+  // Optional follow-up questions (compose step sub-phase): 1-4 short AI
+  // questions that draw out concrete detail before drafting. Empty array =
+  // phase not active.
+  const [followUpQuestions, setFollowUpQuestions] = useState<string[]>([]);
+  const [followUpAnswers, setFollowUpAnswers] = useState<string[]>([]);
+  const [fetchingQuestions, setFetchingQuestions] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
   // True when any review message is a manual-compose starter draft instead
@@ -145,7 +151,9 @@ export function CampaignParticipate({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [step]);
 
-  const draftCore = async () => {
+  // whyOverride lets the follow-up step pass its just-enriched text directly
+  // (state updates haven't flushed yet when it calls this).
+  const draftCore = async (whyOverride?: string) => {
     setError(null);
     setCoreStatus('drafting');
     try {
@@ -156,7 +164,7 @@ export function CampaignParticipate({
         body: JSON.stringify({
           campaignSlug: campaign.slug,
           stance: isOfficial ? stance ?? undefined : undefined,
-          personalWhy: personalWhy.trim() || undefined,
+          personalWhy: (whyOverride ?? personalWhy).trim() || undefined,
           turnstileToken: turnstileToken || undefined,
         }),
       });
@@ -172,6 +180,55 @@ export function CampaignParticipate({
     } finally {
       setCoreStatus('idle');
     }
+  };
+
+  // Between the why-input and drafting: fetch 1-4 short follow-up questions.
+  // This step is optional by design — any failure, non-OK response, or zero
+  // questions falls straight through to drafting, exactly as before.
+  const startDraftFlow = async () => {
+    setError(null);
+    setFetchingQuestions(true);
+    try {
+      const res = await fetch('/api/follow-up-questions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          headline: campaign.headline.slice(0, 200),
+          stance: isOfficial ? stance ?? undefined : undefined,
+          personalWhy: personalWhy.trim().slice(0, 2000),
+        }),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        const qs = Array.isArray(data?.questions)
+          ? data.questions.filter((q: unknown): q is string => typeof q === 'string' && !!q.trim()).slice(0, 4)
+          : [];
+        if (qs.length > 0) {
+          setFollowUpQuestions(qs);
+          setFollowUpAnswers(qs.map(() => ''));
+          setFetchingQuestions(false);
+          fireFunnel('participate_followups_viewed');
+          return;
+        }
+      }
+    } catch {
+      // Questions are a bonus, never a gate.
+    }
+    setFetchingQuestions(false);
+    void draftCore();
+  };
+
+  // Continue and Skip both land here: append only the participant's ANSWERS
+  // (their own words) to the personal why — never our question text, which
+  // downstream checks would treat as words the constituent wrote themselves.
+  // Questions are cleared before drafting so a failed draft can't re-append.
+  const finishFollowUps = () => {
+    const answers = followUpAnswers.map((a) => a.trim()).filter(Boolean);
+    const enrichedWhy = [personalWhy.trim(), answers.join('\n')].filter(Boolean).join('\n\n');
+    setPersonalWhy(enrichedWhy);
+    setFollowUpQuestions([]);
+    setFollowUpAnswers([]);
+    void draftCore(enrichedWhy);
   };
 
   // Auto-fill from profile for logged-in users
@@ -642,7 +699,47 @@ export function CampaignParticipate({
           </div>
         )}
 
-        {!coreDraft ? (
+        {!coreDraft && followUpQuestions.length > 0 ? (
+          <>
+            <div>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">A couple quick questions</h3>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                Your answers make your letter specific. Skip anything.
+              </p>
+            </div>
+            <div className="space-y-4">
+              {followUpQuestions.map((question, i) => (
+                <div key={i}>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    {question}
+                  </label>
+                  <input
+                    type="text"
+                    value={followUpAnswers[i] ?? ''}
+                    onChange={(e) =>
+                      setFollowUpAnswers((prev) => prev.map((a, j) => (j === i ? e.target.value : a)))
+                    }
+                    maxLength={300}
+                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
+                  />
+                </div>
+              ))}
+            </div>
+            <div className="flex gap-2">
+              <Button onClick={finishFollowUps} disabled={coreStatus === 'drafting'} className="flex-1">
+                {coreStatus === 'drafting' ? 'Writing your message…' : 'Continue'}
+              </Button>
+              <button
+                type="button"
+                onClick={finishFollowUps}
+                disabled={coreStatus === 'drafting'}
+                className="px-4 py-2 border border-gray-300 dark:border-gray-600 text-sm text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700"
+              >
+                Skip
+              </button>
+            </div>
+          </>
+        ) : !coreDraft ? (
           <>
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -657,8 +754,12 @@ export function CampaignParticipate({
                 className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent resize-y bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
               />
             </div>
-            <Button onClick={() => void draftCore()} disabled={coreStatus === 'drafting'} className="w-full">
-              {coreStatus === 'drafting' ? 'Writing your message…' : 'Draft my message'}
+            <Button
+              onClick={() => void startDraftFlow()}
+              disabled={coreStatus === 'drafting' || fetchingQuestions}
+              className="w-full"
+            >
+              {coreStatus === 'drafting' ? 'Writing your message…' : fetchingQuestions ? 'One moment…' : 'Draft my message'}
             </Button>
             <p className="text-xs text-gray-500 dark:text-gray-400 text-center">
               You&apos;ll see and edit the message before anything else happens — no address needed yet.

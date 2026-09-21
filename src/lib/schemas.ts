@@ -316,6 +316,16 @@ export const messageFeedbackSchema = z.object({
   rating: z.enum(['positive', 'negative']),
 });
 
+// Compose-step enrichment: after a supporter writes why they care, the AI
+// asks 1-4 very short questions to draw out concrete detail. Distinct from
+// generateFollowUpSchema below, which drafts follow-up MESSAGES to officials.
+export const followUpQuestionsSchema = z.object({
+  headline: z.string().min(1).max(200),
+  stance: z.enum(['support', 'oppose', 'undecided']).optional(),
+  // Empty is valid: no story yet means the questions become gentle starters.
+  personalWhy: z.string().max(2000, 'Your personal story is a bit long — please keep it under 2,000 characters.'),
+});
+
 export const generateFollowUpSchema = z.object({
   originalMessageId: z.string().uuid(),
   followUpType: z.enum(['no_response', 'thank_you']),
