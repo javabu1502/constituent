@@ -5,44 +5,44 @@ import { OrgAccessForm } from '@/components/campaign/OrgAccessForm';
 export const metadata: Metadata = {
   title: 'Advocacy Platform | My Democracy',
   description:
-    'Run your whole legislative campaign in one place: authentic constituent messages, step-by-step bill tracking, whip counts, story collection, and funder-ready impact reports. Now onboarding pilot organizations.',
+    'Share one link and each supporter writes to their own legislators in their own words. Count the votes, collect stories with consent, and hand funders a real report. Now onboarding pilot organizations.',
   alternates: { canonical: 'https://www.mydemocracy.app/campaigns' },
   openGraph: {
     title: 'Advocacy Platform | My Democracy',
     description:
-      'Authentic constituent voice, legislative intelligence, and impact reporting in one platform. Now onboarding pilot organizations.',
+      'Your supporters write to their own legislators. You see the whip count, the stories, and the report. Now onboarding pilot organizations.',
   },
 };
 
 const PILLARS = [
   {
     title: 'Take Action',
-    lead: 'Campaigns that follow the bill.',
+    lead: 'Follow the bill from cosponsors to the floor.',
     points: [
-      'Actions for each step: cosponsors, committee, floor votes, thank-yous',
-      'Committee-true targeting: messages only reach the officials who actually decide',
-      'Every message unique, in the constituent’s own voice; your talking points woven in, visibly',
-      'Supporters re-engaged automatically when the bill moves',
+      'Add an action for each step: cosponsors, committee, floor votes, a thank-you after a win',
+      'Committee actions only message that committee\u2019s members',
+      'No two supporters send the same letter, and your talking points are in every one',
+      'When the bill moves, past supporters get an email with the next action',
     ],
   },
   {
     title: 'Storytelling',
-    lead: 'The stories that move votes, collected with consent.',
+    lead: 'Collect real stories, with permission to use them.',
     points: [
-      'Guided story collection with attribution and usage consent built in',
-      'AI themes what people actually say, with verbatim de-identified quotes',
-      'Press-ready and follow-up-ready flags on every story',
-      'Stories feed your hearings, your reports, and your campaigns',
+      'A guided chat helps each person write their story',
+      'Storytellers choose how they are named and how you may use each story',
+      'See which stories are cleared for press and who you may contact',
+      'Read everything on your dashboard or export a spreadsheet',
     ],
   },
   {
     title: 'Intelligence',
-    lead: 'The org side nobody else has.',
+    lead: 'Count the votes and track your own work.',
     points: [
-      'Whip counts per bill with committee pass projections',
-      'Legislator profiles: committees, positions across your bills, meeting notes, constituent pressure',
-      'Lobbying hours logged once, reported everywhere',
-      'Coalition tracking: who supports, who opposes, what they said',
+      'A whip board: mark where each member stands and see if you have the votes',
+      'A profile per legislator: meeting notes, their positions on your bills, and how many constituents wrote them',
+      'Log lobbying hours once and they appear in your reports',
+      'Track which groups support and oppose your bill, and what they said',
     ],
   },
 ];
@@ -53,15 +53,15 @@ export default function CampaignsPage() {
       {/* Hero */}
       <div className="mb-12 text-center max-w-3xl mx-auto">
         <p className="text-sm font-semibold text-purple-600 dark:text-purple-400 uppercase tracking-wide mb-3">
-          The My Democracy Advocacy Platform
+          For advocacy organizations
         </p>
         <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white leading-tight">
-          Run your whole legislative campaign in one place
+          Your supporters write to their own legislators. You see all of it.
         </h1>
         <p className="text-gray-600 dark:text-gray-400 mt-4 text-lg">
-          Constituents write authentic messages. You whip the votes and log the meetings. The impact report writes
-          itself. Grassroots tools don&apos;t have the lobbying layer; lobbying tools don&apos;t have real grassroots.
-          This has both, feeding each other.
+          Create a campaign page and share the link. Each supporter sends a personal message to the officials who
+          represent them, in their own words, with your talking points included. On your side: who got contacted, a
+          whip board for counting votes, collected stories, and a report you can hand a funder.
         </p>
         <div className="mt-6 flex flex-wrap gap-3 justify-center">
           <a href="#apply" className="px-5 py-2.5 bg-purple-600 hover:bg-purple-700 text-white text-sm font-semibold rounded-lg transition-colors">
@@ -77,8 +77,8 @@ export default function CampaignsPage() {
       <div className="mb-12 p-4 rounded-2xl border border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-900/20 text-center">
         <p className="text-sm text-amber-900 dark:text-amber-200">
           <span className="font-semibold">Now onboarding a limited group of pilot organizations.</span> The platform is
-          a paid service for advocacy groups. Pilot partners receive discounted founding-member pricing and shape the
-          roadmap directly with us.
+          a paid service for advocacy groups. Pilot pricing is discounted, and you work directly with the founder on
+          what gets built next.
         </p>
       </div>
 
