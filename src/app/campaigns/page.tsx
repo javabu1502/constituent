@@ -5,19 +5,19 @@ import { OrgAccessForm } from '@/components/campaign/OrgAccessForm';
 export const metadata: Metadata = {
   title: 'Advocacy Platform | My Democracy',
   description:
-    'Share one link and each supporter writes to their own legislators in their own words. Count the votes, collect stories with consent, and hand funders a real report. Now onboarding pilot organizations.',
+    'Grassroots advocacy software for legislative campaigns: individually written constituent messages, bill-stage targeting, whip counts, story collection, and impact reporting. Now onboarding pilot organizations.',
   alternates: { canonical: 'https://www.mydemocracy.app/campaigns' },
   openGraph: {
     title: 'Advocacy Platform | My Democracy',
     description:
-      'Your supporters write to their own legislators. You see the whip count, the stories, and the report. Now onboarding pilot organizations.',
+      'Grassroots action, legislative tracking, and impact reporting in one platform. Now onboarding pilot organizations.',
   },
 };
 
 const PILLARS = [
   {
     title: 'Take Action',
-    lead: 'Follow the bill from cosponsors to the floor.',
+    lead: 'Grassroots action, tied to the legislative calendar.',
     points: [
       'Add an action for each step: cosponsors, committee, floor votes, a thank-you after a win',
       'Committee actions only message that committee\u2019s members',
@@ -27,7 +27,7 @@ const PILLARS = [
   },
   {
     title: 'Storytelling',
-    lead: 'Collect real stories, with permission to use them.',
+    lead: 'Story collection with consent management.',
     points: [
       'A guided chat helps each person write their story',
       'Storytellers choose how they are named and how you may use each story',
@@ -37,7 +37,7 @@ const PILLARS = [
   },
   {
     title: 'Intelligence',
-    lead: 'Count the votes and track your own work.',
+    lead: 'Legislative tracking and reporting.',
     points: [
       'A whip board: mark where each member stands and see if you have the votes',
       'A profile per legislator: meeting notes, their positions on your bills, and how many constituents wrote them',
@@ -53,15 +53,15 @@ export default function CampaignsPage() {
       {/* Hero */}
       <div className="mb-12 text-center max-w-3xl mx-auto">
         <p className="text-sm font-semibold text-purple-600 dark:text-purple-400 uppercase tracking-wide mb-3">
-          For advocacy organizations
+          Advocacy software for organizations
         </p>
         <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white leading-tight">
-          Your supporters write to their own legislators. You see all of it.
+          Grassroots advocacy built for legislative campaigns
         </h1>
         <p className="text-gray-600 dark:text-gray-400 mt-4 text-lg">
-          Create a campaign page and share the link. Each supporter sends a personal message to the officials who
-          represent them, in their own words, with your talking points included. On your side: who got contacted, a
-          whip board for counting votes, collected stories, and a report you can hand a funder.
+          My Democracy combines grassroots action, legislative tracking, and impact reporting in one platform.
+          Supporters send individually written messages to their own legislators. Your team tracks positions,
+          meetings, and outcomes, and reports results to funders.
         </p>
         <div className="mt-6 flex flex-wrap gap-3 justify-center">
           <a href="#apply" className="px-5 py-2.5 bg-purple-600 hover:bg-purple-700 text-white text-sm font-semibold rounded-lg transition-colors">
@@ -98,6 +98,26 @@ export default function CampaignsPage() {
             </ul>
           </div>
         ))}
+      </div>
+
+      {/* Differentiation */}
+      <div className="mb-14 max-w-3xl mx-auto">
+        <h2 className="text-2xl font-bold text-gray-900 dark:text-white text-center mb-6">
+          How My Democracy compares
+        </h2>
+        <div className="space-y-4">
+          {[
+            ['Individually written messages', 'Legacy advocacy platforms rotate a handful of templates, and legislative offices discount identical letters. Here, every supporter’s message is drafted from their own reasons, so it reads and gets counted as genuine constituent mail.'],
+            ['Targeting that follows the bill', 'Most tools blast every office at once. Actions here aim at the people deciding the current step: the committee, one chamber, or the specific members you choose.'],
+            ['Whip counts without the enterprise contract', 'Position tracking, meeting notes, and lobbying-hour logs are usually sold separately in enterprise public affairs suites. They are part of the same workspace as your grassroots actions.'],
+            ['Launch in a day', 'No implementation fees, no per-module pricing, no sales cycle. Create a campaign, share the link, and your first constituent messages arrive the same day.'],
+          ].map(([title, body]) => (
+            <div key={title} className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
+              <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-1">{title}</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400">{body}</p>
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* Demo walkthrough */}
@@ -146,6 +166,14 @@ export default function CampaignsPage() {
         </p>
         <OrgAccessForm />
       </div>
+
+      {/* Founder trust */}
+      <p className="text-center text-sm text-gray-500 dark:text-gray-400 mb-4">
+        My Democracy is independent and founder-led.{' '}
+        <Link href="/team" className="text-purple-600 dark:text-purple-400 hover:underline font-medium">
+          Meet the founder and read why it exists →
+        </Link>
+      </p>
 
       {/* Constituent redirect */}
       <p className="text-center text-sm text-gray-500 dark:text-gray-400">
