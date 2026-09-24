@@ -20,7 +20,7 @@ const OUTCOMES: { value: string; label: string }[] = [
   { value: 'withdrawn', label: 'Withdrawn' },
 ];
 
-export function CoalitionPanel({ slug, initialOutcome }: { slug: string; initialOutcome: string | null }) {
+export function CoalitionPanel({ slug, initialOutcome, isDemo = false }: { slug: string; initialOutcome: string | null; isDemo?: boolean }) {
   const [stakeholders, setStakeholders] = useState<Stakeholder[]>([]);
   const [notes, setNotes] = useState<SNote[]>([]);
   const [loaded, setLoaded] = useState(false);
@@ -112,7 +112,7 @@ export function CoalitionPanel({ slug, initialOutcome }: { slug: string; initial
                     </p>
                   ))}
                   {convos.length === 0 && <p className="text-xs text-gray-400 dark:text-gray-500 italic">No conversations logged yet.</p>}
-                  <div className="flex gap-1.5 pt-1">
+                  {!isDemo && <div className="flex gap-1.5 pt-1">
                     <input
                       value={noteDraft}
                       onChange={(e) => setNoteDraft(e.target.value)}
@@ -121,7 +121,7 @@ export function CoalitionPanel({ slug, initialOutcome }: { slug: string; initial
                       className="flex-1 px-2 py-1 text-xs rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
                     />
                     <button type="button" onClick={() => void addNote(s)} className="text-xs px-2 py-1 rounded bg-purple-600 text-white">Add</button>
-                  </div>
+                  </div>}
                 </div>
               )}
             </div>
@@ -138,15 +138,21 @@ export function CoalitionPanel({ slug, initialOutcome }: { slug: string; initial
         <h2 className="text-base font-semibold text-gray-900 dark:text-white">Coalition &amp; outcome</h2>
         <label className="flex items-center gap-2 text-xs text-gray-600 dark:text-gray-400">
           Legislation outcome:
-          <select
-            value={outcome}
-            onChange={(e) => void saveOutcome(e.target.value)}
-            className="text-xs rounded-lg border border-gray-300 dark:border-gray-600 px-2 py-1 bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
-          >
-            {OUTCOMES.map((o) => (
-              <option key={o.value} value={o.value}>{o.label}</option>
-            ))}
-          </select>
+          {isDemo ? (
+            <span className="text-xs font-medium rounded-lg border border-gray-200 dark:border-gray-600 px-2 py-1 text-gray-900 dark:text-white">
+              {OUTCOMES.find((o) => o.value === outcome)?.label ?? 'Ongoing'}
+            </span>
+          ) : (
+            <select
+              value={outcome}
+              onChange={(e) => void saveOutcome(e.target.value)}
+              className="text-xs rounded-lg border border-gray-300 dark:border-gray-600 px-2 py-1 bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
+            >
+              {OUTCOMES.map((o) => (
+                <option key={o.value} value={o.value}>{o.label}</option>
+              ))}
+            </select>
+          )}
         </label>
       </div>
       <p className="text-xs text-gray-500 dark:text-gray-400 mb-4">
@@ -158,7 +164,7 @@ export function CoalitionPanel({ slug, initialOutcome }: { slug: string; initial
         {column('Opposing', side('oppose'), 'oppose')}
       </div>
 
-      {adding ? (
+      {isDemo ? null : adding ? (
         <div className="mt-4 pt-3 border-t border-gray-100 dark:border-gray-700 flex flex-wrap gap-2 items-start">
           <input value={newName} onChange={(e) => setNewName(e.target.value)} placeholder="Organization name" className="px-2.5 py-1.5 text-sm rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-white" />
           <select value={newSide} onChange={(e) => setNewSide(e.target.value as 'support' | 'oppose')} className="px-2 py-1.5 text-sm rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-white">

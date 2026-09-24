@@ -41,7 +41,7 @@ function chamberOf(chamber: string | null): 'house' | 'senate' | null {
   return null;
 }
 
-export function WhipBoard({ slug }: { slug: string }) {
+export function WhipBoard({ slug, isDemo = false }: { slug: string; isDemo?: boolean }) {
   const [rows, setRows] = useState<Row[]>([]);
   const [notes, setNotes] = useState<Note[]>([]);
   const [committee, setCommittee] = useState<{ id: string; name: string; size: number } | null>(null);
@@ -196,7 +196,7 @@ export function WhipBoard({ slug }: { slug: string }) {
             <div className="flex items-center justify-between gap-2">
               <div className="min-w-0 flex items-center gap-2">
                 <Link
-                  href={`/dashboard/legislator?id=${encodeURIComponent(r.id)}`}
+                  href={`${isDemo ? '/demo/legislator' : '/dashboard/legislator'}?id=${encodeURIComponent(r.id)}`}
                   className="text-sm font-medium text-purple-700 dark:text-purple-300 hover:underline truncate"
                   title="Full intel on this legislator"
                 >
@@ -229,16 +229,22 @@ export function WhipBoard({ slug }: { slug: string }) {
                     ✉ {r.messages}
                   </span>
                 )}
-                <select
-                  value={r.position ?? ''}
-                  onChange={(e) => e.target.value && setPosition(r, e.target.value)}
-                  className={`text-xs rounded-lg border border-gray-200 dark:border-gray-600 px-1.5 py-1 ${r.position ? WHIP_STYLES[r.position as keyof typeof WHIP_STYLES] : 'bg-white dark:bg-gray-900 text-gray-500 dark:text-gray-400'}`}
-                >
-                  <option value="">— set —</option>
-                  {WHIP_POSITIONS.map((p) => (
-                    <option key={p} value={p}>{WHIP_LABELS[p]}</option>
-                  ))}
-                </select>
+                {isDemo ? (
+                  <span className={`text-xs rounded-lg px-2 py-1 font-medium ${r.position ? WHIP_STYLES[r.position as keyof typeof WHIP_STYLES] : 'text-gray-400 dark:text-gray-500'}`}>
+                    {r.position ? WHIP_LABELS[r.position as keyof typeof WHIP_LABELS] : 'not set'}
+                  </span>
+                ) : (
+                  <select
+                    value={r.position ?? ''}
+                    onChange={(e) => e.target.value && setPosition(r, e.target.value)}
+                    className={`text-xs rounded-lg border border-gray-200 dark:border-gray-600 px-1.5 py-1 ${r.position ? WHIP_STYLES[r.position as keyof typeof WHIP_STYLES] : 'bg-white dark:bg-gray-900 text-gray-500 dark:text-gray-400'}`}
+                  >
+                    <option value="">— set —</option>
+                    {WHIP_POSITIONS.map((p) => (
+                      <option key={p} value={p}>{WHIP_LABELS[p]}</option>
+                    ))}
+                  </select>
+                )}
                 <button
                   type="button"
                   onClick={() => { setOpenLegislator(openLegislator === r.id ? null : r.id); setNoteDraft(''); }}
@@ -262,7 +268,7 @@ export function WhipBoard({ slug }: { slug: string }) {
                     {n.body}
                   </div>
                 ))}
-                <div className="flex gap-2">
+                {!isDemo && <div className="flex gap-2">
                   <input
                     type="text"
                     value={noteDraft}
@@ -290,7 +296,7 @@ export function WhipBoard({ slug }: { slug: string }) {
                   >
                     Add
                   </button>
-                </div>
+                </div>}
               </div>
             )}
           </li>

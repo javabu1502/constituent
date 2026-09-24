@@ -22,7 +22,9 @@ interface StageCampaign {
  */
 export async function CampaignStages({
   campaign,
+  isDemo = false,
 }: {
+  isDemo?: boolean;
   campaign: {
     id: string;
     slug: string;
@@ -88,14 +90,16 @@ export async function CampaignStages({
     <div className="mb-8 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-5">
       <div className="flex items-center justify-between gap-3 mb-1">
         <h2 className="text-base font-semibold text-gray-900 dark:text-white">Actions</h2>
-        <Link
-          href={`/campaign/create?type=advocacy&parent=${campaign.id}&parent_name=${encodeURIComponent(campaign.headline)}${
-            campaign.bill_level === 'state' && campaign.bill_state ? `&state=${campaign.bill_state}` : ''
-          }${reachable > 0 ? `&supporters=${reachable}` : ''}`}
-          className="text-sm font-medium px-3 py-1.5 rounded-lg border border-purple-300 dark:border-purple-700 text-purple-700 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/20 transition-colors"
-        >
-          + Add an action
-        </Link>
+        {!isDemo && (
+          <Link
+            href={`/campaign/create?type=advocacy&parent=${campaign.id}&parent_name=${encodeURIComponent(campaign.headline)}${
+              campaign.bill_level === 'state' && campaign.bill_state ? `&state=${campaign.bill_state}` : ''
+            }${reachable > 0 ? `&supporters=${reachable}` : ''}`}
+            className="text-sm font-medium px-3 py-1.5 rounded-lg border border-purple-300 dark:border-purple-700 text-purple-700 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/20 transition-colors"
+          >
+            + Add an action
+          </Link>
+        )}
       </div>
       <p className="text-xs text-gray-500 dark:text-gray-400 mb-4">
         Follow the bill: recruit cosponsors, win the committee, then each floor vote. Each action only messages the

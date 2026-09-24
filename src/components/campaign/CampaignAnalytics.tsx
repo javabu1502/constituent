@@ -97,6 +97,8 @@ interface CampaignAnalyticsProps {
   /** Parent campaigns render the whip board, which already lists every
    * legislator with message counts — hide the redundant officials panel. */
   hideOfficialsPanel?: boolean;
+  /** Public read-only demo: CSV exports are owner-only, so hide their buttons. */
+  isDemo?: boolean;
 }
 
 function attributionBadge(level: StoryListItem['attribution_level']): string {
@@ -191,7 +193,7 @@ function photoRequestMailto(story: StoryListItem, campaignName: string): string 
   return `mailto:${story.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
 
-function StorytellingAnalytics({ analytics, campaignName, insightsPanel }: { analytics: StoryAnalytics; campaignName: string; insightsPanel?: ReactNode }) {
+function StorytellingAnalytics({ analytics, campaignName, insightsPanel, isDemo = false }: { analytics: StoryAnalytics; campaignName: string; insightsPanel?: ReactNode; isDemo?: boolean }) {
   const [q, setQ] = useState('');
   const [stateFilter, setStateFilter] = useState('');
   const [cityFilter, setCityFilter] = useState('');
@@ -448,7 +450,7 @@ function StorytellingAnalytics({ analytics, campaignName, insightsPanel }: { ana
       <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
         <div className="flex items-start justify-between gap-3 mb-1">
           <h3 className="text-base font-semibold text-gray-900 dark:text-white">Stories</h3>
-          {analytics.stories.length > 0 && (
+          {analytics.stories.length > 0 && !isDemo && (
             <a
               href={exportHref}
               className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-purple-600 hover:bg-purple-700 text-white text-sm font-medium rounded-lg transition-colors shrink-0"
@@ -691,7 +693,7 @@ function AdvocateOverview({
   );
 }
 
-function MessageBrowser({ messages, slug }: { messages: NonNullable<AdvocacyAnalytics['messages']>; slug: string }) {
+function MessageBrowser({ messages, slug, isDemo = false }: { messages: NonNullable<AdvocacyAnalytics['messages']>; slug: string; isDemo?: boolean }) {
   const [q, setQ] = useState('');
   const [stateFilter, setStateFilter] = useState('');
   const [officialFilter, setOfficialFilter] = useState('');
@@ -735,12 +737,14 @@ function MessageBrowser({ messages, slug }: { messages: NonNullable<AdvocacyAnal
     <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
       <div className="flex items-center justify-between gap-3 mb-1">
         <h3 className="text-base font-semibold text-gray-900 dark:text-white">Messages</h3>
-        <a
-          href={exportHref}
-          className="shrink-0 text-sm font-medium px-3 py-1.5 rounded-lg border border-purple-300 dark:border-purple-700 text-purple-700 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/20 transition-colors"
-        >
-          Download CSV
-        </a>
+        {!isDemo && (
+          <a
+            href={exportHref}
+            className="shrink-0 text-sm font-medium px-3 py-1.5 rounded-lg border border-purple-300 dark:border-purple-700 text-purple-700 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/20 transition-colors"
+          >
+            Download CSV
+          </a>
+        )}
       </div>
       <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">
         Read every message and export the raw data. Showing {filtered.length.toLocaleString()} of {messages.length.toLocaleString()}.
@@ -808,9 +812,9 @@ function MessageBrowser({ messages, slug }: { messages: NonNullable<AdvocacyAnal
   );
 }
 
-export function CampaignAnalytics({ analytics, campaignName, insightsPanel, hideOfficialsPanel }: CampaignAnalyticsProps) {
+export function CampaignAnalytics({ analytics, campaignName, insightsPanel, hideOfficialsPanel, isDemo = false }: CampaignAnalyticsProps) {
   if (analytics.kind === 'storytelling') {
-    return <StorytellingAnalytics analytics={analytics} campaignName={campaignName} insightsPanel={insightsPanel} />;
+    return <StorytellingAnalytics analytics={analytics} campaignName={campaignName} insightsPanel={insightsPanel} isDemo={isDemo} />;
   }
 
   const maxTopState = analytics.top_states.length > 0 ? analytics.top_states[0].count : 1;
@@ -1174,7 +1178,7 @@ export function CampaignAnalytics({ analytics, campaignName, insightsPanel, hide
 
       {/* Message browser + CSV export — read every message, dig deeper */}
       {analytics.campaign_slug && analytics.messages && analytics.messages.length > 0 && (
-        <MessageBrowser messages={analytics.messages} slug={analytics.campaign_slug} />
+        <MessageBrowser messages={analytics.messages} slug={analytics.campaign_slug} isDemo={isDemo} />
       )}
 
       {/* Recent activity pulse */}

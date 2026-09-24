@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase';
+import { isDemoCampaign } from '@/lib/demo';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -17,20 +18,24 @@ const stakeholderSchema = z.object({
   statement: z.string().max(2000).nullish(),
 });
 
-async function loadOwned(slug: string) {
+async function loadOwned(slug: string, opts?: { allowDemoRead?: boolean }) {
   const admin = createAdminClient();
   const { data: campaign } = await admin.from('campaigns').select('id, creator_id').eq('slug', slug).single();
   if (!campaign) return { error: 'not_found' as const };
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
+  if (user && user.id === campaign.creator_id) return { campaign, admin, userId: user.id };
+  // Public demo: reads only. Writes never take this path.
+  if (opts?.allowDemoRead && isDemoCampaign({ slug, creator_id: campaign.creator_id })) {
+    return { campaign, admin, userId: campaign.creator_id as string };
+  }
   if (!user) return { error: 'unauthorized' as const };
-  if (user.id !== campaign.creator_id) return { error: 'forbidden' as const };
-  return { campaign, admin, userId: user.id };
+  return { error: 'forbidden' as const };
 }
 
 export async function GET(_req: NextRequest, { params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const res = await loadOwned(slug);
+  const res = await loadOwned(slug, { allowDemoRead: true });
   if ('error' in res) {
     const status = res.error === 'not_found' ? 404 : res.error === 'unauthorized' ? 401 : 403;
     return NextResponse.json({ error: res.error }, { status });

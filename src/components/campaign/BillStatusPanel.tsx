@@ -11,7 +11,9 @@ import { listCommittees } from '@/lib/committees';
  */
 export async function BillStatusPanel({
   campaign,
+  isDemo = false,
 }: {
+  isDemo?: boolean;
   campaign: {
     id: string;
     slug: string;
@@ -76,12 +78,14 @@ export async function BillStatusPanel({
                 </p>
                 <p className="text-xs text-purple-700 dark:text-purple-300 mt-0.5">{suggestion.reason}</p>
               </div>
-              <Link
-                href={addStageHref}
-                className="shrink-0 text-xs font-medium px-3 py-1.5 rounded-lg bg-purple-600 hover:bg-purple-700 text-white transition-colors"
-              >
-                Add this action
-              </Link>
+              {!isDemo && (
+                <Link
+                  href={addStageHref}
+                  className="shrink-0 text-xs font-medium px-3 py-1.5 rounded-lg bg-purple-600 hover:bg-purple-700 text-white transition-colors"
+                >
+                  Add this action
+                </Link>
+              )}
             </div>
           )}
 

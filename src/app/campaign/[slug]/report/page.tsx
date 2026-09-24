@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase';
 import { buildCampaignReport } from '@/lib/report';
+import { isDemoCampaign } from '@/lib/demo';
+import { DemoBanner } from '@/components/demo/DemoBanner';
 import { PrintReportButton } from '@/components/campaign/PrintReportButton';
 import { STAGE_GOAL_LABELS } from '@/lib/stages';
 
@@ -48,12 +50,6 @@ function Stat({ label, value, sub }: { label: string; value: string | number; su
 export default async function CampaignReportPage({ params }: PageProps) {
   const { slug } = await params;
 
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  if (!user) redirect('/login');
-
   const admin = createAdminClient();
   const { data: campaign } = await admin
     .from('campaigns')
@@ -61,7 +57,19 @@ export default async function CampaignReportPage({ params }: PageProps) {
     .eq('slug', slug)
     .single();
   if (!campaign) notFound();
-  if (campaign.creator_id !== user.id) redirect(`/campaign/${slug}`);
+
+  // Owner sees the report as usual; anyone else may view demo campaigns only
+  // (public org-backend demo).
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  const isOwner = !!user && user.id === campaign.creator_id;
+  const isDemo = !isOwner && isDemoCampaign(campaign);
+  if (!isOwner && !isDemo) {
+    if (!user) redirect('/login');
+    redirect(`/campaign/${slug}`);
+  }
 
   const report = await buildCampaignReport(campaign, Date.now());
   const isStorytelling = campaign.campaign_type === 'storytelling';
@@ -75,6 +83,8 @@ export default async function CampaignReportPage({ params }: PageProps) {
     <div className="max-w-4xl mx-auto px-4 py-8 print:py-0 print:max-w-none">
       {/* Print rules: drop site chrome + the toolbar, force light. */}
       <style>{`@media print { nav, header.sticky, .no-print { display: none !important; } body { background: #fff !important; } }`}</style>
+
+      {isDemo && <div className="no-print"><DemoBanner /></div>}
 
       <div className="flex items-center justify-between gap-3 mb-6 no-print">
         <Link href={`/campaign/${slug}/analytics`} className="text-sm text-purple-600 dark:text-purple-400 hover:underline">

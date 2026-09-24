@@ -10,8 +10,10 @@ import Link from 'next/link';
  */
 export function LegislatorSearch({
   roster,
+  intelBasePath = '/dashboard/legislator',
 }: {
   roster: { id: string; name: string; party: string | null; chamber: string | null; state: string }[];
+  intelBasePath?: string;
 }) {
   const [q, setQ] = useState('');
 
@@ -37,7 +39,7 @@ export function LegislatorSearch({
           {matches.map((r) => (
             <Link
               key={r.id}
-              href={`/dashboard/legislator?id=${encodeURIComponent(r.id)}`}
+              href={`${intelBasePath}?id=${encodeURIComponent(r.id)}`}
               className="flex items-center justify-between gap-2 px-4 py-2.5 text-sm hover:bg-purple-50 dark:hover:bg-purple-900/20"
             >
               <span className="font-medium text-gray-900 dark:text-white">{r.name}</span>

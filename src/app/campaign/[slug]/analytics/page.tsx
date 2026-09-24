@@ -10,6 +10,8 @@ import { CoalitionPanel } from '@/components/campaign/CoalitionPanel';
 import { CampaignTalkingPoints } from '@/components/campaign/CampaignTalkingPoints';
 import { CampaignInsightsPanel } from '@/components/campaign/CampaignInsightsPanel';
 import { getCachedInsights } from '@/lib/insights';
+import { isDemoCampaign } from '@/lib/demo';
+import { DemoBanner } from '@/components/demo/DemoBanner';
 import { usageLabels } from '@/lib/story-usage';
 import { findSenators } from '@/lib/legislators';
 import { US_STATES } from '@/lib/constants';
@@ -40,14 +42,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function CampaignAnalyticsPage({ params }: PageProps) {
   const { slug } = await params;
 
-  // Auth check
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
-
-  if (!user) {
-    redirect('/login');
-  }
-
   const admin = createAdminClient();
 
   // Fetch campaign
@@ -61,8 +55,14 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
     notFound();
   }
 
-  // Verify ownership
-  if (campaign.creator_id !== user.id) {
+  // Owner sees the full editable page. Anyone else gets a read-only view of
+  // demo campaigns only (public org-backend demo); otherwise auth as before.
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  const isOwner = !!user && user.id === campaign.creator_id;
+  const isDemo = !isOwner && isDemoCampaign(campaign);
+  if (!isOwner && !isDemo) {
+    if (!user) redirect('/login');
     redirect(`/campaign/${slug}`);
   }
 
@@ -77,6 +77,7 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
       initial={cachedInsights?.insights ?? null}
       initialStale={cachedInsights?.stale ?? false}
       kind={insightsKind}
+      readOnly={isDemo}
     />
   );
 
@@ -196,8 +197,9 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
 
     return (
       <div className="max-w-5xl mx-auto px-4 py-8">
+        {isDemo && <DemoBanner />}
         <div className="mb-6">
-          <Link href="/dashboard" className="text-sm text-purple-600 dark:text-purple-400 hover:underline">
+          <Link href={isDemo ? '/demo/dashboard' : '/dashboard'} className="text-sm text-purple-600 dark:text-purple-400 hover:underline">
             &larr; Back to Dashboard
           </Link>
         </div>
@@ -212,7 +214,7 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
         </div>
         {/* No coalition/outcome tracking here: storytelling campaigns collect
             stories, they don't whip a bill to an outcome. */}
-        <CampaignAnalytics analytics={storyAnalytics} campaignName={campaign.headline} insightsPanel={insightsPanel} />
+        <CampaignAnalytics analytics={storyAnalytics} campaignName={campaign.headline} insightsPanel={insightsPanel} isDemo={isDemo} />
       </div>
     );
   }
@@ -390,9 +392,10 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-8">
+      {isDemo && <DemoBanner />}
       <div className="mb-6">
         <Link
-          href="/dashboard"
+          href={isDemo ? '/demo/dashboard' : '/dashboard'}
           className="text-sm text-purple-600 dark:text-purple-400 hover:underline"
         >
           &larr; Back to Dashboard
@@ -415,6 +418,7 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
 
       {!campaign.parent_campaign_id && (
         <BillStatusPanel
+          isDemo={isDemo}
           campaign={{
             id: campaign.id,
             slug,
@@ -429,9 +433,9 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
         />
       )}
 
-      {hasWhipBoard && <WhipBoard slug={slug} />}
+      {hasWhipBoard && <WhipBoard slug={slug} isDemo={isDemo} />}
 
-      {!campaign.parent_campaign_id && <CoalitionPanel slug={slug} initialOutcome={campaign.outcome ?? null} />}
+      {!campaign.parent_campaign_id && <CoalitionPanel slug={slug} initialOutcome={campaign.outcome ?? null} isDemo={isDemo} />}
 
       {campaign.message_template && (
         <CampaignTalkingPoints
@@ -445,6 +449,7 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
       )}
 
       <CampaignStages
+        isDemo={isDemo}
         campaign={{
           id: campaign.id,
           slug,
@@ -460,6 +465,7 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
         campaignName={campaign.headline}
         insightsPanel={insightsPanel}
         hideOfficialsPanel={hasWhipBoard}
+        isDemo={isDemo}
       />
     </div>
   );

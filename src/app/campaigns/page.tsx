@@ -125,8 +125,8 @@ export default function CampaignsPage() {
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white text-center mb-2">See a campaign run start to finish</h2>
         <p className="text-gray-600 dark:text-gray-400 text-center max-w-2xl mx-auto mb-6">
           We ran a full demonstration campaign, a school-meals bill through the Nevada legislature, from cosponsor
-          push to the governor&apos;s desk. The public side is live right now; the org side is what we walk you
-          through on a pilot call.
+          push to the governor&apos;s desk. Both sides are live right now: the constituent experience and the org
+          dashboard behind it.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm p-6">
@@ -143,16 +143,19 @@ export default function CampaignsPage() {
             </Link>
           </div>
           <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm p-6">
-            <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-2">The org side (pilot walkthrough)</h3>
+            <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-2">Explore the org dashboard</h3>
             <ul className="text-sm text-gray-600 dark:text-gray-400 space-y-1.5 mb-4">
               <li>• A whip board reading &ldquo;8 of 13 committee members supportive, passes if it holds&rdquo;</li>
               <li>• A legislator profile with meetings, positions across bills, and constituent pressure</li>
               <li>• AI-themed &ldquo;what constituents are saying&rdquo; with verbatim quotes</li>
               <li>• A one-page funder report: 255 constituents, 22 lobbying hours, bill passed</li>
             </ul>
-            <a href="#apply" className="inline-block px-4 py-2 border border-purple-300 dark:border-purple-700 text-purple-700 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/20 text-sm font-medium rounded-lg transition-colors">
-              Request a live walkthrough
-            </a>
+            <Link
+              href="/demo/dashboard"
+              className="inline-block px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white text-sm font-medium rounded-lg transition-colors"
+            >
+              Open the org dashboard →
+            </Link>
           </div>
         </div>
       </div>

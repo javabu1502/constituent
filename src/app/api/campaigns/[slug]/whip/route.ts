@@ -7,6 +7,7 @@ import { getAllFederalLegislators } from '@/lib/legislators';
 import { getStateCommittee } from '@/lib/state-committees';
 import { getCommittee, getCommitteeMembers } from '@/lib/committees';
 import { openstatesRestFetch } from '@/lib/openstates-api';
+import { isDemoCampaign } from '@/lib/demo';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -26,7 +27,7 @@ const positionSchema = z.object({
   position: z.enum(['leaning_yes', 'yes', 'uncommitted', 'leaning_no', 'no']),
 });
 
-async function loadOwnedCampaign(slug: string) {
+async function loadOwnedCampaign(slug: string, opts?: { allowDemoRead?: boolean }) {
   const admin = createAdminClient();
   const { data: campaign } = await admin
     .from('campaigns')
@@ -36,9 +37,14 @@ async function loadOwnedCampaign(slug: string) {
   if (!campaign) return { error: 'not_found' as const };
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
+  if (user && user.id === campaign.creator_id) return { campaign, admin, userId: user.id };
+  // Public demo: reads are scoped to the demo org's own data, exactly as the
+  // owner would see them. Writes never take this path.
+  if (opts?.allowDemoRead && isDemoCampaign({ slug, creator_id: campaign.creator_id })) {
+    return { campaign, admin, userId: campaign.creator_id as string };
+  }
   if (!user) return { error: 'unauthorized' as const };
-  if (user.id !== campaign.creator_id) return { error: 'forbidden' as const };
-  return { campaign, admin, userId: user.id };
+  return { error: 'forbidden' as const };
 }
 
 // Sponsor sets cached 1h — same data the participate flow uses for intents.
@@ -65,7 +71,7 @@ async function stateSponsorIds(state: string, ref: string): Promise<Set<string>>
 
 export async function GET(_req: NextRequest, { params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const res = await loadOwnedCampaign(slug);
+  const res = await loadOwnedCampaign(slug, { allowDemoRead: true });
   if ('error' in res) {
     const status = res.error === 'not_found' ? 404 : res.error === 'unauthorized' ? 401 : 403;
     return NextResponse.json({ error: res.error }, { status });

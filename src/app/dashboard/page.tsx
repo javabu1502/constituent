@@ -5,14 +5,12 @@ import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase';
 import { truncate } from '@/lib/utils';
 import { stageOrder } from '@/lib/stages';
-import { LegislatorSearch } from '@/components/dashboard/LegislatorSearch';
-import { getStateLegislators } from '@/lib/state-legislators';
-import { getAllFederalLegislators } from '@/lib/legislators';
 import { MyRepresentativesSection } from '@/components/dashboard/MyRepresentativesSection';
 import { LocalOfficialsSection } from '@/components/dashboard/LocalOfficialsSection';
 import { RepActivitySection } from '@/components/dashboard/RepActivitySection';
 import { VoterInfoCard } from '@/components/dashboard/VoterInfoCard';
-import { CopyLinkButton } from '@/components/campaign/CopyLinkButton';
+import { CampaignCard } from '@/components/dashboard/CampaignCard';
+import { OrgDashboard } from '@/components/dashboard/OrgDashboard';
 import { CollapsibleSection } from '@/components/ui/CollapsibleSection';
 import { GettingStartedChecklist } from '@/components/dashboard/GettingStartedChecklist';
 import { WelcomeTour } from '@/components/dashboard/WelcomeTour';
@@ -171,105 +169,10 @@ export default async function DashboardPage() {
 
   // One campaign card, shared by the constituent view and the org's grouped
   // (Federal / State) sections.
-  const renderCampaignCard = (campaign: CampRow) => {
-              const stages = stagesByParent.get(campaign.id as string) ?? [];
-              return (
-              <div
-                key={campaign.id}
-                className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5"
-              >
-                {(() => {
-                  const isStory = campaign.campaign_type === 'storytelling';
-                  // A parent's action_count IS the initiative total (stages
-                  // included) — never add stage counts on top of it.
-                  const count = isStory ? Number(campaign.story_count) : Number(campaign.action_count);
-                  const approval = String(campaign.approval_status || 'approved');
-                  const approvalBadge: Record<string, { label: string; cls: string }> = {
-                    pending: { label: 'Pending review', cls: 'bg-yellow-100 text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-300' },
-                    rejected: { label: 'Needs changes', cls: 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300' },
-                  };
-                  const ab = approvalBadge[approval];
-                  return (
-                    <div className="flex items-start justify-between mb-3">
-                      <div className="flex flex-wrap items-center gap-1.5">
-                        {campaign.issue_area && (
-                          <span className="px-2.5 py-1 text-xs font-medium rounded-full bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300">
-                            {campaign.issue_area}
-                          </span>
-                        )}
-                        {campaign.campaign_type !== 'storytelling' && (
-                          <span className="px-2.5 py-1 text-xs font-medium rounded-full bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-300">
-                            {campaign.bill_state ? `State · ${campaign.bill_state}` : 'Federal'}
-                          </span>
-                        )}
-                        {isStory && (
-                          <span className="px-2.5 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300">
-                            Storytelling
-                          </span>
-                        )}
-                        {campaign.outcome && (
-                          <span className={`px-2.5 py-1 text-xs font-semibold rounded-full ${
-                            (campaign.direction === 'oppose' ? campaign.outcome !== 'passed' : campaign.outcome === 'passed')
-                              ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300'
-                              : 'bg-gray-200 text-gray-600 dark:bg-gray-700 dark:text-gray-300'
-                          }`}>
-                            {String(campaign.outcome) === 'passed' ? (campaign.direction === 'oppose' ? 'Passed (lost)' : 'Passed ✓') :
-                             String(campaign.outcome) === 'died_committee' ? (campaign.direction === 'oppose' ? 'Stopped ✓' : 'Died in committee') :
-                             String(campaign.outcome) === 'failed' ? (campaign.direction === 'oppose' ? 'Defeated ✓' : 'Failed') :
-                             String(campaign.outcome) === 'vetoed' ? 'Vetoed' : 'Withdrawn'}
-                          </span>
-                        )}
-                        {ab && (
-                          <span className={`px-2.5 py-1 text-xs font-medium rounded-full ${ab.cls}`}>{ab.label}</span>
-                        )}
-                      </div>
-                      <div className="flex items-center gap-1.5 text-purple-600 dark:text-purple-400">
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
-                        </svg>
-                        <span className="text-sm font-bold">{count}</span>
-                        <span className="text-xs text-gray-500 dark:text-gray-400">
-                          {isStory ? `stor${count === 1 ? 'y' : 'ies'}` : `action${count !== 1 ? 's' : ''}`}
-                        </span>
-                      </div>
-                    </div>
-                  );
-                })()}
-                <h3 className="font-semibold text-gray-900 dark:text-white mb-1 line-clamp-1">
-                  {campaign.headline}
-                </h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 line-clamp-2">
-                  {campaign.description}
-                </p>
-                {/* The reviewer's note is the org's only signal for WHAT to
-                    change — without it "Needs changes" is a dead end. */}
-                {String(campaign.approval_status) === 'rejected' && campaign.review_note && (
-                  <div className="mb-4 p-3 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
-                    <p className="text-sm text-red-800 dark:text-red-300">
-                      <span className="font-semibold">Reviewer note:</span> {campaign.review_note}
-                    </p>
-                  </div>
-                )}
-                {/* Two buttons, no more. Everything else (view, analytics,
-                    report, embed, QR, edit, delete, the actions list) lives on
-                    Manage — the card got unusably busy (Jared, 09-18). */}
-                <div className="flex items-center gap-2">
-                  <Link
-                    href={`/campaign/${campaign.slug}/manage`}
-                    className="flex-1 text-center px-3 py-2 bg-purple-600 hover:bg-purple-700 text-white text-sm font-medium rounded-lg transition-colors"
-                  >
-                    Manage
-                  </Link>
-                  <CopyLinkButton slug={campaign.slug as string} />
-                </div>
-                {stages.length > 0 && (
-                  <p className="mt-3 text-xs text-gray-500 dark:text-gray-400">
-                    {stages.length} action{stages.length !== 1 ? 's' : ''} in this campaign
-                  </p>
-                )}
-              </div>
-            );
-  };
+  // One campaign card, shared with the org dashboard (CampaignCard).
+  const renderCampaignCard = (campaign: CampRow) => (
+    <CampaignCard key={campaign.id} campaign={campaign} stages={stagesByParent.get(campaign.id as string) ?? []} />
+  );
 
   const campaignsSection = campaigns && campaigns.length > 0 ? (
         <section id="campaigns" className="mb-10 scroll-mt-24">
@@ -290,144 +193,11 @@ export default async function DashboardPage() {
   // the reach those campaigns earned. Orgs have no elected officials of their
   // own and never send constituent messages, so none of those sections render.
   if (accountType === 'organization') {
-    // Member lookup roster: every legislator in the states this org works,
-    // plus all of Congress when it runs federal campaigns. Most orgs live in
-    // one world or the other — the roster follows their portfolio.
-    const rosterStates = [...new Set(allCampaigns.map((c) => c.bill_state as string | null).filter(Boolean))] as string[];
-    const hasFederal = topLevelCampaigns.some(
-      (c) => c.campaign_type !== 'storytelling' && !c.bill_state && (c.bill_level === 'federal' || c.target_level === 'federal' || c.target_level === 'both' || !c.target_level)
-    );
-    const legislatorRoster = [
-      ...rosterStates.flatMap((st) =>
-        getStateLegislators(st).map((l) => ({ id: l.id, name: l.name, party: l.party ?? null, chamber: l.chamber ?? null, state: st }))
-      ),
-      ...(hasFederal
-        ? getAllFederalLegislators().map((l) => ({ id: l.id, name: l.name, party: l.party ?? null, chamber: l.chamber ?? null, state: 'US' }))
-        : []),
-    ];
-    // Federal and state portfolios render as separate sections.
-    const federalCampaigns = topLevelCampaigns.filter((c) => c.campaign_type !== 'storytelling' && !c.bill_state);
-    const stateGroups = new Map<string, CampRow[]>();
-    for (const c of topLevelCampaigns) {
-      if (c.campaign_type === 'storytelling' || !c.bill_state) continue;
-      const st = c.bill_state as string;
-      if (!stateGroups.has(st)) stateGroups.set(st, []);
-      stateGroups.get(st)!.push(c);
-    }
-    const storytellingCampaigns = topLevelCampaigns.filter((c) => c.campaign_type === 'storytelling');
-    // Sum initiative totals only (parents already include their stages).
-    const totalActions = topLevelCampaigns.reduce((n, c) => n + (Number(c.action_count) || 0), 0);
-    const totalStories = topLevelCampaigns.reduce((n, c) => n + (Number(c.story_count) || 0), 0);
-    // Portfolio scoreboard: outcomes judged against each campaign's goal.
-    let wins = 0;
-    let losses = 0;
-    let ongoing = 0;
-    for (const c of topLevelCampaigns) {
-      if (!c.outcome) { ongoing += 1; continue; }
-      const met = c.direction === 'oppose' ? c.outcome !== 'passed' : c.outcome === 'passed';
-      if (met) wins += 1; else losses += 1;
-    }
     return (
-      <div className="max-w-6xl mx-auto px-4 py-8">
-        <div className="mb-8 flex items-start justify-between gap-3">
-          <div>
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Organization Dashboard</h1>
-            <p className="text-gray-600 dark:text-gray-400 mt-1">
-              {(profile?.org_name as string) || (profile?.name as string) || user.email} · advocacy account
-              {(wins + losses > 0) && (
-                <span className="ml-2 text-sm">
-                  · record: <span className="font-semibold text-emerald-600 dark:text-emerald-400">{wins} won</span>
-                  {losses > 0 && <> · <span className="font-semibold text-gray-500">{losses} lost</span></>}
-                  {ongoing > 0 && <> · {ongoing} ongoing</>}
-                </span>
-              )}
-            </p>
-          </div>
-          <div className="shrink-0 flex items-center gap-2">
-            <Link href="/dashboard/settings" className="text-sm font-medium px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-              Settings
-            </Link>
-            <Link href="/dashboard/report" className="text-sm font-medium px-4 py-2 rounded-lg border border-purple-300 dark:border-purple-700 text-purple-700 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/20 transition-colors">
-              Organization report
-            </Link>
-            <Link href="/campaign/create" className="text-sm font-medium px-4 py-2 rounded-lg bg-purple-600 hover:bg-purple-700 text-white transition-colors">
-              + New campaign
-            </Link>
-          </div>
-        </div>
-
-        <LegislatorSearch roster={legislatorRoster} />
-
-        <div className="grid grid-cols-3 gap-4 mb-10">
-          <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
-            <p className="text-sm text-gray-500 dark:text-gray-400">Campaigns</p>
-            <p className="text-3xl font-bold text-gray-900 dark:text-white mt-1">{topLevelCampaigns.length}</p>
-          </div>
-          <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
-            <p className="text-sm text-gray-500 dark:text-gray-400">Constituent actions</p>
-            <p className="text-3xl font-bold text-gray-900 dark:text-white mt-1">{totalActions.toLocaleString()}</p>
-          </div>
-          <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
-            <p className="text-sm text-gray-500 dark:text-gray-400">Stories collected</p>
-            <p className="text-3xl font-bold text-gray-900 dark:text-white mt-1">{totalStories.toLocaleString()}</p>
-          </div>
-        </div>
-
-        {topLevelCampaigns.length === 0 ? (
-          // First run: a new org lands here with no guidance otherwise. This
-          // card disappears forever once the first campaign exists.
-          <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-8 max-w-2xl mx-auto">
-            <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">Welcome to your advocacy dashboard</h2>
-            <p className="text-gray-600 dark:text-gray-400 mb-6">Here&rsquo;s how campaigns work on My Democracy:</p>
-            <ol className="space-y-4 mb-8">
-              {[
-                ['Create a campaign', 'Set the ask, link a bill, and add talking points. We review every campaign before it goes live.'],
-                ['Share your link', 'Supporters open it and write to their own representatives. It takes them about two minutes.'],
-                ['Track results', 'Actions, analytics, a whip board for legislator positions, and funder-ready reports all live on this dashboard.'],
-              ].map(([title, body], i) => (
-                <li key={title} className="flex items-start gap-3">
-                  <span className="shrink-0 w-6 h-6 rounded-full bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300 text-sm font-bold flex items-center justify-center mt-0.5">
-                    {i + 1}
-                  </span>
-                  <span>
-                    <span className="block font-medium text-gray-900 dark:text-white">{title}</span>
-                    <span className="block text-sm text-gray-600 dark:text-gray-400">{body}</span>
-                  </span>
-                </li>
-              ))}
-            </ol>
-            <div className="flex flex-col sm:flex-row gap-3">
-              <Link href="/campaign/create" className="text-center px-4 py-2.5 bg-purple-600 hover:bg-purple-700 text-white text-sm font-medium rounded-lg">
-                Create your first campaign
-              </Link>
-              <Link href="/dashboard/settings" className="text-center px-4 py-2.5 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 text-sm font-medium rounded-lg">
-                Set up your organization
-              </Link>
-            </div>
-          </div>
-        ) : (
-          <>
-            {federalCampaigns.length > 0 && (
-              <section className="mb-10">
-                <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Federal campaigns</h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">{federalCampaigns.map(renderCampaignCard)}</div>
-              </section>
-            )}
-            {[...stateGroups.entries()].map(([st, list]) => (
-              <section key={st} className="mb-10">
-                <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">State campaigns · {st}</h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">{list.map(renderCampaignCard)}</div>
-              </section>
-            ))}
-            {storytellingCampaigns.length > 0 && (
-              <section className="mb-10">
-                <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Storytelling campaigns</h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">{storytellingCampaigns.map(renderCampaignCard)}</div>
-              </section>
-            )}
-          </>
-        )}
-      </div>
+      <OrgDashboard
+        displayName={(profile?.org_name as string) || (profile?.name as string) || user.email || 'Your organization'}
+        campaigns={allCampaigns}
+      />
     );
   }
 

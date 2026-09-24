@@ -14,11 +14,13 @@ export function CampaignInsightsPanel({
   initial,
   initialStale,
   kind,
+  readOnly = false,
 }: {
   slug: string;
   initial: CampaignInsights | null;
   initialStale: boolean;
   kind: 'stories' | 'messages';
+  readOnly?: boolean;
 }) {
   const [insights, setInsights] = useState<CampaignInsights | null>(initial);
   const [stale, setStale] = useState(initialStale);
@@ -60,17 +62,19 @@ export function CampaignInsightsPanel({
             Neutral themes drawn from your {noun}. Summarized, de-identified, and faithful to what people wrote.
           </p>
         </div>
-        <button
-          type="button"
-          onClick={generate}
-          disabled={loading}
-          className="shrink-0 text-xs font-medium px-3 py-1.5 rounded-lg bg-purple-600 hover:bg-purple-700 disabled:opacity-60 text-white transition-colors"
-        >
-          {loading ? 'Analyzing…' : insights ? 'Refresh' : 'Generate insights'}
-        </button>
+        {!readOnly && (
+          <button
+            type="button"
+            onClick={generate}
+            disabled={loading}
+            className="shrink-0 text-xs font-medium px-3 py-1.5 rounded-lg bg-purple-600 hover:bg-purple-700 disabled:opacity-60 text-white transition-colors"
+          >
+            {loading ? 'Analyzing…' : insights ? 'Refresh' : 'Generate insights'}
+          </button>
+        )}
       </div>
 
-      {insights && stale && !loading && (
+      {insights && stale && !loading && !readOnly && (
         <p className="text-[11px] text-amber-600 dark:text-amber-400 mb-2">
           New {noun} have come in since this was generated — refresh for an up-to-date read.
         </p>
@@ -80,8 +84,9 @@ export function CampaignInsightsPanel({
 
       {!insights && !notice && (
         <p className="text-sm text-gray-600 dark:text-gray-400">
-          Generate a themed summary of what your constituents are sharing — the top themes, a representative quote for
-          each, and an overall read you can use.
+          {readOnly
+            ? 'No insights generated for this campaign yet.'
+            : 'Generate a themed summary of what your constituents are sharing — the top themes, a representative quote for each, and an overall read you can use.'}
         </p>
       )}
 
