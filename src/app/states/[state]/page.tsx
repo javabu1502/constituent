@@ -706,7 +706,7 @@ export default async function StateHubPage({ params }: StatePageProps) {
       {/* CTA */}
       <div className="text-center py-8 border-t border-gray-200 dark:border-gray-700">
         <p className="text-gray-600 dark:text-gray-400 mb-4">
-          Make your voice heard. Contact your {stateInfo.name} representatives today.
+          Contact your {stateInfo.name} representatives. It takes about two minutes.
         </p>
         <Link href="/contact" className="inline-block px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-medium rounded-lg transition-colors">
           Contact Your Representatives

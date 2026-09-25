@@ -25,6 +25,15 @@ vi.mock('@/lib/supabase', () => ({
           })),
         };
       }
+      if (table === 'profiles') {
+        return {
+          select: vi.fn(() => ({
+            eq: vi.fn(() => ({
+              single: vi.fn(async () => ({ data: { account_type: 'organization' }, error: null })),
+            })),
+          })),
+        };
+      }
       return {};
     }),
   })),
@@ -47,6 +56,7 @@ const validCampaign = {
   description: 'A campaign to protect national parks from development',
   issue_area: 'Environment',
   target_level: 'federal' as const,
+  direction: 'support' as const,
   distribution_plan: 'Share with our neighborhood association and local environmental groups.',
 };
 

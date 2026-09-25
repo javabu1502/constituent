@@ -37,6 +37,18 @@ const PARTISAN_PATTERNS: RegExp[] = [
   /\byou should (support|oppose|back|reject)\b/i,
 ];
 
+/**
+ * True if the text carries partisan/directive phrasing. Exposed for the
+ * reposter: we only amplify content from trusted sources that reads neutral,
+ * so a trusted account's occasional pointed post is never reposted under our
+ * brand. This is the nonpartisan check alone — not the full draft guardrails
+ * (which also gate length, em dashes, coverage), none of which should apply to
+ * someone else's post we're merely resharing.
+ */
+export function isPartisan(text: string): boolean {
+  return PARTISAN_PATTERNS.some((re) => re.test(text));
+}
+
 // AI/voice tells the brand brain bans outright.
 const VOICE_TELLS: Array<{ re: RegExp; reason: string }> = [
   { re: /\byou (clearly|obviously) (feel|care)\b/i, reason: 'narrates the reader\'s emotions' },
@@ -86,6 +98,63 @@ function billRefs(s: string): string[] {
   return [...out];
 }
 
+// --- Named contact targets -------------------------------------------------
+// The app connects people to THEIR OWN elected officials, so a post may only
+// name a specific person as a contact target if that person is a covered
+// legislator. "Put it in Pete Buttigieg's inbox via mydemocracy.app" is a
+// promise the product cannot keep (2026-08-12 incident) — block it.
+import { getAllFederalLegislators } from '@/lib/legislators';
+import { getStateLegislators } from '@/lib/state-legislators';
+import { US_STATES } from '@/lib/constants';
+
+let coveredNamesCache: { full: string[]; last: Set<string> } | null = null;
+function coveredOfficialNames(): { full: string[]; last: Set<string> } {
+  if (coveredNamesCache) return coveredNamesCache;
+  const full: string[] = [];
+  const last = new Set<string>();
+  const add = (name: string) => {
+    const n = name.toLowerCase();
+    full.push(n);
+    const parts = n.replace(/,.*$/, '').split(/\s+/);
+    if (parts.length) last.add(parts[parts.length - 1]);
+  };
+  try {
+    for (const l of getAllFederalLegislators()) add(l.name);
+    for (const st of US_STATES) {
+      try {
+        for (const l of getStateLegislators(st.code)) add(l.name);
+      } catch { /* missing state file */ }
+    }
+  } catch { /* data unavailable: check degrades to pass-through below */ }
+  coveredNamesCache = { full, last };
+  return coveredNamesCache;
+}
+
+const CONTACT_CONTEXT = /(message|email|write(?:\s+to)?|contact|tell|reach|inbox(?:es)?\s+of)\s+((?:[A-Z][a-z]+[’']?s?\s*){1,3})|((?:[A-Z][a-z]+[’']?s?\s*){1,3})(?:'s|’s)\s+(?:inbox|office|desk)/g;
+const NAME_STOPWORDS = new Set(['My', 'Democracy', 'Your', 'The', 'Their', 'Congress', 'Senate', 'House', 'Washington', 'America', 'Us', 'United', 'States']);
+
+/** Names used as contact targets that aren't covered legislators. */
+export function uncoveredContactTargets(text: string): string[] {
+  const covered = coveredOfficialNames();
+  if (covered.full.length === 0) return [];
+  const bad: string[] = [];
+  for (const m of text.matchAll(CONTACT_CONTEXT)) {
+    const raw = (m[2] || m[3] || '').replace(/[’']s/g, '').trim();
+    if (!raw) continue;
+    const words = raw.split(/\s+/).filter((w) => /^[A-Z][a-z]+$/.test(w) && !NAME_STOPWORDS.has(w));
+    if (words.length === 0) continue;
+    const candidate = words.join(' ').toLowerCase();
+    // Generic references are fine ("tell your Representative").
+    if (/^(senator|senators|representative|representatives|rep|reps|lawmakers?|officials?|legislators?)$/.test(candidate)) continue;
+    // Full-name containment, or a last-name hit ("Chuck Schumer" vs the
+    // dataset's "Charles E. Schumer") — posts use nicknames constantly.
+    const lastWord = words[words.length - 1].toLowerCase();
+    const matched = covered.full.some((n) => n.includes(candidate) || candidate.includes(n)) || covered.last.has(lastWord);
+    if (!matched) bad.push(words.join(' '));
+  }
+  return [...new Set(bad)];
+}
+
 export interface GuardrailInput {
   text: string;
   /** The source signal text the claim must trace to (accuracy check). */
@@ -112,6 +181,16 @@ export function runGuardrails(input: GuardrailInput): GateReport {
     passed: !partisanHit,
     severity: 'block',
     reason: partisanHit ? `partisan/directive phrasing: ${partisanHit}` : undefined,
+  });
+
+  // 1b. Named contact targets (block): never promise the app can reach a
+  //     specific person unless they're a covered legislator.
+  const badTargets = uncoveredContactTargets(text);
+  checks.push({
+    name: 'named_contact_target',
+    passed: badTargets.length === 0,
+    severity: 'block',
+    reason: badTargets.length ? `directs contact to non-covered figure: ${badTargets.join(', ')}` : undefined,
   });
 
   // 2. Meta output (block): internal writer notes are never publishable copy.
@@ -199,9 +278,51 @@ const REPLY_SKIP_PATTERNS: Array<{ re: RegExp; reason: string }> = [
   { re: /\b(f[u*]ck|c[u*]nt|retard|sl[u*]t)\b/i, reason: 'abusive language' },
 ];
 
+// The "someone should do something (about this/that)" meme: on Bluesky this
+// phrasing is overwhelmingly sarcasm about a quoted post, image, or vibe the
+// account can't see. The lane query was removed 2026-08-25 and the model is
+// instructed to skip invisible referents — and it still recurred (08-28,
+// after a rollback deploy re-ran the old code). Model judgment is not a
+// reliable sole defense against this meme, so it is now a DETERMINISTIC skip:
+// the phrase with a bare deictic referent (or none) can never be replied to.
+// A post that names an actual topic after the phrase ("someone should do
+// something about insulin prices") still passes to the model's judgment.
+const DEICTIC_MEME_RE =
+  /\bsomeone (really |seriously )?(should|needs? to|ought to|has to|had better) do something\b(?!,? about (?!(this|that|it)\b)\w)/i;
+
 export function replyShouldSkip(targetText: string): { skip: boolean; reason?: string } {
+  if (DEICTIC_MEME_RE.test(targetText)) {
+    return { skip: true, reason: 'deictic "someone should do something" meme — referent invisible, near-certain sarcasm' };
+  }
   const hit = REPLY_SKIP_PATTERNS.find((p) => p.re.test(targetText));
   return hit ? { skip: true, reason: hit.reason } : { skip: false };
+}
+
+/**
+ * Catchphrase-reuse check: the 2026-09-01 audit found the reply writer had
+ * quietly built a template farm ("you can be the someone" ×25, "if this is
+ * you" ×15, "less effort than the post" ×21 live) — each reply passed the
+ * near-dup Jaccard check because only the QUIP repeats, not the whole body.
+ * This blocks the THIRD use of any distinctive 4-gram within the recent
+ * window: one echo is coincidence, two is a template forming.
+ */
+export function sharesCatchphrase(text: string, recent: string[]): { shared: boolean; phrase?: string } {
+  const grams = (s: string) => {
+    const toks = normalize(s.replace(/https?:\/\/\S+/g, ' ')).split(' ').filter(Boolean);
+    const out = new Set<string>();
+    for (let i = 0; i + 4 <= toks.length; i++) out.add(toks.slice(i, i + 4).join(' '));
+    return out;
+  };
+  const mine = grams(text);
+  if (mine.size === 0) return { shared: false };
+  const counts = new Map<string, number>();
+  for (const r of recent) {
+    for (const g of grams(r)) {
+      if (mine.has(g)) counts.set(g, (counts.get(g) ?? 0) + 1);
+    }
+  }
+  for (const [g, n] of counts) if (n >= 2) return { shared: true, phrase: g };
+  return { shared: false };
 }
 
 /** Token-Jaccard near-duplicate check against recently posted bodies. */

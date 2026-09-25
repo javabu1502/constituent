@@ -120,7 +120,19 @@ const DIRECT_FEEDS: { url: string; sourceName: string }[] = [
 ];
 
 const CACHE_KEY = 'civic-news';
-const CACHE_TTL_MS = 2 * 60 * 60 * 1000; // 2 hours
+const CACHE_TTL_MS = 45 * 60 * 1000; // 45 min — fresh enough to feel real-time without hammering feeds
+
+// Hard freshness ceiling on every article. Google News queries carry when:3d,
+// but the direct RSS feeds have no date filter at all — a feed serving archive
+// items can inject year-old stories into "today's" pool. Items with no
+// parsable pubDate are dropped too: an undatable item can't be proven fresh.
+const MAX_ARTICLE_AGE_MS = 72 * 60 * 60 * 1000;
+
+function isFresh(article: NewsArticle): boolean {
+  const t = Date.parse(article.pubDate);
+  if (Number.isNaN(t)) return false;
+  return Date.now() - t < MAX_ARTICLE_AGE_MS;
+}
 
 // Keyword-to-policy-area classification (checked against title + description)
 const TOPIC_PATTERNS: { pattern: RegExp; topic: ArticleTopic }[] = [
@@ -387,6 +399,44 @@ function detectBill(title: string): NewsArticle['bill'] {
   }
 }
 
+// Align the article-classifier's topic labels to the campaigns' issue_area
+// values. Without this most topics (guns, labor, economy, tech, housing, taxes)
+// never matched a campaign, so news never surfaced a "weigh in" CTA — the
+// classifier says "Gun Violence"/"Worker Rights" while campaigns are keyed
+// "guns"/"labor". Keyed by topic.issue (lower-cased).
+const TOPIC_TO_ISSUE_AREA: Record<string, string> = {
+  immigration: 'immigration',
+  healthcare: 'healthcare',
+  'climate change': 'environment',
+  'gun violence': 'guns',
+  education: 'education',
+  'tax reform': 'taxation',
+  'affordable housing': 'housing',
+  'social security': 'economy',
+  veterans: 'veterans',
+  elections: 'civil rights',
+  'supreme court': 'civil rights',
+  'cost of living': 'economy',
+  infrastructure: 'infrastructure',
+  'criminal justice reform': 'civil rights',
+  'child care': 'economy',
+  'ai & tech': 'technology',
+  'foreign policy': 'foreign policy',
+  'worker rights': 'labor',
+  'civil rights': 'civil rights',
+};
+
+/** A campaign CTA on a non-US story is how "Anambra state education policy"
+ * got attached to the Pell campaign. Affirmative US signal required; a clearly
+ * foreign dateline without one disqualifies the article entirely. */
+const US_SIGNAL = /\b(?:congress|senate|house of representatives|federal|white house|supreme court|u\.s\.|\bus\b|american|washington|governor|state legislature|legislature|ballot|midterm|medicare|medicaid|social security|irs|epa|fda|pentagon)\b/i;
+const FOREIGN_SIGNAL = /\b(?:nigeria|anambra|\buk\b|britain|british|canada|canadian|australia|india|kenya|ghana|philippines|pakistan|brazil|mexico city|european union|\beu\b|germany|france|japan|beijing|moscow)\b/i;
+
+function isUsCivicRelevant(text: string): boolean {
+  if (US_SIGNAL.test(text)) return true;
+  return !FOREIGN_SIGNAL.test(text);
+}
+
 /**
  * Map each issue to the most active approved campaign on that issue, so news
  * about a topic can recruit readers into an existing campaign.
@@ -432,7 +482,7 @@ export async function GET(request: NextRequest) {
 
     // Check cache
     const { data: cached } = await supabase
-      .from('feed_cache')
+      .from('content_cache')
       .select('data, created_at')
       .eq('cache_key', cacheKey)
       .single();
@@ -492,6 +542,7 @@ export async function GET(request: NextRequest) {
     for (const result of results) {
       if (result.status !== 'fulfilled') continue;
       for (const article of result.value) {
+        if (!isFresh(article)) continue;
         const key = normalizeTitle(article.title);
         if (seen.has(key)) continue;
         seen.add(key);
@@ -516,12 +567,15 @@ export async function GET(request: NextRequest) {
     const articles = diverseArticles.slice(0, 40).map((a) => ({
       ...a,
       bill: detectBill(a.title),
-      campaign: a.topic ? campaignsByIssue.get(a.topic.issue.toLowerCase()) ?? null : null,
+      campaign:
+        a.topic && isUsCivicRelevant(a.title)
+          ? campaignsByIssue.get(TOPIC_TO_ISSUE_AREA[a.topic.issue.toLowerCase()] ?? a.topic.issue.toLowerCase()) ?? null
+          : null,
     }));
 
     // Cache result
     await supabase
-      .from('feed_cache')
+      .from('content_cache')
       .upsert(
         { cache_key: cacheKey, data: { articles }, created_at: new Date().toISOString() },
         { onConflict: 'cache_key' }

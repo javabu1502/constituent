@@ -73,7 +73,7 @@ export async function GET(
     return new Response('Not found', { status: 404 });
   }
   const campaign = lookup.ok ? lookup.campaign : null;
-  const headline = campaign?.headline ?? 'Make your voice heard';
+  const headline = campaign?.headline ?? 'Weigh in on the issues';
 
   const kicker =
     pos === 'support'

@@ -174,7 +174,7 @@ export function RepStep({ state, dispatch, onBack }: RepStepProps) {
     clearInterviewResult();
     setIsOpen(false);
     if (recommended.length > 0) {
-      dispatch({ type: 'GO_TO_STEP', payload: 'topic' });
+      dispatch({ type: 'GO_TO_STEP', payload: 'message' });
     }
   }, [interviewResult, officials, dispatch, clearInterviewResult, setIsOpen]);
 
@@ -235,7 +235,7 @@ export function RepStep({ state, dispatch, onBack }: RepStepProps) {
       dispatch({ type: 'SET_ERROR', payload: 'Please select at least one official' });
       return;
     }
-    dispatch({ type: 'GO_TO_STEP', payload: 'topic' });
+    dispatch({ type: 'GO_TO_STEP', payload: 'message' });
   };
 
   return (
@@ -253,10 +253,9 @@ export function RepStep({ state, dispatch, onBack }: RepStepProps) {
       <div className="mb-5 p-4 bg-gradient-to-r from-purple-600 to-purple-700 rounded-xl text-white">
         <div className="flex items-center justify-between gap-3 flex-wrap">
           <div className="min-w-0 flex-1">
-            <p className="text-sm font-semibold">✨ Want a hand with all of it?</p>
+            <p className="text-sm font-semibold">Not sure who to pick?</p>
             <p className="text-xs text-purple-100 mt-0.5">
-              Chat with the My Democracy Assistant. It&rsquo;ll help you figure out who to contact, name your
-              issue, and shape your story — then set everything up here for you. Share only what feels comfortable.
+              The assistant asks a few questions, then fills in the officials, issue, and draft for you to review.
             </p>
           </div>
           <button

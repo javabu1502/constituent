@@ -7,7 +7,7 @@ import { NewsBrief } from '@/components/news/NewsBrief';
 export const metadata: Metadata = {
   title: 'Civic News | My Democracy',
   description:
-    'Stay informed with the latest civic and political news from multiple sources. Find actionable stories and write to your officials.',
+    'Civic and political news from sources across the spectrum, with a direct line to write your officials about any story.',
   openGraph: {
     title: 'Civic News | My Democracy',
     description:

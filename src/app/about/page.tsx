@@ -44,7 +44,7 @@ export default function AboutPage() {
                 </ul>
               </div>
               <div>
-                <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Personalized Dashboard</h3>
+                <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Your Dashboard</h3>
                 <ul className="list-disc list-inside space-y-2">
                   <li>
                     <strong className="text-gray-900 dark:text-white">Activity feed</strong>:see your message history and engagement at a glance
@@ -110,7 +110,7 @@ export default function AboutPage() {
                   <strong className="text-gray-900 dark:text-white">Enter your address</strong>:we find your federal, state, and local officials
                 </li>
                 <li>
-                  <strong className="text-gray-900 dark:text-white">Tell us what you care about</strong>:AI writes personalized messages for each representative
+                  <strong className="text-gray-900 dark:text-white">Tell us what you care about</strong>:you get a draft letter for each representative, in your words
                 </li>
                 <li>
                   <strong className="text-gray-900 dark:text-white">Reach out</strong>:send an email or make a call
@@ -135,7 +135,7 @@ export default function AboutPage() {
                   <strong className="text-gray-900 dark:text-white">Congressional offices track and tally every constituent contact</strong>:emails, calls, everything
                 </li>
                 <li>
-                  <strong className="text-gray-900 dark:text-white">Personalized messages carry more weight</strong> than form letters or scripts
+                  <strong className="text-gray-900 dark:text-white">A message in your own words carries more weight</strong> than a form letter or script
                 </li>
                 <li>
                   <strong className="text-gray-900 dark:text-white">Your officials work for you</strong>:but only if they hear from you

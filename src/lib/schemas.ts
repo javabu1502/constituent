@@ -12,6 +12,9 @@ const officialSchema = z.object({
   state: z.string().min(1).max(50),
   level: z.enum(['federal', 'state']).optional(),
   district: z.string().max(20).optional(),
+  // Stage campaigns: per-official message intent — thank a rep who's already
+  // on the bill, persuade one who isn't.
+  intent: z.enum(['persuade', 'thank']).optional(),
 });
 
 const addressSchema = z.object({
@@ -66,6 +69,8 @@ export const trackSendSchema = z.object({
   issue_subtopic: z.string().min(1).max(200),
   message_body: z.string().min(1).max(10000),
   delivery_method: z.enum(['email', 'phone', 'webform']),
+  // Stage campaigns: whether this message thanked or tried to persuade.
+  message_intent: z.enum(['persuade', 'thank']).optional(),
   // Must cover every status the clients emit (OfficialSendCard in
   // CampaignParticipate + OfficialCard in SendStep) — a value missing here
   // 400s the request, and the fire-and-forget clients drop that silently.
@@ -90,6 +95,8 @@ export const createCampaignSchema = z.object({
   issue_subtopic: z.string().max(200).nullish(),
   // Advocacy fields
   target_level: z.enum(['federal', 'state', 'both']).optional(),
+  // Directional stance for advocacy campaigns (one way only, chosen at creation).
+  direction: z.enum(['support', 'oppose']).optional(),
   message_template: z.string().max(2000).nullish(),
   distribution_plan: z.string().max(1000).nullish(),
   // Optional related bill (federal or state) — all-or-nothing, resolved client-side
@@ -117,23 +124,119 @@ export const createCampaignSchema = z.object({
     .max(253)
     .regex(/^(?!-)[a-z0-9-]{1,63}(?<!-)(\.(?!-)[a-z0-9-]{1,63}(?<!-))+$/i, 'Enter a bare domain like action.yourorg.org')
     .nullish(),
+  // Stage campaigns: this campaign is one step of a parent initiative's
+  // legislative journey. Parent ownership + one-level nesting enforced in the
+  // route; committee stages carry the committee to target.
+  parent_campaign_id: z.string().uuid().optional(),
+  stage_goal: z.enum(['cosponsor', 'committee', 'floor_house', 'floor_senate', 'thank_you', 'custom']).optional(),
+  // Congressional thomas_id (HSIF) or a state committee uuid; state committees
+  // also send target_committee_state so the route knows which roster to check.
+  target_committee: z
+    .string()
+    .regex(/^([HS][A-Z]{3}\d{0,2}|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$/i, 'Unknown committee id')
+    .optional(),
+  target_committee_state: z.string().length(2).optional(),
+  // Narrow targeting beyond level: a hand-picked officials list (ids matched
+  // against each participant's resolved reps) or a party+chamber slice.
+  // At most one of committee / officials / party applies.
+  target_officials: z
+    .array(
+      z.object({
+        id: z.string().min(1).max(60),
+        name: z.string().min(1).max(120),
+        level: z.enum(['federal', 'state']),
+        state: z.string().length(2),
+      })
+    )
+    .min(1)
+    .max(100)
+    .optional(),
+  target_party: z
+    .object({
+      party: z.enum(['D', 'R', 'I']),
+      chamber: z.enum(['house', 'senate', 'both']),
+      level: z.enum(['federal', 'state']),
+      state: z.string().length(2).optional(),
+    })
+    .optional(),
+  // Stage creation: email everyone who already acted on the initiative.
+  notify_supporters: z.boolean().optional(),
 }).superRefine((data, ctx) => {
+  const modes = [data.target_committee, data.target_officials, data.target_party].filter(Boolean).length;
+  if (modes > 1) {
+    ctx.addIssue({ code: 'custom', path: ['target_officials'], message: 'Pick one targeting mode: committee, specific officials, or party' });
+  }
+  if ((data.target_officials || data.target_party) && data.campaign_type === 'storytelling') {
+    ctx.addIssue({ code: 'custom', path: ['target_officials'], message: 'Targeting applies to advocacy campaigns' });
+  }
+  if (data.stage_goal && !data.parent_campaign_id) {
+    ctx.addIssue({ code: 'custom', path: ['stage_goal'], message: 'A stage goal requires a parent campaign' });
+  }
+  if (data.stage_goal === 'committee' && !data.target_committee) {
+    ctx.addIssue({ code: 'custom', path: ['target_committee'], message: 'Committee stages must name the committee to target' });
+  }
+  if (data.target_committee && data.stage_goal !== 'committee') {
+    ctx.addIssue({ code: 'custom', path: ['target_committee'], message: 'Committee targeting is only for committee stages' });
+  }
+  if (data.target_committee_state && !data.target_committee) {
+    ctx.addIssue({ code: 'custom', path: ['target_committee_state'], message: 'A committee state requires a committee' });
+  }
   if (data.campaign_type === 'storytelling') {
     if (!data.usage_tags || data.usage_tags.length < 1) {
       ctx.addIssue({ code: 'custom', path: ['usage_tags'], message: 'Select at least one way you’d like to use these stories' });
     }
   } else {
-    if (!data.issue_area || data.issue_area.trim().length < 1) {
+    // Actions inherit the parent campaign's issue area; only standalone
+    // campaigns pick one.
+    if ((!data.issue_area || data.issue_area.trim().length < 1) && !data.parent_campaign_id) {
       ctx.addIssue({ code: 'custom', path: ['issue_area'], message: 'Issue area is required' });
     }
     if (!data.target_level) {
       ctx.addIssue({ code: 'custom', path: ['target_level'], message: 'Target level is required' });
     }
-    if (!data.distribution_plan || data.distribution_plan.trim().length < 10) {
-      ctx.addIssue({ code: 'custom', path: ['distribution_plan'], message: 'Distribution plan must be at least 10 characters' });
+    // Stages inherit the parent's direction — a thank-you or cosponsor stage
+    // can't take a different position than its own initiative.
+    if (!data.direction && !data.parent_campaign_id) {
+      ctx.addIssue({ code: 'custom', path: ['direction'], message: 'Choose whether the campaign supports or opposes' });
     }
+    // distribution_plan is no longer collected (dropped from the form
+    // 2026-09-18); the column stays for campaigns that have one.
   }
 });
+
+// Campaign edits: same per-field rules as creation, but everything optional —
+// the route merges changes onto the existing row. Nullable fields use null to
+// clear. Stage/parent structure and campaign_type are not editable.
+export const updateCampaignSchema = z
+  .object({
+    headline: z.string().min(3).max(100).optional(),
+    description: z.string().min(10).max(500).optional(),
+    issue_area: z.string().max(200).optional(),
+    issue_subtopic: z.string().max(200).nullish(),
+    target_level: z.enum(['federal', 'state', 'both']).optional(),
+    direction: z.enum(['support', 'oppose']).optional(),
+    message_template: z.string().max(2000).nullish(),
+    distribution_plan: z.string().min(10).max(1000).optional(),
+    bill_level: z.enum(['federal', 'state']).nullish(),
+    bill_state: z.string().length(2).nullish(),
+    bill_ref: z.string().max(60).nullish(),
+    bill_title: z.string().max(500).nullish(),
+    bill_url: z.string().max(1000).nullish(),
+    story_prompt: z.string().max(2000).nullish(),
+    usage_tags: z.array(z.string().max(60)).max(20).optional(),
+    org_name: z.string().max(120).nullish(),
+    org_url: z.string().url().max(300).nullish(),
+    org_logo_url: z.string().url().max(500).nullish(),
+    brand_color: z.string().regex(/^#[0-9a-fA-F]{6}$/, 'Use a hex color like #6A39C9').nullish(),
+    custom_domain: z
+      .string()
+      .max(253)
+      .regex(/^(?!-)[a-z0-9-]{1,63}(?<!-)(\.(?!-)[a-z0-9-]{1,63}(?<!-))+$/i, 'Enter a bare domain like action.yourorg.org')
+      .nullish(),
+  })
+  .refine((data) => Object.values(data).some((v) => v !== undefined), {
+    message: 'At least one field is required',
+  });
 
 export const storyChatSchema = z.object({
   campaignSlug: z.string().min(1).max(120),
@@ -147,6 +250,14 @@ export const storyChatSchema = z.object({
     .min(1)
     .max(60),
   turnstileToken: z.string().optional(),
+});
+
+// Compose accepts an optional revision: the storyteller's current draft plus
+// a plain-language edit request ("make it shorter", "mention my daughter").
+export const storyComposeSchema = storyChatSchema.extend({
+  currentTitle: z.string().max(120).optional(),
+  currentBody: z.string().max(8000).optional(),
+  revisionNote: z.string().min(3).max(500).optional(),
 });
 
 export const submitStorySchema = z.object({
@@ -205,6 +316,16 @@ export const messageFeedbackSchema = z.object({
   rating: z.enum(['positive', 'negative']),
 });
 
+// Compose-step enrichment: after a supporter writes why they care, the AI
+// asks 1-4 very short questions to draw out concrete detail. Distinct from
+// generateFollowUpSchema below, which drafts follow-up MESSAGES to officials.
+export const followUpQuestionsSchema = z.object({
+  headline: z.string().min(1).max(200),
+  stance: z.enum(['support', 'oppose', 'undecided']).optional(),
+  // Empty is valid: no story yet means the questions become gentle starters.
+  personalWhy: z.string().max(2000, 'Your personal story is a bit long — please keep it under 2,000 characters.'),
+});
+
 export const generateFollowUpSchema = z.object({
   originalMessageId: z.string().uuid(),
   followUpType: z.enum(['no_response', 'thank_you']),
@@ -221,6 +342,11 @@ export const profileUpdateSchema = z
     zip: z.string().regex(/^\d{5}(-\d{4})?$/).optional(),
     representatives: z.unknown().optional(),
     local_officials: z.unknown().optional(),
+    // Account-level org identity (defaults for campaign branding). Null clears.
+    org_name: z.string().trim().max(120).nullable().optional(),
+    org_url: z.string().trim().url().max(300).nullable().optional(),
+    org_logo_url: z.string().max(500).nullable().optional(),
+    brand_color: z.string().regex(/^#[0-9a-fA-F]{6}$/).nullable().optional(),
   })
   .refine((data) => Object.values(data).some((v) => v !== undefined), {
     message: 'At least one field is required',
@@ -228,6 +354,8 @@ export const profileUpdateSchema = z
 
 export const campaignParticipateSchema = z.object({
   participant_name: z.string().min(1).max(200),
+  // Collected on org campaigns (with notice) for advance-the-campaign emails.
+  participant_email: z.string().email().max(254).nullish(),
   participant_city: z.string().min(1).max(100),
   participant_state: z.string().min(1).max(50),
   messages_sent: z.number().int().min(0).max(20).optional(),

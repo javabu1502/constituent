@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { callClaude, extractJSON, deDash } from '@/lib/claude';
-import { STORY_COMPOSE_PROMPT } from '@/lib/story-interview-prompt';
-import { storyChatSchema, parseBody } from '@/lib/schemas';
+import { STORY_COMPOSE_PROMPT, STORY_REVISE_PROMPT } from '@/lib/story-interview-prompt';
+import { storyComposeSchema, parseBody } from '@/lib/schemas';
 import { chatLimiter, getClientIp } from '@/lib/rate-limit';
 import { enforceDailyQuota, resolveUsageIdentity } from '@/lib/usage-quota';
 import { verifyTurnstile } from '@/lib/turnstile';
@@ -29,12 +29,13 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 });
   }
 
-  const parsed = parseBody(storyChatSchema, raw);
+  const parsed = parseBody(storyComposeSchema, raw);
   if (!parsed.success) {
     return NextResponse.json({ error: parsed.error }, { status: 400 });
   }
 
-  const { messages, turnstileToken } = parsed.data;
+  const { messages, turnstileToken, currentBody, currentTitle, revisionNote } = parsed.data;
+  const isRevision = !!(revisionNote?.trim() && currentBody?.trim());
 
   const identity = await resolveUsageIdentity(ip);
   if (process.env.TURNSTILE_SECRET_KEY) {
@@ -53,11 +54,19 @@ export async function POST(request: Request) {
     .join('\n\n');
 
   try {
-    const text = await callClaude(STORY_COMPOSE_PROMPT, transcript, 1600);
+    // Revision mode: the storyteller has a draft and a plain-language edit
+    // request; the transcript stays the source of truth for facts.
+    const userContent = isRevision
+      ? `INTERVIEW TRANSCRIPT (source of truth for facts):\n${transcript}\n\nCURRENT TITLE: ${currentTitle?.trim() || '(none)'}\n\nCURRENT DRAFT:\n${currentBody!.trim()}\n\nSTORYTELLER'S EDIT REQUEST: ${revisionNote!.trim()}`
+      : transcript;
+    const text = await callClaude(isRevision ? STORY_REVISE_PROMPT : STORY_COMPOSE_PROMPT, userContent, 1600);
     const json = extractJSON(text) as { title?: string; body?: string } | null;
 
     if (!json || typeof json.body !== 'string' || json.body.trim().length < 20) {
-      return NextResponse.json({ error: 'Could not compose a story yet — try sharing a little more first.' }, { status: 422 });
+      return NextResponse.json(
+        { error: isRevision ? 'Could not make that edit. Try rewording the request.' : 'Could not compose a story yet. Try sharing a little more first.' },
+        { status: 422 }
+      );
     }
 
     return NextResponse.json({

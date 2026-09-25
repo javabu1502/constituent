@@ -23,7 +23,7 @@ export interface OfficialMessage {
 
 // State shape
 export interface ContactState {
-  step: 'address' | 'representative' | 'topic' | 'message' | 'send' | 'success';
+  step: 'topic' | 'compose' | 'address' | 'representative' | 'message' | 'send' | 'success';
   shareId: string | null;
   address: Address | null;
   officials: Official[];
@@ -37,6 +37,8 @@ export interface ContactState {
   issueCategory: string;
   ask: string;
   personalWhy: string;
+  // Message-first: the approved core message, drafted before address/officials.
+  coreMessage: string;
   // Per-official messages keyed by official name (like PoliAct)
   messages: Record<string, OfficialMessage>;
   // Per-official loading states
@@ -59,6 +61,7 @@ type ContactAction =
   | { type: 'SET_ISSUE'; payload: { issue: string; category: string } }
   | { type: 'SET_ASK'; payload: string }
   | { type: 'SET_PERSONAL_WHY'; payload: string }
+  | { type: 'SET_CORE'; payload: string }
   | { type: 'SET_MESSAGE'; payload: { officialName: string; message: OfficialMessage } }
   | { type: 'SET_MESSAGES'; payload: Record<string, OfficialMessage> }
   | { type: 'UPDATE_MESSAGE'; payload: { officialName: string; field: 'subject' | 'body'; value: string } }
@@ -70,7 +73,7 @@ type ContactAction =
   | { type: 'RESET' };
 
 const initialState: ContactState = {
-  step: 'address',
+  step: 'topic',
   address: null,
   officials: [],
   selectedReps: [],
@@ -82,6 +85,7 @@ const initialState: ContactState = {
   issueCategory: '',
   ask: '',
   personalWhy: '',
+  coreMessage: '',
   messages: {},
   loadingIds: new Set(),
   isLoading: false,
@@ -119,6 +123,8 @@ function contactReducer(state: ContactState, action: ContactAction): ContactStat
       return { ...state, issue: action.payload.issue, issueCategory: action.payload.category };
     case 'SET_ASK':
       return { ...state, ask: action.payload };
+    case 'SET_CORE':
+      return { ...state, coreMessage: action.payload };
     case 'SET_PERSONAL_WHY':
       return { ...state, personalWhy: action.payload };
     case 'SET_MESSAGE':
@@ -166,21 +172,19 @@ function contactReducer(state: ContactState, action: ContactAction): ContactStat
   }
 }
 
-const STEPS = ['address', 'representative', 'topic', 'message', 'send'] as const;
+const STEPS = ['topic', 'address', 'message', 'send'] as const;
 const STEP_LABELS: Record<string, string> = {
-  address: 'Address',
-  representative: 'Who to Contact',
-  topic: 'Your Issue',
+  topic: 'Your Story',
+  address: 'Your Address',
   message: 'Review',
   send: 'Send',
   success: 'Done',
 };
 
 const STEP_DESCRIPTIONS: Record<string, string> = {
-  address: 'We use your address to find the people who represent you.',
-  representative: 'Pick who you want to write to.',
-  topic: 'Tell us what matters to you. AI will draft a message for each person you selected.',
-  message: 'Read over the messages and make any changes before sending.',
+  topic: 'Tell us what matters to you and why.',
+  address: 'Your address maps you to the officials who actually represent you.',
+  message: 'Your message, addressed to your officials. Edit anything before it goes.',
   send: 'Send your messages.',
 };
 
@@ -192,12 +196,18 @@ export function ContactFlow() {
   const [wasReset, setWasReset] = useState(false);
 
   // Wrap dispatch to detect RESET and clear auto-save
+  const firstTouch = useRef(false);
   const wrappedDispatch = useCallback((action: ContactAction) => {
     if (action.type === 'RESET') {
       setWasReset(true);
     }
     if (action.type === 'GO_TO_STEP') {
       trackEvent('contact_step', { step: action.payload });
+    }
+    // First real interaction (typing/picking) — the human-vs-bounce line.
+    if (!firstTouch.current && (action.type === 'SET_ISSUE' || action.type === 'SET_PERSONAL_WHY' || action.type === 'SET_ASK')) {
+      firstTouch.current = true;
+      trackEvent('contact_engaged', { via: action.type });
     }
     dispatch(action);
   }, []);
@@ -257,14 +267,28 @@ export function ContactFlow() {
       dispatch({ type: 'SET_LOADING', payload: false });
     }
 
-    // Navigate to saved step
-    dispatch({ type: 'GO_TO_STEP', payload: draft.step as ContactState['step'] });
+    // Navigate to saved step. Drafts saved before the message-first flow may
+    // point at retired steps — land them where the current flow makes sense.
+    const savedStep = draft.step as ContactState['step'];
+    const step: ContactState['step'] =
+      savedStep === 'representative' || savedStep === 'compose' ? 'topic' : savedStep;
+    dispatch({ type: 'GO_TO_STEP', payload: step });
   }, [dismissDraft]);
 
   // Auto-fill from user profile and handle repId deep-linking
   useEffect(() => {
     if (profileLoaded.current) return;
     profileLoaded.current = true;
+
+    // Landing beacon: fires once per mount, BEFORE any interaction. Without
+    // it, a human who lands on /contact and bounces at the first screen is
+    // invisible in the funnel — indistinguishable from a bot. Vercel counts
+    // the pageview; this tells us the app actually booted for them, and the
+    // deep-link flag splits organic arrivals from our own campaign links.
+    trackEvent('contact_landed', {
+      deepLink: searchParams.has('issue') || searchParams.has('ask') || searchParams.has('repId'),
+      utmSource: searchParams.get('utm_source') ?? 'none',
+    });
 
     // Read deep-link params
     const deepIssue = searchParams.get('issue');
@@ -337,9 +361,8 @@ export function ContactFlow() {
                 return;
               }
             }
-
-            // No repId - skip to rep selection step
-            dispatch({ type: 'GO_TO_STEP', payload: 'representative' });
+            // Message-first: stay on the story step. The saved address just
+            // pre-fills the address step to a one-click confirm later.
           } else {
             // Has address but no cached reps - fetch them and skip
             fetch('/api/profile/representatives', { method: 'POST' })
@@ -361,8 +384,7 @@ export function ContactFlow() {
                       return;
                     }
                   }
-
-                  dispatch({ type: 'GO_TO_STEP', payload: 'representative' });
+                  // Message-first: stay on the story step (see above).
                 }
               })
               .catch(() => {});
@@ -397,9 +419,9 @@ export function ContactFlow() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
             </div>
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Thank You!</h3>
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Sent</h3>
             <p className="text-gray-600 dark:text-gray-300 mb-6">
-              Your voice matters. Every message counts toward making a difference.
+              Offices tally constituent messages by issue. Yours is now in the count.
             </p>
             <div className="p-4 bg-purple-50 dark:bg-purple-900/30 border border-purple-200 dark:border-purple-700 rounded-xl mb-6">
               <p className="text-sm text-purple-800 dark:text-purple-200">
@@ -450,7 +472,7 @@ export function ContactFlow() {
   return (
     <div className="w-full max-w-2xl mx-auto">
       {/* Resume draft banner */}
-      {savedDraft && !hasDeepLink && state.step === 'address' && (
+      {savedDraft && !hasDeepLink && state.step === 'topic' && (
         <div className="mb-4 mx-4 p-4 bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-700 rounded-xl flex items-center justify-between gap-4">
           <div className="min-w-0">
             <p className="text-sm font-medium text-purple-900 dark:text-purple-100">
@@ -550,7 +572,7 @@ export function ContactFlow() {
         {state.step === 'address' && (
           <AddressStep state={state} dispatch={wrappedDispatch} />
         )}
-        {state.step === 'representative' && (
+        {false && state.step === 'representative' && (
           <RepStep state={state} dispatch={wrappedDispatch} onBack={goBack} />
         )}
         {state.step === 'topic' && (

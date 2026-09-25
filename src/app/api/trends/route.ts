@@ -44,10 +44,21 @@ export async function GET(req: NextRequest) {
   const admin = createAdminClient();
   const since = buildTimeFilter(period);
 
+  // Demo/sandbox campaigns (slug prefix "demo-") must NEVER count toward
+  // public trends — these numbers imply real constituents contacted real
+  // officials, and that claim has to stay true.
+  const { data: demoCampaigns } = await admin.from('campaigns').select('id').like('slug', 'demo-%');
+  const demoIds = (demoCampaigns ?? []).map((c) => c.id as string);
+  const demoFilter = demoIds.length ? `campaign_id.is.null,campaign_id.not.in.(${demoIds.join(',')})` : null;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const excludeDemo = <T,>(q: T): T => (demoFilter ? (q as any).or(demoFilter) : q);
+
   // Build filtered query for issue rankings
-  let issueQuery = admin
-    .from('messages')
-    .select('issue_area, issue_subtopic');
+  let issueQuery = excludeDemo(
+    admin
+      .from('messages')
+      .select('issue_area, issue_subtopic')
+  );
 
   if (since) issueQuery = issueQuery.gte('created_at', since);
   if (level !== 'all') issueQuery = issueQuery.eq('legislator_level', level);
@@ -60,11 +71,13 @@ export async function GET(req: NextRequest) {
 
   // Recent messages respect the level/state filters (like the issue list) so
   // the activity chart and rising/cooling badges match what's on screen.
-  let recentQuery = admin
-    .from('messages')
-    .select('issue_area, created_at')
-    .gte('created_at', thirtyDaysAgo)
-    .limit(10000);
+  let recentQuery = excludeDemo(
+    admin
+      .from('messages')
+      .select('issue_area, created_at')
+      .gte('created_at', thirtyDaysAgo)
+      .limit(10000)
+  );
   if (level !== 'all') recentQuery = recentQuery.eq('legislator_level', level);
   if (stateParam) recentQuery = recentQuery.eq('advocate_state', stateParam);
 
@@ -78,11 +91,11 @@ export async function GET(req: NextRequest) {
     { data: campaignData },
   ] = await Promise.all([
     issueQuery,
-    admin.from('messages').select('*', { count: 'exact', head: true }),
-    admin.from('messages').select('*', { count: 'exact', head: true }).gte('created_at', thirtyDaysAgo),
-    admin.from('messages').select('advocate_state').limit(10000),
+    excludeDemo(admin.from('messages').select('*', { count: 'exact', head: true })),
+    excludeDemo(admin.from('messages').select('*', { count: 'exact', head: true }).gte('created_at', thirtyDaysAgo)),
+    excludeDemo(admin.from('messages').select('advocate_state').limit(10000)),
     recentQuery,
-    admin.from('messages').select('legislator_name').limit(10000),
+    excludeDemo(admin.from('messages').select('legislator_name').limit(10000)),
     admin.from('campaigns').select('story_count').eq('approval_status', 'approved').eq('is_official', true),
   ]);
 
@@ -150,10 +163,12 @@ export async function GET(req: NextRequest) {
       if (profile?.state) {
         userState = profile.state;
 
-        let stateQuery = admin
-          .from('messages')
-          .select('issue_area, issue_subtopic')
-          .eq('advocate_state', profile.state);
+        let stateQuery = excludeDemo(
+          admin
+            .from('messages')
+            .select('issue_area, issue_subtopic')
+            .eq('advocate_state', profile.state)
+        );
 
         if (since) stateQuery = stateQuery.gte('created_at', since);
         if (level !== 'all') stateQuery = stateQuery.eq('legislator_level', level);

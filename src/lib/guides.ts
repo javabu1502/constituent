@@ -225,7 +225,7 @@ export const GUIDES: GuideEntry[] = [
   // Community Action
   {
     title: 'How to Attend a Town Hall',
-    description: 'Find town halls, prepare your question, and make your voice heard face-to-face with your officials.',
+    description: 'Find town halls, prepare your question, and ask it to your officials face-to-face.',
     href: '/guides/how-to-attend-a-town-hall',
     category: 'community-action',
   },

@@ -4,6 +4,9 @@
  * which re-exports detectBillReferences from here to keep a single source of truth.
  */
 
+/** The sitting Congress — bump every odd January. */
+export const CURRENT_CONGRESS = 119;
+
 export interface BillReference {
   raw: string;
   level: 'federal' | 'state';

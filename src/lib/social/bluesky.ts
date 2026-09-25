@@ -22,6 +22,23 @@ interface Facet {
   features: Array<{ $type: string; uri: string }>;
 }
 
+interface BlobRef {
+  $type: 'blob';
+  ref: { $link: string };
+  mimeType: string;
+  size: number;
+}
+
+export interface ExternalEmbed {
+  $type: 'app.bsky.embed.external';
+  external: {
+    uri: string;
+    title: string;
+    description: string;
+    thumb?: BlobRef;
+  };
+}
+
 export interface PostRecord {
   $type: 'app.bsky.feed.post';
   text: string;
@@ -32,6 +49,7 @@ export interface PostRecord {
     root: { uri: string; cid: string };
     parent: { uri: string; cid: string };
   };
+  embed?: ExternalEmbed;
 }
 
 export interface PostResult {
@@ -94,10 +112,53 @@ export interface FoundPost {
   cid: string;
   authorHandle: string;
   authorDisplay: string;
+  authorDid: string;
   text: string;
   /** Thread root ref if this post is itself a reply (else the post is root). */
   root?: { uri: string; cid: string };
+  /** Direct parent ref if this post is itself a reply. */
+  parent?: { uri: string; cid: string };
+  /** What the post's embed shows (quoted post text, image alts, link card). */
+  embedText?: string;
   likeCount: number;
+  /** ISO timestamp the post was indexed (set by getAuthorFeed for recency). */
+  indexedAt?: string;
+}
+
+/**
+ * Flatten a hydrated embed view into readable context. A post whose text is
+ * "someone should do something about this" carries its entire meaning in the
+ * quoted post or image — a reply drafted without this context is a coin flip.
+ */
+export function extractEmbedText(embed: Record<string, unknown> | undefined | null): string {
+  if (!embed) return '';
+  const type = (embed.$type as string) ?? '';
+  const parts: string[] = [];
+  if (type.startsWith('app.bsky.embed.record')) {
+    // Quote-post (possibly recordWithMedia). The quoted record's text lives at
+    // embed.record.value.text (viewRecord) — one level deeper for withMedia.
+    const rec = (embed.record as Record<string, unknown>) ?? {};
+    const inner = (rec.record as Record<string, unknown>) ?? rec; // withMedia nests once more
+    const value = (inner.value as Record<string, unknown>) ?? {};
+    const quotedAuthor = ((inner.author as Record<string, unknown>) ?? {}).handle;
+    if (typeof value.text === 'string' && value.text) {
+      parts.push(`quotes @${quotedAuthor ?? '?'}: ${value.text}`);
+    }
+    const media = (embed.media as Record<string, unknown>) ?? null;
+    if (media) parts.push(extractEmbedText(media));
+  } else if (type.startsWith('app.bsky.embed.images')) {
+    const images = (embed.images as Array<Record<string, unknown>>) ?? [];
+    const alts = images.map((i) => (i.alt as string) ?? '').filter(Boolean);
+    parts.push(alts.length ? `image: ${alts.join(' | ')}` : 'image (no description)');
+  } else if (type.startsWith('app.bsky.embed.video')) {
+    parts.push('video');
+  } else if (type.startsWith('app.bsky.embed.external')) {
+    const ext = (embed.external as Record<string, unknown>) ?? {};
+    const title = (ext.title as string) ?? '';
+    const desc = (ext.description as string) ?? '';
+    if (title || desc) parts.push(`link: ${[title, desc].filter(Boolean).join(' — ')}`);
+  }
+  return parts.filter(Boolean).join(' ');
 }
 
 /** Search recent posts by keyword (for the Engager's listening layer). */
@@ -110,17 +171,55 @@ export async function searchPosts(session: BlueskySession, q: string, limit = 15
   return (data.posts ?? []).map((p) => {
     const author = (p.author as Record<string, unknown>) ?? {};
     const record = (p.record as Record<string, unknown>) ?? {};
-    const reply = record.reply as { root?: { uri: string; cid: string } } | undefined;
+    const reply = record.reply as { root?: { uri: string; cid: string }; parent?: { uri: string; cid: string } } | undefined;
     return {
       uri: p.uri as string,
       cid: p.cid as string,
       authorHandle: (author.handle as string) ?? '',
       authorDisplay: (author.displayName as string) ?? '',
+      authorDid: (author.did as string) ?? '',
       text: (record.text as string) ?? '',
       root: reply?.root,
+      parent: reply?.parent,
+      embedText: extractEmbedText(p.embed as Record<string, unknown> | undefined),
       likeCount: (p.likeCount as number) ?? 0,
     };
   });
+}
+
+/**
+ * Batch-fetch the text of specific posts (thread parents, quoted posts) so
+ * reply drafting can see the conversation a candidate post lives in.
+ */
+export async function getPostTexts(
+  session: BlueskySession,
+  uris: string[],
+): Promise<Record<string, { authorHandle: string; text: string }>> {
+  const out: Record<string, { authorHandle: string; text: string }> = {};
+  if (!uris.length) return out;
+  for (let i = 0; i < uris.length; i += 25) {
+    const batch = uris.slice(i, i + 25);
+    const params = new URLSearchParams();
+    batch.forEach((u) => params.append('uris', u));
+    const data = await xrpcGet<{ posts: Array<Record<string, unknown>> }>(
+      'app.bsky.feed.getPosts',
+      params,
+      session.accessJwt,
+    ).catch(() => ({ posts: [] as Array<Record<string, unknown>> }));
+    for (const p of data.posts ?? []) {
+      const author = (p.author as Record<string, unknown>) ?? {};
+      const record = (p.record as Record<string, unknown>) ?? {};
+      const embedText = extractEmbedText(p.embed as Record<string, unknown> | undefined);
+      const text = [(record.text as string) ?? '', embedText ? `[${embedText}]` : '']
+        .filter(Boolean)
+        .join(' ');
+      out[p.uri as string] = {
+        authorHandle: (author.handle as string) ?? '',
+        text,
+      };
+    }
+  }
+  return out;
 }
 
 /** Fetch engagement counts for a set of post URIs (Analyst). */
@@ -151,6 +250,56 @@ export async function getPostMetrics(
   return out;
 }
 
+export interface InboundNotification {
+  /** The reply/mention/quote post itself (what we thread our response onto). */
+  uri: string;
+  cid: string;
+  authorHandle: string;
+  authorDisplay: string;
+  text: string;
+  reason: 'reply' | 'mention' | 'quote';
+  /** Thread root, if their post carries one; else their post is the root. */
+  root?: { uri: string; cid: string };
+  /** Direct parent — for replies, the post of OURS they're responding to. */
+  parent?: { uri: string; cid: string };
+  isRead: boolean;
+  indexedAt: string;
+}
+
+/**
+ * Fetch notifications and keep only the ones that are people ENGAGING WITH US —
+ * replies, mentions, and quote-posts. This is how the Social Desk sees inbound
+ * conversation on our own posts (search only ever surfaces strangers' posts).
+ * Likes/reposts/follows are dropped (nothing to reply to).
+ */
+export async function listNotifications(session: BlueskySession, limit = 50): Promise<InboundNotification[]> {
+  const data = await xrpcGet<{ notifications: Array<Record<string, unknown>> }>(
+    'app.bsky.notification.listNotifications',
+    { limit: String(limit) },
+    session.accessJwt,
+  );
+  const kept = new Set(['reply', 'mention', 'quote']);
+  return (data.notifications ?? [])
+    .filter((n) => kept.has(n.reason as string))
+    .map((n) => {
+      const author = (n.author as Record<string, unknown>) ?? {};
+      const record = (n.record as Record<string, unknown>) ?? {};
+      const reply = record.reply as { root?: { uri: string; cid: string }; parent?: { uri: string; cid: string } } | undefined;
+      return {
+        uri: n.uri as string,
+        cid: n.cid as string,
+        authorHandle: (author.handle as string) ?? '',
+        authorDisplay: (author.displayName as string) ?? '',
+        text: (record.text as string) ?? '',
+        reason: n.reason as InboundNotification['reason'],
+        root: reply?.root,
+        parent: reply?.parent,
+        isRead: (n.isRead as boolean) ?? false,
+        indexedAt: (n.indexedAt as string) ?? '',
+      };
+    });
+}
+
 async function xrpc<T>(method: string, body: unknown, token?: string): Promise<T> {
   const res = await fetch(`${PDS}/${method}`, {
     method: 'POST',
@@ -172,6 +321,198 @@ export async function createSession(handle: string, appPassword: string): Promis
     identifier: handle,
     password: appPassword,
   });
+}
+
+// --- Following (network growth) ---
+
+/** Resolve a handle (e.g. "someone.bsky.social") to its DID. */
+export async function resolveHandle(handle: string): Promise<string | null> {
+  try {
+    const d = await xrpcGet<{ did: string }>('com.atproto.identity.resolveHandle', { handle });
+    return d.did ?? null;
+  } catch {
+    return null;
+  }
+}
+
+/** DIDs we already follow (paginated), so we never double-follow. */
+export async function getFollowing(session: BlueskySession, actor?: string): Promise<Set<string>> {
+  const dids = new Set<string>();
+  let cursor: string | undefined;
+  do {
+    const params: Record<string, string> = { actor: actor ?? session.did, limit: '100' };
+    if (cursor) params.cursor = cursor;
+    const data = await xrpcGet<{ follows?: Array<{ did: string }>; cursor?: string }>('app.bsky.graph.getFollows', params, session.accessJwt);
+    for (const f of data.follows ?? []) dids.add(f.did);
+    cursor = data.cursor;
+  } while (cursor && dids.size < 2000);
+  return dids;
+}
+
+/** Accounts that follow us (did + handle), for follow-back. */
+export async function getFollowers(session: BlueskySession, actor?: string): Promise<Array<{ did: string; handle: string }>> {
+  const out: Array<{ did: string; handle: string }> = [];
+  let cursor: string | undefined;
+  do {
+    const params: Record<string, string> = { actor: actor ?? session.did, limit: '100' };
+    if (cursor) params.cursor = cursor;
+    const data = await xrpcGet<{ followers?: Array<{ did: string; handle: string }>; cursor?: string }>('app.bsky.graph.getFollowers', params, session.accessJwt);
+    for (const f of data.followers ?? []) out.push({ did: f.did, handle: f.handle });
+    cursor = data.cursor;
+  } while (cursor && out.length < 1000);
+  return out;
+}
+
+/** Follow an account by DID. */
+export async function follow(session: BlueskySession, subjectDid: string): Promise<{ uri: string; cid: string }> {
+  return xrpc<{ uri: string; cid: string }>(
+    'com.atproto.repo.createRecord',
+    {
+      repo: session.did,
+      collection: 'app.bsky.graph.follow',
+      record: { $type: 'app.bsky.graph.follow', subject: subjectDid, createdAt: new Date().toISOString() },
+    },
+    session.accessJwt,
+  );
+}
+
+// --- Engagement (likes + reposts) ---
+
+/**
+ * Like a post by its strong ref (uri + cid). A like is the lowest-risk form of
+ * engagement — no content is published under our brand — and it notifies the
+ * author, which is how we get on relevant civic accounts' radar.
+ */
+export async function like(session: BlueskySession, subject: { uri: string; cid: string }): Promise<{ uri: string; cid: string }> {
+  return xrpc<{ uri: string; cid: string }>(
+    'com.atproto.repo.createRecord',
+    {
+      repo: session.did,
+      collection: 'app.bsky.feed.like',
+      record: { $type: 'app.bsky.feed.like', subject, createdAt: new Date().toISOString() },
+    },
+    session.accessJwt,
+  );
+}
+
+/**
+ * Repost a post by its strong ref (uri + cid). Unlike a like, a repost
+ * AMPLIFIES someone else's content under our brand, so callers must vet the
+ * source and content first (neutrality/accuracy) — we only repost from a
+ * curated trusted-source allowlist.
+ */
+export async function repost(session: BlueskySession, subject: { uri: string; cid: string }): Promise<{ uri: string; cid: string }> {
+  return xrpc<{ uri: string; cid: string }>(
+    'com.atproto.repo.createRecord',
+    {
+      repo: session.did,
+      collection: 'app.bsky.feed.repost',
+      record: { $type: 'app.bsky.feed.repost', subject, createdAt: new Date().toISOString() },
+    },
+    session.accessJwt,
+  );
+}
+
+/** Recent posts from one account's feed (for the trusted-source reposter). */
+export async function getAuthorFeed(session: BlueskySession, actor: string, limit = 10): Promise<FoundPost[]> {
+  const data = await xrpcGet<{ feed?: Array<{ post?: Record<string, unknown> }> }>(
+    'app.bsky.feed.getAuthorFeed',
+    { actor, limit: String(limit), filter: 'posts_no_replies' },
+    session.accessJwt,
+  );
+  const out: FoundPost[] = [];
+  for (const item of data.feed ?? []) {
+    const p = item.post;
+    if (!p) continue;
+    const author = (p.author as Record<string, unknown>) ?? {};
+    const record = (p.record as Record<string, unknown>) ?? {};
+    // Skip reposts-of-reposts and posts that are themselves replies.
+    if (record.reply) continue;
+    out.push({
+      uri: p.uri as string,
+      cid: p.cid as string,
+      authorHandle: (author.handle as string) ?? '',
+      authorDisplay: (author.displayName as string) ?? '',
+      authorDid: (author.did as string) ?? '',
+      text: (record.text as string) ?? '',
+      likeCount: (p.likeCount as number) ?? 0,
+      indexedAt: (p.indexedAt as string) ?? (record.createdAt as string) ?? '',
+    });
+  }
+  return out;
+}
+
+/** Upload raw image bytes; returns the blob ref for use in an embed. */
+export async function uploadBlob(
+  session: BlueskySession,
+  bytes: ArrayBuffer,
+  mimeType: string,
+): Promise<BlobRef> {
+  const res = await fetch(`${PDS}/com.atproto.repo.uploadBlob`, {
+    method: 'POST',
+    headers: { 'Content-Type': mimeType, Authorization: `Bearer ${session.accessJwt}` },
+    body: bytes,
+  });
+  const json = await res.json();
+  if (!res.ok) throw new Error(`Bluesky uploadBlob failed (${res.status}): ${json.error ?? ''}`);
+  return json.blob as BlobRef;
+}
+
+// Bluesky rejects image blobs over ~976KB; stay under with margin.
+const MAX_THUMB_BYTES = 900 * 1024;
+
+export function ogTag(html: string, property: string): string {
+  const re = new RegExp(
+    `<meta[^>]+(?:property|name)=["']${property}["'][^>]+content=["']([^"']*)["']|<meta[^>]+content=["']([^"']*)["'][^>]+(?:property|name)=["']${property}["']`,
+    'i',
+  );
+  const m = html.match(re);
+  return (m?.[1] ?? m?.[2] ?? '').trim();
+}
+
+/**
+ * Build an external-link card for a URL: fetch the page's OpenGraph metadata
+ * and (when small enough) upload its og:image as the card thumbnail. Bare
+ * links get near-zero engagement on Bluesky compared to cards, and our own
+ * pages already serve custom OG images. Best-effort: any failure returns null
+ * and the post simply goes out without a card.
+ */
+export async function fetchLinkCard(session: BlueskySession, url: string): Promise<ExternalEmbed | null> {
+  try {
+    const res = await fetch(url, {
+      signal: AbortSignal.timeout(8000),
+      headers: { 'User-Agent': 'Mozilla/5.0 (compatible; MyDemocracy/1.0)' },
+    });
+    if (!res.ok) return null;
+    const html = (await res.text()).slice(0, 200_000);
+
+    const title = ogTag(html, 'og:title') || html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1]?.trim() || url;
+    const description = ogTag(html, 'og:description') || ogTag(html, 'description');
+
+    let thumb: BlobRef | undefined;
+    const imageUrl = ogTag(html, 'og:image');
+    if (imageUrl) {
+      try {
+        const imgRes = await fetch(new URL(imageUrl, url), { signal: AbortSignal.timeout(8000) });
+        const mime = imgRes.headers.get('content-type') ?? '';
+        if (imgRes.ok && mime.startsWith('image/')) {
+          const bytes = await imgRes.arrayBuffer();
+          if (bytes.byteLength > 0 && bytes.byteLength <= MAX_THUMB_BYTES) {
+            thumb = await uploadBlob(session, bytes, mime.split(';')[0]);
+          }
+        }
+      } catch {
+        // no thumb — a card with title/description still beats a bare link
+      }
+    }
+
+    return {
+      $type: 'app.bsky.embed.external',
+      external: { uri: url, title: title.slice(0, 300), description: description.slice(0, 1000), ...(thumb ? { thumb } : {}) },
+    };
+  } catch {
+    return null;
+  }
 }
 
 /**
@@ -205,7 +546,7 @@ export function buildPostRecord(
  */
 export async function post(
   text: string,
-  opts: { dryRun?: boolean; reply?: PostRecord['reply']; session?: BlueskySession } = {},
+  opts: { dryRun?: boolean; reply?: PostRecord['reply']; session?: BlueskySession; linkCardUrl?: string } = {},
 ): Promise<PostResult> {
   const { record, graphemes } = buildPostRecord(text, { reply: opts.reply });
 
@@ -218,6 +559,13 @@ export async function post(
     const creds = getBlueskyCreds();
     if (!creds) throw new Error('BLUESKY_HANDLE / BLUESKY_APP_PASSWORD not set');
     session = await createSession(creds.handle, creds.appPassword);
+  }
+
+  // Attach a link card when the caller provides a destination URL; failures
+  // fall back to the bare post rather than blocking it.
+  if (opts.linkCardUrl) {
+    const card = await fetchLinkCard(session, opts.linkCardUrl);
+    if (card) record.embed = card;
   }
 
   const result = await xrpc<{ uri: string; cid: string }>(

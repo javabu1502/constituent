@@ -5,7 +5,9 @@ import { isTripped } from '@/lib/social/circuit-breaker';
 import { canReplyNow } from '@/lib/social/cadence';
 import { loadBrandBrain } from '@/lib/social/brand-brain';
 import { createSession, getBlueskyCreds } from '@/lib/social/bluesky';
-import { runEngager } from '@/lib/social/engager';
+import { runEngager, runInboundEngager } from '@/lib/social/engager';
+import { runFollower } from '@/lib/social/follower';
+import { runReposter } from '@/lib/social/reposter';
 import { publishReply } from '@/lib/social/publisher';
 
 export const runtime = 'nodejs';
@@ -36,7 +38,26 @@ export async function GET(request: NextRequest) {
 
   const brandBrain = await loadBrandBrain();
   const session = await createSession(creds.handle, creds.appPassword);
-  const drafted = await runEngager(brandBrain, session);
+  // Outbound: find strangers' posts worth joining. Inbound: reply to people
+  // engaging with US (replies/mentions/quotes) — otherwise we ignore everyone
+  // who talks to us. Both feed the same social_replies queue + publish path.
+  const searchDrafted = await runEngager(brandBrain, session);
+  const inboundDrafted = await runInboundEngager(brandBrain, session);
+  // Network growth: follow back followers + the people we've actually replied
+  // to, so the account stops broadcasting into the void. Non-fatal.
+  const followed = await runFollower(session, { maxPerRun: 20 }).catch(() => null);
+  // Amplify helpful, neutral civic info from trusted self-authenticating
+  // sources (domain handles). Conservative + guardrailed; non-fatal.
+  const reposted = await runReposter(session).catch(() => null);
+  const drafted = {
+    scanned: searchDrafted.scanned + inboundDrafted.scanned,
+    drafted: searchDrafted.drafted + inboundDrafted.drafted,
+    gated: searchDrafted.gated + inboundDrafted.gated,
+    skipped: searchDrafted.skipped + inboundDrafted.skipped,
+    liked: searchDrafted.liked + inboundDrafted.liked,
+    followed: searchDrafted.followed + inboundDrafted.followed,
+    inbound: inboundDrafted,
+  };
 
   // Autonomous reply mode: post a few ready citizen replies, cadence-gated.
   const published: Array<{ replyId: string; ok: boolean; reason?: string }> = [];
@@ -63,15 +84,29 @@ export async function GET(request: NextRequest) {
         .eq('id', row.id);
     }
 
-    const { data: ready } = await admin
+    // Inbound first: people already talking to us are the warmest audience,
+    // and under a shared FIFO they competed with cold outbound replies for the
+    // 3 slots/run and regularly expired unanswered (bug reports included).
+    const { data: readyInbound } = await admin
       .from('social_replies')
       .select('id')
       .eq('status', 'pending_post')
       .eq('requires_human', false)
+      .like('lane', 'inbound-%')
       .gte('created_at', cutoff)
       .order('created_at', { ascending: true })
       .limit(3);
-    for (const r of ready ?? []) {
+    const { data: readyOutbound } = await admin
+      .from('social_replies')
+      .select('id')
+      .eq('status', 'pending_post')
+      .eq('requires_human', false)
+      .not('lane', 'like', 'inbound-%')
+      .gte('created_at', cutoff)
+      .order('created_at', { ascending: true })
+      .limit(3);
+    const ready = [...(readyInbound ?? []), ...(readyOutbound ?? [])].slice(0, 3);
+    for (const r of ready) {
       const cadence = await canReplyNow();
       if (!cadence.allowed) break;
       const res = await publishReply(r.id as string);
@@ -80,5 +115,5 @@ export async function GET(request: NextRequest) {
     }
   }
 
-  return NextResponse.json({ ok: true, mode: reply.mode, ...drafted, published });
+  return NextResponse.json({ ok: true, mode: reply.mode, ...drafted, published, followed, reposted });
 }

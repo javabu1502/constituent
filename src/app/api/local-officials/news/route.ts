@@ -32,17 +32,17 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: 'Missing name or city parameter' }, { status: 400 });
   }
 
-  // Check cache (using 'public' user_id for non-authenticated lookups)
+  // feed_cache keys user_id as uuid, so the old 'public' sentinel errored on
+  // every call and this cache never hit; content_cache is the shared store.
   const cacheKey = `local-news:${name}:${city}`;
   const admin = createAdminClient();
   const { data: cached } = await admin
-    .from('feed_cache')
-    .select('data, fetched_at')
-    .eq('user_id', 'public')
-    .eq('feed_type', cacheKey)
+    .from('content_cache')
+    .select('data, created_at')
+    .eq('cache_key', cacheKey)
     .single();
 
-  if (cached && Date.now() - new Date(cached.fetched_at).getTime() < CACHE_TTL_MS) {
+  if (cached && Date.now() - new Date(cached.created_at).getTime() < CACHE_TTL_MS) {
     return NextResponse.json({ articles: cached.data });
   }
 
@@ -81,10 +81,10 @@ export async function GET(request: NextRequest) {
   // Cache result (best-effort, don't block response)
   try {
     await admin
-      .from('feed_cache')
+      .from('content_cache')
       .upsert(
-        { user_id: 'public', feed_type: cacheKey, data: articles, fetched_at: new Date().toISOString() },
-        { onConflict: 'user_id,feed_type' }
+        { cache_key: cacheKey, data: articles, created_at: new Date().toISOString() },
+        { onConflict: 'cache_key' }
       );
   } catch {
     // Ignore cache write failures

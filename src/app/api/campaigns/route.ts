@@ -4,6 +4,9 @@ import { createAdminClient } from '@/lib/supabase';
 import { createCampaignSchema, parseBody } from '@/lib/schemas';
 import { profileLimiter, getClientIp } from '@/lib/rate-limit';
 import { sendAdminNotification } from '@/lib/resend';
+import { getCommitteeMembers } from '@/lib/committees';
+import { sendStageAdvanceEmails } from '@/lib/campaign-updates';
+import { getStateCommitteeMembers } from '@/lib/state-committees';
 
 function escapeHtml(str: string): string {
   return str
@@ -25,6 +28,8 @@ function randomSuffix(): string {
   return Math.random().toString(36).substring(2, 8);
 }
 
+export const maxDuration = 60; // stage creation may fan out supporter emails
+
 /**
  * POST /api/campaigns
  * Create a new campaign (auth required)
@@ -43,6 +48,21 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Too many requests' }, { status: 429, headers: { 'Retry-After': String(retryAfter) } });
   }
 
+  // Campaigns are run by advocacy organizations; constituent accounts use the
+  // contact/story flows instead. Org identity fields become the campaign's
+  // branding — the form no longer collects branding per campaign.
+  const { data: creatorProfile } = await createAdminClient()
+    .from('profiles')
+    .select('account_type, org_name, org_url, org_logo_url, brand_color')
+    .eq('user_id', user.id)
+    .single();
+  if (creatorProfile?.account_type !== 'organization') {
+    return NextResponse.json(
+      { error: 'Campaign creation is available to advocacy organization accounts' },
+      { status: 403 }
+    );
+  }
+
   let raw: unknown;
   try {
     raw = await request.json();
@@ -57,14 +77,49 @@ export async function POST(request: NextRequest) {
 
   const {
     campaign_type, headline, description, issue_area, issue_subtopic,
-    target_level, message_template, distribution_plan,
+    target_level, direction, message_template, distribution_plan,
     bill_level, bill_state, bill_ref, bill_title, bill_url,
     story_prompt, usage_statement, usage_tags, attribution_options, edit_revoke_policy, recipient_email,
     org_name, org_url, org_logo_url, brand_color, custom_domain,
+    parent_campaign_id, stage_goal, target_committee, target_committee_state, notify_supporters,
+    target_officials, target_party,
   } = parsed.data;
 
   const isStory = campaign_type === 'storytelling';
   const slug = slugify(headline).slice(0, 50) + '-' + randomSuffix();
+
+  // Stage campaigns: verify the parent before anything is written. Only the
+  // parent's creator can add stages, and nesting is one level deep — a stage
+  // cannot grow stages of its own.
+  let parent: { bill_level: string | null; bill_state: string | null; bill_ref: string | null; bill_title: string | null; bill_url: string | null; issue_area: string | null; issue_subtopic: string | null; direction: string | null; message_template: string | null; slug: string; headline: string; org_name: string | null } | null = null;
+  if (parent_campaign_id) {
+    const { data: parentRow } = await createAdminClient()
+      .from('campaigns')
+      .select('creator_id, parent_campaign_id, campaign_type, bill_level, bill_state, bill_ref, bill_title, bill_url, issue_area, issue_subtopic, direction, message_template, slug, headline, org_name')
+      .eq('id', parent_campaign_id)
+      .single();
+    if (!parentRow) {
+      return NextResponse.json({ error: 'Parent campaign not found' }, { status: 404 });
+    }
+    if (parentRow.creator_id !== user.id) {
+      return NextResponse.json({ error: 'Only the campaign owner can add stages' }, { status: 403 });
+    }
+    if (parentRow.parent_campaign_id) {
+      return NextResponse.json({ error: 'Stages cannot have stages of their own' }, { status: 400 });
+    }
+    if (isStory) {
+      return NextResponse.json({ error: 'Stages must be advocacy campaigns' }, { status: 400 });
+    }
+    if (target_committee) {
+      const roster = target_committee_state
+        ? getStateCommitteeMembers(target_committee_state, target_committee)
+        : getCommitteeMembers(target_committee).map((m) => m.bioguide);
+      if (roster.length === 0) {
+        return NextResponse.json({ error: 'Unknown committee' }, { status: 400 });
+      }
+    }
+    parent = parentRow;
+  }
 
   // User-created campaigns are ALWAYS unlisted (link-only): never in the
   // public directory, never promoted. Official/public is a curated flag set
@@ -72,11 +127,13 @@ export async function POST(request: NextRequest) {
   // every user campaign; the logo must live in OUR storage bucket.
   const logoPrefix = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/campaign-logos/`;
   const safeLogoUrl = org_logo_url && org_logo_url.startsWith(logoPrefix) ? org_logo_url : null;
+  // Body values (admin scripts) win; otherwise the org's profile identity
+  // applies automatically. Profile logo URLs were bucket-checked at save time.
   const branding = {
-    org_name: org_name?.trim() || null,
-    org_url: org_url || null,
-    org_logo_url: safeLogoUrl,
-    brand_color: brand_color || null,
+    org_name: org_name?.trim() || creatorProfile.org_name || null,
+    org_url: org_url || creatorProfile.org_url || null,
+    org_logo_url: safeLogoUrl || creatorProfile.org_logo_url || null,
+    brand_color: brand_color || creatorProfile.brand_color || null,
     custom_domain: custom_domain?.toLowerCase() || null,
   };
 
@@ -89,19 +146,36 @@ export async function POST(request: NextRequest) {
       campaign_type,
       // All user-created campaigns are unlisted; is_official stays false.
       visibility: 'unlisted',
-      approval_status: 'pending',
+      // Orgs are hand-approved at the account level (Jared, 09-18), so their
+      // campaigns launch live. Review moved from per-campaign to per-org.
+      approval_status: 'approved',
+      approved_at: new Date().toISOString(),
       headline,
       description,
-      issue_area,
-      issue_subtopic: issue_subtopic || null,
+      // Actions carry the campaign's issue; it is set once on the parent.
+      issue_area: parent ? parent.issue_area : issue_area,
+      issue_subtopic: parent ? parent.issue_subtopic : issue_subtopic || null,
       target_level: isStory ? 'federal' : target_level,
-      message_template: isStory ? null : (message_template || null),
+      // Stages inherit position and talking points from the parent unless
+      // they bring their own (talking points usually DO change per stage).
+      direction: isStory ? null : (direction || parent?.direction || null),
+      message_template: isStory ? null : (message_template || parent?.message_template || null),
       distribution_plan: isStory ? null : distribution_plan,
-      bill_level: isStory ? null : (bill_level || null),
-      bill_state: !isStory && bill_level === 'state' ? (bill_state || null) : null,
-      bill_ref: isStory ? null : (bill_ref || null),
-      bill_title: isStory ? null : (bill_title || null),
-      bill_url: isStory ? null : (bill_url || null),
+      // Stages inherit the parent's bill unless they set their own.
+      bill_level: isStory ? null : (bill_level || parent?.bill_level || null),
+      bill_state: !isStory && (bill_level || parent?.bill_level) === 'state' ? (bill_state || parent?.bill_state || null) : null,
+      bill_ref: isStory ? null : (bill_ref || parent?.bill_ref || null),
+      bill_title: isStory ? null : (bill_title || parent?.bill_title || null),
+      bill_url: isStory ? null : (bill_url || parent?.bill_url || null),
+      parent_campaign_id: parent_campaign_id || null,
+      stage_goal: parent_campaign_id ? (stage_goal || 'custom') : null,
+      target_filter: target_committee
+        ? { type: 'committee', committee_id: target_committee, ...(target_committee_state ? { state: target_committee_state.toUpperCase() } : {}) }
+        : target_officials
+          ? { type: 'officials', officials: target_officials }
+          : target_party
+            ? { type: 'party', ...target_party }
+            : null,
       story_prompt: isStory ? (story_prompt || null) : null,
       usage_statement: isStory ? usage_statement : null,
       usage_tags: isStory ? (usage_tags || []) : null,
@@ -109,7 +183,7 @@ export async function POST(request: NextRequest) {
       edit_revoke_policy: isStory ? edit_revoke_policy : null,
       recipient_email: isStory ? (recipient_email || user.email || null) : null,
       ...branding,
-      status: 'pending',
+      status: 'active',
     })
     .select()
     .single();
@@ -122,24 +196,46 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Failed to create campaign' }, { status: 500 });
   }
 
-  // Ping the admin that a new campaign is awaiting approval (fire-and-forget)
+  // Advance-the-campaign: a new stage re-engages everyone who already acted
+  // on the initiative. Awaited so serverless doesn't kill the batch; failures
+  // never break creation.
+  let supporterNotify: { eligible: number; sent: number } | null = null;
+  if (parent && parent_campaign_id && notify_supporters) {
+    try {
+      const r = await sendStageAdvanceEmails({
+        parentId: parent_campaign_id,
+        parentSlug: parent.slug,
+        parentHeadline: parent.headline,
+        orgName: parent.org_name,
+        billRef: parent.bill_ref,
+        stageSlug: campaign.slug as string,
+        stageHeadline: headline,
+      });
+      supporterNotify = { eligible: r.eligible, sent: r.sent };
+    } catch (err) {
+      console.error('[campaigns] supporter notify failed:', err);
+    }
+  }
+
+  // FYI ping: org campaigns launch live without review, so this is
+  // awareness only, not a to-do (fire-and-forget).
   void sendAdminNotification(
-    `New campaign awaiting approval: ${headline}`,
-    `<h2>New campaign submitted</h2>
+    `New campaign live: ${headline}`,
+    `<h2>New org campaign launched</h2>
      <p><strong>${escapeHtml(headline)}</strong></p>
      <p>${escapeHtml(description)}</p>
      <ul>
        <li>Type: ${escapeHtml(campaign_type)}</li>
        <li>Issue: ${escapeHtml(issue_area)}${issue_subtopic ? ` / ${escapeHtml(issue_subtopic)}` : ''}</li>
        ${isStory
-         ? `<li>Story prompt: ${escapeHtml(story_prompt || '—')}</li><li>Usage: ${escapeHtml(usage_statement || '')}</li>`
-         : `<li>Target level: ${escapeHtml(target_level || '')}</li><li>Distribution plan: ${escapeHtml(distribution_plan || '')}</li>`}
+         ? `<li>Story prompt: ${escapeHtml(story_prompt || '(none)')}</li>`
+         : `<li>Target level: ${escapeHtml(target_level || '')}</li>`}
        <li>Slug: ${escapeHtml(slug)}</li>
      </ul>
-     <p>Status is <strong>pending</strong> — review and approve it in the admin dashboard.</p>`
+     <p>Live immediately. Org accounts are pre-approved; no action needed.</p>`
   );
 
-  return NextResponse.json(campaign);
+  return NextResponse.json({ ...campaign, supporter_notify: supporterNotify });
 }
 
 /**

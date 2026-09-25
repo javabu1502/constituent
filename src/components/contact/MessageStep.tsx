@@ -5,12 +5,49 @@ import type { ContactState, ContactAction, OfficialMessage } from './ContactFlow
 import { Button } from '@/components/ui/Button';
 import { PHONE_TIPS } from '@/lib/phone-tips';
 import { useTurnstile } from '@/components/ui/Turnstile';
+import { buildEnvelope } from '@/lib/envelope';
+import { hasJurisdictionRule, sanitizeAiJurisdiction } from '@/lib/issue-jurisdiction';
+import { detectCasework } from '@/lib/casework';
+import { auditMessageQuality } from '@/lib/message-quality';
 import { salutationTitle } from '@/lib/utils';
 
 interface MessageStepProps {
   state: ContactState;
   dispatch: React.Dispatch<ContactAction>;
   onBack: () => void;
+}
+
+/** Recipients grouped by level of government — shown while drafting and on
+ * the review banner so the user always sees exactly who is receiving this
+ * and at which level. */
+const LEVEL_GROUPS: { level: string; label: string }[] = [
+  { level: 'federal', label: 'Congress' },
+  { level: 'state', label: 'State Legislature' },
+  { level: 'local', label: 'Local' },
+];
+
+function RecipientChips({ reps }: { reps: ContactState['selectedReps'] }) {
+  return (
+    <div className="space-y-1.5">
+      {LEVEL_GROUPS.map(({ level, label }) => {
+        const group = reps.filter((r) => ((r.level as string) ?? 'federal') === level);
+        if (group.length === 0) return null;
+        return (
+          <div key={level} className="flex flex-wrap items-center justify-center gap-1.5">
+            <span className="text-xs font-medium text-gray-500 dark:text-gray-400">{label}:</span>
+            {group.map((rep) => (
+              <span
+                key={rep.id}
+                className="inline-flex items-center px-2 py-0.5 text-xs rounded-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-200"
+              >
+                {rep.name}
+              </span>
+            ))}
+          </div>
+        );
+      })}
+    </div>
+  );
 }
 
 function getPartyColors(party: string): { bg: string; text: string } {
@@ -64,13 +101,17 @@ function buildFallbackMessage(
     'Thank you for your time and service.',
     `Sincerely,\n${signature}`,
   ].join('\n\n');
-  return { subject: `Constituent message: ${opts.issue.trim().slice(0, 100)}`, body };
+  return { subject: `From your constituent: ${opts.issue.trim().slice(0, 100)}`, body };
 }
 
 export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
   const { selectedReps, userName, issue, ask, personalWhy, messages, contactMethod, address } = state;
   const [reviewIndex, setReviewIndex] = useState(0);
   const [isGenerating, setIsGenerating] = useState(false);
+  // Message-first path: true while the ONE core message is being drafted,
+  // before any envelopes exist. Without it the step renders an empty review
+  // screen for several seconds and the content pops in — jarring.
+  const [isDraftingCore, setIsDraftingCore] = useState(false);
   const [feedback, setFeedback] = useState<Record<string, 'positive' | 'negative'>>({});
   const [suggestionInput, setSuggestionInput] = useState('');
   const [showSuggestionInput, setShowSuggestionInput] = useState(false);
@@ -78,6 +119,8 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
   // True when any message is a manual-compose starter draft instead of an
   // AI draft — shown as an amber notice instead of the red error.
   const [usedFallback, setUsedFallback] = useState(false);
+  // Best-practice warnings (non-blocking) surfaced on first Continue click.
+  const [qualityWarnings, setQualityWarnings] = useState<string[]>([]);
   const { getToken, TurnstileWidget } = useTurnstile();
 
   const currentRep = selectedReps[reviewIndex];
@@ -395,10 +438,96 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
     });
   };
 
-  // Generate messages on mount if not already present
+  // Build messages on mount if not already present. Message-first path: the
+  // constituent already approved a core message, so each selected official
+  // gets an instant deterministic envelope around it (no AI call). Legacy
+  // path (restored drafts without a core) still generates per official.
   useEffect(() => {
     const repsNeedingMessages = selectedReps.filter(rep => !messages[rep.name]);
     if (repsNeedingMessages.length === 0) return;
+    if (!state.coreMessage?.trim()) {
+      // Message-first: draft the ONE core message now (story + goal), then
+      // envelope it per official. Falls back to legacy per-official
+      // generation if core drafting fails.
+      void (async () => {
+        setIsDraftingCore(true);
+        try {
+          const turnstileToken = await getToken().catch(() => '');
+          const res = await fetch('/api/generate-core-message', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              issue: state.issue || state.issueCategory || 'an issue that matters to me',
+              ask: state.ask || undefined,
+              personalWhy: state.personalWhy?.trim() || undefined,
+              turnstileToken: turnstileToken || undefined,
+            }),
+          });
+          const data = await res.json();
+          if (!res.ok || !data.body) throw new Error(data.error || 'core drafting failed');
+          dispatch({ type: 'SET_CORE', payload: data.body });
+
+          // AI jurisdiction refinement — ONLY when no hand-audited rule
+          // matched the issue text (the rules are the guardrail; the AI
+          // catches phrasing the patterns can't).
+          let recipients = repsNeedingMessages;
+          const issueText = `${state.issue || ''} ${state.issueCategory || ''}`;
+          if (data.jurisdiction && !hasJurisdictionRule(issueText)) {
+            const ai = sanitizeAiJurisdiction(data.jurisdiction);
+            if (ai) {
+              const refined = recipients.filter((rep) => ai.weights[(rep.level as 'federal' | 'state' | 'local') ?? 'federal'] > 0);
+              if (refined.length > 0 && refined.length < recipients.length) {
+                recipients = refined;
+                dispatch({ type: 'SELECT_REPS', payload: refined });
+              }
+            }
+          }
+
+          const built: Record<string, { subject: string; body: string }> = {};
+          for (const rep of recipients) {
+            built[rep.name] = buildEnvelope(String(data.body).trim(), rep, {
+              committeeName: null,
+              verb: null,
+              billRef: null,
+              stageGoal: undefined,
+              headline: state.issue || state.issueCategory || 'this issue',
+              senderName: state.userName || 'A constituent',
+              city: state.address?.city ?? '',
+              stateCode: state.address?.state ?? '',
+              zip: state.address?.zip ?? '',
+              coreSubject: typeof data.subject === 'string' ? data.subject : null,
+              coreOpening: typeof data.opening === 'string' ? data.opening : null,
+              coreAsk: typeof data.ask === 'string' ? data.ask : null,
+            });
+          }
+          dispatch({ type: 'SET_MESSAGES', payload: { ...messages, ...built } });
+        } catch (err) {
+          console.error('[contact] core drafting failed, using legacy generation:', err);
+          generateMessages();
+        } finally {
+          setIsDraftingCore(false);
+        }
+      })();
+      return;
+    }
+    if (state.coreMessage?.trim()) {
+      const built: Record<string, { subject: string; body: string }> = {};
+      for (const rep of repsNeedingMessages) {
+        built[rep.name] = buildEnvelope(state.coreMessage.trim(), rep, {
+          committeeName: null,
+          verb: null,
+          billRef: null,
+          stageGoal: undefined,
+          headline: state.issue || state.issueCategory || 'this issue',
+          senderName: state.userName || 'A constituent',
+          city: state.address?.city ?? '',
+          stateCode: state.address?.state ?? '',
+          zip: state.address?.zip ?? '',
+        });
+      }
+      dispatch({ type: 'SET_MESSAGES', payload: { ...messages, ...built } });
+      return;
+    }
     generateMessages();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -411,7 +540,8 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
   };
 
   const handleContinue = () => {
-    // Check all messages have content
+    // Check all messages have content and pass the best-practice gate.
+    const warnings: string[] = [];
     for (const rep of selectedReps) {
       const msg = messages[rep.name];
       if (!msg?.body?.trim()) {
@@ -422,6 +552,22 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
         setReviewIndex(selectedReps.indexOf(rep));
         return;
       }
+      const issues = auditMessageQuality(msg.body, { source: 'user' });
+      const block = issues.find((i) => i.level === 'block');
+      if (block) {
+        dispatch({ type: 'SET_ERROR', payload: `Message for ${rep.name}: ${block.detail}` });
+        setReviewIndex(selectedReps.indexOf(rep));
+        return;
+      }
+      for (const w of issues) {
+        if (w.level === 'warn' && !warnings.includes(w.detail)) warnings.push(w.detail);
+      }
+    }
+    // Warnings inform but never block — it's their message. Shown once; a
+    // second click proceeds.
+    if (warnings.length > 0 && qualityWarnings.length === 0) {
+      setQualityWarnings(warnings);
+      return;
     }
     dispatch({ type: 'SET_ERROR', payload: null });
     dispatch({ type: 'GO_TO_STEP', payload: 'send' });
@@ -432,7 +578,7 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
   ).length;
 
   // Show full-screen spinner only when generating AND no messages have arrived yet
-  if (isGenerating && loadedCount === 0) {
+  if ((isGenerating || isDraftingCore) && loadedCount === 0) {
     return (
       <div className="p-6 sm:p-8">
         <div className="flex flex-col items-center justify-center py-16">
@@ -445,13 +591,27 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
             </div>
           </div>
           <p className="text-gray-600 dark:text-gray-300 mt-4 font-medium">
-            {contactMethod === 'phone'
+            {isDraftingCore
+              ? 'Writing your message...'
+              : contactMethod === 'phone'
               ? `Writing ${selectedReps.length} script${selectedReps.length > 1 ? 's' : ''}...`
               : `Writing ${selectedReps.length} message${selectedReps.length > 1 ? 's' : ''}...`}
           </p>
-          <p className="text-gray-400 dark:text-gray-500 text-sm mt-1">
-            {loadedCount} of {selectedReps.length} complete
-          </p>
+          {isDraftingCore ? (
+            <div className="mt-4 max-w-md">
+              <p className="text-gray-500 dark:text-gray-400 text-sm text-center mb-3">
+                Drafting your message. Each of these officials gets their own copy:
+              </p>
+              <RecipientChips reps={selectedReps} />
+              <p className="text-gray-400 dark:text-gray-500 text-xs text-center mt-3">
+                Officials with no authority over this issue are dropped from the list before you review.
+              </p>
+            </div>
+          ) : (
+            <p className="text-gray-400 dark:text-gray-500 text-sm mt-1">
+              {loadedCount} of {selectedReps.length} complete
+            </p>
+          )}
         </div>
       </div>
     );
@@ -471,6 +631,34 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
         </p>
       </div>
 
+      {/* Personal-case detection: casework is what congressional offices are
+          genuinely FOR, but an email alone can't start it — tell them how. */}
+      {(() => {
+        const cw = detectCasework(`${state.issue || ''} ${state.ask || ''} ${state.personalWhy || ''}`);
+        if (!cw.isCasework) return null;
+        return (
+          <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700 rounded-xl">
+            <p className="text-sm text-blue-800 dark:text-blue-200 font-medium">
+              This sounds like a personal case — {cw.level === 'state' ? 'your state legislator&apos;s office' : 'congressional offices'} have caseworkers for exactly this.
+            </p>
+            <p className="text-xs text-blue-700 dark:text-blue-300 mt-1">
+              Sending this message is a good first step. Ask for &quot;casework help&quot; in your message — their office will usually send you a privacy release form so they can contact the agency on your behalf.
+            </p>
+          </div>
+        );
+      })()}
+
+      {/* Who this goes to, and why — the bridge between the address they just
+          entered and the officials they're suddenly looking at. */}
+      {selectedReps.length > 0 && (
+        <div className="mb-4 p-3 bg-gray-50 dark:bg-gray-700/40 border border-gray-200 dark:border-gray-600 rounded-xl">
+          <p className="text-xs text-gray-600 dark:text-gray-300 mb-2">
+            From your address and your issue, this goes to the {selectedReps.length === 1 ? 'official' : `${selectedReps.length} officials`} who can actually act on it:
+          </p>
+          <RecipientChips reps={selectedReps} />
+        </div>
+      )}
+
       {isGenerating && loadedCount > 0 && (
         <div className="mb-4 p-3 bg-purple-50 dark:bg-purple-900/30 border border-purple-200 dark:border-purple-700 rounded-xl">
           <div className="flex items-center gap-2">
@@ -479,6 +667,20 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
               {loadedCount} of {selectedReps.length} {contactMethod === 'phone' ? 'scripts' : 'messages'} ready
             </p>
           </div>
+        </div>
+      )}
+
+      {qualityWarnings.length > 0 && (
+        <div className="mb-4 p-3 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded-xl">
+          <p className="text-sm text-amber-800 dark:text-amber-300 font-medium">A quick check before you send:</p>
+          <ul className="text-xs text-amber-700 dark:text-amber-400 mt-1 space-y-1 list-disc pl-4">
+            {qualityWarnings.map((w) => (
+              <li key={w}>{w}</li>
+            ))}
+          </ul>
+          <p className="text-xs text-amber-700 dark:text-amber-400 mt-2">
+            These are suggestions, not rules — edit above, or continue as-is.
+          </p>
         </div>
       )}
 

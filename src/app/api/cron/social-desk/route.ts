@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createAdminClient } from '@/lib/supabase';
 import { getKillSwitch, getMode } from '@/lib/social/config';
-import { scoutCampaigns, scoutNews, nextSignal, markSignalUsed } from '@/lib/social/scout';
+import { scoutCampaigns, scoutNews, scoutLegislativeActions, nextSignal, markSignalUsed } from '@/lib/social/scout';
+import { scoutElections } from '@/lib/social/elections';
 import { loadBrandBrain } from '@/lib/social/brand-brain';
 import { writePost } from '@/lib/social/writer';
 import { runGuardrails, isNearDuplicate } from '@/lib/social/guardrails';
@@ -49,15 +50,37 @@ export async function GET(request: NextRequest) {
   }
 
   const admin = createAdminClient();
-  const scouted = (await scoutCampaigns()) + (await scoutNews());
+  const scouted = (await scoutCampaigns()) + (await scoutNews()) + (await scoutLegislativeActions()) + (await scoutElections());
 
-  const signal = await nextSignal();
+  // One bad signal must not kill the whole run: the writer's "when in doubt,
+  // sit it out" doctrine skipped 3 straight DAYS of runs because each 2-hour
+  // cycle drew exactly one (often junk) signal and gave up. Try up to 4.
+  const brandBrain = await loadBrandBrain();
+  let signal = await nextSignal();
   if (!signal) {
     return NextResponse.json({ ok: true, scouted, swept, skipped: 'no signal' });
   }
-
-  const brandBrain = await loadBrandBrain();
-  const draft = await writePost(brandBrain, signal);
+  let draft = await writePost(brandBrain, signal);
+  let attempts = 1;
+  while ('skip' in draft && attempts < 4) {
+    await admin.from('social_posts').insert({
+      platform: 'bluesky',
+      lane: 'none',
+      body: '',
+      content_hash: contentHash(''),
+      signal_id: signal.id,
+      campaign_slug: signal.campaign_slug,
+      issue_area: signal.issue_area,
+      status: 'skipped',
+      dry_run: process.env.SOCIAL_DRY_RUN === 'true',
+      guardrail_report: { skipReason: `writer skip: ${draft.reason}` },
+    });
+    await markSignalUsed(signal.id);
+    signal = await nextSignal();
+    if (!signal) return NextResponse.json({ ok: true, scouted, swept, skipped: 'no signal after retries', attempts });
+    draft = await writePost(brandBrain, signal);
+    attempts++;
+  }
 
   // Writer skip: record it for the digest and consume the signal so the next
   // run moves on. Skips never carry publishable text.
@@ -79,13 +102,15 @@ export async function GET(request: NextRequest) {
   }
 
   // Guardrails + near-duplicate check against recent drafts/posts.
-  const isNews = signal.source === 'news';
+  // News and legislative-action signals both carry external factual claims
+  // (a headline, a bill's status) that must trace to their source text.
+  const isFactual = signal.source === 'news' || signal.source === 'legislative';
   const gate = runGuardrails({
     text: draft.text,
     sourceText: `${signal.title ?? ''}\n${signal.summary ?? ''}`,
     maxLength: BLUESKY_MAX_GRAPHEMES,
     graphemeLength,
-    strictAccuracy: isNews, // news claims must trace to the source or they're blocked
+    strictAccuracy: isFactual, // factual claims must trace to the source or they're blocked
   });
   const { data: recentRows } = await admin
     .from('social_posts')
@@ -110,11 +135,13 @@ export async function GET(request: NextRequest) {
       platform: 'bluesky',
       lane: draft.lane,
       body: draft.text,
-      link_url: signal.url,
+      // Writer flagged a campaign-link mismatch on a good story: send readers
+      // to the issues page rather than an unrelated campaign.
+      link_url: draft.genericLink ? `${process.env.NEXT_PUBLIC_SITE_URL || 'https://www.mydemocracy.app'}/issues` : signal.url,
       issue_area: signal.issue_area,
       content_hash: contentHash(draft.text),
       signal_id: signal.id,
-      campaign_slug: signal.campaign_slug,
+      campaign_slug: draft.genericLink ? null : signal.campaign_slug,
       status,
       dry_run: process.env.SOCIAL_DRY_RUN === 'true',
       guardrail_report: { ...gate, duplicate, skipReason },

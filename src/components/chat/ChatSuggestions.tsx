@@ -21,10 +21,10 @@ export function ChatSuggestions() {
     return (
       <div className="flex flex-col items-center justify-center h-full px-4 text-center">
         <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
-          Let&apos;s craft your message
+          What do you want to say?
         </h3>
         <p className="text-xs text-gray-400 dark:text-gray-500 mb-4">
-          Share only what feels comfortable. You review everything before it&apos;s sent.
+          Share as much or as little as you want. You review everything before it&apos;s sent.
         </p>
         <div className="flex flex-wrap justify-center gap-2">
           {INTERVIEW_SUGGESTIONS.map((q) => (

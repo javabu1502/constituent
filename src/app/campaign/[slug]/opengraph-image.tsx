@@ -57,7 +57,7 @@ export default async function OgImage({ params }: { params: Promise<{ slug: stri
     return new Response('Not found', { status: 404 });
   }
   const campaign = lookup.ok ? lookup.campaign : null;
-  const headline = campaign?.headline ?? 'Make your voice heard';
+  const headline = campaign?.headline ?? 'Weigh in on the issues';
   // Official weigh-ins get the neutral both-sides card; user-created
   // campaigns are the creator's own cause — no case-for/against framing.
   const isOfficial = campaign?.is_official ?? true;

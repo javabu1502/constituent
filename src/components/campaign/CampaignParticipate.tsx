@@ -9,6 +9,8 @@ import type { Official } from '@/lib/types';
 import { US_STATES } from '@/lib/constants';
 import { Button } from '@/components/ui/Button';
 import { formatPhone, salutationTitle } from '@/lib/utils';
+import { buildEnvelope } from '@/lib/envelope';
+import { detectBillReferences, CURRENT_CONGRESS } from '@/lib/bills';
 import {
   determineDeliveryMethod,
   generateMailtoLink,
@@ -18,7 +20,7 @@ import { useTurnstile } from '@/components/ui/Turnstile';
 import { SupportNudge } from '@/components/ui/SupportNudge';
 import { SocialShare } from '@/components/ui/SocialShare';
 
-type Step = 'stance' | 'form' | 'loading' | 'review' | 'done';
+type Step = 'stance' | 'compose' | 'form' | 'loading' | 'review' | 'done' | 'noTarget' | 'wrongState';
 type Stance = 'support' | 'oppose' | 'undecided';
 
 /** Errors whose message is safe to show users (our own API copy). Anything
@@ -81,21 +83,47 @@ function buildFallbackMessage(
   return { subject: `Constituent message: ${campaign.headline}`, body };
 }
 
-export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
+export function CampaignParticipate({
+  campaign,
+  parentCampaign = null,
+}: {
+  campaign: Campaign;
+  parentCampaign?: { slug: string; headline: string } | null;
+}) {
   // Official weigh-ins are neutral: the participant picks their OWN position
   // first and the message carries that stance. User-created campaigns are
   // the creator's own directional ask — no stance step, no poll.
   const isOfficial = !!campaign.is_official;
-  const [step, setStep] = useState<Step>(isOfficial ? 'stance' : 'form');
+  const [step, setStep] = useState<Step>(isOfficial ? 'stance' : 'compose');
+  // Message-first: the constituent's approved core message, drafted before we
+  // know who their officials are.
+  const [coreDraft, setCoreDraft] = useState('');
+  // AI-drafted frame from the same call: subject (used only without a bill
+  // ref), opening, and validated ask — per-sender variance so a hundred
+  // participants don't share one template frame.
+  const [coreSubject, setCoreSubject] = useState<string | null>(null);
+  const [coreOpening, setCoreOpening] = useState<string | null>(null);
+  const [coreAsk, setCoreAsk] = useState<string | null>(null);
+  const [coreStatus, setCoreStatus] = useState<'idle' | 'drafting'>('idle');
   const [stance, setStance] = useState<Stance | null>(null);
 
   // Form fields
   const [name, setName] = useState('');
+  // Org campaigns collect email (with notice) so the campaign can re-engage
+  // participants when the bill advances. Official weigh-ins stay email-free.
+  const collectEmail = !campaign.is_official && campaign.campaign_type !== 'storytelling';
+  const [email, setEmail] = useState('');
   const [street, setStreet] = useState('');
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
   const [zip, setZip] = useState('');
   const [personalWhy, setPersonalWhy] = useState('');
+  // Optional follow-up questions (compose step sub-phase): 1-4 short AI
+  // questions that draw out concrete detail before drafting. Empty array =
+  // phase not active.
+  const [followUpQuestions, setFollowUpQuestions] = useState<string[]>([]);
+  const [followUpAnswers, setFollowUpAnswers] = useState<string[]>([]);
+  const [fetchingQuestions, setFetchingQuestions] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
   // True when any review message is a manual-compose starter draft instead
@@ -103,6 +131,105 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
   const [usedFallback, setUsedFallback] = useState(false);
   const [profileLoaded, setProfileLoaded] = useState(false);
   const { getToken, TurnstileWidget } = useTurnstile();
+
+  // Funnel telemetry: one event per step reached, so we can finally see WHERE
+  // visitors drop between landing and a sent message (49 sends all-time says
+  // the funnel leaks badly; until now nothing measured the middle).
+  const funnelFired = useRef<Set<string>>(new Set());
+  const fireFunnel = (event: string) => {
+    if (funnelFired.current.has(event)) return;
+    funnelFired.current.add(event);
+    trackEvent(event, { campaign: campaign.slug });
+  };
+  useEffect(() => {
+    if (step === 'compose') fireFunnel('participate_compose_viewed');
+    if (step === 'form') fireFunnel('participate_form_viewed');
+    if (step === 'loading') fireFunnel('participate_submitted');
+    if (step === 'review') fireFunnel('participate_generated');
+    if (step === 'noTarget') fireFunnel('participate_no_target');
+    if (step === 'wrongState') fireFunnel('participate_wrong_state');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [step]);
+
+  // whyOverride lets the follow-up step pass its just-enriched text directly
+  // (state updates haven't flushed yet when it calls this).
+  const draftCore = async (whyOverride?: string) => {
+    setError(null);
+    setCoreStatus('drafting');
+    try {
+      const turnstileToken = await getToken().catch(() => '');
+      const res = await fetch('/api/generate-core-message', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          campaignSlug: campaign.slug,
+          stance: isOfficial ? stance ?? undefined : undefined,
+          personalWhy: (whyOverride ?? personalWhy).trim() || undefined,
+          turnstileToken: turnstileToken || undefined,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new FriendlyError(data.error || 'Drafting failed');
+      setCoreDraft(data.body);
+      setCoreSubject(typeof data.subject === 'string' ? data.subject : null);
+      setCoreOpening(typeof data.opening === 'string' ? data.opening : null);
+      setCoreAsk(typeof data.ask === 'string' ? data.ask : null);
+      fireFunnel('participate_core_generated');
+    } catch (err) {
+      setError(err instanceof FriendlyError ? err.message : 'We could not draft your message — you can write it yourself below, or try again.');
+    } finally {
+      setCoreStatus('idle');
+    }
+  };
+
+  // Between the why-input and drafting: fetch 1-4 short follow-up questions.
+  // This step is optional by design — any failure, non-OK response, or zero
+  // questions falls straight through to drafting, exactly as before.
+  const startDraftFlow = async () => {
+    setError(null);
+    setFetchingQuestions(true);
+    try {
+      const res = await fetch('/api/follow-up-questions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          headline: campaign.headline.slice(0, 200),
+          stance: isOfficial ? stance ?? undefined : undefined,
+          personalWhy: personalWhy.trim().slice(0, 2000),
+        }),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        const qs = Array.isArray(data?.questions)
+          ? data.questions.filter((q: unknown): q is string => typeof q === 'string' && !!q.trim()).slice(0, 4)
+          : [];
+        if (qs.length > 0) {
+          setFollowUpQuestions(qs);
+          setFollowUpAnswers(qs.map(() => ''));
+          setFetchingQuestions(false);
+          fireFunnel('participate_followups_viewed');
+          return;
+        }
+      }
+    } catch {
+      // Questions are a bonus, never a gate.
+    }
+    setFetchingQuestions(false);
+    void draftCore();
+  };
+
+  // Continue and Skip both land here: append only the participant's ANSWERS
+  // (their own words) to the personal why — never our question text, which
+  // downstream checks would treat as words the constituent wrote themselves.
+  // Questions are cleared before drafting so a failed draft can't re-append.
+  const finishFollowUps = () => {
+    const answers = followUpAnswers.map((a) => a.trim()).filter(Boolean);
+    const enrichedWhy = [personalWhy.trim(), answers.join('\n')].filter(Boolean).join('\n\n');
+    setPersonalWhy(enrichedWhy);
+    setFollowUpQuestions([]);
+    setFollowUpAnswers([]);
+    void draftCore(enrichedWhy);
+  };
 
   // Auto-fill from profile for logged-in users
   useEffect(() => {
@@ -137,6 +264,11 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
 
   // Data from API calls
   const [officials, setOfficials] = useState<Official[]>([]);
+  // Committee name shown when none of the participant's reps sit on the
+  // stage's targeted committee (the 'noTarget' step).
+  const [noTargetName, setNoTargetName] = useState('');
+  // Per-official message intent (stage campaigns): thank vs persuade.
+  const [intentByOfficial, setIntentByOfficial] = useState<Record<string, 'persuade' | 'thank'>>({});
   const [messages, setMessages] = useState<Record<string, OfficialMessage>>({});
   const [sentCount, setSentCount] = useState(0);
   // Reader-poll aggregates, fetched fresh after this participant is counted.
@@ -148,6 +280,10 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
     setError(null);
 
     if (!name.trim()) { setError('Please enter your name'); return; }
+    if (collectEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+      setError('Please enter your email so the campaign can update you when the bill moves');
+      return;
+    }
     if (!street.trim()) { setError('Please enter your street address'); return; }
     if (!city.trim()) { setError('Please enter your city'); return; }
     if (!state) { setError('Please select your state'); return; }
@@ -174,6 +310,18 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
     // without the +4; we keep the user's full ZIP for display).
     const stateCode = toStateCode(state);
     const zip5 = zip.trim().match(/^\d{5}/)?.[0] ?? zip.trim();
+    let committeeName: string | null = null;
+
+    // State-bill campaigns are for that state's constituents: a Californian's
+    // legislators have no vote on a Nevada bill, so their message would land
+    // on the wrong desks. Check BEFORE any lookups.
+    const requiredState =
+      campaign.target_level === 'state' ? campaign.bill_state || campaign.target_filter?.state || null : null;
+    if (requiredState && stateCode !== requiredState) {
+      setStep('wrongState');
+      setSubmitting(false);
+      return;
+    }
 
     try {
       // Fetch representatives
@@ -194,108 +342,159 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
         filtered = filtered.filter((o: Official) => o.level === 'state');
       }
 
+      // Stage targeting: only contact the officials who matter at this step
+      // of the legislative journey. Floor stages narrow to the chamber that's
+      // voting (house/lower vs senate/upper covers Congress and the states);
+      // committee stages narrow to the committee's members — a message to an
+      // office that isn't involved hurts the campaign's credibility.
+      if (campaign.stage_goal === 'floor_house') {
+        filtered = filtered.filter((o: Official) => o.chamber === 'house' || o.chamber === 'lower');
+      } else if (campaign.stage_goal === 'floor_senate') {
+        filtered = filtered.filter((o: Official) => o.chamber === 'senate' || o.chamber === 'upper');
+      }
+      if (campaign.target_filter?.type === 'committee' && campaign.target_filter.committee_id) {
+        const cmteState = campaign.target_filter.state;
+        const cmteRes = await fetch(
+          `/api/committees/${campaign.target_filter.committee_id}/members${cmteState ? `?state=${cmteState}` : ''}`
+        );
+        const cmteData = await cmteRes.json();
+        if (!cmteRes.ok) {
+          throw new FriendlyError('We couldn’t load the committee roster for this campaign. Please try again.');
+        }
+        committeeName = cmteData.committee?.name ?? null;
+        const roster = new Set<string>(cmteData.memberIds || []);
+        filtered = filtered.filter((o: Official) => (cmteState ? o.level === 'state' : o.level === 'federal') && roster.has(o.id));
+        if (filtered.length === 0) {
+          setNoTargetName(cmteData.committee?.name || 'the targeted committee');
+          setStep('noTarget');
+          return;
+        }
+      }
+
+      // Hand-picked officials: messages go only to the campaign's chosen
+      // targets. A participant none of whose reps are targeted still gets
+      // the other-ways-to-help path instead of a dead end.
+      if (campaign.target_filter?.type === 'officials' && campaign.target_filter.officials?.length) {
+        const roster = new Set(campaign.target_filter.officials.map((t) => t.id));
+        filtered = filtered.filter((o: Official) => roster.has(o.id));
+        if (filtered.length === 0) {
+          setNoTargetName('the officials this campaign is targeting');
+          setStep('noTarget');
+          return;
+        }
+      }
+
+      // Party slice: e.g. House Democrats, or one state's Republicans.
+      if (campaign.target_filter?.type === 'party' && campaign.target_filter.party) {
+        const f = campaign.target_filter;
+        const wantParty = f.party as string;
+        filtered = filtered.filter((o: Official) => {
+          if (f.level && o.level !== f.level) return false;
+          if (f.state && o.state !== f.state) return false;
+          if (f.chamber && f.chamber !== 'both') {
+            const houseLike = o.chamber === 'house' || o.chamber === 'lower';
+            if (f.chamber === 'house' ? !houseLike : houseLike) return false;
+          }
+          return (o.party || '').charAt(0).toUpperCase() === wantParty;
+        });
+        if (filtered.length === 0) {
+          setNoTargetName('the officials this campaign is targeting');
+          setStep('noTarget');
+          return;
+        }
+      }
+
       if (filtered.length === 0) {
         throw new FriendlyError('No representatives found for your address at the targeted level');
       }
 
-      setOfficials(filtered);
-
-      // Official weigh-ins: the message carries the PARTICIPANT's stance —
-      // the platform never supplies a position. User-created campaigns carry
-      // the CREATOR's ask, in their voice.
-      let ask: string;
-      if (!isOfficial) {
-        ask = campaign.message_template
-          ? `${campaign.headline}. ${campaign.message_template}`
-          : campaign.headline;
-      } else if (stance === 'support') {
-        ask = `The constituent SUPPORTS this position: "${campaign.headline}". Write a respectful message expressing clear support and asking the official to support it too.`;
-      } else if (stance === 'oppose') {
-        ask = `The constituent OPPOSES this position: "${campaign.headline}". Write a respectful message expressing clear opposition and asking the official to oppose it.`;
-      } else {
-        ask = `The constituent is still forming a view on: "${campaign.headline}". Write a respectful message asking the official to share their position and reasoning on this issue.`;
-      }
-      // Reference the bill ONLY when the campaign is explicitly flagged as an
-      // action on a specific bill — neutral issues never name one. The
-      // generate-message route runs detectBillReferences over the ask.
-      if (campaign.is_bill_specific && campaign.bill_type && campaign.bill_number) {
-        const typeLabels: Record<string, string> = {
-          hr: 'H.R.', s: 'S.', hres: 'H.Res.', sres: 'S.Res.',
-          hjres: 'H.J.Res.', sjres: 'S.J.Res.', hconres: 'H.Con.Res.', sconres: 'S.Con.Res.',
-        };
-        const ref = `${typeLabels[campaign.bill_type.toLowerCase()] ?? campaign.bill_type.toUpperCase()} ${campaign.bill_number}`;
-        ask += ` Specifically regarding ${ref}${campaign.bill_title ? `, the ${campaign.bill_title}` : ''}.`;
-      }
-
-      const msgMap: Record<string, OfficialMessage> = {};
-      try {
-        const msgRes = await fetch('/api/generate-message', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            officials: filtered.map((o: Official) => ({
-              name: o.name,
-              lastName: o.lastName,
-              stafferFirstName: o.stafferFirstName,
-              title: o.title,
-              party: o.party,
-              state: o.state,
-            })),
-            issue: campaign.issue_subtopic || campaign.issue_area,
-            ask,
-            personalWhy: personalWhy.trim() || undefined,
-            senderName: name.trim(),
-            address: { street: street.trim(), city: city.trim(), state: stateCode, zip: zip5 },
-            contactMethod: 'email',
-            turnstileToken,
-          }),
-        });
-
-        if (!msgRes.ok) {
-          const errData = await msgRes.json().catch(() => null);
-          throw new Error(errData?.error || `generate-message ${msgRes.status}`);
-        }
-
-        // Success responses are an SSE stream: one `data: {officialName,
-        // subject, body}` line per official, then `data: [DONE]`. Parsing this
-        // as JSON was the long-standing breakage in this flow — the contact
-        // flow always streamed; this one never did.
-        const reader = msgRes.body?.getReader();
-        if (!reader) throw new Error('No response stream');
-        const decoder = new TextDecoder();
-        let buffer = '';
-        while (true) {
-          const { done, value } = await reader.read();
-          if (done) break;
-          buffer += decoder.decode(value, { stream: true });
-          const lines = buffer.split('\n');
-          buffer = lines.pop() || '';
-          for (const line of lines) {
-            if (!line.startsWith('data: ')) continue;
-            const data = line.slice(6).trim();
-            if (data === '[DONE]') continue;
-            try {
-              const msg = JSON.parse(data) as { officialName: string; subject: string; body: string };
-              msgMap[msg.officialName] = { subject: msg.subject, body: msg.body };
-            } catch {
-              // Skip malformed lines
+      // Message mapping: on cosponsor stages, officials already on the bill
+      // get a thank-you instead of a pitch; thank_you stages thank everyone.
+      // Fails open (no intent) — a sponsor-lookup hiccup shouldn't block anyone.
+      const intents: Record<string, 'persuade' | 'thank'> = {};
+      if (campaign.stage_goal === 'thank_you') {
+        for (const o of filtered) intents[o.id] = 'thank';
+      } else if (campaign.stage_goal === 'cosponsor') {
+        try {
+          if (campaign.bill_level === 'state' && campaign.bill_state && campaign.bill_ref) {
+            const csRes = await fetch(
+              `/api/bills/state-sponsors?state=${campaign.bill_state}&ref=${encodeURIComponent(campaign.bill_ref)}`
+            );
+            if (csRes.ok) {
+              const onBill = new Set<string>((await csRes.json()).memberIds || []);
+              for (const o of filtered) {
+                if (o.level === 'state') intents[o.id] = onBill.has(o.id) ? 'thank' : 'persuade';
+              }
+            }
+          } else {
+            // Federal: official weigh-ins store congress/type/number; user
+            // campaigns store bill_ref ("H.R. 1234"), which we parse. Bills in
+            // campaigns are current, so the ref path assumes this Congress.
+            let congress = campaign.bill_congress ? String(campaign.bill_congress) : '';
+            let type = campaign.bill_type || '';
+            let number = campaign.bill_number || '';
+            if (!(congress && type && number) && campaign.bill_ref) {
+              const fed = detectBillReferences(campaign.bill_ref).find((r) => r.level === 'federal');
+              if (fed) {
+                congress = String(CURRENT_CONGRESS);
+                type = fed.type;
+                number = fed.number;
+              }
+            }
+            if (congress && type && number) {
+              const csRes = await fetch(
+                `/api/bills/cosponsors?congress=${congress}&type=${encodeURIComponent(type)}&number=${encodeURIComponent(number)}`
+              );
+              if (csRes.ok) {
+                const onBill = new Set<string>((await csRes.json()).bioguides || []);
+                for (const o of filtered) {
+                  if (o.level === 'federal') intents[o.id] = onBill.has(o.id) ? 'thank' : 'persuade';
+                }
+              }
             }
           }
+        } catch (csErr) {
+          console.warn('[participate] sponsor lookup failed, generating without intent:', csErr);
         }
-      } catch (genErr) {
-        // AI drafting failed (CAPTCHA, outage, quota) — don't bounce back to
-        // the form. Officials were found, so fall through to review with
-        // starter drafts the participant writes themselves. This is what the
-        // July–August Turnstile outage taught us: an AI failure must never
-        // block sending entirely.
-        console.error('[participate] message generation failed, using manual compose:', genErr);
       }
+      setIntentByOfficial(intents);
 
-      // Starter drafts for every official the AI didn't cover (all of them,
-      // when generation failed outright).
+      setOfficials(filtered);
+
+      // Message-first assembly: the constituent already approved their core
+      // message on the compose step. Each official gets a deterministic
+      // envelope around that SAME core — no second AI pass, and the approved
+      // words are never altered. Falls back to a starter draft if somehow no
+      // core exists (e.g. drafting was down and they skipped ahead).
+      const billRef =
+        campaign.bill_ref ??
+        (campaign.is_bill_specific && campaign.bill_type && campaign.bill_number
+          ? `${({ hr: 'H.R.', s: 'S.', hres: 'H.Res.', sres: 'S.Res.', hjres: 'H.J.Res.', sjres: 'S.J.Res.', hconres: 'H.Con.Res.', sconres: 'S.Con.Res.' } as Record<string, string>)[campaign.bill_type.toLowerCase()] ?? campaign.bill_type.toUpperCase()} ${campaign.bill_number}`
+          : null);
+      const verb: 'support' | 'oppose' | null = isOfficial
+        ? stance === 'oppose' ? 'oppose' : stance === 'support' ? 'support' : null
+        : campaign.direction === 'oppose' ? 'oppose' : 'support';
+
+      const msgMap: Record<string, OfficialMessage> = {};
       let fallback = false;
       for (const o of filtered) {
-        if (!msgMap[o.name]) {
+        if (coreDraft.trim()) {
+          msgMap[o.name] = buildEnvelope(coreDraft.trim(), o, {
+            intent: intents[o.id],
+            committeeName,
+            verb,
+            billRef,
+            stageGoal: campaign.stage_goal,
+            headline: campaign.headline,
+            senderName: name.trim(),
+            city: city.trim(),
+            stateCode,
+            zip: zip5,
+            coreSubject,
+            coreOpening,
+            coreAsk,
+          });
+        } else {
           msgMap[o.name] = buildFallbackMessage(campaign, o, {
             stance, personalWhy, senderName: name.trim(), city: city.trim(), stateCode, zip: zip5,
           });
@@ -359,6 +558,7 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             participant_name: name.trim(),
+            participant_email: collectEmail && email.trim() ? email.trim() : undefined,
             participant_city: city.trim(),
             participant_state: state,
             messages_sent: isFirst ? initialMessagesSent : undefined,
@@ -386,6 +586,7 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
     if (!msg) return;
 
     setSentCount((c) => c + 1);
+    fireFunnel('participate_send_clicked');
     const turnstileToken = await getToken();
 
     fetch('/api/track-send', {
@@ -393,6 +594,7 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         advocate_name: name.trim(),
+        advocate_email: collectEmail && email.trim() ? email.trim() : undefined,
         advocate_city: city.trim(),
         advocate_state: state,
         legislator_name: official.name,
@@ -405,6 +607,7 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
         message_body: msg.body,
         delivery_method: 'email',
         delivery_status: deliveryStatus,
+        message_intent: intentByOfficial[official.id],
         campaign_id: campaign.id,
         turnstileToken: turnstileToken || undefined,
       }),
@@ -458,7 +661,7 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
         onClick={() => {
           setStance(value);
           trackEvent('campaign_stance_selected', { campaign: campaign.slug, stance: value });
-          setStep('form');
+          setStep('compose');
         }}
         className="w-full p-4 rounded-xl border-2 border-gray-200 dark:border-gray-600 hover:border-purple-500 hover:bg-purple-50 dark:hover:bg-purple-900/20 text-left transition-colors"
       >
@@ -479,8 +682,126 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
         <div className="space-y-2">
           {stanceButton('support', 'I support this', 'Your message will express clear support and ask your officials to support it too.')}
           {stanceButton('oppose', 'I oppose this', 'Your message will express clear opposition and ask your officials to oppose it.')}
-          {stanceButton('undecided', 'I’m still deciding', 'Your message will ask your officials where they stand and why.')}
         </div>
+      </div>
+    );
+  }
+
+  // Step: compose — the message comes FIRST. Value before identity: they see
+  // and approve their own message before we ask for an address.
+  if (step === 'compose') {
+    return (
+      <div className="space-y-5">
+        <TurnstileWidget />
+        {error && (
+          <div className="p-4 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 rounded-xl">
+            <p className="text-sm text-red-700 dark:text-red-300">{error}</p>
+          </div>
+        )}
+
+        {!coreDraft && followUpQuestions.length > 0 ? (
+          <>
+            <div>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">A couple quick questions</h3>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                Your answers make your letter specific. Skip anything.
+              </p>
+            </div>
+            <div className="space-y-4">
+              {followUpQuestions.map((question, i) => (
+                <div key={i}>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                    {question}
+                  </label>
+                  <input
+                    type="text"
+                    value={followUpAnswers[i] ?? ''}
+                    onChange={(e) =>
+                      setFollowUpAnswers((prev) => prev.map((a, j) => (j === i ? e.target.value : a)))
+                    }
+                    maxLength={300}
+                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
+                  />
+                </div>
+              ))}
+            </div>
+            <div className="flex gap-2">
+              <Button onClick={finishFollowUps} disabled={coreStatus === 'drafting'} className="flex-1">
+                {coreStatus === 'drafting' ? 'Writing your message…' : 'Continue'}
+              </Button>
+              <button
+                type="button"
+                onClick={finishFollowUps}
+                disabled={coreStatus === 'drafting'}
+                className="px-4 py-2 border border-gray-300 dark:border-gray-600 text-sm text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700"
+              >
+                Skip
+              </button>
+            </div>
+          </>
+        ) : !coreDraft ? (
+          <>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Why does this matter to you? <span className="text-gray-400 dark:text-gray-500 font-normal">(optional, but it makes your message land)</span>
+              </label>
+              <textarea
+                value={personalWhy}
+                onChange={(e) => setPersonalWhy(e.target.value)}
+                placeholder="How does this affect you, your family, your community? A sentence or two is plenty."
+                rows={4}
+                maxLength={2000}
+                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent resize-y bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
+              />
+            </div>
+            <Button
+              onClick={() => void startDraftFlow()}
+              disabled={coreStatus === 'drafting' || fetchingQuestions}
+              className="w-full"
+            >
+              {coreStatus === 'drafting' ? 'Writing your message…' : fetchingQuestions ? 'One moment…' : 'Draft my message'}
+            </Button>
+            <p className="text-xs text-gray-500 dark:text-gray-400 text-center">
+              You&apos;ll see and edit the message before anything else happens — no address needed yet.
+            </p>
+          </>
+        ) : (
+          <>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Your message <span className="text-gray-400 dark:text-gray-500 font-normal">(edit anything — these are your words)</span>
+              </label>
+              <textarea
+                value={coreDraft}
+                onChange={(e) => setCoreDraft(e.target.value)}
+                rows={10}
+                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent resize-y bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              />
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                We add the greeting, each official&apos;s name, and your signature automatically — your words above are never changed.
+              </p>
+            </div>
+            <div className="flex gap-2">
+              <Button
+                onClick={() => {
+                  fireFunnel('participate_core_approved');
+                  setStep('form');
+                }}
+                className="flex-1"
+              >
+                Looks good — deliver it
+              </Button>
+              <button
+                type="button"
+                onClick={() => void draftCore()}
+                disabled={coreStatus === 'drafting'}
+                className="px-4 py-2 border border-gray-300 dark:border-gray-600 text-sm text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700"
+              >
+                {coreStatus === 'drafting' ? 'Redrafting…' : 'Redraft'}
+              </button>
+            </div>
+          </>
+        )}
       </div>
     );
   }
@@ -533,6 +854,25 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
             className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
           />
         </div>
+
+        {collectEmail && (
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              Email <span className="text-red-500">*</span>
+            </label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="you@example.com"
+              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
+            />
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+              {campaign.org_name || 'The campaign organizer'} will email you when this bill moves to its next step, so
+              you can act again when it counts. Unsubscribe anytime.
+            </p>
+          </div>
+        )}
 
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
@@ -591,30 +931,9 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
           />
         </div>
 
-        <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-            Why does this matter to you? <span className="text-gray-400 dark:text-gray-500 font-normal">(optional)</span>
-          </label>
-          <div className="mb-3 p-3 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded-xl">
-            <p className="text-xs text-amber-800 dark:text-amber-300 font-medium mb-1">Tips for a powerful message:</p>
-            <p className="text-xs text-amber-700 dark:text-amber-400">
-              Share how this issue affects you personally. The more specific you are, the more impactful your message will be. Examples: How does this affect your family? Your community? Your daily life?
-            </p>
-          </div>
-          <textarea
-            value={personalWhy}
-            onChange={(e) => setPersonalWhy(e.target.value)}
-            placeholder="Share your personal connection to this issue..."
-            rows={5}
-            maxLength={2000}
-            className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent resize-y bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
-          />
-          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{personalWhy.length}/2000 characters</p>
-        </div>
-
         <div className="p-3 bg-purple-50 dark:bg-purple-900/30 border border-purple-200 dark:border-purple-700 rounded-xl">
           <p className="text-xs text-purple-700 dark:text-purple-300">
-            AI will write personalized messages to your officials based on this campaign. You&apos;ll review before sending.
+            Your approved message goes to each official with their own greeting and ask. You&apos;ll review everything before sending.
           </p>
         </div>
 
@@ -650,6 +969,90 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
     );
   }
 
+  // Committee stage, but none of this participant's reps sit on the
+  // committee: never send to uninvolved offices — offer other ways to help.
+  if (step === 'noTarget') {
+    const shareUrl = campaign.custom_domain
+      ? `https://${campaign.custom_domain}/`
+      : `https://www.mydemocracy.app/campaign/${campaign.slug}`;
+    return (
+      <div className="max-w-xl mx-auto py-8 text-center">
+        <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
+          <svg className="w-8 h-8 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+        </div>
+        <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+          Your representatives aren&apos;t on {noTargetName}
+        </h3>
+        <p className="text-gray-600 dark:text-gray-300 mb-6">
+          This stage of the campaign targets only the members of {noTargetName}, so their offices hear from the
+          constituents they represent. Your voice still matters — here are the best ways to help right now.
+        </p>
+        {parentCampaign && (
+          <Link
+            href={`/campaign/${parentCampaign.slug}`}
+            className="inline-block mb-4 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white text-sm font-medium rounded-lg transition-colors"
+          >
+            Send a broader message to your own legislators instead
+          </Link>
+        )}
+        <div className="mb-6 text-left">
+          <SocialShare url={shareUrl} text={`"${campaign.headline}" is in front of ${noTargetName} right now — if your rep is on the committee, they need to hear from you.`} />
+        </div>
+        <button
+          onClick={() => setStep('form')}
+          className="text-sm text-purple-600 dark:text-purple-400 hover:underline"
+        >
+          &larr; Try a different address
+        </button>
+      </div>
+    );
+  }
+
+  // State-bill campaign, participant from another state: their legislators
+  // have no vote here — don't generate an irrelevant message. Explain why and
+  // offer ways to stay useful.
+  if (step === 'wrongState') {
+    const requiredState = campaign.bill_state || campaign.target_filter?.state || '';
+    const stateName = US_STATES.find((s) => s.code === requiredState)?.name || requiredState;
+    const shareUrl = campaign.custom_domain
+      ? `https://${campaign.custom_domain}/`
+      : `https://www.mydemocracy.app/campaign/${campaign.slug}`;
+    return (
+      <div className="max-w-xl mx-auto py-8 text-center">
+        <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center">
+          <svg className="w-8 h-8 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+        </div>
+        <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+          This campaign is for {stateName} constituents
+        </h3>
+        <p className="text-gray-600 dark:text-gray-300 mb-6">
+          It&apos;s about a bill in the {stateName} legislature, and only {stateName} legislators vote on it — your
+          own state legislators aren&apos;t part of this decision. The most useful thing you can do is pass it along
+          to people in {stateName}, or find an issue where <em>your</em> officials are the ones deciding.
+        </p>
+        <div className="flex flex-col sm:flex-row gap-3 justify-center mb-6">
+          <Link
+            href="/issues"
+            className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white text-sm font-medium rounded-lg transition-colors"
+          >
+            Find an issue for your state
+          </Link>
+        </div>
+        <div className="mb-6 text-left">
+          <SocialShare url={shareUrl} text={`${stateName} friends: "${campaign.headline}" needs your voice — your legislators are the ones deciding.`} />
+        </div>
+        <button onClick={() => setStep('form')} className="text-sm text-purple-600 dark:text-purple-400 hover:underline">
+          &larr; I entered the wrong address
+        </button>
+      </div>
+    );
+  }
+
   // Step 3: Review & Send
   if (step === 'review') {
     return (
@@ -663,6 +1066,20 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
             Send each message using the options below
           </p>
         </div>
+
+        {campaign.message_template && (
+          <details className="p-3 bg-gray-50 dark:bg-gray-700/40 border border-gray-200 dark:border-gray-600 rounded-xl">
+            <summary className="text-sm font-medium text-gray-700 dark:text-gray-300 cursor-pointer select-none">
+              See the talking points your messages will include
+            </summary>
+            <p className="mt-2 text-sm text-gray-600 dark:text-gray-400 whitespace-pre-line border-l-2 border-purple-400 pl-3">
+              {campaign.message_template}
+            </p>
+            <p className="mt-2 text-xs text-gray-500 dark:text-gray-400">
+              Everything else is written for your voice — edit anything before you send.
+            </p>
+          </details>
+        )}
 
         {usedFallback && (
           <div className="p-3 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded-xl">
@@ -713,9 +1130,9 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
         </svg>
       </div>
-      <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Thank You!</h3>
+      <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Sent</h3>
       <p className="text-gray-600 dark:text-gray-300 mb-6">
-        Your voice matters. Every message counts toward making a difference.
+        Offices tally constituent messages by issue. Yours is now in the count.
       </p>
 
       {/* Reader-poll results — revealed only AFTER this reader picked and acted */}
@@ -724,7 +1141,11 @@ export function CampaignParticipate({ campaign }: { campaign: Campaign }) {
         const rows: Array<{ key: Stance; label: string; count: number }> = [
           { key: 'support', label: 'Support', count: pollResults.support },
           { key: 'oppose', label: 'Oppose', count: pollResults.oppose },
-          { key: 'undecided', label: 'Still deciding', count: pollResults.undecided },
+          // "Still deciding" is no longer an option; only show it if older
+          // campaigns still carry historical undecided counts.
+          ...(pollResults.undecided > 0
+            ? [{ key: 'undecided' as Stance, label: 'Still deciding', count: pollResults.undecided }]
+            : []),
         ];
         const pct = (n: number) => (total > 0 ? Math.round((n / total) * 100) : 0);
         const ownPct = pct(rows.find((r) => r.key === stance)?.count ?? 0);

@@ -424,7 +424,7 @@ export function TopicStep({ state, dispatch, onBack }: TopicStepProps) {
       return;
     }
     dispatch({ type: 'SET_ERROR', payload: null });
-    dispatch({ type: 'GO_TO_STEP', payload: 'message' });
+    dispatch({ type: 'GO_TO_STEP', payload: 'address' });
   };
 
   return (
@@ -493,8 +493,8 @@ export function TopicStep({ state, dispatch, onBack }: TopicStepProps) {
         </h3>
         <p className="text-gray-500 dark:text-gray-400 mt-1 text-sm">
           {contactMethod === 'phone'
-            ? 'AI will write a personalized phone script for each official'
-            : 'AI will write a personalized letter for each official'}
+            ? 'Your words become a separate phone script for each official.'
+            : 'Your words become a separate letter for each official.'}
           {' '}
           <a href="/about/ai-tailoring" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">
             How does this work?
@@ -513,7 +513,7 @@ export function TopicStep({ state, dispatch, onBack }: TopicStepProps) {
           <div className="flex-1 min-w-0">
             <p className="text-sm font-medium text-purple-900 dark:text-purple-100">Not sure what to say?</p>
             <p className="text-xs text-purple-700 dark:text-purple-300 mt-0.5">
-              Chat with our assistant and we&apos;ll help you figure out your issue, who to contact, and what to ask for. Share only what feels comfortable.
+              The assistant asks a few questions and turns your answers into an issue, an ask, and a draft you can edit.
             </p>
             <button
               type="button"
@@ -772,7 +772,7 @@ export function TopicStep({ state, dispatch, onBack }: TopicStepProps) {
         />
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{personalWhy.length}/2000 characters</p>
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
-          Personal stories drive policy. Congressional staff track constituent concerns and often share compelling stories directly with legislators.
+          Staff read personal stories and pass the memorable ones to the member. A specific detail from your life outweighs a page of talking points.
           {' '}<a href="/guides/tell-your-story" target="_blank" rel="noopener noreferrer" className="text-purple-600 dark:text-purple-400 hover:underline">Read the full guide</a>.
         </p>
       </div>
@@ -781,8 +781,8 @@ export function TopicStep({ state, dispatch, onBack }: TopicStepProps) {
       <div className="mb-6 p-3 bg-purple-50 dark:bg-purple-900/30 border border-purple-200 dark:border-purple-700 rounded-xl">
         <p className="text-xs text-purple-700 dark:text-purple-300">
           {contactMethod === 'phone'
-            ? 'AI will write a separate phone script for each official, tailored to their party and likely stance.'
-            : 'AI will write a separate letter for each official, tailored to their party and likely stance.'}
+            ? 'Each official gets a separate script built from your reasons, worded for where that official stands.'
+            : 'Each official gets a separate letter built from your reasons, worded for where that official stands.'}
           {' '}
           <a href="/about/ai-tailoring" target="_blank" rel="noopener noreferrer" className="underline hover:text-purple-900 dark:hover:text-purple-100">
             How does this work?

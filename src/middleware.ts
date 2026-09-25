@@ -10,9 +10,15 @@ const securityHeaders: Record<string, string> = {
   'Strict-Transport-Security': 'max-age=63072000; includeSubDomains; preload',
 };
 
-function applySecurityHeaders(response: NextResponse): NextResponse {
+function applySecurityHeaders(response: NextResponse, pathname?: string): NextResponse {
   for (const [key, value] of Object.entries(securityHeaders)) {
     response.headers.set(key, value);
+  }
+  // /embed/* exists to be iframed on third-party sites — every other route
+  // keeps the DENY above.
+  if (pathname?.startsWith('/embed/')) {
+    response.headers.delete('X-Frame-Options');
+    response.headers.set('Content-Security-Policy', 'frame-ancestors *');
   }
   return response;
 }
@@ -66,7 +72,7 @@ export async function middleware(request: NextRequest) {
   // Skip session refresh for auth callback — the route handler
   // needs the PKCE code verifier cookie untouched.
   if (request.nextUrl.pathname === '/auth/callback') {
-    return applySecurityHeaders(NextResponse.next());
+    return applySecurityHeaders(NextResponse.next(), request.nextUrl.pathname);
   }
 
   // Custom domain root → that org's campaign page.
@@ -76,12 +82,12 @@ export async function middleware(request: NextRequest) {
     if (slug) {
       const url = request.nextUrl.clone();
       url.pathname = `/campaign/${slug}`;
-      return applySecurityHeaders(NextResponse.rewrite(url));
+      return applySecurityHeaders(NextResponse.rewrite(url), request.nextUrl.pathname);
     }
   }
 
   const response = await updateSession(request);
-  return applySecurityHeaders(response);
+  return applySecurityHeaders(response, request.nextUrl.pathname);
 }
 
 export const config = {

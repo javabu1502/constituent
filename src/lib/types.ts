@@ -297,6 +297,8 @@ export interface Campaign {
   issue_area: string;
   issue_subtopic: string | null;
   target_level: 'federal' | 'state' | 'both';
+  /** User/advocacy campaigns are directional (one way); null for neutral official weigh-ins + storytelling. */
+  direction?: 'support' | 'oppose' | null;
   message_template: string | null;
   status: 'active' | 'paused' | 'archived';
   action_count: number;
@@ -349,6 +351,22 @@ export interface Campaign {
   org_logo_url?: string | null;
   brand_color?: string | null;
   custom_domain?: string | null;
+  // Stage campaigns: one step of a parent initiative's legislative journey.
+  parent_campaign_id?: string | null;
+  stage_goal?: 'cosponsor' | 'committee' | 'floor_house' | 'floor_senate' | 'thank_you' | 'custom' | null;
+  /** Targeting rule limiting which officials this campaign/action contacts.
+   *  type 'committee' -> committee_id (+state for state committees);
+   *  type 'officials' -> hand-picked list (ids matched against the
+   *  participant's resolved reps); type 'party' -> party/chamber/level slice. */
+  target_filter?: {
+    type?: string;
+    committee_id?: string;
+    state?: string;
+    officials?: { id: string; name: string; level: 'federal' | 'state'; state: string }[];
+    party?: 'D' | 'R' | 'I';
+    chamber?: 'house' | 'senate' | 'both';
+    level?: 'federal' | 'state';
+  } | null;
 }
 
 export type AttributionLevel = 'named' | 'first_name_only' | 'anonymous';

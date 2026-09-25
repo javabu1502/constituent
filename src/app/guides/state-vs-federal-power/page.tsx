@@ -214,7 +214,7 @@ export default function StateVsFederalPowerGuidePage() {
             Know who represents you at every level
           </h2>
           <p className="text-gray-600 dark:text-gray-300 mb-6">
-            Find your federal and state officials and make your voice heard where it counts.
+            Find your federal and state officials and take your issue to the level that actually decides it.
           </p>
           <Link
             href="/contact"

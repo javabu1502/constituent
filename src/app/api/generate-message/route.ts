@@ -12,6 +12,7 @@ import { generateMessageSchema, parseBody } from '@/lib/schemas';
 import { generateLimiter, getClientIp } from '@/lib/rate-limit';
 import { verifyTurnstile } from '@/lib/turnstile';
 import { enforceDailyQuota, resolveUsageIdentity } from '@/lib/usage-quota';
+import { scrubUnsupportedIdentityClaims, stripUnsourcedStats } from '@/lib/message-quality';
 
 type GenerateRequest = z.infer<typeof generateMessageSchema>;
 type OfficialInput = GenerateRequest['officials'][number];
@@ -336,7 +337,7 @@ function buildToneInstructions(tone: Tone): string {
     case 'personal':
       return `\n\nTONE — PERSONAL:
 - Lead with the personal story, use conversational language, show vulnerability
-- Frame statistics personally (e.g. "I'm one of 43 million...")
+- Keep it personal and concrete, using ONLY experiences and facts the constituent actually shared — never claim an identity or experience for them
 - Prioritize emotional connection over formality`;
     case 'passionate':
       return `\n\nTONE — PASSIONATE:
@@ -347,6 +348,41 @@ function buildToneInstructions(tone: Tone): string {
     default:
       return ''; // professional is the default style
   }
+}
+
+/** Minimal JSON string unescape for streaming partials. */
+function unescapeJsonString(s: string): string {
+  return s
+    .replace(/\\n/g, '\n')
+    .replace(/\\r/g, '\r')
+    .replace(/\\t/g, '\t')
+    .replace(/\\"/g, '"')
+    .replace(/\\\\/g, '\\');
+}
+
+/** Best-effort extraction of subject/body from a partial JSON string while streaming. */
+function extractPartial(raw: string): { subject: string; body: string } {
+  let subject = '';
+  const subjMatch = raw.match(/"subject"\s*:\s*"((?:[^"\\]|\\.)*)"/);
+  if (subjMatch) subject = unescapeJsonString(subjMatch[1]);
+
+  let body = '';
+  const key = raw.includes('"script"') ? '"script"' : '"body"';
+  const keyIdx = raw.indexOf(key);
+  if (keyIdx !== -1) {
+    const colonIdx = raw.indexOf(':', keyIdx + key.length);
+    const quoteIdx = colonIdx !== -1 ? raw.indexOf('"', colonIdx + 1) : -1;
+    if (quoteIdx !== -1) {
+      let rest = raw.slice(quoteIdx + 1);
+      let end = -1;
+      for (let i = 0; i < rest.length; i++) {
+        if (rest[i] === '"' && rest[i - 1] !== '\\') { end = i; break; }
+      }
+      if (end !== -1) rest = rest.slice(0, end);
+      body = unescapeJsonString(rest);
+    }
+  }
+  return { subject, body };
 }
 
 async function generateForOfficial(
@@ -364,6 +400,7 @@ async function generateForOfficial(
   tone: Tone = 'professional',
   billDetails?: string,
   newsContext?: string,
+  onPartial?: (msg: OfficialMessage) => void,
 ): Promise<OfficialMessage> {
   const isState = official.level === 'state';
   const titleLower = official.title.toLowerCase();
@@ -383,7 +420,7 @@ async function generateForOfficial(
   const officialLastName = official.lastName || official.name.split(' ').pop();
 
   const constituentContext = isState && official.district
-    ? `${official.state} ${titleLower.includes('senator') ? 'Senate' : 'Assembly'} District ${official.district}`
+    ? `${official.state} ${titleLower.includes('senator') ? 'Senate' : 'state legislature'} District ${official.district}`
     : official.state;
 
   const stafferNote = official.stafferFirstName
@@ -419,6 +456,15 @@ async function generateForOfficial(
 
   const toneInstructions = buildToneInstructions(tone);
 
+  // Stage campaigns map intent per official: an official already on the bill
+  // gets gratitude that reinforces, not a pitch that ignores what they did.
+  const intentInstructions =
+    official.intent === 'thank'
+      ? `\n- THIS IS A THANK-YOU MESSAGE: this official has ALREADY taken the action the campaign asks for (e.g. cosponsored the bill or cast the vote). Shift the whole voice: warm, specific, and glad — a letter someone writes because they WANT to, with none of the urgency or pressure of a persuasion letter. Name the action being thanked. Do NOT lobby them as if they were undecided. Ask them to keep championing it — urge colleagues to join, push for a hearing or a floor vote.`
+      : official.intent === 'persuade'
+        ? `\n- This official has NOT yet taken the action the campaign asks for. Make the constituent's case directly and end with the specific ask (e.g. cosponsor the bill).`
+        : '';
+
   const emailSystemPrompt = `You are an expert constituent letter writer. Write a compelling, personalized letter from a constituent to ONE specific elected official.
 
 Use your knowledge of this official's party affiliation, state, and likely positions to tailor the letter specifically to them.
@@ -434,8 +480,9 @@ Writing guidelines:
 - Maintain a respectful, firm tone
 - Keep the letter between 170-300 words (each request sets an exact target — follow it)
 - Do NOT include a greeting line (no "Dear Senator") or signature block (no "Sincerely") — the app handles those
+- NEVER include the sender's name, street, city, state, or ZIP anywhere in the letter body — those live in the signature the app adds, and repeating them inside the letter breaks how offices process mail
 - Write in first person
-- Be direct and specific to THIS official, not generic${stafferNote}${stateNote}${voteInstructions}${districtInstructions}${billInstructions}${newsInstructions}${toneInstructions}
+- Be direct and specific to THIS official, not generic${stafferNote}${stateNote}${voteInstructions}${districtInstructions}${billInstructions}${newsInstructions}${toneInstructions}${intentInstructions}
 
 DATA-DRIVEN WRITING:
 - Use specific numbers from the KEY STATISTICS provided — they add credibility
@@ -468,6 +515,7 @@ Writing guidelines:
 - Keep it under 150 words
 - Conversational, first-person tone — NOT bullet points
 - Structure: issue statement → personal connection → specific ask
+- NEVER claim an identity, profession, or lived experience the constituent's own words do not state (no borrowed "I'm a veteran", "my kids", "my patients"). Invent no statistics or figures.
 - Do NOT include the opening line (e.g. "Hi, my name is...") or closing ("Thank you for your time.") — the app handles those
 - IMPORTANT: The app already introduces the caller with their name and location. Do NOT mention the caller's city, state, or location anywhere in the script. Never say "as a [city] resident", "here in [state]", "in my community", or any other location reference. The caller's location is already established.
 - Write as a flowing, natural script the caller reads aloud
@@ -475,7 +523,7 @@ Writing guidelines:
 - If the official likely SUPPORTS the position: acknowledge that and urge continued action
 - If the official likely OPPOSES it: respectfully urge reconsideration
 - Work ONE key statistic into the script naturally — e.g. "I'm concerned because over 48,000 Americans die from gun violence each year"
-- End with a clear, specific ask — not a vague "please consider"${stateNote ? stateNote.replace('email', 'call') : ''}${voteInstructions}${districtInstructions}${billInstructions}${newsInstructions}${toneInstructions}
+- End with a clear, specific ask — not a vague "please consider"${stateNote ? stateNote.replace('email', 'call') : ''}${voteInstructions}${districtInstructions}${billInstructions}${newsInstructions}${toneInstructions}${intentInstructions}
 
 DATA-DRIVEN WRITING:
 - Use specific numbers from the KEY STATISTICS provided — they add credibility
@@ -561,6 +609,13 @@ Respond with ONLY this JSON:
   // Build messages with few-shot examples
   const fewShotMessages = buildFewShotMessages(contactMethod);
 
+  // Everything the constituent actually said, plus every data block we
+  // supplied — the ONLY licence for identity claims and statistics.
+  const userOwnWords = `${issue} ${ask} ${personalWhy || ''}`;
+  const allowedStatSource = [topicData, voteContext, districtContext, billDetails, newsContext, userOwnWords]
+    .filter(Boolean)
+    .join(' ');
+
   const response = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
     headers: {
@@ -571,26 +626,59 @@ Respond with ONLY this JSON:
     body: JSON.stringify({
       model: process.env.CLAUDE_MODEL || 'claude-sonnet-4-6',
       max_tokens: 1200,
+      stream: true,
       system: systemPrompt,
       messages: [...fewShotMessages, { role: 'user', content: userPrompt }],
     }),
   });
 
-  if (!response.ok) {
-    const errText = await response.text();
+  if (!response.ok || !response.body) {
+    const errText = response.body ? await response.text() : '';
     console.error(`Anthropic API error for ${official.name}:`, response.status, errText);
     throw new Error(`API error ${response.status}`);
   }
 
-  const data = await response.json();
-  const textParts: string[] = [];
-  for (const block of (data.content || [])) {
-    if (block.type === 'text' && block.text) {
-      textParts.push(block.text);
+  // Read the Anthropic SSE stream, accumulating text deltas and emitting
+  // best-effort partial updates so the client renders the letter as it
+  // writes. Partials pass the same identity-scrub and stat-strip as finals —
+  // a fabricated claim must never render, even transiently.
+  const streamReader = response.body.getReader();
+  const streamDecoder = new TextDecoder();
+  let sseBuffer = '';
+  let rawText = '';
+  while (true) {
+    const { done, value } = await streamReader.read();
+    if (done) break;
+    sseBuffer += streamDecoder.decode(value, { stream: true });
+    const sseLines = sseBuffer.split('\n');
+    sseBuffer = sseLines.pop() || '';
+    for (const sseLine of sseLines) {
+      const trimmed = sseLine.trim();
+      if (!trimmed.startsWith('data:')) continue;
+      const payload = trimmed.slice(5).trim();
+      if (!payload || payload === '[DONE]') continue;
+      try {
+        const evt = JSON.parse(payload);
+        if (evt.type === 'content_block_delta' && evt.delta?.type === 'text_delta' && evt.delta.text) {
+          rawText += evt.delta.text;
+          if (onPartial) {
+            const partial = extractPartial(rawText);
+            if (partial.body) {
+              const safeBody = stripUnsourcedStats(
+                scrubUnsupportedIdentityClaims(partial.body, userOwnWords),
+                allowedStatSource,
+              );
+              if (safeBody) {
+                onPartial({ officialName: official.name, subject: partial.subject, body: safeBody });
+              }
+            }
+          }
+        }
+      } catch {
+        // Ignore keepalive/non-JSON lines
+      }
     }
   }
-
-  const rawText = textParts.join('\n');
   const strippedText = stripTags(rawText);
   const parsed = extractJSON(strippedText) as { subject?: string; body?: string; script?: string } | null;
 
@@ -605,7 +693,10 @@ Respond with ONLY this JSON:
       script = strippedText;
     }
 
-    const cleanedScript = deDash(cleanText(script));
+    const cleanedScript = stripUnsourcedStats(
+      scrubUnsupportedIdentityClaims(deDash(cleanText(script)), userOwnWords),
+      allowedStatSource,
+    );
 
     // Build phone opening and closing
     const opening = `Hi, my name is ${senderName} and I'm a constituent${locationStr ? ` from ${locationStr}` : ''}.`;
@@ -630,6 +721,10 @@ Respond with ONLY this JSON:
     subj = 'Reaching Out About an Important Issue';
     body = strippedText;
   }
+
+  // Legacy path has no retry loop — scrub fabricated identity sentences and
+  // drop any statistic whose number isn't in the data we supplied.
+  body = stripUnsourcedStats(scrubUnsupportedIdentityClaims(body, userOwnWords), allowedStatSource);
 
   const cleanedBody = deDash(cleanText(body));
   const cleanedSubject = deDash(cleanText(subj).replace(/\n/g, ' '));
@@ -873,6 +968,7 @@ ${contactMethod === 'phone' ? '{"script": "the revised phone script"}' : '{"subj
             const result = await generateForOfficial(
               apiKey, official, issue, ask, personalWhy, senderName, address, method,
               topicDataBlock, voteContext, districtContext, selectedTone, billDetailsBlock, newsContext,
+              enqueueMessage,
             );
             enqueueMessage(result);
             return result;

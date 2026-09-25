@@ -8,7 +8,7 @@ const tourSteps = [
   {
     title: 'Welcome to My Democracy!',
     description:
-      'Your personalized civic hub. Here\'s a quick tour of everything you can do from your dashboard.',
+      'Your officials, their activity, and your message history live here. A quick tour:',
     icon: (
       <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
@@ -38,7 +38,7 @@ const tourSteps = [
   {
     title: 'Contact Your Officials',
     description:
-      'Write to your officials in minutes. Tell us what matters to you, and AI helps draft a message. You review and edit everything before it\'s sent.',
+      'Pick an issue, say why it matters to you, and get a draft letter for each official. You edit it before anything is sent.',
     icon: (
       <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />

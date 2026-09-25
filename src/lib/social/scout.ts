@@ -8,8 +8,14 @@
  * risk that we want the loop proven before we take on.
  */
 import { createAdminClient } from '@/lib/supabase';
+import { fetchBillCard } from '@/lib/congress-api';
+import { CURRENT_CONGRESS } from '@/lib/votes';
 
 const SITE = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.mydemocracy.app';
+
+// How recent a bill's latest action must be to count as a real-time signal.
+// 4 days covers weekend/cron gaps without resurfacing stale movement.
+const LEGISLATIVE_FRESHNESS_DAYS = 4;
 
 export interface Signal {
   id: string;
@@ -22,6 +28,10 @@ export interface Signal {
   classification: string | null;
   campaign_slug: string | null;
   status: string;
+  /** Extra context per source: `outlet` (attribution), `campaign_title` (what
+   *  the linked campaign page is actually about — the writer needs it to judge
+   *  link fit; slugs alone let a defense story pass as a veterans campaign). */
+  metadata?: Record<string, unknown> | null;
 }
 
 /**
@@ -117,18 +127,22 @@ export async function scoutNews(): Promise<number> {
     const res = await fetch(`${SITE}/api/news/civic`, { cache: 'no-store' });
     if (res.ok) {
       const { articles } = (await res.json()) as {
-        articles?: Array<{ title: string; link: string; topic?: { issueCategory?: string }; campaign?: { slug: string } | null }>;
+        articles?: Array<{ title: string; link: string; source?: string; topic?: { issueCategory?: string }; campaign?: { slug: string } | null }>;
       };
       for (const a of (articles ?? []).filter((x) => x.campaign?.slug)) {
+        // Carry the outlet so the writer can attribute the claim ("via AP") —
+        // honest, and required if we ever post to platforms that mandate it.
+        const outlet = a.source?.trim() || '';
         candidates.push({
           source: 'news',
           external_ref: a.link,
           title: a.title,
-          summary: a.title,
+          summary: outlet ? `${a.title} (via ${outlet})` : a.title,
           url: `${SITE}/campaign/${a.campaign!.slug}`,
           issue_area: a.topic?.issueCategory ?? null,
           classification: 'actionable',
           campaign_slug: a.campaign!.slug,
+          metadata: outlet ? { outlet } : {},
         });
       }
     }
@@ -137,6 +151,19 @@ export async function scoutNews(): Promise<number> {
   }
 
   if (!candidates.length) return 0;
+
+  // Attach each matched campaign's TITLE so the writer can judge link fit
+  // against what the campaign is actually about, not a slug fragment.
+  const matchedSlugs = [...new Set(candidates.map((c) => c.campaign_slug).filter(Boolean))] as string[];
+  if (matchedSlugs.length) {
+    const { data: titled } = await admin.from('campaigns').select('slug, title').in('slug', matchedSlugs);
+    const titleBySlug = new Map((titled ?? []).map((c) => [c.slug as string, c.title as string]));
+    for (const c of candidates) {
+      const title = c.campaign_slug ? titleBySlug.get(c.campaign_slug) : undefined;
+      if (title) c.metadata = { ...(c.metadata ?? {}), campaign_title: title };
+    }
+  }
+
   const refs = candidates.map((c) => c.external_ref).filter(Boolean) as string[];
   const { data: existing } = await admin
     .from('social_signals')
@@ -145,11 +172,86 @@ export async function scoutNews(): Promise<number> {
     .in('external_ref', refs);
   const have = new Set((existing ?? []).map((r) => r.external_ref));
 
-  const rows = candidates.filter((c) => !have.has(c.external_ref)).map((c) => ({ ...c, status: 'new', metadata: {} }));
+  // Preserve candidate metadata (outlet, campaign_title) — a literal {} here
+  // silently wiped it for every news signal.
+  const rows = candidates.filter((c) => !have.has(c.external_ref)).map((c) => ({ ...c, status: 'new', metadata: c.metadata ?? {} }));
   if (!rows.length) return 0;
   const { error } = await admin.from('social_signals').insert(rows);
   if (error) {
     console.error('[scout-news] insert failed:', error.message);
+    return 0;
+  }
+  return rows.length;
+}
+
+/**
+ * Real-time legislative feed. Every bill-specific weigh-in campaign tracks an
+ * actual bill; when that bill MOVES on Congress.gov (reported out of committee,
+ * floor vote, passed a chamber, signed), that's the most timely, most
+ * actionable thing we can post — a bill our users can weigh in on RIGHT NOW
+ * just changed status. We poll each tracked bill's latest action and, when it
+ * landed within the freshness window, emit an actionable signal linking to the
+ * campaign. The exact Congress.gov action text rides along in the summary so
+ * the downstream accuracy guardrail can verify every claim against source.
+ * fetchBillCard day-caches per bill, so re-runs don't hammer the API.
+ */
+export async function scoutLegislativeActions(limit = 30): Promise<number> {
+  const admin = createAdminClient();
+
+  const { data: campaigns, error } = await admin
+    .from('campaigns')
+    .select('slug, headline, issue_area, bill_congress, bill_type, bill_number')
+    .eq('is_official', true)
+    .eq('status', 'active')
+    .eq('approval_status', 'approved')
+    .eq('is_bill_specific', true)
+    .not('bill_type', 'is', null)
+    .not('bill_number', 'is', null)
+    .limit(limit);
+
+  if (error || !campaigns?.length) return 0;
+
+  const cutoff = new Date(Date.now() - LEGISLATIVE_FRESHNESS_DAYS * 24 * 60 * 60_000);
+  type Candidate = Omit<Signal, 'id' | 'status'> & { metadata?: Record<string, unknown> };
+  const candidates: Candidate[] = [];
+
+  for (const c of campaigns) {
+    const congress = Number(c.bill_congress) || CURRENT_CONGRESS;
+    const card = await fetchBillCard(congress, String(c.bill_type), String(c.bill_number)).catch(() => null);
+    if (!card?.latestAction || !card.latestActionDate) continue;
+    // Only surface genuinely recent movement.
+    const actionDate = new Date(card.latestActionDate);
+    if (isNaN(actionDate.getTime()) || actionDate < cutoff) continue;
+
+    candidates.push({
+      source: 'legislative',
+      external_ref: `bill-action-${c.slug}-${card.latestActionDate}`,
+      title: `${card.ref}: ${card.latestAction}`,
+      summary: `${card.ref} — ${card.latestAction} (${card.latestActionDate}). Weigh-in: ${c.headline}`,
+      url: `${SITE}/campaign/${c.slug}`,
+      issue_area: c.issue_area,
+      classification: 'actionable',
+      campaign_slug: c.slug,
+      metadata: { bill_ref: card.ref, action_date: card.latestActionDate, bill_url: card.url },
+    });
+  }
+
+  if (!candidates.length) return 0;
+  const refs = candidates.map((c) => c.external_ref).filter(Boolean) as string[];
+  const { data: existing } = await admin
+    .from('social_signals')
+    .select('external_ref')
+    .eq('source', 'legislative')
+    .in('external_ref', refs);
+  const have = new Set((existing ?? []).map((r) => r.external_ref));
+
+  const rows = candidates
+    .filter((c) => !have.has(c.external_ref))
+    .map((c) => ({ ...c, status: 'new', metadata: c.metadata ?? {} }));
+  if (!rows.length) return 0;
+  const { error: insErr } = await admin.from('social_signals').insert(rows);
+  if (insErr) {
+    console.error('[scout-legislative] insert failed:', insErr.message);
     return 0;
   }
   return rows.length;
@@ -162,10 +264,15 @@ export async function scoutNews(): Promise<number> {
  */
 export async function nextSignal(): Promise<Signal | null> {
   const admin = createAdminClient();
+  // Score outranks recency: editorial uplift signals (score 10) must beat the
+  // constant stream of news signals or they starve in the queue forever
+  // (2026-08-15: the 08-12 Flock/AI uplift signals never posted for exactly
+  // this reason — created_at ordering pushed them out of the window).
   const { data, error } = await admin
     .from('social_signals')
-    .select('id, source, external_ref, title, summary, url, issue_area, classification, campaign_slug, status')
+    .select('id, source, external_ref, title, summary, url, issue_area, classification, campaign_slug, status, metadata')
     .eq('status', 'new')
+    .order('score', { ascending: false })
     .order('created_at', { ascending: false })
     .limit(20);
   if (error || !data?.length) return null;

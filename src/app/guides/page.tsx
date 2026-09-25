@@ -6,14 +6,14 @@ import type { ReactNode } from 'react';
 
 export const metadata: Metadata = {
   title: 'Civic Engagement Guides | My Democracy',
-  description: 'Learn how to effectively contact your elected officials, write compelling letters to Congress, and make your voice heard in democracy.',
+  description: 'How to contact your elected officials, write letters that get read, and follow up. Practical guides with no fluff.',
   keywords: ['civic engagement', 'contact congress', 'write to officials', 'how to contact senator', 'state legislature', 'advocacy guide'],
   alternates: {
     canonical: 'https://www.mydemocracy.app/guides',
   },
   openGraph: {
     title: 'Civic Engagement Guides | My Democracy',
-    description: 'Learn how to effectively contact your elected officials, write compelling letters to Congress, and make your voice heard in democracy.',
+    description: 'How to contact your elected officials, write letters that get read, and follow up. Practical guides with no fluff.',
     type: 'website',
   },
 };
@@ -214,7 +214,7 @@ export default function GuidesPage() {
           Civic Engagement Guides
         </h1>
         <p className="text-lg text-gray-600 dark:text-gray-300 mb-10">
-          Everything you need to know to effectively contact your elected officials and make your voice heard.
+          Practical guides to contacting your officials, from your first letter to a town hall question.
         </p>
 
         <GuidesGrid icons={guideIcons} />
@@ -222,7 +222,7 @@ export default function GuidesPage() {
         {/* CTA Section */}
         <div className="mt-12 bg-purple-50 dark:bg-purple-900/20 rounded-2xl p-8 text-center">
           <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
-            Ready to make your voice heard?
+            Ready to write your first message?
           </h2>
           <p className="text-gray-600 dark:text-gray-300 mb-6">
             Use what you&apos;ve learned to contact your officials today.

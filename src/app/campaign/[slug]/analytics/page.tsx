@@ -3,6 +3,15 @@ import { redirect, notFound } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase';
 import { CampaignAnalytics } from '@/components/campaign/CampaignAnalytics';
+import { CampaignStages } from '@/components/campaign/CampaignStages';
+import { BillStatusPanel } from '@/components/campaign/BillStatusPanel';
+import { WhipBoard } from '@/components/campaign/WhipBoard';
+import { CoalitionPanel } from '@/components/campaign/CoalitionPanel';
+import { CampaignTalkingPoints } from '@/components/campaign/CampaignTalkingPoints';
+import { CampaignInsightsPanel } from '@/components/campaign/CampaignInsightsPanel';
+import { getCachedInsights } from '@/lib/insights';
+import { isDemoCampaign } from '@/lib/demo';
+import { DemoBanner } from '@/components/demo/DemoBanner';
 import { usageLabels } from '@/lib/story-usage';
 import { findSenators } from '@/lib/legislators';
 import { US_STATES } from '@/lib/constants';
@@ -33,14 +42,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function CampaignAnalyticsPage({ params }: PageProps) {
   const { slug } = await params;
 
-  // Auth check
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
-
-  if (!user) {
-    redirect('/login');
-  }
-
   const admin = createAdminClient();
 
   // Fetch campaign
@@ -54,10 +55,31 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
     notFound();
   }
 
-  // Verify ownership
-  if (campaign.creator_id !== user.id) {
+  // Owner sees the full editable page. Anyone else gets a read-only view of
+  // demo campaigns only (public org-backend demo); otherwise auth as before.
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  const isOwner = !!user && user.id === campaign.creator_id;
+  const isDemo = !isOwner && isDemoCampaign(campaign);
+  if (!isOwner && !isDemo) {
+    if (!user) redirect('/login');
     redirect(`/campaign/${slug}`);
   }
+
+  // AI-themed insights panel (owner-only). Reads the cached snapshot here;
+  // generation happens on demand via the panel's button. Storytelling themes
+  // stories, everything else themes the constituent messages.
+  const insightsKind = campaign.campaign_type === 'storytelling' ? 'stories' : 'messages';
+  const cachedInsights = await getCachedInsights(campaign.id, insightsKind);
+  const insightsPanel = (
+    <CampaignInsightsPanel
+      slug={slug}
+      initial={cachedInsights?.insights ?? null}
+      initialStale={cachedInsights?.stale ?? false}
+      kind={insightsKind}
+      readOnly={isDemo}
+    />
+  );
 
   // ----- Storytelling campaigns: running count + non-identifying subjects -----
   if (campaign.campaign_type === 'storytelling') {
@@ -175,31 +197,53 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
 
     return (
       <div className="max-w-5xl mx-auto px-4 py-8">
+        {isDemo && <DemoBanner />}
         <div className="mb-6">
-          <Link href="/dashboard" className="text-sm text-purple-600 dark:text-purple-400 hover:underline">
+          <Link href={isDemo ? '/demo/dashboard' : '/dashboard'} className="text-sm text-purple-600 dark:text-purple-400 hover:underline">
             &larr; Back to Dashboard
           </Link>
         </div>
-        <div className="mb-8">
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Campaign Analytics</h1>
-          <p className="text-gray-600 dark:text-gray-400 mt-1">{campaign.headline}</p>
+        <div className="mb-8 flex items-start justify-between gap-3">
+          <div>
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Campaign Analytics</h1>
+            <p className="text-gray-600 dark:text-gray-400 mt-1">{campaign.headline}</p>
+          </div>
+          <Link href={`/campaign/${slug}/report`} className="shrink-0 text-sm font-medium px-4 py-2 rounded-lg bg-purple-600 hover:bg-purple-700 text-white transition-colors">
+            View impact report
+          </Link>
         </div>
-        <CampaignAnalytics analytics={storyAnalytics} campaignName={campaign.headline} />
+        {/* No coalition/outcome tracking here: storytelling campaigns collect
+            stories, they don't whip a bill to an outcome. */}
+        <CampaignAnalytics analytics={storyAnalytics} campaignName={campaign.headline} insightsPanel={insightsPanel} isDemo={isDemo} />
       </div>
     );
   }
 
   // ----- Advocacy campaigns: action/message analytics -----
+  // A parent campaign's analytics cover the whole initiative — its own
+  // activity plus every stage's, matching the impact report's roll-up.
+  const { data: childCampaigns } = await admin
+    .from('campaigns')
+    .select('id, target_filter')
+    .eq('parent_campaign_id', campaign.id);
+  const analyticsCampaignIds = [campaign.id, ...(childCampaigns ?? []).map((c) => c.id as string)];
+
+  // The whip board replaces the officials panel wherever it can build a
+  // roster (state campaigns, or a committee-targeted stage). Elsewhere the
+  // classic officials panel stays.
+  const hasWhipBoard = !campaign.parent_campaign_id && campaign.campaign_type !== 'storytelling';
+
   const [messagesResult, actionsResult] = await Promise.all([
     admin
       .from('messages')
-      .select('delivery_method, delivery_status, legislator_name, legislator_party, legislator_level, legislator_chamber, advocate_city, advocate_state, created_at')
-      .eq('campaign_id', campaign.id)
+      .select('advocate_name, delivery_method, delivery_status, legislator_name, legislator_party, legislator_level, legislator_chamber, advocate_city, advocate_state, message_body, created_at')
+      .in('campaign_id', analyticsCampaignIds)
+      .order('created_at', { ascending: false })
       .limit(10000),
     admin
       .from('campaign_actions')
       .select('participant_name, participant_city, participant_state, messages_sent, created_at')
-      .eq('campaign_id', campaign.id)
+      .in('campaign_id', analyticsCampaignIds)
       .order('created_at', { ascending: false })
       .limit(10000),
   ]);
@@ -325,29 +369,104 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
     recent_actions: recentActions,
     cities_count: cityCounts.size,
     avg_messages_per_action: totalActions > 0 ? Math.round((totalMessages / totalActions) * 10) / 10 : 0,
+    // Where participants landed. Only official weigh-ins run the stance step, so
+    // this is 0/0 (hidden) for directional user campaigns.
+    stance_split: {
+      support: Number(campaign.support_count) || 0,
+      oppose: Number(campaign.oppose_count) || 0,
+    },
+    campaign_slug: campaign.slug as string,
+    // Individual messages for the browser + CSV export ("dig deeper").
+    messages: campaignMessages.map((m) => ({
+      created_at: m.created_at as string,
+      name: (m.advocate_name as string | null) ?? null,
+      city: (m.advocate_city as string | null) ?? null,
+      state: (m.advocate_state as string | null) ?? null,
+      official: (m.legislator_name as string | null) ?? null,
+      party: (m.legislator_party as string | null) ?? null,
+      method: (m.delivery_method as string | null) ?? null,
+      status: (m.delivery_status as string | null) ?? null,
+      body: (m.message_body as string | null) ?? '',
+    })),
   };
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-8">
+      {isDemo && <DemoBanner />}
       <div className="mb-6">
         <Link
-          href="/dashboard"
+          href={isDemo ? '/demo/dashboard' : '/dashboard'}
           className="text-sm text-purple-600 dark:text-purple-400 hover:underline"
         >
           &larr; Back to Dashboard
         </Link>
       </div>
 
-      <div className="mb-8">
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-          Campaign Analytics
-        </h1>
-        <p className="text-gray-600 dark:text-gray-400 mt-1">
-          {campaign.headline}
-        </p>
+      <div className="mb-8 flex items-start justify-between gap-3">
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+            Campaign Analytics
+          </h1>
+          <p className="text-gray-600 dark:text-gray-400 mt-1">
+            {campaign.headline}
+          </p>
+        </div>
+        <Link href={`/campaign/${slug}/report`} className="shrink-0 text-sm font-medium px-4 py-2 rounded-lg bg-purple-600 hover:bg-purple-700 text-white transition-colors">
+          View impact report
+        </Link>
       </div>
 
-      <CampaignAnalytics analytics={analytics} campaignName={campaign.headline} />
+      {!campaign.parent_campaign_id && (
+        <BillStatusPanel
+          isDemo={isDemo}
+          campaign={{
+            id: campaign.id,
+            slug,
+            headline: campaign.headline,
+            bill_ref: campaign.bill_ref ?? null,
+            bill_level: campaign.bill_level ?? null,
+            bill_state: campaign.bill_state ?? null,
+            bill_congress: campaign.bill_congress ?? null,
+            bill_type: campaign.bill_type ?? null,
+            bill_number: campaign.bill_number ?? null,
+          }}
+        />
+      )}
+
+      {hasWhipBoard && <WhipBoard slug={slug} isDemo={isDemo} />}
+
+      {!campaign.parent_campaign_id && <CoalitionPanel slug={slug} initialOutcome={campaign.outcome ?? null} isDemo={isDemo} />}
+
+      {campaign.message_template && (
+        <CampaignTalkingPoints
+          template={campaign.message_template}
+          orgName={campaign.org_name ?? null}
+          accent={campaign.brand_color ?? null}
+          subtitle={
+            'Your framing, side by side with reality: compare these points against "What constituents are saying" below — when their own words echo yours, the talking points are landing.'
+          }
+        />
+      )}
+
+      <CampaignStages
+        isDemo={isDemo}
+        campaign={{
+          id: campaign.id,
+          slug,
+          headline: campaign.headline,
+          parent_campaign_id: campaign.parent_campaign_id ?? null,
+          bill_level: campaign.bill_level ?? null,
+          bill_state: campaign.bill_state ?? null,
+        }}
+      />
+
+      <CampaignAnalytics
+        analytics={analytics}
+        campaignName={campaign.headline}
+        insightsPanel={insightsPanel}
+        hideOfficialsPanel={hasWhipBoard}
+        isDemo={isDemo}
+      />
     </div>
   );
 }

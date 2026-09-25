@@ -3,6 +3,8 @@ import { notFound } from 'next/navigation';
 import { createAdminClient } from '@/lib/supabase';
 import { CampaignParticipate } from '@/components/campaign/CampaignParticipate';
 import { StorytellerFlow } from '@/components/campaign/StorytellerFlow';
+import { BillJourney } from '@/components/campaign/BillJourney';
+import { CampaignTalkingPoints } from '@/components/campaign/CampaignTalkingPoints';
 import { CopyLinkButton } from '@/components/campaign/CopyLinkButton';
 import { fetchBillCard } from '@/lib/congress-api';
 import type { Campaign } from '@/lib/types';
@@ -65,7 +67,7 @@ export default async function CampaignPage({ params }: PageProps) {
 
   const { data, error } = await admin
     .from('campaigns')
-    .select('id, slug, headline, description, issue_area, issue_subtopic, target_level, status, campaign_type, visibility, message_template, bill_level, bill_state, bill_ref, bill_title, bill_url, story_prompt, usage_statement, usage_tags, attribution_options, edit_revoke_policy, action_count, story_count, created_at, org_name, org_url, org_logo_url, brand_color, custom_domain, case_for, case_against, source_for_label, source_for_url, source_against_label, source_against_url, is_bill_specific, bill_congress, bill_type, bill_number, support_count, oppose_count, undecided_count, is_official')
+    .select('id, slug, headline, description, issue_area, issue_subtopic, target_level, direction, status, campaign_type, visibility, message_template, bill_level, bill_state, bill_ref, bill_title, bill_url, story_prompt, usage_statement, usage_tags, attribution_options, edit_revoke_policy, action_count, story_count, created_at, org_name, org_url, org_logo_url, brand_color, custom_domain, case_for, case_against, source_for_label, source_for_url, source_against_label, source_against_url, is_bill_specific, bill_congress, bill_type, bill_number, support_count, oppose_count, undecided_count, is_official, parent_campaign_id, stage_goal, target_filter')
     .eq('slug', slug)
     .eq('approval_status', 'approved')
     .single();
@@ -76,6 +78,20 @@ export default async function CampaignPage({ params }: PageProps) {
 
   const campaign = data as Campaign;
   const isStory = campaign.campaign_type === 'storytelling';
+
+  // Stage campaigns carry their parent so the participate flow can offer the
+  // broader action to people who can't act on this narrow stage (e.g. their
+  // rep isn't on the targeted committee).
+  let parentCampaign: { slug: string; headline: string } | null = null;
+  if (campaign.parent_campaign_id) {
+    const { data: parentRow } = await admin
+      .from('campaigns')
+      .select('slug, headline')
+      .eq('id', campaign.parent_campaign_id)
+      .eq('approval_status', 'approved')
+      .single();
+    parentCampaign = parentRow ?? null;
+  }
 
   // White-label branding (unlisted campaigns only — the insert enforces this)
   const branded = !!(campaign.org_name || campaign.org_logo_url);
@@ -302,12 +318,30 @@ export default async function CampaignPage({ params }: PageProps) {
         </div>
       </div>
 
+      {/* The campaign's contributed language, in the open (two-block model) */}
+      {!isStory && campaign.message_template && (
+        <CampaignTalkingPoints template={campaign.message_template} orgName={campaign.org_name ?? null} accent={campaign.brand_color ?? null} />
+      )}
+
+      {/* Bill journey — parent campaigns show where the legislation stands */}
+      {!isStory && !campaign.parent_campaign_id && (
+        <BillJourney
+          campaign={{
+            id: campaign.id,
+            bill_ref: campaign.bill_ref ?? null,
+            bill_level: campaign.bill_level ?? null,
+            bill_state: campaign.bill_state ?? null,
+            bill_title: campaign.bill_title ?? null,
+          }}
+        />
+      )}
+
       {/* Participation form */}
       <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm p-6 sm:p-8">
         <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">
           {isStory ? 'Share Your Story' : 'Take Action'}
         </h2>
-        {isStory ? <StorytellerFlow campaign={campaign} /> : <CampaignParticipate campaign={campaign} />}
+        {isStory ? <StorytellerFlow campaign={campaign} /> : <CampaignParticipate campaign={campaign} parentCampaign={parentCampaign} />}
       </div>
     </div>
   );

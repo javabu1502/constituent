@@ -227,7 +227,7 @@ export default function SocialMediaAdvocacyGuidePage() {
         {/* CTA Section */}
         <div className="mt-10 bg-purple-50 dark:bg-purple-900/20 rounded-2xl p-8 text-center">
           <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
-            Ready to Make Your Voice Heard?
+            Ready to Go Beyond the Timeline?
           </h2>
           <p className="text-gray-600 dark:text-gray-300 mb-6">
             Find your officials and craft a message that gets their attention, online or off.

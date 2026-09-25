@@ -1,7 +1,7 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi, afterEach } from 'vitest';
 import { runGuardrails, isNearDuplicate, LOCAL_COVERAGE, replyShouldSkip } from '../guardrails';
 import { isLikelyElectedOfficial, looksLikeOrgOrBot, hasFirstPersonVoice } from '../engager';
-import { linkFacets, graphemeLength, buildPostRecord, BLUESKY_MAX_GRAPHEMES } from '../bluesky';
+import { linkFacets, graphemeLength, buildPostRecord, BLUESKY_MAX_GRAPHEMES, listNotifications } from '../bluesky';
 import { canPost, MAX_POSTS_PER_DAY, MIN_GAP_MINUTES } from '../cadence';
 import { nextStateOnError, CONSECUTIVE_FAIL_LIMIT } from '../circuit-breaker';
 
@@ -127,6 +127,48 @@ describe('bluesky: link facets + record building', () => {
   });
 });
 
+describe('bluesky: listNotifications (inbound engagement)', () => {
+  const session = { accessJwt: 'jwt', refreshJwt: 'r', did: 'did:x', handle: 'us.bsky.social' };
+  afterEach(() => vi.restoreAllMocks());
+
+  const notif = (reason: string, extra: Record<string, unknown> = {}) => ({
+    uri: `at://post/${reason}`,
+    cid: `cid-${reason}`,
+    reason,
+    isRead: false,
+    indexedAt: '2026-08-09T00:00:00Z',
+    author: { handle: `${reason}.bsky.social`, displayName: reason },
+    record: { text: `a ${reason}`, ...(extra.record as object) },
+    ...extra,
+  });
+
+  it('keeps only reply/mention/quote and drops like/repost/follow', async () => {
+    vi.spyOn(globalThis, 'fetch').mockResolvedValue(
+      new Response(JSON.stringify({
+        notifications: [
+          notif('reply'), notif('mention'), notif('quote'),
+          notif('like'), notif('repost'), notif('follow'),
+        ],
+      }), { status: 200 }),
+    );
+    const got = await listNotifications(session);
+    expect(got.map((n) => n.reason).sort()).toEqual(['mention', 'quote', 'reply']);
+    expect(got.every((n) => n.text.startsWith('a '))).toBe(true);
+    expect(got[0].authorHandle).toContain('.bsky.social');
+  });
+
+  it('surfaces the thread root when the inbound post carries one', async () => {
+    const root = { uri: 'at://root', cid: 'cid-root' };
+    vi.spyOn(globalThis, 'fetch').mockResolvedValue(
+      new Response(JSON.stringify({
+        notifications: [notif('reply', { record: { text: 'hi', reply: { root } } })],
+      }), { status: 200 }),
+    );
+    const [n] = await listNotifications(session);
+    expect(n.root).toEqual(root);
+  });
+});
+
 describe('cadence', () => {
   const now = 1_800_000_000_000;
   const min = 60_000;
@@ -153,6 +195,24 @@ describe('cadence', () => {
   it('ignores posts older than 24h for the daily cap', () => {
     const old = Array.from({ length: MAX_POSTS_PER_DAY }, (_, i) => now - (25 * 60 + i) * min);
     expect(canPost(old, now).allowed).toBe(true);
+  });
+});
+
+describe('engager: tuned org/bot filter (growth)', () => {
+  it('still skips clear orgs, news outlets, and bots', () => {
+    expect(looksLikeOrgOrBot('dailywire', 'The Daily Wire')).toBe(true);
+    expect(looksLikeOrgOrBot('somepac', 'Freedom PAC')).toBe(true);
+    expect(looksLikeOrgOrBot('cnnbrk', 'CNN Breaking News')).toBe(true);
+    expect(looksLikeOrgOrBot('weatherbot', 'Weather Bot')).toBe(true);
+    expect(looksLikeOrgOrBot('brookings', 'Brookings Institute')).toBe(true);
+  });
+  it('no longer over-filters real people whose names contain common words', () => {
+    // These were wrongly skipped by the old broad filter (action/daily/network/report/official).
+    expect(looksLikeOrgOrBot('actionjackson', 'Action Jackson')).toBe(false);
+    expect(looksLikeOrgOrBot('dailyjane', 'Jane (posts daily)')).toBe(false);
+    expect(looksLikeOrgOrBot('mike_network', 'Mike')).toBe(false);
+    expect(looksLikeOrgOrBot('reportcardmom', 'Tired Mom')).toBe(false);
+    expect(looksLikeOrgOrBot('officialkevin', 'Kevin')).toBe(false);
   });
 });
 

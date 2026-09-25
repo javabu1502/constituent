@@ -2,6 +2,8 @@
 
 import { useState, useCallback } from 'react';
 import type { ContactState, ContactAction } from './ContactFlow';
+import { getJurisdiction, selectLevels, type GovLevel } from '@/lib/issue-jurisdiction';
+import type { Official } from '@/lib/types';
 import { Button } from '@/components/ui/Button';
 import { AddressAutocomplete, type ParsedAddress } from '@/components/ui/AddressAutocomplete';
 
@@ -61,6 +63,22 @@ export function AddressStep({ state, dispatch }: AddressStepProps) {
 
       dispatch({ type: 'SET_OFFICIALS', payload: data.officials });
 
+      // No recipient picker: map the story to the RIGHT officials. Only the
+      // PRIMARY (weight-2) levels receive the message — "shares authority"
+      // is context, not a mailing list; the old any-weight policy put an
+      // open-borders message in a state senator's inbox. The personal story
+      // is included so bill refs and casework phrasing inside it count.
+      const guidance = getJurisdiction(
+        `${state.issue || ''} ${state.issueCategory || ''} ${state.ask || ''} ${state.personalWhy || ''}`
+      );
+      const levels = new Set(selectLevels(guidance));
+      const all = data.officials as Official[];
+      const relevant = all.filter((o) => levels.has((o.level as GovLevel) ?? 'federal'));
+      // Fallback ladder: jurisdiction match -> non-local officials -> everyone.
+      // Never blast local officials with an issue we couldn't classify.
+      const nonLocal = all.filter((o) => o.level !== 'local');
+      dispatch({ type: 'SELECT_REPS', payload: relevant.length > 0 ? relevant : nonLocal.length > 0 ? nonLocal : all });
+
       // Save address + officials to profile for logged-in users (fire-and-forget)
       fetch('/api/profile', {
         method: 'PATCH',
@@ -71,7 +89,7 @@ export function AddressStep({ state, dispatch }: AddressStepProps) {
         }),
       }).catch(() => {}); // Silently ignore for anonymous users (401)
 
-      dispatch({ type: 'GO_TO_STEP', payload: 'representative' });
+      dispatch({ type: 'GO_TO_STEP', payload: 'message' });
     } catch (err) {
       dispatch({
         type: 'SET_ERROR',
@@ -153,7 +171,7 @@ export function AddressStep({ state, dispatch }: AddressStepProps) {
       </form>
 
       <p className="text-xs text-gray-500 dark:text-gray-400 text-center mt-6">
-        Used only to look up your officials. Never stored or shared.
+        Used to look up your officials, and included in your signature so they know you&apos;re a constituent. Saved to your profile only if you have an account.
       </p>
     </div>
   );

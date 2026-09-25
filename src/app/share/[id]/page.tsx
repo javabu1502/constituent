@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: SharePageProps): Promise<Meta
   }
 
   const title = `A citizen contacted ${data.legislator_name} about ${data.issue_subtopic || data.issue_area}`;
-  const description = `A constituent from ${data.advocate_city}, ${data.advocate_state} contacted ${data.legislator_name}. Make your voice heard too. Write to your officials on My Democracy.`;
+  const description = `A constituent from ${data.advocate_city}, ${data.advocate_state} contacted ${data.legislator_name}. Write to your officials too on My Democracy.`;
 
   return {
     title: `${title} | My Democracy`,
@@ -103,7 +103,7 @@ export default async function SharePage({ params }: SharePageProps) {
             </Link>
 
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-4">
-              Free, AI-powered messages to your elected officials in minutes.
+              Free. Your words, sent to the officials who represent you.
             </p>
           </div>
         </div>

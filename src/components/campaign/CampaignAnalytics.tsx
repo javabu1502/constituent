@@ -1,8 +1,9 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useMemo, useState, type ReactNode } from 'react';
 import { STORY_USAGE_OPTIONS } from '@/lib/story-usage';
 import { US_STATES } from '@/lib/constants';
+import { CollapsibleSection } from '@/components/ui/CollapsibleSection';
 
 interface OfficialContacted {
   name: string;
@@ -37,6 +38,19 @@ interface AdvocacyAnalytics {
   recent_actions: RecentAction[];
   cities_count: number;
   avg_messages_per_action: number;
+  stance_split?: { support: number; oppose: number };
+  campaign_slug?: string;
+  messages?: Array<{
+    created_at: string;
+    name: string | null;
+    city: string | null;
+    state: string | null;
+    official: string | null;
+    party: string | null;
+    method: string | null;
+    status: string | null;
+    body: string;
+  }>;
 }
 
 interface StoryListItem {
@@ -78,6 +92,13 @@ interface StoryAnalytics {
 interface CampaignAnalyticsProps {
   analytics: AdvocacyAnalytics | StoryAnalytics;
   campaignName: string;
+  /** AI-themed insights panel, injected by the analytics page (owner-only). */
+  insightsPanel?: ReactNode;
+  /** Parent campaigns render the whip board, which already lists every
+   * legislator with message counts — hide the redundant officials panel. */
+  hideOfficialsPanel?: boolean;
+  /** Public read-only demo: CSV exports are owner-only, so hide their buttons. */
+  isDemo?: boolean;
 }
 
 function attributionBadge(level: StoryListItem['attribution_level']): string {
@@ -172,13 +193,17 @@ function photoRequestMailto(story: StoryListItem, campaignName: string): string 
   return `mailto:${story.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
 
-function StorytellingAnalytics({ analytics, campaignName }: { analytics: StoryAnalytics; campaignName: string }) {
+function StorytellingAnalytics({ analytics, campaignName, insightsPanel, isDemo = false }: { analytics: StoryAnalytics; campaignName: string; insightsPanel?: ReactNode; isDemo?: boolean }) {
   const [q, setQ] = useState('');
   const [stateFilter, setStateFilter] = useState('');
   const [cityFilter, setCityFilter] = useState('');
   const [attributionFilter, setAttributionFilter] = useState('');
   const [useFilter, setUseFilter] = useState('');
   const [officialFilter, setOfficialFilter] = useState('');
+  // "Reachable" stat expands into the actual contact list, so getting an
+  // email address never requires the CSV export.
+  const [showReachable, setShowReachable] = useState(false);
+  const [copiedEmails, setCopiedEmails] = useState(false);
 
   const active = useMemo(() => analytics.stories.filter((s) => !s.revoked), [analytics.stories]);
 
@@ -289,23 +314,81 @@ function StorytellingAnalytics({ analytics, campaignName }: { analytics: StoryAn
           <p className="text-3xl font-bold text-gray-900 dark:text-white mt-1">{pressReady}</p>
           <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">OK to share with media</p>
         </div>
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
+        <button
+          type="button"
+          onClick={() => setShowReachable((v) => !v)}
+          disabled={contactable === 0}
+          className={`bg-white dark:bg-gray-800 rounded-xl border shadow-sm p-5 text-left transition-colors ${
+            showReachable
+              ? 'border-purple-500'
+              : 'border-gray-200 dark:border-gray-700'
+          } ${contactable > 0 ? 'hover:border-purple-400 dark:hover:border-purple-500 cursor-pointer' : ''}`}
+        >
           <p className="text-sm text-gray-500 dark:text-gray-400">Reachable</p>
           <p className="text-3xl font-bold text-gray-900 dark:text-white mt-1">{contactable}</p>
-          <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">Agreed to follow-up contact</p>
-        </div>
+          <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
+            {contactable > 0 ? (showReachable ? 'Agreed to follow-up. Hide emails' : 'Agreed to follow-up. See emails') : 'Agreed to follow-up contact'}
+          </p>
+        </button>
       </div>
 
-      {/* Use over time */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
-        <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-4">Stories Over Time (Last 30 Days)</h3>
-        <DailyBarChart counts={dailyCounts} unit="story" />
-      </div>
-
-      {/* By elected official — target your outreach */}
-      {analytics.officials.length > 0 && (
+      {/* The reachable list: who agreed to follow-up, with one-click emails */}
+      {showReachable && contactable > 0 && (
         <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
-          <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-1">By Elected Official</h3>
+          <div className="flex items-center justify-between gap-3 mb-3">
+            <h3 className="text-base font-semibold text-gray-900 dark:text-white">Reachable storytellers</h3>
+            <button
+              type="button"
+              onClick={async () => {
+                const emails = active.filter((s) => !!s.email).map((s) => s.email as string);
+                try {
+                  await navigator.clipboard.writeText([...new Set(emails)].join(', '));
+                  setCopiedEmails(true);
+                  setTimeout(() => setCopiedEmails(false), 2000);
+                } catch {
+                  // clipboard unavailable; the addresses are visible below
+                }
+              }}
+              className="px-3 py-1.5 text-sm font-medium border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg transition-colors"
+            >
+              {copiedEmails ? 'Copied!' : 'Copy all emails'}
+            </button>
+          </div>
+          <ul className="divide-y divide-gray-100 dark:divide-gray-700">
+            {active.filter((s) => !!s.email).map((s) => (
+              <li key={s.id} className="py-2 flex flex-wrap items-center justify-between gap-2">
+                <span className="text-sm text-gray-900 dark:text-white">
+                  {s.display_name}
+                  {(s.city || s.state) && (
+                    <span className="text-xs text-gray-500 dark:text-gray-400"> · {[s.city, s.state].filter(Boolean).join(', ')}</span>
+                  )}
+                </span>
+                <a href={`mailto:${s.email}`} className="text-sm text-purple-600 dark:text-purple-400 hover:underline">
+                  {s.email}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {/* The middle sections collapse so the stories are one scroll away —
+          reading stories is the page's main job. */}
+      {insightsPanel && (
+        <CollapsibleSection title="What Constituents Are Saying" defaultOpen={false}>
+          {insightsPanel}
+        </CollapsibleSection>
+      )}
+
+      <CollapsibleSection title="Stories Over Time" defaultOpen={false}>
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
+          <DailyBarChart counts={dailyCounts} unit="story" />
+        </div>
+      </CollapsibleSection>
+
+      {analytics.officials.length > 0 && (
+        <CollapsibleSection title="By Elected Official" badge={`${analytics.officials.length}`} defaultOpen={false}>
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
           <p className="text-xs text-gray-500 dark:text-gray-400 mb-4">
             Every official — federal, state, and local — matched from your storytellers&rsquo; addresses, with how many
             storytellers each represents. Click one to pull up their constituents&rsquo; stories, then bring exactly those
@@ -360,13 +443,14 @@ function StorytellingAnalytics({ analytics, campaignName }: { analytics: StoryAn
             );
           })}
         </div>
+        </CollapsibleSection>
       )}
 
       {/* Story browser */}
       <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
         <div className="flex items-start justify-between gap-3 mb-1">
           <h3 className="text-base font-semibold text-gray-900 dark:text-white">Stories</h3>
-          {analytics.stories.length > 0 && (
+          {analytics.stories.length > 0 && !isDemo && (
             <a
               href={exportHref}
               className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-purple-600 hover:bg-purple-700 text-white text-sm font-medium rounded-lg transition-colors shrink-0"
@@ -540,9 +624,197 @@ function StorytellingAnalytics({ analytics, campaignName }: { analytics: StoryAn
   );
 }
 
-export function CampaignAnalytics({ analytics, campaignName }: CampaignAnalyticsProps) {
+/** Browse + search the individual messages, and export them (filtered) to CSV.
+ * The "dig deeper" companion to the aggregate charts. */
+/**
+ * Advocate overview — click a name in the message browser to see one
+ * person's whole record: every official they wrote, when, and a ready-made
+ * shout-out. Recognition is the retention engine for advocacy orgs, so this
+ * makes thanking an advocate a ten-second act.
+ */
+function AdvocateOverview({
+  advocate,
+  messages,
+  onClose,
+}: {
+  advocate: { name: string; city: string | null };
+  messages: NonNullable<AdvocacyAnalytics['messages']>;
+  onClose: () => void;
+}) {
+  const [copied, setCopied] = useState(false);
+  const theirs = messages
+    .filter((m) => m.name === advocate.name && (m.city ?? null) === advocate.city)
+    .sort((a, b) => String(a.created_at).localeCompare(String(b.created_at)));
+  const officials = [...new Set(theirs.map((m) => m.official).filter(Boolean))] as string[];
+  const first = theirs[0]?.created_at ? new Date(theirs[0].created_at) : null;
+  const last = theirs[theirs.length - 1]?.created_at ? new Date(theirs[theirs.length - 1].created_at) : null;
+  const fmt = (d: Date) => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  const firstName = advocate.name.split(' ')[0];
+
+  const shoutOut = `Shout-out to ${firstName}${advocate.city ? ` from ${advocate.city}` : ''}, who has sent ${theirs.length} message${theirs.length !== 1 ? 's' : ''} to ${officials.length} lawmaker${officials.length !== 1 ? 's' : ''} in this campaign. Advocacy runs on people like ${firstName}. 🙌`;
+
+  return (
+    <div className="mb-4 p-4 rounded-xl border-2 border-purple-200 dark:border-purple-800 bg-purple-50/50 dark:bg-purple-900/10">
+      <div className="flex items-start justify-between gap-2 mb-2">
+        <div>
+          <h4 className="text-sm font-semibold text-gray-900 dark:text-white">
+            {advocate.name}
+            {advocate.city && <span className="font-normal text-gray-500 dark:text-gray-400"> · {advocate.city}</span>}
+          </h4>
+          <p className="text-xs text-gray-500 dark:text-gray-400">
+            {theirs.length} message{theirs.length !== 1 ? 's' : ''} to {officials.length} official{officials.length !== 1 ? 's' : ''}
+            {first && last && ` · active ${fmt(first)}${+first !== +last ? ` – ${fmt(last)}` : ''}`}
+          </p>
+        </div>
+        <button type="button" onClick={onClose} className="text-xs text-gray-500 dark:text-gray-400 hover:underline shrink-0">
+          Close
+        </button>
+      </div>
+      <ul className="space-y-1 mb-3">
+        {theirs.map((m, i) => (
+          <li key={i} className="text-xs text-gray-600 dark:text-gray-400">
+            <span className="text-gray-400 dark:text-gray-500 mr-1.5">{m.created_at ? fmt(new Date(m.created_at)) : ''}</span>
+            wrote {m.official || 'an official'}
+          </li>
+        ))}
+      </ul>
+      <button
+        type="button"
+        onClick={() => {
+          void navigator.clipboard.writeText(shoutOut);
+          setCopied(true);
+          setTimeout(() => setCopied(false), 2000);
+        }}
+        className="text-xs font-medium px-3 py-1.5 rounded-lg bg-purple-600 hover:bg-purple-700 text-white transition-colors"
+      >
+        {copied ? 'Copied!' : 'Copy a shout-out to recognize them'}
+      </button>
+    </div>
+  );
+}
+
+function MessageBrowser({ messages, slug, isDemo = false }: { messages: NonNullable<AdvocacyAnalytics['messages']>; slug: string; isDemo?: boolean }) {
+  const [q, setQ] = useState('');
+  const [stateFilter, setStateFilter] = useState('');
+  const [officialFilter, setOfficialFilter] = useState('');
+  const [statusFilter, setStatusFilter] = useState('');
+  const [advocate, setAdvocate] = useState<{ name: string; city: string | null } | null>(null);
+
+  const uniq = (vals: Array<string | null>) => [...new Set(vals.filter((v): v is string => !!v))].sort();
+  const states = useMemo(() => uniq(messages.map((m) => m.state)), [messages]);
+  const officials = useMemo(() => uniq(messages.map((m) => m.official)), [messages]);
+  const statuses = useMemo(() => uniq(messages.map((m) => m.status)), [messages]);
+
+  const filtered = useMemo(
+    () =>
+      messages.filter((m) => {
+        if (stateFilter && m.state !== stateFilter) return false;
+        if (officialFilter && m.official !== officialFilter) return false;
+        if (statusFilter && m.status !== statusFilter) return false;
+        if (q.trim()) {
+          const hay = `${m.name ?? ''} ${m.city ?? ''} ${m.state ?? ''} ${m.official ?? ''} ${m.body}`.toLowerCase();
+          if (!hay.includes(q.trim().toLowerCase())) return false;
+        }
+        return true;
+      }),
+    [messages, q, stateFilter, officialFilter, statusFilter],
+  );
+
+  const exportHref = useMemo(() => {
+    const p = new URLSearchParams();
+    if (q.trim()) p.set('q', q.trim());
+    if (stateFilter) p.set('state', stateFilter);
+    if (officialFilter) p.set('official', officialFilter);
+    if (statusFilter) p.set('status', statusFilter);
+    const qs = p.toString();
+    return `/api/campaigns/${slug}/messages/export${qs ? `?${qs}` : ''}`;
+  }, [slug, q, stateFilter, officialFilter, statusFilter]);
+
+  const selectClass =
+    'px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-purple-600';
+
+  return (
+    <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
+      <div className="flex items-center justify-between gap-3 mb-1">
+        <h3 className="text-base font-semibold text-gray-900 dark:text-white">Messages</h3>
+        {!isDemo && (
+          <a
+            href={exportHref}
+            className="shrink-0 text-sm font-medium px-3 py-1.5 rounded-lg border border-purple-300 dark:border-purple-700 text-purple-700 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/20 transition-colors"
+          >
+            Download CSV
+          </a>
+        )}
+      </div>
+      <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">
+        Read every message and export the raw data. Showing {filtered.length.toLocaleString()} of {messages.length.toLocaleString()}.
+      </p>
+      <div className="flex flex-wrap gap-2 mb-4">
+        <input
+          value={q}
+          onChange={(e) => setQ(e.target.value)}
+          placeholder="Search names, cities, officials, message text…"
+          className="flex-1 min-w-[12rem] px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400"
+        />
+        <select value={stateFilter} onChange={(e) => setStateFilter(e.target.value)} className={selectClass}>
+          <option value="">All states</option>
+          {states.map((s) => (
+            <option key={s} value={s}>{s}</option>
+          ))}
+        </select>
+        <select value={officialFilter} onChange={(e) => setOfficialFilter(e.target.value)} className={selectClass}>
+          <option value="">All officials</option>
+          {officials.map((o) => (
+            <option key={o} value={o}>{o}</option>
+          ))}
+        </select>
+        <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} className={selectClass}>
+          <option value="">All statuses</option>
+          {statuses.map((s) => (
+            <option key={s} value={s}>{s}</option>
+          ))}
+        </select>
+      </div>
+      {advocate && <AdvocateOverview advocate={advocate} messages={messages} onClose={() => setAdvocate(null)} />}
+
+      <div className="max-h-[34rem] overflow-y-auto space-y-2">
+        {filtered.slice(0, 300).map((m, i) => (
+          <details key={i} className="group border border-gray-200 dark:border-gray-700 rounded-lg p-3">
+            <summary className="cursor-pointer list-none flex items-center justify-between gap-2">
+              <span className="text-sm text-gray-900 dark:text-white">
+                {m.name ? (
+                  <button
+                    type="button"
+                    onClick={(e) => { e.preventDefault(); setAdvocate({ name: m.name!, city: m.city ?? null }); }}
+                    className="font-medium text-purple-700 dark:text-purple-300 hover:underline"
+                    title="See this advocate's activity"
+                  >
+                    {m.name}
+                  </button>
+                ) : (
+                  <span className="font-medium">Constituent</span>
+                )}
+                {(m.city || m.state) && <span className="text-gray-500 dark:text-gray-400"> · {[m.city, m.state].filter(Boolean).join(', ')}</span>}
+                {m.official && <span className="text-gray-500 dark:text-gray-400"> → {m.official}</span>}
+              </span>
+              <span className="text-xs text-gray-400 dark:text-gray-500 shrink-0">
+                {m.created_at ? new Date(m.created_at).toLocaleDateString() : ''}
+              </span>
+            </summary>
+            <p className="mt-2 text-sm text-gray-700 dark:text-gray-300 whitespace-pre-wrap">{m.body || <span className="italic text-gray-400">No message text recorded.</span>}</p>
+          </details>
+        ))}
+        {filtered.length > 300 && (
+          <p className="text-xs text-gray-400 dark:text-gray-500 pt-1">Showing the first 300 on screen — the CSV export includes all {filtered.length.toLocaleString()}.</p>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export function CampaignAnalytics({ analytics, campaignName, insightsPanel, hideOfficialsPanel, isDemo = false }: CampaignAnalyticsProps) {
   if (analytics.kind === 'storytelling') {
-    return <StorytellingAnalytics analytics={analytics} campaignName={campaignName} />;
+    return <StorytellingAnalytics analytics={analytics} campaignName={campaignName} insightsPanel={insightsPanel} isDemo={isDemo} />;
   }
 
   const maxTopState = analytics.top_states.length > 0 ? analytics.top_states[0].count : 1;
@@ -657,18 +929,59 @@ export function CampaignAnalytics({ analytics, campaignName }: CampaignAnalytics
         </div>
       </div>
 
-      {/* Daily activity chart */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
-        <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-4">
-          Daily Activity (Last 30 Days)
-        </h3>
-        <DailyBarChart counts={analytics.daily_counts} unit="action" />
-      </div>
+      {/* Middle sections collapse so the messages are one scroll away —
+          reading what constituents sent is the page's main job. */}
+      {insightsPanel && (
+        <CollapsibleSection title="What Constituents Are Saying" defaultOpen={false}>
+          {insightsPanel}
+        </CollapsibleSection>
+      )}
 
-      {/* Officials contacted — where this campaign's pressure is landing */}
-      {analytics.officials_contacted.length > 0 && (
+      {/* Where participants stand — only neutral weigh-ins with a genuine
+          two-way split. Directional campaigns (one side only) never show this. */}
+      {analytics.stance_split && analytics.stance_split.support > 0 && analytics.stance_split.oppose > 0 && (() => {
+        const { support, oppose } = analytics.stance_split;
+        const total = support + oppose;
+        const supportPct = Math.round((support / total) * 100);
+        const opposePct = 100 - supportPct;
+        return (
+          <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
+            <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-1">Where participants stand</h3>
+            <p className="text-xs text-gray-500 dark:text-gray-400 mb-4">
+              The position each participant chose before their message was written. {total.toLocaleString()} took a position.
+            </p>
+            <div className="flex h-3 w-full overflow-hidden rounded-full">
+              <div className="bg-emerald-500" style={{ width: `${supportPct}%` }} />
+              <div className="bg-rose-500" style={{ width: `${opposePct}%` }} />
+            </div>
+            <div className="mt-3 flex items-center justify-between text-sm">
+              <div className="flex items-center gap-2">
+                <span className="inline-block h-2.5 w-2.5 rounded-full bg-emerald-500" />
+                <span className="font-semibold text-gray-900 dark:text-white">Support</span>
+                <span className="text-gray-500 dark:text-gray-400">{support.toLocaleString()} ({supportPct}%)</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-gray-500 dark:text-gray-400">{oppose.toLocaleString()} ({opposePct}%)</span>
+                <span className="font-semibold text-gray-900 dark:text-white">Oppose</span>
+                <span className="inline-block h-2.5 w-2.5 rounded-full bg-rose-500" />
+              </div>
+            </div>
+          </div>
+        );
+      })()}
+
+      {/* Daily activity chart */}
+      <CollapsibleSection title="Daily Activity" defaultOpen={false}>
         <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
-          <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-1">Officials Contacted</h3>
+          <DailyBarChart counts={analytics.daily_counts} unit="action" />
+        </div>
+      </CollapsibleSection>
+
+      {/* Officials contacted — where this campaign's pressure is landing.
+          Hidden on parents: the whip board is the one legislators section. */}
+      {!hideOfficialsPanel && analytics.officials_contacted.length > 0 && (
+        <CollapsibleSection title="Officials Contacted" badge={`${analytics.officials_contacted.length}`} defaultOpen={false}>
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
           <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">
             Which lawmakers your campaign&rsquo;s messages went to — use this to see where pressure is landing and
             which offices to target next.
@@ -728,9 +1041,11 @@ export function CampaignAnalytics({ analytics, campaignName }: CampaignAnalytics
             ))}
           </div>
         </div>
+        </CollapsibleSection>
       )}
 
       {/* Outcomes and Delivery methods side by side */}
+      <CollapsibleSection title="Outcomes and Delivery" defaultOpen={false}>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {/* Message outcomes — how far each message got */}
         <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
@@ -796,8 +1111,10 @@ export function CampaignAnalytics({ analytics, campaignName }: CampaignAnalytics
           )}
         </div>
       </div>
+      </CollapsibleSection>
 
       {/* Top states and Top cities side by side */}
+      <CollapsibleSection title="Top States and Cities" defaultOpen={false}>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
           <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-4">
@@ -857,6 +1174,12 @@ export function CampaignAnalytics({ analytics, campaignName }: CampaignAnalytics
           )}
         </div>
       </div>
+      </CollapsibleSection>
+
+      {/* Message browser + CSV export — read every message, dig deeper */}
+      {analytics.campaign_slug && analytics.messages && analytics.messages.length > 0 && (
+        <MessageBrowser messages={analytics.messages} slug={analytics.campaign_slug} isDemo={isDemo} />
+      )}
 
       {/* Recent activity pulse */}
       {analytics.recent_actions.length > 0 && (

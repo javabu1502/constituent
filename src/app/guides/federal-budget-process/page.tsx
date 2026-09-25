@@ -146,7 +146,7 @@ export default function FederalBudgetProcessGuidePage() {
                   <p className="text-sm">Congress has raised or suspended the debt ceiling dozens of times since it was established in 1917. Debt ceiling standoffs have become increasingly common and politically charged, making these moments especially important for constituent engagement.</p>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-gray-900 dark:text-white mb-1">Why Your Voice Matters</h3>
+                  <h3 className="font-semibold text-gray-900 dark:text-white mb-1">Why These Moments Count</h3>
                   <p className="text-sm">Debt ceiling debates are high-stakes and high-visibility. Officials pay close attention to constituent sentiment during these moments. Contacting your senators and representative during a debt ceiling debate can have real impact.</p>
                 </div>
               </div>

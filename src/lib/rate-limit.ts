@@ -10,23 +10,26 @@ interface RateLimitConfig {
   maxRequests: number;  // e.g. 10
 }
 
-const store = new Map<string, RateLimitEntry>();
-
 // Periodic cleanup to prevent memory leaks (every 5 minutes)
 const CLEANUP_INTERVAL = 5 * 60 * 1000;
-let lastCleanup = Date.now();
-
-function cleanup(windowMs: number) {
-  const now = Date.now();
-  if (now - lastCleanup < CLEANUP_INTERVAL) return;
-  lastCleanup = now;
-  for (const [key, entry] of store) {
-    entry.timestamps = entry.timestamps.filter(t => now - t < windowMs);
-    if (entry.timestamps.length === 0) store.delete(key);
-  }
-}
 
 export function rateLimit(config: RateLimitConfig) {
+  // Each limiter gets its own store. A single shared map keyed by IP would
+  // make every limiter count every other limiter's traffic for that IP
+  // (e.g. 20 chat requests tripping the 5/min generation limiter).
+  const store = new Map<string, RateLimitEntry>();
+  let lastCleanup = Date.now();
+
+  function cleanup(windowMs: number) {
+    const now = Date.now();
+    if (now - lastCleanup < CLEANUP_INTERVAL) return;
+    lastCleanup = now;
+    for (const [key, entry] of store) {
+      entry.timestamps = entry.timestamps.filter(t => now - t < windowMs);
+      if (entry.timestamps.length === 0) store.delete(key);
+    }
+  }
+
   return {
     check(ip: string): { success: boolean; retryAfter?: number } {
       cleanup(config.windowMs);

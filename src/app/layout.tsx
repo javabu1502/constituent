@@ -6,6 +6,7 @@ import { Footer } from '@/components/layout/Footer';
 import { ChatProvider } from '@/components/chat/ChatProvider';
 import { ChatButton } from '@/components/chat/ChatButton';
 import { ChatPanel } from '@/components/chat/ChatPanel';
+import { NotInEmbed } from '@/components/layout/NotInEmbed';
 import './globals.css';
 
 const geistSans = Geist({
@@ -20,7 +21,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.mydemocracy.app'),
-  title: 'My Democracy | Find Your Reps, See How They Vote, Make Your Voice Heard',
+  title: 'My Democracy | Find Your Reps, See How They Vote, Write to Them',
   description:
     'Find out who represents you, see what they\'re voting on, and send them a message in minutes. Free, private, no account needed.',
   keywords: ['civic engagement', 'contact representatives', 'democracy', 'AI', 'congress', 'state legislature'],
@@ -32,7 +33,7 @@ export const metadata: Metadata = {
     canonical: 'https://www.mydemocracy.app/',
   },
   openGraph: {
-    title: 'My Democracy | Find Your Reps, See How They Vote, Make Your Voice Heard',
+    title: 'My Democracy | Find Your Reps, See How They Vote, Write to Them',
     description:
       'Find out who represents you, see what they\'re voting on, and send them a message in minutes. Free, private, no account needed.',
     type: 'website',
@@ -40,7 +41,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'My Democracy | Find Your Reps, See How They Vote, Make Your Voice Heard',
+    title: 'My Democracy | Find Your Reps, See How They Vote, Write to Them',
     description:
       'Find out who represents you, see what they\'re voting on, and send them a message in minutes.',
     images: ['/og-image.png'],
@@ -64,11 +65,15 @@ export default function RootLayout({
           Skip to main content
         </a>
         <ChatProvider>
-          <Header />
+          <NotInEmbed>
+            <Header />
+          </NotInEmbed>
           <main id="main-content" className="flex-1">{children}</main>
-          <Footer />
-          <ChatPanel />
-          <ChatButton />
+          <NotInEmbed>
+            <Footer />
+            <ChatPanel />
+            <ChatButton />
+          </NotInEmbed>
         </ChatProvider>
         <Analytics />
       </body>

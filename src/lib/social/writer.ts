@@ -14,6 +14,8 @@ const SOFT_LIMIT = 280;
 export interface Draft {
   text: string;
   lane: string;
+  /** Story is good but the campaign link isn't — link the issues page. */
+  genericLink?: boolean;
 }
 
 const WRITER_INSTRUCTIONS = `
@@ -26,19 +28,43 @@ Write ONE Bluesky post about the item below. Hard rules:
 - Nonpartisan: never say how to vote, never praise or attack a party or figure.
 - No em dashes. No AI tells. Sound like the approved examples, not an assistant.
 - Only claim what the item states. Invent nothing. This is strict for news.
+- ATTRIBUTION: if the item names an outlet (e.g. "via AP", "via Politico"),
+  credit it in the post. Never present a reported claim as if it were ours.
+- LABELS AND DIRECTION: a number must keep the source's exact label (do not
+  call a figure "the Fed's preferred gauge" unless the source does); who did
+  what, and which way they pushed, must match the source. Never compress two
+  opposing pushes into one. Never assert momentum ("moving", "advancing")
+  the source doesn't state.
 - CLASSIFICATION handling: if 'actionable', include a clear CTA to weigh in on
   the linked campaign. If 'informational' (e.g. the daily brief), give context
   only and a soft "weigh in on what's moving" link, NO invented specific action.
+- NEWS VOICE — be genuinely useful, not a template. Let the CONTENT pick the shape:
+  * If there is ONE clearly dominant story, go deep on it: what happened AND why
+    it matters to constituents. Depth over breadth.
+  * If several items matter, give a tight digest, but each item earns a short
+    "why it matters" clause — never bare headlines stacked together.
+  Never use canned framing like "Your government, briefly:" or bait closers like
+  "Got a take?". Sound like a knowledgeable, neutral person sharing what moved.
 - LOCAL CTAs: the app can only route local-official actions in ${[...LOCAL_COVERAGE].join(', ')}.
   Unless the item is explicitly about one of those states, never tell readers to
   contact a city council, mayor, school board, county board, or "local
   officials"; point the CTA at the linked campaign instead.
 - Match a posting lane from the brand brain (news drop / by-the-numbers / bill on the move / rolling brief).
-- If the item can't be posted under these rules (source/campaign mismatch,
-  partisan-only framing, unverifiable claims), do NOT explain in prose.
+- CAMPAIGN LINK FIT: LINK goes to the campaign page named in CAMPAIGN PAGE.
+  Judge fit on the story's SPECIFIC subject, not broad adjacency — a defense
+  budget story does NOT fit a veterans-benefits campaign; a drug-pricing story
+  does NOT fit a general healthcare campaign. If the campaign does not clearly
+  cover the story's subject but the story is solid, verifiable US civic news,
+  DRAFT IT ANYWAY, set "genericLink": true, AND use ${'https://www.mydemocracy.app/issues'}
+  as the inline link in the post text instead of LINK (the mismatched campaign
+  URL must not appear anywhere in the post). Phrase the CTA generically
+  ("weigh in on what's moving") — never promise a campaign specific to this
+  story. Only skip when the story itself fails the rules (partisan-only
+  framing, unverifiable claims, not US civic news).
+- If the item can't be posted under these rules, do NOT explain in prose.
   Return ONLY JSON: {"skip": true, "reason": "<short internal note>"}
 
-Return ONLY JSON: {"text": "<the post>", "lane": "<lane name>"} or {"skip": true, "reason": "<why>"}
+Return ONLY JSON: {"text": "<the post>", "lane": "<lane name>", "genericLink": true|false} or {"skip": true, "reason": "<why>"}
 `;
 
 /** A skipped signal: the writer declined instead of drafting. Never publish. */
@@ -47,11 +73,37 @@ export interface WriterSkip {
   reason: string;
 }
 
+// The model free-texts lane names ("real-time civic news drops", "rolling
+// civic brief"…), fragmenting per-lane analytics (audit 2026-09-01: 8 label
+// variants for 4 lanes). Clamp to the brand brain's canonical set.
+const CANONICAL_LANES = ['news drop', 'by-the-numbers', 'bill on the move', 'rolling brief', 'election reminder'] as const;
+
+export function normalizeLane(lane: string): string {
+  const s = lane.trim().toLowerCase().replace(/-/g, ' ');
+  const exact = CANONICAL_LANES.find((l) => l === s);
+  if (exact) return exact;
+  if (s.includes('brief')) return 'rolling brief';
+  if (s.includes('bill')) return 'bill on the move';
+  if (s.includes('number')) return 'by-the-numbers';
+  if (s.includes('election')) return 'election reminder';
+  if (s.includes('news')) return 'news drop';
+  return 'news drop';
+}
+
 export async function writePost(brandBrain: string, signal: Signal): Promise<Draft | WriterSkip> {
+  const campaignTitle =
+    (signal.metadata as Record<string, unknown> | null | undefined)?.campaign_title;
   const item = [
     `TITLE: ${signal.title ?? ''}`,
     `SUMMARY: ${signal.summary ?? ''}`,
     `LINK: ${signal.url ?? ''}`,
+    `CAMPAIGN PAGE: ${
+      typeof campaignTitle === 'string' && campaignTitle
+        ? campaignTitle
+        : signal.campaign_slug
+          ? `(title unknown — slug "${signal.campaign_slug}"; judge fit cautiously and prefer genericLink)`
+          : '(none — LINK is not a campaign page)'
+    }`,
     `ISSUE AREA: ${signal.issue_area ?? ''}`,
     `CLASSIFICATION: ${signal.classification ?? 'actionable'}`,
     `SOURCE: ${signal.source ?? ''}`,
@@ -67,15 +119,33 @@ export async function writePost(brandBrain: string, signal: Signal): Promise<Dra
   // a structured {"skip": true}, prose refusals, meta notes, and parse failures
   // all land here. Raw model output must not reach the publish path (leaked
   // "SKIP, INPUT MISMATCH: ..." notes were published verbatim in July 2026).
-  const parsed = extractJSON(raw) as { text?: string; lane?: string; skip?: boolean; reason?: string } | null;
+  const parsed = extractJSON(raw) as { text?: string; lane?: string; skip?: boolean; reason?: string; genericLink?: boolean } | null;
   if (!parsed || parsed.skip || typeof parsed.text !== 'string' || !parsed.text.trim()) {
     return { skip: true, reason: parsed?.reason ?? 'writer returned no usable draft' };
   }
 
   let text = parsed.text;
-  const lane = typeof parsed.lane === 'string' ? parsed.lane : 'rolling brief';
+  const lane = normalizeLane(typeof parsed.lane === 'string' ? parsed.lane : 'rolling brief');
 
-  // Backstop the brand's hardest rule regardless of what the model returned.
+  // No-em-dash rule, done RIGHT: mechanical dash→comma replacement produced
+  // published word salad ("13 unresolved issues, troop pay, procurement, and
+  // more, before a final bill lands" — 2026-08 FY27 defense post), because
+  // appositive dashes often carry a clause whose grammar collapses without
+  // them. Ask the model to RESTRUCTURE the sentence first; deDash stays as
+  // the last-resort backstop only if dashes survive the rewrite.
+  if (/[—–]/.test(text)) {
+    try {
+      const rewritten = await callClaude(
+        `${brandBrain}\n\n---\nRewrite this Bluesky post with NO em or en dashes. RESTRUCTURE into complete grammatical sentences (split sentences, use a colon, or reword) — do NOT just swap dashes for commas. Keep the link, facts, length, and voice. Return ONLY JSON: {"text": "<post>"}`,
+        text,
+        350,
+      );
+      const cleaned = (extractJSON(rewritten) as { text?: string } | null)?.text?.trim();
+      if (cleaned && !/[—–]/.test(cleaned)) text = cleaned;
+    } catch {
+      // fall through to the mechanical backstop
+    }
+  }
   text = deDash(text).trim();
 
   // Shorten passes if it's over length (the brief lane tends to run long), so
@@ -99,5 +169,33 @@ export async function writePost(brandBrain: string, signal: Signal): Promise<Dra
     }
   }
 
-  return { text, lane };
+  // Coherence + claim-support gate. Coherence is the last line of defense for
+  // GRAMMAR (the FY27 word-salad post passed every structural guardrail).
+  // For FACTUAL signals (news/legislative) the same judge also verifies the
+  // post against the source item: the 2026-09-01 fact-check found the two
+  // real-world errors were LABEL/DIRECTION errors — a correct number pinned
+  // to the wrong metric ("Fed's preferred gauge" on the headline-PCE figure)
+  // and an actor/direction flip ("both parties pressure into discounting"
+  // when they pushed opposite ways) — which the regex traceability check is
+  // structurally blind to. Blocks only on an explicit "ok": false so a flaky
+  // judge can't silence the account.
+  const isFactual = signal.source === 'news' || signal.source === 'legislative';
+  try {
+    const factualCriteria = isFactual
+      ? ` ALSO verify the post against the SOURCE ITEM. Rules: every number must be attached to the SAME metric/entity the source attaches it to; actors and the DIRECTION of actions must match the source (who is pushing what, for or against); no factual claim may go beyond what the source states; do not assert current momentum ("moving", "advancing", "just passed") unless the source says so. A post that is accurate but incomplete is fine — only flag claims the source does not support or contradicts.\n\nSOURCE ITEM:\n${item}\n\nPOST:`
+      : '';
+    const review = await callClaude(
+      `You are a copy editor and fact-alignment checker. Judge whether this social post (1) reads as coherent, complete, grammatical English a careful human would publish — every sentence has its verb, no truncated fragments or comma-spliced word lists.${isFactual ? ' (2) makes only claims the SOURCE ITEM supports, per the rules below.' : ''} Do not judge opinions, style, or length. Return ONLY JSON: {"ok": true} or {"ok": false, "reason": "<what is broken>"}${factualCriteria ? `\n${factualCriteria}` : ''}`,
+      text,
+      150,
+    );
+    const verdict = extractJSON(review) as { ok?: boolean; reason?: string } | null;
+    if (verdict?.ok === false) {
+      return { skip: true, reason: `incoherent draft: ${verdict.reason ?? 'failed copy-edit check'}` };
+    }
+  } catch {
+    // judge unavailable — let the structural guardrails decide as before
+  }
+
+  return { text, lane, genericLink: parsed.genericLink === true };
 }
