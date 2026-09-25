@@ -76,6 +76,27 @@ export default function TeamPage() {
               </p>
             </div>
           </div>
+
+          <div className="mt-5 rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-6 sm:p-8 flex flex-col sm:flex-row gap-6 items-start">
+            <div className="w-24 h-24 rounded-full bg-purple-100 dark:bg-purple-900 flex items-center justify-center flex-shrink-0">
+              <span className="text-3xl font-bold text-purple-600 dark:text-purple-300">
+                LB
+              </span>
+            </div>
+            <div>
+              <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+                Lee Bound
+              </h2>
+              <p className="text-sm font-medium text-purple-600 dark:text-purple-400 mb-3">
+                Product &amp; Engineering
+              </p>
+              <p className="text-gray-600 dark:text-gray-300">
+                Lee is a veteran product manager, software developer, and AI
+                orchestration expert with over 20 years of experience
+                architecting digital experiences.
+              </p>
+            </div>
+          </div>
         </section>
 
         <div className="prose prose-gray dark:prose-invert max-w-none">
