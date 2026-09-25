@@ -20,7 +20,7 @@ const POLICY_AREAS: Record<string, string[]> = {
   'Congress': ['Congressional Reform', 'Term Limits', 'Government Accountability', 'Congressional Oversight', 'Congressional Pay', 'Earmarks', 'Congressional Stock Trading', 'Insider Trading Ban', 'Congressional Subpoena Power'],
   'Crime and Law Enforcement': ['Gun Violence', 'Police Reform', 'Drug Policy', 'Criminal Justice Reform', 'Sentencing', 'Fentanyl', 'Human Trafficking', 'Cybercrime', 'Domestic Violence', 'Hate Crimes', 'Mass Incarceration', 'Death Penalty', 'Bail Reform', 'Juvenile Justice', 'Gang Violence', 'Recidivism', 'Carjacking', 'Retail Theft', 'Cyberstalking', 'School Shootings', 'Sex Trafficking', 'Elder Abuse', 'White Collar Crime', 'Asset Forfeiture', 'Body Cameras', 'Drug Cartels', 'Organized Crime'],
   'Economics and Public Finance': ['Federal Budget', 'National Debt', 'Inflation', 'Cost of Living', 'Wage Growth', 'Federal Reserve', 'Recession', 'Trade Deficit', 'Income Inequality', 'Poverty Rate', 'GDP Growth', 'Government Shutdown', 'Debt Ceiling', 'Austerity', 'Grocery Prices', 'Gas Prices', 'Utility Bills', 'Rent Prices'],
-  'Education': ['K-12 Education', 'Student Loans', 'Higher Education', 'Special Education', 'School Choice', 'Teacher Pay', 'School Safety', 'Book Bans', 'School Funding', 'Early Childhood Education', 'Pre-K', 'Title IX', 'STEM Education', 'Homeschooling', 'Charter Schools', 'Student Debt Forgiveness', 'School Vouchers', 'Standardized Testing', 'College Affordability', 'Sex Education', 'Library Funding', 'Civics Education', 'School Boards', 'Bullying'],
+  'Education': ['K-12 Education', 'Student Loans', 'Higher Education', 'Special Education', 'School Choice', 'Teacher Pay', 'School Safety', 'Book Bans', 'School Funding', 'Early Childhood Education', 'Head Start', 'Pre-K', 'Title IX', 'STEM Education', 'Homeschooling', 'Charter Schools', 'Student Debt Forgiveness', 'School Vouchers', 'Standardized Testing', 'College Affordability', 'Sex Education', 'Library Funding', 'Civics Education', 'School Boards', 'Bullying'],
   'Emergency Management': ['Disaster Relief', 'FEMA', 'Emergency Preparedness', 'Climate Resilience', 'Pandemic Preparedness', 'First Responders', 'Wildfire Management', 'Flood Insurance', 'National Stockpile', 'Climate Adaptation'],
   'Energy': ['Oil and Gas', 'Renewable Energy', 'Energy Costs', 'Nuclear Energy', 'Electric Vehicles', 'Energy Grid', 'Fracking', 'Carbon Tax', 'Energy Storage', 'Hydrogen', 'Pipeline Safety', 'Energy Independence', 'Geothermal', 'Offshore Wind', 'Coal'],
   'Environmental Protection': ['Climate Change', 'Clean Air', 'Clean Water', 'Pollution', 'EPA', 'PFAS/Forever Chemicals', 'Plastics', 'Environmental Justice', 'Wildfires', 'Carbon Capture', 'Methane', 'NEPA Reform', 'Deforestation', 'Microplastics', 'Lead Pipes', 'Superfund Sites', 'Ozone', 'Wetlands'],
@@ -281,6 +281,8 @@ const KEYWORD_ALIASES: Record<string, string[]> = {
   // Education - new
   'pre-k': ['pre-k', 'early childhood education'],
   'preschool': ['pre-k', 'early childhood education'],
+  'head start': ['head start', 'early childhood education'],
+  'headstart': ['head start', 'early childhood education'],
   'title ix': ['title ix', 'education'],
   'stem': ['stem education', 'education'],
   'homeschool': ['homeschooling', 'education'],
