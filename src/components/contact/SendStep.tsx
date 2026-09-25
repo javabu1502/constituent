@@ -5,6 +5,7 @@ import { createClient } from '@/lib/supabase/client';
 import { trackEvent } from '@/lib/analytics';
 import type { ContactState, ContactAction } from './ContactFlow';
 import type { Official } from '@/lib/types';
+import { CWC_ENABLED } from '@/lib/cwc-prefixes';
 import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 import { formatPhone } from '@/lib/utils';
@@ -498,6 +499,25 @@ export function SendStep({ state, dispatch, onBack }: SendStepProps) {
         delivery_status: deliveryStatus,
         user_id: userId || undefined,
         turnstileToken: turnstileToken || undefined,
+        // CWC delivery payload: only when the rollout flag is on, the office
+        // is federal, and every required field was collected. The server
+        // gates again (CWC_DELIVERY_ENABLED) before enqueueing anything.
+        cwc:
+          CWC_ENABLED &&
+          official.level === 'federal' &&
+          state.userPrefix &&
+          state.userEmail &&
+          state.address?.street &&
+          /^\d{5}/.test(state.address?.zip ?? '')
+            ? {
+                prefix: state.userPrefix,
+                street: state.address.street.trim(),
+                zip: state.address.zip.trim().match(/^\d{5}(-\d{4})?/)?.[0] ?? state.address.zip.trim(),
+                email: state.userEmail.trim(),
+                subject: msg.subject.slice(0, 500),
+                senate_class: official.chamber === 'senate' ? official.senateClass : undefined,
+              }
+            : undefined,
       }),
     })
       .then(async (res) => {

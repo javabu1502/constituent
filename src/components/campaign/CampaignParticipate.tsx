@@ -609,6 +609,7 @@ export function CampaignParticipate({
         advocate_email: collectEmail && email.trim() ? email.trim() : undefined,
         advocate_city: city.trim(),
         advocate_state: state,
+        advocate_district: official.level === 'federal' && official.chamber === 'house' ? official.district || undefined : undefined,
         legislator_name: official.name,
         legislator_id: official.id,
         legislator_party: official.party,
@@ -622,6 +623,21 @@ export function CampaignParticipate({
         message_intent: intentByOfficial[official.id],
         campaign_id: campaign.id,
         turnstileToken: turnstileToken || undefined,
+        // CWC delivery payload: only when the rollout flag is on, the office
+        // is federal, and every required field was collected. The server
+        // gates again (CWC_DELIVERY_ENABLED) before enqueueing anything.
+        cwc:
+          cwcFields && official.level === 'federal' && prefix && email.trim() && street.trim() && /^\d{5}/.test(zip.trim())
+            ? {
+                prefix,
+                street: street.trim(),
+                zip: zip.trim().match(/^\d{5}(-\d{4})?/)?.[0] ?? zip.trim(),
+                email: email.trim(),
+                subject: (msg.subject || `Constituent message: ${campaign.headline}`).slice(0, 500),
+                stance: stance === 'support' ? 'pro' : stance === 'oppose' ? 'con' : undefined,
+                senate_class: official.chamber === 'senate' ? official.senateClass : undefined,
+              }
+            : undefined,
       }),
     })
       .then(async (res) => {

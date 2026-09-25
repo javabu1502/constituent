@@ -82,6 +82,22 @@ export const trackSendSchema = z.object({
   user_id: z.string().uuid().optional(),
   campaign_id: z.string().uuid().optional(),
   turnstileToken: z.string().optional(),
+  // CWC delivery payload — present only when the client ran with
+  // NEXT_PUBLIC_CWC_ENABLED and the recipient is a federal office. These
+  // fields feed the send queue's delivery record; they are NOT written to
+  // the messages table (the queue is service-role-only and needs the full
+  // address for constituent verification + the XML payload).
+  cwc: z
+    .object({
+      prefix: z.enum(['Mr.', 'Mrs.', 'Miss', 'Ms.', 'Dr.']),
+      street: z.string().min(1).max(200),
+      zip: z.string().regex(/^\d{5}(-\d{4})?$/),
+      email: z.string().email().max(254),
+      subject: z.string().min(6).max(500),
+      stance: z.enum(['pro', 'con']).optional(),
+      senate_class: z.number().int().min(1).max(3).optional(),
+    })
+    .optional(),
 });
 
 export const createCampaignSchema = z.object({

@@ -1,10 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { after } from 'next/server';
 import { createAdminClient } from '@/lib/supabase';
 import { createClient } from '@/lib/supabase/server';
 import { trackSendSchema, parseBody } from '@/lib/schemas';
 import { writeLimiter, getClientIp } from '@/lib/rate-limit';
 import { checkLegislatorCooldown, resolveUsageIdentity } from '@/lib/usage-quota';
 import { verifyTurnstile } from '@/lib/turnstile';
+import { enqueueCwcDeliveries } from '@/lib/cwc';
+import { buildCwcQueueItem, type CampaignBillContext } from '@/lib/cwc/enqueue-from-send';
+
+// The CWC enqueue path (after()) reaches congressional endpoints through the
+// undici static-IP proxy — Node runtime required.
+export const runtime = 'nodejs';
 
 /**
  * POST /api/track-send
@@ -102,6 +109,37 @@ export async function POST(request: NextRequest) {
         { error: 'Failed to log message' },
         { status: 500 }
       );
+    }
+
+    // CWC delivery: enqueue AFTER the response is sent (the content gate runs
+    // an LLM screen; the client should not wait on it). Triple-gated: server
+    // flag + client payload + federal office. A skip or failure here loses
+    // nothing — the client's own mailto/webform path already ran.
+    if (process.env.CWC_DELIVERY_ENABLED === 'true' && body.cwc && body.legislator_level === 'federal' && data?.id) {
+      const cwcPayload = body.cwc;
+      const messageId = data.id as string;
+      after(async () => {
+        try {
+          let campaign: CampaignBillContext | null = null;
+          if (body.campaign_id) {
+            const { data: c } = await supabase
+              .from('campaigns')
+              .select('slug, bill_level, bill_congress, bill_type, bill_number, direction, headline')
+              .eq('id', body.campaign_id)
+              .single();
+            campaign = (c as CampaignBillContext | null) ?? null;
+          }
+          const built = buildCwcQueueItem({ body, cwc: cwcPayload, campaign, messageId });
+          if (!built.ok) {
+            console.log(`[track-send] cwc skip (${messageId}): ${built.skip}`);
+            return;
+          }
+          const result = await enqueueCwcDeliveries([built.item], 'production');
+          console.log(`[track-send] cwc enqueue (${messageId}):`, JSON.stringify(result));
+        } catch (e) {
+          console.error(`[track-send] cwc enqueue failed (${messageId}):`, (e as Error).message);
+        }
+      });
     }
 
     return NextResponse.json({ success: true, shareId: data?.id });
