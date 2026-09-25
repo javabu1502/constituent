@@ -59,7 +59,6 @@ export default function CampaignsPage() {
           Grassroots advocacy built for legislative campaigns
         </h1>
         <p className="text-gray-600 dark:text-gray-400 mt-4 text-lg">
-          My Democracy combines grassroots action, legislative tracking, and impact reporting in one platform.
           Supporters send individually written messages to their own legislators. Your team tracks positions,
           meetings, and outcomes, and reports results to funders.
         </p>
@@ -169,6 +168,14 @@ export default function CampaignsPage() {
         </p>
         <OrgAccessForm />
       </div>
+
+      {/* Founder trust */}
+      <p className="text-center text-sm text-gray-500 dark:text-gray-400 mb-4">
+        My Democracy is independent and founder-led.{' '}
+        <Link href="/team" className="text-purple-600 dark:text-purple-400 hover:underline font-medium">
+          Meet the founder and read why it exists &rarr;
+        </Link>
+      </p>
 
       {/* Constituent redirect */}
       <p className="text-center text-sm text-gray-500 dark:text-gray-400">
