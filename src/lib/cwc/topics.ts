@@ -35,6 +35,7 @@ const NORMALIZE: Record<string, LocTopic> = {
 };
 
 const KEYWORD_FALLBACKS: [RegExp, LocTopic][] = [
+  [/head start|pre-?k\b|early childhood/i, 'Education'],
   [/health|medic|hospital|drug/i, 'Health'],
   [/school|educat|student|teacher/i, 'Education'],
   [/climate|environment|energy|pollut/i, 'Environmental Protection'],
