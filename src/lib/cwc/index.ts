@@ -47,9 +47,12 @@ export {
   type AcquirePermitOptions,
 } from './rate-permit';
 export {
-  enqueueCwcDeliveries, processCwcSendQueue, setSendQueueClientFactory,
+  enqueueCwcDeliveries, processCwcSendQueue, resolveHeldMessage,
+  setSendQueueClientFactory, setEnqueueComplianceGate,
   type QueueItem, type SendQueueJob, type ProcessQueueOptions, type ProcessQueueSummary,
+  type EnqueueResult,
 } from './queue';
+export { screenMessageForCwc, setComplianceScreener, type GateOutcome } from './compliance-gate';
 export {
   resolveOfficeCode,
   houseOfficeCode,

@@ -272,12 +272,27 @@ describe('production wiring locks (compliance verification 2026-08-31)', () => {
     const sender = vi.fn(async (): Promise<CwcResult> => ({ ok: true, status: 201 }));
     const outcome = await sendCwcDelivery(prodDelivery, {
       messageKey: 'user1:campaign-1', environment: 'production', billLevel: 'federal',
+      complianceGated: true,
       activeOffices: { loader: async () => new Set(['SNY01']) },
       sender,
       now: new Date('2026-08-14T16:00:00Z'),
       verifier: async () => ({ ok: false, reason: 'STATE_MISMATCH', detail: 'address is in NJ' }),
     });
     expect(outcome).toMatchObject({ sent: false, fallback: 'not-constituent' });
+    expect(sender).not.toHaveBeenCalled();
+  });
+
+  it('production REFUSES sends that skipped the content-compliance gate', async () => {
+    const sender = vi.fn(async (): Promise<CwcResult> => ({ ok: true, status: 201 }));
+    await expect(
+      sendCwcDelivery(prodDelivery, {
+        messageKey: 'user1:campaign-1', environment: 'production', billLevel: 'federal',
+        activeOffices: { loader: async () => new Set(['SNY01']) },
+        sender,
+        verifier: async () => ({ ok: true, officeCode: 'SNY01' }),
+        now: new Date('2026-08-14T16:00:00Z'),
+      }),
+    ).rejects.toThrow(/content-compliance gate/);
     expect(sender).not.toHaveBeenCalled();
   });
 

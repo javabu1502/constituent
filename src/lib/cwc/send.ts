@@ -1,6 +1,6 @@
 import { isInMaintenanceWindow, type Chamber } from './constants';
 import { loadActiveOfficeCodes, sendHouse, sendSenate, type CwcResult } from './client';
-import { assertCwcSendable } from './content';
+import { assertCwcSendable, CwcComplianceError } from './content';
 import { buildCwcXml } from './xml';
 import {
   getOrCreateDeliveryId,
@@ -109,6 +109,13 @@ export interface SendCwcOptions {
    *  `verifier` is the test seam. */
   verifyConstituent?: boolean;
   verifier?: (delivery: CwcDelivery) => Promise<import('./verify').VerifyResult>;
+  /** Attestation that this message passed the CONTENT-compliance gate
+   *  (screenMessageForCwc — threat/fake-identity/spam screening, recorded in
+   *  message_compliance). The queue drainer sets it because every claimable
+   *  row was screened at enqueue; 'held' rows only become claimable through
+   *  an explicit admin approval. REQUIRED in production: a direct production
+   *  call without it throws, so no future caller can skip the screen. */
+  complianceGated?: boolean;
 }
 
 export type SendCwcOutcome =
@@ -139,6 +146,15 @@ export async function sendCwcDelivery(
   // production it would send to non-participating offices — hard error.
   if (opts.skipActiveOfficeCheck && opts.environment === 'production') {
     throw new Error('skipActiveOfficeCheck is a TEST-environment escape hatch — production must check Get Active Offices');
+  }
+
+  // 1a. Content-compliance attestation — production messages must have been
+  //     screened (threats/fake identity/spam → message_compliance). The queue
+  //     path sets this; a direct production call without it is a caller bug.
+  if (opts.environment === 'production' && opts.complianceGated !== true) {
+    throw new CwcComplianceError([
+      'production sends require the content-compliance gate: enqueue via enqueueCwcDeliveries (which screens the message and sets complianceGated) instead of calling sendCwcDelivery directly',
+    ]);
   }
 
   // 1b. Constituent verification — the address must geocode to THIS seat.

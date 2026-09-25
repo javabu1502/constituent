@@ -1,5 +1,9 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
-import { enqueueCwcDeliveries, processCwcSendQueue, setSendQueueClientFactory, type SendQueueJob } from '../queue';
+import {
+  enqueueCwcDeliveries, processCwcSendQueue, setSendQueueClientFactory,
+  setEnqueueComplianceGate, type SendQueueJob,
+} from '../queue';
+import type { GateOutcome } from '../compliance-gate';
 import { CwcComplianceError } from '../content';
 import { RatePermitBackpressureError } from '../rate-permit';
 import type { CwcDelivery } from '../types';
@@ -56,14 +60,52 @@ describe('cwc send queue', () => {
     } as unknown as ReturnType<typeof import('@/lib/supabase').createAdminClient>;
   }
 
+  const gateOutcome = (decision: GateOutcome['decision']): GateOutcome => ({
+    decision,
+    verdict: {
+      decision,
+      reasons: [],
+      categories: { fakeIdentity: false, threat: false, spam: false, gibberish: false, splitAbuse: false, other: false },
+      model: 'test-model',
+      promptVersion: 'compliance-v1',
+    },
+  });
+  let gateDecisions: Array<GateOutcome['decision']>;
+
   beforeEach(() => {
     upserts = [];
     updates = [];
     claimArgs = null;
     claimed = [];
+    gateDecisions = [];
     setSendQueueClientFactory(fakeDb);
+    // Content gate passes by default; individual tests override.
+    setEnqueueComplianceGate(async () => {
+      gateDecisions.push('pass');
+      return gateOutcome('pass');
+    });
   });
-  afterEach(() => setSendQueueClientFactory());
+  afterEach(() => {
+    setSendQueueClientFactory();
+    setEnqueueComplianceGate();
+  });
+
+  describe('drainer compliance attestation', () => {
+    it('every queue-drained send carries complianceGated (rows were screened at enqueue)', async () => {
+      claimed = [job()];
+      let seenOpts: Record<string, unknown> | null = null;
+      await processCwcSendQueue({
+        workerId: 'w1',
+        environment: 'test',
+        send: async (_d, o) => {
+          seenOpts = o as unknown as Record<string, unknown>;
+          return { sent: true, deliveryId: 'd1', retried: false, result: { ok: true, status: 201 } } as SendCwcOutcome;
+        },
+      });
+      expect(seenOpts).not.toBeNull();
+      expect((seenOpts as unknown as { complianceGated?: boolean }).complianceGated).toBe(true);
+    });
+  });
 
   describe('enqueueCwcDeliveries', () => {
     it('gates at the boundary: an unsendable item refuses the whole enqueue', async () => {
@@ -88,8 +130,50 @@ describe('cwc send queue', () => {
       });
       expect(upserts[0].rows[0]).toMatchObject({
         message_key: 'u1:c1', office_code: 'SNY01', environment: 'test',
-        chamber: 'senate', bill_level: 'none',
+        chamber: 'senate', bill_level: 'none', status: 'queued',
       });
+    });
+
+    it('screens ONCE per logical message, not per office', async () => {
+      await enqueueCwcDeliveries(
+        [
+          { delivery, messageKey: 'u1:c1', billLevel: 'none' },
+          { delivery: { ...delivery, officeCode: 'SNY02' }, messageKey: 'u1:c1', billLevel: 'none' },
+          { delivery, messageKey: 'u2:c1', billLevel: 'none' },
+        ],
+        'test',
+      );
+      expect(gateDecisions).toHaveLength(2); // two logical messages, three rows
+      expect(upserts[0].rows).toHaveLength(3);
+    });
+
+    it("a 'review' verdict enqueues the message's rows as HELD", async () => {
+      setEnqueueComplianceGate(async () => gateOutcome('review'));
+      const result = await enqueueCwcDeliveries(
+        [
+          { delivery, messageKey: 'u1:c1', billLevel: 'none' },
+          { delivery: { ...delivery, officeCode: 'SNY02' }, messageKey: 'u1:c1', billLevel: 'none' },
+        ],
+        'test',
+      );
+      expect(result).toMatchObject({ enqueued: 0, held: 2, blockedKeys: [] });
+      expect((upserts[0].rows as Array<{ status: string }>).every((r) => r.status === 'held')).toBe(true);
+    });
+
+    it("a 'block' verdict enqueues NOTHING for that message and reports the key", async () => {
+      setEnqueueComplianceGate(async ({ messageKey }) =>
+        gateOutcome(messageKey === 'bad:msg' ? 'block' : 'pass'),
+      );
+      const result = await enqueueCwcDeliveries(
+        [
+          { delivery, messageKey: 'bad:msg', billLevel: 'none' },
+          { delivery: { ...delivery, officeCode: 'SNY02' }, messageKey: 'ok:msg', billLevel: 'none' },
+        ],
+        'test',
+      );
+      expect(result).toMatchObject({ enqueued: 1, held: 0, blockedKeys: ['bad:msg'] });
+      expect(upserts[0].rows).toHaveLength(1);
+      expect(upserts[0].rows[0]).toMatchObject({ message_key: 'ok:msg', status: 'queued' });
     });
   });
 

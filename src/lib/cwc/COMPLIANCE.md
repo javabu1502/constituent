@@ -27,6 +27,25 @@ module · 🟡 pending (upstream product/recipient work) · 📋 process step.
 - ✅ **Only send from real constituents of that office.** `verifyConstituentForOffice` (`verify.ts`) re-geocodes the delivery's own constituent address and requires it to produce the target seat — **enforced inside `sendCwcDelivery`, MANDATORY in production (no opt-out)**, not caller discipline. `offices.ts` resolves office codes deterministically and refuses to guess. REMAINING RISK (upstream): the House district must come from an accurate **ZIP+4 → district** lookup; at split-ZIP boundaries a 5-digit ZIP can map to the wrong district.
 - ✅ **Don't send federal offices about state bills.** `assertCwcSendable` (`content.ts`) — **FAIL-CLOSED**: only an explicit `billLevel` of `'federal'` or `'none'` is sendable; `'state'`, `null`, and *omitted* all refuse. "We don't know" never defaults to "send it to Congress".
 
+## Content-compliance gate (`compliance-gate.ts` + `src/lib/compliance/`) ✅ wired 2026-09-25
+
+Second, independent pre-send gate: an LLM screen of the MESSAGE CONTENT itself
+(true threats, fake identities, spam, gibberish, split-abuse across a sender's
+recent messages) — strictly viewpoint-neutral by prompt design (partisan/angry
+speech always passes). Runs ONCE per logical message at `enqueueCwcDeliveries`:
+
+- `pass`   → rows enqueue as `queued` (claimable by the drainer);
+- `review` → rows enqueue as `held` — invisible to `claim_cwc_send_jobs` until
+  an admin approves at `/admin/compliance` (approve → `queued`, reject →
+  `refused`); the screener FAILS SAFE to `review` on any model/parse error;
+- `block`  → nothing enqueues; the verdict is still recorded.
+
+Every verdict (including passes) lands in `message_compliance` (RLS, service-
+role only, migration 20260925000000) — the durable audit trail. Belt-and-
+suspenders: `sendCwcDelivery` REFUSES production sends without the
+`complianceGated` attestation, which only the queue drainer (post-screen) and
+admin approval flow set — a future direct caller cannot skip the screen.
+
 ## Pre-send compliance gate (`content.ts` → `assertCwcSendable`) ✅ wired
 
 One function every send path runs (in `send.ts`, the admin route, and the acceptance harness). Refuses when:

@@ -2,6 +2,7 @@ import { createAdminClient } from '@/lib/supabase';
 import { assertCwcSendable, CwcComplianceError } from './content';
 import { RatePermitBackpressureError } from './rate-permit';
 import { sendCwcDelivery, type SendCwcOptions, type SendCwcOutcome } from './send';
+import { screenMessageForCwc, type GateOutcome } from './compliance-gate';
 import { CwcValidationError } from './xml';
 import type { CwcEnvironment } from './delivery-log';
 import type { CwcDelivery } from './types';
@@ -30,6 +31,14 @@ export function setSendQueueClientFactory(factory?: () => DbClient): void {
   clientFactory = factory ?? createAdminClient;
 }
 
+type EnqueueGate = (opts: { messageKey: string; delivery: CwcDelivery; db: DbClient }) => Promise<GateOutcome>;
+let enqueueGate: EnqueueGate = screenMessageForCwc;
+
+/** Test seam — pass nothing to restore the real content-compliance gate. */
+export function setEnqueueComplianceGate(fn?: EnqueueGate): void {
+  enqueueGate = fn ?? screenMessageForCwc;
+}
+
 export interface QueueItem {
   delivery: CwcDelivery;
   /** Stable key for the logical message (e.g. `userId:campaignId`). */
@@ -52,17 +61,30 @@ export interface SendQueueJob {
   max_attempts: number;
 }
 
+export interface EnqueueResult {
+  /** Rows enqueued as 'queued' — claimable by the drainer. */
+  enqueued: number;
+  /** Rows enqueued as 'held' — awaiting admin review (/admin/compliance). */
+  held: number;
+  /** Message keys the content gate refused outright — nothing enqueued. */
+  blockedKeys: string[];
+}
+
 /**
- * Enqueue deliveries for background sending. Runs the compliance gate NOW so
- * an unsendable message fails at the boundary (with the full problem list),
- * not minutes later inside a worker. Re-enqueueing an existing
- * (messageKey × office × environment) is a no-op — safe to call from a
- * retried request.
+ * Enqueue deliveries for background sending. Runs BOTH gates NOW so an
+ * unsendable message fails at the boundary (with the full problem list), not
+ * minutes later inside a worker:
+ *  1. `assertCwcSendable` — format/PII/stance/billLevel rules (throws);
+ *  2. the content gate (`screenMessageForCwc`) — one LLM screen per logical
+ *     message: 'pass' enqueues as 'queued', 'review' enqueues as 'held' for
+ *     the admin queue, 'block' never enqueues.
+ * Re-enqueueing an existing (messageKey × office × environment) is a no-op —
+ * safe to call from a retried request.
  */
 export async function enqueueCwcDeliveries(
   items: QueueItem[],
   environment: CwcEnvironment,
-): Promise<{ enqueued: number }> {
+): Promise<EnqueueResult> {
   for (const item of items) {
     assertCwcSendable({
       message: item.delivery.message,
@@ -71,7 +93,23 @@ export async function enqueueCwcDeliveries(
     });
   }
   const db = clientFactory();
-  const rows = items.map((item) => ({
+
+  // One content screen per logical message, not per office.
+  const byKey = new Map<string, QueueItem[]>();
+  for (const item of items) {
+    if (!byKey.has(item.messageKey)) byKey.set(item.messageKey, []);
+    byKey.get(item.messageKey)!.push(item);
+  }
+  const statusByKey = new Map<string, 'queued' | 'held'>();
+  const blockedKeys: string[] = [];
+  for (const [messageKey, group] of byKey) {
+    const { decision } = await enqueueGate({ messageKey, delivery: group[0].delivery, db });
+    if (decision === 'block') blockedKeys.push(messageKey);
+    else statusByKey.set(messageKey, decision === 'pass' ? 'queued' : 'held');
+  }
+
+  const sendable = items.filter((item) => statusByKey.has(item.messageKey));
+  const rows = sendable.map((item) => ({
     message_key: item.messageKey,
     office_code: item.delivery.officeCode,
     environment,
@@ -79,16 +117,41 @@ export async function enqueueCwcDeliveries(
     campaign_id: item.delivery.campaignId,
     delivery: item.delivery,
     bill_level: item.billLevel,
+    status: statusByKey.get(item.messageKey)!,
   }));
-  const { error, count } = await db
+  let enqueued = 0;
+  let held = 0;
+  if (rows.length > 0) {
+    const { error } = await db
+      .from('cwc_send_queue')
+      .upsert(rows, {
+        onConflict: 'message_key,office_code,environment',
+        ignoreDuplicates: true,
+      });
+    if (error) throw new Error(`cwc_send_queue enqueue failed: ${error.message}`);
+    held = rows.filter((r) => r.status === 'held').length;
+    enqueued = rows.length - held;
+  }
+  return { enqueued, held, blockedKeys };
+}
+
+/**
+ * Release or refuse the HELD queue rows for one reviewed message. Called by
+ * the admin compliance review (approve → 'queued', reject → 'refused').
+ */
+export async function resolveHeldMessage(
+  messageKey: string,
+  resolution: 'approve' | 'reject',
+): Promise<{ updated: number }> {
+  const db = clientFactory();
+  const { data, error } = await db
     .from('cwc_send_queue')
-    .upsert(rows, {
-      onConflict: 'message_key,office_code,environment',
-      ignoreDuplicates: true,
-      count: 'exact',
-    });
-  if (error) throw new Error(`cwc_send_queue enqueue failed: ${error.message}`);
-  return { enqueued: count ?? rows.length };
+    .update({ status: resolution === 'approve' ? 'queued' : 'refused', updated_at: new Date().toISOString() })
+    .eq('message_key', messageKey)
+    .eq('status', 'held')
+    .select('id');
+  if (error) throw new Error(`cwc_send_queue held-resolution failed: ${error.message}`);
+  return { updated: (data ?? []).length };
 }
 
 export interface ProcessQueueOptions {
@@ -165,6 +228,9 @@ export async function processCwcSendQueue(opts: ProcessQueueOptions): Promise<Pr
         messageKey: job.message_key,
         environment: opts.environment,
         billLevel: job.bill_level,
+        // Every claimable row passed the content gate at enqueue ('held' rows
+        // only become 'queued' through an explicit admin approval).
+        complianceGated: true,
         ...opts.sendOptions,
       });
       if (outcome.sent) {
