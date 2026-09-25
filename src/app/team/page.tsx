@@ -206,8 +206,8 @@ export default function TeamPage() {
               </p>
               <p>
                 Email{' '}
-                <a href="mailto:info@mydemocracy.app" className="text-purple-600 dark:text-purple-400 hover:underline">
-                  info@mydemocracy.app
+                <a href="mailto:jared@mydemocracy.app" className="text-purple-600 dark:text-purple-400 hover:underline">
+                  jared@mydemocracy.app
                 </a>
               </p>
               <p>
