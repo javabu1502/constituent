@@ -511,6 +511,8 @@ export function CampaignParticipate({
             coreSubject,
             coreOpening,
             coreAsk,
+            // CWC carries name and address in separate fields: no signature in the text.
+            signature: !cwcDeliverable(o),
           });
         } else {
           msgMap[o.name] = buildFallbackMessage(campaign, o, {
@@ -1383,8 +1385,9 @@ function OfficialSendCard({
   adoptionAsk?: { participating: number; defaultChecked: boolean; onSign: () => void };
 }) {
   const [signChecked, setSignChecked] = useState(adoptionAsk?.defaultChecked ?? false);
+  const [signed, setSigned] = useState(false);
   const send = (status: string) => {
-    if (adoptionAsk && signChecked) adoptionAsk.onSign();
+    if (adoptionAsk && signChecked) { adoptionAsk.onSign(); setSigned(true); }
     return onSend(status);
   };
   const [copied, setCopied] = useState(false);
@@ -1527,6 +1530,7 @@ function OfficialSendCard({
             body={message.body}
             onBodyChange={(body) => onEdit({ body })}
             onCheckedChange={setSignChecked}
+            signed={signed}
           />
         )}
 

@@ -8,6 +8,8 @@ import { enforceDailyQuota, resolveUsageIdentity } from '@/lib/usage-quota';
 import { sanitizeAiJurisdiction } from '@/lib/issue-jurisdiction';
 import { validateCampaignAsk } from '@/lib/envelope';
 import {
+  askAddressesOfficial,
+  openingRepeatsBody,
   auditMessageQuality,
   hasBlockingIssue,
   detectUnsupportedIdentityClaims,
@@ -113,9 +115,9 @@ export async function POST(request: NextRequest) {
 
 Also write "subject": an email subject line in the constituent's own voice — specific to their actual concern, under 80 characters, no official's name. Never generic labels like "A constituent message", "Regarding my concerns", or a bare topic word. Good: "Groceries in our house cost a third more than in 2022". Bad: "A constituent message: Inflation".
 
-Also write "opening": one or two sentences that open the email, before the core — the constituent introducing why they are writing, in their own voice. No official's name, title, chamber, or committee (unknown at this point). Do NOT use stock phrasings like "I am writing to you as your constituent" — make it natural and specific to this person and issue. Vary sentence structure freely.
+Also write "opening": one or two sentences that open the email, before the core — the constituent introducing why they are writing, in their own voice. No official's name, title, chamber, or committee (unknown at this point). Do NOT use stock phrasings like "I am writing to you as your constituent" — make it natural and specific to this person and issue. Vary sentence structure freely. The opening and the body are read back to back: the body must NOT repeat the opening's facts, credentials, or phrasing. If the opening uses the constituent's background or story, the body starts with the case itself.
 
-Also write "ask": the single closing request sentence of the email. In the constituent's voice, matching their position exactly. No greeting, no sign-off, no official's name.
+Also write "ask": the closing request of the email, one sentence, or two when the constituent's goal has two parts, in the constituent's voice and matching their position exactly. The ask is addressed to the ELECTED OFFICIAL who is reading the email, so it asks THEM to act. When the constituent's goal names an agency, department, company, or other third party (for example "Urge HHS to rescind the rule"), the ask must request that the official press that party: "Please urge HHS to rescind the proposed rule and preserve the Head Start standards." Never write the ask as if the reader were the third party ("I urge HHS to..."). Cover every part of the constituent's goal; do not drop the second half. No greeting, no sign-off, no official's name.
 
 Also classify which levels of government have real authority over this issue.
 Weights: 2 = primary authority, 1 = shares authority, 0 = no meaningful
@@ -213,6 +215,20 @@ Draft the core message.`;
           continue;
         }
       }
+      // Frame checks (retry once with a pointed correction; the body itself
+      // is fine, so a second miss just drops the frame field to the pools).
+      const askText = String(out?.ask ?? '').trim();
+      if (attempt === 0 && askText && !askAddressesOfficial(askText)) {
+        correction = `YOUR PREVIOUS "ask" was addressed past the reader ("${askText.slice(0, 120)}"). The reader is the elected official. Rewrite the ask so it asks THEM to act, e.g. "Please urge [the agency] to..." or "Please work with...". Keep every part of the constituent's goal.`;
+        body = '';
+        continue;
+      }
+      const openingText = String(out?.opening ?? '').trim();
+      if (attempt === 0 && openingText && openingRepeatsBody(openingText, body)) {
+        correction = 'YOUR PREVIOUS DRAFT repeated the opening sentence inside the body. The opening and the body are read together: state the constituent\'s background ONCE. Rewrite the body so it starts with the case, not with the same introduction.';
+        body = '';
+        continue;
+      }
       if (!hasBlockingIssue(auditMessageQuality(body, { source: 'ai' }))) break;
       body = '';
     }
@@ -228,14 +244,14 @@ Draft the core message.`;
         : null;
     const rawOpening = deDash(String(out?.opening ?? '').trim());
     const opening =
-      rawOpening.length >= 20 && rawOpening.length <= 400 && !/^dear\b/i.test(rawOpening) && !/i am writing to you as your constituent because your vote/i.test(rawOpening) && detectUnsourcedStats(rawOpening, statSource).length === 0
+      rawOpening.length >= 20 && rawOpening.length <= 400 && !/^dear\b/i.test(rawOpening) && !/i am writing to you as your constituent because your vote/i.test(rawOpening) && detectUnsourcedStats(rawOpening, statSource).length === 0 && !openingRepeatsBody(rawOpening, body)
         ? rawOpening
         : null;
     const rawAsk = deDash(String(out?.ask ?? '').trim());
     // Campaign asks must name the bill and match the direction exactly —
     // anything off falls back to the deterministic closers.
     const ask =
-      rawAsk.length >= 10 && rawAsk.length <= 300 && !/^dear\b/i.test(rawAsk) && detectUnsourcedStats(rawAsk, statSource).length === 0
+      rawAsk.length >= 10 && rawAsk.length <= 400 && !/^dear\b/i.test(rawAsk) && detectUnsourcedStats(rawAsk, statSource).length === 0 && askAddressesOfficial(rawAsk)
         ? campaign?.bill_ref
           ? validateCampaignAsk(rawAsk, campaign.bill_ref, stanceVerb, campaign.stage_goal) ? rawAsk : null
           : rawAsk

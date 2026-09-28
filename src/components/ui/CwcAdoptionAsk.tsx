@@ -18,6 +18,7 @@ export function CwcAdoptionAsk({
   body,
   onBodyChange,
   onCheckedChange,
+  signed,
 }: {
   senatorLastName: string;
   /** Number of Senate offices currently on the CWC list. */
@@ -26,6 +27,8 @@ export function CwcAdoptionAsk({
   body: string;
   onBodyChange: (body: string) => void;
   onCheckedChange: (checked: boolean) => void;
+  /** True once the send action fired with the box checked. */
+  signed?: boolean;
 }) {
   const [checked, setChecked] = useState(defaultChecked);
 
@@ -57,7 +60,9 @@ export function CwcAdoptionAsk({
         </span>
       </label>
       <p className="mt-1 pl-6 text-[11px] text-gray-500 dark:text-gray-400">
-        We share the number of constituents who asked, and their names, with the office. Nothing else.
+        {signed
+          ? 'Your name was added to the request when you sent your message.'
+          : 'Your name is added when you send your message. We share the number of constituents who asked, and their names, with the office. Nothing else.'}
       </p>
     </div>
   );

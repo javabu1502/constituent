@@ -114,8 +114,9 @@ function OfficialCard({ official, message, deliveryInfo, contactMethod, isCallCo
   const [signChecked, setSignChecked] = useState(adoptionAsk?.defaultChecked ?? false);
   // Every email/form/website action: record the adoption signature when the
   // box is checked, then the normal tracking.
+  const [signed, setSigned] = useState(false);
   const send = (status: string) => {
-    if (adoptionAsk && signChecked) adoptionAsk.onSign();
+    if (adoptionAsk && signChecked) { adoptionAsk.onSign(); setSigned(true); }
     return onSend?.(status);
   };
   const [messageCopied, setMessageCopied] = useState(false);
@@ -409,6 +410,7 @@ function OfficialCard({ official, message, deliveryInfo, contactMethod, isCallCo
             body={message.body}
             onBodyChange={adoptionAsk.onBodyChange}
             onCheckedChange={setSignChecked}
+            signed={signed}
           />
         )}
 

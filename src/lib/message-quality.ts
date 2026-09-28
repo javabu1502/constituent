@@ -343,3 +343,26 @@ export function sharesVerbatimRun(template: string, draft: string, minWords = 18
   }
   return false;
 }
+
+
+/**
+ * The closing ask must ask the OFFICIAL to act. A constituent goal like
+ * "Urge HHS to rescind the rule" must become "Please urge HHS to rescind the
+ * rule" in the email, never "I urge HHS to..." addressed to a third party
+ * the official is not (Jared's Head Start letter, 2026-09-28).
+ */
+export function askAddressesOfficial(ask: string): boolean {
+  const a = (ask || '').trim();
+  if (!a) return false;
+  const secondPerson = /\b(you|your|your office|your vote|your support|please)\b/i.test(a);
+  // "I urge HHS to…", "We ask the Department to…", "Congress must…" with no
+  // second person = addressed past the reader.
+  const thirdPartyImperative = /^(i|we)\s+(urge|ask|call on|implore|encourage)\s+(?!you\b)/i.test(a) && !/\b(you|your)\b/i.test(a);
+  return secondPerson && !thirdPartyImperative;
+}
+
+/** The opening line and the body must not restate each other (the same
+ *  credentials sentence twice is the loudest template tell). */
+export function openingRepeatsBody(opening: string, body: string): boolean {
+  return sharesVerbatimRun(opening, body, 8);
+}

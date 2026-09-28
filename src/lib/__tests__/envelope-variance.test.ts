@@ -72,3 +72,14 @@ describe('validateCampaignAsk', () => {
     expect(validateCampaignAsk('Please cosponsor S. 1332.', 'S. 1332', 'support', 'cosponsor')).toBe(true);
   });
 });
+
+
+describe('signature control', () => {
+  it('omits the closing signature block for CWC-bound drafts and keeps it otherwise', () => {
+    const withSig = buildEnvelope('The core case.', rep, { ...baseOpts, senderName: 'Jared Busker', city: 'Reno', stateCode: 'NV', zip: '89506' });
+    expect(withSig.body).toMatch(/Sincerely,\nJared Busker\nReno, NV 89506$/);
+    const noSig = buildEnvelope('The core case.', rep, { ...baseOpts, senderName: 'Jared Busker', city: 'Reno', stateCode: 'NV', zip: '89506', signature: false });
+    expect(noSig.body).not.toMatch(/Sincerely|Jared Busker|Reno, NV/);
+    expect(noSig.body).toMatch(/The core case\./);
+  });
+});

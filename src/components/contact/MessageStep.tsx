@@ -529,6 +529,8 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
               coreSubject: typeof data.subject === 'string' ? data.subject : null,
               coreOpening: typeof data.opening === 'string' ? data.opening : null,
               coreAsk: typeof data.ask === 'string' ? data.ask : null,
+              // CWC carries name and address in separate fields: no signature in the text.
+              signature: !cwcDeliverable(rep),
             });
           }
           dispatch({ type: 'SET_MESSAGES', payload: { ...messages, ...built } });
@@ -554,6 +556,7 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
           city: state.address?.city ?? '',
           stateCode: state.address?.state ?? '',
           zip: state.address?.zip ?? '',
+          signature: !cwcDeliverable(rep),
         });
       }
       dispatch({ type: 'SET_MESSAGES', payload: { ...messages, ...built } });

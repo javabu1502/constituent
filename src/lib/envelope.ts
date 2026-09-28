@@ -194,6 +194,10 @@ export function buildEnvelope(
     /** AI-drafted closing ask in the sender's voice. Campaign asks are only
      * used when validateCampaignAsk passed upstream. */
     coreAsk?: string | null;
+    /** false for messages delivered through CWC: the chambers carry the
+     *  sender's name and address in separate fields and ask that neither
+     *  appear in the text, so the draft ends with the ask. Default true. */
+    signature?: boolean;
   }
 ): OfficialMessage {
   const lastName = official.lastName || official.name.split(' ').pop() || official.name;
@@ -258,6 +262,9 @@ export function buildEnvelope(
   // frame (subject, opener, closer) is ours to scrub.
   return {
     subject: stripDashes(subject),
-    body: `Dear ${sal} ${lastName},\n\n${stripDashes(opener)}\n\n${core}\n\n${stripDashes(closer)}\n\nSincerely,\n${opts.senderName}\n${opts.city}, ${opts.stateCode} ${opts.zip}`,
+    body:
+      opts.signature === false
+        ? `Dear ${sal} ${lastName},\n\n${stripDashes(opener)}\n\n${core}\n\n${stripDashes(closer)}`
+        : `Dear ${sal} ${lastName},\n\n${stripDashes(opener)}\n\n${core}\n\n${stripDashes(closer)}\n\nSincerely,\n${opts.senderName}\n${opts.city}, ${opts.stateCode} ${opts.zip}`,
   };
 }
