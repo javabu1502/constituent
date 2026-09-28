@@ -85,6 +85,29 @@ describe('runComplianceCheck()', () => {
     expect(v.categories.splitAbuse).toBe(true);
   });
 
+  it('holds a state-only message for review even when the model says pass (deterministic layer)', async () => {
+    mockedCallClaude.mockResolvedValue(JSON.stringify({ decision: 'pass', reasons: [], categories: {} }));
+    const v = await runComplianceCheck(baseInput({ message: 'Please vote yes on AB 156 in the Assembly next week.' }));
+    expect(v.decision).toBe('review');
+    expect(v.categories.jurisdiction).toBe(true);
+    expect(v.reasons.join(' ')).toMatch(/state bill/);
+  });
+
+  it("holds for review when the model flags jurisdiction (never 'block' on that ground alone)", async () => {
+    mockedCallClaude.mockResolvedValue(JSON.stringify({ decision: 'pass', reasons: [], categories: { jurisdiction: true } }));
+    const v = await runComplianceCheck(baseInput({ message: 'Our HOA board is being unreasonable about fences.' }));
+    expect(v.decision).toBe('review');
+    expect(v.categories.jurisdiction).toBe(true);
+    expect(v.reasons.length).toBeGreaterThan(0);
+  });
+
+  it('leaves a federal ask with local context alone', async () => {
+    mockedCallClaude.mockResolvedValue(JSON.stringify({ decision: 'pass', reasons: [], categories: {} }));
+    const v = await runComplianceCheck(baseInput({ message: 'Our county lost Head Start slots. Please protect federal Head Start funding.' }));
+    expect(v.decision).toBe('pass');
+    expect(v.categories.jurisdiction).toBe(false);
+  });
+
   it('fails SAFE to review when the model output is unparseable', async () => {
     mockedCallClaude.mockResolvedValue('not json at all, sorry');
     const v = await runComplianceCheck(baseInput());

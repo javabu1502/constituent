@@ -10,6 +10,7 @@
 import { callClaude, extractJSON } from '@/lib/claude';
 import { env } from '@/lib/env';
 import { COMPLIANCE_SYSTEM_PROMPT, PROMPT_VERSION } from './prompt';
+import { assessFederalJurisdiction } from './jurisdiction';
 
 export type ComplianceDecision = 'pass' | 'review' | 'block';
 
@@ -19,6 +20,8 @@ export interface ComplianceCategories {
   spam: boolean;
   gibberish: boolean;
   splitAbuse: boolean;
+  /** Message is exclusively a state/local matter — outside Congress's purview. */
+  jurisdiction: boolean;
   other: boolean;
 }
 
@@ -61,6 +64,7 @@ const EMPTY_CATEGORIES: ComplianceCategories = {
   spam: false,
   gibberish: false,
   splitAbuse: false,
+  jurisdiction: false,
   other: false,
 };
 
@@ -125,7 +129,31 @@ function coerceCategories(raw: unknown): ComplianceCategories {
     spam: r.spam === true,
     gibberish: r.gibberish === true,
     splitAbuse: r.splitAbuse === true,
+    jurisdiction: r.jurisdiction === true,
     other: r.other === true,
+  };
+}
+
+/**
+ * Topic-jurisdiction ENFORCEMENT (not guidance): a message that is only about
+ * a state/local matter must never reach a congressional office unattended.
+ * Combines the deterministic rules with the model's `jurisdiction` flag; any
+ * hit forces at least 'review' (held for a human). Never escalates to block.
+ */
+export function enforceJurisdiction(input: ComplianceInput, verdict: ComplianceVerdict): ComplianceVerdict {
+  const det = assessFederalJurisdiction({ message: input.message, subject: input.topic });
+  const flagged = det.outsideFederal || verdict.categories.jurisdiction;
+  if (!flagged) return verdict;
+  const reasons = [...verdict.reasons];
+  for (const r of det.reasons) if (!reasons.includes(r)) reasons.push(r);
+  if (verdict.categories.jurisdiction && det.reasons.length === 0) {
+    reasons.push('Screener judged the request to be a state or local matter outside congressional jurisdiction.');
+  }
+  return {
+    ...verdict,
+    decision: verdict.decision === 'block' ? 'block' : 'review',
+    reasons,
+    categories: { ...verdict.categories, jurisdiction: true },
   };
 }
 
@@ -159,13 +187,13 @@ export async function runComplianceCheck(input: ComplianceInput): Promise<Compli
       ? (parsed.reasons as unknown[]).map((r) => String(r)).slice(0, 20)
       : [];
 
-    return {
+    return enforceJurisdiction(input, {
       decision: normalized,
       reasons,
       categories: coerceCategories(parsed.categories),
       model,
       promptVersion: PROMPT_VERSION,
-    };
+    });
   } catch (err) {
     console.error('[compliance] Screening failed, defaulting to review:', err);
     return {

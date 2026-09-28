@@ -76,7 +76,7 @@ describe('cwc send queue', () => {
     verdict: {
       decision,
       reasons: [],
-      categories: { fakeIdentity: false, threat: false, spam: false, gibberish: false, splitAbuse: false, other: false },
+      categories: { fakeIdentity: false, threat: false, spam: false, gibberish: false, splitAbuse: false, jurisdiction: false, other: false },
       model: 'test-model',
       promptVersion: 'compliance-v1',
     },
