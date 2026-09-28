@@ -719,7 +719,7 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
             ))}
           </ul>
           <p className="text-xs text-amber-700 dark:text-amber-400 mt-2">
-            These are suggestions, not rules — edit above, or continue as-is.
+            These are suggestions, not rules. Edit the message below, or continue as is.
           </p>
         </div>
       )}
@@ -984,14 +984,6 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
         </div>
       )}
 
-      {/* Bounce notice: only when a federal office still goes by email */}
-      {contactMethod === 'email' && selectedReps.some((o) => o.level === 'federal' && !cwcDeliverable(o)) && (
-        <div className="mb-4 p-3 bg-yellow-50 dark:bg-yellow-900/30 border border-yellow-200 dark:border-yellow-700 rounded-xl">
-          <p className="text-xs text-yellow-700 dark:text-yellow-300">
-            Note: Some congressional emails may bounce. If that happens, use the official&apos;s contact form on their website.
-          </p>
-        </div>
-      )}
 
       {/* Navigation between officials */}
       {selectedReps.length > 1 && (

@@ -359,6 +359,11 @@ function OfficialCard({ official, message, deliveryInfo, contactMethod, isCallCo
             {!deliveryInfo.captchaBlocked && deliveryInfo.note && (
               <p className="text-xs text-gray-500 dark:text-gray-400">{deliveryInfo.note}</p>
             )}
+            {official.level === 'federal' && (
+              <p className="text-xs text-gray-500 dark:text-gray-400">
+                Some congressional emails bounce. If that happens, use the official&apos;s contact form on their website.
+              </p>
+            )}
           </>
         ) : deliveryInfo.method === 'contact_form' && deliveryInfo.contactFormUrl ? (
           // Contact form - copy message then open form
@@ -744,14 +749,6 @@ export function SendStep({ state, dispatch, onBack }: SendStepProps) {
         </div>
       )}
 
-      {/* Note about bounces: only for federal offices that still go by email */}
-      {contactMethod === 'email' && selectedReps.some((o) => o.level === 'federal' && !cwcDeliverable(o) && deliveryInfoMap.get(o.id)?.method === 'staffer_email') && (
-        <div className="mb-6 p-3 bg-yellow-50 dark:bg-yellow-900/30 border border-yellow-200 dark:border-yellow-700 rounded-xl">
-          <p className="text-xs text-yellow-700 dark:text-yellow-300">
-            Note: Some congressional emails may bounce. If that happens, use the official&apos;s contact form on their website.
-          </p>
-        </div>
-      )}
 
       <p className="text-xs text-gray-500 dark:text-gray-400 text-center mb-4">
         If you are signed in, this message is saved to your history. See our{' '}
