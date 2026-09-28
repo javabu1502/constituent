@@ -26,7 +26,16 @@ const LEVEL_GROUPS: { level: string; label: string }[] = [
   { level: 'local', label: 'Local' },
 ];
 
-function RecipientChips({ reps }: { reps: ContactState['selectedReps'] }) {
+function RecipientChips({
+  reps,
+  available,
+  onAdd,
+}: {
+  reps: ContactState['selectedReps'];
+  /** Officials the router left out (never local); each renders as an add chip. */
+  available?: ContactState['selectedReps'];
+  onAdd?: (rep: ContactState['selectedReps'][number]) => void;
+}) {
   return (
     <div className="space-y-1.5">
       {LEVEL_GROUPS.map(({ level, label }) => {
@@ -46,6 +55,22 @@ function RecipientChips({ reps }: { reps: ContactState['selectedReps'] }) {
           </div>
         );
       })}
+      {available && available.length > 0 && onAdd && (
+        <div className="pt-1.5 mt-1.5 border-t border-gray-200 dark:border-gray-600 flex flex-wrap items-center justify-center gap-1.5">
+          <span className="text-xs text-gray-500 dark:text-gray-400">Also write to:</span>
+          {available.map((rep) => (
+            <button
+              key={rep.id}
+              type="button"
+              onClick={() => onAdd(rep)}
+              className="inline-flex items-center gap-1 px-2 py-0.5 text-xs rounded-full border border-dashed border-purple-300 dark:border-purple-600 text-purple-700 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/20"
+            >
+              <span aria-hidden="true">+</span>
+              {rep.name}
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
@@ -655,7 +680,13 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
           <p className="text-xs text-gray-600 dark:text-gray-300 mb-2">
             From your address and your issue, this goes to the {selectedReps.length === 1 ? 'official' : `${selectedReps.length} officials`} who can actually act on it:
           </p>
-          <RecipientChips reps={selectedReps} />
+          <RecipientChips
+            reps={selectedReps}
+            available={state.officials.filter(
+              (o) => o.level !== 'local' && !selectedReps.some((s) => s.id === o.id),
+            )}
+            onAdd={(rep) => dispatch({ type: 'TOGGLE_REP', payload: rep })}
+          />
         </div>
       )}
 

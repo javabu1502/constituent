@@ -6,7 +6,7 @@ import { trackEvent } from '@/lib/analytics';
 import type { ContactState, ContactAction } from './ContactFlow';
 import type { Official } from '@/lib/types';
 import { CWC_ENABLED } from '@/lib/cwc-prefixes';
-import { useCwcActiveOffices, isCwcDeliverable, CWC_SUBMITTED_STATUS } from '@/lib/cwc-client';
+import { useCwcActiveOffices, isCwcDeliverable, CWC_SUBMITTED_STATUS, CWC_COPY, describeCwcOutcome, type SendOutcome, type CwcButtonState } from '@/lib/cwc-client';
 import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 import { formatPhone } from '@/lib/utils';
@@ -99,7 +99,7 @@ interface OfficialCardProps {
   contactMethod: 'email' | 'phone';
   isCallComplete?: boolean;
   onMarkCallComplete?: () => void;
-  onSend?: (deliveryStatus: string) => void;
+  onSend?: (deliveryStatus: string) => Promise<SendOutcome | void> | void;
   /** Office accepts CWC delivery: show ONE "Send to Congress" action and no
    *  email/copy actions (the message must not reach the office twice). */
   cwcDelivery?: boolean;
@@ -107,7 +107,10 @@ interface OfficialCardProps {
 
 function OfficialCard({ official, message, deliveryInfo, contactMethod, isCallComplete, onMarkCallComplete, onSend, cwcDelivery }: OfficialCardProps) {
   const [messageCopied, setMessageCopied] = useState(false);
-  const [cwcSent, setCwcSent] = useState(false);
+  const [cwcState, setCwcState] = useState<CwcButtonState>('idle');
+  const [cwcNote, setCwcNote] = useState<string>(CWC_COPY.idle);
+  // After a failed hand-off the card falls back to the email/form actions.
+  const showCwc = cwcDelivery && cwcState !== 'failed';
   const [emailCopied, setEmailCopied] = useState(false);
   const [phoneCopied, setPhoneCopied] = useState(false);
   const partyColors = getPartyColors(official.party);
@@ -285,27 +288,37 @@ function OfficialCard({ official, message, deliveryInfo, contactMethod, isCallCo
         </div>
       )}
 
+      {cwcDelivery && cwcState === 'failed' && (
+        <div className="mb-3 p-2 bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-700 rounded-lg flex items-start gap-2">
+          <WarningIcon className="w-4 h-4 text-amber-600 dark:text-amber-400 flex-shrink-0 mt-0.5" />
+          <p className="text-xs text-amber-700 dark:text-amber-300">{cwcNote}</p>
+        </div>
+      )}
+
       {/* Primary action based on delivery method */}
       <div className="space-y-2">
-        {cwcDelivery ? (
+        {showCwc ? (
           // Office participates in Communicating With Congress: one action,
           // delivered by us. No email app, no copy: sending it twice breaks
           // the office's grouping and counts the constituent twice.
           <>
             <button
               type="button"
-              disabled={cwcSent}
-              onClick={() => { setCwcSent(true); onSend?.(CWC_SUBMITTED_STATUS); }}
-              className={`flex items-center justify-center gap-2 w-full py-2.5 rounded-lg text-sm font-medium transition-colors ${cwcSent ? 'bg-green-600 text-white cursor-default' : 'bg-purple-600 hover:bg-purple-700 text-white'}`}
+              disabled={cwcState !== 'idle'}
+              onClick={async () => {
+                setCwcState('sending');
+                setCwcNote(CWC_COPY.sending);
+                const outcome = await onSend?.(CWC_SUBMITTED_STATUS);
+                const d = describeCwcOutcome(outcome ?? undefined);
+                setCwcState(d.state);
+                setCwcNote(d.note);
+              }}
+              className={`flex items-center justify-center gap-2 w-full py-2.5 rounded-lg text-sm font-medium transition-colors ${cwcState === 'sent' ? 'bg-green-600 text-white cursor-default' : cwcState === 'sending' ? 'bg-purple-400 text-white cursor-wait' : 'bg-purple-600 hover:bg-purple-700 text-white'}`}
             >
-              {cwcSent ? <CheckIcon className="w-4 h-4" /> : <EmailIcon className="w-4 h-4" />}
-              {cwcSent ? 'Sent to Congress' : 'Send to Congress'}
+              {cwcState === 'sent' ? <CheckIcon className="w-4 h-4" /> : <EmailIcon className="w-4 h-4" />}
+              {cwcState === 'sent' ? 'Sent to Congress' : cwcState === 'sending' ? 'Sending' : 'Send to Congress'}
             </button>
-            <p className="text-[10px] text-gray-400 dark:text-gray-500 text-center">
-              {cwcSent
-                ? 'Delivered to the office through Communicating with Congress, the message system run by the House and Senate.'
-                : 'Goes straight to the office through Communicating with Congress, the message system run by the House and Senate. No email app needed.'}
-            </p>
+            <p className="text-xs text-gray-500 dark:text-gray-400 text-center">{cwcNote}</p>
           </>
         ) : deliveryInfo.method === 'staffer_email' && deliveryInfo.email ? (
           // Staffer email - open in email client as primary action
@@ -376,7 +389,7 @@ function OfficialCard({ official, message, deliveryInfo, contactMethod, isCallCo
         )}
 
         {/* Secondary actions row (none under CWC delivery) */}
-        {!cwcDelivery && <div className="flex flex-col sm:flex-row gap-2">
+        {!showCwc && <div className="flex flex-col sm:flex-row gap-2">
           {deliveryInfo.method === 'staffer_email' ? (
             <>
               {/* Copy Email Address */}
@@ -506,13 +519,14 @@ export function SendStep({ state, dispatch, onBack }: SendStepProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [deliveryInfoMap, cwcOffices, state.userPrefix, state.userEmail, state.address?.street, state.address?.zip, contactMethod]);
 
-  const trackSend = async (official: Official, deliveryStatus: string) => {
+  const trackSend = async (official: Official, deliveryStatus: string): Promise<SendOutcome> => {
     const msg = messages[official.name];
     const deliveryInfo = deliveryInfoMap.get(official.id);
-    if (!msg || !deliveryInfo) return;
+    if (!msg || !deliveryInfo) return { ok: false };
 
     const turnstileToken = await getToken();
-    fetch('/api/track-send', {
+    try {
+    const res = await fetch('/api/track-send', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -561,24 +575,24 @@ export function SendStep({ state, dispatch, onBack }: SendStepProps) {
               }
             : undefined,
       }),
-    })
-      .then(async (res) => {
-        if (!res.ok) {
-          console.error('[track-send] Failed:', res.status, await res.text());
-          return null;
-        }
-        return res.json();
-      })
-      .then((data) => {
-        if (data?.shareId) {
-          dispatch({ type: 'SET_SHARE_ID', payload: data.shareId });
-        }
-        trackEvent('message_sent', {
-          method: contactMethod === 'phone' ? 'phone' : 'email',
-          issue: state.issueCategory || 'unknown',
-        });
-      })
-      .catch((err) => console.error('[track-send] Failed:', err));
+    });
+      const data = await res.json().catch(() => null);
+      if (!res.ok) {
+        console.error('[track-send] Failed:', res.status, data);
+        return { ok: false, error: typeof data?.error === 'string' ? data.error : undefined };
+      }
+      if (data?.shareId) {
+        dispatch({ type: 'SET_SHARE_ID', payload: data.shareId });
+      }
+      trackEvent('message_sent', {
+        method: deliveryStatus === CWC_SUBMITTED_STATUS ? 'cwc' : contactMethod === 'phone' ? 'phone' : 'email',
+        issue: state.issueCategory || 'unknown',
+      });
+      return { ok: true, cwc: data?.cwc };
+    } catch (err) {
+      console.error('[track-send] Failed:', err);
+      return { ok: false };
+    }
   };
 
   const handleDone = () => {

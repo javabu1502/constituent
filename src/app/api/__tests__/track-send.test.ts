@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { NextRequest } from 'next/server';
 
 const mockInsert = vi.fn();
@@ -21,6 +21,11 @@ vi.mock('@/lib/supabase/server', () => ({
 vi.mock('@/lib/usage-quota', () => ({
   checkLegislatorCooldown: vi.fn(async () => ({ allowed: true })),
   resolveUsageIdentity: vi.fn(async () => ({ userId: null, ipHash: 'test-hash' })),
+}));
+
+const mockEnqueue = vi.fn();
+vi.mock('@/lib/cwc', () => ({
+  enqueueCwcDeliveries: (...args: unknown[]) => mockEnqueue(...args),
 }));
 
 vi.mock('@/lib/turnstile', () => ({
@@ -116,6 +121,67 @@ describe('POST /api/track-send', () => {
       });
       expect((await POST(req)).status, delivery_method).toBe(200);
     }
+  });
+
+  describe('CWC hand-off outcome (flag on)', () => {
+    const cwcBody = {
+      ...validBody,
+      delivery_method: 'cwc',
+      delivery_status: 'cwc_submitted',
+      cwc: { prefix: 'Mr.', street: '1 Main St', zip: '95814', email: 'john@example.com', subject: 'Please act on climate', senate_class: 1 },
+    };
+    const post = async (body: unknown, ip: string) => {
+      const { POST } = await import('../track-send/route');
+      const req = new NextRequest('http://localhost/api/track-send', {
+        method: 'POST',
+        body: JSON.stringify(body),
+        headers: { 'Content-Type': 'application/json', 'x-forwarded-for': ip },
+      });
+      const res = await POST(req);
+      return { status: res.status, data: await res.json() };
+    };
+    beforeEach(() => {
+      process.env.CWC_DELIVERY_ENABLED = 'true';
+      mockEnqueue.mockReset();
+    });
+    afterEach(() => {
+      delete process.env.CWC_DELIVERY_ENABLED;
+    });
+
+    it('reports queued when the content gate passes and the row is enqueued', async () => {
+      mockEnqueue.mockResolvedValue({ enqueued: 1, held: 0, blockedKeys: [] });
+      const { status, data } = await post(cwcBody, '10.8.0.1');
+      expect(status).toBe(200);
+      expect(mockEnqueue).toHaveBeenCalledTimes(1);
+      expect(data.cwc).toEqual({ status: 'queued' });
+    });
+
+    it('reports held / blocked from the content gate', async () => {
+      mockEnqueue.mockResolvedValueOnce({ enqueued: 0, held: 1, blockedKeys: [] });
+      expect((await post(cwcBody, '10.8.0.2')).data.cwc).toEqual({ status: 'held' });
+      mockEnqueue.mockResolvedValueOnce({ enqueued: 0, held: 0, blockedKeys: ['k'] });
+      expect((await post(cwcBody, '10.8.0.3')).data.cwc).toEqual({ status: 'blocked' });
+    });
+
+    it('reports skipped with the reason when the payload cannot be built (single-token name)', async () => {
+      const { data } = await post({ ...cwcBody, advocate_name: 'Jared' }, '10.8.0.4');
+      expect(mockEnqueue).not.toHaveBeenCalled();
+      expect(data.cwc.status).toBe('skipped');
+      expect(data.cwc.reason).toMatch(/last name/);
+    });
+
+    it('reports error when the enqueue throws, and still logs the message', async () => {
+      mockEnqueue.mockRejectedValue(new Error('db down'));
+      const { status, data } = await post(cwcBody, '10.8.0.5');
+      expect(status).toBe(200);
+      expect(data.cwc).toEqual({ status: 'error' });
+    });
+
+    it('never enqueues on an email/copy click even with a payload', async () => {
+      const { data } = await post({ ...cwcBody, delivery_method: 'email', delivery_status: 'email_opened' }, '10.8.0.6');
+      expect(mockEnqueue).not.toHaveBeenCalled();
+      expect(data.cwc).toBeUndefined();
+    });
   });
 
   it('accepts the cwc_submitted status with a cwc payload (flag off → logged, nothing enqueued)', async () => {

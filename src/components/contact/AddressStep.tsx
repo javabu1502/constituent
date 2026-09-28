@@ -2,7 +2,7 @@
 
 import { useState, useCallback } from 'react';
 import type { ContactState, ContactAction } from './ContactFlow';
-import { getJurisdiction, selectLevels, type GovLevel } from '@/lib/issue-jurisdiction';
+import { chooseRecipientLevels, type GovLevel } from '@/lib/issue-jurisdiction';
 import type { Official } from '@/lib/types';
 import { Button } from '@/components/ui/Button';
 import { AddressAutocomplete, type ParsedAddress } from '@/components/ui/AddressAutocomplete';
@@ -68,10 +68,9 @@ export function AddressStep({ state, dispatch }: AddressStepProps) {
       // is context, not a mailing list; the old any-weight policy put an
       // open-borders message in a state senator's inbox. The personal story
       // is included so bill refs and casework phrasing inside it count.
-      const guidance = getJurisdiction(
-        `${state.issue || ''} ${state.issueCategory || ''} ${state.ask || ''} ${state.personalWhy || ''}`
+      const levels = new Set(
+        chooseRecipientLevels({ issue: state.issue, issueCategory: state.issueCategory, ask: state.ask, personalWhy: state.personalWhy }),
       );
-      const levels = new Set(selectLevels(guidance));
       const all = data.officials as Official[];
       const relevant = all.filter((o) => levels.has((o.level as GovLevel) ?? 'federal'));
       // Fallback ladder: jurisdiction match -> non-local officials -> everyone.

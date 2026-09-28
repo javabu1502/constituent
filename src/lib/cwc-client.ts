@@ -66,3 +66,36 @@ export function isCwcDeliverable(
 
 /** The track-send delivery_status that means "delivered through CWC". */
 export const CWC_SUBMITTED_STATUS = 'cwc_submitted';
+
+/** What a send click learned from /api/track-send. */
+export interface SendOutcome {
+  ok: boolean;
+  /** Server-provided error text (cooldown, validation), shown to the user. */
+  error?: string;
+  cwc?: { status: 'queued' | 'held' | 'blocked' | 'skipped' | 'error'; reason?: string };
+}
+
+export type CwcButtonState = 'idle' | 'sending' | 'sent' | 'failed';
+
+/** Copy for the CWC card after a send attempt. Flat sentences, no em dashes. */
+export const CWC_COPY = {
+  idle: 'Goes straight to the office through Communicating with Congress, the message system run by the House and Senate. No email app needed.',
+  sending: 'Handing your message to the congressional delivery system.',
+  sent: 'Received by the congressional delivery system. Delivery usually completes within minutes and pauses overnight during House and Senate maintenance windows.',
+  blocked: 'This message could not be accepted for delivery to Congress.',
+  fallbackPrefix: 'We could not hand this message to the congressional delivery system.',
+} as const;
+
+/** Turn a send outcome into the card state + note the constituent sees. */
+export function describeCwcOutcome(outcome: SendOutcome | void): { state: CwcButtonState; note: string } {
+  if (!outcome) return { state: 'failed', note: `${CWC_COPY.fallbackPrefix} Use the email option below.` };
+  if (!outcome.ok) return { state: 'failed', note: outcome.error ? outcome.error : `${CWC_COPY.fallbackPrefix} Use the email option below.` };
+  const status = outcome.cwc?.status;
+  if (status === 'queued' || status === 'held') return { state: 'sent', note: CWC_COPY.sent };
+  if (status === 'blocked') return { state: 'failed', note: CWC_COPY.blocked };
+  const reason = outcome.cwc?.reason ?? '';
+  if (/no last name/i.test(reason)) {
+    return { state: 'failed', note: 'Congressional offices require a first and last name. Go back, add your last name, and try again. Or use the email option below.' };
+  }
+  return { state: 'failed', note: `${CWC_COPY.fallbackPrefix} Use the email option below.` };
+}

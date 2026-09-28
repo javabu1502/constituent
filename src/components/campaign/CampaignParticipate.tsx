@@ -20,7 +20,7 @@ import { useTurnstile } from '@/components/ui/Turnstile';
 import { SupportNudge } from '@/components/ui/SupportNudge';
 import { SocialShare } from '@/components/ui/SocialShare';
 import { CWC_PREFIXES, CWC_ENABLED } from '@/lib/cwc-prefixes';
-import { useCwcActiveOffices, isCwcDeliverable, CWC_SUBMITTED_STATUS } from '@/lib/cwc-client';
+import { useCwcActiveOffices, isCwcDeliverable, CWC_SUBMITTED_STATUS, CWC_COPY, describeCwcOutcome, type SendOutcome, type CwcButtonState } from '@/lib/cwc-client';
 
 type Step = 'stance' | 'compose' | 'form' | 'loading' | 'review' | 'done' | 'noTarget' | 'wrongState';
 type Stance = 'support' | 'oppose' | 'undecided';
@@ -599,15 +599,18 @@ export function CampaignParticipate({
   };
 
   // Track send for a single official
-  const trackSend = async (official: Official, deliveryStatus: string) => {
+  const trackSend = async (official: Official, deliveryStatus: string): Promise<SendOutcome> => {
     const msg = messages[official.name];
-    if (!msg) return;
+    if (!msg) return { ok: false };
 
+    const isCwc = deliveryStatus === CWC_SUBMITTED_STATUS;
     setSentCount((c) => c + 1);
     fireFunnel('participate_send_clicked');
     const turnstileToken = await getToken();
 
-    fetch('/api/track-send', {
+    let outcome: SendOutcome = { ok: false };
+    try {
+    const res = await fetch('/api/track-send', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -646,17 +649,30 @@ export function CampaignParticipate({
               }
             : undefined,
       }),
-    })
-      .then(async (res) => {
-        if (!res.ok) {
-          console.error('[track-send] Failed:', res.status, await res.text());
-        }
-      })
-      .catch((err) => console.error('[track-send] Failed:', err));
+    });
+      const data = await res.json().catch(() => null);
+      if (!res.ok) {
+        console.error('[track-send] Failed:', res.status, data);
+        outcome = { ok: false, error: typeof data?.error === 'string' ? data.error : undefined };
+      } else {
+        outcome = { ok: true, cwc: data?.cwc };
+      }
+    } catch (err) {
+      console.error('[track-send] Failed:', err);
+    }
+
+    // A CWC hand-off that failed is NOT a send: give the count back and let
+    // the card fall back to the email path. (An email-app open counts as
+    // sent regardless of tracking, so those paths record the engagement.)
+    if (isCwc && !(outcome.ok && (outcome.cwc?.status === 'queued' || outcome.cwc?.status === 'held'))) {
+      setSentCount((c) => Math.max(0, c - 1));
+      return outcome;
+    }
 
     // Opened-into-mail counts as sent: record this official's engagement
     // now, while the user (and the Turnstile widget) are on the review step.
     void recordEngagement();
+    return outcome;
   };
 
   // Complete participation
@@ -1319,14 +1335,17 @@ function OfficialSendCard({
   message: OfficialMessage;
   deliveryInfo: DeliveryInfo;
   mailtoLink: string | null;
-  onSend: (status: string) => void;
+  onSend: (status: string) => Promise<SendOutcome | void> | void;
   onEdit: (patch: Partial<OfficialMessage>) => void;
   startOpen: boolean;
   /** Office accepts CWC delivery: ONE "Send to Congress" action, no email/copy. */
   cwcDelivery?: boolean;
 }) {
   const [copied, setCopied] = useState(false);
-  const [cwcSent, setCwcSent] = useState(false);
+  const [cwcState, setCwcState] = useState<CwcButtonState>('idle');
+  const [cwcNote, setCwcNote] = useState<string>(CWC_COPY.idle);
+  // After a failed hand-off the card falls back to the email/form actions.
+  const showCwc = cwcDelivery && cwcState !== 'failed';
   // Starter drafts open ready to write; AI drafts start collapsed. Track
   // open state ourselves so re-renders from typing don't fight the toggle.
   const [editOpen, setEditOpen] = useState(startOpen);
@@ -1360,31 +1379,38 @@ function OfficialSendCard({
         <p className="text-sm text-gray-600 dark:text-gray-400">{official.title}</p>
       </div>
 
+      {cwcDelivery && cwcState === 'failed' && (
+        <p className="mb-3 p-2 text-xs rounded-lg bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-700 text-amber-700 dark:text-amber-300">{cwcNote}</p>
+      )}
+
       {/* Actions */}
       <div className="space-y-2">
-        {cwcDelivery ? (
+        {showCwc ? (
           // Office participates in Communicating With Congress: one action,
           // delivered by us. No email app, no copy: sending it twice breaks
           // the office's grouping and counts the constituent twice.
           <>
             <button
               type="button"
-              disabled={cwcSent}
-              onClick={() => { setCwcSent(true); onSend(CWC_SUBMITTED_STATUS); }}
-              className={`flex items-center justify-center gap-2 w-full py-2.5 rounded-lg text-sm font-medium transition-colors ${cwcSent ? 'bg-green-600 text-white cursor-default' : 'bg-purple-600 hover:bg-purple-700 text-white'}`}
+              disabled={cwcState !== 'idle'}
+              onClick={async () => {
+                setCwcState('sending');
+                setCwcNote(CWC_COPY.sending);
+                const outcome = await onSend(CWC_SUBMITTED_STATUS);
+                const d = describeCwcOutcome(outcome ?? undefined);
+                setCwcState(d.state);
+                setCwcNote(d.note);
+              }}
+              className={`flex items-center justify-center gap-2 w-full py-2.5 rounded-lg text-sm font-medium transition-colors ${cwcState === 'sent' ? 'bg-green-600 text-white cursor-default' : cwcState === 'sending' ? 'bg-purple-400 text-white cursor-wait' : 'bg-purple-600 hover:bg-purple-700 text-white'}`}
             >
-              {cwcSent ? (
+              {cwcState === 'sent' ? (
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
               ) : (
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
               )}
-              {cwcSent ? 'Sent to Congress' : 'Send to Congress'}
+              {cwcState === 'sent' ? 'Sent to Congress' : cwcState === 'sending' ? 'Sending' : 'Send to Congress'}
             </button>
-            <p className="text-xs text-gray-500 dark:text-gray-400">
-              {cwcSent
-                ? 'Delivered to the office through Communicating with Congress, the message system run by the House and Senate.'
-                : 'Goes straight to the office through Communicating with Congress, the message system run by the House and Senate. No email app needed.'}
-            </p>
+            <p className="text-xs text-gray-500 dark:text-gray-400">{cwcNote}</p>
           </>
         ) : deliveryInfo.method === 'staffer_email' && mailtoLink ? (
           <>
@@ -1447,7 +1473,7 @@ function OfficialSendCard({
           </span>
         )}
 
-        {!cwcDelivery && <button
+        {!showCwc && <button
           onClick={copyMessage}
           className="flex items-center justify-center gap-1.5 w-full py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg text-xs font-medium transition-colors"
         >

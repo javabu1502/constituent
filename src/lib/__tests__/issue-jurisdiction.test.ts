@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { getJurisdiction, matchLabelForLevel, type GovLevel } from '../issue-jurisdiction';
+import { getJurisdiction, matchLabelForLevel, chooseRecipientLevels, type GovLevel } from '../issue-jurisdiction';
 
 /** Which levels get auto-selected (best/also) for a given issue text. */
 function routedLevels(text: string): GovLevel[] {
@@ -8,6 +8,28 @@ function routedLevels(text: string): GovLevel[] {
     (l) => matchLabelForLevel(g, l) !== 'low'
   );
 }
+
+describe('federal agencies, programs, and rulemaking route to Congress (audit 2026-09-28)', () => {
+  it('an HHS proposed rule on Head Start is federal only', () => {
+    expect(routedLevels('Urge HHS to rescind the proposed rule on the Head Start Program Performance Standards')).toEqual(['federal']);
+  });
+  it('a story detail about school buses cannot redirect a federal ask to the state DOT', () => {
+    expect(
+      chooseRecipientLevels({
+        issue: 'Families',
+        issueCategory: 'Families',
+        ask: 'Urge HHS to rescind the proposed rule that would rescind the Head Start Program Performance Standards (Docket ACF-2026-0595)',
+        personalWhy: 'The standards on group sizes, ratios, background checks and transportation safety are why parents trust Head Start.',
+      }),
+    ).toEqual(['federal']);
+  });
+  it('the story still decides when the ask alone matches nothing', () => {
+    expect(chooseRecipientLevels({ issue: 'Families', ask: 'Please help', personalWhy: 'The state legislature must fix child support enforcement.' })).toEqual(['state']);
+  });
+  it('a bare "Doe" surname never trips an agency acronym', () => {
+    expect(routedLevels('Jane Doe wants better child care options')).not.toEqual(['federal']);
+  });
+});
 
 describe('issue jurisdiction routing (auto-selection is load-bearing now)', () => {
   it('Social Security never routes to state or local', () => {

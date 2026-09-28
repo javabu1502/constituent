@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { after } from 'next/server';
 import { createAdminClient } from '@/lib/supabase';
 import { createClient } from '@/lib/supabase/server';
 import { trackSendSchema, parseBody } from '@/lib/schemas';
@@ -12,6 +11,11 @@ import { buildCwcQueueItem, shouldEnqueueCwc, type CampaignBillContext } from '@
 // The CWC enqueue path (after()) reaches congressional endpoints through the
 // undici static-IP proxy — Node runtime required.
 export const runtime = 'nodejs';
+// The CWC enqueue runs an LLM content screen before responding (~2-5s).
+export const maxDuration = 60;
+
+/** What the client is told about CWC delivery for this send. */
+export type CwcSendStatus = 'queued' | 'held' | 'blocked' | 'skipped' | 'error';
 
 /**
  * POST /api/track-send
@@ -111,38 +115,43 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // CWC delivery: enqueue AFTER the response is sent (the content gate runs
-    // an LLM screen; the client should not wait on it). Gated on: server flag
-    // + client payload + federal office + the constituent having pressed
-    // "Send to Congress" (status cwc_submitted) — never on email/copy clicks.
+    // CWC delivery: enqueue BEFORE responding so the constituent learns the
+    // real outcome (the button used to turn green regardless; audit 09-28).
+    // Gated on: server flag + client payload + federal office + the
+    // constituent having pressed "Send to Congress" (status cwc_submitted).
+    let cwc: { status: CwcSendStatus; reason?: string } | undefined;
     if (shouldEnqueueCwc(body) && body.cwc && data?.id) {
       const cwcPayload = body.cwc;
       const messageId = data.id as string;
-      after(async () => {
-        try {
-          let campaign: CampaignBillContext | null = null;
-          if (body.campaign_id) {
-            const { data: c } = await supabase
-              .from('campaigns')
-              .select('slug, bill_level, bill_congress, bill_type, bill_number, direction, headline')
-              .eq('id', body.campaign_id)
-              .single();
-            campaign = (c as CampaignBillContext | null) ?? null;
-          }
-          const built = buildCwcQueueItem({ body, cwc: cwcPayload, campaign, messageId });
-          if (!built.ok) {
-            console.log(`[track-send] cwc skip (${messageId}): ${built.skip}`);
-            return;
-          }
+      try {
+        let campaign: CampaignBillContext | null = null;
+        if (body.campaign_id) {
+          const { data: c } = await supabase
+            .from('campaigns')
+            .select('slug, bill_level, bill_congress, bill_type, bill_number, direction, headline')
+            .eq('id', body.campaign_id)
+            .single();
+          campaign = (c as CampaignBillContext | null) ?? null;
+        }
+        const built = buildCwcQueueItem({ body, cwc: cwcPayload, campaign, messageId });
+        if (!built.ok) {
+          console.log(`[track-send] cwc skip (${messageId}): ${built.skip}`);
+          cwc = { status: 'skipped', reason: built.skip };
+        } else {
           const result = await enqueueCwcDeliveries([built.item], 'production');
           console.log(`[track-send] cwc enqueue (${messageId}):`, JSON.stringify(result));
-        } catch (e) {
-          console.error(`[track-send] cwc enqueue failed (${messageId}):`, (e as Error).message);
+          cwc =
+            result.blockedKeys.length > 0 ? { status: 'blocked' }
+            : result.held > 0 ? { status: 'held' }
+            : { status: 'queued' };
         }
-      });
+      } catch (e) {
+        console.error(`[track-send] cwc enqueue failed (${messageId}):`, (e as Error).message);
+        cwc = { status: 'error' };
+      }
     }
 
-    return NextResponse.json({ success: true, shareId: data?.id });
+    return NextResponse.json({ success: true, shareId: data?.id, ...(cwc ? { cwc } : {}) });
   } catch (err) {
     console.error('[track-send] Unexpected error:', err);
     return NextResponse.json(

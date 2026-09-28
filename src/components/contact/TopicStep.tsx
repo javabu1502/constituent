@@ -411,9 +411,11 @@ export function TopicStep({ state, dispatch, onBack }: TopicStepProps) {
     }
   };
 
-  // Congressional delivery needs a title + email; only ask when a federal
-  // official is selected and the CWC rollout flag is on.
-  const cwcRequired = CWC_ENABLED && selectedReps.some((r) => r.level === 'federal');
+  // Congressional delivery needs a title + email. Every US address has
+  // federal officials and this step runs BEFORE the address step, so the
+  // rule is simply: CWC on + email path. (Gating on selectedReps left the
+  // email "(optional)" for everyone and made CWC unreachable, audit 09-28.)
+  const cwcRequired = CWC_ENABLED && contactMethod === 'email';
 
   const handleContinue = () => {
     if (!userName.trim()) {
@@ -548,21 +550,23 @@ export function TopicStep({ state, dispatch, onBack }: TopicStepProps) {
         </div>
       )}
 
-      {/* Header showing selected reps */}
-      <div className="mb-6">
-        <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
-          Writing to ({selectedReps.length})
-        </h4>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-          {selectedReps.map(rep => (
-            <OfficialBadge key={rep.id} official={rep} />
-          ))}
+      {/* Header showing selected reps (only once an address has chosen them) */}
+      {selectedReps.length > 0 && (
+        <div className="mb-6">
+          <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
+            Writing to ({selectedReps.length})
+          </h4>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            {selectedReps.map(rep => (
+              <OfficialBadge key={rep.id} official={rep} />
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Your Name (+ CWC title when congressional delivery is enabled) */}
-      <div className={`mb-5 ${CWC_ENABLED ? 'grid grid-cols-[7rem_1fr] gap-3' : ''}`}>
-        {CWC_ENABLED && (
+      <div className={`mb-5 ${cwcRequired ? 'grid grid-cols-[6rem_1fr] gap-3' : ''}`}>
+        {cwcRequired && (
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Title <span className="text-red-500">*</span>
@@ -572,7 +576,7 @@ export function TopicStep({ state, dispatch, onBack }: TopicStepProps) {
               onChange={(e) => dispatch({ type: 'SET_USER_PREFIX', payload: e.target.value })}
               className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
             >
-              <option value="">Title</option>
+              <option value="">Mr./Ms.</option>
               {CWC_PREFIXES.map((p) => (
                 <option key={p} value={p}>{p}</option>
               ))}

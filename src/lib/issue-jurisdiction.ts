@@ -39,6 +39,20 @@ const RULES: JurisdictionRule[] = [
     },
   },
   {
+    // Federal agencies, federal programs, and federal rulemaking: only
+    // Congress oversees them. A message about an HHS proposed rule or Head
+    // Start funding is congressional even when the story mentions the
+    // state or a school bus (pre-go-live audit 2026-09-28: a Head Start
+    // message was routed ONLY to state legislators on "transportation
+    // safety").
+    pattern: /\bhhs\b|health and human services|head ?start|\bacf\b|\bcms\b|\bepa\b|\bfda\b|\busda\b|\bhud\b|\bosha\b|\bnih\b|\bcdc\b|\bfema\b|department of (?:education|health|labor|agriculture|defense|justice|homeland security|transportation|energy|the interior|veterans affairs|housing)|social security administration|proposed rule|final rule|federal register|federal (?:rule|regulation|funding|grant|program|agency|standards?)|appropriations?|continuing resolution|government shutdown|\bcongress\b/i,
+    guidance: {
+      weights: { federal: 2, state: 0, local: 0 },
+      why: { federal: 'Federal agencies, programs, and rulemaking answer to Congress.' },
+    },
+    exclusive: true,
+  },
+  {
     // Congress regulating itself.
     pattern: /members? of congress|congressional (?:stock|ethics|term|pay)|term limits? (?:for|on) congress|stock trading ban|insider trading by congress|filibuster|electoral college/i,
     guidance: {
@@ -633,6 +647,24 @@ export function hasJurisdictionRule(issueText: string): boolean {
   if (refs.federal.length > 0 || refs.state.length > 0) return true;
   if (detectCasework(text).isCasework) return true;
   return RULES.some((rule) => rule.pattern.test(text));
+}
+
+/**
+ * Which levels of government receive a contact-flow message. The ASK (issue,
+ * category, what they want done) decides; the personal story is only
+ * consulted when the ask alone matches no rule. A story detail ("my kids'
+ * school bus route") must never redirect a federal ask to the state DOT.
+ */
+export function chooseRecipientLevels(input: {
+  issue?: string;
+  issueCategory?: string;
+  ask?: string;
+  personalWhy?: string;
+}): GovLevel[] {
+  const askText = [input.issue, input.issueCategory, input.ask].filter(Boolean).join(' ');
+  const fullText = [askText, input.personalWhy].filter(Boolean).join(' ');
+  const guidance = hasJurisdictionRule(askText) ? getJurisdiction(askText) : getJurisdiction(fullText);
+  return selectLevels(guidance);
 }
 
 /**
