@@ -733,8 +733,11 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
           </p>
           <RecipientChips
             reps={selectedReps}
+            // Only STATE legislators can be added by hand. Congress is decided by the
+            // jurisdiction router alone (Jared, 2026-09-28): a constituent must never
+            // route an out-of-jurisdiction message to a congressional office.
             available={state.officials.filter(
-              (o) => o.level !== 'local' && !selectedReps.some((s) => s.id === o.id),
+              (o) => o.level === 'state' && !selectedReps.some((s) => s.id === o.id),
             )}
             onAdd={(rep) => dispatch({ type: 'TOGGLE_REP', payload: rep })}
           />
