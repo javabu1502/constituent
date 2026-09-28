@@ -45,6 +45,9 @@ export interface ContactState {
   personalWhy: string;
   // Message-first: the approved core message, drafted before address/officials.
   coreMessage: string;
+  /** AI-drafted frame from the core pass (subject/opening/ask), reused when
+   *  a recipient is added later so every letter shares one voice. */
+  coreFrame: { subject: string | null; opening: string | null; ask: string | null } | null;
   // Per-official messages keyed by official name (like PoliAct)
   messages: Record<string, OfficialMessage>;
   // Per-official loading states
@@ -77,6 +80,7 @@ type ContactAction =
   | { type: 'SET_ERROR'; payload: string | null }
   | { type: 'SET_SHARE_ID'; payload: string }
   | { type: 'SET_SENT_STATUS'; payload: { officialId: string; status: string } }
+  | { type: 'SET_CORE_FRAME'; payload: ContactState['coreFrame'] }
   | { type: 'GO_TO_STEP'; payload: ContactState['step'] }
   | { type: 'RESET' };
 
@@ -95,6 +99,7 @@ const initialState: ContactState = {
   ask: '',
   personalWhy: '',
   coreMessage: '',
+  coreFrame: null,
   messages: {},
   loadingIds: new Set(),
   isLoading: false,
@@ -137,6 +142,8 @@ function contactReducer(state: ContactState, action: ContactAction): ContactStat
       return { ...state, ask: action.payload };
     case 'SET_CORE':
       return { ...state, coreMessage: action.payload };
+    case 'SET_CORE_FRAME':
+      return { ...state, coreFrame: action.payload };
     case 'SET_PERSONAL_WHY':
       return { ...state, personalWhy: action.payload };
     case 'SET_MESSAGE':

@@ -497,6 +497,14 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
           const data = await res.json();
           if (!res.ok || !data.body) throw new Error(data.error || 'core drafting failed');
           dispatch({ type: 'SET_CORE', payload: data.body });
+          dispatch({
+            type: 'SET_CORE_FRAME',
+            payload: {
+              subject: typeof data.subject === 'string' ? data.subject : null,
+              opening: typeof data.opening === 'string' ? data.opening : null,
+              ask: typeof data.ask === 'string' ? data.ask : null,
+            },
+          });
 
           // AI jurisdiction refinement — ONLY when no hand-audited rule
           // matched the issue text (the rules are the guardrail; the AI
@@ -556,6 +564,9 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
           city: state.address?.city ?? '',
           stateCode: state.address?.state ?? '',
           zip: state.address?.zip ?? '',
+          coreSubject: state.coreFrame?.subject ?? null,
+          coreOpening: state.coreFrame?.opening ?? null,
+          coreAsk: state.coreFrame?.ask ?? null,
           signature: !cwcDeliverable(rep),
         });
       }
@@ -565,6 +576,35 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
     generateMessages();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // A recipient added AFTER the core exists (the "Also write to" chips) gets
+  // their envelope immediately, in the same voice as everyone else's.
+  const selectedIds = selectedReps.map((r) => r.id).join(',');
+  useEffect(() => {
+    if (!state.coreMessage?.trim() || isDraftingCore) return;
+    const missing = selectedReps.filter((rep) => !messages[rep.name]);
+    if (missing.length === 0) return;
+    const built: Record<string, { subject: string; body: string }> = {};
+    for (const rep of missing) {
+      built[rep.name] = buildEnvelope(state.coreMessage.trim(), rep, {
+        committeeName: null,
+        verb: null,
+        billRef: null,
+        stageGoal: undefined,
+        headline: state.issue || state.issueCategory || 'this issue',
+        senderName: state.userName || 'A constituent',
+        city: state.address?.city ?? '',
+        stateCode: state.address?.state ?? '',
+        zip: state.address?.zip ?? '',
+        coreSubject: state.coreFrame?.subject ?? null,
+        coreOpening: state.coreFrame?.opening ?? null,
+        coreAsk: state.coreFrame?.ask ?? null,
+        signature: !cwcDeliverable(rep),
+      });
+    }
+    dispatch({ type: 'SET_MESSAGES', payload: { ...messages, ...built } });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedIds, state.coreMessage, isDraftingCore]);
 
   const updateMessage = (officialName: string, field: 'subject' | 'body', value: string) => {
     dispatch({
@@ -687,7 +727,9 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
       {selectedReps.length > 0 && (
         <div className="mb-4 p-3 bg-gray-50 dark:bg-gray-700/40 border border-gray-200 dark:border-gray-600 rounded-xl">
           <p className="text-xs text-gray-600 dark:text-gray-300 mb-2">
-            From your address and your issue, this goes to the {selectedReps.length === 1 ? 'official' : `${selectedReps.length} officials`} who can actually act on it:
+            Your address decides who represents you. Your issue decides which of them can act on it. Congressional
+            offices accept messages only from their own constituents, and a message sent to the wrong level of
+            government goes nowhere. This one goes to {selectedReps.length === 1 ? 'the official' : `the ${selectedReps.length} officials`} who can act:
           </p>
           <RecipientChips
             reps={selectedReps}
