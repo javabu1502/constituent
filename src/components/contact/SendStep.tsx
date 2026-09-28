@@ -6,7 +6,8 @@ import { trackEvent } from '@/lib/analytics';
 import type { ContactState, ContactAction } from './ContactFlow';
 import type { Official } from '@/lib/types';
 import { CWC_ENABLED } from '@/lib/cwc-prefixes';
-import { useCwcActiveOffices, isCwcDeliverable, CWC_SUBMITTED_STATUS, CWC_COPY, describeCwcOutcome, type SendOutcome, type CwcButtonState } from '@/lib/cwc-client';
+import { useCwcActiveOffices, isCwcDeliverable, isNonParticipatingSenator, participatingSenateCount, cwcOfficeCodeFor, submitAdoptionSignature, CWC_SUBMITTED_STATUS, CWC_COPY, describeCwcOutcome, type SendOutcome, type CwcButtonState } from '@/lib/cwc-client';
+import { CwcAdoptionAsk } from '@/components/ui/CwcAdoptionAsk';
 import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 import { formatPhone } from '@/lib/utils';
@@ -105,9 +106,18 @@ interface OfficialCardProps {
   cwcDelivery?: boolean;
   /** True when this session already handed this official's message to CWC. */
   alreadySent?: boolean;
+  /** Present for a senator whose office is not on the CWC list. */
+  adoptionAsk?: { participating: number; defaultChecked: boolean; onSign: () => void; onBodyChange: (body: string) => void };
 }
 
-function OfficialCard({ official, message, deliveryInfo, contactMethod, isCallComplete, onMarkCallComplete, onSend, cwcDelivery, alreadySent }: OfficialCardProps) {
+function OfficialCard({ official, message, deliveryInfo, contactMethod, isCallComplete, onMarkCallComplete, onSend, cwcDelivery, alreadySent, adoptionAsk }: OfficialCardProps) {
+  const [signChecked, setSignChecked] = useState(adoptionAsk?.defaultChecked ?? false);
+  // Every email/form/website action: record the adoption signature when the
+  // box is checked, then the normal tracking.
+  const send = (status: string) => {
+    if (adoptionAsk && signChecked) adoptionAsk.onSign();
+    return onSend?.(status);
+  };
   const [messageCopied, setMessageCopied] = useState(false);
   const [cwcState, setCwcState] = useState<CwcButtonState>(alreadySent ? 'sent' : 'idle');
   const [cwcNote, setCwcNote] = useState<string>(alreadySent ? CWC_COPY.sent : CWC_COPY.idle);
@@ -189,7 +199,7 @@ function OfficialCard({ official, message, deliveryInfo, contactMethod, isCallCo
                 <p className="text-xs text-purple-600 dark:text-purple-400 mb-1">Tap to call</p>
                 <a
                   href={`tel:${deliveryInfo.phone.replace(/[^\d+]/g, '')}`}
-                  onClick={() => onSend?.('initiated')}
+                  onClick={() => send('initiated')}
                   className="text-2xl font-bold text-purple-700 dark:text-purple-300 hover:text-purple-800 dark:hover:text-purple-200 transition-colors"
                 >
                   {formatPhone(deliveryInfo.phone)}
@@ -327,7 +337,7 @@ function OfficialCard({ official, message, deliveryInfo, contactMethod, isCallCo
           <>
             {mailtoLink ? (
               <button
-                onClick={() => { window.open(mailtoLink, '_blank'); onSend?.('email_opened'); }}
+                onClick={() => { window.open(mailtoLink, '_blank'); send('email_opened'); }}
                 className="flex items-center justify-center gap-2 w-full py-2.5 bg-purple-600 hover:bg-purple-700 text-white rounded-lg text-sm font-medium transition-colors"
               >
                 <EmailIcon className="w-4 h-4" />
@@ -335,7 +345,7 @@ function OfficialCard({ official, message, deliveryInfo, contactMethod, isCallCo
               </button>
             ) : (
               <button
-                onClick={() => { copyEmail(); onSend?.('email_copied'); }}
+                onClick={() => { copyEmail(); send('email_copied'); }}
                 className="flex items-center justify-center gap-2 w-full py-2.5 bg-purple-600 hover:bg-purple-700 text-white rounded-lg text-sm font-medium transition-colors"
               >
                 {emailCopied ? <CheckIcon className="w-4 h-4" /> : <CopyIcon className="w-4 h-4" />}
@@ -356,7 +366,7 @@ function OfficialCard({ official, message, deliveryInfo, contactMethod, isCallCo
               href={deliveryInfo.contactFormUrl}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => { copyMessage(); onSend?.('form_opened'); }}
+              onClick={() => { copyMessage(); send('form_opened'); }}
               className="flex items-center justify-center gap-2 w-full py-2.5 bg-purple-600 hover:bg-purple-700 text-white rounded-lg text-sm font-medium transition-colors"
             >
               <ExternalLinkIcon className="w-4 h-4" />
@@ -373,7 +383,7 @@ function OfficialCard({ official, message, deliveryInfo, contactMethod, isCallCo
               href={deliveryInfo.actionUrl || deliveryInfo.websiteUrl}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => { copyMessage(); onSend?.('website_opened'); }}
+              onClick={() => { copyMessage(); send('website_opened'); }}
               className="flex items-center justify-center gap-2 w-full py-2.5 bg-purple-600 hover:bg-purple-700 text-white rounded-lg text-sm font-medium transition-colors"
             >
               <ExternalLinkIcon className="w-4 h-4" />
@@ -391,12 +401,23 @@ function OfficialCard({ official, message, deliveryInfo, contactMethod, isCallCo
         )}
 
         {/* Secondary actions row (none under CWC delivery) */}
+        {!showCwc && adoptionAsk && (
+          <CwcAdoptionAsk
+            senatorLastName={official.lastName || official.name.split(' ').pop() || official.name}
+            participating={adoptionAsk.participating}
+            defaultChecked={adoptionAsk.defaultChecked}
+            body={message.body}
+            onBodyChange={adoptionAsk.onBodyChange}
+            onCheckedChange={setSignChecked}
+          />
+        )}
+
         {!showCwc && <div className="flex flex-col sm:flex-row gap-2">
           {deliveryInfo.method === 'staffer_email' ? (
             <>
               {/* Copy Email Address */}
               <button
-                onClick={() => { copyEmail(); onSend?.('email_copied'); }}
+                onClick={() => { copyEmail(); send('email_copied'); }}
                 className="flex-1 flex items-center justify-center gap-1.5 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg text-xs font-medium transition-colors"
               >
                 {emailCopied ? (
@@ -678,6 +699,32 @@ export function SendStep({ state, dispatch, onBack }: SendStepProps) {
               onSend={(status) => trackSend(official, status)}
               cwcDelivery={cwcDeliverable(official)}
               alreadySent={state.sentStatus?.[official.id] === CWC_SUBMITTED_STATUS}
+              adoptionAsk={
+                contactMethod === 'email' && isNonParticipatingSenator(official, cwcOffices)
+                  ? {
+                      participating: participatingSenateCount(cwcOffices),
+                      defaultChecked: true,
+                      onBodyChange: (body) => dispatch({ type: 'UPDATE_MESSAGE', payload: { officialName: official.name, field: 'body', value: body } }),
+                      onSign: () => {
+                        void (async () => {
+                          const turnstileToken = await getToken().catch(() => '');
+                          submitAdoptionSignature({
+                            senator_id: official.id,
+                            senator_name: official.name,
+                            state: (state.address?.state || official.state || '').slice(0, 2).toUpperCase(),
+                            office_code: cwcOfficeCodeFor(official) ?? undefined,
+                            name: state.userName,
+                            email: state.userEmail,
+                            city: state.address?.city || undefined,
+                            zip: state.address?.zip?.match(/^\d{5}(-\d{4})?/)?.[0],
+                            source: 'contact',
+                            turnstileToken: turnstileToken || undefined,
+                          });
+                        })();
+                      },
+                    }
+                  : undefined
+              }
             />
           );
         })}

@@ -64,6 +64,70 @@ export function isCwcDeliverable(
   return Boolean(fields.prefix && fields.email?.trim() && fields.street?.trim() && /^\d{5}/.test(fields.zip?.trim() ?? ''));
 }
 
+/** A senator whose office is NOT on the participating list (list loaded). */
+export function isNonParticipatingSenator(official: Official, offices: CwcActiveOffices): boolean {
+  if (!CWC_ENABLED || !offices.loaded) return false;
+  if (official.level !== 'federal' || official.chamber !== 'senate') return false;
+  const code = cwcOfficeCodeFor(official);
+  return !!code && !offices.codes.has(code);
+}
+
+/** How many Senate offices currently accept CWC delivery. */
+export function participatingSenateCount(offices: CwcActiveOffices): number {
+  let n = 0;
+  for (const c of offices.codes) if (c.startsWith('S')) n++;
+  return n;
+}
+
+/** The sentence added to an email/webform message when the constituent asks
+ *  the office to join CWC. Kept as one paragraph so it can be removed again. */
+export const CWC_ADOPTION_SENTENCE =
+  'I also ask your office to accept constituent messages through Communicating with Congress, the delivery system already used by the House and most Senate offices, so messages like this one reach you directly.';
+
+/** Add or remove the adoption sentence before the closing signature block. */
+export function withAdoptionSentence(body: string, on: boolean): string {
+  const stripped = body
+    .split('\n')
+    .filter((line) => line.trim() !== CWC_ADOPTION_SENTENCE)
+    .join('\n')
+    .replace(/\n{3,}/g, '\n\n');
+  if (!on) return stripped;
+  // Insert before the closing ("Sincerely," / "Thank you," ...) when present.
+  const lines = stripped.split('\n');
+  const closingIdx = lines.findIndex((l) => /^(sincerely|respectfully|thank you|best regards|regards|with respect|gratefully)[,.]?\s*$/i.test(l.trim()));
+  if (closingIdx > 0) {
+    const before = lines.slice(0, closingIdx).join('\n').replace(/\s+$/, '');
+    const after = lines.slice(closingIdx).join('\n');
+    return `${before}\n\n${CWC_ADOPTION_SENTENCE}\n\n${after}`;
+  }
+  return `${stripped.replace(/\s+$/, '')}\n\n${CWC_ADOPTION_SENTENCE}`;
+}
+
+export interface AdoptionSignaturePayload {
+  senator_id: string;
+  senator_name: string;
+  state: string;
+  office_code?: string;
+  name: string;
+  email: string;
+  city?: string;
+  zip?: string;
+  source: 'contact' | 'campaign';
+  campaign_id?: string;
+  turnstileToken?: string;
+}
+
+/** Fire-and-forget: record the signature. Failures are logged, never shown. */
+export function submitAdoptionSignature(payload: AdoptionSignaturePayload): void {
+  fetch('/api/cwc/adoption-signature', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  })
+    .then(async (res) => { if (!res.ok) console.error('[cwc/adoption-signature] Failed:', res.status, await res.text()); })
+    .catch((err) => console.error('[cwc/adoption-signature] Failed:', err));
+}
+
 /** The track-send delivery_status that means "delivered through CWC". */
 export const CWC_SUBMITTED_STATUS = 'cwc_submitted';
 

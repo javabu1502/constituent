@@ -20,7 +20,8 @@ import { useTurnstile } from '@/components/ui/Turnstile';
 import { SupportNudge } from '@/components/ui/SupportNudge';
 import { SocialShare } from '@/components/ui/SocialShare';
 import { CWC_PREFIXES, CWC_ENABLED } from '@/lib/cwc-prefixes';
-import { useCwcActiveOffices, isCwcDeliverable, CWC_SUBMITTED_STATUS, CWC_COPY, describeCwcOutcome, type SendOutcome, type CwcButtonState } from '@/lib/cwc-client';
+import { useCwcActiveOffices, isCwcDeliverable, isNonParticipatingSenator, participatingSenateCount, cwcOfficeCodeFor, submitAdoptionSignature, CWC_SUBMITTED_STATUS, CWC_COPY, describeCwcOutcome, type SendOutcome, type CwcButtonState } from '@/lib/cwc-client';
+import { CwcAdoptionAsk } from '@/components/ui/CwcAdoptionAsk';
 
 type Step = 'stance' | 'compose' | 'form' | 'loading' | 'review' | 'done' | 'noTarget' | 'wrongState';
 type Stance = 'support' | 'oppose' | 'undecided';
@@ -1206,6 +1207,34 @@ export function CampaignParticipate({
               startOpen={usedFallback}
               cwcDelivery={cwcDeliverable(official)}
               alreadySent={!!cwcSentIds[official.id]}
+              adoptionAsk={
+                isNonParticipatingSenator(official, cwcOffices) && email.trim()
+                  ? {
+                      participating: participatingSenateCount(cwcOffices),
+                      // The platform's own ask: pre-checked on official weigh-ins and the
+                      // contact flow; off by default on an organization's campaign.
+                      defaultChecked: isOfficial,
+                      onSign: () => {
+                        void (async () => {
+                          const turnstileToken = await getToken().catch(() => '');
+                          submitAdoptionSignature({
+                            senator_id: official.id,
+                            senator_name: official.name,
+                            state: state.slice(0, 2).toUpperCase(),
+                            office_code: cwcOfficeCodeFor(official) ?? undefined,
+                            name: name.trim(),
+                            email: email.trim(),
+                            city: city.trim() || undefined,
+                            zip: zip.trim().match(/^\d{5}(-\d{4})?/)?.[0],
+                            source: 'campaign',
+                            campaign_id: campaign.id,
+                            turnstileToken: turnstileToken || undefined,
+                          });
+                        })();
+                      },
+                    }
+                  : undefined
+              }
             />
           );
         })}
@@ -1337,6 +1366,7 @@ function OfficialSendCard({
   startOpen,
   cwcDelivery,
   alreadySent,
+  adoptionAsk,
 }: {
   official: Official;
   message: OfficialMessage;
@@ -1349,7 +1379,14 @@ function OfficialSendCard({
   cwcDelivery?: boolean;
   /** True when this session already handed this official's message to CWC. */
   alreadySent?: boolean;
+  /** Present for a senator whose office is not on the CWC list. */
+  adoptionAsk?: { participating: number; defaultChecked: boolean; onSign: () => void };
 }) {
+  const [signChecked, setSignChecked] = useState(adoptionAsk?.defaultChecked ?? false);
+  const send = (status: string) => {
+    if (adoptionAsk && signChecked) adoptionAsk.onSign();
+    return onSend(status);
+  };
   const [copied, setCopied] = useState(false);
   const [cwcState, setCwcState] = useState<CwcButtonState>(alreadySent ? 'sent' : 'idle');
   const [cwcNote, setCwcNote] = useState<string>(alreadySent ? CWC_COPY.sent : CWC_COPY.idle);
@@ -1426,7 +1463,7 @@ function OfficialSendCard({
             <button
               onClick={() => {
                 window.open(mailtoLink, '_blank');
-                onSend('email_opened');
+                send('email_opened');
               }}
               className="flex items-center justify-center gap-2 w-full py-2.5 bg-purple-600 hover:bg-purple-700 text-white rounded-lg text-sm font-medium transition-colors"
             >
@@ -1444,7 +1481,7 @@ function OfficialSendCard({
             href={deliveryInfo.contactFormUrl}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={() => { copyMessage(); onSend('form_opened'); }}
+            onClick={() => { copyMessage(); send('form_opened'); }}
             className="flex items-center justify-center gap-2 w-full py-2.5 bg-purple-600 hover:bg-purple-700 text-white rounded-lg text-sm font-medium transition-colors"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1457,7 +1494,7 @@ function OfficialSendCard({
             href={deliveryInfo.actionUrl || deliveryInfo.websiteUrl}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={() => { copyMessage(); onSend('website_opened'); }}
+            onClick={() => { copyMessage(); send('website_opened'); }}
             className="flex items-center justify-center gap-2 w-full py-2.5 bg-purple-600 hover:bg-purple-700 text-white rounded-lg text-sm font-medium transition-colors"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1468,7 +1505,7 @@ function OfficialSendCard({
         ) : official.phone ? (
           <a
             href={`tel:${official.phone.replace(/[^\d+]/g, '')}`}
-            onClick={() => onSend('called')}
+            onClick={() => send('called')}
             className="flex items-center justify-center gap-2 w-full py-2.5 bg-purple-600 hover:bg-purple-700 text-white rounded-lg text-sm font-medium transition-colors"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1480,6 +1517,17 @@ function OfficialSendCard({
           <span className="flex items-center justify-center gap-2 w-full py-2.5 bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400 rounded-lg text-sm">
             No contact method available
           </span>
+        )}
+
+        {!showCwc && adoptionAsk && (
+          <CwcAdoptionAsk
+            senatorLastName={official.lastName || official.name.split(' ').pop() || official.name}
+            participating={adoptionAsk.participating}
+            defaultChecked={adoptionAsk.defaultChecked}
+            body={message.body}
+            onBodyChange={(body) => onEdit({ body })}
+            onCheckedChange={setSignChecked}
+          />
         )}
 
         {!showCwc && <button

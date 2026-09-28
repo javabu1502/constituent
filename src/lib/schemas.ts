@@ -325,6 +325,21 @@ export const generateCommentSchema = z.object({
   turnstileToken: z.string().optional(),
 });
 
+/** Opt-in signature asking a non-participating Senate office to join CWC. */
+export const cwcAdoptionSignatureSchema = z.object({
+  senator_id: z.string().min(1).max(20),
+  senator_name: z.string().min(1).max(200),
+  state: z.string().length(2),
+  office_code: z.string().regex(/^S[A-Z]{2}0[1-3]$/).optional(),
+  name: z.string().min(2).max(200),
+  email: z.string().email().max(254),
+  city: z.string().max(100).optional(),
+  zip: z.string().regex(/^\d{5}(-\d{4})?$/).optional(),
+  source: z.enum(['contact', 'campaign']),
+  campaign_id: z.string().uuid().optional(),
+  turnstileToken: z.string().optional(),
+});
+
 export const messageFeedbackSchema = z.object({
   messageHash: z.string().min(1).max(100),
   officialName: z.string().min(1).max(200),
