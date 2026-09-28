@@ -20,6 +20,7 @@ export interface SavedDraft {
   ask: string;
   personalWhy: string;
   messages: Record<string, { subject: string; body: string }>;
+  sentStatus?: Record<string, string>;
   timestamp: number;
 }
 
@@ -37,6 +38,7 @@ interface AutoSaveState {
   ask: string;
   personalWhy: string;
   messages: Record<string, { subject: string; body: string }>;
+  sentStatus?: Record<string, string>;
 }
 
 export function useAutoSave(
@@ -102,6 +104,7 @@ export function useAutoSave(
         ask: state.ask,
         personalWhy: state.personalWhy,
         messages: state.messages,
+        sentStatus: state.sentStatus ?? {},
         timestamp: Date.now(),
       };
 

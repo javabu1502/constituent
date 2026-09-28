@@ -79,7 +79,7 @@ export type CwcButtonState = 'idle' | 'sending' | 'sent' | 'failed';
 
 /** Copy for the CWC card after a send attempt. Flat sentences, no em dashes. */
 export const CWC_COPY = {
-  idle: 'Goes straight to the office through Communicating with Congress, the message system run by the House and Senate. No email app needed.',
+  idle: 'Goes straight to the office through Communicating with Congress, the message system run by the House and Senate. No email app needed. Your name and address travel in separate fields, so no signature is needed in the text.',
   sending: 'Handing your message to the congressional delivery system.',
   sent: 'Received by the congressional delivery system. Delivery usually completes within minutes and pauses overnight during House and Senate maintenance windows.',
   blocked: 'This message could not be accepted for delivery to Congress.',

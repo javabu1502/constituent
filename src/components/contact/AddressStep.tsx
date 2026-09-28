@@ -31,12 +31,16 @@ export function AddressStep({ state, dispatch }: AddressStepProps) {
       dispatch({ type: 'SET_ERROR', payload: 'Please enter a valid street address' });
       return;
     }
-    if (!address.city.trim()) {
-      dispatch({ type: 'SET_ERROR', payload: 'Please enter a city' });
+    if (address.city.trim().length < 3) {
+      dispatch({ type: 'SET_ERROR', payload: 'Please enter your city' });
       return;
     }
     if (!address.state) {
       dispatch({ type: 'SET_ERROR', payload: 'Please select a state' });
+      return;
+    }
+    if (!/^\d{5}(-\d{4})?$/.test(address.zip.trim())) {
+      dispatch({ type: 'SET_ERROR', payload: 'Please enter your 5-digit ZIP code. ZIP+4 is welcome.' });
       return;
     }
 
@@ -170,7 +174,7 @@ export function AddressStep({ state, dispatch }: AddressStepProps) {
       </form>
 
       <p className="text-xs text-gray-500 dark:text-gray-400 text-center mt-6">
-        Used to look up your officials, and included in your signature so they know you&apos;re a constituent. Saved to your profile only if you have an account.
+        Used to look up your officials and sent to congressional offices with your message so they know you are a constituent. Saved to your profile only if you have an account.
       </p>
     </div>
   );

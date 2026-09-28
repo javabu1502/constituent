@@ -1050,7 +1050,8 @@ function buildTemplateFallback(
 
   return {
     officialName: official.name,
-    subject: `Constituent Message: ${issue.slice(0, 60)}`,
+    // Offices group and triage by subject: lead with the ask, not a label.
+    subject: (ask?.trim() ? ask.trim() : `Regarding ${issue}`).replace(/\s+/g, ' ').slice(0, 120),
     body: `${salutation}\n\n${bodyParts.join('\n\n')}\n\n${closing}`,
   };
 }

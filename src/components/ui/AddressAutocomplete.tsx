@@ -65,6 +65,7 @@ function parsePlace(place: google.maps.places.PlaceResult): ParsedAddress {
   let city = '';
   let state = '';
   let zip = '';
+  let zipSuffix = '';
 
   for (const component of components) {
     const types = component.types;
@@ -80,8 +81,12 @@ function parsePlace(place: google.maps.places.PlaceResult): ParsedAddress {
       state = component.short_name;
     } else if (types.includes('postal_code')) {
       zip = component.long_name;
+    } else if (types.includes('postal_code_suffix')) {
+      // ZIP+4: the Senate "strongly prefers" it for constituent matching.
+      zipSuffix = component.long_name;
     }
   }
+  if (zip && zipSuffix && /^\d{5}$/.test(zip) && /^\d{4}$/.test(zipSuffix)) zip = `${zip}-${zipSuffix}`;
 
   const street = streetNumber && route ? `${streetNumber} ${route}` : route || streetNumber;
 

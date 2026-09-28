@@ -422,6 +422,10 @@ export function TopicStep({ state, dispatch, onBack }: TopicStepProps) {
       dispatch({ type: 'SET_ERROR', payload: 'Please enter your name' });
       return;
     }
+    if (cwcRequired && userName.trim().split(/\s+/).length < 2) {
+      dispatch({ type: 'SET_ERROR', payload: 'Please enter your first and last name. Congressional offices require both.' });
+      return;
+    }
     if (cwcRequired && !state.userPrefix) {
       dispatch({ type: 'SET_ERROR', payload: 'Please select a title. Congressional offices require one to accept your message.' });
       return;
@@ -836,7 +840,7 @@ export function TopicStep({ state, dispatch, onBack }: TopicStepProps) {
       </div>
 
       <p className="text-xs text-gray-400 dark:text-gray-500 text-center mt-3">
-        Your message will be saved to your history.{' '}
+        If you are signed in, this message is saved to your history.{' '}
         <a href="/privacy" target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-600 dark:hover:text-gray-300">
           See our Privacy Policy
         </a>{' '}for details.

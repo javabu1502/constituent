@@ -1,5 +1,6 @@
 'use client';
 
+import { useCwcActiveOffices, isCwcDeliverable } from '@/lib/cwc-client';
 import { useEffect, useState } from 'react';
 import type { ContactState, ContactAction, OfficialMessage } from './ContactFlow';
 import { Button } from '@/components/ui/Button';
@@ -131,6 +132,11 @@ function buildFallbackMessage(
 
 export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
   const { selectedReps, userName, issue, ask, personalWhy, messages, contactMethod, address } = state;
+  // Which offices will receive this through CWC (so the copy never promises a
+  // staffer email for a message that goes through the congressional system).
+  const cwcOffices = useCwcActiveOffices();
+  const cwcDeliverable = (o: ContactState['selectedReps'][number]) =>
+    contactMethod === 'email' && isCwcDeliverable(o, cwcOffices, { prefix: state.userPrefix, email: state.userEmail, street: address?.street, zip: address?.zip });
   const [reviewIndex, setReviewIndex] = useState(0);
   const [isGenerating, setIsGenerating] = useState(false);
   // Message-first path: true while the ONE core message is being drafted,
@@ -812,12 +818,16 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
               {currentRep.party}
             </span>
           </div>
-          {/* Staffer explanation for email */}
-          {contactMethod === 'email' && currentRep.stafferFirstName && (
+          {/* How this one is delivered */}
+          {cwcDeliverable(currentRep) ? (
+            <p className="mt-2 text-xs text-purple-700 dark:text-purple-300">
+              Goes to this office through Communicating with Congress, the delivery system run by the House and Senate. Your name and address travel in separate fields, so no signature is needed in the text.
+            </p>
+          ) : contactMethod === 'email' && currentRep.stafferFirstName ? (
             <p className="mt-2 text-xs text-purple-700 dark:text-purple-300">
               Your message will be sent to {currentRep.stafferFirstName}{currentRep.stafferLastName ? ` ${currentRep.stafferLastName}` : ''}, staff for {currentRep.chamber === 'senate' ? 'Sen.' : 'Rep.'} {currentRep.lastName || currentRep.name.split(' ').pop()}&apos;s office.
             </p>
-          )}
+          ) : null}
         </div>
       )}
 
@@ -971,8 +981,8 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
         </div>
       )}
 
-      {/* Bounce notice (email only) */}
-      {contactMethod === 'email' && (
+      {/* Bounce notice: only when a federal office still goes by email */}
+      {contactMethod === 'email' && selectedReps.some((o) => o.level === 'federal' && !cwcDeliverable(o)) && (
         <div className="mb-4 p-3 bg-yellow-50 dark:bg-yellow-900/30 border border-yellow-200 dark:border-yellow-700 rounded-xl">
           <p className="text-xs text-yellow-700 dark:text-yellow-300">
             Note: Some congressional emails may bounce. If that happens, use the official&apos;s contact form on their website.

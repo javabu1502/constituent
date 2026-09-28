@@ -213,6 +213,7 @@ export const POPULAR_TOPICS: { label: string; category: string; subtopics: { lab
     label: 'Families',
     category: 'Families',
     subtopics: [
+      { label: 'Head Start', category: 'Families' },
       { label: 'Child Care', category: 'Families' },
       { label: 'Paid Family Leave', category: 'Families' },
       { label: 'Child Tax Credit', category: 'Families' },

@@ -279,6 +279,9 @@ export function CampaignParticipate({
   const [intentByOfficial, setIntentByOfficial] = useState<Record<string, 'persuade' | 'thank'>>({});
   const [messages, setMessages] = useState<Record<string, OfficialMessage>>({});
   const [sentCount, setSentCount] = useState(0);
+  // Officials whose message the CWC queue accepted this session: survives
+  // Back/Next within the flow so the button never re-arms after a send.
+  const [cwcSentIds, setCwcSentIds] = useState<Record<string, boolean>>({});
   // Reader-poll aggregates, fetched fresh after this participant is counted.
   const [pollResults, setPollResults] = useState<{ support: number; oppose: number; undecided: number } | null>(null);
 
@@ -289,6 +292,7 @@ export function CampaignParticipate({
 
     if (cwcFields && !prefix) { setError('Please select a title — congressional offices require one to accept your message'); return; }
     if (!name.trim()) { setError('Please enter your name'); return; }
+    if (cwcFields && name.trim().split(/\s+/).length < 2) { setError('Please enter your first and last name. Congressional offices require both.'); return; }
     if (collectEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
       setError('Please enter your email so the campaign can update you when the bill moves');
       return;
@@ -668,6 +672,7 @@ export function CampaignParticipate({
       setSentCount((c) => Math.max(0, c - 1));
       return outcome;
     }
+    if (isCwc) setCwcSentIds((m) => ({ ...m, [official.id]: true }));
 
     // Opened-into-mail counts as sent: record this official's engagement
     // now, while the user (and the Turnstile widget) are on the review step.
@@ -829,7 +834,7 @@ export function CampaignParticipate({
                 className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent resize-y bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               />
               <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                We add the greeting, each official&apos;s name, and your signature automatically — your words above are never changed.
+                We add the greeting and each official&apos;s name automatically. Your words above are never changed.
               </p>
             </div>
             <div className="flex gap-2">
@@ -1032,7 +1037,7 @@ export function CampaignParticipate({
         </Button>
 
         <p className="text-xs text-gray-400 dark:text-gray-500 text-center">
-          Your address is used only to find your officials. See our{' '}
+          Your address is used to find your officials and, for congressional offices, is sent with your message so they can confirm you are a constituent. See our{' '}
           <a href="/privacy" className="underline hover:text-gray-600 dark:hover:text-gray-300">Privacy Policy</a>.
         </p>
       </form>
@@ -1200,6 +1205,7 @@ export function CampaignParticipate({
               onEdit={(patch) => updateMessage(official.name, patch)}
               startOpen={usedFallback}
               cwcDelivery={cwcDeliverable(official)}
+              alreadySent={!!cwcSentIds[official.id]}
             />
           );
         })}
@@ -1330,6 +1336,7 @@ function OfficialSendCard({
   onEdit,
   startOpen,
   cwcDelivery,
+  alreadySent,
 }: {
   official: Official;
   message: OfficialMessage;
@@ -1340,10 +1347,12 @@ function OfficialSendCard({
   startOpen: boolean;
   /** Office accepts CWC delivery: ONE "Send to Congress" action, no email/copy. */
   cwcDelivery?: boolean;
+  /** True when this session already handed this official's message to CWC. */
+  alreadySent?: boolean;
 }) {
   const [copied, setCopied] = useState(false);
-  const [cwcState, setCwcState] = useState<CwcButtonState>('idle');
-  const [cwcNote, setCwcNote] = useState<string>(CWC_COPY.idle);
+  const [cwcState, setCwcState] = useState<CwcButtonState>(alreadySent ? 'sent' : 'idle');
+  const [cwcNote, setCwcNote] = useState<string>(alreadySent ? CWC_COPY.sent : CWC_COPY.idle);
   // After a failed hand-off the card falls back to the email/form actions.
   const showCwc = cwcDelivery && cwcState !== 'failed';
   // Starter drafts open ready to write; AI drafts start collapsed. Track

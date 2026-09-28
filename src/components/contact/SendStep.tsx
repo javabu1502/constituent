@@ -103,12 +103,14 @@ interface OfficialCardProps {
   /** Office accepts CWC delivery: show ONE "Send to Congress" action and no
    *  email/copy actions (the message must not reach the office twice). */
   cwcDelivery?: boolean;
+  /** True when this session already handed this official's message to CWC. */
+  alreadySent?: boolean;
 }
 
-function OfficialCard({ official, message, deliveryInfo, contactMethod, isCallComplete, onMarkCallComplete, onSend, cwcDelivery }: OfficialCardProps) {
+function OfficialCard({ official, message, deliveryInfo, contactMethod, isCallComplete, onMarkCallComplete, onSend, cwcDelivery, alreadySent }: OfficialCardProps) {
   const [messageCopied, setMessageCopied] = useState(false);
-  const [cwcState, setCwcState] = useState<CwcButtonState>('idle');
-  const [cwcNote, setCwcNote] = useState<string>(CWC_COPY.idle);
+  const [cwcState, setCwcState] = useState<CwcButtonState>(alreadySent ? 'sent' : 'idle');
+  const [cwcNote, setCwcNote] = useState<string>(alreadySent ? CWC_COPY.sent : CWC_COPY.idle);
   // After a failed hand-off the card falls back to the email/form actions.
   const showCwc = cwcDelivery && cwcState !== 'failed';
   const [emailCopied, setEmailCopied] = useState(false);
@@ -584,6 +586,11 @@ export function SendStep({ state, dispatch, onBack }: SendStepProps) {
       if (data?.shareId) {
         dispatch({ type: 'SET_SHARE_ID', payload: data.shareId });
       }
+      // A CWC hand-off only counts once the queue accepted it.
+      const cwcAccepted = data?.cwc?.status === 'queued' || data?.cwc?.status === 'held';
+      if (deliveryStatus !== CWC_SUBMITTED_STATUS || cwcAccepted) {
+        dispatch({ type: 'SET_SENT_STATUS', payload: { officialId: official.id, status: deliveryStatus } });
+      }
       trackEvent('message_sent', {
         method: deliveryStatus === CWC_SUBMITTED_STATUS ? 'cwc' : contactMethod === 'phone' ? 'phone' : 'email',
         issue: state.issueCategory || 'unknown',
@@ -642,7 +649,7 @@ export function SendStep({ state, dispatch, onBack }: SendStepProps) {
             : deliverySummary.cwcCount > 0 && deliverySummary.emailCount + deliverySummary.formCount === 0
             ? 'Click "Send to Congress" to deliver each message'
             : deliverySummary.cwcCount > 0
-            ? `${deliverySummary.cwcCount} sent to Congress directly, ${deliverySummary.emailCount + deliverySummary.formCount} via email or contact form`
+            ? `${deliverySummary.cwcCount} go straight to Congress, ${deliverySummary.emailCount + deliverySummary.formCount} open in your email app or a contact form`
             : deliverySummary.emailCount > 0 && deliverySummary.formCount > 0
             ? `${deliverySummary.emailCount} via email, ${deliverySummary.formCount} via contact form`
             : deliverySummary.emailCount > 0
@@ -670,6 +677,7 @@ export function SendStep({ state, dispatch, onBack }: SendStepProps) {
               onMarkCallComplete={() => markCallComplete(official.id)}
               onSend={(status) => trackSend(official, status)}
               cwcDelivery={cwcDeliverable(official)}
+              alreadySent={state.sentStatus?.[official.id] === CWC_SUBMITTED_STATUS}
             />
           );
         })}
@@ -690,8 +698,8 @@ export function SendStep({ state, dispatch, onBack }: SendStepProps) {
         </div>
       )}
 
-      {/* Note about bounces (email only) */}
-      {contactMethod === 'email' && deliverySummary.emailCount > 0 && (
+      {/* Note about bounces: only for federal offices that still go by email */}
+      {contactMethod === 'email' && selectedReps.some((o) => o.level === 'federal' && !cwcDeliverable(o) && deliveryInfoMap.get(o.id)?.method === 'staffer_email') && (
         <div className="mb-6 p-3 bg-yellow-50 dark:bg-yellow-900/30 border border-yellow-200 dark:border-yellow-700 rounded-xl">
           <p className="text-xs text-yellow-700 dark:text-yellow-300">
             Note: Some congressional emails may bounce. If that happens, use the official&apos;s contact form on their website.
@@ -700,7 +708,7 @@ export function SendStep({ state, dispatch, onBack }: SendStepProps) {
       )}
 
       <p className="text-xs text-gray-500 dark:text-gray-400 text-center mb-4">
-        Your message will be saved to your history. See our{' '}
+        If you are signed in, this message is saved to your history. See our{' '}
         <Link href="/privacy" className="text-purple-600 dark:text-purple-400 hover:underline">Privacy Policy</Link>{' '}
         for details.
       </p>

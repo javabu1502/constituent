@@ -25,6 +25,9 @@ export interface OfficialMessage {
 export interface ContactState {
   step: 'topic' | 'compose' | 'address' | 'representative' | 'message' | 'send' | 'success';
   shareId: string | null;
+  /** Per-official send status from this session ('cwc_submitted', 'email_opened'...), so a
+   *  refresh or Back never re-arms a "Send to Congress" button that already fired. */
+  sentStatus: Record<string, string>;
   address: Address | null;
   officials: Official[];
   selectedReps: Official[];
@@ -73,6 +76,7 @@ type ContactAction =
   | { type: 'SET_LOADING'; payload: boolean }
   | { type: 'SET_ERROR'; payload: string | null }
   | { type: 'SET_SHARE_ID'; payload: string }
+  | { type: 'SET_SENT_STATUS'; payload: { officialId: string; status: string } }
   | { type: 'GO_TO_STEP'; payload: ContactState['step'] }
   | { type: 'RESET' };
 
@@ -96,6 +100,7 @@ const initialState: ContactState = {
   isLoading: false,
   error: null,
   shareId: null,
+  sentStatus: {},
 };
 
 function contactReducer(state: ContactState, action: ContactAction): ContactState {
@@ -170,6 +175,8 @@ function contactReducer(state: ContactState, action: ContactAction): ContactStat
       return { ...state, error: action.payload };
     case 'SET_SHARE_ID':
       return { ...state, shareId: action.payload };
+    case 'SET_SENT_STATUS':
+      return { ...state, sentStatus: { ...state.sentStatus, [action.payload.officialId]: action.payload.status } };
     case 'GO_TO_STEP':
       return { ...state, step: action.payload, error: null };
     case 'RESET':
@@ -246,6 +253,9 @@ export function ContactFlow() {
     if (draft.personalWhy) dispatch({ type: 'SET_PERSONAL_WHY', payload: draft.personalWhy });
     if (Object.keys(draft.messages).length > 0) {
       dispatch({ type: 'SET_MESSAGES', payload: draft.messages });
+    }
+    for (const [officialId, status] of Object.entries(draft.sentStatus ?? {})) {
+      dispatch({ type: 'SET_SENT_STATUS', payload: { officialId, status } });
     }
 
     // Re-fetch officials if address is available
@@ -613,8 +623,9 @@ export function ContactFlow() {
           <div>
             <h4 className="text-sm font-medium text-gray-900 dark:text-white">Your Privacy Matters</h4>
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-              Your address is used to find your elected officials. Logged-in users can save their
-              address for faster access. Messages are sent directly from your device.
+              Your address is used to find your elected officials and, for congressional offices, is sent
+              with your message so they can confirm you are a constituent. Logged-in users can save their
+              address for faster access.
             </p>
           </div>
         </div>
