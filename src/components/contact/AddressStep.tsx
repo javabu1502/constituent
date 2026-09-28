@@ -3,6 +3,7 @@
 import { useState, useCallback } from 'react';
 import type { ContactState, ContactAction } from './ContactFlow';
 import { chooseRecipientLevels, type GovLevel } from '@/lib/issue-jurisdiction';
+import { chooseLocalOfficials } from '@/lib/local-routing';
 import type { Official } from '@/lib/types';
 import { Button } from '@/components/ui/Button';
 import { AddressAutocomplete, type ParsedAddress } from '@/components/ui/AddressAutocomplete';
@@ -76,7 +77,10 @@ export function AddressStep({ state, dispatch }: AddressStepProps) {
         chooseRecipientLevels({ issue: state.issue, issueCategory: state.issueCategory, ask: state.ask, personalWhy: state.personalWhy }),
       );
       const all = data.officials as Official[];
-      const relevant = all.filter((o) => levels.has((o.level as GovLevel) ?? 'federal'));
+      // Within the local level, only the body that owns the issue (school board
+      // vs city council vs county commission) receives it.
+      const issueText = `${state.issue || ''} ${state.issueCategory || ''} ${state.ask || ''} ${state.personalWhy || ''}`;
+      const relevant = chooseLocalOfficials(all.filter((o) => levels.has((o.level as GovLevel) ?? 'federal')), issueText);
       // Fallback ladder: jurisdiction match -> non-local officials -> everyone.
       // Never blast local officials with an issue we couldn't classify.
       const nonLocal = all.filter((o) => o.level !== 'local');

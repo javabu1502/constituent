@@ -12,8 +12,48 @@ export interface GeocodedAddress {
   congressionalDistrict: string;
   stateUpperDistrict?: string;
   stateLowerDistrict?: string;
+  /** Local government geographies (Census layers), for src/lib/local-officials. */
+  countyGeoid?: string;
+  countyName?: string;
+  /** Absent for unincorporated areas: the county is the local government. */
+  placeGeoid?: string;
+  placeName?: string;
+  schoolDistrictGeoid?: string;
+  schoolDistrictName?: string;
   latitude?: number;
   longitude?: number;
+}
+
+/**
+ * Pull county, incorporated place, and unified school district out of the
+ * Census `geographies` map. Keys are layer names ("Counties", "Incorporated
+ * Places", "Unified School Districts"); each value is a list with GEOID +
+ * NAME/BASENAME. Pure, so it is unit-testable without the network.
+ */
+export function extractLocalGeographies(
+  geographies: Record<string, Array<Record<string, string | undefined>> | undefined>,
+): Pick<GeocodedAddress, 'countyGeoid' | 'countyName' | 'placeGeoid' | 'placeName' | 'schoolDistrictGeoid' | 'schoolDistrictName'> {
+  const out: ReturnType<typeof extractLocalGeographies> = {};
+  const first = (pred: (k: string) => boolean) => {
+    const key = Object.keys(geographies).find((k) => pred(k.toLowerCase()));
+    return key ? geographies[key]?.[0] : undefined;
+  };
+  const county = first((k) => k === 'counties' || k.startsWith('counties'));
+  if (county?.GEOID && /^\d{5}$/.test(county.GEOID)) {
+    out.countyGeoid = county.GEOID;
+    out.countyName = county.NAME || county.BASENAME;
+  }
+  const place = first((k) => k.includes('incorporated place'));
+  if (place?.GEOID && /^\d{7}$/.test(place.GEOID)) {
+    out.placeGeoid = place.GEOID;
+    out.placeName = place.NAME || place.BASENAME;
+  }
+  const usd = first((k) => k.includes('unified school'));
+  if (usd?.GEOID && /^\d{7}$/.test(usd.GEOID)) {
+    out.schoolDistrictGeoid = usd.GEOID;
+    out.schoolDistrictName = usd.NAME || usd.BASENAME;
+  }
+  return out;
 }
 
 export interface GeocodeError {
@@ -250,6 +290,7 @@ export async function geocodeAddress(
       congressionalDistrict,
       stateUpperDistrict,
       stateLowerDistrict,
+      ...extractLocalGeographies(geographies as Record<string, Array<Record<string, string | undefined>> | undefined>),
       latitude: match.coordinates.y,
       longitude: match.coordinates.x
     };

@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
-import { fetchLocalOfficials } from '@/lib/civic-api';
+import { geocodeAddress } from '@/lib/geocode';
+import { findLocalOfficials } from '@/lib/local-officials';
 import { lookupLimiter, getClientIp } from '@/lib/rate-limit';
 import { verifyTurnstile } from '@/lib/turnstile';
 import { resolveUsageIdentity } from '@/lib/usage-quota';
@@ -31,7 +32,6 @@ export async function POST(request: Request) {
     );
   }
 
-  const address = `${street}, ${city}, ${state} ${zip}`;
   const identity = await resolveUsageIdentity(ip);
   if (process.env.TURNSTILE_SECRET_KEY) {
     const valid = await verifyTurnstile(turnstileToken || '', { strict: !identity.userId });
@@ -41,8 +41,12 @@ export async function POST(request: Request) {
   }
 
   try {
-    const officials = await fetchLocalOfficials(address);
-    return NextResponse.json({ officials });
+    const geo = await geocodeAddress(street, city, state, zip);
+    if ('error' in geo) {
+      return NextResponse.json({ error: geo.error }, { status: geo.code === 'NO_MATCH' || geo.code === 'INVALID_ADDRESS' ? 400 : 502 });
+    }
+    const officials = findLocalOfficials(geo.stateCode, geo);
+    return NextResponse.json({ officials, coverage: officials.length > 0 ? 'roster' : 'none' });
   } catch (err) {
     console.error('Local officials lookup failed:', err);
     return NextResponse.json(

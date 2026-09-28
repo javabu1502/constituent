@@ -4,7 +4,7 @@ import { createAdminClient } from '@/lib/supabase';
 import { geocodeAddress } from '@/lib/geocode';
 import { findSenators, findRepresentative } from '@/lib/legislators';
 import { findStateLegislators } from '@/lib/state-legislators';
-import { fetchLocalOfficials } from '@/lib/civic-api';
+import { findLocalOfficials, toOfficial } from '@/lib/local-officials';
 import type { Official, LocalOfficial } from '@/lib/types';
 
 /**
@@ -76,11 +76,11 @@ export async function POST() {
   );
   officials.push(...stateLegislators);
 
-  // Local officials (non-blocking — don't fail the whole request)
+  // Local officials from the hand-verified roster (non-blocking)
   let localOfficials: LocalOfficial[] = [];
   try {
-    const address = `${profile.street}, ${profile.city}, ${profile.state} ${profile.zip}`;
-    localOfficials = await fetchLocalOfficials(address);
+    localOfficials = findLocalOfficials(geocodeResult.stateCode, geocodeResult);
+    officials.push(...localOfficials.map(toOfficial));
   } catch (err) {
     console.error('Local officials lookup failed (non-blocking):', err);
   }

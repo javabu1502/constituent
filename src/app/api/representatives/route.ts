@@ -6,7 +6,7 @@ import {
   isDataAvailable,
 } from '@/lib/legislators';
 import { findStateLegislators } from '@/lib/state-legislators';
-import { fetchLocalOfficials } from '@/lib/civic-api';
+import { findLocalOfficials, toOfficial } from '@/lib/local-officials';
 import { lookupLimiter, getClientIp } from '@/lib/rate-limit';
 import type { Official, LookupResult, ApiError } from '@/lib/types';
 
@@ -128,24 +128,11 @@ export async function POST(request: NextRequest): Promise<NextResponse<LookupRes
     );
     officials.push(...stateLegislators);
 
-    // Step 4: Look up local officials (non-blocking — don't fail if unavailable)
+    // Step 4: Local officials from the hand-verified roster (county / city /
+    // school board by Census GEOID). Non-blocking.
     try {
-      const fullAddress = `${street}, ${city}, ${state}${zip ? ` ${zip}` : ''}`;
-      const localOfficials = await fetchLocalOfficials(fullAddress);
-      for (const local of localOfficials) {
-        officials.push({
-          id: local.id,
-          name: local.name,
-          title: local.title,
-          level: 'local',
-          party: local.party,
-          state: local.state || geocodeResult.stateCode,
-          phone: local.phone,
-          email: local.email,
-          website: local.website,
-          photoUrl: local.photoUrl,
-          socialMedia: local.socialMedia,
-        });
+      for (const local of findLocalOfficials(geocodeResult.stateCode, geocodeResult)) {
+        officials.push(toOfficial(local));
       }
     } catch (err) {
       console.warn('[representatives] Local officials lookup failed:', err);

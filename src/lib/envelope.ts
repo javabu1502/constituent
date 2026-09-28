@@ -202,7 +202,9 @@ export function buildEnvelope(
   const voteWord = opts.verb === 'oppose' ? 'no' : 'yes';
   const seed = `${opts.senderName}|${opts.zip}|${opts.headline}`;
   const pick = <T,>(pool: T[]): T => pool[seededIndex(seed, pool.length)];
-  const isExecutive = official.level === 'local' || EXECUTIVE_TITLE.test(official.title || '');
+  // Local legislators (council members, commissioners, trustees) get the
+  // legislative phrasing; mayors/supervisors/executives get the executive one.
+  const isExecutive = /mayor|supervisor|executive|governor/i.test(official.title || '') || (official.level !== 'local' && EXECUTIVE_TITLE.test(official.title || ''));
   const isNonVotingDelegate = official.level === 'federal' && NON_VOTING.has((official.state || '').toUpperCase());
 
   let subject: string;
