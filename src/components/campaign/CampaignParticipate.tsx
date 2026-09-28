@@ -1527,8 +1527,6 @@ function OfficialSendCard({
             senatorLastName={official.lastName || official.name.split(' ').pop() || official.name}
             participating={adoptionAsk.participating}
             defaultChecked={adoptionAsk.defaultChecked}
-            body={message.body}
-            onBodyChange={(body) => onEdit({ body })}
             onCheckedChange={setSignChecked}
             signed={signed}
           />

@@ -79,30 +79,6 @@ export function participatingSenateCount(offices: CwcActiveOffices): number {
   return n;
 }
 
-/** The sentence added to an email/webform message when the constituent asks
- *  the office to join CWC. Kept as one paragraph so it can be removed again. */
-export const CWC_ADOPTION_SENTENCE =
-  'I also ask your office to accept constituent messages through Communicating with Congress, the delivery system already used by the House and most Senate offices, so messages like this one reach you directly.';
-
-/** Add or remove the adoption sentence before the closing signature block. */
-export function withAdoptionSentence(body: string, on: boolean): string {
-  const stripped = body
-    .split('\n')
-    .filter((line) => line.trim() !== CWC_ADOPTION_SENTENCE)
-    .join('\n')
-    .replace(/\n{3,}/g, '\n\n');
-  if (!on) return stripped;
-  // Insert before the closing ("Sincerely," / "Thank you," ...) when present.
-  const lines = stripped.split('\n');
-  const closingIdx = lines.findIndex((l) => /^(sincerely|respectfully|thank you|best regards|regards|with respect|gratefully)[,.]?\s*$/i.test(l.trim()));
-  if (closingIdx > 0) {
-    const before = lines.slice(0, closingIdx).join('\n').replace(/\s+$/, '');
-    const after = lines.slice(closingIdx).join('\n');
-    return `${before}\n\n${CWC_ADOPTION_SENTENCE}\n\n${after}`;
-  }
-  return `${stripped.replace(/\s+$/, '')}\n\n${CWC_ADOPTION_SENTENCE}`;
-}
-
 export interface AdoptionSignaturePayload {
   senator_id: string;
   senator_name: string;

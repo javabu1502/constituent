@@ -107,7 +107,7 @@ interface OfficialCardProps {
   /** True when this session already handed this official's message to CWC. */
   alreadySent?: boolean;
   /** Present for a senator whose office is not on the CWC list. */
-  adoptionAsk?: { participating: number; defaultChecked: boolean; onSign: () => void; onBodyChange: (body: string) => void };
+  adoptionAsk?: { participating: number; defaultChecked: boolean; onSign: () => void };
 }
 
 function OfficialCard({ official, message, deliveryInfo, contactMethod, isCallComplete, onMarkCallComplete, onSend, cwcDelivery, alreadySent, adoptionAsk }: OfficialCardProps) {
@@ -407,8 +407,6 @@ function OfficialCard({ official, message, deliveryInfo, contactMethod, isCallCo
             senatorLastName={official.lastName || official.name.split(' ').pop() || official.name}
             participating={adoptionAsk.participating}
             defaultChecked={adoptionAsk.defaultChecked}
-            body={message.body}
-            onBodyChange={adoptionAsk.onBodyChange}
             onCheckedChange={setSignChecked}
             signed={signed}
           />
@@ -706,7 +704,6 @@ export function SendStep({ state, dispatch, onBack }: SendStepProps) {
                   ? {
                       participating: participatingSenateCount(cwcOffices),
                       defaultChecked: true,
-                      onBodyChange: (body) => dispatch({ type: 'UPDATE_MESSAGE', payload: { officialName: official.name, field: 'body', value: body } }),
                       onSign: () => {
                         void (async () => {
                           const turnstileToken = await getToken().catch(() => '');

@@ -1,22 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { withAdoptionSentence, CWC_ADOPTION_SENTENCE, describeCwcOutcome, participatingSenateCount, isNonParticipatingSenator } from '../cwc-client';
+import { describeCwcOutcome, participatingSenateCount, isNonParticipatingSenator } from '../cwc-client';
 import type { Official } from '@/lib/types';
-
-describe('withAdoptionSentence', () => {
-  const body = 'Dear Senator Cortez Masto,\n\nPlease protect Head Start.\n\nSincerely,\nJared Busker\nReno, NV 89506';
-  it('inserts the sentence before the closing and is idempotent', () => {
-    const on = withAdoptionSentence(body, true);
-    expect(on).toContain(`Please protect Head Start.\n\n${CWC_ADOPTION_SENTENCE}\n\nSincerely,`);
-    expect(withAdoptionSentence(on, true)).toBe(on);
-    expect(on.split(CWC_ADOPTION_SENTENCE).length).toBe(2);
-  });
-  it('removes it cleanly', () => {
-    expect(withAdoptionSentence(withAdoptionSentence(body, true), false)).toBe(body);
-  });
-  it('appends at the end when there is no closing', () => {
-    expect(withAdoptionSentence('Please protect Head Start.', true)).toBe(`Please protect Head Start.\n\n${CWC_ADOPTION_SENTENCE}`);
-  });
-});
 
 describe('describeCwcOutcome', () => {
   it('queued and held read as sent; blocked / skipped / errors fail with a note', () => {
