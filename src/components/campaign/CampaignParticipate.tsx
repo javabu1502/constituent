@@ -20,6 +20,7 @@ import { useTurnstile } from '@/components/ui/Turnstile';
 import { SupportNudge } from '@/components/ui/SupportNudge';
 import { SocialShare } from '@/components/ui/SocialShare';
 import { CWC_PREFIXES, CWC_ENABLED } from '@/lib/cwc-prefixes';
+import { useCwcActiveOffices, isCwcDeliverable, CWC_SUBMITTED_STATUS } from '@/lib/cwc-client';
 
 type Step = 'stance' | 'compose' | 'form' | 'loading' | 'review' | 'done' | 'noTarget' | 'wrongState';
 type Stance = 'support' | 'oppose' | 'undecided';
@@ -535,6 +536,11 @@ export function CampaignParticipate({
   };
 
   // Delivery info for each official
+  // Which offices accept CWC delivery (live list; empty until loaded → email path).
+  const cwcOffices = useCwcActiveOffices();
+  const cwcDeliverable = (official: Official) =>
+    cwcFields && isCwcDeliverable(official, cwcOffices, { prefix, email, street, zip });
+
   const deliveryInfoMap = useMemo(() => {
     const map = new Map<string, DeliveryInfo>();
     for (const official of officials) {
@@ -618,16 +624,17 @@ export function CampaignParticipate({
         issue_area: campaign.issue_area,
         issue_subtopic: campaign.issue_subtopic || campaign.issue_area,
         message_body: msg.body,
-        delivery_method: 'email',
+        delivery_method: deliveryStatus === CWC_SUBMITTED_STATUS ? 'cwc' : 'email',
         delivery_status: deliveryStatus,
         message_intent: intentByOfficial[official.id],
         campaign_id: campaign.id,
         turnstileToken: turnstileToken || undefined,
-        // CWC delivery payload: only when the rollout flag is on, the office
-        // is federal, and every required field was collected. The server
-        // gates again (CWC_DELIVERY_ENABLED) before enqueueing anything.
+        // CWC delivery payload: ONLY on the "Send to Congress" click (never on
+        // an email/copy click, so an office can't get the message twice), and
+        // only when the rollout flag is on, the office is federal, and every
+        // required field was collected. The server gates again.
         cwc:
-          cwcFields && official.level === 'federal' && prefix && email.trim() && street.trim() && /^\d{5}/.test(zip.trim())
+          deliveryStatus === CWC_SUBMITTED_STATUS && cwcFields && official.level === 'federal' && prefix && email.trim() && street.trim() && /^\d{5}/.test(zip.trim())
             ? {
                 prefix,
                 street: street.trim(),
@@ -1176,6 +1183,7 @@ export function CampaignParticipate({
               onSend={(status) => trackSend(official, status)}
               onEdit={(patch) => updateMessage(official.name, patch)}
               startOpen={usedFallback}
+              cwcDelivery={cwcDeliverable(official)}
             />
           );
         })}
@@ -1305,6 +1313,7 @@ function OfficialSendCard({
   onSend,
   onEdit,
   startOpen,
+  cwcDelivery,
 }: {
   official: Official;
   message: OfficialMessage;
@@ -1313,8 +1322,11 @@ function OfficialSendCard({
   onSend: (status: string) => void;
   onEdit: (patch: Partial<OfficialMessage>) => void;
   startOpen: boolean;
+  /** Office accepts CWC delivery: ONE "Send to Congress" action, no email/copy. */
+  cwcDelivery?: boolean;
 }) {
   const [copied, setCopied] = useState(false);
+  const [cwcSent, setCwcSent] = useState(false);
   // Starter drafts open ready to write; AI drafts start collapsed. Track
   // open state ourselves so re-renders from typing don't fight the toggle.
   const [editOpen, setEditOpen] = useState(startOpen);
@@ -1350,7 +1362,31 @@ function OfficialSendCard({
 
       {/* Actions */}
       <div className="space-y-2">
-        {deliveryInfo.method === 'staffer_email' && mailtoLink ? (
+        {cwcDelivery ? (
+          // Office participates in Communicating With Congress: one action,
+          // delivered by us. No email app, no copy: sending it twice breaks
+          // the office's grouping and counts the constituent twice.
+          <>
+            <button
+              type="button"
+              disabled={cwcSent}
+              onClick={() => { setCwcSent(true); onSend(CWC_SUBMITTED_STATUS); }}
+              className={`flex items-center justify-center gap-2 w-full py-2.5 rounded-lg text-sm font-medium transition-colors ${cwcSent ? 'bg-green-600 text-white cursor-default' : 'bg-purple-600 hover:bg-purple-700 text-white'}`}
+            >
+              {cwcSent ? (
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+              ) : (
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+              )}
+              {cwcSent ? 'Sent to Congress' : 'Send to Congress'}
+            </button>
+            <p className="text-xs text-gray-500 dark:text-gray-400">
+              {cwcSent
+                ? 'Delivered to the office through Communicating with Congress, the message system run by the House and Senate.'
+                : 'Goes straight to the office through Communicating with Congress, the message system run by the House and Senate. No email app needed.'}
+            </p>
+          </>
+        ) : deliveryInfo.method === 'staffer_email' && mailtoLink ? (
           <>
             <button
               onClick={() => {
@@ -1411,7 +1447,7 @@ function OfficialSendCard({
           </span>
         )}
 
-        <button
+        {!cwcDelivery && <button
           onClick={copyMessage}
           className="flex items-center justify-center gap-1.5 w-full py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg text-xs font-medium transition-colors"
         >
@@ -1425,7 +1461,7 @@ function OfficialSendCard({
             </svg>
           )}
           {copied ? 'Copied!' : 'Copy Message'}
-        </button>
+        </button>}
       </div>
 
       {/* Message editor — edits flow back up so mailto/copy use them */}

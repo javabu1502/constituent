@@ -68,7 +68,7 @@ export const trackSendSchema = z.object({
   issue_area: z.string().min(1).max(200),
   issue_subtopic: z.string().min(1).max(200),
   message_body: z.string().min(1).max(10000),
-  delivery_method: z.enum(['email', 'phone', 'webform']),
+  delivery_method: z.enum(['email', 'phone', 'webform', 'cwc']),
   // Stage campaigns: whether this message thanked or tried to persuade.
   message_intent: z.enum(['persuade', 'thank']).optional(),
   // Must cover every status the clients emit (OfficialSendCard in
@@ -78,6 +78,9 @@ export const trackSendSchema = z.object({
     'drafted', 'sent', 'opened', 'copied', // legacy values, kept for compat
     'initiated', 'email_opened', 'email_copied',
     'form_opened', 'website_opened', 'called',
+    // The constituent pressed "Send to Congress": the ONLY status that may
+    // carry a cwc payload into the delivery queue (see shouldEnqueueCwc).
+    'cwc_submitted',
   ]),
   user_id: z.string().uuid().optional(),
   campaign_id: z.string().uuid().optional(),

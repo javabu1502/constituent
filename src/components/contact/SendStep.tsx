@@ -6,6 +6,7 @@ import { trackEvent } from '@/lib/analytics';
 import type { ContactState, ContactAction } from './ContactFlow';
 import type { Official } from '@/lib/types';
 import { CWC_ENABLED } from '@/lib/cwc-prefixes';
+import { useCwcActiveOffices, isCwcDeliverable, CWC_SUBMITTED_STATUS } from '@/lib/cwc-client';
 import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 import { formatPhone } from '@/lib/utils';
@@ -99,10 +100,14 @@ interface OfficialCardProps {
   isCallComplete?: boolean;
   onMarkCallComplete?: () => void;
   onSend?: (deliveryStatus: string) => void;
+  /** Office accepts CWC delivery: show ONE "Send to Congress" action and no
+   *  email/copy actions (the message must not reach the office twice). */
+  cwcDelivery?: boolean;
 }
 
-function OfficialCard({ official, message, deliveryInfo, contactMethod, isCallComplete, onMarkCallComplete, onSend }: OfficialCardProps) {
+function OfficialCard({ official, message, deliveryInfo, contactMethod, isCallComplete, onMarkCallComplete, onSend, cwcDelivery }: OfficialCardProps) {
   const [messageCopied, setMessageCopied] = useState(false);
+  const [cwcSent, setCwcSent] = useState(false);
   const [emailCopied, setEmailCopied] = useState(false);
   const [phoneCopied, setPhoneCopied] = useState(false);
   const partyColors = getPartyColors(official.party);
@@ -282,7 +287,27 @@ function OfficialCard({ official, message, deliveryInfo, contactMethod, isCallCo
 
       {/* Primary action based on delivery method */}
       <div className="space-y-2">
-        {deliveryInfo.method === 'staffer_email' && deliveryInfo.email ? (
+        {cwcDelivery ? (
+          // Office participates in Communicating With Congress: one action,
+          // delivered by us. No email app, no copy: sending it twice breaks
+          // the office's grouping and counts the constituent twice.
+          <>
+            <button
+              type="button"
+              disabled={cwcSent}
+              onClick={() => { setCwcSent(true); onSend?.(CWC_SUBMITTED_STATUS); }}
+              className={`flex items-center justify-center gap-2 w-full py-2.5 rounded-lg text-sm font-medium transition-colors ${cwcSent ? 'bg-green-600 text-white cursor-default' : 'bg-purple-600 hover:bg-purple-700 text-white'}`}
+            >
+              {cwcSent ? <CheckIcon className="w-4 h-4" /> : <EmailIcon className="w-4 h-4" />}
+              {cwcSent ? 'Sent to Congress' : 'Send to Congress'}
+            </button>
+            <p className="text-[10px] text-gray-400 dark:text-gray-500 text-center">
+              {cwcSent
+                ? 'Delivered to the office through Communicating with Congress, the message system run by the House and Senate.'
+                : 'Goes straight to the office through Communicating with Congress, the message system run by the House and Senate. No email app needed.'}
+            </p>
+          </>
+        ) : deliveryInfo.method === 'staffer_email' && deliveryInfo.email ? (
           // Staffer email - open in email client as primary action
           <>
             {mailtoLink ? (
@@ -350,8 +375,8 @@ function OfficialCard({ official, message, deliveryInfo, contactMethod, isCallCo
           </span>
         )}
 
-        {/* Secondary actions row */}
-        <div className="flex flex-col sm:flex-row gap-2">
+        {/* Secondary actions row (none under CWC delivery) */}
+        {!cwcDelivery && <div className="flex flex-col sm:flex-row gap-2">
           {deliveryInfo.method === 'staffer_email' ? (
             <>
               {/* Copy Email Address */}
@@ -409,7 +434,7 @@ function OfficialCard({ official, message, deliveryInfo, contactMethod, isCallCo
               </button>
             </>
           )}
-        </div>
+        </div>}
       </div>
 
       {/* Note for contact form method */}
@@ -453,6 +478,11 @@ export function SendStep({ state, dispatch, onBack }: SendStepProps) {
     return map;
   }, [selectedReps, contactMethod]);
 
+  // Which offices accept CWC delivery (live list; empty until loaded → email path).
+  const cwcOffices = useCwcActiveOffices();
+  const cwcFields = { prefix: state.userPrefix, email: state.userEmail, street: state.address?.street, zip: state.address?.zip };
+  const cwcDeliverable = (official: Official) => contactMethod !== 'phone' && isCwcDeliverable(official, cwcOffices, cwcFields);
+
   const markCallComplete = (officialId: string) => {
     setCompletedCalls(prev => new Set([...prev, officialId]));
   };
@@ -462,15 +492,19 @@ export function SendStep({ state, dispatch, onBack }: SendStepProps) {
     let emailCount = 0;
     let formCount = 0;
     let phoneCount = 0;
+    let cwcCount = 0;
 
-    for (const info of deliveryInfoMap.values()) {
+    for (const [id, info] of deliveryInfoMap.entries()) {
+      const official = selectedReps.find((o) => o.id === id);
+      if (official && cwcDeliverable(official)) { cwcCount++; continue; }
       if (info.method === 'staffer_email') emailCount++;
       else if (info.method === 'contact_form' || info.method === 'website') formCount++;
       else if (info.method === 'phone') phoneCount++;
     }
 
-    return { emailCount, formCount, phoneCount };
-  }, [deliveryInfoMap]);
+    return { emailCount, formCount, phoneCount, cwcCount };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [deliveryInfoMap, cwcOffices, state.userPrefix, state.userEmail, state.address?.street, state.address?.zip, contactMethod]);
 
   const trackSend = async (official: Official, deliveryStatus: string) => {
     const msg = messages[official.name];
@@ -495,14 +529,22 @@ export function SendStep({ state, dispatch, onBack }: SendStepProps) {
         issue_area: state.issueCategory || state.issue,
         issue_subtopic: state.issue,
         message_body: msg.body,
-        delivery_method: contactMethod === 'phone' ? 'phone' : deliveryInfo.method,
+        // The schema takes email | phone | webform | cwc; DeliveryInfo.method is
+        // the finer-grained routing label, so map it here.
+        delivery_method:
+          deliveryStatus === CWC_SUBMITTED_STATUS ? 'cwc'
+          : contactMethod === 'phone' ? 'phone'
+          : deliveryInfo.method === 'staffer_email' ? 'email'
+          : 'webform',
         delivery_status: deliveryStatus,
         user_id: userId || undefined,
         turnstileToken: turnstileToken || undefined,
-        // CWC delivery payload: only when the rollout flag is on, the office
-        // is federal, and every required field was collected. The server
-        // gates again (CWC_DELIVERY_ENABLED) before enqueueing anything.
+        // CWC delivery payload: ONLY on the "Send to Congress" click (never on
+        // an email/copy click, so an office can't get the message twice), and
+        // only when the rollout flag is on, the office is federal, and every
+        // required field was collected. The server gates again.
         cwc:
+          deliveryStatus === CWC_SUBMITTED_STATUS &&
           CWC_ENABLED &&
           official.level === 'federal' &&
           state.userPrefix &&
@@ -583,6 +625,10 @@ export function SendStep({ state, dispatch, onBack }: SendStepProps) {
             ? completedCalls.size > 0
               ? `${completedCalls.size} of ${selectedReps.length} calls complete`
               : 'Call each official and use your script'
+            : deliverySummary.cwcCount > 0 && deliverySummary.emailCount + deliverySummary.formCount === 0
+            ? 'Click "Send to Congress" to deliver each message'
+            : deliverySummary.cwcCount > 0
+            ? `${deliverySummary.cwcCount} sent to Congress directly, ${deliverySummary.emailCount + deliverySummary.formCount} via email or contact form`
             : deliverySummary.emailCount > 0 && deliverySummary.formCount > 0
             ? `${deliverySummary.emailCount} via email, ${deliverySummary.formCount} via contact form`
             : deliverySummary.emailCount > 0
@@ -609,6 +655,7 @@ export function SendStep({ state, dispatch, onBack }: SendStepProps) {
               isCallComplete={completedCalls.has(official.id)}
               onMarkCallComplete={() => markCallComplete(official.id)}
               onSend={(status) => trackSend(official, status)}
+              cwcDelivery={cwcDeliverable(official)}
             />
           );
         })}

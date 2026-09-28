@@ -7,7 +7,7 @@ import { writeLimiter, getClientIp } from '@/lib/rate-limit';
 import { checkLegislatorCooldown, resolveUsageIdentity } from '@/lib/usage-quota';
 import { verifyTurnstile } from '@/lib/turnstile';
 import { enqueueCwcDeliveries } from '@/lib/cwc';
-import { buildCwcQueueItem, type CampaignBillContext } from '@/lib/cwc/enqueue-from-send';
+import { buildCwcQueueItem, shouldEnqueueCwc, type CampaignBillContext } from '@/lib/cwc/enqueue-from-send';
 
 // The CWC enqueue path (after()) reaches congressional endpoints through the
 // undici static-IP proxy — Node runtime required.
@@ -112,10 +112,10 @@ export async function POST(request: NextRequest) {
     }
 
     // CWC delivery: enqueue AFTER the response is sent (the content gate runs
-    // an LLM screen; the client should not wait on it). Triple-gated: server
-    // flag + client payload + federal office. A skip or failure here loses
-    // nothing — the client's own mailto/webform path already ran.
-    if (process.env.CWC_DELIVERY_ENABLED === 'true' && body.cwc && body.legislator_level === 'federal' && data?.id) {
+    // an LLM screen; the client should not wait on it). Gated on: server flag
+    // + client payload + federal office + the constituent having pressed
+    // "Send to Congress" (status cwc_submitted) — never on email/copy clicks.
+    if (shouldEnqueueCwc(body) && body.cwc && data?.id) {
       const cwcPayload = body.cwc;
       const messageId = data.id as string;
       after(async () => {

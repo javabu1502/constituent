@@ -105,6 +105,40 @@ describe('POST /api/track-send', () => {
     expect(res.status).toBe(400);
   });
 
+  it('accepts every delivery_method the clients emit (email, phone, webform, cwc)', async () => {
+    const { POST } = await import('../track-send/route');
+    for (const [i, delivery_method] of ['email', 'phone', 'webform', 'cwc'].entries()) {
+      const req = new NextRequest('http://localhost/api/track-send', {
+        method: 'POST',
+        body: JSON.stringify({ ...validBody, delivery_method }),
+        // distinct client IPs: the shared writeLimiter allows 10/min per IP
+        headers: { 'Content-Type': 'application/json', 'x-forwarded-for': `10.9.0.${i + 1}` },
+      });
+      expect((await POST(req)).status, delivery_method).toBe(200);
+    }
+  });
+
+  it('accepts the cwc_submitted status with a cwc payload (flag off → logged, nothing enqueued)', async () => {
+    delete process.env.CWC_DELIVERY_ENABLED;
+    const { POST } = await import('../track-send/route');
+    const req = new NextRequest('http://localhost/api/track-send', {
+      method: 'POST',
+      body: JSON.stringify({
+        ...validBody,
+        delivery_method: 'cwc',
+        delivery_status: 'cwc_submitted',
+        cwc: { prefix: 'Mr.', street: '1 Main St', zip: '95814', email: 'john@example.com', subject: 'Please act on climate', senate_class: 1 },
+      }),
+      headers: { 'Content-Type': 'application/json', 'x-forwarded-for': '10.9.0.9' },
+    });
+    const res = await POST(req);
+    expect(res.status).toBe(200);
+    // the messages row never receives the street/zip/prefix
+    const inserted = mockInsert.mock.calls[0][0];
+    expect(JSON.stringify(inserted)).not.toContain('1 Main St');
+    expect(inserted.delivery_method).toBe('cwc');
+  });
+
   it('returns 400 for invalid delivery_method', async () => {
     const { POST } = await import('../track-send/route');
     const req = new NextRequest('http://localhost/api/track-send', {

@@ -411,9 +411,21 @@ export function TopicStep({ state, dispatch, onBack }: TopicStepProps) {
     }
   };
 
+  // Congressional delivery needs a title + email; only ask when a federal
+  // official is selected and the CWC rollout flag is on.
+  const cwcRequired = CWC_ENABLED && selectedReps.some((r) => r.level === 'federal');
+
   const handleContinue = () => {
     if (!userName.trim()) {
       dispatch({ type: 'SET_ERROR', payload: 'Please enter your name' });
+      return;
+    }
+    if (cwcRequired && !state.userPrefix) {
+      dispatch({ type: 'SET_ERROR', payload: 'Please select a title. Congressional offices require one to accept your message.' });
+      return;
+    }
+    if (cwcRequired && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(state.userEmail.trim())) {
+      dispatch({ type: 'SET_ERROR', payload: 'Please enter your email. Congressional offices require it to accept your message.' });
       return;
     }
     if (!issue.trim()) {
@@ -585,7 +597,7 @@ export function TopicStep({ state, dispatch, onBack }: TopicStepProps) {
       <div className="mb-5">
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
           Your Email{' '}
-          <span className="text-gray-400 dark:text-gray-500 font-normal">(optional)</span>
+          {cwcRequired ? <span className="text-red-500">*</span> : <span className="text-gray-400 dark:text-gray-500 font-normal">(optional)</span>}
         </label>
         <input
           type="email"
@@ -595,7 +607,7 @@ export function TopicStep({ state, dispatch, onBack }: TopicStepProps) {
           className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
         />
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-          So legislators can reply to you. Never shared or sold.
+          {cwcRequired ? 'Congressional offices require an email address to accept and reply to your message. Never shared or sold.' : 'So legislators can reply to you. Never shared or sold.'}
         </p>
       </div>
 

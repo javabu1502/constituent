@@ -113,6 +113,21 @@ export function stableMessageKey(opts: { email: string; campaignRef: string; bod
   return `cwc:${createHash('sha256').update(identity).digest('hex').slice(0, 40)}`;
 }
 
+/**
+ * Whether a tracked send may enter the CWC queue. ALL must hold:
+ *  - the server rollout flag is on;
+ *  - the client attached a cwc payload for a federal office;
+ *  - the constituent explicitly pressed "Send to Congress" (delivery_status
+ *    'cwc_submitted'). Email-app / copy / form clicks NEVER enqueue, so an
+ *    office can't receive the same message by staffer email AND by CWC.
+ */
+export function shouldEnqueueCwc(
+  body: Pick<TrackSendLike, 'legislator_level'> & { delivery_status?: string; cwc?: unknown },
+  env: Record<string, string | undefined> = process.env,
+): boolean {
+  return env.CWC_DELIVERY_ENABLED === 'true' && !!body.cwc && body.legislator_level === 'federal' && body.delivery_status === 'cwc_submitted';
+}
+
 export function buildCwcQueueItem(opts: {
   body: TrackSendLike;
   cwc: CwcSendPayload;
@@ -120,7 +135,7 @@ export function buildCwcQueueItem(opts: {
   /** messages.id — kept for log correlation; NOT the queue identity. */
   messageId: string;
 }): BuildResult {
-  const { body, cwc, campaign, messageId } = opts;
+  const { body, cwc, campaign } = opts;
 
   if (body.legislator_level !== 'federal') return { ok: false, skip: 'not a federal office' };
   const chamber = body.legislator_chamber === 'senate' ? 'senate' : body.legislator_chamber === 'house' ? 'house' : null;

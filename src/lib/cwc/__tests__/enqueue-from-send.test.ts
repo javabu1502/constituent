@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { buildCwcQueueItem, stableMessageKey, type TrackSendLike, type CwcSendPayload, type CampaignBillContext } from '../enqueue-from-send';
+import { buildCwcQueueItem, stableMessageKey, shouldEnqueueCwc, type TrackSendLike, type CwcSendPayload, type CampaignBillContext } from '../enqueue-from-send';
 
 const body = (overrides: Partial<TrackSendLike> = {}): TrackSendLike => ({
   advocate_name: 'Jane Q Doe',
@@ -33,6 +33,25 @@ const campaign = (overrides: Partial<CampaignBillContext> = {}): CampaignBillCon
   direction: 'support',
   headline: 'Make Hidden Foster Care Visible',
   ...overrides,
+});
+
+describe('shouldEnqueueCwc (only a "Send to Congress" click may enter the queue)', () => {
+  const on = { CWC_DELIVERY_ENABLED: 'true' };
+  const federal = { legislator_level: 'federal', cwc: cwc() };
+  it('enqueues on cwc_submitted with the flag on, a payload, and a federal office', () => {
+    expect(shouldEnqueueCwc({ ...federal, delivery_status: 'cwc_submitted' }, on)).toBe(true);
+  });
+  it('NEVER enqueues on email / copy / form / call clicks, even with a payload', () => {
+    for (const s of ['email_opened', 'email_copied', 'form_opened', 'website_opened', 'called', 'initiated', 'sent']) {
+      expect(shouldEnqueueCwc({ ...federal, delivery_status: s }, on)).toBe(false);
+    }
+  });
+  it('never enqueues with the server flag off, without a payload, or for non-federal offices', () => {
+    expect(shouldEnqueueCwc({ ...federal, delivery_status: 'cwc_submitted' }, {})).toBe(false);
+    expect(shouldEnqueueCwc({ ...federal, delivery_status: 'cwc_submitted' }, { CWC_DELIVERY_ENABLED: 'false' })).toBe(false);
+    expect(shouldEnqueueCwc({ legislator_level: 'federal', delivery_status: 'cwc_submitted' }, on)).toBe(false);
+    expect(shouldEnqueueCwc({ ...federal, legislator_level: 'state', delivery_status: 'cwc_submitted' }, on)).toBe(false);
+  });
 });
 
 describe('stableMessageKey (dedupe identity — pre-go-live review 2026-09-28)', () => {
