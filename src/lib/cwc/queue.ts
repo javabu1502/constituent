@@ -166,6 +166,11 @@ export interface ProcessQueueOptions {
   /** Test seam — defaults to sendCwcDelivery. */
   send?: (delivery: CwcDelivery, opts: SendCwcOptions) => Promise<SendCwcOutcome>;
   now?: () => number;
+  /** SUPERVISED DRAIN: claim ONLY these queue row ids (still only rows that
+   *  are 'queued' — held/leased/terminal rows are never touched). Bypasses
+   *  the FIFO claim function; used by the admin queue page for the first
+   *  sends and for hand-picked retries. Max 20 per call. */
+  ids?: number[];
 }
 
 export interface ProcessQueueSummary {
@@ -202,13 +207,34 @@ export async function processCwcSendQueue(opts: ProcessQueueOptions): Promise<Pr
   const send = opts.send ?? sendCwcDelivery;
   const summary: ProcessQueueSummary = { claimed: 0, sent: 0, routed: 0, refused: 0, deferred: 0, failed: 0 };
 
-  const { data, error } = await db.rpc('claim_cwc_send_jobs', {
-    p_worker: opts.workerId,
-    p_limit: opts.limit ?? 20,
-    p_lease_seconds: opts.leaseSeconds ?? 120,
-  });
-  if (error) throw new Error(`claim_cwc_send_jobs failed: ${error.message}`);
-  const jobs = (data ?? []) as SendQueueJob[];
+  let jobs: SendQueueJob[];
+  if (opts.ids) {
+    if (opts.ids.length === 0 || opts.ids.length > 20) throw new Error('selective drain takes 1–20 queue ids');
+    // Atomic conditional update: only rows still 'queued' flip to 'leased',
+    // so a concurrent cron claim (which also requires 'queued') cannot
+    // double-claim a row.
+    const leaseUntil = new Date(now() + (opts.leaseSeconds ?? 120) * 1000).toISOString();
+    const { data, error } = await db
+      .from('cwc_send_queue')
+      .update({ status: 'leased', leased_by: opts.workerId, lease_expires_at: leaseUntil, updated_at: new Date(now()).toISOString() })
+      .in('id', opts.ids)
+      .eq('status', 'queued')
+      .select('id, message_key, office_code, environment, chamber, campaign_id, delivery, bill_level, status, attempts, max_attempts');
+    if (error) throw new Error(`cwc_send_queue selective claim failed: ${error.message}`);
+    // The SQL claim function bumps attempts at claim time; mirror that here.
+    jobs = ((data ?? []) as SendQueueJob[]).map((j) => ({ ...j, attempts: j.attempts + 1 }));
+    for (const j of jobs) {
+      await db.from('cwc_send_queue').update({ attempts: j.attempts }).eq('id', j.id);
+    }
+  } else {
+    const { data, error } = await db.rpc('claim_cwc_send_jobs', {
+      p_worker: opts.workerId,
+      p_limit: opts.limit ?? 20,
+      p_lease_seconds: opts.leaseSeconds ?? 120,
+    });
+    if (error) throw new Error(`claim_cwc_send_jobs failed: ${error.message}`);
+    jobs = (data ?? []) as SendQueueJob[];
+  }
   summary.claimed = jobs.length;
 
   for (const job of jobs) {
@@ -222,6 +248,19 @@ export async function processCwcSendQueue(opts: ProcessQueueOptions): Promise<Pr
         console.error(`cwc_send_queue: failed to update job ${job.id}:`, updErr.message);
       }
     };
+
+    // The claim function has no environment filter: a row enqueued for one
+    // environment must never be sent to another. Park it (held = invisible
+    // to every claim) rather than sending or burning attempts.
+    if (job.environment !== opts.environment) {
+      summary.refused++;
+      await finish({
+        status: 'held',
+        attempts: job.attempts - 1,
+        last_error: `environment mismatch: row is '${job.environment}', worker drains '${opts.environment}'`,
+      });
+      continue;
+    }
 
     try {
       const outcome = await send(job.delivery, {
@@ -237,14 +276,21 @@ export async function processCwcSendQueue(opts: ProcessQueueOptions): Promise<Pr
         summary.sent++;
         await finish({ status: 'sent', last_error: null });
       } else if (outcome.fallback === 'retry-later') {
-        // Maintenance window / endpoint 429 / queue depth — wait, don't burn.
+        // Maintenance window / endpoint 429 / geocoder outage / queue depth —
+        // wait, don't burn. A hinted delay (window end) beats the backoff.
         summary.deferred++;
         await finish({
           status: 'queued',
           attempts: job.attempts - 1, // a deferral gives the attempt back
-          run_after: new Date(now() + backoffMs(job.attempts)).toISOString(),
+          run_after: new Date(now() + (outcome.retryAfterMs ?? backoffMs(job.attempts))).toISOString(),
           last_error: outcome.reason,
         });
+      } else if (outcome.fallback === 'rejected') {
+        // The endpoint refused the payload (400/401/403…): terminal. The
+        // office does NOT have it; surfacing as 'failed' is what makes an
+        // inactive key or a schema regression visible instead of silent.
+        summary.failed++;
+        await finish({ status: 'failed', last_error: outcome.reason });
       } else if (outcome.fallback === 'router') {
         summary.routed++;
         await finish({ status: 'routed', last_error: outcome.reason });
@@ -267,7 +313,8 @@ export async function processCwcSendQueue(opts: ProcessQueueOptions): Promise<Pr
           last_error: err.message,
         });
       } else {
-        // Transient (network, DB blip): backoff and let the budget decide.
+        // Transient (endpoint 5xx, network, DB blip): backoff and let the
+        // budget decide.
         const exhausted = job.attempts >= job.max_attempts;
         if (exhausted) summary.failed++;
         else summary.deferred++;

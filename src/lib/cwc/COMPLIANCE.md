@@ -10,7 +10,7 @@ module · 🟡 pending (upstream product/recipient work) · 📋 process step.
 - ✅ **Prefix ∈ {Mr., Mrs., Miss, Ms., Dr.}** — validated + unit-tested. UI must also constrain the picker to these five.
 - ✅ **Office code = the seat, not the person** (static). Senate `S[A-Z]{2}0[1-3]`, House `H[A-Z]{2}\d{2}`, chamber-checked.
 - ✅ **DeliveryId** = 32-char alphanumeric GUID; **DeliveryDate** = YYYYMMDD.
-- ✅ **DeliveryAgent** = exact company legal name (`CWC_DELIVERY_AGENT` = `My Democracy LLC`) — Senate validates against the access application.
+- ✅ **DeliveryAgent** is chamber-specific: Senate = exact SOAPBox company legal name (`CWC_DELIVERY_AGENT` = `My Democracy LLC`); House = its vendor record (`CWC_HOUSE_DELIVERY_AGENT` = `MyDemocracy`, one word — UAT rejected the legal name as "DeliveryAgent Mismatch" 2026-09-18). Both must be set in Vercel production.
 - ✅ **≥1 LibraryOfCongressTopic** from the Senate 32-topic list (not the House's newer list; count verified byte-for-byte against the RNG in the 2026-08-26 audit).
 - ✅ **Subject** 6–500 chars; **OrganizationStatement/ConstituentMessage** 6–10,000, at least one present.
 - ✅ **Bill type abbreviations** transcribed literally from the schema (incl. the `H.Con.Res` no-trailing-dot quirk); **ProOrCon** = Pro/Con.
@@ -24,7 +24,7 @@ module · 🟡 pending (upstream product/recipient work) · 📋 process step.
 - ✅ **AI-personalized text → `ConstituentMessage`; untouched template → `OrganizationStatement`.** Both supported; be consistent.
 - ✅ **Do NOT repeat the constituent's name/mailing address in the message body/closing** (breaks the offices' ~80%-similarity grouping). Two layers at render (`buildCwcXml`): `stripSignatureBlock` (bounded trailing-block cut, CRLF-normalized, closing+name-on-one-line and dash sign-offs) then **value-aware `redactConstituentPii`** — drops whole lines matching the constituent's OWN name/address/city-state-zip anywhere in the body (top-of-letter blocks included). The pre-send gate refuses what redaction can't fix safely: surviving signature blocks, **inline** PII ("My name is Jane Doe…"), and bodies that are ONLY a signature (nothing left after stripping). Every audit defeat case is a regression test.
 - ✅ **Ask the constituent pro/con when a bill is referenced.** Enforced by the pre-send gate `assertCwcSendable` (`content.ts`): a bill reference without `message.stance` refuses to send. (Weigh-ins already capture stance; the contact flow must pass it through — the gate makes forgetting impossible.)
-- ✅ **Only send from real constituents of that office.** `verifyConstituentForOffice` (`verify.ts`) re-geocodes the delivery's own constituent address and requires it to produce the target seat — **enforced inside `sendCwcDelivery`, MANDATORY in production (no opt-out)**, not caller discipline. `offices.ts` resolves office codes deterministically and refuses to guess. REMAINING RISK (upstream): the House district must come from an accurate **ZIP+4 → district** lookup; at split-ZIP boundaries a 5-digit ZIP can map to the wrong district.
+- ✅ **Only send from real constituents of that office.** `verifyConstituentForOffice` (`verify.ts`) re-geocodes the delivery's own constituent address and requires it to produce the target seat — **enforced inside `sendCwcDelivery`, MANDATORY in production (no opt-out)**, not caller discipline. `offices.ts` resolves office codes deterministically and refuses to guess. The district comes from a Census **full street-address** geocode (not ZIP), so split-ZIP boundaries are not a risk. A geocoder OUTAGE (API error / rate limit) is `transient` and defers the send (retry-later); only a real mismatch or unresolvable address refuses.
 - ✅ **Don't send federal offices about state bills.** `assertCwcSendable` (`content.ts`) — **FAIL-CLOSED**: only an explicit `billLevel` of `'federal'` or `'none'` is sendable; `'state'`, `null`, and *omitted* all refuse. "We don't know" never defaults to "send it to Congress".
 
 ## Content-compliance gate (`compliance-gate.ts` + `src/lib/compliance/`) ✅ wired 2026-09-25
@@ -58,18 +58,21 @@ One function every send path runs (in `send.ts`, the admin route, and the accept
 ## Operational rules
 
 - ✅ **Rate limit 5–10 msg/sec** — the authoritative limiter is the Postgres permit allocator (`rate-permit.ts`), claimed **inside `postHouse`/`postSenate`** so no path (including the raw exports) can bypass it, and it holds across concurrent serverless instances. Deep queues **defer with backpressure** (`RatePermitBackpressureError` → `retry-later`), never burst past the ceiling; refused claims don't inflate the queue (`p_max_wait_ms`). `sendBatch` spacing remains per-process courtesy pacing only.
-- ✅ **Run Get Active Offices before campaigns; only send to listed offices** (Senate participation is voluntary, ~50/100). `getActiveOfficeCodesCached` (`send.ts`) caches the list ~12h with a force-refresh option; `sendCwcDelivery` refuses offices not on the list and returns a `router` fallback so the message goes out via webform/email instead. An **EMPTY list throws instead of caching** — an API/parse failure must not silently divert every send to the fallback for 12h.
+- ✅ **Run Get Active Offices before campaigns; only send to listed offices** (Senate participation is voluntary, ~50/100). `getActiveOfficeCodesCached` (`send.ts`) caches the list 1h (was 12h; both chambers ask for regular refreshes) with a force-refresh option; the Senate list is read with the key that matches the MODE (production key in production); `sendCwcDelivery` refuses offices not on the list and returns a `router` fallback so the message goes out via webform/email instead. An **EMPTY list throws instead of caching** — an API/parse failure must not silently divert every send to the fallback for 12h.
 - ✅ **SCWC maintenance windows** (Sun 12a–6a, Wed 5a–7a ET): `isInScwcMaintenanceWindow` (`constants.ts`); `sendBatch` refuses to start inside a window (House-only batches can override); `sendCwcDelivery` returns `retry-later`.
 - ✅ **Idempotent retries — duplicates forbidden (House LoS A.12; Senate 409s a reused DeliveryId).** `cwc_deliveries` table + `delivery-log.ts`: the DeliveryId per (message × office × environment) is minted once and REUSED on retry, never regenerated.
-- ✅ **Monitor 400/500-class responses (SOAPBox requirement).** Every outcome (http status, parsed `<Error>` list, **raw response body** 8KB-truncated, payload sha256) is recorded in `cwc_deliveries` (service-role only, RLS with no policies). A **429 keeps the row `pending`** and surfaces as `retry-later` — rate limiting is not a verdict on the message.
+- ✅ **Monitor 400/500-class responses (SOAPBox requirement).** Every outcome (http status, parsed `<Error>` list, **raw response body** 8KB-truncated, payload sha256) is recorded in `cwc_deliveries` (service-role only, RLS with no policies). Outcome → queue (pre-go-live review 2026-09-28; before this, ANY non-429 response was marked `sent`): **2xx/409 → `sent`**; **429 → `retry-later`** (row stays `pending`, same id reused); **5xx → `CwcTransientError`** → exponential backoff within the attempt budget; **any other 4xx (400/401/403/415) → `rejected` → queue `failed`** with the endpoint's message in `last_error` — an inactive key or schema regression is visible, never silent. If the log already says `delivered` for a (message × office × environment), the send is NOT repeated (worker-death safety for the House, which does not 409 duplicates). `/admin/cwc-queue` shows every row with its delivery-log outcome.
 - ✅ **Proxy scoped to CWC only**, Node runtime, both static IPs whitelisted (`client.ts`, README). **FAIL-CLOSED egress**: production sends refuse to leave without `QUOTAGUARD_URL` (explicit `CWC_ALLOW_DIRECT_EGRESS=true` override for diagnostics only), and env-overridable endpoints are validated as `https` `house.gov`/`senate.gov` hosts (`assertCwcUrl`).
 - ✅ **Senate acceptance harness** — `scripts/cwc-acceptance-run.ts`: ≥3 distinct campaigns (bill+Pro, same-bill+Con as a separate campaign id, no-bill) across ALL 100 test office codes (`SENATE_TEST_OFFICE_CODES`), each send through **`sendCwcDelivery` (the production path)**, logged to `cwc_deliveries`. Refuses to run without `CWC_ACCEPTANCE_CONFIRM=YES` + `CWC_ACCEPTANCE_ENV=test`; hardcoded to the test endpoint.
 - 📋 **Notify `saacwc@saa.senate.gov` when test messages are ready for review** (Senate).
 - 📋 **Separate test/prod endpoints + keys**; Senate test env accepts all 100 offices but keeps them in the sandbox.
 - 📋 **House: 72-hour response SLA** to CAO comms (2 hours for emergencies).
 - 📋 **SOAPBox account fields must match the access application** (company legal name, contacts) — process-side, verify in SOAPBox.
-- 📋 **American Samoa office code**: we emit `HAQ00` per the House AQ remap (`offices.ts`); confirm with the Senate/House whether their systems expect `AQ00` vs `HAS00` before AS traffic.
-- 📋 **House `/v2/validate` bill-type casing** (Title-case vs lowercase) — confirm before House go-live (`constants.ts` note).
+- ✅ **American Samoa office code** `HAQ00` (House API doc p.7; the production `/v2/offices` list contains no AS code either way — verified 2026-09-28).
+- ✅ **House bill-type casing is lowercase** (`hr`, `hconres`…) — settled empirically against `/v2/validate` 2026-09-18; Senate keeps the RNG Title-case forms.
+- ✅ **Duplicate deliveries per click** (pre-go-live review 2026-09-28): the queue identity is `stableMessageKey(email, campaignRef, sha256(body))`, not `messages.id` — every send-button click POSTs track-send and creates a new messages row, so a per-row key enqueued one CWC delivery per click. Same sender + same text + same campaign = one delivery.
+- ✅ **Environment isolation**: the drainer parks (holds) any row whose `environment` differs from the worker's instead of sending it.
+- ✅ **Maintenance windows are checked before the Census geocode** and defer the row until the window ENDS (`retryAfterMs`), not 1 minute.
 
 ## Delivery routing — CWC vs. fallback (the "~46 other offices")
 
@@ -124,11 +127,15 @@ died mid-send retries with the SAME id → Senate 409 → recorded delivered,
 never duplicated at the office. Attempts burn at claim time; deferrals
 (backpressure/maintenance/429) give the attempt back; compliance errors fail
 terminally; transient errors back off exponentially (1m→15m cap) until the
-budget is spent. NOT yet wired to any cron/route — the hard no-send gate
-holds; the production drainer route ships with the contact-flow caller.
+budget is spent. WIRED (2026-09-25): `POST /api/track-send` enqueues (behind
+`CWC_DELIVERY_ENABLED`), `GET /api/cron/cwc-queue` drains every 5 min (behind
+`CWC_QUEUE_ENABLED`), the client attaches the CWC fields behind
+`NEXT_PUBLIC_CWC_ENABLED`. `POST /api/admin/cwc-queue` (page `/admin/cwc-queue`)
+drains hand-picked rows through the SAME gated path for supervised sends, and
+can hold / requeue rows.
 
 ## Not started (next milestones)
 
-- Recipient resolution (address → correct office code, incl. House ZIP+4 district) fed from address-accurate rep resolution.
-- Production API route that enqueues via `enqueueCwcDeliveries` + a cron drainer route calling `processCwcSendQueue`.
-- Webform sender for the ~46 non-participating Senate offices (form-automation wrap).
+- Webform sender for the 47 non-participating Senate offices (27 CAPTCHA-free are automatable; 18 reCAPTCHA need the finish-on-site handoff). Today a `routed` queue row is terminal: the constituent's own mailto/webform click already ran.
+- Retention: `cwc_send_queue.delivery` keeps the full street address + email after terminal status; purge on a schedule.
+- Alerting on `rejected`/`error` rows in `cwc_deliveries` (today: the admin queue page + Vercel logs).

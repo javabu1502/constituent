@@ -25,7 +25,19 @@ export type VerifyReason =
 
 export type VerifyResult =
   | { ok: true; officeCode: string }
-  | { ok: false; reason: VerifyReason; detail: string };
+  | {
+      ok: false;
+      reason: VerifyReason;
+      detail: string;
+      /** True when the failure is the GEOCODER's (outage / rate limit), not
+       *  the address's — callers should retry later, never refuse. */
+      transient?: boolean;
+    };
+
+/** Census outage or throttling — the address itself was never judged. */
+function isTransientGeocodeFailure(code: string): boolean {
+  return code === 'API_ERROR' || code === 'RATE_LIMITED';
+}
 
 export interface ConstituentAddress {
   street: string;
@@ -44,7 +56,7 @@ export async function verifyConstituent(
 
   const geo = await geocodeAddress(address.street, address.city, address.state, address.zip);
   if ('error' in geo) {
-    return { ok: false, reason: 'GEOCODE_FAILED', detail: geo.error };
+    return { ok: false, reason: 'GEOCODE_FAILED', detail: geo.error, transient: isTransientGeocodeFailure(geo.code) };
   }
 
   // Senators represent the whole state — the state must match.
@@ -88,7 +100,7 @@ export async function verifyConstituentForOffice(delivery: CwcDelivery): Promise
 
   const geo = await geocodeAddress(c.address1, c.city, c.state, c.zip);
   if ('error' in geo) {
-    return { ok: false, reason: 'GEOCODE_FAILED', detail: geo.error };
+    return { ok: false, reason: 'GEOCODE_FAILED', detail: geo.error, transient: isTransientGeocodeFailure(geo.code) };
   }
 
   // Senators represent the whole state — the seat's state letters must match.

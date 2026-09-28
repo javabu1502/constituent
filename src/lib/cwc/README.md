@@ -3,10 +3,13 @@
 Delivers constituent messages to House and Senate offices via the official
 **Communicating With Congress** APIs, replacing mailto/webform handoff.
 
-**Status: scaffolding for review. Nothing is sent yet.** The module can build
-and validate payloads, but no test or production message has been transmitted.
-Live testing waits on (1) the QuotaGuard proxy being wired up, (2) House IP
-whitelisting, and (3) the Senate testing key.
+**Status (2026-09-28): production-approved by both chambers, shipped dark.**
+Senate acceptance 300/300 (08-31, SAA review passed 09-18); House UAT 12/12
+(09-18), production key activated 09-28 (`/v2/validate` on cwc.house.gov =
+"Validation Passed" from the whitelisted IP). Delivery is gated by three env
+flags, all OFF until the supervised first send: `NEXT_PUBLIC_CWC_ENABLED`
+(client collects title + email), `CWC_DELIVERY_ENABLED` (track-send enqueues),
+`CWC_QUEUE_ENABLED` (cron drains). `/admin/cwc-queue` drains chosen rows.
 
 ## Design principle
 

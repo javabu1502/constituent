@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
-import { assertCwcUrl, assertProxiedEgress, senateBase, sendSenate, sendHouse } from '../client';
+import { assertCwcUrl, assertProxiedEgress, senateBase, sendSenate, sendHouse, getActiveOfficesSenate } from '../client';
 import { setRatePermitClientFactory, RatePermitBackpressureError } from '../rate-permit';
 import type { CwcDelivery } from '../types';
 
@@ -130,5 +130,27 @@ describe('rate permit at the POST choke point (raw exports cannot bypass)', () =
     await sendSenate(delivery, 'uat', false);
     expect(permitClaims).toEqual([]);
     expect(fetchMock).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe('getActiveOfficesSenate key selection (pre-go-live review 2026-09-28)', () => {
+  beforeEach(() => {
+    fetchMock.mockClear();
+    process.env.SCWC_TEST_API_KEY = 'test-key';
+    process.env.SCWC_API_KEY = 'prod-key';
+    process.env.CWC_ALLOW_DIRECT_EGRESS = 'true';
+  });
+  afterEach(() => { delete process.env.CWC_ALLOW_DIRECT_EGRESS; });
+
+  it('production reads participation with the PRODUCTION key, never the test key', async () => {
+    await getActiveOfficesSenate('production');
+    const url = String((fetchMock.mock.calls[0] as unknown[])[0]);
+    expect(url).toContain('apikey=prod-key');
+    expect(url).not.toContain('test-key');
+  });
+
+  it('uat prefers the test key', async () => {
+    await getActiveOfficesSenate('uat');
+    expect(String((fetchMock.mock.calls[0] as unknown[])[0])).toContain('apikey=test-key');
   });
 });

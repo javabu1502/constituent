@@ -188,7 +188,11 @@ export async function geocodeAddress(
       if (key.toLowerCase().includes('congressional')) {
         const cdInfo = geographies[key]?.[0];
         // Try various field names for the district number
-        congressionalDistrict = cdInfo?.CD119 || cdInfo?.CD118 || cdInfo?.BASENAME || '0';
+        // The Census layer is re-keyed each Congress (CD118 → CD119 → CD120…);
+        // take whichever CDnnn field is present so a re-key never silently
+        // degrades to the BASENAME fallback (pre-go-live review 2026-09-28).
+        const cdField = cdInfo ? Object.keys(cdInfo).find((k) => /^CD\d{3}$/.test(k)) : undefined;
+        congressionalDistrict = (cdField && (cdInfo as Record<string, string | undefined>)[cdField]) || cdInfo?.BASENAME || '0';
         // BASENAME might be "Delegate District (at Large)" for DC, extract number
         if (congressionalDistrict && /^\d+$/.test(congressionalDistrict)) {
           break;

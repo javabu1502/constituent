@@ -23,6 +23,9 @@ export interface DeliveryLogRow {
   deliveryId: string;
   /** True when the row already existed — i.e. this is a RETRY of a prior send. */
   existing: boolean;
+  /** Logged status of the existing row ('delivered' means a prior attempt
+   *  already landed — the caller must NOT POST again). */
+  status?: CwcDeliveryStatus;
 }
 
 // Minimal shape of the Supabase client we use — injectable for tests so the
@@ -52,13 +55,13 @@ export async function getOrCreateDeliveryId(
 
   const { data: found, error: selErr } = await db
     .from('cwc_deliveries')
-    .select('delivery_id')
+    .select('delivery_id, status')
     .eq('message_key', messageKey)
     .eq('office_code', officeCode)
     .eq('environment', environment)
     .maybeSingle();
   if (selErr) throw new Error(`cwc_deliveries lookup failed: ${selErr.message}`);
-  if (found?.delivery_id) return { deliveryId: found.delivery_id, existing: true };
+  if (found?.delivery_id) return { deliveryId: found.delivery_id, existing: true, status: found.status as CwcDeliveryStatus | undefined };
 
   const deliveryId = newDeliveryId();
   const { error: insErr } = await db.from('cwc_deliveries').insert({
@@ -76,12 +79,12 @@ export async function getOrCreateDeliveryId(
     if (insErr.code === '23505') {
       const { data: raced } = await db
         .from('cwc_deliveries')
-        .select('delivery_id')
+        .select('delivery_id, status')
         .eq('message_key', messageKey)
         .eq('office_code', officeCode)
         .eq('environment', environment)
         .maybeSingle();
-      if (raced?.delivery_id) return { deliveryId: raced.delivery_id, existing: true };
+      if (raced?.delivery_id) return { deliveryId: raced.delivery_id, existing: true, status: raced.status as CwcDeliveryStatus | undefined };
     }
     throw new Error(`cwc_deliveries insert failed: ${insErr.message}`);
   }

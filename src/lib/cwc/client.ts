@@ -231,7 +231,13 @@ export async function getActiveOfficesSenate(mode: Mode = 'uat'): Promise<unknow
   const url = CWC_ENDPOINTS.senate.activeOffices;
   if (!url) throw new Error('SCWC_OFFICES_URL not set (Senate Get Active Offices endpoint)');
   assertCwcUrl(url, 'Senate active-offices endpoint (SCWC_OFFICES_URL)');
-  const apiKey = process.env.SCWC_TEST_API_KEY || process.env.SCWC_API_KEY || '';
+  // Key follows the MODE: production participation must be read with the
+  // production key (the test key answers for the sandbox, where all 100
+  // offices "participate" — pre-go-live review 2026-09-28).
+  const apiKey =
+    mode === 'production'
+      ? process.env.SCWC_API_KEY || ''
+      : process.env.SCWC_TEST_API_KEY || process.env.SCWC_API_KEY || '';
   const full = apiKey ? `${url}${url.includes('?') ? '&' : '?'}apikey=${encodeURIComponent(apiKey)}` : url;
   const res = await undiciFetch(full, { dispatcher: cwcDispatcher() });
   if (res.status < 200 || res.status >= 300) throw new Error(`getActiveOfficesSenate failed: HTTP ${res.status}`);

@@ -30,7 +30,7 @@ import type { CwcDelivery } from './types';
  *                           deep-queue refusal surfaces here as retry-later.
  */
 
-const ACTIVE_OFFICES_TTL_MS = 12 * 60 * 60 * 1000; // ~12h; George emails when offices join
+const ACTIVE_OFFICES_TTL_MS = 60 * 60 * 1000; // 1h: both chambers ask for regular refreshes; one GET per chamber per hour is cheap (was 12h)
 
 interface OfficeCache {
   codes: ReadonlySet<string>;
@@ -121,8 +121,34 @@ export interface SendCwcOptions {
 export type SendCwcOutcome =
   | { sent: true; deliveryId: string; retried: boolean; result: CwcResult }
   | { sent: false; fallback: 'router'; reason: string }
-  | { sent: false; fallback: 'retry-later'; reason: string }
-  | { sent: false; fallback: 'not-constituent'; reason: string };
+  | { sent: false; fallback: 'retry-later'; reason: string; retryAfterMs?: number }
+  | { sent: false; fallback: 'not-constituent'; reason: string }
+  /** The endpoint REJECTED the message (4xx other than 409/429): terminal.
+   *  Retrying the same payload can never succeed; the row must surface as a
+   *  failure, never as 'sent' (pre-go-live review 2026-09-28). */
+  | { sent: false; fallback: 'rejected'; reason: string; result: CwcResult };
+
+/** 5xx / endpoint outage: nothing landed, the DeliveryId is logged for reuse,
+ *  and the queue should back off and retry within its attempt budget. */
+export class CwcTransientError extends Error {
+  readonly status: number;
+  constructor(message: string, status: number) {
+    super(message);
+    this.name = 'CwcTransientError';
+    this.status = status;
+  }
+}
+
+/** Milliseconds until the chamber's maintenance window ends (sampled per
+ *  minute, capped at 8h so a clock bug can never park a row for days). */
+export function msUntilMaintenanceWindowEnds(chamber: Chamber, from: Date): number {
+  const step = 60_000;
+  const cap = 8 * 60 * 60_000;
+  for (let ms = step; ms <= cap; ms += step) {
+    if (!isInMaintenanceWindow(chamber, new Date(from.getTime() + ms))) return ms;
+  }
+  return cap;
+}
 
 /**
  * Deliver one message via CWC with every gate applied. Returns `sent: false`
@@ -157,32 +183,44 @@ export async function sendCwcDelivery(
     ]);
   }
 
-  // 1b. Constituent verification — the address must geocode to THIS seat.
-  //     Mandatory in production (no opt-out); test env opts in via flag.
+  // 1b. Maintenance windows, chamber-aware: SCWC Sun 12a–6a + Wed 5a–7a ET;
+  //     House DAILY 12a–6a ET. Checked BEFORE verification (which costs a
+  //     Census geocode) so a parked row doesn't re-geocode every 5 minutes
+  //     for six hours; the deferral hint parks it until the window ends.
+  const at = opts.now ?? new Date();
+  if (isInMaintenanceWindow(delivery.chamber, at)) {
+    return {
+      sent: false,
+      fallback: 'retry-later',
+      retryAfterMs: msUntilMaintenanceWindowEnds(delivery.chamber, at),
+      reason:
+        delivery.chamber === 'senate'
+          ? 'SCWC maintenance window (Sun 12a–6a / Wed 5a–7a US Eastern)'
+          : 'House CWC maintenance window (daily 12a–6a US Eastern)',
+    };
+  }
+
+  // 2. Constituent verification — the address must geocode to THIS seat.
+  //    Mandatory in production (no opt-out); test env opts in via flag.
+  //    A geocoder OUTAGE is not a verdict on the constituent: retry later.
   const shouldVerify = opts.environment === 'production' || opts.verifyConstituent === true;
   if (shouldVerify) {
     const verifier = opts.verifier ?? verifyConstituentForOffice;
     const verdict = await verifier(delivery);
     if (!verdict.ok) {
+      if (verdict.transient) {
+        return {
+          sent: false,
+          fallback: 'retry-later',
+          reason: `constituent verification unavailable (${verdict.reason}): ${verdict.detail}`,
+        };
+      }
       return {
         sent: false,
         fallback: 'not-constituent',
         reason: `constituent verification failed (${verdict.reason}): ${verdict.detail}`,
       };
     }
-  }
-
-  // 2. Maintenance windows, chamber-aware: SCWC Sun 12a–6a + Wed 5a–7a ET;
-  //    House DAILY 12a–6a ET (audit 2026-08-26 — previously unchecked).
-  if (isInMaintenanceWindow(delivery.chamber, opts.now ?? new Date())) {
-    return {
-      sent: false,
-      fallback: 'retry-later',
-      reason:
-        delivery.chamber === 'senate'
-          ? 'SCWC maintenance window (Sun 12a–6a / Wed 5a–7a US Eastern)'
-          : 'House CWC maintenance window (daily 12a–6a US Eastern)',
-    };
   }
 
   // 3. Only send to offices on the active list; others go to the router's
@@ -202,12 +240,23 @@ export async function sendCwcDelivery(
   }
 
   // 4. Idempotent DeliveryId: reuse the logged id on retry, never regenerate.
-  const { deliveryId, existing } = await getOrCreateDeliveryId(
+  //    If the log already says 'delivered' (a worker died between the POST
+  //    and the queue update), do NOT POST again: the Senate would 409 it,
+  //    but the House is not documented to — so the log is the authority.
+  const { deliveryId, existing, status: loggedStatus } = await getOrCreateDeliveryId(
     opts.messageKey,
     delivery.officeCode,
     opts.environment,
     { campaignId: delivery.campaignId, chamber: delivery.chamber },
   );
+  if (existing && loggedStatus === 'delivered') {
+    return {
+      sent: true,
+      deliveryId,
+      retried: true,
+      result: { ok: true, status: 409, raw: 'already delivered per cwc_deliveries; not re-sent' },
+    };
+  }
 
   // 5. Build with the logged id, send, record the outcome (incl. 400/500s).
   //    The default sender claims the cross-instance rate permit inside the
@@ -227,22 +276,42 @@ export async function sendCwcDelivery(
       raw: result.raw ?? null,
       xmlSha256: xmlSha256(xml),
     });
+    const snippet = result.raw ? `: ${result.raw.slice(0, 200)}` : '';
     if (result.status === 429) {
       // Endpoint-side rate limiting: the message did NOT land and is not
       // rejected — the row stays pending and the retry reuses the same id.
       return {
         sent: false,
         fallback: 'retry-later',
-        reason: `CWC endpoint rate-limited the send (429)${result.raw ? `: ${result.raw.slice(0, 200)}` : ''}`,
+        reason: `CWC endpoint rate-limited the send (429)${snippet}`,
       };
     }
-    return { sent: true, deliveryId, retried: existing, result };
+    if (result.status === 409 || (result.status >= 200 && result.status < 300)) {
+      // 2xx = accepted; 409 = the Senate already has this DeliveryId (a prior
+      // attempt landed) — both mean the office has the message.
+      return { sent: true, deliveryId, retried: existing, result };
+    }
+    if (result.status >= 500 || result.status === 0) {
+      // Endpoint outage: nothing landed; the logged id is reused on retry.
+      throw new CwcTransientError(`CWC endpoint error (HTTP ${result.status})${snippet}`, result.status);
+    }
+    // Any other 4xx (400 schema/content, 401/403 key or IP, 404, 415…):
+    // the office does NOT have the message and a retry cannot fix it.
+    return {
+      sent: false,
+      fallback: 'rejected',
+      reason: `CWC endpoint rejected the message (HTTP ${result.status})${result.errors?.length ? ` [${result.errors.join('; ')}]` : ''}${snippet}`,
+      result,
+    };
   } catch (e) {
     if (e instanceof RatePermitBackpressureError) {
       // The queue is deep, not broken: nothing was sent, the DeliveryId is
       // logged and will be REUSED on retry. Don't record an error outcome.
       return { sent: false, fallback: 'retry-later', reason: e.message };
     }
+    // The 5xx outcome was already recorded (status 'error' + raw body)
+    // before the throw; re-recording would overwrite the response body.
+    if (e instanceof CwcTransientError) throw e;
     await recordDeliveryResult(deliveryId, {
       status: 'error',
       errors: [(e as Error).message],

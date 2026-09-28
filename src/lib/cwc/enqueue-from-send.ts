@@ -1,3 +1,4 @@
+import { createHash } from 'crypto';
 import { buildCampaignId } from './campaign-id';
 import { locTopicsForIssueArea } from './topics';
 import { houseOfficeCode, senateOfficeCode } from './offices';
@@ -76,7 +77,11 @@ function billContext(campaign: CampaignBillContext | null): {
   billLevel: 'federal' | 'none' | null;
   bill: CwcBill | null;
 } {
-  if (!campaign || !campaign.bill_level || campaign.bill_level === 'none') {
+  if (!campaign) return { billLevel: 'none', bill: null };
+  if (!campaign.bill_level || campaign.bill_level === 'none') {
+    // A NULL level with bill fields set is an unclassified bill campaign —
+    // fail closed rather than send it as a no-bill message (no ProOrCon).
+    if (!campaign.bill_level && (campaign.bill_type || campaign.bill_number)) return { billLevel: null, bill: null };
     return { billLevel: 'none', bill: null };
   }
   if (campaign.bill_level !== 'federal') return { billLevel: null, bill: null }; // state → not CWC-sendable
@@ -94,10 +99,25 @@ function billContext(campaign: CampaignBillContext | null): {
   return { billLevel: 'none', bill: null };
 }
 
+/**
+ * Stable identity for a logical message: the SAME constituent sending the
+ * SAME text under the SAME campaign is one delivery, however many times the
+ * client reports it (every "open email" / "copy" click POSTs track-send and
+ * creates a fresh messages row — keying on messages.id would enqueue a
+ * duplicate CWC delivery per click; pre-go-live review 2026-09-28). The queue
+ * and delivery log dedupe on (messageKey × office × environment).
+ */
+export function stableMessageKey(opts: { email: string; campaignRef: string; body: string }): string {
+  const bodyHash = createHash('sha256').update(opts.body.trim()).digest('hex');
+  const identity = `${opts.email.trim().toLowerCase()}|${opts.campaignRef}|${bodyHash}`;
+  return `cwc:${createHash('sha256').update(identity).digest('hex').slice(0, 40)}`;
+}
+
 export function buildCwcQueueItem(opts: {
   body: TrackSendLike;
   cwc: CwcSendPayload;
   campaign: CampaignBillContext | null;
+  /** messages.id — kept for log correlation; NOT the queue identity. */
   messageId: string;
 }): BuildResult {
   const { body, cwc, campaign, messageId } = opts;
@@ -154,6 +174,10 @@ export function buildCwcQueueItem(opts: {
 
   return {
     ok: true,
-    item: { delivery, messageKey: `msg:${messageId}`, billLevel },
+    item: {
+      delivery,
+      messageKey: stableMessageKey({ email: cwc.email, campaignRef, body: body.message_body }),
+      billLevel,
+    },
   };
 }

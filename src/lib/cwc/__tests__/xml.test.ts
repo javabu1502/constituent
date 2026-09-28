@@ -231,13 +231,13 @@ describe('buildCwcXml', () => {
     expect(() => buildCwcXml(validDelivery())).toThrow(/CWC_CONTACT_NAME must be ≥6/);
   });
 
-  it('drops Address2 / ConstituentOrganization under 2 chars instead of erroring', () => {
+  it('drops Address2 / ConstituentOrganization under the RNG minLength (3) instead of erroring', () => {
     const c = validDelivery().constituent;
-    const short = buildCwcXml(validDelivery({ constituent: { ...c, address2: 'A', constituentOrganization: 'B' } }));
+    const short = buildCwcXml(validDelivery({ constituent: { ...c, address2: '4B', constituentOrganization: 'NY' } }));
     expect(short).not.toContain('<Address2>');
     expect(short).not.toContain('<ConstituentOrganization>');
-    const kept = buildCwcXml(validDelivery({ constituent: { ...c, address2: '4B', constituentOrganization: 'NY Nurses' } }));
-    expect(kept).toContain('<Address2>4B</Address2>');
+    const kept = buildCwcXml(validDelivery({ constituent: { ...c, address2: 'Apt 4B', constituentOrganization: 'NY Nurses' } }));
+    expect(kept).toContain('<Address2>Apt 4B</Address2>');
     expect(kept).toContain('<ConstituentOrganization>NY Nurses</ConstituentOrganization>');
   });
 

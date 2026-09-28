@@ -218,10 +218,11 @@ export function buildCwcXml(delivery: CwcDelivery): string {
   if (c.suffix?.trim()) L.push(tag('Suffix', c.suffix.trim()));
   if (c.title?.trim()) L.push(tag('Title', c.title.trim()));
   // Optional tags with a schema minimum of 2 chars are DROPPED (not errored)
-  // when shorter — a 1-char Address2/"organization" is noise, not signal.
-  if ((c.constituentOrganization?.trim().length ?? 0) >= 2) L.push(tag('ConstituentOrganization', c.constituentOrganization!.trim()));
+  // when shorter — the Senate RNG requires minLength 3 for both; a 1–2 char
+  // value ("#4") would be a schema 400, and is noise anyway.
+  if ((c.constituentOrganization?.trim().length ?? 0) >= 3) L.push(tag('ConstituentOrganization', c.constituentOrganization!.trim())); // RNG minLength 3
   L.push(tag('Address1', c.address1.trim()));
-  if ((c.address2?.trim().length ?? 0) >= 2) L.push(tag('Address2', c.address2!.trim()));
+  if ((c.address2?.trim().length ?? 0) >= 3) L.push(tag('Address2', c.address2!.trim())); // RNG minLength 3
   L.push(tag('City', c.city.trim()));
   L.push(tag('StateAbbreviation', c.state));
   L.push(tag('Zip', c.zip));

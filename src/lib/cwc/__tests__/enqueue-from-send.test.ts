@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { buildCwcQueueItem, type TrackSendLike, type CwcSendPayload, type CampaignBillContext } from '../enqueue-from-send';
+import { buildCwcQueueItem, stableMessageKey, type TrackSendLike, type CwcSendPayload, type CampaignBillContext } from '../enqueue-from-send';
 
 const body = (overrides: Partial<TrackSendLike> = {}): TrackSendLike => ({
   advocate_name: 'Jane Q Doe',
@@ -35,6 +35,33 @@ const campaign = (overrides: Partial<CampaignBillContext> = {}): CampaignBillCon
   ...overrides,
 });
 
+describe('stableMessageKey (dedupe identity — pre-go-live review 2026-09-28)', () => {
+  it('is the same for the same constituent + campaign + text regardless of the messages row', () => {
+    const a = buildCwcQueueItem({ body: body(), cwc: cwc(), campaign: campaign(), messageId: 'm1' });
+    const b = buildCwcQueueItem({ body: body(), cwc: cwc(), campaign: campaign(), messageId: 'm2' });
+    expect(a.ok && b.ok && a.item.messageKey === b.item.messageKey).toBe(true);
+  });
+  it('ignores email case/whitespace and body edge whitespace', () => {
+    const k1 = stableMessageKey({ email: 'Jane@Example.com ', campaignRef: 'c', body: 'Hello\n' });
+    const k2 = stableMessageKey({ email: 'jane@example.com', campaignRef: 'c', body: 'Hello' });
+    expect(k1).toBe(k2);
+  });
+  it('differs when the text, the campaign, or the sender differs', () => {
+    const base = { email: 'jane@example.com', campaignRef: 'c', body: 'Hello' };
+    expect(stableMessageKey({ ...base, body: 'Hello there' })).not.toBe(stableMessageKey(base));
+    expect(stableMessageKey({ ...base, campaignRef: 'd' })).not.toBe(stableMessageKey(base));
+    expect(stableMessageKey({ ...base, email: 'john@example.com' })).not.toBe(stableMessageKey(base));
+  });
+  it('fails closed on a campaign with bill fields but no bill_level classification', () => {
+    const r = buildCwcQueueItem({
+      body: body(), cwc: cwc(),
+      campaign: campaign({ bill_level: null, bill_congress: 119, bill_type: 'hr', bill_number: 1 }),
+      messageId: 'm1',
+    });
+    expect(r.ok).toBe(false);
+  });
+});
+
 describe('buildCwcQueueItem', () => {
   it('builds a House delivery from a tracked campaign send', () => {
     const r = buildCwcQueueItem({ body: body(), cwc: cwc(), campaign: campaign(), messageId: 'm1' });
@@ -42,7 +69,7 @@ describe('buildCwcQueueItem', () => {
     if (!r.ok) return;
     expect(r.item.delivery.officeCode).toBe('HNV02');
     expect(r.item.delivery.chamber).toBe('house');
-    expect(r.item.messageKey).toBe('msg:m1');
+    expect(r.item.messageKey).toMatch(/^cwc:[0-9a-f]{40}$/);
     expect(r.item.billLevel).toBe('none');
     expect(r.item.delivery.constituent).toMatchObject({
       prefix: 'Ms.', firstName: 'Jane', lastName: 'Q Doe', state: 'NV', zip: '89501',

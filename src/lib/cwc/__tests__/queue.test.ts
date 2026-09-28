@@ -38,6 +38,7 @@ describe('cwc send queue', () => {
   let updates: Array<{ patch: Record<string, unknown>; id: unknown }>;
   let claimArgs: Record<string, unknown> | null;
   let claimed: SendQueueJob[];
+  let selectiveClaim: { ids: unknown; status: unknown } | null;
 
   function fakeDb() {
     return {
@@ -55,6 +56,16 @@ describe('cwc send queue', () => {
             updates.push({ patch, id });
             return { error: null };
           },
+          // selective claim chain: .in('id', ids).eq('status','queued').select(...)
+          in: (_col: string, ids: unknown) => ({
+            eq: (_c: string, status: unknown) => ({
+              select: async () => {
+                selectiveClaim = { ids, status };
+                updates.push({ patch, id: ids });
+                return { data: claimed, error: null };
+              },
+            }),
+          }),
         }),
       }),
     } as unknown as ReturnType<typeof import('@/lib/supabase').createAdminClient>;
@@ -76,6 +87,7 @@ describe('cwc send queue', () => {
     upserts = [];
     updates = [];
     claimArgs = null;
+    selectiveClaim = null;
     claimed = [];
     gateDecisions = [];
     setSendQueueClientFactory(fakeDb);
@@ -230,6 +242,47 @@ describe('cwc send queue', () => {
       expect(summary.deferred).toBe(1);
       expect(updates[0].patch).toMatchObject({ status: 'queued', attempts: 1 });
       expect(new Date(updates[0].patch.run_after as string).getTime()).toBe(t0 + 45_000);
+    });
+
+    it("an endpoint REJECTION (400/401/403) is terminal 'failed', never 'sent'", async () => {
+      claimed = [job()];
+      const send = vi.fn(async (): Promise<SendCwcOutcome> => ({
+        sent: false, fallback: 'rejected', reason: 'CWC endpoint rejected the message (HTTP 401)', result: { ok: false, status: 401 },
+      }));
+      const summary = await processCwcSendQueue({ workerId: 'w', environment: 'test', send });
+      expect(summary).toMatchObject({ failed: 1, sent: 0 });
+      expect(updates[0].patch).toMatchObject({ status: 'failed', last_error: expect.stringContaining('HTTP 401') });
+    });
+
+    it('a retry-later with a hinted delay (maintenance window end) parks the row until then', async () => {
+      claimed = [job({ attempts: 1 })];
+      const t0 = 1_000_000;
+      const send = vi.fn(async (): Promise<SendCwcOutcome> => ({ sent: false, fallback: 'retry-later', reason: 'window', retryAfterMs: 4 * 60 * 60_000 }));
+      await processCwcSendQueue({ workerId: 'w', environment: 'test', send, now: () => t0 });
+      expect(new Date(updates[0].patch.run_after as string).getTime()).toBe(t0 + 4 * 60 * 60_000);
+      expect(updates[0].patch.attempts).toBe(0);
+    });
+
+    it("never sends a row enqueued for another environment — parks it 'held'", async () => {
+      claimed = [job({ environment: 'test' })];
+      const send = vi.fn(async () => sent);
+      const summary = await processCwcSendQueue({ workerId: 'w', environment: 'production', send });
+      expect(send).not.toHaveBeenCalled();
+      expect(summary.refused).toBe(1);
+      expect(updates[0].patch).toMatchObject({ status: 'held', last_error: expect.stringContaining('environment mismatch') });
+    });
+
+    it('selective drain claims ONLY the given ids that are still queued, bypassing FIFO', async () => {
+      claimed = [job({ id: 7, attempts: 0 })];
+      const send = vi.fn(async () => sent);
+      const summary = await processCwcSendQueue({ workerId: 'admin:jared', environment: 'test', send, ids: [7] });
+      expect(claimArgs).toBeNull(); // the FIFO rpc was not used
+      expect(selectiveClaim).toEqual({ ids: [7], status: 'queued' });
+      expect(updates[0].patch).toMatchObject({ status: 'leased', leased_by: 'admin:jared' });
+      expect(send).toHaveBeenCalledWith(delivery, expect.objectContaining({ complianceGated: true }));
+      expect(summary).toMatchObject({ claimed: 1, sent: 1 });
+      expect(updates.at(-1)!.patch).toMatchObject({ status: 'sent' });
+      await expect(processCwcSendQueue({ workerId: 'w', environment: 'test', send, ids: [] })).rejects.toThrow(/1–20/);
     });
 
     it('transient errors back off until the budget is spent, then fail', async () => {

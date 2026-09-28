@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
-import { getActiveOfficeCodesCached, clearActiveOfficeCache, sendCwcDelivery } from '../send';
+import { getActiveOfficeCodesCached, clearActiveOfficeCache, sendCwcDelivery, CwcTransientError, msUntilMaintenanceWindowEnds } from '../send';
 import { setDeliveryLogClientFactory } from '../delivery-log';
 import { setRatePermitClientFactory } from '../rate-permit';
 import { CwcComplianceError } from '../content';
@@ -216,11 +216,99 @@ describe('sendCwcDelivery orchestration', () => {
       messageKey: 'user1:campaign-1', environment: 'test', billLevel: 'federal',
       activeOffices: { loader: activeLoader }, sender: rejectSender, now: friday,
     });
-    expect(outcome.sent).toBe(true); // the POST happened; the outcome is logged
+    // The POST happened and is logged for monitoring, but the office does
+    // NOT have the message: the outcome is a terminal rejection, never 'sent'
+    // (pre-go-live review 2026-09-28 — a 401 from an inactive key used to be
+    // reported as sent and silently lost).
+    expect(outcome).toMatchObject({ sent: false, fallback: 'rejected' });
+    if (!outcome.sent && outcome.fallback === 'rejected') expect(outcome.reason).toMatch(/HTTP 400.*bad state/);
     expect(rows[0]).toMatchObject({
       status: 'rejected', http_status: 400, errors: ['bad state'],
       raw_response: '<Errors><Error>bad state</Error></Errors>',
     });
+  });
+
+  it('a 401 (inactive key) is a terminal rejection, not a send', async () => {
+    const unauthorized = async (): Promise<CwcResult> => ({ ok: false, status: 401, raw: '{"Error":"Valid API key required"}' });
+    const outcome = await sendCwcDelivery(delivery, {
+      messageKey: 'user1:campaign-1', environment: 'test', billLevel: 'federal',
+      activeOffices: { loader: activeLoader }, sender: unauthorized, now: friday,
+    });
+    expect(outcome).toMatchObject({ sent: false, fallback: 'rejected' });
+    expect(rows[0]).toMatchObject({ status: 'rejected', http_status: 401 });
+  });
+
+  it('a 5xx throws CwcTransientError (queue backs off) and keeps the id for reuse', async () => {
+    const outage = async (): Promise<CwcResult> => ({ ok: false, status: 503, raw: 'Service Unavailable' });
+    await expect(
+      sendCwcDelivery(delivery, {
+        messageKey: 'user1:campaign-1', environment: 'test', billLevel: 'federal',
+        activeOffices: { loader: activeLoader }, sender: outage, now: friday,
+      }),
+    ).rejects.toBeInstanceOf(CwcTransientError);
+    expect(rows).toHaveLength(1);
+    expect(rows[0]).toMatchObject({ status: 'error', http_status: 503, raw_response: 'Service Unavailable' });
+  });
+
+  it('a 409 (Senate: DeliveryId already landed) counts as sent', async () => {
+    const dup = async (): Promise<CwcResult> => ({ ok: false, status: 409, raw: 'duplicate DeliveryId' });
+    const outcome = await sendCwcDelivery(delivery, {
+      messageKey: 'user1:campaign-1', environment: 'test', billLevel: 'federal',
+      activeOffices: { loader: activeLoader }, sender: dup, now: friday,
+    });
+    expect(outcome.sent).toBe(true);
+    expect(rows[0]).toMatchObject({ status: 'delivered', http_status: 409 });
+  });
+
+  it('never re-POSTs a message the delivery log already records as delivered', async () => {
+    const sender = vi.fn(okSender);
+    const opts = {
+      messageKey: 'user1:campaign-1', environment: 'test' as const, billLevel: 'federal' as const,
+      activeOffices: { loader: activeLoader }, sender, now: friday,
+    };
+    await sendCwcDelivery(delivery, opts);
+    expect(rows[0].status).toBe('delivered');
+    const again = await sendCwcDelivery(delivery, opts);
+    expect(sender).toHaveBeenCalledTimes(1);
+    expect(again).toMatchObject({ sent: true, retried: true });
+  });
+
+  it('a geocoder OUTAGE defers (retry-later) instead of refusing the constituent', async () => {
+    const sender = vi.fn(okSender);
+    const outcome = await sendCwcDelivery(delivery, {
+      messageKey: 'user1:campaign-1', environment: 'test', billLevel: 'federal',
+      activeOffices: { loader: activeLoader }, sender, now: friday,
+      verifyConstituent: true,
+      verifier: async () => ({ ok: false, reason: 'GEOCODE_FAILED', detail: 'Rate limited', transient: true }),
+    });
+    expect(outcome).toMatchObject({ sent: false, fallback: 'retry-later' });
+    expect(sender).not.toHaveBeenCalled();
+  });
+
+  it('a genuine geocode failure (bad address) still refuses', async () => {
+    const outcome = await sendCwcDelivery(delivery, {
+      messageKey: 'user1:campaign-1', environment: 'test', billLevel: 'federal',
+      activeOffices: { loader: activeLoader }, sender: okSender, now: friday,
+      verifyConstituent: true,
+      verifier: async () => ({ ok: false, reason: 'GEOCODE_FAILED', detail: 'Address not found' }),
+    });
+    expect(outcome).toMatchObject({ sent: false, fallback: 'not-constituent' });
+  });
+
+  it('checks the maintenance window BEFORE geocoding and hints the deferral to the window end', async () => {
+    const verifier = vi.fn(async () => ({ ok: true as const, officeCode: 'SNY01' }));
+    const sunday3amEt = new Date('2026-08-16T07:00:00Z'); // Sun 03:00 EDT
+    const outcome = await sendCwcDelivery(delivery, {
+      messageKey: 'user1:campaign-1', environment: 'test', billLevel: 'federal',
+      activeOffices: { loader: activeLoader }, sender: okSender, now: sunday3amEt,
+      verifyConstituent: true, verifier,
+    });
+    expect(outcome).toMatchObject({ sent: false, fallback: 'retry-later' });
+    if (!outcome.sent && outcome.fallback === 'retry-later') {
+      expect(outcome.retryAfterMs).toBe(3 * 60 * 60_000); // until 06:00 ET
+    }
+    expect(verifier).not.toHaveBeenCalled();
+    expect(msUntilMaintenanceWindowEnds('house', new Date('2026-08-17T04:30:00Z'))).toBe(5.5 * 60 * 60_000); // Mon 00:30 EDT → 06:00
   });
 
   it('maps an endpoint 429 to retry-later and keeps the row pending for id reuse', async () => {
