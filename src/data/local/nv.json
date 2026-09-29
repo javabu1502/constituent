@@ -819,7 +819,8 @@
           "verifiedAt": "2026-09-28",
           "unverified": true
         }
-      ]
+      ],
+      "boundaries": "henderson-wards"
     },
     {
       "type": "city",
@@ -942,7 +943,8 @@
           "verifiedAt": "2026-09-28",
           "unverified": false
         }
-      ]
+      ],
+      "boundaries": "las-vegas-wards"
     },
     {
       "type": "city",
@@ -1215,7 +1217,8 @@
           "verifiedAt": "2026-09-28",
           "unverified": true
         }
-      ]
+      ],
+      "boundaries": "north-las-vegas-wards"
     },
     {
       "type": "city",
@@ -1338,7 +1341,8 @@
           "verifiedAt": "2026-09-28",
           "unverified": false
         }
-      ]
+      ],
+      "boundaries": "reno-wards"
     },
     {
       "type": "city",
@@ -1445,7 +1449,8 @@
           "verifiedAt": "2026-09-28",
           "unverified": false
         }
-      ]
+      ],
+      "boundaries": "sparks-wards"
     },
     {
       "type": "city",
@@ -2082,7 +2087,8 @@
           "verifiedAt": "2026-09-28",
           "unverified": false
         }
-      ]
+      ],
+      "boundaries": "clark-commission"
     },
     {
       "type": "county",
@@ -3046,7 +3052,8 @@
           "verifiedAt": "2026-09-28",
           "unverified": false
         }
-      ]
+      ],
+      "boundaries": "washoe-commission"
     },
     {
       "type": "county",
@@ -3570,7 +3577,8 @@
           "verifiedAt": "2026-09-28",
           "unverified": false
         }
-      ]
+      ],
+      "boundaries": "ccsd-trustees"
     },
     {
       "type": "school_district",
@@ -4849,7 +4857,8 @@
           "verifiedAt": "2026-09-28",
           "unverified": false
         }
-      ]
+      ],
+      "boundaries": "wcsd-trustees"
     },
     {
       "type": "school_district",

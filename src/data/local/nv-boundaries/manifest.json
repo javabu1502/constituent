@@ -1,0 +1,254 @@
+{
+ "clark-commission": {
+  "sourceUrl": "https://maps.clarkcountynv.gov/arcgis/rest/services/AdminServ/CommissionerDistrict_p/FeatureServer/0",
+  "downloadedAt": "2026-09-29T01:58:47Z",
+  "featureCount": 7,
+  "districts": [
+   "District A",
+   "District B",
+   "District C",
+   "District D",
+   "District E",
+   "District F",
+   "District G"
+  ],
+  "sizeBytes": 21682,
+  "rawSizeBytes": 760462,
+  "crs": "EPSG:4326",
+  "caveats": "Clark County GIS (AGO item 2b268ede6d2940a8927b2452ccbddec9). Simplified 5% with mapshaper (760 KB -> 22 KB)."
+ },
+ "ccsd-trustees": {
+  "sourceUrl": "https://services1.arcgis.com/F1v0ufATbBQScMtY/arcgis/rest/services/CCSD_Trustees_2020_JAN_2025/FeatureServer/2",
+  "downloadedAt": "2026-09-29T01:58:47Z",
+  "featureCount": 7,
+  "districts": [
+   "District A",
+   "District B",
+   "District C",
+   "District D",
+   "District E",
+   "District F",
+   "District G"
+  ],
+  "sizeBytes": 20423,
+  "rawSizeBytes": 654579,
+  "crs": "EPSG:4326",
+  "caveats": "Hosted by City of Las Vegas Office of GIS (AGO item a8005f48b6d74459a813bea7d93e2626), not by CCSD itself; layer title says 2020 map as of Jan 2025. Simplified 5% (655 KB -> 20 KB)."
+ },
+ "las-vegas-wards": {
+  "sourceUrl": "https://services1.arcgis.com/F1v0ufATbBQScMtY/arcgis/rest/services/Council_Wards/FeatureServer/337",
+  "downloadedAt": "2026-09-29T01:58:47Z",
+  "featureCount": 6,
+  "districts": [
+   "Ward 1",
+   "Ward 2",
+   "Ward 3",
+   "Ward 4",
+   "Ward 5",
+   "Ward 6"
+  ],
+  "sizeBytes": 12944,
+  "rawSizeBytes": 316832,
+  "crs": "EPSG:4326",
+  "caveats": "City of Las Vegas Office of GIS. Source layer has 90 rows; 84 are WARD='0' county-island polygons and were excluded with WARD<>'0'. Simplified 5% (317 KB -> 13 KB)."
+ },
+ "henderson-wards": {
+  "sourceUrl": "https://maps.cityofhenderson.com/arcgis/rest/services/public/OpenDataAdministrativeBoundaries/MapServer/2",
+  "downloadedAt": "2026-09-29T01:58:47Z",
+  "featureCount": 4,
+  "districts": [
+   "Ward I",
+   "Ward II",
+   "Ward III",
+   "Ward IV"
+  ],
+  "sizeBytes": 220539,
+  "rawSizeBytes": 220539,
+  "crs": "EPSG:4326",
+  "caveats": "City of Henderson GIS (AGO item c92a13c8550f405da4b8856294d334cf). Under 300 KB, not simplified. Roman numerals derived from WARDNAME field."
+ },
+ "north-las-vegas-wards": {
+  "sourceUrl": "https://maps.clarkcountynv.gov/arcgis/rest/services/OpenData/PoliticalBoundaries/MapServer/5",
+  "downloadedAt": "2026-09-29T01:58:47Z",
+  "featureCount": 4,
+  "districts": [
+   "Ward 1",
+   "Ward 2",
+   "Ward 3",
+   "Ward 4"
+  ],
+  "sizeBytes": 164541,
+  "rawSizeBytes": 164541,
+  "crs": "EPSG:4326",
+  "caveats": "NOT from a City of North Las Vegas portal (no CNLV GIS host resolved and no CNLV-owned AGO item found). Taken from Clark County OpenData PoliticalBoundaries Ward layer filtered PLACE=80 AND WARD<>0; PLACE=80 is NLV (NAME field lists NLV council members Barron, Garcia Anderson, Black, Cherchio). Under 300 KB, not simplified."
+ },
+ "washoe-commission": {
+  "sourceUrl": "https://wcgisweb.washoecounty.us/arcgis/rest/services/OpenData/OpenData/FeatureServer/4",
+  "downloadedAt": "2026-09-29T01:58:47Z",
+  "featureCount": 5,
+  "districts": [
+   "District 1",
+   "District 2",
+   "District 3",
+   "District 4",
+   "District 5"
+  ],
+  "sizeBytes": 12803,
+  "rawSizeBytes": 374803,
+  "crs": "EPSG:4326",
+  "caveats": "Washoe County OpenData (AGO item 34ef388cc1a64df69cc4e673ec7b5e4a). Simplified 5% (375 KB -> 13 KB)."
+ },
+ "wcsd-trustees": {
+  "sourceUrl": "https://wcgisweb.washoecounty.us/arcgis/rest/services/OpenData/OpenData/FeatureServer/119",
+  "downloadedAt": "2026-09-29T01:58:47Z",
+  "featureCount": 5,
+  "districts": [
+   "District A",
+   "District B",
+   "District C",
+   "District D",
+   "District E"
+  ],
+  "sizeBytes": 40225,
+  "rawSizeBytes": 713432,
+  "crs": "EPSG:4326",
+  "caveats": "Washoe County OpenData \"School Board Trustee\" (standard districts A-E; at-large F/G are layer 125 and excluded). Published by Washoe County, not WCSD. Simplified 5% (713 KB -> 40 KB); mapshaper reported 194 self-intersections it could not repair after simplification."
+ },
+ "reno-wards": {
+  "sourceUrl": "https://services5.arcgis.com/RjM4BJrv5ZkqP4XC/arcgis/rest/services/Final_Option_E/FeatureServer/1",
+  "downloadedAt": "2026-09-29T01:58:47Z",
+  "featureCount": 6,
+  "districts": [
+   "Ward 1",
+   "Ward 2",
+   "Ward 3",
+   "Ward 4",
+   "Ward 5",
+   "Ward 6"
+  ],
+  "sizeBytes": 305907,
+  "rawSizeBytes": 305907,
+  "crs": "EPSG:4326",
+  "caveats": "City of Reno hosted \"Reno 6 Ward Map\" (AGO item a36d7af2b3824a15a5d95207cf4d5803, adopted Option E, last edited 2024-01-30). Rep field is stale (\"To be determined by 2024 election\") so member names were kept only where populated. Cross-checked against Washoe County OpenData layer 122 (six wards with current members). Under 300 KB, not simplified. Validation note: 770 W Golden Valley Rd (39.6105,-119.8420) hits Ward 4; both the City of Reno City Limits layer (CityofRenoBoundaries/5) and Washoe County OpenData layer 11 place that point inside Reno city limits, so the address is not unincorporated per official data. Raw city-limits helper saved at raw/reno-city-limits.geojson."
+ },
+ "sparks-wards": {
+  "sourceUrl": "https://wcgisweb.washoecounty.us/arcgis/rest/services/OpenData/OpenData/FeatureServer/121",
+  "downloadedAt": "2026-09-29T01:58:47Z",
+  "featureCount": 5,
+  "districts": [
+   "Ward 1",
+   "Ward 2",
+   "Ward 3",
+   "Ward 4",
+   "Ward 5"
+  ],
+  "sizeBytes": 246293,
+  "rawSizeBytes": 246293,
+  "crs": "EPSG:4326",
+  "caveats": "Published by Washoe County OpenData, not by City of Sparks (no Sparks GIS host resolved). Under 300 KB, not simplified."
+ },
+ "_validation": {
+  "Reno City Hall": {
+   "clark-commission": [],
+   "ccsd-trustees": [],
+   "las-vegas-wards": [],
+   "henderson-wards": [],
+   "north-las-vegas-wards": [],
+   "washoe-commission": [
+    "District 3"
+   ],
+   "wcsd-trustees": [
+    "District D"
+   ],
+   "reno-wards": [
+    "Ward 1"
+   ],
+   "sparks-wards": []
+  },
+  "Las Vegas City Hall": {
+   "clark-commission": [
+    "District D"
+   ],
+   "ccsd-trustees": [
+    "District D"
+   ],
+   "las-vegas-wards": [
+    "Ward 3"
+   ],
+   "henderson-wards": [],
+   "north-las-vegas-wards": [],
+   "washoe-commission": [],
+   "wcsd-trustees": [],
+   "reno-wards": [],
+   "sparks-wards": []
+  },
+  "Henderson City Hall": {
+   "clark-commission": [
+    "District G"
+   ],
+   "ccsd-trustees": [
+    "District A"
+   ],
+   "las-vegas-wards": [],
+   "henderson-wards": [
+    "Ward I"
+   ],
+   "north-las-vegas-wards": [],
+   "washoe-commission": [],
+   "wcsd-trustees": [],
+   "reno-wards": [],
+   "sparks-wards": []
+  },
+  "North Las Vegas City Hall": {
+   "clark-commission": [
+    "District D"
+   ],
+   "ccsd-trustees": [
+    "District D"
+   ],
+   "las-vegas-wards": [],
+   "henderson-wards": [],
+   "north-las-vegas-wards": [
+    "Ward 1"
+   ],
+   "washoe-commission": [],
+   "wcsd-trustees": [],
+   "reno-wards": [],
+   "sparks-wards": []
+  },
+  "Sparks City Hall": {
+   "clark-commission": [],
+   "ccsd-trustees": [],
+   "las-vegas-wards": [],
+   "henderson-wards": [],
+   "north-las-vegas-wards": [],
+   "washoe-commission": [
+    "District 3"
+   ],
+   "wcsd-trustees": [
+    "District B"
+   ],
+   "reno-wards": [],
+   "sparks-wards": [
+    "Ward 1"
+   ]
+  },
+  "770 W Golden Valley Rd Reno 89506": {
+   "clark-commission": [],
+   "ccsd-trustees": [],
+   "las-vegas-wards": [],
+   "henderson-wards": [],
+   "north-las-vegas-wards": [],
+   "washoe-commission": [
+    "District 5"
+   ],
+   "wcsd-trustees": [
+    "District C"
+   ],
+   "reno-wards": [
+    "Ward 4"
+   ],
+   "sparks-wards": []
+  }
+ }
+}
