@@ -619,6 +619,11 @@ export function CampaignForm({
           maxLength={500}
           className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent resize-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
         />
+        {campaignType === 'storytelling' && (
+          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+            This is the campaign page introduction: who you are, why you are collecting stories, and what you will do with them. Put the question you want people to answer in the story prompt below, not here.
+          </p>
+        )}
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{description.length}/500 characters</p>
         <FieldError field="description" />
       </div>
@@ -898,10 +903,13 @@ export function CampaignForm({
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Story Prompt <span className="text-gray-400 dark:text-gray-500 font-normal">(optional)</span>
             </label>
+            <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">
+              The first question the guide asks each storyteller. Write it as one direct question, not a description of the campaign.
+            </p>
             <textarea
               value={storyPrompt}
               onChange={(e) => setStoryPrompt(e.target.value)}
-              placeholder="What kind of story are you asking for? e.g., How has the cost of housing affected your family?"
+              placeholder="e.g., Tell us about a time you struggled to find or pay for child care. What happened?"
               rows={3}
               maxLength={2000}
               className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 resize-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"

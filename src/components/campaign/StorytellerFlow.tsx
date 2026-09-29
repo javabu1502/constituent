@@ -343,13 +343,6 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
   if (step === 'intro') {
     return (
       <div className="space-y-5">
-        {campaign.story_prompt && (
-          <div className="p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700 rounded-xl">
-            <p className="text-xs font-medium text-blue-600 dark:text-blue-400 mb-1">What this campaign is asking</p>
-            <p className="text-sm text-blue-900 dark:text-blue-200">{campaign.story_prompt}</p>
-          </div>
-        )}
-
         <div className="space-y-2 text-sm text-gray-600 dark:text-gray-300">
           <p className="font-medium text-gray-900 dark:text-white">How it works</p>
           <ol className="list-decimal list-inside space-y-1">
