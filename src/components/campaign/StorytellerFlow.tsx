@@ -360,15 +360,6 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
           </ol>
         </div>
 
-        <div className="p-3 bg-gray-50 dark:bg-gray-700/50 rounded-xl">
-          <p className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">How this campaign may use your story</p>
-          {campaign.usage_statement && <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">{campaign.usage_statement}</p>}
-          <ul className="text-sm text-gray-600 dark:text-gray-300 list-disc list-inside space-y-0.5">
-            {availableUses.map((o) => <li key={o.value}>{o.label}</li>)}
-          </ul>
-          <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">You choose which of these to allow before you submit. The campaign may only use your story in the ways you check.</p>
-        </div>
-
         <div className="p-3 bg-gray-50 dark:bg-gray-700/50 border border-gray-200 dark:border-gray-600 rounded-xl">
           <p className="text-xs text-gray-700 dark:text-gray-300">
             Nothing is shared until you review the draft, choose how you are credited, and press Submit.
@@ -614,7 +605,7 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
         {/* What the campaign hopes to do (context) */}
         {campaign.usage_statement && (
           <div className="p-3 bg-gray-50 dark:bg-gray-700/50 rounded-xl">
-            <p className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">What {campaign.headline} hopes to do with stories</p>
+            <p className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">How this campaign may use your story</p>
             <p className="text-sm text-gray-600 dark:text-gray-300">{campaign.usage_statement}</p>
           </div>
         )}
