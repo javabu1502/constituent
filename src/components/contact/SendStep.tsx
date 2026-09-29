@@ -6,7 +6,7 @@ import { trackEvent } from '@/lib/analytics';
 import type { ContactState, ContactAction } from './ContactFlow';
 import type { Official } from '@/lib/types';
 import { CWC_ENABLED } from '@/lib/cwc-prefixes';
-import { useCwcActiveOffices, isCwcDeliverable, isNonParticipatingSenator, participatingSenateCount, cwcOfficeCodeFor, submitAdoptionSignature, CWC_SUBMITTED_STATUS, CWC_COPY, describeCwcOutcome, type SendOutcome, type CwcButtonState } from '@/lib/cwc-client';
+import { useCwcActiveOffices, congressChannel, isNonParticipatingSenator, participatingSenateCount, cwcOfficeCodeFor, submitAdoptionSignature, CWC_SUBMITTED_STATUS, WEBFORM_SUBMITTED_STATUS, CWC_COPY, WEBFORM_COPY, describeCwcOutcome, type SendOutcome, type CwcButtonState } from '@/lib/cwc-client';
 import { CwcAdoptionAsk } from '@/components/ui/CwcAdoptionAsk';
 import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
@@ -101,9 +101,10 @@ interface OfficialCardProps {
   isCallComplete?: boolean;
   onMarkCallComplete?: () => void;
   onSend?: (deliveryStatus: string) => Promise<SendOutcome | void> | void;
-  /** Office accepts CWC delivery: show ONE "Send to Congress" action and no
+  /** 'cwc' = office accepts CWC delivery; 'webform' = we file the office's
+   *  own contact form. Either way: ONE "Send to Congress" action and no
    *  email/copy actions (the message must not reach the office twice). */
-  cwcDelivery?: boolean;
+  cwcDelivery?: 'cwc' | 'webform' | null;
   /** True when this session already handed this official's message to CWC. */
   alreadySent?: boolean;
   /** Present for a senator whose office is not on the CWC list. */
@@ -120,8 +121,10 @@ function OfficialCard({ official, message, deliveryInfo, contactMethod, isCallCo
     return onSend?.(status);
   };
   const [messageCopied, setMessageCopied] = useState(false);
+  const copy = cwcDelivery === 'webform' ? WEBFORM_COPY : CWC_COPY;
+  const submitStatus = cwcDelivery === 'webform' ? WEBFORM_SUBMITTED_STATUS : CWC_SUBMITTED_STATUS;
   const [cwcState, setCwcState] = useState<CwcButtonState>(alreadySent ? 'sent' : 'idle');
-  const [cwcNote, setCwcNote] = useState<string>(alreadySent ? CWC_COPY.sent : CWC_COPY.idle);
+  const [cwcNote, setCwcNote] = useState<string>(alreadySent ? copy.sent : copy.idle);
   // After a failed hand-off the card falls back to the email/form actions.
   const showCwc = cwcDelivery && cwcState !== 'failed';
   const [emailCopied, setEmailCopied] = useState(false);
@@ -320,11 +323,11 @@ function OfficialCard({ official, message, deliveryInfo, contactMethod, isCallCo
               disabled={cwcState !== 'idle'}
               onClick={async () => {
                 setCwcState('sending');
-                setCwcNote(CWC_COPY.sending);
-                const outcome = await onSend?.(CWC_SUBMITTED_STATUS);
+                setCwcNote(copy.sending);
+                const outcome = await onSend?.(submitStatus);
                 const d = describeCwcOutcome(outcome ?? undefined);
                 setCwcState(d.state);
-                setCwcNote(d.note);
+                setCwcNote(d.state === 'sent' ? copy.sent : d.note);
               }}
               className={`flex items-center justify-center gap-2 w-full py-2.5 rounded-lg text-sm font-medium transition-colors ${cwcState === 'sent' ? 'bg-green-600 text-white cursor-default' : cwcState === 'sending' ? 'bg-purple-400 text-white cursor-wait' : 'bg-purple-600 hover:bg-purple-700 text-white'}`}
             >
@@ -522,7 +525,8 @@ export function SendStep({ state, dispatch, onBack }: SendStepProps) {
   // Which offices accept CWC delivery (live list; empty until loaded → email path).
   const cwcOffices = useCwcActiveOffices();
   const cwcFields = { prefix: state.userPrefix, email: state.userEmail, street: state.address?.street, zip: state.address?.zip };
-  const cwcDeliverable = (official: Official) => contactMethod !== 'phone' && isCwcDeliverable(official, cwcOffices, cwcFields);
+  const channelFor = (official: Official) => (contactMethod !== 'phone' ? congressChannel(official, cwcOffices, cwcFields) : null);
+  const cwcDeliverable = (official: Official) => channelFor(official) !== null;
 
   const markCallComplete = (officialId: string) => {
     setCompletedCalls(prev => new Set([...prev, officialId]));
@@ -575,6 +579,7 @@ export function SendStep({ state, dispatch, onBack }: SendStepProps) {
         // the finer-grained routing label, so map it here.
         delivery_method:
           deliveryStatus === CWC_SUBMITTED_STATUS ? 'cwc'
+          : deliveryStatus === WEBFORM_SUBMITTED_STATUS ? 'webform'
           : contactMethod === 'phone' ? 'phone'
           : deliveryInfo.method === 'staffer_email' ? 'email'
           : 'webform',
@@ -586,7 +591,7 @@ export function SendStep({ state, dispatch, onBack }: SendStepProps) {
         // only when the rollout flag is on, the office is federal, and every
         // required field was collected. The server gates again.
         cwc:
-          deliveryStatus === CWC_SUBMITTED_STATUS &&
+          (deliveryStatus === CWC_SUBMITTED_STATUS || deliveryStatus === WEBFORM_SUBMITTED_STATUS) &&
           CWC_ENABLED &&
           official.level === 'federal' &&
           state.userPrefix &&
@@ -614,11 +619,11 @@ export function SendStep({ state, dispatch, onBack }: SendStepProps) {
       }
       // A CWC hand-off only counts once the queue accepted it.
       const cwcAccepted = data?.cwc?.status === 'queued' || data?.cwc?.status === 'held';
-      if (deliveryStatus !== CWC_SUBMITTED_STATUS || cwcAccepted) {
+      if ((deliveryStatus !== CWC_SUBMITTED_STATUS && deliveryStatus !== WEBFORM_SUBMITTED_STATUS) || cwcAccepted) {
         dispatch({ type: 'SET_SENT_STATUS', payload: { officialId: official.id, status: deliveryStatus } });
       }
       trackEvent('message_sent', {
-        method: deliveryStatus === CWC_SUBMITTED_STATUS ? 'cwc' : contactMethod === 'phone' ? 'phone' : 'email',
+        method: deliveryStatus === CWC_SUBMITTED_STATUS ? 'cwc' : deliveryStatus === WEBFORM_SUBMITTED_STATUS ? 'webform' : contactMethod === 'phone' ? 'phone' : 'email',
         issue: state.issueCategory || 'unknown',
       });
       return { ok: true, cwc: data?.cwc };
@@ -702,8 +707,8 @@ export function SendStep({ state, dispatch, onBack }: SendStepProps) {
               isCallComplete={completedCalls.has(official.id)}
               onMarkCallComplete={() => markCallComplete(official.id)}
               onSend={(status) => trackSend(official, status)}
-              cwcDelivery={cwcDeliverable(official)}
-              alreadySent={state.sentStatus?.[official.id] === CWC_SUBMITTED_STATUS}
+              cwcDelivery={channelFor(official)}
+              alreadySent={[CWC_SUBMITTED_STATUS, WEBFORM_SUBMITTED_STATUS].includes(state.sentStatus?.[official.id] ?? '')}
               adoptionAsk={
                 contactMethod === 'email' && isNonParticipatingSenator(official, cwcOffices)
                   ? {

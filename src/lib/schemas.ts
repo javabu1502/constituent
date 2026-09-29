@@ -81,6 +81,9 @@ export const trackSendSchema = z.object({
     // The constituent pressed "Send to Congress": the ONLY status that may
     // carry a cwc payload into the delivery queue (see shouldEnqueueCwc).
     'cwc_submitted',
+    // "Send to Congress" for a non-CWC senator whose own contact form we file
+    // (webform delivery). Also carries the cwc payload.
+    'webform_submitted',
   ]),
   user_id: z.string().uuid().optional(),
   campaign_id: z.string().uuid().optional(),

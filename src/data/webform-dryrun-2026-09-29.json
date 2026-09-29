@@ -1,0 +1,242 @@
+[
+  {
+    "name": "Maria Cantwell",
+    "url": "https://www.cantwell.senate.gov/public/index.cfm/email-maria",
+    "status": "success",
+    "success": true,
+    "message": "Dry run completed - form was filled but not submitted",
+    "pagesFilled": 1,
+    "validationErrors": null,
+    "ms": 12286
+  },
+  {
+    "name": "Roger F. Wicker",
+    "url": "https://www.wicker.senate.gov/public/index.cfm/contact",
+    "status": "success",
+    "success": true,
+    "message": "Dry run completed - form was filled but not submitted",
+    "pagesFilled": 1,
+    "validationErrors": null,
+    "ms": 9570
+  },
+  {
+    "name": "John Cornyn",
+    "url": "https://www.cornyn.senate.gov/contact",
+    "status": "success",
+    "success": true,
+    "message": "Dry run completed - form was filled but not submitted",
+    "pagesFilled": 1,
+    "validationErrors": null,
+    "ms": 10549
+  },
+  {
+    "name": "Richard J. Durbin",
+    "url": "https://www.durbin.senate.gov/contact/",
+    "status": "success",
+    "success": true,
+    "message": "Dry run completed - form was filled but not submitted",
+    "pagesFilled": 1,
+    "validationErrors": null,
+    "ms": 8609
+  },
+  {
+    "name": "Lindsey Graham",
+    "url": "https://www.lgraham.senate.gov/public/index.cfm/e-mail-senator-graham",
+    "status": "success",
+    "success": true,
+    "message": "Dry run completed - form was filled but not submitted",
+    "pagesFilled": 1,
+    "validationErrors": null,
+    "ms": 6208
+  },
+  {
+    "name": "Mitch McConnell",
+    "url": "https://www.mcconnell.senate.gov/public/index.cfm?p=contact",
+    "status": "success",
+    "success": true,
+    "message": "Dry run completed - form was filled but not submitted",
+    "pagesFilled": 1,
+    "validationErrors": null,
+    "ms": 10807
+  },
+  {
+    "name": "James E. Risch",
+    "url": "https://www.risch.senate.gov/public/index.cfm?p=Email",
+    "status": "success",
+    "success": true,
+    "message": "Dry run completed - form was filled but not submitted",
+    "pagesFilled": 1,
+    "validationErrors": null,
+    "ms": 9949
+  },
+  {
+    "name": "Christopher A. Coons",
+    "url": "https://www.coons.senate.gov/contact",
+    "status": "success",
+    "success": true,
+    "message": "Dry run completed - form was filled but not submitted",
+    "pagesFilled": 1,
+    "validationErrors": null,
+    "ms": 10004
+  },
+  {
+    "name": "John Boozman",
+    "url": "https://www.boozman.senate.gov/public/index.cfm/contact",
+    "status": "success",
+    "success": true,
+    "message": "Dry run completed - form was filled but not submitted",
+    "pagesFilled": 1,
+    "validationErrors": null,
+    "ms": 9479
+  },
+  {
+    "name": "John Hoeven",
+    "url": "https://www.hoeven.senate.gov/contact/contact-the-senator",
+    "status": "success",
+    "success": true,
+    "message": "Dry run completed - form was filled but not submitted",
+    "pagesFilled": 1,
+    "validationErrors": null,
+    "ms": 8341
+  },
+  {
+    "name": "Ron Johnson",
+    "url": "https://www.ronjohnson.senate.gov/public/index.cfm/email-the-senator",
+    "status": "success",
+    "success": true,
+    "message": "Dry run completed - form was filled but not submitted",
+    "pagesFilled": 1,
+    "validationErrors": null,
+    "ms": 94488
+  },
+  {
+    "name": "Edward J. Markey",
+    "url": "https://www.markey.senate.gov/contact",
+    "status": "success",
+    "success": true,
+    "message": "Dry run completed - form was filled but not submitted",
+    "pagesFilled": 1,
+    "validationErrors": null,
+    "ms": 8684
+  },
+  {
+    "name": "Jerry Moran",
+    "url": "https://www.moran.senate.gov/public/index.cfm/e-mail-jerry",
+    "status": "success",
+    "success": true,
+    "message": "Dry run completed - form was filled but not submitted",
+    "pagesFilled": 1,
+    "validationErrors": null,
+    "ms": 168023
+  },
+  {
+    "name": "Lisa Murkowski",
+    "url": "https://www.murkowski.senate.gov/public/index.cfm/contact",
+    "status": "success",
+    "success": true,
+    "message": "Dry run completed - form was filled but not submitted",
+    "pagesFilled": 1,
+    "validationErrors": null,
+    "ms": 9449
+  },
+  {
+    "name": "Rand Paul",
+    "url": "https://www.paul.senate.gov/connect/email-rand",
+    "status": "success",
+    "success": true,
+    "message": "Dry run completed - form was filled but not submitted",
+    "pagesFilled": 1,
+    "validationErrors": null,
+    "ms": 82499
+  },
+  {
+    "name": "Tim Scott",
+    "url": "https://www.scott.senate.gov/contact/email-me",
+    "status": "success",
+    "success": true,
+    "message": "Dry run completed - form was filled but not submitted",
+    "pagesFilled": 1,
+    "validationErrors": null,
+    "ms": 113687
+  },
+  {
+    "name": "John Thune",
+    "url": "https://www.thune.senate.gov/public/index.cfm/contact",
+    "status": "success",
+    "success": true,
+    "message": "Dry run completed - form was filled but not submitted",
+    "pagesFilled": 1,
+    "validationErrors": null,
+    "ms": 10556
+  },
+  {
+    "name": "Ron Wyden",
+    "url": "https://www.wyden.senate.gov/contact/",
+    "status": "success",
+    "success": true,
+    "message": "Dry run completed - form was filled but not submitted",
+    "pagesFilled": 1,
+    "validationErrors": null,
+    "ms": 9274
+  },
+  {
+    "name": "Tammy Duckworth",
+    "url": "https://www.duckworth.senate.gov/content/contact-senator",
+    "status": "success",
+    "success": true,
+    "message": "Dry run completed - form was filled but not submitted",
+    "pagesFilled": 1,
+    "validationErrors": null,
+    "ms": 12977
+  },
+  {
+    "name": "Deb Fischer",
+    "url": "https://www.fischer.senate.gov/public/index.cfm/contact",
+    "status": "success",
+    "success": true,
+    "message": "Dry run completed - form was filled but not submitted",
+    "pagesFilled": 1,
+    "validationErrors": null,
+    "ms": 9620
+  },
+  {
+    "name": "Markwayne Mullin",
+    "url": "https://www.mullin.senate.gov/contact/",
+    "status": "success",
+    "success": true,
+    "message": "Dry run completed - form was filled but not submitted",
+    "pagesFilled": 1,
+    "validationErrors": null,
+    "ms": 6193
+  },
+  {
+    "name": "Cory A. Booker",
+    "url": "https://www.booker.senate.gov/?p=contact",
+    "status": "success",
+    "success": true,
+    "message": "Dry run completed - form was filled but not submitted",
+    "pagesFilled": 2,
+    "validationErrors": null,
+    "ms": 28470
+  },
+  {
+    "name": "Cindy Hyde-Smith",
+    "url": "https://www.hydesmith.senate.gov/contact-senator",
+    "status": "success",
+    "success": true,
+    "message": "Dry run completed - form was filled but not submitted",
+    "pagesFilled": 1,
+    "validationErrors": null,
+    "ms": 85157
+  },
+  {
+    "name": "Josh Hawley",
+    "url": "https://www.hawley.senate.gov/contact-senator-hawley",
+    "status": "success",
+    "success": true,
+    "message": "Dry run completed - form was filled but not submitted",
+    "pagesFilled": 1,
+    "validationErrors": null,
+    "ms": 102493
+  }
+]

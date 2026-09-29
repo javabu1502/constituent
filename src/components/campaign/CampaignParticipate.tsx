@@ -20,7 +20,7 @@ import { useTurnstile } from '@/components/ui/Turnstile';
 import { SupportNudge } from '@/components/ui/SupportNudge';
 import { SocialShare } from '@/components/ui/SocialShare';
 import { CWC_PREFIXES, CWC_ENABLED } from '@/lib/cwc-prefixes';
-import { useCwcActiveOffices, isCwcDeliverable, isNonParticipatingSenator, participatingSenateCount, cwcOfficeCodeFor, submitAdoptionSignature, CWC_SUBMITTED_STATUS, CWC_COPY, describeCwcOutcome, type SendOutcome, type CwcButtonState } from '@/lib/cwc-client';
+import { useCwcActiveOffices, congressChannel, isNonParticipatingSenator, participatingSenateCount, cwcOfficeCodeFor, submitAdoptionSignature, CWC_SUBMITTED_STATUS, WEBFORM_SUBMITTED_STATUS, CWC_COPY, WEBFORM_COPY, describeCwcOutcome, type SendOutcome, type CwcButtonState } from '@/lib/cwc-client';
 import { CwcAdoptionAsk } from '@/components/ui/CwcAdoptionAsk';
 
 type Step = 'stance' | 'compose' | 'form' | 'loading' | 'review' | 'done' | 'noTarget' | 'wrongState';
@@ -545,8 +545,8 @@ export function CampaignParticipate({
   // Delivery info for each official
   // Which offices accept CWC delivery (live list; empty until loaded → email path).
   const cwcOffices = useCwcActiveOffices();
-  const cwcDeliverable = (official: Official) =>
-    cwcFields && isCwcDeliverable(official, cwcOffices, { prefix, email, street, zip });
+  const channelFor = (official: Official) => (cwcFields ? congressChannel(official, cwcOffices, { prefix, email, street, zip }) : null);
+  const cwcDeliverable = (official: Official) => channelFor(official) !== null;
 
   const deliveryInfoMap = useMemo(() => {
     const map = new Map<string, DeliveryInfo>();
@@ -610,7 +610,7 @@ export function CampaignParticipate({
     const msg = messages[official.name];
     if (!msg) return { ok: false };
 
-    const isCwc = deliveryStatus === CWC_SUBMITTED_STATUS;
+    const isCwc = deliveryStatus === CWC_SUBMITTED_STATUS || deliveryStatus === WEBFORM_SUBMITTED_STATUS;
     setSentCount((c) => c + 1);
     fireFunnel('participate_send_clicked');
     const turnstileToken = await getToken();
@@ -634,7 +634,7 @@ export function CampaignParticipate({
         issue_area: campaign.issue_area,
         issue_subtopic: campaign.issue_subtopic || campaign.issue_area,
         message_body: msg.body,
-        delivery_method: deliveryStatus === CWC_SUBMITTED_STATUS ? 'cwc' : 'email',
+        delivery_method: deliveryStatus === CWC_SUBMITTED_STATUS ? 'cwc' : deliveryStatus === WEBFORM_SUBMITTED_STATUS ? 'webform' : 'email',
         delivery_status: deliveryStatus,
         message_intent: intentByOfficial[official.id],
         campaign_id: campaign.id,
@@ -644,7 +644,7 @@ export function CampaignParticipate({
         // only when the rollout flag is on, the office is federal, and every
         // required field was collected. The server gates again.
         cwc:
-          deliveryStatus === CWC_SUBMITTED_STATUS && cwcFields && official.level === 'federal' && prefix && email.trim() && street.trim() && /^\d{5}/.test(zip.trim())
+          isCwc && cwcFields && official.level === 'federal' && prefix && email.trim() && street.trim() && /^\d{5}/.test(zip.trim())
             ? {
                 prefix,
                 street: street.trim(),
@@ -1209,7 +1209,7 @@ export function CampaignParticipate({
               onSend={(status) => trackSend(official, status)}
               onEdit={(patch) => updateMessage(official.name, patch)}
               startOpen={usedFallback}
-              cwcDelivery={cwcDeliverable(official)}
+              cwcDelivery={channelFor(official)}
               alreadySent={!!cwcSentIds[official.id]}
               adoptionAsk={
                 isNonParticipatingSenator(official, cwcOffices) && email.trim()
@@ -1381,8 +1381,8 @@ function OfficialSendCard({
   onSend: (status: string) => Promise<SendOutcome | void> | void;
   onEdit: (patch: Partial<OfficialMessage>) => void;
   startOpen: boolean;
-  /** Office accepts CWC delivery: ONE "Send to Congress" action, no email/copy. */
-  cwcDelivery?: boolean;
+  /** 'cwc' or 'webform': ONE "Send to Congress" action, no email/copy. */
+  cwcDelivery?: 'cwc' | 'webform' | null;
   /** True when this session already handed this official's message to CWC. */
   alreadySent?: boolean;
   /** Present for a senator whose office is not on the CWC list. */
@@ -1395,8 +1395,10 @@ function OfficialSendCard({
     return onSend(status);
   };
   const [copied, setCopied] = useState(false);
+  const copy = cwcDelivery === 'webform' ? WEBFORM_COPY : CWC_COPY;
+  const submitStatus = cwcDelivery === 'webform' ? WEBFORM_SUBMITTED_STATUS : CWC_SUBMITTED_STATUS;
   const [cwcState, setCwcState] = useState<CwcButtonState>(alreadySent ? 'sent' : 'idle');
-  const [cwcNote, setCwcNote] = useState<string>(alreadySent ? CWC_COPY.sent : CWC_COPY.idle);
+  const [cwcNote, setCwcNote] = useState<string>(alreadySent ? copy.sent : copy.idle);
   // After a failed hand-off the card falls back to the email/form actions.
   const showCwc = cwcDelivery && cwcState !== 'failed';
   // Starter drafts open ready to write; AI drafts start collapsed. Track
@@ -1448,11 +1450,11 @@ function OfficialSendCard({
               disabled={cwcState !== 'idle'}
               onClick={async () => {
                 setCwcState('sending');
-                setCwcNote(CWC_COPY.sending);
-                const outcome = await onSend(CWC_SUBMITTED_STATUS);
+                setCwcNote(copy.sending);
+                const outcome = await onSend(submitStatus);
                 const d = describeCwcOutcome(outcome ?? undefined);
                 setCwcState(d.state);
-                setCwcNote(d.note);
+                setCwcNote(d.state === 'sent' ? copy.sent : d.note);
               }}
               className={`flex items-center justify-center gap-2 w-full py-2.5 rounded-lg text-sm font-medium transition-colors ${cwcState === 'sent' ? 'bg-green-600 text-white cursor-default' : cwcState === 'sending' ? 'bg-purple-400 text-white cursor-wait' : 'bg-purple-600 hover:bg-purple-700 text-white'}`}
             >

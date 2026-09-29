@@ -20,9 +20,11 @@ import { resolveOfficeCode } from '@/lib/cwc/offices';
 export interface CwcActiveOffices {
   loaded: boolean;
   codes: ReadonlySet<string>;
+  /** Bioguide ids of non-CWC senators whose own contact form we file. */
+  webformIds: ReadonlySet<string>;
 }
 
-const EMPTY: CwcActiveOffices = { loaded: false, codes: new Set() };
+const EMPTY: CwcActiveOffices = { loaded: false, codes: new Set(), webformIds: new Set() };
 
 export function useCwcActiveOffices(): CwcActiveOffices {
   const [offices, setOffices] = useState<CwcActiveOffices>(EMPTY);
@@ -31,9 +33,9 @@ export function useCwcActiveOffices(): CwcActiveOffices {
     let cancelled = false;
     fetch('/api/cwc/offices')
       .then(async (res) => (res.ok ? res.json() : null))
-      .then((data: { house?: string[]; senate?: string[] } | null) => {
+      .then((data: { house?: string[]; senate?: string[]; webform?: string[] } | null) => {
         if (cancelled || !data) return;
-        setOffices({ loaded: true, codes: new Set([...(data.house ?? []), ...(data.senate ?? [])]) });
+        setOffices({ loaded: true, codes: new Set([...(data.house ?? []), ...(data.senate ?? [])]), webformIds: new Set(data.webform ?? []) });
       })
       .catch(() => { /* fail safe: stays not-deliverable → email path */ });
     return () => { cancelled = true; };
@@ -64,10 +66,38 @@ export function isCwcDeliverable(
   return Boolean(fields.prefix && fields.email?.trim() && fields.street?.trim() && /^\d{5}/.test(fields.zip?.trim() ?? ''));
 }
 
+/**
+ * True when we will file this official's message in the office's own contact
+ * form (non-CWC senator, CAPTCHA-free form, flag on) and the fields exist.
+ */
+export function isWebformDeliverable(
+  official: Official,
+  offices: CwcActiveOffices,
+  fields: { prefix?: string; email?: string; street?: string; zip?: string },
+): boolean {
+  if (!CWC_ENABLED || !offices.loaded || !offices.webformIds.has(official.id)) return false;
+  return Boolean(fields.prefix && fields.email?.trim() && fields.street?.trim() && /^\d{5}/.test(fields.zip?.trim() ?? ''));
+}
+
+/** Which "Send to Congress" channel applies, if any. */
+export function congressChannel(
+  official: Official,
+  offices: CwcActiveOffices,
+  fields: { prefix?: string; email?: string; street?: string; zip?: string },
+): 'cwc' | 'webform' | null {
+  if (isCwcDeliverable(official, offices, fields)) return 'cwc';
+  if (isWebformDeliverable(official, offices, fields)) return 'webform';
+  return null;
+}
+
+/** The track-send delivery_status for a webform hand-off. */
+export const WEBFORM_SUBMITTED_STATUS = 'webform_submitted';
+
 /** A senator whose office is NOT on the participating list (list loaded). */
 export function isNonParticipatingSenator(official: Official, offices: CwcActiveOffices): boolean {
   if (!CWC_ENABLED || !offices.loaded) return false;
   if (official.level !== 'federal' || official.chamber !== 'senate') return false;
+  if (offices.webformIds.has(official.id)) return false; // we file their form for them
   const code = cwcOfficeCodeFor(official);
   return !!code && !offices.codes.has(code);
 }
@@ -118,6 +148,12 @@ export interface SendOutcome {
 export type CwcButtonState = 'idle' | 'sending' | 'sent' | 'failed';
 
 /** Copy for the CWC card after a send attempt. Flat sentences, no em dashes. */
+export const WEBFORM_COPY = {
+  idle: 'This office does not use the congressional delivery system yet, so My Democracy files your message in the office\'s own contact form for you. No email app needed. Your name and address go in the form\'s own fields.',
+  sending: 'Handing your message to the delivery queue.',
+  sent: 'Received. My Democracy will file it in the office\'s contact form within about an hour.',
+} as const;
+
 export const CWC_COPY = {
   idle: 'Goes straight to the office through Communicating with Congress, the message system run by the House and Senate. No email app needed. Your name and address travel in separate fields, so no signature is needed in the text.',
   sending: 'Handing your message to the congressional delivery system.',

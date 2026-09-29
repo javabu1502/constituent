@@ -7,6 +7,7 @@ import { checkLegislatorCooldown, resolveUsageIdentity } from '@/lib/usage-quota
 import { verifyTurnstile } from '@/lib/turnstile';
 import { enqueueCwcDeliveries } from '@/lib/cwc';
 import { buildCwcQueueItem, shouldEnqueueCwc, type CampaignBillContext } from '@/lib/cwc/enqueue-from-send';
+import { buildWebformQueueItem, enqueueWebformDelivery } from '@/lib/webform/queue';
 
 // The CWC enqueue path (after()) reaches congressional endpoints through the
 // undici static-IP proxy — Node runtime required.
@@ -147,6 +148,26 @@ export async function POST(request: NextRequest) {
         }
       } catch (e) {
         console.error(`[track-send] cwc enqueue failed (${messageId}):`, (e as Error).message);
+        cwc = { status: 'error' };
+      }
+    }
+
+    // Webform delivery: a non-CWC senator whose own contact form we file
+    // (flag-gated inside buildWebformQueueItem). Same outcome shape as cwc.
+    if (!cwc && body.delivery_status === 'webform_submitted' && body.cwc && body.legislator_level === 'federal' && data?.id) {
+      try {
+        const campaignRef = body.campaign_id ? `campaign-${body.campaign_id}` : `contact-${(body.issue_area + '-' + body.issue_subtopic).toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
+        const built = await buildWebformQueueItem(body, body.cwc, campaignRef);
+        if (!built.ok) {
+          console.log(`[track-send] webform skip (${data.id}): ${built.skip}`);
+          cwc = { status: 'skipped', reason: built.skip };
+        } else {
+          const r = await enqueueWebformDelivery(built.item);
+          console.log(`[track-send] webform enqueue (${data.id}): ${r.status}`);
+          cwc = { status: r.status };
+        }
+      } catch (e) {
+        console.error(`[track-send] webform enqueue failed (${data?.id}):`, (e as Error).message);
         cwc = { status: 'error' };
       }
     }
