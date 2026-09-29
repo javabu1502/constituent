@@ -3,7 +3,9 @@ import { createAdminClient } from '@/lib/supabase';
 import { createClient } from '@/lib/supabase/server';
 import { submitStorySchema, parseBody } from '@/lib/schemas';
 import { writeLimiter, getClientIp } from '@/lib/rate-limit';
-import { hashIp } from '@/lib/usage-quota';
+import { hashIp, resolveUsageIdentity } from '@/lib/usage-quota';
+import { verifyTurnstile } from '@/lib/turnstile';
+import { storyRevokeToken } from '@/lib/story-revoke';
 import { applyAttribution } from '@/lib/story-attribution';
 import { deDash } from '@/lib/claude';
 
@@ -70,7 +72,15 @@ export async function POST(request: NextRequest) {
     state,
     storyteller_email,
     shared_reps,
+    preview,
+    turnstileToken,
   } = parsed.data;
+
+  const identity = await resolveUsageIdentity(ip);
+  if (process.env.TURNSTILE_SECRET_KEY) {
+    const valid = await verifyTurnstile(turnstileToken || '', { strict: !identity.userId });
+    if (!valid) return NextResponse.json({ error: 'CAPTCHA verification failed' }, { status: 403 });
+  }
 
   const admin = createAdminClient();
   const { data: campaign, error: campaignError } = await admin
@@ -106,12 +116,18 @@ export async function POST(request: NextRequest) {
   const final_body = deDash(applied.final_body);
   const flagged = applied.flagged;
 
-  // Running count.
-  const { error: rpcError } = await admin.rpc('increment_campaign_story_count', {
-    campaign_slug: campaignSlug,
-  });
-  if (rpcError) {
-    console.error('[stories] story-count RPC error:', rpcError);
+  // An anonymous story is never stored unless the redaction pass actually ran.
+  if (attribution_level === 'anonymous' && applied.failed) {
+    return NextResponse.json(
+      { error: 'We could not anonymize your story just now, so nothing was saved. Please try again in a moment.' },
+      { status: 503 },
+    );
+  }
+
+  // Preview: show the storyteller exactly what the organization will receive
+  // (anonymous redaction applied), without saving anything.
+  if (preview) {
+    return NextResponse.json({ preview: true, final_body, flagged });
   }
 
   // Store a short, scrubbed topic title in the aggregate subjects view.
@@ -128,7 +144,12 @@ export async function POST(request: NextRequest) {
   // Persist the full story to the campaign organizer's dashboard (store-by-default).
   // Identity is written ONLY at the chosen attribution level — anonymous stories
   // carry no name, contact, or location.
+  let storyId: string | null = null;
   if (store !== false) {
+    // Running count (only for stories that are actually saved).
+    const { error: rpcError } = await admin.rpc('increment_campaign_story_count', { campaign_slug: campaignSlug });
+    if (rpcError) console.error('[stories] story-count RPC error:', rpcError);
+
     const isAnon = attribution_level === 'anonymous';
     const trimmedName = (storyteller_name || '').trim();
     const nameToStore = isAnon
@@ -139,10 +160,12 @@ export async function POST(request: NextRequest) {
 
     // Share the storyteller's email with the collector ONLY if they granted the
     // "They may contact me about it" use (and aren't anonymous). Otherwise never.
+    // Only an address the storyteller typed. Never the account email by default.
     const canContact = !isAnon && granted_uses.includes('contact_me_followup');
-    const emailToStore = canContact ? storyteller_email?.trim() || userEmail || null : null;
+    const emailToStore = canContact ? storyteller_email?.trim() || null : null;
+    void userEmail;
 
-    const { error: storyError } = await admin.from('stories').insert({
+    const { data: inserted, error: storyError } = await admin.from('stories').insert({
       campaign_id: campaign.id,
       user_id: userId,
       ip_hash: ipHash,
@@ -159,19 +182,26 @@ export async function POST(request: NextRequest) {
       consent_usage_snapshot: {
         usage_statement: campaign.usage_statement ?? null,
         granted_uses,
+        consent_usage: true,
+        consent_adult: true,
+        consented_at: new Date().toISOString(),
       },
       status: 'active',
-    });
+    }).select('id').single();
     if (storyError) {
       console.error('[stories] story insert error:', storyError);
+      return NextResponse.json({ error: 'Could not save your story. Please try again.' }, { status: 500 });
     }
+    storyId = (inserted?.id as string) ?? null;
   }
 
   return NextResponse.json({
     success: true,
     final_body,
     flagged,
-    recipient_email: campaign.recipient_email ?? null,
-    subject: `My story for: ${campaign.headline}`,
+    story_id: storyId,
+    // Lets a guest withdraw the story later without an account.
+    revoke_token: storyId ? storyRevokeToken(storyId) : null,
+    signed_in: !!userId,
   });
 }

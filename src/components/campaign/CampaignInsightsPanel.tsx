@@ -76,7 +76,7 @@ export function CampaignInsightsPanel({
 
       {insights && stale && !loading && !readOnly && (
         <p className="text-[11px] text-amber-600 dark:text-amber-400 mb-2">
-          New {noun} have come in since this was generated — refresh for an up-to-date read.
+          The set of {noun} changed since this was generated, or it is more than a day old. Refresh it before quoting from it.
         </p>
       )}
 
@@ -86,7 +86,7 @@ export function CampaignInsightsPanel({
         <p className="text-sm text-gray-600 dark:text-gray-400">
           {readOnly
             ? 'No insights generated for this campaign yet.'
-            : 'Generate a themed summary of what your constituents are sharing — the top themes, a representative quote for each, and an overall read you can use.'}
+            : 'Generate a themed summary of what your constituents are sharing, with a representative quote for each theme.'}
         </p>
       )}
 
@@ -105,7 +105,11 @@ export function CampaignInsightsPanel({
                   )}
                 </div>
                 {t.quote && (
-                  <p className="text-sm text-gray-600 dark:text-gray-400 italic mt-0.5">&ldquo;{t.quote}&rdquo;</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 italic mt-0.5">
+                    &ldquo;{t.quote}&rdquo;
+                    {t.quoteMeta?.anonymous && <span className="not-italic ml-2 px-1.5 py-0.5 text-[10px] rounded bg-gray-200 dark:bg-gray-600 text-gray-700 dark:text-gray-200">anonymous</span>}
+                    {t.quoteMeta && !t.quoteMeta.reportOk && <span className="not-italic ml-2 text-[10px] text-amber-700 dark:text-amber-300">not cleared for reports</span>}
+                  </p>
                 )}
                 {t.quotes && t.quotes.length > 0 && (
                   <details className="mt-1.5">
@@ -115,7 +119,11 @@ export function CampaignInsightsPanel({
                     <ul className="mt-2 space-y-2">
                       {t.quotes.map((q, qi) => (
                         <li key={qi} className="flex items-start justify-between gap-2 text-sm text-gray-600 dark:text-gray-400 italic bg-gray-50 dark:bg-gray-700/40 rounded-lg px-3 py-2">
-                          <span>&ldquo;{q}&rdquo;</span>
+                          <span>
+                            &ldquo;{q}&rdquo;
+                            {t.quotesMeta?.[qi]?.anonymous && <span className="not-italic ml-2 px-1.5 py-0.5 text-[10px] rounded bg-gray-200 dark:bg-gray-600 text-gray-700 dark:text-gray-200">anonymous</span>}
+                            {t.quotesMeta?.[qi] && !t.quotesMeta[qi].reportOk && <span className="not-italic ml-2 text-[10px] text-amber-700 dark:text-amber-300">not cleared for reports</span>}
+                          </span>
                           <button
                             type="button"
                             onClick={() => navigator.clipboard.writeText(`"${q}"`)}
@@ -133,7 +141,7 @@ export function CampaignInsightsPanel({
             ))}
           </div>
           <p className="text-[11px] text-gray-400 dark:text-gray-500">
-            Based on {insights.sourceCount} {noun}. AI-generated summary — spot-check against the full {noun} before quoting publicly.
+            Based on {insights.sourceCount} {noun}. AI-generated summary. Check each quote against the full {noun} before using it, and honor what each storyteller allowed.
           </p>
         </div>
       )}

@@ -30,6 +30,7 @@ export interface CampaignEditInitial {
   direction: 'support' | 'oppose' | '';
   messageTemplate: string;
   storyPrompt: string;
+  usageStatement: string;
   usageTags: string[];
   resolvedBill: ResolvedBill | null;
 }
@@ -96,6 +97,7 @@ export function CampaignForm({
 
   // Storytelling fields
   const [storyPrompt, setStoryPrompt] = useState(edit?.initial.storyPrompt ?? '');
+  const [usageStatement, setUsageStatement] = useState(edit?.initial.usageStatement ?? '');
   const [usageTags, setUsageTags] = useState<string[]>(edit?.initial.usageTags ?? []);
 
   // Optional related bill
@@ -156,6 +158,7 @@ export function CampaignForm({
       if (d.direction) setDirection(d.direction);
       if (d.messageTemplate) setMessageTemplate(d.messageTemplate);
       if (d.storyPrompt) setStoryPrompt(d.storyPrompt);
+      if (d.usageStatement) setUsageStatement(d.usageStatement);
       if (Array.isArray(d.usageTags) && d.usageTags.length > 0) setUsageTags(d.usageTags);
       if (d.billLevel) setBillLevel(d.billLevel);
       if (d.billState) setBillState(d.billState);
@@ -178,7 +181,7 @@ export function CampaignForm({
           draftKey,
           JSON.stringify({
             headline, description, issueArea, issueCategory, targetLevel, direction,
-            messageTemplate, storyPrompt, usageTags,
+            messageTemplate, storyPrompt, usageStatement, usageTags,
             billLevel, billState, billQuery, resolvedBill,
           })
         );
@@ -189,7 +192,7 @@ export function CampaignForm({
     return () => clearTimeout(timer);
   }, [
     skipDraft, submitted, draftKey, headline, description, issueArea, issueCategory, targetLevel,
-    direction, messageTemplate, storyPrompt, usageTags,
+    direction, messageTemplate, storyPrompt, usageStatement, usageTags,
     billLevel, billState, billQuery, resolvedBill,
   ]);
   const discardDraft = () => {
@@ -413,6 +416,7 @@ export function CampaignForm({
         : {
             ...sharedBody,
             story_prompt: storyPrompt.trim() || null,
+            usage_statement: usageStatement.trim() || null,
             usage_tags: usageTags,
             // Change/revoke is standardized (self-service), so there's no
             // per-campaign policy or recipient email to collect.
@@ -438,6 +442,7 @@ export function CampaignForm({
         : {
             ...sharedBody,
             story_prompt: storyPrompt.trim() || null,
+            usage_statement: usageStatement.trim() || null,
             usage_tags: usageTags,
           };
       const res = edit
@@ -571,7 +576,7 @@ export function CampaignForm({
                 )}
               </select>
               <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                Messages for this stage only go to members of this committee — participants whose reps aren&apos;t on it
+                Messages for this stage only go to members of this committee. Participants whose reps aren&apos;t on it
                 will be shown other ways to help.
               </p>
               <FieldError field="targetCommittee" />
@@ -782,7 +787,7 @@ export function CampaignForm({
               <div className="mt-2 flex items-start gap-2 p-3 rounded-lg bg-green-50 dark:bg-green-900/30 border border-green-200 dark:border-green-800">
                 <span className="text-green-600 dark:text-green-400">✓</span>
                 <p className="text-sm text-green-800 dark:text-green-300">
-                  <span className="font-semibold">{resolvedBill.ref}</span> — {resolvedBill.title}
+                  <span className="font-semibold">{resolvedBill.ref}</span>: {resolvedBill.title}
                 </p>
               </div>
             )}
@@ -793,12 +798,12 @@ export function CampaignForm({
             )}
             {billStatus === 'error' && (
               <p className="mt-2 text-sm text-red-600 dark:text-red-400">
-                {billLevel === 'state' && !billState ? 'Pick a state first.' : 'Lookup failed — try again.'}
+                {billLevel === 'state' && !billState ? 'Pick a state first.' : 'Lookup failed. Try again.'}
               </p>
             )}
             {billLevel === 'state' && (
               <p className="mt-2 text-xs text-gray-500 dark:text-gray-400">
-                State bills apply to a single state — this campaign will be scoped to {billState || 'that state'}.
+                State bills apply to a single state. This campaign will be scoped to {billState || 'that state'}.
               </p>
             )}
           </>
@@ -849,7 +854,7 @@ export function CampaignForm({
         </label>
         {parentCampaignId && (
           <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">
-            Each stage can carry its own talking points — cite the hearing date at the committee stage, the committee
+            Each stage can carry its own talking points. Cite the hearing date at the committee stage, the committee
             vote at the floor stage. Leave blank to reuse the parent campaign&apos;s points.
           </p>
         )}
@@ -883,7 +888,7 @@ export function CampaignForm({
         <>
           <div className="p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700 rounded-xl">
             <p className="text-sm text-blue-800 dark:text-blue-300">
-              Storytelling campaigns are <strong>shared by link only</strong> — they never appear in the public directory.
+              Storytelling campaigns are <strong>shared by link only</strong>. They never appear in the public directory.
               Supporters answer a few guided questions to shape their story, then it&apos;s saved straight to your campaign dashboard, where you can read every story and download them all as a spreadsheet.
             </p>
           </div>
@@ -903,13 +908,31 @@ export function CampaignForm({
             />
           </div>
 
+          {/* Usage statement */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              How you will use these stories <span className="text-gray-400 dark:text-gray-500 font-normal">(optional)</span>
+            </label>
+            <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">
+              Shown to storytellers before they begin and again before they share. Say in plain words who will read the stories, where they might appear, and how to reach you with questions.
+            </p>
+            <textarea
+              value={usageStatement}
+              onChange={(e) => setUsageStatement(e.target.value)}
+              placeholder="e.g., Our policy team reads every story. With your permission we may quote it in testimony to the Legislature or in a report. Questions: stories@example.org"
+              rows={3}
+              maxLength={3000}
+              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 resize-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
+            />
+          </div>
+
           {/* Intended uses (checkboxes) */}
           <div data-field="usageTags">
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               How would you like to use these stories? <span className="text-red-500">*</span>
             </label>
             <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">
-              Pick the ways you’d like to use the stories you collect. Each storyteller then chooses which of these they’re comfortable with — we only pass along the uses they grant.
+              Pick the ways you would like to use the stories you collect. Each storyteller then chooses which of these they are comfortable with. Nothing starts checked for them, and we only pass along the uses they grant.
             </p>
             <div className="space-y-2">
               {STORY_USAGE_OPTIONS.map((opt) => {
@@ -939,7 +962,7 @@ export function CampaignForm({
           </div>
 
           {/* Attribution is always the storyteller's choice (named / first name only /
-              anonymous), made on their end — the creator doesn't restrict it. We enforce
+              anonymous), made on their end. The creator does not restrict it. We enforce
               whatever the storyteller picks before the story reaches the creator. */}
           <div className="p-3 bg-gray-50 dark:bg-gray-700/50 rounded-xl">
             <p className="text-xs text-gray-600 dark:text-gray-300">

@@ -18,6 +18,8 @@ import type { AttributionLevel } from '@/lib/types';
 export interface AttributionResult {
   final_body: string;
   flagged: string[];
+  /** True when anonymous redaction could not run; the caller must not store this body. */
+  failed?: boolean;
 }
 
 function escapeRegExp(s: string): string {
@@ -26,7 +28,7 @@ function escapeRegExp(s: string): string {
 
 const REDACT_PROMPT = `You anonymize a first-person personal story so it cannot be traced back to its author, while preserving its meaning and emotional truth.
 
-Remove or generalize any uniquely identifying detail: full names, employers/specific organizations, exact street addresses, small/specific place names, phone numbers, emails, license/case/ID numbers, and any rare combination of facts that could single the person out. Keep the story coherent and human — replace specifics with neutral generalizations (e.g. "my employer", "a town near me") rather than deleting whole sentences.
+Remove or generalize any uniquely identifying detail: full names (the author's and anyone else's, including children), employers/specific organizations, exact street addresses, small/specific place names, phone numbers, emails, license/case/ID numbers, and any rare combination of facts that could single the person out. Keep the story coherent and human. Replace specifics with neutral generalizations (e.g. "my employer", "a town near me") rather than deleting whole sentences.
 
 ${STRENGTH_BASED_FRAMING}
 
@@ -90,6 +92,7 @@ export async function applyAttribution(
   if (name) out = out.replace(new RegExp(escapeRegExp(name), 'gi'), 'a community member');
   return {
     final_body: out,
-    flagged: ['We could not automatically anonymize your story — please re-read it and remove any details that could identify you before sending.'],
+    flagged: ['We could not automatically anonymize your story. Please re-read it and remove any details that could identify you.'],
+    failed: true,
   };
 }

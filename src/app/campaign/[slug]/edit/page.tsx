@@ -51,6 +51,7 @@ export default async function EditCampaignPage({
     direction: (campaign.direction as 'support' | 'oppose' | null) ?? '',
     messageTemplate: campaign.message_template ?? '',
     storyPrompt: campaign.story_prompt ?? '',
+    usageStatement: campaign.usage_statement ?? '',
     usageTags: campaign.usage_tags ?? [],
     resolvedBill: campaign.bill_ref
       ? {

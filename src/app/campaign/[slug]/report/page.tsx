@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { slug } = await params;
   const admin = createAdminClient();
   const { data } = await admin.from('campaigns').select('headline').eq('slug', slug).single();
-  return { title: data ? `Impact Report — ${data.headline}` : 'Impact Report', robots: { index: false } };
+  return { title: data ? `Impact Report: ${data.headline}` : 'Impact Report', robots: { index: false } };
 }
 
 const DELIVERY_LABELS: Record<string, string> = {
@@ -189,7 +189,7 @@ export default async function CampaignReportPage({ params }: PageProps) {
                 <div key={s.slug} className="flex justify-between gap-3 text-sm border-b border-gray-100 dark:border-gray-700 pb-1.5">
                   <span>
                     <span className="font-medium">{STAGE_LABELS[s.goal] ?? 'Action'}</span>
-                    <span className="text-gray-500 dark:text-gray-400"> — {s.headline}</span>
+                    <span className="text-gray-500 dark:text-gray-400">: {s.headline}</span>
                   </span>
                   <span className="shrink-0 text-gray-500 dark:text-gray-400">
                     {s.constituents.toLocaleString()} participants · {s.messages.toLocaleString()} messages
@@ -246,18 +246,26 @@ export default async function CampaignReportPage({ params }: PageProps) {
         {report.insights && (
           <section>
             <h2 className="text-base font-semibold mb-1">What constituents are saying</h2>
-            <p className="text-[11px] text-gray-400 dark:text-gray-500 mb-3">AI-summarized from {report.insights.sourceCount} submissions · themes only, de-identified</p>
+            <p className="text-[11px] text-gray-500 dark:text-gray-400 mb-3">AI-summarized from {report.insights.sourceCount} submissions. Themes only, de-identified. Quotes appear only from storytellers who allowed use in reports.</p>
             <p className="text-sm text-gray-700 dark:text-gray-300 mb-3">{report.insights.summary}</p>
             <div className="space-y-2">
-              {report.insights.themes.map((t, i) => (
-                <div key={i} className="border-l-2 pl-3" style={{ borderColor: accent }}>
-                  <div className="flex justify-between gap-2">
-                    <span className="text-sm font-semibold">{t.label}</span>
-                    {t.prevalence > 0 && <span className="text-xs text-gray-500 dark:text-gray-400 shrink-0">~{t.prevalence} of {report.insights!.sourceCount}</span>}
+              {report.insights.themes.map((t, i) => {
+                // Only a quote whose storyteller granted "included_in_reports" may print here.
+                const candidates = [
+                  ...(t.quoteMeta?.reportOk ? [t.quote] : []),
+                  ...((t.quotes ?? []).filter((_, qi) => t.quotesMeta?.[qi]?.reportOk)),
+                ].filter(Boolean);
+                const quote = candidates[0] ?? null;
+                return (
+                  <div key={i} className="border-l-2 pl-3" style={{ borderColor: accent }}>
+                    <div className="flex justify-between gap-2">
+                      <span className="text-sm font-semibold">{t.label}</span>
+                      {t.prevalence > 0 && <span className="text-xs text-gray-500 dark:text-gray-400 shrink-0">~{t.prevalence} of {report.insights!.sourceCount}</span>}
+                    </div>
+                    {quote && <p className="text-sm text-gray-600 dark:text-gray-400 italic mt-0.5">&ldquo;{quote}&rdquo;</p>}
                   </div>
-                  {t.quote && <p className="text-sm text-gray-600 dark:text-gray-400 italic mt-0.5">&ldquo;{t.quote}&rdquo;</p>}
-                </div>
-              ))}
+                );
+              })}
             </div>
           </section>
         )}

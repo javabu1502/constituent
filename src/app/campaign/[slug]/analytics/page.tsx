@@ -188,7 +188,8 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
 
     const storyAnalytics = {
       kind: 'storytelling' as const,
-      total_stories: campaign.story_count || 0,
+      // Active rows when the fetch was not capped; the running count otherwise.
+      total_stories: (storyRows || []).length < 200 ? (storyRows || []).filter((s) => (s.status as string) === 'active').length : (campaign.story_count || 0),
       campaign_slug: campaign.slug as string,
       subjects: (subjectRows || []).map((s) => ({ title: s.title as string, created_at: s.created_at as string })),
       stories,

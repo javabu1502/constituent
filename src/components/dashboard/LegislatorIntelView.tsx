@@ -186,7 +186,7 @@ export async function LegislatorIntelView({
               <li key={c.id as string} className="py-2.5 flex items-center justify-between gap-3">
                 <div className="min-w-0">
                   <Link href={`/campaign/${c.slug}/analytics`} className="text-sm font-medium text-gray-900 dark:text-white hover:underline">
-                    {c.bill_ref ? `${c.bill_ref} — ` : ''}{c.headline}
+                    {c.bill_ref ? `${c.bill_ref}: ` : ''}{c.headline}
                   </Link>
                   <p className="text-xs text-gray-500 dark:text-gray-400">
                     {c.outcome ? OUTCOME_LABELS[c.outcome as string] ?? c.outcome : 'Ongoing'}
@@ -213,7 +213,7 @@ export async function LegislatorIntelView({
         <h2 className="text-base font-semibold text-gray-900 dark:text-white mb-1">Constituent pressure</h2>
         <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">
           {msgs.length.toLocaleString()} message{msgs.length !== 1 ? 's' : ''} from constituents across your campaigns
-          {thankCount > 0 ? ` (${thankCount} thank-you${thankCount !== 1 ? 's' : ''})` : ''} — your &ldquo;mention it in the
+          {thankCount > 0 ? ` (${thankCount} thank-you${thankCount !== 1 ? 's' : ''})` : ''}. Your &ldquo;mention it in the
           meeting&rdquo; number.
         </p>
         {msgs.length > 0 && (
@@ -223,7 +223,7 @@ export async function LegislatorIntelView({
                 <span className="text-gray-400 dark:text-gray-500 mr-1.5">{fmt(m.created_at)}</span>
                 {m.advocate_name || 'A constituent'}
                 {m.advocate_city ? ` (${m.advocate_city})` : ''}
-                {m.message_intent === 'thank' ? ' — thank-you' : ''}
+                {m.message_intent === 'thank' ? ' (thank-you)' : ''}
                 {campaignById.get(m.campaign_id) ? ` · ${campaignById.get(m.campaign_id)!.bill_ref ?? ''}` : ''}
               </li>
             ))}

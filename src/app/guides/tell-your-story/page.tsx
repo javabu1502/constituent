@@ -424,13 +424,13 @@ export default function TellYourStoryGuidePage() {
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Campaign Pages</h3>
                 <p className="text-gray-600 dark:text-gray-300 mb-2">
-                  Platforms like My Democracy let you create structured, shareable advocacy campaigns built around your story.
+                  Organizations run storytelling campaigns on My Democracy. You tell your story once, choose how you are credited and which uses you allow, and the organization carries it to lawmakers.
                 </p>
                 <ul className="list-disc list-inside text-gray-600 dark:text-gray-300 space-y-1">
-                  <li>Your story becomes the foundation of a campaign that others can support and share.</li>
-                  <li>The platform helps you direct your message to the right legislators automatically.</li>
-                  <li>Other constituents who share your experience can add their voices, building collective power.</li>
-                  <li>Campaign pages provide a permanent, linkable home for your story that you can reference across other venues.</li>
+                  <li>A guided interview helps you put your experience into words, and the draft is built only from what you said.</li>
+                  <li>You review and edit every word before anything is shared.</li>
+                  <li>You can stay anonymous, use a first name, or use your full name, and you can withdraw the story later.</li>
+                  <li>The organization sees which uses you allowed and may only use the story in those ways.</li>
                 </ul>
               </div>
 
@@ -512,7 +512,7 @@ export default function TellYourStoryGuidePage() {
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Forgetting to Include Your Name and Address</h3>
                 <p className="text-gray-600 dark:text-gray-300 mb-2">
-                  This is surprisingly common, and it can sink an otherwise powerful message. Legislative offices prioritize constituents. If they can&apos;t verify that you live in their district, your message may be discarded entirely. Always include your full name, street address, and ZIP code.
+                  This applies to messages you send directly to an office. Legislative offices prioritize constituents. If they can&apos;t verify that you live in their district, your message may be discarded entirely. Always include your full name, street address, and ZIP code. Storytelling campaigns are different: there you can stay anonymous, because the organization, not the office, receives the story.
                 </p>
                 <div className="bg-gray-100 dark:bg-gray-800 p-3 rounded-lg text-sm space-y-2">
                   <p><span className="text-red-500 dark:text-red-400 font-medium">Pitfall:</span> A passionate, well-structured message signed only with &quot;- A Concerned Citizen&quot;</p>

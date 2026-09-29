@@ -6,7 +6,11 @@
 
 function escapeCell(value: unknown): string {
   if (value === null || value === undefined) return '';
-  const s = String(value);
+  let s = String(value);
+  // Spreadsheet formula injection: a cell starting with = + - @ (or a tab/CR
+  // before one) would execute in Excel/Sheets. User text (titles, bodies)
+  // reaches this export, so neutralize with a leading apostrophe.
+  if (/^[\t\r]*[=+\-@]/.test(s)) s = `'${s}`;
   if (/[",\r\n]/.test(s)) {
     return `"${s.replace(/"/g, '""')}"`;
   }

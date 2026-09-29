@@ -182,7 +182,7 @@ export function DailyBarChart({ counts, unit }: { counts: Record<string, number>
 
 function photoRequestMailto(story: StoryListItem, campaignName: string): string {
   const firstName = story.display_name.split(/\s+/)[0] || 'there';
-  const subject = `A photo to go with your story — ${campaignName}`;
+  const subject = `A photo to go with your story: ${campaignName}`;
   const body =
     `Hi ${firstName},\n\n` +
     `Thank you again for sharing your story with the "${campaignName}" campaign. ` +
@@ -390,7 +390,7 @@ function StorytellingAnalytics({ analytics, campaignName, insightsPanel, isDemo 
         <CollapsibleSection title="By Elected Official" badge={`${analytics.officials.length}`} defaultOpen={false}>
         <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
           <p className="text-xs text-gray-500 dark:text-gray-400 mb-4">
-            Every official — federal, state, and local — matched from your storytellers&rsquo; addresses, with how many
+            Every official (federal, state, and local) matched from your storytellers&rsquo; addresses, with how many
             storytellers each represents. Click one to pull up their constituents&rsquo; stories, then bring exactly those
             stories to that office. &ldquo;State match&rdquo; officials are US senators inferred from the storyteller&rsquo;s state
             (used for stories shared before address matching existed).
@@ -461,7 +461,7 @@ function StorytellingAnalytics({ analytics, campaignName, insightsPanel, isDemo 
         </div>
         <p className="text-xs text-gray-500 dark:text-gray-400 mb-4">
           Stories storytellers shared with your campaign. Anonymous stories show no name or contact details.
-          Storytellers can change or revoke their story at any time — changes are flagged, and revoked stories are
+          Storytellers can change or revoke their story at any time. Changes are flagged, and revoked stories are
           hidden and excluded from the CSV.
         </p>
 
@@ -566,7 +566,7 @@ function StorytellingAnalytics({ analytics, campaignName, insightsPanel, isDemo 
                 </div>
                 {s.revoked ? (
                   <p className="text-xs text-red-600 dark:text-red-400 italic">
-                    The storyteller revoked this story — please don&rsquo;t use it.
+                    The storyteller revoked this story. Please do not use it.
                   </p>
                 ) : (
                   <>
@@ -805,7 +805,7 @@ function MessageBrowser({ messages, slug, isDemo = false }: { messages: NonNulla
           </details>
         ))}
         {filtered.length > 300 && (
-          <p className="text-xs text-gray-400 dark:text-gray-500 pt-1">Showing the first 300 on screen — the CSV export includes all {filtered.length.toLocaleString()}.</p>
+          <p className="text-xs text-gray-400 dark:text-gray-500 pt-1">Showing the first 300 on screen. The CSV export includes all {filtered.length.toLocaleString()}.</p>
         )}
       </div>
     </div>
@@ -983,7 +983,7 @@ export function CampaignAnalytics({ analytics, campaignName, insightsPanel, hide
         <CollapsibleSection title="Officials Contacted" badge={`${analytics.officials_contacted.length}`} defaultOpen={false}>
         <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
           <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">
-            Which lawmakers your campaign&rsquo;s messages went to — use this to see where pressure is landing and
+            Which lawmakers your campaign&rsquo;s messages went to. Use this to see where pressure is landing and
             which offices to target next.
           </p>
           {partyTotal > 0 && partyEntries.length > 1 && (
@@ -1051,7 +1051,7 @@ export function CampaignAnalytics({ analytics, campaignName, insightsPanel, hide
         <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
           <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-1">Message Outcomes</h3>
           <p className="text-xs text-gray-500 dark:text-gray-400 mb-4">
-            How far messages got — from opening a contact form to confirmed delivery.
+            How far messages got, from opening a contact form to confirmed delivery.
           </p>
           {statusEntries.length === 0 ? (
             <p className="text-sm text-gray-500 dark:text-gray-400">No data yet</p>
@@ -1193,7 +1193,7 @@ export function CampaignAnalytics({ analytics, campaignName, insightsPanel, hide
                   {(a.city || a.state) && (
                     <span className="text-gray-500 dark:text-gray-400"> from {[a.city, a.state].filter(Boolean).join(', ')}</span>
                   )}{' '}
-                  took action{a.messages_sent > 0 ? ` — ${a.messages_sent} message${a.messages_sent !== 1 ? 's' : ''}` : ''}
+                  took action{a.messages_sent > 0 ? `, ${a.messages_sent} message${a.messages_sent !== 1 ? 's' : ''}` : ''}
                 </span>
                 <span className="text-xs text-gray-400 dark:text-gray-500 shrink-0">
                   {new Date(a.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}

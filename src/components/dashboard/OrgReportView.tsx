@@ -158,7 +158,7 @@ export async function OrgReportView({
               return (
                 <div key={c.id as string} className="flex items-center justify-between gap-3 text-sm border-b border-gray-100 dark:border-gray-700 pb-1.5">
                   <span className="min-w-0">
-                    <span className="font-medium">{c.bill_ref ? `${c.bill_ref} — ` : ''}{c.headline}</span>
+                    <span className="font-medium">{c.bill_ref ? `${c.bill_ref}: ` : ''}{c.headline}</span>
                   </span>
                   <span className="shrink-0 flex items-center gap-3 text-xs text-gray-500 dark:text-gray-400">
                     <span>{Number(c.action_count).toLocaleString()} constituents</span>

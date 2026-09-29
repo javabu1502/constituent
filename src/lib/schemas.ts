@@ -129,7 +129,7 @@ export const createCampaignSchema = z.object({
   bill_url: z.string().max(1000).optional(),
   // Storytelling fields
   story_prompt: z.string().max(2000).nullish(),
-  usage_statement: z.string().max(3000).optional(),
+  usage_statement: z.string().max(3000).nullish(),
   usage_tags: z.array(z.string().max(60)).max(20).optional(),
   attribution_options: z.array(z.enum(['named', 'first_name_only', 'anonymous'])).optional(),
   edit_revoke_policy: z.string().max(2000).optional(),
@@ -245,6 +245,7 @@ export const updateCampaignSchema = z
     bill_title: z.string().max(500).nullish(),
     bill_url: z.string().max(1000).nullish(),
     story_prompt: z.string().max(2000).nullish(),
+    usage_statement: z.string().max(3000).nullish(),
     usage_tags: z.array(z.string().max(60)).max(20).optional(),
     org_name: z.string().max(120).nullish(),
     org_url: z.string().url().max(300).nullish(),
@@ -289,9 +290,17 @@ export const submitStorySchema = z.object({
   attribution_level: z.enum(['named', 'first_name_only', 'anonymous']),
   storyteller_name: z.string().max(200).nullish(),
   // Which uses the storyteller is OK with (their choice, not the creator's).
-  granted_uses: z.array(z.string().max(60)).min(1).max(20),
+  // Zero is allowed: sharing with the organization for reading only.
+  granted_uses: z.array(z.string().max(60)).min(0).max(20),
+  // Explicit checkbox: share this story with the campaign's organization.
   consent_usage: z.literal(true),
   consent_truthful: z.literal(true),
+  // 18 or older, or a parent/guardian sharing a family experience.
+  consent_adult: z.literal(true),
+  // Preview mode: apply attribution and return the text the organization
+  // would receive, without saving anything.
+  preview: z.boolean().optional(),
+  turnstileToken: z.string().optional(),
   // Storytelling persistence: the story is saved to the campaign organizer's
   // dashboard by default; `store: false` is the storyteller's opt-out. City/
   // state are sent only when location sharing is on; email is optional contact.

@@ -4,6 +4,13 @@ import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase';
 import { applyAttribution } from '@/lib/story-attribution';
 import { deDash } from '@/lib/claude';
+import { verifyStoryRevokeToken } from '@/lib/story-revoke';
+
+/** A revoke or edit changes what the organization may quote: drop the cached AI insights. */
+async function invalidateInsights(admin: ReturnType<typeof createAdminClient>, campaignId: string): Promise<void> {
+  const { error } = await admin.from('campaign_insights').delete().eq('campaign_id', campaignId);
+  if (error) console.error('[stories] insights invalidation failed:', error.message);
+}
 
 /**
  * PATCH /api/stories/[id]
@@ -44,7 +51,7 @@ export async function PATCH(
   // Load the existing story (owner + still active) to get its attribution.
   const { data: existing, error: loadErr } = await admin
     .from('stories')
-    .select('id, attribution_level, storyteller_name')
+    .select('id, attribution_level, storyteller_name, campaign_id')
     .eq('id', id)
     .eq('user_id', user.id)
     .eq('status', 'active')
@@ -72,6 +79,7 @@ export async function PATCH(
   if (error || !data) {
     return NextResponse.json({ error: 'Could not update the story' }, { status: 500 });
   }
+  await invalidateInsights(admin, existing.campaign_id as string);
 
   return NextResponse.json({ success: true, id: data.id, flagged: applied.flagged });
 }
@@ -80,34 +88,38 @@ export async function PATCH(
  * DELETE /api/stories/[id]
  * Storyteller-initiated removal of their own story (soft revoke). The story is
  * marked 'revoked'; the collector sees it flagged (content hidden) and it's
- * excluded from exports. Only the signed-in owner can revoke; anonymous stories
- * have no owner and are removed via the emailed data-deletion request instead.
+ * excluded from exports. The signed-in owner can revoke, and so can a guest
+ * who presents the revoke token issued at submission.
  */
 export async function DELETE(
-  _request: NextRequest,
+  request: NextRequest,
   { params }: { params: Promise<{ id: string }> },
 ) {
   const { id } = await params;
-
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) {
-    return NextResponse.json({ error: 'Sign in to manage your stories.' }, { status: 401 });
-  }
-
   const admin = createAdminClient();
-  const { data, error } = await admin
-    .from('stories')
-    .update({ status: 'revoked', revoked_at: new Date().toISOString() })
-    .eq('id', id)
-    .eq('user_id', user.id)
-    .eq('status', 'active')
-    .select('id')
-    .single();
+
+  // Two ways to prove ownership: the signed-in owner, or the revoke token the
+  // storyteller received when they submitted (guests have no account).
+  const token = request.nextUrl.searchParams.get('token') ?? '';
+  let query = admin.from('stories').update({ status: 'revoked', revoked_at: new Date().toISOString() }).eq('id', id).eq('status', 'active');
+  if (token && verifyStoryRevokeToken(id, token)) {
+    // token proves ownership
+  } else {
+    const supabase = await createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) {
+      return NextResponse.json({ error: 'Sign in, or use the withdraw link from your submission, to remove this story.' }, { status: 401 });
+    }
+    query = query.eq('user_id', user.id);
+  }
+  const { data, error } = await query.select('id, campaign_id').single();
 
   if (error || !data) {
     return NextResponse.json({ error: 'Story not found' }, { status: 404 });
   }
+  await invalidateInsights(admin, data.campaign_id as string);
+  const { error: decErr } = await admin.rpc('decrement_campaign_story_count', { campaign_uuid: data.campaign_id });
+  if (decErr) console.error('[stories] story-count decrement failed:', decErr.message);
 
   return NextResponse.json({ success: true, id: data.id });
 }

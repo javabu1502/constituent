@@ -77,7 +77,7 @@ function StoryCard({ story }: { story: MyStory }) {
           />
           {story.attribution_level === 'anonymous' && (
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-              Your story stays anonymous — we re-check it for identifying details when you save.
+              Your story stays anonymous. We re-check it for identifying details when you save.
             </p>
           )}
           <div className="flex items-center gap-2 mt-2">

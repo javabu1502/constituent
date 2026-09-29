@@ -167,7 +167,7 @@ export default function PrivacyPage() {
                   <strong className="text-gray-900 dark:text-white">Campaign participation</strong>: if you create or join an advocacy campaign, we store the campaign details and the name, city, and state you supply, along with how many messages were sent.
                 </li>
                 <li>
-                  <strong className="text-gray-900 dark:text-white">Storytelling campaigns</strong>: if you share a personal story with a storytelling campaign, we save it to that campaign&apos;s private dashboard (see the &quot;Storytelling Campaigns&quot; section below). You can opt out at submission, and remove a saved story anytime from your dashboard.
+                  <strong className="text-gray-900 dark:text-white">Storytelling campaigns</strong>: if you share a personal story with a storytelling campaign, we save it to that campaign&apos;s private dashboard when you press Submit (see the &quot;Storytelling Campaigns&quot; section below). You can withdraw a saved story later from your dashboard, or with the withdraw link you receive when you submit.
                 </li>
                 <li>
                   <strong className="text-gray-900 dark:text-white">Message-quality ratings</strong>: if you give a draft a thumbs up or down, we record that rating with the issue, tone, and official&apos;s party — but <strong className="text-gray-900 dark:text-white">not</strong> the message text or your identity. It is stored against a one-way hash so we can improve drafting quality.
@@ -194,37 +194,61 @@ export default function PrivacyPage() {
             </h2>
             <div className="space-y-3 text-gray-600 dark:text-gray-300 pl-10">
               <p>
-                Some organizers run <strong className="text-gray-900 dark:text-white">storytelling campaigns</strong> that
-                invite you to share a personal story. Because the whole point is to share your story with that campaign,
-                when you submit one we save it to that campaign&apos;s private dashboard so the organizer can read, track,
-                and follow up on the stories they receive. What we save depends on the choices you make:
+                Some organizations run <strong className="text-gray-900 dark:text-white">storytelling campaigns</strong> that
+                invite you to share a personal story. The purpose is to share your story with that organization. When you
+                press Submit, we save it to that campaign&apos;s private dashboard so the organization can read it and, if you
+                allowed it, use it. Nothing is saved before you press Submit. What we save depends on the choices you make:
               </p>
               <ul className="list-disc list-inside space-y-2 ml-4">
                 <li>
                   <strong className="text-gray-900 dark:text-white">Your story text</strong>, as you chose to have it
-                  attributed. If you choose <strong>anonymous</strong>, we run an automatic pass to remove your name and we
-                  save <strong className="text-gray-900 dark:text-white">no name, contact, or location</strong> with it.
+                  attributed. If you choose <strong>anonymous</strong>, an AI pass removes names, employers, specific places,
+                  and other identifying details. You see and can edit that version before it is saved. If the pass cannot
+                  run, nothing is saved. Anonymous stories carry <strong className="text-gray-900 dark:text-white">no name,
+                  contact, or location</strong>. If you are signed in, the story is linked to your account so you can edit or
+                  withdraw it; the organization never sees that link.
                 </li>
                 <li>
                   <strong className="text-gray-900 dark:text-white">Your name</strong> (full, first-name-only, or none)
-                  exactly as you chose; your <strong className="text-gray-900 dark:text-white">city and state</strong> only
-                  if you opt to share your location; and a <strong className="text-gray-900 dark:text-white">contact email</strong> only
-                  if you provide one for follow-up. Your street address is never shared or stored.
+                  exactly as you chose; your <strong className="text-gray-900 dark:text-white">city, state, and the names of
+                  your elected officials</strong> only if you check the box to share them; and a{' '}
+                  <strong className="text-gray-900 dark:text-white">contact email</strong> only if you type one and allow
+                  follow-up. Your street address is used once to confirm you are a constituent and is never shared or stored.
                 </li>
                 <li>
-                  The <strong className="text-gray-900 dark:text-white">uses you granted</strong> and the date you shared it.
+                  The <strong className="text-gray-900 dark:text-white">uses you allowed</strong> (for example sharing with
+                  legislators, publishing, press, or reports) and the date you consented. The organization sees this list. We
+                  record it; we cannot enforce how the organization uses a story after it downloads it.
+                </li>
+                <li>
+                  For guests, a <strong className="text-gray-900 dark:text-white">one-way hashed IP address</strong> for
+                  abuse tracing, and an edited or withdrawn timestamp if you change the story later.
                 </li>
               </ul>
               <p>
-                <strong className="text-gray-900 dark:text-white">Who can see it:</strong> only the organizer of that
-                specific campaign and you. Saved stories are not public and are not shared with any other campaign or third
-                party. The organizer can download their campaign&apos;s stories as a spreadsheet for their own records.
+                <strong className="text-gray-900 dark:text-white">The AI sees your story.</strong> The interview, the draft,
+                any edits you request, the anonymization pass, and the organization&apos;s summaries are generated by our AI
+                provider (Anthropic) from the text you wrote. Anthropic does not train on this data. The organization can
+                generate an AI summary of its campaign&apos;s stories with short verbatim quotes; quotes never carry names,
+                are marked when they come from an anonymous story, and appear in printable reports only from storytellers
+                who allowed use in reports. A withdrawn story drops out of those summaries the next time they refresh, and
+                we refresh them when a story changes.
               </p>
               <p>
-                <strong className="text-gray-900 dark:text-white">You&apos;re in control:</strong> you can decline to save
-                your story when you submit it (you can still email it yourself), and you can remove a saved story at any time
-                from your dashboard, which takes it out of the organizer&apos;s dashboard and export. You may also email us to
-                delete all of your data (see &quot;Data Retention &amp; Deletion&quot;).
+                <strong className="text-gray-900 dark:text-white">Who can see it:</strong> the organization running that
+                specific campaign and you. Saved stories are not public and are not shared with any other campaign. The
+                organization can download its campaign&apos;s stories as a spreadsheet, which carries only the details you
+                allowed. A short, name-free topic title and a running count of stories are kept for the campaign page even
+                after a story is withdrawn.
+              </p>
+              <p>
+                <strong className="text-gray-900 dark:text-white">You are in control:</strong> you can withdraw a story at
+                any time from your dashboard, or with the withdraw link shown when you submit if you do not have an account.
+                Withdrawing removes it from the organization&apos;s dashboard, its export, and its summaries. Anything the
+                organization already used before then may not be recallable. Stories are kept until you withdraw them or
+                delete your account. You may also email us to delete all of your data (see &quot;Data Retention &amp;
+                Deletion&quot;). You must be 18 or older, or a parent or guardian sharing your family&apos;s experience, to
+                submit a story.
               </p>
             </div>
           </section>

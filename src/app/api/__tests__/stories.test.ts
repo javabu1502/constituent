@@ -15,7 +15,7 @@ vi.mock('@/lib/supabase', () => ({
     from: vi.fn((table: string) => {
       if (table === 'campaigns') return { select: mockCampaignSelect };
       if (table === 'story_subjects') return { insert: mockSubjectInsert };
-      if (table === 'stories') return { insert: mockStoryInsert };
+      if (table === 'stories') return { insert: (row: unknown) => { mockStoryInsert(row); return { select: () => ({ single: async () => ({ data: { id: 'story-1' }, error: null }) }) }; } };
       return {};
     }),
     rpc: mockRpc,
@@ -28,7 +28,8 @@ vi.mock('@/lib/supabase/server', () => ({
   createClient: vi.fn(async () => ({ auth: { getUser: mockGetUser } })),
 }));
 
-vi.mock('@/lib/usage-quota', () => ({ hashIp: vi.fn(() => 'iphash') }));
+vi.mock('@/lib/usage-quota', () => ({ hashIp: vi.fn(() => 'iphash'), resolveUsageIdentity: vi.fn(async () => ({ userId: null, ipHash: 'iphash' })) }));
+vi.mock('@/lib/turnstile', () => ({ verifyTurnstile: vi.fn(() => Promise.resolve(true)) }));
 
 // Keep attribution deterministic — its own unit test covers the logic.
 const mockApply = vi.fn();
@@ -62,6 +63,7 @@ const validBody = {
   granted_uses: ['shared_with_legislators', 'published_web_social'],
   consent_usage: true,
   consent_truthful: true,
+  consent_adult: true,
 };
 
 function makeReq(body: unknown) {
@@ -90,7 +92,7 @@ describe('POST /api/stories', () => {
     expect(res.status).toBe(200);
     const data = await res.json();
     expect(data.final_body).toBe('FINAL BODY');
-    expect(data.recipient_email).toBe('creator@example.com');
+    expect(data.story_id).toBe('story-1');
     expect(mockRpc).toHaveBeenCalledWith('increment_campaign_story_count', { campaign_slug: 'test' });
 
     // The aggregate subject holds only a topic title — no body, no name.
@@ -156,13 +158,49 @@ describe('POST /api/stories', () => {
     expect(row.body).toBe('FINAL BODY'); // redacted body still saved
   });
 
-  it('does NOT persist the story when store is false (but still counts + subject)', async () => {
+  it('does NOT persist or count the story when store is false (subject only)', async () => {
     const { POST } = await import('../stories/route');
     const res = await POST(makeReq({ ...validBody, store: false }));
     expect(res.status).toBe(200);
     expect(mockStoryInsert).not.toHaveBeenCalled();
-    expect(mockRpc).toHaveBeenCalledOnce();
+    expect(mockRpc).not.toHaveBeenCalled();
     expect(mockSubjectInsert).toHaveBeenCalledOnce();
+  });
+
+  it('preview mode returns the attribution-applied body and saves nothing', async () => {
+    const { POST } = await import('../stories/route');
+    const res = await POST(makeReq({ ...validBody, preview: true }));
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.preview).toBe(true);
+    expect(typeof data.final_body).toBe('string');
+    expect(mockStoryInsert).not.toHaveBeenCalled();
+    expect(mockRpc).not.toHaveBeenCalled();
+    expect(mockSubjectInsert).not.toHaveBeenCalled();
+  });
+
+  it('refuses to save an anonymous story when the redaction pass failed', async () => {
+    mockApply.mockResolvedValueOnce({ final_body: 'unredacted text here', flagged: ['could not anonymize'], failed: true });
+    const { POST } = await import('../stories/route');
+    const res = await POST(makeReq({ ...validBody, attribution_level: 'anonymous', storyteller_name: null }));
+    expect(res.status).toBe(503);
+    expect(mockStoryInsert).not.toHaveBeenCalled();
+  });
+
+  it('never falls back to the account email: only a typed contact email is stored', async () => {
+    mockGetUser.mockResolvedValueOnce({ data: { user: { id: 'u1', email: 'account@example.com' } } });
+    const { POST } = await import('../stories/route');
+    const res = await POST(makeReq({ ...validBody, granted_uses: ['contact_me_followup'], storyteller_email: null }));
+    expect(res.status).toBe(200);
+    expect(mockStoryInsert.mock.calls[0][0].storyteller_email).toBeNull();
+  });
+
+  it('returns a revoke token a guest can use later', async () => {
+    const { POST } = await import('../stories/route');
+    const res = await POST(makeReq(validBody));
+    const data = await res.json();
+    expect(data.story_id).toBe('story-1');
+    expect(data.revoke_token).toMatch(/^[0-9a-f]{64}$/);
   });
 
   it('strips the storyteller name out of the stored subject title', async () => {
@@ -174,13 +212,11 @@ describe('POST /api/stories', () => {
     expect(inserted.title).toContain('daycare');
   });
 
-  it('requires at least one granted use', async () => {
+  it('allows zero granted uses (share for reading only)', async () => {
     const { POST } = await import('../stories/route');
     const res = await POST(makeReq({ ...validBody, granted_uses: [] }));
-    expect(res.status).toBe(400);
-    expect(mockRpc).not.toHaveBeenCalled();
+    expect(res.status).toBe(200);
   });
-
   it('returns 400 when consent is not given', async () => {
     const { POST } = await import('../stories/route');
     const res = await POST(makeReq({ ...validBody, consent_usage: false }));

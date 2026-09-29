@@ -7,6 +7,7 @@
  * no DB handles) so it can cross that boundary untouched. See the Salesforce
  * plan for the eventual sync path.
  */
+import { US_STATES } from '@/lib/constants';
 import { createAdminClient } from '@/lib/supabase';
 import { getCachedInsights, type CampaignInsights } from '@/lib/insights';
 import { stageOrder } from '@/lib/stages';
@@ -183,7 +184,8 @@ export function assembleCampaignReport(campaign: CampaignRow, rows: ReportSource
   // Storytelling: story states are the reach geography.
   if (campaign.campaign_type === 'storytelling' && rows.stories) {
     for (const st of rows.stories) {
-      if (st.state) stateAgg.set(st.state.trim().toUpperCase(), (stateAgg.get(st.state.trim().toUpperCase()) || 0) + 1);
+      const code = normalizeStateCode(st.state);
+      if (code) stateAgg.set(code, (stateAgg.get(code) || 0) + 1);
     }
   }
   // Fall back to message locations if actions carry no geography.
@@ -479,4 +481,14 @@ export async function buildCampaignReport(campaign: CampaignRow, nowMs: number):
     },
     nowMs
   );
+}
+
+
+/** "NV" / "Nevada" / "nevada " → "NV"; unknown → null (never counted as its own state). */
+export function normalizeStateCode(raw: string | null | undefined): string | null {
+  if (!raw) return null;
+  const t = raw.trim();
+  if (/^[A-Za-z]{2}$/.test(t)) return t.toUpperCase();
+  const match = US_STATES.find((s) => s.name.toLowerCase() === t.toLowerCase());
+  return match?.code ?? null;
 }
