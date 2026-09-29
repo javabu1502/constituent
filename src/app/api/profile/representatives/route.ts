@@ -79,7 +79,7 @@ export async function POST() {
   // Local officials from the hand-verified roster (non-blocking)
   let localOfficials: LocalOfficial[] = [];
   try {
-    localOfficials = findLocalOfficials(geocodeResult.stateCode, geocodeResult);
+    localOfficials = await findLocalOfficials(geocodeResult.stateCode, geocodeResult);
     officials.push(...localOfficials.map(toOfficial));
   } catch (err) {
     console.error('Local officials lookup failed (non-blocking):', err);

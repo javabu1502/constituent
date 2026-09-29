@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { findLocalOfficials, localRosterFor, toOfficial } from '../local-officials';
+import { findLocalOfficials, localRosterFor, toOfficial, normalizeDistrictLabel } from '../local-officials';
 import { extractLocalGeographies } from '../geocode';
 
 describe('extractLocalGeographies (Census layers → local GEOIDs)', () => {
@@ -24,9 +24,9 @@ describe('extractLocalGeographies (Census layers → local GEOIDs)', () => {
 });
 
 describe('findLocalOfficials', () => {
-  it('returns nothing for a state without a roster or an address without geographies', () => {
-    expect(findLocalOfficials('CA', { countyGeoid: '06037' })).toEqual([]);
-    expect(findLocalOfficials('NV', {})).toEqual([]);
+  it('returns nothing for a state without a roster or an address without geographies', async () => {
+    expect(await findLocalOfficials('CA', { countyGeoid: '06037' })).toEqual([]);
+    expect(await findLocalOfficials('NV', {})).toEqual([]);
   });
   it('Nevada roster is well-formed: every body has a GEOID and every seat a name/title, and verified seats have a contact path', () => {
     const roster = localRosterFor('NV')!;
@@ -44,15 +44,15 @@ describe('findLocalOfficials', () => {
       }
     }
   });
-  it('an unverified seat is listed but never carries an email', () => {
+  it('an unverified seat is listed but never carries an email', async () => {
     const roster = localRosterFor('NV')!;
     const body = roster.bodies.find((b) => b.seats.some((s) => s.unverified));
     if (!body) return; // nothing unverified in this roster
-    const found = findLocalOfficials('NV', { countyGeoid: body.geoid, placeGeoid: body.geoid, schoolDistrictGeoid: body.geoid });
+    const found = await findLocalOfficials('NV', { countyGeoid: body.geoid, placeGeoid: body.geoid, schoolDistrictGeoid: body.geoid });
     for (const o of found) if (o.name === body.seats.find((s) => s.unverified)!.name) expect(o.email).toBeUndefined();
   });
-  it('resolves a Reno address to Washoe County, Reno, and WCSD bodies when present in the roster', () => {
-    const found = findLocalOfficials('NV', { countyGeoid: '32031', placeGeoid: '3260600', schoolDistrictGeoid: '3200480' });
+  it('resolves a Reno address to Washoe County, Reno, and WCSD bodies when present in the roster', async () => {
+    const found = await findLocalOfficials('NV', { countyGeoid: '32031', placeGeoid: '3260600', schoolDistrictGeoid: '3200480' });
     const bodies = new Set(found.map((o) => o.jurisdiction));
     const roster = localRosterFor('NV')!;
     const expected = roster.bodies.filter((b) => ['32031', '3260600', '3200480'].includes(b.geoid)).map((b) => b.name);
@@ -62,5 +62,14 @@ describe('findLocalOfficials', () => {
       expect(o.id).toMatch(/^local:\d+:/);
       expect(toOfficial(o)).not.toHaveProperty('jurisdictionLevel');
     }
+  });
+});
+
+describe('normalizeDistrictLabel', () => {
+  it('compares labels the way bodies write them', () => {
+    expect(normalizeDistrictLabel('District A')).toBe('a');
+    expect(normalizeDistrictLabel('Ward 3')).toBe('3');
+    expect(normalizeDistrictLabel('Ward III')).toBe('3');
+    expect(normalizeDistrictLabel('At-Large District F')).toBe('f');
   });
 });

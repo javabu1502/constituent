@@ -45,7 +45,7 @@ export async function POST(request: Request) {
     if ('error' in geo) {
       return NextResponse.json({ error: geo.error }, { status: geo.code === 'NO_MATCH' || geo.code === 'INVALID_ADDRESS' ? 400 : 502 });
     }
-    const officials = findLocalOfficials(geo.stateCode, geo);
+    const officials = await findLocalOfficials(geo.stateCode, geo);
     return NextResponse.json({ officials, coverage: officials.length > 0 ? 'roster' : 'none' });
   } catch (err) {
     console.error('Local officials lookup failed:', err);

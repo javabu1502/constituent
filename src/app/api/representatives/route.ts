@@ -131,7 +131,7 @@ export async function POST(request: NextRequest): Promise<NextResponse<LookupRes
     // Step 4: Local officials from the hand-verified roster (county / city /
     // school board by Census GEOID). Non-blocking.
     try {
-      for (const local of findLocalOfficials(geocodeResult.stateCode, geocodeResult)) {
+      for (const local of await findLocalOfficials(geocodeResult.stateCode, geocodeResult)) {
         officials.push(toOfficial(local));
       }
     } catch (err) {
