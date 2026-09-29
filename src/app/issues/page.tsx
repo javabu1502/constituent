@@ -47,7 +47,7 @@ export default async function IssuesPage() {
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Weigh In</h1>
           <p className="text-gray-600 dark:text-gray-400 mt-1">
             The questions being decided in Washington and the states right now. Read both sides, pick your position,
-            and send it to the people who represent you. We don&rsquo;t take sides — you do.
+            and send it to the people who represent you. We do not take sides. You do.
           </p>
           {totalActions > 0 && (
             <div className="flex flex-wrap items-center gap-2 mt-3">
@@ -68,7 +68,7 @@ export default async function IssuesPage() {
       {!issues || issues.length === 0 ? (
         <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm p-12 text-center">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">No open questions right now</h3>
-          <p className="text-gray-600 dark:text-gray-400">Check back soon — new issues are added as debates move in Washington.</p>
+          <p className="text-gray-600 dark:text-gray-400">Check back soon. New issues are added as debates move in Washington.</p>
         </div>
       ) : (
         <CampaignFilters campaigns={issues} />

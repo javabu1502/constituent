@@ -77,10 +77,10 @@ export async function GET(
 
   const kicker =
     pos === 'support'
-      ? 'I STAND WITH THE CASE FOR — WEIGH IN'
+      ? 'I STAND WITH THE CASE FOR. WEIGH IN'
       : pos === 'oppose'
-        ? 'I STAND WITH THE CASE AGAINST — WEIGH IN'
-        : "I'M STILL DECIDING — WEIGH IN";
+        ? 'I STAND WITH THE CASE AGAINST. WEIGH IN'
+        : "I'M STILL DECIDING. WEIGH IN";
 
   const panel = (side: 'for' | 'against') => {
     const chosen = (pos === 'support' && side === 'for') || (pos === 'oppose' && side === 'against');

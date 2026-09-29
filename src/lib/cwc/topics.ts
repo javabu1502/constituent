@@ -31,7 +31,8 @@ const NORMALIZE: Record<string, LocTopic> = {
   immigration: 'Immigration',
   energy: 'Energy',
   agriculture: 'Agriculture and Food',
-  other: 'Government Operations and Politics',
+  // 'other' deliberately absent: it falls through to the headline keyword pass
+  // instead of filing everything under Government Operations (audit 2026-09-28).
 };
 
 const KEYWORD_FALLBACKS: [RegExp, LocTopic][] = [

@@ -185,7 +185,7 @@ export function CampaignParticipate({
       setCoreAsk(typeof data.ask === 'string' ? data.ask : null);
       fireFunnel('participate_core_generated');
     } catch (err) {
-      setError(err instanceof FriendlyError ? err.message : 'We could not draft your message — you can write it yourself below, or try again.');
+      setError(err instanceof FriendlyError ? err.message : 'We could not draft your message. You can write it yourself below, or try again.');
     } finally {
       setCoreStatus('idle');
     }
@@ -291,7 +291,7 @@ export function CampaignParticipate({
     e.preventDefault();
     setError(null);
 
-    if (cwcFields && !prefix) { setError('Please select a title — congressional offices require one to accept your message'); return; }
+    if (cwcFields && !prefix) { setError('Please select a title. Congressional offices require one to accept your message.'); return; }
     if (!name.trim()) { setError('Please enter your name'); return; }
     if (cwcFields && name.trim().split(/\s+/).length < 2) { setError('Please enter your first and last name. Congressional offices require both.'); return; }
     if (collectEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
@@ -299,7 +299,7 @@ export function CampaignParticipate({
       return;
     }
     if (cwcFields && !collectEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
-      setError('Please enter your email — congressional offices require it for delivery');
+      setError('Please enter your email. Congressional offices require it for delivery.');
       return;
     }
     if (!street.trim()) { setError('Please enter your street address'); return; }
@@ -691,7 +691,9 @@ export function CampaignParticipate({
     // getToken() after that times out to an empty token, which 403s the
     // anonymous participate call. Same ordering rule as handleSubmit.
     await participationChainRef.current;
-    if (!actionIdRef.current) {
+    // Only a real send counts. A reader who reviewed and clicked Done without
+    // sending is not "someone who weighed in" (audit 2026-09-28).
+    if (!actionIdRef.current && sentCount > 0) {
       await recordEngagement(sentCount);
     }
     setStep('done');
@@ -734,7 +736,7 @@ export function CampaignParticipate({
         <div>
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white">What&rsquo;s your position?</h3>
           <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-            Both sides are laid out above. Your message will carry <em>your</em> position — My Democracy doesn&rsquo;t take a side.
+            Both sides are laid out above. Your message will carry <em>your</em> position. My Democracy does not take a side.
           </p>
         </div>
 
@@ -821,14 +823,14 @@ export function CampaignParticipate({
               {coreStatus === 'drafting' ? 'Writing your message…' : fetchingQuestions ? 'One moment…' : 'Draft my message'}
             </Button>
             <p className="text-xs text-gray-500 dark:text-gray-400 text-center">
-              You&apos;ll see and edit the message before anything else happens — no address needed yet.
+              You will see and edit the message before anything else happens. No address needed yet.
             </p>
           </>
         ) : (
           <>
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Your message <span className="text-gray-400 dark:text-gray-500 font-normal">(edit anything — these are your words)</span>
+                Your message <span className="text-gray-400 dark:text-gray-500 font-normal">(edit anything, these are your words)</span>
               </label>
               <textarea
                 value={coreDraft}
@@ -848,7 +850,7 @@ export function CampaignParticipate({
                 }}
                 className="flex-1"
               >
-                Looks good — deliver it
+                Looks good. Next: your address
               </Button>
               <button
                 type="button"
@@ -1083,7 +1085,7 @@ export function CampaignParticipate({
         </h3>
         <p className="text-gray-600 dark:text-gray-300 mb-6">
           This stage of the campaign targets only the members of {noTargetName}, so their offices hear from the
-          constituents they represent. Your voice still matters — here are the best ways to help right now.
+          constituents they represent. Your voice still matters. Here are the best ways to help right now.
         </p>
         {parentCampaign && (
           <Link
@@ -1094,7 +1096,7 @@ export function CampaignParticipate({
           </Link>
         )}
         <div className="mb-6 text-left">
-          <SocialShare url={shareUrl} text={`"${campaign.headline}" is in front of ${noTargetName} right now — if your rep is on the committee, they need to hear from you.`} />
+          <SocialShare url={shareUrl} text={`"${campaign.headline}" is in front of ${noTargetName} right now. If your rep is on the committee, they need to hear from you.`} />
         </div>
         <button
           onClick={() => setStep('form')}
@@ -1127,7 +1129,7 @@ export function CampaignParticipate({
           This campaign is for {stateName} constituents
         </h3>
         <p className="text-gray-600 dark:text-gray-300 mb-6">
-          It&apos;s about a bill in the {stateName} legislature, and only {stateName} legislators vote on it — your
+          It&apos;s about a bill in the {stateName} legislature, and only {stateName} legislators vote on it. Your
           own state legislators aren&apos;t part of this decision. The most useful thing you can do is pass it along
           to people in {stateName}, or find an issue where <em>your</em> officials are the ones deciding.
         </p>
@@ -1140,7 +1142,7 @@ export function CampaignParticipate({
           </Link>
         </div>
         <div className="mb-6 text-left">
-          <SocialShare url={shareUrl} text={`${stateName} friends: "${campaign.headline}" needs your voice — your legislators are the ones deciding.`} />
+          <SocialShare url={shareUrl} text={`${stateName} friends: "${campaign.headline}" needs your voice. Your legislators are the ones deciding.`} />
         </div>
         <button onClick={() => setStep('form')} className="text-sm text-purple-600 dark:text-purple-400 hover:underline">
           &larr; I entered the wrong address
@@ -1172,7 +1174,7 @@ export function CampaignParticipate({
               {campaign.message_template}
             </p>
             <p className="mt-2 text-xs text-gray-500 dark:text-gray-400">
-              Everything else is written for your voice — edit anything before you send.
+              Everything else is written for your voice. Edit anything before you send.
             </p>
           </details>
         )}
@@ -1183,7 +1185,7 @@ export function CampaignParticipate({
               Our AI writer isn&apos;t available right now, so we&apos;ve started each message for you.
             </p>
             <p className="text-xs text-amber-700 dark:text-amber-400 mt-1">
-              Please make it your own before sending — personal words carry the most weight with officials.
+              Please make it your own before sending. Personal words carry the most weight with officials.
             </p>
           </div>
         )}
@@ -1256,9 +1258,11 @@ export function CampaignParticipate({
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
         </svg>
       </div>
-      <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Sent</h3>
+      <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">{sentCount > 0 || actionIdRef.current ? 'Sent' : 'Nothing sent yet'}</h3>
       <p className="text-gray-600 dark:text-gray-300 mb-6">
-        Offices tally constituent messages by issue. Yours is now in the count.
+        {sentCount > 0 || actionIdRef.current
+          ? 'Offices tally constituent messages by issue. Yours is now in the count.'
+          : 'You can go back and send your message whenever you are ready.'}
       </p>
 
       {/* Reader-poll results — revealed only AFTER this reader picked and acted */}
@@ -1282,7 +1286,7 @@ export function CampaignParticipate({
             </h4>
             {total < 20 ? (
               <p className="text-sm text-gray-600 dark:text-gray-400">
-                Be one of the first to weigh in — results appear once more readers have.
+                Be one of the first to weigh in. Results appear once more readers have.
               </p>
             ) : (
               <>
@@ -1294,7 +1298,7 @@ export function CampaignParticipate({
                     <div key={key}>
                       <div className="flex items-center justify-between text-xs mb-1">
                         <span className={key === stance ? 'font-semibold text-purple-700 dark:text-purple-300' : 'font-medium text-gray-600 dark:text-gray-400'}>
-                          {label}{key === stance ? ' — your position' : ''}
+                          {label}{key === stance ? ' (your position)' : ''}
                         </span>
                         <span className="text-gray-500 dark:text-gray-400">{pct(count)}%</span>
                       </div>
@@ -1331,10 +1335,10 @@ export function CampaignParticipate({
           text={
             stance
               ? `I just weighed in on "${campaign.headline}". Where do you land? 👇`
-              : `I just took action on "${campaign.headline}" — join me!`
+              : `I just took action on "${campaign.headline}". Join me.`
           }
           title={campaign.headline}
-          prompt="Share where you stand — your position, never your name"
+          prompt="Share where you stand. Your position, never your name."
           appendUtmSource
         />
       </div>

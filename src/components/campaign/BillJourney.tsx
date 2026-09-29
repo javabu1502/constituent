@@ -48,17 +48,17 @@ function publicLabel(goal: StageGoal, isState: boolean): string {
 function happeningNow(goal: StageGoal): string {
   switch (goal) {
     case 'cosponsor':
-      return 'Right now, supporters are asking lawmakers to publicly back the bill — the more names on it, the better its chances.';
+      return 'Right now, supporters are asking lawmakers to publicly back the bill. The more names on it, the better its chances.';
     case 'committee':
       return 'Right now, a small group of lawmakers is deciding whether this bill moves forward. If your representative is one of them, your voice counts extra.';
     case 'floor_house':
-      return 'Right now, the bill is headed for a vote by the full chamber — every representative gets a say, including yours.';
+      return 'Right now, the bill is headed for a vote by the full chamber. Every representative gets a say, including yours.';
     case 'floor_senate':
-      return 'Right now, the bill needs one last vote in the Senate — every senator gets a say, including yours.';
+      return 'Right now, the bill needs one last vote in the Senate. Every senator gets a say, including yours.';
     case 'thank_you':
-      return 'The bill passed! Lawmakers rarely hear thank-yous — sending one makes the next good vote easier.';
+      return 'The bill passed. Lawmakers rarely hear thank-yous. Sending one makes the next good vote easier.';
     default:
-      return 'The campaign is active — jump in below.';
+      return 'The campaign is active. Jump in below.';
   }
 }
 
@@ -126,7 +126,7 @@ export async function BillJourney({ campaign }: JourneyProps) {
                 {current && (
                   <p className="text-xs text-gray-500 dark:text-gray-400 truncate">
                     <Link href={`/campaign/${s.slug}`} className="text-purple-600 dark:text-purple-400 hover:underline">
-                      {s.headline} — take action
+                      {s.headline}: take action
                     </Link>
                   </p>
                 )}

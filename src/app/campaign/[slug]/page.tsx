@@ -104,14 +104,17 @@ export default async function CampaignPage({ params }: PageProps) {
     ? await fetchBillCard(campaign.bill_congress!, campaign.bill_type!, campaign.bill_number!)
     : null;
   if (!billSpecific) {
-    // Dormant bill identifiers must not reach the client at all — not even in
-    // serialized props. Neutral issues carry no bill reference anywhere.
-    campaign.bill_ref = null;
-    campaign.bill_title = null;
-    campaign.bill_url = null;
+    // Dormant federal bill identifiers must not reach the client at all, not
+    // even in serialized props. A STATE weigh-in keeps its bill reference and
+    // link (AB 280, Question 6) so the page can show what it is about.
     campaign.bill_congress = null;
     campaign.bill_type = null;
     campaign.bill_number = null;
+    if (campaign.bill_level !== 'state') {
+      campaign.bill_ref = null;
+      campaign.bill_title = null;
+      campaign.bill_url = null;
+    }
   }
 
   return (
@@ -213,7 +216,7 @@ export default async function CampaignPage({ params }: PageProps) {
               </div>
             </div>
             <p className="text-xs text-gray-400 dark:text-gray-500 mt-2">
-              My Democracy doesn&rsquo;t take a side — you choose your position below, and your message carries it.
+              My Democracy does not take a side. You choose your position below, and your message carries it.
               Sources represent one organization on each side; they don&rsquo;t reflect My Democracy&rsquo;s position.
             </p>
           </div>
