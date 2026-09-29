@@ -131,3 +131,73 @@ describe('sharesVerbatimRun', () => {
     expect(sharesVerbatimRun(TEMPLATE, draft)).toBe(true);
   });
 });
+
+describe('drafting fidelity audit 2026-09-29', () => {
+  it('no identity support regex contains a literal escaped pipe (the \\| bug)', async () => {
+    const fs = await import('fs');
+    const src = fs.readFileSync(new URL('../message-quality.ts', import.meta.url), 'utf8');
+    const table = src.slice(src.indexOf('const IDENTITY_CLAIMS'), src.indexOf('export function detectUnsupportedIdentityClaims'));
+    expect(table).not.toContain('\\|');
+  });
+
+  it('licenses true first-person claims the constituent actually wrote', async () => {
+    const { detectUnsupportedIdentityClaims } = await import('../message-quality');
+    const pairs: Array<[string, string]> = [
+      ['I have type 1 diabetes and my insulin costs keep rising.', 'I have type 1 diabetes'],
+      ['I was diagnosed last spring.', 'I was diagnosed with lupus in April'],
+      ['My prescriptions cost more every month.', 'my prescriptions went up again'],
+      ['I am a renter and my landlord raised the rent.', 'I rent my apartment in Reno'],
+      ['My rent went up 300 dollars.', 'my rent jumped this year'],
+      ['As a mom of three, I worry about the school.', 'as a mom I see it every day'],
+      ['My kids ride that bus every day.', 'mis hijos van a esa escuela'],
+      ['I served in the Army for six years.', 'I am a veteran'],
+    ];
+    for (const [draft, user] of pairs) {
+      expect(detectUnsupportedIdentityClaims(draft, user), draft).toEqual([]);
+    }
+  });
+
+  it('flags an invented distance or duration but accepts a spelled-out one the constituent wrote', async () => {
+    const { detectUnsourcedStats } = await import('../message-quality');
+    expect(detectUnsourcedStats('Our nearest ER is 80 miles away now.', 'the drive is an hour and twenty minutes')).toEqual(['80 miles']);
+    expect(detectUnsourcedStats('I have paid for 12 years.', 'I have been paying for twelve years')).toEqual([]);
+    expect(detectUnsourcedStats('We waited 47 days.', 'we waited forty-seven days')).toEqual([]);
+  });
+
+  it('stripUnsourcedStats keeps paragraph breaks and drops the orphan sentence after a removed one', async () => {
+    const { stripUnsourcedStats } = await import('../message-quality');
+    const text = 'My daughter needs her aide.\n\nCongress promised to cover 40 percent of the cost. That promise has never been fully kept. Her school is short staffed.\n\nPlease fund it.';
+    const out = stripUnsourcedStats(text, 'my daughter has an aide at school');
+    expect(out).toBe('My daughter needs her aide.\n\nHer school is short staffed.\n\nPlease fund it.');
+  });
+
+  it('openingRepeatsBody catches the same credentials restated in new words', async () => {
+    const { openingRepeatsBody } = await import('../message-quality');
+    expect(openingRepeatsBody(
+      'I am a renter in Reno and I work nights at the hospital.',
+      'I have rented the same two-bedroom apartment in Reno while working nights at the hospital. Rent is up.'
+    )).toBe(true);
+    expect(openingRepeatsBody(
+      'I am a renter in Reno.',
+      'Rents across the state have climbed faster than wages. My lease renews in March.'
+    )).toBe(false);
+  });
+
+  it('askContradictsStance only trips on explicit direction verbs', async () => {
+    const { askContradictsStance } = await import('../message-quality');
+    expect(askContradictsStance('Please support the bill and vote yes.', 'oppose')).toBe(true);
+    expect(askContradictsStance('Please oppose this increase.', 'support')).toBe(true);
+    expect(askContradictsStance('Please protect Head Start funding in the budget.', 'oppose')).toBe(false);
+    expect(askContradictsStance('Please cosponsor H.R. 4821.', 'support')).toBe(false);
+    expect(askContradictsStance('Please vote no.', null)).toBe(false);
+  });
+
+  it('detectAiCadence and looksLikeRefusal', async () => {
+    const { detectAiCadence, looksLikeRefusal } = await import('../message-quality');
+    expect(detectAiCadence('This is not an abstract policy problem for me.')).toHaveLength(1);
+    expect(detectAiCadence('Four months is not a wait time, it is a barrier.')).toHaveLength(1);
+    expect(detectAiCadence('I waited four months for an appointment. That is too long.')).toEqual([]);
+    expect(looksLikeRefusal("I need to pause here. The constituent's own words say they support the cut.")).toBe(true);
+    expect(looksLikeRefusal('{"body": "Head Start gave my son a start."}')).toBe(false);
+  });
+});

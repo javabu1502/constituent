@@ -67,15 +67,15 @@ WHAT I WANT: Support the Clean Energy Innovation Act
 SENDER: Jamie Rivera from Seattle, WA
 
 TAILORING TIPS:
-- Party: Democrat — Frame around equity, public investment, protecting vulnerable populations, and community welfare
-- If the official likely agrees: thank specifically and urge leadership
+- Party: Democrat. Choose which of the sender's own points to lead with for this reader.
+- Do not guess whether this official agrees.
 
 Respond with ONLY this JSON:
 {"script": "the phone script body"}`,
       },
       {
         role: 'assistant',
-        content: `{"script": "I'm calling to urge Senator Cantwell to support the Clean Energy Innovation Act. Climate disasters cost our country $145 billion a year according to NOAA, and that number keeps climbing. I know the Senator has been a leader on clean energy — I'm grateful for that work and I'm asking her to keep pushing. This bill would accelerate the transition we need. I'd like the Senator to co-sponsor the Clean Energy Innovation Act and push for a floor vote this session."}`,
+        content: `{"script": "I'm calling to urge Senator Cantwell to support the Clean Energy Innovation Act. Climate disasters cost our country $145 billion a year according to NOAA, and that number keeps climbing. I'm asking her to keep pushing. This bill would accelerate the transition we need. I'd like the Senator to co-sponsor the Clean Energy Innovation Act and push for a floor vote this session."}`,
       },
     ];
   }
@@ -97,15 +97,15 @@ MY PERSONAL STORY: I graduated with $47,000 in debt and have been paying for 12 
 SENDER: Alex Chen from Tacoma, WA
 
 TAILORING TIPS:
-- Party: Democrat — Frame around equity, public investment, protecting vulnerable populations, and community welfare
-- If the official likely agrees: thank specifically and urge leadership
+- Party: Democrat. Choose which of the sender's own points to lead with for this reader.
+- Do not guess whether this official agrees.
 
 Respond with ONLY this JSON:
 {"subject": "max 8 words about the ask", "body": "the letter body"}`,
     },
     {
       role: 'assistant',
-      content: `{"subject": "Please Keep Fighting on Student Loans", "body": "Twelve years ago I walked out of graduation with a diploma and $47,000 in debt. I've paid every month since, and the balance has barely moved because of interest. I'm writing from Tacoma because I know you understand what that does to a family's plans.\\n\\nThank you for your leadership on making higher education more accessible. It matters to the 43 million Americans carrying student loan debt, $1.77 trillion of it according to the Federal Reserve. People like me are working hard and playing by the rules and still can't get ahead.\\n\\nSome argue relief is unfair to those who already paid, and I understand that concern. But we don't refuse to cure a disease because earlier patients suffered. Borrowers freed from crushing debt buy homes, start businesses, and invest in their communities.\\n\\nPlease co-sponsor comprehensive student loan relief legislation and push for a vote this session. It would change my family's future, and millions of others."}`,
+      content: `{"subject": "Please Keep Fighting on Student Loans", "body": "Twelve years ago I walked out of graduation with a diploma and $47,000 in debt. I've paid every month since, and the balance has barely moved because of interest. I'm writing because I know you understand what that does to someone's plans.\\n\\nThank you for your leadership on making higher education more accessible. It matters to the 43 million Americans carrying student loan debt, $1.77 trillion of it according to the Federal Reserve. People like me are working hard and playing by the rules and still can't get ahead.\\n\\nSome argue relief is unfair to those who already paid, and I understand that concern. But we don't refuse to cure a disease because earlier patients suffered. Borrowers freed from crushing debt buy homes, start businesses, and invest in their communities.\\n\\nPlease co-sponsor comprehensive student loan relief legislation and push for a vote this session. It would change my future, and millions of others."}`,
     },
     {
       role: 'user',
@@ -121,15 +121,15 @@ WHAT I WANT: Support student loan relief legislation
 SENDER: Jordan Miller from Houston, TX
 
 TAILORING TIPS:
-- Party: Republican — Frame around fiscal responsibility, limited government, local control, and individual liberty
-- If the official likely disagrees: find common ground first, then make the ask
+- Party: Republican. Choose which of the sender's own points to lead with for this reader.
+- Do not guess whether this official agrees.
 
 Respond with ONLY this JSON:
 {"subject": "max 8 words about the ask", "body": "the letter body"}`,
     },
     {
       role: 'assistant',
-      content: `{"subject": "Student Debt Is Holding Back Our Economy", "body": "Will you support bipartisan student loan reform that cuts predatory interest rates and holds universities accountable for outcomes? That's what I'm asking from Houston, and here's why I think it fits the principles you've championed.\\n\\nThe current student loan system is itself a product of government distortion. Federal lending inflated tuition while leaving borrowers trapped. This isn't a free market outcome; it's a government-created problem, one that now touches 43 million Americans and $1.77 trillion in debt according to Federal Reserve data.\\n\\nCritics of relief worry about moral hazard, and that's a fair concern. But fixing broken systems rather than propping them up is a conservative principle. With that much money locked in debt payments, potential entrepreneurs can't take risks, families can't build wealth, and the economy suffers.\\n\\nInterest rate reform and institutional accountability would free up economic activity without blanket bailouts. This is about economic freedom, not handouts."}`,
+      content: `{"subject": "Student Debt Is Holding Back Our Economy", "body": "Will you support bipartisan student loan reform that cuts predatory interest rates and holds universities accountable for outcomes? That's what I'm asking, and here's why I think it fits the principles you've championed.\\n\\nThe current student loan system is itself a product of government distortion. Federal lending inflated tuition while leaving borrowers trapped. This isn't a free market outcome; it's a government-created problem, one that now touches 43 million Americans and $1.77 trillion in debt according to Federal Reserve data.\\n\\nCritics of relief worry about moral hazard, and that's a fair concern. But fixing broken systems rather than propping them up is a conservative principle. With that much money locked in debt payments, potential entrepreneurs can't take risks, families can't build wealth, and the economy suffers.\\n\\nInterest rate reform and institutional accountability would free up economic activity without blanket bailouts. This is about economic freedom, not handouts."}`,
     },
   ];
 }
@@ -145,11 +145,9 @@ Respond with ONLY this JSON:
 
 const EMAIL_OPENINGS = [
   'Open with the sender\'s personal story or connection to the issue. Statistics can come later or not at all.',
-  'Open with one concrete consequence this issue has where the sender lives. No statistics in the first paragraph.',
   'Open with the specific ask in the first two sentences, then spend the rest of the letter making the case.',
   'Open with a short, genuine question directed at the official, then answer it from the sender\'s perspective.',
-  'Open with what the sender has noticed changing around them recently because of this issue.',
-  'Open by acknowledging something specific about this official\'s role, committee seat, or record, then pivot to the issue.',
+  'Open with the sender\'s own words if they shared a story. Otherwise open with the ask.',
 ];
 
 const PHONE_OPENINGS = [
@@ -342,7 +340,7 @@ function buildToneInstructions(tone: Tone): string {
     case 'passionate':
       return `\n\nTONE — PASSIONATE:
 - Use strong, urgent language — bold demands, not timid requests
-- Lead with the most alarming statistic
+- Lead with the stakes as the sender described them. Use a KEY STATISTIC only if one was provided
 - Express moral urgency and the stakes of inaction
 - Still respectful — passionate, not hostile`;
     default:
@@ -467,12 +465,14 @@ async function generateForOfficial(
 
   const emailSystemPrompt = `You are an expert constituent letter writer. Write a compelling, personalized letter from a constituent to ONE specific elected official.
 
-Use your knowledge of this official's party affiliation, state, and likely positions to tailor the letter specifically to them.
+Tailor the letter to this official using ONLY the OFFICIAL line, the TAILORING TIPS, and any vote, cosponsor, committee, or news data provided below. Do not assume this official's record, positions, statements, or votes. Never write "you have been a voice for" or "you have consistently" unless the data below says so.
 
 Writing guidelines:
-- If the official likely SUPPORTS the constituent's position: thank them specifically and urge continued leadership
-- If the official likely OPPOSES it: respectfully urge them to reconsider, noting any relevant party or state context
-- Use the provided statistics and cite sources — weave specific numbers into the argument naturally (e.g. "With 43 million Americans carrying student loan debt..." or "according to the CBO...")
+- If the vote or cosponsor data shows this official already acted on the sender's side, thank them for that specific action and urge them to keep going
+- Otherwise make the sender's case directly without claiming to know where the official stands
+- WHAT I WANT is the sender's position. Never write an ask they did not state, and never argue against their goal, even if their story seems to cut against it
+- Add nothing about the sender's life that MY PERSONAL STORY does not say: no feelings, motives, causes, outcomes, family members, jobs, ages, or events in their town. A sentence between two of their facts must be a plain connective sentence, not a new fact
+- Use only the KEY STATISTICS provided, and cite their source briefly ("according to the CBO"). Never recall a figure from memory, and never reuse a number from the examples above
 - Acknowledge the strongest counterargument briefly, then pivot to the constituent's position — this shows sophistication and is more persuasive
 - Weave in the constituent's personal story naturally if provided
 - Identify the sender as a constituent in the opening (when writing to a staffer, say "constituent of [Official]", NOT "your constituent")
@@ -487,7 +487,7 @@ Writing guidelines:
 DATA-DRIVEN WRITING:
 - Use specific numbers from the KEY STATISTICS provided — they add credibility
 - Cite the source briefly when using a stat (e.g. "according to the CBO" or "per CDC data")
-- If KEY ARGUMENTS are provided, use the strongest points for the constituent's likely side
+- If KEY ARGUMENTS are provided, use the strongest points for the side WHAT I WANT states
 - Acknowledge one counterpoint briefly to show good faith, then pivot
 
 SUBJECT LINE RULES:
@@ -509,7 +509,7 @@ CRITICAL: Respond with ONLY a JSON object. No other text.`;
 
 Write a short, natural-sounding phone script that the caller can read or adapt when speaking to a staffer.
 
-Use your knowledge of this official's party affiliation, state, and likely positions to tailor the script specifically to them.
+Tailor the script using ONLY the OFFICIAL line and any vote, cosponsor, or committee data provided. Do not assume this official's record or positions.
 
 Writing guidelines:
 - Keep it under 150 words
@@ -520,15 +520,14 @@ Writing guidelines:
 - IMPORTANT: The app already introduces the caller with their name and location. Do NOT mention the caller's city, state, or location anywhere in the script. Never say "as a [city] resident", "here in [state]", "in my community", or any other location reference. The caller's location is already established.
 - Write as a flowing, natural script the caller reads aloud
 - Be direct and specific to THIS official, not generic
-- If the official likely SUPPORTS the position: acknowledge that and urge continued action
-- If the official likely OPPOSES it: respectfully urge reconsideration
-- Work ONE key statistic into the script naturally — e.g. "I'm concerned because over 48,000 Americans die from gun violence each year"
+- If the vote or cosponsor data shows this official already acted on the caller's side, acknowledge that specific action and urge continued action; otherwise make the case without guessing where they stand
+- If KEY STATISTICS are provided, work one in naturally. Never recall a figure from memory
 - End with a clear, specific ask — not a vague "please consider"${stateNote ? stateNote.replace('email', 'call') : ''}${voteInstructions}${districtInstructions}${billInstructions}${newsInstructions}${toneInstructions}${intentInstructions}
 
 DATA-DRIVEN WRITING:
 - Use specific numbers from the KEY STATISTICS provided — they add credibility
 - Cite the source briefly when using a stat (e.g. "according to the CBO" or "per CDC data")
-- If KEY ARGUMENTS are provided, use the strongest points for the constituent's likely side
+- If KEY ARGUMENTS are provided, use the strongest points for the side WHAT I WANT states
 - Acknowledge one counterpoint briefly to show good faith, then pivot
 
 SOUND HUMAN, NOT AI:
@@ -552,21 +551,13 @@ CRITICAL: Respond with ONLY a JSON object. No other text.`;
   }
 
   // Build tailoring block with party-specific framing and committee context
-  const partyLower = official.party.toLowerCase();
-  let partyFraming = '';
-  if (partyLower.includes('republican')) {
-    partyFraming = 'Frame around fiscal responsibility, limited government, local control, and individual liberty';
-  } else if (partyLower.includes('democrat')) {
-    partyFraming = 'Frame around equity, public investment, protecting vulnerable populations, and community welfare';
-  }
 
   const tailoringLines: string[] = [];
-  tailoringLines.push(`- Party: ${official.party}${partyFraming ? ` — ${partyFraming}` : ''}`);
+  tailoringLines.push(`- Party: ${official.party}. Choose which of the sender's own points to lead with for this reader, but do not put a party's ideology in the sender's mouth. Their words carry their values.`);
   if (committeeContext) {
     tailoringLines.push(`- ${committeeContext.trim()} — if relevant to the issue, lead with this (e.g., "As a member of the [Committee], you have unique influence...")`);
   }
-  tailoringLines.push('- If the official likely agrees: thank specifically and urge leadership');
-  tailoringLines.push('- If the official likely disagrees: find common ground first, then make the ask');
+  tailoringLines.push('- Do not guess whether this official agrees. Only the vote or cosponsor data above can tell you that.');
 
   const tailoringBlock = `\n\nTAILORING TIPS:\n${tailoringLines.join('\n')}`;
 

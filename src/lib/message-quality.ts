@@ -48,6 +48,25 @@ const UNSOURCED_RESEARCH = /\b(?:studies|research|data|experts?) (?:show|shows|p
 const INVENTED_STAT = /\b\d[\d,]*(?:\.\d+)?\s*(?:percent|%|(?:americans|people|veterans|children|families|deaths|seniors)\s+(?:a|per|every)\s+(?:day|year|week))\b/i;
 const STAT_ATTRIBUTION = /\bthat (?:number|figure) comes from\b|\baccording to (?:the|a)\b/i;
 
+// The shapes that mark a draft as machine-written even when every word is
+// plain: "this is not abstract", "not X, it is Y", and the dash used as a
+// hinge. Checked on the raw draft before deDash (which turns a dash into a
+// comma splice, a second tell).
+const AI_CADENCE = /\bthis is not (?:an? )?abstract\b|\b(?:is|are|was) not (?:a |an |just |simply |only )?[^.,;:]{1,30}, (?:it is|it's|they are|they're|this is)\b|[\u2014\u2013]|\bnot (?:asking for|looking for) a handout\b|\bevery single day\b/i;
+
+/** Returns the AI-cadence tells in `text` (empty when clean). */
+export function detectAiCadence(text: string): string[] {
+  const out: string[] = [];
+  const re = new RegExp(AI_CADENCE.source, 'gi');
+  for (const m of (text || '').match(re) || []) out.push(m === '\u2014' || m === '\u2013' ? 'dash' : m.trim());
+  return out;
+}
+
+/** Prose that is a refusal or a note to the operator, not a draft. */
+export function looksLikeRefusal(text: string): boolean {
+  return /\bi need to (?:pause|stop|flag|point out)\b|\bi can(?:'t|not) (?:draft|write|do) (?:this|that)\b|\bi(?:'m| am) not (?:able|comfortable|going) to\b|\bbefore i (?:draft|write)\b/i.test(text || '');
+}
+
 const ASK_SIGNAL = /\b(?:ask|urge|please|support|oppose|vote|cosponsor|request|need you to|call on you|count on you|hope you)\b/i;
 
 export function auditMessageQuality(
@@ -101,6 +120,9 @@ export function auditMessageQuality(
   // AI drafts must not invent authority; a user citing research is their call.
   if (opts.source === 'ai' && UNSOURCED_RESEARCH.test(t) && !/https?:\/\//i.test(t)) {
     issues.push({ level: 'warn', code: 'unsourced_claim', detail: 'Draft leans on unnamed "studies" or "research" — argue from experience instead.' });
+  }
+  if (opts.source === 'ai' && detectAiCadence(t).length > 0) {
+    issues.push({ level: 'warn', code: 'ai_cadence', detail: 'Draft uses machine-writing shapes ("this is not abstract", "not X, it is Y").' });
   }
   if (opts.source === 'ai' && INVENTED_STAT.test(t) && STAT_ATTRIBUTION.test(t)) {
     issues.push({ level: 'block', code: 'invented_stat', detail: 'Draft asserts a specific statistic with an attribution the constituent never provided.' });
@@ -271,21 +293,71 @@ export function detectUnsupportedIdentityClaims(draft: string, userText: string)
  * available — losing a sentence beats shipping a fabricated identity. */
 export function scrubUnsupportedIdentityClaims(text: string, userText: string): string {
   if (detectUnsupportedIdentityClaims(text, userText).length === 0) return text;
-  const sentences = text.split(/(?<=[.!?])\s+/);
-  const kept = sentences.filter((s) => detectUnsupportedIdentityClaims(s, userText).length === 0);
-  return kept.join(' ').trim();
+  return dropSentences(text, (s) => detectUnsupportedIdentityClaims(s, userText).length > 0);
+}
+
+// A sentence that leans on the one before it ("That promise was never kept.")
+// is meaningless once its antecedent is gone.
+const LEANS_ON_PREVIOUS = /^(?:that|this|it|those|these|such|they|he|she)\b/i;
+
+/** Drops every sentence `bad` flags, plus any sentence right after it that
+ * opens with a pronoun pointing back at it. Paragraph breaks are kept: the
+ * text is processed one paragraph at a time and rejoined with blank lines,
+ * so a long letter never collapses into a single block. Returns '' if
+ * nothing survives. */
+export function dropSentences(text: string, bad: (sentence: string) => boolean): string {
+  const paragraphs = (text || '').split(/\n\s*\n/);
+  const outParas: string[] = [];
+  for (const para of paragraphs) {
+    const sentences = para.trim().split(/(?<=[.!?])\s+/).filter(Boolean);
+    const kept: string[] = [];
+    let dropped = false;
+    for (const sentence of sentences) {
+      if (bad(sentence) || (dropped && LEANS_ON_PREVIOUS.test(sentence))) {
+        dropped = true;
+        continue;
+      }
+      dropped = false;
+      kept.push(sentence);
+    }
+    if (kept.length > 0) outParas.push(kept.join(' '));
+  }
+  return outParas.join('\n\n').trim();
 }
 
 // A statistic-shaped claim: a percentage, a dollar amount, or a count scaled
 // by thousand/million/billion/trillion. Bare small numbers ("three kids",
 // "District 12", "H.R. 1234") deliberately don't match.
+// Distances and durations are included: "80 miles away" or "waited 47 days"
+// in a constituent's name is a fact about their life, and one the model has
+// been caught inventing (audit 2026-09-29, "1 hour 20 minutes" became "80
+// miles").
 const STAT_SHAPE =
-  /\$\s?\d[\d,]*(?:\.\d+)?\s*(?:trillion|billion|million|thousand)?|\d[\d,]*(?:\.\d+)?\s*%|\d[\d,]*(?:\.\d+)?\s*percent\b|\d[\d,]*(?:\.\d+)?\s*(?:trillion|billion|million)\b/gi;
+  /\$\s?\d[\d,]*(?:\.\d+)?\s*(?:trillion|billion|million|thousand)?|\d[\d,]*(?:\.\d+)?\s*%|\d[\d,]*(?:\.\d+)?\s*percent\b|\d[\d,]*(?:\.\d+)?\s*(?:trillion|billion|million)\b|\d[\d,]*(?:\.\d+)?\s*(?:miles?|hours?|minutes?|days?|weeks?|months?|years?)\b/gi;
 
+const WORD_NUMBERS: Record<string, number> = {
+  one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9, ten: 10,
+  eleven: 11, twelve: 12, thirteen: 13, fourteen: 14, fifteen: 15, sixteen: 16, seventeen: 17,
+  eighteen: 18, nineteen: 19, twenty: 20, thirty: 30, forty: 40, fifty: 50, sixty: 60,
+  seventy: 70, eighty: 80, ninety: 90, hundred: 100, thousand: 1000,
+  half: 0.5, dozen: 12,
+};
+
+/** Every number in `text`, digits and spelled-out ("twelve years" licenses
+ * "12 years"; "forty-seven" licenses 47). */
 function numbersIn(text: string): Set<string> {
-  return new Set(
+  const out = new Set(
     ((text || '').match(/\d[\d,]*(?:\.\d+)?/g) || []).map((s) => s.replace(/,/g, ''))
   );
+  const words = (text || '').toLowerCase().match(/[a-z]+(?:-[a-z]+)?/g) || [];
+  for (const w of words) {
+    if (w in WORD_NUMBERS) out.add(String(WORD_NUMBERS[w]));
+    const [tens, ones] = w.split('-');
+    if (tens && ones && tens in WORD_NUMBERS && ones in WORD_NUMBERS && WORD_NUMBERS[tens] >= 20 && WORD_NUMBERS[ones] < 10) {
+      out.add(String(WORD_NUMBERS[tens] + WORD_NUMBERS[ones]));
+    }
+  }
+  return out;
 }
 
 /** Returns the statistic-shaped claims in `draft` whose numbers do not appear
@@ -307,9 +379,17 @@ export function detectUnsourcedStats(draft: string, allowedSource: string): stri
  * Falls back to the original text rather than returning nothing. */
 export function stripUnsourcedStats(text: string, allowedSource: string): string {
   if (detectUnsourcedStats(text, allowedSource).length === 0) return text;
-  const sentences = (text || '').split(/(?<=[.!?])\s+/);
-  const kept = sentences.filter((s) => detectUnsourcedStats(s, allowedSource).length === 0);
-  return kept.join(' ').trim() || text;
+  return dropSentences(text, (s) => detectUnsourcedStats(s, allowedSource).length > 0) || text;
+}
+
+/** The sentences in `text` that carry an unsourced statistic, for naming in
+ * a corrective retry ("remove this sentence"), which the model follows far
+ * better than "rewrite without those figures". */
+export function sentencesWithUnsourcedStats(text: string, allowedSource: string): string[] {
+  return (text || '')
+    .split(/(?<=[.!?])\s+/)
+    .filter((s) => detectUnsourcedStats(s, allowedSource).length > 0)
+    .map((s) => s.trim());
 }
 
 /** True when the draft copies a long verbatim run from the campaign's
@@ -364,5 +444,41 @@ export function askAddressesOfficial(ask: string): boolean {
 /** The opening line and the body must not restate each other (the same
  *  credentials sentence twice is the loudest template tell). */
 export function openingRepeatsBody(opening: string, body: string): boolean {
-  return sharesVerbatimRun(opening, body, 8);
+  if (sharesVerbatimRun(opening, body, 8)) return true;
+  // Same credentials restated in new words ("I am a renter in Reno" then
+  // "I have rented the same apartment in Reno for six years"): the opening
+  // and the body's first sentence share most of their content words.
+  const firstSentence = (body || '').trim().split(/(?<=[.!?])\s+/)[0] || '';
+  const shared = contentWords(opening).filter((w) => contentWords(firstSentence).includes(w));
+  return shared.length >= 4;
+}
+
+const STOPWORDS = new Set(
+  'a an the and or but so because that this these those with without from for of to in on at by as is are was were be been being have has had do does did not no yes it its i my me we our you your they their them he she his her who what when where which while about into over under again more most very just than then there here also only same such can could will would should may might must'.split(' ')
+);
+
+function contentWords(text: string): string[] {
+  return Array.from(
+    new Set(
+      (text || '')
+        .toLowerCase()
+        .replace(/[^a-z0-9\s]/g, ' ')
+        .split(/\s+/)
+        .filter((w) => w.length >= 4 && !STOPWORDS.has(w))
+        // Light stemming so "renter"/"rented" and "work"/"working" match.
+        .map((w) => (w.length > 5 ? w.replace(/(?:ing|ed|er|s)$/, '') : w.replace(/s$/, '')))
+    )
+  );
+}
+
+/** True when a closing ask argues the wrong side for an org campaign whose
+ * direction is fixed. Only explicit direction verbs count; "protect" or
+ * "preserve" can sit on either side of a question and are left alone. */
+export function askContradictsStance(ask: string, verb: 'support' | 'oppose' | null): boolean {
+  if (!verb) return false;
+  const a = ask || '';
+  const opposes = /\b(?:oppose|vote no|vote against|reject|block|defeat)\b/i.test(a);
+  const supports = /\b(?:support|vote yes|vote for|pass|cosponsor|co-sponsor|approve)\b/i.test(a);
+  if (verb === 'oppose') return supports && !opposes;
+  return opposes && !supports;
 }
