@@ -15,7 +15,6 @@ import {
   sentencesWithUnsourcedStats,
   openingRepeatsBody,
   auditMessageQuality,
-  hasBlockingIssue,
   detectUnsupportedIdentityClaims,
   detectUnsourcedStats,
   stripUnsourcedStats,
@@ -190,6 +189,8 @@ Draft the core message.`;
     let out: CoreOut = null;
     let body = '';
     let correction = '';
+    // Why each attempt was rejected, so a 502 in the logs says what happened.
+    const rejects: string[] = [];
     for (let attempt = 0; attempt < 2; attempt++) {
       const rawOut = await callClaude(correction ? `${system}\n\n${correction}` : system, user2, 1100);
       out = extractJSON(rawOut) as CoreOut;
@@ -199,12 +200,14 @@ Draft the core message.`;
         correction = looksLikeRefusal(rawOut)
           ? 'Your previous reply was prose, not the JSON object. POSITION is the constituent\'s own choice and is not up for debate. Write the case for it as instructed and return the JSON object and nothing else.'
           : 'Return the JSON object and nothing else. Do not explain.';
+        rejects.push(`attempt ${attempt}: ${correction.slice(0, 120)}`);
         body = '';
         continue;
       }
       const rawBody = String(out?.body ?? '').trim();
       if (attempt === 0 && /[\u2014\u2013]/.test(rawBody)) {
         correction = 'Your previous draft used dashes. Rewrite it with none. End the sentence and start a new one instead.';
+        rejects.push(`attempt ${attempt}: ${correction.slice(0, 120)}`);
         body = '';
         continue;
       }
@@ -217,6 +220,7 @@ Draft the core message.`;
           // Wrong side in a constituent's name is the one thing worse than
           // no draft. The second miss falls through to the 502.
           correction = `YOUR PREVIOUS DRAFT argued the ${side || 'wrong'} side. The constituent answered ${expected}. Write the case for ${expected} and set "side" to "${expected}".`;
+          rejects.push(`attempt ${attempt}: ${correction.slice(0, 120)}`);
           body = '';
           continue;
         }
@@ -224,12 +228,14 @@ Draft the core message.`;
       const cadence = detectAiCadence(rawBody);
       if (attempt === 0 && cadence.length > 0) {
         correction = `YOUR PREVIOUS DRAFT used machine-writing shapes: ${cadence.slice(0, 3).map((c) => `"${c}"`).join(', ')}. Rewrite in flat declarative sentences with none of them.`;
+        rejects.push(`attempt ${attempt}: ${correction.slice(0, 120)}`);
         body = '';
         continue;
       }
       const draftFull = [String(out?.opening ?? ''), body, String(out?.ask ?? '')].join(' ');
       if (body.split(/\s+/).length > 220) {
         correction = 'Your previous draft ran long. Rewrite it UNDER 180 words, keeping the strongest details of the story.';
+        rejects.push(`attempt ${attempt}: ${correction.slice(0, 120)}`);
         body = '';
         continue;
       }
@@ -238,6 +244,7 @@ Draft the core message.`;
       if (campaign?.message_template && sharesVerbatimRun(campaign.message_template, body)) {
         correction =
           "YOUR PREVIOUS DRAFT COPIED the campaign talking points word for word. Do not paste them. Make their strongest two or three points in fresh wording, in the constituent's voice.";
+        rejects.push(`attempt ${attempt}: ${correction.slice(0, 120)}`);
         body = '';
         continue;
       }
@@ -246,6 +253,7 @@ Draft the core message.`;
         // Retry with the specific correction — this is the one failure the
         // system can never ship (a false "I'm a veteran" in someone's name).
         correction = `YOUR PREVIOUS DRAFT FALSELY CLAIMED the constituent has this identity/experience: ${fabricated.join('; ')}. They said no such thing. Remove that claim. Keep every fact the constituent actually wrote, and speak about the people affected rather than as one of them for anything they did not say.`;
+        rejects.push(`attempt ${attempt}: ${correction.slice(0, 120)}`);
         body = '';
         continue;
       }
@@ -254,6 +262,7 @@ Draft the core message.`;
         if (attempt === 0) {
           const offending = sentencesWithUnsourcedStats(body, statSource).slice(0, 3);
           correction = `YOUR PREVIOUS DRAFT ASSERTED figures the source material does not contain: ${unsourced.join('; ')}. Do not recall numbers from memory. Remove ${offending.length === 1 ? 'this sentence' : 'these sentences'} entirely and do not replace ${offending.length === 1 ? 'it' : 'them'} with other figures: ${offending.map((o) => `"${o}"`).join(' ')}`;
+          rejects.push(`attempt ${attempt}: ${correction.slice(0, 120)}`);
           body = '';
           continue;
         }
@@ -262,6 +271,7 @@ Draft the core message.`;
         // fall through to the refusal path.
         body = stripUnsourcedStats(body, statSource);
         if (detectUnsourcedStats(body, statSource).length > 0 || body.length < 40) {
+          rejects.push(`attempt ${attempt}: ${correction.slice(0, 120)}`);
           body = '';
           continue;
         }
@@ -271,26 +281,34 @@ Draft the core message.`;
       const askText = String(out?.ask ?? '').trim();
       if (attempt === 0 && askText && campaign && !campaign.is_official && askContradictsStance(askText, stanceVerb)) {
         correction = `YOUR PREVIOUS "ask" argued against the campaign's position ("${askText.slice(0, 120)}"). This campaign asks officials to ${stanceVerb?.toUpperCase()} it. Rewrite the ask on that side.`;
+        rejects.push(`attempt ${attempt}: ${correction.slice(0, 120)}`);
         body = '';
         continue;
       }
       if (attempt === 0 && askText && !askAddressesOfficial(askText)) {
         correction = `YOUR PREVIOUS "ask" was addressed past the reader ("${askText.slice(0, 120)}"). The reader is the elected official. Rewrite the ask so it asks THEM to act, e.g. "Please urge [the agency] to..." or "Please work with...". Keep every part of the constituent's goal.`;
+        rejects.push(`attempt ${attempt}: ${correction.slice(0, 120)}`);
         body = '';
         continue;
       }
       const openingText = String(out?.opening ?? '').trim();
       if (attempt === 0 && openingText && openingRepeatsBody(openingText, body)) {
         correction = 'YOUR PREVIOUS DRAFT repeated the opening sentence inside the body. The opening and the body are read together: state the constituent\'s background ONCE. Rewrite the body so it starts with the case, not with the same introduction.';
+        rejects.push(`attempt ${attempt}: ${correction.slice(0, 120)}`);
         body = '';
         continue;
       }
-      if (!hasBlockingIssue(auditMessageQuality(body, { source: 'ai' }))) break;
+      const blocking = auditMessageQuality(body, { source: 'ai' }).filter((i) => i.level === 'block');
+      if (blocking.length === 0) break;
+      rejects.push(`attempt ${attempt}: blocking ${blocking.map((i) => i.code).join(',')}`);
+      rejects.push(`attempt ${attempt}: ${correction.slice(0, 120)}`);
       body = '';
     }
     if (!body) {
+      console.warn('[generate-core] refused:', rejects.length ? rejects : ['empty or short body on every attempt']);
       return NextResponse.json({ error: 'Could not draft a message — please try again' }, { status: 502 });
     }
+    if (rejects.length) console.info('[generate-core] retried:', rejects);
     // Frame fields are best-effort: null (deterministic seeded pools
     // client-side) beats a generic or wrong one slipping through.
     const rawSubject = deDash(String(out?.subject ?? '')).replace(/^["'\s]+|["'\s]+$/g, '');
