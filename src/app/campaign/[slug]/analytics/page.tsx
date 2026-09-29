@@ -136,6 +136,19 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
 
     const officialAgg = new Map<string, { name: string; title: string | null; party: string | null; state: string | null; level: string; story_count: number; inferred: boolean }>();
 
+    const { data: useRows } = await admin
+      .from('story_uses')
+      .select('id, story_id, use_type, note, status, created_at, responded_at')
+      .eq('campaign_id', campaign.id)
+      .order('created_at', { ascending: false })
+      .limit(1000);
+    const usesByStory = new Map<string, Array<{ id: string; use_type: string; note: string; status: 'logged' | 'requested' | 'approved' | 'declined'; created_at: string; responded_at: string | null }>>();
+    for (const u of useRows || []) {
+      const list = usesByStory.get(u.story_id as string) ?? [];
+      list.push({ id: u.id as string, use_type: u.use_type as string, note: u.note as string, status: u.status as 'logged' | 'requested' | 'approved' | 'declined', created_at: u.created_at as string, responded_at: (u.responded_at as string | null) ?? null });
+      usesByStory.set(u.story_id as string, list);
+    }
+
     const stories = (storyRows || []).map((s) => {
       const level = s.attribution_level as 'named' | 'first_name_only' | 'anonymous';
       const revoked = (s.status as string) === 'revoked';
@@ -183,6 +196,7 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
         officials: reps.map((r) => r.name),
         revoked,
         edited_at: (s.edited_at as string | null) ?? null,
+        uses: revoked ? [] : (usesByStory.get(s.id as string) ?? []),
       };
     });
 

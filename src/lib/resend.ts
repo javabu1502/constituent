@@ -10,6 +10,12 @@ function getResend(): Resend | null {
   return _resend;
 }
 
+/** True when outbound email can actually be sent (a missing key makes the
+ * send helpers no-op with a warning, which some callers must not tolerate). */
+export function isEmailConfigured(): boolean {
+  return Boolean(process.env.RESEND_API_KEY);
+}
+
 export async function sendDigestEmail(
   to: string,
   subject: string,

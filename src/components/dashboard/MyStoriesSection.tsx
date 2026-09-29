@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { usageLabels } from '@/lib/story-usage';
 
 export interface MyStory {
   id: string;
@@ -10,7 +11,15 @@ export interface MyStory {
   campaign_headline: string | null;
   title: string | null;
   body: string;
+  uses: Array<{ id: string; use_type: string; note: string; status: string; created_at: string }>;
 }
+
+const USE_STATUS: Record<string, string> = {
+  logged: 'a use you allowed',
+  requested: 'asked, waiting for your answer',
+  approved: 'you said yes',
+  declined: 'you said no',
+};
 
 function StoryCard({ story }: { story: MyStory }) {
   const router = useRouter();
@@ -117,6 +126,19 @@ function StoryCard({ story }: { story: MyStory }) {
         </>
       )}
 
+      {story.uses.length > 0 && mode !== 'edit' && (
+        <div className="mt-2 border-t border-gray-100 dark:border-gray-700 pt-2">
+          <p className="text-xs font-medium text-gray-700 dark:text-gray-300 mb-1">How your story has been used</p>
+          <ul className="space-y-0.5">
+            {story.uses.map((u) => (
+              <li key={u.id} className="text-xs text-gray-600 dark:text-gray-400">
+                <span className="font-medium text-gray-800 dark:text-gray-200">{usageLabels([u.use_type])[0]}</span>: {u.note}{' '}
+                <span className="text-gray-400 dark:text-gray-500">({USE_STATUS[u.status] ?? u.status}, {new Date(u.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })})</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
       {error && <p className="text-xs text-red-600 dark:text-red-400 mt-1">{error}</p>}
     </li>
   );

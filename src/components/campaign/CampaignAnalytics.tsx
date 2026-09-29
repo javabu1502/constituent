@@ -4,6 +4,7 @@ import { useMemo, useState, type ReactNode } from 'react';
 import { STORY_USAGE_OPTIONS } from '@/lib/story-usage';
 import { US_STATES } from '@/lib/constants';
 import { CollapsibleSection } from '@/components/ui/CollapsibleSection';
+import { StoryUseLog, type StoryUse } from './StoryUseLog';
 
 interface OfficialContacted {
   name: string;
@@ -68,6 +69,7 @@ interface StoryListItem {
   officials: string[]; // names of officials representing this storyteller
   revoked: boolean;
   edited_at: string | null;
+  uses: StoryUse[];
 }
 
 interface StoryOfficial {
@@ -602,6 +604,13 @@ function StorytellingAnalytics({ analytics, campaignName, insightsPanel, isDemo 
                         ))}
                       </div>
                     )}
+                    <StoryUseLog
+                      storyId={s.id}
+                      grantedUseValues={s.granted_use_values}
+                      hasEmail={Boolean(s.email)}
+                      initialUses={s.uses}
+                      disabled={isDemo}
+                    />
                     {/* Photo request — only for storytellers who agreed to follow-up contact */}
                     {s.email && s.granted_use_values.includes(CONTACT_USE) && (
                       <div className="mt-2">

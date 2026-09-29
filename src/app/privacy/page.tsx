@@ -217,8 +217,10 @@ export default function PrivacyPage() {
                 </li>
                 <li>
                   The <strong className="text-gray-900 dark:text-white">uses you allowed</strong> (for example sharing with
-                  legislators, publishing, press, or reports) and the date you consented. The organization sees this list. We
-                  record it; we cannot enforce how the organization uses a story after it downloads it.
+                  legislators, publishing, press, or reports) and the date you consented. The organization sees this list and
+                  records each use of your story against it. You can see that log on your dashboard. If the organization
+                  wants a use you did not allow, it must ask you by email, and it may not proceed unless you say yes. We
+                  record all of this; we cannot enforce how the organization uses a story after it downloads it.
                 </li>
                 <li>
                   For guests, a <strong className="text-gray-900 dark:text-white">one-way hashed IP address</strong> for

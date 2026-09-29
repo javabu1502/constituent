@@ -141,6 +141,10 @@ export default async function DashboardPage() {
   }
   const topLevelCampaigns = allCampaigns.filter((c) => !c.parent_campaign_id);
 
+  const myStoryIds = (storiesResult.data ?? []).map((s: Record<string, unknown>) => s.id as string);
+  const { data: myUseRows } = myStoryIds.length
+    ? await admin.from('story_uses').select('id, story_id, use_type, note, status, created_at').in('story_id', myStoryIds).order('created_at', { ascending: false }).limit(200)
+    : { data: [] as Array<Record<string, unknown>> };
   const myStories = (storiesResult.data ?? []).map((s: Record<string, unknown>) => {
     const body = (s.body as string | null) ?? '';
     type CampRel = { headline?: string };
@@ -153,6 +157,9 @@ export default async function DashboardPage() {
       campaign_headline: camp?.headline ?? null,
       title: (s.title as string | null) ?? null,
       body,
+      uses: (myUseRows ?? [])
+        .filter((u) => u.story_id === s.id)
+        .map((u) => ({ id: u.id as string, use_type: u.use_type as string, note: u.note as string, status: u.status as string, created_at: u.created_at as string })),
     };
   });
 
