@@ -132,7 +132,7 @@ export const createCampaignSchema = z.object({
   usage_statement: z.string().max(3000).nullish(),
   usage_tags: z.array(z.string().max(60)).max(20).optional(),
   attribution_options: z.array(z.enum(['named', 'first_name_only', 'anonymous'])).optional(),
-  edit_revoke_policy: z.string().max(2000).optional(),
+  edit_revoke_policy: z.string().max(2000).nullish(),
   recipient_email: z.string().email().max(200).nullish(),
   // White-label branding — honored only for unlisted campaigns (the route
   // drops these for public ones). Logo URL must point at our storage bucket

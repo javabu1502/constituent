@@ -182,6 +182,25 @@ describe('trackSendSchema', () => {
 // --- createCampaignSchema ---
 
 describe('createCampaignSchema', () => {
+  it('accepts the exact body the form sends when launching a storytelling campaign', () => {
+    // 2026-09-30: the Children's Cabinet could not launch because the form
+    // sends explicit nulls for the retired policy fields and the schema
+    // only allowed strings ("Invalid input: expected string, received null").
+    const result = createCampaignSchema.safeParse({
+      campaign_type: 'storytelling',
+      headline: 'Child care stories from Washoe County',
+      description: 'Tell us how finding and paying for child care has affected your family.',
+      issue_area: '',
+      issue_subtopic: null,
+      story_prompt: null,
+      usage_statement: null,
+      usage_tags: ['included_in_reports'],
+      edit_revoke_policy: null,
+      recipient_email: null,
+    });
+    expect(result.success).toBe(true);
+  });
+
   it('accepts valid input', () => {
     const result = createCampaignSchema.safeParse({
       headline: 'Save Our Parks',
