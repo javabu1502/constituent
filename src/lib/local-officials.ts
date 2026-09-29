@@ -78,10 +78,9 @@ export function normalizeDistrictLabel(label: string | null | undefined): string
   return ROMAN[last] ?? last;
 }
 
-/** Seats every constituent of the body gets regardless of district. */
-function isBodyWide(seat: LocalSeat): boolean {
-  const d = (seat.district ?? '').toLowerCase();
-  return !d || /at[- ]large|mayor|president|citywide|countywide/.test(d) || /mayor/i.test(seat.title);
+/** The body's executive (mayor / supervisor chair), shown alongside a district seat. */
+function isExecutiveSeat(seat: LocalSeat): boolean {
+  return /mayor/i.test(seat.title) || /^mayor$/i.test((seat.district ?? '').trim());
 }
 
 /**
@@ -142,12 +141,14 @@ export async function findLocalOfficials(stateCode: string, geo: LocalGeographie
   const out: LocalOfficial[] = [];
   for (const body of roster.bodies) {
     if (!wanted.has(body.geoid)) continue;
-    // District precision: with a boundary match, only that district's seat
-    // plus body-wide seats (at-large, mayor). No match → every seat.
+    // District precision: with a boundary match, only the seat for that
+    // district plus the mayor. At-large seats are dropped (Jared, 2026-09-29:
+    // "only the ones I'm in the district of"). No match → every seat.
     const matched = await resolveDistrict(body, geo);
     const matchedKey = matched ? normalizeDistrictLabel(matched) : null;
-    const seats = matchedKey
-      ? body.seats.filter((s) => isBodyWide(s) || normalizeDistrictLabel(s.district) === matchedKey)
+    const districtSeats = matchedKey ? body.seats.filter((s) => normalizeDistrictLabel(s.district) === matchedKey) : [];
+    const seats = districtSeats.length > 0
+      ? body.seats.filter((s) => isExecutiveSeat(s) || normalizeDistrictLabel(s.district) === matchedKey)
       : body.seats;
     for (const seat of seats) {
       const district = seat.district?.trim() || null;
