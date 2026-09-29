@@ -9,6 +9,9 @@ import { CopyLinkButton } from '@/components/campaign/CopyLinkButton';
 import { fetchBillCard } from '@/lib/congress-api';
 import type { Campaign } from '@/lib/types';
 
+// Counts below this stay hidden on the public page (the progress bar's first milestone).
+const SOCIAL_PROOF_MIN = 10;
+
 interface PageProps {
   params: Promise<{ slug: string }>;
   searchParams: Promise<Record<string, string | string[] | undefined>>;
@@ -280,7 +283,13 @@ export default async function CampaignPage({ params }: PageProps) {
             </a>
           ) : null
         )}
-        {/* Social proof bar */}
+        {/* Social proof bar. A small count works against the campaign, so
+            nothing is shown until it reaches the first milestone. */}
+        {(isStory ? campaign.story_count : campaign.action_count) < SOCIAL_PROOF_MIN ? (
+          <div className="mt-4 flex justify-end">
+            <CopyLinkButton slug={campaign.slug} />
+          </div>
+        ) : (
         <div className="mt-4 p-3 bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-700 rounded-xl">
           <div className="flex items-center justify-between mb-2">
             <div className="flex items-center gap-2">
@@ -319,6 +328,7 @@ export default async function CampaignPage({ params }: PageProps) {
             );
           })()}
         </div>
+        )}
       </div>
 
       {/* The campaign's contributed language, in the open (two-block model) */}
