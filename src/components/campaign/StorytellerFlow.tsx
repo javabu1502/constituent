@@ -11,6 +11,7 @@ import { useTurnstile } from '@/components/ui/Turnstile';
 import { MicButton } from '@/components/chat/MicButton';
 import { AddressAutocomplete, type ParsedAddress } from '@/components/ui/AddressAutocomplete';
 import { STORY_USAGE_OPTIONS } from '@/lib/story-usage';
+import { storytellerCopy, type StorytellerCopy } from '@/lib/copy/storyteller';
 import type { Campaign, AttributionLevel, Official } from '@/lib/types';
 
 type Step = 'intro' | 'interview' | 'review' | 'consent' | 'preview' | 'done';
@@ -20,20 +21,13 @@ interface ChatMessage {
   content: string;
 }
 
-const ATTR_LABELS: Record<AttributionLevel, { label: string; help: string }> = {
-  named: { label: 'Use my full name', help: 'Your story is attributed to your name.' },
-  first_name_only: { label: 'First name only', help: 'We remove your last name before the story is sent.' },
-  anonymous: { label: 'Keep me anonymous', help: 'We remove names, places, and other identifying details before the campaign sees it. You check the result first.' },
-};
-
-function buildGreeting(campaign: Campaign): string {
-  const lead = "Hi. I'm here to help you put your experience into words. There is no rush, and you can skip anything.";
+function buildGreeting(campaign: Campaign, t: StorytellerCopy): string {
   const prompt = campaign.story_prompt?.trim();
   if (prompt) {
     // Open with the exact prompt the campaign creator wrote.
-    return `${lead}\n\nTo start: ${prompt}`;
+    return `${t.greetingLead}\n\n${t.toStart} ${prompt}`;
   }
-  return `${lead}\n\nTo start: what’s your experience with ${campaign.headline}, or what happened?`;
+  return `${t.greetingLead}\n\n${t.toStart} ${t.toStartDefault(campaign.headline)}`;
 }
 
 export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
@@ -41,7 +35,9 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
   const [error, setError] = useState<string | null>(null);
 
   // Interview chat
-  const [messages, setMessages] = useState<ChatMessage[]>(() => [{ role: 'assistant', content: buildGreeting(campaign) }]);
+  // Storyteller-facing copy in the campaign's language (English or Spanish).
+  const t = storytellerCopy(campaign.language);
+  const [messages, setMessages] = useState<ChatMessage[]>(() => [{ role: 'assistant', content: buildGreeting(campaign, t) }]);
   const [input, setInput] = useState('');
   const [streaming, setStreaming] = useState(false);
   const [composing, setComposing] = useState(false);
@@ -59,9 +55,10 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
   // Consent / attribution — both are the storyteller's choice.
   const allowedAttribution: AttributionLevel[] = ['named', 'first_name_only', 'anonymous'];
   // The storyteller grants from the uses the campaign asked for (fallback: all).
-  const availableUses = campaign.usage_tags?.length
+  const availableUses = (campaign.usage_tags?.length
     ? STORY_USAGE_OPTIONS.filter((o) => campaign.usage_tags!.includes(o.value))
-    : STORY_USAGE_OPTIONS;
+    : STORY_USAGE_OPTIONS
+  ).map((o) => ({ ...o, ...(t.usage[o.value] ?? {}) }));
   // Nothing is pre-decided for the storyteller (audit 2026-09-29): they pick
   // how they are credited, and every use starts unchecked.
   const [attribution, setAttribution] = useState<AttributionLevel | null>(null);
@@ -131,7 +128,7 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
         body: JSON.stringify({ campaignSlug: campaign.slug, messages: next.slice(-30), turnstileToken: (await getToken().catch(() => '')) || undefined }),
       });
       if (!res.ok || !res.body) {
-        throw new Error((await res.text().catch(() => '')) || 'Sorry — we couldn’t connect just now. Please try again.');
+        throw new Error((await res.text().catch(() => '')) || t.connectError);
       }
 
       const reader = res.body.getReader();
@@ -151,7 +148,7 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
         });
       }
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Something went wrong');
+      setError(err instanceof Error ? err.message : t.somethingWrong);
       // drop the empty assistant placeholder if present
       setMessages((prev) => (prev[prev.length - 1]?.content === '' ? prev.slice(0, -1) : prev));
     } finally {
@@ -170,13 +167,13 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
         body: JSON.stringify({ campaignSlug: campaign.slug, messages: messages.slice(-40), turnstileToken: (await getToken().catch(() => '')) || undefined }),
       });
       const data = await res.json();
-      if (!res.ok) throw new Error(data.error || 'Could not compose your story');
+      if (!res.ok) throw new Error(data.error || t.composeFailed);
       setTitle(data.title || '');
       setBody(data.body || '');
       setDraftNotes(Array.isArray(data.notes) ? data.notes : []);
       setStep('review');
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Could not compose your story');
+      setError(err instanceof Error ? err.message : t.composeFailed);
     } finally {
       setComposing(false);
     }
@@ -202,13 +199,13 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
         }),
       });
       const data = await res.json();
-      if (!res.ok) throw new Error(data.error || 'Could not make that edit');
+      if (!res.ok) throw new Error(data.error || t.editFailed);
       if (data.title) setTitle(data.title);
       setBody(data.body || body);
       setDraftNotes(Array.isArray(data.notes) ? data.notes : []);
       setReviseNote('');
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Could not make that edit');
+      setError(err instanceof Error ? err.message : t.editFailed);
     } finally {
       setRevising(false);
     }
@@ -216,13 +213,13 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
 
   // --- Submit: validate, then (anonymous) preview the redacted text, then save ---
   const validateConsent = (): string | null => {
-    if (!attribution) return 'Please choose how you would like to be credited.';
-    if (!consentShare) return `Please confirm you want to share your story with ${campaign.headline}.`;
-    if (!consentTruthful) return 'Please confirm this is your own true experience.';
-    if (!consentAdult) return 'Please confirm you are 18 or older, or a parent or guardian sharing a family experience.';
-    if (attribution !== 'anonymous' && !storytellerName.trim()) return 'Please enter the name you would like used, or choose to stay anonymous.';
+    if (!attribution) return t.vChooseCredit;
+    if (!consentShare) return t.vConfirmShare(campaign.headline);
+    if (!consentTruthful) return t.vConfirmTruthful;
+    if (!consentAdult) return t.vConfirmAdult;
+    if (attribution !== 'anonymous' && !storytellerName.trim()) return t.vEnterName;
     if (attribution !== 'anonymous' && (!address.street.trim() || !address.city.trim() || !address.state.trim() || !address.zip.trim())) {
-      return 'Please enter your address. The street is used only to confirm you are a constituent and is never stored.';
+      return t.vEnterAddress;
     }
     return null;
   };
@@ -287,7 +284,7 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
           body: JSON.stringify(buildPayload({ preview: true, sharedReps: [], turnstileToken })),
         });
         const data = await res.json();
-        if (!res.ok) throw new Error(data.error || 'Could not prepare your story');
+        if (!res.ok) throw new Error(data.error || t.prepareFailed);
         setFinalBody(data.final_body || body.trim());
         setFlagged(Array.isArray(data.flagged) ? data.flagged : []);
         setStep('preview');
@@ -300,7 +297,7 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
         body: JSON.stringify(buildPayload({ preview: false, sharedReps, turnstileToken })),
       });
       const data = await res.json();
-      if (!res.ok) throw new Error(data.error || 'Could not submit your story');
+      if (!res.ok) throw new Error(data.error || t.submitFailed);
       setFinalBody(data.final_body || body.trim());
       setFlagged(Array.isArray(data.flagged) ? data.flagged : []);
       setRevokeToken(data.revoke_token || null);
@@ -308,7 +305,7 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
       trackEvent('story_submitted', { campaign: campaign.slug, attribution: attribution ?? 'unknown' });
       setStep('done');
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Could not submit your story');
+      setError(err instanceof Error ? err.message : t.submitFailed);
     } finally {
       setSubmitting(false);
     }
@@ -319,13 +316,13 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
     setError(null);
     try {
       const res = await fetch(`/api/stories/${storyId}?token=${encodeURIComponent(revokeToken)}`, { method: 'DELETE' });
-      if (!res.ok) throw new Error('Could not withdraw the story');
+      if (!res.ok) throw new Error(t.withdrawFailed);
       setStoryId(null);
       setRevokeToken(null);
       setFinalBody('');
-      setError('Your story was withdrawn. The campaign can no longer see it.');
+      setError(t.withdrawn);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Could not withdraw the story');
+      setError(err instanceof Error ? err.message : t.withdrawFailed);
     }
   };
 
@@ -344,23 +341,23 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
     return (
       <div className="space-y-5">
         <div className="space-y-2 text-sm text-gray-600 dark:text-gray-300">
-          <p className="font-medium text-gray-900 dark:text-white">How it works</p>
+          <p className="font-medium text-gray-900 dark:text-white">{t.howItWorks}</p>
           <ol className="list-decimal list-inside space-y-1">
-            <li>We ask a few gentle questions to help you put your experience into words, at your pace.</li>
-            <li>We write a draft from your answers only. You review and edit every word.</li>
-            <li>You choose how you are credited and which uses you allow.</li>
-            <li>You press Submit. The story goes to the campaign&apos;s dashboard. Nothing is shared before that.</li>
+            <li>{t.step1}</li>
+            <li>{t.step2}</li>
+            <li>{t.step3}</li>
+            <li>{t.step4}</li>
           </ol>
         </div>
 
         <div className="p-3 bg-gray-50 dark:bg-gray-700/50 border border-gray-200 dark:border-gray-600 rounded-xl">
           <p className="text-xs text-gray-700 dark:text-gray-300">
-            Nothing is shared until you review the draft, choose how you are credited, and press Submit.
+            {t.nothingSharedUntil}
           </p>
         </div>
 
         <Button onClick={() => setStep('interview')} className="w-full" size="lg">
-          Start my story
+          {t.startMyStory}
         </Button>
       </div>
     );
@@ -373,11 +370,11 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
     const answers = messages.filter((m) => m.role === 'user');
     const answerWords = answers.reduce((n, m) => n + m.content.split(/\s+/).filter(Boolean).length, 0);
     const lastGuide = [...messages].reverse().find((m) => m.role === 'assistant')?.content ?? '';
-    const guideSaidReady = /Turn this into my story/i.test(lastGuide);
+    const guideSaidReady = /Turn this into my story|Convertir esto en mi historia/i.test(lastGuide);
     // Substance, not turn count: a real draft needs about 60 of their own words,
     // or the guide's explicit hand-off.
     const canCompose = answerWords >= 60 || (guideSaidReady && answerWords >= 30);
-    const declineAnswer = () => { setInput("I'd rather not say."); };
+    const declineAnswer = () => { setInput(t.ratherNotSayInput); };
     return (
       <div className="space-y-4">
         <TurnstileWidget />
@@ -412,15 +409,15 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
                 sendMessage();
               }
             }}
-            placeholder="Share as much or as little as you like…"
+            placeholder={t.sharePlaceholder}
             rows={2}
             disabled={streaming}
             className="flex-1 px-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 resize-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 text-sm"
           />
-          <button type="button" onClick={declineAnswer} disabled={streaming} className="self-end text-xs text-gray-500 dark:text-gray-400 underline whitespace-nowrap pb-3">Rather not say</button>
+          <button type="button" onClick={declineAnswer} disabled={streaming} className="self-end text-xs text-gray-500 dark:text-gray-400 underline whitespace-nowrap pb-3">{t.ratherNotSay}</button>
           <MicButton text={input} setText={setInput} disabled={streaming} className="self-end" />
           <Button onClick={sendMessage} isLoading={streaming} className="self-end">
-            Send
+            {t.send}
           </Button>
         </div>
 
@@ -432,12 +429,12 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
             variant="secondary"
             className="w-full"
           >
-            Turn this into my story
+            {t.turnIntoStory}
           </Button>
           <p className="text-xs text-gray-400 dark:text-gray-500 text-center mt-1.5">
             {canCompose
-              ? 'You can edit the draft and choose how you are credited before anything is submitted.'
-              : 'A little more detail first. The draft is built only from what you write here.'}
+              ? t.canComposeHint
+              : t.needMoreHint}
           </p>
         </div>
       </div>
@@ -450,7 +447,7 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
       <div className="space-y-4">
         <TurnstileWidget />
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Title <span className="text-gray-400 font-normal">(optional)</span></label>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{t.titleLabel} <span className="text-gray-400 font-normal">{t.optional}</span></label>
           <input
             type="text"
             value={title}
@@ -460,8 +457,8 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Your story</label>
-          <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">We wrote this draft from your answers and kept your words where we could. Nothing here comes from anywhere else. Change anything you want.</p>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{t.yourStory}</label>
+          <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">{t.draftNote}</p>
           {draftNotes.length > 0 && (
             <ul className="mb-2 p-3 rounded-lg bg-gray-50 dark:bg-gray-700/40 border border-gray-200 dark:border-gray-600 text-xs text-gray-700 dark:text-gray-300 space-y-1 list-disc list-inside">
               {draftNotes.map((n, i) => <li key={i}>{n}</li>)}
@@ -479,10 +476,10 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
         {/* AI edit: type a request instead of editing by hand */}
         <div className="p-3 bg-gray-50 dark:bg-gray-700/40 border border-gray-200 dark:border-gray-600 rounded-xl">
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-            Want a change made for you?
+            {t.wantChange}
           </label>
           <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">
-            Describe the edit and it happens, using only what you shared. Nothing gets made up.
+            {t.describeEdit}
           </p>
           <div className="flex gap-2">
             <input
@@ -491,19 +488,19 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
               onChange={(e) => setReviseNote(e.target.value)}
               onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); reviseStory(); } }}
               maxLength={500}
-              placeholder={'e.g. "Make it shorter" or "Start with the part about my son"'}
+              placeholder={t.editPlaceholder}
               className="flex-1 px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400"
             />
             <Button type="button" variant="secondary" onClick={reviseStory} isLoading={revising} disabled={reviseNote.trim().length < 3}>
-              Make the edit
+              {t.makeEdit}
             </Button>
           </div>
         </div>
 
         {error && <p className="text-sm text-red-600 dark:text-red-400">{error}</p>}
         <div className="flex gap-2">
-          <Button variant="secondary" onClick={() => setStep('interview')} className="flex-1">Back to the questions</Button>
-          <Button onClick={() => { setError(null); setStep('consent'); }} disabled={body.trim().length < 20 || revising} className="flex-1">Continue</Button>
+          <Button variant="secondary" onClick={() => setStep('interview')} className="flex-1">{t.backToQuestions}</Button>
+          <Button onClick={() => { setError(null); setStep('consent'); }} disabled={body.trim().length < 20 || revising} className="flex-1">{t.continue}</Button>
         </div>
       </div>
     );
@@ -514,11 +511,11 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
     return (
       <div className="space-y-5">
         <TurnstileWidget />
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white">How you are credited, and what you allow</h3>
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{t.consentTitle}</h3>
 
         {/* Attribution */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Choose how you are credited</label>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{t.chooseCredit}</label>
           <div className="space-y-2">
             {allowedAttribution.map((opt) => (
               <label
@@ -535,8 +532,8 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
                   className="mt-1 h-4 w-4 text-purple-600 focus:ring-purple-500"
                 />
                 <span>
-                  <span className="block text-sm font-medium text-gray-800 dark:text-gray-200">{ATTR_LABELS[opt].label}</span>
-                  <span className="block text-xs text-gray-500 dark:text-gray-400">{ATTR_LABELS[opt].help}</span>
+                  <span className="block text-sm font-medium text-gray-800 dark:text-gray-200">{t.attribution[opt].label}</span>
+                  <span className="block text-xs text-gray-500 dark:text-gray-400">{t.attribution[opt].help}</span>
                 </span>
               </label>
             ))}
@@ -547,18 +544,18 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
         {attribution !== 'anonymous' && (
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              {attribution === 'first_name_only' ? 'Your first name' : 'Your name'}
+              {attribution === 'first_name_only' ? t.yourFirstName : t.yourName}
             </label>
             <input
               type="text"
               value={storytellerName}
               onChange={(e) => setStorytellerName(e.target.value)}
-              placeholder={attribution === 'first_name_only' ? 'First name' : 'Full name'}
+              placeholder={attribution === 'first_name_only' ? t.firstNamePlaceholder : t.fullNamePlaceholder}
               maxLength={200}
               className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
             />
             {attribution === 'first_name_only' && (
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">If you enter a full name, we keep only your first name.</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{t.keepFirstOnly}</p>
             )}
           </div>
         )}
@@ -566,12 +563,12 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
         {/* Address: only when the story carries a name. Anonymous stories carry no location at all. */}
         {attribution && attribution !== 'anonymous' && (
           <div className="p-4 bg-gray-50 dark:bg-gray-700/40 border border-gray-200 dark:border-gray-600 rounded-xl">
-            <p className="text-sm font-medium text-gray-900 dark:text-white mb-1">Your address <span className="text-red-500">*</span></p>
+            <p className="text-sm font-medium text-gray-900 dark:text-white mb-1">{t.yourAddress} <span className="text-red-500">*</span></p>
             <p className="text-xs text-gray-600 dark:text-gray-300 mb-3">
-              We use your street address once, to confirm you are a constituent. The street is never shared and never stored. Below you choose whether the campaign sees your city, state, and representatives.
+              {t.addressOnce}
             </p>
             <AddressAutocomplete
-              label="Your address"
+              label={t.yourAddress}
               initialAddress={address}
               onAddressChange={setAddress}
             />
@@ -584,13 +581,13 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
                 className="mt-1 h-4 w-4 rounded text-purple-600 focus:ring-purple-500"
               />
               <span className="text-sm text-gray-800 dark:text-gray-200">
-                Share my city, state, and the officials who represent me with this campaign
+                {t.shareLocationLabel}
               </span>
             </label>
             <p className="text-xs text-gray-600 dark:text-gray-400 mt-2">
               {shareLocation
-                ? <>The campaign will see {address.city && address.state ? <strong>{address.city}, {address.state}</strong> : 'your city and state'} and the names of your elected officials, so it can bring your story to the people who represent you.</>
-                : 'The campaign will see your story without a location.'}
+                ? <>{t.campaignWillSeeA} {address.city && address.state ? <strong>{address.city}, {address.state}</strong> : t.yourCityState} {t.campaignWillSeeB}</>
+                : t.withoutLocation}
             </p>
           </div>
         )}
@@ -598,16 +595,16 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
         {/* What the campaign hopes to do (context) */}
         {campaign.usage_statement && (
           <div className="p-3 bg-gray-50 dark:bg-gray-700/50 rounded-xl">
-            <p className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">How this campaign may use your story</p>
+            <p className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">{t.howMayUse}</p>
             <p className="text-sm text-gray-600 dark:text-gray-300">{campaign.usage_statement}</p>
           </div>
         )}
 
         {/* Storyteller's usage permissions */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">How may the campaign use your story?</label>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">{t.howMayUseQ}</label>
           <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">
-            Check each way you are comfortable with. The campaign may only use your story in the ways you check. You can check none: the campaign can then read it but not use it elsewhere.
+            {t.checkEach}
           </p>
           <div className="space-y-2">
             {availableUses.map((opt) => {
@@ -639,17 +636,17 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
         {attribution !== 'anonymous' && grantedUses.includes('contact_me_followup') && (
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-              Contact email
+              {t.contactEmail}
             </label>
             <input
               type="email"
               value={storytellerEmail}
               onChange={(e) => setStorytellerEmail(e.target.value)}
-              placeholder="you@example.com"
+              placeholder={t.emailPlaceholder}
               className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
             />
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-              Shared with this campaign only, and only if you type it here.
+              {t.sharedOnlyIfTyped}
             </p>
           </div>
         )}
@@ -659,20 +656,20 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
           <label className="flex items-start gap-3 cursor-pointer">
             <input type="checkbox" checked={consentShare} onChange={(e) => setConsentShare(e.target.checked)} className="mt-1 h-4 w-4 rounded text-purple-600 focus:ring-purple-500" />
             <span className="text-sm text-gray-700 dark:text-gray-300">
-              Share my story with <strong>{campaign.headline}</strong> through their dashboard.
-              {attribution === 'anonymous' ? ' No name, contact, or location is saved with it.' : ' The details I chose above go with it.'}
+              {t.shareWith} <strong>{campaign.headline}</strong> {t.throughDashboard}
+              {attribution === 'anonymous' ? t.anonSavedNote : t.detailsGoNote}
             </span>
           </label>
           <label className="flex items-start gap-3 cursor-pointer">
             <input type="checkbox" checked={consentTruthful} onChange={(e) => setConsentTruthful(e.target.checked)} className="mt-1 h-4 w-4 rounded text-purple-600 focus:ring-purple-500" />
             <span className="text-sm text-gray-700 dark:text-gray-300">
-              This is my own experience and it is truthful to the best of my knowledge.
+              {t.truthful}
             </span>
           </label>
           <label className="flex items-start gap-3 cursor-pointer">
             <input type="checkbox" checked={consentAdult} onChange={(e) => setConsentAdult(e.target.checked)} className="mt-1 h-4 w-4 rounded text-purple-600 focus:ring-purple-500" />
             <span className="text-sm text-gray-700 dark:text-gray-300">
-              I am 18 or older, or a parent or guardian sharing my family&apos;s experience.
+              {t.adult}
             </span>
           </label>
         </div>
@@ -680,17 +677,17 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
         <div className="p-3 bg-gray-50 dark:bg-gray-700/50 rounded-xl">
           <p className="text-[11px] text-gray-600 dark:text-gray-400">
             {signedIn
-              ? 'You can edit or withdraw your story later from your dashboard. Anything the campaign already used before you change it may not be fully recallable.'
-              : 'After you submit you will get a withdraw link on the next screen. Keep it: without an account it is the only way to remove the story later. Anything the campaign already used before then may not be fully recallable.'}
+              ? t.laterSignedIn
+              : t.laterAnon}
           </p>
         </div>
 
         {error && <p className="text-sm text-red-600 dark:text-red-400" role="alert">{error}</p>}
 
         <div className="flex gap-2">
-          <Button variant="secondary" onClick={() => setStep('review')} className="flex-1">Back</Button>
+          <Button variant="secondary" onClick={() => setStep('review')} className="flex-1">{t.back}</Button>
           <Button onClick={submitStory} isLoading={submitting} className="flex-1">
-            {attribution === 'anonymous' ? 'Check the anonymous version' : 'Submit story'}
+            {attribution === 'anonymous' ? t.checkAnonVersion : t.submitStory}
           </Button>
         </div>
       </div>
@@ -702,11 +699,11 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
     return (
       <div className="space-y-4">
         <TurnstileWidget />
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white">This is what the campaign will receive</h3>
-        <p className="text-sm text-gray-600 dark:text-gray-300">We removed names, places, and other details that could identify you. Read it once more. Nothing has been saved yet.</p>
+        <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{t.previewTitle}</h3>
+        <p className="text-sm text-gray-600 dark:text-gray-300">{t.previewNote}</p>
         {flagged.length > 0 && (
           <div className="p-3 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded-xl">
-            <p className="text-xs text-amber-800 dark:text-amber-300">Please check these details yourself: {flagged.join('; ')}.</p>
+            <p className="text-xs text-amber-800 dark:text-amber-300">{t.checkDetails} {flagged.join('; ')}.</p>
           </div>
         )}
         <textarea
@@ -714,14 +711,14 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
           onChange={(e) => setFinalBody(e.target.value)}
           rows={12}
           maxLength={8000}
-          aria-label="Anonymous version of your story"
+          aria-label={t.anonAria}
           className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 resize-y bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm leading-relaxed"
         />
         {error && <p className="text-sm text-red-600 dark:text-red-400" role="alert">{error}</p>}
         <div className="flex gap-2">
-          <Button variant="secondary" onClick={() => setStep('consent')} className="flex-1">Back</Button>
+          <Button variant="secondary" onClick={() => setStep('consent')} className="flex-1">{t.back}</Button>
           <Button onClick={() => { setBody(finalBody); void submitStory(); }} isLoading={submitting} disabled={finalBody.trim().length < 20} className="flex-1">
-            Submit this version
+            {t.submitThisVersion}
           </Button>
         </div>
       </div>
@@ -736,14 +733,14 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
         </svg>
       </div>
-      <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">{storyId ? 'Thank you for sharing' : 'Story withdrawn'}</h3>
+      <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">{storyId ? t.thankYou : t.storyWithdrawn}</h3>
       <p className="text-gray-600 dark:text-gray-300 mb-6">
-        {storyId ? `The campaign can now read your story in its dashboard.` : 'The campaign can no longer see it.'}
+        {storyId ? t.canReadNow : t.canNoLonger}
       </p>
 
       {flagged.length > 0 && storyId && (
         <div className="mb-6 p-3 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded-xl text-left">
-          <p className="text-xs text-amber-800 dark:text-amber-300">Details we could not fully resolve: {flagged.join('; ')}.</p>
+          <p className="text-xs text-amber-800 dark:text-amber-300">{t.unresolved} {flagged.join('; ')}.</p>
         </div>
       )}
 
@@ -753,7 +750,7 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
             <p className="text-sm text-gray-700 dark:text-gray-200 whitespace-pre-line leading-relaxed">{finalBody}</p>
           </div>
           <button type="button" onClick={copyStory} className="mt-2 text-sm text-purple-600 dark:text-purple-400 underline">
-            {copied ? 'Copied' : 'Copy my story'}
+            {copied ? t.copied : t.copyMyStory}
           </button>
         </div>
       )}
@@ -762,9 +759,9 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
         <div className="mb-6 p-3 bg-gray-50 dark:bg-gray-700/50 rounded-xl text-left">
           <p className="text-xs text-gray-600 dark:text-gray-400">
             {signedIn ? (
-              <>You can edit or withdraw this story from your <Link href="/dashboard" className="underline">dashboard</Link>.</>
+              <>{t.editFromDashboardA} <Link href="/dashboard" className="underline">{t.dashboard}</Link>.</>
             ) : (
-              <>Changed your mind? You can <button type="button" onClick={withdrawStory} className="underline">withdraw it now</button>. To withdraw later, keep this link: <span className="break-all font-mono text-[11px]">{`https://www.mydemocracy.app/stories/withdraw?id=${storyId}&token=${revokeToken ?? ''}`}</span></>
+              <>{t.changedMind} <button type="button" onClick={withdrawStory} className="underline">{t.withdrawNow}</button>{t.keepLink} <span className="break-all font-mono text-[11px]">{`https://www.mydemocracy.app/stories/withdraw?id=${storyId}&token=${revokeToken ?? ''}`}</span></>
             )}
           </p>
         </div>
@@ -779,12 +776,12 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
               ? `https://${campaign.custom_domain}/`
               : `https://www.mydemocracy.app/campaign/${campaign.slug}`
           }
-          text={`I shared my story with "${campaign.headline}". You can share yours here:`}
-          title={`Share your story: ${campaign.headline}`}
-          prompt="Know someone with a story? Send them the campaign link."
+          text={t.shareText(campaign.headline)}
+          title={t.shareTitle(campaign.headline)}
+          prompt={t.sharePrompt}
         />
         <p className="text-[11px] text-gray-500 dark:text-gray-400 mt-2 text-center">
-          This shares a link to the campaign, never your story.
+          {t.sharesLinkOnly}
         </p>
       </div>
 
