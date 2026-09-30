@@ -2,8 +2,8 @@ import { NextResponse } from 'next/server';
 import { createAdminClient } from '@/lib/supabase';
 import { createClient } from '@/lib/supabase/server';
 import { congressFetch } from '@/lib/congress-api';
-import { openstatesFetch } from '@/lib/openstates-api';
-import type { FeedBill, RepNewsArticle, RepFeedItem, RepFeedResponse, RepVote, Official, BillAction } from '@/lib/types';
+import { fetchPersonFeedBills } from '@/lib/openstates-person';
+import type { FeedBill, RepNewsArticle, RepFeedItem, RepFeedResponse, RepVote, Official } from '@/lib/types';
 
 const CACHE_TTL_MS = 6 * 60 * 60 * 1000; // 6 hours
 const NINETY_DAYS_MS = 90 * 24 * 60 * 60 * 1000;
@@ -18,18 +18,6 @@ function parseRepresentatives(raw: unknown): Official[] {
     else if (val && typeof val === 'object' && 'id' in val && 'name' in val) result.push(val as Official);
   }
   return result;
-}
-
-function deriveStatus(classifications: string[][]): string {
-  const flat = classifications.flat();
-  if (flat.includes('executive-signature') || flat.includes('became-law')) return 'Signed into Law';
-  if (flat.includes('passage')) return 'Passed Chamber';
-  if (flat.includes('committee-passage')) return 'Passed Committee';
-  if (flat.includes('reading-3')) return 'Third Reading';
-  if (flat.includes('reading-2')) return 'Second Reading';
-  if (flat.includes('referral-committee')) return 'In Committee';
-  if (flat.includes('reading-1') || flat.includes('introduction')) return 'Introduced';
-  return '';
 }
 
 function isWithin90Days(dateStr: string): boolean {
@@ -90,117 +78,13 @@ async function fetchFederalBills(rep: Official): Promise<FeedBill[]> {
   return [...sponsoredBills, ...cosponsoredBills];
 }
 
-function mapStateBillEdge(
-  edge: Record<string, Record<string, unknown>>,
-  rep: Official,
-  sponsorshipType: 'sponsored' | 'cosponsored',
-): FeedBill {
-  const node = edge.node;
-  const actions = (node.actions ?? []) as { description: string; date: string; classification: string[] }[];
-  const lastAction = actions.length > 0 ? actions[actions.length - 1] : null;
-  const abstracts = (node.abstracts ?? []) as { abstract: string }[];
-  const description = abstracts.length > 0 ? abstracts[0].abstract : '';
-  const allClassifications = actions.map((a) => a.classification ?? []);
-  const sponsorships = (node.sponsorships ?? []) as { name: string; classification: string }[];
-  const sponsors = sponsorships.map((s) => s.name).filter(Boolean);
-  const sources = (node.sources ?? []) as { url: string }[];
-
-  const referralAction = actions.find((a) => (a.classification ?? []).includes('referral-committee'));
-  const committee = referralAction?.description?.replace(/^Referred to\s*/i, '') ?? '';
-
-  const billActions: BillAction[] = actions.map((a) => ({
-    description: a.description,
-    date: a.date,
-    classification: a.classification ?? [],
-  }));
-
-  return {
-    type: 'bill' as const,
-    bill_number: (node.identifier as string) ?? '',
-    title: (node.title as string) ?? '',
-    description,
-    sponsor_name: rep.name,
-    sponsors,
-    date: lastAction?.date ?? ((node.updatedAt as string) ?? ''),
-    status: deriveStatus(allClassifications),
-    last_action: lastAction?.description ?? '',
-    last_action_date: lastAction?.date ?? '',
-    policy_area: '',
-    committee,
-    bill_url: sources[0]?.url || ((node.openstatesUrl as string) ?? ''),
-    rep_id: rep.id,
-    level: 'state' as const,
-    sponsorship_type: sponsorshipType,
-    actions: billActions,
-  };
-}
-
 async function fetchStateBills(rep: Official): Promise<FeedBill[]> {
-  const apiKey = process.env.OPENSTATES_API_KEY;
-  if (!apiKey) return [];
-
-  const gqlQuery = `
-    query($personId: String!) {
-      sponsored: bills(first: 10, sponsor: { person: $personId }) {
-        edges {
-          node {
-            identifier
-            title
-            updatedAt
-            classification
-            openstatesUrl
-            abstracts { abstract }
-            actions { description date classification }
-            sponsorships { name classification }
-            sources { url }
-          }
-        }
-      }
-      cosponsored: bills(first: 10, cosponsor: { person: $personId }) {
-        edges {
-          node {
-            identifier
-            title
-            updatedAt
-            classification
-            openstatesUrl
-            abstracts { abstract }
-            actions { description date classification }
-            sponsorships { name classification }
-            sources { url }
-          }
-        }
-      }
-    }
-  `;
-
+  if (!process.env.OPENSTATES_API_KEY) return [];
   try {
-    const res = await openstatesFetch(gqlQuery, { personId: rep.id });
-    if (!res.ok) return [];
-    const data = await res.json();
-    if (data.errors) return [];
-
-    const sponsoredEdges = data?.data?.sponsored?.edges ?? [];
-    const cosponsoredEdges = data?.data?.cosponsored?.edges ?? [];
-
-    const sponsoredBills = sponsoredEdges.map((edge: Record<string, Record<string, unknown>>) =>
-      mapStateBillEdge(edge, rep, 'sponsored')
-    );
-    const cosponsoredBills = cosponsoredEdges.map((edge: Record<string, Record<string, unknown>>) =>
-      mapStateBillEdge(edge, rep, 'cosponsored')
-    );
-
-    // Deduplicate by bill identifier (a bill could appear in both)
-    const seen = new Set<string>();
-    const all: FeedBill[] = [];
-    for (const bill of [...sponsoredBills, ...cosponsoredBills]) {
-      if (!seen.has(bill.bill_number)) {
-        seen.add(bill.bill_number);
-        all.push(bill);
-      }
-    }
-    return all;
-  } catch {
+    const { bills } = await fetchPersonFeedBills({ id: rep.id, name: rep.name, state: rep.state });
+    return bills;
+  } catch (e) {
+    console.error('[feed/representatives] state bills', rep.name, e instanceof Error ? e.message : e);
     return [];
   }
 }

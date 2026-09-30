@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { openstatesRestFetch } from '@/lib/openstates-api';
-import { US_STATES } from '@/lib/constants';
+import { openstatesRestFetch, jurisdictionName } from '@/lib/openstates-api';
 
 /**
  * GET /api/bills?state=NV&query=housing&page=1
@@ -38,14 +37,6 @@ interface OpenStatesBill {
 }
 
 /** v3 REST wants the full jurisdiction name ("Nevada"), not a 2-letter code. */
-function jurisdictionName(state: string): string | null {
-  const s = state.trim();
-  if (/^[A-Za-z]{2}$/.test(s)) {
-    return US_STATES.find((x) => x.code === s.toUpperCase())?.name ?? null;
-  }
-  return US_STATES.find((x) => x.name.toLowerCase() === s.toLowerCase())?.name ?? s;
-}
-
 export async function GET(request: NextRequest) {
   if (!process.env.OPENSTATES_API_KEY) {
     return NextResponse.json(
