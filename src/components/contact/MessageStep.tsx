@@ -503,6 +503,8 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
               subject: typeof data.subject === 'string' ? data.subject : null,
               opening: typeof data.opening === 'string' ? data.opening : null,
               ask: typeof data.ask === 'string' ? data.ask : null,
+              bodyEs: typeof data.body_es === 'string' ? data.body_es : null,
+              original: data.original && typeof data.original.text === 'string' ? data.original : null,
             },
           });
 
@@ -537,6 +539,7 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
               coreSubject: typeof data.subject === 'string' ? data.subject : null,
               coreOpening: typeof data.opening === 'string' ? data.opening : null,
               coreAsk: typeof data.ask === 'string' ? data.ask : null,
+              originalWords: data.original && typeof data.original.text === 'string' ? data.original : null,
               // CWC carries name and address in separate fields: no signature in the text.
               signature: !cwcDeliverable(rep),
             });
@@ -567,6 +570,7 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
           coreSubject: state.coreFrame?.subject ?? null,
           coreOpening: state.coreFrame?.opening ?? null,
           coreAsk: state.coreFrame?.ask ?? null,
+          originalWords: state.coreFrame?.original ?? null,
           signature: !cwcDeliverable(rep),
         });
       }
@@ -599,6 +603,7 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
         coreSubject: state.coreFrame?.subject ?? null,
         coreOpening: state.coreFrame?.opening ?? null,
         coreAsk: state.coreFrame?.ask ?? null,
+          originalWords: state.coreFrame?.original ?? null,
         signature: !cwcDeliverable(rep),
       });
     }

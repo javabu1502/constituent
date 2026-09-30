@@ -70,7 +70,7 @@ export default async function CampaignPage({ params }: PageProps) {
 
   const { data, error } = await admin
     .from('campaigns')
-    .select('id, slug, headline, description, issue_area, issue_subtopic, target_level, direction, status, campaign_type, visibility, message_template, bill_level, bill_state, bill_ref, bill_title, bill_url, story_prompt, usage_statement, usage_tags, attribution_options, edit_revoke_policy, action_count, story_count, created_at, org_name, org_url, org_logo_url, brand_color, custom_domain, case_for, case_against, source_for_label, source_for_url, source_against_label, source_against_url, is_bill_specific, bill_congress, bill_type, bill_number, support_count, oppose_count, undecided_count, is_official, parent_campaign_id, stage_goal, target_filter')
+    .select('id, slug, headline, description, issue_area, issue_subtopic, target_level, direction, status, campaign_type, visibility, message_template, bill_level, bill_state, bill_ref, bill_title, bill_url, story_prompt, usage_statement, usage_tags, attribution_options, edit_revoke_policy, action_count, story_count, created_at, org_name, org_url, org_logo_url, brand_color, custom_domain, case_for, case_against, source_for_label, source_for_url, source_against_label, source_against_url, is_bill_specific, bill_congress, bill_type, bill_number, support_count, oppose_count, undecided_count, is_official, parent_campaign_id, stage_goal, target_filter, language')
     .eq('slug', slug)
     .eq('approval_status', 'approved')
     .single();
@@ -137,7 +137,7 @@ export default async function CampaignPage({ params }: PageProps) {
           )}
           {campaign.org_name && (
             <div className="min-w-0">
-              <p className="text-xs text-gray-500 dark:text-gray-400">A campaign by</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400">{campaign.language === 'es' ? 'Una campaña de' : 'A campaign by'}</p>
               {campaign.org_url ? (
                 <a
                   href={campaign.org_url}
@@ -187,10 +187,10 @@ export default async function CampaignPage({ params }: PageProps) {
         {/* Where do you stand? — both sides, visually equal, neither emphasized */}
         {campaign.is_official && campaign.case_for && campaign.case_against && (
           <div className="mt-6">
-            <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Weigh in</h2>
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">{campaign.language === 'es' ? 'Opine' : 'Weigh in'}</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div className="p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm flex flex-col">
-                <p className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">The case for</p>
+                <p className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">{campaign.language === 'es' ? 'Argumentos a favor' : 'The case for'}</p>
                 <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed flex-1">{campaign.case_for}</p>
                 {campaign.source_for_url && campaign.source_for_label && (
                   <a
@@ -204,7 +204,7 @@ export default async function CampaignPage({ params }: PageProps) {
                 )}
               </div>
               <div className="p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm flex flex-col">
-                <p className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">The case against</p>
+                <p className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">{campaign.language === 'es' ? 'Argumentos en contra' : 'The case against'}</p>
                 <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed flex-1">{campaign.case_against}</p>
                 {campaign.source_against_url && campaign.source_against_label && (
                   <a

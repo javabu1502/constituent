@@ -10,6 +10,7 @@ import { US_STATES } from '@/lib/constants';
 import { Button } from '@/components/ui/Button';
 import { formatPhone, salutationTitle } from '@/lib/utils';
 import { buildEnvelope } from '@/lib/envelope';
+import { participateCopy, type ParticipateCopy } from '@/lib/copy/participate';
 import { detectBillReferences, CURRENT_CONGRESS } from '@/lib/bills';
 import {
   determineDeliveryMethod,
@@ -20,7 +21,7 @@ import { useTurnstile } from '@/components/ui/Turnstile';
 import { SupportNudge } from '@/components/ui/SupportNudge';
 import { SocialShare } from '@/components/ui/SocialShare';
 import { CWC_PREFIXES, CWC_ENABLED } from '@/lib/cwc-prefixes';
-import { useCwcActiveOffices, congressChannel, isNonParticipatingSenator, participatingSenateCount, cwcOfficeCodeFor, submitAdoptionSignature, CWC_SUBMITTED_STATUS, WEBFORM_SUBMITTED_STATUS, CWC_COPY, WEBFORM_COPY, describeCwcOutcome, type SendOutcome, type CwcButtonState } from '@/lib/cwc-client';
+import { useCwcActiveOffices, congressChannel, isNonParticipatingSenator, participatingSenateCount, cwcOfficeCodeFor, submitAdoptionSignature, CWC_SUBMITTED_STATUS, WEBFORM_SUBMITTED_STATUS, describeCwcOutcome, type SendOutcome, type CwcButtonState } from '@/lib/cwc-client';
 import { CwcAdoptionAsk } from '@/components/ui/CwcAdoptionAsk';
 
 type Step = 'stance' | 'compose' | 'form' | 'loading' | 'review' | 'done' | 'noTarget' | 'wrongState';
@@ -97,6 +98,8 @@ export function CampaignParticipate({
   // first and the message carries that stance. User-created campaigns are
   // the creator's own directional ask — no stance step, no poll.
   const isOfficial = !!campaign.is_official;
+  // Participant-facing copy in the campaign's language (English or Spanish).
+  const t = participateCopy(campaign.language);
   const [step, setStep] = useState<Step>(isOfficial ? 'stance' : 'compose');
   // Message-first: the constituent's approved core message, drafted before we
   // know who their officials are.
@@ -107,6 +110,10 @@ export function CampaignParticipate({
   const [coreSubject, setCoreSubject] = useState<string | null>(null);
   const [coreOpening, setCoreOpening] = useState<string | null>(null);
   const [coreAsk, setCoreAsk] = useState<string | null>(null);
+  // Bilingual: a Spanish reading copy of the core (review only) and the
+  // participant's own Spanish, which every letter carries verbatim.
+  const [coreBodyEs, setCoreBodyEs] = useState<string | null>(null);
+  const [coreOriginal, setCoreOriginal] = useState<{ language: 'en' | 'es'; text: string } | null>(null);
   const [coreStatus, setCoreStatus] = useState<'idle' | 'drafting'>('idle');
   const [stance, setStance] = useState<Stance | null>(null);
 
@@ -183,9 +190,11 @@ export function CampaignParticipate({
       setCoreSubject(typeof data.subject === 'string' ? data.subject : null);
       setCoreOpening(typeof data.opening === 'string' ? data.opening : null);
       setCoreAsk(typeof data.ask === 'string' ? data.ask : null);
+      setCoreBodyEs(typeof data.body_es === 'string' ? data.body_es : null);
+      setCoreOriginal(data.original && typeof data.original.text === 'string' ? data.original : null);
       fireFunnel('participate_core_generated');
     } catch (err) {
-      setError(err instanceof FriendlyError ? err.message : 'We could not draft your message. You can write it yourself below, or try again.');
+      setError(err instanceof FriendlyError ? err.message : t.draftFailed);
     } finally {
       setCoreStatus('idle');
     }
@@ -203,6 +212,7 @@ export function CampaignParticipate({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           headline: campaign.headline.slice(0, 200),
+          language: campaign.language === 'es' ? 'es' : undefined,
           stance: isOfficial ? stance ?? undefined : undefined,
           personalWhy: personalWhy.trim().slice(0, 2000),
         }),
@@ -511,6 +521,7 @@ export function CampaignParticipate({
             coreSubject,
             coreOpening,
             coreAsk,
+            originalWords: coreOriginal,
             // CWC carries name and address in separate fields: no signature in the text.
             signature: !cwcDeliverable(o),
           });
@@ -734,15 +745,15 @@ export function CampaignParticipate({
     return (
       <div className="space-y-5">
         <div>
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white">What&rsquo;s your position?</h3>
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{t.positionTitle}</h3>
           <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-            Both sides are laid out above. Your message will carry <em>your</em> position. My Democracy does not take a side.
+            {t.positionHelp}
           </p>
         </div>
 
         <div className="space-y-2">
-          {stanceButton('support', 'I support this', 'Your message will express clear support and ask your officials to support it too.')}
-          {stanceButton('oppose', 'I oppose this', 'Your message will express clear opposition and ask your officials to oppose it.')}
+          {stanceButton('support', t.supportLabel, t.supportHelp)}
+          {stanceButton('oppose', t.opposeLabel, t.opposeHelp)}
         </div>
       </div>
     );
@@ -763,7 +774,7 @@ export function CampaignParticipate({
         {!coreDraft && followUpQuestions.length > 0 ? (
           <>
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">A couple quick questions</h3>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{t.followUpTitle}</h3>
               <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
                 Your answers make your letter specific. Skip anything.
               </p>
@@ -788,7 +799,7 @@ export function CampaignParticipate({
             </div>
             <div className="flex gap-2">
               <Button onClick={finishFollowUps} disabled={coreStatus === 'drafting'} className="flex-1">
-                {coreStatus === 'drafting' ? 'Writing your message…' : 'Continue'}
+                {coreStatus === 'drafting' ? t.writing : t.continue}
               </Button>
               <button
                 type="button"
@@ -804,12 +815,12 @@ export function CampaignParticipate({
           <>
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Why does this matter to you? <span className="text-gray-400 dark:text-gray-500 font-normal">(optional, but it makes your message land)</span>
+                {t.whyLabel} <span className="text-gray-400 dark:text-gray-500 font-normal">{t.whyOptional}</span>
               </label>
               <textarea
                 value={personalWhy}
                 onChange={(e) => setPersonalWhy(e.target.value)}
-                placeholder="How does this affect you, your family, your community? A sentence or two is plenty."
+                placeholder={t.whyPlaceholder}
                 rows={4}
                 maxLength={2000}
                 className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent resize-y bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
@@ -820,17 +831,17 @@ export function CampaignParticipate({
               disabled={coreStatus === 'drafting' || fetchingQuestions}
               className="w-full"
             >
-              {coreStatus === 'drafting' ? 'Writing your message…' : fetchingQuestions ? 'One moment…' : 'Draft my message'}
+              {coreStatus === 'drafting' ? t.writing : fetchingQuestions ? t.oneMoment : t.draftMyMessage}
             </Button>
             <p className="text-xs text-gray-500 dark:text-gray-400 text-center">
-              You will see and edit the message before anything else happens. No address needed yet.
+              {t.reviewBeforeAnything}
             </p>
           </>
         ) : (
           <>
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Your message <span className="text-gray-400 dark:text-gray-500 font-normal">(edit anything, these are your words)</span>
+                {t.yourMessage} <span className="text-gray-400 dark:text-gray-500 font-normal">{t.yourMessageHint}</span>
               </label>
               <textarea
                 value={coreDraft}
@@ -839,8 +850,28 @@ export function CampaignParticipate({
                 className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent resize-y bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               />
               <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                We add the greeting and each official&apos;s name automatically. Your words above are never changed.
+                {t.greetingAdded}
               </p>
+              {coreOriginal && (
+                <div className="mt-3 p-3 bg-gray-50 dark:bg-gray-700/40 border border-gray-200 dark:border-gray-600 rounded-xl space-y-2">
+                  <p className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                    Su mensaje se enviará en inglés junto con sus propias palabras en español.
+                  </p>
+                  {coreBodyEs && (
+                    <details>
+                      <summary className="text-sm text-purple-700 dark:text-purple-300 cursor-pointer select-none">
+                        Leer el mensaje en español
+                      </summary>
+                      <p className="mt-2 text-sm text-gray-600 dark:text-gray-400 whitespace-pre-line border-l-2 border-purple-400 pl-3">
+                        {coreBodyEs}
+                      </p>
+                      <p className="mt-2 text-xs text-gray-500 dark:text-gray-400">
+                        Esta es una traducción para que usted la revise. Si edita el texto en inglés arriba, esta copia no cambia.
+                      </p>
+                    </details>
+                  )}
+                </div>
+              )}
             </div>
             <div className="flex gap-2">
               <Button
@@ -850,7 +881,7 @@ export function CampaignParticipate({
                 }}
                 className="flex-1"
               >
-                Looks good. Next: your address
+                {t.looksGoodNext}
               </Button>
               <button
                 type="button"
@@ -858,7 +889,7 @@ export function CampaignParticipate({
                 disabled={coreStatus === 'drafting'}
                 className="px-4 py-2 border border-gray-300 dark:border-gray-600 text-sm text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700"
               >
-                {coreStatus === 'drafting' ? 'Redrafting…' : 'Redraft'}
+                {coreStatus === 'drafting' ? t.redrafting : t.redraft}
               </button>
             </div>
           </>
@@ -873,9 +904,9 @@ export function CampaignParticipate({
         {stance && (
           <div className="flex items-center justify-between gap-2 p-3 bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-700 rounded-xl">
             <p className="text-xs text-purple-900 dark:text-purple-200">
-              Your position:{' '}
+              {t.yourPosition}{' '}
               <span className="font-semibold">
-                {stance === 'support' ? 'Support' : stance === 'oppose' ? 'Oppose' : 'Still deciding'}
+                {stance === 'support' ? t.stanceSupport : stance === 'oppose' ? t.stanceOppose : t.stanceUndecided}
               </span>
             </p>
             <button
@@ -883,7 +914,7 @@ export function CampaignParticipate({
               onClick={() => setStep('stance')}
               className="text-xs font-medium text-purple-600 dark:text-purple-400 hover:underline shrink-0"
             >
-              Change
+              {t.change}
             </button>
           </div>
         )}
@@ -893,7 +924,7 @@ export function CampaignParticipate({
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
-              Your info has been filled from your account. Edit if needed.
+              {t.prefilled}
             </p>
           </div>
         )}
@@ -907,14 +938,14 @@ export function CampaignParticipate({
           {cwcFields && (
             <div>
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                Title <span className="text-red-500">*</span>
+                {t.title} <span className="text-red-500">*</span>
               </label>
               <select
                 value={prefix}
                 onChange={(e) => setPrefix(e.target.value)}
                 className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
               >
-                <option value="" disabled>Choose</option>
+                <option value="" disabled>{t.choose}</option>
                 {CWC_PREFIXES.map((p) => (
                   <option key={p} value={p}>{p}</option>
                 ))}
@@ -923,13 +954,13 @@ export function CampaignParticipate({
           )}
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              Your Name <span className="text-red-500">*</span>
+              {t.yourName} <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="Your full name"
+              placeholder={t.yourNamePlaceholder}
               className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
             />
           </div>
@@ -938,7 +969,7 @@ export function CampaignParticipate({
         {cwcFields && !collectEmail && (
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              Email <span className="text-red-500">*</span>
+              {t.email} <span className="text-red-500">*</span>
             </label>
             <input
               type="email"
@@ -948,7 +979,7 @@ export function CampaignParticipate({
               className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
             />
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-              Congressional offices require an email address to accept and reply to your message. Never shared or sold.
+              {t.emailRequiredNote}
             </p>
           </div>
         )}
@@ -956,7 +987,7 @@ export function CampaignParticipate({
         {collectEmail && (
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              Email <span className="text-red-500">*</span>
+              {t.email} <span className="text-red-500">*</span>
             </label>
             <input
               type="email"
@@ -966,21 +997,20 @@ export function CampaignParticipate({
               className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
             />
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-              {campaign.org_name || 'The campaign organizer'} will email you when this bill moves to its next step, so
-              you can act again when it counts. Unsubscribe anytime.
+              {t.emailFollowUpNote(campaign.org_name || t.organizerFallback)}
             </p>
           </div>
         )}
 
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-            Street Address <span className="text-red-500">*</span>
+            {t.streetAddress} <span className="text-red-500">*</span>
           </label>
           <input
             type="text"
             value={street}
             onChange={(e) => setStreet(e.target.value)}
-            placeholder="123 Main St"
+            placeholder={t.streetPlaceholder}
             className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
           />
         </div>
@@ -988,26 +1018,26 @@ export function CampaignParticipate({
         <div className="grid grid-cols-2 gap-3">
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              City <span className="text-red-500">*</span>
+              {t.city} <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
               value={city}
               onChange={(e) => setCity(e.target.value)}
-              placeholder="City"
+              placeholder={t.city}
               className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
             />
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              State <span className="text-red-500">*</span>
+              {t.state} <span className="text-red-500">*</span>
             </label>
             <select
               value={state}
               onChange={(e) => setState(e.target.value)}
               className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
             >
-              <option value="">Select state</option>
+              <option value="">{t.selectState}</option>
               {US_STATES.map((s) => (
                 <option key={s.code} value={s.code}>{s.name}</option>
               ))}
@@ -1017,7 +1047,7 @@ export function CampaignParticipate({
 
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-            ZIP Code <span className="text-red-500">*</span>
+            {t.zip} <span className="text-red-500">*</span>
           </label>
           <input
             type="text"
@@ -1031,19 +1061,19 @@ export function CampaignParticipate({
 
         <div className="p-3 bg-purple-50 dark:bg-purple-900/30 border border-purple-200 dark:border-purple-700 rounded-xl">
           <p className="text-xs text-purple-700 dark:text-purple-300">
-            Your approved message goes to each official with their own greeting and ask. You&apos;ll review everything before sending.
+            {t.approvedGoesToEach}
           </p>
         </div>
 
         <TurnstileWidget />
 
         <Button type="submit" className="w-full" size="lg" isLoading={submitting}>
-          Find My Officials
+          {t.findMyOfficials}
         </Button>
 
         <p className="text-xs text-gray-400 dark:text-gray-500 text-center">
-          Your address is used to find your officials and, for congressional offices, is sent with your message so they can confirm you are a constituent. See our{' '}
-          <a href="/privacy" className="underline hover:text-gray-600 dark:hover:text-gray-300">Privacy Policy</a>.
+          {t.addressUse}{' '}
+          <a href="/privacy" className="underline hover:text-gray-600 dark:hover:text-gray-300">{t.privacyPolicy}</a>.
         </p>
       </form>
     );
@@ -1061,8 +1091,8 @@ export function CampaignParticipate({
             </svg>
           </div>
         </div>
-        <p className="text-gray-600 dark:text-gray-300 mt-4 font-medium">Finding your officials...</p>
-        <p className="text-gray-400 dark:text-gray-500 text-sm mt-1">Generating personalized messages</p>
+        <p className="text-gray-600 dark:text-gray-300 mt-4 font-medium">{t.findingOfficials}</p>
+        <p className="text-gray-400 dark:text-gray-500 text-sm mt-1">{t.generatingMessages}</p>
       </div>
     );
   }
@@ -1158,23 +1188,23 @@ export function CampaignParticipate({
         <TurnstileWidget />
         <div className="text-center mb-2">
           <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-            {officials.length} Message{officials.length !== 1 ? 's' : ''} Ready
+            {t.messagesReady(officials.length)}
           </h3>
           <p className="text-sm text-gray-500 dark:text-gray-400">
-            Send each message using the options below
+            {t.sendEachBelow}
           </p>
         </div>
 
         {campaign.message_template && (
           <details className="p-3 bg-gray-50 dark:bg-gray-700/40 border border-gray-200 dark:border-gray-600 rounded-xl">
             <summary className="text-sm font-medium text-gray-700 dark:text-gray-300 cursor-pointer select-none">
-              See the talking points your messages will include
+              {t.seeTalkingPoints}
             </summary>
             <p className="mt-2 text-sm text-gray-600 dark:text-gray-400 whitespace-pre-line border-l-2 border-purple-400 pl-3">
               {campaign.message_template}
             </p>
             <p className="mt-2 text-xs text-gray-500 dark:text-gray-400">
-              Everything else is written for your voice. Edit anything before you send.
+              {t.everythingElseYourVoice}
             </p>
           </details>
         )}
@@ -1182,10 +1212,10 @@ export function CampaignParticipate({
         {usedFallback && (
           <div className="p-3 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded-xl">
             <p className="text-sm text-amber-800 dark:text-amber-300 font-medium">
-              Our AI writer isn&apos;t available right now, so we&apos;ve started each message for you.
+              {t.aiUnavailable}
             </p>
             <p className="text-xs text-amber-700 dark:text-amber-400 mt-1">
-              Please make it your own before sending. Personal words carry the most weight with officials.
+              {t.makeItYourOwn}
             </p>
           </div>
         )}
@@ -1202,6 +1232,7 @@ export function CampaignParticipate({
           return (
             <OfficialSendCard
               key={official.id}
+              ui={t}
               official={official}
               message={msg}
               deliveryInfo={deliveryInfo}
@@ -1244,7 +1275,7 @@ export function CampaignParticipate({
         })}
 
         <Button onClick={handleDone} className="w-full" size="lg">
-          Done
+          {t.done}
         </Button>
       </div>
     );
@@ -1258,23 +1289,23 @@ export function CampaignParticipate({
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
         </svg>
       </div>
-      <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">{sentCount > 0 || actionIdRef.current ? 'Sent' : 'Nothing sent yet'}</h3>
+      <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">{sentCount > 0 || actionIdRef.current ? t.sent : t.nothingSentYet}</h3>
       <p className="text-gray-600 dark:text-gray-300 mb-6">
         {sentCount > 0 || actionIdRef.current
-          ? 'Offices tally constituent messages by issue. Yours is now in the count.'
-          : 'You can go back and send your message whenever you are ready.'}
+          ? t.inTheCount
+          : t.sendWhenReady}
       </p>
 
       {/* Reader-poll results — revealed only AFTER this reader picked and acted */}
       {stance && pollResults && (() => {
         const total = pollResults.support + pollResults.oppose + pollResults.undecided;
         const rows: Array<{ key: Stance; label: string; count: number }> = [
-          { key: 'support', label: 'Support', count: pollResults.support },
-          { key: 'oppose', label: 'Oppose', count: pollResults.oppose },
+          { key: 'support', label: t.stanceSupport, count: pollResults.support },
+          { key: 'oppose', label: t.stanceOppose, count: pollResults.oppose },
           // "Still deciding" is no longer an option; only show it if older
           // campaigns still carry historical undecided counts.
           ...(pollResults.undecided > 0
-            ? [{ key: 'undecided' as Stance, label: 'Still deciding', count: pollResults.undecided }]
+            ? [{ key: 'undecided' as Stance, label: t.stanceUndecided, count: pollResults.undecided }]
             : []),
         ];
         const pct = (n: number) => (total > 0 ? Math.round((n / total) * 100) : 0);
@@ -1282,23 +1313,23 @@ export function CampaignParticipate({
         return (
           <div className="mb-6 p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm text-left">
             <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-1">
-              How My Democracy readers have landed so far
+              {t.readersSoFar}
             </h4>
             {total < 20 ? (
               <p className="text-sm text-gray-600 dark:text-gray-400">
-                Be one of the first to weigh in. Results appear once more readers have.
+                {t.beFirst}
               </p>
             ) : (
               <>
                 <p className="text-xs text-purple-600 dark:text-purple-400 font-medium mb-3">
-                  You&rsquo;re with the {ownPct}%.
+                  {t.youreWith(ownPct)}
                 </p>
                 <div className="space-y-2.5">
                   {rows.map(({ key, label, count }) => (
                     <div key={key}>
                       <div className="flex items-center justify-between text-xs mb-1">
                         <span className={key === stance ? 'font-semibold text-purple-700 dark:text-purple-300' : 'font-medium text-gray-600 dark:text-gray-400'}>
-                          {label}{key === stance ? ' (your position)' : ''}
+                          {label}{key === stance ? t.yourPositionSuffix : ''}
                         </span>
                         <span className="text-gray-500 dark:text-gray-400">{pct(count)}%</span>
                       </div>
@@ -1373,8 +1404,11 @@ function OfficialSendCard({
   cwcDelivery,
   alreadySent,
   adoptionAsk,
+  ui,
 }: {
   official: Official;
+  /** Copy in the campaign's language. */
+  ui: ParticipateCopy;
   message: OfficialMessage;
   deliveryInfo: DeliveryInfo;
   mailtoLink: string | null;
@@ -1395,7 +1429,9 @@ function OfficialSendCard({
     return onSend(status);
   };
   const [copied, setCopied] = useState(false);
-  const copy = cwcDelivery === 'webform' ? WEBFORM_COPY : CWC_COPY;
+  const copy = cwcDelivery === 'webform'
+    ? { idle: ui.webformIdle, sending: ui.webformSending, sent: ui.webformSent }
+    : { idle: ui.cwcIdle, sending: ui.cwcSending, sent: ui.cwcSent };
   const submitStatus = cwcDelivery === 'webform' ? WEBFORM_SUBMITTED_STATUS : CWC_SUBMITTED_STATUS;
   const [cwcState, setCwcState] = useState<CwcButtonState>(alreadySent ? 'sent' : 'idle');
   const [cwcNote, setCwcNote] = useState<string>(alreadySent ? copy.sent : copy.idle);
@@ -1426,7 +1462,7 @@ function OfficialSendCard({
           </span>
           {official.level === 'state' && (
             <span className="px-2 py-0.5 text-xs font-medium rounded-full bg-purple-100 text-purple-700">
-              State
+              {ui.stateBadge}
             </span>
           )}
         </div>
@@ -1463,7 +1499,7 @@ function OfficialSendCard({
               ) : (
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
               )}
-              {cwcState === 'sent' ? 'Sent to Congress' : cwcState === 'sending' ? 'Sending' : 'Send to Congress'}
+              {cwcState === 'sent' ? ui.sentToCongress : cwcState === 'sending' ? ui.sending : ui.sendToCongress}
             </button>
             <p className="text-xs text-gray-500 dark:text-gray-400">{cwcNote}</p>
           </>
@@ -1479,7 +1515,7 @@ function OfficialSendCard({
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
-              Send Email{deliveryInfo.stafferName ? ` to ${deliveryInfo.stafferName}` : ''}
+              {ui.sendEmail}{deliveryInfo.stafferName ? ` (${deliveryInfo.stafferName})` : ''}
             </button>
             {!deliveryInfo.captchaBlocked && deliveryInfo.note && (
               <p className="text-xs text-gray-500 dark:text-gray-400">{deliveryInfo.note}</p>
@@ -1496,7 +1532,7 @@ function OfficialSendCard({
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
             </svg>
-            Open Contact Form
+            {ui.openContactForm}
           </a>
         ) : deliveryInfo.method === 'website' && deliveryInfo.websiteUrl ? (
           <a
@@ -1509,7 +1545,7 @@ function OfficialSendCard({
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
             </svg>
-            Visit Website
+            {ui.visitWebsite}
           </a>
         ) : official.phone ? (
           <a
@@ -1520,11 +1556,11 @@ function OfficialSendCard({
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
             </svg>
-            Call {formatPhone(official.phone)}
+            {ui.call} {formatPhone(official.phone)}
           </a>
         ) : (
           <span className="flex items-center justify-center gap-2 w-full py-2.5 bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400 rounded-lg text-sm">
-            No contact method available
+            {ui.noContactMethod}
           </span>
         )}
 
@@ -1551,7 +1587,7 @@ function OfficialSendCard({
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2" />
             </svg>
           )}
-          {copied ? 'Copied!' : 'Copy Message'}
+          {copied ? ui.copied : ui.copyMessage}
         </button>}
       </div>
 
@@ -1565,11 +1601,11 @@ function OfficialSendCard({
           <svg className="w-3 h-3 transition-transform group-open:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>
-          View &amp; edit message
+          {ui.viewEditMessage}
         </summary>
         <div className="mt-2 space-y-2">
           <div>
-            <label className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">Subject</label>
+            <label className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">{ui.subject}</label>
             <input
               type="text"
               value={message.subject}
@@ -1578,7 +1614,7 @@ function OfficialSendCard({
             />
           </div>
           <div>
-            <label className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">Message</label>
+            <label className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">{ui.message}</label>
             <textarea
               value={message.body}
               onChange={(e) => onEdit({ body: e.target.value })}

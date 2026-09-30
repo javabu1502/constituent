@@ -47,7 +47,15 @@ export interface ContactState {
   coreMessage: string;
   /** AI-drafted frame from the core pass (subject/opening/ask), reused when
    *  a recipient is added later so every letter shares one voice. */
-  coreFrame: { subject: string | null; opening: string | null; ask: string | null } | null;
+  coreFrame: {
+    subject: string | null;
+    opening: string | null;
+    ask: string | null;
+    /** Spanish reading copy of the core, for the sender's review only. */
+    bodyEs?: string | null;
+    /** The sender's own words in the language they wrote, appended to every letter. */
+    original?: { language: 'en' | 'es'; text: string } | null;
+  } | null;
   // Per-official messages keyed by official name (like PoliAct)
   messages: Record<string, OfficialMessage>;
   // Per-official loading states

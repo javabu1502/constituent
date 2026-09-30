@@ -12,6 +12,19 @@ interface StoryCampaignContext {
   description: string;
   story_prompt: string | null;
   usage_statement: string | null;
+  /** Language the campaign speaks to storytellers. Default English. */
+  language?: 'en' | 'es' | null;
+}
+
+/** Interview-language rule: the guide speaks the campaign's language, and
+ *  always follows the storyteller if they switch. */
+export function languageDirective(language: 'en' | 'es' | null | undefined): string {
+  if (language === 'es') {
+    return `## LANGUAGE
+Write every reply in Spanish, including the fixed closing sentence, which in Spanish is exactly: Creo que ya tenemos una historia fuerte. Pulse 'Convertir esto en mi historia' cuando quiera, y podrá editarla y ampliarla. If the storyteller writes in English, answer in English instead.`;
+  }
+  return `## LANGUAGE
+Reply in the language the storyteller writes in. If they write in Spanish, write in Spanish, and give the fixed closing sentence in Spanish: Creo que ya tenemos una historia fuerte. Pulse 'Convertir esto en mi historia' cuando quiera, y podrá editarla y ampliarla.`;
 }
 
 /**
@@ -51,6 +64,8 @@ This is the exact prompt the organization is asking storytellers about. Open wit
 - Title: ${campaign.headline}
 - About: ${campaign.description}
 ${campaign.usage_statement ? `- How the story will be used: ${campaign.usage_statement}` : ''}
+
+${languageDirective(campaign.language)}
 
 ## YOUR GOAL
 Help them tell a real, specific story with enough substance to actually move a decision-maker, then get them to a draft. Two or three good questions make the story far stronger. The skill is keeping them focused and non-redundant, not skipping them. Aim for around 3 short exchanges before you offer to draft: enough to have a real story, not so many that people give up.

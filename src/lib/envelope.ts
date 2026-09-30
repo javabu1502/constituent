@@ -15,6 +15,7 @@
  */
 import type { Official } from '@/lib/types';
 import { salutationTitle } from '@/lib/utils';
+import { formatOriginalWordsBlock, type SupportedLanguage } from '@/lib/language';
 
 export interface OfficialMessage {
   subject: string;
@@ -198,6 +199,10 @@ export function buildEnvelope(
      *  sender's name and address in separate fields and ask that neither
      *  appear in the text, so the draft ends with the ask. Default true. */
     signature?: boolean;
+    /** The sender's own words in the language they wrote (Spanish today),
+     *  appended after the ask so the official gets both the English letter
+     *  and the original. Plain lines only: no closing, no name. */
+    originalWords?: { language: SupportedLanguage; text: string } | null;
   }
 ): OfficialMessage {
   const lastName = official.lastName || official.name.split(' ').pop() || official.name;
@@ -260,11 +265,12 @@ export function buildEnvelope(
 
   // The core is the constituent's approved text and is NEVER altered; the
   // frame (subject, opener, closer) is ours to scrub.
+  const originalBlock = opts.originalWords?.text?.trim() ? `\n\n${formatOriginalWordsBlock(opts.originalWords)}` : '';
   return {
     subject: stripDashes(subject),
     body:
       opts.signature === false
-        ? `Dear ${sal} ${lastName},\n\n${stripDashes(opener)}\n\n${core}\n\n${stripDashes(closer)}`
-        : `Dear ${sal} ${lastName},\n\n${stripDashes(opener)}\n\n${core}\n\n${stripDashes(closer)}\n\nSincerely,\n${opts.senderName}\n${opts.city}, ${opts.stateCode} ${opts.zip}`,
+        ? `Dear ${sal} ${lastName},\n\n${stripDashes(opener)}\n\n${core}\n\n${stripDashes(closer)}${originalBlock}`
+        : `Dear ${sal} ${lastName},\n\n${stripDashes(opener)}\n\n${core}\n\n${stripDashes(closer)}${originalBlock}\n\nSincerely,\n${opts.senderName}\n${opts.city}, ${opts.stateCode} ${opts.zip}`,
   };
 }

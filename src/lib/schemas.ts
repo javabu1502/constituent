@@ -109,6 +109,7 @@ export const trackSendSchema = z.object({
 export const createCampaignSchema = z.object({
   campaign_type: z.enum(['advocacy', 'storytelling']).default('advocacy'),
   visibility: z.enum(['public', 'unlisted']).optional(),
+  language: z.enum(['en', 'es']).default('en'),
   headline: z.string().min(3).max(100),
   description: z.string().min(10).max(500),
   // Required for advocacy (enforced in superRefine); storytelling omits it and the
@@ -231,6 +232,7 @@ export const createCampaignSchema = z.object({
 // clear. Stage/parent structure and campaign_type are not editable.
 export const updateCampaignSchema = z
   .object({
+    language: z.enum(['en', 'es']).optional(),
     headline: z.string().min(3).max(100).optional(),
     description: z.string().min(10).max(500).optional(),
     issue_area: z.string().max(200).optional(),
@@ -367,6 +369,7 @@ export const messageFeedbackSchema = z.object({
 // generateFollowUpSchema below, which drafts follow-up MESSAGES to officials.
 export const followUpQuestionsSchema = z.object({
   headline: z.string().min(1).max(200),
+  language: z.enum(['en', 'es']).optional(),
   stance: z.enum(['support', 'oppose', 'undecided']).optional(),
   // Empty is valid: no story yet means the questions become gentle starters.
   personalWhy: z.string().max(2000, 'Your personal story is a bit long — please keep it under 2,000 characters.'),

@@ -312,6 +312,8 @@ export interface Campaign {
   bill_url: string | null;
   // Campaign type + moderation/visibility (storytelling vs advocacy)
   campaign_type: 'advocacy' | 'storytelling';
+  /** Language the participant-facing flows speak. Default 'en'. */
+  language?: 'en' | 'es';
   visibility: 'public' | 'unlisted';
   approval_status: 'pending' | 'approved' | 'rejected';
   reviewed_by: string | null;

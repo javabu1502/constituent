@@ -16,6 +16,7 @@ function publicCampaign(campaign: Record<string, unknown>) {
     target_level: campaign.target_level,
     status: campaign.status,
     campaign_type: campaign.campaign_type,
+    language: campaign.language ?? 'en',
     visibility: campaign.visibility,
     message_template: campaign.message_template,
     bill_level: campaign.bill_level,

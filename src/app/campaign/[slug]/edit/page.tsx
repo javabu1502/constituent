@@ -41,6 +41,7 @@ export default async function EditCampaignPage({
 
   const initial: CampaignEditInitial = {
     campaignType: campaign.campaign_type === 'storytelling' ? 'storytelling' : 'advocacy',
+    language: campaign.language === 'es' ? 'es' : 'en',
     headline: campaign.headline ?? '',
     description: campaign.description ?? '',
     // Creation stores category in issue_area and the picked issue in

@@ -41,6 +41,16 @@ export function ComposeStep({
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || 'Drafting failed');
       dispatch({ type: 'SET_CORE', payload: data.body });
+      dispatch({
+        type: 'SET_CORE_FRAME',
+        payload: {
+          subject: typeof data.subject === 'string' ? data.subject : null,
+          opening: typeof data.opening === 'string' ? data.opening : null,
+          ask: typeof data.ask === 'string' ? data.ask : null,
+          bodyEs: typeof data.body_es === 'string' ? data.body_es : null,
+          original: data.original && typeof data.original.text === 'string' ? data.original : null,
+        },
+      });
     } catch (err) {
       setError(err instanceof Error ? err.message : 'We could not draft your message — you can write it yourself below or try again.');
       // Let them write the core by hand if drafting is down.
@@ -87,6 +97,26 @@ export function ComposeStep({
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
               We add the greeting, each official&apos;s name, and your signature automatically — your words are never changed.
             </p>
+            {state.coreFrame?.original && (
+              <div className="mt-3 p-3 bg-gray-50 dark:bg-gray-700/40 border border-gray-200 dark:border-gray-600 rounded-xl space-y-2">
+                <p className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                  Su mensaje se enviará en inglés junto con sus propias palabras en español.
+                </p>
+                {state.coreFrame.bodyEs && (
+                  <details>
+                    <summary className="text-sm text-purple-700 dark:text-purple-300 cursor-pointer select-none">
+                      Leer el mensaje en español
+                    </summary>
+                    <p className="mt-2 text-sm text-gray-600 dark:text-gray-400 whitespace-pre-line border-l-2 border-purple-400 pl-3">
+                      {state.coreFrame.bodyEs}
+                    </p>
+                    <p className="mt-2 text-xs text-gray-500 dark:text-gray-400">
+                      Esta es una traducción para que usted la revise. Si edita el texto en inglés arriba, esta copia no cambia.
+                    </p>
+                  </details>
+                )}
+              </div>
+            )}
           </div>
           <div className="flex gap-2">
             <Button

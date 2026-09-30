@@ -22,6 +22,7 @@ interface ResolvedBill {
 
 export interface CampaignEditInitial {
   campaignType: 'advocacy' | 'storytelling';
+  language?: 'en' | 'es';
   headline: string;
   description: string;
   issueArea: string;
@@ -47,6 +48,7 @@ export function CampaignForm({
 
   const [headline, setHeadline] = useState(edit?.initial.headline ?? (searchParams.get('ask') || ''));
   const [description, setDescription] = useState(edit?.initial.description ?? '');
+  const [language, setLanguage] = useState<'en' | 'es'>(edit?.initial.language ?? 'en');
   const [issueArea, setIssueArea] = useState(edit?.initial.issueArea ?? (searchParams.get('issue') || ''));
   const [issueCategory, setIssueCategory] = useState(edit?.initial.issueCategory ?? (searchParams.get('category') || ''));
   const [targetLevel, setTargetLevel] = useState<'federal' | 'state' | 'both'>(edit?.initial.targetLevel ?? 'federal');
@@ -372,6 +374,7 @@ export function CampaignForm({
       // Branding is applied server-side from the org's profile settings.
       const sharedBody = {
         campaign_type: campaignType,
+        language,
         headline: headline.trim(),
         description: description.trim(),
         issue_area: issueCategory || issueArea,
@@ -626,6 +629,28 @@ export function CampaignForm({
         )}
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{description.length}/500 characters</p>
         <FieldError field="description" />
+      </div>
+
+      {/* Language the participant-facing flow speaks. Spanish participants get a
+          bilingual letter either way; this switches the buttons, labels, and
+          the AI guide to Spanish so they can get through the flow. */}
+      <div data-field="language">
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          Language
+        </label>
+        <select
+          value={language}
+          onChange={(e) => setLanguage(e.target.value === 'es' ? 'es' : 'en')}
+          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+        >
+          <option value="en">English</option>
+          <option value="es">Español</option>
+        </select>
+        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+          {campaignType === 'storytelling'
+            ? 'The storyteller flow and the interview guide speak this language. Write your prompt in it too.'
+            : 'The participation flow speaks this language. Anyone who writes in Spanish sends a bilingual letter: their Spanish plus an English rendering.'}
+        </p>
       </div>
 
       {campaignType === 'advocacy' && (

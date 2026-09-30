@@ -76,7 +76,7 @@ export async function POST(request: NextRequest) {
   }
 
   const {
-    campaign_type, headline, description, issue_area, issue_subtopic,
+    campaign_type, language, headline, description, issue_area, issue_subtopic,
     target_level, direction, message_template, distribution_plan,
     bill_level, bill_state, bill_ref, bill_title, bill_url,
     story_prompt, usage_statement, usage_tags, attribution_options, edit_revoke_policy, recipient_email,
@@ -152,6 +152,7 @@ export async function POST(request: NextRequest) {
       approved_at: new Date().toISOString(),
       headline,
       description,
+      language: language || 'en',
       // Actions carry the campaign's issue; it is set once on the parent.
       issue_area: parent ? parent.issue_area : issue_area,
       issue_subtopic: parent ? parent.issue_subtopic : issue_subtopic || null,

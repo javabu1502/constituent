@@ -7,6 +7,7 @@ import { getClientIp } from '@/lib/rate-limit';
 import { enforceDailyQuota, resolveUsageIdentity } from '@/lib/usage-quota';
 import { sanitizeAiJurisdiction } from '@/lib/issue-jurisdiction';
 import { validateCampaignAsk } from '@/lib/envelope';
+import { detectLanguage, translateToEnglish, type SupportedLanguage } from '@/lib/language';
 import {
   askAddressesOfficial,
   askContradictsStance,
@@ -91,10 +92,39 @@ export async function POST(request: NextRequest) {
     campaign = data;
   }
 
+  // Bilingual: a participant who writes in Spanish gets an English letter
+  // drafted from a faithful translation of their words, plus their original
+  // Spanish appended by the envelope, plus a Spanish reading copy of the
+  // English core so they can review what goes out in their name. The
+  // pipeline and every gate below stay English.
+  const inWhy = parsed.data.personalWhy?.trim() || '';
+  const inIssue = parsed.data.issue?.trim() || '';
+  const inGoal = parsed.data.ask?.trim() || '';
+  const inputLanguage: SupportedLanguage = detectLanguage([inWhy, inIssue, inGoal].filter(Boolean).join('\n'));
+  let personalWhy = inWhy;
+  let inputIssue = inIssue;
+  let inputGoal = inGoal;
+  let original: { language: SupportedLanguage; text: string } | null = null;
+  if (inputLanguage === 'es') {
+    const [whyEn, issueEn, askEn] = await Promise.all([
+      inWhy ? translateToEnglish(inWhy) : Promise.resolve(null),
+      inIssue && detectLanguage(inIssue) === 'es' ? translateToEnglish(inIssue) : Promise.resolve(null),
+      inGoal && detectLanguage(inGoal) === 'es' ? translateToEnglish(inGoal) : Promise.resolve(null),
+    ]);
+    if (inWhy && !whyEn) {
+      console.warn('[generate-core] translation failed; drafting from the original text');
+    }
+    personalWhy = whyEn || inWhy;
+    inputIssue = issueEn || inIssue;
+    inputGoal = askEn || inGoal;
+    // Their own words, verbatim, are what the official reads in Spanish.
+    if (inWhy) original = { language: 'es', text: inWhy };
+  }
+
   // Official weigh-ins carry the PARTICIPANT's stance; org campaigns carry
   // the campaign's own direction; freeform mode carries whatever the
   // constituent asked for, in their ask.
-  const hasStory = Boolean(parsed.data.personalWhy?.trim());
+  const hasStory = Boolean(personalWhy);
   const officialStance =
     campaign?.is_official && parsed.data.stance && parsed.data.stance !== 'undecided' ? parsed.data.stance : null;
   // Official weigh-ins are questions ("Should Congress protect Head Start
@@ -140,8 +170,8 @@ Weights: 2 = primary authority, 1 = shares authority, 0 = no meaningful
 authority. Be strict about 0s: a US senator cannot fix trash pickup; a city
 council cannot fix Social Security.
 
-${officialStance ? '\nAlso write "side": the answer you argued for, exactly "YES" or "NO".\n' : ''}
-Return ONLY JSON. Never explain, refuse, or add notes: {"body": "...", "subject": "...", "opening": "...", "ask": "..."${officialStance ? ', "side": "YES"|"NO"' : ''}, "jurisdiction": {"federal": 0|1|2, "state": 0|1|2, "local": 0|1|2}}`;
+${officialStance ? '\nAlso write "side": the answer you argued for, exactly "YES" or "NO".\n' : ''}${original ? '\nThe constituent wrote in Spanish. Also write "body_es": a faithful Spanish rendering of "body", sentence for sentence, so they can read what is being sent in their name. Same facts, same order, nothing added. No dashes.\n' : ''}
+Return ONLY JSON. Never explain, refuse, or add notes: {"body": "...", "subject": "...", "opening": "...", "ask": "..."${officialStance ? ', "side": "YES"|"NO"' : ''}${original ? ', "body_es": "..."' : ''}, "jurisdiction": {"federal": 0|1|2, "state": 0|1|2, "local": 0|1|2}}`;
 
   // The precise action the ask sentence must carry (validated after).
   const stanceVerb =
@@ -163,11 +193,11 @@ ABOUT: ${campaign.description}
 ${campaign.message_template ? `CAMPAIGN TALKING POINTS: ${campaign.message_template}` : ''}
 POSITION: ${position}
 ${askInstruction}`
-    : `ISSUE: ${parsed.data.issue}
-${parsed.data.ask ? `THE CONSTITUENT'S GOAL: ${parsed.data.ask}` : ''}
+    : `ISSUE: ${inputIssue}
+${inputGoal ? `THE CONSTITUENT'S GOAL: ${inputGoal}` : ''}
 POSITION: ${position}`;
   const user2 = `${user}
-${hasStory ? `THE CONSTITUENT'S OWN WORDS ABOUT WHY THIS MATTERS TO THEM: """${parsed.data.personalWhy!.trim()}"""` : 'The constituent did not share a personal story. Argue only from their goal and general reasoning, and say nothing about their own life or town.'}
+${hasStory ? `THE CONSTITUENT'S OWN WORDS ABOUT WHY THIS MATTERS TO THEM${original ? ' (translated from their Spanish)' : ''}: """${personalWhy}"""` : 'The constituent did not share a personal story. Argue only from their goal and general reasoning, and say nothing about their own life or town.'}
 
 Draft the core message.`;
 
@@ -177,7 +207,7 @@ Draft the core message.`;
     // a bad draft must never be the thing we show a constituent.
     // Everything the constituent actually said — the ONLY licence for any
     // first-person identity claim in the draft.
-    const userOwnWords = [parsed.data.issue, parsed.data.ask, parsed.data.personalWhy].filter(Boolean).join(' ');
+    const userOwnWords = [inputIssue, inputGoal, personalWhy].filter(Boolean).join(' ');
     // The only licensed sources for any statistic in the draft: the campaign's
     // own material and the constituent's own words.
     const statSource = [
@@ -185,14 +215,14 @@ Draft the core message.`;
       campaign?.bill_ref, campaign?.bill_title, userOwnWords,
     ].filter(Boolean).join(' ');
 
-    type CoreOut = { body?: string; subject?: unknown; opening?: unknown; ask?: unknown; side?: unknown; jurisdiction?: unknown } | null;
+    type CoreOut = { body?: string; subject?: unknown; opening?: unknown; ask?: unknown; side?: unknown; body_es?: unknown; jurisdiction?: unknown } | null;
     let out: CoreOut = null;
     let body = '';
     let correction = '';
     // Why each attempt was rejected, so a 502 in the logs says what happened.
     const rejects: string[] = [];
     for (let attempt = 0; attempt < 2; attempt++) {
-      const rawOut = await callClaude(correction ? `${system}\n\n${correction}` : system, user2, 1100);
+      const rawOut = await callClaude(correction ? `${system}\n\n${correction}` : system, user2, original ? 1800 : 1100);
       out = extractJSON(rawOut) as CoreOut;
       if (!out) {
         // Prose instead of JSON is almost always the model arguing with the
@@ -335,7 +365,10 @@ Draft the core message.`;
     // AI jurisdiction is advisory: the client applies it ONLY when no
     // deterministic rule matched the issue text.
     const jurisdiction = sanitizeAiJurisdiction(out?.jurisdiction)?.weights ?? null;
-    return NextResponse.json({ body, subject, opening, ask, jurisdiction });
+    // Spanish reading copy of the core: for the participant's eyes, never sent.
+    const rawBodyEs = original ? deDash(String(out?.body_es ?? '').trim()) : '';
+    const body_es = rawBodyEs.length >= 40 ? rawBodyEs : null;
+    return NextResponse.json({ body, subject, opening, ask, jurisdiction, body_es, original });
   } catch (err) {
     console.error('[generate-core] failed:', err);
     return NextResponse.json({ error: 'Message drafting is unavailable right now' }, { status: 503 });

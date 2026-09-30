@@ -3,6 +3,7 @@ import { callClaude, extractJSON, deDash } from '@/lib/claude';
 import { followUpQuestionsSchema, parseBody } from '@/lib/schemas';
 import { chatLimiter, getClientIp } from '@/lib/rate-limit';
 import { enforceDailyQuota, resolveUsageIdentity } from '@/lib/usage-quota';
+import { detectLanguage } from '@/lib/language';
 
 /**
  * POST /api/follow-up-questions
@@ -58,7 +59,11 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Daily limit reached. Try again tomorrow.' }, { status: 429 });
   }
 
-  const { headline, stance, personalWhy } = parsed.data;
+  const { headline, stance, personalWhy, language } = parsed.data;
+  // Ask in the language the participant is working in: the campaign's, or
+  // theirs if they clearly wrote in the other one.
+  const askInSpanish = language === 'es' ? detectLanguage(personalWhy) !== 'en' || !personalWhy.trim() : detectLanguage(personalWhy) === 'es';
+  const languageRule = askInSpanish ? '\n- Write the questions in Spanish.' : '';
   const userContent = [
     `CAMPAIGN HEADLINE: ${headline}`,
     stance ? `THEIR STANCE: ${stance}` : null,
@@ -68,7 +73,7 @@ export async function POST(request: Request) {
     .join('\n\n');
 
   try {
-    const text = await callClaude(FOLLOW_UP_QUESTIONS_PROMPT, userContent, 400);
+    const text = await callClaude(FOLLOW_UP_QUESTIONS_PROMPT + languageRule, userContent, 400);
     const json = extractJSON(text) as { questions?: unknown } | null;
     const questions = Array.isArray(json?.questions)
       ? json.questions
