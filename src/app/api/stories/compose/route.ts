@@ -5,7 +5,7 @@ import { storyComposeSchema, parseBody } from '@/lib/schemas';
 import { chatLimiter, getClientIp } from '@/lib/rate-limit';
 import { enforceDailyQuota, resolveUsageIdentity } from '@/lib/usage-quota';
 import { verifyTurnstile } from '@/lib/turnstile';
-import { draftProblems, draftWordBudget } from '@/lib/story-draft-check';
+import { draftProblems, draftWordBudget, draftWordFloor } from '@/lib/story-draft-check';
 
 /**
  * POST /api/stories/compose
@@ -58,10 +58,12 @@ export async function POST(request: Request) {
     .join('\n\n');
   const tellerText = messages.filter((m) => m.role === 'user').map((m) => m.content).join('\n');
   const tellerWords = tellerText.split(/\s+/).filter(Boolean).length;
-  if (!isRevision && tellerWords < 60) {
+  // Matches the client's lowest hand-off path (guide said ready + 30 words).
+  if (!isRevision && tellerWords < 30) {
     return NextResponse.json({ error: 'Could not compose a story yet. Try sharing a little more first.' }, { status: 422 });
   }
-  const maxWords = draftWordBudget(tellerWords);
+  const maxWords = Math.max(draftWordBudget(tellerWords), draftWordFloor(tellerWords) + 60);
+  const minWords = draftWordFloor(tellerWords);
 
   try {
     // Revision mode: the storyteller has a draft and a plain-language edit
@@ -70,14 +72,14 @@ export async function POST(request: Request) {
       ? `INTERVIEW TRANSCRIPT (source of truth for facts):\n${transcript}\n\nCURRENT TITLE: ${currentTitle?.trim() || '(none)'}\n\nCURRENT DRAFT:\n${currentBody!.trim()}\n\nSTORYTELLER'S EDIT REQUEST: ${revisionNote!.trim()}`
       : transcript;
     const systemBase = isRevision ? STORY_REVISE_PROMPT : STORY_COMPOSE_PROMPT;
-    const lengthNote = isRevision ? '' : `\n\nThe storyteller wrote ${tellerWords} words. Write no more than ${maxWords} words.`;
+    const lengthNote = isRevision ? '' : `\n\nThe storyteller wrote ${tellerWords} words. Write at least ${minWords} words and no more than ${maxWords}. Develop what they said; do not restate it.`;
     let json: { title?: string; body?: string; notes?: unknown } | null = null;
     let correction = '';
     for (let attempt = 0; attempt < 2; attempt++) {
       const text = await callClaude(`${systemBase}${lengthNote}${correction ? `\n\n${correction}` : ''}`, userContent, 1600);
       json = extractJSON(text) as { title?: string; body?: string; notes?: unknown } | null;
       if (!json || typeof json.body !== 'string' || json.body.trim().length < 20) break;
-      const problems = draftProblems(json.body, tellerText, isRevision ? null : maxWords);
+      const problems = draftProblems(json.body, tellerText, isRevision ? null : maxWords, isRevision ? null : minWords);
       if (problems.length === 0 || attempt === 1) break;
       correction = `YOUR PREVIOUS DRAFT HAD THESE PROBLEMS: ${problems.join('; ')}. Rewrite it using only what the storyteller said.`;
     }
