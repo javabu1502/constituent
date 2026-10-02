@@ -69,6 +69,16 @@ export function CampaignForm({
   const [campaignType] = useState<'advocacy' | 'storytelling'>(
     edit?.initial.campaignType ?? initialType ?? (searchParams.get('type') === 'storytelling' ? 'storytelling' : 'advocacy')
   );
+  const sectionTitles =
+    campaignType === 'storytelling'
+      ? ['The campaign', 'How stories are collected']
+      : ['The ask', 'Who to reach', 'How supporters take part'];
+  const SectionHeading = ({ n, title }: { n: number; title: string }) => (
+    <h2 className="flex items-center gap-2 text-base font-semibold text-gray-900 dark:text-white pt-2 border-t border-gray-100 dark:border-gray-700 first:border-0 first:pt-0">
+      <span className="w-6 h-6 rounded-full bg-purple-600 text-white text-xs font-bold flex items-center justify-center">{n}</span>
+      {title}
+    </h2>
+  );
 
   // Stage mode: arriving via "Add a stage" on a parent campaign
   // (?parent=<id>&parent_name=<headline>&goal=<stage_goal>). The stage becomes
@@ -503,7 +513,7 @@ export function CampaignForm({
       {parentCampaignId && campaignType === 'advocacy' && (
         <div className="p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700 rounded-xl space-y-3">
           <p className="text-sm text-blue-800 dark:text-blue-300">
-            <span className="font-semibold">Adding an action{parentName ? ` to “${parentName}”` : ''}.</span> This
+            <span className="font-semibold">Adding a step{parentName ? ` to “${parentName}”` : ''}.</span> This
             action only messages the officials involved in its step, and its results count toward the campaign total.
           </p>
           <div data-field="stageGoal">
@@ -587,6 +597,20 @@ export function CampaignForm({
           )}
         </div>
       )}
+
+      {/* Three labeled sections so a long form reads as a short path. */}
+      {!edit && (
+        <ol className="flex flex-wrap items-center gap-2 text-xs text-gray-500 dark:text-gray-400 -mb-1">
+          {sectionTitles.map((title, i) => (
+            <li key={title} className="flex items-center gap-2">
+              <span className="w-5 h-5 rounded-full bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300 font-semibold flex items-center justify-center">{i + 1}</span>
+              <span>{title}</span>
+              {i < sectionTitles.length - 1 && <span className="text-gray-300 dark:text-gray-600">·</span>}
+            </li>
+          ))}
+        </ol>
+      )}
+      <SectionHeading n={1} title={sectionTitles[0]} />
 
       {/* Headline */}
       <div data-field="headline">
@@ -674,6 +698,8 @@ export function CampaignForm({
         <FieldError field="issueArea" />
       </div>
       )}
+
+      {campaignType === 'advocacy' && <SectionHeading n={2} title={sectionTitles[1]} />}
 
       {/* Target Level */}
       <div>
@@ -876,10 +902,12 @@ export function CampaignForm({
       </div>
       )}
 
+      {campaignType === 'advocacy' && <SectionHeading n={3} title={sectionTitles[2]} />}
+
       {/* Message Template (optional) */}
       <div>
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-          {parentCampaignId ? 'Talking points for this stage' : 'Message Template'}{' '}
+          {parentCampaignId ? 'Talking points for this step' : 'Talking points'}{' '}
           <span className="text-gray-400 dark:text-gray-500 font-normal">(optional)</span>
         </label>
         {parentCampaignId && (
@@ -912,6 +940,8 @@ export function CampaignForm({
 
         </>
       )}
+
+      {campaignType === 'storytelling' && <SectionHeading n={2} title={sectionTitles[1]} />}
 
       {/* Storytelling fields */}
       {campaignType === 'storytelling' && (

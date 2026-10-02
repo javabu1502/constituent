@@ -35,14 +35,22 @@ const COPY = {
 export default async function CreateCampaignPage({
   searchParams,
 }: {
-  searchParams: Promise<{ type?: string }>;
+  searchParams: Promise<{ type?: string; parent?: string; parent_name?: string }>;
 }) {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
 
-  const { type } = await searchParams;
+  const { type, parent, parent_name } = await searchParams;
   const isStory = type === 'storytelling';
-  const copy = isStory ? COPY.storytelling : COPY.advocacy;
+  // Adding a step to an existing campaign: say so, or people think they
+  // lost their place and are starting a second, unrelated campaign.
+  const copy = parent
+    ? {
+        ...COPY.advocacy,
+        heading: parent_name ? `Add a step to “${parent_name}”` : 'Add a step to your campaign',
+        subtitle: 'A step is one push inside your campaign, like a cosponsor ask or a committee vote. It gets its own targets and share link.',
+      }
+    : isStory ? COPY.storytelling : COPY.advocacy;
   const createPath = `/campaign/create${isStory ? '?type=storytelling' : '?type=advocacy'}`;
 
   // Campaigns are run by advocacy organizations. Signed-in constituents get a

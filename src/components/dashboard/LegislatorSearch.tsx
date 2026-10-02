@@ -27,11 +27,15 @@ export function LegislatorSearch({
 
   return (
     <div className="relative mb-8">
+      <label htmlFor="legislator-search" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
+        Look up a lawmaker
+      </label>
       <input
+        id="legislator-search"
         type="text"
         value={q}
         onChange={(e) => setQ(e.target.value)}
-        placeholder="Look up a legislator — intel, whip status, notes, constituent pressure…"
+        placeholder="Search by name"
         className="w-full px-4 py-2.5 text-sm rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-600"
       />
       {matches.length > 0 && (

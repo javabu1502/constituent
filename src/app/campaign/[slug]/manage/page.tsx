@@ -142,7 +142,7 @@ export default async function ManageCampaignPage({
             href={`/campaign/${campaign.slug}/report`}
             className="px-3 py-1.5 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 text-sm font-medium rounded-lg transition-colors"
           >
-            Report
+            Impact report
           </Link>
         )}
         <CopyLinkButton slug={campaign.slug} />
@@ -160,34 +160,34 @@ export default async function ManageCampaignPage({
         <DeleteCampaignButton slug={campaign.slug} headline={campaign.headline} />
       </div>
 
-      {/* Actions (advocacy only) */}
+      {/* Steps (advocacy only) */}
       {!isStory && (
       <section>
         <div className="flex items-center justify-between gap-3 mb-1">
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Actions</h2>
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Steps</h2>
           <Link
             href={addActionHref}
             className="text-sm font-medium px-4 py-2 rounded-lg bg-purple-600 hover:bg-purple-700 text-white transition-colors"
           >
-            + Add an action
+            + Add a step
           </Link>
         </div>
         <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
-          Break your campaign into actions, like a cosponsor push or a committee vote. Each one has its own targets and share link.
+          Break your campaign into steps, like a cosponsor push or a committee vote. Each step has its own targets and share link.
         </p>
 
         {actions.length === 0 ? (
           <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-8 text-center">
-            <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-2">No actions yet</h3>
+            <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-2">No steps yet</h3>
             <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 max-w-md mx-auto">
-              Start with a cosponsor push or a committee vote. When the bill moves, add the next action and your past
+              Start with a cosponsor push or a committee vote. When the bill moves, add the next step and your past
               supporters get invited back.
             </p>
             <Link
               href={addActionHref}
               className="inline-block px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white text-sm font-medium rounded-lg transition-colors"
             >
-              + Add an action
+              + Add a step
             </Link>
           </div>
         ) : (

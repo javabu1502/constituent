@@ -224,7 +224,7 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
             <p className="text-gray-600 dark:text-gray-400 mt-1">{campaign.headline}</p>
           </div>
           <Link href={`/campaign/${slug}/report`} className="shrink-0 text-sm font-medium px-4 py-2 rounded-lg bg-purple-600 hover:bg-purple-700 text-white transition-colors">
-            View impact report
+            Impact report
           </Link>
         </div>
         {/* No coalition/outcome tracking here: storytelling campaigns collect
@@ -427,7 +427,7 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
           </p>
         </div>
         <Link href={`/campaign/${slug}/report`} className="shrink-0 text-sm font-medium px-4 py-2 rounded-lg bg-purple-600 hover:bg-purple-700 text-white transition-colors">
-          View impact report
+          Impact report
         </Link>
       </div>
 

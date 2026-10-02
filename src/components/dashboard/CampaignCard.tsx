@@ -9,13 +9,14 @@ export type CampaignRow = Record<string, string | number | null>;
 /**
  * One campaign card — used by the constituent dashboard's "My Campaigns"
  * section, the org dashboard's grouped sections, and the public read-only
- * demo. Advocacy cards stay slim (the card got unusably busy — Jared, 09-18):
- * Manage + copy-link for owners; the demo swaps Manage for the read-only
- * Analytics/Report views since /manage is owner-gated.
+ * demo. The demo shows the read-only Analytics/Impact report views since
+ * /manage is owner-gated.
  *
- * Storytelling campaigns have no actions, so their manage page was only a
- * toolbar one click away (Jared, 10-02). Their card carries that toolbar
- * directly: View, Analytics, Share, Embed, QR, edit, delete.
+ * 10-02 (dashboard UX audit, Jared approved): every owner card carries the
+ * manage toolbar directly (View, Analytics, Impact report, Share, Embed, QR,
+ * edit, delete) so there is one learnable card shape and no empty hop. The
+ * manage page is now only where an advocacy campaign's steps live, reached
+ * from the card's footer link.
  */
 export function CampaignCard({
   campaign,
@@ -82,7 +83,7 @@ export function CampaignCard({
               </svg>
               <span className="text-sm font-bold">{count}</span>
               <span className="text-xs text-gray-500 dark:text-gray-400">
-                {isStory ? `stor${count === 1 ? 'y' : 'ies'}` : `action${count !== 1 ? 's' : ''}`}
+                {isStory ? `stor${count === 1 ? 'y' : 'ies'}` : `message${count !== 1 ? 's' : ''}`}
               </span>
             </div>
           </div>
@@ -117,7 +118,7 @@ export function CampaignCard({
                 href={`/campaign/${campaign.slug}/report`}
                 className="px-3 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 text-sm font-medium rounded-lg transition-colors"
               >
-                Report
+                Impact report
               </Link>
             )}
             <Link
@@ -127,7 +128,7 @@ export function CampaignCard({
               Public page
             </Link>
           </>
-        ) : campaign.campaign_type === 'storytelling' ? (
+        ) : (
           <div className="flex flex-wrap items-center gap-2 w-full">
             <Link
               href={`/campaign/${campaign.slug}`}
@@ -141,6 +142,14 @@ export function CampaignCard({
             >
               Analytics
             </Link>
+            {campaign.campaign_type !== 'storytelling' && (
+              <Link
+                href={`/campaign/${campaign.slug}/report`}
+                className="px-3 py-1.5 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 text-sm font-medium rounded-lg transition-colors"
+              >
+                Impact report
+              </Link>
+            )}
             <CopyLinkButton slug={campaign.slug as string} />
             <EmbedCodeButton slug={campaign.slug as string} />
             <QrCodeButton slug={campaign.slug as string} />
@@ -155,21 +164,19 @@ export function CampaignCard({
             </Link>
             <DeleteCampaignButton slug={campaign.slug as string} headline={String(campaign.headline ?? '')} />
           </div>
-        ) : (
-          <>
-            <Link
-              href={`/campaign/${campaign.slug}/manage`}
-              className="flex-1 text-center px-3 py-2 bg-purple-600 hover:bg-purple-700 text-white text-sm font-medium rounded-lg transition-colors"
-            >
-              Manage
-            </Link>
-            <CopyLinkButton slug={campaign.slug as string} />
-          </>
         )}
       </div>
-      {stages.length > 0 && (
+      {!isDemo && campaign.campaign_type !== 'storytelling' && (
         <p className="mt-3 text-xs text-gray-500 dark:text-gray-400">
-          {stages.length} action{stages.length !== 1 ? 's' : ''} in this campaign
+          {stages.length > 0 ? `${stages.length} step${stages.length !== 1 ? 's' : ''} · ` : ''}
+          <Link href={`/campaign/${campaign.slug}/manage`} className="text-purple-600 dark:text-purple-400 hover:underline">
+            {stages.length > 0 ? 'Manage steps' : 'Add a step'} &rarr;
+          </Link>
+        </p>
+      )}
+      {isDemo && stages.length > 0 && (
+        <p className="mt-3 text-xs text-gray-500 dark:text-gray-400">
+          {stages.length} step{stages.length !== 1 ? 's' : ''} in this campaign
         </p>
       )}
     </div>

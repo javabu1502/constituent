@@ -110,7 +110,7 @@ export function OrgDashboard({
             </Link>
           )}
           <Link href={isDemo ? '/demo/report' : '/dashboard/report'} className="text-sm font-medium px-4 py-2 rounded-lg border border-purple-300 dark:border-purple-700 text-purple-700 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/20 transition-colors">
-            Organization report
+            All-campaign report
           </Link>
           {!isDemo && (
             <Link href="/campaign/create" className="text-sm font-medium px-4 py-2 rounded-lg bg-purple-600 hover:bg-purple-700 text-white transition-colors">
@@ -122,13 +122,13 @@ export function OrgDashboard({
 
       <LegislatorSearch roster={legislatorRoster} intelBasePath={isDemo ? '/demo/legislator' : '/dashboard/legislator'} />
 
-      <div className="grid grid-cols-3 gap-4 mb-10">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
         <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
           <p className="text-sm text-gray-500 dark:text-gray-400">Campaigns</p>
           <p className="text-3xl font-bold text-gray-900 dark:text-white mt-1">{topLevelCampaigns.length}</p>
         </div>
         <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
-          <p className="text-sm text-gray-500 dark:text-gray-400">Constituent actions</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400">Messages sent</p>
           <p className="text-3xl font-bold text-gray-900 dark:text-white mt-1">{totalActions.toLocaleString()}</p>
         </div>
         <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
@@ -140,35 +140,15 @@ export function OrgDashboard({
       {topLevelCampaigns.length === 0 ? (
         // First run: a new org lands here with no guidance otherwise. This
         // card disappears forever once the first campaign exists.
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-8 max-w-2xl mx-auto">
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">Welcome to your advocacy dashboard</h2>
-          <p className="text-gray-600 dark:text-gray-400 mb-6">Here&rsquo;s how campaigns work on My Democracy:</p>
-          <ol className="space-y-4 mb-8">
-            {[
-              ['Create a campaign', 'Set the ask, link a bill, and add talking points. We review every campaign before it goes live.'],
-              ['Share your link', 'Supporters open it and write to their own representatives. It takes them about two minutes.'],
-              ['Track results', 'Actions, analytics, a whip board for legislator positions, and funder-ready reports all live on this dashboard.'],
-            ].map(([title, body], i) => (
-              <li key={title} className="flex items-start gap-3">
-                <span className="shrink-0 w-6 h-6 rounded-full bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300 text-sm font-bold flex items-center justify-center mt-0.5">
-                  {i + 1}
-                </span>
-                <span>
-                  <span className="block font-medium text-gray-900 dark:text-white">{title}</span>
-                  <span className="block text-sm text-gray-600 dark:text-gray-400">{body}</span>
-                </span>
-              </li>
-            ))}
-          </ol>
+        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-8 max-w-2xl mx-auto text-center">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Start your first campaign</h2>
+          <p className="text-gray-600 dark:text-gray-400 mb-6">
+            A campaign is one link. Supporters open it and write to their own representatives. It goes live the moment you launch it.
+          </p>
           {!isDemo && (
-            <div className="flex flex-col sm:flex-row gap-3">
-              <Link href="/campaign/create" className="text-center px-4 py-2.5 bg-purple-600 hover:bg-purple-700 text-white text-sm font-medium rounded-lg">
-                Create your first campaign
-              </Link>
-              <Link href="/dashboard/settings" className="text-center px-4 py-2.5 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 text-sm font-medium rounded-lg">
-                Set up your organization
-              </Link>
-            </div>
+            <Link href="/campaign/create" className="inline-block px-5 py-2.5 bg-purple-600 hover:bg-purple-700 text-white text-sm font-medium rounded-lg">
+              + New campaign
+            </Link>
           )}
         </div>
       ) : (
