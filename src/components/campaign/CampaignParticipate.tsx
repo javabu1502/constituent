@@ -11,6 +11,8 @@ import { Button } from '@/components/ui/Button';
 import { formatPhone, salutationTitle } from '@/lib/utils';
 import { buildEnvelope } from '@/lib/envelope';
 import { participateCopy, type ParticipateCopy } from '@/lib/copy/participate';
+import { MicButton } from '@/components/chat/MicButton';
+import { CAMPAIGN_GUIDE_HANDOFF } from '@/lib/campaign-interview-prompt';
 import { detectBillReferences, CURRENT_CONGRESS } from '@/lib/bills';
 import {
   determineDeliveryMethod,
@@ -134,6 +136,16 @@ export function CampaignParticipate({
   const [state, setState] = useState('');
   const [zip, setZip] = useState('');
   const [personalWhy, setPersonalWhy] = useState('');
+  // Guided chat (default) vs. the plain textarea. The guide's own turns are
+  // never passed to drafting: only the participant's messages become their
+  // "why", so nothing we asked can be mistaken for something they said.
+  const [composeMode, setComposeMode] = useState<'chat' | 'write'>('chat');
+  const [chatMessages, setChatMessages] = useState<{ role: 'user' | 'assistant'; content: string }[]>(() => [
+    { role: 'assistant', content: t.guideGreeting(campaign.headline) },
+  ]);
+  const [chatInput, setChatInput] = useState('');
+  const [chatStreaming, setChatStreaming] = useState(false);
+  const chatScrollRef = useRef<HTMLDivElement>(null);
   // Optional follow-up questions (compose step sub-phase): 1-4 short AI
   // questions that draw out concrete detail before drafting. Empty array =
   // phase not active.
@@ -198,6 +210,68 @@ export function CampaignParticipate({
     } finally {
       setCoreStatus('idle');
     }
+  };
+
+  useEffect(() => {
+    chatScrollRef.current?.scrollTo({ top: chatScrollRef.current.scrollHeight, behavior: 'smooth' });
+  }, [chatMessages, chatStreaming]);
+
+  const sendChat = async () => {
+    const text = chatInput.trim();
+    if (!text || chatStreaming) return;
+    setError(null);
+    setChatInput('');
+    const next = [...chatMessages, { role: 'user' as const, content: text }];
+    setChatMessages(next);
+    setChatStreaming(true);
+    try {
+      const turnstileToken = await getToken().catch(() => '');
+      const res = await fetch('/api/chat/campaign-interview', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          campaignSlug: campaign.slug,
+          stance: isOfficial ? stance ?? undefined : undefined,
+          messages: next.slice(-30),
+          turnstileToken: turnstileToken || undefined,
+        }),
+      });
+      if (!res.ok || !res.body) throw new Error((await res.text().catch(() => '')) || t.draftFailed);
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+      let acc = '';
+      setChatMessages((prev) => [...prev, { role: 'assistant', content: '' }]);
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        acc += decoder.decode(value, { stream: true });
+        const shown = acc.replace(/\s*[—–]\s*/g, ', ').replace(/\*\*/g, '');
+        setChatMessages((prev) => {
+          const copy = [...prev];
+          copy[copy.length - 1] = { role: 'assistant', content: shown };
+          return copy;
+        });
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : t.draftFailed);
+      setChatMessages((prev) => (prev[prev.length - 1]?.content === '' ? prev.slice(0, -1) : prev));
+    } finally {
+      setChatStreaming(false);
+    }
+  };
+
+  // The participant's own chat turns become their "why". Substance, not turn
+  // count: about 40 of their words, or the guide's explicit hand-off.
+  const chatAnswers = chatMessages.filter((m) => m.role === 'user').map((m) => m.content.trim()).filter(Boolean);
+  const chatWords = chatAnswers.reduce((n, a) => n + a.split(/\s+/).filter(Boolean).length, 0);
+  const lastGuide = [...chatMessages].reverse().find((m) => m.role === 'assistant')?.content ?? '';
+  const guideHandedOff = CAMPAIGN_GUIDE_HANDOFF.test(lastGuide);
+  const canDraftFromChat = chatWords >= 40 || (guideHandedOff && chatWords >= 15);
+  const draftFromChat = () => {
+    const why = chatAnswers.join('\n\n').slice(0, 4000);
+    setPersonalWhy(why);
+    fireFunnel('participate_guide_completed');
+    void draftCore(why);
   };
 
   // Between the why-input and drafting: fetch 1-4 short follow-up questions.
@@ -776,7 +850,7 @@ export function CampaignParticipate({
             <div>
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{t.followUpTitle}</h3>
               <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                Your answers make your letter specific. Skip anything.
+                {t.followUpHelp}
               </p>
             </div>
             <div className="space-y-4">
@@ -807,9 +881,67 @@ export function CampaignParticipate({
                 disabled={coreStatus === 'drafting'}
                 className="px-4 py-2 border border-gray-300 dark:border-gray-600 text-sm text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700"
               >
-                Skip
+                {t.skip}
               </button>
             </div>
+          </>
+        ) : !coreDraft && composeMode === 'chat' ? (
+          <>
+            <div ref={chatScrollRef} className="max-h-[22rem] overflow-y-auto space-y-3 pr-1">
+              {chatMessages.map((m, i) => (
+                <div key={i} className={m.role === 'user' ? 'flex justify-end' : 'flex justify-start'}>
+                  <div
+                    className={`max-w-[85%] px-4 py-2.5 rounded-2xl text-sm whitespace-pre-line ${
+                      m.role === 'user'
+                        ? 'bg-purple-600 text-white rounded-br-sm'
+                        : 'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-100 rounded-bl-sm'
+                    }`}
+                  >
+                    {m.content || (chatStreaming ? '…' : '')}
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="flex gap-2">
+              <textarea
+                value={chatInput}
+                onChange={(e) => setChatInput(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    void sendChat();
+                  }
+                }}
+                placeholder={t.chatPlaceholder}
+                rows={2}
+                disabled={chatStreaming}
+                className="flex-1 px-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 resize-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 text-sm"
+              />
+              <button type="button" onClick={() => setChatInput(t.ratherNotSayInput)} disabled={chatStreaming} className="self-end text-xs text-gray-500 dark:text-gray-400 underline whitespace-nowrap pb-3">{t.ratherNotSay}</button>
+              <MicButton text={chatInput} setText={setChatInput} disabled={chatStreaming} className="self-end" />
+              <Button onClick={() => void sendChat()} isLoading={chatStreaming} className="self-end">
+                {t.send}
+              </Button>
+            </div>
+            <div className="pt-2 border-t border-gray-100 dark:border-gray-700">
+              <Button
+                onClick={draftFromChat}
+                disabled={!canDraftFromChat || chatStreaming || coreStatus === 'drafting'}
+                className="w-full"
+              >
+                {coreStatus === 'drafting' ? t.writing : t.draftMyMessage}
+              </Button>
+              <p className="text-xs text-gray-400 dark:text-gray-500 text-center mt-1.5">
+                {canDraftFromChat ? t.guideReadyHint : t.guideMoreHint}
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={() => setComposeMode('write')}
+              className="block mx-auto text-xs text-gray-500 dark:text-gray-400 underline"
+            >
+              {t.writeItMyself}
+            </button>
           </>
         ) : !coreDraft ? (
           <>
@@ -836,6 +968,13 @@ export function CampaignParticipate({
             <p className="text-xs text-gray-500 dark:text-gray-400 text-center">
               {t.reviewBeforeAnything}
             </p>
+            <button
+              type="button"
+              onClick={() => setComposeMode('chat')}
+              className="block mx-auto text-xs text-gray-500 dark:text-gray-400 underline"
+            >
+              {t.useTheGuide}
+            </button>
           </>
         ) : (
           <>

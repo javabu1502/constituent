@@ -277,6 +277,23 @@ export const storyChatSchema = z.object({
   turnstileToken: z.string().optional(),
 });
 
+// Guided chat on an advocacy campaign's participation flow; same shape as
+// the story chat plus the participant's stance.
+export const campaignChatSchema = z.object({
+  stance: z.enum(['support', 'oppose', 'undecided']).optional(),
+  campaignSlug: z.string().min(1).max(120),
+  messages: z
+    .array(
+      z.object({
+        role: z.enum(['user', 'assistant']),
+        content: z.string().min(1).max(4000),
+      })
+    )
+    .min(1)
+    .max(60),
+  turnstileToken: z.string().optional(),
+});
+
 // Compose accepts an optional revision: the storyteller's current draft plus
 // a plain-language edit request ("make it shorter", "mention my daughter").
 export const storyComposeSchema = storyChatSchema.extend({

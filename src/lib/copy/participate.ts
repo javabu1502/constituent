@@ -38,6 +38,19 @@ const en = {
   redraft: 'Redraft',
   draftFailed: 'We could not draft your message. You can write it yourself below, or try again.',
 
+  // Guided chat (compose step)
+  guideGreeting: (headline: string) => `Hi. I’m here to help you say why this matters to you, so your message carries your own experience. There is no rush, and you can skip anything.\n\nTo start: what is your connection to "${headline}", or what has happened that makes you care about it?`,
+  chatPlaceholder: 'Share as much or as little as you like…',
+  send: 'Send',
+  ratherNotSay: 'Rather not say',
+  ratherNotSayInput: 'I’d rather not say.',
+  guideReadyHint: 'You will see and edit the message before anything else happens.',
+  guideMoreHint: 'A little more first. The message is built only from what you write here.',
+  writeItMyself: 'Skip the questions and write it myself',
+  useTheGuide: 'Answer a few questions instead',
+  skip: 'Skip',
+  followUpHelp: 'Your answers make your letter specific. Skip anything.',
+
   // Form step
   prefilled: 'Your info has been filled from your account. Edit if needed.',
   title: 'Title',
@@ -136,6 +149,18 @@ const es: ParticipateCopy = {
   redrafting: 'Redactando de nuevo…',
   redraft: 'Redactar de nuevo',
   draftFailed: 'No pudimos redactar su mensaje. Puede escribirlo usted mismo abajo o intentarlo de nuevo.',
+
+  guideGreeting: (headline: string) => `Hola. Estoy aquí para ayudarle a decir por qué este tema le importa, para que su mensaje lleve su propia experiencia. No hay prisa, y puede saltarse lo que quiera.\n\nPara empezar: ¿cuál es su relación con "${headline}", o qué ha pasado que le hace importarle?`,
+  chatPlaceholder: 'Comparta tanto o tan poco como quiera…',
+  send: 'Enviar',
+  ratherNotSay: 'Prefiero no decirlo',
+  ratherNotSayInput: 'Prefiero no decirlo.',
+  guideReadyHint: 'Verá y podrá editar el mensaje antes de cualquier otra cosa.',
+  guideMoreHint: 'Un poco más primero. El mensaje se construye solo con lo que usted escribe aquí.',
+  writeItMyself: 'Saltar las preguntas y escribirlo yo mismo',
+  useTheGuide: 'Responder unas preguntas en su lugar',
+  skip: 'Saltar',
+  followUpHelp: 'Sus respuestas hacen que su carta sea específica. Sáltese lo que quiera.',
 
   prefilled: 'Sus datos se completaron desde su cuenta. Edítelos si hace falta.',
   title: 'Título',

@@ -44,7 +44,7 @@ const coreSchema = z
     issue: z.string().max(500).optional(),
     ask: z.string().max(1000).optional(),
     stance: z.enum(['support', 'oppose', 'undecided']).optional(),
-    personalWhy: z.string().max(2000).optional(),
+    personalWhy: z.string().max(4000).optional(),
     turnstileToken: z.string().optional(),
   })
   .refine((d) => d.campaignSlug || d.issue, { message: 'campaignSlug or issue required' });
