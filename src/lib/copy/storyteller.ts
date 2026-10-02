@@ -72,7 +72,7 @@ const en = {
   withoutLocation: 'The campaign will see your story without a location.',
   howMayUse: 'How this campaign may use your story',
   howMayUseQ: 'How may the campaign use your story?',
-  checkEach: 'Check each way you are comfortable with. The campaign may only use your story in the ways you check. You can check none: the campaign can then read it but not use it elsewhere.',
+  checkEach: 'Uncheck any way you are not comfortable with. The campaign may only use your story in the ways left checked. You can uncheck all of them: the campaign can then read it but not use it elsewhere.',
   usage: {
     shared_with_legislators: { label: 'Shared with elected officials', description: 'Sent to or shown to lawmakers and their staff to support the cause.' },
     published_web_social: { label: 'Published on web or social media', description: 'Posted on the organization’s website or social channels.' },
@@ -191,7 +191,7 @@ const es: StorytellerCopy = {
   withoutLocation: 'La campaña verá su historia sin ubicación.',
   howMayUse: 'Cómo puede usar su historia esta campaña',
   howMayUseQ: '¿Cómo puede la campaña usar su historia?',
-  checkEach: 'Marque cada uso con el que se sienta cómodo. La campaña solo puede usar su historia de las formas que marque. Puede no marcar ninguna: entonces la campaña puede leerla pero no usarla en otro lugar.',
+  checkEach: 'Desmarque cualquier uso con el que no se sienta cómodo. La campaña solo puede usar su historia de las formas que queden marcadas. Puede desmarcarlas todas: entonces la campaña puede leerla pero no usarla en otro lugar.',
   usage: {
     shared_with_legislators: { label: 'Compartida con funcionarios electos', description: 'Enviada o mostrada a legisladores y su personal para apoyar la causa.' },
     published_web_social: { label: 'Publicada en la web o en redes sociales', description: 'Publicada en el sitio web o en las redes de la organización.' },

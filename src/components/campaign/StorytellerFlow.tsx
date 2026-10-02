@@ -59,12 +59,13 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
     ? STORY_USAGE_OPTIONS.filter((o) => campaign.usage_tags!.includes(o.value))
     : STORY_USAGE_OPTIONS
   ).map((o) => ({ ...o, ...(t.usage[o.value] ?? {}) }));
-  // Nothing is pre-decided for the storyteller (audit 2026-09-29): they pick
-  // how they are credited, and every use starts unchecked.
+  // Attribution is the storyteller's pick, nothing pre-selected. Uses start
+  // ALL checked and the storyteller unchecks what they are not comfortable
+  // with (Jared, 10-02; reversed the 09-29 all-unchecked default).
   const [attribution, setAttribution] = useState<AttributionLevel | null>(null);
   const [storytellerName, setStorytellerName] = useState('');
   const [storytellerEmail, setStorytellerEmail] = useState('');
-  const [grantedUses, setGrantedUses] = useState<string[]>([]);
+  const [grantedUses, setGrantedUses] = useState<string[]>(() => availableUses.map((o) => o.value));
   const [consentShare, setConsentShare] = useState(false);
   const [consentTruthful, setConsentTruthful] = useState(false);
   const [consentAdult, setConsentAdult] = useState(false);
