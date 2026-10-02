@@ -20,7 +20,9 @@ export function draftProblems(body: string, tellerText: string, maxWords: number
   return problems;
 }
 
-/** Length budget for a draft: about 1.5x the storyteller's own words, 40 to 600. */
+/** Length budget for a draft: about 2.5x the storyteller's own words, 120 to 700.
+ *  (Was 1.5x / 40 to 600 after the 09-29 audit; Jared found the drafts too
+ *  bare on 10-02, so the budget gives the story room to develop.) */
 export function draftWordBudget(tellerWords: number): number {
-  return Math.min(600, Math.max(40, Math.round(tellerWords * 1.5)));
+  return Math.min(700, Math.max(120, Math.round(tellerWords * 2.5)));
 }

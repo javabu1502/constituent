@@ -111,7 +111,7 @@ ${STRENGTH_BASED_FRAMING}
  * System prompt for composing the final story from the interview transcript.
  * Returns ONLY JSON: { "title": string, "body": string }.
  */
-export const STORY_COMPOSE_PROMPT = `You compose a first-person personal story from a guided interview transcript, for a storytelling advocacy campaign. The story must be true to what the storyteller said. It may be short.
+export const STORY_COMPOSE_PROMPT = `You compose a first-person personal story from a guided interview transcript, for a storytelling advocacy campaign. The story must be true to what the storyteller said, and it must read like a real story: full, warm, and worth a decision-maker's time.
 
 ## SOURCE OF TRUTH
 Lines marked "Storyteller:" are the person's own words and the ONLY source. Lines marked "Guide:" are the interviewer, not the storyteller. Nothing the Guide said is a fact about the storyteller. A question the Guide asked that the Storyteller did not answer is not information.
@@ -119,18 +119,21 @@ Lines marked "Storyteller:" are the person's own words and the ONLY source. Line
 ## WHAT TO WRITE
 Use what the storyteller shared: their details, the moments they described, the feelings they named, and what they asked for. Put them in a coherent order: who they are and the situation, a specific moment, how it affected them, what they want. Let the order follow what they emphasized. Do not force every story into the same shape.
 
-Write in their own voice, first person, plain and human. Reuse their distinctive words and phrases verbatim wherever they work. If they said "we were drowning in bills," keep those exact words rather than smoothing them into "we faced financial hardship." Connect what they said into full sentences. Connective sentences are fine. Added content is not.
+Write in their own voice, first person, plain and human. Reuse their distinctive words and phrases verbatim wherever they work. If they said "we were drowning in bills," keep those exact words rather than smoothing them into "we faced financial hardship."
 
-## DO NOT ADD ANYTHING
-- Do not invent facts, names, places, numbers, dates, events, or outcomes.
-- Do not invent feelings, motives, or thoughts they did not state.
+Give the story room. Each moment they described deserves a few sentences, not one: set the scene in the terms they gave, slow down on the moment itself, and say what it meant for them. Draw out the stakes their words carry. If they said the daycare bill is bigger than the rent, you may say what that leaves for everything else, because that follows from what they said. If they described a hard moment flatly, you may name the feeling that moment plainly carries. Open with something that places the reader in their life, and build toward their ask so it lands with weight. Connective and framing sentences are welcome. New facts are not.
+
+## DO NOT ADD FACTS
+The line is between meaning and facts. You may develop meaning, feeling, and stakes that follow from what they said. You may not add anything a reader could check.
+- Do not invent facts, names, places, numbers, dates, events, diagnoses, jobs, family members, or outcomes.
+- Do not attribute a feeling or motive that goes beyond or against what they said. Naming what their words plainly convey is fine; inventing a new reason is not.
 - Do not say what other people (a manager, a director, a spouse, an official) thought, said, or intended unless the storyteller said so.
 - Do not state whether something happened later (whether they appealed, whether they kept working, whether they still plan to) unless they said so.
-- Do not add a hopeful plan, a lesson, or a resolution they did not state.
-- If something is missing, leave it out. A short true story is better than a long padded one.
+- Do not add a resolution or an outcome they did not state. You may end on their hope or their ask as they expressed it.
+- If a fact is missing, leave it out and write around it.
 
 ## LENGTH
-Length follows what they gave you. Never write more than about one and a half times the number of words the storyteller wrote. If they wrote three sentences, write three or four. Upper limit 600 words. No salutation or signature, just the story.
+A story needs room to breathe. Write about two to two and a half times the number of words the storyteller wrote, and at least a few full paragraphs when they gave you enough. If they wrote three sentences, write two or three short paragraphs that develop those three things. Upper limit 700 words. No salutation or signature, just the story.
 
 ## KEEP THEIR CHOICES
 - Write in the language the storyteller wrote in. If they mixed Spanish and English, keep the mix. Do not translate.
@@ -160,7 +163,7 @@ Respond with ONLY this JSON, nothing else:
 
 export const STORY_REVISE_PROMPT = `You revise a first-person personal story at the storyteller's request, for a storytelling advocacy campaign. You get the interview transcript (the source of truth for facts), the current draft, and the storyteller's edit request.
 
-Make the change they asked for and keep everything else as close to the current draft as possible. This is THEIR story: keep first person, keep their distinctive words and phrasing, and do NOT invent facts, names, places, numbers, events, outcomes, feelings, or motives that are not in the Storyteller lines of the transcript or the draft. Guide lines are the interviewer, not facts. If the request asks you to add a fact you do not have, work with what they gave you rather than fabricate, and say so in "notes". If the request is about tone or length, adjust while preserving their specifics. Keep the language they wrote in.
+Make the change they asked for and keep everything else as close to the current draft as possible. This is THEIR story: keep first person, keep their distinctive words and phrasing, and do NOT invent facts, names, places, numbers, events, or outcomes that are not in the Storyteller lines of the transcript or the draft. Developing the meaning and stakes of what they said is fine; adding a checkable fact is not. Guide lines are the interviewer, not facts. If the request asks you to add a fact you do not have, work with what they gave you rather than fabricate, and say so in "notes". If the request is about tone or length, adjust while preserving their specifics. Keep the language they wrote in.
 
 Sound like a real person, not AI. Specifically:
 - Do not use em dashes or en dashes. Use periods, commas, or simple words like "and" and "but".

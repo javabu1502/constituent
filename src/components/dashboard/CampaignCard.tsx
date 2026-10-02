@@ -1,14 +1,21 @@
 import Link from 'next/link';
 import { CopyLinkButton } from '@/components/campaign/CopyLinkButton';
+import { EmbedCodeButton } from '@/components/campaign/EmbedCodeButton';
+import { QrCodeButton } from '@/components/campaign/QrCodeButton';
+import { DeleteCampaignButton } from '@/components/campaign/DeleteCampaignButton';
 
 export type CampaignRow = Record<string, string | number | null>;
 
 /**
  * One campaign card — used by the constituent dashboard's "My Campaigns"
  * section, the org dashboard's grouped sections, and the public read-only
- * demo. Two buttons, no more (the card got unusably busy — Jared, 09-18):
+ * demo. Advocacy cards stay slim (the card got unusably busy — Jared, 09-18):
  * Manage + copy-link for owners; the demo swaps Manage for the read-only
  * Analytics/Report views since /manage is owner-gated.
+ *
+ * Storytelling campaigns have no actions, so their manage page was only a
+ * toolbar one click away (Jared, 10-02). Their card carries that toolbar
+ * directly: View, Analytics, Share, Embed, QR, edit, delete.
  */
 export function CampaignCard({
   campaign,
@@ -120,6 +127,34 @@ export function CampaignCard({
               Public page
             </Link>
           </>
+        ) : campaign.campaign_type === 'storytelling' ? (
+          <div className="flex flex-wrap items-center gap-2 w-full">
+            <Link
+              href={`/campaign/${campaign.slug}`}
+              className="px-3 py-1.5 bg-purple-600 hover:bg-purple-700 text-white text-sm font-medium rounded-lg transition-colors"
+            >
+              View
+            </Link>
+            <Link
+              href={`/campaign/${campaign.slug}/analytics`}
+              className="px-3 py-1.5 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 text-sm font-medium rounded-lg transition-colors"
+            >
+              Analytics
+            </Link>
+            <CopyLinkButton slug={campaign.slug as string} />
+            <EmbedCodeButton slug={campaign.slug as string} />
+            <QrCodeButton slug={campaign.slug as string} />
+            <Link
+              href={`/campaign/${campaign.slug}/edit`}
+              className="p-2 text-gray-400 hover:text-purple-600 dark:text-gray-500 dark:hover:text-purple-400 transition-colors rounded-lg hover:bg-purple-50 dark:hover:bg-purple-900/20"
+              title="Edit campaign"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+              </svg>
+            </Link>
+            <DeleteCampaignButton slug={campaign.slug as string} headline={String(campaign.headline ?? '')} />
+          </div>
         ) : (
           <>
             <Link

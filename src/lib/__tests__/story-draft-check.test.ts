@@ -12,9 +12,9 @@ describe('draftProblems (a story may only contain what the teller wrote)', () =>
     expect(p.join(' ')).toMatch(/dashes/);
     expect(draftProblems(new Array(80).fill('word').join(' '), teller, 40).join(' ')).toMatch(/too long/);
   });
-  it('word budget is 1.5x the teller, clamped 40 to 600', () => {
-    expect(draftWordBudget(10)).toBe(40);
-    expect(draftWordBudget(100)).toBe(150);
-    expect(draftWordBudget(1000)).toBe(600);
+  it('word budget is 2.5x the teller, clamped 120 to 700 (room to develop, 10-02)', () => {
+    expect(draftWordBudget(10)).toBe(120);
+    expect(draftWordBudget(100)).toBe(250);
+    expect(draftWordBudget(1000)).toBe(700);
   });
 });

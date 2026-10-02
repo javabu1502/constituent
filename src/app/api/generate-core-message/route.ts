@@ -148,12 +148,12 @@ export async function POST(request: NextRequest) {
 - Do NOT address any official, reference any specific official, or assume which chamber or committee will read it.
 - Do NOT include a greeting, sign-off, the constituent's name, or their address anywhere.
 - Do NOT include a final "I ask you to vote..." sentence — the ask is added later.
-- First person, plain human language. With a personal story, 110 to 180 words. Without one, 60 to 110 words.
+- First person, plain human language. With a personal story, 160 to 260 words. Without one, 90 to 150 words.
 - Write flat declarative sentences. Do not use these shapes: three parallel items in a row, "not X but Y", "this is not X, it is Y", "this is not abstract", a closing line that turns the meaning around, or any dash. If you want a dash, end the sentence and start a new one.
 - ONE issue only — the one given. Do not drift into other topics.
-- Use at most two of the campaign's talking points, only the ones that connect to what the constituent wrote, and not in the order given. Leave out any number the constituent did not write unless the case cannot be made without it. Never paste.
-- If the constituent shared a personal story, it is the heart of the message. Lead with it and keep their meaning exactly. Do not add anything they did not write. That includes feelings, motives, reasons, causes, outcomes, what other people said or intended, ages, incomes, jobs, family members, diagnoses, insurance status, dollar amounts, dates, distances, and how long anything has gone on. When you need a sentence between two of their facts, make it a plain connective sentence, not a new fact. Quote their own phrases where they fit.
-- If the constituent shared no personal story, argue only from their goal and general reasoning. Speak about people in general ("homeowners in wildfire zones"), never about the constituent's own town, family, work, or experiences. Do not describe local conditions or events as fact.
+- Use two or three of the campaign's talking points, the ones that connect to what the constituent wrote, in your own order and your own words. Numbers from the talking points may be used when they strengthen the case. Never paste.
+- If the constituent shared a personal story, it is the heart of the message. Lead with it, give it room, and keep their meaning exactly. Develop what they said: set the scene in the terms they gave, say what the moment meant for them, draw out the stakes their words carry, and name the feeling a moment plainly conveys. Then connect their experience to the larger issue and the ask. The line is between meaning and facts: you may develop meaning and stakes; you may not add anything a reader could check. Do not add ages, incomes, jobs, family members, diagnoses, insurance status, dollar amounts, dates, distances, durations, events, outcomes, or what other people said or intended. Quote their own phrases where they fit.
+- If the constituent shared no personal story, argue from their goal and general reasoning with real substance: why the issue matters, who is affected, what is at stake. Speak about people in general ("homeowners in wildfire zones"), never about the constituent's own town, family, work, or experiences. Do not describe local conditions or events as fact.
 - Invent nothing about the constituent, and invent no statistics, studies, or figures. If the campaign talking points supply a number you may use it; otherwise argue from the constituent's experience and plain reasoning — never "studies show".
 - NEVER claim an identity, profession, or lived experience for the constituent that their own words do not state. Caring about veterans does not make them a veteran; caring about schools does not give them children. If they shared no personal stake, write as a concerned constituent about the people affected ("veterans in my community"), never in a borrowed first person ("I served", "my kids"). And never assert that specific harms or events have happened in their own community ("families here are burying their children") unless they said so — concern is theirs to feel; events are theirs to report.
 - Respectful and firm. No insults, no partisan name-calling, no threats, and no "or you'll lose my vote" — offices discount those.
@@ -222,7 +222,7 @@ Draft the core message.`;
     // Why each attempt was rejected, so a 502 in the logs says what happened.
     const rejects: string[] = [];
     for (let attempt = 0; attempt < 2; attempt++) {
-      const rawOut = await callClaude(correction ? `${system}\n\n${correction}` : system, user2, original ? 1800 : 1100);
+      const rawOut = await callClaude(correction ? `${system}\n\n${correction}` : system, user2, original ? 2200 : 1400);
       out = extractJSON(rawOut) as CoreOut;
       if (!out) {
         // Prose instead of JSON is almost always the model arguing with the
@@ -263,8 +263,8 @@ Draft the core message.`;
         continue;
       }
       const draftFull = [String(out?.opening ?? ''), body, String(out?.ask ?? '')].join(' ');
-      if (body.split(/\s+/).length > 220) {
-        correction = 'Your previous draft ran long. Rewrite it UNDER 180 words, keeping the strongest details of the story.';
+      if (body.split(/\s+/).length > 320) {
+        correction = 'Your previous draft ran long. Rewrite it UNDER 260 words, keeping the strongest details of the story.';
         rejects.push(`attempt ${attempt}: ${correction.slice(0, 120)}`);
         body = '';
         continue;
