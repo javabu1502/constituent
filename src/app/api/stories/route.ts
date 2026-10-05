@@ -8,6 +8,7 @@ import { verifyTurnstile } from '@/lib/turnstile';
 import { storyRevokeToken } from '@/lib/story-revoke';
 import { applyAttribution } from '@/lib/story-attribution';
 import { deDash } from '@/lib/claude';
+import { renderStoryEnglish } from '@/lib/language';
 
 /**
  * POST /api/stories
@@ -165,12 +166,18 @@ export async function POST(request: NextRequest) {
     const emailToStore = canContact ? storyteller_email?.trim() || null : null;
     void userEmail;
 
+    // Spanish stories get an English rendering for the organization. The
+    // body itself stays in the storyteller's language.
+    const rendered = await renderStoryEnglish(final_body);
+
     const { data: inserted, error: storyError } = await admin.from('stories').insert({
       campaign_id: campaign.id,
       user_id: userId,
       ip_hash: ipHash,
       // Body is the attribution-applied version — anonymous bodies are redacted.
       body: final_body,
+      language: rendered.language,
+      body_en: rendered.body_en,
       // For anonymous, store the name-scrubbed topic title; otherwise the AI title.
       title: isAnon ? subjectTitle || null : title ? deDash(title).slice(0, 120) : null,
       attribution_level,

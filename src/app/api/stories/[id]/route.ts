@@ -4,6 +4,7 @@ import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase';
 import { applyAttribution } from '@/lib/story-attribution';
 import { deDash } from '@/lib/claude';
+import { renderStoryEnglish } from '@/lib/language';
 import { verifyStoryRevokeToken } from '@/lib/story-revoke';
 
 /** A revoke or edit changes what the organization may quote: drop the cached AI insights. */
@@ -62,11 +63,15 @@ export async function PATCH(
 
   const level = existing.attribution_level as 'named' | 'first_name_only' | 'anonymous';
   const applied = await applyAttribution(parsed.data.body, level, existing.storyteller_name as string | null);
+  const finalBody = deDash(applied.final_body);
+  const rendered = await renderStoryEnglish(finalBody);
 
   const { data, error } = await admin
     .from('stories')
     .update({
-      body: deDash(applied.final_body),
+      body: finalBody,
+      language: rendered.language,
+      body_en: rendered.body_en,
       title: parsed.data.title ? deDash(parsed.data.title).slice(0, 120) : null,
       edited_at: new Date().toISOString(),
     })

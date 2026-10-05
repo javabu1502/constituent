@@ -93,7 +93,7 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
       admin
         .from('stories')
         // Include revoked so the collector is flagged (content hidden below).
-        .select('id, created_at, attribution_level, storyteller_name, storyteller_email, city, state, title, body, status, edited_at, consent_usage_snapshot, shared_reps')
+        .select('id, created_at, attribution_level, storyteller_name, storyteller_email, city, state, title, body, body_en, language, status, edited_at, consent_usage_snapshot, shared_reps')
         .eq('campaign_id', campaign.id)
         .in('status', ['active', 'revoked'])
         .order('created_at', { ascending: false })
@@ -191,6 +191,8 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
         email: revoked ? null : ((s.storyteller_email as string | null) ?? null),
         title: revoked ? null : ((s.title as string | null) ?? null),
         body: revoked ? '' : ((s.body as string | null) ?? ''),
+        body_en: revoked ? null : ((s.body_en as string | null) ?? null),
+        language: ((s.language as string | null) ?? 'en'),
         granted_uses: revoked ? [] : usageLabels(grantedValues),
         granted_use_values: revoked ? [] : grantedValues,
         officials: reps.map((r) => r.name),

@@ -94,7 +94,7 @@ async function gatherSources(campaignId: string, kind: InsightKind): Promise<Ins
     if (kind === 'stories') {
       const { data } = await admin
         .from('stories')
-        .select('id, body, attribution_level, storyteller_name, shared_reps, consent_usage_snapshot, created_at')
+        .select('id, body, body_en, attribution_level, storyteller_name, shared_reps, consent_usage_snapshot, created_at')
         .in('campaign_id', ids)
         .eq('status', 'active')
         .order('created_at', { ascending: false })
@@ -105,7 +105,8 @@ async function gatherSources(campaignId: string, kind: InsightKind): Promise<Ins
           const reps = Array.isArray(r.shared_reps) ? (r.shared_reps as Array<{ name?: string }>).map((x) => x.name ?? '') : [];
           return {
             id: String(r.id),
-            body: String(r.body ?? '').trim(),
+            // Spanish stories carry an English rendering; the insight model reads that.
+            body: String((r as { body_en?: string | null }).body_en || r.body || '').trim(),
             anonymous: r.attribution_level === 'anonymous',
             reportOk: Array.isArray(snap.granted_uses) && snap.granted_uses.includes('included_in_reports'),
             names: [String(r.storyteller_name ?? ''), ...reps].filter((n) => n.trim().length >= 3),

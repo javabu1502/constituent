@@ -51,6 +51,9 @@ interface AdvocacyAnalytics {
     method: string | null;
     status: string | null;
     body: string;
+    /** English rendering when the story was written in Spanish. */
+    body_en?: string | null;
+    language?: string;
   }>;
 }
 
@@ -64,6 +67,9 @@ interface StoryListItem {
   email: string | null;
   title: string | null;
   body: string;
+  /** English rendering when the story was written in Spanish. */
+  body_en?: string | null;
+  language?: string;
   granted_uses: string[]; // human-readable labels
   granted_use_values: string[]; // raw values, for filtering
   officials: string[]; // names of officials representing this storyteller
@@ -247,7 +253,7 @@ function StorytellingAnalytics({ analytics, campaignName, insightsPanel, isDemo 
       if (useFilter && !s.granted_use_values.includes(useFilter)) return false;
       if (officialFilter && !s.officials.includes(officialFilter)) return false;
       if (needle) {
-        const haystack = [s.display_name, s.title ?? '', s.body, s.city ?? '', s.state ?? '', s.email ?? '', ...s.officials]
+        const haystack = [s.display_name, s.title ?? '', s.body, s.body_en ?? '', s.city ?? '', s.state ?? '', s.email ?? '', ...s.officials]
           .join(' ')
           .toLowerCase();
         if (!haystack.includes(needle)) return false;
@@ -594,7 +600,19 @@ function StorytellingAnalytics({ analytics, campaignName, insightsPanel, isDemo 
                       </p>
                     )}
                     {s.title && <p className="text-sm font-medium text-gray-800 dark:text-gray-200">{s.title}</p>}
-                    <p className="text-sm text-gray-600 dark:text-gray-300 mt-0.5 whitespace-pre-line">{s.body}</p>
+                    {s.body_en ? (
+                      <>
+                        <p className="text-sm text-gray-600 dark:text-gray-300 mt-0.5 whitespace-pre-line">{s.body_en}</p>
+                        <details className="mt-1.5">
+                          <summary className="text-xs text-purple-600 dark:text-purple-400 cursor-pointer select-none">
+                            Written in Spanish. Read the original
+                          </summary>
+                          <p className="mt-1 text-sm text-gray-600 dark:text-gray-300 whitespace-pre-line border-l-2 border-purple-300 dark:border-purple-700 pl-3">{s.body}</p>
+                        </details>
+                      </>
+                    ) : (
+                      <p className="text-sm text-gray-600 dark:text-gray-300 mt-0.5 whitespace-pre-line">{s.body}</p>
+                    )}
                     {s.granted_uses.length > 0 && (
                       <div className="mt-2 flex flex-wrap gap-1">
                         {s.granted_uses.map((u) => (

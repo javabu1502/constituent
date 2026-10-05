@@ -58,7 +58,7 @@ export async function GET(
 
   const { data: stories, error: storiesError } = await admin
     .from('stories')
-    .select('created_at, attribution_level, storyteller_name, city, state, storyteller_email, title, body, consent_usage_snapshot, shared_reps')
+    .select('created_at, attribution_level, storyteller_name, city, state, storyteller_email, title, body, body_en, consent_usage_snapshot, shared_reps')
     .eq('campaign_id', campaign.id)
     .eq('status', 'active')
     .order('created_at', { ascending: false });
@@ -115,6 +115,7 @@ export async function GET(
         isAnon ? '' : s.storyteller_name ?? '',
         s.title ?? '',
         s.body ?? '',
+        s.body_en ?? '',
         isAnon ? '' : s.city ?? '',
         isAnon ? '' : s.state ?? '',
         isAnon ? '' : s.storyteller_email ?? '',
@@ -127,7 +128,7 @@ export async function GET(
     return true;
   });
 
-  const headers = ['Date', 'Attribution', 'Name', 'City', 'State', 'Contact Email', 'Represented By', 'Title', 'Story', 'Granted Uses'];
+  const headers = ['Date', 'Attribution', 'Name', 'City', 'State', 'Contact Email', 'Represented By', 'Title', 'Story', 'Story (English)', 'Granted Uses'];
   const rows = filtered.map((s) => {
     const isAnon = s.attribution_level === 'anonymous';
     const snapshot = (s.consent_usage_snapshot ?? {}) as { granted_uses?: string[] };
@@ -151,6 +152,7 @@ export async function GET(
       reps,
       s.title ?? '',
       s.body ?? '',
+      s.body_en ?? '',
       uses,
     ];
   });

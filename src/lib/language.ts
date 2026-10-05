@@ -62,14 +62,14 @@ export function detectLanguage(text: string | null | undefined): SupportedLangua
  * fails, so callers can decide whether to proceed in the original language.
  */
 export async function translateToEnglish(text: string): Promise<string | null> {
-  const system = `You translate a constituent's own words from Spanish to English for a letter to their elected official.
+  const system = `You translate a person's own words from Spanish to English so an English reader can read exactly what they said.
 Rules:
 - Translate faithfully. Keep every fact, number, name, and the person's meaning exactly. Add nothing, remove nothing, soften nothing, explain nothing.
-- Keep first person. Keep their tone. Plain English, no dashes.
+- Keep first person. Keep their tone and paragraph breaks. Plain English, no dashes.
 - If part of the text is already English, keep it as written.
 Return ONLY JSON: {"english": "..."}`;
   try {
-    const raw = await callClaude(system, text, 1200);
+    const raw = await callClaude(system, text, 2500);
     const out = extractJSON(raw) as { english?: unknown } | null;
     const english = typeof out?.english === 'string' ? out.english.trim() : '';
     return english.length >= 3 ? english : null;
@@ -93,4 +93,18 @@ export const ORIGINAL_WORDS_HEADING: Record<SupportedLanguage, string> = {
 export function formatOriginalWordsBlock(original: { language: SupportedLanguage; text: string }): string {
   const heading = ORIGINAL_WORDS_HEADING[original.language];
   return `${heading}\n${original.text.trim()}`;
+}
+
+/**
+ * For a submitted story: which language it is in and, when it is Spanish,
+ * a faithful English rendering for the organization reading it. English
+ * stories return body_en null. A failed translation also returns null so
+ * the story is still saved; the org then sees the original.
+ */
+export async function renderStoryEnglish(body: string): Promise<{ language: SupportedLanguage; body_en: string | null }> {
+  const language = detectLanguage(body);
+  if (language !== 'es') return { language: 'en', body_en: null };
+  const body_en = await translateToEnglish(body);
+  if (!body_en) console.warn('[language] story translation failed; saving without English rendering');
+  return { language, body_en };
 }
