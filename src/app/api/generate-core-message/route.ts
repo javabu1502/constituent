@@ -45,6 +45,13 @@ const coreSchema = z
     ask: z.string().max(1000).optional(),
     stance: z.enum(['support', 'oppose', 'undecided']).optional(),
     personalWhy: z.string().max(4000).optional(),
+    // The guided chat, when the constituent used it: the guide's questions give
+    // the answers their meaning ("Three times" needs "how many times?"). Only
+    // the constituent's own turns count as their words for the gates below.
+    interview: z
+      .array(z.object({ role: z.enum(['user', 'assistant']), content: z.string().max(4000) }))
+      .max(40)
+      .optional(),
     turnstileToken: z.string().optional(),
   })
   .refine((d) => d.campaignSlug || d.issue, { message: 'campaignSlug or issue required' });
@@ -120,6 +127,17 @@ export async function POST(request: NextRequest) {
     // Their own words, verbatim, are what the official reads in Spanish.
     if (inWhy) original = { language: 'es', text: inWhy };
   }
+
+  // The interview transcript, when there was one, is context for reading the
+  // answers. Guide lines are OUR questions and are never facts about the
+  // constituent; an unanswered question is not information.
+  const interview = (parsed.data.interview ?? []).filter((m) => m.content.trim());
+  const interviewBlock =
+    interview.length > 1
+      ? `\n\nHOW THOSE WORDS CAME UP (a short guided chat; "Guide:" lines are our questions, not the constituent's words, and nothing the Guide said is a fact about them):\n${interview
+          .map((m) => `${m.role === 'user' ? 'Constituent' : 'Guide'}: ${m.content.trim()}`)
+          .join('\n')}`
+      : '';
 
   // Official weigh-ins carry the PARTICIPANT's stance; org campaigns carry
   // the campaign's own direction; freeform mode carries whatever the
@@ -197,7 +215,7 @@ ${askInstruction}`
 ${inputGoal ? `THE CONSTITUENT'S GOAL: ${inputGoal}` : ''}
 POSITION: ${position}`;
   const user2 = `${user}
-${hasStory ? `THE CONSTITUENT'S OWN WORDS ABOUT WHY THIS MATTERS TO THEM${original ? ' (translated from their Spanish)' : ''}: """${personalWhy}"""` : 'The constituent did not share a personal story. Argue only from their goal and general reasoning, and say nothing about their own life or town.'}
+${hasStory ? `THE CONSTITUENT'S OWN WORDS ABOUT WHY THIS MATTERS TO THEM${original ? ' (translated from their Spanish)' : ''}: """${personalWhy}"""` : 'The constituent did not share a personal story. Argue only from their goal and general reasoning, and say nothing about their own life or town.'}${interviewBlock}
 
 Draft the core message.`;
 

@@ -5,8 +5,9 @@
  * mirrors the storytelling interview guide but is shorter and aimed at a
  * letter to an official rather than a standalone story.
  *
- * The guide's turns are never treated as the constituent's words: the client
- * passes only the constituent's own messages on to drafting.
+ * The guide's turns are never treated as the constituent's words. Drafting
+ * receives the whole transcript for context (so short answers keep their
+ * meaning) but only the constituent's own turns count as their words.
  */
 
 export interface CampaignInterviewContext {
@@ -15,6 +16,9 @@ export interface CampaignInterviewContext {
   is_official?: boolean | null;
   direction?: 'support' | 'oppose' | null;
   language?: 'en' | 'es' | null;
+  /** The bill and stage, when the campaign sets a concrete ask. */
+  bill_ref?: string | null;
+  stage_goal?: string | null;
 }
 
 /** The exact hand-off sentences, both languages, matched by the client. */
@@ -35,6 +39,21 @@ export function buildCampaignInterviewPrompt(
       : 'They have not taken a side yet. Help them say what the issue means to them without pushing them either way.'
     : `The campaign asks officials to ${campaign.direction === 'oppose' ? 'OPPOSE' : 'SUPPORT'} it. The constituent has chosen to take part, so help them say why it matters to them.`;
 
+  // On an organization's campaign the ask belongs to the campaign (the bill,
+  // the vote, the cosponsor push). The guide draws out the person's reason
+  // and never makes them invent an ask. Official weigh-ins and bill-less
+  // campaigns have no fixed ask, so there the guide asks what they want.
+  const campaignAsk = !campaign.is_official
+    ? campaign.bill_ref
+      ? campaign.stage_goal === 'cosponsor'
+        ? `ask the official to cosponsor ${campaign.bill_ref}`
+        : `ask the official to ${campaign.direction === 'oppose' ? 'oppose' : 'support'} ${campaign.bill_ref}`
+      : `ask the official to ${campaign.direction === 'oppose' ? 'oppose' : 'support'} this`
+    : null;
+  const thirdThing = campaignAsk
+    ? `3. What they want the official to understand. The letter's ask is already set by the campaign (it will ${campaignAsk}), so do not ask them what to ask for. Ask what they most want the official to know, or what would change for them.`
+    : '3. What they want. What they would like the official to understand or do.';
+
   const language =
     campaign.language === 'es'
       ? `## LANGUAGE
@@ -53,13 +72,14 @@ Reply in the language the constituent writes in. If they write in Spanish, write
 In two or three short exchanges, draw out the three things a letter needs:
 1. Their connection to the issue. A specific moment, situation, or example from their own life or the people around them. Not "I care about this" but what actually happened.
 2. The impact. How it has affected them, their family, their work, their money, or their community.
-3. What they want. What they would like the official to understand or do.
+${thirdThing}
 When you have all three, stop asking. Your entire reply is a one-sentence reflection followed by exactly this sentence: ${HANDOFF_EN}
 
 ## HOW TO INTERVIEW
 - One question per reply. Exactly one question mark. Do not offer alternatives inside the question.
 - Keep each reply under 60 words. Warm, plain, brief.
 - Build on what they said. Never re-ask or rephrase something they already answered. If they answer a different question than the one you asked, take what they gave and move on.
+- A letter lands on specifics. If an answer is general ("it's expensive", "it affects everyone", "I worry about it"), your next question asks for one concrete instance: a particular day, a bill, a number, a place, a person, what was said. Do not hand off until the conversation holds at least one concrete detail like that. If after two tries they stay general, hand off anyway; a general letter is still their letter.
 - Never presume an identity, role, or experience they did not state. Do not assume they are a parent, veteran, patient, worker, or anything else. Ask, do not assume.
 - Never push for medical, financial, legal, or traumatic detail. If they say they would rather not say, accept it and move on.
 - If they have no personal connection and say so, ask what they would want the official to understand, then hand off. A letter without a story is still a letter.

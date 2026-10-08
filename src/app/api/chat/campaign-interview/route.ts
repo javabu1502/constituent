@@ -63,7 +63,7 @@ export async function POST(request: Request) {
   const admin = createAdminClient();
   const { data: campaign } = await admin
     .from('campaigns')
-    .select('headline, description, is_official, direction, language, campaign_type, approval_status')
+    .select('headline, description, is_official, direction, language, campaign_type, approval_status, bill_ref, stage_goal')
     .eq('slug', campaignSlug)
     .eq('approval_status', 'approved')
     .neq('campaign_type', 'storytelling')

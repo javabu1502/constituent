@@ -181,7 +181,7 @@ export function CampaignParticipate({
 
   // whyOverride lets the follow-up step pass its just-enriched text directly
   // (state updates haven't flushed yet when it calls this).
-  const draftCore = async (whyOverride?: string) => {
+  const draftCore = async (whyOverride?: string, interview?: { role: 'user' | 'assistant'; content: string }[]) => {
     setError(null);
     setCoreStatus('drafting');
     try {
@@ -193,6 +193,7 @@ export function CampaignParticipate({
           campaignSlug: campaign.slug,
           stance: isOfficial ? stance ?? undefined : undefined,
           personalWhy: (whyOverride ?? personalWhy).trim() || undefined,
+          interview: interview && interview.length > 1 ? interview.slice(-30) : undefined,
           turnstileToken: turnstileToken || undefined,
         }),
       });
@@ -271,7 +272,7 @@ export function CampaignParticipate({
     const why = chatAnswers.join('\n\n').slice(0, 4000);
     setPersonalWhy(why);
     fireFunnel('participate_guide_completed');
-    void draftCore(why);
+    void draftCore(why, chatMessages.filter((m) => m.content.trim()));
   };
 
   // Between the why-input and drafting: fetch 1-4 short follow-up questions.
@@ -1024,7 +1025,7 @@ export function CampaignParticipate({
               </Button>
               <button
                 type="button"
-                onClick={() => void draftCore()}
+                onClick={() => void draftCore(undefined, composeMode === 'chat' ? chatMessages.filter((m) => m.content.trim()) : undefined)}
                 disabled={coreStatus === 'drafting'}
                 className="px-4 py-2 border border-gray-300 dark:border-gray-600 text-sm text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700"
               >
