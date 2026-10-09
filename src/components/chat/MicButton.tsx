@@ -50,11 +50,14 @@ export function MicButton({
   setText,
   disabled,
   className,
+  lang = 'en-US',
 }: {
   text: string;
   setText: (t: string) => void;
   disabled?: boolean;
   className?: string;
+  /** BCP 47 tag for the speech recognizer. Spanish flows pass 'es-US'. */
+  lang?: string;
 }) {
   const [supported, setSupported] = useState(false);
   const [listening, setListening] = useState(false);
@@ -104,7 +107,7 @@ export function MicButton({
     if (!Ctor) return;
 
     const rec = new Ctor();
-    rec.lang = 'en-US';
+    rec.lang = lang;
     rec.continuous = true;
     rec.interimResults = true;
 
@@ -139,7 +142,7 @@ export function MicButton({
     } catch {
       setListening(false);
     }
-  }, [text, setText]);
+  }, [text, setText, lang]);
 
   if (!supported) return null;
 

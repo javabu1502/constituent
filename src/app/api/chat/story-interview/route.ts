@@ -43,7 +43,12 @@ export async function POST(request: Request) {
   const identity = await resolveUsageIdentity(ip);
 
   if (process.env.TURNSTILE_SECRET_KEY) {
-    const valid = await verifyTurnstile(turnstileToken || '', { strict: !identity.userId });
+    // Storytelling is lenient on a MISSING token: an organization's testers hit
+    // "CAPTCHA verification failed" on 2026-10-09 because their network never
+    // produced a Turnstile token. These routes are rate limited per IP and
+    // daily-quota'd, and the org reviews every story, so a missing token is
+    // allowed; a token that is present but invalid is still rejected.
+    const valid = await verifyTurnstile(turnstileToken || '', { strict: false });
     if (!valid) {
       return new Response('CAPTCHA verification failed', { status: 403 });
     }
