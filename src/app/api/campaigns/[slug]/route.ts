@@ -237,7 +237,7 @@ export async function PATCH(
   // Fields that belong to the other campaign type are dropped, not errors —
   // the shared form always sends its full field set.
   const isStory = campaign.campaign_type === 'storytelling';
-  const advocacyOnly = ['target_level', 'direction', 'message_template', 'distribution_plan', 'bill_level', 'bill_state', 'bill_ref', 'bill_title', 'bill_url'];
+  const advocacyOnly = ['target_level', 'direction', 'message_template', 'talking_points_coverage', 'distribution_plan', 'bill_level', 'bill_state', 'bill_ref', 'bill_title', 'bill_url'];
   const storyOnly = ['story_prompt', 'usage_statement', 'usage_tags'];
   for (const key of isStory ? advocacyOnly : storyOnly) {
     delete updates[key];

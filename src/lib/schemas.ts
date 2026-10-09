@@ -121,6 +121,7 @@ export const createCampaignSchema = z.object({
   // Directional stance for advocacy campaigns (one way only, chosen at creation).
   direction: z.enum(['support', 'oppose']).optional(),
   message_template: z.string().max(2000).nullish(),
+  talking_points_coverage: z.enum(['all', 'fit']).optional(),
   distribution_plan: z.string().max(1000).nullish(),
   // Optional related bill (federal or state) — all-or-nothing, resolved client-side
   bill_level: z.enum(['federal', 'state']).optional(),
@@ -240,6 +241,7 @@ export const updateCampaignSchema = z
     target_level: z.enum(['federal', 'state', 'both']).optional(),
     direction: z.enum(['support', 'oppose']).optional(),
     message_template: z.string().max(2000).nullish(),
+  talking_points_coverage: z.enum(['all', 'fit']).optional(),
     distribution_plan: z.string().min(10).max(1000).optional(),
     bill_level: z.enum(['federal', 'state']).nullish(),
     bill_state: z.string().length(2).nullish(),

@@ -77,7 +77,7 @@ export async function POST(request: NextRequest) {
 
   const {
     campaign_type, language, headline, description, issue_area, issue_subtopic,
-    target_level, direction, message_template, distribution_plan,
+    target_level, direction, message_template, talking_points_coverage, distribution_plan,
     bill_level, bill_state, bill_ref, bill_title, bill_url,
     story_prompt, usage_statement, usage_tags, attribution_options, edit_revoke_policy, recipient_email,
     org_name, org_url, org_logo_url, brand_color, custom_domain,
@@ -161,6 +161,7 @@ export async function POST(request: NextRequest) {
       // they bring their own (talking points usually DO change per stage).
       direction: isStory ? null : (direction || parent?.direction || null),
       message_template: isStory ? null : (message_template || parent?.message_template || null),
+      talking_points_coverage: isStory ? 'all' : (talking_points_coverage || 'all'),
       distribution_plan: isStory ? null : distribution_plan,
       // Stages inherit the parent's bill unless they set their own.
       bill_level: isStory ? null : (bill_level || parent?.bill_level || null),

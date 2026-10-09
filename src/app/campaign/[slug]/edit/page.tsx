@@ -51,6 +51,7 @@ export default async function EditCampaignPage({
     targetLevel: (campaign.target_level as 'federal' | 'state' | 'both') ?? 'federal',
     direction: (campaign.direction as 'support' | 'oppose' | null) ?? '',
     messageTemplate: campaign.message_template ?? '',
+    talkingPointsCoverage: campaign.talking_points_coverage === 'fit' ? 'fit' : 'all',
     storyPrompt: campaign.story_prompt ?? '',
     usageStatement: campaign.usage_statement ?? '',
     usageTags: campaign.usage_tags ?? [],

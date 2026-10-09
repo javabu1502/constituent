@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { trackEvent } from '@/lib/analytics';
 import { Button } from '@/components/ui/Button';
+import { parseTalkingPoints, MAX_REQUIRED_POINTS } from '@/lib/talking-points';
 import { IssuePicker } from '@/components/ui/IssuePicker';
 import { US_STATES } from '@/lib/constants';
 import { detectBillReferences } from '@/lib/bills';
@@ -30,6 +31,7 @@ export interface CampaignEditInitial {
   targetLevel: 'federal' | 'state' | 'both';
   direction: 'support' | 'oppose' | '';
   messageTemplate: string;
+  talkingPointsCoverage?: 'all' | 'fit';
   storyPrompt: string;
   usageStatement: string;
   usageTags: string[];
@@ -61,6 +63,8 @@ export function CampaignForm({
   const [targetParty, setTargetParty] = useState<TargetParty>({ party: 'D', chamber: 'both', level: 'federal' });
   const [direction, setDirection] = useState<'support' | 'oppose' | ''>(edit?.initial.direction ?? '');
   const [messageTemplate, setMessageTemplate] = useState(edit?.initial.messageTemplate ?? '');
+  const [talkingPointsCoverage, setTalkingPointsCoverage] = useState<'all' | 'fit'>(edit?.initial.talkingPointsCoverage ?? 'all');
+  const talkingPointCount = parseTalkingPoints(messageTemplate).length;
 
   // Campaign type is fixed by the entry point (?type=advocacy|storytelling);
   // each type has its own track below. Advocacy campaigns are always public.
@@ -405,6 +409,7 @@ export function CampaignForm({
             target_level: targetLevel,
             direction: direction || undefined,
             message_template: messageTemplate.trim() || null,
+            talking_points_coverage: talkingPointsCoverage,
             ...(edit ? {} : targetingBody),
             ...(parentCampaignId
               ? {
@@ -445,6 +450,7 @@ export function CampaignForm({
             target_level: targetLevel,
             ...(direction ? { direction } : {}),
             message_template: messageTemplate.trim() || null,
+            talking_points_coverage: talkingPointsCoverage,
             // Explicit nulls clear a previously linked bill.
             bill_level: resolvedBill?.level ?? null,
             bill_state: resolvedBill?.level === 'state' ? (resolvedBill.state ?? null) : null,
@@ -924,8 +930,32 @@ export function CampaignForm({
           className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent resize-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
         />
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-          Every participant&apos;s letter combines these points with their own reasons for caring, so no two letters read the same.
+          One point per line, up to {MAX_REQUIRED_POINTS}. Every participant&apos;s letter combines these points with their own reasons for caring, so no two letters read the same.
         </p>
+        {messageTemplate.trim() && (
+          <div className="mt-3">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">How letters use these points</label>
+            <div className="space-y-2">
+              {([
+                ['all', 'Make every point', 'Each letter makes all of them, in the participant\u2019s own words and order.'],
+                ['fit', 'Use the ones that fit', 'Each letter uses the points that connect to what the participant wrote.'],
+              ] as const).map(([value, label, help]) => (
+                <label key={value} className={`flex items-start gap-3 p-3 rounded-xl border cursor-pointer ${talkingPointsCoverage === value ? 'border-purple-500 bg-purple-50 dark:bg-purple-900/20' : 'border-gray-200 dark:border-gray-700'}`}>
+                  <input type="radio" name="talkingPointsCoverage" value={value} checked={talkingPointsCoverage === value} onChange={() => setTalkingPointsCoverage(value)} className="mt-1 h-4 w-4 text-purple-600 focus:ring-purple-500" />
+                  <span>
+                    <span className="block text-sm font-medium text-gray-800 dark:text-gray-200">{label}</span>
+                    <span className="block text-xs text-gray-500 dark:text-gray-400">{help}</span>
+                  </span>
+                </label>
+              ))}
+            </div>
+            {talkingPointsCoverage === 'all' && talkingPointCount > MAX_REQUIRED_POINTS && (
+              <p className="text-xs text-amber-700 dark:text-amber-300 mt-2">
+                You have {talkingPointCount} points. Letters that make every point stay readable at {MAX_REQUIRED_POINTS} or fewer; trim the list or switch to the ones that fit.
+              </p>
+            )}
+          </div>
+        )}
       </div>
 
       {/* User campaigns are always link-only */}

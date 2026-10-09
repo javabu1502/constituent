@@ -8,6 +8,7 @@ import { enforceDailyQuota, resolveUsageIdentity } from '@/lib/usage-quota';
 import { sanitizeAiJurisdiction } from '@/lib/issue-jurisdiction';
 import { validateCampaignAsk } from '@/lib/envelope';
 import { detectLanguage, translateToEnglish, type SupportedLanguage } from '@/lib/language';
+import { parseTalkingPoints, talkingPointCoverage, MAX_REQUIRED_POINTS } from '@/lib/talking-points';
 import {
   askAddressesOfficial,
   askContradictsStance,
@@ -86,12 +87,15 @@ export async function POST(request: NextRequest) {
     bill_ref: string | null;
     bill_title: string | null;
     stage_goal?: string | null;
+    bill_level?: string | null;
+    target_level?: string | null;
+    talking_points_coverage?: string | null;
   } | null = null;
   if (parsed.data.campaignSlug) {
     const admin = createAdminClient();
     const { data } = await admin
       .from('campaigns')
-      .select('headline, description, direction, message_template, is_official, bill_ref, bill_title, issue_area, stage_goal')
+      .select('headline, description, direction, message_template, is_official, bill_ref, bill_title, issue_area, stage_goal, bill_level, target_level, talking_points_coverage')
       .eq('slug', parsed.data.campaignSlug)
       .eq('approval_status', 'approved')
       .single();
@@ -161,15 +165,34 @@ export async function POST(request: NextRequest) {
       : 'The constituent is still weighing this. Write a thoughtful message urging serious attention to the issue without taking a side for them.'
     : `This campaign asks officials to ${campaign.direction === 'oppose' ? 'OPPOSE' : 'SUPPORT'} it. Argue that side clearly.`;
 
+  // Length follows the reader. Congressional offices skim; state legislators
+  // often read the letter themselves and have smaller staffs, so a state-only
+  // campaign gets a tighter core. (CMF staff surveys: personal and specific
+  // beats long.)
+  const stateOnly = campaign?.bill_level === 'state' || campaign?.target_level === 'state';
+  const lengthRule = stateOnly
+    ? 'With a personal story, 130 to 200 words. Without one, 80 to 130 words. State legislators read these themselves; keep it tight.'
+    : 'With a personal story, 180 to 250 words. Without one, 90 to 150 words.';
+  const longWords = stateOnly ? 260 : 300;
+  const longTarget = stateOnly ? 200 : 250;
+  // Talking points: an organization's campaign makes every point by default
+  // (that is what the org is asking for); official weigh-ins and "fit" mode
+  // use the ones that connect. Points are always paraphrased, never pasted.
+  const points = campaign?.message_template ? parseTalkingPoints(campaign.message_template) : [];
+  const requireAllPoints = !!campaign && !campaign.is_official && campaign.talking_points_coverage !== 'fit' && points.length > 0 && points.length <= MAX_REQUIRED_POINTS;
+  const talkingPointsRule = requireAllPoints
+    ? `- The campaign's talking points are listed as separate items. Make EVERY one of them (there are ${points.length}), each in your own words and the constituent's voice, in whatever order fits their story, and connect each to what they wrote where you can. A point may be one sentence. Numbers from the talking points may be used. Never paste.`
+    : '- Use two or three of the campaign\'s talking points, the ones that connect to what the constituent wrote, in your own order and your own words. Numbers from the talking points may be used when they strengthen the case. Never paste.';
+
   const system = `You draft the CORE of a constituent's message to elected officials. The core is the constituent's own case — it will later be wrapped with a greeting, an official-specific opening, a closing ask, and a signature. Because of that:
 
 - Do NOT address any official, reference any specific official, or assume which chamber or committee will read it.
 - Do NOT include a greeting, sign-off, the constituent's name, or their address anywhere.
 - Do NOT include a final "I ask you to vote..." sentence — the ask is added later.
-- First person, plain human language. With a personal story, 160 to 260 words. Without one, 90 to 150 words.
+- First person, plain human language. ${lengthRule}
 - Write flat declarative sentences. Do not use these shapes: three parallel items in a row, "not X but Y", "this is not X, it is Y", "this is not abstract", a closing line that turns the meaning around, or any dash. If you want a dash, end the sentence and start a new one.
 - ONE issue only — the one given. Do not drift into other topics.
-- Use two or three of the campaign's talking points, the ones that connect to what the constituent wrote, in your own order and your own words. Numbers from the talking points may be used when they strengthen the case. Never paste.
+${talkingPointsRule}
 - If the constituent shared a personal story, it is the heart of the message. Lead with it, give it room, and keep their meaning exactly. Develop what they said: set the scene in the terms they gave, say what the moment meant for them, draw out the stakes their words carry, and name the feeling a moment plainly conveys. Then connect their experience to the larger issue and the ask. The line is between meaning and facts: you may develop meaning and stakes; you may not add anything a reader could check. Do not add ages, incomes, jobs, family members, diagnoses, insurance status, dollar amounts, dates, distances, durations, events, outcomes, or what other people said or intended. Quote their own phrases where they fit.
 - If the constituent shared no personal story, argue from their goal and general reasoning with real substance: why the issue matters, who is affected, what is at stake. Speak about people in general ("homeowners in wildfire zones"), never about the constituent's own town, family, work, or experiences. Do not describe local conditions or events as fact.
 - Invent nothing about the constituent, and invent no statistics, studies, or figures. If the campaign talking points supply a number you may use it; otherwise argue from the constituent's experience and plain reasoning — never "studies show".
@@ -208,7 +231,7 @@ Return ONLY JSON. Never explain, refuse, or add notes: {"body": "...", "subject"
     ? `CAMPAIGN: ${campaign.headline}
 ${campaign.bill_ref ? `BILL: ${campaign.bill_ref}${campaign.bill_title ? ` — ${campaign.bill_title}` : ''}` : ''}
 ABOUT: ${campaign.description}
-${campaign.message_template ? `CAMPAIGN TALKING POINTS: ${campaign.message_template}` : ''}
+${campaign.message_template ? (requireAllPoints ? `CAMPAIGN TALKING POINTS (make every one):\n${points.map((pt, i) => `${i + 1}. ${pt}`).join('\n')}` : `CAMPAIGN TALKING POINTS: ${campaign.message_template}`) : ''}
 POSITION: ${position}
 ${askInstruction}`
     : `ISSUE: ${inputIssue}
@@ -281,8 +304,8 @@ Draft the core message.`;
         continue;
       }
       const draftFull = [String(out?.opening ?? ''), body, String(out?.ask ?? '')].join(' ');
-      if (body.split(/\s+/).length > 320) {
-        correction = 'Your previous draft ran long. Rewrite it UNDER 260 words, keeping the strongest details of the story.';
+      if (body.split(/\s+/).length > longWords) {
+        correction = `Your previous draft ran long. Rewrite it UNDER ${longTarget} words, keeping the strongest details of the story.`;
         rejects.push(`attempt ${attempt}: ${correction.slice(0, 120)}`);
         body = '';
         continue;
@@ -295,6 +318,19 @@ Draft the core message.`;
         rejects.push(`attempt ${attempt}: ${correction.slice(0, 120)}`);
         body = '';
         continue;
+      }
+      if (requireAllPoints) {
+        const { missing } = talkingPointCoverage(body, points);
+        if (missing.length > 0) {
+          if (attempt === 0) {
+            correction = `YOUR PREVIOUS DRAFT LEFT OUT ${missing.length === 1 ? 'this talking point' : 'these talking points'}: ${missing.map((m) => `"${m}"`).join(' ')}. The campaign asks that every point be made. Add ${missing.length === 1 ? 'it' : 'them'} in your own words, each as at least one sentence, keeping everything else.`;
+            rejects.push(`attempt ${attempt}: ${correction.slice(0, 120)}`);
+            body = '';
+            continue;
+          }
+          // Second miss: ship the draft and log it; a letter beats no letter.
+          console.info('[generate-core] talking points still missing after retry:', missing);
+        }
       }
       const fabricated = detectUnsupportedIdentityClaims(draftFull, userOwnWords);
       if (fabricated.length > 0) {
