@@ -4,6 +4,7 @@ import { cwcAdoptionSignatureSchema, parseBody } from '@/lib/schemas';
 import { writeLimiter, getClientIp } from '@/lib/rate-limit';
 import { resolveUsageIdentity } from '@/lib/usage-quota';
 import { verifyTurnstile } from '@/lib/turnstile';
+import { captchaStrictFor } from '@/lib/campaign-captcha';
 
 /**
  * POST /api/cwc/adoption-signature — a constituent asks a NON-participating
@@ -29,12 +30,10 @@ export async function POST(request: NextRequest) {
 
   const identity = await resolveUsageIdentity(ip);
   if (process.env.TURNSTILE_SECRET_KEY) {
-    // Lenient on a MISSING token (Jared, 2026-10-09): an organization's testers
-    // were on a network that never produced a Turnstile token, so the strict
-    // anonymous path failed closed. Per-IP rate limits, daily quotas, and the
-    // CWC compliance gate remain; a token that is present but invalid is still
-    // rejected.
-    const valid = await verifyTurnstile(body.turnstileToken || '', { strict: false });
+    // Bot check stays on for the general website, off for an organization's
+    // campaign (see src/lib/campaign-captcha.ts).
+    const strict = await captchaStrictFor({ userId: identity.userId, campaignId: body.source === 'campaign' ? body.campaign_id || null : null });
+    const valid = await verifyTurnstile(body.turnstileToken || '', { strict });
     if (!valid) return NextResponse.json({ error: 'CAPTCHA verification failed' }, { status: 403 });
   }
 

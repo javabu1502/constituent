@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { createAdminClient } from '@/lib/supabase';
 import { callClaude, deDash, extractJSON } from '@/lib/claude';
 import { verifyTurnstile } from '@/lib/turnstile';
+import { captchaStrictFor } from '@/lib/campaign-captcha';
 import { getClientIp } from '@/lib/rate-limit';
 import { enforceDailyQuota, resolveUsageIdentity } from '@/lib/usage-quota';
 import { sanitizeAiJurisdiction } from '@/lib/issue-jurisdiction';
@@ -70,12 +71,10 @@ export async function POST(request: NextRequest) {
   const ip = getClientIp(request);
   const identity = await resolveUsageIdentity(ip);
   if (process.env.TURNSTILE_SECRET_KEY) {
-    // Lenient on a MISSING token (Jared, 2026-10-09): an organization's testers
-    // were on a network that never produced a Turnstile token, so the strict
-    // anonymous path failed closed. Per-IP rate limits, daily quotas, and the
-    // CWC compliance gate remain; a token that is present but invalid is still
-    // rejected.
-    const valid = await verifyTurnstile(parsed.data.turnstileToken || '', { strict: false });
+    // Bot check stays on for the general website, off for an organization's
+    // campaign (see src/lib/campaign-captcha.ts).
+    const strict = await captchaStrictFor({ userId: identity.userId, campaignSlug: parsed.data.campaignSlug });
+    const valid = await verifyTurnstile(parsed.data.turnstileToken || '', { strict });
     if (!valid) return NextResponse.json({ error: 'CAPTCHA verification failed' }, { status: 403 });
   }
   const { allowed } = await enforceDailyQuota(ip, 'generate_message', identity);
