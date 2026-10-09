@@ -66,7 +66,11 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
   const [storytellerName, setStorytellerName] = useState('');
   const [storytellerEmail, setStorytellerEmail] = useState('');
   const [grantedUses, setGrantedUses] = useState<string[]>(() => availableUses.map((o) => o.value));
-  const [consentShare, setConsentShare] = useState(false);
+  // Sharing with the campaign is the point of submitting, so it starts checked
+  // (Jared, 10-09); the truthfulness and age boxes stay the storyteller's own.
+  const [consentShare, setConsentShare] = useState(true);
+  // The consent names the organization, not the campaign headline.
+  const orgLabel = (campaign.org_name || '').trim() || campaign.headline;
   const [consentTruthful, setConsentTruthful] = useState(false);
   const [consentAdult, setConsentAdult] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -215,7 +219,7 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
   // --- Submit: validate, then (anonymous) preview the redacted text, then save ---
   const validateConsent = (): string | null => {
     if (!attribution) return t.vChooseCredit;
-    if (!consentShare) return t.vConfirmShare(campaign.headline);
+    if (!consentShare) return t.vConfirmShare(orgLabel);
     if (!consentTruthful) return t.vConfirmTruthful;
     if (!consentAdult) return t.vConfirmAdult;
     if (attribution !== 'anonymous' && !storytellerName.trim()) return t.vEnterName;
@@ -657,7 +661,7 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
           <label className="flex items-start gap-3 cursor-pointer">
             <input type="checkbox" checked={consentShare} onChange={(e) => setConsentShare(e.target.checked)} className="mt-1 h-4 w-4 rounded text-purple-600 focus:ring-purple-500" />
             <span className="text-sm text-gray-700 dark:text-gray-300">
-              {t.shareWith} <strong>{campaign.headline}</strong> {t.throughDashboard}
+              {t.shareWith} <strong>{orgLabel}</strong> {t.throughDashboard}
               {attribution === 'anonymous' ? t.anonSavedNote : t.detailsGoNote}
             </span>
           </label>
