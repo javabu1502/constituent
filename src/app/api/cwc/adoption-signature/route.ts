@@ -29,7 +29,12 @@ export async function POST(request: NextRequest) {
 
   const identity = await resolveUsageIdentity(ip);
   if (process.env.TURNSTILE_SECRET_KEY) {
-    const valid = await verifyTurnstile(body.turnstileToken || '', { strict: !identity.userId });
+    // Lenient on a MISSING token (Jared, 2026-10-09): an organization's testers
+    // were on a network that never produced a Turnstile token, so the strict
+    // anonymous path failed closed. Per-IP rate limits, daily quotas, and the
+    // CWC compliance gate remain; a token that is present but invalid is still
+    // rejected.
+    const valid = await verifyTurnstile(body.turnstileToken || '', { strict: false });
     if (!valid) return NextResponse.json({ error: 'CAPTCHA verification failed' }, { status: 403 });
   }
 
