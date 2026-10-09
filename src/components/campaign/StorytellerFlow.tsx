@@ -662,7 +662,7 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
             <input type="checkbox" checked={consentShare} onChange={(e) => setConsentShare(e.target.checked)} className="mt-1 h-4 w-4 rounded text-purple-600 focus:ring-purple-500" />
             <span className="text-sm text-gray-700 dark:text-gray-300">
               {t.shareWith} <strong>{orgLabel}</strong> {t.throughDashboard}
-              {attribution === 'anonymous' ? t.anonSavedNote : t.detailsGoNote}
+              {attribution === 'anonymous' ? t.anonSavedNote : ''}
             </span>
           </label>
           <label className="flex items-start gap-3 cursor-pointer">
