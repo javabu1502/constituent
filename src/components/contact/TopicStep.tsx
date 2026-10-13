@@ -860,7 +860,8 @@ export function TopicStep({ state, dispatch, onBack }: TopicStepProps) {
           See our Privacy Policy
         </a>{' '}for details.
       </p>
-      <TurnstileWidget />
+      {/* The interview carries its own widget; two badges on one screen (Jared, 10-13). */}
+      {composeMode === 'write' && <TurnstileWidget />}
     </div>
   );
 }
