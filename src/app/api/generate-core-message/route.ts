@@ -6,7 +6,7 @@ import { verifyTurnstile } from '@/lib/turnstile';
 import { captchaStrictFor } from '@/lib/campaign-captcha';
 import { getClientIp } from '@/lib/rate-limit';
 import { enforceDailyQuota, resolveUsageIdentity } from '@/lib/usage-quota';
-import { sanitizeAiJurisdiction } from '@/lib/issue-jurisdiction';
+import { sanitizeAiJurisdiction, getJurisdiction, jurisdictionSource } from '@/lib/issue-jurisdiction';
 import { validateCampaignAsk } from '@/lib/envelope';
 import { detectLanguage, translateToEnglish, type SupportedLanguage } from '@/lib/language';
 import { parseTalkingPoints, talkingPointCoverage, MAX_REQUIRED_POINTS } from '@/lib/talking-points';
@@ -136,6 +136,17 @@ export async function POST(request: NextRequest) {
     if (inWhy) original = { language: 'es', text: inWhy };
   }
 
+  // Routing hint for the classifier: what the deterministic rules say about
+  // the freeform ask. Bill references and casework are authoritative and the
+  // client keeps them; a topic rule is advice the model may overrule with a
+  // stated reason.
+  const routingText = campaign ? '' : [inputIssue, inputGoal].filter(Boolean).join(' ');
+  const routingSource = campaign ? 'campaign' : jurisdictionSource(routingText);
+  const routingHintWeights = !campaign && routingSource !== 'none' ? getJurisdiction(routingText).weights : null;
+  const routingHint = routingHintWeights
+    ? `A rule-based lookup suggests federal ${routingHintWeights.federal}, state ${routingHintWeights.state}, local ${routingHintWeights.local} (source: ${routingSource}). Treat it as a hint; if the ask clearly belongs elsewhere, say so in the reason.`
+    : '';
+
   // The interview transcript, when there was one, is context for reading the
   // answers. Guide lines are OUR questions and are never facts about the
   // constituent; an unanswered question is not information.
@@ -213,10 +224,16 @@ Also write "ask": the closing request of the email, one sentence, or two when th
 Also classify which levels of government have real authority over this issue.
 Weights: 2 = primary authority, 1 = shares authority, 0 = no meaningful
 authority. Be strict about 0s: a US senator cannot fix trash pickup; a city
-council cannot fix Social Security.
+council cannot fix Social Security. Read the constituent's ask closely: the
+same topic can belong to different levels depending on what is being asked
+(the death penalty is state law, but televising federal executions is
+Congress alone; schools are local and state, but federal education funding
+is Congress). ${routingHint}
+Also write "jurisdiction_reason": one plain sentence naming the level(s) that
+get this message and why, for the constituent to read.
 
 ${officialStance ? '\nAlso write "side": the answer you argued for, exactly "YES" or "NO".\n' : ''}${original ? '\nThe constituent wrote in Spanish. Also write "body_es": a faithful Spanish rendering of "body", sentence for sentence, so they can read what is being sent in their name. Same facts, same order, nothing added. No dashes.\n' : ''}
-Return ONLY JSON. Never explain, refuse, or add notes: {"body": "...", "subject": "...", "opening": "...", "ask": "..."${officialStance ? ', "side": "YES"|"NO"' : ''}${original ? ', "body_es": "..."' : ''}, "jurisdiction": {"federal": 0|1|2, "state": 0|1|2, "local": 0|1|2}}`;
+Return ONLY JSON. Never explain, refuse, or add notes: {"body": "...", "subject": "...", "opening": "...", "ask": "..."${officialStance ? ', "side": "YES"|"NO"' : ''}${original ? ', "body_es": "..."' : ''}, "jurisdiction_reason": "...", "jurisdiction": {"federal": 0|1|2, "state": 0|1|2, "local": 0|1|2}}`;
 
   // The precise action the ask sentence must carry (validated after).
   const stanceVerb =
@@ -260,7 +277,7 @@ Draft the core message.`;
       campaign?.bill_ref, campaign?.bill_title, userOwnWords,
     ].filter(Boolean).join(' ');
 
-    type CoreOut = { body?: string; subject?: unknown; opening?: unknown; ask?: unknown; side?: unknown; body_es?: unknown; jurisdiction?: unknown } | null;
+    type CoreOut = { body?: string; subject?: unknown; opening?: unknown; ask?: unknown; side?: unknown; body_es?: unknown; jurisdiction?: unknown; jurisdiction_reason?: unknown } | null;
     let out: CoreOut = null;
     let body = '';
     let correction = '';
@@ -423,10 +440,15 @@ Draft the core message.`;
     // AI jurisdiction is advisory: the client applies it ONLY when no
     // deterministic rule matched the issue text.
     const jurisdiction = sanitizeAiJurisdiction(out?.jurisdiction)?.weights ?? null;
+    const jurisdiction_reason = deDash(String(out?.jurisdiction_reason ?? '').trim()).slice(0, 240) || null;
+    // Routing audit trail: what the rules said, what the model said, and why.
+    if (!campaign) {
+      console.info('[jurisdiction]', JSON.stringify({ text: routingText.slice(0, 160), hint: routingHint ? routingHintWeights : null, source: routingSource, ai: jurisdiction, reason: jurisdiction_reason }));
+    }
     // Spanish reading copy of the core: for the participant's eyes, never sent.
     const rawBodyEs = original ? deDash(String(out?.body_es ?? '').trim()) : '';
     const body_es = rawBodyEs.length >= 40 ? rawBodyEs : null;
-    return NextResponse.json({ body, subject, opening, ask, jurisdiction, body_es, original });
+    return NextResponse.json({ body, subject, opening, ask, jurisdiction, jurisdiction_reason, jurisdiction_source: routingSource, body_es, original });
   } catch (err) {
     console.error('[generate-core] failed:', err);
     return NextResponse.json({ error: 'Message drafting is unavailable right now' }, { status: 503 });

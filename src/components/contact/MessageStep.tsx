@@ -7,7 +7,8 @@ import { Button } from '@/components/ui/Button';
 import { PHONE_TIPS } from '@/lib/phone-tips';
 import { useTurnstile } from '@/components/ui/Turnstile';
 import { buildEnvelope } from '@/lib/envelope';
-import { hasJurisdictionRule, sanitizeAiJurisdiction } from '@/lib/issue-jurisdiction';
+import { jurisdictionSource, sanitizeAiJurisdiction, selectLevels, type GovLevel } from '@/lib/issue-jurisdiction';
+import { chooseLocalOfficials } from '@/lib/local-routing';
 import { detectCasework } from '@/lib/casework';
 import { auditMessageQuality } from '@/lib/message-quality';
 import { salutationTitle } from '@/lib/utils';
@@ -505,21 +506,27 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
               ask: typeof data.ask === 'string' ? data.ask : null,
               bodyEs: typeof data.body_es === 'string' ? data.body_es : null,
               original: data.original && typeof data.original.text === 'string' ? data.original : null,
+              jurisdictionReason: typeof data.jurisdiction_reason === 'string' ? data.jurisdiction_reason : null,
             },
           });
 
-          // AI jurisdiction refinement — ONLY when no hand-audited rule
-          // matched the issue text (the rules are the guardrail; the AI
-          // catches phrasing the patterns can't).
+          // Routing: the classifier decides which levels get the message,
+          // choosing from EVERY official at the address (so it can add
+          // Congress back, not just trim). A bill reference or casework is
+          // unambiguous and stays authoritative. (Jared, 2026-10-13: a
+          // "televised executions" letter went to state and local only.)
           let recipients = repsNeedingMessages;
-          const issueText = `${state.issue || ''} ${state.issueCategory || ''}`;
-          if (data.jurisdiction && !hasJurisdictionRule(issueText)) {
+          const issueText = `${state.issue || ''} ${state.issueCategory || ''} ${state.ask || ''}`;
+          const source = jurisdictionSource(issueText);
+          if (data.jurisdiction && source !== 'bill' && source !== 'casework') {
             const ai = sanitizeAiJurisdiction(data.jurisdiction);
             if (ai) {
-              const refined = recipients.filter((rep) => ai.weights[(rep.level as 'federal' | 'state' | 'local') ?? 'federal'] > 0);
-              if (refined.length > 0 && refined.length < recipients.length) {
-                recipients = refined;
-                dispatch({ type: 'SELECT_REPS', payload: refined });
+              const levels = new Set(selectLevels(ai));
+              const pool = state.officials.length > 0 ? state.officials : recipients;
+              const chosen = chooseLocalOfficials(pool.filter((o) => levels.has((o.level as GovLevel) ?? 'federal')), `${issueText} ${state.personalWhy || ''}`);
+              if (chosen.length > 0) {
+                recipients = chosen;
+                dispatch({ type: 'SELECT_REPS', payload: chosen });
               }
             }
           }
@@ -741,6 +748,9 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
             offices accept messages only from their own constituents, and a message sent to the wrong level of
             government goes nowhere. This one goes to {selectedReps.length === 1 ? 'the official' : `the ${selectedReps.length} officials`} who can act:
           </p>
+          {state.coreFrame?.jurisdictionReason && (
+            <p className="text-xs text-purple-700 dark:text-purple-300 mb-2">{state.coreFrame.jurisdictionReason}</p>
+          )}
           <RecipientChips
             reps={selectedReps}
             // Only STATE legislators can be added by hand. Congress is decided by the

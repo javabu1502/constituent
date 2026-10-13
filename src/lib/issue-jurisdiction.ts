@@ -686,6 +686,22 @@ export function getJurisdiction(issueText: string): JurisdictionGuidance {
   return merged;
 }
 
+/**
+ * Which deterministic signal decided the routing, if any. Bill references
+ * and casework are unambiguous and stay authoritative; a topic rule is a
+ * strong hint that the AI classifier may overrule with a stated reason
+ * (Jared, 2026-10-13: "AI should do the audit so we determine where").
+ */
+export function jurisdictionSource(issueText: string): 'bill' | 'casework' | 'rule' | 'none' {
+  const text = (issueText || '').trim();
+  if (!text) return 'none';
+  const refs = detectBillRefs(text);
+  if (refs.federal.length > 0 || refs.state.length > 0) return 'bill';
+  const casework = detectCasework(text);
+  if (casework.isCasework && casework.level) return 'casework';
+  return RULES.some((rule) => rule.pattern.test(text)) ? 'rule' : 'none';
+}
+
 /** Did any deterministic signal match (bill ref, casework, or topic rule)?
  * When true, the table is authoritative and AI classification is ignored. */
 export function hasJurisdictionRule(issueText: string): boolean {

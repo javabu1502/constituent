@@ -55,6 +55,8 @@ export interface ContactState {
     bodyEs?: string | null;
     /** The sender's own words in the language they wrote, appended to every letter. */
     original?: { language: 'en' | 'es'; text: string } | null;
+    /** The classifier's one-line reason for which levels get the message. */
+    jurisdictionReason?: string | null;
   } | null;
   // Per-official messages keyed by official name (like PoliAct)
   messages: Record<string, OfficialMessage>;
