@@ -239,6 +239,20 @@ const RULES: JurisdictionRule[] = [
     },
   },
   {
+    // Capital punishment is a state legislature question (and a federal one
+    // for federal crimes). A mayor or council member has no vote on it; the
+    // general crime rule below would have pulled them in (seen 2026-10-13).
+    pattern: /death penalty|capital punishment|death row|\bexecutions?\b(?! of (?:the )?(?:law|contract|order|budget))|lethal injection/i,
+    guidance: {
+      weights: { federal: 1, state: 2, local: 0 },
+      why: {
+        state: 'The death penalty is set by state law; the legislature decides whether it exists and how it is applied.',
+        federal: 'Congress sets the penalty for federal crimes only.',
+        local: 'City and county officials have no authority over sentencing law.',
+      },
+    },
+  },
+  {
     // Bare "drug" is too greedy — it pulled Medicare drug coverage into
     // city-council territory. Only drug-CRIME phrasings belong here; pricing
     // and coverage phrasings are handled by the health rules above.

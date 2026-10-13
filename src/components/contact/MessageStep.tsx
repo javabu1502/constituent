@@ -656,10 +656,15 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
     selectedReps.some(rep => rep.name === name)
   ).length;
 
-  // Show full-screen spinner only when generating AND no messages have arrived yet
+  // Show full-screen spinner only when generating AND no messages have arrived yet.
+  // The CAPTCHA widget MUST be mounted here too: drafting fires on mount and
+  // getToken() waits for this step's own widget to solve. With the widget only
+  // in the review view below, every anonymous draft waited 20s, sent no token,
+  // got a 403, and fell back to the template letters (found 2026-10-13).
   if ((isGenerating || isDraftingCore) && loadedCount === 0) {
     return (
       <div className="p-6 sm:p-8">
+        <TurnstileWidget />
         <div className="flex flex-col items-center justify-center py-16">
           <div className="relative">
             <div className="w-16 h-16 border-4 border-purple-200 dark:border-purple-800 rounded-full animate-spin border-t-purple-600"></div>
