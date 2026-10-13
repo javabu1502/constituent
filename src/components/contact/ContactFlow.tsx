@@ -45,6 +45,8 @@ export interface ContactState {
   personalWhy: string;
   // Message-first: the approved core message, drafted before address/officials.
   coreMessage: string;
+  /** Level the guided interview decided on; null when the person wrote the form by hand. */
+  interviewLevel: 'federal' | 'state' | 'local' | 'both' | null;
   /** AI-drafted frame from the core pass (subject/opening/ask), reused when
    *  a recipient is added later so every letter shares one voice. */
   coreFrame: {
@@ -91,6 +93,7 @@ type ContactAction =
   | { type: 'SET_SHARE_ID'; payload: string }
   | { type: 'SET_SENT_STATUS'; payload: { officialId: string; status: string } }
   | { type: 'SET_CORE_FRAME'; payload: ContactState['coreFrame'] }
+  | { type: 'SET_INTERVIEW_LEVEL'; payload: ContactState['interviewLevel'] }
   | { type: 'GO_TO_STEP'; payload: ContactState['step'] }
   | { type: 'RESET' };
 
@@ -109,6 +112,7 @@ const initialState: ContactState = {
   ask: '',
   personalWhy: '',
   coreMessage: '',
+  interviewLevel: null,
   coreFrame: null,
   messages: {},
   loadingIds: new Set(),
@@ -154,6 +158,8 @@ function contactReducer(state: ContactState, action: ContactAction): ContactStat
       return { ...state, coreMessage: action.payload };
     case 'SET_CORE_FRAME':
       return { ...state, coreFrame: action.payload };
+    case 'SET_INTERVIEW_LEVEL':
+      return { ...state, interviewLevel: action.payload };
     case 'SET_PERSONAL_WHY':
       return { ...state, personalWhy: action.payload };
     case 'SET_MESSAGE':

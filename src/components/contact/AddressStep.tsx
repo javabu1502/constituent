@@ -2,7 +2,7 @@
 
 import { useState, useCallback } from 'react';
 import type { ContactState, ContactAction } from './ContactFlow';
-import { chooseRecipientLevels, type GovLevel } from '@/lib/issue-jurisdiction';
+import { chooseRecipientLevels, jurisdictionSource, type GovLevel } from '@/lib/issue-jurisdiction';
 import { chooseLocalOfficials } from '@/lib/local-routing';
 import type { Official } from '@/lib/types';
 import { Button } from '@/components/ui/Button';
@@ -73,8 +73,16 @@ export function AddressStep({ state, dispatch }: AddressStepProps) {
       // is context, not a mailing list; the old any-weight policy put an
       // open-borders message in a state senator's inbox. The personal story
       // is included so bill refs and casework phrasing inside it count.
+      // The guided interview decides the level (it asked, and said why); a bill
+      // reference or casework in the text is unambiguous and still wins.
+      const ruleSource = jurisdictionSource([state.issue, state.issueCategory, state.ask].filter(Boolean).join(' '));
+      const interviewLevels: GovLevel[] | null =
+        state.interviewLevel && ruleSource !== 'bill' && ruleSource !== 'casework'
+          ? state.interviewLevel === 'both' ? ['federal', 'state'] : [state.interviewLevel]
+          : null;
       const levels = new Set(
-        chooseRecipientLevels({ issue: state.issue, issueCategory: state.issueCategory, ask: state.ask, personalWhy: state.personalWhy }),
+        interviewLevels ??
+          chooseRecipientLevels({ issue: state.issue, issueCategory: state.issueCategory, ask: state.ask, personalWhy: state.personalWhy }),
       );
       const all = data.officials as Official[];
       // Within the local level, only the body that owns the issue (school board

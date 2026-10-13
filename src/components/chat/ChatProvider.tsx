@@ -46,7 +46,7 @@ export function useChatContext() {
 const RATE_LIMIT_MAX = 15;
 const RATE_LIMIT_WINDOW = 5 * 60 * 1000; // 5 minutes
 
-function tryParseInterviewResult(content: string): InterviewResult | null {
+export function tryParseInterviewResult(content: string): InterviewResult | null {
   const jsonMatch = content.match(/```json\s*([\s\S]*?)\s*```/);
   if (!jsonMatch) return null;
   try {
