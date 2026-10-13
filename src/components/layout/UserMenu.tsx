@@ -29,13 +29,23 @@ export function UserMenu({ user }: { user: User | null }) {
   }, []);
 
   if (!user) {
+    // Both doors, side by side: a tester could not find how to make an
+    // account when the header only said "Sign In" (Jared, 10-13).
     return (
-      <Link
-        href="/login"
-        className="text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-lg transition-colors"
-      >
-        Sign In
-      </Link>
+      <div className="flex items-center gap-2">
+        <Link
+          href="/login"
+          className="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-purple-700 dark:hover:text-purple-300 px-3 py-2 rounded-lg transition-colors"
+        >
+          Sign In
+        </Link>
+        <Link
+          href="/signup"
+          className="text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-lg transition-colors"
+        >
+          Create account
+        </Link>
+      </div>
     );
   }
 

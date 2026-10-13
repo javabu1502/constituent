@@ -756,7 +756,8 @@ export function SendStep({ state, dispatch, onBack }: SendStepProps) {
 
 
       <p className="text-xs text-gray-500 dark:text-gray-400 text-center mb-4">
-        If you are signed in, this message is saved to your history. See our{' '}
+        <Link href="/signup" className="text-purple-600 dark:text-purple-400 hover:underline font-medium">Create a free account</Link>{' '}
+        to keep this message in your history and hear when your officials act. See our{' '}
         <Link href="/privacy" className="text-purple-600 dark:text-purple-400 hover:underline">Privacy Policy</Link>{' '}
         for details.
       </p>

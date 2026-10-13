@@ -131,13 +131,22 @@ export function MobileNav({ user }: { user: User | null }) {
               </button>
             </>
           ) : (
-            <Link
-              href="/login"
-              onClick={() => setOpen(false)}
-              className="block px-4 py-3 text-sm font-medium text-purple-600 dark:text-purple-400 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
-            >
-              Sign In
-            </Link>
+            <>
+              <Link
+                href="/signup"
+                onClick={() => setOpen(false)}
+                className="block px-4 py-3 text-sm font-medium text-purple-600 dark:text-purple-400 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+              >
+                Create account
+              </Link>
+              <Link
+                href="/login"
+                onClick={() => setOpen(false)}
+                className="block px-4 py-3 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+              >
+                Sign In
+              </Link>
+            </>
           )}
         </nav>
       )}
