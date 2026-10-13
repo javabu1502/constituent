@@ -147,10 +147,17 @@ describe('every selectable issue routes through a hand-audited rule', () => {
     expect(getJurisdiction('global warming').weights.state).toBe(2);
   });
 
-  it('death penalty goes to state and federal, never local (10-13)', () => {
-    for (const text of ['Oppose any effort to televise executions', 'Bring back the death penalty', 'end capital punishment', 'Death Penalty Crime & Justice Oppose any effort to televise executions']) {
+  it('death penalty in general goes to the state legislature, never local (10-13)', () => {
+    for (const text of ['Bring back the death penalty', 'end capital punishment', 'Death Penalty Crime & Justice Abolish the death penalty in Nevada']) {
       expect(hasJurisdictionRule(text), text).toBe(true);
-      expect(getJurisdiction(text).weights, text).toEqual({ federal: 2, state: 2, local: 0 });
+      expect(getJurisdiction(text).weights, text).toEqual({ federal: 1, state: 2, local: 0 });
+      expect(chooseRecipientLevels({ issue: text }), text).toEqual(['state']);
+    }
+  });
+  it('federal executions (televised, Bureau of Prisons) go to Congress alone (10-13)', () => {
+    for (const text of ['Oppose any effort to televise executions', 'Death Penalty Crime & Justice Oppose any effort to televise executions', 'Stop the federal death penalty']) {
+      expect(getJurisdiction(text).weights, text).toEqual({ federal: 2, state: 0, local: 0 });
+      expect(chooseRecipientLevels({ issue: text }), text).toEqual(['federal']);
     }
   });
 });

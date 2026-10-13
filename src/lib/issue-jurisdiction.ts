@@ -244,18 +244,36 @@ const RULES: JurisdictionRule[] = [
     },
   },
   {
-    // Capital punishment is both a state question (each state's own law) and
-    // a federal one (the federal death penalty, how federal executions are
-    // carried out or shown). Both levels get a letter; a mayor or council
-    // member has no vote on it. The general crime rule below had pulled local
-    // officials in and the AI classifier had dropped Congress (2026-10-13).
-    pattern: /death penalty|capital punishment|death row|death sentence|\bexecutions?\b(?! of (?:the )?(?:law|contract|order|budget))|lethal injection|televis\w* (?:an )?execution/i,
+    // The FEDERAL death penalty: how federal executions are carried out or
+    // shown (televised executions, the Bureau of Prisons, the Attorney
+    // General). That is Congress alone; a state legislator has no vote on a
+    // federal execution. Vetoes state and local so the general rule below
+    // cannot add them (Jared, 2026-10-13: "states oversee the death penalty
+    // except at the federal level like this instance").
+    pattern: /federal (?:death penalty|executions?|death row)|televis\w* (?:an |the )?executions?|broadcast\w* (?:an |the )?executions?|bureau of prisons|attorney general.{0,40}execut|execut.{0,40}attorney general/i,
+    vetoes: ['state', 'local'],
+    guidance: {
+      weights: { federal: 2, state: 0, local: 0 },
+      why: {
+        federal: 'Federal executions are governed by Congress and the Justice Department; your state legislature has no role.',
+        state: 'A state legislator has no vote on how federal executions are carried out.',
+        local: 'City and county officials have no authority over sentencing law.',
+      },
+    },
+  },
+  {
+    // Capital punishment in general is a state question: each legislature
+    // decides whether it exists and how it is applied. Congress shares
+    // authority only for federal crimes (weight 1, context not a mailing
+    // list). A mayor or council member has no vote on it; the general crime
+    // rule below had pulled local officials in (2026-10-13).
+    pattern: /death penalty|capital punishment|death row|death sentence|\bexecutions?\b(?! of (?:the )?(?:law|contract|order|budget))|lethal injection/i,
     vetoes: ['local'],
     guidance: {
-      weights: { federal: 2, state: 2, local: 0 },
+      weights: { federal: 1, state: 2, local: 0 },
       why: {
         state: 'Each state sets its own death penalty law; the legislature decides whether it exists and how it is applied.',
-        federal: 'Congress sets the federal death penalty and the rules for federal executions.',
+        federal: 'Congress sets the penalty for federal crimes only.',
         local: 'City and county officials have no authority over sentencing law.',
       },
     },
