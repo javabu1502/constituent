@@ -239,15 +239,17 @@ const RULES: JurisdictionRule[] = [
     },
   },
   {
-    // Capital punishment is a state legislature question (and a federal one
-    // for federal crimes). A mayor or council member has no vote on it; the
-    // general crime rule below would have pulled them in (seen 2026-10-13).
-    pattern: /death penalty|capital punishment|death row|\bexecutions?\b(?! of (?:the )?(?:law|contract|order|budget))|lethal injection/i,
+    // Capital punishment is both a state question (each state's own law) and
+    // a federal one (the federal death penalty, how federal executions are
+    // carried out or shown). Both levels get a letter; a mayor or council
+    // member has no vote on it. The general crime rule below had pulled local
+    // officials in and the AI classifier had dropped Congress (2026-10-13).
+    pattern: /death penalty|capital punishment|death row|death sentence|\bexecutions?\b(?! of (?:the )?(?:law|contract|order|budget))|lethal injection|televis\w* (?:an )?execution/i,
     guidance: {
-      weights: { federal: 1, state: 2, local: 0 },
+      weights: { federal: 2, state: 2, local: 0 },
       why: {
-        state: 'The death penalty is set by state law; the legislature decides whether it exists and how it is applied.',
-        federal: 'Congress sets the penalty for federal crimes only.',
+        state: 'Each state sets its own death penalty law; the legislature decides whether it exists and how it is applied.',
+        federal: 'Congress sets the federal death penalty and the rules for federal executions.',
         local: 'City and county officials have no authority over sentencing law.',
       },
     },

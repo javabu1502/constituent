@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { getJurisdiction, matchLabelForLevel, chooseRecipientLevels, type GovLevel } from '../issue-jurisdiction';
+import { getJurisdiction, hasJurisdictionRule, matchLabelForLevel, chooseRecipientLevels, type GovLevel } from '../issue-jurisdiction';
 
 /** Which levels get auto-selected (best/also) for a given issue text. */
 function routedLevels(text: string): GovLevel[] {
@@ -145,5 +145,12 @@ describe('every selectable issue routes through a hand-audited rule', () => {
     // Countries missing from the foreign-policy list fell to the default.
     expect(getJurisdiction('Iran International Affairs').weights).toEqual({ federal: 2, state: 0, local: 0 });
     expect(getJurisdiction('global warming').weights.state).toBe(2);
+  });
+
+  it('death penalty goes to state and federal, never local (10-13)', () => {
+    for (const text of ['Oppose any effort to televise executions', 'Bring back the death penalty', 'end capital punishment']) {
+      expect(hasJurisdictionRule(text), text).toBe(true);
+      expect(getJurisdiction(text).weights, text).toEqual({ federal: 2, state: 2, local: 0 });
+    }
   });
 });
