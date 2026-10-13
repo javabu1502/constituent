@@ -6,6 +6,8 @@
  * content; numbers were the one thing the model kept exact, so this guards
  * the boundary that matters most).
  */
+import { addedFrequencyWords } from './message-quality';
+
 const NUM = /\$?\d[\d,.]*/g;
 const norm = (n: string) => n.replace(/[,$]/g, '').replace(/\.$/, '');
 
@@ -18,6 +20,8 @@ export function draftProblems(body: string, tellerText: string, maxWords: number
   if (maxWords && words > Math.round(maxWords * 1.15)) problems.push(`too long (${words} words, limit ${maxWords})`);
   if (minWords && words < Math.round(minWords * 0.85)) problems.push(`too short (${words} words, write at least ${minWords}): develop what the storyteller said instead of restating it`);
   if (/[—–]/.test(body)) problems.push('em or en dashes');
+  const freq = addedFrequencyWords(body, tellerText);
+  if (freq.length) problems.push(`frequency words the storyteller never used: ${freq.join(', ')} (say only how often they said it happens)`);
   return problems;
 }
 

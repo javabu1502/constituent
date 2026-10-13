@@ -15,6 +15,8 @@ import {
   askContradictsStance,
   detectAiCadence,
   looksLikeRefusal,
+  looksLikeMetaCommentary,
+  addedFrequencyWords,
   sentencesWithUnsourcedStats,
   openingRepeatsBody,
   auditMessageQuality,
@@ -186,15 +188,17 @@ export async function POST(request: NextRequest) {
   // beats long.)
   const stateOnly = campaign?.bill_level === 'state' || campaign?.target_level === 'state';
   const lengthRule = stateOnly
-    ? 'With a personal story, 130 to 200 words. Without one, 80 to 130 words. State legislators read these themselves; keep it tight.'
-    : 'With a personal story, 180 to 250 words. Without one, 90 to 150 words.';
-  const longWords = stateOnly ? 260 : 300;
-  const longTarget = stateOnly ? 200 : 250;
+    ? 'With a personal story, 120 to 180 words. Without one, 80 to 120 words. State legislators read these themselves; keep it tight.'
+    : 'With a personal story, 160 to 220 words. Without one, 90 to 140 words.';
+  const longWords = stateOnly ? 230 : 270;
+  const longTarget = stateOnly ? 180 : 220;
   // Talking points: an organization's campaign makes every point by default
   // (that is what the org is asking for); official weigh-ins and "fit" mode
   // use the ones that connect. Points are always paraphrased, never pasted.
   const points = campaign?.message_template ? parseTalkingPoints(campaign.message_template) : [];
-  const requireAllPoints = !!campaign && !campaign.is_official && campaign.talking_points_coverage !== 'fit' && points.length > 0 && points.length <= MAX_REQUIRED_POINTS;
+  // Thank-you steps are not argued; forcing every talking point into a
+  // thank-you put campaign strategy language in the constituent's mouth.
+  const requireAllPoints = !!campaign && !campaign.is_official && campaign.stage_goal !== 'thank_you' && campaign.talking_points_coverage !== 'fit' && points.length > 0 && points.length <= MAX_REQUIRED_POINTS;
   const talkingPointsRule = requireAllPoints
     ? `- The campaign's talking points are listed as separate items. Make EVERY one of them (there are ${points.length}), each in your own words and the constituent's voice, in whatever order fits their story, and connect each to what they wrote where you can. A point may be one sentence. Numbers from the talking points may be used. Never paste.`
     : '- Use two or three of the campaign\'s talking points, the ones that connect to what the constituent wrote, in your own order and your own words. Numbers from the talking points may be used when they strengthen the case. Never paste.';
@@ -205,11 +209,14 @@ export async function POST(request: NextRequest) {
 - Do NOT include a greeting, sign-off, the constituent's name, or their address anywhere.
 - Do NOT include a final "I ask you to vote..." sentence — the ask is added later.
 - First person, plain human language. ${lengthRule}
-- Write flat declarative sentences. Do not use these shapes: three parallel items in a row, "not X but Y", "this is not X, it is Y", "this is not abstract", a closing line that turns the meaning around, or any dash. If you want a dash, end the sentence and start a new one.
+- Write flat declarative sentences. Do not use these shapes: three parallel items in a row, "not X but Y", "this is not X, it is Y", "X is not Y. It is Z.", fragments for emphasis ("Not a month. Not a week."), "this is not abstract", a closing line that turns the meaning around, a stock opener ("X has real consequences for real people"), or any dash. If you want a dash, end the sentence and start a new one.
+- The body's first sentence is about the issue. It must not restate who the constituent is or where they are; the opening already did.
 - ONE issue only — the one given. Do not drift into other topics.
 ${talkingPointsRule}
 - If the constituent shared a personal story, it is the heart of the message. Lead with it, give it room, and keep their meaning exactly. Develop what they said: set the scene in the terms they gave, say what the moment meant for them, draw out the stakes their words carry, and name the feeling a moment plainly conveys. Then connect their experience to the larger issue and the ask. The line is between meaning and facts: you may develop meaning and stakes; you may not add anything a reader could check. Do not add ages, incomes, jobs, family members, diagnoses, insurance status, dollar amounts, dates, distances, durations, events, outcomes, or what other people said or intended. Quote their own phrases where they fit.
 - If the constituent shared no personal story, argue from their goal and general reasoning with real substance: why the issue matters, who is affected, what is at stake. Speak about people in general ("homeowners in wildfire zones"), never about the constituent's own town, family, work, or experiences. Do not describe local conditions or events as fact.
+- Never change who people are: keep every person's gender, number, relationship, and age exactly as the constituent gave them (a daughter stays a daughter; one child stays one child). Never add frequency or duration words the constituent did not say ("every day", "always", "for years", "constantly").
+- Never invent a name for a bill. Refer to a bill by the number given; use its title only if the campaign gave one.
 - Invent nothing about the constituent, and invent no statistics, studies, or figures. If the campaign talking points supply a number you may use it; otherwise argue from the constituent's experience and plain reasoning — never "studies show".
 - NEVER claim an identity, profession, or lived experience for the constituent that their own words do not state. Caring about veterans does not make them a veteran; caring about schools does not give them children. If they shared no personal stake, write as a concerned constituent about the people affected ("veterans in my community"), never in a borrowed first person ("I served", "my kids"). And never assert that specific harms or events have happened in their own community ("families here are burying their children") unless they said so — concern is theirs to feel; events are theirs to report.
 - Respectful and firm. No insults, no partisan name-calling, no threats, and no "or you'll lose my vote" — offices discount those.
@@ -283,7 +290,9 @@ Draft the core message.`;
     let correction = '';
     // Why each attempt was rejected, so a 502 in the logs says what happened.
     const rejects: string[] = [];
-    for (let attempt = 0; attempt < 2; attempt++) {
+    // Three attempts: a dash retry plus one substantive correction used to
+    // exhaust the budget and 502 (10-13 quality run).
+    for (let attempt = 0; attempt < 3; attempt++) {
       const rawOut = await callClaude(correction ? `${system}\n\n${correction}` : system, user2, original ? 2200 : 1400);
       out = extractJSON(rawOut) as CoreOut;
       if (!out) {
@@ -297,8 +306,15 @@ Draft the core message.`;
         continue;
       }
       const rawBody = String(out?.body ?? '').trim();
+      if (looksLikeMetaCommentary(rawBody) || rawBody.split(/\s+/).length < 50) {
+        // The model narrating its own edit, or a stub, must never ship.
+        correction = 'Your previous reply contained commentary about the draft instead of the draft. Return ONLY the JSON object with the finished text in "body". Never describe what you are doing.';
+        rejects.push(`attempt ${attempt}: meta or stub (${rawBody.split(/\s+/).length} words)`);
+        body = '';
+        continue;
+      }
       if (attempt === 0 && /[\u2014\u2013]/.test(rawBody)) {
-        correction = 'Your previous draft used dashes. Rewrite it with none. End the sentence and start a new one instead.';
+        correction = 'Your previous draft used dashes. Return the same JSON object again with every dash removed: end the sentence and start a new one instead. Return ONLY the JSON, no commentary.';
         rejects.push(`attempt ${attempt}: ${correction.slice(0, 120)}`);
         body = '';
         continue;
@@ -352,6 +368,23 @@ Draft the core message.`;
           // Second miss: ship the draft and log it; a letter beats no letter.
           console.info('[generate-core] talking points still missing after retry:', missing);
         }
+      }
+      // An invented bill name ("Breakfast for Every Nevada Student Act") is
+      // a fact the office will check (2026-10-13 quality run).
+      const actNames = [...draftFull.matchAll(/\b((?:[A-Z][\w'-]*\s+){1,7}Act)\b/g)].map((m) => m[1]);
+      const inventedAct = actNames.find((n) => !statSource.toLowerCase().includes(n.toLowerCase()));
+      if (inventedAct) {
+        correction = `YOUR PREVIOUS DRAFT NAMED a bill "${inventedAct}" that nothing in the campaign material names. Never invent a bill's name. Refer to it only as ${campaign?.bill_ref ? campaign.bill_ref : 'the bill'}.`;
+        rejects.push(`attempt ${attempt}: invented act name ${inventedAct}`);
+        body = '';
+        continue;
+      }
+      const freq = addedFrequencyWords(draftFull, `${userOwnWords} ${campaign?.message_template ?? ''}`);
+      if (freq.length > 0 && attempt < 2) {
+        correction = `YOUR PREVIOUS DRAFT ADDED frequency words the constituent never used: ${freq.map((f) => `"${f}"`).join(', ')}. Remove them. Say only how often they said it happens, or leave frequency out.`;
+        rejects.push(`attempt ${attempt}: ${correction.slice(0, 120)}`);
+        body = '';
+        continue;
       }
       const fabricated = detectUnsupportedIdentityClaims(draftFull, userOwnWords);
       if (fabricated.length > 0) {

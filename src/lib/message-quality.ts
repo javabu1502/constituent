@@ -63,6 +63,15 @@ export function detectAiCadence(text: string): string[] {
 }
 
 /** Prose that is a refusal or a note to the operator, not a draft. */
+/**
+ * The model talking to itself inside the draft ("I need to catch that dash.
+ * Let me rewrite.") shipped as a letter on 2026-10-13. Any first-person
+ * editing talk is a hard reject.
+ */
+export function looksLikeMetaCommentary(text: string): boolean {
+  return /\b(let me (?:rewrite|redo|try again|fix|revise|start over)|i need to (?:catch|fix|rewrite|remove)|here is (?:the|a) (?:rewritten|revised|corrected)|rewriting (?:without|to remove)|i(?:'ll| will) (?:rewrite|revise|remove the dash))\b/i.test(text);
+}
+
 export function looksLikeRefusal(text: string): boolean {
   return /\bi need to (?:pause|stop|flag|point out)\b|\bi can(?:'t|not) (?:draft|write|do) (?:this|that)\b|\bi(?:'m| am) not (?:able|comfortable|going) to\b|\bbefore i (?:draft|write)\b/i.test(text || '');
 }
@@ -159,7 +168,7 @@ const IDENTITY_CLAIMS: { label: string; claim: RegExp; support: RegExp }[] = [
   {
     label: 'parent',
     claim: /\bmy (?:kids?|children|son|daughter|baby)\b|\bas a (?:mom|dad|mother|father|parent)\b|\bi(?:'m| am) (?:a |an )?(?:single )?(?:mom|dad|mother|father|parent)\b/i,
-    support: /(?:\bmy\b|\bour\b)[^.!?\n]{0,25}\b(?:kids?|children|son|daughter|baby|famil\w*)\b|\b(?:i|we) (?:have|raise|am raising|are raising)[^.!?\n]{0,20}\b(?:kids?|children|a son|a daughter|a baby|(?:one|two|three|four|five|\d+) (?:kids?|children|boys?|girls?))\b|\bi(?:'m| am)[^.!?\n]{0,15}\b(?:pregnant|a (?:mom|dad|mother|father|parent))\b|\bas a (?:mom|dad|mother|father|parent)|\b(?:mi|nuestr[oa])s?[^.!?\n]{0,20}\b(?:hij[oa]s?|niñ[oa]s?|bebé|familia)\b/i,
+    support: /(?:\bmy\b|\bour\b)[^.!?\n]{0,25}\b(?:kids?|children|son|daughter|baby|famil\w*)\b|\b(?:i|we) (?:have|raise|am raising|are raising)[^.!?\n]{0,20}\b(?:kids?|children|a son|a daughter|a baby|(?:one|two|three|four|five|\d+) (?:kids?|children|boys?|girls?))\b|\bi(?:'m| am)[^.!?\n]{0,15}\b(?:pregnant|a (?:mom|dad|mother|father|parent))\b|\bas a (?:mom|dad|mother|father|parent)|\b(?:mi|nuestr[oa])s?[^.!?\n]{0,20}\b(?:hij[oa]s?|niñ[oa]s?|bebé|familia)\b|\b(?:my|our) (?:\d+|\w+)[- ]year[- ]old\b|\b(?:my|our) (?:older |younger |oldest |youngest |little )?(?:boy|girl|toddler|twins|kiddo|teenager)s?\b/i,
   },
   {
     label: 'teacher',
@@ -443,6 +452,19 @@ export function askAddressesOfficial(ask: string): boolean {
 
 /** The opening line and the body must not restate each other (the same
  *  credentials sentence twice is the loudest template tell). */
+/**
+ * Frequency and duration words the draft added that the person never said
+ * ("every morning", "always", "for years", "todos los días"). The 10-13
+ * quality run found these in most drafts; they inflate a story and offices
+ * notice. Returns the offending phrases.
+ */
+const FREQUENCY_WORDS = /\b(every (?:single )?(?:day|morning|night|week|month|time)|all the time|always|constantly|for years|year after year|daily|nightly|todos los d[ií]as|todas las (?:mañanas|noches|semanas)|cada d[ií]a|cada mañana|cada noche|siempre|constantemente|durante años)\b/gi;
+export function addedFrequencyWords(draft: string, source: string): string[] {
+  const said = new Set(((source || '').match(FREQUENCY_WORDS) ?? []).map((w) => w.toLowerCase()));
+  const found = (draft || '').match(FREQUENCY_WORDS) ?? [];
+  return [...new Set(found.map((w) => w.toLowerCase()))].filter((w) => !said.has(w));
+}
+
 export function openingRepeatsBody(opening: string, body: string): boolean {
   if (sharesVerbatimRun(opening, body, 8)) return true;
   // Same credentials restated in new words ("I am a renter in Reno" then
@@ -450,7 +472,8 @@ export function openingRepeatsBody(opening: string, body: string): boolean {
   // and the body's first sentence share most of their content words.
   const firstSentence = (body || '').trim().split(/(?<=[.!?])\s+/)[0] || '';
   const shared = contentWords(opening).filter((w) => contentWords(firstSentence).includes(w));
-  return shared.length >= 4;
+  // Three shared content words is already "I drive a school bus" twice.
+  return shared.length >= 3;
 }
 
 const STOPWORDS = new Set(
