@@ -451,6 +451,65 @@ export function TopicStep({ state, dispatch, onBack }: TopicStepProps) {
     dispatch({ type: 'GO_TO_STEP', payload: 'address' });
   };
 
+  // Name, title, and email. In the interview they are asked last, once the
+  // person has said what they want; on a phone they were the first thing on
+  // screen and buried the conversation (Jared, 2026-10-13).
+  const identityFields = (
+    <>
+        {/* Your Name (+ CWC title when congressional delivery is enabled) */}
+        <div className={`mb-5 ${cwcRequired ? 'grid grid-cols-[6rem_1fr] gap-3' : ''}`}>
+          {cwcRequired && (
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Title <span className="text-red-500">*</span>
+              </label>
+              <select
+                value={state.userPrefix}
+                onChange={(e) => dispatch({ type: 'SET_USER_PREFIX', payload: e.target.value })}
+                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              >
+                <option value="" disabled>Choose</option>
+                {CWC_PREFIXES.map((p) => (
+                  <option key={p} value={p}>{p}</option>
+                ))}
+              </select>
+            </div>
+          )}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              Your Name <span className="text-red-500">*</span>
+            </label>
+            <input
+              type="text"
+              value={userName}
+              onChange={(e) => dispatch({ type: 'SET_USER_NAME', payload: e.target.value })}
+              placeholder="Your full name"
+              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
+            />
+          </div>
+        </div>
+  
+        {/* Your Email */}
+        <div className="mb-5">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            Your Email{' '}
+            {cwcRequired ? <span className="text-red-500">*</span> : <span className="text-gray-400 dark:text-gray-500 font-normal">(optional)</span>}
+          </label>
+          <input
+            type="email"
+            value={state.userEmail}
+            onChange={(e) => dispatch({ type: 'SET_USER_EMAIL', payload: e.target.value })}
+            placeholder="you@example.com"
+            className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
+          />
+          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+            {cwcRequired ? 'Congressional offices require an email address to accept and reply to your message. Never shared or sold.' : 'So legislators can reply to you. Never shared or sold.'}
+          </p>
+        </div>
+  
+      </>
+  );
+
   return (
     <div className="p-6 sm:p-8">
       {/* Contact method toggle */}
@@ -546,60 +605,11 @@ export function TopicStep({ state, dispatch, onBack }: TopicStepProps) {
         </div>
       )}
 
-      {/* Your Name (+ CWC title when congressional delivery is enabled) */}
-      <div className={`mb-5 ${cwcRequired ? 'grid grid-cols-[6rem_1fr] gap-3' : ''}`}>
-        {cwcRequired && (
-          <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              Title <span className="text-red-500">*</span>
-            </label>
-            <select
-              value={state.userPrefix}
-              onChange={(e) => dispatch({ type: 'SET_USER_PREFIX', payload: e.target.value })}
-              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-            >
-              <option value="" disabled>Choose</option>
-              {CWC_PREFIXES.map((p) => (
-                <option key={p} value={p}>{p}</option>
-              ))}
-            </select>
-          </div>
-        )}
-        <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-            Your Name <span className="text-red-500">*</span>
-          </label>
-          <input
-            type="text"
-            value={userName}
-            onChange={(e) => dispatch({ type: 'SET_USER_NAME', payload: e.target.value })}
-            placeholder="Your full name"
-            className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
-          />
-        </div>
-      </div>
-
-      {/* Your Email */}
-      <div className="mb-5">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-          Your Email{' '}
-          {cwcRequired ? <span className="text-red-500">*</span> : <span className="text-gray-400 dark:text-gray-500 font-normal">(optional)</span>}
-        </label>
-        <input
-          type="email"
-          value={state.userEmail}
-          onChange={(e) => dispatch({ type: 'SET_USER_EMAIL', payload: e.target.value })}
-          placeholder="you@example.com"
-          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
-        />
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-          {cwcRequired ? 'Congressional offices require an email address to accept and reply to your message. Never shared or sold.' : 'So legislators can reply to you. Never shared or sold.'}
-        </p>
-      </div>
+      {composeMode === 'write' && identityFields}
 
       {composeMode === 'interview' ? (
         <>
-          <InterviewPanel dispatch={dispatch} onContinue={handleContinue} />
+          <InterviewPanel dispatch={dispatch} onContinue={handleContinue} identityFields={identityFields} />
           <button
             type="button"
             onClick={() => setComposeMode('write')}
@@ -607,11 +617,9 @@ export function TopicStep({ state, dispatch, onBack }: TopicStepProps) {
           >
             Skip the questions and write it myself
           </button>
-          <div className="flex gap-3 mt-6">
-            <Button variant="secondary" onClick={onBack} className="flex-1">
-              Back
-            </Button>
-          </div>
+          <button type="button" onClick={onBack} className="block mx-auto mt-4 text-sm text-purple-600 dark:text-purple-400 hover:underline">
+            &larr; Back
+          </button>
         </>
       ) : (
         <>

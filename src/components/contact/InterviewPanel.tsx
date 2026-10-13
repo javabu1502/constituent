@@ -40,9 +40,12 @@ function displayText(content: string): string {
 export function InterviewPanel({
   dispatch,
   onContinue,
+  identityFields,
 }: {
   dispatch: React.Dispatch<ContactAction>;
   onContinue: () => void;
+  /** Name, title, and email inputs; shown once the interview has a result. */
+  identityFields?: React.ReactNode;
 }) {
   const { getToken, TurnstileWidget } = useTurnstile();
   const [messages, setMessages] = useState<Msg[]>([{ role: 'assistant', content: GREETING }]);
@@ -110,7 +113,6 @@ export function InterviewPanel({
 
   return (
     <div className="space-y-4">
-      <TurnstileWidget />
       <div ref={scrollRef} className="max-h-[24rem] overflow-y-auto space-y-3 pr-1">
         {messages.map((m, i) => {
           const text = m.role === 'assistant' ? displayText(m.content) : m.content;
@@ -142,6 +144,12 @@ export function InterviewPanel({
             <p className="text-sm text-gray-700 dark:text-gray-300"><span className="font-medium">Why it matters to you:</span> {result.personalWhy}</p>
           )}
           <p className="text-sm text-gray-700 dark:text-gray-300"><span className="font-medium">Who gets it:</span> {LEVEL_LABEL[result.level] ?? LEVEL_LABEL.both}</p>
+          {identityFields && (
+            <div className="pt-3 mt-1 border-t border-purple-200 dark:border-purple-700">
+              <p className="text-sm font-semibold text-gray-900 dark:text-white mb-3">Last thing: who the message is from</p>
+              {identityFields}
+            </div>
+          )}
           <div className="flex gap-2 pt-1">
             <Button onClick={onContinue} className="flex-1">Looks good. Next: your address</Button>
             <button
@@ -156,7 +164,7 @@ export function InterviewPanel({
       )}
 
       {!result && (
-        <div className="flex gap-2">
+        <div className="space-y-2">
           <textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
@@ -169,13 +177,18 @@ export function InterviewPanel({
             placeholder="Share as much or as little as you like…"
             rows={2}
             disabled={streaming}
-            className="flex-1 px-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 resize-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 text-sm"
+            className="w-full px-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 resize-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 text-sm"
           />
-          <button type="button" onClick={() => setInput('I’d rather not say.')} disabled={streaming} className="self-end text-xs text-gray-500 dark:text-gray-400 underline whitespace-nowrap pb-3">Rather not say</button>
-          <MicButton text={input} setText={setInput} disabled={streaming} className="self-end" />
-          <Button onClick={() => void send()} isLoading={streaming} className="self-end">Send</Button>
+          <div className="flex items-center justify-between gap-2">
+            <button type="button" onClick={() => setInput('I’d rather not say.')} disabled={streaming} className="text-xs text-gray-500 dark:text-gray-400 underline whitespace-nowrap">Rather not say</button>
+            <div className="flex items-center gap-2">
+              <MicButton text={input} setText={setInput} disabled={streaming} />
+              <Button onClick={() => void send()} isLoading={streaming}>Send</Button>
+            </div>
+          </div>
         </div>
       )}
+      <TurnstileWidget />
     </div>
   );
 }
