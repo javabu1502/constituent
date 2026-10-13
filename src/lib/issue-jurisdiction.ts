@@ -26,6 +26,11 @@ interface JurisdictionRule {
   /** Federal-exclusive topics: competing rules need MULTIPLE distinct token
    * hits to add state/local weight when one of these matches. */
   exclusive?: boolean;
+  /** Levels this rule asserts have NO authority. A veto beats any weight a
+   * broader rule contributes: "Crime & Justice" as a category label trips
+   * the general crime rule (local 2), but a death penalty letter must never
+   * go to a mayor (2026-10-13). */
+  vetoes?: GovLevel[];
 }
 
 const RULES: JurisdictionRule[] = [
@@ -245,6 +250,7 @@ const RULES: JurisdictionRule[] = [
     // member has no vote on it. The general crime rule below had pulled local
     // officials in and the AI classifier had dropped Congress (2026-10-13).
     pattern: /death penalty|capital punishment|death row|death sentence|\bexecutions?\b(?! of (?:the )?(?:law|contract|order|budget))|lethal injection|televis\w* (?:an )?execution/i,
+    vetoes: ['local'],
     guidance: {
       weights: { federal: 2, state: 2, local: 0 },
       why: {
@@ -649,6 +655,14 @@ export function getJurisdiction(issueText: string): JurisdictionGuidance {
         merged.weights[level] = rule.guidance.weights[level];
         if (rule.guidance.why[level]) merged.why[level] = rule.guidance.why[level];
       }
+    }
+  }
+  // Vetoes: a specific rule that says a level has no authority wins over any
+  // weight a broader rule added for that level.
+  for (const rule of matched) {
+    for (const level of rule.vetoes ?? []) {
+      merged.weights[level] = 0;
+      if (rule.guidance.why[level]) merged.why[level] = rule.guidance.why[level];
     }
   }
   return merged;

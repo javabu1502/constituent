@@ -148,7 +148,7 @@ describe('every selectable issue routes through a hand-audited rule', () => {
   });
 
   it('death penalty goes to state and federal, never local (10-13)', () => {
-    for (const text of ['Oppose any effort to televise executions', 'Bring back the death penalty', 'end capital punishment']) {
+    for (const text of ['Oppose any effort to televise executions', 'Bring back the death penalty', 'end capital punishment', 'Death Penalty Crime & Justice Oppose any effort to televise executions']) {
       expect(hasJurisdictionRule(text), text).toBe(true);
       expect(getJurisdiction(text).weights, text).toEqual({ federal: 2, state: 2, local: 0 });
     }
