@@ -7,7 +7,6 @@ import { trackEvent } from '@/lib/analytics';
 import { Button } from '@/components/ui/Button';
 import { SupportNudge } from '@/components/ui/SupportNudge';
 import { SocialShare } from '@/components/ui/SocialShare';
-import { useTurnstile } from '@/components/ui/Turnstile';
 import { MicButton } from '@/components/chat/MicButton';
 import { AddressAutocomplete, type ParsedAddress } from '@/components/ui/AddressAutocomplete';
 import { STORY_USAGE_OPTIONS } from '@/lib/story-usage';
@@ -90,7 +89,11 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
   const [copied, setCopied] = useState(false);
 
   const scrollRef = useRef<HTMLDivElement>(null);
-  const { getToken, TurnstileWidget } = useTurnstile();
+  // No CAPTCHA on the storytelling flow (Jared, 2026-10-15, before the
+  // Children's Cabinet session): the server accepts storytelling requests
+  // without a token, the routes are rate limited per IP, and the organization
+  // reads every story. A widget that was slow or rejected by the verifier
+  // was the one way left for a participant to see an error.
 
   useEffect(() => {
     async function loadAuth() {
@@ -130,7 +133,7 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
       const res = await fetch('/api/chat/story-interview', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ campaignSlug: campaign.slug, messages: next.slice(-30), turnstileToken: (await getToken().catch(() => '')) || undefined }),
+        body: JSON.stringify({ campaignSlug: campaign.slug, messages: next.slice(-30), turnstileToken: undefined }),
       });
       if (!res.ok || !res.body) {
         throw new Error((await res.text().catch(() => '')) || t.connectError);
@@ -169,7 +172,7 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
       const res = await fetch('/api/stories/compose', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ campaignSlug: campaign.slug, messages: messages.slice(-40), turnstileToken: (await getToken().catch(() => '')) || undefined }),
+        body: JSON.stringify({ campaignSlug: campaign.slug, messages: messages.slice(-40), turnstileToken: undefined }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || t.composeFailed);
@@ -200,7 +203,7 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
           currentTitle: title,
           currentBody: body,
           revisionNote: note,
-          turnstileToken: (await getToken().catch(() => '')) || undefined,
+          turnstileToken: undefined,
         }),
       });
       const data = await res.json();
@@ -280,7 +283,7 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
     if (problem) { setError(problem); return; }
     setSubmitting(true);
     try {
-      const turnstileToken = (await getToken().catch(() => '')) || '';
+      const turnstileToken = '';
       // Anonymous: show the redacted text first. Nothing is saved yet.
       if (attribution === 'anonymous' && step === 'consent') {
         const res = await fetch('/api/stories', {
@@ -382,7 +385,6 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
     const declineAnswer = () => { setInput(t.ratherNotSayInput); };
     return (
       <div className="space-y-4">
-        <TurnstileWidget />
         <div
           ref={scrollRef}
           className="h-80 overflow-y-auto space-y-3 p-1"
@@ -450,7 +452,6 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
   if (step === 'review') {
     return (
       <div className="space-y-4">
-        <TurnstileWidget />
         <div>
           <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{t.titleLabel} <span className="text-gray-400 font-normal">{t.optional}</span></label>
           <input
@@ -515,7 +516,6 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
   if (step === 'consent') {
     return (
       <div className="space-y-5">
-        <TurnstileWidget />
         <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{t.consentTitle}</h3>
 
         {/* Attribution */}
@@ -703,7 +703,6 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
   if (step === 'preview') {
     return (
       <div className="space-y-4">
-        <TurnstileWidget />
         <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{t.previewTitle}</h3>
         <p className="text-sm text-gray-600 dark:text-gray-300">{t.previewNote}</p>
         {flagged.length > 0 && (
