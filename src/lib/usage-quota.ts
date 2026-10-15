@@ -3,13 +3,16 @@ import { createAdminClient } from '@/lib/supabase';
 import { createClient } from '@/lib/supabase/server';
 
 /** Daily AI generation limits by action type (per user, or per anonymous IP). */
+// Per-IP. A conference room, a school, or an office shares one address, so
+// these must hold for a crowd, not a person (Children's Cabinet session,
+// 2026-10-16: 30 people on one Wi-Fi would have hit chat:50 in minutes).
 const DAILY_LIMITS: Record<string, number> = {
-  generate_message: 10,
+  generate_message: 60,
   generate_follow_up: 10,
   generate_comment: 10,
   research: 15,
   bill_summary: 15,
-  chat: 50,
+  chat: 600,
 };
 
 /** Minimum days between messages to the same legislator */

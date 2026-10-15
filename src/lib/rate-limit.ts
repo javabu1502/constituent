@@ -62,11 +62,11 @@ export function getClientIp(request: Request): string {
 // Pre-configured limiters for different route tiers
 
 // Per-minute burst limiters
-export const chatLimiter = rateLimit({ windowMs: 60_000, maxRequests: 20 });       // streaming, called frequently
+export const chatLimiter = rateLimit({ windowMs: 60_000, maxRequests: 90 });       // streaming; per IP, so a room on one Wi-Fi must fit
 export const researchLimiter = rateLimit({ windowMs: 60_000, maxRequests: 10 });    // streaming research
 export const generateLimiter = rateLimit({ windowMs: 60_000, maxRequests: 5 });     // expensive generation
 export const summaryLimiter = rateLimit({ windowMs: 60_000, maxRequests: 15 });     // has Supabase cache
-export const writeLimiter = rateLimit({ windowMs: 60_000, maxRequests: 10 });      // track-send, message-feedback, participate
+export const writeLimiter = rateLimit({ windowMs: 60_000, maxRequests: 40 });      // track-send, message-feedback, participate, stories; per IP
 export const lookupLimiter = rateLimit({ windowMs: 60_000, maxRequests: 15 });     // representatives
 export const profileLimiter = rateLimit({ windowMs: 60_000, maxRequests: 10 });    // profile, campaigns
 

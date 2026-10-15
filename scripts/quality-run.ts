@@ -17,6 +17,9 @@ import { detectAiCadence } from '../src/lib/message-quality';
 import * as fs from 'fs';
 
 const BASE = process.env.SIM_BASE_URL || 'http://localhost:3123';
+// Production rejects a present-but-invalid token; only the local server (with
+// the Turnstile test secret) accepts the placeholder.
+const TOKEN = /localhost|127\.0\.0\.1/.test(BASE) ? 'test' : undefined;
 type Flow = 'story' | 'advocacy';
 type Msg = { role: 'user' | 'assistant'; content: string };
 
@@ -172,7 +175,7 @@ async function runOne(p: Persona, idx: number, templates: Record<string, string 
       const answer = await fakeAnswer(p, messages);
       messages.push({ role: 'user', content: answer });
       const path = p.flow === 'story' ? '/api/chat/story-interview' : '/api/chat/campaign-interview';
-      const res = await post(path, { campaignSlug: p.slug, messages, stance: p.stance, turnstileToken: 'test' }, ip);
+      const res = await post(path, { campaignSlug: p.slug, messages, stance: p.stance, turnstileToken: TOKEN }, ip);
       if (!res.ok) throw new Error(`${path} ${res.status}: ${(await res.text()).slice(0, 200)}`);
       const reply = (await res.text()).trim();
       messages.push({ role: 'assistant', content: reply });
@@ -181,12 +184,17 @@ async function runOne(p: Persona, idx: number, templates: Record<string, string 
     const userTurns = messages.filter((m) => m.role === 'user').map((m) => m.content);
     result.inputWords = userTurns.join(' ').split(/\s+/).filter(Boolean).length;
     if (p.flow === 'story') {
-      const res = await post('/api/stories/compose', { campaignSlug: p.slug, messages, turnstileToken: 'test' }, ip);
+      const res = await post('/api/stories/compose', { campaignSlug: p.slug, messages, turnstileToken: TOKEN }, ip);
       const d = await res.json();
       if (!res.ok) throw new Error(`compose ${res.status}: ${d.error}`);
       result.output = d.body || ''; result.title = d.title || '';
+      // Submit in PREVIEW mode: runs the anonymization pass, saves nothing.
+      const pv = await post('/api/stories', { campaignSlug: p.slug, preview: true, body: result.output, title: result.title, attribution_level: 'anonymous', granted_uses: ['shared_with_legislators'], consent_usage: true, consent_truthful: true, consent_adult: true, turnstileToken: TOKEN }, ip);
+      const pd = await pv.json();
+      if (!pv.ok) throw new Error(`submit preview ${pv.status}: ${pd.error}`);
+      result.title = result.title || ''; (result as RunResult & { preview?: string }).preview = pd.final_body;
     } else {
-      const res = await post('/api/generate-core-message', { campaignSlug: p.slug, stance: p.stance, personalWhy: userTurns.join('\n\n').slice(0, 4000), interview: messages, turnstileToken: 'test' }, ip);
+      const res = await post('/api/generate-core-message', { campaignSlug: p.slug, stance: p.stance, personalWhy: userTurns.join('\n\n').slice(0, 4000), interview: messages, turnstileToken: TOKEN }, ip);
       const d = await res.json();
       if (!res.ok) throw new Error(`draft ${res.status}: ${d.error}`);
       result.output = `${d.opening ? d.opening + '\n\n' : ''}${d.body}\n\n${d.ask ?? ''}`.trim(); result.title = d.subject || '';
