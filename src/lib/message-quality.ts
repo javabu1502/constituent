@@ -458,7 +458,7 @@ export function askAddressesOfficial(ask: string): boolean {
  * quality run found these in most drafts; they inflate a story and offices
  * notice. Returns the offending phrases.
  */
-const FREQUENCY_WORDS = /\b(every (?:single )?(?:day|morning|night|week|month|time)|all the time|always|constantly|for years|year after year|daily|nightly|todos los d[ií]as|todas las (?:mañanas|noches|semanas)|cada d[ií]a|cada mañana|cada noche|siempre|constantemente|durante años)\b/gi;
+const FREQUENCY_WORDS = /\b(every (?:single )?(?:day|morning|night|week|month|time)|all the time|always|constantly|for years|year after year|night after night|day after day|morning after morning|daily|nightly|todos los d[ií]as|todas las (?:mañanas|noches|semanas)|cada d[ií]a|cada mañana|cada noche|siempre|constantemente|durante años)\b/gi;
 export function addedFrequencyWords(draft: string, source: string): string[] {
   const said = new Set(((source || '').match(FREQUENCY_WORDS) ?? []).map((w) => w.toLowerCase()));
   const found = (draft || '').match(FREQUENCY_WORDS) ?? [];
