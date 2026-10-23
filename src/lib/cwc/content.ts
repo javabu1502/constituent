@@ -10,10 +10,14 @@ import type { CwcMessageContent } from './types';
 // "respectfully") — the alternation is first-match.
 const CLOSING_WORDS = [
   'sincerely yours', 'yours sincerely', 'sincerely',
+  // "Very Respectfully," survived the strip on a production send (queue row
+  // #11, 2026-10-20) because only the bare word was listed. Intensified
+  // forms must precede the bare word.
+  'very respectfully', 'most respectfully',
   'respectfully yours', 'respectfully submitted', 'respectfully',
   'best regards', 'kind regards', 'warm regards', 'warmest regards', 'regards',
   'best wishes', 'all the best', 'best',
-  'thank you for your time', 'thank you', 'thanks so much', 'thanks',
+  'thank you so much for your time', 'thank you for your time', 'thank you', 'thanks so much', 'thanks',
   'yours truly', 'with gratitude', 'gratefully', 'warmly', 'cordially',
   'in solidarity', 'v/r', 'many thanks',
 ].join('|');

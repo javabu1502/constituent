@@ -84,4 +84,10 @@ export interface CwcDelivery {
   deliveryId?: string;
   /** Override the delivery date (YYYYMMDD). Defaults to today (UTC). */
   deliveryDate?: string;
+  /** messages.id of the tracked send this delivery came from. The drain
+   *  writes the terminal outcome back to that row. Never rendered. */
+  messageId?: string;
+  /** Display name of the official, for notifications and the compliance
+   *  audit row. Never rendered. */
+  officialName?: string;
 }

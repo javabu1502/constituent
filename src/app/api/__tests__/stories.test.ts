@@ -9,16 +9,31 @@ const mockCampaignSelect = vi.fn(() => ({ eq: mockEq1 }));
 const mockSubjectInsert = vi.fn();
 const mockStoryInsert = vi.fn();
 const mockRpc = vi.fn();
+// Result of the insert's .select().single(); a test can make it fail.
+const mockInsertResult = vi.fn(async () => ({ data: { id: 'story-1' }, error: null } as { data: { id: string } | null; error: { message: string } | null }));
+// Today's story count for the campaign (per-campaign daily ceiling).
+const mockTodayCount = vi.fn(async () => ({ count: 0, error: null } as { count: number | null; error: { message: string } | null }));
+// Order of side effects, to prove the count is bumped only after the insert.
+const callOrder: string[] = [];
 
 vi.mock('@/lib/supabase', () => ({
   createAdminClient: vi.fn(() => ({
     from: vi.fn((table: string) => {
       if (table === 'campaigns') return { select: mockCampaignSelect };
       if (table === 'story_subjects') return { insert: mockSubjectInsert };
-      if (table === 'stories') return { insert: (row: unknown) => { mockStoryInsert(row); return { select: () => ({ single: async () => ({ data: { id: 'story-1' }, error: null }) }) }; } };
+      if (table === 'stories') {
+        return {
+          insert: (row: unknown) => {
+            mockStoryInsert(row);
+            callOrder.push('insert');
+            return { select: () => ({ single: mockInsertResult }) };
+          },
+          select: () => ({ eq: () => ({ gte: mockTodayCount }) }),
+        };
+      }
       return {};
     }),
-    rpc: mockRpc,
+    rpc: (...args: unknown[]) => { callOrder.push('rpc'); return mockRpc(...args); },
   })),
 }));
 
@@ -28,7 +43,12 @@ vi.mock('@/lib/supabase/server', () => ({
   createClient: vi.fn(async () => ({ auth: { getUser: mockGetUser } })),
 }));
 
-vi.mock('@/lib/usage-quota', () => ({ hashIp: vi.fn(() => 'iphash'), resolveUsageIdentity: vi.fn(async () => ({ userId: null, ipHash: 'iphash' })) }));
+const mockEnforceDailyQuota = vi.fn(async () => ({ allowed: true, remaining: 59 }));
+vi.mock('@/lib/usage-quota', () => ({
+  hashIp: vi.fn(() => 'iphash'),
+  resolveUsageIdentity: vi.fn(async () => ({ userId: null, ipHash: 'iphash' })),
+  enforceDailyQuota: (...args: unknown[]) => mockEnforceDailyQuota(...(args as [])),
+}));
 vi.mock('@/lib/turnstile', () => ({ verifyTurnstile: vi.fn(() => Promise.resolve(true)) }));
 
 // Keep attribution deterministic — its own unit test covers the logic.
@@ -77,6 +97,10 @@ function makeReq(body: unknown) {
 describe('POST /api/stories', () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    callOrder.length = 0;
+    mockInsertResult.mockResolvedValue({ data: { id: 'story-1' }, error: null });
+    mockTodayCount.mockResolvedValue({ count: 0, error: null });
+    mockEnforceDailyQuota.mockResolvedValue({ allowed: true, remaining: 59 });
     mockWriteLimiter.check.mockReturnValue({ success: true });
     mockSingle.mockResolvedValue({ data: APPROVED_CAMPAIGN, error: null });
     mockSubjectInsert.mockResolvedValue({ error: null });
@@ -241,5 +265,75 @@ describe('POST /api/stories', () => {
     const { POST } = await import('../stories/route');
     const res = await POST(makeReq(validBody));
     expect(res.status).toBe(429);
+  });
+
+  // ----- 10-23 audit fixes -----
+
+  it('counts preview and store against the story_submit daily quota and returns 429 when it is spent', async () => {
+    const { POST } = await import('../stories/route');
+    await POST(makeReq({ ...validBody, preview: true }));
+    expect(mockEnforceDailyQuota).toHaveBeenCalledWith('127.0.0.1', 'story_submit', expect.anything());
+
+    mockEnforceDailyQuota.mockResolvedValueOnce({ allowed: false, remaining: 0 });
+    const res = await POST(makeReq(validBody));
+    expect(res.status).toBe(429);
+    expect(mockStoryInsert).not.toHaveBeenCalled();
+  });
+
+  it('anonymous + preview_confirmed stores the reviewed text as given and does not redact again', async () => {
+    const { POST } = await import('../stories/route');
+    const reviewed = 'The text I read on the preview step, with my own edit kept in.';
+    const res = await POST(makeReq({ ...validBody, attribution_level: 'anonymous', storyteller_name: null, body: reviewed, preview_confirmed: true }));
+    expect(res.status).toBe(200);
+    expect(mockApply).not.toHaveBeenCalled();
+    const row = mockStoryInsert.mock.calls[0][0];
+    expect(row.body).toBe(reviewed);
+    expect(row.storyteller_name).toBeNull();
+    const data = await res.json();
+    expect(data.final_body).toBe(reviewed);
+  });
+
+  it('preview_confirmed still strips a typed name and never skips redaction on the preview call itself', async () => {
+    const { POST } = await import('../stories/route');
+    // A name sent along with the confirmed body is removed without the model.
+    await POST(makeReq({ ...validBody, attribution_level: 'anonymous', storyteller_name: 'Jane Doe', body: 'Jane Doe went to the clinic and Jane waited an hour.', preview_confirmed: true }));
+    expect(mockApply).not.toHaveBeenCalled();
+    expect(mockStoryInsert.mock.calls[0][0].body).not.toMatch(/Jane|Doe/);
+    // The flag means nothing on a preview request: the model pass still runs.
+    vi.clearAllMocks();
+    mockApply.mockResolvedValue({ final_body: 'REDACTED', flagged: [] });
+    await POST(makeReq({ ...validBody, attribution_level: 'anonymous', storyteller_name: null, preview: true, preview_confirmed: true }));
+    expect(mockApply).toHaveBeenCalledOnce();
+  });
+
+  it('preview_confirmed is ignored for named and first-name stories', async () => {
+    const { POST } = await import('../stories/route');
+    await POST(makeReq({ ...validBody, preview_confirmed: true }));
+    expect(mockApply).toHaveBeenCalledOnce();
+  });
+
+  it('bumps story_count only after the insert succeeds', async () => {
+    const { POST } = await import('../stories/route');
+    await POST(makeReq(validBody));
+    expect(callOrder).toEqual(['insert', 'rpc']);
+
+    vi.clearAllMocks();
+    callOrder.length = 0;
+    mockInsertResult.mockResolvedValueOnce({ data: null, error: { message: 'boom' } });
+    const res = await POST(makeReq(validBody));
+    expect(res.status).toBe(500);
+    expect(mockRpc).not.toHaveBeenCalled();
+  });
+
+  it('refuses a store once the campaign has taken 500 stories today, and fails open on a count error', async () => {
+    const { POST } = await import('../stories/route');
+    mockTodayCount.mockResolvedValueOnce({ count: 500, error: null });
+    const res = await POST(makeReq(validBody));
+    expect(res.status).toBe(429);
+    expect(mockStoryInsert).not.toHaveBeenCalled();
+
+    mockTodayCount.mockResolvedValueOnce({ count: null, error: { message: 'db down' } });
+    const ok = await POST(makeReq(validBody));
+    expect(ok.status).toBe(200);
   });
 });

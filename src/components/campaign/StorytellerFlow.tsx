@@ -10,7 +10,7 @@ import { SocialShare } from '@/components/ui/SocialShare';
 import { MicButton } from '@/components/chat/MicButton';
 import { AddressAutocomplete, type ParsedAddress } from '@/components/ui/AddressAutocomplete';
 import { STORY_USAGE_OPTIONS } from '@/lib/story-usage';
-import { storytellerCopy, type StorytellerCopy } from '@/lib/copy/storyteller';
+import { storytellerCopy, tellerWordCount, type StorytellerCopy } from '@/lib/copy/storyteller';
 import type { Campaign, AttributionLevel, Official } from '@/lib/types';
 
 type Step = 'intro' | 'interview' | 'review' | 'consent' | 'preview' | 'done';
@@ -18,6 +18,59 @@ type Step = 'intro' | 'interview' | 'review' | 'consent' | 'preview' | 'done';
 interface ChatMessage {
   role: 'user' | 'assistant';
   content: string;
+}
+
+// An unfinished story survives a refresh, a closed tab, or a browser back for
+// a day. Only the transcript and the draft are kept; consent choices, the
+// address, and the contact email are never written to storage.
+const DRAFT_TTL_MS = 24 * 60 * 60 * 1000;
+const draftKey = (slug: string) => `md_story_draft:${slug}`;
+
+interface SavedDraft {
+  messages: ChatMessage[];
+  title: string;
+  body: string;
+  step: Step;
+  savedAt: number;
+}
+
+function readSavedDraft(slug: string): SavedDraft | null {
+  try {
+    const raw = window.sessionStorage.getItem(draftKey(slug));
+    if (!raw) return null;
+    const d = JSON.parse(raw) as Partial<SavedDraft>;
+    if (!Array.isArray(d.messages) || typeof d.savedAt !== 'number') return null;
+    if (Date.now() - d.savedAt > DRAFT_TTL_MS) return null;
+    return { messages: d.messages, title: d.title ?? '', body: d.body ?? '', step: d.step ?? 'interview', savedAt: d.savedAt };
+  } catch {
+    return null;
+  }
+}
+
+function writeSavedDraft(slug: string, d: Omit<SavedDraft, 'savedAt'>): void {
+  try {
+    window.sessionStorage.setItem(draftKey(slug), JSON.stringify({ ...d, savedAt: Date.now() }));
+  } catch {
+    // storage unavailable (private mode, quota): the flow still works in memory
+  }
+}
+
+function clearSavedDraft(slug: string): void {
+  try {
+    window.sessionStorage.removeItem(draftKey(slug));
+  } catch {
+    // ignore
+  }
+}
+
+/** Parse a JSON body without throwing on HTML error pages or empty bodies. */
+async function readJson(res: Response): Promise<Record<string, unknown> | null> {
+  try {
+    const data: unknown = await res.json();
+    return data && typeof data === 'object' ? (data as Record<string, unknown>) : null;
+  } catch {
+    return null;
+  }
 }
 
 function buildGreeting(campaign: Campaign, t: StorytellerCopy): string {
@@ -65,6 +118,8 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
   const [storytellerName, setStorytellerName] = useState('');
   const [storytellerEmail, setStorytellerEmail] = useState('');
   const [grantedUses, setGrantedUses] = useState<string[]>(() => availableUses.map((o) => o.value));
+  // An anonymous story has no contact, so the follow-up use is not offered.
+  const visibleUses = attribution === 'anonymous' ? availableUses.filter((o) => o.value !== 'contact_me_followup') : availableUses;
   // Sharing with the campaign is the point of submitting, so it starts checked
   // (Jared, 10-09); the truthfulness and age boxes stay the storyteller's own.
   const [consentShare, setConsentShare] = useState(true);
@@ -87,8 +142,46 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
   const [revokeToken, setRevokeToken] = useState<string | null>(null);
   const [storyId, setStoryId] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
+  const [linkCopied, setLinkCopied] = useState(false);
 
   const scrollRef = useRef<HTMLDivElement>(null);
+  // Set once the saved draft (if any) has been restored, so the save effect
+  // never overwrites it with the fresh initial state.
+  const restoredRef = useRef(false);
+
+  // Map a failed response to a message in the campaign's language. Server
+  // text is shown only where it is written for the storyteller (422 from
+  // compose, localized there); everything else gets our own copy.
+  const failureMessage = (status: number, data: Record<string, unknown> | null, fallback: string, serverTextOn: number[] = []): string => {
+    if (status === 429) return t.tooManyRequests;
+    if (serverTextOn.includes(status) && typeof data?.error === 'string' && data.error.trim()) return data.error;
+    return fallback;
+  };
+
+  // Restore an unfinished story for this campaign, once, after mount.
+  useEffect(() => {
+    const saved = readSavedDraft(campaign.slug);
+    if (saved && saved.messages.length > 1) {
+      setMessages(saved.messages);
+      setTitle(saved.title);
+      setBody(saved.body);
+      // Consent choices are not saved, so a preview or consent step resumes
+      // at consent (the form shows unselected); anything later is a new story.
+      const resume: Step = saved.step === 'preview' ? 'consent' : saved.step === 'done' || saved.step === 'intro' ? 'interview' : saved.step;
+      setStep(resume);
+    }
+    restoredRef.current = true;
+  }, [campaign.slug]);
+
+  useEffect(() => {
+    if (!restoredRef.current) return;
+    if (step === 'done') {
+      clearSavedDraft(campaign.slug);
+      return;
+    }
+    if (step === 'intro') return;
+    writeSavedDraft(campaign.slug, { messages, title, body, step });
+  }, [campaign.slug, messages, title, body, step]);
   // No CAPTCHA on the storytelling flow (Jared, 2026-10-15, before the
   // Children's Cabinet session): the server accepts storytelling requests
   // without a token, the routes are rate limited per IP, and the organization
@@ -128,6 +221,9 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
     const next: ChatMessage[] = [...messages, { role: 'user', content: text }];
     setMessages(next);
     setStreaming(true);
+    // Did any of the guide's reply arrive? If not, the send is undone on
+    // failure and the typed answer goes back in the box for a retry.
+    let gotReply = false;
 
     try {
       const res = await fetch('/api/chat/story-interview', {
@@ -136,7 +232,7 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
         body: JSON.stringify({ campaignSlug: campaign.slug, messages: next.slice(-30), turnstileToken: undefined }),
       });
       if (!res.ok || !res.body) {
-        throw new Error((await res.text().catch(() => '')) || t.connectError);
+        throw new Error(res.status === 429 ? t.tooManyRequests : t.connectError);
       }
 
       const reader = res.body.getReader();
@@ -149,6 +245,7 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
         if (done) break;
         acc += decoder.decode(value, { stream: true });
         const shown = acc.replace(/\s*[—–]\s*/g, ', ').replace(/\*\*/g, '');
+        if (shown.trim()) gotReply = true;
         setMessages((prev) => {
           const copy = [...prev];
           copy[copy.length - 1] = { role: 'assistant', content: shown };
@@ -156,9 +253,15 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
         });
       }
     } catch (err) {
-      setError(err instanceof Error ? err.message : t.somethingWrong);
-      // drop the empty assistant placeholder if present
-      setMessages((prev) => (prev[prev.length - 1]?.content === '' ? prev.slice(0, -1) : prev));
+      setError(err instanceof Error ? err.message : t.connectError);
+      setMessages((prev) => {
+        // drop the empty assistant placeholder if present
+        let out = prev[prev.length - 1]?.role === 'assistant' && prev[prev.length - 1]?.content === '' ? prev.slice(0, -1) : prev;
+        // nothing came back: undo the send so the answer can be retried as typed
+        if (!gotReply && out[out.length - 1]?.role === 'user' && out[out.length - 1]?.content === text) out = out.slice(0, -1);
+        return out;
+      });
+      if (!gotReply) setInput(text);
     } finally {
       setStreaming(false);
     }
@@ -174,11 +277,12 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ campaignSlug: campaign.slug, messages: messages.slice(-40), turnstileToken: undefined }),
       });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || t.composeFailed);
-      setTitle(data.title || '');
-      setBody(data.body || '');
-      setDraftNotes(Array.isArray(data.notes) ? data.notes : []);
+      if (!res.ok) throw new Error(failureMessage(res.status, await readJson(res), t.composeFailed, [422]));
+      const data = await readJson(res);
+      if (!data || typeof data.body !== 'string') throw new Error(t.composeFailed);
+      setTitle(typeof data.title === 'string' ? data.title : '');
+      setBody(data.body);
+      setDraftNotes(Array.isArray(data.notes) ? data.notes.filter((n): n is string => typeof n === 'string') : []);
       setStep('review');
     } catch (err) {
       setError(err instanceof Error ? err.message : t.composeFailed);
@@ -206,11 +310,12 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
           turnstileToken: undefined,
         }),
       });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || t.editFailed);
-      if (data.title) setTitle(data.title);
-      setBody(data.body || body);
-      setDraftNotes(Array.isArray(data.notes) ? data.notes : []);
+      if (!res.ok) throw new Error(failureMessage(res.status, await readJson(res), t.editFailed, [422]));
+      const data = await readJson(res);
+      if (!data) throw new Error(t.editFailed);
+      if (typeof data.title === 'string' && data.title) setTitle(data.title);
+      setBody(typeof data.body === 'string' && data.body ? data.body : body);
+      setDraftNotes(Array.isArray(data.notes) ? data.notes.filter((n): n is string => typeof n === 'string') : []);
       setReviseNote('');
     } catch (err) {
       setError(err instanceof Error ? err.message : t.editFailed);
@@ -228,6 +333,10 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
     if (attribution !== 'anonymous' && !storytellerName.trim()) return t.vEnterName;
     if (attribution !== 'anonymous' && (!address.street.trim() || !address.city.trim() || !address.state.trim() || !address.zip.trim())) {
       return t.vEnterAddress;
+    }
+    const email = storytellerEmail.trim();
+    if (attribution !== 'anonymous' && grantedUses.includes('contact_me_followup') && email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return t.vEnterValidEmail;
     }
     return null;
   };
@@ -253,21 +362,24 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
     return reps.slice(0, 30);
   };
 
-  const buildPayload = (opts: { preview: boolean; sharedReps: SharedRep[]; turnstileToken: string }) => {
+  const buildPayload = (opts: { preview: boolean; sharedReps: SharedRep[]; turnstileToken: string; bodyText: string; previewConfirmed: boolean }) => {
     const anon = attribution === 'anonymous';
     const shareLoc = shareLocation && !anon;
     return {
       campaignSlug: campaign.slug,
       title: title.trim() || null,
-      body: body.trim(),
+      body: opts.bodyText.trim(),
       attribution_level: attribution,
       storyteller_name: anon ? null : storytellerName.trim(),
-      granted_uses: grantedUses,
+      // No contact is stored for an anonymous story, so no follow-up use either.
+      granted_uses: anon ? grantedUses.filter((u) => u !== 'contact_me_followup') : grantedUses,
       consent_usage: true,
       consent_truthful: true,
       consent_adult: true,
       store: true,
       preview: opts.preview,
+      // Anonymous store after preview: this body is the reviewed text, stored as given.
+      preview_confirmed: opts.previewConfirmed || undefined,
       city: shareLoc ? address.city.trim() : null,
       state: shareLoc ? address.state.trim() : null,
       shared_reps: shareLoc && opts.sharedReps.length ? opts.sharedReps : null,
@@ -277,7 +389,13 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
     };
   };
 
-  const submitStory = async () => {
+  /**
+   * Submit. `confirmedBody` is the text from the anonymous preview textarea:
+   * it is passed in explicitly (not read from state, which is one render
+   * behind) and stored exactly as shown. Without it, the draft body goes
+   * through the server's attribution pass as usual.
+   */
+  const submitStory = async (confirmedBody?: string) => {
     setError(null);
     const problem = validateConsent();
     if (problem) { setError(problem); return; }
@@ -285,37 +403,52 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
     try {
       const turnstileToken = '';
       // Anonymous: show the redacted text first. Nothing is saved yet.
-      if (attribution === 'anonymous' && step === 'consent') {
+      if (attribution === 'anonymous' && confirmedBody === undefined) {
         const res = await fetch('/api/stories', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(buildPayload({ preview: true, sharedReps: [], turnstileToken })),
+          body: JSON.stringify(buildPayload({ preview: true, sharedReps: [], turnstileToken, bodyText: body, previewConfirmed: false })),
         });
-        const data = await res.json();
-        if (!res.ok) throw new Error(data.error || t.prepareFailed);
-        setFinalBody(data.final_body || body.trim());
-        setFlagged(Array.isArray(data.flagged) ? data.flagged : []);
+        if (!res.ok) throw new Error(failureMessage(res.status, await readJson(res), res.status === 503 ? t.anonymizeFailed : t.prepareFailed));
+        const data = await readJson(res);
+        if (!data) throw new Error(t.prepareFailed);
+        setFinalBody(typeof data.final_body === 'string' && data.final_body ? data.final_body : body.trim());
+        setFlagged(Array.isArray(data.flagged) ? data.flagged.filter((f): f is string => typeof f === 'string') : []);
         setStep('preview');
         return;
       }
       const sharedReps = shareLocation && attribution !== 'anonymous' ? await lookupReps() : [];
+      const bodyText = confirmedBody ?? body;
       const res = await fetch('/api/stories', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(buildPayload({ preview: false, sharedReps, turnstileToken })),
+        body: JSON.stringify(buildPayload({ preview: false, sharedReps, turnstileToken, bodyText, previewConfirmed: confirmedBody !== undefined })),
       });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || t.submitFailed);
-      setFinalBody(data.final_body || body.trim());
-      setFlagged(Array.isArray(data.flagged) ? data.flagged : []);
-      setRevokeToken(data.revoke_token || null);
-      setStoryId(data.story_id || null);
+      if (!res.ok) throw new Error(failureMessage(res.status, await readJson(res), res.status === 503 ? t.anonymizeFailed : t.submitFailed));
+      const data = await readJson(res);
+      if (!data) throw new Error(t.submitFailed);
+      setFinalBody(typeof data.final_body === 'string' && data.final_body ? data.final_body : bodyText.trim());
+      setFlagged(Array.isArray(data.flagged) ? data.flagged.filter((f): f is string => typeof f === 'string') : []);
+      setRevokeToken(typeof data.revoke_token === 'string' ? data.revoke_token : null);
+      setStoryId(typeof data.story_id === 'string' ? data.story_id : null);
       trackEvent('story_submitted', { campaign: campaign.slug, attribution: attribution ?? 'unknown' });
+      clearSavedDraft(campaign.slug);
       setStep('done');
     } catch (err) {
       setError(err instanceof Error ? err.message : t.submitFailed);
     } finally {
       setSubmitting(false);
+    }
+  };
+
+  const withdrawUrl = storyId ? `https://www.mydemocracy.app/stories/withdraw?id=${storyId}&token=${revokeToken ?? ''}` : '';
+  const copyWithdrawLink = async () => {
+    try {
+      await navigator.clipboard.writeText(withdrawUrl);
+      setLinkCopied(true);
+      setTimeout(() => setLinkCopied(false), 2000);
+    } catch {
+      // clipboard unavailable
     }
   };
 
@@ -375,8 +508,8 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
   if (step === 'interview') {
     // Ask for a bit of real substance first (a couple of exchanges) so the draft
     // isn't thin — the guide gathers a moment, its impact, and their ask.
-    const answers = messages.filter((m) => m.role === 'user');
-    const answerWords = answers.reduce((n, m) => n + m.content.split(/\s+/).filter(Boolean).length, 0);
+    // "Rather not say" is a button, not their words, so it does not count.
+    const answerWords = tellerWordCount(messages);
     const lastGuide = [...messages].reverse().find((m) => m.role === 'assistant')?.content ?? '';
     const guideSaidReady = /Turn this into my story|Convertir esto en mi historia/i.test(lastGuide);
     // Substance, not turn count: a real draft needs about 60 of their own words,
@@ -421,11 +554,15 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
             disabled={streaming}
             className="flex-1 px-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 resize-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 text-sm"
           />
-          <button type="button" onClick={declineAnswer} disabled={streaming} className="self-end text-xs text-gray-500 dark:text-gray-400 underline whitespace-nowrap pb-3">{t.ratherNotSay}</button>
+          {/* On a phone this link sits under the box so the box keeps its width. */}
+          <button type="button" onClick={declineAnswer} disabled={streaming} className="hidden sm:inline self-end text-xs text-gray-500 dark:text-gray-400 underline whitespace-nowrap pb-3">{t.ratherNotSay}</button>
           <MicButton text={input} setText={setInput} disabled={streaming} className="self-end" lang={campaign.language === 'es' ? 'es-US' : 'en-US'} />
           <Button onClick={sendMessage} isLoading={streaming} className="self-end">
             {t.send}
           </Button>
+        </div>
+        <div className="sm:hidden -mt-2">
+          <button type="button" onClick={declineAnswer} disabled={streaming} className="text-xs text-gray-500 dark:text-gray-400 underline">{t.ratherNotSay}</button>
         </div>
 
         <div className="pt-2 border-t border-gray-100 dark:border-gray-700">
@@ -533,7 +670,7 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
                   type="radio"
                   name="attribution"
                   checked={attribution === opt}
-                  onChange={() => setAttribution(opt)}
+                  onChange={() => { setAttribution(opt); setError(null); }}
                   className="mt-1 h-4 w-4 text-purple-600 focus:ring-purple-500"
                 />
                 <span>
@@ -612,7 +749,7 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
             {t.checkEach}
           </p>
           <div className="space-y-2">
-            {availableUses.map((opt) => {
+            {visibleUses.map((opt) => {
               const on = grantedUses.includes(opt.value);
               return (
                 <label
@@ -691,7 +828,7 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
 
         <div className="flex gap-2">
           <Button variant="secondary" onClick={() => setStep('review')} className="flex-1">{t.back}</Button>
-          <Button onClick={submitStory} isLoading={submitting} className="flex-1">
+          <Button onClick={() => void submitStory()} isLoading={submitting} className="flex-1">
             {attribution === 'anonymous' ? t.checkAnonVersion : t.submitStory}
           </Button>
         </div>
@@ -721,7 +858,7 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
         {error && <p className="text-sm text-red-600 dark:text-red-400" role="alert">{error}</p>}
         <div className="flex gap-2">
           <Button variant="secondary" onClick={() => setStep('consent')} className="flex-1">{t.back}</Button>
-          <Button onClick={() => { setBody(finalBody); void submitStory(); }} isLoading={submitting} disabled={finalBody.trim().length < 20} className="flex-1">
+          <Button onClick={() => { setBody(finalBody); void submitStory(finalBody); }} isLoading={submitting} disabled={finalBody.trim().length < 20} className="flex-1">
             {t.submitThisVersion}
           </Button>
         </div>
@@ -765,7 +902,13 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
             {signedIn ? (
               <>{t.editFromDashboardA} <Link href="/dashboard" className="underline">{t.dashboard}</Link>.</>
             ) : (
-              <>{t.changedMind} <button type="button" onClick={withdrawStory} className="underline">{t.withdrawNow}</button>{t.keepLink} <span className="break-all font-mono text-[11px]">{`https://www.mydemocracy.app/stories/withdraw?id=${storyId}&token=${revokeToken ?? ''}`}</span></>
+              <>
+                {t.changedMind} <button type="button" onClick={withdrawStory} className="underline">{t.withdrawNow}</button>{t.keepLink}{' '}
+                <span className="break-all font-mono text-[11px]">{withdrawUrl}</span>
+                <button type="button" onClick={copyWithdrawLink} className="ml-2 inline-flex items-center px-2 py-0.5 rounded-md border border-gray-300 dark:border-gray-600 text-[11px] font-medium text-purple-700 dark:text-purple-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                  {linkCopied ? t.linkCopied : t.copyLink}
+                </button>
+              </>
             )}
           </p>
         </div>

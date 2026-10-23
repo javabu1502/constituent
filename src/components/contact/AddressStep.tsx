@@ -7,6 +7,7 @@ import { chooseLocalOfficials } from '@/lib/local-routing';
 import type { Official } from '@/lib/types';
 import { Button } from '@/components/ui/Button';
 import { AddressAutocomplete, type ParsedAddress } from '@/components/ui/AddressAutocomplete';
+import { CWC_COPY, districtResolvedFrom, streetLooksUndeliverable } from '@/lib/cwc-client';
 
 interface AddressStepProps {
   state: ContactState;
@@ -20,14 +21,18 @@ export function AddressStep({ state, dispatch }: AddressStepProps) {
     state: state.address?.state || '',
     zip: state.address?.zip || '',
   });
+  // A street that looks like a dorm, campus building, or PO Box gets one
+  // warning before the lookup. The person can edit it or go ahead anyway.
+  const [streetWarning, setStreetWarning] = useState(false);
+  const [streetWarningAcked, setStreetWarningAcked] = useState(false);
 
   const onAddressChange = useCallback((a: ParsedAddress) => {
     setAddress(a);
+    setStreetWarning(false);
+    setStreetWarningAcked(false);
   }, []);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
+  const lookup = async (acked: boolean) => {
     if (!address.street.trim() || address.street.trim().length < 3) {
       dispatch({ type: 'SET_ERROR', payload: 'Please enter a valid street address' });
       return;
@@ -42,6 +47,11 @@ export function AddressStep({ state, dispatch }: AddressStepProps) {
     }
     if (!/^\d{5}(-\d{4})?$/.test(address.zip.trim())) {
       dispatch({ type: 'SET_ERROR', payload: 'Please enter your 5-digit ZIP code. ZIP+4 is welcome.' });
+      return;
+    }
+    if (!acked && streetLooksUndeliverable(address.street)) {
+      dispatch({ type: 'SET_ERROR', payload: null });
+      setStreetWarning(true);
       return;
     }
 
@@ -68,8 +78,14 @@ export function AddressStep({ state, dispatch }: AddressStepProps) {
 
       dispatch({ type: 'SET_OFFICIALS', payload: data.officials });
 
+      // The route falls back to senators-only with a warning when the
+      // geocoder cannot place the street. A message sent through Congress
+      // then is refused later, after the person has left. Carry the flag so
+      // the send step withholds "Send to Congress" and says why.
+      dispatch({ type: 'SET_DISTRICT_RESOLVED', payload: districtResolvedFrom(data) });
+
       // No recipient picker: map the story to the RIGHT officials. Only the
-      // PRIMARY (weight-2) levels receive the message — "shares authority"
+      // PRIMARY (weight-2) levels receive the message. "Shares authority"
       // is context, not a mailing list; the old any-weight policy put an
       // open-borders message in a state senator's inbox. The personal story
       // is included so bill refs and casework phrasing inside it count.
@@ -115,11 +131,17 @@ export function AddressStep({ state, dispatch }: AddressStepProps) {
     }
   };
 
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    await lookup(streetWarningAcked);
+  };
+
   return (
     <div className="p-6 sm:p-8">
       <div className="text-center mb-8">
         <div className="w-16 h-16 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center mx-auto mb-4">
           <svg
+            aria-hidden="true"
             className="w-8 h-8 text-purple-600 dark:text-purple-400"
             fill="none"
             stroke="currentColor"
@@ -143,9 +165,16 @@ export function AddressStep({ state, dispatch }: AddressStepProps) {
           Enter Your Home Address
         </h3>
         <p className="text-gray-500 dark:text-gray-400 mt-2 text-sm max-w-sm mx-auto">
-          We&apos;ll find the people who represent you — from Congress down to your city or county.
+          We&apos;ll find the people who represent you, from Congress down to your city or county.
         </p>
       </div>
+
+      {/* Came back from the review step after a failed geocode: say why. */}
+      {state.address && !state.districtResolved && (
+        <div role="alert" className="mb-4 p-3 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded-xl">
+          <p className="text-sm text-amber-800 dark:text-amber-300">{CWC_COPY.unresolvedAddress}</p>
+        </div>
+      )}
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <AddressAutocomplete
@@ -154,10 +183,41 @@ export function AddressStep({ state, dispatch }: AddressStepProps) {
           label="Address"
         />
 
+        {streetWarning && (
+          <div role="alert" className="p-4 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded-xl space-y-3">
+            <p className="text-sm text-amber-800 dark:text-amber-300">{CWC_COPY.streetWarning}</p>
+            <div className="flex flex-col sm:flex-row gap-2">
+              <button
+                type="button"
+                onClick={() => {
+                  setStreetWarning(false);
+                  document.getElementById('address-autocomplete')?.focus();
+                }}
+                className="flex-1 py-2 px-3 text-sm font-medium bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors"
+              >
+                Edit my address
+              </button>
+              <button
+                type="button"
+                disabled={state.isLoading}
+                onClick={() => {
+                  setStreetWarningAcked(true);
+                  setStreetWarning(false);
+                  void lookup(true);
+                }}
+                className="flex-1 py-2 px-3 text-sm font-medium border border-amber-300 dark:border-amber-600 text-amber-800 dark:text-amber-200 rounded-lg hover:bg-amber-100 dark:hover:bg-amber-900/40 transition-colors disabled:opacity-50"
+              >
+                Use this address anyway
+              </button>
+            </div>
+          </div>
+        )}
+
         {state.error && (
-          <div className="p-4 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 rounded-xl">
+          <div role="alert" className="p-4 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 rounded-xl">
             <div className="flex items-start gap-3">
               <svg
+                aria-hidden="true"
                 className="w-5 h-5 text-red-500 dark:text-red-400 flex-shrink-0 mt-0.5"
                 fill="none"
                 stroke="currentColor"

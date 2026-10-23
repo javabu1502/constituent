@@ -28,6 +28,11 @@ export interface ContactState {
   /** Per-official send status from this session ('cwc_submitted', 'email_opened'...), so a
    *  refresh or Back never re-arms a "Send to Congress" button that already fired. */
   sentStatus: Record<string, string>;
+  /** False when the representatives lookup could not place the street (senators-only
+   *  fallback). Congressional delivery is withheld until a lookup succeeds. */
+  districtResolved: boolean;
+  /** True when this flow was restored from a saved draft; sent cards then say so. */
+  restoredFromDraft: boolean;
   address: Address | null;
   officials: Official[];
   selectedReps: Official[];
@@ -35,7 +40,7 @@ export interface ContactState {
   tone: 'professional' | 'personal' | 'passionate';
   // Topic form fields
   userName: string;
-  // CWC-valid title (Mr./Mrs./Miss/Ms./Dr.) — only collected when CWC
+  // CWC-valid title (Mr./Mrs./Miss/Ms./Dr.), only collected when CWC
   // delivery is enabled; empty otherwise.
   userPrefix: string;
   userEmail: string;
@@ -92,6 +97,8 @@ type ContactAction =
   | { type: 'SET_ERROR'; payload: string | null }
   | { type: 'SET_SHARE_ID'; payload: string }
   | { type: 'SET_SENT_STATUS'; payload: { officialId: string; status: string } }
+  | { type: 'SET_DISTRICT_RESOLVED'; payload: boolean }
+  | { type: 'SET_RESTORED'; payload: boolean }
   | { type: 'SET_CORE_FRAME'; payload: ContactState['coreFrame'] }
   | { type: 'SET_INTERVIEW_LEVEL'; payload: ContactState['interviewLevel'] }
   | { type: 'GO_TO_STEP'; payload: ContactState['step'] }
@@ -120,6 +127,8 @@ const initialState: ContactState = {
   error: null,
   shareId: null,
   sentStatus: {},
+  districtResolved: true,
+  restoredFromDraft: false,
 };
 
 function contactReducer(state: ContactState, action: ContactAction): ContactState {
@@ -200,6 +209,10 @@ function contactReducer(state: ContactState, action: ContactAction): ContactStat
       return { ...state, shareId: action.payload };
     case 'SET_SENT_STATUS':
       return { ...state, sentStatus: { ...state.sentStatus, [action.payload.officialId]: action.payload.status } };
+    case 'SET_DISTRICT_RESOLVED':
+      return { ...state, districtResolved: action.payload };
+    case 'SET_RESTORED':
+      return { ...state, restoredFromDraft: action.payload };
     case 'GO_TO_STEP':
       return { ...state, step: action.payload, error: null };
     case 'RESET':
@@ -241,7 +254,7 @@ export function ContactFlow() {
     if (action.type === 'GO_TO_STEP') {
       trackEvent('contact_step', { step: action.payload });
     }
-    // First real interaction (typing/picking) — the human-vs-bounce line.
+    // First real interaction (typing/picking): the human-vs-bounce line.
     if (!firstTouch.current && (action.type === 'SET_ISSUE' || action.type === 'SET_PERSONAL_WHY' || action.type === 'SET_ASK')) {
       firstTouch.current = true;
       trackEvent('contact_engaged', { via: action.type });
@@ -249,7 +262,7 @@ export function ContactFlow() {
     dispatch(action);
   }, []);
 
-  // Auto-save hook — persists draft to localStorage
+  // Auto-save hook: persists draft to localStorage
   const { savedDraft, dismissDraft, clearDraft, justSaved } = useAutoSave(state, wasReset);
   const hasDeepLink = useMemo(
     () => searchParams.has('issue') || searchParams.has('ask') || searchParams.has('repId'),
@@ -280,6 +293,8 @@ export function ContactFlow() {
     for (const [officialId, status] of Object.entries(draft.sentStatus ?? {})) {
       dispatch({ type: 'SET_SENT_STATUS', payload: { officialId, status } });
     }
+    dispatch({ type: 'SET_DISTRICT_RESOLVED', payload: draft.districtResolved ?? true });
+    dispatch({ type: 'SET_RESTORED', payload: true });
 
     // Re-fetch officials if address is available
     if (draft.address) {

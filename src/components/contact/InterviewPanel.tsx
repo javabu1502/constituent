@@ -113,7 +113,7 @@ export function InterviewPanel({
 
   return (
     <div className="space-y-4">
-      <div ref={scrollRef} className="max-h-[24rem] overflow-y-auto space-y-3 pr-1">
+      <div ref={scrollRef} aria-live="polite" aria-busy={streaming} className="max-h-[24rem] overflow-y-auto space-y-3 pr-1">
         {messages.map((m, i) => {
           const text = m.role === 'assistant' ? displayText(m.content) : m.content;
           if (!text && !streaming) return null;
@@ -133,7 +133,7 @@ export function InterviewPanel({
         })}
       </div>
 
-      {error && <p className="text-sm text-red-600 dark:text-red-400">{error}</p>}
+      {error && <p role="alert" className="text-sm text-red-600 dark:text-red-400">{error}</p>}
 
       {result && (
         <div className="p-4 bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-700 rounded-xl space-y-2">
@@ -166,6 +166,7 @@ export function InterviewPanel({
       {!result && (
         <div className="space-y-2">
           <textarea
+            aria-label="Your reply"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => {

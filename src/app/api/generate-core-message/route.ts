@@ -444,7 +444,7 @@ Draft the core message.`;
     }
     if (!body) {
       console.warn('[generate-core] refused:', rejects.length ? rejects : ['empty or short body on every attempt']);
-      return NextResponse.json({ error: 'Could not draft a message — please try again' }, { status: 502 });
+      return NextResponse.json({ error: 'Could not draft a message. Please try again' }, { status: 502 });
     }
     if (rejects.length) console.info('[generate-core] retried:', rejects);
     // Frame fields are best-effort: null (deterministic seeded pools

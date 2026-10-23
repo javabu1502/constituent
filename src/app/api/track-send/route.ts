@@ -9,6 +9,7 @@ import { captchaStrictFor } from '@/lib/campaign-captcha';
 import { enqueueCwcDeliveries } from '@/lib/cwc';
 import { buildCwcQueueItem, shouldEnqueueCwc, type CampaignBillContext } from '@/lib/cwc/enqueue-from-send';
 import { buildWebformQueueItem, enqueueWebformDelivery } from '@/lib/webform/queue';
+import { CWC_MESSAGE_STATUS, WEBFORM_MESSAGE_STATUS, setMessageDeliveryStatus } from '@/lib/cwc/message-status';
 
 // The CWC enqueue path (after()) reaches congressional endpoints through the
 // undici static-IP proxy — Node runtime required.
@@ -124,6 +125,11 @@ export async function POST(request: NextRequest) {
     // real outcome (the button used to turn green regardless; audit 09-28).
     // Gated on: server flag + client payload + federal office + the
     // constituent having pressed "Send to Congress" (status cwc_submitted).
+    //
+    // Delivery truth (audit 2026-10-23): the row above was inserted with the
+    // client's 'cwc_submitted'. Every path that does NOT leave a queued row
+    // corrects it here (skipped / failed); the queue writes held / blocked,
+    // and the drain writes delivered / refused / failed.
     let cwc: { status: CwcSendStatus; reason?: string } | undefined;
     if (shouldEnqueueCwc(body) && body.cwc && data?.id) {
       const cwcPayload = body.cwc;
@@ -142,8 +148,9 @@ export async function POST(request: NextRequest) {
         if (!built.ok) {
           console.log(`[track-send] cwc skip (${messageId}): ${built.skip}`);
           cwc = { status: 'skipped', reason: built.skip };
+          await setMessageDeliveryStatus(supabase, messageId, CWC_MESSAGE_STATUS.skipped);
         } else {
-          const result = await enqueueCwcDeliveries([built.item], 'production');
+          const result = await enqueueCwcDeliveries([built.item], 'production', { ipHash: identity.ipHash });
           console.log(`[track-send] cwc enqueue (${messageId}):`, JSON.stringify(result));
           cwc =
             result.blockedKeys.length > 0 ? { status: 'blocked' }
@@ -153,6 +160,7 @@ export async function POST(request: NextRequest) {
       } catch (e) {
         console.error(`[track-send] cwc enqueue failed (${messageId}):`, (e as Error).message);
         cwc = { status: 'error' };
+        await setMessageDeliveryStatus(supabase, messageId, CWC_MESSAGE_STATUS.failed);
       }
     }
 
@@ -161,18 +169,20 @@ export async function POST(request: NextRequest) {
     if (!cwc && body.delivery_status === 'webform_submitted' && body.cwc && body.legislator_level === 'federal' && data?.id) {
       try {
         const campaignRef = body.campaign_id ? `campaign-${body.campaign_id}` : `contact-${(body.issue_area + '-' + body.issue_subtopic).toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
-        const built = await buildWebformQueueItem(body, body.cwc, campaignRef);
+        const built = await buildWebformQueueItem(body, body.cwc, campaignRef, undefined, data.id as string);
         if (!built.ok) {
           console.log(`[track-send] webform skip (${data.id}): ${built.skip}`);
           cwc = { status: 'skipped', reason: built.skip };
+          await setMessageDeliveryStatus(supabase, data.id as string, WEBFORM_MESSAGE_STATUS.skipped);
         } else {
-          const r = await enqueueWebformDelivery(built.item);
+          const r = await enqueueWebformDelivery(built.item, { ipHash: identity.ipHash });
           console.log(`[track-send] webform enqueue (${data.id}): ${r.status}`);
           cwc = { status: r.status };
         }
       } catch (e) {
         console.error(`[track-send] webform enqueue failed (${data?.id}):`, (e as Error).message);
         cwc = { status: 'error' };
+        await setMessageDeliveryStatus(supabase, data?.id as string | undefined, WEBFORM_MESSAGE_STATUS.failed);
       }
     }
 

@@ -6,6 +6,8 @@ import { screenMessageForCwc, type GateOutcome } from '@/lib/cwc/compliance-gate
 import { stableMessageKey } from '@/lib/cwc/enqueue-from-send';
 import { getActiveOfficeCodesCached } from '@/lib/cwc/send';
 import { resolveOfficeCode } from '@/lib/cwc/offices';
+import { WEBFORM_MESSAGE_STATUS, setMessageDeliveryStatus } from '@/lib/cwc/message-status';
+import { notifyConstituent } from '@/lib/cwc/notify';
 import type { CwcDelivery } from '@/lib/cwc/types';
 
 /**
@@ -22,7 +24,7 @@ import type { CwcDelivery } from '@/lib/cwc/types';
 type DbClient = ReturnType<typeof createAdminClient>;
 let clientFactory: () => DbClient = createAdminClient;
 export function setWebformQueueClientFactory(factory?: () => DbClient): void { clientFactory = factory ?? createAdminClient; }
-type Gate = (opts: { messageKey: string; delivery: CwcDelivery; db: DbClient }) => Promise<GateOutcome>;
+type Gate = (opts: { messageKey: string; delivery: CwcDelivery; db: DbClient; ipHash?: string | null }) => Promise<GateOutcome>;
 let gate: Gate = screenMessageForCwc;
 export function setWebformGate(fn?: Gate): void { gate = fn ?? screenMessageForCwc; }
 
@@ -72,6 +74,8 @@ export async function webformAutomatableSenatorIds(activeCodes?: ReadonlySet<str
 
 export interface WebformQueueItem {
   messageKey: string;
+  /** messages.id of the tracked send, so the worker can write the outcome back. */
+  messageId?: string;
   officialId: string;
   officialName: string;
   formUrl: string;
@@ -85,7 +89,7 @@ export type WebformBuild = { ok: true; item: WebformQueueItem } | { ok: false; s
 export async function buildWebformQueueItem(body: {
   legislator_id: string; legislator_name: string; legislator_level: string; legislator_chamber: string;
   advocate_name: string; advocate_city: string; advocate_state: string; message_body: string; issue_area: string;
-}, cwc: { prefix: string; street: string; zip: string; email: string; subject: string }, campaignRef: string, activeCodes?: ReadonlySet<string>): Promise<WebformBuild> {
+}, cwc: { prefix: string; street: string; zip: string; email: string; subject: string }, campaignRef: string, activeCodes?: ReadonlySet<string>, messageId?: string): Promise<WebformBuild> {
   if (!webformDeliveryEnabled()) return { ok: false, skip: 'WEBFORM_DELIVERY_ENABLED is not true' };
   if (body.legislator_level !== 'federal' || body.legislator_chamber !== 'senate') return { ok: false, skip: 'webform delivery is Senate-only' };
   const state = body.advocate_state.trim().toUpperCase().slice(0, 2);
@@ -102,6 +106,7 @@ export async function buildWebformQueueItem(body: {
     ok: true,
     item: {
       messageKey: stableMessageKey({ email: cwc.email, campaignRef, body: body.message_body }),
+      messageId,
       officialId: senator.id,
       officialName: senator.name,
       formUrl,
@@ -113,23 +118,41 @@ export async function buildWebformQueueItem(body: {
 
 export interface WebformEnqueueResult { status: 'queued' | 'held' | 'blocked' }
 
-/** Screen the message (same gate as CWC) and enqueue. */
-export async function enqueueWebformDelivery(item: WebformQueueItem): Promise<WebformEnqueueResult> {
+/**
+ * Screen the message (same gate as CWC) and enqueue. The messages row is
+ * updated to webform_held / webform_blocked here; the worker writes
+ * webform_delivered / webform_failed. The messages.id travels inside the
+ * `message` jsonb (no migration) as `messageId`.
+ */
+export async function enqueueWebformDelivery(item: WebformQueueItem, opts: { ipHash?: string | null } = {}): Promise<WebformEnqueueResult> {
   const db = clientFactory();
   const delivery: CwcDelivery = {
     chamber: 'senate',
     officeCode: 'SXX00',
     campaignId: 'webform',
+    messageId: item.messageId,
+    officialName: item.officialName,
     constituent: { prefix: item.constituent.prefix as CwcDelivery['constituent']['prefix'], firstName: item.constituent.firstName, lastName: item.constituent.lastName, address1: item.constituent.street, city: item.constituent.city, state: item.constituent.state, zip: item.constituent.zip, email: item.constituent.email },
     message: { subject: item.message.subject, topics: ['Government Operations and Politics'], constituentMessage: item.message.body },
   };
-  const { decision } = await gate({ messageKey: item.messageKey, delivery, db });
-  if (decision === 'block') return { status: 'blocked' };
+  const { decision } = await gate({ messageKey: item.messageKey, delivery, db, ipHash: opts.ipHash });
+  if (decision === 'block') {
+    await setMessageDeliveryStatus(db, item.messageId, WEBFORM_MESSAGE_STATUS.blocked);
+    return { status: 'blocked' };
+  }
   const status = decision === 'pass' ? 'queued' : 'held';
+  const message = item.messageId ? { ...item.message, messageId: item.messageId } : item.message;
   const { error } = await db.from('webform_send_queue').upsert(
-    { message_key: item.messageKey, official_id: item.officialId, official_name: item.officialName, form_url: item.formUrl, constituent: item.constituent, message: item.message, status },
+    { message_key: item.messageKey, official_id: item.officialId, official_name: item.officialName, form_url: item.formUrl, constituent: item.constituent, message, status },
     { onConflict: 'message_key,official_id', ignoreDuplicates: true },
   );
   if (error) throw new Error(`webform_send_queue enqueue failed: ${error.message}`);
+  if (status === 'held') {
+    await setMessageDeliveryStatus(db, item.messageId, WEBFORM_MESSAGE_STATUS.held);
+    await notifyConstituent(
+      { channel: 'webform', messageId: item.messageId, constituentEmail: item.constituent.email, officialName: item.officialName, formUrl: item.formUrl },
+      'held',
+    );
+  }
   return { status };
 }

@@ -816,10 +816,21 @@ Rules:
 - If the user says something is wrong (e.g., "I'm not a gig worker"), fix that assumption throughout.
 - Respond with ONLY a JSON object, no other text.`;
 
+    // The street address never goes to the model. The signature block the
+    // first draft appended carries it, so drop that one line before the
+    // revision prompt and put it back on the revised closing afterwards.
+    const streetLine = address?.street ? `\n${address.street}` : '';
+    const existingForModel = streetLine ? existingMessage.split(streetLine).join('') : existingMessage;
+    const restoreStreet = (text: string): string => {
+      if (!streetLine || !address || text.includes(address.street)) return text;
+      const cityLine = `\n${address.city}, ${address.state} ${address.zip}`;
+      return text.includes(cityLine) ? text.replace(cityLine, `${streetLine}${cityLine}`) : text;
+    };
+
     const revisionUserPrompt = `Here is the existing ${contactMethod === 'phone' ? 'phone script' : 'message'}:
 
 """
-${existingMessage}
+${existingForModel}
 """
 
 The user says: "${revisionNote}"
@@ -865,7 +876,7 @@ ${contactMethod === 'phone' ? '{"script": "the revised phone script"}' : '{"subj
         resultBody = revParsed?.script || revParsed?.body || cleanText(stripTags(rawText));
         resultSubject = '';
       } else {
-        resultBody = revParsed?.body || cleanText(stripTags(rawText));
+        resultBody = restoreStreet(revParsed?.body || cleanText(stripTags(rawText)));
         resultSubject = revParsed?.subject || '';
       }
 

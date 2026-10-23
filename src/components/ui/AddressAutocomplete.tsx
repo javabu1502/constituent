@@ -58,7 +58,7 @@ function loadGoogleMapsScript(): Promise<void> {
   });
 }
 
-function parsePlace(place: google.maps.places.PlaceResult): ParsedAddress {
+function parsePlace(place: google.maps.places.PlaceResult): ParsedAddress & { hasStreetNumber: boolean } {
   const components = place.address_components || [];
   let streetNumber = '';
   let route = '';
@@ -66,6 +66,7 @@ function parsePlace(place: google.maps.places.PlaceResult): ParsedAddress {
   let state = '';
   let zip = '';
   let zipSuffix = '';
+  let unit = '';
 
   for (const component of components) {
     const types = component.types;
@@ -73,6 +74,10 @@ function parsePlace(place: google.maps.places.PlaceResult): ParsedAddress {
       streetNumber = component.long_name;
     } else if (types.includes('route')) {
       route = component.long_name;
+    } else if (types.includes('subpremise')) {
+      // Apartment, suite, or unit. Dropping it made "123 Main St Apt 4B"
+      // arrive at the office as "123 Main St".
+      unit = component.long_name;
     } else if (types.includes('locality')) {
       city = component.long_name;
     } else if (types.includes('sublocality_level_1') && !city) {
@@ -88,9 +93,10 @@ function parsePlace(place: google.maps.places.PlaceResult): ParsedAddress {
   }
   if (zip && zipSuffix && /^\d{5}$/.test(zip) && /^\d{4}$/.test(zipSuffix)) zip = `${zip}-${zipSuffix}`;
 
-  const street = streetNumber && route ? `${streetNumber} ${route}` : route || streetNumber;
+  const base = streetNumber && route ? `${streetNumber} ${route}` : route || streetNumber;
+  const street = unit ? `${base} ${/^(apt|suite|ste|unit|#)/i.test(unit) ? unit : `Apt ${unit}`}` : base;
 
-  return { street, city, state, zip };
+  return { street, city, state, zip, hasStreetNumber: Boolean(streetNumber) };
 }
 
 export function AddressAutocomplete({
@@ -169,13 +175,17 @@ export function AddressAutocomplete({
       const place = autocomplete.getPlace();
       if (!place.address_components) return;
 
-      const parsed = parsePlace(place);
+      const { hasStreetNumber, ...parsed } = parsePlace(place);
       setStreet(parsed.street);
       setCity(parsed.city);
       setAddrState(parsed.state);
       setZip(parsed.zip);
       setAutocompleteText(place.formatted_address || '');
       onAddressChange(parsed);
+      // A place with no house number (a campus, a building name, a road)
+      // cannot be matched to a home. Open the manual fields so the person
+      // can add the number instead of sending something the office rejects.
+      if (!hasStreetNumber) setShowManual(true);
     });
 
     autocompleteRef.current = autocomplete;
@@ -244,11 +254,12 @@ export function AddressAutocomplete({
         </p>
       )}
       <div>
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <label htmlFor="address-autocomplete" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
           {label}
         </label>
         <input
           ref={inputRef}
+          id="address-autocomplete"
           type="text"
           value={autocompleteText}
           onChange={(e) => setAutocompleteText(e.target.value)}

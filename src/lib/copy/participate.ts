@@ -103,9 +103,12 @@ const en = {
   cwcIdle: 'Goes straight to the office through Communicating with Congress, the message system run by the House and Senate. No email app needed. Your name and address travel in separate fields, so no signature is needed in the text.',
   cwcSending: 'Handing your message to the congressional delivery system.',
   cwcSent: 'Received by the congressional delivery system. Delivery usually completes within minutes and pauses overnight during House and Senate maintenance windows.',
+  cwcHeld: 'Received. A reviewer checks it before it goes to the office, usually within a day.',
+  cwcBlocked: 'This message could not be sent through this site.',
   webformIdle: 'This office does not use the congressional delivery system yet, so My Democracy files your message in the office’s own contact form for you. No email app needed. Your name and address go in the form’s own fields.',
   webformSending: 'Handing your message to the delivery queue.',
   webformSent: 'Received. My Democracy will file it in the office’s contact form within about an hour.',
+  webformHeld: 'Received. A reviewer checks it before it goes to the office, usually within a day.',
 
   // Done step
   sent: 'Sent',
@@ -210,9 +213,12 @@ const es: ParticipateCopy = {
   cwcIdle: 'Va directo a la oficina a través de Communicating with Congress, el sistema de mensajes de la Cámara y el Senado. No necesita una aplicación de correo. Su nombre y dirección viajan en campos separados, así que el texto no necesita firma.',
   cwcSending: 'Entregando su mensaje al sistema de envío del Congreso.',
   cwcSent: 'Recibido por el sistema de envío del Congreso. La entrega suele completarse en minutos y se pausa de noche durante el mantenimiento de la Cámara y el Senado.',
+  cwcHeld: 'Recibido. Una persona lo revisa antes de que llegue a la oficina, normalmente dentro de un día.',
+  cwcBlocked: 'Este mensaje no se pudo enviar por este sitio.',
   webformIdle: 'Esta oficina todavía no usa el sistema de envío del Congreso, así que My Democracy registra su mensaje en el formulario de contacto de la oficina por usted. No necesita una aplicación de correo. Su nombre y dirección van en los campos del formulario.',
   webformSending: 'Entregando su mensaje a la cola de envío.',
   webformSent: 'Recibido. My Democracy lo registrará en el formulario de contacto de la oficina en aproximadamente una hora.',
+  webformHeld: 'Recibido. Una persona lo revisa antes de que llegue a la oficina, normalmente dentro de un día.',
 
   sent: 'Enviado',
   nothingSentYet: 'Todavía no se ha enviado nada',

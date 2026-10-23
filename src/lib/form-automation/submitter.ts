@@ -2,11 +2,112 @@
  * Form submission and verification
  *
  * Handles clicking submit and verifying the result using Claude Vision.
+ *
+ * Submit-button resolution (2026-10-23): the first production webform send
+ * (Durbin) timed out because `button:has-text("Submit")` matched the site's
+ * header search button (aria-label "Submit Search") before the form's own
+ * button. The resolver now searches INSIDE the <form> that contains the
+ * message field first, skips any button whose text or attributes mention
+ * "search", and only then falls back to the whole page. Dry runs resolve the
+ * button the same way and report the selector without clicking it.
  */
 
-import type { Page } from 'playwright';
+import type { Page, Locator } from 'playwright';
 import type { FormAnalysis, SubmissionResult, AnalyzerConfig } from './types';
 import { takeScreenshot } from './browser';
+
+/** A SubmissionResult plus the selector the resolver chose. */
+export type SubmitFormResult = SubmissionResult & { submitSelector?: string };
+
+/** Buttons whose text, label, value, title, name or id mention search are never a form submit. */
+export const SEARCH_BUTTON_PATTERN = /search/i;
+
+/** Selector of the field the message body was filled into, when the analysis has one. */
+export function messageFieldSelector(analysis: FormAnalysis): string | undefined {
+  const byData = analysis.fields.find((f) => f.dataType === 'message' && f.selector);
+  const byType = analysis.fields.find((f) => f.type === 'textarea' && f.selector);
+  return (byData ?? byType)?.selector || undefined;
+}
+
+/** Candidate selectors in priority order. Claude's suggestion comes first. */
+export function submitStrategies(analysis: FormAnalysis): string[] {
+  return [
+    // Use Claude's suggestion if provided (but clean up invalid CSS selectors)
+    analysis.submitButtonSelector?.replace(/:contains\([^)]+\)/g, ''),
+    // Common submit button patterns
+    'button:has-text("Submit")',
+    'button:has-text("Send")',
+    'button:has-text("Send Message")',
+    'input[type="submit"]',
+    'button[type="submit"]',
+    '#edit-submit',
+    '.btn-primary[type="submit"]',
+  ].filter((s): s is string => Boolean(s && s.trim()));
+}
+
+async function looksLikeSearch(el: Locator): Promise<boolean> {
+  const parts = await Promise.all([
+    el.textContent().catch(() => null),
+    el.getAttribute('aria-label').catch(() => null),
+    el.getAttribute('value').catch(() => null),
+    el.getAttribute('title').catch(() => null),
+    el.getAttribute('name').catch(() => null),
+    el.getAttribute('id').catch(() => null),
+  ]);
+  return SEARCH_BUTTON_PATTERN.test(parts.filter(Boolean).join(' '));
+}
+
+export interface ResolvedSubmit {
+  locator: Locator;
+  /** The selector that matched, for logs and dry-run results. */
+  selector: string;
+  /** True when found inside the form that holds the message field. */
+  scoped: boolean;
+}
+
+/**
+ * Find the form's submit button. Scoped to the <form> containing the message
+ * field first, then the whole page. Search buttons are excluded in both
+ * passes. Returns null when nothing visible qualifies. Never clicks.
+ */
+export async function resolveSubmitButton(page: Page, analysis: FormAnalysis): Promise<ResolvedSubmit | null> {
+  const strategies = submitStrategies(analysis);
+  const messageSel = messageFieldSelector(analysis);
+
+  const scopes: Array<{ root: Page | Locator; scoped: boolean }> = [];
+  if (messageSel) {
+    try {
+      scopes.push({ root: page.locator('form').filter({ has: page.locator(messageSel) }).first(), scoped: true });
+    } catch {
+      // An invalid message selector just skips the scoped pass.
+    }
+  }
+  scopes.push({ root: page, scoped: false });
+
+  for (const { root, scoped } of scopes) {
+    for (const selector of strategies) {
+      let candidates: Locator;
+      let count = 0;
+      try {
+        candidates = root.locator(selector);
+        count = await candidates.count();
+      } catch {
+        continue; // invalid selector, or the scope resolved to nothing
+      }
+      for (let i = 0; i < count; i++) {
+        const el = candidates.nth(i);
+        try {
+          if (!(await el.isVisible())) continue;
+          if (await looksLikeSearch(el)) continue;
+          return { locator: el, selector, scoped };
+        } catch {
+          continue;
+        }
+      }
+    }
+  }
+  return null;
+}
 
 /**
  * Submit a form and verify the result
@@ -15,44 +116,16 @@ export async function submitForm(
   page: Page,
   analysis: FormAnalysis,
   config: AnalyzerConfig
-): Promise<SubmissionResult> {
+): Promise<SubmitFormResult> {
   const startTime = Date.now();
+  let usedSelector = '';
 
   try {
-    // Try multiple strategies to find the submit button
-    const submitStrategies = [
-      // Use Claude's suggestion if provided (but clean up invalid CSS selectors)
-      analysis.submitButtonSelector?.replace(/:contains\([^)]+\)/g, ''),
-      // Common submit button patterns
-      'button:has-text("Submit")',
-      'button:has-text("Send")',
-      'button:has-text("Send Message")',
-      'input[type="submit"]',
-      'button[type="submit"]',
-      '#edit-submit',
-      '.btn-primary[type="submit"]',
-    ].filter(Boolean) as string[];
-
-    let submitButton = null;
-    let usedSelector = '';
-
-    for (const selector of submitStrategies) {
-      try {
-        const button = page.locator(selector).first();
-        if (await button.isVisible({ timeout: 1000 })) {
-          submitButton = button;
-          usedSelector = selector;
-          break;
-        }
-      } catch {
-        // Try next selector
-      }
+    const resolved = await resolveSubmitButton(page, analysis);
+    if (!resolved) {
+      throw new Error('Could not find submit button with any strategy (search buttons excluded)');
     }
-
-    if (!submitButton) {
-      throw new Error('Could not find submit button with any strategy');
-    }
-
+    usedSelector = `${resolved.selector}${resolved.scoped ? ' (inside the message form)' : ' (page-wide)'}`;
     console.log(`Clicking submit button: ${usedSelector}`);
 
     // Click the submit button
@@ -61,7 +134,7 @@ export async function submitForm(
       page.waitForLoadState('networkidle', { timeout: 30000 }).catch(() => {
         // Some forms don't navigate, just show a message
       }),
-      submitButton.click(),
+      resolved.locator.click(),
     ]);
 
     // Wait a moment for any JS to update the page
@@ -78,6 +151,7 @@ export async function submitForm(
       screenshotBase64,
       timeTakenMs: Date.now() - startTime,
       pagesFilled: 1, // For single-page forms
+      submitSelector: usedSelector,
     };
   } catch (error) {
     console.error('Submit error:', error);
@@ -97,6 +171,7 @@ export async function submitForm(
       screenshotBase64,
       timeTakenMs: Date.now() - startTime,
       pagesFilled: 1,
+      submitSelector: usedSelector || undefined,
     };
   }
 }

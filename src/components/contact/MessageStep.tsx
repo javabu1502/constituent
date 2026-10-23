@@ -1,6 +1,6 @@
 'use client';
 
-import { useCwcActiveOffices, isCwcDeliverable } from '@/lib/cwc-client';
+import { useCwcActiveOffices, isCwcDeliverable, CWC_COPY } from '@/lib/cwc-client';
 import { useEffect, useState } from 'react';
 import type { ContactState, ContactAction, OfficialMessage } from './ContactFlow';
 import { Button } from '@/components/ui/Button';
@@ -137,7 +137,7 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
   // staffer email for a message that goes through the congressional system).
   const cwcOffices = useCwcActiveOffices();
   const cwcDeliverable = (o: ContactState['selectedReps'][number]) =>
-    contactMethod === 'email' && isCwcDeliverable(o, cwcOffices, { prefix: state.userPrefix, email: state.userEmail, street: address?.street, zip: address?.zip });
+    contactMethod === 'email' && state.districtResolved && isCwcDeliverable(o, cwcOffices, { prefix: state.userPrefix, email: state.userEmail, street: address?.street, zip: address?.zip });
   const [reviewIndex, setReviewIndex] = useState(0);
   const [isGenerating, setIsGenerating] = useState(false);
   // Message-first path: true while the ONE core message is being drafted,
@@ -515,43 +515,24 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
           // Congress back, not just trim). A bill reference or casework is
           // unambiguous and stays authoritative. (Jared, 2026-10-13: a
           // "televised executions" letter went to state and local only.)
-          let recipients = repsNeedingMessages;
+          // The interview already asked the person which level can act and
+          // showed them the answer; the drafter does not overrule it. A
+          // bill reference or casework in the text is unambiguous either way.
           const issueText = `${state.issue || ''} ${state.issueCategory || ''} ${state.ask || ''}`;
           const source = jurisdictionSource(issueText);
-          if (data.jurisdiction && source !== 'bill' && source !== 'casework') {
+          if (data.jurisdiction && !state.interviewLevel && source !== 'bill' && source !== 'casework') {
             const ai = sanitizeAiJurisdiction(data.jurisdiction);
             if (ai) {
               const levels = new Set(selectLevels(ai));
-              const pool = state.officials.length > 0 ? state.officials : recipients;
+              const pool = state.officials.length > 0 ? state.officials : repsNeedingMessages;
               const chosen = chooseLocalOfficials(pool.filter((o) => levels.has((o.level as GovLevel) ?? 'federal')), `${issueText} ${state.personalWhy || ''}`);
               if (chosen.length > 0) {
-                recipients = chosen;
                 dispatch({ type: 'SELECT_REPS', payload: chosen });
               }
             }
           }
-
-          const built: Record<string, { subject: string; body: string }> = {};
-          for (const rep of recipients) {
-            built[rep.name] = buildEnvelope(String(data.body).trim(), rep, {
-              committeeName: null,
-              verb: null,
-              billRef: null,
-              stageGoal: undefined,
-              headline: state.issue || state.issueCategory || 'this issue',
-              senderName: state.userName || 'A constituent',
-              city: state.address?.city ?? '',
-              stateCode: state.address?.state ?? '',
-              zip: state.address?.zip ?? '',
-              coreSubject: typeof data.subject === 'string' ? data.subject : null,
-              coreOpening: typeof data.opening === 'string' ? data.opening : null,
-              coreAsk: typeof data.ask === 'string' ? data.ask : null,
-              originalWords: data.original && typeof data.original.text === 'string' ? data.original : null,
-              // CWC carries name and address in separate fields: no signature in the text.
-              signature: !cwcDeliverable(rep),
-            });
-          }
-          dispatch({ type: 'SET_MESSAGES', payload: { ...messages, ...built } });
+          // Envelopes are built by the effect below, once the office list
+          // has resolved, so a CWC-bound letter carries no signature.
         } catch (err) {
           console.error('[contact] core drafting failed, using legacy generation:', err);
           generateMessages();
@@ -562,37 +543,22 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
       return;
     }
     if (state.coreMessage?.trim()) {
-      const built: Record<string, { subject: string; body: string }> = {};
-      for (const rep of repsNeedingMessages) {
-        built[rep.name] = buildEnvelope(state.coreMessage.trim(), rep, {
-          committeeName: null,
-          verb: null,
-          billRef: null,
-          stageGoal: undefined,
-          headline: state.issue || state.issueCategory || 'this issue',
-          senderName: state.userName || 'A constituent',
-          city: state.address?.city ?? '',
-          stateCode: state.address?.state ?? '',
-          zip: state.address?.zip ?? '',
-          coreSubject: state.coreFrame?.subject ?? null,
-          coreOpening: state.coreFrame?.opening ?? null,
-          coreAsk: state.coreFrame?.ask ?? null,
-          originalWords: state.coreFrame?.original ?? null,
-          signature: !cwcDeliverable(rep),
-        });
-      }
-      dispatch({ type: 'SET_MESSAGES', payload: { ...messages, ...built } });
+      // Restored or approved core: the effect below wraps it per official.
       return;
     }
     generateMessages();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // A recipient added AFTER the core exists (the "Also write to" chips) gets
-  // their envelope immediately, in the same voice as everyone else's.
+  // Every official without a letter gets an envelope around the ONE core,
+  // in the same voice: the first build, a restored draft, and a recipient
+  // added later by the "Also write to" chips. It waits for the office list
+  // so the signature decision is right: a CWC-bound letter carries name and
+  // address in separate fields, and the review copy says so (found
+  // 2026-10-23: envelopes built before the list loaded always had one).
   const selectedIds = selectedReps.map((r) => r.id).join(',');
   useEffect(() => {
-    if (!state.coreMessage?.trim() || isDraftingCore) return;
+    if (!state.coreMessage?.trim() || isDraftingCore || !cwcOffices.loaded) return;
     const missing = selectedReps.filter((rep) => !messages[rep.name]);
     if (missing.length === 0) return;
     const built: Record<string, { subject: string; body: string }> = {};
@@ -616,7 +582,7 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
     }
     dispatch({ type: 'SET_MESSAGES', payload: { ...messages, ...built } });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedIds, state.coreMessage, isDraftingCore]);
+  }, [selectedIds, state.coreMessage, isDraftingCore, cwcOffices.loaded]);
 
   const updateMessage = (officialName: string, field: 'subject' | 'body', value: string) => {
     dispatch({
@@ -668,11 +634,13 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
   // getToken() waits for this step's own widget to solve. With the widget only
   // in the review view below, every anonymous draft waited 20s, sent no token,
   // got a 403, and fell back to the template letters (found 2026-10-13).
-  if ((isGenerating || isDraftingCore) && loadedCount === 0) {
+  // Also while the core exists and its envelopes wait on the office list.
+  const waitingForEnvelopes = !!state.coreMessage?.trim() && selectedReps.length > 0 && loadedCount === 0 && !state.error;
+  if ((isGenerating || isDraftingCore || waitingForEnvelopes) && loadedCount === 0) {
     return (
       <div className="p-6 sm:p-8">
         <TurnstileWidget />
-        <div className="flex flex-col items-center justify-center py-16">
+        <div role="status" className="flex flex-col items-center justify-center py-16">
           <div className="relative">
             <div className="w-16 h-16 border-4 border-purple-200 dark:border-purple-800 rounded-full animate-spin border-t-purple-600"></div>
             <div className="absolute inset-0 flex items-center justify-center">
@@ -682,13 +650,13 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
             </div>
           </div>
           <p className="text-gray-600 dark:text-gray-300 mt-4 font-medium">
-            {isDraftingCore
+            {isDraftingCore || waitingForEnvelopes
               ? 'Writing your message...'
               : contactMethod === 'phone'
               ? `Writing ${selectedReps.length} script${selectedReps.length > 1 ? 's' : ''}...`
               : `Writing ${selectedReps.length} message${selectedReps.length > 1 ? 's' : ''}...`}
           </p>
-          {isDraftingCore ? (
+          {isDraftingCore || waitingForEnvelopes ? (
             <div className="mt-4 max-w-md">
               <p className="text-gray-500 dark:text-gray-400 text-sm text-center mb-3">
                 Drafting your message. Each of these officials gets their own copy:
@@ -722,24 +690,42 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
         </p>
       </div>
 
+      {/* The street could not be placed: congressional delivery is withheld
+          (email instead) and the person can fix the address now. */}
+      {!state.districtResolved && (
+        <div role="alert" className="mb-4 p-3 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded-xl">
+          <p className="text-sm text-amber-800 dark:text-amber-300">{CWC_COPY.unresolvedAddress}</p>
+          <p className="text-xs text-amber-700 dark:text-amber-400 mt-1">
+            Until the address checks out, federal messages open in your email app instead of going through the congressional delivery system.
+          </p>
+          <button
+            type="button"
+            onClick={onBack}
+            className="mt-2 text-xs font-medium text-amber-900 dark:text-amber-200 underline"
+          >
+            Re-enter my address
+          </button>
+        </div>
+      )}
+
       {/* Personal-case detection: casework is what congressional offices are
-          genuinely FOR, but an email alone can't start it — tell them how. */}
+          genuinely FOR, but an email alone can't start it. Tell them how. */}
       {(() => {
         const cw = detectCasework(`${state.issue || ''} ${state.ask || ''} ${state.personalWhy || ''}`);
         if (!cw.isCasework) return null;
         return (
           <div className="mb-4 p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700 rounded-xl">
             <p className="text-sm text-blue-800 dark:text-blue-200 font-medium">
-              This sounds like a personal case — {cw.level === 'state' ? 'your state legislator&apos;s office' : 'congressional offices'} have caseworkers for exactly this.
+              This sounds like a personal case. {cw.level === 'state' ? 'Your state legislator&apos;s office has' : 'Congressional offices have'} caseworkers for exactly this.
             </p>
             <p className="text-xs text-blue-700 dark:text-blue-300 mt-1">
-              Sending this message is a good first step. Ask for &quot;casework help&quot; in your message — their office will usually send you a privacy release form so they can contact the agency on your behalf.
+              Sending this message is a good first step. Ask for &quot;casework help&quot; in your message. Their office will usually send you a privacy release form so they can contact the agency on your behalf.
             </p>
           </div>
         );
       })()}
 
-      {/* Who this goes to, and why — the bridge between the address they just
+      {/* Who this goes to, and why: the bridge between the address they just
           entered and the officials they're suddenly looking at. */}
       {selectedReps.length > 0 && (
         <div className="mb-4 p-3 bg-gray-50 dark:bg-gray-700/40 border border-gray-200 dark:border-gray-600 rounded-xl">
@@ -795,13 +781,13 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
             Our AI writer isn&apos;t available right now, so we&apos;ve started each {contactMethod === 'phone' ? 'script' : 'message'} for you.
           </p>
           <p className="text-xs text-amber-700 dark:text-amber-400 mt-1">
-            Please make it your own before sending — personal words carry the most weight with officials.
+            Please make it your own before sending. Personal words carry the most weight with officials.
           </p>
         </div>
       )}
 
       {state.error && (
-        <div className="mb-4 p-4 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 rounded-xl">
+        <div role="alert" className="mb-4 p-4 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 rounded-xl">
           <div className="flex items-center justify-between gap-3">
             <p className="text-sm text-red-700 dark:text-red-300">{state.error}</p>
             {Object.keys(messages).length < selectedReps.length && (
@@ -893,7 +879,7 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
             </p>
           ) : contactMethod === 'email' && currentRep.stafferFirstName ? (
             <p className="mt-2 text-xs text-purple-700 dark:text-purple-300">
-              Your message will be sent to {currentRep.stafferFirstName}{currentRep.stafferLastName ? ` ${currentRep.stafferLastName}` : ''}, staff for {currentRep.chamber === 'senate' ? 'Sen.' : 'Rep.'} {currentRep.lastName || currentRep.name.split(' ').pop()}&apos;s office.
+              You send this yourself from your email app. It goes to {currentRep.stafferFirstName}{currentRep.stafferLastName ? ` ${currentRep.stafferLastName}` : ''}, staff for {currentRep.chamber === 'senate' ? 'Sen.' : 'Rep.'} {currentRep.lastName || currentRep.name.split(' ').pop()}&apos;s office.
             </p>
           ) : null}
         </div>
@@ -904,10 +890,11 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
         <>
           {contactMethod === 'email' && (
             <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label htmlFor="message-subject" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Subject Line
               </label>
               <input
+                id="message-subject"
                 type="text"
                 value={currentMessage.subject}
                 onChange={(e) => currentRep && updateMessage(currentRep.name, 'subject', e.target.value)}
@@ -918,7 +905,7 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
 
           <div className="mb-4">
             <div className="flex items-center justify-between mb-2">
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+              <label htmlFor="message-body" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                 {contactMethod === 'phone' ? 'Phone Script' : 'Message Body'}
               </label>
               <span className="text-xs text-gray-400 dark:text-gray-500">
@@ -926,6 +913,7 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
               </span>
             </div>
             <textarea
+              id="message-body"
               value={currentMessage.body}
               onChange={(e) => currentRep && updateMessage(currentRep.name, 'body', e.target.value)}
               rows={contactMethod === 'phone' ? 6 : 8}
@@ -996,11 +984,12 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
             {/* Suggestion input */}
             {showSuggestionInput && currentRep && (
               <div className="mt-3 p-3 bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-700 rounded-xl">
-                <label className="block text-xs font-medium text-purple-700 dark:text-purple-300 mb-1.5">
+                <label htmlFor="message-suggestion" className="block text-xs font-medium text-purple-700 dark:text-purple-300 mb-1.5">
                   What should be different?
                 </label>
                 <div className="flex gap-2">
                   <input
+                    id="message-suggestion"
                     type="text"
                     value={suggestionInput}
                     onChange={(e) => setSuggestionInput(e.target.value)}
@@ -1026,7 +1015,7 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
                   </button>
                 </div>
                 <p className="text-xs text-purple-500 dark:text-purple-400 mt-1.5">
-                  Tell the AI what to fix — it&apos;ll update the message without starting over.
+                  Tell the AI what to fix. It updates the message without starting over.
                 </p>
               </div>
             )}

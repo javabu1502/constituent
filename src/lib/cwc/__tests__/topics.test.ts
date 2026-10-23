@@ -32,6 +32,23 @@ describe('locTopicsForIssueArea', () => {
     expect(locTopicsForIssueArea('guns')).toEqual(['Crime and Law Enforcement']);
     expect(locTopicsForIssueArea('foreign policy')).toEqual(['International Affairs']);
   });
+  it('maps reproductive-health issue areas to Health (production case 2026-10-20)', () => {
+    // Every issue_area the contact flow produced that day, plus the subtopics.
+    expect(locTopicsForIssueArea('Abortion')).toEqual(['Health']);
+    expect(locTopicsForIssueArea('Abortion and Fetal Rights')).toEqual(['Health']);
+    expect(locTopicsForIssueArea('Reproductive Rights & Life')).toEqual(['Health']);
+    expect(locTopicsForIssueArea('Abortion', undefined, 'Legislation recognizing personhood from conception')).toEqual(['Health']);
+    expect(locTopicsForIssueArea('Reproductive Rights & Life', undefined, 'Equal legal rights and protections for humans from conception')).toEqual(['Health']);
+    for (const word of ['unborn life', 'fetal personhood', 'pregnancy care', 'contraception access', 'IVF coverage']) {
+      expect(locTopicsForIssueArea(word), word).toEqual(['Health']);
+    }
+  });
+  it('uses the subtopic when the issue_area is unplaceable', () => {
+    expect(locTopicsForIssueArea('Other', undefined, 'equal protection bill to abolish abortion')).toEqual(['Health']);
+    expect(locTopicsForIssueArea('Other', undefined, 'property tax relief')).toEqual(['Taxation']);
+    // An exact LoC name still wins over the subtopic.
+    expect(locTopicsForIssueArea('Families', undefined, 'abortion')).toEqual(['Families']);
+  });
   it('falls back via keywords, then to Government Operations', () => {
     expect(locTopicsForIssueArea('School Meals Access')).toEqual(['Education']);
     expect(locTopicsForIssueArea('zzz nothing', 'zzz')).toEqual(['Government Operations and Politics']);

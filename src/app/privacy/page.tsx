@@ -14,7 +14,7 @@ export default function PrivacyPage() {
           Privacy Policy
         </h1>
         <p className="text-gray-500 dark:text-gray-400 mb-10">
-          Last updated: July 2026
+          Last updated: October 2026
         </p>
 
         <div className="prose prose-gray dark:prose-invert max-w-none">
@@ -52,8 +52,13 @@ export default function PrivacyPage() {
                 </a>, we find your federal and state representatives.
               </p>
               <p className="bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-700 rounded-lg p-4 text-blue-800 dark:text-blue-300">
-                <strong>Without an account:</strong> your address is used for lookup only
-                and then discarded. <strong>With an account:</strong> your address is stored
+                <strong>Without an account:</strong> your address is used to find your officials
+                and is not stored with your profile. If you send a message to a congressional
+                office through this site, your name, street address, email, and message are
+                kept in our delivery records so the office can confirm you are a constituent
+                and so we can retry or review the delivery. The street address, email, and
+                phone are removed from those records 30 days after the delivery is settled.{' '}
+                <strong>With an account:</strong> your address is stored
                 securely in your profile so you can access your dashboard and matched
                 officials. You can update or delete it anytime.
               </p>
@@ -81,6 +86,13 @@ export default function PrivacyPage() {
               <p className="bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-700 rounded-lg p-4 text-blue-800 dark:text-blue-300">
                 <strong>The AI does NOT see your full street address</strong> or any
                 other personal information beyond what&apos;s needed to write the message.
+              </p>
+              <p>
+                Before a message goes to a congressional office through this site, an automated
+                screen reads the message text to check for threats, impersonation, and spam. The
+                screen runs on the same AI provider under the same terms. Messages it cannot clear
+                are read by a My Democracy administrator before they are sent or declined. We keep
+                a short excerpt and the decision for each screened message.
               </p>
             </div>
           </section>
@@ -116,10 +128,10 @@ export default function PrivacyPage() {
                 <li>Your <strong className="text-gray-900 dark:text-white">email</strong>, so the message is linked to your account</li>
               </ul>
               <p className="bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-700 rounded-lg p-4 text-blue-800 dark:text-blue-300">
-                <strong>If you send a message without an account, we do not store the text of what you wrote.</strong> We keep only the trend information listed above.
+                <strong>If you send a message without an account, we do not store the text of what you wrote with the trend information.</strong> The one exception is a message you send to a congressional office through this site, which is kept in our delivery records as described above.
               </p>
               <p className="bg-green-50 dark:bg-green-900/30 border border-green-200 dark:border-green-700 rounded-lg p-4 text-green-800 dark:text-green-300">
-                <strong>We never share, sell, or provide your messages or personal information to any third party</strong>, including legislators, political organizations, or advertisers.
+                <strong>We never sell your messages or personal information, and we never give them to advertisers or political organizations.</strong> When you send a message to an official through this site, we deliver your name, address, email, and message to that office, because that is what you asked us to do. Nothing goes to any office you did not choose.
               </p>
             </div>
           </section>
@@ -280,7 +292,7 @@ export default function PrivacyPage() {
                   <strong className="text-gray-900 dark:text-white">To improve the platform:</strong> we may review anonymized message patterns to improve AI message generation.
                 </li>
                 <li>
-                  <strong className="text-gray-900 dark:text-white">To prevent abuse and control costs:</strong> we log AI-generation events (which feature was used and when) to enforce daily limits and protect against automated abuse. For signed-in users this is tied to your account; for visitors without an account we record only a <strong className="text-gray-900 dark:text-white">one-way hashed version of your IP address</strong> — we never store raw IP addresses for this purpose. These logs are automatically purged after 30 days.
+                  <strong className="text-gray-900 dark:text-white">To prevent abuse and control costs:</strong> we log AI-generation events (which feature was used and when) to enforce daily limits and protect against automated abuse. For signed-in users this is tied to your account; for visitors without an account we record only a <strong className="text-gray-900 dark:text-white">one-way hashed version of your IP address</strong>. We never store raw IP addresses for this purpose. These logs are automatically purged after 30 days.
                 </li>
               </ul>
               <p className="bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-700 rounded-lg p-4 text-blue-800 dark:text-blue-300">
@@ -354,7 +366,27 @@ export default function PrivacyPage() {
               </div>
               <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
                 <p className="font-semibold text-gray-900 dark:text-white">Vercel</p>
-                <p className="text-sm">Website hosting. Standard web server logs only.</p>
+                <p className="text-sm">Website hosting and cookie-free analytics. Vercel Analytics records page views and a few product events, such as that a message was sent and by which method, without personal identifiers.</p>
+              </div>
+              <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
+                <p className="font-semibold text-gray-900 dark:text-white">U.S. House and Senate Communicating With Congress systems</p>
+                <p className="text-sm">When you choose &quot;Send to Congress&quot;, your name, address, email, and message are delivered to the office you picked through the official congressional intake systems, from a fixed outbound address we lease for that purpose. Each office then handles the message under its own rules.</p>
+              </div>
+              <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
+                <p className="font-semibold text-gray-900 dark:text-white">Cloudflare Turnstile</p>
+                <p className="text-sm">Bot protection on AI features. Cloudflare receives your IP address and browser signals to decide whether you are a person.</p>
+              </div>
+              <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
+                <p className="font-semibold text-gray-900 dark:text-white">Google Maps Places</p>
+                <p className="text-sm">Address autocomplete. The text you type into the address box is sent to Google to suggest matches.</p>
+              </div>
+              <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
+                <p className="font-semibold text-gray-900 dark:text-white">Resend</p>
+                <p className="text-sm">Email delivery for account notices, campaign updates you opted into, and story permission requests. Resend receives the recipient address and the email content.</p>
+              </div>
+              <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
+                <p className="font-semibold text-gray-900 dark:text-white">GitHub Actions</p>
+                <p className="text-sm">Runs the worker that files messages on a few senators&apos; contact forms when those offices do not accept the congressional intake system. It reads the queued message and your contact details for that one submission.</p>
               </div>
             </div>
           </section>
@@ -474,7 +506,7 @@ export default function PrivacyPage() {
                   <strong className="text-gray-900 dark:text-white">Abuse protection</strong>: CAPTCHA bot-detection, rate limiting, and per-account (or per-IP) daily usage limits guard our AI features against automated misuse.
                 </li>
                 <li>
-                  <strong className="text-gray-900 dark:text-white">Data minimization</strong>: we never store raw IP addresses for usage tracking — only one-way hashes — and the AI is never given your full street address.
+                  <strong className="text-gray-900 dark:text-white">Data minimization</strong>: we never store raw IP addresses for usage tracking, only one-way hashes, and the AI is never given your full street address.
                 </li>
                 <li>
                   <strong className="text-gray-900 dark:text-white">Least privilege</strong>: access to your data is restricted to essential platform operations only.

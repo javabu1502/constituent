@@ -160,7 +160,7 @@ ${STRENGTH_BASED_FRAMING}
 A short, topical headline about the issue (max 80 chars). It must NOT contain the person's name, employer, or a specific small place. Identify the topic, not the person (e.g. "Rising costs are forcing me to consider closing").
 
 ## NOTES
-List, in "notes", anything you left out or changed: a detail you could not use, a sentence you softened or dropped, a name you did not include. One short sentence each, addressed to the storyteller ("I left out the line about your neighbor; add it back if you want it in."). Empty list if nothing.
+List, in "notes", anything you left out or changed: a detail you could not use, a sentence you softened or dropped, a name you did not include. One short sentence each, addressed to the storyteller as "you" ("I left out the line about your neighbor; add it back if you want it in."). Never call them "the author" or "the storyteller" in a note. Write the notes in the language the storyteller wrote in. Empty list if nothing.
 
 Respond with ONLY this JSON, nothing else:
 {
@@ -179,6 +179,8 @@ Sound like a real person, not AI. Specifically:
 - Vary sentence length. A little plain or imperfect reads as human.
 
 Keep the title unless the edit request asks to change it (same rules: short, topical, non-identifying, max 80 chars). No salutation or signature.
+
+Write "notes" in the language the storyteller wrote in, addressed to them as "you", not as "the author" or "the storyteller".
 
 Respond with ONLY this JSON, nothing else:
 {

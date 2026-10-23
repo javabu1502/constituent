@@ -28,6 +28,8 @@ export interface CwcSendPayload {
 
 export interface TrackSendLike {
   advocate_name: string;
+  /** Display name of the official, carried on the delivery for notifications. */
+  legislator_name?: string;
   advocate_city: string;
   advocate_state: string;
   advocate_district?: string;
@@ -132,7 +134,8 @@ export function buildCwcQueueItem(opts: {
   body: TrackSendLike;
   cwc: CwcSendPayload;
   campaign: CampaignBillContext | null;
-  /** messages.id — kept for log correlation; NOT the queue identity. */
+  /** messages.id — carried on the delivery so the drain can write the
+   *  outcome back; NOT the queue identity (see stableMessageKey). */
   messageId: string;
 }): BuildResult {
   const { body, cwc, campaign } = opts;
@@ -168,6 +171,9 @@ export function buildCwcQueueItem(opts: {
     chamber,
     officeCode: office.code,
     campaignId: buildCampaignId({ campaignRef, bill: bill ?? undefined, stance }),
+    // Delivery truth: the drain writes the outcome back to this messages row.
+    messageId: opts.messageId,
+    officialName: body.legislator_name?.trim() || undefined,
     constituent: {
       prefix: cwc.prefix,
       firstName: nameParts[0],
@@ -180,7 +186,7 @@ export function buildCwcQueueItem(opts: {
     },
     message: {
       subject: cwc.subject,
-      topics: locTopicsForIssueArea(body.issue_area, campaign?.headline ?? undefined),
+      topics: locTopicsForIssueArea(body.issue_area, campaign?.headline ?? undefined, body.issue_subtopic),
       ...(bill ? { bills: [bill] } : {}),
       ...(stance ? { stance } : {}),
       constituentMessage: body.message_body,

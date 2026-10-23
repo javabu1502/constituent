@@ -39,7 +39,7 @@ import {
 
 import { analyzeForm, enhanceAnalysisFromDOM } from './analyzer';
 import { fillForm, preprocessData } from './filler';
-import { submitForm, goToNextPage } from './submitter';
+import { submitForm, goToNextPage, resolveSubmitButton, type SubmitFormResult } from './submitter';
 
 // Re-export types
 export * from './types';
@@ -75,7 +75,7 @@ export async function submitToRepresentative(
   bioguideIdOrUrl: string,
   constituentData: ConstituentData,
   config: AutomationConfig
-): Promise<SubmissionResult> {
+): Promise<SubmitFormResult> {
   const startTime = Date.now();
   let pagesFilled = 0;
   let representativeId: string | undefined;
@@ -246,15 +246,34 @@ export async function submitToRepresentative(
         formUrl: contactFormUrl,
       };
     } else {
+      // Dry run: resolve the submit button exactly as a live send would, and
+      // report it, but never click. A dry run that cannot resolve a submit
+      // button is a failure, so the audit catches it before a real send does.
       console.log('Dry run - not submitting');
+      const resolved = await resolveSubmitButton(page, currentAnalysis);
+      if (!resolved) {
+        return {
+          success: false,
+          status: 'unknown_error',
+          errorType: 'unknown',
+          message: 'Dry run: form was filled but no submit button could be resolved (search buttons are excluded)',
+          timeTakenMs: Date.now() - startTime,
+          pagesFilled,
+          representativeId,
+          formUrl: contactFormUrl,
+        };
+      }
+      const where = resolved.scoped ? 'inside the message form' : 'page-wide';
+      console.log(`Dry run resolved submit button: ${resolved.selector} (${where})`);
       return {
         success: true,
         status: 'success',
-        message: 'Dry run completed - form was filled but not submitted',
+        message: `Dry run completed - form was filled but not submitted (submit: ${resolved.selector}, ${where})`,
         timeTakenMs: Date.now() - startTime,
         pagesFilled,
         representativeId,
         formUrl: contactFormUrl,
+        submitSelector: resolved.selector,
       };
     }
   } catch (error) {

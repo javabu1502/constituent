@@ -321,6 +321,10 @@ export const submitStorySchema = z.object({
   // Preview mode: apply attribution and return the text the organization
   // would receive, without saving anything.
   preview: z.boolean().optional(),
+  // Anonymous only: the body is exactly the redacted text the storyteller
+  // reviewed on the preview step (possibly hand-edited). The server stores it
+  // as given and does not run the model redaction a second time.
+  preview_confirmed: z.boolean().optional(),
   turnstileToken: z.string().optional(),
   // Storytelling persistence: the story is saved to the campaign organizer's
   // dashboard by default; `store: false` is the storyteller's opt-out. City/

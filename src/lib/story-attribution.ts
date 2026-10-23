@@ -28,14 +28,16 @@ function escapeRegExp(s: string): string {
 
 const REDACT_PROMPT = `You anonymize a first-person personal story so it cannot be traced back to its author, while preserving its meaning and emotional truth.
 
-Remove or generalize any uniquely identifying detail: full names (the author's and anyone else's, including children), employers/specific organizations, exact street addresses, small/specific place names, phone numbers, emails, license/case/ID numbers, and any rare combination of facts that could single the person out. Keep the story coherent and human. Replace specifics with neutral generalizations (e.g. "my employer", "a town near me") rather than deleting whole sentences.
+Remove or generalize any uniquely identifying detail: full names (the storyteller's and anyone else's, including children), employers/specific organizations, exact street addresses, small/specific place names, phone numbers, emails, license/case/ID numbers, and any rare combination of facts that could single the person out. Keep the story coherent and human. Replace specifics with neutral generalizations (e.g. "my employer", "a town near me") rather than deleting whole sentences. Keep the story in the language it was written in.
 
 ${STRENGTH_BASED_FRAMING}
+
+Write each "flagged" item in the language the story is written in, addressed to the storyteller as "you" ("You mention the name of your school; check whether it could identify you."). Never write "the author" or "the storyteller".
 
 Respond with ONLY this JSON:
 {
   "redacted": "the anonymized story",
-  "flagged": ["short descriptions of details you could NOT confidently anonymize and the author should review"]
+  "flagged": ["short descriptions of details you could NOT confidently anonymize and that you should review"]
 }`;
 
 /**

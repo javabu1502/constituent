@@ -460,10 +460,11 @@ export function TopicStep({ state, dispatch, onBack }: TopicStepProps) {
         <div className={`mb-5 ${cwcRequired ? 'grid grid-cols-[6rem_1fr] gap-3' : ''}`}>
           {cwcRequired && (
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label htmlFor="contact-prefix" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Title <span className="text-red-500">*</span>
               </label>
               <select
+                id="contact-prefix"
                 value={state.userPrefix}
                 onChange={(e) => dispatch({ type: 'SET_USER_PREFIX', payload: e.target.value })}
                 className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
@@ -476,10 +477,11 @@ export function TopicStep({ state, dispatch, onBack }: TopicStepProps) {
             </div>
           )}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label htmlFor="contact-name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               Your Name <span className="text-red-500">*</span>
             </label>
             <input
+              id="contact-name"
               type="text"
               value={userName}
               onChange={(e) => dispatch({ type: 'SET_USER_NAME', payload: e.target.value })}
@@ -491,11 +493,12 @@ export function TopicStep({ state, dispatch, onBack }: TopicStepProps) {
   
         {/* Your Email */}
         <div className="mb-5">
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <label htmlFor="contact-email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             Your Email{' '}
             {cwcRequired ? <span className="text-red-500">*</span> : <span className="text-gray-400 dark:text-gray-500 font-normal">(optional)</span>}
           </label>
           <input
+            id="contact-email"
             type="email"
             value={state.userEmail}
             onChange={(e) => dispatch({ type: 'SET_USER_EMAIL', payload: e.target.value })}
@@ -503,7 +506,7 @@ export function TopicStep({ state, dispatch, onBack }: TopicStepProps) {
             className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
           />
           <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-            {cwcRequired ? 'Congressional offices require an email address to accept and reply to your message. Never shared or sold.' : 'So legislators can reply to you. Never shared or sold.'}
+            {cwcRequired ? 'Congressional offices require an email address to accept and reply to your message. Shared only with the office you write to.' : 'So legislators can reply to you. Shared only with the office you write to.'}
           </p>
         </div>
   
@@ -586,7 +589,7 @@ export function TopicStep({ state, dispatch, onBack }: TopicStepProps) {
       </div>
 
       {state.error && (
-        <div className="mb-4 p-4 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 rounded-xl">
+        <div role="alert" className="mb-4 p-4 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 rounded-xl">
           <p className="text-sm text-red-700 dark:text-red-300">{state.error}</p>
         </div>
       )}
@@ -668,10 +671,11 @@ export function TopicStep({ state, dispatch, onBack }: TopicStepProps) {
 
       {/* What action do you want them to take? */}
       <div className="mb-5">
-        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+        <label htmlFor="contact-ask" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
           What action do you want them to take? <span className="text-red-500">*</span>
         </label>
         <textarea
+          id="contact-ask"
           value={ask}
           onChange={(e) => dispatch({ type: 'SET_ASK', payload: e.target.value })}
           placeholder='e.g., "Vote yes on the infrastructure bill", "Fix the roads in my district"'
@@ -683,7 +687,7 @@ export function TopicStep({ state, dispatch, onBack }: TopicStepProps) {
       {/* Your personal why */}
       <div className="mb-5">
         <div className="flex items-center justify-between mb-2">
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+          <label htmlFor="contact-why" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
             Your personal why{' '}
             <span className="text-gray-400 dark:text-gray-500 font-normal">(optional but powerful)</span>
           </label>
@@ -699,7 +703,7 @@ export function TopicStep({ state, dispatch, onBack }: TopicStepProps) {
         {showStoryHelp && (
           <div className="mb-3 p-3 bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-700 rounded-xl space-y-3">
             <p className="text-xs font-medium text-purple-800 dark:text-purple-200">
-              Congressional staff say that personal stories stand out — messages that share a real experience are much more likely to get attention.
+              Congressional staff say that personal stories stand out. Messages that share a real experience are much more likely to get attention.
             </p>
 
             {/* Story starter prompts */}
@@ -807,6 +811,7 @@ export function TopicStep({ state, dispatch, onBack }: TopicStepProps) {
         )}
 
         <textarea
+          id="contact-why"
           value={personalWhy}
           onChange={(e) => dispatch({ type: 'SET_PERSONAL_WHY', payload: e.target.value })}
           placeholder='e.g., "This affects my daily commute and my kids&#39; school bus route"'

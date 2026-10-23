@@ -13,6 +13,9 @@ const DAILY_LIMITS: Record<string, number> = {
   research: 15,
   bill_summary: 15,
   chat: 600,
+  // Story preview + store on POST /api/stories. No CAPTCHA on that flow since
+  // 10-15, so this is the one durable cap on a script flooding a campaign.
+  story_submit: 60,
 };
 
 /** Minimum days between messages to the same legislator */

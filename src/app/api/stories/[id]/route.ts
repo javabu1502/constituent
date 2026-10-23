@@ -63,6 +63,14 @@ export async function PATCH(
 
   const level = existing.attribution_level as 'named' | 'first_name_only' | 'anonymous';
   const applied = await applyAttribution(parsed.data.body, level, existing.storyteller_name as string | null);
+  // An anonymous edit is never saved unless the redaction pass actually ran
+  // (same rule as POST; audit 2026-10-23).
+  if (level === 'anonymous' && applied.failed) {
+    return NextResponse.json(
+      { error: 'We could not anonymize your story just now, so nothing was changed. Please try again in a moment.' },
+      { status: 503 },
+    );
+  }
   const finalBody = deDash(applied.final_body);
   const rendered = await renderStoryEnglish(finalBody);
 

@@ -2,8 +2,10 @@ import { createAdminClient } from '@/lib/supabase';
 import { assertCwcSendable, CwcComplianceError } from './content';
 import { RatePermitBackpressureError } from './rate-permit';
 import { sendCwcDelivery, type SendCwcOptions, type SendCwcOutcome } from './send';
-import { screenMessageForCwc, type GateOutcome } from './compliance-gate';
+import { screenMessageForCwc, screeningKeyFor, type GateOutcome, type ScreenSibling } from './compliance-gate';
 import { CwcValidationError } from './xml';
+import { CWC_MESSAGE_STATUS, setMessageDeliveryStatus } from './message-status';
+import { notifyAdminOutcome, notifyConstituent, type DeliveryRef } from './notify';
 import type { CwcEnvironment } from './delivery-log';
 import type { CwcDelivery } from './types';
 
@@ -31,7 +33,13 @@ export function setSendQueueClientFactory(factory?: () => DbClient): void {
   clientFactory = factory ?? createAdminClient;
 }
 
-type EnqueueGate = (opts: { messageKey: string; delivery: CwcDelivery; db: DbClient }) => Promise<GateOutcome>;
+type EnqueueGate = (opts: {
+  messageKey: string;
+  delivery: CwcDelivery;
+  db: DbClient;
+  ipHash?: string | null;
+  siblings?: ScreenSibling[];
+}) => Promise<GateOutcome>;
 let enqueueGate: EnqueueGate = screenMessageForCwc;
 
 /** Test seam — pass nothing to restore the real content-compliance gate. */
@@ -80,10 +88,20 @@ export interface EnqueueResult {
  *     the admin queue, 'block' never enqueues.
  * Re-enqueueing an existing (messageKey × office × environment) is a no-op —
  * safe to call from a retried request.
+ *
+ * A logical message is identified by `screeningKeyFor` (sender + campaign +
+ * body without its salutation line), so the copies of one letter addressed
+ * to each of a person's officials share one verdict. Every queue message key
+ * in the group gets its own audit row.
+ *
+ * Delivery truth: a held or blocked message writes `cwc_held` / `cwc_blocked`
+ * to its messages row (when the delivery carries `messageId`), and a held
+ * message emails the constituent once per logical message.
  */
 export async function enqueueCwcDeliveries(
   items: QueueItem[],
   environment: CwcEnvironment,
+  opts: { ipHash?: string | null } = {},
 ): Promise<EnqueueResult> {
   for (const item of items) {
     assertCwcSendable({
@@ -95,17 +113,37 @@ export async function enqueueCwcDeliveries(
   const db = clientFactory();
 
   // One content screen per logical message, not per office.
-  const byKey = new Map<string, QueueItem[]>();
+  const byScreen = new Map<string, QueueItem[]>();
   for (const item of items) {
-    if (!byKey.has(item.messageKey)) byKey.set(item.messageKey, []);
-    byKey.get(item.messageKey)!.push(item);
+    const key = screeningKeyFor(item.delivery);
+    if (!byScreen.has(key)) byScreen.set(key, []);
+    byScreen.get(key)!.push(item);
   }
   const statusByKey = new Map<string, 'queued' | 'held'>();
   const blockedKeys: string[] = [];
-  for (const [messageKey, group] of byKey) {
-    const { decision } = await enqueueGate({ messageKey, delivery: group[0].delivery, db });
-    if (decision === 'block') blockedKeys.push(messageKey);
-    else statusByKey.set(messageKey, decision === 'pass' ? 'queued' : 'held');
+  const heldGroups: QueueItem[][] = [];
+  const blockedItems: QueueItem[] = [];
+  for (const group of byScreen.values()) {
+    const siblings: ScreenSibling[] = group.map((i) => ({
+      messageKey: i.messageKey,
+      officeCode: i.delivery.officeCode,
+      officialName: i.delivery.officialName,
+    }));
+    const { decision } = await enqueueGate({
+      messageKey: group[0].messageKey,
+      delivery: group[0].delivery,
+      db,
+      ipHash: opts.ipHash,
+      siblings,
+    });
+    const keys = new Set(group.map((i) => i.messageKey));
+    if (decision === 'block') {
+      for (const k of keys) blockedKeys.push(k);
+      blockedItems.push(...group);
+    } else {
+      for (const k of keys) statusByKey.set(k, decision === 'pass' ? 'queued' : 'held');
+      if (decision === 'review') heldGroups.push(group);
+    }
   }
 
   const sendable = items.filter((item) => statusByKey.has(item.messageKey));
@@ -131,6 +169,27 @@ export async function enqueueCwcDeliveries(
     if (error) throw new Error(`cwc_send_queue enqueue failed: ${error.message}`);
     held = rows.filter((r) => r.status === 'held').length;
     enqueued = rows.length - held;
+  }
+
+  // Delivery truth for the messages table, plus the constituent's notice.
+  for (const group of heldGroups) {
+    for (const item of group) {
+      await setMessageDeliveryStatus(db, item.delivery.messageId, CWC_MESSAGE_STATUS.held);
+    }
+    const first = group[0].delivery;
+    await notifyConstituent(
+      {
+        channel: 'cwc',
+        messageId: first.messageId,
+        constituentEmail: first.constituent.email,
+        officialName: group.map((i) => i.delivery.officialName).filter(Boolean).join(', ') || undefined,
+        officeCode: first.officeCode,
+      },
+      'held',
+    );
+  }
+  for (const item of blockedItems) {
+    await setMessageDeliveryStatus(db, item.delivery.messageId, CWC_MESSAGE_STATUS.blocked);
   }
   return { enqueued, held, blockedKeys };
 }
@@ -249,6 +308,29 @@ export async function processCwcSendQueue(opts: ProcessQueueOptions): Promise<Pr
       }
     };
 
+    // Terminal outcome: write delivery truth to the messages row and tell
+    // the people who need to know. Best-effort; the queue row is authoritative.
+    const settle = async (status: 'sent' | 'refused' | 'failed', reason?: string) => {
+      const d = job.delivery;
+      const ref: DeliveryRef = {
+        channel: 'cwc',
+        messageId: d.messageId,
+        constituentEmail: d.constituent?.email,
+        officialName: d.officialName,
+        officeCode: job.office_code,
+        queueId: job.id,
+        messageKey: job.message_key,
+      };
+      if (status === 'sent') {
+        await setMessageDeliveryStatus(db, d.messageId, CWC_MESSAGE_STATUS.delivered);
+        await notifyConstituent(ref, 'delivered');
+        return;
+      }
+      await setMessageDeliveryStatus(db, d.messageId, status === 'refused' ? CWC_MESSAGE_STATUS.refused : CWC_MESSAGE_STATUS.failed);
+      await notifyAdminOutcome({ ...ref, outcome: status, reason: reason ?? '' });
+      await notifyConstituent(ref, status);
+    };
+
     // The claim function has no environment filter: a row enqueued for one
     // environment must never be sent to another. Park it (held = invisible
     // to every claim) rather than sending or burning attempts.
@@ -275,6 +357,7 @@ export async function processCwcSendQueue(opts: ProcessQueueOptions): Promise<Pr
       if (outcome.sent) {
         summary.sent++;
         await finish({ status: 'sent', last_error: null });
+        await settle('sent');
       } else if (outcome.fallback === 'retry-later') {
         // Maintenance window / endpoint 429 / geocoder outage / queue depth —
         // wait, don't burn. A hinted delay (window end) beats the backoff.
@@ -291,12 +374,14 @@ export async function processCwcSendQueue(opts: ProcessQueueOptions): Promise<Pr
         // inactive key or a schema regression visible instead of silent.
         summary.failed++;
         await finish({ status: 'failed', last_error: outcome.reason });
+        await settle('failed', outcome.reason);
       } else if (outcome.fallback === 'router') {
         summary.routed++;
         await finish({ status: 'routed', last_error: outcome.reason });
       } else {
         summary.refused++;
         await finish({ status: 'refused', last_error: outcome.reason });
+        await settle('refused', outcome.reason);
       }
     } catch (e) {
       const err = e as Error;
@@ -304,6 +389,7 @@ export async function processCwcSendQueue(opts: ProcessQueueOptions): Promise<Pr
         // Caller bug baked into the payload — retrying can never succeed.
         summary.failed++;
         await finish({ status: 'failed', last_error: err.message });
+        await settle('failed', err.message);
       } else if (e instanceof RatePermitBackpressureError) {
         summary.deferred++;
         await finish({
@@ -323,6 +409,7 @@ export async function processCwcSendQueue(opts: ProcessQueueOptions): Promise<Pr
           run_after: new Date(now() + backoffMs(job.attempts)).toISOString(),
           last_error: err.message,
         });
+        if (exhausted) await settle('failed', err.message);
       }
     }
   }
