@@ -24,7 +24,14 @@ export type VerifyReason =
   | 'UNRESOLVED'; // couldn't derive a district from the geocode
 
 export type VerifyResult =
-  | { ok: true; officeCode: string }
+  | {
+      ok: true;
+      officeCode: string;
+      /** How the constituency was established. 'geocode' is the normal path.
+       *  'declared_state' means the street did not geocode and a Senate seat
+       *  was matched on the state the constituent gave instead. */
+      verifiedBy?: 'geocode' | 'declared_state';
+    }
   | {
       ok: false;
       reason: VerifyReason;
@@ -100,7 +107,30 @@ export async function verifyConstituentForOffice(delivery: CwcDelivery): Promise
 
   const geo = await geocodeAddress(c.address1, c.city, c.state, c.zip);
   if ('error' in geo) {
-    return { ok: false, reason: 'GEOCODE_FAILED', detail: geo.error, transient: isTransientGeocodeFailure(geo.code) };
+    const transient = isTransientGeocodeFailure(geo.code);
+    // A senator represents the whole state, so the street address is only a
+    // means of establishing which state. When the street cannot be matched at
+    // all (campus roads, new construction, rural routes: 2026-10-20 refused two
+    // Lynchburg students writing to their own Virginia senators), fall back to
+    // the state the constituent gave. The House path never falls back, because
+    // the district genuinely depends on the street.
+    //
+    // This is weaker than a geocode, but not by much: geocoding proves an
+    // address exists, never that the sender lives there, and a Senate office's
+    // own contact form asks for no more than this.
+    if (!transient && chamber === 'senate') {
+      const seatState = officeCode.slice(1, 3).toUpperCase();
+      if (c.state.trim().toUpperCase() === seatState) {
+        console.info('[cwc:verify] senate fallback to declared state', { officeCode, reason: geo.code });
+        return { ok: true, officeCode, verifiedBy: 'declared_state' };
+      }
+      return {
+        ok: false,
+        reason: 'STATE_MISMATCH',
+        detail: `the address could not be matched and the constituent gave ${c.state}, but the delivery targets ${officeCode} (${seatState})`,
+      };
+    }
+    return { ok: false, reason: 'GEOCODE_FAILED', detail: geo.error, transient };
   }
 
   // Senators represent the whole state — the seat's state letters must match.
@@ -113,7 +143,7 @@ export async function verifyConstituentForOffice(delivery: CwcDelivery): Promise
         detail: `address is in ${geo.stateCode}, but the delivery targets ${officeCode} (${seatState})`,
       };
     }
-    return { ok: true, officeCode };
+    return { ok: true, officeCode, verifiedBy: 'geocode' };
   }
 
   // House: the district the address geocodes to must produce this exact seat.

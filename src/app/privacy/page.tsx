@@ -326,10 +326,14 @@ export default function PrivacyPage() {
                   the response. Under Anthropic&apos;s{' '}
                   <a href="https://www.anthropic.com/legal/commercial-terms" className="text-purple-600 dark:text-purple-400 hover:underline" target="_blank" rel="noopener noreferrer">
                     Commercial Terms
-                  </a>, data submitted through the API is{' '}
-                  <strong className="text-gray-900 dark:text-white">not used to train their models</strong>.
-                  Anthropic retains it only transiently to deliver the response and for automated
-                  safety/abuse monitoring, then deletes it. Your full street address is never sent.
+                  </a>, Anthropic{' '}
+                  <strong className="text-gray-900 dark:text-white">may not train its models on data submitted through the API</strong>.
+                  Anthropic deletes API inputs and outputs within 30 days. There is one exception
+                  we want you to know about: if Anthropic&apos;s automated safety systems flag a
+                  message as violating their usage policy, they keep it for up to two years and a
+                  person there may read it. Messages we send to Congress pass through an automated
+                  safety screen first, so a message that screen questions is also the kind their
+                  systems may flag. Your full street address is never sent.
                 </p>
               </div>
               <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
