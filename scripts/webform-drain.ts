@@ -24,6 +24,27 @@ import { WEBFORM_MESSAGE_STATUS, setMessageDeliveryStatus } from '../src/lib/cwc
 import { notifyAdminWebformFailed, notifyConstituent, type DeliveryRef } from '../src/lib/cwc/notify';
 
 const LIMIT = Number(process.env.WEBFORM_DRAIN_LIMIT ?? 5);
+/** Comfortably longer than a healthy run (about half a minute) and well
+ *  inside the 300-second claim lease. */
+const JOB_DEADLINE_MS = Number(process.env.WEBFORM_JOB_DEADLINE_MS ?? 180_000);
+
+class DeadlineError extends Error {}
+
+/** Reject if `work` has not settled within `ms`. The browser the engine owns
+ *  is torn down by its own finally block when the process moves on. */
+async function withDeadline<T>(work: Promise<T>, ms: number): Promise<T> {
+  let timer: NodeJS.Timeout | undefined;
+  try {
+    return await Promise.race([
+      work,
+      new Promise<never>((_, reject) => {
+        timer = setTimeout(() => reject(new DeadlineError(`form engine exceeded ${Math.round(ms / 1000)}s`)), ms);
+      }),
+    ]);
+  } finally {
+    if (timer) clearTimeout(timer);
+  }
+}
 
 interface WebformJob {
   id: number;
@@ -74,15 +95,22 @@ interface WebformJob {
     };
     try {
       const c = job.constituent;
-      const r = await submitToRepresentative(job.form_url, {
-        prefix: c.prefix, firstName: c.firstName, lastName: c.lastName, email: c.email, phone: c.phone,
-        street: c.street, city: c.city, state: c.state, zip: c.zip,
-        topic: job.message.topic, subject: job.message.subject, message: job.message.body,
-      }, {
-        browser: { headless: true, timeout: 45000 },
-        analyzer: { apiKey: process.env.ANTHROPIC_API_KEY || '', model: 'claude-sonnet-4-6' },
-        submit: true,
-      });
+      // A job must never outlive its lease. The engine drives a real browser
+      // and calls a vision model per page, so a site that misbehaves can
+      // stall it; without a ceiling the lease expires mid-run and the row is
+      // retried while the first attempt is still going.
+      const r = await withDeadline(
+        submitToRepresentative(job.form_url, {
+          prefix: c.prefix, firstName: c.firstName, lastName: c.lastName, email: c.email, phone: c.phone,
+          street: c.street, city: c.city, state: c.state, zip: c.zip,
+          topic: job.message.topic, subject: job.message.subject, message: job.message.body,
+        }, {
+          browser: { headless: true, timeout: 45000 },
+          analyzer: { apiKey: process.env.ANTHROPIC_API_KEY || '', model: 'claude-sonnet-4-6' },
+          submit: true,
+        }),
+        JOB_DEADLINE_MS,
+      );
       const result = { status: r.status, message: r.message, confirmationNumber: r.confirmationNumber ?? null, validationErrors: r.validationErrors ?? null, pagesFilled: r.pagesFilled, timeTakenMs: r.timeTakenMs, submitSelector: r.submitSelector ?? null };
       if (r.success) {
         console.log(`#${job.id} ${job.official_name}: SENT ${r.confirmationNumber ?? ''}`);

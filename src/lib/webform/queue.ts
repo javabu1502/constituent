@@ -40,12 +40,38 @@ function auditFindings(): AuditFinding[] {
 }
 const norm = (s: string) => s.toLowerCase().replace(/[^a-z]/g, '');
 
+let verifiedCache: Array<{ name: string; url: string }> | null = null;
+function verifiedForms(): Array<{ name: string; url: string }> {
+  if (verifiedCache) return verifiedCache;
+  try {
+    const file = path.join(process.cwd(), 'src', 'data', 'senate-webform-verified.json');
+    verifiedCache = (JSON.parse(fs.readFileSync(file, 'utf-8')) as { senators: Array<{ name: string; url: string }> }).senators;
+  } catch { verifiedCache = []; }
+  return verifiedCache;
+}
+
 /** Contact-form URL for a senator whose form the audit found CAPTCHA-free, else null. */
 export function captchaFreeFormFor(official: { name: string; lastName?: string; contactForm?: string }): string | null {
   const last = norm(official.lastName || official.name.split(' ').pop() || '');
   const f = auditFindings().find((x) => norm(x.name) === norm(official.name)) ?? auditFindings().find((x) => norm(x.name).endsWith(last));
   if (!f || f.error || f.hasCaptcha) return null;
-  return official.contactForm || f.url;
+  // Being CAPTCHA-free is not enough. The CAPTCHA audit recorded whatever page
+  // it was pointed at, and on 2026-10-25 only 17 of those 51 pages actually
+  // held a message form; the rest were landing pages whose only submit button
+  // was site search. That is what the first production webform send filled.
+  // So a senator is automatable only if their form was verified to exist.
+  const verified = verifiedFormFor(official.name, last);
+  if (!verified) return null;
+  return official.contactForm || verified;
+}
+
+/** The verified contact form for a senator, or null. See
+ *  src/data/senate-webform-verified.json for how the list was built. */
+export function verifiedFormFor(name: string, lastName?: string): string | null {
+  const last = norm(lastName || name.split(' ').pop() || '');
+  const hit = verifiedForms().find((x) => norm(x.name) === norm(name))
+    ?? verifiedForms().find((x) => norm(x.name).endsWith(last));
+  return hit?.url ?? null;
 }
 
 export function webformDeliveryEnabled(): boolean {

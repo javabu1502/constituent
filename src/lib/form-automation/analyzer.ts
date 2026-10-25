@@ -11,6 +11,8 @@ import { takeScreenshot, scrollPage } from './browser';
 
 const DEFAULT_MODEL = 'claude-sonnet-4-6';
 const DEFAULT_MAX_TOKENS = 4096;
+/** Ceiling for one vision call. A healthy analysis takes a few seconds. */
+const ANALYZER_TIMEOUT_MS = Number(process.env.FORM_ANALYZER_TIMEOUT_MS ?? 90_000);
 
 /**
  * System prompt for Claude Vision form analysis
@@ -74,8 +76,14 @@ export async function analyzeForm(
   // Take a full-page screenshot
   const screenshotBase64 = await takeScreenshot(page, { fullPage: true });
 
-  // Call Claude Vision API
+  // Call Claude Vision API.
+  //
+  // The timeout is not optional. This call runs inside a worker that holds a
+  // browser and a queue lease, and a bare fetch has no deadline of its own: a
+  // stalled request hangs the whole job until something outside kills it. A
+  // dry run against one Senate form sat here past twenty minutes (2026-10-25).
   const response = await fetch('https://api.anthropic.com/v1/messages', {
+    signal: AbortSignal.timeout(ANALYZER_TIMEOUT_MS),
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

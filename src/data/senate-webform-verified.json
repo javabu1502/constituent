@@ -1,0 +1,75 @@
+{
+  "verifiedOn": "2026-10-25",
+  "method": "Loaded each URL in a headless browser and required a form that is not site search or Google Translate and that has a textarea or at least five visible fields.",
+  "note": "Only senators listed here may be filed through their own contact form. Anyone else falls back to the email path. A URL that merely appeared in the CAPTCHA audit is NOT sufficient: 34 of 51 of those were landing pages, which is why the first production webform send filled a site search box.",
+  "senators": [
+    {
+      "name": "Bernard Sanders",
+      "url": "https://www.sanders.senate.gov/contact/"
+    },
+    {
+      "name": "John Barrasso",
+      "url": "https://www.barrasso.senate.gov/public/index.cfm/contact-form"
+    },
+    {
+      "name": "Jeff Merkley",
+      "url": "https://www.merkley.senate.gov/contact/"
+    },
+    {
+      "name": "Ron Johnson",
+      "url": "https://www.ronjohnson.senate.gov/public/index.cfm/email-the-senator"
+    },
+    {
+      "name": "Jerry Moran",
+      "url": "https://www.moran.senate.gov/public/index.cfm/e-mail-jerry"
+    },
+    {
+      "name": "Patty Murray",
+      "url": "https://www.murray.senate.gov/write-to-patty/"
+    },
+    {
+      "name": "Rand Paul",
+      "url": "https://www.paul.senate.gov/connect/email-rand"
+    },
+    {
+      "name": "Tim Scott",
+      "url": "https://www.scott.senate.gov/contact/email-me"
+    },
+    {
+      "name": "Peter Welch",
+      "url": "https://www.welch.senate.gov/email-peter/"
+    },
+    {
+      "name": "Ron Wyden",
+      "url": "https://www.wyden.senate.gov/contact/"
+    },
+    {
+      "name": "Steve Daines",
+      "url": "https://www.daines.senate.gov/connect/email-steve"
+    },
+    {
+      "name": "Jacky Rosen",
+      "url": "https://www.rosen.senate.gov/contact_jacky"
+    },
+    {
+      "name": "Tina Smith",
+      "url": "https://www.smith.senate.gov/share-your-opinion/"
+    },
+    {
+      "name": "Cindy Hyde-Smith",
+      "url": "https://www.hydesmith.senate.gov/contact-senator"
+    },
+    {
+      "name": "Josh Hawley",
+      "url": "https://www.hawley.senate.gov/contact-senator-hawley"
+    },
+    {
+      "name": "Tommy Tuberville",
+      "url": "https://www.tuberville.senate.gov/contact/contact-form/"
+    },
+    {
+      "name": "John Fetterman",
+      "url": "https://www.fetterman.senate.gov/contact/"
+    }
+  ]
+}

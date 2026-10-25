@@ -40,11 +40,35 @@ function getStatusBadge(status: string) {
     case 'called':
       return { label: 'Called', class: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300' };
     case 'sent':
+    case 'cwc_delivered':
+    case 'webform_delivered':
       return { label: 'Delivered to Congress', class: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300' };
+    case 'email_copied':
+      return { label: 'Copied', class: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300' };
+    // Handed to the congressional delivery system but not yet confirmed by
+    // the office. Not the same as delivered, and not a failure.
+    case 'cwc_submitted':
+    case 'webform_submitted':
+      return { label: 'Sending to Congress', class: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300' };
     case 'pending_review':
+    case 'cwc_held':
+    case 'webform_held':
       return { label: 'Under Review', class: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300' };
+    // The ones a person most needs to see. Before this, a message that never
+    // reached an office looked no different from one that did.
+    case 'cwc_refused':
+      return { label: 'Address could not be verified', class: 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300' };
+    case 'cwc_failed':
+    case 'webform_failed':
+      return { label: 'Not delivered', class: 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300' };
+    case 'cwc_blocked':
+    case 'webform_blocked':
+      return { label: 'Not sent', class: 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300' };
+    case 'cwc_skipped':
+    case 'webform_skipped':
+      return { label: 'Sent by email instead', class: 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300' };
     default:
-      return { label: status, class: 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300' };
+      return { label: status.replace(/_/g, ' '), class: 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300' };
   }
 }
 
