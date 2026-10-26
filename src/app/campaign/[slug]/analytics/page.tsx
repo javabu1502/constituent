@@ -193,7 +193,11 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
         // Revoked stories expose no content or identity.
         city: revoked || anon ? null : ((s.city as string | null) ?? null),
         state: revoked || anon ? null : ((s.state as string | null) ?? null),
-        email: revoked || anon ? null : ((s.storyteller_email as string | null) ?? null),
+        // Never on the demo. That page has no sign-in in front of it, so an
+        // address sent here is public in the page source whatever the UI
+        // chooses to render. Hiding the button was not enough: the seeded
+        // addresses were still shipped to every anonymous visitor.
+        email: isDemo || revoked || anon ? null : ((s.storyteller_email as string | null) ?? null),
         title: revoked ? null : ((s.title as string | null) ?? null),
         body: revoked ? '' : ((s.body as string | null) ?? ''),
         body_en: revoked ? null : ((s.body_en as string | null) ?? null),
