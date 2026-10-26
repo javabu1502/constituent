@@ -43,6 +43,54 @@ export async function sendDigestEmail(
 }
 
 /**
+ * True when email may go to a constituent. Resend's test sender
+ * (onboarding@resend.dev) only delivers to the account owner, so while the
+ * From address is on resend.dev every constituent email is skipped and
+ * logged. Admin notifications are unaffected.
+ */
+export function isConstituentEmailEnabled(env: Record<string, string | undefined> = process.env): boolean {
+  const from = (env.RESEND_FROM_EMAIL || '').trim().toLowerCase();
+  if (!env.RESEND_API_KEY) return false;
+  if (!from) return false;
+  return !from.endsWith('resend.dev');
+}
+
+/**
+ * Send a transactional email to a constituent. Returns 'skipped' (with a log
+ * line) when constituent email is not enabled or the address is missing.
+ * Best-effort: never throws.
+ */
+export async function sendConstituentEmail(
+  to: string | null | undefined,
+  subject: string,
+  html: string,
+): Promise<'sent' | 'skipped'> {
+  const address = (to || '').trim();
+  if (!address) {
+    console.log('[resend] constituent email skipped: no address');
+    return 'skipped';
+  }
+  if (!isConstituentEmailEnabled()) {
+    console.log(`[resend] constituent email skipped (sender not verified or key missing): "${subject}"`);
+    return 'skipped';
+  }
+  const resend = getResend();
+  if (!resend) return 'skipped';
+  const from = process.env.RESEND_FROM_EMAIL as string;
+  try {
+    const { error } = await resend.emails.send({ from, to: address, subject, html });
+    if (error) {
+      console.error('[resend] Failed to send constituent email:', error);
+      return 'skipped';
+    }
+    return 'sent';
+  } catch (e) {
+    console.error('[resend] constituent email threw:', (e as Error).message);
+    return 'skipped';
+  }
+}
+
+/**
  * Send an internal admin notification (e.g. a new campaign awaiting approval)
  * to ADMIN_NOTIFY_EMAIL. Best-effort: never throws, so it can't break the
  * action that triggered it.

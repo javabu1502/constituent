@@ -25,6 +25,8 @@ export interface LocalSeat {
   sourceUrl?: string | null;
   verifiedAt?: string | null;
   unverified?: boolean;
+  /** Nobody holds this seat right now, so there is nobody to write to. */
+  vacant?: boolean;
 }
 
 export interface LocalBody {
@@ -127,10 +129,26 @@ export interface LocalGeographies {
 }
 
 /**
+ * A term that has already ended. The roster is hand-verified and goes stale
+ * between elections, and several of these addresses are personal: a school
+ * board seat whose term ended in 2024 still carried a private gmail and a
+ * work address at an accountancy firm. Someone who left office years ago
+ * should not receive a constituent's story at home.
+ */
+export function termHasEnded(termEnd: string | number | null | undefined, now = new Date()): boolean {
+  if (termEnd == null) return false;
+  const raw = String(termEnd).trim();
+  // A bare year means the term runs to the end of that year.
+  const end = /^\d{4}$/.test(raw) ? new Date(Number(raw), 11, 31, 23, 59, 59) : new Date(raw);
+  if (Number.isNaN(end.getTime())) return false;
+  return end.getTime() < now.getTime();
+}
+
+/**
  * Every seat of every body that governs this address. Unincorporated areas
  * have no place, so only the county commission and school board apply. Seats
- * flagged `unverified` are returned without an email so they can never be
- * mailed on stale data.
+ * flagged `unverified`, and seats whose term has already ended, are returned
+ * without an email so they can never be mailed on stale data.
  */
 export async function findLocalOfficials(stateCode: string, geo: LocalGeographies): Promise<LocalOfficial[]> {
   const roster = localRosterFor(stateCode);
@@ -151,6 +169,10 @@ export async function findLocalOfficials(stateCode: string, geo: LocalGeographie
       ? body.seats.filter((s) => isExecutiveSeat(s) || normalizeDistrictLabel(s.district) === matchedKey)
       : body.seats;
     for (const seat of seats) {
+      // A vacant seat has no officeholder. Fernley's Ward Three sat in the
+      // roster under its former member's name and personal email months
+      // after he left, so a constituent's message would have gone to him.
+      if (seat.vacant) continue;
       const district = seat.district?.trim() || null;
       const officeName = district && !/^mayor$/i.test(district) && !new RegExp(district, 'i').test(seat.title)
         ? `${seat.title}, ${district}`
@@ -165,7 +187,7 @@ export async function findLocalOfficials(stateCode: string, geo: LocalGeographie
         state: roster.state,
         district: district ?? undefined,
         phone: seat.phone ?? undefined,
-        email: seat.unverified ? undefined : seat.email ?? undefined,
+        email: seat.unverified || termHasEnded(seat.termEnd) ? undefined : seat.email ?? undefined,
         website: seat.website ?? body.website ?? undefined,
         contactForm: seat.contactFormUrl ?? undefined,
         photoUrl: seat.photoUrl ?? undefined,

@@ -1,3 +1,4 @@
+import { deliveryStatusInfo } from '@/lib/delivery-status';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
@@ -30,22 +31,16 @@ function getPartyBadgeClass(party: string) {
 }
 
 function getStatusBadge(status: string) {
-  switch (status) {
-    case 'email_opened':
-      return { label: 'Email Sent', class: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300' };
-    case 'form_opened':
-      return { label: 'Form Opened', class: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300' };
-    case 'website_opened':
-      return { label: 'Website Visited', class: 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300' };
-    case 'called':
-      return { label: 'Called', class: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300' };
-    case 'sent':
-      return { label: 'Delivered to Congress', class: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300' };
-    case 'pending_review':
-      return { label: 'Under Review', class: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-300' };
-    default:
-      return { label: status, class: 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300' };
-  }
+  // Labels come from the shared delivery vocabulary so this page, the
+  // organization's analytics and the impact report cannot drift apart.
+  const { label, outcome } = deliveryStatusInfo(status);
+  const cls = {
+    delivered: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300',
+    in_flight: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300',
+    not_delivered: 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300',
+    self_sent: 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-300',
+  }[outcome];
+  return { label, class: cls };
 }
 
 export default async function DashboardPage() {

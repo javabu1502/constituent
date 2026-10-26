@@ -10,10 +10,14 @@ import type { CwcMessageContent } from './types';
 // "respectfully") — the alternation is first-match.
 const CLOSING_WORDS = [
   'sincerely yours', 'yours sincerely', 'sincerely',
+  // "Very Respectfully," survived the strip on a production send (queue row
+  // #11, 2026-10-20) because only the bare word was listed. Intensified
+  // forms must precede the bare word.
+  'very respectfully', 'most respectfully',
   'respectfully yours', 'respectfully submitted', 'respectfully',
   'best regards', 'kind regards', 'warm regards', 'warmest regards', 'regards',
   'best wishes', 'all the best', 'best',
-  'thank you for your time', 'thank you', 'thanks so much', 'thanks',
+  'thank you so much for your time', 'thank you for your time', 'thank you', 'thanks so much', 'thanks',
   'yours truly', 'with gratitude', 'gratefully', 'warmly', 'cordially',
   'in solidarity', 'v/r', 'many thanks',
 ].join('|');
@@ -222,6 +226,11 @@ export function cwcSendableProblems(input: {
   }
   if (m.bills?.length && !m.stance) {
     problems.push('a federal bill is referenced but message.stance (ProOrCon) is missing — George requires pro/con with any bill reference');
+  }
+  // The subject is user-editable and reaches the wire, so it is held to the
+  // same no-name-no-address rule as the body.
+  if (input.constituent && m.subject && containsConstituentPii(m.subject, input.constituent)) {
+    problems.push("message.subject contains the constituent's name or street address — it is already carried in the <Constituent> tags, and offices group messages by subject");
   }
   for (const [label, text] of [
     ['constituentMessage', m.constituentMessage],

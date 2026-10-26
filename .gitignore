@@ -53,3 +53,6 @@ next-env.d.ts
 
 # Confidential CWC docs, API keys, EIN — never commit
 docs/Jared Shared Resources/
+
+# Scratch scripts from audit sessions, never committed
+scripts/_*.tmp.*

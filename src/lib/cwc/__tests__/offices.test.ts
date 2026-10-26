@@ -84,3 +84,39 @@ describe('SENATE_SEAT_CODES table', () => {
     expect(senateSeatCodesForState('ZZ')).toBeNull();
   });
 });
+
+describe('a missing district is never turned into an at-large seat', () => {
+  it('refuses a multi-seat state with no district', () => {
+    for (const d of [undefined, null, '', '   ', 'at-large', 'At Large']) {
+      const r = houseOfficeCode('TX', d as never);
+      expect(r.ok).toBe(false);
+    }
+  });
+
+  it('refuses the Census placeholders 98 and 99', () => {
+    expect(houseOfficeCode('TX', '98').ok).toBe(false);
+    expect(houseOfficeCode('TX', '99').ok).toBe(false);
+  });
+
+  it('refuses district 00 in a state that has many seats', () => {
+    expect(houseOfficeCode('TX', '0').ok).toBe(false);
+    expect(houseOfficeCode('TX', '00').ok).toBe(false);
+  });
+
+  it('refuses a numbered district in a single-seat state', () => {
+    expect(houseOfficeCode('WY', '1').ok).toBe(false);
+  });
+
+  it('still resolves the real single-seat states and territories', () => {
+    expect(houseOfficeCode('WY', '00')).toEqual({ ok: true, code: 'HWY00' });
+    expect(houseOfficeCode('WY', undefined)).toEqual({ ok: true, code: 'HWY00' });
+    expect(houseOfficeCode('DC', '00')).toEqual({ ok: true, code: 'HDC00' });
+    // American Samoa keeps AQ, not AS.
+    expect(houseOfficeCode('AS', '00')).toEqual({ ok: true, code: 'HAQ00' });
+  });
+
+  it('still resolves an ordinary numbered seat', () => {
+    expect(houseOfficeCode('TX', '18')).toEqual({ ok: true, code: 'HTX18' });
+    expect(houseOfficeCode('NV', 2)).toEqual({ ok: true, code: 'HNV02' });
+  });
+});

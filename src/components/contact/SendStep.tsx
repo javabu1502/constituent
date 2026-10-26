@@ -6,7 +6,7 @@ import { trackEvent } from '@/lib/analytics';
 import type { ContactState, ContactAction } from './ContactFlow';
 import type { Official } from '@/lib/types';
 import { CWC_ENABLED } from '@/lib/cwc-prefixes';
-import { useCwcActiveOffices, congressChannel, isNonParticipatingSenator, participatingSenateCount, cwcOfficeCodeFor, submitAdoptionSignature, CWC_SUBMITTED_STATUS, WEBFORM_SUBMITTED_STATUS, CWC_COPY, WEBFORM_COPY, describeCwcOutcome, type SendOutcome, type CwcButtonState } from '@/lib/cwc-client';
+import { useCwcActiveOffices, congressChannel, isNonParticipatingSenator, participatingSenateCount, cwcOfficeCodeFor, submitAdoptionSignature, CWC_SUBMITTED_STATUS, WEBFORM_SUBMITTED_STATUS, CWC_HELD_STATUS, CWC_COPY, WEBFORM_COPY, describeCwcOutcome, deliveryUndecided, isSentStatus, cwcStateFromStatus, cwcAccepted, type SendOutcome, type CwcButtonState } from '@/lib/cwc-client';
 import { CwcAdoptionAsk } from '@/components/ui/CwcAdoptionAsk';
 import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
@@ -105,28 +105,45 @@ interface OfficialCardProps {
    *  own contact form. Either way: ONE "Send to Congress" action and no
    *  email/copy actions (the message must not reach the office twice). */
   cwcDelivery?: 'cwc' | 'webform' | null;
-  /** True when this session already handed this official's message to CWC. */
-  alreadySent?: boolean;
+  /** Status recorded for this official earlier (this session or a restored draft). */
+  priorStatus?: string;
+  /** True while the office list has not resolved: one disabled button, no mailto. */
+  checkingDelivery?: boolean;
+  /** True when the flow came back from a saved draft; sent cards say "earlier". */
+  restored?: boolean;
   /** Present for a senator whose office is not on the CWC list. */
   adoptionAsk?: { participating: number; defaultChecked: boolean; onSign: () => void };
 }
 
-function OfficialCard({ official, message, deliveryInfo, contactMethod, isCallComplete, onMarkCallComplete, onSend, cwcDelivery, alreadySent, adoptionAsk }: OfficialCardProps) {
+function OfficialCard({ official, message, deliveryInfo, contactMethod, isCallComplete, onMarkCallComplete, onSend, cwcDelivery, priorStatus, checkingDelivery, restored, adoptionAsk }: OfficialCardProps) {
   const [signChecked, setSignChecked] = useState(adoptionAsk?.defaultChecked ?? false);
   // Every email/form/website action: record the adoption signature when the
   // box is checked, then the normal tracking.
   const [signed, setSigned] = useState(false);
+  // A second click inside two seconds is a double click, not a second send.
+  const [busy, setBusy] = useState(false);
+  const pulseBusy = () => {
+    setBusy(true);
+    setTimeout(() => setBusy(false), 2000);
+  };
   const send = (status: string) => {
     if (adoptionAsk && signChecked) { adoptionAsk.onSign(); setSigned(true); }
+    pulseBusy();
     return onSend?.(status);
   };
   const [messageCopied, setMessageCopied] = useState(false);
   const copy = cwcDelivery === 'webform' ? WEBFORM_COPY : CWC_COPY;
   const submitStatus = cwcDelivery === 'webform' ? WEBFORM_SUBMITTED_STATUS : CWC_SUBMITTED_STATUS;
-  const [cwcState, setCwcState] = useState<CwcButtonState>(alreadySent ? 'sent' : 'idle');
-  const [cwcNote, setCwcNote] = useState<string>(alreadySent ? copy.sent : copy.idle);
+  const priorCwcState = cwcStateFromStatus(priorStatus);
+  const [cwcState, setCwcState] = useState<CwcButtonState>(priorCwcState);
+  const [cwcNote, setCwcNote] = useState<string>(priorCwcState === 'sent' ? copy.sent : priorCwcState === 'held' ? copy.held : copy.idle);
   // After a failed hand-off the card falls back to the email/form actions.
+  // Blocked and cooldown keep the CWC branch and show only the note.
   const showCwc = cwcDelivery && cwcState !== 'failed';
+  const cwcLocked = cwcState === 'blocked' || cwcState === 'cooldown';
+  // The message already left through email, a form, a website, or a call.
+  const openedBefore = isSentStatus(priorStatus) && priorCwcState === 'idle';
+  const [sendAgain, setSendAgain] = useState(false);
   const [emailCopied, setEmailCopied] = useState(false);
   const [phoneCopied, setPhoneCopied] = useState(false);
   const partyColors = getPartyColors(official.party);
@@ -305,7 +322,7 @@ function OfficialCard({ official, message, deliveryInfo, contactMethod, isCallCo
       )}
 
       {cwcDelivery && cwcState === 'failed' && (
-        <div className="mb-3 p-2 bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-700 rounded-lg flex items-start gap-2">
+        <div role="alert" className="mb-3 p-2 bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-700 rounded-lg flex items-start gap-2">
           <WarningIcon className="w-4 h-4 text-amber-600 dark:text-amber-400 flex-shrink-0 mt-0.5" />
           <p className="text-xs text-amber-700 dark:text-amber-300">{cwcNote}</p>
         </div>
@@ -313,7 +330,28 @@ function OfficialCard({ official, message, deliveryInfo, contactMethod, isCallCo
 
       {/* Primary action based on delivery method */}
       <div className="space-y-2">
-        {showCwc ? (
+        {checkingDelivery ? (
+          // The office list has not resolved. One disabled button, so a
+          // mailto click can never race a "Send to Congress" click later.
+          <>
+            <button
+              type="button"
+              disabled
+              aria-busy="true"
+              className="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg text-sm font-medium bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400 cursor-wait"
+            >
+              <span aria-hidden="true" className="w-4 h-4 border-2 border-gray-300 dark:border-gray-500 rounded-full animate-spin border-t-purple-600" />
+              {CWC_COPY.checking}
+            </button>
+            <p className="text-xs text-gray-500 dark:text-gray-400 text-center">One moment while we check how this office accepts messages.</p>
+          </>
+        ) : showCwc && cwcLocked ? (
+          // Refused by the content gate, or this person wrote this office
+          // within the last week. No send actions of any kind.
+          <div role="alert" className="p-3 rounded-lg bg-gray-50 dark:bg-gray-700/40 border border-gray-200 dark:border-gray-600">
+            <p className="text-sm text-gray-700 dark:text-gray-200">{cwcNote}</p>
+          </div>
+        ) : showCwc ? (
           // Office participates in Communicating With Congress: one action,
           // delivered by us. No email app, no copy: sending it twice breaks
           // the office's grouping and counts the constituent twice.
@@ -327,30 +365,47 @@ function OfficialCard({ official, message, deliveryInfo, contactMethod, isCallCo
                 const outcome = await onSend?.(submitStatus);
                 const d = describeCwcOutcome(outcome ?? undefined);
                 setCwcState(d.state);
-                setCwcNote(d.state === 'sent' ? copy.sent : d.note);
+                setCwcNote(d.state === 'sent' ? copy.sent : d.state === 'held' ? copy.held : d.note);
               }}
-              className={`flex items-center justify-center gap-2 w-full py-2.5 rounded-lg text-sm font-medium transition-colors ${cwcState === 'sent' ? 'bg-green-600 text-white cursor-default' : cwcState === 'sending' ? 'bg-purple-400 text-white cursor-wait' : 'bg-purple-600 hover:bg-purple-700 text-white'}`}
+              className={`flex items-center justify-center gap-2 w-full py-2.5 rounded-lg text-sm font-medium transition-colors ${cwcState === 'sent' ? 'bg-green-600 text-white cursor-default' : cwcState === 'held' ? 'bg-amber-500 text-white cursor-default' : cwcState === 'sending' ? 'bg-purple-400 text-white cursor-wait' : 'bg-purple-600 hover:bg-purple-700 text-white'}`}
             >
-              {cwcState === 'sent' ? <CheckIcon className="w-4 h-4" /> : <EmailIcon className="w-4 h-4" />}
-              {cwcState === 'sent' ? 'Sent to Congress' : cwcState === 'sending' ? 'Sending' : 'Send to Congress'}
+              {cwcState === 'sent' ? <CheckIcon className="w-4 h-4" /> : cwcState === 'held' ? <WarningIcon className="w-4 h-4" /> : <EmailIcon className="w-4 h-4" />}
+              {cwcState === 'sent' ? 'Sent to Congress' : cwcState === 'held' ? 'Received, held for review' : cwcState === 'sending' ? 'Sending' : 'Send to Congress'}
             </button>
-            <p className="text-xs text-gray-500 dark:text-gray-400 text-center">{cwcNote}</p>
+            <p className="text-xs text-gray-500 dark:text-gray-400 text-center" aria-live="polite">{cwcNote}</p>
+          </>
+        ) : openedBefore && !sendAgain ? (
+          // Already opened in the email app (or a form, or a call) once.
+          <>
+            <div className="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg text-sm font-medium bg-green-100 dark:bg-green-900/40 text-green-800 dark:text-green-200">
+              <CheckIcon className="w-4 h-4" />
+              {restored ? 'Opened in your email app earlier' : 'Opened in your email app'}
+            </div>
+            <button
+              type="button"
+              onClick={() => setSendAgain(true)}
+              className="flex items-center justify-center gap-1.5 w-full py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg text-xs font-medium transition-colors"
+            >
+              Send again
+            </button>
           </>
         ) : deliveryInfo.method === 'staffer_email' && deliveryInfo.email ? (
           // Staffer email - open in email client as primary action
           <>
             {mailtoLink ? (
               <button
+                disabled={busy}
                 onClick={() => { window.open(mailtoLink, '_blank'); send('email_opened'); }}
-                className="flex items-center justify-center gap-2 w-full py-2.5 bg-purple-600 hover:bg-purple-700 text-white rounded-lg text-sm font-medium transition-colors"
+                className="flex items-center justify-center gap-2 w-full py-2.5 bg-purple-600 hover:bg-purple-700 disabled:opacity-60 text-white rounded-lg text-sm font-medium transition-colors"
               >
                 <EmailIcon className="w-4 h-4" />
                 Send with Your Email
               </button>
             ) : (
               <button
+                disabled={busy}
                 onClick={() => { copyEmail(); send('email_copied'); }}
-                className="flex items-center justify-center gap-2 w-full py-2.5 bg-purple-600 hover:bg-purple-700 text-white rounded-lg text-sm font-medium transition-colors"
+                className="flex items-center justify-center gap-2 w-full py-2.5 bg-purple-600 hover:bg-purple-700 disabled:opacity-60 text-white rounded-lg text-sm font-medium transition-colors"
               >
                 {emailCopied ? <CheckIcon className="w-4 h-4" /> : <CopyIcon className="w-4 h-4" />}
                 {emailCopied ? 'Copied!' : 'Copy Email Address'}
@@ -375,7 +430,8 @@ function OfficialCard({ official, message, deliveryInfo, contactMethod, isCallCo
               href={deliveryInfo.contactFormUrl}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => { copyMessage(); send('form_opened'); }}
+              aria-disabled={busy}
+              onClick={(e) => { if (busy) { e.preventDefault(); return; } copyMessage(); send('form_opened'); }}
               className="flex items-center justify-center gap-2 w-full py-2.5 bg-purple-600 hover:bg-purple-700 text-white rounded-lg text-sm font-medium transition-colors"
             >
               <ExternalLinkIcon className="w-4 h-4" />
@@ -392,7 +448,8 @@ function OfficialCard({ official, message, deliveryInfo, contactMethod, isCallCo
               href={deliveryInfo.actionUrl || deliveryInfo.websiteUrl}
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => { copyMessage(); send('website_opened'); }}
+              aria-disabled={busy}
+              onClick={(e) => { if (busy) { e.preventDefault(); return; } copyMessage(); send('website_opened'); }}
               className="flex items-center justify-center gap-2 w-full py-2.5 bg-purple-600 hover:bg-purple-700 text-white rounded-lg text-sm font-medium transition-colors"
             >
               <ExternalLinkIcon className="w-4 h-4" />
@@ -409,8 +466,8 @@ function OfficialCard({ official, message, deliveryInfo, contactMethod, isCallCo
           </span>
         )}
 
-        {/* Secondary actions row (none under CWC delivery) */}
-        {!showCwc && adoptionAsk && (
+        {/* Secondary actions row (none under CWC delivery, none while checking) */}
+        {!showCwc && !checkingDelivery && adoptionAsk && (
           <CwcAdoptionAsk
             senatorLastName={official.lastName || official.name.split(' ').pop() || official.name}
             participating={adoptionAsk.participating}
@@ -420,11 +477,12 @@ function OfficialCard({ official, message, deliveryInfo, contactMethod, isCallCo
           />
         )}
 
-        {!showCwc && <div className="flex flex-col sm:flex-row gap-2">
+        {!showCwc && !checkingDelivery && <div className="flex flex-col sm:flex-row gap-2">
           {deliveryInfo.method === 'staffer_email' ? (
             <>
               {/* Copy Email Address */}
               <button
+                disabled={busy}
                 onClick={() => { copyEmail(); send('email_copied'); }}
                 className="flex-1 flex items-center justify-center gap-1.5 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg text-xs font-medium transition-colors"
               >
@@ -525,7 +583,8 @@ export function SendStep({ state, dispatch, onBack }: SendStepProps) {
   // Which offices accept CWC delivery (live list; empty until loaded → email path).
   const cwcOffices = useCwcActiveOffices();
   const cwcFields = { prefix: state.userPrefix, email: state.userEmail, street: state.address?.street, zip: state.address?.zip };
-  const channelFor = (official: Official) => (contactMethod !== 'phone' ? congressChannel(official, cwcOffices, cwcFields) : null);
+  // A street the geocoder could not place never gets a congressional channel.
+  const channelFor = (official: Official) => (contactMethod !== 'phone' ? congressChannel(official, cwcOffices, cwcFields, state.districtResolved) : null);
   const cwcDeliverable = (official: Official) => channelFor(official) !== null;
 
   const markCallComplete = (officialId: string) => {
@@ -617,16 +676,21 @@ export function SendStep({ state, dispatch, onBack }: SendStepProps) {
       if (data?.shareId) {
         dispatch({ type: 'SET_SHARE_ID', payload: data.shareId });
       }
-      // A CWC hand-off only counts once the queue accepted it.
-      const cwcAccepted = data?.cwc?.status === 'queued' || data?.cwc?.status === 'held';
-      if ((deliveryStatus !== CWC_SUBMITTED_STATUS && deliveryStatus !== WEBFORM_SUBMITTED_STATUS) || cwcAccepted) {
+      // A CWC hand-off only counts once the queue accepted it (queued or
+      // held). Held is remembered as its own client-side status so a
+      // refresh brings the card back in the held state, not green.
+      const outcome: SendOutcome = { ok: true, cwc: data?.cwc };
+      const isCongress = deliveryStatus === CWC_SUBMITTED_STATUS || deliveryStatus === WEBFORM_SUBMITTED_STATUS;
+      if (!isCongress) {
         dispatch({ type: 'SET_SENT_STATUS', payload: { officialId: official.id, status: deliveryStatus } });
+      } else if (cwcAccepted(outcome)) {
+        dispatch({ type: 'SET_SENT_STATUS', payload: { officialId: official.id, status: data?.cwc?.status === 'held' ? CWC_HELD_STATUS : deliveryStatus } });
       }
       trackEvent('message_sent', {
         method: deliveryStatus === CWC_SUBMITTED_STATUS ? 'cwc' : deliveryStatus === WEBFORM_SUBMITTED_STATUS ? 'webform' : contactMethod === 'phone' ? 'phone' : 'email',
         issue: state.issueCategory || 'unknown',
       });
-      return { ok: true, cwc: data?.cwc };
+      return outcome;
     } catch (err) {
       console.error('[track-send] Failed:', err);
       return { ok: false };
@@ -689,6 +753,22 @@ export function SendStep({ state, dispatch, onBack }: SendStepProps) {
         </p>
       </div>
 
+      {!state.districtResolved && contactMethod === 'email' && (
+        <div role="alert" className="mb-4 p-3 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded-xl">
+          <p className="text-sm text-amber-800 dark:text-amber-300">{CWC_COPY.unresolvedAddress}</p>
+          <p className="text-xs text-amber-700 dark:text-amber-400 mt-1">
+            Federal messages open in your email app instead of going through the congressional delivery system.
+          </p>
+          <button
+            type="button"
+            onClick={() => dispatch({ type: 'GO_TO_STEP', payload: 'address' })}
+            className="mt-2 text-xs font-medium text-amber-900 dark:text-amber-200 underline"
+          >
+            Re-enter my address
+          </button>
+        </div>
+      )}
+
       {/* Per-official cards */}
       <div className="space-y-4 mb-6">
         {selectedReps.map(official => {
@@ -708,7 +788,9 @@ export function SendStep({ state, dispatch, onBack }: SendStepProps) {
               onMarkCallComplete={() => markCallComplete(official.id)}
               onSend={(status) => trackSend(official, status)}
               cwcDelivery={channelFor(official)}
-              alreadySent={[CWC_SUBMITTED_STATUS, WEBFORM_SUBMITTED_STATUS].includes(state.sentStatus?.[official.id] ?? '')}
+              priorStatus={state.sentStatus?.[official.id]}
+              checkingDelivery={contactMethod === 'email' && state.districtResolved && deliveryUndecided(official, cwcOffices)}
+              restored={state.restoredFromDraft}
               adoptionAsk={
                 contactMethod === 'email' && isNonParticipatingSenator(official, cwcOffices)
                   ? {

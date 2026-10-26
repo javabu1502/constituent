@@ -24,6 +24,13 @@ const delivery: CwcDelivery = {
   },
 };
 
+/** One delivery with a different letter in it. Two messages are the same
+ *  logical message only when sender, campaign, and body all match, so tests
+ *  that mean "a different message" have to change the body. */
+function withBody(base: CwcDelivery, constituentMessage: string): CwcDelivery {
+  return { ...base, message: { ...base.message, constituentMessage } };
+}
+
 function job(overrides: Partial<SendQueueJob> = {}): SendQueueJob {
   return {
     id: 1, message_key: 'u1:c1', office_code: 'SNY01', environment: 'test',
@@ -147,11 +154,16 @@ describe('cwc send queue', () => {
     });
 
     it('screens ONCE per logical message, not per office', async () => {
+      // Two copies of one letter (they differ only by salutation, as the real
+      // drafter writes them) plus a second, different letter.
+      const toWarner = withBody(delivery, 'Dear Senator Warner,\n\nAs a nurse, I see insulin costs hurt my patients.');
+      const toKaine = { ...withBody(delivery, 'Dear Senator Kaine,\n\nAs a nurse, I see insulin costs hurt my patients.'), officeCode: 'SNY02' };
+      const otherLetter = withBody(delivery, 'Dear Senator Warner,\n\nI am writing about the cost of childcare in my county.');
       await enqueueCwcDeliveries(
         [
-          { delivery, messageKey: 'u1:c1', billLevel: 'none' },
-          { delivery: { ...delivery, officeCode: 'SNY02' }, messageKey: 'u1:c1', billLevel: 'none' },
-          { delivery, messageKey: 'u2:c1', billLevel: 'none' },
+          { delivery: toWarner, messageKey: 'u1:c1', billLevel: 'none' },
+          { delivery: toKaine, messageKey: 'u1:c1', billLevel: 'none' },
+          { delivery: otherLetter, messageKey: 'u2:c1', billLevel: 'none' },
         ],
         'test',
       );
@@ -178,8 +190,12 @@ describe('cwc send queue', () => {
       );
       const result = await enqueueCwcDeliveries(
         [
-          { delivery, messageKey: 'bad:msg', billLevel: 'none' },
-          { delivery: { ...delivery, officeCode: 'SNY02' }, messageKey: 'ok:msg', billLevel: 'none' },
+          { delivery: withBody(delivery, 'You will regret ignoring this.'), messageKey: 'bad:msg', billLevel: 'none' },
+          {
+            delivery: { ...withBody(delivery, 'As a nurse, I see insulin costs hurt my patients.'), officeCode: 'SNY02' },
+            messageKey: 'ok:msg',
+            billLevel: 'none',
+          },
         ],
         'test',
       );

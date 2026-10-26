@@ -109,7 +109,11 @@ function buildUserPayload(input: ComplianceInput): string {
     '',
     '## CURRENT MESSAGE',
     input.topic ? `Topic: ${input.topic}` : null,
-    input.legislatorName ? `Recipient: ${input.legislatorName}` : null,
+    // The recipient's name is deliberately NOT sent. It tells the screener
+    // nothing about whether a message is abusive, it is the one field that
+    // differs between copies of one letter addressed to several offices, and
+    // it invites the model's priors about a particular member into a verdict
+    // that should rest on the words alone.
     fenced('Message body', input.message),
     '',
     '## RECENT MESSAGES FROM THIS SENDER (for split-abuse detection)',
@@ -165,7 +169,11 @@ export async function runComplianceCheck(input: ComplianceInput): Promise<Compli
   const model = env().CLAUDE_MODEL || 'claude-sonnet-4-6';
 
   try {
-    const raw = await callClaude(COMPLIANCE_SYSTEM_PROMPT, buildUserPayload(input), 600);
+    // Temperature 0. This verdict decides whether a person's political
+    // speech reaches their representative, so it must not vary run to run.
+    // At the default, one borderline message came back held on one run and
+    // refused on the next, and each office is screened separately.
+    const raw = await callClaude(COMPLIANCE_SYSTEM_PROMPT, buildUserPayload(input), 600, { temperature: 0 });
     const parsed = extractJSON(raw) as Record<string, unknown> | null;
 
     if (!parsed || typeof parsed.decision !== 'string') {
@@ -187,10 +195,26 @@ export async function runComplianceCheck(input: ComplianceInput): Promise<Compli
       ? (parsed.reasons as unknown[]).map((r) => String(r)).slice(0, 20)
       : [];
 
+    // A verdict has to name what it objects to. A hold with every category
+    // false is a judgment about the message's tone or its politics wearing
+    // the costume of a rule, and it costs a constituent their delivery
+    // window with nothing a reviewer can weigh. The jurisdiction layer below
+    // can still raise its own flag with its own stated reason.
+    const categories = coerceCategories(parsed.categories);
+    const named = Object.values(categories).some(Boolean);
+    // Only a verdict the model actually stated is downgraded. A decision we
+    // could not parse is a malformed response, which still fails safe to
+    // review the way the rest of this module does.
+    const stated = decision === 'review' || decision === 'block';
+    const grounded: ComplianceDecision = stated && !named ? 'pass' : normalized;
+    if (grounded !== normalized) {
+      console.info('[compliance] downgraded an uncategorised verdict to pass:', reasons.slice(0, 2));
+    }
+
     return enforceJurisdiction(input, {
-      decision: normalized,
-      reasons,
-      categories: coerceCategories(parsed.categories),
+      decision: grounded,
+      reasons: grounded === 'pass' && normalized !== 'pass' ? [] : reasons,
+      categories,
       model,
       promptVersion: PROMPT_VERSION,
     });

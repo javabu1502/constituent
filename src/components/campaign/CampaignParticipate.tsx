@@ -23,16 +23,85 @@ import { useTurnstile } from '@/components/ui/Turnstile';
 import { SupportNudge } from '@/components/ui/SupportNudge';
 import { SocialShare } from '@/components/ui/SocialShare';
 import { CWC_PREFIXES, CWC_ENABLED } from '@/lib/cwc-prefixes';
-import { useCwcActiveOffices, congressChannel, isNonParticipatingSenator, participatingSenateCount, cwcOfficeCodeFor, submitAdoptionSignature, CWC_SUBMITTED_STATUS, WEBFORM_SUBMITTED_STATUS, describeCwcOutcome, type SendOutcome, type CwcButtonState } from '@/lib/cwc-client';
+import { useCwcActiveOffices, loadCwcActiveOffices, isCwcDeliverable, congressChannel, isNonParticipatingSenator, participatingSenateCount, cwcOfficeCodeFor, submitAdoptionSignature, CWC_SUBMITTED_STATUS, WEBFORM_SUBMITTED_STATUS, CWC_HELD_STATUS, CWC_COPY, describeCwcOutcome, deliveryUndecided, isSentStatus, cwcStateFromStatus, cwcAccepted, streetLooksUndeliverable, districtResolvedFrom, type SendOutcome, type CwcButtonState } from '@/lib/cwc-client';
 import { CwcAdoptionAsk } from '@/components/ui/CwcAdoptionAsk';
+import { readParticipateSession, writeParticipateSession, clearParticipateSession } from '@/hooks/useAutoSave';
 
 type Step = 'stance' | 'compose' | 'form' | 'loading' | 'review' | 'done' | 'noTarget' | 'wrongState';
 type Stance = 'support' | 'oppose' | 'undecided';
 
 /** Errors whose message is safe to show users (our own API copy). Anything
- * else — WebKit URL/pattern DOMExceptions, network noise — stays in the
+ * else (WebKit URL/pattern DOMExceptions, network noise) stays in the
  * console and the user sees actionable guidance instead. */
 class FriendlyError extends Error {}
+
+/** Copy this component needs that the shared participate copy does not carry
+ * yet. Same flat register, both languages. */
+const extraCopy = {
+  en: {
+    checking: CWC_COPY.checking,
+    checkingHelp: 'One moment while we check how this office accepts messages.',
+    heldButton: 'Received, held for review',
+    openedBefore: 'Opened in your email app',
+    openedEarlier: 'Opened in your email app earlier',
+    sendAgain: 'Send again',
+    lockedNote: CWC_COPY.lockedNote,
+    streetWarning: CWC_COPY.streetWarning,
+    editAddress: 'Edit my address',
+    useAnyway: 'Use this address anyway',
+    unresolved: CWC_COPY.unresolvedAddress,
+    unresolvedHelp: 'Federal messages open in your email app instead of going through the congressional delivery system.',
+    changeAddress: 'Re-enter my address',
+    zipFormat: 'Please enter your 5-digit ZIP code. ZIP+4 is welcome.',
+    draftFallback: 'We started your message from your own words instead. Edit anything before you continue.',
+  },
+  es: {
+    checking: 'Verificando las opciones de envío',
+    checkingHelp: 'Un momento mientras verificamos cómo esta oficina acepta mensajes.',
+    heldButton: 'Recibido, en revisión',
+    openedBefore: 'Abierto en su aplicación de correo',
+    openedEarlier: 'Abierto en su aplicación de correo antes',
+    sendAgain: 'Enviar de nuevo',
+    lockedNote: 'Enviado. Los cambios aquí ya no modifican lo que recibe la oficina.',
+    streetWarning: 'Esta dirección parece una residencia estudiantil, un edificio de campus, un apartado postal, o no tiene número de casa. Las oficinas del Congreso rechazan los mensajes que no pueden vincular a un domicilio. Use una calle residencial si tiene una.',
+    editAddress: 'Editar mi dirección',
+    useAnyway: 'Usar esta dirección de todos modos',
+    unresolved: 'No pudimos verificar esta dirección. Las oficinas del Congreso rechazan los mensajes que no pueden vincular a un domicilio. Las direcciones de residencias estudiantiles, campus y apartados postales necesitan una calle residencial.',
+    unresolvedHelp: 'Los mensajes federales se abren en su aplicación de correo en lugar de ir por el sistema de envío del Congreso.',
+    changeAddress: 'Volver a escribir mi dirección',
+    zipFormat: 'Escriba su código postal de 5 dígitos. ZIP+4 también sirve.',
+    draftFallback: 'Iniciamos su mensaje con sus propias palabras. Edite lo que quiera antes de continuar.',
+  },
+} as const;
+
+/** The constituent's own words as a starter core when the AI writer is
+ * unavailable. The envelope adds the greeting, the ask, and the closing;
+ * this is only the middle. Neutral: the stance line is theirs. */
+function buildFallbackCore(
+  campaign: Campaign,
+  stance: Stance | null,
+  personalWhy: string,
+  language: 'en' | 'es',
+): string {
+  const why = personalWhy.trim();
+  const headline = campaign.headline;
+  if (language === 'es') {
+    const opening =
+      stance === 'support'
+        ? `Le escribo para expresar mi apoyo a "${headline}".`
+        : stance === 'oppose'
+          ? `Le escribo para expresar mi oposición a "${headline}".`
+          : `Le escribo sobre "${headline}".`;
+    return [opening, why || '[Agregue una o dos oraciones sobre por qué esto le importa y qué le gustaría que hicieran.]'].join('\n\n');
+  }
+  const opening =
+    stance === 'support'
+      ? `I am writing to express my support for "${headline}".`
+      : stance === 'oppose'
+        ? `I am writing to express my opposition to "${headline}".`
+        : `I am writing about "${headline}".`;
+  return [opening, why || '[Add a sentence or two about why this matters to you and what you would like them to do.]'].join('\n\n');
+}
 
 /** Map a full state name (bad autofill / legacy profile values) to its code. */
 function toStateCode(value: string): string {
@@ -102,6 +171,8 @@ export function CampaignParticipate({
   const isOfficial = !!campaign.is_official;
   // Participant-facing copy in the campaign's language (English or Spanish).
   const t = participateCopy(campaign.language);
+  const lang: 'en' | 'es' = campaign.language === 'es' ? 'es' : 'en';
+  const x = extraCopy[lang];
   const [step, setStep] = useState<Step>(isOfficial ? 'stance' : 'compose');
   // Message-first: the constituent's approved core message, drafted before we
   // know who their officials are.
@@ -154,10 +225,20 @@ export function CampaignParticipate({
   const [fetchingQuestions, setFetchingQuestions] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
-  // True when any review message is a manual-compose starter draft instead
-  // of an AI draft — the review step then opens editors and says so.
+  // True when the core is a starter draft from the person's own words
+  // instead of an AI draft: the compose and review steps say so, and the
+  // review step opens the editors.
   const [usedFallback, setUsedFallback] = useState(false);
+  // Why the AI draft failed, kept as an amber note next to the starter draft.
+  const [draftNote, setDraftNote] = useState<string | null>(null);
   const [profileLoaded, setProfileLoaded] = useState(false);
+  // False when the representatives lookup could not place the street. No
+  // "Send to Congress" then: the office would refuse it after the fact.
+  const [districtResolved, setDistrictResolved] = useState(true);
+  // One warning before the lookup for a street that looks like a dorm,
+  // campus building, or PO Box; the person can edit it or go ahead.
+  const [streetWarning, setStreetWarning] = useState(false);
+  const [streetWarningAcked, setStreetWarningAcked] = useState(false);
   const { getToken, TurnstileWidget } = useTurnstile();
 
   // Funnel telemetry: one event per step reached, so we can finally see WHERE
@@ -205,9 +286,23 @@ export function CampaignParticipate({
       setCoreAsk(typeof data.ask === 'string' ? data.ask : null);
       setCoreBodyEs(typeof data.body_es === 'string' ? data.body_es : null);
       setCoreOriginal(data.original && typeof data.original.text === 'string' ? data.original : null);
+      setUsedFallback(false);
+      setDraftNote(null);
       fireFunnel('participate_core_generated');
     } catch (err) {
-      setError(err instanceof FriendlyError ? err.message : t.draftFailed);
+      // Never strand the person at "Draft my message". A refusal, a quota,
+      // a CAPTCHA miss, or an outage all land on an editable starter core
+      // built from their own words, with the reason as an amber note.
+      console.error('[participate] core draft failed:', err);
+      const why = (whyOverride ?? personalWhy).trim();
+      setCoreDraft(buildFallbackCore(campaign, isOfficial ? stance : null, why, lang));
+      setCoreSubject(null);
+      setCoreOpening(null);
+      setCoreAsk(null);
+      setCoreBodyEs(null);
+      setCoreOriginal(null);
+      setUsedFallback(true);
+      setDraftNote(err instanceof FriendlyError ? err.message : t.draftFailed);
     } finally {
       setCoreStatus('idle');
     }
@@ -365,15 +460,45 @@ export function CampaignParticipate({
   const [intentByOfficial, setIntentByOfficial] = useState<Record<string, 'persuade' | 'thank'>>({});
   const [messages, setMessages] = useState<Record<string, OfficialMessage>>({});
   const [sentCount, setSentCount] = useState(0);
-  // Officials whose message the CWC queue accepted this session: survives
-  // Back/Next within the flow so the button never re-arms after a send.
-  const [cwcSentIds, setCwcSentIds] = useState<Record<string, boolean>>({});
+  // Per-official status recorded this session (cwc_submitted, cwc_held,
+  // email_opened...). Survives Back/Next and, through sessionStorage, a
+  // refresh, so a button never re-arms after a send.
+  const [sentStatus, setSentStatus] = useState<Record<string, string>>({});
   // Reader-poll aggregates, fetched fresh after this participant is counted.
   const [pollResults, setPollResults] = useState<{ support: number; oppose: number; undecided: number } | null>(null);
+
+  // Session persistence (H3): what a refresh must not lose. The letter text
+  // is not kept (it is re-drafted); the markers that stop a second CWC
+  // delivery and a second participant row are.
+  const actionIdRef = useRef<string | null>(null);
+  const [actionIdState, setActionIdState] = useState<string | null>(null);
+  const sessionReady = useRef(false);
+  useEffect(() => {
+    const saved = readParticipateSession(campaign.slug);
+    if (saved) {
+      if (saved.stance && isOfficial) setStance(saved.stance);
+      setSentStatus(saved.sentStatus);
+      setSentCount(saved.sentCount);
+      actionIdRef.current = saved.actionId;
+      setActionIdState(saved.actionId);
+      if (saved.stance && isOfficial) setStep('compose');
+    }
+    sessionReady.current = true;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  useEffect(() => {
+    if (!sessionReady.current || step === 'done') return;
+    if (!stance && Object.keys(sentStatus).length === 0 && sentCount === 0 && !actionIdState) return;
+    writeParticipateSession(campaign.slug, { step, stance, sentStatus, actionId: actionIdState, sentCount });
+  }, [campaign.slug, step, stance, sentStatus, sentCount, actionIdState]);
 
   // Step 1: Form submission
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    await submitForm(streetWarningAcked);
+  };
+
+  const submitForm = async (acked: boolean) => {
     setError(null);
 
     if (cwcFields && !prefix) { setError('Please select a title. Congressional offices require one to accept your message.'); return; }
@@ -391,20 +516,12 @@ export function CampaignParticipate({
     if (!city.trim()) { setError('Please enter your city'); return; }
     if (!state) { setError('Please select your state'); return; }
     if (!zip.trim()) { setError('Please enter your ZIP code'); return; }
+    if (!/^\d{5}(-\d{4})?$/.test(zip.trim())) { setError(x.zipFormat); return; }
+    if (!acked && streetLooksUndeliverable(street)) { setStreetWarning(true); return; }
+    setStreetWarning(false);
 
-    // Mint the CAPTCHA token BEFORE leaving the form step: the invisible
-    // Turnstile widget lives in the form's JSX, and switching to 'loading'
-    // unmounts it — getToken() after that times out to an empty token and
-    // anonymous users get a 403 from the AI routes. Minting can take seconds
-    // on cautious networks, so the button shows a busy state the whole time.
-    setSubmitting(true);
-    let turnstileToken = '';
-    try {
-      turnstileToken = await getToken();
-    } catch (tokenErr) {
-      console.error('[participate] turnstile token failed:', tokenErr);
-    }
-
+    // No CAPTCHA mint here: the lookups on the loading step do not take a
+    // token, and the review step mounts its own widget for the sends.
     setStep('loading');
     setSubmitting(false);
 
@@ -436,6 +553,13 @@ export function CampaignParticipate({
 
       const repData = await repRes.json();
       if (!repRes.ok) throw new FriendlyError(repData.error || 'Failed to find representatives');
+
+      // The route falls back to senators-only with a warning when the
+      // geocoder cannot place the street. A CWC message sent then is
+      // refused later, after the person has left (2026-10-20), so the
+      // review step withholds "Send to Congress" and says why.
+      const resolved = districtResolvedFrom(repData);
+      setDistrictResolved(resolved);
 
       // Filter by campaign target level
       let filtered: Official[] = repData.officials || [];
@@ -578,8 +702,15 @@ export function CampaignParticipate({
         ? stance === 'oppose' ? 'oppose' : stance === 'support' ? 'support' : null
         : campaign.direction === 'oppose' ? 'oppose' : 'support';
 
+      // The signature decision needs the office list: a CWC-bound letter
+      // carries name and address in separate fields, so no signature in the
+      // text. Wait for the list (shared fetch, 8s cap) instead of guessing.
+      const offices = cwcOffices.loaded ? cwcOffices : await loadCwcActiveOffices();
+      const cwcBound = (o: Official) =>
+        resolved && cwcFields && isCwcDeliverable(o, offices, { prefix, email, street, zip });
+
       const msgMap: Record<string, OfficialMessage> = {};
-      let fallback = false;
+      let fallback = usedFallback;
       for (const o of filtered) {
         if (coreDraft.trim()) {
           msgMap[o.name] = buildEnvelope(coreDraft.trim(), o, {
@@ -598,7 +729,7 @@ export function CampaignParticipate({
             coreAsk,
             originalWords: coreOriginal,
             // CWC carries name and address in separate fields: no signature in the text.
-            signature: !cwcDeliverable(o),
+            signature: !cwcBound(o),
           });
         } else {
           msgMap[o.name] = buildFallbackMessage(campaign, o, {
@@ -631,8 +762,7 @@ export function CampaignParticipate({
   // Delivery info for each official
   // Which offices accept CWC delivery (live list; empty until loaded → email path).
   const cwcOffices = useCwcActiveOffices();
-  const channelFor = (official: Official) => (cwcFields ? congressChannel(official, cwcOffices, { prefix, email, street, zip }) : null);
-  const cwcDeliverable = (official: Official) => channelFor(official) !== null;
+  const channelFor = (official: Official) => (cwcFields ? congressChannel(official, cwcOffices, { prefix, email, street, zip }, districtResolved) : null);
 
   const deliveryInfoMap = useMemo(() => {
     const map = new Map<string, DeliveryInfo>();
@@ -654,7 +784,6 @@ export function CampaignParticipate({
   // count. Calls are serialized through a promise chain so follow-up clicks
   // see the action_id from the first, and each runs while the review step's
   // Turnstile widget is still mounted.
-  const actionIdRef = useRef<string | null>(null);
   const participationChainRef = useRef<Promise<void>>(Promise.resolve());
   const recordEngagement = (initialMessagesSent = 1) => {
     participationChainRef.current = participationChainRef.current.then(async () => {
@@ -683,7 +812,10 @@ export function CampaignParticipate({
           return;
         }
         const data = await res.json();
-        if (data?.action_id) actionIdRef.current = data.action_id;
+        if (data?.action_id) {
+          actionIdRef.current = data.action_id;
+          setActionIdState(data.action_id);
+        }
       } catch (err) {
         console.error('[participate] Failed:', err);
       }
@@ -757,11 +889,13 @@ export function CampaignParticipate({
     // A CWC hand-off that failed is NOT a send: give the count back and let
     // the card fall back to the email path. (An email-app open counts as
     // sent regardless of tracking, so those paths record the engagement.)
-    if (isCwc && !(outcome.ok && (outcome.cwc?.status === 'queued' || outcome.cwc?.status === 'held'))) {
+    if (isCwc && !cwcAccepted(outcome)) {
       setSentCount((c) => Math.max(0, c - 1));
       return outcome;
     }
-    if (isCwc) setCwcSentIds((m) => ({ ...m, [official.id]: true }));
+    // Held is remembered as its own client-side status so a refresh brings
+    // the card back held, not green. Still an engagement.
+    setSentStatus((m) => ({ ...m, [official.id]: isCwc && outcome.cwc?.status === 'held' ? CWC_HELD_STATUS : deliveryStatus }));
 
     // Opened-into-mail counts as sent: record this official's engagement
     // now, while the user (and the Turnstile widget) are on the review step.
@@ -782,6 +916,7 @@ export function CampaignParticipate({
     if (!actionIdRef.current && sentCount > 0) {
       await recordEngagement(sentCount);
     }
+    clearParticipateSession(campaign.slug);
     setStep('done');
 
     if (!isOfficial) return;
@@ -806,6 +941,18 @@ export function CampaignParticipate({
       <button
         type="button"
         onClick={() => {
+          // A draft written under the other position must not survive the
+          // change: clear it so the next draft carries the new stance.
+          if (stance && stance !== value) {
+            setCoreDraft('');
+            setCoreSubject(null);
+            setCoreOpening(null);
+            setCoreAsk(null);
+            setCoreBodyEs(null);
+            setCoreOriginal(null);
+            setUsedFallback(false);
+            setDraftNote(null);
+          }
           setStance(value);
           trackEvent('campaign_stance_selected', { campaign: campaign.slug, stance: value });
           setStep('compose');
@@ -841,8 +988,14 @@ export function CampaignParticipate({
       <div className="space-y-5">
         <TurnstileWidget />
         {error && (
-          <div className="p-4 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 rounded-xl">
+          <div role="alert" className="p-4 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 rounded-xl">
             <p className="text-sm text-red-700 dark:text-red-300">{error}</p>
+          </div>
+        )}
+        {coreDraft && usedFallback && (
+          <div role="alert" className="p-3 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded-xl">
+            <p className="text-sm text-amber-800 dark:text-amber-300 font-medium">{t.aiUnavailable}</p>
+            <p className="text-xs text-amber-700 dark:text-amber-400 mt-1">{x.draftFallback}{draftNote ? ` (${draftNote})` : ''}</p>
           </div>
         )}
 
@@ -857,10 +1010,11 @@ export function CampaignParticipate({
             <div className="space-y-4">
               {followUpQuestions.map((question, i) => (
                 <div key={i}>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  <label htmlFor={`follow-up-${i}`} className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     {question}
                   </label>
                   <input
+                    id={`follow-up-${i}`}
                     type="text"
                     value={followUpAnswers[i] ?? ''}
                     onChange={(e) =>
@@ -888,7 +1042,7 @@ export function CampaignParticipate({
           </>
         ) : !coreDraft && composeMode === 'chat' ? (
           <>
-            <div ref={chatScrollRef} className="max-h-[22rem] overflow-y-auto space-y-3 pr-1">
+            <div ref={chatScrollRef} aria-live="polite" aria-busy={chatStreaming} className="max-h-[22rem] overflow-y-auto space-y-3 pr-1">
               {chatMessages.map((m, i) => (
                 <div key={i} className={m.role === 'user' ? 'flex justify-end' : 'flex justify-start'}>
                   <div
@@ -905,6 +1059,7 @@ export function CampaignParticipate({
             </div>
             <div className="flex gap-2">
               <textarea
+                aria-label={t.chatPlaceholder}
                 value={chatInput}
                 onChange={(e) => setChatInput(e.target.value)}
                 onKeyDown={(e) => {
@@ -947,10 +1102,11 @@ export function CampaignParticipate({
         ) : !coreDraft ? (
           <>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label htmlFor="participate-why" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 {t.whyLabel} <span className="text-gray-400 dark:text-gray-500 font-normal">{t.whyOptional}</span>
               </label>
               <textarea
+                id="participate-why"
                 value={personalWhy}
                 onChange={(e) => setPersonalWhy(e.target.value)}
                 placeholder={t.whyPlaceholder}
@@ -980,10 +1136,11 @@ export function CampaignParticipate({
         ) : (
           <>
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label htmlFor="participate-core" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 {t.yourMessage} <span className="text-gray-400 dark:text-gray-500 font-normal">{t.yourMessageHint}</span>
               </label>
               <textarea
+                id="participate-core"
                 value={coreDraft}
                 onChange={(e) => setCoreDraft(e.target.value)}
                 rows={10}
@@ -1069,18 +1226,24 @@ export function CampaignParticipate({
           </div>
         )}
         {error && (
-          <div className="p-4 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 rounded-xl">
+          <div role="alert" className="p-4 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 rounded-xl">
             <p className="text-sm text-red-700 dark:text-red-300">{error}</p>
+          </div>
+        )}
+        {!districtResolved && (
+          <div role="alert" className="p-3 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded-xl">
+            <p className="text-sm text-amber-800 dark:text-amber-300">{x.unresolved}</p>
           </div>
         )}
 
         <div className={cwcFields ? 'grid grid-cols-[7rem_1fr] gap-3' : undefined}>
           {cwcFields && (
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label htmlFor="participate-prefix" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 {t.title} <span className="text-red-500">*</span>
               </label>
               <select
+                id="participate-prefix"
                 value={prefix}
                 onChange={(e) => setPrefix(e.target.value)}
                 className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
@@ -1093,10 +1256,11 @@ export function CampaignParticipate({
             </div>
           )}
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label htmlFor="participate-name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               {t.yourName} <span className="text-red-500">*</span>
             </label>
             <input
+              id="participate-name"
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
@@ -1108,10 +1272,11 @@ export function CampaignParticipate({
 
         {cwcFields && !collectEmail && (
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label htmlFor="participate-email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               {t.email} <span className="text-red-500">*</span>
             </label>
             <input
+              id="participate-email"
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -1126,10 +1291,11 @@ export function CampaignParticipate({
 
         {collectEmail && (
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label htmlFor="participate-email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               {t.email} <span className="text-red-500">*</span>
             </label>
             <input
+              id="participate-email"
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -1143,13 +1309,14 @@ export function CampaignParticipate({
         )}
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <label htmlFor="participate-street" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             {t.streetAddress} <span className="text-red-500">*</span>
           </label>
           <input
+            id="participate-street"
             type="text"
             value={street}
-            onChange={(e) => setStreet(e.target.value)}
+            onChange={(e) => { setStreet(e.target.value); setStreetWarning(false); setStreetWarningAcked(false); }}
             placeholder={t.streetPlaceholder}
             className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
           />
@@ -1157,10 +1324,11 @@ export function CampaignParticipate({
 
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label htmlFor="participate-city" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               {t.city} <span className="text-red-500">*</span>
             </label>
             <input
+              id="participate-city"
               type="text"
               value={city}
               onChange={(e) => setCity(e.target.value)}
@@ -1169,10 +1337,11 @@ export function CampaignParticipate({
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            <label htmlFor="participate-state" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
               {t.state} <span className="text-red-500">*</span>
             </label>
             <select
+              id="participate-state"
               value={state}
               onChange={(e) => setState(e.target.value)}
               className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
@@ -1186,11 +1355,13 @@ export function CampaignParticipate({
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          <label htmlFor="participate-zip" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             {t.zip} <span className="text-red-500">*</span>
           </label>
           <input
+            id="participate-zip"
             type="text"
+            inputMode="numeric"
             value={zip}
             onChange={(e) => setZip(e.target.value)}
             placeholder="12345"
@@ -1204,6 +1375,35 @@ export function CampaignParticipate({
             {t.approvedGoesToEach}
           </p>
         </div>
+
+        {streetWarning && (
+          <div role="alert" className="p-4 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded-xl space-y-3">
+            <p className="text-sm text-amber-800 dark:text-amber-300">{x.streetWarning}</p>
+            <div className="flex flex-col sm:flex-row gap-2">
+              <button
+                type="button"
+                onClick={() => {
+                  setStreetWarning(false);
+                  document.getElementById('participate-street')?.focus();
+                }}
+                className="flex-1 py-2 px-3 text-sm font-medium bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors"
+              >
+                {x.editAddress}
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setStreetWarningAcked(true);
+                  setStreetWarning(false);
+                  void submitForm(true);
+                }}
+                className="flex-1 py-2 px-3 text-sm font-medium border border-amber-300 dark:border-amber-600 text-amber-800 dark:text-amber-200 rounded-lg hover:bg-amber-100 dark:hover:bg-amber-900/40 transition-colors"
+              >
+                {x.useAnyway}
+              </button>
+            </div>
+          </div>
+        )}
 
         <TurnstileWidget />
 
@@ -1222,7 +1422,7 @@ export function CampaignParticipate({
   // Step 2: Loading
   if (step === 'loading') {
     return (
-      <div className="flex flex-col items-center justify-center py-16">
+      <div role="status" className="flex flex-col items-center justify-center py-16">
         <div className="relative">
           <div className="w-16 h-16 border-4 border-purple-200 dark:border-purple-800 rounded-full animate-spin border-t-purple-600"></div>
           <div className="absolute inset-0 flex items-center justify-center">
@@ -1350,13 +1550,27 @@ export function CampaignParticipate({
         )}
 
         {usedFallback && (
-          <div className="p-3 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded-xl">
+          <div role="alert" className="p-3 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded-xl">
             <p className="text-sm text-amber-800 dark:text-amber-300 font-medium">
               {t.aiUnavailable}
             </p>
             <p className="text-xs text-amber-700 dark:text-amber-400 mt-1">
               {t.makeItYourOwn}
             </p>
+          </div>
+        )}
+
+        {!districtResolved && cwcFields && (
+          <div role="alert" className="p-3 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded-xl">
+            <p className="text-sm text-amber-800 dark:text-amber-300">{x.unresolved}</p>
+            <p className="text-xs text-amber-700 dark:text-amber-400 mt-1">{x.unresolvedHelp}</p>
+            <button
+              type="button"
+              onClick={() => setStep('form')}
+              className="mt-2 text-xs font-medium text-amber-900 dark:text-amber-200 underline"
+            >
+              {x.changeAddress}
+            </button>
           </div>
         )}
 
@@ -1381,7 +1595,9 @@ export function CampaignParticipate({
               onEdit={(patch) => updateMessage(official.name, patch)}
               startOpen={usedFallback}
               cwcDelivery={channelFor(official)}
-              alreadySent={!!cwcSentIds[official.id]}
+              priorStatus={sentStatus[official.id]}
+              checkingDelivery={cwcFields && districtResolved && deliveryUndecided(official, cwcOffices)}
+              extra={x}
               adoptionAsk={
                 isNonParticipatingSenator(official, cwcOffices) && email.trim()
                   ? {
@@ -1436,7 +1652,7 @@ export function CampaignParticipate({
           : t.sendWhenReady}
       </p>
 
-      {/* Reader-poll results — revealed only AFTER this reader picked and acted */}
+      {/* Reader-poll results: revealed only AFTER this reader picked and acted */}
       {stance && pollResults && (() => {
         const total = pollResults.support + pollResults.oppose + pollResults.undecided;
         const rows: Array<{ key: Stance; label: string; count: number }> = [
@@ -1493,7 +1709,7 @@ export function CampaignParticipate({
 
       <SupportNudge />
 
-      {/* Share section — opt-in; shares your position, never your name */}
+      {/* Share section: opt-in; shares your position, never your name */}
       <div className="mb-6 text-left">
         <SocialShare
           url={
@@ -1542,13 +1758,18 @@ function OfficialSendCard({
   onEdit,
   startOpen,
   cwcDelivery,
-  alreadySent,
+  priorStatus,
+  checkingDelivery,
   adoptionAsk,
   ui,
+  extra,
 }: {
   official: Official;
   /** Copy in the campaign's language. */
   ui: ParticipateCopy;
+  /** Copy this component needs that the shared participate copy lacks.
+   *  Widened to string so either language's object fits. */
+  extra: { [K in keyof (typeof extraCopy)['en']]: string };
   message: OfficialMessage;
   deliveryInfo: DeliveryInfo;
   mailtoLink: string | null;
@@ -1557,8 +1778,14 @@ function OfficialSendCard({
   startOpen: boolean;
   /** 'cwc' or 'webform': ONE "Send to Congress" action, no email/copy. */
   cwcDelivery?: 'cwc' | 'webform' | null;
-  /** True when this session already handed this official's message to CWC. */
-  alreadySent?: boolean;
+  /** The delivery status recorded for this official earlier in this session,
+   *  restored from storage after a reload. Any value means the person already
+   *  acted on this card, by email or through Congress. */
+  priorStatus?: string | null;
+  /** The participating-offices list has not answered yet, so we do not know
+   *  whether this federal office takes messages through Congress or by email.
+   *  Show neither action until it does. */
+  checkingDelivery?: boolean;
   /** Present for a senator whose office is not on the CWC list. */
   adoptionAsk?: { participating: number; defaultChecked: boolean; onSign: () => void };
 }) {
@@ -1570,13 +1797,23 @@ function OfficialSendCard({
   };
   const [copied, setCopied] = useState(false);
   const copy = cwcDelivery === 'webform'
-    ? { idle: ui.webformIdle, sending: ui.webformSending, sent: ui.webformSent }
-    : { idle: ui.cwcIdle, sending: ui.cwcSending, sent: ui.cwcSent };
+    ? { idle: ui.webformIdle, sending: ui.webformSending, sent: ui.webformSent, held: ui.webformHeld }
+    : { idle: ui.cwcIdle, sending: ui.cwcSending, sent: ui.cwcSent, held: ui.cwcHeld };
   const submitStatus = cwcDelivery === 'webform' ? WEBFORM_SUBMITTED_STATUS : CWC_SUBMITTED_STATUS;
-  const [cwcState, setCwcState] = useState<CwcButtonState>(alreadySent ? 'sent' : 'idle');
-  const [cwcNote, setCwcNote] = useState<string>(alreadySent ? copy.sent : copy.idle);
+  const noteFor = (state: CwcButtonState, fallback: string) =>
+    state === 'sent' ? copy.sent : state === 'held' ? copy.held : state === 'blocked' ? ui.cwcBlocked : fallback;
+  const restored = cwcStateFromStatus(priorStatus);
+  const [cwcState, setCwcState] = useState<CwcButtonState>(restored);
+  const [cwcNote, setCwcNote] = useState<string>(noteFor(restored, copy.idle));
+  // The email path has no server round trip, so a prior email status is all
+  // we know: offer a deliberate second send rather than the primary button.
+  const openedByEmailBefore = isSentStatus(priorStatus) && restored === 'idle';
+  const [emailBusy, setEmailBusy] = useState(false);
   // After a failed hand-off the card falls back to the email/form actions.
+  // 'blocked' and 'cooldown' deliberately do not: a message the screen
+  // refused, or a duplicate inside the cooldown, should not be mailed instead.
   const showCwc = cwcDelivery && cwcState !== 'failed';
+  const cwcDone = cwcState === 'sent' || cwcState === 'held';
   // Starter drafts open ready to write; AI drafts start collapsed. Track
   // open state ourselves so re-renders from typing don't fight the toggle.
   const [editOpen, setEditOpen] = useState(startOpen);
@@ -1611,12 +1848,26 @@ function OfficialSendCard({
       </div>
 
       {cwcDelivery && cwcState === 'failed' && (
-        <p className="mb-3 p-2 text-xs rounded-lg bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-700 text-amber-700 dark:text-amber-300">{cwcNote}</p>
+        <p className="mb-3 p-2 text-xs rounded-lg bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-700 text-amber-700 dark:text-amber-300" role="alert">{cwcNote}</p>
       )}
 
       {/* Actions */}
       <div className="space-y-2">
-        {showCwc ? (
+        {checkingDelivery ? (
+          // The offices list decides between "Send to Congress" and the email
+          // app. Showing either one before it answers invites a send down the
+          // path we are about to swap away.
+          <>
+            <button
+              type="button"
+              disabled
+              className="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg text-sm font-medium bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400 cursor-wait"
+            >
+              {extra.checking}
+            </button>
+            <p className="text-xs text-gray-500 dark:text-gray-400" role="status">{extra.checkingHelp}</p>
+          </>
+        ) : showCwc ? (
           // Office participates in Communicating With Congress: one action,
           // delivered by us. No email app, no copy: sending it twice breaks
           // the office's grouping and counts the constituent twice.
@@ -1630,32 +1881,51 @@ function OfficialSendCard({
                 const outcome = await onSend(submitStatus);
                 const d = describeCwcOutcome(outcome ?? undefined);
                 setCwcState(d.state);
-                setCwcNote(d.state === 'sent' ? copy.sent : d.note);
+                setCwcNote(noteFor(d.state, d.note));
               }}
-              className={`flex items-center justify-center gap-2 w-full py-2.5 rounded-lg text-sm font-medium transition-colors ${cwcState === 'sent' ? 'bg-green-600 text-white cursor-default' : cwcState === 'sending' ? 'bg-purple-400 text-white cursor-wait' : 'bg-purple-600 hover:bg-purple-700 text-white'}`}
+              className={`flex items-center justify-center gap-2 w-full py-2.5 rounded-lg text-sm font-medium transition-colors ${cwcState === 'sent' ? 'bg-green-600 text-white cursor-default' : cwcState === 'held' ? 'bg-gray-500 text-white cursor-default' : cwcState === 'blocked' || cwcState === 'cooldown' ? 'bg-gray-300 dark:bg-gray-700 text-gray-600 dark:text-gray-300 cursor-default' : cwcState === 'sending' ? 'bg-purple-400 text-white cursor-wait' : 'bg-purple-600 hover:bg-purple-700 text-white'}`}
             >
-              {cwcState === 'sent' ? (
+              {cwcDone ? (
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
               ) : (
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
               )}
-              {cwcState === 'sent' ? ui.sentToCongress : cwcState === 'sending' ? ui.sending : ui.sendToCongress}
+              {cwcState === 'sent'
+                ? ui.sentToCongress
+                : cwcState === 'held'
+                  ? extra.heldButton
+                  : cwcState === 'sending'
+                    ? ui.sending
+                    : ui.sendToCongress}
             </button>
-            <p className="text-xs text-gray-500 dark:text-gray-400">{cwcNote}</p>
+            <p className="text-xs text-gray-500 dark:text-gray-400" role={cwcState === 'idle' ? undefined : 'status'}>{cwcNote}</p>
           </>
         ) : deliveryInfo.method === 'staffer_email' && mailtoLink ? (
           <>
+            {openedByEmailBefore && (
+              <p className="text-xs text-gray-600 dark:text-gray-400">{extra.openedEarlier}</p>
+            )}
             <button
+              disabled={emailBusy}
               onClick={() => {
+                if (emailBusy) return;
+                setEmailBusy(true);
+                setTimeout(() => setEmailBusy(false), 2000);
                 window.open(mailtoLink, '_blank');
                 send('email_opened');
               }}
-              className="flex items-center justify-center gap-2 w-full py-2.5 bg-purple-600 hover:bg-purple-700 text-white rounded-lg text-sm font-medium transition-colors"
+              className={`flex items-center justify-center gap-2 w-full py-2.5 rounded-lg text-sm font-medium transition-colors ${
+                openedByEmailBefore
+                  ? 'border border-purple-600 text-purple-700 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/30'
+                  : 'bg-purple-600 hover:bg-purple-700 text-white'
+              } ${emailBusy ? 'opacity-60 cursor-wait' : ''}`}
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
-              {ui.sendEmail}{deliveryInfo.stafferName ? ` (${deliveryInfo.stafferName})` : ''}
+              {openedByEmailBefore
+                ? extra.sendAgain
+                : `${ui.sendEmail}${deliveryInfo.stafferName ? ` (${deliveryInfo.stafferName})` : ''}`}
             </button>
             {!deliveryInfo.captchaBlocked && deliveryInfo.note && (
               <p className="text-xs text-gray-500 dark:text-gray-400">{deliveryInfo.note}</p>
@@ -1744,22 +2014,32 @@ function OfficialSendCard({
           {ui.viewEditMessage}
         </summary>
         <div className="mt-2 space-y-2">
+          {/* Once the message is with Congress, edits here would never reach
+              the office. Say so rather than letting someone retype into a
+              box that no longer goes anywhere. */}
+          {cwcDone && (
+            <p className="text-xs text-gray-600 dark:text-gray-400">{extra.lockedNote}</p>
+          )}
           <div>
-            <label className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">{ui.subject}</label>
+            <label htmlFor={`subject-${official.id}`} className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">{ui.subject}</label>
             <input
+              id={`subject-${official.id}`}
               type="text"
               value={message.subject}
+              readOnly={cwcDone}
               onChange={(e) => onEdit({ subject: e.target.value })}
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-sm text-gray-900 dark:text-white"
+              className={`w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-sm text-gray-900 dark:text-white ${cwcDone ? 'opacity-70' : ''}`}
             />
           </div>
           <div>
-            <label className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">{ui.message}</label>
+            <label htmlFor={`body-${official.id}`} className="block text-xs font-medium text-gray-500 dark:text-gray-400 mb-1">{ui.message}</label>
             <textarea
+              id={`body-${official.id}`}
               value={message.body}
+              readOnly={cwcDone}
               onChange={(e) => onEdit({ body: e.target.value })}
               rows={10}
-              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent resize-y bg-white dark:bg-gray-700 text-sm leading-relaxed text-gray-900 dark:text-white"
+              className={`w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent resize-y bg-white dark:bg-gray-700 text-sm leading-relaxed text-gray-900 dark:text-white ${cwcDone ? 'opacity-70' : ''}`}
             />
           </div>
         </div>

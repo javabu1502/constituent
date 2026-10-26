@@ -6,6 +6,9 @@ import { screenMessageForCwc, type GateOutcome } from '@/lib/cwc/compliance-gate
 import { stableMessageKey } from '@/lib/cwc/enqueue-from-send';
 import { getActiveOfficeCodesCached } from '@/lib/cwc/send';
 import { resolveOfficeCode } from '@/lib/cwc/offices';
+import { verifyConstituentForOffice } from '@/lib/cwc/verify';
+import { WEBFORM_MESSAGE_STATUS, setMessageDeliveryStatus } from '@/lib/cwc/message-status';
+import { notifyConstituent } from '@/lib/cwc/notify';
 import type { CwcDelivery } from '@/lib/cwc/types';
 
 /**
@@ -22,7 +25,7 @@ import type { CwcDelivery } from '@/lib/cwc/types';
 type DbClient = ReturnType<typeof createAdminClient>;
 let clientFactory: () => DbClient = createAdminClient;
 export function setWebformQueueClientFactory(factory?: () => DbClient): void { clientFactory = factory ?? createAdminClient; }
-type Gate = (opts: { messageKey: string; delivery: CwcDelivery; db: DbClient }) => Promise<GateOutcome>;
+type Gate = (opts: { messageKey: string; delivery: CwcDelivery; db: DbClient; ipHash?: string | null }) => Promise<GateOutcome>;
 let gate: Gate = screenMessageForCwc;
 export function setWebformGate(fn?: Gate): void { gate = fn ?? screenMessageForCwc; }
 
@@ -38,12 +41,38 @@ function auditFindings(): AuditFinding[] {
 }
 const norm = (s: string) => s.toLowerCase().replace(/[^a-z]/g, '');
 
+let verifiedCache: Array<{ name: string; url: string }> | null = null;
+function verifiedForms(): Array<{ name: string; url: string }> {
+  if (verifiedCache) return verifiedCache;
+  try {
+    const file = path.join(process.cwd(), 'src', 'data', 'senate-webform-verified.json');
+    verifiedCache = (JSON.parse(fs.readFileSync(file, 'utf-8')) as { senators: Array<{ name: string; url: string }> }).senators;
+  } catch { verifiedCache = []; }
+  return verifiedCache;
+}
+
 /** Contact-form URL for a senator whose form the audit found CAPTCHA-free, else null. */
 export function captchaFreeFormFor(official: { name: string; lastName?: string; contactForm?: string }): string | null {
   const last = norm(official.lastName || official.name.split(' ').pop() || '');
   const f = auditFindings().find((x) => norm(x.name) === norm(official.name)) ?? auditFindings().find((x) => norm(x.name).endsWith(last));
   if (!f || f.error || f.hasCaptcha) return null;
-  return official.contactForm || f.url;
+  // Being CAPTCHA-free is not enough. The CAPTCHA audit recorded whatever page
+  // it was pointed at, and on 2026-10-25 only 17 of those 51 pages actually
+  // held a message form; the rest were landing pages whose only submit button
+  // was site search. That is what the first production webform send filled.
+  // So a senator is automatable only if their form was verified to exist.
+  const verified = verifiedFormFor(official.name, last);
+  if (!verified) return null;
+  return official.contactForm || verified;
+}
+
+/** The verified contact form for a senator, or null. See
+ *  src/data/senate-webform-verified.json for how the list was built. */
+export function verifiedFormFor(name: string, lastName?: string): string | null {
+  const last = norm(lastName || name.split(' ').pop() || '');
+  const hit = verifiedForms().find((x) => norm(x.name) === norm(name))
+    ?? verifiedForms().find((x) => norm(x.name).endsWith(last));
+  return hit?.url ?? null;
 }
 
 export function webformDeliveryEnabled(): boolean {
@@ -72,6 +101,8 @@ export async function webformAutomatableSenatorIds(activeCodes?: ReadonlySet<str
 
 export interface WebformQueueItem {
   messageKey: string;
+  /** messages.id of the tracked send, so the worker can write the outcome back. */
+  messageId?: string;
   officialId: string;
   officialName: string;
   formUrl: string;
@@ -85,7 +116,7 @@ export type WebformBuild = { ok: true; item: WebformQueueItem } | { ok: false; s
 export async function buildWebformQueueItem(body: {
   legislator_id: string; legislator_name: string; legislator_level: string; legislator_chamber: string;
   advocate_name: string; advocate_city: string; advocate_state: string; message_body: string; issue_area: string;
-}, cwc: { prefix: string; street: string; zip: string; email: string; subject: string }, campaignRef: string, activeCodes?: ReadonlySet<string>): Promise<WebformBuild> {
+}, cwc: { prefix: string; street: string; zip: string; email: string; subject: string }, campaignRef: string, activeCodes?: ReadonlySet<string>, messageId?: string): Promise<WebformBuild> {
   if (!webformDeliveryEnabled()) return { ok: false, skip: 'WEBFORM_DELIVERY_ENABLED is not true' };
   if (body.legislator_level !== 'federal' || body.legislator_chamber !== 'senate') return { ok: false, skip: 'webform delivery is Senate-only' };
   const state = body.advocate_state.trim().toUpperCase().slice(0, 2);
@@ -98,10 +129,30 @@ export async function buildWebformQueueItem(body: {
   if (!formUrl) return { ok: false, skip: 'no CAPTCHA-free contact form on record' };
   const parts = body.advocate_name.trim().split(/\s+/);
   if (parts.length < 2) return { ok: false, skip: 'advocate name has no last name' };
+  // Confirm the sender is actually represented by this senator. The CWC path
+  // enforces this inside sendCwcDelivery, which this path never reaches, so
+  // until now the only test was whether the senator matched the state the
+  // sender typed. A wrong state in the form was enough to file a message with
+  // a senator who does not represent them.
+  const verdict = await verifyConstituentForOffice({
+    chamber: 'senate',
+    officeCode: code.ok ? code.code : `S${state}01`,
+    campaignId: campaignRef,
+    constituent: {
+      prefix: cwc.prefix as CwcDelivery['constituent']['prefix'],
+      firstName: parts[0], lastName: parts.slice(1).join(' '),
+      address1: cwc.street, city: body.advocate_city, state, zip: cwc.zip, email: cwc.email,
+    },
+    message: { subject: cwc.subject, topics: [], constituentMessage: body.message_body },
+  });
+  if (!verdict.ok) {
+    return { ok: false, skip: `constituent verification failed (${verdict.reason}): ${verdict.detail}` };
+  }
   return {
     ok: true,
     item: {
       messageKey: stableMessageKey({ email: cwc.email, campaignRef, body: body.message_body }),
+      messageId,
       officialId: senator.id,
       officialName: senator.name,
       formUrl,
@@ -113,23 +164,41 @@ export async function buildWebformQueueItem(body: {
 
 export interface WebformEnqueueResult { status: 'queued' | 'held' | 'blocked' }
 
-/** Screen the message (same gate as CWC) and enqueue. */
-export async function enqueueWebformDelivery(item: WebformQueueItem): Promise<WebformEnqueueResult> {
+/**
+ * Screen the message (same gate as CWC) and enqueue. The messages row is
+ * updated to webform_held / webform_blocked here; the worker writes
+ * webform_delivered / webform_failed. The messages.id travels inside the
+ * `message` jsonb (no migration) as `messageId`.
+ */
+export async function enqueueWebformDelivery(item: WebformQueueItem, opts: { ipHash?: string | null } = {}): Promise<WebformEnqueueResult> {
   const db = clientFactory();
   const delivery: CwcDelivery = {
     chamber: 'senate',
     officeCode: 'SXX00',
     campaignId: 'webform',
+    messageId: item.messageId,
+    officialName: item.officialName,
     constituent: { prefix: item.constituent.prefix as CwcDelivery['constituent']['prefix'], firstName: item.constituent.firstName, lastName: item.constituent.lastName, address1: item.constituent.street, city: item.constituent.city, state: item.constituent.state, zip: item.constituent.zip, email: item.constituent.email },
     message: { subject: item.message.subject, topics: ['Government Operations and Politics'], constituentMessage: item.message.body },
   };
-  const { decision } = await gate({ messageKey: item.messageKey, delivery, db });
-  if (decision === 'block') return { status: 'blocked' };
+  const { decision } = await gate({ messageKey: item.messageKey, delivery, db, ipHash: opts.ipHash });
+  if (decision === 'block') {
+    await setMessageDeliveryStatus(db, item.messageId, WEBFORM_MESSAGE_STATUS.blocked);
+    return { status: 'blocked' };
+  }
   const status = decision === 'pass' ? 'queued' : 'held';
+  const message = item.messageId ? { ...item.message, messageId: item.messageId } : item.message;
   const { error } = await db.from('webform_send_queue').upsert(
-    { message_key: item.messageKey, official_id: item.officialId, official_name: item.officialName, form_url: item.formUrl, constituent: item.constituent, message: item.message, status },
+    { message_key: item.messageKey, official_id: item.officialId, official_name: item.officialName, form_url: item.formUrl, constituent: item.constituent, message, status },
     { onConflict: 'message_key,official_id', ignoreDuplicates: true },
   );
   if (error) throw new Error(`webform_send_queue enqueue failed: ${error.message}`);
+  if (status === 'held') {
+    await setMessageDeliveryStatus(db, item.messageId, WEBFORM_MESSAGE_STATUS.held);
+    await notifyConstituent(
+      { channel: 'webform', messageId: item.messageId, constituentEmail: item.constituent.email, officialName: item.officialName, formUrl: item.formUrl },
+      'held',
+    );
+  }
   return { status };
 }

@@ -11,6 +11,7 @@
     "refresh-federal": "npx tsx scripts/refresh-federal-data.ts",
     "refresh-data": "npm run refresh-states && npm run refresh-federal",
     "seed-campaigns": "npx tsx scripts/seed-campaigns.ts",
+    "check-links": "node scripts/check-external-links.mjs",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test"

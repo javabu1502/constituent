@@ -192,6 +192,9 @@ export async function POST(request: NextRequest) {
     : 'With a personal story, 160 to 220 words. Without one, 90 to 140 words.';
   const longWords = stateOnly ? 230 : 270;
   const longTarget = stateOnly ? 180 : 220;
+  // The opening and the ask add roughly fifty words to the body, so the
+  // whole-letter ceiling sits above the body ceiling by about that much.
+  const longWordsFull = stateOnly ? 290 : 340;
   // Talking points: an organization's campaign makes every point by default
   // (that is what the org is asking for); official weigh-ins and "fit" mode
   // use the ones that connect. Points are always paraphrased, never pasted.
@@ -341,9 +344,15 @@ Draft the core message.`;
         continue;
       }
       const draftFull = [String(out?.opening ?? ''), body, String(out?.ask ?? '')].join(' ');
-      if (body.split(/\s+/).length > longWords) {
+      // Two ceilings. The body has its own, and the whole letter has one too:
+      // the office reads the opening, the body and the ask together, and
+      // gating only the body let three real letters go to Congress at 427 to
+      // 470 words against a 220-word target (2026-10-20). The second ceiling
+      // sits well above a normal letter, so it only catches a runaway.
+      const fullWords = draftFull.split(/\s+/).filter(Boolean).length;
+      if (body.split(/\s+/).length > longWords || fullWords > longWordsFull) {
         correction = `Your previous draft ran long. Rewrite it UNDER ${longTarget} words, keeping the strongest details of the story.`;
-        rejects.push(`attempt ${attempt}: ${correction.slice(0, 120)}`);
+        rejects.push(`attempt ${attempt}: ${correction.slice(0, 120)} (body ${body.split(/\s+/).length}w, whole letter ${fullWords}w)`);
         body = '';
         continue;
       }
@@ -444,7 +453,7 @@ Draft the core message.`;
     }
     if (!body) {
       console.warn('[generate-core] refused:', rejects.length ? rejects : ['empty or short body on every attempt']);
-      return NextResponse.json({ error: 'Could not draft a message — please try again' }, { status: 502 });
+      return NextResponse.json({ error: 'Could not draft a message. Please try again' }, { status: 502 });
     }
     if (rejects.length) console.info('[generate-core] retried:', rejects);
     // Frame fields are best-effort: null (deterministic seeded pools

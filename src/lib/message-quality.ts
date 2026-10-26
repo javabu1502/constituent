@@ -52,7 +52,29 @@ const STAT_ATTRIBUTION = /\bthat (?:number|figure) comes from\b|\baccording to (
 // plain: "this is not abstract", "not X, it is Y", and the dash used as a
 // hinge. Checked on the raw draft before deDash (which turns a dash into a
 // comma splice, a second tell).
-const AI_CADENCE = /\bthis is not (?:an? )?abstract\b|\b(?:is|are|was) not (?:a |an |just |simply |only )?[^.,;:]{1,30}, (?:it is|it's|they are|they're|this is)\b|[\u2014\u2013]|\bnot (?:asking for|looking for) a handout\b|\bevery single day\b/i;
+const AI_CADENCE = new RegExp(
+  [
+    /\bthis is not (?:an? )?abstract\b/,
+    // "X is not a wait time, it is a barrier."
+    /\b(?:is|are|was|were) not (?:a |an |just |simply |only )?[^.,;:]{1,30}, (?:it is|it's|they are|they're|this is)\b/,
+    // "That is not a theory. It is the plain reality."
+    /\b(?:is|are|was|were) not (?:a |an |just |simply |only )?[^.,;:]{1,30}\. (?:it is|it's|they are|they're|this is)\b/,
+    // "does not just hurt a business, it leaves workers..."
+    /\b(?:does|do|did) not just [^.,;:]{1,40}, (?:it|they|this|that)\b/,
+    // "Not a quick errand, not a short inconvenience, but a 50-mile drive"
+    /\bnot (?:a |an |just |simply |only )?[^.,;:]{1,40}, not (?:a |an |just |simply |only )?[^.,;:]{1,40}, but\b/,
+    // Spanish: "No para un lujo, no para algo extra, sino para..."
+    /\bno (?:es |para |por |de )?[^.,;:]{1,40}, (?:no|ni) (?:es |para |por |de )?[^.,;:]{1,40}, sino\b/,
+    // Spanish: "No es un n\u00famero abstracto. Es la cifra..." / "no fue una decisi\u00f3n, fue la \u00fanica salida"
+    /\bno (?:es|era|fue|son) [^.,;:]{1,40}[.,] (?:es|era|fue|son)\b/,
+    /[\u2014\u2013]/,
+    /\bnot (?:asking for|looking for) a handout\b/,
+    /\bevery single day\b/,
+  ]
+    .map((r) => r.source)
+    .join('|'),
+  'i',
+);
 
 /** Returns the AI-cadence tells in `text` (empty when clean). */
 export function detectAiCadence(text: string): string[] {

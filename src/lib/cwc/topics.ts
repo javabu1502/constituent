@@ -36,6 +36,11 @@ const NORMALIZE: Record<string, LocTopic> = {
 };
 
 const KEYWORD_FALLBACKS: [RegExp, LocTopic][] = [
+  // Reproductive-health language. congress.gov files abortion and fertility
+  // bills under the Health policy area, so these must never fall through to
+  // the Government Operations default (audit 2026-10-23: eight production
+  // messages about abortion shipped with the default topic).
+  [/abortion|reproductive|unborn|fetal|pregnan|conception|contracepti|\bivf\b/i, 'Health'],
   [/head start/i, 'Families'],
   [/pre-?k\b|early childhood/i, 'Education'],
   [/health|medic|hospital|drug/i, 'Health'],
@@ -57,13 +62,17 @@ const KEYWORD_FALLBACKS: [RegExp, LocTopic][] = [
 /**
  * Always returns a non-empty array of VALID LoC topics — the schema requires
  * at least one, and a wrong-but-plausible topic beats a rejected message.
+ *
+ * `subtopic` is the contact flow's free-text issue (issue_subtopic). It joins
+ * the keyword haystack because the issue_area alone is often a label the
+ * keyword table cannot place ("Other", a user-typed category).
  */
-export function locTopicsForIssueArea(raw: string | null | undefined, headline?: string): LocTopic[] {
+export function locTopicsForIssueArea(raw: string | null | undefined, headline?: string, subtopic?: string): LocTopic[] {
   const t = (raw || '').trim();
   if (t && LOC_TOPIC_SET.has(t)) return [t as LocTopic];
   const mapped = NORMALIZE[t.toLowerCase()];
   if (mapped) return [mapped];
-  const haystack = `${t} ${headline || ''}`;
+  const haystack = `${t} ${subtopic || ''} ${headline || ''}`;
   for (const [pattern, topic] of KEYWORD_FALLBACKS) {
     if (pattern.test(haystack)) return [topic];
   }

@@ -197,6 +197,17 @@ describe('drafting fidelity audit 2026-09-29', () => {
     expect(detectAiCadence('This is not an abstract policy problem for me.')).toHaveLength(1);
     expect(detectAiCadence('Four months is not a wait time, it is a barrier.')).toHaveLength(1);
     expect(detectAiCadence('I waited four months for an appointment. That is too long.')).toEqual([]);
+    // Shapes the 2026-10-23 harness run shipped while the detector returned 0.
+    expect(detectAiCadence('Not a quick errand, not a short inconvenience, but a 50-mile drive both times.')).toHaveLength(1);
+    expect(detectAiCadence('That is not a theory. It is the plain reality of how hunger works.')).toHaveLength(1);
+    expect(detectAiCadence('That kind of disruption does not just hurt a business, it leaves skilled workers without paychecks.')).toHaveLength(1);
+    expect(detectAiCadence('No para un lujo, no para algo extra, sino para mantener a mi hijo en la guardería.')).toHaveLength(1);
+    expect(detectAiCadence('No es un número abstracto. Es la cifra que aparece en mi mente.')).toHaveLength(1);
+    expect(detectAiCadence('Dejar pasar esa oportunidad no fue una decisión, fue la única salida que tenía.')).toHaveLength(1);
+    // Plain sentences that must stay clean.
+    expect(detectAiCadence('I do not have a car, so the bus takes 55 minutes.')).toEqual([]);
+    expect(detectAiCadence('No tengo carro. El autobús tarda 55 minutos.')).toEqual([]);
+    expect(detectAiCadence('She does not just teach, she also runs the after-school club on Fridays.')).toEqual([]);
     expect(looksLikeRefusal("I need to pause here. The constituent's own words say they support the cut.")).toBe(true);
     expect(looksLikeRefusal('{"body": "Head Start gave my son a start."}')).toBe(false);
   });

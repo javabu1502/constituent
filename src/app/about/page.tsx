@@ -115,6 +115,9 @@ export default function AboutPage() {
                 <li>
                   <strong className="text-gray-900 dark:text-white">Reach out</strong>:send an email or make a call
                 </li>
+                <li>
+                  <strong className="text-gray-900 dark:text-white">Or we deliver it to Congress for you</strong>:My Democracy is an approved vendor on Communicating with Congress, the message system the House and Senate run themselves. For offices that take messages that way, your letter goes straight into the office&apos;s queue. No email app, and your name and address travel in their own fields so the office can confirm you are a constituent.
+                </li>
               </ol>
             </div>
           </section>
@@ -185,7 +188,7 @@ export default function AboutPage() {
             <div className="space-y-3 text-gray-600 dark:text-gray-300 pl-10">
               <ul className="list-disc list-inside space-y-2">
                 <li>
-                  <strong className="text-gray-900 dark:text-white">Direct delivery to congressional inboxes</strong> via the official CWC API (application pending)
+                  <strong className="text-gray-900 dark:text-white">More ways to follow a bill after you write</strong>, so a message is the start of something rather than the end of it
                 </li>
               </ul>
             </div>
@@ -226,7 +229,7 @@ export default function AboutPage() {
             </h2>
             <div className="pl-10">
               <p className="text-gray-600 dark:text-gray-300 mb-4">
-                My Democracy is a passion project. If you find it useful, consider supporting its development.
+                My Democracy is free for constituents and always will be. Advocacy organizations pay for the campaign tools, and that is what funds the rest. If you find it useful, you can also chip in directly.
               </p>
               <a
                 href="https://buymeacoffee.com/mydemocracy"

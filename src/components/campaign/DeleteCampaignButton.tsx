@@ -7,6 +7,7 @@ export function DeleteCampaignButton({ slug, headline }: { slug: string; headlin
   const router = useRouter();
   const [showConfirm, setShowConfirm] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleDelete = async () => {
     setIsDeleting(true);
@@ -18,9 +19,11 @@ export function DeleteCampaignButton({ slug, headline }: { slug: string; headlin
       }
       router.refresh();
     } catch (err) {
+      // A failure used to close the dialog and look exactly like success
+      // until the card was still there after a refresh.
       console.error('Delete failed:', err);
+      setError(err instanceof Error ? err.message : 'Could not delete this campaign. Try again.');
       setIsDeleting(false);
-      setShowConfirm(false);
     }
   };
 
@@ -47,9 +50,20 @@ export function DeleteCampaignButton({ slug, headline }: { slug: string; headlin
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white text-center mb-2">
               Delete Campaign
             </h3>
-            <p className="text-sm text-gray-600 dark:text-gray-400 text-center mb-6">
-              Are you sure you want to delete &ldquo;{headline}&rdquo;? This action cannot be undone.
+            <p className="text-sm text-gray-600 dark:text-gray-400 text-center mb-3">
+              Delete &ldquo;{headline}&rdquo;?
             </p>
+            <p className="text-sm text-gray-600 dark:text-gray-400 text-center mb-6">
+              This also deletes every story people shared with this campaign, along with
+              the consent they gave, the record of how each story was used, and any whip
+              positions, meeting notes and coalition entries. None of it can be recovered.
+              Download what you need first.
+            </p>
+            {error && (
+              <p className="mb-4 p-2 text-sm rounded-lg bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-700 text-red-700 dark:text-red-300" role="alert">
+                {error}
+              </p>
+            )}
             <div className="flex gap-3">
               <button
                 onClick={() => setShowConfirm(false)}

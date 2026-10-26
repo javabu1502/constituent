@@ -29,10 +29,20 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
   if (!campaign) return NextResponse.json({ error: 'Campaign not found' }, { status: 404 });
   if (campaign.creator_id !== user.id) return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
 
+  // The same set of campaigns the analytics page counts: this one plus its
+  // steps. Exporting the parent alone returned a header row and nothing else,
+  // because an initiative's messages belong to its steps. Someone pulling a
+  // grant file saw 343 messages on screen and downloaded zero.
+  const { data: childCampaigns } = await admin
+    .from('campaigns')
+    .select('id')
+    .eq('parent_campaign_id', campaign.id);
+  const campaignIds = [campaign.id, ...(childCampaigns ?? []).map((c) => c.id as string)];
+
   const { data: messages } = await admin
     .from('messages')
     .select('created_at, advocate_name, advocate_city, advocate_state, legislator_name, legislator_party, legislator_level, legislator_chamber, delivery_method, delivery_status, message_body')
-    .eq('campaign_id', campaign.id)
+    .in('campaign_id', campaignIds)
     .order('created_at', { ascending: false })
     .limit(10000);
 

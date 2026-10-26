@@ -3,12 +3,20 @@ import { createAdminClient } from '@/lib/supabase';
 import { createClient } from '@/lib/supabase/server';
 import { submitStorySchema, parseBody } from '@/lib/schemas';
 import { writeLimiter, getClientIp } from '@/lib/rate-limit';
-import { hashIp, resolveUsageIdentity } from '@/lib/usage-quota';
+import { enforceDailyQuota, hashIp, resolveUsageIdentity } from '@/lib/usage-quota';
 import { verifyTurnstile } from '@/lib/turnstile';
 import { storyRevokeToken } from '@/lib/story-revoke';
-import { applyAttribution } from '@/lib/story-attribution';
+import { applyAttribution, type AttributionResult } from '@/lib/story-attribution';
 import { deDash } from '@/lib/claude';
 import { renderStoryEnglish } from '@/lib/language';
+
+// Redaction plus translation can run past the default function limit.
+export const maxDuration = 60;
+
+/** Stories one campaign may receive in a day. A durable backstop against a
+ *  script that rotates addresses past the per-IP quota; real collection
+ *  sessions are tens of stories, not hundreds. */
+const CAMPAIGN_DAILY_STORY_CEILING = 500;
 
 /**
  * POST /api/stories
@@ -27,6 +35,18 @@ import { renderStoryEnglish } from '@/lib/language';
  */
 function escapeRegExp(s: string): string {
   return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+/** Replace any name the storyteller typed with a neutral phrase. Pure string
+ *  work, no model; used when the model redaction already ran at preview. */
+function stripName(body: string, name: string | null | undefined): string {
+  const nm = (name || '').trim();
+  let out = body.trim();
+  if (!nm) return out;
+  for (const part of [nm, ...nm.split(/\s+/)].filter((p) => p.length >= 2)) {
+    out = out.replace(new RegExp(`\\b${escapeRegExp(part)}(?:['’]s)?\\b`, 'gi'), 'a community member');
+  }
+  return out;
 }
 
 /** Keep a topical title only; strip the storyteller's name and dashes. */
@@ -74,10 +94,17 @@ export async function POST(request: NextRequest) {
     storyteller_email,
     shared_reps,
     preview,
+    preview_confirmed,
     turnstileToken,
   } = parsed.data;
 
   const identity = await resolveUsageIdentity(ip);
+  // Durable per-identity cap (no CAPTCHA on this flow since 10-15). Counts
+  // preview and store alike; sized for a room on one Wi-Fi, not a person.
+  const { allowed: quotaOk } = await enforceDailyQuota(ip, 'story_submit', identity);
+  if (!quotaOk) {
+    return NextResponse.json({ error: 'Daily story limit reached. Try again tomorrow.' }, { status: 429 });
+  }
   if (process.env.TURNSTILE_SECRET_KEY) {
     // Storytelling is lenient on a MISSING token: an organization's testers hit
     // "CAPTCHA verification failed" on 2026-10-09 because their network never
@@ -118,7 +145,16 @@ export async function POST(request: NextRequest) {
   // Attribution is entirely the storyteller's choice (any of the three levels).
   // Enforce it on our end before the story ever leaves us. de-dash so the sent
   // text reads like a person wrote it (the anonymous redaction pass can add them).
-  const applied = await applyAttribution(body, attribution_level, storyteller_name);
+  //
+  // Anonymous + preview_confirmed: the body IS the redacted text the
+  // storyteller just reviewed (and may have hand-edited) on the preview step.
+  // It is stored exactly as given; a second model pass would change it and
+  // throw away their edits (confirmed live, 2026-10-23). Only the
+  // deterministic safety checks run: strip any name they typed, and de-dash.
+  const confirmedAnonymous = attribution_level === 'anonymous' && preview_confirmed === true && !preview;
+  const applied: AttributionResult = confirmedAnonymous
+    ? { final_body: stripName(body, storyteller_name), flagged: [] }
+    : await applyAttribution(body, attribution_level, storyteller_name);
   const final_body = deDash(applied.final_body);
   const flagged = applied.flagged;
 
@@ -152,9 +188,23 @@ export async function POST(request: NextRequest) {
   // carry no name, contact, or location.
   let storyId: string | null = null;
   if (store !== false) {
-    // Running count (only for stories that are actually saved).
-    const { error: rpcError } = await admin.rpc('increment_campaign_story_count', { campaign_slug: campaignSlug });
-    if (rpcError) console.error('[stories] story-count RPC error:', rpcError);
+    // Per-campaign daily ceiling. Fails open on a query error so an
+    // infrastructure hiccup never blocks a real storyteller.
+    try {
+      const startOfDay = new Date();
+      startOfDay.setHours(0, 0, 0, 0);
+      const { count, error: countError } = await admin
+        .from('stories')
+        .select('id', { count: 'exact', head: true })
+        .eq('campaign_id', campaign.id)
+        .gte('created_at', startOfDay.toISOString());
+      if (!countError && typeof count === 'number' && count >= CAMPAIGN_DAILY_STORY_CEILING) {
+        console.warn('[stories] campaign daily ceiling reached:', campaignSlug, count);
+        return NextResponse.json({ error: 'This campaign has received as many stories as it can take today. Please try again tomorrow.' }, { status: 429 });
+      }
+    } catch (err) {
+      console.error('[stories] campaign ceiling check failed:', err);
+    }
 
     const isAnon = attribution_level === 'anonymous';
     const trimmedName = (storyteller_name || '').trim();
@@ -205,6 +255,11 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Could not save your story. Please try again.' }, { status: 500 });
     }
     storyId = (inserted?.id as string) ?? null;
+
+    // Running count, only once the story is actually saved (a failed insert
+    // used to leave the count one too high; audit 2026-10-23).
+    const { error: rpcError } = await admin.rpc('increment_campaign_story_count', { campaign_slug: campaignSlug });
+    if (rpcError) console.error('[stories] story-count RPC error:', rpcError);
   }
 
   return NextResponse.json({

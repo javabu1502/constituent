@@ -52,7 +52,29 @@ export {
   type QueueItem, type SendQueueJob, type ProcessQueueOptions, type ProcessQueueSummary,
   type EnqueueResult,
 } from './queue';
-export { screenMessageForCwc, setComplianceScreener, type GateOutcome } from './compliance-gate';
+export {
+  screenMessageForCwc, setComplianceScreener, screeningKeyFor, bodyWithoutSalutation,
+  type GateOutcome, type ScreenSibling,
+} from './compliance-gate';
+export {
+  CWC_MESSAGE_STATUS, WEBFORM_MESSAGE_STATUS, SENT_TO_CONGRESS_STATUSES, NOT_DELIVERED_STATUSES,
+  countsAsSentToCongress, isNotDelivered, setMessageDeliveryStatus,
+  type ServerDeliveryStatus,
+} from './message-status';
+export {
+  notifyAdminHeld, notifyAdminOutcome, notifyAdminWebformFailed, notifyAdminAlert, notifyConstituent,
+  setCwcNotifiers, maskEmail, constituentEmailCopy,
+  type DeliveryRef, type ConstituentOutcome,
+} from './notify';
+export {
+  readQueueHealth, staleProblems, heartbeatLine, alertIfStale, runAtMostOncePer,
+  type QueueHealth,
+} from './queue-health';
+export {
+  runRetentionScrub, scrubCwcDelivery, scrubWebformConstituent,
+  TERMINAL_QUEUE_STATUSES, TERMINAL_WEBFORM_STATUSES, RETENTION_DAYS,
+  type RetentionSummary,
+} from './retention';
 export {
   resolveOfficeCode,
   houseOfficeCode,

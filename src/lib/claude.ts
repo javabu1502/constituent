@@ -93,7 +93,12 @@ export function deDash(text: string): string {
 export async function callClaude(
   systemPrompt: string,
   userPrompt: string,
-  maxTokens = 1200
+  maxTokens = 1200,
+  /** Sampling temperature. Omitted means the API default. Pass 0 where the
+   *  answer should be the same every time, as the compliance screener needs:
+   *  at the default, the same borderline message was held on one run and
+   *  refused outright on the next. */
+  options: { temperature?: number } = {}
 ): Promise<string> {
   const { ANTHROPIC_API_KEY, CLAUDE_MODEL } = env();
 
@@ -107,6 +112,7 @@ export async function callClaude(
     body: JSON.stringify({
       model: CLAUDE_MODEL || 'claude-sonnet-4-6',
       max_tokens: maxTokens,
+      ...(options.temperature !== undefined ? { temperature: options.temperature } : {}),
       system: systemPrompt,
       messages: [{ role: 'user', content: userPrompt }],
     }),

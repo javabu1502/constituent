@@ -2,6 +2,20 @@
  * Geocoding utilities to determine districts from addresses
  * Uses free Census Geocoder API for address-to-district lookup
  */
+import { CURRENT_CONGRESS } from './bills';
+
+/**
+ * Census vintage that carries each Congress's district map.
+ *
+ * "Current_Current" is whatever Census considers current, which is not the
+ * same thing as the Congress currently seated: during 2026 it advanced to the
+ * 120th map while the 119th was still in office. Pin it, and add the next
+ * entry when the roster moves.
+ */
+export const CENSUS_VINTAGE_BY_CONGRESS: Record<number, string> = {
+  119: 'ACS2024_Current',
+  120: 'Current_Current',
+};
 
 export interface GeocodedAddress {
   street: string;
@@ -188,7 +202,15 @@ export async function geocodeAddress(
     city: city,
     state: stateInfo.code,
     benchmark: 'Public_AR_Current',
-    vintage: 'Current_Current',
+    // Pinned to the seated Congress, NOT to "Current". Census moved
+    // Current_Current on to the 120th Congress map (seated January 2027)
+    // during 2026, while the member roster we look names up in is the 119th.
+    // That mismatch silently named the wrong representative for anyone in a
+    // state that redrew its map mid-decade: a Dallas address resolved to the
+    // 33rd instead of the 30th, Austin to the 10th instead of the 37th,
+    // Jefferson City to a district a hundred miles away and across party.
+    // Bump this with CURRENT_CONGRESS and the roster together.
+    vintage: CENSUS_VINTAGE_BY_CONGRESS[CURRENT_CONGRESS] ?? 'Current_Current',
     layers: 'all',
     format: 'json'
   });
@@ -227,6 +249,17 @@ export async function geocodeAddress(
     for (const key of Object.keys(geographies)) {
       if (key.toLowerCase().includes('congressional')) {
         const cdInfo = geographies[key]?.[0];
+        // The district must belong to the Congress whose roster we look names
+        // up in. Census stamps the session on the layer, so check it rather
+        // than trusting the vintage to mean what we expect. A mismatch is
+        // treated as unresolved: naming the wrong member is worse than naming
+        // none, and the caller already handles an unresolved district.
+        const session = (cdInfo as Record<string, string | undefined> | undefined)?.CDSESSN;
+        if (session && session !== String(CURRENT_CONGRESS)) {
+          console.error(`[geocode] Census returned ${key} (session ${session}) but we seat Congress ${CURRENT_CONGRESS}; treating the district as unresolved`);
+          congressionalDistrict = '0';
+          break;
+        }
         // Try various field names for the district number
         // The Census layer is re-keyed each Congress (CD118 → CD119 → CD120…);
         // take whichever CDnnn field is present so a re-key never silently

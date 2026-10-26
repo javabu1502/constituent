@@ -25,6 +25,22 @@ describe('stripSignatureBlock', () => {
     expect(stripSignatureBlock('My message.\n\nBest regards,\nJohn Smith\nBoston, MA')).toBe('My message.');
   });
 
+  it('strips intensified and long-form closings above a signature (production row #11, 2026-10-20)', () => {
+    const ask = 'Please support federal legislation on this issue, and urge your state-level counterparts to do the same.';
+    expect(stripSignatureBlock(`${ask}\n\nVery Respectfully,\nJane Doe\nLynchburg, VA 24502-5397`)).toBe(ask);
+    expect(stripSignatureBlock(`${ask}\n\nMost respectfully,\nJane Doe`)).toBe(ask);
+    expect(stripSignatureBlock(`${ask}\n\nRespectfully yours,\nJane Doe\nLynchburg, VA 24502`)).toBe(ask);
+    expect(stripSignatureBlock(`${ask}\n\nYours truly,\nJane Doe`)).toBe(ask);
+    expect(stripSignatureBlock(`${ask}\n\nWith gratitude,\nJane Doe`)).toBe(ask);
+    expect(stripSignatureBlock(`${ask}\n\nThank you so much for your time! \nSincerely,\nJane Q Doe\nLynchburg, VA 24515`)).toBe(ask);
+    expect(stripSignatureBlock(`${ask}\n\nVERY RESPECTFULLY\nJane Doe`)).toBe(ask);
+  });
+
+  it('flags an intensified closing that survives as a signature block', () => {
+    expect(containsSignatureBlock('Body.\n\nVery Respectfully,\n')).toBe(true);
+    expect(containsSignatureBlock('Body.\n\nMost Respectfully,')).toBe(true);
+  });
+
   it('leaves a body without a closing untouched', () => {
     const body = 'Please protect coverage. My family depends on it.';
     expect(stripSignatureBlock(body)).toBe(body);

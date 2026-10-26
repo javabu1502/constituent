@@ -39,7 +39,7 @@ import {
 
 import { analyzeForm, enhanceAnalysisFromDOM } from './analyzer';
 import { fillForm, preprocessData } from './filler';
-import { submitForm, goToNextPage } from './submitter';
+import { submitForm, goToNextPage, resolveSubmitButton, type SubmitFormResult } from './submitter';
 
 // Re-export types
 export * from './types';
@@ -47,6 +47,26 @@ export * from './types';
 /**
  * Configuration for the automation
  */
+/** No congressional contact form is deeper than this. Past it we stop. */
+export const MAX_FORM_PAGES = 5;
+
+/**
+ * A cheap fingerprint of the page we are filling: where we are plus the shape
+ * of the form on it. Two turns of the multi-page loop producing the same
+ * signature means the "next" button did not take us anywhere.
+ */
+export async function pageSignature(page: import('playwright').Page): Promise<string> {
+  try {
+    const counts = await page.evaluate(() => {
+      const n = (sel: string) => document.querySelectorAll(sel).length;
+      return `${n('input')}/${n('textarea')}/${n('select')}/${n('button')}`;
+    });
+    return `${page.url()}|${counts}`;
+  } catch {
+    return page.url();
+  }
+}
+
 export interface AutomationConfig {
   /** Browser options */
   browser?: BrowserOptions;
@@ -75,7 +95,7 @@ export async function submitToRepresentative(
   bioguideIdOrUrl: string,
   constituentData: ConstituentData,
   config: AutomationConfig
-): Promise<SubmissionResult> {
+): Promise<SubmitFormResult> {
   const startTime = Date.now();
   let pagesFilled = 0;
   let representativeId: string | undefined;
@@ -173,14 +193,35 @@ export async function submitToRepresentative(
       });
     }
 
-    // Handle multi-page forms
+    // Handle multi-page forms.
+    //
+    // Two guards, both learned the hard way (2026-10-25): neither this loop
+    // nor goToNextPage checked that the page actually CHANGED. A "next"
+    // button that does not navigate, or an analysis that keeps reporting one
+    // more page, span forever: every turn spends a vision call and the job
+    // holds its worker lease until the lease expires and it retries. A dry
+    // run against one Senate form ran past twenty minutes before being
+    // killed. So: stop after MAX_FORM_PAGES, and stop the moment a page
+    // repeats one we have already filled.
+    const seenPages = new Set<string>([await pageSignature(page)]);
     while (currentAnalysis.isMultiPage && currentAnalysis.nextButtonSelector) {
+      if (pagesFilled >= MAX_FORM_PAGES) {
+        console.warn(`[form] stopping at the ${MAX_FORM_PAGES}-page limit; the form kept asking for another page.`);
+        break;
+      }
       console.log('Navigating to next page...');
       const navigated = await goToNextPage(page, currentAnalysis);
 
       if (!navigated) {
         break;
       }
+
+      const signature = await pageSignature(page);
+      if (seenPages.has(signature)) {
+        console.warn('[form] the next button did not move us to a new page; stopping.');
+        break;
+      }
+      seenPages.add(signature);
 
       // Analyze the new page
       currentAnalysis = await analyzeForm(page, config.analyzer);
@@ -246,15 +287,34 @@ export async function submitToRepresentative(
         formUrl: contactFormUrl,
       };
     } else {
+      // Dry run: resolve the submit button exactly as a live send would, and
+      // report it, but never click. A dry run that cannot resolve a submit
+      // button is a failure, so the audit catches it before a real send does.
       console.log('Dry run - not submitting');
+      const resolved = await resolveSubmitButton(page, currentAnalysis);
+      if (!resolved) {
+        return {
+          success: false,
+          status: 'unknown_error',
+          errorType: 'unknown',
+          message: 'Dry run: form was filled but no submit button could be resolved (search buttons are excluded)',
+          timeTakenMs: Date.now() - startTime,
+          pagesFilled,
+          representativeId,
+          formUrl: contactFormUrl,
+        };
+      }
+      const where = resolved.scoped ? 'inside the message form' : 'page-wide';
+      console.log(`Dry run resolved submit button: ${resolved.selector} (${where})`);
       return {
         success: true,
         status: 'success',
-        message: 'Dry run completed - form was filled but not submitted',
+        message: `Dry run completed - form was filled but not submitted (submit: ${resolved.selector}, ${where})`,
         timeTakenMs: Date.now() - startTime,
         pagesFilled,
         representativeId,
         formUrl: contactFormUrl,
+        submitSelector: resolved.selector,
       };
     }
   } catch (error) {

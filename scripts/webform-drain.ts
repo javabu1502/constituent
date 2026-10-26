@@ -8,14 +8,55 @@
  * validation/CAPTCHA/network failure re-queues with backoff up to
  * max_attempts (3); success or exhaustion is terminal.
  *
+ * Delivery truth: a sent row writes `webform_delivered` to its messages row
+ * and emails the constituent; an exhausted row writes `webform_failed`,
+ * emails the admin (ADMIN_NOTIFY_EMAIL) with the last error, and emails the
+ * constituent. The worker needs RESEND_API_KEY and ADMIN_NOTIFY_EMAIL in its
+ * environment for those emails; without them the notifier logs a skip.
+ *
  * Kill switch: WEBFORM_DELIVERY_ENABLED must be 'true' or the worker exits.
  * Run: WEBFORM_DELIVERY_ENABLED=true npx tsx scripts/webform-drain.ts
  */
 import dotenv from 'dotenv';
 dotenv.config({ path: process.env.CWC_ENV_FILE ?? '.env.local' });
 import { createClient } from '@supabase/supabase-js';
+import { WEBFORM_MESSAGE_STATUS, setMessageDeliveryStatus } from '../src/lib/cwc/message-status';
+import { notifyAdminWebformFailed, notifyConstituent, type DeliveryRef } from '../src/lib/cwc/notify';
 
 const LIMIT = Number(process.env.WEBFORM_DRAIN_LIMIT ?? 5);
+/** Comfortably longer than a healthy run (about half a minute) and well
+ *  inside the 300-second claim lease. */
+const JOB_DEADLINE_MS = Number(process.env.WEBFORM_JOB_DEADLINE_MS ?? 180_000);
+
+class DeadlineError extends Error {}
+
+/** Reject if `work` has not settled within `ms`. The browser the engine owns
+ *  is torn down by its own finally block when the process moves on. */
+async function withDeadline<T>(work: Promise<T>, ms: number): Promise<T> {
+  let timer: NodeJS.Timeout | undefined;
+  try {
+    return await Promise.race([
+      work,
+      new Promise<never>((_, reject) => {
+        timer = setTimeout(() => reject(new DeadlineError(`form engine exceeded ${Math.round(ms / 1000)}s`)), ms);
+      }),
+    ]);
+  } finally {
+    if (timer) clearTimeout(timer);
+  }
+}
+
+interface WebformJob {
+  id: number;
+  message_key: string;
+  official_id: string;
+  official_name: string;
+  form_url: string;
+  attempts: number;
+  max_attempts: number;
+  constituent: Record<string, string>;
+  message: { subject: string; body: string; topic: string; messageId?: string };
+}
 
 (async () => {
   if (process.env.WEBFORM_DELIVERY_ENABLED !== 'true') {
@@ -26,7 +67,7 @@ const LIMIT = Number(process.env.WEBFORM_DRAIN_LIMIT ?? 5);
   const workerId = `webform:${process.env.GITHUB_RUN_ID ?? 'local'}:${Date.now()}`;
   const { data, error } = await sb.rpc('claim_webform_send_jobs', { p_worker: workerId, p_limit: LIMIT, p_lease_seconds: 300 });
   if (error) throw new Error(`claim failed: ${error.message}`);
-  const jobs = (data ?? []) as Array<{ id: number; official_name: string; form_url: string; attempts: number; max_attempts: number; constituent: Record<string, string>; message: { subject: string; body: string; topic: string } }>;
+  const jobs = (data ?? []) as WebformJob[];
   console.log(`claimed ${jobs.length} job(s)`);
   if (jobs.length === 0) return;
 
@@ -36,31 +77,59 @@ const LIMIT = Number(process.env.WEBFORM_DRAIN_LIMIT ?? 5);
       const { error: e } = await sb.from('webform_send_queue').update({ ...patch, leased_by: null, lease_expires_at: null, updated_at: new Date().toISOString() }).eq('id', job.id);
       if (e) console.error(`update ${job.id} failed:`, e.message);
     };
+    const ref: DeliveryRef = {
+      channel: 'webform',
+      messageId: job.message.messageId,
+      constituentEmail: job.constituent.email,
+      officialName: job.official_name,
+      officeCode: job.official_id,
+      queueId: job.id,
+      messageKey: job.message_key,
+      formUrl: job.form_url,
+    };
+    // Terminal failure: delivery truth + both notices. Best-effort.
+    const settleFailed = async (reason: string) => {
+      await setMessageDeliveryStatus(sb, job.message.messageId, WEBFORM_MESSAGE_STATUS.failed);
+      await notifyAdminWebformFailed({ ...ref, reason, attempts: job.attempts });
+      await notifyConstituent(ref, 'failed');
+    };
     try {
       const c = job.constituent;
-      const r = await submitToRepresentative(job.form_url, {
-        prefix: c.prefix, firstName: c.firstName, lastName: c.lastName, email: c.email, phone: c.phone,
-        street: c.street, city: c.city, state: c.state, zip: c.zip,
-        topic: job.message.topic, subject: job.message.subject, message: job.message.body,
-      }, {
-        browser: { headless: true, timeout: 45000 },
-        analyzer: { apiKey: process.env.ANTHROPIC_API_KEY || '', model: 'claude-sonnet-4-6' },
-        submit: true,
-      });
-      const result = { status: r.status, message: r.message, confirmationNumber: r.confirmationNumber ?? null, validationErrors: r.validationErrors ?? null, pagesFilled: r.pagesFilled, timeTakenMs: r.timeTakenMs };
+      // A job must never outlive its lease. The engine drives a real browser
+      // and calls a vision model per page, so a site that misbehaves can
+      // stall it; without a ceiling the lease expires mid-run and the row is
+      // retried while the first attempt is still going.
+      const r = await withDeadline(
+        submitToRepresentative(job.form_url, {
+          prefix: c.prefix, firstName: c.firstName, lastName: c.lastName, email: c.email, phone: c.phone,
+          street: c.street, city: c.city, state: c.state, zip: c.zip,
+          topic: job.message.topic, subject: job.message.subject, message: job.message.body,
+        }, {
+          browser: { headless: true, timeout: 45000 },
+          analyzer: { apiKey: process.env.ANTHROPIC_API_KEY || '', model: 'claude-sonnet-4-6' },
+          submit: true,
+        }),
+        JOB_DEADLINE_MS,
+      );
+      const result = { status: r.status, message: r.message, confirmationNumber: r.confirmationNumber ?? null, validationErrors: r.validationErrors ?? null, pagesFilled: r.pagesFilled, timeTakenMs: r.timeTakenMs, submitSelector: r.submitSelector ?? null };
       if (r.success) {
         console.log(`#${job.id} ${job.official_name}: SENT ${r.confirmationNumber ?? ''}`);
         await finish({ status: 'sent', result, last_error: null });
+        await setMessageDeliveryStatus(sb, job.message.messageId, WEBFORM_MESSAGE_STATUS.delivered);
+        await notifyConstituent(ref, 'delivered');
       } else {
         const exhausted = job.attempts >= job.max_attempts;
         console.log(`#${job.id} ${job.official_name}: ${r.status} (${exhausted ? 'failed' : 'retry'}) ${r.message.slice(0, 120)}`);
-        await finish({ status: exhausted ? 'failed' : 'queued', result, last_error: `${r.status}: ${r.message.slice(0, 500)}`, run_after: new Date(Date.now() + 30 * 60_000).toISOString() });
+        const lastError = `${r.status}: ${r.message.slice(0, 500)}`;
+        await finish({ status: exhausted ? 'failed' : 'queued', result, last_error: lastError, run_after: new Date(Date.now() + 30 * 60_000).toISOString() });
+        if (exhausted) await settleFailed(lastError);
       }
     } catch (e) {
       const msg = (e as Error).message;
       const exhausted = job.attempts >= job.max_attempts;
       console.error(`#${job.id} ${job.official_name}: exception ${msg.slice(0, 200)}`);
       await finish({ status: exhausted ? 'failed' : 'queued', last_error: msg.slice(0, 500), run_after: new Date(Date.now() + 30 * 60_000).toISOString() });
+      if (exhausted) await settleFailed(msg.slice(0, 500));
     }
   }
   await shutdown();

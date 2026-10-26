@@ -29,9 +29,10 @@ export const metadata: Metadata = {
     icon: '/icon.svg',
     apple: '/apple-touch-icon.png',
   },
-  alternates: {
-    canonical: 'https://www.mydemocracy.app/',
-  },
+  // No canonical here. A canonical in the root layout is inherited by every
+  // page that does not set its own, which told search engines that all 38
+  // guides, the privacy page and the terms page were duplicates of the home
+  // page. Pages that need a canonical set it in their own metadata.
   openGraph: {
     title: 'My Democracy | Find Your Reps, See How They Vote, Write to Them',
     description:

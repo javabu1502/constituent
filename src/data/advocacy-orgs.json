@@ -19,7 +19,7 @@
     ],
     "conservative": [
       { "name": "Heritage Foundation - Health", "url": "https://www.heritage.org/health-care-reform" },
-      { "name": "Americans for Prosperity - Healthcare", "url": "https://americansforprosperity.org/issue/health-care/" },
+      { "name": "Americans for Prosperity - Healthcare", "url": "https://americansforprosperity.org/health-care/" },
       { "name": "Paragon Health Institute", "url": "https://paragoninstitute.org/" }
     ]
   },
@@ -56,7 +56,7 @@
     "conservative": [
       { "name": "Heritage Foundation - Education", "url": "https://www.heritage.org/education" },
       { "name": "American Federation for Children", "url": "https://www.federationforchildren.org/" },
-      { "name": "Reason Foundation - Education", "url": "https://reason.org/topic/education/" }
+      { "name": "Reason Foundation - Education", "url": "https://reason.org/topics/education/" }
     ]
   },
   "Taxation": {
@@ -77,7 +77,7 @@
       { "name": "National Housing Law Project", "url": "https://www.nhlp.org/" }
     ],
     "conservative": [
-      { "name": "Reason Foundation - Housing", "url": "https://reason.org/topic/housing/" },
+      { "name": "Reason Foundation - Housing", "url": "https://reason.org/topics/housing/" },
       { "name": "Cato Institute - Housing", "url": "https://www.cato.org/research/housing" }
     ]
   },
@@ -99,7 +99,7 @@
     ],
     "conservative": [
       { "name": "Heritage Foundation - Defense", "url": "https://www.heritage.org/defense" },
-      { "name": "American Enterprise Institute - Defense", "url": "https://www.aei.org/policy-areas/defense-and-national-security/" },
+      { "name": "American Enterprise Institute - Defense", "url": "https://www.aei.org/policy-areas/foreign-defense-policy/" },
       { "name": "Foundation for Defense of Democracies", "url": "https://www.fdd.org/" }
     ]
   },
@@ -111,8 +111,7 @@
     ],
     "conservative": [
       { "name": "Heritage Action", "url": "https://heritageaction.com/" },
-      { "name": "Judicial Watch", "url": "https://www.judicialwatch.org/" },
-      { "name": "FreedomWorks", "url": "https://www.freedomworks.org/" }
+      { "name": "Judicial Watch", "url": "https://www.judicialwatch.org/" }
     ]
   },
   "Law": {
@@ -144,7 +143,7 @@
       { "name": "National Resources Defense Council", "url": "https://www.nrdc.org/" }
     ],
     "conservative": [
-      { "name": "Reason Foundation - Transportation", "url": "https://reason.org/topic/transportation/" },
+      { "name": "Reason Foundation - Transportation", "url": "https://reason.org/topics/transportation/" },
       { "name": "Competitive Enterprise Institute", "url": "https://cei.org/" }
     ]
   },
@@ -167,7 +166,7 @@
     "conservative": [
       { "name": "TechFreedom", "url": "https://techfreedom.org/" },
       { "name": "Information Technology and Innovation Foundation", "url": "https://itif.org/" },
-      { "name": "R Street Institute - Technology", "url": "https://www.rstreet.org/issue/technology-and-innovation/" }
+      { "name": "R Street Institute - Technology", "url": "https://www.rstreet.org/home/our-issues/technology-and-innovation/" }
     ]
   },
   "International Affairs": {

@@ -26,7 +26,11 @@ export async function GET() {
   const { data, error } = await admin
     .from('message_compliance')
     .select('id, message_key, decision, reasons, categories, message_excerpt, model, created_at')
-    .eq('decision', 'review')
+    // Blocked messages are listed too. A block means a person's message to
+    // their representative was refused outright, and until now that produced
+    // a database row nobody was told about and nobody could see, so a false
+    // positive was unappealable and a real threat went unreported.
+    .in('decision', ['review', 'block'])
     .is('reviewed_at', null)
     .order('created_at', { ascending: true })
     .limit(100);

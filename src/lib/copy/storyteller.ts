@@ -31,10 +31,12 @@ const en = {
   needMoreHint: 'A little more detail first. The draft is built only from what you write here.',
   connectError: 'Sorry, we could not connect just now. Please try again.',
   somethingWrong: 'Something went wrong',
-  composeFailed: 'Could not compose your story',
-  editFailed: 'Could not make that edit',
-  prepareFailed: 'Could not prepare your story',
-  submitFailed: 'Could not submit your story',
+  tooManyRequests: 'Too many requests right now. Wait a minute and try again.',
+  composeFailed: 'Could not compose your story. Please try again.',
+  editFailed: 'Could not make that edit. Please try again.',
+  prepareFailed: 'Could not prepare your story. Please try again.',
+  submitFailed: 'Could not submit your story. Please try again.',
+  anonymizeFailed: 'We could not anonymize your story just now, so nothing was saved. Please try again in a moment.',
   withdrawFailed: 'Could not withdraw the story',
   withdrawn: 'Your story was withdrawn. The campaign can no longer see it.',
 
@@ -100,6 +102,7 @@ const en = {
   vConfirmAdult: 'Please confirm you are 18 or older, or a parent or guardian sharing a family experience.',
   vEnterName: 'Please enter the name you would like used, or choose to stay anonymous.',
   vEnterAddress: 'Please enter your address. The street is used only to confirm you are a constituent and is never stored.',
+  vEnterValidEmail: 'Please enter a valid email address, or leave the box empty.',
 
   // Preview (anonymous)
   previewTitle: 'This is what the campaign will receive',
@@ -121,6 +124,8 @@ const en = {
   changedMind: 'Changed your mind? You can',
   withdrawNow: 'withdraw it now',
   keepLink: '. To withdraw later, keep this link:',
+  copyLink: 'Copy link',
+  linkCopied: 'Link copied',
   shareText: (headline: string) => `I shared my story with "${headline}". You can share yours here:`,
   shareTitle: (headline: string) => `Share your story: ${headline}`,
   sharePrompt: 'Know someone with a story? Send them the campaign link.',
@@ -151,10 +156,12 @@ const es: StorytellerCopy = {
   needMoreHint: 'Un poco más de detalle primero. El borrador se construye solo con lo que usted escribe aquí.',
   connectError: 'Lo sentimos, no pudimos conectar en este momento. Inténtelo de nuevo.',
   somethingWrong: 'Algo salió mal',
-  composeFailed: 'No pudimos redactar su historia',
-  editFailed: 'No pudimos hacer ese cambio',
-  prepareFailed: 'No pudimos preparar su historia',
-  submitFailed: 'No pudimos enviar su historia',
+  tooManyRequests: 'Demasiadas solicitudes en este momento. Espere un minuto e inténtelo de nuevo.',
+  composeFailed: 'No pudimos redactar su historia. Inténtelo de nuevo.',
+  editFailed: 'No pudimos hacer ese cambio. Inténtelo de nuevo.',
+  prepareFailed: 'No pudimos preparar su historia. Inténtelo de nuevo.',
+  submitFailed: 'No pudimos enviar su historia. Inténtelo de nuevo.',
+  anonymizeFailed: 'No pudimos anonimizar su historia en este momento, así que no se guardó nada. Inténtelo de nuevo en un momento.',
   withdrawFailed: 'No pudimos retirar la historia',
   withdrawn: 'Su historia fue retirada. La campaña ya no puede verla.',
 
@@ -218,6 +225,7 @@ const es: StorytellerCopy = {
   vConfirmAdult: 'Confirme que tiene 18 años o más, o que es padre, madre o tutor y comparte una experiencia familiar.',
   vEnterName: 'Escriba el nombre que quiere que se use, o elija permanecer en el anonimato.',
   vEnterAddress: 'Escriba su dirección. La calle se usa solo para confirmar que es un constituyente y nunca se guarda.',
+  vEnterValidEmail: 'Escriba un correo electrónico válido o deje la casilla vacía.',
 
   previewTitle: 'Esto es lo que recibirá la campaña',
   previewNote: 'Quitamos nombres, lugares y otros detalles que podrían identificarle. Léalo una vez más. Todavía no se ha guardado nada.',
@@ -237,6 +245,8 @@ const es: StorytellerCopy = {
   changedMind: '¿Cambió de opinión? Puede',
   withdrawNow: 'retirarla ahora',
   keepLink: '. Para retirarla más tarde, guarde este enlace:',
+  copyLink: 'Copiar enlace',
+  linkCopied: 'Enlace copiado',
   shareText: (headline: string) => `Compartí mi historia con "${headline}". Usted puede compartir la suya aquí:`,
   shareTitle: (headline: string) => `Comparta su historia: ${headline}`,
   sharePrompt: '¿Conoce a alguien con una historia? Envíele el enlace de la campaña.',
@@ -245,4 +255,21 @@ const es: StorytellerCopy = {
 
 export function storytellerCopy(language: string | null | undefined): StorytellerCopy {
   return language === 'es' ? es : en;
+}
+
+/** The exact text the "Rather not say" button puts in the box, in each
+ *  language. These are not the storyteller's words and never count toward
+ *  the word gate for composing a draft. */
+export const RATHER_NOT_SAY_INPUTS: readonly string[] = [en.ratherNotSayInput, es.ratherNotSayInput];
+
+export function isRatherNotSay(text: string): boolean {
+  return RATHER_NOT_SAY_INPUTS.includes(text.trim());
+}
+
+/** Words the storyteller actually wrote: every user turn except the
+ *  "Rather not say" button text. */
+export function tellerWordCount(messages: ReadonlyArray<{ role: string; content: string }>): number {
+  return messages
+    .filter((m) => m.role === 'user' && !isRatherNotSay(m.content))
+    .reduce((n, m) => n + m.content.split(/\s+/).filter(Boolean).length, 0);
 }

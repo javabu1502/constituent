@@ -52,15 +52,47 @@ export type OfficeResolution =
   | { ok: true; code: string }
   | { ok: false; reason: string };
 
+/**
+ * The places with exactly one House seat, which CWC encodes as district 00.
+ * Seven single-district states after the 2020 census, plus DC and the
+ * territories, whose delegates sit in the House. Everywhere else, 00 is not a
+ * district, so a lookup that lands on it is a failure, not an at-large seat.
+ */
+export const AT_LARGE_HOUSE_STATES: ReadonlySet<string> = new Set([
+  'AK', 'DE', 'ND', 'SD', 'VT', 'WY', 'MT',
+  'DC', 'PR', 'VI', 'GU', 'AS', 'MP',
+]);
+
 /** House seat code from a state + district. At-large / single-district → 00. */
 export function houseOfficeCode(state: string, district: string | number | undefined): OfficeResolution {
   const st = state?.toUpperCase();
   if (!CWC_STATE_CODES.has(st)) return { ok: false, reason: `unknown state "${state}"` };
-  // Extract the numeric district; absent/"At-Large" means the state's single
-  // seat, which CWC encodes as 00.
-  const digits = district === undefined ? '' : String(district).match(/\d+/)?.[0] ?? '';
-  const dd = digits === '' ? '00' : digits.padStart(2, '0');
+  // A missing or unparseable district is NOT at-large. It used to become 00,
+  // which for a 38-seat state is a code for an office that does not exist,
+  // and which passed our own validator. Only a state that really has one
+  // seat may use 00, and it has to say so.
+  const raw = district === undefined || district === null ? '' : String(district).trim();
+  const digits = raw.match(/\d+/)?.[0] ?? '';
+  if (digits === '') {
+    if (raw === '' || /^at[- ]?large$/i.test(raw)) {
+      return AT_LARGE_HOUSE_STATES.has(st)
+        ? { ok: true, code: `H${st === 'AS' ? 'AQ' : st}00` }
+        : { ok: false, reason: `no district given for ${st}, which has more than one House seat` };
+    }
+    return { ok: false, reason: `district "${district}" is not a number` };
+  }
+  const dd = digits.padStart(2, '0');
   if (dd.length !== 2) return { ok: false, reason: `district "${district}" out of range` };
+  // 98 and 99 are Census sentinels for "not defined", never real seats.
+  if (dd === '98' || dd === '99') return { ok: false, reason: `district "${district}" is a placeholder, not a seat` };
+  // 00 is the single-seat encoding, so a numbered state cannot use it and a
+  // single-seat state cannot use anything else.
+  if (dd === '00' && !AT_LARGE_HOUSE_STATES.has(st)) {
+    return { ok: false, reason: `${st} has more than one House seat, so 00 is not a valid district` };
+  }
+  if (dd !== '00' && AT_LARGE_HOUSE_STATES.has(st)) {
+    return { ok: false, reason: `${st} has a single at-large seat, so district "${district}" does not exist` };
+  }
   // American Samoa's House office code is AQ00, not AS00 — the House remapped it
   // to avoid a clash with the Armed Services (AS) committee name. The
   // constituent's StateAbbreviation stays "AS"; only the office code changes.

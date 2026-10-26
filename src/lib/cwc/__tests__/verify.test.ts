@@ -36,7 +36,10 @@ describe('verifyConstituent — House', () => {
     mockGeo.mockResolvedValue(geo({ congressionalDistrict: '0' }));
     const r = await verifyConstituent(addr, official({ chamber: 'house', district: '12' }));
     expect(r.ok).toBe(false);
-    if (!r.ok) expect(r.reason).toBe('DISTRICT_MISMATCH');
+    // '0' in a multi-seat state is an unresolved lookup, not district 00.
+    // It used to be turned into a code for an at-large seat the state does
+    // not have, which then failed as a mismatch. Now it is refused outright.
+    if (!r.ok) expect(r.reason).toBe('UNRESOLVED');
   });
 
   it('allows a genuine at-large match', async () => {
@@ -95,7 +98,7 @@ describe('verifyConstituentForOffice (delivery-shaped, mandatory in production)'
     mockGeo.mockResolvedValue(geo({ stateCode: 'NY' }));
     const { verifyConstituentForOffice } = await import('../verify');
     const r = await verifyConstituentForOffice(delivery());
-    expect(r).toEqual({ ok: true, officeCode: 'SNY01' });
+    expect(r).toEqual({ ok: true, officeCode: 'SNY01', verifiedBy: 'geocode' });
   });
 
   it('senate: refuses when the address geocodes to another state', async () => {
@@ -121,11 +124,46 @@ describe('verifyConstituentForOffice (delivery-shaped, mandatory in production)'
     expect(r).toEqual({ ok: true, officeCode: 'HNY12' });
   });
 
-  it('fails closed when geocoding errors', async () => {
+  it('fails closed when geocoding errors on a House seat', async () => {
     mockGeo.mockResolvedValue({ error: 'No match', code: 'NO_MATCH' });
     const { verifyConstituentForOffice } = await import('../verify');
-    const r = await verifyConstituentForOffice(delivery());
+    const r = await verifyConstituentForOffice(delivery({ chamber: 'house', officeCode: 'HNY12' }));
     expect(r.ok).toBe(false);
     if (!r.ok) expect(r.reason).toBe('GEOCODE_FAILED');
+  });
+
+  // A senator represents the whole state, so an unmatchable street (campus
+  // roads, rural routes) must not block an in-state constituent.
+  it('senate: an unmatchable street falls back to the declared state', async () => {
+    mockGeo.mockResolvedValue({ error: 'Address not found', code: 'NO_MATCH' });
+    const { verifyConstituentForOffice } = await import('../verify');
+    const r = await verifyConstituentForOffice(
+      delivery({
+        officeCode: 'SVA01',
+        constituent: { prefix: 'Mr.', firstName: 'A', lastName: 'B', address1: 'Liberty Mountain Drive', city: 'Lynchburg', state: 'VA', zip: '24502', email: 'a@b.edu' },
+      }),
+    );
+    expect(r).toEqual({ ok: true, officeCode: 'SVA01', verifiedBy: 'declared_state' });
+  });
+
+  it('senate: the fallback still refuses a state that does not match the seat', async () => {
+    mockGeo.mockResolvedValue({ error: 'Address not found', code: 'NO_MATCH' });
+    const { verifyConstituentForOffice } = await import('../verify');
+    const r = await verifyConstituentForOffice(
+      delivery({
+        officeCode: 'SVA01',
+        constituent: { prefix: 'Mr.', firstName: 'A', lastName: 'B', address1: 'Nowhere Rd', city: 'Bethesda', state: 'MD', zip: '20814', email: 'a@b.edu' },
+      }),
+    );
+    expect(r.ok).toBe(false);
+    if (!r.ok) expect(r.reason).toBe('STATE_MISMATCH');
+  });
+
+  it('senate: a geocoder outage still retries rather than falling back', async () => {
+    mockGeo.mockResolvedValue({ error: 'Census is down', code: 'API_ERROR' });
+    const { verifyConstituentForOffice } = await import('../verify');
+    const r = await verifyConstituentForOffice(delivery({ officeCode: 'SVA01' }));
+    expect(r.ok).toBe(false);
+    if (!r.ok) { expect(r.reason).toBe('GEOCODE_FAILED'); expect(r.transient).toBe(true); }
   });
 });
