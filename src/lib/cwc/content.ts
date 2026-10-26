@@ -227,6 +227,11 @@ export function cwcSendableProblems(input: {
   if (m.bills?.length && !m.stance) {
     problems.push('a federal bill is referenced but message.stance (ProOrCon) is missing — George requires pro/con with any bill reference');
   }
+  // The subject is user-editable and reaches the wire, so it is held to the
+  // same no-name-no-address rule as the body.
+  if (input.constituent && m.subject && containsConstituentPii(m.subject, input.constituent)) {
+    problems.push("message.subject contains the constituent's name or street address — it is already carried in the <Constituent> tags, and offices group messages by subject");
+  }
   for (const [label, text] of [
     ['constituentMessage', m.constituentMessage],
     ['organizationStatement', m.organizationStatement],

@@ -91,7 +91,8 @@ describe('buildCwcQueueItem', () => {
     expect(r.item.messageKey).toMatch(/^cwc:[0-9a-f]{40}$/);
     expect(r.item.billLevel).toBe('none');
     expect(r.item.delivery.constituent).toMatchObject({
-      prefix: 'Ms.', firstName: 'Jane', lastName: 'Q Doe', state: 'NV', zip: '89501',
+      // A lone middle initial goes in its own field; the surname stands alone.
+      prefix: 'Ms.', firstName: 'Jane', middleName: 'Q.', lastName: 'Doe', state: 'NV', zip: '89501',
     });
     expect(r.item.delivery.message.topics.length).toBeGreaterThan(0);
   });
@@ -161,5 +162,27 @@ describe('buildCwcQueueItem', () => {
     if (!a.ok || !b.ok) return;
     // Same issue → same CWC campaign id (offices group by campaign).
     expect(a.item.delivery.campaignId).toBe(b.item.delivery.campaignId);
+  });
+});
+
+describe('name splitting and campaign grouping', () => {
+  it('lifts a lone middle initial, with or without a period', async () => {
+    const { splitConstituentName } = await import('../enqueue-from-send');
+    expect(splitConstituentName(['Jane', 'Q', 'Doe'])).toEqual({ firstName: 'Jane', middleName: 'Q.', lastName: 'Doe' });
+    expect(splitConstituentName(['Jane', 'q.', 'Doe'])).toEqual({ firstName: 'Jane', middleName: 'Q.', lastName: 'Doe' });
+  });
+
+  it('never guesses at a compound surname', async () => {
+    const { splitConstituentName } = await import('../enqueue-from-send');
+    // Taking the last token would wrongly drop "Van" and "de la".
+    expect(splitConstituentName(['Mary', 'Van', 'Buren'])).toEqual({ firstName: 'Mary', lastName: 'Van Buren' });
+    expect(splitConstituentName(['Jose', 'de', 'la', 'Cruz'])).toEqual({ firstName: 'Jose', lastName: 'de la Cruz' });
+    // A full middle name is ambiguous from one string, so it stays put.
+    expect(splitConstituentName(['Ashleigh', 'Karen', 'McGinnis'])).toEqual({ firstName: 'Ashleigh', lastName: 'Karen McGinnis' });
+  });
+
+  it('two names are unchanged', async () => {
+    const { splitConstituentName } = await import('../enqueue-from-send');
+    expect(splitConstituentName(['Jane', 'Doe'])).toEqual({ firstName: 'Jane', lastName: 'Doe' });
   });
 });

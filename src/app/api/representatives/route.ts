@@ -104,20 +104,28 @@ export async function POST(request: NextRequest): Promise<NextResponse<LookupRes
     officials.push(...senators);
 
     // Federal representative (1)
+    //
+    // '0' is the geocoder's unresolved sentinel as well as an at-large
+    // district, so it is handled on its own. There used to be a fallback here
+    // that tried district 1 when district 0 found nobody, which meant any
+    // unresolved lookup in a multi-district state handed the message to that
+    // state's first representative. An at-large state does not need it:
+    // Census returns '00' for those, which resolves on the branch above.
+    let houseWarning: string | null = null;
     if (geocodeResult.congressionalDistrict && geocodeResult.congressionalDistrict !== '0') {
       const rep = findRepresentative(geocodeResult.stateCode, geocodeResult.congressionalDistrict);
       if (rep) {
         officials.push(rep);
+      } else {
+        // The district resolved but we have nobody on file for it: a seat
+        // filled since the roster was last refreshed, or a vacancy. Say so
+        // rather than quietly returning senators only.
+        houseWarning = `We could not find a current House member on file for ${geocodeResult.stateCode}-${geocodeResult.congressionalDistrict}. Your senators are listed below.`;
+        console.error(`[representatives] no member on file for ${geocodeResult.stateCode}-${geocodeResult.congressionalDistrict}`);
       }
     } else {
-      // At-large districts - try district 0 or 1
-      let rep = findRepresentative(geocodeResult.stateCode, 0);
-      if (!rep) {
-        rep = findRepresentative(geocodeResult.stateCode, 1);
-      }
-      if (rep) {
-        officials.push(rep);
-      }
+      const rep = findRepresentative(geocodeResult.stateCode, 0);
+      if (rep) officials.push(rep);
     }
 
     // Step 3: Look up state legislators
@@ -150,6 +158,7 @@ export async function POST(request: NextRequest): Promise<NextResponse<LookupRes
         stateUpperDistrict: geocodeResult.stateUpperDistrict,
         stateLowerDistrict: geocodeResult.stateLowerDistrict,
       },
+      ...(houseWarning ? { warning: houseWarning } : {}),
     };
 
     return NextResponse.json(result);

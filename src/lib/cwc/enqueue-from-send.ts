@@ -75,6 +75,26 @@ function toStateCode(raw: string): string | null {
 }
 
 /** Campaign bill context → the queue's fail-closed billLevel + bill payload. */
+/**
+ * Split a typed full name into the fields the spec wants: the surname alone
+ * in LastName, a middle name in MiddleName.
+ *
+ * We only lift a middle name when it is unmistakably one: a single initial,
+ * with or without a period. Everything else keeps the whole remainder as the
+ * surname, because three capitalised words are genuinely ambiguous from one
+ * string, and guessing wrong on a compound surname ("Mary Van Buren", "Jose
+ * de la Cruz") is worse than leaving a middle name in place. Collecting the
+ * parts separately in the form is the real fix.
+ */
+export function splitConstituentName(parts: string[]): { firstName: string; middleName?: string; lastName: string } {
+  const [first, ...rest] = parts;
+  if (rest.length >= 2 && /^[A-Za-z]\.?$/.test(rest[0])) {
+    const initial = rest[0].replace(/\.$/, '').toUpperCase();
+    return { firstName: first, middleName: `${initial}.`, lastName: rest.slice(1).join(' ') };
+  }
+  return { firstName: first, lastName: rest.join(' ') };
+}
+
 function billContext(campaign: CampaignBillContext | null): {
   billLevel: 'federal' | 'none' | null;
   bill: CwcBill | null;
@@ -164,8 +184,19 @@ export function buildCwcQueueItem(opts: {
 
   const nameParts = body.advocate_name.trim().split(/\s+/);
   if (nameParts.length < 2) return { ok: false, skip: 'advocate name has no last name' };
+  const name = splitConstituentName(nameParts);
 
-  const campaignRef = campaign?.slug ?? `contact-${(body.issue_area + '-' + body.issue_subtopic).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '')}`;
+  const topics = locTopicsForIssueArea(body.issue_area, campaign?.headline ?? undefined, body.issue_subtopic);
+  // CampaignId is how an office rolls our deliveries up. A campaign has a
+  // stable slug. The contact flow has no campaign, and it used to build the
+  // ref out of the free-text issue and subtopic, so five ways of saying one
+  // thing ("insulin prices", "insulin pricing", "the cost of insulin") became
+  // five campaigns. That is the complaint the Senate raised with vendors:
+  // eighteen single-message campaigns about one subject. Group instead on the
+  // Library of Congress topic, which is one of thirty-two fixed values. When
+  // the message cites a bill, buildCampaignId folds the bill and the stance in
+  // on top, so bill-specific mail still groups per bill and per side.
+  const campaignRef = campaign?.slug ?? `contact-${topics[0].toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '')}`;
 
   const delivery: CwcDelivery = {
     chamber,
@@ -176,8 +207,9 @@ export function buildCwcQueueItem(opts: {
     officialName: body.legislator_name?.trim() || undefined,
     constituent: {
       prefix: cwc.prefix,
-      firstName: nameParts[0],
-      lastName: nameParts.slice(1).join(' '),
+      firstName: name.firstName,
+      ...(name.middleName ? { middleName: name.middleName } : {}),
+      lastName: name.lastName,
       address1: cwc.street,
       city: body.advocate_city,
       state,
@@ -186,7 +218,7 @@ export function buildCwcQueueItem(opts: {
     },
     message: {
       subject: cwc.subject,
-      topics: locTopicsForIssueArea(body.issue_area, campaign?.headline ?? undefined, body.issue_subtopic),
+      topics,
       ...(bill ? { bills: [bill] } : {}),
       ...(stance ? { stance } : {}),
       constituentMessage: body.message_body,

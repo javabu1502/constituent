@@ -180,7 +180,9 @@ export function buildCwcXml(delivery: CwcDelivery): string {
   // "DeliveryAgent Mismatch").
   const deliveryAgent =
     delivery.chamber === 'house'
-      ? process.env.CWC_HOUSE_DELIVERY_AGENT || requireEnv('CWC_DELIVERY_AGENT')
+      // Required outright, not defaulted. Falling back to the Senate name
+      // would make every House send a 401 rather than fail here.
+      ? requireEnv('CWC_HOUSE_DELIVERY_AGENT')
       : requireEnv('CWC_DELIVERY_AGENT');
   L.push(tag('DeliveryAgent', deliveryAgent));
   L.push(tag('DeliveryAgentAckEmailAddress', requireEnv('CWC_ACK_EMAIL')));
@@ -236,7 +238,11 @@ export function buildCwcXml(delivery: CwcDelivery): string {
   L.push('</Constituent>');
 
   L.push('<Message>');
-  L.push(tag('Subject', m.subject.trim()));
+  // The subject takes the same PII pass as the body. Offices group messages
+  // by similarity, and a name or street in the subject throws that grouping
+  // off exactly as it does in the body. It is user-editable, so this is the
+  // one place it could otherwise reach the wire.
+  L.push(tag('Subject', redactConstituentPii(m.subject.trim(), c).trim() || m.subject.trim()));
   L.push('<LibraryOfCongressTopics>');
   for (const t of m.topics) L.push(tag('LibraryOfCongressTopic', t));
   L.push('</LibraryOfCongressTopics>');

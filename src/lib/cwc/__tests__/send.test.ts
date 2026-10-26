@@ -12,6 +12,7 @@ import type { CwcResult } from '../client';
 beforeEach(() => {
   clearActiveOfficeCache();
   process.env.CWC_DELIVERY_AGENT = 'My Democracy LLC';
+  process.env.CWC_HOUSE_DELIVERY_AGENT = 'MyDemocracy';
   process.env.CWC_ACK_EMAIL = 'ack@mydemocracy.app';
   process.env.CWC_CONTACT_NAME = 'Jared Busker';
   process.env.CWC_CONTACT_EMAIL = 'jared@busker.consulting';
