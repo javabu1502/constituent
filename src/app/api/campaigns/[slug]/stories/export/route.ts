@@ -111,11 +111,12 @@ export async function GET(
     if (useFilter && !grantedValues.includes(useFilter)) return false;
     if (officialFilter && !officials.includes(officialFilter)) return false;
     if (q) {
+      const restricted = grantedValues.length === 0;
       const haystack = [
         isAnon ? '' : s.storyteller_name ?? '',
-        s.title ?? '',
-        s.body ?? '',
-        s.body_en ?? '',
+        restricted ? '' : s.title ?? '',
+        restricted ? '' : s.body ?? '',
+        restricted ? '' : s.body_en ?? '',
         isAnon ? '' : s.city ?? '',
         isAnon ? '' : s.state ?? '',
         isAnon ? '' : s.storyteller_email ?? '',
@@ -128,11 +129,18 @@ export async function GET(
     return true;
   });
 
-  const headers = ['Date', 'Attribution', 'Name', 'City', 'State', 'Contact Email', 'Represented By', 'Title', 'Story', 'Story (English)', 'Granted Uses'];
+  // A storyteller who grants no use at all has told us the campaign may read
+  // their story but not use it elsewhere, and a file is the thing that
+  // travels. Those rows stay in the export so the organization can see the
+  // story exists and why it is restricted, but the text does not leave the
+  // dashboard in a spreadsheet.
+  const headers = ['Date', 'Attribution', 'Name', 'City', 'State', 'Contact Email', 'Represented By', 'Title', 'Story', 'Story (English)', 'Granted Uses', 'Usable'];
   const rows = filtered.map((s) => {
     const isAnon = s.attribution_level === 'anonymous';
     const snapshot = (s.consent_usage_snapshot ?? {}) as { granted_uses?: string[] };
-    const uses = usageLabels(snapshot.granted_uses ?? []).join('; ');
+    const granted = snapshot.granted_uses ?? [];
+    const uses = usageLabels(granted).join('; ');
+    const restricted = granted.length === 0;
     const shared = s.shared_reps as Array<{ name?: string; title?: string | null }> | null;
     const reps =
       !isAnon && Array.isArray(shared)
@@ -150,10 +158,11 @@ export async function GET(
       isAnon ? '' : s.state ?? '',
       isAnon ? '' : s.storyteller_email ?? '',
       reps,
-      s.title ?? '',
-      s.body ?? '',
-      s.body_en ?? '',
-      uses,
+      restricted ? '' : s.title ?? '',
+      restricted ? 'Withheld. This storyteller granted no uses.' : s.body ?? '',
+      restricted ? '' : s.body_en ?? '',
+      restricted ? 'None' : uses,
+      restricted ? 'Dashboard only' : 'Yes, within the granted uses',
     ];
   });
 

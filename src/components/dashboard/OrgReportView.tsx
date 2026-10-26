@@ -47,12 +47,44 @@ export async function OrgReportView({
   const allIds = all.map((c) => c.id as string);
   const topOf = new Map(all.map((c) => [c.id as string, (c.parent_campaign_id as string | null) ?? (c.id as string)]));
 
-  const [{ data: msgRows }, { data: noteRows }, { data: posRows }, { data: stakeRows }] = await Promise.all([
+  const [{ data: msgRows }, { data: noteRows }, { data: posRows }, { data: stakeRows }, { data: storyRows }] = await Promise.all([
     allIds.length ? admin.from('messages').select('campaign_id, legislator_id').in('campaign_id', allIds).limit(10000) : Promise.resolve({ data: [] }),
     allIds.length ? admin.from('campaign_notes').select('campaign_id, hours').in('campaign_id', allIds).limit(5000) : Promise.resolve({ data: [] }),
     allIds.length ? admin.from('legislator_positions').select('campaign_id, position').in('campaign_id', allIds).limit(5000) : Promise.resolve({ data: [] }),
     allIds.length ? admin.from('campaign_stakeholders').select('campaign_id, side').in('campaign_id', allIds).limit(2000) : Promise.resolve({ data: [] }),
+    allIds.length
+      ? admin.from('stories').select('campaign_id, attribution_level, consent_usage_snapshot, state, language, storyteller_email').in('campaign_id', allIds).eq('status', 'active').limit(5000)
+      : Promise.resolve({ data: [] }),
   ]);
+
+  // A storytelling organization's portfolio is its stories. Counting only
+  // bill campaigns meant the one customer who ran a bilingual storytelling
+  // campaign opened their funder report and read "0 campaigns" with zeros
+  // across every tile, with their eight stories listed in two lines at the
+  // bottom. These are the figures that describe that work.
+  const stories = (storyRows ?? []) as Array<{
+    attribution_level?: string | null;
+    consent_usage_snapshot?: { granted_uses?: string[] } | null;
+    state?: string | null;
+    language?: string | null;
+    storyteller_email?: string | null;
+  }>;
+  const grantedOf = (s: { consent_usage_snapshot?: { granted_uses?: string[] } | null }) =>
+    s.consent_usage_snapshot?.granted_uses ?? [];
+  const storyStats = {
+    total: stories.length,
+    named: stories.filter((s) => s.attribution_level === 'named').length,
+    firstNameOnly: stories.filter((s) => s.attribution_level === 'first_name_only').length,
+    anonymous: stories.filter((s) => s.attribution_level === 'anonymous').length,
+    quotableInReports: stories.filter((s) => grantedOf(s).includes('included_in_reports')).length,
+    shareableWithOfficials: stories.filter((s) => grantedOf(s).includes('shared_with_legislators')).length,
+    pressReady: stories.filter((s) => grantedOf(s).includes('shared_with_media')).length,
+    openToFollowUp: stories.filter((s) => grantedOf(s).includes('contact_me_followup') && !!s.storyteller_email).length,
+    // Anonymous tellers have no state on file, so this counts the places we
+    // can actually name.
+    states: new Set(stories.map((s) => (s.attribution_level === 'anonymous' ? null : s.state)).filter(Boolean)).size,
+    languages: new Set(stories.map((s) => s.language || 'en')).size,
+  };
 
   // Roll everything up to initiatives.
   const msgsByTop = new Map<string, number>();
@@ -90,7 +122,15 @@ export async function OrgReportView({
   const totalMessages = [...msgsByTop.values()].reduce((a, b) => a + b, 0);
   const totalMeetings = (noteRows ?? []).length;
   const totalHours = Math.round((noteRows ?? []).reduce((n, r) => n + (Number(r.hours) || 0), 0) * 4) / 4;
-  const orgName = (topLevel.find((c) => c.org_name)?.org_name as string) || fallbackOrgName || 'Your organization';
+  const orgName = (all.find((c) => c.org_name)?.org_name as string) || fallbackOrgName || 'Your organization';
+  const campaignWord = (n: number, word: string) => `${n} ${word}${n === 1 ? '' : 's'}`;
+  const portfolioLabel = [
+    topLevel.length ? campaignWord(topLevel.length, 'legislative campaign') : null,
+    storytelling.length ? campaignWord(storytelling.length, 'story collection') : null,
+  ].filter(Boolean).join(' · ') || 'No campaigns yet';
+  // An organization that only collects stories has no bills to win or lose,
+  // so the record and the legislative tiles would be five zeros.
+  const hasLegislative = topLevel.length > 0;
   const generated = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 
   return (
@@ -106,11 +146,12 @@ export async function OrgReportView({
           <p className="text-sm font-semibold text-purple-700 dark:text-purple-400">{orgName} · Organization Impact Report</p>
           <h1 className="text-2xl font-bold mt-1">Legislative Advocacy Portfolio</h1>
           <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
-            {topLevel.length} campaigns · Report generated {generated}
+            {portfolioLabel} · Report generated {generated}
           </p>
         </div>
 
         {/* The record */}
+        {hasLegislative && (
         <section>
           <h2 className="text-base font-semibold mb-3">The record</h2>
           <div className="grid grid-cols-3 gap-3">
@@ -119,8 +160,10 @@ export async function OrgReportView({
             <Stat label="Ongoing" value={ongoing} />
           </div>
         </section>
+        )}
 
         {/* Grassroots + direct advocacy */}
+        {hasLegislative && (
         <section>
           <h2 className="text-base font-semibold mb-3">The work behind it</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
@@ -131,11 +174,43 @@ export async function OrgReportView({
             <Stat label="Coalition partners" value={supporterOrgs.toLocaleString()} sub={`${opponentOrgs} opposing orgs tracked`} />
           </div>
         </section>
+        )}
 
         {/* Story collection — the qualitative arm of the portfolio */}
         {storytelling.length > 0 && (
           <section>
-            <h2 className="text-base font-semibold mb-3">Story collection</h2>
+            <h2 className="text-base font-semibold mb-3">Stories collected</h2>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-4">
+              <Stat
+                label="Stories shared"
+                value={storyStats.total.toLocaleString()}
+                sub={storyStats.languages > 1 ? `in ${storyStats.languages} languages` : undefined}
+              />
+              <Stat
+                label="People who gave their name"
+                value={storyStats.named.toLocaleString()}
+                sub={`${storyStats.firstNameOnly} first name only · ${storyStats.anonymous} anonymous`}
+              />
+              <Stat
+                label="Cleared for reports"
+                value={storyStats.quotableInReports.toLocaleString()}
+                sub="storytellers who allowed this use"
+              />
+              <Stat
+                label="Cleared to share with officials"
+                value={storyStats.shareableWithOfficials.toLocaleString()}
+              />
+              <Stat label="Cleared for press" value={storyStats.pressReady.toLocaleString()} />
+              <Stat
+                label="Open to follow-up"
+                value={storyStats.openToFollowUp.toLocaleString()}
+                sub="gave a contact address"
+              />
+            </div>
+            <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">
+              Every figure above counts only what each storyteller agreed to. A story may be read
+              here and still not be cleared to quote.
+            </p>
             <div className="space-y-1.5">
               {storytelling.map((c) => (
                 <div key={c.id as string} className="flex items-center justify-between gap-3 text-sm border-b border-gray-100 dark:border-gray-700 pb-1.5">
@@ -150,6 +225,7 @@ export async function OrgReportView({
         )}
 
         {/* Per-campaign table */}
+        {hasLegislative && (
         <section>
           <h2 className="text-base font-semibold mb-3">Campaign by campaign</h2>
           <div className="space-y-1.5">
@@ -182,6 +258,7 @@ export async function OrgReportView({
             Need depth on one campaign? Each has its own printable report from its analytics page.
           </p>
         </section>
+        )}
 
         <p className="text-[11px] text-gray-400 dark:text-gray-500 border-t border-gray-200 dark:border-gray-700 pt-4">
           Generated by My Democracy. Constituent figures reflect recorded participation; whip positions and touchpoints
