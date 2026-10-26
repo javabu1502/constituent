@@ -7,7 +7,7 @@ import { CampaignForm, type CampaignEditInitial } from '@/components/campaign/Ca
 
 export const metadata: Metadata = {
   title: 'Edit Campaign | My Democracy',
-  description: 'Edit your campaign. Changes go back through review before going live.',
+  description: 'Edit your campaign. Changes go live immediately, and your campaign link does not change.',
 };
 
 export default async function EditCampaignPage({

@@ -59,3 +59,37 @@ describe('a salutation is not a federal ask', () => {
     expect(a.outsideFederal).toBe(false);
   });
 });
+
+describe('a topic noun is not a federal ask', () => {
+  // These used to split by topic: the immigration version was waved through
+  // and the identical firearm version was held, because the pattern treated
+  // "immigration" as proof of a federal request.
+  const local = (topic: string) =>
+    assessFederalJurisdiction({
+      message: `Our city council passed a ${topic} ordinance and it has to stop. Please weigh in with the council.`,
+    }).outsideFederal;
+
+  it('holds a purely local ask whatever its subject', () => {
+    for (const topic of ['sanctuary', 'gun storage', 'short-term rental', 'mask']) {
+      expect(local(topic)).toBe(true);
+    }
+  });
+
+  it('is not switched off by the word national', () => {
+    const a = assessFederalJurisdiction({
+      message: 'The potholes on my street are terrible and the city does nothing. This is a national disgrace.',
+    });
+    expect(a.outsideFederal).toBe(true);
+  });
+
+  it('still recognises a real federal actor', () => {
+    for (const msg of [
+      'Please urge HHS to withdraw the proposed rule.',
+      'Please vote no on H.R. 1234.',
+      'Congress should fund Head Start properly.',
+      'Ask ICE to stop the raids at the courthouse.',
+    ]) {
+      expect(assessFederalJurisdiction({ message: msg }).outsideFederal).toBe(false);
+    }
+  });
+});

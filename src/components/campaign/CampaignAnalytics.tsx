@@ -1,5 +1,6 @@
 'use client';
 
+import { deliveryStatusLabel, deliveryStatusInfo, deliveryOutcomeBarClass } from '@/lib/delivery-status';
 import { useMemo, useState, type ReactNode } from 'react';
 import { STORY_USAGE_OPTIONS } from '@/lib/story-usage';
 import { US_STATES } from '@/lib/constants';
@@ -881,24 +882,9 @@ export function CampaignAnalytics({ analytics, campaignName, insightsPanel, hide
     }
   }
 
-  function formatStatus(status: string): string {
-    switch (status) {
-      case 'sent':
-        return 'Delivered to Congress';
-      case 'email_opened':
-        return 'Email Sent';
-      case 'form_opened':
-        return 'Form Opened';
-      case 'website_opened':
-        return 'Website Visited';
-      case 'called':
-        return 'Called';
-      case 'pending_review':
-        return 'Under Review';
-      default:
-        return status.charAt(0).toUpperCase() + status.slice(1).replace(/_/g, ' ');
-    }
-  }
+  // One shared vocabulary with the constituent's dashboard and the report,
+  // so a refused message cannot read as a delivered one here.
+  const formatStatus = (status: string): string => deliveryStatusLabel(status);
 
   function chamberLabel(level: string | null, chamber: string | null): string {
     if (level === 'federal') return chamber === 'senate' ? 'U.S. Senate' : chamber === 'house' ? 'U.S. House' : 'Federal';
@@ -1096,7 +1082,7 @@ export function CampaignAnalytics({ analytics, campaignName, insightsPanel, hide
                   </div>
                   <div className="w-full bg-gray-100 dark:bg-gray-700 rounded-full h-2">
                     <div
-                      className="h-2 rounded-full bg-green-500 dark:bg-green-400 transition-all"
+                      className={`h-2 rounded-full transition-all ${deliveryOutcomeBarClass(deliveryStatusInfo(status).outcome)}`}
                       style={{ width: `${(count / maxStatus) * 100}%` }}
                     />
                   </div>

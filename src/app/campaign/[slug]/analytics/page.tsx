@@ -157,8 +157,13 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
 
       // Officials representing this storyteller: exact when shared at submit
       // time, otherwise inferred senators from the shared state.
+      // An anonymous storyteller is anonymous everywhere. Inferring their
+      // senators from a stored state, or showing the state at all, narrows
+      // them to a place they asked not to be placed in. The CSV already
+      // withheld both; this page did not.
+      const anon = level === 'anonymous';
       let reps: StoryRep[] = [];
-      if (!revoked) {
+      if (!revoked && !anon) {
         const shared = s.shared_reps as Array<{ name?: string; title?: string | null; party?: string | null; state?: string | null; level?: string | null }> | null;
         if (Array.isArray(shared) && shared.length > 0) {
           reps = shared
@@ -186,9 +191,9 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
         attribution_level: level,
         display_name: level === 'anonymous' ? 'Anonymous' : ((s.storyteller_name as string | null) || 'Unnamed'),
         // Revoked stories expose no content or identity.
-        city: revoked ? null : ((s.city as string | null) ?? null),
-        state: revoked ? null : ((s.state as string | null) ?? null),
-        email: revoked ? null : ((s.storyteller_email as string | null) ?? null),
+        city: revoked || anon ? null : ((s.city as string | null) ?? null),
+        state: revoked || anon ? null : ((s.state as string | null) ?? null),
+        email: revoked || anon ? null : ((s.storyteller_email as string | null) ?? null),
         title: revoked ? null : ((s.title as string | null) ?? null),
         body: revoked ? '' : ((s.body as string | null) ?? ''),
         body_en: revoked ? null : ((s.body_en as string | null) ?? null),

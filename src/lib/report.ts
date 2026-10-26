@@ -7,6 +7,7 @@
  * no DB handles) so it can cross that boundary untouched. See the Salesforce
  * plan for the eventual sync path.
  */
+import { tallyDelivery } from './delivery-status';
 import { US_STATES } from '@/lib/constants';
 import { createAdminClient } from '@/lib/supabase';
 import { getCachedInsights, type CampaignInsights } from '@/lib/insights';
@@ -33,6 +34,14 @@ export interface CampaignReport {
   reach: {
     constituents: number; // distinct participation actions
     messages: number; // messages generated/sent
+    /** What actually happened to them. A message that never reached an
+     *  office must not be counted as reach in a funder report. */
+    delivered: number;
+    inFlight: number;
+    notDelivered: number;
+    /** Sent by the constituent from their own mail app, so the outcome is
+     *  not ours to know. */
+    selfSent: number;
     officialsContacted: number;
     statesReached: number;
     citiesReached: number;
@@ -234,6 +243,7 @@ export function assembleCampaignReport(campaign: CampaignRow, rows: ReportSource
   const weekOverWeekPct = prevWeek > 0 ? Math.round(((thisWeek - prevWeek) / prevWeek) * 100) : null;
 
   const totalMessages = msgs.length;
+  const deliveryTally = tallyDelivery(msgs.map((m) => (m as { delivery_status?: string | null }).delivery_status));
   const totalActions = acts.length || totalMessages;
 
   // Stance: only meaningful when both sides exist (neutral official weigh-ins).
@@ -299,7 +309,9 @@ export function assembleCampaignReport(campaign: CampaignRow, rows: ReportSource
       const uses = s.consent_usage_snapshot?.granted_uses ?? [];
       if (uses.includes(PRESS_USE)) pressReady += 1;
       if (uses.includes(CONTACT_USE) && s.storyteller_email) contactable += 1;
-      if (s.state) storyStates.add(s.state.trim().toUpperCase());
+      // Normalized the same way reach does it, so "NV" and "Nevada"
+      // are not counted as two states on the same page.
+      if (s.state) { const c = normalizeStateCode(s.state); if (c) storyStates.add(c); }
     }
     storyImpact = {
       total: rows.stories.length,
@@ -338,6 +350,10 @@ export function assembleCampaignReport(campaign: CampaignRow, rows: ReportSource
     reach: {
       constituents: isStorytellingReport ? (rows.stories ?? []).length : totalActions,
       messages: totalMessages,
+      delivered: deliveryTally.delivered,
+      inFlight: deliveryTally.inFlight,
+      notDelivered: deliveryTally.notDelivered,
+      selfSent: deliveryTally.selfSent,
       officialsContacted: officialAgg.size,
       statesReached: stateAgg.size,
       citiesReached: cities.size,
@@ -397,7 +413,7 @@ export async function buildCampaignReport(campaign: CampaignRow, nowMs: number):
     admin
       .from('messages')
       .select(
-        'legislator_name, legislator_party, legislator_level, legislator_chamber, advocate_city, advocate_state, delivery_method, message_intent, created_at'
+        'legislator_name, legislator_party, legislator_level, legislator_chamber, advocate_city, advocate_state, delivery_method, delivery_status, message_intent, created_at'
       )
       .in('campaign_id', campaignIds)
       .limit(5000),

@@ -47,6 +47,21 @@ function Stat({ label, value, sub }: { label: string; value: string | number; su
   );
 }
 
+/**
+ * What happened to the messages, under the headline count. A message that was
+ * refused or failed never reached an office, and a report that counts it as
+ * reach overstates the campaign to whoever is reading it.
+ */
+function deliverySubtitle(reach: { delivered: number; inFlight: number; notDelivered: number; selfSent: number }): string | undefined {
+  const parts: string[] = [];
+  if (reach.delivered) parts.push(`${reach.delivered.toLocaleString()} delivered`);
+  if (reach.inFlight) parts.push(`${reach.inFlight.toLocaleString()} in flight`);
+  if (reach.notDelivered) parts.push(`${reach.notDelivered.toLocaleString()} not delivered`);
+  if (reach.selfSent) parts.push(`${reach.selfSent.toLocaleString()} sent by the constituent`);
+  return parts.length ? parts.join(' · ') : undefined;
+}
+
+
 export default async function CampaignReportPage({ params }: PageProps) {
   const { slug } = await params;
 
@@ -127,7 +142,13 @@ export default async function CampaignReportPage({ params }: PageProps) {
           <h2 className="text-base font-semibold mb-3">Reach &amp; mobilization</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
             <Stat label={isStorytelling ? 'Stories shared' : 'Constituents mobilized'} value={report.reach.constituents.toLocaleString()} />
-            {!isStorytelling && <Stat label="Messages to officials" value={report.reach.messages.toLocaleString()} />}
+            {!isStorytelling && (
+              <Stat
+                label="Messages to officials"
+                value={report.reach.messages.toLocaleString()}
+                sub={deliverySubtitle(report.reach)}
+              />
+            )}
             {!isStorytelling && (
               <Stat
                 label="Officials contacted"

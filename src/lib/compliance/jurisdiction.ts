@@ -29,12 +29,22 @@ const STATE_LEGISLATURE_PATTERN =
 const LOCAL_BODY_PATTERN =
   /\b(city council|county commission(?:ers)?|board of supervisors|school board|planning commission|zoning board|mayor'?s office|our mayor|the mayor|city manager|county manager|homeowners? association|\bhoa\b)\b/i;
 
-// "Senator" and "Representative" on their own are NOT evidence of a federal
-// ask. Every state has senators and representatives too, and more to the
-// point, writing "Dear Representative," at the top of a letter about potholes
-// used to switch this whole check off. A federal qualifier is required.
+// A FEDERAL ACTOR OR INSTRUMENT, never a bare topic, and never a bare title.
+//
+// "Senator" and "Representative" alone are not evidence either: every state
+// has those too, and writing "Dear Representative," at the top of a letter
+// about potholes used to switch this whole check off.
+//
+// This list used to include immigration, border, foreign, military, nato,
+// ukraine, israel, national, nationwide and regulation. A topic noun is not
+// a request of Congress, and because those nouns are not politically neutral
+// the effect was asymmetric: a purely local message about an immigration
+// ordinance was waved straight through while the structurally identical
+// local message about a firearm ordinance was held. The bare word "national"
+// also switched the whole check off, so "the potholes on my street are a
+// national disgrace" read as federal.
 const FEDERAL_ASK_PATTERN =
-  /\b(congress|federal|u\.?s\.? (?:senate|house|representative|senator)|congress(?:man|woman|member)|appropriat|\bbill\b.*\b(?:h\.?r\.?|s\.)\s*\d|medicare|medicaid|social security|\bva\b|veterans affairs|\birs\b|\bepa\b|\bfda\b|\bhhs\b|head start|\bsnap\b|\bwic\b|department of (?:education|health|labor|agriculture|defense|justice|homeland|state|transportation|energy|interior)|federal funding|federal grant|federal rule|proposed rule|regulation|national|nationwide|immigration|border|tariff|foreign|military|nato|ukraine|israel)\b/i;
+  /\b(congress|federal|u\.?s\.? (?:senate|house|representative|senator)|congress(?:man|woman|member)|appropriat|\bbill\b.*\b(?:h\.?r\.?|s\.)\s*\d|medicare|medicaid|social security|\bva\b|veterans affairs|\birs\b|\bepa\b|\bfda\b|\bhhs\b|\bice\b|\bdhs\b|\bfbi\b|\bcbp\b|head start|\bsnap\b|\bwic\b|department of (?:education|health|labor|agriculture|defense|justice|homeland|state|transportation|energy|interior)|federal funding|federal grant|federal rule|federal law|proposed rule|act of congress|treaty|federal court|supreme court)\b/i;
 
 // Municipal services: nobody in Congress fixes these; a message that is only
 // about them (with no federal ask) belongs to city hall.
