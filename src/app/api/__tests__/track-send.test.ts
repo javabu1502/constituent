@@ -18,11 +18,14 @@ vi.mock('@/lib/supabase/server', () => ({
   createClient: vi.fn(async () => ({ auth: { getUser: mockGetUser } })),
 }));
 
-const mockOfficeQuota = vi.fn(async (_opts: { email?: string | null; userId?: string | null; officialId: string }) => ({ allowed: true, remaining: 3 }));
+type OfficeQuotaOpts = { email?: string | null; userId?: string | null; officialId: string };
+const mockOfficeQuota = vi.fn<(opts: OfficeQuotaOpts) => Promise<{ allowed: boolean; remaining: number }>>(
+  async () => ({ allowed: true, remaining: 3 }),
+);
 vi.mock('@/lib/usage-quota', () => ({
   checkLegislatorCooldown: vi.fn(async () => ({ allowed: true })),
   resolveUsageIdentity: vi.fn(async () => ({ userId: null, ipHash: 'test-hash' })),
-  enforceOfficeSendQuota: (opts: { email?: string | null; userId?: string | null; officialId: string }) => mockOfficeQuota(opts),
+  enforceOfficeSendQuota: (opts: OfficeQuotaOpts) => mockOfficeQuota(opts),
 }));
 
 const mockEnqueue = vi.fn();
