@@ -2,12 +2,17 @@
 
 import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
 import type { User } from '@supabase/supabase-js';
+import { isOrgWorkspacePath } from './org-workspace';
 
 export function MobileNav({ user, isOrg = false }: { user: User | null; isOrg?: boolean }) {
   const router = useRouter();
+  const pathname = usePathname();
+  // Campaign tools inside the organization's own workspace, the ordinary
+  // site menu everywhere else. See org-workspace.ts.
+  const inWorkspace = isOrg && isOrgWorkspacePath(pathname);
   const [open, setOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -57,7 +62,7 @@ export function MobileNav({ user, isOrg = false }: { user: User | null; isOrg?: 
 
       {open && (
         <nav id="mobile-menu" aria-label="Mobile navigation" className="absolute right-0 mt-2 w-56 max-w-[calc(100vw-2rem)] bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-lg py-2 z-50">
-          {isOrg ? (
+          {inWorkspace ? (
             <>
               {/* An organization's own work comes first. */}
               <p className="px-4 pt-2 pb-1 text-xs font-medium text-gray-400 dark:text-gray-500 uppercase tracking-wider">Your organization</p>

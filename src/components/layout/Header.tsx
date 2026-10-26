@@ -1,12 +1,11 @@
 import Link from 'next/link';
+import { cache } from 'react';
 import { BRAND } from '@/lib/constants';
 import { createClient } from '@/lib/supabase/server';
-import { UserMenu } from './UserMenu';
-import { MobileNav } from './MobileNav';
-import { NavDropdown } from './NavDropdown';
-import { SearchButton } from '@/components/search/SearchButton';
-import { cache } from 'react';
 import { createAdminClient } from '@/lib/supabase';
+import { MainNav } from './MainNav';
+import { MobileNav } from './MobileNav';
+import { SearchButton } from '@/components/search/SearchButton';
 
 /**
  * Is this account an organization? Cached per request, so the several server
@@ -27,16 +26,13 @@ const isOrgAccount = cache(async (userId: string): Promise<boolean> => {
     return false;
   }
 });
-import { OrgNav } from './OrgNav';
 
 export async function Header() {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
 
-  // An organization gets its own navigation. The constituent items stay
-  // reachable under Explore and Learn, but they are not what this account
-  // came to do, and the dashboard link in the account menu was the only way
-  // into their own work.
+  // Whether the campaign tools show is decided per page, not per account:
+  // see MainNav. An organization is still a person on the public site.
   const isOrg = user ? await isOrgAccount(user.id) : false;
 
   return (
@@ -50,65 +46,7 @@ export async function Header() {
             <SearchButton />
           </div>
 
-          {/* Desktop nav */}
-          <nav aria-label="Main navigation" className="hidden md:flex items-center gap-6">
-            {isOrg ? (
-              <OrgNav />
-            ) : (
-              <>
-                <Link
-                  href="/contact"
-                  className="px-3 py-1.5 bg-purple-600 text-white text-sm font-medium rounded-lg hover:bg-purple-700 transition-colors"
-                >
-                  Write to Your Officials
-                </Link>
-                <NavDropdown
-                  label="Take Action"
-                  emphasis
-                  menuWidthClass="w-60"
-                  items={[
-                    { href: '/issues', label: 'Weigh In' },
-                    { href: '/campaigns', label: 'Run a Campaign' },
-                    { href: '/vote', label: 'Vote' },
-                    // Regulations (public comment) temporarily hidden, restore to bring it back.
-                    // { href: '/regulations', label: 'Regulations' },
-                  ]}
-                />
-              </>
-            )}
-            <NavDropdown
-              label="Explore"
-              items={[
-                { href: '/states', label: 'States' },
-                { href: '/legislators', label: 'Legislators' },
-                { href: '/news', label: 'News' },
-                { href: '/trends', label: 'Trends' },
-              ]}
-            />
-            <NavDropdown
-              label="Learn"
-              items={[
-                { href: '/guides', label: 'Guides' },
-                { href: '/about', label: 'About' },
-              ]}
-            />
-            {!isOrg && (
-            <a
-              href="https://buymeacoffee.com/mydemocracy"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-amber-500 hover:bg-amber-600 text-gray-900 text-sm font-semibold rounded-lg transition-colors"
-            >
-              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-                <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
-              </svg>
-              Donate
-            </a>
-            )}
-            <UserMenu user={user} />
-          </nav>
-
-          {/* Mobile hamburger */}
+          <MainNav user={user} isOrg={isOrg} />
           <MobileNav user={user} isOrg={isOrg} />
         </div>
       </div>
