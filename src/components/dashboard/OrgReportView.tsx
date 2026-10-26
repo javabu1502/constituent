@@ -122,7 +122,9 @@ export async function OrgReportView({
   const totalMessages = [...msgsByTop.values()].reduce((a, b) => a + b, 0);
   const totalMeetings = (noteRows ?? []).length;
   const totalHours = Math.round((noteRows ?? []).reduce((n, r) => n + (Number(r.hours) || 0), 0) * 4) / 4;
-  const orgName = (all.find((c) => c.org_name)?.org_name as string) || fallbackOrgName || 'Your organization';
+  // A caller-supplied name wins, so the demo cannot borrow a real
+  // organization's name out of a seeded row.
+  const orgName = fallbackOrgName || (all.find((c) => c.org_name)?.org_name as string) || 'Your organization';
   const campaignWord = (n: number, word: string) => `${n} ${word}${n === 1 ? '' : 's'}`;
   const portfolioLabel = [
     topLevel.length ? campaignWord(topLevel.length, 'legislative campaign') : null,

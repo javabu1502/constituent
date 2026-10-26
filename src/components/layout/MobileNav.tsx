@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
 import type { User } from '@supabase/supabase-js';
 
-export function MobileNav({ user }: { user: User | null }) {
+export function MobileNav({ user, isOrg = false }: { user: User | null; isOrg?: boolean }) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -57,25 +57,44 @@ export function MobileNav({ user }: { user: User | null }) {
 
       {open && (
         <nav id="mobile-menu" aria-label="Mobile navigation" className="absolute right-0 mt-2 w-56 max-w-[calc(100vw-2rem)] bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-lg py-2 z-50">
-          <Link
-            href="/contact"
-            onClick={() => setOpen(false)}
-            className="block px-4 py-3 text-sm font-medium text-purple-700 dark:text-purple-300 bg-purple-50 dark:bg-purple-900/20 hover:bg-purple-100 dark:hover:bg-purple-900/30 transition-colors"
-          >
-            Write to Your Officials
-          </Link>
-          <a
-            href="https://buymeacoffee.com/mydemocracy"
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => setOpen(false)}
-            className="mx-4 my-1 flex items-center justify-center gap-1.5 px-4 py-2.5 bg-amber-500 hover:bg-amber-600 text-white text-sm font-semibold rounded-lg transition-colors"
-          >
-            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-              <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
-            </svg>
-            Donate
-          </a>
+          {isOrg ? (
+            <>
+              {/* An organization's own work comes first. */}
+              <p className="px-4 pt-2 pb-1 text-xs font-medium text-gray-400 dark:text-gray-500 uppercase tracking-wider">Your organization</p>
+              <Link href="/dashboard" onClick={() => setOpen(false)} className="block px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">Campaigns</Link>
+              <Link href="/dashboard/report" onClick={() => setOpen(false)} className="block px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">Reports</Link>
+              <Link href="/dashboard/settings" onClick={() => setOpen(false)} className="block px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">Settings</Link>
+              <Link
+                href="/campaign/create"
+                onClick={() => setOpen(false)}
+                className="mx-4 my-2 block px-4 py-2.5 text-center bg-purple-600 hover:bg-purple-700 text-white text-sm font-semibold rounded-lg transition-colors"
+              >
+                New campaign
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link
+                href="/contact"
+                onClick={() => setOpen(false)}
+                className="block px-4 py-3 text-sm font-medium text-purple-700 dark:text-purple-300 bg-purple-50 dark:bg-purple-900/20 hover:bg-purple-100 dark:hover:bg-purple-900/30 transition-colors"
+              >
+                Write to Your Officials
+              </Link>
+              <a
+                href="https://buymeacoffee.com/mydemocracy"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setOpen(false)}
+                className="mx-4 my-1 flex items-center justify-center gap-1.5 px-4 py-2.5 bg-amber-500 hover:bg-amber-600 text-gray-900 text-sm font-semibold rounded-lg transition-colors"
+              >
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                  <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
+                </svg>
+                Donate
+              </a>
+            </>
+          )}
 
           <p className="px-4 pt-3 pb-1 text-xs font-medium text-gray-400 dark:text-gray-500 uppercase tracking-wider">Take Action</p>
           <Link href="/issues" onClick={() => setOpen(false)} className="block px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">Weigh In</Link>

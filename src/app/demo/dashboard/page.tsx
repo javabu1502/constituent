@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { createAdminClient } from '@/lib/supabase';
 import { OrgDashboard } from '@/components/dashboard/OrgDashboard';
 import { DemoBanner } from '@/components/demo/DemoBanner';
-import { DEMO_ORG_USER_ID } from '@/lib/demo';
+import { DEMO_ORG_USER_ID, DEMO_ORG_NAME } from '@/lib/demo';
 
 export const metadata: Metadata = {
   title: 'Live Demo — Organization Dashboard | My Democracy',
@@ -27,7 +27,7 @@ export default async function DemoDashboardPage() {
     .order('created_at', { ascending: false });
 
   const all = campaigns ?? [];
-  const orgName = (all.find((c) => c.org_name)?.org_name as string) || 'Demo organization';
+  const orgName = DEMO_ORG_NAME;
 
   return (
     <>

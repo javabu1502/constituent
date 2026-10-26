@@ -90,8 +90,12 @@ export function OrgDashboard({
   );
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8">
-      <div className="mb-8 flex items-start justify-between gap-3">
+    // The floating assistant is fixed to the bottom right, so the page
+    // needs room underneath it on a phone or it covers the last card.
+    <div className="max-w-6xl mx-auto px-4 py-8 pb-28 sm:pb-8">
+      {/* Stacked on a phone: side by side, the action buttons ran off the
+          right edge and "All-campaign report" was cut in half. */}
+      <div className="mb-8 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
         <div>
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Organization Dashboard</h1>
           <p className="text-gray-600 dark:text-gray-400 mt-1">
@@ -105,20 +109,18 @@ export function OrgDashboard({
             )}
           </p>
         </div>
-        <div className="shrink-0 flex items-center gap-2">
-          {!isDemo && (
-            <Link href="/dashboard/settings" className="text-sm font-medium px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-              Settings
-            </Link>
-          )}
+        <div className="sm:shrink-0 flex flex-wrap items-center gap-2">
+          <Link href={isDemo ? '/campaigns#apply' : '/dashboard/settings'} className="text-sm font-medium px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+            Settings
+          </Link>
           <Link href={isDemo ? '/demo/report' : '/dashboard/report'} className="text-sm font-medium px-4 py-2 rounded-lg border border-purple-300 dark:border-purple-700 text-purple-700 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/20 transition-colors">
             All-campaign report
           </Link>
-          {!isDemo && (
-            <Link href="/campaign/create" className="text-sm font-medium px-4 py-2 rounded-lg bg-purple-600 hover:bg-purple-700 text-white transition-colors">
-              + New campaign
-            </Link>
-          )}
+          {/* The demo used to hide every action, so someone evaluating the
+              product saw a dashboard with one button on it. */}
+          <Link href={isDemo ? '/campaigns#apply' : '/campaign/create'} className="text-sm font-medium px-4 py-2 rounded-lg bg-purple-600 hover:bg-purple-700 text-white transition-colors">
+            + New campaign
+          </Link>
         </div>
       </div>
 
@@ -130,19 +132,19 @@ export function OrgDashboard({
         </div>
       )}
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 mb-8">
         <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
           <p className="text-sm text-gray-500 dark:text-gray-400">Campaigns</p>
-          <p className="text-3xl font-bold text-gray-900 dark:text-white mt-1">{topLevelCampaigns.length}</p>
+          <p className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mt-1">{topLevelCampaigns.length}</p>
         </div>
         <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
           <p className="text-sm text-gray-500 dark:text-gray-400">Supporters mobilized</p>
-          <p className="text-3xl font-bold text-gray-900 dark:text-white mt-1">{totalActions.toLocaleString()}</p>
+          <p className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mt-1">{totalActions.toLocaleString()}</p>
           <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">People who took part. One person may send several messages.</p>
         </div>
         <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
           <p className="text-sm text-gray-500 dark:text-gray-400">Stories collected</p>
-          <p className="text-3xl font-bold text-gray-900 dark:text-white mt-1">{totalStories.toLocaleString()}</p>
+          <p className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mt-1">{totalStories.toLocaleString()}</p>
         </div>
       </div>
 

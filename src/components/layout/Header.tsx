@@ -5,10 +5,30 @@ import { UserMenu } from './UserMenu';
 import { MobileNav } from './MobileNav';
 import { NavDropdown } from './NavDropdown';
 import { SearchButton } from '@/components/search/SearchButton';
+import { createAdminClient } from '@/lib/supabase';
+import { OrgNav } from './OrgNav';
 
 export async function Header() {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
+
+  // An organization gets its own navigation. The constituent items stay
+  // reachable under Explore and Learn, but they are not what this account
+  // came to do, and the dashboard link in the account menu was the only way
+  // into their own work.
+  let isOrg = false;
+  if (user) {
+    try {
+      const { data: profile } = await createAdminClient()
+        .from('profiles')
+        .select('account_type')
+        .eq('user_id', user.id)
+        .single();
+      isOrg = profile?.account_type === 'organization';
+    } catch {
+      isOrg = false;
+    }
+  }
 
   return (
     <header className="border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
@@ -23,24 +43,30 @@ export async function Header() {
 
           {/* Desktop nav */}
           <nav aria-label="Main navigation" className="hidden md:flex items-center gap-6">
-            <Link
-              href="/contact"
-              className="px-3 py-1.5 bg-purple-600 text-white text-sm font-medium rounded-lg hover:bg-purple-700 transition-colors"
-            >
-              Write to Your Officials
-            </Link>
-            <NavDropdown
-              label="Take Action"
-              emphasis
-              menuWidthClass="w-60"
-              items={[
-                { href: '/issues', label: 'Weigh In' },
-                { href: '/campaigns', label: 'Run a Campaign' },
-                { href: '/vote', label: 'Vote' },
-                // Regulations (public comment) temporarily hidden — restore to bring it back.
-                // { href: '/regulations', label: 'Regulations' },
-              ]}
-            />
+            {isOrg ? (
+              <OrgNav />
+            ) : (
+              <>
+                <Link
+                  href="/contact"
+                  className="px-3 py-1.5 bg-purple-600 text-white text-sm font-medium rounded-lg hover:bg-purple-700 transition-colors"
+                >
+                  Write to Your Officials
+                </Link>
+                <NavDropdown
+                  label="Take Action"
+                  emphasis
+                  menuWidthClass="w-60"
+                  items={[
+                    { href: '/issues', label: 'Weigh In' },
+                    { href: '/campaigns', label: 'Run a Campaign' },
+                    { href: '/vote', label: 'Vote' },
+                    // Regulations (public comment) temporarily hidden, restore to bring it back.
+                    // { href: '/regulations', label: 'Regulations' },
+                  ]}
+                />
+              </>
+            )}
             <NavDropdown
               label="Explore"
               items={[
@@ -57,22 +83,24 @@ export async function Header() {
                 { href: '/about', label: 'About' },
               ]}
             />
+            {!isOrg && (
             <a
               href="https://buymeacoffee.com/mydemocracy"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-amber-500 hover:bg-amber-600 text-white text-sm font-semibold rounded-lg transition-colors"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-amber-500 hover:bg-amber-600 text-gray-900 text-sm font-semibold rounded-lg transition-colors"
             >
               <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
                 <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
               </svg>
               Donate
             </a>
+            )}
             <UserMenu user={user} />
           </nav>
 
           {/* Mobile hamburger */}
-          <MobileNav user={user} />
+          <MobileNav user={user} isOrg={isOrg} />
         </div>
       </div>
     </header>
