@@ -40,4 +40,32 @@ describe('the screened body does not depend on the office', () => {
     const body = 'I am writing about the child care tax credit.\n\nThank you.';
     expect(bodyForScreening(body)).toBe(body);
   });
+
+  /**
+   * Whatever is removed here is still sent to the office, so anything the
+   * screener does not see is delivered unscreened. This is the only abuse
+   * screen in the pipeline.
+   *
+   * Deleting the whole first line whenever it began with a greeting word let
+   * a threat ride in on it: "Hi, I know where you live and I will be there."
+   * was removed and the letter screened as the sentence after it. Matching up
+   * to the first comma had the same hole one step along.
+   */
+  it.each([
+    ['a threat wearing a greeting', 'Hi, I know where you live and I will be there.\n\nPlease vote no on H.R. 1234.', /know where you live/],
+    ['abuse after "To"', 'To hell with you and your family, I am coming\n\nPlease vote no.', /hell with you|coming/],
+    ['no recipient named', 'Hi, you are a crook and I will find you\n\nPlease vote no.', /crook|find you/],
+  ])('keeps %s in the screener input', (_label, body, expected) => {
+    expect(bodyForScreening(body)).toMatch(expected);
+  });
+
+  it.each([
+    ['Dear Senator Rosen,\n\nPlease vote no.'],
+    ['Dear Rep. Amodei,\n\nPlease vote no.'],
+    ['Hello Jacky Rosen,\n\nPlease vote no.'],
+    ['To the Honorable Jane Doe:\n\nPlease vote no.'],
+    ['Dear Congresswoman Kiggans,\n\nPlease vote no.'],
+  ])('still removes a real salutation: %s', (body) => {
+    expect(bodyForScreening(body)).toBe('Please vote no.');
+  });
 });

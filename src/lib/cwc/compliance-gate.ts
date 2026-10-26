@@ -42,10 +42,24 @@ function messageBody(delivery: CwcDelivery): string {
   return delivery.message.constituentMessage ?? delivery.message.organizationStatement ?? '';
 }
 
-// A greeting line at the top of the letter: "Dear Senator Warner,",
-// "Hello Representative Kiggans:", "To the Honorable ...". Bounded so a real
-// sentence that happens to start with "Dear" is left alone.
-const SALUTATION_LINE = new RegExp(`^[ \t]*(?:${SALUTATION_WORDS})\\b[^\n]{0,120}$`, 'i');
+// The greeting PREFIX at the top of the letter: "Dear Senator Warner,",
+// "Hello Representative Kiggans:", "To the Honorable Jane Doe:".
+//
+// It must actually NAME a recipient: a greeting word, an optional honorific,
+// then up to four capitalised name tokens, then a comma or colon. Anything
+// looser is an evasion, because whatever is removed here is still sent to the
+// office. Deleting the whole first line let "Hi, I know where you live and I
+// will be there." screen as the sentence after it, and matching up to the
+// first comma let "To hell with you and your family," disappear the same way.
+// Neither names anyone, so both now stay in the screener's input.
+const HONORIFIC =
+  '(?:the\\s+honorable|senator|senador[a]?|representative|rep\\.?|congress(?:man|woman|member)|' +
+  'speaker|leader|chair(?:man|woman|person)?|mr\\.?|mrs\\.?|ms\\.?|mx\\.?|dr\\.?)';
+const NAME_TOKEN = "[A-Z][\\w'\u2019.-]*";
+const SALUTATION_PREFIX = new RegExp(
+  `^[ \\t]*(?:${SALUTATION_WORDS})\\s*(?:${HONORIFIC}\\s+)?(?:${NAME_TOKEN}(?:\\s+${NAME_TOKEN}){0,3})?\\s*[,:][ \\t]*`,
+  'i',
+);
 
 /**
  * The body without its opening salutation line, whitespace-normalized. Two
@@ -71,8 +85,12 @@ export function bodyWithoutSalutation(body: string): string {
 export function bodyForScreening(body: string): string {
   const lines = normalizeBodyText(body).split('\n');
   const firstIdx = lines.findIndex((l) => l.trim().length > 0);
-  if (firstIdx >= 0 && SALUTATION_LINE.test(lines[firstIdx])) {
-    lines.splice(firstIdx, 1);
+  if (firstIdx >= 0) {
+    const stripped = lines[firstIdx].replace(SALUTATION_PREFIX, '');
+    // Whatever followed the greeting on that line stays. Only a line that was
+    // nothing but a greeting disappears.
+    if (stripped.trim().length === 0) lines.splice(firstIdx, 1);
+    else lines[firstIdx] = stripped;
   }
   return lines.join('\n').trim();
 }
