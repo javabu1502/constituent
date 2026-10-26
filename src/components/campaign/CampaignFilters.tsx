@@ -51,7 +51,13 @@ function billRef(c: Campaign): string | null {
     return `${BILL_TYPE_LABELS[c.bill_type.toLowerCase()] ?? c.bill_type.toUpperCase()} ${c.bill_number}`;
   }
   // State (or other non-Congress.gov) bills: rendered from the stored ref.
-  if (c.bill_ref) return c.bill_state ? `${c.bill_state} ${c.bill_ref}` : c.bill_ref;
+  // Some refs carry a parenthetical ("S. 1318 (House substitute)") that does
+  // not belong on a chip, so the chip shows the bill and the page shows the
+  // rest.
+  if (c.bill_ref) {
+    const ref = c.bill_ref.replace(/\s*\([^)]*\)\s*$/, '').trim() || c.bill_ref;
+    return c.bill_state ? `${c.bill_state} ${ref}` : ref;
+  }
   return null;
 }
 
@@ -206,9 +212,13 @@ export function CampaignFilters({ campaigns }: { campaigns: Campaign[] }) {
               href={`/campaign/${campaign.slug}`}
               className="block bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5 hover:shadow-md hover:border-purple-300 dark:hover:border-purple-700 transition-all"
             >
-              <div className="flex items-center justify-between mb-3 gap-2">
-                <span className="flex items-center gap-1.5 min-w-0">
-                  <span className="px-2.5 py-1 text-xs font-medium rounded-full bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300 truncate">
+              {/* The chips wrap instead of competing for one row. Squeezed
+                  onto a single line they truncated to nonsense: a civil
+                  rights card read "ci", and a long bill reference spilled
+                  outside its own pill. */}
+              <div className="flex items-start justify-between mb-3 gap-2">
+                <span className="flex flex-wrap items-center gap-1.5 min-w-0">
+                  <span className="px-2.5 py-1 text-xs font-medium rounded-full bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300 max-w-[11rem] truncate">
                     {campaign.issue_area}
                   </span>
                   {levelTag(campaign) && (
@@ -217,17 +227,23 @@ export function CampaignFilters({ campaigns }: { campaigns: Campaign[] }) {
                     </span>
                   )}
                   {billRef(campaign) && (
-                    <span className="px-2 py-1 text-xs font-semibold rounded-full bg-indigo-100 text-indigo-700 dark:bg-indigo-900/40 dark:text-indigo-300 shrink-0">
-                      📄 {billRef(campaign)}
+                    <span className="px-2 py-1 text-xs font-semibold rounded-full bg-indigo-100 text-indigo-700 dark:bg-indigo-900/40 dark:text-indigo-300 max-w-[11rem] truncate">
+                      {billRef(campaign)}
                     </span>
                   )}
                 </span>
-                <div className="flex items-center gap-1 text-gray-500 dark:text-gray-400">
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
-                  </svg>
-                  <span className="text-sm font-bold">{campaign.action_count ?? 0}</span>
-                </div>
+                {/* A bold zero on card after card is worse than no number.
+                    Only six of the eighty-one issues have been weighed in on,
+                    so most of these said 0 and said it loudly. */}
+                {(campaign.action_count ?? 0) > 0 && (
+                  <div className="shrink-0 flex items-center gap-1 text-gray-500 dark:text-gray-400">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    <span className="text-sm font-bold">{campaign.action_count}</span>
+                    <span className="sr-only">people have weighed in</span>
+                  </div>
+                )}
               </div>
               <h3 className="font-semibold text-gray-900 dark:text-white mb-1 line-clamp-2">
                 {campaign.headline}
