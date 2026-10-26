@@ -77,8 +77,17 @@ export function CampaignForm({
     campaignType === 'storytelling'
       ? ['The campaign', 'How stories are collected']
       : ['The ask', 'Who to reach', 'How supporters take part'];
-  const SectionHeading = ({ n, title }: { n: number; title: string }) => (
-    <h2 className="flex items-center gap-2 text-base font-semibold text-gray-900 dark:text-white pt-2 border-t border-gray-100 dark:border-gray-700 first:border-0 first:pt-0">
+  // The divider is explicit rather than `first:`. The overview rail below is
+  // rendered before section 1, so section 1 was not the first child of the
+  // form and `first:border-0 first:pt-0` quietly stopped applying. That drew
+  // a rule immediately under the rail, which read as the rail having a
+  // stray underline.
+  const SectionHeading = ({ n, title, divider = true }: { n: number; title: string; divider?: boolean }) => (
+    <h2
+      className={`flex items-center gap-2 text-base font-semibold text-gray-900 dark:text-white ${
+        divider ? 'pt-6 border-t border-gray-100 dark:border-gray-700' : ''
+      }`}
+    >
       <span className="w-6 h-6 rounded-full bg-purple-600 text-white text-xs font-bold flex items-center justify-center">{n}</span>
       {title}
     </h2>
@@ -613,19 +622,21 @@ export function CampaignForm({
         </div>
       )}
 
-      {/* Three labeled sections so a long form reads as a short path. */}
+      {/* What the whole form covers, before any of it. Separated from the
+          first section by its own rule, so it reads as an overview rather
+          than as a label sitting on top of the heading it repeats. */}
       {!edit && (
-        <ol className="flex flex-wrap items-center gap-2 text-xs text-gray-500 dark:text-gray-400 -mb-1">
+        <ol className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-gray-500 dark:text-gray-400 pb-5 border-b border-gray-100 dark:border-gray-700">
           {sectionTitles.map((title, i) => (
             <li key={title} className="flex items-center gap-2">
               <span className="w-5 h-5 rounded-full bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300 font-semibold flex items-center justify-center">{i + 1}</span>
               <span>{title}</span>
-              {i < sectionTitles.length - 1 && <span className="text-gray-300 dark:text-gray-600">·</span>}
+              {i < sectionTitles.length - 1 && <span className="text-gray-300 dark:text-gray-600" aria-hidden="true">·</span>}
             </li>
           ))}
         </ol>
       )}
-      <SectionHeading n={1} title={sectionTitles[0]} />
+      <SectionHeading n={1} title={sectionTitles[0]} divider={false} />
 
       {/* Headline */}
       <div data-field="headline">
@@ -941,15 +952,23 @@ export function CampaignForm({
             vote at the floor stage. Leave blank to reuse the parent campaign&apos;s points.
           </p>
         )}
+        {/* The format rule goes ABOVE the box. It used to sit underneath, so
+            the instruction arrived after the guessing. The placeholder is a
+            worked example for the same reason: the old one said "talking
+            points or a template", which left it unclear whether to write a
+            list or a letter. It is a list. */}
+        <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">
+          The points you want every letter to make. Write one per line, up to {MAX_REQUIRED_POINTS}.
+        </p>
         <textarea
           value={messageTemplate}
           onChange={(e) => setMessageTemplate(e.target.value)}
-          placeholder="Provide talking points or a template for participants' messages..."
-          rows={3}
+          placeholder={'Child care now costs more than rent for many families here\nProviders are closing faster than new ones open\nPlease fund the state child care assistance program'}
+          rows={4}
           className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent resize-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
         />
-        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-          One point per line, up to {MAX_REQUIRED_POINTS}. Every participant&apos;s letter combines these points with their own reasons for caring, so no two letters read the same.
+        <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
+          Each participant writes their own letter. These points are combined with their own reasons for caring, so no two letters read the same.
         </p>
         {messageTemplate.trim() && (
           <div className="mt-3">
@@ -980,8 +999,8 @@ export function CampaignForm({
       {/* User campaigns are always link-only */}
       <div className="p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700 rounded-xl">
         <p className="text-sm text-blue-800 dark:text-blue-300">
-          Your campaign is <strong>shared by link only</strong>: it won&apos;t appear in the public directory,
-          and it&apos;s written in your voice, for your cause. It carries your branding from{' '}
+          Your campaign is <strong>shared by link only</strong>. It won&apos;t appear in the public directory.
+          It carries your branding from{' '}
           <Link href="/dashboard/settings" className="underline hover:text-blue-900 dark:hover:text-blue-200">organization settings</Link>,
           and you can embed it on your own site from the dashboard.
         </p>
@@ -1008,7 +1027,7 @@ export function CampaignForm({
               Story Prompt <span className="text-gray-400 dark:text-gray-500 font-normal">(optional)</span>
             </label>
             <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">
-              The first question the guide asks each storyteller. Write it as one direct question, not a description of the campaign.
+              The first question the guide asks each storyteller. Keep it to one direct question.
             </p>
             <textarea
               value={storyPrompt}
@@ -1026,7 +1045,7 @@ export function CampaignForm({
               How you will use these stories <span className="text-gray-400 dark:text-gray-500 font-normal">(optional)</span>
             </label>
             <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">
-              Shown to storytellers before they begin and again before they share. Say in plain words who will read the stories, where they might appear, and how to reach you with questions.
+              Shown to storytellers before they begin and again before they share. Say who will read the stories and where they might appear. Add an email address for questions.
             </p>
             <textarea
               value={usageStatement}
@@ -1044,7 +1063,7 @@ export function CampaignForm({
               How would you like to use these stories? <span className="text-red-500">*</span>
             </label>
             <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">
-              Pick the ways you would like to use the stories you collect. Each storyteller then chooses which of these they are comfortable with. Nothing starts checked for them, and we only pass along the uses they grant.
+              Pick what you want to use stories for. Storytellers see the same list when they submit, with every box already checked, and they uncheck anything they are not comfortable with.
             </p>
             <div className="space-y-2">
               {STORY_USAGE_OPTIONS.map((opt) => {
