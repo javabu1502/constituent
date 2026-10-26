@@ -4,7 +4,7 @@ import { isCampaignClosed } from '@/lib/campaign-close';
 import { createClient } from '@/lib/supabase/server';
 import { trackSendSchema, parseBody } from '@/lib/schemas';
 import { writeLimiter, getClientIp } from '@/lib/rate-limit';
-import { checkLegislatorCooldown, resolveUsageIdentity } from '@/lib/usage-quota';
+import { checkLegislatorCooldown, resolveUsageIdentity, enforceOfficeSendQuota } from '@/lib/usage-quota';
 import { verifyTurnstile } from '@/lib/turnstile';
 import { captchaStrictFor } from '@/lib/campaign-captcha';
 import { enqueueCwcDeliveries } from '@/lib/cwc';
@@ -82,6 +82,35 @@ export async function POST(request: NextRequest) {
     if (!cooldown.allowed) {
       return NextResponse.json(
         { error: `You already contacted this official on ${cooldown.lastContactDate}. Please wait before sending another message to the same representative.` },
+        { status: 429 },
+      );
+    }
+  }
+
+  // Per-office daily cap on messages WE deliver to a congressional office.
+  //
+  // The cooldown above only ever ran for signed-in users, so the anonymous
+  // campaign flow had no per-office limit at all, and the delivery dedupe
+  // does not provide one: it keys on the exact body, so changing a single
+  // character produces a new key and a real second delivery. This counts
+  // sends, not text, so editing the letter does not buy another one.
+  //
+  // Only the channels we deliver on. A message the person sends from their
+  // own mail app is between them and the office.
+  const deliversToOffice =
+    !!body.cwc && (body.delivery_status === 'cwc_submitted' || body.delivery_status === 'webform_submitted');
+  if (deliversToOffice && body.legislator_id) {
+    const officeQuota = await enforceOfficeSendQuota({
+      email: body.cwc?.email ?? body.advocate_email ?? null,
+      userId: verifiedUserId,
+      officialId: body.legislator_id,
+    });
+    if (!officeQuota.allowed) {
+      return NextResponse.json(
+        {
+          error:
+            'You have reached the daily limit for messages to this office. Congressional offices treat repeated messages from one person as spam, which costs every constituent who writes through us. Please try again tomorrow, or write to a different official.',
+        },
         { status: 429 },
       );
     }

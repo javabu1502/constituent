@@ -22,6 +22,34 @@ const DAILY_LIMITS: Record<string, number> = {
 const LEGISLATOR_COOLDOWN_DAYS = 7;
 
 /**
+ * How many messages one sender may deliver to one congressional office in a
+ * day, through CWC or an office's own web form.
+ *
+ * The 7-day legislator cooldown above only ever ran for signed-in users, so
+ * the whole anonymous campaign flow had no per-office limit at all. The
+ * delivery dedupe does not close that: it keys on the exact body, so adding
+ * a character produces a new key and a genuinely new delivery. One script
+ * could have put 40 messages a minute into a single office under our vendor
+ * name, which is the fastest way to lose an office's trust.
+ *
+ * This is deliberately a daily cap and not the 7-day cooldown. A campaign
+ * runs in stages and asks supporters to act again when a bill moves, often
+ * within the week, so a week-long block would break ordinary participation
+ * to stop something nobody is doing. Three in a day leaves room to correct
+ * and resend, and leaves none to flood.
+ *
+ * Counted per office, so writing to both senators and a representative on
+ * the same day is three separate allowances, not one.
+ */
+export const OFFICE_SEND_DAILY_LIMIT = 3;
+const OFFICE_SEND_PREFIX = 'office_send:';
+
+/** The quota bucket for one official. One legislator is one office. */
+export function officeSendAction(officialId: string): string {
+  return `${OFFICE_SEND_PREFIX}${officialId}`;
+}
+
+/**
  * Who a usage event is attributed to. Exactly one field is set:
  * a logged-in user, or a hashed client IP for anonymous traffic.
  */
@@ -34,6 +62,46 @@ export interface UsageIdentity {
 export function hashIp(ip: string): string {
   const salt = process.env.IP_HASH_SALT ?? '';
   return createHash('sha256').update(`${ip}:${salt}`).digest('hex').slice(0, 32);
+}
+
+/**
+ * Hash a sender's email for rate limiting, so the limit can count a person
+ * without the counter holding their address.
+ *
+ * The sender, not the network. A classroom, a office or a conference room
+ * shares one IP, and four students writing to the same three senators from
+ * one lecture hall is exactly what this product is for. Counting by address
+ * would have stopped them and let a script with forty addresses through.
+ */
+export function hashSender(email: string): string {
+  const salt = process.env.IP_HASH_SALT ?? '';
+  return createHash('sha256').update(`sender:${email.trim().toLowerCase()}:${salt}`).digest('hex').slice(0, 32);
+}
+
+/**
+ * Durable per-sender, per-office cap on messages delivered to a
+ * congressional office. Returns what happened rather than throwing.
+ *
+ * Fails OPEN on a database error, like every other quota here: an
+ * infrastructure hiccup must not stop a constituent writing to their
+ * representative. The compliance gate still screens whatever gets through.
+ */
+export async function enforceOfficeSendQuota(opts: {
+  email?: string | null;
+  userId?: string | null;
+  officialId: string;
+}): Promise<{ allowed: boolean; remaining: number }> {
+  const email = (opts.email ?? '').trim();
+  // No identity to count: a send with neither a signed-in user nor an email
+  // cannot reach a congressional office anyway, since CWC requires one.
+  if (!email && !opts.userId) return { allowed: true, remaining: OFFICE_SEND_DAILY_LIMIT };
+  const identity: UsageIdentity = opts.userId
+    ? { userId: opts.userId, ipHash: null }
+    : { userId: null, ipHash: hashSender(email) };
+  const action = officeSendAction(opts.officialId);
+  const { allowed, remaining } = await checkDailyQuota(identity, action);
+  if (allowed) void logUsage(identity, action);
+  return { allowed, remaining };
 }
 
 /**
@@ -59,7 +127,9 @@ export async function checkDailyQuota(
   identity: UsageIdentity,
   actionType: string,
 ): Promise<{ allowed: boolean; remaining: number }> {
-  const limit = DAILY_LIMITS[actionType] ?? 10;
+  const limit = actionType.startsWith(OFFICE_SEND_PREFIX)
+    ? OFFICE_SEND_DAILY_LIMIT
+    : (DAILY_LIMITS[actionType] ?? 10);
   const supabase = createAdminClient();
 
   const startOfDay = new Date();

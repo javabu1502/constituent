@@ -18,9 +18,11 @@ vi.mock('@/lib/supabase/server', () => ({
   createClient: vi.fn(async () => ({ auth: { getUser: mockGetUser } })),
 }));
 
+const mockOfficeQuota = vi.fn(async (_opts: { email?: string | null; userId?: string | null; officialId: string }) => ({ allowed: true, remaining: 3 }));
 vi.mock('@/lib/usage-quota', () => ({
   checkLegislatorCooldown: vi.fn(async () => ({ allowed: true })),
   resolveUsageIdentity: vi.fn(async () => ({ userId: null, ipHash: 'test-hash' })),
+  enforceOfficeSendQuota: (opts: { email?: string | null; userId?: string | null; officialId: string }) => mockOfficeQuota(opts),
 }));
 
 const mockEnqueue = vi.fn();
@@ -299,5 +301,69 @@ describe('POST /api/track-send', () => {
     const inserted = mockInsert.mock.calls[0][0];
     expect(inserted.message_body).toBe(validBody.message_body);
     expect(inserted.user_id).toBe(userId);
+  });
+
+  /**
+   * The 7-day cooldown only ever ran for signed-in users, so the anonymous
+   * campaign flow had no per-office limit. The delivery dedupe does not
+   * provide one either: it keys on the exact body, so a one-character edit
+   * produces a new key and a real second delivery to the office.
+   */
+  describe('per-office daily cap', () => {
+    const makeReq = (b: unknown) =>
+      new NextRequest('http://localhost/api/track-send', {
+        method: 'POST',
+        body: JSON.stringify(b),
+        headers: { 'Content-Type': 'application/json' },
+      });
+
+    const cwcBody = {
+      ...validBody,
+      delivery_method: 'cwc' as const,
+      delivery_status: 'cwc_submitted' as const,
+      cwc: {
+        prefix: 'Mr.' as const,
+        street: '123 Main St',
+        zip: '89501',
+        email: 'flood@example.com',
+        subject: 'Please vote no on this bill',
+      },
+    };
+
+    it('counts an anonymous congressional send against the sender, not the network', async () => {
+      const { POST } = await import('../track-send/route');
+      await POST(makeReq(cwcBody));
+      expect(mockOfficeQuota).toHaveBeenCalledWith({
+        email: 'flood@example.com',
+        userId: null,
+        officialId: 'S001234',
+      });
+    });
+
+    it('refuses a send once the office is at its daily limit, and stores nothing', async () => {
+      mockOfficeQuota.mockResolvedValueOnce({ allowed: false, remaining: 0 });
+      const { POST } = await import('../track-send/route');
+      const res = await POST(makeReq(cwcBody));
+      expect(res.status).toBe(429);
+      expect(mockInsert).not.toHaveBeenCalled();
+      expect(mockEnqueue).not.toHaveBeenCalled();
+    });
+
+    it('is not fooled by editing the message, because it counts sends and not text', async () => {
+      const { POST } = await import('../track-send/route');
+      await POST(makeReq({ ...cwcBody, message_body: 'Original wording of the letter here.' }));
+      await POST(makeReq({ ...cwcBody, message_body: 'Original wording of the letter here!' }));
+      // Same sender, same office, both counted.
+      expect(mockOfficeQuota).toHaveBeenCalledTimes(2);
+      for (const call of mockOfficeQuota.mock.calls) {
+        expect(call[0]).toMatchObject({ email: 'flood@example.com', officialId: 'S001234' });
+      }
+    });
+
+    it('leaves a message the person sends from their own mail app alone', async () => {
+      const { POST } = await import('../track-send/route');
+      await POST(makeReq({ ...validBody, delivery_status: 'email_opened' as const }));
+      expect(mockOfficeQuota).not.toHaveBeenCalled();
+    });
   });
 });
