@@ -17,6 +17,12 @@ const BASE_URL =
   'https://raw.githubusercontent.com/unitedstates/congress-legislators/main';
 
 const FILES = [
+  // The roster itself. This was missing, so every refresh updated the
+  // committee files and left the member list behind: by October 2026 it was
+  // eight months old, four districts had nobody on file at all, and two
+  // states still named a departed senator.
+  'legislators-current.yaml',
+  'legislators-social-media.yaml',
   'committees-current.yaml',
   'committee-membership-current.yaml',
 ];

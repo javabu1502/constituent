@@ -29,3 +29,33 @@ describe('assessFederalJurisdiction (topic jurisdiction is ENFORCED, not guided)
     expect(assessFederalJurisdiction({ message: 'I am a nurse in Reno and insulin prices are hurting my patients. Please act to lower drug prices.' }).outsideFederal).toBe(false);
   });
 });
+
+describe('a salutation is not a federal ask', () => {
+  it('holds a municipal complaint even when it is addressed to a Representative', () => {
+    const a = assessFederalJurisdiction({
+      message: 'Dear Representative,\n\nThe potholes on my street have not been fixed in two years. Please repave Vassar Street.',
+    });
+    expect(a.outsideFederal).toBe(true);
+  });
+
+  it('holds a zoning request that calls the reader Senator mid-sentence', () => {
+    const a = assessFederalJurisdiction({
+      message: 'My city council approved a tower next door, Senator please help. Deny the variance.',
+    });
+    expect(a.outsideFederal).toBe(true);
+  });
+
+  it('still lets a genuine federal ask through with a salutation on top', () => {
+    const a = assessFederalJurisdiction({
+      message: 'Dear Senator,\n\nPlease urge HHS to withdraw the proposed rule on Head Start performance standards.',
+    });
+    expect(a.outsideFederal).toBe(false);
+  });
+
+  it('still lets a federal bill through', () => {
+    const a = assessFederalJurisdiction({
+      message: 'Dear Representative,\n\nPlease vote no on H.R. 1234 when it reaches the floor.',
+    });
+    expect(a.outsideFederal).toBe(false);
+  });
+});

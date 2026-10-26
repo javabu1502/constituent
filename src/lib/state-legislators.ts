@@ -28,7 +28,8 @@ export interface StateLegislator {
   name: string;
   firstName?: string;
   lastName?: string;
-  chamber: 'upper' | 'lower';
+  /** Nebraska is unicameral and stores its members as 'legislature'. */
+  chamber: 'upper' | 'lower' | 'legislature';
   district: string;
   party: string;
   email?: string;
@@ -162,8 +163,10 @@ export function getStateLegislators(stateCode: string): StateLegislator[] {
  * Convert StateLegislator to Official type
  */
 export function toOfficial(leg: StateLegislator, stateCode: string): Official {
+  // Nebraska's unicameral members are "State Senator" too, which is what they
+  // are actually called.
   const chamberTitle =
-    leg.chamber === 'upper' ? 'State Senator' : 'State Representative';
+    leg.chamber === 'lower' ? 'State Representative' : 'State Senator';
 
   // Use "District N" for numeric districts, bare name for named districts
   const isNumeric = /^\d+$/.test(leg.district);
@@ -177,7 +180,9 @@ export function toOfficial(leg: StateLegislator, stateCode: string): Official {
     lastName: leg.lastName,
     title: `${chamberTitle}, ${districtLabel}`,
     level: 'state',
-    chamber: leg.chamber,
+    // Official.chamber has no unicameral value; Nebraska's members present as
+    // the upper chamber, which is how the state itself describes them.
+    chamber: leg.chamber === 'legislature' ? 'upper' : leg.chamber,
     party: leg.party,
     state: stateCode.toUpperCase(),
     district: leg.district,
@@ -199,9 +204,13 @@ export function findStateSenator(
   const legislators = getStateLegislators(stateCode);
   const target = normalizeDistrict(district);
 
+  // Nebraska's legislature is unicameral, and its members are stored with
+  // chamber "legislature". Matching only "upper" meant a Nebraskan writing
+  // about a state matter reached nobody at the state level at all.
   const senator = legislators.find(
     (leg) =>
-      leg.chamber === 'upper' && normalizeDistrict(leg.district) === target
+      (leg.chamber === 'upper' || leg.chamber === 'legislature') &&
+      normalizeDistrict(leg.district) === target
   );
 
   return senator ? toOfficial(senator, stateCode) : null;

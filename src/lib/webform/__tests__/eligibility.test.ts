@@ -29,8 +29,8 @@ describe('webform eligibility', () => {
     expect(captchaFreeFormFor({ name: 'Nobody At All' })).toBeNull();
   });
 
-  it('every verified entry carries a senate.gov url', () => {
-    const { senators } = require('../../../data/senate-webform-verified.json') as {
+  it('every verified entry carries a senate.gov url', async () => {
+    const { senators } = (await import('../../../data/senate-webform-verified.json')) as unknown as {
       senators: Array<{ name: string; url: string }>;
     };
     expect(senators.length).toBeGreaterThan(0);

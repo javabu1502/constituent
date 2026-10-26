@@ -127,10 +127,26 @@ export interface LocalGeographies {
 }
 
 /**
+ * A term that has already ended. The roster is hand-verified and goes stale
+ * between elections, and several of these addresses are personal: a school
+ * board seat whose term ended in 2024 still carried a private gmail and a
+ * work address at an accountancy firm. Someone who left office years ago
+ * should not receive a constituent's story at home.
+ */
+export function termHasEnded(termEnd: string | number | null | undefined, now = new Date()): boolean {
+  if (termEnd == null) return false;
+  const raw = String(termEnd).trim();
+  // A bare year means the term runs to the end of that year.
+  const end = /^\d{4}$/.test(raw) ? new Date(Number(raw), 11, 31, 23, 59, 59) : new Date(raw);
+  if (Number.isNaN(end.getTime())) return false;
+  return end.getTime() < now.getTime();
+}
+
+/**
  * Every seat of every body that governs this address. Unincorporated areas
  * have no place, so only the county commission and school board apply. Seats
- * flagged `unverified` are returned without an email so they can never be
- * mailed on stale data.
+ * flagged `unverified`, and seats whose term has already ended, are returned
+ * without an email so they can never be mailed on stale data.
  */
 export async function findLocalOfficials(stateCode: string, geo: LocalGeographies): Promise<LocalOfficial[]> {
   const roster = localRosterFor(stateCode);
@@ -165,7 +181,7 @@ export async function findLocalOfficials(stateCode: string, geo: LocalGeographie
         state: roster.state,
         district: district ?? undefined,
         phone: seat.phone ?? undefined,
-        email: seat.unverified ? undefined : seat.email ?? undefined,
+        email: seat.unverified || termHasEnded(seat.termEnd) ? undefined : seat.email ?? undefined,
         website: seat.website ?? body.website ?? undefined,
         contactForm: seat.contactFormUrl ?? undefined,
         photoUrl: seat.photoUrl ?? undefined,

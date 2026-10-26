@@ -36,7 +36,10 @@ describe('verifyConstituent — House', () => {
     mockGeo.mockResolvedValue(geo({ congressionalDistrict: '0' }));
     const r = await verifyConstituent(addr, official({ chamber: 'house', district: '12' }));
     expect(r.ok).toBe(false);
-    if (!r.ok) expect(r.reason).toBe('DISTRICT_MISMATCH');
+    // '0' in a multi-seat state is an unresolved lookup, not district 00.
+    // It used to be turned into a code for an at-large seat the state does
+    // not have, which then failed as a mismatch. Now it is refused outright.
+    if (!r.ok) expect(r.reason).toBe('UNRESOLVED');
   });
 
   it('allows a genuine at-large match', async () => {

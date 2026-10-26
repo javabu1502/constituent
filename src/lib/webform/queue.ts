@@ -6,6 +6,7 @@ import { screenMessageForCwc, type GateOutcome } from '@/lib/cwc/compliance-gate
 import { stableMessageKey } from '@/lib/cwc/enqueue-from-send';
 import { getActiveOfficeCodesCached } from '@/lib/cwc/send';
 import { resolveOfficeCode } from '@/lib/cwc/offices';
+import { verifyConstituentForOffice } from '@/lib/cwc/verify';
 import { WEBFORM_MESSAGE_STATUS, setMessageDeliveryStatus } from '@/lib/cwc/message-status';
 import { notifyConstituent } from '@/lib/cwc/notify';
 import type { CwcDelivery } from '@/lib/cwc/types';
@@ -128,6 +129,25 @@ export async function buildWebformQueueItem(body: {
   if (!formUrl) return { ok: false, skip: 'no CAPTCHA-free contact form on record' };
   const parts = body.advocate_name.trim().split(/\s+/);
   if (parts.length < 2) return { ok: false, skip: 'advocate name has no last name' };
+  // Confirm the sender is actually represented by this senator. The CWC path
+  // enforces this inside sendCwcDelivery, which this path never reaches, so
+  // until now the only test was whether the senator matched the state the
+  // sender typed. A wrong state in the form was enough to file a message with
+  // a senator who does not represent them.
+  const verdict = await verifyConstituentForOffice({
+    chamber: 'senate',
+    officeCode: code.ok ? code.code : `S${state}01`,
+    campaignId: campaignRef,
+    constituent: {
+      prefix: cwc.prefix as CwcDelivery['constituent']['prefix'],
+      firstName: parts[0], lastName: parts.slice(1).join(' '),
+      address1: cwc.street, city: body.advocate_city, state, zip: cwc.zip, email: cwc.email,
+    },
+    message: { subject: cwc.subject, topics: [], constituentMessage: body.message_body },
+  });
+  if (!verdict.ok) {
+    return { ok: false, skip: `constituent verification failed (${verdict.reason}): ${verdict.detail}` };
+  }
   return {
     ok: true,
     item: {

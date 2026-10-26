@@ -29,16 +29,26 @@ const STATE_LEGISLATURE_PATTERN =
 const LOCAL_BODY_PATTERN =
   /\b(city council|county commission(?:ers)?|board of supervisors|school board|planning commission|zoning board|mayor'?s office|our mayor|the mayor|city manager|county manager|homeowners? association|\bhoa\b)\b/i;
 
+// "Senator" and "Representative" on their own are NOT evidence of a federal
+// ask. Every state has senators and representatives too, and more to the
+// point, writing "Dear Representative," at the top of a letter about potholes
+// used to switch this whole check off. A federal qualifier is required.
 const FEDERAL_ASK_PATTERN =
-  /\b(congress|federal|u\.?s\.? (?:senate|house|representative|senator)|senator|representative|congress(?:man|woman|member)|appropriat|\bbill\b.*\b(?:h\.?r\.?|s\.)\s*\d|medicare|medicaid|social security|\bva\b|veterans affairs|\birs\b|\bepa\b|\bfda\b|\bhhs\b|head start|\bsnap\b|\bwic\b|department of (?:education|health|labor|agriculture|defense|justice|homeland|state|transportation|energy|interior)|federal funding|federal grant|federal rule|proposed rule|regulation|national|nationwide|immigration|border|tariff|foreign|military|nato|ukraine|israel)\b/i;
+  /\b(congress|federal|u\.?s\.? (?:senate|house|representative|senator)|congress(?:man|woman|member)|appropriat|\bbill\b.*\b(?:h\.?r\.?|s\.)\s*\d|medicare|medicaid|social security|\bva\b|veterans affairs|\birs\b|\bepa\b|\bfda\b|\bhhs\b|head start|\bsnap\b|\bwic\b|department of (?:education|health|labor|agriculture|defense|justice|homeland|state|transportation|energy|interior)|federal funding|federal grant|federal rule|proposed rule|regulation|national|nationwide|immigration|border|tariff|foreign|military|nato|ukraine|israel)\b/i;
 
 // Municipal services: nobody in Congress fixes these; a message that is only
 // about them (with no federal ask) belongs to city hall.
 const LOCAL_SERVICE_PATTERN =
   /\b(potholes?|street ?lights?|sidewalks?|trash (?:pickup|collection)|garbage (?:pickup|collection|service)|recycling pickup|snow ?plow\w*|water bill|sewer bill|parking (?:tickets?|meters?|enforcement)|noise ordinance|leash law|code enforcement|building permit|property tax(?:es)?|the city does nothing|the county does nothing)\b/i;
 
+/** Drop a leading "Dear ...," line. It names the recipient, which tells us
+ *  nothing about whether the request belongs to that office. */
+export function withoutSalutation(message: string): string {
+  return message.replace(/^\s*(dear|to|hello|greetings)\b[^\n]{0,80}[,:]?\s*\n+/i, '');
+}
+
 export function assessFederalJurisdiction(input: { message: string; subject?: string }): JurisdictionAssessment {
-  const text = `${input.subject ?? ''}\n${input.message}`;
+  const text = `${input.subject ?? ''}\n${withoutSalutation(input.message)}`;
   const reasons: string[] = [];
 
   const refs = detectBillReferences(text);
