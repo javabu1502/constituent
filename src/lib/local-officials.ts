@@ -25,6 +25,8 @@ export interface LocalSeat {
   sourceUrl?: string | null;
   verifiedAt?: string | null;
   unverified?: boolean;
+  /** Nobody holds this seat right now, so there is nobody to write to. */
+  vacant?: boolean;
 }
 
 export interface LocalBody {
@@ -167,6 +169,10 @@ export async function findLocalOfficials(stateCode: string, geo: LocalGeographie
       ? body.seats.filter((s) => isExecutiveSeat(s) || normalizeDistrictLabel(s.district) === matchedKey)
       : body.seats;
     for (const seat of seats) {
+      // A vacant seat has no officeholder. Fernley's Ward Three sat in the
+      // roster under its former member's name and personal email months
+      // after he left, so a constituent's message would have gone to him.
+      if (seat.vacant) continue;
       const district = seat.district?.trim() || null;
       const officeName = district && !/^mayor$/i.test(district) && !new RegExp(district, 'i').test(seat.title)
         ? `${seat.title}, ${district}`

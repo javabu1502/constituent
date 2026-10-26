@@ -681,20 +681,21 @@
           "unverified": false
         },
         {
-          "name": "Stan Lau",
+          "name": "Vacant",
           "title": "Council Member",
           "district": "Ward 3",
           "party": null,
-          "email": "slau@cityoffernley.org",
+          "email": null,
           "emailIsShared": false,
           "contactFormUrl": null,
-          "phone": "775-784-9854",
-          "website": "https://www.cityoffernley.org/777/Ward-Three-Stan-Lau",
+          "phone": null,
+          "website": "https://www.cityoffernley.org/1300/Ward-Three---Vacant",
           "photoUrl": null,
           "termEnd": null,
           "sourceUrl": "https://www.cityoffernley.org/132/Mayor-and-City-Council",
-          "verifiedAt": "2026-09-28",
-          "unverified": false
+          "verifiedAt": "2026-10-25",
+          "unverified": false,
+          "vacant": true
         },
         {
           "name": "Albert Torres",

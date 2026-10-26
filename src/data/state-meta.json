@@ -56,7 +56,7 @@
     "inSession": true,
     "upperChamberName": "Senate",
     "lowerChamberName": "House of Representatives",
-    "publicCommentUrl": "https://leg.colorado.gov/content/testify",
+    "publicCommentUrl": "https://sites.coleg.gov/public-testimony",
     "publicCommentMethod": "Online sign-up for in-person, remote (Zoom), or written testimony"
   },
   "CT": {
@@ -366,7 +366,7 @@
     "inSession": true,
     "upperChamberName": "Senate",
     "lowerChamberName": "House of Representatives",
-    "publicCommentUrl": "https://olis.oregonlegislature.gov/liz/testimony",
+    "publicCommentUrl": "https://www.oregonlegislature.gov/citizen_engagement/Pages/Submit-Exhibits.aspx",
     "publicCommentMethod": "Testimony submission form with video guidance"
   },
   "PA": {
@@ -436,7 +436,7 @@
     "inSession": false,
     "upperChamberName": "Senate",
     "lowerChamberName": "House of Representatives",
-    "publicCommentUrl": "https://le.utah.gov/asp/billsintro/SubsAndMore.asp",
+    "publicCommentUrl": "https://le.utah.gov/committee/committee.jsp",
     "publicCommentMethod": "Public comment form (closes 1 hour before meeting)"
   },
   "VT": {
