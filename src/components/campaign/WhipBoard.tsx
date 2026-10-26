@@ -41,11 +41,23 @@ function chamberOf(chamber: string | null): 'house' | 'senate' | null {
   return null;
 }
 
+// Writes to the whip board are the org's vote count. A silent failure loses an
+// afternoon of counting, so every rejection has to say what to do next.
+function failureReason(status: number | null): string {
+  if (status === 401 || status === 403) {
+    return 'Your sign-in is no longer valid. Sign in again, then reload this page.';
+  }
+  return 'Check your connection and try again.';
+}
+
 export function WhipBoard({ slug, isDemo = false }: { slug: string; isDemo?: boolean }) {
   const [rows, setRows] = useState<Row[]>([]);
   const [notes, setNotes] = useState<Note[]>([]);
   const [committee, setCommittee] = useState<{ id: string; name: string; size: number } | null>(null);
   const [loaded, setLoaded] = useState(false);
+  const [loadError, setLoadError] = useState(false);
+  const [positionError, setPositionError] = useState<string | null>(null);
+  const [noteError, setNoteError] = useState<string | null>(null);
   const [search, setSearch] = useState('');
   const [chamberFilter, setChamberFilter] = useState('');
   const [committeeOnly, setCommitteeOnly] = useState(false);
@@ -55,13 +67,20 @@ export function WhipBoard({ slug, isDemo = false }: { slug: string; isDemo?: boo
   const [savingNote, setSavingNote] = useState(false);
 
   const load = useCallback(async () => {
+    setLoadError(false);
     try {
       const res = await fetch(`/api/campaigns/${slug}/whip`);
-      if (!res.ok) return;
+      if (!res.ok) {
+        // An empty board and an unreadable board look identical otherwise.
+        setLoadError(true);
+        return;
+      }
       const data = await res.json();
       setRows(data.rows || []);
       setNotes(data.notes || []);
       setCommittee(data.committee ?? null);
+    } catch {
+      setLoadError(true);
     } finally {
       setLoaded(true);
     }
@@ -70,20 +89,32 @@ export function WhipBoard({ slug, isDemo = false }: { slug: string; isDemo?: boo
   useEffect(() => { void load(); }, [load]);
 
   const setPosition = async (row: Row, position: string) => {
+    const previous = row.position;
+    setPositionError(null);
     setRows((prev) => prev.map((r) => (r.id === row.id ? { ...r, position } : r)));
-    await fetch(`/api/campaigns/${slug}/whip`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        legislator_id: row.id, legislator_name: row.name,
-        legislator_party: row.party, legislator_chamber: row.chamber, position,
-      }),
-    }).catch(() => {});
+    let status: number | null = null;
+    try {
+      const res = await fetch(`/api/campaigns/${slug}/whip`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          legislator_id: row.id, legislator_name: row.name,
+          legislator_party: row.party, legislator_chamber: row.chamber, position,
+        }),
+      });
+      status = res.status;
+      if (!res.ok) throw new Error(`whip write failed: ${res.status}`);
+    } catch {
+      setRows((prev) => prev.map((r) => (r.id === row.id ? { ...r, position: previous } : r)));
+      setPositionError(`Could not save the position for ${row.name}. ${failureReason(status)}`);
+    }
   };
 
   const addNote = async (row: Row | null) => {
     if (!noteDraft.trim()) return;
     setSavingNote(true);
+    setNoteError(null);
+    let status: number | null = null;
     try {
       const res = await fetch(`/api/campaigns/${slug}/notes`, {
         method: 'POST',
@@ -95,13 +126,16 @@ export function WhipBoard({ slug, isDemo = false }: { slug: string; isDemo?: boo
           hours: noteHours.trim() ? Number(noteHours) : null,
         }),
       });
-      if (res.ok) {
-        const { note } = await res.json();
-        setNotes((prev) => [note, ...prev]);
-        if (row) setRows((prev) => prev.map((r) => (r.id === row.id ? { ...r, noteCount: r.noteCount + 1 } : r)));
-        setNoteDraft('');
-        setNoteHours('');
-      }
+      status = res.status;
+      if (!res.ok) throw new Error(`note write failed: ${res.status}`);
+      const { note } = await res.json();
+      setNotes((prev) => [note, ...prev]);
+      if (row) setRows((prev) => prev.map((r) => (r.id === row.id ? { ...r, noteCount: r.noteCount + 1 } : r)));
+      setNoteDraft('');
+      setNoteHours('');
+    } catch {
+      // The draft stays in the box so the note is not lost on a retry.
+      setNoteError(`Could not save this note. ${failureReason(status)}`);
     } finally {
       setSavingNote(false);
     }
@@ -133,6 +167,26 @@ export function WhipBoard({ slug, isDemo = false }: { slug: string; isDemo?: boo
   }, [rows, search, chamberFilter, committeeOnly]);
 
   if (!loaded) return null;
+
+  if (loadError) {
+    return (
+      <div className="mb-8 rounded-xl border border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-900/20 p-5">
+        <h2 className="text-base font-semibold text-amber-900 dark:text-amber-200 mb-1">Whip count unavailable</h2>
+        <p className="text-sm text-amber-800 dark:text-amber-300">
+          Your saved positions could not be loaded, so this board is not showing them. Nothing has been lost. Try
+          again, and if it keeps failing, sign in again and reload this page.
+        </p>
+        <button
+          type="button"
+          onClick={() => void load()}
+          className="mt-3 text-xs font-medium px-3 py-1.5 rounded-lg bg-amber-600 hover:bg-amber-700 text-white"
+        >
+          Try again
+        </button>
+      </div>
+    );
+  }
+
   if (rows.length === 0) return null;
 
   return (
@@ -153,6 +207,22 @@ export function WhipBoard({ slug, isDemo = false }: { slug: string; isDemo?: boo
         <span className="font-medium">Uncommitted</span> = still winnable — your to-do list. Sponsor badges sync
         automatically from the bill record. Click a name for full intel; log hours on notes to track lobbying time.
       </p>
+
+      {positionError && (
+        <div
+          role="alert"
+          className="mb-3 flex items-start justify-between gap-3 p-3 rounded-lg border border-red-200 dark:border-red-800 bg-red-50 dark:bg-red-900/20"
+        >
+          <p className="text-sm text-red-700 dark:text-red-300">{positionError}</p>
+          <button
+            type="button"
+            onClick={() => setPositionError(null)}
+            className="shrink-0 text-xs text-red-600 dark:text-red-400 hover:underline"
+          >
+            Dismiss
+          </button>
+        </div>
+      )}
 
       {committeeTally && committee && (
         <div className={`mb-4 p-3 rounded-lg border text-sm ${
@@ -247,7 +317,7 @@ export function WhipBoard({ slug, isDemo = false }: { slug: string; isDemo?: boo
                 )}
                 <button
                   type="button"
-                  onClick={() => { setOpenLegislator(openLegislator === r.id ? null : r.id); setNoteDraft(''); }}
+                  onClick={() => { setOpenLegislator(openLegislator === r.id ? null : r.id); setNoteDraft(''); setNoteError(null); }}
                   className="text-xs text-purple-600 dark:text-purple-400 hover:underline"
                 >
                   Notes{r.noteCount > 0 ? ` (${r.noteCount})` : ''}
@@ -297,6 +367,9 @@ export function WhipBoard({ slug, isDemo = false }: { slug: string; isDemo?: boo
                     Add
                   </button>
                 </div>}
+                {!isDemo && noteError && (
+                  <p role="alert" className="text-sm text-red-600 dark:text-red-400">{noteError}</p>
+                )}
               </div>
             )}
           </li>

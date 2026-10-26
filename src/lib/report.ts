@@ -249,7 +249,9 @@ export function assembleCampaignReport(campaign: CampaignRow, rows: ReportSource
   // Stance: only meaningful when both sides exist (neutral official weigh-ins).
   const support = Number(campaign.support_count) || 0;
   const oppose = Number(campaign.oppose_count) || 0;
-  const stance = support + oppose > 0 && support > 0 && oppose > 0 ? { support, oppose } : null;
+  // A unanimous result is reportable. Requiring both sides to be non-zero
+  // meant a campaign where everyone agreed reported no stance at all.
+  const stance = support + oppose > 0 ? { support, oppose } : null;
 
   // Party split of messages. Prefix match absorbs the label variants the
   // legislator data actually carries (D / Dem / Democratic / DFL, R / Rep /

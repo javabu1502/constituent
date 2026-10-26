@@ -34,8 +34,17 @@ export function CampaignInsightsPanel({
     setNotice(null);
     try {
       const res = await fetch(`/api/campaigns/${slug}/insights`, { method: 'POST' });
-      const data = (await res.json()) as { insights: CampaignInsights | null; reason?: string };
-      if (data.insights) {
+      const data = (await res.json().catch(() => ({}))) as {
+        insights?: CampaignInsights | null;
+        reason?: string;
+        error?: string;
+      };
+      if (res.status === 429) {
+        // Generation is rate limited, because each press is a model pass.
+        setNotice(data.reason ?? 'You have run this a few times in a row. Wait a minute and generate again.');
+      } else if (!res.ok) {
+        setNotice(data.reason ?? 'Could not generate insights right now. Please try again.');
+      } else if (data.insights) {
         setInsights(data.insights);
         setStale(false);
       } else {

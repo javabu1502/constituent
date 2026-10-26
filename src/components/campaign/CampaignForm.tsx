@@ -220,13 +220,22 @@ export function CampaignForm({
     setTargetLevel('federal');
     setDirection('');
     setMessageTemplate('');
+    setTalkingPointsCoverage('all');
     setStoryPrompt('');
+    setUsageStatement('');
     setUsageTags([]);
+    setLanguage('en');
+    setTargetMode('all');
+    setTargetOfficials([]);
+    setTargetParty({ party: 'D', chamber: 'both', level: 'federal' });
     setBillLevel('');
     setBillState('');
     setBillQuery('');
     setResolvedBill(null);
+    setBillStatus('idle');
+    setSuggestion(null);
     setFieldErrors({});
+    setError(null);
     setDraftRestored(false);
   };
 
@@ -737,7 +746,17 @@ export function CampaignForm({
       </div>
 
       {/* Narrow targeting — hidden in edit mode (targeting is fixed at
-          creation) and on committee actions (the committee picker rules). */}
+          creation) and on committee actions (the committee picker rules).
+          In edit mode, say why the picker is missing so an org that targeted
+          the wrong officials knows what its options are. */}
+      {edit && stageGoal !== 'committee' && (
+        <p className="text-xs text-gray-500 dark:text-gray-400">
+          You can still change the level above. The narrower choice you made at creation, specific officials or a
+          party slice, is fixed once a campaign is live, so messages already sent stay attributed to the officials
+          they went to. To work a different set of officials, add a step to this campaign or create a new campaign
+          with the targets you want.
+        </p>
+      )}
       {!edit && stageGoal !== 'committee' && (
         <TargetPicker
           mode={targetMode}

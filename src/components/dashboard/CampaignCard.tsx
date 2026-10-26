@@ -3,6 +3,8 @@ import { CopyLinkButton } from '@/components/campaign/CopyLinkButton';
 import { EmbedCodeButton } from '@/components/campaign/EmbedCodeButton';
 import { QrCodeButton } from '@/components/campaign/QrCodeButton';
 import { DeleteCampaignButton } from '@/components/campaign/DeleteCampaignButton';
+import { CloseCampaignButton } from '@/components/campaign/CloseCampaignButton';
+import { isCampaignClosed } from '@/lib/campaign-close';
 
 export type CampaignRow = Record<string, string | number | null>;
 
@@ -27,6 +29,9 @@ export function CampaignCard({
   stages: CampaignRow[];
   isDemo?: boolean;
 }) {
+  // A closed campaign stays on the dashboard. It says it is closed, and the
+  // action next to delete reopens it.
+  const closed = isCampaignClosed(campaign.status as string | null);
   return (
     <div
       key={campaign.id}
@@ -75,6 +80,11 @@ export function CampaignCard({
               )}
               {ab && (
                 <span className={`px-2.5 py-1 text-xs font-medium rounded-full ${ab.cls}`}>{ab.label}</span>
+              )}
+              {closed && (
+                <span className="px-2.5 py-1 text-xs font-semibold rounded-full bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-100">
+                  Closed
+                </span>
               )}
             </div>
             <div className="flex items-center gap-1.5 text-purple-600 dark:text-purple-400">
@@ -162,10 +172,29 @@ export function CampaignCard({
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
               </svg>
             </Link>
-            <DeleteCampaignButton slug={campaign.slug as string} headline={String(campaign.headline ?? '')} />
+            <CloseCampaignButton
+              slug={campaign.slug as string}
+              headline={String(campaign.headline ?? '')}
+              closed={closed}
+              stepCount={stages.length}
+              isStory={campaign.campaign_type === 'storytelling'}
+            />
+            <DeleteCampaignButton
+              slug={campaign.slug as string}
+              headline={String(campaign.headline ?? '')}
+              closed={closed}
+              stepCount={stages.length}
+            />
           </div>
         )}
       </div>
+      {!isDemo && closed && (
+        <p className="mt-3 text-xs text-gray-500 dark:text-gray-400">
+          {campaign.campaign_type === 'storytelling'
+            ? 'Not collecting stories. The public page and the embed say it is closed.'
+            : 'Not collecting messages. The public page and the embed say it is closed.'}
+        </p>
+      )}
       {!isDemo && campaign.campaign_type !== 'storytelling' && (
         <p className="mt-3 text-xs text-gray-500 dark:text-gray-400">
           {stages.length > 0 ? `${stages.length} step${stages.length !== 1 ? 's' : ''} · ` : ''}

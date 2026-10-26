@@ -92,3 +92,13 @@ export function tallyDelivery(statuses: Array<string | null | undefined>): Deliv
   }
   return t;
 }
+
+/** Every status that means this outcome. Used for exact grouped counts. */
+export function statusesForOutcome(outcome: DeliveryOutcome): string[] {
+  return Object.entries(STATUSES).filter(([, v]) => v.outcome === outcome).map(([k]) => k);
+}
+
+/** Every status this vocabulary knows. Anything else counts as self_sent. */
+export function knownStatuses(): string[] {
+  return Object.keys(STATUSES);
+}

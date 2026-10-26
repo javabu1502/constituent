@@ -91,8 +91,9 @@ export default async function CreateCampaignPage({
     }
   }
 
-  // Logged-out visitors get a public explainer + sign-in CTA instead of a cold
-  // redirect to the login box, so they understand what they clicked on.
+  // Logged-out visitors get a public explainer instead of a cold redirect to
+  // the login box. The explainer has to say that campaigns are for
+  // organizations, or a constituent signs up and lands on a 403.
   if (!user) {
     return (
       <div className="max-w-2xl mx-auto px-4 py-8">
@@ -115,31 +116,37 @@ export default async function CreateCampaignPage({
           </ul>
 
           <div className="mt-6 p-4 bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-700 rounded-xl">
+            <p className="text-sm text-purple-800 dark:text-purple-200 mb-1 font-medium">
+              Campaigns are run by advocacy organizations.
+            </p>
             <p className="text-sm text-purple-800 dark:text-purple-200 mb-3">
-              Creating a campaign is free. You just need an account so you can manage it and see responses.
+              Running a campaign needs an organization account, which we set up for advocacy groups, nonprofits, and
+              civic organizations. A personal account cannot create one. If you represent an organization, apply for
+              the pilot and we will get your account set up. If you already have an organization account, sign in.
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
               <Link
-                href={`/login?redirectTo=${encodeURIComponent(createPath)}`}
+                href="/campaigns#apply"
                 className="flex-1 text-center px-4 py-2.5 bg-purple-600 hover:bg-purple-700 text-white text-sm font-medium rounded-lg transition-colors"
               >
-                Sign in to start
+                Apply for an organization account
               </Link>
               <Link
-                href={`/signup?redirectTo=${encodeURIComponent(createPath)}`}
+                href={`/login?redirectTo=${encodeURIComponent(createPath)}`}
                 className="flex-1 text-center px-4 py-2.5 border-2 border-purple-600 text-purple-600 dark:text-purple-400 dark:border-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/20 text-sm font-medium rounded-lg transition-colors"
               >
-                Create a free account
+                Sign in
               </Link>
             </div>
           </div>
         </div>
 
         <p className="text-center text-sm text-gray-500 dark:text-gray-400 mt-6">
-          Just want to take action?{' '}
-          <Link href="/campaigns" className="text-purple-600 dark:text-purple-400 hover:underline font-medium">Browse campaigns</Link>
+          Here as an individual? You can{' '}
+          <Link href="/issues" className="text-purple-600 dark:text-purple-400 hover:underline font-medium">weigh in on an active issue</Link>,{' '}
+          <Link href="/campaigns" className="text-purple-600 dark:text-purple-400 hover:underline font-medium">browse campaigns</Link>
           {' '}or{' '}
-          <Link href="/contact" className="text-purple-600 dark:text-purple-400 hover:underline font-medium">write to your officials</Link>.
+          <Link href="/contact" className="text-purple-600 dark:text-purple-400 hover:underline font-medium">write to your officials</Link>. No organization account needed.
         </p>
       </div>
     );

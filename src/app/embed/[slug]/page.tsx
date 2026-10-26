@@ -4,6 +4,8 @@ import { createAdminClient } from '@/lib/supabase';
 import { CampaignParticipate } from '@/components/campaign/CampaignParticipate';
 import { StorytellerFlow } from '@/components/campaign/StorytellerFlow';
 import { EmbedAutoHeight } from '@/components/embed/EmbedAutoHeight';
+import { CampaignClosedNotice } from '@/components/campaign/CampaignClosedNotice';
+import { isCampaignClosed } from '@/lib/campaign-close';
 import type { Campaign } from '@/lib/types';
 
 interface PageProps {
@@ -56,6 +58,35 @@ export default async function CampaignEmbedPage({ params }: PageProps) {
     parentCampaign = parentRow ?? null;
   }
 
+  // The embed filtered on approval_status and never on status, so a closed
+  // campaign kept rendering a form whose submit failed with a generic error
+  // on the org's own website. It gets the same closed state as the public
+  // page, with links that break out of the iframe.
+  const closed = isCampaignClosed(campaign.status);
+  let closedOutcome: string | null = null;
+  let onwardCampaigns: { slug: string; headline: string }[] = [];
+  if (closed) {
+    const { data: ownerRow } = await admin
+      .from('campaigns')
+      .select('creator_id, outcome')
+      .eq('id', campaign.id)
+      .single();
+    closedOutcome = (ownerRow?.outcome as string | null) ?? null;
+    if (ownerRow?.creator_id) {
+      const { data: siblings } = await admin
+        .from('campaigns')
+        .select('slug, headline')
+        .eq('creator_id', ownerRow.creator_id)
+        .eq('status', 'active')
+        .eq('approval_status', 'approved')
+        .is('parent_campaign_id', null)
+        .neq('id', campaign.id)
+        .order('created_at', { ascending: false })
+        .limit(3);
+      onwardCampaigns = (siblings ?? []) as { slug: string; headline: string }[];
+    }
+  }
+
   // Dormant bill identifiers must not reach the client at all — not even in
   // serialized props. Neutral issues carry no bill reference anywhere.
   const billSpecific = !!(campaign.is_bill_specific && campaign.bill_congress && campaign.bill_type && campaign.bill_number);
@@ -104,13 +135,24 @@ export default async function CampaignEmbedPage({ params }: PageProps) {
           </div>
         )}
 
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4 sm:p-5">
-          {isStory ? (
-            <StorytellerFlow campaign={campaign} />
-          ) : (
-            <CampaignParticipate campaign={campaign} parentCampaign={parentCampaign} />
-          )}
-        </div>
+        {closed ? (
+          <CampaignClosedNotice
+            language={campaign.language}
+            isStory={isStory}
+            outcome={closedOutcome}
+            orgName={campaign.org_name ?? null}
+            otherCampaigns={onwardCampaigns}
+            inEmbed
+          />
+        ) : (
+          <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4 sm:p-5">
+            {isStory ? (
+              <StorytellerFlow campaign={campaign} />
+            ) : (
+              <CampaignParticipate campaign={campaign} parentCampaign={parentCampaign} />
+            )}
+          </div>
+        )}
 
         <p className="mt-3 text-center text-xs text-gray-400 dark:text-gray-500">
           <a

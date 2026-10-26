@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase';
 import { generateCampaignInsights, getCachedInsights, MIN_SOURCES, type InsightKind } from '@/lib/insights';
+import { generateLimiter, getClientIp } from '@/lib/rate-limit';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -43,7 +44,9 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
   return NextResponse.json({ insights: cached?.insights ?? null, stale: cached?.stale ?? false, kind });
 }
 
-/** POST — (re)generate insights on demand. Owner-only; runs one LLM pass. */
+/** POST — (re)generate insights on demand. Owner-only; runs one LLM pass.
+ * Rate limited: owner-gating alone lets a held-down button bill a full model
+ * pass per press. */
 export async function POST(request: NextRequest, { params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const res = await loadOwnedCampaign(slug);
@@ -51,6 +54,19 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
     const status = res.error === 'not_found' ? 404 : res.error === 'unauthorized' ? 401 : 403;
     return NextResponse.json({ error: res.error }, { status });
   }
+
+  const ip = getClientIp(request);
+  const { success, retryAfter } = generateLimiter.check(ip);
+  if (!success) {
+    return NextResponse.json(
+      {
+        error: 'rate_limited',
+        reason: `You have run this a few times in a row. Wait ${retryAfter} seconds and generate again.`,
+      },
+      { status: 429, headers: { 'Retry-After': String(retryAfter) } },
+    );
+  }
+
   const kind = kindFor(res.campaign.campaign_type);
   const insights = await generateCampaignInsights(res.campaign.id, kind);
   if (!insights) {

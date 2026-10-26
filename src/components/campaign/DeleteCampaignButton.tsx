@@ -2,12 +2,42 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { CLOSED_STATUS, setCampaignOpenState } from '@/lib/campaign-close';
 
-export function DeleteCampaignButton({ slug, headline }: { slug: string; headline: string }) {
+/**
+ * Delete is the destructive end. The dialog also offers the other one:
+ * closing, which stops the campaign collecting and keeps everything.
+ */
+export function DeleteCampaignButton({
+  slug,
+  headline,
+  closed = false,
+  stepCount = 0,
+}: {
+  slug: string;
+  headline: string;
+  closed?: boolean;
+  stepCount?: number;
+}) {
   const router = useRouter();
   const [showConfirm, setShowConfirm] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  const handleClose = async () => {
+    setIsClosing(true);
+    setError(null);
+    try {
+      await setCampaignOpenState(slug, CLOSED_STATUS);
+      setShowConfirm(false);
+      setIsClosing(false);
+      router.refresh();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Could not close this campaign. Try again.');
+      setIsClosing(false);
+    }
+  };
 
   const handleDelete = async () => {
     setIsDeleting(true);
@@ -59,6 +89,23 @@ export function DeleteCampaignButton({ slug, headline }: { slug: string; headlin
               positions, meeting notes and coalition entries. None of it can be recovered.
               Download what you need first.
             </p>
+            {!closed && (
+              <div className="mb-6 p-3 rounded-lg bg-gray-50 dark:bg-gray-900/40 border border-gray-200 dark:border-gray-700">
+                <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
+                  Closing it stops the campaign collecting and keeps all of that. The public page
+                  and the embed say it is closed.
+                  {stepCount > 0 ? ` Its ${stepCount === 1 ? '1 step' : `${stepCount} steps`} close too.` : ''}
+                </p>
+                <button
+                  type="button"
+                  onClick={handleClose}
+                  disabled={isClosing || isDeleting}
+                  className="w-full py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-white dark:hover:bg-gray-700 rounded-lg text-sm font-medium transition-colors"
+                >
+                  {isClosing ? 'Closing...' : 'Close it instead'}
+                </button>
+              </div>
+            )}
             {error && (
               <p className="mb-4 p-2 text-sm rounded-lg bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-700 text-red-700 dark:text-red-300" role="alert">
                 {error}
@@ -67,14 +114,14 @@ export function DeleteCampaignButton({ slug, headline }: { slug: string; headlin
             <div className="flex gap-3">
               <button
                 onClick={() => setShowConfirm(false)}
-                disabled={isDeleting}
+                disabled={isDeleting || isClosing}
                 className="flex-1 py-2.5 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg text-sm font-medium transition-colors"
               >
                 Cancel
               </button>
               <button
                 onClick={handleDelete}
-                disabled={isDeleting}
+                disabled={isDeleting || isClosing}
                 className="flex-1 py-2.5 bg-red-600 hover:bg-red-700 disabled:bg-red-400 text-white rounded-lg text-sm font-medium transition-colors"
               >
                 {isDeleting ? 'Deleting...' : 'Delete'}

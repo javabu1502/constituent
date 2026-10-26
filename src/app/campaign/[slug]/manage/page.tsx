@@ -10,6 +10,8 @@ import { CopyLinkButton } from '@/components/campaign/CopyLinkButton';
 import { EmbedCodeButton } from '@/components/campaign/EmbedCodeButton';
 import { QrCodeButton } from '@/components/campaign/QrCodeButton';
 import { DeleteCampaignButton } from '@/components/campaign/DeleteCampaignButton';
+import { CloseCampaignButton } from '@/components/campaign/CloseCampaignButton';
+import { isCampaignClosed } from '@/lib/campaign-close';
 
 export const metadata: Metadata = {
   title: 'Manage Campaign | My Democracy',
@@ -23,6 +25,7 @@ interface ActionCampaign {
   stage_goal: string | null;
   target_filter: { type?: string; committee_id?: string; state?: string } | null;
   approval_status: string | null;
+  status: string | null;
   action_count: number | null;
   created_at: string;
 }
@@ -81,13 +84,14 @@ export default async function ManageCampaignPage({
 
   const { data: childRows } = await admin
     .from('campaigns')
-    .select('id, slug, headline, stage_goal, target_filter, approval_status, action_count, created_at')
+    .select('id, slug, headline, stage_goal, target_filter, approval_status, status, action_count, created_at')
     .eq('parent_campaign_id', campaign.id);
   const actions = ((childRows ?? []) as ActionCampaign[]).sort(
     (a, b) => stageOrder(a.stage_goal) - stageOrder(b.stage_goal) || a.created_at.localeCompare(b.created_at)
   );
 
   const badge = approvalBadge(String(campaign.approval_status || 'approved'));
+  const closed = isCampaignClosed(campaign.status);
   const count = isStory ? Number(campaign.story_count) || 0 : Number(campaign.action_count) || 0;
   const directionLabel =
     campaign.direction === 'support' ? 'Supporting' : campaign.direction === 'oppose' ? 'Opposing' : null;
@@ -105,9 +109,16 @@ export default async function ManageCampaignPage({
         </Link>
         <div className="mt-2 flex items-start justify-between gap-3">
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white">{campaign.headline}</h1>
-          <span className={`shrink-0 mt-1 px-2.5 py-1 text-xs font-medium rounded-full ${badge.cls}`}>
-            {badge.label}
-          </span>
+          <div className="shrink-0 mt-1 flex items-center gap-1.5">
+            {closed && (
+              <span className="px-2.5 py-1 text-xs font-semibold rounded-full bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-100">
+                Closed
+              </span>
+            )}
+            <span className={`px-2.5 py-1 text-xs font-medium rounded-full ${badge.cls}`}>
+              {badge.label}
+            </span>
+          </div>
         </div>
         <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
           {isStory
@@ -121,6 +132,14 @@ export default async function ManageCampaignPage({
                 ? ` · ${campaign.bill_ref}`
                 : ''}
         </p>
+        {closed && (
+          <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
+            {isStory
+              ? 'This campaign is closed. It is no longer collecting stories.'
+              : 'This campaign is closed. It is no longer collecting messages.'}{' '}
+            The public page and the embed say so. Everything it collected is still here.
+          </p>
+        )}
       </div>
 
       {/* Toolbar */}
@@ -157,7 +176,19 @@ export default async function ManageCampaignPage({
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
           </svg>
         </Link>
-        <DeleteCampaignButton slug={campaign.slug} headline={campaign.headline} />
+        <CloseCampaignButton
+          slug={campaign.slug}
+          headline={campaign.headline}
+          closed={closed}
+          stepCount={actions.length}
+          isStory={isStory}
+        />
+        <DeleteCampaignButton
+          slug={campaign.slug}
+          headline={campaign.headline}
+          closed={closed}
+          stepCount={actions.length}
+        />
       </div>
 
       {/* Steps (advocacy only) */}
@@ -201,6 +232,7 @@ export default async function ManageCampaignPage({
                   : null;
               const childBadge = approvalBadge(String(a.approval_status || 'approved'));
               const childCount = Number(a.action_count) || 0;
+              const childClosed = isCampaignClosed(a.status);
               return (
                 <div
                   key={a.id}
@@ -211,8 +243,12 @@ export default async function ManageCampaignPage({
                       {STAGE_GOAL_LABELS[(a.stage_goal ?? 'custom') as StageGoal] ?? 'Action'}
                       {committee ? ` · ${committee.name}` : ''}
                     </p>
-                    <span className={`shrink-0 px-2.5 py-1 text-xs font-medium rounded-full ${childBadge.cls}`}>
-                      {childBadge.label}
+                    <span className={`shrink-0 px-2.5 py-1 text-xs font-medium rounded-full ${
+                      childClosed
+                        ? 'bg-gray-200 text-gray-700 dark:bg-gray-600 dark:text-gray-100'
+                        : childBadge.cls
+                    }`}>
+                      {childClosed ? 'Closed' : childBadge.label}
                     </span>
                   </div>
                   <h3 className="font-semibold text-gray-900 dark:text-white mb-1 line-clamp-2">{a.headline}</h3>
@@ -234,6 +270,7 @@ export default async function ManageCampaignPage({
                     </Link>
                     <CopyLinkButton slug={a.slug} />
                     <QrCodeButton slug={a.slug} />
+                    <CloseCampaignButton slug={a.slug} headline={a.headline} closed={childClosed} />
                   </div>
                 </div>
               );

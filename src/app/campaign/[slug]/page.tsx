@@ -6,7 +6,9 @@ import { StorytellerFlow } from '@/components/campaign/StorytellerFlow';
 import { BillJourney } from '@/components/campaign/BillJourney';
 import { CampaignTalkingPoints } from '@/components/campaign/CampaignTalkingPoints';
 import { CopyLinkButton } from '@/components/campaign/CopyLinkButton';
+import { CampaignClosedNotice } from '@/components/campaign/CampaignClosedNotice';
 import { fetchBillCard } from '@/lib/congress-api';
+import { isCampaignClosed } from '@/lib/campaign-close';
 import type { Campaign } from '@/lib/types';
 
 // Counts below this stay hidden on the public page (the progress bar's first milestone).
@@ -25,7 +27,7 @@ export async function generateMetadata({ params, searchParams }: PageProps): Pro
   const admin = createAdminClient();
   const { data: campaign } = await admin
     .from('campaigns')
-    .select('headline, description, visibility')
+    .select('headline, description, visibility, status')
     .eq('slug', slug)
     .eq('approval_status', 'approved')
     .single();
@@ -48,8 +50,13 @@ export async function generateMetadata({ params, searchParams }: PageProps): Pro
     description: campaign.description,
     alternates: { canonical: `https://www.mydemocracy.app/campaign/${slug}` },
     // Unlisted campaigns (all storytelling ones) are shared by link only —
-    // keep them out of search engines even if the link circulates.
-    robots: campaign.visibility === 'unlisted' ? { index: false, follow: false } : undefined,
+    // keep them out of search engines even if the link circulates. A closed
+    // campaign leaves the index too: the page still answers a shared link,
+    // but search should not send new people to a dead campaign.
+    robots:
+      campaign.visibility === 'unlisted' || isCampaignClosed(campaign.status)
+        ? { index: false, follow: false }
+        : undefined,
     openGraph: {
       title: campaign.headline,
       description: campaign.description,
@@ -94,6 +101,34 @@ export default async function CampaignPage({ params }: PageProps) {
       .eq('approval_status', 'approved')
       .single();
     parentCampaign = parentRow ?? null;
+  }
+
+  // A campaign that stopped collecting still renders: the link has been
+  // shared and people will keep arriving on it. The participate flow does
+  // not render, and the page says what happened and where to go instead.
+  const closed = isCampaignClosed(campaign.status);
+  let closedOutcome: string | null = null;
+  let onwardCampaigns: { slug: string; headline: string }[] = [];
+  if (closed) {
+    const { data: ownerRow } = await admin
+      .from('campaigns')
+      .select('creator_id, outcome')
+      .eq('id', campaign.id)
+      .single();
+    closedOutcome = (ownerRow?.outcome as string | null) ?? null;
+    if (ownerRow?.creator_id) {
+      const { data: siblings } = await admin
+        .from('campaigns')
+        .select('slug, headline')
+        .eq('creator_id', ownerRow.creator_id)
+        .eq('status', 'active')
+        .eq('approval_status', 'approved')
+        .is('parent_campaign_id', null)
+        .neq('id', campaign.id)
+        .order('created_at', { ascending: false })
+        .limit(3);
+      onwardCampaigns = (siblings ?? []) as { slug: string; headline: string }[];
+    }
   }
 
   // White-label branding (unlisted campaigns only — the insert enforces this)
@@ -285,7 +320,7 @@ export default async function CampaignPage({ params }: PageProps) {
         )}
         {/* Social proof bar. A small count works against the campaign, so
             nothing is shown until it reaches the first milestone. */}
-        {(isStory ? campaign.story_count : campaign.action_count) < SOCIAL_PROOF_MIN ? (
+        {closed ? null : (isStory ? campaign.story_count : campaign.action_count) < SOCIAL_PROOF_MIN ? (
           <div className="mt-4 flex justify-end">
             <CopyLinkButton slug={campaign.slug} />
           </div>
@@ -331,6 +366,17 @@ export default async function CampaignPage({ params }: PageProps) {
         )}
       </div>
 
+      {/* A closed campaign ends here: the banner, the outcome, a way onward. */}
+      {closed ? (
+        <CampaignClosedNotice
+          language={campaign.language}
+          isStory={isStory}
+          outcome={closedOutcome}
+          orgName={campaign.org_name ?? null}
+          otherCampaigns={onwardCampaigns}
+        />
+      ) : (
+      <>
       {/* The campaign's contributed language, in the open (two-block model) */}
       {!isStory && campaign.message_template && (
         <CampaignTalkingPoints template={campaign.message_template} orgName={campaign.org_name ?? null} accent={campaign.brand_color ?? null} />
@@ -356,6 +402,8 @@ export default async function CampaignPage({ params }: PageProps) {
         </h2>
         {isStory ? <StorytellerFlow campaign={campaign} /> : <CampaignParticipate campaign={campaign} parentCampaign={parentCampaign} />}
       </div>
+      </>
+      )}
     </div>
   );
 }

@@ -119,6 +119,22 @@ const en = {
   beFirst: 'Be one of the first to weigh in. Results appear once more readers have.',
   youreWith: (pct: number) => `You’re with the ${pct}%.`,
   yourPositionSuffix: ' (your position)',
+
+  // Closed campaign (public page + embed)
+  closedHeading: 'This campaign is closed',
+  closedBodyActions: 'It is no longer collecting messages.',
+  closedBodyStories: 'It is no longer collecting stories.',
+  closedOutcomeHeading: 'How it ended',
+  closedOutcome: (outcome: string): string =>
+    outcome === 'passed' ? 'The legislation passed.'
+      : outcome === 'failed' ? 'The legislation failed.'
+      : outcome === 'died_committee' ? 'The legislation died in committee.'
+      : outcome === 'vetoed' ? 'The legislation was vetoed.'
+      : outcome === 'withdrawn' ? 'The legislation was withdrawn.'
+      : '',
+  closedOnwardHeading: 'Where to go next',
+  closedMoreFrom: (org: string) => `Still open from ${org}`,
+  closedBrowseIssues: 'See what is being decided now',
 };
 
 export type ParticipateCopy = typeof en;
@@ -228,6 +244,21 @@ const es: ParticipateCopy = {
   beFirst: 'Sea de los primeros en opinar. Los resultados aparecen cuando más lectores hayan participado.',
   youreWith: (pct: number) => `Usted está con el ${pct}%.`,
   yourPositionSuffix: ' (su posición)',
+
+  closedHeading: 'Esta campaña está cerrada',
+  closedBodyActions: 'Ya no está recibiendo mensajes.',
+  closedBodyStories: 'Ya no está recibiendo historias.',
+  closedOutcomeHeading: 'Cómo terminó',
+  closedOutcome: (outcome: string): string =>
+    outcome === 'passed' ? 'La legislación fue aprobada.'
+      : outcome === 'failed' ? 'La legislación no fue aprobada.'
+      : outcome === 'died_committee' ? 'La legislación se quedó en el comité.'
+      : outcome === 'vetoed' ? 'La legislación fue vetada.'
+      : outcome === 'withdrawn' ? 'La legislación fue retirada.'
+      : '',
+  closedOnwardHeading: 'Adónde ir ahora',
+  closedMoreFrom: (org: string) => `Campañas abiertas de ${org}`,
+  closedBrowseIssues: 'Vea lo que se está decidiendo ahora',
 };
 
 export function participateCopy(language: string | null | undefined): ParticipateCopy {

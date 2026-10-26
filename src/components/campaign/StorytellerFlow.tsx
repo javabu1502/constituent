@@ -154,6 +154,8 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
   // compose, localized there); everything else gets our own copy.
   const failureMessage = (status: number, data: Record<string, unknown> | null, fallback: string, serverTextOn: number[] = []): string => {
     if (status === 429) return t.tooManyRequests;
+    // The campaign stopped collecting while this page was open.
+    if (status === 409) return t.campaignClosed;
     if (serverTextOn.includes(status) && typeof data?.error === 'string' && data.error.trim()) return data.error;
     return fallback;
   };

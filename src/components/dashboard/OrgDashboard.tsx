@@ -12,6 +12,8 @@ import { getAllFederalLegislators } from '@/lib/legislators';
  * authenticated /dashboard org branch and the public read-only /demo/dashboard
  * (isDemo hides every mutating control and reroutes intel links).
  */
+import { OrgAssistant } from './OrgAssistant';
+
 export function OrgDashboard({
   displayName,
   campaigns,
@@ -122,14 +124,21 @@ export function OrgDashboard({
 
       <LegislatorSearch roster={legislatorRoster} intelBasePath={isDemo ? '/demo/legislator' : '/dashboard/legislator'} />
 
+      {!isDemo && (
+        <div className="mb-6">
+          <OrgAssistant />
+        </div>
+      )}
+
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
         <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
           <p className="text-sm text-gray-500 dark:text-gray-400">Campaigns</p>
           <p className="text-3xl font-bold text-gray-900 dark:text-white mt-1">{topLevelCampaigns.length}</p>
         </div>
         <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
-          <p className="text-sm text-gray-500 dark:text-gray-400">Messages sent</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400">Supporters mobilized</p>
           <p className="text-3xl font-bold text-gray-900 dark:text-white mt-1">{totalActions.toLocaleString()}</p>
+          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">People who took part. One person may send several messages.</p>
         </div>
         <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
           <p className="text-sm text-gray-500 dark:text-gray-400">Stories collected</p>

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createAdminClient } from '@/lib/supabase';
+import { isCampaignClosed } from '@/lib/campaign-close';
 import { createClient } from '@/lib/supabase/server';
 import { submitStorySchema, parseBody } from '@/lib/schemas';
 import { writeLimiter, getClientIp } from '@/lib/rate-limit';
@@ -118,7 +119,7 @@ export async function POST(request: NextRequest) {
   const admin = createAdminClient();
   const { data: campaign, error: campaignError } = await admin
     .from('campaigns')
-    .select('id, slug, headline, recipient_email, approval_status, campaign_type, usage_statement')
+    .select('id, slug, headline, recipient_email, approval_status, status, campaign_type, usage_statement')
     .eq('slug', campaignSlug)
     .eq('approval_status', 'approved')
     .eq('campaign_type', 'storytelling')
@@ -126,6 +127,16 @@ export async function POST(request: NextRequest) {
 
   if (campaignError || !campaign) {
     return NextResponse.json({ error: 'Campaign not found' }, { status: 404 });
+  }
+
+  // A closed campaign stops collecting. The advocacy participate route
+  // already required an active campaign; stories never checked, so a page
+  // left open in a tab could still write to a campaign that had ended.
+  if (isCampaignClosed(campaign.status)) {
+    return NextResponse.json(
+      { error: 'This campaign is closed and is no longer collecting stories.' },
+      { status: 409 }
+    );
   }
 
   // Resolve the storyteller identity: signed-in user (if any) + a hashed IP for
