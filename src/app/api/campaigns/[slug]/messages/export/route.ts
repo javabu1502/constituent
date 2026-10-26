@@ -41,7 +41,7 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
 
   const { data: messages } = await admin
     .from('messages')
-    .select('created_at, advocate_name, advocate_city, advocate_state, legislator_name, legislator_party, legislator_level, legislator_chamber, delivery_method, delivery_status, message_body')
+    .select('created_at, advocate_name, advocate_city, advocate_state, legislator_name, legislator_party, legislator_level, legislator_chamber, delivery_method, delivery_status')
     .in('campaign_id', campaignIds)
     .order('created_at', { ascending: false })
     .limit(10000);
@@ -57,13 +57,18 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
     if (official && (m.legislator_name || '').toLowerCase() !== official) return false;
     if (status && (m.delivery_status || '').toLowerCase() !== status) return false;
     if (q) {
-      const hay = `${m.advocate_name ?? ''} ${m.advocate_city ?? ''} ${m.advocate_state ?? ''} ${m.legislator_name ?? ''} ${m.message_body ?? ''}`.toLowerCase();
+      const hay = `${m.advocate_name ?? ''} ${m.advocate_city ?? ''} ${m.advocate_state ?? ''} ${m.legislator_name ?? ''}`.toLowerCase();
       if (!hay.includes(q)) return false;
     }
     return true;
   });
 
-  const headers = ['Date', 'Name', 'City', 'State', 'Official', 'Party', 'Level', 'Chamber', 'Delivery Method', 'Status', 'Message'];
+  // No Message column. The privacy policy says a constituent's message is
+  // never given to a political organization, and the organization running a
+  // campaign is one. Nothing at the point of collection tells a participant
+  // their letter will be read by the campaign, so the file carries who took
+  // part and what happened to their message, not what they wrote.
+  const headers = ['Date', 'Name', 'City', 'State', 'Official', 'Party', 'Level', 'Chamber', 'Delivery Method', 'Status'];
   const rows = filtered.map((m) => [
     m.created_at ? new Date(m.created_at).toISOString().slice(0, 10) : '',
     m.advocate_name ?? '',
@@ -75,7 +80,6 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
     m.legislator_chamber ?? '',
     m.delivery_method ?? '',
     m.delivery_status ?? '',
-    m.message_body ?? '',
   ]);
 
   return new NextResponse(toCSV(headers, rows), {

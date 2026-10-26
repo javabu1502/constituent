@@ -118,6 +118,7 @@ export default function PrivacyPage() {
                 <li>The <strong className="text-gray-900 dark:text-white">name, party, and chamber</strong> of the legislator(s) you contacted</li>
                 <li>The <strong className="text-gray-900 dark:text-white">issue area</strong> you selected</li>
                 <li>The <strong className="text-gray-900 dark:text-white">date and time</strong>, and the <strong className="text-gray-900 dark:text-white">delivery method and status</strong></li>
+                <li>Your <strong className="text-gray-900 dark:text-white">email address</strong>, when you give us one. A congressional office requires it to accept a message, and an organization&rsquo;s campaign asks for it so it can tell you when the bill moves.</li>
               </ul>
               <p>
                 We use this to show aggregate issue trends and to keep basic records of activity on the platform.
@@ -125,13 +126,14 @@ export default function PrivacyPage() {
               <p className="font-medium text-gray-900 dark:text-white">Only if you have an account, we additionally store:</p>
               <ul className="list-disc list-inside space-y-1 ml-4">
                 <li>The <strong className="text-gray-900 dark:text-white">full text</strong> of each message — so you can read your own message history in your dashboard</li>
-                <li>Your <strong className="text-gray-900 dark:text-white">email</strong>, so the message is linked to your account</li>
+                <li>That your email is <strong className="text-gray-900 dark:text-white">linked to your account</strong>, so your message history is yours to read</li>
               </ul>
               <p className="bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-700 rounded-lg p-4 text-blue-800 dark:text-blue-300">
                 <strong>If you send a message without an account, we do not store the text of what you wrote with the trend information.</strong> The one exception is a message you send to a congressional office through this site, which is kept in our delivery records as described above.
               </p>
               <p className="bg-green-50 dark:bg-green-900/30 border border-green-200 dark:border-green-700 rounded-lg p-4 text-green-800 dark:text-green-300">
-                <strong>We never sell your messages or personal information, and we never give them to advertisers or political organizations.</strong> When you send a message to an official through this site, we deliver your name, address, email, and message to that office, because that is what you asked us to do. Nothing goes to any office you did not choose.
+                <strong>We never sell your messages or personal information, and we never give them to advertisers.</strong> When you send a message to an official through this site, we deliver your name, address, email, and message to that office, because that is what you asked us to do. Nothing goes to any office you did not choose.
+                {' '}If you took part through an organization&rsquo;s campaign, that organization can see that you took part: your name, your city and state, which official you wrote to, and whether it arrived. <strong className="text-gray-900 dark:text-white">It never sees what you wrote.</strong> Your message goes to the office, not to the campaign.
               </p>
             </div>
           </section>

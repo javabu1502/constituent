@@ -6,6 +6,7 @@ import {
   type QueueHealth,
 } from '@/lib/cwc/queue-health';
 import { runRetentionScrub, type RetentionSummary } from '@/lib/cwc/retention';
+import { reconcileDeliveryStatuses, type ReconcileSummary } from '@/lib/cwc/reconcile';
 
 // Node runtime required: the CWC client egresses through the undici
 // static-IP proxy, and sends must not be cut off mid-batch.
@@ -75,6 +76,19 @@ export async function GET(request: NextRequest) {
       console.error('[cwc-queue] heartbeat failed:', (e as Error).message);
     }
 
+    // Backstop for the drain's own write-back. Runs every pass, not once a
+    // day: a message that claims to be on its way to a congressional office
+    // when it is not is the one thing this product must never say.
+    let reconcile: ReconcileSummary | null = null;
+    try {
+      reconcile = await reconcileDeliveryStatuses(db, { now: new Date(now) });
+      if (reconcile.repaired || reconcile.orphaned || reconcile.errors.length) {
+        console.log('[cwc-queue] reconcile:', JSON.stringify(reconcile));
+      }
+    } catch (e) {
+      console.error('[cwc-queue] reconcile failed:', (e as Error).message);
+    }
+
     let retention: RetentionSummary | null = null;
     try {
       await runAtMostOncePer(db, RETENTION_CACHE_KEY, ALERT_DEDUPE_MS, now, async () => {
@@ -85,7 +99,7 @@ export async function GET(request: NextRequest) {
       console.error('[cwc-queue] retention scrub failed:', (e as Error).message);
     }
 
-    return NextResponse.json({ ok: true, ...summary, health, stale, retention });
+    return NextResponse.json({ ok: true, ...summary, health, stale, reconcile, retention });
   } catch (e) {
     const err = e as Error;
     console.error('[cwc-queue] drain failed:', err.message);

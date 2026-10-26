@@ -51,7 +51,6 @@ interface AdvocacyAnalytics {
     party: string | null;
     method: string | null;
     status: string | null;
-    body: string;
     /** English rendering when the story was written in Spanish. */
     body_en?: string | null;
     language?: string;
@@ -325,7 +324,7 @@ function StorytellingAnalytics({ analytics, campaignName, insightsPanel, isDemo 
         </div>
         <button
           type="button"
-          onClick={() => setShowReachable((v) => !v)}
+          onClick={() => { if (!isDemo) setShowReachable((v) => !v); }}
           disabled={contactable === 0}
           className={`bg-white dark:bg-gray-800 rounded-xl border shadow-sm p-5 text-left transition-colors ${
             showReachable
@@ -336,13 +335,20 @@ function StorytellingAnalytics({ analytics, campaignName, insightsPanel, isDemo 
           <p className="text-sm text-gray-500 dark:text-gray-400">Reachable</p>
           <p className="text-3xl font-bold text-gray-900 dark:text-white mt-1">{contactable}</p>
           <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
-            {contactable > 0 ? (showReachable ? 'Agreed to follow-up. Hide emails' : 'Agreed to follow-up. See emails') : 'Agreed to follow-up contact'}
+            {/* The demo is readable by anyone with no sign-in, so it never
+                offers contact details, even seeded ones. */}
+            {isDemo
+              ? 'Agreed to follow-up contact'
+              : contactable > 0
+                ? (showReachable ? 'Agreed to follow-up. Hide emails' : 'Agreed to follow-up. See emails')
+                : 'Agreed to follow-up contact'}
           </p>
         </button>
       </div>
 
-      {/* The reachable list: who agreed to follow-up, with one-click emails */}
-      {showReachable && contactable > 0 && (
+      {/* The reachable list: who agreed to follow-up, with one-click emails.
+          Never on the demo, which has no sign-in in front of it. */}
+      {showReachable && contactable > 0 && !isDemo && (
         <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
           <div className="flex items-center justify-between gap-3 mb-3">
             <h3 className="text-base font-semibold text-gray-900 dark:text-white">Reachable storytellers</h3>
@@ -740,7 +746,7 @@ function MessageBrowser({ messages, slug, isDemo = false }: { messages: NonNulla
         if (officialFilter && m.official !== officialFilter) return false;
         if (statusFilter && m.status !== statusFilter) return false;
         if (q.trim()) {
-          const hay = `${m.name ?? ''} ${m.city ?? ''} ${m.state ?? ''} ${m.official ?? ''} ${m.body}`.toLowerCase();
+          const hay = `${m.name ?? ''} ${m.city ?? ''} ${m.state ?? ''} ${m.official ?? ''}`.toLowerCase();
           if (!hay.includes(q.trim().toLowerCase())) return false;
         }
         return true;
@@ -775,13 +781,13 @@ function MessageBrowser({ messages, slug, isDemo = false }: { messages: NonNulla
         )}
       </div>
       <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">
-        Read every message and export the raw data. Showing {filtered.length.toLocaleString()} of {messages.length.toLocaleString()}.
+        Who wrote, to which official, and what happened to it. Showing {filtered.length.toLocaleString()} of {messages.length.toLocaleString()}.
       </p>
       <div className="flex flex-wrap gap-2 mb-4">
         <input
           value={q}
           onChange={(e) => setQ(e.target.value)}
-          placeholder="Search names, cities, officials, message text…"
+          placeholder="Search names, cities, officials…"
           className="flex-1 min-w-[12rem] px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400"
         />
         <select value={stateFilter} onChange={(e) => setStateFilter(e.target.value)} className={selectClass}>
@@ -829,7 +835,17 @@ function MessageBrowser({ messages, slug, isDemo = false }: { messages: NonNulla
                 {m.created_at ? new Date(m.created_at).toLocaleDateString() : ''}
               </span>
             </summary>
-            <p className="mt-2 text-sm text-gray-700 dark:text-gray-300 whitespace-pre-wrap">{m.body || <span className="italic text-gray-400">No message text recorded.</span>}</p>
+            {/* What they wrote is not shown. A constituent's letter to their
+                own representative is between them and that office; the
+                privacy policy promises it is never handed to a political
+                organization, and nothing at the point of collection tells
+                them otherwise. The campaign gets who took part, who they
+                reached, and whether it arrived. */}
+            <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+              {[m.official && `Sent to ${m.official}`, m.party, m.method && `via ${m.method}`, m.status && deliveryStatusLabel(m.status)]
+                .filter(Boolean)
+                .join(' · ')}
+            </p>
           </details>
         ))}
         {filtered.length > 300 && (

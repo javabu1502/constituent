@@ -2,6 +2,7 @@ import { createHmac, timingSafeEqual } from 'crypto';
 import { NextRequest, NextResponse } from 'next/server';
 import { createAdminClient } from '@/lib/supabase';
 import { isCampaignClosed } from '@/lib/campaign-close';
+import { isDemoCampaign } from '@/lib/demo';
 import { createClient } from '@/lib/supabase/server';
 import { submitStorySchema, parseBody } from '@/lib/schemas';
 import { writeLimiter, getClientIp } from '@/lib/rate-limit';
@@ -160,7 +161,7 @@ export async function POST(request: NextRequest) {
   const admin = createAdminClient();
   const { data: campaign, error: campaignError } = await admin
     .from('campaigns')
-    .select('id, slug, headline, recipient_email, approval_status, status, campaign_type, usage_statement')
+    .select('id, slug, headline, recipient_email, approval_status, status, campaign_type, usage_statement, creator_id')
     .eq('slug', campaignSlug)
     .eq('approval_status', 'approved')
     .eq('campaign_type', 'storytelling')
@@ -168,6 +169,22 @@ export async function POST(request: NextRequest) {
 
   if (campaignError || !campaign) {
     return NextResponse.json({ error: 'Campaign not found' }, { status: 404 });
+  }
+
+  // The public demo is a showroom, not a collection point.
+  //
+  // The demo storytelling campaign is approved, active and storytelling, so
+  // this route accepted real submissions to it, and its analytics page is
+  // deliberately readable by anyone with no sign-in. Between the two, a
+  // parent who found that link and told their family's story had it
+  // published to the open web the moment they pressed submit, with their
+  // email attached if they had agreed to follow-up. Everything in there is
+  // seeded, and it stays that way.
+  if (isDemoCampaign({ slug: campaign.slug as string, creator_id: campaign.creator_id as string })) {
+    return NextResponse.json(
+      { error: 'This is a demonstration campaign, so it does not collect real stories. Please use the organization\u2019s own campaign link.' },
+      { status: 403 },
+    );
   }
 
   // A closed campaign stops collecting. The advocacy participate route

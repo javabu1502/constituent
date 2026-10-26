@@ -408,7 +408,10 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
       party: (m.legislator_party as string | null) ?? null,
       method: (m.delivery_method as string | null) ?? null,
       status: (m.delivery_status as string | null) ?? null,
-      body: (m.message_body as string | null) ?? '',
+      // The message text is deliberately NOT sent to the organization's
+      // browser. See the note in MessageBrowser: the privacy policy promises
+      // a constituent's letter is never handed to a political organization,
+      // and nothing at the point of collection says otherwise.
     })),
   };
 
