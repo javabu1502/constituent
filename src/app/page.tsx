@@ -1,9 +1,19 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 import { HomeTrends } from '@/components/trends/HomeTrends';
 import { US_STATES } from '@/lib/constants';
 import { StatePicker } from '@/components/ui/StatePicker';
 import { createAdminClient } from '@/lib/supabase';
+
+/**
+ * The root layout deliberately sets no canonical, because every page without
+ * its own would have inherited it and claimed to be a duplicate of this one.
+ * So the home page declares its own.
+ */
+export const metadata: Metadata = {
+  alternates: { canonical: '/' },
+};
 
 const organizationJsonLd = {
   '@context': 'https://schema.org',

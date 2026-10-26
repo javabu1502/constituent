@@ -92,4 +92,49 @@ describe('a topic noun is not a federal ask', () => {
       expect(assessFederalJurisdiction({ message: msg }).outsideFederal).toBe(false);
     }
   });
+
+  /**
+   * Dropping the bare topic nouns stopped the asymmetry, and then held
+   * ordinary federal letters: a message that mentions a mayor or a council
+   * and makes its federal ask through one of those words had no federal
+   * signal left. They are back as actors and instruments.
+   */
+  it('does not hold a federal ask that also mentions a local body', () => {
+    for (const msg of [
+      'Our city council passed a resolution on Israel. I want the United States to stop arming Israel through foreign aid.',
+      'Please stop the immigration raids in my neighborhood. The mayor says he cannot help.',
+      'Please stop deploying the National Guard to our city. The mayor opposes it.',
+      'Please vote against the new tariffs on imported ore. The county commission wrote you too.',
+      'My VA disability claim has been stuck for a year. The county does nothing to help.',
+    ]) {
+      expect(assessFederalJurisdiction({ message: msg }).outsideFederal).toBe(false);
+    }
+  });
+
+  /**
+   * The acronyms are matched case-sensitively. Lowercase, they are ordinary
+   * English, and matching them case-insensitively made this check fail OPEN.
+   * The Virginia case is the expensive one: every constituent with a VA
+   * address in their signature block bypassed the check entirely.
+   */
+  it('does not let a lowercase word or a state abbreviation switch the check off', () => {
+    for (const msg of [
+      'There is ice on the sidewalk in front of my house and the city does nothing.',
+      'Potholes everywhere. The city does nothing.  Jane Doe, 123 Main St, Arlington, VA 22201',
+      'The snow plows never come down our street. Sent from Richmond, VA.',
+    ]) {
+      expect(assessFederalJurisdiction({ message: msg }).outsideFederal).toBe(true);
+    }
+  });
+
+  /**
+   * The salutation strip used to delete the whole first line, which took the
+   * ask with it when the greeting ran inline with the request.
+   */
+  it('keeps an ask that shares a line with the salutation', () => {
+    const a = assessFederalJurisdiction({
+      message: 'Dear Senator Rosen, please vote no on H.R. 1234.\n\nThe city council supports it but I do not.',
+    });
+    expect(a.outsideFederal).toBe(false);
+  });
 });

@@ -324,7 +324,16 @@ export const submitStorySchema = z.object({
   // Anonymous only: the body is exactly the redacted text the storyteller
   // reviewed on the preview step (possibly hand-edited). The server stores it
   // as given and does not run the model redaction a second time.
+  //
+  // Honoured ONLY alongside a `preview_token` that verifies. The flag by
+  // itself is a claim from the browser, and this route is public, so on its
+  // own it let a single POST store an unredacted body labelled anonymous.
   preview_confirmed: z.boolean().optional(),
+  /** Returned by the preview call. Proves the redaction pass ran. */
+  preview_token: z.string().max(64).optional(),
+  /** The exact text the preview returned, when the storyteller then edited
+   *  it. The token is checked against this, and `body` is what gets stored. */
+  previewed_body: z.string().max(10000).optional(),
   turnstileToken: z.string().optional(),
   // Storytelling persistence: the story is saved to the campaign organizer's
   // dashboard by default; `store: false` is the storyteller's opt-out. City/

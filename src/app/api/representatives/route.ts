@@ -158,7 +158,13 @@ export async function POST(request: NextRequest): Promise<NextResponse<LookupRes
         stateUpperDistrict: geocodeResult.stateUpperDistrict,
         stateLowerDistrict: geocodeResult.stateLowerDistrict,
       },
-      ...(houseWarning ? { warning: houseWarning } : {}),
+      // Deliberately NOT `warning`. That field means "the street could not
+      // be placed", which the client reads as "withhold congressional
+      // delivery". A missing House member says nothing about the senators,
+      // who do not depend on a district at all, and reporting it as
+      // `warning` cut both senators off and told the person their address
+      // was bad. TX-23 and FL-20 were live examples.
+      ...(houseWarning ? { houseWarning } : {}),
     };
 
     return NextResponse.json(result);

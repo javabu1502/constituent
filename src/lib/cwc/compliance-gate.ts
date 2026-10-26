@@ -2,6 +2,7 @@ import { createHash } from 'crypto';
 import { runComplianceCheck, type ComplianceVerdict, type ComplianceInput } from '@/lib/compliance/check';
 import { createAdminClient } from '@/lib/supabase';
 import { normalizeBodyText } from './content';
+import { SALUTATION_WORDS } from '@/lib/compliance/jurisdiction';
 import { notifyAdminHeld } from './notify';
 import type { CwcDelivery } from './types';
 
@@ -44,7 +45,7 @@ function messageBody(delivery: CwcDelivery): string {
 // A greeting line at the top of the letter: "Dear Senator Warner,",
 // "Hello Representative Kiggans:", "To the Honorable ...". Bounded so a real
 // sentence that happens to start with "Dear" is left alone.
-const SALUTATION_LINE = /^[ \t]*(dear|hello|hi|greetings|to)\b[^\n]{0,120}$/i;
+const SALUTATION_LINE = new RegExp(`^[ \t]*(?:${SALUTATION_WORDS})\\b[^\n]{0,120}$`, 'i');
 
 /**
  * The body without its opening salutation line, whitespace-normalized. Two
@@ -52,12 +53,28 @@ const SALUTATION_LINE = /^[ \t]*(dear|hello|hi|greetings|to)\b[^\n]{0,120}$/i;
  * text here.
  */
 export function bodyWithoutSalutation(body: string): string {
+  return bodyForScreening(body).replace(/\s+/g, ' ').trim();
+}
+
+/**
+ * The body as the screener sees it: the salutation line removed, paragraphs
+ * kept.
+ *
+ * The screener used to receive the body verbatim, which begins "Dear Senator
+ * <name>,". That put the recipient's name back into the model input the
+ * payload builder deliberately leaves out, and it made the input DIFFERENT
+ * for each office, so the three copies of one letter could still come back
+ * with three different verdicts however the key grouped them. With the
+ * salutation gone the input is genuinely office-independent, and at
+ * temperature 0 the copies agree by construction.
+ */
+export function bodyForScreening(body: string): string {
   const lines = normalizeBodyText(body).split('\n');
   const firstIdx = lines.findIndex((l) => l.trim().length > 0);
   if (firstIdx >= 0 && SALUTATION_LINE.test(lines[firstIdx])) {
     lines.splice(firstIdx, 1);
   }
-  return lines.join('\n').replace(/\s+/g, ' ').trim();
+  return lines.join('\n').trim();
 }
 
 /**
@@ -110,9 +127,9 @@ export async function screenMessageForCwc(opts: {
     .limit(5);
 
   const verdict = await screener({
-    message: body,
+    // Office-independent by construction: see bodyForScreening.
+    message: bodyForScreening(body),
     topic: opts.delivery.message.subject,
-    legislatorName: opts.delivery.officialName,
     sender: {
       name: [constituent.firstName, constituent.lastName].filter(Boolean).join(' '),
       email: constituent.email,
@@ -121,8 +138,11 @@ export async function screenMessageForCwc(opts: {
       zip: constituent.zip,
       street: constituent.address1,
     },
+    // The members these earlier letters went to are left out. Split abuse is
+    // about one person splitting one abusive message across offices, which
+    // the bodies show; naming the members only invites the model's priors
+    // about a particular member into the verdict.
     recentMessages: (recent ?? []).map((m) => ({
-      legislatorName: (m.legislator_name as string | null) ?? undefined,
       issueArea: (m.issue_area as string | null) ?? undefined,
       body: (m.message_body as string | null) ?? undefined,
       createdAt: (m.created_at as string | null) ?? undefined,
@@ -147,7 +167,14 @@ export async function screenMessageForCwc(opts: {
     prompt_version: verdict.promptVersion,
     raw_verdict: verdict as unknown as Record<string, unknown>,
   }));
-  const { error } = await db.from('message_compliance').insert(rows);
+  // Upsert, not insert. `message_key` is unique, so a retried /api/track-send
+  // that re-screens the same letter would otherwise hit a duplicate-key error
+  // here, and the error path below HOLDS the message. A retry must not cost
+  // the constituent their delivery. The existing row wins: it is the verdict
+  // the queue acted on, and any human review already recorded sits on it.
+  const { error } = await db
+    .from('message_compliance')
+    .upsert(rows, { onConflict: 'message_key', ignoreDuplicates: true });
   let outcome: GateOutcome = { decision: verdict.decision, verdict };
   if (error) {
     // The audit trail is part of the compliance story: if we cannot record

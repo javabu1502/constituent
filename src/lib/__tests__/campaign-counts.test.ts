@@ -1,4 +1,4 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { getInitiativeCounts } from '../campaign-counts';
 
 /**
@@ -13,7 +13,7 @@ function fakeDb(rows: Record<string, number>, children: string[] = []) {
     from(table: string) {
       const q: Record<string, unknown> = {};
       const self = {
-        select: (_c?: string, _opts?: { head?: boolean }) => self,
+        select: () => self,
         eq(col: string, val: string) { q[col] = val; return self; },
         in(col: string, vals: string[]) { q[col] = vals.join(','); return self; },
         then(resolve: (v: { count: number; error: null }) => void) {

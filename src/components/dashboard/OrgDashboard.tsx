@@ -18,10 +18,13 @@ export function OrgDashboard({
   displayName,
   campaigns,
   isDemo = false,
+  portfolio = null,
 }: {
   displayName: string;
   campaigns: CampaignRow[];
   isDemo?: boolean;
+  /** Exact counts across every campaign, when they could be taken. */
+  portfolio?: { participants: number; messages: number } | null;
 }) {
   // Stage campaigns nest under their parent so each initiative reads as ONE
   // narrative — the parent card carries the whole journey, not six siblings.
@@ -69,6 +72,13 @@ export function OrgDashboard({
   const storytellingCampaigns = topLevelCampaigns.filter((c) => c.campaign_type === 'storytelling');
   // Sum initiative totals only (parents already include their stages).
   const totalActions = topLevelCampaigns.reduce((n, c) => n + (Number(c.action_count) || 0), 0);
+  // `action_count` is an engagement counter: it moves once per official
+  // engaged and again for every follow-up, so one person writing to two
+  // senators and a representative moves it by three. It cannot be labelled as
+  // people. When the exact participant count is available the tile shows that
+  // and says "people"; otherwise it shows the counter and says "actions".
+  const peopleKnown = portfolio !== null;
+  const headlineCount = peopleKnown ? portfolio.participants : totalActions;
   const totalStories = topLevelCampaigns.reduce((n, c) => n + (Number(c.story_count) || 0), 0);
   // Portfolio scoreboard: outcomes judged against each campaign's goal.
   let wins = 0;
@@ -90,9 +100,7 @@ export function OrgDashboard({
   );
 
   return (
-    // The floating assistant is fixed to the bottom right, so the page
-    // needs room underneath it on a phone or it covers the last card.
-    <div className="max-w-6xl mx-auto px-4 py-8 pb-28 sm:pb-8">
+    <div className="max-w-6xl mx-auto px-4 py-8">
       {/* Stacked on a phone: side by side, the action buttons ran off the
           right edge and "All-campaign report" was cut in half. */}
       <div className="mb-8 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
@@ -138,9 +146,13 @@ export function OrgDashboard({
           <p className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mt-1">{topLevelCampaigns.length}</p>
         </div>
         <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
-          <p className="text-sm text-gray-500 dark:text-gray-400">Supporters mobilized</p>
-          <p className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mt-1">{totalActions.toLocaleString()}</p>
-          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">People who took part. One person may send several messages.</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400">{peopleKnown ? 'Supporters mobilized' : 'Actions taken'}</p>
+          <p className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mt-1">{headlineCount.toLocaleString()}</p>
+          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+            {peopleKnown
+              ? `People who took part${portfolio.messages > portfolio.participants ? `, who sent ${portfolio.messages.toLocaleString()} messages between them` : ''}.`
+              : 'One person may count more than once here.'}
+          </p>
         </div>
         <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
           <p className="text-sm text-gray-500 dark:text-gray-400">Stories collected</p>

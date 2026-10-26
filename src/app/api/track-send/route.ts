@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createAdminClient } from '@/lib/supabase';
+import { isCampaignClosed } from '@/lib/campaign-close';
 import { createClient } from '@/lib/supabase/server';
 import { trackSendSchema, parseBody } from '@/lib/schemas';
 import { writeLimiter, getClientIp } from '@/lib/rate-limit';
@@ -88,6 +89,24 @@ export async function POST(request: NextRequest) {
 
   try {
     const supabase = createAdminClient();
+
+    // A campaign the organizer closed stops accepting messages. The
+    // participate route and the story route both check this; track-send did
+    // not, so a tab left open on a closed campaign kept inserting messages
+    // and enqueueing CWC deliveries after the organizer had shut it down.
+    if (body.campaign_id) {
+      const { data: camp } = await supabase
+        .from('campaigns')
+        .select('status')
+        .eq('id', body.campaign_id)
+        .single();
+      if (camp && isCampaignClosed(camp.status as string | null)) {
+        return NextResponse.json(
+          { error: 'This campaign has closed and is no longer accepting messages.' },
+          { status: 409 },
+        );
+      }
+    }
 
     const { data, error } = await supabase.from('messages').insert({
       advocate_name: body.advocate_name,

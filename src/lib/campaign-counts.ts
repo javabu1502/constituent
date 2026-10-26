@@ -1,5 +1,5 @@
 import type { createAdminClient } from '@/lib/supabase';
-import { statusesForOutcome, knownStatuses } from '@/lib/delivery-status';
+import { statusesForOutcome } from '@/lib/delivery-status';
 
 /**
  * One count of an initiative, for every surface that shows one.
@@ -42,10 +42,6 @@ export interface InitiativeCounts {
   stories: number;
 }
 
-const EMPTY: Omit<InitiativeCounts, 'campaignIds'> = {
-  participants: 0, messages: 0, delivered: 0, inFlight: 0, notDelivered: 0, selfSent: 0, stories: 0,
-};
-
 /** The campaign and every step beneath it. */
 export async function initiativeCampaignIds(db: DbClient, campaignId: string): Promise<string[]> {
   try {
@@ -74,8 +70,8 @@ async function countRows(db: DbClient, table: string, apply: (q: never) => unkno
  * as zero rather than taking down the page that asked for it.
  */
 export async function getInitiativeCounts(db: DbClient, campaignId: string): Promise<InitiativeCounts> {
+  // `initiativeCampaignIds` always returns at least the campaign itself.
   const campaignIds = await initiativeCampaignIds(db, campaignId);
-  if (campaignIds.length === 0) return { campaignIds, ...EMPTY };
 
   const inIds = <T>(q: T): T => (q as { in: (c: string, v: string[]) => T }).in('campaign_id', campaignIds);
   const delivered = statusesForOutcome('delivered');
@@ -95,7 +91,6 @@ export async function getInitiativeCounts(db: DbClient, campaignId: string): Pro
   // vocabulary has not met yet. Derived rather than queried so the four
   // buckets always sum to the total.
   const selfSent = Math.max(0, messages - d - f - n);
-  void knownStatuses;
 
   return { campaignIds, participants, messages, delivered: d, inFlight: f, notDelivered: n, selfSent, stories };
 }
@@ -107,4 +102,36 @@ export async function getInitiativeCounts(db: DbClient, campaignId: string): Pro
  */
 export function participantsLabel(counts: InitiativeCounts, storedActionCount?: number | null): number {
   return counts.participants || Number(storedActionCount ?? 0) || 0;
+}
+
+export interface PortfolioCounts {
+  /** One row per person per campaign: the number the dashboard tile claims. */
+  participants: number;
+  messages: number;
+}
+
+/**
+ * Participants and messages across a whole set of campaigns, in two exact
+ * queries rather than one per campaign.
+ *
+ * The organization dashboard used to sum `campaigns.action_count` and label
+ * it "Supporters mobilized". That counter is incremented once per official
+ * engaged, and again for every follow-up message, so a single person writing
+ * to two senators and a representative moved it by three. The tile was
+ * reporting engagements as people.
+ *
+ * Returns null when the count cannot be taken, so the caller can fall back to
+ * the stored counter and relabel rather than render a zero.
+ */
+export async function getPortfolioCounts(db: DbClient, campaignIds: string[]): Promise<PortfolioCounts | null> {
+  if (campaignIds.length === 0) return { participants: 0, messages: 0 };
+  try {
+    const [participants, messages] = await Promise.all([
+      countRows(db, 'campaign_actions', (q) => (q as { in: (c: string, v: string[]) => unknown }).in('campaign_id', campaignIds)),
+      countRows(db, 'messages', (q) => (q as { in: (c: string, v: string[]) => unknown }).in('campaign_id', campaignIds)),
+    ]);
+    return { participants, messages };
+  } catch {
+    return null;
+  }
 }

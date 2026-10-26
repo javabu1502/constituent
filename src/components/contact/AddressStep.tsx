@@ -25,11 +25,16 @@ export function AddressStep({ state, dispatch }: AddressStepProps) {
   // warning before the lookup. The person can edit it or go ahead anyway.
   const [streetWarning, setStreetWarning] = useState(false);
   const [streetWarningAcked, setStreetWarningAcked] = useState(false);
+  // The district resolved but we hold no current House member for it: a seat
+  // filled since the roster was refreshed, or a vacancy. The senators are
+  // unaffected, so this is a notice, never a block.
+  const [houseGap, setHouseGap] = useState<string | null>(null);
 
   const onAddressChange = useCallback((a: ParsedAddress) => {
     setAddress(a);
     setStreetWarning(false);
     setStreetWarningAcked(false);
+    setHouseGap(null);
   }, []);
 
   const lookup = async (acked: boolean) => {
@@ -83,6 +88,7 @@ export function AddressStep({ state, dispatch }: AddressStepProps) {
       // then is refused later, after the person has left. Carry the flag so
       // the send step withholds "Send to Congress" and says why.
       dispatch({ type: 'SET_DISTRICT_RESOLVED', payload: districtResolvedFrom(data) });
+      setHouseGap(typeof data.houseWarning === 'string' ? data.houseWarning : null);
 
       // No recipient picker: map the story to the RIGHT officials. Only the
       // PRIMARY (weight-2) levels receive the message. "Shares authority"
@@ -173,6 +179,13 @@ export function AddressStep({ state, dispatch }: AddressStepProps) {
       {state.address && !state.districtResolved && (
         <div role="alert" className="mb-4 p-3 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded-xl">
           <p className="text-sm text-amber-800 dark:text-amber-300">{CWC_COPY.unresolvedAddress}</p>
+        </div>
+      )}
+
+      {/* District fine, House seat not on file. Senators still go through. */}
+      {houseGap && state.districtResolved && (
+        <div role="status" className="mb-4 p-3 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded-xl">
+          <p className="text-sm text-amber-800 dark:text-amber-300">{houseGap}</p>
         </div>
       )}
 

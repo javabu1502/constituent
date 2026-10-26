@@ -1,3 +1,4 @@
+import { createHmac, timingSafeEqual } from 'crypto';
 import { NextRequest, NextResponse } from 'next/server';
 import { createAdminClient } from '@/lib/supabase';
 import { isCampaignClosed } from '@/lib/campaign-close';
@@ -50,6 +51,44 @@ function stripName(body: string, name: string | null | undefined): string {
   return out;
 }
 
+/**
+ * Proof that an anonymous story went through the redaction preview.
+ *
+ * `preview_confirmed` is a claim made by the browser, and this route is
+ * public and unauthenticated. On its own it meant one POST with
+ * `attribution_level: 'anonymous'` and `preview_confirmed: true` stored the
+ * body verbatim and labelled it anonymous, with nothing on the server
+ * showing a redaction pass had ever run. The named backstop could not catch
+ * it either: the client sends no name for an anonymous story, so the
+ * deterministic strip had nothing to strip.
+ *
+ * So the preview step now returns a token over the text it produced, and the
+ * store step honours `preview_confirmed` only if that token verifies. The
+ * token is scoped to the campaign and to the previewed text, so it cannot be
+ * replayed against another campaign. A hand-edit is still accepted: the
+ * token proves the preview happened, which is the part the server cannot
+ * otherwise know, and re-running the model would discard the edits the
+ * storyteller just made.
+ */
+function previewSecret(): string {
+  return process.env.STORY_PREVIEW_SECRET || process.env.SUPABASE_SECRET_KEY || process.env.IP_HASH_SALT || '';
+}
+
+function previewToken(campaignId: string, previewedBody: string): string {
+  return createHmac('sha256', previewSecret())
+    .update(`${campaignId}:${previewedBody.trim()}`)
+    .digest('hex')
+    .slice(0, 32);
+}
+
+function previewTokenValid(token: unknown, campaignId: string, previewedBody: string): boolean {
+  if (typeof token !== 'string' || token.length !== 32) return false;
+  const expected = previewToken(campaignId, previewedBody);
+  const a = Buffer.from(token);
+  const b = Buffer.from(expected);
+  return a.length === b.length && timingSafeEqual(a, b);
+}
+
 /** Keep a topical title only; strip the storyteller's name and dashes. */
 function sanitizeTitle(title: string | null | undefined, name: string | null | undefined): string {
   let t = deDash((title || '').trim());
@@ -96,6 +135,8 @@ export async function POST(request: NextRequest) {
     shared_reps,
     preview,
     preview_confirmed,
+    preview_token,
+    previewed_body,
     turnstileToken,
   } = parsed.data;
 
@@ -162,7 +203,14 @@ export async function POST(request: NextRequest) {
   // It is stored exactly as given; a second model pass would change it and
   // throw away their edits (confirmed live, 2026-10-23). Only the
   // deterministic safety checks run: strip any name they typed, and de-dash.
-  const confirmedAnonymous = attribution_level === 'anonymous' && preview_confirmed === true && !preview;
+  //
+  // `preview_confirmed` alone is not enough: it is a claim from the browser,
+  // and this route is public. `preview_token` is the server's own evidence
+  // that the redaction pass ran on this campaign's preview step. Without a
+  // valid one, the full redaction pass runs here instead.
+  const previewProven =
+    preview_confirmed === true && previewTokenValid(preview_token, campaign.id as string, previewed_body ?? body);
+  const confirmedAnonymous = attribution_level === 'anonymous' && previewProven && !preview;
   const applied: AttributionResult = confirmedAnonymous
     ? { final_body: stripName(body, storyteller_name), flagged: [] }
     : await applyAttribution(body, attribution_level, storyteller_name);
@@ -180,11 +228,31 @@ export async function POST(request: NextRequest) {
   // Preview: show the storyteller exactly what the organization will receive
   // (anonymous redaction applied), without saving anything.
   if (preview) {
-    return NextResponse.json({ preview: true, final_body, flagged });
+    // The token travels with the previewed text. The store step replays it to
+    // prove this story passed through redaction.
+    return NextResponse.json({
+      preview: true,
+      final_body,
+      flagged,
+      preview_token: previewToken(campaign.id as string, final_body),
+    });
   }
 
   // Store a short, scrubbed topic title in the aggregate subjects view.
-  const subjectTitle = sanitizeTitle(title, storyteller_name);
+  //
+  // An anonymous story's title never went through the anonymization pass.
+  // `sanitizeTitle` strips the name the storyteller typed, and an anonymous
+  // story sends no name, so for those rows it did nothing but remove dashes.
+  // A title like "My son Diego's wait at the clinic" was then stored on an
+  // anonymous row, exported with no masking, and copied into `story_subjects`
+  // where it is shown in aggregate. The redaction prompt is explicitly
+  // responsible for third parties, so the title goes through it too; if that
+  // pass cannot run, the title is dropped rather than stored unredacted.
+  let subjectTitle = sanitizeTitle(title, storyteller_name);
+  if (attribution_level === 'anonymous' && subjectTitle) {
+    const titlePass = await applyAttribution(subjectTitle, 'anonymous', storyteller_name);
+    subjectTitle = titlePass.failed ? '' : sanitizeTitle(titlePass.final_body, storyteller_name);
+  }
   if (subjectTitle) {
     const { error: subjectError } = await admin
       .from('story_subjects')

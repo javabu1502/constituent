@@ -60,7 +60,12 @@ export interface LocalOfficial extends Official {
 export interface LookupResult {
   officials: Official[];
   address: GeocodedAddress;
+  /** The street could not be placed at all, so only senators are listed and
+   *  congressional delivery is withheld. */
   warning?: string;
+  /** The district resolved but no House member is on file for it. Senators
+   *  are unaffected and congressional delivery stays open for them. */
+  houseWarning?: string;
 }
 
 // Topic types (for predefined topic grid - kept for backwards compatibility)

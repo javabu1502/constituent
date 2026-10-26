@@ -5,7 +5,28 @@ import { UserMenu } from './UserMenu';
 import { MobileNav } from './MobileNav';
 import { NavDropdown } from './NavDropdown';
 import { SearchButton } from '@/components/search/SearchButton';
+import { cache } from 'react';
 import { createAdminClient } from '@/lib/supabase';
+
+/**
+ * Is this account an organization? Cached per request, so the several server
+ * components that need it share one query instead of each adding a
+ * round trip to every page load.
+ */
+const isOrgAccount = cache(async (userId: string): Promise<boolean> => {
+  try {
+    const { data: profile } = await createAdminClient()
+      .from('profiles')
+      .select('account_type')
+      .eq('user_id', userId)
+      .single();
+    return profile?.account_type === 'organization';
+  } catch {
+    // A missing or errored profile reads as a constituent, which shows the
+    // ordinary navigation rather than nothing.
+    return false;
+  }
+});
 import { OrgNav } from './OrgNav';
 
 export async function Header() {
@@ -16,19 +37,7 @@ export async function Header() {
   // reachable under Explore and Learn, but they are not what this account
   // came to do, and the dashboard link in the account menu was the only way
   // into their own work.
-  let isOrg = false;
-  if (user) {
-    try {
-      const { data: profile } = await createAdminClient()
-        .from('profiles')
-        .select('account_type')
-        .eq('user_id', user.id)
-        .single();
-      isOrg = profile?.account_type === 'organization';
-    } catch {
-      isOrg = false;
-    }
-  }
+  const isOrg = user ? await isOrgAccount(user.id) : false;
 
   return (
     <header className="border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">

@@ -63,6 +63,7 @@ export async function OrgReportView({
   // across every tile, with their eight stories listed in two lines at the
   // bottom. These are the figures that describe that work.
   const stories = (storyRows ?? []) as Array<{
+    campaign_id?: string | null;
     attribution_level?: string | null;
     consent_usage_snapshot?: { granted_uses?: string[] } | null;
     state?: string | null;
@@ -71,6 +72,16 @@ export async function OrgReportView({
   }>;
   const grantedOf = (s: { consent_usage_snapshot?: { granted_uses?: string[] } | null }) =>
     s.consent_usage_snapshot?.granted_uses ?? [];
+  // Real rows per initiative, so the per-campaign line and the totals above
+  // it come from the same place. Rolled up to the parent the way messages and
+  // meetings are, or a story collected on a step would not appear at all.
+  const storiesByCampaign = new Map<string, number>();
+  for (const st of stories) {
+    const cid = st.campaign_id ?? '';
+    if (!cid) continue;
+    const top = topOf.get(cid) ?? cid;
+    storiesByCampaign.set(top, (storiesByCampaign.get(top) ?? 0) + 1);
+  }
   const storyStats = {
     total: stories.length,
     named: stories.filter((s) => s.attribution_level === 'named').length,
@@ -80,9 +91,12 @@ export async function OrgReportView({
     shareableWithOfficials: stories.filter((s) => grantedOf(s).includes('shared_with_legislators')).length,
     pressReady: stories.filter((s) => grantedOf(s).includes('shared_with_media')).length,
     openToFollowUp: stories.filter((s) => grantedOf(s).includes('contact_me_followup') && !!s.storyteller_email).length,
-    // Anonymous tellers have no state on file, so this counts the places we
-    // can actually name.
-    states: new Set(stories.map((s) => (s.attribution_level === 'anonymous' ? null : s.state)).filter(Boolean)).size,
+    // Every story that HAS a state counts, anonymous included. An anonymous
+    // story is unattributed, not placeless, and many carry one. Excluding
+    // them here disagreed with report.ts, which counts them, so the same
+    // organization saw two different reach figures. A state is not
+    // identifying on its own; the row carries no name either way.
+    states: new Set(stories.map((s) => s.state).filter(Boolean)).size,
     languages: new Set(stories.map((s) => s.language || 'en')).size,
   };
 
@@ -178,8 +192,11 @@ export async function OrgReportView({
         </section>
         )}
 
-        {/* Story collection — the qualitative arm of the portfolio */}
-        {storytelling.length > 0 && (
+        {/* Story collection — the qualitative arm of the portfolio.
+            Gated on the stories themselves. Gating on a storytelling campaign
+            hid stories collected through an advocacy campaign: those rows
+            were counted into the figures above and then never shown. */}
+        {(storyStats.total > 0 || storytelling.length > 0) && (
           <section>
             <h2 className="text-base font-semibold mb-3">Stories collected</h2>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-4">
@@ -218,7 +235,11 @@ export async function OrgReportView({
                 <div key={c.id as string} className="flex items-center justify-between gap-3 text-sm border-b border-gray-100 dark:border-gray-700 pb-1.5">
                   <span className="font-medium min-w-0">{c.headline}</span>
                   <span className="shrink-0 text-xs text-gray-500 dark:text-gray-400">
-                    {Number(c.story_count || 0).toLocaleString()} stories collected
+                    {/* Live rows, not `campaigns.story_count`. The two
+                        disagreed in the same block of the same page: one
+                        campaign read 3 against 1 real story, because the
+                        counter was bumped before the insert was confirmed. */}
+                    {(storiesByCampaign.get(c.id as string) ?? 0).toLocaleString()} stories collected
                   </span>
                 </div>
               ))}

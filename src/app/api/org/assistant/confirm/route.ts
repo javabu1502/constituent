@@ -60,7 +60,11 @@ export async function POST(req: NextRequest) {
   }
 
   const admin = createAdminClient();
-  const { data: profile } = await admin.from('profiles').select('account_type').eq('user_id', user.id).single();
+  const { data: profile } = await admin
+    .from('profiles')
+    .select('account_type, org_name, org_url, org_logo_url, brand_color')
+    .eq('user_id', user.id)
+    .single();
   if (profile?.account_type !== 'organization') {
     return NextResponse.json({ error: 'This is for organization accounts.' }, { status: 403 });
   }
@@ -124,11 +128,21 @@ export async function POST(req: NextRequest) {
     headline: c.headline.trim(),
     description: c.description.trim(),
     issue_area: c.issue_area?.trim() || 'Other',
-    target_level: c.campaign_type === 'advocacy' ? c.target_level ?? 'federal' : null,
+    // NOT NULL in the schema with no default, so null here 500s every
+    // storytelling campaign the assistant drafts. The ordinary create route
+    // stores 'federal' for storytelling too.
+    target_level: c.campaign_type === 'advocacy' ? c.target_level ?? 'federal' : 'federal',
     direction: c.campaign_type === 'advocacy' ? c.direction ?? null : null,
     message_template: c.message_template?.trim() || null,
     story_prompt: c.campaign_type === 'storytelling' ? c.story_prompt?.trim() || null : null,
     language: c.language ?? 'en',
+    // The organization's own identity, the way the ordinary create route
+    // applies it. Without these the campaign's public page and its closed
+    // notice name no organization at all.
+    org_name: (profile?.org_name as string) || null,
+    org_url: (profile?.org_url as string) || null,
+    org_logo_url: (profile?.org_logo_url as string) || null,
+    brand_color: (profile?.brand_color as string) || null,
     visibility: 'unlisted',
     // Not live. The person opens it, checks it, and launches it themselves.
     status: 'paused',

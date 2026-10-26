@@ -35,26 +35,73 @@ const LOCAL_BODY_PATTERN =
 // has those too, and writing "Dear Representative," at the top of a letter
 // about potholes used to switch this whole check off.
 //
-// This list used to include immigration, border, foreign, military, nato,
-// ukraine, israel, national, nationwide and regulation. A topic noun is not
-// a request of Congress, and because those nouns are not politically neutral
-// the effect was asymmetric: a purely local message about an immigration
-// ordinance was waved straight through while the structurally identical
-// local message about a firearm ordinance was held. The bare word "national"
-// also switched the whole check off, so "the potholes on my street are a
-// national disgrace" read as federal.
+// Bare topic nouns are not evidence of a request to Congress, and because
+// those nouns are not politically neutral the effect was asymmetric: a purely
+// local message about an immigration ordinance was waved straight through
+// while the structurally identical local message about a firearm ordinance
+// was held. The bare word "national" also switched the whole check off, so
+// "the potholes on my street are a national disgrace" read as federal.
+//
+// Removing them outright went too far the other way and held ordinary
+// federal letters: a message asking Congress to stop arming a foreign
+// government, to end an immigration raid, or to vote against a tariff had no
+// federal signal left once it also mentioned a mayor or a city council. So
+// they are back as ACTORS AND INSTRUMENTS, which are the forms a request of
+// Congress actually takes, and not as the bare nouns.
 const FEDERAL_ASK_PATTERN =
-  /\b(congress|federal|u\.?s\.? (?:senate|house|representative|senator)|congress(?:man|woman|member)|appropriat|\bbill\b.*\b(?:h\.?r\.?|s\.)\s*\d|medicare|medicaid|social security|\bva\b|veterans affairs|\birs\b|\bepa\b|\bfda\b|\bhhs\b|\bice\b|\bdhs\b|\bfbi\b|\bcbp\b|head start|\bsnap\b|\bwic\b|department of (?:education|health|labor|agriculture|defense|justice|homeland|state|transportation|energy|interior)|federal funding|federal grant|federal rule|federal law|proposed rule|act of congress|treaty|federal court|supreme court)\b/i;
+  /\b(congress|federal|u\.?s\.? (?:senate|house|representative|senator)|congress(?:man|woman|member)|house of representatives|appropriat|\bbill\b.*\b(?:h\.?r\.?|s\.)\s*\d|medicare|medicaid|social security|veterans affairs|head start|department of (?:education|health|labor|agriculture|defense|justice|homeland|state|transportation|energy|interior)|state department|national guard|foreign aid|military aid|foreign policy|defense authorization|tariffs?|immigration (?:law|policy|enforcement|raids?|reform|court)|border (?:policy|patrol|wall|security)|federal funding|federal grant|federal rule|federal law|federal immigration|proposed rule|act of congress|treaty|federal court|supreme court|nationwide ban|national ban)\b/i;
+
+// The same check for words that are only federal actors in capitals. Matched
+// case-SENSITIVELY, because the lowercase forms are ordinary English and
+// matching them case-insensitively made this check fail OPEN:
+//
+//   "There is ice on the sidewalk and the city does nothing"  -> read federal
+//   "Potholes everywhere. Jane Doe, 123 Main St, Arlington, VA 22201"
+//
+// That second one is the expensive one. Every constituent with a Virginia
+// address in their signature block bypassed the jurisdiction check entirely,
+// because the body carried "VA".
+const FEDERAL_ACRONYM_PATTERN =
+  /\b(ICE|DHS|FBI|CBP|IRS|EPA|FDA|HHS|SNAP|WIC|USDA|FEMA|NATO|CMS|SSA|HUD)\b/;
+
+// Two-letter and otherwise ambiguous acronyms need to say what they are
+// about. "VA" is a state as often as it is the department.
+const AMBIGUOUS_ACRONYM_PATTERN =
+  /\bVA\b\s*(?:benefits?|claim|hospital|clinic|disability|loan|health|care|appeals?|backlog)|(?:department|secretary|office)\s+of\s+veterans|\bthe\s+VA\b/i;
 
 // Municipal services: nobody in Congress fixes these; a message that is only
 // about them (with no federal ask) belongs to city hall.
 const LOCAL_SERVICE_PATTERN =
   /\b(potholes?|street ?lights?|sidewalks?|trash (?:pickup|collection)|garbage (?:pickup|collection|service)|recycling pickup|snow ?plow\w*|water bill|sewer bill|parking (?:tickets?|meters?|enforcement)|noise ordinance|leash law|code enforcement|building permit|property tax(?:es)?|the city does nothing|the county does nothing)\b/i;
 
-/** Drop a leading "Dear ...," line. It names the recipient, which tells us
- *  nothing about whether the request belongs to that office. */
+/**
+ * The greeting at the top of a letter, as a prefix: "Dear Senator Rosen,".
+ * Shared with the CWC compliance gate, which strips the same thing before
+ * screening, so the two cannot drift apart about what a salutation is.
+ */
+export const SALUTATION_WORDS = 'dear|to|hello|hi|greetings';
+const SALUTATION_OPENING = new RegExp(`^\\s*(?:${SALUTATION_WORDS})\\b[^,:\\n]{0,60}[,:]\\s*`, 'i');
+
+/**
+ * Drop a leading salutation. It names the recipient, which tells us nothing
+ * about whether the request belongs to that office.
+ *
+ * Only the greeting goes, not the whole first line. Deleting the line took
+ * the ask with it whenever the salutation ran inline: "Dear Senator Rosen,
+ * please vote no on H.R. 1234." lost the bill reference before the detector
+ * ever saw it, and the message was held.
+ */
 export function withoutSalutation(message: string): string {
-  return message.replace(/^\s*(dear|to|hello|greetings)\b[^\n]{0,80}[,:]?\s*\n+/i, '');
+  return message.replace(SALUTATION_OPENING, '');
+}
+
+/** Any federal actor or instrument in the text. */
+function hasFederalAsk(text: string): boolean {
+  return (
+    FEDERAL_ASK_PATTERN.test(text) ||
+    FEDERAL_ACRONYM_PATTERN.test(text) ||
+    AMBIGUOUS_ACRONYM_PATTERN.test(text)
+  );
 }
 
 export function assessFederalJurisdiction(input: { message: string; subject?: string }): JurisdictionAssessment {
@@ -64,7 +111,7 @@ export function assessFederalJurisdiction(input: { message: string; subject?: st
   const refs = detectBillReferences(text);
   const federalRefs = refs.filter((r) => r.level === 'federal');
   const stateBillHits = [...text.matchAll(STATE_BILL_PATTERN)].map((m) => `${m[1]} ${m[2]}`);
-  const federalAsk = FEDERAL_ASK_PATTERN.test(text);
+  const federalAsk = hasFederalAsk(text);
 
   // 1. A state bill number with no federal bill and no federal ask: this is
   //    a message for the state legislature, not Congress.

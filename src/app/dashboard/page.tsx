@@ -12,6 +12,7 @@ import { RepActivitySection } from '@/components/dashboard/RepActivitySection';
 import { VoterInfoCard } from '@/components/dashboard/VoterInfoCard';
 import { CampaignCard } from '@/components/dashboard/CampaignCard';
 import { OrgDashboard } from '@/components/dashboard/OrgDashboard';
+import { getPortfolioCounts } from '@/lib/campaign-counts';
 import { CollapsibleSection } from '@/components/ui/CollapsibleSection';
 import { GettingStartedChecklist } from '@/components/dashboard/GettingStartedChecklist';
 import { WelcomeTour } from '@/components/dashboard/WelcomeTour';
@@ -195,10 +196,15 @@ export default async function DashboardPage() {
   // the reach those campaigns earned. Orgs have no elected officials of their
   // own and never send constituent messages, so none of those sections render.
   if (accountType === 'organization') {
+    // Exact counts across every campaign the org runs, steps included. The
+    // tile used to sum `campaigns.action_count`, which counts officials
+    // engaged rather than people, and label the result as supporters.
+    const portfolio = await getPortfolioCounts(admin, allCampaigns.map((c) => c.id as string));
     return (
       <OrgDashboard
         displayName={(profile?.org_name as string) || (profile?.name as string) || user.email || 'Your organization'}
         campaigns={allCampaigns}
+        portfolio={portfolio}
       />
     );
   }

@@ -42,9 +42,9 @@ export interface ComplianceSender {
   street?: string;
 }
 
-/** A prior message by the same sender, used for split-abuse detection. */
+/** A prior message by the same sender, used for split-abuse detection. The
+ *  recipient is deliberately absent; see buildUserPayload. */
 export interface RecentMessage {
-  legislatorName?: string;
   issueArea?: string;
   body?: string;
   createdAt?: string;
@@ -53,7 +53,6 @@ export interface RecentMessage {
 export interface ComplianceInput {
   message: string;
   topic?: string;
-  legislatorName?: string;
   sender: ComplianceSender;
   recentMessages: RecentMessage[];
 }
@@ -91,7 +90,6 @@ function buildUserPayload(input: ComplianceInput): string {
         .map((m, i) => {
           const meta = [
             m.createdAt ? `sent ${m.createdAt}` : null,
-            m.legislatorName ? `to ${m.legislatorName}` : null,
             m.issueArea ? `re: ${m.issueArea}` : null,
           ]
             .filter(Boolean)
@@ -136,6 +134,23 @@ function coerceCategories(raw: unknown): ComplianceCategories {
     jurisdiction: r.jurisdiction === true,
     other: r.other === true,
   };
+}
+
+/**
+ * Did the model actually report a category for every flag we asked about?
+ *
+ * This matters because `coerceCategories` cannot tell "the model said nothing
+ * is wrong" from "I could not read the categories at all" — both arrive as
+ * seven falses. The difference decides whether an uncategorised verdict is
+ * safe to relax, so a response whose categories we cannot read is treated as
+ * a malformed response rather than as an all-clear.
+ */
+function categoriesWellFormed(raw: unknown): boolean {
+  if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return false;
+  const r = raw as Record<string, unknown>;
+  return (Object.keys(EMPTY_CATEGORIES) as (keyof ComplianceCategories)[]).every(
+    (k) => typeof r[k] === 'boolean',
+  );
 }
 
 /**
@@ -200,20 +215,45 @@ export async function runComplianceCheck(input: ComplianceInput): Promise<Compli
     // the costume of a rule, and it costs a constituent their delivery
     // window with nothing a reviewer can weigh. The jurisdiction layer below
     // can still raise its own flag with its own stated reason.
+    //
+    // Three cases, and the difference between them is the whole safety
+    // argument. This is the only abuse screen in the pipeline, so a wrong
+    // relaxation here delivers an unscreened message to a congressional
+    // office with an audit row that reads "pass".
+    //
+    //   1. Categories readable and all false, model said review  -> pass.
+    //      We have positive evidence the model flagged nothing, so holding
+    //      the message would be the ungrounded hold described above.
+    //   2. Categories readable and all false, model said block   -> review.
+    //      A stated refusal is too strong to wave through on the strength of
+    //      an empty category set. A person looks at it instead.
+    //   3. Categories unreadable                                 -> review.
+    //      We cannot tell an all-clear from an unparsed response, and the
+    //      rest of this module fails safe to review. So does this.
     const categories = coerceCategories(parsed.categories);
     const named = Object.values(categories).some(Boolean);
-    // Only a verdict the model actually stated is downgraded. A decision we
-    // could not parse is a malformed response, which still fails safe to
-    // review the way the rest of this module does.
+    const wellFormed = categoriesWellFormed(parsed.categories);
     const stated = decision === 'review' || decision === 'block';
-    const grounded: ComplianceDecision = stated && !named ? 'pass' : normalized;
+    let grounded: ComplianceDecision = normalized;
+    if (stated && !named) {
+      if (!wellFormed) grounded = 'review';
+      else grounded = decision === 'block' ? 'review' : 'pass';
+    }
     if (grounded !== normalized) {
-      console.info('[compliance] downgraded an uncategorised verdict to pass:', reasons.slice(0, 2));
+      console.info(
+        `[compliance] uncategorised ${decision} verdict became ${grounded}` +
+          `${wellFormed ? '' : ' (categories unreadable)'}:`,
+        reasons.slice(0, 2),
+      );
     }
 
+    // The model's own stated reasons are kept whatever the outcome. They are
+    // the only record of why it objected, and `raw_verdict` in the audit
+    // table stores this verdict after the adjustment above, so dropping them
+    // here would make the adjustment unreviewable.
     return enforceJurisdiction(input, {
       decision: grounded,
-      reasons: grounded === 'pass' && normalized !== 'pass' ? [] : reasons,
+      reasons,
       categories,
       model,
       promptVersion: PROMPT_VERSION,

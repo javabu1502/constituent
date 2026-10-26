@@ -112,7 +112,24 @@ describe('districtResolvedFrom reads the representatives response', () => {
   });
   it('true on a normal lookup', () => {
     expect(districtResolvedFrom({ address: { congressionalDistrict: '2' } })).toBe(true);
-    expect(districtResolvedFrom({})).toBe(true);
+    expect(districtResolvedFrom({ address: { congressionalDistrict: '00' } })).toBe(true);
+  });
+
+  // A district that resolved but has no House member on file travels as
+  // `houseWarning`. It must not withhold delivery: the person's senators do
+  // not depend on a district, and this used to cut them off and blame the
+  // address. A response with no district at all stays conservative.
+  it('stays true when only the House seat is missing', () => {
+    expect(
+      districtResolvedFrom({
+        houseWarning: 'We could not find a current House member on file for TX-23.',
+        address: { congressionalDistrict: '23' },
+      } as Parameters<typeof districtResolvedFrom>[0]),
+    ).toBe(true);
+  });
+
+  it('false when the response carries no district', () => {
+    expect(districtResolvedFrom({})).toBe(false);
   });
 });
 

@@ -138,6 +138,11 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
 
   // Result from preview / submit
   const [finalBody, setFinalBody] = useState('');
+  // The redaction preview's own text and the token the server issued over it.
+  // Replayed on the store call as proof the pass ran, so an edited story is
+  // stored as edited instead of going through the model a second time.
+  const [previewToken, setPreviewToken] = useState<string | null>(null);
+  const [previewedBody, setPreviewedBody] = useState<string | null>(null);
   const [flagged, setFlagged] = useState<string[]>([]);
   const [revokeToken, setRevokeToken] = useState<string | null>(null);
   const [storyId, setStoryId] = useState<string | null>(null);
@@ -364,7 +369,7 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
     return reps.slice(0, 30);
   };
 
-  const buildPayload = (opts: { preview: boolean; sharedReps: SharedRep[]; turnstileToken: string; bodyText: string; previewConfirmed: boolean }) => {
+  const buildPayload = (opts: { preview: boolean; sharedReps: SharedRep[]; turnstileToken: string; bodyText: string; previewConfirmed: boolean; previewToken?: string | null; previewedBody?: string | null }) => {
     const anon = attribution === 'anonymous';
     const shareLoc = shareLocation && !anon;
     return {
@@ -382,6 +387,11 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
       preview: opts.preview,
       // Anonymous store after preview: this body is the reviewed text, stored as given.
       preview_confirmed: opts.previewConfirmed || undefined,
+      // The server's own proof that the redaction preview ran. Without it
+      // the store step re-runs the model, which would discard the edits made
+      // on the preview screen.
+      preview_token: opts.previewToken || undefined,
+      previewed_body: opts.previewedBody || undefined,
       city: shareLoc ? address.city.trim() : null,
       state: shareLoc ? address.state.trim() : null,
       shared_reps: shareLoc && opts.sharedReps.length ? opts.sharedReps : null,
@@ -414,7 +424,10 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
         if (!res.ok) throw new Error(failureMessage(res.status, await readJson(res), res.status === 503 ? t.anonymizeFailed : t.prepareFailed));
         const data = await readJson(res);
         if (!data) throw new Error(t.prepareFailed);
-        setFinalBody(typeof data.final_body === 'string' && data.final_body ? data.final_body : body.trim());
+        const redacted = typeof data.final_body === 'string' && data.final_body ? data.final_body : body.trim();
+        setFinalBody(redacted);
+        setPreviewToken(typeof data.preview_token === 'string' ? data.preview_token : null);
+        setPreviewedBody(redacted);
         setFlagged(Array.isArray(data.flagged) ? data.flagged.filter((f): f is string => typeof f === 'string') : []);
         setStep('preview');
         return;
@@ -424,7 +437,7 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
       const res = await fetch('/api/stories', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(buildPayload({ preview: false, sharedReps, turnstileToken, bodyText, previewConfirmed: confirmedBody !== undefined })),
+        body: JSON.stringify(buildPayload({ preview: false, sharedReps, turnstileToken, bodyText, previewConfirmed: confirmedBody !== undefined, previewToken, previewedBody })),
       });
       if (!res.ok) throw new Error(failureMessage(res.status, await readJson(res), res.status === 503 ? t.anonymizeFailed : t.submitFailed));
       const data = await readJson(res);

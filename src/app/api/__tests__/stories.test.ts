@@ -280,12 +280,40 @@ describe('POST /api/stories', () => {
     expect(mockStoryInsert).not.toHaveBeenCalled();
   });
 
-  it('anonymous + preview_confirmed stores the reviewed text as given and does not redact again', async () => {
+  /**
+   * The preview step issues a token over the text it produced. The store step
+   * honours `preview_confirmed` only when that token verifies, because the
+   * flag on its own is a claim from the browser and this route is public.
+   */
+  /**
+   * An anonymous story's TITLE goes through the redaction pass too, so
+   * `mockApply` may legitimately be called for the title. These assertions
+   * are about the body, so they count only the calls that carry it.
+   */
+  const bodyRedactions = (bodyText: string) =>
+    mockApply.mock.calls.filter((c) => String(c[0]) === bodyText).length;
+
+  async function previewTokenFor(bodyText: string): Promise<string> {
     const { POST } = await import('../stories/route');
+    mockApply.mockResolvedValueOnce({ final_body: bodyText, flagged: [] });
+    const res = await POST(makeReq({ ...validBody, attribution_level: 'anonymous', storyteller_name: null, body: bodyText, preview: true }));
+    const data = await res.json();
+    vi.clearAllMocks();
+    mockInsertResult.mockResolvedValue({ data: { id: 'story-1' }, error: null });
+    return data.preview_token as string;
+  }
+
+  it('anonymous + a verified preview token stores the reviewed text as given and does not redact again', async () => {
     const reviewed = 'The text I read on the preview step, with my own edit kept in.';
-    const res = await POST(makeReq({ ...validBody, attribution_level: 'anonymous', storyteller_name: null, body: reviewed, preview_confirmed: true }));
+    const token = await previewTokenFor(reviewed);
+    expect(token).toBeTruthy();
+    const { POST } = await import('../stories/route');
+    const res = await POST(makeReq({
+      ...validBody, attribution_level: 'anonymous', storyteller_name: null, body: reviewed,
+      preview_confirmed: true, preview_token: token, previewed_body: reviewed,
+    }));
     expect(res.status).toBe(200);
-    expect(mockApply).not.toHaveBeenCalled();
+    expect(bodyRedactions(reviewed)).toBe(0);
     const row = mockStoryInsert.mock.calls[0][0];
     expect(row.body).toBe(reviewed);
     expect(row.storyteller_name).toBeNull();
@@ -293,17 +321,101 @@ describe('POST /api/stories', () => {
     expect(data.final_body).toBe(reviewed);
   });
 
-  it('preview_confirmed still strips a typed name and never skips redaction on the preview call itself', async () => {
+  it('keeps a hand-edit made after the preview, since the token covers the previewed text', async () => {
+    const reviewed = 'A community member waited an hour at the clinic.';
+    const token = await previewTokenFor(reviewed);
+    const edited = `${reviewed} I want to add that the wait was in the rain.`;
     const { POST } = await import('../stories/route');
-    // A name sent along with the confirmed body is removed without the model.
-    await POST(makeReq({ ...validBody, attribution_level: 'anonymous', storyteller_name: 'Jane Doe', body: 'Jane Doe went to the clinic and Jane waited an hour.', preview_confirmed: true }));
-    expect(mockApply).not.toHaveBeenCalled();
+    await POST(makeReq({
+      ...validBody, attribution_level: 'anonymous', storyteller_name: null, body: edited,
+      preview_confirmed: true, preview_token: token, previewed_body: reviewed,
+    }));
+    expect(bodyRedactions(edited)).toBe(0);
+    expect(mockStoryInsert.mock.calls[0][0].body).toBe(edited);
+  });
+
+  // The hole this closes: one POST claiming the preview happened stored the
+  // body verbatim and labelled it anonymous, and the named backstop could not
+  // catch it because an anonymous story carries no name to strip.
+  it.each([
+    ['no token at all', {}],
+    ['a forged token', { preview_token: 'f'.repeat(32) }],
+    ['a token for another campaign', { preview_token: '0'.repeat(32) }],
+    ['a short token', { preview_token: 'abc' }],
+  ])('runs the full redaction pass when preview_confirmed arrives with %s', async (_label, extra) => {
+    const { POST } = await import('../stories/route');
+    mockApply.mockResolvedValue({ final_body: 'REDACTED BY THE MODEL', flagged: [] });
+    await POST(makeReq({
+      ...validBody, attribution_level: 'anonymous', storyteller_name: null,
+      body: 'My neighbour Maria Gonzalez at 12 Oak Street lost her placement.',
+      preview_confirmed: true, ...extra,
+    }));
+    expect(bodyRedactions('My neighbour Maria Gonzalez at 12 Oak Street lost her placement.')).toBe(1);
+    expect(mockStoryInsert.mock.calls[0][0].body).toBe('REDACTED BY THE MODEL');
+  });
+
+  it('a token issued for one body does not authorise a different campaign', async () => {
+    const token = await previewTokenFor('Some reviewed text.');
+    const { POST } = await import('../stories/route');
+    mockApply.mockResolvedValue({ final_body: 'REDACTED BY THE MODEL', flagged: [] });
+    // previewed_body does not match what the token was issued over.
+    await POST(makeReq({
+      ...validBody, attribution_level: 'anonymous', storyteller_name: null, body: 'Different text entirely.',
+      preview_confirmed: true, preview_token: token, previewed_body: 'Text the preview never returned.',
+    }));
+    expect(bodyRedactions('Different text entirely.')).toBe(1);
+  });
+
+  it('strips a typed name on the confirmed path and never skips redaction on a preview call', async () => {
+    const reviewed = 'Jane Doe went to the clinic and Jane waited an hour.';
+    const token = await previewTokenFor(reviewed);
+    const { POST } = await import('../stories/route');
+    await POST(makeReq({
+      ...validBody, attribution_level: 'anonymous', storyteller_name: 'Jane Doe', body: reviewed,
+      preview_confirmed: true, preview_token: token, previewed_body: reviewed,
+    }));
+    expect(bodyRedactions(reviewed)).toBe(0);
     expect(mockStoryInsert.mock.calls[0][0].body).not.toMatch(/Jane|Doe/);
     // The flag means nothing on a preview request: the model pass still runs.
     vi.clearAllMocks();
     mockApply.mockResolvedValue({ final_body: 'REDACTED', flagged: [] });
     await POST(makeReq({ ...validBody, attribution_level: 'anonymous', storyteller_name: null, preview: true, preview_confirmed: true }));
-    expect(mockApply).toHaveBeenCalledOnce();
+    expect(bodyRedactions(validBody.body)).toBe(1);
+  });
+
+  /**
+   * An anonymous story's title used to skip anonymization entirely:
+   * `sanitizeTitle` only strips the name the storyteller typed, and an
+   * anonymous story sends no name. "My son Diego's wait at the clinic" was
+   * stored on an anonymous row, exported with no masking, and copied into the
+   * aggregate subjects table.
+   */
+  it('runs an anonymous title through the redaction pass', async () => {
+    const { POST } = await import('../stories/route');
+    mockApply.mockImplementation(async (text: string) =>
+      ({ final_body: text.replace(/Diego/g, 'a child'), flagged: [] }));
+    await POST(makeReq({
+      ...validBody, attribution_level: 'anonymous', storyteller_name: null,
+      title: "My son Diego's wait at the clinic",
+      body: 'We waited a long time and nobody could tell us why.',
+    }));
+    const row = mockStoryInsert.mock.calls[0][0];
+    expect(row.title).not.toMatch(/Diego/);
+    expect(row.title).toContain('a child');
+  });
+
+  it('drops an anonymous title rather than storing it unredacted when the pass fails', async () => {
+    const { POST } = await import('../stories/route');
+    mockApply.mockImplementation(async (text: string) =>
+      text.startsWith('My son')
+        ? { final_body: text, flagged: [], failed: true }
+        : { final_body: 'REDACTED', flagged: [] });
+    await POST(makeReq({
+      ...validBody, attribution_level: 'anonymous', storyteller_name: null,
+      title: "My son Diego's wait at the clinic",
+      body: 'We waited a long time and nobody could tell us why.',
+    }));
+    expect(mockStoryInsert.mock.calls[0][0].title).toBeNull();
   });
 
   it('preview_confirmed is ignored for named and first-name stories', async () => {

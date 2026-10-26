@@ -16,8 +16,12 @@ export default async function OrgReportPage() {
   if (!user) redirect('/login');
 
   const admin = createAdminClient();
-  const { data: profile } = await admin.from('profiles').select('account_type, name').eq('user_id', user.id).single();
+  const { data: profile } = await admin.from('profiles').select('account_type, org_name').eq('user_id', user.id).single();
   if (profile?.account_type !== 'organization') redirect('/dashboard');
 
-  return <OrgReportView orgUserId={user.id} fallbackOrgName={(profile?.name as string) ?? null} />;
+  // `org_name`, never `name`. `name` is the person who holds the account, so
+  // the funder report was headed "Lela Gonzales · Organization Impact Report"
+  // for The Children's Cabinet, with that same person named among the
+  // storytellers further down the page.
+  return <OrgReportView orgUserId={user.id} fallbackOrgName={(profile?.org_name as string) ?? null} />;
 }

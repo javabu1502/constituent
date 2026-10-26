@@ -132,7 +132,12 @@ export async function POST(req: NextRequest) {
       if (write) {
         toolsUsed.push(write.name);
         return NextResponse.json({
-          reply: text,
+          // Always some text. When the model proposes a write with no
+          // preamble the reply was empty, the client added no assistant turn,
+          // and the next question re-ran every tool from scratch.
+          reply: text || (write.name === 'propose_campaign'
+            ? 'Here is the campaign I would create. Check it over.'
+            : 'Here is the meeting I would record. Check it over.'),
           proposal: { kind: write.name, input: write.input },
           toolsUsed,
         });

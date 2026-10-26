@@ -148,13 +148,19 @@ export function streetLooksUndeliverable(street: string): boolean {
 
 /**
  * Whether the representatives lookup could place the street. The route
- * falls back to senators-only with a warning when the geocoder fails; a
- * message sent then is refused downstream, so the client must know.
+ * falls back to senators-only when the geocoder fails; a message sent then is
+ * refused downstream, so the client must know.
+ *
+ * This reads the district, not the presence of a warning. Keying off any
+ * warning string meant a second, unrelated condition (district resolved, no
+ * House member on file) withheld congressional delivery from the person's
+ * SENATORS, who need no district, and told them their street was bad. That
+ * condition travels as `houseWarning` and does not belong here.
  */
 export function districtResolvedFrom(data: { warning?: unknown; address?: { congressionalDistrict?: unknown } } | null | undefined): boolean {
   if (!data) return false;
-  if (typeof data.warning === 'string' && data.warning) return false;
-  if (data.address?.congressionalDistrict === 'unknown') return false;
+  const d = data.address?.congressionalDistrict;
+  if (d === 'unknown' || d === undefined || d === null || d === '') return false;
   return true;
 }
 

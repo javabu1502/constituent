@@ -12,8 +12,8 @@ import { usePathname } from 'next/navigation';
  * buried in the account menu. Getting from a campaign to the settings page
  * meant knowing the URL.
  *
- * These are the four places an organization actually works, with the current
- * one marked.
+ * These are the places an organization actually works, with the current one
+ * marked.
  */
 export const ORG_NAV = [
   { href: '/dashboard', label: 'Campaigns' },

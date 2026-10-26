@@ -133,14 +133,21 @@ export function CampaignInsightsPanel({
                             {t.quotesMeta?.[qi]?.anonymous && <span className="not-italic ml-2 px-1.5 py-0.5 text-[10px] rounded bg-gray-200 dark:bg-gray-600 text-gray-700 dark:text-gray-200">anonymous</span>}
                             {t.quotesMeta?.[qi] && !t.quotesMeta[qi].reportOk && <span className="not-italic ml-2 text-[10px] text-amber-700 dark:text-amber-300">not cleared for reports</span>}
                           </span>
-                          <button
-                            type="button"
-                            onClick={() => navigator.clipboard.writeText(`"${q}"`)}
-                            className="shrink-0 not-italic text-[11px] font-medium text-purple-600 dark:text-purple-400 hover:underline"
-                            title="Copy quote"
-                          >
-                            Copy
-                          </button>
+                          {/* No copy button on a quote the storyteller did
+                              not clear for reports. Labelling it "not cleared
+                              for reports" and then offering one click to lift
+                              the text out invited exactly the use the label
+                              warns against. */}
+                          {t.quotesMeta?.[qi]?.reportOk !== false && (
+                            <button
+                              type="button"
+                              onClick={() => navigator.clipboard.writeText(`"${q}"`)}
+                              className="shrink-0 not-italic text-[11px] font-medium text-purple-600 dark:text-purple-400 hover:underline"
+                              title="Copy quote"
+                            >
+                              Copy
+                            </button>
+                          )}
                         </li>
                       ))}
                     </ul>

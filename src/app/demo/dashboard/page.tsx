@@ -3,6 +3,7 @@ import { createAdminClient } from '@/lib/supabase';
 import { OrgDashboard } from '@/components/dashboard/OrgDashboard';
 import { DemoBanner } from '@/components/demo/DemoBanner';
 import { DEMO_ORG_USER_ID, DEMO_ORG_NAME } from '@/lib/demo';
+import { getPortfolioCounts } from '@/lib/campaign-counts';
 
 export const metadata: Metadata = {
   title: 'Live Demo — Organization Dashboard | My Democracy',
@@ -28,13 +29,14 @@ export default async function DemoDashboardPage() {
 
   const all = campaigns ?? [];
   const orgName = DEMO_ORG_NAME;
+  const portfolio = await getPortfolioCounts(admin, all.map((c) => c.id as string));
 
   return (
     <>
       <div className="max-w-6xl mx-auto px-4 pt-6">
         <DemoBanner />
       </div>
-      <OrgDashboard displayName={orgName} campaigns={all} isDemo />
+      <OrgDashboard displayName={orgName} campaigns={all} portfolio={portfolio} isDemo />
     </>
   );
 }

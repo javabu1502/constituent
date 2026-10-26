@@ -19,6 +19,18 @@ export const TERMINAL_QUEUE_STATUSES: readonly string[] = ['sent', 'routed', 're
 export const TERMINAL_WEBFORM_STATUSES: readonly string[] = ['sent', 'refused', 'failed'];
 
 export const RETENTION_DAYS = 30;
+
+/**
+ * A ceiling for rows that never reach a terminal status.
+ *
+ * The scrub keys off terminal statuses, which is right: a row still moving
+ * must keep the address it needs to deliver. But a HELD row waits for a
+ * human, and if nobody ever reviews it, it kept the constituent's street,
+ * email and phone indefinitely. The privacy page promises deletion 30 days
+ * after a delivery is settled, so an unsettled row needs its own limit
+ * rather than no limit at all.
+ */
+export const STALE_HOLD_DAYS = 120;
 const DAY_MS = 24 * 60 * 60 * 1000;
 
 /** The stored shape after scrubbing: the fields are present but null. */
@@ -98,6 +110,8 @@ export interface RetentionSummary {
   cwcScrubbed: number;
   webformScrubbed: number;
   aiUsageDeleted: number;
+  /** Of cwcScrubbed, rows that never reached a terminal status. */
+  staleHoldsScrubbed: number;
   errors: string[];
 }
 
@@ -113,7 +127,7 @@ export async function runRetentionScrub(
   const now = opts.now ?? new Date();
   const cutoff = new Date(now.getTime() - (opts.retentionDays ?? RETENTION_DAYS) * DAY_MS).toISOString();
   const limit = opts.limit ?? 500;
-  const summary: RetentionSummary = { cutoff, cwcScrubbed: 0, webformScrubbed: 0, aiUsageDeleted: 0, errors: [] };
+  const summary: RetentionSummary = { cutoff, cwcScrubbed: 0, webformScrubbed: 0, aiUsageDeleted: 0, staleHoldsScrubbed: 0, errors: [] };
 
   // (a) CWC queue rows.
   try {
@@ -136,6 +150,35 @@ export async function runRetentionScrub(
     }
   } catch (e) {
     summary.errors.push(`cwc_send_queue select: ${(e as Error).message}`);
+  }
+
+  // (a2) Rows that never settled. A hold nobody reviews is not a delivery in
+  // progress after four months, it is a stalled row holding a person's street
+  // address. Scrubbed on the same ceiling for both queues.
+  const staleCutoff = new Date(now.getTime() - STALE_HOLD_DAYS * DAY_MS).toISOString();
+  try {
+    const { data, error } = await db
+      .from('cwc_send_queue')
+      .select('id, delivery')
+      .not('status', 'in', `(${TERMINAL_QUEUE_STATUSES.join(',')})`)
+      .lt('created_at', staleCutoff)
+      .is('delivery->scrubbedAt', null)
+      .limit(limit);
+    if (error) throw new Error(error.message);
+    for (const row of (data ?? []) as Array<{ id: number; delivery: CwcDelivery }>) {
+      if (!row.delivery?.constituent) continue;
+      const { error: updErr } = await db
+        .from('cwc_send_queue')
+        .update({ delivery: scrubCwcDelivery(row.delivery, now) })
+        .eq('id', row.id);
+      if (updErr) summary.errors.push(`cwc_send_queue stale #${row.id}: ${updErr.message}`);
+      else {
+        summary.cwcScrubbed++;
+        summary.staleHoldsScrubbed++;
+      }
+    }
+  } catch (e) {
+    summary.errors.push(`cwc_send_queue stale select: ${(e as Error).message}`);
   }
 
   // (b) Webform queue rows.

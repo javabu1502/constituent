@@ -111,12 +111,17 @@ export async function GET(
     if (useFilter && !grantedValues.includes(useFilter)) return false;
     if (officialFilter && !officials.includes(officialFilter)) return false;
     if (q) {
-      const restricted = grantedValues.length === 0;
+      // Search the FULL text, including a row whose text is withheld from the
+      // file. Blanking the haystack dropped those rows from a filtered export
+      // altogether, which contradicts the rule below: a restricted row stays
+      // in the export, it just travels without its text. The organization can
+      // read the story on screen, so a search that matches it on screen has
+      // to match it here too.
       const haystack = [
         isAnon ? '' : s.storyteller_name ?? '',
-        restricted ? '' : s.title ?? '',
-        restricted ? '' : s.body ?? '',
-        restricted ? '' : s.body_en ?? '',
+        s.title ?? '',
+        s.body ?? '',
+        s.body_en ?? '',
         isAnon ? '' : s.city ?? '',
         isAnon ? '' : s.state ?? '',
         isAnon ? '' : s.storyteller_email ?? '',
@@ -132,8 +137,14 @@ export async function GET(
   // A storyteller who grants no use at all has told us the campaign may read
   // their story but not use it elsewhere, and a file is the thing that
   // travels. Those rows stay in the export so the organization can see the
-  // story exists and why it is restricted, but the text does not leave the
-  // dashboard in a spreadsheet.
+  // story exists and why it is restricted, but NOTHING that identifies the
+  // storyteller or carries their words leaves the dashboard in a spreadsheet.
+  //
+  // That means the identifying columns go too, not just the text. Withholding
+  // the body while still emitting the name, city, state, contact email and
+  // the nine officials the story was shared with hands over the person and
+  // the fact that they told this campaign a story, which is the part they
+  // declined to let travel.
   const headers = ['Date', 'Attribution', 'Name', 'City', 'State', 'Contact Email', 'Represented By', 'Title', 'Story', 'Story (English)', 'Granted Uses', 'Usable'];
   const rows = filtered.map((s) => {
     const isAnon = s.attribution_level === 'anonymous';
@@ -149,15 +160,18 @@ export async function GET(
             .map((r) => (r.title ? `${r.name} (${r.title})` : r.name))
             .join('; ')
         : '';
+    // Identity is emitted only for a row that is neither anonymous nor
+    // consent-restricted.
+    const withholdIdentity = isAnon || restricted;
     return [
       s.created_at ? new Date(s.created_at).toISOString().slice(0, 10) : '',
       s.attribution_level,
       // Safety net: never emit identity for anonymous rows even if columns held data.
-      isAnon ? '' : s.storyteller_name ?? '',
-      isAnon ? '' : s.city ?? '',
-      isAnon ? '' : s.state ?? '',
-      isAnon ? '' : s.storyteller_email ?? '',
-      reps,
+      withholdIdentity ? '' : s.storyteller_name ?? '',
+      withholdIdentity ? '' : s.city ?? '',
+      withholdIdentity ? '' : s.state ?? '',
+      withholdIdentity ? '' : s.storyteller_email ?? '',
+      restricted ? '' : reps,
       restricted ? '' : s.title ?? '',
       restricted ? 'Withheld. This storyteller granted no uses.' : s.body ?? '',
       restricted ? '' : s.body_en ?? '',

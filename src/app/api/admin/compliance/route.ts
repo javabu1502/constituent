@@ -66,12 +66,29 @@ export async function PATCH(request: NextRequest) {
   const admin = createAdminClient();
   const { data: verdict, error: vErr } = await admin
     .from('message_compliance')
-    .select('id, message_key, reviewed_at')
+    .select('id, message_key, reviewed_at, decision')
     .eq('id', complianceId)
     .single();
   if (vErr || !verdict) return NextResponse.json({ error: 'Review item not found' }, { status: 404 });
   if (verdict.reviewed_at) return NextResponse.json({ error: 'Already reviewed' }, { status: 409 });
   if (!verdict.message_key) return NextResponse.json({ error: 'Verdict has no message_key to release' }, { status: 422 });
+
+  // A blocked message was never enqueued, so there is no held row to release
+  // and approving it cannot deliver anything. Say so instead of reporting a
+  // silent success: the card used to disappear from the queue on any 2xx and
+  // the message was then unreachable forever.
+  const wasBlocked = verdict.decision === 'block';
+
+  // The queue moves FIRST. Writing `reviewed_at` before releasing meant a
+  // failure here left the verdict marked reviewed and the queue untouched,
+  // so the message was dropped from the review loop without being sent.
+  const { updated } = await resolveHeldMessage(verdict.message_key as string, action);
+  if (action === 'approve' && updated === 0 && !wasBlocked) {
+    return NextResponse.json(
+      { error: 'Nothing was released, so this was left in the queue. Check the delivery rows for this message.' },
+      { status: 409 },
+    );
+  }
 
   const { error: updErr } = await admin
     .from('message_compliance')
@@ -87,6 +104,13 @@ export async function PATCH(request: NextRequest) {
     return NextResponse.json({ error: 'Failed to record review' }, { status: 500 });
   }
 
-  const { updated } = await resolveHeldMessage(verdict.message_key as string, action);
-  return NextResponse.json({ ok: true, releasedRows: updated, action });
+  return NextResponse.json({
+    ok: true,
+    releasedRows: updated,
+    action,
+    decision: verdict.decision,
+    ...(wasBlocked && action === 'approve'
+      ? { note: 'This message was refused before it was queued, so approving it here does not deliver it. The sender has to send it again.' }
+      : {}),
+  });
 }

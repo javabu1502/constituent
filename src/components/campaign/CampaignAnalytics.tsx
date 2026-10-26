@@ -950,12 +950,10 @@ export function CampaignAnalytics({ analytics, campaignName, insightsPanel, hide
         </CollapsibleSection>
       )}
 
-      {/* Where participants stand — only neutral weigh-ins with a genuine
-          two-way split. Directional campaigns (one side only) never show this. */}
-      {/* A unanimous weigh-in is still a result. Requiring both sides to be
-              non-zero hid it entirely, so a campaign where everyone agreed
-              showed nothing at all. */}
-          {analytics.stance_split && analytics.stance_split.support + analytics.stance_split.oppose > 0 && (() => {
+      {/* Where participants stand, for neutral weigh-ins. A unanimous result
+          is still a result: requiring both sides to be non-zero hid it
+          entirely, so a campaign where everyone agreed showed nothing. */}
+      {analytics.stance_split && analytics.stance_split.support + analytics.stance_split.oppose > 0 && (() => {
         const { support, oppose } = analytics.stance_split;
         const total = support + oppose;
         const supportPct = Math.round((support / total) * 100);

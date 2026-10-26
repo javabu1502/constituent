@@ -21,8 +21,14 @@ export interface DeliveryStatusInfo {
 }
 
 const STATUSES: Record<string, DeliveryStatusInfo> = {
+  // The legacy catch-all, written before there were delivery channels. Every
+  // row that carries it was sent by the person from their own mail app, and
+  // many are state-legislature messages, so it cannot claim Congress or
+  // claim confirmation. It said "Delivered to Congress" and counted as
+  // delivered, which made the demo report overstate what the product did.
+  sent: { label: 'Sent by the sender', outcome: 'self_sent' },
+
   // Handed to the office by us, and confirmed.
-  sent: { label: 'Delivered to Congress', outcome: 'delivered' },
   cwc_delivered: { label: 'Delivered to Congress', outcome: 'delivered' },
   webform_delivered: { label: 'Filed in the office form', outcome: 'delivered' },
 
@@ -39,6 +45,14 @@ const STATUSES: Record<string, DeliveryStatusInfo> = {
   webform_failed: { label: 'Not delivered', outcome: 'not_delivered' },
   cwc_blocked: { label: 'Not sent', outcome: 'not_delivered' },
   webform_blocked: { label: 'Not sent', outcome: 'not_delivered' },
+  // The payload could not be built: no last name on file, or an office we
+  // could not map. These were labelled "Sent by email instead" and counted as
+  // mail the person sent themselves, which is a claim about an action they
+  // never took. `message-status.ts` has always called them not delivered, and
+  // the two files have to agree or every build failure vanishes from the
+  // not-delivered column on an organization's report.
+  cwc_skipped: { label: 'We could not send this', outcome: 'not_delivered' },
+  webform_skipped: { label: 'We could not send this', outcome: 'not_delivered' },
 
   // The person sent it themselves, so we cannot know whether it arrived.
   email_opened: { label: 'Opened in their email app', outcome: 'self_sent' },
@@ -46,9 +60,13 @@ const STATUSES: Record<string, DeliveryStatusInfo> = {
   form_opened: { label: 'Opened the office form', outcome: 'self_sent' },
   website_opened: { label: 'Opened the office website', outcome: 'self_sent' },
   called: { label: 'Called the office', outcome: 'self_sent' },
-  cwc_skipped: { label: 'Sent by email instead', outcome: 'self_sent' },
-  webform_skipped: { label: 'Sent by email instead', outcome: 'self_sent' },
   initiated: { label: 'Started', outcome: 'self_sent' },
+
+  // Legacy values still accepted by the send schema and still present in old
+  // rows. Without entries here they printed as raw column text.
+  drafted: { label: 'Drafted', outcome: 'self_sent' },
+  opened: { label: 'Opened in their email app', outcome: 'self_sent' },
+  copied: { label: 'Copied to send', outcome: 'self_sent' },
 };
 
 export function deliveryStatusInfo(status: string | null | undefined): DeliveryStatusInfo {

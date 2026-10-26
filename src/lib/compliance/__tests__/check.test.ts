@@ -17,7 +17,6 @@ function baseInput(overrides: Partial<ComplianceInput> = {}): ComplianceInput {
   return {
     message: 'Please support the clean water act. Our river matters to my family.',
     topic: 'Environment',
-    legislatorName: 'Rep. Smith',
     sender: { name: 'Jane Doe', email: 'jane@example.com', city: 'Reno', state: 'NV', zip: '89501' },
     recentMessages: [],
     ...overrides,
@@ -143,20 +142,59 @@ describe('runComplianceCheck()', () => {
   });
 });
 
+const ALL_CLEAR = {
+  fakeIdentity: false,
+  threat: false,
+  spam: false,
+  gibberish: false,
+  splitAbuse: false,
+  jurisdiction: false,
+  other: false,
+};
+
 describe('a verdict has to name what it objects to', () => {
-  it('downgrades a stated review with no category to pass', async () => {
+  it('relaxes a review that reports every category clear', async () => {
     mockedCallClaude.mockResolvedValue(
-      JSON.stringify({ decision: 'review', reasons: ['something is off about this one'], categories: {} }),
+      JSON.stringify({ decision: 'review', reasons: ['something is off about this one'], categories: ALL_CLEAR }),
     );
     const v = await runComplianceCheck(baseInput());
     expect(v.decision).toBe('pass');
-    expect(v.reasons).toEqual([]);
+    // The model's stated reason survives the adjustment so it stays auditable.
+    expect(v.reasons).toEqual(['something is off about this one']);
   });
 
-  it('downgrades a stated block with no category to pass', async () => {
-    mockedCallClaude.mockResolvedValue(JSON.stringify({ decision: 'block', reasons: ['tone'], categories: {} }));
+  it('holds an uncategorised block for a human instead of passing it', async () => {
+    mockedCallClaude.mockResolvedValue(
+      JSON.stringify({ decision: 'block', reasons: ['tone'], categories: ALL_CLEAR }),
+    );
     const v = await runComplianceCheck(baseInput());
-    expect(v.decision).toBe('pass');
+    expect(v.decision).toBe('review');
+  });
+
+  // The screener used to read every one of these as "no category flagged" and
+  // turn a stated block into a silent pass with no reasons, which delivered
+  // the message. Each must fail safe instead.
+  it.each([
+    ['categories omitted', { decision: 'block', reasons: ['threat'] }],
+    ['boolean as a string', { decision: 'block', categories: { threat: 'true' } }],
+    ['TitleCase key', { decision: 'block', categories: { Threat: true } }],
+    ['an invented key', { decision: 'block', categories: { violence: true } }],
+    ['an array', { decision: 'block', categories: ['threat'] }],
+    ['a bare string', { decision: 'block', categories: 'threat' }],
+    ['null', { decision: 'block', categories: null }],
+    ['numbered keys', { decision: 'block', categories: { '2': true } }],
+    ['the flag at the top level', { decision: 'block', threat: true }],
+    ['a partial category set', { decision: 'block', categories: { threat: false } }],
+  ])('never passes a block whose categories arrive as %s', async (_label, payload) => {
+    mockedCallClaude.mockResolvedValue(JSON.stringify(payload));
+    const v = await runComplianceCheck(baseInput());
+    expect(v.decision).not.toBe('pass');
+  });
+
+  it('does not relax a review whose categories are unreadable', async () => {
+    mockedCallClaude.mockResolvedValue(JSON.stringify({ decision: 'review', reasons: ['x'], categories: {} }));
+    const v = await runComplianceCheck(baseInput());
+    expect(v.decision).toBe('review');
   });
 
   it('keeps a verdict that names a category', async () => {

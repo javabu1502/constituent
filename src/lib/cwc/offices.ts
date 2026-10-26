@@ -54,12 +54,17 @@ export type OfficeResolution =
 
 /**
  * The places with exactly one House seat, which CWC encodes as district 00.
- * Seven single-district states after the 2020 census, plus DC and the
+ * Six single-district states after the 2020 census, plus DC and the
  * territories, whose delegates sit in the House. Everywhere else, 00 is not a
  * district, so a lookup that lands on it is a failure, not an at-large seat.
+ *
+ * Montana is NOT on this list. It gained a second seat in the 2020
+ * reapportionment and has had MT-01 and MT-02 since 2023. Listing it here
+ * refused every Montana House message outright, and let a blank district
+ * produce HMT00, a code for a seat that no longer exists.
  */
 export const AT_LARGE_HOUSE_STATES: ReadonlySet<string> = new Set([
-  'AK', 'DE', 'ND', 'SD', 'VT', 'WY', 'MT',
+  'AK', 'DE', 'ND', 'SD', 'VT', 'WY',
   'DC', 'PR', 'VI', 'GU', 'AS', 'MP',
 ]);
 

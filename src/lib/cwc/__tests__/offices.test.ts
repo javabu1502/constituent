@@ -115,6 +115,17 @@ describe('a missing district is never turned into an at-large seat', () => {
     expect(houseOfficeCode('AS', '00')).toEqual({ ok: true, code: 'HAQ00' });
   });
 
+  // Montana gained a second seat in the 2020 reapportionment. It spent a
+  // while on the at-large list, which refused every Montana House message
+  // and let a blank district resolve to a seat that no longer exists.
+  it('treats Montana as a two-seat state', () => {
+    expect(houseOfficeCode('MT', '01')).toEqual({ ok: true, code: 'HMT01' });
+    expect(houseOfficeCode('MT', '1')).toEqual({ ok: true, code: 'HMT01' });
+    expect(houseOfficeCode('MT', 2)).toEqual({ ok: true, code: 'HMT02' });
+    expect(houseOfficeCode('MT', '00').ok).toBe(false);
+    expect(houseOfficeCode('MT', undefined).ok).toBe(false);
+  });
+
   it('still resolves an ordinary numbered seat', () => {
     expect(houseOfficeCode('TX', '18')).toEqual({ ok: true, code: 'HTX18' });
     expect(houseOfficeCode('NV', 2)).toEqual({ ok: true, code: 'HNV02' });

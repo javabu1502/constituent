@@ -165,7 +165,10 @@ describe('POST /api/representatives', () => {
     const data = await res.json();
     expect(data.officials).toBeDefined();
     expect(data.officials.length).toBe(2);
+    // A street the geocoder cannot place DOES set `warning`: congressional
+    // delivery is withheld for everyone, senators included.
     expect(data.warning).toBeTruthy();
+    expect(data.address.congressionalDistrict).toBe('unknown');
   });
 
   it('returns 503 when data is unavailable and geocode fails', async () => {
