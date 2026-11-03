@@ -4,13 +4,15 @@ import { isCampaignClosed } from '@/lib/campaign-close';
 import { createClient } from '@/lib/supabase/server';
 import { trackSendSchema, parseBody } from '@/lib/schemas';
 import { writeLimiter, getClientIp } from '@/lib/rate-limit';
-import { checkLegislatorCooldown, resolveUsageIdentity, enforceOfficeSendQuota } from '@/lib/usage-quota';
+import { checkLegislatorCooldown, resolveUsageIdentity, enforceOfficeSendQuota, hashIp } from '@/lib/usage-quota';
+import { recordSendRefusal } from '@/lib/send-refusals';
 import { verifyTurnstile } from '@/lib/turnstile';
 import { captchaStrictFor } from '@/lib/campaign-captcha';
 import { enqueueCwcDeliveries } from '@/lib/cwc';
 import { buildCwcQueueItem, shouldEnqueueCwc, type CampaignBillContext } from '@/lib/cwc/enqueue-from-send';
 import { buildWebformQueueItem, enqueueWebformDelivery } from '@/lib/webform/queue';
 import { CWC_MESSAGE_STATUS, WEBFORM_MESSAGE_STATUS, setMessageDeliveryStatus } from '@/lib/cwc/message-status';
+import { locTopicsForIssueArea } from '@/lib/cwc/topics';
 
 // The CWC enqueue path (after()) reaches congressional endpoints through the
 // undici static-IP proxy — Node runtime required.
@@ -29,6 +31,7 @@ export async function POST(request: NextRequest) {
   const ip = getClientIp(request);
   const { success, retryAfter } = writeLimiter.check(ip);
   if (!success) {
+    await recordSendRefusal('rate_limited', { status: 429, ipHash: hashIp(ip) });
     return NextResponse.json({ error: 'Too many requests' }, { status: 429, headers: { 'Retry-After': String(retryAfter) } });
   }
 
@@ -36,6 +39,7 @@ export async function POST(request: NextRequest) {
   try {
     raw = await request.json();
   } catch {
+    await recordSendRefusal('invalid_json', { status: 400, ipHash: hashIp(ip) });
     return NextResponse.json(
       { error: 'Invalid JSON in request body' },
       { status: 400 }
@@ -44,6 +48,7 @@ export async function POST(request: NextRequest) {
 
   const parsed = parseBody(trackSendSchema, raw);
   if (!parsed.success) {
+    await recordSendRefusal('schema_rejected', { status: 400, ipHash: hashIp(ip) });
     return NextResponse.json(
       { error: parsed.error },
       { status: 400 }
@@ -58,6 +63,9 @@ export async function POST(request: NextRequest) {
     const strict = await captchaStrictFor({ userId: identity.userId, campaignId: body.campaign_id || null });
     const valid = await verifyTurnstile(body.turnstileToken || '', { strict });
     if (!valid) {
+      await recordSendRefusal('captcha_failed', {
+        status: 403, campaignId: body.campaign_id || null, userId: identity.userId, ipHash: identity.ipHash,
+      });
       return NextResponse.json({ error: 'CAPTCHA verification failed' }, { status: 403 });
     }
   }
@@ -80,6 +88,10 @@ export async function POST(request: NextRequest) {
   if (verifiedUserId && body.legislator_id) {
     const cooldown = await checkLegislatorCooldown(verifiedUserId, body.legislator_id);
     if (!cooldown.allowed) {
+      await recordSendRefusal('legislator_cooldown', {
+        status: 429, campaignId: body.campaign_id || null, userId: verifiedUserId,
+        ipHash: identity.ipHash, legislatorId: body.legislator_id,
+      });
       return NextResponse.json(
         { error: `You already contacted this official on ${cooldown.lastContactDate}. Please wait before sending another message to the same representative.` },
         { status: 429 },
@@ -106,6 +118,10 @@ export async function POST(request: NextRequest) {
       officialId: body.legislator_id,
     });
     if (!officeQuota.allowed) {
+      await recordSendRefusal('office_quota', {
+        status: 429, campaignId: body.campaign_id || null, userId: verifiedUserId,
+        ipHash: identity.ipHash, legislatorId: body.legislator_id,
+      });
       return NextResponse.json(
         {
           error:
@@ -130,6 +146,9 @@ export async function POST(request: NextRequest) {
         .eq('id', body.campaign_id)
         .single();
       if (camp && isCampaignClosed(camp.status as string | null)) {
+        await recordSendRefusal('campaign_closed', {
+          status: 409, campaignId: body.campaign_id, userId: verifiedUserId, ipHash: identity.ipHash,
+        });
         return NextResponse.json(
           { error: 'This campaign has closed and is no longer accepting messages.' },
           { status: 409 },
@@ -150,6 +169,11 @@ export async function POST(request: NextRequest) {
       legislator_chamber: body.legislator_chamber,
       issue_area: body.issue_area,
       issue_subtopic: body.issue_subtopic,
+      // issue_area is whatever the classifier or the person typed, so one
+      // subject arrives under several spellings and no count can be trusted.
+      // Store the Library of Congress policy area beside it. The sender's own
+      // wording above is left untouched.
+      issue_topic: locTopicsForIssueArea(body.issue_area, undefined, body.issue_subtopic)[0],
       // Only retain the message text for signed-in users, so they can re-read it
       // in their dashboard. Anonymous sends keep the trend metadata above but we
       // do NOT store what they wrote (left empty).
@@ -163,6 +187,10 @@ export async function POST(request: NextRequest) {
 
     if (error) {
       console.error('[track-send] Supabase insert error:', error);
+      await recordSendRefusal('insert_failed', {
+        status: 500, campaignId: body.campaign_id || null, userId: verifiedUserId,
+        ipHash: identity.ipHash, legislatorId: body.legislator_id,
+      });
       return NextResponse.json(
         { error: 'Failed to log message' },
         { status: 500 }

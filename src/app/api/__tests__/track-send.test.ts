@@ -4,11 +4,14 @@ import { NextRequest } from 'next/server';
 const mockInsert = vi.fn();
 const mockSelect = vi.fn();
 const mockSingle = vi.fn();
+// Refusal telemetry writes to its own table. Keeping it off mockInsert is
+// what lets "no message was written" stay an honest assertion.
+const mockRefusalInsert = vi.fn();
 
 vi.mock('@/lib/supabase', () => ({
   createAdminClient: vi.fn(() => ({
-    from: vi.fn(() => ({
-      insert: mockInsert,
+    from: vi.fn((table: string) => ({
+      insert: table === 'send_refusals' ? mockRefusalInsert : mockInsert,
     })),
   })),
 }));
@@ -26,6 +29,7 @@ vi.mock('@/lib/usage-quota', () => ({
   checkLegislatorCooldown: vi.fn(async () => ({ allowed: true })),
   resolveUsageIdentity: vi.fn(async () => ({ userId: null, ipHash: 'test-hash' })),
   enforceOfficeSendQuota: (opts: OfficeQuotaOpts) => mockOfficeQuota(opts),
+  hashIp: (ip: string) => `hash:${ip}`,
 }));
 
 const mockEnqueue = vi.fn();
@@ -341,6 +345,19 @@ describe('POST /api/track-send', () => {
         userId: null,
         officialId: 'S001234',
       });
+    });
+
+    it('records why a refused send never became a message', async () => {
+      // Every refusal path used to be a console line only, so the gap between
+      // drafts and sends was unmeasurable from the database.
+      const { POST } = await import('../track-send/route');
+      mockOfficeQuota.mockResolvedValueOnce({ allowed: false, remaining: 0 });
+      const res = await POST(makeReq(cwcBody));
+      expect(res.status).toBe(429);
+      expect(mockInsert).not.toHaveBeenCalled();
+      expect(mockRefusalInsert).toHaveBeenCalledWith(
+        expect.objectContaining({ reason: 'office_quota', status: 429, legislator_id: validBody.legislator_id }),
+      );
     });
 
     it('refuses a send once the office is at its daily limit, and stores nothing', async () => {
