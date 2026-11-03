@@ -8,6 +8,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const staticPages: MetadataRoute.Sitemap = [
     { url: baseUrl, changeFrequency: 'weekly', priority: 1 },
+    { url: `${baseUrl}/representatives`, changeFrequency: 'monthly', priority: 0.9 },
     { url: `${baseUrl}/legislators`, changeFrequency: 'weekly', priority: 0.9 },
     { url: `${baseUrl}/trends`, changeFrequency: 'daily', priority: 0.8 },
     { url: `${baseUrl}/vote`, changeFrequency: 'monthly', priority: 0.8 },

@@ -6,6 +6,7 @@ const FOOTER_COLUMNS = [
     heading: 'Explore',
     links: [
       { href: '/contact', label: 'Contact' },
+      { href: '/representatives', label: 'Find My Representatives' },
       { href: '/legislators', label: 'Legislators' },
       { href: '/news', label: 'News' },
       { href: '/trends', label: 'Trends' },

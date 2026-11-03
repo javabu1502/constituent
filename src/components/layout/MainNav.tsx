@@ -49,6 +49,7 @@ export function MainNav({ user, isOrg }: { user: User | null; isOrg: boolean }) 
       <NavDropdown
         label="Explore"
         items={[
+          { href: '/representatives', label: 'Find My Representatives' },
           { href: '/states', label: 'States' },
           { href: '/legislators', label: 'Legislators' },
           { href: '/news', label: 'News' },
