@@ -13,6 +13,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import type { Official } from './types';
+import { LOWER_CHAMBER_TITLE } from './chambers';
 
 // Cache directory for state data (populated by scripts/refresh-state-data.ts)
 const CACHE_DIR = path.join(process.cwd(), 'src', 'data', 'states');
@@ -166,7 +167,9 @@ export function toOfficial(leg: StateLegislator, stateCode: string): Official {
   // Nebraska's unicameral members are "State Senator" too, which is what they
   // are actually called.
   const chamberTitle =
-    leg.chamber === 'lower' ? 'State Representative' : 'State Senator';
+    leg.chamber === 'lower'
+      ? LOWER_CHAMBER_TITLE[stateCode.toUpperCase()] ?? 'State Representative'
+      : 'State Senator';
 
   // Use "District N" for numeric districts, bare name for named districts
   const isNumeric = /^\d+$/.test(leg.district);

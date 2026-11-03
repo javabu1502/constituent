@@ -25,6 +25,10 @@ export function AddressStep({ state, dispatch }: AddressStepProps) {
   // warning before the lookup. The person can edit it or go ahead anyway.
   const [streetWarning, setStreetWarning] = useState(false);
   const [streetWarningAcked, setStreetWarningAcked] = useState(false);
+  // The lookup came back senators-only because the geocoder could not place
+  // the street. Stop on this step and offer the fix before the person writes
+  // a letter they cannot send to Congress.
+  const [unresolvedPrompt, setUnresolvedPrompt] = useState(false);
   // The district resolved but we hold no current House member for it: a seat
   // filled since the roster was refreshed, or a vacancy. The senators are
   // unaffected, so this is a notice, never a block.
@@ -35,6 +39,7 @@ export function AddressStep({ state, dispatch }: AddressStepProps) {
     setStreetWarning(false);
     setStreetWarningAcked(false);
     setHouseGap(null);
+    setUnresolvedPrompt(false);
   }, []);
 
   const lookup = async (acked: boolean) => {
@@ -87,7 +92,8 @@ export function AddressStep({ state, dispatch }: AddressStepProps) {
       // geocoder cannot place the street. A message sent through Congress
       // then is refused later, after the person has left. Carry the flag so
       // the send step withholds "Send to Congress" and says why.
-      dispatch({ type: 'SET_DISTRICT_RESOLVED', payload: districtResolvedFrom(data) });
+      const resolved = districtResolvedFrom(data);
+      dispatch({ type: 'SET_DISTRICT_RESOLVED', payload: resolved });
       setHouseGap(typeof data.houseWarning === 'string' ? data.houseWarning : null);
 
       // No recipient picker: map the story to the RIGHT officials. Only the
@@ -125,6 +131,16 @@ export function AddressStep({ state, dispatch }: AddressStepProps) {
           representatives: data.officials,
         }),
       }).catch(() => {}); // Silently ignore for anonymous users (401)
+
+      // Senators-only means no congressional delivery for the House seat and
+      // a CWC refusal for anything we did send. Advancing here hid that until
+      // the review step, after the letter was written (2026-10-20: two
+      // Lynchburg students refused post-hoc). A mistyped street is the usual
+      // cause, so stop once and let them correct it.
+      if (!resolved) {
+        setUnresolvedPrompt(true);
+        return;
+      }
 
       dispatch({ type: 'GO_TO_STEP', payload: 'message' });
     } catch (err) {
@@ -176,7 +192,7 @@ export function AddressStep({ state, dispatch }: AddressStepProps) {
       </div>
 
       {/* Came back from the review step after a failed geocode: say why. */}
-      {state.address && !state.districtResolved && (
+      {state.address && !state.districtResolved && !unresolvedPrompt && (
         <div role="alert" className="mb-4 p-3 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded-xl">
           <p className="text-sm text-amber-800 dark:text-amber-300">{CWC_COPY.unresolvedAddress}</p>
         </div>
@@ -195,6 +211,34 @@ export function AddressStep({ state, dispatch }: AddressStepProps) {
           onAddressChange={onAddressChange}
           label="Address"
         />
+
+        {unresolvedPrompt && (
+          <div role="alert" className="p-4 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded-xl space-y-3">
+            <p className="text-sm text-amber-800 dark:text-amber-300">{CWC_COPY.unresolvedAddress}</p>
+            <div className="flex flex-col sm:flex-row gap-2">
+              <button
+                type="button"
+                onClick={() => {
+                  setUnresolvedPrompt(false);
+                  document.getElementById('address-autocomplete')?.focus();
+                }}
+                className="flex-1 py-2 px-3 text-sm font-medium bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors"
+              >
+                Check my address
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setUnresolvedPrompt(false);
+                  dispatch({ type: 'GO_TO_STEP', payload: 'message' });
+                }}
+                className="flex-1 py-2 px-3 text-sm font-medium border border-amber-300 dark:border-amber-600 text-amber-800 dark:text-amber-200 rounded-lg hover:bg-amber-100 dark:hover:bg-amber-900/40 transition-colors"
+              >
+                Continue to my senators
+              </button>
+            </div>
+          </div>
+        )}
 
         {streetWarning && (
           <div role="alert" className="p-4 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded-xl space-y-3">

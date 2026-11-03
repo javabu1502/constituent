@@ -54,6 +54,8 @@ const extraCopy = {
     changeAddress: 'Re-enter my address',
     zipFormat: 'Please enter your 5-digit ZIP code. ZIP+4 is welcome.',
     draftFallback: 'We started your message from your own words instead. Edit anything before you continue.',
+    addressUnmatched: 'We could not match that street address, so we could not find the officials this campaign is targeting. Check the street number and spelling, then try again.',
+    unresolvedStateLevel: 'We could not match this street address to a legislative district, so we cannot tell which legislators represent you. Check the street number and spelling. A residential street works best.',
   },
   es: {
     checking: 'Verificando las opciones de envío',
@@ -71,6 +73,8 @@ const extraCopy = {
     changeAddress: 'Volver a escribir mi dirección',
     zipFormat: 'Escriba su código postal de 5 dígitos. ZIP+4 también sirve.',
     draftFallback: 'Iniciamos su mensaje con sus propias palabras. Edite lo que quiera antes de continuar.',
+    addressUnmatched: 'No pudimos vincular esa dirección, así que no pudimos encontrar a los funcionarios a los que se dirige esta campaña. Revise el número y la ortografía de la calle, y vuelva a intentarlo.',
+    unresolvedStateLevel: 'No pudimos vincular esta dirección con un distrito legislativo, así que no podemos saber qué legisladores le representan. Revise el número y la ortografía de la calle. Una calle residencial funciona mejor.',
   },
 } as const;
 
@@ -239,7 +243,14 @@ export function CampaignParticipate({
   // campus building, or PO Box; the person can edit it or go ahead.
   const [streetWarning, setStreetWarning] = useState(false);
   const [streetWarningAcked, setStreetWarningAcked] = useState(false);
+  // The form's submit button sits well below its error slot, so an error set
+  // on submit renders off screen and the click reads as "nothing happened".
+  const formErrorRef = useRef<HTMLDivElement | null>(null);
   const { getToken, TurnstileWidget } = useTurnstile();
+
+  useEffect(() => {
+    if (error && step === 'form') formErrorRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }, [error, step]);
 
   // Funnel telemetry: one event per step reached, so we can finally see WHERE
   // visitors drop between landing and a sent message (49 sends all-time says
@@ -632,7 +643,14 @@ export function CampaignParticipate({
       }
 
       if (filtered.length === 0) {
-        throw new FriendlyError('No representatives found for your address at the targeted level');
+        // A street the geocoder cannot place comes back as senators only, so a
+        // state-targeted or House-targeted campaign filters down to nothing.
+        // Reporting that as "no representatives at the targeted level" sends
+        // the person hunting for the wrong mistake: the street is what needs
+        // a second look, and the form they land back on is where to fix it.
+        throw new FriendlyError(
+          resolved ? 'No representatives found for your address at the targeted level' : x.addressUnmatched,
+        );
       }
 
       // Message mapping: on cosponsor stages, officials already on the bill
@@ -1226,13 +1244,17 @@ export function CampaignParticipate({
           </div>
         )}
         {error && (
-          <div role="alert" className="p-4 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 rounded-xl">
+          <div ref={formErrorRef} role="alert" className="p-4 bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 rounded-xl">
             <p className="text-sm text-red-700 dark:text-red-300">{error}</p>
           </div>
         )}
         {!districtResolved && (
           <div role="alert" className="p-3 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 rounded-xl">
-            <p className="text-sm text-amber-800 dark:text-amber-300">{x.unresolved}</p>
+            {/* A state-targeted campaign never reaches a congressional office,
+                so the CWC wording ("Congressional offices reject...") names a
+                rule that does not apply and sends the person looking for a
+                problem they do not have. */}
+            <p className="text-sm text-amber-800 dark:text-amber-300">{cwcFields ? x.unresolved : x.unresolvedStateLevel}</p>
           </div>
         )}
 
