@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { titleFromUrl, tidy } from '@/app/api/legislators/wiki-bio/route';
+import { titleFromUrl, tidy } from '@/lib/wiki-bio';
 
 describe('wikipedia article urls', () => {
   it('takes the title out of a real article url', () => {

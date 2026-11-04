@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createAdminClient } from '@/lib/supabase';
 import { summaryLimiter, getClientIp } from '@/lib/rate-limit';
+import { titleFromUrl, tidy } from '@/lib/wiki-bio';
 
 export const runtime = 'nodejs';
 
@@ -25,23 +26,6 @@ const PUBLIC_USER_ID = '00000000-0000-0000-0000-000000000000';
  * Wikipedia, and so one fetch serves everyone. Wikipedia prose is CC BY-SA,
  * so the article URL comes back with it and the page has to show it.
  */
-export function titleFromUrl(url: string): string | null {
-  try {
-    const u = new URL(url);
-    if (u.hostname !== 'en.wikipedia.org') return null;
-    const m = u.pathname.match(/^\/wiki\/(.+)$/);
-    const title = m ? decodeURIComponent(m[1]) : null;
-    return title && !title.includes(':') ? title : null;
-  } catch {
-    return null;
-  }
-}
-
-/** Summaries open with a parenthetical of birth dates and pronunciation. */
-export function tidy(extract: string): string {
-  return extract.replace(/\s*\([^()]*\)/, '').replace(/\s+/g, ' ').trim();
-}
-
 export async function GET(request: NextRequest) {
   const { success } = summaryLimiter.check(getClientIp(request));
   if (!success) return NextResponse.json({ error: 'Too many requests' }, { status: 429 });
