@@ -11,7 +11,9 @@
     "phone": "208-332-1409",
     "photoUrl": "https://cdn.theorg.com/61b74bbb-61b5-48d5-a84d-fb498da306b9_thumb.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/2023/id6687/",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Alison_Rabe",
+    "ballotpediaUrl": "https://ballotpedia.org/Alison_Rabe"
   },
   {
     "id": "ocd-person/a0ccdf84-6300-4f9d-bca3-30b3299fece5",
@@ -25,7 +27,10 @@
     "phone": "208-332-1075",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2026/directory/Haws10055.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/2026/id10055/",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "Boise, ID 83704",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Anne_Henderson_Haws",
+    "ballotpediaUrl": "https://ballotpedia.org/Annie_Haws"
   },
   {
     "id": "ocd-person/c8c374b3-22b8-4221-a65a-6a4616cb107d",
@@ -39,7 +44,10 @@
     "phone": "208-332-1189",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2025/directory/Ehardt4945.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2022&district=33",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "Idaho Falls, ID 83402",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Barbara_Ehardt",
+    "ballotpediaUrl": "https://ballotpedia.org/Barbara_Ehardt"
   },
   {
     "id": "ocd-person/02a86541-b10a-42cc-b260-0d0f5e3226c0",
@@ -53,7 +61,11 @@
     "phone": "208-332-1336",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2025/directory/Adams6685.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2022&district=13",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "Nampa, ID 83686",
+    "districtPhone": "208-546-9393",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ben_Adams_(Idaho_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Ben_Adams_(Idaho)"
   },
   {
     "id": "ocd-person/cd9538d6-3ed0-4c87-8e0d-d524e8861157",
@@ -67,7 +79,9 @@
     "phone": "208-332-1038",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2025/directory/Fuhriman9429.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/2025/id9429/",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ben_Fuhriman",
+    "ballotpediaUrl": "https://ballotpedia.org/Ben_Fuhriman"
   },
   {
     "id": "ocd-person/a0bec144-a980-4ce8-9e02-ada83079a300",
@@ -81,7 +95,11 @@
     "phone": "208-332-1322",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2023/directory/Toews7795.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2023&district=4",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "Coeur d’Alene, ID 83814",
+    "districtPhone": "208-209-7791",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ben_Toews",
+    "ballotpediaUrl": "https://ballotpedia.org/Ben_Toews"
   },
   {
     "id": "ocd-person/59fc8cd0-bec0-4df6-a3e6-99ea305c7100",
@@ -95,7 +113,9 @@
     "phone": "208-332-1175",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2021/directory/Mitchell6704.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2022&district=5",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Brandon_Mitchell_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Brandon_Mitchell"
   },
   {
     "id": "ocd-person/42e5ac22-a35c-4e0e-80fb-05bab9093b28",
@@ -109,7 +129,10 @@
     "phone": "208-332-1325",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2025/directory/Shippy9215.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/2024/id9215/",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "New Plymouth, ID 83655",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Brandon_Shippy",
+    "ballotpediaUrl": "https://ballotpedia.org/Brandon_Shippy"
   },
   {
     "id": "ocd-person/81d4b890-9bf4-44e0-99b2-eda866f02d48",
@@ -123,7 +146,9 @@
     "phone": "208-332-1058",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2025/directory/Crane21.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2022&district=13",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Brent_Crane",
+    "ballotpediaUrl": "https://ballotpedia.org/Brent_Crane"
   },
   {
     "id": "ocd-person/e89ea88e-7519-48fe-8cb9-65ea18d0dd7b",
@@ -137,7 +162,9 @@
     "phone": "208-332-1329",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2026/directory/Lenney7778.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2023&district=13",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Brian_Lenney",
+    "ballotpediaUrl": "https://ballotpedia.org/Brian_Lenney"
   },
   {
     "id": "ocd-person/df313cc3-ceb2-4fb0-bb36-b2f9cb9e959d",
@@ -151,7 +178,9 @@
     "phone": "208-332-1173",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2023/directory/Raybould5381.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2023&district=34",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Britt_Raybould",
+    "ballotpediaUrl": "https://ballotpedia.org/Britt_Raybould"
   },
   {
     "id": "ocd-person/50e557e4-e7b6-4765-a636-1638a675189c",
@@ -165,7 +194,10 @@
     "phone": "208-332-1080",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2026/directory/Green5374.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2022&district=18",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "Boise, ID 83706",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Brooke_Green",
+    "ballotpediaUrl": "https://ballotpedia.org/Brooke_Green"
   },
   {
     "id": "ocd-person/e8eea4c8-b669-4609-b991-13ef3a6ff10b",
@@ -179,7 +211,10 @@
     "phone": "208-332-1178",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2021/directory/Skaug6708.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2022&district=12",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "Nampa, ID 83687",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bruce_Skaug",
+    "ballotpediaUrl": "https://ballotpedia.org/Bruce_Skaug"
   },
   {
     "id": "ocd-person/f67b55ee-1cc0-431b-b950-4b5dfca332ad",
@@ -193,7 +228,9 @@
     "phone": "208-332-1334",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2023/directory/Grow5126.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2022&district=14",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/C._Scott_Grow",
+    "ballotpediaUrl": "https://ballotpedia.org/C._Scott_Grow"
   },
   {
     "id": "ocd-person/6a0fc69b-9842-4d47-b509-f555fee240e6",
@@ -207,7 +244,11 @@
     "phone": "208-332-1320",
     "photoUrl": "https://idgop.org/wp-content/uploads/sites/4/2024/05/blaylock-1.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/2025/id9400/",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "Caldwell, ID 83605",
+    "districtPhone": "208-484-3183",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Camille_Blaylock",
+    "ballotpediaUrl": "https://ballotpedia.org/Camille_Blaylock"
   },
   {
     "id": "ocd-person/a1af9e8e-8f2c-4b6a-a7ca-708a0d0bf6f2",
@@ -221,7 +262,11 @@
     "phone": "208-332-1421",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2023/directory/Bjerke7796.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2023&district=5",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "Coeur d’Alene, ID 83814",
+    "districtPhone": "208-704-0925",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Carl_Bjerke",
+    "ballotpediaUrl": "https://ballotpedia.org/Carl_Bjerke"
   },
   {
     "id": "ocd-person/34bec23f-67e3-4940-8f5e-29850f0e9170",
@@ -235,7 +280,9 @@
     "phone": "208-332-1352",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2022/directory/Semmelroth7115.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2022&district=17",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Carrie_Semmelroth",
+    "ballotpediaUrl": "https://ballotpedia.org/Carrie_Semmelroth"
   },
   {
     "id": "ocd-person/e3d1a2f1-913b-40ec-8256-36eba043156b",
@@ -249,7 +296,9 @@
     "phone": "208-332-1067",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2021/directory/Shepherd6707.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2022&district=7",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Charlie_Shepherd",
+    "ballotpediaUrl": "https://ballotpedia.org/Charlie_Shepherd"
   },
   {
     "id": "ocd-person/dbc641db-1cb7-4110-9121-96ddf5d877d7",
@@ -263,7 +312,10 @@
     "phone": "208-332-1055",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2025/directory/Bruce9423.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/2025/id9423/",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "Kuna, ID 83634",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Chris_Bruce_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Chris_Bruce"
   },
   {
     "id": "ocd-person/7e3f625c-e56e-409a-9989-b07cd77344f6",
@@ -277,7 +329,9 @@
     "phone": "208-332-1076",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2021/directory/Mathias6703.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2022&district=19",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Chris_Mathias",
+    "ballotpediaUrl": "https://ballotpedia.org/Chris_Mathias"
   },
   {
     "id": "ocd-person/adb43503-bebd-4a83-8fa6-e6416576de2f",
@@ -291,7 +345,11 @@
     "phone": "208-332-1344",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2025/directory/Zito4281.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2022&district=23",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "ID",
+    "districtPhone": "208-590-4633",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Christy_Zito",
+    "ballotpediaUrl": "https://ballotpedia.org/Christy_Zito"
   },
   {
     "id": "ocd-person/4f02e826-da06-4286-8aaf-b89ef3f659bc",
@@ -305,7 +363,11 @@
     "phone": "208-332-1355",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2023/directory/Carlson7776.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2023&district=7",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "Riggins, ID 83549",
+    "districtPhone": "208-494-2633",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Cindy_Carlson",
+    "ballotpediaUrl": "https://ballotpedia.org/Cindy_Carlson"
   },
   {
     "id": "ocd-person/1bef63af-a339-47dd-872d-ef1c94a72900",
@@ -319,7 +381,9 @@
     "phone": "208-332-1074",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2026/directory/Handy7811.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2023&district=27",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Clay_Handy",
+    "ballotpediaUrl": "https://ballotpedia.org/Clay_Handy"
   },
   {
     "id": "ocd-person/39fe1103-009e-4594-8ae1-107ba5ffd388",
@@ -333,7 +397,9 @@
     "phone": "208-332-1024",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2025/directory/Hostetler9425.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/2025/id9425/",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Clint_Hostetler",
+    "ballotpediaUrl": "https://ballotpedia.org/Clint_Hostetler"
   },
   {
     "id": "ocd-person/bd3c88a6-3476-4aa8-b267-a5c30d454cac",
@@ -343,11 +409,15 @@
     "chamber": "upper",
     "district": "15",
     "party": "Republican",
-    "email": "cgalloway@sente.idaho.gov",
+    "email": "cgalloway@senate.idaho.gov",
     "phone": "208-332-1407",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2025/directory/Galloway6702.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2022&district=15",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "Boise, ID 83713",
+    "districtPhone": "208-614-2634",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Codi_Galloway",
+    "ballotpediaUrl": "https://ballotpedia.org/Codi_Galloway"
   },
   {
     "id": "ocd-person/a41cd894-d64d-406e-99cd-f1935e40a812",
@@ -361,7 +431,11 @@
     "phone": "208-332-1185",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2025/directory/Rasor9315.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/2024/id9315/",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "Sagle, ID 83860",
+    "districtPhone": "208-290-7403",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Cornel_Rasor",
+    "ballotpediaUrl": "https://ballotpedia.org/Cornel_Rasor"
   },
   {
     "id": "ocd-person/d9426884-2195-45ee-8130-4a8cf0d61adf",
@@ -375,7 +449,9 @@
     "phone": "208-332-1070",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2023/directory/Hawkins7855.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2023&district=2",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dale_Hawkins_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Dale_Hawkins"
   },
   {
     "id": "ocd-person/bae06244-d892-41b2-a4a5-beaaa6cba0da",
@@ -389,7 +465,9 @@
     "phone": "208-332-1081",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2023/directory/Garner7813.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2023&district=28",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dan_Garner",
+    "ballotpediaUrl": "https://ballotpedia.org/Dan_Garner"
   },
   {
     "id": "ocd-person/04ccb3bd-ae8d-4a64-a6c2-1b63a6f94d15",
@@ -403,7 +481,9 @@
     "phone": "208-332-1405",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2023/directory/Foreman4269.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/2023/id4269/",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dan_Foreman",
+    "ballotpediaUrl": "https://ballotpedia.org/Dan_Foreman"
   },
   {
     "id": "ocd-person/fdcf0c8e-5794-4c3c-a092-a64ee5cab9d3",
@@ -417,7 +497,11 @@
     "phone": "208-332-1313",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2026/directory/Lent5345.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2022&district=33",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "1186 Caysie Circle, Idaho Falls, ID 83402",
+    "districtPhone": "208-521-0716",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dave_Lent",
+    "ballotpediaUrl": "https://ballotpedia.org/David_Lent"
   },
   {
     "id": "ocd-person/140cefcc-8d67-4b5d-9051-c7892072bc38",
@@ -431,7 +515,11 @@
     "phone": "208-332-1182",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2025/directory/Leavitt9426.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/2025/id9426/",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "Twin Falls, ID 83301",
+    "districtPhone": "208-358-0203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/David_Leavitt_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/David_Leavitt_(Idaho)"
   },
   {
     "id": "ocd-person/20fe3cd5-d9e1-4d03-9247-9a1ccde862d3",
@@ -445,7 +533,10 @@
     "phone": "208-332-1086",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2021/directory/Cannon6699.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2022&district=31",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "Blackfoot, ID 83221",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/David_Cannon_(Idaho_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/David_Cannon"
   },
   {
     "id": "ocd-person/51cc52d2-b23d-4b37-b8fd-2bc53941ee47",
@@ -459,7 +550,10 @@
     "phone": "208-332-1188",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2025/directory/Hall10355.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/2026/id10355/",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "Twin Falls, ID 83301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Don_Hall_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Donald_Hall_(Idaho)"
   },
   {
     "id": "ocd-person/3caa9714-29b4-4851-b530-b696c1a87b41",
@@ -473,7 +567,11 @@
     "phone": "208-332-1176",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2023/directory/Healey7861.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2023&district=15",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "Boise, ID 83704",
+    "districtPhone": "208-718-0464",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dori_Healey",
+    "ballotpediaUrl": "https://ballotpedia.org/Dori_Healey"
   },
   {
     "id": "ocd-person/db1a3f87-5a7e-4133-a36d-5b319d28d38c",
@@ -487,7 +585,9 @@
     "phone": "208-332-1338",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2023/directory/Okuniewicz6706.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2022&district=2",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Doug_Okuniewicz",
+    "ballotpediaUrl": "https://ballotpedia.org/Doug_Okuniewicz"
   },
   {
     "id": "ocd-person/2960c6c4-abca-4406-9d9d-4734fec3f68d",
@@ -501,7 +601,11 @@
     "phone": "208-332-1301",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2021/directory/Ricks5383.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2022&district=34",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "Rexburg, ID 83440",
+    "districtPhone": "208-557-9665",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Doug_Ricks",
+    "ballotpediaUrl": "https://ballotpedia.org/Doug_Ricks"
   },
   {
     "id": "ocd-person/6dbb9465-3ef5-4754-a482-08ae17c4cb9b",
@@ -515,7 +619,11 @@
     "phone": "208-332-1123",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2023/directory/Pickett7810.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2023&district=27",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "Oakley, ID 83346",
+    "districtPhone": "208-862-3387",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Douglas_Pickett",
+    "ballotpediaUrl": "https://ballotpedia.org/Douglas_T._Pickett"
   },
   {
     "id": "ocd-person/f7a93a62-fa0b-4d95-a9ad-10a938fd47a0",
@@ -529,7 +637,11 @@
     "phone": "208-332-1079",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2021/directory/Manwaring4277.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2022&district=29",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "Pocatello, ID 83202",
+    "districtPhone": "208-252-5295",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dustin_Manwaring",
+    "ballotpediaUrl": "https://ballotpedia.org/Dustin_W._Manwaring"
   },
   {
     "id": "ocd-person/ceec86a5-6519-452a-ba13-9f7ba2da84e5",
@@ -543,7 +655,10 @@
     "phone": "208-332-1124",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2023/directory/Hill7859.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2023&district=14",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "Eagle, ID 83616",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ted_Hill_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Ted_Hill"
   },
   {
     "id": "ocd-person/f6437e18-b7fb-4e53-8c40-a2423d82853d",
@@ -557,7 +672,11 @@
     "phone": "208-332-1048",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2023/directory/Price7856.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2023&district=4",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "Coeur d’Alene, ID 83814",
+    "districtPhone": "208-654-3228",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Elaine_Price",
+    "ballotpediaUrl": "https://ballotpedia.org/Elaine_Price"
   },
   {
     "id": "ocd-person/13b5078f-aaaf-4222-a0ae-c8afcbdf3757",
@@ -571,7 +690,10 @@
     "phone": "208-332-1071",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2026/directory/Bingham10415.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/2026/id10415/",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "Idaho Falls, ID 83404",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Erin_Bingham",
+    "ballotpediaUrl": "https://ballotpedia.org/Erin_Bingham"
   },
   {
     "id": "ocd-person/d54c2ad2-bd9d-499f-9046-b6d1eaebbef1",
@@ -585,7 +707,11 @@
     "phone": "208-332-1054",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2025/directory/Thompson9420.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/2025/id9420/",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "McCall, ID 83638",
+    "districtPhone": "208-634-6569",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Faye_Thompson",
+    "ballotpediaUrl": "https://ballotpedia.org/Faye_Thompson"
   },
   {
     "id": "ocd-person/7ba08b82-5bfc-4b36-b036-28b04c0d8bd2",
@@ -599,7 +725,9 @@
     "phone": "208-332-1347",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2026/directory/Zuiderveld7798.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2023&district=24",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Glenneda_Zuiderveld",
+    "ballotpediaUrl": "https://ballotpedia.org/Glenneda_Zuiderveld"
   },
   {
     "id": "ocd-person/bd967aaf-a9d5-4bec-bf7c-cf0aa19d72ca",
@@ -613,7 +741,9 @@
     "phone": "208-332-1190",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2019/directory/Scott3137.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2022&district=1",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Heather_Scott",
+    "ballotpediaUrl": "https://ballotpedia.org/Heather_Scott_(Idaho)"
   },
   {
     "id": "ocd-person/8b37fbb7-bc05-4fd5-be33-a8940e489195",
@@ -627,7 +757,11 @@
     "phone": "208-332-1034",
     "photoUrl": "https://idahocapitalsun.com/wp-content/uploads/2021/04/IlanaRubel-scaled.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2022&district=18",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "Boise, ID 83706",
+    "districtPhone": "208-866-4776",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ilana_Rubel",
+    "ballotpediaUrl": "https://ballotpedia.org/Ilana_Rubel"
   },
   {
     "id": "ocd-person/6e4d92d8-1f64-4284-95cf-d9c50e3d5730",
@@ -641,7 +775,11 @@
     "phone": "208-332-1032",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2023/directory/Nelsen7838.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2023&district=26",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "Jerome, ID 83338",
+    "districtPhone": "208-320-1921",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jack_Nelsen",
+    "ballotpediaUrl": "https://ballotpedia.org/Jack_Nelsen"
   },
   {
     "id": "ocd-person/bcb4f50c-1f70-484a-90c2-65652b6a1133",
@@ -651,11 +789,13 @@
     "chamber": "upper",
     "district": "29",
     "party": "Democratic",
-    "email": "jruchti@house.idaho.gov",
+    "email": "jruchti@senate.idaho.gov",
     "phone": "208-332-1406",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2023/directory/Ruchti52.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2022&district=29",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/James_Ruchti",
+    "ballotpediaUrl": "https://ballotpedia.org/James_Ruchti"
   },
   {
     "id": "ocd-person/28827442-9341-4768-86ea-a9186d718be0",
@@ -669,7 +809,11 @@
     "phone": "208-332-1041",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2017/directory/Holtzclaw2086.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2022&district=20",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "Meridian, ID 83646",
+    "districtPhone": "208-284-9542",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/James_Holtzclaw",
+    "ballotpediaUrl": "https://ballotpedia.org/James_Holtzclaw"
   },
   {
     "id": "ocd-person/07e5711c-2e3d-4d26-a82a-6c710ed9bf3b",
@@ -683,7 +827,11 @@
     "phone": "208-332-1043",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2023/directory/Petzke7863.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2023&district=21",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "Meridian, ID 83642",
+    "districtPhone": "208-450-5615",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/James_Petzke",
+    "ballotpediaUrl": "https://ballotpedia.org/James_Petzke"
   },
   {
     "id": "ocd-person/c3b6822b-8900-408d-8745-7066b79e1e52",
@@ -697,7 +845,11 @@
     "phone": "208-332-1425",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2023/directory/Ward-Engelking2091.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2022&district=18",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "Boise, ID 83706",
+    "districtPhone": "208-861-6434",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Janie_Ward-Engelking",
+    "ballotpediaUrl": "https://ballotpedia.org/Janie_Ward-Engelking"
   },
   {
     "id": "ocd-person/da5babc3-b974-4f3c-a750-8989ab3a122b",
@@ -711,7 +863,9 @@
     "phone": "208-332-1059",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2026/directory/Crane7803.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2023&district=12",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jaron_Crane",
+    "ballotpediaUrl": "https://ballotpedia.org/Jaron_Crane"
   },
   {
     "id": "ocd-person/9808edb1-15b0-4b9b-91d9-91a97ff7bb4b",
@@ -725,7 +879,11 @@
     "phone": "208-332-1036",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2025/directory/Monks2084.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2022&district=22",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "Meridian, ID 83687",
+    "districtPhone": "208-884-8684",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jason_Monks",
+    "ballotpediaUrl": "https://ballotpedia.org/Jason_Monks"
   },
   {
     "id": "ocd-person/a0b66388-5039-4a2c-b022-ac2ece0ce865",
@@ -739,7 +897,11 @@
     "phone": "208-332-1072",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2026/directory/Ehlers7805.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2023&district=21",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "Meridian, ID 83642",
+    "districtPhone": "208-278-2818",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jeff_Ehlers",
+    "ballotpediaUrl": "https://ballotpedia.org/Jeff_Ehlers"
   },
   {
     "id": "ocd-person/42d3b7d7-1a3a-4d58-ae68-a84cbaaf7ad0",
@@ -753,7 +915,11 @@
     "phone": "208-332-1033",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2023/directory/Cornilles7802.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2023&district=12",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "Nampa, ID 83686",
+    "districtPhone": "208-880-3562",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jeff_Cornilles",
+    "ballotpediaUrl": "https://ballotpedia.org/Jeff_Cornilles"
   },
   {
     "id": "ocd-person/0147a633-d6d2-4005-9eb9-35dcf205718b",
@@ -767,7 +933,11 @@
     "phone": "208-332-1183",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2023/directory/Raymond5382.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2023&district=31",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "Menan, ID 83434",
+    "districtPhone": "208-317-8777",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jerald_Raymond",
+    "ballotpediaUrl": "https://ballotpedia.org/Jerald_Raymond"
   },
   {
     "id": "ocd-person/e2a8fbe1-e9dc-4569-865f-450fa5f13665",
@@ -781,7 +951,11 @@
     "phone": "208-332-1348",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2017/directory/Guthrie1179.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2022&district=28",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "McCammon, ID 83250",
+    "districtPhone": "208-251-9303",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jim_Guthrie_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Jim_Guthrie_(Idaho)"
   },
   {
     "id": "ocd-person/76cd07b1-e4de-4e1b-bd7c-a3153493ac5f",
@@ -795,7 +969,9 @@
     "phone": "208-332-1349",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2025/directory/Woodward5347.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2022&district=1",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jim_Woodward_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Jim_Woodward"
   },
   {
     "id": "ocd-person/561516c4-4e4f-45bc-b1d0-6ed359006597",
@@ -809,7 +985,9 @@
     "phone": "208-332-1065",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2023/directory/Alfieri7857.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2023&district=4",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Joe_Alfieri",
+    "ballotpediaUrl": "https://ballotpedia.org/Joe_Alfieri"
   },
   {
     "id": "ocd-person/ed09bbbc-7b10-4ee8-be6b-a4dfcd7330ec",
@@ -823,7 +1001,10 @@
     "phone": "208-332-1062",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2023/directory/Palmer749.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2022&district=20",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "Meridian, ID 83642",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Joe_Palmer_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Joe_Palmer"
   },
   {
     "id": "ocd-person/048117e1-cf54-4ebf-9afc-f244d023e039",
@@ -837,7 +1018,11 @@
     "phone": "208-332-1082",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2017/directory/Gannon2144.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2022&district=17",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "Boise, ID 83705",
+    "districtPhone": "208-343-1608",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_Gannon_(American_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/John_L._Gannon"
   },
   {
     "id": "ocd-person/7fb821ae-d24a-4e5c-b7bf-70c04b00b269",
@@ -851,7 +1036,9 @@
     "phone": "208-332-1166",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2025/directory/Shirts9421.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/2025/id9421/",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_Shirts",
+    "ballotpediaUrl": "https://ballotpedia.org/John_Shirts"
   },
   {
     "id": "ocd-person/ed9290a6-47b1-4b24-8b61-0c0de9b45c73",
@@ -865,7 +1052,11 @@
     "phone": "208-332-1037",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2017/directory/Vander%20Woude67.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2022&district=22",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "Nampa, ID 83687",
+    "districtPhone": "208-888-4210",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_Vander_Woude",
+    "ballotpediaUrl": "https://ballotpedia.org/John_Vander_Woude"
   },
   {
     "id": "ocd-person/4501fe8d-11d8-43ee-a9bd-5ba3a82eb5d4",
@@ -879,7 +1070,11 @@
     "phone": "208-332-1053",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2021/directory/Weber6709.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2022&district=34",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "Rexburg, ID 83440",
+    "districtPhone": "208-390-6128",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jon_Weber_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Jon_Weber"
   },
   {
     "id": "ocd-person/9cbfadc5-8393-444c-bb39-b1c79390d01b",
@@ -893,7 +1088,11 @@
     "phone": "208-332-1180",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2023/directory/Redman7800.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2023&district=3",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "Coeur d’Alene, ID 83814",
+    "districtPhone": "208-252-5070",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jordan_Redman",
+    "ballotpediaUrl": "https://ballotpedia.org/Jordan_Redman"
   },
   {
     "id": "ocd-person/b01dc4f2-6477-4386-ba9b-eb0c3a2c2c8b",
@@ -907,7 +1106,9 @@
     "phone": "208-332-1354",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2025/directory/Keyser9395.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/2025/id9395/",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Josh_Keyser",
+    "ballotpediaUrl": "https://ballotpedia.org/Josh_Keyser"
   },
   {
     "id": "ocd-person/7ea55825-b942-4464-bb86-878113e524fe",
@@ -921,7 +1122,10 @@
     "phone": "208-332-1318",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2025/directory/Kohl9401.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/2025/id9401/",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "255 Blue Lakes Blvd. North #559, Twin Falls, ID 83301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Josh_Kohl",
+    "ballotpediaUrl": "https://ballotpedia.org/Josh_Kohl"
   },
   {
     "id": "ocd-person/188ce2db-4021-4af8-b562-c90bfab83ebf",
@@ -935,7 +1139,9 @@
     "phone": "208-332-1057",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2023/directory/Tanner7860.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2023&district=14",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Josh_Tanner",
+    "ballotpediaUrl": "https://ballotpedia.org/Josh_Tanner"
   },
   {
     "id": "ocd-person/647e5e14-6813-4fc7-a20d-be175157ffb0",
@@ -949,7 +1155,11 @@
     "phone": "208-332-1179",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2023/directory/Wheeler7839.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2023&district=35",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "ID",
+    "districtPhone": "208-360-3926",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Josh_Wheeler_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Josh_Wheeler_(Idaho)"
   },
   {
     "id": "ocd-person/bcaace10-c9c4-4018-a87c-6112eeb33346",
@@ -963,7 +1173,9 @@
     "phone": "208-332-1064",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2025/directory/Boyle745.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2022&district=9",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Judy_Boyle",
+    "ballotpediaUrl": "https://ballotpedia.org/Judy_Boyle"
   },
   {
     "id": "ocd-person/8efc94ea-7306-48f5-8d45-5bed5f5e1f85",
@@ -976,8 +1188,12 @@
     "email": "jvanorden@senate.idaho.gov",
     "phone": "208-332-1346",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2017/directory/VanOrden2129.jpg",
-    "website": "https://legislature.idaho.gov/house/membershipSingle.cfm?ID=2129",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "website": "https://legislature.idaho.gov/legislators/membership/2023/id2129/",
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "Pingree, ID 83262",
+    "districtPhone": "208-684-4052",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Julie_VanOrden",
+    "ballotpediaUrl": "https://ballotpedia.org/Julie_Van_Orden"
   },
   {
     "id": "ocd-person/9577c53b-0d84-4d3b-9c5b-7d38227c8e32",
@@ -991,7 +1207,9 @@
     "phone": "208-332-1327",
     "photoUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzBUr0WfBwwJVjrJhYaJYV9f99Qba5dm5P6g&s",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2022&district=27",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kelly_Anthon",
+    "ballotpediaUrl": "https://ballotpedia.org/Kelly_Anthon"
   },
   {
     "id": "ocd-person/c92ba4ff-72aa-4985-b8c0-bb3178187c81",
@@ -1005,7 +1223,9 @@
     "phone": "208-332-1052",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2025/directory/Marmon9417.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/2025/id9417/",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kent_Marmon",
+    "ballotpediaUrl": "https://ballotpedia.org/Kent_Marmon"
   },
   {
     "id": "ocd-person/9134f853-f2da-47e8-a11f-9fbe77849414",
@@ -1019,7 +1239,11 @@
     "phone": "208-332-1358",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2021/directory/Cook6686.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2022&district=30",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "Idaho Falls, ID 83404",
+    "districtPhone": "208-521-6776",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kevin_Cook_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Kevin_Cook"
   },
   {
     "id": "ocd-person/0c646770-75cb-4f65-b2af-fd7c933dfe24",
@@ -1033,7 +1257,11 @@
     "phone": "208-332-1133",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2025/directory/Harris9415.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/2025/id9415/",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "Lewiston, ID 83501",
+    "districtPhone": "208-305-0185",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kyle_Harris_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Kyle_Harris_(Idaho)"
   },
   {
     "id": "ocd-person/d3ee525f-429f-4ac6-ba52-e947881a3e6c",
@@ -1047,7 +1275,9 @@
     "phone": "208-332-1340",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2017/directory/Den%20Hartog3124.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2022&district=22",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lori_Den_Hartog",
+    "ballotpediaUrl": "https://ballotpedia.org/Lori_Den_Hartog"
   },
   {
     "id": "ocd-person/5c049d3c-e605-4f3f-9eba-c91949d5f9f4",
@@ -1061,7 +1291,11 @@
     "phone": "208-332-1184",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2021/directory/McCann6955.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2022&district=6",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "Lewiston, ID 83501",
+    "districtPhone": "208-743-5517",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lori_McCann",
+    "ballotpediaUrl": "https://ballotpedia.org/Lori_McCann"
   },
   {
     "id": "ocd-person/f51cb798-c8e6-4cb7-954c-6507c0d3d054",
@@ -1075,7 +1309,11 @@
     "phone": "208-332-1044",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2025/directory/Cayler9418.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/2025/id9418/",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "Caldwell, ID 83605",
+    "districtPhone": "208-800-2579",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lucas_Cayler",
+    "ballotpediaUrl": "https://ballotpedia.org/Lucas_Cayler"
   },
   {
     "id": "ocd-person/a9af8eba-9dc3-4961-9305-fa325cb86948",
@@ -1089,7 +1327,11 @@
     "phone": "208-332-1073",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2023/directory/Erickson6700.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2022&district=33",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "Idaho Falls, ID 83402",
+    "districtPhone": "208-241-5665",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Marco_Erickson",
+    "ballotpediaUrl": "https://ballotpedia.org/Marco_Erickson"
   },
   {
     "id": "ocd-person/84d9ffa4-35f6-4baf-acdd-c3bafee537e7",
@@ -1103,7 +1345,11 @@
     "phone": "208-332-1429",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2017/directory/Harris3584.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2022&district=32",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "Soda Springs, ID 83276",
+    "districtPhone": "208-547-3360",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mark_Harris_%28Idaho_politician%29",
+    "ballotpediaUrl": "https://ballotpedia.org/Mark_Harris_(Idaho)"
   },
   {
     "id": "ocd-person/92364a5c-40fe-4350-9604-5257be00caab",
@@ -1117,7 +1363,9 @@
     "phone": "208-332-1035",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2023/directory/Sauter7799.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2023&district=1",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mark_Sauter",
+    "ballotpediaUrl": "https://ballotpedia.org/Mark_Sauter"
   },
   {
     "id": "ocd-person/7abc0666-30bd-4e16-ba86-304b1750ac8e",
@@ -1131,7 +1379,9 @@
     "phone": "208-332-1049",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2024/directory/Egbert9195.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/2024/id9195/",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Megan_Egbert",
+    "ballotpediaUrl": "https://ballotpedia.org/Megan_Egbert"
   },
   {
     "id": "ocd-person/c6b06b7d-05f8-45a3-8415-4cd1e76c5642",
@@ -1145,7 +1395,9 @@
     "phone": "208-332-1339",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2025/directory/Wintrow3139.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2022&district=19",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Melissa_Wintrow",
+    "ballotpediaUrl": "https://ballotpedia.org/Melissa_Wintrow"
   },
   {
     "id": "ocd-person/060e3496-76ff-4895-9637-4ff7bbe7a05e",
@@ -1159,7 +1411,11 @@
     "phone": "208-332-1122",
     "photoUrl": "https://www.idahoednews.org/wp-content/uploads/2018/12/Mike-Moyle-620x477.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2022&district=14",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "Star, ID 83669",
+    "districtPhone": "208-286-7842",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mike_Moyle",
+    "ballotpediaUrl": "https://ballotpedia.org/Mike_Moyle"
   },
   {
     "id": "ocd-person/d8c564c8-3499-4e44-b4b9-df1c0bb52ab4",
@@ -1173,7 +1429,11 @@
     "phone": "208-332-1174",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2025/directory/Pohanka9427.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/2025/id9427/",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "Jerome, ID 83338",
+    "districtPhone": "208-490-4709",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mike_Pohanka",
+    "ballotpediaUrl": "https://ballotpedia.org/Mike_Pohanka"
   },
   {
     "id": "ocd-person/ca69eadf-b5f3-4f48-8ce1-8507af44f50e",
@@ -1187,7 +1447,11 @@
     "phone": "208-332-1045",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2026/directory/Veile10155.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/2026/id10155/",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "Soda Springs, ID 83276",
+    "districtPhone": "208-223-2544",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mike_Veile",
+    "ballotpediaUrl": "https://ballotpedia.org/Mike_Veile"
   },
   {
     "id": "ocd-person/b3878069-33ec-4ecc-8236-f9d0de68f5da",
@@ -1201,7 +1465,9 @@
     "phone": "208-332-1078",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2025/directory/Church9422.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/2025/id9422/",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Monica_Church",
+    "ballotpediaUrl": "https://ballotpedia.org/Monica_Church"
   },
   {
     "id": "ocd-person/202344ed-fa6e-4d6d-b746-516abb5c962d",
@@ -1215,7 +1481,9 @@
     "phone": "208-332-1345",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2023/directory/Hart26.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2023&district=2",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Phil_Hart_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Phil_Hart"
   },
   {
     "id": "ocd-person/bb03d309-94c3-4d63-bb69-ede616be8c72",
@@ -1229,7 +1497,11 @@
     "phone": "208-332-1046",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2026/directory/Cheatum7812.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2023&district=28",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "Pocatello, ID 83201",
+    "districtPhone": "208-339-2629",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Richard_Cheatum",
+    "ballotpediaUrl": "https://ballotpedia.org/Richard_Cheatum"
   },
   {
     "id": "ocd-person/6d7d44ab-22ce-4a46-b6d0-643cc3af3d0b",
@@ -1243,7 +1515,9 @@
     "phone": "208-332-1181",
     "photoUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9psK7gbvCRFwbID4kl-z8CYjGocsNnfsafQ&s",
     "website": "https://legislature.idaho.gov/legislators/membership/2025/id9416/",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rob_Beiswenger",
+    "ballotpediaUrl": "https://ballotpedia.org/Rob_Beiswenger"
   },
   {
     "id": "ocd-person/70eb5f7f-381b-400d-87b2-2bdeb6a1c7e7",
@@ -1257,7 +1531,11 @@
     "phone": "208-332-1056",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2019/directory/Furniss5372.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2022&district=35",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "Rigby, ID 83442",
+    "districtPhone": "208-589-1100",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rod_Furniss",
+    "ballotpediaUrl": "https://ballotpedia.org/Rod_Furniss"
   },
   {
     "id": "ocd-person/1024a2b6-d36f-4c1f-86a0-826ec9120fe0",
@@ -1271,7 +1549,11 @@
     "phone": "208-332-1353",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2023/directory/Taylor7836.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2023&district=26",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "Hailey, ID 83333",
+    "districtPhone": "208-831-1726",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ron_Taylor_(Idaho_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Ron_Taylor"
   },
   {
     "id": "ocd-person/71489ac3-457d-41ec-b285-a099648b601b",
@@ -1285,7 +1567,11 @@
     "phone": "208-332-1040",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2019/directory/Mendive2124.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2022&district=3",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "Coeur d'Alene, ID 83814",
+    "districtPhone": "208-667-9330",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ron_Mendive",
+    "ballotpediaUrl": "https://ballotpedia.org/Ron_Mendive"
   },
   {
     "id": "ocd-person/0ad2781c-7d8f-4e19-9fb2-74c8f9033ef9",
@@ -1299,7 +1585,11 @@
     "phone": "208-332-1047",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2025/directory/Dygert9424.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/2025/id9424/",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "Melba, ID 83641",
+    "districtPhone": "208-250-9882",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Shawn_Dygert",
+    "ballotpediaUrl": "https://ballotpedia.org/Shawn_Dygert"
   },
   {
     "id": "ocd-person/b5b4cf71-98db-47f1-84ec-087a4b46641a",
@@ -1313,7 +1603,9 @@
     "phone": "208-332-1083",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2023/directory/Galaviz7862.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2023&district=16",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/So%C3%B1ia_Galaviz",
+    "ballotpediaUrl": "https://ballotpedia.org/So%C3%B1ia_Galaviz"
   },
   {
     "id": "ocd-person/94248975-397a-4e5c-a544-40cb7a3f06d0",
@@ -1327,7 +1619,11 @@
     "phone": "208-332-1042",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2023/directory/Mickelsen7814.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2023&district=32",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "Idaho Falls, ID 83402",
+    "districtPhone": "208-715-7770",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Stephanie_Mickelsen",
+    "ballotpediaUrl": "https://ballotpedia.org/Stephanie_Mickelsen"
   },
   {
     "id": "ocd-person/0c413128-0ec7-4228-aa8b-93572d153c6f",
@@ -1341,7 +1637,9 @@
     "phone": "208-332-1039",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2019/directory/Berch5368.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2022&district=15",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Steve_Berch",
+    "ballotpediaUrl": "https://ballotpedia.org/Steve_Berch"
   },
   {
     "id": "ocd-person/0e6ffb72-a52a-4cac-90a0-ae54a3dfe1a2",
@@ -1355,7 +1653,10 @@
     "phone": "208-332-1063",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2025/directory/Tanner9419.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/2025/id9419/",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "Nampa, ID 83686",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Steve_Tanner_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Steve_Tanner_(Idaho_House_candidate)"
   },
   {
     "id": "ocd-person/983607b1-0987-4efe-8547-de1c5d262e5f",
@@ -1368,8 +1669,11 @@
     "email": "smiller@house.idaho.gov",
     "phone": "208-332-1061",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2023/directory/Miller2134.jpg",
-    "website": "https://legislature.idaho.gov/house/membershipSingle.cfm?ID=2134",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "website": "https://legislature.idaho.gov/legislators/membership/2023/id2134/",
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "Fairfield, ID 83327",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Steve_Miller_(Idaho_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Steve_Miller_(Idaho)"
   },
   {
     "id": "ocd-person/846c0e7d-ec02-4f49-afb9-3604dd27da98",
@@ -1383,7 +1687,9 @@
     "phone": "208-332-1423",
     "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Tammy_Nichols_Election_Photo.jpg/500px-Tammy_Nichols_Election_Photo.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2022&district=11",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tammy_Nichols",
+    "ballotpediaUrl": "https://ballotpedia.org/Tammy_Nichols"
   },
   {
     "id": "ocd-person/7255260c-8991-427e-acd7-5ef985041199",
@@ -1397,7 +1703,11 @@
     "phone": "208-332-1031",
     "photoUrl": "https://assets.civicengine.com/uploads/candidate/headshot/812118/812118.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/2025/id9428/",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "Pocatello, ID 83201",
+    "districtPhone": "208-252-5502",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tanya_Burgoyne",
+    "ballotpediaUrl": "https://ballotpedia.org/Tanya_Burgoyne"
   },
   {
     "id": "ocd-person/0b894582-b3d6-4600-a401-ed874e8c632d",
@@ -1411,7 +1721,11 @@
     "phone": "208-332-1328",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2023/directory/Lakey2132.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2022&district=12",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "Nampa, ID 83651",
+    "districtPhone": "208-908-4415",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Todd_Lakey",
+    "ballotpediaUrl": "https://ballotpedia.org/Todd_Lakey"
   },
   {
     "id": "ocd-person/ee4e19dc-d39c-4a93-b466-346b2e822f86",
@@ -1425,7 +1739,9 @@
     "phone": "208-332-1060",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2019/directory/Wisniewski5384.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2022&district=3",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tony_Wisniewski",
+    "ballotpediaUrl": "https://ballotpedia.org/Tony_Wisniewski"
   },
   {
     "id": "ocd-person/562def54-c2da-4b6a-bdfa-5038a4c04e0c",
@@ -1439,7 +1755,9 @@
     "phone": "208-332-1331",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2023/directory/Bernt7797.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2023&district=21",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Treg_Bernt",
+    "ballotpediaUrl": "https://ballotpedia.org/Treg_Bernt"
   },
   {
     "id": "ocd-person/2a8943d8-c4fe-4286-8b26-6240d9ff26f8",
@@ -1453,7 +1771,9 @@
     "phone": "208-332-1342",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2023/directory/Burtenshaw3140.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2022&district=35",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Van_Burtenshaw",
+    "ballotpediaUrl": "https://ballotpedia.org/Van_Burtenshaw"
   },
   {
     "id": "ocd-person/1abcdba2-7ed6-4871-889e-9e4c47c4d000",
@@ -1467,6 +1787,10 @@
     "phone": "208-332-1177",
     "photoUrl": "https://legislature.idaho.gov/wp-content/uploads/sessioninfo/2019/directory/Barbieri1171.jpg",
     "website": "https://legislature.idaho.gov/legislators/membership/?yr=2022&district=2",
-    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720"
+    "office": "P.O. Box 83720 700 W. Jefferson St., Boise, ID 83720",
+    "districtOffice": "Dalton Gardens, ID 83815",
+    "districtPhone": "208-620-0873",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Vito_Barbieri",
+    "ballotpediaUrl": "https://ballotpedia.org/Vito_Barbieri"
   }
 ]

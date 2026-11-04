@@ -11,7 +11,9 @@
     "phone": "615-741-1946",
     "photoUrl": "https://static.wixstatic.com/media/599b12_afa74a3390064dd386df25e882ac9659~mv2.jpeg/v1/fill/w_675,h_716,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/599b12_afa74a3390064dd386df25e882ac9659~mv2.jpeg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=S1",
-    "office": "Room 732, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 732, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/J._Adam_Lowe",
+    "ballotpediaUrl": "https://ballotpedia.org/J._Adam_Lowe"
   },
   {
     "id": "ocd-person/6dc4d8e8-aa2c-423b-8f5c-8ed4666a27db",
@@ -25,7 +27,9 @@
     "phone": "615-741-3229",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Aftyn_Behn.png",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H51",
-    "office": "Room 574, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 574, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Aftyn_Behn",
+    "ballotpediaUrl": "https://ballotpedia.org/Aftyn_Behn"
   },
   {
     "id": "ocd-person/ad23d4a9-9a62-40a5-94a5-246f7741c3e2",
@@ -39,7 +43,9 @@
     "phone": "615-741-4419",
     "photoUrl": "http://www.capitol.tn.gov/house/members/images/h17.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H17",
-    "office": "Room 630, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 630, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Andrew_Farmer",
+    "ballotpediaUrl": "https://ballotpedia.org/Andrew_Farmer"
   },
   {
     "id": "ocd-person/0b5b90de-2d94-424f-ab28-b434696cb5a9",
@@ -51,9 +57,11 @@
     "party": "Republican",
     "email": "rep.aron.maberry@capitol.tn.gov",
     "phone": "615-741-4341",
-    "photoUrl": "https://www.cmcss.net/wp-content/uploads/elementor/thumbs/L10A9877-2-scaled-qx0h1ahjmd2n4yug9v0d3onejmbo99kwtpl6ybvbxo.jpg",
+    "photoUrl": "https://votemaberry.com/wp-content/uploads/2024/11/AronMaberryHomeBackground2-3.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H68",
-    "office": "Room 576, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 576, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Aron_Maberry",
+    "ballotpediaUrl": "https://ballotpedia.org/Aron_Maberry"
   },
   {
     "id": "ocd-person/592971a7-2e11-4bed-a57d-71187e174329",
@@ -67,7 +75,9 @@
     "phone": "615-741-1648",
     "photoUrl": "http://www.capitol.tn.gov/senate/members/images/s6.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=S6",
-    "office": "Room 776, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 776, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Becky_Duncan_Massey",
+    "ballotpediaUrl": "https://ballotpedia.org/Becky_Duncan_Massey"
   },
   {
     "id": "ocd-person/46b6a1b2-f0c0-4e9a-a506-a81e12e329f5",
@@ -81,7 +91,9 @@
     "phone": "615-741-2374",
     "photoUrl": "http://www.capitol.tn.gov/senate/members/images/s22.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=S22",
-    "office": "Room 772, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 772, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bill_Powers_(American_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Bill_Powers_(Tennessee)"
   },
   {
     "id": "ocd-person/e0272220-99f1-4cfb-9d29-946b86279e0b",
@@ -95,7 +107,9 @@
     "phone": "615-741-4317",
     "photoUrl": "http://www.capitol.tn.gov/house/members/images/h50.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H50",
-    "office": "Room 400, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 400, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bo_Mitchell",
+    "ballotpediaUrl": "https://ballotpedia.org/Bo_Mitchell"
   },
   {
     "id": "ocd-person/86d5ff12-369b-41a4-9626-237425063c1b",
@@ -109,7 +123,9 @@
     "phone": "615-741-3227",
     "photoUrl": "http://www.capitol.tn.gov/senate/members/images/s11.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=S11",
-    "office": "Room 706, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 706, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bo_Watson",
+    "ballotpediaUrl": "https://ballotpedia.org/Bo_Watson"
   },
   {
     "id": "ocd-person/c8a26be8-8de1-434b-864a-21697f8f15d4",
@@ -123,7 +139,9 @@
     "phone": "615-741-0709",
     "photoUrl": "https://www.capitol.tn.gov/house/members/images/H56.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H56",
-    "office": "Room 592, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 592, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bob_Freeman_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Bob_Freeman_(Tennessee)"
   },
   {
     "id": "ocd-person/841e5585-a49a-4754-95d4-682d974b4ff4",
@@ -137,7 +155,9 @@
     "phone": "615-741-5761",
     "photoUrl": "https://tennesseelookout.com/wp-content/uploads/2024/09/Bobby-Harshbarger-975x1024.jpeg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=S4",
-    "office": "Room 740, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 740, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bobby_Harshbarger",
+    "ballotpediaUrl": "https://ballotpedia.org/Bobby_Harshbarger"
   },
   {
     "id": "ocd-person/d3f48e28-4ee5-4027-9670-0d617ca6048e",
@@ -151,7 +171,9 @@
     "phone": "615-741-3036",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/BrentTaylor_TN.jpeg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=S31",
-    "office": "Room 714, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 714, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Brent_Taylor_(Tennessee_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Brent_Taylor_(Tennessee)"
   },
   {
     "id": "ocd-person/de8e2d6f-efd8-45f5-b261-5963db78b909",
@@ -163,9 +185,10 @@
     "party": "Republican",
     "email": "rep.brock.martin@capitol.tn.gov",
     "phone": "615-741-7478",
-    "photoUrl": "https://static.wixstatic.com/media/e786a5_3d8b40c28edc4423ad7371c244de049c~mv2.jpg/v1/crop/x_2630,y_0,w_4189,h_5464/fill/w_460,h_600,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/023A1186.jpg",
+    "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Brock-Martin.PNG",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H79",
-    "office": "Room 652, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 652, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "ballotpediaUrl": "https://ballotpedia.org/Brock_Martin"
   },
   {
     "id": "ocd-person/a9676141-e809-4554-9d0c-283916c36f63",
@@ -179,7 +202,9 @@
     "phone": "615-741-2180",
     "photoUrl": "http://www.capitol.tn.gov/house/members/images/h48.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H48",
-    "office": "Room 646, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 646, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bryan_Terry",
+    "ballotpediaUrl": "https://ballotpedia.org/Bryan_Terry"
   },
   {
     "id": "ocd-person/1e3046c6-b44b-43dd-9cb2-937f40e97a6a",
@@ -193,7 +218,9 @@
     "phone": "615-741-2886",
     "photoUrl": "http://www.capitol.tn.gov/house/members/images/h2.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H2",
-    "office": "Room 519, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 519, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bud_Hulsey",
+    "ballotpediaUrl": "https://ballotpedia.org/Bud_Hulsey"
   },
   {
     "id": "ocd-person/625050ba-cb23-4c09-b62b-818e544d987d",
@@ -207,7 +234,9 @@
     "phone": "615-741-2035",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/hemmercaleb.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H59",
-    "office": "Room 412, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 412, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Caleb_Hemmer",
+    "ballotpediaUrl": "https://ballotpedia.org/Caleb_Hemmer"
   },
   {
     "id": "ocd-person/421c9380-99f4-47ff-9d70-5c5eced05a89",
@@ -221,7 +250,9 @@
     "phone": "615-741-2343",
     "photoUrl": "http://www.capitol.tn.gov/house/members/images/h25.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H25",
-    "office": "Room 600, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 600, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Cameron_Sexton",
+    "ballotpediaUrl": "https://ballotpedia.org/Cameron_Sexton"
   },
   {
     "id": "ocd-person/0ce3dbf9-c880-480b-a623-7d9da870bb01",
@@ -235,7 +266,9 @@
     "phone": "615-741-2453",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/CharlaneOliver.png",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=S19",
-    "office": "Room 766, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 766, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Charlane_Oliver",
+    "ballotpediaUrl": "https://ballotpedia.org/Charlane_Oliver"
   },
   {
     "id": "ocd-person/7c874269-afdd-4d41-a9da-b0ddb903bb6f",
@@ -249,7 +282,9 @@
     "phone": "615-741-6849",
     "photoUrl": "http://www.capitol.tn.gov/house/members/images/H37.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H37",
-    "office": "Room 620, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 620, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Charlie_Baum",
+    "ballotpediaUrl": "https://ballotpedia.org/Charlie_Baum"
   },
   {
     "id": "ocd-person/35764262-91cb-4a03-a2ee-5c87a0f5026e",
@@ -263,7 +298,9 @@
     "phone": "615-741-2134",
     "photoUrl": "https://capitol.tn.gov/house/members/images/H82.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H82",
-    "office": "Room 500, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 500, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Chris_Hurt",
+    "ballotpediaUrl": "https://ballotpedia.org/Chris_Hurt"
   },
   {
     "id": "ocd-person/5854880e-f10d-4c24-9593-4ae567fec8d7",
@@ -277,7 +314,9 @@
     "phone": "615-741-7475",
     "photoUrl": "https://www.capitol.tn.gov/house/members/images/H73.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H73",
-    "office": "Room 526, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 526, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Chris_Todd_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Chris_Todd_(Tennessee)"
   },
   {
     "id": "ocd-person/7fa67dd6-999c-4116-a136-32633710f6b0",
@@ -291,7 +330,8 @@
     "phone": "615-741-7086",
     "photoUrl": "http://www.capitol.tn.gov/house/members/images/h46.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H46",
-    "office": "Room 528, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 528, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "ballotpediaUrl": "https://ballotpedia.org/Clark_Boyd"
   },
   {
     "id": "ocd-person/bdfd00ac-13a8-4208-b687-e46e980d79de",
@@ -305,7 +345,9 @@
     "phone": "615-741-7476",
     "photoUrl": "http://www.capitol.tn.gov/house/members/images/H70.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H70",
-    "office": "Room 636, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 636, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Clay_Doggett",
+    "ballotpediaUrl": "https://ballotpedia.org/Clay_Doggett"
   },
   {
     "id": "ocd-person/311de632-eabb-46da-b547-5fbd73b97769",
@@ -319,7 +361,9 @@
     "phone": "615-741-7799",
     "photoUrl": "http://www.capitol.tn.gov/house/members/images/h22.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H22",
-    "office": "Room 556, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 556, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dan_Howell_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Dan_Howell"
   },
   {
     "id": "ocd-person/4d4a531e-1122-4155-a4e3-9c7069aaebc7",
@@ -333,7 +377,9 @@
     "phone": "615-741-6879",
     "photoUrl": "http://www.capitol.tn.gov/house/members/images/H19.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H19",
-    "office": "Room 588, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 588, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dave_Wright_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Dave_Wright_(Tennessee)"
   },
   {
     "id": "ocd-person/646c2358-84c6-46bf-aca7-555283f31744",
@@ -347,7 +393,9 @@
     "phone": "615-741-7482",
     "photoUrl": "http://www.capitol.tn.gov/house/members/images/h5.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H5",
-    "office": "Room 648, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 648, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/David_B._Hawk",
+    "ballotpediaUrl": "https://ballotpedia.org/David_Hawk"
   },
   {
     "id": "ocd-person/80bf42b1-4942-4187-af19-94e830333ce2",
@@ -361,7 +409,9 @@
     "phone": "615-741-6853",
     "photoUrl": "http://www.capitol.tn.gov/senate/members/images/s13.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=S13",
-    "office": "Room 744, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 744, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dawn_White",
+    "ballotpediaUrl": "https://ballotpedia.org/Dawn_White"
   },
   {
     "id": "ocd-person/d07683be-bda8-4af9-be0b-9bf3c1e441e7",
@@ -375,7 +425,9 @@
     "phone": "615-741-3774",
     "photoUrl": "http://www.capitol.tn.gov/house/members/images/h81.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H81",
-    "office": "Room 680, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 680, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Debra_Moody",
+    "ballotpediaUrl": "https://ballotpedia.org/Debra_Moody"
   },
   {
     "id": "ocd-person/67643e56-9e53-437b-999d-987f8b0692c1",
@@ -389,7 +441,9 @@
     "phone": "615-741-3335",
     "photoUrl": "http://www.capitol.tn.gov/house/members/images/h36.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H36",
-    "office": "Room 428, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 428, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dennis_Powers",
+    "ballotpediaUrl": "https://ballotpedia.org/Dennis_Powers_(Tennessee)"
   },
   {
     "id": "ocd-person/a94ac42a-6b1e-4ecf-acd4-32c2e463e059",
@@ -403,7 +457,9 @@
     "phone": "615-741-1260",
     "photoUrl": "http://edbutlerfortn.com/wp-content/uploads/2018/04/Ed-Butler.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H41",
-    "office": "Room 578, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 578, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ed_Butler_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Ed_Butler_(Tennessee)"
   },
   {
     "id": "ocd-person/93024b02-926b-4414-8826-147b14739a2b",
@@ -417,7 +473,9 @@
     "phone": "615-741-1810",
     "photoUrl": "https://capitol.tn.gov/senate/members/images/S25.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=S25",
-    "office": "Room 730, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 730, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ed_Jackson_(Tennessee_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Ed_Jackson"
   },
   {
     "id": "ocd-person/4c4c679e-fb3d-4ad2-bdfe-f7c077f2d82a",
@@ -431,7 +489,9 @@
     "phone": "615-741-2287",
     "photoUrl": "https://images.squarespace-cdn.com/content/v1/62669899a296e67b1d34963d/13e0ac0c-9c86-423e-baa5-655fb75829bf/ElaineDavis2022-1.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H18",
-    "office": "Room 562, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 562, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Elaine_Davis_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Elaine_Davis"
   },
   {
     "id": "ocd-person/f0cdd239-6095-49bc-9d82-e8ebd7c10254",
@@ -445,7 +505,9 @@
     "phone": "615-741-1934",
     "photoUrl": "https://capitol.tn.gov/house/members/images/H30.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H30",
-    "office": "Room 502, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 502, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Esther_Helton-Haynes",
+    "ballotpediaUrl": "https://ballotpedia.org/Esther_Helton"
   },
   {
     "id": "ocd-person/f539ae98-f5d7-4290-9835-f64a1ab0a8c7",
@@ -459,7 +521,9 @@
     "phone": "615-741-1999",
     "photoUrl": "http://www.capitol.tn.gov/senate/members/images/s18.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=S18",
-    "office": "Room 708, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 708, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ferrell_Haile",
+    "ballotpediaUrl": "https://ballotpedia.org/Ferrell_Haile"
   },
   {
     "id": "ocd-person/a9c952eb-ff76-4d8c-9dbd-820b8909622e",
@@ -473,21 +537,9 @@
     "phone": "615-741-5981",
     "photoUrl": "https://static.wixstatic.com/media/2859e9_1cd01bea042640618e87046b22a3e1ef~mv2.png/v1/crop/x_578,y_0,w_2532,h_2534/fill/w_434,h_434,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/2023%201204%20Atchley%20Thank%20You%20Cards.png",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H12&ga=114",
-    "office": "Room 640, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
-  },
-  {
-    "id": "ocd-person/740ad1ee-4445-41ef-b6b9-1d31185b4916",
-    "name": "G.A. Hardaway",
-    "firstName": "G.A.",
-    "lastName": "Hardaway",
-    "chamber": "lower",
-    "district": "93",
-    "party": "Democratic",
-    "email": "rep.ga.hardaway@capitol.tn.gov",
-    "phone": "615-741-5625",
-    "photoUrl": "http://www.capitol.tn.gov/house/members/images/h93.jpg",
-    "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H93",
-    "office": "Room 404, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 640, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Fred_Atchley",
+    "ballotpediaUrl": "https://ballotpedia.org/Fred_Atchley"
   },
   {
     "id": "ocd-person/15ba8ea2-6fd3-47e2-8a3c-98e87712b367",
@@ -501,7 +553,9 @@
     "phone": "615-741-1920",
     "photoUrl": "https://images.squarespace-cdn.com/content/v1/587e30b61b10e3f62fc61ab4/242a6f6e-67d2-4fa8-8e51-c70a3b595274/IMG_1959.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H96&ga=114",
-    "office": "Room 420, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 420, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Gabby_Salinas",
+    "ballotpediaUrl": "https://ballotpedia.org/Gabby_Salinas"
   },
   {
     "id": "ocd-person/2c60cce4-42aa-44e7-85fe-ab30d8e38979",
@@ -515,7 +569,9 @@
     "phone": "615-741-7480",
     "photoUrl": "http://www.capitol.tn.gov/house/members/images/h9.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H9",
-    "office": "Room 606, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 606, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Gary_Hicks_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Gary_Hicks_(Tennessee)"
   },
   {
     "id": "ocd-person/7e3d4405-71b3-44f8-8e51-9d329ce10838",
@@ -529,7 +585,8 @@
     "phone": "615-741-6808",
     "photoUrl": "https://votegino.com/wp-content/uploads/2022/04/gino.png",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H61",
-    "office": "Room 520, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 520, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "ballotpediaUrl": "https://ballotpedia.org/Gino_Bulso"
   },
   {
     "id": "ocd-person/4dbbf89b-69ab-459f-97ee-c53866e81296",
@@ -543,7 +600,9 @@
     "phone": "615-741-2031",
     "photoUrl": "https://capitol.tn.gov/house/members/images/H90.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H90",
-    "office": "Room 434, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 434, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Gloria_Johnson_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Gloria_Johnson_(Tennessee)"
   },
   {
     "id": "ocd-person/3fb15ce3-c606-4e25-bc6f-1c374bb52cf6",
@@ -557,7 +616,9 @@
     "phone": "615-741-2548",
     "photoUrl": "https://www.capitol.tn.gov/house/members/images/h26.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H26",
-    "office": "Room 586, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 586, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Greg_Martin_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Greg_Martin_(Tennessee)"
   },
   {
     "id": "ocd-person/1035ecfa-8b33-472b-8aa9-2c6286c7fb59",
@@ -571,7 +632,9 @@
     "phone": "615-741-3025",
     "photoUrl": "https://www.capitol.tn.gov/house/members/images/h29.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H29",
-    "office": "Room 550, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 550, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Greg_Vital",
+    "ballotpediaUrl": "https://ballotpedia.org/Greg_Vital"
   },
   {
     "id": "ocd-person/2b7b0735-2adf-4d15-8dab-e32cf871d1d9",
@@ -585,7 +648,9 @@
     "phone": "615-741-3831",
     "photoUrl": "http://www.capitol.tn.gov/house/members/images/h58.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H58",
-    "office": "Room 668, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 668, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Harold_Love",
+    "ballotpediaUrl": "https://ballotpedia.org/Harold_Love"
   },
   {
     "id": "ocd-person/b4356789-3561-4110-ad59-00c7cf36e0fd",
@@ -599,7 +664,9 @@
     "phone": "615-741-6679",
     "photoUrl": "https://www.capitol.tn.gov/senate/members/images/S20.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=S20",
-    "office": "Room 770, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 770, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Heidi_Campbell_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Heidi_Campbell"
   },
   {
     "id": "ocd-person/96432d4d-ecdf-4fa0-8a20-e8a5636fb7dd",
@@ -613,7 +680,9 @@
     "phone": "615-741-8695",
     "photoUrl": "https://data.openstates.org/images/small/ocd-person/96432d4d-ecdf-4fa0-8a20-e8a5636fb7dd",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H39",
-    "office": "Room 560, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 560, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Iris_Rudder",
+    "ballotpediaUrl": "https://ballotpedia.org/Iris_Rudder"
   },
   {
     "id": "ocd-person/83e732c5-55af-4d56-b3ed-9ff358ed641e",
@@ -627,7 +696,9 @@
     "phone": "615-741-2495",
     "photoUrl": "https://bloximages.newyork1.vip.townnews.com/williamsonherald.com/content/tncms/assets/v3/editorial/b/5f/b5ffcba0-f751-11e8-8648-bf381c197480/5c05b9b74599d.image.jpg?resize=334%2C500",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=S27",
-    "office": "Room 702, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 702, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jack_Johnson_(American_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Jack_Johnson"
   },
   {
     "id": "ocd-person/f954892c-82e4-48ff-ae0c-c7e10c251335",
@@ -641,7 +712,9 @@
     "phone": "615-741-4389",
     "photoUrl": "https://images.squarespace-cdn.com/content/v1/58f80179be65944c6f5eeb8a/94dc5fac-95f7-4b57-8c52-6bffa35d2a20/JakeMcCalmon-3.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H63",
-    "office": "Room 564, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 564, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jake_McCalmon",
+    "ballotpediaUrl": "https://ballotpedia.org/Jake_McCalmon"
   },
   {
     "id": "ocd-person/f48dc5f3-1c31-4654-a6be-1b9d20ecb3b2",
@@ -655,7 +728,9 @@
     "phone": "615-741-6694",
     "photoUrl": "http://www.capitol.tn.gov/senate/members/images/s16.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=S16",
-    "office": "Room 718, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 718, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Janice_Bowling",
+    "ballotpediaUrl": "https://ballotpedia.org/Janice_Bowling"
   },
   {
     "id": "ocd-person/7a2b1f85-6a85-41af-8b81-44d585e0041a",
@@ -669,7 +744,9 @@
     "phone": "615-741-6861",
     "photoUrl": "https://www.tennessean.com/gcdn/-mm-/6f03ca527b37558797b9ff3612df6f1ca4cc9386/c=0-42-1946-2637/local/-/media/Nashville/2015/02/11/B9316214695Z.1_20150211202701_000_GF79UD55G.1-0.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H53",
-    "office": "Room 418, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 418, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jason_Powell",
+    "ballotpediaUrl": "https://ballotpedia.org/Jason_Powell"
   },
   {
     "id": "ocd-person/984fd95f-0554-4b7b-aa3e-b72af6ae1aee",
@@ -683,7 +760,9 @@
     "phone": "615-741-2264",
     "photoUrl": "http://www.capitol.tn.gov/house/members/images/h14.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H14",
-    "office": "Room 616, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 616, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jason_Zachary",
+    "ballotpediaUrl": "https://ballotpedia.org/Jason_Zachary"
   },
   {
     "id": "ocd-person/380a255b-fef0-4cd9-9f33-3d5b5d163c68",
@@ -697,7 +776,9 @@
     "phone": "615-741-7098",
     "photoUrl": "http://www.capitol.tn.gov/house/members/images/h74.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H74",
-    "office": "Room 402, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 402, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jay_Reedy",
+    "ballotpediaUrl": "https://ballotpedia.org/Jay_Reedy"
   },
   {
     "id": "ocd-person/eda112b7-c5bc-4d24-95b8-3651090e1da4",
@@ -711,7 +792,9 @@
     "phone": "615-741-3291",
     "photoUrl": "http://www.capitol.tn.gov/senate/members/images/s21.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=S21",
-    "office": "Room 768, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 768, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jeff_Yarbro",
+    "ballotpediaUrl": "https://ballotpedia.org/Jeff_Yarbro"
   },
   {
     "id": "ocd-person/c01a4deb-373d-48a9-b4a2-19125c6e1fe2",
@@ -725,7 +808,9 @@
     "phone": "615-741-6871",
     "photoUrl": "http://www.capitol.tn.gov/house/members/images/h11.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H11",
-    "office": "Room 604, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 604, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jeremy_Faison",
+    "ballotpediaUrl": "https://ballotpedia.org/Jeremy_Faison"
   },
   {
     "id": "ocd-person/27331b48-e198-4de9-ac44-e30509c8c26b",
@@ -739,7 +824,9 @@
     "phone": "615-741-5481",
     "photoUrl": "http://www.capitol.tn.gov/house/members/images/h8.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H8",
-    "office": "Room 530, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 530, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jerome_Moon",
+    "ballotpediaUrl": "https://ballotpedia.org/Jerome_Moon"
   },
   {
     "id": "ocd-person/108691a2-9f24-41c5-b4c8-606c7cdf036b",
@@ -753,7 +840,9 @@
     "phone": "615-741-6954",
     "photoUrl": "https://www.capitol.tn.gov/house/members/images/H85.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H85",
-    "office": "Room 504, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 504, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jesse_Chism",
+    "ballotpediaUrl": "https://ballotpedia.org/Jesse_Chism"
   },
   {
     "id": "ocd-person/b37537b4-ac38-4d83-ba16-025fcb7f0dc6",
@@ -767,7 +856,9 @@
     "phone": "615-741-2061",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Jason_Weakley_20241023_122227.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=S8&ga=114",
-    "office": "Room 748, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 748, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jessie_Seal",
+    "ballotpediaUrl": "https://ballotpedia.org/Jessie_Seal"
   },
   {
     "id": "ocd-person/2689e641-85b8-4753-bd0f-28e2cdfc1568",
@@ -781,21 +872,8 @@
     "phone": "615-741-3513",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Jody-Barrett.PNG",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H69",
-    "office": "Room 596, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
-  },
-  {
-    "id": "ocd-person/7a3177a1-118c-48ce-bbb8-17ebb1240e00",
-    "name": "Joe Towns",
-    "firstName": "Joe",
-    "lastName": "Towns",
-    "chamber": "lower",
-    "district": "84",
-    "party": "Democratic",
-    "email": "rep.joe.towns@capitol.tn.gov",
-    "phone": "615-741-2189",
-    "photoUrl": "http://www.capitol.tn.gov/house/members/images/h84.jpg",
-    "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H84",
-    "office": "Room 416, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 596, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "ballotpediaUrl": "https://ballotpedia.org/Jody_Barrett"
   },
   {
     "id": "ocd-person/fccb09fc-b331-4bba-8b84-fbd4ab3e3227",
@@ -809,7 +887,9 @@
     "phone": "615-741-3100",
     "photoUrl": "http://www.capitol.tn.gov/senate/members/images/s28.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=S28",
-    "office": "Room 742, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 742, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Joey_Hensley",
+    "ballotpediaUrl": "https://ballotpedia.org/Joey_Hensley"
   },
   {
     "id": "ocd-person/d1ead0ef-cc7a-48b3-9fec-0afc8b9d013d",
@@ -823,7 +903,9 @@
     "phone": "615-741-7623",
     "photoUrl": "http://www.capitol.tn.gov/house/members/images/h1.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H1",
-    "office": "Room 540, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 540, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_Crawford_(Tennessee_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/John_Crawford_(Tennessee)"
   },
   {
     "id": "ocd-person/927edca0-8b67-40c6-b786-4cbfac5b344f",
@@ -837,7 +919,9 @@
     "phone": "615-741-8201",
     "photoUrl": "https://www.capitol.tn.gov/house/members/images/h97.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H97",
-    "office": "Room 590, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 590, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_Gillespie_(Tennessee_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/John_Gillespie"
   },
   {
     "id": "ocd-person/87464fca-8690-4e1e-a7aa-499008a9c0b1",
@@ -851,7 +935,9 @@
     "phone": "615-741-4410",
     "photoUrl": "http://www.capitol.tn.gov/house/members/images/h55.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H55",
-    "office": "Room 662, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 662, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_Ray_Clemmons",
+    "ballotpediaUrl": "https://ballotpedia.org/John_Ray_Clemmons"
   },
   {
     "id": "ocd-person/cb6c477c-ceb7-41af-ab96-b03debc1b7e3",
@@ -865,7 +951,9 @@
     "phone": "615-741-4576",
     "photoUrl": "http://www.capitol.tn.gov/senate/members/images/s24.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=S24",
-    "office": "Room 710, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 710, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_Stevens_(Tennessee)",
+    "ballotpediaUrl": "https://ballotpedia.org/John_Stevens_(Tennessee)"
   },
   {
     "id": "ocd-person/8aeb3cc6-b0ca-4af6-ae9d-06aca0c6ae14",
@@ -879,7 +967,9 @@
     "phone": "615-741-3893",
     "photoUrl": "https://www.spencerfane.com/wp-content/uploads/2023/05/garrett-j-731x1024.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H45",
-    "office": "Room 608, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 608, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Johnny_Garrett_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Johnny_Garrett"
   },
   {
     "id": "ocd-person/36e97a50-c2e3-42a4-8f2d-97b4f176ddb1",
@@ -893,7 +983,9 @@
     "phone": "615-741-4538",
     "photoUrl": "http://www.capitol.tn.gov/house/members/images/h80.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H80",
-    "office": "Room 570, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 570, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Johnny_Shaw",
+    "ballotpediaUrl": "https://ballotpedia.org/Johnny_Shaw"
   },
   {
     "id": "ocd-person/df116f27-98bd-497d-a5bc-9f1d7ddff506",
@@ -907,7 +999,9 @@
     "phone": "615-741-4295",
     "photoUrl": "https://images.squarespace-cdn.com/content/v1/638e0e4731cb8444ce5a20e8/1d467f44-2f5f-42d0-96e9-8819eee165fb/Justin_21.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H86",
-    "office": "Room 572, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 572, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Justin_J._Pearson",
+    "ballotpediaUrl": "https://ballotpedia.org/Justin_Pearson_(Tennessee)"
   },
   {
     "id": "ocd-person/7d04ddd1-fbe5-452e-a649-1ca3aac0e0a3",
@@ -921,7 +1015,9 @@
     "phone": "615-741-2184",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/JustinJones_TN_HD52.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H52",
-    "office": "Room 422, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 422, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Justin_Jones_(Tennessee_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Justin_Jones_(Tennessee_House_candidate)"
   },
   {
     "id": "ocd-person/34114218-f0eb-4864-8f4a-156c4cc71cdb",
@@ -935,7 +1031,9 @@
     "phone": "615-741-4110",
     "photoUrl": "https://fluxconsole.com/files/image/131170",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H89",
-    "office": "Room 506, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 506, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Justin_Lafferty",
+    "ballotpediaUrl": "https://ballotpedia.org/Justin_Lafferty"
   },
   {
     "id": "ocd-person/807f5a72-fe61-460c-86a3-c65a6b9eaca1",
@@ -949,7 +1047,9 @@
     "phone": "615-741-1898",
     "photoUrl": "http://www.capitol.tn.gov/house/members/images/h87.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H87",
-    "office": "Room 664, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 664, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Karen_Camper",
+    "ballotpediaUrl": "https://ballotpedia.org/Karen_Camper"
   },
   {
     "id": "ocd-person/51baddf9-a3d9-47c6-81e5-00b6608c6767",
@@ -963,7 +1063,9 @@
     "phone": "615-741-6852",
     "photoUrl": "http://www.capitol.tn.gov/house/members/images/h38.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H38",
-    "office": "Room 566, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 566, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kelly_Keisling",
+    "ballotpediaUrl": "https://ballotpedia.org/Kelly_Keisling"
   },
   {
     "id": "ocd-person/908edc68-a862-455c-a609-7619977252d1",
@@ -977,7 +1079,9 @@
     "phone": "615-741-1449",
     "photoUrl": "http://www.capitol.tn.gov/senate/members/images/s12.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=S12",
-    "office": "Room 704, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 704, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ken_Yager",
+    "ballotpediaUrl": "https://ballotpedia.org/Ken_Yager"
   },
   {
     "id": "ocd-person/872517bf-9780-44e2-9532-87dfd816ec4c",
@@ -991,7 +1095,9 @@
     "phone": "615-741-4499",
     "photoUrl": "https://fluxconsole.com/files/image/131100",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=S23",
-    "office": "Room 746, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 746, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kerry_Roberts",
+    "ballotpediaUrl": "https://ballotpedia.org/Kerry_Roberts"
   },
   {
     "id": "ocd-person/96936d32-69d1-4956-a3e7-12833239e2bb",
@@ -1005,7 +1111,9 @@
     "phone": "615-741-1350",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Kevin-Raper.PNG",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H24",
-    "office": "Room 508, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 508, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kevin_Raper",
+    "ballotpediaUrl": "https://ballotpedia.org/Kevin_Raper"
   },
   {
     "id": "ocd-person/6246e527-70a9-4591-bb46-6354c6e11107",
@@ -1019,7 +1127,9 @@
     "phone": "615-741-1866",
     "photoUrl": "http://www.capitol.tn.gov/house/members/images/h95.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H95",
-    "office": "Room 622, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 622, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kevin_Vaughan",
+    "ballotpediaUrl": "https://ballotpedia.org/Kevin_Vaughan"
   },
   {
     "id": "ocd-person/1ea53db6-5fee-4603-9f8e-fd63694b45fa",
@@ -1033,7 +1143,9 @@
     "phone": "615-741-2190",
     "photoUrl": "https://votecapley.com/wp-content/uploads/2022/01/capley2-4.png",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H71",
-    "office": "Room 650, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 650, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kip_Capley",
+    "ballotpediaUrl": "https://ballotpedia.org/Kip_Capley"
   },
   {
     "id": "ocd-person/65b1d39e-414c-46c2-9aca-8cea5b6cba8b",
@@ -1047,7 +1159,9 @@
     "phone": "615-741-0750",
     "photoUrl": "https://capitol.tn.gov/house/members/images/H72.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H72",
-    "office": "Room 554, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 554, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kirk_Haston",
+    "ballotpediaUrl": "https://ballotpedia.org/Kirk_Haston"
   },
   {
     "id": "ocd-person/3e7acb18-4b9e-45d5-9787-dbce0f1959d8",
@@ -1061,7 +1175,9 @@
     "phone": "615-741-4453",
     "photoUrl": "http://www.capitol.tn.gov/house/members/images/h88.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H88",
-    "office": "Room 580, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 580, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Larry_Miller_(Tennessee_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Larry_Miller_(Tennessee_representative)"
   },
   {
     "id": "ocd-person/f7006293-9fb3-4053-bd79-d77f84c6e59a",
@@ -1074,8 +1190,10 @@
     "email": "rep.lee.reeves@capitol.tn.gov",
     "phone": "615-741-1864",
     "photoUrl": "https://bloximages.newyork1.vip.townnews.com/williamsonherald.com/content/tncms/assets/v3/editorial/7/43/743d158c-3f0e-11ef-855e-4b97c0d5f896/668f0f9e62e96.image.jpg?resize=394%2C500",
-    "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H65&ga=114",
-    "office": "Room 552, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "website": "https://tnhousegop.org/members/representative-lee-reeves/",
+    "office": "Room 552, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lee_Reeves_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Lee_Reeves"
   },
   {
     "id": "ocd-person/44fda210-d5be-4785-ae5e-0072b4111a67",
@@ -1089,7 +1207,9 @@
     "phone": "615-741-2509",
     "photoUrl": "https://www.capitol.tn.gov/senate/members/images/s33.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=S33",
-    "office": "Room 762, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 762, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/London_Lamar",
+    "ballotpediaUrl": "https://ballotpedia.org/London_Lamar"
   },
   {
     "id": "ocd-person/df1bd786-8e1a-4c9d-bd7a-bf8250213dc3",
@@ -1103,7 +1223,9 @@
     "phone": "615-741-3736",
     "photoUrl": "https://www.capitol.tn.gov/house/members/images/H21.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H21",
-    "office": "Room 634, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 634, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lowell_Russell",
+    "ballotpediaUrl": "https://ballotpedia.org/Lowell_Russell"
   },
   {
     "id": "ocd-person/a8461189-9673-4d76-a01d-fa7dddc33a28",
@@ -1117,7 +1239,9 @@
     "phone": "615-741-1725",
     "photoUrl": "https://www.capitol.tn.gov/house/members/images/H23.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H23",
-    "office": "Room 642, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 642, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mark_Cochran",
+    "ballotpediaUrl": "https://ballotpedia.org/Mark_Cochran"
   },
   {
     "id": "ocd-person/47dee87e-231d-4c39-b0a2-6905a85ddbf8",
@@ -1131,7 +1255,9 @@
     "phone": "615-741-2421",
     "photoUrl": "http://www.capitol.tn.gov/senate/members/images/s17.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=S17",
-    "office": "Room 754, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 754, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mark_Pody",
+    "ballotpediaUrl": "https://ballotpedia.org/Mark_Pody"
   },
   {
     "id": "ocd-person/8765a8d9-17ac-4a88-90e3-ef1f7d1b4e61",
@@ -1145,7 +1271,9 @@
     "phone": "615-741-4415",
     "photoUrl": "http://www.capitol.tn.gov/house/members/images/h83.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H83",
-    "office": "Room 624, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 624, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mark_White_(Tennessee_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Mark_White_(Tennessee)"
   },
   {
     "id": "ocd-person/ec8815da-568a-436a-88ed-1e9da240fe80",
@@ -1159,7 +1287,9 @@
     "phone": "615-741-7477",
     "photoUrl": "http://www.capitol.tn.gov/house/members/images/h78.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H78",
-    "office": "Room 632, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 632, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mary_Littleton",
+    "ballotpediaUrl": "https://ballotpedia.org/Mary_Littleton"
   },
   {
     "id": "ocd-person/7bad87b9-12ec-4e74-a3ec-945bc78c5f5f",
@@ -1173,7 +1303,9 @@
     "phone": "615-741-2192",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Michael_Hale_20230524_083209.jpeg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H40",
-    "office": "Room 672, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 672, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Michael_Hale",
+    "ballotpediaUrl": "https://ballotpedia.org/Michael_Hale_(Tennessee)"
   },
   {
     "id": "ocd-person/4ac298c0-370f-4b1d-b41c-29d3ec4f6f09",
@@ -1187,7 +1319,9 @@
     "phone": "615-741-6804",
     "photoUrl": "https://montgomerytn.gov/storage/departments/commission/commissioner/Commissioners-Sept-2022/MichaelLankford.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H75",
-    "office": "Room 660, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 660, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Michael_Lankford",
+    "ballotpediaUrl": "https://ballotpedia.org/Michael_Lankford"
   },
   {
     "id": "ocd-person/6e3a4ce2-b37c-4bd0-8def-100aba672a50",
@@ -1201,7 +1335,9 @@
     "phone": "615-741-1721",
     "photoUrl": "http://nebula.wsimg.com/ec18d700041ee80017970cc4f5b0d8cb?AccessKeyId=C9D09D69010A6C1BCFA5&disposition=0&alloworigin=1",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H16",
-    "office": "Room 510, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 510, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Michele_Carringer",
+    "ballotpediaUrl": "https://ballotpedia.org/Michele_Carringer"
   },
   {
     "id": "ocd-person/435383cc-dc4b-40cb-a55f-d554dcd9d6b7",
@@ -1214,8 +1350,10 @@
     "email": "rep.michele.reneau@capitol.tn.gov",
     "phone": "615-741-2746",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Rebecca_Day_20240808_092357.jpg",
-    "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H27&ga=114",
-    "office": "Room 522, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "website": "https://tnhousegop.org/members/representative-michele-reneau/",
+    "office": "Room 522, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Michele_Reneau",
+    "ballotpediaUrl": "https://ballotpedia.org/Michele_Reneau"
   },
   {
     "id": "ocd-person/092dd5d6-fb25-494c-ad16-78f0034df92f",
@@ -1229,7 +1367,9 @@
     "phone": "615-741-6829",
     "photoUrl": "http://www.capitol.tn.gov/house/members/images/h49.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H49",
-    "office": "Room 532, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 532, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mike_Sparks",
+    "ballotpediaUrl": "https://ballotpedia.org/Mike_Sparks_(Tennessee)"
   },
   {
     "id": "ocd-person/eb738f26-e0b1-4c51-af77-024bfed96183",
@@ -1243,7 +1383,9 @@
     "phone": "615-741-7658",
     "photoUrl": "https://static.wixstatic.com/media/fd35b0_10146244fb184e609fc7bce8e27b2b82~mv2.png/v1/fill/w_252,h_358,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/Monty%20Image%20cropped%20(1)_edited.png",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H32",
-    "office": "Room 430, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 430, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Monty_Fritts",
+    "ballotpediaUrl": "https://ballotpedia.org/Monty_Fritts"
   },
   {
     "id": "ocd-person/88788ad3-d3e0-4846-9bd7-bc7b7f0b9759",
@@ -1257,7 +1399,8 @@
     "phone": "615-741-2368",
     "photoUrl": "http://www.capitol.tn.gov/senate/members/images/S26.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=S26",
-    "office": "Room 750, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 750, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "ballotpediaUrl": "https://ballotpedia.org/Page_Walley"
   },
   {
     "id": "ocd-person/2670b6b7-f648-454d-a70e-bd84792d304d",
@@ -1271,7 +1414,9 @@
     "phone": "615-741-6824",
     "photoUrl": "http://www.capitol.tn.gov/house/members/images/h62.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H62",
-    "office": "Room 610, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 610, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Pat_Marsh",
+    "ballotpediaUrl": "https://ballotpedia.org/Pat_Marsh"
   },
   {
     "id": "ocd-person/8e49fca4-e0d8-4273-adab-265632163d86",
@@ -1285,7 +1430,9 @@
     "phone": "615-741-3978",
     "photoUrl": "http://www.capitol.tn.gov/senate/members/images/s15.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=S15",
-    "office": "Room 736, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 736, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Paul_Bailey_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Paul_Bailey_(Tennessee)"
   },
   {
     "id": "ocd-person/1793564f-19a5-4ac9-91c3-7cbb47843c2b",
@@ -1299,7 +1446,9 @@
     "phone": "615-741-1967",
     "photoUrl": "http://www.capitol.tn.gov/senate/members/images/s32.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=S32",
-    "office": "Room 734, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 734, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Paul_Rose_(American_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Paul_Rose"
   },
   {
     "id": "ocd-person/3c4af105-7b55-4c00-af88-af574ea05493",
@@ -1313,7 +1462,9 @@
     "phone": "615-741-1963",
     "photoUrl": "http://www.capitol.tn.gov/house/members/images/h43.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H43",
-    "office": "Room 670, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 670, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Paul_Sherrell",
+    "ballotpediaUrl": "https://ballotpedia.org/Paul_Sherrell"
   },
   {
     "id": "ocd-person/e00c236d-6153-4618-96f8-12e6a1d639aa",
@@ -1327,7 +1478,9 @@
     "phone": "615-741-6806",
     "photoUrl": "http://www.capitol.tn.gov/senate/members/images/s5.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=S5",
-    "office": "Room 700, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 700, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Randy_McNally",
+    "ballotpediaUrl": "https://ballotpedia.org/Randy_McNally"
   },
   {
     "id": "ocd-person/9c949092-7bff-4859-bea7-46d9c37ed513",
@@ -1341,7 +1494,9 @@
     "phone": "615-741-1767",
     "photoUrl": "http://www.capitol.tn.gov/senate/members/images/s29.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=S29",
-    "office": "Room 764, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 764, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Raumesh_Akbari",
+    "ballotpediaUrl": "https://ballotpedia.org/Raumesh_Akbari"
   },
   {
     "id": "ocd-person/5110ee0d-fc68-4126-8ff2-7db3814afe66",
@@ -1355,7 +1510,9 @@
     "phone": "615-741-2251",
     "photoUrl": "https://www.capitol.tn.gov/house/members/images/h7.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H7",
-    "office": "Room 516, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 516, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rebecca_Alexander_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Rebecca_Alexander"
   },
   {
     "id": "ocd-person/22be6e69-17be-43cf-aba3-bf06d4c7b54c",
@@ -1369,7 +1526,9 @@
     "phone": "615-741-7450",
     "photoUrl": "https://reneajones.com/wp-content/uploads/2023/12/aboutimage.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H4",
-    "office": "Room 584, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 584, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Renea_Jones",
+    "ballotpediaUrl": "https://ballotpedia.org/Renea_Jones"
   },
   {
     "id": "ocd-person/785aed65-3e87-42fe-8e71-307ce08f44ae",
@@ -1383,7 +1542,9 @@
     "phone": "615-741-4575",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Antonio_Parkinson.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H98",
-    "office": "Room 419, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 419, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Antonio_Parkinson",
+    "ballotpediaUrl": "https://ballotpedia.org/Antonio_Parkinson"
   },
   {
     "id": "ocd-person/9d744074-d7ae-4004-8912-bae320633c46",
@@ -1397,7 +1558,9 @@
     "phone": "615-741-1766",
     "photoUrl": "http://www.capitol.tn.gov/senate/members/images/s7.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=S7",
-    "office": "Room 774, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 774, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Richard_Briggs",
+    "ballotpediaUrl": "https://ballotpedia.org/Richard_Briggs_(Tennessee)"
   },
   {
     "id": "ocd-person/c79fb980-4ee3-40ce-9737-62e369c61fe0",
@@ -1411,7 +1574,9 @@
     "phone": "615-741-6877",
     "photoUrl": "http://www.capitol.tn.gov/house/members/images/H10.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H10",
-    "office": "Room 542, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 542, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rick_Eldridge",
+    "ballotpediaUrl": "https://ballotpedia.org/Rick_Eldridge"
   },
   {
     "id": "ocd-person/e38dc213-a42e-43ec-8924-236dc2d9ef35",
@@ -1425,7 +1590,9 @@
     "phone": "615-741-4400",
     "photoUrl": "https://tnhousegop.org/wp-content/uploads/2025/01/Scarbrough-scaled.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H33",
-    "office": "Room 614, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 614, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rick_Scarbrough",
+    "ballotpediaUrl": "https://ballotpedia.org/Richard_Scarbrough"
   },
   {
     "id": "ocd-person/c8be1020-e805-46a9-a8b0-79e206b57540",
@@ -1439,7 +1606,9 @@
     "phone": "615-741-3830",
     "photoUrl": "https://capitol.tn.gov/house/members/images/H13.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H13",
-    "office": "Room 432, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 432, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Robert_Stevens_(Tennessee_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Robert_Stevens_(Tennessee)"
   },
   {
     "id": "ocd-person/e7a2a416-0d33-4d78-8ee5-cf79628df4bd",
@@ -1453,7 +1622,9 @@
     "phone": "615-741-6890",
     "photoUrl": "http://www.capitol.tn.gov/house/members/images/h94.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H94",
-    "office": "Room 618, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 618, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ron_Gant_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Ron_Gant"
   },
   {
     "id": "ocd-person/7429d345-6ad7-421c-936b-3ef9755c6d1f",
@@ -1464,10 +1635,10 @@
     "district": "31",
     "party": "Republican",
     "email": "rep.ron.travis@capitol.tn.gov",
-    "phone": "615-741-1450",
     "photoUrl": "http://www.capitol.tn.gov/house/members/images/h31.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H31",
-    "office": "Room 534, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ron_Travis",
+    "ballotpediaUrl": "https://ballotpedia.org/Ron_Travis"
   },
   {
     "id": "ocd-person/12e6200c-0859-4582-9f55-31dd55eb3b0e",
@@ -1481,7 +1652,9 @@
     "phone": "615-741-2043",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/1Aug232020602PM_80182230_BLUE-min.png",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H67",
-    "office": "Room 410, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 410, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ronnie_Glynn",
+    "ballotpediaUrl": "https://ballotpedia.org/Ronnie_Glynn"
   },
   {
     "id": "ocd-person/271c14e0-433b-42ce-91c5-c01ad5ccfc41",
@@ -1495,7 +1668,9 @@
     "phone": "615-741-7448",
     "photoUrl": "https://data.openstates.org/images/small/ocd-person/271c14e0-433b-42ce-91c5-c01ad5ccfc41",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H47",
-    "office": "Room 594, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 594, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rush_Bricken",
+    "ballotpediaUrl": "https://ballotpedia.org/Rush_Bricken"
   },
   {
     "id": "ocd-person/b8b305e5-ff02-4f8d-8ef1-61a4a7ecf54a",
@@ -1509,7 +1684,9 @@
     "phone": "615-741-2468",
     "photoUrl": "http://www.capitol.tn.gov/senate/members/images/s3.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=S3",
-    "office": "Room 720, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 720, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rusty_Crowe",
+    "ballotpediaUrl": "https://ballotpedia.org/Rusty_Crowe"
   },
   {
     "id": "ocd-person/d00c0511-6872-4f2a-9d48-cf8d2a60e199",
@@ -1523,7 +1700,9 @@
     "phone": "615-741-0718",
     "photoUrl": "http://www.capitol.tn.gov/house/members/images/h77.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H77",
-    "office": "Room 644, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 644, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rusty_Grills",
+    "ballotpediaUrl": "https://ballotpedia.org/Rusty_Grills"
   },
   {
     "id": "ocd-person/df3f9935-b7e2-4f76-a461-115487c57721",
@@ -1537,7 +1716,9 @@
     "phone": "615-741-1875",
     "photoUrl": "http://www.capitol.tn.gov/house/members/images/h42.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H42",
-    "office": "Room 612, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 612, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ryan_Williams_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Ryan_Williams_(Tennessee)"
   },
   {
     "id": "ocd-person/57b51b23-1a38-47dd-bd4f-49954df01971",
@@ -1551,7 +1732,9 @@
     "phone": "615-741-2860",
     "photoUrl": "http://www.capitol.tn.gov/house/members/images/h66.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H66",
-    "office": "Room 654, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 654, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sabi_%22Doc%22_Kumar",
+    "ballotpediaUrl": "https://ballotpedia.org/Sabi_Kumar"
   },
   {
     "id": "ocd-person/810d9aeb-b666-4acc-b098-deaf265df277",
@@ -1565,7 +1748,9 @@
     "phone": "615-741-0768",
     "photoUrl": "http://www.capitol.tn.gov/house/members/images/h15.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H15",
-    "office": "Room 512, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 512, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sam_McKenzie",
+    "ballotpediaUrl": "https://ballotpedia.org/Sam_McKenzie"
   },
   {
     "id": "ocd-person/f1eb839c-83c6-471f-865e-1d87344fb58c",
@@ -1579,7 +1764,9 @@
     "phone": "615-741-4167",
     "photoUrl": "http://www.capitol.tn.gov/senate/members/images/s30.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=S30",
-    "office": "Room 760, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 760, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sara_Kyle",
+    "ballotpediaUrl": "https://ballotpedia.org/Sara_Kyle"
   },
   {
     "id": "ocd-person/da306a9e-f227-4cf4-bfd8-c7d6cb4c7eac",
@@ -1593,7 +1780,9 @@
     "phone": "615-741-3005",
     "photoUrl": "https://capitol.tn.gov/house/members/images/H64.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H64",
-    "office": "Room 678, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 678, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Scott_Cepicky",
+    "ballotpediaUrl": "https://ballotpedia.org/Scott_Cepicky"
   },
   {
     "id": "ocd-person/fa4bd8d0-c567-4434-a24a-6d0bf9759f0b",
@@ -1607,7 +1796,9 @@
     "phone": "615-741-1066",
     "photoUrl": "http://www.capitol.tn.gov/senate/members/images/s14.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=S14",
-    "office": "Room 722, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 722, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Shane_Reeves",
+    "ballotpediaUrl": "https://ballotpedia.org/Shane_Reeves"
   },
   {
     "id": "ocd-person/93b13ac4-5a82-40fb-b646-2fe7c07f8ac1",
@@ -1621,7 +1812,9 @@
     "phone": "615-741-6959",
     "photoUrl": "https://images.bradyunited.org/production/images/Shaundelle-Brooks.jpeg?w=400&h=336&fm=webp&auto=compress&fit=crop&dm=1717513962&s=8dee64026b44a29de45f896285fc7b35",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H60",
-    "office": "Room 406, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 406, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Shaundelle_Brooks",
+    "ballotpediaUrl": "https://ballotpedia.org/Shaundelle_Brooks"
   },
   {
     "id": "ocd-person/37dddeca-88ef-4254-b6f2-b2ddd6526665",
@@ -1635,7 +1828,9 @@
     "phone": "615-741-3851",
     "photoUrl": "https://capitol.tn.gov/senate/members/images/S9.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=S9",
-    "office": "Room 712, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 712, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Steve_Southerland_(Tennessee_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Steve_Southerland_(Tennessee)"
   },
   {
     "id": "ocd-person/b593203d-3346-4a33-8a97-94cc9614d5c5",
@@ -1649,7 +1844,25 @@
     "phone": "615-741-7462",
     "photoUrl": "http://www.capitol.tn.gov/house/members/images/h57.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H57",
-    "office": "Room 426, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 426, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Susan_Lynn",
+    "ballotpediaUrl": "https://ballotpedia.org/Susan_Lynn"
+  },
+  {
+    "id": "ocd-person/fb96543d-2ccf-45c0-9ade-49f042bb715e",
+    "name": "T.J. Hardaway",
+    "firstName": "T.J.",
+    "lastName": "Hardaway",
+    "chamber": "lower",
+    "district": "93",
+    "party": "Democratic",
+    "email": "rep.tj.hardaway@capitol.tn.gov",
+    "phone": "615-741-5625",
+    "photoUrl": "https://tennesseelookout.com/wp-content/uploads/2026/05/TJHardaway1.jpg",
+    "website": "https://wapp.capitol.tn.gov/apps/LegislatorInfo/Member?district=H93",
+    "office": "Room 404, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/T._J._Hardaway",
+    "ballotpediaUrl": "https://ballotpedia.org/TJ_Hardaway"
   },
   {
     "id": "ocd-person/5cec9957-0b24-47d0-94b6-6f41e8f259bc",
@@ -1663,7 +1876,9 @@
     "phone": "615-741-7847",
     "photoUrl": "http://www.capitol.tn.gov/house/members/images/h76.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H76",
-    "office": "Room 676, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 676, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tandy_Darby",
+    "ballotpediaUrl": "https://ballotpedia.org/Tandy_Darby"
   },
   {
     "id": "ocd-person/d3ad0df9-8812-46b9-8fb3-6433036a1a9f",
@@ -1677,7 +1892,9 @@
     "phone": "615-741-1717",
     "photoUrl": "http://www.capitol.tn.gov/house/members/images/h6.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H6",
-    "office": "Room 518, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 518, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tim_Hicks_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Tim_Hicks_(Tennessee)"
   },
   {
     "id": "ocd-person/78c1a569-dcc0-446c-a995-f871964df056",
@@ -1691,7 +1908,9 @@
     "phone": "615-741-2804",
     "photoUrl": "http://www.capitol.tn.gov/house/members/images/h34.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H34",
-    "office": "Room 544, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 544, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tim_Rudd",
+    "ballotpediaUrl": "https://ballotpedia.org/Tim_Rudd"
   },
   {
     "id": "ocd-person/206d00d3-65a9-4922-82d8-48f09a411863",
@@ -1705,7 +1924,9 @@
     "phone": "615-741-2050",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/TimothyHill.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H3",
-    "office": "Room 674, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 674, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Timothy_Hill_%28politician%29",
+    "ballotpediaUrl": "https://ballotpedia.org/Timothy_Hill"
   },
   {
     "id": "ocd-person/d5d2e89a-5467-4f69-a77d-70caaa351086",
@@ -1719,7 +1940,8 @@
     "phone": "615-741-6682",
     "photoUrl": "https://capitol.tn.gov/senate/members/images/S10.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=S10",
-    "office": "Room 716, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 716, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "ballotpediaUrl": "https://ballotpedia.org/Todd_Gardenhire"
   },
   {
     "id": "ocd-person/a7947036-fe6d-4ace-8e6e-78445dc4e19f",
@@ -1733,7 +1955,9 @@
     "phone": "615-741-4170",
     "photoUrl": "https://www.capitol.tn.gov/house/members/images/h92.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H92",
-    "office": "Room 414, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 414, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Todd_Warner",
+    "ballotpediaUrl": "https://ballotpedia.org/Todd_Warner"
   },
   {
     "id": "ocd-person/6567e0e2-9ecf-4129-b838-e3618b4cf786",
@@ -1747,7 +1971,9 @@
     "phone": "615-741-0981",
     "photoUrl": "https://images.squarespace-cdn.com/content/v1/6570c60e478ebd26777cfd83/7e2e888c-6da6-4b8f-a79f-279c8e5cd2c2/365772199_7298985810116788_8248702436261909523_n.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=S2&ga=114",
-    "office": "Room 752, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 752, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tom_Hatcher_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Tom_Hatcher"
   },
   {
     "id": "ocd-person/37db89c5-6814-450a-8259-5e6d1a046e4f",
@@ -1761,7 +1987,9 @@
     "phone": "615-741-7084",
     "photoUrl": "https://d33byq9npfy6u9.cloudfront.net/4/tom-leatherwood/u/original/1333880/tomleatherwoodmug.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H99",
-    "office": "Room 514, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 514, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tom_Leatherwood",
+    "ballotpediaUrl": "https://ballotpedia.org/Tom_Leatherwood"
   },
   {
     "id": "ocd-person/ed22e9c7-ddb2-4772-b664-04d4e31cce5b",
@@ -1775,7 +2003,9 @@
     "phone": "615-741-3560",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Tom_Stinnett_2025.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H20",
-    "office": "Room 424, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 424, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tom_Stinnett",
+    "ballotpediaUrl": "https://ballotpedia.org/Tom_Stinnett"
   },
   {
     "id": "ocd-person/8036dedc-9be1-4935-9a37-df3f95033110",
@@ -1789,7 +2019,9 @@
     "phone": "615-741-2239",
     "photoUrl": "https://capitol.tn.gov/house/members/images/H91.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H91",
-    "office": "Room 582, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 582, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Torrey_Harris",
+    "ballotpediaUrl": "https://ballotpedia.org/Torrey_Harris"
   },
   {
     "id": "ocd-person/ee804d8a-2f07-4271-83a7-0179f4c3445c",
@@ -1803,7 +2035,9 @@
     "phone": "615-741-1997",
     "photoUrl": "https://www.capitol.tn.gov/house/members/images/H54.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H54",
-    "office": "Room 408, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 408, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Vincent_Dixie",
+    "ballotpediaUrl": "https://ballotpedia.org/Vincent_Dixie"
   },
   {
     "id": "ocd-person/5026d19f-d4ec-47b2-b106-f318a45e8585",
@@ -1817,7 +2051,9 @@
     "phone": "615-741-1980",
     "photoUrl": "http://www.capitol.tn.gov/house/members/images/h44.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H44",
-    "office": "Room 602, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 602, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/William_Lamberth",
+    "ballotpediaUrl": "https://ballotpedia.org/William_Lamberth"
   },
   {
     "id": "ocd-person/33aa517f-98cc-4c9a-8bae-5b41542555fa",
@@ -1829,9 +2065,11 @@
     "party": "Republican",
     "email": "rep.william.slater@capitol.tn.gov",
     "phone": "615-741-2534",
-    "photoUrl": "https://bloximages.newyork1.vip.townnews.com/gallatinnews.com/content/tncms/assets/v3/editorial/e/3b/e3b758f4-03a2-11ed-9c70-97c00c9ae5a8/62d0609f6cb1e.image.jpg",
+    "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/William_Slater_20230521_074943.jpg",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H35",
-    "office": "Room 568, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 568, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/William_Slater_%28Tennessee_politician%29",
+    "ballotpediaUrl": "https://ballotpedia.org/William_Slater"
   },
   {
     "id": "ocd-person/73d17744-fdda-495d-b5a8-c44342fc5b38",
@@ -1845,6 +2083,8 @@
     "phone": "615-741-2702",
     "photoUrl": "https://data.openstates.org/images/small/ocd-person/73d17744-fdda-495d-b5a8-c44342fc5b38",
     "website": "https://wapp.capitol.tn.gov/apps/legislatorinfo/member.aspx?district=H28",
-    "office": "Room 524, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243"
+    "office": "Room 524, Cordell Hull Building 425 Rep. John Lewis Way North, Nashville, TN 37243",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Yusuf_Hakeem",
+    "ballotpediaUrl": "https://ballotpedia.org/Yusuf_Hakeem"
   }
 ]

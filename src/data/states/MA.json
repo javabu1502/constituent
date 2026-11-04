@@ -11,7 +11,9 @@
     "phone": "617-722-2320",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/ALS1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/ALS1",
-    "office": "Room 34, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 34, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Aaron_Saunders",
+    "ballotpediaUrl": "https://ballotpedia.org/Aaron_Saunders"
   },
   {
     "id": "ocd-person/4183f327-e2a6-4b1a-9d23-161da1b5e261",
@@ -25,7 +27,9 @@
     "phone": "617-722-2990",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/AMM1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/AMM1",
-    "office": "Room 243, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 243, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Aaron_Michlewitz",
+    "ballotpediaUrl": "https://ballotpedia.org/Aaron_Michlewitz"
   },
   {
     "id": "ocd-person/d2a82a0d-fbd1-4448-be2d-b786a7e11168",
@@ -39,7 +43,9 @@
     "phone": "617-722-1660",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/A_G0.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/A_G0",
-    "office": "Room 312-E, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 312-E, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Adam_Gomez",
+    "ballotpediaUrl": "https://ballotpedia.org/Adam_Gomez"
   },
   {
     "id": "ocd-person/804c5518-7fdf-43c9-ba24-f2c24eb3b0ab",
@@ -53,7 +59,9 @@
     "phone": "617-722-2680",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/AJS1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/AJS1",
-    "office": "Room 127, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 127, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Adam_Scanlon",
+    "ballotpediaUrl": "https://ballotpedia.org/Adam_Scanlon"
   },
   {
     "id": "ocd-person/f8772f1e-29f7-42e2-8a8c-ab4005153b05",
@@ -67,7 +75,9 @@
     "phone": "617-722-2320",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/ACM1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/ACM1",
-    "office": "Room 34, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 34, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Adrian_Madaro",
+    "ballotpediaUrl": "https://ballotpedia.org/Adrian_Madaro"
   },
   {
     "id": "ocd-person/300d40b3-9479-43c0-99d3-18f94e1110cc",
@@ -81,7 +91,9 @@
     "phone": "617-722-2140",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/APR1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/APR1",
-    "office": "Room 21, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 21, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Adrianne_Ramos",
+    "ballotpediaUrl": "https://ballotpedia.org/Adrianne_Ramos"
   },
   {
     "id": "ocd-person/6e81dcb7-4a04-4a88-b5f2-728a3336cf9d",
@@ -95,7 +107,11 @@
     "phone": "617-722-2230",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/A_S1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/A_S1",
-    "office": "Room 167, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 167, State House 24 Beacon St., Boston, MA 02133",
+    "districtOffice": "Room 237, 1 Government Center, Fall River, MA 02723",
+    "districtPhone": "774-526-1122",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Alan_Silvia",
+    "ballotpediaUrl": "https://ballotpedia.org/Alan_Silvia"
   },
   {
     "id": "ocd-person/2a9569a0-feaf-431d-8a8d-012d8ebccbf8",
@@ -109,7 +125,9 @@
     "phone": "617-722-2783",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/AHP1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/AHP1",
-    "office": "Room 234, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 234, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Alice_Peisch",
+    "ballotpediaUrl": "https://ballotpedia.org/Alice_Peisch"
   },
   {
     "id": "ocd-person/bed31f9a-e759-41a5-80b6-8b6bb9a64762",
@@ -123,7 +141,9 @@
     "phone": "617-722-2488",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/AMS2.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/AMS2",
-    "office": "Room 548, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 548, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Alyson_Sullivan",
+    "ballotpediaUrl": "https://ballotpedia.org/Alyson_Sullivan"
   },
   {
     "id": "ocd-person/adb7ebb2-480f-4215-859e-3a1194e9a598",
@@ -137,7 +157,9 @@
     "phone": "617-722-2130",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/AMS3.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/AMS3",
-    "office": "Room 130, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 130, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Amy_Mah_Sangiolo",
+    "ballotpediaUrl": "https://ballotpedia.org/Amy_Sangiolo"
   },
   {
     "id": "ocd-person/c1f81bec-d032-4f41-940c-ca32f2b5af12",
@@ -151,7 +173,11 @@
     "phone": "617-722-2080",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/AXV1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/AXV1",
-    "office": "Room 26, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 26, State House 24 Beacon St., Boston, MA 02133",
+    "districtOffice": "MA",
+    "districtPhone": "978-228-1233",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Andy_Vargas",
+    "ballotpediaUrl": "https://ballotpedia.org/Andy_Vargas"
   },
   {
     "id": "ocd-person/8302648f-4ed2-454e-ad1e-d7389e25b8dc",
@@ -165,7 +191,11 @@
     "phone": "617-722-2006",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/AJP1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/AJP1",
-    "office": "Room 122, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 122, State House 24 Beacon St., Boston, MA 02133",
+    "districtOffice": "2341 Boston Road Suite 204, Wilbraham, MA 01095",
+    "districtPhone": "413-596-4333",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Angelo_Puppolo",
+    "ballotpediaUrl": "https://ballotpedia.org/Angelo_Puppolo,_Jr."
   },
   {
     "id": "ocd-person/59aed143-c5c1-4760-ac55-eab18600c451",
@@ -179,7 +209,9 @@
     "phone": "617-722-2017",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/AFC1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/AFC1",
-    "office": "Room 466, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 466, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Antonio_Cabral",
+    "ballotpediaUrl": "https://ballotpedia.org/Antonio_Cabral"
   },
   {
     "id": "ocd-person/49397268-3fc9-4c83-a385-f55be18597f4",
@@ -193,7 +225,9 @@
     "phone": "617-722-1612",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/BRF0.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/BRF0",
-    "office": "Room 109-D, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 109-D, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Barry_Finegold",
+    "ballotpediaUrl": "https://ballotpedia.org/Barry_Finegold"
   },
   {
     "id": "ocd-person/368c3f95-1124-4f0a-9ab5-7361cb2805d3",
@@ -207,7 +241,11 @@
     "phone": "617-722-2100",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/BHJ1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/BHJ1",
-    "office": "Room 124, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 124, State House 24 Beacon St., Boston, MA 02133",
+    "districtOffice": "MA",
+    "districtPhone": "978-664-5936",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bradley_Jones_Jr.",
+    "ballotpediaUrl": "https://ballotpedia.org/Bradley_Jones,_Jr."
   },
   {
     "id": "ocd-person/99c9c9e7-f0e3-480b-ad38-de297e6c635a",
@@ -221,7 +259,9 @@
     "phone": "617-722-2396",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/BFO1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/BFO1",
-    "office": "Room 136, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 136, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Brandy_Fluker_Oakley",
+    "ballotpediaUrl": "https://ballotpedia.org/Brandy_Fluker-Reid"
   },
   {
     "id": "ocd-person/77994b2c-f88c-4a5f-bf9d-7abd1875d8dc",
@@ -235,7 +275,9 @@
     "phone": "617-722-1350",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/BPC0.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/BPC0",
-    "office": "Room 109-C, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 109-C, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Brendan_Crighton",
+    "ballotpediaUrl": "https://ballotpedia.org/Brendan_Crighton"
   },
   {
     "id": "ocd-person/503a0888-f086-4b52-b03c-c5293378bc51",
@@ -249,7 +291,11 @@
     "phone": "617-722-2304",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/BMA1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/BMA1",
-    "office": "Room 160, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 160, State House 24 Beacon St., Boston, MA 02133",
+    "districtOffice": "MA",
+    "districtPhone": "413-272-3922",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Brian_Ashe",
+    "ballotpediaUrl": "https://ballotpedia.org/Brian_Ashe"
   },
   {
     "id": "ocd-person/66e7c819-cd52-4034-bace-bfec476c106d",
@@ -263,7 +309,11 @@
     "phone": "617-722-2380",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/BWM1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/BWM1",
-    "office": "Room 238, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 238, State House 24 Beacon St., Boston, MA 02133",
+    "districtOffice": "MA",
+    "districtPhone": "508-473-1740",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Brian_Murray_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Brian_W._Murray"
   },
   {
     "id": "ocd-person/2b6d0884-6638-410e-87b7-243c7ca18a16",
@@ -277,7 +327,8 @@
     "phone": "617-722-2460",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/BMP1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/BMP1",
-    "office": "Room 443, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 443, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bridget_Plouffe"
   },
   {
     "id": "ocd-person/429f87cf-f7a1-4201-ade4-9efeb9149d03",
@@ -291,7 +342,9 @@
     "phone": "617-722-1600",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/BET0.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/BET0",
-    "office": "Room 308, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 308, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bruce_Tarr",
+    "ballotpediaUrl": "https://ballotpedia.org/Bruce_Tarr"
   },
   {
     "id": "ocd-person/f81b07bd-cc43-47be-95ea-dca26f19a647",
@@ -305,7 +358,9 @@
     "phone": "617-722-2070",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/BJA1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/BJA1",
-    "office": "Room 473-C, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 473-C, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bruce_Ayers",
+    "ballotpediaUrl": "https://ballotpedia.org/Bruce_Ayers"
   },
   {
     "id": "ocd-person/b23dd64e-a05c-4fe1-8562-c29436ca79bb",
@@ -319,7 +374,11 @@
     "phone": "617-722-2430",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/BLW1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/BLW1",
-    "office": "Room 236, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 236, State House 24 Beacon St., Boston, MA 02133",
+    "districtOffice": "MA",
+    "districtPhone": "413-316-4743",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bud_Williams",
+    "ballotpediaUrl": "https://ballotpedia.org/Bud_L._Williams"
   },
   {
     "id": "ocd-person/c4d03c0e-713d-4195-ba23-1394f225494b",
@@ -333,7 +392,9 @@
     "phone": "617-722-2199",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/C_G1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/C_G1",
-    "office": "Room 163, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 163, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Carlos_Gonzalez_%28legislator%29",
+    "ballotpediaUrl": "https://ballotpedia.org/Carlos_Gonzalez_(Massachusetts)"
   },
   {
     "id": "ocd-person/b9a91cec-bad7-43a7-8fd2-60cd704bd7ab",
@@ -347,7 +408,9 @@
     "phone": "617-722-2810",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/CLG1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/CLG1",
-    "office": "Room 167, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 167, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Carmine_Gentile",
+    "ballotpediaUrl": "https://ballotpedia.org/Carmine_Gentile"
   },
   {
     "id": "ocd-person/af41924a-7c46-4b6b-b71b-bba683c62c5f",
@@ -361,7 +424,11 @@
     "phone": "617-722-2430",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/CAF1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/CAF1",
-    "office": "Room 236, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 236, State House 24 Beacon St., Boston, MA 02133",
+    "districtOffice": "MA",
+    "districtPhone": "774-322-1313",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Carole_Fiola",
+    "ballotpediaUrl": "https://ballotpedia.org/Carole_Fiola"
   },
   {
     "id": "ocd-person/35396516-6096-4336-ab74-80d6d8e53bcd",
@@ -375,7 +442,9 @@
     "phone": "617-722-2230",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/CPB2.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/CPB2",
-    "office": "Room 167, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 167, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Christine_Barber",
+    "ballotpediaUrl": "https://ballotpedia.org/Christine_Barber"
   },
   {
     "id": "ocd-person/9750bdb4-4dce-4003-85ec-672185a3a5a4",
@@ -389,7 +458,9 @@
     "phone": "617-722-2080",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/C_H1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/C_H1",
-    "office": "Room 26, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 26, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Christopher_Hendricks",
+    "ballotpediaUrl": "https://ballotpedia.org/Christopher_Hendricks"
   },
   {
     "id": "ocd-person/59539448-5c3b-4d4d-8e96-48fabb01b10f",
@@ -403,7 +474,9 @@
     "phone": "617-722-2396",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/CJW1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/CJW1",
-    "office": "Room 136, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 136, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Christopher_Worrell_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Christopher_Worrell"
   },
   {
     "id": "ocd-person/560c5ca3-d9b4-4c47-998c-a9baa16a8309",
@@ -417,7 +490,9 @@
     "phone": "617-722-2676",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/CMM1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/CMM1",
-    "office": "Room 276, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 276, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Christopher_Markey",
+    "ballotpediaUrl": "https://ballotpedia.org/Christopher_Markey"
   },
   {
     "id": "ocd-person/c30f76b4-73d6-4795-be75-c46973d17f59",
@@ -431,7 +506,9 @@
     "phone": "617-722-2080",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/CRF1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/CRF1",
-    "office": "Room 26, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 26, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Chris_Flanagan_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Chris_Flanagan"
   },
   {
     "id": "ocd-person/3b92fb1f-d268-40d8-8a4e-851f11fe81ff",
@@ -445,7 +522,9 @@
     "phone": "617-722-2060",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/C_T1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/C_T1",
-    "office": "Room 33, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 33, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Chynah_Tyler",
+    "ballotpediaUrl": "https://ballotpedia.org/Chynah_Tyler"
   },
   {
     "id": "ocd-person/456b0061-febd-4ff7-8547-42be0685526f",
@@ -459,7 +538,9 @@
     "phone": "617-722-1432",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/CFF0.jpg",
     "website": "https://cindyfriedman.org/",
-    "office": "Room 313, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 313, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Cindy_Friedman",
+    "ballotpediaUrl": "https://ballotpedia.org/Cindy_Friedman"
   },
   {
     "id": "ocd-person/0e38852a-52b0-4aac-8a65-fa3fc964c88e",
@@ -473,7 +554,9 @@
     "phone": "617-722-2380",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/CMG1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/CMG1",
-    "office": "Room 238, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 238, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Colleen_Garry",
+    "ballotpediaUrl": "https://ballotpedia.org/Colleen_Garry"
   },
   {
     "id": "ocd-person/ece82669-b6f6-4f0f-ae5d-7b238b1cd1dd",
@@ -487,7 +570,9 @@
     "phone": "617-722-1639",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/CSC0.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/CSC0",
-    "office": "Room 312-A, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 312-A, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Cynthia_Stone_Creem",
+    "ballotpediaUrl": "https://ballotpedia.org/Cynthia_Stone_Creem"
   },
   {
     "id": "ocd-person/5f227f77-f58b-4ac6-b193-9f406bde4055",
@@ -501,7 +586,9 @@
     "phone": "617-722-2020",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/DFC1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/DFC1",
-    "office": "Room 527A, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 527A, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Daniel_Cahill",
+    "ballotpediaUrl": "https://ballotpedia.org/Dan_Cahill_(Massachusetts)"
   },
   {
     "id": "ocd-person/2990f236-cb76-4d93-af19-7792fa77290b",
@@ -515,7 +602,9 @@
     "phone": "617-722-2460",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/djh1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/djh1",
-    "office": "Room 443, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 443, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Daniel_J._Hunt",
+    "ballotpediaUrl": "https://ballotpedia.org/Daniel_J._Hunt"
   },
   {
     "id": "ocd-person/c0519476-08fc-44af-9114-c77d197f883d",
@@ -529,7 +618,9 @@
     "phone": "617-722-2240",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/djr1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/djr1",
-    "office": "Room 156, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 156, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Daniel_Joseph_Ryan",
+    "ballotpediaUrl": "https://ballotpedia.org/Daniel_Joseph_Ryan"
   },
   {
     "id": "ocd-person/d70e97f1-b8ec-489d-ab5a-2b7f3775ae8a",
@@ -543,7 +634,9 @@
     "phone": "617-722-2637",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/DMD1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/DMD1",
-    "office": "Room 544, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 544, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dan_Donahue",
+    "ballotpediaUrl": "https://ballotpedia.org/Daniel_Donahue_(Massachusetts)"
   },
   {
     "id": "ocd-person/5696763c-5fd6-44dd-9dce-7be56632cedd",
@@ -557,7 +650,9 @@
     "phone": "617-722-2140",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/DWG1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/DWG1",
-    "office": "Room 21, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 21, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Danielle_Gregoire",
+    "ballotpediaUrl": "https://ballotpedia.org/Danielle_Gregoire"
   },
   {
     "id": "ocd-person/8f480d9c-0741-43bb-83a4-179745e1f3b2",
@@ -571,7 +666,9 @@
     "phone": "617-722-2014",
     "photoUrl": "http://malegislature.gov/Legislators/Profile/170/DAS1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/DAS1",
-    "office": "Room 39, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 39, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Danillo_Sena",
+    "ballotpediaUrl": "https://ballotpedia.org/Danillo_Sena"
   },
   {
     "id": "ocd-person/f3dd7fd8-5d7f-4fa3-b2fe-910e375f2edd",
@@ -585,7 +682,9 @@
     "phone": "617-722-2210",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/D_R1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/D_R1",
-    "office": "Room 473F, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 473F, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dave_Robertson_(Massachusetts_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/David_Allen_Robertson"
   },
   {
     "id": "ocd-person/5fde161f-7456-4006-bffd-eaf6fedc5aa3",
@@ -599,7 +698,9 @@
     "phone": "617-722-2220",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/D_B1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/D_B1",
-    "office": "Room 254, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 254, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/David_Biele",
+    "ballotpediaUrl": "https://ballotpedia.org/David_Biele"
   },
   {
     "id": "ocd-person/cf295962-4f8d-427a-84e9-c7615ff94c8c",
@@ -613,7 +714,9 @@
     "phone": "617-722-2489",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/DFD1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/DFD1",
-    "office": "Room 542, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 542, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/David_DeCoste",
+    "ballotpediaUrl": "https://ballotpedia.org/David_DeCoste"
   },
   {
     "id": "ocd-person/ca659c30-e49e-420b-8213-797cfeb3c378",
@@ -627,7 +730,9 @@
     "phone": "617-722-2305",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/DAL1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/DAL1",
-    "office": "Room 237, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 237, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/David_LeBoeuf",
+    "ballotpediaUrl": "https://ballotpedia.org/David_Henry_Argosky_LeBoeuf"
   },
   {
     "id": "ocd-person/b601dee7-1ad1-4f36-b585-b0fb5077fd89",
@@ -641,7 +746,9 @@
     "phone": "617-722-2100",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/DKM1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/DKM1",
-    "office": "Room 128, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 128, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/David_Muradian",
+    "ballotpediaUrl": "https://ballotpedia.org/David_Muradian,_Jr."
   },
   {
     "id": "ocd-person/51adc4d9-23d8-442f-b692-c4e4204f552e",
@@ -655,7 +762,9 @@
     "phone": "617-722-2263",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/DMR1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/DMR1",
-    "office": "Room 473B, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 473B, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dave_Rogers_(Massachusetts_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/David_Rogers_(Massachusetts)"
   },
   {
     "id": "ocd-person/06867e5f-9de5-4cb2-a3ae-a039e890718c",
@@ -669,7 +778,9 @@
     "phone": "617-722-2810",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/DPL1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/DPL1",
-    "office": "Room 167, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 167, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/David_Linsky",
+    "ballotpediaUrl": "https://ballotpedia.org/David_Linsky"
   },
   {
     "id": "ocd-person/5c798735-2f95-40a6-9ef7-4cd25eb638f6",
@@ -683,7 +794,11 @@
     "phone": "617-722-2230",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/DTV1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/DTV1",
-    "office": "Room 167, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 167, State House 24 Beacon St., Boston, MA 02133",
+    "districtOffice": "MA",
+    "districtPhone": "508-548-8683",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/David_Vieira_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/David_Vieira"
   },
   {
     "id": "ocd-person/6c49bb2c-7c53-4f22-bfb9-04af813b95b0",
@@ -697,7 +812,9 @@
     "phone": "617-722-2263",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/D_S1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/D_S1",
-    "office": "Room 473B, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 473B, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dawne_Shand",
+    "ballotpediaUrl": "https://ballotpedia.org/Dawne_Shand"
   },
   {
     "id": "ocd-person/3601344e-8a37-488b-a3b1-f355f4e52ea7",
@@ -711,7 +828,9 @@
     "phone": "617-722-2014",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/DCG2.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/DCG2",
-    "office": "Room 39, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 39, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dennis_Gallagher_(Massachusetts_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Dennis_Gallagher_(Massachusetts)"
   },
   {
     "id": "ocd-person/e8071049-2a8d-4633-b6cb-c1f6ae83bb7a",
@@ -725,7 +844,9 @@
     "phone": "617-722-2488",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/DHW1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/DHW1",
-    "office": "Room 541, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 541, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Donald_Wong",
+    "ballotpediaUrl": "https://ballotpedia.org/Donald_Wong"
   },
   {
     "id": "ocd-person/5a276629-f50a-4d9a-a54e-2c0e07f84968",
@@ -739,7 +860,25 @@
     "phone": "617-722-2488",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/DRB1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/DRB1",
-    "office": "Room 548, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 548, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Donnie_Berthiaume",
+    "ballotpediaUrl": "https://ballotpedia.org/Donald_Berthiaume,_Jr."
+  },
+  {
+    "id": "ocd-person/b4f97e46-d8cd-45f7-88c4-94926b0bf60b",
+    "name": "Dru Tarr",
+    "firstName": "Dru",
+    "lastName": "Tarr",
+    "chamber": "lower",
+    "district": "5th Essex",
+    "party": "Democratic",
+    "email": "andrew.tarr@mahouse.gov",
+    "phone": "617-722-2014",
+    "photoUrl": "https://malegislature.gov/Legislators/Profile/170/AFT1.jpg",
+    "website": "https://malegislature.gov/Legislators/Profile/AFT1",
+    "office": "Room 39, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Andrew_Tarr",
+    "ballotpediaUrl": "https://ballotpedia.org/Andrew_Tarr"
   },
   {
     "id": "ocd-person/cd05a88c-19f0-4fc5-bc3b-d339572842b7",
@@ -753,7 +892,9 @@
     "phone": "617-722-1330",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/DAF0.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/DAF0",
-    "office": "Room 519, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 519, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dylan_Fernandes",
+    "ballotpediaUrl": "https://ballotpedia.org/Dylan_A._Fernandes"
   },
   {
     "id": "ocd-person/73394d70-485b-4fbf-a512-bf2da4e4cb3b",
@@ -767,7 +908,9 @@
     "phone": "617-722-2400",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/ERP1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/ERP1",
-    "office": "Room 134, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 134, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ted_Philips",
+    "ballotpediaUrl": "https://ballotpedia.org/Ted_Philips"
   },
   {
     "id": "ocd-person/a3f4c05a-b51a-4b8f-bc5d-d4cb82d74164",
@@ -781,7 +924,9 @@
     "phone": "508-319-9510",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/E_U1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/E_U1",
-    "office": "Room 473B, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 473B, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Erika_Uyterhoeven",
+    "ballotpediaUrl": "https://ballotpedia.org/Erika_Uyterhoeven"
   },
   {
     "id": "ocd-person/824532f7-8dc9-4a1a-a7b3-16b2d0e78941",
@@ -795,7 +940,9 @@
     "phone": "617-722-2240",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/EAR1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/EAR1",
-    "office": "Room 156, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 156, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Estela_Reyes",
+    "ballotpediaUrl": "https://ballotpedia.org/Estela_Reyes"
   },
   {
     "id": "ocd-person/99109961-27e8-4e58-8269-3a1deb29f228",
@@ -809,7 +956,9 @@
     "phone": "617-722-2060",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/FEP1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/FEP1",
-    "office": "Room 33, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 33, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Francisco_E._Paulino",
+    "ballotpediaUrl": "https://ballotpedia.org/Francisco_Paulino"
   },
   {
     "id": "ocd-person/8c42603e-4483-44f1-995f-5956fa09c73c",
@@ -823,7 +972,9 @@
     "phone": "617-722-2180",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/FAM1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/FAM1",
-    "office": "Room 481, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 481, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Frank_A._Moran",
+    "ballotpediaUrl": "https://ballotpedia.org/Frank_Moran"
   },
   {
     "id": "ocd-person/2770216d-1802-435d-b147-4ca1d684dc45",
@@ -837,7 +988,9 @@
     "phone": "617-722-2014",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/G_S1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/G_S1",
-    "office": "Room 39, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 39, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Greg_Schwartz",
+    "ballotpediaUrl": "https://ballotpedia.org/Greg_Schwartz"
   },
   {
     "id": "ocd-person/8d481937-69c5-477d-ba72-e3b682ed0a4d",
@@ -851,7 +1004,9 @@
     "phone": "617-722-2582",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/H_L1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/H_L1",
-    "office": "Room 448, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 448, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Hadley_Luddy",
+    "ballotpediaUrl": "https://ballotpedia.org/Hadley_Luddy"
   },
   {
     "id": "ocd-person/f9a6f401-206b-43df-a1b9-0fc1cd8a3417",
@@ -865,7 +1020,9 @@
     "phone": "617-722-2460",
     "photoUrl": "https://www.resolutionnorthshore.org/images/staff/AG22-Hannah_Bowen-228832.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/HLB1",
-    "office": "Room 443, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 443, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Hannah_Bowen",
+    "ballotpediaUrl": "https://ballotpedia.org/Hannah_Bowen"
   },
   {
     "id": "ocd-person/3dd1e2a8-3fdd-4d3a-9504-88a04f3fc973",
@@ -879,7 +1036,9 @@
     "phone": "617-722-2810",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/HEK1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/HEK1",
-    "office": "Room 167, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 167, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Hannah_Kane",
+    "ballotpediaUrl": "https://ballotpedia.org/Hannah_Kane"
   },
   {
     "id": "ocd-person/6b27dd86-5c03-4223-957c-9efd12c70e04",
@@ -893,7 +1052,9 @@
     "phone": "413-977-2676",
     "photoUrl": "https://images.squarespace-cdn.com/content/v1/6616e5c7caac657d5a7f9682/0c122a29-b755-4647-a180-d5cbdb08bbcc/Screenshot+2024-04-10+at+4.35.35+PM.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/H_G1",
-    "office": "Room 130, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 130, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Homar_Gomez",
+    "ballotpediaUrl": "https://ballotpedia.org/Homar_Gomez"
   },
   {
     "id": "ocd-person/e3dc06b1-8523-4a33-959f-21ed0d5da851",
@@ -905,9 +1066,11 @@
     "party": "Democratic",
     "email": "jack.lewis@mahouse.gov",
     "phone": "617-722-2582",
-    "photoUrl": "https://malegislature.gov/Legislators/Profile/170/JPL1.jpg",
+    "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Jack_Patrick_Lewis.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/JPL1",
-    "office": "Room 452, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 452, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jack_Patrick_Lewis",
+    "ballotpediaUrl": "https://ballotpedia.org/Jack_Patrick_Lewis"
   },
   {
     "id": "ocd-person/b857e2f7-b65a-4d34-a680-50dfff745a16",
@@ -921,7 +1084,9 @@
     "phone": "617-722-1291",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/JRO0.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/JRO0",
-    "office": "Room 416-B, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 416-B, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jacob_Oliveira",
+    "ballotpediaUrl": "https://ballotpedia.org/Jacob_Oliveira"
   },
   {
     "id": "ocd-person/70e42c78-89e1-43cb-bc65-7d0da132daa2",
@@ -935,7 +1100,9 @@
     "phone": "617-722-2400",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/J_A1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/J_A1",
-    "office": "Room 134, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 134, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/James_Arciero",
+    "ballotpediaUrl": "https://ballotpedia.org/James_Arciero"
   },
   {
     "id": "ocd-person/23704722-a50c-4148-8f14-98c7d78324b9",
@@ -949,7 +1116,9 @@
     "phone": "617-722-1120",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/JBE0.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/JBE0",
-    "office": "Room 511-C, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 511-C, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jamie_Eldridge",
+    "ballotpediaUrl": "https://ballotpedia.org/James_Eldridge"
   },
   {
     "id": "ocd-person/47ffc61b-0cae-4386-ae68-12b20eadd83f",
@@ -963,7 +1132,9 @@
     "phone": "617-722-2810",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/JCD1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/JCD1",
-    "office": "Room 167, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 167, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/James_Arena-DeRosa",
+    "ballotpediaUrl": "https://ballotpedia.org/James_Arena-DeRosa"
   },
   {
     "id": "ocd-person/67f64532-7f9a-4cd3-8c89-dc9b5df06517",
@@ -977,7 +1148,9 @@
     "phone": "617-722-2090",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/JJO1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/JJO1",
-    "office": "Room 540, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 540, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jim_O%27Day",
+    "ballotpediaUrl": "https://ballotpedia.org/James_O%27Day"
   },
   {
     "id": "ocd-person/c8936e7c-f0f5-4dc4-b9e9-774e38638787",
@@ -991,7 +1164,9 @@
     "phone": "617-722-2013",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/JKH1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/JKH1",
-    "office": "Room 472, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 472, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jim_Hawkins_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/James_Hawkins_(Massachusetts)"
   },
   {
     "id": "ocd-person/ef175304-020e-4f79-b71f-dc961b738254",
@@ -1005,7 +1180,9 @@
     "phone": "617-722-2220",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/JMM1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/JMM1",
-    "office": "Room 254, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 254, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/James_M._Murphy",
+    "ballotpediaUrl": "https://ballotpedia.org/James_Murphy_(Massachusetts)"
   },
   {
     "id": "ocd-person/92a770ae-a348-4f86-92ad-c4a8ebc568f6",
@@ -1019,7 +1196,9 @@
     "phone": "617-722-1206",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/jml0.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/jml0",
-    "office": "Room 511-B, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 511-B, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jason_Lewis_(Massachusetts_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Jason_Lewis_(Massachusetts)"
   },
   {
     "id": "ocd-person/033bf9eb-2706-4c5f-9f93-8e8d222bf2c0",
@@ -1033,7 +1212,9 @@
     "phone": "617-722-2011",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/J_L1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/J_L1",
-    "office": "Room 146, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 146, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jay_Livingstone",
+    "ballotpediaUrl": "https://ballotpedia.org/Jay_Livingstone"
   },
   {
     "id": "ocd-person/b23d4ed5-1994-4355-a102-cdf15ae57230",
@@ -1047,7 +1228,9 @@
     "phone": "617-722-2040",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/JNR1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/JNR1",
-    "office": "Room 7, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 7, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jeffrey_Roy",
+    "ballotpediaUrl": "https://ballotpedia.org/Jeffrey_Roy"
   },
   {
     "id": "ocd-person/cd89185f-f928-4b26-bb47-60f1bccad0dd",
@@ -1061,7 +1244,9 @@
     "phone": "617-722-2230",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/JRT1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/JRT1",
-    "office": "Room 167, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 167, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jeffrey_Turco",
+    "ballotpediaUrl": "https://ballotpedia.org/Jeffrey_Turco"
   },
   {
     "id": "ocd-person/eab9b69f-0434-4307-972c-6acce9deb370",
@@ -1075,7 +1260,9 @@
     "phone": "617-722-2140",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/JBA1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/JBA1",
-    "office": "Room 21, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 21, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jenny_Armini",
+    "ballotpediaUrl": "https://ballotpedia.org/Jenny_Armini"
   },
   {
     "id": "ocd-person/0ed98993-456c-4630-bd52-894bdde0c0b0",
@@ -1089,7 +1276,9 @@
     "phone": "617-722-2020",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/JAG1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/JAG1",
-    "office": "Room 527A, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 527A, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jessica_Giannino",
+    "ballotpediaUrl": "https://ballotpedia.org/Jessica_Giannino"
   },
   {
     "id": "ocd-person/d0956cb2-93df-4096-82ce-d39fbf0b9e36",
@@ -1103,7 +1292,9 @@
     "phone": "617-722-1410",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/JBL0.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/JBL0",
-    "office": "Room 413-D, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 413-D, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Joan_Lovely",
+    "ballotpediaUrl": "https://ballotpedia.org/Joan_Lovely"
   },
   {
     "id": "ocd-person/03d1f31d-1431-41d2-88b7-67b57d50f323",
@@ -1117,7 +1308,9 @@
     "phone": "617-722-2092",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/J_M1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/J_M1",
-    "office": "Room 162, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 162, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Joan_Meschino",
+    "ballotpediaUrl": "https://ballotpedia.org/Joan_Meschino"
   },
   {
     "id": "ocd-person/2998b05b-b83e-4a9b-9659-a609ddc63a34",
@@ -1131,7 +1324,11 @@
     "phone": "617-722-1532",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/JMC0.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/JMC0",
-    "office": "Room 410, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 410, State House 24 Beacon St., Boston, MA 02133",
+    "districtOffice": "MA",
+    "districtPhone": "413-367-4656",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jo_Comerford",
+    "ballotpediaUrl": "https://ballotpedia.org/Jo_Comerford"
   },
   {
     "id": "ocd-person/da8051b7-de05-4c30-9d37-5d7223906356",
@@ -1145,7 +1342,11 @@
     "phone": "617-722-2012",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/J_B1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/J_B1",
-    "office": "Room 277, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 277, State House 24 Beacon St., Boston, MA 02133",
+    "districtOffice": "MA",
+    "districtPhone": "413-743-8300",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_Barrett_(Massachusetts_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/John_Barrett_III"
   },
   {
     "id": "ocd-person/a37a3f66-83a2-4a7e-90e3-8de41be7262d",
@@ -1159,7 +1360,9 @@
     "phone": "617-722-1415",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/jcv1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/JCV0",
-    "office": "Room 513, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 513, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_Velis",
+    "ballotpediaUrl": "https://ballotpedia.org/John_C._Velis"
   },
   {
     "id": "ocd-person/5a333327-70bb-4b95-9cfd-fadd701e9348",
@@ -1172,8 +1375,10 @@
     "email": "john.cronin@masenate.gov",
     "phone": "617-722-1230",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/JJC0.jpg",
-    "website": "https://malegislature.gov/Legislators/Profile/JJC0",
-    "office": "Room 218, State House 24 Beacon St., Boston, MA 02133"
+    "website": "https://johnjcronin.com/",
+    "office": "Room 218, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_Cronin_(Massachusetts_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/John_J._Cronin"
   },
   {
     "id": "ocd-person/7be04e69-85c6-44e4-a933-88c59c0675a5",
@@ -1187,7 +1392,9 @@
     "phone": "617-722-1494",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/JFK0.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/JFK0",
-    "office": "Room 413-F, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 413-F, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_F._Keenan_(state_senator)",
+    "ballotpediaUrl": "https://ballotpedia.org/John_Keenan_(State_Senate)"
   },
   {
     "id": "ocd-person/15ff9d00-e05e-470a-b89c-36038b1dd5bb",
@@ -1201,7 +1408,9 @@
     "phone": "617-722-2460",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/JFM1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/JFM1",
-    "office": "Room 443, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 443, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_F._Moran",
+    "ballotpediaUrl": "https://ballotpedia.org/John_Moran_(Massachusetts)"
   },
   {
     "id": "ocd-person/013e94ee-496e-42f3-8b1b-f96c737f1f8e",
@@ -1215,7 +1424,9 @@
     "phone": "617-722-2060",
     "photoUrl": "https://static.wixstatic.com/media/40d8f8_3ba01018eff64b309a92373daddd8344~mv2.jpg/v1/crop/x_140,y_436,w_734,h_891/fill/w_440,h_534,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/Untitled-6.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/JRG2",
-    "office": "Room 33, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 33, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_Gaskey",
+    "ballotpediaUrl": "https://ballotpedia.org/John_Gaskey"
   },
   {
     "id": "ocd-person/50942563-77bb-49ec-a54c-6e26048a31a3",
@@ -1229,7 +1440,9 @@
     "phone": "617-722-2450",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/JHR1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/JHR1",
-    "office": "Room 155, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 155, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_H._Rogers",
+    "ballotpediaUrl": "https://ballotpedia.org/John_Rogers_(Massachusetts)"
   },
   {
     "id": "ocd-person/1ea6937d-a39e-41e2-92fb-47c2966cd52e",
@@ -1243,7 +1456,9 @@
     "phone": "617-722-2430",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/JJL2.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/JJL2",
-    "office": "Room 236, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 236, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_J._Lawn",
+    "ballotpediaUrl": "https://ballotpedia.org/John_Lawn"
   },
   {
     "id": "ocd-person/2abbc0cb-6339-42d9-9947-69412a24301b",
@@ -1257,7 +1472,9 @@
     "phone": "617-722-2575",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/JJM2.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/JJM2",
-    "office": "Room 146, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 146, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_J._Mahoney",
+    "ballotpediaUrl": "https://ballotpedia.org/John_J._Mahoney"
   },
   {
     "id": "ocd-person/0e8c6c71-bca0-46fd-86d1-223d41ed5517",
@@ -1271,7 +1488,9 @@
     "phone": "617-722-2240",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/JJM1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/JJM1",
-    "office": "Room 156, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 156, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_Marsi",
+    "ballotpediaUrl": "https://ballotpedia.org/John_Marsi_Jr."
   },
   {
     "id": "ocd-person/49c4bb4e-fadd-4136-953f-6bd64a970acb",
@@ -1285,7 +1504,11 @@
     "phone": "617-722-2582",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/JDZ1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/JDZ1",
-    "office": "Room 449, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 449, State House 24 Beacon St., Boston, MA 02133",
+    "districtOffice": "MA",
+    "districtPhone": "978-410-9559",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jonathan_Zlotnik",
+    "ballotpediaUrl": "https://ballotpedia.org/Jonathan_Zlotnik"
   },
   {
     "id": "ocd-person/0e6c20bd-bfcb-445c-a1ce-3be99e26398e",
@@ -1299,7 +1522,9 @@
     "phone": "617-722-2810",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/JDM1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/JDM1",
-    "office": "Room 167, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 167, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Joseph_D._McKenna",
+    "ballotpediaUrl": "https://ballotpedia.org/Joseph_McKenna_(Massachusetts)"
   },
   {
     "id": "ocd-person/6c3b63a2-ef13-43e5-b6de-d5e0901aa65a",
@@ -1313,7 +1538,9 @@
     "phone": "617-722-2015",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/jwm1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/jwm1",
-    "office": "Room 171, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 171, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Joe_McGonagle",
+    "ballotpediaUrl": "https://ballotpedia.org/Joseph_McGonagle,_Jr."
   },
   {
     "id": "ocd-person/9c847f4f-a48b-4d42-95cb-2b6a219f89ac",
@@ -1327,7 +1554,9 @@
     "phone": "617-722-2582",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/J_T1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/J_T1",
-    "office": "Room 448, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 448, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Joshua_Tarsky",
+    "ballotpediaUrl": "https://ballotpedia.org/Joshua_Tarsky"
   },
   {
     "id": "ocd-person/6f15f647-07f5-4739-a340-497798a474e7",
@@ -1341,7 +1570,9 @@
     "phone": "617-722-2011",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/JAG2.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/JAG2",
-    "office": "Room 146, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 146, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Judith_Garc%C3%ADa",
+    "ballotpediaUrl": "https://ballotpedia.org/Judith_Garcia"
   },
   {
     "id": "ocd-person/5a0688ef-c0cd-469d-bd3c-fe9848724387",
@@ -1355,7 +1586,9 @@
     "phone": "617-722-1570",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/JAC0.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/JAC0",
-    "office": "Room 111, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 111, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Julian_Cyr",
+    "ballotpediaUrl": "https://ballotpedia.org/Julian_Andre_Cyr"
   },
   {
     "id": "ocd-person/4002361d-3211-4f02-b627-95d6e6a3f76c",
@@ -1369,7 +1602,9 @@
     "phone": "617-722-2460",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/J_T2.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/J_T2",
-    "office": "Room 443, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 443, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Justin_Thurber",
+    "ballotpediaUrl": "https://ballotpedia.org/Justin_Thurber"
   },
   {
     "id": "ocd-person/e48879ef-ed74-4f93-8e5b-c0f3752d4fd7",
@@ -1383,7 +1618,9 @@
     "phone": "617-722-1500",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/KES0.jpg",
     "website": "https://karenspilka.com/",
-    "office": "Room 332, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 332, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Karen_Spilka",
+    "ballotpediaUrl": "https://ballotpedia.org/Karen_Spilka"
   },
   {
     "id": "ocd-person/e2aa2c0f-d6e6-49d7-8483-d595a3a1eb3a",
@@ -1397,7 +1634,9 @@
     "phone": "617-722-2013",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/K_D1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/K_D1",
-    "office": "Room 472, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 472, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kate_Donaghue",
+    "ballotpediaUrl": "https://ballotpedia.org/Kate_Donaghue"
   },
   {
     "id": "ocd-person/3d709a64-6cd2-49c6-ad0d-b007e834bfec",
@@ -1411,7 +1650,9 @@
     "phone": "617-722-2600",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/K_H1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/K_H1",
-    "office": "Room 370, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 370, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kate_Hogan",
+    "ballotpediaUrl": "https://ballotpedia.org/Kate_Hogan"
   },
   {
     "id": "ocd-person/7d66e1ca-1fb3-4194-bb18-f9924c528df2",
@@ -1425,7 +1666,9 @@
     "phone": "617-722-2960",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/KLG1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/KLG1",
-    "office": "Room 185, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 185, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kate_Lipper-Garabedian",
+    "ballotpediaUrl": "https://ballotpedia.org/Kate_Lipper-Garabedian"
   },
   {
     "id": "ocd-person/fbbda637-7a45-43f2-a13a-388dc50b02ee",
@@ -1439,7 +1682,9 @@
     "phone": "617-722-2370",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/KPL1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/KPL1",
-    "office": "Room 42, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 42, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kathleen_LaNatra",
+    "ballotpediaUrl": "https://ballotpedia.org/Kathleen_LaNatra"
   },
   {
     "id": "ocd-person/062618e6-3ba4-4170-8b4f-9d0fa325a9ab",
@@ -1453,7 +1698,9 @@
     "phone": "617-722-1551",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/KAD0.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/KAD0",
-    "office": "Room 213-B, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 213-B, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kelly_Dooner",
+    "ballotpediaUrl": "https://ballotpedia.org/Kelly_Dooner"
   },
   {
     "id": "ocd-person/72eea330-24b4-4207-a016-0b1e568e0b6e",
@@ -1467,7 +1714,9 @@
     "phone": "413-875-8787",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/KWP1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/KWP1",
-    "office": "Room 237, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 237, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kelly_Pease",
+    "ballotpediaUrl": "https://ballotpedia.org/Kelly_Pease"
   },
   {
     "id": "ocd-person/1eece00d-5b31-4be0-9263-b594863b295c",
@@ -1481,7 +1730,9 @@
     "phone": "617-722-2305",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/KPS1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/KPS1",
-    "office": "Room 237, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 237, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kenneth_Sweezey",
+    "ballotpediaUrl": "https://ballotpedia.org/Kenneth_Sweezey"
   },
   {
     "id": "ocd-person/47c42957-b618-41b7-a557-5d24c33568cf",
@@ -1495,7 +1746,9 @@
     "phone": "617-722-2070",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/KIG1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/KIG1",
-    "office": "Room 473G, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 473G, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ken_Gordon_(American_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Kenneth_I._Gordon"
   },
   {
     "id": "ocd-person/9e4b8b32-233e-443f-a147-46fbaa778a58",
@@ -1509,7 +1762,9 @@
     "phone": "617-722-2470",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/KGH1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/KGH1",
-    "office": "Room 38, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 38, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kevin_Honan",
+    "ballotpediaUrl": "https://ballotpedia.org/Kevin_Honan"
   },
   {
     "id": "ocd-person/888457ba-c348-4826-b2c6-450dba5e38bd",
@@ -1523,7 +1778,9 @@
     "phone": "617-722-2100",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Kimberly-Ferguson.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/KNF1",
-    "office": "Room 124, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 124, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kimberly_Ferguson",
+    "ballotpediaUrl": "https://ballotpedia.org/Kimberly_Ferguson"
   },
   {
     "id": "ocd-person/df1a3cfc-1555-4a05-8a5c-03a7e53932aa",
@@ -1537,7 +1794,9 @@
     "phone": "617-722-2380",
     "photoUrl": "https://www.capecod.com/wp-content/uploads/NWS_Kip-Diggs_JS081720.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/KAD1",
-    "office": "Room 238, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 238, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kip_Diggs",
+    "ballotpediaUrl": "https://ballotpedia.org/Kip_Diggs"
   },
   {
     "id": "ocd-person/1129a0d9-c280-4bf0-af34-20879293a2b5",
@@ -1551,7 +1810,9 @@
     "phone": "617-722-2220",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/K_K2.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/K_K2",
-    "office": "Room 254, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 254, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kristin_Kassner",
+    "ballotpediaUrl": "https://ballotpedia.org/Kristin_Kassner"
   },
   {
     "id": "ocd-person/386c6121-a2a4-4c92-b093-4abea066d840",
@@ -1565,7 +1826,11 @@
     "phone": "617-722-2400",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/LSD1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/LSD1",
-    "office": "Room 134, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 134, State House 24 Beacon St., Boston, MA 02133",
+    "districtOffice": "MA",
+    "districtPhone": "413-854-4623",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Leigh_Davis_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Leigh_Davis"
   },
   {
     "id": "ocd-person/05f9b238-283f-4529-8989-ff7d1bda60a8",
@@ -1579,7 +1844,11 @@
     "phone": "617-722-2304",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/L_S1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/L_S1",
-    "office": "Room 160, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 160, State House 24 Beacon St., Boston, MA 02133",
+    "districtOffice": "76 Gothic St., Northampton, MA 01060",
+    "districtPhone": "413-270-1166",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lindsay_N._Sabadosa",
+    "ballotpediaUrl": "https://ballotpedia.org/Lindsay_Sabadosa"
   },
   {
     "id": "ocd-person/0a14e19e-3761-4aa2-887f-8b335d6e3eed",
@@ -1590,9 +1859,12 @@
     "district": "3rd Bristol",
     "party": "Democratic",
     "email": "lisa.field@mahouse.gov",
+    "phone": "617-722-2460",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/LMF1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/LMF1",
-    "office": "State House 24 Beacon St., Boston, MA 02133"
+    "office": "State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lisa_Field",
+    "ballotpediaUrl": "https://ballotpedia.org/Lisa_Field"
   },
   {
     "id": "ocd-person/703d6d4e-3a1d-4a2e-82e3-3c9693b75953",
@@ -1606,7 +1878,9 @@
     "phone": "617-722-1673",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/L%20M0.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/L M0",
-    "office": "Room 413-C, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 413-C, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Liz_Miranda",
+    "ballotpediaUrl": "https://ballotpedia.org/Liz_Miranda"
   },
   {
     "id": "ocd-person/5278711f-55ec-4a67-acc9-edd1db1c4e8c",
@@ -1620,7 +1894,9 @@
     "phone": "617-722-1634",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/LME0.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/LME0",
-    "office": "Room 413-A, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 413-A, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lydia_Edwards",
+    "ballotpediaUrl": "https://ballotpedia.org/Lydia_Edwards"
   },
   {
     "id": "ocd-person/5ae88c49-8938-4472-8de2-1c0f0bc0e2f0",
@@ -1634,7 +1910,9 @@
     "phone": "617-722-2011",
     "photoUrl": "https://www.wickedlocal.com/gcdn/authoring/2018/08/07/NWKL/ghows-WL-72d881e3-b92a-5ead-e053-0100007fbaea-a47ecf5e.jpeg?width=600&height=1068&fit=crop&format=pjpg&auto=webp",
     "website": "https://malegislature.gov/Legislators/Profile/M_C3",
-    "office": "Room 146, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 146, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Manny_Cruz",
+    "ballotpediaUrl": "https://ballotpedia.org/Manny_Cruz"
   },
   {
     "id": "ocd-person/398f9a47-bc65-4c2a-b12e-347f375d8fac",
@@ -1648,7 +1926,9 @@
     "phone": "617-722-2460",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/MTL1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/MTL1",
-    "office": "Room 443, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 443, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Marc_Lombardo",
+    "ballotpediaUrl": "https://ballotpedia.org/Marc_Lombardo"
   },
   {
     "id": "ocd-person/2dd65a68-0ea5-4c15-b5fe-bcde086eb357",
@@ -1662,7 +1942,9 @@
     "phone": "617-722-2263",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/MSV1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/MSV1",
-    "office": "Room 473B, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 473B, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Marcus_Vaughn",
+    "ballotpediaUrl": "https://ballotpedia.org/Marcus_Vaughn"
   },
   {
     "id": "ocd-person/a25fd374-e502-43bb-91fe-99c4b6c493a5",
@@ -1676,7 +1958,9 @@
     "phone": "617-722-2210",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/MRS1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/MRS1",
-    "office": "Room 473F, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 473F, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Margaret_Scarsdale",
+    "ballotpediaUrl": "https://ballotpedia.org/Margaret_Scarsdale"
   },
   {
     "id": "ocd-person/b9019024-899b-41b3-a283-69c50866fabd",
@@ -1690,7 +1974,9 @@
     "phone": "617-722-2130",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/MCD1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/MCD1",
-    "office": "Room 130, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 130, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Marjorie_Decker",
+    "ballotpediaUrl": "https://ballotpedia.org/Marjorie_Decker"
   },
   {
     "id": "ocd-person/31600b44-797b-4baf-80aa-0762b4f0aff5",
@@ -1704,7 +1990,11 @@
     "phone": "617-722-1440",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/MCM0.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/MCM0",
-    "office": "Room 312C, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 312C, State House 24 Beacon St., Boston, MA 02133",
+    "districtOffice": "Room 304, 888 Purchase St., New Bedford, MA 02740",
+    "districtPhone": "508-984-1474",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mark_Montigny",
+    "ballotpediaUrl": "https://ballotpedia.org/Mark_Montigny"
   },
   {
     "id": "ocd-person/b51c5c27-7da0-42f5-b67b-22085173af7a",
@@ -1718,7 +2008,9 @@
     "phone": "617-722-2030",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/MJC1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/MJC1",
-    "office": "Room 43, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 43, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mark_Cusack",
+    "ballotpediaUrl": "https://ballotpedia.org/Mark_Cusack"
   },
   {
     "id": "ocd-person/7446bdd1-f6b4-40cb-a039-41f4be68833e",
@@ -1732,7 +2024,9 @@
     "phone": "617-722-2400",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/MDS1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/MDS1",
-    "office": "Room 134, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 134, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mark_Sylvia",
+    "ballotpediaUrl": "https://ballotpedia.org/Mark_Sylvia"
   },
   {
     "id": "ocd-person/4d0b5dda-d9d1-4c25-9c94-ce8fbd8ff398",
@@ -1746,7 +2040,9 @@
     "phone": "617-626-0286",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/MSK1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/MSK1",
-    "office": "Room 466, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 466, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mary_Keefe",
+    "ballotpediaUrl": "https://ballotpedia.org/Mary_S._Keefe"
   },
   {
     "id": "ocd-person/b61c923f-3598-465b-8051-6507b6f6c6c2",
@@ -1760,7 +2056,9 @@
     "phone": "617-722-2575",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/M_K1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/M_K1",
-    "office": "Room 146, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 146, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Meghan_Kilcoyne",
+    "ballotpediaUrl": "https://ballotpedia.org/Meghan_Kilcoyne"
   },
   {
     "id": "ocd-person/c3cdd26f-1314-4366-89f6-17c4c540bce9",
@@ -1774,7 +2072,9 @@
     "phone": "617-722-1200",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/MDB0.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/MDB0",
-    "office": "Room 416-A, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 416-A, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Michael_Brady_%28politician%29",
+    "ballotpediaUrl": "https://ballotpedia.org/Michael_Brady"
   },
   {
     "id": "ocd-person/6a82d675-3496-48af-88cf-23c26355b01f",
@@ -1788,7 +2088,9 @@
     "phone": "617-722-1348",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/MFR0.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/MFR0",
-    "office": "Room 208, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 208, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mike_Rush",
+    "ballotpediaUrl": "https://ballotpedia.org/Michael_Rush"
   },
   {
     "id": "ocd-person/2cf31d35-c3e8-4627-a534-08dce38078db",
@@ -1802,7 +2104,9 @@
     "phone": "617-722-1572",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/MJB0.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/MJB0",
-    "office": "Room 312-B, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 312-B, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Michael_J._Barrett",
+    "ballotpediaUrl": "https://ballotpedia.org/Mike_Barrett"
   },
   {
     "id": "ocd-person/b61922e8-c775-4c74-8ecb-557d79162195",
@@ -1816,7 +2120,11 @@
     "phone": "617-722-2014",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Michael_Finn.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/MJF1",
-    "office": "Room 39, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 39, State House 24 Beacon St., Boston, MA 02133",
+    "districtOffice": "MA",
+    "districtPhone": "413-363-1965",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Michael_Finn",
+    "ballotpediaUrl": "https://ballotpedia.org/Michael_Finn"
   },
   {
     "id": "ocd-person/2fd8669d-a5e2-40fd-bb2f-595210f1bf49",
@@ -1830,7 +2138,9 @@
     "phone": "617-722-2300",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/MJM1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/MJM1",
-    "office": "Room 343, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 343, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Michael_Moran_%28Massachusetts_politician%29",
+    "ballotpediaUrl": "https://ballotpedia.org/Michael_Moran_(Massachusetts)"
   },
   {
     "id": "ocd-person/af0d6647-3a7b-48d0-971c-bde55a75e78c",
@@ -1844,7 +2154,11 @@
     "phone": "617-722-1114",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/MJR0.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/MJR0",
-    "office": "Room 212, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 212, State House 24 Beacon St., Boston, MA 02133",
+    "districtOffice": "MA",
+    "districtPhone": "508-646-0650",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Michael_Rodrigues_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Michael_Rodrigues"
   },
   {
     "id": "ocd-person/4cec2aa4-c17b-4749-b0e9-58a25695bf2f",
@@ -1858,7 +2172,9 @@
     "phone": "617-722-2488",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/MJS3.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/MJS3",
-    "office": "Room 551, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 551, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Michael_Soter",
+    "ballotpediaUrl": "https://ballotpedia.org/Michael_Soter"
   },
   {
     "id": "ocd-person/7b48bd48-8d27-4dd8-958d-703571efe150",
@@ -1872,7 +2188,11 @@
     "phone": "617-722-1485",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/MOM0.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/MOM0",
-    "office": "Room 109-B, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 109-B, State House 24 Beacon St., Boston, MA 02133",
+    "districtOffice": "MA",
+    "districtPhone": "508-757-0323 ext. 13",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Michael_O._Moore",
+    "ballotpediaUrl": "https://ballotpedia.org/Michael_O._Moore"
   },
   {
     "id": "ocd-person/591dc6dd-40b8-4713-83b8-f236ff6250bf",
@@ -1886,7 +2206,11 @@
     "phone": "617-722-2396",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/MPK1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/MPK1",
-    "office": "Room 136, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 136, State House 24 Beacon St., Boston, MA 02133",
+    "districtOffice": "718 Main St., Fitchburg, MA 01420",
+    "districtPhone": "978-829-1954",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mike_Kushmerek",
+    "ballotpediaUrl": "https://ballotpedia.org/Michael_Kushmerek"
   },
   {
     "id": "ocd-person/2e198563-4aeb-499b-8333-b4a46b605491",
@@ -1900,7 +2224,9 @@
     "phone": "617-722-2396",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/MSD1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/MSD1",
-    "office": "Room 136, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 136, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mike_Day_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Michael_Day"
   },
   {
     "id": "ocd-person/a0c80d02-beb0-42c3-b7ff-31fc0d5351f5",
@@ -1914,7 +2240,9 @@
     "phone": "617-722-2060",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/MichelleBadger24.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/MLB1",
-    "office": "Room 33, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 33, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Michelle_Badger",
+    "ballotpediaUrl": "https://ballotpedia.org/Michelle_Badger"
   },
   {
     "id": "ocd-person/ea385faa-049c-4743-ad41-3bbe58ee40e2",
@@ -1928,7 +2256,9 @@
     "phone": "617-722-2210",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/M_C2.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/M_C2",
-    "office": "Room 473F, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 473F, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Michelle_Ciccolo",
+    "ballotpediaUrl": "https://ballotpedia.org/Michelle_Ciccolo"
   },
   {
     "id": "ocd-person/f41834f0-0d73-4e8e-8758-66184772c081",
@@ -1942,7 +2272,9 @@
     "phone": "617-722-2017",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/MMD1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/MMD1",
-    "office": "Room 466, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 466, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Michelle_DuBois",
+    "ballotpediaUrl": "https://ballotpedia.org/Michelle_DuBois"
   },
   {
     "id": "ocd-person/0a74c581-eb5c-4935-b5c3-f4a77e6dcd31",
@@ -1956,7 +2288,9 @@
     "phone": "617-722-2090",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/MSC1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/MSC1",
-    "office": "Room 540, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 540, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Michael_Chaisson",
+    "ballotpediaUrl": "https://ballotpedia.org/Michael_Chaisson"
   },
   {
     "id": "ocd-person/a8225754-d88c-4343-8829-aa168b564cbd",
@@ -1970,7 +2304,9 @@
     "phone": "617-722-2230",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/M_C1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/M_C1",
-    "office": "Room 167, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 167, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mike_Connolly_(Massachusetts_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Mike_Connolly_(Massachusetts)"
   },
   {
     "id": "ocd-person/65617e1a-1834-4ec8-9f19-4ac801ce9764",
@@ -1984,7 +2320,11 @@
     "phone": "617-722-2060",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/M_D2.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/M_D2",
-    "office": "Room 33, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 33, State House 24 Beacon St., Boston, MA 02133",
+    "districtOffice": "MA",
+    "districtPhone": "413-335-1362",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mindy_Domb",
+    "ballotpediaUrl": "https://ballotpedia.org/Mindy_Domb"
   },
   {
     "id": "ocd-person/17c3ac90-1218-4d61-ae47-bc5ef6ee4a74",
@@ -1998,7 +2338,11 @@
     "phone": "617-722-2014",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/N_H1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/N_H1",
-    "office": "Room 39, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 39, State House 24 Beacon St., Boston, MA 02133",
+    "districtOffice": "MA",
+    "districtPhone": "978-227-5278",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Natalie_Higgins",
+    "ballotpediaUrl": "https://ballotpedia.org/Natalie_Higgins"
   },
   {
     "id": "ocd-person/0e72fc19-89be-49b9-8baf-5f35f938ec87",
@@ -2012,7 +2356,9 @@
     "phone": "413-274-8084",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/NAG1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/NAG1",
-    "office": "Room 167, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 167, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Nicholas_Boldyga",
+    "ballotpediaUrl": "https://ballotpedia.org/Nicholas_Boldyga"
   },
   {
     "id": "ocd-person/8ca6ea6c-1121-40b3-a5cf-9b55dfe6a2b0",
@@ -2026,7 +2372,9 @@
     "phone": "617-722-1150",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/N_C0.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/N_C0",
-    "office": "Room 511-A, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 511-A, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Nick_Collins_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Nick_Collins"
   },
   {
     "id": "ocd-person/6d186dd3-a4a0-4d65-aaf1-2f0a63cd42ec",
@@ -2040,7 +2388,9 @@
     "phone": "617-722-2090",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/NJO1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/NJO1",
-    "office": "Room 540, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 540, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Norman_Orrall",
+    "ballotpediaUrl": "https://ballotpedia.org/Norman_Orrall"
   },
   {
     "id": "ocd-person/a1a94ad4-7b75-46be-896e-548c86b23d0c",
@@ -2054,7 +2404,11 @@
     "phone": "617-722-2430",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/O_R1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/O_R1",
-    "office": "Room 236, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 236, State House 24 Beacon St., Boston, MA 02133",
+    "districtOffice": "Springfield, MA 01104",
+    "districtPhone": "413-271-7955",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Orlando_Ramos",
+    "ballotpediaUrl": "https://ballotpedia.org/Orlando_Ramos"
   },
   {
     "id": "ocd-person/e50e8121-bc6f-4aaa-8cf2-f1cbd53c9172",
@@ -2068,7 +2422,9 @@
     "phone": "617-722-2637",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/PAD1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/PAD1",
-    "office": "Room 544, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 544, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Patricia_Duffy",
+    "ballotpediaUrl": "https://ballotpedia.org/Patricia_Duffy"
   },
   {
     "id": "ocd-person/6de50ed2-4fe8-4b98-894d-0bc391c876b5",
@@ -2082,7 +2438,9 @@
     "phone": "617-722-1578",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/PDJ0.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/PDJ0",
-    "office": "Room 424, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 424, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Patricia_D._Jehlen",
+    "ballotpediaUrl": "https://ballotpedia.org/Patricia_Jehlen"
   },
   {
     "id": "ocd-person/0a288f3d-397f-4e7b-8bfd-b5032ae1421f",
@@ -2096,7 +2454,9 @@
     "phone": "617-722-2017",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/PJK1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/PJK1",
-    "office": "Room 279, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 279, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Patrick_J._Kearney",
+    "ballotpediaUrl": "https://ballotpedia.org/Patrick_Joseph_Kearney"
   },
   {
     "id": "ocd-person/493988da-4de8-49a0-8d6c-090097e89920",
@@ -2110,7 +2470,9 @@
     "phone": "617-722-1646",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/PMO.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/PMO",
-    "office": "Room 419, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 419, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Patrick_O%27Connor_(Massachusetts_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Patrick_O%27Connor_(Massachusetts)"
   },
   {
     "id": "ocd-person/18bf433d-24e5-46cb-9d83-c2f9373204bd",
@@ -2124,7 +2486,11 @@
     "phone": "617-722-2520",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/PJD1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/PJD1",
-    "office": "Room 478, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 478, State House 24 Beacon St., Boston, MA 02133",
+    "districtOffice": "MA",
+    "districtPhone": "781-395-1683",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Paul_Donato",
+    "ballotpediaUrl": "https://ballotpedia.org/Paul_Donato,_Sr."
   },
   {
     "id": "ocd-person/fdc5586f-0db3-4614-af1f-72a42cf5e6f0",
@@ -2138,7 +2504,9 @@
     "phone": "617-722-2100",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Paul-Frost.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/PKF1",
-    "office": "Room 124, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 124, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Paul_Frost",
+    "ballotpediaUrl": "https://ballotpedia.org/Paul_Frost"
   },
   {
     "id": "ocd-person/d0e66289-022e-4a99-ac8c-f20fb7557e7f",
@@ -2152,7 +2520,9 @@
     "phone": "617-722-2013",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/P_M1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/P_M1",
-    "office": "Room 472, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 472, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Paul_McMurtry",
+    "ballotpediaUrl": "https://ballotpedia.org/Paul_McMurtry"
   },
   {
     "id": "ocd-person/b390af07-1fa2-4516-b8f0-b6bd1b62121a",
@@ -2166,7 +2536,9 @@
     "phone": "617-722-1222",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/PRF0.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/PRF0",
-    "office": "Room 112, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 112, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Paul_Feeney",
+    "ballotpediaUrl": "https://ballotpedia.org/Paul_Feeney"
   },
   {
     "id": "ocd-person/fd5aaac8-48f5-42c2-82a8-abaf6c5de650",
@@ -2180,7 +2552,11 @@
     "phone": "617-722-1625",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/PWM0.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/PWM0",
-    "office": "Room 504, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 504, State House 24 Beacon St., Boston, MA 02133",
+    "districtOffice": "773 Tyler St., Pittsfield, MA 01201",
+    "districtPhone": "413-464-5635",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Paul_Mark",
+    "ballotpediaUrl": "https://ballotpedia.org/Paul_Mark"
   },
   {
     "id": "ocd-person/1d33d1e7-dae9-4e98-aa9e-626b0d711d9a",
@@ -2194,7 +2570,9 @@
     "phone": "617-722-1604",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/PMP0.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/PMP0",
-    "office": "Room 413-B, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 413-B, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Pavel_Payano",
+    "ballotpediaUrl": "https://ballotpedia.org/Pavel_Payano"
   },
   {
     "id": "ocd-person/c674060b-4568-43fa-b72d-0921f4876713",
@@ -2208,7 +2586,9 @@
     "phone": "617-722-1540",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/PJD0.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/PJD0",
-    "office": "Room 520, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 520, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Peter_Durant",
+    "ballotpediaUrl": "https://ballotpedia.org/Peter_Durant"
   },
   {
     "id": "ocd-person/a148ff77-2e73-4e42-a525-20e8d1ed569a",
@@ -2222,7 +2602,9 @@
     "phone": "617-722-2396",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/PSS1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/PSS1",
-    "office": "Room 136, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 136, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Priscila_Sousa",
+    "ballotpediaUrl": "https://ballotpedia.org/Priscila_Sousa"
   },
   {
     "id": "ocd-person/fb97b139-c0dd-41b5-ae52-159528f47b11",
@@ -2236,7 +2618,9 @@
     "phone": "617-722-1555",
     "photoUrl": "https://www.brandeis.edu/now/2019/january/images/rausch620.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/RLR0",
-    "office": "Room 215, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 215, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Becca_Rausch",
+    "ballotpediaUrl": "https://ballotpedia.org/Becca_Rausch"
   },
   {
     "id": "ocd-person/521620ea-1e5b-4a0c-94f8-abe888370e05",
@@ -2250,7 +2634,9 @@
     "phone": "617-722-2575",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/RMH1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/RMH1",
-    "office": "Room 146, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 146, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Richard_Haggerty",
+    "ballotpediaUrl": "https://ballotpedia.org/Richard_Haggerty"
   },
   {
     "id": "ocd-person/e988f332-eba5-40a4-b55f-554728360e6c",
@@ -2264,7 +2650,9 @@
     "phone": "617-722-2582",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/RGW1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/RGW1",
-    "office": "Room 448, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 448, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Richard_Wells_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Richard_Wells_Jr."
   },
   {
     "id": "ocd-person/87e3afd8-390c-45a3-97c6-2bb164ec1e90",
@@ -2278,7 +2666,9 @@
     "phone": "617-722-2460",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/RAM1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/RAM1",
-    "office": "Room 446, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 446, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rita_Mendes",
+    "ballotpediaUrl": "https://ballotpedia.org/Rita_Mendes"
   },
   {
     "id": "ocd-person/edcd5892-2488-4945-a3da-86f40012d396",
@@ -2292,7 +2682,9 @@
     "phone": "617-722-2692",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/R_C1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/R_C1",
-    "office": "Room 166, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 166, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Robert_Consalvo",
+    "ballotpediaUrl": "https://ballotpedia.org/Rob_Consalvo"
   },
   {
     "id": "ocd-person/2fb1c0e0-edaa-4b55-9bbb-b6fe6b3e5dcc",
@@ -2306,21 +2698,9 @@
     "phone": "617-722-1544",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/RKK0.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/RKK0",
-    "office": "Room 312-D, State House 24 Beacon St., Boston, MA 02133"
-  },
-  {
-    "id": "ocd-person/49816a0c-b8e5-4586-859b-8a8f1ae9b6ab",
-    "name": "Rodney Elliott",
-    "firstName": "Rodney",
-    "lastName": "Elliott",
-    "chamber": "lower",
-    "district": "16th Middlesex",
-    "party": "Democratic",
-    "email": "rodney.elliott@mahouse.gov",
-    "phone": "617-722-2030",
-    "photoUrl": "https://malegislature.gov/Legislators/Profile/170/RME1.jpg",
-    "website": "https://malegislature.gov/Legislators/Profile/RME1",
-    "office": "Room 43, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 312-D, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Robyn_Kennedy",
+    "ballotpediaUrl": "https://ballotpedia.org/Robyn_Kennedy"
   },
   {
     "id": "ocd-person/e142d28d-e57a-4ff9-afa4-c3cd149f2114",
@@ -2334,7 +2714,9 @@
     "phone": "617-722-2500",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/R_M1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/R_M1",
-    "office": "Room 356, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 356, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ronald_Mariano",
+    "ballotpediaUrl": "https://ballotpedia.org/Ronald_Mariano"
   },
   {
     "id": "ocd-person/078692f2-2afe-4aa1-a320-d4747edacbbb",
@@ -2348,7 +2730,9 @@
     "phone": "617-722-2220",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/REH1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/REH1",
-    "office": "Room 254, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 254, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Russell_Holmes",
+    "ballotpediaUrl": "https://ballotpedia.org/Russell_Holmes"
   },
   {
     "id": "ocd-person/edebef62-78d9-4f8b-a94d-65a29dbc09f6",
@@ -2362,7 +2746,9 @@
     "phone": "617-722-1420",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/RCF0.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/RCF0",
-    "office": "Room 213-A, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 213-A, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ryan_Fattman",
+    "ballotpediaUrl": "https://ballotpedia.org/Ryan_Fattman"
   },
   {
     "id": "ocd-person/799d49f3-28e5-46a1-bcc8-6370e9fbf44a",
@@ -2376,7 +2762,9 @@
     "phone": "617-722-2090",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/RMH2.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/RMH2",
-    "office": "Room 540, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 540, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ryan_Hamilton_(Massachusetts_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Ryan_Hamilton"
   },
   {
     "id": "ocd-person/d691b834-a68d-44da-8140-9582ee37d8a6",
@@ -2390,7 +2778,9 @@
     "phone": "617-722-1650",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/SND0.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/SND0",
-    "office": "Room 405, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 405, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sal_DiDomenico",
+    "ballotpediaUrl": "https://ballotpedia.org/Sal_DiDomenico"
   },
   {
     "id": "ocd-person/308b15a0-dc30-41be-be53-9e5827522cac",
@@ -2404,7 +2794,9 @@
     "phone": "617-722-2210",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/SPK1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/SPK1",
-    "office": "Room 473F, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 473F, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sally_Kerans",
+    "ballotpediaUrl": "https://ballotpedia.org/Sally_Kerans"
   },
   {
     "id": "ocd-person/668db267-f9e1-4839-918d-c092741f96f9",
@@ -2418,7 +2810,9 @@
     "phone": "617-722-2460",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/S_M1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/S_M1",
-    "office": "Room 446, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 446, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sam_Monta%C3%B1o",
+    "ballotpediaUrl": "https://ballotpedia.org/Sam_Monta%C3%B1o"
   },
   {
     "id": "ocd-person/1e9d742c-c20b-45cf-9e22-e7752189fa7a",
@@ -2432,7 +2826,9 @@
     "phone": "617-722-2090",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/S_G1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/S_G1",
-    "office": "Room 540, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 540, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sean_Garballey",
+    "ballotpediaUrl": "https://ballotpedia.org/Sean_Garballey"
   },
   {
     "id": "ocd-person/d3ad855a-567f-443a-bb9f-480a0c95fb06",
@@ -2446,7 +2842,9 @@
     "phone": "617-722-2460",
     "photoUrl": "https://static.wixstatic.com/media/afaf11_7be85579b8f44be19dc438362812307c~mv2.jpg/v1/crop/x_0,y_241,w_1500,h_1845/fill/w_560,h_689,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/SeanHeadshot.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/S_R1",
-    "office": "Room 443, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 443, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sean_Reid_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Sean_Reid"
   },
   {
     "id": "ocd-person/ff433cf6-2895-4e01-b143-26747500f8a4",
@@ -2460,7 +2858,9 @@
     "phone": "617-722-2305",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/SBA1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/SBA1",
-    "office": "Room 237, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 237, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Shirley_Arriaga",
+    "ballotpediaUrl": "https://ballotpedia.org/Shirley_Arriaga"
   },
   {
     "id": "ocd-person/f43366ee-ff27-43ac-aa55-629be715b4a9",
@@ -2474,7 +2874,9 @@
     "phone": "617-722-2396",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/S_C1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/S_C1",
-    "office": "Room 136, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 136, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Simon_Cataldo",
+    "ballotpediaUrl": "https://ballotpedia.org/Simon_Cataldo"
   },
   {
     "id": "ocd-person/f20dd448-92ef-458c-bf92-90e7e766072a",
@@ -2488,7 +2890,9 @@
     "phone": "617-722-2230",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/SCO1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/SCO1",
-    "office": "Room 167, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 167, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Steven_Owens",
+    "ballotpediaUrl": "https://ballotpedia.org/Steven_Owens_(Massachusetts)"
   },
   {
     "id": "ocd-person/485e001e-95e9-4b79-9226-cf028a307138",
@@ -2502,7 +2906,9 @@
     "phone": "617-722-2488",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/SGX1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/SGX1",
-    "office": "Room 542, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 542, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Steven_Xiarhos",
+    "ballotpediaUrl": "https://ballotpedia.org/Steven_Xiarhos"
   },
   {
     "id": "ocd-person/0fbe25ff-563e-4563-8523-f151bd839e3c",
@@ -2516,7 +2922,11 @@
     "phone": "617-722-2060",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Steven_Ouellette_20241027_114832.jpeg",
     "website": "https://malegislature.gov/Legislators/Profile/SJO1",
-    "office": "Room 33, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 33, State House 24 Beacon St., Boston, MA 02133",
+    "districtOffice": "MA",
+    "districtPhone": "508-677-0905",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Steven_Ouellette",
+    "ballotpediaUrl": "https://ballotpedia.org/Steven_Ouellette"
   },
   {
     "id": "ocd-person/54487f49-5377-4c41-bd97-60b748cc240a",
@@ -2530,7 +2940,9 @@
     "phone": "617-722-2305",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/SSH1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/SSH1",
-    "office": "Room 237, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 237, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Steve_Howitt",
+    "ballotpediaUrl": "https://ballotpedia.org/Steven_Howitt"
   },
   {
     "id": "ocd-person/209427dd-91f0-45d6-ae8c-05a51872c10c",
@@ -2544,7 +2956,9 @@
     "phone": "617-722-2877",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/S_G2.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/S_G2",
-    "office": "Room 174, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 174, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Steven_Ultrino",
+    "ballotpediaUrl": "https://ballotpedia.org/Steven_Ultrino"
   },
   {
     "id": "ocd-person/76b07f35-1876-4259-9c0a-bdf595541c39",
@@ -2558,7 +2972,11 @@
     "phone": "617-722-2090",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/SLG1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/SLG1",
-    "office": "Room 540, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 540, State House 24 Beacon St., Boston, MA 02133",
+    "districtOffice": "352 Main St., Athol, MA 01331",
+    "districtPhone": "978-895-9606",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Susannah_Whipps_Lee",
+    "ballotpediaUrl": "https://ballotpedia.org/Susannah_Whipps"
   },
   {
     "id": "ocd-person/6b420d2a-f12d-40ca-a13f-04cf9061a66b",
@@ -2572,7 +2990,9 @@
     "phone": "617-722-2370",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/T_C1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/T_C1",
-    "office": "Room 42, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 42, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tackey_Chan",
+    "ballotpediaUrl": "https://ballotpedia.org/Tackey_Chan"
   },
   {
     "id": "ocd-person/e5b9b2d0-1626-4151-93cf-73c16035a584",
@@ -2586,7 +3006,11 @@
     "phone": "617-722-2080",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/TTH1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/TTH1",
-    "office": "Room 26, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 26, State House 24 Beacon St., Boston, MA 02133",
+    "districtOffice": "MA",
+    "districtPhone": "978-226-8964",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tara_Hong",
+    "ballotpediaUrl": "https://ballotpedia.org/Tara_Hong"
   },
   {
     "id": "ocd-person/2becbe4e-5b5e-4b42-be87-b4abf57550c7",
@@ -2600,7 +3024,9 @@
     "phone": "617-722-2810",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/TMS1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/TMS1",
-    "office": "Room 167, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 167, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Thomas_M._Stanley",
+    "ballotpediaUrl": "https://ballotpedia.org/Thomas_Stanley"
   },
   {
     "id": "ocd-person/ebfdda03-c083-4a13-b3a4-f87f6e24adac",
@@ -2614,7 +3040,9 @@
     "phone": "617-722-2400",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/TWM1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/TWM1",
-    "office": "Room 134, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 134, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Thomas_Moakley",
+    "ballotpediaUrl": "https://ballotpedia.org/Thomas_Moakley"
   },
   {
     "id": "ocd-person/5f796cb3-08ae-40c4-8c11-a2758f317cc2",
@@ -2628,7 +3056,9 @@
     "phone": "617-722-2410",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/TJW1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/TJW1",
-    "office": "Room 20, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 20, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Thomas_Walsh_(Massachusetts_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Thomas_Walsh_(Massachusetts)"
   },
   {
     "id": "ocd-person/d8895862-a95b-4982-bb2e-31c8ffa4bf57",
@@ -2642,7 +3072,9 @@
     "phone": "617-722-2100",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/TMS2.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/TMS2",
-    "office": "Room 124, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 124, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Todd_Smola",
+    "ballotpediaUrl": "https://ballotpedia.org/Todd_Smola"
   },
   {
     "id": "ocd-person/7a234dbf-2f9f-466f-8db1-44ac0f3975a8",
@@ -2656,7 +3088,9 @@
     "phone": "617-722-2013",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/T_V1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/T_V1",
-    "office": "Room 472, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 472, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tommy_Vitolo",
+    "ballotpediaUrl": "https://ballotpedia.org/Tommy_Vitolo"
   },
   {
     "id": "ocd-person/1e7b8d51-56fa-4faf-93e6-9b485812ddf9",
@@ -2670,7 +3104,9 @@
     "phone": "617-722-2370",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/TTN1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/TTN1",
-    "office": "Room 36, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 36, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tram_Nguyen",
+    "ballotpediaUrl": "https://ballotpedia.org/Tram_Nguyen"
   },
   {
     "id": "ocd-person/1f444dfe-d3b3-4852-ab10-0682206d773d",
@@ -2684,21 +3120,27 @@
     "phone": "617-722-2676",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/TFB1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/TFB1",
-    "office": "Room 274, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 274, State House 24 Beacon St., Boston, MA 02133",
+    "districtOffice": "431 North St., Pittsfield, MA 01201",
+    "districtPhone": "413-442-4300",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tricia_Farley-Bouvier",
+    "ballotpediaUrl": "https://ballotpedia.org/Tricia_Farley-Bouvier"
   },
   {
     "id": "ocd-person/053aae1e-ae76-41b0-912c-39f27f3f6d6f",
     "name": "Vanna Howard",
     "firstName": "Vanna",
     "lastName": "Howard",
-    "chamber": "lower",
-    "district": "17th Middlesex",
+    "chamber": "upper",
+    "district": "First Middlesex",
     "party": "Democratic",
-    "email": "vanna.howard@mahouse.gov",
-    "phone": "617-722-2060",
+    "email": "vanna.howard@masenate.gov",
+    "phone": "617-722-1630",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/V_H1.jpg",
-    "website": "https://malegislature.gov/Legislators/Profile/V_H1",
-    "office": "Room 33, State House 24 Beacon St., Boston, MA 02133"
+    "website": "https://malegislature.gov/Legislators/Profile/V_H0",
+    "office": "Room 109-E, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Vanna_Howard",
+    "ballotpediaUrl": "https://ballotpedia.org/Vanna_Howard"
   },
   {
     "id": "ocd-person/04997a33-67a9-4535-95d2-c9a4c260519d",
@@ -2712,7 +3154,9 @@
     "phone": "617-722-2692",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/WCG1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/WCG1",
-    "office": "Room 166, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 166, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/William_C._Galvin",
+    "ballotpediaUrl": "https://ballotpedia.org/William_Galvin_(House_of_Representatives)"
   },
   {
     "id": "ocd-person/1b7d1710-da71-46cd-9ee3-fc891556f3a9",
@@ -2726,7 +3170,9 @@
     "phone": "617-722-1643",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/WJD1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/WJD0",
-    "office": "Room 507, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 507, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/William_Driscoll",
+    "ballotpediaUrl": "https://ballotpedia.org/William_J._Driscoll,_Jr."
   },
   {
     "id": "ocd-person/9f0c5984-accf-45a3-8922-07aa7ade0030",
@@ -2740,7 +3186,9 @@
     "phone": "617-722-2020",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/WFM1.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/WFM1",
-    "office": "Room 527, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 527, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bill_MacGregor_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Bill_MacGregor"
   },
   {
     "id": "ocd-person/94929da6-2219-4a44-99c3-d6561eead9f5",
@@ -2754,6 +3202,8 @@
     "phone": "617-722-1280",
     "photoUrl": "https://malegislature.gov/Legislators/Profile/170/WNB0.jpg",
     "website": "https://malegislature.gov/Legislators/Profile/WNB0",
-    "office": "Room 319, State House 24 Beacon St., Boston, MA 02133"
+    "office": "Room 319, State House 24 Beacon St., Boston, MA 02133",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Will_Brownsberger",
+    "ballotpediaUrl": "https://ballotpedia.org/William_Brownsberger"
   }
 ]

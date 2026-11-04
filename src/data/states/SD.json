@@ -11,7 +11,9 @@
     "phone": "605-773-3851",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Aaron-Aylward.PNG",
     "website": "https://sdlegislature.gov/Legislators/Profile/3786/Detail",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Aaron_Aylward",
+    "ballotpediaUrl": "https://ballotpedia.org/Aaron_Aylward"
   },
   {
     "id": "ocd-person/02f0edff-2879-4fbb-9b23-796358690d07",
@@ -25,7 +27,9 @@
     "phone": "605-773-3851",
     "photoUrl": "https://sdlegislature.gov/inc/img/Legislators/NOVSTRUP_2017.jpg",
     "website": "https://sdlegislature.gov/Legislators/Legislators/MemberDetail.aspx?Member=1456&Session=2018s",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Al_Novstrup",
+    "ballotpediaUrl": "https://ballotpedia.org/Al_Novstrup"
   },
   {
     "id": "ocd-person/f9dd87da-ac23-450d-9574-1efa95ef0d81",
@@ -39,7 +43,9 @@
     "phone": "605-773-3851",
     "photoUrl": "https://siouxfallschamber.com/wp-content/uploads/sites/3/2022/11/District-12-Amber-Arlint.webp",
     "website": "https://sdlegislature.gov/Legislators/Profile/4456/Detail",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Amber_Arlint",
+    "ballotpediaUrl": "https://ballotpedia.org/Amber_Arlint"
   },
   {
     "id": "ocd-person/ae4b500c-4a37-43ed-a3a2-dbb08071e265",
@@ -53,7 +59,9 @@
     "phone": "605-773-3821",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/ahulse.jpg",
     "website": "https://sdlegislature.gov/Legislators/Profile/4701/Detail",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Amber_Hulse",
+    "ballotpediaUrl": "https://ballotpedia.org/Amber_Hulse"
   },
   {
     "id": "ocd-person/169a8374-daaa-4884-9add-d1719eabd966",
@@ -67,7 +75,9 @@
     "phone": "605-773-3821",
     "photoUrl": "https://sdlegislature.gov/inc/img/Legislators/BEAL_2017.jpg",
     "website": "https://sdlegislature.gov/Legislators/Legislators/MemberDetail.aspx?Member=1518&Session=2018s",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Arch_Beal",
+    "ballotpediaUrl": "https://ballotpedia.org/Arch_Beal"
   },
   {
     "id": "ocd-person/3b05e975-1b79-42ec-94e8-7a258142dd46",
@@ -78,8 +88,12 @@
     "district": "9",
     "party": "Republican",
     "email": "bethany.soye@sdlegislature.gov",
+    "phone": "605-773-3851",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/_Bethany-Soye_.PNG",
-    "website": "https://sdlegislature.gov/Legislators/Profile/3793/Detail"
+    "website": "https://sdlegislature.gov/Legislators/Profile/3793/Detail",
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bethany_Soye",
+    "ballotpediaUrl": "https://ballotpedia.org/Bethany_Soye"
   },
   {
     "id": "ocd-person/1e3d4ebf-2669-4b20-acd4-e339d24f73c3",
@@ -93,7 +107,9 @@
     "phone": "605-773-3851",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Bobbi_Andera_20250303_091250.jpg",
     "website": "https://sdlegislature.gov/Legislators/Profile/4715/Detail",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bobbi_Andera",
+    "ballotpediaUrl": "https://ballotpedia.org/Bobbi_Andera"
   },
   {
     "id": "ocd-person/713ca571-304b-48f0-a853-b49fa859134e",
@@ -107,7 +123,9 @@
     "phone": "605-773-3851",
     "photoUrl": "https://gray-ksfy-prod.cdn.arcpublishing.com/resizer/3wAp2PAmslSttABhdOPnmasLDYI=/980x0/smart/filters:quality(85)/cloudfront-us-east-1.images.arcpublishing.com/gray/Y4ZM7RT3TRB2ZBPHKDXEI5HL6E.jpg",
     "website": "https://sdlegislature.gov/Legislators/Profile/4444/Detail",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Brandei_Schaefbauer",
+    "ballotpediaUrl": "https://ballotpedia.org/Brandei_Schaefbauer"
   },
   {
     "id": "ocd-person/a5c12215-2e38-4d1f-a8b0-cc6ce0e859ca",
@@ -121,7 +139,9 @@
     "phone": "605-773-3821",
     "photoUrl": "https://governor.sd.gov/doc/IMG_4416-scaled.jpg",
     "website": "https://sdlegislature.gov/Legislators/Profile/4837/Detail",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Brandon_Wipf",
+    "ballotpediaUrl": "https://ballotpedia.org/Brandon_Wipf"
   },
   {
     "id": "ocd-person/d9d8a84f-96df-4dbf-b638-d63e216166d4",
@@ -135,7 +155,9 @@
     "phone": "605-773-3851",
     "photoUrl": "https://img1.wsimg.com/isteam/ip/27b7dcd4-adbb-4603-9579-073f083153b8/Brian_BriCowanPhotography-11.jpg/:/cr=t:0%25,l:0%25,w:100%25,h:100%25/rs=w:400,cg:true",
     "website": "https://sdlegislature.gov/Legislators/Profile/4447/Detail",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Brian_Mulder",
+    "ballotpediaUrl": "https://ballotpedia.org/Brian_Mulder"
   },
   {
     "id": "ocd-person/5a5c92d7-0b2c-418e-a0ce-8ba0a6e4790a",
@@ -149,7 +171,9 @@
     "phone": "605-773-3821",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Carl_Perry_20230524_083211.jpeg",
     "website": "https://sdlegislature.gov/Legislators/Legislators/MemberDetail.aspx?Member=1612&Session=2019",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Carl_E._Perry",
+    "ballotpediaUrl": "https://ballotpedia.org/Carl_Perry"
   },
   {
     "id": "ocd-person/6dabb48d-f267-4fb3-9e8c-0a3c182d44d3",
@@ -163,7 +187,9 @@
     "phone": "605-773-3821",
     "photoUrl": "https://sdlegislature.gov/inc/img/Legislators/crabtree_2020.jpg",
     "website": "https://sdlegislature.gov/Legislators/Profile/1881/Detail",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Casey_Crabtree",
+    "ballotpediaUrl": "https://ballotpedia.org/Casey_Crabtree"
   },
   {
     "id": "ocd-person/85616a5d-63b7-4794-8eb0-63ab7b121761",
@@ -177,7 +203,9 @@
     "phone": "605-773-3821",
     "photoUrl": "https://sdlegislature.gov/inc/img/Legislators/Karr_2017.jpg",
     "website": "https://sdlegislature.gov/Legislators/Legislators/MemberDetail.aspx?Member=1549&Session=2018s",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Chris_Karr",
+    "ballotpediaUrl": "https://ballotpedia.org/Chris_Karr"
   },
   {
     "id": "ocd-person/87c4b9d3-1e14-4c64-af35-e9a95a1f4bf3",
@@ -191,7 +219,9 @@
     "phone": "605-773-3851",
     "photoUrl": "https://lawmakerdocuments.blob.core.usgovcloudapi.net/photos/kassin,%20chris%20rep-0599%20rt.webp",
     "website": "https://sdlegislature.gov/Legislators/Profile/4462/Detail",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Chris_Kassin",
+    "ballotpediaUrl": "https://ballotpedia.org/Chris_Kassin"
   },
   {
     "id": "ocd-person/132b0654-ebb2-4b6b-81b3-d39b41110d45",
@@ -205,7 +235,9 @@
     "phone": "605-773-3851",
     "photoUrl": "https://cloudfront-us-east-1.images.arcpublishing.com/gray/JN4WUIDOKVFC5NL33TGXE5YFOM.JPG",
     "website": "https://sdlegislature.gov/Legislators/Profile/4451/Detail",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Curt_Massie",
+    "ballotpediaUrl": "https://ballotpedia.org/Curt_Massie"
   },
   {
     "id": "ocd-person/6dce0110-114c-467d-adb2-50e0309a8079",
@@ -219,7 +251,9 @@
     "phone": "605-773-3821",
     "photoUrl": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1b0cc545-be4d-4e1d-a25e-504b7057b344.heic",
     "website": "https://sdlegislature.gov/Legislators/Profile/4702/Detail",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Curt_Voight",
+    "ballotpediaUrl": "https://ballotpedia.org/Curt_Voight"
   },
   {
     "id": "ocd-person/4d2f522f-336a-4794-8b89-48d65d250f6e",
@@ -233,7 +267,9 @@
     "phone": "605-773-3851",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/DavidKull.png",
     "website": "https://sdlegislature.gov/Legislators/Profile/4438/Detail",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/David_Kull",
+    "ballotpediaUrl": "https://ballotpedia.org/David_Kull"
   },
   {
     "id": "ocd-person/ce0a6958-a2d1-4e9e-ab06-943bc84a271a",
@@ -247,7 +283,9 @@
     "phone": "605-773-3851",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/DrewPeterson.png",
     "website": "https://sdlegislature.gov/Legislators/Profile/4440/Detail",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Drew_Peterson_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Drew_Peterson"
   },
   {
     "id": "ocd-person/d458ae29-45a8-4406-a5c0-c256ec743172",
@@ -261,7 +299,9 @@
     "phone": "605-773-3851",
     "photoUrl": "https://assets.civicengine.com/uploads/candidate/headshot/815272/815272.jpg",
     "website": "https://sdlegislature.gov/Legislators/Profile/4714/Detail",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dylan_C._Jordan",
+    "ballotpediaUrl": "https://ballotpedia.org/Dylan_Jordan"
   },
   {
     "id": "ocd-person/589ced64-f78f-447d-ab9a-8ead6965c61b",
@@ -275,7 +315,9 @@
     "phone": "605-773-3851",
     "photoUrl": "https://www.sfsimplified.com/content/images/2022/09/Eric-Emery.jpg",
     "website": "https://sdlegislature.gov/Legislators/Profile/4471/Detail",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Eric_Emery",
+    "ballotpediaUrl": "https://ballotpedia.org/Eric_Emery"
   },
   {
     "id": "ocd-person/c123398a-d235-488f-ba5f-cc71983a66de",
@@ -289,7 +331,9 @@
     "phone": "605-773-3851",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/ErikMuckey.png",
     "website": "https://sdlegislature.gov/Legislators/Profile/4719/Detail",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Erik_Muckey",
+    "ballotpediaUrl": "https://ballotpedia.org/Erik_Muckey"
   },
   {
     "id": "ocd-person/85bda678-d416-4caa-b439-8a579288f2ec",
@@ -303,7 +347,9 @@
     "phone": "605-773-3851",
     "photoUrl": "https://sdlegislature.gov/inc/img/Legislators/Healy_2019.jpg",
     "website": "https://sdlegislature.gov/Legislators/Legislators/MemberDetail.aspx?Member=1624&Session=2019",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Erin_Healy",
+    "ballotpediaUrl": "https://ballotpedia.org/Erin_Healy"
   },
   {
     "id": "ocd-person/dda7bd46-d880-453e-b830-269e79425a9a",
@@ -317,7 +363,9 @@
     "phone": "605-773-3821",
     "photoUrl": "https://sdlegislature.gov/inc/img/Legislators/OTTEN_2017.jpg",
     "website": "https://sdlegislature.gov/Legislators/Legislators/MemberDetail.aspx?Member=1479&Session=2018s",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ernie_Otten",
+    "ballotpediaUrl": "https://ballotpedia.org/Ernie_Otten_Jr."
   },
   {
     "id": "ocd-person/4d53d676-05f1-409a-8ef8-762d97143443",
@@ -328,8 +376,12 @@
     "district": "5",
     "party": "Republican",
     "email": "glen.vilhauer@sdlegislature.gov",
+    "phone": "605-773-3821",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Glen_Vilhauer.jpg",
-    "website": "https://sdlegislature.gov/Legislators/Profile/4706/Detail"
+    "website": "https://sdlegislature.gov/Legislators/Profile/4706/Detail",
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Glen_Vilhauer",
+    "ballotpediaUrl": "https://ballotpedia.org/Glen_Vilhauer"
   },
   {
     "id": "ocd-person/4a052dc7-31aa-4a24-b72d-7e922ce7bf8b",
@@ -340,8 +392,12 @@
     "district": "35",
     "party": "Republican",
     "email": "greg.blanc@sdlegislature.gov",
+    "phone": "605-773-3821",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/gblanc2.png",
-    "website": "https://sdlegislature.gov/Legislators/Profile/4709/Detail"
+    "website": "https://sdlegislature.gov/Legislators/Profile/4709/Detail",
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Greg_Blanc",
+    "ballotpediaUrl": "https://ballotpedia.org/Greg_Blanc"
   },
   {
     "id": "ocd-person/fe9a44c7-7241-4395-98e3-8445b1bc2d54",
@@ -355,7 +411,9 @@
     "phone": "605-773-3851",
     "photoUrl": "https://sdlegislature.gov/inc/img/Legislators/Jamison_2017.jpg",
     "website": "https://sdlegislature.gov/Legislators/Legislators/MemberDetail.aspx?Member=1536&Session=2018s",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Greg_Jamison",
+    "ballotpediaUrl": "https://ballotpedia.org/Greg_Jamison"
   },
   {
     "id": "ocd-person/229c5337-951c-41d2-9e76-dc74878bcf89",
@@ -369,7 +427,9 @@
     "phone": "605-773-3851",
     "photoUrl": "https://substackcdn.com/image/fetch/w_1200,h_600,c_fill,f_jpg,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F110b1f43-2918-4e73-928e-0b9834191446_750x517.webp",
     "website": "https://sdlegislature.gov/Legislators/Profile/4721/Detail",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Heather_Baxter",
+    "ballotpediaUrl": "https://ballotpedia.org/Heather_Baxter"
   },
   {
     "id": "ocd-person/950b0ec2-1c69-4c81-ab1d-c61464519e26",
@@ -380,8 +440,12 @@
     "district": "25",
     "party": "Republican",
     "email": "les.heinemann@sdlegislature.gov",
+    "phone": "605-773-3851",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Leslie_Heinemann.jpg",
-    "website": "https://legis.sd.gov/Legislators/Legislators/MemberDetail.aspx?Member=1019&Session=2016"
+    "website": "https://sdlegislature.gov/#/Legislators/Profile/1250/Detail",
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Leslie_Heinemann",
+    "ballotpediaUrl": "https://ballotpedia.org/Leslie_Heinemann"
   },
   {
     "id": "ocd-person/e0548110-ef50-435f-8c99-fbd53a06d8ff",
@@ -395,7 +459,9 @@
     "phone": "605-773-3821",
     "photoUrl": "http://sdlegislature.gov/inc/img/Legislators/Duhamel_2020.jpg",
     "website": "https://sdlegislature.gov/Legislators/Profile/1785/Detail",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Helene_Duhamel",
+    "ballotpediaUrl": "https://ballotpedia.org/Helene_Duhamel"
   },
   {
     "id": "ocd-person/fd692c4a-e6c1-45c1-b970-1fcdbe732cfe",
@@ -409,7 +475,9 @@
     "phone": "605-773-3851",
     "photoUrl": "https://sdlegislature.gov/inc/img/Legislators/Kolbeck_2017.jpg",
     "website": "https://sdlegislature.gov/Legislators/Legislators/MemberDetail.aspx?Member=1538&Session=2018s",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jack_Kolbeck",
+    "ballotpediaUrl": "https://ballotpedia.org/Jack_Kolbeck"
   },
   {
     "id": "ocd-person/bea6d77a-6773-463b-946c-b23b27f5f4c0",
@@ -423,7 +491,9 @@
     "phone": "605-773-3821",
     "photoUrl": "https://sdlegislature.gov/inc/img/Legislators/Smith_jamie_2019.jpg",
     "website": "https://sdlegislature.gov/Legislators/Legislators/MemberDetail.aspx?Member=1539&Session=2018s",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jamie_Smith_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Jamie_Smith_(South_Dakota)"
   },
   {
     "id": "ocd-person/3900be26-2367-48af-8083-6ec4b4f18cf1",
@@ -437,7 +507,9 @@
     "phone": "605-773-3851",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Jana_Hunt_2025.jpg",
     "website": "https://sdlegislature.gov/Legislators/Profile/4718/Detail",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jana_Hunt",
+    "ballotpediaUrl": "https://ballotpedia.org/Jana_Hunt"
   },
   {
     "id": "ocd-person/94fa8c46-b27a-452e-85b2-27baca009678",
@@ -451,7 +523,9 @@
     "phone": "605-773-3851",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Jeff_Bathke_20240808_100312fgd.jpg",
     "website": "https://sdlegislature.gov/Legislators/Profile/4688/Detail",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jeff_Bathke",
+    "ballotpediaUrl": "https://ballotpedia.org/Jeff_Bathke"
   },
   {
     "id": "ocd-person/7d5691be-08ff-4684-978d-81aaa8bdd99b",
@@ -465,7 +539,9 @@
     "phone": "605-773-3851",
     "photoUrl": "https://gray-ksfy-prod.cdn.arcpublishing.com/resizer/uVfdl5DqYxBK5BAgVB1sNda9-dw=/980x0/smart/filters:quality(85)/cloudfront-us-east-1.images.arcpublishing.com/gray/XEYMZWQPXBGYFJAKREMXYXNXCI.png",
     "website": "https://sdlegislature.gov/Legislators/Profile/4441/Detail",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jessica_Bahmuller",
+    "ballotpediaUrl": "https://ballotpedia.org/Jessica_Bahmuller"
   },
   {
     "id": "ocd-person/98281de1-c8bc-4c3a-9a5b-6a45c96c6087",
@@ -476,8 +552,11 @@
     "district": "21",
     "party": "Republican",
     "email": "jim.halverson@sdlegislature.gov",
+    "phone": "605-773-3851",
     "photoUrl": "https://halversonforhouse.com/wp-content/uploads/2024/04/Jim-Halverson-for-House.jpg",
-    "website": "https://sdlegislature.gov/Legislators/Profile/4712/Detail"
+    "website": "https://sdlegislature.gov/Legislators/Profile/4712/Detail",
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "ballotpediaUrl": "https://ballotpedia.org/Jim_Halverson_(South_Dakota)"
   },
   {
     "id": "ocd-person/c8ca77f5-97e7-4604-aec3-fe4ee5e7dc31",
@@ -491,7 +570,9 @@
     "phone": "605-773-3821",
     "photoUrl": "https://jimmehlhaff.com/wp-content/uploads/2022/03/Jim-High-Res-819x1024.jpeg",
     "website": "https://sdlegislature.gov/Legislators/Profile/4460/Detail",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jim_Mehlhaff",
+    "ballotpediaUrl": "https://ballotpedia.org/Jim_Mehlhaff"
   },
   {
     "id": "ocd-person/2d13f154-7e05-462c-b8d9-da5c5556d8b9",
@@ -505,7 +586,9 @@
     "phone": "605-773-3821",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/JohnCarley3.png",
     "website": "https://sdlegislature.gov/Legislators/Profile/4692/Detail",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_Carley",
+    "ballotpediaUrl": "https://ballotpedia.org/John_Carley"
   },
   {
     "id": "ocd-person/123a6b73-d0a1-4263-96fd-a65373159918",
@@ -516,8 +599,12 @@
     "district": "13",
     "party": "Republican",
     "email": "john.hughes@sdlegislature.gov",
+    "phone": "605-773-3851",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/John_Hughes_2025.jpg",
-    "website": "https://sdlegislature.gov/Legislators/Profile/4690/Detail"
+    "website": "https://sdlegislature.gov/Legislators/Profile/4690/Detail",
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_Hughes_(South_Dakota_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/John_Hughes_(South_Dakota)"
   },
   {
     "id": "ocd-person/de36e5d9-b079-4778-bd29-2d7a161488f6",
@@ -531,7 +618,9 @@
     "phone": "605-773-3851",
     "photoUrl": "https://southdakotasearchlight.com/wp-content/uploads/2025/09/Shubeck-197x300.jpg",
     "website": "https://sdlegislature.gov/Legislators/Profile/4947/Detail",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_Shubeck",
+    "ballotpediaUrl": "https://ballotpedia.org/John_Shubeck"
   },
   {
     "id": "ocd-person/fe5950b8-b6e8-4a95-87b5-fd569f43b286",
@@ -545,7 +634,9 @@
     "phone": "605-773-3851",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/JohnSjaarda.png",
     "website": "https://sdlegislature.gov/Legislators/Profile/4439/Detail",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_Sjaarda",
+    "ballotpediaUrl": "https://ballotpedia.org/John_Sjaarda"
   },
   {
     "id": "ocd-person/912b0c53-5674-42b0-8f22-8ccd01c3264c",
@@ -559,7 +650,9 @@
     "phone": "605-773-3851",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Jon_Hansen.jpg",
     "website": "https://sdlegislature.gov/Legislators/Legislators/MemberDetail.aspx?Member=1635&Session=2019",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jon_Hansen",
+    "ballotpediaUrl": "https://ballotpedia.org/Jon_Hansen"
   },
   {
     "id": "ocd-person/6ca3c0b7-e0d2-4d68-8b33-725c378ff130",
@@ -573,7 +666,9 @@
     "phone": "605-773-3851",
     "photoUrl": "https://static.wixstatic.com/media/3f6c9b_7103450fc62d4fb8acfceb568e4a1545~mv2.jpg/v1/fill/w_705,h_802,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/3f6c9b_7103450fc62d4fb8acfceb568e4a1545~mv2.jpg",
     "website": "https://sdlegislature.gov/Legislators/Profile/4705/Detail",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Josephine_Garcia",
+    "ballotpediaUrl": "https://ballotpedia.org/Josephine_Garcia_(South_Dakota)"
   },
   {
     "id": "ocd-person/3a454e94-ca27-4e34-b603-c2768c047bc3",
@@ -587,7 +682,9 @@
     "phone": "605-773-3821",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/jhohn.jpg",
     "website": "https://sdlegislature.gov/Legislators/Profile/4723/Detail",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Joy_Hohn",
+    "ballotpediaUrl": "https://ballotpedia.org/Joy_Hohn"
   },
   {
     "id": "ocd-person/8fabf252-4409-4c1f-b754-ab54759ea3ce",
@@ -601,7 +698,9 @@
     "phone": "605-773-3851",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/JulieAuch.png",
     "website": "https://sdlegislature.gov/Legislators/Profile/4445/Detail",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Julie_Auch",
+    "ballotpediaUrl": "https://ballotpedia.org/Julie_Auch"
   },
   {
     "id": "ocd-person/892b6289-0bd8-441d-94bf-30e6f1cfce49",
@@ -612,8 +711,12 @@
     "district": "15",
     "party": "Democratic",
     "email": "kadyn.wittman@sdlegislature.gov",
+    "phone": "605-773-3851",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/KadynWittman.png",
-    "website": "https://sdlegislature.gov/Legislators/Profile/4461/Detail"
+    "website": "https://sdlegislature.gov/Legislators/Profile/4461/Detail",
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kadyn_Wittman",
+    "ballotpediaUrl": "https://ballotpedia.org/Kadyn_Wittman"
   },
   {
     "id": "ocd-person/0baaa53b-6468-4de4-98ce-bf1e218f8d38",
@@ -627,7 +730,9 @@
     "phone": "605-773-3851",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Kaley_Nolz_2025.jpg",
     "website": "https://sdlegislature.gov/Legislators/Profile/4689/Detail",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kaley_Nolz",
+    "ballotpediaUrl": "https://ballotpedia.org/Kaley_Nolz"
   },
   {
     "id": "ocd-person/0c864308-04a8-4b22-af5b-5d718046b99f",
@@ -641,7 +746,9 @@
     "phone": "605-773-3851",
     "photoUrl": "https://gray-ksfy-prod.cdn.arcpublishing.com/resizer/fX4I5GWdwjL88Z9n8a1Dah-NctM=/980x0/smart/filters:quality(85)/cloudfront-us-east-1.images.arcpublishing.com/gray/72HOS665ZZDWHPEMYA6BWMS6BA.jpg",
     "website": "https://sdlegislature.gov/Legislators/Profile/4443/Detail",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Karla_Lems",
+    "ballotpediaUrl": "https://ballotpedia.org/Karla_Lems"
   },
   {
     "id": "ocd-person/f2a2616a-c0d4-45d2-8c52-2c8d7dac5e26",
@@ -652,8 +759,12 @@
     "district": "29",
     "party": "Republican",
     "email": "kathy.rice@sdlegislature.gov",
+    "phone": "605-773-3851",
     "photoUrl": "https://gray-kota-prod.gtv-cdn.com/resizer/v2/J7PTGE337BGX3PYCKMQSGVCMWI.jpg?auth=219de6028a2c39d4fe6c781ce1d7fbf5c6d380c1863d80fe91b11b9e80c54ea1&width=980&height=1030&smart=true",
-    "website": "https://sdlegislature.gov/Legislators/Profile/4711/Detail"
+    "website": "https://sdlegislature.gov/Legislators/Profile/4711/Detail",
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kathy_Rice",
+    "ballotpediaUrl": "https://ballotpedia.org/Kathy_Rice"
   },
   {
     "id": "ocd-person/8125bf75-9ccc-41c4-b76b-3e84dc083c43",
@@ -667,7 +778,9 @@
     "phone": "605-773-3851",
     "photoUrl": "https://static.votesmart.org/static/canphoto/216142.jpg",
     "website": "https://sdlegislature.gov/Legislators/Profile/4713/Detail",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kent_Roe",
+    "ballotpediaUrl": "https://ballotpedia.org/Kent_Roe"
   },
   {
     "id": "ocd-person/708ee344-687f-499a-9f52-48cb79686167",
@@ -681,7 +794,9 @@
     "phone": "605-773-3851",
     "photoUrl": "https://images.squarespace-cdn.com/content/v1/6633129388483f6e2a0ea63e/4fa432f3-e858-4d44-a401-ddc328a1f893/29d976e1-b6bb-4539-807c-c4e93f10ee4f+%281%29.jpg?format=2500w",
     "website": "https://sdlegislature.gov/Legislators/Profile/4691/Detail",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Keri_Weems",
+    "ballotpediaUrl": "https://ballotpedia.org/Keri_Weems"
   },
   {
     "id": "ocd-person/1de26fd7-bcde-486b-b290-afdee6756c7c",
@@ -695,7 +810,9 @@
     "phone": "605-773-3821",
     "photoUrl": "https://sdlegislature.gov/inc/img/Legislators/Jensen_2017.jpg",
     "website": "https://sdlegislature.gov/Legislators/Legislators/MemberDetail.aspx?Member=1427&Session=2019",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kevin_D._Jensen",
+    "ballotpediaUrl": "https://ballotpedia.org/Kevin_Jensen_(South_Dakota)"
   },
   {
     "id": "ocd-person/e94f9d65-3b95-40cb-b3c2-74126023b55f",
@@ -707,9 +824,11 @@
     "party": "Republican",
     "email": "kevin.vandiepen@sdlegislature.gov",
     "phone": "605-773-3851",
-    "photoUrl": "https://www.plainsman.com/uploads/original/20240109-142336-0a240151fba44bcc2fecc73323c1cfdd.jpg",
+    "photoUrl": "https://lawmakerdocuments.blob.core.usgovcloudapi.net/photos/van%20diepen,%20kevin%20rep-4504%20rtjs.jpg",
     "website": "https://sdlegislature.gov/Legislators/Profile/4699/Detail",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kevin_Van_Diepen",
+    "ballotpediaUrl": "https://ballotpedia.org/Kevin_Van_Diepen"
   },
   {
     "id": "ocd-person/bd74c8bf-cc11-4bfc-a721-269a01a6ccb1",
@@ -723,7 +842,9 @@
     "phone": "605-773-3821",
     "photoUrl": "http://sdlegislature.gov/inc/img/Legislators/Schoenfish_2019.jpg",
     "website": "https://sdlegislature.gov/Legislators/Profile/1851/Detail",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kyle_Schoenfish",
+    "ballotpediaUrl": "https://ballotpedia.org/Kyle_Schoenfish"
   },
   {
     "id": "ocd-person/7eefd193-a618-4a9b-b416-cd495239ead6",
@@ -734,8 +855,12 @@
     "district": "22",
     "party": "Republican",
     "email": "lana.greenfield@sdlegislature.gov",
+    "phone": "605-773-3851",
     "photoUrl": "https://sdlegislature.gov/inc/img/Legislators/GreenfieldLana_2017.jpg",
-    "website": "https://sdlegislature.gov/Legislators/Legislators/MemberDetail.aspx?Member=1509&Session=2018s"
+    "website": "https://sdlegislature.gov/Legislators/Legislators/MemberDetail.aspx?Member=1509&Session=2018s",
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lana_Greenfield",
+    "ballotpediaUrl": "https://ballotpedia.org/Lana_Greenfield"
   },
   {
     "id": "ocd-person/5e23171d-49a3-471f-a6f8-24b057f2d836",
@@ -749,7 +874,9 @@
     "phone": "605-773-3821",
     "photoUrl": "https://sdlegislature.gov/inc/img/Legislators/ZIKMUND_2017.jpg",
     "website": "https://sdlegislature.gov/Legislators/Profile/1870/Detail",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Larry_Zikmund",
+    "ballotpediaUrl": "https://ballotpedia.org/Larry_P._Zikmund"
   },
   {
     "id": "ocd-person/a5c8c5c0-c02e-49cf-834b-f8e9d118935a",
@@ -763,7 +890,9 @@
     "phone": "605-773-3821",
     "photoUrl": "https://cdn.socast.io/6942/sites/13/2024/06/04233345/Lauren-Nelson.jpg",
     "website": "https://sdlegislature.gov/Legislators/Profile/4695/Detail",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lauren_Nelson_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Lauren_Nelson_(South_Dakota)"
   },
   {
     "id": "ocd-person/81df3498-7677-4749-9753-c1ae9799e444",
@@ -777,7 +906,9 @@
     "phone": "605-773-3821",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Liz_Larson__.jpg",
     "website": "https://sdlegislature.gov/Legislators/Profile/4466/Detail",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Liz_Larson",
+    "ballotpediaUrl": "https://ballotpedia.org/Elizabeth_Larson_(South_Dakota)"
   },
   {
     "id": "ocd-person/2b581087-9814-4f0d-80e5-b29a6e7aee67",
@@ -791,7 +922,9 @@
     "phone": "605-773-3851",
     "photoUrl": "https://sdlegislature.gov/inc/img/Legislators/MAY_2017.jpg",
     "website": "https://sdlegislature.gov/Legislators/Profile/3806/Detail",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Liz_Marty_May",
+    "ballotpediaUrl": "https://ballotpedia.org/Elizabeth_May"
   },
   {
     "id": "ocd-person/533da64d-d703-4d56-9d65-8bf3b730d552",
@@ -805,7 +938,9 @@
     "phone": "605-773-3851",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Logan_Manhart.jpeg",
     "website": "https://sdlegislature.gov/Legislators/Profile/4685/Detail",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Logan_Manhart",
+    "ballotpediaUrl": "https://ballotpedia.org/Logan_Manhart"
   },
   {
     "id": "ocd-person/04b57e8f-1cbe-4637-84a5-6b2257413d18",
@@ -819,7 +954,9 @@
     "phone": "605-773-3821",
     "photoUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoZm0bH8MRxxVDUSQkCXbPkK3Lm-BaDg8Cog&s",
     "website": "https://sdlegislature.gov/Legislators/Profile/4696/Detail",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mark_Lapka",
+    "ballotpediaUrl": "https://ballotpedia.org/Mark_Lapka"
   },
   {
     "id": "ocd-person/7dc4b8d9-148b-4622-a6de-b27dc27030be",
@@ -830,8 +967,12 @@
     "district": "21",
     "party": "Republican",
     "email": "marty.overweg@sdlegislature.gov",
+    "phone": "605-773-3851",
     "photoUrl": "http://sdlegislature.gov/inc/img/Legislators/overweg_2020.jpg",
-    "website": "https://sdlegislature.gov/Legislators/Profile/1832/Detail"
+    "website": "https://sdlegislature.gov/Legislators/Profile/1832/Detail",
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Marty_Overweg",
+    "ballotpediaUrl": "https://ballotpedia.org/Marty_Overweg"
   },
   {
     "id": "ocd-person/e03644b8-7ddd-4ae0-a734-6f6e76e735ba",
@@ -843,9 +984,11 @@
     "party": "Republican",
     "email": "mary.fitzgerald@sdlegislature.gov",
     "phone": "605-773-3851",
-    "photoUrl": "https://bloximages.chicago2.vip.townnews.com/capjournal.com/content/tncms/assets/v3/editorial/6/bb/6bb95f06-3413-11eb-b8a6-77bddc8623d9/5fc6d265841ef.image.png?resize=630%2C630",
+    "photoUrl": "https://lawmakerdocuments.blob.core.usgovcloudapi.net/photos/fitzgerald,%20mary%20rep-4983%20copy%20rtjs.jpg",
     "website": "https://sdlegislature.gov/Legislators/Profile/3785/Detail",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mary_Fitzgerald_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Mary_Fitzgerald_(South_Dakota)"
   },
   {
     "id": "ocd-person/8ea8be55-3862-4034-b0c9-8aa418dfc915",
@@ -859,7 +1002,9 @@
     "phone": "605-773-3851",
     "photoUrl": "https://bloximages.newyork1.vip.townnews.com/mykxlg.com/content/tncms/assets/v3/editorial/8/8b/88bea3ac-5e1f-11ee-ba1f-dfd780c64f5d/6515af82998be.image.jpg?resize=333%2C500",
     "website": "https://sdlegislature.gov/Legislators/Profile/4704/Detail",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Matt_Roby",
+    "ballotpediaUrl": "https://ballotpedia.org/Matt_Roby"
   },
   {
     "id": "ocd-person/82afbbac-f85b-47ec-aad9-c7218f35d44c",
@@ -873,7 +1018,9 @@
     "phone": "605-773-3851",
     "photoUrl": "https://img1.wsimg.com/isteam/ip/805d1e30-7bc9-464e-a3b8-c366e5bfe518/IMG_1300%20(1).JPG",
     "website": "https://sdlegislature.gov/Legislators/Profile/4450/Detail",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mellissa_Heermann",
+    "ballotpediaUrl": "https://ballotpedia.org/Mellissa_Heermann"
   },
   {
     "id": "ocd-person/9f5c460a-6f5d-4198-8be2-e78a9d4980bf",
@@ -887,7 +1034,9 @@
     "phone": "605-773-3821",
     "photoUrl": "https://lawmakerdocuments.blob.core.usgovcloudapi.net/photos/rohl,%20michael%20sen-2772%20full%20rt.webp",
     "website": "https://sdlegislature.gov/Legislators/Profile/3805/Detail",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Michael_Rohl_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Michael_Rohl"
   },
   {
     "id": "ocd-person/0121d607-e75c-4427-bd76-a6e01434afca",
@@ -898,8 +1047,12 @@
     "district": "18",
     "party": "Republican",
     "email": "mike.stevens@sdlegislature.gov",
+    "phone": "605-773-3851",
     "photoUrl": "https://sdlegislature.gov/inc/img/Legislators/STEVENS_2017.jpg",
-    "website": "https://sdlegislature.gov/Legislators/Profile/3790/Detail"
+    "website": "https://sdlegislature.gov/Legislators/Profile/3790/Detail",
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mike_Stevens_%28South_Dakota_politician%29",
+    "ballotpediaUrl": "https://ballotpedia.org/Mike_Stevens_(South_Dakota)"
   },
   {
     "id": "ocd-person/082e4c6e-c16a-4bfa-8c17-9c46952da446",
@@ -913,7 +1066,9 @@
     "phone": "605-773-3851",
     "photoUrl": "https://lloydcompanies.com/wp/wp-content/uploads/2020/07/Mike-Derby-816x1024.jpg",
     "website": "https://sdlegislature.gov/Legislators/Profile/3791/Detail",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mike_Derby",
+    "ballotpediaUrl": "https://ballotpedia.org/Mike_Derby"
   },
   {
     "id": "ocd-person/f611d7e5-8438-49da-a323-374bbf0af218",
@@ -925,9 +1080,11 @@
     "party": "Republican",
     "email": "mike.weisgram@sdlegislature.gov",
     "phone": "605-773-3851",
-    "photoUrl": "https://bloximages.chicago2.vip.townnews.com/capjournal.com/content/tncms/assets/v3/editorial/5/dd/5dd71c64-93d9-11ea-a386-83ab371b2512/5eb9d679c54ee.image.jpg",
+    "photoUrl": "https://lawmakerdocuments.blob.core.usgovcloudapi.net/photos/weisgram,%20mike%20rep-4783%20rtjs.jpg",
     "website": "https://sdlegislature.gov/Legislators/Profile/3789/Detail",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mike_Weisgram",
+    "ballotpediaUrl": "https://ballotpedia.org/Mike_Weisgram"
   },
   {
     "id": "ocd-person/5cfb95b9-aa6a-4285-89d1-04770ae033fd",
@@ -938,8 +1095,12 @@
     "district": "21",
     "party": "Republican",
     "email": "mykala.voita@sdlegislature.gov",
+    "phone": "605-773-3821",
     "photoUrl": "https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7b0400d1-d3d8-4073-95b9-39e28c8c6203.heic",
-    "website": "https://sdlegislature.gov/Legislators/Profile/4697/Detail"
+    "website": "https://sdlegislature.gov/Legislators/Profile/4697/Detail",
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mykala_Voita",
+    "ballotpediaUrl": "https://ballotpedia.org/MyKala_Voita"
   },
   {
     "id": "ocd-person/1f9d8833-6a73-4985-b33e-635b6bc194b7",
@@ -950,8 +1111,12 @@
     "district": "1",
     "party": "Republican",
     "email": "nick.fosness@sdlegislature.gov",
+    "phone": "605-773-3851",
     "photoUrl": "https://sdaho.org/wp-content/uploads/2018/03/nick-fosness-big-696x967.jpg",
-    "website": "https://sdlegislature.gov/Legislators/Profile/4839/Detail"
+    "website": "https://sdlegislature.gov/Legislators/Profile/4839/Detail",
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Nick_Fosness",
+    "ballotpediaUrl": "https://ballotpedia.org/Nicholas_Fosness"
   },
   {
     "id": "ocd-person/00ed522e-529c-4ec7-bec2-90e124a2b3df",
@@ -962,8 +1127,12 @@
     "district": "32",
     "party": "Democratic",
     "email": "nicole.uhre-balk@sdlegislature.gov",
+    "phone": "605-773-3851",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/nubalk.jpg",
-    "website": "https://sdlegislature.gov/Legislators/Profile/4693/Detail"
+    "website": "https://sdlegislature.gov/Legislators/Profile/4693/Detail",
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Nicole_Uhre-Balk",
+    "ballotpediaUrl": "https://ballotpedia.org/Nicole_Uhre-Balk"
   },
   {
     "id": "ocd-person/169a02e3-c161-4cca-8adb-10e55934a94f",
@@ -977,7 +1146,9 @@
     "phone": "605-773-3821",
     "photoUrl": "https://lawmakerdocuments.blob.core.usgovcloudapi.net/photos/miskimins_2019.jpg",
     "website": "https://sdlegislature.gov/Legislators/Legislators/MemberDetail.aspx?Member=1632&Session=2019",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Paul_Miskimins",
+    "ballotpediaUrl": "https://ballotpedia.org/Paul_Miskimins"
   },
   {
     "id": "ocd-person/8dc5a857-0514-4a81-8215-a2f21a069075",
@@ -991,7 +1162,9 @@
     "phone": "605-773-3851",
     "photoUrl": "https://sdlegislature.gov/inc/img/Legislators/Pourier_2019.jpg",
     "website": "https://sdlegislature.gov/Legislators/Legislators/MemberDetail.aspx?Member=1638&Session=2019",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Peri_Pourier",
+    "ballotpediaUrl": "https://ballotpedia.org/Peri_Pourier"
   },
   {
     "id": "ocd-person/cc4fe32a-b912-4876-96e5-32341ccdd06d",
@@ -1003,9 +1176,11 @@
     "party": "Republican",
     "email": "phil.jensen@sdlegislature.gov",
     "phone": "605-773-3851",
-    "photoUrl": "https://sdlegislature.gov/inc/img/Legislators/JensenPhil_2017.jpg",
+    "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Phil-Jensen.jpg",
     "website": "https://sdlegislature.gov/Legislators/Legislators/MemberDetail.aspx?Member=1442&Session=2019",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Phil_Jensen",
+    "ballotpediaUrl": "https://ballotpedia.org/Phil_Jensen"
   },
   {
     "id": "ocd-person/73f418c4-6d07-4ef5-924f-1664738d2b46",
@@ -1019,7 +1194,9 @@
     "phone": "605-773-3821",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/RandyDeibert.png",
     "website": "https://sdlegislature.gov/Legislators/Profile/4448/Detail",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Randy_Deibert",
+    "ballotpediaUrl": "https://ballotpedia.org/Randy_Deibert"
   },
   {
     "id": "ocd-person/6ce3a563-339c-4bf4-8a70-0f5de85e5693",
@@ -1033,7 +1210,9 @@
     "phone": "605-773-3851",
     "photoUrl": "https://sdlegislature.gov/inc/img/Legislators/Reimer_2017.jpg",
     "website": "https://sdlegislature.gov/Legislators/Legislators/MemberDetail.aspx?Member=1554&Session=2018s",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rebecca_Reimer",
+    "ballotpediaUrl": "https://ballotpedia.org/Rebecca_Reimer"
   },
   {
     "id": "ocd-person/d2b91681-6a72-42f8-94f6-c489309798b7",
@@ -1047,7 +1226,9 @@
     "phone": "605-773-3821",
     "photoUrl": "https://listen.sdpb.org/sites/sdpb/files/201905/lege_red_dawn_foster_2019.jpg",
     "website": "https://sdlegislature.gov/Legislators/Legislators/MemberDetail.aspx?Member=1605&Session=2019",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Red_Dawn_Foster",
+    "ballotpediaUrl": "https://ballotpedia.org/Red_Dawn_Foster"
   },
   {
     "id": "ocd-person/69b0ca35-e513-4250-90fd-3a8c44dbeae8",
@@ -1061,7 +1242,9 @@
     "phone": "605-773-3851",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/RogerDeGroot.png",
     "website": "https://sdlegislature.gov/Legislators/Profile/4449/Detail",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Roger_DeGroot",
+    "ballotpediaUrl": "https://ballotpedia.org/Roger_DeGroot"
   },
   {
     "id": "ocd-person/3ff2f0b9-b570-4980-941f-9616ea0bbc55",
@@ -1075,7 +1258,9 @@
     "phone": "605-773-3821",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/MARTY.jpg",
     "website": "https://sdlegislature.gov/Legislators/Legislators/MemberDetail.aspx?Member=1514&Session=2018s",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/J._Sam_Marty",
+    "ballotpediaUrl": "https://ballotpedia.org/J._Sam_Marty"
   },
   {
     "id": "ocd-person/f6efc9b6-c985-4765-bd47-8da24d06712b",
@@ -1086,8 +1271,12 @@
     "district": "23",
     "party": "Republican",
     "email": "scott.moore@sdlegislature.gov",
+    "phone": "605-773-3851",
     "photoUrl": "https://gray-ksfy-prod.cdn.arcpublishing.com/resizer/PaauCW6h0UcuEU2uhSkymFUQnhU=/980x0/smart/filters:quality(85)/cloudfront-us-east-1.images.arcpublishing.com/gray/WIET46SP6JBKTLV2GTADMR27PY.jpg",
-    "website": "https://sdlegislature.gov/Legislators/Profile/4469/Detail"
+    "website": "https://sdlegislature.gov/Legislators/Profile/4469/Detail",
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Scott_Moore_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Scott_Moore_(South_Dakota)"
   },
   {
     "id": "ocd-person/18602d7b-fb7f-495b-bf94-2b0da2aae00f",
@@ -1101,7 +1290,9 @@
     "phone": "605-773-3851",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Scott-Odenbach.PNG",
     "website": "https://sdlegislature.gov/Legislators/Profile/3784/Detail",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Scott_Odenbach",
+    "ballotpediaUrl": "https://ballotpedia.org/Scott_Odenbach"
   },
   {
     "id": "ocd-person/138b5508-01b0-43ed-b8b6-ce9b9d07806f",
@@ -1115,7 +1306,9 @@
     "phone": "605-773-3851",
     "photoUrl": "https://sdlegislature.gov/inc/img/Legislators/Gosch_2017.jpg",
     "website": "https://sdlegislature.gov/Legislators/Legislators/MemberDetail.aspx?Member=1434&Session=2019",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Spencer_Gosch",
+    "ballotpediaUrl": "https://ballotpedia.org/Spencer_Gosch"
   },
   {
     "id": "ocd-person/229f3180-5808-47f9-b473-3da3c9585bc5",
@@ -1129,7 +1322,9 @@
     "phone": "605-773-3821",
     "photoUrl": "https://lawmakerdocuments.blob.core.usgovcloudapi.net/photos/sm_sauder,%20stephanie%20rep-0648%20rt.webp",
     "website": "https://sdlegislature.gov/Legislators/Profile/4455/Detail",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Stephanie_Sauder",
+    "ballotpediaUrl": "https://ballotpedia.org/Stephanie_Sauder"
   },
   {
     "id": "ocd-person/a86e2b88-677f-4819-9fc2-0e9ba4c04377",
@@ -1143,7 +1338,9 @@
     "phone": "605-773-3851",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/SteveDuffy.png",
     "website": "https://sdlegislature.gov/Legislators/Profile/4468/Detail",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Steve_Duffy",
+    "ballotpediaUrl": "https://ballotpedia.org/Steve_Duffy"
   },
   {
     "id": "ocd-person/d8b7a70b-2c34-4319-aaaf-54112c5ca471",
@@ -1157,7 +1354,9 @@
     "phone": "605-773-3821",
     "photoUrl": "https://kolbeckforsouthdakota.com/wp-content/uploads/2022/02/Kolbeck-Headshot1.png-684x1024.jpg",
     "website": "https://sdlegislature.gov/Legislators/Profile/4453/Detail",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Steve_Kolbeck",
+    "ballotpediaUrl": "https://ballotpedia.org/Steve_Kolbeck"
   },
   {
     "id": "ocd-person/10c3de09-4e65-4885-bbbb-78b2903a36e2",
@@ -1171,7 +1370,9 @@
     "phone": "605-773-3821",
     "photoUrl": "https://sdlegislature.gov/inc/img/Legislators/PetersonSue_2017.jpg",
     "website": "https://sdlegislature.gov/Legislators/Legislators/MemberDetail.aspx?Member=1431&Session=2019",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sue_Peterson",
+    "ballotpediaUrl": "https://ballotpedia.org/Sue_Lucas-Peterson"
   },
   {
     "id": "ocd-person/c2149a50-34ee-42c5-8440-e1c5ddcf66e4",
@@ -1185,7 +1386,9 @@
     "phone": "605-773-3821",
     "photoUrl": "https://bloximages.chicago2.vip.townnews.com/plaintalk.net/content/tncms/assets/v3/editorial/e/f2/ef29df3c-0515-11eb-b916-33278c4cf760/5f77d0e624605.image.jpg?resize=500%2C750",
     "website": "https://sdlegislature.gov/Legislators/Profile/3783/Detail",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sydney_Davis_(South_Dakota_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Sydney_Davis"
   },
   {
     "id": "ocd-person/f06bd3c9-8cac-4cc6-be62-f949e51f28eb",
@@ -1199,7 +1402,9 @@
     "phone": "605-773-3821",
     "photoUrl": "https://sdlegislature.gov/inc/img/Legislators/Howard_2017.jpg",
     "website": "https://sdlegislature.gov/Legislators/Legislators/MemberDetail.aspx?Member=1547&Session=2018s",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Taffy_Howard",
+    "ballotpediaUrl": "https://ballotpedia.org/Taffy_Howard"
   },
   {
     "id": "ocd-person/e195011d-04f8-4e39-a9f9-b804495b3f2c",
@@ -1213,7 +1418,9 @@
     "phone": "605-773-3821",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/TamaraGrove2024.jpeg",
     "website": "https://sdlegislature.gov/Legislators/Profile/4716/Detail",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tamara_Grove",
+    "ballotpediaUrl": "https://ballotpedia.org/Tamara_Grove"
   },
   {
     "id": "ocd-person/ba249bd9-5b3e-42f3-a367-061bf63d620a",
@@ -1227,7 +1434,9 @@
     "phone": "605-773-3851",
     "photoUrl": "https://www.gannett-cdn.com/presto/2020/05/22/PSIF/4cc05ff5-5458-4aa1-a67d-b9f2ac8e2cd2-Taylor_Rae_Rehfeldt.jpg",
     "website": "https://sdlegislature.gov/Legislators/Profile/3799/Detail",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Taylor_Rehfeldt",
+    "ballotpediaUrl": "https://ballotpedia.org/Taylor_Rae_Rehfeldt"
   },
   {
     "id": "ocd-person/5f9be535-0a3a-4661-a651-f65dbd39ce2b",
@@ -1238,10 +1447,12 @@
     "district": "29",
     "party": "Republican",
     "email": "terri.jorgenson@sdlegislature.gov",
-    "phone": "605-733-3851",
+    "phone": "605-773-3851",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Terri-Jorgenson.jpg",
     "website": "https://sdlegislature.gov/Legislators/Profile/4710/Detail",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Terri_Jorgenson",
+    "ballotpediaUrl": "https://ballotpedia.org/Terri_Jorgenson"
   },
   {
     "id": "ocd-person/052b96bd-7f02-4518-ba11-b1a55084149e",
@@ -1252,8 +1463,12 @@
     "district": "9",
     "party": "Republican",
     "email": "tesa.schwans@sdlegislature.gov",
+    "phone": "605-773-3851",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/TesaSchwans2024.jpeg",
-    "website": "https://sdlegislature.gov/Legislators/Profile/4717/Detail"
+    "website": "https://sdlegislature.gov/Legislators/Profile/4717/Detail",
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tesa_Schwans",
+    "ballotpediaUrl": "https://ballotpedia.org/Tesa_Schwans"
   },
   {
     "id": "ocd-person/6a9db533-590a-4481-980b-b5efe3412d9b",
@@ -1267,7 +1482,9 @@
     "phone": "605-773-3851",
     "photoUrl": "https://npr.brightspotcdn.com/89/8f/6dd0f43d4ee39f123a628f41ba91/tim-czmowski.jpg",
     "website": "https://sdlegislature.gov/Legislators/Profile/4730/Detail",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tim_Czmowski",
+    "ballotpediaUrl": "https://ballotpedia.org/Tim_Czmowski"
   },
   {
     "id": "ocd-person/e12868fa-61b7-4ad5-9f68-bcfca817057d",
@@ -1278,8 +1495,12 @@
     "district": "30",
     "party": "Republican",
     "email": "tim.goodwin@sdlegislature.gov",
+    "phone": "605-773-3851",
     "photoUrl": "https://sdlegislature.gov/inc/img/Legislators/Goodwin_2017.jpg",
-    "website": "https://sdlegislature.gov/Legislators/Legislators/MemberDetail.aspx?Member=1444&Session=2019"
+    "website": "https://sdlegislature.gov/Legislators/Legislators/MemberDetail.aspx?Member=1444&Session=2019",
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tim_Goodwin_(South_Dakota_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Tim_Goodwin_(South_Dakota)"
   },
   {
     "id": "ocd-person/6206c534-4bec-4228-b86f-5005547c6957",
@@ -1290,8 +1511,12 @@
     "district": "7",
     "party": "Republican",
     "email": "tim.reed@sdlegislature.gov",
+    "phone": "605-773-3821",
     "photoUrl": "https://sdlegislature.gov/inc/img/Legislators/Reed_2017.jpg",
-    "website": "https://sdlegislature.gov/Legislators/Legislators/MemberDetail.aspx?Member=1533&Session=2018s"
+    "website": "https://sdlegislature.gov/Legislators/Legislators/MemberDetail.aspx?Member=1533&Session=2018s",
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tim_Reed",
+    "ballotpediaUrl": "https://ballotpedia.org/Tim_Reed_(South_Dakota)"
   },
   {
     "id": "ocd-person/3c82e6e9-348f-40cd-818e-76d4901d9ec5",
@@ -1303,9 +1528,10 @@
     "party": "Republican",
     "email": "tim.reisch@sdlegislature.gov",
     "phone": "605-773-3851",
-    "photoUrl": "https://lawmakerdocuments.blob.core.usgovcloudapi.net/photos/https://lawmakerdocuments.blob.core.usgovcloudapi.net/photos/reisch, tim rep-1757 rt.jpg",
     "website": "https://sdlegislature.gov/Legislators/Profile/4458/Detail",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tim_Reisch",
+    "ballotpediaUrl": "https://ballotpedia.org/Tim_Reisch"
   },
   {
     "id": "ocd-person/cc78d0ae-544c-4b45-8073-4aed3ee1a513",
@@ -1319,7 +1545,9 @@
     "phone": "605-773-3851",
     "photoUrl": "https://assets.civicengine.com/uploads/candidate/headshot/208150/208150.jpg",
     "website": "https://sdlegislature.gov/Legislators/Profile/4687/Detail",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tim_Walburg",
+    "ballotpediaUrl": "https://ballotpedia.org/Tim_Walburg"
   },
   {
     "id": "ocd-person/ebadc687-f53a-4ec4-9c37-b362a2ea6842",
@@ -1333,7 +1561,9 @@
     "phone": "605-773-3851",
     "photoUrl": "https://sdlegislature.gov/inc/img/Legislators/Mulally_2019.jpg",
     "website": "https://sdlegislature.gov/Legislators/Legislators/MemberDetail.aspx?Member=1646&Session=2019",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tina_Mulally",
+    "ballotpediaUrl": "https://ballotpedia.org/Tina_Mulally"
   },
   {
     "id": "ocd-person/f6b50a35-18e6-4e0c-bdd9-071f4a99bbed",
@@ -1347,7 +1577,9 @@
     "phone": "605-773-3821",
     "photoUrl": "https://sdlegislature.gov/inc/img/Legislators/Pischke_2017.jpg",
     "website": "https://sdlegislature.gov/Legislators/Legislators/MemberDetail.aspx?Member=1446&Session=2019",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tom_Pischke",
+    "ballotpediaUrl": "https://ballotpedia.org/Tom_Pischke"
   },
   {
     "id": "ocd-person/a0e95faf-3b79-4657-bdd2-3a496d04e03c",
@@ -1361,7 +1593,9 @@
     "phone": "605-773-3851",
     "photoUrl": "https://assets.civicengine.com/uploads/candidate/headshot/815298/815298.jpg",
     "website": "https://sdlegislature.gov/Legislators/Profile/4724/Detail",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tony_Kayser",
+    "ballotpediaUrl": "https://ballotpedia.org/Tony_Kayser"
   },
   {
     "id": "ocd-person/74bc4404-28a3-413b-b01f-3f303da1c8a9",
@@ -1372,8 +1606,12 @@
     "district": "35",
     "party": "Republican",
     "email": "tony.randolph@sdlegislature.gov",
+    "phone": "605-773-3851",
     "photoUrl": "https://sdlegislature.gov/inc/img/Legislators/Randolph_2019.jpg",
-    "website": "https://sdlegislature.gov/Legislators/Legislators/MemberDetail.aspx?Member=1647&Session=2019"
+    "website": "https://sdlegislature.gov/Legislators/Legislators/MemberDetail.aspx?Member=1647&Session=2019",
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tony_Randolph",
+    "ballotpediaUrl": "https://ballotpedia.org/Tony_Randolph"
   },
   {
     "id": "ocd-person/1e73baba-bddd-4b8c-901d-a1324f3194eb",
@@ -1384,8 +1622,12 @@
     "district": "28B",
     "party": "Republican",
     "email": "travis.ismay@sdlegislature.gov",
+    "phone": "605-773-3851",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Travis_Ismay_2025.jpg",
-    "website": "https://sdlegislature.gov/Legislators/Profile/4725/Detail"
+    "website": "https://sdlegislature.gov/Legislators/Profile/4725/Detail",
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Travis_Ismay",
+    "ballotpediaUrl": "https://ballotpedia.org/Travis_Ismay"
   },
   {
     "id": "ocd-person/e7bb9291-fd90-4db8-b3e6-c90ebc41c997",
@@ -1399,7 +1641,9 @@
     "phone": "605-773-3851",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Trish_Ladner.png",
     "website": "https://sdlegislature.gov/Legislators/Profile/3802/Detail",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Trish_Ladner",
+    "ballotpediaUrl": "https://ballotpedia.org/Trish_Ladner"
   },
   {
     "id": "ocd-person/46a0838c-0bb9-446a-8828-21a3f2124d1b",
@@ -1413,7 +1657,9 @@
     "phone": "605-773-3851",
     "photoUrl": "https://www.gannett-cdn.com/-mm-/7d2e32043f35f170234758f26dd14f0d4c05b2fa/c=0-17-3772-2148/local/-/media/2016/12/28/SiouxFalls/SiouxFalls/636185485920955826-Will-Mortenson.jpg?width=3200&height=1808&fit=crop&format=pjpg&auto=webp",
     "website": "https://sdlegislature.gov/Legislators/Profile/3788/Detail",
-    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501"
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Will_Mortenson",
+    "ballotpediaUrl": "https://ballotpedia.org/Will_Mortenson"
   },
   {
     "id": "ocd-person/705bda08-a613-4be4-9c90-ac7e30eef6bf",
@@ -1424,7 +1670,11 @@
     "district": "17",
     "party": "Republican",
     "email": "william.shorma@sdlegislature.gov",
+    "phone": "605-773-3851",
     "photoUrl": "https://lawmakerdocuments.blob.core.usgovcloudapi.net/photos/shorma,%20william%20rep-1194%20rt.webp",
-    "website": "https://legis.sd.gov/Legislators/Legislators/MemberDetail.aspx?Member=1066&Session=2016"
+    "website": "https://sdlegislature.gov/Legislators/Profile/4463/Detail",
+    "office": "Capitol Building 500 E. Capitol Ave., Pierre, SD 57501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/William_Shorma",
+    "ballotpediaUrl": "https://ballotpedia.org/William_Shorma"
   }
 ]

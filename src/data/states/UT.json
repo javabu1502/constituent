@@ -11,7 +11,11 @@
     "phone": "801-538-1029",
     "photoUrl": "https://le.utah.gov/images/legislator/MALOYC.jpg",
     "website": "https://house.utah.gov/rep/MALOYC/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "districtOffice": "283 E. 500 North, Lehi, UT 84043",
+    "districtPhone": "801-477-0019",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Cory_Maloy",
+    "ballotpediaUrl": "https://ballotpedia.org/Cory_Maloy"
   },
   {
     "id": "ocd-person/eac36970-1c63-4b4c-81b1-3a39536bd69d",
@@ -25,7 +29,11 @@
     "phone": "801-538-1029",
     "photoUrl": "https://le.utah.gov/images/legislator/STODDA.jpg",
     "website": "https://house.utah.gov/rep/STODDA/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "districtOffice": "218 E. 8135 South, Sandy, UT 84070",
+    "districtPhone": "385-256-3281",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Andrew_Stoddard",
+    "ballotpediaUrl": "https://ballotpedia.org/Andrew_Stoddard"
   },
   {
     "id": "ocd-person/d987aff4-abcf-4f2a-826d-b5741d065d44",
@@ -39,7 +47,9 @@
     "phone": "801-538-1029",
     "photoUrl": "https://le.utah.gov/images/legislator/ROMERAY.jpg",
     "website": "https://house.utah.gov/rep/ROMERAY/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Angela_Romero",
+    "ballotpediaUrl": "https://ballotpedia.org/Angela_Romero"
   },
   {
     "id": "ocd-person/6b86542a-9b8a-418f-a275-6c261cdd86d2",
@@ -53,7 +63,11 @@
     "phone": "801-538-1035",
     "photoUrl": "https://le.utah.gov/images/legislator/MILLNA.jpg",
     "website": "https://senate.utah.gov/sen/MILLNA/",
-    "office": "P.O. Box 145115 350 N. State St., Suite 320, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145115 350 N. State St., Suite 320, Salt Lake City, UT 84114",
+    "districtOffice": "Room 313, 4287 Harrison Blvd., Ogden, UT 84403",
+    "districtPhone": "801-900-3897",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ann_Millner",
+    "ballotpediaUrl": "https://ballotpedia.org/Ann_Millner"
   },
   {
     "id": "ocd-person/7c0df02d-1ef0-4fa9-b708-ccafff35649e",
@@ -67,7 +81,11 @@
     "phone": "801-538-1029",
     "photoUrl": "https://le.utah.gov/images/legislator/LOUBEA.jpg",
     "website": "https://house.utah.gov/rep/LOUBEA/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "districtOffice": "4956 W. 6200 South #434, Kearns, UT 84118",
+    "districtPhone": "801-657-0466",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Anthony_Loubet",
+    "ballotpediaUrl": "https://ballotpedia.org/Anthony_Loubet"
   },
   {
     "id": "ocd-person/6d3d4043-1ec3-454c-a517-4036722c50ee",
@@ -81,7 +99,11 @@
     "phone": "801-538-1029",
     "photoUrl": "https://le.utah.gov/images/legislator/DEFAYA.jpg",
     "website": "https://house.utah.gov/rep/DEFAYA/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "districtOffice": "UT",
+    "districtPhone": "801-793-8944",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ariel_Defay",
+    "ballotpediaUrl": "https://ballotpedia.org/Ariel_Defay"
   },
   {
     "id": "ocd-person/8a770a9d-d24e-4468-9194-fa2ff1f422e3",
@@ -95,7 +117,11 @@
     "phone": "801-538-1029",
     "photoUrl": "https://le.utah.gov/images/legislator/MATTHA.jpg",
     "website": "https://house.utah.gov/rep/MATTHA/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "districtOffice": "UT",
+    "districtPhone": "385-264-2024",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ashlee_Matthews",
+    "ballotpediaUrl": "https://ballotpedia.org/Ashlee_Matthews"
   },
   {
     "id": "ocd-person/b8751ce0-ba9b-44a0-8658-9cc9dc5f4c2c",
@@ -109,7 +135,10 @@
     "phone": "801-538-1035",
     "photoUrl": "https://le.utah.gov/images/legislator/BRAMMB.jpg",
     "website": "https://house.utah.gov/rep/BRAMMB/",
-    "office": "P.O. Box 145115 350 N. State St., Suite 320, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145115 350 N. State St., Suite 320, Salt Lake City, UT 84114",
+    "districtOffice": "1955 W. Grove Parkway, Suite 200, Pleasant Grove, UT 84062",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Brady_Brammer",
+    "ballotpediaUrl": "https://ballotpedia.org/Brady_Brammer"
   },
   {
     "id": "ocd-person/3e388e2d-1b4a-49dc-9aa5-38353166e08f",
@@ -123,7 +152,11 @@
     "phone": "801-538-1029",
     "photoUrl": "https://le.utah.gov/images/legislator/BOLINB.jpg",
     "website": "https://house.utah.gov/rep/BOLINB/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "districtOffice": "UT",
+    "districtPhone": "435-255-3093",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bridger_Bolinder",
+    "ballotpediaUrl": "https://ballotpedia.org/Bridger_Bolinder"
   },
   {
     "id": "ocd-person/8e452a53-e405-49f9-9031-77d8a9f63bd3",
@@ -137,7 +170,9 @@
     "phone": "801-538-1029",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/CalRoberts2024.jpg",
     "website": "https://house.utleg.gov/rep/ROBERC/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Calvin_Roberts_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Cal_Roberts"
   },
   {
     "id": "ocd-person/036ab735-ad82-450e-a5ca-098b1436cb90",
@@ -151,7 +186,11 @@
     "phone": "801-538-1035",
     "photoUrl": "https://le.utah.gov/images/legislator/MUSSECR.jpg",
     "website": "https://house.utah.gov/rep/MUSSECR/",
-    "office": "P.O. Box 145115 350 N. State St., Suite 320, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145115 350 N. State St., Suite 320, Salt Lake City, UT 84114",
+    "districtOffice": "4137 S. 4100 West, West Haven, UT 84401",
+    "districtPhone": "801-773-1777",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Cal_Musselman",
+    "ballotpediaUrl": "https://ballotpedia.org/Calvin_Musselman"
   },
   {
     "id": "ocd-person/b4977f98-8a0d-4e4b-a43f-b8ee80adba2b",
@@ -165,7 +204,11 @@
     "phone": "801-538-1029",
     "photoUrl": "https://le.utah.gov/images/legislator/PIERUC.jpg",
     "website": "https://house.utah.gov/rep/PIERUC/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "districtOffice": "5526 W. 13400 South #617, Herriman, UT 84096",
+    "districtPhone": "385-414-1488",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Candice_Pierucci",
+    "ballotpediaUrl": "https://ballotpedia.org/Candice_Pierucci"
   },
   {
     "id": "ocd-person/8967df77-dc79-46e0-873c-b79f9cf73e1f",
@@ -179,7 +222,11 @@
     "phone": "801-538-1029",
     "photoUrl": "https://le.utah.gov/images/legislator/ALBRECR.jpg",
     "website": "https://house.utah.gov/rep/ALBRECR/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "districtOffice": "UT",
+    "districtPhone": "435-979-6578",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Carl_Albrecht_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Carl_R._Albrecht"
   },
   {
     "id": "ocd-person/8d06fd93-cc42-47e3-a00c-2229718b7226",
@@ -193,7 +240,11 @@
     "phone": "801-538-1029",
     "photoUrl": "https://le.utah.gov/images/legislator/MOSSCS.jpg",
     "website": "https://house.utah.gov/rep/MOSSCS/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "districtOffice": "2712 E. Kelly Lane, Salt Lake City, UT 84117",
+    "districtPhone": "801-647-8764",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Carol_Spackman_Moss",
+    "ballotpediaUrl": "https://ballotpedia.org/Carol_Moss"
   },
   {
     "id": "ocd-person/5d8ada2a-75c6-4aa6-b359-29720794fb7e",
@@ -207,7 +258,9 @@
     "phone": "801-538-1029",
     "photoUrl": "https://le.utah.gov/images/legislator/SNIDEC.jpg",
     "website": "https://house.utah.gov/rep/SNIDEC/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Casey_Snider",
+    "ballotpediaUrl": "https://ballotpedia.org/Casey_Snider"
   },
   {
     "id": "ocd-person/54fcc31c-a3e5-47ea-a044-d1223c6bce65",
@@ -221,7 +274,11 @@
     "phone": "801-538-1029",
     "photoUrl": "https://le.utah.gov/images/legislator/ACTONCK.jpg",
     "website": "https://house.utah.gov/rep/ACTONCK/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "districtOffice": "UT",
+    "districtPhone": "801-809-3571",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Cheryl_Acton",
+    "ballotpediaUrl": "https://ballotpedia.org/Cheryl_Acton"
   },
   {
     "id": "ocd-person/3acc854e-2a4d-43ff-9cfb-63d527bb8186",
@@ -235,7 +292,9 @@
     "phone": "435-752-7355",
     "photoUrl": "https://le.utah.gov/images/legislator/WILSOCH.jpg",
     "website": "https://senate.utah.gov/sen/WILSOCH/",
-    "office": "P.O. Box 145115 350 N. State St., Suite 320, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145115 350 N. State St., Suite 320, Salt Lake City, UT 84114",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Chris_H._Wilson",
+    "ballotpediaUrl": "https://ballotpedia.org/Chris_Wilson_(Utah)"
   },
   {
     "id": "ocd-person/052622aa-50ab-47c7-84b8-175d144a9d59",
@@ -249,7 +308,11 @@
     "phone": "801-538-1029",
     "photoUrl": "https://le.utah.gov/images/legislator/WATKICF.jpg",
     "website": "https://house.utah.gov/rep/WATKICF/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "districtOffice": "1548 E. 5700 South, Price, UT 84501",
+    "districtPhone": "435-650-1969",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Christine_Watkins",
+    "ballotpediaUrl": "https://ballotpedia.org/Christine_Watkins"
   },
   {
     "id": "ocd-person/12581dac-c07b-40a8-b309-3c9ea167f913",
@@ -263,7 +326,11 @@
     "phone": "801-538-1029",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/ClintOkerlund2024.jpeg",
     "website": "https://house.utleg.gov/rep/OKERLC/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "districtOffice": "UT",
+    "districtPhone": "801-214-4948",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Clinton_Okerlund",
+    "ballotpediaUrl": "https://ballotpedia.org/Clint_Okerlund"
   },
   {
     "id": "ocd-person/2fb1aaec-83c2-41f3-b98a-8a8a34e7301e",
@@ -277,7 +344,8 @@
     "phone": "801-538-1029",
     "photoUrl": "https://le.utah.gov/images/legislator/JACKC.jpg",
     "website": "https://house.utah.gov/rep/JACKC/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "ballotpediaUrl": "https://ballotpedia.org/Colin_Jack"
   },
   {
     "id": "ocd-person/6540aa74-9456-4b29-9b56-cadd31104db2",
@@ -291,7 +359,9 @@
     "phone": "801-538-1035",
     "photoUrl": "https://le.utah.gov/images/legislator/MCCAYD.jpg",
     "website": "https://senate.utah.gov/sen/MCCAYD/",
-    "office": "P.O. Box 145115 350 N. State St., Suite 320, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145115 350 N. State St., Suite 320, Salt Lake City, UT 84114",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Daniel_McCay",
+    "ballotpediaUrl": "https://ballotpedia.org/Dan_McCay"
   },
   {
     "id": "ocd-person/e26d3225-27da-440d-ac85-cad08bdb5ade",
@@ -305,7 +375,11 @@
     "phone": "801-538-1029",
     "photoUrl": "https://assets.civicengine.com/uploads/candidate/headshot/414685/414685.jpg",
     "website": "https://house.utleg.gov/rep/SHALLD/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "districtOffice": "UT",
+    "districtPhone": "801-214-5989",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/David_Shallenberger",
+    "ballotpediaUrl": "https://ballotpedia.org/David_Shallenberger"
   },
   {
     "id": "ocd-person/78b7c95c-45a7-40cb-a82c-681db75f9529",
@@ -319,7 +393,9 @@
     "phone": "801-538-1035",
     "photoUrl": "https://le.utah.gov/images/legislator/HINKIDP.jpg",
     "website": "https://senate.utah.gov/sen/HINKIDP/",
-    "office": "P.O. Box 145115 350 N. State St., Suite 320, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145115 350 N. State St., Suite 320, Salt Lake City, UT 84114",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/David_Hinkins",
+    "ballotpediaUrl": "https://ballotpedia.org/David_Hinkins"
   },
   {
     "id": "ocd-person/ef1c9af3-b4f9-4eeb-b63d-a22f01c84262",
@@ -333,7 +409,9 @@
     "phone": "801-538-1035",
     "photoUrl": "https://le.utah.gov/images/legislator/OWENSD.jpg",
     "website": "https://senate.utah.gov/sen/OWENSD/",
-    "office": "P.O. Box 145115 350 N. State St., Suite 320, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145115 350 N. State St., Suite 320, Salt Lake City, UT 84114",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Derrin_Owens",
+    "ballotpediaUrl": "https://ballotpedia.org/Derrin_Owens"
   },
   {
     "id": "ocd-person/cbfab19e-80f2-4edc-ae55-08f9e03a6d2f",
@@ -347,7 +425,10 @@
     "phone": "801-538-1035",
     "photoUrl": "https://le.utah.gov/images/legislator/IPSONDL.jpg",
     "website": "https://senate.utah.gov/sen/IPSONDL/",
-    "office": "P.O. Box 145115 350 N. State St., Suite 320, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145115 350 N. State St., Suite 320, Salt Lake City, UT 84114",
+    "districtOffice": "539 Diagonal St., St. George, UT 84770",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Don_Ipson",
+    "ballotpediaUrl": "https://ballotpedia.org/Don_Ipson"
   },
   {
     "id": "ocd-person/ea11beb4-7128-4549-9174-fa7b40cacca8",
@@ -361,7 +442,9 @@
     "phone": "801-538-1029",
     "photoUrl": "https://dougfiefia.com/wp-content/uploads/2023/11/Doug-Fiefia-header.png",
     "website": "https://house.utleg.gov/rep/FIEFID/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "districtOffice": "UT",
+    "ballotpediaUrl": "https://ballotpedia.org/Doug_Fiefia"
   },
   {
     "id": "ocd-person/b60609f0-e6df-42fc-bbca-9b67a2ed7254",
@@ -375,7 +458,9 @@
     "phone": "801-538-1029",
     "photoUrl": "https://le.utah.gov/images/legislator/OWENSDO.jpg",
     "website": "https://house.utah.gov/rep/OWENSDO/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Doug_Owens",
+    "ballotpediaUrl": "https://ballotpedia.org/Doug_Owens"
   },
   {
     "id": "ocd-person/725abf07-1cca-47a5-a5a7-223d763f5da0",
@@ -389,7 +474,11 @@
     "phone": "801-538-1029",
     "photoUrl": "https://le.utah.gov/images/legislator/WELTOD.jpg",
     "website": "https://house.utah.gov/rep/WELTOD/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "districtOffice": "UT",
+    "districtPhone": "385-977-3870",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Doug_Welton",
+    "ballotpediaUrl": "https://ballotpedia.org/Doug_Welton"
   },
   {
     "id": "ocd-person/f5149921-03c9-4420-bb21-9b54c19e0c65",
@@ -401,8 +490,12 @@
     "party": "Forward",
     "email": "ebuss@le.utah.gov",
     "phone": "801-538-1029",
+    "photoUrl": "https://le.utah.gov/images/legislator/BUSSEM.jpg",
     "website": "https://senate.utah.gov/sen/BUSSEM/",
-    "office": "350 N. State St. Suite 320, Salt Lake City, UT 84114"
+    "office": "350 N. State St. Suite 320, Salt Lake City, UT 84114",
+    "districtOffice": "UT",
+    "districtPhone": "801-598-4734",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Emily_Buss_(politician)"
   },
   {
     "id": "ocd-person/3ee27d8b-c865-4d86-b33e-9cfb34c3bac4",
@@ -416,7 +509,9 @@
     "phone": "435-586-9651",
     "photoUrl": "https://le.utah.gov/images/legislator/VICKEEJ.jpg",
     "website": "https://senate.utah.gov/sen/VICKEEJ/",
-    "office": "P.O. Box 145115 350 N. State St., Suite 320, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145115 350 N. State St., Suite 320, Salt Lake City, UT 84114",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Evan_Vickers",
+    "ballotpediaUrl": "https://ballotpedia.org/Evan_Vickers"
   },
   {
     "id": "ocd-person/82be86b6-0047-471e-8983-a061e5cc91e2",
@@ -430,7 +525,25 @@
     "phone": "801-538-1029",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/gmiller2.jpg",
     "website": "https://house.utleg.gov/rep/MILLGR/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "districtOffice": "UT",
+    "districtPhone": "801-520-0099",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Grant_Amjad_Miller",
+    "ballotpediaUrl": "https://ballotpedia.org/Grant_Amjad_Miller"
+  },
+  {
+    "id": "ocd-person/83efadab-9aba-4506-96d7-04a79581348c",
+    "name": "Grant Pace",
+    "firstName": "Grant",
+    "lastName": "Pace",
+    "chamber": "lower",
+    "district": "60",
+    "party": "Republican",
+    "email": "gpace@le.utah.gov",
+    "phone": "801-538-1029",
+    "website": "https://house.utleg.gov/rep/PACEG/",
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "ballotpediaUrl": "https://ballotpedia.org/Grant_Pace"
   },
   {
     "id": "ocd-person/650616ca-3c57-4995-a514-37644fe1fa8f",
@@ -444,7 +557,9 @@
     "phone": "801-538-1035",
     "photoUrl": "https://le.utah.gov/images/legislator/BALDEH.jpg",
     "website": "https://senate.utah.gov/sen/BALDEH/",
-    "office": "P.O. Box 145115 350 N. State St., Suite 320, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145115 350 N. State St., Suite 320, Salt Lake City, UT 84114",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Heidi_Balderree",
+    "ballotpediaUrl": "https://ballotpedia.org/Heidi_Balderree"
   },
   {
     "id": "ocd-person/efcd1f01-061f-4b35-9202-407576e22e77",
@@ -458,7 +573,11 @@
     "phone": "801-538-1029",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/HoangNguyen2024.jpg",
     "website": "https://house.utleg.gov/rep/NGUYEH/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "districtOffice": "UT",
+    "districtPhone": "801-842-4220",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Hoang_Nguyen",
+    "ballotpediaUrl": "https://ballotpedia.org/Hoang_Nguyen"
   },
   {
     "id": "ocd-person/5b47c889-e555-4d3c-9b30-97d52ee02960",
@@ -472,7 +591,24 @@
     "phone": "801-538-1035",
     "photoUrl": "https://le.utah.gov/images/legislator/ADAMSJS.jpg",
     "website": "https://senate.utah.gov/sen/ADAMSJS/",
-    "office": "P.O. Box 145115 350 N. State St., Suite 320, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145115 350 N. State St., Suite 320, Salt Lake City, UT 84114",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/J._Stuart_Adams",
+    "ballotpediaUrl": "https://ballotpedia.org/Stuart_Adams"
+  },
+  {
+    "id": "ocd-person/c078ef2d-7a7a-469a-a8bc-d6e5c16203c4",
+    "name": "Jackie Larson",
+    "firstName": "Jackie",
+    "lastName": "Larson",
+    "chamber": "lower",
+    "district": "64",
+    "party": "Republican",
+    "email": "jlarson@le.utah.gov",
+    "phone": "801-538-1029",
+    "photoUrl": "https://static.wixstatic.com/media/355155_bfae42d4d46d4e1f86e11a37eef18af1~mv2.jpeg/v1/fill/w_873,h_1484,fp_0.46_0.23,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/355155_bfae42d4d46d4e1f86e11a37eef18af1~mv2.jpeg",
+    "website": "https://house.utleg.gov/rep/LARSOJ/",
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "ballotpediaUrl": "https://ballotpedia.org/Jackie_Larson"
   },
   {
     "id": "ocd-person/e68bfc15-5c1f-4903-ac1f-eb8ca44a816a",
@@ -486,7 +622,11 @@
     "phone": "801-538-1029",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/JakeFitisemanu2024.jpg",
     "website": "https://house.utleg.gov/rep/FITISJ/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "districtOffice": "UT",
+    "districtPhone": "801-633-4546",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jake_Fitisemanu",
+    "ballotpediaUrl": "https://ballotpedia.org/Jake_Fitisemanu"
   },
   {
     "id": "ocd-person/dd923550-9fd3-4476-9a43-219a199c8057",
@@ -500,7 +640,11 @@
     "phone": "801-538-1029",
     "photoUrl": "https://static.wixstatic.com/media/d27656_26f8c475869649a59bad8ae179994b0f~mv2.jpg/v1/fill/w_317,h_383,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/Jake_Website_edited.jpg",
     "website": "https://house.utleg.gov/rep/SAWYEJ/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "districtOffice": "UT",
+    "districtPhone": "385-641-5928",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jake_Sawyer",
+    "ballotpediaUrl": "https://ballotpedia.org/Jake_Sawyer"
   },
   {
     "id": "ocd-person/89b3cebe-884b-4798-b063-794d359ea891",
@@ -514,7 +658,10 @@
     "phone": "801-538-1029",
     "photoUrl": "https://le.utah.gov/images/legislator/DUNNIJA.jpg",
     "website": "https://house.utah.gov/rep/DUNNIJA/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "districtOffice": "3105 W. 5400 South Suite 6, Taylorsville, UT 84129",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/James_Dunnigan_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Jim_Dunnigan"
   },
   {
     "id": "ocd-person/cb6f79ec-b7b4-418e-950e-f5f066489929",
@@ -528,7 +675,11 @@
     "phone": "801-538-1029",
     "photoUrl": "https://le.utah.gov/images/legislator/KYLEJB.jpg",
     "website": "https://house.utah.gov/rep/KYLEJB/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "districtOffice": "UT",
+    "districtPhone": "385-394-2424",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jason_Kyle_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Jason_Kyle"
   },
   {
     "id": "ocd-person/d7b06a16-ad92-4d55-af46-93a1f13253e7",
@@ -542,21 +693,11 @@
     "phone": "801-538-1029",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Jason_Thompson2024.jpeg",
     "website": "https://house.utleg.gov/rep/THOMJA/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
-  },
-  {
-    "id": "ocd-person/1773d5d5-4967-4af5-9880-3106ace372d7",
-    "name": "Jeff Burton",
-    "firstName": "Jeff",
-    "lastName": "Burton",
-    "chamber": "lower",
-    "district": "64",
-    "party": "Republican",
-    "email": "jburton@le.utah.gov",
-    "phone": "801-538-1029",
-    "photoUrl": "https://le.utah.gov/images/legislator/BURTOJS.jpg",
-    "website": "https://house.utah.gov/rep/BURTOJS/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "districtOffice": "UT",
+    "districtPhone": "801-505-8787",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jason_Thompson_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Jason_Thompson_(Utah)"
   },
   {
     "id": "ocd-person/b32f9174-73af-4db3-877b-1c368bd4e62e",
@@ -570,7 +711,11 @@
     "phone": "801-538-1029",
     "photoUrl": "https://le.utah.gov/images/legislator/DAILEJ.jpg",
     "website": "https://house.utah.gov/rep/DAILEJ/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "districtOffice": "UT",
+    "districtPhone": "385-321-7827",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jennifer_Dailey-Provost",
+    "ballotpediaUrl": "https://ballotpedia.org/Jen_Dailey-Provost"
   },
   {
     "id": "ocd-person/bd870ade-5b3f-4ed3-9e6f-6bbab93a7d35",
@@ -584,7 +729,9 @@
     "phone": "801-538-1035",
     "photoUrl": "https://le.utah.gov/images/legislator/PLUMBJ.jpg",
     "website": "https://senate.utah.gov/sen/PLUMBJ/",
-    "office": "P.O. Box 145115 350 N. State St., Suite 320, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145115 350 N. State St., Suite 320, Salt Lake City, UT 84114",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jennifer_Plumb",
+    "ballotpediaUrl": "https://ballotpedia.org/Jennifer_Plumb"
   },
   {
     "id": "ocd-person/3a04e48f-6d8c-47aa-b0aa-0e14994cd961",
@@ -598,7 +745,9 @@
     "phone": "801-538-1035",
     "photoUrl": "https://le.utah.gov/images/legislator/STEVEJW.jpg",
     "website": "https://senate.utah.gov/sen/STEVEJW/",
-    "office": "P.O. Box 145115 350 N. State St., Suite 320, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145115 350 N. State St., Suite 320, Salt Lake City, UT 84114",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jerry_Stevenson_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Jerry_Stevenson"
   },
   {
     "id": "ocd-person/598a8b34-ab05-4438-b927-77b20437035d",
@@ -612,7 +761,11 @@
     "phone": "801-538-1029",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/JillKoford.jpg",
     "website": "https://house.utleg.gov/rep/KOFORJ/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "districtOffice": "UT",
+    "districtPhone": "801-300-2532",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jill_Koford",
+    "ballotpediaUrl": "https://ballotpedia.org/Jill_Koford"
   },
   {
     "id": "ocd-person/b5f1d356-e619-413b-8b9a-fec2d3d48362",
@@ -624,8 +777,12 @@
     "party": "Democratic",
     "email": "jarthur@le.utah.gov",
     "phone": "801-538-1029",
+    "photoUrl": "https://le.utah.gov/images/legislator/ARTHUJ.jpg",
     "website": "https://house.utleg.gov/rep/ARTHUJ/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "districtOffice": "UT",
+    "districtPhone": "801-518-3407",
+    "ballotpediaUrl": "https://ballotpedia.org/John_Arthur_(Utah)"
   },
   {
     "id": "ocd-person/0c8df9e4-cb46-4dc1-ab5b-6d181efd58e0",
@@ -639,7 +796,10 @@
     "phone": "801-538-1035",
     "photoUrl": "https://le.utah.gov/images/legislator/JOHNSJD.jpg",
     "website": "https://senate.utah.gov/sen/JOHNSJD/",
-    "office": "P.O. Box 145115 350 N. State St., Suite 320, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145115 350 N. State St., Suite 320, Salt Lake City, UT 84114",
+    "districtOffice": "Room 297, 2637 N. Washington Blvd., North Ogden, UT 84414",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_D._Johnson_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/John_Johnson_(Utah)"
   },
   {
     "id": "ocd-person/e214e4ef-2df9-41a2-9113-98715f5a791c",
@@ -653,7 +813,9 @@
     "phone": "801-538-1029",
     "photoUrl": "https://le.utah.gov/images/legislator/HAWKIJ.jpg",
     "website": "https://house.utah.gov/rep/HAWKIJ/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jon_Hawkins_(Utah_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Jon_Hawkins"
   },
   {
     "id": "ocd-person/4fb12ece-15d9-4fd2-9b0a-e96a0dbdd2ad",
@@ -667,7 +829,11 @@
     "phone": "801-538-1029",
     "photoUrl": "https://le.utah.gov/images/legislator/TEUSCJ.jpg",
     "website": "https://house.utah.gov/rep/TEUSCJ/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "districtOffice": "3731 W. South Jordan Parkway Suite 102-323, South Jordan, UT 84009",
+    "districtPhone": "801-810-6170",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jordan_Teuscher",
+    "ballotpediaUrl": "https://ballotpedia.org/Jordan_Teuscher"
   },
   {
     "id": "ocd-person/0d22b3d0-94f2-4f88-95e9-b830480f4be8",
@@ -681,7 +847,11 @@
     "phone": "801-538-1029",
     "photoUrl": "https://le.utah.gov/images/legislator/ELISOJ.jpg",
     "website": "https://house.utah.gov/rep/ELISOJ/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "districtOffice": "UT",
+    "districtPhone": "801-657-1006",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Joseph_Elison",
+    "ballotpediaUrl": "https://ballotpedia.org/Joseph_Elison"
   },
   {
     "id": "ocd-person/3ceb7500-0ea7-46ef-9a75-d00d378b86b7",
@@ -695,7 +865,9 @@
     "phone": "801-538-1035",
     "photoUrl": "https://le.utah.gov/images/legislator/KWANK.jpg",
     "website": "https://house.utah.gov/rep/KWANK/",
-    "office": "P.O. Box 145115 350 N. State St., Suite 320, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145115 350 N. State St., Suite 320, Salt Lake City, UT 84114",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Karen_Kwan_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Karen_Kwan"
   },
   {
     "id": "ocd-person/3c2d4efe-dd4e-48cf-a83b-2a15791706a3",
@@ -709,7 +881,11 @@
     "phone": "801-538-1029",
     "photoUrl": "https://le.utah.gov/images/legislator/PETERK.jpg",
     "website": "https://house.utah.gov/rep/PETERK/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "districtOffice": "2122 W. 1800 North Suite D #340, Clinton, UT 84015",
+    "districtPhone": "385-285-6790",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Karen_M._Peterson",
+    "ballotpediaUrl": "https://ballotpedia.org/Karen_Peterson_(Utah)"
   },
   {
     "id": "ocd-person/59eb30b5-da7b-4161-85b3-8b48c01f4c2b",
@@ -723,7 +899,9 @@
     "phone": "801-538-1029",
     "photoUrl": "https://le.utah.gov/images/legislator/LISONK.jpg",
     "website": "https://house.utah.gov/rep/LISONK/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Karianne_Lisonbee",
+    "ballotpediaUrl": "https://ballotpedia.org/Karianne_Lisonbee"
   },
   {
     "id": "ocd-person/67c6161b-0222-4702-85ce-7409bc5bc86a",
@@ -737,7 +915,9 @@
     "phone": "385-222-1742",
     "photoUrl": "https://le.utah.gov/images/legislator/RIEBEK.jpg",
     "website": "https://senate.utah.gov/sen/RIEBEK/",
-    "office": "P.O. Box 145115 350 N. State St., Suite 320, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145115 350 N. State St., Suite 320, Salt Lake City, UT 84114",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kathleen_Riebe",
+    "ballotpediaUrl": "https://ballotpedia.org/Kathleen_Riebe"
   },
   {
     "id": "ocd-person/37301850-0f06-4bbd-ba85-faa7c4d39906",
@@ -751,7 +931,11 @@
     "phone": "801-538-1029",
     "photoUrl": "https://le.utah.gov/images/legislator/HALLK.jpg",
     "website": "https://house.utah.gov/rep/HALLK/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "districtOffice": "UT",
+    "districtPhone": "801-834-3059",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Katy_Hall",
+    "ballotpediaUrl": "https://ballotpedia.org/Katy_Hall"
   },
   {
     "id": "ocd-person/aee56bc8-022b-4351-81c0-9b5050846a8b",
@@ -765,7 +949,11 @@
     "phone": "801-538-1029",
     "photoUrl": "https://le.utah.gov/images/legislator/CHRISKJ.jpg",
     "website": "https://house.utah.gov/rep/CHRISKJ/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "districtOffice": "1256 E. 1500 North, Lehi, UT 84043",
+    "districtPhone": "801-592-5709",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kay_Christofferson",
+    "ballotpediaUrl": "https://ballotpedia.org/Kay_Christofferson"
   },
   {
     "id": "ocd-person/7634ce2b-d172-4852-919c-7089eaa38db8",
@@ -779,7 +967,9 @@
     "phone": "801-538-1035",
     "photoUrl": "https://le.utah.gov/images/legislator/GROVEK.jpg",
     "website": "https://senate.utah.gov/sen/GROVEK/",
-    "office": "P.O. Box 145115 350 N. State St., Suite 320, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145115 350 N. State St., Suite 320, Salt Lake City, UT 84114",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Keith_Grover",
+    "ballotpediaUrl": "https://ballotpedia.org/Keith_Grover"
   },
   {
     "id": "ocd-person/c76bd4cf-9149-46e8-a001-e2c81c5942d5",
@@ -793,7 +983,11 @@
     "phone": "801-538-1029",
     "photoUrl": "https://le.utah.gov/images/legislator/IVORYK.jpg",
     "website": "https://house.utah.gov/rep/IVORYK/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "districtOffice": "8393 S. 2010 West, West Jordan, UT 84088",
+    "districtPhone": "801-694-8380",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ken_Ivory",
+    "ballotpediaUrl": "https://ballotpedia.org/Ken_Ivory"
   },
   {
     "id": "ocd-person/a919fa9b-f3f7-480f-b578-4a49bb4b572e",
@@ -807,7 +1001,9 @@
     "phone": "801-538-1035",
     "photoUrl": "https://le.utah.gov/images/legislator/STRATKJ.jpg",
     "website": "https://house.utah.gov/rep/STRATKJ/",
-    "office": "P.O. Box 145115 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145115 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Keven_Stratton",
+    "ballotpediaUrl": "https://ballotpedia.org/Keven_Stratton"
   },
   {
     "id": "ocd-person/c421a26f-c1c1-4398-be94-d77d312ea3fe",
@@ -821,7 +1017,9 @@
     "phone": "801-538-1035",
     "photoUrl": "https://le.utah.gov/images/legislator/CULLIKA.jpg",
     "website": "https://senate.utah.gov/sen/CULLIKA/",
-    "office": "P.O. Box 145115 350 N. State St., Suite 320, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145115 350 N. State St., Suite 320, Salt Lake City, UT 84114",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kirk_Cullimore_Jr.",
+    "ballotpediaUrl": "https://ballotpedia.org/Kirk_Cullimore"
   },
   {
     "id": "ocd-person/d428d2ed-8644-459a-b374-7535561a1482",
@@ -833,8 +1031,13 @@
     "party": "Republican",
     "email": "kchevrier@le.utah.gov",
     "phone": "801-538-1029",
+    "photoUrl": "https://le.utah.gov/images/legislator/CHEVRK.jpg",
     "website": "https://house.utleg.gov/rep/CHEVRK/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "districtOffice": "UT",
+    "districtPhone": "801-520-6773",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kristen_Chevrier",
+    "ballotpediaUrl": "https://ballotpedia.org/Kristen_Chevrier"
   },
   {
     "id": "ocd-person/72df7728-0455-4b7b-9432-745f4365d99e",
@@ -846,8 +1049,10 @@
     "party": "Republican",
     "email": "lhansen@le.utah.gov",
     "phone": "801-538-1029",
+    "photoUrl": "https://le.utah.gov/images/legislator/LHANSEN.jpg",
     "website": "https://house.utleg.gov/rep/LHANSEN/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "ballotpediaUrl": "https://ballotpedia.org/Leah_Hansen_(Utah)"
   },
   {
     "id": "ocd-person/74f25c67-1e6f-48f1-b3e3-49bbdf85539a",
@@ -861,7 +1066,10 @@
     "phone": "801-538-1035",
     "photoUrl": "https://le.utah.gov/images/legislator/FILLML.jpg",
     "website": "https://senate.utah.gov/sen/FILLML/",
-    "office": "P.O. Box 145115 350 N. State St., Suite 320, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145115 350 N. State St., Suite 320, Salt Lake City, UT 84114",
+    "districtOffice": "10167 S. 1190 West, South Jordan, UT 84095",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lincoln_Fillmore",
+    "ballotpediaUrl": "https://ballotpedia.org/Lincoln_Fillmore"
   },
   {
     "id": "ocd-person/cc269dc8-cef7-4e8d-a3fc-0d658d1dcfcc",
@@ -875,7 +1083,11 @@
     "phone": "801-538-1029",
     "photoUrl": "https://img1.wsimg.com/isteam/ip/214c6333-69cf-4437-a4a5-149983b67c86/123-bKwEnQhUdpI%20(1)%202.JPEG/:/cr=t:2.05%25,l:12.92%25,w:73.53%25,h:73.53%25/rs=w:355,h:355,cg:true,m",
     "website": "https://house.utleg.gov/rep/SHEPHL/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "districtOffice": "895 N. 2552 West, Provo, UT 84601",
+    "districtPhone": "801-903-8998",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lisa_Shepherd",
+    "ballotpediaUrl": "https://ballotpedia.org/Lisa_Shepherd"
   },
   {
     "id": "ocd-person/afd0bd15-a816-44ae-b28e-cecf50dda45b",
@@ -889,7 +1101,11 @@
     "phone": "801-538-1029",
     "photoUrl": "https://images.squarespace-cdn.com/content/v1/653bf32647727060129bd0cf/f7061061-f68f-4697-9dc5-fd2bcc264299/IMG_7508.jpg",
     "website": "https://house.utleg.gov/rep/MONSOL/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "districtOffice": "158 S. 200 East, Blanding, UT 84511",
+    "districtPhone": "801-834-5270",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Logan_Monson",
+    "ballotpediaUrl": "https://ballotpedia.org/Logan_Monson"
   },
   {
     "id": "ocd-person/6983c74c-3687-4e48-b462-38a80caeb260",
@@ -903,7 +1119,9 @@
     "phone": "801-538-1035",
     "photoUrl": "https://le.utah.gov/images/legislator/ESCAML.jpg",
     "website": "https://senate.utah.gov/sen/ESCAML/",
-    "office": "P.O. Box 145115 350 N. State St., Suite 320, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145115 350 N. State St., Suite 320, Salt Lake City, UT 84114",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Luz_Escamilla",
+    "ballotpediaUrl": "https://ballotpedia.org/Luz_Escamilla"
   },
   {
     "id": "ocd-person/5d383c2b-0450-48db-92bf-e20977953cd8",
@@ -917,7 +1135,11 @@
     "phone": "801-538-1029",
     "photoUrl": "https://le.utah.gov/images/legislator/STRONMA.jpg",
     "website": "https://house.utah.gov/rep/STRONMA/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "districtOffice": "2628 Clydesdale Circle, Bluffdale, UT 84065",
+    "districtPhone": "385-275-5682",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mark_Strong_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Mark_Strong"
   },
   {
     "id": "ocd-person/ad88a882-c27b-4ceb-8476-b7a3d2a9dd19",
@@ -931,21 +1153,11 @@
     "phone": "801-538-1029",
     "photoUrl": "https://le.utah.gov/images/legislator/MACPHM.jpg",
     "website": "https://house.utah.gov/rep/MACPHM/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
-  },
-  {
-    "id": "ocd-person/8d2d4368-9f6a-4f8e-a7a6-782b3cb23eda",
-    "name": "Matt Gwynn",
-    "firstName": "Matt",
-    "lastName": "Gwynn",
-    "chamber": "lower",
-    "district": "6",
-    "party": "Republican",
-    "email": "mgwynn@le.utah.gov",
-    "phone": "801-538-1029",
-    "photoUrl": "https://le.utah.gov/images/legislator/GWYNNM.jpg",
-    "website": "https://house.utah.gov/rep/GWYNNM/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "districtOffice": "UT",
+    "districtPhone": "801-520-2974",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Matt_MacPherson",
+    "ballotpediaUrl": "https://ballotpedia.org/Matt_MacPherson"
   },
   {
     "id": "ocd-person/861428f5-6456-4c94-b1ed-838b01a7d845",
@@ -959,7 +1171,11 @@
     "phone": "801-538-1029",
     "photoUrl": "https://le.utah.gov/images/legislator/BALLAMG.jpg",
     "website": "https://house.utah.gov/rep/BALLAMG/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "districtOffice": "UT",
+    "districtPhone": "801-633-6561",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Melissa_Garff_Ballard",
+    "ballotpediaUrl": "https://ballotpedia.org/Melissa_Garff_Ballard"
   },
   {
     "id": "ocd-person/8ffe791d-6a74-412b-a435-ee04045e0ad0",
@@ -973,7 +1189,11 @@
     "phone": "801-538-1035",
     "photoUrl": "https://le.utah.gov/images/legislator/MCKELMK.jpg",
     "website": "https://senate.utah.gov/sen/MCKELMK/",
-    "office": "P.O. Box 145115 350 N. State St., Suite 320, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145115 350 N. State St., Suite 320, Salt Lake City, UT 84114",
+    "districtOffice": "642 Kirby Lane Suite 105, Spanish Fork, UT 84660",
+    "districtPhone": "801-798-9000",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mike_McKell",
+    "ballotpediaUrl": "https://ballotpedia.org/Mike_McKell"
   },
   {
     "id": "ocd-person/656dec4e-3c95-43b1-9059-f2259300f88b",
@@ -987,7 +1207,9 @@
     "phone": "801-538-1029",
     "photoUrl": "https://le.utah.gov/images/legislator/KOHLEM.jpg",
     "website": "https://house.utah.gov/rep/KOHLEM/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mike_Kohler",
+    "ballotpediaUrl": "https://ballotpedia.org/Mike_Kohler"
   },
   {
     "id": "ocd-person/e9792114-e077-4663-96c4-94d679c66ace",
@@ -1001,7 +1223,11 @@
     "phone": "801-538-1029",
     "photoUrl": "https://le.utah.gov/images/legislator/PETERM.jpg",
     "website": "https://house.utah.gov/rep/PETERM/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "districtOffice": "UT",
+    "districtPhone": "435-770-6925",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mike_Petersen_(Utah_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Mike_Petersen_(Utah)"
   },
   {
     "id": "ocd-person/d1046a0c-ddd3-4fed-be41-13da161d6231",
@@ -1015,7 +1241,9 @@
     "phone": "801-538-1029",
     "photoUrl": "https://le.utah.gov/images/legislator/SCHULM.jpg",
     "website": "https://house.utah.gov/rep/SCHULM/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mike_Schultz_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Mike_Schultz_(Utah)"
   },
   {
     "id": "ocd-person/c9f2ef36-ee69-4e91-9da9-6c9311334912",
@@ -1029,7 +1257,9 @@
     "phone": "801-538-1035",
     "photoUrl": "https://le.utah.gov/images/legislator/BLOUIN.jpg",
     "website": "https://senate.utah.gov/sen/BLOUIN/",
-    "office": "P.O. Box 145115 350 N. State St., Suite 320, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145115 350 N. State St., Suite 320, Salt Lake City, UT 84114",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Nate_Blouin",
+    "ballotpediaUrl": "https://ballotpedia.org/Nate_Blouin"
   },
   {
     "id": "ocd-person/00670b53-62f7-4c0f-b229-eb1fad6dbbbc",
@@ -1043,7 +1273,11 @@
     "phone": "801-538-1029",
     "photoUrl": "https://le.utah.gov/images/legislator/ABBOTN.jpg",
     "website": "https://house.utah.gov/rep/ABBOTN/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "districtOffice": "195 S. Palisade Drive, Orem, UT 84097",
+    "districtPhone": "385-358-3269",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Nelson_Abbott",
+    "ballotpediaUrl": "https://ballotpedia.org/Nelson_Abbott"
   },
   {
     "id": "ocd-person/08c69398-e218-46a2-a843-9f1bfe088caa",
@@ -1057,7 +1291,9 @@
     "phone": "801-538-1029",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/NicholeenPeck2024c.jpg",
     "website": "https://house.utleg.gov/rep/PECKNI/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Nicholeen_P._Peck",
+    "ballotpediaUrl": "https://ballotpedia.org/Nicholeen_Peck"
   },
   {
     "id": "ocd-person/8e36fabe-9e2a-4ccd-b29a-1395d6318560",
@@ -1071,7 +1307,11 @@
     "phone": "801-538-1029",
     "photoUrl": "https://le.utah.gov/images/legislator/THURSNK.jpg",
     "website": "https://house.utah.gov/rep/THURSNK/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "districtOffice": "965 E. Center St., Provo, UT 84606",
+    "districtPhone": "801-477-5348",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Norm_Thurston",
+    "ballotpediaUrl": "https://ballotpedia.org/Norm_Thurston"
   },
   {
     "id": "ocd-person/d8c2c3ff-83a7-45f7-88bb-fb01b8cd624e",
@@ -1085,7 +1325,11 @@
     "phone": "801-538-1029",
     "photoUrl": "https://le.utah.gov/images/legislator/CUTLEP.jpg",
     "website": "https://house.utah.gov/rep/CUTLEP/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "districtOffice": "1872 N. Main St., Centerville, UT 84014",
+    "districtPhone": "801-923-4618",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Paul_A._Cutler",
+    "ballotpediaUrl": "https://ballotpedia.org/Paul_Cutler"
   },
   {
     "id": "ocd-person/5b90793c-f90a-4b0e-b9e6-78943bfaab1c",
@@ -1099,7 +1343,11 @@
     "phone": "801-538-1029",
     "photoUrl": "https://le.utah.gov/images/legislator/WALTER.jpg",
     "website": "https://house.utah.gov/rep/WALTER/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "districtOffice": "243 E. St. George Blvd. Suite 200, St. George, UT 84770",
+    "districtPhone": "435-627-5720",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/R._Neil_Walter",
+    "ballotpediaUrl": "https://ballotpedia.org/Neil_Walter"
   },
   {
     "id": "ocd-person/dbd3789a-5040-4015-9474-ac27b4a32010",
@@ -1113,7 +1361,11 @@
     "phone": "801-538-1029",
     "photoUrl": "https://le.utah.gov/images/legislator/WARDR.jpg",
     "website": "https://house.utah.gov/rep/WARDR/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "districtOffice": "954 E. Millbrook Way, Bountiful, UT 84010",
+    "districtPhone": "801-440-8765",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Raymond_Ward",
+    "ballotpediaUrl": "https://ballotpedia.org/Raymond_Ward"
   },
   {
     "id": "ocd-person/66ec0903-117f-4006-8e05-e7326330fc63",
@@ -1127,7 +1379,26 @@
     "phone": "801-538-1029",
     "photoUrl": "https://le.utah.gov/images/legislator/SHIPPRP.jpg",
     "website": "https://house.utah.gov/rep/SHIPPRP/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "districtOffice": "749 S. St. James Place, Cedar City, UT 84720",
+    "districtPhone": "435-590-1073",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rex_Shipp",
+    "ballotpediaUrl": "https://ballotpedia.org/Rex_Shipp"
+  },
+  {
+    "id": "ocd-person/b68ab473-0a2e-41f5-9732-fbffd6738865",
+    "name": "Rob Bishop",
+    "firstName": "Rob",
+    "lastName": "Bishop",
+    "chamber": "lower",
+    "district": "6",
+    "party": "Republican",
+    "email": "rbishop@le.utah.gov",
+    "phone": "801-538-1029",
+    "website": "https://house.utleg.gov/rep/BISHORW/",
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rob_Bishop",
+    "ballotpediaUrl": "https://ballotpedia.org/Rob_Bishop"
   },
   {
     "id": "ocd-person/5079192a-3d15-4a00-b0c7-2cf29d320035",
@@ -1141,7 +1412,9 @@
     "phone": "435-823-2727",
     "photoUrl": "https://le.utah.gov/images/legislator/WINTER.jpg",
     "website": "https://senate.utah.gov/sen/WINTER/",
-    "office": "P.O. Box 145115 350 N. State St., Suite 320, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145115 350 N. State St., Suite 320, Salt Lake City, UT 84114",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ronald_Winterton",
+    "ballotpediaUrl": "https://ballotpedia.org/Ronald_Winterton"
   },
   {
     "id": "ocd-person/6944b102-0d94-4267-916f-59fbd6f2bb18",
@@ -1155,7 +1428,11 @@
     "phone": "801-538-1029",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Rosalba_Dominguez_20240921_082723.jpeg",
     "website": "https://house.utleg.gov/rep/DOMINR/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "districtOffice": "UT",
+    "districtPhone": "801-419-3283",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rosalba_Dominguez",
+    "ballotpediaUrl": "https://ballotpedia.org/Rosalba_Dominguez"
   },
   {
     "id": "ocd-person/9657724b-ade7-467e-b77d-b77fb98891c5",
@@ -1169,7 +1446,9 @@
     "phone": "801-538-1029",
     "photoUrl": "https://le.utah.gov/images/legislator/WILCORD.jpg",
     "website": "https://house.utah.gov/rep/WILCORD/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ryan_Wilcox",
+    "ballotpediaUrl": "https://ballotpedia.org/Ryan_Wilcox"
   },
   {
     "id": "ocd-person/b0a5ca40-5e04-495c-80e0-2c5d3608273d",
@@ -1183,7 +1462,11 @@
     "phone": "801-538-1029",
     "photoUrl": "https://le.utah.gov/images/legislator/HAYESS.jpg",
     "website": "https://house.utah.gov/rep/HAYESS/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "districtOffice": "UT",
+    "districtPhone": "801-657-0395",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sahara_Hayes",
+    "ballotpediaUrl": "https://ballotpedia.org/Sahara_Hayes"
   },
   {
     "id": "ocd-person/8c8d32a7-32ed-4ef1-a03d-9661ca98fc5a",
@@ -1197,7 +1480,9 @@
     "phone": "801-538-1029",
     "photoUrl": "https://le.utah.gov/images/legislator/HOLLIS.jpg",
     "website": "https://house.utah.gov/rep/HOLLIS/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sandra_Hollins",
+    "ballotpediaUrl": "https://ballotpedia.org/Sandra_Hollins"
   },
   {
     "id": "ocd-person/d1a1c031-9dce-4727-a298-ec92cb34fe40",
@@ -1211,7 +1496,10 @@
     "phone": "801-538-1035",
     "photoUrl": "https://le.utah.gov/images/legislator/SANDASD.jpg",
     "website": "https://senate.utah.gov/sen/SANDASD/",
-    "office": "P.O. Box 145115 350 N. State St., Suite 320, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145115 350 N. State St., Suite 320, Salt Lake City, UT 84114",
+    "districtOffice": "635 Hillcrest Circle, Tremonton, UT 84337",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Scott_Sandall",
+    "ballotpediaUrl": "https://ballotpedia.org/Scott_Sandall"
   },
   {
     "id": "ocd-person/d7a3c337-4395-4e23-9e11-74cb55744f14",
@@ -1225,7 +1513,9 @@
     "phone": "801-538-1029",
     "photoUrl": "https://le.utah.gov/images/legislator/CHEWSH.jpg",
     "website": "https://house.utah.gov/rep/CHEWSH/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Scott_Chew",
+    "ballotpediaUrl": "https://ballotpedia.org/Scott_H._Chew"
   },
   {
     "id": "ocd-person/236ec233-4d24-4514-82a5-05a028c1de14",
@@ -1239,7 +1529,11 @@
     "phone": "801-538-1029",
     "photoUrl": "https://le.utah.gov/images/legislator/GRICIS.jpg",
     "website": "https://house.utah.gov/rep/GRICIS/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "districtOffice": "UT",
+    "districtPhone": "801-901-8251",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Stephanie_Gricius",
+    "ballotpediaUrl": "https://ballotpedia.org/Stephanie_Gricius"
   },
   {
     "id": "ocd-person/edf0f18c-4b89-4d34-a2eb-6ce79accdaa7",
@@ -1253,7 +1547,9 @@
     "phone": "801-538-1035",
     "photoUrl": "https://le.utah.gov/images/legislator/PITCHS.jpg",
     "website": "https://house.utah.gov/rep/PITCHS/",
-    "office": "P.O. Box 145115 350 N. State St., Suite 320, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145115 350 N. State St., Suite 320, Salt Lake City, UT 84114",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Stephanie_Pitcher",
+    "ballotpediaUrl": "https://ballotpedia.org/Stephanie_Pitcher"
   },
   {
     "id": "ocd-person/451ecbcb-42a9-467b-98c7-e0b3e5bd32d3",
@@ -1267,7 +1563,10 @@
     "phone": "801-538-1029",
     "photoUrl": "https://le.utah.gov/images/legislator/WHYTESL.jpg",
     "website": "https://house.utah.gov/rep/WHYTESL/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "districtOffice": "913 S. Iris Lane, Mapleton, UT 84664",
+    "districtPhone": "385-271-8435",
+    "ballotpediaUrl": "https://ballotpedia.org/Stephen_Whyte"
   },
   {
     "id": "ocd-person/06d334f0-dd19-4a8e-b1c9-5f1ae1d90e26",
@@ -1281,7 +1580,11 @@
     "phone": "801-538-1029",
     "photoUrl": "https://le.utah.gov/images/legislator/ELIASS.jpg",
     "website": "https://house.utah.gov/rep/ELIASS/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "districtOffice": "8157 S. Grambling Way, Sandy, UT 84094",
+    "districtPhone": "801-673-4748",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Steve_Eliason",
+    "ballotpediaUrl": "https://ballotpedia.org/Steven_Eliason"
   },
   {
     "id": "ocd-person/b5285658-1e71-48a2-8641-a2bc75957b24",
@@ -1295,7 +1598,11 @@
     "phone": "801-538-1029",
     "photoUrl": "https://le.utah.gov/images/legislator/BARLOSE.jpg",
     "website": "https://house.utah.gov/rep/BARLOSE/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "districtOffice": "940 Signal Hill, Fruit Heights, UT 84037",
+    "districtPhone": "801-289-6699",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Stewart_Barlow",
+    "ballotpediaUrl": "https://ballotpedia.org/Stewart_Barlow"
   },
   {
     "id": "ocd-person/faa88790-ac92-4a09-b00e-7049cc8521b6",
@@ -1309,7 +1616,11 @@
     "phone": "801-538-1029",
     "photoUrl": "https://le.utah.gov/images/legislator/PETERT.jpg",
     "website": "https://house.utah.gov/rep/PETERT/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "districtOffice": "UT",
+    "districtPhone": "435-720-3516",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Thomas_Peterson_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Thomas_Peterson_(Utah)"
   },
   {
     "id": "ocd-person/85745a94-5b45-4ac2-a258-1a1f48dc33db",
@@ -1323,7 +1634,11 @@
     "phone": "801-538-1029",
     "photoUrl": "https://le.utah.gov/images/legislator/house/AUXIET.jpg",
     "website": "https://house.utleg.gov/rep/AUXIET/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "districtOffice": "UT",
+    "districtPhone": "801-450-3701",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tiara_Auxier",
+    "ballotpediaUrl": "https://ballotpedia.org/Tiara_Auxier"
   },
   {
     "id": "ocd-person/6d49f384-ea91-41f2-b703-229a0a7452d9",
@@ -1337,7 +1652,10 @@
     "phone": "801-538-1035",
     "photoUrl": "https://le.utah.gov/images/legislator/WEILET.jpg",
     "website": "https://senate.utah.gov/sen/WEILET/",
-    "office": "P.O. Box 145115 350 N. State St., Suite 320, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145115 350 N. State St., Suite 320, Salt Lake City, UT 84114",
+    "districtOffice": "1248 W. 1900 South, Woods Cross, UT 84087",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Todd_Weiler",
+    "ballotpediaUrl": "https://ballotpedia.org/Todd_Weiler"
   },
   {
     "id": "ocd-person/1460f74d-e7af-44a6-8e24-5c3fe8013251",
@@ -1351,21 +1669,11 @@
     "phone": "801-538-1029",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Tracy_Miller.jpeg",
     "website": "https://house.utleg.gov/rep/MILLET/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
-  },
-  {
-    "id": "ocd-person/3187c9ea-c509-45f3-9eb4-a8ba2d8fd7d9",
-    "name": "Trevor Lee",
-    "firstName": "Trevor",
-    "lastName": "Lee",
-    "chamber": "lower",
-    "district": "16",
-    "party": "Republican",
-    "email": "tlee@le.utah.gov",
-    "phone": "801-538-1029",
-    "photoUrl": "https://le.utah.gov/images/legislator/LEETA.jpg",
-    "website": "https://house.utah.gov/rep/LEETA/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "districtOffice": "UT",
+    "districtPhone": "801-707-5768",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tracy_Miller_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Tracy_Miller"
   },
   {
     "id": "ocd-person/7e80bacf-6b3d-4f33-b854-06dab80a29bd",
@@ -1379,21 +1687,9 @@
     "phone": "801-538-1029",
     "photoUrl": "https://cdn.prod.website-files.com/659704f376348afc7dd40409/670080f6423ccdeef1b4812e_Troy-Shelley.png",
     "website": "https://house.utleg.gov/rep/SHELLT/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
-  },
-  {
-    "id": "ocd-person/739625fa-268f-48d6-9ffa-b80fc19797d5",
-    "name": "Tyler Clancy",
-    "firstName": "Tyler",
-    "lastName": "Clancy",
-    "chamber": "lower",
-    "district": "60",
-    "party": "Republican",
-    "email": "tclancy@le.utah.gov",
-    "phone": "801-538-1029",
-    "photoUrl": "https://le.utah.gov/images/legislator/CLANCT.jpg",
-    "website": "https://house.utah.gov/rep/CLANCT/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Troy_Shelley",
+    "ballotpediaUrl": "https://ballotpedia.org/Troy_Shelley"
   },
   {
     "id": "ocd-person/8662eb2d-1ff1-4bd2-9a3b-41fa8770cc18",
@@ -1407,7 +1703,11 @@
     "phone": "801-538-1029",
     "photoUrl": "https://le.utah.gov/images/legislator/PETERVL.jpg",
     "website": "https://house.utah.gov/rep/PETERVL/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "districtOffice": "528 W. 1160 North, Orem, UT 84057",
+    "districtPhone": "801-224-4473",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Val_Peterson_(Utah_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Val_Peterson"
   },
   {
     "id": "ocd-person/ba4559e4-0f36-4c48-afb9-3e142b670f86",
@@ -1421,7 +1721,11 @@
     "phone": "801-538-1029",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/VeronaMauga.jpg",
     "website": "https://house.utleg.gov/rep/MAUGAV/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "districtOffice": "UT",
+    "districtPhone": "801-573-8279",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Verona_Mauga",
+    "ballotpediaUrl": "https://ballotpedia.org/Verona_Mauga"
   },
   {
     "id": "ocd-person/5cef5a01-f3ea-4c28-aa39-036449806388",
@@ -1435,7 +1739,11 @@
     "phone": "801-538-1029",
     "photoUrl": "https://le.utah.gov/images/legislator/BROOKW.jpg",
     "website": "https://house.utah.gov/rep/BROOKW/",
-    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145030 350 N. State St., Suite 350, Salt Lake City, UT 84114",
+    "districtOffice": "393 W. 300 North, St. George, UT 84770",
+    "districtPhone": "435-817-3530",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Walt_Brooks",
+    "ballotpediaUrl": "https://ballotpedia.org/Walt_Brooks"
   },
   {
     "id": "ocd-person/c351d354-5397-4f6e-b67d-98c41cea0d2c",
@@ -1449,6 +1757,8 @@
     "phone": "801-538-1035",
     "photoUrl": "https://le.utah.gov/images/legislator/HARPEWA.jpg",
     "website": "https://senate.utah.gov/sen/HARPEWA/",
-    "office": "P.O. Box 145115 350 N. State St., Suite 320, Salt Lake City, UT 84114"
+    "office": "P.O. Box 145115 350 N. State St., Suite 320, Salt Lake City, UT 84114",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Wayne_Harper",
+    "ballotpediaUrl": "https://ballotpedia.org/Wayne_Harper"
   }
 ]

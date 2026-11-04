@@ -9,9 +9,13 @@
     "party": "Republican",
     "email": "adam.anderson@flhouse.gov",
     "phone": "850-717-5057",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4885.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4885.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4885&LegislativeTermId=90",
-    "office": "Room 209, House Office Building 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 209, House Office Building 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "682 E. Klosterman Road Suite BB038, Tarpon Springs, FL 34689",
+    "districtPhone": "727-382-8300",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Adam_Anderson_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Adam_Anderson"
   },
   {
     "id": "ocd-person/c94b1151-5034-482b-8d7b-f91f9bb5f951",
@@ -23,9 +27,13 @@
     "party": "Republican",
     "email": "adam.botana@flhouse.gov",
     "phone": "850-717-5080",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4782.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4782.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4782&LegislativeTermId=90",
-    "office": "Room 303, House Office Building 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 303, House Office Building 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "Sunshine Professional Center 9240 Bonita Beach Road SE, Suite 2215, Bonita Springs, FL 34135",
+    "districtPhone": "239-317-8600",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Adam_Botana",
+    "ballotpediaUrl": "https://ballotpedia.org/Adam_Botana"
   },
   {
     "id": "ocd-person/b2fce1a8-4ba6-483b-a534-fa48cc43ee7f",
@@ -37,9 +45,13 @@
     "party": "Republican",
     "email": "alex.rizo@flhouse.gov",
     "phone": "850-717-5112",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4796.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4796.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4796&LegislativeTermId=90",
-    "office": "Room 313, House Office Building 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 313, House Office Building 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "3798 W. 12th Ave. Suite A, Hialeah, FL 33012",
+    "districtPhone": "305-364-3114",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Alex_Rizo",
+    "ballotpediaUrl": "https://ballotpedia.org/Alex_Rizo"
   },
   {
     "id": "ocd-person/7f1e874f-ae8b-42a0-90d9-fe867cf9fb45",
@@ -53,7 +65,11 @@
     "phone": "850-487-5038",
     "photoUrl": "https://flsenate.gov/PublishedContent/Senators/2022-2024/Photos/s38_5525.jpg",
     "website": "https://flsenate.gov/Senators/2022-2024/S38",
-    "office": "Room 305, Senate Building 404 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 305, Senate Building 404 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "Kendall Campus 11011 SW 104th St., Suite 5101, Miami, FL 33176",
+    "districtPhone": "305-596-3002",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Alexis_Calatayud",
+    "ballotpediaUrl": "https://ballotpedia.org/Alexis_Calatayud"
   },
   {
     "id": "ocd-person/c26599eb-5ef8-44c3-93a6-77cf23a9567e",
@@ -65,9 +81,11 @@
     "party": "Democratic",
     "email": "allison.tant@flhouse.gov",
     "phone": "850-717-5009",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4765.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4765.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4765&LegislativeTermId=90",
-    "office": "Room 329, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 329, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Allison_Tant",
+    "ballotpediaUrl": "https://ballotpedia.org/Allison_Tant"
   },
   {
     "id": "ocd-person/afd55a58-b8f6-4dd7-9d93-a2207b65e425",
@@ -81,7 +99,11 @@
     "phone": "850-487-5040",
     "photoUrl": "https://flsenate.gov/PublishedContent/Senators/2022-2024/Photos/s40_5379.jpg",
     "website": "https://flsenate.gov/Senators/2022-2024/S40",
-    "office": "Room 410, Senate Building 404 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 410, Senate Building 404 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "Miami-Dade College, West Campus 3800 NW 115th Ave., Suite 1112, Doral, FL 33178",
+    "districtPhone": "305-470-2552",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ana_Maria_Rodriguez_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Ana_Maria_Rodriguez"
   },
   {
     "id": "ocd-person/66c3a112-3008-4332-a6b0-8990a7d992d5",
@@ -93,9 +115,11 @@
     "party": "Democratic",
     "email": "angela.nixon@flhouse.gov",
     "phone": "850-717-5013",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4766.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4766.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4766&LegislativeTermId=90",
-    "office": "Room 1102, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 1102, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Angie_Nixon",
+    "ballotpediaUrl": "https://ballotpedia.org/Angela_Nixon"
   },
   {
     "id": "ocd-person/1f8e10ad-0047-4854-b696-38e15fda7afa",
@@ -107,9 +131,13 @@
     "party": "Democratic",
     "email": "anna.eskamani@flhouse.gov",
     "phone": "850-717-5042",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4746.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4746.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4746&LegislativeTermId=90",
-    "office": "Room 407, House Office Building 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 407, House Office Building 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "1507 E. Concord St., Orlando, FL 32803",
+    "districtPhone": "407-228-1451",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Anna_Eskamani",
+    "ballotpediaUrl": "https://ballotpedia.org/Anna_Eskamani"
   },
   {
     "id": "ocd-person/ad877adf-e8f2-4f31-bdd2-38a6aaf74884",
@@ -123,7 +151,11 @@
     "phone": "850-717-5093",
     "photoUrl": "https://www.hlcpbc.org/wp-content/uploads/2021/01/Anne_Gerwig.jpg",
     "website": "https://www.flhouse.gov/Sections/Representatives/custom/details.aspx?MemberId=4925",
-    "office": "Room 1301, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 1301, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "6685 Forest Hill Blvd. Suite 208, Greenacres, FL 33413",
+    "districtPhone": "561-785-0630",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Anne_Gerwig",
+    "ballotpediaUrl": "https://ballotpedia.org/Anne_Gerwig"
   },
   {
     "id": "ocd-person/2c62c9ae-8d1d-4dc3-a86a-fcc5dd7ba286",
@@ -135,9 +167,13 @@
     "party": "Democratic",
     "email": "ashley.gantt@flhouse.gov",
     "phone": "850-717-5109",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4897.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4897.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4897&LegislativeTermId=90",
-    "office": "Room 1101, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 1101, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "5400 NW 22nd Ave. Suite 101, Building C, Miami, FL 33142",
+    "districtPhone": "786-435-9410",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ashley_Gantt",
+    "ballotpediaUrl": "https://ballotpedia.org/Ashley_Gantt"
   },
   {
     "id": "ocd-person/2af7bd80-7f71-4530-8d69-ee448bc32255",
@@ -151,7 +187,11 @@
     "phone": "850-487-5035",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/_oMaIez3_400x400.jpg",
     "website": "https://www.flsenate.gov/Senators/S35",
-    "office": "Room 205, Senate Building 404 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 205, Senate Building 404 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "3351 N. University Drive Suite A, Davie, FL 33024",
+    "districtPhone": "954-424-6674",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Barbara_Sharief",
+    "ballotpediaUrl": "https://ballotpedia.org/Barbara_Sharief"
   },
   {
     "id": "ocd-person/5c81dfe7-1cec-45e8-8044-6d9cd324f2e8",
@@ -165,7 +205,11 @@
     "phone": "850-487-5027",
     "photoUrl": "https://flsenate.gov/PublishedContent/Senators/2022-2024/Photos/s27_5342.jpg",
     "website": "https://flsenate.gov/Senators/2022-2024/S27",
-    "office": "Room 409, The Capitol 404 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 409, The Capitol 404 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "150 N. Central Ave., Bartow, FL 33830",
+    "districtPhone": "863-534-0073",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ben_Albritton",
+    "ballotpediaUrl": "https://ballotpedia.org/Ben_Albritton"
   },
   {
     "id": "ocd-person/8e396afa-17d2-404c-9024-7aa8d7e00e0d",
@@ -177,9 +221,13 @@
     "party": "Republican",
     "email": "berny.jacques@flhouse.gov",
     "phone": "850-717-5059",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4886.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4886.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4886&LegislativeTermId=90",
-    "office": "Room 303, House Office Building 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 303, House Office Building 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "4625 E. Bay Drive Suite 207, Clearwater, FL 33764",
+    "districtPhone": "727-558-4230",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Berny_Jacques",
+    "ballotpediaUrl": "https://ballotpedia.org/Berny_Jacques"
   },
   {
     "id": "ocd-person/43724cbb-0b19-4fad-ae9b-1e8bcd47c16d",
@@ -193,7 +241,11 @@
     "phone": "850-717-5072",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/BillConerly2024.jpg",
     "website": "https://www.flhouse.gov/Sections/Representatives/custom/details.aspx?MemberId=4920",
-    "office": "Room 1401, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 1401, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "Mailbox 311 11523 Palmbrush Trail, Lakewood Ranch, FL 34202",
+    "districtPhone": "941-327-0150",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bill_Conerly",
+    "ballotpediaUrl": "https://ballotpedia.org/Bill_Conerly"
   },
   {
     "id": "ocd-person/92e88cfe-0a68-45e1-b84c-9f181a46554e",
@@ -207,7 +259,11 @@
     "phone": "850-717-5028",
     "photoUrl": "https://www.billpartington.com/images/Partington,-Bill-WEB-FILE.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4912&LegislativeTermId=91",
-    "office": "Room 1301, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 1301, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "444 Seabreeze Blvd. Suite 645, Daytona Beach, FL 32118",
+    "districtPhone": "386-230-1960",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bill_Partington",
+    "ballotpediaUrl": "https://ballotpedia.org/Bill_Partington"
   },
   {
     "id": "ocd-person/8d746fc8-370b-4d12-bcf8-3dd4a4061707",
@@ -219,9 +275,13 @@
     "party": "Republican",
     "email": "brad.yeager@flhouse.gov",
     "phone": "850-717-5056",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4882.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4882.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4882&LegislativeTermId=90",
-    "office": "Room 214, House Office Building 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 214, House Office Building 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "5509 Grand Blvd. Suite 200, New Port Richey, FL 34652",
+    "districtPhone": "727-274-9280",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Brad_Yeager",
+    "ballotpediaUrl": "https://ballotpedia.org/Brad_Yeager"
   },
   {
     "id": "ocd-person/4737f2dc-8241-4329-85fc-59a9c405d7b6",
@@ -233,8 +293,31 @@
     "party": "Republican",
     "email": "brian.hodgers@flhouse.gov",
     "phone": "850-717-5032",
-    "website": "https://www.flhouse.gov/Sections/Representatives/details.aspx?MemberId=5064",
-    "office": "Room 1401, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/5064.jpg",
+    "website": "https://www.flhouse.gov/Sections/Representatives/custom/details.aspx?MemberId=5064&LegislativeTermId=91",
+    "office": "Room 1401, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "2725 Judge Fran Jamieson Way Building B, Unit 202, Viera, FL 32940",
+    "districtPhone": "321-497-8200",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Brian_Hodgers",
+    "ballotpediaUrl": "https://ballotpedia.org/Brian_Hodgers"
+  },
+  {
+    "id": "ocd-person/528bc47a-e8c7-4a28-9923-aba1deefd976",
+    "name": "Brian Nathan",
+    "firstName": "Brian",
+    "lastName": "Nathan",
+    "chamber": "upper",
+    "district": "14",
+    "party": "Democratic",
+    "email": "nathan.brian.web@flsenate.gov",
+    "phone": "850-487-5014",
+    "photoUrl": "https://www.flsenate.gov/PublishedContent/Senators/2024-2026/Photos/s14_5606.jpg",
+    "website": "https://www.flsenate.gov/Senators/S14",
+    "office": "Room 224, Senate Building 404 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "701 W. Dr. Martin Luther King Jr. Blvd. Suite 2, Tampa, FL 33603",
+    "districtPhone": "813-281-2538",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Brian_Nathan",
+    "ballotpediaUrl": "https://ballotpedia.org/Brian_Nathan"
   },
   {
     "id": "ocd-person/617888c1-3369-49cd-a264-18ab663d2e8a",
@@ -246,23 +329,13 @@
     "party": "Democratic",
     "email": "bruce.antone@flhouse.gov",
     "phone": "850-717-5041",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4269.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4269.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4269&LegislativeTermId=90",
-    "office": "Room 1101, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
-  },
-  {
-    "id": "ocd-person/a4a5f92e-62cf-401b-9fc6-9d9a63498d5c",
-    "name": "Bryan Ávila",
-    "firstName": "Bryan",
-    "lastName": "Ávila",
-    "chamber": "upper",
-    "district": "39",
-    "party": "Republican",
-    "email": "avila.bryan.web@flsenate.gov",
-    "phone": "850-487-5039",
-    "photoUrl": "https://flsenate.gov/PublishedContent/Senators/2022-2024/Photos/s39_5459.jpg",
-    "website": "https://flsenate.gov/Senators/2022-2024/S39",
-    "office": "Room 309, Senate Building 404 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 1101, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "1003 S. Kirkman Road Suite 201, Orlando, FL 32811",
+    "districtPhone": "407-472-9820",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bruce_Antone",
+    "ballotpediaUrl": "https://ballotpedia.org/Bruce_Antone"
   },
   {
     "id": "ocd-person/df1d6ab6-b2cd-4a6f-b7cc-aa5a63d8011f",
@@ -274,9 +347,13 @@
     "party": "Democratic",
     "email": "smith.carlos.web@flsenate.gov",
     "phone": "850-487-5017",
-    "photoUrl": "https://www.myfloridahouse.gov//FileStores/Web/Imaging/Member/4642.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4642.jpg",
     "website": "https://www.flsenate.gov/Senators/S17",
-    "office": "Room 218, Senate Building 404 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 218, Senate Building 404 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "508 N. Mills Ave. Suite A, Orlando, FL 32803",
+    "districtPhone": "407-893-2422",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Carlos_Guillermo_Smith",
+    "ballotpediaUrl": "https://ballotpedia.org/Carlos_Guillermo_Smith"
   },
   {
     "id": "ocd-person/2aa3b059-b565-413d-9eac-24e34b541c1d",
@@ -289,8 +366,12 @@
     "email": "chad.johnson@flhouse.gov",
     "phone": "850-717-5022",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Chad_Johnson_20240808_095012.jpg",
-    "website": "https://www.flhouse.gov/Sections/Representatives/details.aspx?MemberId=4908",
-    "office": "Room 1302, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "website": "https://www.flhouse.gov/Sections/Representatives/custom/details.aspx?MemberId=4908&LegislativeTermId=91",
+    "office": "Room 1302, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "105 SW 140th Court Suite 1, Newberry, FL 32669",
+    "districtPhone": "352-496-3700",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Chad_Johnson_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Chad_Johnson_(Florida)"
   },
   {
     "id": "ocd-person/47cd160b-1e9e-469c-a939-002be336302f",
@@ -302,9 +383,13 @@
     "party": "Republican",
     "email": "chase.tramont@flhouse.gov",
     "phone": "850-717-5030",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4867.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4867.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4867&LegislativeTermId=90",
-    "office": "Room 214, House Office Building 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 214, House Office Building 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "5889 S. Williamson Blvd. Suite 201D, Port Orange, FL 32128",
+    "districtPhone": "386-278-1640",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Chase_Tramont",
+    "ballotpediaUrl": "https://ballotpedia.org/Chase_Tramont"
   },
   {
     "id": "ocd-person/54cd0ebc-6f93-489e-a919-3583fa32b26a",
@@ -316,9 +401,13 @@
     "party": "Republican",
     "email": "chip.lamarca@flhouse.gov",
     "phone": "850-717-5100",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4722.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4722.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4722&LegislativeTermId=90",
-    "office": "Room 214, House Office Building 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 214, House Office Building 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "1827 NE 24th St., Lighthouse Point, FL 33064",
+    "districtPhone": "954-953-2640",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Chip_LaMarca",
+    "ballotpediaUrl": "https://ballotpedia.org/Chip_LaMarca"
   },
   {
     "id": "ocd-person/89d7d4d0-82e7-4535-bb79-3260a7b432b5",
@@ -330,9 +419,13 @@
     "party": "Democratic",
     "email": "christine.hunschofsky@flhouse.gov",
     "phone": "850-717-5095",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4799.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4799.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4799&LegislativeTermId=90",
-    "office": "Room 329, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 329, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "4800 W. Copans Road, Coconut Creek, FL 33063",
+    "districtPhone": "954-953-2760",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Christine_Hunschofsky",
+    "ballotpediaUrl": "https://ballotpedia.org/Christine_Hunschofsky"
   },
   {
     "id": "ocd-person/f1eda85d-37f2-4475-a318-8278a11c9466",
@@ -346,7 +439,11 @@
     "phone": "850-487-5004",
     "photoUrl": "https://flsenate.gov/PublishedContent/Senators/2022-2024/Photos/s04_5394.jpg",
     "website": "https://flsenate.gov/Senators/2022-2024/S4",
-    "office": "Room 308, Senate Building 404 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 308, Senate Building 404 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "1615 Huffingham Road Suite 1, Jacksonville, FL 32216",
+    "districtPhone": "904-723-2035",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Clay_Yarborough",
+    "ballotpediaUrl": "https://ballotpedia.org/Clay_Yarborough"
   },
   {
     "id": "ocd-person/50d5881b-ceac-49a2-98db-87ef6e09438c",
@@ -360,7 +457,11 @@
     "phone": "850-487-5012",
     "photoUrl": "https://flsenate.gov/PublishedContent/Senators/2022-2024/Photos/s12_5414.jpg",
     "website": "https://flsenate.gov/Senators/2022-2024/S12",
-    "office": "Room 408, Senate Building 404 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 408, Senate Building 404 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "1375 Havendale Blvd. NW, Winter Haven, FL 33881",
+    "districtPhone": "863-413-1529",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Colleen_Burton",
+    "ballotpediaUrl": "https://ballotpedia.org/Colleen_Burton_(Florida)"
   },
   {
     "id": "ocd-person/fca5c9b2-da9e-4836-a3d5-366a25350976",
@@ -374,7 +475,9 @@
     "phone": "850-487-5003",
     "photoUrl": "https://flsenate.gov/PublishedContent/Senators/2022-2024/Photos/s03_5522.jpg",
     "website": "https://flsenate.gov/Senators/2022-2024/S3",
-    "office": "Room 303, Senate Building 404 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 303, Senate Building 404 S. Monroe St., Tallahassee, FL 32399",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Corey_Simon",
+    "ballotpediaUrl": "https://ballotpedia.org/Corey_Simon"
   },
   {
     "id": "ocd-person/66308162-9b64-4d34-a8bc-fac71407f7d5",
@@ -386,9 +489,13 @@
     "party": "Democratic",
     "email": "dan.daley@flhouse.gov",
     "phone": "850-717-5096",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4757.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4757.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4757&LegislativeTermId=90",
-    "office": "Room 403, House Office Building 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 403, House Office Building 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "9500 W. Sample Road, Coral Springs, FL 33065",
+    "districtPhone": "954-697-4390",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dan_Daley",
+    "ballotpediaUrl": "https://ballotpedia.org/Dan_Daley"
   },
   {
     "id": "ocd-person/767d2aef-21ee-4b6d-b64b-ed9350abaa60",
@@ -400,9 +507,13 @@
     "party": "Republican",
     "email": "dana.trabulsy@flhouse.gov",
     "phone": "850-717-5084",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4788.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4788.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4788&LegislativeTermId=90",
-    "office": "Room 313, House Office Building 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 313, House Office Building 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "2300 Virginia Ave., Fort Pierce, FL 34982",
+    "districtPhone": "772-710-1410",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dana_Trabulsy",
+    "ballotpediaUrl": "https://ballotpedia.org/Dana_Trabulsy"
   },
   {
     "id": "ocd-person/5a852452-a855-44a6-aa71-1e07e48c0c89",
@@ -414,23 +525,11 @@
     "party": "Republican",
     "email": "danny.alvarez@flhouse.gov",
     "phone": "850-717-5069",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4889.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4889.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4889&LegislativeTermId=90",
-    "office": "Room 412, House Office Building 402 S. Monroe St., Tallahassee, FL 32399"
-  },
-  {
-    "id": "ocd-person/ed30b061-bbdc-44f3-8a40-e574646d6cf8",
-    "name": "Daniel Perez",
-    "firstName": "Daniel",
-    "lastName": "Perez",
-    "chamber": "lower",
-    "district": "116",
-    "party": "Republican",
-    "email": "daniel.perez@flhouse.gov",
-    "phone": "305-463-1230",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4690.jpg",
-    "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4690&LegislativeTermId=90",
-    "office": "Room 420, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 412, House Office Building 402 S. Monroe St., Tallahassee, FL 32399",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Danny_Alvarez",
+    "ballotpediaUrl": "https://ballotpedia.org/Danny_Alvarez"
   },
   {
     "id": "ocd-person/55815523-33b5-4d42-9864-28e00b805e68",
@@ -444,7 +543,11 @@
     "phone": "850-487-5023",
     "photoUrl": "https://flsenate.gov/PublishedContent/Senators/2022-2024/Photos/s23_5169.jpg",
     "website": "https://flsenate.gov/Senators/2022-2024/S23",
-    "office": "Room 411, Senate Building 404 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 411, Senate Building 404 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "38507 5th Ave., Zephyrhills, FL 33542",
+    "districtPhone": "813-779-7059",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Danny_Burgess",
+    "ballotpediaUrl": "https://ballotpedia.org/Daniel_Burgess"
   },
   {
     "id": "ocd-person/971fb9ac-b0f3-45df-89f0-f24b6ba9b5a3",
@@ -458,7 +561,11 @@
     "phone": "850-717-5075",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Danny_Nix.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4921&LegislativeTermId=91",
-    "office": "Room 1301, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 1301, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "B200 18500 Murdock Circle, Port Charlotte, FL 33948",
+    "districtPhone": "941-899-0810",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Danny_Nix_Jr.",
+    "ballotpediaUrl": "https://ballotpedia.org/Danny_Nix"
   },
   {
     "id": "ocd-person/3de11937-c291-4561-bee5-4f747665cb37",
@@ -472,7 +579,10 @@
     "phone": "850-487-5016",
     "photoUrl": "https://flsenate.gov/PublishedContent/Senators/2022-2024/Photos/s16_5203.jpg",
     "website": "https://flsenate.gov/Senators/2022-2024/S16",
-    "office": "Room 212, Senate Building 404 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 212, Senate Building 404 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "330 Pauls Drive, Brandon, FL 33511",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Darryl_Rouson",
+    "ballotpediaUrl": "https://ballotpedia.org/Darryl_Rouson"
   },
   {
     "id": "ocd-person/2c1c37bb-fd17-46d6-9694-8f2757f6da3e",
@@ -484,9 +594,11 @@
     "party": "Democratic",
     "email": "daryl.campbell@flhouse.gov",
     "phone": "850-717-5099",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4843.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4843.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4843&LegislativeTermId=90",
-    "office": "Room 1102, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 1102, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Daryl_Campbell_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Daryl_Campbell"
   },
   {
     "id": "ocd-person/686a3de8-6df1-4144-85bc-edaad7fe1708",
@@ -498,9 +610,13 @@
     "party": "Republican",
     "email": "david.borrero@flhouse.gov",
     "phone": "850-717-5111",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4794.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4794.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4794&LegislativeTermId=90",
-    "office": "Room 412, House Office Building 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 412, House Office Building 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "9600 NW 25th St. Suite 4C, Doral, FL 33172",
+    "districtPhone": "786-984-8910",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/David_Borrero",
+    "ballotpediaUrl": "https://ballotpedia.org/David_Borrero"
   },
   {
     "id": "ocd-person/e4bf077a-8468-49a6-a75c-24ee5076352e",
@@ -512,9 +628,11 @@
     "party": "Republican",
     "email": "david.smith@flhouse.gov",
     "phone": "850-717-5038",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4718.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4718.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4718&LegislativeTermId=90",
-    "office": "Room 402, House Office Building 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 402, House Office Building 402 S. Monroe St., Tallahassee, FL 32399",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/David_Smith_(Florida_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/David_Smith_(Florida)"
   },
   {
     "id": "ocd-person/c082de7e-0a73-43a6-94e7-48180a1af3d6",
@@ -526,9 +644,13 @@
     "party": "Republican",
     "email": "dean.black@flhouse.gov",
     "phone": "850-717-5015",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4865.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4865.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4865&LegislativeTermId=90",
-    "office": "Room 402, House Office Building 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 402, House Office Building 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "12400 Yellow Bluff Road Suite 108, Jacksonville, FL 32226",
+    "districtPhone": "904-717-9750",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dean_Black",
+    "ballotpediaUrl": "https://ballotpedia.org/Dean_Black"
   },
   {
     "id": "ocd-person/a41e2c13-be68-4af3-8229-3c657b8d980d",
@@ -542,7 +664,11 @@
     "phone": "850-487-5019",
     "photoUrl": "https://flsenate.gov/PublishedContent/Senators/2022-2024/Photos/s19_5199.jpg",
     "website": "https://flsenate.gov/Senators/2022-2024/S19",
-    "office": "Room 302, Senate Building 404 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 302, Senate Building 404 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "Room 408, 900 E. Strawbridge Ave., Melbourne, FL 32901",
+    "districtPhone": "321-409-2025",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Debbie_Mayfield",
+    "ballotpediaUrl": "https://ballotpedia.org/Debbie_Mayfield"
   },
   {
     "id": "ocd-person/88b67b7d-e856-43b3-9ae3-90092919c4e5",
@@ -556,7 +682,11 @@
     "phone": "850-717-5089",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Debra__Tendrich__20241023_121011.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4924&LegislativeTermId=91",
-    "office": "Room 1402, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 1402, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "1850 Forest Hill Blvd. Suite 200, Lake Clarke Shores, FL 33406",
+    "districtPhone": "561-954-0850",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Debra_Tendrich",
+    "ballotpediaUrl": "https://ballotpedia.org/Debra_Tendrich"
   },
   {
     "id": "ocd-person/8407b440-b679-4d84-b642-de35869461a4",
@@ -568,9 +698,13 @@
     "party": "Republican",
     "email": "demi.busatta@flhouse.gov",
     "phone": "850-717-5114",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4800.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4800.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4800&LegislativeTermId=90",
-    "office": "Room 222, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 222, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "2020 Ponce de Leon Blvd. Suite 1007, Coral Gables, FL 33134",
+    "districtPhone": "305-686-6840",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Demi_Busatta",
+    "ballotpediaUrl": "https://ballotpedia.org/Demi_Busatta_Cabrera"
   },
   {
     "id": "ocd-person/1be9ca60-ccf5-4beb-835a-3c292e04eaef",
@@ -582,9 +716,13 @@
     "party": "Democratic",
     "email": "dianne.hart-lowman@flhouse.gov",
     "phone": "850-717-5063",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4736.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4736.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4736&LegislativeTermId=90",
-    "office": "Room 403, House Office Building 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 403, House Office Building 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "3911 N. Tampa St., Tampa, FL 33603",
+    "districtPhone": "813-738-0410",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dianne_Hart",
+    "ballotpediaUrl": "https://ballotpedia.org/Dianne_Hart"
   },
   {
     "id": "ocd-person/c45cbed2-9b2e-4507-a6d1-3f960d330c34",
@@ -598,7 +736,11 @@
     "phone": "850-487-5001",
     "photoUrl": "http://www.flsenate.gov/PublishedContent/Senators/2014-2016/Photos/s01_4804.jpg",
     "website": "https://www.flsenate.gov/Senators/s1",
-    "office": "Room 405, Senate Building 404 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 405, Senate Building 404 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "418 W. Garden St. Fourth Floor, Pensacola, FL 32502",
+    "districtPhone": "850-595-1036",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Don_Gaetz",
+    "ballotpediaUrl": "https://ballotpedia.org/Don_Gaetz"
   },
   {
     "id": "ocd-person/bcb3b06f-882e-4012-af21-4c9ba68d093d",
@@ -610,9 +752,11 @@
     "party": "Democratic",
     "email": "dotie.joseph@flhouse.gov",
     "phone": "850-717-5108",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4716.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4716.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4716&LegislativeTermId=90",
-    "office": "Room 407, House Office Building 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 407, House Office Building 402 S. Monroe St., Tallahassee, FL 32399",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dotie_Joseph",
+    "ballotpediaUrl": "https://ballotpedia.org/Dotie_Joseph"
   },
   {
     "id": "ocd-person/c585b9bb-83d4-4d01-8a02-778578cfe2d6",
@@ -624,9 +768,13 @@
     "party": "Republican",
     "email": "doug.bankson@flhouse.gov",
     "phone": "850-717-5039",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4873.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4873.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4873&LegislativeTermId=90",
-    "office": "Room 200, House Office Building 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 200, House Office Building 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "10 N. Park Ave., Apopka, FL 32703",
+    "districtPhone": "407-598-8470",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Doug_Bankson",
+    "ballotpediaUrl": "https://ballotpedia.org/Doug_Bankson"
   },
   {
     "id": "ocd-person/0e375630-02a4-4e59-ac80-869f9a199b2a",
@@ -640,7 +788,29 @@
     "phone": "850-487-5021",
     "photoUrl": "https://flsenate.gov/PublishedContent/Senators/2022-2024/Photos/s21_5344.jpg",
     "website": "https://flsenate.gov/Senators/2022-2024/S21",
-    "office": "Room 202, Senate Building 404 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 202, Senate Building 404 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "FL",
+    "districtPhone": "727-771-2102",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ed_Hooper_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Ed_Hooper"
+  },
+  {
+    "id": "ocd-person/e2d16b6f-6522-46c6-9817-3d4f4d1b66ce",
+    "name": "Emily Gregory",
+    "firstName": "Emily",
+    "lastName": "Gregory",
+    "chamber": "lower",
+    "district": "87",
+    "party": "Democratic",
+    "email": "emily.gregory@flhouse.gov",
+    "phone": "850-717-5087",
+    "photoUrl": "https://www.sun-sentinel.com/wp-content/uploads/2025/10/TFL-L-Emily-Gregory-candidate-01.jpg?w=864",
+    "website": "https://www.flhouse.gov/Sections/Representatives/details.aspx?MemberId=5069",
+    "office": "Room 1101, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "321 S. Dixie Highway Suite 202, West Palm Beach, FL 33401",
+    "districtPhone": "561-614-8350",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Emily_Gregory_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Emily_Gregory"
   },
   {
     "id": "ocd-person/30a6de56-a2b6-44b4-ab5a-e1bc6d944c93",
@@ -654,7 +824,9 @@
     "phone": "850-717-5035",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Erika_Booth.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4914&LegislativeTermId=91",
-    "office": "Room 1301, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 1301, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Erika_Booth",
+    "ballotpediaUrl": "https://ballotpedia.org/Erika_Booth"
   },
   {
     "id": "ocd-person/9cf042e6-01c0-4f8e-aab5-68508a0fda66",
@@ -668,7 +840,11 @@
     "phone": "850-487-5029",
     "photoUrl": "https://flsenate.gov/PublishedContent/Senators/2022-2024/Photos/s29_5426.jpg",
     "website": "https://flsenate.gov/Senators/2022-2024/S29",
-    "office": "Room 316, Senate Building 404 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 316, Senate Building 404 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "1069 U.S. Highway 27 North, Lake Placid, FL 33852",
+    "districtPhone": "863-699-1080",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Erin_Grall",
+    "ballotpediaUrl": "https://ballotpedia.org/Erin_Grall"
   },
   {
     "id": "ocd-person/38674fed-3bec-4623-a5eb-d31e4851323f",
@@ -680,9 +856,13 @@
     "party": "Republican",
     "email": "fabian.basabe@flhouse.gov",
     "phone": "850-717-5106",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4900.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4900.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4900&LegislativeTermId=90",
-    "office": "Room 200, House Office Building 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 200, House Office Building 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "1521 Alton Road Suite 86, Miami Beach, FL 33139",
+    "districtPhone": "305-564-4780",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Fabi%C3%A1n_Basabe",
+    "ballotpediaUrl": "https://ballotpedia.org/Fabi%C3%A1n_Basabe"
   },
   {
     "id": "ocd-person/1d219f7c-140b-48fd-ac39-4683c48dbc87",
@@ -694,9 +874,13 @@
     "party": "Democratic",
     "email": "felicia.robinson@flhouse.gov",
     "phone": "850-717-5104",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4791.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4791.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4791&LegislativeTermId=90",
-    "office": "Room 1003, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 1003, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "16405 NW 25th Ave., Miami Gardens, FL 33054",
+    "districtPhone": "305-488-5490",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Felicia_Robinson",
+    "ballotpediaUrl": "https://ballotpedia.org/Felicia_Simone_Robinson"
   },
   {
     "id": "ocd-person/5a138490-70a4-46fa-967e-8739d1ea7456",
@@ -708,9 +892,13 @@
     "party": "Democratic",
     "email": "fentrice.driskell@flhouse.gov",
     "phone": "850-717-5067",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4745.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4745.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4745&LegislativeTermId=90",
-    "office": "Room 316, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 316, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "13220 N. 56th St. Suite A, Temple Terrace, FL 33617",
+    "districtPhone": "813-535-8580",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Fentrice_Driskell",
+    "ballotpediaUrl": "https://ballotpedia.org/Fentrice_Driskell"
   },
   {
     "id": "ocd-person/741003ec-e46f-4ae8-a3af-ce2a2aba5cd4",
@@ -722,9 +910,13 @@
     "party": "Republican",
     "email": "fiona.mcfarland@flhouse.gov",
     "phone": "850-717-5073",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4780.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4780.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4780&LegislativeTermId=90",
-    "office": "Room 303, House Office Building 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 303, House Office Building 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "2700 S. Tamiami Trail Unit 9, Sarasota, FL 34239",
+    "districtPhone": "941-899-0940",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Fiona_McFarland",
+    "ballotpediaUrl": "https://ballotpedia.org/Fiona_McFarland"
   },
   {
     "id": "ocd-person/3c9e6522-75aa-40d0-870c-1792d5178b04",
@@ -736,9 +928,11 @@
     "party": "Democratic",
     "email": "gallop.franklin@flhouse.gov",
     "phone": "850-717-5008",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4863.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4863.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4863&LegislativeTermId=90",
-    "office": "Room 1003, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 1003, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Gallop_Franklin",
+    "ballotpediaUrl": "https://ballotpedia.org/Gallop_Franklin"
   },
   {
     "id": "ocd-person/cd3ba8e7-7c51-444b-bff3-e0c29de30660",
@@ -752,7 +946,29 @@
     "phone": "850-487-5031",
     "photoUrl": "https://flsenate.gov/PublishedContent/Senators/2022-2024/Photos/s31_5348.jpg",
     "website": "https://flsenate.gov/Senators/2022-2024/S31",
-    "office": "Room 404, Senate Building 404 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 404, Senate Building 404 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "312 SE Denver Ave., Stuart, FL 34994",
+    "districtPhone": "772-221-4019",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Gayle_Harrell",
+    "ballotpediaUrl": "https://ballotpedia.org/Gayle_Harrell"
+  },
+  {
+    "id": "ocd-person/fd753355-7d8a-4eda-ab3c-8a6478e1ac73",
+    "name": "Hilary Holley",
+    "firstName": "Hilary",
+    "lastName": "Holley",
+    "chamber": "lower",
+    "district": "51",
+    "party": "Republican",
+    "email": "hilary.holley@flhouse.gov",
+    "phone": "850-717-5051",
+    "photoUrl": "https://floridapolitics.com/wp-content/uploads/2025/10/Hillary-Holley-copy.jpg",
+    "website": "https://www.flhouse.gov/Sections/Representatives/details.aspx?MemberId=5072",
+    "office": "Room 1301, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "209 Palmetto St., Auburndale, FL 33823",
+    "districtPhone": "863-656-8520",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Hilary_Holley",
+    "ballotpediaUrl": "https://ballotpedia.org/Hilary_Holley"
   },
   {
     "id": "ocd-person/d38a5a91-afd4-46d2-9bd3-7ccaf7aa0d2b",
@@ -764,9 +980,13 @@
     "party": "Republican",
     "email": "hillary.cassel@flhouse.gov",
     "phone": "850-717-5101",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4895.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4895.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4895&LegislativeTermId=90",
-    "office": "Room 212, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 212, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "3475 Sheridan St. Suite 203, Hollywood, FL 33021",
+    "districtPhone": "954-872-0180",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Hillary_Cassel",
+    "ballotpediaUrl": "https://ballotpedia.org/Hillary_Cassel"
   },
   {
     "id": "ocd-person/3b65ecb0-8a3d-469c-9db4-b70c8724610f",
@@ -780,7 +1000,11 @@
     "phone": "850-487-5036",
     "photoUrl": "https://flsenate.gov/PublishedContent/Senators/2022-2024/Photos/s36_5515.jpg",
     "website": "https://flsenate.gov/Senators/2022-2024/S36",
-    "office": "Room 314, Senate Building 404 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 314, Senate Building 404 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "2828 Coral Way Suite 208, Miami, FL 33145",
+    "districtPhone": "305-442-6841",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ileana_Garcia",
+    "ballotpediaUrl": "https://ballotpedia.org/Ileana_Garcia"
   },
   {
     "id": "ocd-person/b65fb87d-0544-4058-8ad6-9cbd3622a330",
@@ -794,7 +1018,11 @@
     "phone": "850-717-5023",
     "photoUrl": "https://assets.civicengine.com/uploads/candidate/headshot/841906/841906.jpg",
     "website": "https://www.flhouse.gov/Sections/Representatives/custom/details.aspx?MemberId=4909",
-    "office": "Room 1302, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 1302, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "106 E. Dampier St., Inverness, FL 34450",
+    "districtPhone": "352-654-0490",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/J._J._Grow",
+    "ballotpediaUrl": "https://ballotpedia.org/J.J._Grow"
   },
   {
     "id": "ocd-person/797767ca-fadc-49d9-a7a5-5722baf6557e",
@@ -806,9 +1034,13 @@
     "party": "Republican",
     "email": "james.buchanan@flhouse.gov",
     "phone": "850-717-5074",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4731.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4731.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4731&LegislativeTermId=90",
-    "office": "Room 418, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 418, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "5900 Pan American Blvd. Building A, Unit 102, North Port, FL 34287",
+    "districtPhone": "941-732-0430",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/James_Buchanan_(Florida_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/James_Buchanan_(Florida)"
   },
   {
     "id": "ocd-person/d03b8661-852b-44ab-b7c2-aa3bf14acd39",
@@ -820,9 +1052,13 @@
     "party": "Republican",
     "email": "james.mooney@flhouse.gov",
     "phone": "850-717-5120",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4797.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4797.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4797&LegislativeTermId=90",
-    "office": "Room 334, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 334, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "44 NE 16th St., Homestead, FL 33030",
+    "districtPhone": "305-315-9040",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jim_Mooney_(Florida_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Jim_Mooney"
   },
   {
     "id": "ocd-person/b1525f57-c2db-407e-bca9-66675cc4d3ff",
@@ -836,7 +1072,11 @@
     "phone": "850-487-5010",
     "photoUrl": "https://flsenate.gov/PublishedContent/Senators/2022-2024/Photos/s10_5077.jpg",
     "website": "https://flsenate.gov/Senators/2022-2024/S10",
-    "office": "Room 416, Senate Building 404 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 416, Senate Building 404 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "110 Timberlachen Circle Suite 1012, Lake Mary, FL 32746",
+    "districtPhone": "407-333-1802",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jason_Brodeur",
+    "ballotpediaUrl": "https://ballotpedia.org/Jason_Brodeur"
   },
   {
     "id": "ocd-person/2bae38cc-f703-446b-93ec-576c0e388760",
@@ -848,9 +1088,13 @@
     "party": "Republican",
     "email": "jason.shoaf@flhouse.gov",
     "phone": "850-717-5007",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4756.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4756.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4756&LegislativeTermId=90",
-    "office": "Room 222, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 222, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "103 E. Ellis St., Perry, FL 32347",
+    "districtPhone": "850-295-5680",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jason_Shoaf",
+    "ballotpediaUrl": "https://ballotpedia.org/Jason_Shoaf"
   },
   {
     "id": "ocd-person/42278250-8dc9-4fcc-ab11-964aa8e369e7",
@@ -864,7 +1108,11 @@
     "phone": "850-487-5037",
     "photoUrl": "https://flsenate.gov/PublishedContent/Senators/2022-2024/Photos/s37_5345.jpg",
     "website": "https://flsenate.gov/Senators/2022-2024/S37",
-    "office": "Room 304, Senate Building 404 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 304, Senate Building 404 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "3475 Sheridan St. Suite 211, Hollywood, FL 33021",
+    "districtPhone": "954-893-5045",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jason_Pizzo",
+    "ballotpediaUrl": "https://ballotpedia.org/Jason_Pizzo"
   },
   {
     "id": "ocd-person/29c38853-2773-45d3-bc17-0979def1ab54",
@@ -878,7 +1126,11 @@
     "phone": "850-487-5002",
     "photoUrl": "https://flsenate.gov/PublishedContent/Senators/2022-2024/Photos/s02_5389.jpg",
     "website": "https://flsenate.gov/Senators/2022-2024/S2",
-    "office": "Room 415, Senate Building 404 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 415, Senate Building 404 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "840 W. 11th St., Panama City, FL 32401",
+    "districtPhone": "850-747-5454",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jay_Trumbull",
+    "ballotpediaUrl": "https://ballotpedia.org/Jay_Trumbull"
   },
   {
     "id": "ocd-person/5bd19ebd-e225-49a5-b0f5-42f6380a9fa8",
@@ -890,23 +1142,13 @@
     "party": "Republican",
     "email": "jeff.holcomb@flhouse.gov",
     "phone": "850-717-5053",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4890.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4890.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4890&LegislativeTermId=90",
-    "office": "Room 315, House Office Building 402 S. Monroe St., Tallahassee, FL 32399"
-  },
-  {
-    "id": "ocd-person/bc54a6ff-f7b3-4bbf-a23a-4acc9caa8064",
-    "name": "Jenna Persons-Mulicka",
-    "firstName": "Jenna",
-    "lastName": "Persons-Mulicka",
-    "chamber": "lower",
-    "district": "78",
-    "party": "Republican",
-    "email": "jenna.persons@flhouse.gov",
-    "phone": "850-717-5078",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4785.jpg",
-    "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4785&LegislativeTermId=90",
-    "office": "Room 222, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 315, House Office Building 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "2955 Landover Blvd., Spring Hill, FL 34608",
+    "districtPhone": "352-675-0100",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jeff_Holcomb",
+    "ballotpediaUrl": "https://ballotpedia.org/Jeff_Holcomb_(Florida)"
   },
   {
     "id": "ocd-person/68e0a17f-338b-497b-ba07-1f74e9623f1d",
@@ -920,7 +1162,11 @@
     "phone": "850-487-5006",
     "photoUrl": "https://flsenate.gov/PublishedContent/Senators/2022-2024/Photos/s06_5476.jpg",
     "website": "https://flsenate.gov/Senators/2022-2024/S6",
-    "office": "Room 406, Senate Building 404 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 406, Senate Building 404 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "1845 EW Parkway Unit #5, Fleming Island, FL 32003",
+    "districtPhone": "904-278-2085",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jennifer_Bradley",
+    "ballotpediaUrl": "https://ballotpedia.org/Jennifer_Bradley"
   },
   {
     "id": "ocd-person/7fb5a540-2c3c-4661-8495-2e0e02ab8644",
@@ -932,9 +1178,13 @@
     "party": "Republican",
     "email": "jennifer.canady@flhouse.gov",
     "phone": "850-717-5050",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4879.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4879.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4879&LegislativeTermId=90",
-    "office": "Room 418, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 418, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "101 W. Main St. Suite 230, Lakeland, FL 33815",
+    "districtPhone": "863-450-4795",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jennifer_Canady",
+    "ballotpediaUrl": "https://ballotpedia.org/Jennifer_Canady"
   },
   {
     "id": "ocd-person/28e33eaa-f6cf-4158-83fe-aff91d0cd8f0",
@@ -948,7 +1198,11 @@
     "phone": "850-717-5049",
     "photoUrl": "https://www.theledger.com/gcdn/authoring/authoring-images/2024/04/17/NLED/73359809007-jen.jpg?width=660&height=981&fit=crop&format=pjpg&auto=webp",
     "website": "https://www.flhouse.gov/Sections/Representatives/custom/details.aspx?MemberId=4918",
-    "office": "Room 1302, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 1302, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "210 E. Main St., Bartow, FL 33830",
+    "districtPhone": "863-486-0440",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jennifer_Kincart_Jonsson",
+    "ballotpediaUrl": "https://ballotpedia.org/Jennifer_Kincart_Jonsson"
   },
   {
     "id": "ocd-person/ca476441-7c7a-4f21-ba55-207c21a7d51d",
@@ -960,9 +1214,13 @@
     "party": "Democratic",
     "email": "rita.harris@flhouse.gov",
     "phone": "850-717-5044",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4877.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4877.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4877&LegislativeTermId=90",
-    "office": "Room 1102, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 1102, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "2151 Consulate Drive Suite 15-3, Orlando, FL 32837",
+    "districtPhone": "407-751-1380",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rita_Harris_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Jennifer_Harris"
   },
   {
     "id": "ocd-person/bb2ae855-2e7a-4744-9271-a8ae1af89428",
@@ -974,9 +1232,13 @@
     "party": "Democratic",
     "email": "jervonte.edmonds@flhouse.gov",
     "phone": "850-717-5088",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4842.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4842.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4842&LegislativeTermId=90",
-    "office": "Room 1101, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 1101, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "5725 Corporate Way Suite 206, West Palm Beach, FL 33407",
+    "districtPhone": "561-242-5530",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jervonte_Edmonds",
+    "ballotpediaUrl": "https://ballotpedia.org/Jervonte_Edmonds"
   },
   {
     "id": "ocd-person/8dd703e2-8024-47c5-a22b-87a36db841cb",
@@ -988,9 +1250,13 @@
     "party": "Republican",
     "email": "jessica.baker@flhouse.gov",
     "phone": "850-717-5017",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4866.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4866.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4866&LegislativeTermId=90",
-    "office": "Room 300, House Office Building 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 300, House Office Building 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "8833 Perimeter Park Blvd. Suite 801, Jacksonville, FL 32216",
+    "districtPhone": "904-667-0280",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jessica_Baker",
+    "ballotpediaUrl": "https://ballotpedia.org/Jessica_Baker"
   },
   {
     "id": "ocd-person/c70f231f-92e2-4a55-a59b-fcf113ab51af",
@@ -1004,7 +1270,11 @@
     "phone": "850-487-5020",
     "photoUrl": "https://flsenate.gov/PublishedContent/Senators/2022-2024/Photos/s20_5070.jpg",
     "website": "https://flsenate.gov/Senators/2022-2024/S20",
-    "office": "Room 318, Senate Building 404 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 318, Senate Building 404 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "717 Manatee Ave. West Suite 100, Bradenton, FL 34205",
+    "districtPhone": "941-742-6445",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jim_Boyd_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Jim_Boyd"
   },
   {
     "id": "ocd-person/24b4458a-bc61-42f8-805a-6bc43edf6acb",
@@ -1018,7 +1288,11 @@
     "phone": "850-487-5022",
     "photoUrl": "https://flsenate.gov/PublishedContent/Senators/2022-2024/Photos/s22_5347.jpg",
     "website": "https://flsenate.gov/Senators/2022-2024/S22",
-    "office": "Room 413, Senate Building 404 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 413, Senate Building 404 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "381 Interstate Blvd., Sarasota, FL 34240",
+    "districtPhone": "941-378-6309",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Joe_Gruters",
+    "ballotpediaUrl": "https://ballotpedia.org/Joe_Gruters"
   },
   {
     "id": "ocd-person/fa6bc3c9-a107-4954-adf1-e1461e9f3520",
@@ -1030,9 +1304,13 @@
     "party": "Democratic",
     "email": "johanna.lopez@flhouse.gov",
     "phone": "850-717-5043",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4875.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4875.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4875&LegislativeTermId=90",
-    "office": "Room 407, House Office Building 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 407, House Office Building 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "5575 S. Semoran Blvd. Suite 2, Orlando, FL 32822",
+    "districtPhone": "407-751-1060",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Johanna_L%C3%B3pez",
+    "ballotpediaUrl": "https://ballotpedia.org/Johanna_Lopez"
   },
   {
     "id": "ocd-person/5055fc3a-3cdd-4f4d-addb-23634fd1df92",
@@ -1044,9 +1322,13 @@
     "party": "Republican",
     "email": "john.snyder@flhouse.gov",
     "phone": "850-717-5086",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4787.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4787.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4787&LegislativeTermId=90",
-    "office": "Room 222, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 222, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "4239 SW High Meadow Ave. #201, Palm City, FL 34990",
+    "districtPhone": "772-510-0120",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_Snyder_(Florida_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/John_Snyder"
   },
   {
     "id": "ocd-person/c7ee0194-6ff9-4b95-83ee-bac26e80467d",
@@ -1059,8 +1341,12 @@
     "email": "jon.albert@flhouse.gov",
     "phone": "850-717-5048",
     "photoUrl": "https://assets.civicengine.com/uploads/candidate/headshot/828599/828599.jpg",
-    "website": "https://www.flhouse.gov/Sections/Representatives/details.aspx?MemberId=4917",
-    "office": "Room 1301, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "website": "https://www.flhouse.gov/Sections/Representatives/custom/details.aspx?MemberId=4917&LegislativeTermId=91",
+    "office": "Room 1301, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "337 Ave. C SW, Winter Haven, FL 33880",
+    "districtPhone": "863-500-8310",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jon_Albert",
+    "ballotpediaUrl": "https://ballotpedia.org/Jon_Albert"
   },
   {
     "id": "ocd-person/e5e1f892-4d9e-464e-b58d-6acf50069b75",
@@ -1074,7 +1360,11 @@
     "phone": "850-487-5033",
     "photoUrl": "https://flsenate.gov/PublishedContent/Senators/2022-2024/Photos/s33_5524.jpg",
     "website": "https://flsenate.gov/Senators/2022-2024/S33",
-    "office": "Room 315, Senate Building 404 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 315, Senate Building 404 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "2000 Main St. Suite 401, Fort Myers, FL 33901",
+    "districtPhone": "239-338-2570",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jonathan_Martin_(Florida_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Jonathan_Allen_Martin"
   },
   {
     "id": "ocd-person/c3e8a214-183a-4b9c-970c-5332e83eb8e6",
@@ -1088,21 +1378,11 @@
     "phone": "850-717-5046",
     "photoUrl": "https://www.voterfocus.com/CampaignFinance/photo_osceola/cand_345.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4916&LegislativeTermId=91",
-    "office": "Room 1402, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
-  },
-  {
-    "id": "ocd-person/3f87732e-d7d9-4a1a-bee5-9a231758a474",
-    "name": "Josie Tomkow",
-    "firstName": "Josie",
-    "lastName": "Tomkow",
-    "chamber": "lower",
-    "district": "51",
-    "party": "Republican",
-    "email": "josie.tomkow@flhouse.gov",
-    "phone": "850-717-5051",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4704.jpg",
-    "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4704&LegislativeTermId=90",
-    "office": "Room 418, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 1402, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "Kissimmee City Hall 101 Church St., Suite 305, Kissimmee, FL 34741",
+    "districtPhone": "407-964-8050",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jose_Alvarez_(Florida_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Jose_A._Alvarez"
   },
   {
     "id": "ocd-person/6c673f21-8f64-44b7-831f-d3d2e9c78eb3",
@@ -1114,9 +1394,13 @@
     "party": "Republican",
     "email": "juancarlos.porras@flhouse.gov",
     "phone": "850-717-5119",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4898.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4898.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4898&LegislativeTermId=90",
-    "office": "Room 334, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 334, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "13372 SW 128th St., Miami, FL 33186",
+    "districtPhone": "305-252-4307",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Juan_Carlos_Porras",
+    "ballotpediaUrl": "https://ballotpedia.org/Juan_Carlos_Porras"
   },
   {
     "id": "ocd-person/09ff6379-dbcc-4aa2-bc70-0b2fa9fd69ec",
@@ -1130,7 +1414,11 @@
     "phone": "850-717-5020",
     "photoUrl": "https://static.wixstatic.com/media/239f01_44bd85c8941a4875a3e3f89d1cf01db3~mv2.jpeg/v1/fill/w_490,h_591,al_t,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/239f01_44bd85c8941a4875a3e3f89d1cf01db3~mv2.jpeg",
     "website": "https://www.flhouse.gov/Sections/Representatives/details.aspx?MemberId=4907",
-    "office": "Room 1301, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 1301, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "115 SE 25th Ave., Ocala, FL 34471",
+    "districtPhone": "352-496-3430",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Judson_Sapp",
+    "ballotpediaUrl": "https://ballotpedia.org/Judson_Sapp"
   },
   {
     "id": "ocd-person/d1296445-72e8-45e5-ad0e-4443275176ef",
@@ -1142,9 +1430,13 @@
     "party": "Republican",
     "email": "karen.pittman@flhouse.gov",
     "phone": "850-717-5065",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4888.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4888.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4888&LegislativeTermId=90",
-    "office": "Room 212, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 212, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "1101 Channelside Drive Suite 210, Tampa, FL 33602",
+    "districtPhone": "813-726-1940",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Karen_Gonzalez_Pittman",
+    "ballotpediaUrl": "https://ballotpedia.org/Karen_Gonzalez_Pittman"
   },
   {
     "id": "ocd-person/ae123d54-1076-49b2-84f9-2897b7d60ebd",
@@ -1158,7 +1450,11 @@
     "phone": "850-487-5028",
     "photoUrl": "https://flsenate.gov/PublishedContent/Senators/2022-2024/Photos/s28_5196.jpg",
     "website": "https://flsenate.gov/Senators/2022-2024/S28",
-    "office": "Room 400, Senate Building 404 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 400, Senate Building 404 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "3299 E. Tamiami Trail Suite 203, Naples, FL 34112",
+    "districtPhone": "239-417-6205",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kathleen_Passidomo",
+    "ballotpediaUrl": "https://ballotpedia.org/Kathleen_Passidomo"
   },
   {
     "id": "ocd-person/43356d29-3396-423e-9286-f7bd1e52ebde",
@@ -1170,9 +1466,13 @@
     "party": "Republican",
     "email": "kaylee.tuck@flhouse.gov",
     "phone": "850-717-5083",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4776.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4776.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4776&LegislativeTermId=90",
-    "office": "Room 209, House Office Building 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 209, House Office Building 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "205 S. Commerce Ave. Suite B, Sebring, FL 33870",
+    "districtPhone": "863-304-9500",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kaylee_Tuck",
+    "ballotpediaUrl": "https://ballotpedia.org/Kaylee_Tuck"
   },
   {
     "id": "ocd-person/9c87088c-e5a4-4902-b3cb-4477e062de66",
@@ -1184,9 +1484,12 @@
     "party": "Republican",
     "email": "truenow.keith.web@flsenate.gov",
     "phone": "850-487-5013",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4772.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4772.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4772&LegislativeTermId=90",
-    "office": "Room 306, Senate Building 404 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 306, Senate Building 404 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "16207 State Road 50 Suite 401, Clermont, FL 34711",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Keith_Truenow",
+    "ballotpediaUrl": "https://ballotpedia.org/Keith_Truenow"
   },
   {
     "id": "ocd-person/8eff1a19-557d-4a5d-8a3b-c77015a7babe",
@@ -1198,9 +1501,13 @@
     "party": "Democratic",
     "email": "kelly.skidmore@flhouse.gov",
     "phone": "850-717-5092",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4786.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4786.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4786&LegislativeTermId=90",
-    "office": "Room 316, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 316, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "7499 W. Atlantic Ave. Suite 200, Delray Beach, FL 33446",
+    "districtPhone": "561-407-6490",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kelly_Skidmore",
+    "ballotpediaUrl": "https://ballotpedia.org/Kelly_Skidmore"
   },
   {
     "id": "ocd-person/313e81ee-19af-4d9d-9186-fbbca7e6d65d",
@@ -1212,23 +1519,13 @@
     "party": "Democratic",
     "email": "kevin.chambliss@flhouse.gov",
     "phone": "850-717-5117",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4798.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4798.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4798&LegislativeTermId=90",
-    "office": "Room 407, House Office Building 402 S. Monroe St., Tallahassee, FL 32399"
-  },
-  {
-    "id": "ocd-person/7cf27467-9070-4d4a-9a45-24bfe980dfb8",
-    "name": "Kevin Steele",
-    "firstName": "Kevin",
-    "lastName": "Steele",
-    "chamber": "lower",
-    "district": "55",
-    "party": "Republican",
-    "email": "kevin.steele@flhouse.gov",
-    "phone": "850-717-5055",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4881.jpg",
-    "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4881&LegislativeTermId=90",
-    "office": "Room 315, House Office Building 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 407, House Office Building 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "500 College Terrace Suite F212, Homestead, FL 33030",
+    "districtPhone": "305-237-5968",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kevin_Chambliss",
+    "ballotpediaUrl": "https://ballotpedia.org/Kevin_Chambliss"
   },
   {
     "id": "ocd-person/e809e1f7-641f-47c7-8754-964f1ceae10d",
@@ -1242,7 +1539,9 @@
     "phone": "850-717-5018",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/KimKendall2024.jpg",
     "website": "https://www.flhouse.gov/Sections/Representatives/custom/details.aspx?MemberId=4905",
-    "office": "Room 1301, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 1301, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kim_Kendall",
+    "ballotpediaUrl": "https://ballotpedia.org/Kim_Kendall"
   },
   {
     "id": "ocd-person/d6c0ddf5-2821-4510-83d1-da9eb422739a",
@@ -1254,9 +1553,13 @@
     "party": "Republican",
     "email": "kim.berfield@flhouse.gov",
     "phone": "850-717-5058",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4210.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4210.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4210&LegislativeTermId=90",
-    "office": "Room 313, House Office Building 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 313, House Office Building 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "2189 Cleveland St. Suite 229, Clearwater, FL 33765",
+    "districtPhone": "727-351-8820",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kim_Berfield",
+    "ballotpediaUrl": "https://ballotpedia.org/Kimberly_Berfield"
   },
   {
     "id": "ocd-person/469b8c3d-5133-43c1-8598-b63ea936f135",
@@ -1268,9 +1571,13 @@
     "party": "Democratic",
     "email": "kimberly.daniels@flhouse.gov",
     "phone": "850-717-5014",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4652.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4652.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4652&LegislativeTermId=90",
-    "office": "Room 400, House Office Building 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 400, House Office Building 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "728 Blanche St. Suite 216, Jacksonville, FL 32204",
+    "districtPhone": "904-659-7180",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kimberly_Daniels",
+    "ballotpediaUrl": "https://ballotpedia.org/Kimberly_Daniels"
   },
   {
     "id": "ocd-person/efa5f0b9-e10e-4ae0-a352-db879b1e0d3b",
@@ -1282,9 +1589,13 @@
     "party": "Republican",
     "email": "kiyan.michael@flhouse.gov",
     "phone": "850-717-5016",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4869.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4869.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4869&LegislativeTermId=90",
-    "office": "Room 300, House Office Building 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 300, House Office Building 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "421 3rd St. North, Jacksonville Beach, FL 32250",
+    "districtPhone": "904-561-1010",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kiyan_Michael",
+    "ballotpediaUrl": "https://ballotpedia.org/Kiyan_Michael"
   },
   {
     "id": "ocd-person/e4a84025-e4fd-4d36-8e12-64bd9f61ed6d",
@@ -1294,11 +1605,15 @@
     "chamber": "upper",
     "district": "25",
     "party": "Democratic",
-    "email": "arrington.kristen@flsenate.gov",
+    "email": "arrington.kristen.web@flsenate.gov",
     "phone": "850-487-5025",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4774.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4774.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4774&LegislativeTermId=90",
-    "office": "Room 210, Senate Building 404 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 210, Senate Building 404 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "3 Courthouse Square Suites 218-219, Kissimmee, FL 34741",
+    "districtPhone": "407-846-5187",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kristen_Arrington",
+    "ballotpediaUrl": "https://ballotpedia.org/Kristen_Arrington"
   },
   {
     "id": "ocd-person/2f86f22f-b277-4441-b322-b1fbfb017b74",
@@ -1310,9 +1625,13 @@
     "party": "Democratic",
     "email": "bracydavis.lavon.web@flsenate.gov",
     "phone": "850-487-5015",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4874.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4874.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4874&LegislativeTermId=90",
-    "office": "Room 226, Senate Building 404 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 226, Senate Building 404 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "801 N. Magnolia Ave. Suite 305, Orlando, FL 32803",
+    "districtPhone": "407-245-0194",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/LaVon_Bracy_Davis",
+    "ballotpediaUrl": "https://ballotpedia.org/LaVon_Bracy_Davis"
   },
   {
     "id": "ocd-person/f835385b-0837-4cfc-a81c-54982ba185d7",
@@ -1324,9 +1643,13 @@
     "party": "Republican",
     "email": "lauren.melo@flhouse.gov",
     "phone": "850-717-5082",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4784.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4784.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4784&LegislativeTermId=90",
-    "office": "Room 209, House Office Building 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 209, House Office Building 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "Harmon Turner Building 3299 Tamiami Trail E., Suite 212, Naples, FL 34112",
+    "districtPhone": "239-423-0510",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lauren_Melo",
+    "ballotpediaUrl": "https://ballotpedia.org/Lauren_Melo"
   },
   {
     "id": "ocd-person/56263ea0-3c5c-45cb-998d-ac7cf8db5446",
@@ -1338,9 +1661,13 @@
     "party": "Republican",
     "email": "lawrence.mcclure@flhouse.gov",
     "phone": "850-717-5068",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4686.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4686.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4686&LegislativeTermId=90",
-    "office": "Room 418, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 418, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "110 W. Reynolds St. Suite 204, Plant City, FL 33563",
+    "districtPhone": "813-730-8600",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lawrence_McClure",
+    "ballotpediaUrl": "https://ballotpedia.org/Lawrence_McClure"
   },
   {
     "id": "ocd-person/69e5941c-0def-4c79-a33e-c318ff516c9a",
@@ -1354,7 +1681,11 @@
     "phone": "850-717-5045",
     "photoUrl": "https://floridapolitics.com/wp-content/uploads/2024/05/Spencer-Leonars.jpeg",
     "website": "https://www.flhouse.gov/Sections/Representatives/custom/details.aspx?MemberId=4915&LegislativeTermId=91",
-    "office": "Room 1402, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 1402, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "12200 W. Colonial Drive Suite 300H, Winter Garden, FL 34787",
+    "districtPhone": "407-598-8680",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Leonard_Spencer",
+    "ballotpediaUrl": "https://ballotpedia.org/Leonard_Spencer"
   },
   {
     "id": "ocd-person/7d59a4fe-d0f1-43a8-93b4-bcd3b7fe5b4e",
@@ -1366,9 +1697,11 @@
     "party": "Republican",
     "email": "linda.chaney@flhouse.gov",
     "phone": "850-717-5061",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4778.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4778.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4778&LegislativeTermId=90",
-    "office": "Room 303, House Office Building 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 303, House Office Building 402 S. Monroe St., Tallahassee, FL 32399",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Linda_Chaney",
+    "ballotpediaUrl": "https://ballotpedia.org/Linda_Chaney"
   },
   {
     "id": "ocd-person/8bcd1df3-2697-42a9-842a-f3cced1fcb0f",
@@ -1380,9 +1713,13 @@
     "party": "Democratic",
     "email": "lindsay.cross@flhouse.gov",
     "phone": "850-717-5060",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4887.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4887.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4887&LegislativeTermId=90",
-    "office": "Room 1101, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 1101, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "425 N. 22nd Ave. Suite C, St. Petersburg, FL 33704",
+    "districtPhone": "727-629-6770",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lindsay_Cross",
+    "ballotpediaUrl": "https://ballotpedia.org/Lindsay_Cross"
   },
   {
     "id": "ocd-person/314f9b75-2167-4b73-b7b8-9c7dee31aaee",
@@ -1394,9 +1731,13 @@
     "party": "Democratic",
     "email": "lisa.dunkley@flhouse.gov",
     "phone": "850-717-5097",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4893.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4893.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4893&LegislativeTermId=90",
-    "office": "Room 1003, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 1003, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "7491 W. Oakland Park Blvd. Suite 219, Lauderhill, FL 33319",
+    "districtPhone": "954-910-2360",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lisa_Dunkley",
+    "ballotpediaUrl": "https://ballotpedia.org/Lisa_Dunkley"
   },
   {
     "id": "ocd-person/762d321c-5bbe-4513-b9f0-7e3d8a6972f5",
@@ -1410,7 +1751,11 @@
     "phone": "850-487-5026",
     "photoUrl": "https://flsenate.gov/PublishedContent/Senators/2022-2024/Photos/s26_5339.jpg",
     "website": "https://flsenate.gov/Senators/2022-2024/S26",
-    "office": "Room 228, Senate Building 404 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 228, Senate Building 404 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "2300 High Ridge Road Suite 161, Boynton Beach, FL 33426",
+    "districtPhone": "561-292-6014",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lori_Berman",
+    "ballotpediaUrl": "https://ballotpedia.org/Lori_Berman"
   },
   {
     "id": "ocd-person/3038008c-cb9b-4735-92b4-b8f2be9c5d8e",
@@ -1424,7 +1769,11 @@
     "phone": "850-487-5024",
     "photoUrl": "http://www.flhouse.gov/FileStores/Web/Imaging/Member/4422.jpg",
     "website": "https://www.flhouse.gov/Sections/Representatives/details.aspx?MemberId=4422&SessionId=70",
-    "office": "Room 216, Senate Building 404 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 216, Senate Building 404 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "1715 E. Tiffany Drive, West Palm Beach, FL 33407",
+    "districtPhone": "561-650-6880",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mack_Bernard",
+    "ballotpediaUrl": "https://ballotpedia.org/Mack_Bernard"
   },
   {
     "id": "ocd-person/5eb39c7e-3582-4269-a012-7a88c54623c9",
@@ -1436,9 +1785,13 @@
     "party": "Democratic",
     "email": "marie.woodson@flhouse.gov",
     "phone": "850-717-5105",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4789.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4789.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4789&LegislativeTermId=90",
-    "office": "Room 223, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 223, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "7200 Pines Blvd. Building #73, Suite 120, Pembroke Pines, FL 33024",
+    "districtPhone": "954-250-6010",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Marie_Woodson",
+    "ballotpediaUrl": "https://ballotpedia.org/Marie_Woodson"
   },
   {
     "id": "ocd-person/7079537f-b144-4304-b389-8e572e62e1c9",
@@ -1452,7 +1805,11 @@
     "phone": "850-717-5094",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Nick_Ward_20240808_093359.jpg",
     "website": "https://www.flhouse.gov/Sections/Representatives/custom/details.aspx?MemberId=4926",
-    "office": "Room 1401, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 1401, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "9200 Belvedere Road Suite 214, West Palm Beach, FL 33411",
+    "districtPhone": "561-576-0340",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Meg_Weinberger",
+    "ballotpediaUrl": "https://ballotpedia.org/Meg_Weinberger"
   },
   {
     "id": "ocd-person/1c170657-03fb-4ab7-ae9f-f8e83568471e",
@@ -1464,9 +1821,11 @@
     "party": "Democratic",
     "email": "mike.gottlieb@flhouse.gov",
     "phone": "850-717-5102",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4724.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4724.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4724&LegislativeTermId=90",
-    "office": "Room 403, House Office Building 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 403, House Office Building 402 S. Monroe St., Tallahassee, FL 32399",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Michael_Gottlieb_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Michael_Gottlieb"
   },
   {
     "id": "ocd-person/fc683ed7-c458-46b4-a133-6ab6916237d0",
@@ -1478,9 +1837,10 @@
     "party": "Republican",
     "email": "michael.owen@flhouse.gov",
     "phone": "850-717-5070",
-    "photoUrl": "https://www.porttb.com/?a=Files.Serve&File_id=DEAE221B-6C8A-4865-BE9F-9C16F892E47C",
     "website": "https://www.flhouse.gov/Sections/Representatives/custom/details.aspx?MemberId=4919",
-    "office": "Room 1302, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 1302, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Michael_Owen_(Florida_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Michael_Owen_(Florida)"
   },
   {
     "id": "ocd-person/9b6f17f5-ec19-4302-8a45-2b40175bb39b",
@@ -1492,9 +1852,11 @@
     "party": "Democratic",
     "email": "michele.rayner@flhouse.gov",
     "phone": "850-717-5062",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4781.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4781.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4781&LegislativeTermId=90",
-    "office": "Room 407, House Office Building 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 407, House Office Building 402 S. Monroe St., Tallahassee, FL 32399",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Michele_Rayner",
+    "ballotpediaUrl": "https://ballotpedia.org/Michele_Rayner"
   },
   {
     "id": "ocd-person/a3c0aa9f-c261-4904-b73b-4dc127778222",
@@ -1506,9 +1868,13 @@
     "party": "Republican",
     "email": "michelle.salzman@flhouse.gov",
     "phone": "850-717-5001",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4763.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4763.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4763&LegislativeTermId=90",
-    "office": "Room 214, House Office Building 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 214, House Office Building 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "3212 S. Highway 95-A, Cantonment, FL 32533",
+    "districtPhone": "850-988-1160",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Michelle_Salzman",
+    "ballotpediaUrl": "https://ballotpedia.org/Michelle_Salzman"
   },
   {
     "id": "ocd-person/9a44c892-cd4a-452b-88cb-435e8ece8d82",
@@ -1520,9 +1886,11 @@
     "party": "Republican",
     "email": "mike.giallombardo@flhouse.gov",
     "phone": "850-717-5079",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4783.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4783.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4783&LegislativeTermId=90",
-    "office": "Room 214, House Office Building 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 214, House Office Building 402 S. Monroe St., Tallahassee, FL 32399",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mike_Giallombardo",
+    "ballotpediaUrl": "https://ballotpedia.org/Mike_Giallombardo"
   },
   {
     "id": "ocd-person/a4a0a7bf-62c4-412e-9501-007d712009ca",
@@ -1534,9 +1902,13 @@
     "party": "Republican",
     "email": "mike.redondo@flhouse.gov",
     "phone": "850-717-5118",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4902.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4902.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4902&LegislativeTermId=90",
-    "office": "Room 1301, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 1301, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "Miami Dade College, Kendall Campus 11011 SW 104th St., Suite M207, Miami, FL 33176",
+    "districtPhone": "305-564-4730",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mike_Redondo",
+    "ballotpediaUrl": "https://ballotpedia.org/Mike_Redondo"
   },
   {
     "id": "ocd-person/04a025da-737a-4580-9c0f-64531e9cbbec",
@@ -1550,7 +1922,11 @@
     "phone": "850-717-5098",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/MitchRosenwald.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4927&LegislativeTermId=91",
-    "office": "Room 1402, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 1402, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "3411 North Dixie Highway, Oakland Park, FL 33334",
+    "districtPhone": "954-481-0340",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mitch_Rosenwald",
+    "ballotpediaUrl": "https://ballotpedia.org/Mitch_Rosenwald"
   },
   {
     "id": "ocd-person/4a001cb2-e0ab-4036-a85d-b4f8ab3664cc",
@@ -1564,7 +1940,11 @@
     "phone": "850-717-5033",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Monique_Miller.jpg",
     "website": "https://www.flhouse.gov/Sections/Representatives/custom/details.aspx?MemberId=4913",
-    "office": "Room 1301, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 1301, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "2539 Palm Bay Road NE Suite 5, Palm Bay, FL 32905",
+    "districtPhone": "321-497-8170",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Monique_Miller_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Monique_Miller"
   },
   {
     "id": "ocd-person/609d82db-51d0-4705-a6c4-4d0bd487a61f",
@@ -1578,7 +1958,11 @@
     "phone": "850-717-5026",
     "photoUrl": "https://www.eustis.org/files/assets/public/v/3/city-hall-mgrs-office/images/commissioner-cobb.jpg?dimension=pageimage&w=480",
     "website": "https://www.flhouse.gov/Sections/Representatives/details.aspx?MemberId=4910",
-    "office": "Room 1401, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 1401, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "343 N. Bay St. Suite 204, Eustis, FL 32726",
+    "districtPhone": "352-747-1540",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Nan_Cobb",
+    "ballotpediaUrl": "https://ballotpedia.org/Nan_Cobb"
   },
   {
     "id": "ocd-person/7fa0c00f-c006-401c-88e7-06485e394c34",
@@ -1590,8 +1974,13 @@
     "party": "Republican",
     "email": "nathan.boyles@flhouse.gov",
     "phone": "850-717-5003",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/5063.jpg",
     "website": "https://www.flhouse.gov/Sections/Representatives/custom/details.aspx?MemberId=5063",
-    "office": "Room 1401, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 1401, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "Northwest Florida State College 805 E. James Lee Blvd. (Highway 90), Crestview, FL 32539",
+    "districtPhone": "850-750-4470",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Nathan_Boyles",
+    "ballotpediaUrl": "https://ballotpedia.org/Nathan_Boyles"
   },
   {
     "id": "ocd-person/618247ea-caa1-462c-a29a-636c1720fd14",
@@ -1605,7 +1994,11 @@
     "phone": "850-487-5018",
     "photoUrl": "https://flsenate.gov/PublishedContent/Senators/2022-2024/Photos/s18_5365.jpg",
     "website": "https://flsenate.gov/Senators/2022-2024/S18",
-    "office": "Room 414, Senate Building 404 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 414, Senate Building 404 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "9800 4th St. North #200, St. Petersburg, FL 33702",
+    "districtPhone": "727-563-1910",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Nick_DiCeglie",
+    "ballotpediaUrl": "https://ballotpedia.org/Nick_DiCeglie"
   },
   {
     "id": "ocd-person/4bae75ba-b3df-4780-984b-144ae4d80a77",
@@ -1619,7 +2012,11 @@
     "phone": "850-717-5115",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Omar__Blanco.PNG",
     "website": "https://www.flhouse.gov/Sections/Representatives/custom/details.aspx?MemberId=4929",
-    "office": "Room 1302, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 1302, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "7380 SW 48th St., Miami, FL 33155",
+    "districtPhone": "305-850-6410",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Omar_Blanco",
+    "ballotpediaUrl": "https://ballotpedia.org/Omar_Blanco"
   },
   {
     "id": "ocd-person/0a0ec0a3-4f1d-4cd8-b790-d51bff717798",
@@ -1631,9 +2028,11 @@
     "party": "Republican",
     "email": "paula.stark@flhouse.gov",
     "phone": "850-717-5047",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4878.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4878.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4878&LegislativeTermId=90",
-    "office": "Room 200, House Office Building 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 200, House Office Building 402 S. Monroe St., Tallahassee, FL 32399",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Paula_Stark",
+    "ballotpediaUrl": "https://ballotpedia.org/Paula_Stark"
   },
   {
     "id": "ocd-person/ab654947-84ed-4526-9b00-487642499106",
@@ -1645,9 +2044,13 @@
     "party": "Republican",
     "email": "peggy.gossettseidman@flhouse.gov",
     "phone": "850-717-5091",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4891.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4891.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4891&LegislativeTermId=90",
-    "office": "Room 212, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 212, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "4400 N. Federal Highway Suite 40, Boca Raton, FL 33431",
+    "districtPhone": "561-571-4670",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Peggy_Gossett-Seidman",
+    "ballotpediaUrl": "https://ballotpedia.org/Peggy_Gossett-Seidman"
   },
   {
     "id": "ocd-person/25748543-5a46-49c2-bc52-f7d39c18a2e6",
@@ -1659,9 +2062,13 @@
     "party": "Republican",
     "email": "griff.griffitts@flhouse.gov",
     "phone": "850-717-5006",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4862.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4862.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4862&LegislativeTermId=90",
-    "office": "Room 303, House Office Building 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 303, House Office Building 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "840 W. 11th St. Suite 3300, Panama City, FL 32401",
+    "districtPhone": "850-804-1950",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Philip_Griffitts",
+    "ballotpediaUrl": "https://ballotpedia.org/Philip_Griffitts"
   },
   {
     "id": "ocd-person/ff372569-d6f5-4bd0-8d36-569a7458f3e2",
@@ -1673,8 +2080,13 @@
     "party": "Democratic",
     "email": "rashon.young@flhouse.gov",
     "phone": "850-717-5040",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/5065.jpg",
     "website": "https://www.flhouse.gov/Sections/Representatives/custom/details.aspx?MemberId=5065",
-    "office": "Room 1402, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 1402, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "801 N. Magnolia Ave. Suite 301, Orlando, FL 32803",
+    "districtPhone": "407-557-4530",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/RaShon_Young",
+    "ballotpediaUrl": "https://ballotpedia.org/RaShon_Young"
   },
   {
     "id": "ocd-person/1b25c111-e59b-429e-a6b7-fd22a38c1581",
@@ -1686,9 +2098,13 @@
     "party": "Republican",
     "email": "rachel.plakon@flhouse.gov",
     "phone": "850-717-5036",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4871.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4871.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4871&LegislativeTermId=90",
-    "office": "Room 200, House Office Building 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 200, House Office Building 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "1855 W. State Road 434 Suite 222, Longwood, FL 32750",
+    "districtPhone": "407-263-3931",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rachel_Plakon",
+    "ballotpediaUrl": "https://ballotpedia.org/Rachel_Plakon"
   },
   {
     "id": "ocd-person/6d1623ae-0b24-4007-9c0f-af352ea22180",
@@ -1700,9 +2116,13 @@
     "party": "Republican",
     "email": "massullo.ralph.web@flsenate.gov",
     "phone": "850-487-5011",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4624.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4624.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4624&LegislativeTermId=90",
-    "office": "Room 313, Senate Office Building 404 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 313, Senate Office Building 404 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "104 E. Dampier St., Inverness, FL 34450",
+    "districtPhone": "352-666-5707",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ralph_Massullo",
+    "ballotpediaUrl": "https://ballotpedia.org/Ralph_Massullo_Jr."
   },
   {
     "id": "ocd-person/2a415c08-da66-402b-ada6-93390a5df820",
@@ -1714,9 +2134,12 @@
     "party": "Republican",
     "email": "randy.maggard@flhouse.gov",
     "phone": "850-717-5054",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4758.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4758.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4758&LegislativeTermId=90",
-    "office": "Room 322, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 322, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "Creekside Center 35358 State Road 54, Zephyrhills, FL 33541",
+    "districtPhone": "813-768-0030",
+    "ballotpediaUrl": "https://ballotpedia.org/Randy_Maggard"
   },
   {
     "id": "ocd-person/c95a0c72-09d5-40dc-8df8-a865051b9ea0",
@@ -1730,7 +2153,11 @@
     "phone": "850-717-5027",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Richard_Gentry_20240811_121405.png",
     "website": "https://www.flhouse.gov/Sections/Representatives/details.aspx?MemberId=4911",
-    "office": "Room 1302, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 1302, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "275 S. Charles Richard Beall Blvd. Unit 108, DeBary, FL 32713",
+    "districtPhone": "386-251-1100",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Richard_Gentry_(Florida_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Richard_Gentry"
   },
   {
     "id": "ocd-person/50be2c32-37ea-4b93-9525-21d7b6f0b463",
@@ -1742,8 +2169,13 @@
     "party": "Democratic",
     "email": "rob.long@flhouse.gov",
     "phone": "850-717-5090",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/5067.jpg",
     "website": "https://www.flhouse.gov/Sections/Representatives/details.aspx?MemberId=5067",
-    "office": "Room 1102, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 1102, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "9770 S. Military Trail Suite B4, Mailbox 386, Boynton Beach, FL 33436",
+    "districtPhone": "561-903-1310",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rob_Long_(Florida_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Rob_Long"
   },
   {
     "id": "ocd-person/c63b8e5e-fd63-45a1-b7e9-16595039f34a",
@@ -1755,9 +2187,13 @@
     "party": "Republican",
     "email": "robert.brackett@flhouse.gov",
     "phone": "850-717-5034",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4870.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4870.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4870&LegislativeTermId=90",
-    "office": "Room 209, House Office Building 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 209, House Office Building 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "1800 27th St. Suite B2-203, Vero Beach, FL 32960",
+    "districtPhone": "772-365-9230",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Robbie_Brackett",
+    "ballotpediaUrl": "https://ballotpedia.org/Robert_Brackett"
   },
   {
     "id": "ocd-person/de5ddba1-d7fe-41da-9f36-16a03b0b22fc",
@@ -1769,9 +2205,13 @@
     "party": "Republican",
     "email": "alex.andrade@flhouse.gov",
     "phone": "850-717-5002",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4710.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4710.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4710&LegislativeTermId=90",
-    "office": "Room 214, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 214, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "226 S. Palafox Place Suite 401B, Pensacola, FL 32502",
+    "districtPhone": "850-542-1980",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Alex_Andrade_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Alex_Andrade"
   },
   {
     "id": "ocd-person/caf95c6f-3143-433e-8654-c17d39b94f88",
@@ -1783,9 +2223,13 @@
     "party": "Republican",
     "email": "chuck.brannan@flhouse.gov",
     "phone": "850-717-5010",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4708.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4708.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4708&LegislativeTermId=90",
-    "office": "Room 317, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 317, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "1262 SE Baya Drive, Lake City, FL 32025",
+    "districtPhone": "386-400-1980",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Chuck_Brannan",
+    "ballotpediaUrl": "https://ballotpedia.org/Chuck_Brannan"
   },
   {
     "id": "ocd-person/67c201cf-9aaa-4a06-8dda-28e93ea27f6b",
@@ -1797,9 +2241,13 @@
     "party": "Democratic",
     "email": "robin.bartleman@flhouse.gov",
     "phone": "850-717-5103",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4793.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4793.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4793&LegislativeTermId=90",
-    "office": "Room 407, House Office Building 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 407, House Office Building 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "1792 Bell Tower Lane Suite 102, Weston, FL 33326",
+    "districtPhone": "954-872-1770",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Robin_Bartleman",
+    "ballotpediaUrl": "https://ballotpedia.org/Robin_Bartleman"
   },
   {
     "id": "ocd-person/3194701f-dfa8-40e9-9081-56aa20c63f6e",
@@ -1813,7 +2261,11 @@
     "phone": "850-487-5032",
     "photoUrl": "https://flsenate.gov/PublishedContent/Senators/2022-2024/Photos/s32_5520.jpg",
     "website": "https://flsenate.gov/Senators/2022-2024/S32",
-    "office": "Room 213, Senate Building 404 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 213, Senate Building 404 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "8491 W. Commercial Blvd., Tamarac, FL 33351",
+    "districtPhone": "954-321-2705",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rosalind_Osgood",
+    "ballotpediaUrl": "https://ballotpedia.org/Rosalind_Osgood"
   },
   {
     "id": "ocd-person/baa03ffb-0948-4975-9e3a-c3fb9c0fcf40",
@@ -1825,9 +2277,13 @@
     "party": "Republican",
     "email": "ryan.chamberlin@flhouse.gov",
     "phone": "850-717-5024",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4901.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4901.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4901&LegislativeTermId=90",
-    "office": "Room 1401, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 1401, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "315 SE 25th Ave., Ocala, FL 34471",
+    "districtPhone": "352-635-0450",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ryan_Chamberlin",
+    "ballotpediaUrl": "https://ballotpedia.org/Ryan_Chamberlin"
   },
   {
     "id": "ocd-person/965e180a-177f-49ac-baba-0f0c7fe9a836",
@@ -1839,9 +2295,13 @@
     "party": "Republican",
     "email": "sam.garrison@flhouse.gov",
     "phone": "850-717-5011",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4767.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4767.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4767&LegislativeTermId=90",
-    "office": "Room 422, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 422, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "1835 EW Parkway Suite 18, Fleming Island, FL 32003",
+    "districtPhone": "904-375-3300",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sam_Garrison_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Sam_Garrison"
   },
   {
     "id": "ocd-person/2da96449-663b-48ed-ab70-ef4e433afda3",
@@ -1855,7 +2315,29 @@
     "phone": "850-717-5019",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/SamGreco2024.png",
     "website": "https://www.flhouse.gov/Sections/Representatives/details.aspx?MemberId=4906",
-    "office": "Room 1401, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 1401, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "4877 Palm Coast Parkway NW Suite 1, Palm Coast, FL 32137",
+    "districtPhone": "386-446-7644",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sam_Greco_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Sam_Greco"
+  },
+  {
+    "id": "ocd-person/6e6024d7-d66b-437d-b4a7-1e96bc365d5d",
+    "name": "Samantha Scott",
+    "firstName": "Samantha",
+    "lastName": "Scott",
+    "chamber": "lower",
+    "district": "52",
+    "party": "Republican",
+    "email": "samantha.scott@flhouse.gov",
+    "phone": "850-717-5052",
+    "photoUrl": "https://lakeandsumterstyle.com/wp-content/uploads/2025/09/548330102_10238294438960625_7665889559183237490_n-e1758302240695-1200x730.jpg",
+    "website": "https://www.flhouse.gov/Sections/Representatives/details.aspx?MemberId=5070",
+    "office": "Room 1401, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "600 Lee St., Wildwood, FL 34785",
+    "districtPhone": "352-635-0260",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Samantha_Scott_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Samantha_Scott"
   },
   {
     "id": "ocd-person/c844e345-f2a8-42fa-9ef9-d278bcb8fa4c",
@@ -1867,9 +2349,13 @@
     "party": "Republican",
     "email": "shane.abbott@flhouse.gov",
     "phone": "850-717-5005",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4864.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4864.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4864&LegislativeTermId=90",
-    "office": "Room 200, House Office Building 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 200, House Office Building 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "NWFSC Chautauqua Center 908 U.S. Highway 90 West, DeFuniak Springs, FL 32433",
+    "districtPhone": "850-635-3470",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Shane_Abbott",
+    "ballotpediaUrl": "https://ballotpedia.org/Shane_Abbott"
   },
   {
     "id": "ocd-person/a8a2eaa4-449b-441f-96bb-d8a3e8191479",
@@ -1883,7 +2369,11 @@
     "phone": "850-487-5034",
     "photoUrl": "https://flsenate.gov/PublishedContent/Senators/2022-2024/Photos/s34_5453.jpg",
     "website": "https://flsenate.gov/Senators/2022-2024/S34",
-    "office": "Room 214, Senate Building 404 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 214, Senate Building 404 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "606 NW 183rd St., Miami Gardens, FL 33169",
+    "districtPhone": "305-493-6002",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Shevrin_D._Jones",
+    "ballotpediaUrl": "https://ballotpedia.org/Shevrin_Jones"
   },
   {
     "id": "ocd-person/5844fc0a-b2d2-4a09-baa7-6774e684326a",
@@ -1895,9 +2385,13 @@
     "party": "Republican",
     "email": "mcclain.stan.web@flsenate.gov",
     "phone": "850-487-5009",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4658.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4658.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4658&LegislativeTermId=90",
-    "office": "Room 312, Senate Building 404 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 312, Senate Building 404 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "315 SE 25th Ave., Ocala, FL 34471",
+    "districtPhone": "352-732-1249",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Stan_McClain",
+    "ballotpediaUrl": "https://ballotpedia.org/Stan_McClain"
   },
   {
     "id": "ocd-person/811dfa67-2615-4d45-9cf9-bd1a587a34fe",
@@ -1909,9 +2403,11 @@
     "party": "Republican",
     "email": "susan.valdes@flhouse.gov",
     "phone": "850-717-5064",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4752.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4752.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4752&LegislativeTermId=90",
-    "office": "Room 334, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 334, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Susan_Valdes",
+    "ballotpediaUrl": "https://ballotpedia.org/Susan_Valdes"
   },
   {
     "id": "ocd-person/a5af681e-9679-4fed-83a3-ed16405055cb",
@@ -1923,9 +2419,13 @@
     "party": "Republican",
     "email": "susan.plasencia@flhouse.gov",
     "phone": "850-717-5037",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4872.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4872.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4872&LegislativeTermId=90",
-    "office": "Room 334, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 334, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "10151 University Blvd. Private Mailbox 130, Orlando, FL 32817",
+    "districtPhone": "407-633-3730",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Susan_Plasencia",
+    "ballotpediaUrl": "https://ballotpedia.org/Susan_Plasencia"
   },
   {
     "id": "ocd-person/4ba15ff2-a717-4ea5-ad72-34e673ef63d8",
@@ -1937,9 +2437,13 @@
     "party": "Republican",
     "email": "taylor.yarkosky@flhouse.gov",
     "phone": "850-717-5025",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4868.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4868.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4868&LegislativeTermId=90",
-    "office": "Room 319, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 319, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "16207 State Road 50 Suite 402, Clermont, FL 34711",
+    "districtPhone": "352-995-0130",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Taylor_Yarkosky",
+    "ballotpediaUrl": "https://ballotpedia.org/Taylor_Yarkosky"
   },
   {
     "id": "ocd-person/04066eef-919c-4dc9-a655-ebc5e185f0c7",
@@ -1951,9 +2455,13 @@
     "party": "Republican",
     "email": "leek.tom.web@flsenate.gov",
     "phone": "850-487-5007",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4662.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4662.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4662&LegislativeTermId=90",
-    "office": "Room 310, Senate Building 404 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 310, Senate Building 404 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "4475 U.S. 1 South Suite 404, St. Augustine, FL 32086",
+    "districtPhone": "386-446-7610",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tom_Leek",
+    "ballotpediaUrl": "https://ballotpedia.org/Tom_Leek"
   },
   {
     "id": "ocd-person/ed56c597-3652-45a5-9c01-de0bf3eb8ab9",
@@ -1965,9 +2473,13 @@
     "party": "Republican",
     "email": "patt.maney@flhouse.gov",
     "phone": "850-717-5004",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4764.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4764.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4764&LegislativeTermId=90",
-    "office": "Room 222, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 222, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "115 Miracle Strip Parkway SE Suite 201, Fort Walton Beach, FL 32548",
+    "districtPhone": "850-904-1020",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Patt_Maney",
+    "ballotpediaUrl": "https://ballotpedia.org/T._Patt_Maney"
   },
   {
     "id": "ocd-person/36219a90-2f5f-4ac6-b6ad-04139103c70c",
@@ -1979,9 +2491,13 @@
     "party": "Republican",
     "email": "tiffany.esposito@flhouse.gov",
     "phone": "850-717-5077",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4892.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4892.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4892&LegislativeTermId=90",
-    "office": "Room 313, House Office Building 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 313, House Office Building 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "FL",
+    "districtPhone": "239-445-0150",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tiffany_Esposito",
+    "ballotpediaUrl": "https://ballotpedia.org/Tiffany_Esposito"
   },
   {
     "id": "ocd-person/8c728fd0-2a3b-48ea-88a9-c7d675eb05d0",
@@ -1995,7 +2511,11 @@
     "phone": "850-487-5030",
     "photoUrl": "https://flsenate.gov/PublishedContent/Senators/2022-2024/Photos/s30_5371.jpg",
     "website": "https://flsenate.gov/Senators/2022-2024/S30",
-    "office": "Room 220, Senate Building 404 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 220, Senate Building 404 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "5301 N. Federal Highway Suite 135, Boca Raton, FL 33487",
+    "districtPhone": "561-443-8170",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tina_Polsky",
+    "ballotpediaUrl": "https://ballotpedia.org/Tina_Polsky"
   },
   {
     "id": "ocd-person/a44181b6-df0b-466d-9989-d369083201aa",
@@ -2007,9 +2527,13 @@
     "party": "Republican",
     "email": "toby.overdorf@flhouse.gov",
     "phone": "850-717-5085",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4728.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4728.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4728&LegislativeTermId=90",
-    "office": "Room 402, House Office Building 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 402, House Office Building 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "151 SW Flagler Ave., Stuart, FL 34994",
+    "districtPhone": "772-403-9560",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Toby_Overdorf",
+    "ballotpediaUrl": "https://ballotpedia.org/Toby_Overdorf"
   },
   {
     "id": "ocd-person/4ae2bacf-d265-42a5-888d-5050015a6602",
@@ -2023,7 +2547,11 @@
     "phone": "850-487-5008",
     "photoUrl": "https://flsenate.gov/PublishedContent/Senators/2022-2024/Photos/s08_5346.jpg",
     "website": "https://flsenate.gov/Senators/2022-2024/S8",
-    "office": "Room 412, Senate Building 404 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 412, Senate Building 404 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "4606 S. Clyde Morris Blvd. Suite 2-J, Port Orange, FL 32129",
+    "districtPhone": "386-304-7630",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tom_A._Wright",
+    "ballotpediaUrl": "https://ballotpedia.org/Tom_Wright_(Florida)"
   },
   {
     "id": "ocd-person/35f68144-b99b-4f86-b223-726897926bfa",
@@ -2035,9 +2563,13 @@
     "party": "Republican",
     "email": "tom.fabricio@flhouse.gov",
     "phone": "850-717-5110",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4792.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4792.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4792&LegislativeTermId=90",
-    "office": "Room 319, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 319, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "7480 Fairway Drive Suite 206, Miami Lakes, FL 33014",
+    "districtPhone": "305-564-4980",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tom_Fabricio",
+    "ballotpediaUrl": "https://ballotpedia.org/Tom_Fabricio"
   },
   {
     "id": "ocd-person/217f848d-99c2-43aa-98d2-6fee2812c1e6",
@@ -2049,9 +2581,11 @@
     "party": "Republican",
     "email": "traci.koster@flhouse.gov",
     "phone": "850-717-5066",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4779.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4779.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4779&LegislativeTermId=90",
-    "office": "Room 412, House Office Building 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 412, House Office Building 402 S. Monroe St., Tallahassee, FL 32399",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Traci_Koster",
+    "ballotpediaUrl": "https://ballotpedia.org/Traci_Koster"
   },
   {
     "id": "ocd-person/03362949-948c-415d-a5b6-f99e8fbc6495",
@@ -2065,7 +2599,11 @@
     "phone": "850-487-5005",
     "photoUrl": "https://flsenate.gov/PublishedContent/Senators/2022-2024/Photos/s05_5385.jpg",
     "website": "https://flsenate.gov/Senators/2022-2024/S5",
-    "office": "Room 222, Senate Building 404 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 222, Senate Building 404 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "2933 N. Myrtle Ave. Suite 201, Jacksonville, FL 32209",
+    "districtPhone": "904-359-2575",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tracie_Davis",
+    "ballotpediaUrl": "https://ballotpedia.org/Tracie_Davis"
   },
   {
     "id": "ocd-person/ac26aaa6-1f59-4893-ae7f-30f5d2e5d8fc",
@@ -2077,9 +2615,13 @@
     "party": "Republican",
     "email": "tyler.sirois@flhouse.gov",
     "phone": "850-717-5031",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4748.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4748.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4748&LegislativeTermId=90",
-    "office": "Room 322, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 322, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "260 N. Tropical Trail Suite 206, Merritt Island, FL 32953",
+    "districtPhone": "321-447-2060",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tyler_Sirois",
+    "ballotpediaUrl": "https://ballotpedia.org/Tyler_Sirois"
   },
   {
     "id": "ocd-person/2d1c1c14-3ff1-468e-920a-07a081df4775",
@@ -2093,7 +2635,11 @@
     "phone": "850-717-5076",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/VanessaOliver2024.jpg",
     "website": "https://www.flhouse.gov/Sections/Representatives/details.aspx?MemberId=4922",
-    "office": "Room 1401, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 1401, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "4355 Pinnacle St. Suite C, Punta Gorda, FL 33980",
+    "districtPhone": "941-621-0480",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Vanessa_Oliver",
+    "ballotpediaUrl": "https://ballotpedia.org/Vanessa_Oliver"
   },
   {
     "id": "ocd-person/7cba4eb9-69b5-431d-817e-41f54ccf9ceb",
@@ -2107,7 +2653,11 @@
     "phone": "850-717-5107",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/WallaceAristide.png",
     "website": "https://www.flhouse.gov/Sections/Representatives/custom/details.aspx?MemberId=4928",
-    "office": "Room 1402, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 1402, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "16901 NE 19th Ave. Suite A, North Miami Beach, FL 33162",
+    "districtPhone": "305-488-5530",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Wallace_Aristide",
+    "ballotpediaUrl": "https://ballotpedia.org/Wallace_Aristide"
   },
   {
     "id": "ocd-person/f2b23850-7feb-484e-8ed2-68e2f6108fbf",
@@ -2119,9 +2669,13 @@
     "party": "Republican",
     "email": "webster.barnaby@flhouse.gov",
     "phone": "850-717-5029",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4770.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4770.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4770&LegislativeTermId=90",
-    "office": "Room 317, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 317, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "120 S. Florida Ave., Deland, FL 32720",
+    "districtPhone": "386-736-5042",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Webster_Barnaby",
+    "ballotpediaUrl": "https://ballotpedia.org/Webster_Barnaby"
   },
   {
     "id": "ocd-person/042b27f1-ec82-497e-958c-ebe5da28b706",
@@ -2133,9 +2687,11 @@
     "party": "Republican",
     "email": "will.robinson@flhouse.gov",
     "phone": "850-717-5071",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4733.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4733.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4733&LegislativeTermId=90",
-    "office": "Room 303, House Office Building 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 303, House Office Building 402 S. Monroe St., Tallahassee, FL 32399",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Will_Robinson_(Florida_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Will_Robinson"
   },
   {
     "id": "ocd-person/17ae3cd7-1aa0-44b4-baab-ed839b6776a6",
@@ -2147,9 +2703,13 @@
     "party": "Republican",
     "email": "wyman.duggan@flhouse.gov",
     "phone": "850-717-5012",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4712.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4712.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4712&LegislativeTermId=90",
-    "office": "Room 422, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 422, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "4530 Saint Johns Ave., Suite 15 Private Mailbox 409, Jacksonville, FL 32210",
+    "districtPhone": "904-659-6920",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Wyman_Duggan",
+    "ballotpediaUrl": "https://ballotpedia.org/Wyman_Duggan"
   },
   {
     "id": "ocd-person/88aacea0-124a-4980-b046-90cfb0cda4db",
@@ -2163,7 +2723,11 @@
     "phone": "850-717-5081",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/YvetteBennaroch24.JPG",
     "website": "https://www.flhouse.gov/Sections/Representatives/custom/details.aspx?MemberId=4923",
-    "office": "Room 1401, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 1401, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "districtOffice": "3299 Tamiami Trail East Suite 304, Naples, FL 34112",
+    "districtPhone": "239-232-8810",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Yvette_Benarroch",
+    "ballotpediaUrl": "https://ballotpedia.org/Yvette_Benarroch"
   },
   {
     "id": "ocd-person/0f5d2710-6b7c-4444-8a45-ea3e917805ba",
@@ -2175,8 +2739,10 @@
     "party": "Democratic",
     "email": "yvonne.hinson@flhouse.gov",
     "phone": "850-717-5021",
-    "photoUrl": "https://myfloridahouse.gov//FileStores/Web/Imaging/Member/4768.jpg",
+    "photoUrl": "https://www.flhouse.gov/FileStores/Web/Imaging/Member/4768.jpg",
     "website": "https://myfloridahouse.gov/Sections/Representatives/details.aspx?MemberId=4768&LegislativeTermId=90",
-    "office": "Room 1102, The Capitol 402 S. Monroe St., Tallahassee, FL 32399"
+    "office": "Room 1102, The Capitol 402 S. Monroe St., Tallahassee, FL 32399",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Yvonne_Hayes_Hinson",
+    "ballotpediaUrl": "https://ballotpedia.org/Yvonne_Hayes_Hinson"
   }
 ]

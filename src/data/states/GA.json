@@ -1,5 +1,21 @@
 [
   {
+    "id": "ocd-person/3cfc8d4f-68d4-44b2-81f4-a162465e1aed",
+    "name": "Adrienne White",
+    "firstName": "Adrienne",
+    "lastName": "White",
+    "chamber": "upper",
+    "district": "7",
+    "party": "Democratic",
+    "email": "adrienne.whitecarden@senate.ga.gov",
+    "phone": "404-463-5263",
+    "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/carden-adrienne-white-5097.jpg",
+    "website": "https://www.legis.ga.gov/members/senate/5097",
+    "office": "Room 320-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Adrienne_White",
+    "ballotpediaUrl": "https://ballotpedia.org/Adrienne_White_(Georgia)"
+  },
+  {
     "id": "ocd-person/938f2479-c51f-446a-87f0-76d4f07c61e5",
     "name": "Akbar Ali",
     "firstName": "Akbar",
@@ -8,7 +24,10 @@
     "district": "106",
     "party": "Democratic",
     "email": "akbar.ali@house.ga.gov",
-    "website": "https://www.legis.ga.gov/members/house/5089"
+    "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/ali-akbar-5089.jpg",
+    "website": "https://www.legis.ga.gov/members/house/5089",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Akbar_Ali_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Muhammad_Akbar_Ali"
   },
   {
     "id": "ocd-person/a5a0998b-3837-4c4e-a66b-a567dc2f9d77",
@@ -22,7 +41,10 @@
     "phone": "404-656-6372",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/williams-al-230.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=230&Session=27",
-    "office": "Room 511-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 511-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "districtOffice": "8216 E. Oglethorpe Highway, Midway, GA 31320",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Al_Williams_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Al_Williams_(Georgia_legislator)"
   },
   {
     "id": "ocd-person/bb48e87c-29db-4a4d-a278-fa299be2020e",
@@ -36,7 +58,27 @@
     "phone": "404-463-3793",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/powell-alan-187.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=187&Session=27",
-    "office": "Room 613-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 613-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "districtOffice": "3059 Ridge Road, Hartwell, GA 30643",
+    "districtPhone": "706-206-6500",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Alan_Powell_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Alan_Powell"
+  },
+  {
+    "id": "ocd-person/8aa7ee05-bf64-4c51-8821-ad905d25741b",
+    "name": "Alvin Payton",
+    "firstName": "Alvin",
+    "lastName": "Payton",
+    "chamber": "lower",
+    "district": "177",
+    "party": "Democratic",
+    "email": "alvin.payton@house.ga.gov",
+    "phone": "404-656-7859",
+    "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/payton-alvin-5096.jpg",
+    "website": "https://www.legis.ga.gov/members/house/5096?session=1034",
+    "office": "Room 512-E, Coverdell Legislative Office Building, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Alvin_Payton",
+    "ballotpediaUrl": "https://ballotpedia.org/Alvin_Payton_Jr."
   },
   {
     "id": "ocd-person/b001a55f-61fa-4e62-85fd-ac6c282f2711",
@@ -50,7 +92,11 @@
     "phone": "404-656-0126",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/moore-angela-5008.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "Room 411-H, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 411-H, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "districtOffice": "2724 Wesley Chapel Road Suite 361731, Decatur, GA 30034",
+    "districtPhone": "678-824-5790",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Angela_Moore",
+    "ballotpediaUrl": "https://ballotpedia.org/Angela_Moore_(Georgia)"
   },
   {
     "id": "ocd-person/1d0deded-daaa-425b-b6aa-3612492dca5b",
@@ -64,7 +110,9 @@
     "phone": "404-656-0254",
     "photoUrl": "https://angieosteen.com/wp-content/uploads/sites/109/2024/04/photo-mobile-1.jpg",
     "website": "https://www.legis.ga.gov/members/house/5084",
-    "office": "Room 601-E, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 601-E, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Angie_O%27Steen",
+    "ballotpediaUrl": "https://ballotpedia.org/Angie_O%27Steen"
   },
   {
     "id": "ocd-person/e16d6516-badc-4682-9e3a-84f30a44b060",
@@ -78,7 +126,9 @@
     "phone": "404-656-0116",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/westbrook-anne-allen-5054.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "Room 409-F, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 409-F, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Anne_Allen_Westbrook",
+    "ballotpediaUrl": "https://ballotpedia.org/Anne_Westbrook"
   },
   {
     "id": "ocd-person/3b3da57c-2f96-4a94-a7bc-eb6a814cc627",
@@ -92,7 +142,9 @@
     "phone": "404-656-0109",
     "photoUrl": "https://bloximages.newyork1.vip.townnews.com/gwinnettdailypost.com/content/tncms/assets/v3/editorial/f/66/f663df0a-941b-11ec-92cf-a71cdde39cc5/621544040ce4c.image.jpg?crop=656%2C819%2C276%2C240",
     "website": "https://www.legis.ga.gov/members/house/5076",
-    "office": "Room 404-C, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 404-C, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Arlene_Beckles",
+    "ballotpediaUrl": "https://ballotpedia.org/Arlene_Beckles"
   },
   {
     "id": "ocd-person/fd2717f1-6294-4601-a027-8fc41195372c",
@@ -102,11 +154,13 @@
     "chamber": "upper",
     "district": "1",
     "party": "Republican",
-    "email": "ben.watson@house.ga.gov",
+    "email": "ben.watson@senate.ga.gov",
     "phone": "404-656-7880",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/watson-ben-784.jpg",
     "website": "https://www.legis.ga.gov/members/senate",
-    "office": "Room 325-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 325-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ben_Watson_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Ben_Watson"
   },
   {
     "id": "ocd-person/e4e40f68-0970-4392-b739-3c68f749bcdc",
@@ -120,7 +174,10 @@
     "phone": "404-656-7153",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/camp-beth-5004.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "State Capitol Room 218-D, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 218-D, 206 Washington St. SW, Atlanta, GA 30334",
+    "districtOffice": "1235 Strickland Road, Concord, GA 30206",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Beth_Camp",
+    "ballotpediaUrl": "https://ballotpedia.org/Beth_Camp"
   },
   {
     "id": "ocd-person/8b4b00cb-6f78-4b69-b788-796b19d94752",
@@ -134,7 +191,9 @@
     "phone": "404-656-0325",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/ballard-bethany-5051.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "Room 612-C, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 612-C, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bethany_Ballard",
+    "ballotpediaUrl": "https://ballotpedia.org/Bethany_Ballard"
   },
   {
     "id": "ocd-person/c2c81ffc-f4b1-40f4-96b0-6309f89902ee",
@@ -148,7 +207,10 @@
     "phone": "404-656-0116",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/holland-betsy-4943.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=4943&Session=27",
-    "office": "Room 409-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 409-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "districtOffice": "535 Pine Tree Drive NE, Atlanta, GA 30305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Betsy_Holland",
+    "ballotpediaUrl": "https://ballotpedia.org/Betsy_Holland"
   },
   {
     "id": "ocd-person/4dc87191-fa52-4c2f-bc9c-8823a8b4c882",
@@ -162,7 +224,9 @@
     "phone": "404-463-1366",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/cowsert-bill-9.jpg",
     "website": "https://www.legis.ga.gov/members/senate",
-    "office": "State Capitol Room 432, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 432, 206 Washington St. SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bill_Cowsert",
+    "ballotpediaUrl": "https://ballotpedia.org/Bill_Cowsert"
   },
   {
     "id": "ocd-person/f2444048-8c14-45b2-b700-37f7899fa5bb",
@@ -174,8 +238,12 @@
     "party": "Republican",
     "email": "bill.fincher@house.ga.gov",
     "phone": "404-656-0254",
+    "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/fincher-bill-5092.jpg",
     "website": "https://www.legis.ga.gov/members/house/5092",
-    "office": "Room 601-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 601-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "districtOffice": "109 Breckinridge Drive, Canton, GA 30115",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bill_Fincher_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Bill_Fincher"
   },
   {
     "id": "ocd-person/4a9ef816-9130-4510-a19e-3124e3f2aeed",
@@ -189,7 +257,10 @@
     "phone": "404-656-5126",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/hitchens-bill-823.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=823&Session=27",
-    "office": "State Capitol Room 217, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 217, 206 Washington St. SW, Atlanta, GA 30334",
+    "districtOffice": "2440 Rincon-Stillwell Road, Rincon, GA 31326",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bill_Hitchens",
+    "ballotpediaUrl": "https://ballotpedia.org/Bill_Hitchens"
   },
   {
     "id": "ocd-person/adefd0ba-43cd-4aae-9321-12f67e57ac8a",
@@ -203,7 +274,9 @@
     "phone": "404-656-5132",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/werkheiser-bill-863.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=863&Session=27",
-    "office": "State Capitol Room 218-A, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 218-A, 206 Washington St. SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bill_Werkheiser",
+    "ballotpediaUrl": "https://ballotpedia.org/Bill_Werkheiser"
   },
   {
     "id": "ocd-person/23dfc274-73d1-45df-b381-67e597cf0b84",
@@ -214,10 +287,14 @@
     "district": "152",
     "party": "Republican",
     "email": "bill.yearta@house.ga.gov",
-    "phone": "404-656-0254",
+    "phone": "404-463-2248",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/yearta-bill-4969.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=4969&Session=27",
-    "office": "Room 601-H, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 245-E, 206 Washington St. SW, Atlanta, GA 30334",
+    "districtOffice": "114 Carriage Lane, Sylvester, GA 31791",
+    "districtPhone": "229-776-2047",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bill_Yearta",
+    "ballotpediaUrl": "https://ballotpedia.org/Bill_Yearta"
   },
   {
     "id": "ocd-person/449db918-10b7-4fa7-a047-eb9de416dce3",
@@ -231,7 +308,9 @@
     "phone": "404-463-1371",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/hickman-billy-4972.jpg",
     "website": "https://www.legis.ga.gov/members/senate",
-    "office": "Room 304-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 304-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Billy_Hickman",
+    "ballotpediaUrl": "https://ballotpedia.org/Billy_Hickman_(Georgia)"
   },
   {
     "id": "ocd-person/96307d79-07d4-4f59-9dd3-b7f994d566d5",
@@ -245,7 +324,9 @@
     "phone": "404-656-0287",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/mitchell-billy-172.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=172&Session=27",
-    "office": "Room 607-D, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 607-D, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Billy_Mitchell_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Billy_Mitchell"
   },
   {
     "id": "ocd-person/e9c5a2fc-3354-49e1-ac29-783502155fe7",
@@ -259,7 +340,11 @@
     "phone": "404-656-5038",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/tillery-blake-4908.jpg",
     "website": "https://www.legis.ga.gov/members/senate",
-    "office": "State Capitol Room 234, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 234, 206 Washington St. SW, Atlanta, GA 30334",
+    "districtOffice": "404 Durden St., Vidalia, GA 30474",
+    "districtPhone": "912-537-3030",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Blake_Tillery",
+    "ballotpediaUrl": "https://ballotpedia.org/Blake_Tillery"
   },
   {
     "id": "ocd-person/60bb96c4-f20c-4918-b88b-d7857341e5f4",
@@ -273,7 +358,9 @@
     "phone": "404-656-7454",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/hatchett-bo-4984.jpg",
     "website": "https://www.legis.ga.gov/members/senate",
-    "office": "State Capitol Room 109, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 109, 206 Washington St. SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bo_Hatchett",
+    "ballotpediaUrl": "https://ballotpedia.org/Bo_Hatchett"
   },
   {
     "id": "ocd-person/933a841a-19d6-42c2-a046-991ff9903a23",
@@ -287,7 +374,11 @@
     "phone": "404-656-0152",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/thomas-brad-4991.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "Room 401-F, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 401-F, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "districtOffice": "2210 Holly Springs Parkway Unit 1280, Holly Springs, GA 30115",
+    "districtPhone": "678-224-1490",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Brad_Thomas_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Brad_Thomas_(Georgia)"
   },
   {
     "id": "ocd-person/c0b205e2-1542-4802-896d-fa7b2b6fc4d9",
@@ -301,7 +392,9 @@
     "phone": "404-656-0152",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/cox-brent-5021.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "Room 401-C, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 401-C, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Brent_Cox",
+    "ballotpediaUrl": "https://ballotpedia.org/Brent_Cox"
   },
   {
     "id": "ocd-person/a53e6bbd-a5b8-436b-94ae-bebf957c5b61",
@@ -315,7 +408,9 @@
     "phone": "404-656-0298",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/prince-brian-847.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=847&Session=27",
-    "office": "Room 608-D, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 608-D, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Brian_Prince",
+    "ballotpediaUrl": "https://ballotpedia.org/Brian_Prince"
   },
   {
     "id": "ocd-person/3a5721a0-d848-40d0-a48a-66b797e7d7d9",
@@ -329,7 +424,9 @@
     "phone": "404-656-0508",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/strickland-brian-835.jpg",
     "website": "https://www.legis.ga.gov/members/senate",
-    "office": "Room 324-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 324-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Brian_Strickland",
+    "ballotpediaUrl": "https://ballotpedia.org/Brian_Strickland"
   },
   {
     "id": "ocd-person/13b7af1b-5b56-481b-a81a-2001846188a6",
@@ -343,7 +440,9 @@
     "phone": "404-656-5025",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/williamson-bruce-778.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=778&Session=27",
-    "office": "State Capitol Room 415-B, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 415-B, 206 Washington St. SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bruce_Williamson_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Bruce_Williamson_(Georgia)"
   },
   {
     "id": "ocd-person/b1187e7a-8cea-4e91-9c9f-7c7c61df3c85",
@@ -357,7 +456,9 @@
     "phone": "404-656-0220",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Bryce_Berry.jpg",
     "website": "https://www.legis.ga.gov/members/house/5069",
-    "office": "Room 509-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 509-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bryce_Berry",
+    "ballotpediaUrl": "https://ballotpedia.org/Bryce_Berry"
   },
   {
     "id": "ocd-person/d40576ac-fbc0-4b42-98ee-f6362063784d",
@@ -371,7 +472,10 @@
     "phone": "404-656-7857",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/deloach-buddy-303.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "State Capitol Room 401-H, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 401-H, 206 Washington St. SW, Atlanta, GA 30334",
+    "districtOffice": "2689 Sutherland Bluff Drive NE, Townsend, GA 31331",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Buddy_DeLoach",
+    "ballotpediaUrl": "https://ballotpedia.org/Buddy_DeLoach"
   },
   {
     "id": "ocd-person/842218b5-88ae-4ba8-8395-756bf3340e16",
@@ -385,7 +489,11 @@
     "phone": "404-656-5141",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/parrish-butch-183.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=183&Session=27",
-    "office": "State Capitol Room HM-1, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room HM-1, 206 Washington St. SW, Atlanta, GA 30334",
+    "districtOffice": "132 Victory Drive, Swainsboro, GA 30401",
+    "districtPhone": "478-237-3838",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Butch_Parrish",
+    "ballotpediaUrl": "https://ballotpedia.org/Butch_Parrish"
   },
   {
     "id": "ocd-person/98850c9f-1c37-4177-9ad8-17d2b4d3c8d4",
@@ -399,7 +507,10 @@
     "phone": "404-656-9224",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/summers-carden-4971.jpg",
     "website": "https://www.legis.ga.gov/members/senate",
-    "office": "State Capitol Room 121-J, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 121-J, 206 Washington St. SW, Atlanta, GA 30334",
+    "districtOffice": "108 E. 13th Ave., Cordele, GA 31015",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Carden_Summers",
+    "ballotpediaUrl": "https://ballotpedia.org/Carden_Summers"
   },
   {
     "id": "ocd-person/562e162f-2a60-441c-956b-11db12eef266",
@@ -413,7 +524,10 @@
     "phone": "404-656-7859",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/gilliard-carl-4881.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=4881&Session=27",
-    "office": "Room 512-G, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 512-G, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "districtOffice": "Garden City, GA",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Carl_Gilliard_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Carl_Gilliard"
   },
   {
     "id": "ocd-person/3646e872-85a6-4383-97c5-36ff96ca7113",
@@ -427,7 +541,9 @@
     "phone": "404-656-0188",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/CarmenRice2024.jpg",
     "website": "https://www.legis.ga.gov/members/house/5064",
-    "office": "Room 504-C, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 504-C, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Carmen_Rice",
+    "ballotpediaUrl": "https://ballotpedia.org/Carmen_Rice"
   },
   {
     "id": "ocd-person/0f5a9273-2fc6-458f-af59-b75070a1dc76",
@@ -441,7 +557,9 @@
     "phone": "404-656-5058",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/hugley-carolyn-133.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=133&Session=27",
-    "office": "Room 609, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 609, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Carolyn_Hugley",
+    "ballotpediaUrl": "https://ballotpedia.org/Carolyn_Hugley"
   },
   {
     "id": "ocd-person/72370a62-92f4-46f1-ab7b-193a643085b8",
@@ -455,7 +573,9 @@
     "phone": "404-656-0152",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/barrett-carter-5020.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "Room 401-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 401-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Carter_Barrett",
+    "ballotpediaUrl": "https://ballotpedia.org/Carter_Barrett"
   },
   {
     "id": "ocd-person/cba2f06c-773c-49d3-949c-b1a2db377c21",
@@ -465,11 +585,13 @@
     "chamber": "lower",
     "district": "172",
     "party": "Republican",
-    "email": "charles.cannon@house.ga.gov",
+    "email": "chas.cannon@house.ga.gov",
     "phone": "404-656-0177",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/cannon-charles--chas--5058.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "Room 501-C, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 501-C, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Charles_Cannon_(Georgia_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Charles_Cannon"
   },
   {
     "id": "ocd-person/0d75f0d9-0242-4f72-b4f3-1cd085eb26b6",
@@ -483,7 +605,10 @@
     "phone": "404-656-0213",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/byrd-charlice-75.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "Room 508-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 508-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "districtOffice": "1025 Rose Creek Drive Suite 620-165, Woodstock, GA 30189",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Charlice_Byrd",
+    "ballotpediaUrl": "https://ballotpedia.org/Charlice_Byrd"
   },
   {
     "id": "ocd-person/d79c3e9b-b73d-416b-9bfd-8a0338d8256c",
@@ -497,7 +622,9 @@
     "phone": "404-656-7850",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/erwin-chris-4965.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=4965&Session=27",
-    "office": "State Capitol Room 220-B, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 220-B, 206 Washington St. SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Chris_Erwin",
+    "ballotpediaUrl": "https://ballotpedia.org/Chris_Erwin"
   },
   {
     "id": "ocd-person/42517dd7-eccb-4d22-a795-cbd010b69ee6",
@@ -511,7 +638,10 @@
     "phone": "404-656-5146",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/martin-chuck-164.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=164&Session=27",
-    "office": "State Capitol Room 417-A, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 417-A, 206 Washington St. SW, Atlanta, GA 30334",
+    "districtOffice": "11770 Haynes Bridge Road Suite 205-544, Alpharetta, GA 30004",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Chuck_Martin_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Charles_Martin_Jr."
   },
   {
     "id": "ocd-person/3ff894cb-f2e4-47d0-9f67-b125245a10c3",
@@ -525,7 +655,9 @@
     "phone": "404-656-5052",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/efstration-chuck-846.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=846&Session=27",
-    "office": "State Capitol Room 338, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 338, 206 Washington St. SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Chuck_Efstration",
+    "ballotpediaUrl": "https://ballotpedia.org/Chuck_Efstration"
   },
   {
     "id": "ocd-person/b11d0191-cd84-4a93-add6-ee65494caff2",
@@ -539,7 +671,10 @@
     "phone": "404-656-0034",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/hufstetler-chuck-838.jpg",
     "website": "https://www.legis.ga.gov/members/senate",
-    "office": "State Capitol Room 121-C, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 121-C, 206 Washington St. SW, Atlanta, GA 30334",
+    "districtOffice": "3 Orchard Spring Drive, Rome, GA 30165",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Chuck_Hufstetler",
+    "ballotpediaUrl": "https://ballotpedia.org/Chuck_Hufstetler"
   },
   {
     "id": "ocd-person/1ac93f89-f367-4de3-82ba-79fa78d4d134",
@@ -553,7 +688,9 @@
     "phone": "404-656-5080",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/payne-chuck--4909.jpg",
     "website": "https://www.legis.ga.gov/members/senate",
-    "office": "State Capitol Room 433, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 432, 206 Washington St. SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Chuck_Payne",
+    "ballotpediaUrl": "https://ballotpedia.org/Chuck_Payne"
   },
   {
     "id": "ocd-person/e1a9102d-f845-47f5-882e-e344eef060ec",
@@ -567,7 +704,10 @@
     "phone": "404-656-0325",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/crowe-clint-5002.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "Room 612-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 612-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "districtOffice": "115 Mabry Road, Jackson, GA 30233",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Clint_Crowe",
+    "ballotpediaUrl": "https://ballotpedia.org/Clint_Crowe"
   },
   {
     "id": "ocd-person/17a7e011-73f2-4ac5-8470-3436b47a6744",
@@ -581,7 +721,9 @@
     "phone": "404-463-2518",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/dixon-clint-4982.jpg",
     "website": "https://www.legis.ga.gov/members/senate",
-    "office": "State Capitol Room 421-A, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 421-A, 206 Washington St. SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Clint_Dixon",
+    "ballotpediaUrl": "https://ballotpedia.org/Clint_Dixon"
   },
   {
     "id": "ocd-person/ec6cf250-ebcc-4dda-89a5-12da9ebbe51a",
@@ -595,7 +737,10 @@
     "phone": "404-656-0152",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/washburn-dale-4958.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=4958&Session=27",
-    "office": "Room 401-H, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 401-H, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "districtOffice": "3040 Riverside Drive Suite C-2, Macon, GA 31210",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dale_Washburn",
+    "ballotpediaUrl": "https://ballotpedia.org/Dale_Washburn"
   },
   {
     "id": "ocd-person/1a9598cc-056f-4725-a3fb-64c3f0fd26ed",
@@ -609,7 +754,9 @@
     "phone": "404-656-0152",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/mathis-danny-4959.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=4959&Session=27",
-    "office": "Room 401-E, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 401-E, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Danny_Mathis",
+    "ballotpediaUrl": "https://ballotpedia.org/Danny_Mathis"
   },
   {
     "id": "ocd-person/d00eb950-0fb6-41ab-ae22-8e9ce84d7cf0",
@@ -623,7 +770,9 @@
     "phone": "404-463-2246",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/taylor-darlene-786.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=786&Session=27",
-    "office": "State Capitol Room 245-B, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 245-B, 206 Washington St. SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Darlene_Taylor_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Darlene_Taylor"
   },
   {
     "id": "ocd-person/1f94316e-fb58-401f-bbfc-5ada0a717b6b",
@@ -637,7 +786,8 @@
     "phone": "404-656-0202",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/kendrick-dar-shun-770.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=770&Session=27",
-    "office": "Room 507-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 507-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dar%27shun_Kendrick"
   },
   {
     "id": "ocd-person/ad18dba4-9247-4542-95b1-2ccef815dbc7",
@@ -651,7 +801,10 @@
     "phone": "404-656-0188",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/clark-david-867.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=867&Session=27",
-    "office": "Room 504-E, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 504-E, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "districtOffice": "420 S. Hill St., Buford, GA 30518",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/David_Clark_(Georgia_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/David_Clark_(Georgia)"
   },
   {
     "id": "ocd-person/9bcfa0eb-ee7d-4762-9555-7bc4a67d6417",
@@ -665,7 +818,9 @@
     "phone": "404-656-0325",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/huddleston-david-5033.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "Room 612-G, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 612-G, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/David_Huddleston_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/David_Huddleston"
   },
   {
     "id": "ocd-person/0f288c5b-484a-4b70-8209-0a23f922edd1",
@@ -679,7 +834,10 @@
     "phone": "404-656-0188",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/jenkins-david-5005.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "Room 504-F, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 504-F, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "districtOffice": "833 John Trammell Road, Grantville, GA 30220",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/David_Jenkins_(Georgia_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/David_Jenkins_(Georgia)"
   },
   {
     "id": "ocd-person/4b05e770-4423-4b64-8ae1-9600e8c73244",
@@ -693,7 +851,9 @@
     "phone": "404-656-0150",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/lucas-david-157.jpg",
     "website": "https://www.legis.ga.gov/members/senate",
-    "office": "State Capitol Room 110-B, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 110-B, 206 Washington St. SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/David_Lucas_(American_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/David_Lucas_Sr."
   },
   {
     "id": "ocd-person/9a8e7b0c-3c19-473f-b04a-d3a17037af0a",
@@ -706,7 +866,9 @@
     "email": "david.sampson@house.ga.gov",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/sampson-david-5052.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "1713 E. Oglethorpe, Albany, GA 31705"
+    "office": "1713 E. Oglethorpe, Albany, GA 31705",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/David_Sampson_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/David_Sampson"
   },
   {
     "id": "ocd-person/83a7bbf2-d69c-4813-bbeb-52820e6b9af4",
@@ -720,7 +882,11 @@
     "phone": "404-656-0314",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/wilkerson-david-760.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=760&Session=27",
-    "office": "Room 611-E, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 611-E, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "districtOffice": "3721 New Macland Road Suite 200-232, Powder Springs, GA 30127",
+    "districtPhone": "770-891-9736",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/David_Wilkerson_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/David_Wilkerson"
   },
   {
     "id": "ocd-person/5061bc6b-83af-46d0-a78d-30ebe10a63db",
@@ -734,7 +900,11 @@
     "phone": "404-656-0116",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/buckner-debbie-71.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=71&Session=27",
-    "office": "Room 409-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 409-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "districtOffice": "780 Fielders Mill Road, Junction City, GA 31812",
+    "districtPhone": "706-269-3630",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Debbie_Buckner",
+    "ballotpediaUrl": "https://ballotpedia.org/Debbie_Buckner"
   },
   {
     "id": "ocd-person/b824f8fd-7343-449d-8027-fcd0afaf1949",
@@ -748,7 +918,10 @@
     "phone": "404-657-1803",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/silcox-deborah-4887.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=4887&Session=27",
-    "office": "Room 408-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 408-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "districtOffice": "6300 Powers Ferry Road Suite 600, #177, Atlanta, GA 30339",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Deborah_Silcox",
+    "ballotpediaUrl": "https://ballotpedia.org/Deborah_Silcox"
   },
   {
     "id": "ocd-person/1bb8d14b-9d5d-4edd-8c93-37e95991a8e4",
@@ -762,7 +935,10 @@
     "phone": "404-656-0202",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/bazemore-debra-4890.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=4890&Session=27",
-    "office": "Room 507-D, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 507-D, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "districtOffice": "7042 Galloway Pointe, Riverdale, GA 30296",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Debra_Bazemore",
+    "ballotpediaUrl": "https://ballotpedia.org/Debra_Bazemore"
   },
   {
     "id": "ocd-person/016fb7f0-2b08-4587-b7f2-8d18c1d9b8f5",
@@ -776,7 +952,9 @@
     "phone": "404-656-7859",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/douglas-demetrius-817.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=817&Session=27",
-    "office": "Room 512-I, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 512-I, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Demetrius_Douglas",
+    "ballotpediaUrl": "https://ballotpedia.org/Demetrius_Douglas"
   },
   {
     "id": "ocd-person/73918c45-83c1-4d52-a84d-3ad7ad8de40b",
@@ -790,7 +968,9 @@
     "phone": "404-656-7586",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/mallow-derek-5007.jpg",
     "website": "https://www.legis.ga.gov/members/house/5007?session=1029",
-    "office": "State Capitol Room 121-H, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 121-H, 206 Washington St. SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Derek_Mallow",
+    "ballotpediaUrl": "https://ballotpedia.org/Derek_Mallow"
   },
   {
     "id": "ocd-person/9046fcb2-f3eb-4233-bd92-32c94e60f9df",
@@ -804,7 +984,10 @@
     "phone": "404-656-7859",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/jackson-derrick-4891.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "Room 512-C, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 512-C, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "districtOffice": "100 Commerce Drive #1052, Tyrone, GA 30290",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Derrick_Jackson_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Derrick_Jackson"
   },
   {
     "id": "ocd-person/3a323603-753e-4380-993c-9bb2a7fc55f3",
@@ -818,7 +1001,9 @@
     "phone": "404-656-0152",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/mccollum-derrick-5022.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "Room 401-D, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 401-D, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Derrick_McCollum",
+    "ballotpediaUrl": "https://ballotpedia.org/Derrick_McCollum"
   },
   {
     "id": "ocd-person/8f76af22-98dc-4e1e-ba99-75b87c1129d6",
@@ -832,7 +1017,9 @@
     "phone": "404-651-7737",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/seabaugh-devan-5009.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "State Capitol Room 109, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 109, 206 Washington St. SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Devan_Seabaugh",
+    "ballotpediaUrl": "https://ballotpedia.org/Devan_Seabaugh"
   },
   {
     "id": "ocd-person/8afda706-7afa-462c-89f2-0d6d5da010ff",
@@ -846,21 +1033,9 @@
     "phone": "404-656-0220",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/mcclain-dewey-845.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=845&Session=27",
-    "office": "Room 509-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
-  },
-  {
-    "id": "ocd-person/b0587620-8c43-45b8-8212-285a13a4d47c",
-    "name": "Dexter Sharper",
-    "firstName": "Dexter",
-    "lastName": "Sharper",
-    "chamber": "lower",
-    "district": "177",
-    "party": "Democratic",
-    "email": "dexter.sharper@house.ga.gov",
-    "phone": "404-656-0126",
-    "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/sharper-dexter-831.jpg",
-    "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=831&Session=27",
-    "office": "Room 411-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 509-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dewey_McClain",
+    "ballotpediaUrl": "https://ballotpedia.org/Dewey_McClain"
   },
   {
     "id": "ocd-person/81dde544-49e9-4fb0-9313-32eacaf6194b",
@@ -874,7 +1049,11 @@
     "phone": "404-656-5143",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/parsons-don-184.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=184&Session=27",
-    "office": "State Capitol Room 402, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 402, 206 Washington St. SW, Atlanta, GA 30334",
+    "districtOffice": "3167 Sycamore Lane, Marietta, GA 30066",
+    "districtPhone": "770-977-4426",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Don_Parsons_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Don_Parsons"
   },
   {
     "id": "ocd-person/7f88fadb-2f51-48c7-8ae5-e20cd2f33e4a",
@@ -888,7 +1067,9 @@
     "phone": "404-463-1379",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/james-donzella-372.jpg",
     "website": "https://www.legis.ga.gov/members/senate",
-    "office": "State Capitol Room 121-D, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 121-D, 206 Washington St. SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Donzella_James",
+    "ballotpediaUrl": "https://ballotpedia.org/Donzella_James"
   },
   {
     "id": "ocd-person/818f1afb-2850-448e-99c1-be63a9acfe95",
@@ -902,7 +1083,9 @@
     "phone": "404-656-0220",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/carter-doreen-3877.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=3877&Session=27",
-    "office": "Room 509-G, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 509-G, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Doreen_Carter",
+    "ballotpediaUrl": "https://ballotpedia.org/Doreen_Carter"
   },
   {
     "id": "ocd-person/6be704ef-6250-4e08-86d3-f5fa2e1eebf3",
@@ -916,7 +1099,9 @@
     "phone": "404-463-3931",
     "photoUrl": "https://www.gfpe.org/library/imglib/Drew-Echols-1.jpg",
     "website": "https://www.legis.ga.gov/members/senate/5067",
-    "office": "Room 305-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 305-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Drew_Echols",
+    "ballotpediaUrl": "https://ballotpedia.org/Drew_Echols"
   },
   {
     "id": "ocd-person/4cf7c975-678b-4e21-9877-6d22d7b37916",
@@ -930,7 +1115,9 @@
     "phone": "404-656-0074",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/harbison-ed-17.jpg",
     "website": "https://www.legis.ga.gov/members/senate",
-    "office": "State Capitol Room 420-C, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 420-C, 206 Washington St. SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ed_Harbison",
+    "ballotpediaUrl": "https://ballotpedia.org/Ed_Harbison"
   },
   {
     "id": "ocd-person/777f58bb-9d6b-4755-ab7b-b94d11629cb5",
@@ -944,7 +1131,10 @@
     "phone": "404-656-0256",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/setzler-ed-203.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=203&Session=27",
-    "office": "Room 322-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 322-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "districtOffice": "1555 Boxwood Trace, Acworth, GA 30102",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ed_Setzler",
+    "ballotpediaUrl": "https://ballotpedia.org/Ed_Setzler"
   },
   {
     "id": "ocd-person/f33d979c-554c-433e-ad0f-837eef1da589",
@@ -958,7 +1148,9 @@
     "phone": "404-656-7850",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/lumsden-eddie-826.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=826&Session=27",
-    "office": "State Capitol Room 220-A, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 220-A, 206 Washington St. SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Eddie_Lumsden_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Eddie_Lumsden"
   },
   {
     "id": "ocd-person/18427775-e3e7-4730-bb6f-722616e6aebe",
@@ -972,7 +1164,10 @@
     "phone": "404-656-0265",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/jackson-edna-5011.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "Room 604-C, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 604-C, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "districtOffice": "2227 N. Fernwood Court, Savannah, GA 31404",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Edna_Jackson_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Edna_Jackson"
   },
   {
     "id": "ocd-person/4615e308-db74-408f-89df-02be56b5013b",
@@ -986,7 +1181,11 @@
     "phone": "404-656-0287",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/holly-el-mahdi-4954.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=4954&Session=27",
-    "office": "Room 607-F, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 607-F, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "districtOffice": "1740 Hudson Bridge Road Suite 1221, Stockbridge, GA 30253",
+    "districtPhone": "770-284-8146",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/El-Mahdi_Holly",
+    "ballotpediaUrl": "https://ballotpedia.org/El-Mahdi_Holly"
   },
   {
     "id": "ocd-person/3f15ad5e-877d-44aa-b5b3-b24587c42685",
@@ -1000,7 +1199,9 @@
     "phone": "404-656-5109",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/parent-elena-768.jpg",
     "website": "https://www.legis.ga.gov/members/senate",
-    "office": "State Capitol Room 121-A, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 121-A, 206 Washington St. SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Elena_Parent",
+    "ballotpediaUrl": "https://ballotpedia.org/Elena_Parent"
   },
   {
     "id": "ocd-person/acc7c167-6251-4ce8-8021-511acfa291ef",
@@ -1014,7 +1215,9 @@
     "phone": "404-656-0502",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/jones-emanuel-28.jpg",
     "website": "https://www.legis.ga.gov/members/senate",
-    "office": "State Capitol Room 420-A, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 420-A, 206 Washington St. SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Emanuel_Jones",
+    "ballotpediaUrl": "https://ballotpedia.org/Emanuel_Jones"
   },
   {
     "id": "ocd-person/3b2b9f31-6859-4582-8d82-581597c0c178",
@@ -1028,7 +1231,10 @@
     "phone": "404-656-7857",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/dunahoo-emory-797.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=797&Session=27",
-    "office": "State Capitol Room 401-J, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 401-J, 206 Washington St. SW, Atlanta, GA 30334",
+    "districtOffice": "4495 Bryant Quarter Road, Gillsville, GA 30543",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Emory_Dunahoo",
+    "ballotpediaUrl": "https://ballotpedia.org/Emory_West_Dunahoo_Jr."
   },
   {
     "id": "ocd-person/fe4b934e-8976-4c62-bcb0-ed8ae9782560",
@@ -1042,7 +1248,10 @@
     "phone": "404-656-0126",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/bell-eric-5061.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "Room 411-D, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 411-D, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "districtOffice": "Jonesboro, GA",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Eric_Bell_II",
+    "ballotpediaUrl": "https://ballotpedia.org/Eric_Bell_II_(Georgia)"
   },
   {
     "id": "ocd-person/abece831-30a8-4cf8-94ff-d41f7f48197f",
@@ -1054,8 +1263,11 @@
     "party": "Democratic",
     "email": "eric.gisler@house.ga.gov",
     "phone": "404-656-0287",
+    "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/gisler-eric-5091.jpg",
     "website": "https://www.legis.ga.gov/members/house/5091",
-    "office": "Room 607-G, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 607-G, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Eric_Gisler",
+    "ballotpediaUrl": "https://ballotpedia.org/Eric_Gisler"
   },
   {
     "id": "ocd-person/bdc621be-7296-4383-8c45-b4533d1c106c",
@@ -1069,7 +1281,9 @@
     "phone": "404-656-0287",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/panitch-esther-5026.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "Room 607-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 607-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Esther_Panitch",
+    "ballotpediaUrl": "https://ballotpedia.org/Esther_Panitch"
   },
   {
     "id": "ocd-person/b261086c-7b16-4a8e-82a6-22df4445af84",
@@ -1083,7 +1297,9 @@
     "phone": "404-656-7859",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/FloydGriffin.JPG",
     "website": "https://www.legis.ga.gov/members/house/5083",
-    "office": "Room 512-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 512-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Floyd_Griffin",
+    "ballotpediaUrl": "https://ballotpedia.org/Floyd_Griffin"
   },
   {
     "id": "ocd-person/9e417b67-da09-4516-b858-6b2458f53633",
@@ -1097,7 +1313,9 @@
     "phone": "404-656-9224",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/ginn-frank-751.jpg",
     "website": "https://www.legis.ga.gov/members/senate",
-    "office": "State Capitol Room 121-I, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 121-I, 206 Washington St. SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Frank_Ginn",
+    "ballotpediaUrl": "https://ballotpedia.org/Frank_Ginn"
   },
   {
     "id": "ocd-person/a0bfdc0d-4110-4cd2-b83c-834bba4300f5",
@@ -1111,7 +1329,9 @@
     "phone": "404-463-5259",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/sims-freddie-209.jpg",
     "website": "https://www.legis.ga.gov/members/senate",
-    "office": "State Capitol Room 121-F, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 121-F, 206 Washington St. SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Freddie_Powell_Sims",
+    "ballotpediaUrl": "https://ballotpedia.org/Freddie_Sims"
   },
   {
     "id": "ocd-person/dc99efc3-076b-4d00-b4b0-66a0507a4057",
@@ -1125,7 +1345,10 @@
     "phone": "404-656-0220",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/okoye-gabe-5041.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "Room 509-D, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 509-D, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "districtOffice": "121 E. Crogan St. #1715, Lawrenceville, GA 30046",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Gabe_Okoye",
+    "ballotpediaUrl": "https://ballotpedia.org/Gabe_Okoye"
   },
   {
     "id": "ocd-person/bd990496-ea34-4b79-8d6f-68cfed424c15",
@@ -1139,7 +1362,9 @@
     "phone": "404-656-0126",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Gabriel_SanchezGA.jpg",
     "website": "https://www.legis.ga.gov/members/house/5068",
-    "office": "Room 411-G, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 411-G, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Gabriel_Sanchez_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Gabriel_Sanchez_(Georgia)"
   },
   {
     "id": "ocd-person/df023a79-0194-4d1a-8755-5dee4053e1cc",
@@ -1153,7 +1378,9 @@
     "phone": "404-463-5260",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/davenport-gail-10.jpg",
     "website": "https://www.legis.ga.gov/members/senate",
-    "office": "State Capitol Room 121-G, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 121-G, 206 Washington St. SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Gail_Davenport",
+    "ballotpediaUrl": "https://ballotpedia.org/Gail_Davenport"
   },
   {
     "id": "ocd-person/47fd36f3-f5d4-4ef6-a429-1ffc7681e233",
@@ -1167,7 +1394,9 @@
     "phone": "404-656-0254",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/GaryRichardson2024.jpg",
     "website": "https://www.legis.ga.gov/members/house/5063",
-    "office": "Room 601-F, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 601-F, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Gary_Richardson_(Georgia_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Gary_Richardson_(Georgia)"
   },
   {
     "id": "ocd-person/570a213a-a475-4fd3-ac36-23e1bd1190be",
@@ -1181,7 +1410,10 @@
     "phone": "404-656-9210",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/greene-gerald-115.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=115&Session=27",
-    "office": "State Capitol Room 416-A, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 416-A, 206 Washington St. SW, Atlanta, GA 30334",
+    "districtOffice": "5805 U.S. Highway 82 West, Cuthbert, GA 39840",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Gerald_Greene",
+    "ballotpediaUrl": "https://ballotpedia.org/Gerald_Greene"
   },
   {
     "id": "ocd-person/be05ace3-ea73-4f3f-85ae-c5ed313d4cbe",
@@ -1195,7 +1427,9 @@
     "phone": "404-656-5024",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/ehrhart-ginny-4937.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=4937&Session=27",
-    "office": "State Capitol Room 415, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 415, 206 Washington St. SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ginny_Ehrhart",
+    "ballotpediaUrl": "https://ballotpedia.org/Ginny_Ehrhart"
   },
   {
     "id": "ocd-person/1f7d013a-8861-4e08-b6bf-7c8d36f8107c",
@@ -1209,7 +1443,10 @@
     "phone": "404-656-0040",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/dolezal-greg-4925.jpg",
     "website": "https://www.legis.ga.gov/members/senate",
-    "office": "State Capitol Room 421-B, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "Room 324-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "districtOffice": "6505 Shiloh Road Suite 200, Alpharetta, GA 30005",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Greg_Dolezal",
+    "ballotpediaUrl": "https://ballotpedia.org/Greg_Dolezal"
   },
   {
     "id": "ocd-person/d7bfd125-d343-4acd-a4dc-480daf241af3",
@@ -1223,7 +1460,11 @@
     "phone": "404-656-0036",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/jones-ii-harold-851.jpg",
     "website": "https://www.legis.ga.gov/members/senate",
-    "office": "State Capitol Room 121-B, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 121-B, 206 Washington St. SW, Atlanta, GA 30334",
+    "districtOffice": "437 Walker St., Augusta, GA 30901",
+    "districtPhone": "706-339-1424",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Harold_V._Jones_II",
+    "ballotpediaUrl": "https://ballotpedia.org/Harold_V._Jones_II"
   },
   {
     "id": "ocd-person/b39e2164-d570-45f2-b271-5e2fbe99c8d6",
@@ -1234,10 +1475,12 @@
     "district": "119",
     "party": "Republican",
     "email": "holt.persinger@house.ga.gov",
-    "phone": "404-656-6731",
+    "phone": "404-656-0213",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/persinger-holt-5060.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "Room 508-C, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 508-C, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Holt_Persinger",
+    "ballotpediaUrl": "https://ballotpedia.org/Holt_Persinger"
   },
   {
     "id": "ocd-person/e73cb2a6-bf3e-4211-a386-142c18a4f607",
@@ -1251,7 +1494,9 @@
     "phone": "404-656-0152",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/gaines-houston-4955.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=4955&Session=27",
-    "office": "Room 401-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 401-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Houston_Gaines",
+    "ballotpediaUrl": "https://ballotpedia.org/Houston_Gaines"
   },
   {
     "id": "ocd-person/2a68d594-e7d5-49cd-b615-6efb872430c3",
@@ -1265,7 +1510,9 @@
     "phone": "404-656-0202",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/barnes-imani-5037.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "Room 507-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 507-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Imani_Barnes",
+    "ballotpediaUrl": "https://ballotpedia.org/Imani_Barnes"
   },
   {
     "id": "ocd-person/f02d369f-2d48-4d8d-853d-77ce5a8810fc",
@@ -1279,7 +1526,10 @@
     "phone": "404-656-6372",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/willis-inga-5027.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "Room 511-E, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 511-E, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "districtOffice": "794 Marietta St. NW Suite 93311, Atlanta, GA 30318",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Inga_Willis",
+    "ballotpediaUrl": "https://ballotpedia.org/Inga_Willis"
   },
   {
     "id": "ocd-person/37602f7b-947e-4067-8f2e-b2fec620643e",
@@ -1293,7 +1543,9 @@
     "phone": "404-656-0325",
     "photoUrl": "https://jaclynforgeorgia.com/wp-content/uploads/sites/127/2024/02/photo-mobile-2.jpg",
     "website": "https://www.legis.ga.gov/members/house/5085",
-    "office": "Room 612-D, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 612-D, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jaclyn_Ford",
+    "ballotpediaUrl": "https://ballotpedia.org/Jaclyn_Ford_(Georgia)"
   },
   {
     "id": "ocd-person/fcd57129-480c-4fba-a0d1-7fb369706611",
@@ -1304,8 +1556,11 @@
     "district": "35",
     "party": "Democratic",
     "email": "jaha.howard@senate.ga.gov",
+    "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/howard-jaha-5090.jpg",
     "website": "https://www.legis.ga.gov/members/senate/5090",
-    "office": "4450 S. Cobb Drive, Smyrna, GA 30080"
+    "office": "4450 S. Cobb Drive, Smyrna, GA 30080",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jaha_Howard",
+    "ballotpediaUrl": "https://ballotpedia.org/Jaha_Howard"
   },
   {
     "id": "ocd-person/dbce462d-74e3-42d3-bd6c-3b9f8eeb69fe",
@@ -1319,7 +1574,10 @@
     "phone": "404-656-5024",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/burchett-james-4967.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=4967&Session=27",
-    "office": "State Capitol Room 415, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 415, 206 Washington St. SW, Atlanta, GA 30334",
+    "districtOffice": "215 Pendleton St., Waycross, GA 31501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/James_Burchett_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/James_Burchett"
   },
   {
     "id": "ocd-person/85740034-23b0-4001-9190-8948bd9f3b37",
@@ -1333,7 +1591,10 @@
     "phone": "404-656-5072",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/jones-jan-142.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=142&Session=27",
-    "office": "State Capitol Room 340, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 340, 206 Washington St. SW, Atlanta, GA 30334",
+    "districtOffice": "12850 Highway 9 Suite 600-356, Milton, GA 30004",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jan_Jones_%28Georgia_politician%29",
+    "ballotpediaUrl": "https://ballotpedia.org/Jan_Jones"
   },
   {
     "id": "ocd-person/0461f02b-df18-4984-8b3b-ada287879d0a",
@@ -1347,7 +1608,9 @@
     "phone": "404-656-0287",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/clark-jasmine-4953.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=4953&Session=27",
-    "office": "Room 607-E, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 607-E, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jasmine_Clark",
+    "ballotpediaUrl": "https://ballotpedia.org/Jasmine_Clark"
   },
   {
     "id": "ocd-person/cb7d8c1d-3c26-4f35-8d37-d1cf8a7ce207",
@@ -1361,7 +1624,9 @@
     "phone": "404-656-0085",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/anavitarte-jason-4980.jpg",
     "website": "https://www.legis.ga.gov/members/senate",
-    "office": "State Capitol Room 236, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 236, 206 Washington St. SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jason_Anavitarte",
+    "ballotpediaUrl": "https://ballotpedia.org/Jason_Anavitarte"
   },
   {
     "id": "ocd-person/584267b0-e40b-4d6e-a7fe-4c076eb6214c",
@@ -1373,8 +1638,11 @@
     "party": "Republican",
     "email": "jason.dickerson@senate.ga.gov",
     "phone": "404-463-1378",
-    "website": "https://www.legis.ga.gov/members/senate/5088?session=1033",
-    "office": "State Capitol Room 420-D, 206 Washington St. SW, Atlanta, GA 30334"
+    "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/dickerson-jason-5088.jpg",
+    "website": "https://www.legis.ga.gov/members/senate/5088",
+    "office": "State Capitol Room 420-D, 206 Washington St. SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jason_Dickerson",
+    "ballotpediaUrl": "https://ballotpedia.org/Jason_Dickerson_(Georgia)"
   },
   {
     "id": "ocd-person/594aa971-500b-42a4-9d7a-1ceb4c029220",
@@ -1388,7 +1656,9 @@
     "phone": "404-656-3947",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/ridley-jason-4883.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=4883&Session=27",
-    "office": "Room 614-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 614-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jason_Ridley",
+    "ballotpediaUrl": "https://ballotpedia.org/Jason_Ridley"
   },
   {
     "id": "ocd-person/38c596a4-df69-4a56-9329-be73f26bc7d5",
@@ -1402,7 +1672,9 @@
     "phone": "404-656-5115",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/petrea-jesse-862.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=862&Session=27",
-    "office": "State Capitol Room 226-B, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 226-B, 206 Washington St. SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jesse_Petrea",
+    "ballotpediaUrl": "https://ballotpedia.org/Jesse_L._Petrea"
   },
   {
     "id": "ocd-person/c862c17f-ed00-41d7-97e5-1138f451a96c",
@@ -1416,7 +1688,10 @@
     "phone": "404-656-0254",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/campbell-joe-4970.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=4970&Session=27",
-    "office": "Room 601-C, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 601-C, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "districtOffice": "4556 Squirrel Haven Road, Camilla, GA 31730",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Joe_Campbell_(Georgia_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Joe_Campbell_(Georgia)"
   },
   {
     "id": "ocd-person/ac1cac30-3fec-4c56-b172-b483db465a6b",
@@ -1430,7 +1705,9 @@
     "phone": "404-463-8055",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/albers-john-754.jpg",
     "website": "https://www.legis.ga.gov/members/senate",
-    "office": "State Capitol Room 421-C, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 421-C, 206 Washington St. SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_Albers",
+    "ballotpediaUrl": "https://ballotpedia.org/John_Albers"
   },
   {
     "id": "ocd-person/713cac52-0a57-4baa-8273-6eeca5b491df",
@@ -1444,7 +1721,11 @@
     "phone": "404-656-7855",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/carson-john-795.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=795&Session=27",
-    "office": "State Capitol Room 401-E, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 401-E, 206 Washington St. SW, Atlanta, GA 30334",
+    "districtOffice": "3605 Sandy Plains Road Suite 240-123, Marietta, GA 30066",
+    "districtPhone": "404-520-8826",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_Carson_(Georgia_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/John_Carson_(Georgia)"
   },
   {
     "id": "ocd-person/a34c9a5a-f307-4c07-b766-3b3b1148d7b1",
@@ -1458,7 +1739,10 @@
     "phone": "404-656-5105",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/corbett-john-859.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=859&Session=27",
-    "office": "State Capitol Room 131-B, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 131-B, 206 Washington St. SW, Atlanta, GA 30334",
+    "districtOffice": "1484 Georgia Highway 135 South, Lake Park, GA 31636",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_Corbett_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/John_L._Corbett"
   },
   {
     "id": "ocd-person/9249be26-54d2-467a-88ec-2588b886148d",
@@ -1472,7 +1756,9 @@
     "phone": "404-656-5105",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/lahood-john-4923.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=4923&Session=27",
-    "office": "State Capitol Room 131-A, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 131-A, 206 Washington St. SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_LaHood",
+    "ballotpediaUrl": "https://ballotpedia.org/John_LaHood"
   },
   {
     "id": "ocd-person/8106e2d8-e1e3-42a8-b550-fbd2627fa474",
@@ -1486,7 +1772,9 @@
     "phone": "404-656-0325",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/chastain-johnny-5057.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "Room 612-E, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 612-E, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Johnny_Chastain",
+    "ballotpediaUrl": "https://ballotpedia.org/Johnny_Chastain"
   },
   {
     "id": "ocd-person/64012657-d026-411c-9525-3232524a5145",
@@ -1500,7 +1788,9 @@
     "phone": "404-656-5020",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/burns-jon-73.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=73&Session=27",
-    "office": "State Capitol Room 332, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 332, 206 Washington St. SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jon_G._Burns",
+    "ballotpediaUrl": "https://ballotpedia.org/Jon_G._Burns"
   },
   {
     "id": "ocd-person/56f28f8a-9296-4e69-9bd4-d0101a42b359",
@@ -1514,7 +1804,9 @@
     "phone": "404-656-0254",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/ridley-jordan-5019.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "Room 601-D, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 601-D, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jordan_Ridley_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Jordan_Ridley"
   },
   {
     "id": "ocd-person/f36d2507-b19a-4ee5-b4f9-5c06df761edf",
@@ -1528,7 +1820,9 @@
     "phone": "404-463-2248",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/gullett-joseph-4936.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=4936&Session=27",
-    "office": "State Capitol Room 245-A, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 245-A, 206 Washington St. SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Joseph_Gullett",
+    "ballotpediaUrl": "https://ballotpedia.org/Joseph_Gullett"
   },
   {
     "id": "ocd-person/0e45048c-c1a4-415f-9ee4-5d09ea857e2e",
@@ -1542,7 +1836,9 @@
     "phone": "404-463-7853",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/bonner-josh-4893.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=4893&Session=27",
-    "office": "State Capitol Room 401-F, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 401-F, 206 Washington St. SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Josh_Bonner",
+    "ballotpediaUrl": "https://ballotpedia.org/Josh_Bonner"
   },
   {
     "id": "ocd-person/b83b0486-773f-4979-a1ce-e2f7f3e6d7e1",
@@ -1556,7 +1852,9 @@
     "phone": "404-463-4228",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/mclaurin-josh-4942.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=4942&Session=27",
-    "office": "Room 323-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 323-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Josh_McLaurin",
+    "ballotpediaUrl": "https://ballotpedia.org/Josh_McLaurin"
   },
   {
     "id": "ocd-person/8b62e64b-bf80-4967-832b-8fb92cd6c4b3",
@@ -1570,7 +1868,9 @@
     "phone": "404-656-0177",
     "photoUrl": "https://ngturf.com/wp-content/uploads/2017/11/jutt.jpg",
     "website": "https://www.legis.ga.gov/members/house/5073",
-    "office": "Room 501-D, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 501-D, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Justin_Howard_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Justin_Howard"
   },
   {
     "id": "ocd-person/eb28f991-35c9-4d84-a907-5be56aed1aff",
@@ -1584,7 +1884,9 @@
     "phone": "404-656-0314",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/lupton-karen-5035.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "Room 611-C, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 611-C, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Karen_Lupton",
+    "ballotpediaUrl": "https://ballotpedia.org/Karen_Lupton"
   },
   {
     "id": "ocd-person/f8db50e0-08ab-406c-ac8b-39c7038ef5ca",
@@ -1598,7 +1900,10 @@
     "phone": "404-656-0213",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/mathiak-karen-4894.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=4894&Session=27",
-    "office": "Room 508-D, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 508-D, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "districtOffice": "127 Dunwoody Circle, Griffin, GA 30223",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Karen_Mathiak",
+    "ballotpediaUrl": "https://ballotpedia.org/Karen_Mathiak"
   },
   {
     "id": "ocd-person/27365f19-a138-4a9e-9f6e-11352932e5d5",
@@ -1612,7 +1917,9 @@
     "phone": "404-656-0202",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/drenner-karla-95.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=95&Session=27",
-    "office": "Room 507-H, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 507-H, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Karla_Drenner",
+    "ballotpediaUrl": "https://ballotpedia.org/Karla_Drenner"
   },
   {
     "id": "ocd-person/4b3fdb35-d3fb-40aa-843e-d3900df37ce4",
@@ -1626,7 +1933,9 @@
     "phone": "404-656-6372",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/howard-karlton-5056.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "Room 511-G, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 511-G, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Karlton_Howard",
+    "ballotpediaUrl": "https://ballotpedia.org/Karlton_Howard"
   },
   {
     "id": "ocd-person/97a40ea4-674f-4b84-8fd3-8bc2f3b4a35d",
@@ -1640,7 +1949,9 @@
     "phone": "404-656-7857",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/carpenter-kasey-4911.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=4911&Session=27",
-    "office": "State Capitol Room 401-I, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 401-I, 206 Washington St. SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kasey_Carpenter",
+    "ballotpediaUrl": "https://ballotpedia.org/Kasey_Carpenter"
   },
   {
     "id": "ocd-person/bf68b3dc-ca81-49f9-8e33-fe27317183d3",
@@ -1654,7 +1965,10 @@
     "phone": "404-463-2248",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/dempsey-katie-92.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=92&Session=27",
-    "office": "State Capitol Room 245-C, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 245-C, 206 Washington St. SW, Atlanta, GA 30334",
+    "districtOffice": "3 Central Plaza, #360, Rome, GA 30161",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Katie_Dempsey",
+    "ballotpediaUrl": "https://ballotpedia.org/Katie_Dempsey"
   },
   {
     "id": "ocd-person/fc31ab02-026c-4173-86db-570c0b297c64",
@@ -1665,10 +1979,14 @@
     "district": "32",
     "party": "Republican",
     "email": "kay.kirkpatrick@senate.ga.gov",
-    "phone": "404-656-0508",
+    "phone": "404-463-2518",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/kirkpatrick-kay-4910.jpg",
     "website": "https://www.legis.ga.gov/members/senate",
-    "office": "Room 324-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 421-B, 206 Washington St. SW, Atlanta, GA 30334",
+    "districtOffice": "2146 Roswell Road Suite 108895, Marietta, GA 30062",
+    "districtPhone": "404-656-3932",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kay_Kirkpatrick",
+    "ballotpediaUrl": "https://ballotpedia.org/Kay_Kirkpatrick"
   },
   {
     "id": "ocd-person/0a816fbf-e5ec-4056-8b3e-08184400e71b",
@@ -1682,7 +2000,9 @@
     "phone": "404-463-1562",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Kenya_Wicks.JPG",
     "website": "https://www.legis.ga.gov/members/senate/5065",
-    "office": "Room 319-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 319-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kenya_Wicks",
+    "ballotpediaUrl": "https://ballotpedia.org/Kenya_Wicks"
   },
   {
     "id": "ocd-person/2f8621bc-0548-457c-8b0d-9148e14b77fe",
@@ -1696,7 +2016,9 @@
     "phone": "404-656-6882",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/jackson-kim-4981.jpg",
     "website": "https://www.legis.ga.gov/members/senate",
-    "office": "Room 303-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 303-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kim_Jackson_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Kim_Jackson"
   },
   {
     "id": "ocd-person/eff357d0-3187-4a7b-93fe-2d54d010b093",
@@ -1706,11 +2028,14 @@
     "chamber": "lower",
     "district": "63",
     "party": "Democratic",
-    "email": "kim.schoefield@house.ga.gov",
+    "email": "kim.schofield@house.ga.gov",
     "phone": "404-656-0298",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/schofield-kim-4916.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=4916&Session=27",
-    "office": "Room 608-C, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 608-C, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "districtOffice": "Atlanta, GA",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kim_Schofield",
+    "ballotpediaUrl": "https://ballotpedia.org/Kim_Schofield"
   },
   {
     "id": "ocd-person/275b772e-6407-4aaa-8bd6-ceddad1da7fa",
@@ -1724,7 +2049,9 @@
     "phone": "404-656-7859",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/alexander-kimberly-806.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=806&Session=27",
-    "office": "Room 512-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 512-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kimberly_Alexander",
+    "ballotpediaUrl": "https://ballotpedia.org/Kimberly_Alexander_(Georgia_state_representative)"
   },
   {
     "id": "ocd-person/fc1a5e1f-6ce4-47ab-987b-095afa166359",
@@ -1738,7 +2065,9 @@
     "phone": "404-656-0325",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/new-kimberly-5030.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "Room 612-F, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 612-F, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kimberly_New",
+    "ballotpediaUrl": "https://ballotpedia.org/Kimberly_New"
   },
   {
     "id": "ocd-person/1d9bb111-bf4f-4e4f-aa63-a2f6a94b566c",
@@ -1750,8 +2079,27 @@
     "party": "Democratic",
     "email": "lc.myles@house.ga.gov",
     "phone": "404-656-0265",
+    "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/myles-lc-5079.jpg",
     "website": "https://www.legis.ga.gov/members/house/5079",
-    "office": "Room 604-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 604-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/L.C._Myles",
+    "ballotpediaUrl": "https://ballotpedia.org/L_C_Myles_Jr."
+  },
+  {
+    "id": "ocd-person/ae6e08e3-6971-4cd2-982a-48d650a343d5",
+    "name": "Lanny Thomas",
+    "firstName": "Lanny",
+    "lastName": "Thomas",
+    "chamber": "upper",
+    "district": "53",
+    "party": "Republican",
+    "email": "lanny.thomas@senate.ga.gov",
+    "phone": "404-657-7716",
+    "photoUrl": "https://images.squarespace-cdn.com/content/69373488c86b8056febeb404/1f53a219-dd13-4b1b-8ab7-c71996cab9b7/Lanny+Thomas+for+Senate+in+road.jpg?content-type=image%2Fjpeg",
+    "website": "https://www.legis.ga.gov/members/senate/5094",
+    "office": "Room 323-B, Coverdell Legislative Office Building, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lanny_Thomas",
+    "ballotpediaUrl": "https://ballotpedia.org/Lanny_Thomas"
   },
   {
     "id": "ocd-person/44a51125-9e82-41f6-8d4f-a646895b5994",
@@ -1765,7 +2113,9 @@
     "phone": "404-656-0095",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/walker--iii-larry-4878.jpg",
     "website": "https://www.legis.ga.gov/members/senate",
-    "office": "State Capitol Room 421-A, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 321, 206 Washington St. SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Larry_Walker_III",
+    "ballotpediaUrl": "https://ballotpedia.org/Larry_Walker_(Georgia)"
   },
   {
     "id": "ocd-person/7767ee85-7961-45ba-adc2-c3606b1c39b8",
@@ -1779,7 +2129,11 @@
     "phone": "404-656-7855",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/mcdonald-lauren-4992.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "State Capitol Room 401-B, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 401-B, 206 Washington St. SW, Atlanta, GA 30334",
+    "districtOffice": "4180 Creekwood Drive, Cumming, GA 30041",
+    "districtPhone": "770-886-9899",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lauren_McDonald",
+    "ballotpediaUrl": "https://ballotpedia.org/Lauren_W._McDonald_III"
   },
   {
     "id": "ocd-person/e11cecf4-f2e5-49d9-ba9e-47681f779438",
@@ -1793,7 +2147,10 @@
     "phone": "404-656-5114",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/anderson-lee-723.jpg",
     "website": "https://www.legis.ga.gov/members/senate",
-    "office": "Room 325-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 325-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "districtOffice": "160 Louisville Road, Grovetown, GA 30813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lee_Anderson_(American_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Lee_Anderson"
   },
   {
     "id": "ocd-person/69493144-3e3e-49a8-9e1f-f9a948fd0ff3",
@@ -1807,7 +2164,10 @@
     "phone": "404-656-7855",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/hawkins-lee-19.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=19&Session=27",
-    "office": "State Capitol Room 401-C, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 401-C, 206 Washington St. SW, Atlanta, GA 30334",
+    "districtOffice": "Gainesville, GA",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lee_Hawkins",
+    "ballotpediaUrl": "https://ballotpedia.org/Lee_Hawkins"
   },
   {
     "id": "ocd-person/df874c28-6403-42c1-9cbb-0855508cda85",
@@ -1821,7 +2181,9 @@
     "phone": "404-656-0177",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/hagan-leesa-5010.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "Room 501-H, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 501-H, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Leesa_Hagan",
+    "ballotpediaUrl": "https://ballotpedia.org/Leesa_Hagan"
   },
   {
     "id": "ocd-person/6971bb34-9ea4-4bdc-971e-c1a2c5de344c",
@@ -1835,7 +2197,9 @@
     "phone": "404-656-0178",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/franklin-lehman-5053.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "Room 501-F, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 501-F, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lehman_Franklin",
+    "ballotpediaUrl": "https://ballotpedia.org/Lehman_Franklin"
   },
   {
     "id": "ocd-person/3a23acfd-5ce6-4e47-b641-1efdab05bdca",
@@ -1849,7 +2213,10 @@
     "phone": "404-656-0202",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/campbell-lisa-5023.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "Room 507-F, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 507-F, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "districtOffice": "2001 Duncan Drive Unit #2281, Kennesaw, GA 30156",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lisa_Campbell_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Lisa_Campbell_(Georgia)"
   },
   {
     "id": "ocd-person/7475f989-a4f9-4ac8-9188-26903a012d71",
@@ -1863,7 +2230,9 @@
     "phone": "404-656-7859",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/tran-long-5034.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "Room 512-F, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 512-F, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Long_Tran",
+    "ballotpediaUrl": "https://ballotpedia.org/Long_Tran"
   },
   {
     "id": "ocd-person/ee575d7a-b5a1-419c-949d-4aa9290a67a1",
@@ -1877,7 +2246,9 @@
     "phone": "404-656-0116",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/glaize-lydia-5031.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "Room 409-C, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 409-C, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lydia_Glaize",
+    "ballotpediaUrl": "https://ballotpedia.org/Lydia_Glaize"
   },
   {
     "id": "ocd-person/945875f7-f3c5-4c75-acd6-a195a0f76b12",
@@ -1891,7 +2262,10 @@
     "phone": "404-656-7149",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/smith-lynn-212.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=212&Session=27",
-    "office": "State Capitol Room 228-C, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 228-C, 206 Washington St. SW, Atlanta, GA 30334",
+    "districtOffice": "8 Evergreen Drive, Newnan, GA 30263",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lynn_Smith_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Lynn_Smith_(Georgia)"
   },
   {
     "id": "ocd-person/8e209d95-2333-4aa2-a628-1bdcec0674f5",
@@ -1905,7 +2279,10 @@
     "phone": "404-656-0314",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/jackson-mack-738.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=738&Session=27",
-    "office": "Room 611-H, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 611-H, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "districtOffice": "733 Evelyn St., Sandersville, GA 31082",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mack_Jackson",
+    "ballotpediaUrl": "https://ballotpedia.org/Mack_Jackson"
   },
   {
     "id": "ocd-person/5e12fb82-1f69-46df-9ac5-a09ce51dd95b",
@@ -1919,7 +2296,10 @@
     "phone": "404-656-7855",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/newton-mark-4902.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=4902&Session=27",
-    "office": "State Capitol Room 401-D, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 401-D, 206 Washington St. SW, Atlanta, GA 30334",
+    "districtOffice": "Augusta, GA",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mark_Newton",
+    "ballotpediaUrl": "https://ballotpedia.org/Mark_Newton"
   },
   {
     "id": "ocd-person/6552dd8d-1020-4bbb-abfc-88975573ebd4",
@@ -1933,7 +2313,10 @@
     "phone": "404-656-0178",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/momtahan-martin-4935.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=4935&Session=27",
-    "office": "Room 501-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 501-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "districtOffice": "105 Village Walk Suite 278, Dallas, GA 30132",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Martin_Momtahan",
+    "ballotpediaUrl": "https://ballotpedia.org/Martin_Momtahan"
   },
   {
     "id": "ocd-person/078246e9-90b8-43aa-bb92-d7016f517b8e",
@@ -1947,7 +2330,10 @@
     "phone": "404-656-0078",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/harbin-marty-850.jpg",
     "website": "https://www.legis.ga.gov/members/senate",
-    "office": "Room 302-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 302-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "districtOffice": "215 Greencastle Road, Tyrone, GA 30290",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Marty_Harbin",
+    "ballotpediaUrl": "https://ballotpedia.org/Marty_Harbin"
   },
   {
     "id": "ocd-person/9531d502-440c-48db-83c4-70dfbe9a9ea1",
@@ -1961,7 +2347,9 @@
     "phone": "404-656-0314",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/lim-marvin-4999.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "Room 611-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 611-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Marvin_Lim",
+    "ballotpediaUrl": "https://ballotpedia.org/Marvin_Lim"
   },
   {
     "id": "ocd-person/7deae3f1-5548-4afe-9018-e8112945fd8d",
@@ -1975,7 +2363,10 @@
     "phone": "404-656-0202",
     "photoUrl": "https://img1.wsimg.com/isteam/ip/d3c0c01c-397b-4334-bf90-8a34a01abd0f/IMG_7488-2b31e45.jpeg/:/cr=t:0%25,l:6.58%25,w:86.84%25,h:100%25/rs=w:355,h:355,cg:true",
     "website": "https://www.legis.ga.gov/members/house/5078",
-    "office": "Room 507-C, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 507-C, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "districtOffice": "922 Highway 81 East Suite 224, McDonough, GA 30252",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mary_Ann_Santos",
+    "ballotpediaUrl": "https://ballotpedia.org/Mary_Ann_Santos"
   },
   {
     "id": "ocd-person/4aec761f-5117-4f43-a487-9d77418f0bfa",
@@ -1989,7 +2380,9 @@
     "phone": "404-656-0287",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/williams-mary-frances-4938.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=4938&Session=27",
-    "office": "Room 607-C, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 607-C, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mary_Frances_Williams",
+    "ballotpediaUrl": "https://ballotpedia.org/Mary_Frances_Williams"
   },
   {
     "id": "ocd-person/e6ca1b23-0972-4df6-ab04-6186cf9da814",
@@ -2003,7 +2396,11 @@
     "phone": "404-656-0265",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/oliver-mary-margaret-181.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "Room 604-G, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 604-G, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "districtOffice": "150 E. Ponce de Leon Ave. Suite 260, Decatur, GA 30030",
+    "districtPhone": "404-377-0485",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mary_Margaret_Oliver",
+    "ballotpediaUrl": "https://ballotpedia.org/Mary_Margaret_Oliver"
   },
   {
     "id": "ocd-person/9103b29e-964b-4637-9304-0e73216d7796",
@@ -2017,7 +2414,9 @@
     "phone": "404-656-3947",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/barton-matt-4966.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=4966&Session=27",
-    "office": "Room 614-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 614-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Matt_Barton_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Matt_Barton"
   },
   {
     "id": "ocd-person/81b84318-8c9f-467f-a7c1-776d9c415f51",
@@ -2031,7 +2430,9 @@
     "phone": "404-656-0057",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/brass-matt-4907.jpg",
     "website": "https://www.legis.ga.gov/members/senate",
-    "office": "State Capitol Room 453, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 453, 206 Washington St. SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Matt_Brass",
+    "ballotpediaUrl": "https://ballotpedia.org/Matt_Brass"
   },
   {
     "id": "ocd-person/99f0a2a7-8817-4756-a40e-575e259890e7",
@@ -2045,7 +2446,10 @@
     "phone": "404-463-2246",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/dubnik-matt-4886.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=4886&Session=27",
-    "office": "State Capitol Room 245-D, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 245-D, 206 Washington St. SW, Atlanta, GA 30334",
+    "districtOffice": "Gainesville, GA",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Matt_Dubnik",
+    "ballotpediaUrl": "https://ballotpedia.org/Matt_Dubnik"
   },
   {
     "id": "ocd-person/c81779f3-65bf-4714-b295-79cac3b0da28",
@@ -2059,7 +2463,9 @@
     "phone": "404-463-2247",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/hatchett-matt-781.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=781&Session=27",
-    "office": "State Capitol Room 243, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 243, 206 Washington St. SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Matt_Hatchett",
+    "ballotpediaUrl": "https://ballotpedia.org/Matt_Hatchett"
   },
   {
     "id": "ocd-person/0f4f3c5a-1192-4ec1-9698-4aef005b4875",
@@ -2073,7 +2479,11 @@
     "phone": "404-656-0152",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/reeves-matt-5040.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "Room 401-G, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 401-G, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "districtOffice": "1960 Satellite Blvd. Suite 4000, Duluth, GA 30097",
+    "districtPhone": "770-236-9768",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Matt_Reeves_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Matt_Reeves"
   },
   {
     "id": "ocd-person/909e9026-e549-494b-be99-e8562a389e0c",
@@ -2087,7 +2497,9 @@
     "phone": "404-651-7737",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/gambill-matthew-4934.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=4934&Session=27",
-    "office": "State Capitol Room 109, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 109, 206 Washington St. SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Matthew_Gambill",
+    "ballotpediaUrl": "https://ballotpedia.org/Matthew_Gambill"
   },
   {
     "id": "ocd-person/918888ac-edc7-4178-9133-d058f0f21010",
@@ -2099,8 +2511,11 @@
     "party": "Republican",
     "email": "max.burns@senate.ga.gov",
     "phone": "404-463-1376",
+    "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/burns-max-4979.jpg",
     "website": "https://www.legis.ga.gov/members/senate",
-    "office": "Room 327-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 327-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Max_Burns",
+    "ballotpediaUrl": "https://ballotpedia.org/Max_Burns"
   },
   {
     "id": "ocd-person/f0af2586-d535-4e44-bcaa-65239f9390b1",
@@ -2114,7 +2529,10 @@
     "phone": "404-656-0109",
     "photoUrl": "https://static.wixstatic.com/media/a3388b_311f34c52195445d89b52eadd1384ad8~mv2.png/v1/fill/w_640,h_838,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/a3388b_311f34c52195445d89b52eadd1384ad8~mv2.png",
     "website": "https://www.legis.ga.gov/members/house/5070",
-    "office": "Room 404-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 404-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "districtOffice": "2451 Cumberland Parkway Suite 3359, Atlanta, GA 30339",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mekyah_McQueen",
+    "ballotpediaUrl": "https://ballotpedia.org/Mekyah_McQueen"
   },
   {
     "id": "ocd-person/efb9168c-b45a-4f43-bba5-d6f05e7d9cbe",
@@ -2128,7 +2546,9 @@
     "phone": "404-656-0054",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/rhett-michael--doc--855.jpg",
     "website": "https://www.legis.ga.gov/members/senate",
-    "office": "Room 321-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 321-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Michael_Rhett",
+    "ballotpediaUrl": "https://ballotpedia.org/Michael_A._Rhett"
   },
   {
     "id": "ocd-person/68185f1d-fa54-4571-b305-fcd6c7dc024e",
@@ -2142,7 +2562,11 @@
     "phone": "404-656-0265",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/smith-michael-832.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=832&Session=27",
-    "office": "Room 604-F, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 604-F, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "districtOffice": "2162 Caneridge Drive, Marietta, GA 30064",
+    "districtPhone": "404-652-9227",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Michael_Smith_(Georgia_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Michael_Smith_(Georgia_state_representative)"
   },
   {
     "id": "ocd-person/48b46caf-d38e-46ab-96ff-c268e23a7d76",
@@ -2156,7 +2580,10 @@
     "phone": "404-656-0314",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/au-michelle-4983.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "Room 611-G, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 611-G, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "districtOffice": "5805 State Bridge Road Suite G238, Johns Creek, GA 30097",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Michelle_Au",
+    "ballotpediaUrl": "https://ballotpedia.org/Michelle_Au"
   },
   {
     "id": "ocd-person/f4f9be12-5d7c-4fae-8b7b-9e9d19d2282f",
@@ -2170,7 +2597,10 @@
     "phone": "404-656-0188",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/cameron-mike-4986.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "Room 504-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 504-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "districtOffice": "1100 S. Crest Road, Rossville, GA 30741",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mike_Cameron_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Mike_Cameron"
   },
   {
     "id": "ocd-person/1831cc73-e694-4cea-83a4-b55c3495f76a",
@@ -2184,7 +2614,9 @@
     "phone": "404-463-7853",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/cheokas-mike-81.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=81&Session=27",
-    "office": "State Capitol Room 401-G, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 401-G, 206 Washington St. SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mike_Cheokas",
+    "ballotpediaUrl": "https://ballotpedia.org/Mike_Cheokas"
   },
   {
     "id": "ocd-person/011995be-4dd0-43b2-ae75-57ae45f53576",
@@ -2198,7 +2630,11 @@
     "phone": "404-656-7127",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/hodges-mike-5013.jpg",
     "website": "https://www.legis.ga.gov/members/senate",
-    "office": "Room 305-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 305-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "districtOffice": "3410 Cypress Mill Road Box 101, Brunswick, GA 31525",
+    "districtPhone": "912-464-1989",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mike_Hodges_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Mike_Hodges"
   },
   {
     "id": "ocd-person/bad14891-c7bc-4ac4-b23a-fb5ae3878d67",
@@ -2212,7 +2648,9 @@
     "phone": "404-656-0109",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/paris-miriam-794.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=794&Session=27",
-    "office": "Room 404-G, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 404-G, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Miriam_Paris",
+    "ballotpediaUrl": "https://ballotpedia.org/Miriam_Paris"
   },
   {
     "id": "ocd-person/c4c6c741-0cb4-4179-b46d-9983421b8fdd",
@@ -2226,7 +2664,9 @@
     "phone": "404-656-0325",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/horner-mitchell-5018.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "Room 612-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 612-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mitchell_Horner",
+    "ballotpediaUrl": "https://ballotpedia.org/Mitchell_Horner"
   },
   {
     "id": "ocd-person/7ac30a66-1649-4a8c-a72f-a4b9a7ab1534",
@@ -2240,21 +2680,9 @@
     "phone": "404-656-0254",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/scoggins-mitchell-4964.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=4964&Session=27",
-    "office": "Room 601-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
-  },
-  {
-    "id": "ocd-person/23ffff2b-3ce6-46dc-996c-7b4fd71607bc",
-    "name": "Nabilah Parkes",
-    "firstName": "Nabilah",
-    "lastName": "Parkes",
-    "chamber": "upper",
-    "district": "7",
-    "party": "Democratic",
-    "email": "nabilah.parkes@senate.ga.gov",
-    "phone": "404-463-5263",
-    "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/islam-nabilah-5015.jpg",
-    "website": "https://www.legis.ga.gov/members/senate",
-    "office": "Room 320-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 601-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mitchell_Scoggins",
+    "ballotpediaUrl": "https://ballotpedia.org/Mitchell_Scoggins"
   },
   {
     "id": "ocd-person/bf2c1ec5-d995-4605-85ac-139adb037d99",
@@ -2268,7 +2696,11 @@
     "phone": "404-463-8054",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/orrock-nan-33.jpg",
     "website": "https://www.legis.ga.gov/members/senate",
-    "office": "State Capitol Room 420-B, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 420-B, 206 Washington St. SW, Atlanta, GA 30334",
+    "districtOffice": "1070 Delaware Ave. SE, Atlanta, GA 30316",
+    "districtPhone": "404-524-5999",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Nan_Grogan_Orrock",
+    "ballotpediaUrl": "https://ballotpedia.org/Nan_Orrock"
   },
   {
     "id": "ocd-person/57ad1f65-9969-4be2-b262-684bf53123fb",
@@ -2282,7 +2714,10 @@
     "phone": "404-463-1310",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/merritt-nikki-4978.jpg",
     "website": "https://www.legis.ga.gov/members/senate",
-    "office": "State Capitol Room 319-B, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 319-B, 206 Washington St. SW, Atlanta, GA 30334",
+    "districtOffice": "1911 Grayson Highway Suite 8367, Grayson, GA 30017",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Nikki_Merritt",
+    "ballotpediaUrl": "https://ballotpedia.org/Nikki_Merritt"
   },
   {
     "id": "ocd-person/55074030-4d64-4da0-b68a-5e3945d00f25",
@@ -2296,7 +2731,9 @@
     "phone": "404-656-0314",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/AnissaJones2024.jpg",
     "website": "https://www.legis.ga.gov/members/house/5081",
-    "office": "Room 611-D, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 611-D, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Anissa_Jones_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Anissa_Jones"
   },
   {
     "id": "ocd-person/3252da04-a17e-4298-b19d-9dd2fbf29ded",
@@ -2310,7 +2747,10 @@
     "phone": "404-656-5146",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/williams--jr-noel-4960.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=4960&Session=27",
-    "office": "State Capitol Room 417-B, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 417-B, 206 Washington St. SW, Atlanta, GA 30334",
+    "districtOffice": "1308 Ogburn Road, Cordele, GA 31015",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Noel_Williams_Jr.",
+    "ballotpediaUrl": "https://ballotpedia.org/Noel_Williams_Jr."
   },
   {
     "id": "ocd-person/fdf78e39-985f-48c3-8ed3-ccf15946871f",
@@ -2324,7 +2764,9 @@
     "phone": "404-656-0177",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/nkahaian.jpg",
     "website": "https://www.legis.ga.gov/members/house/5075",
-    "office": "Room 501-E, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 501-E, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Noelle_Kahaian",
+    "ballotpediaUrl": "https://ballotpedia.org/Noelle_Kahaian"
   },
   {
     "id": "ocd-person/dbb81f07-2181-48dd-b383-19870e08d4fd",
@@ -2338,7 +2780,9 @@
     "phone": "404-656-0314",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/crawford-omari-5036.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "Room 611-F, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 611-F, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Omari_Crawford",
+    "ballotpediaUrl": "https://ballotpedia.org/Omari_Crawford"
   },
   {
     "id": "ocd-person/5c5ab5cb-54f6-4218-8d1d-a99d36bca436",
@@ -2352,7 +2796,10 @@
     "phone": "404-656-0287",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/cannon-park-4880.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=4880&Session=27",
-    "office": "Room 607-H, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 607-H, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "districtOffice": "931 Monroe Drive NE Suite 102 #460, Atlanta, GA 30308",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Park_Cannon",
+    "ballotpediaUrl": "https://ballotpedia.org/Park_Cannon"
   },
   {
     "id": "ocd-person/af51c2db-8871-45a4-803d-314fa2b9d18d",
@@ -2366,7 +2813,10 @@
     "phone": "404-656-0213",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/bentley-patty-811.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=811&Session=27",
-    "office": "Room 508-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 508-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "districtOffice": "133 Railroad St., Butler, GA 31006",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Patty_Marie_Stinson",
+    "ballotpediaUrl": "https://ballotpedia.org/Patty_Stinson"
   },
   {
     "id": "ocd-person/80928bd9-c963-4b21-954c-c62ee9373064",
@@ -2380,7 +2830,9 @@
     "phone": "404-656-0220",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/olaleye-phil-5028.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "Room 509-F, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 509-F, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Phil_Olaleye",
+    "ballotpediaUrl": "https://ballotpedia.org/Phil_Olaleye"
   },
   {
     "id": "ocd-person/8798a822-fee8-4546-bcdd-455f788bef44",
@@ -2394,7 +2846,9 @@
     "phone": "404-657-4640",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Randal_Mangham.jpg",
     "website": "https://www.legis.ga.gov/members/senate/161",
-    "office": "Room 320-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 320-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Randal_Mangham",
+    "ballotpediaUrl": "https://ballotpedia.org/Randal_Mangham"
   },
   {
     "id": "ocd-person/6da7fe11-4436-4854-8e1b-4c45dc4cdaac",
@@ -2408,7 +2862,9 @@
     "phone": "404-656-0045",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/robertson-randy-4926.jpg",
     "website": "https://www.legis.ga.gov/members/senate",
-    "office": "State Capitol Room 421-F, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 421-F, 206 Washington St. SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Randy_Robertson_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Randy_Robertson"
   },
   {
     "id": "ocd-person/069fb4fa-766b-40e4-90b7-ce96b4fa2ace",
@@ -2422,7 +2878,9 @@
     "phone": "404-656-0105",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/RashaunKemp2024.png",
     "website": "https://www.legis.ga.gov/members/senate/5066",
-    "office": "State Capitol Room 121-E, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 121-E, 206 Washington St. SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/RaShaun_Kemp",
+    "ballotpediaUrl": "https://ballotpedia.org/Rashaun_Kemp"
   },
   {
     "id": "ocd-person/21651856-bba6-49fd-b3f8-8ed1b723e804",
@@ -2436,7 +2894,10 @@
     "phone": "404-656-0287",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/lewis-ward-regina-5001.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "Room 607-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 607-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "districtOffice": "289 Jonesboro Road Suite 401, McDonough, GA 30253",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Regina_Lewis-Ward",
+    "ballotpediaUrl": "https://ballotpedia.org/Regina_Lewis-Ward"
   },
   {
     "id": "ocd-person/08ee45fd-d3f4-4129-9e7c-27cf52533ed2",
@@ -2450,7 +2911,9 @@
     "phone": "404-656-0254",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/martinez-reynaldo--rey--5045.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "Room 601-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 601-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Reynaldo_Martinez",
+    "ballotpediaUrl": "https://ballotpedia.org/Reynaldo_%22Rey%22_Martinez"
   },
   {
     "id": "ocd-person/e04bd985-5b75-4551-84a1-f9797ac495d2",
@@ -2464,7 +2927,10 @@
     "phone": "404-656-0116",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/burnough-rhonda-4895.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=4895&Session=27",
-    "office": "Room 409-C, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 409-G, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "districtOffice": "7843 Clearview Circle, Riverdale, GA 30296",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rhonda_Burnough",
+    "ballotpediaUrl": "https://ballotpedia.org/Rhonda_Burnough"
   },
   {
     "id": "ocd-person/bc40f904-9c20-41d0-80d5-e5645d3e6935",
@@ -2478,7 +2944,9 @@
     "phone": "404-656-0265",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/taylor-rhonda-4998.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "Room 604-E, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 604-E, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rhonda_Taylor",
+    "ballotpediaUrl": "https://ballotpedia.org/Rhonda_Taylor_(Georgia)"
   },
   {
     "id": "ocd-person/4d1f5379-01e9-4f58-9868-42acc07ec7a8",
@@ -2492,7 +2960,10 @@
     "phone": "404-656-7153",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/jasperse-rick-755.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=755&Session=27",
-    "office": "State Capitol Room 218-C, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 218-C, 206 Washington St. SW, Atlanta, GA 30334",
+    "districtOffice": "89 Apple Valley Farm Lane, Jasper, GA 30143",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rick_Jasperse",
+    "ballotpediaUrl": "https://ballotpedia.org/Rick_Jasperse"
   },
   {
     "id": "ocd-person/1da20ad9-1a05-42ab-addb-7fbf295a0e5d",
@@ -2506,7 +2977,9 @@
     "phone": "404-656-0178",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/townsend-rick-5055.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "Room 501-G, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 501-G, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rick_Townsend",
+    "ballotpediaUrl": "https://ballotpedia.org/Rick_Townsend"
   },
   {
     "id": "ocd-person/c7860bae-9d9c-449c-9903-20230eec50ac",
@@ -2520,7 +2993,10 @@
     "phone": "404-656-0082",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/williams-rick-4905.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=4905&Session=27",
-    "office": "Room 327-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 327-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "districtOffice": "1670 N. Jefferson St., Milledgeville, GA 31061",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rick_Williams_(Georgia_Politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Ricky_Williams"
   },
   {
     "id": "ocd-person/84eb7371-a332-4534-b3b3-542500c798f8",
@@ -2534,7 +3010,10 @@
     "phone": "404-657-1803",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/RobClifton2024.jpg",
     "website": "https://www.legis.ga.gov/members/house/5080",
-    "office": "Room 408-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 408-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "districtOffice": "4324 Wheeler Road, Augusta, GA 30907",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rob_Clifton",
+    "ballotpediaUrl": "https://ballotpedia.org/Rob_Clifton_(Georgia)"
   },
   {
     "id": "ocd-person/29210f3f-ec97-47c8-9492-b81154275109",
@@ -2548,7 +3027,9 @@
     "phone": "404-656-5132",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/leverett-rob-4993.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "State Capitol Room 218-B, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 218-B, 206 Washington St. SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rob_Leverett",
+    "ballotpediaUrl": "https://ballotpedia.org/Rob_Leverett"
   },
   {
     "id": "ocd-person/5d77204f-89e7-43df-bccb-a08b9956132d",
@@ -2562,7 +3043,9 @@
     "phone": "404-656-6372",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/rdawson.jpg",
     "website": "https://www.legis.ga.gov/members/house/5072",
-    "office": "Room 511-C, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 511-C, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Robert_Dawson_(Georgia_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Robert_Dawson_(Georgia)"
   },
   {
     "id": "ocd-person/f863b50d-c865-463a-830a-e5648837d9f7",
@@ -2576,7 +3059,11 @@
     "phone": "404-656-5099",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/dickey-robert-791.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=791&Session=27",
-    "office": "State Capitol Room 228-B, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 228-B, 206 Washington St. SW, Atlanta, GA 30334",
+    "districtOffice": "3440 Musella Road, Musella, GA 31066",
+    "districtPhone": "478-836-4362",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Robert_Dickey_(American_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Robert_Dickey"
   },
   {
     "id": "ocd-person/32c3fbdd-4034-47d0-b7ab-0411bd200737",
@@ -2590,7 +3077,9 @@
     "phone": "404-656-7859",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Robert_Flournoy_20241223_044055.jpg",
     "website": "https://www.legis.ga.gov/members/house/5074",
-    "office": "Room 512-D, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 512-D, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Robert_Flournoy",
+    "ballotpediaUrl": "https://ballotpedia.org/Robert_Flournoy_Jr."
   },
   {
     "id": "ocd-person/aeaeb854-ff9c-47cb-8069-395b60ba05b2",
@@ -2604,7 +3093,11 @@
     "phone": "404-656-5115",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/stephens-ron-219.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=219&Session=27",
-    "office": "State Capitol Room 226-A, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 226-A, 206 Washington St. SW, Atlanta, GA 30334",
+    "districtOffice": "45 Cove Drive, Savannah, GA 31419",
+    "districtPhone": "912-596-1998",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ron_Stephens_(Georgia_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Ron_Stephens_(Georgia_Representative)"
   },
   {
     "id": "ocd-person/b90b899d-87f0-43a5-9d15-6e310187ac41",
@@ -2618,7 +3111,10 @@
     "phone": "404-463-1318",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/goodman-russ-4977.jpg",
     "website": "https://www.legis.ga.gov/members/senate",
-    "office": "Room 301-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 301-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "districtOffice": "9677 Frank S. Sessoms Memorial Highway, Homerville, GA 31634",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Russ_Goodman",
+    "ballotpediaUrl": "https://ballotpedia.org/Russ_Goodman"
   },
   {
     "id": "ocd-person/d291834f-70cd-48b5-b7db-b05d23d74a4c",
@@ -2632,7 +3128,10 @@
     "phone": "404-656-0220",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/romman-ruwa-5039.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "Room 509-C, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 509-C, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "districtOffice": "3870 Peachtree Industrial Blvd. Suite 340, #129, Duluth, GA 30096",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ruwa_Romman",
+    "ballotpediaUrl": "https://ballotpedia.org/Ruwa_Romman"
   },
   {
     "id": "ocd-person/2a66b922-b812-4c45-9786-478187cd5e33",
@@ -2646,7 +3145,9 @@
     "phone": "404-656-0265",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/draper-saira-5038.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "Room 604-D, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 604-D, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Saira_Draper",
+    "ballotpediaUrl": "https://ballotpedia.org/Saira_Draper"
   },
   {
     "id": "ocd-person/218a4fc4-a568-4b78-b350-0d60c6b12d4c",
@@ -2660,7 +3161,9 @@
     "phone": "404-656-7871",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/harrell-sally-311.jpg",
     "website": "https://www.legis.ga.gov/members/senate",
-    "office": "State Capitol Room 110-D, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 110-D, 206 Washington St. SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sally_Harrell",
+    "ballotpediaUrl": "https://ballotpedia.org/Sally_Harrell"
   },
   {
     "id": "ocd-person/2ba0916f-40b1-4255-9496-94b12ccabd1e",
@@ -2670,11 +3173,14 @@
     "chamber": "lower",
     "district": "107",
     "party": "Democratic",
-    "email": "samuel.park@house.ga.gov",
+    "email": "sam.park@house.ga.gov",
     "phone": "404-656-5059",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/park-sam-4901.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=4901&Session=27",
-    "office": "Room 609, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 609, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "districtOffice": "4850 Sugarloaf Parkway Suite 209-188, Lawrenceville, GA 30044",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sam_Park",
+    "ballotpediaUrl": "https://ballotpedia.org/Samuel_Park"
   },
   {
     "id": "ocd-person/cbcdfca3-e47d-4b32-9164-ec0709a134bf",
@@ -2688,7 +3194,9 @@
     "phone": "404-656-0065",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/watson-sam-837.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=837&Session=27",
-    "office": "Room 302-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 302-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sam_Watson_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Sam_Watson"
   },
   {
     "id": "ocd-person/21c6cae1-bcd2-4403-ad39-af04b64ce55c",
@@ -2702,7 +3210,10 @@
     "phone": "404-656-0314",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/scott-sandra-766.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=766&Session=27",
-    "office": "Room 611-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 611-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "districtOffice": "3489 Oak Leaf Court, Rex, GA 30273",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sandra_Scott_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Sandra_Scott"
   },
   {
     "id": "ocd-person/4ab15127-5b7a-40bc-8807-26e8e8a73397",
@@ -2716,7 +3227,9 @@
     "phone": "404-656-0177",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Sandy_Donatucci_20240808_092636.jpg",
     "website": "https://www.legis.ga.gov/members/house/5077",
-    "office": "Room 501-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 501-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sandy_Donatucci",
+    "ballotpediaUrl": "https://ballotpedia.org/Sandy_Donatucci"
   },
   {
     "id": "ocd-person/91abe321-5ea4-4f17-b8d8-573d7cb913e6",
@@ -2730,7 +3243,10 @@
     "phone": "404-656-0188",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/hilton-scott-4899.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "Room 504-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 504-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "districtOffice": "5425 Peachtree Parkway, Peachtree Corners, GA 30092",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Scott_Hilton_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Scott_Hilton_(Georgia)"
   },
   {
     "id": "ocd-person/99ef9b20-6b1f-4831-8e58-a523de606cda",
@@ -2744,7 +3260,10 @@
     "phone": "404-656-6372",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/holcomb-scott-769.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=769&Session=27",
-    "office": "Room 511-I, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 511-I, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "districtOffice": "2306 Briarcliff Commons, Atlanta, GA 30345",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Scott_Holcomb",
+    "ballotpediaUrl": "https://ballotpedia.org/Scott_Holcomb_(Georgia)"
   },
   {
     "id": "ocd-person/702658f4-8382-479a-9416-79928239d5e7",
@@ -2758,7 +3277,9 @@
     "phone": "404-656-6372",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/adeyina-segun-5044.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "Room 511-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 511-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Segun_Adeyina",
+    "ballotpediaUrl": "https://ballotpedia.org/Segun_Adeyina"
   },
   {
     "id": "ocd-person/15db25fc-273b-467f-b8f9-897337f40b65",
@@ -2772,7 +3293,9 @@
     "phone": "404-656-5069",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/cooper-sharon-86.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=86&Session=27",
-    "office": "State Capitol Room 436, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 436, 206 Washington St. SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sharon_Cooper",
+    "ballotpediaUrl": "https://ballotpedia.org/Sharon_Cooper"
   },
   {
     "id": "ocd-person/e51d36a7-9684-4540-aae7-a5e60e434681",
@@ -2786,7 +3309,9 @@
     "phone": "404-656-7859",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/henderson-sharon-5003.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "Room 512-E, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 512-E, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sharon_Henderson",
+    "ballotpediaUrl": "https://ballotpedia.org/Sharon_Henderson"
   },
   {
     "id": "ocd-person/ee145624-3295-4db4-b3ce-9d1583e4ef6e",
@@ -2800,7 +3325,9 @@
     "phone": "404-656-5103",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/blackmon-shaw-1878.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=1878&Session=27",
-    "office": "State Capitol Room 133, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 133, 206 Washington St. SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Shaw_Blackmon",
+    "ballotpediaUrl": "https://ballotpedia.org/Shaw_Blackmon"
   },
   {
     "id": "ocd-person/314d7845-ba55-4bd4-809a-c7c7aea26690",
@@ -2814,7 +3341,10 @@
     "phone": "404-656-7127",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/still-shawn-5016.jpg",
     "website": "https://www.legis.ga.gov/members/senate",
-    "office": "State Capitol Room 421-D, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 421-D, 206 Washington St. SW, Atlanta, GA 30334",
+    "districtOffice": "2850 Simpson Circle, Norcross, GA 30071",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Shawn_Still",
+    "ballotpediaUrl": "https://ballotpedia.org/Shawn_Still"
   },
   {
     "id": "ocd-person/9007dcd9-3246-4cf3-9185-7478b3a9ad7a",
@@ -2828,7 +3358,9 @@
     "phone": "404-656-0298",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/roberts-shea-4994.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "Room 608-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 608-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Shea_Roberts",
+    "ballotpediaUrl": "https://ballotpedia.org/Shea_Roberts"
   },
   {
     "id": "ocd-person/5b6e0e37-802b-4103-b401-551532aba2e7",
@@ -2842,7 +3374,25 @@
     "phone": "404-656-7871",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/rahman-sheikh-4924.jpg",
     "website": "https://www.legis.ga.gov/members/senate",
-    "office": "State Capitol Room 110-C, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 110-C, 206 Washington St. SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sheikh_Rahman",
+    "ballotpediaUrl": "https://ballotpedia.org/Sheikh_Rahman"
+  },
+  {
+    "id": "ocd-person/059c0e54-cc7b-4605-aee6-58388026a2fb",
+    "name": "Sheila Nelson",
+    "firstName": "Sheila",
+    "lastName": "Nelson",
+    "chamber": "lower",
+    "district": "130",
+    "party": "Democratic",
+    "email": "sheila.nelson@house.ga.gov",
+    "phone": "404-656-0126",
+    "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/nelson-sheila-4903.jpg",
+    "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=4903&Session=27",
+    "office": "Room 411-A, Coverdell Legislative Office Building, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sheila_Nelson_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Sheila_Clark_Nelson"
   },
   {
     "id": "ocd-person/b278b399-5ca3-4cd7-bc19-4053166577a2",
@@ -2856,7 +3406,9 @@
     "phone": "404-656-0308",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/jones-sheila-143.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=143&Session=27",
-    "office": "Room 404-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 404-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sheila_Jones",
+    "ballotpediaUrl": "https://ballotpedia.org/Sheila_Jones"
   },
   {
     "id": "ocd-person/5474fbe2-6cdb-4ad2-9831-cdffaca442af",
@@ -2870,7 +3422,9 @@
     "phone": "404-656-0220",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/adesanya-solomon-5025.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "Room 509-E, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 509-E, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Solomon_Adesanya",
+    "ballotpediaUrl": "https://ballotpedia.org/Solomon_Adesanya"
   },
   {
     "id": "ocd-person/2abbbe23-8cb6-4f33-afaf-38ce88a4e10c",
@@ -2884,7 +3438,9 @@
     "phone": "404-656-9644",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/halpern-sonya-4985.jpg",
     "website": "https://www.legis.ga.gov/members/senate",
-    "office": "Room 303-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 303-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sonya_Halpern",
+    "ballotpediaUrl": "https://ballotpedia.org/Sonya_Halpern"
   },
   {
     "id": "ocd-person/64721c9b-451c-4bc9-9040-4ca232ffd746",
@@ -2898,7 +3454,9 @@
     "phone": "404-656-5025",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/hong-soo-5042.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "State Capitol Room 415, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 415, 206 Washington St. SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Soo_Hong",
+    "ballotpediaUrl": "https://ballotpedia.org/Soo_Hong"
   },
   {
     "id": "ocd-person/e6ae8d30-4b1b-4b06-8918-2be6fa7f8108",
@@ -2912,7 +3470,10 @@
     "phone": "404-656-0265",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/frye-spencer-819.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=819&Session=27",
-    "office": "Room 604-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 604-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "districtOffice": "1000 Newton Bridge Road, Athens, GA 30606",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Spencer_Frye",
+    "ballotpediaUrl": "https://ballotpedia.org/Spencer_Frye"
   },
   {
     "id": "ocd-person/fa5d8d09-a0b9-4ba4-93da-a24902530416",
@@ -2926,7 +3487,11 @@
     "phone": "404-656-0116",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/evans-stacey-762.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=762&Session=25",
-    "office": "Room 409-D, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 409-D, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "districtOffice": "750 Piedmont Ave. NE, Atlanta, GA 30308",
+    "districtPhone": "770-710-4087",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Stacey_Evans",
+    "ballotpediaUrl": "https://ballotpedia.org/Stacey_Evans"
   },
   {
     "id": "ocd-person/432ef767-d4c8-4736-b2ac-96397205fb3d",
@@ -2940,7 +3505,9 @@
     "phone": "404-656-5125",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/gunter-stan-4987.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "State Capitol Room 132, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 132, 206 Washington St. SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Stan_Gunter",
+    "ballotpediaUrl": "https://ballotpedia.org/Stan_Gunter"
   },
   {
     "id": "ocd-person/e2c141e9-9e04-4e2b-8e5b-57db594c7abc",
@@ -2954,7 +3521,9 @@
     "phone": "404-656-9221",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/gooch-steve-752.jpg",
     "website": "https://www.legis.ga.gov/members/senate",
-    "office": "Room 301-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 301-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Steve_Gooch",
+    "ballotpediaUrl": "https://ballotpedia.org/Steve_Gooch"
   },
   {
     "id": "ocd-person/80f4bbdf-02f3-4233-8456-e550e7e745af",
@@ -2968,7 +3537,25 @@
     "phone": "404-463-3793",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/tarvin-steve-849.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=849&Session=27",
-    "office": "Room 613-C, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 613-C, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Steve_Tarvin",
+    "ballotpediaUrl": "https://ballotpedia.org/Steve_Tarvin"
+  },
+  {
+    "id": "ocd-person/516cb969-9467-490f-9a05-02c3e7decae3",
+    "name": "Steven McNeel",
+    "firstName": "Steven",
+    "lastName": "McNeel",
+    "chamber": "upper",
+    "district": "18",
+    "party": "Republican",
+    "email": "steven.mcneel@senate.ga.gov",
+    "phone": "404-463-2593",
+    "photoUrl": "https://static.wixstatic.com/media/717e3f_742258cc71f249009c9f26b868c3c467~mv2.jpg/v1/fill/w_953,h_602,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/717e3f_742258cc71f249009c9f26b868c3c467~mv2.jpg",
+    "website": "https://www.legis.ga.gov/members/senate/5093",
+    "office": "Room 322-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Steven_McNeel",
+    "ballotpediaUrl": "https://ballotpedia.org/Steven_McNeel"
   },
   {
     "id": "ocd-person/3194a8e0-aaf8-4686-b2c9-a22521f85fff",
@@ -2982,7 +3569,9 @@
     "phone": "404-463-2246",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/meeks-steven-4961.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=4961&Session=27",
-    "office": "State Capitol Room 245-F, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 245-F, 206 Washington St. SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Steven_Meeks",
+    "ballotpediaUrl": "https://ballotpedia.org/Steven_Meeks"
   },
   {
     "id": "ocd-person/99082062-acd6-4c6b-bb45-2cfa071f19fc",
@@ -2996,7 +3585,10 @@
     "phone": "404-657-1803",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/sainz-steven-4962.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=4962&Session=27",
-    "office": "Room 408-D, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 408-D, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "districtOffice": "2712 Osborne Road, St. Marys, GA 31558",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Steven_Sainz",
+    "ballotpediaUrl": "https://ballotpedia.org/Steven_Sainz"
   },
   {
     "id": "ocd-person/cabc1e6f-ba7c-4063-a778-707579f91ec8",
@@ -3010,7 +3602,9 @@
     "phone": "404-656-6372",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Sylvia_Wayfer.jpg",
     "website": "https://www.legis.ga.gov/members/house/5071",
-    "office": "Room 511-D, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 511-D, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sylvia_Wayfer_Baker",
+    "ballotpediaUrl": "https://ballotpedia.org/Sylvia_Wayfer"
   },
   {
     "id": "ocd-person/c5766526-3a5a-4d33-b5ff-a0d1d358d7ae",
@@ -3024,7 +3618,10 @@
     "phone": "404-656-0202",
     "photoUrl": "https://images.squarespace-cdn.com/content/v1/64b7398b4867300614bcfe48/9ddc7dee-fc52-4309-a0dc-3c8671c9eaaa/Tangie+Herring_headshot.jpg?format=2500w",
     "website": "https://www.legis.ga.gov/members/house/5082",
-    "office": "Room 507-G, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 507-G, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "districtOffice": "871 Lee Road, Macon, GA 31024",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tangie_Herring",
+    "ballotpediaUrl": "https://ballotpedia.org/Tangie_Herring"
   },
   {
     "id": "ocd-person/6e5432a3-09ed-4813-b11d-e97222bb7e4d",
@@ -3038,7 +3635,9 @@
     "phone": "404-656-0298",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/miller-tanya-f-5029.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "Room 608-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 608-A, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tanya_F._Miller",
+    "ballotpediaUrl": "https://ballotpedia.org/Tanya_Miller"
   },
   {
     "id": "ocd-person/aa7405f9-5c37-4ce8-a7eb-ac5949a6e776",
@@ -3052,7 +3651,10 @@
     "phone": "404-656-0202",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/cummings-terry-5024.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "Room 507-E, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 507-E, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "districtOffice": "1400 Veterans Memorial Highway Suite 124-265, Mableton, GA 30126",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Terry_Cummings_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Terry_Cummings"
   },
   {
     "id": "ocd-person/93f45299-bfa2-4458-844a-5c6b9bdd8c1d",
@@ -3066,7 +3668,9 @@
     "phone": "404-656-7872",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Timothy_Bearden.jpg",
     "website": "https://www.legis.ga.gov/members/senate/62",
-    "office": "Room 304-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 304-B, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tim_Bearden",
+    "ballotpediaUrl": "https://ballotpedia.org/Tim_Bearden"
   },
   {
     "id": "ocd-person/cf955c60-cbda-4414-9266-3d8dca3553fe",
@@ -3080,7 +3684,9 @@
     "phone": "404-656-0188",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/fleming-tim-5046.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "Room 504-D, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 504-D, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tim_Fleming_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Tim_Fleming"
   },
   {
     "id": "ocd-person/45567c87-3ba6-49ec-9ea2-5ebb880aa94c",
@@ -3094,7 +3700,10 @@
     "phone": "404-656-9210",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/jones-todd-4885.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=4885&Session=27",
-    "office": "State Capitol Room 416-B, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 416-B, 206 Washington St. SW, Atlanta, GA 30334",
+    "districtOffice": "8175 Majors Ridge Way, Cumming, GA 30041",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Todd_Jones_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Todd_Jones"
   },
   {
     "id": "ocd-person/d9f1ea57-7b90-484a-9664-927a36c87e0c",
@@ -3108,7 +3717,9 @@
     "phone": "404-463-2598",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/anderson-tonya-807.jpg",
     "website": "https://www.legis.ga.gov/members/senate",
-    "office": "State Capitol Room 110-A, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 110-A, 206 Washington St. SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tonya_Anderson",
+    "ballotpediaUrl": "https://ballotpedia.org/Tonya_Anderson"
   },
   {
     "id": "ocd-person/9fe70ed7-31a0-4732-92b1-54d2a79a4654",
@@ -3122,7 +3733,9 @@
     "phone": "404-656-0109",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/reese-tremaine-teddy-5050.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "Room 404-E, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 404-E, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Teddy_Reese",
+    "ballotpediaUrl": "https://ballotpedia.org/Teddy_Reese"
   },
   {
     "id": "ocd-person/6ac8933e-8dde-4902-8eec-61cc5a91c844",
@@ -3136,7 +3749,9 @@
     "phone": "404-656-0188",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/kelley-trey-825.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=825&Session=27",
-    "office": "Room 504-G, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 504-G, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Trey_Kelley",
+    "ballotpediaUrl": "https://ballotpedia.org/Trey_Kelley"
   },
   {
     "id": "ocd-person/9dfc8ec3-0935-4d1d-877d-e05cf7a5dca5",
@@ -3150,7 +3765,10 @@
     "phone": "404-656-5099",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/rhodes-trey-876.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=876&Session=27",
-    "office": "State Capitol Room 228-A, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 228-A, 206 Washington St. SW, Atlanta, GA 30334",
+    "districtOffice": "1051 Ben Hammond Drive, Greensboro, GA 30642",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Trey_Rhodes",
+    "ballotpediaUrl": "https://ballotpedia.org/Trey_Rhodes"
   },
   {
     "id": "ocd-person/4b162447-89a7-4ffc-acbf-617e1ad87e2a",
@@ -3164,7 +3782,9 @@
     "phone": "404-463-7853",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/smith-tyler-paul-4990.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "State Capitol Room 401-K, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 401-K, 206 Washington St. SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tyler_Smith_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Tyler_Smith_(Georgia)"
   },
   {
     "id": "ocd-person/9deeb60b-4d1e-42b8-8052-d2808a30ea9a",
@@ -3178,7 +3798,25 @@
     "phone": "404-656-0254",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/smith-vance-215.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=215&Session=27",
-    "office": "Room 601-G, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 601-G, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Vance_Smith",
+    "ballotpediaUrl": "https://ballotpedia.org/Vance_Smith"
+  },
+  {
+    "id": "ocd-person/b9050158-4a6d-4332-8ad2-769472f52e3e",
+    "name": "Venola Mason",
+    "firstName": "Venola",
+    "lastName": "Mason",
+    "chamber": "lower",
+    "district": "94",
+    "party": "Democratic",
+    "email": "venola.mason@house.ga.gov",
+    "phone": "404-656-0126",
+    "photoUrl": "https://venolaforthefuture.com/wp-content/uploads/2026/02/Venola-Campaign-photo-Oval_s.png",
+    "website": "https://www.legis.ga.gov/members/house/5095",
+    "office": "Room 411-B, Coverdell Legislative Office Building, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Venola_Mason",
+    "ballotpediaUrl": "https://ballotpedia.org/Venola_Mason"
   },
   {
     "id": "ocd-person/546d682f-b256-4060-8fd3-084d7f118d43",
@@ -3192,7 +3830,9 @@
     "phone": "404-656-0325",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/anderson-victor-4989.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "Room 612-H, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 612-H, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Victor_Anderson_(Georgia_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Victor_Anderson"
   },
   {
     "id": "ocd-person/e3b1be9c-b244-4466-9192-adc365a31cfb",
@@ -3206,7 +3846,9 @@
     "phone": "404-656-0109",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/davis-viola-4947.jpg",
     "website": "https://www.house.ga.gov/Representatives/en-US/member.aspx?Member=4947&Session=27",
-    "office": "Room 404-D, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 404-D, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Viola_Davis_(Georgia_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Viola_Davis"
   },
   {
     "id": "ocd-person/97a002db-6151-4fdf-9bce-013a6344764f",
@@ -3220,7 +3862,9 @@
     "phone": "404-651-7737",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/wade-will-4988.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "State Capitol Room 109, 206 Washington St. SW, Atlanta, GA 30334"
+    "office": "State Capitol Room 109, 206 Washington St. SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Will_Wade_(Georgia_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Will_Wade"
   },
   {
     "id": "ocd-person/6f986b42-14f6-4147-9466-c49294331db9",
@@ -3234,6 +3878,8 @@
     "phone": "404-656-6372",
     "photoUrl": "https://www.legis.ga.gov/api/images/default-source/portraits/neal-yasmin-765.jpg",
     "website": "https://www.legis.ga.gov/members/house",
-    "office": "Room 511-F, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334"
+    "office": "Room 511-F, Coverdell Legislative Office Building 18 Capitol Square SW, Atlanta, GA 30334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Yasmin_Neal",
+    "ballotpediaUrl": "https://ballotpedia.org/Yasmin_Neal"
   }
 ]

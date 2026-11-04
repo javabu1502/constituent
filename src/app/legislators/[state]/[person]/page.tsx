@@ -6,6 +6,7 @@ import { findBySlug, slugsForState } from '@/lib/state-legislator-slug';
 import { lowerChamberName } from '@/lib/chambers';
 import { committeesForPerson } from '@/lib/state-committees';
 import { StateLegislatorActivity } from '@/components/legislators/StateLegislatorActivity';
+import { LegislatorBio } from '@/components/legislators/LegislatorBio';
 import type { Official } from '@/lib/types';
 
 const STATES_BY_SLUG: Record<string, { code: string; name: string }> = {};
@@ -92,6 +93,7 @@ export default async function StateLegislatorPage({ params }: PageProps) {
   const partyRule = /democrat/i.test(official.party) ? '#2B5CA8' : /republican/i.test(official.party) ? '#A8352B' : '#6E685C';
 
   const seats = committeesForPerson(state.code, official.id);
+  const record = slugsForState(state.code).find((e) => e.slug === person)?.legislator;
   const sameChamber = slugsForState(state.code)
     .filter((e) => e.legislator.chamber === official.chamber && e.legislator.name !== official.name)
     .slice(0, 12);
@@ -154,6 +156,15 @@ export default async function StateLegislatorPage({ params }: PageProps) {
                 <dd className="text-gray-700 dark:text-gray-300">{official.office}</dd>
               </div>
             )}
+            {record?.districtOffice && (
+              <div className="flex gap-3">
+                <dt className="label w-16 shrink-0">District</dt>
+                <dd className="text-gray-700 dark:text-gray-300">
+                  {record.districtOffice}
+                  {record.districtPhone ? ` · ${record.districtPhone}` : ''}
+                </dd>
+              </div>
+            )}
             {official.website && (
               <div className="flex gap-3">
                 <dt className="label w-16 shrink-0">Official</dt>
@@ -171,8 +182,27 @@ export default async function StateLegislatorPage({ params }: PageProps) {
           <p className="mt-2 text-xs text-gray-600 dark:text-gray-400">
             We check that you live in their district before sending.
           </p>
+
+          {(record?.wikipediaUrl || record?.ballotpediaUrl || record?.twitter) && (
+            <div className="mt-5">
+              <h3 className="label mb-2">Elsewhere</h3>
+              <ul className="text-sm space-y-1.5">
+                {record.wikipediaUrl && (
+                  <li><a className="hover:underline" href={record.wikipediaUrl} target="_blank" rel="noopener noreferrer">Wikipedia</a></li>
+                )}
+                {record.ballotpediaUrl && (
+                  <li><a className="hover:underline" href={record.ballotpediaUrl} target="_blank" rel="noopener noreferrer">Ballotpedia</a></li>
+                )}
+                {record.twitter && (
+                  <li><a className="hover:underline" href={`https://x.com/${record.twitter}`} target="_blank" rel="noopener noreferrer">@{record.twitter}</a></li>
+                )}
+              </ul>
+            </div>
+          )}
         </div>
       </div>
+
+      {record?.wikipediaUrl && <LegislatorBio wikipediaUrl={record.wikipediaUrl} name={official.name} />}
 
       {seats.length > 0 && (
         <section className="mb-12">

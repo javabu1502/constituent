@@ -11,7 +11,9 @@
     "phone": "601-359-2224",
     "photoUrl": "https://billstatus.ls.state.ms.us/members/senate/butler.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/senate/butler_(36th).xml",
-    "office": "State Capitol Room 405, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 405, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Albert_Butler",
+    "ballotpediaUrl": "https://ballotpedia.org/Albert_Butler"
   },
   {
     "id": "ocd-person/80fca1ba-017c-4941-990c-a5e2ff34aea0",
@@ -22,10 +24,11 @@
     "district": "35",
     "party": "Republican",
     "email": "aberry@senate.ms.gov",
-    "phone": "601-359-2886",
+    "phone": "601-359-4088",
     "photoUrl": "https://billstatus.ls.state.ms.us/members/senate/Berry.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/senate/berry.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "ballotpediaUrl": "https://ballotpedia.org/Andy_Berry"
   },
   {
     "id": "ocd-person/95d25b69-8eb7-44cd-a789-54351e17970c",
@@ -39,7 +42,9 @@
     "phone": "601-359-3770",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/boyd_(37).jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/boyd_(37).xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Andy_Boyd",
+    "ballotpediaUrl": "https://ballotpedia.org/Andy_Boyd"
   },
   {
     "id": "ocd-person/4004cf9a-6d23-4323-b158-00f22078d2b4",
@@ -50,10 +55,12 @@
     "district": "40",
     "party": "Republican",
     "email": "ahill@senate.ms.gov",
-    "phone": "601-359-3237",
+    "phone": "601-359-2886",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/senate/hill.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/senate/hill.xml",
-    "office": "State Capitol Room 409, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Angela_Burks_Hill",
+    "ballotpediaUrl": "https://ballotpedia.org/Angela_Hill"
   },
   {
     "id": "ocd-person/83f9f72e-ec2d-4351-a227-d8a6aec18eed",
@@ -67,7 +74,9 @@
     "phone": "601-359-3340",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Angela_Cockerham.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/cockerham.xml",
-    "office": "State Capitol Room 201, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 201, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Angela_Cockerham",
+    "ballotpediaUrl": "https://ballotpedia.org/Angela_Cockerham"
   },
   {
     "id": "ocd-person/74d0c9b2-58a2-41a7-b2a0-582924a45adf",
@@ -81,7 +90,9 @@
     "phone": "601-359-3237",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/senate/turner-ford.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/senate/turner-ford.xml",
-    "office": "State Capitol Room 409, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 409, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Angela_Turner-Ford",
+    "ballotpediaUrl": "https://ballotpedia.org/Angela_Turner-Ford"
   },
   {
     "id": "ocd-person/3b2b3cb2-3ef8-400d-b395-6b0895ea7631",
@@ -93,9 +104,10 @@
     "party": "Democratic",
     "email": "bblackmon@senate.ms.gov",
     "phone": "601-359-2224",
-    "photoUrl": "https://billstatus.ls.state.ms.us/members/senate/blackmon.jpeg",
+    "photoUrl": "https://billstatus.ls.state.ms.us/members/senate/blackmon.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/senate/blackmon.xml",
-    "office": "State Capitol Room 405, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 405, 400 High St., Jackson, MS 39201",
+    "ballotpediaUrl": "https://ballotpedia.org/Bradford_Blackmon"
   },
   {
     "id": "ocd-person/5f65f3a3-db2a-4573-a5c8-59b6cc0dbf40",
@@ -106,10 +118,12 @@
     "district": "15",
     "party": "Republican",
     "email": "bwilliams@senate.ms.gov",
-    "phone": "601-359-4088",
+    "phone": "601-359-2220",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/senate/williams.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/senate/williams.xml",
-    "office": "State Capitol Room 213, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bart_Williams_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Bart_Williams_(Mississippi)"
   },
   {
     "id": "ocd-person/4b865b47-4811-4437-be08-0f3bf10d461c",
@@ -123,7 +137,9 @@
     "phone": "601-359-3131",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/currie.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/currie.xml",
-    "office": "State Capitol Room 401-C, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 401-C, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Becky_Currie",
+    "ballotpediaUrl": "https://ballotpedia.org/Becky_Currie"
   },
   {
     "id": "ocd-person/ba13036f-790b-4745-b008-eeb74f1c86a1",
@@ -137,7 +153,9 @@
     "phone": "601-359-4088",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/senate/suber.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/senate/suber.xml",
-    "office": "State Capitol Room 213, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 213, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Benjamin_Suber",
+    "ballotpediaUrl": "https://ballotpedia.org/Benjamin_Suber"
   },
   {
     "id": "ocd-person/27f187c6-8755-4a18-a32a-dd5b5d7831c8",
@@ -151,7 +169,9 @@
     "phone": "601-359-3770",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Beth_Luther_Waldo.jpeg",
     "website": "https://billstatus.ls.state.ms.us/members/house/waldo.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Beth_Luther_Waldo",
+    "ballotpediaUrl": "https://ballotpedia.org/Beth_Luther_Waldo"
   },
   {
     "id": "ocd-person/af66e7a0-2b1a-4fa0-a66c-e6e7a2541cb1",
@@ -165,7 +185,9 @@
     "phone": "601-359-3334",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/kinkade.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/kinkade.xml",
-    "office": "State Capitol Room 112-C, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 112-C, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bill_Kinkade",
+    "ballotpediaUrl": "https://ballotpedia.org/Bill_Kinkade"
   },
   {
     "id": "ocd-person/2fed984f-0f51-40d2-9881-ec16131a6a2f",
@@ -179,7 +201,9 @@
     "phone": "601-359-3332",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/pigott.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/pigott.xml",
-    "office": "State Capitol Room 119-B, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 119-B, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bill_Pigott",
+    "ballotpediaUrl": "https://ballotpedia.org/Bill_Pigott"
   },
   {
     "id": "ocd-person/15f21051-d36c-4a2a-aa96-100bb8cb693b",
@@ -193,21 +217,9 @@
     "phone": "601-359-3770",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/calvert.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/calvert.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
-  },
-  {
-    "id": "ocd-person/b8541474-47fd-4dd2-8576-53b7fe911039",
-    "name": "Bo Brown",
-    "firstName": "Bo",
-    "lastName": "Brown",
-    "chamber": "lower",
-    "district": "70",
-    "party": "Democratic",
-    "email": "bbrown@house.ms.gov",
-    "phone": "601-359-3770",
-    "photoUrl": "http://billstatus.ls.state.ms.us/members/house/brown_(70th).jpg",
-    "website": "https://billstatus.ls.state.ms.us/members/house/brown_(70th).xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Billy_Adam_Calvert",
+    "ballotpediaUrl": "https://ballotpedia.org/Billy_Adam_Calvert"
   },
   {
     "id": "ocd-person/7fe0478b-3777-490c-93cb-20f83baf3d3f",
@@ -221,7 +233,9 @@
     "phone": "601-359-2433",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/evans_(91st).jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/evans_%2891st%29.xml",
-    "office": "State Capitol Room 400-F, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 400-F, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Robert_Evans_(Mississippi_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Bob_Evans"
   },
   {
     "id": "ocd-person/487214e9-b0e2-4741-8bd4-a043a1dd19a5",
@@ -235,7 +249,9 @@
     "phone": "601-359-3728",
     "photoUrl": "https://www.supertalk.fm/wp-content/uploads/2023/08/Brad-Mattox-960x540.png.webp",
     "website": "https://billstatus.ls.state.ms.us/members/house/mattox.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Brad_Mattox",
+    "ballotpediaUrl": "https://ballotpedia.org/Brad_Mattox"
   },
   {
     "id": "ocd-person/307ab2ac-eafb-4d68-8e02-1fff040f50e4",
@@ -249,7 +265,9 @@
     "phone": "601-359-3770",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api/storage/uploads/thumbs/200/300/crop/best/80182230_img_6905.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/anderson_(122nd).xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Brent_Anderson_(Mississippi_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Brent_Anderson_(Mississippi)"
   },
   {
     "id": "ocd-person/222077fd-0e92-4437-a156-59521d7faffa",
@@ -263,7 +281,9 @@
     "phone": "601-359-3349",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/powell.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/powell.xml",
-    "office": "State Capitol Room 119, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 119, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Brent_Powell",
+    "ballotpediaUrl": "https://ballotpedia.org/Brent_Powell"
   },
   {
     "id": "ocd-person/77852654-cea4-4555-899c-641494605220",
@@ -277,7 +297,8 @@
     "phone": "601-359-4088",
     "photoUrl": "https://billstatus.ls.state.ms.us/members/senate/rhodes.jpeg",
     "website": "https://billstatus.ls.state.ms.us/members/senate/rhodes.xml",
-    "office": "State Capitol Room 213, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 213, 400 High St., Jackson, MS 39201",
+    "ballotpediaUrl": "https://ballotpedia.org/Brian_Rhodes_(Mississippi)"
   },
   {
     "id": "ocd-person/7e27e9e0-fe62-4fc0-b8b0-c2ac9c9ce28d",
@@ -291,7 +312,9 @@
     "phone": "601-359-3237",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/senate/wiggins.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/senate/wiggins.xml",
-    "office": "State Capitol Room 409, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 409, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Brice_Wiggins",
+    "ballotpediaUrl": "https://ballotpedia.org/Brice_Wiggins"
   },
   {
     "id": "ocd-person/0d191683-0d9c-408f-812b-5d986a3030a6",
@@ -305,7 +328,9 @@
     "phone": "601-359-2845",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/clark.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/clark.xml",
-    "office": "State Capitol Room Basement-B, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room Basement-B, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bryant_Clark",
+    "ballotpediaUrl": "https://ballotpedia.org/Bryant_Clark"
   },
   {
     "id": "ocd-person/796d8875-e1a2-4274-bdba-2e689d99929c",
@@ -319,7 +344,9 @@
     "phone": "601-359-3340",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/bounds.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/bounds.xml",
-    "office": "State Capitol Room 115-B, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 115-B, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/C._Scott_Bounds",
+    "ballotpediaUrl": "https://ballotpedia.org/C._Scott_Bounds"
   },
   {
     "id": "ocd-person/6e50b530-8c0e-485a-a568-6d40ba83127d",
@@ -333,7 +360,9 @@
     "phone": "601-359-2439",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/mickens.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/mickens.xml",
-    "office": "State Capitol Room 400-F, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 400-F, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Carl_L._Mickens",
+    "ballotpediaUrl": "https://ballotpedia.org/Carl_L._Mickens"
   },
   {
     "id": "ocd-person/7e340127-bea2-48af-95a8-368b99160880",
@@ -347,7 +376,9 @@
     "phone": "601-359-2582",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/crawford.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/crawford.xml",
-    "office": "State Capitol Room 201-M7, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 201-M7, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Carolyn_Crawford",
+    "ballotpediaUrl": "https://ballotpedia.org/Carolyn_Crawford"
   },
   {
     "id": "ocd-person/7f1357e0-62b5-412c-b121-6cb5a5aced0e",
@@ -361,7 +392,9 @@
     "phone": "601-359-9466",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/eure.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/eure.xml",
-    "office": "State Capitol Room 201M-5, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 201M-5, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Casey_Eure",
+    "ballotpediaUrl": "https://ballotpedia.org/Casey_Eure"
   },
   {
     "id": "ocd-person/379b9fd9-2da7-4e20-b0ed-4319ead3a1db",
@@ -375,7 +408,9 @@
     "phone": "601-359-2420",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/burnett.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/burnett.xml",
-    "office": "State Capitol Room 100-A, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 100-A, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Cedric_Burnett",
+    "ballotpediaUrl": "https://ballotpedia.org/Cedric_Burnett"
   },
   {
     "id": "ocd-person/c854a4e7-61d0-4c5e-8623-694a38f0ad20",
@@ -389,7 +424,9 @@
     "phone": "601-359-3770",
     "photoUrl": "https://static.wixstatic.com/media/4b62c6_190e934501654befbc52179bbb3d45b0~mv2.jpeg/v1/fill/w_605,h_713,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/4b62c6_190e934501654befbc52179bbb3d45b0~mv2.jpeg",
     "website": "https://billstatus.ls.state.ms.us/members/house/hurst.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Celeste_Hurst",
+    "ballotpediaUrl": "https://ballotpedia.org/Celeste_Hurst"
   },
   {
     "id": "ocd-person/17a5d5bb-d52b-4d53-a6a0-bcaa7c5538d7",
@@ -403,7 +440,9 @@
     "phone": "601-359-2886",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/senate/mcmahan.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/senate/mcmahan.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Chad_McMahan",
+    "ballotpediaUrl": "https://ballotpedia.org/Chad_McMahan"
   },
   {
     "id": "ocd-person/74ef0a3e-35c9-4729-b6fd-2c07c165864d",
@@ -417,7 +456,9 @@
     "phone": "601-359-3770",
     "photoUrl": "http://www.starkvilledailynews.com/sites/default/files/styles/galleria_zoom/public/field/image/TAYLOR%20MUG_0.png?itok=jRnUfeN0",
     "website": "https://billstatus.ls.state.ms.us/members/house/taylor.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Cheikh_Taylor",
+    "ballotpediaUrl": "https://ballotpedia.org/Cheikh_Taylor"
   },
   {
     "id": "ocd-person/20510bb3-edcd-4cb8-a41a-e0114e6215c9",
@@ -431,7 +472,8 @@
     "phone": "601-359-2220",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/senate/johnson.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/senate/johnson.xml",
-    "office": "State Capitol Room 407, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 407, 400 High St., Jackson, MS 39201",
+    "ballotpediaUrl": "https://ballotpedia.org/Chris_Johnson_(Mississippi)"
   },
   {
     "id": "ocd-person/5aa9d603-5bb2-4c1d-9a0b-1baaf91c425d",
@@ -445,7 +487,9 @@
     "phone": "601-359-2461",
     "photoUrl": "https://static.votesmart.org/static/canphoto/40229.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/bell_(65th).xml",
-    "office": "State Capitol Room 400-F, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 400-F, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Christopher_Bell_(Mississippi_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Christopher_M._Bell"
   },
   {
     "id": "ocd-person/4a046f0b-1286-4bb3-aea0-7284adab76fd",
@@ -459,7 +503,9 @@
     "phone": "601-359-3770",
     "photoUrl": "https://billstatus.ls.state.ms.us/members/house/blackwell.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/blackwell.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Charles_Blackwell_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Charles_Blackwell"
   },
   {
     "id": "ocd-person/c22d208a-59c7-4e90-bbe0-37b953a00b41",
@@ -473,7 +519,9 @@
     "phone": "601-359-2886",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/senate/younger.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/senate/younger.xml",
-    "office": "State Capitol Room 212-C, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 212-C, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Charles_Younger",
+    "ballotpediaUrl": "https://ballotpedia.org/Charles_Younger"
   },
   {
     "id": "ocd-person/0c9a7d35-4b91-42c7-8af2-39b6514c23d8",
@@ -487,7 +535,9 @@
     "phone": "601-359-3497",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/deweese.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/deweese.xml",
-    "office": "State Capitol Room 400-F, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 400-F, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Clay_Deweese",
+    "ballotpediaUrl": "https://ballotpedia.org/Clay_Deweese"
   },
   {
     "id": "ocd-person/bb9ba950-b671-4c41-b851-4a2c86d2059d",
@@ -501,7 +551,8 @@
     "phone": "601-359-3770",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Clay_Mansell.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/mansell.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "ballotpediaUrl": "https://ballotpedia.org/Clay_Mansell"
   },
   {
     "id": "ocd-person/48567f29-ec70-4ff5-bda5-873f2e42933b",
@@ -515,7 +566,9 @@
     "phone": "601-359-4082",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/eubanks.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/eubanks.xml",
-    "office": "State Capitol Room Basement, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room Basement, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dan_Eubanks",
+    "ballotpediaUrl": "https://ballotpedia.org/Dan_Eubanks"
   },
   {
     "id": "ocd-person/22afa0b0-e76a-4ac0-af9a-fa158c55daea",
@@ -529,7 +582,9 @@
     "phone": "601-359-3770",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/mclean.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/mclean.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dana_McLean",
+    "ballotpediaUrl": "https://ballotpedia.org/Dana_Underwood_McLean"
   },
   {
     "id": "ocd-person/32153f0b-aa40-4989-9787-e2608c55a87e",
@@ -543,7 +598,9 @@
     "phone": "601-359-3237",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/senate/sparks.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/senate/sparks.xml",
-    "office": "State Capitol Room 409, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 409, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Daniel_Sparks_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Daniel_Sparks_(Mississippi)"
   },
   {
     "id": "ocd-person/da9d953d-a95f-4166-9b94-e6c5e5b40c86",
@@ -555,9 +612,11 @@
     "party": "Democratic",
     "email": "dporter@house.ms.gov",
     "phone": "601-359-3770",
-    "photoUrl": "https://www.pepperodom.com/wp-content/uploads/2019/05/daryl-porter-683x1024.jpg",
+    "photoUrl": "https://upload.wikimedia.org/wikipedia/commons/8/80/Daryl_Porter_at_2023_Mississippi_Legislative_Luncheon_%28cropped%29.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/porter.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Daryl_Porter_Jr.",
+    "ballotpediaUrl": "https://ballotpedia.org/Daryl_Porter_Jr."
   },
   {
     "id": "ocd-person/c8e4b4c1-6c8f-4b95-9b48-c73997b3f518",
@@ -571,7 +630,9 @@
     "phone": "601-359-2220",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/senate/blount.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/senate/blount.xml",
-    "office": "State Capitol Room 407, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 407, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/David_Blount",
+    "ballotpediaUrl": "https://ballotpedia.org/David_Blount"
   },
   {
     "id": "ocd-person/d1572354-a456-47fa-aa21-58be9884a3bb",
@@ -585,7 +646,9 @@
     "phone": "601-359-4089",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/senate/kirby.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/senate/Kirby.xml",
-    "office": "State Capitol Room 307, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 307, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dean_Kirby",
+    "ballotpediaUrl": "https://ballotpedia.org/Dean_Kirby"
   },
   {
     "id": "ocd-person/8c139a04-43ed-48c5-98cc-e2d308efa65b",
@@ -596,10 +659,12 @@
     "district": "43",
     "party": "Republican",
     "email": "ddebar@senate.ms.gov",
-    "phone": "601-359-3221",
+    "phone": "601-359-3250",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/senate/debar.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/senate/debar.xml",
-    "office": "State Capitol Room 214-B, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dennis_DeBar",
+    "ballotpediaUrl": "https://ballotpedia.org/Dennis_DeBar"
   },
   {
     "id": "ocd-person/3ea1bab4-64f2-4ff3-b0a9-e04a8caa3e9f",
@@ -613,7 +678,9 @@
     "phone": "601-359-2224",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/senate/simmons_(12th).jpg",
     "website": "https://billstatus.ls.state.ms.us/members/senate/simmons_(12th).xml",
-    "office": "State Capitol Room 405, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 405, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Derrick_Simmons",
+    "ballotpediaUrl": "https://ballotpedia.org/Derrick_Simmons"
   },
   {
     "id": "ocd-person/7051aea6-71cf-4c6e-a3f7-5eebe826aa44",
@@ -623,11 +690,12 @@
     "chamber": "lower",
     "district": "28",
     "party": "Republican",
-    "email": "wharris@house.ms.gov",
-    "phone": "601-359-3770",
+    "email": "dharris@house.ms.gov",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/harrisdoc.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/harris.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Doc_Harris",
+    "ballotpediaUrl": "https://ballotpedia.org/Doc_Harris"
   },
   {
     "id": "ocd-person/035cf383-3d6b-401c-955e-2dcc3a95e4a5",
@@ -638,9 +706,12 @@
     "district": "42",
     "party": "Republican",
     "email": "dhartness@senate.ms.gov",
+    "phone": "601-359-2220",
     "photoUrl": "https://billstatus.ls.state.ms.us/members/senate/Hartness.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/senate/hartness.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Don_Hartness",
+    "ballotpediaUrl": "https://ballotpedia.org/Don_Hartness"
   },
   {
     "id": "ocd-person/fd1a4542-8537-4af3-90c8-4052be561c66",
@@ -654,7 +725,9 @@
     "phone": "601-359-3396",
     "photoUrl": "https://billstatus.ls.state.ms.us/members/house/bell_(21st).jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/bell_(21st).xml",
-    "office": "State Capitol Room 400-A, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 400-A, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Donnie_Bell",
+    "ballotpediaUrl": "https://ballotpedia.org/Donnie_Bell"
   },
   {
     "id": "ocd-person/2118023c-ed1d-455f-b3a6-faeefd0e87b5",
@@ -668,7 +741,9 @@
     "phone": "601-359-3770",
     "photoUrl": "http://files.ctctcdn.com/ee25b30f001/08bd0580-a7b2-481a-a9d2-198a61aec56d.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/scoggin.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Donnie_Scoggin",
+    "ballotpediaUrl": "https://ballotpedia.org/Donnie_Scoggin"
   },
   {
     "id": "ocd-person/4fa41145-35bf-442b-bdfe-cf54ea53da69",
@@ -682,7 +757,9 @@
     "phone": "601-359-3399",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/banks.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/banks.xml",
-    "office": "State Capitol Room 102-C, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 102-C, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Earle_S._Banks",
+    "ballotpediaUrl": "https://ballotpedia.org/Earle_Banks"
   },
   {
     "id": "ocd-person/c38da14f-37fd-48fd-9903-e63ce18c1215",
@@ -695,7 +772,9 @@
     "email": "lblackmon@house.ms.gov",
     "photoUrl": "https://i0.wp.com/www.theindustrycosign.com/wp-content/uploads/2021/11/Lawrence-Blackmon-the-industry-cosign-big-ced.jpg?w=1170&ssl=1",
     "website": "https://billstatus.ls.state.ms.us/members/house/blackmon.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lawrence_Blackmon",
+    "ballotpediaUrl": "https://ballotpedia.org/Lawrence_Blackmon"
   },
   {
     "id": "ocd-person/bb2a876e-ca55-46dd-842d-9b89a910848d",
@@ -709,7 +788,9 @@
     "phone": "601-359-3728",
     "photoUrl": "https://static.wixstatic.com/media/220c5e_621b140aa59647afa9d2a4370f2a9253~mv2_d_5184_3456_s_4_2.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/burch.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Elliot_Burch",
+    "ballotpediaUrl": "https://ballotpedia.org/Elliot_Burch"
   },
   {
     "id": "ocd-person/706088db-555c-4dac-b9c4-ca6574241ca4",
@@ -723,7 +804,9 @@
     "phone": "601-359-3728",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/fnelson.JPG",
     "website": "https://billstatus.ls.state.ms.us/members/house/nelson.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Fabian_Nelson",
+    "ballotpediaUrl": "https://ballotpedia.org/Fabian_Nelson"
   },
   {
     "id": "ocd-person/002bdecd-2374-44d8-8280-e0636c5f4897",
@@ -737,7 +820,9 @@
     "phone": "601-359-3770",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/shanks.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/shanks.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Fred_Shanks",
+    "ballotpediaUrl": "https://ballotpedia.org/Fred_Shanks"
   },
   {
     "id": "ocd-person/dcae79b5-ddc5-48e8-86c2-54d5c47f0656",
@@ -751,7 +836,8 @@
     "phone": "601-359-3237",
     "photoUrl": "https://billstatus.ls.state.ms.us/members/senate/brumfield.png",
     "website": "https://billstatus.ls.state.ms.us/members/senate/brumfield.xml",
-    "office": "State Capitol Room 409, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 409, 400 High St., Jackson, MS 39201",
+    "ballotpediaUrl": "https://ballotpedia.org/Gary_Brumfield"
   },
   {
     "id": "ocd-person/2fe9c09d-6213-4576-b0e4-6e89330f41bc",
@@ -762,9 +848,12 @@
     "district": "61",
     "party": "Republican",
     "email": "gnewman@house.ms.gov",
+    "phone": "601-316-2491",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/newman.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/newman.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Gene_Newman",
+    "ballotpediaUrl": "https://ballotpedia.org/Gene_Newman"
   },
   {
     "id": "ocd-person/c38f3e52-9594-4580-a280-bdaa11a33b66",
@@ -778,7 +867,9 @@
     "phone": "601-359-3338",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/haney.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/haney.xml",
-    "office": "State Capitol Room 400-F, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 400-F, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Greg_Haney",
+    "ballotpediaUrl": "https://ballotpedia.org/Greg_Haney"
   },
   {
     "id": "ocd-person/9b5e1a7c-98cd-448e-9f75-d59a5591f1a4",
@@ -789,10 +880,12 @@
     "district": "82",
     "party": "Democratic",
     "email": "gelliott@house.ms.gov",
-    "phone": "601-359-3770",
+    "phone": "601-562-4714",
     "photoUrl": "https://billstatus.ls.state.ms.us/members/house/elliott.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/elliott.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Gregory_Elliott",
+    "ballotpediaUrl": "https://ballotpedia.org/Gregory_Elliott"
   },
   {
     "id": "ocd-person/745b9724-e66d-46ec-874a-d658f01b78a6",
@@ -806,7 +899,9 @@
     "phone": "601-359-2435",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/holloway.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/holloway.xml",
-    "office": "State Capitol Room 400-F, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 400-F, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Gregory_Holloway_Sr.",
+    "ballotpediaUrl": "https://ballotpedia.org/Gregory_Holloway,_Sr."
   },
   {
     "id": "ocd-person/4ead62fd-15e5-4662-8f9b-21a8b0fa8ebe",
@@ -820,7 +915,9 @@
     "phone": "601-359-4049",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/zuber.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/zuber.xml",
-    "office": "State Capitol Room 402-C, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 402-C, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Henry_Zuber_III",
+    "ballotpediaUrl": "https://ballotpedia.org/Henry_Zuber,_III"
   },
   {
     "id": "ocd-person/3a2e8f7d-e657-45e2-93d7-2f5e8499ccfd",
@@ -834,7 +931,9 @@
     "phone": "601-359-3770",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/mccray.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/mccray.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Hester_Jackson-McCray",
+    "ballotpediaUrl": "https://ballotpedia.org/Hester_Jackson_McCray"
   },
   {
     "id": "ocd-person/92659a52-eda2-41a1-9300-40ca7fc3a46b",
@@ -848,7 +947,9 @@
     "phone": "601-359-2220",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/senate/frazier.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/senate/frazier.xml",
-    "office": "State Capitol Room 407, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 407, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Hillman_Terome_Frazier",
+    "ballotpediaUrl": "https://ballotpedia.org/Hillman_Frazier"
   },
   {
     "id": "ocd-person/717de4df-c8b0-4387-a767-4d37b577f370",
@@ -862,7 +963,9 @@
     "phone": "601-359-2395",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/senate/bryan.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/senate/bryan.xml",
-    "office": "State Capitol Room 215, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 215, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Hob_Bryan",
+    "ballotpediaUrl": "https://ballotpedia.org/Hob_Bryan"
   },
   {
     "id": "ocd-person/61c65e25-07c9-445c-8cef-1e6d53cbbfb3",
@@ -876,7 +979,9 @@
     "phone": "601-359-2886",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/senate/michel.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/senate/michel.xml",
-    "office": "State Capitol Room 212-C, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 212-C, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/J._Walter_Michel",
+    "ballotpediaUrl": "https://ballotpedia.org/Walter_Michel"
   },
   {
     "id": "ocd-person/8a829f4e-388e-41c5-bbc6-9e4292ff9539",
@@ -890,7 +995,9 @@
     "phone": "601-359-3770",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/owen.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/owen.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jansen_Owen",
+    "ballotpediaUrl": "https://ballotpedia.org/Jansen_Owen"
   },
   {
     "id": "ocd-person/c664f98f-0d57-4d32-abf1-a95dcec7fa31",
@@ -904,7 +1011,9 @@
     "phone": "601-359-2886",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/senate/barrett.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/senate/barrett.xml",
-    "office": "State Capitol Room 212-C, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 212-C, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jason_Barrett_(Mississippi_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Jason_Barrett_(Mississippi)"
   },
   {
     "id": "ocd-person/fa29dc4f-e4cb-45dd-a450-a1911d529801",
@@ -918,7 +1027,9 @@
     "phone": "601-359-3300",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/white.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/white.xml",
-    "office": "State Capitol Room 306, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 306, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jason_White_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Jason_White_(Mississippi)"
   },
   {
     "id": "ocd-person/7674b0fc-99c4-44a7-85ec-7edd5e6e85a0",
@@ -932,7 +1043,9 @@
     "phone": "601-359-3770",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/mcknight.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/mcknight.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jay_McKnight_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Jay_McKnight"
   },
   {
     "id": "ocd-person/ffba30ff-86d3-42db-ab94-0028df181da1",
@@ -946,7 +1059,9 @@
     "phone": "601-359-9395",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/hale.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/hale.xml",
-    "office": "State Capitol Room 400-F, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 400-F, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jeff_Hale",
+    "ballotpediaUrl": "https://ballotpedia.org/Jeff_Hale"
   },
   {
     "id": "ocd-person/9839c663-7ae3-4437-82d8-c985975309d8",
@@ -960,7 +1075,9 @@
     "phone": "601-359-2224",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/senate/tate.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/senate/tate.xml",
-    "office": "State Capitol Room 405, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 405, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jeff_Tate_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Jeff_Tate"
   },
   {
     "id": "ocd-person/73fee1dd-f8c0-40a7-a4f9-e7576b4ecc3f",
@@ -974,7 +1091,9 @@
     "phone": "601-359-3770",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/harness.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/harness.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jeffery_Harness",
+    "ballotpediaUrl": "https://ballotpedia.org/Jeffery_Harness"
   },
   {
     "id": "ocd-person/249c4603-1fce-4c28-84be-5fa6fc5420b4",
@@ -988,7 +1107,9 @@
     "phone": "601-359-3770",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/hulum.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/hulum.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jeffrey_Hulum_III",
+    "ballotpediaUrl": "https://ballotpedia.org/Jeffrey_Hulum_III"
   },
   {
     "id": "ocd-person/c5ec6885-a7dc-48f4-a2e4-7aa85397f337",
@@ -1002,7 +1123,9 @@
     "phone": "601-359-2420",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/guice.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/guice.xml",
-    "office": "State Capitol Room 201 M-4, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 201 M-4, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jeffrey_Guice",
+    "ballotpediaUrl": "https://ballotpedia.org/Jeffrey_S._Guice"
   },
   {
     "id": "ocd-person/29c08356-5e03-4aed-8518-28da6090a14b",
@@ -1016,7 +1139,9 @@
     "phone": "601-359-2438",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/anderson_(110th).jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/anderson_(110th).xml",
-    "office": "State Capitol Room 400-F, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 400-F, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jeramey_Anderson",
+    "ballotpediaUrl": "https://ballotpedia.org/Jeramey_Anderson"
   },
   {
     "id": "ocd-person/33ffa85f-af2b-41bc-89ce-3c59341d17ab",
@@ -1030,7 +1155,9 @@
     "phone": "601-359-3237",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/senate/england.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/senate/england.xml",
-    "office": "State Capitol Room 409, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 409, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jeremy_England_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Jeremy_England"
   },
   {
     "id": "ocd-person/52d3da6f-c397-4795-9bd8-5a3f17657129",
@@ -1044,7 +1171,9 @@
     "phone": "601-359-3328",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/turner.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/turner.xml",
-    "office": "State Capitol Room 402-B, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 402-B, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jerry_Turner_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Jerry_Turner_(Mississippi)"
   },
   {
     "id": "ocd-person/922a1ebe-1f17-497b-af99-5f14b6b0f66a",
@@ -1058,7 +1187,9 @@
     "phone": "601-359-3770",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/ford_(73rd).jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/ford_(73rd).xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jill_Ford",
+    "ballotpediaUrl": "https://ballotpedia.org/Jill_Ford"
   },
   {
     "id": "ocd-person/822c7153-6b04-4db2-bec4-b6f9d074fb75",
@@ -1072,7 +1203,9 @@
     "phone": "601-359-3770",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/JimEstrada2023.jpeg",
     "website": "https://billstatus.ls.state.ms.us/members/house/estrada.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jim_Estrada",
+    "ballotpediaUrl": "https://ballotpedia.org/Jim_Estrada"
   },
   {
     "id": "ocd-person/af90acc6-0f51-4638-9b7a-51afc5acb0a3",
@@ -1086,7 +1219,9 @@
     "phone": "601-359-3728",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Jimmy_Fondren.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/fondren.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jimmy_Fondren",
+    "ballotpediaUrl": "https://ballotpedia.org/Jimmy_Fondren"
   },
   {
     "id": "ocd-person/f4bd4ab9-cb95-4b3e-95cb-68312eda5b16",
@@ -1100,7 +1235,9 @@
     "phone": "601-359-3457",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/steverson.jpg?rand=41826",
     "website": "https://billstatus.ls.state.ms.us/members/house/steverson.xml",
-    "office": "State Capitol Room 201-M7, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 201-M7, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jody_Steverson",
+    "ballotpediaUrl": "https://ballotpedia.org/Jody_Steverson"
   },
   {
     "id": "ocd-person/cc55837a-0a3e-4bcf-8255-b8786fc2b43f",
@@ -1114,7 +1251,9 @@
     "phone": "601-359-2395",
     "photoUrl": "https://billstatus.ls.state.ms.us/members/senate/carter.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/senate/carter.xml",
-    "office": "State Capitol Room 215, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 215, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Joel_Carter",
+    "ballotpediaUrl": "https://ballotpedia.org/Joel_Carter"
   },
   {
     "id": "ocd-person/bc0bd61c-da9a-40db-bf66-a0108b01275e",
@@ -1128,7 +1267,9 @@
     "phone": "601-359-3237",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/senate/fillingane.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/senate/fillingane.xml",
-    "office": "State Capitol Room 409, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 409, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Joey_Fillingane",
+    "ballotpediaUrl": "https://ballotpedia.org/Joey_Fillingane"
   },
   {
     "id": "ocd-person/622761e7-fba1-4a35-879b-45a6dd021ab0",
@@ -1142,7 +1283,9 @@
     "phone": "601-359-2428",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/hood.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/hood.xml",
-    "office": "State Capitol Room 112-E, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 112-E, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Joey_Hood",
+    "ballotpediaUrl": "https://ballotpedia.org/Joey_Hood"
   },
   {
     "id": "ocd-person/26c38427-62d3-440b-9253-c3e485fbd8ea",
@@ -1156,7 +1299,9 @@
     "phone": "601-359-2432",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/faulkner.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/faulkner.xml",
-    "office": "State Capitol Room 400-F, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 400-F, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_Faulkner_(Mississippi_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/John_Faulkner"
   },
   {
     "id": "ocd-person/6c7089b2-5e2d-4049-9aee-5fd76004af16",
@@ -1170,7 +1315,9 @@
     "phone": "601-359-3340",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/read.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/read.xml",
-    "office": "State Capitol Room 201C, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 201C, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_Read_(Mississippi_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/John_Read"
   },
   {
     "id": "ocd-person/c655558e-dfac-468a-a633-85f380c538b6",
@@ -1184,7 +1331,9 @@
     "phone": "601-359-3343",
     "photoUrl": "https://images.squarespace-cdn.com/content/v1/5660bc77e4b02bc8dd3c055f/1463509030796-7AM0VGR04ZZUTAOF9TQW/image-asset.jpeg?format=500w",
     "website": "https://billstatus.ls.state.ms.us/members/house/lamar.xml",
-    "office": "State Capitol Room 201, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 201, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Trey_Lamar",
+    "ballotpediaUrl": "https://ballotpedia.org/Trey_Lamar"
   },
   {
     "id": "ocd-person/a432eb59-5656-4869-aedc-832b2206b4a5",
@@ -1198,7 +1347,9 @@
     "phone": "601-359-3285",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/hines.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/hines.xml",
-    "office": "State Capitol Room 100-C, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 100-C, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_Hines_(Mississippi_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/John_Hines,_Mississippi_Representative"
   },
   {
     "id": "ocd-person/b05ddbc1-7d61-4f78-bbd3-e0f9ea4de84a",
@@ -1209,9 +1360,12 @@
     "district": "45",
     "party": "Democratic",
     "email": "jdupree@senate.ms.gov",
+    "phone": "601-359-2220",
     "photoUrl": "https://www.nationalcivicleague.org/wp-content/uploads/2021/11/DuPree.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/senate/dupree.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Johnny_DuPree",
+    "ballotpediaUrl": "https://ballotpedia.org/Johnny_DuPree"
   },
   {
     "id": "ocd-person/392af292-07d5-4bfd-9636-fe4257df61b3",
@@ -1225,7 +1379,8 @@
     "phone": "601-359-3770",
     "photoUrl": "https://billstatus.ls.state.ms.us/members/house/mcmillan.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/mcmillan.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "ballotpediaUrl": "https://ballotpedia.org/Jonathan_McMillan"
   },
   {
     "id": "ocd-person/70b45762-64ee-4a16-b15a-194e4e3c9bf6",
@@ -1235,11 +1390,13 @@
     "chamber": "upper",
     "district": "47",
     "party": "Republican",
-    "email": "jseymour@senate.ms.gov",
+    "email": "mseymour@senate.ms.gov",
     "phone": "601-359-2224",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/senate/seymour.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/senate/seymour.xml",
-    "office": "State Capitol Room 405, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 405, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mike_Seymour_(Mississippi_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Joseph_Seymour"
   },
   {
     "id": "ocd-person/13131d55-19a4-49cd-aba9-e8eef7aedb06",
@@ -1253,7 +1410,9 @@
     "phone": "601-359-3232",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/senate/thomas.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/senate/thomas.xml",
-    "office": "State Capitol Room 404, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 404, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Joseph_C._Thomas",
+    "ballotpediaUrl": "https://ballotpedia.org/Joseph_Thomas_(Mississippi)"
   },
   {
     "id": "ocd-person/820dcd6c-fdeb-4244-8ceb-7f5ce3048674",
@@ -1267,7 +1426,9 @@
     "phone": "601-359-3770",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/tubb.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/tubb.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Joseph_Tubb_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Joseph_Tubb"
   },
   {
     "id": "ocd-person/13163ae5-a55d-4eff-8b23-b9f7df9e354a",
@@ -1281,7 +1442,9 @@
     "phone": "601-359-2395",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/senate/harkins.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/senate/harkins.xml",
-    "office": "State Capitol Room 215, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 215, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Josh_Harkins",
+    "ballotpediaUrl": "https://ballotpedia.org/Josh_Harkins"
   },
   {
     "id": "ocd-person/5ad5b396-01a0-40eb-8d4b-0f76f2727406",
@@ -1295,21 +1458,9 @@
     "phone": "601-359-3770",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/80182230_83452a1c-4a99-4e85-9c86-d12418dab31b.jpeg",
     "website": "https://billstatus.ls.state.ms.us/members/house/hawkins.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
-  },
-  {
-    "id": "ocd-person/fcb35ef2-7463-4f8a-9a8a-3bc45b235ecb",
-    "name": "Juan Barnett",
-    "firstName": "Juan",
-    "lastName": "Barnett",
-    "chamber": "upper",
-    "district": "34",
-    "party": "Democratic",
-    "email": "jbarnett@senate.ms.gov",
-    "phone": "601-359-2224",
-    "photoUrl": "https://static.votesmart.org/static/canphoto/156222.jpg",
-    "website": "https://billstatus.ls.state.ms.us/members/senate/barnett.xml",
-    "office": "State Capitol Room 405, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Josh_Hawkins_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Josh_Hawkins"
   },
   {
     "id": "ocd-person/2289ffac-b812-4f76-89a8-d8e77df4de2c",
@@ -1322,7 +1473,9 @@
     "email": "jcrosby@house.ms.gov",
     "photoUrl": "https://cdn.mississippitoday.org/wp-content/uploads/2025/07/16124016/IMG_20250627_163819-200x200.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/crosby.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Justin_Crosby",
+    "ballotpediaUrl": "https://ballotpedia.org/Justin_Crosby"
   },
   {
     "id": "ocd-person/9eae167e-9e7e-4334-a67e-5b686617c71c",
@@ -1336,7 +1489,8 @@
     "phone": "601-359-3770",
     "photoUrl": "https://desotocountynews.com/wp-content/uploads/2023/01/Justin-Keen-800x445.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/keen.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "ballotpediaUrl": "https://ballotpedia.org/Justin_Keen"
   },
   {
     "id": "ocd-person/78171f60-d4f8-470f-85ef-0636656eb0d5",
@@ -1347,9 +1501,11 @@
     "district": "24",
     "party": "Democratic",
     "email": "jpope@senate.ms.gov",
+    "phone": "601-359-2224",
     "photoUrl": "https://billstatus.ls.state.ms.us/members/Senate/Pope.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/senate/pope.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "ballotpediaUrl": "https://ballotpedia.org/Justin_Pope"
   },
   {
     "id": "ocd-person/48af55d6-95ef-4e57-9ec3-a566af0ce517",
@@ -1359,11 +1515,13 @@
     "chamber": "lower",
     "district": "72",
     "party": "Democratic",
-    "email": "gibbs@house.ms.gov",
+    "email": "jgibbs@house.ms.gov",
     "phone": "601-359-3728",
     "photoUrl": "https://billstatus.ls.state.ms.us/members/house/gibbs_(72nd).jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/gibbs_(72nd).xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Justis_Gibbs",
+    "ballotpediaUrl": "https://ballotpedia.org/Justis_Gibbs"
   },
   {
     "id": "ocd-person/a1fef221-e3ca-4598-a7f9-cf6862b3007a",
@@ -1377,7 +1535,9 @@
     "phone": "601-359-3339",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/karriem.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/karriem.xml",
-    "office": "State Capitol Room 400-F, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 400-F, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kabir_Karriem",
+    "ballotpediaUrl": "https://ballotpedia.org/Kabir_Karriem"
   },
   {
     "id": "ocd-person/d0269daa-032c-482b-9faf-1d569a4645a9",
@@ -1388,9 +1548,11 @@
     "district": "26",
     "party": "Democratic",
     "email": "kmumford@senate.ms.gov",
+    "phone": "601-359-4088",
     "photoUrl": "https://i0.wp.com/www.mississippifreepress.org/wp-content/uploads/2025/11/Kamesha-Mumford_courtesy.jpg?w=1200&quality=89&ssl=1",
     "website": "https://billstatus.ls.state.ms.us/members/senate/mumford.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "ballotpediaUrl": "https://ballotpedia.org/Kamesha_Mumford"
   },
   {
     "id": "ocd-person/38d590c5-20ff-42d5-b9dd-af77664213cf",
@@ -1404,7 +1566,9 @@
     "phone": "601-359-9390",
     "photoUrl": "https://billstatus.ls.state.ms.us/members/house/gibbs_(36th).jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/gibbs.xml",
-    "office": "State Capitol Room 400-F, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 400-F, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Karl_Gibbs",
+    "ballotpediaUrl": "https://ballotpedia.org/Karl_Gibbs"
   },
   {
     "id": "ocd-person/761527db-bbe0-43e5-90e0-2a06528ebfa4",
@@ -1418,7 +1582,9 @@
     "phone": "601-359-3340",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/oliver.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/oliver.xml",
-    "office": "State Capitol Room 201-D, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 201-D, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Karl_Oliver",
+    "ballotpediaUrl": "https://ballotpedia.org/Karl_Oliver"
   },
   {
     "id": "ocd-person/cc7b9351-ea3c-4436-8cc7-9ec0f34b3e0a",
@@ -1429,10 +1595,12 @@
     "district": "3",
     "party": "Republican",
     "email": "kchism@senate.ms.gov",
-    "phone": "601-359-3232",
+    "phone": "601-359-2220",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/senate/chism.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/senate/chism.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kathy_Chism",
+    "ballotpediaUrl": "https://ballotpedia.org/Kathy_Chism"
   },
   {
     "id": "ocd-person/0f07445d-ab7a-4c6f-9b3c-a402436afbed",
@@ -1446,7 +1614,9 @@
     "phone": "601-359-3770",
     "photoUrl": "https://www.theclintoncourier.net/wp-content/uploads/2024/03/Statement-by-Attorney-Christopher-A.-Collins-on-Behalf-of-Keith-Jackson.png",
     "website": "https://billstatus.ls.state.ms.us/members/house/jackson_(45th).xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Keith_Jackson_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Keith_Jackson_(Mississippi)"
   },
   {
     "id": "ocd-person/da8a0173-20dc-4979-949d-57d902e744e0",
@@ -1460,7 +1630,9 @@
     "phone": "601-359-5334",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/morgan.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/morgan.xml",
-    "office": "State Capitol Room 119-C, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 119-C, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ken_Morgan_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Ken_Morgan"
   },
   {
     "id": "ocd-person/f0fd6950-d890-445b-834e-a635715b75d5",
@@ -1474,7 +1646,9 @@
     "phone": "601-359-3770",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/KenjiHolloway.jpeg",
     "website": "https://billstatus.ls.state.ms.us/members/house/holloway_(27th).xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kenji_Holloway",
+    "ballotpediaUrl": "https://ballotpedia.org/Kenji_Holloway"
   },
   {
     "id": "ocd-person/63655fb4-af7a-4b96-95f0-5aa1bd93da62",
@@ -1488,7 +1662,9 @@
     "phone": "601-550-2470",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/mccarty.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/mccarty.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kent_McCarty",
+    "ballotpediaUrl": "https://ballotpedia.org/Kent_McCarty"
   },
   {
     "id": "ocd-person/b58c7115-6f1d-4de3-9327-eef3b6f0c83c",
@@ -1502,7 +1678,9 @@
     "phone": "601-359-2395",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/senate/blackwell.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/senate/blackwell.xml",
-    "office": "State Capitol Room 215, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 215, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kevin_Blackwell_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Kevin_Blackwell"
   },
   {
     "id": "ocd-person/9967ba62-2eb6-452e-8445-d3422c62a813",
@@ -1516,7 +1694,9 @@
     "phone": "601-359-3770",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/felsher.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/felsher.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kevin_Felsher",
+    "ballotpediaUrl": "https://ballotpedia.org/Kevin_Felsher"
   },
   {
     "id": "ocd-person/7a9174a7-1301-407a-8c77-5f70e70fde92",
@@ -1530,7 +1710,8 @@
     "phone": "601-359-9473",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/ford.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/ford_(54th).xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "ballotpediaUrl": "https://ballotpedia.org/Kevin_Ford"
   },
   {
     "id": "ocd-person/b339d980-af38-4e76-b53c-215c26191cc1",
@@ -1544,7 +1725,9 @@
     "phone": "601-359-3311",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/horan.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/horan.xml",
-    "office": "State Capitol Room 400-F, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 400-F, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kevin_Horan",
+    "ballotpediaUrl": "https://ballotpedia.org/Kevin_Horan_(Mississippi)"
   },
   {
     "id": "ocd-person/58bd4b77-f7d6-45bd-bb3e-0386cf36bbf3",
@@ -1558,7 +1741,9 @@
     "phone": "601-359-3728",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/KimberlyRemak.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/remak.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kimberly_Remak",
+    "ballotpediaUrl": "https://ballotpedia.org/Kimberly_Remak"
   },
   {
     "id": "ocd-person/f9eedb57-45af-4743-b869-ece1ccb643e2",
@@ -1572,7 +1757,9 @@
     "phone": "601-359-3728",
     "photoUrl": "https://mcgeerealtyservices.com/wp-content/uploads/2020/09/Lances-Headshot-300x400.gif",
     "website": "https://billstatus.ls.state.ms.us/members/house/varner.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lance_Varner",
+    "ballotpediaUrl": "https://ballotpedia.org/Lance_Varner"
   },
   {
     "id": "ocd-person/b273517c-b673-4bf0-a084-b960bc943953",
@@ -1586,7 +1773,9 @@
     "phone": "601-359-2220",
     "photoUrl": "https://billstatus.ls.state.ms.us/members/senate/taylor.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/senate/taylor.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lane_Taylor_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Lane_Taylor"
   },
   {
     "id": "ocd-person/57419404-003c-4a1d-93c0-dce987b11c00",
@@ -1600,7 +1789,9 @@
     "phone": "601-359-3337",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/byrd.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/byrd.xml",
-    "office": "State Capitol Room 400-B, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 400-B, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Larry_Byrd",
+    "ballotpediaUrl": "https://ballotpedia.org/Larry_Byrd"
   },
   {
     "id": "ocd-person/843ed177-0a3d-4f96-9df2-28ad7333c5a6",
@@ -1614,7 +1805,9 @@
     "phone": "601-359-3770",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/jackson.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/jackson.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lataisha_Jackson",
+    "ballotpediaUrl": "https://ballotpedia.org/Lataisha_M._Jackson"
   },
   {
     "id": "ocd-person/fe627b98-efb2-43b0-a6e5-7ad967c1a2fc",
@@ -1628,7 +1821,9 @@
     "phone": "601-359-4000",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/yancey.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/yancey.xml",
-    "office": "State Capitol Room 102-B, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 102-B, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lee_Yancey",
+    "ballotpediaUrl": "https://ballotpedia.org/Lee_Yancey"
   },
   {
     "id": "ocd-person/dcc9906b-9a0a-4503-9128-006317d5ff3f",
@@ -1642,7 +1837,9 @@
     "phone": "601-359-4073",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/carpenter.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/carpenter.xml",
-    "office": "State Capitol Room Basement, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room Basement, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lester_Carpenter",
+    "ballotpediaUrl": "https://ballotpedia.org/Lester_Carpenter"
   },
   {
     "id": "ocd-person/094c0731-4932-4400-ad96-84c83ba1dd59",
@@ -1656,7 +1853,9 @@
     "phone": "601-359-2395",
     "photoUrl": "https://billstatus.ls.state.ms.us/members/senate/chassaniol.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/senate/chassaniol.xml",
-    "office": "State Capitol Room 215, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 215, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lydia_Chassaniol",
+    "ballotpediaUrl": "https://ballotpedia.org/Lydia_Chassaniol"
   },
   {
     "id": "ocd-person/c3ea3d93-cd2d-48f4-babd-a47bbd951108",
@@ -1670,7 +1869,9 @@
     "phone": "601-359-3304",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/barton.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/barton.xml",
-    "office": "State Capitol Room 302, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 302, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Manly_Barton",
+    "ballotpediaUrl": "https://ballotpedia.org/Manly_Barton"
   },
   {
     "id": "ocd-person/3439bb59-6632-4653-83e1-031422ad832f",
@@ -1684,7 +1885,9 @@
     "phone": "601-359-2431",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/tullos.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/tullos.xml",
-    "office": "State Capitol Room 400-F, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 400-F, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mark_Tullos",
+    "ballotpediaUrl": "https://ballotpedia.org/Mark_Tullos"
   },
   {
     "id": "ocd-person/017dec88-1105-454d-b55b-eeb3a3c85b55",
@@ -1695,10 +1898,12 @@
     "district": "1",
     "party": "Republican",
     "email": "mmclendon@senate.ms.gov",
-    "phone": "601-359-3232",
+    "phone": "601-359-3237",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/senate/mclendon.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/senate/mclendon.xml",
-    "office": "State Capitol Room 404, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Michael_McLendon",
+    "ballotpediaUrl": "https://ballotpedia.org/Michael_McLendon"
   },
   {
     "id": "ocd-person/eaa39996-c8a7-4568-b01e-d7685667227b",
@@ -1712,7 +1917,9 @@
     "phone": "601-359-4088",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/senate/thompson.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/senate/thompson.xml",
-    "office": "State Capitol Room 213, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 213, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mike_Thompson_(Mississippi_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Mike_Thompson_(Mississippi)"
   },
   {
     "id": "ocd-person/e645db95-2862-40dd-b548-b84b6f0b5f3f",
@@ -1726,7 +1933,9 @@
     "phone": "601-359-3770",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/mcgee.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/mcgee.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Missy_McGee",
+    "ballotpediaUrl": "https://ballotpedia.org/Missy_Warren_McGee"
   },
   {
     "id": "ocd-person/60cdec6e-abad-4d5c-97ca-83da67ed7a67",
@@ -1740,7 +1949,9 @@
     "phone": "601-359-4088",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/senate/whaley.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/senate/whaley.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Neil_Whaley",
+    "ballotpediaUrl": "https://ballotpedia.org/Neil_Whaley"
   },
   {
     "id": "ocd-person/befe53fc-f95d-49df-93f4-9985e00151e6",
@@ -1754,7 +1965,9 @@
     "phone": "601-359-2886",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/senate/boyd.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/senate/boyd.xml",
-    "office": "State Capitol Room 212-C, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 212-C, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Nicole_Akins_Boyd",
+    "ballotpediaUrl": "https://ballotpedia.org/Nicole_Boyd"
   },
   {
     "id": "ocd-person/86dbc7dc-6cd5-4005-b076-9b1bb674e331",
@@ -1768,7 +1981,9 @@
     "phone": "601-359-3363",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/sanford.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/sanford.xml",
-    "office": "State Capitol Room 201M-6, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 201M-6, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Noah_Sanford",
+    "ballotpediaUrl": "https://ballotpedia.org/Noah_Sanford"
   },
   {
     "id": "ocd-person/ee6c2cb7-6d0f-4b45-9e06-2ba1dfae8ecb",
@@ -1782,7 +1997,9 @@
     "phone": "601-359-4084",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/scott.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/scott.xml",
-    "office": "State Capitol Room Basement, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room Basement, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Omeria_Scott",
+    "ballotpediaUrl": "https://ballotpedia.org/Omeria_Scott"
   },
   {
     "id": "ocd-person/5fb7e1d6-24ab-41e1-b0b2-d1445bf6abd3",
@@ -1796,7 +2013,9 @@
     "phone": "601-359-2438",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/denton.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/denton.xml",
-    "office": "State Capitol Room 400-F, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 400-F, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Oscar_Denton",
+    "ballotpediaUrl": "https://ballotpedia.org/Oscar_Denton"
   },
   {
     "id": "ocd-person/c730cb69-8d30-4676-afe8-0fb513f3845f",
@@ -1809,7 +2028,9 @@
     "email": "owilliams@house.ms.gov",
     "photoUrl": "https://magnoliatribune.com/wp-content/uploads/2025/11/Otha-Williams-1024x1024.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/williams.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Otha_Williams",
+    "ballotpediaUrl": "https://ballotpedia.org/Otha_Williams_III"
   },
   {
     "id": "ocd-person/d4007757-e112-43b0-8261-1dd806f658c8",
@@ -1823,7 +2044,9 @@
     "phone": "601-359-3755",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/anthony.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/anthony.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Otis_Anthony",
+    "ballotpediaUrl": "https://ballotpedia.org/Otis_Anthony"
   },
   {
     "id": "ocd-person/7dcb0b5b-3eb3-4db2-8666-0eb83589289f",
@@ -1837,7 +2060,9 @@
     "phone": "601-359-3770",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/watson.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/watson.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Percy_Watson_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Percy_Watson"
   },
   {
     "id": "ocd-person/a91418ca-cbde-4a6f-8c9d-889f406c4ed8",
@@ -1851,7 +2076,9 @@
     "phone": "601-359-3770",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/bailey_(23rd).jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/bailey_(23rd).xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Perry_Van_Bailey",
+    "ballotpediaUrl": "https://ballotpedia.org/Perry_Van_Bailey"
   },
   {
     "id": "ocd-person/7aef9236-de61-47cf-8243-b5a21fcac9dc",
@@ -1865,21 +2092,8 @@
     "phone": "601-359-4088",
     "photoUrl": "https://billstatus.ls.state.ms.us/members/senate/Ladner.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/senate/ladner.xml",
-    "office": "State Capitol Room 213, 400 High St., Jackson, MS 39201"
-  },
-  {
-    "id": "ocd-person/35bf01bd-be16-4ce6-b07c-bfff3d25e7e3",
-    "name": "Price Wallace",
-    "firstName": "Price",
-    "lastName": "Wallace",
-    "chamber": "lower",
-    "district": "77",
-    "party": "Republican",
-    "email": "pwallace@house.ms.gov",
-    "phone": "601-359-3770",
-    "photoUrl": "http://billstatus.ls.state.ms.us/members/house/wallace.jpg",
-    "website": "https://billstatus.ls.state.ms.us/members/house/wallace.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 213, 400 High St., Jackson, MS 39201",
+    "ballotpediaUrl": "https://ballotpedia.org/Philman_Ladner"
   },
   {
     "id": "ocd-person/defa75f7-917e-42da-9d2c-403ad80d1995",
@@ -1893,7 +2107,9 @@
     "phone": "601-359-3373",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/boyd_(19th).jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/boyd_(19).xml",
-    "office": "State Capitol Room 400-E, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 400-E, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Randy_Boyd_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Randy_Boyd_(Mississippi)"
   },
   {
     "id": "ocd-person/af2a8aef-177c-49d2-9b77-f1f19f7b8eaa",
@@ -1907,7 +2123,9 @@
     "phone": "601-359-3371",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/rushing.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/rushing.xml",
-    "office": "State Capitol Room 400-H, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 400-H, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Randy_Rushing",
+    "ballotpediaUrl": "https://ballotpedia.org/Randy_Rushing"
   },
   {
     "id": "ocd-person/4b4c6bbd-fcbb-4c7e-9746-83acffe80898",
@@ -1921,7 +2139,9 @@
     "phone": "601-359-2860",
     "photoUrl": "https://static.votesmart.org/static/canphoto/69948.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/bennett.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Richard_Bennett_(Mississippi_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Richard_Bennett_(Mississippi)"
   },
   {
     "id": "ocd-person/f8b65fd8-7b11-4954-93fd-47a5cbbd53c8",
@@ -1935,7 +2155,9 @@
     "phone": "601-359-3770",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/thompson.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/thompson.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rickey_W._Thompson",
+    "ballotpediaUrl": "https://ballotpedia.org/Rickey_Thompson"
   },
   {
     "id": "ocd-person/d618a68e-ed3a-47a5-be24-852af75d9ab3",
@@ -1949,7 +2171,9 @@
     "phone": "601-359-2886",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/senate/parks.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/senate/parks.xml",
-    "office": "State Capitol Room 212-C, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 212-C, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rita_Potts_Parks",
+    "ballotpediaUrl": "https://ballotpedia.org/Rita_Parks"
   },
   {
     "id": "ocd-person/e36cdae5-3437-48fc-93b4-280b09af661b",
@@ -1963,7 +2187,9 @@
     "phone": "601-359-3359",
     "photoUrl": "https://robrobersonattorney.com/wp-content/uploads/2019/07/Rob-Roberson.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/roberson.xml",
-    "office": "State Capitol Room 400-D, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 400-D, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rob_Roberson",
+    "ballotpediaUrl": "https://ballotpedia.org/Rob_Roberson"
   },
   {
     "id": "ocd-person/0fde8bcf-e43a-4b39-a9a5-b7869424e2d9",
@@ -1974,10 +2200,11 @@
     "district": "11",
     "party": "Democratic",
     "email": "rjackson@senate.ms.gov",
-    "phone": "601-359-3232",
+    "phone": "601-359-4088",
     "photoUrl": "https://billstatus.ls.state.ms.us/members/senate/jackson.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/senate/jackson.xml",
-    "office": "State Capitol Room 404, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "ballotpediaUrl": "https://ballotpedia.org/Reginald_Jackson_(Mississippi)"
   },
   {
     "id": "ocd-person/0de22359-9403-4bec-917a-985b26fd45ff",
@@ -1991,7 +2218,9 @@
     "phone": "601-359-3252",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/johnson.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/johnson.xml",
-    "office": "State Capitol Room 102-C, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 102-C, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Robert_Johnson_III",
+    "ballotpediaUrl": "https://ballotpedia.org/Robert_Johnson,_III"
   },
   {
     "id": "ocd-person/e7684f57-ee0c-48ea-8157-8f04c2b8e685",
@@ -2005,7 +2234,9 @@
     "phone": "601-359-3770",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/sanders.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/sanders.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Robert_L._Sanders",
+    "ballotpediaUrl": "https://ballotpedia.org/Robert_Sanders_(Mississippi)"
   },
   {
     "id": "ocd-person/eb5bde8b-1497-4a27-9806-128cf68cb00d",
@@ -2019,7 +2250,9 @@
     "phone": "601-359-3237",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/senate/hickman.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/senate/hickman.xml",
-    "office": "State Capitol Room 409, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 409, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rod_Hickman",
+    "ballotpediaUrl": "https://ballotpedia.org/Rod_Hickman"
   },
   {
     "id": "ocd-person/6d293363-c72f-479b-81fc-225071ac4913",
@@ -2031,8 +2264,11 @@
     "party": "Republican",
     "email": "rhall@house.ms.gov",
     "phone": "601-359-3770",
+    "photoUrl": "https://billstatus.ls.state.ms.us/members/house/hall.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/hall.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rodney_Hall_(Mississippi_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Rodney_Hall_(Mississippi)"
   },
   {
     "id": "ocd-person/fee2ce67-1403-487e-b891-587e625ce15c",
@@ -2046,7 +2282,9 @@
     "phone": "601-359-3770",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/crudup.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/crudup.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ronnie_Crudup_Jr.",
+    "ballotpediaUrl": "https://ballotpedia.org/Ronnie_Crudup_Jr."
   },
   {
     "id": "ocd-person/0bf76f2b-9380-45c1-8809-315a682322a3",
@@ -2060,7 +2298,9 @@
     "phone": "601-359-3340",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/mims.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/mims.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sam_Mims_V",
+    "ballotpediaUrl": "https://ballotpedia.org/Sam_Mims,_V"
   },
   {
     "id": "ocd-person/d79acfe3-5991-41ae-b245-f7b7f877febb",
@@ -2074,7 +2314,9 @@
     "phone": "601-359-3770",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/creekmore_iv.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/creekmore_iv.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sam_Creekmore_IV",
+    "ballotpediaUrl": "https://ballotpedia.org/Sam_Creekmore_IV"
   },
   {
     "id": "ocd-person/f1012c43-9559-4f7a-8b70-8dd9cf88bab1",
@@ -2088,7 +2330,9 @@
     "phone": "601-359-3232",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/senate/simmons_(13th).jpg",
     "website": "https://billstatus.ls.state.ms.us/members/senate/simmons_(13th).xml",
-    "office": "State Capitol Room 404, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 404, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sarita_Simmons",
+    "ballotpediaUrl": "https://ballotpedia.org/Sarita_Simmons"
   },
   {
     "id": "ocd-person/8467b994-f651-446b-b77f-0632ff790ff8",
@@ -2102,7 +2346,9 @@
     "phone": "601-359-2220",
     "photoUrl": "https://billstatus.ls.state.ms.us/members/senate/delano.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/senate/delano.xml",
-    "office": "State Capitol Room 407, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 407, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Scott_DeLano",
+    "ballotpediaUrl": "https://ballotpedia.org/Scott_DeLano"
   },
   {
     "id": "ocd-person/de5a9a25-1b08-45ba-9aff-e635905498ba",
@@ -2116,7 +2362,9 @@
     "phone": "601-359-3770",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/yates.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/yates.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Shanda_Yates",
+    "ballotpediaUrl": "https://ballotpedia.org/Shanda_Yates"
   },
   {
     "id": "ocd-person/4a73b9e6-c66b-4022-b380-6caea6b48265",
@@ -2130,7 +2378,9 @@
     "phone": "601-359-3374",
     "photoUrl": "https://billstatus.ls.state.ms.us/members/house/aguirre.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/aguirre.xml",
-    "office": "State Capitol Room 100-C, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 100-C, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Shane_Aguirre",
+    "ballotpediaUrl": "https://ballotpedia.org/Shane_Aguirre"
   },
   {
     "id": "ocd-person/9b8df60b-26ba-4cdc-b862-87b15f81fdc1",
@@ -2142,9 +2392,11 @@
     "party": "Republican",
     "email": "sbarnett@house.ms.gov",
     "phone": "601-359-3014",
-    "photoUrl": "https://images.squarespace-cdn.com/content/v1/5472abbae4b0859145039552/1519227639852-W83BICPBB7LGL856WGBQ/Shane.jpg?format=500w",
+    "photoUrl": "https://billstatus.ls.state.ms.us/members/house/barnett.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/barnett.xml",
-    "office": "State Capitol Room 400-F, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 400-F, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Shane_Barnett",
+    "ballotpediaUrl": "https://ballotpedia.org/Shane_Barnett"
   },
   {
     "id": "ocd-person/4b5fb3d4-b284-4886-bb0b-4c00febb1724",
@@ -2158,7 +2410,9 @@
     "phone": "601-359-2224",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/senate/norwood.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/senate/norwood.xml",
-    "office": "State Capitol Room 405, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 405, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sollie_Norwood",
+    "ballotpediaUrl": "https://ballotpedia.org/Sollie_Norwood"
   },
   {
     "id": "ocd-person/23d69b3d-2f17-4fa9-a23c-c9ad8db4f7a9",
@@ -2172,7 +2426,9 @@
     "phone": "601-359-3770",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/osborne.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/osborne.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Solomon_Osborne",
+    "ballotpediaUrl": "https://ballotpedia.org/Solomon_Osborne"
   },
   {
     "id": "ocd-person/fa44d12a-cb19-426b-94d3-6fb68b4095c8",
@@ -2186,7 +2442,9 @@
     "phone": "601-359-3744",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/hobgood-wilkes.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/hobgood-wilkes.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Stacey_Hobgood-Wilkes",
+    "ballotpediaUrl": "https://ballotpedia.org/Stacey_Hobgood_Wilkes"
   },
   {
     "id": "ocd-person/1253bd3e-36dd-4f23-a671-ab24dc4aed12",
@@ -2200,7 +2458,9 @@
     "phone": "601-359-3770",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/foster.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/foster.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Stephanie_Foster_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Stephanie_Foster"
   },
   {
     "id": "ocd-person/f1e7e5ba-29b7-42e2-bb70-5ab4c7923c77",
@@ -2214,7 +2474,9 @@
     "phone": "601-359-9392",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/horne.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/horne.xml",
-    "office": "State Capitol Room 100-C, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 100-C, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Stephen_Horne",
+    "ballotpediaUrl": "https://ballotpedia.org/Stephen_Horne"
   },
   {
     "id": "ocd-person/df77d55d-10c7-4ecb-9ed9-b8f989da339e",
@@ -2228,7 +2490,9 @@
     "phone": "601-359-3728",
     "photoUrl": "https://bloximages.chicago2.vip.townnews.com/stonecountyenterprise.com/content/tncms/assets/v3/editorial/2/fa/2faf492e-910b-11ed-8a24-b33c741f2b91/63bd9eedb8c9d.image.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/lott.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Steve_Lott_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Steve_Lott"
   },
   {
     "id": "ocd-person/abfa015f-301e-4e17-9917-535bb9079768",
@@ -2242,7 +2506,9 @@
     "phone": "601-359-3353",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/massengill.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/massengill.xml",
-    "office": "State Capitol Room 400-E, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 400-E, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Steve_Massengill",
+    "ballotpediaUrl": "https://ballotpedia.org/Steve_Massengill"
   },
   {
     "id": "ocd-person/c135a4b0-9620-4eef-b561-2b08beda7289",
@@ -2256,7 +2522,9 @@
     "phone": "601-359-3770",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/TamarraGraceButlerWashington.png",
     "website": "https://billstatus.ls.state.ms.us/members/house/butler-washington.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tamarra_Butler-Washington",
+    "ballotpediaUrl": "https://ballotpedia.org/Tamarra_Butler-Washington"
   },
   {
     "id": "ocd-person/34b84276-9c36-4f69-b015-ba05a1c5ee58",
@@ -2267,8 +2535,11 @@
     "district": "2",
     "party": "Democratic",
     "email": "tgillespie-isom@senate.ms.gov",
+    "phone": "662-250-6908",
     "photoUrl": "https://billstatus.ls.state.ms.us/members/Senate/Gillespie_Isom.jpg",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Theresa_Gillespie_Isom",
+    "ballotpediaUrl": "https://ballotpedia.org/Theresa_Gillespie_Isom"
   },
   {
     "id": "ocd-person/3312edf4-798e-4333-b2c8-4d73f246de01",
@@ -2282,7 +2553,9 @@
     "phone": "601-359-3728",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/TimakaJames-Jones2023.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/james-jones.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Timaka_James-Jones",
+    "ballotpediaUrl": "https://ballotpedia.org/Timaka_James-Jones"
   },
   {
     "id": "ocd-person/53869ff4-415d-466a-ad71-c13485b83318",
@@ -2296,7 +2569,9 @@
     "phone": "601-359-2422",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/ladner.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/ladner.xml",
-    "office": "State Capitol Room 119-B, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 119-B, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Timmy_Ladner",
+    "ballotpediaUrl": "https://ballotpedia.org/Timmy_Ladner"
   },
   {
     "id": "ocd-person/b37913d2-9f6e-4f1c-b6c8-7a19863be463",
@@ -2310,7 +2585,9 @@
     "phone": "601-359-3770",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/rosebud.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/rosebud.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tracey_Rosebud",
+    "ballotpediaUrl": "https://ballotpedia.org/Tracey_Rosebud"
   },
   {
     "id": "ocd-person/5ff548a6-827f-4ab7-a4a5-5b510712f6a2",
@@ -2324,7 +2601,9 @@
     "phone": "601-359-3770",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/smith.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/smith.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Troy_Smith_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Troy_Smith"
   },
   {
     "id": "ocd-person/bd335f00-4e41-4972-b8f4-f2249b410614",
@@ -2338,7 +2617,9 @@
     "phone": "601-359-2220",
     "photoUrl": "https://billstatus.ls.state.ms.us/members/senate/mccaughn.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/senate/mccaughn.xml",
-    "office": "State Capitol Room 407, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 407, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tyler_McCaughn",
+    "ballotpediaUrl": "https://ballotpedia.org/Tyler_McCaughn"
   },
   {
     "id": "ocd-person/c0d8a1af-3036-4aee-89e7-f98cc40203cd",
@@ -2352,7 +2633,9 @@
     "phone": "601-359-5140",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/house/mangold.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/mangold.xml",
-    "office": "State Capitol Room Basement, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room Basement, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Vince_Mangold",
+    "ballotpediaUrl": "https://ballotpedia.org/Vince_Mangold"
   },
   {
     "id": "ocd-person/f275881b-1096-4a6a-a607-b417eae41f2e",
@@ -2366,7 +2649,9 @@
     "phone": "601-359-3250",
     "photoUrl": "http://billstatus.ls.state.ms.us/members/senate/hopson.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/senate/hopson.xml",
-    "office": "State Capitol Room 214-B, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 214-B, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Briggs_Hopson",
+    "ballotpediaUrl": "https://ballotpedia.org/Briggs_Hopson"
   },
   {
     "id": "ocd-person/2601640f-867f-480f-83a1-c59c332c0b82",
@@ -2380,7 +2665,9 @@
     "phone": "601-359-2420",
     "photoUrl": "http://da.mdah.ms.gov/series-files/legislature/composites/2016/500/house-of-representatives/2016_2020HousePhotos/Tracy.Arnold.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/arnold.xml",
-    "office": "State Capitol Room 400-E, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 400-E, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/William_Tracy_Arnold",
+    "ballotpediaUrl": "https://ballotpedia.org/William_Arnold"
   },
   {
     "id": "ocd-person/bec0f8f6-7f4c-442b-be25-14e2a2c1f5cb",
@@ -2394,7 +2681,9 @@
     "phone": "601-359-3363",
     "photoUrl": "https://billstatus.ls.state.ms.us/members/house/bailey_(49th).jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/bailey.xml",
-    "office": "State Capitol Room 100-C, 400 High St., Jackson, MS 39201"
+    "office": "State Capitol Room 100-C, 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Willie_Bailey",
+    "ballotpediaUrl": "https://ballotpedia.org/Willie_Bailey"
   },
   {
     "id": "ocd-person/b62cfb62-68b6-4804-a1ff-f0259e7513b4",
@@ -2408,7 +2697,9 @@
     "phone": "601-359-3770",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/ZacharyGrady.jpg",
     "website": "https://billstatus.ls.state.ms.us/members/house/grady.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Zachary_Grady",
+    "ballotpediaUrl": "https://ballotpedia.org/Zachary_Grady"
   },
   {
     "id": "ocd-person/56158045-4973-4fd2-9589-01ad212f2975",
@@ -2422,6 +2713,8 @@
     "phone": "601-359-3770",
     "photoUrl": "https://stateinnovation.org/wp-content/uploads/2021/04/Zakiya-Summers.png",
     "website": "https://billstatus.ls.state.ms.us/members/house/summers.xml",
-    "office": "State Capitol 400 High St., Jackson, MS 39201"
+    "office": "State Capitol 400 High St., Jackson, MS 39201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Zakiya_Summers",
+    "ballotpediaUrl": "https://ballotpedia.org/Zakiya_Summers"
   }
 ]

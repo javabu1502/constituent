@@ -1,5 +1,21 @@
 [
   {
+    "id": "ocd-person/feedb0b5-72da-4529-ab31-630805452e1a",
+    "name": "Aaron Holley",
+    "firstName": "Aaron",
+    "lastName": "Holley",
+    "chamber": "lower",
+    "district": "22",
+    "party": "Republican",
+    "email": "aaron.holley@wvhouse.gov",
+    "phone": "304-340-3277",
+    "photoUrl": "https://www.wvlegislature.gov/images/members/2025/house/holley_aaron.jpg",
+    "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Holley",
+    "office": "State Capitol Room 150R, Complex Building 1, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Aaron_Holley",
+    "ballotpediaUrl": "https://ballotpedia.org/Aaron_Holley"
+  },
+  {
     "id": "ocd-person/76544899-58ec-4065-a3e8-4a4d8a12b4eb",
     "name": "Adam Burkhammer",
     "firstName": "Adam",
@@ -11,7 +27,9 @@
     "phone": "304-340-3123",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2025/house/burkhammer_adam.jpg",
     "website": "https://www.legis.state.wv.us/House/lawmaker.cfm?member=Delegate+Burkhammer",
-    "office": "State Capitol Room 219E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 219E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Adam_Burkhammer",
+    "ballotpediaUrl": "https://ballotpedia.org/Adam_Burkhammer"
   },
   {
     "id": "ocd-person/c15b4eb1-1dc4-498f-9929-43ff34445317",
@@ -25,7 +43,9 @@
     "phone": "304-340-3163",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2023/house/vance_adam.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Vance",
-    "office": "State Capitol Room 212E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 212E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Adam_Vance",
+    "ballotpediaUrl": "https://ballotpedia.org/Adam_Vance"
   },
   {
     "id": "ocd-person/57c08164-a673-4269-84d9-6017e740eaac",
@@ -39,7 +59,9 @@
     "phone": "304-357-7855",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2024/senate/grady_amy.jpg",
     "website": "https://www.legis.state.wv.us/Senate1/lawmaker.cfm?member=Senator+Grady",
-    "office": "State Capitol Room 417M, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 417M, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Amy_Grady",
+    "ballotpediaUrl": "https://ballotpedia.org/Amy_Nichole_Grady"
   },
   {
     "id": "ocd-person/e6deff1e-fb70-4bf0-a2b6-9c30567fcd9d",
@@ -53,7 +75,9 @@
     "phone": "304-340-3392",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2023/house/shamblin_andy.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Shamblin",
-    "office": "State Capitol Room 207E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 207E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Andy_Shamblin",
+    "ballotpediaUrl": "https://ballotpedia.org/Andy_Shamblin"
   },
   {
     "id": "ocd-person/86a1fdf7-e6af-41b4-8d69-0d0815fc9512",
@@ -67,7 +91,9 @@
     "phone": "304-340-3900",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2023/house/hamilton_anitra.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Hamilton",
-    "office": "State Capitol Room 2R, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 2R, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Anitra_Hamilton",
+    "ballotpediaUrl": "https://ballotpedia.org/Anitra_Hamilton"
   },
   {
     "id": "ocd-person/37bf9de9-84b5-4983-8742-a5c3eeeca64a",
@@ -81,7 +107,9 @@
     "phone": "304-357-7854",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2025/senate/charnock_anne.jpg",
     "website": "https://www.wvlegislature.gov/Senate1/lawmaker.cfm?member=Senator%20Charnock",
-    "office": "State Capitol Room 203W, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 203W, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Anne_Charnock_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Anne_Charnock"
   },
   {
     "id": "ocd-person/de50d28d-6a58-4244-8c74-36ca3f41767a",
@@ -95,7 +123,27 @@
     "phone": "304-357-7904",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2023/senate/queen_ben.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Queen",
-    "office": "State Capitol Room 204W, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 204W, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ben_Queen_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Ben_Queen"
+  },
+  {
+    "id": "ocd-person/ffd4b452-510d-48f0-ac07-51af538b46f0",
+    "name": "Betsy Kelly",
+    "firstName": "Betsy",
+    "lastName": "Kelly",
+    "chamber": "lower",
+    "district": "9",
+    "party": "Republican",
+    "email": "betsy.kelly@wvhouse.gov",
+    "phone": "304-340-3195",
+    "photoUrl": "https://www.wvlegislature.gov/images/members/2025/house/kelly_betsy.jpg",
+    "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Kelly",
+    "office": "State Capitol Room 208E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "districtOffice": "156 Chesnut Lane, Pennsboro, WV 26415",
+    "districtPhone": "843-685-3544",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Betsy_Kelly",
+    "ballotpediaUrl": "https://ballotpedia.org/Betsy_Kelly"
   },
   {
     "id": "ocd-person/4d4f0511-706a-406b-9259-05c4008d8b64",
@@ -109,21 +157,9 @@
     "phone": "304-340-3226",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2025/house/bell_bill.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Bell",
-    "office": "State Capitol Room 206E, Complex Building 1, Charleston, WV 25305"
-  },
-  {
-    "id": "ocd-person/84ae4ee5-01d1-402d-8267-787a78dd58e5",
-    "name": "Bill Flanigan",
-    "firstName": "Bill",
-    "lastName": "Flanigan",
-    "chamber": "lower",
-    "district": "4",
-    "party": "Republican",
-    "email": "bill.flanigan@wvhouse.gov",
-    "phone": "304-340-3127",
-    "photoUrl": "https://www.wvlegislature.gov/images/members/2025/house/flanigan_bill.jpg",
-    "website": "https://www.legis.state.wv.us/House/lawmaker.cfm?member=Delegate+Flanigan",
-    "office": "State Capitol Room 150R, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 206E, Complex Building 1, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bill_Bell_(West_Virginia_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Bill_Bell_(West_Virginia)"
   },
   {
     "id": "ocd-person/8bd21671-34c1-4ba3-aced-0dcaa110029c",
@@ -137,7 +173,11 @@
     "phone": "304-357-7906",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2024/senate/hamilton_bill.jpg",
     "website": "https://www.legis.state.wv.us/Senate1/lawmaker.cfm?member=Senator+Hamilton",
-    "office": "State Capitol Room 223W, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 223W, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "districtOffice": "WV",
+    "districtPhone": "304-472-1966",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bill_Hamilton_(West_Virginia_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/William_Hamilton"
   },
   {
     "id": "ocd-person/ad2e5607-a6ef-4458-88fc-bea91da19ac6",
@@ -151,7 +191,9 @@
     "phone": "304-340-3248",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2023/house/ridenour_bill.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Ridenour",
-    "office": "State Capitol Room 150R, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 150R, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/William_Ridenour",
+    "ballotpediaUrl": "https://ballotpedia.org/William_Ridenour"
   },
   {
     "id": "ocd-person/9f35a509-bd40-4ed2-8792-407169b7a944",
@@ -165,7 +207,29 @@
     "phone": "304-340-3180",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2024/house/roop_carl.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Roop",
-    "office": "State Capitol Room 203E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 203E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "districtOffice": "105 Hawksbury Trace, Beckley, WV 25801",
+    "districtPhone": "304-573-5065",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Carl_%22Bill%22_Roop",
+    "ballotpediaUrl": "https://ballotpedia.org/Carl_Roop_(West_Virginia)"
+  },
+  {
+    "id": "ocd-person/a49643ec-8dac-4464-8658-1cf68602be17",
+    "name": "Bill Vest",
+    "firstName": "Bill",
+    "lastName": "Vest",
+    "chamber": "lower",
+    "district": "50",
+    "party": "Republican",
+    "email": "william.vest@wvhouse.gov",
+    "phone": "304-340-3337",
+    "photoUrl": "https://www.wvlegislature.gov/images/members/2025/house/vest_william.jpg",
+    "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Vest",
+    "office": "State Capitol Room 229E, Complex Building 1, Charleston, WV 25305",
+    "districtOffice": "WV",
+    "districtPhone": "304-894-6049",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/William_Vest_(West_Virginia_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/William_Vest"
   },
   {
     "id": "ocd-person/a70a295b-82a5-44a0-ba22-a462823f7abb",
@@ -179,7 +243,9 @@
     "phone": "304-340-3137",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2023/house/fehrenbacher_bob.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Fehrenbacher",
-    "office": "State Capitol Room 150R-A, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 150R-A, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bob_Fehrenbacher",
+    "ballotpediaUrl": "https://ballotpedia.org/Bob_Fehrenbacher"
   },
   {
     "id": "ocd-person/be5e24ac-6372-4364-a9b0-2e9b33a1a234",
@@ -193,7 +259,9 @@
     "phone": "304-357-7807",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2025/senate/helton_brian.jpg",
     "website": "https://www.wvlegislature.gov/Senate1/lawmaker.cfm?member=Senator%20Helton",
-    "office": "State Capitol Room 439M, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 439M, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Brian_Helton",
+    "ballotpediaUrl": "https://ballotpedia.org/Brian_Helton"
   },
   {
     "id": "ocd-person/9cdbf48f-3fd5-4147-9f26-a78632d99929",
@@ -207,7 +275,11 @@
     "phone": "304-340-3139",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2025/house/smith_bryan.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Smith,%20B.",
-    "office": "State Capitol Room 225E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 225E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "districtOffice": "288 Drive-In Road, Grafton, WV 26354",
+    "districtPhone": "304-709-0164",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bryan_Smith_(West_Virginia_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Bryan_Smith_(West_Virginia)"
   },
   {
     "id": "ocd-person/6e588e9a-4d48-444d-92b4-629e00900440",
@@ -221,7 +293,9 @@
     "phone": "304-340-3154",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2023/house/ward_bryan.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Ward,%20B.",
-    "office": "State Capitol Room 201E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 201E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bryan_Ward_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Bryan_Ward"
   },
   {
     "id": "ocd-person/aa01a651-9834-4b98-b9c3-25aee388087a",
@@ -235,7 +309,10 @@
     "phone": "304-340-3167",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2019/house/martin_carl.jpg",
     "website": "https://www.legis.state.wv.us/House/lawmaker.cfm?member=Delegate+Martin",
-    "office": "State Capitol Room 226E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 226E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "districtOffice": "2297 Turkey Run Road, Buckhannon, WV 26201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Carl_Martin_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Carl_Martin_(West_Virginia)"
   },
   {
     "id": "ocd-person/8941d02d-cee0-47a4-9c68-de73382b20af",
@@ -249,7 +326,11 @@
     "phone": "304-357-7827",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2021/senate/clements_charles.jpg",
     "website": "https://www.legis.state.wv.us/Senate1/lawmaker.cfm?member=Senator+Clements",
-    "office": "State Capitol Room 417M, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 417M, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "districtOffice": "242 E. Thistle Court, New Martinsville, WV 26155",
+    "districtPhone": "304-455-5339",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Charles_H._Clements",
+    "ballotpediaUrl": "https://ballotpedia.org/Charles_Clements"
   },
   {
     "id": "ocd-person/338acc2a-d910-4c29-aa94-bf39fbebdeec",
@@ -263,7 +344,10 @@
     "phone": "304-340-3111",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2023/house/sheedy_charles.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Sheedy",
-    "office": "State Capitol Room 205E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 205E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "districtOffice": "12471 Waynesburg Pike Road, Cameron, WV 26033",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Charles_Sheedy_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Charles_Sheedy"
   },
   {
     "id": "ocd-person/7ad5da9a-c2b3-4f9b-b62c-6cd7f0564f43",
@@ -277,7 +361,11 @@
     "phone": "304-340-3350",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2025/house/anders_chris.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Anders",
-    "office": "State Capitol Room 476M, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 476M, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "districtOffice": "WV",
+    "districtPhone": "304-620-4506",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/S._Chris_Anders",
+    "ballotpediaUrl": "https://ballotpedia.org/S._Chris_Anders"
   },
   {
     "id": "ocd-person/eb6d633a-5526-413b-872d-bd36f4d9a906",
@@ -291,7 +379,11 @@
     "phone": "304-340-3192",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2019/house/phillips_chris.jpg",
     "website": "https://www.legis.state.wv.us/House/lawmaker.cfm?member=Delegate+Phillips",
-    "office": "State Capitol Room 213E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 213E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "districtOffice": "742 Sawmill Road, Buckhannon, WV 26201",
+    "districtPhone": "304-614-3246",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Chris_Phillips_(West_Virginia_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Chris_Phillips_(West_Virginia)"
   },
   {
     "id": "ocd-person/9c82f11d-28f2-4167-b10c-26815533f73a",
@@ -305,7 +397,9 @@
     "phone": "304-357-7902",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2025/senate/rose_chris.jpg",
     "website": "https://www.wvlegislature.gov/Senate1/lawmaker.cfm?member=Senator%20Rose",
-    "office": "State Capitol Room 209W, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 209W, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Chris_Rose_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Christopher_Rose"
   },
   {
     "id": "ocd-person/cdd73d73-98d4-43f0-9eec-a030c4ce080f",
@@ -319,7 +413,11 @@
     "phone": "304-340-3265",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2023/house/toney_christopher.jpg",
     "website": "https://www.legis.state.wv.us/House/lawmaker.cfm?member=Delegate+Toney",
-    "office": "State Capitol Room 150R-A, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 150R-A, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "districtOffice": "3626 Clear Fork Road, Beckley, WV 25801",
+    "districtPhone": "304-228-3760",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Chris_Toney",
+    "ballotpediaUrl": "https://ballotpedia.org/Christopher_Wayne_Toney"
   },
   {
     "id": "ocd-person/1f91d255-ce76-40b4-86fd-f9412407f869",
@@ -333,7 +431,9 @@
     "phone": "304-340-3148",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2023/house/horst_chuck.jpg",
     "website": "https://www.legis.state.wv.us/House/lawmaker.cfm?member=Delegate+Horst",
-    "office": "State Capitol Room 202E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 202E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Chuck_Horst",
+    "ballotpediaUrl": "https://ballotpedia.org/Charles_Horst_Sr."
   },
   {
     "id": "ocd-person/cf728c9e-40e8-4f73-a5fa-0d46844aa38e",
@@ -347,7 +447,11 @@
     "phone": "304-340-3144",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2021/house/riley_clay.jpg",
     "website": "https://www.legis.state.wv.us/House/lawmaker.cfm?member=Delegate+Riley",
-    "office": "State Capitol Room 472M, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 472M, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "districtOffice": "66 Spring Haven Trail, Shinnston, WV 26431",
+    "districtPhone": "304-844-5679",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Clay_Riley",
+    "ballotpediaUrl": "https://ballotpedia.org/Clay_Riley"
   },
   {
     "id": "ocd-person/e304d393-2b0a-45c3-9f59-98455e0d73a0",
@@ -361,7 +465,9 @@
     "phone": "304-357-7843",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2025/senate/hart_craig.jpg",
     "website": "https://www.wvlegislature.gov/senate1/lawmaker.cfm?member=Senator%20Hart",
-    "office": "State Capitol Room 209W, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 209W, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Craig_Hart",
+    "ballotpediaUrl": "https://ballotpedia.org/Craig_Hart"
   },
   {
     "id": "ocd-person/34e1e6dd-469b-4e3d-9cc5-604bffe79730",
@@ -375,7 +481,10 @@
     "phone": "304-340-3396",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2023/house/jennings_d.jpg",
     "website": "https://www.legis.state.wv.us/House/lawmaker.cfm?member=Delegate+Jennings",
-    "office": "State Capitol Room 207E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 207E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "districtOffice": "2366 Evansville Pike, Thornton, WV 26440",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/D._Rolland_Jennings",
+    "ballotpediaUrl": "https://ballotpedia.org/D.R._Jennings"
   },
   {
     "id": "ocd-person/6c7fa52c-c313-4f10-aab9-ba9cc0269743",
@@ -389,21 +498,9 @@
     "phone": "304-340-3194",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2023/house/ferrell_dana.jpg",
     "website": "https://www.legis.state.wv.us/House/lawmaker.cfm?member=Delegate+Ferrell",
-    "office": "State Capitol Room 224E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
-  },
-  {
-    "id": "ocd-person/32c4e5cf-81f5-4564-bb9b-568d13156dec",
-    "name": "Daniel Linville",
-    "firstName": "Daniel",
-    "lastName": "Linville",
-    "chamber": "lower",
-    "district": "22",
-    "party": "Republican",
-    "email": "daniel.linville@wvhouse.gov",
-    "phone": "304-340-3277",
-    "photoUrl": "http://www.wvlegislature.gov/images/members/2023/house/linville_daniel.jpg",
-    "website": "https://www.legis.state.wv.us/House/lawmaker.cfm?member=Delegate+Linville",
-    "office": "State Capitol Room 150R, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 224E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dana_Ferrell",
+    "ballotpediaUrl": "https://ballotpedia.org/Dana_Ferrell"
   },
   {
     "id": "ocd-person/60b7f294-2c42-40ab-ab7d-2a639e5be5e5",
@@ -417,7 +514,9 @@
     "phone": "304-357-7980",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2023/house/thorne_darren.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Thorne",
-    "office": "State Capitol Room 200W, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 200W, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Darren_Thorne",
+    "ballotpediaUrl": "https://ballotpedia.org/Darren_Thorne"
   },
   {
     "id": "ocd-person/9ad2e11c-daf4-4f33-9c2d-0075beaeada8",
@@ -431,7 +530,9 @@
     "phone": "304-340-3136",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2023/house/foggin_dave.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Foggin",
-    "office": "State Capitol Room 208E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 208E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dave_Foggin",
+    "ballotpediaUrl": "https://ballotpedia.org/Dave_Foggin"
   },
   {
     "id": "ocd-person/297732cd-3e12-4ce1-b6ca-7e046d8b3e46",
@@ -445,7 +546,11 @@
     "phone": "304-340-3127",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2025/house/mccormick_david.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20McCormick",
-    "office": "State Capitol Room 231E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 231E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "districtOffice": "714 Venture Drive, Box 142, Morgantown, WV 26508",
+    "districtPhone": "304-435-5220",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/David_McCormick_(West_Virginia_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/David_McCormick_(West_Virginia)"
   },
   {
     "id": "ocd-person/79e71ddf-33fc-4e28-8324-dd52aaa0e653",
@@ -459,21 +564,11 @@
     "phone": "304-340-3157",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2025/house/cannon_david.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Cannon,%20D.",
-    "office": "State Capitol Room 231E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
-  },
-  {
-    "id": "ocd-person/d7f119af-3e41-40a1-9541-bfa1a1e7a9b4",
-    "name": "Elliott Pritt",
-    "firstName": "Elliott",
-    "lastName": "Pritt",
-    "chamber": "lower",
-    "district": "50",
-    "party": "Republican",
-    "email": "elliott.pritt@wvhouse.gov",
-    "phone": "304-340-3337",
-    "photoUrl": "https://www.wvlegislature.gov/images/members/2025/house/pritt_david.jpg",
-    "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Pritt",
-    "office": "State Capitol Room 229E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 231E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "districtOffice": "WV",
+    "districtPhone": "304-663-8489",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/David_Cannon_(West_Virginia_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/David_Cannon_(West_Virginia)"
   },
   {
     "id": "ocd-person/b0526275-df8b-4f42-b16b-064aa721a858",
@@ -487,7 +582,11 @@
     "phone": "304-340-3165",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2024/house/green_david.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Green",
-    "office": "State Capitol Room 226E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 226E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "districtOffice": "WV",
+    "districtPhone": "304-938-7065",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Stephen_%22David%22_Green",
+    "ballotpediaUrl": "https://ballotpedia.org/S._David_Green"
   },
   {
     "id": "ocd-person/94a511d8-31ee-4f7d-9227-005b143f9c47",
@@ -501,7 +600,28 @@
     "phone": "304-340-3149",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2022/house/jeffries_dean.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Jeffries,%20D.",
-    "office": "State Capitol Room 221E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 221E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "districtOffice": "207 Leo Drive, Elkview, WV 25071",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dean_Jeffries_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Dean_Jeffries"
+  },
+  {
+    "id": "ocd-person/43f0eeae-cf06-4d8b-a568-03e63c72b796",
+    "name": "Donald Bennett",
+    "firstName": "Donald",
+    "lastName": "Bennett",
+    "chamber": "lower",
+    "district": "94",
+    "party": "Republican",
+    "email": "donaldlee.bennett@wvhouse.gov",
+    "phone": "304-340-3122",
+    "photoUrl": "https://www.wvlegislature.gov/images/members/2025/house/bennett_donald.jpg",
+    "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Bennett",
+    "office": "State Capitol Room MB 68, Complex Building 1, Charleston, WV 25305",
+    "districtOffice": "68 Shaftment Way, Martinsburg, WV 25403",
+    "districtPhone": "304-283-8585",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Donald_Bennett_(West_Virginia_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Donald_Bennett"
   },
   {
     "id": "ocd-person/70ac0a53-79d8-426b-950b-83e9be022bf3",
@@ -515,7 +635,11 @@
     "phone": "304-340-3187",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2023/house/smith_doug.jpg",
     "website": "https://www.legis.state.wv.us/House/lawmaker.cfm?member=Delegate+Smith",
-    "office": "State Capitol Room 214E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 214E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "districtOffice": "WV",
+    "districtPhone": "678-656-8233",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Doug_Smith_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Doug_Smith_(West_Virginia)"
   },
   {
     "id": "ocd-person/0714e7e4-9da4-46bf-a8f5-e48be1af2242",
@@ -529,7 +653,11 @@
     "phone": "304-340-3145",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2023/house/coopgonzalez_elias.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Coop-Gonzalez",
-    "office": "State Capitol Room 228E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 228E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "districtOffice": "WV",
+    "districtPhone": "304-801-3303",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Elias_Coop-Gonzalez",
+    "ballotpediaUrl": "https://ballotpedia.org/Elias_Coop-Gonzalez"
   },
   {
     "id": "ocd-person/db5d813b-3cd2-4a6d-b656-b48624f61094",
@@ -543,7 +671,11 @@
     "phone": "304-340-3197",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2025/house/brooks_eric.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Brooks",
-    "office": "State Capitol Room 220E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 220E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "districtOffice": "WV",
+    "districtPhone": "304-877-8298",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Eric_Brooks_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Eric_Brooks"
   },
   {
     "id": "ocd-person/18d03332-9bd9-4070-9101-6cf93ab2105e",
@@ -557,7 +689,11 @@
     "phone": "304-357-7901",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2023/senate/tarr_eric.jpg",
     "website": "https://www.legis.state.wv.us/Senate1/lawmaker.cfm?member=Senator+Tarr",
-    "office": "State Capitol Room 213W, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 213W, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "districtOffice": "WV",
+    "districtPhone": "304-202-4276",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Eric_Tarr",
+    "ballotpediaUrl": "https://ballotpedia.org/Eric_Tarr"
   },
   {
     "id": "ocd-person/74fee589-c9e9-4dd7-a719-d9b165b2b2c7",
@@ -571,7 +707,9 @@
     "phone": "304-340-3185",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2023/house/moore_erica.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Moore",
-    "office": "State Capitol Room 209E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 209E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Erica_Moore_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Erica_Moore_(West_Virginia)"
   },
   {
     "id": "ocd-person/10dbdccd-3754-49b8-ae28-8f75c4d6936f",
@@ -585,7 +723,9 @@
     "phone": "304-340-3125",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2019/house/hansen_evan.jpg",
     "website": "https://www.legis.state.wv.us/House/lawmaker.cfm?member=Delegate+Hansen",
-    "office": "State Capitol Room 2R, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 2R, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Evan_Hansen_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Evan_Hansen"
   },
   {
     "id": "ocd-person/b875b7d6-4941-42a6-bcdf-c5da19bf0ced",
@@ -599,7 +739,10 @@
     "phone": "304-340-3269",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2023/house/worrell_evan.jpg",
     "website": "https://www.legis.state.wv.us/House/lawmaker.cfm?member=Delegate+Worrell",
-    "office": "State Capitol Room 217E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 217E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "districtOffice": "415 Roach Road, Salt Rock, WV 25559",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Evan_Worrell",
+    "ballotpediaUrl": "https://ballotpedia.org/Evan_Worrell"
   },
   {
     "id": "ocd-person/405fa851-873f-4895-acd5-d394fbb06be3",
@@ -613,7 +756,9 @@
     "phone": "304-340-3191",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2023/house/howell_gary.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Howell",
-    "office": "State Capitol Room 151R, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 151R, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Gary_Howell_(West_Virginia_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Gary_Howell_(West_Virginia)"
   },
   {
     "id": "ocd-person/409397ae-ceea-4b1b-bce5-b042af057232",
@@ -627,7 +772,9 @@
     "phone": "304-340-3158",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2025/house/chiarelli_geno.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Chiarelli",
-    "office": "State Capitol Room 223E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 223E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Geno_Chiarelli",
+    "ballotpediaUrl": "https://ballotpedia.org/Eugene_Chiarelli"
   },
   {
     "id": "ocd-person/5bb7ff93-88f4-42ec-ba11-6921dead66a1",
@@ -641,7 +788,10 @@
     "phone": "304-340-3177",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2023/house/miller_george.jpg",
     "website": "https://www.legis.state.wv.us/House/lawmaker.cfm?member=Delegate+Miller",
-    "office": "State Capitol Room 276M, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 276M, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "districtOffice": "2450 Martinsburg Road, Berkeley Springs, WV 25411",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/George_Miller_(West_Virginia_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/George_Miller_(West_Virginia)"
   },
   {
     "id": "ocd-person/2ee0335d-f067-4ca3-99ce-e10944fa8875",
@@ -655,7 +805,9 @@
     "phone": "304-340-3160",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2023/house/street_george.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Street",
-    "office": "State Capitol Room 222E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 222E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/George_Street_(West_Virginia_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/George_Street"
   },
   {
     "id": "ocd-person/de2f5e4b-192a-463d-91b0-73f212e8f953",
@@ -669,7 +821,9 @@
     "phone": "304-357-7866",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2023/senate/jeffries_glenn.jpg",
     "website": "https://www.legis.state.wv.us/Senate1/lawmaker.cfm?member=Senator+Jeffries",
-    "office": "State Capitol Room 214W, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 214W, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Glenn_Jeffries",
+    "ballotpediaUrl": "https://ballotpedia.org/Glenn_Jeffries"
   },
   {
     "id": "ocd-person/c66e0d8a-9d20-47ce-8d45-50d4b5aaa0d3",
@@ -683,7 +837,9 @@
     "phone": "304-340-3916",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2025/house/watt_gregory.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Watt",
-    "office": "State Capitol Room 230E, Complex Building 1, Charleston, WV 25305"
+    "office": "State Capitol Room 230E, Complex Building 1, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Gregory_Watt",
+    "ballotpediaUrl": "https://ballotpedia.org/Gregory_Watt"
   },
   {
     "id": "ocd-person/1495b97d-e012-4f6f-84b9-3e1d67b8a016",
@@ -697,7 +853,9 @@
     "phone": "304-340-3249",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2025/house/ward_guy.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Ward,%20G.",
-    "office": "State Capitol Room 151R, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 151R, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Guy_Ward",
+    "ballotpediaUrl": "https://ballotpedia.org/Guy_Ward"
   },
   {
     "id": "ocd-person/e05b927b-a702-4143-87b2-79a8c81d4eee",
@@ -711,7 +869,9 @@
     "phone": "304-340-3155",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2025/house/dillon_henry.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Dillon",
-    "office": "State Capitol Room 230E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 230E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Henry_Dillon_(American_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Henry_C._Dillon"
   },
   {
     "id": "ocd-person/68163122-16de-4528-8eda-fd1f9783c45d",
@@ -725,7 +885,9 @@
     "phone": "304-340-3183",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2023/house/lewis_hollis.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Lewis",
-    "office": "State Capitol Room 6U-A, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 6U-A, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Hollis_Lewis",
+    "ballotpediaUrl": "https://ballotpedia.org/Hollis_Lewis"
   },
   {
     "id": "ocd-person/f8921713-413e-4f72-8291-464f2cef3f7b",
@@ -739,7 +901,9 @@
     "phone": "304-340-3147",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2025/house/masters_ian.jpg",
     "website": "https://www.wvlegislature.gov/house/lawmaker.cfm?member=Delegate%20Masters",
-    "office": "State Capitol Room 230E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 230E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ian_Masters_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Ian_Masters"
   },
   {
     "id": "ocd-person/33e56ab1-3106-45fa-a992-fab181983a99",
@@ -753,7 +917,11 @@
     "phone": "304-340-3340",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2024/house/akers_james.jpg",
     "website": "https://www.wvlegislature.gov/house/lawmaker.cfm?member=Delegate%20Akers",
-    "office": "State Capitol Room 418M, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 418M, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "districtOffice": "815 Cedar Road, Charleston, WV 25314",
+    "districtPhone": "304-458-3515",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/JB_Akers",
+    "ballotpediaUrl": "https://ballotpedia.org/JB_Akers"
   },
   {
     "id": "ocd-person/b4df4940-ac0e-4e1a-ba3c-940d604b4ad2",
@@ -767,7 +935,11 @@
     "phone": "304-357-7849",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2023/senate/woodrum_jack.jpg",
     "website": "https://www.legis.state.wv.us/Senate1/lawmaker.cfm?member=Senator+Woodrum",
-    "office": "State Capitol Room 229W, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 229W, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "districtOffice": "WV",
+    "districtPhone": "304-660-9241",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jack_Woodrum",
+    "ballotpediaUrl": "https://ballotpedia.org/Jack_Woodrum"
   },
   {
     "id": "ocd-person/e617259d-e2c9-4043-a759-321c7e3ff7f0",
@@ -781,7 +953,9 @@
     "phone": "304-340-3324",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2022/house/cannon_jarred.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Cannon",
-    "office": "State Capitol Room 151R, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 151R, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jarred_Cannon",
+    "ballotpediaUrl": "https://ballotpedia.org/Jarred_Cannon"
   },
   {
     "id": "ocd-person/bcbe03de-3df0-4c07-8973-0304dafa2cb8",
@@ -795,7 +969,11 @@
     "phone": "304-357-7933",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2023/senate/barrett_jason.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Barrett",
-    "office": "State Capitol Room 461M, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 461M, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "districtOffice": "WV",
+    "districtPhone": "304-886-9907",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jason_Barrett_(West_Virginia_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Jason_Barrett_(West_Virginia)"
   },
   {
     "id": "ocd-person/a7ae16a1-8a1e-4280-8d00-9125719a893e",
@@ -809,7 +987,9 @@
     "phone": "304-357-7914",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2023/senate/taylor_jay.jpg",
     "website": "https://www.wvlegislature.gov/Senate1/lawmaker.cfm?member=Senator%20Taylor",
-    "office": "State Capitol Room 217W, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 217W, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jay_Taylor_(West_Virginia_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Jay_Taylor_(West_Virginia)"
   },
   {
     "id": "ocd-person/81cad520-b015-42c8-b533-64a9e4596197",
@@ -823,7 +1003,9 @@
     "phone": "304-340-3131",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2025/house/campbell_jeff.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Campbell",
-    "office": "State Capitol Room 204E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 204E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jeff_Campbell_(West_Virginia_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Jeff_Campbell_(West_Virginia)"
   },
   {
     "id": "ocd-person/e43a22ad-b630-496b-81f8-6b1f6ceaa13e",
@@ -837,7 +1019,9 @@
     "phone": "304-340-3152",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2025/house/eldridge_jeff.jpg",
     "website": "https://www.legis.state.wv.us/House/lawmaker.cfm?member=Delegate+Eldridge",
-    "office": "State Capitol Room 220E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 220E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jeff_Eldridge",
+    "ballotpediaUrl": "https://ballotpedia.org/Jeff_Eldridge"
   },
   {
     "id": "ocd-person/0092e49c-3dfe-4a2b-b053-e7a0360accf1",
@@ -851,7 +1035,9 @@
     "phone": "304-340-3151",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2023/house/stephens_jeffrey.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Stephens",
-    "office": "State Capitol Room 205E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 205E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jeffrey_Stephens",
+    "ballotpediaUrl": "https://ballotpedia.org/Jeffrey_Stephens"
   },
   {
     "id": "ocd-person/905290bd-c655-4a3d-9961-65a2f9c0e271",
@@ -865,7 +1051,9 @@
     "phone": "304-340-3199",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2025/house/butler_jim.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Butler",
-    "office": "State Capitol Room 225E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 225E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jim_Butler_(West_Virginia_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Jim_Butler_(West_Virginia)"
   },
   {
     "id": "ocd-person/5a2928e1-3371-480d-be6f-1c3133de4609",
@@ -879,7 +1067,9 @@
     "phone": "304-340-3367",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2023/house/willis_jimmy.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Willis",
-    "office": "State Capitol Room 224E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 224E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jimmy_Willis_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Jimmy_Willis"
   },
   {
     "id": "ocd-person/fe6a6b8e-91f2-427f-9060-2cac2b9eb66c",
@@ -893,7 +1083,11 @@
     "phone": "304-340-3265",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2023/house/ellington_joe.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Ellington",
-    "office": "State Capitol Room 246M, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 246M, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "districtOffice": "613 Pigeon Roost Trail, Princeton, WV 24740",
+    "districtPhone": "304-487-6526",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Joe_Ellington",
+    "ballotpediaUrl": "https://ballotpedia.org/Joe_Ellington"
   },
   {
     "id": "ocd-person/c93039e0-7c57-4289-9447-466f56bba802",
@@ -907,7 +1101,9 @@
     "phone": "304-340-3130",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2024/house/funkhouser_joe.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Funkhouser",
-    "office": "State Capitol Room 150R, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 150R, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Joe_Funkhouser",
+    "ballotpediaUrl": "https://ballotpedia.org/Joe_Funkhouser"
   },
   {
     "id": "ocd-person/e2f71bb6-832a-46f3-8247-5e2c16685fe1",
@@ -921,7 +1117,9 @@
     "phone": "304-340-3140",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2025/house/parsons_frederick.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Parsons",
-    "office": "State Capitol Room 230E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 230E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Joe_Parsons_(West_Virginia_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Joe_Parsons_(West_Virginia)"
   },
   {
     "id": "ocd-person/79271821-3d79-4f99-bba3-a147779bb3d0",
@@ -935,7 +1133,11 @@
     "phone": "304-340-3265",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2023/house/statler_joe.jpg",
     "website": "https://www.legis.state.wv.us/House/lawmaker.cfm?member=Delegate+Statler",
-    "office": "State Capitol Room 434M-A, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 434M-A, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "districtOffice": "97 Long Drain Road, Core, WV 26541",
+    "districtPhone": "304-376-7336",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Joe_Statler",
+    "ballotpediaUrl": "https://ballotpedia.org/Joe_Statler"
   },
   {
     "id": "ocd-person/387d11ce-ecf1-4c80-a338-bd8c86f52004",
@@ -949,7 +1151,9 @@
     "phone": "304-357-7961",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2025/senate/garcia_joey.jpg",
     "website": "https://www.legis.state.wv.us/House/lawmaker.cfm?member=Delegate+Garcia",
-    "office": "State Capitol Room 213W, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 213W, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Joey_Garcia",
+    "ballotpediaUrl": "https://ballotpedia.org/Joey_Garcia"
   },
   {
     "id": "ocd-person/642a1eab-3a94-4d91-b1ff-5fc5e720cb06",
@@ -963,7 +1167,11 @@
     "phone": "304-340-3162",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2025/house/jordan_john.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Jordan",
-    "office": "State Capitol Room 206E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 206E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "districtOffice": "WV",
+    "districtPhone": "304-575-2267",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_Jordan_(West_Virginia_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/John_Jordan_(West_Virginia)"
   },
   {
     "id": "ocd-person/06c041be-0a45-4bfe-8e2d-49055af1205f",
@@ -977,7 +1185,11 @@
     "phone": "304-340-3399",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2021/house/hott_john.jpg",
     "website": "https://www.legis.state.wv.us/House/lawmaker.cfm?member=Delegate+Hott",
-    "office": "State Capitol Room 150R-A, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 150R-A, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "districtOffice": "207 N. Main St., Petersburg, WV 26847",
+    "districtPhone": "304-257-4494",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_Paul_Hott",
+    "ballotpediaUrl": "https://ballotpedia.org/John_Paul_Hott_II"
   },
   {
     "id": "ocd-person/2c8a36d4-5afa-4b68-a6a0-1a9b170401b0",
@@ -991,7 +1203,10 @@
     "phone": "304-340-3173",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2021/house/williams_john.jpg",
     "website": "https://www.legis.state.wv.us/House/lawmaker.cfm?member=Delegate+Williams",
-    "office": "State Capitol Room 4R, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 4R, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "districtOffice": "1462 Lakeland Ave., Morgantown, WV 26505",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_Williams_(West_Virginia_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/John_Williams_(West_Virginia)"
   },
   {
     "id": "ocd-person/e83c168f-6725-47ea-ac8d-7dbadc6736c7",
@@ -1005,7 +1220,9 @@
     "phone": "304-340-3178",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2025/house/kyle_jonathan.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Kyle",
-    "office": "State Capitol Room 231E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 231E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jonathan_Kyle",
+    "ballotpediaUrl": "https://ballotpedia.org/Jonathan_B._Kyle"
   },
   {
     "id": "ocd-person/a71cd621-aa1e-4338-b0bd-ca9f7a03f667",
@@ -1019,7 +1236,9 @@
     "phone": "304-340-3146",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2024/house/pinson_jonathan.jpg",
     "website": "https://www.legis.state.wv.us/House/lawmaker.cfm?member=Delegate+Pinson",
-    "office": "State Capitol Room 219E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 219E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jonathan_Pinson",
+    "ballotpediaUrl": "https://ballotpedia.org/Jonathan_Pinson"
   },
   {
     "id": "ocd-person/be682c29-e66f-4a19-89cc-761c60330eea",
@@ -1033,7 +1252,9 @@
     "phone": "304-340-3297",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2021/house/bridges_jordan.jpg",
     "website": "https://www.legis.state.wv.us/House/lawmaker.cfm?member=Delegate+Bridges",
-    "office": "State Capitol Room 212E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 212E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jordan_Bridges_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Jordan_Bridges_(West_Virginia)"
   },
   {
     "id": "ocd-person/487dd54b-3091-4b0e-b798-0df99523b4c6",
@@ -1047,7 +1268,9 @@
     "phone": "304-340-3164",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2023/house/maynor_jordan.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Maynor",
-    "office": "State Capitol Room 408M, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 408M, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jordan_Maynor",
+    "ballotpediaUrl": "https://ballotpedia.org/Jordan_Maynor"
   },
   {
     "id": "ocd-person/9d8c89be-2ece-4dff-8a6d-65dccb8e647e",
@@ -1061,7 +1284,9 @@
     "phone": "304-340-3184",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2024/house/holstein_josh.jpg",
     "website": "https://www.legis.state.wv.us/House/lawmaker.cfm?member=Delegate+Holstein",
-    "office": "State Capitol Room 222E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 222E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Josh_Holstein",
+    "ballotpediaUrl": "https://ballotpedia.org/Josh_Holstein"
   },
   {
     "id": "ocd-person/0686b8e2-2d6a-4950-b3c3-0dbfe5a6e719",
@@ -1075,7 +1300,11 @@
     "phone": "304-340-3118",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2024/house/crouse_kathie.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Crouse",
-    "office": "State Capitol Room 210E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 210E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "districtOffice": "WV",
+    "districtPhone": "856-528-4355",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kathie_Hess_Crouse",
+    "ballotpediaUrl": "https://ballotpedia.org/Kathie_Hess_Crouse"
   },
   {
     "id": "ocd-person/3317959e-9fbd-40dc-aa7a-0f0a9cc06c3f",
@@ -1089,7 +1318,11 @@
     "phone": "304-340-3362",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2024/house/young_kayla.jpg",
     "website": "https://www.legis.state.wv.us/House/lawmaker.cfm?member=Delegate+Young",
-    "office": "State Capitol Room 6R-A, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 6R-A, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "districtOffice": "WV",
+    "districtPhone": "304-561-4234",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kayla_Young",
+    "ballotpediaUrl": "https://ballotpedia.org/Kayla_Young"
   },
   {
     "id": "ocd-person/13a851e4-7ecb-4609-bd19-3bd4ff7fbc1c",
@@ -1103,7 +1336,11 @@
     "phone": "304-340-3141",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2023/house/marple_keith.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Marple",
-    "office": "State Capitol Room 204E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 204E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "districtOffice": "4069 Johnstown Road, Lost Creek, WV 26385",
+    "districtPhone": "304-622-8492",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Keith_Marple",
+    "ballotpediaUrl": "https://ballotpedia.org/Keith_Marple"
   },
   {
     "id": "ocd-person/bf1213a4-9f13-4c3e-a900-c1722909f8a6",
@@ -1117,21 +1354,9 @@
     "phone": "304-357-7841",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2019/house/bartlett_t.jpg",
     "website": "https://www.wvlegislature.gov/Senate1/lawmaker.cfm?member=Senator%20Bartlett",
-    "office": "State Capitol Room 216W, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
-  },
-  {
-    "id": "ocd-person/17ae499e-4b87-4631-851d-5e55185da510",
-    "name": "Larry Kump",
-    "firstName": "Larry",
-    "lastName": "Kump",
-    "chamber": "lower",
-    "district": "94",
-    "party": "Republican",
-    "email": "larry.kump@wvhouse.gov",
-    "phone": "304-340-3122",
-    "photoUrl": "http://www.wvlegislature.gov/images/members/2019/house/kump_larry.jpg",
-    "website": "https://www.legis.state.wv.us/House/lawmaker.cfm?member=Delegate+Kump",
-    "office": "State Capitol Room MB 68, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 216W, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/T._Kevan_Bartlett",
+    "ballotpediaUrl": "https://ballotpedia.org/T._Kevan_Bartlett"
   },
   {
     "id": "ocd-person/ce1e7053-19d4-4405-8e31-f5c39af87ae9",
@@ -1145,7 +1370,9 @@
     "phone": "304-340-3102",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2025/house/kimble_laura.jpg",
     "website": "https://www.legis.state.wv.us/House/lawmaker.cfm?member=Delegate+Kimble",
-    "office": "State Capitol Room 227E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 227E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Laura_Kimble",
+    "ballotpediaUrl": "https://ballotpedia.org/Laura_Kimble"
   },
   {
     "id": "ocd-person/599fd572-0475-4215-8d43-1474237f5a78",
@@ -1159,7 +1386,9 @@
     "phone": "304-357-7918",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2025/senate/chapman_laura.jpg",
     "website": "https://www.wvlegislature.gov/Senate1/lawmaker.cfm?member=Senator%20Chapman",
-    "office": "State Capitol Room 218W, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 218W, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Laura_Chapman",
+    "ballotpediaUrl": "https://ballotpedia.org/Laura_Wakim_Chapman"
   },
   {
     "id": "ocd-person/7ae7ca12-88dc-4387-a9ee-49295af32fb7",
@@ -1173,7 +1402,9 @@
     "phone": "304-340-3274",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2025/house/white_lisa.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20White",
-    "office": "State Capitol Room 210E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 210E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lisa_White_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Lisa_White"
   },
   {
     "id": "ocd-person/3f45442d-ffd9-4566-a661-42efa25f8e18",
@@ -1187,7 +1418,11 @@
     "phone": "304-340-3142",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2025/house/dittman_lori.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Dittman",
-    "office": "State Capitol Room 209E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 209E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "districtOffice": "WV",
+    "districtPhone": "304-701-8600",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lori_Dittman",
+    "ballotpediaUrl": "https://ballotpedia.org/Lori_Cowger_Dittman"
   },
   {
     "id": "ocd-person/92599af8-32f7-4aa4-bab2-8c7b461f54a5",
@@ -1201,7 +1436,11 @@
     "phone": "304-340-3174",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2025/house/mazzocchi_margitta.jpg",
     "website": "https://www.legis.state.wv.us/House/lawmaker.cfm?member=Delegate+Mazzocchi",
-    "office": "State Capitol Room 227E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 227E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "districtOffice": "WV",
+    "districtPhone": "304-785-1465",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Margitta_Mazzocchi",
+    "ballotpediaUrl": "https://ballotpedia.org/Margitta_Mazzocchi"
   },
   {
     "id": "ocd-person/2461647c-b7dc-4df2-b1b8-6acee9700b7c",
@@ -1215,7 +1454,9 @@
     "phone": "304-340-3304",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2023/house/dean_mark.jpg",
     "website": "https://www.legis.state.wv.us/House/lawmaker.cfm?member=Delegate+Dean",
-    "office": "State Capitol Room 212E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 212E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mark_Dean_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Mark_Dean"
   },
   {
     "id": "ocd-person/e98e90d4-7e6d-47e0-b837-6f5f8b492d9c",
@@ -1229,7 +1470,11 @@
     "phone": "304-357-7808",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2023/senate/maynard_mark.jpg",
     "website": "https://www.wvlegislature.gov/Senate1/lawmaker.cfm?member=Senator%20Maynard",
-    "office": "State Capitol Room 441M, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 441M, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "districtOffice": "WV",
+    "districtPhone": "304-360-6272",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mark_R._Maynard",
+    "ballotpediaUrl": "https://ballotpedia.org/Mark_R._Maynard"
   },
   {
     "id": "ocd-person/af0b8606-3832-40d4-91e2-3b71975e4b8f",
@@ -1243,7 +1488,11 @@
     "phone": "304-340-3101",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2023/house/zatezalo_mark.jpg",
     "website": "https://www.legis.state.wv.us/House/lawmaker.cfm?member=Delegate+Zatezalo",
-    "office": "State Capitol Room 201E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 201E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "districtOffice": "WV",
+    "districtPhone": "304-491-0937",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mark_Zatezalo",
+    "ballotpediaUrl": "https://ballotpedia.org/Mark_Zatezalo"
   },
   {
     "id": "ocd-person/6a8371d3-32ba-4997-9cd4-ad26bafab694",
@@ -1257,7 +1506,11 @@
     "phone": "304-340-3170",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2025/house/clay_marshall.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Clay",
-    "office": "State Capitol Room 233E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 233E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "districtOffice": "1437 Cunard Road, Fayetteville, WV 25840",
+    "districtPhone": "304-860-8859",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Marshall_Clay",
+    "ballotpediaUrl": "https://ballotpedia.org/Marshall_Clay"
   },
   {
     "id": "ocd-person/c56adc82-a476-4d3c-bd7f-51b2257b0032",
@@ -1271,7 +1524,9 @@
     "phone": "304-340-3179",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2021/house/gearheart_marty.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Gearheart",
-    "office": "State Capitol Room 200E-A, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 200E-A, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Marty_Gearheart",
+    "ballotpediaUrl": "https://ballotpedia.org/Marty_Gearheart"
   },
   {
     "id": "ocd-person/074a2aa9-d012-437a-8d59-d3f4b9d73905",
@@ -1285,7 +1540,11 @@
     "phone": "304-340-3221",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2023/house/rohrbach_matthew.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Rohrbach",
-    "office": "State Capitol Room 242M, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 242M, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "districtOffice": "25 Kensington Lane, Huntington, WV 25705",
+    "districtPhone": "304-563-9040",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Matthew_Rohrbach",
+    "ballotpediaUrl": "https://ballotpedia.org/Matthew_Rohrbach"
   },
   {
     "id": "ocd-person/3d5db222-66fb-4f3a-a178-d12246697654",
@@ -1299,7 +1558,9 @@
     "phone": "304-340-3355",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2025/house/amos_michael.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Amos",
-    "office": "State Capitol Room 151R, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 151R, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Michael_Amos_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Michael_Amos"
   },
   {
     "id": "ocd-person/0ef791a3-2e24-4751-8686-21ffac958ce0",
@@ -1313,7 +1574,9 @@
     "phone": "304-340-3269",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2023/house/hite_michael.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Hite",
-    "office": "State Capitol Room 215E-C, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 215E-C, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Michael_Hite",
+    "ballotpediaUrl": "https://ballotpedia.org/Michael_Hite"
   },
   {
     "id": "ocd-person/b76899a3-5189-495c-af2f-9ca8a4e8036e",
@@ -1327,7 +1590,9 @@
     "phone": "304-340-3138",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2025/house/hornby_mike.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Hornby",
-    "office": "State Capitol Room 214E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 214E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Michael_Hornby_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Michael_Hornby"
   },
   {
     "id": "ocd-person/354b56ae-dee4-4536-879e-cfb0d80b4069",
@@ -1341,7 +1606,11 @@
     "phone": "304-340-3171",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2023/house/petitto_mickey.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Petitto",
-    "office": "State Capitol Room 210E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 210E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "districtOffice": "228 E. Main St., Clarksburg, WV 26301",
+    "districtPhone": "304-626-0372",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mickey_Petitto",
+    "ballotpediaUrl": "https://ballotpedia.org/Mickey_Petitto"
   },
   {
     "id": "ocd-person/8fe81e26-b0ce-4349-a3e3-91d25247b980",
@@ -1355,7 +1624,11 @@
     "phone": "304-357-7970",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2025/senate/azinger_michael.jpg",
     "website": "https://www.legis.state.wv.us/Senate1/lawmaker.cfm?member=Senator+Azinger",
-    "office": "State Capitol Room 441M, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 441M, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "districtOffice": "WV",
+    "districtPhone": "304-916-2177",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mike_Azinger",
+    "ballotpediaUrl": "https://ballotpedia.org/Mike_Azinger"
   },
   {
     "id": "ocd-person/c00003a6-3518-496e-b972-fd5aa566d4c4",
@@ -1369,7 +1642,9 @@
     "phone": "304-357-7919",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2023/senate/oliverio_michael.jpg",
     "website": "https://www.wvlegislature.gov/Senate1/lawmaker.cfm?member=Senator%20Oliverio",
-    "office": "State Capitol Room 206W, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 206W, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mike_Oliverio",
+    "ballotpediaUrl": "https://ballotpedia.org/Mike_Oliverio"
   },
   {
     "id": "ocd-person/1a97b137-218f-43cc-a24f-d806c6ac9fd2",
@@ -1383,7 +1658,11 @@
     "phone": "304-340-3106",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2023/house/pushkin_mike.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Pushkin",
-    "office": "State Capitol Room 6U-B, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 6U-B, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "districtOffice": "106 Park Ave., Charleston, WV 25302",
+    "districtPhone": "304-989-6856",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mike_Pushkin",
+    "ballotpediaUrl": "https://ballotpedia.org/Mike_Pushkin"
   },
   {
     "id": "ocd-person/500ddd59-2fb2-406a-869c-2b06f6cc2385",
@@ -1397,7 +1676,11 @@
     "phone": "304-357-7956",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2025/senate/woelfel_michael.jpg",
     "website": "https://www.wvlegislature.gov/Senate1/lawmaker.cfm?member=Senator%20Woelfel",
-    "office": "State Capitol Room 245M, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 245M, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "districtOffice": "WV",
+    "districtPhone": "304-522-6249",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mike_Woelfel",
+    "ballotpediaUrl": "https://ballotpedia.org/Mike_Woelfel"
   },
   {
     "id": "ocd-person/aa7bf09a-ce90-4e58-a893-42c813a16434",
@@ -1411,7 +1694,11 @@
     "phone": "304-340-3220",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2023/house/mcgeehan_pat.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20McGeehan",
-    "office": "State Capitol Room 228M, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 228M, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "districtOffice": "532 River St., Chester, WV 26034",
+    "districtPhone": "304-374-7018",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Pat_McGeehan",
+    "ballotpediaUrl": "https://ballotpedia.org/Patrick_McGeehan"
   },
   {
     "id": "ocd-person/61c66718-ebd4-4ded-827d-14b21ed01b0a",
@@ -1425,7 +1712,11 @@
     "phone": "304-357-7957",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2025/senate/rucker_patricia.jpg",
     "website": "https://www.legis.state.wv.us/Senate1/lawmaker.cfm?member=Senator+Rucker",
-    "office": "State Capitol Room 206W, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 206W, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "districtOffice": "WV",
+    "districtPhone": "304-279-1619",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Patricia_Rucker",
+    "ballotpediaUrl": "https://ballotpedia.org/Patricia_Rucker"
   },
   {
     "id": "ocd-person/9a7c2d4d-002a-439e-b095-e7b86329fc1c",
@@ -1439,7 +1730,9 @@
     "phone": "304-340-3280",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2025/house/lucas_patrick.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Lucas",
-    "office": "State Capitol Room 216E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 216E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Patrick_Lucas",
+    "ballotpediaUrl": "https://ballotpedia.org/Patrick_Lucas"
   },
   {
     "id": "ocd-person/69547a9d-4e96-4ea8-94eb-528e40d5d004",
@@ -1453,7 +1746,9 @@
     "phone": "304-357-7845",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2021/senate/martin_patrick.jpg",
     "website": "https://www.legis.state.wv.us/House/lawmaker.cfm?member=Delegate+Martin",
-    "office": "State Capitol Room 227M, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 227M, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Patrick_S._Martin",
+    "ballotpediaUrl": "https://ballotpedia.org/Patrick_S._Martin"
   },
   {
     "id": "ocd-person/ca7ec436-00a0-447d-8592-00fc7d358571",
@@ -1467,7 +1762,9 @@
     "phone": "304-340-3331",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2021/house/mallow_phil.jpg",
     "website": "https://www.legis.state.wv.us/House/lawmaker.cfm?member=Delegate+Mallow",
-    "office": "State Capitol Room 202E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 202E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Phil_Mallow",
+    "ballotpediaUrl": "https://ballotpedia.org/Phil_Mallow"
   },
   {
     "id": "ocd-person/28321ca7-5b8c-4b1a-9a85-2ae30e52045b",
@@ -1481,7 +1778,9 @@
     "phone": "304-357-7995",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2025/senate/smith_randy.jpg",
     "website": "https://www.legis.state.wv.us/Senate1/lawmaker.cfm?member=Senator+Smith",
-    "office": "State Capitol Room 229M, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 229M, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Randy_Smith_%28politician%29",
+    "ballotpediaUrl": "https://ballotpedia.org/Randy_Smith_(West_Virginia)"
   },
   {
     "id": "ocd-person/639eb22f-b161-4be3-9abc-9cccf4dfdd05",
@@ -1495,7 +1794,11 @@
     "phone": "304-340-3129",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2025/house/canterbury_ray.jpg",
     "website": "https://www.legis.state.wv.us/House/lawmaker.cfm?member=Delegate+Canterbury",
-    "office": "State Capitol Room 229E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 229E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "districtOffice": "2875 Seneca Trail South, Ronceverte, WV 24970",
+    "districtPhone": "304-992-4770",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ray_Canterbury",
+    "ballotpediaUrl": "https://ballotpedia.org/Denny_Canterbury_Jr."
   },
   {
     "id": "ocd-person/cc1fb64b-859b-4009-88b3-2cb23e7e9d9b",
@@ -1509,7 +1812,9 @@
     "phone": "304-340-3124",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2025/house/garcia_rick.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Garcia",
-    "office": "State Capitol Room 6R, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 6R, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rick_Garcia",
+    "ballotpediaUrl": "https://ballotpedia.org/Rick_Garcia_(West_Virginia)"
   },
   {
     "id": "ocd-person/5e9dad08-2267-4354-b695-814e1014a0ec",
@@ -1523,7 +1828,10 @@
     "phone": "304-340-3176",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2024/house/hillenbrand_rick.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Hillenbrand",
-    "office": "State Capitol Room 218E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 218E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "districtOffice": "3524 Middle Ridge Road, Romney, WV 26757",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rick_Hillenbrand",
+    "ballotpediaUrl": "https://ballotpedia.org/Rick_Hillenbrand"
   },
   {
     "id": "ocd-person/86c70f70-4fc9-43f3-bd70-632d3a8f023b",
@@ -1537,7 +1845,9 @@
     "phone": "304-357-7973",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2025/senate/morris_robbie.jpg",
     "website": "https://www.wvlegislature.gov/Senate1/lawmaker.cfm?member=Senator%20Morris",
-    "office": "State Capitol Room 214W, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 214W, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Robbie_Morris_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Robbie_Morris"
   },
   {
     "id": "ocd-person/a5fb80fa-41db-4bb7-8d0c-9f643b029b86",
@@ -1551,7 +1861,9 @@
     "phone": "304-340-3210",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2021/house/hanshaw_roger.jpg",
     "website": "https://www.legis.state.wv.us/House/lawmaker.cfm?member=Speaker+Hanshaw",
-    "office": "State Capitol Room 228M, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 228M, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Roger_Hanshaw",
+    "ballotpediaUrl": "https://ballotpedia.org/Roger_Hanshaw"
   },
   {
     "id": "ocd-person/e0166da1-e7d4-42ed-bf99-fe2a9cd3e82e",
@@ -1565,7 +1877,11 @@
     "phone": "304-357-7831",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2023/senate/roberts_rollan.jpg",
     "website": "https://www.legis.state.wv.us/Senate1/lawmaker.cfm?member=Senator+Roberts",
-    "office": "State Capitol Room 229W, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 229W, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "districtOffice": "WV",
+    "districtPhone": "681-238-1779",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rollan_Roberts",
+    "ballotpediaUrl": "https://ballotpedia.org/Rollan_Roberts_(West_Virginia)"
   },
   {
     "id": "ocd-person/f7a82cd3-d2c6-4f57-b0d0-d38322d1ad54",
@@ -1579,7 +1895,11 @@
     "phone": "304-340-3119",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2024/house/cooper_roy.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Cooper",
-    "office": "State Capitol Room 203E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 203E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "districtOffice": "31 Pam's Way, Wayside, WV 24985",
+    "districtPhone": "304-466-5523",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Roy_Cooper_(West_Virginia_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Roy_G._Cooper"
   },
   {
     "id": "ocd-person/c1187148-471e-4bdc-acf5-16fa0d5d998e",
@@ -1593,7 +1913,9 @@
     "phone": "304-357-7857",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2021/senate/phillips_rupie.jpg",
     "website": "https://www.legis.state.wv.us/Senate1/lawmaker.cfm?member=Senator+Phillips",
-    "office": "State Capitol Room 217W, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 217W, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rupie_Phillips",
+    "ballotpediaUrl": "https://ballotpedia.org/Rupert_Phillips_Jr."
   },
   {
     "id": "ocd-person/c95f5292-14c3-4e79-8465-05cca13242b6",
@@ -1607,7 +1929,9 @@
     "phone": "304-340-3126",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2024/house/browning_ryan.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Browning",
-    "office": "State Capitol Room 231E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 231E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ryan_Browning",
+    "ballotpediaUrl": "https://ballotpedia.org/Ryan_Browning"
   },
   {
     "id": "ocd-person/680aa2ce-6408-4047-a36b-0b3badc82851",
@@ -1620,8 +1944,10 @@
     "email": "ryan.weld@wvsenate.gov",
     "phone": "304-357-7984",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2021/senate/weld_ryan.jpg",
-    "website": "https://www.legis.state.wv.us/Senate1/lawmaker.cfm?member=Senator+Weld",
-    "office": "State Capitol Room 216W, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "website": "https://ryanweld.com/",
+    "office": "State Capitol Room 216W, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ryan_Weld",
+    "ballotpediaUrl": "https://ballotpedia.org/Ryan_Weld"
   },
   {
     "id": "ocd-person/003871b4-bf51-4bba-bacc-bf1ead7a9947",
@@ -1635,7 +1961,9 @@
     "phone": "304-340-3121",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2025/house/drennan_sarah.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Drennan",
-    "office": "State Capitol Room 209E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 209E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sarah_Drennan",
+    "ballotpediaUrl": "https://ballotpedia.org/Sarah_Drennan"
   },
   {
     "id": "ocd-person/5cd39fcf-7682-4cb0-8ac3-f7c4816f950d",
@@ -1649,7 +1977,9 @@
     "phone": "304-340-3394",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2023/house/heckert_scot.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Heckert",
-    "office": "State Capitol Room 223E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 223E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Scot_Heckert",
+    "ballotpediaUrl": "https://ballotpedia.org/Scot_Heckert"
   },
   {
     "id": "ocd-person/7a94bf35-24ea-49ba-bf09-b53c1465ffa7",
@@ -1663,7 +1993,9 @@
     "phone": "304-357-7937",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2025/senate/fuller_scott.jpg",
     "website": "https://www.wvlegislature.gov/Senate1/lawmaker.cfm?member=Senator%20Fuller",
-    "office": "State Capitol Room 218W, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 218W, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Scott_Fuller",
+    "ballotpediaUrl": "https://ballotpedia.org/Scott_Fuller_(West_Virginia)"
   },
   {
     "id": "ocd-person/916ee127-a228-4dac-b945-312a5f76121a",
@@ -1677,7 +2009,26 @@
     "phone": "304-340-3395",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2023/house/hornbuckle_sean.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Hornbuckle",
-    "office": "State Capitol Room 260M, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 260M, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sean_Hornbuckle",
+    "ballotpediaUrl": "https://ballotpedia.org/Sean_Hornbuckle"
+  },
+  {
+    "id": "ocd-person/290eeecf-40a3-4418-a80d-15a61b809607",
+    "name": "Shane Stack",
+    "firstName": "Shane",
+    "lastName": "Stack",
+    "chamber": "lower",
+    "district": "4",
+    "party": "Republican",
+    "email": "shane.stack@wvhouse.gov",
+    "phone": "304-340-3378",
+    "photoUrl": "https://www.wvlegislature.gov/images/members/2025/house/stack_shane.jpg",
+    "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Stack",
+    "office": "State Capitol Room 150R, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "districtOffice": "WV",
+    "districtPhone": "740-391-5386",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Shane_Stack"
   },
   {
     "id": "ocd-person/bd0e9ba2-fe37-4251-96f2-44715a186750",
@@ -1689,9 +2040,13 @@
     "party": "Democratic",
     "email": "shawn.fluharty@wvhouse.gov",
     "phone": "304-340-3270",
-    "photoUrl": "http://www.wvlegislature.gov/images/members/2023/house/fluharty_shawn.jpg",
+    "photoUrl": "https://house.wvlegislature.gov/images/delegates/H-517-Shawn-Fluharty.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Fluharty",
-    "office": "State Capitol Room 258M, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 258M, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "districtOffice": "42 Walnut Ave., Wheeling, WV 26003",
+    "districtPhone": "304-281-8195",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Shawn_Fluharty",
+    "ballotpediaUrl": "https://ballotpedia.org/Shawn_Fluharty"
   },
   {
     "id": "ocd-person/4b7f8925-344a-4ce2-b70c-76bb9127c4fa",
@@ -1705,7 +2060,10 @@
     "phone": "304-340-3352",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2025/house/adkins_stanley.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Adkins",
-    "office": "State Capitol Room 230E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 230E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "districtOffice": "609 Vaught St., Summersville, WV 26651",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Stanley_Adkins_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Stanley_Adkins"
   },
   {
     "id": "ocd-person/c6a91d2b-9230-4d3e-a3d0-c3844ad9e985",
@@ -1719,7 +2077,9 @@
     "phone": "304-357-7990",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2021/senate/takubo_tom.jpg",
     "website": "https://www.wvlegislature.gov/Senate1/lawmaker.cfm?member=Senator%20Takubo",
-    "office": "State Capitol Room 203W, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 203W, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tom_Takubo",
+    "ballotpediaUrl": "https://ballotpedia.org/Tom_Takubo"
   },
   {
     "id": "ocd-person/da86ac6a-5d19-472e-80a0-8b8595cb3054",
@@ -1733,7 +2093,11 @@
     "phone": "304-357-7867",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2025/senate/willis_tom.jpg",
     "website": "https://www.wvlegislature.gov/Senate1/lawmaker.cfm?member=Senator%20Willis",
-    "office": "State Capitol Room 210W, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 210W, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "districtOffice": "WV",
+    "districtPhone": "304-261-0169",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tom_Willis_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Tom_Willis_(West_Virginia)"
   },
   {
     "id": "ocd-person/4a909c49-37c6-4105-ac77-afe4745a1b1b",
@@ -1746,8 +2110,10 @@
     "email": "trenton.barnhart@wvsenate.gov",
     "phone": "304-357-7905",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2023/house/barnhart_trenton.jpg",
-    "website": "https://www.legis.state.wv.us/House/lawmaker.cfm?member=Delegate+Barnhart",
-    "office": "State Capitol Room 223W, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "website": "https://www.wvlegislature.gov/Senate1/lawmaker.cfm?member=Senator%20Barnhart",
+    "office": "State Capitol Room 223W, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Trenton_Barnhart",
+    "ballotpediaUrl": "https://ballotpedia.org/Trenton_Barnhart"
   },
   {
     "id": "ocd-person/a6ad12cd-7040-4cf0-83b5-9de1fd835fa8",
@@ -1761,7 +2127,11 @@
     "phone": "304-340-3287",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2025/house/howell_tresa.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Howell,%20T.",
-    "office": "State Capitol Room 227E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 227E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "districtOffice": "WV",
+    "districtPhone": "304-400-2700",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tresa_Howell",
+    "ballotpediaUrl": "https://ballotpedia.org/Tresa_Howell"
   },
   {
     "id": "ocd-person/8b2ff1b1-618d-47c4-8b20-8388c53eb412",
@@ -1775,7 +2145,9 @@
     "phone": "304-340-3156",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2025/house/leavitt_tristan.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Leavitt",
-    "office": "State Capitol Room 150R-A, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 150R-A, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tristan_Leavitt",
+    "ballotpediaUrl": "https://ballotpedia.org/Tristan_Leavitt"
   },
   {
     "id": "ocd-person/381e0784-9202-4308-a138-399c84740804",
@@ -1789,7 +2161,9 @@
     "phone": "304-340-3230",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2025/house/criss_vernon.jpg",
     "website": "https://www.legis.state.wv.us/House/lawmaker.cfm?member=Delegate+Criss",
-    "office": "State Capitol Room 462M, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 462M, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Vernon_Criss",
+    "ballotpediaUrl": "https://ballotpedia.org/Vernon_Criss"
   },
   {
     "id": "ocd-person/147a2b54-846b-4fec-b394-be4b50827f5f",
@@ -1803,7 +2177,11 @@
     "phone": "304-357-7959",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2023/senate/deeds_vince.jpg",
     "website": "https://www.wvlegislature.gov/Senate1/lawmaker.cfm?member=Senator%20Deeds",
-    "office": "State Capitol Room 200W, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 200W, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "districtOffice": "WV",
+    "districtPhone": "304-992-9305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Vince_Deeds",
+    "ballotpediaUrl": "https://ballotpedia.org/Vince_Deeds"
   },
   {
     "id": "ocd-person/542b49b1-72ed-4e96-98bf-e7c236b92e12",
@@ -1817,7 +2195,9 @@
     "phone": "304-340-3181",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2023/house/hall_walter.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Hall",
-    "office": "State Capitol Room 218E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 218E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Walter_Hall_(American_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Walter_Hall"
   },
   {
     "id": "ocd-person/de66a26a-0d5d-44d4-a687-58cffa1a2512",
@@ -1831,7 +2211,10 @@
     "phone": "304-340-3366",
     "photoUrl": "https://www.wvlegislature.gov/images/members/2025/house/clark_wayne.jpg",
     "website": "https://www.legis.state.wv.us/House/lawmaker.cfm?member=Delegate+Clark",
-    "office": "State Capitol Room 216E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 216E, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "districtOffice": "397 Davis St., Charles Town, WV 25414",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Wayne_Clark_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Wayne_Clark_(West_Virginia)"
   },
   {
     "id": "ocd-person/b5b3734c-fa9f-422b-b0d4-ce8b2b2624c5",
@@ -1845,7 +2228,11 @@
     "phone": "304-340-3101",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2022/house/anderson_bill.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Anderson",
-    "office": "State Capitol Room 200E-C, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305"
+    "office": "State Capitol Room 200E-C, Complex, Building 1 1900 Kanawha Blvd. East, Charleston, WV 25305",
+    "districtOffice": "1011 Highland Ave., Williamstown, WV 26187",
+    "districtPhone": "304-481-4129",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bill_Anderson_(West_Virginia_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Everette_Anderson"
   },
   {
     "id": "ocd-person/1039d280-ca07-4923-a501-408c5f7703dc",
@@ -1859,6 +2246,8 @@
     "phone": "304-357-7939",
     "photoUrl": "http://www.wvlegislature.gov/images/members/2021/house/maynard_zack.jpg",
     "website": "https://www.wvlegislature.gov/House/lawmaker.cfm?member=Delegate%20Maynard",
-    "office": "State Capitol Room 204W, Complex Building 1, Charleston, WV 25305"
+    "office": "State Capitol Room 204W, Complex Building 1, Charleston, WV 25305",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Zack_Maynard",
+    "ballotpediaUrl": "https://ballotpedia.org/Zack_Maynard"
   }
 ]

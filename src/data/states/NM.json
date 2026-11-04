@@ -11,21 +11,10 @@
     "phone": "505-986-4758",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HMAAL.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HMAAL",
-    "office": "State Capitol Room 125B, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
-  },
-  {
-    "id": "ocd-person/c4caca3c-faa3-445f-91e0-cce9edd53a5a",
-    "name": "Andi Reeb",
-    "firstName": "Andi",
-    "lastName": "Reeb",
-    "chamber": "lower",
-    "district": "64",
-    "party": "Republican",
-    "email": "andrea.reeb@nmlegis.gov",
-    "phone": "505-986-4215",
-    "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HREEB.jpg",
-    "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HREEB",
-    "office": "State Capitol Room 201A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 125B, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "districtOffice": "4132 Jackie Road SE, Rio Rancho, NM 87124",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Alan_Martinez",
+    "ballotpediaUrl": "https://ballotpedia.org/Alan_Martinez_(New_Mexico)"
   },
   {
     "id": "ocd-person/ed0ba54a-4fc3-4c50-aa0d-f74b1f0e86f6",
@@ -39,7 +28,11 @@
     "phone": "505-986-4344",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HROAN.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HROAN",
-    "office": "State Capitol Room 312A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 312A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Andrea_Romero",
+    "ballotpediaUrl": "https://ballotpedia.org/Andrea_Romero",
+    "twitter": "aromero_nm",
+    "facebook": "andrearomeronm46"
   },
   {
     "id": "ocd-person/948ee9a0-a718-46f1-a1fe-35eb97f01fad",
@@ -53,7 +46,8 @@
     "phone": "505-986-4513",
     "photoUrl": "https://images.squarespace-cdn.com/content/v1/65a92fa05202ee2b13428333/630e642f-dfc6-48c0-930b-c25b16d80e76/Headshot.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=SCHAR",
-    "office": "State Capitol Room 416D, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 416D, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "ballotpediaUrl": "https://ballotpedia.org/Angel_Charley"
   },
   {
     "id": "ocd-person/ea2a9403-248c-4474-aea0-47b45265e0be",
@@ -67,7 +61,11 @@
     "phone": "505-986-4210",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HRUBI.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HRUBI",
-    "office": "State Capitol Room 204B, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 204B, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Angelica_Rubio",
+    "ballotpediaUrl": "https://ballotpedia.org/Angelica_Rubio",
+    "twitter": "anrubio",
+    "facebook": "RubioNM35"
   },
   {
     "id": "ocd-person/75986bbd-3629-4520-a770-f86c46f423ab",
@@ -81,7 +79,11 @@
     "phone": "505-986-4467",
     "photoUrl": "https://bloximages.newyork1.vip.townnews.com/rdrnews.com/content/tncms/assets/v3/editorial/5/0f/50f20b06-de3c-11ee-8fb3-1b97c5eaf40c/65ec9fd35dc59.image.jpg?resize=457%2C500",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HMEAN",
-    "office": "Room 203F, New Mexico Capitol Annex 325 Don Gaspar Ave., Santa Fe, NM 87501"
+    "office": "Room 203F, New Mexico Capitol Annex 325 Don Gaspar Ave., Santa Fe, NM 87501",
+    "districtOffice": "1600 SE Main St. Suite G, Roswell, NM 88203",
+    "districtPhone": "575-347-1778",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Angelita_Mejia",
+    "ballotpediaUrl": "https://ballotpedia.org/Angelita_Mejia"
   },
   {
     "id": "ocd-person/ee127909-55b5-4854-b3c6-2e45e19b7156",
@@ -95,7 +97,9 @@
     "phone": "505-986-4255",
     "photoUrl": "https://anita4newmexico.com/wp-content/uploads/2024/02/Anita-ABOUT.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HGOAN",
-    "office": "Room 203AN, New Mexico Capitol Annex 325 Don Gaspar Ave., Santa Fe, NM 87501"
+    "office": "Room 203AN, New Mexico Capitol Annex 325 Don Gaspar Ave., Santa Fe, NM 87501",
+    "districtOffice": "500 Douglas Ave., Las Vegas, NM 87701",
+    "ballotpediaUrl": "https://ballotpedia.org/Anita_Gonzales"
   },
   {
     "id": "ocd-person/02d806fd-fb8f-4d66-b9b8-6dacd2bd9656",
@@ -109,7 +113,9 @@
     "phone": "505-986-4274",
     "photoUrl": "https://antthorntonfornm.com/wp-content/uploads/2024/02/Ant-Thornton-768x768.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=STHOR",
-    "office": "State Capitol Room 415E, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 415E, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "districtOffice": "12165 N. Highway 14 Unit B-10, Cedar Crest, NM 87008",
+    "ballotpediaUrl": "https://ballotpedia.org/Anthony_L._Thornton"
   },
   {
     "id": "ocd-person/3dcac810-1d9b-4a4d-9e82-8b6e49eba735",
@@ -123,7 +129,11 @@
     "phone": "505-986-4389",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/Senate/SSEDI.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=SSEDI",
-    "office": "State Capitol Room 218B, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 218B, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Antoinette_Sedillo_Lopez",
+    "ballotpediaUrl": "https://ballotpedia.org/Antoinette_Sedillo_Lopez",
+    "twitter": "asl4justice4all",
+    "facebook": "NMStateSenatorAntoinetteSedilloLopezNMSD16"
   },
   {
     "id": "ocd-person/2913173a-2bfe-4474-8bdc-d145f868c4de",
@@ -137,7 +147,11 @@
     "phone": "505-986-4373",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/Senate/SMAEM.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=SMAEM",
-    "office": "State Capitol Room 300C, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 300C, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Moe_Maestas",
+    "ballotpediaUrl": "https://ballotpedia.org/Antonio_Maestas",
+    "twitter": "RepMoe",
+    "facebook": "repmoe"
   },
   {
     "id": "ocd-person/057c7d79-a168-4b7b-ae96-66cf41e4f115",
@@ -151,7 +165,9 @@
     "phone": "505-986-4333",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HDELA.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HDELA",
-    "office": "State Capitol Room 327A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 327A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Art_De_La_Cruz",
+    "ballotpediaUrl": "https://ballotpedia.org/Art_De_La_Cruz"
   },
   {
     "id": "ocd-person/145aba4a-89ba-4c17-b1ec-2f4b568f5048",
@@ -165,7 +181,11 @@
     "phone": "505-986-4264",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/Senate/SSHEN.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=SSHEN",
-    "office": "State Capitol Room 325A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 325A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "districtOffice": "139-G Bear Head Canyon, Jemez Pueblo, NM 87024",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Benny_Shendo",
+    "ballotpediaUrl": "https://ballotpedia.org/Benny_Shendo",
+    "facebook": "BennyShendoforNMSenate"
   },
   {
     "id": "ocd-person/e0e4fcc9-1e0c-49f8-894d-223c863d61f8",
@@ -177,8 +197,10 @@
     "party": "Republican",
     "email": "bill.hall@nmlegis.gov",
     "phone": "505-986-4336",
+    "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HHABI.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HHABI",
-    "office": "Room 203DN, New Mexico Capitol Annex 325 Don Gaspar Ave., Santa Fe, NM 87501"
+    "office": "Room 203DN, New Mexico Capitol Annex 325 Don Gaspar Ave., Santa Fe, NM 87501",
+    "ballotpediaUrl": "https://ballotpedia.org/Bill_Hall_(New_Mexico)"
   },
   {
     "id": "ocd-person/05f3609c-c2a6-42fc-bf6a-5141f8050ff8",
@@ -192,7 +214,10 @@
     "phone": "505-986-4221",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HBACB.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HBACB",
-    "office": "State Capitol Room 202A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 202A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "districtOffice": "101 Courthouse Road SE, Los Lunas, NM 87031",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Brian_Baca",
+    "ballotpediaUrl": "https://ballotpedia.org/Brian_Baca"
   },
   {
     "id": "ocd-person/46464f19-1bda-489f-93cf-3772d0445407",
@@ -204,9 +229,13 @@
     "party": "Republican",
     "email": "csecows@aol.com",
     "phone": "505-986-4381",
-    "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HEZZE.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HEZZE",
-    "office": "State Capitol Room 415H, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 415H, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "districtOffice": "1600 SE Main St. Suite G, Roswell, NM 88203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Candy_Ezzell",
+    "ballotpediaUrl": "https://ballotpedia.org/Candy_Spence_Ezzell",
+    "twitter": "candyezzell",
+    "facebook": "candy.ezzell"
   },
   {
     "id": "ocd-person/83df260f-2110-4d39-8e19-6a2edc33491d",
@@ -220,7 +249,9 @@
     "phone": "505-986-4310",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/Senate/SHAMB.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=SHAMB",
-    "office": "State Capitol Room 323A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 323A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Carrie_Hamblen",
+    "ballotpediaUrl": "https://ballotpedia.org/Carrie_Hamblen"
   },
   {
     "id": "ocd-person/35f36593-4252-4205-b123-cc7236e96954",
@@ -234,7 +265,10 @@
     "phone": "505-986-4226",
     "photoUrl": "https://cullen4nm.com/wp-content/plugins/phastpress/phast.php/c2VydmljZT1pbWFnZXMmc3JjPWh0dHBzJTNBJTJGJTJGY3VsbGVuNG5tLmNvbSUyRndwLWNvbnRlbnQlMkZ1cGxvYWRzJTJGMjAyNCUyRjA3JTJGSU1HXzMyMjguanBnJmNhY2hlTWFya2VyPTE3MzAxNTM0NzYtMTUyNzQyJnRva2VuPTU0MDM0MzcxMmJiYWYyZmY.q.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HCUCA",
-    "office": "State Capitol Room 203B, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 203B, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "districtOffice": "4132 Jackie Road SE, Rio Rancho, NM 87124",
+    "districtPhone": "505-710-4462",
+    "ballotpediaUrl": "https://ballotpedia.org/Catherine_Cullen"
   },
   {
     "id": "ocd-person/8b51e39c-5f4c-48dd-affd-b97c6062d87e",
@@ -248,7 +282,12 @@
     "phone": "505-986-4227",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HBROW.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HBROW",
-    "office": "State Capitol Room 203A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 203A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "districtOffice": "102 Canal St., Carlsbad, NM 88220",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Cathrynn_Brown",
+    "ballotpediaUrl": "https://ballotpedia.org/Cathrynn_Brown",
+    "twitter": "cathrynnbrown",
+    "facebook": "RepCathrynnBrown"
   },
   {
     "id": "ocd-person/052e06cd-7f58-4c3c-8640-be1d8842a19b",
@@ -262,7 +301,10 @@
     "phone": "505-986-4432",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HLITC.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HLITC",
-    "office": "State Capitol Room 413F, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 413F, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "districtOffice": "Room 109B, 10549 Universe Blvd. NW, Albuquerque, NM 87114",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Charlotte_Little",
+    "ballotpediaUrl": "https://ballotpedia.org/Charlotte_Little"
   },
   {
     "id": "ocd-person/6ecab682-9ccf-4777-940d-afa418b601b8",
@@ -276,7 +318,11 @@
     "phone": "505-986-4411",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HCHAN.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HCHAN",
-    "office": "State Capitol Room 308A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 308A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Christine_Chandler",
+    "ballotpediaUrl": "https://ballotpedia.org/Christine_Chandler",
+    "twitter": "Christine4nm",
+    "facebook": "Christine4NM"
   },
   {
     "id": "ocd-person/631f715e-754c-4410-a967-1e5a928ae971",
@@ -287,10 +333,13 @@
     "district": "9",
     "party": "Democratic",
     "email": "cindy.nava@nmlegis.gov",
-    "phone": "505-986-4365",
+    "phone": "505-986-4736",
     "photoUrl": "https://s3.amazonaws.com/cms.ipressroom.com/175/files/20187/5b883c6f2cfac267c6377417_Cindy+Nava+1/Cindy+Nava+1_mid.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=SNACI",
-    "office": "State Capitol Room 416E, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 120A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "districtOffice": "282 S. Camino Del Pueblo Suite 2B, Bernalillo, NM 87004",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Cindy_Nava",
+    "ballotpediaUrl": "https://ballotpedia.org/Cindy_Nava"
   },
   {
     "id": "ocd-person/365e015d-5011-4126-8b07-0b0f90a949c7",
@@ -304,7 +353,12 @@
     "phone": "505-986-4703",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/Senate/SBRAN.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=SBRAN",
-    "office": "State Capitol Room 414D, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 414D, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "districtOffice": "4132 Jackie Road SE, Rio Rancho, NM 87124",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Craig_Brandt",
+    "ballotpediaUrl": "https://ballotpedia.org/Craig_Brandt",
+    "twitter": "Craig4NM",
+    "facebook": "craig.brandt.31"
   },
   {
     "id": "ocd-person/8819e763-061e-4f30-9828-af635428b41a",
@@ -318,7 +372,10 @@
     "phone": "505-986-4436",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HPARA.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HPARA",
-    "office": "State Capitol Room 413C, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 413C, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "districtOffice": "3214 Purdue Place NE, Albuquerque, NM 87106",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Cristina_Paraj%C3%B3n",
+    "ballotpediaUrl": "https://ballotpedia.org/Cristina_Paraj%C3%B3n"
   },
   {
     "id": "ocd-person/1ed6a003-54c1-4da3-b297-0cec8ddf4882",
@@ -330,9 +387,10 @@
     "party": "Republican",
     "email": "crystal.diamond@nmlegis.gov",
     "phone": "505-986-4369",
-    "photoUrl": "https://www.nmlegis.gov/Images/Legislators/Senate/SDIAM.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=SDIAM",
-    "office": "State Capitol Room 414C, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 414C, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Crystal_Diamond",
+    "ballotpediaUrl": "https://ballotpedia.org/Crystal_Diamond_Brantley"
   },
   {
     "id": "ocd-person/2e2ecadf-7236-48c5-8145-e7fea6fcd393",
@@ -346,7 +404,9 @@
     "phone": "505-986-4236",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HBORR.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HBORR",
-    "office": "State Capitol Room 413E, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 413E, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Cynthia_Borrego",
+    "ballotpediaUrl": "https://ballotpedia.org/Cynthia_Borrego"
   },
   {
     "id": "ocd-person/69fcccf7-9cfb-4c8f-978a-c85fbd55922d",
@@ -360,7 +420,10 @@
     "phone": "505-986-4433",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HJOHD.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HJOHD",
-    "office": "State Capitol Room 413D, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 413D, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Doreen_Wonda_Johnson",
+    "ballotpediaUrl": "https://ballotpedia.org/D._Wonda_Johnson",
+    "facebook": "DoreenWondaJohnson"
   },
   {
     "id": "ocd-person/9d5296b7-b8b1-40c8-a8ce-246f719b8ff0",
@@ -374,7 +437,11 @@
     "phone": "505-986-4877",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/Senate/SGADM.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=SGADM",
-    "office": "State Capitol Room 109B, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 109B, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "districtOffice": "200 E. Broadway St., Hobbs, NM 88240",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/David_Gallegos",
+    "ballotpediaUrl": "https://ballotpedia.org/David_M._Gallegos",
+    "twitter": "gallegos4nm"
   },
   {
     "id": "ocd-person/124f1c82-12f1-45ab-b21e-67cc4a529d18",
@@ -388,7 +455,13 @@
     "phone": "505-986-4777",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HHOCH.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HHOCH",
-    "office": "State Capitol Room 134C, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 134C, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "districtOffice": "6718 Rio Grande Blvd. NW, Los Ranchos De Albuquerque, NM 87107",
+    "districtPhone": "505-633-8101",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dayan_Hochman-Vigil",
+    "ballotpediaUrl": "https://ballotpedia.org/Dayan_Hochman-Vigil",
+    "twitter": "dayhochmanvigil",
+    "facebook": "DayHochmanVigil"
   },
   {
     "id": "ocd-person/e347c564-d1f5-4fb8-a24d-47218fa754e7",
@@ -402,7 +475,9 @@
     "phone": "505-986-4306",
     "photoUrl": "https://www.naco.org/sites/default/files/styles/349x333/public/PIC_OMalley%2C%20Debbie.webp",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=SOMAL",
-    "office": "State Capitol Room 218C, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 218C, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "districtOffice": "4904 4th St. NW, Albuquerque, NM 87107",
+    "ballotpediaUrl": "https://ballotpedia.org/Debbie_O%27Malley"
   },
   {
     "id": "ocd-person/8cb27ec7-dc78-49b1-bc3f-18ad2beb76b6",
@@ -416,7 +491,12 @@
     "phone": "505-986-4438",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HSARI.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HSARI",
-    "office": "State Capitol Room 413B, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 413B, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "districtOffice": "11300 Lomas Blvd. NE Suite 34, Albuquerque, NM 87112",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Debra_M._Sari%C3%B1ana",
+    "ballotpediaUrl": "https://ballotpedia.org/Debra_Marie_Sarinana",
+    "twitter": "SarinanaDebbie",
+    "facebook": "debsarinana"
   },
   {
     "id": "ocd-person/0421351b-6a8c-4731-bf93-5029d6b4feab",
@@ -430,7 +510,10 @@
     "phone": "505-986-4420",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HLENT.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HLENT",
-    "office": "State Capitol Room 316B, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 316B, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Derrick_Lente",
+    "ballotpediaUrl": "https://ballotpedia.org/Derrick_J._Lente",
+    "facebook": "derrickjlentefornmhousedistrict65"
   },
   {
     "id": "ocd-person/c8e6de13-632b-4e09-8d1f-ff8ab2431acc",
@@ -444,7 +527,9 @@
     "phone": "505-986-4255",
     "photoUrl": "https://static.wixstatic.com/media/4db618_2eb9e70e0469459fa20a1b6a172d7f67~mv2.jpg/v1/fill/w_200,h_200,fp_0.47_0.36,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/image000000.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HTOLE",
-    "office": "Room 203A, New Mexico Capitol Annex 325 Don Gaspar Ave., Santa Fe, NM 87501"
+    "office": "Room 203A, New Mexico Capitol Annex 325 Don Gaspar Ave., Santa Fe, NM 87501",
+    "districtOffice": "1930 Juan Tabo Blvd. NE, Albuquerque, NM 87112",
+    "ballotpediaUrl": "https://ballotpedia.org/Elizabeth_Torres-Velasquez"
   },
   {
     "id": "ocd-person/6563f869-64f5-42fb-9707-263fee6f59dc",
@@ -458,7 +543,11 @@
     "phone": "505-986-4329",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HGADO.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HGADO",
-    "office": "State Capitol Room 306A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 306A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Doreen_Gallegos",
+    "ballotpediaUrl": "https://ballotpedia.org/Doreen_Y._Gallegos",
+    "twitter": "doreen4staterep",
+    "facebook": "doreen.gallegos.9"
   },
   {
     "id": "ocd-person/810e1619-ebae-4139-be1e-778e252a09b0",
@@ -472,7 +561,9 @@
     "phone": "505-986-4450",
     "photoUrl": "https://images.squarespace-cdn.com/content/v1/6101dbe38853cb26aaf1d169/482eeab7-b7c0-4dfc-bc83-1b4ecc0e66b4/945A8275-Edit.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HSEEL",
-    "office": "Room 203G, New Mexico Capitol Annex 325 Don Gaspar Ave., Santa Fe, NM 87501"
+    "office": "Room 203G, New Mexico Capitol Annex 325 Don Gaspar Ave., Santa Fe, NM 87501",
+    "districtOffice": "200 E. Broadway St., Hobbs, NM 88240",
+    "ballotpediaUrl": "https://ballotpedia.org/Elaine_Sena_Cortez"
   },
   {
     "id": "ocd-person/19ad7971-bfe4-49e2-bc0f-c5416df1f241",
@@ -486,7 +577,11 @@
     "phone": "505-986-4242",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HCHAL.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HCHAL",
-    "office": "State Capitol Room 205B, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 205B, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "districtOffice": "201 Unser Blvd. NW Unit 116, Albuquerque, NM 87121",
+    "districtPhone": "505-986-4247",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Eleanor_Chavez",
+    "ballotpediaUrl": "https://ballotpedia.org/Eleanor_Chavez"
   },
   {
     "id": "ocd-person/1ed4e059-94c6-4404-b28e-0dc572112d03",
@@ -500,7 +595,12 @@
     "phone": "505-986-4377",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/Senate/SSTEF.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=SSTEF",
-    "office": "State Capitol Room 328B, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 328B, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "districtOffice": "Room 123A, 6401 Richards Ave., Santa Fe, NM 87508",
+    "districtPhone": "505-699-4808",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Liz_Stefanics",
+    "ballotpediaUrl": "https://ballotpedia.org/Liz_Stefanics",
+    "facebook": "SenatorLizStefanics"
   },
   {
     "id": "ocd-person/13ad8eb1-a64f-4a08-8c68-a1488466128f",
@@ -514,7 +614,13 @@
     "phone": "505-986-4425",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HTHOE.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HTHOE",
-    "office": "State Capitol Room 314B, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 314B, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "districtOffice": "108 Wellesley Drive SE, Albuquerque, NM 87106",
+    "districtPhone": "505-946-5624",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Elizabeth_Thomson_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Elizabeth_L._Thomson",
+    "twitter": "lizthomsonnm",
+    "facebook": "lizthomsonnm"
   },
   {
     "id": "ocd-person/5cf6976d-e616-4579-a194-ec3c37260ebd",
@@ -528,7 +634,13 @@
     "phone": "505-986-4842",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HROMA.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HROMA",
-    "office": "State Capitol Room 313B, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 313B, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "districtOffice": "Albuquerque, NM",
+    "districtPhone": "505-514-9574",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/G._Andr%C3%A9s_Romero",
+    "ballotpediaUrl": "https://ballotpedia.org/G._Andres_Romero",
+    "twitter": "andresromeronm",
+    "facebook": "RomeroForDistrict10"
   },
   {
     "id": "ocd-person/6677ca7f-f961-44f1-a241-d14280762f5d",
@@ -542,7 +654,12 @@
     "phone": "505-986-4391",
     "photoUrl": "http://www.nmlegis.gov/Images/Legislators/Senate/SRAMO.jpg",
     "website": "https://www.linkedin.com/in/gabriel-ramos-a5aa74109/",
-    "office": "State Capitol Room 414A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 414A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "districtOffice": "1609 N. Swan St., Silver City, NM 88061",
+    "districtPhone": "575-313-2077",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Gabriel_Ramos_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Gabriel_Ramos",
+    "facebook": "NMSenRamos"
   },
   {
     "id": "ocd-person/9564298b-dc55-4037-8205-5eca1c2063dc",
@@ -556,7 +673,11 @@
     "phone": "505-986-4758",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HARMG.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HARMG",
-    "office": "State Capitol Room 125C, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 125C, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Gail_Armstrong_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Gail_Armstrong",
+    "twitter": "gail4nm",
+    "facebook": "Gail4NM"
   },
   {
     "id": "ocd-person/b4c20aea-b56c-4a19-a89a-788c53d995d7",
@@ -570,7 +691,11 @@
     "phone": "505-986-4371",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/Senate/SMUNO.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=SMUNO",
-    "office": "State Capitol Room 325B, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 325B, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/George_Mu%C3%B1oz_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/George_Munoz",
+    "twitter": "munozfornm",
+    "facebook": "nmsenatormunoz"
   },
   {
     "id": "ocd-person/e7e8e973-411b-45fd-8fd7-7e4ea7d9f1be",
@@ -584,7 +709,9 @@
     "phone": "505-986-4450",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HVINC.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HVINC",
-    "office": "Room 203GN, New Mexico Capitol Annex 325 Don Gaspar Ave., Santa Fe, NM 87501"
+    "office": "Room 203GN, New Mexico Capitol Annex 325 Don Gaspar Ave., Santa Fe, NM 87501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Harlan_Vincent",
+    "ballotpediaUrl": "https://ballotpedia.org/Harlan_Vincent"
   },
   {
     "id": "ocd-person/713e2881-4ecb-4d66-9bd3-6422c898df91",
@@ -598,7 +725,10 @@
     "phone": "505-986-4380",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/Senate/SPOPE.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=SPOPE",
-    "office": "State Capitol Room 301A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 301A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "districtOffice": "Room 109B, 10549 Universe Blvd. NW, Albuquerque, NM 87193",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Harold_Pope_Jr.",
+    "ballotpediaUrl": "https://ballotpedia.org/Harold_Pope_Jr."
   },
   {
     "id": "ocd-person/e5d44d75-76df-41fc-87ae-27bc4c943d50",
@@ -612,7 +742,10 @@
     "phone": "505-986-4726",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/HeatherBerghmans24.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=SBERG",
-    "office": "State Capitol Room 416C, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 416C, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "districtOffice": "4700 Morris St. NE Suite 101, Albuquerque, NM 87111",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Heather_Berghmans",
+    "ballotpediaUrl": "https://ballotpedia.org/Heather_Berghmans"
   },
   {
     "id": "ocd-person/c41b373a-7376-4084-b0de-3648cfce9b05",
@@ -626,7 +759,10 @@
     "phone": "505-986-4467",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HCHAT.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HCHAT",
-    "office": "Room 203FN, New Mexico Capitol Annex 325 Don Gaspar Ave., Santa Fe, NM 87501"
+    "office": "Room 203FN, New Mexico Capitol Annex 325 Don Gaspar Ave., Santa Fe, NM 87501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jack_Chatfield",
+    "ballotpediaUrl": "https://ballotpedia.org/Jackey_Chatfield",
+    "facebook": "jackchatfieldhd67"
   },
   {
     "id": "ocd-person/667a8a3c-dbe9-4aba-b768-e90be503df88",
@@ -638,9 +774,13 @@
     "party": "Republican",
     "email": "townsend@pvtn.net",
     "phone": "505-986-4366",
-    "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HTOWJ.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HTOWJ",
-    "office": "State Capitol Room 415C, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 415C, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "districtOffice": "314 E. 9th St., Alamogordo, NM 88310",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/James_G._Townsend",
+    "ballotpediaUrl": "https://ballotpedia.org/James_Townsend_(New_Mexico)",
+    "twitter": "LeaderTownsend",
+    "facebook": "jimandpaula.townsend"
   },
   {
     "id": "ocd-person/bc8985ad-c6e6-42cd-b2d5-30688e4616a1",
@@ -654,7 +794,9 @@
     "phone": "505-986-4435",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HANYA.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HANYA",
-    "office": "State Capitol Room 413A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 413A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Janelle_Anyanonu",
+    "ballotpediaUrl": "https://ballotpedia.org/Janelle_Anyanonu"
   },
   {
     "id": "ocd-person/221a42af-f54f-4e66-b648-9b0028165595",
@@ -668,7 +810,11 @@
     "phone": "505-986-4782",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HMARJ.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HMARJ",
-    "office": "State Capitol Room 104, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 104, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Javier_Mart%C3%ADnez_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Javier_I._Martinez",
+    "twitter": "javierfornm",
+    "facebook": "javiermartinezfornewmexico"
   },
   {
     "id": "ocd-person/ee5fab91-b6eb-43be-bf26-300302eec5d1",
@@ -682,7 +828,10 @@
     "phone": "505-986-4702",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Jay_Block.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=SBLOC",
-    "office": "State Capitol Room 415A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 415A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "districtOffice": "3791 Southern Blvd. SE Suite 240, Rio Rancho, NM 87124",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jay_C._Block",
+    "ballotpediaUrl": "https://ballotpedia.org/Jay_Block"
   },
   {
     "id": "ocd-person/601202fc-f916-4be1-ae20-8c437293817e",
@@ -696,7 +845,11 @@
     "phone": "505-986-4862",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/Senate/SSTEI.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=SSTEI",
-    "office": "State Capitol Room 218A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 218A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jeff_Steinborn",
+    "ballotpediaUrl": "https://ballotpedia.org/Jeff_Steinborn",
+    "twitter": "jeff4nm",
+    "facebook": "jeff.steinborn.9"
   },
   {
     "id": "ocd-person/6968fa09-cbf8-42a5-a5a6-132b0b663103",
@@ -710,7 +863,9 @@
     "phone": "505-986-4227",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HJONJ.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HJONJ",
-    "office": "State Capitol Room 203A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 203A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jenifer_Jones",
+    "ballotpediaUrl": "https://ballotpedia.org/Jenifer_Jones"
   },
   {
     "id": "ocd-person/d92a32b1-e3ef-43d7-8e63-c24e59c52b3d",
@@ -724,21 +879,10 @@
     "phone": "505-986-4220",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HMASO.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HMASO",
-    "office": "State Capitol Room 202B, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
-  },
-  {
-    "id": "ocd-person/05309266-c7a0-455b-94f2-ebf1d436daff",
-    "name": "Joanne Ferrary",
-    "firstName": "Joanne",
-    "lastName": "Ferrary",
-    "chamber": "lower",
-    "district": "37",
-    "party": "Democratic",
-    "email": "joanne.ferrary@nmlegis.gov",
-    "phone": "505-986-4844",
-    "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HFERJ.jpg",
-    "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HFERJ",
-    "office": "State Capitol Room 314C, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 202B, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "districtOffice": "324 W. Main St., Artesia, NM 88210",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jimmy_Mason_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Jimmy_Mason"
   },
   {
     "id": "ocd-person/fd2e3bdc-3ca7-495c-b853-8a4db020e4d0",
@@ -752,7 +896,9 @@
     "phone": "505-986-4453",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HBLOC.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HBLOC",
-    "office": "Room 203H, New Mexico Capitol Annex 325 Don Gaspar Ave., Santa Fe, NM 87501"
+    "office": "Room 203H, New Mexico Capitol Annex 325 Don Gaspar Ave., Santa Fe, NM 87501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_Block_(New_Mexico_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/John_Block"
   },
   {
     "id": "ocd-person/3c29303f-1a07-4767-9172-b7f453918d77",
@@ -766,7 +912,9 @@
     "phone": "505-986-4221",
     "photoUrl": "https://assets.civicengine.com/uploads/candidate/headshot/810348/810348.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HHENR",
-    "office": "State Capitol Room 202A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 202A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "districtOffice": "324 W. Main St., Artesia, NM 88210",
+    "ballotpediaUrl": "https://ballotpedia.org/Jonathan_Henry"
   },
   {
     "id": "ocd-person/14f0186e-bf9b-46aa-aa00-1ccc8f58490b",
@@ -780,7 +928,11 @@
     "phone": "505-986-4861",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/Senate/SCERV.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=SCERV",
-    "office": "State Capitol Room 319A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 319A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Joe_Cervantes",
+    "ballotpediaUrl": "https://ballotpedia.org/Joseph_Cervantes",
+    "twitter": "senjoecervantes",
+    "facebook": "joe4nm"
   },
   {
     "id": "ocd-person/854e0c8a-0093-4282-8544-8d20bafde8f6",
@@ -792,9 +944,9 @@
     "party": "Democratic",
     "email": "joseph.hernandez@nmlegis.gov",
     "phone": "505-986-4233",
-    "photoUrl": "https://progressivevotersguide.com/sites/default/files/styles/candidate/public/new%20mexico/2024/general/Joseph%20H.jpg?itok=DRcr52HE",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HHEJO",
-    "office": "State Capitol Room 204A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 204A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "ballotpediaUrl": "https://ballotpedia.org/Joseph_Hernandez"
   },
   {
     "id": "ocd-person/0ed175a3-3c71-4b42-bf53-9435d0f93f52",
@@ -808,7 +960,11 @@
     "phone": "505-986-4233",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HSAJO.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HSAJO",
-    "office": "State Capitol Room 204A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 204A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Joseph_L._Sanchez",
+    "ballotpediaUrl": "https://ballotpedia.org/Joseph_Sanchez_(New_Mexico)",
+    "twitter": "josephsancheznm",
+    "facebook": "josephsanchezfornm"
   },
   {
     "id": "ocd-person/82528266-9d6a-4fb3-854e-be9ab6a549b7",
@@ -822,7 +978,10 @@
     "phone": "505-986-4375",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/Senate/SSANJ.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=SSANJ",
-    "office": "State Capitol Room 414B, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 414B, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "districtOffice": "101 Courthouse Road SE, Los Lunas, NM 87301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Joshua_A._Sanchez",
+    "ballotpediaUrl": "https://ballotpedia.org/Joshua_A._Sanchez"
   },
   {
     "id": "ocd-person/71b8feb5-0bbd-45bd-9b25-c6dc7642962b",
@@ -836,7 +995,11 @@
     "phone": "505-986-4215",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HHERN.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HHERN",
-    "office": "State Capitol Room 201A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 201A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "districtOffice": "3791 Southern Blvd. SE Suite 240, Rio Rancho, NM 87124",
+    "districtPhone": "505-234-6337",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Joshua_Hernandez",
+    "ballotpediaUrl": "https://ballotpedia.org/Joshua_Hernandez_(New_Mexico)"
   },
   {
     "id": "ocd-person/930a9ffb-d292-49d5-8c43-c42bdab290ff",
@@ -850,7 +1013,13 @@
     "phone": "505-986-4341",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HGARR.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HGARR",
-    "office": "State Capitol Room 313A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 313A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "districtOffice": "Room 108, 10549 Universe Blvd. NW, Albuquerque, NM 87114",
+    "districtPhone": "505-977-5039",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Joy_Garratt",
+    "ballotpediaUrl": "https://ballotpedia.org/Joy_I._Garratt",
+    "twitter": "joyousgarratt",
+    "facebook": "Joy4NewMexico"
   },
   {
     "id": "ocd-person/73fc9839-619a-4ad5-bbbd-dfaf7f308e09",
@@ -864,7 +1033,10 @@
     "phone": "505-986-4432",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HCATE.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HCATE",
-    "office": "State Capitol Room 413F, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 413F, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "districtOffice": "5600 Eagle Rock Ave. Suite 205, Rio Rancho, NM 87113",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kathleen_Cates",
+    "ballotpediaUrl": "https://ballotpedia.org/Kathleen_Cates"
   },
   {
     "id": "ocd-person/cce76180-bf09-413a-9d9d-1cc8ae7cf2db",
@@ -878,7 +1050,10 @@
     "phone": "505-986-4270",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/Senate/SDUHI.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=SDUHI",
-    "office": "State Capitol Room 320A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 320A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "districtOffice": "215 Central Ave. NW, Albuquerque, NM 87102",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Katy_Duhigg",
+    "ballotpediaUrl": "https://ballotpedia.org/Katy_Duhigg"
   },
   {
     "id": "ocd-person/0dd8a8ff-99c5-4d1a-90fb-3b74398a4141",
@@ -892,7 +1067,10 @@
     "phone": "505-986-4840",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HORTE.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HORTE",
-    "office": "State Capitol Room 312B, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 312B, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "districtOffice": "400 Camino de la Placitas, Taos, NM 87571",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kristina_Ortez",
+    "ballotpediaUrl": "https://ballotpedia.org/Kristina_Ortez"
   },
   {
     "id": "ocd-person/febbd8f4-a85e-476c-b96f-52f4f759f8c7",
@@ -904,9 +1082,11 @@
     "party": "Republican",
     "email": "larry.scott@nmlegis.gov",
     "phone": "505-986-4701",
-    "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HSCOT.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HSCOT",
-    "office": "State Capitol Room 415B, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 415B, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "districtOffice": "726 E. Michigan Drive Suite 210, Hobbs, NM 88240",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Larry_R._Scott",
+    "ballotpediaUrl": "https://ballotpedia.org/Larry_Scott"
   },
   {
     "id": "ocd-person/9b0d6912-d333-4ae7-b626-ce643099a43d",
@@ -920,7 +1100,10 @@
     "phone": "505-986-4260",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/Senate/SJARA.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=SJARA",
-    "office": "State Capitol Room 300D, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 300D, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "districtOffice": "1122 Industrial Park Road, Espanola, NM 87532",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Leo_Jaramillo",
+    "ballotpediaUrl": "https://ballotpedia.org/Leo_Jaramillo"
   },
   {
     "id": "ocd-person/ecc60fc8-8598-4650-8a55-6e91d24e991e",
@@ -934,7 +1117,11 @@
     "phone": "505-986-4482",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/Senate/SLOPE.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=SLOPE",
-    "office": "State Capitol Room 300A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 300A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Linda_M._Lopez",
+    "ballotpediaUrl": "https://ballotpedia.org/Linda_Lopez,_New_Mexico_Senator",
+    "twitter": "lopez4gov",
+    "facebook": "linda.m.lopez.39"
   },
   {
     "id": "ocd-person/4cbcf352-3f7a-412d-afc6-568dc4b94400",
@@ -945,10 +1132,14 @@
     "district": "24",
     "party": "Democratic",
     "email": "linda.trujillo@nmlegis.gov",
-    "phone": "505-986-4863",
-    "photoUrl": "http://www.nmlegis.gov/Images/Legislators/House/HTRUL.jpg",
+    "phone": "505-986-4810",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HTRUL",
-    "office": "State Capitol Room 416G, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 119A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "districtOffice": "NM",
+    "districtPhone": "505-795-4324",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Linda_Trujillo",
+    "ballotpediaUrl": "https://ballotpedia.org/Linda_Trujillo",
+    "twitter": "jellybeanlaw4"
   },
   {
     "id": "ocd-person/570bb94a-0500-44de-8983-ca259e0d4a60",
@@ -962,7 +1153,9 @@
     "phone": "505-986-4243",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HSERR.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HSERR",
-    "office": "State Capitol Room 205A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 205A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Linda_Serrato",
+    "ballotpediaUrl": "https://ballotpedia.org/Linda_Serrato"
   },
   {
     "id": "ocd-person/6f02eec7-0afe-4f15-ad56-653148da00c0",
@@ -976,7 +1169,10 @@
     "phone": "505-986-4336",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HTERR.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HTERR",
-    "office": "Room 203DN, New Mexico Capitol Annex 325 Don Gaspar Ave., Santa Fe, NM 87501"
+    "office": "Room 203DN, New Mexico Capitol Annex 325 Don Gaspar Ave., Santa Fe, NM 87501",
+    "districtOffice": "1609 N. Swan St., Silver City, NM 88061",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Luis_Terrazas_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Luis_Terrazas"
   },
   {
     "id": "ocd-person/c2fb0283-189c-4b0c-9d99-7b70d2f62c40",
@@ -990,7 +1186,12 @@
     "phone": "505-986-4248",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HMATT.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HMATT",
-    "office": "State Capitol Room 206B, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 206B, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "districtOffice": "4700 Morris St. NE Suite 101, Albuquerque, NM 87111",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Marian_Matthews",
+    "ballotpediaUrl": "https://ballotpedia.org/Marian_Matthews",
+    "twitter": "Hd27Marian",
+    "facebook": "MarianMatthewsHD27"
   },
   {
     "id": "ocd-person/bc194113-8c8a-4cba-b1f4-25269c72a9fd",
@@ -1004,7 +1205,10 @@
     "phone": "505-986-4254",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/MariannaAnaya.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HANMA",
-    "office": "Room 203CN, New Mexico Capitol Annex 325 Don Gaspar Ave., Santa Fe, NM 87501"
+    "office": "Room 203CN, New Mexico Capitol Annex 325 Don Gaspar Ave., Santa Fe, NM 87501",
+    "districtOffice": "108 Wellesley Drive SE, Albuquerque, NM 87106",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Marianna_Anaya",
+    "ballotpediaUrl": "https://ballotpedia.org/Marianna_Anaya"
   },
   {
     "id": "ocd-person/aa8f331c-d541-4acd-b025-e218e01764e2",
@@ -1018,7 +1222,9 @@
     "phone": "505-986-4226",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HDUNC.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HDUNC",
-    "office": "State Capitol Room 203B, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 203B, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mark_Duncan_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Mark_Duncan_(New_Mexico)"
   },
   {
     "id": "ocd-person/406c0ab4-c372-42bc-ba14-77181dc7c418",
@@ -1030,8 +1236,11 @@
     "party": "Republican",
     "email": "mark.murphy@nmlegis.gov",
     "phone": "505-986-4454",
+    "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HMURP.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HMURP",
-    "office": "Room 203IN, New Mexico Capitol Annex 325 Don Gaspar Ave., Santa Fe, NM 87501"
+    "office": "Room 203IN, New Mexico Capitol Annex 325 Don Gaspar Ave., Santa Fe, NM 87501",
+    "districtOffice": "1600 SE Main St. Suite G, Roswell, NM 88203",
+    "ballotpediaUrl": "https://ballotpedia.org/Mark_Murphy_(New_Mexico)"
   },
   {
     "id": "ocd-person/fb0443f9-b6d7-4b3b-a87e-0d8b143ed64b",
@@ -1043,8 +1252,10 @@
     "party": "Democratic",
     "email": "martha.garcia@nmlegis.gov",
     "phone": "505-986-4464",
+    "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HGAMA.jpg",
     "website": "https://www.nmlegis.gov/members/Legislator?SponCode=HGAMA",
-    "office": "Room 203B, New Mexico Capitol Annex 325 Don Gaspar Ave., Santa Fe, NM 87501"
+    "office": "Room 203B, New Mexico Capitol Annex 325 Don Gaspar Ave., Santa Fe, NM 87501",
+    "ballotpediaUrl": "https://ballotpedia.org/Martha_Garcia_(New_Mexico)"
   },
   {
     "id": "ocd-person/88fd357f-3fb1-4c2b-b49b-555231011c46",
@@ -1058,7 +1269,10 @@
     "phone": "505-986-4487",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/Senate/SHICK.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=SHICK",
-    "office": "State Capitol Room 300B, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 300B, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "districtOffice": "1930 Juan Tabo Blvd. NE, Albuquerque, NM 87112",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Martin_Hickey",
+    "ballotpediaUrl": "https://ballotpedia.org/Martin_Hickey"
   },
   {
     "id": "ocd-person/dc968f82-503e-4246-9124-b880fd6ae3ae",
@@ -1072,7 +1286,12 @@
     "phone": "505-986-4211",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HZAMO.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HZAMO",
-    "office": "Room 203E, New Mexico Capitol Annex 325 Don Gaspar Ave., Santa Fe, NM 87501"
+    "office": "Room 203E, New Mexico Capitol Annex 325 Don Gaspar Ave., Santa Fe, NM 87501",
+    "districtOffice": "NM",
+    "districtPhone": "575-309-2334",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Martin_R._Zamora",
+    "ballotpediaUrl": "https://ballotpedia.org/Martin_Ruben_Zamora",
+    "twitter": "repmartinzamora"
   },
   {
     "id": "ocd-person/e3affc46-1790-48ba-ae36-5c00473d6c35",
@@ -1086,7 +1305,12 @@
     "phone": "505-986-4423",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HMCQU.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HMCQU",
-    "office": "State Capitol Room 316A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 316A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "districtOffice": "7 Avenida Vista Grande Suite B7-120, Santa Fe, NM 87508",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Matthew_McQueen_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Matthew_McQueen",
+    "twitter": "mcqueenfornm",
+    "facebook": "mcqueenfornm"
   },
   {
     "id": "ocd-person/ac49b3cf-9fb8-4fa1-af55-4b35a6570c87",
@@ -1100,7 +1324,9 @@
     "phone": "505-986-4320",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HDIXO.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HDIXO",
-    "office": "State Capitol Room 304C, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 304C, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Meredith_Dixon",
+    "ballotpediaUrl": "https://ballotpedia.org/Meredith_Dixon"
   },
   {
     "id": "ocd-person/5b9af862-0f9f-42b2-a694-f80055129d6c",
@@ -1114,7 +1340,10 @@
     "phone": "505-986-4210",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HCADA.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HCADA",
-    "office": "State Capitol Room 204B, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 204B, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Micaela_Lara_Cadena",
+    "ballotpediaUrl": "https://ballotpedia.org/Micaela_Lara_Cadena",
+    "facebook": "laracadena4nm"
   },
   {
     "id": "ocd-person/ce888eff-62f5-41c0-9114-651c43f77aba",
@@ -1125,10 +1354,14 @@
     "district": "14",
     "party": "Democratic",
     "email": "michael.padilla@nmlegis.gov",
-    "phone": "505-986-4737",
+    "phone": "505-986-4361",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/Senate/SPADI.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=SPADI",
-    "office": "State Capitol Room 120A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 416E, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Michael_Padilla",
+    "ballotpediaUrl": "https://ballotpedia.org/Michael_Padilla_(New_Mexico)",
+    "twitter": "SenPadilla",
+    "facebook": "michael.padilla.31"
   },
   {
     "id": "ocd-person/3363aa83-2490-4631-b04b-9a52fdbad14b",
@@ -1142,7 +1375,11 @@
     "phone": "505-986-4242",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HGAMP.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HGAMP",
-    "office": "State Capitol Room 205B, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 205B, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "districtOffice": "1118 La Font Road SW, Albuquerque, NM 87105",
+    "districtPhone": "505-877-8131",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Miguel_Garcia_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Miguel_Garcia_(New_Mexico)"
   },
   {
     "id": "ocd-person/f1144347-0a16-43e4-97b9-01308a890631",
@@ -1156,7 +1393,13 @@
     "phone": "505-986-4734",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/Senate/SSTEW.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=SSTEW",
-    "office": "State Capitol Room 105A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 105A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "districtOffice": "NM",
+    "districtPhone": "505-986-4733",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mimi_Stewart",
+    "ballotpediaUrl": "https://ballotpedia.org/Mimi_Stewart",
+    "twitter": "Sen_MimiStewart",
+    "facebook": "peopleformimistewart"
   },
   {
     "id": "ocd-person/48969449-b004-4ca3-a72b-8508e95e0051",
@@ -1170,7 +1413,11 @@
     "phone": "505-986-4266",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HFIGU.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HFIGU",
-    "office": "State Capitol Room 416G, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 416G, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "districtOffice": "4700 Morris St. NE Suite 101, Albuquerque, NM 87111",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Natalie_Figueroa_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Natalie_R._Figueroa",
+    "facebook": "Natalie4NM"
   },
   {
     "id": "ocd-person/57440e55-06ad-4f1f-8aa5-3bdd31a805dd",
@@ -1184,7 +1431,13 @@
     "phone": "505-986-4319",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HSMAL.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HSMAL",
-    "office": "State Capitol Room 304B, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 304B, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "districtOffice": "NM",
+    "districtPhone": "575-496-9540",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Nathan_Small",
+    "ballotpediaUrl": "https://ballotpedia.org/Nathan_P._Small",
+    "twitter": "nathanlcnm",
+    "facebook": "NathanForNM"
   },
   {
     "id": "ocd-person/f2ed2dd1-ba2d-48cd-8365-cbb149b459e9",
@@ -1198,7 +1451,10 @@
     "phone": "505-986-4214",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/NicoleChavez.jpeg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HCHNI",
-    "office": "State Capitol Room 201B, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 201B, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "districtOffice": "8100 Wyoming Blvd. Suite M4 Box 139, Albuquerque, NM 87113",
+    "districtPhone": "505-235-7836",
+    "ballotpediaUrl": "https://ballotpedia.org/Nicole_Chavez"
   },
   {
     "id": "ocd-person/daefbf8d-768f-4dab-8f4f-0a272e2cb697",
@@ -1212,7 +1468,11 @@
     "phone": "505-986-4278",
     "photoUrl": "https://nicolefornm.com/wp-content/uploads/2023/06/Nicole-Tobiassen-Headshot-3-768x512.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=STOBI",
-    "office": "State Capitol Room 415G, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 415G, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "districtOffice": "8100 Wyoming Blvd. NE Suite M4-#786, Albuquerque, NM 87133",
+    "districtPhone": "505-209-7716",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Nicole_Tobiassen",
+    "ballotpediaUrl": "https://ballotpedia.org/Nicole_Tobiassen"
   },
   {
     "id": "ocd-person/800d2a2e-1622-4ab2-b290-3c537b38bdf8",
@@ -1226,7 +1486,11 @@
     "phone": "505-986-4248",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HHEPA.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HHEPA",
-    "office": "State Capitol Room 206B, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 206B, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "districtOffice": "1930 Juan Tabo Blvd. NE, Albuquerque, NM 87112",
+    "districtPhone": "505-205-0868",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Pamelya_Herndon",
+    "ballotpediaUrl": "https://ballotpedia.org/Pamelya_Herndon"
   },
   {
     "id": "ocd-person/4093c9b8-d07a-4a12-b13b-abbd4130b1fe",
@@ -1240,7 +1504,8 @@
     "phone": "505-986-4393",
     "photoUrl": "https://senatorpatboone.com/wp-content/uploads/2024/03/Pat-Boone-Photo-1.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=SBOON",
-    "office": "State Capitol Room 415D, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 415D, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "ballotpediaUrl": "https://ballotpedia.org/Patrick_Boone_IV"
   },
   {
     "id": "ocd-person/6a28626b-9919-4d77-9b62-44ad1d45215d",
@@ -1254,7 +1519,9 @@
     "phone": "505-986-4853",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/Senate/SWOOD.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=SWOOD",
-    "office": "State Capitol Room 109C, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 109C, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Pat_Woods_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Pat_Woods"
   },
   {
     "id": "ocd-person/94eed261-74bb-4f8b-a0ab-62b2a7ff8e98",
@@ -1268,7 +1535,10 @@
     "phone": "505-986-4249",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HLUND.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HLUND",
-    "office": "State Capitol Room 206A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 206A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Patricia_Lundstrom",
+    "ballotpediaUrl": "https://ballotpedia.org/Patricia_Lundstrom",
+    "facebook": "patricia.lundstrom.1"
   },
   {
     "id": "ocd-person/20dc90cf-7805-4609-8631-45db1973cd5c",
@@ -1282,7 +1552,12 @@
     "phone": "505-986-4416",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HROYB.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HROYB",
-    "office": "State Capitol Room 314A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 314A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "districtOffice": "4300 Blake Road SW, Albuquerque, NM 87121",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Patricia_Roybal_Caballero",
+    "ballotpediaUrl": "https://ballotpedia.org/Patricia_A._Roybal_Caballero",
+    "twitter": "proybalcaballer",
+    "facebook": "patricia4nm"
   },
   {
     "id": "ocd-person/8cc272e5-bf6a-441e-9b0a-407ed6361afa",
@@ -1296,7 +1571,9 @@
     "phone": "505-986-4254",
     "photoUrl": "https://womencount.org/wp-content/uploads/2024/03/Michelle-Paulene-Abeyta-300x300.jpeg",
     "website": "https://www.nmlegis.gov/members/Legislator?SponCode=HABMI",
-    "office": "Room 203CN, New Mexico Capitol Annex 325 Don Gaspar Ave., Santa Fe, NM 87501"
+    "office": "Room 203CN, New Mexico Capitol Annex 325 Don Gaspar Ave., Santa Fe, NM 87501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Michelle_Paulene_Abeyta",
+    "ballotpediaUrl": "https://ballotpedia.org/Michelle_Abeyta"
   },
   {
     "id": "ocd-person/e2f7dd70-36fc-4b65-8dfd-19fcc1d63e38",
@@ -1310,7 +1587,11 @@
     "phone": "505-986-4267",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/Senate/SCAMP.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=SCAMP",
-    "office": "State Capitol Room 302B, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 302B, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Pete_Campos",
+    "ballotpediaUrl": "https://ballotpedia.org/Pete_Campos",
+    "twitter": "senpetecampos",
+    "facebook": "pete.campos.1426"
   },
   {
     "id": "ocd-person/7595b557-0c70-44e3-a26b-af533d1ca94d",
@@ -1321,10 +1602,15 @@
     "district": "25",
     "party": "Democratic",
     "email": "peter.wirth@nmlegis.gov",
-    "phone": "505-986-4727",
+    "phone": "505-986-4272",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/Senate/SWIRT.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=SWIRT",
-    "office": "State Capitol Room 119A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 416F, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "districtOffice": "NM",
+    "districtPhone": "505-986-4727",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Peter_Wirth_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Peter_Wirth",
+    "twitter": "senatorwirth"
   },
   {
     "id": "ocd-person/a36bdc41-5666-4208-b8f0-8d9012d31f22",
@@ -1338,7 +1624,10 @@
     "phone": "505-986-4220",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HPETT.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HPETT",
-    "office": "State Capitol Room 202B, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 202B, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "districtOffice": "100 N. Main Ave. Suite 4, Lovington, NM 88260",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Randall_Pettigrew",
+    "ballotpediaUrl": "https://ballotpedia.org/Randall_Pettigrew"
   },
   {
     "id": "ocd-person/e8d69d4c-dfd4-4e22-939a-cc356ba7ac05",
@@ -1352,7 +1641,11 @@
     "phone": "505-986-4777",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HLARA.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HLARA",
-    "office": "State Capitol Room 134A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 134A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "districtOffice": "744 San Jose Road, La Mesa, NM 88044",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Raymundo_Lara",
+    "ballotpediaUrl": "https://ballotpedia.org/Raymundo_Lara",
+    "facebook": "RayLaraforStateRepresentative"
   },
   {
     "id": "ocd-person/2904a9a3-7e21-4c6f-b40a-e79288ca1b49",
@@ -1366,7 +1659,11 @@
     "phone": "505-986-4758",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HDOWR.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HDOWR",
-    "office": "State Capitol Room 125A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 125A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rebecca_Dow",
+    "ballotpediaUrl": "https://ballotpedia.org/Rebecca_L._Dow",
+    "twitter": "reprebeccadow",
+    "facebook": "rebeccadowforhouse"
   },
   {
     "id": "ocd-person/0b7d9451-0462-4064-b28e-6d44123edd1e",
@@ -1380,7 +1677,11 @@
     "phone": "505-986-4777",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HSZCZ.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HSCZE",
-    "office": "State Capitol Room 134B, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 134B, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "districtOffice": "1000 Cordova Place, #973, Santa Fe, NM 87505",
+    "districtPhone": "505-986-4780",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Reena_Szczepanski",
+    "ballotpediaUrl": "https://ballotpedia.org/Reena_Szczepanski"
   },
   {
     "id": "ocd-person/0884aac3-cddb-4374-88e1-94bf623410f3",
@@ -1392,8 +1693,10 @@
     "party": "Republican",
     "email": "rex.wilson@nmlegis.gov",
     "phone": "505-986-4395",
+    "photoUrl": "https://www.nmlegis.gov/Images/Legislators/Senate/SWIRE.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=SWIRE",
-    "office": "State Capitol Room 415F, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 415F, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "ballotpediaUrl": "https://ballotpedia.org/Rex_Wilson"
   },
   {
     "id": "ocd-person/5e9a828c-3dfb-4f88-8dfe-f8fccf11ef78",
@@ -1407,7 +1710,9 @@
     "phone": "505-986-4362",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/Senate/SGONZ.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=SGONZ",
-    "office": "State Capitol Room 217A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 217A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Roberto_Gonzales",
+    "ballotpediaUrl": "https://ballotpedia.org/Roberto_Gonzales"
   },
   {
     "id": "ocd-person/948ba2f7-fd71-42ed-a35a-e692b76d2ca2",
@@ -1417,11 +1722,15 @@
     "chamber": "lower",
     "district": "1",
     "party": "Republican",
-    "email": "roddmontoya@gmail.com",
+    "email": "rod.montoya@nmlegis.gov",
     "phone": "505-986-4454",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HMONR.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HMONR",
-    "office": "Room 203IN, New Mexico Capitol Annex 325 Don Gaspar Ave., Santa Fe, NM 87501"
+    "office": "Room 203IN, New Mexico Capitol Annex 325 Don Gaspar Ave., Santa Fe, NM 87501",
+    "districtOffice": "7450 E. Main St. Suite A, Farmington, NM 87402",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rod_Montoya",
+    "ballotpediaUrl": "https://ballotpedia.org/Rodney_Montoya",
+    "facebook": "rod.montoya.186"
   },
   {
     "id": "ocd-person/a9377979-b109-4e11-b338-89b203c04527",
@@ -1435,7 +1744,8 @@
     "phone": "505-986-4436",
     "photoUrl": "https://images.squarespace-cdn.com/content/v1/66d0e643284c6d63d067a073/8916e12c-d13c-49fb-810a-2c7ffb58d300/SilvaSarah.JPG",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HSISA",
-    "office": "State Capitol Room 413C, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 413C, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "ballotpediaUrl": "https://ballotpedia.org/Sarah_Silva"
   },
   {
     "id": "ocd-person/fa98430a-5031-4c64-bd6d-8a6f0cc4043e",
@@ -1449,7 +1759,10 @@
     "phone": "505-986-4835",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/Senate/SPINS.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=SPINS",
-    "office": "State Capitol Room 301B, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 301B, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Shannon_Pinto",
+    "ballotpediaUrl": "https://ballotpedia.org/Shannon_Pinto",
+    "facebook": "Shannon4NM"
   },
   {
     "id": "ocd-person/eef5df5d-b9da-4ac3-9a3e-7f6ba775e6d7",
@@ -1463,7 +1776,10 @@
     "phone": "505-986-4453",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HLORD.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HLORD",
-    "office": "Room 203HN, New Mexico Capitol Annex 325 Don Gaspar Ave., Santa Fe, NM 87501"
+    "office": "Room 203HN, New Mexico Capitol Annex 325 Don Gaspar Ave., Santa Fe, NM 87501",
+    "districtOffice": "12165 N. Highway 14 Unit B-10, Cedar Crest, NM 87008",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Stefani_Lord",
+    "ballotpediaUrl": "https://ballotpedia.org/Stefani_Lord"
   },
   {
     "id": "ocd-person/82ac8832-cb59-4ea3-b6e7-a74e2115f37d",
@@ -1477,21 +1793,10 @@
     "phone": "505-986-4724",
     "photoUrl": "https://www.naco.org/sites/default/files/styles/349x333/public/Steve%20Lanier.webp",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=SLANI",
-    "office": "State Capitol Room 415I, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
-  },
-  {
-    "id": "ocd-person/d5d0e9d9-bd6f-4f28-9a3f-13a56cadcc0f",
-    "name": "Susan Herrera",
-    "firstName": "Susan",
-    "lastName": "Herrera",
-    "chamber": "lower",
-    "district": "41",
-    "party": "Democratic",
-    "email": "susan.herrera@nmlegis.gov",
-    "phone": "505-986-4438",
-    "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HHERS.jpg",
-    "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HHERS",
-    "office": "State Capitol Room 203BN, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 415I, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "districtOffice": "7450 E. Main St. Suite G, Farmington, NM 87402",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Steve_D._Lanier",
+    "ballotpediaUrl": "https://ballotpedia.org/Steve_Lanier"
   },
   {
     "id": "ocd-person/f2394325-2797-4403-8f77-7f4dd3db0bb9",
@@ -1505,7 +1810,10 @@
     "phone": "505-986-4214",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HMIRA.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HMIRA",
-    "office": "State Capitol Room 201B, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 201B, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "districtOffice": "101 Courthouse Road SE, Los Lunas, NM 87031",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tanya_Mirabal_Moya",
+    "ballotpediaUrl": "https://ballotpedia.org/Tanya_Mirabal_Moya"
   },
   {
     "id": "ocd-person/a564eb5c-5c29-43ef-a40f-241efb70ef8d",
@@ -1519,7 +1827,9 @@
     "phone": "505-986-4236",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HLUTA.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HLUTA",
-    "office": "State Capitol Room 413E, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 413E, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tara_Lujan",
+    "ballotpediaUrl": "https://ballotpedia.org/Tara_Lujan"
   },
   {
     "id": "ocd-person/7a7be318-78b1-49c6-bd98-f2b9b7476372",
@@ -1533,7 +1843,12 @@
     "phone": "505-986-4877",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/Senate/SSHAR.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=SSHAR",
-    "office": "State Capitol Room 109A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 109A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "districtOffice": "7450 E. Main St. Suite A, Farmington, NM 87402",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/William_Sharer",
+    "ballotpediaUrl": "https://ballotpedia.org/William_Sharer",
+    "twitter": "billsharer",
+    "facebook": "bill.sharer.9"
   },
   {
     "id": "ocd-person/33aa9a6b-b106-4216-8ea5-82d85cd2250a",
@@ -1547,7 +1862,11 @@
     "phone": "505-986-4834",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/Senate/SSOUL.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=SSOUL",
-    "office": "State Capitol Room 328C, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 328C, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/William_Soules",
+    "ballotpediaUrl": "https://ballotpedia.org/William_P._Soules",
+    "twitter": "senatorsoules",
+    "facebook": "Soules4Senate37"
   },
   {
     "id": "ocd-person/bc947ac1-c584-4e5f-84a9-ea9f6ac959c6",
@@ -1561,6 +1880,9 @@
     "phone": "505-986-4435",
     "photoUrl": "https://www.nmlegis.gov/Images/Legislators/House/HGURR.jpg",
     "website": "https://www.nmlegis.gov/Members/Legislator?SponCode=HGURR",
-    "office": "State Capitol Room 413A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501"
+    "office": "State Capitol Room 413A, New Mexico  490 Old Santa Fe Trail, Santa Fe, NM 87501",
+    "districtOffice": "201 Unser Blvd. NW Unit 116, Albuquerque, NM 87121",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Yanira_Gurrola",
+    "ballotpediaUrl": "https://ballotpedia.org/Yanira_Gurrola_Valenzuela"
   }
 ]

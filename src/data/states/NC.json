@@ -11,7 +11,9 @@
     "phone": "919-733-5779",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/787/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/787",
-    "office": "Room 417A, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 417A, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Reece_Pyrtle",
+    "ballotpediaUrl": "https://ballotpedia.org/A._Reece_Pyrtle,_Jr."
   },
   {
     "id": "ocd-person/559521af-e5f9-43c3-a75e-de9b242d364f",
@@ -25,7 +27,10 @@
     "phone": "919-733-5758",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/780/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/780",
-    "office": "Room 1219, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 1219, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Abe_Jones_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Abraham_P._Jones_(North_Carolina)",
+    "twitter": "repabejones"
   },
   {
     "id": "ocd-person/9f9d7fb9-9981-412d-b3e2-45c7f67d189a",
@@ -39,7 +44,8 @@
     "phone": "919-733-5778",
     "photoUrl": "https://static.wixstatic.com/media/382708_03a01c002bae45c2a4dd4b665892e242~mv2.png/v1/fill/w_369,h_369,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/aisha%20dew%20updated%20headshot.png",
     "website": "https://www.ncleg.gov/Members/Biography/H/836",
-    "office": "Room 1021, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 1021, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "ballotpediaUrl": "https://ballotpedia.org/Aisha_Dew"
   },
   {
     "id": "ocd-person/6ca8b8ee-96ed-4b21-94cf-d67e49f9c1c8",
@@ -53,7 +59,9 @@
     "phone": "919-733-5191",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/alan_branson.jpg",
     "website": "https://www.ncleg.gov/Members/Biography/H/821",
-    "office": "Room 604, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 604, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Alan_Branson",
+    "ballotpediaUrl": "https://ballotpedia.org/Alan_Branson"
   },
   {
     "id": "ocd-person/95a533af-7933-4992-aea6-dfdc626b7ca6",
@@ -67,7 +75,9 @@
     "phone": "919-733-7208",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/790/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/790",
-    "office": "Room 514, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 514, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Allen_Buansi",
+    "ballotpediaUrl": "https://ballotpedia.org/Allen_Buansi"
   },
   {
     "id": "ocd-person/fc3772c1-d98a-4325-a6c8-96b9da492ed6",
@@ -81,7 +91,9 @@
     "phone": "919-733-5802",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/799/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/799",
-    "office": "Room 418B, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 418B, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Allen_Chesser",
+    "ballotpediaUrl": "https://ballotpedia.org/Allen_Chesser_II"
   },
   {
     "id": "ocd-person/785927b3-34ca-4a2d-bc1c-df4cc8e16c47",
@@ -95,7 +107,9 @@
     "phone": "919-733-5755",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/740/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/740",
-    "office": "Room 1217, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 1217, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Allison_Dahle",
+    "ballotpediaUrl": "https://ballotpedia.org/Allison_Dahle"
   },
   {
     "id": "ocd-person/5f309927-de7a-4fd4-930b-a369dd10fec8",
@@ -107,9 +121,11 @@
     "party": "Democratic",
     "email": "amanda.cook@ncleg.gov",
     "phone": "919-733-5825",
-    "photoUrl": "https://img.legistorm.com/people/944/191944.jpg?rand=44430",
+    "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/1002/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/1002",
-    "office": "Room 2223, 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 2223, 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Amanda_Cook_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Amanda_Cook_(North_Carolina)"
   },
   {
     "id": "ocd-person/628fc48c-a48b-4128-87f1-2391ab795e0a",
@@ -123,7 +139,9 @@
     "phone": "919-733-5829",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/782/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/782",
-    "office": "Room 1006, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 1006, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Amber_Baker",
+    "ballotpediaUrl": "https://ballotpedia.org/Amber_Baker_(North_Carolina)"
   },
   {
     "id": "ocd-person/46275779-8191-48be-8b0b-8373376fa23d",
@@ -137,7 +155,9 @@
     "phone": "919-733-5902",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/725/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/725",
-    "office": "Room 510, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 510, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Amos_Quick",
+    "ballotpediaUrl": "https://ballotpedia.org/Amos_Quick"
   },
   {
     "id": "ocd-person/8be9deca-bbd6-404f-8726-0aecaeb19ca7",
@@ -151,7 +171,24 @@
     "phone": "919-301-1446",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/S/429/Low",
     "website": "https://www.ncleg.gov/Members/Biography/S/429",
-    "office": "Room 311, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 311, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Amy_Galey",
+    "ballotpediaUrl": "https://ballotpedia.org/Amy_Galey"
+  },
+  {
+    "id": "ocd-person/5ca31513-814c-44b9-9206-aae55c05d056",
+    "name": "Anna Ferguson",
+    "firstName": "Anna",
+    "lastName": "Ferguson",
+    "chamber": "lower",
+    "district": "119",
+    "party": "Republican",
+    "email": "anna.ferguson@ncleg.gov",
+    "phone": "919-715-3005",
+    "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/1003/Low",
+    "website": "https://www.ncleg.gov/Members/Biography/H/1003",
+    "office": "Room 633, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "ballotpediaUrl": "https://ballotpedia.org/Anna_Ferguson_(North_Carolina)"
   },
   {
     "id": "ocd-person/064a56b9-d616-43a1-a3f2-ffd4938740d3",
@@ -165,7 +202,9 @@
     "phone": "919-715-0850",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/805/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/805",
-    "office": "Room 1319, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 1319, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ray_Jeffers",
+    "ballotpediaUrl": "https://ballotpedia.org/Ray_Jeffers"
   },
   {
     "id": "ocd-person/367ad234-14bc-4d86-95ee-ab1176890d6e",
@@ -179,7 +218,9 @@
     "phone": "919-733-5827",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/322/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/322",
-    "office": "Room 1221, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 1221, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Becky_Carney",
+    "ballotpediaUrl": "https://ballotpedia.org/Becky_Carney"
   },
   {
     "id": "ocd-person/fdc7d25a-085c-4100-b5f4-a8ae51979292",
@@ -193,7 +234,9 @@
     "phone": "919-733-5903",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/784/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/784",
-    "office": "Room 306A3, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 306A3, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ben_Moss",
+    "ballotpediaUrl": "https://ballotpedia.org/Ben_Moss"
   },
   {
     "id": "ocd-person/0c960acb-381f-4ce9-b9d3-313fd882b6e1",
@@ -207,7 +250,9 @@
     "phone": "919-715-3040",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/S/445/Low",
     "website": "https://www.ncleg.gov/Members/Biography/S/445",
-    "office": "Room 521, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 521, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Benton_Sawrey",
+    "ballotpediaUrl": "https://ballotpedia.org/Benton_Sawrey"
   },
   {
     "id": "ocd-person/cf469ccf-d24e-4ccd-a2fb-041806933b93",
@@ -221,7 +266,8 @@
     "phone": "919-733-5828",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Beth_Gardner_Helfrich.jpeg",
     "website": "https://www.ncleg.gov/Members/Biography/H/832",
-    "office": "Room 1019, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 1019, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "ballotpediaUrl": "https://ballotpedia.org/Beth_Gardner_Helfrich"
   },
   {
     "id": "ocd-person/ac7e8e60-b5cb-41c2-92f9-1bdf9204f79a",
@@ -235,7 +281,9 @@
     "phone": "919-733-5963",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/S/303/Low",
     "website": "https://www.ncleg.gov/Members/Biography/S/303",
-    "office": "Room 2010, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 2010, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bill_Rabon",
+    "ballotpediaUrl": "https://ballotpedia.org/William_Rabon"
   },
   {
     "id": "ocd-person/f1d726fb-535d-456b-9712-b689afcb7763",
@@ -249,7 +297,9 @@
     "phone": "919-733-5780",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/816/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/816",
-    "office": "Room 306A2, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 306A2, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bill_Ward_(North_Carolina_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Bill_Ward_(North_Carolina)"
   },
   {
     "id": "ocd-person/b558be80-96b1-4df6-8714-fcba387f8abc",
@@ -263,7 +313,8 @@
     "phone": "919-733-5935",
     "photoUrl": "https://storage.googleapis.com/enview-public-general/legislative-people-photos/151642.jpg",
     "website": "https://www.ncleg.gov/Members/Biography/H/825",
-    "office": "Room 2219, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 2219, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "ballotpediaUrl": "https://ballotpedia.org/Blair_Eddins"
   },
   {
     "id": "ocd-person/0104c116-78b6-4a91-af98-464fdbf12904",
@@ -277,21 +328,9 @@
     "phone": "919-733-5621",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Bob_Brinson.jpg",
     "website": "https://www.ncleg.gov/Members/Biography/S/448",
-    "office": "Room 2115, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
-  },
-  {
-    "id": "ocd-person/8911db0d-01aa-4e61-a0f5-727d07a5d232",
-    "name": "Bobby Hanig",
-    "firstName": "Bobby",
-    "lastName": "Hanig",
-    "chamber": "upper",
-    "district": "1",
-    "party": "Republican",
-    "email": "bobby.hanig@ncleg.gov",
-    "phone": "919-715-8293",
-    "photoUrl": "https://www.ncleg.gov/Members/MemberImage/S/435/Low",
-    "website": "https://www.ncleg.gov/Members/Biography/S/435",
-    "office": "Room 629, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 2115, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bob_Brinson",
+    "ballotpediaUrl": "https://ballotpedia.org/Bob_Brinson"
   },
   {
     "id": "ocd-person/dfacde1f-3324-4ebe-bc96-ae473548e951",
@@ -305,7 +344,9 @@
     "phone": "919-733-5734",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/S/444/Low",
     "website": "https://www.ncleg.gov/Members/Biography/S/444",
-    "office": "Room 526, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 526, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Brad_Overcash",
+    "ballotpediaUrl": "https://ballotpedia.org/Brad_Overcash"
   },
   {
     "id": "ocd-person/4142addf-2eb1-4557-b3d3-bcea559cbbd3",
@@ -319,7 +360,9 @@
     "phone": "919-715-3009",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/751/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/751",
-    "office": "Room 1309, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 1309, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Brandon_Lofton",
+    "ballotpediaUrl": "https://ballotpedia.org/Brandon_Lofton"
   },
   {
     "id": "ocd-person/1e419504-9efe-4b1f-b1e0-6e8d7d8c74a9",
@@ -333,7 +376,9 @@
     "phone": "919-733-5821",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/723/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/723",
-    "office": "Room 301F, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 301F, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Brenden_Jones",
+    "ballotpediaUrl": "https://ballotpedia.org/Brenden_Jones"
   },
   {
     "id": "ocd-person/23f1da0b-34b2-4347-adb4-f5fc26e0475d",
@@ -347,7 +392,9 @@
     "phone": "919-733-5705",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/S/281/Low",
     "website": "https://www.ncleg.gov/Members/Biography/S/281",
-    "office": "Room 2022, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 2022, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/W._Brent_Jackson",
+    "ballotpediaUrl": "https://ballotpedia.org/Brent_Jackson_(North_Carolina_State_Senator)"
   },
   {
     "id": "ocd-person/c476ab83-c1f7-44a7-b7c9-4cfa4679bed8",
@@ -361,7 +408,9 @@
     "phone": "919-733-5865",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/793/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/793",
-    "office": "Room 416A, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 416A, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Brian_Biggs_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Brian_Biggs"
   },
   {
     "id": "ocd-person/19c32795-3313-4f2f-a1d2-b79ff1dd81fb",
@@ -375,7 +424,8 @@
     "phone": "919-733-5861",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Brian_Echiveria_.jpg",
     "website": "https://www.ncleg.gov/Members/Biography/H/828",
-    "office": "Room 536, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 536, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "ballotpediaUrl": "https://ballotpedia.org/Brian_Echevarria"
   },
   {
     "id": "ocd-person/0229944f-1584-4c3c-9a7b-5c97b6785a6f",
@@ -389,7 +439,9 @@
     "phone": "919-715-3012",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/696/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/696",
-    "office": "Room 1303, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 1303, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Brian_Turner_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Brian_Turner_(North_Carolina)"
   },
   {
     "id": "ocd-person/e596d2ce-a208-475c-a9c1-15e25ccb3404",
@@ -403,7 +455,8 @@
     "phone": "919-733-5824",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Bryan__Cohn__20240808_093541.jpg",
     "website": "https://www.ncleg.gov/Members/Biography/H/827",
-    "office": "Room 1211, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 1211, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "ballotpediaUrl": "https://ballotpedia.org/Bryan_Cohn"
   },
   {
     "id": "ocd-person/a2013778-1144-4936-a0fa-895ad190649f",
@@ -417,7 +470,8 @@
     "phone": "919-715-3050",
     "photoUrl": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcST0VSf38rEGBD-siclt6NuNe1QJ5F0bSq2yeTZaPl6B5jN6UixO_XTlOxWxObcJM0wmNgic4MjyZBFddFBYaj7sg",
     "website": "https://www.ncleg.gov/Members/Biography/S/451",
-    "office": "Room 515, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 515, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "ballotpediaUrl": "https://ballotpedia.org/Caleb_Theodros"
   },
   {
     "id": "ocd-person/91615553-5509-4625-ab20-7a81896438e0",
@@ -431,7 +485,9 @@
     "phone": "919-733-5665",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/S/410/Low",
     "website": "https://www.ncleg.gov/Members/Biography/S/410",
-    "office": "Room 625, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 625, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Carl_Ford_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Carl_Ford_(North_Carolina)"
   },
   {
     "id": "ocd-person/f1ba290a-c2a5-453a-884c-6d03a2c8e83a",
@@ -440,12 +496,14 @@
     "lastName": "Cunningham",
     "chamber": "lower",
     "district": "106",
-    "party": "Democratic",
+    "party": "Independent",
     "email": "carla.cunningham@ncleg.gov",
     "phone": "919-733-5807",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/642/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/642",
-    "office": "Room 402, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 402, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Carla_Cunningham",
+    "ballotpediaUrl": "https://ballotpedia.org/Carla_Cunningham"
   },
   {
     "id": "ocd-person/80495071-4aea-43ff-9548-09860c77cc90",
@@ -459,7 +517,9 @@
     "phone": "919-715-2530",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/750/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/750",
-    "office": "Room 503, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 503, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Carolyn_Logan",
+    "ballotpediaUrl": "https://ballotpedia.org/Carolyn_Logan"
   },
   {
     "id": "ocd-person/6f78b8a8-f77c-4aef-bfa4-b3dac3312e33",
@@ -473,7 +533,9 @@
     "phone": "919-715-9664",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/755/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/755",
-    "office": "Room 410, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 410, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Carson_Smith_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Carson_Smith_Jr."
   },
   {
     "id": "ocd-person/51b17197-aa93-4c8f-821d-81a32b41e2ae",
@@ -487,7 +549,9 @@
     "phone": "919-733-6275",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/797/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/797",
-    "office": "Room 530, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 530, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Celeste_Cairns",
+    "ballotpediaUrl": "https://ballotpedia.org/Celeste_Cairns"
   },
   {
     "id": "ocd-person/2736ade6-4cc1-4833-ab0d-cf1953227726",
@@ -501,7 +565,9 @@
     "phone": "919-733-5601",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/813/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/813",
-    "office": "Room 2123, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 2123, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Charles_Smith_(North_Carolina_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Charles_Smith_(North_Carolina_House_of_Representatives_candidate)"
   },
   {
     "id": "ocd-person/311f0605-29d2-4608-a964-323768582198",
@@ -515,7 +581,9 @@
     "phone": "919-733-5830",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/778/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/778",
-    "office": "Room 417B, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 417B, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Charlie_Miller_(North_Carolina_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Charles_Miller_(North_Carolina)"
   },
   {
     "id": "ocd-person/fdf6de7b-aad3-403b-96c3-a6a007b11ccd",
@@ -529,7 +597,9 @@
     "phone": "919-733-5995",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/747/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/747",
-    "office": "Room 638, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 638, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Chris_Humphrey_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Chris_Humphrey"
   },
   {
     "id": "ocd-person/9dfc9308-ec16-4da8-b5c7-8a9cc55df534",
@@ -541,8 +611,11 @@
     "party": "Republican",
     "email": "chris.measmer@ncleg.gov",
     "phone": "919-733-7223",
+    "photoUrl": "https://www.ncleg.gov/Members/MemberImage/S/455/Low",
     "website": "https://www.ncleg.gov/Members/Biography/S/455",
-    "office": "Room 2106, 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 2106, 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Chris_Measmer",
+    "ballotpediaUrl": "https://ballotpedia.org/Chris_Measmer"
   },
   {
     "id": "ocd-person/702adc2f-f401-4ab4-ac8e-8fcf1a14376b",
@@ -556,7 +629,8 @@
     "phone": "919-733-5908",
     "photoUrl": "https://assets.civicengine.com/uploads/candidate/headshot/797923/797923.jpg",
     "website": "https://www.ncleg.gov/Members/Biography/H/833",
-    "office": "Room 537, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 537, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "ballotpediaUrl": "https://ballotpedia.org/Cody_Huneycutt"
   },
   {
     "id": "ocd-person/a5d3d142-3601-429e-954c-fdb98b0e628a",
@@ -570,7 +644,9 @@
     "phone": "919-733-5860",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/711/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/711",
-    "office": "Room 1004, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 1004, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Cynthia_Ball",
+    "ballotpediaUrl": "https://ballotpedia.org/Cynthia_Ball"
   },
   {
     "id": "ocd-person/06dca4de-5217-45fc-b78a-fc7870ae7faf",
@@ -584,7 +660,24 @@
     "phone": "919-733-5752",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/S/268/Low",
     "website": "https://www.ncleg.gov/Members/Biography/S/268",
-    "office": "Room 1129, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 1129, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dan_Blue",
+    "ballotpediaUrl": "https://ballotpedia.org/Dan_Blue_Jr."
+  },
+  {
+    "id": "ocd-person/443b38b0-1881-443c-ba43-70ffb1d7a9ea",
+    "name": "Dan Kiger",
+    "firstName": "Dan",
+    "lastName": "Kiger",
+    "chamber": "lower",
+    "district": "90",
+    "party": "Republican",
+    "email": "dan.kiger@ncleg.gov",
+    "phone": "919-715-1883",
+    "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/1004/Low",
+    "website": "https://www.ncleg.gov/Members/Biography/H/1004",
+    "office": "Room 418A, 300 N. Salisbury St., Raleigh, NC 27603",
+    "ballotpediaUrl": "https://ballotpedia.org/Dan_Kiger"
   },
   {
     "id": "ocd-person/93fbb331-6fe5-427f-802d-09881d4913d3",
@@ -598,7 +691,8 @@
     "phone": "919-733-7850",
     "photoUrl": "https://storage.googleapis.com/enview-dev-public-general/legislative-people-photos/162671.jpg",
     "website": "https://www.ncleg.gov/Members/Biography/S/449",
-    "office": "Room 2113, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 2113, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "ballotpediaUrl": "https://ballotpedia.org/Dana_Caudill_Jones"
   },
   {
     "id": "ocd-person/91f238a6-29fd-4b65-bc48-1464da11786b",
@@ -612,7 +706,9 @@
     "phone": "919-733-5651",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/S/399/Low",
     "website": "https://www.ncleg.gov/Members/Biography/S/399",
-    "office": "Room 523, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 523, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Danny_Britt",
+    "ballotpediaUrl": "https://ballotpedia.org/Danny_Earl_Britt"
   },
   {
     "id": "ocd-person/d0cbde92-5f2b-4177-822a-f100613a9b30",
@@ -626,7 +722,8 @@
     "phone": "919-733-5898",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/DantePittman2024.JPG",
     "website": "https://www.ncleg.gov/Members/Biography/H/839",
-    "office": "Room 1311, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 1311, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "ballotpediaUrl": "https://ballotpedia.org/Dante_Pittman"
   },
   {
     "id": "ocd-person/7074c9f6-6a8e-4c63-b0b3-ae43b9cfba0d",
@@ -640,7 +737,8 @@
     "phone": "919-733-5870",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/S/423/Low",
     "website": "https://www.ncleg.gov/Members/Biography/S/423",
-    "office": "Room 2108, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 2108, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dave_Craven"
   },
   {
     "id": "ocd-person/6b06a564-763d-421d-bc9b-4779f4dbc1a4",
@@ -654,7 +752,9 @@
     "phone": "919-733-2406",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/779/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/779",
-    "office": "Room 420, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 420, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/David_Willis_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/David_Willis"
   },
   {
     "id": "ocd-person/1c0d5d12-7bc0-4296-a148-423e4faa7dae",
@@ -664,11 +764,13 @@
     "chamber": "upper",
     "district": "39",
     "party": "Democratic",
-    "email": "deandrea.salvador@ncleg.go",
+    "email": "deandrea.salvador@ncleg.gov",
     "phone": "919-733-5655",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/S/431/Low",
     "website": "https://www.ncleg.gov/Members/Biography/S/431",
-    "office": "Room 1120, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 1120, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/DeAndrea_Salvador",
+    "ballotpediaUrl": "https://ballotpedia.org/DeAndrea_Salvador"
   },
   {
     "id": "ocd-person/ffdbb3fa-0445-460a-9501-18b5028fbe50",
@@ -682,7 +784,9 @@
     "phone": "919-715-3007",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/640/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/640",
-    "office": "Room 307A, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 307A, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dean_Arp",
+    "ballotpediaUrl": "https://ballotpedia.org/Dean_Arp"
   },
   {
     "id": "ocd-person/cab978f1-1c91-41e4-9f2e-69af3c89bbf8",
@@ -696,7 +800,9 @@
     "phone": "919-733-5754",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/730/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/730",
-    "office": "Room 1109, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 1109, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Deb_Butler",
+    "ballotpediaUrl": "https://ballotpedia.org/Deb_Butler"
   },
   {
     "id": "ocd-person/fcff21e8-b2a0-4fe5-8fb9-1b1c084a26e1",
@@ -710,7 +816,9 @@
     "phone": "919-733-5905",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/665/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/665",
-    "office": "Room 419B, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 419B, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dennis_Riddell",
+    "ballotpediaUrl": "https://ballotpedia.org/Dennis_Riddell"
   },
   {
     "id": "ocd-person/636555c9-b55c-47f8-9fcc-c9cb93b27f50",
@@ -724,7 +832,9 @@
     "phone": "919-733-5931",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/719/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/719",
-    "office": "Room 2304, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 2304, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Destin_Hall",
+    "ballotpediaUrl": "https://ballotpedia.org/Destin_Hall"
   },
   {
     "id": "ocd-person/034ed56d-8058-4489-be3e-3d4b9977ac4b",
@@ -738,7 +848,9 @@
     "phone": "919-733-5959",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/785/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/785",
-    "office": "Room 301N, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 301N, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Diane_Wheatley",
+    "ballotpediaUrl": "https://ballotpedia.org/Diane_Wheatley"
   },
   {
     "id": "ocd-person/7e1cb220-ff5e-4543-bc51-f44ba7ee0a2b",
@@ -752,7 +864,9 @@
     "phone": "919-733-5605",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/728/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/728",
-    "office": "Room 307B, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 307B, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Donna_McDowell_White",
+    "ballotpediaUrl": "https://ballotpedia.org/Donna_McDowell_White"
   },
   {
     "id": "ocd-person/d7308aed-454d-4091-b32c-606f516e9421",
@@ -766,7 +880,9 @@
     "phone": "919-733-5809",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/788/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/788",
-    "office": "Room 608, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 608, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Donnie_Loftis",
+    "ballotpediaUrl": "https://ballotpedia.org/Donnie_Loftis"
   },
   {
     "id": "ocd-person/dd2200c1-2bdb-4afc-a557-ebcbb5f1eee8",
@@ -780,7 +896,9 @@
     "phone": "919-733-5747",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/646/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/646",
-    "office": "Room 303, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 303, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Donny_Lambeth",
+    "ballotpediaUrl": "https://ballotpedia.org/Donny_C._Lambeth"
   },
   {
     "id": "ocd-person/0573192d-0557-449a-9c3e-8462844a79ab",
@@ -794,7 +912,9 @@
     "phone": "919-733-5862",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/777/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/777",
-    "office": "Room 306B1, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 306B1, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dudley_Greene",
+    "ballotpediaUrl": "https://ballotpedia.org/Dudley_Greene"
   },
   {
     "id": "ocd-person/b560f232-dfa2-49f7-81c8-42000cc9027b",
@@ -808,7 +928,9 @@
     "phone": "919-733-5878",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/S/443/Low",
     "website": "https://www.ncga.state.nc.us/gascripts/members/viewMember.pl?sChamber=Senate&nUserID=362",
-    "office": "Room 308, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 308, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Buck_Newton",
+    "ballotpediaUrl": "https://ballotpedia.org/Buck_Newton"
   },
   {
     "id": "ocd-person/b4b6f0a7-baca-4062-947a-989cb9f98356",
@@ -822,7 +944,9 @@
     "phone": "919-733-5742",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/S/446/Low",
     "website": "https://www.ncleg.gov/Members/Biography/S/446",
-    "office": "Room 2117, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 2117, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Eddie_Settle",
+    "ballotpediaUrl": "https://ballotpedia.org/Eddie_Settle"
   },
   {
     "id": "ocd-person/10d93679-f5f4-496f-8b7c-89f923038ac0",
@@ -836,7 +960,9 @@
     "phone": "919-733-0010",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/744/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/744",
-    "office": "Room 2217, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 2217, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ed_Goodwin",
+    "ballotpediaUrl": "https://ballotpedia.org/Ed_Goodwin"
   },
   {
     "id": "ocd-person/8c10abe1-4b81-404a-9164-9823e023cd2b",
@@ -850,7 +976,9 @@
     "phone": "919-715-2013",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/819/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/819",
-    "office": "Room 504, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 504, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Eric_Ager",
+    "ballotpediaUrl": "https://ballotpedia.org/J._Eric_Ager"
   },
   {
     "id": "ocd-person/ea801bb0-b3bd-4dbc-9164-25e7f4e63f84",
@@ -864,7 +992,9 @@
     "phone": "919-733-2962",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/770/Low",
     "website": "https://reperinpare.com/home",
-    "office": "Room 637, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 637, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Erin_Par%C3%A9",
+    "ballotpediaUrl": "https://ballotpedia.org/Erin_Pare"
   },
   {
     "id": "ocd-person/1a32e77b-9880-467c-88c8-6aeb738f6525",
@@ -878,7 +1008,9 @@
     "phone": "919-733-9892",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/803/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/803",
-    "office": "Room 1017, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 1017, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Frances_Jackson_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Frances_Jackson_(North_Carolina)"
   },
   {
     "id": "ocd-person/f75593f8-b178-47f1-8e72-e403f04dfb5d",
@@ -892,7 +1024,9 @@
     "phone": "919-301-1450",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/598/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/598",
-    "office": "Room 639, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 639, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Frank_Iler",
+    "ballotpediaUrl": "https://ballotpedia.org/Frank_Iler"
   },
   {
     "id": "ocd-person/1ba9c7a6-3a28-47ec-9704-6f3437463845",
@@ -906,7 +1040,9 @@
     "phone": "919-715-3036",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/S/436/Low",
     "website": "https://www.ncleg.gov/Members/Biography/S/436",
-    "office": "Room 1104, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 1104, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Gale_Adcock",
+    "ballotpediaUrl": "https://ballotpedia.org/Gale_Adcock"
   },
   {
     "id": "ocd-person/32edee21-40a5-491f-b28e-316ba7262360",
@@ -920,7 +1056,9 @@
     "phone": "919-733-5803",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/497/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/497",
-    "office": "Room 1204, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 1204, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Garland_E._Pierce",
+    "ballotpediaUrl": "https://ballotpedia.org/Garland_Pierce"
   },
   {
     "id": "ocd-person/af3f63da-d39a-4542-b0f2-41f118d96f55",
@@ -934,7 +1072,9 @@
     "phone": "919-715-3042",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/S/364/Low",
     "website": "https://www.ncleg.gov/Members/Biography/S/364",
-    "office": "Room 1028, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 1028, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Gladys_A._Robinson",
+    "ballotpediaUrl": "https://ballotpedia.org/Gladys_Robinson"
   },
   {
     "id": "ocd-person/d2ab7bb8-d0d6-4824-a42e-d180c2644f9e",
@@ -948,21 +1088,9 @@
     "phone": "919-715-3023",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/794/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/794",
-    "office": "Room 403, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
-  },
-  {
-    "id": "ocd-person/dea063a9-3548-4ec7-b226-a126d2eea0b2",
-    "name": "Graig Meyer",
-    "firstName": "Graig",
-    "lastName": "Meyer",
-    "chamber": "upper",
-    "district": "23",
-    "party": "Democratic",
-    "email": "graig.meyer@ncleg.gov",
-    "phone": "919-733-5804",
-    "photoUrl": "https://www.ncleg.gov/Members/MemberImage/S/437/Low",
-    "website": "https://www.ncleg.gov/Members/Biography/S/437",
-    "office": "Room 1121, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 403, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Gloristine_Brown",
+    "ballotpediaUrl": "https://ballotpedia.org/Gloristine_Brown"
   },
   {
     "id": "ocd-person/aca7632d-5a2a-470c-bb83-6cf374c68172",
@@ -976,7 +1104,8 @@
     "phone": "919-715-2009",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/campbellgrant.jpg",
     "website": "https://www.ncleg.gov/Members/Biography/H/830",
-    "office": "Room 306C, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 306C, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "ballotpediaUrl": "https://ballotpedia.org/Grant_Campbell"
   },
   {
     "id": "ocd-person/940d4a15-ee12-4a3b-a7b5-70b9dea38379",
@@ -990,7 +1119,25 @@
     "phone": "919-733-5784",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/630/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/630",
-    "office": "Room 611, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 611, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Harry_J._Warren",
+    "ballotpediaUrl": "https://ballotpedia.org/Harry_Warren"
+  },
+  {
+    "id": "ocd-person/e94fc39b-d33c-4d24-81c7-2cd2cc5aa997",
+    "name": "Haseeb Fatmi",
+    "firstName": "Haseeb",
+    "lastName": "Fatmi",
+    "chamber": "upper",
+    "district": "18",
+    "party": "Democratic",
+    "email": "haseeb.fatmi@ncleg.gov",
+    "phone": "919-733-5850",
+    "photoUrl": "https://ogletree.com/app/uploads/people/haseeb-s-fatmi.jpg",
+    "website": "https://www.ncleg.gov/Members/Biography/S/1002",
+    "office": "Room 1419, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Haseeb_Fatmi",
+    "ballotpediaUrl": "https://ballotpedia.org/Haseeb_Fatmi_(Wake_Forest_Town_Council,_North_Carolina,_candidate_2025)"
   },
   {
     "id": "ocd-person/d01232af-826f-441e-85c0-efaedd1ba422",
@@ -1004,7 +1151,8 @@
     "phone": "919-733-5782",
     "photoUrl": "https://storage.googleapis.com/enview-public-general/legislative-people-photos/148921.jpg",
     "website": "https://www.ncleg.gov/Members/Biography/H/823",
-    "office": "Room 531, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 531, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "ballotpediaUrl": "https://ballotpedia.org/Heather_Rhyne"
   },
   {
     "id": "ocd-person/9b6a3a48-9827-421f-9925-4717340110ab",
@@ -1018,7 +1166,9 @@
     "phone": "919-715-3015",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/768/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/768",
-    "office": "Room 418C, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 418C, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Howard_Penny_Jr.",
+    "ballotpediaUrl": "https://ballotpedia.org/Howard_Penny_Jr."
   },
   {
     "id": "ocd-person/f7ffa24f-4c1f-416f-bf1d-30d762d9c6c3",
@@ -1032,7 +1182,9 @@
     "phone": "919-733-5805",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/580/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/580",
-    "office": "Room 541, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 541, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Hugh_Blackwell",
+    "ballotpediaUrl": "https://ballotpedia.org/Hugh_Blackwell"
   },
   {
     "id": "ocd-person/11c5404c-5cb6-4f99-84a5-711a23e6295f",
@@ -1046,7 +1198,9 @@
     "phone": "919-715-4466",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/762/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/762",
-    "office": "Room 529, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 529, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jake_Johnson_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Jake_Johnson"
   },
   {
     "id": "ocd-person/4547831d-14b9-4d9d-9e3c-15b66c389054",
@@ -1060,7 +1214,9 @@
     "phone": "919-733-5974",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/786/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/786",
-    "office": "Room 511, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 511, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/James_Roberson_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/James_Roberson"
   },
   {
     "id": "ocd-person/1a75f967-8f35-40aa-8b0a-990a135e70cb",
@@ -1074,7 +1230,9 @@
     "phone": "919-733-5988",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/697/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/697",
-    "office": "Room 2207, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 2207, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jay_Adams_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Jay_Adams"
   },
   {
     "id": "ocd-person/75860d99-3e31-4c38-b511-734f76477c9b",
@@ -1088,7 +1246,9 @@
     "phone": "919-715-6400",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/S/395/Low",
     "website": "https://www.ncleg.gov/Members/Biography/S/395",
-    "office": "Room 1117, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 1117, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jay_Chaudhuri",
+    "ballotpediaUrl": "https://ballotpedia.org/Jay_Chaudhuri"
   },
   {
     "id": "ocd-person/f3f10d50-4117-41f8-b2af-c9273d3c425e",
@@ -1102,7 +1262,9 @@
     "phone": "919-733-5787",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/775/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/775",
-    "office": "Room 532, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 532, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jeff_Zenger",
+    "ballotpediaUrl": "https://ballotpedia.org/Jeff_Zenger"
   },
   {
     "id": "ocd-person/09d4ccb5-4456-4f33-aea7-36f3e2ef9e43",
@@ -1116,7 +1278,9 @@
     "phone": "919-733-5661",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/761/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/761",
-    "office": "Room 606, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 606, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jeffrey_McNeely",
+    "ballotpediaUrl": "https://ballotpedia.org/Jeffrey_McNeely"
   },
   {
     "id": "ocd-person/1c0b287a-2695-47e3-8c7a-1868db5c8d5c",
@@ -1130,7 +1294,24 @@
     "phone": "919-733-5956",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/820/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/820",
-    "office": "Room 2215, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 2215, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jennifer_Balkcom",
+    "ballotpediaUrl": "https://ballotpedia.org/Jennifer_Capps_Balkcom"
+  },
+  {
+    "id": "ocd-person/de679003-a07a-4f53-bb87-fd9bab0af532",
+    "name": "Jerry Tillett",
+    "firstName": "Jerry",
+    "lastName": "Tillett",
+    "chamber": "upper",
+    "district": "1",
+    "party": "Republican",
+    "email": "jerry.tillett@ncleg.gov",
+    "phone": "919-715-8293",
+    "photoUrl": "https://tillettforsenate.com/wp-content/uploads/2025/11/1-scaled-450x450.jpg",
+    "website": "https://www.ncleg.gov/Members/Biography/S/1003",
+    "office": "Room 629, 300 N. Salisbury St., Raleigh, NC 27603",
+    "ballotpediaUrl": "https://ballotpedia.org/Jerry_R._Tillett"
   },
   {
     "id": "ocd-person/9793e1e4-641c-4a5c-b1bc-7f6d0a65a655",
@@ -1144,7 +1325,9 @@
     "phone": "919-733-5748",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/S/412/Low",
     "website": "https://www.ncleg.gov/Members/Biography/S/412",
-    "office": "Room 620, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 620, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jim_Burgin",
+    "ballotpediaUrl": "https://ballotpedia.org/Jim_Burgin"
   },
   {
     "id": "ocd-person/2fdb425d-47c9-4683-943e-15a566f3552b",
@@ -1158,7 +1341,9 @@
     "phone": "919-715-3021",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/613/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/613",
-    "office": "Room 2226, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 2226, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jimmy_Dixon_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/James_Dixon_(North_Carolina)"
   },
   {
     "id": "ocd-person/cb059250-c895-4a14-bfa2-997aed42155e",
@@ -1172,7 +1357,9 @@
     "phone": "919-733-5868",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/606/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/606",
-    "office": "Room 538, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 538, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_Torbett",
+    "ballotpediaUrl": "https://ballotpedia.org/John_Torbett"
   },
   {
     "id": "ocd-person/3a96a66b-58e9-4ce5-bc6c-803b19c2746d",
@@ -1186,7 +1373,9 @@
     "phone": "919-733-5877",
     "photoUrl": "https://storage.googleapis.com/enview-public-general/legislative-people-photos/21657.jpg",
     "website": "https://www.ncleg.gov/Members/Biography/H/234",
-    "office": "Room 613, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 613, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_Blust",
+    "ballotpediaUrl": "https://ballotpedia.org/John_Blust"
   },
   {
     "id": "ocd-person/7d07a14d-a5dc-46a9-8277-85fee42921a1",
@@ -1198,9 +1387,10 @@
     "party": "Republican",
     "email": "john.lowery@ncleg.gov",
     "phone": "919-715-0875",
-    "photoUrl": "https://img.legistorm.com/people/361/195361.jpg?rand=42931",
+    "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/1001/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/1001",
-    "office": "Room 306B2, 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 306B2, 300 N. Salisbury St., Raleigh, NC 27603",
+    "ballotpediaUrl": "https://ballotpedia.org/John_Lowery_(North_Carolina)"
   },
   {
     "id": "ocd-person/cc410819-75a4-46dd-a3d5-edbd80d9f861",
@@ -1214,7 +1404,9 @@
     "phone": "919-715-3017",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/661/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/661",
-    "office": "Room 2301, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 2301, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_R._Bell_IV",
+    "ballotpediaUrl": "https://ballotpedia.org/John_Bell_(North_Carolina)"
   },
   {
     "id": "ocd-person/bde014bb-27c1-42a3-909f-c5d96cca5c3f",
@@ -1228,7 +1420,25 @@
     "phone": "919-715-3026",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/393/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/393",
-    "office": "Room 408, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 408, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_I._Sauls",
+    "ballotpediaUrl": "https://ballotpedia.org/John_Sauls"
+  },
+  {
+    "id": "ocd-person/3622ded7-77d3-46f8-a62b-dad1c8f3e589",
+    "name": "Jonah Garson",
+    "firstName": "Jonah",
+    "lastName": "Garson",
+    "chamber": "upper",
+    "district": "23",
+    "party": "Democratic",
+    "email": "jonah.garson@ncleg.gov",
+    "phone": "919-733-5804",
+    "photoUrl": "https://images.squarespace-cdn.com/content/v1/5ce70c57184229000120643d/1635110523522-15B7H44X3PRPJSL2DYJH/ParryLaw_PLLC_20211020_1501-2.jpg",
+    "website": "https://www.ncleg.gov/Members/Biography/S/1001",
+    "office": "Room 1121, 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jonah_Garson",
+    "ballotpediaUrl": "https://ballotpedia.org/Jonah_Garson"
   },
   {
     "id": "ocd-person/a8fb7327-cfc3-4951-a15f-5a60ba05dcba",
@@ -1242,7 +1452,8 @@
     "phone": "919-715-8361",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Jonathan_Almond_20241029_031016.png",
     "website": "https://www.ncleg.gov/Members/Biography/H/843",
-    "office": "Room 602, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 602, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "ballotpediaUrl": "https://ballotpedia.org/Jonathan_Almond"
   },
   {
     "id": "ocd-person/196e72cf-7987-4847-8e2f-03b540064e86",
@@ -1256,7 +1467,8 @@
     "phone": "919-733-5749",
     "photoUrl": "https://lopez4nc.com/wp-content/uploads/2023/12/FAV1127_LOPEZ_-121.webp",
     "website": "https://www.ncleg.gov/Members/Biography/H/835",
-    "office": "Room 1325, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 1325, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "ballotpediaUrl": "https://ballotpedia.org/Jordan_Lopez"
   },
   {
     "id": "ocd-person/50435516-ccee-4b72-9075-e27a0bfe0a72",
@@ -1270,7 +1482,9 @@
     "phone": "919-733-5906",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/808/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/808",
-    "office": "Room 542, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 542, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Joe_Pike",
+    "ballotpediaUrl": "https://ballotpedia.org/Joe_Pike"
   },
   {
     "id": "ocd-person/3e8067e6-6232-4ebb-979c-d077ab968446",
@@ -1284,7 +1498,9 @@
     "phone": "919-733-5650",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/S/393/Low",
     "website": "https://www.ncleg.gov/Members/Biography/S/393",
-    "office": "Room 1106, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 1106, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Joyce_Waddell",
+    "ballotpediaUrl": "https://ballotpedia.org/Joyce_Waddell"
   },
   {
     "id": "ocd-person/5318144e-d466-40ea-8e35-f0f09bf57760",
@@ -1298,7 +1514,9 @@
     "phone": "919-733-5904",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/53/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/53",
-    "office": "Room 302, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 302, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Julia_C._Howard",
+    "ballotpediaUrl": "https://ballotpedia.org/Julia_Howard"
   },
   {
     "id": "ocd-person/e9c35f8c-48f0-46e3-bd47-2e9481abc971",
@@ -1312,7 +1530,8 @@
     "phone": "919-715-0706",
     "photoUrl": "https://greenvoterguidenc.org/wp-content/uploads/Julia-Greenfield-square-400x400.png",
     "website": "https://www.ncleg.gov/Members/Biography/H/829",
-    "office": "Room 2121, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 2121, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "ballotpediaUrl": "https://ballotpedia.org/Julia_Greenfield"
   },
   {
     "id": "ocd-person/c8ac71ee-e3dc-450f-83f7-efeb363e88bc",
@@ -1326,7 +1545,9 @@
     "phone": "919-715-3001",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/S/432/Low",
     "website": "https://www.ncleg.gov/Members/Biography/S/432",
-    "office": "Room 1025, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 1025, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Julie_Mayfield",
+    "ballotpediaUrl": "https://ballotpedia.org/Julie_Mayfield"
   },
   {
     "id": "ocd-person/7b4481a0-466b-44be-8b39-def9e1bc04f8",
@@ -1340,7 +1561,9 @@
     "phone": "919-715-0795",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/758/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/758",
-    "office": "Room 1002, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 1002, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Julie_von_Haefen",
+    "ballotpediaUrl": "https://ballotpedia.org/Julie_Von_Haefen"
   },
   {
     "id": "ocd-person/5afbb4dc-a121-414a-b600-53af0936beb8",
@@ -1354,7 +1577,9 @@
     "phone": "919-715-8363",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/S/447/Low",
     "website": "https://www.ncleg.gov/Members/Biography/S/447",
-    "office": "Room 1113, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 1113, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kandie_Smith",
+    "ballotpediaUrl": "https://ballotpedia.org/Kandie_Smith"
   },
   {
     "id": "ocd-person/91f28923-c52e-4a47-aed2-944672902823",
@@ -1368,7 +1593,9 @@
     "phone": "919-733-5777",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/795/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/795",
-    "office": "Room 1317, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 1317, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kanika_Brown",
+    "ballotpediaUrl": "https://ballotpedia.org/Kanika_Brown"
   },
   {
     "id": "ocd-person/c0ca675d-4bd2-462f-9bcb-b7ac8226dbdf",
@@ -1382,7 +1609,9 @@
     "phone": "919-733-5859",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/771/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/771",
-    "office": "Room 1227, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 1227, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Karl_Gillespie",
+    "ballotpediaUrl": "https://ballotpedia.org/Karl_Gillespie"
   },
   {
     "id": "ocd-person/a39903f1-cf67-494a-8c6a-4ae15c334fc9",
@@ -1396,7 +1625,8 @@
     "phone": "919-733-5881",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/749/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/749",
-    "office": "Room 1206, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 1206, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "ballotpediaUrl": "https://ballotpedia.org/Keith_Kidwell"
   },
   {
     "id": "ocd-person/4edb53d2-f5a1-447d-ac37-36da75a7a4ed",
@@ -1410,7 +1640,9 @@
     "phone": "919-715-2002",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/618/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/618",
-    "office": "Room 2208, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 2208, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kelly_Hastings",
+    "ballotpediaUrl": "https://ballotpedia.org/Kelly_Hastings"
   },
   {
     "id": "ocd-person/410836ee-4f48-4934-8f95-fca6b2d2f051",
@@ -1424,7 +1656,9 @@
     "phone": "919-733-5875",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/S/433/Low",
     "website": "https://www.ncleg.gov/Members/Biography/S/433",
-    "office": "Room 623, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 623, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kevin_Corbin",
+    "ballotpediaUrl": "https://ballotpedia.org/Kevin_Corbin"
   },
   {
     "id": "ocd-person/6d8e0e56-939e-45c4-a9db-2fc370fbbdef",
@@ -1438,7 +1672,9 @@
     "phone": "919-733-5609",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/704/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/704",
-    "office": "Room 305, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 305, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kyle_Hall",
+    "ballotpediaUrl": "https://ballotpedia.org/Kyle_Hall_(North_Carolina)"
   },
   {
     "id": "ocd-person/3ed64eae-ecec-4cbf-a436-e7c1471a4cef",
@@ -1452,7 +1688,9 @@
     "phone": "919-733-5849",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/727/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/727",
-    "office": "Room 304, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 304, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Larry_C._Strickland",
+    "ballotpediaUrl": "https://ballotpedia.org/Larry_Strickland"
   },
   {
     "id": "ocd-person/11c903f8-ce25-4463-8a24-a49394c21955",
@@ -1466,7 +1704,9 @@
     "phone": "919-715-0873",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/724/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/724",
-    "office": "Room 307B1, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 307B1, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Larry_Potts",
+    "ballotpediaUrl": "https://ballotpedia.org/Larry_Potts"
   },
   {
     "id": "ocd-person/283007b1-e7a2-486b-b19b-5a8126bc4128",
@@ -1480,7 +1720,9 @@
     "phone": "919-733-5800",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/796/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/796",
-    "office": "Room 1015, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 1015, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Laura_Budd",
+    "ballotpediaUrl": "https://ballotpedia.org/Laura_Budd"
   },
   {
     "id": "ocd-person/16a0c907-4efa-45a7-83d2-1c79cc541535",
@@ -1494,7 +1736,9 @@
     "phone": "919-733-5746",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/809/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/809",
-    "office": "Room 1301, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 1301, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lindsey_Prather",
+    "ballotpediaUrl": "https://ballotpedia.org/Lindsey_Prather"
   },
   {
     "id": "ocd-person/a370c6f1-338d-49c3-a0b4-41e885dc0d80",
@@ -1508,7 +1752,9 @@
     "phone": "919-733-9349",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/S/439/Low",
     "website": "https://www.ncleg.gov/Members/Biography/S/439",
-    "office": "Room 1119, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 1119, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lisa_Grafstein",
+    "ballotpediaUrl": "https://ballotpedia.org/Lisa_Grafstein"
   },
   {
     "id": "ocd-person/21577fbd-e06f-4bc3-8717-e050ff165a74",
@@ -1522,7 +1768,9 @@
     "phone": "919-715-3030",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/S/427/Low",
     "website": "https://www.ncleg.gov/Members/Biography/S/427",
-    "office": "Room 628, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 628, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lisa_Stone_Barnes",
+    "ballotpediaUrl": "https://ballotpedia.org/Lisa_Barnes"
   },
   {
     "id": "ocd-person/be5acee4-3874-4414-9aff-77043943c1c1",
@@ -1536,7 +1784,9 @@
     "phone": "919-733-7663",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/732/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/732",
-    "office": "Room 1220, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 1220, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Marcia_Morey",
+    "ballotpediaUrl": "https://ballotpedia.org/Marcia_Morey"
   },
   {
     "id": "ocd-person/7a50ad08-1f2a-4f5f-9463-b1672d3a60a3",
@@ -1550,7 +1800,9 @@
     "phone": "919-733-5602",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/798/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/798",
-    "office": "Room 1209, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 1209, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Maria_Cervania",
+    "ballotpediaUrl": "https://ballotpedia.org/Maria_Cervania"
   },
   {
     "id": "ocd-person/cc238a7c-3222-4ac2-8d4d-3884dd342a5f",
@@ -1564,7 +1816,9 @@
     "phone": "919-715-3029",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/663/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/663",
-    "office": "Room 419A, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 419A, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mark_Brody",
+    "ballotpediaUrl": "https://ballotpedia.org/Mark_Brody"
   },
   {
     "id": "ocd-person/601cab9a-8b58-42fa-a62e-4170ec23b955",
@@ -1578,7 +1832,9 @@
     "phone": "919-733-5732",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/773/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/773",
-    "office": "Room 306A1, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 306A1, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mark_Pless",
+    "ballotpediaUrl": "https://ballotpedia.org/Mark_Pless"
   },
   {
     "id": "ocd-person/1afc84ab-30e5-413a-8975-2a552e050aee",
@@ -1590,9 +1846,10 @@
     "party": "Republican",
     "email": "mark.hollo@ncleg.gov",
     "phone": "919-733-5876",
-    "photoUrl": "http://www.ncga.state.nc.us/House/pictures/hiRes/619.jpg",
     "website": "https://www.ncga.state.nc.us/gascripts/members/viewMember.pl?sChamber=House&nUserID=619",
-    "office": "Room 2119, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 2119, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mark_Hollo",
+    "ballotpediaUrl": "https://ballotpedia.org/Mark_Hollo"
   },
   {
     "id": "ocd-person/819581b6-a44a-4d4a-8a08-14c2dccd86f5",
@@ -1606,7 +1863,9 @@
     "phone": "919-733-5607",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/713/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/713",
-    "office": "Room 1313, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 1313, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mary_Gardner_Belk",
+    "ballotpediaUrl": "https://ballotpedia.org/Mary_Belk"
   },
   {
     "id": "ocd-person/1dfa7f10-249d-43aa-930b-a5be9e4fce9f",
@@ -1620,7 +1879,9 @@
     "phone": "919-715-3032",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/776/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/776",
-    "office": "Room 1326, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 1326, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Matthew_Winslow",
+    "ballotpediaUrl": "https://ballotpedia.org/Matthew_Winslow"
   },
   {
     "id": "ocd-person/f0121b49-81cc-45f5-98e1-1fbeee882c81",
@@ -1634,7 +1895,9 @@
     "phone": "919-715-3034",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/S/426/Low",
     "website": "https://www.ncleg.gov/Members/Biography/S/426",
-    "office": "Room 300-C, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 300-C, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Michael_Lazzara",
+    "ballotpediaUrl": "https://ballotpedia.org/Michael_Lazzara"
   },
   {
     "id": "ocd-person/f40a7222-92eb-4d8e-ad4d-7008b859aae7",
@@ -1648,7 +1911,9 @@
     "phone": "919-733-5856",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/S/414/Low",
     "website": "https://www.ncleg.gov/Members/Biography/S/414",
-    "office": "Room 1109, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 1109, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Michael_Garrett_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Michael_Garrett_(North_Carolina)"
   },
   {
     "id": "ocd-person/082079ab-53d2-43e5-be5f-cb7c6054edd3",
@@ -1662,21 +1927,9 @@
     "phone": "919-715-2525",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/S/387/Low",
     "website": "https://www.ncleg.gov/Members/Biography/S/387",
-    "office": "Room 300-B, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
-  },
-  {
-    "id": "ocd-person/7bb5e97d-cc3b-4e78-94b1-92f6ec537afd",
-    "name": "Mike Clampitt",
-    "firstName": "Mike",
-    "lastName": "Clampitt",
-    "chamber": "lower",
-    "district": "119",
-    "party": "Republican",
-    "email": "mike.clampitt@ncleg.gov",
-    "phone": "919-715-3005",
-    "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/715/Low",
-    "website": "https://www.ncleg.gov/Members/Biography/H/715",
-    "office": "Room 633, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 300-B, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Michael_V._Lee",
+    "ballotpediaUrl": "https://ballotpedia.org/Michael_V._Lee"
   },
   {
     "id": "ocd-person/b3b24f9e-5eb4-475e-8b06-7040cfb39fb5",
@@ -1690,7 +1943,8 @@
     "phone": "919-733-5775",
     "photoUrl": "https://votemikecolvin.com/wp-content/uploads/2024/01/untitled-1024x1024.jpg",
     "website": "https://www.ncleg.gov/Members/Biography/H/831",
-    "office": "Room 1023, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 1023, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "ballotpediaUrl": "https://ballotpedia.org/Mike_Colvin"
   },
   {
     "id": "ocd-person/f6d0fc41-fbfa-4829-aa33-f5977edf1082",
@@ -1704,7 +1958,8 @@
     "phone": "919-715-3010",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/MikeSchietzelt2024.jpg",
     "website": "https://www.ncleg.gov/Members/Biography/H/840",
-    "office": "Room 533, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 533, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "ballotpediaUrl": "https://ballotpedia.org/Mike_Schietzelt"
   },
   {
     "id": "ocd-person/d4713ec5-e36b-49bb-bfc8-6b7fe9c0e9a7",
@@ -1718,7 +1973,9 @@
     "phone": "919-733-4948",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/149/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/149",
-    "office": "Room 2204, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 2204, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mitchell_S._Setzer",
+    "ballotpediaUrl": "https://ballotpedia.org/Mitchell_Setzer"
   },
   {
     "id": "ocd-person/018cd1c9-5b84-4f8e-8a1d-6f0326ce1f2f",
@@ -1732,7 +1989,8 @@
     "phone": "919-733-5880",
     "photoUrl": "https://www.uncfsu.edu/assets/Images/Student_Stories/Monika-Hostler.jpg",
     "website": "https://www.ncleg.gov/Members/Biography/H/834",
-    "office": "Room 2221, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 2221, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "ballotpediaUrl": "https://ballotpedia.org/Monika_Johnson-Hostler"
   },
   {
     "id": "ocd-person/c733e47e-af6a-4f31-a350-010043b5164b",
@@ -1746,7 +2004,9 @@
     "phone": "919-733-5955",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/S/417/Low",
     "website": "https://www.ncleg.gov/Members/Biography/S/417",
-    "office": "Room 517, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 517, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mujtaba_A._Mohammed",
+    "ballotpediaUrl": "https://ballotpedia.org/Mujtaba_Mohammed"
   },
   {
     "id": "ocd-person/6acc3963-2724-4d88-8762-f78df333be94",
@@ -1755,12 +2015,14 @@
     "lastName": "Majeed",
     "chamber": "lower",
     "district": "99",
-    "party": "Democratic",
+    "party": "Independent",
     "email": "nasif.majeed@ncleg.gov",
     "phone": "919-733-5606",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/752/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/752",
-    "office": "Room 1008, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 1008, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Nasif_Majeed",
+    "ballotpediaUrl": "https://ballotpedia.org/Nasif_Majeed"
   },
   {
     "id": "ocd-person/121cec2b-d03f-45bc-a835-1ae5f4eb18d3",
@@ -1774,7 +2036,9 @@
     "phone": "919-733-4599",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/S/422/Low",
     "website": "https://www.ncleg.gov/Members/Biography/S/422",
-    "office": "Room 1118, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 1118, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Natalie_Murdock",
+    "ballotpediaUrl": "https://ballotpedia.org/Natalie_Murdock"
   },
   {
     "id": "ocd-person/1e2d0ef7-d021-4427-af07-14fae1ad5aa0",
@@ -1788,7 +2052,9 @@
     "phone": "919-715-4946",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/804/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/804",
-    "office": "Room 406, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 406, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Neal_Jackson_(North_Carolina_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Neal_Jackson"
   },
   {
     "id": "ocd-person/7493bee0-b1ed-4d45-b772-b7fce91be4ff",
@@ -1802,7 +2068,9 @@
     "phone": "919-733-5706",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/S/375/Low",
     "website": "https://www.ncleg.gov/Members/Biography/S/375",
-    "office": "Room 309, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 309, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Norman_W._Sanderson",
+    "ballotpediaUrl": "https://ballotpedia.org/Norman_Sanderson"
   },
   {
     "id": "ocd-person/a73e339a-9724-45a5-9ebd-f1ca506374a0",
@@ -1816,7 +2084,9 @@
     "phone": "919-733-5620",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/S/394/Low",
     "website": "https://www.ncleg.gov/Members/Biography/S/394",
-    "office": "Room 1127, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 1127, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Paul_A._Lowe_Jr.",
+    "ballotpediaUrl": "https://ballotpedia.org/Paul_Lowe"
   },
   {
     "id": "ocd-person/8f02ce28-e826-48f7-adc1-11f8e5c2ed26",
@@ -1830,7 +2100,8 @@
     "phone": "919-733-4838",
     "photoUrl": "https://static.wixstatic.com/media/a254ce_1422fda1afc540a697d4c59e20275ee8~mv2.png/v1/fill/w_626,h_1003,al_c,q_90,usm_0.66_1.00_0.01,enc_auto/a254ce_1422fda1afc540a697d4c59e20275ee8~mv2.png",
     "website": "https://www.ncleg.gov/Members/Biography/H/841",
-    "office": "Room 610, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 610, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "ballotpediaUrl": "https://ballotpedia.org/Paul_Scott_(North_Carolina)"
   },
   {
     "id": "ocd-person/f276e61a-c569-4924-b302-caeda17a306a",
@@ -1844,7 +2115,9 @@
     "phone": "919-733-5708",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/S/64/Low",
     "website": "https://www.ncleg.gov/Members/Biography/S/64",
-    "office": "Room 2007, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 2007, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Philip_E._Berger",
+    "ballotpediaUrl": "https://ballotpedia.org/Phil_Berger"
   },
   {
     "id": "ocd-person/efae51b3-e547-46c0-87df-4ac35c0c60de",
@@ -1856,8 +2129,11 @@
     "party": "Democratic",
     "email": "phillip.rubin@ncleg.gov",
     "phone": "919-733-5530",
+    "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/844/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/844",
-    "office": "Room 1013, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 1013, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Phil_Rubin",
+    "ballotpediaUrl": "https://ballotpedia.org/Phil_Rubin"
   },
   {
     "id": "ocd-person/eab6e9df-d2e4-4476-b09d-cda1de0cf654",
@@ -1871,7 +2147,9 @@
     "phone": "919-715-9644",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/628/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/628",
-    "office": "Room 534, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 534, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Phil_Shepard",
+    "ballotpediaUrl": "https://ballotpedia.org/Phillip_Shepard"
   },
   {
     "id": "ocd-person/4c2e2654-2647-4394-8efe-f09532225ff6",
@@ -1885,7 +2163,9 @@
     "phone": "919-733-5771",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/504/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/504",
-    "office": "Room 1218, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 1218, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Pricey_Harrison",
+    "ballotpediaUrl": "https://ballotpedia.org/Mary_Harrison"
   },
   {
     "id": "ocd-person/25828c07-8295-45af-bd01-b044b59d530a",
@@ -1899,7 +2179,9 @@
     "phone": "919-733-3460",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/S/298/Low",
     "website": "https://www.ncleg.gov/Members/Biography/S/298",
-    "office": "Room 300-A, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 300-A, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ralph_Hise",
+    "ballotpediaUrl": "https://ballotpedia.org/Ralph_Hise"
   },
   {
     "id": "ocd-person/27cea850-e6f2-4fe8-a02e-26f9867d00f1",
@@ -1913,7 +2195,9 @@
     "phone": "919-733-7727",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/772/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/772",
-    "office": "Room 411, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 411, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ray_Pickett",
+    "ballotpediaUrl": "https://ballotpedia.org/Ray_Pickett"
   },
   {
     "id": "ocd-person/7ee23b19-064e-4531-a9e8-2e928f8f2203",
@@ -1927,7 +2211,9 @@
     "phone": "919-715-3019",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/810/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/810",
-    "office": "Room 1321, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 1321, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Renee_Price",
+    "ballotpediaUrl": "https://ballotpedia.org/Renee_Price"
   },
   {
     "id": "ocd-person/3aa6f3c5-cd15-42e1-907e-92e6f5362c8f",
@@ -1941,7 +2227,9 @@
     "phone": "919-733-0057",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/684/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/684",
-    "office": "Room 506, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27602"
+    "office": "Room 506, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27602",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Robert_T._Reives_II",
+    "ballotpediaUrl": "https://ballotpedia.org/Robert_Reives"
   },
   {
     "id": "ocd-person/230ed41f-56c1-459d-a66d-7ab0a3a8342b",
@@ -1955,7 +2243,9 @@
     "phone": "919-733-5662",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/RodneyPierce2024.jpeg",
     "website": "https://www.ncleg.gov/Members/Biography/H/838",
-    "office": "Room 1421, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 1421, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rodney_D._Pierce",
+    "ballotpediaUrl": "https://ballotpedia.org/Rodney_Pierce"
   },
   {
     "id": "ocd-person/4f490403-b729-4f33-b3ba-5417db20cb0b",
@@ -1969,7 +2259,9 @@
     "phone": "919-715-2526",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/687/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/687",
-    "office": "Room 632, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 632, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sam_Watford",
+    "ballotpediaUrl": "https://ballotpedia.org/Sam_Watford"
   },
   {
     "id": "ocd-person/4eb017f8-318e-43ba-b0c5-9fecbc3d0530",
@@ -1983,21 +2275,9 @@
     "phone": "919-733-5823",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/800/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/800",
-    "office": "Room 1323, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
-  },
-  {
-    "id": "ocd-person/09099128-27fc-463f-af36-28253d1e7a60",
-    "name": "Sarah Stevens",
-    "firstName": "Sarah",
-    "lastName": "Stevens",
-    "chamber": "lower",
-    "district": "90",
-    "party": "Republican",
-    "email": "sarah.stevens@ncleg.gov",
-    "phone": "919-715-1883",
-    "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/592/Low",
-    "website": "https://www.ncleg.gov/Members/Biography/H/592",
-    "office": "Room 635, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 1323, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sarah_Crawford_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Sarah_Crawford"
   },
   {
     "id": "ocd-person/f0d9b7f4-abb7-4111-b640-766a1f81d653",
@@ -2011,7 +2291,9 @@
     "phone": "919-715-3024",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/700/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/700",
-    "office": "Room 513, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 513, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Shelly_Willingham",
+    "ballotpediaUrl": "https://ballotpedia.org/Shelly_Willingham"
   },
   {
     "id": "ocd-person/c8c4c09a-5b3a-4521-82d4-2e2ded1b6b0a",
@@ -2025,7 +2307,8 @@
     "phone": "919-733-4809",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/SophiaChitlik2024.jpg",
     "website": "https://www.ncleg.gov/Members/Biography/S/449",
-    "office": "Room 1111, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 1111, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "ballotpediaUrl": "https://ballotpedia.org/Sophia_Chitlik"
   },
   {
     "id": "ocd-person/6b6dc936-a880-4bdb-9fba-11e0a2ff9f01",
@@ -2039,7 +2322,9 @@
     "phone": "919-733-5820",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/812/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/812",
-    "office": "Room 1229, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 1229, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Stephen_M._Ross_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Stephen_M._Ross"
   },
   {
     "id": "ocd-person/d0af18d6-b4e1-4a9a-92f3-a6950961e953",
@@ -2053,7 +2338,9 @@
     "phone": "919-733-5743",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/S/430/Low",
     "website": "https://www.ncleg.gov/Members/Biography/S/430",
-    "office": "Room 525, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 525, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Steve_Jarvis",
+    "ballotpediaUrl": "https://ballotpedia.org/Steven_Jarvis_(North_Carolina)"
   },
   {
     "id": "ocd-person/e4c62004-8706-4984-acb1-0140967173f0",
@@ -2067,7 +2354,9 @@
     "phone": "919-733-5853",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/774/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/774",
-    "office": "Room 634, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 634, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Steve_Tyson",
+    "ballotpediaUrl": "https://ballotpedia.org/Steve_Tyson"
   },
   {
     "id": "ocd-person/f29f268e-5a29-4f49-8c5e-3fa19688f4a2",
@@ -2081,7 +2370,9 @@
     "phone": "919-733-5653",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/S/434/Low",
     "website": "https://www.ncleg.gov/Members/Biography/S/434",
-    "office": "Room 1026, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 1026, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sydney_Batch",
+    "ballotpediaUrl": "https://ballotpedia.org/Sydney_Batch"
   },
   {
     "id": "ocd-person/b654a887-2eca-41f7-83ba-60044df0fc1c",
@@ -2095,21 +2386,9 @@
     "phone": "919-733-5786",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/637/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/637",
-    "office": "Room 301D, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
-  },
-  {
-    "id": "ocd-person/1217dc52-8590-4c6b-832b-666b57ef121c",
-    "name": "Terence Everitt",
-    "firstName": "Terence",
-    "lastName": "Everitt",
-    "chamber": "upper",
-    "district": "18",
-    "party": "Democratic",
-    "email": "terence.everitt@ncleg.gov",
-    "phone": "919-733-5850",
-    "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/741/Low",
-    "website": "https://www.ncleg.gov/Members/Biography/H/741",
-    "office": "Room 1419, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 301D, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ted_Davis_Jr.",
+    "ballotpediaUrl": "https://ballotpedia.org/Ted_Davis,_Jr."
   },
   {
     "id": "ocd-person/1ac38d5f-d089-4589-bcc4-bef1f1675956",
@@ -2123,7 +2402,9 @@
     "phone": "919-733-5654",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/783/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/783",
-    "office": "Room 509, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 509, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Terry_M._Brown_Jr.",
+    "ballotpediaUrl": "https://ballotpedia.org/Terry_Brown_Jr._(North_Carolina)"
   },
   {
     "id": "ocd-person/20f45197-ec0c-4031-a889-2825bffb008a",
@@ -2137,7 +2418,9 @@
     "phone": "919-733-5745",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/S/438/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/623",
-    "office": "Room 520, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 520, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tim_Moffitt",
+    "ballotpediaUrl": "https://ballotpedia.org/Timothy_Moffitt"
   },
   {
     "id": "ocd-person/1bc1818f-49fd-478a-affa-1f167adcfb51",
@@ -2151,7 +2434,9 @@
     "phone": "919-733-5773",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/818/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/818",
-    "office": "Room 1315, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 1315, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tim_Longest",
+    "ballotpediaUrl": "https://ballotpedia.org/Tim_Longest"
   },
   {
     "id": "ocd-person/f836e608-2d16-4792-bec5-0993fa2db3aa",
@@ -2165,7 +2450,8 @@
     "phone": "919-733-5757",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/811/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/811",
-    "office": "Room 416B, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 416B, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "ballotpediaUrl": "https://ballotpedia.org/Timothy_Reeder"
   },
   {
     "id": "ocd-person/1a7c3ce0-97be-4601-895d-8300458a7e42",
@@ -2179,7 +2465,8 @@
     "phone": "919-733-5741",
     "photoUrl": "https://www.iredellfreenews.com/wp-content/uploads/2023/12/Todd-Carver.jpg.webp",
     "website": "https://www.ncleg.gov/Members/Biography/H/842",
-    "office": "Room 603, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 603, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "ballotpediaUrl": "https://ballotpedia.org/Todd_Carver"
   },
   {
     "id": "ocd-person/37e615d5-0c02-488c-83e2-e6e6df5b8184",
@@ -2193,7 +2480,9 @@
     "phone": "919-733-7659",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/S/406/Low",
     "website": "https://www.ncleg.gov/Members/Biography/S/406",
-    "office": "Room 310, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 310, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Todd_Johnson_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Todd_Johnson_(North_Carolina)"
   },
   {
     "id": "ocd-person/81a19cd2-9493-4b85-b92b-44df8777530e",
@@ -2207,7 +2496,9 @@
     "phone": "919-733-5953",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/S/389/Low",
     "website": "https://www.ncleg.gov/Members/Biography/S/389",
-    "office": "Room 314, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 314, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tom_McInnis_(North_Carolina_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Tom_McInnis"
   },
   {
     "id": "ocd-person/47d80aae-1c7b-4330-96bd-76db7fe8b060",
@@ -2221,7 +2512,9 @@
     "phone": "919-733-5781",
     "photoUrl": "https://storage.googleapis.com/enview-public-general/legislative-people-photos/148017.jpg",
     "website": "https://www.ncleg.gov/Members/Biography/H/822",
-    "office": "Room 1213, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 1213, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tracy_Clark_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Tracy_Clark"
   },
   {
     "id": "ocd-person/6045737f-cc7a-4cf5-b7e6-12419deed77b",
@@ -2235,7 +2528,9 @@
     "phone": "919-733-5886",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/817/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/817",
-    "office": "Room 528, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 528, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tricia_Cotham",
+    "ballotpediaUrl": "https://ballotpedia.org/Tricia_Cotham"
   },
   {
     "id": "ocd-person/1ba98521-ee10-414a-9cf0-8b389ad02ffe",
@@ -2249,7 +2544,9 @@
     "phone": "919-733-5776",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/S/440/Low",
     "website": "https://www.ncleg.gov/Members/Biography/S/440",
-    "office": "Room 516, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 516, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Val_Applewhite",
+    "ballotpediaUrl": "https://ballotpedia.org/Val_Applewhite"
   },
   {
     "id": "ocd-person/baca6c05-f6c5-4239-bf9b-c4f57001273d",
@@ -2263,7 +2560,9 @@
     "phone": "919-733-5872",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/765/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/765",
-    "office": "Room 505, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 505, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Vernetta_Alston",
+    "ballotpediaUrl": "https://ballotpedia.org/Vernetta_Alston"
   },
   {
     "id": "ocd-person/ece1f23b-841d-4145-9719-3807bf29f861",
@@ -2277,7 +2576,9 @@
     "phone": "919-715-3038",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/S/405/Low",
     "website": "https://www.ncleg.gov/Members/Biography/S/405",
-    "office": "Room 312, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 312, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Vickie_Sawyer",
+    "ballotpediaUrl": "https://ballotpedia.org/Vickie_Sawyer"
   },
   {
     "id": "ocd-person/fe39f817-2024-401d-a0a8-3818ca22bdb1",
@@ -2291,7 +2592,9 @@
     "phone": "919-715-0690",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/S/416/Low",
     "website": "https://www.ncleg.gov/Members/Biography/S/416",
-    "office": "Room 621, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 621, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/W._Ted_Alexander",
+    "ballotpediaUrl": "https://ballotpedia.org/Ted_Alexander"
   },
   {
     "id": "ocd-person/5397305f-16ba-460d-aa16-3bee6185299b",
@@ -2305,7 +2608,9 @@
     "phone": "919-715-7823",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/S/295/Low",
     "website": "https://www.ncleg.gov/Members/Biography/S/295",
-    "office": "Room 627, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 627, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Warren_Daniel",
+    "ballotpediaUrl": "https://ballotpedia.org/Warren_Daniel"
   },
   {
     "id": "ocd-person/5eadd1cd-7d46-448d-9608-2901b596b24f",
@@ -2319,7 +2624,9 @@
     "phone": "919-733-5772",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/558/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/558",
-    "office": "Room 405, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 405, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/William_Brisson",
+    "ballotpediaUrl": "https://ballotpedia.org/William_Brisson"
   },
   {
     "id": "ocd-person/da2ebbae-4f50-4a95-927d-359ed2a9a42b",
@@ -2333,7 +2640,9 @@
     "phone": "919-715-8331",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Woodson_Bradley_20240820_013503.jpg",
     "website": "https://www.ncleg.gov/Members/Biography/S/454",
-    "office": "Room 518, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 518, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Woodson_Bradley",
+    "ballotpediaUrl": "https://ballotpedia.org/Woodson_Bradley"
   },
   {
     "id": "ocd-person/89065b80-ca15-43b3-bbe5-c7bb5e3a3843",
@@ -2347,7 +2656,9 @@
     "phone": "919-715-6707",
     "photoUrl": "https://images.squarespace-cdn.com/content/v1/6555362b58434b0824932281/15739355-3436-4410-b02c-ed4d63322f69/untitled-7317.jpg",
     "website": "https://www.ncleg.gov/Members/Biography/H/837",
-    "office": "Room 609, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 609, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Wyatt_Gable",
+    "ballotpediaUrl": "https://ballotpedia.org/Wyatt_Gable"
   },
   {
     "id": "ocd-person/d48b59a1-cf27-438e-8a25-2f8f179992f2",
@@ -2361,7 +2672,9 @@
     "phone": "919-733-5863",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/806/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/806",
-    "office": "Room 404, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603"
+    "office": "Room 404, Legislative Office Building 300 N. Salisbury St., Raleigh, NC 27603",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ya_Liu",
+    "ballotpediaUrl": "https://ballotpedia.org/Ya_Liu"
   },
   {
     "id": "ocd-person/6dea5a89-20c8-4370-94c2-0dac7fe29d77",
@@ -2375,6 +2688,8 @@
     "phone": "919-715-2528",
     "photoUrl": "https://www.ncleg.gov/Members/MemberImage/H/742/Low",
     "website": "https://www.ncleg.gov/Members/Biography/H/742",
-    "office": "Room 1307, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601"
+    "office": "Room 1307, North Carolina Legislative Building 16 W. Jones St., Raleigh, NC 27601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Zack_Forde-Hawkins",
+    "ballotpediaUrl": "https://ballotpedia.org/Zack_Forde-Hawkins"
   }
 ]

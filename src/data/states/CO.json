@@ -1,5 +1,23 @@
 [
   {
+    "id": "ocd-person/a033ad21-bdb7-4af2-be2e-e21c3e4cfa24",
+    "name": "Adrienne Benavidez",
+    "firstName": "Adrienne",
+    "lastName": "Benavidez",
+    "chamber": "upper",
+    "district": "21",
+    "party": "Democratic",
+    "email": "adrienne.benavidez.senate@coleg.gov",
+    "phone": "303-866-4857",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBMmlFQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--23746f2c8382ad88801fb500a0e47384becef5d8/Benavidez,%20Adrienne.jpg",
+    "website": "https://leg.colorado.gov/legislators/adrienne-benavidez",
+    "office": "200 E. Colfax, Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Adrienne_Benavidez",
+    "ballotpediaUrl": "https://ballotpedia.org/Adrienne_Benavidez",
+    "twitter": "benavidezhd32",
+    "facebook": "benavidezhd32"
+  },
+  {
     "id": "ocd-person/45c957a4-0017-4c0c-8650-393d656fc5a0",
     "name": "Alex Valdez",
     "firstName": "Alex",
@@ -9,9 +27,13 @@
     "party": "Democratic",
     "email": "alex.valdez.house@coleg.gov",
     "phone": "303-866-2925",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_valdez%2Calex.jpg?itok=NsEe2BaG",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBMU5UQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--d081dee839aa2f1b43bce42882d1b5e679141a05/Valdez,%20Alex.jpg",
     "website": "https://leg.colorado.gov/legislators/alex-valdez",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Alex_Valdez",
+    "ballotpediaUrl": "https://ballotpedia.org/Alex_Valdez_(Colorado)",
+    "twitter": "ValdezforCO",
+    "facebook": "ValdezforCO"
   },
   {
     "id": "ocd-person/34dbb5f1-239b-4924-911e-27ff91bde5cd",
@@ -25,7 +47,9 @@
     "phone": "303-866-2932",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/AmyPaschall24.jpg",
     "website": "https://leg.colorado.gov/legislators/amy-paschal",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Amy_Paschal",
+    "ballotpediaUrl": "https://ballotpedia.org/Amy_Paschal"
   },
   {
     "id": "ocd-person/278f042b-4fe3-4325-ad59-bc240e4fda0c",
@@ -37,9 +61,13 @@
     "party": "Democratic",
     "email": "andrew.boesenecker.house@coleg.gov",
     "phone": "303-866-2917",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_boesenecker%2Candrew.jpg?itok=3jMO1y9L",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBMGhUQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--cfaae02348bca597a92a30ada0c08d3e68ecc93f/Boesenecker,%20Andrew.jpg",
     "website": "https://leg.colorado.gov/legislators/andrew-boesenecker",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Andrew_Boesenecker",
+    "ballotpediaUrl": "https://ballotpedia.org/Andrew_Boesenecker",
+    "twitter": "rep_boesenecker",
+    "facebook": "andyforcolorado"
   },
   {
     "id": "ocd-person/561892b1-c618-43cb-9767-9237514f0a92",
@@ -51,9 +79,13 @@
     "party": "Republican",
     "email": "anthony.hartsook.house@coleg.gov",
     "phone": "303-866-2933",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_hartsook%2Canthony.jpg?itok=jDCFtuOk",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBeVpUQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--500af1f4202491ae4bd34d7f8e8196708b8f0019/Hartsook,Anthony.jpg",
     "website": "https://leg.colorado.gov/legislators/anthony-hartsook",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Anthony_Hartsook",
+    "ballotpediaUrl": "https://ballotpedia.org/Anthony_Hartsook",
+    "twitter": "RepHartsook",
+    "facebook": "AnthonyHartsookCO"
   },
   {
     "id": "ocd-person/af9e96aa-fb8b-49bb-96d8-e6c2c1ceb2b5",
@@ -65,8 +97,12 @@
     "party": "Republican",
     "email": "ava.flanell.house@coleg.gov",
     "phone": "303-866-2965",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBNEJUQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--5304bfc622fea842363e0fa2e5cbcb23d63aa5cf/Rep%20Flanell.jpeg",
     "website": "https://leg.colorado.gov/legislators/ava-flanell",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ava_Flanell",
+    "ballotpediaUrl": "https://ballotpedia.org/Ava_Flanell",
+    "twitter": "AvaFlanell_"
   },
   {
     "id": "ocd-person/6d1fcaf0-ed3d-4772-876f-09dc5e931556",
@@ -78,9 +114,12 @@
     "party": "Republican",
     "email": "barbara.kirkmeyer.senate@coleg.gov",
     "phone": "303-866-4876",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_kirkmeyer%2Cbarb-.jpg?itok=0RWY0AqY",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBKzlTQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--b75364af53ed9e801f5b0adfea3ca5cd1bbb3cf9/Kirkmeyer,%20Barbara.jpg",
     "website": "https://leg.colorado.gov/legislators/barbara-kirkmeyer",
-    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Barbara_Kirkmeyer",
+    "ballotpediaUrl": "https://ballotpedia.org/Barbara_Kirkmeyer",
+    "twitter": "SenKirkmeyer"
   },
   {
     "id": "ocd-person/ade56d2d-41d7-436d-b76b-85051f036c7a",
@@ -92,9 +131,13 @@
     "party": "Democratic",
     "email": "bob.marshall.house@coleg.gov",
     "phone": "303-866-2936",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_marshall%2C%20bob.jpg?itok=5ohSNQXK",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBM1pUQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--18c815634a34450ae6caf0855eeb0406ea4582cc/Marshall,%20Bob.jpg",
     "website": "https://leg.colorado.gov/legislators/bob-marshall",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bob_Marshall_(Colorado_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Robert_Marshall_(Colorado)",
+    "twitter": "Bob4Colorado",
+    "facebook": "Bob4Colorado"
   },
   {
     "id": "ocd-person/5a396024-8dcf-438c-beca-a730e972d9d8",
@@ -106,9 +149,13 @@
     "party": "Republican",
     "email": "brandi.bradley.house@coleg.gov",
     "phone": "303-866-2935",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_bradley%2Cbrandi.jpg?itok=gkSqfLu8",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBMnhUQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--f00bc156e1af4f5ddf1b991b5f96817a5221767c/Bradley,%20Brandi.jpg",
     "website": "https://leg.colorado.gov/legislators/brandi-bradley",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Brandi_Bradley",
+    "ballotpediaUrl": "https://ballotpedia.org/Brandi_Bradley",
+    "twitter": "brandi_b12",
+    "facebook": "brandibradleyfor39"
   },
   {
     "id": "ocd-person/fa9b604d-5981-4de1-97bc-9400e03909c9",
@@ -120,9 +167,13 @@
     "party": "Democratic",
     "email": "brianna.titone.house@coleg.gov",
     "phone": "303-866-2962",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_titone%2Cbrianna.jpg?itok=uJAlJK9O",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBeUZUQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--ee1a1cad1906ee93f20ffecfca5d9444e525ac05/Titone,%20Brianna.jpg",
     "website": "https://leg.colorado.gov/legislators/brianna-titone",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Brianna_Titone",
+    "ballotpediaUrl": "https://ballotpedia.org/Brianna_Titone",
+    "twitter": "BriannaForCO",
+    "facebook": "BriannaForColorado"
   },
   {
     "id": "ocd-person/2d0d060c-6d5f-45da-a069-fe2be14547eb",
@@ -134,9 +185,12 @@
     "party": "Republican",
     "email": "byron.pelton.senate@coleg.gov",
     "phone": "303-866-6360",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_pelton%2Cbyron-.jpg?itok=dSwGCsUR",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBdzk5QXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--7602b8809ffd638d639b8a39132341d13e764130/Pelton,%20Byron.jpg",
     "website": "https://leg.colorado.gov/legislators/byron-pelton",
-    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Byron_Pelton",
+    "ballotpediaUrl": "https://ballotpedia.org/Byron_Pelton",
+    "twitter": "commish_pelton"
   },
   {
     "id": "ocd-person/5f8d1bd0-329b-4a87-8d2f-cb62b8f2e921",
@@ -150,7 +204,10 @@
     "phone": "303-866-2943",
     "photoUrl": "https://i0.wp.com/coloradocommunitymedia.com/wp-content/uploads/2024/10/7A10C326-743A-4DF1-9625-6E709398C30F-JF-Services-Inc-Office-e1728345969755.jpg?resize=150%2C150&ssl=1",
     "website": "https://leg.colorado.gov/legislators/carlos-barron",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Carlos_Barron_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Carlos_Barron",
+    "twitter": "RepCarlosBarron"
   },
   {
     "id": "ocd-person/0ddf3b75-c450-419e-8235-553157770e49",
@@ -162,9 +219,13 @@
     "party": "Democratic",
     "email": "cathy.kipp.senate@coleg.gov",
     "phone": "303-866-4841",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_kipp%2Ccathy-.jpg?itok=5TZvGZWf",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBLzFTQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--0c9240ecbd4ae088cff97b227aa60c5b2bf6ac83/Kipp,%20Cathy.jpg",
     "website": "https://leg.colorado.gov/legislators/cathy-kipp",
-    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Cathy_Kipp",
+    "ballotpediaUrl": "https://ballotpedia.org/Cathy_Kipp",
+    "twitter": "cathy_kipp",
+    "facebook": "SenatorCathyKipp"
   },
   {
     "id": "ocd-person/a34a6b10-12d9-4109-86d1-76c311463333",
@@ -178,7 +239,9 @@
     "phone": "303-866-2954",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/CeceliaEspenoza24.jpg",
     "website": "https://leg.colorado.gov/legislators/cecelia-espenoza",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Cecelia_Espenoza",
+    "ballotpediaUrl": "https://ballotpedia.org/Cecelia_Espenoza"
   },
   {
     "id": "ocd-person/faaae748-7c57-47df-bdf7-1811e0a61458",
@@ -190,8 +253,12 @@
     "party": "Democratic",
     "email": "chad.clifford.house@coleg.gov",
     "phone": "303-866-5510",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBMmxUQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--440e192273c07cd1802c3f80053294b1fc1466f0/Clifford,%20Chad.jpg",
     "website": "https://leg.colorado.gov/legislators/chad-clifford",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Chad_Clifford",
+    "ballotpediaUrl": "https://ballotpedia.org/Chad_Clifford",
+    "facebook": "chadforcolorado"
   },
   {
     "id": "ocd-person/f72691ec-a5a0-413b-a344-e452009551a2",
@@ -203,9 +270,13 @@
     "party": "Democratic",
     "email": "chris.kolker.senate@coleg.gov",
     "phone": "303-866-4883",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_kolker%2Cchris.jpg?itok=DVQOTDRw",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBL2xTQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--56397ac18c5c7504955ce6730cdb98acc6f36205/Kolker,%20Chris.jpg",
     "website": "https://leg.colorado.gov/legislators/chris-kolker",
-    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Chris_Kolker",
+    "ballotpediaUrl": "https://ballotpedia.org/Chris_Kolker",
+    "twitter": "senatorkolker",
+    "facebook": "KolkerforColorado"
   },
   {
     "id": "ocd-person/0c428ee3-a327-4906-96c9-c46da7dfd7f1",
@@ -217,9 +288,10 @@
     "party": "Republican",
     "email": "chris.richardson.house@coleg.gov",
     "phone": "303-866-2912",
-    "photoUrl": "https://i0.wp.com/coloradocommunitymedia.com/wp-content/uploads/2022/10/20221012-100004-Richardson20for20Facebook.jpg?resize=1200%2C782&ssl=1",
     "website": "https://leg.colorado.gov/legislators/chris-richardson",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Chris_Richardson_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Chris_Richardson_(Colorado)"
   },
   {
     "id": "ocd-person/715df6f2-cef6-4b88-b745-0207c8ffb4ff",
@@ -231,9 +303,12 @@
     "party": "Republican",
     "email": "cleave.simpson.senate@coleg.gov",
     "phone": "303-866-4875",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_simpson%2Ccleave.jpg?itok=tY6QiPQW",
     "website": "https://leg.colorado.gov/legislators/cleave-simpson",
-    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Cleave_Simpson",
+    "ballotpediaUrl": "https://ballotpedia.org/Cleave_Simpson_Jr.",
+    "twitter": "SSenate35",
+    "facebook": "simpsonforsenate6"
   },
   {
     "id": "ocd-person/df050043-0b4f-4b51-8df0-ffd6cd6cd5b2",
@@ -245,9 +320,13 @@
     "party": "Republican",
     "email": "dan.woog.house@coleg.gov",
     "phone": "303-866-2924",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2022a_woog%2C%20dan.jpg?itok=VCcwkzOa",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBNEZUQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--6bf3d084b17e200e01f2ade18431e32df8e43a60/Rep%20Woog%202026.jpg",
     "website": "https://leg.colorado.gov/legislators/dan-woog",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dan_Woog",
+    "ballotpediaUrl": "https://ballotpedia.org/Dan_Woog",
+    "twitter": "danielpwoog",
+    "facebook": "representativedanwoog"
   },
   {
     "id": "ocd-person/f38f9f4b-9d3a-4e79-a96f-fab94d553d89",
@@ -261,7 +340,9 @@
     "phone": "303-866-2398",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/DustyJohnsonCO.jpg",
     "website": "https://leg.colorado.gov/legislators/dusty-johnson",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dusty_A._Johnson",
+    "ballotpediaUrl": "https://ballotpedia.org/Dusty_Johnson_(Colorado)"
   },
   {
     "id": "ocd-person/4be512fb-5ebc-422c-a858-d250cb5568ad",
@@ -273,9 +354,13 @@
     "party": "Democratic",
     "email": "dylan.roberts.senate@coleg.gov",
     "phone": "303-866-4871",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_roberts%2Cdylan.jpg?itok=reORJBqi",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBOXhTQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--8f1c6929289275427225aba6c766440b456c3b1a/Roberts,%20Dylan.jpg",
     "website": "https://leg.colorado.gov/legislators/dylan-roberts",
-    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dylan_Roberts",
+    "ballotpediaUrl": "https://ballotpedia.org/Dylan_Roberts",
+    "twitter": "Dylan_RobertsCO",
+    "facebook": "DylanforColorado"
   },
   {
     "id": "ocd-person/c02b7bf5-a583-43c0-b6d6-2e757c7d42b7",
@@ -287,9 +372,13 @@
     "party": "Democratic",
     "email": "eliza.hamrick.house@coleg.gov",
     "phone": "303-866-3706",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_hamrick%2Celiza-.jpg?itok=x__dbth_",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBd3RUQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--291f32764a20e23b89e6ea44560dea6151853b61/Hamrick,Eliza-.jpg",
     "website": "https://leg.colorado.gov/legislators/eliza-hamrick",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Eliza_Hamrick",
+    "ballotpediaUrl": "https://ballotpedia.org/Eliza_Hamrick",
+    "twitter": "eliza4colorado",
+    "facebook": "eliza4colorado"
   },
   {
     "id": "ocd-person/bd50bf12-cf63-4a3d-a887-93008333e694",
@@ -301,9 +390,12 @@
     "party": "Democratic",
     "email": "elizabeth.velasco.house@coleg.gov",
     "phone": "303-866-2949",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_velasco%2Celizabeth.jpg?itok=y0rtvQsw",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBNTltQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--1fae82b072c31f28dbf73e893d992426893562a5/Velasco,%20Elizabeth.jpg",
     "website": "https://leg.colorado.gov/legislators/elizabeth-velasco",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Elizabeth_Velasco",
+    "ballotpediaUrl": "https://ballotpedia.org/Elizabeth_Velasco",
+    "facebook": "ElizabethforHD57"
   },
   {
     "id": "ocd-person/c8c1a9c5-c7c2-4894-8829-fc83251bcaf2",
@@ -315,9 +407,13 @@
     "party": "Democratic",
     "email": "emily.sirota.house@coleg.gov",
     "phone": "303-866-2910",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_sirota%2Cemily.jpg?itok=lU6YsziF",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBeTVUQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--14b86aa8d8dc84d49199d71d5ad732b0abe8eb38/Sirota,%20Emily.jpg",
     "website": "https://leg.colorado.gov/legislators/emily-sirota",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Emily_Sirota",
+    "ballotpediaUrl": "https://ballotpedia.org/Emily_Sirota",
+    "twitter": "EmilyForCO",
+    "facebook": "EmilyForColorado"
   },
   {
     "id": "ocd-person/e0edd86c-a50d-4e78-96ac-f3e8217de4a8",
@@ -331,7 +427,11 @@
     "phone": "303-866-2953",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/GretchenRydin2024.jpeg",
     "website": "https://leg.colorado.gov/legislators/gretchen-rydin",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Gretchen_Rydin",
+    "ballotpediaUrl": "https://ballotpedia.org/Gretchen_Rydin",
+    "twitter": "gretchenforCO",
+    "facebook": "gretchenforcolorado"
   },
   {
     "id": "ocd-person/506f18ea-3611-408b-aa0e-73adf9681efe",
@@ -343,9 +443,13 @@
     "party": "Democratic",
     "email": "iman.jodeh.senate@coleg.gov",
     "phone": "303-866-3432",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_jodeh%2C%20iman.jpg?itok=rVcBxpYT",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBOXRTQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--29b2053d4c36e8d2d5d661dd8e279ff5a4fa30e5/Iman_Jodeh.jpg",
     "website": "https://leg.colorado.gov/legislators/iman-jodeh",
-    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Iman_Jodeh",
+    "ballotpediaUrl": "https://ballotpedia.org/Iman_Jodeh",
+    "twitter": "ImanforColorado",
+    "facebook": "ImanforColorado"
   },
   {
     "id": "ocd-person/48d0af72-b21b-44a5-afc2-325b80f1c551",
@@ -359,7 +463,10 @@
     "phone": "303-866-2918",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/jacque_phillips.jpg",
     "website": "https://leg.colorado.gov/legislators/jacque-phillips",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jacqueline_Phillips",
+    "ballotpediaUrl": "https://ballotpedia.org/Jacque_Phillips",
+    "facebook": "jacquephillipsforstaterep"
   },
   {
     "id": "ocd-person/e4e1f1a9-7134-4d90-9fed-2aa7a0e3a307",
@@ -371,9 +478,13 @@
     "party": "Democratic",
     "email": "james.coleman.senate@coleg.gov",
     "phone": "303-866-4864",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_coleman%2Cjames.jpg?itok=U8FI_CeH",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBKzVTQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--7a5daba3d83289b2d6431d3200c1731a422d6091/Coleman,%20James%20.jpg",
     "website": "https://leg.colorado.gov/legislators/james-coleman",
-    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/James_Coleman_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/James_Coleman_(Colorado)",
+    "twitter": "ColemanforCO",
+    "facebook": "colemanforcolorado"
   },
   {
     "id": "ocd-person/09ef4f5a-7c9d-463a-8ab6-52c861f97a74",
@@ -387,7 +498,10 @@
     "phone": "303-866-2919",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Jamie_Jackson_Colorado_House.jpg",
     "website": "https://leg.colorado.gov/legislators/jamie-jackson",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jamie_Jackson_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Jamie_Jackson_(Colorado)",
+    "facebook": "JamieForColorado"
   },
   {
     "id": "ocd-person/2718c918-a38c-49c2-a120-5503164f959f",
@@ -399,9 +513,13 @@
     "party": "Democratic",
     "email": "janice.marchman.senate@coleg.gov",
     "phone": "303-866-4853",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_marchman%2Cjanice.jpg?itok=Of-P3JI-",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBL0ZTQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--fcb333a05c84defed2c15ce0bdf8723c605199f3/Marchman,%20Janice.jpg",
     "website": "https://leg.colorado.gov/legislators/janice-marchman",
-    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Janice_Marchman",
+    "ballotpediaUrl": "https://ballotpedia.org/Janice_Marchman",
+    "twitter": "Janice_Marchman",
+    "facebook": "janiceforcolorado"
   },
   {
     "id": "ocd-person/2372415a-2aea-4423-8a3a-bed2d40493a6",
@@ -411,11 +529,13 @@
     "chamber": "upper",
     "district": "7",
     "party": "Republican",
-    "email": "janicerichsd7@gmail.com",
+    "email": "janice.rich.senate@coleg.gov",
     "phone": "303-866-3077",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_rich%2Cjanice-.jpg?itok=2ZTgyDv7",
     "website": "https://leg.colorado.gov/legislators/janice-rich",
-    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Janice_Rich",
+    "ballotpediaUrl": "https://ballotpedia.org/Janice_Rich",
+    "facebook": "JaniceRichforCO"
   },
   {
     "id": "ocd-person/544a4247-320e-456a-b5dd-f0373bdad788",
@@ -429,7 +549,11 @@
     "phone": "303-866-2191",
     "photoUrl": "https://coloradonewsline.com/wp-content/uploads/2023/12/jarvis-caldwell--200x300.jpeg",
     "website": "https://leg.colorado.gov/legislators/jarvis-caldwell",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jarvis_Caldwell",
+    "ballotpediaUrl": "https://ballotpedia.org/Jarvis_Caldwell",
+    "twitter": "GOP_Jarvis",
+    "facebook": "jarviscaldwellforhd20"
   },
   {
     "id": "ocd-person/d2b25169-0772-4e97-aa9e-49f82f0f5d08",
@@ -441,9 +565,13 @@
     "party": "Democratic",
     "email": "javier.mabrey.house@coleg.gov",
     "phone": "303-866-2966",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_mabrey%2Cjavier-.jpg?itok=nfzx9teU",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBeGhUQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--d5786817bd26f7bddab7f2d1085068af877cdf48/Mabrey,%20Javier.jpg",
     "website": "https://leg.colorado.gov/legislators/javier-mabrey",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Javier_Mabrey",
+    "ballotpediaUrl": "https://ballotpedia.org/Javier_Mabrey",
+    "twitter": "javier_mabrey",
+    "facebook": "JavierMabreyforCO"
   },
   {
     "id": "ocd-person/c2cade07-9c95-4439-938c-77ac4ed44fab",
@@ -455,9 +583,13 @@
     "party": "Democratic",
     "email": "jeff.bridges.senate@coleg.gov",
     "phone": "303-866-4846",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_bridges%2Cjeff.jpg?itok=7ZsoC6-F",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBeWhwQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--1f18e804077a78214975ed08168ecc3aa4c6f896/Bridges,Jeff.jpg",
     "website": "https://leg.colorado.gov/legislators/jeff-bridges",
-    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jeff_Bridges_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Jeff_Bridges",
+    "twitter": "JeffBridges",
+    "facebook": "bridgesforcolorado"
   },
   {
     "id": "ocd-person/4aba3e11-9554-405d-b926-5435eb77fa26",
@@ -469,9 +601,13 @@
     "party": "Democratic",
     "email": "jennifer.bacon.house@coleg.gov",
     "phone": "303-866-2909",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_bacon%2Cjennifer.jpg?itok=IifAHPYj",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBeXhUQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--9cf98fe8dc3d759fedb356430b801c66ad2b1edd/Bacon,%20Jennifer.jpg",
     "website": "https://leg.colorado.gov/legislators/jennifer-bacon",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jennifer_Bacon",
+    "ballotpediaUrl": "https://ballotpedia.org/Jennifer_Bacon",
+    "twitter": "baconforco",
+    "facebook": "BaconforColorado"
   },
   {
     "id": "ocd-person/655c629d-72f6-45d1-bd8f-a241e200d089",
@@ -483,9 +619,13 @@
     "party": "Democratic",
     "email": "jenny.willford.house@coleg.gov",
     "phone": "303-866-2931",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_willford%2Cjenny.jpg?itok=ydfmMYJj",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBM0pUQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--1d5d85081063604c97df120526af629e099e84e1/Willford,%20Jenny.jpg",
     "website": "https://leg.colorado.gov/legislators/jenny-willford",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jenny_Willford",
+    "ballotpediaUrl": "https://ballotpedia.org/Jenny_Willford",
+    "twitter": "JennyforCO",
+    "facebook": "jennyforcolorado"
   },
   {
     "id": "ocd-person/c06af980-c553-4f79-a39d-295b7226f029",
@@ -497,9 +637,13 @@
     "party": "Democratic",
     "email": "jessie.danielson.senate@coleg.gov",
     "phone": "303-866-4856",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_danielson%2Cjessie.jpg?itok=PNVRiYDq",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBK1JTQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--444190d18434e86fd51db8d0f3656887bb45824b/Danielson,%20Jessie.jpg",
     "website": "https://leg.colorado.gov/legislators/jessie-danielson",
-    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jessie_Danielson",
+    "ballotpediaUrl": "https://ballotpedia.org/Jessie_Danielson",
+    "twitter": "JessieDanielson",
+    "facebook": "jessiedanielsonforcolorado"
   },
   {
     "id": "ocd-person/8e95ac06-ddbb-4f6c-ba7e-854a92860be4",
@@ -511,9 +655,10 @@
     "party": "Republican",
     "email": "john.carson.senate@coleg.gov",
     "phone": "303-866-4881",
-    "photoUrl": "https://i0.wp.com/coloradocommunitymedia.com/wp-content/uploads/2024/06/DCO-0613-Commissioner-D3-race-2.jpg?w=768&ssl=1",
     "website": "https://leg.colorado.gov/legislators/john-carson",
-    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_Carson_(Colorado_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/John_Carson_(Colorado)"
   },
   {
     "id": "ocd-person/829879ea-a9a3-42b6-8f5f-d209b1cc961d",
@@ -525,9 +670,12 @@
     "party": "Democratic",
     "email": "judy.amabile.senate@coleg.gov",
     "phone": "303-866-4872",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_amabile%2Cjudy.jpg?itok=7ZbVKo7E",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBOUZTQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--b064f9311bf3386a06c699ba6aeee37a07444669/Judy%20Amabile.jpg",
     "website": "https://leg.colorado.gov/legislators/judy-amabile",
-    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Judy_Amabile",
+    "ballotpediaUrl": "https://ballotpedia.org/Judith_Amabile",
+    "facebook": "JudyAmabileCO"
   },
   {
     "id": "ocd-person/8dae5ba5-6741-4aca-8c1e-24f014fda187",
@@ -539,9 +687,13 @@
     "party": "Democratic",
     "email": "julie.gonzales.senate@coleg.gov",
     "phone": "303-866-4862",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_gonzales%2Cjulie.jpg?itok=YD-7SxZl",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBOXBTQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--f26a08c473c6f23699613abea473f8b3120e976c/Gonzales,%20Julie.jpg",
     "website": "https://leg.colorado.gov/legislators/julie-gonzales",
-    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Julie_Gonzales",
+    "ballotpediaUrl": "https://ballotpedia.org/Julie_Gonzales",
+    "twitter": "SenadoraJulie",
+    "facebook": "senadorajulie"
   },
   {
     "id": "ocd-person/53facaaf-5673-4c76-b15a-6b5061965ae1",
@@ -553,9 +705,13 @@
     "party": "Democratic",
     "email": "julie.mccluskie.house@coleg.gov",
     "phone": "303-866-2952",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_mccluskie%2C%20julie%20-%20speaker.jpg?itok=Gnk_5Fmt",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBeEpUQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--876516c8bc7b672caf43f253b83440d18b6eba1a/McCluskie,%20Julie.jpg",
     "website": "https://leg.colorado.gov/legislators/julie-mccluskie",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Julie_McCluskie",
+    "ballotpediaUrl": "https://ballotpedia.org/Julie_McCluskie",
+    "twitter": "McCluskieforCO",
+    "facebook": "McCluskieforCO"
   },
   {
     "id": "ocd-person/0c2271df-5808-42ff-9550-700f454b8b3a",
@@ -567,9 +723,13 @@
     "party": "Democratic",
     "email": "junie.joseph.house@coleg.gov",
     "phone": "303-866-2915",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_joseph%2Cjunie.jpg?itok=Lx4YgUSv",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBeWRUQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--c05fd8101f2bb8458f9e92fcaac1e5d867b1b662/Joseph,Junie.jpg",
     "website": "https://leg.colorado.gov/legislators/junie-joseph",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Junie_Joseph",
+    "ballotpediaUrl": "https://ballotpedia.org/Junie_Joseph",
+    "twitter": "Junie4Colorado",
+    "facebook": "junie4boulder"
   },
   {
     "id": "ocd-person/7631027c-2467-4112-8f03-abad6c6ed8f2",
@@ -581,9 +741,13 @@
     "party": "Democratic",
     "email": "karen.mccormick.house@coleg.gov",
     "phone": "303-866-2780",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_mccormick%2Ckaren.jpg?itok=b2GRKW9h",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBMkJUQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--e6c90c7865f8557c6411c91a27f58280cf938f05/McCormick,%20Karen.jpg",
     "website": "https://leg.colorado.gov/legislators/karen-mccormick",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Karen_McCormick",
+    "ballotpediaUrl": "https://ballotpedia.org/Karen_McCormick",
+    "twitter": "McCormickForCO",
+    "facebook": "McCormickForCO"
   },
   {
     "id": "ocd-person/fa06bf42-5305-4b04-95d0-a63f94ae8913",
@@ -597,7 +761,10 @@
     "phone": "303-866-2914",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/KatieStewart2024.jpg",
     "website": "https://leg.colorado.gov/legislators/katie-stewart",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Katie_Stewart_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Katie_Stewart_(Colorado)",
+    "facebook": "katieforcolorado"
   },
   {
     "id": "ocd-person/f0fa561d-39cf-48f3-ae8c-84b4d30d2662",
@@ -609,8 +776,11 @@
     "party": "Democratic",
     "email": "katie.wallace.senate@coleg.gov",
     "phone": "303-866-5291",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBOVpTQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--ccec530ad3acc81ebd2174a2e748819018094813/wallace%20katie.jpg",
     "website": "https://leg.colorado.gov/legislators/katie-wallace",
-    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Katie_Wallace",
+    "ballotpediaUrl": "https://ballotpedia.org/Katie_Wallace"
   },
   {
     "id": "ocd-person/767c8676-7cf0-45bf-9e20-e615d4d13c5e",
@@ -622,9 +792,11 @@
     "party": "Republican",
     "email": "ken.degraaf.house@coleg.gov",
     "phone": "303-866-2927",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_degraaf%2Cken.jpg?itok=kBCJZk7B",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBeUJUQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--375071f2707656fb29aac1700948de56433dd649/deGraaf,%20Ken.jpg",
     "website": "https://leg.colorado.gov/legislators/ken-degraaf",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ken_DeGraaf",
+    "ballotpediaUrl": "https://ballotpedia.org/Kenneth_DeGraaf"
   },
   {
     "id": "ocd-person/f84befdc-bf1b-4b0b-92df-27155caf403f",
@@ -636,8 +808,12 @@
     "party": "Democratic",
     "email": "kenny.nguyen.house@coleg.gov",
     "phone": "303-866-4667",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBd2hWQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--f9b1ecc716972f212d3b5fa44d7984f6a797f367/Nguyen,-Kenny.jpg",
     "website": "https://leg.colorado.gov/legislators/kenny-nguyen",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kenny_Nguyen_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Kenny_Nguyen",
+    "facebook": "NguyenforColorado"
   },
   {
     "id": "ocd-person/f376a75e-e0b0-4bf7-95b1-0931ade3bdb8",
@@ -649,9 +825,13 @@
     "party": "Democratic",
     "email": "kyle.brown.house@coleg.gov",
     "phone": "303-866-2920",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_kyle%20brown.jpg?itok=wfdtmHtz",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBMEZUQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--4dbbcef24e21979fc4a8cd74bea005733c789d61/Brown,%20Kyle.jpg",
     "website": "https://leg.colorado.gov/legislators/kyle-brown",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kyle_Brown_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Kyle_Brown_(Colorado)",
+    "twitter": "KyleBrownHD12",
+    "facebook": "representativekylebrown"
   },
   {
     "id": "ocd-person/ebf0c3de-2f58-436f-af67-12863f9cb552",
@@ -663,9 +843,13 @@
     "party": "Democratic",
     "email": "kyle.mullica.senate@coleg.gov",
     "phone": "303-866-4451",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_mullica%2Ckyle.jpg?itok=8ek9BxJC",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBK05TQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--c8a05176c5f582700250b8669d5df16c090a5d05/Mullica,%20Kyle.jpg",
     "website": "https://leg.colorado.gov/legislators/kyle-mullica",
-    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kyle_Mullica",
+    "ballotpediaUrl": "https://ballotpedia.org/Kyle_Mullica",
+    "twitter": "Kyle_Mullica",
+    "facebook": "VoteKyleMullica"
   },
   {
     "id": "ocd-person/c9fd6b10-91a3-44ec-ac6a-48f73eee3ed1",
@@ -677,9 +861,10 @@
     "party": "Republican",
     "email": "larry.liston.senate@coleg.gov",
     "phone": "303-866-2737",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_liston%2Clarry.jpg?itok=iMiSIx7h",
     "website": "https://leg.colorado.gov/legislators/larry-liston",
-    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Larry_Liston",
+    "ballotpediaUrl": "https://ballotpedia.org/Larry_Liston"
   },
   {
     "id": "ocd-person/a2745e24-bcf2-40f8-aa77-fad08d873ab1",
@@ -691,8 +876,12 @@
     "party": "Republican",
     "email": "larry.suckla.house@coleg.gov",
     "phone": "303-866-2955",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBMUpUQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--4b9d44adbd15e44548363ced61b10a873a3a90db/Suckla,%20Larry%20Don.jpg",
     "website": "https://leg.colorado.gov/legislators/larry-don-suckla",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Larry_Don_Suckla",
+    "ballotpediaUrl": "https://ballotpedia.org/Larry_Suckla",
+    "twitter": "LSuckla"
   },
   {
     "id": "ocd-person/475639af-fb56-4fde-9a78-213593db91d0",
@@ -706,7 +895,10 @@
     "phone": "303-866-2578",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Lesley_Smith_20230524_083227.jpg",
     "website": "https://leg.colorado.gov/legislators/lesley-smith",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lesley_Smith_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Lesley_Smith_(Colorado)",
+    "twitter": "LesleyForCU"
   },
   {
     "id": "ocd-person/d5ec869e-db7a-480f-b270-428805b90cee",
@@ -720,7 +912,10 @@
     "phone": "303-866-2959",
     "photoUrl": "https://images.squarespace-cdn.com/content/v1/5ea0cb44b06d660224de3cc9/1588045290088-U5X5Z0VC06EFGHN9K1AC/lindsay-gilchrist.jpg?format=500w",
     "website": "https://leg.colorado.gov/legislators/lindsay-gilchrist",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lindsay_Gilchrist",
+    "ballotpediaUrl": "https://ballotpedia.org/Lindsay_Gilchrist",
+    "twitter": "LindsGilchrist"
   },
   {
     "id": "ocd-person/2de0a3a1-a1e3-477f-88b9-3212fa52fb9c",
@@ -732,9 +927,13 @@
     "party": "Democratic",
     "email": "lindsey.daugherty.senate@coleg.gov",
     "phone": "303-866-4840",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_daugherty%2Clindsey.jpg?itok=27KHw-jU",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBL0pTQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--4a370bf5b571c75e61965486b4074d0d108d80b8/Daugherty,%20Lindsey.jpg",
     "website": "https://leg.colorado.gov/legislators/lindsey-daugherty",
-    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lindsey_Daugherty",
+    "ballotpediaUrl": "https://ballotpedia.org/Lindsey_Daugherty",
+    "twitter": "LindseyForCO",
+    "facebook": "lindseyforcolorado"
   },
   {
     "id": "ocd-person/5226ebdd-0710-49da-b446-61fac19765ce",
@@ -746,9 +945,13 @@
     "party": "Democratic",
     "email": "lisa.cutter.senate@coleg.gov",
     "phone": "303-866-4859",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_cutter%2Clisa.jpg?itok=9pY76BLB",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBL3BTQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--f08a5431fd4e493fd52194b1418976fd5a250df8/Cutter,%20Lisa.jpg",
     "website": "https://leg.colorado.gov/legislators/lisa-cutter",
-    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lisa_Cutter",
+    "ballotpediaUrl": "https://ballotpedia.org/Lisa_Cutter",
+    "twitter": "Cutter4Colorado",
+    "facebook": "CutterForColorado"
   },
   {
     "id": "ocd-person/e1a861fa-2163-4ef5-a891-fc9d36c2504b",
@@ -762,7 +965,10 @@
     "phone": "303-866-2950",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Lisa_Feret_20240622_065004.jpeg",
     "website": "https://leg.colorado.gov/legislators/lisa-feret",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lisa_Feret",
+    "ballotpediaUrl": "https://ballotpedia.org/Lisa_Feret",
+    "facebook": "LisaFeretCO"
   },
   {
     "id": "ocd-person/fce5c955-f43d-4f80-bad5-8369223bc0ea",
@@ -774,9 +980,13 @@
     "party": "Republican",
     "email": "lisa.frizell.senate@coleg.gov",
     "phone": "303-866-4869",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_frizell%2Clisa.jpg?itok=1nUPX3uM",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBODVTQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--2ea2d7fd307e8f1e762f9099be3a5b09bcb15f0a/Frizell,%20Lisa.jpg",
     "website": "https://leg.colorado.gov/legislators/lisa-frizell",
-    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lisa_Frizell",
+    "ballotpediaUrl": "https://ballotpedia.org/Lisa_Frizell",
+    "twitter": "lisa_frizell",
+    "facebook": "FrizellForSD2"
   },
   {
     "id": "ocd-person/d7569723-ddde-4706-a857-422804198fa8",
@@ -788,9 +998,13 @@
     "party": "Democratic",
     "email": "lorena.garcia.house@coleg.gov",
     "phone": "303-866-2964",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_garcia%2Clorena.jpg?itok=AB_Ecmz-",
-    "website": "https://leg.colorado.gov/legislators/lorena-garc%C3%ADa",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBMVZUQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--000f403a3a00241cbcadbe814acab9558e10dde4/Garcia,%20Lorena.jpg",
+    "website": "https://leg.colorado.gov/legislators/lorena-garcia",
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lorena_Garcia_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Lorena_Garcia",
+    "twitter": "RepLorenaGarcia",
+    "facebook": "RepLorenaGarcia"
   },
   {
     "id": "ocd-person/8de5b6ec-a488-4f1f-b96d-d78b90cb7fe7",
@@ -802,8 +1016,11 @@
     "party": "Democratic",
     "email": "lori.goldstein.house@coleg.gov",
     "phone": "303-866-2843",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBOHhTQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--c9f2d149165dbada9f3390e8d08ed879dc90f881/Goldstein,-Lori.jpg",
     "website": "https://leg.colorado.gov/legislators/lori-goldstein",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lori_Goldstein_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Lori_Goldstein"
   },
   {
     "id": "ocd-person/d450c0d3-b829-4855-ad0d-1228c5284a4f",
@@ -813,11 +1030,14 @@
     "chamber": "lower",
     "district": "65",
     "party": "Republican",
-    "email": "lori garciasander.house@coleg.gov",
+    "email": "lori.garciasander.house@coleg.gov",
     "phone": "303-866-2907",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/LoriSander2024.jpg",
     "website": "https://leg.colorado.gov/legislators/lori-garcia-sander",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lori_Garcia_Sander",
+    "ballotpediaUrl": "https://ballotpedia.org/Lori_Sander",
+    "twitter": "LGSforHD65"
   },
   {
     "id": "ocd-person/e5055578-02cb-435c-9fe0-b877318e3b1b",
@@ -829,8 +1049,11 @@
     "party": "Republican",
     "email": "lynda.zamorawilson.senate@coleg.gov",
     "phone": "303-866-4835",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBL2hTQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--d9f490eb4c61fa8d40c93bf6264c05d3e4471de6/Zamora%20Wilson.jpg",
     "website": "https://leg.colorado.gov/legislators/lynda-zamora-wilson",
-    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lynda_Zamora_Wilson",
+    "ballotpediaUrl": "https://ballotpedia.org/Lynda_Zamora_Wilson"
   },
   {
     "id": "ocd-person/2582d3dd-20c0-4d15-83a0-3b6dab1e98d2",
@@ -842,23 +1065,25 @@
     "party": "Democratic",
     "email": "mandy.lindsay.house@coleg.gov",
     "phone": "303-866-3911",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_lindsay%2Cmandy.jpg?itok=FHjKFjNG",
     "website": "https://leg.colorado.gov/legislators/mandy-lindsay",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mandy_Lindsay",
+    "ballotpediaUrl": "https://ballotpedia.org/Mandy_Lindsay",
+    "twitter": "MandyForCO",
+    "facebook": "RepLindsay"
   },
   {
-    "id": "ocd-person/ce4bd827-c1bc-4736-a580-f4f0215e727d",
-    "name": "Manny Rutinel",
-    "firstName": "Manny",
-    "lastName": "Rutinel",
+    "id": "ocd-person/135499ed-a471-4567-afcc-53c16112f0d6",
+    "name": "María González",
+    "firstName": "María",
+    "lastName": "González",
     "chamber": "lower",
     "district": "32",
     "party": "Democratic",
-    "email": "manny.rutinel.house@coleg.gov",
     "phone": "303-866-2945",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_rep%20rutinel%20v2.png?itok=m5Xp301H",
-    "website": "https://leg.colorado.gov/legislators/manny-rutinel",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "photoUrl": "https://images.squarespace-cdn.com/content/v1/5d1a28b95422a10001b1aada/1649269619359-0E7ARKVM3YXNYITKRFNP/Maria+Gonzalez.jpg?format=500w",
+    "office": "200 E Colfax RM 307, Denver, CO 80203",
+    "ballotpediaUrl": "https://ballotpedia.org/Maria_Gonzalez_(Colorado)"
   },
   {
     "id": "ocd-person/c0cfa7d3-2c5e-4b68-8692-2e1b6f1b3372",
@@ -870,9 +1095,12 @@
     "party": "Republican",
     "email": "marc.catlin.senate@coleg.gov",
     "phone": "303-866-5292",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_catlin%2Cmarc.jpg?itok=H8c5qcvv",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBdzlUQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--a385166cb7a79caaf96ebfd19a9e619a73014264/Catlin,%20Marc.jpg",
     "website": "https://leg.colorado.gov/legislators/marc-catlin",
-    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Marc_Catlin",
+    "ballotpediaUrl": "https://ballotpedia.org/Marc_Catlin",
+    "facebook": "CatlinForColorado"
   },
   {
     "id": "ocd-person/5dbb7ac2-a4c8-42b8-bfb1-1b012737fa74",
@@ -884,9 +1112,12 @@
     "party": "Democratic",
     "email": "marc.snyder.senate@coleg.gov",
     "phone": "303-866-4880",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_snyder%2C%20marc.jpg?itok=H0ekSgX2",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBeWxwQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--af6fe2d0b4cf102c536ab81e2462d61d44783d1a/Snyder,%20Marc.jpg",
     "website": "https://leg.colorado.gov/legislators/marc-snyder",
-    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Marc_Snyder",
+    "ballotpediaUrl": "https://ballotpedia.org/Marc_Snyder",
+    "twitter": "MarcSnyderHD18"
   },
   {
     "id": "ocd-person/b4002b84-79a0-481a-94a8-00136c2dabb6",
@@ -898,9 +1129,11 @@
     "party": "Republican",
     "email": "mark.baisley@senate.co.com",
     "phone": "303-866-4877",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_baisley%2Cmark.jpg?itok=_MDPUMlG",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBK2hTQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--7e5bc18c718b71be8507a78ac7fd5c9f047b70ae/Baisley,%20Mark.jpg",
     "website": "https://leg.colorado.gov/legislators/mark-baisley",
-    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mark_Baisley",
+    "ballotpediaUrl": "https://ballotpedia.org/Mark_Baisley"
   },
   {
     "id": "ocd-person/9e1ed481-cc42-4186-a8fe-891abba60162",
@@ -912,9 +1145,13 @@
     "party": "Republican",
     "email": "mary.bradfield.house@coleg.gov",
     "phone": "303-866-2946",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_bradfield%2Cmary.jpg?itok=QsKqEtTp",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBMXRUQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--e23010a39e960f0ad905ba4df19c5be9cf9ea5b9/Bradfield,Mary.jpg",
     "website": "https://leg.colorado.gov/legislators/mary-bradfield",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mary_Bradfield",
+    "ballotpediaUrl": "https://ballotpedia.org/Mary_Bradfield",
+    "twitter": "BradfieldFor",
+    "facebook": "MaryBradfield4HD21"
   },
   {
     "id": "ocd-person/4a72c7ee-c3e5-4c61-8e79-3301cb70a599",
@@ -928,7 +1165,9 @@
     "phone": "303-866-4861",
     "photoUrl": "https://images.squarespace-cdn.com/content/67330255adbf4c1a48d665b3/1732088535559-59YBHTFEFBLWVIPHRMDL/Matt+Ball+Headshot_park.jpeg?content-type=image%2Fjpeg",
     "website": "https://leg.colorado.gov/legislators/matt-ball",
-    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Matthew_Ball_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Matt_Ball"
   },
   {
     "id": "ocd-person/9e529237-916b-407c-a60e-abd8e0708329",
@@ -940,9 +1179,12 @@
     "party": "Republican",
     "email": "matthew.soper.house@coleg.gov",
     "phone": "303-866-2583",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_soper%2C%20matt.jpg?itok=n4TTkQb0",
     "website": "https://leg.colorado.gov/legislators/matt-soper",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Matt_Soper",
+    "ballotpediaUrl": "https://ballotpedia.org/Matt_Soper",
+    "twitter": "SoperMatthew",
+    "facebook": "Rep.Matt.Soper"
   },
   {
     "id": "ocd-person/27716b46-14de-4097-a29c-1a882ae3cd3a",
@@ -954,9 +1196,13 @@
     "party": "Democratic",
     "email": "matthew.martinez.house@coleg.gov",
     "phone": "303-866-2916",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_martinez%2Cmatthew.jpg?itok=JOH2bZF1",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBeEJUQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--4743a8832adf9daea6fe22f97942afef67ab8d1a/Martinez,%20Matthew.jpg",
     "website": "https://leg.colorado.gov/legislators/matthew-martinez",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Matthew_Martinez_(Colorado_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Matthew_Martinez",
+    "twitter": "MartinezforSoCo",
+    "facebook": "martinezinfo"
   },
   {
     "id": "ocd-person/fe11081d-5ca9-4f88-a143-04aed94e45f9",
@@ -970,7 +1216,10 @@
     "phone": "303-866-2948",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/MaxBrooks2024.jpg",
     "website": "https://leg.colorado.gov/legislators/max-brooks",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Max_Brooks_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Max_Brooks",
+    "facebook": "MaxforHD45"
   },
   {
     "id": "ocd-person/8e6bc6cb-fe7e-4640-a938-eb32536e95c5",
@@ -982,9 +1231,13 @@
     "party": "Democratic",
     "email": "meg.froelich.house@coleg.gov",
     "phone": "303-866-2921",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_froelich%2Cmeg.jpg?itok=YaGZpLnx",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBeUpUQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--2f6a935d21bc9d78189accacc0743c3071e567a1/Froelich,%20Meg.jpg",
     "website": "https://leg.colorado.gov/legislators/meg-froelich",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Meg_Froelich",
+    "ballotpediaUrl": "https://ballotpedia.org/Meg_Froelich",
+    "twitter": "RepMegFroe",
+    "facebook": "RepFroelich"
   },
   {
     "id": "ocd-person/c1a18202-08ad-487f-99bb-b1a606c15a22",
@@ -996,9 +1249,13 @@
     "party": "Democratic",
     "email": "meghan.lukens.house@coleg.gov",
     "phone": "303-866-2923",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_lukens%2Cmeghan.jpg?itok=uumAlRsU",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBM05UQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--16c3fe74431c9197b51b11e7bd64eb387369e758/Lukens,%20Meghan.jpg",
     "website": "https://leg.colorado.gov/legislators/meghan-lukens",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Meghan_Lukens",
+    "ballotpediaUrl": "https://ballotpedia.org/Meghan_Lukens",
+    "twitter": "MeghanLukens",
+    "facebook": "MeghanLukensforColorado"
   },
   {
     "id": "ocd-person/9c2accab-1bbf-495c-8036-137e48ba684d",
@@ -1012,7 +1269,10 @@
     "phone": "303-866-2942",
     "photoUrl": "https://aps.ss20.sharpschool.com/UserFiles/Servers/Server_3217444/Image/Board%20of%20Education/Members/Carter_Michael_152-200x300.jpg",
     "website": "https://leg.colorado.gov/legislators/michael-carter",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Michael_Carter_(Colorado_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Michael_Carter_(Colorado)",
+    "facebook": "carter_for_colorado"
   },
   {
     "id": "ocd-person/b680cb39-442c-4dd2-81bd-88696cfe9df2",
@@ -1024,9 +1284,13 @@
     "party": "Democratic",
     "email": "mike.weissman.senate@coleg.gov",
     "phone": "303-866-4879",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_weissman%2Cmike.jpg?itok=7RFIpBao",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBOUJTQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--8f5c3253e6bdff26fefd8864913fd683300d7176/Weissman,Mike.jpg",
     "website": "https://leg.colorado.gov/legislators/mike-weissman",
-    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mike_Weissman",
+    "ballotpediaUrl": "https://ballotpedia.org/Mike_Weissman",
+    "twitter": "mjweissman",
+    "facebook": "mike4rep"
   },
   {
     "id": "ocd-person/d8b6809c-61d9-4ea3-b21b-c846051468c2",
@@ -1038,9 +1302,13 @@
     "party": "Democratic",
     "email": "monica.duran.house@coleg.gov",
     "phone": "303-866-5522",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_duran%2C%20monica.jpg?itok=weFukimD",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBeDVUQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--807d51d68890b754bbaed0298372904fcf4a75d5/Duran,%20Monica.jpg",
     "website": "https://leg.colorado.gov/legislators/monica-duran",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Monica_Duran",
+    "ballotpediaUrl": "https://ballotpedia.org/Monica_Duran",
+    "twitter": "MonicaDuran23",
+    "facebook": "Monica.Duran.Colorado.House"
   },
   {
     "id": "ocd-person/64f01ef4-238f-4e48-9657-e221e0d030c0",
@@ -1052,9 +1320,13 @@
     "party": "Democratic",
     "email": "naquetta.ricks.house@coleg.gov",
     "phone": "303-866-2944",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_ricks%2Cnaquetta-.jpg?itok=ZtahH919",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBMjlUQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--6ad9235336da0cb9a035f6bb879b11838db6749e/Ricks,%20Naquetta.jpg",
     "website": "https://leg.colorado.gov/legislators/naquetta-ricks",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Naquetta_Ricks",
+    "ballotpediaUrl": "https://ballotpedia.org/Naquetta_Ricks",
+    "twitter": "naquettaricks",
+    "facebook": "RicksforColorado"
   },
   {
     "id": "ocd-person/4d753f6e-b7e3-420d-a684-e9a27f7ab27b",
@@ -1066,9 +1338,13 @@
     "party": "Democratic",
     "email": "nick.hinrichsen.senate@coleg.gov",
     "phone": "303-866-4878",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_hinrichsen%2Cnick.jpg?itok=dwNkn_3k",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBMmhUQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--4b49d3c681dec554da650bb248660b5dca8c032a/Hinrichsen,%20Nick.jpg",
     "website": "https://leg.colorado.gov/legislators/nick-hinrichsen",
-    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Nick_Hinrichsen",
+    "ballotpediaUrl": "https://ballotpedia.org/Nick_Hinrichsen",
+    "twitter": "NickForCO",
+    "facebook": "NickForColorado"
   },
   {
     "id": "ocd-person/04df7ed2-3683-4e00-ae08-9660cd6d878b",
@@ -1082,7 +1358,10 @@
     "phone": "303-866-2937",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Rebecca_Keltie_new.jpeg",
     "website": "https://leg.colorado.gov/legislators/rebecca-keltie",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rebecca_Keltie",
+    "ballotpediaUrl": "https://ballotpedia.org/Rebecca_Keltie",
+    "twitter": "Keltie4Congress"
   },
   {
     "id": "ocd-person/ef2507af-95ba-4a2f-84d5-84771785bfc2",
@@ -1096,7 +1375,11 @@
     "phone": "303-866-2951",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/RebekahStewart2024.jpeg",
     "website": "https://leg.colorado.gov/legislators/rebekah-stewart",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rebekah_Stewart",
+    "ballotpediaUrl": "https://ballotpedia.org/Rebekah_Stewart",
+    "twitter": "RebekahforCO",
+    "facebook": "RebekahforCO"
   },
   {
     "id": "ocd-person/d5be5146-f7a9-46eb-86f9-b0d1cebc4e9c",
@@ -1108,9 +1391,13 @@
     "party": "Democratic",
     "email": "regina.english.house@coleg.gov",
     "phone": "303-866-3069",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_english%2Cregina.jpg?itok=JnUXbH3O",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBejFUQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--854752db6d6188b1f926eb9e309d7791738093e5/English,%20Regina.jpg",
     "website": "https://leg.colorado.gov/legislators/regina-english",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Regina_English",
+    "ballotpediaUrl": "https://ballotpedia.org/Regina_English",
+    "twitter": "ReginaEnglishCO",
+    "facebook": "ReginaEnglishCO"
   },
   {
     "id": "ocd-person/5dae0c7f-430e-42a2-906d-9e177782f91b",
@@ -1122,9 +1409,12 @@
     "party": "Republican",
     "email": "rick.taggart.house@coleg.gov",
     "phone": "303-866-3068",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_taggartrick.jpg?itok=nCWfv2vG",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBd3BUQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--6b1fb5526e7780f89f9b2fb79535d4e7c39fc37b/TaggartRick.jpg",
     "website": "https://leg.colorado.gov/legislators/rick-taggart",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rick_Taggart",
+    "ballotpediaUrl": "https://ballotpedia.org/Rick_Taggart",
+    "facebook": "repricktaggart"
   },
   {
     "id": "ocd-person/ab377224-ab70-4c20-a535-baa429520e7c",
@@ -1136,9 +1426,12 @@
     "party": "Democratic",
     "email": "robert.rodriguez.senate@coleg.gov",
     "phone": "303-866-4852",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_rodriguez%2Crobert.jpg?itok=n2lsSdht",
     "website": "https://leg.colorado.gov/legislators/robert-rodriguez",
-    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Robert_Rodriguez_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Robert_Rodriguez_(Colorado)",
+    "twitter": "SenRobRodriguez",
+    "facebook": "RobertRodriguezforColorado"
   },
   {
     "id": "ocd-person/45cd06eb-9967-4468-9e4e-677549e7638d",
@@ -1150,9 +1443,13 @@
     "party": "Republican",
     "email": "rod.pelton.senate@coleg.gov",
     "phone": "303-866-4884",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_pelton%2C%20rod.jpg?itok=UiBGO0En",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBOU5TQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--08b2017b389fcad9ad2c05f5ffc23692931b3216/Pelton,%20Rod.jpg",
     "website": "https://leg.colorado.gov/legislators/rod-pelton",
-    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rod_Pelton",
+    "ballotpediaUrl": "https://ballotpedia.org/Rod_Pelton",
+    "twitter": "SenRodPelton",
+    "facebook": "SenatorRodPelton"
   },
   {
     "id": "ocd-person/9b1256a4-11c6-4c9e-81e6-2e0a3c5871be",
@@ -1164,9 +1461,13 @@
     "party": "Republican",
     "email": "ron.weinberg.house@coleg.gov",
     "phone": "303-866-2947",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_rep%20ron%20weinberg.jpg?itok=7Z-RCYNp",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBekpUQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--ff0c3a27e8b7c137cbdb5c5fde02af093a8db4b4/Rep%20Ron%20Weinberg.JPG",
     "website": "https://leg.colorado.gov/legislators/ron-weinberg",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ron_Weinberg",
+    "ballotpediaUrl": "https://ballotpedia.org/Ron_Weinberg",
+    "twitter": "RepWeinberg",
+    "facebook": "WeinbergForColorado"
   },
   {
     "id": "ocd-person/e7b1210b-3400-4ad4-a461-a55023e54042",
@@ -1180,7 +1481,11 @@
     "phone": "303-866-2929",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/ryangonzalez.jpeg",
     "website": "https://leg.colorado.gov/legislators/ryan-gonzalez",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ryan_Gonzalez",
+    "ballotpediaUrl": "https://ballotpedia.org/Ryan_Gonzalez",
+    "twitter": "RyanGonzalezCO",
+    "facebook": "Gonzalezfor50"
   },
   {
     "id": "ocd-person/66254480-6178-4312-8a18-268ec84153cc",
@@ -1192,9 +1497,13 @@
     "party": "Republican",
     "email": "scott.bottoms.house@coleg.gov",
     "phone": "303-866-5525",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_scott%20bottoms.jpg?itok=q9FETlLN",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBMCtIQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--2fb56df7ac0ddd22f63e0eb99a03b0d30e48bff5/Rep%20Bottoms%202026.jpg",
     "website": "https://leg.colorado.gov/legislators/scott-bottoms",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Scott_Bottoms",
+    "ballotpediaUrl": "https://ballotpedia.org/Scott_Bottoms",
+    "twitter": "repscottbottoms",
+    "facebook": "scottbottomsco"
   },
   {
     "id": "ocd-person/fb530f21-a08e-473c-b215-9a4de6a86ee9",
@@ -1208,7 +1517,10 @@
     "phone": "303-866-4855",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/ScottBright.jpg",
     "website": "https://leg.colorado.gov/legislators/scott-bright",
-    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Scott_Bright",
+    "ballotpediaUrl": "https://ballotpedia.org/Scott_Bright_(Colorado)",
+    "facebook": "ScottBrightforSenate"
   },
   {
     "id": "ocd-person/cba33581-a61a-41c5-9773-c949f2b06d0a",
@@ -1220,8 +1532,11 @@
     "party": "Republican",
     "email": "scott.slaugh.house@coleg.gov",
     "phone": "303-866-2906",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBMzVUQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--0e6191fb1cd75d1bcd0669b7105c3d347e0d598d/Slaugh,-Scott.jpg",
     "website": "https://leg.colorado.gov/legislators/scott-slaugh",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Scott_Slaugh",
+    "ballotpediaUrl": "https://ballotpedia.org/Scott_Slaugh"
   },
   {
     "id": "ocd-person/56e058a4-2a75-4864-8d5e-18c1c98f6960",
@@ -1235,7 +1550,10 @@
     "phone": "303-866-2911",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/SeanCamacho2024.jpeg",
     "website": "https://leg.colorado.gov/legislators/sean-camacho",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sean_Camacho",
+    "ballotpediaUrl": "https://ballotpedia.org/Sean_Camacho",
+    "twitter": "SeanCamachoCO"
   },
   {
     "id": "ocd-person/b44045eb-e2fb-4723-9e91-d68fb55c0bf7",
@@ -1247,9 +1565,11 @@
     "party": "Democratic",
     "email": "sheila.lieder.house@coleg.gov",
     "phone": "303-866-2939",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_lieder%2Csheila.jpg?itok=eytxsbcE",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBeE5UQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--bbb6f4456c06c54b1c8fffade0441c9a63ccf12e/Lieder,%20Sheila.jpg",
     "website": "https://leg.colorado.gov/legislators/sheila-lieder",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sheila_Lieder",
+    "ballotpediaUrl": "https://ballotpedia.org/Sheila_Lieder"
   },
   {
     "id": "ocd-person/3e7145a3-8729-497c-a168-db98d22cf015",
@@ -1261,9 +1581,11 @@
     "party": "Republican",
     "email": "stephanie.luck.house@coleg.gov",
     "phone": "303-866-2905",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_luck%2C%20stephanie.jpg?itok=b1DCrqcw",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBdzVUQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--30a0b950ff1755b8691052388ed9b70f8fe688cc/Luck,%20Stephanie.jpg",
     "website": "https://leg.colorado.gov/legislators/stephanie-luck",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Stephanie_Luck",
+    "ballotpediaUrl": "https://ballotpedia.org/Stephanie_Luck"
   },
   {
     "id": "ocd-person/09af4a19-c07e-49b2-b320-104f3784705b",
@@ -1275,9 +1597,13 @@
     "party": "Democratic",
     "email": "steven.woodrow.house@coleg.gov",
     "phone": "303-866-2967",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_woodrow%2Csteven-.jpg?itok=s0Qxv3Oj",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBMXhUQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--b28a2d8e234c37d646a99efd0b7aea44a198fe9d/Woodrow,Steven-.jpg",
     "website": "https://leg.colorado.gov/legislators/steven-woodrow",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Steven_Woodrow",
+    "ballotpediaUrl": "https://ballotpedia.org/Steven_Woodrow",
+    "twitter": "WoodrowForCO",
+    "facebook": "woodrowforco"
   },
   {
     "id": "ocd-person/489b3afa-1e08-40f4-918a-f01c186b6f73",
@@ -1289,9 +1615,13 @@
     "party": "Democratic",
     "email": "tammy.story.house@coleg.gov",
     "phone": "303-866-2582",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_story%2Ctammy.jpg?itok=NP2YRnLu",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBelJUQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--6eaeb97b2bd0b0a9f0bf46040f34663cd0c37112/Story,%20Tammy.jpg",
     "website": "https://leg.colorado.gov/legislators/tammy-story",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tammy_Story",
+    "ballotpediaUrl": "https://ballotpedia.org/Tammy_Story",
+    "twitter": "Story4CO",
+    "facebook": "Story4CO"
   },
   {
     "id": "ocd-person/851b5f31-0694-4674-a3b8-468b6eb1f0a8",
@@ -1303,9 +1633,12 @@
     "party": "Democratic",
     "email": "tisha.mauro.house@coleg.gov",
     "phone": "303-866-2968",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_t%20mauro.jpg?itok=05-hhChK",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBMlJUQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--c083d9d0c61aec511c97d0802cd5873416f901d9/Mauro,%20Tisha.jpg",
     "website": "https://leg.colorado.gov/legislators/tisha-mauro",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tisha_Mauro",
+    "ballotpediaUrl": "https://ballotpedia.org/Tisha_Mauro",
+    "facebook": "tishamauroforhousedistrict46"
   },
   {
     "id": "ocd-person/dc9056b8-fb9c-4a66-99b8-210acce64bff",
@@ -1317,9 +1650,13 @@
     "party": "Democratic",
     "email": "tom.sullivan.senate@coleg.gov",
     "phone": "303-866-4873",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_sullivan%2Ctom.jpg?itok=rbln5IBq",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBOWxTQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--85d8c976f450d3f48b1dbe66ac712d2be0f5e86b/Sullivan,Tom.jpg",
     "website": "https://leg.colorado.gov/legislators/tom-sullivan",
-    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tom_Sullivan_(Colorado_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Tom_Sullivan_(Colorado)",
+    "twitter": "Sully_720",
+    "facebook": "SullivanForColorado"
   },
   {
     "id": "ocd-person/473bd095-778d-4418-8e61-96a2b8005c8e",
@@ -1331,9 +1668,13 @@
     "party": "Democratic",
     "email": "tony.exum.senate@coleg.gov",
     "phone": "303-866-6364",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_exum%2Ctony%20sr.jpg?itok=NGfbn-0x",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBKzFTQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--d4163d37a59db187d2e91b1e4af903d1385df345/Exum,%20Tony%20SR.jpg",
     "website": "https://leg.colorado.gov/legislators/tony-exum",
-    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 346, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tony_Exum",
+    "ballotpediaUrl": "https://ballotpedia.org/Thomas_Exum,_Sr.",
+    "twitter": "TonyExum",
+    "facebook": "SenTonyExum"
   },
   {
     "id": "ocd-person/f3cd2006-7729-41b0-a009-0c5cf64e95e0",
@@ -1345,9 +1686,12 @@
     "party": "Republican",
     "email": "ty.winter.house@coleg.gov",
     "phone": "303-866-2747",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_winter%2Cty.jpg?itok=aGQTR3tx",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBMmRUQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--7e3263a1638a76c8a5732293d1ea8f844d2e9d25/Winter,Ty.jpg",
     "website": "https://leg.colorado.gov/legislators/ty-winter",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ty_Winter",
+    "ballotpediaUrl": "https://ballotpedia.org/Ty_Winter",
+    "twitter": "RepTyWinter"
   },
   {
     "id": "ocd-person/dbe86f29-2ecb-449e-aaf6-3fc91baf2e0e",
@@ -1359,9 +1703,13 @@
     "party": "Democratic",
     "email": "william.lindstedt.senate@coleg.gov",
     "phone": "303-866-4863",
-    "photoUrl": "http://leg.colorado.gov/sites/default/files/styles/width_300/public/2023b_lindstedt%2Cwilliam.jpg?itok=UVhLAS88",
+    "photoUrl": "https://leg.colorado.gov/rails/active_storage/blobs/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBK1ZTQXc9PSIsImV4cCI6bnVsbCwicHVyIjoiYmxvYl9pZCJ9fQ==--5f021c807d11e6b00e9c2e987dd101e88185bee0/Lindstedt,%20William.jpg",
     "website": "https://leg.colorado.gov/legislators/william-lindstedt",
-    "office": "State Capitol Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/William_Lindstedt",
+    "ballotpediaUrl": "https://ballotpedia.org/William_Lindstedt",
+    "twitter": "WSLindstedt",
+    "facebook": "williamforcolorado"
   },
   {
     "id": "ocd-person/e8a7d2a2-1907-450d-8c61-8c328839e922",
@@ -1375,6 +1723,9 @@
     "phone": "303-866-4569",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/yf.jpeg",
     "website": "https://leg.colorado.gov/legislators/yara-zokaie",
-    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203"
+    "office": "State Capitol Room 307, Colorado  Building 200 E. Colfax Ave., Denver, CO 80203",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Yara_Zokaie",
+    "ballotpediaUrl": "https://ballotpedia.org/Yara_Zokaie",
+    "twitter": "yzokaie"
   }
 ]

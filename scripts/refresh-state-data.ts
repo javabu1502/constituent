@@ -52,6 +52,13 @@ interface OpenStatesData {
     url: string;
     note?: string;
   }>;
+  /** Where OpenStates got the record. Usually includes Wikipedia and Ballotpedia. */
+  sources?: Array<{
+    url: string;
+    note?: string;
+  }>;
+  ids?: Record<string, string>;
+  other_identifiers?: Array<{ identifier: string; scheme: string }>;
 }
 
 interface StateLegislator {
@@ -67,6 +74,15 @@ interface StateLegislator {
   photoUrl?: string;
   website?: string;
   office?: string;
+  /** The office they keep in the district, when it differs from the capitol. */
+  districtOffice?: string;
+  districtPhone?: string;
+  /** Written by people, not inferred by a model. OpenStates has already
+   *  matched the article to the person, which is the hard half. */
+  wikipediaUrl?: string;
+  ballotpediaUrl?: string;
+  twitter?: string;
+  facebook?: string;
 }
 
 function parseLegislator(data: OpenStatesData): StateLegislator | null {
@@ -92,6 +108,14 @@ function parseLegislator(data: OpenStatesData): StateLegislator | null {
   const homepage = data.links?.find((l) => l.note === 'homepage');
   const website = homepage?.url || data.links?.[0]?.url;
 
+  // Wikipedia and Ballotpedia turn up in sources, occasionally in links.
+  const urls = [...(data.sources ?? []), ...(data.links ?? [])].map((l) => l.url).filter(Boolean);
+  const wikipediaUrl = urls.find((u) => /^https?:\/\/en\.wikipedia\.org\/wiki\//.test(u));
+  const ballotpediaUrl = urls.find((u) => /^https?:\/\/ballotpedia\.org\//.test(u));
+
+  const handle = (scheme: string) =>
+    data.ids?.[scheme] ?? data.other_identifiers?.find((i) => i.scheme === scheme)?.identifier;
+
   return {
     id: data.id,
     name: data.name,
@@ -105,6 +129,12 @@ function parseLegislator(data: OpenStatesData): StateLegislator | null {
     photoUrl: data.image,
     website,
     office,
+    districtOffice: districtOffice?.address !== office ? districtOffice?.address : undefined,
+    districtPhone: districtOffice?.voice !== phone ? districtOffice?.voice : undefined,
+    wikipediaUrl,
+    ballotpediaUrl,
+    twitter: handle('twitter'),
+    facebook: handle('facebook'),
   };
 }
 

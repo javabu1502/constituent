@@ -11,7 +11,9 @@
     "phone": "502-233-3689",
     "photoUrl": "https://gunleash.com/wp-content/uploads/2023/11/Aaron_Reed.jpg",
     "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=107",
-    "office": "1016 Mount Vernon Drive Suite 3, Shelbyville, KY 40065"
+    "office": "1016 Mount Vernon Drive Suite 3, Shelbyville, KY 40065",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Aaron_Reed",
+    "ballotpediaUrl": "https://ballotpedia.org/Aaron_Reed"
   },
   {
     "id": "ocd-person/1439bad2-f18b-49e2-94ca-21f2b563dfdd",
@@ -23,7 +25,9 @@
     "party": "Republican",
     "email": "aaron.thompson@kylegislature.gov",
     "photoUrl": "https://content.campaignpartner.net/images/126420/Headshot.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=98"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=98",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Aaron_Thompson_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Aaron_Thompson_(Kentucky)"
   },
   {
     "id": "ocd-person/e7f7a316-4eb0-4be9-adf9-e7067b20dcfc",
@@ -35,7 +39,10 @@
     "party": "Republican",
     "email": "adam.bowling@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house87.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=87"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=87",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Adam_Bowling",
+    "ballotpediaUrl": "https://ballotpedia.org/Adam_Bowling",
+    "twitter": "ABowlingKY"
   },
   {
     "id": "ocd-person/1ce736fd-c1ca-4366-a235-9509fdb2dcaf",
@@ -47,7 +54,9 @@
     "party": "Democratic",
     "email": "adam.moore@kylegislature.gov",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/AdamMoore2024.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=45"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=45",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Adam_Moore_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Adam_Moore_(Kentucky)"
   },
   {
     "id": "ocd-person/943724d5-5e02-4d0f-bd79-a74e30f18d1a",
@@ -59,7 +68,10 @@
     "party": "Democratic",
     "email": "adrielle.camuel@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house93.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=93"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=93",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Adrielle_Camuel",
+    "ballotpediaUrl": "https://ballotpedia.org/Adrielle_Camuel",
+    "twitter": "camuelforky"
   },
   {
     "id": "ocd-person/dfaa3769-decc-4c1c-9c0b-7195153ab6c8",
@@ -71,7 +83,10 @@
     "party": "Democratic",
     "email": "al.gentry@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house46.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=46"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=46",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Al_Gentry_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Alan_Gentry",
+    "twitter": "kyalgentry"
   },
   {
     "id": "ocd-person/7c03bd44-8541-49b0-9794-a9e606c292ce",
@@ -83,7 +98,10 @@
     "party": "Republican",
     "email": "amanda.maysbledsoe@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/senate112.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=112"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=112",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Amanda_Mays_Bledsoe",
+    "ballotpediaUrl": "https://ballotpedia.org/Amanda_Mays_Bledsoe",
+    "twitter": "amandambledsoe"
   },
   {
     "id": "ocd-person/f7bb262c-026f-4af2-9e17-939692c96e89",
@@ -95,7 +113,10 @@
     "party": "Republican",
     "email": "amy.neighbors@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house21.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=21"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=21",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Amy_Neighbors",
+    "ballotpediaUrl": "https://ballotpedia.org/Amy_Neighbors",
+    "twitter": "aneigh"
   },
   {
     "id": "ocd-person/2b9ac6b5-8979-40b1-b2d1-8241b93061a7",
@@ -107,7 +128,9 @@
     "party": "Democratic",
     "email": "anne.donworth@kylegislature.gov",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/AnneDonworth.jpeg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=76"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=76",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Anne_Donworth",
+    "ballotpediaUrl": "https://ballotpedia.org/Anne_Donworth"
   },
   {
     "id": "ocd-person/6bc2a8c3-3370-4586-b0b7-a5028f336d12",
@@ -119,7 +142,9 @@
     "party": "Democratic",
     "email": "ashley.tackettlaferty@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house95.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=95"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=95",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ashley_Tackett_Laferty",
+    "ballotpediaUrl": "https://ballotpedia.org/Ashley_Tackett_Laferty"
   },
   {
     "id": "ocd-person/c8a9f2cf-9a79-45f6-94df-346b546e1d9b",
@@ -131,7 +156,9 @@
     "party": "Democratic",
     "email": "beverly.chesterburton@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house44.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=44"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=44",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Beverly_Chester-Burton",
+    "ballotpediaUrl": "https://ballotpedia.org/Beverly_Chester-Burton"
   },
   {
     "id": "ocd-person/91eec267-436a-49a5-9d41-b6b2632d0a51",
@@ -143,7 +170,9 @@
     "party": "Republican",
     "email": "bill.wesley@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house91.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=91"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=91",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bill_Wesley",
+    "ballotpediaUrl": "https://ballotpedia.org/Billy_Wesley"
   },
   {
     "id": "ocd-person/22e056d2-728a-425a-a0a1-19e0e5cc59cb",
@@ -155,7 +184,9 @@
     "party": "Republican",
     "email": "bobby.mccool@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house97.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=97"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=97",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bobby_McCool_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Bobby_McCool"
   },
   {
     "id": "ocd-person/209d5334-d4a2-45f3-b910-0cd52f96dd4e",
@@ -167,7 +198,10 @@
     "party": "Republican",
     "email": "brandon.smith@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/senate130.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=130"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=130",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Brandon_Smith_%28politician%29",
+    "ballotpediaUrl": "https://ballotpedia.org/Brandon_Smith_(Kentucky)",
+    "twitter": "Smithkysenate"
   },
   {
     "id": "ocd-person/257271f3-68b1-4481-94e5-f98300493413",
@@ -179,7 +213,9 @@
     "party": "Republican",
     "email": "brandon.storm@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/senate121.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=121"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=121",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Brandon_J._Storm",
+    "ballotpediaUrl": "https://ballotpedia.org/Brandon_Storm"
   },
   {
     "id": "ocd-person/70d58905-dd36-4e9a-b281-639600e6b945",
@@ -191,7 +227,9 @@
     "party": "Republican",
     "email": "candy.massaroni@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house50.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=50"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=50",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Candy_Massaroni",
+    "ballotpediaUrl": "https://ballotpedia.org/Candy_Massaroni"
   },
   {
     "id": "ocd-person/8dbecabb-ef15-4925-8e50-26331e738a05",
@@ -203,7 +241,10 @@
     "party": "Democratic",
     "email": "cassie.armstrong@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/senate119.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=119"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=119",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Cassie_Chambers_Armstrong",
+    "ballotpediaUrl": "https://ballotpedia.org/Cassie_Chambers_Armstrong",
+    "twitter": "cassieforky"
   },
   {
     "id": "ocd-person/51dc7033-7377-44d4-a5d8-7bd36b371896",
@@ -215,7 +256,10 @@
     "party": "Democratic",
     "email": "chad.aull@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house79.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=79"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=79",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Chad_Aull",
+    "ballotpediaUrl": "https://ballotpedia.org/Chad_Aull",
+    "twitter": "chadaull"
   },
   {
     "id": "ocd-person/db36edd8-6c2f-4441-aa30-5b4dc48b3357",
@@ -227,7 +271,9 @@
     "party": "Republican",
     "email": "chris.freeland@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house6.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=6"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=6",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Chris_Freeland",
+    "ballotpediaUrl": "https://ballotpedia.org/Chris_Freeland"
   },
   {
     "id": "ocd-person/6843e90b-a30a-4dbf-885c-7321ccc8f73f",
@@ -239,7 +285,9 @@
     "party": "Republican",
     "email": "chris.fugate@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house84.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=84"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=84",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Chris_Fugate",
+    "ballotpediaUrl": "https://ballotpedia.org/Chris_Fugate"
   },
   {
     "id": "ocd-person/7da80b33-fc71-4d7f-8c96-e6068bd4c19b",
@@ -251,7 +299,9 @@
     "party": "Republican",
     "email": "chris.lewis@kylegislature.gov",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/ChrisLewis2024.jpeg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=29"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=29",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Chris_Lewis_(American_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Chris_Lewis_(Kentucky)"
   },
   {
     "id": "ocd-person/b32a95c9-42ba-449b-8581-97b9cef73c6a",
@@ -263,7 +313,10 @@
     "party": "Republican",
     "email": "chris.mcdaniel@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/senate123.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=123"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=123",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Christian_McDaniel",
+    "ballotpediaUrl": "https://ballotpedia.org/Chris_McDaniel_(Kentucky)",
+    "twitter": "kychrismcdaniel"
   },
   {
     "id": "ocd-person/3109e3ae-10c1-417e-bf7f-bf4f539bd3c8",
@@ -275,7 +328,9 @@
     "party": "Republican",
     "email": "craig.richardson@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/senate103.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=103"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=103",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Craig_Richardson",
+    "ballotpediaUrl": "https://ballotpedia.org/Craig_Richardson"
   },
   {
     "id": "ocd-person/ed9307f1-cd95-4004-9e72-46970ea64adf",
@@ -287,7 +342,9 @@
     "party": "Republican",
     "email": "dj.johnson@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house13.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=13"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=13",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/DJ_Johnson_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/D.J._Johnson_(Kentucky)"
   },
   {
     "id": "ocd-person/d93e2493-49a8-4395-b7e0-5842893344e1",
@@ -299,7 +356,9 @@
     "party": "Republican",
     "email": "daniel.elliott@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house54.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=54"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=54",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Daniel_Elliott_(Kentucky_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Daniel_Elliott_(Kentucky)"
   },
   {
     "id": "ocd-person/c88c6162-de24-4d8b-98a9-f1788390d043",
@@ -311,7 +370,9 @@
     "party": "Republican",
     "email": "daniel.fister@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house56.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=56"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=56",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Daniel_Fister",
+    "ballotpediaUrl": "https://ballotpedia.org/Daniel_Fister"
   },
   {
     "id": "ocd-person/d4dd968d-1508-476b-bde1-7504a47288f0",
@@ -323,7 +384,10 @@
     "party": "Democratic",
     "email": "daniel.grossberg@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house30.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=30"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=30",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Daniel_Grossberg",
+    "ballotpediaUrl": "https://ballotpedia.org/Daniel_Grossberg",
+    "twitter": "Grossberg4KY"
   },
   {
     "id": "ocd-person/0ec7d376-4235-44e7-a6d7-d63962dff167",
@@ -335,7 +399,10 @@
     "party": "Republican",
     "email": "danny.carroll@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/senate102.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=102"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=102",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Danny_Carroll_(Kentucky_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Danny_Carroll",
+    "twitter": "dannycarrollky"
   },
   {
     "id": "ocd-person/ebd5f90d-e3cc-45ef-97ff-d51ff1685bcc",
@@ -347,7 +414,9 @@
     "party": "Republican",
     "email": "david.hale@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house74.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=74"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=74",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/David_Hale_(Kentucky_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/David_Hale_(Kentucky)"
   },
   {
     "id": "ocd-person/3643503c-1da8-4a57-90f1-54f063b1d25e",
@@ -359,7 +428,10 @@
     "party": "Republican",
     "email": "david.meade@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house80.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=80"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=80",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/David_Meade",
+    "ballotpediaUrl": "https://ballotpedia.org/David_Meade",
+    "twitter": "DavidMeadeKY"
   },
   {
     "id": "ocd-person/bf8bfdc3-66f2-417c-8178-9ed16bf8843f",
@@ -371,7 +443,10 @@
     "party": "Republican",
     "email": "david.osborne@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house59.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=59"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=59",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/David_W._Osborne",
+    "ballotpediaUrl": "https://ballotpedia.org/David_Osborne",
+    "twitter": "reposborne"
   },
   {
     "id": "ocd-person/5594a97f-7358-427e-af84-43150a21c97e",
@@ -383,7 +458,10 @@
     "party": "Republican",
     "email": "david.givens@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/senate109.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=109"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=109",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/David_P._Givens",
+    "ballotpediaUrl": "https://ballotpedia.org/David_Givens",
+    "twitter": "kydavidgivens"
   },
   {
     "id": "ocd-person/96ab59e2-44c2-4c3d-ac8a-1ee24acc5b55",
@@ -395,7 +473,10 @@
     "party": "Republican",
     "email": "deanna.gordon@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house81.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=81"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=81",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Deanna_Frazier_Gordon",
+    "ballotpediaUrl": "https://ballotpedia.org/Deanna_Frazier",
+    "twitter": "deanna_ky"
   },
   {
     "id": "ocd-person/60ef609e-8aed-4698-a626-664f536a6122",
@@ -407,7 +488,9 @@
     "party": "Republican",
     "email": "derek.lewis@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house90.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=90"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=90",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Derek_Lewis_(American_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Derek_Lewis_(Kentucky)"
   },
   {
     "id": "ocd-person/a7cd8577-c315-4bf0-b95f-3259ab7dfce7",
@@ -419,7 +502,9 @@
     "party": "Republican",
     "email": "donald.douglas@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/senate122.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=122"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=122",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Donald_Douglas_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Donald_Douglas"
   },
   {
     "id": "ocd-person/67b233b8-474d-49ce-81a8-7f48eec3c79a",
@@ -431,7 +516,10 @@
     "party": "Republican",
     "email": "emily.callaway@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house37.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=37"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=37",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Emily_Callaway",
+    "ballotpediaUrl": "https://ballotpedia.org/Emily_Callaway",
+    "twitter": "Miz_Emc"
   },
   {
     "id": "ocd-person/4ce23404-165d-4c96-9130-56acaf2e73a7",
@@ -443,7 +531,9 @@
     "party": "Democratic",
     "email": "erika.hancock@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house57.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=57"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=57",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Erika_Hancock",
+    "ballotpediaUrl": "https://ballotpedia.org/Erika_Hancock"
   },
   {
     "id": "ocd-person/4342be62-2791-4d48-b601-43949239cd94",
@@ -455,7 +545,9 @@
     "party": "Republican",
     "email": "felicia.rabourn@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house47.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=47"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=47",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Felicia_Rabourn",
+    "ballotpediaUrl": "https://ballotpedia.org/Felicia_Rabourn"
   },
   {
     "id": "ocd-person/2d6a7358-f685-4476-aa31-b92cf72b11ec",
@@ -467,7 +559,9 @@
     "party": "Republican",
     "email": "gary.boswell@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/senate108.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=108"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=108",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Gary_Boswell",
+    "ballotpediaUrl": "https://ballotpedia.org/Gary_Boswell"
   },
   {
     "id": "ocd-person/b0cb8f76-4b91-472c-97e2-106ef21f3342",
@@ -478,7 +572,10 @@
     "district": "37",
     "party": "Democratic",
     "email": "gary.clemons@kylegislature.gov",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=137"
+    "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/senate137.jpg",
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=137",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Gary_Clemons",
+    "ballotpediaUrl": "https://ballotpedia.org/Gary_Clemons"
   },
   {
     "id": "ocd-person/bb3e5fee-3bda-4a5d-95ee-dc31ff9defed",
@@ -492,7 +589,10 @@
     "phone": "859-312-7513",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house77.jpg",
     "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=77",
-    "office": "KY"
+    "office": "KY",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/George_Brown_Jr._(Kentucky_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/George_A._Brown_Jr.",
+    "twitter": "GeorgeBrownky77"
   },
   {
     "id": "ocd-person/0d92a09c-ce23-46cd-9582-b7d1b08d76dd",
@@ -506,7 +606,10 @@
     "phone": "502-776-1222",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/senate133.jpg",
     "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=133",
-    "office": "KY"
+    "office": "KY",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Gerald_Neal",
+    "ballotpediaUrl": "https://ballotpedia.org/Gerald_Neal",
+    "twitter": "GeraldNeal33"
   },
   {
     "id": "ocd-person/6aa07729-a16f-4465-a605-7afbbe982882",
@@ -518,7 +621,9 @@
     "party": "Republican",
     "email": "gex.williams@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/senate120.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=120"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=120",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Gex_Williams",
+    "ballotpediaUrl": "https://ballotpedia.org/Gex_Williams"
   },
   {
     "id": "ocd-person/139d004c-7a19-4153-a58b-919a1b70180e",
@@ -530,7 +635,9 @@
     "party": "Republican",
     "email": "greg.elkins@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/senate128.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=128"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=128",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Greg_Elkins",
+    "ballotpediaUrl": "https://ballotpedia.org/Greg_Elkins"
   },
   {
     "id": "ocd-person/fded60a9-de72-47ba-bf20-90dddd9f9138",
@@ -542,7 +649,9 @@
     "party": "Republican",
     "email": "jt.payne@kylegislature.gov",
     "photoUrl": "https://thenews.org/wp-content/uploads/2018/08/7BD9AD2B-7439-4C90-86BE-692CC9C4D09A-777x437.jpeg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=11"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=11",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/J._T._Payne",
+    "ballotpediaUrl": "https://ballotpedia.org/J.T._Payne_(Kentucky)"
   },
   {
     "id": "ocd-person/d6c9aa9b-3c6b-411a-bff1-fc1c38d4bce0",
@@ -554,7 +663,10 @@
     "party": "Republican",
     "email": "james.tipton@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house53.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=53"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=53",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/James_Tipton",
+    "ballotpediaUrl": "https://ballotpedia.org/James_A._Tipton",
+    "twitter": "JamesATipton"
   },
   {
     "id": "ocd-person/b86f4912-39b1-44a0-90a8-0b233921a094",
@@ -568,7 +680,9 @@
     "phone": "502-544-1846",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house28.jpg",
     "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=28",
-    "office": "KY"
+    "office": "KY",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jared_Bauman",
+    "ballotpediaUrl": "https://ballotpedia.org/Jared_Bauman"
   },
   {
     "id": "ocd-person/b2299f51-c122-46ac-9937-3a6a7b682bb8",
@@ -580,7 +694,10 @@
     "party": "Republican",
     "email": "jared.carpenter@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/senate134.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=134"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=134",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jared_Carpenter",
+    "ballotpediaUrl": "https://ballotpedia.org/Jared_Carpenter",
+    "twitter": "JCarpenterKY"
   },
   {
     "id": "ocd-person/a796965c-0c0f-43b2-975b-d9726b34acd8",
@@ -592,7 +709,10 @@
     "party": "Republican",
     "email": "jason.howell@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/senate101.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=101"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=101",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jason_Howell",
+    "ballotpediaUrl": "https://ballotpedia.org/Jason_Howell_(Kentucky)",
+    "twitter": "jasonghowell"
   },
   {
     "id": "ocd-person/c56fc398-975e-47b9-919a-fbdd0c9f721d",
@@ -604,7 +724,10 @@
     "party": "Republican",
     "email": "jason.nemes@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house33.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=33"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=33",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jason_Nemes",
+    "ballotpediaUrl": "https://ballotpedia.org/Jason_Michael_Nemes",
+    "twitter": "jmnemes"
   },
   {
     "id": "ocd-person/3fac3a9c-78ad-4b24-8483-f1786fac9c9e",
@@ -616,7 +739,9 @@
     "party": "Republican",
     "email": "jason.petrie@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house16.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=16"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=16",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jason_Petrie",
+    "ballotpediaUrl": "https://ballotpedia.org/Jason_Petrie"
   },
   {
     "id": "ocd-person/2c5c20cc-807b-44c8-a1a9-582fe69ca87c",
@@ -628,7 +753,9 @@
     "party": "Republican",
     "email": "jennifer.decker@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house58.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=58"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=58",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jennifer_Decker_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Jennifer_Decker"
   },
   {
     "id": "ocd-person/f40ed494-ce37-43f4-b323-1bc2b6197831",
@@ -642,7 +769,9 @@
     "phone": "270-667-7327",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house12.jpg",
     "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=12",
-    "office": "KY"
+    "office": "KY",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jim_Gooch_Jr.",
+    "ballotpediaUrl": "https://ballotpedia.org/Jim_Gooch,_Jr."
   },
   {
     "id": "ocd-person/4042b29b-c6bb-407e-856d-9197a03d55ff",
@@ -656,7 +785,10 @@
     "phone": "270-692-6945",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/senate114.jpg",
     "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=114",
-    "office": "KY"
+    "office": "KY",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jimmy_Higdon",
+    "ballotpediaUrl": "https://ballotpedia.org/Jimmy_Higdon",
+    "twitter": "SenatorJimmy"
   },
   {
     "id": "ocd-person/7cda4251-f26b-4bab-bf88-ed61b947018e",
@@ -668,7 +800,10 @@
     "party": "Republican",
     "email": "john.blanton@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house92.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=92"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=92",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_Blanton",
+    "ballotpediaUrl": "https://ballotpedia.org/John_Blanton",
+    "twitter": "repblanton92"
   },
   {
     "id": "ocd-person/2f3255d6-7801-4089-a275-f01e00444ee0",
@@ -680,7 +815,9 @@
     "party": "Republican",
     "email": "john.hodgson@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house36.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=36"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=36",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_Hodgson_(Kentucky_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/John_Hodgson"
   },
   {
     "id": "ocd-person/ff91cf3b-77a1-47b0-81b3-1c18f006349a",
@@ -692,7 +829,10 @@
     "party": "Republican",
     "email": "josh.branscum@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house83.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=83"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=83",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Josh_Branscum",
+    "ballotpediaUrl": "https://ballotpedia.org/Joshua_Branscum",
+    "twitter": "BranscumforKY"
   },
   {
     "id": "ocd-person/a110d6ba-f17f-4847-b0e9-327c82cd7122",
@@ -704,7 +844,10 @@
     "party": "Republican",
     "email": "josh.bray@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house71.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=71"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=71",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Josh_Bray_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Josh_Bray",
+    "twitter": "BrayforKy"
   },
   {
     "id": "ocd-person/f218fb5a-2336-4f82-b192-acc3893dabdf",
@@ -716,7 +859,9 @@
     "party": "Republican",
     "email": "josh.calloway@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house10.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=10"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=10",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Josh_Calloway",
+    "ballotpediaUrl": "https://ballotpedia.org/Josh_Calloway"
   },
   {
     "id": "ocd-person/118003d1-9f48-4ef8-bbd0-748d17ebb699",
@@ -728,7 +873,9 @@
     "party": "Democratic",
     "email": "joshua.watkins@kylegislature.gov",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/JoshuaWatkins2024.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=42"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=42",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Joshua_Watkins",
+    "ballotpediaUrl": "https://ballotpedia.org/Joshua_Watkins"
   },
   {
     "id": "ocd-person/38ae421f-f4fa-40f6-b025-a75bc6b42f35",
@@ -740,7 +887,10 @@
     "party": "Republican",
     "email": "julie.adams@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/senate136.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=136"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=136",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Julie_Adams_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Julie_Adams",
+    "twitter": "jrajra"
   },
   {
     "id": "ocd-person/b45a3156-f662-4884-9c13-b33a4c2d9105",
@@ -752,7 +902,9 @@
     "party": "Democratic",
     "email": "karen.berg@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/senate126.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=126"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=126",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Karen_Berg_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Karen_Berg"
   },
   {
     "id": "ocd-person/d7b86c25-2f90-4d8b-a92e-4b4ef5dd0512",
@@ -764,7 +916,9 @@
     "party": "Republican",
     "email": "ken.fleming@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house48.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=48"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=48",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ken_Fleming_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Ken_Fleming"
   },
   {
     "id": "ocd-person/7aa13bf4-126a-4901-bfeb-2244bd2d3cc3",
@@ -778,7 +932,10 @@
     "phone": "606-340-8490",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house52.jpg",
     "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=52",
-    "office": "KY"
+    "office": "KY",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ken_Upchurch",
+    "ballotpediaUrl": "https://ballotpedia.org/Ken_Upchurch",
+    "twitter": "KenUpchurch"
   },
   {
     "id": "ocd-person/15b970f1-bd55-4876-80d5-13570b8f1a1a",
@@ -790,7 +947,9 @@
     "party": "Democratic",
     "email": "keturah.herron@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/senate135.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=42"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=42",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Keturah_Herron",
+    "ballotpediaUrl": "https://ballotpedia.org/Keturah_Herron"
   },
   {
     "id": "ocd-person/0e905c68-fbcc-4392-865e-a4dbc5d2ea42",
@@ -802,7 +961,9 @@
     "party": "Republican",
     "email": "kevin.jackson@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house20.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=20"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=20",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kevin_Jackson_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Kevin_Jackson"
   },
   {
     "id": "ocd-person/27b951aa-c951-4160-9373-721ca3b6a9db",
@@ -814,7 +975,9 @@
     "party": "Republican",
     "email": "kim.banta@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house63.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=63"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=63",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kim_Banta",
+    "ballotpediaUrl": "https://ballotpedia.org/Kimberly_Banta"
   },
   {
     "id": "ocd-person/5cb48d67-2db5-4b6e-89b1-1509110bd708",
@@ -828,7 +991,9 @@
     "phone": "270-978-0583",
     "photoUrl": "https://npr.brightspotcdn.com/01/2a/8d768d42405b8992ce1c5dcb8159/244626154-114463787658953-2523667072088681096-n.jpg",
     "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=2",
-    "office": "KY"
+    "office": "KY",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kimberly_Holloway",
+    "ballotpediaUrl": "https://ballotpedia.org/Kimberly_Holloway_(Kentucky)"
   },
   {
     "id": "ocd-person/cd95ada0-14f0-4b63-aeea-f4a92525eeaf",
@@ -840,7 +1005,10 @@
     "party": "Republican",
     "email": "kim.king@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house55.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=55"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=55",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kim_King_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Kim_King",
+    "twitter": "KimberlyKingGOP"
   },
   {
     "id": "ocd-person/92511255-ca06-4241-bd91-0cafd92e3d5c",
@@ -852,7 +1020,9 @@
     "party": "Republican",
     "email": "kimberly.moser@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house64.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=64"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=64",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kimberly_Poore_Moser",
+    "ballotpediaUrl": "https://ballotpedia.org/Kimberly_Poore_Moser"
   },
   {
     "id": "ocd-person/8048f367-9d46-4be5-9cb8-7a249d06cb13",
@@ -864,7 +1034,9 @@
     "party": "Democratic",
     "email": "lindsey.burke@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house75.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=75"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=75",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lindsey_Burke",
+    "ballotpediaUrl": "https://ballotpedia.org/Lindsey_Burke"
   },
   {
     "id": "ocd-person/db2324a8-1ae2-4e3a-81e5-ac83cb7bbb05",
@@ -876,7 +1048,10 @@
     "party": "Republican",
     "email": "lindsey.tichenor@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/senate106.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=106"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=106",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lindsey_Tichenor",
+    "ballotpediaUrl": "https://ballotpedia.org/Lindsey_Tichenor",
+    "twitter": "tichenor4ky"
   },
   {
     "id": "ocd-person/6dd815a4-fc3c-4e79-8cd5-a574d8cf0af8",
@@ -888,7 +1063,10 @@
     "party": "Democratic",
     "email": "lisa.willner@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house35.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=35"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=35",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lisa_Willner",
+    "ballotpediaUrl": "https://ballotpedia.org/Lisa_Willner",
+    "twitter": "lgwillner"
   },
   {
     "id": "ocd-person/1ad4657b-84d4-4ce1-864e-2f1f75686cc7",
@@ -900,7 +1078,9 @@
     "party": "Republican",
     "email": "marianne.proctor@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house60.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=60"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=60",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Marianne_Proctor",
+    "ballotpediaUrl": "https://ballotpedia.org/Marianne_Proctor"
   },
   {
     "id": "ocd-person/b1a31b02-5d89-42be-97d4-7d08d99161d8",
@@ -914,7 +1094,9 @@
     "phone": "859-654-4278",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house78.jpg",
     "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=78",
-    "office": "KY"
+    "office": "KY",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mark_Hart_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Mark_Hart"
   },
   {
     "id": "ocd-person/ad063b4f-a860-48c3-abfb-18e977a21caf",
@@ -926,7 +1108,9 @@
     "party": "Republican",
     "email": "marybeth.imes@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house5.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=5"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=5",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mary_Beth_Imes",
+    "ballotpediaUrl": "https://ballotpedia.org/Mary_Imes"
   },
   {
     "id": "ocd-person/86342422-7a28-4631-b3d7-3912eb444ffd",
@@ -940,7 +1124,9 @@
     "phone": "502-541-1376",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house41.jpg",
     "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=34",
-    "office": "KY"
+    "office": "KY",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mary_Lou_Marzian",
+    "ballotpediaUrl": "https://ballotpedia.org/Mary_Marzian"
   },
   {
     "id": "ocd-person/7afd2d36-9415-44ff-b96d-0010cf4f864e",
@@ -952,7 +1138,9 @@
     "party": "Democratic",
     "email": "matt.lehman@kylegislature.gov",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/MatthewLehman2024.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=67"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=67",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Matt_Lehman_(Kentucky_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Matthew_Lehman_(Kentucky)"
   },
   {
     "id": "ocd-person/9a6d1b5a-6cb4-421e-b7c2-2cb27cfa4cc9",
@@ -964,7 +1152,9 @@
     "party": "Republican",
     "email": "matt.lockett@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house39.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=39"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=39",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Matt_Lockett",
+    "ballotpediaUrl": "https://ballotpedia.org/Matt_Lockett"
   },
   {
     "id": "ocd-person/86bd13c4-c404-4a34-aaf4-561621f2b2d8",
@@ -976,7 +1166,9 @@
     "party": "Republican",
     "email": "matt.nunn@kylegislature.gov",
     "photoUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkAwk-VsxWc9P7zUFu6kXXFswQiXfHR8HdEg&s",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=117"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=117",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Matt_Nunn_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Matt_Nunn"
   },
   {
     "id": "ocd-person/b76a3218-b1bd-475c-a775-7a6cbefbc1f3",
@@ -988,7 +1180,10 @@
     "party": "Republican",
     "email": "matthew.deneen@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/senate110.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=110"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=110",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Matthew_Deneen",
+    "ballotpediaUrl": "https://ballotpedia.org/Matthew_Deneen",
+    "twitter": "MatthewDeneen1"
   },
   {
     "id": "ocd-person/1b8bc567-b895-4fae-8b3f-7a7160ca5138",
@@ -1000,7 +1195,9 @@
     "party": "Republican",
     "email": "matthew.koch@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house72.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=72"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=72",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Matthew_Koch",
+    "ballotpediaUrl": "https://ballotpedia.org/Matthew_Koch"
   },
   {
     "id": "ocd-person/32b5035e-6d1a-44b8-9f7a-4173a1cdb940",
@@ -1012,7 +1209,10 @@
     "party": "Republican",
     "email": "max.wise@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/senate116.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=116"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=116",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Max_Wise",
+    "ballotpediaUrl": "https://ballotpedia.org/Max_Wise",
+    "twitter": "maxwellwise"
   },
   {
     "id": "ocd-person/230c230d-7313-4a94-8eb3-60f57a86543c",
@@ -1024,7 +1224,9 @@
     "party": "Republican",
     "email": "mike.nemes@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/senate138.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=138"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=138",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Michael_J._Nemes",
+    "ballotpediaUrl": "https://ballotpedia.org/Mike_Nemes"
   },
   {
     "id": "ocd-person/f013115a-6bbc-48ac-aab4-7949dd902701",
@@ -1036,7 +1238,9 @@
     "party": "Republican",
     "email": "michael.meredith@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house19.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=19"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=19",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Michael_Meredith_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Michael_Meredith"
   },
   {
     "id": "ocd-person/3e417407-423f-45d3-b18a-c2845cd1ec57",
@@ -1048,7 +1252,9 @@
     "party": "Republican",
     "email": "sarge.pollock@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house51.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=51"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=51",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Michael_Pollock_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Michael_Pollock"
   },
   {
     "id": "ocd-person/34a39b2d-1ff6-4ced-adf2-32f92fa781b1",
@@ -1060,7 +1266,9 @@
     "party": "Republican",
     "email": "mike.clines@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house68.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=68"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=68",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mike_Clines",
+    "ballotpediaUrl": "https://ballotpedia.org/Mike_Clines"
   },
   {
     "id": "ocd-person/64af8584-1675-47fd-acfb-1cec59dfdda5",
@@ -1072,7 +1280,10 @@
     "party": "Republican",
     "email": "mike.wilson@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/senate132.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=132"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=132",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mike_Wilson_(Kentucky_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Mike_Wilson_(Kentucky)",
+    "twitter": "mikewilson2018"
   },
   {
     "id": "ocd-person/3f4b9459-8c62-4d89-b2d6-9d0e951ed24f",
@@ -1084,7 +1295,9 @@
     "party": "Republican",
     "email": "mitchum.whitaker@kylegislature.gov",
     "photoUrl": "https://whitakerforky.com/wp-content/uploads/2023/10/174675061_4495865760430094_8296166563898892766_n-1024x1024.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=94"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=94",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mitch_Whitaker",
+    "ballotpediaUrl": "https://ballotpedia.org/Mitchum_Whitaker"
   },
   {
     "id": "ocd-person/c6904810-37a8-428d-8342-7831d7dc100c",
@@ -1098,7 +1311,9 @@
     "phone": "270-475-9503",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house9.jpg",
     "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=9",
-    "office": "KY"
+    "office": "KY",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Myron_Dossett",
+    "ballotpediaUrl": "https://ballotpedia.org/Myron_Dossett"
   },
   {
     "id": "ocd-person/911af3e2-7435-4f82-a477-99cb078ea99b",
@@ -1110,7 +1325,9 @@
     "party": "Republican",
     "email": "nancy.tate@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house27.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=27"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=27",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Nancy_Tate",
+    "ballotpediaUrl": "https://ballotpedia.org/Nancy_Tate"
   },
   {
     "id": "ocd-person/716d7b2c-0576-4bf8-b5a9-b6fa2c1f8024",
@@ -1122,7 +1339,9 @@
     "party": "Republican",
     "email": "nick.wilson@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house82.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=82"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=82",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Nick_Wilson_(Survivor_contestant)",
+    "ballotpediaUrl": "https://ballotpedia.org/Nick_Wilson"
   },
   {
     "id": "ocd-person/bee3f0dd-450a-41a2-b9b9-e056d0a0f14d",
@@ -1134,7 +1353,9 @@
     "party": "Democratic",
     "email": "nima.kulkarni@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house40.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=40"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=40",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Nima_Kulkarni",
+    "ballotpediaUrl": "https://ballotpedia.org/Nima_Kulkarni"
   },
   {
     "id": "ocd-person/897f811e-273d-4fc1-9268-0087e57444cf",
@@ -1146,7 +1367,9 @@
     "party": "Democratic",
     "email": "pamela.stevenson@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house43.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=43"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=43",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Pamela_Stevenson",
+    "ballotpediaUrl": "https://ballotpedia.org/Pamela_Stevenson"
   },
   {
     "id": "ocd-person/8ae56ea2-3f37-490b-a3dc-0dec9fe85c7c",
@@ -1158,7 +1381,9 @@
     "party": "Republican",
     "email": "patrick.flannery@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house96.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=96"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=96",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Patrick_Flannery_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Patrick_Flannery"
   },
   {
     "id": "ocd-person/eddce954-34a0-4b9a-aaca-6114e6bf418f",
@@ -1170,7 +1395,9 @@
     "party": "Republican",
     "email": "peyton.griffee@kylegislature.gov",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/PeytonGriffee2024.png",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=26"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=26",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Peyton_Griffee",
+    "ballotpediaUrl": "https://ballotpedia.org/Peyton_Griffee"
   },
   {
     "id": "ocd-person/18063ded-67cb-46a9-b558-14d5da92b860",
@@ -1182,7 +1409,9 @@
     "party": "Republican",
     "email": "phillip.wheeler@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/senate131.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=131"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=131",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Phillip_Wheeler",
+    "ballotpediaUrl": "https://ballotpedia.org/Phillip_Wheeler"
   },
   {
     "id": "ocd-person/1217ac1a-4ca4-4fe4-953b-572beb008bed",
@@ -1196,7 +1425,10 @@
     "phone": "502-724-7529",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house38.jpg",
     "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=38",
-    "office": "KY"
+    "office": "KY",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rachel_Roarx",
+    "ballotpediaUrl": "https://ballotpedia.org/Rachel_Roarx",
+    "twitter": "rachelroarx"
   },
   {
     "id": "ocd-person/c033dd77-f8d7-4558-8582-9e0088ae5406",
@@ -1208,7 +1440,9 @@
     "party": "Republican",
     "email": "randy.bridges@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house3.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=3"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=3",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Randy_Bridges",
+    "ballotpediaUrl": "https://ballotpedia.org/Randy_Bridges"
   },
   {
     "id": "ocd-person/be2fd4e3-6dfe-4d54-8c45-631eac63bc27",
@@ -1220,7 +1454,10 @@
     "party": "Republican",
     "email": "rebecca.raymer@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house15.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=15"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=15",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rebecca_Raymer",
+    "ballotpediaUrl": "https://ballotpedia.org/Rebecca_Raymer",
+    "twitter": "raymerforky"
   },
   {
     "id": "ocd-person/42b259db-9ddb-4588-a463-b1a38c944c66",
@@ -1232,7 +1469,10 @@
     "party": "Democratic",
     "email": "reginald.thomas@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/senate113.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=113"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=113",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Reggie_Thomas",
+    "ballotpediaUrl": "https://ballotpedia.org/Reggie_Thomas",
+    "twitter": "ReggieThomasKY"
   },
   {
     "id": "ocd-person/29b248e1-4033-41f6-ba30-136f2aa55045",
@@ -1244,7 +1484,10 @@
     "party": "Republican",
     "email": "richard.white@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house99.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=99"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=99",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Richard_White_(Kentucky_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Richard_White_(Kentucky)",
+    "twitter": "RichardWhiteKY"
   },
   {
     "id": "ocd-person/34ed9881-46b8-41ba-b625-3d350140d2b9",
@@ -1256,7 +1499,9 @@
     "party": "Republican",
     "email": "rick.girdler@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/senate115.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=115"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=115",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rick_Girdler",
+    "ballotpediaUrl": "https://ballotpedia.org/Rick_Girdler"
   },
   {
     "id": "ocd-person/366daab1-a877-49b9-86b8-e3c497143bf0",
@@ -1268,7 +1513,10 @@
     "party": "Republican",
     "email": "robby.mills@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/senate104.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=104"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=104",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Robby_Mills",
+    "ballotpediaUrl": "https://ballotpedia.org/Robby_Mills",
+    "twitter": "robbymillsforky"
   },
   {
     "id": "ocd-person/ad2d1d2a-b838-4727-ac0f-a6fb64298b14",
@@ -1280,7 +1528,9 @@
     "party": "Republican",
     "email": "robert.duvall@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house17.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=17"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=17",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Robert_Duvall_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Robert_Duvall_(Kentucky)"
   },
   {
     "id": "ocd-person/8659c7e3-ec01-4c40-b7ee-d21f37facff5",
@@ -1294,7 +1544,10 @@
     "phone": "606-598-2322",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/senate125.jpg",
     "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=125",
-    "office": "207 Main St., Manchester, KY 40962"
+    "office": "207 Main St., Manchester, KY 40962",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Robert_Stivers",
+    "ballotpediaUrl": "https://ballotpedia.org/Robert_Stivers",
+    "twitter": "kysenatepres"
   },
   {
     "id": "ocd-person/42990da5-7020-4327-bbd8-496955b00040",
@@ -1308,7 +1561,9 @@
     "phone": "606-474-5380",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/senate118.jpg",
     "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=118",
-    "office": "102 S. Hord St., Grayson, KY 41143"
+    "office": "102 S. Hord St., Grayson, KY 41143",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Robin_L._Webb",
+    "ballotpediaUrl": "https://ballotpedia.org/Robin_Webb"
   },
   {
     "id": "ocd-person/af59339a-aedf-4d1c-94b6-de071030773b",
@@ -1320,7 +1575,9 @@
     "party": "Republican",
     "email": "ryan.bivens@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house24.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=24"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=24",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ryan_Bivens",
+    "ballotpediaUrl": "https://ballotpedia.org/Ryan_Bivens"
   },
   {
     "id": "ocd-person/718ec3d2-325d-4ddf-b72b-728cea857222",
@@ -1332,7 +1589,9 @@
     "party": "Republican",
     "email": "ryan.dotson@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house73.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=73"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=73",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ryan_Dotson",
+    "ballotpediaUrl": "https://ballotpedia.org/Ryan_Dotson"
   },
   {
     "id": "ocd-person/d3176059-683c-48be-9c43-a57da08a2f49",
@@ -1342,9 +1601,11 @@
     "chamber": "lower",
     "district": "18",
     "party": "Republican",
-    "email": "ryan.dotson@kylegislature.gov",
+    "email": "samara.heavrin@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house18.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=18"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=18",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Samara_Heavrin",
+    "ballotpediaUrl": "https://ballotpedia.org/Samara_Heavrin"
   },
   {
     "id": "ocd-person/bb3f614a-7fa0-4e55-a76b-dedfea0fdaa9",
@@ -1356,7 +1617,10 @@
     "party": "Democratic",
     "email": "sarah.stalker@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house34.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=34"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=34",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sarah_Stalker",
+    "ballotpediaUrl": "https://ballotpedia.org/Sarah_Stalker",
+    "twitter": "sarahforky"
   },
   {
     "id": "ocd-person/a8988de2-d65f-461c-96d1-4f1cddc6a969",
@@ -1368,7 +1632,10 @@
     "party": "Republican",
     "email": "savannah.maddox@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house61.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=61"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=61",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Savannah_Maddox",
+    "ballotpediaUrl": "https://ballotpedia.org/Savannah_Maddox",
+    "twitter": "SavannahLMaddox"
   },
   {
     "id": "ocd-person/07773b3f-387f-4e4e-ba79-571940c186f0",
@@ -1380,7 +1647,9 @@
     "party": "Republican",
     "email": "scott.lewis@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house14.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=14"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=14",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Scott_Lewis_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Scott_Lewis_(Kentucky)"
   },
   {
     "id": "ocd-person/d7adea26-9f4f-477f-a0bd-4b29ae9072b4",
@@ -1392,7 +1661,9 @@
     "party": "Republican",
     "email": "scott.madon@kylegislature.gov",
     "photoUrl": "https://thecityofpineville.com/wp-content/uploads/2018/08/mayor-scott-madon-228x300.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=129"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=129",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Scott_Madon",
+    "ballotpediaUrl": "https://ballotpedia.org/Scott_Madon"
   },
   {
     "id": "ocd-person/65469c71-edc2-4c9f-87da-bcf4d3277591",
@@ -1404,7 +1675,9 @@
     "party": "Republican",
     "email": "scott.sharp@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house100.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=100"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=100",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Scott_Sharp_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Scott_Sharp"
   },
   {
     "id": "ocd-person/2eab3a78-154d-43cd-8278-73ad2e166b08",
@@ -1416,7 +1689,9 @@
     "party": "Republican",
     "email": "shane.baker@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house85.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=85"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=85",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Shane_Baker",
+    "ballotpediaUrl": "https://ballotpedia.org/Shane_Baker"
   },
   {
     "id": "ocd-person/5a327e3b-ae91-4279-ae17-9214aad32fa9",
@@ -1429,7 +1704,9 @@
     "email": "shawn.mcpherson@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house22.jpg",
     "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=22",
-    "office": "801 E. Main St., Scottsville, KY 42164"
+    "office": "801 E. Main St., Scottsville, KY 42164",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Shawn_McPherson",
+    "ballotpediaUrl": "https://ballotpedia.org/Shawn_McPherson"
   },
   {
     "id": "ocd-person/b7112818-3357-413d-acae-a46bf3442b1d",
@@ -1441,7 +1718,10 @@
     "party": "Republican",
     "email": "shelley.funkefrommeyer@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/senate124.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=124"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=124",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Shelley_Funke_Frommeyer",
+    "ballotpediaUrl": "https://ballotpedia.org/Shelley_Funke_Frommeyer",
+    "twitter": "FunkeShelley"
   },
   {
     "id": "ocd-person/737ae037-a61c-4649-9c08-bf5fe052ff36",
@@ -1453,7 +1733,10 @@
     "party": "Republican",
     "email": "stephanie.dietz@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house65.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=65"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=65",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Stephanie_Dietz",
+    "ballotpediaUrl": "https://ballotpedia.org/Stephanie_A._Dietz",
+    "twitter": "sdietz2"
   },
   {
     "id": "ocd-person/8915acb8-6089-451f-be08-c79b0be59c40",
@@ -1465,7 +1748,9 @@
     "party": "Republican",
     "email": "stephen.meredith@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/senate105.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=105"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Stephen_Meredith_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Stephen_Meredith"
   },
   {
     "id": "ocd-person/1f3bbab4-2be0-496c-9c3b-b8f340f6b404",
@@ -1477,7 +1762,10 @@
     "party": "Republican",
     "email": "steve.west@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/senate127.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=127"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=127",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Steve_West_(Kentucky_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Steve_West_(Kentucky)",
+    "twitter": "SteveWestKY"
   },
   {
     "id": "ocd-person/e0860aa8-43ba-4bf2-94d7-3632c7375ab6",
@@ -1489,7 +1777,9 @@
     "party": "Republican",
     "email": "steve.bratcher@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house25.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=25"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=25",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Steve_Bratcher",
+    "ballotpediaUrl": "https://ballotpedia.org/Steve_Bratcher"
   },
   {
     "id": "ocd-person/b702771e-135c-4444-b148-a321ee8088b2",
@@ -1503,7 +1793,9 @@
     "phone": "859-757-7037",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/senate111.jpg",
     "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=66",
-    "office": "KY"
+    "office": "KY",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Steve_Rawlings",
+    "ballotpediaUrl": "https://ballotpedia.org/Steve_Rawlings"
   },
   {
     "id": "ocd-person/817df40b-8e76-460d-81cf-63277866268a",
@@ -1515,7 +1807,9 @@
     "party": "Republican",
     "email": "steve.riley@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house23.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=23"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=23",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Steve_Riley_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Steve_Riley_(Kentucky)"
   },
   {
     "id": "ocd-person/a41c47ce-cbfa-49e3-8a21-5666f24ef96a",
@@ -1527,7 +1821,10 @@
     "party": "Republican",
     "email": "steven.doan@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house69.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=69"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=69",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Steven_Doan",
+    "ballotpediaUrl": "https://ballotpedia.org/Steven_Doan",
+    "twitter": "stevedoanlaw"
   },
   {
     "id": "ocd-person/f73e54d0-9547-4688-b97d-4818b104d160",
@@ -1539,7 +1836,10 @@
     "party": "Republican",
     "email": "steven.rudy@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house1.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=1"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=1",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Steven_Rudy",
+    "ballotpediaUrl": "https://ballotpedia.org/Steven_Rudy",
+    "twitter": "kyrudy"
   },
   {
     "id": "ocd-person/c85ace8f-67e3-438d-afeb-e6442aec43cd",
@@ -1551,7 +1851,10 @@
     "party": "Republican",
     "email": "susan.witten@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house31.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=31"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=31",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Susan_Witten",
+    "ballotpediaUrl": "https://ballotpedia.org/Susan_Tyler_Witten",
+    "twitter": "catfaninthevill"
   },
   {
     "id": "ocd-person/92576283-508e-4613-b1a0-3d227edf4068",
@@ -1563,7 +1866,10 @@
     "party": "Republican",
     "email": "suzanne.miles@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house7.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=7"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=7",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Suzanne_Miles",
+    "ballotpediaUrl": "https://ballotpedia.org/Suzanne_Miles",
+    "twitter": "MilesForKY"
   },
   {
     "id": "ocd-person/1c369689-ed04-484c-ab53-c50bd6011192",
@@ -1575,7 +1881,9 @@
     "party": "Republican",
     "email": "tj.roberts@kylegislature.gov",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/T.J._Roberts.png",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=66"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=66",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/T._J._Roberts_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/T.J._Roberts"
   },
   {
     "id": "ocd-person/7d2b01df-9356-4eaa-923f-144e3f229860",
@@ -1587,7 +1895,9 @@
     "party": "Republican",
     "email": "thomas.huff@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house49.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=49"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=49",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Thomas_Huff",
+    "ballotpediaUrl": "https://ballotpedia.org/Thomas_Huff_(Kentucky)"
   },
   {
     "id": "ocd-person/b2834b48-3186-4fbd-aa3e-daa1d38fa308",
@@ -1599,7 +1909,9 @@
     "party": "Republican",
     "email": "timmy.truett@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house89.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=89"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=89",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Timmy_Truett",
+    "ballotpediaUrl": "https://ballotpedia.org/Timmy_Truett"
   },
   {
     "id": "ocd-person/77db7bcf-dfa8-4365-bb3a-4ca0351a8368",
@@ -1611,7 +1923,10 @@
     "party": "Democratic",
     "email": "tina.bojanowski@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house32.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=32"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=32",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tina_Bojanowski",
+    "ballotpediaUrl": "https://ballotpedia.org/Tina_Bojanowski",
+    "twitter": "tinaforkentucky"
   },
   {
     "id": "ocd-person/5764151d-bf80-422b-bc46-93ac2be910cc",
@@ -1623,7 +1938,9 @@
     "party": "Republican",
     "email": "tom.smith@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house86.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=86"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=86",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tom_Smith_(Kentucky_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Tom_Smith_(Kentucky)"
   },
   {
     "id": "ocd-person/79a62906-5436-4ac8-adea-0c566273bbde",
@@ -1635,7 +1952,9 @@
     "party": "Republican",
     "email": "tony.hampton@kylegislature.gov",
     "photoUrl": "https://cdn.photos.sparkplatform.com/lex/20240524200530073416000000.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=62"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=62",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tony_Hampton",
+    "ballotpediaUrl": "https://ballotpedia.org/Tony_Hampton"
   },
   {
     "id": "ocd-person/bc34f3ad-05ad-494c-bb80-bd2eb99e4fe9",
@@ -1647,7 +1966,9 @@
     "party": "Republican",
     "email": "vanessa.grossl@kylegislature.gov",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/VanessaGrossl.jpeg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=88"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=88",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Vanessa_Grossl",
+    "ballotpediaUrl": "https://ballotpedia.org/Vanessa_Grossl"
   },
   {
     "id": "ocd-person/66619aa2-a521-4318-b5d7-b4c36954b43d",
@@ -1659,7 +1980,9 @@
     "party": "Republican",
     "email": "wade.williams@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house4.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=4"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=4",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/D._Wade_Williams",
+    "ballotpediaUrl": "https://ballotpedia.org/D._Wade_Williams"
   },
   {
     "id": "ocd-person/ec846db3-c75b-4460-ba72-3e2b3fd9e04d",
@@ -1673,7 +1996,10 @@
     "phone": "270-889-8091",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house8.jpg",
     "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=8",
-    "office": "KY"
+    "office": "KY",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Walker_Thomas",
+    "ballotpediaUrl": "https://ballotpedia.org/Walker_Thomas",
+    "twitter": "walkerthomas_ky"
   },
   {
     "id": "ocd-person/3d3b33bc-8852-48fe-90cf-42ce9551424c",
@@ -1685,6 +2011,8 @@
     "party": "Republican",
     "email": "william.lawrence@kylegislature.gov",
     "photoUrl": "https://legislature.ky.gov/Legislators%20Thumbnail%20Images/house70.jpg",
-    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=70"
+    "website": "https://legislature.ky.gov/Legislators/Pages/Legislator-Profile.aspx?DistrictNumber=70",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/William_Lawrence_(Kentucky_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/William_Lawrence_(Kentucky)"
   }
 ]

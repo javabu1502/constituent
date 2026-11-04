@@ -11,7 +11,13 @@
     "phone": "907-465-3875",
     "photoUrl": "http://akleg.gov/images/legislators/450x600/GAL.jpg",
     "website": "https://akhouse.org/rep-galvin/",
-    "office": "State Capitol Room 502, 120 4th St., Juneau, AK 99801"
+    "office": "State Capitol Room 502, 120 4th St., Juneau, AK 99801",
+    "districtOffice": "1500 W. Benson Blvd., Anchorage, AK 99503",
+    "districtPhone": "907-269-0190",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Alyse_Galvin",
+    "ballotpediaUrl": "https://ballotpedia.org/Alyse_Galvin",
+    "twitter": "AlyseGalvin",
+    "facebook": "repalysegalvin"
   },
   {
     "id": "ocd-person/7db414a5-dd7e-48a9-aba2-9c0204f93a5c",
@@ -25,7 +31,10 @@
     "phone": "907-465-3744",
     "photoUrl": "http://akleg.gov/images/legislators/450x600/STO.jpg",
     "website": "https://akhouse.org/rep-story/",
-    "office": "State Capitol Room 403, 120 4th St., Juneau, AK 99801"
+    "office": "State Capitol Room 403, 120 4th St., Juneau, AK 99801",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Andi_Story",
+    "ballotpediaUrl": "https://ballotpedia.org/Andi_Story",
+    "facebook": "RepAndiStory"
   },
   {
     "id": "ocd-person/822df52b-f962-478d-8bf5-3bbe3c9dd811",
@@ -39,7 +48,13 @@
     "phone": "907-465-4940",
     "photoUrl": "http://akleg.gov/images/legislators/450x600/GRY.jpg",
     "website": "https://akhouse.org/rep-gray/",
-    "office": "State Capitol Room 118, 120 4th St., Juneau, AK 99801"
+    "office": "State Capitol Room 118, 120 4th St., Juneau, AK 99801",
+    "districtOffice": "1500 W. Benson Blvd., Anchorage, AK 99503",
+    "districtPhone": "907-269-0123",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Andrew_Gray_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Andrew_Gray_(Alaska)",
+    "twitter": "rep_gray",
+    "facebook": "repandrewgray"
   },
   {
     "id": "ocd-person/e1989648-fdd3-4e88-a0f0-9e27e75c0f03",
@@ -53,7 +68,13 @@
     "phone": "907-465-4939",
     "photoUrl": "http://akleg.gov/images/legislators/450x600/JOS.jpg",
     "website": "https://akhouse.org/rep_josephson/",
-    "office": "State Capitol Room 505, 120 4th St., Juneau, AK 99801"
+    "office": "State Capitol Room 505, 120 4th St., Juneau, AK 99801",
+    "districtOffice": "1500 W. Benson Blvd., Anchorage, AK 99503",
+    "districtPhone": "907-269-0265",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Andy_Josephson",
+    "ballotpediaUrl": "https://ballotpedia.org/Andrew_L._Josephson",
+    "twitter": "RepAndyJ",
+    "facebook": "RepAndyJosephson"
   },
   {
     "id": "ocd-person/1ac31dd3-6e42-43b1-91b0-4da4a1399543",
@@ -67,7 +88,13 @@
     "phone": "907-465-4976",
     "photoUrl": "http://akleg.gov/images/legislators/450x600/CAI.jpg",
     "website": "https://akhouse.org/rep-carrick/",
-    "office": "State Capitol Room 406, 120 4th St., Juneau, AK 99801"
+    "office": "State Capitol Room 406, 120 4th St., Juneau, AK 99801",
+    "districtOffice": "1292 Sadler Way Suite 308, Fairbanks, AK 99701",
+    "districtPhone": "907-452-6084",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ashley_Carrick",
+    "ballotpediaUrl": "https://ballotpedia.org/Ashley_Carrick",
+    "twitter": "RepCarrick",
+    "facebook": "RepCarrick"
   },
   {
     "id": "ocd-person/a160c8f2-f8a9-4429-9bc2-e14831545503",
@@ -81,7 +108,9 @@
     "phone": "907-465-2327",
     "photoUrl": "https://bloximages.newyork1.vip.townnews.com/newsminer.com/content/tncms/assets/v3/editorial/3/e9/3e94520a-9536-11ef-bf77-632b9a4876c1/671f9b183c878.image.jpg?resize=424%2C500",
     "website": "https://www.akleg.gov/basis/Member/Detail/34?code=scw",
-    "office": "State Capitol Room 409, 120 4th St., Juneau, AK 99801"
+    "office": "State Capitol Room 409, 120 4th St., Juneau, AK 99801",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rebecca_Schwanke",
+    "ballotpediaUrl": "https://ballotpedia.org/Becky_Schwanke"
   },
   {
     "id": "ocd-person/bfdc2ee2-7760-4119-9d68-4962f1e1a285",
@@ -95,7 +124,12 @@
     "phone": "907-465-3873",
     "photoUrl": "http://akleg.gov/images/legislators/450x600/SMN.jpg",
     "website": "https://alaskasenate.org/stedman/",
-    "office": "State Capitol Room 516, 120 4th St., Juneau, AK 99801"
+    "office": "State Capitol Room 516, 120 4th St., Juneau, AK 99801",
+    "districtOffice": "1900 1st Ave. Suite 310, Ketchikan, AK 99901",
+    "districtPhone": "907-225-8088",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bert_Stedman",
+    "ballotpediaUrl": "https://ballotpedia.org/Bert_K._Stedman",
+    "twitter": "SenStedman"
   },
   {
     "id": "ocd-person/354dc869-cbaf-4298-89cd-c691c0f52a1e",
@@ -109,7 +143,11 @@
     "phone": "907-465-3779",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/BillElam2024.jpg",
     "website": "https://www.akleg.gov/basis/Member/Detail/34?code=ela",
-    "office": "State Capitol Room 422, 120 4th St., Juneau, AK 99801"
+    "office": "State Capitol Room 422, 120 4th St., Juneau, AK 99801",
+    "districtOffice": "145 Main Street Loop, Kenai, AK 99611",
+    "districtPhone": "907-283-7223",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bill_Elam",
+    "ballotpediaUrl": "https://ballotpedia.org/Bill_Elam"
   },
   {
     "id": "ocd-person/57554431-caac-4074-a8d8-40a4e6289ec1",
@@ -123,7 +161,13 @@
     "phone": "907-465-2435",
     "photoUrl": "http://akleg.gov/images/legislators/450x600/WIE.jpg",
     "website": "https://alaskasenate.org/wielechowski/",
-    "office": "State Capitol Room 103, 120 4th St., Juneau, AK 99801"
+    "office": "State Capitol Room 103, 120 4th St., Juneau, AK 99801",
+    "districtOffice": "1500 W. Benson Blvd., Anchorage, AK 99501",
+    "districtPhone": "907-269-0120",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bill_Wielechowski",
+    "ballotpediaUrl": "https://ballotpedia.org/Bill_Wielechowski",
+    "twitter": "SenWielechowski",
+    "facebook": "bill.wielechowski"
   },
   {
     "id": "ocd-person/b097e069-345d-42da-b821-0c2c9747ccfc",
@@ -137,7 +181,13 @@
     "phone": "907-465-4451",
     "photoUrl": "http://akleg.gov/images/legislators/450x600/EDG.jpg",
     "website": "https://akhousemajority.com/rep-edgmon/",
-    "office": "State Capitol Room 208, 120 4th St., Juneau, AK 99801"
+    "office": "State Capitol Room 208, 120 4th St., Juneau, AK 99801",
+    "districtOffice": "1500 W. Benson Blvd., Anchorage, AK 99503",
+    "districtPhone": "907-269-0275",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bryce_Edgmon",
+    "ballotpediaUrl": "https://ballotpedia.org/Bryce_E._Edgmon",
+    "twitter": "BryceEdgmon",
+    "facebook": "RepEdgmon"
   },
   {
     "id": "ocd-person/8ed150a0-45be-4844-abe5-d921c9f5a435",
@@ -151,7 +201,12 @@
     "phone": "907-465-4931",
     "photoUrl": "http://akleg.gov/images/legislators/450x600/SCG.jpg",
     "website": "https://akhouse.org/rep-schrage/",
-    "office": "State Capitol Room 404, 120 4th St., Juneau, AK 99801"
+    "office": "State Capitol Room 410, 120 4th St., Juneau, AK 99801",
+    "districtOffice": "1500 W. Benson Blvd., Anchorage, AK 99503",
+    "districtPhone": "907-269-0205",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Calvin_Schrage",
+    "ballotpediaUrl": "https://ballotpedia.org/Calvin_Schrage",
+    "facebook": "repcalvinschrage"
   },
   {
     "id": "ocd-person/c9bf1b47-3ed8-49e8-9535-2a7094c52d1a",
@@ -165,7 +220,13 @@
     "phone": "907-465-4968",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/CarolynHall2024.jpg",
     "website": "https://www.akleg.gov/basis/Member/Detail/34?code=hll",
-    "office": "State Capitol Room 434, 120 4th St., Juneau, AK 99801"
+    "office": "State Capitol Room 434, 120 4th St., Juneau, AK 99801",
+    "districtOffice": "1500 W. Benson Blvd., Anchorage, AK 99503",
+    "districtPhone": "907-269-0117",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Carolyn_Hall",
+    "ballotpediaUrl": "https://ballotpedia.org/Carolyn_Hall",
+    "twitter": "CHall_AK",
+    "facebook": "CarolynforAlaska"
   },
   {
     "id": "ocd-person/4ac9a4bf-e2d9-4257-a360-9e91dc234deb",
@@ -179,7 +240,12 @@
     "phone": "907-465-4843",
     "photoUrl": "http://akleg.gov/images/legislators/450x600/GIE.jpg",
     "website": "https://alaskasenate.org/giessel/",
-    "office": "State Capitol Room 121, 120 4th St., Juneau, AK 99801"
+    "office": "State Capitol Room 121, 120 4th St., Juneau, AK 99801",
+    "districtOffice": "1500 W. Benson Blvd., Anchorage, AK 99501",
+    "districtPhone": "907-269-0181",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Cathy_Giessel",
+    "ballotpediaUrl": "https://ballotpedia.org/Catherine_A._Giessel",
+    "facebook": "SenatorCathyGiessel"
   },
   {
     "id": "ocd-person/f1816065-31d1-4757-b8b9-714e15daeccf",
@@ -193,7 +259,10 @@
     "phone": "907-465-2199",
     "photoUrl": "http://akleg.gov/images/legislators/450x600/TLT.jpg",
     "website": "https://akhousemajority.com/rep-tilton/",
-    "office": "State Capitol Room 9, 120 4th St., Juneau, AK 99801"
+    "office": "State Capitol Room 9, 120 4th St., Juneau, AK 99801",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Cathy_Tilton",
+    "ballotpediaUrl": "https://ballotpedia.org/Cathy_L._Tilton",
+    "facebook": "Tilton4Alaska"
   },
   {
     "id": "ocd-person/7474d172-6c90-47f9-aae1-9f66c9518be2",
@@ -207,7 +276,12 @@
     "phone": "907-465-3892",
     "photoUrl": "http://akleg.gov/images/legislators/kop.jpg",
     "website": "https://www.akleg.gov/basis/Member/Detail/30?code=kop",
-    "office": "State Capitol Room 204, 120 4th St., Juneau, AK 99801"
+    "office": "State Capitol Room 204, 120 4th St., Juneau, AK 99801",
+    "districtOffice": "1500 W. Benson Blvd., Anchorage, AK 99503",
+    "districtPhone": "907-269-0200",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Chuck_Kopp",
+    "ballotpediaUrl": "https://ballotpedia.org/Charles_M._Kopp",
+    "facebook": "RepChuckKopp"
   },
   {
     "id": "ocd-person/7dcdf7b8-530a-4b81-85b6-745af9224eb1",
@@ -221,7 +295,12 @@
     "phone": "907-465-3783",
     "photoUrl": "http://akleg.gov/images/legislators/450x600/SAD.jpg",
     "website": "https://akhousemajority.com/rep-saddler/",
-    "office": "State Capitol Room 104, 120 4th St., Juneau, AK 99801"
+    "office": "State Capitol Room 104, 120 4th St., Juneau, AK 99801",
+    "districtOffice": "1500 W. Benson Blvd., Anchorage, AK 99503",
+    "districtPhone": "907-334-2630",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dan_Saddler",
+    "ballotpediaUrl": "https://ballotpedia.org/Dan_Saddler",
+    "facebook": "dansaddleralaska"
   },
   {
     "id": "ocd-person/e1a32811-98f9-484f-8d4b-12df7eab4183",
@@ -233,9 +312,13 @@
     "party": "Republican",
     "email": "representative.david.nelson@akleg.gov",
     "phone": "907-465-4998",
-    "photoUrl": "http://akleg.gov/images/legislators/ned.jpg",
     "website": "https://www.akleg.gov/basis/Member/Detail/32?code=ned",
-    "office": "State Capitol Room 426, 120 4th St., Juneau, AK 99801"
+    "office": "State Capitol Room 426, 120 4th St., Juneau, AK 99801",
+    "districtOffice": "1500 W. Benson Blvd, Anchorage, AK 99503",
+    "districtPhone": "907-269-0216",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/David_Nelson_(Alaska_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/David_Nelson_(Alaska)",
+    "facebook": "NelsonforAlaska"
   },
   {
     "id": "ocd-person/d7d4a21d-942e-46f7-92b6-237f1741b025",
@@ -249,7 +332,13 @@
     "phone": "907-465-4958",
     "photoUrl": "http://akleg.gov/images/legislators/450x600/JHS.jpg",
     "website": "https://akhousemajority.com/rep-d-johnson/",
-    "office": "State Capitol Room 432, 120 4th St., Juneau, AK 99801"
+    "office": "State Capitol Room 404, 120 4th St., Juneau, AK 99801",
+    "districtOffice": "600 E. Railroad Ave., Wasilla, AK 99654",
+    "districtPhone": "907-376-4958",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/DeLena_Johnson",
+    "ballotpediaUrl": "https://ballotpedia.org/Delena_Johnson",
+    "twitter": "RepDeLena",
+    "facebook": "RepDeLena"
   },
   {
     "id": "ocd-person/fbe52f5e-1dd2-4d44-9205-b2ebbbe39eee",
@@ -263,7 +352,13 @@
     "phone": "907-465-3438",
     "photoUrl": "http://akleg.gov/images/legislators/450x600/MEA.jpg",
     "website": "https://akhouse.org/rep-mears/",
-    "office": "State Capitol Room 102, 120 4th St., Juneau, AK 99801"
+    "office": "State Capitol Room 102, 120 4th St., Juneau, AK 99801",
+    "districtOffice": "1500 W. Benson Blvd., Anchorage, AK 99503",
+    "districtPhone": "907-269-0100",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Donna_Mears",
+    "ballotpediaUrl": "https://ballotpedia.org/Donna_Mears",
+    "twitter": "DonnaMears",
+    "facebook": "Rep.Mears"
   },
   {
     "id": "ocd-person/cd3ca264-553d-4e21-a993-e3f5097b1b77",
@@ -277,7 +372,9 @@
     "phone": "907-465-3707",
     "photoUrl": "http://akleg.gov/images/legislators/450x600/OLS.jpg",
     "website": "https://alaskasenate.org/olson/",
-    "office": "State Capitol Room 508, 120 4th St., Juneau, AK 99801"
+    "office": "State Capitol Room 508, 120 4th St., Juneau, AK 99801",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Donny_Olson",
+    "ballotpediaUrl": "https://ballotpedia.org/Donald_C._Olson"
   },
   {
     "id": "ocd-person/6e6762ad-37ca-4166-982c-75aab9701d0c",
@@ -291,7 +388,11 @@
     "phone": "907-465-4833",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/ElexieMoore2024.png",
     "website": "https://www.akleg.gov/basis/Member/Detail/34?code=moo",
-    "office": "State Capitol Room 430, 120 4th St., Juneau, AK 99801"
+    "office": "State Capitol Room 430, 120 4th St., Juneau, AK 99801",
+    "districtOffice": "600 E. Railroad Ave., Wasilla, AK 99654",
+    "districtPhone": "907-373-6285",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Elexie_Moore",
+    "ballotpediaUrl": "https://ballotpedia.org/Elexie_Moore"
   },
   {
     "id": "ocd-person/2ba2d14f-a08a-4f05-a9d4-5ca63d09561e",
@@ -305,7 +406,12 @@
     "phone": "907-465-4930",
     "photoUrl": "http://akleg.gov/images/legislators/450x600/GRA.jpg",
     "website": "https://alaskasenate.org/gray-jackson/",
-    "office": "State Capitol Room 30, 120 4th St., Juneau, AK 99801"
+    "office": "State Capitol Room 30, 120 4th St., Juneau, AK 99801",
+    "districtOffice": "1500 W. Benson Blvd., Anchorage, AK 99503",
+    "districtPhone": "907-269-0174",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Elvi_Gray-Jackson",
+    "ballotpediaUrl": "https://ballotpedia.org/Elvi_Gray-Jackson",
+    "facebook": "SenatorElviGrayJackson"
   },
   {
     "id": "ocd-person/4511370e-1ac8-4135-a622-d5b533faeb43",
@@ -319,7 +425,13 @@
     "phone": "907-465-6944",
     "photoUrl": "http://akleg.gov/images/legislators/450x600/DNB.jpg",
     "website": "https://alaskasenate.org/dunbar/",
-    "office": "State Capitol Room 125, 120 4th St., Juneau, AK 99801"
+    "office": "State Capitol Room 125, 120 4th St., Juneau, AK 99801",
+    "districtOffice": "1500 W. Benson Blvd., Anchorage, AK 99503",
+    "districtPhone": "907-269-0246",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Forrest_Dunbar",
+    "ballotpediaUrl": "https://ballotpedia.org/Forrest_Dunbar",
+    "twitter": "ForrestDunbarAK",
+    "facebook": "sendunbar"
   },
   {
     "id": "ocd-person/498eadb3-9999-4055-9358-84ccfe64f788",
@@ -333,7 +445,12 @@
     "phone": "907-465-4457",
     "photoUrl": "http://akleg.gov/images/legislators/450x600/TMZ.jpg",
     "website": "https://www.akleg.gov/basis/Member/Detail/33?code=tmz",
-    "office": "State Capitol Room 405, 120 4th St., Juneau, AK 99801"
+    "office": "State Capitol Room 405, 120 4th St., Juneau, AK 99801",
+    "districtOffice": "1292 Sadler Way Suite 308, Fairbanks, AK 99701",
+    "districtPhone": "907-456-8172",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Frank_Tomaszewski",
+    "ballotpediaUrl": "https://ballotpedia.org/Frank_Tomaszewski",
+    "facebook": "RepTomaszewski"
   },
   {
     "id": "ocd-person/abb33c56-f4ba-4c95-938e-658677368ca4",
@@ -345,8 +462,13 @@
     "party": "Republican",
     "email": "representative.garret.nelson@akleg.gov",
     "phone": "907-465-6600",
+    "photoUrl": "https://akleg.gov/images/legislators/450x600/NEG.jpg",
     "website": "https://www.akleg.gov/basis/Member/Detail/34?code=neg",
-    "office": "State Capitol Room 430, 120 4th St., Juneau, AK 99801"
+    "office": "State Capitol Room 430, 120 4th St., Juneau, AK 99801",
+    "districtOffice": "600 E. Railroad Ave. Suite 1, Wasilla, AK 99654",
+    "districtPhone": "907-376-3370",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Garret_Nelson",
+    "ballotpediaUrl": "https://ballotpedia.org/Garret_Nelson"
   },
   {
     "id": "ocd-person/f5c83068-a809-4f57-8b77-1e77c87ee93b",
@@ -360,7 +482,11 @@
     "phone": "907-465-4925",
     "photoUrl": "http://akleg.gov/images/legislators/450x600/STG.jpg",
     "website": "https://www.akleg.gov/basis/Member/Detail/30?code=stg",
-    "office": "State Capitol Room 111, 120 4th St., Juneau, AK 99801"
+    "office": "State Capitol Room 111, 120 4th St., Juneau, AK 99801",
+    "districtOffice": "305 Center Ave. Suite 1, Kodiak, AK 99615",
+    "districtPhone": "907-486-4925",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Gary_Stevens_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Gary_Stevens"
   },
   {
     "id": "ocd-person/a1adb2e5-3c63-4032-81e8-9e787976ca63",
@@ -374,7 +500,11 @@
     "phone": "907-465-3424",
     "photoUrl": "http://akleg.gov/images/legislators/450x600/MNA.jpg",
     "website": "https://akhouse.org/rep-mina/",
-    "office": "State Capitol Room 416, 120 4th St., Juneau, AK 99801"
+    "office": "State Capitol Room 416, 120 4th St., Juneau, AK 99801",
+    "districtOffice": "1500 W. Benson Blvd., Anchorage, AK 99503",
+    "districtPhone": "907-269-0144",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Genevieve_Mina",
+    "ballotpediaUrl": "https://ballotpedia.org/Genevieve_Mina"
   },
   {
     "id": "ocd-person/627922d3-e631-4c32-841f-148f061b0c75",
@@ -388,7 +518,12 @@
     "phone": "907-465-4859",
     "photoUrl": "http://akleg.gov/images/legislators/450x600/RAU.jpg",
     "website": "https://akhousemajority.com/rep-rauscher/",
-    "office": "State Capitol Room 419, 120 4th St., Juneau, AK 99801"
+    "office": "State Capitol Room 419, 120 4th St., Juneau, AK 99801",
+    "districtOffice": "600 E. Railroad Ave., Wasilla, AK 99654",
+    "districtPhone": "907-373-6287",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/George_Rauscher",
+    "ballotpediaUrl": "https://ballotpedia.org/George_Rauscher",
+    "facebook": "Rep.George.Rauscher"
   },
   {
     "id": "ocd-person/f6cd7b64-a3f3-44ec-89a1-68c17fa6d4c9",
@@ -402,7 +537,12 @@
     "phone": "907-465-4949",
     "photoUrl": "http://akleg.gov/images/legislators/450x600/KAU.jpg",
     "website": "https://alaskasenate.org/kaufman/",
-    "office": "State Capitol Room 510, 120 4th St., Juneau, AK 99801"
+    "office": "State Capitol Room 510, 120 4th St., Juneau, AK 99801",
+    "districtOffice": "1500 W. Benson Blvd., Anchorage, AK 99503",
+    "districtPhone": "907-269-0244",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/James_D._Kaufman",
+    "ballotpediaUrl": "https://ballotpedia.org/James_Kaufman",
+    "facebook": "senatorkaufman"
   },
   {
     "id": "ocd-person/9d56634b-f2d0-43fe-b20e-ed2465b0ad9c",
@@ -416,7 +556,11 @@
     "phone": "907-465-2995",
     "photoUrl": "http://akleg.gov/images/legislators/450x600/ALR.jpg",
     "website": "https://akhousemajority.com/rep-allard/",
-    "office": "State Capitol Room 415, 120 4th St., Juneau, AK 99801"
+    "office": "State Capitol Room 415, 120 4th St., Juneau, AK 99801",
+    "districtOffice": "1500 W. Benson Blvd., Anchorage, AK 99503",
+    "districtPhone": "907-269-0250",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jamie_Allard",
+    "ballotpediaUrl": "https://ballotpedia.org/Jamie_Allard"
   },
   {
     "id": "ocd-person/b2eaa848-d651-4521-9abb-21b68da5d5c6",
@@ -430,7 +574,12 @@
     "phone": "907-465-3824",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/jbynum.jpg",
     "website": "https://www.akleg.gov/basis/Member/Detail/34?code=byn",
-    "office": "State Capitol Room 400, 120 4th St., Juneau, AK 99801"
+    "office": "State Capitol Room 400, 120 4th St., Juneau, AK 99801",
+    "districtOffice": "1900 First Ave., Ketchikan, AK 99901",
+    "districtPhone": "907-247-4672",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jeremy_Bynum",
+    "ballotpediaUrl": "https://ballotpedia.org/Jeremy_Bynum",
+    "facebook": "votebynum"
   },
   {
     "id": "ocd-person/e14b5980-9a38-4420-8903-70738802edf6",
@@ -444,7 +593,13 @@
     "phone": "907-465-2828",
     "photoUrl": "http://akleg.gov/images/legislators/450x600/BJK.jpg",
     "website": "https://alaskasenate.org/bjorkman/",
-    "office": "State Capitol Room 427, 120 4th St., Juneau, AK 99801"
+    "office": "State Capitol Room 427, 120 4th St., Juneau, AK 99801",
+    "districtOffice": "145 Main St. Loop, Kenai, AK 99611",
+    "districtPhone": "907-283-7996",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jesse_Bjorkman",
+    "ballotpediaUrl": "https://ballotpedia.org/Jesse_Bjorkman",
+    "twitter": "JJBinAK",
+    "facebook": "Senator.Jesse.Bjorkman"
   },
   {
     "id": "ocd-person/1ae3974e-660d-4526-b351-fff9b689b51a",
@@ -458,7 +613,11 @@
     "phone": "907-465-4947",
     "photoUrl": "http://akleg.gov/images/legislators/450x600/KIE.jpg",
     "website": "https://alaskasenate.org/kiehl/",
-    "office": "State Capitol Room 514, 120 4th St., Juneau, AK 99801"
+    "office": "State Capitol Room 514, 120 4th St., Juneau, AK 99801",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jesse_Kiehl",
+    "ballotpediaUrl": "https://ballotpedia.org/Jesse_Kiehl",
+    "twitter": "JesseKiehl",
+    "facebook": "senatorkiehl"
   },
   {
     "id": "ocd-person/a5fc1d39-03f4-427f-9266-8baf789b6ac6",
@@ -472,7 +631,12 @@
     "phone": "907-465-2186",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/JubileeUnderwood2024.jpg",
     "website": "https://www.akleg.gov/basis/Member/Detail/34?code=und",
-    "office": "State Capitol Room 112, 120 4th St., Juneau, AK 99801"
+    "office": "State Capitol Room 112, 120 4th St., Juneau, AK 99801",
+    "districtOffice": "600 E. Railroad Ave., Wasilla, AK 99654",
+    "districtPhone": "907-373-1842",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jubilee_Underwood",
+    "ballotpediaUrl": "https://ballotpedia.org/Jubilee_Underwood",
+    "facebook": "jubileeforstatehouse"
   },
   {
     "id": "ocd-person/a66f1539-56d3-458c-8ac0-3aff6907a69d",
@@ -486,7 +650,12 @@
     "phone": "907-465-3879",
     "photoUrl": "http://akleg.gov/images/legislators/450x600/COU.jpg",
     "website": "https://akhousemajority.com/rep-coulombe/",
-    "office": "State Capitol Room 420, 120 4th St., Juneau, AK 99801"
+    "office": "State Capitol Room 420, 120 4th St., Juneau, AK 99801",
+    "districtOffice": "1500 W. Benson Blvd., Anchorage, AK 99503",
+    "districtPhone": "907-269-0222",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Julie_Coulombe",
+    "ballotpediaUrl": "https://ballotpedia.org/Julie_Coulombe",
+    "twitter": "RepCoulombe"
   },
   {
     "id": "ocd-person/722ec3e9-7e0d-4dda-bf19-11d873df7031",
@@ -500,7 +669,11 @@
     "phone": "907-465-2693",
     "photoUrl": "http://akleg.gov/images/legislators/450x600/RUF.jpg",
     "website": "https://akhousemajority.com/rep-ruffridge/",
-    "office": "State Capitol Room 424, 120 4th St., Juneau, AK 99801"
+    "office": "State Capitol Room 424, 120 4th St., Juneau, AK 99801",
+    "districtOffice": "145 Main St. Loop, Kenai, AK 99611",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Justin_Ruffridge",
+    "ballotpediaUrl": "https://ballotpedia.org/Justin_Ruffridge",
+    "facebook": "repruffridge"
   },
   {
     "id": "ocd-person/ddad148b-d8ed-4eff-826d-3861709eb500",
@@ -514,7 +687,12 @@
     "phone": "907-465-3777",
     "photoUrl": "http://akleg.gov/images/legislators/450x600/MRR.jpg",
     "website": "https://alaskasenate.org/merrick/",
-    "office": "State Capitol Room 504, 120 4th St., Juneau, AK 99801"
+    "office": "State Capitol Room 504, 120 4th St., Juneau, AK 99801",
+    "districtOffice": "1500 W. Benson Blvd., Anchorage, AK 99503",
+    "districtPhone": "907-269-3630",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kelly_Merrick",
+    "ballotpediaUrl": "https://ballotpedia.org/Kelly_Merrick",
+    "facebook": "SenKellyMerrick"
   },
   {
     "id": "ocd-person/0160c6d2-4090-4143-8e23-f8501501bdd0",
@@ -528,7 +706,12 @@
     "phone": "907-465-2679",
     "photoUrl": "http://akleg.gov/images/legislators/450x600/MCA.jpg",
     "website": "https://akhousemajority.com/rep-mccabe/",
-    "office": "State Capitol Room 13, 120 4th St., Juneau, AK 99801"
+    "office": "State Capitol Room 13, 120 4th St., Juneau, AK 99801",
+    "districtOffice": "600 E. Railroad Ave., Wasilla, AK 99654",
+    "districtPhone": "907-376-2679",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kevin_J._McCabe",
+    "ballotpediaUrl": "https://ballotpedia.org/Kevin_McCabe_(Alaska)",
+    "facebook": "RepKevinJMcCabe"
   },
   {
     "id": "ocd-person/a669e6fd-ba4c-42db-b2e8-079600a60f58",
@@ -542,7 +725,13 @@
     "phone": "907-465-4945",
     "photoUrl": "https://kyholland.com/wp-content/uploads/2024/04/Ky-headshot-new.jpeg",
     "website": "https://www.akleg.gov/basis/Member/Detail/34?code=hla",
-    "office": "State Capitol Room 418, 120 4th St., Juneau, AK 99801"
+    "office": "State Capitol Room 418, 120 4th St., Juneau, AK 99801",
+    "districtOffice": "1500 W. Benson Blvd., Anchorage, AK 99503",
+    "districtPhone": "907-269-0199",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ky_Holland",
+    "ballotpediaUrl": "https://ballotpedia.org/Ky_Holland",
+    "twitter": "KyHollandAK",
+    "facebook": "RepKyHolland"
   },
   {
     "id": "ocd-person/c66c309d-1612-4eab-863c-59e34b643e2c",
@@ -556,7 +745,12 @@
     "phone": "907-465-3704",
     "photoUrl": "http://akleg.gov/images/legislators/450x600/TOB.jpg",
     "website": "https://alaskasenate.org/tobin/",
-    "office": "State Capitol Room 115, 120 4th St., Juneau, AK 99801"
+    "office": "State Capitol Room 115, 120 4th St., Juneau, AK 99801",
+    "districtOffice": "1500 W. Benson Blvd., Anchorage, AK 99503",
+    "districtPhone": "907-269-0169",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Löki_Tobin",
+    "ballotpediaUrl": "https://ballotpedia.org/Loki_Tobin",
+    "facebook": "senatorloki"
   },
   {
     "id": "ocd-person/2d74c456-7818-42bc-a284-63026fbbfc56",
@@ -570,7 +764,13 @@
     "phone": "907-465-2487",
     "photoUrl": "http://akleg.gov/images/legislators/450x600/STS.jpg",
     "website": "https://akhouse.org/rep_stutes",
-    "office": "State Capitol Room 216, 120 4th St., Juneau, AK 99801"
+    "office": "State Capitol Room 216, 120 4th St., Juneau, AK 99801",
+    "districtOffice": "305 Center Ave. Suite 1, Kodiak, AK 99615",
+    "districtPhone": "907-486-8872",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Louise_Stutes",
+    "ballotpediaUrl": "https://ballotpedia.org/Louise_Stutes",
+    "twitter": "RepLouiseStutes",
+    "facebook": "replouisestutes"
   },
   {
     "id": "ocd-person/e187d603-9202-4f64-80b0-6366702aec11",
@@ -584,7 +784,9 @@
     "phone": "907-465-4453",
     "photoUrl": "http://akleg.gov/images/legislators/450x600/HOF.jpg",
     "website": "https://alaskasenate.org/hoffman/",
-    "office": "State Capitol Room 518, 120 4th St., Juneau, AK 99801"
+    "office": "State Capitol Room 518, 120 4th St., Juneau, AK 99801",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lyman_Hoffman",
+    "ballotpediaUrl": "https://ballotpedia.org/Lyman_Hoffman"
   },
   {
     "id": "ocd-person/0b2d5ec3-c1b2-4b09-8444-144c92125cc4",
@@ -598,7 +800,13 @@
     "phone": "907-465-4919",
     "photoUrl": "http://akleg.gov/images/legislators/450x600/CLA.jpg",
     "website": "https://alaskasenate.org/matt-claman/",
-    "office": "State Capitol Room 429, 120 4th St., Juneau, AK 99801"
+    "office": "State Capitol Room 429, 120 4th St., Juneau, AK 99801",
+    "districtOffice": "1500 W. Benson Blvd., Anchorage, AK 99503",
+    "districtPhone": "907-269-0130",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Matt_Claman",
+    "ballotpediaUrl": "https://ballotpedia.org/Matt_Claman",
+    "twitter": "mattclaman",
+    "facebook": "SenMattClaman"
   },
   {
     "id": "ocd-person/5ef3ef20-0fd1-41a3-be56-7844d169bba8",
@@ -612,7 +820,13 @@
     "phone": "907-465-2138",
     "photoUrl": "http://akleg.gov/images/legislators/450x600/DIB.jpg",
     "website": "https://akhouse.org/rep-dibert/",
-    "office": "State Capitol Room 128, 120 4th St., Juneau, AK 99801"
+    "office": "State Capitol Room 126, 120 4th St., Juneau, AK 99801",
+    "districtOffice": "1292 Sadler Way Suite 308, Fairbanks, AK 99701",
+    "districtPhone": "907-451-4347",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Maxine_Dibert",
+    "ballotpediaUrl": "https://ballotpedia.org/Maxine_Dibert",
+    "twitter": "maxine_dibert",
+    "facebook": "Repmaxinedibert"
   },
   {
     "id": "ocd-person/aea19844-4572-4086-9462-e50ad3ff4b76",
@@ -623,10 +837,16 @@
     "district": "15",
     "party": "Republican",
     "email": "representative.mia.costello@akleg.gov",
-    "phone": "907-465-6641",
+    "phone": "907-465-4993",
     "photoUrl": "http://akleg.gov/images/legislators/cos.jpg",
     "website": "https://akleg.gov/legislator.php?id=cos",
-    "office": "State Capitol Room 404, 120 4th St., Juneau, AK 99801"
+    "office": "State Capitol Room 421, 120 4th St., Juneau, AK 99801",
+    "districtOffice": "1500 W. Benson Blvd., Anchorage, AK 99501",
+    "districtPhone": "907-269-0200",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mia_Costello",
+    "ballotpediaUrl": "https://ballotpedia.org/Mia_Costello",
+    "twitter": "MiaCostelloAK",
+    "facebook": "VoteMia"
   },
   {
     "id": "ocd-person/c50de9c3-90a3-4c6d-9003-50e12c6c5246",
@@ -640,7 +860,10 @@
     "phone": "907-465-4527",
     "photoUrl": "http://akleg.gov/images/legislators/450x600/CRN.jpg",
     "website": "https://akhousemajority.com/rep-cronk/",
-    "office": "State Capitol Room 11, 120 4th St., Juneau, AK 99801"
+    "office": "State Capitol Room 11, 120 4th St., Juneau, AK 99801",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mike_Cronk",
+    "ballotpediaUrl": "https://ballotpedia.org/Mike_Cronk",
+    "facebook": "RepMikeCronk"
   },
   {
     "id": "ocd-person/3f4670ef-c5b7-4a5b-bd91-9f8605a0affa",
@@ -654,7 +877,12 @@
     "phone": "907-465-4797",
     "photoUrl": "http://akleg.gov/images/legislators/450x600/PRA.jpg",
     "website": "https://akhousemajority.com/rep-prax/",
-    "office": "State Capitol Room 428, 120 4th St., Juneau, AK 99801"
+    "office": "State Capitol Room 428, 120 4th St., Juneau, AK 99801",
+    "districtOffice": "1292 Sadler Way, Suite 308, Fairbanks, AK 99701",
+    "districtPhone": "907-451-2723",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mike_Prax",
+    "ballotpediaUrl": "https://ballotpedia.org/Glenn_Prax",
+    "facebook": "rep.mikeprax"
   },
   {
     "id": "ocd-person/14f39e67-1604-4eb4-8000-99c699f196a0",
@@ -668,7 +896,12 @@
     "phone": "907-465-3789",
     "photoUrl": "http://akleg.gov/images/legislators/450x600/FON.jpg",
     "website": "https://akhousemajority.com/rep-foster/",
-    "office": "State Capitol Room 511, 120 4th St., Juneau, AK 99801"
+    "office": "State Capitol Room 511, 120 4th St., Juneau, AK 99801",
+    "districtOffice": "103 E. Front St., Nome, AK 99762",
+    "districtPhone": "907-443-5036",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Neal_Foster",
+    "ballotpediaUrl": "https://ballotpedia.org/Neal_Foster",
+    "facebook": "Repnealfoster"
   },
   {
     "id": "ocd-person/1454451c-f821-4b6d-903e-07bef45ab0de",
@@ -682,7 +915,9 @@
     "phone": "907-465-4942",
     "photoUrl": "https://npr.brightspotcdn.com/dims4/default/41429e9/2147483647/strip/true/crop/6000x4000+0+0/resize/880x587!/quality/90/?url=http%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2Ffe%2F2b%2F2bf76eb540a397e680305d5eac7d%2Fimg-2003.JPG",
     "website": "https://www.akleg.gov/basis/Member/Detail/34?code=jim",
-    "office": "State Capitol Room 513, 120 4th St., Juneau, AK 99801"
+    "office": "State Capitol Room 513, 120 4th St., Juneau, AK 99801",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Nellie_Jimmie",
+    "ballotpediaUrl": "https://ballotpedia.org/Nellie_Jimmie"
   },
   {
     "id": "ocd-person/5637be3f-7a59-48cc-8f8a-ad7a8bac8ee9",
@@ -696,7 +931,10 @@
     "phone": "907-465-3732",
     "photoUrl": "http://akleg.gov/images/legislators/450x600/HMS.jpg",
     "website": "https://akhouse.org/rep-himschoot/",
-    "office": "State Capitol Room 411, 120 4th St., Juneau, AK 99801"
+    "office": "State Capitol Room 411, 120 4th St., Juneau, AK 99801",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rebecca_Himschoot",
+    "ballotpediaUrl": "https://ballotpedia.org/Rebecca_Himschoot",
+    "facebook": "rep.himschoot"
   },
   {
     "id": "ocd-person/82334f7b-8119-4494-bf3e-a7ddb09536bd",
@@ -708,14 +946,18 @@
     "party": "Republican",
     "email": "senator.robert.yundt@akleg.gov",
     "phone": "907-465-3878",
-    "photoUrl": "https://ktna.org/wp-content/uploads/2023/06/YundtThumb.jpg",
     "website": "https://www.akleg.gov/basis/Member/Detail/34?code=yun",
-    "office": "State Capitol Room 417, 120 4th St., Juneau, AK 99801"
+    "office": "State Capitol Room 417, 120 4th St., Juneau, AK 99801",
+    "districtOffice": "600 E. Railroad Ave., Wasilla, AK 99654",
+    "districtPhone": "907-376-4866",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Robert_Yundt",
+    "ballotpediaUrl": "https://ballotpedia.org/Robert_Yundt",
+    "facebook": "robyundtforalaska"
   },
   {
     "id": "ocd-person/697cb834-6aa1-44f1-9c6e-9cf57ad30774",
-    "name": "Robert Myers",
-    "firstName": "Robert",
+    "name": "Robb Myers",
+    "firstName": "Robb",
     "lastName": "Myers",
     "chamber": "upper",
     "district": "Q",
@@ -724,7 +966,12 @@
     "phone": "907-465-3719",
     "photoUrl": "http://akleg.gov/images/legislators/450x600/MYE.jpg",
     "website": "https://www.akleg.gov/basis/Member/Detail/32?code=mye",
-    "office": "State Capitol Room 7, 120 4th St., Juneau, AK 99801"
+    "office": "State Capitol Room 7, 120 4th St., Juneau, AK 99801",
+    "districtOffice": "1292 Sadler Way Suite 308, Fairbanks, AK 99701",
+    "districtPhone": "907-451-2157",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Robert_Myers_Jr.",
+    "ballotpediaUrl": "https://ballotpedia.org/Robert_Myers_Jr._(Alaska)",
+    "facebook": "SenRobertMyers"
   },
   {
     "id": "ocd-person/c3b004d2-d62a-45de-a212-382396a20b59",
@@ -738,7 +985,11 @@
     "phone": "907-465-3473",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/RobynBurke2024.jpeg",
     "website": "https://www.akleg.gov/basis/Member/Detail/34?code=bur",
-    "office": "State Capitol Room 108, 120 4th St., Juneau, AK 99801"
+    "office": "State Capitol Room 108, 120 4th St., Juneau, AK 99801",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Robyn_Burke",
+    "ballotpediaUrl": "https://ballotpedia.org/Robyn_Burke",
+    "twitter": "RobynBurkeHD40",
+    "facebook": "Robynburkehd40"
   },
   {
     "id": "ocd-person/6cec7228-ed13-47f6-b896-59f927789f6d",
@@ -752,7 +1003,11 @@
     "phone": "907-465-4766",
     "photoUrl": "http://akleg.gov/images/legislators/450x600/HNN.jpg",
     "website": "https://akhouse.org/rep-hannan/",
-    "office": "State Capitol Room 501, 120 4th St., Juneau, AK 99801"
+    "office": "State Capitol Room 501, 120 4th St., Juneau, AK 99801",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sara_Hannan",
+    "ballotpediaUrl": "https://ballotpedia.org/Sara_Hannan",
+    "twitter": "RepSaraHannan",
+    "facebook": "RepSaraHannan"
   },
   {
     "id": "ocd-person/e8756722-e9e9-4246-95e3-13019cb3bd50",
@@ -766,7 +1021,12 @@
     "phone": "907-465-2689",
     "photoUrl": "http://akleg.gov/images/legislators/450x600/VAN.jpg",
     "website": "https://akhousemajority.com/rep-vance/",
-    "office": "State Capitol Room 114, 120 4th St., Juneau, AK 99801"
+    "office": "State Capitol Room 114, 120 4th St., Juneau, AK 99801",
+    "districtOffice": "270 W. Pioneer Ave., Homer, AK 99603",
+    "districtPhone": "907-235-2921",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sarah_Vance_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Sarah_Vance_(Alaska)",
+    "facebook": "repsarahvance"
   },
   {
     "id": "ocd-person/53f7b86b-ce31-4199-86ef-f566ae9aa02c",
@@ -780,7 +1040,13 @@
     "phone": "907-465-3466",
     "photoUrl": "http://akleg.gov/images/legislators/450x600/KAW.jpg",
     "website": "https://aksenatedems.com/sen-kawasaki/",
-    "office": "State Capitol Room 119, 120 4th St., Juneau, AK 99801"
+    "office": "State Capitol Room 119, 120 4th St., Juneau, AK 99801",
+    "districtOffice": "1292 Sadler Way Suite 308, Fairbanks, AK 99701",
+    "districtPhone": "907-456-7423",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Scott_Kawasaki",
+    "ballotpediaUrl": "https://ballotpedia.org/Scott_Kawasaki",
+    "twitter": "alaskascott",
+    "facebook": "scottforalaska"
   },
   {
     "id": "ocd-person/6692f2e6-2ad5-4b9c-a3f5-a0243c087064",
@@ -792,8 +1058,13 @@
     "party": "Republican",
     "email": "representative.steve.st.clair@akleg.gov",
     "phone": "907-465-3743",
+    "photoUrl": "https://akleg.gov/images/legislators/450x600/STC.jpg",
     "website": "https://www.akleg.gov/basis/Member/Detail/34?code=stc",
-    "office": "State Capitol Room 110, 120 4th St., Juneau, AK 99801"
+    "office": "State Capitol Room 110, 120 4th St., Juneau, AK 99801",
+    "districtOffice": "600 E. Railroad Ave., Wasilla, AK 99654",
+    "districtPhone": "907-376-3725",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Steve_St._Clair",
+    "ballotpediaUrl": "https://ballotpedia.org/Steve_St._Clair"
   },
   {
     "id": "ocd-person/132c5970-0ed3-4a8c-baa9-2917196daedb",
@@ -807,7 +1078,13 @@
     "phone": "907-465-2095",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Ted_Eischeid2024.jpg",
     "website": "https://www.akleg.gov/basis/Member/Detail/34?code=eis",
-    "office": "State Capitol Room 412, 120 4th St., Juneau, AK 99801"
+    "office": "State Capitol Room 412, 120 4th St., Juneau, AK 99801",
+    "districtOffice": "1500 W. Benson Blvd., Anchorage, AK 99503",
+    "districtPhone": "907-269-0240",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ted_Eischeid",
+    "ballotpediaUrl": "https://ballotpedia.org/Ted_Eischeid",
+    "twitter": "TedForAlaska",
+    "facebook": "TedForAlaska"
   },
   {
     "id": "ocd-person/ede005ce-9d29-4b8e-8b24-b2136d05edf6",
@@ -821,7 +1098,11 @@
     "phone": "907-465-3004",
     "photoUrl": "http://akleg.gov/images/legislators/450x600/SPP.jpg",
     "website": "https://akhousemajority.com/rep-stapp/",
-    "office": "State Capitol Room 500, 120 4th St., Juneau, AK 99801"
+    "office": "State Capitol Room 500, 120 4th St., Juneau, AK 99801",
+    "districtOffice": "1292 Sadler Way Suite 308, Fairbanks, AK 99701",
+    "districtPhone": "907-452-1088",
+    "ballotpediaUrl": "https://ballotpedia.org/Will_Stapp",
+    "facebook": "willstappforalaska"
   },
   {
     "id": "ocd-person/c1d170a4-d099-43cb-b7e5-5a9db63ae716",
@@ -835,6 +1116,12 @@
     "phone": "907-465-2647",
     "photoUrl": "http://akleg.gov/images/legislators/450x600/FIE.jpg",
     "website": "https://akhouse.org/rep-fields/",
-    "office": "State Capitol Room 24, 120 4th St., Juneau, AK 99801"
+    "office": "State Capitol Room 24, 120 4th St., Juneau, AK 99801",
+    "districtOffice": "1500 W. Benson Blvd., Anchorage, AK 99503",
+    "districtPhone": "907-269-0106",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Zack_Fields",
+    "ballotpediaUrl": "https://ballotpedia.org/Zack_Fields_(Alaska)",
+    "twitter": "repzackfields",
+    "facebook": "repzackfields"
   }
 ]

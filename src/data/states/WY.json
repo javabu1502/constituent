@@ -10,7 +10,10 @@
     "email": "abby.angelos@wyoleg.gov",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-AngelosAbby.jpg",
     "website": "https://wyoleg.gov/Legislators/2021/R/2091",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Abby_Angelos",
+    "ballotpediaUrl": "https://ballotpedia.org/Abby_Angelos",
+    "facebook": "voteforabby"
   },
   {
     "id": "ocd-person/3198aa67-829e-4827-8b26-8955cbf36f4a",
@@ -23,7 +26,9 @@
     "email": "andrew.byron@wyoleg.gov",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-ByronAndrew.jpg",
     "website": "https://wyoleg.gov/Legislators/2021/R/2099",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Andrew_Byron",
+    "ballotpediaUrl": "https://ballotpedia.org/Andrew_Byron"
   },
   {
     "id": "ocd-person/4665c34f-70f5-4bc0-af49-0239e0e907a1",
@@ -36,7 +41,9 @@
     "email": "ann.lucas@wyoleg.gov",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-LucasAnn.jpg",
     "website": "https://www.wyoleg.gov/Legislators/2025/H/2128",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "ballotpediaUrl": "https://ballotpedia.org/Ann_Lucas",
+    "facebook": "annlucas4wyoming"
   },
   {
     "id": "ocd-person/394ba273-63d7-409d-90cd-5d183e750ea4",
@@ -47,9 +54,13 @@
     "district": "36",
     "party": "Republican",
     "email": "art.washut@wyoleg.gov",
+    "phone": "307-251-4725",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-WashutArt.jpg",
     "website": "https://www.wyoleg.gov/Legislators/2023/H/2058",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "districtOffice": "4031 Crystie Lane, Casper, WY 82609",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Art_Washut",
+    "ballotpediaUrl": "https://ballotpedia.org/Art_Washut"
   },
   {
     "id": "ocd-person/c6578593-1ca0-4b7d-8635-67249df87c36",
@@ -60,9 +71,13 @@
     "district": "22",
     "party": "Republican",
     "email": "barry.crago@wyoleg.gov",
+    "phone": "307-267-9789",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-CragoBarry.jpg",
     "website": "https://www.wyoleg.gov/Legislators/2023/H/2078",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "districtOffice": "443 Lobban Ave., Buffalo, WY 82834",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Barry_Crago",
+    "ballotpediaUrl": "https://ballotpedia.org/Barry_Crago"
   },
   {
     "id": "ocd-person/2f0d84dc-df29-4c3d-83ea-aa56beca9839",
@@ -75,7 +90,9 @@
     "email": "bill.allemand@wyoleg.gov",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-AllemandBill.jpg",
     "website": "https://wyoleg.gov/Legislators/2021/R/2114",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bill_Allemand",
+    "ballotpediaUrl": "https://ballotpedia.org/Bill_Allemand"
   },
   {
     "id": "ocd-person/e0c25487-a7fb-406b-b637-c3a4de3c6770",
@@ -86,9 +103,13 @@
     "district": "27",
     "party": "Republican",
     "email": "bill.landen@wyoleg.gov",
+    "phone": "307-259-4194",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-LandenBill.jpg",
     "website": "https://www.wyoleg.gov/Legislators/2023/S/434",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "districtOffice": "2010 Kingsbury Drive, Casper, WY 82609",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bill_Landen",
+    "ballotpediaUrl": "https://ballotpedia.org/Bill_Landen"
   },
   {
     "id": "ocd-person/016465da-4d49-4ffc-8bb0-cf9528bc6d0e",
@@ -101,7 +122,11 @@
     "email": "bo.biteman@wyoleg.gov",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-BitemanBo.jpg",
     "website": "https://www.wyoleg.gov/Legislators/2018/H/2044",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bo_Biteman",
+    "ballotpediaUrl": "https://ballotpedia.org/Bo_Biteman",
+    "twitter": "bobiteman",
+    "facebook": "Sen.Biteman"
   },
   {
     "id": "ocd-person/8ddb8078-482c-4df5-983d-ece9e5825cc2",
@@ -114,7 +139,10 @@
     "email": "bob.davis@wyoleg.gov",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-DavisBob.jpg",
     "website": "https://wyoleg.gov/Legislators/2021/R/2110",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bob_Davis_(Wyoming_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Robert_Davis_(Wyoming)",
+    "facebook": "BobDavisforWY"
   },
   {
     "id": "ocd-person/6d1c2665-46ea-444d-b88b-b22e2623e660",
@@ -128,7 +156,13 @@
     "phone": "307-777-7881",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/67th-IdeBob.jpg",
     "website": "https://wyoleg.gov/Legislators/2021/R/2089",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "districtOffice": "3838 Garden Creek Road, Casper, WY 82601",
+    "districtPhone": "307-472-0233",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bob_Ide",
+    "ballotpediaUrl": "https://ballotpedia.org/Robert_Ide_(Wyoming)",
+    "twitter": "BobIdeWY",
+    "facebook": "BobIdeWY"
   },
   {
     "id": "ocd-person/6ff4eff9-e68c-42a1-9aa5-b964daa37a89",
@@ -139,9 +173,13 @@
     "district": "7",
     "party": "Republican",
     "email": "bob.nicholas@wyoleg.gov",
+    "phone": "307-851-7774",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-NicholasBob.jpg",
     "website": "https://www.wyoleg.gov/Legislators/2023/H/1980",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "districtOffice": "6225 Mountainview Drive, Cheyenne, WY 82009",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bob_Nicholas",
+    "ballotpediaUrl": "https://ballotpedia.org/Bob_Nicholas"
   },
   {
     "id": "ocd-person/cfed8eb6-ad00-4414-9ceb-bd5d46c5974f",
@@ -154,7 +192,11 @@
     "email": "brian.boner@wyoleg.gov",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-BonerBrian.jpg",
     "website": "https://www.wyoleg.gov/Legislators/2023/S/2021",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Brian_Boner",
+    "ballotpediaUrl": "https://ballotpedia.org/Brian_Boner",
+    "twitter": "BrianBonerWYO",
+    "facebook": "BrianBonerWYO"
   },
   {
     "id": "ocd-person/0b07cbe8-73ba-4371-9acb-95cb7ecf6251",
@@ -168,7 +210,11 @@
     "phone": "307-777-7881",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-CaseCale.jpg",
     "website": "https://www.wyoleg.gov/Legislators/2023/S/945",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "districtOffice": "787 S. 4th St., Lander, WY 82520",
+    "districtPhone": "307-332-7623",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Cale_Case",
+    "ballotpediaUrl": "https://ballotpedia.org/Cale_Case"
   },
   {
     "id": "ocd-person/a3ddc445-efa1-4c0c-809a-d21fc383fa59",
@@ -182,7 +228,11 @@
     "phone": "307-777-7881",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-ScottCharles.jpg",
     "website": "https://www.wyoleg.gov/Legislators/2023/S/294",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "districtOffice": "13900 State Highway 487, Casper, WY 82604",
+    "districtPhone": "307-473-2512",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Charles_Scott_(Wyoming_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Charles_Scott_(Wyoming)"
   },
   {
     "id": "ocd-person/9fe08ab5-b31c-4f7b-bb23-c7aff3cd3e4d",
@@ -195,7 +245,10 @@
     "email": "cheri.steinmetz@wyoleg.gov",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-SteinmetzCheri.jpg",
     "website": "https://www.wyoleg.gov/Legislators/2023/S/2011",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Cheri_Steinmetz",
+    "ballotpediaUrl": "https://ballotpedia.org/Cheri_Steinmetz",
+    "facebook": "SteinmetzSD3"
   },
   {
     "id": "ocd-person/b9414bc4-f900-474b-b99c-8f2716419683",
@@ -208,7 +261,10 @@
     "email": "chip.neiman@wyoleg.gov",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-NeimanChip.jpg",
     "website": "https://www.wyoleg.gov/Legislators/2023/H/2070",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Chip_Neiman",
+    "ballotpediaUrl": "https://ballotpedia.org/Chip_Neiman",
+    "facebook": "ChipNeimanWY"
   },
   {
     "id": "ocd-person/510546dd-c3ca-4ce4-9342-f77e05712f2e",
@@ -221,7 +277,11 @@
     "email": "chris.rothfuss@wyoleg.gov",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-RothfussChris.jpg",
     "website": "https://www.wyoleg.gov/Legislators/2023/S/1971",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Chris_Rothfuss",
+    "ballotpediaUrl": "https://ballotpedia.org/Chris_Rothfuss",
+    "twitter": "rothfuss",
+    "facebook": "rothfuss"
   },
   {
     "id": "ocd-person/ffe52a1f-bc33-424a-bd8c-a2df967ac83a",
@@ -232,9 +292,13 @@
     "district": "53",
     "party": "Republican",
     "email": "chris.knapp@wyoleg.gov",
+    "phone": "307-660-4566",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-KnappChristopher.jpg",
     "website": "https://www.wyoleg.gov/Legislators/2023/H/2086",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "districtOffice": "1134 E. 12th St., Gillette, WY 82716",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Chris_Knapp_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Christopher_Knapp"
   },
   {
     "id": "ocd-person/0df4327b-df46-4886-ab09-0c8a55639548",
@@ -245,9 +309,14 @@
     "district": "12",
     "party": "Republican",
     "email": "clarence.styvar@wyoleg.gov",
+    "phone": "307-631-2566",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-StyvarClarence.jpg",
     "website": "https://www.wyoleg.gov/Legislators/2023/H/2051",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "districtOffice": "580 Willson Court, Cheyenne, WY 82007",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Clarence_Styvar",
+    "ballotpediaUrl": "https://ballotpedia.org/Clarence_Styvar",
+    "facebook": "ClarenceStyvar1"
   },
   {
     "id": "ocd-person/9b6e58cd-4dbc-4554-a677-b362c913c069",
@@ -258,9 +327,13 @@
     "district": "39",
     "party": "Republican",
     "email": "cody.wylie@wyoleg.gov",
+    "phone": "307-371-3283",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/67th-WylieCody.jpg",
     "website": "https://wyoleg.gov/Legislators/2021/R/2107",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "districtOffice": "517 Archers Trail, Rock Springs, WY 82901",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Cody_Wylie",
+    "ballotpediaUrl": "https://ballotpedia.org/Cody_Wylie"
   },
   {
     "id": "ocd-person/416ee113-2983-43ab-bf24-3d7134767b41",
@@ -273,7 +346,9 @@
     "email": "dalton.banks@wyoleg.gov",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-BanksDalton.jpg",
     "website": "https://wyoleg.gov/Legislators/2021/R/2101",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dalton_Banks",
+    "ballotpediaUrl": "https://ballotpedia.org/Dalton_Banks"
   },
   {
     "id": "ocd-person/5395223c-9b56-410d-b18f-978d9e2a07a9",
@@ -287,7 +362,10 @@
     "phone": "307-777-7881",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-DockstaderDan.jpg",
     "website": "https://www.wyoleg.gov/Legislators/2023/S/1048",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dan_Dockstader",
+    "ballotpediaUrl": "https://ballotpedia.org/Dan_Dockstader",
+    "facebook": "danforwyoming"
   },
   {
     "id": "ocd-person/982cdb50-2a81-47b4-97e8-cf80b92d1412",
@@ -301,7 +379,11 @@
     "phone": "307-777-7881",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-LaursenDan.jpg",
     "website": "https://wyoleg.gov/Legislators/2021/R/2006",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "districtOffice": "478 Road 8, Powell, WY 82435",
+    "districtPhone": "307-271-0241",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dan_Laursen",
+    "ballotpediaUrl": "https://ballotpedia.org/Dan_Laursen"
   },
   {
     "id": "ocd-person/0a177e23-5f49-46dd-bc32-b2403ea7124c",
@@ -314,7 +396,9 @@
     "email": "daniel.singh@wyoleg.gov",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-SinghDaniel.jpg",
     "website": "https://wyoleg.gov/Legislators/2021/R/2116",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Daniel_Singh",
+    "ballotpediaUrl": "https://ballotpedia.org/Daniel_Singh"
   },
   {
     "id": "ocd-person/ff389664-aac3-4241-abc7-3a8e781e5989",
@@ -325,9 +409,12 @@
     "district": "48",
     "party": "Republican",
     "email": "darin.mccann@wyoleg.gov",
+    "phone": "307-899-2270",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-McCannDarin.jpg",
     "website": "https://wyoleg.gov/Legislators/2025/H/2130",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "districtOffice": "532 Quadrant Drive, Rock Springs, WY 82901",
+    "ballotpediaUrl": "https://ballotpedia.org/Darin_McCann"
   },
   {
     "id": "ocd-person/13022d64-c748-4603-b60e-bd176383b8f1",
@@ -340,7 +427,10 @@
     "email": "ed.cooper@wyoleg.gov",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-CooperEd.jpg",
     "website": "https://www.wyoleg.gov/Legislators/2023/S/2068",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ed_Cooper_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Edward_Cooper",
+    "facebook": "WYSenatorCooper"
   },
   {
     "id": "ocd-person/c0c75f8e-6d58-4197-9076-154528191d47",
@@ -351,9 +441,12 @@
     "district": "56",
     "party": "Republican",
     "email": "elissa.campbell@wyoleg.gov",
+    "phone": "307-277-4782",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-CampbellElissa.jpg",
     "website": "https://wyoleg.gov/Legislators/2025/H/2133",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "districtOffice": "718 Divine Ave., Casper, WY 82601",
+    "ballotpediaUrl": "https://ballotpedia.org/Elissa_Campbell"
   },
   {
     "id": "ocd-person/afa67bb0-3191-4dce-94ab-ddb3a9e7475c",
@@ -367,7 +460,11 @@
     "phone": "307-777-7881",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-BarlowEric.jpg",
     "website": "https://wyoleg.gov/Legislators/2021/R/1995",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "districtOffice": "1625 A Buffalo Cut Across Road, Gillette, WY 82718",
+    "districtPhone": "307-682-9639",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Eric_Barlow",
+    "ballotpediaUrl": "https://ballotpedia.org/Eric_Barlow"
   },
   {
     "id": "ocd-person/7f287d7d-8f05-4116-8bcf-33174ecf1e9c",
@@ -380,7 +477,10 @@
     "email": "evie.brennan@wyoleg.gov",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-BrennanEvie.jpg",
     "website": "https://wyoleg.gov/Legislators/2021/R/2090",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Evie_Brennan",
+    "ballotpediaUrl": "https://ballotpedia.org/Evie_Brennan",
+    "facebook": "eviebrennanforwyosenate"
   },
   {
     "id": "ocd-person/472c50ea-da65-42c3-a9b3-3639a9881a7f",
@@ -393,7 +493,8 @@
     "email": "gary.brown@wyoleg.gov",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-BrownGary.jpg",
     "website": "https://wyoleg.gov/Legislators/2025/H/2140",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "ballotpediaUrl": "https://ballotpedia.org/Gary_Brown_(Wyoming)"
   },
   {
     "id": "ocd-person/84464d31-bdbb-4687-9757-27794e64d319",
@@ -406,7 +507,9 @@
     "email": "gary.crum@wyoleg.gov",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-CrumGary.jpg",
     "website": "https://wyoleg.gov/Legislators/2025/S/2144",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Gary_Crum",
+    "ballotpediaUrl": "https://ballotpedia.org/Gary_Crum_(Wyoming)"
   },
   {
     "id": "ocd-person/df82de40-cf5b-4197-b276-5e5982146849",
@@ -419,7 +522,9 @@
     "email": "ivan.posey@wyoleg.gov",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-PoseyIvan.jpg",
     "website": "https://www.poseyforhd33.com/",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ivan_Posey",
+    "ballotpediaUrl": "https://ballotpedia.org/Ivan_Posey"
   },
   {
     "id": "ocd-person/fc63a597-e32a-4c94-a2f2-7420f7836aeb",
@@ -430,9 +535,13 @@
     "district": "2",
     "party": "Republican",
     "email": "jd.williams@wyoleg.gov",
+    "phone": "307-340-6006",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-WilliamsJD.jpg",
     "website": "https://wyoleg.gov/Legislators/2021/R/2087",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "districtOffice": "251A Greasewood Road, Lusk, WY 82225",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/J._D._Williams_(Wyoming_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/J.D._Williams"
   },
   {
     "id": "ocd-person/25e8e592-1425-4e8d-bcce-97ec84ef66c3",
@@ -443,9 +552,12 @@
     "district": "59",
     "party": "Republican",
     "email": "jr.riggins@wyoleg.gov",
+    "phone": "307-262-8446",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-RigginsJR.jpg",
     "website": "https://wyoleg.gov/Legislators/2025/H/2135",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "districtOffice": "1872 Jim Bridger Ave., Casper, WY 82604",
+    "ballotpediaUrl": "https://ballotpedia.org/J.R._Riggins"
   },
   {
     "id": "ocd-person/2a0be03f-4f0a-4b2e-850b-50b4d0dade13",
@@ -456,9 +568,13 @@
     "district": "17",
     "party": "Republican",
     "email": "jt.larson@wyoleg.gov",
+    "phone": "307-389-0162",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-LarsonJT.jpg",
     "website": "https://wyoleg.gov/Legislators/2021/R/2096",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "districtOffice": "606 Walnut St., Rock Springs, WY",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/J.T._Larson",
+    "ballotpediaUrl": "https://ballotpedia.org/J.T._Larson"
   },
   {
     "id": "ocd-person/b598ad4e-6124-4863-ac74-dbb13630e7db",
@@ -469,9 +585,13 @@
     "district": "11",
     "party": "Republican",
     "email": "jacob.wasserburger@wyoleg.gov",
+    "phone": "307-340-0160",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-WasserburgerJacob.jpg",
     "website": "https://wyoleg.gov/Legislators/2025/H/2139",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "districtOffice": "1740 Dell Range Blvd. Suite H107, Cheyenne, WY 82009",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jacob_Wasserburger",
+    "ballotpediaUrl": "https://ballotpedia.org/Jacob_Wasserburger"
   },
   {
     "id": "ocd-person/63e25ff3-1832-45c8-a9af-669bb74a3aa4",
@@ -484,7 +604,11 @@
     "email": "jared.olsen@wyoleg.gov",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-OlsenJared.jpg",
     "website": "https://www.olsenforwyoming.com/",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jared_Olsen",
+    "ballotpediaUrl": "https://ballotpedia.org/Jared_Olsen",
+    "twitter": "JaredSOlsen",
+    "facebook": "repjaredolsen"
   },
   {
     "id": "ocd-person/89408a3a-ae27-4a8d-aa93-0050a48cf93d",
@@ -495,9 +619,13 @@
     "district": "38",
     "party": "Republican",
     "email": "jayme.lien@wyoleg.gov",
+    "phone": "307-267-5675",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-LienJayme.jpg",
     "website": "https://wyoleg.gov/Legislators/2025/H/2126",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "districtOffice": "1624 Begonia St., Casper, WY 82604",
+    "ballotpediaUrl": "https://ballotpedia.org/Jayme_Lien",
+    "facebook": "lienforwy"
   },
   {
     "id": "ocd-person/b9bbea38-a84b-4173-a599-cd9f5500b181",
@@ -510,7 +638,9 @@
     "email": "jeremy.haroldson@wyoleg.gov",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-HaroldsonJeremy.jpg",
     "website": "https://www.wyoleg.gov/Legislators/2023/H/2071",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jeremy_Haroldson",
+    "ballotpediaUrl": "https://ballotpedia.org/Jeremy_Haroldson"
   },
   {
     "id": "ocd-person/f40c41d5-b371-49c5-a597-db8435e613a0",
@@ -521,9 +651,13 @@
     "district": "28",
     "party": "Republican",
     "email": "jim.anderson@wyoleg.gov",
+    "phone": "307-267-5775",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-AndersonJim.jpg",
     "website": "https://www.wyoleg.gov/Legislators/2023/S/1985",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "districtOffice": "5941 S. Cedar St., Casper, WY 82601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/James_Lee_Anderson",
+    "ballotpediaUrl": "https://ballotpedia.org/James_Anderson_(Wyoming_State_Senate_District_28)"
   },
   {
     "id": "ocd-person/19e421d2-03a4-4a0a-86e8-b18b63d13822",
@@ -536,7 +670,9 @@
     "email": "joe.webb@wyoleg.gov",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-WebbJoe.jpg",
     "website": "https://wyoleg.gov/Legislators/2025/H/2120",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Joe_Webb_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Joseph_Webb_(Wyoming)"
   },
   {
     "id": "ocd-person/39076643-ca3a-47d2-888e-d944eb4f5de9",
@@ -547,9 +683,12 @@
     "district": "55",
     "party": "Republican",
     "email": "joel.guggenmos@wyoleg.gov",
+    "phone": "307-488-8564",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-GuggenmosJoel.jpg",
     "website": "https://wyoleg.gov/Legislators/2025/H/2132",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "districtOffice": "1106 E. Adams Ave., Riverton, WY 82501",
+    "ballotpediaUrl": "https://ballotpedia.org/Joel_Guggenmos"
   },
   {
     "id": "ocd-person/931a9e71-33a6-4e65-be91-703ad612447e",
@@ -560,9 +699,14 @@
     "district": "31",
     "party": "Republican",
     "email": "john.bear@wyoleg.gov",
+    "phone": "307-670-1130",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-BearJohn.jpg",
     "website": "https://www.wyoleg.gov/Legislators/2023/H/2075",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "districtOffice": "409 Mills Ave., Gillette, WY 82718",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_Bear_%28politician%29",
+    "ballotpediaUrl": "https://ballotpedia.org/John_Bear_(Wyoming)",
+    "facebook": "JohnBearforGillette"
   },
   {
     "id": "ocd-person/a8a05d47-8306-4f20-a848-02c92db1fffe",
@@ -573,9 +717,14 @@
     "district": "12",
     "party": "Republican",
     "email": "john.kolb@wyoleg.gov",
+    "phone": "307-389-5000",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-KolbJohn.jpg",
     "website": "https://www.wyoleg.gov/Legislators/2023/S/2066",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "districtOffice": "503 Cheyenne Drive, Rock Springs, WY 82901",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_Kolb",
+    "ballotpediaUrl": "https://ballotpedia.org/John_Kolb",
+    "facebook": "votekolb"
   },
   {
     "id": "ocd-person/e79049b8-a6d9-4356-a190-fc1e90837d5d",
@@ -586,9 +735,13 @@
     "district": "28",
     "party": "Republican",
     "email": "john.winter@wyoleg.gov",
+    "phone": "307-690-0185",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-WinterJohn.jpg",
     "website": "https://www.wyoleg.gov/Legislators/2023/H/2056",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "districtOffice": "P. O. Box 311, Thermopolis, WY 82443",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_Winter_(Wyoming_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/John_Winter_(Wyoming)"
   },
   {
     "id": "ocd-person/64428f70-4a9b-453d-b2f5-bbbdcdb370e5",
@@ -601,7 +754,8 @@
     "email": "julie.jarvis@wyoleg.gov",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-JarvisJulie.jpg",
     "website": "https://wyoleg.gov/Legislators/2025/H/2134",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "ballotpediaUrl": "https://ballotpedia.org/Julie_Jarvis"
   },
   {
     "id": "ocd-person/970ff542-b60c-4a3b-bd63-492a38a0a878",
@@ -614,7 +768,8 @@
     "email": "justin.fornstrom@wyoleg.gov",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-FornstromJustin.JPG",
     "website": "https://www.wyoleg.gov/Legislators/2025/H/2146",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "ballotpediaUrl": "https://ballotpedia.org/Justin_Fornstrom"
   },
   {
     "id": "ocd-person/588c810c-0a65-475b-9593-46fa556cb962",
@@ -627,7 +782,11 @@
     "email": "karlee.provenza@wyoleg.gov",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-ProvenzaKarlee.jpg",
     "website": "https://www.wyoleg.gov/Legislators/2023/H/2080",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Karlee_Provenza",
+    "ballotpediaUrl": "https://ballotpedia.org/Karlee_Provenza",
+    "twitter": "Provenza4Wyomin",
+    "facebook": "RepProvenza"
   },
   {
     "id": "ocd-person/dcc60e43-41b3-44ef-976c-0604a295b9cd",
@@ -641,7 +800,9 @@
     "phone": "307-777-7881",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-ChestekKen.jpg",
     "website": "https://wyoleg.gov/Legislators/2021/D/2095",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ken_Chestek",
+    "ballotpediaUrl": "https://ballotpedia.org/Ken_Chestek"
   },
   {
     "id": "ocd-person/15ae95ba-274d-4b7b-a2c7-a5cfb5e2b089",
@@ -655,7 +816,12 @@
     "phone": "307-777-7881",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-CloustonKen.jpg",
     "website": "https://wyoleg.gov/Legislators/2021/R/2104",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "districtOffice": "3830 Overdale Drive, Gillette, WY 82718",
+    "districtPhone": "307-682-4900",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ken_Clouston",
+    "ballotpediaUrl": "https://ballotpedia.org/Ken_Clouston",
+    "facebook": "reelectkenclouston"
   },
   {
     "id": "ocd-person/b7a5cb78-6473-4b7b-9c27-90c8ab2130a5",
@@ -666,9 +832,13 @@
     "district": "29",
     "party": "Republican",
     "email": "ken.pendergraft@wyoleg.gov",
+    "phone": "307-461-2436",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-PendergraftKen.jpg",
     "website": "https://wyoleg.gov/Legislators/2021/R/2103",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "districtOffice": "459 W. Burkitt St., Sheridan, WY 82801",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ken_Pendergraft",
+    "ballotpediaUrl": "https://ballotpedia.org/Ken_Pendergraft"
   },
   {
     "id": "ocd-person/e6242790-9cdf-48ec-a5d3-aae3e5439733",
@@ -681,7 +851,8 @@
     "email": "kevin.campbell@wyoleg.gov",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-CampbellKevin.jpg",
     "website": "https://wyoleg.gov/Legislators/2025/H/2136",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "ballotpediaUrl": "https://ballotpedia.org/Kevin_Campbell_(Wyoming)"
   },
   {
     "id": "ocd-person/7052600a-c1b3-484d-80a3-232fc9815d7c",
@@ -692,9 +863,14 @@
     "district": "9",
     "party": "Republican",
     "email": "landon.brown@wyoleg.gov",
+    "phone": "307-630-0582",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-BrownLandon.jpg",
     "website": "https://www.wyoleg.gov/Legislators/2023/H/2034",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "districtOffice": "5312 Opal Drive, Cheyenne, WY 82009",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Landon_Brown",
+    "ballotpediaUrl": "https://ballotpedia.org/Landon_Brown",
+    "facebook": "lbrownHD09"
   },
   {
     "id": "ocd-person/286af01e-ace3-4de2-b1c3-44756370d932",
@@ -708,20 +884,24 @@
     "phone": "307-777-7881",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-HicksLarry.jpg",
     "website": "https://www.wyoleg.gov/Legislators/2023/S/1963",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Larry_S._Hicks",
+    "ballotpediaUrl": "https://ballotpedia.org/Larry_S._Hicks_(Wyoming)"
   },
   {
     "id": "ocd-person/c6b78357-5a9d-41e9-b947-1d81227b0f15",
-    "name": "Laura Pearson",
+    "name": "Laura Taliaferro",
     "firstName": "Laura",
-    "lastName": "Pearson",
+    "lastName": "Taliaferro",
     "chamber": "upper",
     "district": "14",
     "party": "Republican",
-    "email": "laura.pearson@wyoleg.gov",
+    "email": "Laura.Taliaferro@wyoleg.gov",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-PearsonLaura.jpg",
     "website": "https://wyoleg.gov/Legislators/2025/R/2138",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Laura_Taliaferro_Pearson",
+    "ballotpediaUrl": "https://ballotpedia.org/Laura_Taliaferro_Pearson"
   },
   {
     "id": "ocd-person/5eabff67-a57e-4fd5-b62c-3072d0374d56",
@@ -735,7 +915,10 @@
     "phone": "307-777-7881",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-BrattenLaurie.jpg",
     "website": "https://wyoleg.gov/Legislators/2025/H/2131",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "districtOffice": "1004 Big Goose Road, Sheridan, WY 82801",
+    "districtPhone": "307-683-1788",
+    "ballotpediaUrl": "https://ballotpedia.org/Laurie_Bratten"
   },
   {
     "id": "ocd-person/be3b0a04-4e00-42e4-9202-5c8f68aacedd",
@@ -746,9 +929,14 @@
     "district": "44",
     "party": "Republican",
     "email": "lee.filer@wyoleg.gov",
+    "phone": "307-421-9554",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-FilerLee.jpg",
     "website": "https://legisweb.state.wy.us/LegislatorSummary/LegDetail.aspx?LegID=1990",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "districtOffice": "1215 Medley Loop, Cheyenne, WY 82007",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lee_Filer",
+    "ballotpediaUrl": "https://ballotpedia.org/Lee_Filer",
+    "twitter": "RepLeeFiler"
   },
   {
     "id": "ocd-person/7d3ea3c1-de6a-433f-83e2-c53dde09be61",
@@ -761,7 +949,10 @@
     "email": "liz.storer@wyoleg.gov",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-StorerLiz.jpg",
     "website": "https://wyoleg.gov/Legislators/2021/D/2100",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Liz_Storer",
+    "ballotpediaUrl": "https://ballotpedia.org/Liz_Storer",
+    "facebook": "replizstorer"
   },
   {
     "id": "ocd-person/6466bd0e-d531-4ac0-8667-3e7f34a32f9a",
@@ -772,9 +963,14 @@
     "district": "54",
     "party": "Republican",
     "email": "lloyd.larsen@wyoleg.gov",
+    "phone": "307-321-1221",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-LarsenLloyd.jpg",
     "website": "https://www.wyoleg.gov/Legislators/2023/H/1988",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "districtOffice": "1076 S. 2nd St., Lander, WY 82520",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lloyd_Larsen",
+    "ballotpediaUrl": "https://ballotpedia.org/Lloyd_Charles_Larsen",
+    "facebook": "Lloydfor54"
   },
   {
     "id": "ocd-person/b91459e7-2049-4cf9-8b0b-f769ce373613",
@@ -788,7 +984,9 @@
     "phone": "307-777-7881",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-HutchingsLynn.jpg",
     "website": "https://www.hutchingsforsenate.com/",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lynn_Hutchings",
+    "ballotpediaUrl": "https://ballotpedia.org/Lynn_Hutchings"
   },
   {
     "id": "ocd-person/65ae499e-9549-42e2-ab16-65b56eb0f8ab",
@@ -799,9 +997,12 @@
     "district": "40",
     "party": "Republican",
     "email": "marilyn.connolly@wyoleg.gov",
+    "phone": "307-217-0345",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-ConnollyMarilyn.jpg",
     "website": "https://wyoleg.gov/Legislators/2025/H/2127",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "districtOffice": "859 N. DeSmet Ave., Buffalo, WY 82834",
+    "ballotpediaUrl": "https://ballotpedia.org/Marilyn_Connoly"
   },
   {
     "id": "ocd-person/b2d0dc89-4104-4f6e-a1eb-bbc9dafbefa9",
@@ -814,7 +1015,9 @@
     "email": "marlene.brady@wyoleg.gov",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-BradyMarlene.jpg",
     "website": "https://wyoleg.gov/Legislators/2025/H/2143",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Marlene_Brady",
+    "ballotpediaUrl": "https://ballotpedia.org/Marlene_Brady"
   },
   {
     "id": "ocd-person/c954b74f-1933-4be4-801d-cc93f7f37ac0",
@@ -825,9 +1028,14 @@
     "district": "27",
     "party": "Republican",
     "email": "martha.lawley@wyoleg.gov",
+    "phone": "307-431-1272",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-LawleyMartha.jpg",
     "website": "https://wyoleg.gov/Legislators/2021/R/2102",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "districtOffice": "818 Sagebrush Drive, Worland, WY 82401",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Martha_Lawley",
+    "ballotpediaUrl": "https://ballotpedia.org/Martha_Lawley",
+    "facebook": "RepresentativeMarthaLawley"
   },
   {
     "id": "ocd-person/f3fe63a7-b938-41c4-b2f5-b4069949a163",
@@ -838,9 +1046,14 @@
     "district": "21",
     "party": "Republican",
     "email": "mckay.erickson@wyoleg.gov",
+    "phone": "307-884-6119",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-EricksonMcKay.jpg",
     "website": "https://wyoleg.gov/Legislators/2025/R/2122",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "districtOffice": "2886 Highway 241, Afton, WY 83110",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/McKay_Erickson",
+    "ballotpediaUrl": "https://ballotpedia.org/McKay_Erickson",
+    "facebook": "Erickson4Wyoming"
   },
   {
     "id": "ocd-person/587874e4-f0c9-4679-aa08-a2442b7d33b1",
@@ -853,7 +1066,10 @@
     "email": "mike.gierau@wyoleg.gov",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-GierauMike.jpg",
     "website": "https://www.wyoleg.gov/Legislators/2023/S/2027",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mike_Gierau",
+    "ballotpediaUrl": "https://ballotpedia.org/Mike_Gierau",
+    "facebook": "Mike4Wyolegislature"
   },
   {
     "id": "ocd-person/4c9350f0-084c-4ba2-be0d-9ee0b5f6c629",
@@ -866,7 +1082,11 @@
     "email": "mike.schmid@wyoleg.gov",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-SchmidMike.jpg",
     "website": "https://wyoleg.gov/Legislators/2025/H/2121",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mike_Schmid_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Michael_Schmid",
+    "twitter": "mikeschmid",
+    "facebook": "MDSchmid"
   },
   {
     "id": "ocd-person/28649646-1108-4954-9381-4aa2d3b6f31b",
@@ -879,7 +1099,11 @@
     "email": "mike.yin@wyoleg.gov",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-YinMike.jpg",
     "website": "https://www.wyoleg.gov/Legislators/2023/H/2054",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mike_Yin",
+    "ballotpediaUrl": "https://ballotpedia.org/Mike_Yin",
+    "twitter": "itsmikeyin",
+    "facebook": "mikeyinhd16"
   },
   {
     "id": "ocd-person/86d51e65-7fef-49ff-a19a-60984fe2fab2",
@@ -890,9 +1114,13 @@
     "district": "24",
     "party": "Republican",
     "email": "nina.webber@wyoleg.gov",
+    "phone": "307-921-8593",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-WebberNina.jpg",
     "website": "https://wyoleg.gov/Legislators/2025/H/2123",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "districtOffice": "1108 14th St. Suite 108, Cody, WY 82414",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Nina_Webber",
+    "ballotpediaUrl": "https://ballotpedia.org/Nina_Webber"
   },
   {
     "id": "ocd-person/d811f813-1093-449a-a4dc-5d02c704ee49",
@@ -905,7 +1133,9 @@
     "email": "ocean.andrew@wyoleg.gov",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/66th-AndrewOcean.jpg",
     "website": "https://www.wyoleg.gov/Legislators/2023/H/2081",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ocean_Andrew",
+    "ballotpediaUrl": "https://ballotpedia.org/Ocean_Andrew"
   },
   {
     "id": "ocd-person/e72a31cf-cefd-42c1-9620-967af32a2f48",
@@ -918,7 +1148,11 @@
     "email": "ogden.driskill@wyoleg.gov",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-DriskillOgden.jpg",
     "website": "https://www.wyoleg.gov/Legislators/2023/S/1972",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ogden_Driskill",
+    "ballotpediaUrl": "https://ballotpedia.org/Ogden_Driskill",
+    "twitter": "DriskillOgden",
+    "facebook": "VoteOgdenDriskill"
   },
   {
     "id": "ocd-person/4e09e885-4101-4e95-8560-17d35caad18c",
@@ -929,9 +1163,13 @@
     "district": "15",
     "party": "Republican",
     "email": "pam.thayer@wyoleg.gov",
+    "phone": "307-321-5624",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-ThayerPamela.jpg",
     "website": "https://www.wyoleg.gov/Legislators/2025/H/2119",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "districtOffice": "219 W. Maple St., Rawlins, WY 82301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Pam_Thayer",
+    "ballotpediaUrl": "https://ballotpedia.org/Pam_Thayer"
   },
   {
     "id": "ocd-person/d110d38a-8f1f-4056-b89d-d7d46613c72a",
@@ -944,7 +1182,8 @@
     "email": "paul.hoeft@wyoleg.gov",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-HoeftPaul.jpg",
     "website": "https://wyoleg.gov/Legislators/2025/H/2124",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "ballotpediaUrl": "https://ballotpedia.org/Paul_Hoeft"
   },
   {
     "id": "ocd-person/9c9a9e1b-8107-40ac-b667-a8e75c5f806d",
@@ -957,7 +1196,9 @@
     "email": "pepper.ottman@wyoleg.gov",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-OttmanPepper.jpg",
     "website": "https://www.wyoleg.gov/Legislators/2023/H/2076",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Pepper_Ottman",
+    "ballotpediaUrl": "https://ballotpedia.org/Pepper_Ottman"
   },
   {
     "id": "ocd-person/2fc47a70-0bf7-4d7c-bda2-5cdbf75a99ea",
@@ -970,7 +1211,10 @@
     "email": "rachel.rodriguez-williams@wyoleg.gov",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-Rodriguez-WilliamsRachel.jpg",
     "website": "https://www.wyoleg.gov/Legislators/2023/H/2083",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rachel_Rodriguez-Williams",
+    "ballotpediaUrl": "https://ballotpedia.org/Rachel_Rodriguez-Williams",
+    "twitter": "RepRachelRW"
   },
   {
     "id": "ocd-person/8b636fd9-d6e2-4369-9764-c56803244076",
@@ -981,9 +1225,14 @@
     "district": "52",
     "party": "Republican",
     "email": "reuben.tarver@wyoleg.gov",
+    "phone": "307-689-6275",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-TarverReuben.jpg",
     "website": "https://wyoleg.gov/Legislators/2021/R/2112",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "districtOffice": "8185 N. Highway 14-16, Gillette, WY 82716",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Reuben_Tarver",
+    "ballotpediaUrl": "https://ballotpedia.org/Reuben_Tarver",
+    "facebook": "tarverforwyoming"
   },
   {
     "id": "ocd-person/219dcec3-8f83-401b-91df-1a79ac725889",
@@ -997,7 +1246,11 @@
     "phone": "307-777-7881",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-GeringerRob.jpg",
     "website": "https://wyoleg.gov/Legislators/2025/H/2142",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rob_Geringer",
+    "ballotpediaUrl": "https://ballotpedia.org/Rob_Geringer",
+    "twitter": "GeringerForWyo",
+    "facebook": "GeringerWyo"
   },
   {
     "id": "ocd-person/bc53e98d-bd3c-4a67-9822-68e609f45251",
@@ -1008,9 +1261,14 @@
     "district": "49",
     "party": "Republican",
     "email": "robert.wharff@wyoleg.gov",
+    "phone": "307-799-8944",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-WharffRobert.jpg",
     "website": "https://wyoleg.gov/Legislators/2021/R/2082",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "districtOffice": "137 Shady Lane, Evanston, WY 82930",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Robert_Wharff",
+    "ballotpediaUrl": "https://ballotpedia.org/Robert_Wharff",
+    "facebook": "Robert-Wharff-for-Wyoming"
   },
   {
     "id": "ocd-person/232d6600-4cfd-40a1-abb9-8a1eecd84768",
@@ -1023,7 +1281,9 @@
     "email": "scott.heiner@wyoleg.gov",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-HeinerScott.jpg",
     "website": "https://www.wyoleg.gov/Legislators/2023/H/2074",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Scott_Heiner",
+    "ballotpediaUrl": "https://ballotpedia.org/Scott_Heiner"
   },
   {
     "id": "ocd-person/201b5fe9-4060-4dfa-ae2c-c59a3a3120ff",
@@ -1036,7 +1296,10 @@
     "email": "scott.smith@wyoleg.gov",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/67th-SmithScott.jpg",
     "website": "https://wyoleg.gov/Legislators/2021/R/2093",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Scott_Smith_%28Wyoming_politician%29",
+    "ballotpediaUrl": "https://ballotpedia.org/Scott_Smith_(Wyoming)",
+    "facebook": "ScottSmithWyo"
   },
   {
     "id": "ocd-person/343a76eb-5672-433a-9d39-f34b6f683cab",
@@ -1047,9 +1310,15 @@
     "district": "13",
     "party": "Republican",
     "email": "stacy.jones@wyoleg.gov",
+    "phone": "307-371-8182",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-JonesStacy.jpg",
     "website": "https://wyoleg.gov/Legislators/2021/R/2088",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "districtOffice": "927 Whitewater Drive, Rock Springs, WY 82901",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Stacy_Jones_(Wyoming_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Stacy_Jones",
+    "twitter": "stacybjones1",
+    "facebook": "Jones4Wyoming"
   },
   {
     "id": "ocd-person/f46abbfe-3a0a-4657-a4ac-fbc418adfcc7",
@@ -1060,9 +1329,15 @@
     "district": "7",
     "party": "Republican",
     "email": "stephan.pappas@wyoleg.gov",
+    "phone": "307-630-7180",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-PappasStephan.jpg",
     "website": "https://www.wyoleg.gov/Legislators/2023/S/2008",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "districtOffice": "1500 E. 22nd St., Cheyenne, WY 82001",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Stephan_Pappas",
+    "ballotpediaUrl": "https://ballotpedia.org/Stephan_Pappas",
+    "twitter": "PappasStephan",
+    "facebook": "pappasforwy"
   },
   {
     "id": "ocd-person/1f6a3489-e152-487f-852a-23fc40a22185",
@@ -1073,9 +1348,14 @@
     "district": "37",
     "party": "Republican",
     "email": "steve.harshman@wyoleg.gov",
+    "phone": "307-262-8075",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-HarshmanSteve.jpg",
     "website": "https://www.wyoleg.gov/Legislators/2023/H/717",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "districtOffice": "4286 Moonbeam Road, Casper, WY 82604",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Steve_Harshman",
+    "ballotpediaUrl": "https://ballotpedia.org/Steve_Harshman",
+    "twitter": "SteveHarshman"
   },
   {
     "id": "ocd-person/51b4d190-c5b4-4860-acb9-a6569f26e064",
@@ -1086,9 +1366,14 @@
     "district": "8",
     "party": "Republican",
     "email": "steve.johnson@wyoleg.gov",
+    "phone": "307-640-0707",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-JohnsonSteve.jpg",
     "website": "https://wyoleg.gov/Legislators/2025/H/2118",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "districtOffice": "11234 Coonrod Road, Cheyenne, WY 82009",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Steve_Johnson_(Wyoming_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Steve_Johnson_(Wyoming)",
+    "facebook": "staterepresentativestevejohnson"
   },
   {
     "id": "ocd-person/e6276406-b441-4265-a110-7e3f9b8b0e3f",
@@ -1099,9 +1384,13 @@
     "district": "6",
     "party": "Republican",
     "email": "taft.love@wyoleg.gov",
+    "phone": "307-631-8107",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-LoveTaft.jpg",
     "website": "https://wyoleg.gov/Legislators/2026/R/2145",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "districtOffice": "1463 Earhart Drive, Cheyenne, WY 82009",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Taft_Love",
+    "ballotpediaUrl": "https://ballotpedia.org/Taft_Love"
   },
   {
     "id": "ocd-person/f20c9c17-f2bd-4c88-9f6f-208af6a61f26",
@@ -1114,7 +1403,10 @@
     "email": "tara.nethercott@wyoleg.gov",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-NethercottTara.jpg",
     "website": "https://www.wyoleg.gov/Legislators/2023/S/2029",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tara_Nethercott",
+    "ballotpediaUrl": "https://ballotpedia.org/Tara_Nethercott",
+    "facebook": "wyosenatornethercott"
   },
   {
     "id": "ocd-person/057afdb5-3c0e-4503-b6cd-50ba6df1aaab",
@@ -1127,7 +1419,9 @@
     "email": "tim.french@wyoleg.gov",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-FrenchTim.jpg",
     "website": "https://www.wyoleg.gov/Legislators/2023/S/2067",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tim_French",
+    "ballotpediaUrl": "https://ballotpedia.org/Tim_French"
   },
   {
     "id": "ocd-person/4f702d02-54ad-4143-837a-09be9a03ee6e",
@@ -1138,9 +1432,13 @@
     "district": "26",
     "party": "Republican",
     "email": "tim.salazar@wyoleg.gov",
+    "phone": "307-220-1213",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-SalazarTim.jpg",
     "website": "https://wyoleg.gov/Legislators/2021/R/2028",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "districtOffice": "331 Peterson Road, Riverton, WY 82501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tim_Salazar",
+    "ballotpediaUrl": "https://ballotpedia.org/Tim_Salazar"
   },
   {
     "id": "ocd-person/312edf5d-1dad-475a-b3bd-4b58f5f98ad4",
@@ -1151,9 +1449,13 @@
     "district": "30",
     "party": "Republican",
     "email": "tom.kelly@wyoleg.gov",
+    "phone": "307-461-9304",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-KellyTom.jpg",
     "website": "https://wyoleg.gov/Legislators/2025/H/2125",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "districtOffice": "412 Airport Road, Sheridan, WY 82801",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tom_Kelly_(Wyoming_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Thomas_Kelly_(Wyoming)"
   },
   {
     "id": "ocd-person/d1ac363d-41ed-4c2c-a661-6e400d0b7d57",
@@ -1164,9 +1466,13 @@
     "district": "6",
     "party": "Republican",
     "email": "tomi.strock@wyoleg.gov",
+    "phone": "307-359-1120",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-StrockTomi.jpg",
     "website": "https://wyoleg.gov/Legislators/2021/R/2094",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "districtOffice": "125 Cherokee Trail, Douglas, WY 82633",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tomi_Strock",
+    "ballotpediaUrl": "https://ballotpedia.org/Tomi_Strock"
   },
   {
     "id": "ocd-person/0cd9d0d3-09eb-4cf1-8e5b-bfc15a71b337",
@@ -1179,7 +1485,9 @@
     "email": "tony.locke@wyoleg.gov",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-LockeTony.jpg",
     "website": "https://wyoleg.gov/Legislators/2021/R/2106",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tony_Locke_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Tony_Locke"
   },
   {
     "id": "ocd-person/b2265fcb-f768-4617-ad03-15f5b65af79f",
@@ -1193,7 +1501,11 @@
     "phone": "307-777-7881",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-SherwoodTrey.jpg",
     "website": "https://www.wyoleg.gov/Legislators/2023/H/2072",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Trey_Sherwood",
+    "ballotpediaUrl": "https://ballotpedia.org/Trey_Sherwood",
+    "twitter": "LaradiseLady",
+    "facebook": "reptreysherwood"
   },
   {
     "id": "ocd-person/c1525bf9-8a43-4807-b72a-e42f94267b09",
@@ -1204,9 +1516,14 @@
     "district": "24",
     "party": "Republican",
     "email": "troy.mckeown@wyoleg.gov",
+    "phone": "307-670-3581",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-McKeownTroy.jpg",
     "website": "https://www.wyoleg.gov/Legislators/2023/S/2069",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "districtOffice": "1330 Columbine Drive, Gillette, WY 82718",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Troy_McKeown",
+    "ballotpediaUrl": "https://ballotpedia.org/Troy_McKeown",
+    "facebook": "WYStateSenatorTroyMcKeown"
   },
   {
     "id": "ocd-person/6dd13000-c423-47d8-9fbb-3cbcf730d7fe",
@@ -1217,8 +1534,12 @@
     "district": "15",
     "party": "Republican",
     "email": "wendy.schuler@wyoleg.gov",
+    "phone": "307-679-6774",
     "photoUrl": "https://wyoleg.gov/LegislatorSummary/Photos/68th-SchulerWendy.jpg",
     "website": "https://www.wyoleg.gov/Legislators/2023/S/2062",
-    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002"
+    "office": "State Capitol 200 W. 24th St., Cheyenne, WY 82002",
+    "districtOffice": "200 Liberty Ave., Evanston, WY 82930",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Wendy_Davis_Schuler",
+    "ballotpediaUrl": "https://ballotpedia.org/Wendy_Davis_Schuler"
   }
 ]

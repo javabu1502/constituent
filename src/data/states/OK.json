@@ -11,7 +11,9 @@
     "phone": "405-521-5600",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Aaron_Reinhardt_20241023_121244.jpeg",
     "website": "https://oksenate.gov/senators/aaron-reinhardt",
-    "office": "Room 528.2, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 528.2, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Aaron_Reinhardt",
+    "ballotpediaUrl": "https://ballotpedia.org/Aaron_Reinhardt"
   },
   {
     "id": "ocd-person/7e356581-ff96-4e5d-b6bc-94b3c8e0005c",
@@ -25,7 +27,9 @@
     "phone": "405-521-5622",
     "photoUrl": "https://oksenate.gov/sites/default/files/pugh.jpg",
     "website": "https://oksenate.gov/contact-senator?sid=1899",
-    "office": "Room 425, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 425, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Adam_Pugh",
+    "ballotpediaUrl": "https://ballotpedia.org/Adam_Pugh"
   },
   {
     "id": "ocd-person/a91af3e5-8f27-4aa3-9c5d-6166eeb7ec8a",
@@ -37,8 +41,11 @@
     "party": "Democratic",
     "email": "aletia.timmons@okhouse.gov",
     "phone": "405-557-7367",
+    "photoUrl": "https://dgbf0g52sf9l0.cloudfront.net/medium_Timmons_Aletia_ee4a34547d.jpg",
     "website": "https://www.okhouse.gov/representatives/aletia-timmons",
-    "office": "Room 603, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 603, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Aletia_Timmons",
+    "ballotpediaUrl": "https://ballotpedia.org/Aletia_Haynes_Timmons"
   },
   {
     "id": "ocd-person/0e3e261d-437a-4e04-8328-70adb16c82d9",
@@ -52,7 +59,9 @@
     "phone": "405-521-5555",
     "photoUrl": "https://oksenate.gov/sites/default/files/Seifried%2C%20Ally%20Flags%202022.jpg",
     "website": "https://oksenate.gov/contact-senator?sid=1523279",
-    "office": "Room 238, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 238, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ally_Seifried",
+    "ballotpediaUrl": "https://ballotpedia.org/Ally_Seifried"
   },
   {
     "id": "ocd-person/8dac97e3-d74f-4f58-bb7d-83412600975f",
@@ -66,7 +75,9 @@
     "phone": "405-557-7361",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Amanda_Clinton_20250516_045055.png",
     "website": "https://www.okhouse.gov/representatives/amanda-clinton",
-    "office": "Room 544, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 544, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Amanda_Clinton",
+    "ballotpediaUrl": "https://ballotpedia.org/Amanda_Clinton"
   },
   {
     "id": "ocd-person/987fd457-5b14-4300-95f1-e92f7cd5f748",
@@ -78,9 +89,10 @@
     "party": "Democratic",
     "email": "andy.fugate@okhouse.gov",
     "phone": "405-557-7370",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Fugate,%20Andy.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=94",
-    "office": "Room 545, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/andy-fugate",
+    "office": "Room 545, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Andy_Fugate",
+    "ballotpediaUrl": "https://ballotpedia.org/Andy_Fugate"
   },
   {
     "id": "ocd-person/3a5828d9-b8bf-491c-adfe-19f5331d1e20",
@@ -92,9 +104,10 @@
     "party": "Democratic",
     "email": "annie.menz@okhouse.gov",
     "phone": "405-557-7386",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Menz,%20Annie.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=45",
-    "office": "Room 502, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/annie-menz",
+    "office": "Room 502, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Annie_Menz",
+    "ballotpediaUrl": "https://ballotpedia.org/Annie_Menz"
   },
   {
     "id": "ocd-person/c1f71291-89c1-4109-a15c-2483743d333a",
@@ -106,9 +119,10 @@
     "party": "Republican",
     "email": "anthony.moore@okhouse.gov",
     "phone": "405-557-7325",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Moore,%20Anthony.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=57",
-    "office": "Room 406, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/anthony-moore",
+    "office": "Room 406, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Anthony_Moore_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Anthony_Moore"
   },
   {
     "id": "ocd-person/4d0b52d3-ad1f-45c9-b46e-3676194ef82c",
@@ -120,9 +134,10 @@
     "party": "Democratic",
     "email": "arturo.alonso@okhouse.gov",
     "phone": "405-557-7397",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Alonso,%20Arturo.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=89",
-    "office": "Room 604, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/arturo-alonsosandoval",
+    "office": "Room 604, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Arturo_Alonso",
+    "ballotpediaUrl": "https://ballotpedia.org/Arturo_Alonso-Sandoval"
   },
   {
     "id": "ocd-person/f2bc8c9d-050a-4531-84eb-1f233ad7042a",
@@ -134,9 +149,10 @@
     "party": "Republican",
     "email": "avery.frix@oksenate.gov",
     "phone": "405-521-5533",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Frix,%20Avery.jpg",
     "website": "https://oksenate.gov/senators/avery-frix",
-    "office": "Room 413, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 413, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Avery_Frix",
+    "ballotpediaUrl": "https://ballotpedia.org/Avery_Carl_Frix"
   },
   {
     "id": "ocd-person/446468ba-e7a8-49ff-8edc-e9f96da9d613",
@@ -150,7 +166,9 @@
     "phone": "405-521-5581",
     "photoUrl": "https://oksenate.gov/sites/default/files/Coleman%2C%20Bill%20Flags%202022.jpg",
     "website": "https://oksenate.gov/contact-senator?sid=1844",
-    "office": "Room 426, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 426, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bill_Coleman_(Oklahoma_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Bill_Coleman_(Oklahoma)"
   },
   {
     "id": "ocd-person/246cfe54-edbd-4844-9bdc-0213c4b501e9",
@@ -162,9 +180,10 @@
     "party": "Republican",
     "email": "bob.culver@okhouse.gov",
     "phone": "405-557-7408",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Culver,%20BobEd.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=4",
-    "office": "Room 504, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/bob-culver",
+    "office": "Room 504, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bob_Ed_Culver_Jr.",
+    "ballotpediaUrl": "https://ballotpedia.org/Bob_Ed_Culver"
   },
   {
     "id": "ocd-person/be4edaae-b522-4ce0-bc1d-98b813424f57",
@@ -176,9 +195,10 @@
     "party": "Republican",
     "email": "brad.boles@okhouse.gov",
     "phone": "405-557-7405",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Boles,%20Brad.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=51",
-    "office": "Room 244, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/brad-boles",
+    "office": "Room 244, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Brad_Boles",
+    "ballotpediaUrl": "https://ballotpedia.org/Brad_Boles"
   },
   {
     "id": "ocd-person/55b572a7-2951-4597-b70c-e37b51163b03",
@@ -192,7 +212,9 @@
     "phone": "405-521-5584",
     "photoUrl": "https://oksenate.gov/sites/default/files/Brenda-Stanley_1.jpg",
     "website": "https://oksenate.gov/contact-senator?sid=1900",
-    "office": "Room 420, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 420, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Brenda_Stanley",
+    "ballotpediaUrl": "https://ballotpedia.org/Brenda_Stanley"
   },
   {
     "id": "ocd-person/bc85e399-f4bc-4690-b34b-685e15242904",
@@ -206,7 +228,9 @@
     "phone": "405-521-5612",
     "photoUrl": "https://oksenate.gov/sites/default/files/Howard%2C%20Brent_flags.jpg",
     "website": "https://oksenate.gov/contact-senator?sid=1853",
-    "office": "Room 427, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 427, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Brent_Howard",
+    "ballotpediaUrl": "https://ballotpedia.org/Brent_Howard"
   },
   {
     "id": "ocd-person/19a4841c-4571-4803-8f5d-262f664fb31a",
@@ -220,7 +244,9 @@
     "phone": "405-521-5675",
     "photoUrl": "https://bloximages.newyork1.vip.townnews.com/citynewsokc.com/content/tncms/assets/v3/editorial/5/d2/5d26a700-4e64-11ee-be35-db82e824c57c/64fb4b329045b.image.jpg?resize=500%2C500",
     "website": "https://oksenate.gov/senators/brian-guthrie",
-    "office": "Room 446, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 446, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Brian_Guthrie",
+    "ballotpediaUrl": "https://ballotpedia.org/Brian_Guthrie"
   },
   {
     "id": "ocd-person/03af3716-0ac4-49f5-b25a-ff757420d87d",
@@ -232,9 +258,10 @@
     "party": "Republican",
     "email": "brian.hill@okhouse.gov",
     "phone": "405-557-7333",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Hill,%20Brian.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=47",
-    "office": "Room 336, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/brian-hill",
+    "office": "Room 336, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Brian_Hill_(Oklahoma_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Brian_Hill_(Oklahoma)"
   },
   {
     "id": "ocd-person/a3c36ebe-151f-4632-ab04-31963f55f9d8",
@@ -248,7 +275,9 @@
     "phone": "405-521-5588",
     "photoUrl": "https://nondoc.com/wp-content/uploads/2025/05/Bryan-Logan-mug-cropped-640x373.jpg",
     "website": "https://oksenate.gov/senators/bryan-logan",
-    "office": "Room 533, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 533, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bryan_Logan",
+    "ballotpediaUrl": "https://ballotpedia.org/Bryan_Logan"
   },
   {
     "id": "ocd-person/6cfaac2f-52af-4aad-8ec4-6373bb45bf24",
@@ -260,9 +289,10 @@
     "party": "Republican",
     "email": "carl.newton@okhouse.gov",
     "phone": "405-557-7339",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Newton,%20Carl.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=58",
-    "office": "Room 507, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/carl-newton",
+    "office": "Room 507, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Carl_Newton",
+    "ballotpediaUrl": "https://ballotpedia.org/Carl_Newton"
   },
   {
     "id": "ocd-person/6ecf8a12-033a-41da-9b5f-3fbcf41f4841",
@@ -276,7 +306,9 @@
     "phone": "405-521-5543",
     "photoUrl": "https://oksenate.gov/sites/default/files/Hicks%2C%20Carri%20Flags%202022.jpg",
     "website": "https://oksenate.gov/contact-senator?sid=1852",
-    "office": "Room 516, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 516, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Carri_Hicks",
+    "ballotpediaUrl": "https://ballotpedia.org/Carri_Hicks"
   },
   {
     "id": "ocd-person/8c8517c3-75ee-4b27-8d8c-3444c036ba78",
@@ -290,7 +322,9 @@
     "phone": "405-521-5626",
     "photoUrl": "https://oksenate.gov/sites/default/files/murdock.jpg",
     "website": "https://oksenate.gov/contact-senator?sid=1862",
-    "office": "Room 431, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 431, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Casey_Murdock",
+    "ballotpediaUrl": "https://ballotpedia.org/Casey_Murdock"
   },
   {
     "id": "ocd-person/c5909558-d02d-438e-9c0c-50eb8c88f862",
@@ -302,9 +336,10 @@
     "party": "Republican",
     "email": "chad.caldwell@okhouse.gov",
     "phone": "405-557-7317",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Caldwell,%20Chad.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=40",
-    "office": "Room 328, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/chad-caldwell",
+    "office": "Room 328, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Chad_Caldwell",
+    "ballotpediaUrl": "https://ballotpedia.org/Chad_Caldwell"
   },
   {
     "id": "ocd-person/442374ea-1ad4-4793-bdbc-a5db81a1d219",
@@ -316,9 +351,10 @@
     "party": "Republican",
     "email": "chris.banning@okhouse.gov",
     "phone": "405-557-7306",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Banning,%20Chris.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=24",
-    "office": "Room 304, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/59th-chris-banning",
+    "office": "Room 304, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Chris_Banning",
+    "ballotpediaUrl": "https://ballotpedia.org/Chris_Banning"
   },
   {
     "id": "ocd-person/5b2d71b9-21c7-4291-ac09-e2840fee2919",
@@ -330,9 +366,10 @@
     "party": "Republican",
     "email": "chris.kannady@okhouse.gov",
     "phone": "405-557-7337",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Kannady,%20Chris.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=91",
-    "office": "Room 240, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/chris-kannady",
+    "office": "Room 240, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Chris_Kannady",
+    "ballotpediaUrl": "https://ballotpedia.org/Chris_Kannady"
   },
   {
     "id": "ocd-person/f4d5b128-a016-4eda-b6c6-e298fe29bc29",
@@ -344,9 +381,10 @@
     "party": "Republican",
     "email": "chris.sneed@okhouse.gov",
     "phone": "405-557-7310",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Sneed,%20Chris.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=14",
-    "office": "Room 404, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/chris-sneed",
+    "office": "Room 404, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Chris_Sneed",
+    "ballotpediaUrl": "https://ballotpedia.org/Chris_Sneed"
   },
   {
     "id": "ocd-person/b8b4337f-5741-4fad-bcf3-38c526cf6c5a",
@@ -360,7 +398,9 @@
     "phone": "405-521-5551",
     "photoUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgg9y84-E8FaeDWzhd1s97N3Ko90lCow4sAQ&s",
     "website": "https://oksenate.gov/senators/christi-gillespie",
-    "office": "Room 235, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 235, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Christi_Gillespie",
+    "ballotpediaUrl": "https://ballotpedia.org/Christi_Gillespie"
   },
   {
     "id": "ocd-person/95f06268-cdfb-463b-aa2e-fb789fbc97c4",
@@ -374,7 +414,9 @@
     "phone": "405-521-5628",
     "photoUrl": "https://oksenate.gov/sites/default/files/hall.jpg",
     "website": "https://oksenate.gov/contact-senator?sid=1850",
-    "office": "Room 537, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 537, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Chuck_Hall_(Oklahoma_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Chuck_Hall"
   },
   {
     "id": "ocd-person/82e04ad9-64c8-4439-9853-cbc3e273d637",
@@ -386,9 +428,10 @@
     "party": "Republican",
     "email": "clay.staires@okhouse.gov",
     "phone": "405-557-7390",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Staires,%20Clay.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=66",
-    "office": "Room 347, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/clay-staires",
+    "office": "Room 347, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Clay_Staires",
+    "ballotpediaUrl": "https://ballotpedia.org/Clay_Staires"
   },
   {
     "id": "ocd-person/17d5c3a4-a468-4aca-b58c-314605214857",
@@ -400,9 +443,10 @@
     "party": "Republican",
     "email": "cody.maynard@okhouse.gov",
     "phone": "405-557-7366",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Maynard,%20Cody.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=21",
-    "office": "Room 341, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/cody-maynard",
+    "office": "Room 341, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Cody_Maynard",
+    "ballotpediaUrl": "https://ballotpedia.org/Cody_Maynard"
   },
   {
     "id": "ocd-person/0cffa048-1b45-4609-a1b6-9e741ca1948c",
@@ -414,9 +458,10 @@
     "party": "Republican",
     "email": "collin.duel@okhouse.gov",
     "phone": "405-557-7350",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Duel,%20Collin.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=31",
-    "office": "Room 246, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/collin-duel",
+    "office": "Room 456, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Collin_Duel",
+    "ballotpediaUrl": "https://ballotpedia.org/Collin_Duel"
   },
   {
     "id": "ocd-person/f9153735-938a-418b-ac4f-6881904861ac",
@@ -428,9 +473,10 @@
     "party": "Democratic",
     "email": "cyndi.munson@okhouse.gov",
     "phone": "405-557-7392",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Munson,%20Cyndie.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=85",
-    "office": "Room 601, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/cyndi-munson",
+    "office": "Room 601, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Cyndi_Munson",
+    "ballotpediaUrl": "https://ballotpedia.org/Cyndi_Munson"
   },
   {
     "id": "ocd-person/382dfd67-bd2a-4271-bb79-62fe045102ea",
@@ -442,9 +488,10 @@
     "party": "Republican",
     "email": "cynthia.roe@okhouse.gov",
     "phone": "405-557-7365",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Cindy-Roe.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=42",
-    "office": "Room 205, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/cynthia-roe",
+    "office": "Room 205, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Cynthia_Roe",
+    "ballotpediaUrl": "https://ballotpedia.org/Cynthia_Roe"
   },
   {
     "id": "ocd-person/74fd77d2-ffa9-42cd-9849-0b64464bcc6f",
@@ -458,7 +505,9 @@
     "phone": "405-521-5566",
     "photoUrl": "https://oksenate.gov/sites/default/files/Prieto%2C%20Dana%20Flags%202022.jpg",
     "website": "https://oksenate.gov/contact-senator?sid=1523287",
-    "office": "Room 445, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 445, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dana_Prieto",
+    "ballotpediaUrl": "https://ballotpedia.org/Dana_Prieto"
   },
   {
     "id": "ocd-person/62d0d568-33cf-4ec6-b90e-5c2b45be82ba",
@@ -470,9 +519,10 @@
     "party": "Republican",
     "email": "daniel.pae@okhouse.gov",
     "phone": "405-557-7374",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Pae,%20Daniel.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=62",
-    "office": "Room 336, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/daniel-pae",
+    "office": "Room 336, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Daniel_Pae",
+    "ballotpediaUrl": "https://ballotpedia.org/Daniel_Pae"
   },
   {
     "id": "ocd-person/61966500-f9d7-4f45-ad6b-761d6d839036",
@@ -484,9 +534,10 @@
     "party": "Republican",
     "email": "danny.sterling@okhouse.gov",
     "phone": "405-557-7349",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Danny-Sterling.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=27",
-    "office": "Room 247, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/danny-sterling",
+    "office": "Room 247, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Danny_Sterling",
+    "ballotpediaUrl": "https://ballotpedia.org/Danny_Sterling"
   },
   {
     "id": "ocd-person/db2c481d-6dc5-455e-905c-2daac4bbc631",
@@ -498,9 +549,10 @@
     "party": "Republican",
     "email": "danny.williams@okhouse.gov",
     "phone": "405-557-7372",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Williams,%20Danny.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=28",
-    "office": "Room 404, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/danny-williams",
+    "office": "Room 500, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Danny_Williams_(Oklahoma_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Danny_Williams_(Oklahoma)"
   },
   {
     "id": "ocd-person/7143be5e-df9e-40ad-8591-dd4c9ea51261",
@@ -514,21 +566,9 @@
     "phone": "405-521-5545",
     "photoUrl": "https://oksenate.gov/sites/default/files/1200px-DarcyJech_0.jpg",
     "website": "https://oksenate.gov/contact-senator?sid=1855",
-    "office": "Room 234, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
-  },
-  {
-    "id": "ocd-person/bea1fd3e-9a8e-4cd6-bdb8-abedd9f8a888",
-    "name": "Darrell Weaver",
-    "firstName": "Darrell",
-    "lastName": "Weaver",
-    "chamber": "upper",
-    "district": "24",
-    "party": "Republican",
-    "email": "darrell.weaver@oksenate.gov",
-    "phone": "405-521-5569",
-    "photoUrl": "https://oksenate.gov/sites/default/files/Weaver%2C%20Darrell_flags.jpg",
-    "website": "https://oksenate.gov/contact-senator?sid=1894",
-    "office": "Room 419, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 234, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Darcy_Jech",
+    "ballotpediaUrl": "https://ballotpedia.org/Darcy_Jech"
   },
   {
     "id": "ocd-person/3714523f-ea6d-4bd5-a801-1397dd508208",
@@ -542,7 +582,9 @@
     "phone": "405-521-5620",
     "photoUrl": "https://oksenate.gov/sites/default/files/Rader%2C%20Dave%20Flags%202022.jpg",
     "website": "https://oksenate.gov/contact-senator?sid=1898",
-    "office": "Room 233, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 233, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/David_Rader",
+    "ballotpediaUrl": "https://ballotpedia.org/Dave_Rader"
   },
   {
     "id": "ocd-person/f7e51701-fb8a-4d48-8f61-951096c0c76d",
@@ -556,7 +598,9 @@
     "phone": "405-521-5586",
     "photoUrl": "https://oksenate.gov/sites/default/files/Bullard_David.jpg",
     "website": "https://oksenate.gov/contact-senator?sid=1843",
-    "office": "Room 443, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 443, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/David_Bullard_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/David_Bullard"
   },
   {
     "id": "ocd-person/b2857b06-9290-4141-9bc4-2a105bc51ce8",
@@ -568,9 +612,10 @@
     "party": "Republican",
     "email": "david.hardin@okhouse.gov",
     "phone": "405-557-7394",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Hardin,%20David.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=86",
-    "office": "Room 250, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/david-hardin",
+    "office": "Room 250, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/David_Hardin",
+    "ballotpediaUrl": "https://ballotpedia.org/David_Hardin"
   },
   {
     "id": "ocd-person/84087e63-a192-4be6-9367-64b2c93a2dcc",
@@ -582,9 +627,10 @@
     "party": "Republican",
     "email": "david.smith@okhouse.gov",
     "phone": "405-557-7376",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Smith,%20David.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=18",
-    "office": "Room 334, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/david-smith",
+    "office": "Room 334, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/David_Smith_(Oklahoma_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/David_Smith_(Oklahoma)"
   },
   {
     "id": "ocd-person/4d473c48-88f9-495a-a8da-b8e2d0310280",
@@ -596,9 +642,9 @@
     "party": "Republican",
     "email": "dell.kerbs@okhouse.gov",
     "phone": "405-557-7345",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Kerbs,%20Dell.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=26",
-    "office": "Room 305, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/dell-kerbs",
+    "office": "Room 305, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "ballotpediaUrl": "https://ballotpedia.org/Dell_Kerbs"
   },
   {
     "id": "ocd-person/e825fe1a-a46d-4a07-b9e4-c9e82e357c90",
@@ -610,9 +656,10 @@
     "party": "Republican",
     "email": "denise.crosswhitehader@okhouse.gov",
     "phone": "405-557-7321",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Crosswhite%20Hader,%20Denise.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=41",
-    "office": "Room 332, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/denise-crosswhitehader",
+    "office": "Room 332, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Denise_Crosswhite_Hader",
+    "ballotpediaUrl": "https://ballotpedia.org/Denise_Hader"
   },
   {
     "id": "ocd-person/a7eb5f03-0a2a-4235-b2f8-b4983e1a8cf2",
@@ -626,7 +673,9 @@
     "phone": "405-557-7379",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/DerrickHildebrant2024.jpg",
     "website": "https://www.okhouse.gov/representatives/derrick.hildebrant",
-    "office": "Room 330, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 330, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Derrick_Hildebrant",
+    "ballotpediaUrl": "https://ballotpedia.org/Derrick_Hildebrant"
   },
   {
     "id": "ocd-person/dc094bcd-66c1-47f4-b9b0-94272636a7fe",
@@ -638,9 +687,26 @@
     "party": "Republican",
     "email": "dick.lowe@okhouse.gov",
     "phone": "405-557-7401",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Lowe,%20Dick.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=56",
-    "office": "Room 547, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/dick-lowe",
+    "office": "Room 547, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dick_Lowe_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Dick_Lowe"
+  },
+  {
+    "id": "ocd-person/14d6a46d-124c-4274-ae72-bfe5541a4a0a",
+    "name": "Dillon Travis",
+    "firstName": "Dillon",
+    "lastName": "Travis",
+    "chamber": "lower",
+    "district": "35",
+    "party": "Republican",
+    "email": "dillon.travis@okhouse.gov",
+    "phone": "405-557-7344",
+    "photoUrl": "https://dgbf0g52sf9l0.cloudfront.net/medium_Travis_Dillon_1d9dc3df46.jpg",
+    "website": "https://www.okhouse.gov/representatives/dillon-travis",
+    "office": "Room 242, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dillon_Travis",
+    "ballotpediaUrl": "https://ballotpedia.org/Dillon_Travis"
   },
   {
     "id": "ocd-person/56666b37-2788-433a-9c32-19af826613e4",
@@ -654,7 +720,9 @@
     "phone": "405-521-5567",
     "photoUrl": "https://oksenate.gov/sites/default/files/Deevers%2C%20Dusty%202023%20Flags%20S_0.jpg",
     "website": "https://oksenate.gov/contact-senator?sid=1861",
-    "office": "Room 534, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 534, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dusty_Deevers",
+    "ballotpediaUrl": "https://ballotpedia.org/Dusty_Deevers"
   },
   {
     "id": "ocd-person/d93c695c-f9d6-4f97-b92e-73249f89545a",
@@ -666,9 +734,10 @@
     "party": "Republican",
     "email": "eddy.dempsey@okhouse.gov",
     "phone": "405-557-7363",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Dempsey,%20Eddy.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=1",
-    "office": "Room 453, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/eddy-dempsey",
+    "office": "Room 453, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Eddy_Dempsey",
+    "ballotpediaUrl": "https://ballotpedia.org/Eddy_Dempsey"
   },
   {
     "id": "ocd-person/c63ddc9a-5f9d-4cb5-b152-4828f4870682",
@@ -682,7 +751,9 @@
     "phone": "405-557-7396",
     "photoUrl": "https://static.wixstatic.com/media/d59798_0699f998a916470598404706be4aca74~mv2.jpg/v1/fill/w_1349,h_1019,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/d59798_0699f998a916470598404706be4aca74~mv2.jpg",
     "website": "https://www.okhouse.gov/representatives/ellen-pogemiller",
-    "office": "Room 511, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 511, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ellen_Pogemiller",
+    "ballotpediaUrl": "https://ballotpedia.org/Ellen_Pogemiller"
   },
   {
     "id": "ocd-person/c9e547ff-6762-49f8-807c-32c78ce569cf",
@@ -694,9 +765,10 @@
     "party": "Democratic",
     "email": "ellyn.hefner@okhouse.gov",
     "phone": "405-557-7335",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Hefner,%20Ellyn.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=87",
-    "office": "Room 541, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/ellyn-hefner",
+    "office": "Room 541, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ellyn_Hefner",
+    "ballotpediaUrl": "https://ballotpedia.org/Ellyn_Hefner"
   },
   {
     "id": "ocd-person/09b3acaf-ac32-4f74-9bfe-37d84beb09c8",
@@ -708,9 +780,10 @@
     "party": "Republican",
     "email": "emily.gise@okhouse.gov",
     "phone": "405-557-7354",
-    "photoUrl": "https://www.cairoklahoma.com/wp-content/uploads/2024/09/emily-200x200.jpeg",
     "website": "https://www.okhouse.gov/representatives/emily-gise",
-    "office": "Room 336, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 336, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Emily_Gise",
+    "ballotpediaUrl": "https://ballotpedia.org/Emily_Gise"
   },
   {
     "id": "ocd-person/752b02fd-2ce1-46d3-88a3-337d64df6b1a",
@@ -722,9 +795,10 @@
     "party": "Republican",
     "email": "eric.roberts@okhouse.gov",
     "phone": "405-557-7409",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Roberts,%20Eric.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=83",
-    "office": "Room 346, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/eric-roberts",
+    "office": "Room 346, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Eric_Roberts_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Eric_Roberts"
   },
   {
     "id": "ocd-person/57fd0b98-5608-470a-a70b-971165572afb",
@@ -738,7 +812,9 @@
     "phone": "405-557-7342",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/ErickHarris.jpg",
     "website": "https://www.okhouse.gov/representatives/erick-harris",
-    "office": "Room 336, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 336, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Erick_Harris_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Erick_Harris"
   },
   {
     "id": "ocd-person/b0168a8a-bf16-4ddb-85ef-a7503cdb4d66",
@@ -750,9 +826,10 @@
     "party": "Republican",
     "email": "gabe.woolley@okhouse.gov",
     "phone": "405-557-7362",
-    "photoUrl": "https://www.cairoklahoma.com/wp-content/uploads/2024/06/gabe-960x958.jpg",
     "website": "https://www.okhouse.gov/representatives/gabe-woolley",
-    "office": "Room 243, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 243, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Gabe_Woolley",
+    "ballotpediaUrl": "https://ballotpedia.org/Gabe_Woolley"
   },
   {
     "id": "ocd-person/a0948c13-b3a0-4040-b0db-9f8f8c67eeac",
@@ -766,7 +843,9 @@
     "phone": "405-521-5614",
     "photoUrl": "https://oksenate.gov/sites/default/files/Burns%2C%20George_flags_1.jpg",
     "website": "https://oksenate.gov/contact-senator?sid=1521373",
-    "office": "Room 527, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 527, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/George_Burns_(American_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/George_Burns_(Oklahoma)"
   },
   {
     "id": "ocd-person/1120aff3-9773-4cc8-9c47-18026559363a",
@@ -778,9 +857,10 @@
     "party": "Republican",
     "email": "gerrid.kendrix@okhouse.gov",
     "phone": "405-557-7369",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Kendrix,%20Gerrid.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=52",
-    "office": "Room 204, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/gerrid-kendrix",
+    "office": "Room 204, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Gerrid_Kendrix",
+    "ballotpediaUrl": "https://ballotpedia.org/Gerrid_Kendrix"
   },
   {
     "id": "ocd-person/9f0cacea-112a-425a-b212-4fa3cfd3b3a0",
@@ -794,7 +874,9 @@
     "phone": "405-521-5547",
     "photoUrl": "https://oksenate.gov/sites/default/files/Green%2C%20Grant%20Flags%202022.jpg",
     "website": "https://oksenate.gov/contact-senator?sid=1523286",
-    "office": "Room 428, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 428, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Grant_Green_(Oklahoma_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Grant_Green"
   },
   {
     "id": "ocd-person/8e22d71d-fd9a-4d9d-aa7c-09af3da43118",
@@ -808,7 +890,9 @@
     "phone": "405-521-5590",
     "photoUrl": "https://oksenate.gov/sites/default/files/Stewart%2C%20Jack%20Flags%202022.jpg",
     "website": "https://oksenate.gov/contact-senator?sid=1523284",
-    "office": "Room 414, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 414, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jack_Stewart_(Oklahoma_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Jack_Stewart"
   },
   {
     "id": "ocd-person/df4d2b89-39a6-4157-90ea-fd229c84f98b",
@@ -820,9 +904,10 @@
     "party": "Democratic",
     "email": "jacob.rosecrants@okhouse.gov",
     "phone": "405-557-7329",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Rosecrants,%20Jacob.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=46",
-    "office": "Room 503, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/jacob-rosecrants",
+    "office": "Room 503, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jacob_Rosecrants",
+    "ballotpediaUrl": "https://ballotpedia.org/Jacob_Rosecrants"
   },
   {
     "id": "ocd-person/a4127dd3-e7f6-4bab-9910-8372e141f160",
@@ -834,9 +919,10 @@
     "party": "Democratic",
     "email": "jared.deck@okhouse.gov",
     "phone": "405-557-7323",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Deck,%20Jared.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=44",
-    "office": "Room 502, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/jared-deck",
+    "office": "Room 502, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jared_Deck",
+    "ballotpediaUrl": "https://ballotpedia.org/Jared_Deck"
   },
   {
     "id": "ocd-person/a791f43c-0ca9-42aa-b90a-98968718a7e1",
@@ -850,7 +936,9 @@
     "phone": "405-557-7346",
     "photoUrl": "https://www.oklahoman.com/gcdn/authoring/authoring-images/2024/06/10/NOKL/74049882007-jason-blair.jpg?width=300&height=366&fit=crop&format=pjpg&auto=webp",
     "website": "https://www.okhouse.gov/representatives/jason-blair",
-    "office": "Room 546, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 546, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jason_Blair_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Jason_Blair"
   },
   {
     "id": "ocd-person/0389a5f1-0777-4a48-8faf-98779dc16849",
@@ -862,9 +950,10 @@
     "party": "Republican",
     "email": "jay.steagall@okhouse.gov",
     "phone": "405-557-7352",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Steagall,%20Jay.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=43",
-    "office": "Room 204, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/jay-steagall",
+    "office": "Room 204, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jay_Steagall",
+    "ballotpediaUrl": "https://ballotpedia.org/Jay_Steagall"
   },
   {
     "id": "ocd-person/edf90069-7569-4cd7-9a8e-e3890e395ac7",
@@ -878,7 +967,9 @@
     "phone": "405-521-5607",
     "photoUrl": "https://oksenate.gov/sites/default/files/Alvord%2C%20Jerry%20Flags%202022.jpg",
     "website": "https://oksenate.gov/contact-senator?sid=1523283",
-    "office": "Room 415, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 415, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jerry_Alvord",
+    "ballotpediaUrl": "https://ballotpedia.org/Jerry_Alvord"
   },
   {
     "id": "ocd-person/612db560-defe-471a-a45f-cf259a4ffeaa",
@@ -890,9 +981,10 @@
     "party": "Republican",
     "email": "jim.grego@okhouse.gov",
     "phone": "405-557-7381",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Grego,%20Jim.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=17",
-    "office": "Room 250, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/jim-grego",
+    "office": "Room 250, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jim_Grego",
+    "ballotpediaUrl": "https://ballotpedia.org/Jim_Grego"
   },
   {
     "id": "ocd-person/f7a4c019-6e5c-40d8-8faf-9f7d44b83062",
@@ -904,9 +996,10 @@
     "party": "Republican",
     "email": "jim.olsen@okhouse.gov",
     "phone": "405-557-7315",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Olsen,%20Jim.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=2",
-    "office": "Room 243, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/jim-olsen",
+    "office": "Room 243, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jim_Olsen",
+    "ballotpediaUrl": "https://ballotpedia.org/Jim_Olsen"
   },
   {
     "id": "ocd-person/df9c291c-e14f-487a-8ff6-9182734ababf",
@@ -920,7 +1013,9 @@
     "phone": "405-557-7368",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/JimShaw2.jpg",
     "website": "https://www.okhouse.gov/representatives/jim-shaw",
-    "office": "Room 340, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 340, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jim_Shaw_(Oklahoma_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Jim_Shaw_(Oklahoma)"
   },
   {
     "id": "ocd-person/164b3ba9-47d4-4c24-870d-4e6679e15cf8",
@@ -934,7 +1029,9 @@
     "phone": "405-521-5624",
     "photoUrl": "https://oksenate.gov/sites/default/files/Dossett%2C%20Jo%20Anna_flags.jpg",
     "website": "https://oksenate.gov/contact-senator?sid=1521376",
-    "office": "Room 514.2, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 514.2, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jo_Anna_Dossett",
+    "ballotpediaUrl": "https://ballotpedia.org/Jo_Anna_Dossett"
   },
   {
     "id": "ocd-person/3af08d09-7d36-4f0b-b257-a0206a8c2778",
@@ -946,9 +1043,10 @@
     "party": "Republican",
     "email": "john.george@okhouse.gov",
     "phone": "405-557-7322",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/George,%20John.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=36",
-    "office": "Room 504, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/john-george",
+    "office": "Room 504, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_George_(Oklahoma_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/John_George_(Oklahoma)"
   },
   {
     "id": "ocd-person/08dca8d5-4264-4509-aebd-bbf7736b9e90",
@@ -962,7 +1060,9 @@
     "phone": "405-521-5602",
     "photoUrl": "https://oksenate.gov/sites/default/files/Haste%2C%20John%202022%20Flags.jpg",
     "website": "https://oksenate.gov/contact-senator?sid=1851",
-    "office": "Room 530, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 530, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_Haste",
+    "ballotpediaUrl": "https://ballotpedia.org/John_Haste"
   },
   {
     "id": "ocd-person/f7ab3ee8-1ec5-4218-ac6b-dba652f2a6d6",
@@ -974,9 +1074,10 @@
     "party": "Republican",
     "email": "john.kane@okhouse.gov",
     "phone": "405-557-7358",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Kane,%20John.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=11",
-    "office": "Room 452, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/john-kane",
+    "office": "Room 452, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_Kane_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/John_Kane_(Oklahoma)"
   },
   {
     "id": "ocd-person/671bd947-18c8-4b39-906e-675209b80b73",
@@ -988,23 +1089,10 @@
     "party": "Republican",
     "email": "john.pfeiffer@okhouse.gov",
     "phone": "405-557-7332",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Pfeiffer,%20John.JPG",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=38",
-    "office": "Room 456, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
-  },
-  {
-    "id": "ocd-person/6a662cc1-492b-4c65-a77c-9b8b202b1ae5",
-    "name": "John Waldron",
-    "firstName": "John",
-    "lastName": "Waldron",
-    "chamber": "lower",
-    "district": "77",
-    "party": "Democratic",
-    "email": "john.waldron@okhouse.gov",
-    "phone": "405-557-7410",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Waldron,%20John.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=77",
-    "office": "Room 501, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/john-pfeiffer",
+    "office": "Room 305, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_Pfeiffer_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/John_Pfeiffer"
   },
   {
     "id": "ocd-person/d8c6a83e-cdac-439d-af83-d90d9f543541",
@@ -1018,7 +1106,9 @@
     "phone": "405-557-7308",
     "photoUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQcSK-0G7vutoYpyD-I4rn3EZVvTgV8ij17A&s",
     "website": "https://www.okhouse.gov/representatives/jonathan-wilk",
-    "office": "Room 546, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 546, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jonathan_Wilk",
+    "ballotpediaUrl": "https://ballotpedia.org/Jonathan_Wilk"
   },
   {
     "id": "ocd-person/077e2743-495e-4198-a096-5675796d78a4",
@@ -1032,7 +1122,9 @@
     "phone": "405-521-5541",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/JonathanWingard2024.png",
     "website": "https://oksenate.gov/senators/jonathan-wingard",
-    "office": "Room 411, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 411, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jonathan_Wingard",
+    "ballotpediaUrl": "https://ballotpedia.org/Jonathan_Wingard"
   },
   {
     "id": "ocd-person/7bfc4244-9498-4a20-bdf7-44383688b608",
@@ -1044,9 +1136,10 @@
     "party": "Republican",
     "email": "josh.cantrell@okhouse.gov",
     "phone": "405-557-7383",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Cantrell,%20Josh.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=49",
-    "office": "Room 303, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/josh-cantrell",
+    "office": "Room 303, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Josh_Cantrell_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Josh_Cantrell"
   },
   {
     "id": "ocd-person/6b71e61a-6f78-49b0-90ef-64b233dab860",
@@ -1058,9 +1151,10 @@
     "party": "Republican",
     "email": "josh.west@okhouse.gov",
     "phone": "405-557-7415",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/West,%20Josh.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=5",
-    "office": "Room 457, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/josh-west",
+    "office": "Room 457, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Josh_West_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Josh_West"
   },
   {
     "id": "ocd-person/47e6f0cc-bf0d-4375-b0f7-3e0c88779ca5",
@@ -1072,9 +1166,10 @@
     "party": "Republican",
     "email": "judd.strom@okhouse.gov",
     "phone": "405-557-7402",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Strom,%20Judd.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=10",
-    "office": "Room 455, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/judd-strom",
+    "office": "Room 455, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Judd_Strom",
+    "ballotpediaUrl": "https://ballotpedia.org/Judd_Strom"
   },
   {
     "id": "ocd-person/986cbe76-2b10-4fc8-92b0-39432b761e1a",
@@ -1088,7 +1183,9 @@
     "phone": "405-521-5636",
     "photoUrl": "https://oksenate.gov/sites/default/files/Kirt%2C%20Julia%202023%20Flags%20S.jpg",
     "website": "https://oksenate.gov/contact-senator?sid=1857",
-    "office": "Room 517, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 517, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Julia_Kirt",
+    "ballotpediaUrl": "https://ballotpedia.org/Julia_Kirt"
   },
   {
     "id": "ocd-person/14ac3593-aa7a-491e-aba0-93474e93673d",
@@ -1102,7 +1199,9 @@
     "phone": "405-521-5634",
     "photoUrl": "https://oksenate.gov/sites/default/files/Daniels%2C%20Julie%202022.jpg",
     "website": "https://oksenate.gov/contact-senator?sid=1846",
-    "office": "Room 421, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 421, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Julie_Daniels",
+    "ballotpediaUrl": "https://ballotpedia.org/Julie_Daniels"
   },
   {
     "id": "ocd-person/3219df30-79cf-43c5-814d-b1f4b02d53bb",
@@ -1116,7 +1215,9 @@
     "phone": "405-521-5574",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/JulieMcIntosh2024.jpeg",
     "website": "https://oksenate.gov/senators/julie-mcintosh",
-    "office": "Room 529.2, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 529.2, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Julie_McIntosh",
+    "ballotpediaUrl": "https://ballotpedia.org/Julie_McIntosh"
   },
   {
     "id": "ocd-person/0b9df925-a78c-4ee4-a58c-5d7c2ace10fd",
@@ -1128,9 +1229,10 @@
     "party": "Republican",
     "email": "justin.humphrey@okhouse.gov",
     "phone": "405-557-7382",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Humphrey,%20Justin.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=19",
-    "office": "Room 301, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/justin-humphrey",
+    "office": "Room 301, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Justin_Humphrey",
+    "ballotpediaUrl": "https://ballotpedia.org/Justin_JJ_Humphrey"
   },
   {
     "id": "ocd-person/595024d3-b5fd-45e4-a980-4774f531d051",
@@ -1144,7 +1246,8 @@
     "phone": "405-521-5632",
     "photoUrl": "https://images.squarespace-cdn.com/content/v1/642c607b85563b44f0aa5800/5c9a6226-10da-4b2b-848d-746244b9e4ad/headshot+%28002%29.jpg",
     "website": "https://oksenate.gov/senators/kelly-hines",
-    "office": "Room 528.1, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 528.1, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "ballotpediaUrl": "https://ballotpedia.org/Kelly_Hines"
   },
   {
     "id": "ocd-person/428ba1b3-23b7-433a-8f18-ca53f6eed9aa",
@@ -1156,9 +1259,11 @@
     "party": "Republican",
     "email": "ken.luttrell@okhouse.gov",
     "phone": "405-557-7355",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Luttrell,%20Ken.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=37",
-    "office": "Room 405, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/ken-luttrell",
+    "office": "Room 405, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "districtOffice": "10 Ramblewood St., Ponca City, OK 74604",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ken_Luttrell",
+    "ballotpediaUrl": "https://ballotpedia.org/Ken_Luttrell"
   },
   {
     "id": "ocd-person/8a183515-ff32-4660-8e9c-1317f274a603",
@@ -1172,7 +1277,9 @@
     "phone": "405-521-5522",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/KendalSacchieri2024.jpg",
     "website": "https://oksenate.gov/senators/kendal-sacchieri",
-    "office": "Room 430, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 430, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kendal_Sacchieri",
+    "ballotpediaUrl": "https://ballotpedia.org/Kendal_Sacchieri"
   },
   {
     "id": "ocd-person/91b38015-8cd5-410e-b850-34961760b8d7",
@@ -1184,9 +1291,10 @@
     "party": "Republican",
     "email": "kenton.patzkowsky@okhouse.gov",
     "phone": "405-557-7384",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Kenton-Patzkowsky,.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=61",
-    "office": "Room 335, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/kenton-patzkowsky",
+    "office": "Room 335, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kenton_Patzkowsky",
+    "ballotpediaUrl": "https://ballotpedia.org/Kenton_Patzkowsky"
   },
   {
     "id": "ocd-person/7a7aca64-e9e6-465e-a423-6e4cf939c67a",
@@ -1198,8 +1306,11 @@
     "party": "Republican",
     "email": "kevin.norwood@okhouse.gov",
     "phone": "405-557-7377",
+    "photoUrl": "https://dgbf0g52sf9l0.cloudfront.net/medium_Norwood_Kevin_dfbc7ed28d.jpg",
     "website": "https://www.okhouse.gov/representatives/kevin-norwood",
-    "office": "Room 242, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 242, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kevin_Wayne_Norwood",
+    "ballotpediaUrl": "https://ballotpedia.org/Kevin_Norwood"
   },
   {
     "id": "ocd-person/fa002548-470f-4cf0-8365-f6f5aa0c50c7",
@@ -1211,9 +1322,10 @@
     "party": "Republican",
     "email": "kevin.west@okhouse.gov",
     "phone": "405-557-7343",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Kevin-West.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=54",
-    "office": "Room 540, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/kevin-west",
+    "office": "Room 540, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kevin_West_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Kevin_West"
   },
   {
     "id": "ocd-person/c768c730-142e-4582-a137-ee09a0240784",
@@ -1227,7 +1339,9 @@
     "phone": "405-521-5592",
     "photoUrl": "https://oksenate.gov/sites/default/files/Thompson%2C%20Kristen%20Flags%202022.jpg",
     "website": "https://oksenate.gov/contact-senator?sid=1523285",
-    "office": "Room 237, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 237, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kristen_Thompson",
+    "ballotpediaUrl": "https://ballotpedia.org/Kristen_Thompson"
   },
   {
     "id": "ocd-person/b0ab4df0-8cc1-43f6-9ed1-567b75e91468",
@@ -1239,9 +1353,10 @@
     "party": "Republican",
     "email": "kyle.hilbert@okhouse.gov",
     "phone": "405-557-7353",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Hilbert,%20Kyle.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=29",
-    "office": "Room 401, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/kyle-hilbert",
+    "office": "Room 401, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kyle_Hilbert",
+    "ballotpediaUrl": "https://ballotpedia.org/Kyle_Hilbert"
   },
   {
     "id": "ocd-person/6bf75215-5df0-4dfc-adfb-98c60a6871bd",
@@ -1253,9 +1368,10 @@
     "party": "Republican",
     "email": "lisa.standridge@oksenate.gov",
     "phone": "405-521-5535",
-    "photoUrl": "https://www.cairoklahoma.com/wp-content/uploads/2024/08/lisa-474x474.jpeg",
     "website": "https://oksenate.gov/senators/lisa-standridge",
-    "office": "Room 529.1, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 529.1, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lisa_Standridge",
+    "ballotpediaUrl": "https://ballotpedia.org/Lisa_Standridge"
   },
   {
     "id": "ocd-person/fe64cfd8-d85e-472e-8761-27b6a3774971",
@@ -1269,7 +1385,9 @@
     "phone": "405-521-5537",
     "photoUrl": "https://oksenate.gov/sites/default/files/paxton.jpg",
     "website": "https://oksenate.gov/contact-senator?sid=1893",
-    "office": "Room 422, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 422, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lonnie_Paxton",
+    "ballotpediaUrl": "https://ballotpedia.org/Lonnie_Paxton"
   },
   {
     "id": "ocd-person/aefe24ff-5a23-48bd-a5df-faa7b3dd0af9",
@@ -1281,9 +1399,10 @@
     "party": "Republican",
     "email": "marilyn.stark@okhouse.gov",
     "phone": "405-557-7403",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Stark,%20Marilyn.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=100",
-    "office": "Room 341, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/marilyn-stark",
+    "office": "Room 341, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Marilyn_Stark",
+    "ballotpediaUrl": "https://ballotpedia.org/Marilyn_Stark"
   },
   {
     "id": "ocd-person/a688f8ac-d265-4830-963f-617b726524ed",
@@ -1297,7 +1416,9 @@
     "phone": "405-557-7388",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/MarkChapman2024.JPG",
     "website": "https://www.okhouse.gov/representatives/mark-chapman",
-    "office": "Room 300, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 300, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mark_Chapman_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Mark_Chapman"
   },
   {
     "id": "ocd-person/97351530-ef54-4859-acdd-effcb11eaf1f",
@@ -1309,9 +1430,10 @@
     "party": "Republican",
     "email": "mark.lawson@okhouse.gov",
     "phone": "405-557-7414",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Lawson,%20Mark.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=30",
-    "office": "Room 200, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/mark-lawson",
+    "office": "Room 200, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mark_Lawson_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Mark_Lawson_(Oklahoma)"
   },
   {
     "id": "ocd-person/a1d5d401-d767-4088-b9b6-e03af9d5ed49",
@@ -1323,9 +1445,10 @@
     "party": "Republican",
     "email": "mark.lepak@okhouse.gov",
     "phone": "405-557-7380",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Lepak,%20Mark.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=9",
-    "office": "Room 453, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/mark-lepak",
+    "office": "Room 453, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mark_Lepak",
+    "ballotpediaUrl": "https://ballotpedia.org/Mark_Lepak"
   },
   {
     "id": "ocd-person/7bf07db8-9661-4f98-859d-9817cb4362dd",
@@ -1339,7 +1462,9 @@
     "phone": "405-521-5610",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Mark_Mann.png",
     "website": "https://oksenate.gov/senators/mark-mann",
-    "office": "Room 515.2, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 515.2, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mark_Mann_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Mark_Harold_Mann"
   },
   {
     "id": "ocd-person/6cac2a71-37ce-41be-8e9a-059f7a8667c5",
@@ -1351,9 +1476,10 @@
     "party": "Republican",
     "email": "mark.tedford@okhouse.gov",
     "phone": "405-557-7331",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Tedford,%20Mark.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=69",
-    "office": "Room 347, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/mark-tedford",
+    "office": "Room 347, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mark_Tedford",
+    "ballotpediaUrl": "https://ballotpedia.org/Mark_Tedford"
   },
   {
     "id": "ocd-person/0172970c-3434-470b-98c8-6f7f0b167afb",
@@ -1367,7 +1493,9 @@
     "phone": "405-521-5553",
     "photoUrl": "https://oksenate.gov/sites/default/files/Boren%2C%20Mary%20Flags%202022.jpg",
     "website": "https://oksenate.gov/contact-senator?sid=1841",
-    "office": "Room 514.1, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 514.1, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mary_B._Boren",
+    "ballotpediaUrl": "https://ballotpedia.org/Mary_Boren"
   },
   {
     "id": "ocd-person/190ef3e9-fdd4-4434-80da-06ebb08f2eaf",
@@ -1379,9 +1507,10 @@
     "party": "Republican",
     "email": "max.wolfley@okhouse.gov",
     "phone": "405-557-7314",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Wolfley,%20Max.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=95",
-    "office": "Room 346, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/max-wolfley",
+    "office": "Room 346, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Max_Wolfley",
+    "ballotpediaUrl": "https://ballotpedia.org/Max_Wolfley"
   },
   {
     "id": "ocd-person/4085a19f-1853-48e4-88c8-8b5b9089054a",
@@ -1393,9 +1522,10 @@
     "party": "Democratic",
     "email": "melissa.provenzano@okhouse.gov",
     "phone": "405-557-7330",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Melissa-Provenzano.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=79",
-    "office": "Room 543, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/melissa-provenzano",
+    "office": "Room 543, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Melissa_Provenzano",
+    "ballotpediaUrl": "https://ballotpedia.org/Melissa_Provenzano"
   },
   {
     "id": "ocd-person/e9c3844d-e861-4848-8737-539fdb553eb9",
@@ -1407,9 +1537,10 @@
     "party": "Democratic",
     "email": "meloyde.blancett@okhouse.gov",
     "phone": "405-557-7334",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Blancett,%20Meloyde.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=78",
-    "office": "Room 545, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/meloyde-blancett",
+    "office": "Room 545, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Meloyde_Blancett",
+    "ballotpediaUrl": "https://ballotpedia.org/Meloyde_Blancett"
   },
   {
     "id": "ocd-person/faabecda-dfa0-4995-b574-2b0a33b039ef",
@@ -1423,7 +1554,9 @@
     "phone": "405-521-5557",
     "photoUrl": "https://oksenate.gov/sites/default/files/Brooks%2C%20Michael%20Flags%202022.jpg",
     "website": "https://oksenate.gov/contact-senator?sid=1842",
-    "office": "Room 513, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 513, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Michael_Brooks-Jimenez",
+    "ballotpediaUrl": "https://ballotpedia.org/Michael_Brooks_(Oklahoma)"
   },
   {
     "id": "ocd-person/49a41053-6a43-44a8-92b9-9fd5e97a56fe",
@@ -1437,7 +1570,9 @@
     "phone": "405-521-5561",
     "photoUrl": "https://oksenate.gov/sites/default/files/Bergstrom%2C%20Micheal%202022%20flags.jpg",
     "website": "https://oksenate.gov/contact-senator?sid=1838",
-    "office": "Room 412, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 412, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Micheal_Bergstrom",
+    "ballotpediaUrl": "https://ballotpedia.org/Micheal_Bergstrom"
   },
   {
     "id": "ocd-person/5822cf27-1b1f-40bd-ace3-a06a7f304820",
@@ -1451,7 +1586,9 @@
     "phone": "405-557-7391",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/MichelleMcCane2024.jpg",
     "website": "https://www.okhouse.gov/representatives/michelle-mccane",
-    "office": "Room 503, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 503, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Michelle_McCane",
+    "ballotpediaUrl": "https://ballotpedia.org/Michelle_McCane"
   },
   {
     "id": "ocd-person/2c065b7f-f5eb-4c15-bd69-10a7fa339b28",
@@ -1463,9 +1600,10 @@
     "party": "Democratic",
     "email": "mickey.dollens@okhouse.gov",
     "phone": "405-557-7371",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Mickey-Dollens.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=93",
-    "office": "Room 501, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/mickey-dollens",
+    "office": "Room 501, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mickey_Dollens",
+    "ballotpediaUrl": "https://ballotpedia.org/Mickey_Dollens"
   },
   {
     "id": "ocd-person/527c315f-7d62-4de1-a543-6c81a0ac11a3",
@@ -1477,9 +1615,10 @@
     "party": "Republican",
     "email": "mike.dobrinski@okhouse.gov",
     "phone": "405-557-7407",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Dobrinski,%20Mike.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=59",
-    "office": "Room 300, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/mike-dobrinski",
+    "office": "Room 300, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mike_Dobrinski",
+    "ballotpediaUrl": "https://ballotpedia.org/Mike_Dobrinski"
   },
   {
     "id": "ocd-person/8746752e-619b-454d-9ef6-7f4434acdd71",
@@ -1493,7 +1632,9 @@
     "phone": "405-557-7311",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/MikeKelley2024.jpg",
     "website": "https://www.okhouse.gov/representatives/mike-kelley",
-    "office": "Room 248, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 248, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mike_Kelley_(Oklahoma_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Mike_Kelley_(Oklahoma)"
   },
   {
     "id": "ocd-person/65f17e9b-aa29-4241-80c8-a800aea8ddae",
@@ -1507,7 +1648,9 @@
     "phone": "405-557-7340",
     "photoUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6rbtW0elpYl-o3FI3jbR9-PkUylFA7p5-Ig&s",
     "website": "https://www.okhouse.gov/representatives/mike-lay",
-    "office": "Room 260, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 260, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mike_Lay",
+    "ballotpediaUrl": "https://ballotpedia.org/Mike_Lay"
   },
   {
     "id": "ocd-person/95734f94-939c-4774-82a5-c9222201f62f",
@@ -1519,9 +1662,10 @@
     "party": "Republican",
     "email": "mike.osburn@okhouse.gov",
     "phone": "405-557-7360",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Osburn,%20Mike.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=81",
-    "office": "Room 246, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/mike-osburn",
+    "office": "Room 246, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mike_Osburn",
+    "ballotpediaUrl": "https://ballotpedia.org/Mike_Osburn"
   },
   {
     "id": "ocd-person/82b98199-7b85-488b-b5e8-7f135aad668f",
@@ -1535,7 +1679,9 @@
     "phone": "405-557-7304",
     "photoUrl": "https://www.cushingcitizen.com/sites/cushingcitizen.com/files/styles/article_420/public/3d8c9a84be_Ar00503010.jpg?itok=QUjuCFyZ",
     "website": "https://www.okhouse.gov/representatives/molly-jenkins",
-    "office": "Room 340, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 340, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Molly_Jenkins",
+    "ballotpediaUrl": "https://ballotpedia.org/Molly_Jenkins"
   },
   {
     "id": "ocd-person/3eb936f1-5bc8-40bb-832e-c617d461115c",
@@ -1547,9 +1693,10 @@
     "party": "Republican",
     "email": "neil.hays@okhouse.gov",
     "phone": "405-557-7302",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Hays,%20Neil.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=13",
-    "office": "Room 302, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/neil-hays",
+    "office": "Room 302, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Neil_Hays",
+    "ballotpediaUrl": "https://ballotpedia.org/Neil_Hays"
   },
   {
     "id": "ocd-person/479b4def-b284-426b-8290-86bdce854bce",
@@ -1561,9 +1708,10 @@
     "party": "Republican",
     "email": "nick.archer@okhouse.gov",
     "phone": "405-557-7312",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Archer,%20Nick.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=55",
-    "office": "Room 202, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/nick-archer",
+    "office": "Room 202, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Nick_Archer_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Nick_Archer"
   },
   {
     "id": "ocd-person/4af77a1a-7011-4901-89fe-4619d558d34c",
@@ -1575,9 +1723,10 @@
     "party": "Republican",
     "email": "nicole.miller@okhouse.gov",
     "phone": "405-557-7357",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Nicole-Miller.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=82",
-    "office": "Room 405, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/nicole-miller",
+    "office": "Room 405, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Nicole_Miller_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Nicole_Miller_(Oklahoma)"
   },
   {
     "id": "ocd-person/365647a0-0840-4a40-aac8-697ab21dbcd5",
@@ -1591,7 +1740,9 @@
     "phone": "405-521-5531",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/008O6811.jpg",
     "website": "https://oksenate.gov/senators/nikki-nice",
-    "office": "Room 515.1, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 515.1, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Nikki_Nice",
+    "ballotpediaUrl": "https://ballotpedia.org/Nikki_Nice"
   },
   {
     "id": "ocd-person/0388a9a8-8de3-4620-8c44-e887e0f1cecd",
@@ -1601,11 +1752,13 @@
     "chamber": "upper",
     "district": "45",
     "party": "Republican",
-    "email": "rosino@oksenate.gov",
+    "email": "paul.rosino@oksenate.gov",
     "phone": "405-521-5618",
     "photoUrl": "https://oksenate.gov/sites/default/files/Rosino%2C%20Paul%20Flags%202022.jpg",
     "website": "https://oksenate.gov/contact-senator?sid=1902",
-    "office": "Room 232, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 232, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Paul_Rosino",
+    "ballotpediaUrl": "https://ballotpedia.org/Paul_Rosino"
   },
   {
     "id": "ocd-person/016593c8-d702-434a-ba7c-aee48b14b6b3",
@@ -1617,9 +1770,10 @@
     "party": "Republican",
     "email": "preston.stinson@okhouse.gov",
     "phone": "405-557-7400",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Stinson,%20Preston.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=96",
-    "office": "Room 202, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/preston-stinson",
+    "office": "Room 202, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Preston_Stinson",
+    "ballotpediaUrl": "https://ballotpedia.org/Preston_Stinson"
   },
   {
     "id": "ocd-person/cfa7e540-ce4e-4230-9f82-9784d11733cb",
@@ -1631,9 +1785,10 @@
     "party": "Republican",
     "email": "rande.worthen@okhouse.gov",
     "phone": "405-557-7398",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Rande-Worthen.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=64",
-    "office": "Room 302, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/rande-worthen",
+    "office": "Room 302, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rande_Worthen",
+    "ballotpediaUrl": "https://ballotpedia.org/Rande_Worthen"
   },
   {
     "id": "ocd-person/812abf8c-ed2d-4b91-8d69-0917a39adeed",
@@ -1647,7 +1802,9 @@
     "phone": "405-521-5572",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/RandyGrellner2024.jpg",
     "website": "https://oksenate.gov/senators/randy-grellner",
-    "office": "Room 531, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 531, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Randy_Grellner",
+    "ballotpediaUrl": "https://ballotpedia.org/Randy_Grellner"
   },
   {
     "id": "ocd-person/2d438999-104f-4405-8cdc-d53ba4715a19",
@@ -1659,9 +1816,10 @@
     "party": "Democratic",
     "email": "regina.goodwin@oksenate.gov",
     "phone": "405-521-5598",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Goodwin,%20Regina.jpg",
     "website": "https://oksenate.gov/senators/regina-goodwin",
-    "office": "Room 524, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 524, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Regina_Goodwin",
+    "ballotpediaUrl": "https://ballotpedia.org/Regina_Goodwin"
   },
   {
     "id": "ocd-person/bae91554-72c9-4dbd-b042-b4bd800e4732",
@@ -1673,9 +1831,10 @@
     "party": "Republican",
     "email": "rick.west@okhouse.gov",
     "phone": "405-557-7413",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/West,%20Rick.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=3",
-    "office": "Room 330, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/rick-west",
+    "office": "Room 330, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rick_West_(Oklahoma_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Rick_West_(Oklahoma)"
   },
   {
     "id": "ocd-person/a73e2372-a002-448b-afbb-31398aed55b1",
@@ -1689,7 +1848,9 @@
     "phone": "405-557-7341",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/rhall.jpg",
     "website": "https://www.okhouse.gov/representatives/rob-hall",
-    "office": "Room 260, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 260, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rob_Hall_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Rob_Hall"
   },
   {
     "id": "ocd-person/a865c489-d177-4058-af64-51c2f0abef68",
@@ -1701,9 +1862,10 @@
     "party": "Republican",
     "email": "robert.manger@okhouse.gov",
     "phone": "405-557-7395",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Manger,%20Robert.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=101",
-    "office": "Room 464, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/robert-manger",
+    "office": "Room 464, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Robert_Manger",
+    "ballotpediaUrl": "https://ballotpedia.org/Robert_Manger"
   },
   {
     "id": "ocd-person/c0db5455-8d12-4525-ab57-afa8ed7e1d7f",
@@ -1717,7 +1879,9 @@
     "phone": "405-521-5630",
     "photoUrl": "https://oksenate.gov/sites/default/files/Pederson%2C%20Roland%202022%20flags.jpg",
     "website": "https://oksenate.gov/contact-senator?sid=1892",
-    "office": "Room 418, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 418, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Roland_Pederson",
+    "ballotpediaUrl": "https://ballotpedia.org/Roland_Pederson"
   },
   {
     "id": "ocd-person/bdd6a3f7-c76a-459e-aad3-e833a9e110f8",
@@ -1731,7 +1895,9 @@
     "phone": "405-557-7406",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/RonStewart2024.jpg",
     "website": "https://www.okhouse.gov/representatives/ronald-stewart",
-    "office": "Room 511, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 511, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ron_Stewart_(Oklahoma_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Ron_Stewart"
   },
   {
     "id": "ocd-person/e5d78f97-752b-4bff-a413-4704ed7c230a",
@@ -1743,9 +1909,10 @@
     "party": "Republican",
     "email": "ronny.johns@okhouse.gov",
     "phone": "405-557-7336",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Johns,%20Ronny.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=25",
-    "office": "Room 248, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/ronny-johns",
+    "office": "Room 248, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ronny_Johns",
+    "ballotpediaUrl": "https://ballotpedia.org/Ronny_Johns"
   },
   {
     "id": "ocd-person/a6aa7540-02db-458d-9031-e6af94d63b44",
@@ -1757,9 +1924,10 @@
     "party": "Republican",
     "email": "ross.ford@okhouse.gov",
     "phone": "405-557-7347",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Ford,%20Ross.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=76",
-    "office": "Room 300, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/ross-ford",
+    "office": "Room 300, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ross_Ford_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Ross_Ford_(Oklahoma)"
   },
   {
     "id": "ocd-person/818eac04-d5b7-49be-b740-84a8432cf5b3",
@@ -1771,9 +1939,10 @@
     "party": "Republican",
     "email": "rusty.cornwell@okhouse.gov",
     "phone": "405-557-7319",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Cornwell,%20Rusty.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=6",
-    "office": "Room 304, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/rusty-cornwell",
+    "office": "Room 304, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rusty_Cornwell",
+    "ballotpediaUrl": "https://ballotpedia.org/Rusty_Cornwell"
   },
   {
     "id": "ocd-person/f61f3be0-ac28-411d-9641-917af1eb6753",
@@ -1787,7 +1956,25 @@
     "phone": "405-557-7412",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/RyanEaves2024.jpg",
     "website": "https://www.okhouse.gov/representatives/ryan-eaves",
-    "office": "Room 547, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 547, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ryan_Eaves",
+    "ballotpediaUrl": "https://ballotpedia.org/Ryan_Eaves"
+  },
+  {
+    "id": "ocd-person/2e541dab-e87d-431a-91f5-e524aa301d5f",
+    "name": "Sam Wargin Grimaldo",
+    "firstName": "Sam",
+    "lastName": "Wargin Grimaldo",
+    "chamber": "lower",
+    "district": "92",
+    "party": "Democratic",
+    "email": "sam.wargingrimaldo@okhouse.gov",
+    "phone": "405-557-7404",
+    "photoUrl": "https://dgbf0g52sf9l0.cloudfront.net/medium_Wargin_Grimaldo_Sam_0849df57c1.jpg",
+    "website": "https://www.okhouse.gov/representatives/sam-wargingrimaldo",
+    "office": "Room 501, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sam_Wargin_Grimaldo",
+    "ballotpediaUrl": "https://ballotpedia.org/Sam_Wargin_Grimaldo"
   },
   {
     "id": "ocd-person/a2be8726-7870-43b3-bbac-381824466f9c",
@@ -1799,9 +1986,10 @@
     "party": "Republican",
     "email": "scott.fetgatter@okhouse.gov",
     "phone": "405-557-7373",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Fetgatter,%20Scott.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=16",
-    "office": "Room 455, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/scott-fetgatter",
+    "office": "Room 455, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Scott_Fetgatter",
+    "ballotpediaUrl": "https://ballotpedia.org/Scott_Fetgatter"
   },
   {
     "id": "ocd-person/97650810-9219-451e-97d1-e3d3318c5d53",
@@ -1815,7 +2003,9 @@
     "phone": "405-521-5539",
     "photoUrl": "https://oksenate.gov/sites/default/files/Jett%2C%20Shane_flags.jpg",
     "website": "https://oksenate.gov/contact-senator?sid=1521375",
-    "office": "Room 417, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 417, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Shane_Jett",
+    "ballotpediaUrl": "https://ballotpedia.org/Shane_Jett"
   },
   {
     "id": "ocd-person/4d4f5043-830c-498d-806c-5b1e9eb183df",
@@ -1829,7 +2019,9 @@
     "phone": "405-521-5563",
     "photoUrl": "https://static.votesmart.org/static/canphoto/216441.jpg",
     "website": "https://oksenate.gov/senators/spencer-kern",
-    "office": "Room 432, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 432, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Spencer_Kern",
+    "ballotpediaUrl": "https://ballotpedia.org/Spencer_Kern"
   },
   {
     "id": "ocd-person/d93d9d8d-1299-423a-bb9e-ade2bcb0fa11",
@@ -1843,7 +2035,8 @@
     "phone": "405-557-7327",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/StacyAdams2024.png",
     "website": "https://www.okhouse.gov/representatives/stacy-adams",
-    "office": "Room 332, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 332, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "ballotpediaUrl": "https://ballotpedia.org/Stacy_Adams"
   },
   {
     "id": "ocd-person/1ba99d3e-ebea-4426-b91a-0560da625e83",
@@ -1855,9 +2048,10 @@
     "party": "Republican",
     "email": "stan.may@okhouse.gov",
     "phone": "405-557-7338",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/May,%20Stan.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=80",
-    "office": "Room 300, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/stan-may",
+    "office": "Room 300, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Stan_May",
+    "ballotpediaUrl": "https://ballotpedia.org/Stan_May"
   },
   {
     "id": "ocd-person/bf810dce-34f8-4db5-b242-efc008311228",
@@ -1869,9 +2063,10 @@
     "party": "Republican",
     "email": "steve.bashore@okhouse.gov",
     "phone": "405-557-7399",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Bashore,%20Steve.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=7",
-    "office": "Room 456, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/steve-bashore",
+    "office": "Room 456, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Steve_Bashore",
+    "ballotpediaUrl": "https://ballotpedia.org/Steve_Bashore"
   },
   {
     "id": "ocd-person/3d8b5070-b96a-4976-b886-e889214ffd0b",
@@ -1883,9 +2078,10 @@
     "party": "Democratic",
     "email": "suzanne.schreiber@okhouse.gov",
     "phone": "405-557-7359",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Schreiber,%20Suzanne.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=70",
-    "office": "Room 541, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/suzanne-schreiber",
+    "office": "Room 541, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Suzanne_Schreiber",
+    "ballotpediaUrl": "https://ballotpedia.org/Suzanne_Schreiber"
   },
   {
     "id": "ocd-person/71996394-7250-43ab-b69f-8c0afa3b144a",
@@ -1897,9 +2093,10 @@
     "party": "Republican",
     "email": "tj.marti@okhouse.gov",
     "phone": "405-557-7356",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Marti,%20TJ.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=75",
-    "office": "Room 500, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/tj-marti",
+    "office": "Room 500, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/T._J._Marti",
+    "ballotpediaUrl": "https://ballotpedia.org/T._Marti"
   },
   {
     "id": "ocd-person/1d6bc21f-6774-45de-b805-23cd8b5c32aa",
@@ -1911,9 +2108,10 @@
     "party": "Republican",
     "email": "tammy.townley@okhouse.gov",
     "phone": "405-557-7326",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Townley,%20Tammy.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=48",
-    "office": "Room 303, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/tammy-townley",
+    "office": "Room 303, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tammy_Townley",
+    "ballotpediaUrl": "https://ballotpedia.org/Tammy_Townley"
   },
   {
     "id": "ocd-person/8a0a65fd-9a33-4f93-a94a-131e0ec39e6b",
@@ -1925,9 +2123,10 @@
     "party": "Republican",
     "email": "tammy.west@okhouse.gov",
     "phone": "405-557-7348",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Tammy-West.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=84",
-    "office": "Room 407, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/tammy-west",
+    "office": "Room 407, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tammy_West",
+    "ballotpediaUrl": "https://ballotpedia.org/Tammy_West"
   },
   {
     "id": "ocd-person/d3bf80d0-be37-4e25-b7c6-7e30e54fe158",
@@ -1941,7 +2140,9 @@
     "phone": "405-557-7375",
     "photoUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdKW8Yps28Qqd_HZ-KGr8HDljGbqjeswJrSA&s",
     "website": "https://www.okhouse.gov/representatives/tim-turner",
-    "office": "Room 500, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 500, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tim_Turner_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Tim_Turner_(Oklahoma)"
   },
   {
     "id": "ocd-person/54d37a3d-68cb-4e87-9916-c38f2f0f8ed3",
@@ -1955,7 +2156,9 @@
     "phone": "405-521-5528",
     "photoUrl": "https://oksenate.gov/sites/default/files/Gollihare%2C%20Todd%20Flags%202022.jpg",
     "website": "https://oksenate.gov/contact-senator?sid=1523282",
-    "office": "Room 429, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 429, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Todd_Gollihare",
+    "ballotpediaUrl": "https://ballotpedia.org/Todd_Gollihare"
   },
   {
     "id": "ocd-person/fc634688-e6d0-4b9b-919c-0c1f001d51a7",
@@ -1967,9 +2170,10 @@
     "party": "Republican",
     "email": "tom.gann@okhouse.gov",
     "phone": "405-557-7364",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Gann,%20Tom.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=8",
-    "office": "Room 334, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/tom-gann",
+    "office": "Room 334, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tom_Gann",
+    "ballotpediaUrl": "https://ballotpedia.org/Tom_Gann"
   },
   {
     "id": "ocd-person/9b993707-70c1-4e3f-96ee-4257c0cf04e6",
@@ -1983,7 +2187,9 @@
     "phone": "405-521-5576",
     "photoUrl": "https://oksenate.gov/sites/default/files/Woods%2C%20Tom%20Flags%202022.jpg",
     "website": "https://oksenate.gov/contact-senator?sid=1523280",
-    "office": "Room 526, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 526, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tom_Woods_(Oklahoma_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Tom_Woods_(Oklahoma)"
   },
   {
     "id": "ocd-person/25f65ce4-eb63-4beb-92d0-0d07db7f851a",
@@ -1995,9 +2201,10 @@
     "party": "Republican",
     "email": "toni.hasenbeck@okhouse.gov",
     "phone": "405-557-7305",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Hasenbeck,%20Toni.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=65",
-    "office": "Room 244, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/toni-hasenbeck",
+    "office": "Room 244, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Toni_Hasenbeck",
+    "ballotpediaUrl": "https://ballotpedia.org/Toni_Hasenbeck"
   },
   {
     "id": "ocd-person/da01678a-03b7-4c2f-b93b-f98338c638b0",
@@ -2009,9 +2216,10 @@
     "party": "Republican",
     "email": "trey.caldwell@okhouse.gov",
     "phone": "405-557-7307",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Caldwell,%20Trey.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=63",
-    "office": "Room 451, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/trey-caldwell",
+    "office": "Room 451, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Trey_Caldwell_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Hurchel_T._Caldwell"
   },
   {
     "id": "ocd-person/d3a66cdd-0469-4c20-90da-620f60c4b4be",
@@ -2023,9 +2231,10 @@
     "party": "Democratic",
     "email": "trish.ranson@okhouse.gov",
     "phone": "405-557-7411",
-    "photoUrl": "https://www.okhouse.gov/Members/Pictures/HiRes/Ranson,%20Trish.jpg",
-    "website": "https://www.okhouse.gov/Members/Contact.aspx?District=34",
-    "office": "Room 602, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "website": "https://www.okhouse.gov/representatives/trish-ranson",
+    "office": "Room 602, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Trish_Ranson",
+    "ballotpediaUrl": "https://ballotpedia.org/Trish_Ranson"
   },
   {
     "id": "ocd-person/48d6aa7c-97e1-4c69-8014-8818ae9ad055",
@@ -2039,6 +2248,8 @@
     "phone": "405-521-5604",
     "photoUrl": "https://oksenate.gov/sites/default/files/Hamilton%2C%20Warren%202022%20flags.jpg",
     "website": "https://oksenate.gov/contact-senator?sid=1521374",
-    "office": "Room 416, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105"
+    "office": "Room 416, 2300 N. Lincoln Blvd., Oklahoma City, OK 73105",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Warren_Hamilton",
+    "ballotpediaUrl": "https://ballotpedia.org/Warren_Hamilton"
   }
 ]

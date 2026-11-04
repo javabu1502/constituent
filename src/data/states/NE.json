@@ -9,8 +9,11 @@
     "party": "Nonpartisan",
     "email": "aspivey@leg.ne.gov",
     "phone": "402-471-2727",
+    "photoUrl": "https://www.nebraskalegislature.gov/media/images/senators/dist13/highres/dist13.jpg",
     "website": "https://nebraskalegislature.gov/senators/landing-pages/index.php?District=13",
-    "office": "State Capitol Room 1120, P.O. Box 94604, Lincoln, NE 68509"
+    "office": "State Capitol Room 1120, P.O. Box 94604, Lincoln, NE 68509",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ashlei_Spivey",
+    "ballotpediaUrl": "https://ballotpedia.org/Ashlei_Spivey"
   },
   {
     "id": "ocd-person/01d5ca17-53a1-463a-b2f6-74fe24833c0f",
@@ -20,11 +23,13 @@
     "chamber": "legislature",
     "district": "40",
     "party": "Nonpartisan",
-    "email": "bdekay@leg.ne.gov",
+    "email": "barry.dekay@leg.ne.gov",
     "phone": "402-471-2801",
     "photoUrl": "https://www.nebraskalegislature.gov/media/images/senators/dist40/highres/dist40.jpg",
     "website": "https://nebraskalegislature.gov/senators/landing-pages/index.php?District=40",
-    "office": "State Capitol Room 1022, P.O. Box 94604, Lincoln, NE 68509"
+    "office": "State Capitol Room 1022, P.O. Box 94604, Lincoln, NE 68509",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Barry_DeKay",
+    "ballotpediaUrl": "https://ballotpedia.org/Barry_DeKay"
   },
   {
     "id": "ocd-person/3da787e9-f6ed-4069-bd74-58ec7c015efb",
@@ -34,11 +39,13 @@
     "chamber": "legislature",
     "district": "21",
     "party": "Nonpartisan",
-    "email": "bballard@leg.ne.gov",
+    "email": "beau.ballard@leg.ne.gov",
     "phone": "402-471-2673",
     "photoUrl": "https://www.nebraskalegislature.gov/media/images/senators/dist21/highres/dist21.jpg",
     "website": "https://nebraskalegislature.gov/senators/landing-pages/index.php?District=21",
-    "office": "State Capitol Room 1101, P.O. Box 94604, Lincoln, NE 68509"
+    "office": "State Capitol Room 1101, P.O. Box 94604, Lincoln, NE 68509",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Beau_Ballard",
+    "ballotpediaUrl": "https://ballotpedia.org/Beau_Ballard"
   },
   {
     "id": "ocd-person/bfc9dd37-6a7b-4ea2-acf5-c8e161a27764",
@@ -48,11 +55,15 @@
     "chamber": "legislature",
     "district": "16",
     "party": "Nonpartisan",
-    "email": "bhansen@leg.ne.gov",
+    "email": "ben.hansen@leg.ne.gov",
     "phone": "402-471-2728",
     "photoUrl": "https://www.nebraskalegislature.gov/media/images/senators/dist16/highres/dist16.jpg",
     "website": "https://nebraskalegislature.gov/senators/landing-pages/index.php?District=16",
-    "office": "State Capitol Room 2108, P.O. Box 94604, Lincoln, NE 68509"
+    "office": "State Capitol Room 2108, P.O. Box 94604, Lincoln, NE 68509",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ben_Hansen",
+    "ballotpediaUrl": "https://ballotpedia.org/Ben_Hansen",
+    "twitter": "BenWHansen",
+    "facebook": "BenHansenforNebraska"
   },
   {
     "id": "ocd-person/db002bad-ee6a-4e22-b5c5-840c665ecad4",
@@ -62,11 +73,14 @@
     "chamber": "legislature",
     "district": "49",
     "party": "Nonpartisan",
-    "email": "bandersen@leg.ne.gov",
+    "email": "bob.andersen@leg.ne.gov",
     "phone": "402-471-2725",
     "photoUrl": "https://storage.googleapis.com/enview-dev-public-general/legislative-people-photos/167021.jpg",
     "website": "https://nebraskalegislature.gov/senators/landing-pages/index.php?District=49",
-    "office": "State Capitol Room 1021, P.O. Box 94604, Lincoln, NE 68509"
+    "office": "State Capitol Room 2012, P.O. Box 94604, Lincoln, NE 68509",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bob_Andersen_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Bob_Andersen_(Nebraska_State_Senate_candidate)",
+    "facebook": "Bob4NE"
   },
   {
     "id": "ocd-person/cc0182c9-3cfe-46b1-8fd2-03e90385c6d5",
@@ -78,8 +92,12 @@
     "party": "Nonpartisan",
     "email": "bhallstrom@leg.ne.gov",
     "phone": "402-471-2733",
+    "photoUrl": "https://www.nebraskalegislature.gov/media/images/senators/dist01/highres/dist01.jpg",
     "website": "https://nebraskalegislature.gov/senators/landing-pages/index.php?District=1",
-    "office": "State Capitol Room 1404, P.O. Box 94604, Lincoln, NE 68509"
+    "office": "State Capitol Room 1404, P.O. Box 94604, Lincoln, NE 68509",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Robert_Hallstrom",
+    "ballotpediaUrl": "https://ballotpedia.org/Robert_Hallstrom",
+    "facebook": "bobhallstromforlegislature"
   },
   {
     "id": "ocd-person/a98b3cf6-9bf8-40a3-94f3-1c196e233ebd",
@@ -93,7 +111,10 @@
     "phone": "402-471-2802",
     "photoUrl": "https://www.nebraskalegislature.gov/media/images/senators/dist48/highres/dist48.jpg",
     "website": "https://nebraskalegislature.gov/senators/landing-pages/index.php?District=48",
-    "office": "State Capitol Room 1402, P.O. Box 94604, Lincoln, NE 68509"
+    "office": "State Capitol Room 1021, P.O. Box 94604, Lincoln, NE 68509",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Brian_Hardin",
+    "ballotpediaUrl": "https://ballotpedia.org/Brian_Hardin",
+    "facebook": "brianhardin2022"
   },
   {
     "id": "ocd-person/ecf3913e-8e18-4aec-8991-12549df820cd",
@@ -107,7 +128,11 @@
     "phone": "402-471-2731",
     "photoUrl": "https://www.nebraskalegislature.gov/media/images/senators/dist25/highres/dist25.jpg",
     "website": "https://nebraskalegislature.gov/senators/landing-pages/index.php?District=25",
-    "office": "State Capitol Room 1103, P.O. Box 94604, Lincoln, NE 68509"
+    "office": "State Capitol Room 1103, P.O. Box 94604, Lincoln, NE 68509",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Carolyn_Bosn",
+    "ballotpediaUrl": "https://ballotpedia.org/Carolyn_Bosn",
+    "twitter": "SenCarolynBosn",
+    "facebook": "SenatorBosn"
   },
   {
     "id": "ocd-person/fdac2d3a-3497-4e34-8247-af670c901dd8",
@@ -121,7 +146,10 @@
     "phone": "402-471-2618",
     "photoUrl": "https://www.nebraskalegislature.gov/media/images/senators/dist18/highres/dist18.jpg",
     "website": "https://nebraskalegislature.gov/senators/landing-pages/index.php?District=18",
-    "office": "State Capitol Room 1423, P.O. Box 94604, Lincoln, NE 68509"
+    "office": "State Capitol Room 1423, P.O. Box 94604, Lincoln, NE 68509",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Christy_Armendariz",
+    "ballotpediaUrl": "https://ballotpedia.org/Christy_Armendariz",
+    "facebook": "ChristyforNE"
   },
   {
     "id": "ocd-person/40eb4961-5467-4d1b-af44-59a2e4de6fae",
@@ -131,11 +159,13 @@
     "chamber": "legislature",
     "district": "33",
     "party": "Nonpartisan",
-    "email": "dlonowski@leg.ne.gov",
+    "email": "dan.lonowski@leg.ne.gov",
     "phone": "402-471-2712",
     "photoUrl": "https://storage.googleapis.com/enview-dev-public-general/legislative-people-photos/167026.jpg",
     "website": "https://nebraskalegislature.gov/senators/landing-pages/index.php?District=33",
-    "office": "State Capitol Room 1017, P.O. Box 94604, Lincoln, NE 68509"
+    "office": "State Capitol Room 1017, P.O. Box 94604, Lincoln, NE 68509",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dan_Lonowski",
+    "ballotpediaUrl": "https://ballotpedia.org/Dan_Lonowski"
   },
   {
     "id": "ocd-person/d3b8ad26-4cf1-4abf-ae4e-0f7a65f92fe6",
@@ -145,11 +175,14 @@
     "chamber": "legislature",
     "district": "35",
     "party": "Nonpartisan",
-    "email": "dquick@leg.ne.gov",
+    "email": "dan.quick@leg.ne.gov",
     "phone": "402-471-2617",
     "photoUrl": "http://www.nebraskalegislature.gov/media/images/blogs/dist35.jpg",
     "website": "https://nebraskalegislature.gov/senators/landing-pages/index.php?District=35",
-    "office": "State Capitol Room 2004, P.O. Box 94604, Lincoln, NE 68509"
+    "office": "State Capitol Room 2004, P.O. Box 94604, Lincoln, NE 68509",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dan_Quick",
+    "ballotpediaUrl": "https://ballotpedia.org/Dan_Quick",
+    "facebook": "votedanquick"
   },
   {
     "id": "ocd-person/bf280e36-3547-4d6a-b5aa-d6c32bb5547a",
@@ -159,11 +192,15 @@
     "chamber": "legislature",
     "district": "46",
     "party": "Nonpartisan",
-    "email": "dconrad@leg.ne.gov",
+    "email": "danielle.conrad@leg.ne.gov",
     "phone": "402-471-2720",
     "photoUrl": "https://www.nebraskalegislature.gov/media/images/senators/dist46/highres/dist46.jpg",
     "website": "https://nebraskalegislature.gov/senators/landing-pages/index.php?District=46",
-    "office": "State Capitol Room 2028, P.O. Box 94604, Lincoln, NE 68509"
+    "office": "State Capitol Room 2028, P.O. Box 94604, Lincoln, NE 68509",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Danielle_Conrad",
+    "ballotpediaUrl": "https://ballotpedia.org/Danielle_Conrad",
+    "twitter": "SenConrad",
+    "facebook": "ConradforLegislature"
   },
   {
     "id": "ocd-person/25c29fce-5de4-46cd-97f0-887033d446ce",
@@ -173,11 +210,14 @@
     "chamber": "legislature",
     "district": "38",
     "party": "Nonpartisan",
-    "email": "dmurman@leg.ne.gov",
+    "email": "dave.murman@leg.ne.gov",
     "phone": "402-471-2732",
     "photoUrl": "https://www.nebraskalegislature.gov/media/images/senators/dist38/highres/dist38.jpg",
     "website": "https://nebraskalegislature.gov/senators/landing-pages/index.php?District=38",
-    "office": "State Capitol Room 1107, P.O. Box 94604, Lincoln, NE 68509"
+    "office": "State Capitol Room 1107, P.O. Box 94604, Lincoln, NE 68509",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dave_Murman",
+    "ballotpediaUrl": "https://ballotpedia.org/Dave_Murman",
+    "facebook": "senatormurman"
   },
   {
     "id": "ocd-person/54fe68ba-6857-483f-b2ae-ba3233a548c4",
@@ -191,7 +231,10 @@
     "phone": "402-471-2721",
     "photoUrl": "https://storage.googleapis.com/enview-dev-public-general/legislative-people-photos/161473.jpg",
     "website": "https://nebraskalegislature.gov/senators/landing-pages/index.php?District=7",
-    "office": "State Capitol Room 1523, P.O. Box 94604, Lincoln, NE 68509"
+    "office": "State Capitol Room 1523, P.O. Box 94604, Lincoln, NE 68509",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dunixi_Guereca",
+    "ballotpediaUrl": "https://ballotpedia.org/Dunixi_Guereca",
+    "facebook": "DunixiGuerecaNE"
   },
   {
     "id": "ocd-person/5e6ca662-d4e3-405b-a060-d0150546eede",
@@ -201,11 +244,15 @@
     "chamber": "legislature",
     "district": "29",
     "party": "Nonpartisan",
-    "email": "ebostar@leg.ne.gov",
+    "email": "eliot.bostar@leg.ne.gov",
     "phone": "402-471-2734",
     "photoUrl": "https://www.nebraskalegislature.gov/media/images/senators/dist29/highres/dist29.jpg",
     "website": "https://nebraskalegislature.gov/senators/landing-pages/index.php?District=29",
-    "office": "State Capitol Room 1012, P.O. Box 94604, Lincoln, NE 68509"
+    "office": "State Capitol Room 1012, P.O. Box 94604, Lincoln, NE 68509",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Eliot_Bostar",
+    "ballotpediaUrl": "https://ballotpedia.org/Eliot_Bostar",
+    "twitter": "BostarEliot",
+    "facebook": "votebostar"
   },
   {
     "id": "ocd-person/5868ed3b-2931-4080-a7c2-9b4eb0e3d487",
@@ -219,7 +266,9 @@
     "phone": "402-471-2631",
     "photoUrl": "https://www.nebraskalegislature.gov/media/images/senators/dist41/highres/dist41.jpg",
     "website": "https://nebraskalegislature.gov/senators/landing-pages/index.php?District=41",
-    "office": "State Capitol Room 1529, P.O. Box 94604, Lincoln, NE 68509"
+    "office": "State Capitol Room 1529, P.O. Box 94604, Lincoln, NE 68509",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Fred_Meyer_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Fred_Meyer"
   },
   {
     "id": "ocd-person/14507b1b-007f-4f87-adbb-a5e4669efba8",
@@ -229,11 +278,15 @@
     "chamber": "legislature",
     "district": "26",
     "party": "Nonpartisan",
-    "email": "gdungan@leg.ne.gov",
+    "email": "george.dungan@leg.ne.gov",
     "phone": "402-471-2610",
     "photoUrl": "https://www.nebraskalegislature.gov/media/images/senators/dist26/highres/dist26.jpg",
     "website": "https://nebraskalegislature.gov/senators/landing-pages/index.php?District=26",
-    "office": "State Capitol Room 1016, P.O. Box 94604, Lincoln, NE 68509"
+    "office": "State Capitol Room 1016, P.O. Box 94604, Lincoln, NE 68509",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/George_Dungan_III",
+    "ballotpediaUrl": "https://ballotpedia.org/George_Dungan_III",
+    "twitter": "George4NE",
+    "facebook": "George4Ne"
   },
   {
     "id": "ocd-person/dae0883f-3a53-4873-99df-b0e10ea64066",
@@ -243,10 +296,14 @@
     "chamber": "legislature",
     "district": "17",
     "party": "Nonpartisan",
-    "email": "gmeyer@leg.ne.gov",
+    "email": "glen.meyer@leg.ne.gov",
     "phone": "402-471-2716",
+    "photoUrl": "https://www.nebraskalegislature.gov/media/images/senators/dist17/highres/dist17.jpg",
     "website": "https://nebraskalegislature.gov/senators/landing-pages/index.php?District=17",
-    "office": "State Capitol Room 1202, P.O. Box 94604, Lincoln, NE 68509"
+    "office": "State Capitol Room 1202, P.O. Box 94604, Lincoln, NE 68509",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Glen_Meyer",
+    "ballotpediaUrl": "https://ballotpedia.org/Glen_Meyer",
+    "facebook": "MeyerForLegislature"
   },
   {
     "id": "ocd-person/967bf436-18bf-444e-bd2f-d83e5ec78995",
@@ -260,7 +317,9 @@
     "phone": "402-471-2756",
     "photoUrl": "https://www.nebraskalegislature.gov/media/images/senators/dist24/highres/dist24.jpg",
     "website": "https://nebraskalegislature.gov/senators/landing-pages/index.php?District=24",
-    "office": "State Capitol Room 1212, P.O. Box 94604, Lincoln, NE 68509"
+    "office": "State Capitol Room 1212, P.O. Box 94604, Lincoln, NE 68509",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jana_Hughes",
+    "ballotpediaUrl": "https://ballotpedia.org/Jana_Hughes"
   },
   {
     "id": "ocd-person/0f176ff3-ed75-4605-9e8b-5bb5a3d3c4cf",
@@ -270,11 +329,15 @@
     "chamber": "legislature",
     "district": "28",
     "party": "Nonpartisan",
-    "email": "jraybould@leg.ne.gov",
+    "email": "jane.raybould@leg.ne.gov",
     "phone": "402-471-2633",
     "photoUrl": "https://www.nebraskalegislature.gov/media/images/senators/dist28/highres/dist28.jpg",
     "website": "https://nebraskalegislature.gov/senators/landing-pages/index.php?District=28",
-    "office": "State Capitol Room 1406, P.O. Box 94604, Lincoln, NE 68509"
+    "office": "State Capitol Room 1309, P.O. Box 94604, Lincoln, NE 68509",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jane_Raybould",
+    "ballotpediaUrl": "https://ballotpedia.org/Jane_Raybould",
+    "twitter": "JaneRaybould",
+    "facebook": "JaneRaybouldNE"
   },
   {
     "id": "ocd-person/356c7606-4eaa-4494-83a5-68dbaf3e77f6",
@@ -286,8 +349,12 @@
     "party": "Nonpartisan",
     "email": "jstorm@leg.ne.gov",
     "phone": "402-471-2719",
+    "photoUrl": "https://www.nebraskalegislature.gov/media/images/senators/dist23/highres/dist23.jpg",
     "website": "https://nebraskalegislature.gov/senators/landing-pages/index.php?District=23",
-    "office": "State Capitol Room 1124, P.O. Box 94604, Lincoln, NE 68509"
+    "office": "State Capitol Room 1124, P.O. Box 94604, Lincoln, NE 68509",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jared_Storm",
+    "ballotpediaUrl": "https://ballotpedia.org/Jared_Storm",
+    "facebook": "StormForLegislature"
   },
   {
     "id": "ocd-person/dda3cdbe-5e52-439e-ac68-02588b6d7cab",
@@ -299,8 +366,12 @@
     "party": "Nonpartisan",
     "email": "jprokop@leg.ne.gov",
     "phone": "402-471-2632",
+    "photoUrl": "https://www.nebraskalegislature.gov/media/images/senators/dist27/highres/dist27.jpg",
     "website": "https://jasonprokop.com",
-    "office": "State Capitol Room 1118, P.O. Box 94604, Lincoln, NE 68509"
+    "office": "State Capitol Room 1118, P.O. Box 94604, Lincoln, NE 68509",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jason_Prokop",
+    "ballotpediaUrl": "https://ballotpedia.org/Jason_Prokop",
+    "facebook": "prokopforleg"
   },
   {
     "id": "ocd-person/f5d27385-af4c-4c08-8654-3e27ef120d94",
@@ -310,11 +381,14 @@
     "chamber": "legislature",
     "district": "14",
     "party": "Nonpartisan",
-    "email": "jarch@leg.ne.gov",
+    "email": "john.arch@leg.ne.gov",
     "phone": "402-471-2730",
     "photoUrl": "https://www.nebraskalegislature.gov/media/images/senators/dist14/highres/dist14.jpg",
     "website": "https://nebraskalegislature.gov/senators/landing-pages/index.php?District=14",
-    "office": "State Capitol Room 2103, P.O. Box 94604, Lincoln, NE 68509"
+    "office": "State Capitol Room 2103, P.O. Box 94604, Lincoln, NE 68509",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_Arch_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/John_Arch",
+    "facebook": "JohnArchLD14"
   },
   {
     "id": "ocd-person/0436186a-3b62-46f1-8f36-55e09fca3e77",
@@ -324,11 +398,15 @@
     "chamber": "legislature",
     "district": "9",
     "party": "Nonpartisan",
-    "email": "jcavanaugh@leg.ne.gov",
+    "email": "john.cavanaugh@leg.ne.gov",
     "phone": "402-471-2723",
     "photoUrl": "https://www.nebraskalegislature.gov/media/images/senators/dist09/highres/dist09.jpg",
     "website": "https://nebraskalegislature.gov/senators/landing-pages/index.php?District=9",
-    "office": "State Capitol Room 1008, P.O. Box 94604, Lincoln, NE 68509"
+    "office": "State Capitol Room 1008, P.O. Box 94604, Lincoln, NE 68509",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_Cavanaugh_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/John_Cavanaugh",
+    "twitter": "Cavanaugh4NE",
+    "facebook": "JohnCavanaughNE"
   },
   {
     "id": "ocd-person/30b4a401-6f6b-4367-80c2-b9d60d7c527f",
@@ -338,11 +416,15 @@
     "chamber": "legislature",
     "district": "20",
     "party": "Nonpartisan",
-    "email": "jfredrickson@leg.ne.gov",
+    "email": "john.fredrickson@leg.ne.gov",
     "phone": "402-471-2622",
     "photoUrl": "https://www.nebraskalegislature.gov/media/images/senators/dist20/highres/dist20.jpg",
     "website": "https://nebraskalegislature.gov/senators/landing-pages/index.php?District=20",
-    "office": "State Capitol Room 2015, P.O. Box 94604, Lincoln, NE 68509"
+    "office": "State Capitol Room 2015, P.O. Box 94604, Lincoln, NE 68509",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_Fredrickson",
+    "ballotpediaUrl": "https://ballotpedia.org/John_Fredrickson",
+    "twitter": "JohnforNE",
+    "facebook": "SenatorFredrickson"
   },
   {
     "id": "ocd-person/9d6fd408-5497-4038-9716-c1f487e348d2",
@@ -352,11 +434,14 @@
     "chamber": "legislature",
     "district": "31",
     "party": "Nonpartisan",
-    "email": "kkauth@leg.ne.gov",
+    "email": "kathleen.kauth@leg.ne.gov",
     "phone": "402-471-2327",
     "photoUrl": "https://www.nebraskalegislature.gov/media/images/senators/dist31/highres/dist31.jpg",
     "website": "https://nebraskalegislature.gov/senators/landing-pages/index.php?District=31",
-    "office": "State Capitol Room 2010, P.O. Box 94604, Lincoln, NE 68509"
+    "office": "State Capitol Room 1317, P.O. Box 94604, Lincoln, NE 68509",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kathleen_Kauth_(Nebraska_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Kathleen_Kauth",
+    "facebook": "electkathleenkauth"
   },
   {
     "id": "ocd-person/2ad42fad-ae37-44a6-8933-0a942f7a85f7",
@@ -366,11 +451,14 @@
     "chamber": "legislature",
     "district": "34",
     "party": "Nonpartisan",
-    "email": "llippincott@leg.ne.gov",
+    "email": "loren.lippincott@leg.ne.gov",
     "phone": "402-471-2630",
     "photoUrl": "https://www.nebraskalegislature.gov/media/images/senators/dist34/highres/dist34.jpg",
     "website": "https://nebraskalegislature.gov/senators/landing-pages/index.php?District=34",
-    "office": "State Capitol Room 1018, P.O. Box 94604, Lincoln, NE 68509"
+    "office": "State Capitol Room 1018, P.O. Box 94604, Lincoln, NE 68509",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Loren_Lippincott",
+    "ballotpediaUrl": "https://ballotpedia.org/Loren_Lippincott",
+    "facebook": "LorenLippincottNE"
   },
   {
     "id": "ocd-person/fd6e1947-c274-4ff5-b2ee-5e5a79d6a729",
@@ -380,11 +468,15 @@
     "chamber": "legislature",
     "district": "6",
     "party": "Nonpartisan",
-    "email": "mcavanaugh@leg.ne.gov",
+    "email": "machaela.cavanaugh@leg.ne.gov",
     "phone": "402-471-2714",
     "photoUrl": "https://www.nebraskalegislature.gov/media/images/senators/dist06/highres/dist06.jpg",
     "website": "https://nebraskalegislature.gov/senators/landing-pages/index.php?District=6",
-    "office": "State Capitol Room 1115, P.O. Box 94604, Lincoln, NE 68509"
+    "office": "State Capitol Room 2010, P.O. Box 94604, Lincoln, NE 68509",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Machaela_Cavanaugh",
+    "ballotpediaUrl": "https://ballotpedia.org/Machaela_Cavanaugh",
+    "twitter": "senatormachaela",
+    "facebook": "senatormachaela"
   },
   {
     "id": "ocd-person/e586486b-002b-4dfb-8eec-a209c915dc95",
@@ -398,7 +490,9 @@
     "phone": "402-471-2710",
     "photoUrl": "https://storage.googleapis.com/enview-dev-public-general/legislative-people-photos/167027.jpg",
     "website": "https://nebraskalegislature.gov/senators/landing-pages/index.php?District=5",
-    "office": "State Capitol Room 1528, P.O. Box 94604, Lincoln, NE 68509"
+    "office": "State Capitol Room 1528, P.O. Box 94604, Lincoln, NE 68509",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Margo_Juarez",
+    "ballotpediaUrl": "https://ballotpedia.org/Margo_Juarez"
   },
   {
     "id": "ocd-person/1b988941-ec1a-4f87-b17a-51fb0309dea0",
@@ -408,11 +502,15 @@
     "chamber": "legislature",
     "district": "8",
     "party": "Nonpartisan",
-    "email": "mhunt@leg.ne.gov",
+    "email": "megan.hunt@leg.ne.gov",
     "phone": "402-471-2722",
     "photoUrl": "https://www.nebraskalegislature.gov/media/images/senators/dist08/highres/dist08.jpg",
     "website": "https://nebraskalegislature.gov/senators/landing-pages/index.php?District=8",
-    "office": "State Capitol Room 2107, P.O. Box 94604, Lincoln, NE 68509"
+    "office": "State Capitol Room 2107, P.O. Box 94604, Lincoln, NE 68509",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Megan_Hunt_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Megan_Hunt",
+    "twitter": "NebraskaMegan",
+    "facebook": "MeganHuntNE"
   },
   {
     "id": "ocd-person/3c015cf9-e3de-42cf-a364-64607ecc70ce",
@@ -422,11 +520,14 @@
     "chamber": "legislature",
     "district": "12",
     "party": "Nonpartisan",
-    "email": "mriepe@leg.ne.gov",
+    "email": "merv.riepe@leg.ne.gov",
     "phone": "402-471-2623",
     "photoUrl": "https://www.nebraskalegislature.gov/media/images/senators/dist12/highres/dist12.jpg",
     "website": "https://nebraskalegislature.gov/senators/landing-pages/index.php?District=12",
-    "office": "State Capitol Room 1015, P.O. Box 94604, Lincoln, NE 68509"
+    "office": "State Capitol Room 1015, P.O. Box 94604, Lincoln, NE 68509",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Merv_Riepe",
+    "ballotpediaUrl": "https://ballotpedia.org/Merv_Riepe",
+    "twitter": "voteriepe"
   },
   {
     "id": "ocd-person/70b3f826-87f3-43c6-9762-27a178156a55",
@@ -436,11 +537,14 @@
     "chamber": "legislature",
     "district": "42",
     "party": "Nonpartisan",
-    "email": "mjacobson@leg.ne.gov",
+    "email": "mike.jacobson@leg.ne.gov",
     "phone": "402-471-2729",
     "photoUrl": "https://www.nebraskalegislature.gov/media/images/senators/dist42/highres/dist42.jpg",
     "website": "https://nebraskalegislature.gov/senators/landing-pages/index.php?District=42",
-    "office": "State Capitol Room 1117, P.O. Box 94604, Lincoln, NE 68509"
+    "office": "State Capitol Room 1117, P.O. Box 94604, Lincoln, NE 68509",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mike_Jacobson",
+    "ballotpediaUrl": "https://ballotpedia.org/Michael_Jacobson",
+    "facebook": "SenJacobson"
   },
   {
     "id": "ocd-person/471fb0d6-b798-4c0c-bac1-021db8b68801",
@@ -454,7 +558,10 @@
     "phone": "402-471-2715",
     "photoUrl": "https://www.nebraskalegislature.gov/media/images/senators/dist22/highres/dist22.jpg",
     "website": "https://nebraskalegislature.gov/senators/landing-pages/index.php?District=22",
-    "office": "State Capitol Room 1317, P.O. Box 94604, Lincoln, NE 68509"
+    "office": "State Capitol Room 1116, P.O. Box 94604, Lincoln, NE 68509",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mike_Moser_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Mike_Moser",
+    "facebook": "senatormoser"
   },
   {
     "id": "ocd-person/4a8d555a-4bba-4f76-a3e1-88eee6030413",
@@ -464,11 +571,13 @@
     "chamber": "legislature",
     "district": "30",
     "party": "Nonpartisan",
-    "email": "mdorn@leg.ne.gov",
+    "email": "myron.dorn@leg.ne.gov",
     "phone": "402-471-2620",
     "photoUrl": "https://www.nebraskalegislature.gov/media/images/senators/dist30/highres/dist30.jpg",
     "website": "https://nebraskalegislature.gov/senators/landing-pages/index.php?District=30",
-    "office": "State Capitol Room 1208, P.O. Box 94604, Lincoln, NE 68509"
+    "office": "State Capitol Room 1208, P.O. Box 94604, Lincoln, NE 68509",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Myron_Dorn",
+    "ballotpediaUrl": "https://ballotpedia.org/Myron_Dorn"
   },
   {
     "id": "ocd-person/0ae0ba8c-757e-459f-aecc-4a0501a25cbb",
@@ -478,10 +587,13 @@
     "chamber": "legislature",
     "district": "47",
     "party": "Nonpartisan",
-    "email": "pstrommen@leg.ne.gov",
+    "email": "paul.strommen@leg.ne.gov",
     "phone": "402-471-2616",
+    "photoUrl": "https://www.nebraskalegislature.gov/media/images/senators/dist47/highres/dist47.jpg",
     "website": "https://nebraskalegislature.gov/senators/landing-pages/index.php?District=47",
-    "office": "State Capitol Room 1321, P.O. Box 94604, Lincoln, NE 68509"
+    "office": "State Capitol Room 1321, P.O. Box 94604, Lincoln, NE 68509",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Paul_Strommen",
+    "ballotpediaUrl": "https://ballotpedia.org/Paul_Strommen"
   },
   {
     "id": "ocd-person/63d2956a-a0be-40db-a0e3-6c32743951ab",
@@ -491,11 +603,13 @@
     "chamber": "legislature",
     "district": "4",
     "party": "Nonpartisan",
-    "email": "bvongillern@leg.ne.gov",
+    "email": "brad.vongillern@leg.ne.gov",
     "phone": "402-471-2621",
     "photoUrl": "https://www.nebraskalegislature.gov/media/images/senators/dist04/highres/dist04.jpg",
     "website": "https://nebraskalegislature.gov/senators/landing-pages/index.php?District=4",
-    "office": "State Capitol Room 1116, P.O. Box 94604, Lincoln, NE 68509"
+    "office": "State Capitol Room 1315, P.O. Box 94604, Lincoln, NE 68509",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Brad_von_Gillern",
+    "ballotpediaUrl": "https://ballotpedia.org/R._Brad_von_Gillern"
   },
   {
     "id": "ocd-person/62ccba1d-4200-41c7-a051-21fa421a206a",
@@ -505,11 +619,13 @@
     "chamber": "legislature",
     "district": "36",
     "party": "Nonpartisan",
-    "email": "rholdcroft@leg.ne.gov",
+    "email": "rick.holdcroft@leg.ne.gov",
     "phone": "402-471-2642",
     "photoUrl": "https://www.nebraskalegislature.gov/media/images/senators/dist36/highres/dist36.jpg",
     "website": "https://nebraskalegislature.gov/senators/landing-pages/index.php?District=36",
-    "office": "State Capitol Room 1019, P.O. Box 94604, Lincoln, NE 68509"
+    "office": "State Capitol Room 1406, P.O. Box 94604, Lincoln, NE 68509",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rick_Holdcroft",
+    "ballotpediaUrl": "https://ballotpedia.org/Rick_Holdcroft"
   },
   {
     "id": "ocd-person/de8d4e0a-36dd-4a84-96ee-e4b7bc4cf69d",
@@ -519,11 +635,14 @@
     "chamber": "legislature",
     "district": "45",
     "party": "Nonpartisan",
-    "email": "rsanders@leg.ne.gov",
+    "email": "rita.sanders@leg.ne.gov",
     "phone": "402-471-2615",
     "photoUrl": "https://www.nebraskalegislature.gov/media/images/senators/dist45/highres/dist45.jpg",
     "website": "https://nebraskalegislature.gov/senators/landing-pages/index.php?District=45",
-    "office": "State Capitol Room 1315, P.O. Box 94604, Lincoln, NE 68509"
+    "office": "State Capitol Room 1315, P.O. Box 94604, Lincoln, NE 68509",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rita_Sanders",
+    "ballotpediaUrl": "https://ballotpedia.org/Rita_Sanders",
+    "facebook": "SenatorRitaSanders"
   },
   {
     "id": "ocd-person/809c0698-2669-426a-819a-275a0773ff84",
@@ -533,11 +652,14 @@
     "chamber": "legislature",
     "district": "2",
     "party": "Nonpartisan",
-    "email": "rclements@leg.ne.gov",
+    "email": "robert.clements@leg.ne.gov",
     "phone": "402-471-2613",
     "photoUrl": "https://www.nebraskalegislature.gov/media/images/senators/dist02/highres/dist02.jpg",
     "website": "https://nebraskalegislature.gov/senators/landing-pages/index.php?District=2",
-    "office": "State Capitol Room 1004, P.O. Box 94604, Lincoln, NE 68509"
+    "office": "State Capitol Room 1004, P.O. Box 94604, Lincoln, NE 68509",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Robert_Clements_(Nebraska_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Robert_Clements",
+    "facebook": "Senator.Clements"
   },
   {
     "id": "ocd-person/a9cc86ff-602c-453f-9d6c-fd1567c7fbd7",
@@ -547,11 +669,13 @@
     "chamber": "legislature",
     "district": "19",
     "party": "Nonpartisan",
-    "email": "rdover@leg.ne.gov",
+    "email": "robert.dover@leg.ne.gov",
     "phone": "402-471-2929",
     "photoUrl": "https://www.nebraskalegislature.gov/media/images/senators/dist19/highres/dist19.jpg",
     "website": "https://nebraskalegislature.gov/senators/landing-pages/index.php?District=19",
-    "office": "State Capitol Room 2011, P.O. Box 94604, Lincoln, NE 68509"
+    "office": "State Capitol Room 2011, P.O. Box 94604, Lincoln, NE 68509",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Robert_Dover_(Nebraska_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Rob_Dover"
   },
   {
     "id": "ocd-person/4bfe5183-1afc-42fa-92c1-7ffe5cbb1080",
@@ -561,11 +685,14 @@
     "chamber": "legislature",
     "district": "37",
     "party": "Nonpartisan",
-    "email": "sclouse@leg.ne.gov",
+    "email": "stan.clouse@leg.ne.gov",
     "phone": "402-471-2726",
     "photoUrl": "https://storage.googleapis.com/enview-dev-public-general/legislative-people-photos/167022.jpg",
     "website": "https://nebraskalegislature.gov/senators/landing-pages/index.php?District=37",
-    "office": "State Capitol Room 1206, P.O. Box 94604, Lincoln, NE 68509"
+    "office": "State Capitol Room 1206, P.O. Box 94604, Lincoln, NE 68509",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Stan_Clouse",
+    "ballotpediaUrl": "https://ballotpedia.org/Stanley_Clouse",
+    "facebook": "StanClouseNE"
   },
   {
     "id": "ocd-person/70751bb8-56af-4fd1-b2dc-21943dc7bb2d",
@@ -575,10 +702,15 @@
     "chamber": "legislature",
     "district": "43",
     "party": "Nonpartisan",
-    "email": "tstorer@leg.ne.gov",
+    "email": "tanya.storer@leg.ne.gov",
     "phone": "402-471-2628",
+    "photoUrl": "https://www.nebraskalegislature.gov/media/images/senators/dist43/highres/dist43.jpg",
     "website": "https://nebraskalegislature.gov/senators/landing-pages/index.php?District=43",
-    "office": "State Capitol Room 1529, P.O. Box 94604, Lincoln, NE 68509"
+    "office": "State Capitol Room 1529, P.O. Box 94604, Lincoln, NE 68509",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tanya_Storer",
+    "ballotpediaUrl": "https://ballotpedia.org/Tanya_Storer",
+    "twitter": "ForLegislature",
+    "facebook": "TanyaStorerForLegislature"
   },
   {
     "id": "ocd-person/374b6dc4-5b90-4028-814c-84895a293c84",
@@ -588,11 +720,14 @@
     "chamber": "legislature",
     "district": "44",
     "party": "Nonpartisan",
-    "email": "tibach@leg.ne.gov",
+    "email": "teresa.ibach@leg.ne.gov",
     "phone": "402-471-2805",
     "photoUrl": "https://www.nebraskalegislature.gov/media/images/senators/dist44/highres/dist44.jpg",
     "website": "https://nebraskalegislature.gov/senators/landing-pages/index.php?District=44",
-    "office": "State Capitol Room 2000, P.O. Box 94604, Lincoln, NE 68509"
+    "office": "State Capitol Room 2000, P.O. Box 94604, Lincoln, NE 68509",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Teresa_Ibach",
+    "ballotpediaUrl": "https://ballotpedia.org/Teresa_Ibach",
+    "facebook": "teresaibachforlegislature"
   },
   {
     "id": "ocd-person/27784792-d54f-4a64-8408-a4a1ce0c26b1",
@@ -602,11 +737,15 @@
     "chamber": "legislature",
     "district": "11",
     "party": "Nonpartisan",
-    "email": "tmckinney@leg.ne.gov",
+    "email": "terrell.mckinney@leg.ne.gov",
     "phone": "402-471-2612",
     "photoUrl": "https://www.nebraskalegislature.gov/media/images/senators/dist11/highres/dist11.jpg",
     "website": "https://nebraskalegislature.gov/senators/landing-pages/index.php?District=11",
-    "office": "State Capitol Room 1319, P.O. Box 94604, Lincoln, NE 68509"
+    "office": "State Capitol Room 1115, P.O. Box 94604, Lincoln, NE 68509",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Terrell_McKinney",
+    "ballotpediaUrl": "https://ballotpedia.org/Terrell_McKinney",
+    "twitter": "SenMcKinneyLD11",
+    "facebook": "SenMcKinneyLD11"
   },
   {
     "id": "ocd-person/37ed5b35-3aea-40a2-95ed-ecc5120fbe82",
@@ -616,11 +755,14 @@
     "chamber": "legislature",
     "district": "32",
     "party": "Nonpartisan",
-    "email": "tbrandt@leg.ne.gov",
+    "email": "tom.brandt@leg.ne.gov",
     "phone": "402-471-2711",
     "photoUrl": "https://www.nebraskalegislature.gov/media/images/senators/dist32/highres/dist32.jpg",
     "website": "https://nebraskalegislature.gov/senators/landing-pages/index.php?District=32",
-    "office": "State Capitol Room 1210, P.O. Box 94604, Lincoln, NE 68509"
+    "office": "State Capitol Room 1210, P.O. Box 94604, Lincoln, NE 68509",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tom_Brandt_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Tom_Brandt",
+    "facebook": "tombrandt32"
   },
   {
     "id": "ocd-person/7093e661-0dbc-4c75-91e0-09a3e171caf1",
@@ -630,10 +772,14 @@
     "chamber": "legislature",
     "district": "39",
     "party": "Nonpartisan",
-    "email": "tsorrentino@leg.ne.gov",
+    "email": "tony.sorrentino@leg.ne.gov",
     "phone": "402-471-2885",
+    "photoUrl": "https://www.nebraskalegislature.gov/media/images/senators/dist39/highres/dist39.jpg",
     "website": "https://nebraskalegislature.gov/senators/landing-pages/index.php?District=39",
-    "office": "State Capitol Room 1522, P.O. Box 94604, Lincoln, NE 68509"
+    "office": "State Capitol Room 1522, P.O. Box 94604, Lincoln, NE 68509",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tony_Sorrentino",
+    "ballotpediaUrl": "https://ballotpedia.org/Tony_Sorrentino",
+    "facebook": "SorrentinoforNebraska"
   },
   {
     "id": "ocd-person/1e43a5b4-e63c-434a-977c-592174c2c635",
@@ -643,10 +789,14 @@
     "chamber": "legislature",
     "district": "3",
     "party": "Nonpartisan",
-    "email": "vrountree@leg.ne.gov",
+    "email": "victor.rountree@leg.ne.gov",
     "phone": "402-471-2627",
+    "photoUrl": "https://www.nebraskalegislature.gov/media/images/senators/dist03/highres/dist03.jpg",
     "website": "https://nebraskalegislature.gov/senators/landing-pages/index.php?District=3",
-    "office": "State Capitol Room 1000, P.O. Box 94604, Lincoln, NE 68509"
+    "office": "State Capitol Room 1000, P.O. Box 94604, Lincoln, NE 68509",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Victor_Rountree",
+    "ballotpediaUrl": "https://ballotpedia.org/Victor_Rountree",
+    "facebook": "rountreeforleg"
   },
   {
     "id": "ocd-person/bc906a77-5932-4042-9ede-a13b24924236",
@@ -656,11 +806,14 @@
     "chamber": "legislature",
     "district": "10",
     "party": "Nonpartisan",
-    "email": "wdeboer@leg.ne.gov",
+    "email": "wendy.deboer@leg.ne.gov",
     "phone": "402-471-2718",
     "photoUrl": "https://www.nebraskalegislature.gov/media/images/senators/dist10/highres/dist10.jpg",
     "website": "https://nebraskalegislature.gov/senators/landing-pages/index.php?District=10",
-    "office": "State Capitol Room 1114, P.O. Box 94604, Lincoln, NE 68509"
+    "office": "State Capitol Room 1114, P.O. Box 94604, Lincoln, NE 68509",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Wendy_DeBoer",
+    "ballotpediaUrl": "https://ballotpedia.org/Wendy_DeBoer",
+    "facebook": "WendyDeBoerNE"
   },
   {
     "id": "ocd-person/86a9643e-4777-48d4-a79a-5ed192fb7f70",
@@ -670,10 +823,12 @@
     "chamber": "legislature",
     "district": "15",
     "party": "Nonpartisan",
-    "email": "dwordekemper@leg.ne.gov",
+    "email": "dave.wordekemper@leg.ne.gov",
     "phone": "402-471-2625",
     "photoUrl": "https://storage.googleapis.com/enview-dev-public-general/legislative-people-photos/164427.jpg",
     "website": "https://nebraskalegislature.gov/senators/landing-pages/index.php?District=15",
-    "office": "State Capitol Room 1110, P.O. Box 94604, Lincoln, NE 94604"
+    "office": "State Capitol Room 1110, P.O. Box 94604, Lincoln, NE 94604",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dave_Wordekemper",
+    "ballotpediaUrl": "https://ballotpedia.org/Dave_Wordekemper"
   }
 ]

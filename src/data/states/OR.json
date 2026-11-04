@@ -11,7 +11,11 @@
     "phone": "503-986-1404",
     "photoUrl": "https://storage.googleapis.com/enview-dev-public-general/legislative-people-photos/121328.jpg",
     "website": "https://www.oregonlegislature.gov/skarlatos",
-    "office": "Room H-390, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room H-390, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Alek_Skarlatos",
+    "ballotpediaUrl": "https://ballotpedia.org/Alek_Skarlatos",
+    "twitter": "alekskarlatos",
+    "facebook": "AlekForOregon"
   },
   {
     "id": "ocd-person/3efec526-6660-45fa-9a10-b02716b2a779",
@@ -25,7 +29,10 @@
     "phone": "503-986-1447",
     "photoUrl": "https://www.oregonlegislature.gov/valderrama/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/valderrama",
-    "office": "Room H-286, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room H-286, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Andrea_Valderrama",
+    "ballotpediaUrl": "https://ballotpedia.org/Andrea_Valderrama",
+    "facebook": "RepValderrama"
   },
   {
     "id": "ocd-person/a22ec130-3ba7-4304-9e6f-3a950b8454cb",
@@ -39,7 +46,10 @@
     "phone": "503-986-1423",
     "photoUrl": "https://www.oregonlegislature.gov/scharf/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/scharf",
-    "office": "Room H-387, 900 Court St., Salem, OR 97301"
+    "office": "Room H-387, 900 Court St., Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Anna_Scharf",
+    "ballotpediaUrl": "https://ballotpedia.org/Anna_Scharf",
+    "facebook": "voteannascharf"
   },
   {
     "id": "ocd-person/7a36fd6a-105a-44b3-b7e3-b3447979db49",
@@ -53,7 +63,11 @@
     "phone": "503-986-1440",
     "photoUrl": "https://www.clackamas.us/sites/default/files/2021-12/annessa_hartman.jpg",
     "website": "https://www.oregonlegislature.gov/hartman",
-    "office": "Room H-487, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room H-487, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Annessa_Hartman",
+    "ballotpediaUrl": "https://ballotpedia.org/Annessa_Hartman",
+    "twitter": "annessaforhd40",
+    "facebook": "representative.annessa"
   },
   {
     "id": "ocd-person/305e1426-2193-4e49-accf-6b26d224e92b",
@@ -67,7 +81,10 @@
     "phone": "503-986-1727",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Anthony_Broadman.jpg",
     "website": "https://www.oregonlegislature.gov/broadman",
-    "office": "Room S-423, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room S-423, 900 Court St. NE, Salem, OR 97301",
+    "ballotpediaUrl": "https://ballotpedia.org/Anthony_Broadman",
+    "twitter": "TheBroadman",
+    "facebook": "BroadmanforOregon"
   },
   {
     "id": "ocd-person/571be1bf-e0ba-45a3-97be-d5df3bc98738",
@@ -81,7 +98,10 @@
     "phone": "503-986-1439",
     "photoUrl": "https://resources.finalsite.net/images/f_auto,q_auto,t_image_size_2/v1753906547/nclackk12orus/tvxc3ditrbsdipxxntfk/CopyofAprilDobsonPhoto2.jpg",
     "website": "https://www.oregonlegislature.gov/dobson",
-    "office": "Room H-488, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room H-488, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/April_Dobson",
+    "ballotpediaUrl": "https://ballotpedia.org/April_Dobson",
+    "facebook": "VoteAprilDobson"
   },
   {
     "id": "ocd-person/a19e8e1f-4859-4d05-8dc7-6f0a352c0757",
@@ -95,7 +115,11 @@
     "phone": "503-986-1425",
     "photoUrl": "https://www.oregonlegislature.gov/bowman/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/bowman",
-    "office": "Room H-295, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room H-295, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ben_Bowman_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Ben_Bowman",
+    "twitter": "BenBowman",
+    "facebook": "RepresentativeBenBowman"
   },
   {
     "id": "ocd-person/4c9f2660-6dd3-49f5-a503-6fe5bc5c7787",
@@ -109,7 +133,10 @@
     "phone": "503-986-1458",
     "photoUrl": "https://www.oregonlegislature.gov/levy/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/levy",
-    "office": "Room H-385, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room H-385, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bobby_Levy",
+    "ballotpediaUrl": "https://ballotpedia.org/Bobby_Levy",
+    "facebook": "BobbyLevyforOregon"
   },
   {
     "id": "ocd-person/a95c31b3-9bfa-4ab1-93d1-278082ead92a",
@@ -123,7 +150,10 @@
     "phone": "503-986-1409",
     "photoUrl": "https://www.oregonlegislature.gov/wright/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/wright",
-    "office": "Room H-372, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room H-372, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Boomer_Wright",
+    "ballotpediaUrl": "https://ballotpedia.org/Boomer_Wright",
+    "facebook": "boomerfororegon"
   },
   {
     "id": "ocd-person/e420fffb-7b56-42db-8cc4-531526ad6802",
@@ -137,7 +167,9 @@
     "phone": "503-986-1712",
     "photoUrl": "https://www.oregonlegislature.gov/starr/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/starr",
-    "office": "Room S-303, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room S-303, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bruce_Starr",
+    "ballotpediaUrl": "https://ballotpedia.org/Bruce_Starr"
   },
   {
     "id": "ocd-person/95da50da-34df-41f5-8900-ff8bec038272",
@@ -149,9 +181,13 @@
     "party": "Republican",
     "email": "sen.cedrichayden@oregonlegislature.gov",
     "phone": "503-986-1706",
-    "photoUrl": "https://www.oregonlegislature.gov/hayden/PublishingImages/member_photo.jpg",
+    "photoUrl": "https://www.oregonlegislature.gov/hayden/PublishingImages/Pages/default/Sen%20Hayden%202023%20closer.jpg",
     "website": "https://www.oregonlegislature.gov/hayden",
-    "office": "Room S-315, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room S-315, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Cedric_Ross_Hayden",
+    "ballotpediaUrl": "https://ballotpedia.org/Cedric_Hayden",
+    "twitter": "CedricHaydenOR",
+    "facebook": "CedricHaydenOR"
   },
   {
     "id": "ocd-person/d5d3b10e-9a5c-464a-93ad-bd824af1cbc0",
@@ -165,7 +201,11 @@
     "phone": "503-986-1725",
     "photoUrl": "http://www.oregonlegislature.gov/house/MemberPhotos/gorsek.jpg",
     "website": "https://www.oregonlegislature.gov/gorsek",
-    "office": "Room S-403, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room S-403, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Chris_Gorsek",
+    "ballotpediaUrl": "https://ballotpedia.org/Chris_Gorsek",
+    "twitter": "cgorsek",
+    "facebook": "GorsekForOregon"
   },
   {
     "id": "ocd-person/9c7dcacb-50b9-4338-924b-cf6d333dc43a",
@@ -179,7 +219,11 @@
     "phone": "503-986-1726",
     "photoUrl": "https://www.oregonlegislature.gov/drazan/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/drazan",
-    "office": "Room S-303, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room S-303, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Christine_Drazan",
+    "ballotpediaUrl": "https://ballotpedia.org/Christine_Drazan",
+    "twitter": "ChristineDrazan",
+    "facebook": "ChristineforOregon"
   },
   {
     "id": "ocd-person/aa0eac5e-9089-4c72-8edb-4493e1c4a0ad",
@@ -191,9 +235,12 @@
     "party": "Republican",
     "email": "rep.courtboice@oregonlegislature.gov",
     "phone": "503-986-1401",
-    "photoUrl": "https://www.oregonlegislature.gov/boice/PublishingImages/member_photo.jpg",
+    "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Court_Boice.png",
     "website": "https://www.oregonlegislature.gov/boice",
-    "office": "Room H-476, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room H-476, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Court_Boice",
+    "ballotpediaUrl": "https://ballotpedia.org/Court_Boice",
+    "facebook": "RepBoice"
   },
   {
     "id": "ocd-person/2bf5a8ca-cadb-4544-89e2-749f13673599",
@@ -207,7 +254,10 @@
     "phone": "503-986-1713",
     "photoUrl": "https://www.oregonlegislature.gov/neron/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/neron",
-    "office": "Room S-425, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room S-425, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Courtney_Neron",
+    "ballotpediaUrl": "https://ballotpedia.org/Courtney_Neron",
+    "facebook": "SenNeronMisslinSD13"
   },
   {
     "id": "ocd-person/1b0e1c41-4914-4f3d-8a49-fd11a019526a",
@@ -221,7 +271,10 @@
     "phone": "503-986-1432",
     "photoUrl": "https://www.oregonlegislature.gov/javadi/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/javadi",
-    "office": "Room H-373, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room H-373, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Cyrus_Javadi",
+    "ballotpediaUrl": "https://ballotpedia.org/Cyrus_Javadi",
+    "facebook": "cyrusfororegon"
   },
   {
     "id": "ocd-person/f08a3b2f-8e56-41e4-bf5f-84a43fd5aab5",
@@ -235,7 +288,11 @@
     "phone": "503-986-1428",
     "photoUrl": "https://www.oregonlegislature.gov/grayber/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/grayber",
-    "office": "Room H-492, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room H-492, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dacia_Grayber",
+    "ballotpediaUrl": "https://ballotpedia.org/Dacia_Grayber",
+    "twitter": "djgrayber",
+    "facebook": "DaciaforOregon"
   },
   {
     "id": "ocd-person/4b30682c-7833-4375-815b-2412cb9c61c7",
@@ -249,7 +306,10 @@
     "phone": "503-986-1438",
     "photoUrl": "https://www.oregonlegislature.gov/nguyend/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/nguyend",
-    "office": "Room H-283, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room H-283, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Daniel_Nguyen_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Daniel_Nguyen",
+    "facebook": "OrRepDanielNguyen"
   },
   {
     "id": "ocd-person/e8deb6b6-9cd0-498d-9422-81d731972da5",
@@ -263,7 +323,9 @@
     "phone": "503-986-1431",
     "photoUrl": "https://www.oregonlegislature.gov/edwards/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/edwards",
-    "office": "Room H-374, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room H-374, 900 Court St. NE, Salem, OR 97301",
+    "ballotpediaUrl": "https://ballotpedia.org/Darcey_Edwards",
+    "facebook": "repdarceyedwards"
   },
   {
     "id": "ocd-person/69c394b0-4299-4776-82aa-f847907f5308",
@@ -277,7 +339,10 @@
     "phone": "503-986-1412",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/DarinHarbick.png",
     "website": "https://www.oregonlegislature.gov/harbick",
-    "office": "Room H-376, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room H-376, 900 Court St. NE, Salem, OR 97301",
+    "ballotpediaUrl": "https://ballotpedia.org/Darin_Harbick",
+    "twitter": "DarinHarbickOre",
+    "facebook": "HarbickForOregon"
   },
   {
     "id": "ocd-person/26a734f0-51f9-4959-a213-bc345c1050ec",
@@ -291,7 +356,10 @@
     "phone": "503-986-1701",
     "photoUrl": "https://www.oregonlegislature.gov/smithd/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/smithd",
-    "office": "Room S-316, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room S-316, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/David_Brock_Smith",
+    "ballotpediaUrl": "https://ballotpedia.org/David_Brock_Smith_(Oregon_state_senator)",
+    "facebook": "SenatorDavidBrockSmith"
   },
   {
     "id": "ocd-person/db52dfee-b099-4ec9-800c-075d09710ca6",
@@ -305,7 +373,10 @@
     "phone": "503-986-1410",
     "photoUrl": "https://www.oregonlegislature.gov/gomberg/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/gomberg",
-    "office": "Room H-480, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room H-480, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/David_Gomberg",
+    "ballotpediaUrl": "https://ballotpedia.org/David_Gomberg",
+    "facebook": "repgomberg"
   },
   {
     "id": "ocd-person/6c867cbf-9d0b-4dd8-9537-55e834a42dc4",
@@ -319,7 +390,11 @@
     "phone": "503-986-1710",
     "photoUrl": "https://www.oregonlegislature.gov/patterson/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/patterson",
-    "office": "Room S-411, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room S-411, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Deb_Patterson_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Deb_Patterson",
+    "twitter": "DebPattersonOR",
+    "facebook": "Senator.DebPatterson"
   },
   {
     "id": "ocd-person/5ab0368e-6434-46c6-a7f4-7ee34b596fd1",
@@ -333,7 +408,9 @@
     "phone": "503-986-1728",
     "photoUrl": "https://ormoneywatch.com/wp-content/uploads/2023/11/Diane-Linthicum-Senate-1.jpeg",
     "website": "https://www.oregonlegislature.gov/linthicumd",
-    "office": "Room S-305, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room S-305, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Diane_Linthicum",
+    "ballotpediaUrl": "https://ballotpedia.org/Diane_Linthicum"
   },
   {
     "id": "ocd-person/5e28a30c-5ca9-4221-a331-9321267fbae6",
@@ -347,7 +424,10 @@
     "phone": "503-986-1705",
     "photoUrl": "https://www.oregonlegislature.gov/anderson/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/anderson",
-    "office": "Room S-311, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room S-311, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dick_Anderson_(Oregon_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Dick_Anderson_(Oregon)",
+    "facebook": "DickAndersonforOregon"
   },
   {
     "id": "ocd-person/497f7e2e-b1d8-4803-8fb8-22dc045bc0b0",
@@ -361,7 +441,10 @@
     "phone": "503-986-1403",
     "photoUrl": "https://www.oregonlegislature.gov/yunker/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/yunker",
-    "office": "Room H-377, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room H-377, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dwayne_Yunker",
+    "ballotpediaUrl": "https://ballotpedia.org/Dwayne_Yunker",
+    "twitter": "RepYunker"
   },
   {
     "id": "ocd-person/709441c1-d716-47bc-8ac6-353abb1e039e",
@@ -375,7 +458,11 @@
     "phone": "503-986-1455",
     "photoUrl": "https://www.oregonlegislature.gov/reschke/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/reschke",
-    "office": "Room H-383, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room H-383, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/E._Werner_Reschke",
+    "ballotpediaUrl": "https://ballotpedia.org/E._Werner_Reschke",
+    "twitter": "EWReschke",
+    "facebook": "wernerfororegon"
   },
   {
     "id": "ocd-person/fa290a38-0cea-4dc8-a981-33ee4ff341f4",
@@ -389,7 +476,10 @@
     "phone": "503-986-1417",
     "photoUrl": "https://www.oregonlegislature.gov/diehl/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/diehl",
-    "office": "Room H-378, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room H-378, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ed_Diehl",
+    "ballotpediaUrl": "https://ballotpedia.org/Ed_Diehl",
+    "facebook": "eddiehlfororegon"
   },
   {
     "id": "ocd-person/2be8d7ed-5767-4a67-a5e9-b519691c14ef",
@@ -403,7 +493,11 @@
     "phone": "503-986-1453",
     "photoUrl": "https://www.oregonlegislature.gov/levye/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/levye",
-    "office": "Room H-486, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room H-486, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Emerson_Levy",
+    "ballotpediaUrl": "https://ballotpedia.org/Emerson_Levy",
+    "twitter": "Emerson4OR",
+    "facebook": "emerson4OR"
   },
   {
     "id": "ocd-person/2ef0c138-ff50-4a2b-9914-1a5edb506b49",
@@ -417,7 +511,9 @@
     "phone": "503-986-1456",
     "photoUrl": "https://www.oregonlegislature.gov/mcintire/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/mcintire",
-    "office": "Room H-379, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room H-379, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Emily_McIntire",
+    "ballotpediaUrl": "https://ballotpedia.org/Emily_McIntire"
   },
   {
     "id": "ocd-person/bec9a2c9-a77c-4ac9-b649-2a7360a5c0ad",
@@ -431,7 +527,11 @@
     "phone": "503-986-1435",
     "photoUrl": "https://www.oregonlegislature.gov/chaichi/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/chaichi",
-    "office": "Room H-478, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room H-478, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Farrah_Chaichi",
+    "ballotpediaUrl": "https://ballotpedia.org/Farrah_Chaichi",
+    "twitter": "FarrahChaichi",
+    "facebook": "RepresentativeFarrahChaichi"
   },
   {
     "id": "ocd-person/a36ed400-bbdd-4053-9ae4-576ba52e95ca",
@@ -445,7 +545,11 @@
     "phone": "503-986-1704",
     "photoUrl": "http://www.oregonlegislature.gov/senate/MemberPhotos/prozanski.jpg",
     "website": "https://www.oregonlegislature.gov/prozanski",
-    "office": "Room S-413, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room S-413, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Floyd_Prozanski",
+    "ballotpediaUrl": "https://ballotpedia.org/Floyd_Prozanski",
+    "twitter": "SenProzanski",
+    "facebook": "senprozanski"
   },
   {
     "id": "ocd-person/aba97bd3-cdf6-4860-9b2c-cbd62e825e79",
@@ -459,7 +563,11 @@
     "phone": "503-986-1709",
     "photoUrl": "http://www.oregonlegislature.gov/senate/MemberPhotos/girod.jpg",
     "website": "https://www.oregonlegislature.gov/girod",
-    "office": "Room S-323, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room S-323, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Fred_Girod",
+    "ballotpediaUrl": "https://ballotpedia.org/Fred_Girod",
+    "twitter": "FredGirod",
+    "facebook": "SenatorGirod"
   },
   {
     "id": "ocd-person/72dc94e8-e5d5-4376-aab5-06f6b3a771c7",
@@ -473,7 +581,9 @@
     "phone": "503-986-1457",
     "photoUrl": "http://www.oregonlegislature.gov/house/MemberPhotos/smithg.jpg",
     "website": "https://www.oregonlegislature.gov/smithg",
-    "office": "Room H-482, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room H-482, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Greg_Smith_(Oregon_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Greg_Smith_(Oregon)"
   },
   {
     "id": "ocd-person/a13db125-e6e2-4621-a1a7-7de714796b90",
@@ -487,7 +597,11 @@
     "phone": "503-986-1436",
     "photoUrl": "https://www.oregonlegislature.gov/phamh/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/phamh",
-    "office": "Room H-282, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room H-282, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Hai_Pham",
+    "ballotpediaUrl": "https://ballotpedia.org/Hai_Pham",
+    "twitter": "HaiforOregon",
+    "facebook": "staterephaipham"
   },
   {
     "id": "ocd-person/f1be7436-8ea5-48b2-8997-53dd566633b9",
@@ -501,7 +615,11 @@
     "phone": "503-986-1707",
     "photoUrl": "https://www.oregonlegislature.gov/manning/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/Manning",
-    "office": "Room S-213, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room S-213, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/James_Manning_Jr.",
+    "ballotpediaUrl": "https://ballotpedia.org/James_Manning_(Oregon)",
+    "twitter": "manningstl",
+    "facebook": "SenJamesManning"
   },
   {
     "id": "ocd-person/e0ac3b1f-565d-4766-b83d-3f08d6c0116b",
@@ -515,7 +633,10 @@
     "phone": "503-986-1411",
     "photoUrl": "https://www.oregonlegislature.gov/cate/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/cate",
-    "office": "Room H-381, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room H-381, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jami_Cate",
+    "ballotpediaUrl": "https://ballotpedia.org/Jami_Cate",
+    "facebook": "repjamicate"
   },
   {
     "id": "ocd-person/9d3f5669-f452-4926-91ec-a74a4c4a48e5",
@@ -529,7 +650,11 @@
     "phone": "503-986-1715",
     "photoUrl": "https://www.oregonlegislature.gov/sollman/PublishingImages/Pages/staff/alteza_films-66_43format.jpg",
     "website": "https://www.oregonlegislature.gov/sollman",
-    "office": "Room S-207​, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room S-207​, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Janeen_Sollman",
+    "ballotpediaUrl": "https://ballotpedia.org/Janeen_Sollman",
+    "twitter": "SollmanJaneen",
+    "facebook": "JaneenSollman2016"
   },
   {
     "id": "ocd-person/47e270fe-abc4-4f5d-9bad-2b7979442f5d",
@@ -543,7 +668,11 @@
     "phone": "503-986-1454",
     "photoUrl": "https://www.oregonlegislature.gov/kropf/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/kropf",
-    "office": "Room H-491, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room H-491, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jason_Kropf",
+    "ballotpediaUrl": "https://ballotpedia.org/Jason_Kropf",
+    "twitter": "JasonForBend",
+    "facebook": "RepresentativeKropf"
   },
   {
     "id": "ocd-person/0240017c-38e7-45da-8841-c40b007965dc",
@@ -557,7 +686,11 @@
     "phone": "503-986-1703",
     "photoUrl": "https://www.oregonlegislature.gov/golden/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/golden",
-    "office": "Room S-421, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room S-421, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jeff_Golden",
+    "ballotpediaUrl": "https://ballotpedia.org/Jeff_Golden_(Oregon)",
+    "twitter": "SenatorGolden",
+    "facebook": "SenatorGolden"
   },
   {
     "id": "ocd-person/936e2bdf-97c6-4297-80e7-faef3bb2e3d7",
@@ -571,7 +704,10 @@
     "phone": "503-986-1452",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api/storage/uploads/thumbs/200/300/crop/best/Jeffrey_Helfrich.jpg",
     "website": "https://www.oregonlegislature.gov/helfrich",
-    "office": "Room H-371, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room H-371, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jeff_Helfrich",
+    "ballotpediaUrl": "https://ballotpedia.org/Jeffrey_Helfrich",
+    "facebook": "JeffHelfrichfororegon"
   },
   {
     "id": "ocd-person/13afc78a-1028-462e-8f98-6df3f7f028d5",
@@ -585,7 +721,10 @@
     "phone": "503-986-1407",
     "photoUrl": "https://www.oregonlegislature.gov/lively/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/lively",
-    "office": "Room H-481, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room H-481, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_Lively_%28politician%29",
+    "ballotpediaUrl": "https://ballotpedia.org/John_Lively",
+    "facebook": "RepJohnLively"
   },
   {
     "id": "ocd-person/55ecfa8d-e89f-4a7b-af2d-6822f1025607",
@@ -599,7 +738,10 @@
     "phone": "503-986-1437",
     "photoUrl": "https://www.oregonlegislature.gov/house/MemberPhotos/walters.jpg",
     "website": "https://www.oregonlegislature.gov/walters",
-    "office": "Room H-489, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room H-489, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jules_Walters",
+    "ballotpediaUrl": "https://ballotpedia.org/Jules_Walters",
+    "facebook": "repjules"
   },
   {
     "id": "ocd-person/b523dd9a-d913-4a8e-95e2-c546016f2b1a",
@@ -613,7 +755,11 @@
     "phone": "503-986-1414",
     "photoUrl": "https://www.oregonlegislature.gov/fahey/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/fahey",
-    "office": "Room H-271, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room H-271, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Julie_Fahey",
+    "ballotpediaUrl": "https://ballotpedia.org/Julie_Fahey",
+    "twitter": "juliefahey",
+    "facebook": "RepJulieFahey"
   },
   {
     "id": "ocd-person/cc87cb36-e12e-42e1-ac5e-c2d50e1d2018",
@@ -627,7 +773,11 @@
     "phone": "503-986-1714",
     "photoUrl": "https://www.oregonlegislature.gov/lieber/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/lieber",
-    "office": "Room S-205, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room S-205, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kate_Lieber",
+    "ballotpediaUrl": "https://ballotpedia.org/Kate_Lieber",
+    "twitter": "KateForOregon",
+    "facebook": "SenatorKateLieber"
   },
   {
     "id": "ocd-person/97c2b8fd-9e87-43b7-b202-6541af36bab7",
@@ -641,7 +791,11 @@
     "phone": "503-986-1721",
     "photoUrl": "https://www.oregonlegislature.gov/taylor/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/taylor",
-    "office": "Room S-209, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room S-209, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kathleen_Taylor_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Kathleen_Taylor_(Oregon)",
+    "twitter": "Kathleen4Oregon",
+    "facebook": "KathleenTaylorforOregon"
   },
   {
     "id": "ocd-person/7532bf1f-c85e-4683-a401-ca87af088e5e",
@@ -651,11 +805,15 @@
     "chamber": "upper",
     "district": "24",
     "party": "Democratic",
-    "email": "sen.jamakayse@oregonlegislature.gov",
+    "email": "sen.kaysejama@oregonlegislature.gov",
     "phone": "503-986-1724",
     "photoUrl": "https://www.oregonlegislature.gov/Jama/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/jama",
-    "office": "Room S-223, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room S-223, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kayse_Jama",
+    "ballotpediaUrl": "https://ballotpedia.org/Kayse_Jama",
+    "twitter": "SenatorJama",
+    "facebook": "SenatorKayseJama"
   },
   {
     "id": "ocd-person/3770e09c-3492-4388-8047-e3dc83f026f3",
@@ -669,7 +827,11 @@
     "phone": "503-986-1427",
     "photoUrl": "https://www.oregonlegislature.gov/helm/PublishingImages/HD18-784-Edit.jpg",
     "website": "https://www.oregonlegislature.gov/helm",
-    "office": "Room H-490, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room H-490, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ken_Helm",
+    "ballotpediaUrl": "https://ballotpedia.org/Ken_Helm",
+    "twitter": "RepKenHelm",
+    "facebook": "kenhelmoregon"
   },
   {
     "id": "ocd-person/af99b8a9-452f-44e0-8404-83dfe05dbfd7",
@@ -683,7 +845,10 @@
     "phone": "503-986-1421",
     "photoUrl": "https://www.oregonlegislature.gov/mannix/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/mannix",
-    "office": "Room H-384, 900 Court St., Salem, OR 97301"
+    "office": "Room H-384, 900 Court St., Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kevin_Mannix",
+    "ballotpediaUrl": "https://ballotpedia.org/Kevin_Mannix",
+    "facebook": "MannixforOregon"
   },
   {
     "id": "ocd-person/3b7edee5-fb20-48d2-98db-541721e24e65",
@@ -697,7 +862,11 @@
     "phone": "503-986-1723",
     "photoUrl": "https://www.oregonlegislature.gov/pham/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/pham",
-    "office": "Room S-407, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room S-407, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Khanh_Pham",
+    "ballotpediaUrl": "https://ballotpedia.org/Khanh_Pham",
+    "twitter": "KhanhPhamForOR",
+    "facebook": "KhanhPhamForOR"
   },
   {
     "id": "ocd-person/5947e2cd-aa8b-4df1-869f-961357705a3c",
@@ -711,7 +880,11 @@
     "phone": "503-986-1711",
     "photoUrl": "https://www.oregonlegislature.gov/thatcher/PublishingImages/thatcher2023.jpg",
     "website": "https://www.oregonlegislature.gov/thatcher",
-    "office": "Room S-307, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room S-307, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kim_Thatcher",
+    "ballotpediaUrl": "https://ballotpedia.org/Kim_Thatcher",
+    "twitter": "KimThatcherGOP",
+    "facebook": "kimthatcheroregon"
   },
   {
     "id": "ocd-person/a2e34475-ba6f-41af-bf61-83c7160d6c10",
@@ -725,7 +898,10 @@
     "phone": "503-986-1406",
     "photoUrl": "https://www.oregonlegislature.gov/wallan/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/wallan",
-    "office": "Room H-388, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room H-388, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kim_Wallan",
+    "ballotpediaUrl": "https://ballotpedia.org/Kim_Wallan",
+    "facebook": "RepKimWallan"
   },
   {
     "id": "ocd-person/c4974690-b877-4f28-a731-a29fdbd811c4",
@@ -739,7 +915,11 @@
     "phone": "503-986-1448",
     "photoUrl": "https://www.oregonlegislature.gov/wise/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/wise",
-    "office": "Room H-473, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room H-473, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lamar_Wise",
+    "ballotpediaUrl": "https://ballotpedia.org/Lamar_Wise",
+    "twitter": "lamarwise3",
+    "facebook": "wisefororegon"
   },
   {
     "id": "ocd-person/d452f3a7-efea-4ae5-8765-cbd5533462f2",
@@ -753,7 +933,10 @@
     "phone": "503-986-1422",
     "photoUrl": "https://www.oregonlegislature.gov/munoz/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/munoz",
-    "office": "Room H-472, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room H-472, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lesly_Mu%C3%B1oz",
+    "ballotpediaUrl": "https://ballotpedia.org/Lesly_Munoz",
+    "facebook": "LeslyMunozOregon"
   },
   {
     "id": "ocd-person/2256d4a8-f19b-4e1d-ba35-771cc0349b0b",
@@ -767,7 +950,11 @@
     "phone": "503-986-1722",
     "photoUrl": "https://www.oregonlegislature.gov/frederick/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/frederick",
-    "office": "Room S-419, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room S-419, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lew_Frederick",
+    "ballotpediaUrl": "https://ballotpedia.org/Lew_Frederick",
+    "twitter": "LewFrederick",
+    "facebook": "SenLewFrederick"
   },
   {
     "id": "ocd-person/d75fd48f-fff7-4ccb-a46e-93854b4de3eb",
@@ -781,7 +968,11 @@
     "phone": "503-986-1408",
     "photoUrl": "https://www.oregonlegislature.gov/fragala/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/fragala",
-    "office": "Room H-484, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room H-484, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lisa_Fragala",
+    "ballotpediaUrl": "https://ballotpedia.org/Lisa_Fragala",
+    "twitter": "LisaFragala24",
+    "facebook": "RepLisaFragala"
   },
   {
     "id": "ocd-person/53afaba4-8ddc-4784-87c3-aaede576ac44",
@@ -795,7 +986,11 @@
     "phone": "503-986-1717",
     "photoUrl": "https://www.oregonlegislature.gov/reynolds/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/reynolds",
-    "office": "Room S-409, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room S-409, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lisa_Reynolds",
+    "ballotpediaUrl": "https://ballotpedia.org/Lisa_Reynolds",
+    "twitter": "LisaForOregon",
+    "facebook": "SenatorLisaReynolds"
   },
   {
     "id": "ocd-person/20f31b04-63fd-45a8-8075-5e6e1beae485",
@@ -809,7 +1004,10 @@
     "phone": "503-986-1424",
     "photoUrl": "https://www.oregonlegislature.gov/elmer/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/elmer",
-    "office": "Room H-390, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room H-395, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lucetta_Elmer",
+    "ballotpediaUrl": "https://ballotpedia.org/Lucetta_Elmer",
+    "facebook": "RepElmer"
   },
   {
     "id": "ocd-person/2b313ed5-ef42-4c8f-ae67-5dbac7346118",
@@ -823,7 +1021,8 @@
     "phone": "503-986-1434",
     "photoUrl": "https://www.oregonlive.com/resizer/v2/NV2ILLLSBNAY7DMKF7SP6EY5UU.jpeg?auth=2bd1feb1c12fa2e0f581e2670cead324d4c2e630233f41037e778e6ade02f6cf&width=1280&quality=90",
     "website": "https://www.oregonlegislature.gov/watanabe",
-    "office": "Room H-483, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room H-483, 900 Court St. NE, Salem, OR 97301",
+    "ballotpediaUrl": "https://ballotpedia.org/Mari_Watanabe"
   },
   {
     "id": "ocd-person/6adb2361-6526-450f-b2b1-e9f32311ca7d",
@@ -837,7 +1036,11 @@
     "phone": "503-986-1441",
     "photoUrl": "https://www.oregonlegislature.gov/gamba/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/gamba",
-    "office": "Room H-274, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room H-274, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mark_Gamba",
+    "ballotpediaUrl": "https://ballotpedia.org/Mark_Gamba",
+    "twitter": "mark_gamba",
+    "facebook": "GambaForOregon"
   },
   {
     "id": "ocd-person/d6379fd3-d283-4c6e-864b-7dca170b593d",
@@ -851,7 +1054,11 @@
     "phone": "503-986-1720",
     "photoUrl": "https://www.oregonlegislature.gov/meek/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/meek",
-    "office": "Room S-417, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room S-417, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mark_Meek",
+    "ballotpediaUrl": "https://ballotpedia.org/Mark_Meek",
+    "twitter": "MarkMeekOR",
+    "facebook": "FriendsofMarkMeek"
   },
   {
     "id": "ocd-person/f73d5af2-f2b6-47d0-a55a-84ac528343ff",
@@ -865,7 +1072,10 @@
     "phone": "503-986-1460",
     "photoUrl": "https://www.oregonlegislature.gov/owens/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/owens",
-    "office": "Room H-475, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room H-475, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mark_Owens_(Oregon_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Mark_Owens_(Oregon)",
+    "facebook": "MarkOwensforOregon"
   },
   {
     "id": "ocd-person/fe73a3b7-97cd-43cc-bf41-26a952a9ee8f",
@@ -879,7 +1089,10 @@
     "phone": "503-986-1451",
     "photoUrl": "https://www.oregonlegislature.gov/bunch/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/bunch",
-    "office": "Room H-380, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room H-380, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Matt_Bunch",
+    "ballotpediaUrl": "https://ballotpedia.org/Matt_Bunch",
+    "facebook": "mattbunch51"
   },
   {
     "id": "ocd-person/f0091fb4-4207-4663-be23-7c9e77994048",
@@ -893,7 +1106,10 @@
     "phone": "503-986-1730",
     "photoUrl": "http://www.oregonlegislature.gov/house/MemberPhotos/mclane.jpg",
     "website": "https://www.oregonlegislature.gov/mclane",
-    "office": "Room S-301, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room S-301, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mike_McLane",
+    "ballotpediaUrl": "https://ballotpedia.org/Mike_McLane",
+    "twitter": "mikemclaneor"
   },
   {
     "id": "ocd-person/dd5774a0-d6fe-44cc-86b3-b197225666eb",
@@ -907,7 +1123,11 @@
     "phone": "503-986-1413",
     "photoUrl": "https://www.oregonlegislature.gov/nathanson/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/nathanson",
-    "office": "Room H-279, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room H-279, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Nancy_Nathanson",
+    "ballotpediaUrl": "https://ballotpedia.org/Nancy_Nathanson",
+    "twitter": "Rep_NN",
+    "facebook": "nancynathansonoregon"
   },
   {
     "id": "ocd-person/5615af6a-5232-45e0-b85b-bcb41e08391e",
@@ -921,7 +1141,10 @@
     "phone": "503-986-1430",
     "photoUrl": "https://www.oregonlegislature.gov/sosa/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/sosa",
-    "office": "Room H-280, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room H-280, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Nathan_Sosa",
+    "ballotpediaUrl": "https://ballotpedia.org/Nathan_Sosa_(Oregon)",
+    "facebook": "RepresentativeSosa"
   },
   {
     "id": "ocd-person/15862ba2-3cdd-4a2e-a22e-28acdea73055",
@@ -935,7 +1158,9 @@
     "phone": "503-986-1702",
     "photoUrl": "https://ormoneywatch.b-cdn.net/wp-content/uploads/2023/11/Noah-Robinson.jpg",
     "website": "https://www.oregonlegislature.gov/robinsonn",
-    "office": "Room S-309, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room S-309, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Noah_Robinson",
+    "ballotpediaUrl": "https://ballotpedia.org/Noah_Robinson_(Oregon)"
   },
   {
     "id": "ocd-person/ec643441-bffe-4f43-80a4-ab834ae0f1bd",
@@ -949,7 +1174,10 @@
     "phone": "503-986-1405",
     "photoUrl": "https://www.oregonlegislature.gov/marsh/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/marsh",
-    "office": "Room H-474, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room H-474, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Pam_Marsh",
+    "ballotpediaUrl": "https://ballotpedia.org/Pam_Marsh",
+    "facebook": "representativepammarsh"
   },
   {
     "id": "ocd-person/8334f7e1-d712-44b4-8570-d0d0a6d131d3",
@@ -963,7 +1191,11 @@
     "phone": "503-986-1420",
     "photoUrl": "https://www.oregonlegislature.gov/evans/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/evans",
-    "office": "Room H-471, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room H-471, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Paul_Evans_(Oregon_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Paul_Evans_(Oregon)",
+    "twitter": "paulevansoregon",
+    "facebook": "paulevanshousedistrict20"
   },
   {
     "id": "ocd-person/dc371425-a173-439f-903c-6e2e3fd145cd",
@@ -977,7 +1209,10 @@
     "phone": "503-986-1418",
     "photoUrl": "https://www.oregonlegislature.gov/lewis/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/lewis",
-    "office": "Room H-382, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room H-382, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rick_Lewis_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Rick_Lewis_(Oregon)",
+    "facebook": "representativericklewis"
   },
   {
     "id": "ocd-person/fce6eed7-4438-4f31-b47a-ee054c28d4f7",
@@ -989,9 +1224,13 @@
     "party": "Democratic",
     "email": "rep.rickiruiz@oregonlegislature.gov",
     "phone": "503-986-1450",
-    "photoUrl": "https://www.oregonlegislature.gov/ruiz/PublishingImages/member_photo.jpg",
+    "photoUrl": "https://www.oregonlegislature.gov/ruiz/PublishingImages/Rep%20Ricki%20Ruiz%20Headshot%202026.jpg",
     "website": "https://www.oregonlegislature.gov/ruiz",
-    "office": "Room H-272, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room H-272, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ricki_Ruiz",
+    "ballotpediaUrl": "https://ballotpedia.org/Ricki_Ruiz",
+    "twitter": "rickiruizor",
+    "facebook": "RickiRuizOR"
   },
   {
     "id": "ocd-person/2aa7ebf4-d8a7-42c6-8e20-1edef58aa545",
@@ -1005,7 +1244,10 @@
     "phone": "503-986-1442",
     "photoUrl": "http://www.oregonlegislature.gov/house/MemberPhotos/nosse.jpg",
     "website": "https://www.oregonlegislature.gov/nosse",
-    "office": "Room H-277, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room H-277, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rob_Nosse",
+    "ballotpediaUrl": "https://ballotpedia.org/Rob_Nosse",
+    "twitter": "RobNosse"
   },
   {
     "id": "ocd-person/e40f7f2c-4c6a-4064-9fde-e6b380dde2aa",
@@ -1019,7 +1261,11 @@
     "phone": "503-986-1600",
     "photoUrl": "https://www.oregonlegislature.gov/wagner/PublishingImages/Headshot%20in%20the%20shrub.jpg",
     "website": "https://www.oregonlegislature.gov/wagner",
-    "office": "Room S-201, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room S-201, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rob_Wagner_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Rob_Wagner",
+    "twitter": "RobForOregon",
+    "facebook": "RobWagnerForOregon"
   },
   {
     "id": "ocd-person/10b42647-1509-4e86-9155-4622c2d17315",
@@ -1033,7 +1279,11 @@
     "phone": "503-986-1708",
     "photoUrl": "http://www.oregonlegislature.gov/senate/MemberPhotos/gelser.jpg",
     "website": "https://www.oregonlegislature.gov/gelser",
-    "office": "Room S-211, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room S-211, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sara_Gelser",
+    "ballotpediaUrl": "https://ballotpedia.org/Sara_Gelser",
+    "twitter": "SenSaraGelser",
+    "facebook": "SGelser"
   },
   {
     "id": "ocd-person/77cbf3a1-387e-424d-87fc-51a46d770921",
@@ -1047,7 +1297,9 @@
     "phone": "503-986-1416",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Sarah_McDonald.jpg",
     "website": "https://www.oregonlegislature.gov/mcdonald",
-    "office": "Room H-477, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room H-477, 900 Court St. NE, Salem, OR 97301",
+    "ballotpediaUrl": "https://ballotpedia.org/Sarah_McDonald",
+    "facebook": "Sarah4ORHouse"
   },
   {
     "id": "ocd-person/4a77ea61-457a-4111-bd2e-f2ee054ab4dc",
@@ -1061,7 +1313,10 @@
     "phone": "503-986-1433",
     "photoUrl": "https://www.oregonlegislature.gov/isadore/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/isadore",
-    "office": "Room H-276, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room H-276, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Shannon_Jones_Isadore",
+    "ballotpediaUrl": "https://ballotpedia.org/Shannon_Jones_Isadore",
+    "facebook": "Rep-Shannon-Jones-Isadore"
   },
   {
     "id": "ocd-person/52af68c5-c141-4e35-912b-11d71b83af33",
@@ -1075,7 +1330,11 @@
     "phone": "503-986-1415",
     "photoUrl": "https://www.oregonlegislature.gov/boshartdavis/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/boshartdavis",
-    "office": "Room H-389, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room H-389, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Shelly_Boshart_Davis",
+    "ballotpediaUrl": "https://ballotpedia.org/Shelly_Boshart_Davis",
+    "twitter": "BoshartDavisAg",
+    "facebook": "shellyboshartdavisfororegon"
   },
   {
     "id": "ocd-person/0f296591-6b7e-40b0-8a92-9198dd72bd7e",
@@ -1089,7 +1348,9 @@
     "phone": "503-986-1426",
     "photoUrl": "https://www.oregonlegislature.gov/riekesmith/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/riekesmith",
-    "office": "Room H-281, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room H-281, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sue_Rieke_Smith",
+    "ballotpediaUrl": "https://ballotpedia.org/Sue_Rieke_Smith"
   },
   {
     "id": "ocd-person/62f98553-cc00-497f-ac14-97e0fc0e62c2",
@@ -1103,7 +1364,10 @@
     "phone": "503-986-1429",
     "photoUrl": "https://www.oregonlegislature.gov/mclain/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/mclain",
-    "office": "Room H-493, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room H-493, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Susan_McLain",
+    "ballotpediaUrl": "https://ballotpedia.org/Susan_McLain",
+    "facebook": "SusanMcLainforOregon"
   },
   {
     "id": "ocd-person/835d23bd-afb1-4e82-93c4-4b1b1822aeb4",
@@ -1117,7 +1381,10 @@
     "phone": "503-986-1716",
     "photoUrl": "https://www.oregonlegislature.gov/weber/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/weber",
-    "office": "Room S-405, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room S-405, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Suzanne_Weber",
+    "ballotpediaUrl": "https://ballotpedia.org/Suzanne_Weber",
+    "facebook": "weberfororegon"
   },
   {
     "id": "ocd-person/c138ec96-0a6f-4dee-be06-be286b68cfbb",
@@ -1131,7 +1398,11 @@
     "phone": "503-986-1443",
     "photoUrl": "https://www.oregonlegislature.gov/sanchez/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/sanchez",
-    "office": "Room H-273, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room H-273, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tawna_Sanchez",
+    "ballotpediaUrl": "https://ballotpedia.org/Tawna_Sanchez",
+    "twitter": "RepTawnaSanchez",
+    "facebook": "RepTawnaSanchez"
   },
   {
     "id": "ocd-person/52058824-2f35-4f6b-877f-d48301bd99a0",
@@ -1145,7 +1416,11 @@
     "phone": "503-986-1445",
     "photoUrl": "https://www.oregonlegislature.gov/tran/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/tran",
-    "office": "Room H-285, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room H-285, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Thuy_Tran",
+    "ballotpediaUrl": "https://ballotpedia.org/Thuy_Tran",
+    "twitter": "RepThuyTran",
+    "facebook": "RepThuyTran"
   },
   {
     "id": "ocd-person/66c4922d-6b7e-4636-85a4-565e812df7a2",
@@ -1159,7 +1434,9 @@
     "phone": "503-986-1729",
     "photoUrl": "https://www.oregonlegislature.gov/nash/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/nash",
-    "office": "Room S-421, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room S-421, 900 Court St. NE, Salem, OR 97301",
+    "ballotpediaUrl": "https://ballotpedia.org/Todd_Nash",
+    "facebook": "senatortoddnash"
   },
   {
     "id": "ocd-person/4d850bbf-df69-4431-bad6-9444c63d4f0c",
@@ -1173,7 +1450,10 @@
     "phone": "503-986-1419",
     "photoUrl": "https://www.oregonlegislature.gov/andersen/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/andersen",
-    "office": "Room H-479, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room H-479, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tom_Andersen",
+    "ballotpediaUrl": "https://ballotpedia.org/Tom_Andersen",
+    "facebook": "RepAndersen"
   },
   {
     "id": "ocd-person/e2a96554-b503-4aad-856c-84266386e957",
@@ -1187,7 +1467,11 @@
     "phone": "503-986-1444",
     "photoUrl": "https://www.oregonlegislature.gov/nelson/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/nelson",
-    "office": "Room H-275, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room H-275, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Travis_Nelson",
+    "ballotpediaUrl": "https://ballotpedia.org/Travis_Nelson_(Oregon)",
+    "twitter": "IamTravisNelson",
+    "facebook": "RepTravisNelson"
   },
   {
     "id": "ocd-person/a3140c7f-befe-4b83-bc54-1451b5fe00f5",
@@ -1201,7 +1485,9 @@
     "phone": "503-986-1459",
     "photoUrl": "https://www.oregonlegislature.gov/breese-iverson/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/breese-iverson",
-    "office": "Room H-386, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room H-386, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Vikki_Breese-Iverson",
+    "ballotpediaUrl": "https://ballotpedia.org/Vikki_Breese-Iverson"
   },
   {
     "id": "ocd-person/f5938046-4558-441b-9e63-6bff0e114bf4",
@@ -1215,7 +1501,10 @@
     "phone": "503-986-1402",
     "photoUrl": "https://www.oregonlegislature.gov/osborne/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/osborne",
-    "office": "Room H-375, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room H-375, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Virgle_Osborne",
+    "ballotpediaUrl": "https://ballotpedia.org/Virgle_Osborne",
+    "facebook": "StateRepVirgleOsborne"
   },
   {
     "id": "ocd-person/21e83410-a7f5-43f1-a4ef-7cdc1d41c6b6",
@@ -1229,7 +1518,9 @@
     "phone": "503-986-1446",
     "photoUrl": "https://www.oregonlegislature.gov/chotzen/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/chotzen",
-    "office": "Room H-485, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room H-485, 900 Court St. NE, Salem, OR 97301",
+    "ballotpediaUrl": "https://ballotpedia.org/Willy_Chotzen",
+    "facebook": "chotzen4oregon"
   },
   {
     "id": "ocd-person/72027f00-3e3c-47c7-ab62-cc89ebb1ed72",
@@ -1243,7 +1534,11 @@
     "phone": "503-986-1718",
     "photoUrl": "https://www.oregonlegislature.gov/campos/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/campos",
-    "office": "Room S-215, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room S-215, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Wlnsvey_Campos",
+    "ballotpediaUrl": "https://ballotpedia.org/Wlnsvey_Campos",
+    "twitter": "wlnsvey",
+    "facebook": "RepWlnsveyCampos"
   },
   {
     "id": "ocd-person/83bbae41-6ba0-477e-a584-8ad7df1283d8",
@@ -1257,6 +1552,10 @@
     "phone": "503-986-1449",
     "photoUrl": "https://www.oregonlegislature.gov/hudson/PublishingImages/member_photo.jpg",
     "website": "https://www.oregonlegislature.gov/hudson",
-    "office": "Room H-284, 900 Court St. NE, Salem, OR 97301"
+    "office": "Room H-284, 900 Court St. NE, Salem, OR 97301",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Zach_Hudson",
+    "ballotpediaUrl": "https://ballotpedia.org/Zach_Hudson",
+    "twitter": "RepZachHudson",
+    "facebook": "HudsonDist49"
   }
 ]

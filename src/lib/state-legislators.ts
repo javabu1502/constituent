@@ -38,6 +38,12 @@ export interface StateLegislator {
   photoUrl?: string;
   website?: string;
   office?: string;
+  districtOffice?: string;
+  districtPhone?: string;
+  wikipediaUrl?: string;
+  ballotpediaUrl?: string;
+  twitter?: string;
+  facebook?: string;
 }
 
 // Map ordinal words to numeric ordinals for district normalization.

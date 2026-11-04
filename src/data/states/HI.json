@@ -11,7 +11,10 @@
     "phone": "808-586-8520",
     "photoUrl": "http://www.capitol.hawaii.gov/MemberFiles/RepSenPhotos/Tam.jpg",
     "website": "https://www.capitol.hawaii.gov/legislature/memberpage.aspx?member=132",
-    "office": "State Capitol Room 402, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 402, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Adrian_Tam",
+    "ballotpediaUrl": "https://ballotpedia.org/Adrian_Tam",
+    "facebook": "repadriantam"
   },
   {
     "id": "ocd-person/cb860f85-2006-4d5b-b1a8-1c56c1def2d7",
@@ -25,7 +28,10 @@
     "phone": "808-586-6700",
     "photoUrl": "http://www.capitol.hawaii.gov/MemberFiles/RepSenPhotos/Perruso.jpg",
     "website": "https://capitol.hawaii.gov/memberpage.aspx?member=perruso&year=2019",
-    "office": "State Capitol Room 444, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 444, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Amy_Perruso",
+    "ballotpediaUrl": "https://ballotpedia.org/Amy_Perruso",
+    "facebook": "representativeperruso"
   },
   {
     "id": "ocd-person/442e3aac-61ca-4efe-bbb8-716654554597",
@@ -39,7 +45,10 @@
     "phone": "808-586-8475",
     "photoUrl": "http://www.capitol.hawaii.gov/MemberFiles/RepSenPhotos/Garrett.jpg",
     "website": "https://www.capitol.hawaii.gov/legislature/memberpage.aspx?member=256",
-    "office": "State Capitol Room 323, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 323, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Andrew_Takuya_Garrett",
+    "ballotpediaUrl": "https://ballotpedia.org/Andrew_Takuya_Garrett",
+    "facebook": "profile.php?id=100085131802111"
   },
   {
     "id": "ocd-person/d31a4d99-d6f1-42f8-b902-b6bff3c667e8",
@@ -53,7 +62,9 @@
     "phone": "808-586-6070",
     "photoUrl": "http://www.capitol.hawaii.gov/MemberFiles/RepSenPhotos/mckelvey.jpg",
     "website": "https://capitol.hawaii.gov/memberpage.aspx?member=mckelvey&year=2019",
-    "office": "State Capitol Room 221, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 221, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Angus_McKelvey",
+    "ballotpediaUrl": "https://ballotpedia.org/Angus_McKelvey"
   },
   {
     "id": "ocd-person/22139704-8a26-4f4a-8a03-989990c21f37",
@@ -67,7 +78,9 @@
     "phone": "808-586-6230",
     "photoUrl": "http://www.capitol.hawaii.gov/MemberFiles/RepSenPhotos/elefante.jpg",
     "website": "https://www.capitol.hawaii.gov/legislature/memberpage.aspx?member=229",
-    "office": "State Capitol Room 217, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 217, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Brandon_Elefante",
+    "ballotpediaUrl": "https://ballotpedia.org/Brandon_Elefante"
   },
   {
     "id": "ocd-person/be1149eb-5b0c-48fb-b9f2-9bee875479cc",
@@ -81,7 +94,9 @@
     "phone": "808-586-7330",
     "photoUrl": "http://www.capitol.hawaii.gov/MemberFiles/RepSenPhotos/awa.jpg",
     "website": "https://www.capitol.hawaii.gov/legislature/memberpage.aspx?member=225",
-    "office": "State Capitol Room 203, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 203, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Brenton_Awa",
+    "ballotpediaUrl": "https://ballotpedia.org/Brenton_Awa"
   },
   {
     "id": "ocd-person/ca85a087-4a1f-450b-9386-11c13eb8c280",
@@ -94,8 +109,10 @@
     "email": "senfukunaga@capitol.hawaii.gov",
     "phone": "808-586-6460",
     "photoUrl": "http://www.capitol.hawaii.gov/MemberFiles/RepSenPhotos/fukunaga.jpg",
-    "website": "https://www.capitol.hawaii.gov/legislature/memberpage.aspx?member=168&year=2023",
-    "office": "State Capitol Room 216, 415 S. Beretania St., Honolulu, HI 96813"
+    "website": "https://capitol.hawaii.gov//memberpage.aspx?member=fukunaga",
+    "office": "State Capitol Room 216, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Carol_Fukunaga",
+    "ballotpediaUrl": "https://ballotpedia.org/Carol_Fukunaga"
   },
   {
     "id": "ocd-person/3484e323-b1a2-4c41-ad9f-8153445f8cd4",
@@ -109,7 +126,9 @@
     "phone": "808-587-8388",
     "photoUrl": "http://www.capitol.hawaii.gov/MemberFiles/RepSenPhotos/clee.jpg",
     "website": "https://capitol.hawaii.gov/memberpage.aspx?member=clee&year=2019",
-    "office": "State Capitol Room 219, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 214, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Chris_Lee_(Hawaii_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Chris_Lee_(Hawaii)"
   },
   {
     "id": "ocd-person/1a5995d1-114e-4e7e-a53f-d91017df2bc3",
@@ -123,7 +142,9 @@
     "phone": "808-586-8460",
     "photoUrl": "https://assets.civicengine.com/uploads/candidate/headshot/827989/827989.jpg",
     "website": "https://www.capitol.hawaii.gov/legislature/memberpage.aspx?member=307",
-    "office": "State Capitol Room 313, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 313, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Chris_Muraoka",
+    "ballotpediaUrl": "https://ballotpedia.org/Chris_Muraoka"
   },
   {
     "id": "ocd-person/6f62978c-5c1e-4a93-b182-caa7b97d45e0",
@@ -137,7 +158,10 @@
     "phone": "808-586-6200",
     "photoUrl": "http://www.capitol.hawaii.gov/MemberFiles/RepSenPhotos/Todd.jpg",
     "website": "https://capitol.hawaii.gov/memberpage.aspx?member=todd&year=2019",
-    "office": "State Capitol Room 306, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 306, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Chris_Toshiro_Todd",
+    "ballotpediaUrl": "https://ballotpedia.org/Chris_Todd_(Hawaii)",
+    "facebook": "staterepchristodd"
   },
   {
     "id": "ocd-person/00c3bae0-1087-4a2f-bee8-af0fbd2c6cf6",
@@ -151,7 +175,25 @@
     "phone": "808-586-6170",
     "photoUrl": "http://www.capitol.hawaii.gov/MemberFiles/RepSenPhotos/Chun.jpg",
     "website": "https://www.capitol.hawaii.gov/legislature/memberpage.aspx?member=252",
-    "office": "State Capitol Room 406, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 406, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Cory_Chun",
+    "ballotpediaUrl": "https://ballotpedia.org/Cory_Chun"
+  },
+  {
+    "id": "ocd-person/6003933a-c572-4df8-8ad8-d3a4f8e70882",
+    "name": "Cov Ratcliffe",
+    "firstName": "Cov",
+    "lastName": "Ratcliffe",
+    "chamber": "lower",
+    "district": "28",
+    "party": "Democratic",
+    "email": "repratcliffe@capitol.hawaii.gov",
+    "phone": "808-586-6180",
+    "photoUrl": "https://wp.civilbeat.digitaldemocracy.org/wp-content/uploads/sites/3/2026/04/Screenshot-2026-04-15-at-2.52.51-PM.png?w=384&q=75",
+    "website": "https://www.capitol.hawaii.gov/legislature/memberpage.aspx?member=311",
+    "office": "Room 314, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Cov_Ratcliffe",
+    "ballotpediaUrl": "https://ballotpedia.org/Michael_Ratcliffe"
   },
   {
     "id": "ocd-person/801d5517-e486-41e4-8c3d-53528a3a8bef",
@@ -164,21 +206,23 @@
     "email": "rephartsfield@capitol.hawaii.gov",
     "phone": "808-586-6520",
     "website": "https://www.capitol.hawaii.gov/legislature/memberpage.aspx?member=310",
-    "office": "State Capitol Room 326, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 326, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Daisy_Hartsfield",
+    "ballotpediaUrl": "https://ballotpedia.org/Daisy_Hartsfield"
   },
   {
-    "id": "ocd-person/0ceb0d53-faa5-4706-a1c5-8ebb45e3b133",
-    "name": "Daniel Holt",
-    "firstName": "Daniel",
-    "lastName": "Holt",
-    "chamber": "lower",
-    "district": "28",
+    "id": "ocd-person/f0a277d4-dbc5-4dfe-952b-bdee42260d39",
+    "name": "Danielle Bass",
+    "firstName": "Danielle",
+    "lastName": "Bass",
+    "chamber": "upper",
+    "district": "18",
     "party": "Democratic",
-    "email": "repholt@capitol.hawaii.gov",
-    "phone": "808-586-6180",
-    "photoUrl": "http://www.capitol.hawaii.gov/MemberFiles/RepSenPhotos/Holt.jpg",
-    "website": "https://capitol.hawaii.gov/memberpage.aspx?member=holt&year=2019",
-    "office": "State Capitol Room 438, 415 S. Beretania St., Honolulu, HI 96813"
+    "email": "senbass@capitol.hawaii.gov",
+    "phone": "808-586-7100",
+    "website": "https://www.capitol.hawaii.gov/legislature/memberpage.aspx?member=313",
+    "office": "State Capitol Room 225, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Danielle_Bass"
   },
   {
     "id": "ocd-person/76c9a0ff-a9f0-47ac-bf3d-9f8ee134c411",
@@ -192,7 +236,9 @@
     "phone": "808-586-9480",
     "photoUrl": "http://www.capitol.hawaii.gov/MemberFiles/RepSenPhotos/Kila.jpg",
     "website": "https://www.capitol.hawaii.gov/legislature/memberpage.aspx?member=266",
-    "office": "State Capitol Room 322, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 403, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Darius_Kila",
+    "ballotpediaUrl": "https://ballotpedia.org/Darius_Kila"
   },
   {
     "id": "ocd-person/fca91474-67f3-4b01-a985-6b0ddbfb2227",
@@ -206,7 +252,11 @@
     "phone": "808-586-8510",
     "photoUrl": "http://www.capitol.hawaii.gov/MemberFiles/RepSenPhotos/Tarnas.jpg",
     "website": "https://capitol.hawaii.gov/memberpage.aspx?member=tarnas&year=2019",
-    "office": "State Capitol Room 442, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 442, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/David_Tarnas",
+    "ballotpediaUrl": "https://ballotpedia.org/David_Tarnas",
+    "twitter": "reptarnas",
+    "facebook": "reptarnas"
   },
   {
     "id": "ocd-person/21e33d30-ecf0-431b-ad89-429f026efc24",
@@ -220,7 +270,11 @@
     "phone": "808-586-6080",
     "photoUrl": "http://www.capitol.hawaii.gov/MemberFiles/RepSenPhotos/Alcos.jpg",
     "website": "https://www.capitol.hawaii.gov/legislature/memberpage.aspx?member=249",
-    "office": "State Capitol Room 324, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 324, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/David_Alcos",
+    "ballotpediaUrl": "https://ballotpedia.org/David_Alcos",
+    "twitter": "repalcos",
+    "facebook": "votealcos"
   },
   {
     "id": "ocd-person/587a16dd-bb53-4164-829b-5e1703e06201",
@@ -234,7 +288,9 @@
     "phone": "808-586-6280",
     "photoUrl": "http://www.capitol.hawaii.gov/MemberFiles/RepSenPhotos/Morikawa.jpg",
     "website": "https://capitol.hawaii.gov/memberpage.aspx?member=morikawa&year=2019",
-    "office": "State Capitol Room 434, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 434, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dee_Morikawa",
+    "ballotpediaUrl": "https://ballotpedia.org/Dee_Morikawa"
   },
   {
     "id": "ocd-person/b3a0c91b-d6fd-4a54-9a34-2ba48cc53984",
@@ -248,7 +304,10 @@
     "phone": "808-586-9425",
     "photoUrl": "http://www.capitol.hawaii.gov/MemberFiles/RepSenPhotos/Belatti.jpg",
     "website": "https://capitol.hawaii.gov/memberpage.aspx?member=belatti&year=2019",
-    "office": "State Capitol Room 420, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 420, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Della_Au_Belatti",
+    "ballotpediaUrl": "https://ballotpedia.org/Della_Au_Belatti",
+    "facebook": "repbelatti"
   },
   {
     "id": "ocd-person/810a94e5-8524-4de9-bdf2-2e0d6c64b7f2",
@@ -262,7 +321,10 @@
     "phone": "808-586-8500",
     "photoUrl": "http://www.capitol.hawaii.gov/MemberFiles/RepSenPhotos/Garcia.jpg",
     "website": "https://www.capitol.hawaii.gov/legislature/memberpage.aspx?member=255",
-    "office": "State Capitol Room 303, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 303, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Diamond_Garcia",
+    "ballotpediaUrl": "https://ballotpedia.org/Diamond_Garcia",
+    "facebook": "repdiamondgarcia"
   },
   {
     "id": "ocd-person/f196e943-c8d6-4a35-96c2-252171c6529a",
@@ -276,7 +338,10 @@
     "phone": "808-587-7200",
     "photoUrl": "http://www.capitol.hawaii.gov/MemberFiles/RepSenPhotos/kim.jpg",
     "website": "https://capitol.hawaii.gov/memberpage.aspx?member=kim&year=2019",
-    "office": "State Capitol Room 218, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 218, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Donna_Mercado_Kim",
+    "ballotpediaUrl": "https://ballotpedia.org/Donna_Kim",
+    "facebook": "senatordonnamercadokim"
   },
   {
     "id": "ocd-person/0a9ef1d8-8fec-48f4-963c-50f39332cfa7",
@@ -290,7 +355,9 @@
     "phone": "808-586-6090",
     "photoUrl": "http://www.capitol.hawaii.gov/MemberFiles/RepSenPhotos/delacruz.jpg",
     "website": "https://capitol.hawaii.gov/memberpage.aspx?member=delacruz&year=2019",
-    "office": "State Capitol Room 208, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 208, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Donovan_Dela_Cruz",
+    "ballotpediaUrl": "https://ballotpedia.org/Donovan_Dela_Cruz"
   },
   {
     "id": "ocd-person/e75469cc-851a-4e63-9908-9e63b5215448",
@@ -304,7 +371,11 @@
     "phone": "808-586-9385",
     "photoUrl": "http://www.capitol.hawaii.gov/MemberFiles/RepSenPhotos/kanuha.jpg",
     "website": "https://capitol.hawaii.gov/memberpage.aspx?member=kanuha&year=2019",
-    "office": "State Capitol Room 206, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 206, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dru_Kanuha",
+    "ballotpediaUrl": "https://ballotpedia.org/Dru_Kanuha",
+    "twitter": "senatorkanuha",
+    "facebook": "senatorkanuha"
   },
   {
     "id": "ocd-person/313f96df-c94e-45d7-8cc6-19465ad40612",
@@ -318,7 +389,11 @@
     "phone": "808-586-8490",
     "photoUrl": "http://www.capitol.hawaii.gov/MemberFiles/RepSenPhotos/Pierick.jpg",
     "website": "https://www.capitol.hawaii.gov/legislature/memberpage.aspx?member=283",
-    "office": "State Capitol Room 318, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 318, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Elijah_Pierick",
+    "ballotpediaUrl": "https://ballotpedia.org/Elijah_Pierick",
+    "twitter": "reppierick",
+    "facebook": "elijahforhawaii"
   },
   {
     "id": "ocd-person/f7bd1cdd-c131-47eb-ab96-1a7c0599bfa7",
@@ -327,12 +402,14 @@
     "lastName": "Cochran",
     "chamber": "lower",
     "district": "14",
-    "party": "Democratic",
+    "party": "Republican",
     "email": "repcochran@capitol.hawaii.gov",
     "phone": "808-586-6160",
     "photoUrl": "http://www.capitol.hawaii.gov/MemberFiles/RepSenPhotos/Cochran.jpg",
     "website": "https://www.capitol.hawaii.gov/legislature/memberpage.aspx?member=253",
-    "office": "State Capitol Room 315, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 315, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Elle_Cochran",
+    "ballotpediaUrl": "https://ballotpedia.org/Elle_Cochran"
   },
   {
     "id": "ocd-person/9019d5ea-bfe8-4cca-9254-7960319a15bc",
@@ -346,7 +423,9 @@
     "phone": "808-586-9470",
     "photoUrl": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSUEhycIE3vAcgX_afwsIq8sAlJD9VW3SFAaNSI-Ey13ObCLFnj",
     "website": "https://www.capitol.hawaii.gov/legislature/memberpage.aspx?member=306",
-    "office": "State Capitol Room 305, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 305, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Garner_Shimizu",
+    "ballotpediaUrl": "https://ballotpedia.org/Garner_Musashi_Shimizu"
   },
   {
     "id": "ocd-person/5ef4a0ba-e9b0-4a62-9ac7-42d88308f3df",
@@ -360,7 +439,9 @@
     "phone": "808-586-8585",
     "photoUrl": "http://www.capitol.hawaii.gov/MemberFiles/RepSenPhotos/wakai.jpg",
     "website": "https://capitol.hawaii.gov/memberpage.aspx?member=wakai&year=2019",
-    "office": "State Capitol Room 407, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 407, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Glenn_Wakai",
+    "ballotpediaUrl": "https://ballotpedia.org/Glenn_Wakai"
   },
   {
     "id": "ocd-person/33584899-9773-4fa2-96aa-869a6da7cf19",
@@ -374,7 +455,10 @@
     "phone": "808-586-6340",
     "photoUrl": "http://www.capitol.hawaii.gov/MemberFiles/RepSenPhotos/Takayama.jpg",
     "website": "https://capitol.hawaii.gov/memberpage.aspx?member=takayama&year=2019",
-    "office": "State Capitol Room 404, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 404, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Gregg_Takayama",
+    "ballotpediaUrl": "https://ballotpedia.org/Gregg_Takayama",
+    "facebook": "reptakayama"
   },
   {
     "id": "ocd-person/d56e9f60-c26e-4437-90d7-4414957e737d",
@@ -388,7 +472,10 @@
     "phone": "808-586-6530",
     "photoUrl": "http://www.capitol.hawaii.gov/MemberFiles/RepSenPhotos/Ilagan.jpg",
     "website": "https://repilagan.com/",
-    "office": "State Capitol Room 419, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 419, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Greggor_Ilagan",
+    "ballotpediaUrl": "https://ballotpedia.org/Greggor_Ilagan",
+    "facebook": "repilagan"
   },
   {
     "id": "ocd-person/ff0ea974-b3aa-4261-aa1b-fa9cf74b3728",
@@ -402,7 +489,9 @@
     "phone": "808-586-6760",
     "photoUrl": "http://www.capitol.hawaii.gov/MemberFiles/RepSenPhotos/richards.jpg",
     "website": "https://www.capitol.hawaii.gov/legislature/memberpage.aspx?member=244",
-    "office": "State Capitol Room 202, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 202, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tim_Richards_III",
+    "ballotpediaUrl": "https://ballotpedia.org/Tim_Richards"
   },
   {
     "id": "ocd-person/2f96974d-decf-46e2-8aed-adf60e072e1e",
@@ -416,7 +505,9 @@
     "phone": "808-586-6050",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/IkaikaHussey2.jpeg",
     "website": "https://www.capitol.hawaii.gov/legislature/memberpage.aspx?member=302",
-    "office": "State Capitol Room 320, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 320, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ikaika_Hussey",
+    "ballotpediaUrl": "https://ballotpedia.org/Ikaika_Hussey"
   },
   {
     "id": "ocd-person/c5582fc0-ff8a-4c69-85f9-efd464e1a482",
@@ -430,7 +521,9 @@
     "phone": "808-586-8515",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Ikaika_Olds_20240812_095944.jpeg",
     "website": "https://www.capitol.hawaii.gov/legislature/memberpage.aspx?member=300",
-    "office": "State Capitol Room 316, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 316, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ikaika_Olds",
+    "ballotpediaUrl": "https://ballotpedia.org/Ikaika_Olds"
   },
   {
     "id": "ocd-person/451d1a20-20d4-4c75-95b9-ca4ba6dd3d1d",
@@ -444,7 +537,10 @@
     "phone": "808-586-6900",
     "photoUrl": "http://www.capitol.hawaii.gov/MemberFiles/RepSenPhotos/Sayama.jpg",
     "website": "https://www.capitol.hawaii.gov/legislature/memberpage.aspx?member=120",
-    "office": "State Capitol Room 443, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 443, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jackson_Sayama",
+    "ballotpediaUrl": "https://ballotpedia.org/Jackson_Sayama",
+    "facebook": "repsayama"
   },
   {
     "id": "ocd-person/07ed1559-820e-4ea1-803e-024ce5359a87",
@@ -458,7 +554,9 @@
     "phone": "808-587-7215",
     "photoUrl": "http://www.capitol.hawaii.gov/MemberFiles/RepSenPhotos/keohokalole.jpg",
     "website": "https://capitol.hawaii.gov/memberpage.aspx?member=jkeohokalole&year=2019",
-    "office": "State Capitol Room 205, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 205, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jarrett_Keohokalole",
+    "ballotpediaUrl": "https://ballotpedia.org/Jarrett_K._Keohokalole"
   },
   {
     "id": "ocd-person/47a7e8c6-361d-4854-9253-e311b58d9e1c",
@@ -472,7 +570,9 @@
     "phone": "808-586-9605",
     "photoUrl": "http://www.capitol.hawaii.gov/MemberFiles/RepSenPhotos/Kapela.jpg",
     "website": "https://www.capitol.hawaii.gov/legislature/memberpage.aspx?member=71",
-    "office": "State Capitol Room 418, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 418, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jeann%C3%A9_Kapela",
+    "ballotpediaUrl": "https://ballotpedia.org/Jeanne_Kapela"
   },
   {
     "id": "ocd-person/928645f2-46ed-4153-ab60-5b7a8250dab3",
@@ -486,7 +586,10 @@
     "phone": "808-586-9415",
     "photoUrl": "http://www.capitol.hawaii.gov/MemberFiles/RepSenPhotos/Takenouchi.jpg",
     "website": "https://www.capitol.hawaii.gov/legislature/memberpage.aspx?member=290",
-    "office": "State Capitol Room 333, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 333, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jenna_Takenouchi",
+    "ballotpediaUrl": "https://ballotpedia.org/Jenna_Takenouchi",
+    "facebook": "reptakenouchi"
   },
   {
     "id": "ocd-person/06d54403-a57b-40f8-96a6-94b58f4b2a0c",
@@ -499,7 +602,9 @@
     "email": "repgedeon@capitol.hawaii.gov",
     "phone": "808-586-6420",
     "website": "https://www.capitol.hawaii.gov/legislature/memberpage.aspx?member=309",
-    "office": "State Capitol Room 319, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 319, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Joe_Gedeon_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Joe_Gedeon"
   },
   {
     "id": "ocd-person/cac74229-bacc-4358-8208-23cdac57d57c",
@@ -513,7 +618,11 @@
     "phone": "808-586-6890",
     "photoUrl": "http://www.capitol.hawaii.gov/MemberFiles/RepSenPhotos/sanbuenaventura.jpg",
     "website": "https://capitol.hawaii.gov/memberpage.aspx?member=Sanbuenaventura&year=2019",
-    "office": "State Capitol Room 213, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 213, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Joy_San_Buenaventura",
+    "ballotpediaUrl": "https://ballotpedia.org/Joy_A._San_Buenaventura",
+    "twitter": "senjoydistrict2",
+    "facebook": "senjoydistrict2"
   },
   {
     "id": "ocd-person/7d6cf0c1-16d4-4c56-bba5-a50c3c5c18ce",
@@ -527,7 +636,9 @@
     "phone": "808-586-9730",
     "photoUrl": "https://i0.wp.com/thefilipinochronicle.com/wp-content/uploads/2024/07/Julie-Reyes-Oda-scaled.jpg?resize=733%2C1024&ssl=1",
     "website": "https://www.capitol.hawaii.gov/legislature/memberpage.aspx?member=304",
-    "office": "State Capitol Room 310, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 310, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Julie_Reyes_Oda",
+    "ballotpediaUrl": "https://ballotpedia.org/Julie_Reyes_Oda"
   },
   {
     "id": "ocd-person/5d9e6c9d-a94b-4ff6-9828-ed2ce8ceeab0",
@@ -541,7 +652,9 @@
     "phone": "808-586-6210",
     "photoUrl": "http://www.capitol.hawaii.gov/MemberFiles/RepSenPhotos/Woodson.jpg",
     "website": "https://capitol.hawaii.gov/memberpage.aspx?member=woodson&year=2019",
-    "office": "State Capitol Room 405, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 405, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Justin_Woodson",
+    "ballotpediaUrl": "https://ballotpedia.org/Justin_Woodson"
   },
   {
     "id": "ocd-person/207b309f-9e03-4834-85cb-083725f7a7ab",
@@ -555,7 +668,9 @@
     "phone": "808-586-8465",
     "photoUrl": "http://www.capitol.hawaii.gov/MemberFiles/RepSenPhotos/Souza.jpg",
     "website": "https://www.capitol.hawaii.gov/legislature/memberpage.aspx?member=288",
-    "office": "State Capitol Room 330, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 330, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kanani_Souza",
+    "ballotpediaUrl": "https://ballotpedia.org/Kanani_Souza"
   },
   {
     "id": "ocd-person/099756de-3b84-4531-b5da-6d1c5d4c89ee",
@@ -569,7 +684,9 @@
     "phone": "808-586-6130",
     "photoUrl": "http://www.capitol.hawaii.gov/MemberFiles/RepSenPhotos/rhoads.jpg",
     "website": "https://capitol.hawaii.gov/memberpage.aspx?member=krhoads&year=2019",
-    "office": "State Capitol Room 228, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 228, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Karl_Rhoads",
+    "ballotpediaUrl": "https://ballotpedia.org/Karl_Rhoads"
   },
   {
     "id": "ocd-person/824eca2b-d968-4807-a48b-7b3df400a904",
@@ -582,7 +699,9 @@
     "email": "repiwamoto@capitol.hawaii.gov",
     "phone": "808-586-8485",
     "website": "https://www.capitol.hawaii.gov/legislature/memberpage.aspx?member=301",
-    "office": "State Capitol Room 327, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 327, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kim_Coco_Iwamoto",
+    "ballotpediaUrl": "https://ballotpedia.org/Kim_Coco_Iwamoto"
   },
   {
     "id": "ocd-person/b6d9dda7-d2e1-443e-a19b-ee44ed891cad",
@@ -596,7 +715,9 @@
     "phone": "808-586-8530",
     "photoUrl": "http://www.capitol.hawaii.gov/MemberFiles/RepSenPhotos/Kahaloa.jpg",
     "website": "https://www.capitol.hawaii.gov/legislature/memberpage.aspx?member=264",
-    "office": "State Capitol Room 403, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 438, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kirstin_Kahaloa",
+    "ballotpediaUrl": "https://ballotpedia.org/Kirstin_Kahaloa"
   },
   {
     "id": "ocd-person/e6bafd21-a2de-41b8-8139-fcbf5ea94cf4",
@@ -610,7 +731,9 @@
     "phone": "808-586-6360",
     "photoUrl": "http://www.capitol.hawaii.gov/MemberFiles/RepSenPhotos/fevella.jpg",
     "website": "https://capitol.hawaii.gov/memberpage.aspx?member=fevella&year=2019",
-    "office": "State Capitol Room 231, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 231, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kurt_Fevella",
+    "ballotpediaUrl": "https://ballotpedia.org/Kurt_Fevella"
   },
   {
     "id": "ocd-person/51f31e1a-2fe4-4029-b49c-c3affa0b848d",
@@ -624,7 +747,10 @@
     "phone": "808-586-6330",
     "photoUrl": "http://www.capitol.hawaii.gov/MemberFiles/RepSenPhotos/Yamashita.jpg",
     "website": "https://capitol.hawaii.gov/memberpage.aspx?member=yamashita&year=2019",
-    "office": "State Capitol Room 422, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 422, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kyle_Yamashita",
+    "ballotpediaUrl": "https://ballotpedia.org/Kyle_Yamashita",
+    "facebook": "kyle.yamashita.77"
   },
   {
     "id": "ocd-person/8562d0d7-9915-4559-98bc-ac9c456efd02",
@@ -638,7 +764,9 @@
     "phone": "808-586-9490",
     "photoUrl": "http://www.capitol.hawaii.gov/MemberFiles/RepSenPhotos/Matsumoto.jpg",
     "website": "https://capitol.hawaii.gov/memberpage.aspx?member=matsumoto&year=2019",
-    "office": "State Capitol Room 302, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 302, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lauren_Matsumoto",
+    "ballotpediaUrl": "https://ballotpedia.org/Lauren_Kealohilani_Matsumoto"
   },
   {
     "id": "ocd-person/94e42ecd-2e4d-4502-8b50-c1c6324617f1",
@@ -652,7 +780,9 @@
     "phone": "808-586-6250",
     "photoUrl": "http://www.capitol.hawaii.gov/MemberFiles/RepSenPhotos/ihara.jpg",
     "website": "https://capitol.hawaii.gov/memberpage.aspx?member=ihara&year=2019",
-    "office": "State Capitol Room 220, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 220, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Les_Ihara_Jr.",
+    "ballotpediaUrl": "https://ballotpedia.org/Les_Ihara,_Jr."
   },
   {
     "id": "ocd-person/546ef7bf-9015-4a09-b8d3-f37fd87ed97f",
@@ -666,7 +796,9 @@
     "phone": "808-586-6220",
     "photoUrl": "http://www.capitol.hawaii.gov/MemberFiles/RepSenPhotos/Ichiyama.jpg",
     "website": "https://www.capitol.hawaii.gov/legislature/memberpage.aspx?member=60",
-    "office": "State Capitol Room 432, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 432, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Linda_Ichiyama",
+    "ballotpediaUrl": "https://ballotpedia.org/Linda_Ichiyama"
   },
   {
     "id": "ocd-person/1d8bd1da-7126-4248-8a1e-dce56626b746",
@@ -680,7 +812,10 @@
     "phone": "808-586-8540",
     "photoUrl": "http://www.capitol.hawaii.gov/MemberFiles/RepSenPhotos/Kitagawa.jpg",
     "website": "https://capitol.hawaii.gov/memberpage.aspx?member=Kitagawa&year=2019",
-    "office": "State Capitol Room 435, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 435, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lisa_Kitagawa",
+    "ballotpediaUrl": "https://ballotpedia.org/Lisa_Kitagawa",
+    "facebook": "representative-lisa-kitagawa-110741641505108"
   },
   {
     "id": "ocd-person/c4ea2b48-612d-42f4-b396-6f13c86bfe5b",
@@ -694,7 +829,9 @@
     "phone": "808-586-9450",
     "photoUrl": "http://www.capitol.hawaii.gov/MemberFiles/RepSenPhotos/Marten.jpg",
     "website": "https://www.capitol.hawaii.gov/legislature/memberpage.aspx?member=87",
-    "office": "State Capitol Room 426, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 426, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lisa_Marten",
+    "ballotpediaUrl": "https://ballotpedia.org/Lisa_Marten"
   },
   {
     "id": "ocd-person/77991a5e-d7df-4282-b1cc-2398c56c18cc",
@@ -708,7 +845,10 @@
     "phone": "808-586-7335",
     "photoUrl": "http://www.capitol.hawaii.gov/MemberFiles/RepSenPhotos/inouye.jpg",
     "website": "https://www.capitol.hawaii.gov/legislature/memberpage.aspx?member=181&year=2023",
-    "office": "State Capitol Room 210, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 210, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lorraine_Inouye",
+    "ballotpediaUrl": "https://ballotpedia.org/Lorraine_Inouye",
+    "facebook": "senlorraineinouye"
   },
   {
     "id": "ocd-person/128214ae-53bd-4dfe-88e6-ad3a70c6a83d",
@@ -722,7 +862,9 @@
     "phone": "808-586-6270",
     "photoUrl": "http://www.capitol.hawaii.gov/MemberFiles/RepSenPhotos/Evslin.jpg",
     "website": "https://www.capitol.hawaii.gov/legislature/memberpage.aspx?member=291",
-    "office": "State Capitol Room 427, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 427, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Luke_Evslin",
+    "ballotpediaUrl": "https://ballotpedia.org/Luke_A._Evslin_(Kauai_County_Council,_Hawaii,_candidate_2022)"
   },
   {
     "id": "ocd-person/d76e8f2c-2e55-4d2a-94e4-c13cc0a9e5e2",
@@ -736,7 +878,9 @@
     "phone": "808-587-7225",
     "photoUrl": "http://www.capitol.hawaii.gov/MemberFiles/RepSenPhotos/decoite.jpg",
     "website": "https://capitol.hawaii.gov/memberpage.aspx?member=decoite&year=2019",
-    "office": "State Capitol Room 230, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 230, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lynn_DeCoite",
+    "ballotpediaUrl": "https://ballotpedia.org/Lynn_DeCoite"
   },
   {
     "id": "ocd-person/c6f087db-713b-43c2-b557-7306f62ee15c",
@@ -750,7 +894,10 @@
     "phone": "808-586-6790",
     "photoUrl": "http://www.capitol.hawaii.gov/MemberFiles/RepSenPhotos/Poepoe.jpg",
     "website": "https://www.capitol.hawaii.gov/legislature/memberpage.aspx?member=284",
-    "office": "State Capitol Room 331, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 331, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mahina_Poepoe",
+    "ballotpediaUrl": "https://ballotpedia.org/Mahina_Poepoe",
+    "facebook": "reppoepoe"
   },
   {
     "id": "ocd-person/f2d1de1a-c206-46f7-8c5f-a6193229642f",
@@ -764,7 +911,9 @@
     "phone": "808-586-6510",
     "photoUrl": "http://www.capitol.hawaii.gov/MemberFiles/RepSenPhotos/Hashem.jpg",
     "website": "https://capitol.hawaii.gov/memberpage.aspx?member=hashem&year=2019",
-    "office": "State Capitol Room 424, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 424, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mark_Hashem",
+    "ballotpediaUrl": "https://ballotpedia.org/Mark_Hashem"
   },
   {
     "id": "ocd-person/fb23dd18-ee42-45da-9fc5-8379ced56c88",
@@ -778,21 +927,9 @@
     "phone": "808-586-6680",
     "photoUrl": "https://storage.googleapis.com/enview-public-general/legislative-people-photos/149765.jpg",
     "website": "https://www.capitol.hawaii.gov/legislature/memberpage.aspx?member=297",
-    "office": "State Capitol Room 311, 415 S. Beretania St., Honolulu, HI 96813"
-  },
-  {
-    "id": "ocd-person/511d674b-1e98-4a1f-8af2-24f986a165d9",
-    "name": "Michelle Kidani",
-    "firstName": "Michelle",
-    "lastName": "Kidani",
-    "chamber": "upper",
-    "district": "18",
-    "party": "Democratic",
-    "email": "senkidani@capitol.hawaii.gov",
-    "phone": "808-586-7100",
-    "photoUrl": "http://www.capitol.hawaii.gov/MemberFiles/RepSenPhotos/kidani.jpg",
-    "website": "https://capitol.hawaii.gov/memberpage.aspx?member=kidani&year=2019",
-    "office": "State Capitol Room 214, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 311, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Matthias_Kusch",
+    "ballotpediaUrl": "https://ballotpedia.org/Matthias_Kusch"
   },
   {
     "id": "ocd-person/9f87e7d6-a307-45ab-b384-96a8599dab56",
@@ -806,7 +943,11 @@
     "phone": "808-586-6830",
     "photoUrl": "http://www.capitol.hawaii.gov/MemberFiles/RepSenPhotos/gabbard.jpg",
     "website": "https://www.capitol.hawaii.gov/legislature/memberpage.aspx?member=169",
-    "office": "State Capitol Room 201, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 201, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mike_Gabbard",
+    "ballotpediaUrl": "https://ballotpedia.org/Mike_Gabbard",
+    "twitter": "senmikegabbard",
+    "facebook": "mikegabbardsenatedistrict21"
   },
   {
     "id": "ocd-person/12d661c2-2391-4504-973d-e905022d3134",
@@ -820,7 +961,9 @@
     "phone": "808-586-6480",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/leemichael.jpg",
     "website": "https://www.capitol.hawaii.gov/legislature/memberpage.aspx?member=305",
-    "office": "State Capitol Room 314, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 322, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mike_Lee_(Hawaii_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Michael_Lee_(Hawaii)"
   },
   {
     "id": "ocd-person/aa2e4b09-2c1e-4fa2-b135-7d2427dca5b4",
@@ -834,7 +977,10 @@
     "phone": "808-586-6100",
     "photoUrl": "http://www.capitol.hawaii.gov/MemberFiles/RepSenPhotos/Nakamura.jpg",
     "website": "https://www.capitol.hawaii.gov/legislature/memberpage.aspx?member=100",
-    "office": "State Capitol Room 431, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 431, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Nadine_Nakamura",
+    "ballotpediaUrl": "https://ballotpedia.org/Nadine_Nakamura",
+    "facebook": "representativenadinenakamura"
   },
   {
     "id": "ocd-person/43795702-8cb7-40a5-945d-80fca537e085",
@@ -848,7 +994,9 @@
     "phone": "808-586-8400",
     "photoUrl": "http://www.capitol.hawaii.gov/MemberFiles/RepSenPhotos/Lowen.jpg",
     "website": "https://capitol.hawaii.gov/memberpage.aspx?member=lowen&year=2019",
-    "office": "State Capitol Room 436, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 436, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Nicole_Lowen",
+    "ballotpediaUrl": "https://ballotpedia.org/Nicole_Lowen"
   },
   {
     "id": "ocd-person/19b5116e-d2b7-4f4b-8d7d-f4dfcbcbe1d6",
@@ -862,7 +1010,10 @@
     "phone": "808-586-6970",
     "photoUrl": "http://www.capitol.hawaii.gov/MemberFiles/RepSenPhotos/Lamosao.jpg",
     "website": "https://www.capitol.hawaii.gov/legislature/memberpage.aspx?member=270",
-    "office": "State Capitol Room 204, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 204, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rachele_Lamosao",
+    "ballotpediaUrl": "https://ballotpedia.org/Rachele_Fernandez_Lamosao",
+    "facebook": "rachelelamosao?mibextid=lqqt4d"
   },
   {
     "id": "ocd-person/3ca1b2e5-0c68-4be1-ba5b-b0d935b85e6f",
@@ -876,7 +1027,9 @@
     "phone": "808-586-6030",
     "photoUrl": "http://www.capitol.hawaii.gov/MemberFiles/RepSenPhotos/kouchi.jpg",
     "website": "https://capitol.hawaii.gov/memberpage.aspx?member=kouchi&year=2019",
-    "office": "State Capitol Room 409, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 409, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ron_Kouchi",
+    "ballotpediaUrl": "https://ballotpedia.org/Ronald_Kouchi"
   },
   {
     "id": "ocd-person/cbf4fe33-42cf-41c2-b689-5e4c0ff150f6",
@@ -890,7 +1043,9 @@
     "phone": "808-586-8455",
     "photoUrl": "http://www.capitol.hawaii.gov/MemberFiles/RepSenPhotos/Kong.jpg",
     "website": "https://capitol.hawaii.gov/memberpage.aspx?member=kong&year=2019",
-    "office": "State Capitol Room 425, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 425, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sam_Saturo_Kong",
+    "ballotpediaUrl": "https://ballotpedia.org/Sam_Kong"
   },
   {
     "id": "ocd-person/8a60db8b-b07f-45da-8169-46ddd043ce02",
@@ -904,7 +1059,9 @@
     "phone": "808-586-7793",
     "photoUrl": "https://storage.googleapis.com/enview-dev-public-general/legislative-people-photos/123803.jpg",
     "website": "https://www.capitol.hawaii.gov/legislature/memberpage.aspx?member=308",
-    "office": "State Capitol Room 223, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 223, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Samantha_DeCorte",
+    "ballotpediaUrl": "https://ballotpedia.org/Samantha_DeCorte"
   },
   {
     "id": "ocd-person/78cc3d2c-31b6-421f-a666-5a96ca3fe65a",
@@ -918,7 +1075,10 @@
     "phone": "808-586-8470",
     "photoUrl": "http://www.capitol.hawaii.gov/MemberFiles/RepSenPhotos/Matayoshi.jpg",
     "website": "https://capitol.hawaii.gov/memberpage.aspx?member=Matayoshi&year=2019",
-    "office": "State Capitol Room 433, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 433, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Scot_Matayoshi",
+    "ballotpediaUrl": "https://ballotpedia.org/Scot_Matayoshi",
+    "facebook": "repscotmatayoshi"
   },
   {
     "id": "ocd-person/078931f6-9caa-4ba0-9f53-2b27e13ed400",
@@ -932,7 +1092,9 @@
     "phone": "808-586-6380",
     "photoUrl": "http://www.capitol.hawaii.gov/MemberFiles/RepSenPhotos/Quinlan.jpg",
     "website": "https://capitol.hawaii.gov/memberpage.aspx?member=quinlan&year=2019",
-    "office": "State Capitol Room 439, 415 S. Beretania St, Honolulu, HI 96813"
+    "office": "State Capitol Room 439, 415 S. Beretania St, Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sean_Quinlan",
+    "ballotpediaUrl": "https://ballotpedia.org/Sean_Quinlan_(Hawaii)"
   },
   {
     "id": "ocd-person/7e04af29-c684-402f-a7b0-bdde0591197c",
@@ -946,7 +1108,10 @@
     "phone": "808-586-6740",
     "photoUrl": "http://www.capitol.hawaii.gov/MemberFiles/RepSenPhotos/moriwaki.jpg",
     "website": "https://capitol.hawaii.gov/memberpage.aspx?member=moriwaki&year=2019",
-    "office": "State Capitol Room 215, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 215, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sharon_Moriwaki",
+    "ballotpediaUrl": "https://ballotpedia.org/Sharon_Moriwaki",
+    "facebook": "senatormoriwaki"
   },
   {
     "id": "ocd-person/58181d36-e194-462d-a3cb-b3ab7615fbf9",
@@ -960,7 +1125,9 @@
     "phone": "808-586-6010",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Shirley_Ann_Templo.jpg",
     "website": "https://www.capitol.hawaii.gov/legislature/memberpage.aspx?member=303",
-    "office": "State Capitol Room 317, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 317, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Shirley_Ann_Templo",
+    "ballotpediaUrl": "https://ballotpedia.org/Shirley_Ann_Templo"
   },
   {
     "id": "ocd-person/d6359473-e0b5-4040-8d7f-9d95a0518650",
@@ -974,7 +1141,9 @@
     "phone": "808-586-8420",
     "photoUrl": "http://www.capitol.hawaii.gov/MemberFiles/RepSenPhotos/schang.jpg",
     "website": "https://capitol.hawaii.gov/memberpage.aspx?member=chang&year=2019",
-    "office": "State Capitol Room 226, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 226, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Stanley_Chang",
+    "ballotpediaUrl": "https://ballotpedia.org/Stanley_Chang"
   },
   {
     "id": "ocd-person/6311f34d-9611-42be-be12-017fcc0f7aa6",
@@ -988,7 +1157,9 @@
     "phone": "808-586-6120",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/SusanLeeLoy2024.png",
     "website": "https://www.capitol.hawaii.gov/legislature/memberpage.aspx?member=298",
-    "office": "State Capitol Room 332, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 332, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sue_Lee_Loy",
+    "ballotpediaUrl": "https://ballotpedia.org/Susan_Lee_Loy"
   },
   {
     "id": "ocd-person/3c16b940-790f-43f2-946d-998b6177dc5a",
@@ -1002,7 +1173,9 @@
     "phone": "808-586-8525",
     "photoUrl": "http://www.capitol.hawaii.gov/MemberFiles/RepSenPhotos/Amato.jpg",
     "website": "https://www.capitol.hawaii.gov/legislature/memberpage.aspx?member=250",
-    "office": "State Capitol Room 328, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 328, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Terez_Amato",
+    "ballotpediaUrl": "https://ballotpedia.org/Terez_Amato"
   },
   {
     "id": "ocd-person/bce62096-6c4d-4923-8826-7f67a6aaf35d",
@@ -1016,7 +1189,9 @@
     "phone": "808-586-6310",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Anthony_Miranda_20240808_093602.jpg",
     "website": "https://www.capitol.hawaii.gov/legislature/memberpage.aspx?member=299",
-    "office": "State Capitol Room 304, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 304, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tina_Nakada_Grandinetti",
+    "ballotpediaUrl": "https://ballotpedia.org/Tina_Nakada_Grandinetti"
   },
   {
     "id": "ocd-person/9957f6f1-9231-45b3-940f-2122c1caf3f7",
@@ -1030,7 +1205,9 @@
     "phone": "808-586-6150",
     "photoUrl": "http://www.capitol.hawaii.gov/MemberFiles/RepSenPhotos/LaChica.jpg",
     "website": "https://www.capitol.hawaii.gov/legislature/memberpage.aspx?member=292",
-    "office": "State Capitol Room 441, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 441, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Trish_La_Chica",
+    "ballotpediaUrl": "https://ballotpedia.org/Trish_La_Chica"
   },
   {
     "id": "ocd-person/3b99a717-698f-4bcf-a630-183bb63e623e",
@@ -1044,7 +1221,10 @@
     "phone": "808-586-7344",
     "photoUrl": "http://www.capitol.hawaii.gov/MemberFiles/RepSenPhotos/Hashimoto.jpg",
     "website": "https://capitol.hawaii.gov/memberpage.aspx?member=hashimoto&year=2019",
-    "office": "State Capitol Room 222, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 222, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Troy_Hashimoto",
+    "ballotpediaUrl": "https://ballotpedia.org/Troy_Hashimoto",
+    "facebook": "rephashimoto"
   },
   {
     "id": "ocd-person/6fb71afb-6ce8-4f21-ad16-a7255ca2bfec",
@@ -1057,6 +1237,8 @@
     "email": "repmiyake@capitol.hawaii.gov",
     "phone": "808-586-9444",
     "website": "https://www.capitol.hawaii.gov/legislature/memberpage.aspx?member=294",
-    "office": "State Capitol Room 421, 415 S. Beretania St., Honolulu, HI 96813"
+    "office": "State Capitol Room 421, 415 S. Beretania St., Honolulu, HI 96813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tyson_Miyake",
+    "ballotpediaUrl": "https://ballotpedia.org/Tyson_Miyake"
   }
 ]

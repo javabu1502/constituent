@@ -1,19 +1,5 @@
 [
   {
-    "id": "ocd-person/295965df-6c71-4e11-806f-2b7d5be5d45c",
-    "name": "Aisha Wahab",
-    "firstName": "Aisha",
-    "lastName": "Wahab",
-    "chamber": "upper",
-    "district": "10",
-    "party": "Democratic",
-    "email": "senator.wahab@senate.ca.gov",
-    "phone": "916-651-4410",
-    "photoUrl": "https://www.senate.ca.gov/sites/senate.ca.gov/files/senator_photos/wahab_aisha_d-10_-_crop.jpg",
-    "website": "https://sd10.senate.ca.gov/",
-    "office": "1021 O St. Suite 8530, Sacramento, CA 95814"
-  },
-  {
     "id": "ocd-person/6c2a35d5-c04c-44d0-8bd9-92a625e2b525",
     "name": "Akilah Weber Pierson",
     "firstName": "Akilah",
@@ -23,9 +9,13 @@
     "party": "Democratic",
     "email": "senator.weber@senate.ca.gov",
     "phone": "916-651-4039",
-    "photoUrl": "https://www.assembly.ca.gov/sites/assembly.ca.gov/files/memberphotos/ad-79_weber_a._005_resized.jpg",
-    "website": "https://a79.asmdc.org/",
-    "office": "1021 O St. Suite 7310, Sacramento, CA 95814"
+    "photoUrl": "https://sd39.senate.ca.gov/sites/sd39.senate.ca.gov/files/website/sd39_bio_portrait.jpg",
+    "website": "https://sd39.senate.ca.gov/",
+    "office": "1021 O St. Suite 7310, Sacramento, CA 95814",
+    "districtOffice": "7575 Metropolitan Drive Suite 100, San Diego, CA 92108",
+    "districtPhone": "619-688-6700",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Akilah_Weber",
+    "ballotpediaUrl": "https://ballotpedia.org/Akilah_Weber"
   },
   {
     "id": "ocd-person/78610d0e-c790-4fc9-ab8e-0887adbbe063",
@@ -37,9 +27,13 @@
     "party": "Democratic",
     "email": "assemblymember.muratsuchi@assembly.ca.gov",
     "phone": "916-319-2066",
-    "photoUrl": "https://www.assembly.ca.gov/sites/assembly.ca.gov/files/memberphotos/ad66.jpg",
+    "photoUrl": "https://webapi.assembly.ca.gov/district-media/assets/members/assembly_member_66.jpg",
     "website": "https://a66.asmdc.org/",
-    "office": "Room 5310, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "office": "Room 5310, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "3424 W. Carson St. Suite 450, Torrance, CA 90503",
+    "districtPhone": "310-375-0691",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Al_Muratsuchi",
+    "ballotpediaUrl": "https://ballotpedia.org/Al_Muratsuchi"
   },
   {
     "id": "ocd-person/5d0057a2-e04d-44ca-b1d5-fc55e113351a",
@@ -49,11 +43,15 @@
     "chamber": "lower",
     "district": "24",
     "party": "Democratic",
-    "email": "alex.lee@asm.ca.gov",
+    "email": "assemblymember.lee@assembly.ca.gov",
     "phone": "916-319-2024",
-    "photoUrl": "https://www.assembly.ca.gov/sites/assembly.ca.gov/files/memberphotos/lee-025.jpg",
+    "photoUrl": "https://webapi.assembly.ca.gov/district-media/assets/members/assembly_member_24.jpg",
     "website": "https://a24.asmdc.org/",
-    "office": "Room 6330, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "office": "Room 6330, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "1313 N. Milpitas Blvd. Suite 255, Milpitas, CA 95035",
+    "districtPhone": "408-262-2501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Alex_Lee_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Alex_Lee"
   },
   {
     "id": "ocd-person/eb9c8103-ac9d-4342-9d95-5086d867a9bd",
@@ -67,7 +65,11 @@
     "phone": "916-319-2033",
     "photoUrl": "https://www.joincalifornia.com/candidate_pic.php?id=15000",
     "website": "https://ad33.asmrc.org/",
-    "office": "Room 5530, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "office": "Room 5530, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "100 W. Willow Plaza Suite 405, Visalia, CA 93291",
+    "districtPhone": "559-636-3440",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Alexandra_Macedo",
+    "ballotpediaUrl": "https://ballotpedia.org/Alexandra_Macedo"
   },
   {
     "id": "ocd-person/c3921173-9680-4387-a70e-ebba5c599846",
@@ -80,8 +82,12 @@
     "email": "assemblymember.avilafarias@assembly.ca.gov",
     "phone": "916-319-2015",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Anamarie_Avila_Farias_20240905_034457.jpg",
-    "website": "https://a15.asmdc.org/",
-    "office": "Room 6140, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "website": "https://avilafarias.asmdc.org/",
+    "office": "Room 6140, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "2151 Salvio St. Suite P, Concord, CA 94520",
+    "districtPhone": "925-521-1511",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Anamarie_Avila_Farias",
+    "ballotpediaUrl": "https://ballotpedia.org/Anamarie_Avila_Farias"
   },
   {
     "id": "ocd-person/564f2203-7cae-4a40-bc93-5c05a935b98f",
@@ -95,7 +101,11 @@
     "phone": "916-651-4008",
     "photoUrl": "https://www.senate.ca.gov/sites/senate.ca.gov/files/senator_photos/ashby_angelique_d-08.jpg",
     "website": "https://sd08.senate.ca.gov/",
-    "office": "1021 O St. Suite 8630, Sacramento, CA 95814"
+    "office": "1021 O St. Suite 8630, Sacramento, CA 95814",
+    "districtOffice": "1510 14th St., Sacramento, CA 95814",
+    "districtPhone": "916-319-0309",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Angelique_Ashby",
+    "ballotpediaUrl": "https://ballotpedia.org/Angelique_Ashby"
   },
   {
     "id": "ocd-person/fe462917-df55-4a43-9fd8-970541544ca6",
@@ -109,7 +119,11 @@
     "phone": "916-651-4014",
     "photoUrl": "https://www.senate.ca.gov/sites/senate.ca.gov/files/senator_photos/2016-ad30_annacaballero.jpg",
     "website": "https://sd14.senate.ca.gov/",
-    "office": "1021 O St. Suite 7620, Sacramento, CA 95814"
+    "office": "1021 O St. Suite 7620, Sacramento, CA 95814",
+    "districtOffice": "2550 Mariposa Mall Suite 2016, Fresno, CA 93721",
+    "districtPhone": "559-264-3070",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Anna_Caballero",
+    "ballotpediaUrl": "https://ballotpedia.org/Anna_Caballero"
   },
   {
     "id": "ocd-person/820619fd-d053-4915-b099-1d134a880228",
@@ -121,9 +135,13 @@
     "party": "Democratic",
     "email": "assemblymember.kalra@assembly.ca.gov",
     "phone": "916-319-2025",
-    "photoUrl": "https://www.assembly.ca.gov/sites/assembly.ca.gov/files/memberphotos/ad27_karla_roster150_20161205.jpg",
+    "photoUrl": "https://webapi.assembly.ca.gov/district-media/assets/members/assembly_member_25.jpg",
     "website": "https://a25.asmdc.org/",
-    "office": "Room 4610, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "office": "Room 4610, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "111 W. Saint John St. Suite 1150, San Jose, CA 95113",
+    "districtPhone": "408-286-2535",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ash_Kalra",
+    "ballotpediaUrl": "https://ballotpedia.org/Ash_Kalra"
   },
   {
     "id": "ocd-person/87062971-b583-4983-8ac5-4af98bef354d",
@@ -135,9 +153,13 @@
     "party": "Democratic",
     "email": "assemblymember.valencia@assembly.ca.gov",
     "phone": "916-319-2068",
-    "photoUrl": "https://www.assembly.ca.gov/sites/assembly.ca.gov/files/memberphotos/valencia_518_11-30-22_resized.jpg",
+    "photoUrl": "https://webapi.assembly.ca.gov/district-media/assets/members/assembly_member_68.jpg",
     "website": "https://a68.asmdc.org/",
-    "office": "Room 5510, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "office": "Room 5510, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "2400 E. Katella Ave. Suite 640, Anaheim, CA 92806",
+    "districtPhone": "714-939-8469",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Avelino_Valencia",
+    "ballotpediaUrl": "https://ballotpedia.org/Avelino_Valencia"
   },
   {
     "id": "ocd-person/e725b91e-1f7f-4510-a9cc-0b9a39d283c3",
@@ -151,7 +173,11 @@
     "phone": "916-651-4024",
     "photoUrl": "https://www.senate.ca.gov/sites/senate.ca.gov/files/senator_photos/allen_ben_d-26.jpg",
     "website": "https://sd24.senate.ca.gov/",
-    "office": "1021 O St. Suite 6610, Sacramento, CA 95814"
+    "office": "1021 O St. Suite 6610, Sacramento, CA 95814",
+    "districtOffice": "111 Penn St. Suite 101, El Segundo, CA 90245",
+    "districtPhone": "310-414-8190",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ben_Allen_(California_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Ben_Allen"
   },
   {
     "id": "ocd-person/82cbb6e9-8486-44ec-8450-86d1e700f828",
@@ -163,9 +189,13 @@
     "party": "Democratic",
     "email": "assemblymember.rubio@assembly.ca.gov",
     "phone": "916-319-2048",
-    "photoUrl": "https://www.assembly.ca.gov/sites/assembly.ca.gov/files/memberphotos/rubio.jpg",
-    "website": "https://a48.asmdc.org",
-    "office": "Room 5250, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "photoUrl": "https://webapi.assembly.ca.gov/district-media/assets/members/assembly_member_48.jpg",
+    "website": "https://rubio.asmdc.org/",
+    "office": "Room 5250, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "100 N. Barranca St. Suite 895, West Covina, CA 91791",
+    "districtPhone": "626-960-4457",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Blanca_Rubio",
+    "ballotpediaUrl": "https://ballotpedia.org/Blanca_Rubio"
   },
   {
     "id": "ocd-person/f2ba8154-6bf3-4e5e-af05-9412e2a189f2",
@@ -177,9 +207,13 @@
     "party": "Democratic",
     "email": "assemblymember.pacheco@assembly.ca.gov",
     "phone": "916-319-2064",
-    "photoUrl": "https://www.assembly.ca.gov/sites/assembly.ca.gov/files/memberphotos/pachecho_007_11-30-22_resized.jpg",
+    "photoUrl": "https://webapi.assembly.ca.gov/district-media/assets/members/assembly_member_64.jpg",
     "website": "https://a64.asmdc.org/",
-    "office": "Room 4510, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "office": "Room 4510, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "8255 Firestone Blvd. Suite 203, Downey, CA 90241",
+    "districtPhone": "562-861-5803",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Blanca_Pacheco",
+    "ballotpediaUrl": "https://ballotpedia.org/Blanca_Pacheco"
   },
   {
     "id": "ocd-person/a76028df-5730-47b0-b617-1565621def41",
@@ -193,7 +227,11 @@
     "phone": "916-651-4030",
     "photoUrl": "https://www.senate.ca.gov/sites/senate.ca.gov/files/senator_photos/archuleta_bob.jpg",
     "website": "https://sd30.senate.ca.gov/",
-    "office": "1021 O St. Suite 6620, Sacramento, CA 95814"
+    "office": "1021 O St. Suite 6620, Sacramento, CA 95814",
+    "districtOffice": "12501 Imperial Highway Suite 110, Norwalk, CA 90650",
+    "districtPhone": "562-406-1001",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bob_Archuleta",
+    "ballotpediaUrl": "https://ballotpedia.org/Bob_Archuleta"
   },
   {
     "id": "ocd-person/ea5c3b3d-bbad-41f6-a912-69f60f1553a4",
@@ -207,7 +245,11 @@
     "phone": "916-651-4040",
     "photoUrl": "https://www.senate.ca.gov/sites/senate.ca.gov/files/senator_photos/brian_jones_headshot_blue.jpg",
     "website": "https://senate.ca.gov/sd38",
-    "office": "1021 O St. Suite 7640, Sacramento, CA 95814"
+    "office": "1021 O St. Suite 7640, Sacramento, CA 95814",
+    "districtOffice": "10650 Treena St. Suite 110, San Diego, CA 92131",
+    "districtPhone": "858-547-3818",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Brian_Jones_(California_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Brian_Jones_(California)"
   },
   {
     "id": "ocd-person/8230907e-9ae3-4ae9-b52a-c8464a157f64",
@@ -219,9 +261,13 @@
     "party": "Democratic",
     "email": "assemblymember.wicks@assembly.ca.gov",
     "phone": "916-319-2014",
-    "photoUrl": "https://www.assembly.ca.gov/sites/assembly.ca.gov/files/memberphotos/a15_b_wicks.jpg",
+    "photoUrl": "https://webapi.assembly.ca.gov/district-media/assets/members/assembly_member_14.jpg",
     "website": "https://a14.asmdc.org",
-    "office": "Room 8140, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "office": "Room 8140, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "1515 Clay St. Suite 2201, Oakland, CA 94612",
+    "districtPhone": "510-286-1400",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Buffy_Wicks",
+    "ballotpediaUrl": "https://ballotpedia.org/Buffy_Wicks"
   },
   {
     "id": "ocd-person/053d119b-847e-43bf-9a22-18b5f309067f",
@@ -235,7 +281,11 @@
     "phone": "916-319-2075",
     "photoUrl": "https://storage.googleapis.com/enview-dev-public-general/legislative-people-photos/159263.jpg",
     "website": "https://ad75.asmrc.org/",
-    "office": "Room 4630, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "office": "Room 4630, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "9820 Willow Creek Road Suite 240, San Diego, CA 92131",
+    "districtPhone": "858-566-7538",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Carl_DeMaio",
+    "ballotpediaUrl": "https://ballotpedia.org/Carl_DeMaio"
   },
   {
     "id": "ocd-person/b19c0361-ca41-4cba-bcf4-b7342a67f28b",
@@ -249,7 +299,11 @@
     "phone": "916-651-4020",
     "photoUrl": "https://www.senate.ca.gov/sites/senate.ca.gov/files/senator_photos/menjivar_caroline_d-20.jpg",
     "website": "https://sd20.senate.ca.gov/",
-    "office": "1021 O St. Suite 6630, Sacramento, CA 95814"
+    "office": "1021 O St. Suite 6630, Sacramento, CA 95814",
+    "districtOffice": "6150 Van Nuys Blvd. Suite 400, Van Nuys, CA 91401",
+    "districtPhone": "818-901-5588",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Caroline_Menjivar",
+    "ballotpediaUrl": "https://ballotpedia.org/Caroline_Menjivar"
   },
   {
     "id": "ocd-person/39e3ce0f-c2e2-4480-9e99-76e1e62f366d",
@@ -263,7 +317,11 @@
     "phone": "916-651-4038",
     "photoUrl": "https://www.senate.ca.gov/sites/senate.ca.gov/files/senator_photos/blakespear_catherine_d-38.jpg",
     "website": "https://sd38.senate.ca.gov/",
-    "office": "1021 O St. Suite 7720, Sacramento, CA 95814"
+    "office": "1021 O St. Suite 7720, Sacramento, CA 95814",
+    "districtOffice": "2385 Camino Vida Roble Unit 205, Carlsbad, CA 92011",
+    "districtPhone": "760-438-2005",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Catherine_Blakespear",
+    "ballotpediaUrl": "https://ballotpedia.org/Catherine_Blakespear"
   },
   {
     "id": "ocd-person/3864202e-3b40-430e-a218-cfe56d83cee5",
@@ -277,7 +335,11 @@
     "phone": "916-319-2019",
     "photoUrl": "https://sfbos.org/sites/default/files/Roster_frame_stefani_0.jpg",
     "website": "https://a19.asmdc.org/",
-    "office": "Room 5220, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "office": "Room 5220, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "455 Golden Gate Ave. Suite 14600, San Francisco, CA 94102",
+    "districtPhone": "415-557-2312",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Catherine_Stefani",
+    "ballotpediaUrl": "https://ballotpedia.org/Catherine_Stefani"
   },
   {
     "id": "ocd-person/434bcfb4-1279-40cc-916b-f89af5805a9c",
@@ -289,9 +351,13 @@
     "party": "Democratic",
     "email": "assemblymember.aguiar-curry@assembly.ca.gov",
     "phone": "916-319-2004",
-    "photoUrl": "https://www.assembly.ca.gov/sites/assembly.ca.gov/files/memberphotos/ad-04_aguiar-curry_c18_resized.jpg",
+    "photoUrl": "https://webapi.assembly.ca.gov/district-media/assets/members/assembly_member_04.jpg",
     "website": "https://a04.asmdc.org/",
-    "office": "Room 8210, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "office": "Room 8210, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "2721 Napa Valley Corporate Drive, Napa, CA 94558",
+    "districtPhone": "707-224-0440",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Cecilia_Aguiar-Curry",
+    "ballotpediaUrl": "https://ballotpedia.org/Cecilia_Aguiar-Curry"
   },
   {
     "id": "ocd-person/1dbf574d-4c03-40ce-8c30-a6727c4bd5ab",
@@ -303,9 +369,12 @@
     "party": "Democratic",
     "email": "assemblymember.celesterodriguez@assembly.ca.gov",
     "phone": "916-319-2043",
-    "photoUrl": "https://ci.san-fernando.ca.us/wp-content/uploads/2021/07/Rodriguez-Celeste-2021-267x300.png",
-    "website": "https://a43.asmdc.org/",
-    "office": "Room 4320, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "website": "https://crodriguez.asmdc.org/",
+    "office": "Room 4320, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "9300 Laurel Canyon Blvd. First Floor, Arleta, CA 91331",
+    "districtPhone": "818-504-3911",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Celeste_Rodriguez",
+    "ballotpediaUrl": "https://ballotpedia.org/Celeste_Rodriguez"
   },
   {
     "id": "ocd-person/84a80bdb-37d5-4f52-8f55-e116fb97ca58",
@@ -319,7 +388,11 @@
     "phone": "916-319-2002",
     "photoUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsvc9FWYBOubY6iEQhH0tArBAvSS_ZMhoOGw&s",
     "website": "https://a02.asmdc.org/",
-    "office": "Room 5130, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "office": "Room 5130, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "1036 5th St. Suite D, Eureka, CA 95501",
+    "districtPhone": "707-445-7014",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Chris_Rogers_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Chris_Rogers_(California)"
   },
   {
     "id": "ocd-person/8833976f-b95a-45bf-bbd9-ccdb66946d20",
@@ -333,7 +406,11 @@
     "phone": "916-651-4003",
     "photoUrl": "https://calearninglab.org/wp-content/uploads/2024/09/Emcee-Christopher-Cabaldon-488x559.png",
     "website": "https://sd03.senate.ca.gov/",
-    "office": "1021 O St. Suite 7320, Sacramento, CA 95814"
+    "office": "1021 O St. Suite 7320, Sacramento, CA 95814",
+    "districtOffice": "2721 Napa Valley Corporate Drive Building 4, Second Floor, Napa, CA 94558",
+    "districtPhone": "707-224-1990",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Christopher_Cabaldon",
+    "ballotpediaUrl": "https://ballotpedia.org/Christopher_Cabaldon"
   },
   {
     "id": "ocd-person/71590420-10d6-4deb-8d59-453256d625b6",
@@ -345,9 +422,13 @@
     "party": "Democratic",
     "email": "assemblymember.ward@assembly.ca.gov",
     "phone": "916-319-2078",
-    "photoUrl": "https://www.assembly.ca.gov/sites/assembly.ca.gov/files/memberphotos/ward-006.jpg",
-    "website": "https://a78.asmdc.org/",
-    "office": "Room 6350, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "photoUrl": "https://webapi.assembly.ca.gov/district-media/assets/members/assembly_member_78.jpg",
+    "website": "https://ward.asmdc.org/",
+    "office": "Room 6350, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "2700 Adams Ave. Suite 102, San Diego, CA 92116",
+    "districtPhone": "619-280-7801",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Chris_Ward_(American_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Christopher_Ward_(California)"
   },
   {
     "id": "ocd-person/e351eaa3-8aa1-4f26-a8ff-2a260a0ad383",
@@ -359,9 +440,13 @@
     "party": "Democratic",
     "email": "assemblymember.jackson@assembly.ca.gov",
     "phone": "916-319-2060",
-    "photoUrl": "https://www.assembly.ca.gov/sites/assembly.ca.gov/files/memberphotos/jackson_027_11-30-22_resized.jpg",
-    "website": "https://a60.asmdc.org/",
-    "office": "Room 6120, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "photoUrl": "https://webapi.assembly.ca.gov/district-media/assets/members/assembly_member_60.jpg",
+    "website": "https://jackson.asmdc.org/",
+    "office": "Room 6120, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "22690 Cactus Ave. Suite 280, Moreno Valley, CA 92553",
+    "districtPhone": "951-653-0960",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Corey_Jackson_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Corey_Jackson"
   },
   {
     "id": "ocd-person/c766abf8-06ca-4a98-9665-82b87149ca96",
@@ -373,9 +458,13 @@
     "party": "Democratic",
     "email": "assemblymember.petrie-norris@assembly.ca.gov",
     "phone": "916-319-2073",
-    "photoUrl": "https://www.assembly.ca.gov/sites/assembly.ca.gov/files/memberphotos/a74_c_p_norris.jpg",
+    "photoUrl": "https://webapi.assembly.ca.gov/district-media/assets/members/assembly_member_73.jpg",
     "website": "https://a73.asmdc.org/",
-    "office": "Room 8120, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "office": "Room 8120, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "19712 MacArthur Blvd. Suite 150, Irvine, CA 92612",
+    "districtPhone": "949-251-0074",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Cottie_Petrie-Norris",
+    "ballotpediaUrl": "https://ballotpedia.org/Cottie_Petrie-Norris"
   },
   {
     "id": "ocd-person/32e06e60-77ac-4c5e-af1e-2110b602dc97",
@@ -387,9 +476,13 @@
     "party": "Democratic",
     "email": "assemblymember.connolly@assembly.ca.gov",
     "phone": "916-319-2012",
-    "photoUrl": "https://www.assembly.ca.gov/sites/assembly.ca.gov/files/memberphotos/connolly_509_11-30-22_resized.jpg",
+    "photoUrl": "https://webapi.assembly.ca.gov/district-media/assets/members/assembly_member_12.jpg",
     "website": "https://a12.asmdc.org/",
-    "office": "Room 5240, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "office": "Room 5240, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "11 English St., Petaluma, CA 94952",
+    "districtPhone": "707-576-2631",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Damon_Connolly",
+    "ballotpediaUrl": "https://ballotpedia.org/Damon_Connolly"
   },
   {
     "id": "ocd-person/86218623-ea63-4b2a-ab5c-7694e3f4a18a",
@@ -403,7 +496,10 @@
     "phone": "916-319-2076",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Darshana_Patel.jpg",
     "website": "https://a76.asmdc.org/",
-    "office": "Room 5140, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "office": "Room 5140, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "12396 World Trade Drive Suite 118, San Diego, CA 92128",
+    "districtPhone": "858-675-0760",
+    "ballotpediaUrl": "https://ballotpedia.org/Darshana_Patel"
   },
   {
     "id": "ocd-person/0fa65d2c-6020-4586-a6f1-5dfd41db38ff",
@@ -417,7 +513,11 @@
     "phone": "916-651-4015",
     "photoUrl": "https://www.senate.ca.gov/sites/senate.ca.gov/files/senator_photos/sd15_cortese_0.jpg",
     "website": "https://sd15.senate.ca.gov/",
-    "office": "1021 O St. Suite 7520, Sacramento, CA 95814"
+    "office": "1021 O St. Suite 7520, Sacramento, CA 95814",
+    "districtOffice": "1155 Meridian Ave. Suite 100, San Jose, CA 95125",
+    "districtPhone": "408-723-4154",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dave_Cortese",
+    "ballotpediaUrl": "https://ballotpedia.org/Dave_Cortese_(California)"
   },
   {
     "id": "ocd-person/52f6ccc1-eb4a-4c09-8614-5e4022395605",
@@ -429,9 +529,13 @@
     "party": "Democratic",
     "email": "assemblymember.alvarez@assembly.ca.gov",
     "phone": "916-319-2080",
-    "photoUrl": "https://www.assembly.ca.gov/sites/assembly.ca.gov/files/memberphotos/ad80_alvarez_008_06-16-22.jpg",
+    "photoUrl": "https://webapi.assembly.ca.gov/district-media/assets/members/assembly_member_80.jpg",
     "website": "https://a80.asmdc.org/",
-    "office": "Room 5320, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "office": "Room 5320, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "276 Church Ave. Suite D, Chula Vista, CA 91910",
+    "districtPhone": "619-498-8580",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/David_Alvarez_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/David_Alvarez_(California)"
   },
   {
     "id": "ocd-person/748ce69c-a2bc-41a7-95e2-b09fba6e5ecd",
@@ -445,7 +549,11 @@
     "phone": "916-319-2008",
     "photoUrl": "https://youngamericans.berkeley.edu/wp-content/uploads/2024/04/David-Tangipa-1024x1024.jpg",
     "website": "https://ad08.asmrc.org/",
-    "office": "Room 4310, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "office": "Room 4310, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "6245 N. Fresno St. Suite 106, Fresno, CA 93710",
+    "districtPhone": "559-446-2029",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/David_Tangipa",
+    "ballotpediaUrl": "https://ballotpedia.org/David_Tangipa"
   },
   {
     "id": "ocd-person/eddfcfb5-2d07-4e5b-81a0-88e5703dc0bb",
@@ -457,9 +565,13 @@
     "party": "Democratic",
     "email": "dawn.addis@asm.ca.gov",
     "phone": "916-319-2030",
-    "photoUrl": "https://www.assembly.ca.gov/sites/assembly.ca.gov/files/memberphotos/addis_003_11-30-22_resized.jpg",
+    "photoUrl": "https://webapi.assembly.ca.gov/district-media/assets/members/assembly_member_30.jpg",
     "website": "https://a30.asmdc.org/",
-    "office": "Room 4120, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "office": "Room 4120, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "857 Santa Rosa St., San Luis Obispo, CA 93401",
+    "districtPhone": "805-549-3001",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dawn_Addis",
+    "ballotpediaUrl": "https://ballotpedia.org/Dawn_Addis"
   },
   {
     "id": "ocd-person/0c4e1b43-c3d7-4a13-87c4-92e29903cb73",
@@ -471,9 +583,13 @@
     "party": "Republican",
     "email": "assemblymember.dixon@assembly.ca.gov",
     "phone": "916-319-2072",
-    "photoUrl": "https://www.assembly.ca.gov/sites/assembly.ca.gov/files/memberphotos/dixon_a25i1340_resized.png",
+    "photoUrl": "https://webapi.assembly.ca.gov/district-media/assets/members/assembly_member_72.jpg",
     "website": "https://ad72.asmrc.org",
-    "office": "Room 5330, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "office": "Room 5330, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "4100 MacArthur Blvd. Suite 340, Newport Beach, CA 92660",
+    "districtPhone": "949-798-7221",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Diane_Dixon_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Diane_Dixon"
   },
   {
     "id": "ocd-person/20c72bef-f518-4677-bbcb-83c502c36ede",
@@ -485,9 +601,13 @@
     "party": "Democratic",
     "email": "assemblymember.papan@assembly.ca.gov",
     "phone": "916-319-2021",
-    "photoUrl": "https://www.assembly.ca.gov/sites/assembly.ca.gov/files/memberphotos/papan_002_11-30-22_resized.jpg",
-    "website": "https://a21.asmdc.org",
-    "office": "Room 4220, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "photoUrl": "https://webapi.assembly.ca.gov/district-media/assets/members/assembly_member_21.jpg",
+    "website": "https://papan.asmdc.org/",
+    "office": "Room 4220, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "1528 S. El Camino Real Suite 302, San Mateo, CA 94402",
+    "districtPhone": "650-349-2200",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Diane_Papan",
+    "ballotpediaUrl": "https://ballotpedia.org/Diane_Papan"
   },
   {
     "id": "ocd-person/e2da0f08-1bd8-4ac2-95f1-002870238527",
@@ -499,9 +619,13 @@
     "party": "Democratic",
     "email": "assemblymember.arambula@assembly.ca.gov",
     "phone": "916-319-2031",
-    "photoUrl": "https://www.assembly.ca.gov/sites/assembly.ca.gov/files/memberphotos/asm-arambula.jpg",
+    "photoUrl": "https://webapi.assembly.ca.gov/district-media/assets/members/assembly_member_31.jpg",
     "website": "https://a31.asmdc.org/",
-    "office": "Room 6130, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "office": "Room 6130, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "2550 Mariposa Mall Suite 5031, Fresno, CA 93721",
+    "districtPhone": "559-445-5532",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Joaquin_Arambula",
+    "ballotpediaUrl": "https://ballotpedia.org/Joaquin_Arambula"
   },
   {
     "id": "ocd-person/19f694d8-b409-40e5-9f87-d8e3e84afc7f",
@@ -514,8 +638,12 @@
     "email": "senator.reyes@senate.ca.gov",
     "phone": "916-651-4029",
     "photoUrl": "https://www.assembly.ca.gov/sites/assembly.ca.gov/files/memberphotos/ad-50_reyes_e17_resized.jpg",
-    "website": "https://a47.asmdc.org",
-    "office": "1021 O St. Suite 7210, Sacramento, CA 95814"
+    "website": "https://sd29.senate.ca.gov/",
+    "office": "1021 O St. Suite 7210, Sacramento, CA 95814",
+    "districtOffice": "301 E. Vanderbilt Way Suite 400, San Bernardino, CA 92408",
+    "districtPhone": "909-888-5360",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Eloise_Reyes",
+    "ballotpediaUrl": "https://ballotpedia.org/Eloise_Reyes"
   },
   {
     "id": "ocd-person/d2a8e29a-5eac-4e2a-a686-d1bdb04927e7",
@@ -527,9 +655,13 @@
     "party": "Democratic",
     "email": "assemblymember.soria@assembly.ca.gov",
     "phone": "916-319-2027",
-    "photoUrl": "https://www.assembly.ca.gov/sites/assembly.ca.gov/files/memberphotos/soria_025_edit_11-29-22_resized_0.jpg",
+    "photoUrl": "https://webapi.assembly.ca.gov/district-media/assets/members/assembly_member_27.jpg",
     "website": "https://a27.asmdc.org/",
-    "office": "Room 4110, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "office": "Room 4110, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "2550 Mariposa Mall Suite 3088, Fresno, CA 93721",
+    "districtPhone": "559-890-2705",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Esmeralda_Soria",
+    "ballotpediaUrl": "https://ballotpedia.org/Esmeralda_Soria"
   },
   {
     "id": "ocd-person/2944d19a-c288-4f32-b6a0-72e35f48e570",
@@ -541,9 +673,13 @@
     "party": "Democratic",
     "email": "assemblymember.pellerin@assembly.ca.gov",
     "phone": "916-319-2028",
-    "photoUrl": "https://www.assembly.ca.gov/sites/assembly.ca.gov/files/memberphotos/pellerin_502_11-30-22_resized.jpg",
+    "photoUrl": "https://webapi.assembly.ca.gov/district-media/assets/members/assembly_member_28.jpg",
     "website": "https://a28.asmdc.org/",
-    "office": "Room 6310, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "office": "Room 6310, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "17555 Peak Ave. Suite 100, Morgan Hill, CA 95037",
+    "districtPhone": "408-659-3127",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Gail_Pellerin",
+    "ballotpediaUrl": "https://ballotpedia.org/Gail_Pellerin"
   },
   {
     "id": "ocd-person/50e55c91-8b18-45ea-a074-bf500e7a299e",
@@ -555,9 +691,13 @@
     "party": "Republican",
     "email": "assemblymember.wallis@assembly.ca.gov",
     "phone": "916-319-2047",
-    "photoUrl": "https://www.assembly.ca.gov/sites/assembly.ca.gov/files/memberphotos/wallis_greg_0.jpg",
+    "photoUrl": "https://webapi.assembly.ca.gov/district-media/assets/members/assembly_member_47.jpg",
     "website": "https://ad47.asmrc.org/",
-    "office": "Room 4330, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "office": "Room 4330, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "41-608 Indian Trail Road Suite D-1, Rancho Mirage, CA 92270",
+    "districtPhone": "760-346-6342",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Greg_Wallis",
+    "ballotpediaUrl": "https://ballotpedia.org/Greg_Wallis"
   },
   {
     "id": "ocd-person/57f76b8e-63ba-4aa7-93c9-0b0853ce2279",
@@ -569,9 +709,13 @@
     "party": "Democratic",
     "email": "assemblymember.hart@assembly.ca.gov",
     "phone": "916-319-2037",
-    "photoUrl": "https://www.assembly.ca.gov/sites/assembly.ca.gov/files/memberphotos/hart_027_11-30-22_resized.jpg",
-    "website": "https://a37.asmdc.org/",
-    "office": "Room 6230, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "photoUrl": "https://webapi.assembly.ca.gov/district-media/assets/members/assembly_member_37.jpg",
+    "website": "https://hart.asmdc.org/",
+    "office": "Room 6230, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "101 W. Anapamu St. Suite A, Santa Barbara, CA 93101",
+    "districtPhone": "805-564-1649",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Gregg_Hart",
+    "ballotpediaUrl": "https://ballotpedia.org/Gregg_Hart"
   },
   {
     "id": "ocd-person/c830a90c-8964-4c0f-b31b-729cab1144fd",
@@ -583,9 +727,13 @@
     "party": "Republican",
     "email": "assemblymember.flora@assembly.ca.gov",
     "phone": "916-319-2009",
-    "photoUrl": "https://www.assembly.ca.gov/sites/assembly.ca.gov/files/memberphotos/flora.jpg",
+    "photoUrl": "https://webapi.assembly.ca.gov/district-media/assets/members/assembly_member_09.jpg",
     "website": "https://ad09.asmrc.org/",
-    "office": "Room 4730, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "office": "Room 4730, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "578 N. Wilma Ave. Suite B, Ripon, CA 95366",
+    "districtPhone": "209-599-2112",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Heath_Flora",
+    "ballotpediaUrl": "https://ballotpedia.org/Heath_Flora"
   },
   {
     "id": "ocd-person/3b125433-5362-42e2-a2b5-b608962c9481",
@@ -599,7 +747,11 @@
     "phone": "916-319-2001",
     "photoUrl": "https://theorion.com/wp-content/uploads/2024/09/Hadwick-MCOE-.jpg",
     "website": "https://ad01.asmrc.org/",
-    "office": "Room 5710, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "office": "Room 5710, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "113 Presley Way Suite 10, Grass Valley, CA 95945",
+    "districtPhone": "530-265-0601",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Heather_Hadwick",
+    "ballotpediaUrl": "https://ballotpedia.org/Heather_Hadwick"
   },
   {
     "id": "ocd-person/66bd4b32-5536-4bae-ab55-08c0b70ca5fd",
@@ -613,7 +765,11 @@
     "phone": "916-651-4027",
     "photoUrl": "https://www.senate.ca.gov/sites/senate.ca.gov/files/senator_photos/stern.jpg",
     "website": "https://sd27.senate.ca.gov/",
-    "office": "1021 O St. Suite 7710, Sacramento, CA 95814"
+    "office": "1021 O St. Suite 7710, Sacramento, CA 95814",
+    "districtOffice": "14724 Ventura Blvd. Suite 1115, Sherman Oaks, CA 91403",
+    "districtPhone": "818-501-0650",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Henry_Stern_(California_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Henry_Stern"
   },
   {
     "id": "ocd-person/e9e56c3e-1c7d-4eab-a3ac-35cfc7c6a651",
@@ -625,9 +781,13 @@
     "party": "Democratic",
     "email": "assemblymember.bryan@assembly.ca.gov",
     "phone": "916-319-2055",
-    "photoUrl": "https://www.assembly.ca.gov/sites/assembly.ca.gov/files/memberphotos/isaacbryan.jpg",
-    "website": "https://a54.asmdc.org",
-    "office": "Room 5630, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "photoUrl": "https://webapi.assembly.ca.gov/district-media/assets/members/assembly_member_55.jpg",
+    "website": "https://bryan.asmdc.org/",
+    "office": "Room 5630, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "5601 W. Slauson Ave. Suite 200, Culver City, CA 90230",
+    "districtPhone": "310-641-5410",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Isaac_Bryan",
+    "ballotpediaUrl": "https://ballotpedia.org/Isaac_Bryan"
   },
   {
     "id": "ocd-person/e7ad99fd-fda5-4114-af3e-320f5be9be3c",
@@ -639,9 +799,13 @@
     "party": "Democratic",
     "email": "assemblymember.irwin@assembly.ca.gov",
     "phone": "916-319-2042",
-    "photoUrl": "https://www.assembly.ca.gov/sites/assembly.ca.gov/files/memberphotos/AD44_Irwin_Portrait150_20141201.jpg",
-    "website": "https://a42.asmdc.org/",
-    "office": "Room 6220, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "photoUrl": "https://webapi.assembly.ca.gov/district-media/assets/members/assembly_member_42.jpg",
+    "website": "https://irwin.asmdc.org/",
+    "office": "Room 6220, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "223 E. Thousand Oaks Blvd. Suite 412, Thousand Oaks, CA 91360",
+    "districtPhone": "805-370-0542",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jacqui_Irwin",
+    "ballotpediaUrl": "https://ballotpedia.org/Jacqui_Irwin"
   },
   {
     "id": "ocd-person/156660b1-4c3f-45e3-8384-53cda60d7ea5",
@@ -653,23 +817,13 @@
     "party": "Democratic",
     "email": "assemblymember.ramos@assembly.ca.gov",
     "phone": "916-319-2045",
-    "photoUrl": "https://www.assembly.ca.gov/sites/assembly.ca.gov/files/memberphotos/a40_jc_ramos.jpg",
-    "website": "https://a40.asmdc.org/",
-    "office": "Room 8310, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
-  },
-  {
-    "id": "ocd-person/5d93a1cb-7a01-43ab-a26c-a2abecdee135",
-    "name": "James Gallagher",
-    "firstName": "James",
-    "lastName": "Gallagher",
-    "chamber": "lower",
-    "district": "3",
-    "party": "Republican",
-    "email": "assemblymember.gallagher@assembly.ca.gov",
-    "phone": "916-319-2003",
-    "photoUrl": "https://www.assembly.ca.gov/sites/assembly.ca.gov/files/memberphotos/Gallagher_LDC_headshot.jpg",
-    "website": "https://ad03.asmrc.org/",
-    "office": "Room 4740, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "photoUrl": "https://webapi.assembly.ca.gov/district-media/assets/members/assembly_member_45.jpg",
+    "website": "https://ramos.asmdc.org/",
+    "office": "Room 8310, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "290 N. D St. Suite 805, San Bernardino, CA 92401",
+    "districtPhone": "909-889-7145",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/James_Ramos",
+    "ballotpediaUrl": "https://ballotpedia.org/James_Ramos"
   },
   {
     "id": "ocd-person/b08199e4-63d9-4bd4-9be3-99e628fa7059",
@@ -681,8 +835,13 @@
     "party": "Democratic",
     "email": "assemblymember.bains@assembly.ca.gov",
     "phone": "916-319-2035",
-    "website": "https://a35.asmdc.org/",
-    "office": "Room 5730, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "photoUrl": "https://webapi.assembly.ca.gov/district-media/assets/members/assembly_member_35.jpg",
+    "website": "https://bains.asmdc.org/",
+    "office": "Room 5730, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "1430 Truxtun Ave. Suite 803, Bakersfield, CA 93301",
+    "districtPhone": "661-335-0302",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jasmeet_Bains",
+    "ballotpediaUrl": "https://ballotpedia.org/Jasmeet_Bains"
   },
   {
     "id": "ocd-person/552b5bf7-472d-48a4-bb9a-132c1f044737",
@@ -696,7 +855,11 @@
     "phone": "916-319-2036",
     "photoUrl": "https://californiaglobe.com/wp-content/uploads/2024/10/Screenshot-2024-10-03-at-7.03.49%E2%80%AFAM-708x642.png",
     "website": "https://ad36.asmrc.org/",
-    "office": "Room 4230, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "office": "Room 4230, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "1101 Airport Road Suite D, Imperial, CA 92251",
+    "districtPhone": "760-355-8656",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jeff_Gonzalez",
+    "ballotpediaUrl": "https://ballotpedia.org/Jeff_Gonzalez"
   },
   {
     "id": "ocd-person/e9733632-df5d-48b4-b4a3-4768e7dcb5f7",
@@ -710,7 +873,11 @@
     "phone": "916-651-4005",
     "photoUrl": "https://storage.googleapis.com/enview-dev-public-general/legislative-people-photos/70583.jpg",
     "website": "https://sd05.senate.ca.gov/",
-    "office": "1021 O St. Suite 6640, Sacramento, CA 95814"
+    "office": "1021 O St. Suite 6640, Sacramento, CA 95814",
+    "districtOffice": "2291 W. March Lane Suite B200, Stockton, CA 95207",
+    "districtPhone": "209-472-9535",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jerry_McNerney",
+    "ballotpediaUrl": "https://ballotpedia.org/Jerry_McNerney"
   },
   {
     "id": "ocd-person/83a64401-d95d-42c5-8cfc-03bd29e4adc8",
@@ -724,7 +891,11 @@
     "phone": "916-651-4007",
     "photoUrl": "https://berkeleyca.gov/sites/default/files/elected-office-holder/portrait.jpg",
     "website": "https://sd07.senate.ca.gov/",
-    "office": "1021 O St. Suite 6710, Sacramento, CA 95814"
+    "office": "1021 O St. Suite 6710, Sacramento, CA 95814",
+    "districtOffice": "1515 Clay St. Suite 2202, Oakland, CA 94612",
+    "districtPhone": "510-286-1333",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jesse_Arregu%C3%ADn",
+    "ballotpediaUrl": "https://ballotpedia.org/Jesse_Arregu%C3%ADn"
   },
   {
     "id": "ocd-person/407f6fda-8638-4cca-9704-7aa8df7de26e",
@@ -736,9 +907,13 @@
     "party": "Democratic",
     "email": "assemblymember.gabriel@assembly.ca.gov",
     "phone": "916-319-2046",
-    "photoUrl": "https://www.assembly.ca.gov/sites/assembly.ca.gov/files/memberphotos/ad-46_gabriel_resized.jpg",
-    "website": "https://a45.asmdc.org/",
-    "office": "Room 8230, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "photoUrl": "https://webapi.assembly.ca.gov/district-media/assets/members/assembly_member_46.jpg",
+    "website": "https://a46.asmdc.org/",
+    "office": "Room 8230, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "16501 Ventura Blvd. Suite 620, Encino, CA 91436",
+    "districtPhone": "818-380-2460",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jesse_Gabriel",
+    "ballotpediaUrl": "https://ballotpedia.org/Jesse_Gabriel"
   },
   {
     "id": "ocd-person/81d9225e-7584-43c9-9e9b-f12b7e7dbd4e",
@@ -752,7 +927,11 @@
     "phone": "916-319-2052",
     "photoUrl": "https://storage.googleapis.com/enview-dev-public-general/legislative-people-photos/158655.jpg",
     "website": "https://a52.asmdc.org/",
-    "office": "Room 5620, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "office": "Room 5620, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "1910 W. Sunset Blvd. Suite 810, Los Angeles, CA 90026",
+    "districtPhone": "213-483-5252",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jessica_Caloza",
+    "ballotpediaUrl": "https://ballotpedia.org/Jessica_Caloza"
   },
   {
     "id": "ocd-person/c7a404d9-03f7-4e82-b730-1623da31d4cc",
@@ -764,9 +943,13 @@
     "party": "Republican",
     "email": "assemblymember.joepatterson@assembly.ca.gov",
     "phone": "916-319-2005",
-    "photoUrl": "https://www.assembly.ca.gov/sites/assembly.ca.gov/files/memberphotos/patterson_a25i1438_resized.png",
+    "photoUrl": "https://webapi.assembly.ca.gov/district-media/assets/members/assembly_member_05.jpg",
     "website": "https://ad05.asmrc.org",
-    "office": "Room 4530, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "office": "Room 4530, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "Rocklin Corporate Plaza, 6030 W. Oaks Blvd. Suite 145, Rocklin, CA 95765",
+    "districtPhone": "916-435-0501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Joe_Patterson_(California_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Joe_Patterson_(California)"
   },
   {
     "id": "ocd-person/0253bb3f-2fcb-49ed-a85d-578fee726be8",
@@ -779,8 +962,12 @@
     "email": "assemblymember.harabedian@assembly.ca.gov",
     "phone": "916-319-2041",
     "photoUrl": "https://storage.googleapis.com/enview-dev-public-general/legislative-people-photos/158662.jpg",
-    "website": "https://a41.asmdc.org/",
-    "office": "Room 4350, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "website": "https://harabedian.asmdc.org/",
+    "office": "Room 4350, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "415 W. Foothill Blvd. Suite 124, Claremont, CA 91711",
+    "districtPhone": "909-624-7876",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_Harabedian",
+    "ballotpediaUrl": "https://ballotpedia.org/John_Harabedian"
   },
   {
     "id": "ocd-person/7476789f-49a4-491a-b294-9d1486f24193",
@@ -794,7 +981,11 @@
     "phone": "916-651-4017",
     "photoUrl": "https://www.senate.ca.gov/sites/senate.ca.gov/files/senator_photos/sd17_laird_0.jpg",
     "website": "https://sd17.senate.ca.gov/",
-    "office": "1021 O St. Suite 8720, Sacramento, CA 95814"
+    "office": "1021 O St. Suite 8720, Sacramento, CA 95814",
+    "districtOffice": "1026 Palm St. Suite 201, San Luis Obispo, CA 93401",
+    "districtPhone": "805-549-3784",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_Laird_(American_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/John_Laird"
   },
   {
     "id": "ocd-person/b9c75c1e-6ea8-4fae-9efa-a7bf0a0cb2cc",
@@ -807,8 +998,12 @@
     "email": "assemblymember.solache@assembly.ca.gov",
     "phone": "916-319-2062",
     "photoUrl": "https://www.lynwoodca.gov/ImageRepository/Document?documentID=302",
-    "website": "https://a62.asmdc.org/",
-    "office": "Room 5110, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "website": "https://solache.asmdc.org/",
+    "office": "Room 5110, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "4909 Lakewood Blvd. Suite 400, Lakewood, CA 90712",
+    "districtPhone": "562-529-3250",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jose_Solache",
+    "ballotpediaUrl": "https://ballotpedia.org/Jose_Solache"
   },
   {
     "id": "ocd-person/c71137b2-3fc3-48bf-b0ad-6c29aff98268",
@@ -822,7 +1017,11 @@
     "phone": "916-651-4013",
     "photoUrl": "https://www.senate.ca.gov/sites/senate.ca.gov/files/senator_photos/sd13_becker_0.jpg",
     "website": "https://sd13.senate.ca.gov/",
-    "office": "1021 O St. Suite 6520, Sacramento, CA 95814"
+    "office": "1021 O St. Suite 6520, Sacramento, CA 95814",
+    "districtOffice": "3525 Alameda de las Pulgas, Menlo Park, CA 94025",
+    "districtPhone": "650-233-2724",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Josh_Becker_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Josh_Becker"
   },
   {
     "id": "ocd-person/71aa54c0-3fad-499c-928e-ffbb692a970b",
@@ -834,8 +1033,13 @@
     "party": "Republican",
     "email": "assemblymember.hoover@assembly.ca.gov",
     "phone": "916-319-2007",
+    "photoUrl": "https://webapi.assembly.ca.gov/district-media/assets/members/assembly_member_07.jpg",
     "website": "https://ad07.asmrc.org",
-    "office": "Room 4540, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "office": "Room 4540, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "13405 Folsom Blvd., Building 700 Suite A, Folsom, CA 95630",
+    "districtPhone": "916-294-9774",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Josh_Hoover",
+    "ballotpediaUrl": "https://ballotpedia.org/Josh_Hoover"
   },
   {
     "id": "ocd-person/b20254b0-437a-4d3d-9aa9-baa5db2bc5ef",
@@ -847,9 +1051,13 @@
     "party": "Democratic",
     "email": "assemblymember.lowenthal@assembly.ca.gov",
     "phone": "916-319-2069",
-    "photoUrl": "https://www.assembly.ca.gov/sites/assembly.ca.gov/files/memberphotos/lowenthal_009_11-30-22_resized.jpg",
+    "photoUrl": "https://webapi.assembly.ca.gov/district-media/assets/members/assembly_member_69.jpg",
     "website": "https://a69.asmdc.org/",
-    "office": "Room 8320, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "office": "Room 8320, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "3777 Long Beach Blvd. Suite 260, Long Beach, CA 90807",
+    "districtPhone": "562-366-2769",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Josh_Lowenthal",
+    "ballotpediaUrl": "https://ballotpedia.org/Josh_Lowenthal"
   },
   {
     "id": "ocd-person/dfb00d6c-1d0d-410f-8a06-d54841495a62",
@@ -861,9 +1069,13 @@
     "party": "Republican",
     "email": "assemblymember.alanis@assembly.ca.gov",
     "phone": "916-319-2022",
-    "photoUrl": "https://www.assembly.ca.gov/sites/assembly.ca.gov/files/memberphotos/alanis_a25i1397_resized.png",
+    "photoUrl": "https://webapi.assembly.ca.gov/district-media/assets/members/assembly_member_22.jpg",
     "website": "https://ad22.asmrc.org/",
-    "office": "Room 4640, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "office": "Room 4640, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "1010 10th St. Suite 5800, Modesto, CA 95354",
+    "districtPhone": "209-521-2201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Juan_Alanis_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Juan_Alanis_(California)"
   },
   {
     "id": "ocd-person/092bda0e-23a9-4d25-92a9-5808e996702b",
@@ -875,9 +1087,13 @@
     "party": "Democratic",
     "email": "assemblymember.juancarrillo@assembly.ca.gov",
     "phone": "916-319-2039",
-    "photoUrl": "https://www.assembly.ca.gov/sites/assembly.ca.gov/files/memberphotos/carrillo_001_11-30-29_resized.jpg",
-    "website": "https://a39.asmdc.org/",
-    "office": "Room 5610, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "photoUrl": "https://webapi.assembly.ca.gov/district-media/assets/members/assembly_member_39.jpg",
+    "website": "https://carrillo.asmdc.org/",
+    "office": "Room 5610, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "11600 Air Express Way, Adelanto, CA 92301",
+    "districtPhone": "760-530-0139",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Juan_Carrillo",
+    "ballotpediaUrl": "https://ballotpedia.org/Juan_Carrillo"
   },
   {
     "id": "ocd-person/76378b56-7ad9-463c-a4fd-47c665b26ee8",
@@ -889,9 +1105,13 @@
     "party": "Republican",
     "email": "assemblymember.sanchez@assembly.ca.gov",
     "phone": "916-319-2071",
-    "photoUrl": "https://www.assembly.ca.gov/sites/assembly.ca.gov/files/memberphotos/sanchez_a25i1518_resized.png",
+    "photoUrl": "https://webapi.assembly.ca.gov/district-media/assets/members/assembly_member_71.jpg",
     "website": "https://ad71.asmrc.org/",
-    "office": "Room 4340, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "office": "Room 4340, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "22342 Avenida Empresa Suite 275, Rancho Santa Margarita, CA 92688",
+    "districtPhone": "949-459-7170",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kate_Sanchez",
+    "ballotpediaUrl": "https://ballotpedia.org/Kate_Sanchez"
   },
   {
     "id": "ocd-person/d9462f08-2b27-4969-8436-9a1c21534a40",
@@ -904,8 +1124,12 @@
     "email": "senator.seyarto@senate.ca.gov",
     "phone": "916-651-4032",
     "photoUrl": "https://www.senate.ca.gov/sites/senate.ca.gov/files/senator_photos/seyarto_kelly_r-32c.jpg",
-    "website": "https://ad67.asmrc.org/",
-    "office": "1021 O St. Suite 7120, Sacramento, CA 95814"
+    "website": "https://senate.ca.gov/sd32",
+    "office": "1021 O St. Suite 7120, Sacramento, CA 95814",
+    "districtOffice": "24640 Jefferson Ave. Suite 202, Murrieta, CA 92562",
+    "districtPhone": "951-894-2220",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kelly_Seyarto",
+    "ballotpediaUrl": "https://ballotpedia.org/Kelly_Seyarto"
   },
   {
     "id": "ocd-person/895f777d-ae7b-429a-aa0f-1b2895c13945",
@@ -919,7 +1143,11 @@
     "phone": "916-319-2079",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/lscollins.JPG",
     "website": "https://a79.asmdc.org/",
-    "office": "Room 4130, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "office": "Room 4130, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "4700 Spring St. Suite 301, La Mesa, CA 91942",
+    "districtPhone": "619-465-7903",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/LaShae_Sharp-Collins",
+    "ballotpediaUrl": "https://ballotpedia.org/LaShae_Sharp-Collins"
   },
   {
     "id": "ocd-person/bd78b1b9-6d92-4c67-a1f4-0548575f3aa5",
@@ -933,7 +1161,11 @@
     "phone": "916-651-4035",
     "photoUrl": "https://storage.googleapis.com/enview-dev-public-general/legislative-people-photos/6409.jpg",
     "website": "https://sd35.senate.ca.gov/",
-    "office": "1021 O St. Suite 7340, Sacramento, CA 95814"
+    "office": "1021 O St. Suite 7340, Sacramento, CA 95814",
+    "districtOffice": "1 W. Manchester Blvd. Suite 600, Inglewood, CA 90301",
+    "districtPhone": "310-412-6120",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Laura_Richardson",
+    "ballotpediaUrl": "https://ballotpedia.org/Laura_Richardson"
   },
   {
     "id": "ocd-person/1b3ac39e-7b50-4263-bd1d-add1e91d71b9",
@@ -945,9 +1177,13 @@
     "party": "Republican",
     "email": "assemblymember.davies@assembly.ca.gov",
     "phone": "916-319-2074",
-    "photoUrl": "https://www.assembly.ca.gov/sites/assembly.ca.gov/files/memberphotos/arc_new_member_headshots_asm.ca_.gov_120x150px_davies.jpg",
-    "website": "https://ad73.asmrc.org/",
-    "office": "Room 4720, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "photoUrl": "https://webapi.assembly.ca.gov/district-media/assets/members/assembly_member_74.jpg",
+    "website": "https://ad74.asmrc.org/",
+    "office": "Room 4720, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "2420 Vista Way Suite 112, Oceanside, CA 92054",
+    "districtPhone": "760-433-7400",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Laurie_Davies_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Laurie_Davies"
   },
   {
     "id": "ocd-person/cb6cc457-59f8-4dd8-aeb5-691c3795ffb7",
@@ -961,7 +1197,11 @@
     "phone": "916-651-4033",
     "photoUrl": "https://www.senate.ca.gov/sites/senate.ca.gov/files/senator_photos/senator-lena-gonzalez.jpg",
     "website": "https://sd33.senate.ca.gov/",
-    "office": "1021 O St. Suite 8610, Sacramento, CA 95814"
+    "office": "1021 O St. Suite 8610, Sacramento, CA 95814",
+    "districtOffice": "3355 E. Gage Ave., Huntington Park, CA 90255",
+    "districtPhone": "323-277-4560",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lena_Gonzalez",
+    "ballotpediaUrl": "https://ballotpedia.org/Lena_Gonzalez"
   },
   {
     "id": "ocd-person/06d4d543-2374-436f-978d-b924c7ec7d53",
@@ -975,7 +1215,11 @@
     "phone": "916-319-2058",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/May162022532PM_104500298_0304E3268B78420096DFCD3FA3DB99B7-min.jpeg",
     "website": "https://ad58.asmrc.org/",
-    "office": "Room 4240, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "office": "Room 4240, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "391 N. Main St. Suite 210, Corona, CA 92878",
+    "districtPhone": "951-371-6860",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Leticia_Castillo",
+    "ballotpediaUrl": "https://ballotpedia.org/Leticia_Castillo"
   },
   {
     "id": "ocd-person/ed58ae30-ffe5-4395-9353-141e4018cbe3",
@@ -987,9 +1231,13 @@
     "party": "Democratic",
     "email": "assemblymember.calderon@assembly.ca.gov",
     "phone": "916-319-2056",
-    "photoUrl": "https://www.assembly.ca.gov/sites/assembly.ca.gov/files/memberphotos/calderon-057.jpg",
+    "photoUrl": "https://webapi.assembly.ca.gov/district-media/assets/members/assembly_member_56.jpg",
     "website": "https://a56.asmdc.org/",
-    "office": "Room 4650, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "office": "Room 4650, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "13181 Crossroads Parkway North Suite 160, City of Industry, CA 91746",
+    "districtPhone": "562-692-5858",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lisa_Calderon",
+    "ballotpediaUrl": "https://ballotpedia.org/Lisa_Calderon_(California)"
   },
   {
     "id": "ocd-person/54e48d10-22e1-43da-b114-c1d3f741faff",
@@ -1001,9 +1249,13 @@
     "party": "Democratic",
     "email": "assemblymember.ortega@assembly.ca.gov",
     "phone": "916-319-2020",
-    "photoUrl": "https://www.assembly.ca.gov/sites/assembly.ca.gov/files/memberphotos/ortega_004_11-30-22_resized.jpg",
-    "website": "https://a20.asmdc.org",
-    "office": "Room 5120, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "photoUrl": "https://webapi.assembly.ca.gov/district-media/assets/members/assembly_member_20.jpg",
+    "website": "https://a20.asmdc.org/",
+    "office": "Room 5120, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "22320 Foothill Blvd. Suite 540, Hayward, CA 94541",
+    "districtPhone": "510-583-8818",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Liz_Ortega",
+    "ballotpediaUrl": "https://ballotpedia.org/Liz_Ortega"
   },
   {
     "id": "ocd-person/37f2dc9f-d788-4f71-b794-093c8816333b",
@@ -1017,7 +1269,11 @@
     "phone": "916-651-4028",
     "photoUrl": "https://www.senate.ca.gov/sites/senate.ca.gov/files/senator_photos/smallwood-cuevas_lola_d-28.jpg",
     "website": "https://sd28.senate.ca.gov/",
-    "office": "1021 O St. Suite 6530, Sacramento, CA 95814"
+    "office": "1021 O St. Suite 6530, Sacramento, CA 95814",
+    "districtOffice": "700 Exposition Park Drive, Los Angeles, CA 90037",
+    "districtPhone": "213-745-6656",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lola_Smallwood-Cuevas",
+    "ballotpediaUrl": "https://ballotpedia.org/Lola_Smallwood-Cuevas"
   },
   {
     "id": "ocd-person/926d1337-0318-4c12-a291-178f10199b23",
@@ -1029,9 +1285,13 @@
     "party": "Democratic",
     "email": "assemblymember.wilson@assembly.ca.gov",
     "phone": "916-319-2011",
-    "photoUrl": "https://www.assembly.ca.gov/sites/assembly.ca.gov/files/memberphotos/ad11-wilson_006_portraits_resized.jpg",
+    "photoUrl": "https://webapi.assembly.ca.gov/district-media/assets/members/assembly_member_11.jpg",
     "website": "https://a11.asmdc.org",
-    "office": "Room 8110, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "office": "Room 8110, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "1 Harbor Center Suite 270, Suisun City, CA 94585",
+    "districtPhone": "707-438-7359",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lori_Wilson_(California_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Lori_Wilson"
   },
   {
     "id": "ocd-person/e8ac7b26-03a5-4818-b05d-0f379029bbdb",
@@ -1045,7 +1305,11 @@
     "phone": "916-319-2006",
     "photoUrl": "https://lettersandscience.ucdavis.edu/sites/g/files/dgvnsk15706/files/styles/sf_profile/public/images/person/Maggy%20Krell.jpeg?h=a7e6d17b&itok=kwhSUK6x",
     "website": "https://a06.asmdc.org/",
-    "office": "Room 5230, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "office": "Room 5230, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "915 L St. Suite 110, Sacramento, CA 95814",
+    "districtPhone": "916-324-4676",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Maggy_Krell",
+    "ballotpediaUrl": "https://ballotpedia.org/Maggy_Krell"
   },
   {
     "id": "ocd-person/24facf9e-7fb1-4475-9120-05cd0145c7c1",
@@ -1057,9 +1321,13 @@
     "party": "Democratic",
     "email": "assemblymember.berman@assembly.ca.gov",
     "phone": "916-319-2023",
-    "photoUrl": "https://www.assembly.ca.gov/sites/assembly.ca.gov/files/memberphotos/ad24_berman_roster150_20161205.jpg",
-    "website": "https://a23.asmdc.org/",
-    "office": "Room 8130, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "photoUrl": "https://webapi.assembly.ca.gov/district-media/assets/members/assembly_member_23.jpg",
+    "website": "https://berman.asmdc.org/",
+    "office": "Room 8130, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "721 Colorado Ave. Suite 101, Palo Alto, CA 94303",
+    "districtPhone": "650-324-0224",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Marc_Berman",
+    "ballotpediaUrl": "https://ballotpedia.org/Marc_Berman"
   },
   {
     "id": "ocd-person/b3f55460-f87b-4db4-b6a5-35a735f34076",
@@ -1073,7 +1341,11 @@
     "phone": "916-651-4026",
     "photoUrl": "https://www.senate.ca.gov/sites/senate.ca.gov/files/senator_photos/senator_durazo.jpg",
     "website": "https://sd26.senate.ca.gov/",
-    "office": "1021 O St. Suite 7530, Sacramento, CA 95814"
+    "office": "1021 O St. Suite 7530, Sacramento, CA 95814",
+    "districtOffice": "1808 W. Sunset Blvd., Los Angeles, CA 90026",
+    "districtPhone": "213-483-9300",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Maria_Elena_Durazo",
+    "ballotpediaUrl": "https://ballotpedia.org/Maria_Elena_Durazo"
   },
   {
     "id": "ocd-person/b6907bd6-05e1-44a4-bfc6-db4b672ff8b4",
@@ -1087,7 +1359,11 @@
     "phone": "916-651-4004",
     "photoUrl": "https://www.senate.ca.gov/sites/senate.ca.gov/files/senator_photos/alvarado-gill_marie_d-04.jpg",
     "website": "https://sd04.senate.ca.gov/",
-    "office": "1021 O St. Suite 7240, Sacramento, CA 95814"
+    "office": "1021 O St. Suite 7240, Sacramento, CA 95814",
+    "districtOffice": "1020 15th St. Suite 21, Modesto, CA 95354",
+    "districtPhone": "209-576-6001",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Marie_Alvarado-Gil",
+    "ballotpediaUrl": "https://ballotpedia.org/Marie_Alvarado-Gil"
   },
   {
     "id": "ocd-person/4a6f5a5d-275e-4fb2-a8bf-bb1272d4dfbb",
@@ -1101,7 +1377,11 @@
     "phone": "916-319-2054",
     "photoUrl": "https://www.sgvtribune.com/wp-content/uploads/2024/10/LDN-L-ELX-VG-ASSMD54-GONZALEZ.jpg?w=520",
     "website": "https://a54.asmdc.org/",
-    "office": "Room 6150, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "office": "Room 6150, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "Room 1050, 320 W. 4th St., Los Angeles, CA 90013",
+    "districtPhone": "213-620-4646",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mark_Gonzalez_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Mark_Gonzalez_(California)"
   },
   {
     "id": "ocd-person/cc6eb833-e16b-472a-83ec-31e7df1b1cd9",
@@ -1113,9 +1393,13 @@
     "party": "Democratic",
     "email": "assemblymember.haney@assembly.ca.gov",
     "phone": "916-319-2017",
-    "photoUrl": "https://www.assembly.ca.gov/sites/assembly.ca.gov/files/memberphotos/ad17_haney.jpg",
+    "photoUrl": "https://webapi.assembly.ca.gov/district-media/assets/members/assembly_member_17.jpg",
     "website": "https://a17.asmdc.org/",
-    "office": "Room 5740, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "office": "Room 5740, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "455 Golden Gate Ave. Suite 14300, San Francisco, CA 94102",
+    "districtPhone": "415-557-3013",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Matt_Haney",
+    "ballotpediaUrl": "https://ballotpedia.org/Matt_Haney"
   },
   {
     "id": "ocd-person/1509d608-4d2b-4ebc-be73-b4cd6c06b7c6",
@@ -1129,7 +1413,11 @@
     "phone": "916-651-4001",
     "photoUrl": "https://www.assembly.ca.gov/sites/assembly.ca.gov/files/memberphotos/mdahle-ad01.gif",
     "website": "https://ad01.asmrc.org/",
-    "office": "1021 O St. Suite 7230, Sacramento, CA 95814"
+    "office": "1021 O St. Suite 7230, Sacramento, CA 95814",
+    "districtOffice": "120 N. Auburn St. Suite 214, Grass Valley, CA 95945",
+    "districtPhone": "530-271-7412",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Megan_Dahle",
+    "ballotpediaUrl": "https://ballotpedia.org/Megan_Dahle"
   },
   {
     "id": "ocd-person/ee9910a2-0b27-46e0-be87-43c800596b41",
@@ -1143,7 +1431,11 @@
     "phone": "916-651-4016",
     "photoUrl": "https://www.senate.ca.gov/sites/senate.ca.gov/files/senator_photos/senator_hurtado_0.jpg",
     "website": "https://sd16.senate.ca.gov/",
-    "office": "1021 O St. Suite 6510, Sacramento, CA 95814"
+    "office": "1021 O St. Suite 6510, Sacramento, CA 95814",
+    "districtOffice": "339 W. D St. Suite E, Lemoore, CA 93245",
+    "districtPhone": "559-924-1201",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Melissa_Hurtado",
+    "ballotpediaUrl": "https://ballotpedia.org/Melissa_Hurtado"
   },
   {
     "id": "ocd-person/a467d09d-289d-4e5a-a2af-a0ce20af14e1",
@@ -1155,9 +1447,13 @@
     "party": "Democratic",
     "email": "assemblymember.mbonta@assembly.ca.gov",
     "phone": "916-319-2018",
-    "photoUrl": "https://www.assembly.ca.gov/sites/assembly.ca.gov/files/memberphotos/ad-18_bonta_m._portraits_edit_155_11-5-21_resized.jpg",
-    "website": "https://a18.asmdc.org",
-    "office": "Room 390, 1020 N St., Sacramento, CA 95814"
+    "photoUrl": "https://webapi.assembly.ca.gov/district-media/assets/members/assembly_member_18.jpg",
+    "website": "https://a18.asmdc.org/",
+    "office": "Room 390, 1020 N St., Sacramento, CA 95814",
+    "districtOffice": "1515 Clay St. Suite 2204, Oakland, CA 94612",
+    "districtPhone": "510-286-1670",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mia_Bonta",
+    "ballotpediaUrl": "https://ballotpedia.org/Mia_Bonta"
   },
   {
     "id": "ocd-person/c8e36b71-c739-4afb-b8e9-cbdd4d362693",
@@ -1170,8 +1466,11 @@
     "email": "assemblymember.michellerodriguez@assembly.ca.gov",
     "phone": "916-319-2053",
     "photoUrl": "https://michelleforassembly.com/cms/wp-content/uploads/2023/08/new-safe-meeno-MICHELLE_RODRIGUEZ-2023.07_011.jpg",
-    "website": "https://a53.asmdc.org/",
-    "office": "Room 5640, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "website": "https://mrodriguez.asmdc.org/",
+    "office": "Room 5640, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "13160 7th St., Chino, CA 91710",
+    "districtPhone": "909-902-9606",
+    "ballotpediaUrl": "https://ballotpedia.org/Michelle_Rodriguez_(California)"
   },
   {
     "id": "ocd-person/404dbee4-6b74-4249-ab26-9644cab7c7d5",
@@ -1183,9 +1482,13 @@
     "party": "Democratic",
     "email": "assemblymember.gipson@assembly.ca.gov",
     "phone": "916-319-2065",
-    "photoUrl": "https://www.assembly.ca.gov/sites/assembly.ca.gov/files/memberphotos/AD64_Gipson_Portrait150_20141201.jpg",
-    "website": "https://a64.asmdc.org/",
-    "office": "Room 6210, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "photoUrl": "https://webapi.assembly.ca.gov/district-media/assets/members/assembly_member_65.jpg",
+    "website": "https://a65.asmdc.org/",
+    "office": "Room 6210, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "879 W. 190th St. Suite 920, Gardena, CA 90248",
+    "districtPhone": "310-324-6408",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mike_Gipson",
+    "ballotpediaUrl": "https://ballotpedia.org/Mike_Gipson"
   },
   {
     "id": "ocd-person/3a7bde9c-8709-49c7-89e4-0835ea1f9eb6",
@@ -1197,9 +1500,13 @@
     "party": "Democratic",
     "email": "assemblymember.mikefong@asm.ca.gov",
     "phone": "916-319-2049",
-    "photoUrl": "https://www.assembly.ca.gov/sites/assembly.ca.gov/files/memberphotos/ad-49_fong_m._037_2022_resized.jpg",
-    "website": "https://a49.asmdc.org/",
-    "office": "Room 5650, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "photoUrl": "https://webapi.assembly.ca.gov/district-media/assets/members/assembly_member_49.jpg",
+    "website": "https://fong.asmdc.org/",
+    "office": "Room 5650, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "1411 S. Garfield Ave. Suite 307, Alhambra, CA 91801",
+    "districtPhone": "626-457-4918",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mike_Fong",
+    "ballotpediaUrl": "https://ballotpedia.org/Mike_Fong"
   },
   {
     "id": "ocd-person/a1394aeb-094a-4fc0-b4d5-005104ceddc0",
@@ -1213,7 +1520,11 @@
     "phone": "916-651-4002",
     "photoUrl": "https://www.senate.ca.gov/sites/senate.ca.gov/files/senator_photos/mcguire-mike.jpg",
     "website": "https://sd02.senate.ca.gov/",
-    "office": "1021 O St. Suite 8518, Sacramento, CA 95814"
+    "office": "1021 O St. Suite 8518, Sacramento, CA 95814",
+    "districtOffice": "1036 5th St. Suite D, Eureka, CA 95501",
+    "districtPhone": "707-445-6508",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mike_McGuire_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Mike_McGuire"
   },
   {
     "id": "ocd-person/e924a3ec-c7c0-4094-8504-7611bcf8979f",
@@ -1226,8 +1537,12 @@
     "email": "senator.limon@senate.ca.gov",
     "phone": "916-651-4021",
     "photoUrl": "https://www.senate.ca.gov/sites/senate.ca.gov/files/senator_photos/limon_monique_d-19_2.jpg",
-    "website": "https://sd19.senate.ca.gov/",
-    "office": "1021 O St. Suite 7610, Sacramento, CA 95814"
+    "website": "https://sd21.senate.ca.gov/",
+    "office": "1021 O St. Suite 7610, Sacramento, CA 95814",
+    "districtOffice": "1111 S. Broadway Suite 101, Santa Maria, CA 93454",
+    "districtPhone": "805-346-1803",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Monique_Lim%C3%B3n",
+    "ballotpediaUrl": "https://ballotpedia.org/Monique_Lim%C3%B3n"
   },
   {
     "id": "ocd-person/0c47a1ba-99a2-44a9-8c65-fcad12aeee97",
@@ -1239,8 +1554,13 @@
     "party": "Republican",
     "email": "assemblymember.johnson@assembly.ca.gov",
     "phone": "916-319-2063",
+    "photoUrl": "https://webapi.assembly.ca.gov/district-media/assets/members/assembly_member_63.jpg",
     "website": "https://ad63.asmrc.org/",
-    "office": "Room 4520, 1021 O St. P.O. Box 942849, Sacramento, CA 95814"
+    "office": "Room 4520, 1021 O St. P.O. Box 942849, Sacramento, CA 95814",
+    "districtOffice": "4160 Temescal Canyon Road Suite 110, Corona, CA 92883",
+    "districtPhone": "951-277-3639",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Natasha_Johnson",
+    "ballotpediaUrl": "https://ballotpedia.org/Natasha_Johnson"
   },
   {
     "id": "ocd-person/06ae0707-255b-4af9-8e3e-c940e8f29600",
@@ -1254,7 +1574,11 @@
     "phone": "916-319-2044",
     "photoUrl": "https://www.burbankca.gov/documents/1626247/0/20210330-nick-schultz-001.jpg",
     "website": "https://a44.asmdc.org/",
-    "office": "Room 5150, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "office": "Room 5150, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "300 E. Magnolia Blvd. Suite 504, Burbank, CA 91502",
+    "districtPhone": "818-558-3043",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Nick_Schultz_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Nick_Schultz"
   },
   {
     "id": "ocd-person/a86994f3-ffe3-4dc6-9e79-bcba7346f919",
@@ -1268,7 +1592,11 @@
     "phone": "916-319-2026",
     "photoUrl": "http://www.fhda.edu/_images/PatrickAhrens2018.jpg",
     "website": "https://a26.asmdc.org/",
-    "office": "Room 6110, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "office": "Room 6110, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "20111 Stevens Creek Blvd. Suite 220, Cupertino, CA 95014",
+    "districtPhone": "408-446-2810",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Patrick_Ahrens",
+    "ballotpediaUrl": "https://ballotpedia.org/Patrick_Ahrens"
   },
   {
     "id": "ocd-person/6ba768a4-2756-42b5-a5c5-f6b8b5db0491",
@@ -1280,9 +1608,13 @@
     "party": "Republican",
     "email": "assemblymember.chen@assembly.ca.gov",
     "phone": "916-319-2059",
-    "photoUrl": "https://www.assembly.ca.gov/sites/assembly.ca.gov/files/memberphotos/chen.jpg",
-    "website": "https://ad55.asmrc.org",
-    "office": "Room 4620, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "photoUrl": "https://webapi.assembly.ca.gov/district-media/assets/members/assembly_member_59.jpg",
+    "website": "https://ad59.asmrc.org",
+    "office": "Room 4620, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "3 Pointe Drive Suite 313, Brea, CA 92821",
+    "districtPhone": "714-529-5502",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Phillip_Chen",
+    "ballotpediaUrl": "https://ballotpedia.org/Phillip_Chen_(California)"
   },
   {
     "id": "ocd-person/d12d3275-2086-4bf5-886b-c4de3823fbf9",
@@ -1294,9 +1626,13 @@
     "party": "Democratic",
     "email": "assemblymember.schiavo@assembly.ca.gov",
     "phone": "916-319-2040",
-    "photoUrl": "https://www.assembly.ca.gov/sites/assembly.ca.gov/files/memberphotos/schiavo_030_11-29-22_resized.jpg",
-    "website": "https://a40.asmdc.org/",
-    "office": "Room 4140, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "photoUrl": "https://webapi.assembly.ca.gov/district-media/assets/members/assembly_member_40.jpg",
+    "website": "https://schiavo.asmdc.org/",
+    "office": "Room 4140, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "27441 Tourney Road Suite 240, Santa Clarita, CA 91355",
+    "districtPhone": "661-286-1565",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Pilar_Schiavo",
+    "ballotpediaUrl": "https://ballotpedia.org/Pilar_Schiavo"
   },
   {
     "id": "ocd-person/2918acca-40a2-4819-a79a-b2873c7895bc",
@@ -1308,9 +1644,13 @@
     "party": "Democratic",
     "email": "assemblymember.bauer-kahan@assembly.ca.gov",
     "phone": "916-319-2016",
-    "photoUrl": "https://www.assembly.ca.gov/sites/assembly.ca.gov/files/memberphotos/a16_r_b_kahan.jpg",
+    "photoUrl": "https://webapi.assembly.ca.gov/district-media/assets/members/assembly_member_16.jpg",
     "website": "https://a16.asmdc.org/",
-    "office": "Room 5210, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "office": "Room 5210, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "12677 Alcosta Blvd. Suite 395, San Ramon, CA 94583",
+    "districtPhone": "925-244-1600",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rebecca_Bauer-Kahan",
+    "ballotpediaUrl": "https://ballotpedia.org/Rebecca_Bauer-Kahan"
   },
   {
     "id": "ocd-person/86d18985-f35b-4e16-9fcc-663394a156ff",
@@ -1324,7 +1664,11 @@
     "phone": "916-319-2013",
     "photoUrl": "https://ca.emergeamerica.org/wp-content/uploads/sites/4/2023/01/Rhodesia-Ransom.jpg",
     "website": "https://a13.asmdc.org/",
-    "office": "Room 6340, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "office": "Room 6340, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "4643 Quail Lakes Drive Suite 200, Stockton, CA 95207",
+    "districtPhone": "209-948-7479",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rhodesia_Ransom",
+    "ballotpediaUrl": "https://ballotpedia.org/Rhodesia_Ransom"
   },
   {
     "id": "ocd-person/6b7e3458-361f-4fce-8a8c-069282db2af7",
@@ -1336,9 +1680,13 @@
     "party": "Democratic",
     "email": "assemblymember.zbur@assembly.ca.gov",
     "phone": "916-319-2051",
-    "photoUrl": "https://www.assembly.ca.gov/sites/assembly.ca.gov/files/memberphotos/chavez-zbur_510_11-30-22_resized.jpg",
-    "website": "https://a51.asmdc.org/",
-    "office": "Room 4250, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "photoUrl": "https://webapi.assembly.ca.gov/district-media/assets/members/assembly_member_51.jpg",
+    "website": "https://www.assembly.ca.gov/assemblymembers/51",
+    "office": "Room 4250, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "1445 N. Stanley Ave. Third Floor, Los Angeles, CA 90046",
+    "districtPhone": "323-436-5184",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rick_Zbur",
+    "ballotpediaUrl": "https://ballotpedia.org/Rick_Chavez_Zbur"
   },
   {
     "id": "ocd-person/8b2f37bc-65b7-40ed-af14-5d93cb765a5d",
@@ -1352,7 +1700,11 @@
     "phone": "916-319-2050",
     "photoUrl": "https://www.joincalifornia.com/candidate_pic.php?id=15124",
     "website": "https://a50.asmdc.org/",
-    "office": "Room 6240, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "office": "Room 6240, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "10390 Commerce Center Drive Suite C-280, Rancho Cucamonga, CA 91730",
+    "districtPhone": "909-966-5090",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Robert_Garcia_(California_assemblymember)",
+    "ballotpediaUrl": "https://ballotpedia.org/Robert_Garcia_(Etiwanda_School_District)"
   },
   {
     "id": "ocd-person/68f5ee30-aa70-489b-84b7-6501e6188751",
@@ -1364,9 +1716,13 @@
     "party": "Democratic",
     "email": "assemblymember.robertrivas@assembly.ca.gov",
     "phone": "916-319-2029",
-    "photoUrl": "https://www.assembly.ca.gov/sites/assembly.ca.gov/files/memberphotos/ad-29_rivas_r19_resized.jpg",
-    "website": "https://a29.asmdc.org/",
-    "office": "Room 8330, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "photoUrl": "https://webapi.assembly.ca.gov/district-media/assets/members/assembly_member_29.jpg",
+    "website": "https://speaker.asmdc.org/",
+    "office": "Room 8330, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "525 Monterey St., Soledad, CA 93960",
+    "districtPhone": "831-759-8676",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Robert_Rivas_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Robert_Rivas"
   },
   {
     "id": "ocd-person/ee85bc79-20ee-4046-905e-ad797995fa41",
@@ -1380,7 +1736,11 @@
     "phone": "916-651-4006",
     "photoUrl": "https://www.senate.ca.gov/sites/senate.ca.gov/files/senator_photos/niello_roger_r-06.jpg",
     "website": "https://senate.ca.gov/sd06",
-    "office": "1021 O St. Suite 7110, Sacramento, CA 95814"
+    "office": "1021 O St. Suite 7110, Sacramento, CA 95814",
+    "districtOffice": "2200A Douglas Blvd. Suite 100, Roseville, CA 95661",
+    "districtPhone": "916-772-0571",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Roger_Niello",
+    "ballotpediaUrl": "https://ballotpedia.org/Roger_Niello"
   },
   {
     "id": "ocd-person/cb5b9356-6798-44d2-8dc2-caf5651ac4e3",
@@ -1394,7 +1754,11 @@
     "phone": "916-651-4019",
     "photoUrl": "https://www.senate.ca.gov/sites/senate.ca.gov/files/senator_photos/sd23_ochoa_bogh.jpg",
     "website": "https://senate.ca.gov/sd23",
-    "office": "1021 O St. Suite 7220, Sacramento, CA 95814"
+    "office": "1021 O St. Suite 7220, Sacramento, CA 95814",
+    "districtOffice": "1758 Orange Tree Lane Suite B, Redlands, CA 92374",
+    "districtPhone": "909-335-0271",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rosilicie_Ochoa_Bogh",
+    "ballotpediaUrl": "https://ballotpedia.org/Rosilicie_Ochoa_Bogh"
   },
   {
     "id": "ocd-person/61cc77e3-551f-40e6-bb6f-16edd89b04db",
@@ -1407,8 +1771,12 @@
     "email": "senator.cervantes@senate.ca.gov",
     "phone": "916-651-4031",
     "photoUrl": "https://www.assembly.ca.gov/sites/assembly.ca.gov/files/memberphotos/ad60_cervantes_roster150_20161205.jpg",
-    "website": "https://a58.asmdc.org/",
-    "office": "1021 O St. Suite 7330, Sacramento, CA 95814"
+    "website": "https://sd31.senate.ca.gov/",
+    "office": "1021 O St. Suite 7330, Sacramento, CA 95814",
+    "districtOffice": "3737 Main St. Suite 104, Riverside, CA 92501",
+    "districtPhone": "951-680-6750",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sabrina_Cervantes",
+    "ballotpediaUrl": "https://ballotpedia.org/Sabrina_Cervantes"
   },
   {
     "id": "ocd-person/6d83a613-6815-48c9-bb31-94adb1ee92ea",
@@ -1422,7 +1790,11 @@
     "phone": "916-319-2057",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/SadeElhawary2024.jpeg",
     "website": "https://a57.asmdc.org/",
-    "office": "Room 6320, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "office": "Room 6320, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "700 Exposition Park Drive, Los Angeles, CA 90037",
+    "districtPhone": "213-744-2111",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sade_Elhawary",
+    "ballotpediaUrl": "https://ballotpedia.org/Sade_Elhawary"
   },
   {
     "id": "ocd-person/aa59bbc8-0f05-4974-a88a-2e805deb26b4",
@@ -1436,7 +1808,11 @@
     "phone": "916-651-4025",
     "photoUrl": "https://www.cityofalhambra.org/ImageRepository/Document?documentId=1262",
     "website": "https://sd25.senate.ca.gov/",
-    "office": "1021 O St. Suite 6720, Sacramento, CA 95814"
+    "office": "1021 O St. Suite 6720, Sacramento, CA 95814",
+    "districtOffice": "601 E. Glenoaks Blvd. Suite 210, Glendale, CA 91207",
+    "districtPhone": "818-409-0402",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sasha_Ren%C3%A9e_P%C3%A9rez",
+    "ballotpediaUrl": "https://ballotpedia.org/Sasha_Ren%C3%A9e_P%C3%A9rez"
   },
   {
     "id": "ocd-person/de84277e-1c23-4036-bd64-b27c310a1c0e",
@@ -1450,7 +1826,11 @@
     "phone": "916-651-4011",
     "photoUrl": "https://www.senate.ca.gov/sites/senate.ca.gov/files/senator_photos/wiener.jpg",
     "website": "https://sd11.senate.ca.gov/",
-    "office": "1021 O St. Suite 8620, Sacramento, CA 95814"
+    "office": "1021 O St. Suite 8620, Sacramento, CA 95814",
+    "districtOffice": "455 Golden Gate Ave. Suite 14800, San Francisco, CA 94102",
+    "districtPhone": "415-557-1300",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Scott_Wiener",
+    "ballotpediaUrl": "https://ballotpedia.org/Scott_Wiener"
   },
   {
     "id": "ocd-person/b4b8e8fb-831b-4cae-9081-b8f75477fcd0",
@@ -1464,7 +1844,11 @@
     "phone": "916-651-4012",
     "photoUrl": "https://www.senate.ca.gov/sites/senate.ca.gov/files/senator_photos/grove_hs_0625_lls.jpg",
     "website": "https://senate.ca.gov/sd12",
-    "office": "1021 O St. Suite 7150, Sacramento, CA 95814"
+    "office": "1021 O St. Suite 7150, Sacramento, CA 95814",
+    "districtOffice": "567 W. Shaw Ave Suite A-3, Fresno, CA 93704",
+    "districtPhone": "559-243-8580",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Shannon_Grove",
+    "ballotpediaUrl": "https://ballotpedia.org/Shannon_Grove"
   },
   {
     "id": "ocd-person/840aa009-3ae4-4484-b9f0-5c5f5060e7db",
@@ -1476,9 +1860,13 @@
     "party": "Democratic",
     "email": "assemblymember.quirk-silva@assembly.ca.gov",
     "phone": "916-319-2067",
-    "photoUrl": "https://www.assembly.ca.gov/sites/assembly.ca.gov/files/memberphotos/ad65_quirk-silva_siteportrait.jpg",
-    "website": "https://a65.asmdc.org/",
-    "office": "Room 4210, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "photoUrl": "https://webapi.assembly.ca.gov/district-media/assets/members/assembly_member_67.jpg",
+    "website": "https://a67.asmdc.org/",
+    "office": "Room 4210, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "4 Centerpointe Drive Suite 120, La Palma, CA 90623",
+    "districtPhone": "714-521-6713",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sharon_Quirk-Silva",
+    "ballotpediaUrl": "https://ballotpedia.org/Sharon_Quirk-Silva"
   },
   {
     "id": "ocd-person/01fddc24-a5ac-40b7-a9e1-80e918fee609",
@@ -1490,8 +1878,13 @@
     "party": "Republican",
     "email": "assemblymember.ellis@assembly.ca.gov",
     "phone": "916-319-2032",
+    "photoUrl": "https://webapi.assembly.ca.gov/district-media/assets/members/assembly_member_32.jpg",
     "website": "https://ad32.asmrc.org/",
-    "office": "Room 5350, P.O. Box 942849 1021 O St., Sacramento, CA 94249"
+    "office": "Room 5350, P.O. Box 942849 1021 O St., Sacramento, CA 94249",
+    "districtOffice": "4550 California Ave. Suite 740, Bakersfield, CA 93309",
+    "districtPhone": "661-395-2995",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Stan_Ellis",
+    "ballotpediaUrl": "https://ballotpedia.org/Stan_Ellis"
   },
   {
     "id": "ocd-person/62102f53-b531-4290-9699-05a0d7687cae",
@@ -1503,9 +1896,13 @@
     "party": "Democratic",
     "email": "assemblymember.stephanienguyen@assembly.ca.gov",
     "phone": "916-319-2010",
-    "photoUrl": "https://www.assembly.ca.gov/sites/assembly.ca.gov/files/memberphotos/nguyen_515_11-30-22_resized.jpg",
+    "photoUrl": "https://webapi.assembly.ca.gov/district-media/assets/members/assembly_member_10.jpg",
     "website": "https://a10.asmdc.org",
-    "office": "Room 5720, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "office": "Room 5720, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "9250 Laguna Springs Drive Suite 220, Elk Grove, CA 95758",
+    "districtPhone": "916-670-7888",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Stephanie_Nguyen_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Stephanie_Nguyen"
   },
   {
     "id": "ocd-person/1e0ccfc0-2d57-4e57-8d16-589d07c1bc72",
@@ -1517,9 +1914,13 @@
     "party": "Democratic",
     "email": "assemblymember.bennett@assembly.ca.gov",
     "phone": "916-319-2038",
-    "photoUrl": "https://www.assembly.ca.gov/sites/assembly.ca.gov/files/memberphotos/official_portrait_0.jpg",
-    "website": "https://a37.asmdc.org/",
-    "office": "Room 4710, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "photoUrl": "https://webapi.assembly.ca.gov/district-media/assets/members/assembly_member_38.jpg",
+    "website": "https://a38.asmdc.org/",
+    "office": "Room 4710, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "300 E. Esplanade Drive Suite 1790, Oxnard, CA 93036",
+    "districtPhone": "805-485-4745",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Steve_Bennett_(California_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Steve_Bennett"
   },
   {
     "id": "ocd-person/eb745b9e-4ced-494a-a298-fdffa9207b0d",
@@ -1533,7 +1934,11 @@
     "phone": "916-651-4018",
     "photoUrl": "https://www.senate.ca.gov/sites/senate.ca.gov/files/senator_photos/padilla_steve_d-18.jpg",
     "website": "https://sd18.senate.ca.gov/",
-    "office": "1021 O St. Suite 7630, Sacramento, CA 95814"
+    "office": "1021 O St. Suite 7630, Sacramento, CA 95814",
+    "districtOffice": "1224 State St. Suite D, El Centro, CA 92243",
+    "districtPhone": "760-335-3442",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Steve_Padilla",
+    "ballotpediaUrl": "https://ballotpedia.org/Steve_Padilla"
   },
   {
     "id": "ocd-person/8b61aa87-d573-47e2-b17b-bd0edd3c8cf2",
@@ -1546,8 +1951,12 @@
     "email": "senator.choi@senate.ca.gov",
     "phone": "916-651-4037",
     "photoUrl": "https://www.assembly.ca.gov/sites/assembly.ca.gov/files/memberphotos/choi.jpg",
-    "website": "https://ad68.asmrc.org/",
-    "office": "1021 O St. Suite 7130, Sacramento, CA 95814"
+    "website": "https://sr37.senate.ca.gov/",
+    "office": "1021 O St. Suite 7130, Sacramento, CA 95814",
+    "districtOffice": "2151 Michelson Drive Suite 258, Irvine, CA 92612",
+    "districtPhone": "949-223-5472",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Steven_Choi",
+    "ballotpediaUrl": "https://ballotpedia.org/Steven_S._Choi"
   },
   {
     "id": "ocd-person/cb0f6477-568f-49db-aba3-f88e7bccbefc",
@@ -1561,7 +1970,11 @@
     "phone": "916-651-4022",
     "photoUrl": "https://www.senate.ca.gov/sites/senate.ca.gov/files/senator_photos/senator_rubio.jpg",
     "website": "https://sd22.senate.ca.gov/",
-    "office": "1021 O St. Suite 8710, Sacramento, CA 95814"
+    "office": "1021 O St. Suite 8710, Sacramento, CA 95814",
+    "districtOffice": "100 S. Vincent Ave. Suite 401, West Covina, CA 91790",
+    "districtPhone": "626-430-2499",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Susan_Rubio",
+    "ballotpediaUrl": "https://ballotpedia.org/Susan_Rubio"
   },
   {
     "id": "ocd-person/fb1c2c06-108c-41bf-9f08-44a9f8e0cb08",
@@ -1574,8 +1987,12 @@
     "email": "senator.valladares@senate.ca.gov",
     "phone": "916-651-4023",
     "photoUrl": "https://www.assembly.ca.gov/sites/assembly.ca.gov/files/memberphotos/arc_new_member_headshots_asm.ca_.gov_120x150px_valladares.jpg",
-    "website": "https://a38.asmdc.org/",
-    "office": "1021 O St. Suite 7140, Sacramento, CA 95814"
+    "website": "https://sr23.senate.ca.gov/",
+    "office": "1021 O St. Suite 7140, Sacramento, CA 95814",
+    "districtOffice": "11600 Air Expressway, Adelanto, CA 92301",
+    "districtPhone": "760-249-2911",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Suzette_Martinez_Valladares",
+    "ballotpediaUrl": "https://ballotpedia.org/Suzette_Martinez_Valladares"
   },
   {
     "id": "ocd-person/9e69729e-4383-410b-840e-ad4ea0f1ab4a",
@@ -1587,9 +2004,13 @@
     "party": "Democratic",
     "email": "assemblymember.boerner@assembly.ca.gov",
     "phone": "916-319-2077",
-    "photoUrl": "https://www.assembly.ca.gov/sites/assembly.ca.gov/files/memberphotos/a76_t_b_horvath.jpg",
+    "photoUrl": "https://webapi.assembly.ca.gov/district-media/assets/members/assembly_member_77.jpg",
     "website": "https://a77.asmdc.org/",
-    "office": "Room 4150, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "office": "Room 4150, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "505 Lomas Santa Fe Drive Suite 110, Solana Beach, CA 92075",
+    "districtPhone": "858-481-7704",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tasha_Boerner",
+    "ballotpediaUrl": "https://ballotpedia.org/Tasha_Boerner_Horvath"
   },
   {
     "id": "ocd-person/cecabb81-51ab-46f5-9815-cc3486da0632",
@@ -1603,7 +2024,11 @@
     "phone": "916-651-4034",
     "photoUrl": "https://www.senate.ca.gov/sites/senate.ca.gov/files/senator_photos/senator_umberg.jpg",
     "website": "https://sd34.senate.ca.gov/",
-    "office": "1021 O St. Suite 7510, Sacramento, CA 95814"
+    "office": "1021 O St. Suite 7510, Sacramento, CA 95814",
+    "districtOffice": "1000 E. Santa Ana Blvd. Suite 220B, Santa Ana, CA 92701",
+    "districtPhone": "714-558-3785",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tom_Umberg",
+    "ballotpediaUrl": "https://ballotpedia.org/Tom_Umberg"
   },
   {
     "id": "ocd-person/972cffb0-32a6-4cef-8a0f-a8cd901395b0",
@@ -1616,8 +2041,12 @@
     "email": "senator.grayson@senate.ca.gov",
     "phone": "916-651-4009",
     "photoUrl": "https://www.assembly.ca.gov/sites/assembly.ca.gov/files/memberphotos/ad14_header.jpg",
-    "website": "https://a14.asmdc.org",
-    "office": "1021 O St. Suite 7250, Sacramento, CA 95814"
+    "website": "https://sd09.senate.ca.gov/",
+    "office": "1021 O St. Suite 7250, Sacramento, CA 95814",
+    "districtOffice": "420 W. 3rd St., Antioch, CA 94509",
+    "districtPhone": "925-754-1461",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tim_Grayson",
+    "ballotpediaUrl": "https://ballotpedia.org/Tim_Grayson"
   },
   {
     "id": "ocd-person/1aa5dff4-3d71-4642-a5e6-e3d00a5b99f9",
@@ -1629,9 +2058,13 @@
     "party": "Democratic",
     "email": "assemblymember.mckinnor@assembly.ca.gov",
     "phone": "916-319-2061",
-    "photoUrl": "https://www.assembly.ca.gov/sites/assembly.ca.gov/files/memberphotos/mckinnon_portrait_web.jpg",
+    "photoUrl": "https://webapi.assembly.ca.gov/district-media/assets/members/assembly_member_61.jpg",
     "website": "https://a61.asmdc.org/",
-    "office": "Room 5520, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "office": "Room 5520, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "One Manchester Blvd. Suite 601, Inglewood, CA 90301",
+    "districtPhone": "310-412-6400",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tina_McKinnor",
+    "ballotpediaUrl": "https://ballotpedia.org/Tina_McKinnor"
   },
   {
     "id": "ocd-person/a8879d70-713c-4d0c-b723-77d0e96c18df",
@@ -1643,9 +2076,13 @@
     "party": "Republican",
     "email": "assemblymember.lackey@assembly.ca.gov",
     "phone": "916-319-2034",
-    "photoUrl": "https://www.assembly.ca.gov/sites/assembly.ca.gov/files/memberphotos/lackey.png",
+    "photoUrl": "https://webapi.assembly.ca.gov/district-media/assets/members/assembly_member_34.jpg",
     "website": "https://ad34.asmrc.org/",
-    "office": "Room 5340, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "office": "Room 5340, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "14955 Dale Evans Parkway, Apple Valley, CA 92307",
+    "districtPhone": "760-539-1341",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tom_Lackey",
+    "ballotpediaUrl": "https://ballotpedia.org/Tom_Lackey"
   },
   {
     "id": "ocd-person/3dae8bef-7fb2-40a0-afee-78d79212521b",
@@ -1658,8 +2095,12 @@
     "email": "senator.strickland@senate.ca.gov",
     "phone": "916-651-4036",
     "photoUrl": "http://votesmart.org/canphoto/16765.jpg",
-    "website": "https://cssrc.us/web/19/",
-    "office": "1021 O St., Suite 6730, Sacramento, CA 95814"
+    "website": "https://sr36.senate.ca.gov/",
+    "office": "1021 O St., Suite 6730, Sacramento, CA 95814",
+    "districtOffice": "301 Main St. Suite 212, Huntington Beach, CA 92648",
+    "districtPhone": "714-374-4000",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tony_Strickland",
+    "ballotpediaUrl": "https://ballotpedia.org/Tony_Strickland"
   },
   {
     "id": "ocd-person/75229920-399d-4216-9b76-c27ea398665a",
@@ -1671,8 +2112,12 @@
     "party": "Republican",
     "email": "assemblymember.ta@assembly.ca.gov",
     "phone": "916-319-2070",
-    "photoUrl": "https://www.assembly.ca.gov/sites/assembly.ca.gov/files/memberphotos/tri_ta_a25i1353_resized.png",
+    "photoUrl": "https://webapi.assembly.ca.gov/district-media/assets/members/assembly_member_70.jpg",
     "website": "https://ad70.asmrc.org",
-    "office": "Room 5540, 1021 O St. P.O. Box 942849, Sacramento, CA 94249"
+    "office": "Room 5540, 1021 O St. P.O. Box 942849, Sacramento, CA 94249",
+    "districtOffice": "14361 Beach Blvd. Suite 211, Westminster, CA 92683",
+    "districtPhone": "714-379-0970",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tri_Ta",
+    "ballotpediaUrl": "https://ballotpedia.org/Tri_Ta"
   }
 ]

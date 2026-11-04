@@ -11,7 +11,11 @@
     "phone": "401-222-3580",
     "photoUrl": "https://www.rilegislature.gov/senators/pictures/dimario.jpg",
     "website": "https://www.rilegislature.gov/senators/algiere/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "47 Tupelo Trail, Narragansett, RI 02882",
+    "districtPhone": "401-276-5568",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Alana_DiMario",
+    "ballotpediaUrl": "https://ballotpedia.org/Alana_DiMario"
   },
   {
     "id": "ocd-person/7769ff96-3f6e-4747-b14b-de0a8648af61",
@@ -25,7 +29,11 @@
     "phone": "401-222-3580",
     "photoUrl": "http://www.rilegislature.gov/representatives/Pictures/marszalkowski.jpg",
     "website": "https://www.rilegislature.gov/representatives/carson/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "20 Waumsett Ave., Cumberland, RI 02864",
+    "districtPhone": "401-714-4425",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Alex_Marszalkowski",
+    "ballotpediaUrl": "https://ballotpedia.org/Alex_Marszalkowski"
   },
   {
     "id": "ocd-person/202a1def-abb3-4f77-8ef1-5c453d2d5423",
@@ -37,9 +45,13 @@
     "party": "Democratic",
     "email": "rep-finkelman@rilegislature.gov",
     "phone": "401-222-3580",
-    "photoUrl": "https://www.rilegislature.gov/representatives/Pictures/Alex%20Finkelman.jpg",
+    "photoUrl": "https://www.rilegislature.gov/LegislationPictures/alex_finkelman.jpg",
     "website": "https://www.rilegislature.gov/representatives/finkelman/Pages/biography.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "28 Bayberry Road, Jamestown, RI 02835",
+    "districtPhone": "401-206-1030",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Alex_Finkelman",
+    "ballotpediaUrl": "https://ballotpedia.org/Alex_Finkelman"
   },
   {
     "id": "ocd-person/a857e27b-7ced-43ad-bd08-a954e5f781ac",
@@ -53,7 +65,9 @@
     "phone": "401-222-3580",
     "photoUrl": "http://www.rilegislature.gov/senators/pictures/quezada.jpg",
     "website": "https://www.rilegislature.gov/senators/algiere/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ana_Quezada",
+    "ballotpediaUrl": "https://ballotpedia.org/Ana_Quezada"
   },
   {
     "id": "ocd-person/89fadd1c-b02c-45aa-b008-bf31d3fea4a1",
@@ -67,7 +81,11 @@
     "phone": "401-222-3580",
     "photoUrl": "https://assets.civicengine.com/uploads/candidate/headshot/830447/830447.jpg",
     "website": "https://rilegislature.gov/senators/Dimitri/Pages/Biography.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "41 Dale Ave. Apartment G, Johnston, RI 02919",
+    "districtPhone": "401-276-5563",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Andrew_Dimitri",
+    "ballotpediaUrl": "https://ballotpedia.org/Andrew_Dimitri"
   },
   {
     "id": "ocd-person/b9359c6a-fbb2-4165-af9b-a6c63290d851",
@@ -81,7 +99,11 @@
     "phone": "401-222-3580",
     "photoUrl": "https://www.rilegislature.gov/representatives/Pictures/DeSimone.jpg",
     "website": "https://www.rilegislature.gov/representatives/desimone/Pages/Biography.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "9 Udell St, Providence, RI 02904",
+    "districtPhone": "401-580-7316",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Anthony_DeSimone",
+    "ballotpediaUrl": "https://ballotpedia.org/Anthony_DeSimone"
   },
   {
     "id": "ocd-person/6d4c7be7-4e68-4aa1-9262-81995fcc231e",
@@ -95,7 +117,11 @@
     "phone": "401-222-3580",
     "photoUrl": "http://www.rilegislature.gov/representatives/pictures/handy.jpg",
     "website": "https://www.rilegislature.gov/representatives/carson/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "26 Welfare Ave., Cranston, RI 02910",
+    "districtPhone": "401-785-8996",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Arthur_Handy",
+    "ballotpediaUrl": "https://ballotpedia.org/Arthur_Handy"
   },
   {
     "id": "ocd-person/6cb1ca03-2ea8-4ee8-9ecb-faa37f4c5966",
@@ -109,7 +135,11 @@
     "phone": "401-222-3580",
     "photoUrl": "http://www.rilegislature.gov/representatives/pictures/corvese.jpg",
     "website": "https://www.rilegislature.gov/representatives/carson/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "234 Lexington Ave., North Providence, RI 02904",
+    "districtPhone": "401-353-8695",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Arthur_Corvese",
+    "ballotpediaUrl": "https://ballotpedia.org/Arthur_Corvese"
   },
   {
     "id": "ocd-person/6ddaaa6f-48c9-468e-a744-714728251586",
@@ -123,7 +153,11 @@
     "phone": "401-222-3580",
     "photoUrl": "http://www.rilegislature.gov/representatives/Pictures/potter.jpg",
     "website": "https://www.rilegislature.gov/representatives/carson/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "62 Grove Ave., Cranston, RI 02910",
+    "districtPhone": "401-400-2276",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Brandon_Potter_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Brandon_Potter"
   },
   {
     "id": "ocd-person/f0206346-2c07-4316-a556-cee7fe595e9a",
@@ -135,9 +169,13 @@
     "party": "Democratic",
     "email": "rep-voas@rilegislature.gov",
     "phone": "401-222-3580",
-    "photoUrl": "https://www.rilegislature.gov/representatives/Pictures/Brandon%20Voas.jpg",
+    "photoUrl": "https://www.rilegislature.gov/LegislationPictures/brandon_voas.jpg",
     "website": "https://www.rilegislature.gov/representatives/voas/pages/biography.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "22 Clark St. Unit 8, Cumberland, RI 02864",
+    "districtPhone": "401-426-9389",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Brandon_Voas",
+    "ballotpediaUrl": "https://ballotpedia.org/Brandon_Voas"
   },
   {
     "id": "ocd-person/397f8729-c37c-4882-af7e-d7235e9f06f2",
@@ -151,7 +189,11 @@
     "phone": "401-222-3580",
     "photoUrl": "http://www.rilegislature.gov/representatives/pictures/newberry.jpg",
     "website": "https://www.rilegislature.gov/representatives/carson/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "53 Follett St., North Smithfield, RI 02896",
+    "districtPhone": "401-222-2259",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Brian_Newberry",
+    "ballotpediaUrl": "https://ballotpedia.org/Brian_Newberry"
   },
   {
     "id": "ocd-person/632b3bf0-a3f8-4c0d-9818-d03c861318dc",
@@ -165,7 +207,9 @@
     "phone": "401-222-3580",
     "photoUrl": "http://www.rilegislature.gov/representatives/pictures/kennedy.jpg",
     "website": "https://www.rilegislature.gov/representatives/carson/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Brian_Patrick_Kennedy",
+    "ballotpediaUrl": "https://ballotpedia.org/Brian_Kennedy_(Rhode_Island)"
   },
   {
     "id": "ocd-person/177cd512-2835-4b9b-b77c-60fe178ec26e",
@@ -179,7 +223,11 @@
     "phone": "401-222-3580",
     "photoUrl": "https://assets.civicengine.com/uploads/candidate/headshot/830443/830443.jpg",
     "website": "https://rilegislature.gov/senators/Thompson/Pages/Biography.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "386 Rhode Island Ave., Woonsocket, RI 02895",
+    "districtPhone": "401-276-5568",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Brian_Thompson_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Brian_Thompson_(Rhode_Island)"
   },
   {
     "id": "ocd-person/80931d0d-c52e-492a-8b92-c191aa00c03f",
@@ -193,7 +241,11 @@
     "phone": "401-222-3580",
     "photoUrl": "http://www.rilegislature.gov/Senators/Pictures/valverde.jpg",
     "website": "https://www.rilegislature.gov/senators/algiere/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "14 Cambridge Court, North Kingstown, RI 02852",
+    "districtPhone": "401-276-5561",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bridget_Valverde",
+    "ballotpediaUrl": "https://ballotpedia.org/Bridget_Valverde"
   },
   {
     "id": "ocd-person/7daab32c-5d7f-4db2-b141-026d3595f69f",
@@ -207,7 +259,11 @@
     "phone": "401-222-3580",
     "photoUrl": "http://www.rilegislature.gov/representatives/Pictures/McEntee.jpg",
     "website": "https://www.rilegislature.gov/representatives/carson/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "70B Broad Rock Road, South Kingstown, RI 02879",
+    "districtPhone": "401-222-4435",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Carol_McEntee",
+    "ballotpediaUrl": "https://ballotpedia.org/Carol_Hagan_McEntee"
   },
   {
     "id": "ocd-person/8fad7738-c303-432e-9442-ce2b6dfe87e5",
@@ -221,7 +277,10 @@
     "phone": "401-222-2466",
     "photoUrl": "http://www.rilegislature.gov/representatives/pictures/lima.jpg",
     "website": "https://www.rilegislature.gov/representatives/carson/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "455 Laurel Hill Ave., Cranston, RI 02920",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Charlene_Lima",
+    "ballotpediaUrl": "https://ballotpedia.org/Charlene_Lima"
   },
   {
     "id": "ocd-person/386a8117-95b5-441f-91d0-665effac1af4",
@@ -233,9 +292,13 @@
     "party": "Democratic",
     "email": "rep-cruz@rilegislature.gov",
     "phone": "401-222-3580",
-    "photoUrl": "https://www.rilegislature.gov/representatives/Pictures/Cruz%20preferred%20pic.jpg",
+    "photoUrl": "https://www.rilegislature.gov/LegislationPictures/cherie_cruz.jpg",
     "website": "https://www.rilegislature.gov/representatives/cruz/Pages/Biography.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "422 Smithfield Ave. Apartment 1, Pawtucket, RI 02860",
+    "districtPhone": "401-222-2447",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Cherie_Cruz",
+    "ballotpediaUrl": "https://ballotpedia.org/Cherie_Cruz"
   },
   {
     "id": "ocd-person/4f6ac85b-f69f-4916-beaf-a30087ba1214",
@@ -249,7 +312,11 @@
     "phone": "401-222-3580",
     "photoUrl": "https://www.cranstonri.gov/_resources/common/userfiles/image/IMG-0103.JPG",
     "website": "https://rilegislature.gov/representatives/Paplauskas/Pages/Biography.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "14 Highland St., Cranston, RI 02920",
+    "districtPhone": "401-996-9166",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Christopher_Paplauskas",
+    "ballotpediaUrl": "https://ballotpedia.org/Chris_Paplauskas"
   },
   {
     "id": "ocd-person/a9ba95ac-22f3-4aeb-8fdd-eb236675d8d4",
@@ -263,7 +330,9 @@
     "phone": "401-222-2466",
     "photoUrl": "http://www.rilegislature.gov/representatives/pictures/blazejewski.jpg",
     "website": "https://www.rilegislature.gov/representatives/blazejewski/default.aspx",
-    "office": "Room 323, 82 Smith St., Providence, RI 02903"
+    "office": "Room 323, 82 Smith St., Providence, RI 02903",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Christopher_Blazejewski",
+    "ballotpediaUrl": "https://ballotpedia.org/Christopher_Blazejewski"
   },
   {
     "id": "ocd-person/b12f1651-fc9e-440c-9bc3-ff326505cca4",
@@ -277,7 +346,11 @@
     "phone": "401-222-3580",
     "photoUrl": "http://www.rilegislature.gov/representatives/pictures/bennett.jpg",
     "website": "https://www.rilegislature.gov/representatives/bennett/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "27 Shippee Ave., Warwick, RI 02886",
+    "districtPhone": "401-480-4647",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/David_Bennett_(Rhode_Island_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/David_Bennett_(Rhode_Island)"
   },
   {
     "id": "ocd-person/785df766-de25-496b-a823-e4ad64c462cb",
@@ -291,7 +364,11 @@
     "phone": "401-222-3580",
     "photoUrl": "http://www.rilegislature.gov/representatives/pictures/place.jpg",
     "website": "https://www.rilegislature.gov/representatives/carson/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "167 Jefferson Road, Harrisville, RI 02830",
+    "districtPhone": "401-286-2088",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/David_J._Place",
+    "ballotpediaUrl": "https://ballotpedia.org/David_Place"
   },
   {
     "id": "ocd-person/75bd1298-3fc9-42cc-87c6-23bdc20a7b56",
@@ -305,7 +382,11 @@
     "phone": "401-222-3580",
     "photoUrl": "http://www.rilegislature.gov/representatives/Pictures/Morales.JPG",
     "website": "https://www.rilegislature.gov/representatives/carson/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "319 Academy Ave. Apartment 4, Providence, RI 02908",
+    "districtPhone": "401-480-1322",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/David_Morales_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/David_Morales_(Rhode_Island)"
   },
   {
     "id": "ocd-person/63bb0194-1993-4149-b39d-23f229c3040e",
@@ -319,7 +400,11 @@
     "phone": "401-222-3580",
     "photoUrl": "https://www.rilegislature.gov/senators/Pictures/Tikoian%202023.jpg",
     "website": "https://www.rilegislature.gov/Senators/tikoian/pages/biography.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "114 Austin Ave., Greenville, RI 02828",
+    "districtPhone": "401-276-5563",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/David_Tikoian",
+    "ballotpediaUrl": "https://ballotpedia.org/David_Tikoian"
   },
   {
     "id": "ocd-person/b747e057-fdd2-480a-beb9-c4ef37ae1e12",
@@ -333,7 +418,9 @@
     "phone": "401-276-5561",
     "photoUrl": "http://www.rilegislature.gov/senators/pictures/euer.jpg",
     "website": "https://www.rilegislature.gov/senators/algiere/default.aspx",
-    "office": "Room 308, 82 Smith St., Providence, RI 02903"
+    "office": "Room 308, 82 Smith St., Providence, RI 02903",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dawn_Euer",
+    "ballotpediaUrl": "https://ballotpedia.org/Dawn_Euer"
   },
   {
     "id": "ocd-person/3efcf2f9-f7f8-4441-9ec7-4f6d8c17940f",
@@ -344,10 +431,14 @@
     "district": "43",
     "party": "Democratic",
     "email": "rep-fellela@rilegislature.gov",
-    "phone": "401-470-3924",
+    "phone": "401-222-1723",
     "photoUrl": "http://www.rilegislature.gov/representatives/pictures/fellela.jpg",
     "website": "https://www.rilegislature.gov/representatives/carson/default.aspx",
-    "office": "Room 331A, 82 Smith St., Providence, RI 02903"
+    "office": "Room B7, 82 Smith St., Providence, RI 02903",
+    "districtOffice": "3 Diaz St., Johnston, RI 02919",
+    "districtPhone": "401-231-2014",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Deborah_Fellela",
+    "ballotpediaUrl": "https://ballotpedia.org/Deborah_Fellela"
   },
   {
     "id": "ocd-person/0065fe7b-08cf-4d17-b358-c0c04ab45616",
@@ -360,8 +451,12 @@
     "email": "rep-fascia@rilegislature.gov",
     "phone": "401-222-3580",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/Richard_Fascia_20240808_092707.png",
-    "website": "https://rilegislature.gov/representatives/Fascia/Pages/Biography.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "website": "https://fasciarep42.com/",
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "20 Jasmine Lane, Johnston, RI 02919",
+    "districtPhone": "401-903-0314",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Richard_Fascia",
+    "ballotpediaUrl": "https://ballotpedia.org/Richard_Fascia"
   },
   {
     "id": "ocd-person/6e9979b1-f131-4d71-8146-71f10bd06e57",
@@ -375,7 +470,11 @@
     "phone": "401-222-3580",
     "photoUrl": "https://bloximages.newyork1.vip.townnews.com/ricentral.com/content/tncms/assets/v3/editorial/4/30/4303801c-a298-11ef-872c-ffd5089fe627/67360f284e7b9.image.jpg?resize=415%2C500",
     "website": "https://rilegislature.gov/representatives/Read/Pages/Biography.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "109 Colvintown Road, Coventry, RI 02816",
+    "districtPhone": "401-255-8504",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Earl_Read_III",
+    "ballotpediaUrl": "https://ballotpedia.org/Earl_Read_III"
   },
   {
     "id": "ocd-person/e073b501-75f0-4fc6-9e61-392b9931f070",
@@ -389,7 +488,11 @@
     "phone": "401-222-3580",
     "photoUrl": "http://www.rilegislature.gov/representatives/Pictures/ajello.jpg",
     "website": "https://www.rilegislature.gov/representatives/ajello/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "29 Benefit St., Providence, RI 02904",
+    "districtPhone": "401-222-2296",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Edith_Ajello",
+    "ballotpediaUrl": "https://ballotpedia.org/Edith_Ajello"
   },
   {
     "id": "ocd-person/6913b936-2e96-414a-80d6-6518f5accb7e",
@@ -403,7 +506,9 @@
     "phone": "401-222-3580",
     "photoUrl": "http://www.rilegislature.gov/Senators/Pictures/morgan.jpg",
     "website": "https://www.rilegislature.gov/senators/algiere/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Elaine_J._Morgan",
+    "ballotpediaUrl": "https://ballotpedia.org/Elaine_Morgan"
   },
   {
     "id": "ocd-person/e70e3449-7587-4a64-a940-922d543f5a2d",
@@ -414,10 +519,13 @@
     "district": "9",
     "party": "Democratic",
     "email": "rep-sanchez@rilegislature.gov",
-    "phone": "401-753-8114",
+    "phone": "401-222-1162",
     "photoUrl": "https://www.rilegislature.gov/representatives/Pictures/Sanchez.jpg",
     "website": "https://www.rilegislature.gov/representatives/sanchez/Pages/biography.aspx",
-    "office": "Room B-07A, 82 Smith St., Providence, RI 02903"
+    "office": "Room 07A, 82 Smith St., Providence, RI 02903",
+    "districtOffice": "17 Messer St., Providence, RI 02909",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Enrique_Sanchez_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Enrique_Sanchez"
   },
   {
     "id": "ocd-person/c5f9a1f5-502b-41b6-8848-bfa359b1bad9",
@@ -431,7 +539,11 @@
     "phone": "401-222-3580",
     "photoUrl": "http://www.rilegislature.gov/representatives/Pictures/shanley.jpg",
     "website": "https://www.rilegislature.gov/representatives/carson/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "7 Turtle Creek Drive, Warwick, RI 02886",
+    "districtPhone": "401-440-3493",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Evan_Shanley",
+    "ballotpediaUrl": "https://ballotpedia.org/Evan_Shanley"
   },
   {
     "id": "ocd-person/d688b16c-5bf2-41df-b1c9-e8c5de7e437c",
@@ -445,7 +557,11 @@
     "phone": "401-222-3580",
     "photoUrl": "http://www.rilegislature.gov/Senators/Pictures/ciccone.jpg",
     "website": "https://www.rilegislature.gov/senators/algiere/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "15 Mercy St., Providence, RI 02909",
+    "districtPhone": "401-276-5579",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Frank_Ciccone",
+    "ballotpediaUrl": "https://ballotpedia.org/Frank_Ciccone"
   },
   {
     "id": "ocd-person/5d976bb8-2481-45d2-bae9-df4b565d9526",
@@ -459,7 +575,11 @@
     "phone": "401-222-3580",
     "photoUrl": "http://www.rilegislature.gov/representatives/pictures/nardone.jpg",
     "website": "https://www.rilegislature.gov/representatives/carson/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "50 Fieldstone Drive, Coventry, RI 02816",
+    "districtPhone": "401-821-2360",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/George_Nardone",
+    "ballotpediaUrl": "https://ballotpedia.org/George_Nardone"
   },
   {
     "id": "ocd-person/961061c2-4ce9-4ac4-85c4-28b20c800e9d",
@@ -473,7 +593,11 @@
     "phone": "401-222-3580",
     "photoUrl": "https://www.rilegislature.gov/LegislationPictures/gordon_rogers.jpg",
     "website": "https://www.rilegislature.gov/senators/algiere/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "61 Cucumber Hill Road, Foster, RI 02825",
+    "districtPhone": "401-222-2708",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Gordon_Rogers",
+    "ballotpediaUrl": "https://ballotpedia.org/Gordon_Rogers"
   },
   {
     "id": "ocd-person/44424388-03a6-452b-992b-3c082949f62f",
@@ -487,7 +611,11 @@
     "phone": "401-222-3580",
     "photoUrl": "http://www.rilegislature.gov/representatives/pictures/diaz.jpg",
     "website": "https://www.rilegislature.gov/representatives/carson/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "43 Adelaide Ave., Providence, RI 02907",
+    "districtPhone": "401-575-3641",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Grace_Diaz",
+    "ballotpediaUrl": "https://ballotpedia.org/Grace_Diaz"
   },
   {
     "id": "ocd-person/4b45cbc5-99f3-4a08-a154-cac0cc90ae1a",
@@ -501,7 +629,11 @@
     "phone": "401-222-3580",
     "photoUrl": "http://www.rilegislature.gov/representatives/pictures/costantino.jpg",
     "website": "https://www.rilegislature.gov/representatives/carson/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "21 Greenwood Lane, Lincoln, RI 02865",
+    "districtPhone": "401-426-0284",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Gregory_Costantino",
+    "ballotpediaUrl": "https://ballotpedia.org/Gregory_Costantino"
   },
   {
     "id": "ocd-person/75750ad6-0bec-4d81-8561-85036c0d99df",
@@ -515,7 +647,11 @@
     "phone": "401-222-3580",
     "photoUrl": "http://www.rilegislature.gov/Senators/Pictures/gallo.jpg",
     "website": "https://www.rilegislature.gov/senators/algiere/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "285 Meshanticut Valley Parkway, Cranston, RI 02920",
+    "districtPhone": "401-276-5563",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Hanna_Gallo",
+    "ballotpediaUrl": "https://ballotpedia.org/Hanna_Gallo"
   },
   {
     "id": "ocd-person/e9b6ecf5-de39-4026-83fa-3766ed43cc49",
@@ -529,7 +665,11 @@
     "phone": "401-222-3580",
     "photoUrl": "https://images.squarespace-cdn.com/content/v1/62d5679913ecdf027fe552fe/d50030ca-d566-4d1d-a60a-8f2ddb95b187/Jake+Bissaillon+Cropped+background.jpg",
     "website": "https://www.rilegislature.gov/senators/bissaillon/Pages/Biography.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "16 Elmhurst Ave., Providence, RI 02908",
+    "districtPhone": "401-442-6973",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jake_Bissaillon",
+    "ballotpediaUrl": "https://ballotpedia.org/Jake_Bissaillon"
   },
   {
     "id": "ocd-person/c2b18728-5409-42b0-a789-d7f5bd717780",
@@ -543,7 +683,11 @@
     "phone": "401-222-3580",
     "photoUrl": "http://www.rilegislature.gov/representatives/Pictures/Baginski.jpg",
     "website": "https://www.rilegislature.gov/representatives/baginski/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "119 Brettonwoods Drive, Cranston, RI 02920",
+    "districtPhone": "401-310-0009",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jacquelyn_Baginski",
+    "ballotpediaUrl": "https://ballotpedia.org/Jacquelyn_Baginski"
   },
   {
     "id": "ocd-person/cef11d28-cbbb-4ffd-b8f2-23c71e73f1b3",
@@ -554,10 +698,14 @@
     "district": "67",
     "party": "Democratic",
     "email": "rep-knight@rilegislature.gov",
-    "phone": "401-903-9804",
-    "photoUrl": "https://www.jasonknightlaw.com/wp-content/uploads/2025/01/about-img.webp",
+    "phone": "401-222-4435",
+    "photoUrl": "https://www.rilegislature.gov/LegislationPictures/jason_knight.jpg",
     "website": "https://www.rilegislature.gov/representatives/carson/default.aspx",
-    "office": "Room 5, 82 Smith St., Providence, RI 02903"
+    "office": "Room B-5, 82 Smith St., Providence, RI 02903",
+    "districtOffice": "1 Newbrook Drive, Barrington, RI 02806",
+    "districtPhone": "617-943-6532",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jason_Knight_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Jason_Knight_(Rhode_Island)"
   },
   {
     "id": "ocd-person/c937560c-277e-4c48-9656-bb385a7910f3",
@@ -571,7 +719,11 @@
     "phone": "401-222-3580",
     "photoUrl": "https://rhodeislandcurrent.com/wp-content/uploads/2024/09/272274786_329286515874430_6351954859366181023_n-1-1024x1024.jpg",
     "website": "https://rilegislature.gov/representatives/Furtado/Pages/Biography.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "35 Arthur Ave. Apartment 29, East Providence, RI 02914",
+    "districtPhone": "401-222-2296",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jenni_Furtado",
+    "ballotpediaUrl": "https://ballotpedia.org/Jenni_Furtado"
   },
   {
     "id": "ocd-person/c11b7057-fe39-42b6-8a38-91d9e7349118",
@@ -582,10 +734,14 @@
     "district": "59",
     "party": "Democratic",
     "email": "rep-stewart@rilegislature.gov",
-    "phone": "401-305-0088",
+    "phone": "401-222-1721",
     "photoUrl": "https://www.rilegislature.gov/representatives/Pictures/Stewart.jpg",
     "website": "https://www.rilegislature.gov/representatives/stewart/pages/biography.aspx",
-    "office": "Room B-07, 82 Smith St., Providence, RI 02903"
+    "office": "Room 07, 82 Smith St., Providence, RI 02903",
+    "districtOffice": "41 Patt St., Pawtucket, RI 02860",
+    "districtPhone": "401-305-0088",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jennifer_Stewart",
+    "ballotpediaUrl": "https://ballotpedia.org/Jennifer_Stewart"
   },
   {
     "id": "ocd-person/32458c0f-8b82-4f49-a191-90d68c3f375f",
@@ -599,7 +755,9 @@
     "phone": "401-222-4263",
     "photoUrl": "https://www.rilegislature.gov/LegislationPictures/jennifer_boylan.jpg",
     "website": "https://www.rilegislature.gov/representatives/boylan/Pages/Biography.aspx",
-    "office": "Room 205, 82 Smith St., Providence, RI 02903"
+    "office": "Room 205, 82 Smith St., Providence, RI 02903",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jennifer_Boylan_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Jennifer_Boylan"
   },
   {
     "id": "ocd-person/03fdc4f3-715d-4f83-ab31-1a63f86a4dcf",
@@ -613,7 +771,9 @@
     "phone": "401-222-3580",
     "photoUrl": "http://www.rilegislature.gov/Senators/Pictures/de%20la%20cruz%20NEW%202022.jpg",
     "website": "https://www.rilegislature.gov/senators/algiere/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jessica_de_la_Cruz",
+    "ballotpediaUrl": "https://ballotpedia.org/Jessica_de_la_Cruz"
   },
   {
     "id": "ocd-person/85b2ef21-1f02-4d9e-9f74-a40a2e942f7c",
@@ -627,7 +787,9 @@
     "phone": "401-222-8028",
     "photoUrl": "http://www.rilegislature.gov/representatives/pictures/edwards.jpg",
     "website": "https://www.rilegislature.gov/representatives/carson/default.aspx",
-    "office": "Room 306, 82 Smith St., Providence, RI 02903"
+    "office": "Room 306, 82 Smith St., Providence, RI 02903",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_Edwards_(Rhode_Island_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/John_Edwards_(Rhode_Island)"
   },
   {
     "id": "ocd-person/f9877000-1919-4f5b-a8b7-f05a1092bdab",
@@ -641,7 +803,11 @@
     "phone": "401-222-3580",
     "photoUrl": "http://www.rilegislature.gov/representatives/pictures/lombardi.jpg",
     "website": "https://www.rilegislature.gov/representatives/carson/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "48 Grove St., Providence, RI 02909",
+    "districtPhone": "401-404-4700",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_J._Lombardi",
+    "ballotpediaUrl": "https://ballotpedia.org/John_Lombardi"
   },
   {
     "id": "ocd-person/a5f646b2-0370-494c-aebc-25869f019a1b",
@@ -655,7 +821,11 @@
     "phone": "401-222-3580",
     "photoUrl": "https://www.rilegislature.gov/senators/pictures/burke.jpg",
     "website": "https://www.rilegislature.gov/senators/algiere/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "7 Bradley Court, West Warwick, RI 02893",
+    "districtPhone": "401-374-4721",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_Burke_(Rhode_Island_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/John_Burke_(Rhode_Island)"
   },
   {
     "id": "ocd-person/89e9f600-0af5-471c-89bb-b27142def4c9",
@@ -669,7 +839,11 @@
     "phone": "401-222-3580",
     "photoUrl": "https://www.rilegislature.gov/representatives/Pictures/Brien.jpg",
     "website": "https://www.rilegislature.gov/representatives/brien/Pages/biography.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "200 Woodland Road, Woonsocket, RI 02895",
+    "districtPhone": "401-597-5565",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jon_D._Brien",
+    "ballotpediaUrl": "https://ballotpedia.org/Jon_Brien"
   },
   {
     "id": "ocd-person/23ac0ada-a340-4539-a4c9-33e4c437add6",
@@ -683,7 +857,11 @@
     "phone": "401-222-3580",
     "photoUrl": "https://d2gjqh9j26unp0.cloudfront.net/profilepic/35446a34e894fdf32e04c9a2069c7915",
     "website": "https://www.rilegislature.gov/senators/acosta/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "100 Illinois St., Central Falls, RI 02863",
+    "districtPhone": "401-305-0545",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jonathon_Acosta",
+    "ballotpediaUrl": "https://ballotpedia.org/Jonathon_Acosta"
   },
   {
     "id": "ocd-person/be85e7a9-0455-4e02-92f7-834710d0e401",
@@ -697,7 +875,11 @@
     "phone": "401-222-3580",
     "photoUrl": "http://www.rilegislature.gov/representatives/Pictures/batista.jpg",
     "website": "https://www.rilegislature.gov/representatives/batista/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "205 Massachusetts Ave., Providence, RI 02905",
+    "districtPhone": "401-533-2226",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jose_Batista_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Jose_Batista"
   },
   {
     "id": "ocd-person/0b700db6-fe30-4fb4-a988-05ae0d618720",
@@ -711,7 +893,11 @@
     "phone": "401-222-3580",
     "photoUrl": "http://www.rilegislature.gov/representatives/pictures/solomon.jpg",
     "website": "https://www.rilegislature.gov/representatives/carson/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "703 W. Shore Road, Warwick, RI 02889",
+    "districtPhone": "401-308-3904",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Joseph_J._Solomon_Jr.",
+    "ballotpediaUrl": "https://ballotpedia.org/Joseph_Solomon_(Rhode_Island)"
   },
   {
     "id": "ocd-person/ce92c860-ad04-4cc5-91eb-52add74c98e5",
@@ -725,7 +911,11 @@
     "phone": "401-222-3580",
     "photoUrl": "http://www.rilegislature.gov/representatives/pictures/mcnamara.jpg",
     "website": "https://www.rilegislature.gov/representatives/carson/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "23 Howie Ave., Warwick, RI 02888",
+    "districtPhone": "401-222-2296",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Joseph_McNamara_(Rhode_Island_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Joseph_McNamara_(Rhode_Island)"
   },
   {
     "id": "ocd-person/b6a9a38c-0f39-4150-b041-fd6c75f9c8ad",
@@ -739,21 +929,11 @@
     "phone": "401-222-3580",
     "photoUrl": "http://www.rilegislature.gov/representatives/Pictures/Giraldo.jpg",
     "website": "https://www.rilegislature.gov/representatives/carson/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
-  },
-  {
-    "id": "ocd-person/6e1cd170-ab5c-4095-9fb2-8e92138f6db3",
-    "name": "Julie Casimiro",
-    "firstName": "Julie",
-    "lastName": "Casimiro",
-    "chamber": "lower",
-    "district": "31",
-    "party": "Democratic",
-    "email": "rep-casimiro@rilegislature.gov",
-    "phone": "401-222-3580",
-    "photoUrl": "http://www.rilegislature.gov/representatives/Pictures/casimiro.jpg",
-    "website": "https://www.rilegislature.gov/representatives/carson/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "74 Summit St., Central Falls, RI 02863",
+    "districtPhone": "401-312-4437",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Joshua_Giraldo",
+    "ballotpediaUrl": "https://ballotpedia.org/Joshua_Giraldo"
   },
   {
     "id": "ocd-person/9386224e-9603-4695-8f46-a1033d8534a5",
@@ -767,7 +947,11 @@
     "phone": "401-222-3580",
     "photoUrl": "http://www.rilegislature.gov/representatives/pictures/speakman.jpg",
     "website": "https://www.rilegislature.gov/representatives/carson/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "54 Seymour St., Warren, RI 02885",
+    "districtPhone": "401-258-1134",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/June_Speakman",
+    "ballotpediaUrl": "https://ballotpedia.org/June_Speakman"
   },
   {
     "id": "ocd-person/38c539f2-0698-4fa2-a761-477608365838",
@@ -781,7 +965,11 @@
     "phone": "401-222-3580",
     "photoUrl": "http://www.rilegislature.gov/representatives/pictures/caldwell.jpg",
     "website": "https://www.rilegislature.gov/representatives/caldwell/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "8 Aurora Road, East Greenwich, RI 02818",
+    "districtPhone": "401-212-7320",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Justine_Caldwell",
+    "ballotpediaUrl": "https://ballotpedia.org/Justine_Caldwell"
   },
   {
     "id": "ocd-person/00644fec-e128-4e7f-9af0-8e79d0903da3",
@@ -795,7 +983,9 @@
     "phone": "401-222-2447",
     "photoUrl": "http://www.rilegislature.gov/representatives/pictures/shekarchi.jpg",
     "website": "https://joeshekarchi.com/",
-    "office": "Room 323, 82 Smith St., Providence, RI 02903"
+    "office": "Room 323, 82 Smith St., Providence, RI 02903",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/K._Joseph_Shekarchi",
+    "ballotpediaUrl": "https://ballotpedia.org/K._Joseph_Shekarchi"
   },
   {
     "id": "ocd-person/016b40cf-1be0-4e66-acdf-78a029822e1c",
@@ -809,7 +999,11 @@
     "phone": "401-222-3580",
     "photoUrl": "http://www.rilegislature.gov/representatives/pictures/alzate.jpg",
     "website": "https://www.rilegislature.gov/representatives/alzate/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "984 York Ave., Pawtucket, RI 02861",
+    "districtPhone": "401-663-5600",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Karen_Alzate",
+    "ballotpediaUrl": "https://ballotpedia.org/Karen_Alzate"
   },
   {
     "id": "ocd-person/bd30e693-11a2-412f-b81a-bebc78d91145",
@@ -820,10 +1014,12 @@
     "district": "63",
     "party": "Democratic",
     "email": "rep-kazarian@rilegislature.gov",
-    "phone": "401-433-9636",
-    "photoUrl": "http://www.rilegislature.gov/representatives/pictures/kazarian.jpg",
+    "phone": "401-222-2466",
+    "photoUrl": "https://www.rilegislature.gov/LegislationPictures/katherine_kazarian.jpg",
     "website": "https://www.rilegislature.gov/representatives/carson/default.aspx",
-    "office": "Room 323, 82 Smith St., Providence, RI 02903"
+    "office": "Room 323, 82 Smith St., Providence, RI 02903",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Katherine_Kazarian",
+    "ballotpediaUrl": "https://ballotpedia.org/Katherine_Kazarian"
   },
   {
     "id": "ocd-person/570c899e-34b2-4e30-93e2-79f588ff8aef",
@@ -837,7 +1033,11 @@
     "phone": "401-222-3580",
     "photoUrl": "http://www.rilegislature.gov/representatives/pictures/fogarty.jpg",
     "website": "https://www.rilegislature.gov/representatives/carson/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "50 Woodmark Way, Wakefield, RI 02879",
+    "districtPhone": "401-782-1919",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kathleen_Fogarty",
+    "ballotpediaUrl": "https://ballotpedia.org/Kathleen_Fogarty"
   },
   {
     "id": "ocd-person/5ab817c5-d86c-4bf0-9a8f-78ca20cdc56b",
@@ -851,7 +1051,11 @@
     "phone": "401-222-3580",
     "photoUrl": "https://lammisvargas.com/wp-content/uploads/2024/07/Lammis-Headshot-1536x1536.jpg",
     "website": "https://rilegislature.gov/senators/Vargas/Pages/Biography.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "35 Betsey Williams Drive, Cranston, RI 02905",
+    "districtPhone": "401-276-5584",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lammis_Vargas",
+    "ballotpediaUrl": "https://ballotpedia.org/Lammis_Vargas"
   },
   {
     "id": "ocd-person/320f08df-f7d3-4ebe-a696-9c2b8d98f75b",
@@ -862,10 +1066,13 @@
     "district": "75",
     "party": "Democratic",
     "email": "rep-carson@rilegislature.gov",
-    "phone": "401-523-1143",
+    "phone": "401-222-1162",
     "photoUrl": "http://www.rilegislature.gov/representatives/pictures/carson.jpg",
     "website": "https://www.rilegislature.gov/representatives/carson/default.aspx",
-    "office": "Room B-07A, 82 Smith St., Providence, RI 02903"
+    "office": "Room B-07A, 82 Smith St., Providence, RI 02903",
+    "districtOffice": "13 Binney St., Newport, RI 02840",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lauren_H._Carson",
+    "ballotpediaUrl": "https://ballotpedia.org/Lauren_Carson"
   },
   {
     "id": "ocd-person/ad453635-2239-4a63-a153-a9f925b32621",
@@ -879,7 +1086,11 @@
     "phone": "401-222-3580",
     "photoUrl": "http://www.rilegislature.gov/representatives/Pictures/Felix.jpg",
     "website": "https://www.rilegislature.gov/representatives/carson/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "195 Carter Ave., Pawtucket, RI 02861",
+    "districtPhone": "401-369-5364",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Leonela_Felix",
+    "ballotpediaUrl": "https://ballotpedia.org/Leonela_Felix"
   },
   {
     "id": "ocd-person/ef7ddd55-3351-4ca9-adfc-aef71505ec95",
@@ -893,7 +1104,11 @@
     "phone": "401-222-3580",
     "photoUrl": "http://www.rilegislature.gov/Senators/Pictures/raptakis.jpg",
     "website": "https://www.rilegislature.gov/senators/algiere/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "2080 Nooseneck Hill Road, Coventry, RI 02816",
+    "districtPhone": "401-276-5567",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Leonidas_Raptakis",
+    "ballotpediaUrl": "https://ballotpedia.org/Leonidas_Raptakis"
   },
   {
     "id": "ocd-person/825b006a-e38e-4f0c-81b7-4df73e2a90fa",
@@ -907,7 +1122,11 @@
     "phone": "401-222-3580",
     "photoUrl": "https://www.rilegislature.gov/senators/Pictures/Ujifusa%20FINAL.jpg",
     "website": "https://www.rilegislature.gov/Senators/ujifusa/pages/biography.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "155 Adams Drive, Portsmouth, RI 02871",
+    "districtPhone": "401-472-4721",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Linda_Ujifusa",
+    "ballotpediaUrl": "https://ballotpedia.org/Linda_Ujifusa"
   },
   {
     "id": "ocd-person/e676d270-0470-40c2-ab57-e8ced3471005",
@@ -921,7 +1140,11 @@
     "phone": "401-222-3580",
     "photoUrl": "https://rhodeislandcurrent.com/wp-content/uploads/2024/09/1-Lori-Urso-09.24-1024x776.jpg",
     "website": "https://rilegislature.gov/senators/Urso/Pages/Biography.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "273 Kenyon Ave., Pawtucket, RI 02861",
+    "districtPhone": "401-276-5567",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lori_Urso",
+    "ballotpediaUrl": "https://ballotpedia.org/Lori_Urso"
   },
   {
     "id": "ocd-person/71da5365-46a9-4f2c-abc8-308bde2577ec",
@@ -935,7 +1158,11 @@
     "phone": "401-222-3580",
     "photoUrl": "http://www.rilegislature.gov/Senators/Pictures/dipalma.jpg",
     "website": "https://www.rilegislature.gov/senators/algiere/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "24 Sail Court, Middletown, RI 02842",
+    "districtPhone": "401-847-8540",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Louis_DiPalma",
+    "ballotpediaUrl": "https://ballotpedia.org/Louis_DiPalma"
   },
   {
     "id": "ocd-person/bc0b7591-fb22-44c1-9766-49ea0d70d894",
@@ -949,7 +1176,11 @@
     "phone": "401-222-3580",
     "photoUrl": "https://s3.amazonaws.com/ballotpedia-api4/files/thumbs/200/300/MarieHopkins.jpg",
     "website": "https://rilegislature.gov/representatives/Hopkins/Pages/Biography.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "6 Kennedy Drive, Warwick, RI 02889",
+    "districtPhone": "401-203-1517",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Marie_Hopkins",
+    "ballotpediaUrl": "https://ballotpedia.org/Marie_Hopkins"
   },
   {
     "id": "ocd-person/580b2e15-faff-4b83-bbea-fb6110a9f975",
@@ -963,7 +1194,11 @@
     "phone": "401-222-3580",
     "photoUrl": "https://www.rilegislature.gov/senators/Pictures/McKenney%202023.jpg",
     "website": "https://www.rilegislature.gov/senators/mckenney/Pages/Biography.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "22 11th Ave., Warwick, RI 02886",
+    "districtPhone": "401-578-6258",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mark_McKenney",
+    "ballotpediaUrl": "https://ballotpedia.org/Mark_McKenney"
   },
   {
     "id": "ocd-person/ed735cca-8f53-4304-a1ec-9e212744ec17",
@@ -977,7 +1212,11 @@
     "phone": "401-222-3580",
     "photoUrl": "http://www.rilegislature.gov/representatives/pictures/abney.jpg",
     "website": "https://www.rilegislature.gov/representatives/abney/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "12 Summer St., Newport, RI 02840",
+    "districtPhone": "401-222-8028",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Marvin_Abney",
+    "ballotpediaUrl": "https://ballotpedia.org/Marvin_Abney"
   },
   {
     "id": "ocd-person/20543a6c-f763-4297-a19b-c670fbe8a68b",
@@ -991,7 +1230,11 @@
     "phone": "401-222-3580",
     "photoUrl": "http://www.rilegislature.gov/representatives/Pictures/shallcross%20smith.jpg",
     "website": "https://www.rilegislature.gov/representatives/carson/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "6 Twin River Road, Lincoln, RI 02865",
+    "districtPhone": "401-727-8982",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mary_Ann_Shallcross_Smith",
+    "ballotpediaUrl": "https://ballotpedia.org/Mary_Ann_Shallcross-Smith"
   },
   {
     "id": "ocd-person/cad61cfb-b3e8-417a-934e-1add601d4cba",
@@ -1005,7 +1248,11 @@
     "phone": "401-222-3580",
     "photoUrl": "http://www.rilegislature.gov/representatives/pictures/messier.jpg",
     "website": "https://www.rilegislature.gov/representatives/carson/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "25 Olympia Ave., Pawtucket, RI 02861",
+    "districtPhone": "401-743-3002",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mary_Messier",
+    "ballotpediaUrl": "https://ballotpedia.org/Mary_Messier"
   },
   {
     "id": "ocd-person/57b194bd-2b6a-46b8-a7b4-35b629bb0b04",
@@ -1019,7 +1266,11 @@
     "phone": "401-222-3580",
     "photoUrl": "https://www.rilegislature.gov/senators/Pictures/LaMountain%202023.jpg",
     "website": "https://www.rilegislature.gov/Senators/lamountain/pages/biography.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "84 Dartmouth Ave., Warwick, RI 02888",
+    "districtPhone": "401-206-0822",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Matthew_LaMountain",
+    "ballotpediaUrl": "https://ballotpedia.org/Matthew_LaMountain"
   },
   {
     "id": "ocd-person/bffdb553-5c5c-403e-8e2c-47b34a7b50f5",
@@ -1033,7 +1284,11 @@
     "phone": "401-222-3580",
     "photoUrl": "https://www.lynchpine.com/wp-content/uploads/sites/1101520/2020/04/dawson_matthew_s.jpg",
     "website": "https://www.rilegislature.gov/representatives/dawson/Pages/Biography.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "40 Channing Ave., East Providence, RI 02915",
+    "districtPhone": "401-258-3660",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Matthew_Dawson_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Matthew_Dawson_(Rhode_Island)"
   },
   {
     "id": "ocd-person/4ad02cf0-3ead-4bc4-84e3-d1c08c3aa11a",
@@ -1047,7 +1302,11 @@
     "phone": "401-222-3580",
     "photoUrl": "https://www.rilegislature.gov/representatives/Pictures/Cotter.jpg",
     "website": "https://www.rilegislature.gov/representatives/cotter/Pages/Biography.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "108 Lantern Lane, Exeter, RI 02822",
+    "districtPhone": "401-541-5588",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Megan_Cotter",
+    "ballotpediaUrl": "https://ballotpedia.org/Megan_Cotter"
   },
   {
     "id": "ocd-person/2cd8c21d-f576-4060-a311-0459e01ffef6",
@@ -1061,7 +1320,11 @@
     "phone": "401-222-3580",
     "photoUrl": "https://www.rilegislature.gov/senators/pictures/kallman.jpg",
     "website": "https://www.rilegislature.gov/senators/kallman/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "93 Capwell Ave., Pawtucket, RI 02860",
+    "districtPhone": "401-648-9422",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Meghan_Kallman",
+    "ballotpediaUrl": "https://ballotpedia.org/Meghan_Kallman"
   },
   {
     "id": "ocd-person/e7d41b59-5619-4a67-a1ec-221fdc24e6c3",
@@ -1075,7 +1338,11 @@
     "phone": "401-222-3580",
     "photoUrl": "http://www.rilegislature.gov/Senators/Pictures/murray.jpg",
     "website": "https://www.rilegislature.gov/senators/algiere/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "377 Vose St., Woonsocket, RI 02895",
+    "districtPhone": "401-276-5568",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Melissa_Murray_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Melissa_Murray"
   },
   {
     "id": "ocd-person/7c4d8cad-55e5-474d-ac05-8db9a59da7fd",
@@ -1089,7 +1356,11 @@
     "phone": "401-222-3580",
     "photoUrl": "http://www.rilegislature.gov/representatives/pictures/ackerman.jpg",
     "website": "https://www.rilegislature.gov/representatives/ackerman/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "6 Shelter Lane, Cumberland, RI 02864",
+    "districtPhone": "401-658-0981",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mia_Ackerman",
+    "ballotpediaUrl": "https://ballotpedia.org/Mia_Ackerman"
   },
   {
     "id": "ocd-person/02f4f018-3639-4fb1-aced-f8684161121d",
@@ -1103,7 +1374,10 @@
     "phone": "401-222-2259",
     "photoUrl": "http://www.rilegislature.gov/representatives/pictures/chippendale.jpg",
     "website": "https://www.rilegislature.gov/representatives/carson/default.aspx",
-    "office": "Room 106, 82 Smith St., Providence, RI 02903"
+    "office": "Room 106, 82 Smith St., Providence, RI 02903",
+    "districtOffice": "124 A Johnson Road, Foster, RI 02825",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Michael_Chippendale",
+    "ballotpediaUrl": "https://ballotpedia.org/Michael_Chippendale"
   },
   {
     "id": "ocd-person/8318a7d4-6d81-4825-8821-4e7aed69b4dc",
@@ -1117,7 +1391,11 @@
     "phone": "401-222-3580",
     "photoUrl": "http://www.rilegislature.gov/representatives/Pictures/mcgaw.jpg",
     "website": "https://www.rilegislature.gov/representatives/carson/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "58 Camara Drive, Portsmouth, RI 02871",
+    "districtPhone": "401-250-3571",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Michelle_McGaw",
+    "ballotpediaUrl": "https://ballotpedia.org/Michelle_McGaw"
   },
   {
     "id": "ocd-person/39bdc05c-bda5-4ea9-b4ad-4cc7172adf56",
@@ -1131,7 +1409,11 @@
     "phone": "401-222-3580",
     "photoUrl": "http://www.rilegislature.gov/representatives/Pictures/biah.jpg",
     "website": "https://www.rilegislature.gov/representatives/biah/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "120 Metcalf St., Providence, RI 02904",
+    "districtPhone": "401-470-0404",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Nathan_Biah",
+    "ballotpediaUrl": "https://ballotpedia.org/Nathan_Biah"
   },
   {
     "id": "ocd-person/c5991f11-e719-473e-93c4-cfc52fae3e6d",
@@ -1145,7 +1427,10 @@
     "phone": "401-222-3580",
     "photoUrl": "https://www.rilegislature.gov/senators/Pictures/Lauria%202023.jpg",
     "website": "https://www.rilegislature.gov/Senators/lauria/pages/biography.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "56 Martin Ave., Barrington, RI 02806",
+    "districtPhone": "401-431-0013",
+    "ballotpediaUrl": "https://ballotpedia.org/Pamela_Lauria"
   },
   {
     "id": "ocd-person/45fd70a7-613e-405d-959f-2900eea0f264",
@@ -1159,7 +1444,11 @@
     "phone": "401-222-3580",
     "photoUrl": "http://www.rilegislature.gov/representatives/pictures/serpa.jpg",
     "website": "https://www.rilegislature.gov/representatives/carson/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "194 Kimberly Lane, West Warwick, RI 02893",
+    "districtPhone": "401-323-8829",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Patricia_Serpa",
+    "ballotpediaUrl": "https://ballotpedia.org/Patricia_Serpa"
   },
   {
     "id": "ocd-person/d28514b2-da9f-4c03-9590-781d3c1529ad",
@@ -1173,7 +1462,11 @@
     "phone": "401-222-3580",
     "photoUrl": "https://static.votesmart.org/static/canphoto/195096.jpg",
     "website": "https://rilegislature.gov/representatives/Santucci/Pages/Biography.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "10 Appletown Road, Greenville, RI 02828",
+    "districtPhone": "401-286-5854",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Paul_Santucci",
+    "ballotpediaUrl": "https://ballotpedia.org/Paul_Santucci_(Rhode_Island)"
   },
   {
     "id": "ocd-person/66e402e8-4f13-44f3-b029-7d1c3aab99b7",
@@ -1187,7 +1480,11 @@
     "phone": "401-222-3580",
     "photoUrl": "https://www.rilegislature.gov/LegislationPictures/peter_appollonio.jpg",
     "website": "https://www.rilegislature.gov/senators/Appollonio/Pages/Biography.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "11 Foster St., Warwick, RI 02889",
+    "districtPhone": "401-276-5568",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Pete_Appollonio",
+    "ballotpediaUrl": "https://ballotpedia.org/Peter_Appollonio_Jr."
   },
   {
     "id": "ocd-person/181465b6-b392-4222-acec-456182d23aa5",
@@ -1201,7 +1498,11 @@
     "phone": "401-222-3580",
     "photoUrl": "http://www.rilegislature.gov/representatives/Pictures/perez.jpg",
     "website": "https://www.rilegislature.gov/representatives/carson/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "42 Ophelia St., Providence, RI 02909",
+    "districtPhone": "401-301-6599",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ramon_Perez_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Ramon_Perez"
   },
   {
     "id": "ocd-person/da9a4b15-1cbf-4645-bd98-58ce413b68e1",
@@ -1214,8 +1515,12 @@
     "email": "rep-hull@rilegislature.gov",
     "phone": "401-222-3580",
     "photoUrl": "http://www.rilegislature.gov/representatives/pictures/hull.jpg",
-    "website": "https://www.rilegislature.gov/representatives/carson/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "website": "https://www.rayhull.com/",
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "616 Mount Pleasant Ave., Providence, RI 02908",
+    "districtPhone": "401-272-4026",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Raymond_Hull_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Raymond_Hull_(Rhode_Island)"
   },
   {
     "id": "ocd-person/dd5636ac-e9a1-4d98-8f21-6376b8977706",
@@ -1229,7 +1534,9 @@
     "phone": "401-222-3580",
     "photoUrl": "http://www.rilegislature.gov/representatives/pictures/kislak.jpg",
     "website": "https://www.rilegislature.gov/representatives/carson/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rebecca_Kislak",
+    "ballotpediaUrl": "https://ballotpedia.org/Rebecca_Kislak"
   },
   {
     "id": "ocd-person/53f07987-a534-4194-ba51-2fcd62f0f63e",
@@ -1243,7 +1550,11 @@
     "phone": "401-222-3580",
     "photoUrl": "https://www.rilegislature.gov/representatives/pictures/phillips.jpg",
     "website": "https://www.rilegislature.gov/representatives/carson/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "325 Dunlap St., Woonsocket, RI 02895",
+    "districtPhone": "401-762-2010",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Robert_Phillips_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Robert_Phillips"
   },
   {
     "id": "ocd-person/a6d519b0-89bd-45d5-9067-3ae0b421eee7",
@@ -1257,7 +1568,11 @@
     "phone": "401-222-3580",
     "photoUrl": "http://www.rilegislature.gov/representatives/pictures/craven.jpg",
     "website": "https://www.rilegislature.gov/representatives/carson/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "24 Highland Road, Saunderstown, RI 02874",
+    "districtPhone": "401-294-2222",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Robert_Craven",
+    "ballotpediaUrl": "https://ballotpedia.org/Robert_Craven_Sr."
   },
   {
     "id": "ocd-person/11bc8a51-bee7-422d-8bb7-6a9177e55735",
@@ -1271,7 +1586,11 @@
     "phone": "401-222-3580",
     "photoUrl": "https://www.rilegislature.gov/LegislationPictures/robert_quattrocchi.jpg",
     "website": "https://www.rilegislature.gov/representatives/carson/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "228 Old Plainfield Pike, Scituate, RI 02825",
+    "districtPhone": "401-764-5143",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Robert_Quattrocchi",
+    "ballotpediaUrl": "https://ballotpedia.org/Robert_Quattrocchi"
   },
   {
     "id": "ocd-person/01ddc920-772c-4098-b9f8-8704783940e5",
@@ -1284,8 +1603,12 @@
     "email": "sen-britto@rilegislature.gov",
     "phone": "401-222-3580",
     "photoUrl": "https://www.rilegislature.gov/senators/Pictures/Britto%202023.jpg",
-    "website": "https://www.rilegislature.gov/senators/britor/Pages/Biography.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "website": "https://www.rilegislature.gov/senators/britto/Pages/Biography.aspx",
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "20 Byron Ave., Rumford, RI 02916",
+    "districtPhone": "401-447-4226",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Robert_Britto",
+    "ballotpediaUrl": "https://ballotpedia.org/Robert_Britto"
   },
   {
     "id": "ocd-person/1378a3d6-95fe-4a21-8fcb-11fefdb97d84",
@@ -1299,12 +1622,16 @@
     "phone": "401-222-3580",
     "photoUrl": "http://www.rilegislature.gov/Senators/Pictures/pearson.jpg",
     "website": "https://www.rilegislature.gov/senators/algiere/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "23 Circuit Drive, Cumberland, RI 02864",
+    "districtPhone": "401-276-5581",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ryan_W._Pearson",
+    "ballotpediaUrl": "https://ballotpedia.org/Ryan_Pearson"
   },
   {
     "id": "ocd-person/c9229f5a-b4ac-4cf2-b227-a0b4e56cca2f",
-    "name": "Samuel Azzinaro",
-    "firstName": "Samuel",
+    "name": "Sam Azzinaro",
+    "firstName": "Sam",
     "lastName": "Azzinaro",
     "chamber": "lower",
     "district": "37",
@@ -1313,7 +1640,11 @@
     "phone": "401-222-3580",
     "photoUrl": "http://www.rilegislature.gov/representatives/pictures/azzinaro.jpg",
     "website": "https://www.rilegislature.gov/representatives/azzinaro/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "20 Piezzo Drive, Westerly, RI 02891",
+    "districtPhone": "401-596-1434",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Samuel_Azzinaro",
+    "ballotpediaUrl": "https://ballotpedia.org/Samuel_Azzinaro"
   },
   {
     "id": "ocd-person/3a4fd015-1c56-4d7b-9e57-1a2a6b9b4c9b",
@@ -1327,7 +1658,11 @@
     "phone": "401-222-3580",
     "photoUrl": "https://www.rilegislature.gov/senators/Pictures/Zurier-2022.jpg?csf=1&e=5y4LAP",
     "website": "https://www.rilegislature.gov/senators/zurier/Pages/Biography.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "330 Grotto Ave., Providence, RI 02906",
+    "districtPhone": "401-644-0925",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sam_Zurier",
+    "ballotpediaUrl": "https://ballotpedia.org/Sam_Zurier"
   },
   {
     "id": "ocd-person/8d466b6a-ea53-46bb-aa86-3131ac76533f",
@@ -1341,7 +1676,11 @@
     "phone": "401-222-3580",
     "photoUrl": "http://www.rilegislature.gov/Senators/Pictures/bell.jpg",
     "website": "https://www.rilegislature.gov/senators/algiere/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "212 Gray Street, Providence, RI 02909",
+    "districtPhone": "401-680-0725",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sam_Bell_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Sam_Bell_(Rhode_Island)"
   },
   {
     "id": "ocd-person/1cd78f67-6adb-47c6-98cd-f49ca8eb603f",
@@ -1355,7 +1694,11 @@
     "phone": "401-222-3580",
     "photoUrl": "http://www.rilegislature.gov/representatives/pictures/slater.jpg",
     "website": "https://www.rilegislature.gov/representatives/carson/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "74 Sawyer St., Providence, RI 02907",
+    "districtPhone": "401-741-7641",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Scott_A._Slater",
+    "ballotpediaUrl": "https://ballotpedia.org/Scott_Slater"
   },
   {
     "id": "ocd-person/6c7285bd-fdd3-4629-be6f-4a01d19e9c25",
@@ -1369,7 +1712,11 @@
     "phone": "401-222-3580",
     "photoUrl": "http://www.rilegislature.gov/representatives/pictures/roberts.jpg",
     "website": "https://www.rilegislature.gov/representatives/carson/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "22 Seminole Trail, West Greenwich, RI 02817",
+    "districtPhone": "401-680-0128",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sherry_Roberts",
+    "ballotpediaUrl": "https://ballotpedia.org/Sherry_Roberts"
   },
   {
     "id": "ocd-person/a2ff0de0-40d1-4ac1-a347-e1e9dedb6d30",
@@ -1383,7 +1730,11 @@
     "phone": "401-222-3580",
     "photoUrl": "https://www.rilegislature.gov/LegislationPictures/stefano_famiglietti.jpg",
     "website": "https://www.rilegislature.gov/senators/famiglietti/Pages/Biography.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "RI",
+    "districtPhone": "401-215-3462",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Stefano_Famiglietti",
+    "ballotpediaUrl": "https://ballotpedia.org/Stefano_Famiglietti"
   },
   {
     "id": "ocd-person/0b20a11e-e90b-4ff2-aa25-5334a8592071",
@@ -1397,7 +1748,9 @@
     "phone": "401-222-8028",
     "photoUrl": "http://www.rilegislature.gov/representatives/pictures/casey.jpg",
     "website": "https://www.rilegislature.gov/representatives/carson/default.aspx",
-    "office": "Room 306, 82 Smith St., Providence, RI 02903"
+    "office": "Room 306, 82 Smith St., Providence, RI 02903",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Stephen_Casey",
+    "ballotpediaUrl": "https://ballotpedia.org/Stephen_Casey_(Rhode_Island)"
   },
   {
     "id": "ocd-person/160de7ca-e70f-4cd4-b218-e9600c24a5aa",
@@ -1411,7 +1764,11 @@
     "phone": "401-222-3580",
     "photoUrl": "http://www.rilegislature.gov/representatives/Pictures/donovan.jpg",
     "website": "https://www.rilegislature.gov/representatives/carson/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "2 Rego Ave., Bristol, RI 02809",
+    "districtPhone": "401-253-7837",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Susan_R._Donovan",
+    "ballotpediaUrl": "https://ballotpedia.org/Susan_Donovan"
   },
   {
     "id": "ocd-person/bdccc3f1-4b2d-4f64-8653-ada4322d6a10",
@@ -1425,7 +1782,11 @@
     "phone": "401-222-3580",
     "photoUrl": "http://www.rilegislature.gov/representatives/pictures/tanzi.jpg",
     "website": "https://www.rilegislature.gov/representatives/carson/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "57 Hillcrest Road, Wakefield, RI 02879",
+    "districtPhone": "401-527-9468",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Teresa_Tanzi",
+    "ballotpediaUrl": "https://ballotpedia.org/Teresa_Tanzi"
   },
   {
     "id": "ocd-person/0e459c44-8d77-408e-9db6-c0e0b79274fd",
@@ -1439,7 +1800,11 @@
     "phone": "401-222-3580",
     "photoUrl": "http://www.rilegislature.gov/representatives/pictures/cortvriend.jpg",
     "website": "https://www.rilegislature.gov/representatives/carson/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "46 Mary Lane, Portsmouth, RI 02871",
+    "districtPhone": "401-472-4789",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Terri-Denise_Cortvriend",
+    "ballotpediaUrl": "https://ballotpedia.org/Terri-Denise_Cortvriend"
   },
   {
     "id": "ocd-person/1f8f3c9b-ba19-45de-af45-b0501d0607f0",
@@ -1453,7 +1818,11 @@
     "phone": "401-222-3580",
     "photoUrl": "http://www.rilegislature.gov/representatives/pictures/noret.jpg",
     "website": "https://www.rilegislature.gov/representatives/carson/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "225 Fairview Ave., Coventry, RI 02816",
+    "districtPhone": "401-641-0813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Thomas_Noret",
+    "ballotpediaUrl": "https://ballotpedia.org/Thomas_Noret"
   },
   {
     "id": "ocd-person/285c33e3-5c40-44d8-9c16-22e49b6a0a81",
@@ -1467,7 +1836,11 @@
     "phone": "401-222-3580",
     "photoUrl": "https://www.rilegislature.gov/senators/Pictures/Paolino%202022.jpg",
     "website": "https://www.rilegislature.gov/senators/algiere/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "19 Heritage Drive, Lincoln, RI 02865",
+    "districtPhone": "401-222-2708",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Thomas_Paolino",
+    "ballotpediaUrl": "https://ballotpedia.org/Thomas_Paolino"
   },
   {
     "id": "ocd-person/b3d5296c-05df-46f5-9a93-4caf96121a84",
@@ -1479,9 +1852,11 @@
     "party": "Democratic",
     "email": "sen-mack@rilegislature.gov",
     "phone": "401-288-1288",
-    "photoUrl": "https://media3.s-nbcnews.com/j/newscms/2020_47/3429284/201118-MAIN-tiara-mack-benjamin-branchaud-ew-1140a_41fc9dcc361b3077b5b335fab1dc4a55.fit-760w.jpg",
+    "photoUrl": "https://www.rilegislature.gov/senators/Pictures/Mack%202023%20NEW.jpg",
     "website": "https://www.rilegislature.gov/senators/algiere/default.aspx",
-    "office": "Room 219, 82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tiara_Mack",
+    "ballotpediaUrl": "https://ballotpedia.org/Tiara_Mack"
   },
   {
     "id": "ocd-person/2c3d82e7-8bdc-4da9-bbab-e42bb5e223fb",
@@ -1492,10 +1867,13 @@
     "district": "36",
     "party": "Democratic",
     "email": "rep-spears@rilegislature.gov",
-    "phone": "401-480-8237",
-    "photoUrl": "https://www.rilegislature.gov/representatives/Pictures/Tina%20Spears.jpg",
+    "phone": "401-222-1162",
+    "photoUrl": "https://www.rilegislature.gov/LegislationPictures/tina_spears.jpg",
     "website": "https://www.rilegislature.gov/representatives/spears/pages/biography.aspx",
-    "office": "Room B-07A, 82 Smith St., Providence, RI 02903"
+    "office": "Room 07A, 82 Smith St., Providence, RI 02903",
+    "districtOffice": "82 Hillside Drive, Charlestown, RI 02813",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tina_Spears",
+    "ballotpediaUrl": "https://ballotpedia.org/Tina_Spears"
   },
   {
     "id": "ocd-person/9f4a0209-d8b0-42e5-9217-d4fd2f0d67e6",
@@ -1509,7 +1887,9 @@
     "phone": "401-276-5592",
     "photoUrl": "https://rilegislature.gov/LegislationPictures/todd_patalano.jpg",
     "website": "https://rilegislature.gov/senators/Patalano/Pages/Biography.aspx",
-    "office": "Room 312, 82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Todd_Patalano",
+    "ballotpediaUrl": "https://ballotpedia.org/Todd_Patalano"
   },
   {
     "id": "ocd-person/c5757781-d437-4b9b-b7a1-9bb96c9b74ab",
@@ -1523,7 +1903,11 @@
     "phone": "401-222-3580",
     "photoUrl": "http://www.rilegislature.gov/Senators/Pictures/sosnowski.jpg",
     "website": "https://www.rilegislature.gov/senators/algiere/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "680 Glen Rock Road, West Kingston, RI 02892",
+    "districtPhone": "401-783-7704",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/V._Susan_Sosnowski",
+    "ballotpediaUrl": "https://ballotpedia.org/V._Susan_Sosnowski"
   },
   {
     "id": "ocd-person/bfb76f36-00b6-47da-89da-e1db5421ff55",
@@ -1537,7 +1921,9 @@
     "phone": "401-222-4901",
     "photoUrl": "https://www.rilegislature.gov/LegislationPictures/valarie_lawson.jpg",
     "website": "https://www.rilegislature.gov/senators/algiere/default.aspx",
-    "office": "Room 316, 82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Valarie_Lawson",
+    "ballotpediaUrl": "https://ballotpedia.org/Valarie_Lawson"
   },
   {
     "id": "ocd-person/afeed427-2ef1-4197-840d-7ab06883e186",
@@ -1551,7 +1937,8 @@
     "phone": "401-222-3580",
     "photoUrl": "https://www.rilegislature.gov/senators/Pictures/Gu%202023.jpg",
     "website": "https://www.rilegislature.gov/Senators/gu/Pages/biography.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "ballotpediaUrl": "https://ballotpedia.org/Victoria_Gu"
   },
   {
     "id": "ocd-person/037e3b02-7f48-4cab-bb04-2524aa9a883d",
@@ -1565,7 +1952,11 @@
     "phone": "401-222-3580",
     "photoUrl": "https://www.rilegislature.gov/senators/Pictures/Felag%202023.jpg",
     "website": "https://www.rilegislature.gov/senators/algiere/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "51 Overhill Road, Warren, RI 02885",
+    "districtPhone": "401-245-7521",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Walter_Felag",
+    "ballotpediaUrl": "https://ballotpedia.org/Walter_Felag"
   },
   {
     "id": "ocd-person/4352dbd3-90e5-4cf3-9bf6-accff7592c33",
@@ -1579,6 +1970,10 @@
     "phone": "401-222-3580",
     "photoUrl": "http://www.rilegislature.gov/representatives/pictures/o'brien.jpg",
     "website": "https://www.rilegislature.gov/representatives/carson/default.aspx",
-    "office": "82 Smith St., Providence, RI 02903"
+    "office": "82 Smith St., Providence, RI 02903",
+    "districtOffice": "25 Oak Grove Blvd., North Providence, RI 02911",
+    "districtPhone": "401-440-4063",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/William_O%27Brien_(Rhode_Island_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/William_O%27Brien_(Rhode_Island)"
   }
 ]

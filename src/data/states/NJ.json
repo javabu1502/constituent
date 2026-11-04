@@ -9,8 +9,13 @@
     "party": "Democratic",
     "email": "asmabdelaziz@njleg.org",
     "phone": "609-847-3905",
+    "photoUrl": "https://pub.njleg.gov/publications/members/abdelaziz_al_2025.jpg",
     "website": "https://www.assemblydems.com/388/Alaa-Al-Abdelaziz---District-35",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "680 Broadway Suite 207, Paterson, NJ 07514",
+    "districtPhone": "862-264-2540",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Al_Abdelaziz",
+    "ballotpediaUrl": "https://ballotpedia.org/Alaa_Abdelaziz"
   },
   {
     "id": "ocd-person/525b3307-b007-4cfa-8166-efb0810fcda7",
@@ -22,8 +27,13 @@
     "party": "Republican",
     "email": "asmbarlas@njleg.org",
     "phone": "609-847-3905",
+    "photoUrl": "https://pub.njleg.gov/publications/members/barlas_al_2024.jpg",
     "website": "https://www.njassemblygop.com/218/Al-Barlas",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "100 Passaic Ave. Suite 155, Fairfield, NJ 07004",
+    "districtPhone": "862-702-8458",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Al_Barlas",
+    "ballotpediaUrl": "https://ballotpedia.org/Al_Barlas"
   },
   {
     "id": "ocd-person/fc986c0e-c1cd-422f-80c1-4d3691f34f28",
@@ -35,8 +45,13 @@
     "party": "Republican",
     "email": "asmsauickie@njleg.org",
     "phone": "609-847-3905",
+    "photoUrl": "https://pub.njleg.gov/publications/members/sauickie_alex_2022_250.jpg",
     "website": "https://njleg.state.nj.us/legislative-roster/454/assemblyman-sauickie",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "405 Route 539, Cream Ridge, NJ 08514",
+    "districtPhone": "609-758-0205",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Alex_Sauickie",
+    "ballotpediaUrl": "https://ballotpedia.org/Alex_Sauickie"
   },
   {
     "id": "ocd-person/b5f9d8c9-0f98-4d89-8a5f-82152f41687d",
@@ -48,8 +63,13 @@
     "party": "Democratic",
     "email": "aswcollazosgill@njleg.org",
     "phone": "609-847-3905",
+    "photoUrl": "https://pub.njleg.gov/publications/members/collazos-gill_alixon_2024.jpg",
     "website": "https://www.assemblydems.com/204/Alixon-Collazos-Gill---District-27",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "39 S. Fullerton Ave. Second Floor, Suite 7, Montclair, NJ 07042",
+    "districtPhone": "973-509-0388",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Alixon_Collazos-Gill",
+    "ballotpediaUrl": "https://ballotpedia.org/Alixon_Collazos-Gill"
   },
   {
     "id": "ocd-person/acf3b54e-9725-4867-aaa5-9275ada21b37",
@@ -61,8 +81,13 @@
     "party": "Democratic",
     "email": "aswkatz@njleg.org",
     "phone": "609-847-3905",
+    "photoUrl": "https://pub.njleg.gov/publications/members/katz_andrea_2024.jpg",
     "website": "https://www.assemblydems.com/168/Andrea-Katz---District-8",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "100 High St. Suite 101, Mount Holly, NJ 08060",
+    "districtPhone": "609-850-2397",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Andrea_Katz",
+    "ballotpediaUrl": "https://ballotpedia.org/Andrea_Katz"
   },
   {
     "id": "ocd-person/bd2c37cd-6c84-406e-9e38-95bd83f20f0f",
@@ -74,8 +99,13 @@
     "party": "Democratic",
     "email": "asmmacurdy@njleg.org",
     "phone": "609-847-3905",
+    "photoUrl": "https://pub.njleg.gov/publications/members/macurdy_andrew_2026.jpg",
     "website": "https://njleg.state.nj.us/legislative-roster/505/assemblyman-macurdy",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "86 Summit Ave. Suite 302, Summit, NJ 07901",
+    "districtPhone": "908-679-8499",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Andrew_Macurdy",
+    "ballotpediaUrl": "https://ballotpedia.org/Andrew_Macurdy"
   },
   {
     "id": "ocd-person/7782ffcd-73df-41b5-9857-fd7b10953bf3",
@@ -87,9 +117,12 @@
     "party": "Democratic",
     "email": "senzwicker@njleg.org",
     "phone": "609-847-3905",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/zwicker_andrew_2019.jpg",
     "website": "https://www.andrewzwicker.com",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "2 Clerico Lane Building 1, Hillsborough, NJ 08844",
+    "districtPhone": "908-308-8672",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Andrew_Zwicker",
+    "ballotpediaUrl": "https://ballotpedia.org/Andrew_Zwicker"
   },
   {
     "id": "ocd-person/d8c826c4-95c7-465b-8448-1f05495bfc45",
@@ -103,7 +136,11 @@
     "phone": "609-847-3905",
     "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/mcknight_color.jpg",
     "website": "https://www.njleg.state.nj.us/legislative-roster/383/assemblywoman-mcknight",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "2324 John F. Kennedy Blvd., Jersey City, NJ 07304",
+    "districtPhone": "201-360-2502",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Angela_V._McKnight",
+    "ballotpediaUrl": "https://ballotpedia.org/Angela_McKnight"
   },
   {
     "id": "ocd-person/ec370db8-c51e-4022-9868-5cad9c38e97d",
@@ -115,9 +152,12 @@
     "party": "Democratic",
     "email": "aswquijano@njleg.org",
     "phone": "609-847-3905",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/quijano_annette_2020.jpg",
     "website": "https://www.assemblydems.com/170/Annette-Quijano---District-20",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "30 Union St. Suite 41, Elizabeth, NJ 07202",
+    "districtPhone": "908-327-9119",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Annette_Quijano",
+    "ballotpediaUrl": "https://ballotpedia.org/Annette_Quijano"
   },
   {
     "id": "ocd-person/21b098a3-5f30-40c7-9169-1d4b92402a99",
@@ -129,8 +169,13 @@
     "party": "Democratic",
     "email": "asmangelozzi@njleg.org",
     "phone": "609-847-3905",
+    "photoUrl": "https://pub.njleg.gov/publications/members/angelozzi_anthony_2026.jpg",
     "website": "https://njleg.state.nj.us/legislative-roster/502/assemblyman-angelozzi",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "135 Jackson Road Suite 1B, Medford, NJ 08055",
+    "districtPhone": "640-600-4279",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Anthony_Angelozzi",
+    "ballotpediaUrl": "https://ballotpedia.org/Anthony_Angelozzi"
   },
   {
     "id": "ocd-person/f321f20f-b8af-4d0b-85ba-e7b8dcf9ae03",
@@ -142,9 +187,12 @@
     "party": "Republican",
     "email": "senbucco@njleg.org",
     "phone": "609-847-3905",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/bucco_a_m_color.jpg",
     "website": "https://bucco.senatenj.com/",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "75 Bloomfield Ave. Suite 302, Third Floor, Denville, NJ 07834",
+    "districtPhone": "973-627-9700",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tony_Bucco",
+    "ballotpediaUrl": "https://ballotpedia.org/Anthony_Bucco,_Jr."
   },
   {
     "id": "ocd-person/c6d61a12-eeb5-4400-943d-68a81b0728f0",
@@ -156,9 +204,12 @@
     "party": "Democratic",
     "email": "asmverrelli@njleg.org",
     "phone": "609-847-3905",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/verrelli_anthony_2020.jpg",
     "website": "https://www.assemblydems.com/177/Anthony-S-Verrelli---District-15",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "150 W. State St. Suite 100B, Trenton, NJ 08608",
+    "districtPhone": "609-292-0500",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Anthony_Verrelli",
+    "ballotpediaUrl": "https://ballotpedia.org/Anthony_Verrelli"
   },
   {
     "id": "ocd-person/4ebe8d6e-9814-4f68-aa9f-148c0942eaab",
@@ -172,7 +223,10 @@
     "phone": "609-778-2012",
     "photoUrl": "http://www.njleg.state.nj.us/members/memberphotos/mcclellan_antwan_2020.jpg",
     "website": "https://www.njassemblygop.com/212/Antwan-McClellan",
-    "office": "School House Office Park 211 S. Main St., Suite 104, Cape May Court House, NJ 08210"
+    "office": "School House Office Park 211 S. Main St., Suite 104, Cape May Court House, NJ 08210",
+    "districtOffice": "610 E. Landis Ave., Vineland, NJ 08360",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Antwan_McClellan",
+    "ballotpediaUrl": "https://ballotpedia.org/Antwan_McClellan"
   },
   {
     "id": "ocd-person/03aa8bec-9d7e-41e7-ad20-b5ba1991cab6",
@@ -184,9 +238,12 @@
     "party": "Republican",
     "email": "aswdunn@njleg.org",
     "phone": "609-847-3905",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/dunn_aura_2020.jpg",
     "website": "https://www.njassemblygop.com/221/Aura-Dunn",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "60 Washington St. Suite 303, Morristown, NJ 07960",
+    "districtPhone": "973-206-1876",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Aura_K._Dunn",
+    "ballotpediaUrl": "https://ballotpedia.org/Aura_Kenny_Dunn"
   },
   {
     "id": "ocd-person/4dab8e3a-93be-4ad7-8cb1-5009e4c7d232",
@@ -198,8 +255,13 @@
     "party": "Democratic",
     "email": "asmschnall@njleg.org",
     "phone": "609-847-3905",
+    "photoUrl": "https://pub.njleg.gov/publications/members/schnall_alexander_2024a.jpg",
     "website": "https://www.assemblydems.com/210/Alexander-Avi-Schnall---District-30",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "500 River Ave. Suite 220, Lakewood, NJ 08701",
+    "districtPhone": "848-245-9486",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Avi_Schnall",
+    "ballotpediaUrl": "https://ballotpedia.org/Avi_Schnall"
   },
   {
     "id": "ocd-person/a189187b-df3f-4f10-8e5c-744ad7071787",
@@ -211,8 +273,13 @@
     "party": "Democratic",
     "email": "asmsingh@njleg.org",
     "phone": "609-847-3905",
+    "photoUrl": "https://pub.njleg.gov/publications/members/singh_balvir_2025a.jpg",
     "website": "https://www.assemblydems.com/389/Balvir-Singh---District-7",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "Delran Professional Center 8008 Route 130 North, Building C, Suite 450, Delran, NJ 08075",
+    "districtPhone": "856-461-3997",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Balvir_Singh",
+    "ballotpediaUrl": "https://ballotpedia.org/Balvir_Singh"
   },
   {
     "id": "ocd-person/18fa38fc-954e-43d9-a294-a2068828216e",
@@ -224,9 +291,12 @@
     "party": "Democratic",
     "email": "senwimberly@njleg.org",
     "phone": "609-847-3905",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/wimberly_color.jpg",
     "website": "https://www.assemblydems.com/176/Benjie-E-Wimberly---District-35",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "301 Main St. Suite 360, Paterson, NJ 07505",
+    "districtPhone": "973-925-7061",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Benjie_E._Wimberly",
+    "ballotpediaUrl": "https://ballotpedia.org/Benjie_Wimberly"
   },
   {
     "id": "ocd-person/177d44ba-0c93-4e26-b245-84aa2239f7b4",
@@ -238,9 +308,12 @@
     "party": "Democratic",
     "email": "senbsmith@njleg.org",
     "phone": "609-847-3905",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/smith_bob_2021.jpg",
     "website": "https://www.njleg.state.nj.us/legislative-roster/53/senator-smith",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "216 Stelton Road Suite E-5, Piscataway, NJ 08854",
+    "districtPhone": "732-752-0770",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Bob_Smith_(New_Jersey_State_Senator)",
+    "ballotpediaUrl": "https://ballotpedia.org/Bob_Smith,_New_Jersey_Senator"
   },
   {
     "id": "ocd-person/006c1bd9-54e9-49be-9d02-12dda1119149",
@@ -252,9 +325,12 @@
     "party": "Republican",
     "email": "asmbergen@njleg.org",
     "phone": "609-847-3905",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/bergen_brian_2020.jpg",
     "website": "https://www.njassemblygop.com/161/Brian-Bergen",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "5 E. Main St. Suite 22B, Denville, NJ 07834",
+    "districtPhone": "973-539-8113",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Brian_Bergen",
+    "ballotpediaUrl": "https://ballotpedia.org/Brian_Bergen"
   },
   {
     "id": "ocd-person/d6731a7f-a22e-48dd-8bba-fd2c155c16c3",
@@ -266,9 +342,12 @@
     "party": "Republican",
     "email": "asmrumpf@njleg.org",
     "phone": "609-847-3905",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/rumpf_brian_2020.jpg",
     "website": "https://www.njassemblygop.com/215/Brian-Rumpf",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "400 N. Main St., Building 1 Suites 1 and 2, Forked River, NJ 08050",
+    "districtPhone": "609-693-6700",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Brian_E._Rumpf",
+    "ballotpediaUrl": "https://ballotpedia.org/Brian_Rumpf"
   },
   {
     "id": "ocd-person/6f616307-dafe-44ca-a6b3-5f9516d21f89",
@@ -280,9 +359,12 @@
     "party": "Democratic",
     "email": "senstack@njleg.org",
     "phone": "609-847-3905",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/stack_color.jpg",
     "website": "https://www.njleg.state.nj.us/legislative-roster/306/senator-stack",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "323 60th St., West New York, NJ 07093",
+    "districtPhone": "201-721-5263",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Brian_P._Stack",
+    "ballotpediaUrl": "https://ballotpedia.org/Brian_Stack"
   },
   {
     "id": "ocd-person/707e3027-d06f-4346-8c11-3ff1becbe725",
@@ -294,9 +376,12 @@
     "party": "Democratic",
     "email": "sentimberlake@njleg.org",
     "phone": "609-847-3905",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/timberlake_britnee_2018.jpg",
     "website": "https://www.assemblydems.com/britnee-timberlake/",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "520 Main St. Suite 1, East Orange, NJ 07018",
+    "districtPhone": "973-395-1166",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Britnee_Timberlake",
+    "ballotpediaUrl": "https://ballotpedia.org/Britnee_Timberlake"
   },
   {
     "id": "ocd-person/0f0e1edc-6ab5-4fca-8999-2db3229c5d19",
@@ -308,8 +393,12 @@
     "party": "Republican",
     "email": "senamato@njleg.org",
     "phone": "609-847-3905",
+    "photoUrl": "https://pub.njleg.gov/publications/members/amato_carmen_2024.jpg",
     "website": "https://www.njleg.state.nj.us/legislative-roster/465/senator-amato",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "400 N. Main St., Building 1 Suites 1 and 2, Manahawkin, NJ 08050",
+    "districtPhone": "609-693-6700",
+    "ballotpediaUrl": "https://ballotpedia.org/Carmen_Amato_Jr."
   },
   {
     "id": "ocd-person/38f2061a-a83f-45bc-92a2-817f44d6b377",
@@ -321,8 +410,13 @@
     "party": "Democratic",
     "email": "aswmorales@njleg.org",
     "phone": "609-847-3905",
+    "photoUrl": "https://pub.njleg.gov/publications/members/morales_carmen_2024.jpg",
     "website": "https://www.assemblydems.com/237/Carmen-Morales---District-34",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "152 Franklin St., Belleville, NJ 07109",
+    "districtPhone": "973-450-0484",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Carmen_Morales_(New_Jersey_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Carmen_Morales"
   },
   {
     "id": "ocd-person/c33b5f2b-0494-414f-aa84-d2286ae46095",
@@ -334,9 +428,12 @@
     "party": "Democratic",
     "email": "aswmurphy@njleg.org",
     "phone": "609-847-3905",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/murphy_carol_2021.jpg",
     "website": "https://www.assemblydems.com/167/Carol-Murphy---District-7",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "750 Centerton Road, Mount Laurel, NJ 08054",
+    "districtPhone": "856-242-2018",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Carol_A._Murphy",
+    "ballotpediaUrl": "https://ballotpedia.org/Carol_Murphy_(New_Jersey)"
   },
   {
     "id": "ocd-person/383fdfc0-c14a-433f-8f1d-a29e6350c5ca",
@@ -348,8 +445,12 @@
     "party": "Democratic",
     "email": "asmonyema@njleg.org",
     "phone": "609-847-3905",
+    "photoUrl": "https://pub.njleg.gov/publications/members/onyema_chigozie_2026.jpg",
     "website": "https://njleg.state.nj.us/legislative-roster/507/assemblyman-onyema",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "111 Dunnel Road Suite 100, Maplewood, NJ 07040",
+    "districtPhone": "973-762-1886",
+    "ballotpediaUrl": "https://ballotpedia.org/Chigozie_Onyema"
   },
   {
     "id": "ocd-person/33050562-f29d-4c4f-9e21-022822792a5c",
@@ -361,9 +462,10 @@
     "party": "Republican",
     "email": "asmdephillips@njleg.org",
     "phone": "609-847-3905",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/dephillips_christopher_2020.jpg",
     "website": "https://www.njassemblygop.com/213/Christopher-DePhillips",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Christopher_DePhillips",
+    "ballotpediaUrl": "https://ballotpedia.org/Christopher_DePhillips"
   },
   {
     "id": "ocd-person/c5469bd6-29bd-4054-9ac0-3577d17422d4",
@@ -375,9 +477,12 @@
     "party": "Democratic",
     "email": "aswtucker@njleg.org",
     "phone": "609-847-3905",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/tucker_cleopatra_2017.jpg",
     "website": "https://www.assemblydems.com/199/Cleopatra-G-Tucker---District-28",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "1079 Bergen St., Newark, NJ 07112",
+    "districtPhone": "973-926-4320",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Cleopatra_Tucker",
+    "ballotpediaUrl": "https://ballotpedia.org/Cleopatra_Tucker"
   },
   {
     "id": "ocd-person/5475b510-25ec-4354-abb5-f1f03c3ea2c3",
@@ -389,9 +494,12 @@
     "party": "Democratic",
     "email": "asmcalabrese@njleg.org",
     "phone": "609-847-3905",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/calabrese_clinton_2018.jpg",
     "website": "https://www.assemblydems.com/226/Clinton-Calabrese---District-36",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "613 Bergen Blvd., Ridgefield, NJ 07657",
+    "districtPhone": "201-943-0615",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Clinton_Calabrese",
+    "ballotpediaUrl": "https://ballotpedia.org/Clinton_Calabrese"
   },
   {
     "id": "ocd-person/fab6547d-4f37-4c02-a738-dc4fb0b707e7",
@@ -403,8 +511,13 @@
     "party": "Democratic",
     "email": "asmmiller@njleg.org",
     "phone": "609-847-3905",
+    "photoUrl": "https://pub.njleg.gov/publications/members/miller_cody_2024.jpg",
     "website": "https://www.assemblydems.com/161/Cody-Miller---District-4",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "129 Johnson Road Suite 1, Turnersville, NJ 08012",
+    "districtPhone": "856-232-6700",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Cody_Miller_(New_Jersey_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Cody_Miller"
   },
   {
     "id": "ocd-person/9d1ae08a-66b3-4d68-bafe-956d4eaeb57f",
@@ -416,9 +529,12 @@
     "party": "Democratic",
     "email": "asmcoughlin@njleg.org",
     "phone": "609-847-3905",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/coughlin_craig_2017.jpg",
     "website": "https://www.assemblydems.com/185/Craig-J-Coughlin---District-19",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "569 Rahway Ave., Woodbridge, NJ 07095",
+    "districtPhone": "732-855-7441",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Craig_Coughlin",
+    "ballotpediaUrl": "https://ballotpedia.org/Craig_Coughlin"
   },
   {
     "id": "ocd-person/fa6aa5c6-0479-4d12-88c0-75480bfbe3a5",
@@ -430,8 +546,13 @@
     "party": "Democratic",
     "email": "asmhutchison@njleg.org",
     "phone": "609-847-3905",
+    "photoUrl": "https://pub.njleg.gov/publications/members/hutchison_dan_2024.jpg",
     "website": "https://www.assemblydems.com/160/Dan-Hutchison---District-4",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "1379 Chews Landing Road, Laurel Springs, NJ 08021",
+    "districtPhone": "856-401-3073",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dan_Hutchinson",
+    "ballotpediaUrl": "https://ballotpedia.org/Dan_Hutchison"
   },
   {
     "id": "ocd-person/64a8c09d-24a2-4d4c-a071-d09f0a30c79f",
@@ -443,8 +564,13 @@
     "party": "Democratic",
     "email": "asmbailey@njleg.org",
     "phone": "609-847-3905",
+    "photoUrl": "https://pub.njleg.gov/publications/members/bailey_dave_2024.jpg",
     "website": "https://www.assemblydems.com/157/Dave-Bailey-Jr---District-3",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "199 E. Broadway Suite G, First Floor, Salem, NJ 08079",
+    "districtPhone": "856-279-2920",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/David_Bailey_(New_Jersey_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Dave_Bailey_Jr."
   },
   {
     "id": "ocd-person/790ac0bd-71fa-4446-b1fa-b013e4b4f33e",
@@ -456,8 +582,13 @@
     "party": "Republican",
     "email": "aswfantasia@njleg.org",
     "phone": "609-847-3905",
+    "photoUrl": "https://pub.njleg.gov/publications/members/fantasia_dawn_2024.jpg",
     "website": "https://www.njassemblygop.com/222/Dawn-Fantasia",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "1 Wilson Drive Suite 2B, Sparta, NJ 07871",
+    "districtPhone": "973-300-0200",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dawn_Fantasia",
+    "ballotpediaUrl": "https://ballotpedia.org/Dawn_Fantasia"
   },
   {
     "id": "ocd-person/ac044b70-7745-435a-9c38-c4af013d0b0e",
@@ -469,9 +600,12 @@
     "party": "Republican",
     "email": "senoscanlon@njleg.org",
     "phone": "609-847-3905",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/oscanlon_color.jpg",
     "website": "https://oscanlon.senatenj.com/",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "101 Crawfords Corner Road Suite 4332, Holmdel, NJ 07733",
+    "districtPhone": "732-444-1838",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Declan_O%27Scanlon",
+    "ballotpediaUrl": "https://ballotpedia.org/Declan_O%27Scanlon,_Jr."
   },
   {
     "id": "ocd-person/df880b40-1e96-49d0-92bc-70732a1cce32",
@@ -483,8 +617,13 @@
     "party": "Republican",
     "email": "asmguardian@njleg.org",
     "phone": "609-847-3905",
+    "photoUrl": "https://pub.njleg.gov/publications/members/guardian_don_2022_250.jpg",
     "website": "https://www.njassemblygop.com/224/Donald-Guardian",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "3100 Hingston Ave. Suite 101, Egg Harbor Township, NJ 08234",
+    "districtPhone": "609-677-8266",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Don_Guardian",
+    "ballotpediaUrl": "https://ballotpedia.org/Don_Guardian"
   },
   {
     "id": "ocd-person/2798197f-1516-44ef-9933-99e5b23f19c8",
@@ -496,8 +635,13 @@
     "party": "Republican",
     "email": "sensteinhardt@njleg.org",
     "phone": "609-847-3905",
+    "photoUrl": "https://pub.njleg.gov/publications/members/steinhardt_douglas_2023_250.jpg",
     "website": "https://steinhardt.senatenj.com/",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "127 Belvidere Ave. Second Floor, Washington, NJ 07882",
+    "districtPhone": "908-835-0552",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Doug_Steinhardt",
+    "ballotpediaUrl": "https://ballotpedia.org/Doug_Steinhardt"
   },
   {
     "id": "ocd-person/c17427d2-58a7-45f5-aa6c-a70ca914f8de",
@@ -509,8 +653,12 @@
     "party": "Democratic",
     "email": "asmrodriguez@njleg.org",
     "phone": "609-847-3905",
+    "photoUrl": "https://pub.njleg.gov/publications/members/rodriguez_ed_2026.jpg",
     "website": "https://njleg.state.nj.us/legislative-roster/503/assemblyman-rodriguez",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "129 E. 1st Ave., Roselle, NJ 07203",
+    "districtPhone": "908-445-7154",
+    "ballotpediaUrl": "https://ballotpedia.org/Ed_Rodriguez_(New_Jersey)"
   },
   {
     "id": "ocd-person/6056438b-65d3-4db4-b0ad-c367074bd47e",
@@ -522,9 +670,12 @@
     "party": "Democratic",
     "email": "aswpintormarin@njleg.org",
     "phone": "609-847-3905",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/pintormarin_eliana_2017.jpg",
     "website": "https://www.assemblydems.com/173/Eliana-Pintor-Marin---District-29",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "263 Lafayette St. First Floor, Newark, NJ 07105",
+    "districtPhone": "973-589-0713",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Eliana_Pintor_Marin",
+    "ballotpediaUrl": "https://ballotpedia.org/Eliana_Pintor_Marin"
   },
   {
     "id": "ocd-person/e5da04d8-e25f-4ab3-a453-84e692fe89c4",
@@ -536,8 +687,13 @@
     "party": "Democratic",
     "email": "aswpark@njleg.org",
     "phone": "609-847-3905",
+    "photoUrl": "https://pub.njleg.gov/publications/members/park_ellen_2024_250.jpg",
     "website": "https://www.assemblydems.com/206/Ellen-Park---District-37",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "96 Engle St., Englewood, NJ 07631",
+    "districtPhone": "201-308-7062",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ellen_Park",
+    "ballotpediaUrl": "https://ballotpedia.org/Ellen_Park"
   },
   {
     "id": "ocd-person/df6d2d1f-3fb0-4e93-93cf-26665cae9a23",
@@ -549,9 +705,12 @@
     "party": "Republican",
     "email": "asmpeterson@njleg.org",
     "phone": "609-847-3905",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/peterson_erik_2020.jpg",
     "website": "https://www.njassemblygop.com/232/Erik-Peterson",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "28 Center St., Clinton, NJ 08809",
+    "districtPhone": "908-238-0251",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Erik_Peterson",
+    "ballotpediaUrl": "https://ballotpedia.org/Erik_Peterson_(New_Jersey)"
   },
   {
     "id": "ocd-person/7f9ebe1c-d4fa-4dd0-8948-7cf6248ffb6d",
@@ -565,7 +724,10 @@
     "phone": "609-778-2012",
     "photoUrl": "http://www.njleg.state.nj.us/members/memberphotos/simonsen_erik_2020.jpg",
     "website": "https://www.njassemblygop.com/235/Erik-Simonsen",
-    "office": "School House Office Park 211 S. Main St., Suite 104, Cape May Court House, NJ 08210"
+    "office": "School House Office Park 211 S. Main St., Suite 104, Cape May Court House, NJ 08210",
+    "districtOffice": "610 E. Landis Ave., Vineland, NJ 08360",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Erik_K._Simonsen",
+    "ballotpediaUrl": "https://ballotpedia.org/Erik_Simonsen"
   },
   {
     "id": "ocd-person/2078f4b2-3e69-4e01-aada-3ccf21ba6173",
@@ -577,8 +739,13 @@
     "party": "Democratic",
     "email": "asmrodriguez@njleg.org",
     "phone": "609-847-3905",
+    "photoUrl": "https://pub.njleg.gov/publications/members/rodriguez_gabriel_2024b.jpg",
     "website": "https://www.assemblydems.com/223/Gabriel-Rodriguez---District-33",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "5600 Kennedy Blvd. Suite 103, West New York, NJ 07093",
+    "districtPhone": "201-223-4247",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Gabe_Rodriguez",
+    "ballotpediaUrl": "https://ballotpedia.org/Gabriel_Rodriguez"
   },
   {
     "id": "ocd-person/93a1a3ce-eb52-4e71-b01c-346f41b6bde4",
@@ -590,9 +757,12 @@
     "party": "Democratic",
     "email": "asmschaer@njleg.org",
     "phone": "609-847-3905",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/schaer_color.jpg",
     "website": "https://www.assemblydems.com/179/Gary-S-Schaer---District-36",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "1 Howe Ave. Suite 401, Passaic, NJ 07055",
+    "districtPhone": "973-249-3665",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Gary_Schaer",
+    "ballotpediaUrl": "https://ballotpedia.org/Gary_Schaer"
   },
   {
     "id": "ocd-person/4323bf03-63e6-4f8b-9b2e-3554df7723bf",
@@ -606,7 +776,11 @@
     "phone": "609-847-3905",
     "photoUrl": "http://www.njleg.state.nj.us/members/memberphotos/scharfenberger_gerard_2020a.jpg",
     "website": "https://www.njassemblygop.com/234/Gerry-Scharfenberger",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "1715 Highway 35 North Suite 306, Middletown, NJ 07748",
+    "districtPhone": "732-856-9294",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Gerard_Scharfenberger",
+    "ballotpediaUrl": "https://ballotpedia.org/Gerard_Scharfenberger"
   },
   {
     "id": "ocd-person/53fe6716-2bdb-4926-993f-4a2cf002ad51",
@@ -618,9 +792,12 @@
     "party": "Democratic",
     "email": "senjohnson@njleg.org",
     "phone": "609-847-3905",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/johnson_color.jpg",
     "website": "https://www.njleg.state.nj.us/legislative-roster/434/senator-johnson",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "96 Engle St., Englewood, NJ 07631",
+    "districtPhone": "201-308-7060",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Gordon_M._Johnson",
+    "ballotpediaUrl": "https://ballotpedia.org/Gordon_Johnson"
   },
   {
     "id": "ocd-person/85863833-b5e6-40f2-aafc-5a0fc5f790d0",
@@ -632,8 +809,13 @@
     "party": "Republican",
     "email": "asmmyhre@njleg.org",
     "phone": "609-847-3905",
+    "photoUrl": "https://pub.njleg.gov/publications/members/myrhe_gregory_2024.jpg",
     "website": "https://www.njassemblygop.com/231/Gregory-Myhre",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "400 N. Main St. Building 1, Suite 1 and 2, Manahawkin, NJ 08050",
+    "districtPhone": "609-693-6700",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Greg_Myhre",
+    "ballotpediaUrl": "https://ballotpedia.org/Gregory_Myhre"
   },
   {
     "id": "ocd-person/2ac520a3-ae36-4936-a9c3-6842401b6c83",
@@ -645,9 +827,12 @@
     "party": "Republican",
     "email": "asmmcguckin@njleg.org",
     "phone": "609-847-3905",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/mcguckin_gregory_2020.jpg",
     "website": "https://www.njassemblygop.com/229/Gregory-McGuckin",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "852 Highway 70, Brick, NJ 08724",
+    "districtPhone": "732-840-9028",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Gregory_P._McGuckin",
+    "ballotpediaUrl": "https://ballotpedia.org/Gregory_McGuckin"
   },
   {
     "id": "ocd-person/5d619c98-5127-433c-99c6-adb888ab407b",
@@ -659,8 +844,13 @@
     "party": "Democratic",
     "email": "aswsimmons@njleg.org",
     "phone": "609-847-3905",
+    "photoUrl": "https://pub.njleg.gov/publications/members/simmons_heather_2024a.jpg",
     "website": "https://www.assemblydems.com/159/Heather-Simmons---District-3",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "199 E. Broadway Suite G, First Floor, Salem, NJ 08079",
+    "districtPhone": "856-279-2920",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Heather_Simmons_(New_Jersey_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Heather_Simmons"
   },
   {
     "id": "ocd-person/57fe7d05-af12-4f44-b143-e19814f2cfa2",
@@ -672,9 +862,12 @@
     "party": "Republican",
     "email": "senschepisi@njleg.org",
     "phone": "609-847-3905",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/schepisi_holly_2021.jpg",
     "website": "https://schepisi.senatenj.com/",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "28 West Grand Ave. Suite 15, Montvale, NJ 07645",
+    "districtPhone": "201-666-0881",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Holly_Schepisi",
+    "ballotpediaUrl": "https://ballotpedia.org/Holly_Schepisi"
   },
   {
     "id": "ocd-person/87714b2b-1868-4d3f-aa3f-a3d25db0fbc6",
@@ -686,9 +879,12 @@
     "party": "Democratic",
     "email": "senbeach@njleg.org",
     "phone": "609-847-3905",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/beach_color.jpg",
     "website": "https://www.njleg.state.nj.us/legislative-roster/310/senator-beach",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "221 Laurel Road Suite 105, Voorhees, NJ 08043",
+    "districtPhone": "856-429-1572",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/James_Beach",
+    "ballotpediaUrl": "https://ballotpedia.org/James_Beach"
   },
   {
     "id": "ocd-person/d80f0df2-57cd-436b-a250-7413ec11fe27",
@@ -700,9 +896,12 @@
     "party": "Democratic",
     "email": "asmkennedy@njleg.org",
     "phone": "609-847-3905",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/kennedy_color.jpg",
     "website": "https://www.assemblydems.com/195/James-J-Kennedy---District-22",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "1445 Main St., Rahway, NJ 07065",
+    "districtPhone": "732-943-2660",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/James_J._Kennedy",
+    "ballotpediaUrl": "https://ballotpedia.org/James_J._Kennedy"
   },
   {
     "id": "ocd-person/32e625c0-5e22-40b4-a6a3-4040d10e6ff0",
@@ -714,9 +913,12 @@
     "party": "Republican",
     "email": "senholzapfel@njleg.org",
     "phone": "609-847-3905",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/holzapfel_james_2020.jpg",
     "website": "https://holzapfel.senatenj.com/",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "852 Highway 70, Brick, NJ 08724",
+    "districtPhone": "732-840-9028",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/James_W._Holzapfel",
+    "ballotpediaUrl": "https://ballotpedia.org/James_Holzapfel"
   },
   {
     "id": "ocd-person/dbe67894-e4cd-46ea-bb59-877a8b4f26d0",
@@ -728,9 +930,12 @@
     "party": "Republican",
     "email": "asmwebber@njleg.org",
     "phone": "609-847-3905",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/webber_jay_2019.jpg",
     "website": "https://www.njassemblygop.com/238/Jay-Webber",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "160 Littleton Road Suite 204, Parsippany, NJ 07054",
+    "districtPhone": "973-917-3420",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jay_Webber",
+    "ballotpediaUrl": "https://ballotpedia.org/Jay_Webber"
   },
   {
     "id": "ocd-person/cbdafb85-539d-4ef4-a3ee-30f4985969fa",
@@ -742,8 +947,12 @@
     "party": "Democratic",
     "email": "asmwalker@njleg.org",
     "phone": "609-847-3905",
+    "photoUrl": "https://pub.njleg.gov/publications/members/walker_jerry_2026.jpg",
     "website": "https://njleg.state.nj.us/legislative-roster/508/assemblyman-walker",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "39 Kearney Ave. Annex 4, Jersey City, NJ 07305",
+    "districtPhone": "201-451-5100",
+    "ballotpediaUrl": "https://ballotpedia.org/Jerry_Walker_(New_Jersey)"
   },
   {
     "id": "ocd-person/03acbfd3-a81b-4461-aff4-db7ecf5e8e48",
@@ -755,9 +964,12 @@
     "party": "Democratic",
     "email": "asmdanielsen@njleg.org",
     "phone": "609-847-3905",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/danielsen_joe_2021.jpg",
     "website": "https://www.assemblydems.com/181/Joseph-Danielsen---District-17",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "334 Elizabeth Ave., Somerset, NJ 08873",
+    "districtPhone": "732-247-3999",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Joseph_Danielsen",
+    "ballotpediaUrl": "https://ballotpedia.org/Joseph_Danielsen"
   },
   {
     "id": "ocd-person/86641d6d-4538-453d-974f-aec40c42a33d",
@@ -769,8 +981,13 @@
     "party": "Republican",
     "email": "asmazzariti@njleg.org",
     "phone": "609-847-3905",
+    "photoUrl": "https://pub.njleg.gov/publications/members/azzariti_john_2024.jpg",
     "website": "https://www.njassemblygop.com/217/John-Azzariti",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "28 W. Grand Ave. Suite 15, Montvale, NJ 07645",
+    "districtPhone": "201-666-0881",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_V._Azzariti",
+    "ballotpediaUrl": "https://ballotpedia.org/John_Azzariti"
   },
   {
     "id": "ocd-person/dce6ec3a-7d62-4b33-8693-259364c85285",
@@ -782,9 +999,12 @@
     "party": "Republican",
     "email": "asmdimaio@njleg.org",
     "phone": "609-847-3905",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/dimaio_john_2020.jpg",
     "website": "https://www.njassemblygop.com/211/John-DiMaio",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "208 Mountain Ave. Suite 3, Hackettstown, NJ 07840",
+    "districtPhone": "908-684-9550",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_DiMaio",
+    "ballotpediaUrl": "https://ballotpedia.org/John_DiMaio"
   },
   {
     "id": "ocd-person/1fec06e0-00df-4d84-8c9a-18e80a6f29e2",
@@ -798,7 +1018,11 @@
     "phone": "609-847-3905",
     "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/mckeon_color.jpg",
     "website": "https://www.assemblydems.com/john-mckeon/",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "555 Northfield Ave. Suite C, West Orange, NJ 07052",
+    "districtPhone": "862-930-7071",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_F._McKeon",
+    "ballotpediaUrl": "https://ballotpedia.org/John_McKeon"
   },
   {
     "id": "ocd-person/1b726d76-851a-487b-a6e6-42ee4fa5c050",
@@ -810,9 +1034,12 @@
     "party": "Democratic",
     "email": "senburzichelli@njleg.org",
     "phone": "609-847-3905",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/burzichelli_color.jpg",
-    "website": "https://www.njleg.state.nj.us/legislative-roster/458/senator-burzichelli",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "website": "https://www.njleg.state.nj.us/api/legislatorData/legislatorBio/458",
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "199 E. Broadway Suite G, First Floor, Salem, NJ 08079",
+    "districtPhone": "856-279-2920",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/John_J._Burzichelli",
+    "ballotpediaUrl": "https://ballotpedia.org/John_Burzichelli"
   },
   {
     "id": "ocd-person/08a758f9-92fb-4e59-ac8f-edc75aaf3390",
@@ -824,8 +1051,13 @@
     "party": "Republican",
     "email": "senbramnick@njleg.org",
     "phone": "609-847-3905",
+    "photoUrl": "https://pub.njleg.gov/publications/members/bramnick_jon_2020_250.jpg",
     "website": "https://bramnick.senatenj.com/",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "251 North Ave. West Second Floor, Westfield, NJ 07090",
+    "districtPhone": "908-232-2073",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jon_Bramnick",
+    "ballotpediaUrl": "https://ballotpedia.org/Jon_Bramnick"
   },
   {
     "id": "ocd-person/90a0a109-2ce3-4a55-8761-1e07ff875703",
@@ -837,9 +1069,12 @@
     "party": "Democratic",
     "email": "senlagana@njleg.org",
     "phone": "609-847-3905",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/lagana_joseph_2020.jpg",
     "website": "https://www.njleg.state.nj.us/legislative-roster/411/senator-lagana",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "205 Robin Road Suite 122, Paramus, NJ 07652",
+    "districtPhone": "201-576-9199",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Joseph_Lagana",
+    "ballotpediaUrl": "https://ballotpedia.org/Joseph_Lagana"
   },
   {
     "id": "ocd-person/97fba3ff-adc8-4323-bf77-37acfe18b735",
@@ -851,9 +1086,12 @@
     "party": "Democratic",
     "email": "senvitale@njleg.org",
     "phone": "609-847-3905",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/vitale_color.jpg",
     "website": "https://www.njleg.state.nj.us/legislative-roster/175/senator-vitale",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "569 Rahway Ave., Woodbridge, NJ 07095",
+    "districtPhone": "732-855-7441",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Joe_F._Vitale",
+    "ballotpediaUrl": "https://ballotpedia.org/Joseph_Vitale"
   },
   {
     "id": "ocd-person/5dcef6ac-7dbe-4c65-a53b-670c89a615e7",
@@ -865,9 +1103,12 @@
     "party": "Democratic",
     "email": "sencryan@njleg.org",
     "phone": "609-847-3905",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/cryan_joseph_2017.jpg",
     "website": "https://www.njleg.state.nj.us/legislative-roster/406/senator-cryan",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "1585 Morris Ave., 1st Floor, Union, NJ 07083",
+    "districtPhone": "908-624-0880",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Joseph_Cryan",
+    "ballotpediaUrl": "https://ballotpedia.org/Joseph_Cryan"
   },
   {
     "id": "ocd-person/4bf4c8e4-5a97-4100-b34d-cb01da6ab266",
@@ -879,9 +1120,12 @@
     "party": "Republican",
     "email": "senpennacchio@njleg.org",
     "phone": "609-847-3905",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/pennacchio_color.jpg",
     "website": "https://pennacchio.senatenj.com/",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "170 Changebridge Road Unit A1, Montville, NJ 07045",
+    "districtPhone": "973-227-4012",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Joseph_Pennacchio",
+    "ballotpediaUrl": "https://ballotpedia.org/Joseph_Pennacchio"
   },
   {
     "id": "ocd-person/a04dc132-6a91-4e1b-a336-ede062d06884",
@@ -893,8 +1137,13 @@
     "party": "Democratic",
     "email": "aswbrennan@njleg.org",
     "phone": "609-847-3905",
+    "photoUrl": "https://pub.njleg.gov/publications/members/brennan_katie_2026.jpg",
     "website": "https://njleg.state.nj.us/legislative-roster/510/assemblywoman-brennan",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "35 Journal Square Suite 528, Jersey City, NJ 07306",
+    "districtPhone": "551-256-7022",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Katie_Brennan_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Katie_Brennan"
   },
   {
     "id": "ocd-person/0bf3c2a3-9004-40cb-8d3a-eeeca4b0b967",
@@ -906,8 +1155,13 @@
     "party": "Democratic",
     "email": "asmstewart@njleg.org",
     "phone": "609-847-3905",
+    "photoUrl": "https://pub.njleg.gov/publications/members/stewart_kenyatta_2026.jpg",
     "website": "https://njleg.state.nj.us/legislative-roster/512/assemblyman-stewart",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "21 Mill St. Suite 5, Paterson, NJ 07501",
+    "districtPhone": "973-925-7063",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kenyatta_Stewart",
+    "ballotpediaUrl": "https://ballotpedia.org/Kenyatta_Stewart"
   },
   {
     "id": "ocd-person/59c25089-5752-4eb9-a96b-a005c1c46743",
@@ -919,8 +1173,13 @@
     "party": "Democratic",
     "email": "asmegan@njleg.org",
     "phone": "609-847-3905",
+    "photoUrl": "https://pub.njleg.gov/publications/members/egan_kevin_2024.jpg",
     "website": "https://www.assemblydems.com/182/Kevin-P-Egan---District-17",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "144 Livingston Ave. Second Floor, New Brunswick, NJ 08901",
+    "districtPhone": "732-249-4550",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kevin_Egan_(New_Jersey_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Kevin_Egan"
   },
   {
     "id": "ocd-person/0880a4b0-8e91-484b-aa12-6e0444838c44",
@@ -932,9 +1191,12 @@
     "party": "Republican",
     "email": "sencorrado@njleg.org",
     "phone": "609-847-3905",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/corrado_kristin_2017.jpg",
     "website": "https://corrado.senatenj.com/",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "999 Riverview Drive Suite 350, Totowa, NJ 07512",
+    "districtPhone": "973-237-1360",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kristin_Corrado",
+    "ballotpediaUrl": "https://ballotpedia.org/Kristin_Corrado"
   },
   {
     "id": "ocd-person/036d00b8-5e0b-4bc0-ae46-f0bf5e1b9a73",
@@ -946,8 +1208,13 @@
     "party": "Democratic",
     "email": "asmwainstein@njleg.org",
     "phone": "609-847-3905",
+    "photoUrl": "https://pub.njleg.gov/publications/members/wainstein_larry_2026.jpg",
     "website": "https://njleg.state.nj.us/legislative-roster/511/assemblyman-wainstein",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "7225 Bergenline Ave. Suite 3A, North Bergen, NJ 07047",
+    "districtPhone": "201-305-5139",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Larry_Wainstein",
+    "ballotpediaUrl": "https://ballotpedia.org/Larry_Wainstein"
   },
   {
     "id": "ocd-person/0e989cd5-91f8-4595-8346-bbac4f3d2c9e",
@@ -959,8 +1226,13 @@
     "party": "Republican",
     "email": "sentiver@njleg.org",
     "phone": "609-847-3905",
+    "photoUrl": "https://pub.njleg.gov/publications/members/tiver_latham_2024.jpg",
     "website": "https://www.njleg.state.nj.us/legislative-roster/464/senator-tiver",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "Elmwood Business Park Suite B-101, Evesham, NJ 08053",
+    "districtPhone": "856-817-2143",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Latham_Tiver",
+    "ballotpediaUrl": "https://ballotpedia.org/Latham_Tiver"
   },
   {
     "id": "ocd-person/27646653-40e2-4c79-b608-0f2edcaa0322",
@@ -974,7 +1246,11 @@
     "phone": "609-847-3905",
     "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/greenstein_color.jpg",
     "website": "https://www.njleg.state.nj.us/legislative-roster/329/senator-greenstein",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "1249 S. River Road Suite 105, Cranbury, NJ 08512",
+    "districtPhone": "609-395-9911",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Linda_R._Greenstein",
+    "ballotpediaUrl": "https://ballotpedia.org/Linda_Greenstein"
   },
   {
     "id": "ocd-person/199dd5c8-3ef1-4a2c-9585-9de5def27e98",
@@ -986,9 +1262,12 @@
     "party": "Democratic",
     "email": "aswcarter@njleg.org",
     "phone": "609-847-3905",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/carter_linda_2018a.jpg",
     "website": "https://www.assemblydems.com/194/Linda-S-Carter---District-22",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "200 W. 2nd St. Suite 102, Plainfield, NJ 07060",
+    "districtPhone": "908-561-5757",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Linda_Carter_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Linda_Carter_(New_Jersey)"
   },
   {
     "id": "ocd-person/28b4c7d2-d1c3-4735-b321-0f348ec27299",
@@ -1000,9 +1279,12 @@
     "party": "Democratic",
     "email": "aswswain@njleg.org",
     "phone": "609-847-3905",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/swain_lisa_2018a.jpg",
     "website": "https://www.assemblydems.com/193/Lisa-Swain---District-38",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "205 Robin Road Suite 122, Paramus, NJ 07652",
+    "districtPhone": "201-576-9199",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lisa_Swain",
+    "ballotpediaUrl": "https://ballotpedia.org/Lisa_Swain"
   },
   {
     "id": "ocd-person/a27823aa-f5a9-4d6c-8089-1d8ceee6f8e0",
@@ -1014,9 +1296,12 @@
     "party": "Democratic",
     "email": "asmgreenwald@njleg.org",
     "phone": "609-847-3905",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/greenwald_color.jpg",
     "website": "https://nj-newjerseylegislativead.civicplus.com/165/Louis-D-Greenwald---District-6",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "1101 Laurel Oak Road Suite 150, Voorhees, NJ 08043",
+    "districtPhone": "856-435-1247",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Louis_Greenwald",
+    "ballotpediaUrl": "https://ballotpedia.org/Louis_Greenwald"
   },
   {
     "id": "ocd-person/589a73bd-a164-472a-8b50-4b4d0846cd24",
@@ -1028,8 +1313,13 @@
     "party": "Democratic",
     "email": "aswpeterpaul@njleg.org",
     "phone": "609-847-3905",
+    "photoUrl": "https://pub.njleg.gov/publications/members/peterpaul_luanne_2024.jpg",
     "website": "https://www.assemblydems.com/172/Luanne-M-Peterpaul---District-11",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "766 Shrewsbury Ave. Suite 100, Tinton Falls, NJ 07724",
+    "districtPhone": "732-704-3808",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Luanne_Peterpaul",
+    "ballotpediaUrl": "https://ballotpedia.org/Luanne_Peterpaul"
   },
   {
     "id": "ocd-person/907aae0b-1026-405a-9429-cadd01efd79d",
@@ -1041,9 +1331,12 @@
     "party": "Democratic",
     "email": "senruiz@njleg.org",
     "phone": "609-847-3905",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/ruiz_teresa_2021.jpg",
     "website": "https://www.njleg.state.nj.us/legislative-roster/287/senator-ruiz",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "475 Bloomfield Ave., Newark, NJ 07107",
+    "districtPhone": "973-484-1000",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Teresa_Ruiz_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Teresa_Ruiz"
   },
   {
     "id": "ocd-person/78ee83b9-ead4-4a03-89e7-f976d0454408",
@@ -1055,8 +1348,13 @@
     "party": "Democratic",
     "email": "aswdonlon@njleg.org",
     "phone": "609-847-3905",
+    "photoUrl": "https://pub.njleg.gov/publications/members/donlon_margie_2024.jpg",
     "website": "https://www.assemblydems.com/171/Margie-M-Donlon---District-11",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "766 Shrewsbury Ave. Suite 100, Tinton Falls, NJ 07724",
+    "districtPhone": "732-704-3808",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Margie_Donlon",
+    "ballotpediaUrl": "https://ballotpedia.org/Margie_Donlon"
   },
   {
     "id": "ocd-person/028a440f-10cb-49cc-9417-1dfd0cff83e2",
@@ -1068,8 +1366,13 @@
     "party": "Democratic",
     "email": "aswsweeney@njleg.org",
     "phone": "609-847-3905",
+    "photoUrl": "https://pub.njleg.gov/publications/members/sweeney_marisa_2026.jpg",
     "website": "https://njleg.state.nj.us/legislative-roster/506/assemblywoman-sweeney",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "1250 Sussex Turnpike Suite D, Randolph, NJ 07869",
+    "districtPhone": "973-933-2124",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Marisa_Sweeney",
+    "ballotpediaUrl": "https://ballotpedia.org/Marisa_Sweeney"
   },
   {
     "id": "ocd-person/af1dfa82-2c03-4b0c-bf63-1eef9e8b6616",
@@ -1081,8 +1384,13 @@
     "party": "Democratic",
     "email": "aswrowan@njleg.org",
     "phone": "609-847-3905",
+    "photoUrl": "https://pub.njleg.gov/publications/members/rowan_maureen_2026.jpg",
     "website": "https://njleg.state.nj.us/legislative-roster/501/assemblywoman-rowan",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "8025 Black Horse Pike Suite 490, Egg Harbor Township, NJ 08232",
+    "districtPhone": "609-241-1905",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Maureen_Rowan",
+    "ballotpediaUrl": "https://ballotpedia.org/Maureen_Rowan"
   },
   {
     "id": "ocd-person/a33ec105-c8ff-446b-ae8b-1a79f402f983",
@@ -1096,7 +1404,11 @@
     "phone": "609-847-3905",
     "photoUrl": "https://storage.googleapis.com/enview-dev-public-general/legislative-people-photos/168239.jpg",
     "website": "https://www.assemblydems.com/387/Melinda-Kane---District-6",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "1101 Laurel Oak Road Suite 150, Voorhees, NJ 08043",
+    "districtPhone": "856-435-1247",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Melinda_Kane",
+    "ballotpediaUrl": "https://ballotpedia.org/Melinda_Kane"
   },
   {
     "id": "ocd-person/4cb8db73-8982-4b4f-9c90-f86b20b217bc",
@@ -1108,9 +1420,11 @@
     "party": "Republican",
     "email": "sentesta@njleg.org",
     "phone": "609-778-2012",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/testa_michael_2019.jpg",
     "website": "https://testa.senatenj.com/testa.php",
-    "office": "School House Office Park 211 S. Main St., Suite 104, Cape May Court House, NJ 08210"
+    "office": "School House Office Park 211 S. Main St., Suite 104, Cape May Court House, NJ 08210",
+    "districtOffice": "610 E. Landis Ave., Vineland, NJ 08360",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mike_Testa",
+    "ballotpediaUrl": "https://ballotpedia.org/Mike_Testa_Jr."
   },
   {
     "id": "ocd-person/9228b053-be5e-4490-aadc-ece59b7421fd",
@@ -1122,8 +1436,13 @@
     "party": "Republican",
     "email": "asminganamort@njleg.org",
     "phone": "609-847-3905",
+    "photoUrl": "https://pub.njleg.gov/publications/members/inganamort_michael_2024.jpg",
     "website": "https://www.njassemblygop.com/225/Michael-Inganamort",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "1 Wilson Drive Suite 2B, Sparta, NJ 07871",
+    "districtPhone": "973-300-0200",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mike_Inganamort",
+    "ballotpediaUrl": "https://ballotpedia.org/Michael_Inganamort"
   },
   {
     "id": "ocd-person/96eb992c-0f0c-4db5-b146-76349604f4d3",
@@ -1135,8 +1454,13 @@
     "party": "Democratic",
     "email": "asmvenezia@njleg.org",
     "phone": "609-847-3905",
+    "photoUrl": "https://pub.njleg.gov/publications/members/venezia_michael_2024.jpg",
     "website": "https://www.assemblydems.com/238/Michael-Venezia---District-34",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "299 Glenwood Ave., Bloomfield, NJ 07003",
+    "districtPhone": "973-893-5869",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Michael_Venezia_(New_Jersey_politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Michael_Venezia"
   },
   {
     "id": "ocd-person/97251dd4-e275-4347-a757-a05366fa5013",
@@ -1148,8 +1472,13 @@
     "party": "Democratic",
     "email": "aswdrulis@njleg.org",
     "phone": "609-847-3905",
+    "photoUrl": "https://pub.njleg.gov/publications/members/drulis_mitchelle_2024.jpg",
     "website": "https://www.assemblydems.com/178/Mitchelle-Drulis---District-16",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "390 Amwell Road Suite 301, Hillsborough, NJ 08844",
+    "districtPhone": "908-829-4191",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mitchelle_Drulis",
+    "ballotpediaUrl": "https://ballotpedia.org/Mitchelle_Drulis"
   },
   {
     "id": "ocd-person/4d47b297-b5f4-4d83-94e6-bb95eb91ecd7",
@@ -1161,9 +1490,12 @@
     "party": "Democratic",
     "email": "senscutari@njleg.org",
     "phone": "609-847-3905",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/scutari_nicholas_2020.jpg",
     "website": "https://www.njleg.state.nj.us/legislative-roster/237/senator-scutari",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "67 Walnut Ave. Suite 406, Clark, NJ 07066",
+    "districtPhone": "732-827-7480",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Nicholas_Scutari",
+    "ballotpediaUrl": "https://ballotpedia.org/Nicholas_Scutari"
   },
   {
     "id": "ocd-person/b656905a-de58-4d36-b433-276788233b1f",
@@ -1175,9 +1507,12 @@
     "party": "Democratic",
     "email": "sencruzperez@njleg.org",
     "phone": "609-847-3905",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/cruzperez_color.jpg",
     "website": "https://www.njleg.state.nj.us/legislative-roster/371/senator-cruz-perez",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "208 White Horse Pike Suite 13, Barrington, NJ 08007",
+    "districtPhone": "856-547-4800",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Nilsa_Cruz-Perez",
+    "ballotpediaUrl": "https://ballotpedia.org/Nilsa_Cruz-Perez"
   },
   {
     "id": "ocd-person/fee23b32-9f92-4951-889e-6d09749a78b9",
@@ -1189,8 +1524,13 @@
     "party": "Republican",
     "email": "senhenry@njleg.org",
     "phone": "609-847-3905",
+    "photoUrl": "https://pub.njleg.gov/publications/members/henry_owen_2026.jpg",
     "website": "https://www.njleg.state.nj.us/legislative-roster/470/senator-henry",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "2501 Highway 516, Old Bridge, NJ 08857",
+    "districtPhone": "732-607-7580",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Owen_Henry",
+    "ballotpediaUrl": "https://ballotpedia.org/Owen_Henry"
   },
   {
     "id": "ocd-person/934c3022-709b-4768-b2df-635d25579128",
@@ -1202,9 +1542,12 @@
     "party": "Democratic",
     "email": "asmtully@njleg.org",
     "phone": "609-847-3905",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/tully_christopher_2018b.jpg",
     "website": "https://www.assemblydems.com/211/Christopher-Tully---District-38",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "205 Robin Road Suite 122, Paramus, NJ 07652",
+    "districtPhone": "201-576-9199",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Chris_Tully",
+    "ballotpediaUrl": "https://ballotpedia.org/Chris_Tully"
   },
   {
     "id": "ocd-person/1dde507a-70ed-4f89-95f8-cd11748a753c",
@@ -1216,9 +1559,12 @@
     "party": "Republican",
     "email": "senspace@njleg.org",
     "phone": "609-847-3905",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/space_parker_2020.jpg",
     "website": "https://www.njassemblygop.com/space/",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "191 Main St. Suite C, Chester, NJ 07930",
+    "districtPhone": "908-955-7429",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Parker_Space",
+    "ballotpediaUrl": "https://ballotpedia.org/Parker_Space"
   },
   {
     "id": "ocd-person/16048732-130c-4102-b6e7-2d8faa0c3f52",
@@ -1230,9 +1576,12 @@
     "party": "Democratic",
     "email": "sendiegnan@njleg.org",
     "phone": "609-847-3905",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/diegnan_2017.jpg",
     "website": "https://www.njleg.state.nj.us/legislative-roster/387/senator-diegnan",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "908 Oak Tree Ave. Unit P, South Plainfield, NJ 07080",
+    "districtPhone": "908-757-1677",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Patrick_J._Diegnan",
+    "ballotpediaUrl": "https://ballotpedia.org/Patrick_Diegnan,_Jr."
   },
   {
     "id": "ocd-person/1d8eb6cf-cff2-4948-ba03-7f31fcadd4ec",
@@ -1244,9 +1593,12 @@
     "party": "Democratic",
     "email": "sensarlo@njleg.org",
     "phone": "609-847-3905",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/sarlo_color.jpg",
     "website": "https://www.njleg.state.nj.us/legislative-roster/223/senator-sarlo",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "496 Columbia Blvd. First Floor, Wood-Ridge, NJ 07075",
+    "districtPhone": "201-804-8118",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Paul_Sarlo",
+    "ballotpediaUrl": "https://ballotpedia.org/Paul_Sarlo"
   },
   {
     "id": "ocd-person/f15f8b7e-96ee-41e8-b59c-b277927985c0",
@@ -1260,7 +1612,11 @@
     "phone": "609-847-3905",
     "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/moriarty_color.jpg",
     "website": "https://www.assemblydems.com/paul-moriarty/",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "129 Johnson Road Suite 1, Turnersville, NJ 08012",
+    "districtPhone": "856-232-6700",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Paul_D._Moriarty",
+    "ballotpediaUrl": "https://ballotpedia.org/Paul_Moriarty_(New_Jersey)"
   },
   {
     "id": "ocd-person/e4c2301b-6812-423e-b27a-c40919f4bd5d",
@@ -1272,8 +1628,13 @@
     "party": "Republican",
     "email": "asmkanitra@njleg.org",
     "phone": "609-847-3905",
+    "photoUrl": "https://pub.njleg.gov/publications/members/kanitra_paul_2024.jpg",
     "website": "https://www.njassemblygop.com/226/Paul-Kanitra",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "852 Highway 70, Brick, NJ 08724",
+    "districtPhone": "732-840-9028",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Paul_Kanitra",
+    "ballotpediaUrl": "https://ballotpedia.org/Paul_Kanitra"
   },
   {
     "id": "ocd-person/fe8bf5e4-85ed-423b-b2d8-301f29d3faea",
@@ -1285,9 +1646,12 @@
     "party": "Democratic",
     "email": "senmukherji@njleg.org",
     "phone": "609-847-3905",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/mukherji_color.jpg",
     "website": "https://www.assemblydems.com/raj-mukherji/",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "121 Newark Ave., 1st Floor, Jersey City, NJ 07302",
+    "districtPhone": "201-626-4000",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Raj_Mukherji",
+    "ballotpediaUrl": "https://ballotpedia.org/Raj_Mukherji"
   },
   {
     "id": "ocd-person/27b085de-d164-466e-845b-fc1de27a2da9",
@@ -1299,8 +1663,13 @@
     "party": "Democratic",
     "email": "asmbhalla@njleg.org",
     "phone": "609-847-3905",
+    "photoUrl": "https://pub.njleg.gov/publications/members/bhalla_ravi_2026.jpg",
     "website": "https://njleg.state.nj.us/legislative-roster/509/assemblyman-bhalla",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "80 River St. 2nd Floor, Hoboken, NJ 07030",
+    "districtPhone": "201-683-7917",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ravinder_Bhalla",
+    "ballotpediaUrl": "https://ballotpedia.org/Ravinder_Bhalla"
   },
   {
     "id": "ocd-person/b8495630-20f7-4f9e-bf84-2a13a6da3794",
@@ -1312,8 +1681,13 @@
     "party": "Democratic",
     "email": "senburgess@njleg.org",
     "phone": "609-847-3905",
+    "photoUrl": "https://pub.njleg.gov/publications/members/burgess_renee_2022_250.jpg",
     "website": "https://www.njleg.state.nj.us/legislative-roster/455/senator-burgess",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "660 Stuyvesant Ave., Irvington, NJ 07111",
+    "districtPhone": "862-231-6577",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Renee_Burgess",
+    "ballotpediaUrl": "https://ballotpedia.org/Renee_Burgess"
   },
   {
     "id": "ocd-person/acff039b-0a83-4184-8b6b-7b051cfcdc77",
@@ -1325,9 +1699,12 @@
     "party": "Republican",
     "email": "asmauth@njleg.org",
     "phone": "609-847-3905",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/auth_robert_2017.jpg",
     "website": "https://www.njassemblygop.com/216/Robert-Auth",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "84 Herbert Ave. Building A, Suite 103, Closter, NJ 07624",
+    "districtPhone": "201-564-7420",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Robert_Auth",
+    "ballotpediaUrl": "https://ballotpedia.org/Robert_Auth"
   },
   {
     "id": "ocd-person/b94db48b-9083-48c9-8b27-3603db14fa3e",
@@ -1339,9 +1716,12 @@
     "party": "Republican",
     "email": "asmclifton@njleg.org",
     "phone": "609-847-3905",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/clifton_robert_2020.jpg",
     "website": "https://www.njassemblygop.com/220/Robert-Clifton",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "14 Cliffwood Ave. Suite 240, Matawan, NJ 07747",
+    "districtPhone": "732-970-6386",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Robert_D._Clifton",
+    "ballotpediaUrl": "https://ballotpedia.org/Robert_Clifton"
   },
   {
     "id": "ocd-person/d6732f77-1c72-4ee6-8d52-5c9b79987976",
@@ -1353,9 +1733,12 @@
     "party": "Democratic",
     "email": "asmkarabinchak@njleg.org",
     "phone": "609-847-3905",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/karabinchak_color.jpg",
-    "website": "https://robkarabinchak.com/",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "website": "https://www.assemblydems.com/189/Robert-Karabinchak---District-18",
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "3 Stephenville Parkway Suite 2D, Edison, NJ 08820",
+    "districtPhone": "732-548-1406",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Robert_Karabinchak",
+    "ballotpediaUrl": "https://ballotpedia.org/Robert_Karabinchak"
   },
   {
     "id": "ocd-person/45219a29-080f-4452-9b05-92488e96f2f1",
@@ -1367,9 +1750,12 @@
     "party": "Republican",
     "email": "sensinger@njleg.org",
     "phone": "609-847-3905",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/singer_color.jpg",
     "website": "https://singer.senatenj.com/",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "1771 Madison Ave. Suite 202, Lakewood, NJ 08701",
+    "districtPhone": "732-987-5669",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Robert_W._Singer",
+    "ballotpediaUrl": "https://ballotpedia.org/Robert_Singer"
   },
   {
     "id": "ocd-person/f152f2d6-e4ff-4958-996d-532c310ddef1",
@@ -1381,8 +1767,13 @@
     "party": "Democratic",
     "email": "aswbagolie@njleg.org",
     "phone": "609-847-3905",
+    "photoUrl": "https://pub.njleg.gov/publications/members/bagolie_rosy_2024.jpg",
     "website": "https://www.assemblydems.com/203/Rosaura-Rosy-Bagolie---District-27",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "651 Old Mount Pleasant Ave., Livingston, NJ 07039",
+    "districtPhone": "973-535-5017",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rosy_Bagolie",
+    "ballotpediaUrl": "https://ballotpedia.org/Rosy_Bagolie"
   },
   {
     "id": "ocd-person/77b80e3f-bfdd-4c81-b92e-866c17abd398",
@@ -1394,9 +1785,12 @@
     "party": "Democratic",
     "email": "asmfreiman@njleg.org",
     "phone": "609-847-3905",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/freiman_roy_2020.jpg",
     "website": "https://www.assemblydems.com/180/Roy-Freiman---District-16",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "390 Amwell Road Suite 301, Hillsborough, NJ 08844",
+    "districtPhone": "908-829-4191",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Roy_Freiman",
+    "ballotpediaUrl": "https://ballotpedia.org/Roy_Freiman"
   },
   {
     "id": "ocd-person/ac95c4e3-057b-43bc-8bee-752137bb2d12",
@@ -1408,9 +1802,12 @@
     "party": "Republican",
     "email": "asmskean@njleg.org",
     "phone": "609-847-3905",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/kean_sean_2020.jpg",
     "website": "https://www.njassemblygop.com/227/Sean-Kean",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "1967 Highway 34, Building C Suite 202, Wall Township, NJ 07719",
+    "districtPhone": "732-974-0400",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sean_T._Kean",
+    "ballotpediaUrl": "https://ballotpedia.org/Sean_Kean"
   },
   {
     "id": "ocd-person/49be7512-9343-4189-8769-4497ed129a92",
@@ -1422,8 +1819,13 @@
     "party": "Democratic",
     "email": "aswhaider@njleg.org",
     "phone": "609-847-3905",
+    "photoUrl": "https://pub.njleg.gov/publications/members/haider_shama_2024.jpg",
     "website": "https://www.assemblydems.com/209/Shama-Haider---District-37",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "96 Engle St., Englewood, NJ 07631",
+    "districtPhone": "201-308-7061",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Shama_Haider",
+    "ballotpediaUrl": "https://ballotpedia.org/Shama_Haider"
   },
   {
     "id": "ocd-person/304c7552-b833-4b9c-b125-39030b8376ff",
@@ -1435,9 +1837,10 @@
     "party": "Democratic",
     "email": "aswspeight@njleg.org",
     "phone": "609-847-3905",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/speight_shanique_2017.jpg",
     "website": "https://www.assemblydems.com/200/Shanique-Speight---District-29",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Shanique_Speight",
+    "ballotpediaUrl": "https://ballotpedia.org/Shanique_Speight"
   },
   {
     "id": "ocd-person/26eb8b3c-59a5-49ca-841c-13a569444994",
@@ -1449,9 +1852,12 @@
     "party": "Democratic",
     "email": "senturner@njleg.org",
     "phone": "609-847-3905",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/turner_color.jpg",
     "website": "https://www.njleg.state.nj.us/legislative-roster/47/senator-turner",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "1230 Parkway Ave. Suite 103, Ewing Township, NJ 08628",
+    "districtPhone": "609-323-7239",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Shirley_Turner",
+    "ballotpediaUrl": "https://ballotpedia.org/Shirley_Turner"
   },
   {
     "id": "ocd-person/901f85af-77c2-4cff-8626-ac510fdc425f",
@@ -1463,9 +1869,12 @@
     "party": "Democratic",
     "email": "asmstanley@njleg.org",
     "phone": "609-847-3905",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/stanley_sterley_2021.jpg",
     "website": "https://www.assemblydems.com/191/Sterley-Stanley---District-18",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "197 State Highway 18 Suite 102 North, East Brunswick, NJ 08816",
+    "districtPhone": "732-875-3833",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Sterley_Stanley",
+    "ballotpediaUrl": "https://ballotpedia.org/Sterley_Stanley"
   },
   {
     "id": "ocd-person/c05a0080-95df-4576-a81c-d509fb4a5063",
@@ -1477,8 +1886,13 @@
     "party": "Democratic",
     "email": "aswmccoy@njleg.org",
     "phone": "609-847-3905",
+    "photoUrl": "https://pub.njleg.gov/publications/members/mccoy_tennille_2024.jpg",
     "website": "https://tennillermccoy.com/",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "3691A Nottingham Way, Hamilton Square, NJ 08690",
+    "districtPhone": "609-631-0198",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Tennille_McCoy",
+    "ballotpediaUrl": "https://ballotpedia.org/Tennille_McCoy"
   },
   {
     "id": "ocd-person/a1c9ec59-4127-4973-b100-f35c30bb817c",
@@ -1490,9 +1904,12 @@
     "party": "Democratic",
     "email": "sensingleton@njleg.org",
     "phone": "609-847-3905",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/singleton_troy_2019.jpg",
     "website": "https://www.njleg.state.nj.us/legislative-roster/395/senator-singleton",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "400 N. Church St. Suite 260, Moorestown, NJ 08057",
+    "districtPhone": "856-234-2790",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Troy_Singleton",
+    "ballotpediaUrl": "https://ballotpedia.org/Troy_Singleton"
   },
   {
     "id": "ocd-person/b432ec8c-f914-47dc-addd-740dfc95daaf",
@@ -1504,9 +1921,12 @@
     "party": "Democratic",
     "email": "aswreynoldsjackson@njleg.org",
     "phone": "609-847-3905",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/reynolds-jackson_verlina_2018.jpg",
     "website": "https://www.assemblydems.com/169/Verlina-Reynolds-Jackson---District-15",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "144 W. State St., Trenton, NJ 08608",
+    "districtPhone": "609-571-9638",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Verlina_Reynolds-Jackson",
+    "ballotpediaUrl": "https://ballotpedia.org/Verlina_Reynolds-Jackson"
   },
   {
     "id": "ocd-person/379945ef-55af-4b76-96ce-fcddbcb0c1c6",
@@ -1518,8 +1938,13 @@
     "party": "Republican",
     "email": "aswflynn@njleg.org",
     "phone": "609-847-3905",
+    "photoUrl": "https://pub.njleg.gov/publications/members/flynn_victoria_2022_250.jpg",
     "website": "https://www.njassemblygop.com/223/Victoria-Flynn",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "1715 Highway 35 North Suite 307, Middletown, NJ 07748",
+    "districtPhone": "732-856-9833",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Vicky_Flynn",
+    "ballotpediaUrl": "https://ballotpedia.org/Victoria_Flynn"
   },
   {
     "id": "ocd-person/76afbcca-bed8-4e2e-bc3a-0fd6d53158a5",
@@ -1531,9 +1956,12 @@
     "party": "Democratic",
     "email": "sengopal@njleg.org",
     "phone": "609-847-3905",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/gopal_vin_2021.jpg",
     "website": "https://www.njleg.state.nj.us/legislative-roster/405/senator-gopal",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "766 Shrewsbury Ave. Suite 100, Tinton Falls, NJ 07724",
+    "districtPhone": "732-704-3808",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Vin_Gopal",
+    "ballotpediaUrl": "https://ballotpedia.org/Vin_Gopal"
   },
   {
     "id": "ocd-person/5a6bf64a-7731-4e80-8208-e1a18f09762b",
@@ -1545,9 +1973,12 @@
     "party": "Republican",
     "email": "senpolistina@njleg.org",
     "phone": "609-847-3905",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/polistina_vincent_2021.jpg",
     "website": "https://polistina.senatenj.com/",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "3100 Hingston Ave. Suite 101, Egg Harbor Township, NJ 08234",
+    "districtPhone": "609-677-8266",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Vincent_J._Polistina",
+    "ballotpediaUrl": "https://ballotpedia.org/Vincent_Polistina"
   },
   {
     "id": "ocd-person/3d57728e-0da2-4df4-891e-9cc8e0e9b219",
@@ -1559,8 +1990,13 @@
     "party": "Democratic",
     "email": "asmkearney@njleg.org",
     "phone": "609-847-3905",
+    "photoUrl": "https://pub.njleg.gov/publications/members/kearney_vincent_2026.jpg",
     "website": "https://njleg.state.nj.us/legislative-roster/504/assemblyman-kearney",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "241 North Ave. West Suites 203 and 303, Westfield, NJ 07090",
+    "districtPhone": "908-516-2880",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Vincent_Kearney_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/Vincent_Kearney"
   },
   {
     "id": "ocd-person/08016f74-f5d6-4554-91b4-385fdbd558a7",
@@ -1572,9 +2008,12 @@
     "party": "Democratic",
     "email": "asmdeangelo@njleg.org",
     "phone": "609-847-3905",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/deangelo_color.jpg",
     "website": "https://www.assemblydems.com/174/Wayne-P-DeAngelo---District-14",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "The Shoppes at Nottingham Pointe 4621A Nottingham Way, Hamilton, NJ 08690",
+    "districtPhone": "609-631-7501",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Wayne_DeAngelo",
+    "ballotpediaUrl": "https://ballotpedia.org/Wayne_DeAngelo"
   },
   {
     "id": "ocd-person/d624fdfb-366e-41f1-83a7-2a8421350d3c",
@@ -1586,8 +2025,13 @@
     "party": "Democratic",
     "email": "asmsampson@njleg.org",
     "phone": "609-847-3905",
+    "photoUrl": "https://pub.njleg.gov/publications/members/sampson_william_b_2022_250.jpg",
     "website": "https://www.assemblydems.com/201/William-Sampson---District-31",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "25 W. 8th St., Bayonne, NJ 07002",
+    "districtPhone": "201-455-2966",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/William_Sampson_(politician)",
+    "ballotpediaUrl": "https://ballotpedia.org/William_Sampson"
   },
   {
     "id": "ocd-person/1e9cd368-349e-4ddc-a34d-8301d0ac4841",
@@ -1599,8 +2043,13 @@
     "party": "Democratic",
     "email": "asmmoen@njleg.org",
     "phone": "609-847-3905",
+    "photoUrl": "https://pub.njleg.gov/publications/members/moen_william_2019_250.jpg",
     "website": "https://www.assemblydems.com/163/William-F-Moen-Jr---District-5",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "208 White Horse Pike Suite 13, Barrington, NJ 08007",
+    "districtPhone": "856-547-4800",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/William_Moen",
+    "ballotpediaUrl": "https://ballotpedia.org/William_Moen_Jr."
   },
   {
     "id": "ocd-person/3d5d3c07-70ed-481a-91ba-a19fce581561",
@@ -1612,9 +2061,12 @@
     "party": "Democratic",
     "email": "asmspearman@njleg.org",
     "phone": "609-847-3905",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/spearman_william_2018a.jpg",
     "website": "https://www.assemblydems.com/162/William-W-Spearman---District-5",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "208 White Horse Pike Suite 13, Barrington, NJ 08007",
+    "districtPhone": "856-547-4800",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/William_Spearman",
+    "ballotpediaUrl": "https://ballotpedia.org/William_Spearman"
   },
   {
     "id": "ocd-person/a0d9e9ac-6ede-4e36-8c9e-f7bd83cc704a",
@@ -1626,8 +2078,11 @@
     "party": "Democratic",
     "email": "aswlopez@njleg.org",
     "phone": "609-847-3905",
-    "photoUrl": "https://www.njleg.state.nj.us/members/memberphotos/lopez_yvonne_2017.jpg",
     "website": "https://www.assemblydems.com/188/Yvonne-Lopez---District-19",
-    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625"
+    "office": "P.O. Box 068 State House, 145 W. State St., Trenton, NJ 08625",
+    "districtOffice": "211 Front St., Perth Amboy, NJ 08861",
+    "districtPhone": "732-638-5057",
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Yvonne_Lopez",
+    "ballotpediaUrl": "https://ballotpedia.org/Yvonne_Lopez"
   }
 ]
