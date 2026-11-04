@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { US_STATES } from '@/lib/constants';
 import { findBySlug, slugsForState } from '@/lib/state-legislator-slug';
 import { lowerChamberName } from '@/lib/chambers';
+import { committeesForPerson } from '@/lib/state-committees';
 import { StateLegislatorActivity } from '@/components/legislators/StateLegislatorActivity';
 import type { Official } from '@/lib/types';
 
@@ -90,12 +91,31 @@ export default async function StateLegislatorPage({ params }: PageProps) {
   const line = districtLine(official, state.name);
   const partyRule = /democrat/i.test(official.party) ? '#2B5CA8' : /republican/i.test(official.party) ? '#A8352B' : '#6E685C';
 
+  const seats = committeesForPerson(state.code, official.id);
   const sameChamber = slugsForState(state.code)
     .filter((e) => e.legislator.chamber === official.chamber && e.legislator.name !== official.name)
     .slice(0, 12);
 
+  // Person markup, so a search engine reads this as someone holding office
+  // rather than a page that happens to mention a name.
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: official.name,
+    jobTitle: line,
+    affiliation: { '@type': 'GovernmentOrganization', name: `${state.name} Legislature` },
+    ...(official.email ? { email: official.email } : {}),
+    ...(official.phone ? { telephone: official.phone } : {}),
+    ...(official.website ? { url: official.website } : {}),
+    ...(official.party ? { memberOf: { '@type': 'Organization', name: official.party } } : {}),
+  };
+
   return (
     <div className="max-w-5xl mx-auto px-4 py-10">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <nav aria-label="Breadcrumb" className="label mb-5">
         <Link href="/legislators" className="hover:underline">Legislators</Link>
         <span aria-hidden="true"> / </span>
@@ -153,6 +173,30 @@ export default async function StateLegislatorPage({ params }: PageProps) {
           </p>
         </div>
       </div>
+
+      {seats.length > 0 && (
+        <section className="mb-12">
+          <h2 className="label mb-4 border-t border-gray-900 dark:border-gray-600 pt-6">
+            Committees
+          </h2>
+          <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 max-w-[62ch]">
+            Committees are where most bills live or die, so a letter to a member of the committee hearing a bill
+            carries further than one to the floor at large.
+          </p>
+          <ul className="grid gap-x-8 gap-y-2.5 sm:grid-cols-2">
+            {seats.map(({ committee, role }) => (
+              <li key={committee.id} className="flex items-baseline gap-3">
+                {role ? (
+                  <span className="label-lg shrink-0 text-purple-700 dark:text-purple-300">{role}</span>
+                ) : (
+                  <span className="label shrink-0">Member</span>
+                )}
+                <span className="text-[15px] text-gray-900 dark:text-gray-100">{committee.name}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       <StateLegislatorActivity
         personId={official.id}

@@ -28,7 +28,12 @@ export default async function IssuesPage() {
     .eq('campaign_type', 'advocacy')
     .eq('is_official', true) // user-created campaigns are link-only, never listed
     .order('created_at', { ascending: false })
-    .limit(50);
+    // The whole library, not the newest 50. Every filter on this page runs in
+    // the browser over whatever arrives here, so a cap silently truncated the
+    // set the filters could see: with 79 live weigh-ins, the 29 oldest were
+    // invisible, and because the policy-level questions are all older than the
+    // bill-specific ones, "Policy" matched nothing at all and said so.
+    .limit(500);
 
   // Platform-wide social proof: total positions sent across all issues.
   const { data: totalsRows } = await admin

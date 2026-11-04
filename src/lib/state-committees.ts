@@ -74,3 +74,31 @@ export function getStateCommitteeRole(stateCode: string, committeeId: string, pe
 export function clearStateCommitteesCache(): void {
   cache.clear();
 }
+
+/** A committee seat, from the person's side rather than the committee's. */
+export interface CommitteeSeat {
+  committee: StateCommittee;
+  /** 'chair', 'vice chair', or null for an ordinary member. */
+  role: string | null;
+}
+
+/**
+ * Every committee a legislator sits on, leadership first.
+ *
+ * The data is stored committee-first (each carries its member list), which
+ * answers "who is on Commerce and Labor" but not "what does this person
+ * do" — the question a page about one legislator has to answer. 7,234 of the
+ * 7,359 legislators we hold sit on at least one.
+ */
+export function committeesForPerson(stateCode: string, personId: string): CommitteeSeat[] {
+  if (!personId) return [];
+  const RANK: Record<string, number> = { chair: 0, 'vice chair': 1 };
+  return loadState(stateCode)
+    .filter((c) => c.classification === 'committee' && c.members.includes(personId))
+    .map((committee) => ({ committee, role: committee.roles?.[personId] ?? null }))
+    .sort((a, b) => {
+      const ra = RANK[(a.role ?? '').toLowerCase()] ?? 2;
+      const rb = RANK[(b.role ?? '').toLowerCase()] ?? 2;
+      return ra - rb || a.committee.name.localeCompare(b.committee.name);
+    });
+}

@@ -43,3 +43,40 @@ describe('state legislator slugs', () => {
     expect(findBySlug('NV', 'not-a-real-person')).toBeNull();
   });
 });
+
+describe('committee seats on a legislator page', () => {
+  it('finds the committees a real legislator sits on', async () => {
+    const { committeesForPerson } = await import('@/lib/state-committees');
+    const { slugsForState } = await import('@/lib/state-legislator-slug');
+    const hansen = slugsForState('NV').find((e) => e.legislator.name === 'Alexis Hansen');
+    const seats = committeesForPerson('NV', hansen!.legislator.id);
+    expect(seats.length).toBeGreaterThan(0);
+    for (const s of seats) expect(s.committee.name.length).toBeGreaterThan(2);
+  });
+
+  it('puts chairs and vice chairs above ordinary members', async () => {
+    const { committeesForPerson } = await import('@/lib/state-committees');
+    const { getStateLegislators } = await import('@/lib/state-legislators');
+    // Find someone who chairs something, in whatever state has one first.
+    let found = false;
+    for (const code of ['NV', 'CA', 'TX', 'CO', 'CT']) {
+      for (const l of getStateLegislators(code)) {
+        const seats = committeesForPerson(code, l.id);
+        const roles = seats.map((s) => (s.role ?? '').toLowerCase());
+        if (roles.some((r) => r === 'chair') && roles.some((r) => r === '')) {
+          expect(roles.indexOf('chair')).toBeLessThan(roles.lastIndexOf(''));
+          found = true;
+          break;
+        }
+      }
+      if (found) break;
+    }
+    expect(found, 'no chair-and-member legislator found to check ordering').toBe(true);
+  });
+
+  it('returns nothing rather than throwing for an unknown person', async () => {
+    const { committeesForPerson } = await import('@/lib/state-committees');
+    expect(committeesForPerson('NV', 'ocd-person/does-not-exist')).toEqual([]);
+    expect(committeesForPerson('NV', '')).toEqual([]);
+  });
+});
