@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { DistrictHeatmap, type Boundaries, type DistrictCount } from './DistrictHeatmap';
+import { DistrictCartogram } from './DistrictCartogram';
 import nvSenate from '@/data/districts/nv-senate.json';
 import nvAssembly from '@/data/districts/nv-assembly.json';
 
@@ -25,6 +26,9 @@ export function SupporterMap({ slug }: { slug: string }) {
   const [data, setData] = useState<Summary | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [chamber, setChamber] = useState<'senate' | 'assembly'>('assembly');
+  // Tiles by default. On a real map of Nevada the Las Vegas districts are a
+  // few pixels wide, which is where most supporters actually are.
+  const [view, setView] = useState<'tiles' | 'map'>('tiles');
 
   useEffect(() => {
     let cancelled = false;
@@ -81,24 +85,42 @@ export function SupporterMap({ slug }: { slug: string }) {
             </span>
           )}
         </p>
-        <div className="inline-flex rounded-lg border border-gray-300 dark:border-gray-600 overflow-hidden text-sm">
-          {(['assembly', 'senate'] as const).map((c) => (
-            <button
-              key={c}
-              type="button"
-              onClick={() => setChamber(c)}
-              className={`px-3 py-1.5 ${chamber === c ? 'bg-purple-600 text-white' : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300'}`}
-            >
-              {c === 'senate' ? 'Senate' : lowerLabel}
-            </button>
-          ))}
+        <div className="flex items-center gap-2">
+          <div className="inline-flex rounded-lg border border-gray-300 dark:border-gray-600 overflow-hidden text-sm">
+            {(['assembly', 'senate'] as const).map((c) => (
+              <button
+                key={c}
+                type="button"
+                onClick={() => setChamber(c)}
+                className={`px-3 py-1.5 ${chamber === c ? 'bg-purple-600 text-white' : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300'}`}
+              >
+                {c === 'senate' ? 'Senate' : lowerLabel}
+              </button>
+            ))}
+          </div>
+          <div className="inline-flex rounded-lg border border-gray-300 dark:border-gray-600 overflow-hidden text-sm">
+            {(['tiles', 'map'] as const).map((v) => (
+              <button
+                key={v}
+                type="button"
+                onClick={() => setView(v)}
+                className={`px-3 py-1.5 ${view === v ? 'bg-gray-900 dark:bg-gray-200 text-white dark:text-gray-900' : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300'}`}
+              >
+                {v === 'tiles' ? 'Tiles' : 'Map'}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 
       <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_280px]">
         <div>
           {geo ? (
-            <DistrictHeatmap boundaries={chamber === 'senate' ? geo.senate : geo.assembly} counts={counts} chamberLabel={label} />
+            view === 'tiles' ? (
+              <DistrictCartogram boundaries={chamber === 'senate' ? geo.senate : geo.assembly} counts={counts} chamberLabel={label} />
+            ) : (
+              <DistrictHeatmap boundaries={chamber === 'senate' ? geo.senate : geo.assembly} counts={counts} chamberLabel={label} />
+            )
           ) : (
             <div className="p-4 rounded-xl bg-gray-50 dark:bg-gray-800 text-sm text-gray-600 dark:text-gray-300">
               District shapes for {data.primaryState ?? 'this state'} are not loaded yet, so the counts are listed
