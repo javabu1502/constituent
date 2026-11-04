@@ -14,6 +14,7 @@
  * one person's letters are consistent while the population varies.
  */
 import type { Official } from '@/lib/types';
+import { lowerChamberName } from '@/lib/chambers';
 import { salutationTitle } from '@/lib/utils';
 import { formatOriginalWordsBlock, type SupportedLanguage } from '@/lib/language';
 
@@ -172,6 +173,43 @@ export function validateCampaignAsk(
   return true;
 }
 
+/**
+ * "I'm a constituent", stated outright, for state legislators.
+ *
+ * Federal mail goes through CWC, which carries the sender's name and address
+ * in its own fields and verifies the address against the seat before it
+ * delivers. State mail has none of that: it arrives as ordinary email, and
+ * offices trade on constituency, so a letter that does not say it is read as
+ * though it might be from anywhere.
+ *
+ * Deterministic on purpose. The core prompt bans "I am writing to you as
+ * your constituent" as a stock phrase, because at volume one fixed opener is
+ * the bot fingerprint a legislator spots instantly. Asking the model for the
+ * claim would fight that rule and still leave it to chance. This line is
+ * ours, it is always present, and it carries the district number, which is
+ * the part an office can actually check.
+ *
+ * The official was matched to this sender by their own address, so the
+ * official's district is the sender's district.
+ */
+export function constituentLine(
+  official: Official,
+  city: string,
+  stateCode: string,
+): string | null {
+  if (official.level !== 'state') return null;
+  const district = (official.district || '').trim();
+  if (district) {
+    const chamber =
+      official.chamber === 'upper'
+        ? 'Senate'
+        : lowerChamberName(official.state || stateCode);
+    const label = /^\d+$/.test(district) ? `District ${district}` : district;
+    return `I am a constituent in ${chamber} ${label}.`;
+  }
+  return city ? `I am a constituent in ${city}, ${stateCode}.` : 'I am a constituent in your district.';
+}
+
 export function buildEnvelope(
   core: string,
   official: Official,
@@ -266,11 +304,19 @@ export function buildEnvelope(
   // The core is the constituent's approved text and is NEVER altered; the
   // frame (subject, opener, closer) is ours to scrub.
   const originalBlock = opts.originalWords?.text?.trim() ? `\n\n${formatOriginalWordsBlock(opts.originalWords)}` : '';
+  // Sits between the greeting and the opener so it is the first thing read,
+  // which is how an office triages. Absent for every non-state official, and
+  // absent on CWC-bound drafts (signature === false): those chambers carry
+  // the address in their own fields, ask that it not appear in the text, and
+  // verify constituency against the seat before delivering, so the claim is
+  // both redundant and against the rules there.
+  const claim = opts.signature === false ? null : constituentLine(official, opts.city, opts.stateCode);
+  const intro = claim ? `${claim}\n\n` : '';
   return {
     subject: stripDashes(subject),
     body:
       opts.signature === false
-        ? `Dear ${sal} ${lastName},\n\n${stripDashes(opener)}\n\n${core}\n\n${stripDashes(closer)}${originalBlock}`
-        : `Dear ${sal} ${lastName},\n\n${stripDashes(opener)}\n\n${core}\n\n${stripDashes(closer)}${originalBlock}\n\nSincerely,\n${opts.senderName}\n${opts.city}, ${opts.stateCode} ${opts.zip}`,
+        ? `Dear ${sal} ${lastName},\n\n${intro}${stripDashes(opener)}\n\n${core}\n\n${stripDashes(closer)}${originalBlock}`
+        : `Dear ${sal} ${lastName},\n\n${intro}${stripDashes(opener)}\n\n${core}\n\n${stripDashes(closer)}${originalBlock}\n\nSincerely,\n${opts.senderName}\n${opts.city}, ${opts.stateCode} ${opts.zip}`,
   };
 }

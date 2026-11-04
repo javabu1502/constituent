@@ -31,7 +31,14 @@ describe('envelope variance', () => {
   it('different senders draw different pooled frames (no single template)', () => {
     const senders = ['Ana Lopez', 'Bill Chen', 'Cara Jones', 'Dev Patel', 'Eve Kim', 'Frank Moore', 'Gia Russo', 'Hank Webb', 'Iris Cole', 'Jay Ford'];
     const openers = new Set(
-      senders.map((s) => buildEnvelope('CORE', rep, { ...baseOpts, senderName: s }).body.split('\n\n')[1])
+      // Pick the opener by what it is not, rather than by position: the
+      // greeting and the state-legislator constituent line both precede it.
+      senders.map(
+        (s) =>
+          buildEnvelope('CORE', rep, { ...baseOpts, senderName: s })
+            .body.split('\n\n')
+            .filter((para) => !para.startsWith('Dear ') && !para.startsWith('I am a constituent'))[0],
+      )
     );
     // Ten senders must not share one opener; the pool guarantees spread.
     expect(openers.size).toBeGreaterThanOrEqual(3);
