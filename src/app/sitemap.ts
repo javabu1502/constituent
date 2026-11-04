@@ -2,6 +2,7 @@ import type { MetadataRoute } from 'next';
 import { createAdminClient } from '@/lib/supabase';
 import { US_STATES } from '@/lib/constants';
 import { getAllFederalLegislators } from '@/lib/legislators';
+import { POLICY_TOPICS } from '@/lib/policy-topics';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://www.mydemocracy.app';
@@ -13,6 +14,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/trends`, changeFrequency: 'daily', priority: 0.8 },
     { url: `${baseUrl}/vote`, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${baseUrl}/issues`, changeFrequency: 'daily', priority: 0.8 },
+    // One address per policy topic. /issues alone is a single URL behind a
+    // client-side filter, so a search for "gun bills in congress" had nowhere
+    // specific to land.
+    ...POLICY_TOPICS.filter((t) => t.slug !== 'other').map((t) => ({
+      url: `${baseUrl}/issues/${t.slug}`,
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
+    })),
     { url: `${baseUrl}/campaigns`, changeFrequency: 'weekly', priority: 0.6 },
     { url: `${baseUrl}/contact`, changeFrequency: 'monthly', priority: 0.9 },
     { url: `${baseUrl}/about`, changeFrequency: 'monthly', priority: 0.5 },

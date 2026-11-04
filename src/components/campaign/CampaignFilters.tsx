@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { topicFor, topicsPresentIn } from '@/lib/policy-topics';
 
 interface Campaign {
   id: string;
@@ -62,14 +63,19 @@ function billRef(c: Campaign): string | null {
 }
 
 export function CampaignFilters({ campaigns }: { campaigns: Campaign[] }) {
+  // A topic slug, not a raw issue_area. The two are not the same thing:
+  // issue_area is whatever the campaign's creator typed.
   const [activeIssue, setActiveIssue] = useState<string | null>(null);
   const [kind, setKind] = useState<'all' | 'legislation' | 'policy'>('all');
   const [level, setLevel] = useState<'all' | 'federal' | 'state'>('all');
   const [stateFilter, setStateFilter] = useState<string | null>(null);
   const [sort, setSort] = useState<'recent' | 'popular'>('recent');
 
-  // Extract unique issue areas
-  const issueAreas = Array.from(new Set(campaigns.map((c) => c.issue_area))).sort();
+  // Topics, not raw labels. Building the list from the distinct issue_area
+  // values gave 30 options for 79 weigh-ins, with healthcare and Health as
+  // separate choices and technology split three ways, so picking one hid
+  // most of the thing you asked for.
+  const issueTopics = topicsPresentIn(campaigns.map((c) => c.issue_area));
 
   // States that actually have campaigns, for the state dropdown.
   const statesWithCampaigns = Array.from(
@@ -82,7 +88,7 @@ export function CampaignFilters({ campaigns }: { campaigns: Campaign[] }) {
   // matches on bill_state.
   const isBill = (c: Campaign) => !!c.is_bill_specific || !!c.bill_ref;
   const filtered = campaigns.filter((c) => {
-    if (activeIssue && c.issue_area !== activeIssue) return false;
+    if (activeIssue && topicFor(c.issue_area).slug !== activeIssue) return false;
     if (kind === 'legislation' && !isBill(c)) return false;
     if (kind === 'policy' && isBill(c)) return false;
     if (level === 'federal' && !(c.target_level === 'federal' || c.target_level === 'both')) return false;
@@ -112,8 +118,8 @@ export function CampaignFilters({ campaigns }: { campaigns: Campaign[] }) {
             className="w-full sm:w-auto sm:min-w-[240px] px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg bg-surface dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-purple-600"
           >
             <option value="">All topics</option>
-            {issueAreas.map((area) => (
-              <option key={area} value={area}>{area}</option>
+            {issueTopics.map((t) => (
+              <option key={t.slug} value={t.slug}>{t.label}</option>
             ))}
           </select>
         </div>
@@ -190,7 +196,7 @@ export function CampaignFilters({ campaigns }: { campaigns: Campaign[] }) {
       {/* Results count */}
       <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">
         {sorted.length} issue{sorted.length !== 1 ? 's' : ''}
-        {activeIssue ? ` in ${activeIssue}` : ''}
+        {activeIssue ? ` in ${issueTopics.find((t) => t.slug === activeIssue)?.label ?? activeIssue}` : ''}
       </p>
 
       {/* Grid */}
@@ -219,7 +225,7 @@ export function CampaignFilters({ campaigns }: { campaigns: Campaign[] }) {
               <div className="flex items-start justify-between mb-3 gap-2">
                 <span className="flex flex-wrap items-center gap-1.5 min-w-0">
                   <span className="px-2.5 py-1 text-xs font-medium rounded-full bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300 max-w-[11rem] truncate">
-                    {campaign.issue_area}
+                    {topicFor(campaign.issue_area).label}
                   </span>
                   {levelTag(campaign) && (
                     <span className="px-2 py-1 text-xs font-semibold rounded-full bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300 shrink-0">
