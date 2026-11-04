@@ -3,6 +3,7 @@ import { createAdminClient } from '@/lib/supabase';
 import { US_STATES } from '@/lib/constants';
 import { getAllFederalLegislators } from '@/lib/legislators';
 import { POLICY_TOPICS } from '@/lib/policy-topics';
+import { slugsForState } from '@/lib/state-legislator-slug';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://www.mydemocracy.app';
@@ -124,6 +125,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
+  // Every state legislator gets an address. This is the largest surface the
+  // site has: 7,000-odd people that nothing else covers well, against the 537
+  // in Congress who are covered everywhere. The pages render on demand, so
+  // this listing is how they get found at all.
+  const stateLegislatorPages: MetadataRoute.Sitemap = US_STATES.flatMap((s) => {
+    const stateSlug = s.name.toLowerCase().replace(/\s+/g, '-');
+    return slugsForState(s.code).map((e) => ({
+      url: `${baseUrl}/legislators/${stateSlug}/${e.slug}`,
+      changeFrequency: 'monthly' as const,
+      priority: 0.5,
+    }));
+  });
+
   // /vote/[state] SEO redirect pages
   const voteStatePages: MetadataRoute.Sitemap = US_STATES.map((s) => ({
     url: `${baseUrl}/vote/${s.name.toLowerCase().replace(/\s+/g, '-')}`,
@@ -131,5 +145,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
-  return [...staticPages, ...statesIndexPage, ...stateHubPages, ...voteStatePages, ...statePages, ...repPages, ...campaignPages];
+  return [
+    ...staticPages,
+    ...statesIndexPage,
+    ...stateHubPages,
+    ...voteStatePages,
+    ...statePages,
+    ...repPages,
+    ...campaignPages,
+    ...stateLegislatorPages,
+  ];
 }

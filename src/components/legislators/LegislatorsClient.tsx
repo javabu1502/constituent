@@ -8,6 +8,7 @@ import { US_STATES } from '@/lib/constants';
 import { PARTY_COLORS, DEFAULT_PARTY_COLOR } from '@/lib/constants';
 import type { Official, LocalOfficial, FeedBill, RepVote, RepNewsArticle, BillAction } from '@/lib/types';
 import { AddressAutocomplete, type ParsedAddress } from '@/components/ui/AddressAutocomplete';
+import { nameSlug } from '@/lib/utils';
 import { useTurnstile } from '@/components/ui/Turnstile';
 
 type ActivityTab = 'legislation' | 'votes' | 'news';
@@ -300,6 +301,8 @@ function LegislatorActivity({ personId, state, chamber, name }: { personId: stri
 
 function LegislatorCard({ legislator, state }: { legislator: Official; state: string }) {
   const [expanded, setExpanded] = useState(false);
+  // `state` here is the two-letter code; the page URL uses the name slug.
+  const stateSlug = (US_STATES.find((s) => s.code === state)?.name ?? state).toLowerCase().replace(/\s+/g, '-');
   const partyColor = PARTY_COLORS[legislator.party] ?? DEFAULT_PARTY_COLOR;
 
   return (
@@ -336,12 +339,25 @@ function LegislatorCard({ legislator, state }: { legislator: Official; state: st
       </button>
 
       {expanded && (
-        <LegislatorActivity
-          personId={legislator.id}
-          state={state}
-          chamber={legislator.chamber || ''}
-          name={legislator.name}
-        />
+        <>
+          {/* The roster used to be a dead end: it could expand activity, but
+              there was nowhere to send someone, and nothing for a search to
+              find. Each legislator now has a page. */}
+          <div className="px-4 pb-3">
+            <Link
+              href={`/legislators/${stateSlug}/${nameSlug(legislator.name)}`}
+              className="label-lg inline-block text-purple-700 dark:text-purple-300 hover:underline"
+            >
+              {legislator.name}&apos;s page &rarr;
+            </Link>
+          </div>
+          <LegislatorActivity
+            personId={legislator.id}
+            state={state}
+            chamber={legislator.chamber || ''}
+            name={legislator.name}
+          />
+        </>
       )}
     </div>
   );

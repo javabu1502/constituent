@@ -123,3 +123,21 @@ export function debounce<T extends (...args: Parameters<T>) => void>(
     timeout = setTimeout(() => func(...args), wait);
   };
 }
+
+/**
+ * A legislator's name as a URL segment, for /legislators/<state>/<person>.
+ *
+ * Lives here rather than beside the lookup, because the lookup reads the
+ * roster off disk with `fs` and the roster list is a client component: one
+ * import of that module from the browser bundle fails the build with
+ * "Can't resolve 'fs'".
+ */
+export function nameSlug(name: string): string {
+  return name
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '');
+}
