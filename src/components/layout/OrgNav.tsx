@@ -17,6 +17,7 @@ import { usePathname } from 'next/navigation';
  */
 export const ORG_NAV = [
   { href: '/dashboard', label: 'Campaigns' },
+  { href: '/dashboard/supporters', label: 'Supporters' },
   { href: '/dashboard/report', label: 'Reports' },
   { href: '/dashboard/settings', label: 'Settings' },
 ] as const;
