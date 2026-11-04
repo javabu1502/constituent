@@ -322,33 +322,70 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Start a Campaign CTA */}
-      <section className="py-16 sm:py-20 px-4 bg-gray-50 dark:bg-gray-800">
-        <div className="max-w-3xl mx-auto text-center">
-          <div className="w-16 h-16 bg-purple-100 dark:bg-purple-900 rounded-2xl flex items-center justify-center mx-auto mb-6">
-            <svg className="w-8 h-8 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" />
-            </svg>
-          </div>
-          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-4">
-            Campaigns: Rally Others Around Your Issue
+      {/* For advocacy organizations */}
+      {/*
+        Campaign creation has always been gated to organization accounts: an
+        individual who clicks through gets an explainer, not the form. This
+        section used to invite everyone to "Start a Campaign" anyway, which
+        walked constituents into that wall. It now says who campaigns are for
+        before the click, and gives individuals the thing that is actually
+        theirs to do.
+      */}
+      <section className="py-16 sm:py-20 px-4 bg-gray-900 dark:bg-gray-800 text-white on-ink">
+        <div className="max-w-4xl mx-auto">
+          <p className="label mb-3">For advocacy organizations</p>
+          <h2 className="text-4xl sm:text-5xl font-extrabold tracking-tighter leading-[0.98] mb-5 max-w-[18ch]">
+            Run a campaign your supporters can actually finish.
           </h2>
-          <p className="text-gray-600 dark:text-gray-300 mb-8 max-w-xl mx-auto leading-relaxed">
-            Join a campaign and contact your representatives, or create a shareable page
-            so your supporters can write to theirs, each person in their own words.
+          <p className="text-lg leading-relaxed text-gray-200 mb-8 max-w-[60ch]">
+            Nonprofits, advocacy groups and civic organizations create a campaign page and share one link. Every
+            supporter writes their own letter, in their own words, to their own representatives. You see where they
+            live, by legislative district.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/campaigns">
-              <Button size="lg" className="text-lg px-8 py-4">
-                Browse Campaigns
-              </Button>
+
+          <div className="grid sm:grid-cols-3 gap-6 mb-10">
+            <div>
+              <p className="label mb-2">One link</p>
+              <p className="text-sm leading-relaxed text-gray-200">
+                Share it anywhere, or embed the form on your own site.
+              </p>
+            </div>
+            <div>
+              <p className="label mb-2">Real letters</p>
+              <p className="text-sm leading-relaxed text-gray-200">
+                Each one personal and routed to that person&apos;s own officials, never a form letter.
+              </p>
+            </div>
+            <div>
+              <p className="label mb-2">Your districts</p>
+              <p className="text-sm leading-relaxed text-gray-200">
+                See which Senate and Assembly districts your supporters are in.
+              </p>
+            </div>
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-3">
+            <Link
+              href="/campaigns#apply"
+              className="label-lg px-6 py-3.5 bg-purple-600 hover:bg-purple-500 text-white text-center transition-colors"
+            >
+              Apply for an org account
             </Link>
-            <Link href="/campaign/create">
-              <Button variant="secondary" size="lg" className="text-lg px-8 py-4">
-                Start a Campaign
-              </Button>
+            <Link
+              href="/campaigns"
+              className="label-lg px-6 py-3.5 border border-white/40 hover:bg-white/10 text-white text-center transition-colors"
+            >
+              Browse campaigns
             </Link>
           </div>
+
+          <p className="mt-8 pt-6 border-t border-white/20 text-sm text-gray-300">
+            Not with an organization? Weighing in on an issue or{' '}
+            <Link href="/contact" className="underline underline-offset-2 hover:no-underline">
+              writing to your own officials
+            </Link>{' '}
+            takes about two minutes, and needs no account.
+          </p>
         </div>
       </section>
 
