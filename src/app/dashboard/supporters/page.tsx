@@ -6,6 +6,7 @@ import { createAdminClient } from '@/lib/supabase';
 import { SupporterMap } from '@/components/org/SupporterMap';
 import { EmbedSnippet } from '@/components/org/EmbedSnippet';
 import { slugCandidates } from '@/lib/org-slug';
+import { mapEmbedToken } from '@/lib/org-embed-token';
 
 export const metadata: Metadata = { title: 'Your supporters | My Democracy', robots: { index: false } };
 
@@ -63,6 +64,8 @@ export default async function DashboardSupportersPage() {
     );
   }
 
+  const mapPath = `/embed/org/${slug}/map?t=${mapEmbedToken(slug)}`;
+
   return (
     <div className="max-w-5xl mx-auto px-4 py-10">
       <p className="label mb-3">Supporters</p>
@@ -70,8 +73,8 @@ export default async function DashboardSupportersPage() {
         Who you can call on, and where.
       </h1>
       <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300 max-w-[62ch] mb-10">
-        People who joined {orgName} without needing to send a letter first. Every district is one tile, so a Las Vegas
-        district reads as clearly as a rural one.
+        Everyone who joined {orgName}, took an action on one of your campaigns, or shared their story with you,
+        counted once.
       </p>
 
       <section className="mb-14">
@@ -91,12 +94,21 @@ export default async function DashboardSupportersPage() {
         </Link>
       </section>
 
-      <section>
+      <section className="mb-14">
         <h2 className="label mb-3 border-t border-gray-900 dark:border-gray-600 pt-6">Put the form on your own site</h2>
         <p className="text-sm text-gray-700 dark:text-gray-300 mb-4 max-w-[62ch]">
           Paste this where you want the form to appear. It resizes itself to fit.
         </p>
         <EmbedSnippet slug={slug} />
+      </section>
+
+      <section>
+        <h2 className="label mb-3 border-t border-gray-900 dark:border-gray-600 pt-6">Put the map on your own site</h2>
+        <p className="text-sm text-gray-700 dark:text-gray-300 mb-4 max-w-[62ch]">
+          The same map as above, for a supporters or campaign page. It shows district and city counts only, never
+          anyone&rsquo;s name or address. The link carries a key, so the map stays private until you publish it.
+        </p>
+        <EmbedSnippet slug={slug} path={mapPath} title={`${orgName} supporters`} minHeight={520} />
       </section>
     </div>
   );

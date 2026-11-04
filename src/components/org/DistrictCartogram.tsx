@@ -107,7 +107,7 @@ export function DistrictCartogram({
             ? `District ${active.district}: ${active.count} supporter${active.count === 1 ? '' : 's'}${active.legislatorName ? ` · ${active.legislatorName}` : ''}`
             : hover
               ? `District ${hover}: no supporters yet`
-              : 'Every district is one tile, so a city district is as readable as a rural one.'}
+              : 'Each tile is one district. Hover for the count.'}
         </p>
       </div>
     </div>

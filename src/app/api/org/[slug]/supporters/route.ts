@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase';
 import { getStateLegislators } from '@/lib/state-legislators';
+import { collectSupporters, type SupporterSource } from '@/lib/org-supporters';
+import { verifyMapEmbedToken } from '@/lib/org-embed-token';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -13,22 +15,27 @@ export interface DistrictCount {
   legislatorParty: string | null;
 }
 
-/**
- * GET /api/org/[slug]/supporters — district counts for the heatmap.
- *
- * Aggregate only. The org sees how many supporters sit in each district and
- * who represents it; it does not get names, emails or addresses from this
- * route. Exporting the list is a separate, consent-governed act.
- *
- * Owner only: a supporter list is the thing an org is building, and a public
- * endpoint would hand a rival (or a legislator's office) its strength map.
- */
-export async function GET(_req: Request, { params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
+export interface PlaceCount {
+  place: string;
+  count: number;
+}
 
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) return NextResponse.json({ error: 'Sign in to view this' }, { status: 401 });
+/**
+ * GET /api/org/[slug]/supporters — the org's supporter rollup for the heatmap.
+ *
+ * A supporter is anyone who joined through the form, took an action on one of
+ * the org's campaigns, or shared a story with it, counted once. See
+ * lib/org-supporters.ts for how identity and consent are handled.
+ *
+ * Aggregate only. Counts per district and per city, never names, emails or
+ * addresses. Exporting the list is a separate, consent-governed act.
+ *
+ * Two ways in: the owner's session, or a signed token for a map the org has
+ * chosen to embed on its own site. A slug alone is not enough.
+ */
+export async function GET(req: Request, { params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const token = new URL(req.url).searchParams.get('t');
 
   const admin = createAdminClient();
   const { data: org } = await admin
@@ -38,34 +45,44 @@ export async function GET(_req: Request, { params }: { params: Promise<{ slug: s
     .eq('account_type', 'organization')
     .maybeSingle();
   if (!org) return NextResponse.json({ error: 'Organization not found' }, { status: 404 });
-  if (org.user_id !== user.id) return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
 
-  const { data: rows, error } = await admin
-    .from('org_supporters')
-    .select('state_upper_district, state_lower_district, state, district_resolved')
-    .eq('org_user_id', org.user_id)
-    .is('unsubscribed_at', null);
-  if (error) {
-    console.error('[org/supporters] fetch failed:', error);
+  const viaToken = verifyMapEmbedToken(slug, token);
+  if (!viaToken) {
+    const supabase = await createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) return NextResponse.json({ error: 'Sign in to view this' }, { status: 401 });
+    if (org.user_id !== user.id) return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+  }
+
+  let rollup;
+  try {
+    rollup = await collectSupporters(admin, org.user_id);
+  } catch (e) {
+    console.error('[org/supporters] fetch failed:', e);
     return NextResponse.json({ error: 'Could not load supporters' }, { status: 500 });
   }
 
-  const all = rows ?? [];
+  const { supporters, anonymousActions, anonymousStories } = rollup;
+
   const upper = new Map<string, number>();
   const lower = new Map<string, number>();
   const states = new Map<string, number>();
-  let unplaced = 0;
-  for (const r of all) {
-    const st = (r.state as string | null)?.toUpperCase() ?? null;
-    if (st) states.set(st, (states.get(st) ?? 0) + 1);
-    if (!r.district_resolved) {
-      unplaced++;
-      continue;
+  const places = new Map<string, number>();
+  const sources: Record<SupporterSource, number> = { joined: 0, acted: 0, shared: 0 };
+  let mapped = 0;
+
+  for (const s of supporters) {
+    for (const src of s.sources) sources[src]++;
+    if (s.state) states.set(s.state, (states.get(s.state) ?? 0) + 1);
+    if (s.city) {
+      const key = s.state ? `${s.city}, ${s.state}` : s.city;
+      places.set(key, (places.get(key) ?? 0) + 1);
     }
-    const u = r.state_upper_district as string | null;
-    const l = r.state_lower_district as string | null;
-    if (u) upper.set(u, (upper.get(u) ?? 0) + 1);
-    if (l) lower.set(l, (lower.get(l) ?? 0) + 1);
+    if (s.upperDistrict || s.lowerDistrict) {
+      mapped++;
+      if (s.upperDistrict) upper.set(s.upperDistrict, (upper.get(s.upperDistrict) ?? 0) + 1);
+      if (s.lowerDistrict) lower.set(s.lowerDistrict, (lower.get(s.lowerDistrict) ?? 0) + 1);
+    }
   }
 
   // The state the org actually organizes in: the one most of its supporters
@@ -86,11 +103,23 @@ export async function GET(_req: Request, { params }: { params: Promise<{ slug: s
       .map(([district, count]) => ({ district, count, ...nameFor(chamber, district) }))
       .sort((a, b) => b.count - a.count || Number(a.district) - Number(b.district));
 
+  const cities: PlaceCount[] = [...places.entries()]
+    .map(([place, count]) => ({ place, count }))
+    .sort((a, b) => b.count - a.count || a.place.localeCompare(b.place));
+
   return NextResponse.json({
     orgName: org.org_name ?? null,
-    total: all.length,
-    unplaced,
+    total: supporters.length,
+    sources,
+    /** Placed in a district. Only the join form collects a street address. */
+    mapped,
+    /** Counted as supporters but with no district to sit in. */
+    unplaced: supporters.length - mapped,
+    /** Real actions and stories that carry no contact detail to tie to a person. */
+    anonymousActions,
+    anonymousStories,
     primaryState,
+    cities,
     senate: shape(upper, 'upper'),
     assembly: shape(lower, 'lower'),
   });
