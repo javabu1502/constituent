@@ -56,3 +56,6 @@ docs/Jared Shared Resources/
 
 # Scratch scripts from audit sessions, never committed
 scripts/_*.tmp.*
+
+# Regenerable audit output (per-legislator rows, ~3.5MB)
+src/data/state-contact-form-audit.json

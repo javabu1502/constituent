@@ -1,0 +1,4442 @@
+{
+ "generatedAt": "2026-11-04T02:34:38.553Z",
+ "method": "http+html",
+ "total": 7344,
+ "byState": {
+  "NH": {
+   "total": 418,
+   "reachable": 418,
+   "unreachable": 0,
+   "withForm": 1,
+   "captchaFree": 1,
+   "captcha": 0,
+   "jsHeavy": 0,
+   "formRateOfReachable": 0
+  },
+  "GA": {
+   "total": 232,
+   "reachable": 138,
+   "unreachable": 94,
+   "withForm": 0,
+   "captchaFree": 0,
+   "captcha": 0,
+   "jsHeavy": 138,
+   "formRateOfReachable": 0
+  },
+  "IL": {
+   "total": 177,
+   "reachable": 14,
+   "unreachable": 163,
+   "withForm": 0,
+   "captchaFree": 0,
+   "captcha": 0,
+   "jsHeavy": 0,
+   "formRateOfReachable": 0
+  },
+  "MO": {
+   "total": 192,
+   "reachable": 171,
+   "unreachable": 21,
+   "withForm": 0,
+   "captchaFree": 0,
+   "captcha": 0,
+   "jsHeavy": 0,
+   "formRateOfReachable": 0
+  },
+  "MS": {
+   "total": 173,
+   "reachable": 173,
+   "unreachable": 0,
+   "withForm": 0,
+   "captchaFree": 0,
+   "captcha": 0,
+   "jsHeavy": 0,
+   "formRateOfReachable": 0
+  },
+  "NC": {
+   "total": 170,
+   "reachable": 166,
+   "unreachable": 4,
+   "withForm": 1,
+   "captchaFree": 0,
+   "captcha": 1,
+   "jsHeavy": 0,
+   "formRateOfReachable": 1
+  },
+  "KS": {
+   "total": 165,
+   "reachable": 164,
+   "unreachable": 1,
+   "withForm": 1,
+   "captchaFree": 0,
+   "captcha": 1,
+   "jsHeavy": 0,
+   "formRateOfReachable": 1
+  },
+  "VT": {
+   "total": 180,
+   "reachable": 176,
+   "unreachable": 4,
+   "withForm": 0,
+   "captchaFree": 0,
+   "captcha": 0,
+   "jsHeavy": 0,
+   "formRateOfReachable": 0
+  },
+  "MD": {
+   "total": 188,
+   "reachable": 188,
+   "unreachable": 0,
+   "withForm": 0,
+   "captchaFree": 0,
+   "captcha": 0,
+   "jsHeavy": 0,
+   "formRateOfReachable": 0
+  },
+  "MA": {
+   "total": 197,
+   "reachable": 196,
+   "unreachable": 1,
+   "withForm": 0,
+   "captchaFree": 0,
+   "captcha": 0,
+   "jsHeavy": 0,
+   "formRateOfReachable": 0
+  },
+  "ME": {
+   "total": 186,
+   "reachable": 185,
+   "unreachable": 1,
+   "withForm": 30,
+   "captchaFree": 30,
+   "captcha": 0,
+   "jsHeavy": 0,
+   "formRateOfReachable": 16
+  },
+  "KY": {
+   "total": 138,
+   "reachable": 138,
+   "unreachable": 0,
+   "withForm": 0,
+   "captchaFree": 0,
+   "captcha": 0,
+   "jsHeavy": 0,
+   "formRateOfReachable": 0
+  },
+  "ND": {
+   "total": 141,
+   "reachable": 141,
+   "unreachable": 0,
+   "withForm": 0,
+   "captchaFree": 0,
+   "captcha": 0,
+   "jsHeavy": 0,
+   "formRateOfReachable": 0
+  },
+  "PA": {
+   "total": 248,
+   "reachable": 246,
+   "unreachable": 2,
+   "withForm": 1,
+   "captchaFree": 0,
+   "captcha": 1,
+   "jsHeavy": 0,
+   "formRateOfReachable": 0
+  },
+  "SC": {
+   "total": 170,
+   "reachable": 170,
+   "unreachable": 0,
+   "withForm": 0,
+   "captchaFree": 0,
+   "captcha": 0,
+   "jsHeavy": 0,
+   "formRateOfReachable": 0
+  },
+  "NY": {
+   "total": 213,
+   "reachable": 153,
+   "unreachable": 60,
+   "withForm": 46,
+   "captchaFree": 0,
+   "captcha": 46,
+   "jsHeavy": 0,
+   "formRateOfReachable": 30
+  },
+  "TN": {
+   "total": 132,
+   "reachable": 132,
+   "unreachable": 0,
+   "withForm": 0,
+   "captchaFree": 0,
+   "captcha": 0,
+   "jsHeavy": 0,
+   "formRateOfReachable": 0
+  },
+  "TX": {
+   "total": 179,
+   "reachable": 179,
+   "unreachable": 0,
+   "withForm": 177,
+   "captchaFree": 22,
+   "captcha": 155,
+   "jsHeavy": 0,
+   "formRateOfReachable": 99
+  },
+  "AL": {
+   "total": 131,
+   "reachable": 131,
+   "unreachable": 0,
+   "withForm": 0,
+   "captchaFree": 0,
+   "captcha": 0,
+   "jsHeavy": 0,
+   "formRateOfReachable": 0
+  },
+  "MN": {
+   "total": 201,
+   "reachable": 200,
+   "unreachable": 1,
+   "withForm": 1,
+   "captchaFree": 0,
+   "captcha": 1,
+   "jsHeavy": 0,
+   "formRateOfReachable": 1
+  },
+  "WI": {
+   "total": 132,
+   "reachable": 132,
+   "unreachable": 0,
+   "withForm": 0,
+   "captchaFree": 0,
+   "captcha": 0,
+   "jsHeavy": 0,
+   "formRateOfReachable": 0
+  },
+  "AR": {
+   "total": 133,
+   "reachable": 133,
+   "unreachable": 0,
+   "withForm": 0,
+   "captchaFree": 0,
+   "captcha": 0,
+   "jsHeavy": 0,
+   "formRateOfReachable": 0
+  },
+  "NM": {
+   "total": 112,
+   "reachable": 111,
+   "unreachable": 1,
+   "withForm": 0,
+   "captchaFree": 0,
+   "captcha": 0,
+   "jsHeavy": 0,
+   "formRateOfReachable": 0
+  },
+  "LA": {
+   "total": 138,
+   "reachable": 138,
+   "unreachable": 0,
+   "withForm": 0,
+   "captchaFree": 0,
+   "captcha": 0,
+   "jsHeavy": 0,
+   "formRateOfReachable": 0
+  },
+  "ID": {
+   "total": 105,
+   "reachable": 103,
+   "unreachable": 2,
+   "withForm": 0,
+   "captchaFree": 0,
+   "captcha": 0,
+   "jsHeavy": 0,
+   "formRateOfReachable": 0
+  },
+  "SD": {
+   "total": 105,
+   "reachable": 103,
+   "unreachable": 2,
+   "withForm": 0,
+   "captchaFree": 0,
+   "captcha": 0,
+   "jsHeavy": 103,
+   "formRateOfReachable": 0
+  },
+  "RI": {
+   "total": 113,
+   "reachable": 92,
+   "unreachable": 21,
+   "withForm": 1,
+   "captchaFree": 0,
+   "captcha": 1,
+   "jsHeavy": 0,
+   "formRateOfReachable": 1
+  },
+  "FL": {
+   "total": 156,
+   "reachable": 156,
+   "unreachable": 0,
+   "withForm": 23,
+   "captchaFree": 23,
+   "captcha": 0,
+   "jsHeavy": 0,
+   "formRateOfReachable": 15
+  },
+  "CO": {
+   "total": 99,
+   "reachable": 98,
+   "unreachable": 1,
+   "withForm": 0,
+   "captchaFree": 0,
+   "captcha": 0,
+   "jsHeavy": 0,
+   "formRateOfReachable": 0
+  },
+  "VA": {
+   "total": 139,
+   "reachable": 137,
+   "unreachable": 2,
+   "withForm": 97,
+   "captchaFree": 0,
+   "captcha": 97,
+   "jsHeavy": 0,
+   "formRateOfReachable": 71
+  },
+  "OK": {
+   "total": 146,
+   "reachable": 69,
+   "unreachable": 77,
+   "withForm": 0,
+   "captchaFree": 0,
+   "captcha": 0,
+   "jsHeavy": 48,
+   "formRateOfReachable": 0
+  },
+  "MT": {
+   "total": 150,
+   "reachable": 149,
+   "unreachable": 1,
+   "withForm": 0,
+   "captchaFree": 0,
+   "captcha": 0,
+   "jsHeavy": 46,
+   "formRateOfReachable": 0
+  },
+  "CT": {
+   "total": 187,
+   "reachable": 187,
+   "unreachable": 0,
+   "withForm": 20,
+   "captchaFree": 12,
+   "captcha": 8,
+   "jsHeavy": 0,
+   "formRateOfReachable": 11
+  },
+  "AZ": {
+   "total": 90,
+   "reachable": 90,
+   "unreachable": 0,
+   "withForm": 0,
+   "captchaFree": 0,
+   "captcha": 0,
+   "jsHeavy": 0,
+   "formRateOfReachable": 0
+  },
+  "OR": {
+   "total": 90,
+   "reachable": 90,
+   "unreachable": 0,
+   "withForm": 0,
+   "captchaFree": 0,
+   "captcha": 0,
+   "jsHeavy": 0,
+   "formRateOfReachable": 0
+  },
+  "OH": {
+   "total": 132,
+   "reachable": 113,
+   "unreachable": 19,
+   "withForm": 113,
+   "captchaFree": 0,
+   "captcha": 113,
+   "jsHeavy": 0,
+   "formRateOfReachable": 100
+  },
+  "WV": {
+   "total": 133,
+   "reachable": 86,
+   "unreachable": 47,
+   "withForm": 0,
+   "captchaFree": 0,
+   "captcha": 0,
+   "jsHeavy": 0,
+   "formRateOfReachable": 0
+  },
+  "WA": {
+   "total": 147,
+   "reachable": 103,
+   "unreachable": 44,
+   "withForm": 5,
+   "captchaFree": 5,
+   "captcha": 0,
+   "jsHeavy": 0,
+   "formRateOfReachable": 5
+  },
+  "NV": {
+   "total": 63,
+   "reachable": 63,
+   "unreachable": 0,
+   "withForm": 0,
+   "captchaFree": 0,
+   "captcha": 0,
+   "jsHeavy": 0,
+   "formRateOfReachable": 0
+  },
+  "IN": {
+   "total": 150,
+   "reachable": 78,
+   "unreachable": 72,
+   "withForm": 0,
+   "captchaFree": 0,
+   "captcha": 0,
+   "jsHeavy": 14,
+   "formRateOfReachable": 0
+  },
+  "MI": {
+   "total": 146,
+   "reachable": 88,
+   "unreachable": 58,
+   "withForm": 9,
+   "captchaFree": 0,
+   "captcha": 9,
+   "jsHeavy": 0,
+   "formRateOfReachable": 10
+  },
+  "UT": {
+   "total": 104,
+   "reachable": 104,
+   "unreachable": 0,
+   "withForm": 80,
+   "captchaFree": 80,
+   "captcha": 0,
+   "jsHeavy": 0,
+   "formRateOfReachable": 77
+  },
+  "IA": {
+   "total": 150,
+   "reachable": 124,
+   "unreachable": 26,
+   "withForm": 35,
+   "captchaFree": 0,
+   "captcha": 35,
+   "jsHeavy": 0,
+   "formRateOfReachable": 28
+  },
+  "NE": {
+   "total": 49,
+   "reachable": 49,
+   "unreachable": 0,
+   "withForm": 0,
+   "captchaFree": 0,
+   "captcha": 0,
+   "jsHeavy": 0,
+   "formRateOfReachable": 0
+  },
+  "WY": {
+   "total": 93,
+   "reachable": 93,
+   "unreachable": 0,
+   "withForm": 0,
+   "captchaFree": 0,
+   "captcha": 0,
+   "jsHeavy": 0,
+   "formRateOfReachable": 0
+  },
+  "NJ": {
+   "total": 120,
+   "reachable": 38,
+   "unreachable": 82,
+   "withForm": 0,
+   "captchaFree": 0,
+   "captcha": 0,
+   "jsHeavy": 1,
+   "formRateOfReachable": 0
+  },
+  "HI": {
+   "total": 76,
+   "reachable": 1,
+   "unreachable": 75,
+   "withForm": 1,
+   "captchaFree": 0,
+   "captcha": 1,
+   "jsHeavy": 0,
+   "formRateOfReachable": 100
+  },
+  "DE": {
+   "total": 62,
+   "reachable": 62,
+   "unreachable": 0,
+   "withForm": 0,
+   "captchaFree": 0,
+   "captcha": 0,
+   "jsHeavy": 0,
+   "formRateOfReachable": 0
+  },
+  "AK": {
+   "total": 60,
+   "reachable": 46,
+   "unreachable": 14,
+   "withForm": 0,
+   "captchaFree": 0,
+   "captcha": 0,
+   "jsHeavy": 0,
+   "formRateOfReachable": 0
+  },
+  "DC": {
+   "total": 13,
+   "reachable": 11,
+   "unreachable": 2,
+   "withForm": 0,
+   "captchaFree": 0,
+   "captcha": 0,
+   "jsHeavy": 0,
+   "formRateOfReachable": 0
+  },
+  "CA": {
+   "total": 120,
+   "reachable": 96,
+   "unreachable": 24,
+   "withForm": 77,
+   "captchaFree": 77,
+   "captcha": 0,
+   "jsHeavy": 0,
+   "formRateOfReachable": 80
+  }
+ },
+ "captchaFree": [
+  {
+   "state": "ME",
+   "name": "Pinny Beebe-Center",
+   "chamber": "upper",
+   "district": "12",
+   "formUrl": "https://legislature.maine.gov/contact",
+   "via": "contact-link"
+  },
+  {
+   "state": "ME",
+   "name": "Anne Carney",
+   "chamber": "upper",
+   "district": "29",
+   "formUrl": "https://legislature.maine.gov/contact",
+   "via": "contact-link"
+  },
+  {
+   "state": "ME",
+   "name": "Brad Farrin",
+   "chamber": "upper",
+   "district": "3",
+   "formUrl": "https://legislature.maine.gov/contact",
+   "via": "contact-link"
+  },
+  {
+   "state": "ME",
+   "name": "Bruce Bickford",
+   "chamber": "upper",
+   "district": "20",
+   "formUrl": "https://legislature.maine.gov/contact",
+   "via": "contact-link"
+  },
+  {
+   "state": "ME",
+   "name": "Cameron Reny",
+   "chamber": "upper",
+   "district": "13",
+   "formUrl": "https://legislature.maine.gov/contact",
+   "via": "contact-link"
+  },
+  {
+   "state": "ME",
+   "name": "Craig Hickman",
+   "chamber": "upper",
+   "district": "14",
+   "formUrl": "https://legislature.maine.gov/contact",
+   "via": "contact-link"
+  },
+  {
+   "state": "ME",
+   "name": "Denise Tepler",
+   "chamber": "upper",
+   "district": "24",
+   "formUrl": "https://legislature.maine.gov/contact",
+   "via": "contact-link"
+  },
+  {
+   "state": "ME",
+   "name": "Donna Bailey",
+   "chamber": "upper",
+   "district": "31",
+   "formUrl": "https://legislature.maine.gov/contact",
+   "via": "contact-link"
+  },
+  {
+   "state": "ME",
+   "name": "Chip Curry",
+   "chamber": "upper",
+   "district": "11",
+   "formUrl": "https://legislature.maine.gov/contact",
+   "via": "contact-link"
+  },
+  {
+   "state": "ME",
+   "name": "Trey Stewart",
+   "chamber": "upper",
+   "district": "2",
+   "formUrl": "https://legislature.maine.gov/contact",
+   "via": "contact-link"
+  },
+  {
+   "state": "ME",
+   "name": "Henry Ingwersen",
+   "chamber": "upper",
+   "district": "32",
+   "formUrl": "https://legislature.maine.gov/contact",
+   "via": "contact-link"
+  },
+  {
+   "state": "ME",
+   "name": "Jim Libby",
+   "chamber": "upper",
+   "district": "22",
+   "formUrl": "https://legislature.maine.gov/contact",
+   "via": "contact-link"
+  },
+  {
+   "state": "ME",
+   "name": "Jeff Timberlake",
+   "chamber": "upper",
+   "district": "17",
+   "formUrl": "https://legislature.maine.gov/contact",
+   "via": "contact-link"
+  },
+  {
+   "state": "ME",
+   "name": "Jill Duson",
+   "chamber": "upper",
+   "district": "27",
+   "formUrl": "https://legislature.maine.gov/contact",
+   "via": "contact-link"
+  },
+  {
+   "state": "ME",
+   "name": "Joe Martin",
+   "chamber": "upper",
+   "district": "19",
+   "formUrl": "https://legislature.maine.gov/contact",
+   "via": "contact-link"
+  },
+  {
+   "state": "ME",
+   "name": "Joe Baldacci",
+   "chamber": "upper",
+   "district": "9",
+   "formUrl": "https://legislature.maine.gov/contact",
+   "via": "contact-link"
+  },
+  {
+   "state": "ME",
+   "name": "Joe Rafferty",
+   "chamber": "upper",
+   "district": "34",
+   "formUrl": "https://legislature.maine.gov/contact",
+   "via": "contact-link"
+  },
+  {
+   "state": "ME",
+   "name": "Peggy Rotundo",
+   "chamber": "upper",
+   "district": "21",
+   "formUrl": "https://legislature.maine.gov/contact",
+   "via": "contact-link"
+  },
+  {
+   "state": "ME",
+   "name": "Marianne Moore",
+   "chamber": "upper",
+   "district": "6",
+   "formUrl": "https://legislature.maine.gov/contact",
+   "via": "contact-link"
+  },
+  {
+   "state": "ME",
+   "name": "Mark Lawrence",
+   "chamber": "upper",
+   "district": "35",
+   "formUrl": "https://legislature.maine.gov/contact",
+   "via": "contact-link"
+  },
+  {
+   "state": "ME",
+   "name": "Mattie Daughtry",
+   "chamber": "upper",
+   "district": "23",
+   "formUrl": "https://legislature.maine.gov/contact",
+   "via": "contact-link"
+  },
+  {
+   "state": "ME",
+   "name": "Matt Harrington",
+   "chamber": "upper",
+   "district": "33",
+   "formUrl": "https://legislature.maine.gov/contact",
+   "via": "contact-link"
+  },
+  {
+   "state": "ME",
+   "name": "Mike Tipping",
+   "chamber": "upper",
+   "district": "8",
+   "formUrl": "https://legislature.maine.gov/contact",
+   "via": "contact-link"
+  },
+  {
+   "state": "ME",
+   "name": "Rick Bennett",
+   "chamber": "upper",
+   "district": "18",
+   "formUrl": "https://legislature.maine.gov/contact",
+   "via": "contact-link"
+  },
+  {
+   "state": "ME",
+   "name": "Russell Black",
+   "chamber": "upper",
+   "district": "5",
+   "formUrl": "https://legislature.maine.gov/contact",
+   "via": "contact-link"
+  },
+  {
+   "state": "ME",
+   "name": "Stacey Guerin",
+   "chamber": "upper",
+   "district": "4",
+   "formUrl": "https://legislature.maine.gov/contact",
+   "via": "contact-link"
+  },
+  {
+   "state": "ME",
+   "name": "Stacy Brenner",
+   "chamber": "upper",
+   "district": "30",
+   "formUrl": "https://legislature.maine.gov/contact",
+   "via": "contact-link"
+  },
+  {
+   "state": "ME",
+   "name": "Sue Bernard",
+   "chamber": "upper",
+   "district": "1",
+   "formUrl": "https://legislature.maine.gov/contact",
+   "via": "contact-link"
+  },
+  {
+   "state": "ME",
+   "name": "Teresa Pierce",
+   "chamber": "upper",
+   "district": "25",
+   "formUrl": "https://legislature.maine.gov/contact",
+   "via": "contact-link"
+  },
+  {
+   "state": "ME",
+   "name": "Tim Nangle",
+   "chamber": "upper",
+   "district": "26",
+   "formUrl": "https://legislature.maine.gov/contact",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Cory Maloy",
+   "chamber": "lower",
+   "district": "52",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Andrew Stoddard",
+   "chamber": "lower",
+   "district": "40",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Angela Romero",
+   "chamber": "lower",
+   "district": "25",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Anthony Loubet",
+   "chamber": "lower",
+   "district": "27",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Ariel Defay",
+   "chamber": "lower",
+   "district": "15",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Ashlee Matthews",
+   "chamber": "lower",
+   "district": "37",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Brady Brammer",
+   "chamber": "upper",
+   "district": "21",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Bridger Bolinder",
+   "chamber": "lower",
+   "district": "29",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Cal Musselman",
+   "chamber": "upper",
+   "district": "4",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Candice Pierucci",
+   "chamber": "lower",
+   "district": "49",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Carl Albrecht",
+   "chamber": "lower",
+   "district": "70",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Carol Moss",
+   "chamber": "lower",
+   "district": "34",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Casey Snider",
+   "chamber": "lower",
+   "district": "5",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Cheryl Acton",
+   "chamber": "lower",
+   "district": "38",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Christine Watkins",
+   "chamber": "lower",
+   "district": "67",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Colin Jack",
+   "chamber": "lower",
+   "district": "73",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Doug Owens",
+   "chamber": "lower",
+   "district": "33",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Doug Welton",
+   "chamber": "lower",
+   "district": "65",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Jim Dunnigan",
+   "chamber": "lower",
+   "district": "36",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Jason Kyle",
+   "chamber": "lower",
+   "district": "8",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Jeff Burton",
+   "chamber": "lower",
+   "district": "64",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Jen Dailey-Provost",
+   "chamber": "lower",
+   "district": "22",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Jon Hawkins",
+   "chamber": "lower",
+   "district": "55",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Jordan Teuscher",
+   "chamber": "lower",
+   "district": "44",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Joseph Elison",
+   "chamber": "lower",
+   "district": "72",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Karen Kwan",
+   "chamber": "upper",
+   "district": "12",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Karen Peterson",
+   "chamber": "lower",
+   "district": "13",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Karianne Lisonbee",
+   "chamber": "lower",
+   "district": "14",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Katy Hall",
+   "chamber": "lower",
+   "district": "11",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Kay Christofferson",
+   "chamber": "lower",
+   "district": "53",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Ken Ivory",
+   "chamber": "lower",
+   "district": "39",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Keven Stratton",
+   "chamber": "upper",
+   "district": "24",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Mark Strong",
+   "chamber": "lower",
+   "district": "47",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Matt MacPherson",
+   "chamber": "lower",
+   "district": "26",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Matt Gwynn",
+   "chamber": "lower",
+   "district": "6",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Melissa Ballard",
+   "chamber": "lower",
+   "district": "20",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Mike Kohler",
+   "chamber": "lower",
+   "district": "59",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Mike Petersen",
+   "chamber": "lower",
+   "district": "2",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Mike Schultz",
+   "chamber": "lower",
+   "district": "12",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Nelson Abbott",
+   "chamber": "lower",
+   "district": "57",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Norm Thurston",
+   "chamber": "lower",
+   "district": "62",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Paul Cutler",
+   "chamber": "lower",
+   "district": "18",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Neil Walter",
+   "chamber": "lower",
+   "district": "74",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Ray Ward",
+   "chamber": "lower",
+   "district": "19",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Rex Shipp",
+   "chamber": "lower",
+   "district": "71",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Ryan Wilcox",
+   "chamber": "lower",
+   "district": "7",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Sahara Hayes",
+   "chamber": "lower",
+   "district": "32",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Sandra Hollins",
+   "chamber": "lower",
+   "district": "21",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Scott Chew",
+   "chamber": "lower",
+   "district": "68",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Stephanie Gricius",
+   "chamber": "lower",
+   "district": "50",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Stephanie Pitcher",
+   "chamber": "upper",
+   "district": "14",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Stephen Whyte",
+   "chamber": "lower",
+   "district": "63",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Steve Eliason",
+   "chamber": "lower",
+   "district": "43",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Stewart Barlow",
+   "chamber": "lower",
+   "district": "17",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Tom Peterson",
+   "chamber": "lower",
+   "district": "1",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Trevor Lee",
+   "chamber": "lower",
+   "district": "16",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Tyler Clancy",
+   "chamber": "lower",
+   "district": "60",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Val Peterson",
+   "chamber": "lower",
+   "district": "56",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Walt Brooks",
+   "chamber": "lower",
+   "district": "75",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "FL",
+   "name": "Anne Gerwig",
+   "chamber": "lower",
+   "district": "93",
+   "formUrl": "https://www.flhouse.gov/Sections/Representatives/custom/contactmember.aspx?MemberId=4925&LegislativeTermId=",
+   "via": "contact-link"
+  },
+  {
+   "state": "FL",
+   "name": "Bill Conerly",
+   "chamber": "lower",
+   "district": "72",
+   "formUrl": "https://www.flhouse.gov/Sections/Representatives/custom/contactmember.aspx?MemberId=4920&LegislativeTermId=",
+   "via": "contact-link"
+  },
+  {
+   "state": "FL",
+   "name": "Brian Hodgers",
+   "chamber": "lower",
+   "district": "32",
+   "formUrl": "https://www.flhouse.gov/Sections/Representatives/custom/contactmember.aspx?MemberId=5064&LegislativeTermId=91",
+   "via": "contact-link"
+  },
+  {
+   "state": "FL",
+   "name": "Chad Johnson",
+   "chamber": "lower",
+   "district": "22",
+   "formUrl": "https://www.flhouse.gov/Sections/Representatives/custom/contactmember.aspx?MemberId=4908&LegislativeTermId=91",
+   "via": "contact-link"
+  },
+  {
+   "state": "FL",
+   "name": "J.J. Grow",
+   "chamber": "lower",
+   "district": "23",
+   "formUrl": "https://www.flhouse.gov/Sections/Representatives/custom/contactmember.aspx?MemberId=4909&LegislativeTermId=",
+   "via": "contact-link"
+  },
+  {
+   "state": "FL",
+   "name": "Jennifer Kincart Jonsson",
+   "chamber": "lower",
+   "district": "49",
+   "formUrl": "https://www.flhouse.gov/Sections/Representatives/custom/contactmember.aspx?MemberId=4918&LegislativeTermId=",
+   "via": "contact-link"
+  },
+  {
+   "state": "FL",
+   "name": "Jon Albert",
+   "chamber": "lower",
+   "district": "48",
+   "formUrl": "https://www.flhouse.gov/Sections/Representatives/custom/contactmember.aspx?MemberId=4917&LegislativeTermId=91",
+   "via": "contact-link"
+  },
+  {
+   "state": "FL",
+   "name": "Judson Sapp",
+   "chamber": "lower",
+   "district": "20",
+   "formUrl": "https://www.flhouse.gov/Sections/Representatives/contactmember.aspx?MemberId=4907&SessionId=113",
+   "via": "contact-link"
+  },
+  {
+   "state": "FL",
+   "name": "Kim Kendall",
+   "chamber": "lower",
+   "district": "18",
+   "formUrl": "https://www.flhouse.gov/Sections/Representatives/custom/contactmember.aspx?MemberId=4905&LegislativeTermId=",
+   "via": "contact-link"
+  },
+  {
+   "state": "FL",
+   "name": "Leonard Spencer",
+   "chamber": "lower",
+   "district": "45",
+   "formUrl": "https://www.flhouse.gov/Sections/Representatives/custom/contactmember.aspx?MemberId=4915&LegislativeTermId=91",
+   "via": "contact-link"
+  },
+  {
+   "state": "FL",
+   "name": "Meg Weinberger",
+   "chamber": "lower",
+   "district": "94",
+   "formUrl": "https://www.flhouse.gov/Sections/Representatives/custom/contactmember.aspx?MemberId=4926&LegislativeTermId=",
+   "via": "contact-link"
+  },
+  {
+   "state": "TX",
+   "name": "Adam Hinojosa",
+   "chamber": "upper",
+   "district": "27",
+   "formUrl": "https://senate.texas.gov/adminForm.php?lang=en",
+   "via": "contact-link"
+  },
+  {
+   "state": "FL",
+   "name": "Michael Owen",
+   "chamber": "lower",
+   "district": "70",
+   "formUrl": "https://www.flhouse.gov/Sections/Representatives/custom/contactmember.aspx?MemberId=4919&LegislativeTermId=",
+   "via": "contact-link"
+  },
+  {
+   "state": "TX",
+   "name": "Angela Paxton",
+   "chamber": "upper",
+   "district": "8",
+   "formUrl": "https://senate.texas.gov/adminForm.php?lang=en",
+   "via": "contact-link"
+  },
+  {
+   "state": "TX",
+   "name": "Bob Hall",
+   "chamber": "upper",
+   "district": "2",
+   "formUrl": "https://senate.texas.gov/adminForm.php?lang=en",
+   "via": "contact-link"
+  },
+  {
+   "state": "FL",
+   "name": "Monique Miller",
+   "chamber": "lower",
+   "district": "33",
+   "formUrl": "https://www.flhouse.gov/Sections/Representatives/custom/contactmember.aspx?MemberId=4913&LegislativeTermId=",
+   "via": "contact-link"
+  },
+  {
+   "state": "TX",
+   "name": "Borris Miles",
+   "chamber": "upper",
+   "district": "13",
+   "formUrl": "https://senate.texas.gov/adminForm.php?lang=en",
+   "via": "contact-link"
+  },
+  {
+   "state": "TX",
+   "name": "Brian Birdwell",
+   "chamber": "upper",
+   "district": "22",
+   "formUrl": "https://senate.texas.gov/adminForm.php?lang=en",
+   "via": "contact-link"
+  },
+  {
+   "state": "FL",
+   "name": "Nan Cobb",
+   "chamber": "lower",
+   "district": "26",
+   "formUrl": "https://www.flhouse.gov/Sections/Representatives/contactmember.aspx?MemberId=4910&SessionId=113",
+   "via": "contact-link"
+  },
+  {
+   "state": "TX",
+   "name": "Bryan Hughes",
+   "chamber": "upper",
+   "district": "1",
+   "formUrl": "https://senate.texas.gov/adminForm.php?lang=en",
+   "via": "contact-link"
+  },
+  {
+   "state": "TX",
+   "name": "Carol Alvarado",
+   "chamber": "upper",
+   "district": "6",
+   "formUrl": "https://senate.texas.gov/adminForm.php?lang=en",
+   "via": "contact-link"
+  },
+  {
+   "state": "FL",
+   "name": "Nathan Boyles",
+   "chamber": "lower",
+   "district": "3",
+   "formUrl": "https://www.flhouse.gov/Sections/Representatives/custom/contactmember.aspx?MemberId=5063&LegislativeTermId=",
+   "via": "contact-link"
+  },
+  {
+   "state": "TX",
+   "name": "Charles Perry",
+   "chamber": "upper",
+   "district": "28",
+   "formUrl": "https://senate.texas.gov/adminForm.php?lang=en",
+   "via": "contact-link"
+  },
+  {
+   "state": "FL",
+   "name": "Omar Blanco",
+   "chamber": "lower",
+   "district": "115",
+   "formUrl": "https://www.flhouse.gov/Sections/Representatives/custom/contactmember.aspx?MemberId=4929&LegislativeTermId=",
+   "via": "contact-link"
+  },
+  {
+   "state": "TX",
+   "name": "Charles Schwertner",
+   "chamber": "upper",
+   "district": "5",
+   "formUrl": "https://senate.texas.gov/adminForm.php?lang=en",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Cal Roberts",
+   "chamber": "lower",
+   "district": "46",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "TX",
+   "name": "Donna Campbell",
+   "chamber": "upper",
+   "district": "25",
+   "formUrl": "https://senate.texas.gov/adminForm.php?lang=en",
+   "via": "contact-link"
+  },
+  {
+   "state": "FL",
+   "name": "RaShon Young",
+   "chamber": "lower",
+   "district": "40",
+   "formUrl": "https://www.flhouse.gov/Sections/Representatives/custom/contactmember.aspx?MemberId=5065&LegislativeTermId=",
+   "via": "contact-link"
+  },
+  {
+   "state": "TX",
+   "name": "Joan Huffman",
+   "chamber": "upper",
+   "district": "17",
+   "formUrl": "https://senate.texas.gov/adminForm.php?lang=en",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Clint Okerlund",
+   "chamber": "lower",
+   "district": "42",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "TX",
+   "name": "José Menéndez",
+   "chamber": "upper",
+   "district": "26",
+   "formUrl": "https://senate.texas.gov/adminForm.php?lang=en",
+   "via": "contact-link"
+  },
+  {
+   "state": "TX",
+   "name": "Chuy Hinojosa",
+   "chamber": "upper",
+   "district": "20",
+   "formUrl": "https://senate.texas.gov/member.php?d=20",
+   "via": "profile"
+  },
+  {
+   "state": "UT",
+   "name": "Dave Shallenberger",
+   "chamber": "lower",
+   "district": "58",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "FL",
+   "name": "Richard Gentry",
+   "chamber": "lower",
+   "district": "27",
+   "formUrl": "https://www.flhouse.gov/Sections/Representatives/contactmember.aspx?MemberId=4911&SessionId=113",
+   "via": "contact-link"
+  },
+  {
+   "state": "TX",
+   "name": "Judith Zaffirini",
+   "chamber": "upper",
+   "district": "21",
+   "formUrl": "https://senate.texas.gov/member.php?d=21",
+   "via": "profile"
+  },
+  {
+   "state": "TX",
+   "name": "Kevin Sparks",
+   "chamber": "upper",
+   "district": "31",
+   "formUrl": "https://senate.texas.gov/adminForm.php?lang=en",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Doug Fiefia",
+   "chamber": "lower",
+   "district": "48",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "FL",
+   "name": "Rob Long",
+   "chamber": "lower",
+   "district": "90",
+   "formUrl": "https://www.flhouse.gov/Sections/Representatives/contactmember.aspx?MemberId=5067&SessionId=113",
+   "via": "contact-link"
+  },
+  {
+   "state": "TX",
+   "name": "Lois Kolkhorst",
+   "chamber": "upper",
+   "district": "18",
+   "formUrl": "https://senate.texas.gov/adminForm.php?lang=en",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Grant Miller",
+   "chamber": "lower",
+   "district": "24",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "FL",
+   "name": "Sam Greco",
+   "chamber": "lower",
+   "district": "19",
+   "formUrl": "https://www.flhouse.gov/Sections/Representatives/contactmember.aspx?MemberId=4906&SessionId=113",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Hoang Nguyen",
+   "chamber": "lower",
+   "district": "23",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "TX",
+   "name": "Nathan Johnson",
+   "chamber": "upper",
+   "district": "16",
+   "formUrl": "https://senate.texas.gov/adminForm.php?lang=en",
+   "via": "contact-link"
+  },
+  {
+   "state": "TX",
+   "name": "Paul Bettencourt",
+   "chamber": "upper",
+   "district": "7",
+   "formUrl": "https://senate.texas.gov/adminForm.php?lang=en",
+   "via": "contact-link"
+  },
+  {
+   "state": "FL",
+   "name": "Vanessa Oliver",
+   "chamber": "lower",
+   "district": "76",
+   "formUrl": "https://www.flhouse.gov/Sections/Representatives/contactmember.aspx?MemberId=4922&SessionId=113",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Jake Fitisemanu",
+   "chamber": "lower",
+   "district": "30",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "TX",
+   "name": "Pete Flores",
+   "chamber": "upper",
+   "district": "24",
+   "formUrl": "https://senate.texas.gov/adminForm.php?lang=en",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Jake Sawyer",
+   "chamber": "lower",
+   "district": "9",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "TX",
+   "name": "Robert Nichols",
+   "chamber": "upper",
+   "district": "3",
+   "formUrl": "https://senate.texas.gov/adminForm.php?lang=en",
+   "via": "contact-link"
+  },
+  {
+   "state": "FL",
+   "name": "Wallace Aristide",
+   "chamber": "lower",
+   "district": "107",
+   "formUrl": "https://www.flhouse.gov/Sections/Representatives/custom/contactmember.aspx?MemberId=4928&LegislativeTermId=",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Jason Thompson",
+   "chamber": "lower",
+   "district": "3",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "TX",
+   "name": "Sarah Eckhardt",
+   "chamber": "upper",
+   "district": "14",
+   "formUrl": "https://senate.texas.gov/member.php?d=14",
+   "via": "profile"
+  },
+  {
+   "state": "FL",
+   "name": "Yvette Benarroch",
+   "chamber": "lower",
+   "district": "81",
+   "formUrl": "https://www.flhouse.gov/Sections/Representatives/custom/contactmember.aspx?MemberId=4923&LegislativeTermId=",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Jill Koford",
+   "chamber": "lower",
+   "district": "10",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "John Arthur",
+   "chamber": "lower",
+   "district": "41",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Kristen Chevrier",
+   "chamber": "lower",
+   "district": "54",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Leah Hansen",
+   "chamber": "lower",
+   "district": "51",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Lisa Shepherd",
+   "chamber": "lower",
+   "district": "61",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Logan Monson",
+   "chamber": "lower",
+   "district": "69",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Nicholeen Peck",
+   "chamber": "lower",
+   "district": "28",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Rosalba Dominguez",
+   "chamber": "lower",
+   "district": "35",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Tiara Auxier",
+   "chamber": "lower",
+   "district": "4",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Tracy Miller",
+   "chamber": "lower",
+   "district": "45",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "CT",
+   "name": "Arnie Jensen",
+   "chamber": "lower",
+   "district": "131",
+   "formUrl": "https://www.cthousegop.com/jensen/contact",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Troy Shelley",
+   "chamber": "lower",
+   "district": "66",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "CT",
+   "name": "Chris Aniskovich",
+   "chamber": "lower",
+   "district": "35",
+   "formUrl": "https://www.cthousegop.com/aniskovich/contact",
+   "via": "contact-link"
+  },
+  {
+   "state": "UT",
+   "name": "Verona Mauga",
+   "chamber": "lower",
+   "district": "31",
+   "formUrl": "https://house.utleg.gov/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "CT",
+   "name": "Chris Stewart",
+   "chamber": "lower",
+   "district": "51",
+   "formUrl": "https://www.cthousegop.com/stewart/contact/",
+   "via": "contact-link"
+  },
+  {
+   "state": "CT",
+   "name": "Jason Buchsbaum",
+   "chamber": "lower",
+   "district": "69",
+   "formUrl": "https://www.cthousegop.com/buchsbaum/contact",
+   "via": "contact-link"
+  },
+  {
+   "state": "CT",
+   "name": "Joe Hoxha",
+   "chamber": "lower",
+   "district": "78",
+   "formUrl": "https://www.cthousegop.com/hoxha/contact",
+   "via": "contact-link"
+  },
+  {
+   "state": "CT",
+   "name": "Karen Reddington-Hughes",
+   "chamber": "lower",
+   "district": "66",
+   "formUrl": "https://www.cthousegop.com/reddington-hughes/contact",
+   "via": "contact-link"
+  },
+  {
+   "state": "CT",
+   "name": "Mark DeCaprio",
+   "chamber": "lower",
+   "district": "48",
+   "formUrl": "https://www.cthousegop.com/decaprio/contact",
+   "via": "contact-link"
+  },
+  {
+   "state": "CT",
+   "name": "Marty Foncello",
+   "chamber": "lower",
+   "district": "107",
+   "formUrl": "https://www.cthousegop.com/foncello/contact",
+   "via": "contact-link"
+  },
+  {
+   "state": "CT",
+   "name": "Seth Bronko",
+   "chamber": "lower",
+   "district": "70",
+   "formUrl": "https://www.cthousegop.com/bronko/contact",
+   "via": "contact-link"
+  },
+  {
+   "state": "CT",
+   "name": "Steve Weir",
+   "chamber": "lower",
+   "district": "55",
+   "formUrl": "https://www.cthousegop.com/weir/contact",
+   "via": "contact-link"
+  },
+  {
+   "state": "CT",
+   "name": "Tina Courpas",
+   "chamber": "lower",
+   "district": "149",
+   "formUrl": "https://www.cthousegop.com/courpas/contact",
+   "via": "contact-link"
+  },
+  {
+   "state": "CT",
+   "name": "Tracy Marra",
+   "chamber": "lower",
+   "district": "141",
+   "formUrl": "https://www.cthousegop.com/marra/contact",
+   "via": "contact-link"
+  },
+  {
+   "state": "CA",
+   "name": "Brian Jones",
+   "chamber": "upper",
+   "district": "40",
+   "formUrl": "https://sd38.senate.ca.gov/contact",
+   "via": "contact-link"
+  },
+  {
+   "state": "CA",
+   "name": "Akilah Weber Pierson",
+   "chamber": "upper",
+   "district": "39",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=AD79&amp;inframe=y&amp;headerimg=N",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "Blanca Pacheco",
+   "chamber": "lower",
+   "district": "64",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=AD64&amp;inframe=y&amp;headerimg=N",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "LaShae Sharp-Collins",
+   "chamber": "lower",
+   "district": "79",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=AD79&amp;inframe=y&amp;headerimg=N",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "Mike Gipson",
+   "chamber": "lower",
+   "district": "65",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=AD64&amp;inframe=y&amp;headerimg=N",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "Buffy Wicks",
+   "chamber": "lower",
+   "district": "14",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=AD14&amp;inframe=y&amp;headerimg=N",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "Gregg Hart",
+   "chamber": "lower",
+   "district": "37",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=AD37&amp;inframe=y&amp;headerimg=N",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "Tim Grayson",
+   "chamber": "upper",
+   "district": "9",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=AD14&amp;inframe=y&amp;headerimg=N",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "Isaac Bryan",
+   "chamber": "lower",
+   "district": "55",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=AD54&amp;inframe=y&amp;headerimg=N",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "James Ramos",
+   "chamber": "lower",
+   "district": "45",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=AD40&amp;inframe=y&amp;headerimg=N",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "Steve Bennett",
+   "chamber": "lower",
+   "district": "38",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=AD37&amp;inframe=y&amp;headerimg=N",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "Pilar Schiavo",
+   "chamber": "lower",
+   "district": "40",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=AD40&amp;inframe=y&amp;headerimg=N",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "Mark González",
+   "chamber": "lower",
+   "district": "54",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=AD54&amp;inframe=y&amp;headerimg=N",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "Aisha Wahab",
+   "chamber": "upper",
+   "district": "10",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=SD10&amp;headerimg=N&amp;inframe=Y",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "Al Muratsuchi",
+   "chamber": "lower",
+   "district": "66",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=AD66",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "Alex Lee",
+   "chamber": "lower",
+   "district": "24",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=AD24&amp;inframe=y&amp;headerimg=N",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "Anna Caballero",
+   "chamber": "upper",
+   "district": "14",
+   "formUrl": "https://sd14.senate.ca.gov/contact-us",
+   "via": "contact-link"
+  },
+  {
+   "state": "CA",
+   "name": "Angelique Ashby",
+   "chamber": "upper",
+   "district": "8",
+   "formUrl": "https://sd08.senate.ca.gov/contact",
+   "via": "contact-link"
+  },
+  {
+   "state": "CA",
+   "name": "Anamarie Avila Farias",
+   "chamber": "lower",
+   "district": "15",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=AD15&amp;inframe=y&amp;headerimg=N",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "Bob Archuleta",
+   "chamber": "upper",
+   "district": "30",
+   "formUrl": "https://sd30.senate.ca.gov/contact/message",
+   "via": "contact-link"
+  },
+  {
+   "state": "CA",
+   "name": "Ben Allen",
+   "chamber": "upper",
+   "district": "24",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=SD24&amp;inframe=Y&amp;headerimg=N",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "Avelino Valencia",
+   "chamber": "lower",
+   "district": "68",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=AD68&amp;inframe=y&amp;headerimg=N",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "Catherine Blakespear",
+   "chamber": "upper",
+   "district": "38",
+   "formUrl": "https://sd38.senate.ca.gov/contact",
+   "via": "contact-link"
+  },
+  {
+   "state": "CA",
+   "name": "Blanca Rubio",
+   "chamber": "lower",
+   "district": "48",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=AD48&amp;inframe=y&amp;headerimg=N",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "Caroline Menjivar",
+   "chamber": "upper",
+   "district": "20",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=SD20&amp;headerimg=N&amp;inframe=Y",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "Catherine Stefani",
+   "chamber": "lower",
+   "district": "19",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=AD19&amp;inframe=y&amp;headerimg=N",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "Christopher Cabaldon",
+   "chamber": "upper",
+   "district": "3",
+   "formUrl": "https://sd03.senate.ca.gov/contact",
+   "via": "contact-link"
+  },
+  {
+   "state": "CA",
+   "name": "Celeste Rodriguez",
+   "chamber": "lower",
+   "district": "43",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=AD43&amp;inframe=y&amp;headerimg=N",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "Chris Rogers",
+   "chamber": "lower",
+   "district": "2",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=AD02&amp;inframe=y&amp;headerimg=N",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "Corey Jackson",
+   "chamber": "lower",
+   "district": "60",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=AD60&amp;inframe=y&amp;headerimg=N",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "Cottie Petrie-Norris",
+   "chamber": "lower",
+   "district": "73",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=AD73&amp;inframe=y&amp;headerimg=N",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "Damon Connolly",
+   "chamber": "lower",
+   "district": "12",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=AD12&amp;inframe=y&amp;headerimg=N",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "Dave Cortese",
+   "chamber": "upper",
+   "district": "15",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=SD15&amp;headerimg=N&amp;inframe=Y",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "David Alvarez",
+   "chamber": "lower",
+   "district": "80",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=AD80&amp;inframe=y&amp;headerimg=N",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "Diane Papan",
+   "chamber": "lower",
+   "district": "21",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=AD21&amp;inframe=y&amp;headerimg=N",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "Esmeralda Soria",
+   "chamber": "lower",
+   "district": "27",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=AD27&amp;inframe=y&amp;headerimg=N",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "Gail Pellerin",
+   "chamber": "lower",
+   "district": "28",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=AD28&amp;inframe=y&amp;headerimg=N",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "Joaquin Arambula",
+   "chamber": "lower",
+   "district": "31",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=AD31&amp;inframe=y&amp;headerimg=N",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "Jacqui Irwin",
+   "chamber": "lower",
+   "district": "42",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=AD42&amp;inframe=y&amp;headerimg=N",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "Jasmeet Bains",
+   "chamber": "lower",
+   "district": "35",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=AD35&amp;inframe=y&amp;headerimg=N",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "Jesse Arreguín",
+   "chamber": "upper",
+   "district": "7",
+   "formUrl": "https://sd07.senate.ca.gov/contact",
+   "via": "contact-link"
+  },
+  {
+   "state": "CA",
+   "name": "Jerry McNerney",
+   "chamber": "upper",
+   "district": "5",
+   "formUrl": "https://sd05.senate.ca.gov/contact",
+   "via": "contact-link"
+  },
+  {
+   "state": "CA",
+   "name": "Jesse Gabriel",
+   "chamber": "lower",
+   "district": "46",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=AD45&amp;inframe=y&amp;headerimg=N",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "John Laird",
+   "chamber": "upper",
+   "district": "17",
+   "formUrl": "https://sd17.senate.ca.gov/contact-us",
+   "via": "contact-link"
+  },
+  {
+   "state": "CA",
+   "name": "Jessica Caloza",
+   "chamber": "lower",
+   "district": "52",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=AD52&amp;inframe=y&amp;headerimg=N",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "John Harabedian",
+   "chamber": "lower",
+   "district": "41",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=AD41&amp;inframe=y&amp;headerimg=N",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "José Solache",
+   "chamber": "lower",
+   "district": "62",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=AD62&amp;inframe=y&amp;headerimg=N",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "Josh Lowenthal",
+   "chamber": "lower",
+   "district": "69",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=AD69&amp;inframe=y&amp;headerimg=N",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "Laura Richardson",
+   "chamber": "upper",
+   "district": "35",
+   "formUrl": "https://sd35.senate.ca.gov/contact",
+   "via": "contact-link"
+  },
+  {
+   "state": "CA",
+   "name": "Juan Carrillo",
+   "chamber": "lower",
+   "district": "39",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=AD39&amp;inframe=y&amp;headerimg=N",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "Lola Smallwood-Cuevas",
+   "chamber": "upper",
+   "district": "28",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=SD28&amp;headerimg=N&amp;inframe=Y",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "Liz Ortega",
+   "chamber": "lower",
+   "district": "20",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=AD20&amp;inframe=y&amp;headerimg=N",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "Maggy Krell",
+   "chamber": "lower",
+   "district": "6",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=AD06&amp;inframe=y&amp;headerimg=N",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "Lori Wilson",
+   "chamber": "lower",
+   "district": "11",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=AD11&amp;inframe=y&amp;headerimg=N",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "Marc Berman",
+   "chamber": "lower",
+   "district": "23",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=AD23&amp;inframe=y&amp;headerimg=N",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "María Elena Durazo",
+   "chamber": "upper",
+   "district": "26",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=SD26&amp;headerimg=N&amp;inframe=Y",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "Matt Haney",
+   "chamber": "lower",
+   "district": "17",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=AD17&amp;inframe=y&amp;headerimg=N",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "Melissa Hurtado",
+   "chamber": "upper",
+   "district": "16",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=SD16&amp;inframe=Y&amp;headerimg=N;",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "Mike McGuire",
+   "chamber": "upper",
+   "district": "2",
+   "formUrl": "https://sd02.senate.ca.gov/contact",
+   "via": "contact-link"
+  },
+  {
+   "state": "CA",
+   "name": "Michelle Rodriguez",
+   "chamber": "lower",
+   "district": "53",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=AD53&amp;inframe=y&amp;headerimg=N",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "Monique Limón",
+   "chamber": "upper",
+   "district": "21",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=SD21&amp;headerimg=N&amp;inframe=Y",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "Mia Bonta",
+   "chamber": "lower",
+   "district": "18",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=AD18&amp;inframe=y&amp;headerimg=N",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "Robert Garcia",
+   "chamber": "lower",
+   "district": "50",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=AD50&amp;inframe=y&amp;headerimg=N",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "Mike Fong",
+   "chamber": "lower",
+   "district": "49",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=AD49&amp;inframe=y&amp;headerimg=N",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "Robert Rivas",
+   "chamber": "lower",
+   "district": "29",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=AD29&amp;inframe=y&amp;headerimg=N",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "Nick Schultz",
+   "chamber": "lower",
+   "district": "44",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=AD44&amp;inframe=y&amp;headerimg=N",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "Patrick Ahrens",
+   "chamber": "lower",
+   "district": "26",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=AD26&amp;inframe=y&amp;headerimg=N",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "Sasha Pérez",
+   "chamber": "upper",
+   "district": "25",
+   "formUrl": "https://sd25.senate.ca.gov/contact",
+   "via": "contact-link"
+  },
+  {
+   "state": "CA",
+   "name": "Rebecca Bauer-Kahan",
+   "chamber": "lower",
+   "district": "16",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=AD16&amp;inframe=y&amp;headerimg=N",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "Rick Zbur",
+   "chamber": "lower",
+   "district": "51",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=AD51&amp;inframe=y&amp;headerimg=N",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "Scott Wiener",
+   "chamber": "upper",
+   "district": "11",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=SD11&amp;headerimg=N&amp;inframe=Y",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "Tom Umberg",
+   "chamber": "upper",
+   "district": "34",
+   "formUrl": "https://sd34.senate.ca.gov/contact",
+   "via": "contact-link"
+  },
+  {
+   "state": "CA",
+   "name": "Stephanie Nguyen",
+   "chamber": "lower",
+   "district": "10",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=AD10&amp;inframe=y&amp;headerimg=N",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "Steve Padilla",
+   "chamber": "upper",
+   "district": "18",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=SD18&amp;headerimg=N&amp;inframe=Y",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "Susan Rubio",
+   "chamber": "upper",
+   "district": "22",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=SD22&amp;inframe=Y&amp;headerimg=N;",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "Tasha Boerner",
+   "chamber": "lower",
+   "district": "77",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=AD77&amp;inframe=y&amp;headerimg=N",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "CA",
+   "name": "Tina McKinnor",
+   "chamber": "lower",
+   "district": "61",
+   "formUrl": "https://lcmspubcontact.lc.ca.gov/PublicLCMS/ContactPopup.php?district=AD61&amp;inframe=y&amp;headerimg=N",
+   "via": "contact-link-iframe"
+  },
+  {
+   "state": "NH",
+   "name": "Cassandra Levesque",
+   "chamber": "lower",
+   "district": "Strafford 4",
+   "formUrl": "https://cassandralevesque4nh.wordpress.com/",
+   "via": "profile"
+  },
+  {
+   "state": "WA",
+   "name": "Chris Gildon",
+   "chamber": "upper",
+   "district": "25",
+   "formUrl": "https://ChrisGildon.src.wastateleg.org/",
+   "via": "profile"
+  },
+  {
+   "state": "WA",
+   "name": "Curtis King",
+   "chamber": "upper",
+   "district": "14",
+   "formUrl": "https://CurtisKing.src.wastateleg.org/",
+   "via": "profile"
+  },
+  {
+   "state": "TX",
+   "name": "Brent Hagenbuch",
+   "chamber": "upper",
+   "district": "30",
+   "formUrl": "https://www.senate.texas.gov/adminForm.php?lang=en",
+   "via": "contact-link"
+  },
+  {
+   "state": "WA",
+   "name": "Jeff Holy",
+   "chamber": "upper",
+   "district": "6",
+   "formUrl": "https://JeffHoly.src.wastateleg.org/",
+   "via": "profile"
+  },
+  {
+   "state": "WA",
+   "name": "Jim McCune",
+   "chamber": "upper",
+   "district": "2",
+   "formUrl": "https://JimMcCune.src.wastateleg.org/",
+   "via": "profile"
+  },
+  {
+   "state": "WA",
+   "name": "Keith Wagoner",
+   "chamber": "upper",
+   "district": "39",
+   "formUrl": "https://KeithWagoner.src.wastateleg.org/",
+   "via": "profile"
+  }
+ ],
+ "deadLinks": [
+  {
+   "state": "IL",
+   "name": "Aarón Ortíz",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3148",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Abdelnasser Rashid",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3229",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Adam Niemerg",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3189",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Adriane Johnson",
+   "url": "https://ilga.gov/senate/Senator.asp?GA=103&MemberID=3170",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Amy Elik",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3190",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Amy Grant",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3150",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Andrew Chesney",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3157",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Angie Guerrero-Cuellar",
+   "url": "https://ilga.gov/house/Rep.asp?GA=102&MemberID=3011",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Ann Williams",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3054",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Anna Moeller",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3085",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Anne Stava",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3138",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Anthony DeLuca",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3044",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Barbara Hernandez",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3159",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Blaine Wilhour",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3156",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Bob Morgan",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3142",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Brad Halbrook",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3114",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Brad Fritts",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3237",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Brad Stephens",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3162",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Brandun Schweizer",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3257",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "C.D. Davidsmeyer",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3081",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Camille Lilly",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3046",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Carol Ammons",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3086",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Celina Villanueva",
+   "url": "https://ilga.gov/senate/Senator.asp?GA=103&MemberID=3167",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Chapin Rose",
+   "url": "https://ilga.gov/senate/Senator.asp?GA=103&MemberID=3068",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Charlie Meier",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3082",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Chris Miller",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3153",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Christopher Belt",
+   "url": "https://ilga.gov/senate/Senator.asp?GA=103&MemberID=3125",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Craig Wilcox",
+   "url": "https://ilga.gov/senate/Senator.asp?GA=103&MemberID=3123",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Cristina Castro",
+   "url": "https://ilga.gov/senate/Senator.asp?GA=103&MemberID=3101",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Curtis Tarver",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3145",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Dee Avelar",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3187",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Dale Fowler",
+   "url": "https://ilga.gov/senate/Senator.asp?GA=103&MemberID=3102",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Dan Ugaste",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3149",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Dan Didech",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3136",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Dan Swanson",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3113",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Dave Severin",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3110",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Dave Syverson",
+   "url": "https://ilga.gov/senate/Senator.asp?GA=103&MemberID=3025",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Dave Vella",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3186",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "David Friess",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3192",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Dave Koehler",
+   "url": "https://ilga.gov/senate/Senator.asp?GA=103&MemberID=3035",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Debbie Meyers-Martin",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3139",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Dennis Tipsword",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3242",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Diane Blair-Sherlock",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3234",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Don Harmon",
+   "url": "https://ilga.gov/senate/Senator.asp?GA=103&MemberID=3029",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Don DeWitte",
+   "url": "https://ilga.gov/senate/Senator.asp?GA=103&MemberID=3121",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Doris Turner",
+   "url": "https://ilga.gov/senate/Senator.asp?GA=103&MemberID=3197",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Edgar González",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3166",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Elgie Sims",
+   "url": "https://ilga.gov/senate/Senator.asp?GA=103&MemberID=3117",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Lisa Hernandez",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3037",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Chris Welch",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3071",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Emil Jones",
+   "url": "https://ilga.gov/senate/Senator.asp?GA=103&MemberID=3043",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Erica Harriss",
+   "url": "https://ilga.gov/senate/Senator.asp?GA=103&MemberID=3216",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Eva-Dina Delgado",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3165",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Fred Crespo",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3038",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Gregg Johnson",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3236",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Harry Benton",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3241",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Hoan Huynh",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3227",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Jackie Haas",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3171",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Jaime Andrade",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3084",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Janet Yang Rohr",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3182",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Jason Bunting",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3250",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Jason Plummer",
+   "url": "https://ilga.gov/senate/Senator.asp?GA=103&MemberID=3133",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Javier Cervantes",
+   "url": "https://ilga.gov/senate/Senator.asp?GA=103&MemberID=3206",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Omar Williams",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3160",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Jay Hoffman",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3083",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Jed Davis",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3223",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Jeff Keicher",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3120",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Jehan Gordon-Booth",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3042",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Jen Gong-Gershowitz",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3141",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Jennifer Sanalitro",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3231",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Jil Tracy",
+   "url": "https://ilga.gov/senate/Senator.asp?GA=103&MemberID=3103",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Joe Sosnowski",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3053",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "John Curran",
+   "url": "https://ilga.gov/senate/Senator.asp?GA=103&MemberID=3115",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "John Cabello",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3239",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Joyce Mason",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3147",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Julie Morrison",
+   "url": "https://ilga.gov/senate/Senator.asp?GA=103&MemberID=3067",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Justin Slaughter",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3104",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Kam Buckner",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3158",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Karina Villa",
+   "url": "https://ilga.gov/senate/Senator.asp?GA=103&MemberID=3177",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Katie Stuart",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3112",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Kelly Cassidy",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3057",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Kevin Olickal",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3228",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Kevin Schmidt",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3245",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Kimberly Lightford",
+   "url": "https://ilga.gov/senate/Senator.asp?GA=103&MemberID=3023",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Kimberly Du Buclet",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3252",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "La Shawn Ford",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3036",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Lakesia Collins",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3169",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Laura Ellman",
+   "url": "https://ilga.gov/senate/Senator.asp?GA=103&MemberID=3128",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Laura Faver Dias",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3235",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Laura Fine",
+   "url": "https://ilga.gov/senate/Senator.asp?GA=103&MemberID=3127",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Laura Murphy",
+   "url": "https://ilga.gov/senate/Senator.asp?GA=103&MemberID=3096",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Larry Walsh",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3059",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Lilian Jiménez",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3226",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Linda Holmes",
+   "url": "https://ilga.gov/senate/Senator.asp?GA=103&MemberID=3034",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Lindsey LaPointe",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3163",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Marcus Evans",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3058",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Margaret Croke",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3176",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Mark Walker",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3140",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Marty McLaughlin",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3185",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Mary Beth Canty",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3233",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Mary Edly-Allen",
+   "url": "https://ilga.gov/senate/Senator.asp?GA=103&MemberID=3212",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Mary Gill",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3251",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Matt Hanson",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3225",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Mattie Hunter",
+   "url": "https://ilga.gov/senate/Senator.asp?GA=103&MemberID=3030",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Maura Hirschauer",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3184",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Maurice West",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3135",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Meg Loughran Cappel",
+   "url": "https://ilga.gov/senate/Senator.asp?GA=103&MemberID=3172",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Mike Hastings",
+   "url": "https://ilga.gov/senate/Senator.asp?GA=103&MemberID=3065",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Mike Halpin",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3106",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Mike Coffey",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3246",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Michael Kelly",
+   "url": "https://ilga.gov/house/Rep.asp?GA=102&MemberID=3013",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Michelle Mussman",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3052",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Mike Porfirio",
+   "url": "https://ilga.gov/senate/Senator.asp?GA=103&MemberID=3208",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Mike Simmons-Gessesse",
+   "url": "https://ilga.gov/senate/Senator.asp?GA=103&MemberID=3196",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Nabeela Syed",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3232",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Napoleon Harris",
+   "url": "https://ilga.gov/senate/Senator.asp?GA=103&MemberID=3064",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Natalie Manley",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3079",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Neil Anderson",
+   "url": "https://ilga.gov/senate/Senator.asp?GA=103&MemberID=3092",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Nick Smith",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3118",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Nicole La Ha",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3256",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Norine Hammond",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3055",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Norma Hernandez",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3224",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Omar Aquino",
+   "url": "https://ilga.gov/senate/Senator.asp?GA=103&MemberID=3099",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Patrick Joyce",
+   "url": "https://ilga.gov/senate/Senator.asp?GA=103&MemberID=3164",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Patrick Windhorst",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3155",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Paul Faraci",
+   "url": "https://ilga.gov/senate/Senator.asp?GA=103&MemberID=3221",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Paul Jacobs",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3191",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Rachel Ventura",
+   "url": "https://ilga.gov/senate/Senator.asp?GA=103&MemberID=3214",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Ram Villivalam",
+   "url": "https://ilga.gov/senate/Senator.asp?GA=103&MemberID=3134",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Rita Mayfield",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3047",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Rob Martwick",
+   "url": "https://ilga.gov/senate/Senator.asp?GA=103&MemberID=3161",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Robert Peters",
+   "url": "https://ilga.gov/senate/Senator.asp?GA=103&MemberID=3132",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Bob Rita",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3027",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Robyn Gabel",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3045",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Ryan Spain",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3111",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Sally Turner",
+   "url": "https://ilga.gov/senate/Senator.asp?GA=103&MemberID=3195",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Sara Feigenholtz",
+   "url": "https://ilga.gov/senate/Senator.asp?GA=103&MemberID=3168",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Seth Lewis",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3183",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Sharon Chung",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3240",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Sonya Harper",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3097",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Stephanie Kifowit",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3077",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Steve McClure",
+   "url": "https://ilga.gov/senate/Senator.asp?GA=103&MemberID=3131",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Steve Stadelman",
+   "url": "https://ilga.gov/senate/Senator.asp?GA=103&MemberID=3069",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Steve Reick",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3109",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Sue Rezin",
+   "url": "https://ilga.gov/senate/Senator.asp?GA=103&MemberID=3048",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Sue Scherer",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3080",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Suzanne Ness",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3193",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Suzy Glowiak Hilton",
+   "url": "https://ilga.gov/senate/Senator.asp?GA=103&MemberID=3130",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Terri Bryant",
+   "url": "https://ilga.gov/senate/Senator.asp?GA=103&MemberID=3180",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Thaddeus Jones",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3050",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Theresa Mah",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3107",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Tom Weber",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3151",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Tony McCombie",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3108",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Travis Weaver",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3244",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Wayne Rosenthal",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3243",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Will Guzzardi",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3091",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Bill Cunningham",
+   "url": "https://ilga.gov/senate/Senator.asp?GA=103&MemberID=3063",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Will Davis",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3026",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Bill Hauter",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3238",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Willie Preston",
+   "url": "https://ilga.gov/senate/Senator.asp?GA=103&MemberID=3209",
+   "status": 404
+  },
+  {
+   "state": "IL",
+   "name": "Yolonda Morris",
+   "url": "https://ilga.gov/house/Rep.asp?GA=103&MemberID=3255",
+   "status": 404
+  },
+  {
+   "state": "NY",
+   "name": "Anna Kelles",
+   "url": "https://assembly.state.ny.us/mem/Anna-Kelles",
+   "status": 404
+  },
+  {
+   "state": "VT",
+   "name": "Michael Nigro",
+   "url": "https://legislature.vermont.gov/Documents/SmallMaps/BEN-2-2.pdf",
+   "status": 404
+  },
+  {
+   "state": "NY",
+   "name": "Eddie Gibbs",
+   "url": "https://assembly.state.ny.us/mem/Eddie-Gibbs",
+   "status": 404
+  },
+  {
+   "state": "VT",
+   "name": "Bob Norris",
+   "url": "https://legislature.vermont.gov/Documents/SmallMaps/FRA-4.pdf",
+   "status": 404
+  },
+  {
+   "state": "VT",
+   "name": "Tanya Vyhovsky",
+   "url": "https://legislature.vermont.gov/Documents/SmallMaps/CHI-8-1.pdf",
+   "status": 404
+  },
+  {
+   "state": "VT",
+   "name": "Thomas Chittenden",
+   "url": "https://legislature.vermont.gov/Documents/SmallMaps/CHIDIST.pdf",
+   "status": 404
+  },
+  {
+   "state": "ME",
+   "name": "Nicole Grohoski",
+   "url": "https://legislature.maine.gov/district-7",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Andy Fugate",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=94",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Annie Menz",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=45",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Anthony Moore",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=57",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Arturo Alonso",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=89",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Bob Culver",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=4",
+   "status": 404
+  },
+  {
+   "state": "VA",
+   "name": "Barry Knight",
+   "url": "https://house.vga.virginia.gov/members/H0206",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Brad Boles",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=51",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Brian Hill",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=47",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Carl Newton",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=58",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Chad Caldwell",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=40",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Chris Banning",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=24",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Chris Kannady",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=91",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Chris Sneed",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=14",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Clay Staires",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=66",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Cody Maynard",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=21",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Collin Duel",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=31",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Cyndi Munson",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=85",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Cindy Roe",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=42",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Daniel Pae",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=62",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Danny Sterling",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=27",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Danny Williams",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=28",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "David Hardin",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=86",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "David Smith",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=18",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Dell Kerbs",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=26",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Denise Crosswhite Hader",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=41",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Dick Lowe",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=56",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Eddy Dempsey",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=1",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Ellyn Hefner",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=87",
+   "status": 404
+  },
+  {
+   "state": "RI",
+   "name": "Bob Britto",
+   "url": "https://www.rilegislature.gov/senators/britor/Pages/Biography.aspx",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Eric Roberts",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=83",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Gerrid Kendrix",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=52",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Jacob Rosecrants",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=46",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Jared Deck",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=44",
+   "status": 404
+  },
+  {
+   "state": "CO",
+   "name": "Lorena García",
+   "url": "https://leg.colorado.gov/legislators/lorena-garc%C3%ADa",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Jay Steagall",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=43",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Jim Grego",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=17",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Jim Olsen",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=2",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "John George",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=36",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "John Kane",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=11",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "John Pfeiffer",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=38",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "John Waldron",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=77",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Josh Cantrell",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=49",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Josh West",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=5",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Judd Strom",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=10",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Justin Humphrey",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=19",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Ken Luttrell",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=37",
+   "status": 404
+  },
+  {
+   "state": "MT",
+   "name": "Emma Kerr-Carpenter",
+   "url": "https://leg.mt.gov/legislator-information/roster/individual/5007",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Kenton Patzkowsky",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=61",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Kevin West",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=54",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Kyle Hilbert",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=29",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Marilyn Stark",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=100",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Mark Lawson",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=30",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Mark Lepak",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=9",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Mark Tedford",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=69",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Max Wolfley",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=95",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Melissa Provenzano",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=79",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Meloyde Blancett",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=78",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Mickey Dollens",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=93",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Mike Dobrinski",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=59",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Mike Osburn",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=81",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Neil Hays",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=13",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Nick Archer",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=55",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Nicole Miller",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=82",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Preston Stinson",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=96",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Rande Worthen",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=64",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Rick West",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=3",
+   "status": 404
+  },
+  {
+   "state": "ID",
+   "name": "Julie VanOrden",
+   "url": "https://legislature.idaho.gov/house/membershipSingle.cfm?ID=2129",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Robert Manger",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=101",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Ronny Johns",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=25",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Ross Ford",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=76",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Rusty Cornwell",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=6",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Scott Fetgatter",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=16",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Stan May",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=80",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Steve Bashore",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=7",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Suzanne Schreiber",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=70",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "T.J. Marti",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=75",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Tammy Townley",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=48",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Tammy West",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=84",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Tom Gann",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=8",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Toni Hasenbeck",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=65",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Trey Caldwell",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=63",
+   "status": 404
+  },
+  {
+   "state": "OK",
+   "name": "Trish Ranson",
+   "url": "https://www.okhouse.gov/Members/Contact.aspx?District=34",
+   "status": 404
+  },
+  {
+   "state": "OH",
+   "name": "Al Cutrona",
+   "url": "https://ohiohouse.gov/al-cutrona",
+   "status": 404
+  },
+  {
+   "state": "OH",
+   "name": "Beth Liston",
+   "url": "https://ohiohouse.gov/beth-liston",
+   "status": 404
+  },
+  {
+   "state": "OH",
+   "name": "Brian Lampton",
+   "url": "https://ohiohouse.gov/brian-e-lampton",
+   "status": 404
+  },
+  {
+   "state": "OH",
+   "name": "Casey Weinstein",
+   "url": "https://ohiohouse.gov/casey-weinstein",
+   "status": 404
+  },
+  {
+   "state": "OH",
+   "name": "Catherine Ingram",
+   "url": "https://ohiohouse.gov/catherine-d-ingram",
+   "status": 404
+  },
+  {
+   "state": "ID",
+   "name": "Steve Miller",
+   "url": "https://legislature.idaho.gov/house/membershipSingle.cfm?ID=2134",
+   "status": 404
+  },
+  {
+   "state": "OH",
+   "name": "D.J. Swearingen",
+   "url": "https://ohiohouse.gov/d-j-swearingen",
+   "status": 404
+  },
+  {
+   "state": "VA",
+   "name": "Michelle Maldonado",
+   "url": "https://house.vga.virginia.gov/members/H0340",
+   "status": 404
+  },
+  {
+   "state": "OH",
+   "name": "Kyle Koehler",
+   "url": "https://ohiohouse.gov/j-kyle-koehler",
+   "status": 404
+  },
+  {
+   "state": "WA",
+   "name": "Emily Alvarado",
+   "url": "https://housedemocrats.wa.gov/Alvarado/",
+   "status": 410
+  },
+  {
+   "state": "WA",
+   "name": "Javier Valdez",
+   "url": "https://housedemocrats.wa.gov/legislators/Javier-Valdez/",
+   "status": 410
+  },
+  {
+   "state": "WA",
+   "name": "Jess Bateman",
+   "url": "https://housedemocrats.wa.gov/Bateman/",
+   "status": 410
+  },
+  {
+   "state": "WA",
+   "name": "John Lovick",
+   "url": "https://housedemocrats.wa.gov/legislators/John-Lovick/",
+   "status": 410
+  },
+  {
+   "state": "OH",
+   "name": "Kent Smith",
+   "url": "https://ohiohouse.gov/kent-smith",
+   "status": 404
+  },
+  {
+   "state": "OH",
+   "name": "Marilyn John",
+   "url": "https://ohiohouse.gov/marilyn-s-john",
+   "status": 404
+  },
+  {
+   "state": "WA",
+   "name": "Marcus Riccelli",
+   "url": "https://housedemocrats.wa.gov/legislators/Marcus-Riccelli/",
+   "status": 410
+  },
+  {
+   "state": "WA",
+   "name": "Mike Chapman",
+   "url": "https://housedemocrats.wa.gov/Chapman/",
+   "status": 410
+  },
+  {
+   "state": "OH",
+   "name": "Paula Hicks-Hudson",
+   "url": "https://ohiohouse.gov/paula-hicks-hudson",
+   "status": 404
+  },
+  {
+   "state": "WA",
+   "name": "Noel Frame",
+   "url": "https://housedemocrats.wa.gov/Frame/",
+   "status": 410
+  },
+  {
+   "state": "OH",
+   "name": "Shane Wilkin",
+   "url": "https://ohiohouse.gov/shane-wilkin",
+   "status": 404
+  },
+  {
+   "state": "OH",
+   "name": "Susan Manchester",
+   "url": "https://ohiohouse.gov/susan-manchester",
+   "status": 404
+  },
+  {
+   "state": "WA",
+   "name": "Sharon Shewmake",
+   "url": "https://housedemocrats.wa.gov/legislators/Sharon-Shewmake/",
+   "status": 410
+  },
+  {
+   "state": "OH",
+   "name": "Tex Fischer",
+   "url": "https://ohiohouse.gov/houseapp/members/tex-fischer",
+   "status": 404
+  },
+  {
+   "state": "OH",
+   "name": "Tom Patton",
+   "url": "https://ohiohouse.gov/thomas-f-patton",
+   "status": 404
+  },
+  {
+   "state": "WA",
+   "name": "Tina Orwall",
+   "url": "https://housedemocrats.wa.gov/legislators/Tina-Orwall/",
+   "status": 410
+  },
+  {
+   "state": "WA",
+   "name": "Vandana Slatter",
+   "url": "https://housedemocrats.wa.gov/legislators/Vandana-Slatter/",
+   "status": 410
+  },
+  {
+   "state": "WA",
+   "name": "Victoria Hunt",
+   "url": "https://housedemocrats.wa.gov/hunt/",
+   "status": 410
+  },
+  {
+   "state": "IA",
+   "name": "Art Staed",
+   "url": "https://eepurl.com/gXSMIH",
+   "status": 404
+  },
+  {
+   "state": "IN",
+   "name": "Carolyn Jackson",
+   "url": "https://indianahousedemocrats.org/members/carolyn-b.-jackson",
+   "status": 404
+  },
+  {
+   "state": "IN",
+   "name": "Gregory Porter",
+   "url": "https://indianahousedemocrats.org/members/gregory-w-porter",
+   "status": 404
+  },
+  {
+   "state": "IN",
+   "name": "John Bartlett",
+   "url": "https://indianahousedemocrats.org/members/john-l-bartlett",
+   "status": 404
+  },
+  {
+   "state": "OH",
+   "name": "Bill Reineke",
+   "url": "https://www.ohiohouse.gov/bill-reineke",
+   "status": 404
+  },
+  {
+   "state": "OH",
+   "name": "George Lang",
+   "url": "https://www.ohiohouse.gov/george-f-lang",
+   "status": 404
+  },
+  {
+   "state": "IA",
+   "name": "Liz Bennett",
+   "url": "https://eepurl.com/gXSfzr",
+   "status": 404
+  },
+  {
+   "state": "IA",
+   "name": "Molly Donahue",
+   "url": "https://eepurl.com/gXN_ff",
+   "status": 404
+  },
+  {
+   "state": "IA",
+   "name": "Sean Bagniewski",
+   "url": "https://eepurl.com/ihfkvX",
+   "status": 404
+  },
+  {
+   "state": "MO",
+   "name": "Angela Mosley",
+   "url": "https://www.senate.mo.gov/mem13",
+   "status": 404
+  },
+  {
+   "state": "MO",
+   "name": "Ben Brown",
+   "url": "https://www.senate.mo.gov/Senators/Member/26",
+   "status": 404
+  },
+  {
+   "state": "MO",
+   "name": "Brian Williams",
+   "url": "https://www.senate.mo.gov/mem14",
+   "status": 404
+  },
+  {
+   "state": "MO",
+   "name": "Cindy O'Laughlin",
+   "url": "https://www.senate.mo.gov/mem18",
+   "status": 404
+  },
+  {
+   "state": "MO",
+   "name": "Curtis Trent",
+   "url": "https://www.senate.mo.gov/Senators/Member/20",
+   "status": 404
+  },
+  {
+   "state": "MO",
+   "name": "Jason Bean",
+   "url": "https://www.senate.mo.gov/mem25",
+   "status": 404
+  },
+  {
+   "state": "MO",
+   "name": "Jill Carter",
+   "url": "https://www.senate.mo.gov/Senators/Member/32/",
+   "status": 404
+  },
+  {
+   "state": "MO",
+   "name": "Justin Brown",
+   "url": "https://www.senate.mo.gov/mem16",
+   "status": 404
+  },
+  {
+   "state": "MO",
+   "name": "Karla May",
+   "url": "https://www.senate.mo.gov/mem04",
+   "status": 404
+  },
+  {
+   "state": "MO",
+   "name": "Lincoln Hough",
+   "url": "https://www.senate.mo.gov/mem30",
+   "status": 404
+  },
+  {
+   "state": "MO",
+   "name": "Mary Elizabeth Coleman",
+   "url": "https://www.senate.mo.gov/Senators/Member/22",
+   "status": 404
+  },
+  {
+   "state": "MO",
+   "name": "Mike Bernskoetter",
+   "url": "https://www.senate.mo.gov/mem06",
+   "status": 404
+  },
+  {
+   "state": "MO",
+   "name": "Mike Cierpiot",
+   "url": "https://www.senate.mo.gov/mem08",
+   "status": 404
+  },
+  {
+   "state": "MO",
+   "name": "Nick Schroer",
+   "url": "https://www.senate.mo.gov/Senators/Member/02",
+   "status": 404
+  },
+  {
+   "state": "MO",
+   "name": "Rusty Black",
+   "url": "https://www.senate.mo.gov/Senators/Member/12",
+   "status": 404
+  },
+  {
+   "state": "MO",
+   "name": "Sandy Crawford",
+   "url": "https://www.senate.mo.gov/mem28",
+   "status": 404
+  },
+  {
+   "state": "MO",
+   "name": "Steve Roberts",
+   "url": "https://www.senate.mo.gov/mem05",
+   "status": 404
+  },
+  {
+   "state": "MO",
+   "name": "Tony Luetkemeyer",
+   "url": "https://www.senate.mo.gov/mem34",
+   "status": 404
+  },
+  {
+   "state": "MO",
+   "name": "Tracy McCreery",
+   "url": "https://www.senate.mo.gov/Senators/Member/24",
+   "status": 404
+  },
+  {
+   "state": "MO",
+   "name": "Travis Fitzwater",
+   "url": "https://www.senate.mo.gov/Senators/Member/10",
+   "status": 404
+  },
+  {
+   "state": "OH",
+   "name": "Nathan Manning",
+   "url": "https://www.ohiosenate.gov/members/nathan-h-manning",
+   "status": 404
+  },
+  {
+   "state": "DC",
+   "name": "Doni Crawford",
+   "url": "https://dccouncil.gov/council/at-large-councilmember-doni-crawford/",
+   "status": 404
+  },
+  {
+   "state": "DC",
+   "name": "Robert White",
+   "url": "https://dccouncil.gov/council/councilmember-robert-c-white-jr/",
+   "status": 404
+  },
+  {
+   "state": "KS",
+   "name": "Wanda Paige",
+   "url": "https://kslegislature.gov/li/b2023_24/members/rep_paige_wanda_1/",
+   "status": 404
+  },
+  {
+   "state": "AK",
+   "name": "Scott Kawasaki",
+   "url": "https://aksenatedems.com/sen-kawasaki/",
+   "status": 404
+  },
+  {
+   "state": "IA",
+   "name": "Mark Cisneros",
+   "url": "https://gmail.us7.list-manage.com/subscribe?u=85fcfa7dcbbb7c52a233de778&id=e13efc9ee4",
+   "status": 404
+  },
+  {
+   "state": "MO",
+   "name": "Stephen Webber",
+   "url": "https://senate.mo.gov/Senators/Member/19",
+   "status": 404
+  }
+ ],
+ "blockedHosts": {
+  "www.rilegislature.gov": 20,
+  "www.indianahouserepublicans.com": 61,
+  "www.nysenate.gov": 58,
+  "housedems.com": 57,
+  "www.assemblydems.com": 47,
+  "www.capitol.hawaii.gov": 42,
+  "capitol.hawaii.gov": 33,
+  "ad01.asmrc.org": 2,
+  "ad33.asmrc.org": 1,
+  "ad75.asmrc.org": 1,
+  "ad08.asmrc.org": 1,
+  "ad72.asmrc.org": 1,
+  "ad09.asmrc.org": 1,
+  "ad47.asmrc.org": 1,
+  "ad36.asmrc.org": 1,
+  "ad03.asmrc.org": 1,
+  "ad05.asmrc.org": 1,
+  "ad07.asmrc.org": 1,
+  "ad22.asmrc.org": 1,
+  "ad71.asmrc.org": 1,
+  "ad58.asmrc.org": 1,
+  "ad63.asmrc.org": 1,
+  "ad32.asmrc.org": 1,
+  "ad34.asmrc.org": 1,
+  "ad70.asmrc.org": 1,
+  "repmoore.com": 1,
+  "repsheehan.com": 1,
+  "schepisi.senatenj.com": 1,
+  "bucco.senatenj.com": 1,
+  "steinhardt.senatenj.com": 1,
+  "oscanlon.senatenj.com": 1,
+  "holzapfel.senatenj.com": 1,
+  "bramnick.senatenj.com": 1,
+  "pennacchio.senatenj.com": 1,
+  "corrado.senatenj.com": 1,
+  "testa.senatenj.com": 1,
+  "singer.senatenj.com": 1,
+  "polistina.senatenj.com": 1,
+  "www.linkedin.com": 1,
+  "repmarcanderson.com": 1,
+  "repbarger.com": 1
+ }
+}
