@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
+import { Archivo, IBM_Plex_Mono } from 'next/font/google';
 import { Analytics } from "@vercel/analytics/react"
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
@@ -9,13 +9,14 @@ import { ChatPanel } from '@/components/chat/ChatPanel';
 import { NotInEmbed } from '@/components/layout/NotInEmbed';
 import './globals.css';
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
+const archivo = Archivo({
+  variable: '--font-archivo',
   subsets: ['latin'],
 });
 
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
+const plexMono = IBM_Plex_Mono({
+  weight: ['400', '500', '600'],
+  variable: '--font-plex-mono',
   subsets: ['latin'],
 });
 
@@ -57,7 +58,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col bg-white dark:bg-gray-900`}
+        className={`${archivo.variable} ${plexMono.variable} antialiased min-h-screen flex flex-col bg-background dark:bg-gray-900`}
       >
         <a
           href="#main-content"

@@ -1,39 +1,69 @@
 @import "tailwindcss";
 
+/*
+ * The editorial direction (2026-11-04). Three moves carry it, and all three
+ * live here so the app follows without touching every component:
+ *   1. An ivory ground instead of white.
+ *   2. A deeper purple that survives on ivory at 4.5:1.
+ *   3. Square corners, by reshaping Tailwind's radius scale rather than
+ *      editing several hundred rounded-* classes.
+ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Warm ground. White reads as a web app; ivory reads as print. */
+  --background: #F8F6F1;
+  --foreground: #1A1A18;
+  /* Cards and inputs sit a shade above the ground rather than below it. */
+  --surface: #FFFEFB;
+  --rule: #DCD7CA;
+  /* Mono labels and small print. Passes 4.5:1 on both ivory and surface. */
+  --ochre: #6B5B3E;
 
-  /* Brand colors */
-  --purple-50: #F5F0FF;
-  --purple-100: #EDE5FF;
-  --purple-200: #D9C7FF;
-  --purple-300: #B794F6;
-  --purple-400: #9F7AEA;
-  --purple-500: #805AD5;
-  --purple-600: #6A39C9;
-  --purple-700: #5A2EB0;
-  --purple-800: #4A2590;
-  --purple-900: #3B1C70;
+  /* Brand purple, deepened. The old ramp peaked at a neon #6A39C9 that
+     vibrates on a warm ground and failed contrast under 600. */
+  --purple-50: #F6F2FA;
+  --purple-100: #EBE2F3;
+  --purple-200: #D6C7E8;
+  --purple-300: #B79CD4;
+  --purple-400: #9163C4;
+  --purple-500: #7544A8;
+  --purple-600: #5B2E8A;
+  --purple-700: #4A2472;
+  --purple-800: #3A1A5C;
+  --purple-900: #2A1243;
 
-  /* Neutral grays */
-  --gray-50: #F9FAFB;
-  --gray-100: #F3F4F6;
-  --gray-200: #E5E7EB;
-  --gray-300: #D1D5DB;
-  --gray-400: #9CA3AF;
-  --gray-500: #6B7280;
-  --gray-600: #4B5563;
-  --gray-700: #374151;
-  --gray-800: #1F2937;
-  --gray-900: #111827;
+  /* Neutrals warmed to sit on ivory; the cool grays looked blue against it. */
+  --gray-50: #F4F2EC;
+  --gray-100: #EDEAE1;
+  --gray-200: #DCD7CA;
+  --gray-300: #C9C3B5;
+  --gray-400: #9A9384;
+  --gray-500: #6E685C;
+  --gray-600: #4A4A45;
+  --gray-700: #3A3A35;
+  --gray-800: #262622;
+  --gray-900: #1A1A18;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-surface: var(--surface);
+  --color-rule: var(--rule);
+  --color-ochre: var(--ochre);
+  --font-sans: var(--font-archivo);
+  --font-mono: var(--font-plex-mono);
+
+  /* Square corners everywhere. Reshaping the scale turns every existing
+     rounded-sm/lg/xl/2xl/3xl into a square corner at once; rounded-full is
+     not part of this scale, so avatars stay circular. */
+  --radius-xs: 0px;
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+  --radius-2xl: 0px;
+  --radius-3xl: 0px;
+  --radius-4xl: 0px;
 
   /* Brand purple palette */
   --color-purple-50: var(--purple-50);
@@ -70,7 +100,47 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  font-family: var(--font-archivo), system-ui, sans-serif;
+}
+
+/*
+ * The label voice: mono, small, wide-tracked, upper. Used for field labels,
+ * stats, nav and metadata. This is the change that makes the product read as
+ * a civic data organisation rather than a consumer app.
+ */
+.label {
+  font-family: var(--font-plex-mono), ui-monospace, monospace;
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ochre);
+}
+
+/*
+ * The label voice inverted, for the ink bands. Ochre on near-black is a real
+ * contrast failure, and the lookup band on /representatives is exactly where
+ * the field labels live.
+ */
+.on-ink .label {
+  color: #CFCBC2;
+}
+
+.on-ink .label-lg,
+.on-ink a {
+  color: #F8F6F1;
+}
+
+/* Any small control inside an ink band, not just anchors. */
+.on-ink button.text-xs,
+.on-ink .text-xs {
+  color: #D6C7E8;
+}
+
+.label-lg {
+  font-family: var(--font-plex-mono), ui-monospace, monospace;
+  font-size: 0.78125rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
 /* Focus ring utility */

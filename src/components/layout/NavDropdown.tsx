@@ -76,7 +76,7 @@ export function NavDropdown({ label, items, emphasis = false, menuWidthClass = '
         onClick={() => setOpen(!open)}
         aria-expanded={open}
         aria-haspopup="menu"
-        className={`flex items-center gap-1 text-sm transition-colors ${
+        className={`label-lg flex items-center gap-1 transition-colors ${
           emphasis
             ? 'font-semibold text-purple-700 dark:text-purple-300 hover:text-purple-900 dark:hover:text-purple-100'
             : isActive

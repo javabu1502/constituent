@@ -28,7 +28,7 @@ export function MainNav({ user, isOrg }: { user: User | null; isOrg: boolean }) 
         <>
           <Link
             href="/contact"
-            className="px-3 py-1.5 bg-purple-600 text-white text-sm font-medium rounded-lg hover:bg-purple-700 transition-colors"
+            className="label-lg px-4 py-2.5 bg-purple-600 text-white hover:bg-purple-700 transition-colors"
           >
             Write to Your Officials
           </Link>

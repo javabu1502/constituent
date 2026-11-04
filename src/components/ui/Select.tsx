@@ -18,7 +18,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
         {label && (
           <label
             htmlFor={selectId}
-            className="block text-sm font-medium text-gray-700 mb-1"
+            className="label block mb-1.5"
           >
             {label}
           </label>
@@ -27,13 +27,17 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
           ref={ref}
           id={selectId}
           className={cn(
-            'w-full px-3 py-2 border rounded-lg transition-colors appearance-none',
-            'bg-white text-gray-900',
+            'w-full px-3 py-2.5 border transition-colors appearance-none',
+            // An explicit surface. This carried only `bg-white`, which the
+            // chevron's background shorthand reset, so the control rendered
+            // see-through: invisible on a white card, and a dark hole once it
+            // sat on an ink band.
+            'bg-surface text-gray-900 dark:bg-gray-700 dark:text-white',
             'focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent',
             'bg-[url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%236B7280\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'%3e%3cpolyline points=\'6 9 12 15 18 9\'%3e%3c/polyline%3e%3c/svg%3e")] bg-[length:1.25rem] bg-[right_0.5rem_center] bg-no-repeat pr-10',
             error
               ? 'border-red-500 focus:ring-red-500'
-              : 'border-gray-300 hover:border-gray-400',
+              : 'border-gray-300 dark:border-gray-600 hover:border-gray-500',
             props.disabled && 'bg-gray-50 cursor-not-allowed',
             className
           )}

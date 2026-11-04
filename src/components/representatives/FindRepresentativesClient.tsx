@@ -23,6 +23,15 @@ function partyAvatarClass(party: string): string {
   return 'bg-gray-500 text-white';
 }
 
+/** Party as a rule above the card. Blue and red differ in lightness too, so
+ *  the distinction survives for a red-green colour-blind reader. */
+function partyRule(party: string): string {
+  const p = (party || '').toLowerCase();
+  if (p.includes('democrat')) return '#2B5CA8';
+  if (p.includes('republican')) return '#A8352B';
+  return '#6E685C';
+}
+
 function partyBadgeClass(party: string): string {
   const p = (party || '').toLowerCase();
   if (p.includes('democrat')) return 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300';
@@ -84,7 +93,9 @@ function RepCard({ official }: { official: Official }) {
   const recordHref = official.level === 'federal' ? `/rep/${official.id}` : null;
 
   return (
-    <li className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4 flex flex-col">
+    <li className="bg-surface dark:bg-gray-800 border border-rule dark:border-gray-700 flex flex-col">
+      <div className="h-1" style={{ background: partyRule(official.party) }} aria-hidden="true" />
+      <div className="p-4 flex flex-col flex-1">
       <div className="flex items-start gap-3 mb-3">
         <Avatar official={official} />
         <div className="min-w-0 flex-1">
@@ -97,7 +108,7 @@ function RepCard({ official }: { official: Official }) {
         </div>
       </div>
 
-      <p className="text-xs text-gray-600 dark:text-gray-400 mb-2">{official.title}</p>
+      <p className="label mb-2">{official.title}</p>
 
       <dl className="text-xs text-gray-500 dark:text-gray-400 space-y-1 mb-3">
         {official.phone && (
@@ -143,6 +154,7 @@ function RepCard({ official }: { official: Official }) {
           )}
         </div>
       </div>
+      </div>
     </li>
   );
 }
@@ -151,8 +163,8 @@ function Group({ title, note, officials }: { title: string; note?: string; offic
   if (officials.length === 0) return null;
   return (
     <section className="mb-8">
-      <h2 className="text-lg font-semibold text-gray-900 dark:text-white">{title}</h2>
-      {note && <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5 mb-3">{note}</p>}
+      <h2 className="label mb-1">{title}</h2>
+      {note && <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">{note}</p>}
       <ul className={`grid gap-4 sm:grid-cols-2 lg:grid-cols-3 ${note ? '' : 'mt-3'}`}>
         {officials.map((o) => (
           <RepCard key={`${o.level}-${o.id}`} official={o} />
@@ -226,20 +238,26 @@ export function FindRepresentativesClient() {
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-8">
-      <div className="max-w-2xl mx-auto text-center mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Find My Representatives</h1>
-        <p className="text-gray-600 dark:text-gray-300">
-          Enter your home address to see everyone who represents you, from Congress down to your county and school board.
+      <div className="max-w-3xl mb-10">
+        <p className="label mb-3">Step one</p>
+        <h1 className="text-5xl sm:text-6xl font-extrabold tracking-tighter leading-[0.96] text-gray-900 dark:text-white mb-5">
+          Find every person who represents you.
+        </h1>
+        <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300 max-w-[58ch]">
+          From your two senators down to your school board trustee. A ZIP code is not enough, because ZIP codes cross
+          district lines.
         </p>
       </div>
 
       <form
-        className="max-w-2xl mx-auto bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm p-6 mb-8"
+        className="on-ink bg-gray-900 dark:bg-gray-800 text-white p-6 sm:p-8 mb-10"
         onSubmit={(e) => {
           e.preventDefault();
           void lookup(false);
         }}
       >
+        <h2 className="text-2xl font-bold tracking-tight mb-1">Your home address</h2>
+        <p className="text-sm text-gray-300 mb-5">Used to work out your districts. Never shown publicly, never sold.</p>
         <AddressAutocomplete onAddressChange={setAddress} label="Home address" />
 
         {streetWarning && (
@@ -279,22 +297,23 @@ export function FindRepresentativesClient() {
         <button
           type="submit"
           disabled={loading}
-          className="mt-4 w-full py-3 bg-purple-600 hover:bg-purple-700 disabled:opacity-50 text-white font-medium rounded-lg transition-colors"
+          className="label-lg mt-5 w-full py-4 bg-purple-600 hover:bg-purple-500 disabled:opacity-50 text-white transition-colors"
         >
-          {loading ? 'Looking up your districts' : 'Find my representatives'}
+          {loading ? 'Looking up your districts' : 'Find my representatives \u2192'}
         </button>
-        <p className="mt-3 text-xs text-gray-500 dark:text-gray-400 text-center">
+        <p className="mt-4 text-xs text-gray-400 text-center">
           Your address is used to work out your districts and is not saved unless you have an account.
         </p>
       </form>
 
       {officials && (
         <div aria-live="polite">
-          <div className="mb-6 text-center">
-            <p className="text-sm text-gray-600 dark:text-gray-300">
-              {officials.length} officials represent {titleCaseCity(resolved?.city || address.city)}, {resolved?.stateCode || address.state}
+          <div className="mb-8 flex flex-wrap items-baseline gap-x-6 gap-y-2 border-b border-gray-900 dark:border-gray-600 pb-3">
+            <p className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+              {titleCaseCity(resolved?.city || address.city)}, {resolved?.stateCode || address.state}
             </p>
-            {districtLine && <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{districtLine}</p>}
+            {districtLine && <p className="label-lg text-ochre">{districtLine}</p>}
+            <p className="label-lg ml-auto text-gray-600 dark:text-gray-400">{officials.length} officials</p>
           </div>
 
           {districtUnresolved && (

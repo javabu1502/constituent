@@ -96,7 +96,7 @@ export default async function HomePage() {
       />
 
       {/* Hero Section */}
-      <section className="py-16 sm:py-24 px-4 bg-gradient-to-b from-purple-50 via-purple-50/50 to-white dark:from-gray-800 dark:via-gray-800/50 dark:to-gray-900">
+      <section className="py-16 sm:py-24 px-4 bg-background dark:bg-gray-900 border-b border-gray-900 dark:border-gray-700">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
             {/* Jared's call (2026-09-18): keep the original hero. It reads

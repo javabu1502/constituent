@@ -237,7 +237,7 @@ export function AddressAutocomplete({
           <button
             type="button"
             onClick={() => setShowManual(false)}
-            className="text-xs text-purple-600 dark:text-purple-400 hover:underline"
+            className="text-xs underline underline-offset-2 text-purple-700 dark:text-purple-300 hover:no-underline"
           >
             Use address search instead
           </button>
@@ -254,7 +254,7 @@ export function AddressAutocomplete({
         </p>
       )}
       <div>
-        <label htmlFor="address-autocomplete" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+        <label htmlFor="address-autocomplete" className="label block mb-1.5">
           {label}
         </label>
         <input
@@ -271,7 +271,7 @@ export function AddressAutocomplete({
       <button
         type="button"
         onClick={() => setShowManual(true)}
-        className="text-xs text-purple-600 dark:text-purple-400 hover:underline"
+        className="text-xs underline underline-offset-2 text-purple-700 dark:text-purple-300 hover:no-underline"
       >
         Enter address manually
       </button>

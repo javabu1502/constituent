@@ -9,19 +9,22 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = 'primary', size = 'md', isLoading, disabled, children, ...props }, ref) => {
-    const baseStyles = 'inline-flex items-center justify-center font-medium rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed';
+    // Buttons speak in the label voice: mono, uppercase, wide-tracked. The
+    // radius scale is already square, so no rounded-* class is needed.
+    const baseStyles =
+      'inline-flex items-center justify-center font-mono uppercase tracking-[0.05em] transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed';
 
     const variants = {
       primary: 'bg-purple-600 text-white hover:bg-purple-700 focus:ring-purple-600',
-      secondary: 'border-2 border-purple-600 text-purple-600 dark:text-purple-400 dark:border-purple-500 hover:bg-purple-50 dark:hover:bg-purple-900/20 focus:ring-purple-600',
+      secondary: 'border border-gray-900 text-gray-900 dark:text-gray-100 dark:border-gray-300 hover:bg-gray-900 hover:text-white dark:hover:bg-gray-100 dark:hover:text-gray-900 focus:ring-gray-900',
       ghost: 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white focus:ring-gray-400',
       danger: 'bg-red-600 text-white hover:bg-red-700 focus:ring-red-600',
     };
 
     const sizes = {
-      sm: 'px-3 py-1.5 text-sm',
-      md: 'px-4 py-2 text-base',
-      lg: 'px-6 py-3 text-lg',
+      sm: 'px-3 py-2 text-xs',
+      md: 'px-4 py-2.5 text-[0.78125rem]',
+      lg: 'px-6 py-3.5 text-sm',
     };
 
     return (

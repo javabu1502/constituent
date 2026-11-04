@@ -36,11 +36,11 @@ export async function Header() {
   const isOrg = user ? await isOrgAccount(user.id) : false;
 
   return (
-    <header className="border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
-      <div className="max-w-5xl mx-auto px-4 py-4">
+    <header className="border-b border-gray-900 dark:border-gray-700 bg-background dark:bg-gray-800">
+      <div className="max-w-6xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Link href="/" className="font-semibold text-xl text-gray-900 dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
+            <Link href="/" className="font-extrabold text-xl tracking-tight text-gray-900 dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
               {BRAND.name}
             </Link>
             <SearchButton />
