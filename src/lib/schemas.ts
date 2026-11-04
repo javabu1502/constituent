@@ -455,6 +455,26 @@ export const campaignParticipateSchema = z.object({
 type ParseSuccess<T> = { success: true; data: T };
 type ParseError = { success: false; error: string };
 
+/**
+ * "Join the campaign": an organization's supporter sign-up.
+ *
+ * The street address is required and not cosmetic. The list exists so an org
+ * can say "40 supporters in Assembly District 24", and ZIP codes cross
+ * district lines, so a ZIP-only signup would produce district counts that
+ * are confidently wrong.
+ */
+export const orgJoinSchema = z.object({
+  name: z.string().trim().min(2).max(120),
+  email: z.string().trim().email().max(200),
+  street: z.string().trim().min(3).max(200),
+  city: z.string().trim().min(2).max(100),
+  state: z.string().trim().length(2),
+  zip: z.string().trim().regex(/^\d{5}(-\d{4})?$/, 'Enter a 5-digit ZIP code. ZIP+4 is welcome.'),
+  // The exact words the person agreed to, stored with the row.
+  consentText: z.string().trim().max(500).optional(),
+  turnstileToken: z.string().optional(),
+});
+
 export function parseBody<T>(
   schema: z.ZodType<T>,
   data: unknown
