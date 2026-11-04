@@ -96,7 +96,9 @@ openai_api_key = "env(OPENAI_API_KEY)"
 
 # Email testing server. Emails sent with the local dev setup are not actually sent - rather, they
 # are monitored, and you can view the emails that would have been sent from the web interface.
-[inbucket]
+# Named [local_smtp] since CLI v2; [inbucket] makes `config diff` and
+# `config push` fail to load the file at all.
+[local_smtp]
 enabled = true
 # Port to use for the email testing server web interface.
 port = 54324
@@ -179,7 +181,9 @@ password_requirements = ""
 
 [auth.rate_limit]
 # Number of emails that can be sent per hour. Requires auth.email.smtp to be enabled.
-email_sent = 2
+# Every sign-in sends one, so this is the ceiling on how many people can get
+# into the app in an hour, not a spam guard.
+email_sent = 200
 # Number of SMS messages that can be sent per hour. Requires auth.sms to be enabled.
 sms_sent = 30
 # Number of anonymous sign-ins that can be made per hour per IP address. Requires enable_anonymous_sign_ins = true.
@@ -217,15 +221,22 @@ otp_length = 6
 # Number of seconds before the email OTP expires (defaults to 1 hour).
 otp_expiry = 3600
 
-# Use a production-ready SMTP server
-# [auth.email.smtp]
-# enabled = true
-# host = "smtp.sendgrid.net"
-# port = 587
-# user = "apikey"
-# pass = "env(SENDGRID_API_KEY)"
-# admin_email = "admin@email.com"
-# sender_name = "Admin"
+# Sign-in codes go through Resend, the same account and sending domain the app
+# already uses for transactional mail. The built-in Supabase mailer is capped
+# at a handful of messages an hour, which does not work when every single
+# sign-in needs an email.
+#
+# The password is the Resend API key; "resend" is the literal SMTP username
+# Resend expects. Requires mydemocracy.app to be a verified domain in Resend,
+# otherwise Resend rejects the send.
+[auth.email.smtp]
+enabled = true
+host = "smtp.resend.com"
+port = 465
+user = "resend"
+pass = "env(RESEND_API_KEY)"
+admin_email = "login@mydemocracy.app"
+sender_name = "My Democracy"
 
 # Sign-in is a code, not a password, so both mails that carry one must print
 # {{ .Token }}. signInWithOtp sends "confirmation" to an address with no
