@@ -211,8 +211,9 @@ enable_confirmations = true
 secure_password_change = false
 # Controls the minimum amount of time that must pass before sending another signup confirmation or password reset email.
 max_frequency = "1m0s"
-# Number of characters used in the email OTP.
-otp_length = 8
+# Number of characters used in the email OTP. Six, matching the code input in
+# EmailCodeForm: there is no password any more, so this IS the sign-in.
+otp_length = 6
 # Number of seconds before the email OTP expires (defaults to 1 hour).
 otp_expiry = 3600
 
@@ -225,6 +226,19 @@ otp_expiry = 3600
 # pass = "env(SENDGRID_API_KEY)"
 # admin_email = "admin@email.com"
 # sender_name = "Admin"
+
+# Sign-in is a code, not a password, so both mails that carry one must print
+# {{ .Token }}. signInWithOtp sends "confirmation" to an address with no
+# account yet and "magic_link" to one that has; leaving either on the stock
+# template would mail a bare link to half the people signing in, and the form
+# would be waiting for digits that never arrived.
+[auth.email.template.magic_link]
+subject = "Your My Democracy sign-in code"
+content_path = "./supabase/templates/magic_link.html"
+
+[auth.email.template.confirmation]
+subject = "Confirm your email for My Democracy"
+content_path = "./supabase/templates/confirmation.html"
 
 # Uncomment to customize email template
 # [auth.email.template.invite]
