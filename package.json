@@ -14,6 +14,7 @@
     "check-links": "node scripts/check-external-links.mjs",
     "backfill-issue-topic": "npx tsx scripts/backfill-message-issue-topic.ts",
     "build-districts": "scripts/build-district-boundaries.sh",
+    "audit-weigh-ins": "npx tsx scripts/audit-weigh-in-freshness.ts",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test"
