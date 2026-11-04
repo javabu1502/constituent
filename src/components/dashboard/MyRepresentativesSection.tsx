@@ -30,7 +30,7 @@ function RepCard({ official }: { official: Official }) {
     .toUpperCase();
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4 flex flex-col">
+    <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4 flex flex-col">
       <div className="flex items-start gap-3 mb-3">
         {official.photoUrl ? (
           <Image
@@ -77,7 +77,7 @@ function RepCard({ official }: { official: Official }) {
 
 function SkeletonCard() {
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4 animate-pulse">
+    <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4 animate-pulse">
       <div className="flex items-start gap-3 mb-3">
         <div className="w-12 h-12 rounded-full bg-gray-200 dark:bg-gray-700 flex-shrink-0" />
         <div className="flex-1 space-y-2">
@@ -144,7 +144,7 @@ function EditAddressForm({ initialAddress, onSaved, onCancel }: EditAddressFormP
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm p-6">
+    <form onSubmit={handleSubmit} className="bg-surface dark:bg-gray-800 rounded-2xl border border-rule dark:border-gray-700 p-6">
       <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-4">
         {initialAddress?.street ? 'Update Your Address' : 'Add Your Address'}
       </h3>
@@ -224,7 +224,7 @@ export function MyRepresentativesSection({ cachedReps, hasAddress: initialHasAdd
   // No address - prompt user
   if (!hasAddress) {
     return (
-      <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm p-8 text-center">
+      <div className="bg-surface dark:bg-gray-800 rounded-2xl border border-rule dark:border-gray-700 p-8 text-center">
         <div className="w-16 h-16 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center mx-auto mb-4">
           <svg className="w-8 h-8 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />

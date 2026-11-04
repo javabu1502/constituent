@@ -23,7 +23,7 @@ export default function GuidesLoading() {
         {[1, 2, 3, 4, 5, 6].map((i) => (
           <div
             key={i}
-            className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-5"
+            className="bg-surface dark:bg-gray-800 border border-rule dark:border-gray-700 rounded-2xl p-5"
           >
             <div className="flex items-start gap-3">
               <div className="w-10 h-10 bg-gray-200 dark:bg-gray-700 rounded-full flex-shrink-0" />

@@ -104,7 +104,7 @@ export function LogMeeting({
             onChange={(e) => setBody(e.target.value)}
             rows={3}
             placeholder={`What happened in the meeting with ${legislator.name}?`}
-            className="w-full px-3 py-2 text-sm rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
+            className="w-full px-3 py-2 text-sm rounded-lg border border-gray-300 dark:border-gray-600 bg-surface dark:bg-gray-900 text-gray-900 dark:text-white"
           />
           <div className="flex items-center gap-2">
             <label className="text-xs text-gray-600 dark:text-gray-400">Lobbying hours:</label>
@@ -113,7 +113,7 @@ export function LogMeeting({
               value={hours}
               onChange={(e) => setHours(e.target.value)}
               placeholder="1.0"
-              className="w-20 px-2 py-1.5 text-sm rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
+              className="w-20 px-2 py-1.5 text-sm rounded-lg border border-gray-300 dark:border-gray-600 bg-surface dark:bg-gray-900 text-gray-900 dark:text-white"
             />
             <span className="text-[11px] text-gray-400 dark:text-gray-500">counted once for the meeting</span>
           </div>
@@ -131,7 +131,7 @@ export function LogMeeting({
                     <select
                       value={leanings[b.slug] ?? ''}
                       onChange={(e) => setLeanings((prev) => ({ ...prev, [b.slug]: e.target.value }))}
-                      className="shrink-0 text-xs rounded-lg border border-gray-300 dark:border-gray-600 px-1.5 py-1 bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300"
+                      className="shrink-0 text-xs rounded-lg border border-gray-300 dark:border-gray-600 px-1.5 py-1 bg-surface dark:bg-gray-900 text-gray-700 dark:text-gray-300"
                     >
                       <option value="">{b.position ? `keep: ${WHIP_LABELS[b.position as keyof typeof WHIP_LABELS] ?? b.position}` : 'no read'}</option>
                       {WHIP_POSITIONS.map((p) => (

@@ -61,7 +61,7 @@ export function MobileNav({ user, isOrg = false }: { user: User | null; isOrg?: 
       </button>
 
       {open && (
-        <nav id="mobile-menu" aria-label="Mobile navigation" className="absolute right-0 mt-2 w-56 max-w-[calc(100vw-2rem)] bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-lg py-2 z-50">
+        <nav id="mobile-menu" aria-label="Mobile navigation" className="absolute right-0 mt-2 w-56 max-w-[calc(100vw-2rem)] bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 shadow-lg py-2 z-50">
           {inWorkspace ? (
             <>
               {/* An organization's own work comes first. */}

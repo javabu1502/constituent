@@ -107,7 +107,7 @@ export function StatePicker() {
           }}
           onFocus={() => setOpen(true)}
           onKeyDown={handleKeyDown}
-          className="w-full px-4 py-3 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm"
+          className="w-full px-4 py-3 bg-surface dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm"
         />
         <svg
           className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none"
@@ -123,7 +123,7 @@ export function StatePicker() {
             ref={listRef}
             id={listboxId}
             role="listbox"
-            className="absolute z-50 w-full mt-1 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg max-h-60 overflow-y-auto"
+            className="absolute z-50 w-full mt-1 bg-surface dark:bg-gray-800 border border-rule dark:border-gray-700 rounded-lg shadow-lg max-h-60 overflow-y-auto"
           >
             {filtered.map((s, i) => (
               <li
@@ -146,7 +146,7 @@ export function StatePicker() {
         )}
 
         {showDropdown && query.trim().length > 0 && filtered.length === 0 && (
-          <div className="absolute z-50 w-full mt-1 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg px-4 py-3">
+          <div className="absolute z-50 w-full mt-1 bg-surface dark:bg-gray-800 border border-rule dark:border-gray-700 rounded-lg shadow-lg px-4 py-3">
             <p className="text-sm text-gray-500 dark:text-gray-400">No states match &ldquo;{query.trim()}&rdquo;</p>
           </div>
         )}

@@ -86,7 +86,7 @@ export default function StatesIndexPage() {
             <Link
               key={s.code}
               href={`/states/${s.name.toLowerCase().replace(/\s+/g, '-')}`}
-              className="px-3 py-2 bg-white dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600 text-sm text-gray-700 dark:text-gray-300 hover:border-purple-400 dark:hover:border-purple-500 hover:text-purple-600 dark:hover:text-purple-400 transition-colors text-center"
+              className="px-3 py-2 bg-surface dark:bg-gray-700 rounded-lg border border-gray-200 dark:border-gray-600 text-sm text-gray-700 dark:text-gray-300 hover:border-purple-400 dark:hover:border-purple-500 hover:text-purple-600 dark:hover:text-purple-400 transition-colors text-center"
             >
               {s.name}
             </Link>

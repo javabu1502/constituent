@@ -83,7 +83,7 @@ export function OrgSettingsForm({ initial }: { initial: OrgSettings }) {
           onChange={(e) => { setOrgName(e.target.value); setSaved(false); }}
           maxLength={120}
           placeholder="e.g. Nevada Housing Coalition"
-          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400"
+          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 bg-surface dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400"
         />
       </div>
 
@@ -95,7 +95,7 @@ export function OrgSettingsForm({ initial }: { initial: OrgSettings }) {
           onChange={(e) => { setOrgUrl(e.target.value); setSaved(false); }}
           maxLength={300}
           placeholder="https://yourorg.org"
-          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400"
+          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 bg-surface dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400"
         />
       </div>
 

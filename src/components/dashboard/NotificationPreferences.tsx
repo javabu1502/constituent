@@ -63,7 +63,7 @@ export function NotificationPreferences({ userEmail }: { userEmail: string }) {
 
   if (loading) {
     return (
-      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 animate-pulse">
+      <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4 animate-pulse">
         <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/3 mb-2" />
         <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-2/3" />
       </div>
@@ -71,7 +71,7 @@ export function NotificationPreferences({ userEmail }: { userEmail: string }) {
   }
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4">
+    <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4">
       <div className="flex items-center justify-between">
         <div>
           <h4 className="text-sm font-semibold text-gray-900 dark:text-white">
@@ -150,7 +150,7 @@ export function NotificationPreferences({ userEmail }: { userEmail: string }) {
                 });
               }
             }}
-            className="w-full px-3 py-1.5 text-sm border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-purple-600"
+            className="w-full px-3 py-1.5 text-sm border border-gray-300 dark:border-gray-600 rounded-lg bg-surface dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-purple-600"
           />
           <p className="text-[10px] text-gray-400 dark:text-gray-500 mt-1">
             Digest sent Mondays at 9am ET. Follow-ups sent Wednesdays at 10am ET. You can unsubscribe anytime.

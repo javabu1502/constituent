@@ -33,7 +33,7 @@ export function VoterInfoCard({ userState }: Props) {
 
   if (!stateData) {
     return (
-      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
+      <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-5">
         <div className="flex items-center gap-3 mb-3">
           <div className="w-10 h-10 rounded-full bg-purple-100 dark:bg-purple-900 flex items-center justify-center">
             <svg className="w-5 h-5 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -66,10 +66,10 @@ export function VoterInfoCard({ userState }: Props) {
   const isElectionSoon = nextElection.days <= 60 && nextElection.days > 0;
 
   return (
-    <div className={`rounded-xl border shadow-sm p-5 ${
+    <div className={`rounded-xl border p-5 ${
       isElectionSoon
         ? 'bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-800'
-        : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700'
+        : 'bg-surface dark:bg-gray-800 border-rule dark:border-gray-700'
     }`}>
       <div className="flex items-center gap-3 mb-3">
         <div className={`w-10 h-10 rounded-full flex items-center justify-center ${

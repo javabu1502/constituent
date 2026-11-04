@@ -58,7 +58,7 @@ export function CampaignInsightsPanel({
   }
 
   return (
-    <div className="mb-6 p-5 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm">
+    <div className="mb-6 p-5 bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700">
       <div className="flex items-start justify-between gap-3 mb-3">
         <div>
           <h4 className="text-base font-semibold text-gray-900 dark:text-white flex items-center gap-2">

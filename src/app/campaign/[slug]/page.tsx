@@ -160,7 +160,7 @@ export default async function CampaignPage({ params }: PageProps) {
       {/* Organization branding banner */}
       {branded && (
         <div
-          className="mb-6 p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm flex items-center gap-4"
+          className="mb-6 p-4 bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 flex items-center gap-4"
           style={brandColor ? { borderTop: `4px solid ${brandColor}` } : undefined}
         >
           {campaign.org_logo_url && (
@@ -224,7 +224,7 @@ export default async function CampaignPage({ params }: PageProps) {
           <div className="mt-6">
             <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">{campaign.language === 'es' ? 'Opine' : 'Weigh in'}</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div className="p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm flex flex-col">
+              <div className="p-4 bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 flex flex-col">
                 <p className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">{campaign.language === 'es' ? 'Argumentos a favor' : 'The case for'}</p>
                 <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed flex-1">{campaign.case_for}</p>
                 {campaign.source_for_url && campaign.source_for_label && (
@@ -238,7 +238,7 @@ export default async function CampaignPage({ params }: PageProps) {
                   </a>
                 )}
               </div>
-              <div className="p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm flex flex-col">
+              <div className="p-4 bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 flex flex-col">
                 <p className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2">{campaign.language === 'es' ? 'Argumentos en contra' : 'The case against'}</p>
                 <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed flex-1">{campaign.case_against}</p>
                 {campaign.source_against_url && campaign.source_against_label && (
@@ -264,7 +264,7 @@ export default async function CampaignPage({ params }: PageProps) {
             a specific bill. Neutral issues never reference a bill. */}
         {billSpecific && (
           billCard ? (
-            <div className="mt-6 p-5 bg-white dark:bg-gray-800 rounded-xl border-2 border-purple-300 dark:border-purple-700 shadow-sm">
+            <div className="mt-6 p-5 bg-surface dark:bg-gray-800 rounded-xl border-2 border-purple-300 dark:border-purple-700">
               <p className="text-xs font-semibold uppercase tracking-wider text-purple-600 dark:text-purple-400 mb-2">
                 This campaign is about this bill
               </p>
@@ -396,7 +396,7 @@ export default async function CampaignPage({ params }: PageProps) {
       )}
 
       {/* Participation form */}
-      <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm p-6 sm:p-8">
+      <div className="bg-surface dark:bg-gray-800 rounded-2xl border border-rule dark:border-gray-700 p-6 sm:p-8">
         <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">
           {isStory ? 'Share Your Story' : 'Take Action'}
         </h2>

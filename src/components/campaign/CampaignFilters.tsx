@@ -109,7 +109,7 @@ export function CampaignFilters({ campaigns }: { campaigns: Campaign[] }) {
             id="topic-filter"
             value={activeIssue ?? ''}
             onChange={(e) => setActiveIssue(e.target.value || null)}
-            className="w-full sm:w-auto sm:min-w-[240px] px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-purple-600"
+            className="w-full sm:w-auto sm:min-w-[240px] px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg bg-surface dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-purple-600"
           >
             <option value="">All topics</option>
             {issueAreas.map((area) => (
@@ -142,7 +142,7 @@ export function CampaignFilters({ campaigns }: { campaigns: Campaign[] }) {
               id="state-filter"
               value={stateFilter ?? ''}
               onChange={(e) => setStateFilter(e.target.value || null)}
-              className="px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-purple-600"
+              className="px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg bg-surface dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-purple-600"
             >
               <option value="">All states</option>
               {statesWithCampaigns.map((s) => (
@@ -195,7 +195,7 @@ export function CampaignFilters({ campaigns }: { campaigns: Campaign[] }) {
 
       {/* Grid */}
       {sorted.length === 0 ? (
-        <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm p-8 text-center">
+        <div className="bg-surface dark:bg-gray-800 rounded-2xl border border-rule dark:border-gray-700 p-8 text-center">
           <p className="text-gray-600 dark:text-gray-400">No issues match these filters.</p>
           <button
             onClick={() => { setActiveIssue(null); setKind('all'); setLevel('all'); setStateFilter(null); }}
@@ -210,7 +210,7 @@ export function CampaignFilters({ campaigns }: { campaigns: Campaign[] }) {
             <Link
               key={campaign.id}
               href={`/campaign/${campaign.slug}`}
-              className="block bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5 hover:shadow-md hover:border-purple-300 dark:hover:border-purple-700 transition-all"
+              className="block bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-5 hover:shadow-md hover:border-purple-300 dark:hover:border-purple-700 transition-all"
             >
               {/* The chips wrap instead of competing for one row. Squeezed
                   onto a single line they truncated to nonsense: a civil

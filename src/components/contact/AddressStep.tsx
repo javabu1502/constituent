@@ -183,7 +183,7 @@ export function AddressStep({ state, dispatch }: AddressStepProps) {
             />
           </svg>
         </div>
-        <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+        <h3 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
           Enter Your Home Address
         </h3>
         <p className="text-gray-500 dark:text-gray-400 mt-2 text-sm max-w-sm mx-auto">

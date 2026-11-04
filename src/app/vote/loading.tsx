@@ -13,7 +13,7 @@ export default function VoteLoading() {
       </div>
 
       {/* Empty state skeleton */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-8 text-center animate-pulse">
+      <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-8 text-center animate-pulse">
         <div className="w-16 h-16 bg-gray-200 dark:bg-gray-700 rounded-full mx-auto mb-4" />
         <div className="h-5 bg-gray-200 dark:bg-gray-700 rounded w-40 mx-auto mb-2" />
         <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-64 mx-auto" />

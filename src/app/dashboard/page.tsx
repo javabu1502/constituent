@@ -249,26 +249,26 @@ export default async function DashboardPage() {
           <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">Your Impact</h2>
           <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">What you&rsquo;ve done so far — click through for the details.</p>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-            <a href="#messages" className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4 hover:border-purple-300 dark:hover:border-purple-600 transition-colors">
+            <a href="#messages" className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4 hover:border-purple-300 dark:hover:border-purple-600 transition-colors">
               <p className="text-sm text-gray-500 dark:text-gray-400">Messages Sent</p>
               <p className="text-3xl font-bold text-gray-900 dark:text-white mt-1">{totalMessages}</p>
               <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
                 {emailsSent} email{emailsSent !== 1 ? 's' : ''} · {callsMade} call{callsMade !== 1 ? 's' : ''}
               </p>
             </a>
-            <a href="#messages" className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4 hover:border-purple-300 dark:hover:border-purple-600 transition-colors">
+            <a href="#messages" className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4 hover:border-purple-300 dark:hover:border-purple-600 transition-colors">
               <p className="text-sm text-gray-500 dark:text-gray-400">Officials Reached</p>
               <p className="text-3xl font-bold text-gray-900 dark:text-white mt-1">{uniqueOfficials}</p>
               <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">across {uniqueIssues} issue{uniqueIssues !== 1 ? 's' : ''}</p>
             </a>
-            <a href={myStories.length > 0 ? '#stories' : '/campaigns'} className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4 hover:border-purple-300 dark:hover:border-purple-600 transition-colors">
+            <a href={myStories.length > 0 ? '#stories' : '/campaigns'} className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4 hover:border-purple-300 dark:hover:border-purple-600 transition-colors">
               <p className="text-sm text-gray-500 dark:text-gray-400">Stories Shared</p>
               <p className="text-3xl font-bold text-gray-900 dark:text-white mt-1">{myStories.length}</p>
               <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
                 {myStories.length > 0 ? 'yours to change or revoke' : 'find a campaign to share with'}
               </p>
             </a>
-            <a href={campaigns && campaigns.length > 0 ? '#campaigns' : '/campaign/create'} className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4 hover:border-purple-300 dark:hover:border-purple-600 transition-colors">
+            <a href={campaigns && campaigns.length > 0 ? '#campaigns' : '/campaign/create'} className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4 hover:border-purple-300 dark:hover:border-purple-600 transition-colors">
               <p className="text-sm text-gray-500 dark:text-gray-400">My Campaigns</p>
               <p className="text-3xl font-bold text-gray-900 dark:text-white mt-1">{topLevelCampaigns.length}</p>
               <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
@@ -307,7 +307,7 @@ export default async function DashboardPage() {
         </h2>
         <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">Your outreach history — follow up to keep the pressure on.</p>
         {!messages || messages.length === 0 ? (
-            <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm p-8 text-center">
+            <div className="bg-surface dark:bg-gray-800 rounded-2xl border border-rule dark:border-gray-700 p-8 text-center">
               <div className="w-16 h-16 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center mx-auto mb-4">
                 <svg aria-hidden="true" className="w-8 h-8 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -335,7 +335,7 @@ export default async function DashboardPage() {
                 return (
                   <div
                     key={msg.id}
-                    className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4"
+                    className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4"
                   >
                     <div className="flex items-start justify-between mb-2">
                       <div className="flex items-center gap-2">
@@ -386,7 +386,7 @@ export default async function DashboardPage() {
             Stories you shared with a campaign. You can <strong>change</strong> or <strong>revoke</strong> yours anytime —
             the campaign is flagged either way.
           </p>
-          <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
+          <div className="bg-surface dark:bg-gray-800 rounded-2xl border border-rule dark:border-gray-700 p-4">
             <MyStoriesSection stories={myStories} />
           </div>
         </section>

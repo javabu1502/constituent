@@ -55,7 +55,7 @@ export function FederalSpending({ stateCode, stateName }: { stateCode: string; s
 
       {/* Summary */}
       <div className="grid grid-cols-2 gap-3 mb-4">
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 text-center">
+        <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4 text-center">
           <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">
             {formatMoney(data.totalObligations)}
           </div>
@@ -63,7 +63,7 @@ export function FederalSpending({ stateCode, stateName }: { stateCode: string; s
             FY{data.fiscalYear} Committed Funds
           </div>
         </div>
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 text-center">
+        <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4 text-center">
           <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">
             {data.awardCount > 0 ? data.awardCount.toLocaleString() : '-'}
           </div>
@@ -73,7 +73,7 @@ export function FederalSpending({ stateCode, stateName }: { stateCode: string; s
 
       {/* Top Agencies */}
       {data.topAgencies.length > 0 && (
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5 mb-4">
+        <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-5 mb-4">
           <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-3">
             Top Federal Agencies in {stateName}
           </h3>
@@ -90,7 +90,7 @@ export function FederalSpending({ stateCode, stateName }: { stateCode: string; s
                 </div>
                 <div className="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-1.5">
                   <div
-                    className="h-1.5 rounded-full bg-gradient-to-r from-purple-500 to-purple-600"
+                    className="h-1.5 rounded-full bg-purple-600"
                     style={{ width: `${(agency.amount / maxAgencyAmount) * 100}%` }}
                   />
                 </div>
@@ -102,7 +102,7 @@ export function FederalSpending({ stateCode, stateName }: { stateCode: string; s
 
       {/* Top Recipients */}
       {data.topRecipients.length > 0 && (
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
+        <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-5">
           <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-3">
             Top Recipients in {stateName}
           </h3>

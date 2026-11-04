@@ -1039,7 +1039,7 @@ export function CampaignParticipate({
                       setFollowUpAnswers((prev) => prev.map((a, j) => (j === i ? e.target.value : a)))
                     }
                     maxLength={300}
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
+                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-surface dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
                   />
                 </div>
               ))}
@@ -1089,7 +1089,7 @@ export function CampaignParticipate({
                 placeholder={t.chatPlaceholder}
                 rows={2}
                 disabled={chatStreaming}
-                className="flex-1 px-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 resize-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 text-sm"
+                className="flex-1 px-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 resize-none bg-surface dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 text-sm"
               />
               <button type="button" onClick={() => setChatInput(t.ratherNotSayInput)} disabled={chatStreaming} className="self-end text-xs text-gray-500 dark:text-gray-400 underline whitespace-nowrap pb-3">{t.ratherNotSay}</button>
               <MicButton text={chatInput} setText={setChatInput} disabled={chatStreaming} className="self-end" lang={campaign.language === 'es' ? 'es-US' : 'en-US'} />
@@ -1130,7 +1130,7 @@ export function CampaignParticipate({
                 placeholder={t.whyPlaceholder}
                 rows={4}
                 maxLength={2000}
-                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent resize-y bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
+                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent resize-y bg-surface dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
               />
             </div>
             <Button
@@ -1162,7 +1162,7 @@ export function CampaignParticipate({
                 value={coreDraft}
                 onChange={(e) => setCoreDraft(e.target.value)}
                 rows={10}
-                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent resize-y bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent resize-y bg-surface dark:bg-gray-700 text-gray-900 dark:text-white"
               />
               <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
                 {t.greetingAdded}
@@ -1268,7 +1268,7 @@ export function CampaignParticipate({
                 id="participate-prefix"
                 value={prefix}
                 onChange={(e) => setPrefix(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-surface dark:bg-gray-700 text-gray-900 dark:text-white"
               >
                 <option value="" disabled>{t.choose}</option>
                 {CWC_PREFIXES.map((p) => (
@@ -1287,7 +1287,7 @@ export function CampaignParticipate({
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder={t.yourNamePlaceholder}
-              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
+              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-surface dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
             />
           </div>
         </div>
@@ -1303,7 +1303,7 @@ export function CampaignParticipate({
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="you@example.com"
-              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
+              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-surface dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
             />
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
               {t.emailRequiredNote}
@@ -1322,7 +1322,7 @@ export function CampaignParticipate({
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="you@example.com"
-              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
+              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-surface dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
             />
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
               {t.emailFollowUpNote(campaign.org_name || t.organizerFallback)}
@@ -1340,7 +1340,7 @@ export function CampaignParticipate({
             value={street}
             onChange={(e) => { setStreet(e.target.value); setStreetWarning(false); setStreetWarningAcked(false); }}
             placeholder={t.streetPlaceholder}
-            className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
+            className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-surface dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
           />
         </div>
 
@@ -1355,7 +1355,7 @@ export function CampaignParticipate({
               value={city}
               onChange={(e) => setCity(e.target.value)}
               placeholder={t.city}
-              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
+              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-surface dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
             />
           </div>
           <div>
@@ -1366,7 +1366,7 @@ export function CampaignParticipate({
               id="participate-state"
               value={state}
               onChange={(e) => setState(e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-surface dark:bg-gray-700 text-gray-900 dark:text-white"
             >
               <option value="">{t.selectState}</option>
               {US_STATES.map((s) => (
@@ -1388,7 +1388,7 @@ export function CampaignParticipate({
             onChange={(e) => setZip(e.target.value)}
             placeholder="12345"
             maxLength={10}
-            className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
+            className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-surface dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
           />
         </div>
 
@@ -1689,7 +1689,7 @@ export function CampaignParticipate({
         const pct = (n: number) => (total > 0 ? Math.round((n / total) * 100) : 0);
         const ownPct = pct(rows.find((r) => r.key === stance)?.count ?? 0);
         return (
-          <div className="mb-6 p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm text-left">
+          <div className="mb-6 p-4 bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 text-left">
             <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-1">
               {t.readersSoFar}
             </h4>
@@ -1852,7 +1852,7 @@ function OfficialSendCard({
   };
 
   return (
-    <div className="p-4 rounded-xl border border-gray-200 dark:border-gray-700">
+    <div className="p-4 rounded-xl border border-rule dark:border-gray-700">
       {/* Official info */}
       <div className="mb-3">
         <div className="flex items-center gap-2 mb-0.5">
@@ -2050,7 +2050,7 @@ function OfficialSendCard({
               value={message.subject}
               readOnly={cwcDone}
               onChange={(e) => onEdit({ subject: e.target.value })}
-              className={`w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-sm text-gray-900 dark:text-white ${cwcDone ? 'opacity-70' : ''}`}
+              className={`w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-surface dark:bg-gray-700 text-sm text-gray-900 dark:text-white ${cwcDone ? 'opacity-70' : ''}`}
             />
           </div>
           <div>
@@ -2061,7 +2061,7 @@ function OfficialSendCard({
               readOnly={cwcDone}
               onChange={(e) => onEdit({ body: e.target.value })}
               rows={10}
-              className={`w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent resize-y bg-white dark:bg-gray-700 text-sm leading-relaxed text-gray-900 dark:text-white ${cwcDone ? 'opacity-70' : ''}`}
+              className={`w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent resize-y bg-surface dark:bg-gray-700 text-sm leading-relaxed text-gray-900 dark:text-white ${cwcDone ? 'opacity-70' : ''}`}
             />
           </div>
         </div>

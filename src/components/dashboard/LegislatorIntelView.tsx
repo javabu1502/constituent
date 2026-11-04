@@ -173,7 +173,7 @@ export async function LegislatorIntelView({
       )}
 
       {/* Every campaign the org runs, with this legislator's standing on each */}
-      <section className="mb-8 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-5">
+      <section className="mb-8 rounded-xl border border-rule dark:border-gray-700 bg-surface dark:bg-gray-800 p-5">
         <h2 className="text-base font-semibold text-gray-900 dark:text-white mb-1">Across all your campaigns</h2>
         <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">
           Every bill you&apos;re working, with your whip read and the constituent pressure they received on each.
@@ -209,7 +209,7 @@ export async function LegislatorIntelView({
       </section>
 
       {/* Constituent pressure */}
-      <section className="mb-8 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-5">
+      <section className="mb-8 rounded-xl border border-rule dark:border-gray-700 bg-surface dark:bg-gray-800 p-5">
         <h2 className="text-base font-semibold text-gray-900 dark:text-white mb-1">Constituent pressure</h2>
         <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">
           {msgs.length.toLocaleString()} message{msgs.length !== 1 ? 's' : ''} from constituents across your campaigns
@@ -232,7 +232,7 @@ export async function LegislatorIntelView({
       </section>
 
       {/* Meeting notes */}
-      <section className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-5">
+      <section className="rounded-xl border border-rule dark:border-gray-700 bg-surface dark:bg-gray-800 p-5">
         <h2 className="text-base font-semibold text-gray-900 dark:text-white mb-1">Meeting notes</h2>
         <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">
           Every conversation your team has logged with this lawmaker, across all campaigns.

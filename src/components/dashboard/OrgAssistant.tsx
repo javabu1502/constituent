@@ -123,8 +123,8 @@ export function OrgAssistant() {
   }
 
   return (
-    <div className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 overflow-hidden">
-      <div className="flex items-center justify-between px-4 py-3 border-b border-gray-200 dark:border-gray-700">
+    <div className="rounded-xl border border-rule dark:border-gray-700 bg-surface dark:bg-gray-800 overflow-hidden">
+      <div className="flex items-center justify-between px-4 py-3 border-b border-rule dark:border-gray-700">
         <h2 className="font-semibold text-gray-900 dark:text-white">Campaign assistant</h2>
         <button onClick={() => setOpen(false)} className="text-sm text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">
           Close
@@ -219,7 +219,7 @@ export function OrgAssistant() {
 
       <form
         onSubmit={(e) => { e.preventDefault(); send(input); }}
-        className="flex gap-2 p-3 border-t border-gray-200 dark:border-gray-700"
+        className="flex gap-2 p-3 border-t border-rule dark:border-gray-700"
       >
         <label htmlFor="org-assistant-input" className="sr-only">Ask the campaign assistant</label>
         <input
@@ -228,7 +228,7 @@ export function OrgAssistant() {
           onChange={(e) => setInput(e.target.value)}
           placeholder="Ask about a campaign, or describe a meeting"
           disabled={busy}
-          className="flex-1 px-3 py-2 text-sm rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-purple-600"
+          className="flex-1 px-3 py-2 text-sm rounded-lg border border-gray-300 dark:border-gray-600 bg-surface dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-purple-600"
         />
         <button
           type="submit"

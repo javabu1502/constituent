@@ -69,7 +69,7 @@ function PermissionInner() {
       <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Permission to use your story</h1>
       {error && <p className="text-sm text-red-600 dark:text-red-400 mb-4">{error}</p>}
       {req && (
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-5 space-y-3">
+        <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-5 space-y-3">
           <p className="text-sm text-gray-700 dark:text-gray-300">
             {org} is asking to use the story you shared with <strong>{req.campaign_headline}</strong> in this way:
           </p>

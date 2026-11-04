@@ -204,9 +204,9 @@ export function SearchDialog({ onClose }: SearchDialogProps) {
         if (e.target === overlayRef.current) onClose();
       }}
     >
-      <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-2xl w-full max-w-lg max-h-[65vh] flex flex-col overflow-hidden">
+      <div className="bg-surface dark:bg-gray-800 rounded-2xl border border-rule dark:border-gray-700 shadow-2xl w-full max-w-lg max-h-[65vh] flex flex-col overflow-hidden">
         {/* Search input */}
-        <div className="flex items-center gap-3 px-4 py-3 border-b border-gray-200 dark:border-gray-700">
+        <div className="flex items-center gap-3 px-4 py-3 border-b border-rule dark:border-gray-700">
           <svg className="w-5 h-5 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
@@ -304,7 +304,7 @@ export function SearchDialog({ onClose }: SearchDialogProps) {
         </div>
 
         {/* Footer */}
-        <div className="border-t border-gray-200 dark:border-gray-700 px-4 py-2 flex items-center justify-between">
+        <div className="border-t border-rule dark:border-gray-700 px-4 py-2 flex items-center justify-between">
           <div className="flex items-center gap-3 text-[10px] text-gray-400 dark:text-gray-500">
             <span className="flex items-center gap-1">
               <kbd className="px-1 py-0.5 bg-gray-100 dark:bg-gray-700 rounded text-[10px]">&uarr;</kbd>

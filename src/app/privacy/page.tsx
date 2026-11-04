@@ -314,11 +314,11 @@ export default function PrivacyPage() {
               Third-Party Services
             </h2>
             <div className="space-y-4 text-gray-600 dark:text-gray-300 pl-10">
-              <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
+              <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-rule dark:border-gray-700">
                 <p className="font-semibold text-gray-900 dark:text-white">US Census Bureau API</p>
                 <p className="text-sm">Address lookup and district matching. A free US government service.</p>
               </div>
-              <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
+              <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-rule dark:border-gray-700">
                 <p className="font-semibold text-gray-900 dark:text-white">Anthropic Claude API</p>
                 <p className="text-sm">
                   Our AI provider for drafting messages, follow-ups, and public comments, the
@@ -338,59 +338,59 @@ export default function PrivacyPage() {
                   systems may flag. Your full street address is never sent.
                 </p>
               </div>
-              <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
+              <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-rule dark:border-gray-700">
                 <p className="font-semibold text-gray-900 dark:text-white">Supabase</p>
                 <p className="text-sm">Database and authentication provider. Stores account data, messages, and dashboard data with encryption at rest and in transit.</p>
               </div>
-              <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
+              <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-rule dark:border-gray-700">
                 <p className="font-semibold text-gray-900 dark:text-white">Open States</p>
                 <p className="text-sm">Open source civic data for state legislator information.</p>
               </div>
-              <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
+              <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-rule dark:border-gray-700">
                 <p className="font-semibold text-gray-900 dark:text-white">Congress.gov API</p>
                 <p className="text-sm">Official congressional data for bill tracking, voting records, and committee information.</p>
               </div>
-              <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
+              <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-rule dark:border-gray-700">
                 <p className="font-semibold text-gray-900 dark:text-white">FEC API</p>
                 <p className="text-sm">Federal Election Commission data for campaign finance information.</p>
               </div>
-              <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
+              <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-rule dark:border-gray-700">
                 <p className="font-semibold text-gray-900 dark:text-white">Senate LDA Reports</p>
                 <p className="text-sm">Lobbying Disclosure Act data for lobbying activity disclosures.</p>
               </div>
-              <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
+              <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-rule dark:border-gray-700">
                 <p className="font-semibold text-gray-900 dark:text-white">LegiScan</p>
                 <p className="text-sm">State and federal legislation tracking data.</p>
               </div>
-              <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
+              <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-rule dark:border-gray-700">
                 <p className="font-semibold text-gray-900 dark:text-white">Google News RSS</p>
                 <p className="text-sm">Public news feeds for per-representative news aggregation.</p>
               </div>
-              <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
+              <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-rule dark:border-gray-700">
                 <p className="font-semibold text-gray-900 dark:text-white">Google Civic Information API</p>
                 <p className="text-sm">Local official and election information lookup.</p>
               </div>
-              <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
+              <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-rule dark:border-gray-700">
                 <p className="font-semibold text-gray-900 dark:text-white">Vercel</p>
                 <p className="text-sm">Website hosting and cookie-free analytics. Vercel Analytics records page views and a few product events, such as that a message was sent and by which method, without personal identifiers.</p>
               </div>
-              <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
+              <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-rule dark:border-gray-700">
                 <p className="font-semibold text-gray-900 dark:text-white">U.S. House and Senate Communicating With Congress systems</p>
                 <p className="text-sm">When you choose &quot;Send to Congress&quot;, your name, address, email, and message are delivered to the office you picked through the official congressional intake systems, from a fixed outbound address we lease for that purpose. Each office then handles the message under its own rules.</p>
               </div>
-              <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
+              <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-rule dark:border-gray-700">
                 <p className="font-semibold text-gray-900 dark:text-white">Cloudflare Turnstile</p>
                 <p className="text-sm">Bot protection on AI features. Cloudflare receives your IP address and browser signals to decide whether you are a person.</p>
               </div>
-              <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
+              <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-rule dark:border-gray-700">
                 <p className="font-semibold text-gray-900 dark:text-white">Google Maps Places</p>
                 <p className="text-sm">Address autocomplete. The text you type into the address box is sent to Google to suggest matches.</p>
               </div>
-              <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
+              <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-rule dark:border-gray-700">
                 <p className="font-semibold text-gray-900 dark:text-white">Resend</p>
                 <p className="text-sm">Email delivery for account notices, campaign updates you opted into, and story permission requests. Resend receives the recipient address and the email content.</p>
               </div>
-              <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
+              <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-4 border border-rule dark:border-gray-700">
                 <p className="font-semibold text-gray-900 dark:text-white">GitHub Actions</p>
                 <p className="text-sm">Runs the worker that files messages on a few senators&apos; contact forms when those offices do not accept the congressional intake system. It reads the queued message and your contact details for that one submission.</p>
               </div>
@@ -546,7 +546,7 @@ export default function PrivacyPage() {
         </div>
 
         {/* Back to Home */}
-        <div className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
+        <div className="mt-12 pt-8 border-t border-rule dark:border-gray-700">
           <Link
             href="/"
             className="inline-flex items-center gap-2 text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 font-medium transition-colors"

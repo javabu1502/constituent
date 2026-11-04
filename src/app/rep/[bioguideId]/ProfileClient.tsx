@@ -34,7 +34,7 @@ function formatRelative(dateStr: string): string {
 
 function SkeletonCard() {
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4 animate-pulse">
+    <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4 animate-pulse">
       <div className="flex items-center gap-2 mb-2">
         <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-20" />
         <div className="h-5 bg-gray-200 dark:bg-gray-700 rounded-full w-14" />
@@ -157,7 +157,7 @@ export default function ProfileClient({
       {bioData?.bioNarrative && (
         <section>
           <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-3">About</h2>
-          <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
+          <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-5">
             <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed">
               {bioData.bioNarrative}
             </p>
@@ -176,7 +176,7 @@ export default function ProfileClient({
             {news.map((article, i) => (
               <div
                 key={i}
-                className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4"
+                className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4"
               >
                 <div className="flex items-center gap-2 mb-1">
                   <span className="px-2 py-0.5 text-xs font-medium rounded-full bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-300">

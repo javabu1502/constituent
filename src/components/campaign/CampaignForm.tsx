@@ -547,7 +547,7 @@ export function CampaignForm({
             <select
               value={stageGoal}
               onChange={(e) => { setStageGoal(e.target.value); clearFieldError('stageGoal'); }}
-              className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm"
+              className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-surface dark:bg-gray-800 text-gray-900 dark:text-white text-sm"
             >
               <option value="">Choose a goal…</option>
               <option value="cosponsor">Recruit cosponsors</option>
@@ -576,7 +576,7 @@ export function CampaignForm({
               <select
                 value={targetCommittee}
                 onChange={(e) => { setTargetCommittee(e.target.value); clearFieldError('targetCommittee'); }}
-                className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm"
+                className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-surface dark:bg-gray-800 text-gray-900 dark:text-white text-sm"
               >
                 <option value="">Choose a committee…</option>
                 {stageState ? (
@@ -651,7 +651,7 @@ export function CampaignForm({
             ? 'e.g., Tell your story: how housing costs hit your family'
             : 'e.g., Protect our local parks funding'}
           maxLength={100}
-          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
+          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-surface dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
         />
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{headline.length}/100 characters</p>
         <FieldError field="headline" />
@@ -670,7 +670,7 @@ export function CampaignForm({
             : 'Explain the issue and why people should take action...'}
           rows={4}
           maxLength={500}
-          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent resize-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
+          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent resize-none bg-surface dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
         />
         {campaignType === 'storytelling' && (
           <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
@@ -691,7 +691,7 @@ export function CampaignForm({
         <select
           value={language}
           onChange={(e) => setLanguage(e.target.value === 'es' ? 'es' : 'en')}
-          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-surface dark:bg-gray-700 text-gray-900 dark:text-white"
         >
           <option value="en">English</option>
           <option value="es">Español</option>
@@ -854,7 +854,7 @@ export function CampaignForm({
                 <select
                   value={billState}
                   onChange={(e) => { setBillState(e.target.value); resetBill(); }}
-                  className="px-3 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                  className="px-3 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 bg-surface dark:bg-gray-700 text-gray-900 dark:text-white"
                 >
                   <option value="">State…</option>
                   {US_STATES.map((s) => (
@@ -868,7 +868,7 @@ export function CampaignForm({
                 onChange={(e) => { setBillQuery(e.target.value); resetBill(); }}
                 onBlur={resolveBill}
                 placeholder={billLevel === 'federal' ? 'e.g., H.R. 22 or a congress.gov link' : 'e.g., AB 1234'}
-                className="flex-1 px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
+                className="flex-1 px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 bg-surface dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
               />
               <Button type="button" variant="secondary" onClick={resolveBill} isLoading={billStatus === 'resolving'}>
                 Look up
@@ -965,7 +965,7 @@ export function CampaignForm({
           onChange={(e) => setMessageTemplate(e.target.value)}
           placeholder={'Child care now costs more than rent for many families here\nProviders are closing faster than new ones open\nPlease fund the state child care assistance program'}
           rows={4}
-          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent resize-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
+          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent resize-none bg-surface dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
         />
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
           Each participant writes their own letter. These points are combined with their own reasons for caring, so no two letters read the same.
@@ -978,7 +978,7 @@ export function CampaignForm({
                 ['all', 'Make every point', 'Each letter makes all of them, in the participant\u2019s own words and order.'],
                 ['fit', 'Use the ones that fit', 'Each letter uses the points that connect to what the participant wrote.'],
               ] as const).map(([value, label, help]) => (
-                <label key={value} className={`flex items-start gap-3 p-3 rounded-xl border cursor-pointer ${talkingPointsCoverage === value ? 'border-purple-500 bg-purple-50 dark:bg-purple-900/20' : 'border-gray-200 dark:border-gray-700'}`}>
+                <label key={value} className={`flex items-start gap-3 p-3 rounded-xl border cursor-pointer ${talkingPointsCoverage === value ? 'border-purple-500 bg-purple-50 dark:bg-purple-900/20' : 'border-rule dark:border-gray-700'}`}>
                   <input type="radio" name="talkingPointsCoverage" value={value} checked={talkingPointsCoverage === value} onChange={() => setTalkingPointsCoverage(value)} className="mt-1 h-4 w-4 text-purple-600 focus:ring-purple-500" />
                   <span>
                     <span className="block text-sm font-medium text-gray-800 dark:text-gray-200">{label}</span>
@@ -1035,7 +1035,7 @@ export function CampaignForm({
               placeholder="e.g., Tell us about a time you struggled to find or pay for child care. What happened?"
               rows={3}
               maxLength={2000}
-              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 resize-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
+              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 resize-none bg-surface dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
             />
           </div>
 
@@ -1053,7 +1053,7 @@ export function CampaignForm({
               placeholder="e.g., Our policy team reads every story. With your permission we may quote it in testimony to the Legislature or in a report. Questions: stories@example.org"
               rows={3}
               maxLength={3000}
-              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 resize-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
+              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 resize-none bg-surface dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
             />
           </div>
 

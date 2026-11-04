@@ -53,7 +53,7 @@ export async function BillStatusPanel({
     : '';
 
   return (
-    <div className="mb-8 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-5">
+    <div className="mb-8 rounded-xl border border-rule dark:border-gray-700 bg-surface dark:bg-gray-800 p-5">
       <h2 className="text-base font-semibold text-gray-900 dark:text-white mb-1">
         Live status: {campaign.bill_ref}
       </h2>

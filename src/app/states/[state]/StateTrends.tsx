@@ -46,7 +46,7 @@ export function StateTrends({ stateCode, stateName }: { stateCode: string; state
           {issues.map((issue, i) => (
             <div
               key={issue.issue_area}
-              className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-3 flex items-center gap-3"
+              className="bg-surface dark:bg-gray-800 rounded-lg border border-rule dark:border-gray-700 p-3 flex items-center gap-3"
             >
               <span className="text-sm font-medium text-gray-400 dark:text-gray-500 w-6 text-right shrink-0">
                 {i + 1}
@@ -70,7 +70,7 @@ export function StateTrends({ stateCode, stateName }: { stateCode: string; state
                 </div>
                 <div className="w-full bg-gray-100 dark:bg-gray-700 rounded-full h-2">
                   <div
-                    className="h-2 rounded-full bg-gradient-to-r from-purple-500 to-purple-600"
+                    className="h-2 rounded-full bg-purple-600"
                     style={{ width: `${(issue.count / maxCount) * 100}%` }}
                   />
                 </div>

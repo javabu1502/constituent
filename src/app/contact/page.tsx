@@ -12,12 +12,14 @@ export const metadata = {
 export default function ContactPage() {
   return (
     <div className="py-8 px-4">
-      <div className="max-w-2xl mx-auto mb-8 text-center">
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-          Write to Your Elected Officials
+      <div className="max-w-3xl mx-auto mb-10">
+        <p className="label mb-3">Write a letter</p>
+        <h1 className="text-5xl sm:text-6xl font-extrabold tracking-tighter leading-[0.96] text-gray-900 dark:text-white mb-5">
+          Say it in your own words.
         </h1>
-        <p className="text-gray-600 dark:text-gray-300">
-          We&apos;ll help you find the people who represent you and send them a message about what matters to you.
+        <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300 max-w-[58ch]">
+          We find the people who represent you, help you write what you actually mean, and deliver it. You see every
+          word before anything is sent.
         </p>
       </div>
       <Suspense>

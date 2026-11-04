@@ -27,7 +27,7 @@ function WriteAboutLobbyingButton({ repId, client, issue }: { repId: string; cli
 
 function SkeletonBlock() {
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4 animate-pulse">
+    <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4 animate-pulse">
       <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-48 mb-3" />
       <div className="space-y-2">
         {Array.from({ length: 3 }).map((_, i) => (
@@ -84,7 +84,7 @@ export function LobbyingTab({ repId, repName, chamber }: { repId: string; repNam
     return (
       <div className="space-y-4">
         {data.committees.length > 0 && (
-          <div className="bg-gray-50 dark:bg-gray-800/50 rounded-lg p-3 border border-gray-200 dark:border-gray-700">
+          <div className="bg-gray-50 dark:bg-gray-800/50 rounded-lg p-3 border border-rule dark:border-gray-700">
             <p className="text-xs text-gray-500 dark:text-gray-400">
               <strong className="text-gray-600 dark:text-gray-300">Committee Assignments:</strong>{' '}
               {data.committees.join(', ')}
@@ -112,7 +112,7 @@ export function LobbyingTab({ repId, repName, chamber }: { repId: string; repNam
 
       {/* Committee assignments */}
       {data.committees.length > 0 && (
-        <div className="bg-gray-50 dark:bg-gray-800/50 rounded-lg p-3 border border-gray-200 dark:border-gray-700">
+        <div className="bg-gray-50 dark:bg-gray-800/50 rounded-lg p-3 border border-rule dark:border-gray-700">
           <p className="text-xs text-gray-500 dark:text-gray-400">
             <strong className="text-gray-600 dark:text-gray-300">Committee Assignments:</strong>{' '}
             {data.committees.join(' · ')}
@@ -122,7 +122,7 @@ export function LobbyingTab({ repId, repName, chamber }: { repId: string; repNam
 
       {/* Top Industries */}
       {data.issue_areas.length > 0 && (
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
+        <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4">
           <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-1">
             Top Industries Lobbying {firstName}&apos;s Policy Areas
           </h4>
@@ -158,7 +158,7 @@ export function LobbyingTab({ repId, repName, chamber }: { repId: string; repNam
 
       {/* Top Lobbying Clients */}
       {data.top_clients.length > 0 && (
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
+        <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4">
           <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-1">
             Top Lobbying Clients
           </h4>
@@ -201,7 +201,7 @@ export function LobbyingTab({ repId, repName, chamber }: { repId: string; repNam
 
       {/* Top Lobbying Firms */}
       {data.top_firms.length > 0 && (
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
+        <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4">
           <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-1">
             Top Lobbying Firms
           </h4>
@@ -234,7 +234,7 @@ export function LobbyingTab({ repId, repName, chamber }: { repId: string; repNam
 
       {/* Recent Lobbying Activity */}
       {data.recent_filings.length > 0 && (
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
+        <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4">
           <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-1">
             Recent Lobbying Activity
           </h4>
@@ -283,7 +283,7 @@ export function LobbyingTab({ repId, repName, chamber }: { repId: string; repNam
 
       {/* Lobbying Connections (donate + lobby) */}
       {data.lobbying_connections.length > 0 && (
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
+        <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4">
           <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-1">
             Lobbying Connections
           </h4>
@@ -329,7 +329,7 @@ export function LobbyingTab({ repId, repName, chamber }: { repId: string; repNam
 
 function AttributionFooter() {
   return (
-    <div className="bg-gray-50 dark:bg-gray-800/50 rounded-lg p-3 border border-gray-200 dark:border-gray-700">
+    <div className="bg-gray-50 dark:bg-gray-800/50 rounded-lg p-3 border border-rule dark:border-gray-700">
       <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
         Source:{' '}
         <a href="https://lda.senate.gov" target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-700 dark:hover:text-gray-300">

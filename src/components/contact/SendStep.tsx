@@ -188,7 +188,7 @@ function OfficialCard({ official, message, deliveryInfo, contactMethod, isCallCo
   // Render phone card
   if (contactMethod === 'phone') {
     return (
-      <div className={`p-4 rounded-xl border ${isCallComplete ? 'border-green-300 dark:border-green-700 bg-green-50 dark:bg-green-900/20' : 'border-gray-200 dark:border-gray-700'}`}>
+      <div className={`p-4 rounded-xl border ${isCallComplete ? 'border-green-300 dark:border-green-700 bg-green-50 dark:bg-green-900/20' : 'border-rule dark:border-gray-700'}`}>
         {/* Official info */}
         <div className="mb-3">
           <div className="flex items-center gap-2 mb-0.5">
@@ -293,7 +293,7 @@ function OfficialCard({ official, message, deliveryInfo, contactMethod, isCallCo
 
   // Render email card based on delivery method
   return (
-    <div className="p-4 rounded-xl border border-gray-200 dark:border-gray-700">
+    <div className="p-4 rounded-xl border border-rule dark:border-gray-700">
       {/* Official info */}
       <div className="mb-3">
         <div className="flex items-center gap-2 mb-0.5">
@@ -727,7 +727,7 @@ export function SendStep({ state, dispatch, onBack }: SendStepProps) {
             </svg>
           )}
         </div>
-        <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+        <h3 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
           {contactMethod === 'phone'
             ? completedCalls.size === selectedReps.length
               ? 'All Calls Complete!'

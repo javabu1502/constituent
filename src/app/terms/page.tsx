@@ -244,7 +244,7 @@ export default function TermsPage() {
         </div>
 
         {/* Back to Home */}
-        <div className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
+        <div className="mt-12 pt-8 border-t border-rule dark:border-gray-700">
           <Link
             href="/"
             className="inline-flex items-center gap-2 text-purple-600 hover:text-purple-700 font-medium transition-colors"

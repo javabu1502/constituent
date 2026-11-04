@@ -82,7 +82,7 @@ function StoryCard({ story }: { story: MyStory }) {
             value={body}
             onChange={(e) => setBody(e.target.value)}
             rows={6}
-            className="w-full text-sm px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+            className="w-full text-sm px-3 py-2 border border-rule dark:border-gray-700 rounded-lg bg-surface dark:bg-gray-700 text-gray-900 dark:text-white"
           />
           {story.attribution_level === 'anonymous' && (
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">

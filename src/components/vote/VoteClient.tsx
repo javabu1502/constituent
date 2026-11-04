@@ -77,7 +77,7 @@ function Badge({ children, variant }: { children: React.ReactNode; variant: 'gre
 
 function LocationCard({ location, type }: { location: VoterInfoLocation; type: string }) {
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
+    <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4">
       <div className="flex items-start gap-3">
         <div className="w-8 h-8 rounded-full bg-purple-100 dark:bg-purple-900 flex items-center justify-center flex-shrink-0 mt-0.5">
           <svg className="w-4 h-4 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -243,7 +243,7 @@ export default function VoteClient() {
             id="vote-state-select"
             value={selectedState}
             onChange={(e) => setSelectedState(e.target.value)}
-            className="w-full sm:w-64 border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
+            className="w-full sm:w-64 border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-2 bg-surface dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
           >
             <option value="">Choose a state...</option>
             {US_STATES.map((s) => (
@@ -277,7 +277,7 @@ export default function VoteClient() {
 
         {/* Your Representatives */}
         {stateData && (
-          <div className="mb-6 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
+          <div className="mb-6 bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-5">
             <h3 className="font-semibold text-gray-900 dark:text-white text-sm mb-2">
               Your {stateData.name} Officials
             </h3>
@@ -311,7 +311,7 @@ export default function VoteClient() {
                 href={stateData.registerOnline || stateData.registerVoteGov}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5 hover:border-purple-300 dark:hover:border-purple-600 hover:shadow-md transition-all group"
+                className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-5 hover:border-purple-300 dark:hover:border-purple-600 hover:shadow-md transition-all group"
               >
                 <div className="w-10 h-10 rounded-full bg-purple-100 dark:bg-purple-900 flex items-center justify-center mb-3">
                   <svg className="w-5 h-5 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -330,7 +330,7 @@ export default function VoteClient() {
                 href={stateData.checkRegistration}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5 hover:border-purple-300 dark:hover:border-purple-600 hover:shadow-md transition-all group"
+                className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-5 hover:border-purple-300 dark:hover:border-purple-600 hover:shadow-md transition-all group"
               >
                 <div className="w-10 h-10 rounded-full bg-purple-100 dark:bg-purple-900 flex items-center justify-center mb-3">
                   <svg className="w-5 h-5 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -347,7 +347,7 @@ export default function VoteClient() {
                 href={stateData.electionOfficeDirectory}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5 hover:border-purple-300 dark:hover:border-purple-600 hover:shadow-md transition-all group"
+                className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-5 hover:border-purple-300 dark:hover:border-purple-600 hover:shadow-md transition-all group"
               >
                 <div className="w-10 h-10 rounded-full bg-purple-100 dark:bg-purple-900 flex items-center justify-center mb-3">
                   <svg className="w-5 h-5 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -367,33 +367,33 @@ export default function VoteClient() {
                 {stateData.name}&apos;s Voting Rules
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
+                <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4">
                   <p className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide font-medium mb-1">Registration Deadline</p>
                   <p className="text-sm font-semibold text-gray-900 dark:text-white">{stateData.registrationDeadline}</p>
                 </div>
-                <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
+                <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4">
                   <p className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide font-medium mb-1">Same-Day Registration</p>
                   <Badge variant={stateData.sameDayRegistration ? 'green' : 'gray'}>
                     {stateData.sameDayRegistration ? 'Available' : 'Not Available'}
                   </Badge>
                 </div>
-                <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
+                <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4">
                   <p className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide font-medium mb-1">Early Voting</p>
                   <Badge variant={stateData.earlyVoting ? 'green' : 'gray'}>
                     {stateData.earlyVoting ? 'Available' : 'Not Available'}
                   </Badge>
                 </div>
-                <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
+                <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4">
                   <p className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide font-medium mb-1">No-Excuse Absentee</p>
                   <Badge variant={stateData.noExcuseAbsentee ? 'green' : 'yellow'}>
                     {stateData.noExcuseAbsentee ? 'Yes' : 'No'}
                   </Badge>
                 </div>
-                <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
+                <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4">
                   <p className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide font-medium mb-1">Voter ID</p>
                   <p className="text-sm font-semibold text-gray-900 dark:text-white">{stateData.voterIdRequired}</p>
                 </div>
-                <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
+                <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4">
                   <p className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide font-medium mb-1">Online Registration</p>
                   <Badge variant={stateData.onlineRegistration ? 'green' : 'yellow'}>
                     {stateData.onlineRegistration ? 'Available' : 'Not Available'}
@@ -428,7 +428,7 @@ export default function VoteClient() {
               <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">2026 Elections</h2>
               <div className="space-y-3">
                 {/* Primary */}
-                <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
+                <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4">
                   <div className="flex items-center justify-between flex-wrap gap-2">
                     <div>
                       <p className="font-semibold text-gray-900 dark:text-white text-sm">Primary Election</p>
@@ -446,7 +446,7 @@ export default function VoteClient() {
 
                 {/* Primary Runoff */}
                 {stateData.primaryRunoff2026 && (
-                  <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
+                  <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4">
                     <div className="flex items-center justify-between flex-wrap gap-2">
                       <div>
                         <p className="font-semibold text-gray-900 dark:text-white text-sm">Primary Runoff</p>
@@ -464,7 +464,7 @@ export default function VoteClient() {
                 )}
 
                 {/* General Election */}
-                <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
+                <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4">
                   <div className="flex items-center justify-between flex-wrap gap-2">
                     <div>
                       <p className="font-semibold text-gray-900 dark:text-white text-sm">General Election</p>
@@ -477,10 +477,10 @@ export default function VoteClient() {
                 </div>
 
                 {/* Senate race */}
-                <div className={`rounded-xl border shadow-sm p-4 ${
+                <div className={`rounded-xl border p-4 ${
                   stateData.senateRace2026
                     ? 'bg-purple-50 dark:bg-purple-900/30 border-purple-200 dark:border-purple-700'
-                    : 'bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700'
+                    : 'bg-surface dark:bg-gray-800 border-rule dark:border-gray-700'
                 }`}>
                   <div className="flex items-center gap-2">
                     {stateData.senateRace2026 ? (
@@ -499,7 +499,7 @@ export default function VoteClient() {
                 </div>
 
                 {/* House seats */}
-                <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
+                <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4">
                   <p className="text-sm text-gray-600 dark:text-gray-400">
                     <span className="font-semibold text-gray-900 dark:text-white">{stateData.houseSeats}</span>{' '}
                     U.S. House seat{stateData.houseSeats !== 1 ? 's' : ''} up for election
@@ -513,7 +513,7 @@ export default function VoteClient() {
               <section className="mb-8">
                 <div className="space-y-3">
                   {[1, 2].map((i) => (
-                    <div key={i} className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4 animate-pulse">
+                    <div key={i} className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4 animate-pulse">
                       <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-48 mb-2" />
                       <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-64" />
                     </div>
@@ -566,7 +566,7 @@ export default function VoteClient() {
                     <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">What&apos;s On Your Ballot</h2>
                     <div className="space-y-3">
                       {civicData.contests.map((contest, i) => (
-                        <div key={i} className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
+                        <div key={i} className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4">
                           <div className="flex items-center gap-2 mb-2">
                             <h4 className="font-semibold text-gray-900 dark:text-white text-sm">
                               {contest.office || contest.type}
@@ -603,7 +603,7 @@ export default function VoteClient() {
                   href="https://vote.gov"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4 hover:border-purple-300 dark:hover:border-purple-600 transition-colors"
+                  className="flex items-center gap-3 bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4 hover:border-purple-300 dark:hover:border-purple-600 transition-colors"
                 >
                   <svg className="w-5 h-5 text-purple-600 dark:text-purple-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -617,7 +617,7 @@ export default function VoteClient() {
                   href={stateData.electionOfficeDirectory}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4 hover:border-purple-300 dark:hover:border-purple-600 transition-colors"
+                  className="flex items-center gap-3 bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4 hover:border-purple-300 dark:hover:border-purple-600 transition-colors"
                 >
                   <svg className="w-5 h-5 text-purple-600 dark:text-purple-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -631,7 +631,7 @@ export default function VoteClient() {
                   href="https://www.eac.gov/voters/national-mail-voter-registration-form"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4 hover:border-purple-300 dark:hover:border-purple-600 transition-colors"
+                  className="flex items-center gap-3 bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4 hover:border-purple-300 dark:hover:border-purple-600 transition-colors"
                 >
                   <svg className="w-5 h-5 text-purple-600 dark:text-purple-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -645,7 +645,7 @@ export default function VoteClient() {
                   href="https://www.fvap.gov"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4 hover:border-purple-300 dark:hover:border-purple-600 transition-colors"
+                  className="flex items-center gap-3 bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4 hover:border-purple-300 dark:hover:border-purple-600 transition-colors"
                 >
                   <svg className="w-5 h-5 text-purple-600 dark:text-purple-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -660,7 +660,7 @@ export default function VoteClient() {
           </>
         ) : (
           /* No state selected */
-          <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-8 text-center">
+          <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-8 text-center">
             <div className="w-16 h-16 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center mx-auto mb-4">
               <svg className="w-8 h-8 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />

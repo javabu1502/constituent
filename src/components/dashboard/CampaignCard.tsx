@@ -35,7 +35,7 @@ export function CampaignCard({
   return (
     <div
       key={campaign.id}
-      className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5"
+      className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-5"
     >
       {(() => {
         const isStory = campaign.campaign_type === 'storytelling';

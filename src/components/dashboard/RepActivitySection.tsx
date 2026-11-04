@@ -57,7 +57,7 @@ function WriteAboutButton({ repId, issue, ask }: { repId?: string; issue?: strin
 
 function BillCard({ bill, showWriteAbout = true, userIssues }: { bill: FeedBill; showWriteAbout?: boolean; userIssues?: string[] }) {
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
+    <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4">
       <div className="flex items-center gap-2 mb-1 flex-wrap">
         <span className="font-bold text-purple-600 dark:text-purple-400 text-sm">{bill.bill_number}</span>
         <span className={`px-2 py-0.5 text-xs font-medium rounded-full ${
@@ -152,7 +152,7 @@ function VoteCard({ vote }: { vote: RepVote }) {
   })();
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
+    <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4">
       <div className="flex items-center gap-2 mb-1 flex-wrap">
         {vote.roll_number && <span className="font-bold text-blue-600 dark:text-blue-400 text-sm">Roll #{vote.roll_number}</span>}
         <span className="px-2 py-0.5 text-xs font-medium rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300">
@@ -263,7 +263,7 @@ function VotingRecordTab({ repId, repLevel, repState }: { repId: string; repLeve
   if (loading) {
     return (
       <div className="space-y-3">
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4 animate-pulse">
+        <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4 animate-pulse">
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {Array.from({ length: 4 }).map((_, i) => (
               <div key={i} className="text-center">
@@ -286,7 +286,7 @@ function VotingRecordTab({ repId, repLevel, repState }: { repId: string; repLeve
     if (repLevel === 'state' && repState) {
       const stateName = US_STATES.find(s => s.code === repState)?.name ?? repState;
       return (
-        <div className="bg-gray-50 dark:bg-gray-800/50 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
+        <div className="bg-gray-50 dark:bg-gray-800/50 rounded-lg p-4 border border-rule dark:border-gray-700">
           <p className="text-sm text-gray-600 dark:text-gray-400">
             Vote data is not currently available for {stateName} state legislators. Not all state legislatures publish roll call vote data through Open States or LegiScan.
           </p>
@@ -303,7 +303,7 @@ function VotingRecordTab({ repId, repLevel, repState }: { repId: string; repLeve
   return (
     <div className="space-y-4">
       {/* Summary stats */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
+      <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4">
         <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-3">Voting Summary</h4>
         <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
           <div className="text-center">
@@ -350,7 +350,7 @@ function VotingRecordTab({ repId, repLevel, repState }: { repId: string; repLeve
         <select
           value={timePeriod}
           onChange={(e) => setTimePeriod(e.target.value as TimePeriod)}
-          className="text-xs border border-gray-300 dark:border-gray-600 rounded-lg px-2 py-1.5 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+          className="text-xs border border-gray-300 dark:border-gray-600 rounded-lg px-2 py-1.5 bg-surface dark:bg-gray-700 text-gray-900 dark:text-white"
         >
           <option value="30d">Last 30 Days</option>
           <option value="6mo">Last 6 Months</option>
@@ -363,7 +363,7 @@ function VotingRecordTab({ repId, repLevel, repState }: { repId: string; repLeve
           placeholder="Search votes..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="flex-1 min-w-0 text-xs border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-1.5 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
+          className="flex-1 min-w-0 text-xs border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-1.5 bg-surface dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
         />
       </div>
 
@@ -392,7 +392,7 @@ function VotingRecordTab({ repId, repLevel, repState }: { repId: string; repLeve
       )}
 
       {/* Data source note */}
-      <div className="bg-gray-50 dark:bg-gray-800/50 rounded-lg p-3 border border-gray-200 dark:border-gray-700">
+      <div className="bg-gray-50 dark:bg-gray-800/50 rounded-lg p-3 border border-rule dark:border-gray-700">
         <p className="text-xs text-gray-500 dark:text-gray-400">
           {data.data_source === 'legiscan'
             ? <>Data provided by <a href="https://legiscan.com" target="_blank" rel="noopener noreferrer" className="underline font-medium hover:text-gray-700 dark:hover:text-gray-300">LegiScan</a>. Coverage may vary by state legislature session.</>
@@ -407,7 +407,7 @@ function VotingRecordTab({ repId, repLevel, repState }: { repId: string; repLeve
 
 function NewsCard({ article }: { article: RepNewsArticle }) {
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
+    <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4">
       <div className="flex items-center gap-2 mb-1">
         <span className="px-2 py-0.5 text-xs font-medium rounded-full bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-300">News</span>
         <span className="text-xs text-gray-500 dark:text-gray-400">{article.rep_name}</span>
@@ -432,7 +432,7 @@ function NewsCard({ article }: { article: RepNewsArticle }) {
 
 function IssueFeedCard({ item }: { item: IssueFeedItem }) {
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
+    <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4">
       <div className="flex items-center gap-2 mb-1 flex-wrap">
         <span className={`px-2 py-0.5 text-xs font-medium rounded-full ${
           item.type === 'issue-bill'
@@ -502,7 +502,7 @@ function LobbyingConnectionsSection({ repId, chamber }: { repId: string; chamber
   if (!loaded || connections.length === 0) return null;
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
+    <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4">
       <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-1">Lobbying Connections</h4>
       <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">
         Organizations whose employees donated to this official&apos;s campaign and also spent money lobbying on issues before their committees. This overlap does not necessarily imply coordination or impropriety.
@@ -557,7 +557,7 @@ function FundingTab({ finance, repId, chamber }: { finance: RepFinance | null; r
       </div>
 
       {/* Totals overview */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
+      <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4">
         <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-1">
           Campaign Financial Summary
         </h4>
@@ -596,7 +596,7 @@ function FundingTab({ finance, repId, chamber }: { finance: RepFinance | null; r
       </div>
 
       {/* Contribution breakdown */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
+      <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4">
         <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-1">Where the Money Comes From</h4>
         <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">
           Breakdown of the {formatCurrency(finance.total_raised)} in total receipts by source type. &quot;Individual contributions&quot; are donations from private citizens. &quot;PAC contributions&quot; are from political action committees representing corporations, unions, or interest groups.
@@ -644,7 +644,7 @@ function FundingTab({ finance, repId, chamber }: { finance: RepFinance | null; r
 
       {/* Top contributors */}
       {finance.top_contributors.length > 0 && (
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
+        <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4">
           <h4 className="text-sm font-semibold text-gray-900 dark:text-white mb-1">Top {contributorCount} Contributors by Employer/Organization</h4>
           <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">
             Individual donors grouped by their self-reported employer. This shows where donors work, not direct corporate contributions (which are illegal for federal candidates). Common entries like &quot;Not Employed,&quot; &quot;Retired,&quot; and &quot;Self-Employed&quot; reflect individual small-dollar donors.
@@ -682,7 +682,7 @@ function FundingTab({ finance, repId, chamber }: { finance: RepFinance | null; r
       <LobbyingConnectionsSection repId={repId} chamber={chamber} />
 
       {/* FEC Disclaimer */}
-      <div className="bg-gray-50 dark:bg-gray-800/50 rounded-lg p-3 border border-gray-200 dark:border-gray-700">
+      <div className="bg-gray-50 dark:bg-gray-800/50 rounded-lg p-3 border border-rule dark:border-gray-700">
         <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
           <strong className="text-gray-600 dark:text-gray-300">About this data:</strong> All figures are from reports filed with the Federal Election Commission (<a href="https://www.fec.gov" target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-700 dark:hover:text-gray-300">fec.gov</a>) for the {cycleLabel} election cycle. Contributor data is grouped by self-reported employer name. It represents where individual donors work, not direct contributions from those organizations. Campaign contributions do not necessarily indicate influence over policy positions. Data may lag current filings by several weeks.
         </p>
@@ -789,7 +789,7 @@ function RepInnerTabs({ repId, repName, items, repLevel, repState, chamber, fina
 
 function SkeletonCard() {
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4 animate-pulse">
+    <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4 animate-pulse">
       <div className="flex items-center gap-2 mb-2">
         <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-20" />
         <div className="h-5 bg-gray-200 dark:bg-gray-700 rounded-full w-14" />
@@ -890,7 +890,7 @@ export function RepActivitySection() {
 
   if (items.length === 0 && !issueData) {
     return (
-      <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm p-8 text-center">
+      <div className="bg-surface dark:bg-gray-800 rounded-2xl border border-rule dark:border-gray-700 p-8 text-center">
         <div className="w-16 h-16 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center mx-auto mb-4">
           <svg className="w-8 h-8 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
@@ -911,7 +911,7 @@ export function RepActivitySection() {
           <button
             onClick={() => setTab('by-rep')}
             className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${
-              tab === 'by-rep' ? 'bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm' : 'text-gray-600 dark:text-gray-400'
+              tab === 'by-rep' ? 'bg-surface dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm' : 'text-gray-600 dark:text-gray-400'
             }`}
           >
             By Official
@@ -919,7 +919,7 @@ export function RepActivitySection() {
           <button
             onClick={() => setTab('by-issue')}
             className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${
-              tab === 'by-issue' ? 'bg-white dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm' : 'text-gray-600 dark:text-gray-400'
+              tab === 'by-issue' ? 'bg-surface dark:bg-gray-700 text-gray-900 dark:text-white shadow-sm' : 'text-gray-600 dark:text-gray-400'
             }`}
           >
             By Issue
@@ -931,7 +931,7 @@ export function RepActivitySection() {
           <select
             value={repSort}
             onChange={(e) => setRepSort(e.target.value as RepSort)}
-            className="text-sm border border-gray-300 dark:border-gray-600 rounded-lg px-2 py-1.5 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+            className="text-sm border border-gray-300 dark:border-gray-600 rounded-lg px-2 py-1.5 bg-surface dark:bg-gray-700 text-gray-900 dark:text-white"
           >
             <option value="recent">Most Recent Activity</option>
             <option value="federal-first">Federal First</option>

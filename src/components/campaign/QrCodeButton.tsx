@@ -40,7 +40,7 @@ export function QrCodeButton({ slug }: { slug: string }) {
           onClick={() => setOpen(false)}
         >
           <div
-            className="w-full max-w-sm bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-xl p-6"
+            className="w-full max-w-sm bg-surface dark:bg-gray-800 rounded-2xl border border-rule dark:border-gray-700 shadow-xl p-6"
             onClick={(e) => e.stopPropagation()}
             role="dialog"
             aria-modal="true"

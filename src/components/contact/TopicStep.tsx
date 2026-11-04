@@ -34,7 +34,7 @@ function OfficialBadge({ official }: { official: Official }) {
   const partyColors = getPartyColors(official.party);
 
   return (
-    <div className="p-3 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-700">
+    <div className="p-3 rounded-lg border border-rule dark:border-gray-700 bg-gray-50 dark:bg-gray-700">
       <div className="flex items-center gap-2 mb-0.5">
         <span aria-label={official.party} className={`px-2 py-0.5 text-xs font-medium rounded-full ${partyColors.bg} ${partyColors.text}`}>
           {official.party.charAt(0)}
@@ -122,7 +122,7 @@ function TopicInfoPanel({ issueCategory, issue, onSelectAsk }: {
               key={item.label}
               type="button"
               onClick={() => onSelectAsk(item.ask)}
-              className="px-3 py-1.5 text-xs font-medium bg-white dark:bg-gray-700 text-blue-700 dark:text-blue-300 rounded-lg border border-blue-200 dark:border-blue-700 hover:bg-blue-100 dark:hover:bg-blue-900/40 transition-colors"
+              className="px-3 py-1.5 text-xs font-medium bg-surface dark:bg-gray-700 text-blue-700 dark:text-blue-300 rounded-lg border border-blue-200 dark:border-blue-700 hover:bg-blue-100 dark:hover:bg-blue-900/40 transition-colors"
             >
               {item.label}
             </button>
@@ -467,7 +467,7 @@ export function TopicStep({ state, dispatch, onBack }: TopicStepProps) {
                 id="contact-prefix"
                 value={state.userPrefix}
                 onChange={(e) => dispatch({ type: 'SET_USER_PREFIX', payload: e.target.value })}
-                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-surface dark:bg-gray-700 text-gray-900 dark:text-white"
               >
                 <option value="" disabled>Choose</option>
                 {CWC_PREFIXES.map((p) => (
@@ -486,7 +486,7 @@ export function TopicStep({ state, dispatch, onBack }: TopicStepProps) {
               value={userName}
               onChange={(e) => dispatch({ type: 'SET_USER_NAME', payload: e.target.value })}
               placeholder="Your full name"
-              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
+              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-surface dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
             />
           </div>
         </div>
@@ -503,7 +503,7 @@ export function TopicStep({ state, dispatch, onBack }: TopicStepProps) {
             value={state.userEmail}
             onChange={(e) => dispatch({ type: 'SET_USER_EMAIL', payload: e.target.value })}
             placeholder="you@example.com"
-            className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
+            className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-surface dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
           />
           <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
             {cwcRequired ? 'Congressional offices require an email address to accept and reply to your message. Shared only with the office you write to.' : 'So legislators can reply to you. Shared only with the office you write to.'}
@@ -516,7 +516,7 @@ export function TopicStep({ state, dispatch, onBack }: TopicStepProps) {
   return (
     <div className="p-6 sm:p-8">
       {/* Contact method toggle */}
-      <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">Choose how you want to reach out:</p>
+      <p className="label mb-2">How to reach out</p>
       <div className="flex bg-gray-100 dark:bg-gray-700/50 rounded-lg p-1 mb-6">
         <button
           type="button"
@@ -549,7 +549,7 @@ export function TopicStep({ state, dispatch, onBack }: TopicStepProps) {
       </div>
 
       {/* Tone selector */}
-      <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">Choose a tone:</p>
+      <p className="label mb-2">Tone</p>
       <div className="flex bg-gray-100 dark:bg-gray-700/50 rounded-lg p-1 mb-1">
         {(['professional', 'personal', 'passionate'] as const).map((t) => (
           <button
@@ -574,7 +574,7 @@ export function TopicStep({ state, dispatch, onBack }: TopicStepProps) {
 
       {/* Header */}
       <div className="text-center mb-6">
-        <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+        <h3 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
           {contactMethod === 'phone' ? 'Describe Your Call' : 'Write Your Message'}
         </h3>
         <p className="text-gray-500 dark:text-gray-400 mt-1 text-sm">
@@ -680,7 +680,7 @@ export function TopicStep({ state, dispatch, onBack }: TopicStepProps) {
           onChange={(e) => dispatch({ type: 'SET_ASK', payload: e.target.value })}
           placeholder='e.g., "Vote yes on the infrastructure bill", "Fix the roads in my district"'
           rows={2}
-          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent resize-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
+          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent resize-none bg-surface dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
         />
       </div>
 
@@ -721,7 +721,7 @@ export function TopicStep({ state, dispatch, onBack }: TopicStepProps) {
                         dispatch({ type: 'SET_PERSONAL_WHY', payload: prompt });
                       }
                     }}
-                    className="px-3 py-2 text-xs bg-white dark:bg-gray-700 border border-purple-200 dark:border-purple-600 rounded-lg text-purple-700 dark:text-purple-300 hover:bg-purple-100 dark:hover:bg-purple-800/30 transition-colors text-left"
+                    className="px-3 py-2 text-xs bg-surface dark:bg-gray-700 border border-purple-200 dark:border-purple-600 rounded-lg text-purple-700 dark:text-purple-300 hover:bg-purple-100 dark:hover:bg-purple-800/30 transition-colors text-left"
                   >
                     {prompt}
                   </button>
@@ -766,7 +766,7 @@ export function TopicStep({ state, dispatch, onBack }: TopicStepProps) {
 
               {researchContent && (
                 <div className="mt-2">
-                  <div className="p-3 bg-white dark:bg-gray-700 border border-purple-200 dark:border-purple-600 rounded-lg text-xs text-gray-800 dark:text-gray-200">
+                  <div className="p-3 bg-surface dark:bg-gray-700 border border-purple-200 dark:border-purple-600 rounded-lg text-xs text-gray-800 dark:text-gray-200">
                     <ResearchResults
                       content={researchContent}
                       dispatch={dispatch}
@@ -817,7 +817,7 @@ export function TopicStep({ state, dispatch, onBack }: TopicStepProps) {
           placeholder='e.g., "This affects my daily commute and my kids&#39; school bus route"'
           rows={5}
           maxLength={2000}
-          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent resize-y bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
+          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent resize-y bg-surface dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
         />
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{personalWhy.length}/2000 characters</p>
         <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">

@@ -131,7 +131,7 @@ export default function RepPublicData({
         ))}
       </div>
 
-      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
+      <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-5">
         {loading ? (
           <SkeletonBlock />
         ) : tab === 'votes' ? (
@@ -286,7 +286,7 @@ export default function RepPublicData({
                           </div>
                           <div className="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-1.5">
                             <div
-                              className="h-1.5 rounded-full bg-gradient-to-r from-purple-500 to-purple-600"
+                              className="h-1.5 rounded-full bg-purple-600"
                               style={{ width: `${(area.total_income / maxIncome) * 100}%` }}
                             />
                           </div>

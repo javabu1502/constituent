@@ -192,7 +192,7 @@ export default function ContactCongressmanGuidePage() {
               <p className="text-gray-600 dark:text-gray-300 mb-4">
                 Nervous about calling? That&apos;s normal. Most calls last under two minutes. Here&apos;s a word-for-word script you can follow. A staff member (usually an intern or staff assistant) will answer the phone.
               </p>
-              <div className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 text-sm text-gray-700 dark:text-gray-300 space-y-4">
+              <div className="bg-gray-50 dark:bg-gray-800 border border-rule dark:border-gray-700 rounded-xl p-6 text-sm text-gray-700 dark:text-gray-300 space-y-4">
                 <p className="font-semibold text-gray-900 dark:text-white">When the staffer answers:</p>
                 <p>
                   &quot;Hi, my name is <span className="text-purple-600 dark:text-purple-400">[Your Full Name]</span> and I live in <span className="text-purple-600 dark:text-purple-400">[City, State]</span>, ZIP code <span className="text-purple-600 dark:text-purple-400">[ZIP]</span>.&quot;
@@ -213,7 +213,7 @@ export default function ContactCongressmanGuidePage() {
                 <p>
                   &quot;Thank you for your time. I appreciate the work your office does. Have a good day.&quot;
                 </p>
-                <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+                <div className="mt-4 pt-4 border-t border-rule dark:border-gray-700">
                   <p className="text-xs text-gray-500 dark:text-gray-400">
                     <strong>Tip:</strong> The staffer may ask for your full address to confirm you live in the district. They may also tell you the legislator&apos;s current position on the issue. Don&apos;t worry if you stumble. Staff appreciate that you called, regardless of polish.
                   </p>
@@ -236,7 +236,7 @@ export default function ContactCongressmanGuidePage() {
               <p className="text-gray-600 dark:text-gray-300 mb-4">
                 Use this template as a starting point, but personalize it with your own details and voice. Congressional offices can tell when a message is copied verbatim from a template, so make it your own.
               </p>
-              <div className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 text-sm text-gray-700 dark:text-gray-300 space-y-4">
+              <div className="bg-gray-50 dark:bg-gray-800 border border-rule dark:border-gray-700 rounded-xl p-6 text-sm text-gray-700 dark:text-gray-300 space-y-4">
                 <p>
                   <strong className="text-gray-900 dark:text-white">Subject:</strong> <span className="text-purple-600 dark:text-purple-400">[Your Position: Support/Oppose]</span> - <span className="text-purple-600 dark:text-purple-400">[Bill Number or Issue Name]</span>
                 </p>
@@ -476,7 +476,7 @@ export default function ContactCongressmanGuidePage() {
         </div>
 
         {/* Back to Guides */}
-        <div className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
+        <div className="mt-12 pt-8 border-t border-rule dark:border-gray-700">
           <Link
             href="/guides"
             className="inline-flex items-center gap-2 text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 font-medium transition-colors"

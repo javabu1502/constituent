@@ -208,7 +208,7 @@ export default async function ManageCampaignPage({
         </p>
 
         {actions.length === 0 ? (
-          <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-8 text-center">
+          <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-8 text-center">
             <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-2">No steps yet</h3>
             <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 max-w-md mx-auto">
               Start with a cosponsor push or a committee vote. When the bill moves, add the next step and your past
@@ -236,7 +236,7 @@ export default async function ManageCampaignPage({
               return (
                 <div
                   key={a.id}
-                  className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5"
+                  className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-5"
                 >
                   <div className="flex items-start justify-between gap-3 mb-1">
                     <p className="text-xs font-semibold uppercase tracking-wide text-purple-600 dark:text-purple-400">

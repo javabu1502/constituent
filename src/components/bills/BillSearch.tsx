@@ -88,7 +88,7 @@ export function BillSearch({ stateCode, stateName }: BillSearchProps) {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder={`Search ${stateName} legislation...`}
-          className="flex-1 px-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 text-sm"
+          className="flex-1 px-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-surface dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 text-sm"
         />
         <button
           type="submit"
@@ -127,7 +127,7 @@ export function BillSearch({ stateCode, stateName }: BillSearchProps) {
             {bills.map((bill) => (
               <div
                 key={bill.id}
-                className="p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-purple-300 dark:hover:border-purple-600 transition-colors"
+                className="p-4 bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 hover:border-purple-300 dark:hover:border-purple-600 transition-colors"
               >
                 <div className="flex items-start justify-between gap-3">
                   <div className="min-w-0 flex-1">

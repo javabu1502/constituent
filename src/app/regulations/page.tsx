@@ -61,19 +61,19 @@ export default function RegulationsPage() {
       <RegulationsBrowser />
 
       {/* Related guides */}
-      <div className="mt-10 pt-8 border-t border-gray-200 dark:border-gray-700">
+      <div className="mt-10 pt-8 border-t border-rule dark:border-gray-700">
         <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-3">Related Guides</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <Link
             href="/guides/how-to-track-legislation"
-            className="p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-purple-300 dark:hover:border-purple-600 transition-colors"
+            className="p-4 bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 hover:border-purple-300 dark:hover:border-purple-600 transition-colors"
           >
             <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-1">How to Track Legislation</h3>
             <p className="text-xs text-gray-500 dark:text-gray-400">Follow bills and know when to act</p>
           </Link>
           <Link
             href="/guides/write-effective-letter-to-congress"
-            className="p-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 hover:border-purple-300 dark:hover:border-purple-600 transition-colors"
+            className="p-4 bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 hover:border-purple-300 dark:hover:border-purple-600 transition-colors"
           >
             <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-1">Write an Effective Letter</h3>
             <p className="text-xs text-gray-500 dark:text-gray-400">Tips for comments that agencies notice</p>

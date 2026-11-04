@@ -45,7 +45,7 @@ export function GettingStartedChecklist({ hasAddress, hasReps, hasMessages }: Ge
   if (allDone) return null;
 
   return (
-    <div className="mb-8 bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-purple-900/20 dark:to-indigo-900/20 rounded-2xl border border-purple-200 dark:border-purple-800 p-6">
+    <div className="mb-8 bg-purple-50 dark:bg-purple-900/20 border border-purple-200 dark:border-purple-800 p-6">
       <div className="flex items-center gap-3 mb-1">
         <div className="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center flex-shrink-0">
           <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -80,7 +80,7 @@ export function GettingStartedChecklist({ hasAddress, hasReps, hasMessages }: Ge
                 done
                   ? 'bg-white/60 dark:bg-gray-800/40'
                   : isNext
-                  ? 'bg-white dark:bg-gray-800 shadow-sm border border-purple-200 dark:border-purple-700'
+                  ? 'bg-surface dark:bg-gray-800 border border-purple-200 dark:border-purple-700'
                   : 'bg-white/40 dark:bg-gray-800/20 opacity-60'
               }`}
             >

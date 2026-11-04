@@ -102,7 +102,7 @@ export default async function CreateCampaignPage({
           <p className="text-gray-600 dark:text-gray-400 mt-2">{copy.subtitle}</p>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm p-6 sm:p-8">
+        <div className="bg-surface dark:bg-gray-800 rounded-2xl border border-rule dark:border-gray-700 p-6 sm:p-8">
           <p className="text-gray-700 dark:text-gray-200">{copy.what}</p>
           <ul className="mt-4 space-y-2">
             {copy.points.map((pt) => (
@@ -164,7 +164,7 @@ export default async function CreateCampaignPage({
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <Link
             href="/campaign/create?type=advocacy"
-            className="bg-white dark:bg-gray-800 rounded-2xl border-2 border-gray-200 dark:border-gray-700 hover:border-purple-500 dark:hover:border-purple-500 shadow-sm p-6 transition-colors"
+            className="bg-surface dark:bg-gray-800 rounded-2xl border-2 border-rule dark:border-gray-700 hover:border-purple-500 dark:hover:border-purple-500 p-6 transition-colors"
           >
             <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Advocacy</h2>
             <p className="text-sm text-gray-600 dark:text-gray-400">
@@ -174,7 +174,7 @@ export default async function CreateCampaignPage({
           </Link>
           <Link
             href="/campaign/create?type=storytelling"
-            className="bg-white dark:bg-gray-800 rounded-2xl border-2 border-gray-200 dark:border-gray-700 hover:border-purple-500 dark:hover:border-purple-500 shadow-sm p-6 transition-colors"
+            className="bg-surface dark:bg-gray-800 rounded-2xl border-2 border-rule dark:border-gray-700 hover:border-purple-500 dark:hover:border-purple-500 p-6 transition-colors"
           >
             <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Storytelling</h2>
             <p className="text-sm text-gray-600 dark:text-gray-400">
@@ -194,7 +194,7 @@ export default async function CreateCampaignPage({
         <p className="text-gray-600 dark:text-gray-400 mt-2">{copy.subtitle}</p>
       </div>
 
-      <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm p-6 sm:p-8">
+      <div className="bg-surface dark:bg-gray-800 rounded-2xl border border-rule dark:border-gray-700 p-6 sm:p-8">
         <CampaignForm initialType={isStory ? 'storytelling' : 'advocacy'} />
       </div>
     </div>

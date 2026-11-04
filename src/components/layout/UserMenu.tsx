@@ -76,7 +76,7 @@ export function UserMenu({ user }: { user: User | null }) {
       </button>
 
       {open && (
-        <div id="user-menu" role="menu" className="absolute right-0 mt-2 w-56 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-lg py-1 z-50">
+        <div id="user-menu" role="menu" className="absolute right-0 mt-2 w-56 bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 shadow-lg py-1 z-50">
           <div className="px-4 py-3 border-b border-gray-100 dark:border-gray-700">
             <p className="text-sm font-medium text-gray-900 dark:text-white truncate">
               {user.user_metadata?.full_name || 'User'}

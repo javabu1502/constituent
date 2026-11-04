@@ -84,7 +84,7 @@ export default function CampaignsPage() {
       {/* Three pillars */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-14">
         {PILLARS.map((p) => (
-          <div key={p.title} className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm p-6">
+          <div key={p.title} className="bg-surface dark:bg-gray-800 rounded-2xl border border-rule dark:border-gray-700 p-6">
             <h2 className="text-lg font-semibold text-gray-900 dark:text-white">{p.title}</h2>
             <p className="text-sm font-medium text-purple-600 dark:text-purple-400 mb-3">{p.lead}</p>
             <ul className="text-sm text-gray-600 dark:text-gray-400 space-y-2">
@@ -111,7 +111,7 @@ export default function CampaignsPage() {
             ['Whip counts without the enterprise contract', 'Position tracking, meeting notes, and lobbying-hour logs are usually sold separately in enterprise public affairs suites. They are part of the same workspace as your grassroots actions.'],
             ['Launch in a day', 'No implementation fees, no per-module pricing, no sales cycle. Create a campaign, share the link, and your first constituent messages arrive the same day.'],
           ].map(([title, body]) => (
-            <div key={title} className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
+            <div key={title} className="bg-surface dark:bg-gray-800 rounded-2xl border border-rule dark:border-gray-700 p-5">
               <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-1">{title}</h3>
               <p className="text-sm text-gray-600 dark:text-gray-400">{body}</p>
             </div>
@@ -128,7 +128,7 @@ export default function CampaignsPage() {
           dashboard behind it.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm p-6">
+          <div className="bg-surface dark:bg-gray-800 rounded-2xl border border-rule dark:border-gray-700 p-6">
             <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-2">Explore the live demo campaign</h3>
             <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
               What constituents see: the bill&apos;s journey tracker, the organization&apos;s talking points in the
@@ -141,7 +141,7 @@ export default function CampaignsPage() {
               Open the demo campaign →
             </Link>
           </div>
-          <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm p-6">
+          <div className="bg-surface dark:bg-gray-800 rounded-2xl border border-rule dark:border-gray-700 p-6">
             <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-2">Explore the org dashboard</h3>
             <ul className="text-sm text-gray-600 dark:text-gray-400 space-y-1.5 mb-4">
               <li>• A whip board reading &ldquo;8 of 13 committee members supportive, passes if it holds&rdquo;</li>
@@ -160,7 +160,7 @@ export default function CampaignsPage() {
       </div>
 
       {/* Application */}
-      <div id="apply" className="mb-10 scroll-mt-24 bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm p-6 sm:p-8 max-w-2xl mx-auto">
+      <div id="apply" className="mb-10 scroll-mt-24 bg-surface dark:bg-gray-800 rounded-2xl border border-rule dark:border-gray-700 p-6 sm:p-8 max-w-2xl mx-auto">
         <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-1">Apply for the pilot</h2>
         <p className="text-sm text-gray-600 dark:text-gray-400 mb-5">
           We onboard a handful of organizations at a time and work closely with each. Tell us what you&apos;re working

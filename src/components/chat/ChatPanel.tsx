@@ -79,12 +79,12 @@ export function ChatPanel() {
 
   return (
     <div
-      className="fixed bottom-20 right-4 sm:right-6 z-40 w-[calc(100vw-2rem)] sm:w-[400px] h-[min(520px,calc(100vh-7rem))] bg-white dark:bg-gray-800 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700 flex flex-col overflow-hidden"
+      className="fixed bottom-20 right-4 sm:right-6 z-40 w-[calc(100vw-2rem)] sm:w-[400px] h-[min(520px,calc(100vh-7rem))] bg-surface dark:bg-gray-800 rounded-2xl shadow-2xl border border-rule dark:border-gray-700 flex flex-col overflow-hidden"
       role="dialog"
       aria-label="Chat assistant"
     >
       {/* Header */}
-      <div className="flex items-center justify-between px-4 py-3 border-b border-gray-200 dark:border-gray-700 shrink-0">
+      <div className="flex items-center justify-between px-4 py-3 border-b border-rule dark:border-gray-700 shrink-0">
         <div className="flex items-center gap-2">
           <h2 className="font-semibold text-gray-900 dark:text-white text-sm">
             {headerTitle}
@@ -176,7 +176,7 @@ export function ChatPanel() {
       )}
 
       {/* Input area */}
-      <div className="px-3 pb-3 pt-2 border-t border-gray-200 dark:border-gray-700 shrink-0">
+      <div className="px-3 pb-3 pt-2 border-t border-rule dark:border-gray-700 shrink-0">
         <div className="flex items-end gap-2">
           <textarea
             ref={textareaRef}
@@ -189,7 +189,7 @@ export function ChatPanel() {
             placeholder={mode === 'interview' ? 'Share what\'s on your mind...' : 'Ask a question...'}
             rows={1}
             maxLength={2000}
-            className="flex-1 resize-none rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent placeholder:text-gray-400 dark:placeholder:text-gray-500"
+            className="flex-1 resize-none rounded-xl border border-gray-300 dark:border-gray-600 bg-surface dark:bg-gray-700 text-gray-900 dark:text-white text-sm px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent placeholder:text-gray-400 dark:placeholder:text-gray-500"
           />
           <MicButton text={input} setText={setInput} disabled={isLoading} />
           <button

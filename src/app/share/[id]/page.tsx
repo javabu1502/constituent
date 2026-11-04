@@ -69,9 +69,9 @@ export default async function SharePage({ params }: SharePageProps) {
   return (
     <div className="min-h-screen flex items-center justify-center px-4 py-16">
       <div className="max-w-lg w-full">
-        <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-lg overflow-hidden">
+        <div className="bg-surface dark:bg-gray-800 rounded-2xl border border-rule dark:border-gray-700 shadow-lg overflow-hidden">
           {/* Header accent */}
-          <div className="h-2 bg-gradient-to-r from-purple-600 to-purple-400" />
+          <div className="h-2 bg-purple-600" />
 
           <div className="p-8 text-center">
             {/* Icon */}

@@ -128,7 +128,7 @@ export default function WriteLetterGuidePage() {
               Example Letter
             </h2>
             <div className="pl-10">
-              <div className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 text-sm text-gray-700 dark:text-gray-300 space-y-4">
+              <div className="bg-gray-50 dark:bg-gray-800 border border-rule dark:border-gray-700 rounded-xl p-6 text-sm text-gray-700 dark:text-gray-300 space-y-4">
                 <p>Dear Senator [Name],</p>
                 <p>
                   My name is [Your Name], and I live in [City, State ZIP]. I&apos;m writing to urge you to vote YES on S. 1234, the Affordable Insulin Act.
@@ -233,7 +233,7 @@ export default function WriteLetterGuidePage() {
             <div className="pl-10 space-y-6">
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-3">Infrastructure &amp; Road Safety</h3>
-                <div className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 text-sm text-gray-700 dark:text-gray-300 space-y-4">
+                <div className="bg-gray-50 dark:bg-gray-800 border border-rule dark:border-gray-700 rounded-xl p-6 text-sm text-gray-700 dark:text-gray-300 space-y-4">
                   <p>Dear Representative [Name],</p>
                   <p>
                     My name is [Your Name], and I live at [Address] in [City, State ZIP]. I&apos;m writing to urge you to support HR 5678, the Safe Streets and Roads Act, which would direct federal funding to fix dangerous intersections in communities like ours.
@@ -261,7 +261,7 @@ export default function WriteLetterGuidePage() {
 
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-3">Education Funding</h3>
-                <div className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 text-sm text-gray-700 dark:text-gray-300 space-y-4">
+                <div className="bg-gray-50 dark:bg-gray-800 border border-rule dark:border-gray-700 rounded-xl p-6 text-sm text-gray-700 dark:text-gray-300 space-y-4">
                   <p>Dear Senator [Name],</p>
                   <p>
                     My name is [Your Name], and I&apos;m a parent of two children at Lincoln Elementary in [City, State ZIP]. I&apos;m writing to ask you to vote YES on S. 2345, the Strengthening Public Schools Act.
@@ -522,7 +522,7 @@ export default function WriteLetterGuidePage() {
         </div>
 
         {/* Back to Guides */}
-        <div className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
+        <div className="mt-12 pt-8 border-t border-rule dark:border-gray-700">
           <Link
             href="/guides"
             className="inline-flex items-center gap-2 text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 font-medium transition-colors"

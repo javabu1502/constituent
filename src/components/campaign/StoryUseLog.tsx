@@ -104,13 +104,13 @@ export function StoryUseLog({
           Record a use
         </button>
       ) : (
-        <div className="rounded-lg border border-gray-200 dark:border-gray-700 p-3 space-y-2 bg-gray-50 dark:bg-gray-800/60">
+        <div className="rounded-lg border border-rule dark:border-gray-700 p-3 space-y-2 bg-gray-50 dark:bg-gray-800/60">
           <label className="block text-xs font-medium text-gray-700 dark:text-gray-300">
             How are you using this story?
             <select
               value={useType}
               onChange={(e) => setUseType(e.target.value)}
-              className="mt-1 block w-full text-sm px-2 py-1.5 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              className="mt-1 block w-full text-sm px-2 py-1.5 rounded-lg border border-gray-300 dark:border-gray-600 bg-surface dark:bg-gray-700 text-gray-900 dark:text-white"
             >
               {STORY_USAGE_OPTIONS.map((o) => {
                 const ok = grantedUseValues.includes(o.value);
@@ -137,7 +137,7 @@ export function StoryUseLog({
               rows={2}
               maxLength={500}
               placeholder="e.g., Quoted in our written testimony to the Assembly Education Committee on Oct 3"
-              className="mt-1 block w-full text-sm px-2 py-1.5 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400"
+              className="mt-1 block w-full text-sm px-2 py-1.5 rounded-lg border border-gray-300 dark:border-gray-600 bg-surface dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400"
             />
           </label>
           {error && <p className="text-xs text-red-600 dark:text-red-400">{error}</p>}

@@ -59,7 +59,7 @@ export function SupporterMap({ slug }: { slug: string }) {
 
   if (data.total === 0) {
     return (
-      <div className="p-6 rounded-2xl border border-gray-200 dark:border-gray-700 text-center">
+      <div className="p-6 rounded-2xl border border-rule dark:border-gray-700 text-center">
         <p className="text-gray-700 dark:text-gray-300">No supporters yet.</p>
         <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
           Share your join link or embed the form, and this map fills in as people sign up.
@@ -92,7 +92,7 @@ export function SupporterMap({ slug }: { slug: string }) {
                 key={c}
                 type="button"
                 onClick={() => setChamber(c)}
-                className={`px-3 py-1.5 ${chamber === c ? 'bg-purple-600 text-white' : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300'}`}
+                className={`px-3 py-1.5 ${chamber === c ? 'bg-purple-600 text-white' : 'bg-surface dark:bg-gray-800 text-gray-700 dark:text-gray-300'}`}
               >
                 {c === 'senate' ? 'Senate' : lowerLabel}
               </button>
@@ -104,7 +104,7 @@ export function SupporterMap({ slug }: { slug: string }) {
                 key={v}
                 type="button"
                 onClick={() => setView(v)}
-                className={`px-3 py-1.5 ${view === v ? 'bg-gray-900 dark:bg-gray-200 text-white dark:text-gray-900' : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300'}`}
+                className={`px-3 py-1.5 ${view === v ? 'bg-gray-900 dark:bg-gray-200 text-white dark:text-gray-900' : 'bg-surface dark:bg-gray-800 text-gray-700 dark:text-gray-300'}`}
               >
                 {v === 'tiles' ? 'Tiles' : 'Map'}
               </button>

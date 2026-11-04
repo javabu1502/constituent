@@ -203,7 +203,7 @@ function CampaignCard({
   const isStory = campaign.campaign_type === 'storytelling';
 
   return (
-    <div className="p-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl">
+    <div className="p-4 bg-surface dark:bg-gray-800 border border-rule dark:border-gray-700 rounded-xl">
       <div className="flex items-start justify-between gap-4">
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 mb-1 flex-wrap">
@@ -274,7 +274,7 @@ function CampaignCard({
             onChange={(e) => onNoteChange(e.target.value)}
             placeholder="Optional note to the creator (included in your email — e.g. a reason for rejection or a welcome message)"
             rows={2}
-            className="w-full text-sm px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 resize-none"
+            className="w-full text-sm px-3 py-2 border border-rule dark:border-gray-700 rounded-lg bg-surface dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 resize-none"
           />
         </div>
       )}

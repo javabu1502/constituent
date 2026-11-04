@@ -15,7 +15,7 @@ export default function SignupPage() {
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Create Account</h1>
           <p className="text-gray-600 dark:text-gray-400 mt-2">Track your advocacy and message history</p>
         </div>
-        <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm p-6 sm:p-8">
+        <div className="bg-surface dark:bg-gray-800 rounded-2xl border border-rule dark:border-gray-700 p-6 sm:p-8">
           <SignupForm />
         </div>
       </div>

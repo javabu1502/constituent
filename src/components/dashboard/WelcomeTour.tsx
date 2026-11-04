@@ -107,7 +107,7 @@ export function WelcomeTour() {
       <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={dismiss} />
 
       {/* Modal */}
-      <div className="relative bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-md w-full overflow-hidden">
+      <div className="relative bg-surface dark:bg-gray-800 rounded-2xl shadow-2xl max-w-md w-full overflow-hidden">
         {/* Progress dots */}
         <div className="flex justify-center gap-1.5 pt-5">
           {tourSteps.map((_, i) => (

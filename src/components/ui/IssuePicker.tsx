@@ -114,7 +114,7 @@ export function IssuePicker({ value, category, onChange }: IssuePickerProps) {
   if (value && category && category !== 'Other') {
     return (
       <div ref={containerRef}>
-        <div className="flex items-center gap-2 w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-700">
+        <div className="flex items-center gap-2 w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl bg-surface dark:bg-gray-700">
           <span className="flex-1 text-sm text-gray-900 dark:text-white">
             <span className="font-medium">{value}</span>
           </span>
@@ -151,7 +151,7 @@ export function IssuePicker({ value, category, onChange }: IssuePickerProps) {
           value={value}
           onChange={(e) => onChange(e.target.value, 'Other')}
           placeholder="Describe your issue..."
-          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
+          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-surface dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
         />
       </div>
     );
@@ -181,7 +181,7 @@ export function IssuePicker({ value, category, onChange }: IssuePickerProps) {
           onFocus={() => setIsOpen(true)}
           onKeyDown={handleKeyDown}
           placeholder='Search topics, e.g. "child care", "student loans"'
-          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
+          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-surface dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
           role="combobox"
           aria-controls="issue-picker-listbox"
           aria-expanded={isOpen}
@@ -189,7 +189,7 @@ export function IssuePicker({ value, category, onChange }: IssuePickerProps) {
           autoComplete="off"
         />
         {isOpen && (
-          <div ref={listRef} id="issue-picker-listbox" role="listbox" className="absolute z-50 w-full mt-1 max-h-60 overflow-y-auto bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-xl shadow-lg">
+          <div ref={listRef} id="issue-picker-listbox" role="listbox" className="absolute z-50 w-full mt-1 max-h-60 overflow-y-auto bg-surface dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-xl shadow-lg">
             {results.length === 0 && (
               <div className="px-4 py-3 text-sm text-gray-500 dark:text-gray-400">No matching topics</div>
             )}
@@ -218,7 +218,7 @@ export function IssuePicker({ value, category, onChange }: IssuePickerProps) {
               aria-selected={highlightIndex === results.length}
               onClick={selectOther}
               onMouseEnter={() => setHighlightIndex(results.length)}
-              className={`w-full text-left px-4 py-2.5 text-sm border-t border-gray-200 dark:border-gray-700 transition-colors ${
+              className={`w-full text-left px-4 py-2.5 text-sm border-t border-rule dark:border-gray-700 transition-colors ${
                 highlightIndex === results.length
                   ? 'bg-purple-50 dark:bg-purple-900/40 text-purple-900 dark:text-purple-100'
                   : 'text-gray-500 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700'
@@ -267,7 +267,7 @@ export function IssuePicker({ value, category, onChange }: IssuePickerProps) {
                 key={sub.label}
                 type="button"
                 onClick={() => selectOption(sub)}
-                className="px-3 py-1.5 text-xs font-medium bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg border border-purple-200 dark:border-purple-700 hover:bg-purple-100 dark:hover:bg-purple-900/40 hover:text-purple-700 dark:hover:text-purple-300 transition-colors"
+                className="px-3 py-1.5 text-xs font-medium bg-surface dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg border border-purple-200 dark:border-purple-700 hover:bg-purple-100 dark:hover:bg-purple-900/40 hover:text-purple-700 dark:hover:text-purple-300 transition-colors"
               >
                 {sub.label}
               </button>

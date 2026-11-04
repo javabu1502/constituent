@@ -39,7 +39,7 @@ export function EmbedCodeButton({ slug }: { slug: string }) {
           onClick={() => setOpen(false)}
         >
           <div
-            className="w-full max-w-lg bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-xl p-6"
+            className="w-full max-w-lg bg-surface dark:bg-gray-800 rounded-2xl border border-rule dark:border-gray-700 shadow-xl p-6"
             onClick={(e) => e.stopPropagation()}
             role="dialog"
             aria-modal="true"
@@ -59,7 +59,7 @@ export function EmbedCodeButton({ slug }: { slug: string }) {
             <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
               Paste this where you want the campaign to appear on your site. It sizes itself to fit.
             </p>
-            <pre className="p-3 bg-gray-50 dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700 text-xs text-gray-800 dark:text-gray-200 overflow-x-auto whitespace-pre-wrap break-all">
+            <pre className="p-3 bg-gray-50 dark:bg-gray-900 rounded-lg border border-rule dark:border-gray-700 text-xs text-gray-800 dark:text-gray-200 overflow-x-auto whitespace-pre-wrap break-all">
               {scriptSnippet}
             </pre>
             <button
@@ -72,7 +72,7 @@ export function EmbedCodeButton({ slug }: { slug: string }) {
             <p className="text-sm text-gray-600 dark:text-gray-400 mt-5 mb-2">
               If your site builder strips script tags, use the plain iframe instead:
             </p>
-            <pre className="p-3 bg-gray-50 dark:bg-gray-900 rounded-lg border border-gray-200 dark:border-gray-700 text-xs text-gray-800 dark:text-gray-200 overflow-x-auto whitespace-pre-wrap break-all">
+            <pre className="p-3 bg-gray-50 dark:bg-gray-900 rounded-lg border border-rule dark:border-gray-700 text-xs text-gray-800 dark:text-gray-200 overflow-x-auto whitespace-pre-wrap break-all">
               {iframeSnippet}
             </pre>
             <button

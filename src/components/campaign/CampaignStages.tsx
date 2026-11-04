@@ -87,7 +87,7 @@ export async function CampaignStages({
     .sort((a, b) => stageOrder(a.stage_goal) - stageOrder(b.stage_goal) || a.created_at.localeCompare(b.created_at));
 
   return (
-    <div className="mb-8 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-5">
+    <div className="mb-8 rounded-xl border border-rule dark:border-gray-700 bg-surface dark:bg-gray-800 p-5">
       <div className="flex items-center justify-between gap-3 mb-1">
         <h2 className="text-base font-semibold text-gray-900 dark:text-white">Actions</h2>
         {!isDemo && (

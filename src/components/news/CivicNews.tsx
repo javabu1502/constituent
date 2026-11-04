@@ -62,7 +62,7 @@ function BlindspotBadge({ side }: { side: 'left' | 'right' }) {
 function BiasLegend() {
   const leans: SourceLean[] = ['left', 'left-center', 'center', 'right-center', 'right'];
   return (
-    <div className="mb-6 p-4 bg-gray-50 dark:bg-gray-800/50 rounded-xl border border-gray-200 dark:border-gray-700">
+    <div className="mb-6 p-4 bg-gray-50 dark:bg-gray-800/50 rounded-xl border border-rule dark:border-gray-700">
       <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-1">Understanding Source Bias Labels</h3>
       <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">
         Each article shows a colored label indicating the source&apos;s editorial lean. This helps you read
@@ -127,7 +127,7 @@ function mentionsRep(article: NewsArticle, matchers: RegExp[]): boolean {
 
 function NewsCard({ article, isMyRep, weeklyWrites }: { article: NewsArticle; isMyRep: boolean; weeklyWrites: number }) {
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4 hover:border-purple-300 dark:hover:border-purple-600 transition-colors">
+    <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4 hover:border-purple-300 dark:hover:border-purple-600 transition-colors">
       <div className="flex flex-wrap items-center gap-1.5 mb-2">
         {article.topic && (
           <span className="inline-block px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-purple-600 dark:text-purple-400 bg-purple-50 dark:bg-purple-900/20 rounded">
@@ -365,7 +365,7 @@ export function CivicNews({ limit, compact = false, showLegend = false, showFilt
     return (
       <div className={compact ? 'space-y-2' : 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3'}>
         {Array.from({ length: limit || 6 }).map((_, i) => (
-          <div key={i} className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 animate-pulse">
+          <div key={i} className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4 animate-pulse">
             <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-2" />
             <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-1/2" />
           </div>
@@ -480,7 +480,7 @@ export function CivicNews({ limit, compact = false, showLegend = false, showFilt
       {stateLoading ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {Array.from({ length: 6 }).map((_, i) => (
-            <div key={i} className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 animate-pulse">
+            <div key={i} className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4 animate-pulse">
               <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/4 mb-2" />
               <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-1/2" />
             </div>

@@ -40,7 +40,7 @@ export default function TeamPage() {
 
         {/* Founder card */}
         <section className="mb-12">
-          <div className="rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-6 sm:p-8 flex flex-col sm:flex-row gap-6 items-start">
+          <div className="rounded-2xl border border-rule dark:border-gray-700 bg-surface dark:bg-gray-800 p-6 sm:p-8 flex flex-col sm:flex-row gap-6 items-start">
             <Image
               src="/team/jared-busker.jpg"
               alt="Jared Busker"
@@ -77,7 +77,7 @@ export default function TeamPage() {
             </div>
           </div>
 
-          <div className="mt-5 rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-6 sm:p-8 flex flex-col sm:flex-row gap-6 items-start">
+          <div className="mt-5 rounded-2xl border border-rule dark:border-gray-700 bg-surface dark:bg-gray-800 p-6 sm:p-8 flex flex-col sm:flex-row gap-6 items-start">
             <div className="w-24 h-24 rounded-full bg-purple-100 dark:bg-purple-900 flex items-center justify-center flex-shrink-0">
               <span className="text-3xl font-bold text-purple-600 dark:text-purple-300">
                 LB
@@ -235,7 +235,7 @@ export default function TeamPage() {
                 href="https://buymeacoffee.com/mydemocracy"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-[#FFDD00] hover:bg-[#e6c800] text-gray-900 font-semibold rounded-lg transition-colors shadow-sm"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-[#FFDD00] hover:bg-[#e6c800] text-gray-900 font-semibold rounded-lg transition-colors"
               >
                 <span className="text-xl">☕</span>
                 Support My Democracy
@@ -245,7 +245,7 @@ export default function TeamPage() {
         </div>
 
         {/* Back to Home */}
-        <div className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
+        <div className="mt-12 pt-8 border-t border-rule dark:border-gray-700">
           <Link
             href="/"
             className="inline-flex items-center gap-2 text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 font-medium transition-colors"

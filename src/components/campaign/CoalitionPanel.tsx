@@ -95,7 +95,7 @@ export function CoalitionPanel({ slug, initialOutcome, isDemo = false }: { slug:
         {list.map((s) => {
           const convos = notes.filter((n) => n.stakeholder_id === s.id);
           return (
-            <div key={s.id} className="p-2.5 rounded-lg border border-gray-200 dark:border-gray-700">
+            <div key={s.id} className="p-2.5 rounded-lg border border-rule dark:border-gray-700">
               <div className="flex items-center justify-between gap-2">
                 <span className="text-sm font-medium text-gray-900 dark:text-white">{s.name}</span>
                 <button type="button" onClick={() => { setOpen(open === s.id ? null : s.id); setNoteDraft(''); }} className="text-xs text-purple-600 dark:text-purple-400 hover:underline shrink-0">
@@ -118,7 +118,7 @@ export function CoalitionPanel({ slug, initialOutcome, isDemo = false }: { slug:
                       onChange={(e) => setNoteDraft(e.target.value)}
                       onKeyDown={(e) => { if (e.key === 'Enter') void addNote(s); }}
                       placeholder="Log a conversation…"
-                      className="flex-1 px-2 py-1 text-xs rounded border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
+                      className="flex-1 px-2 py-1 text-xs rounded border border-gray-300 dark:border-gray-600 bg-surface dark:bg-gray-900 text-gray-900 dark:text-white"
                     />
                     <button type="button" onClick={() => void addNote(s)} className="text-xs px-2 py-1 rounded bg-purple-600 text-white">Add</button>
                   </div>}
@@ -133,7 +133,7 @@ export function CoalitionPanel({ slug, initialOutcome, isDemo = false }: { slug:
   );
 
   return (
-    <div className="mb-8 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-5">
+    <div className="mb-8 rounded-xl border border-rule dark:border-gray-700 bg-surface dark:bg-gray-800 p-5">
       <div className="flex flex-wrap items-center justify-between gap-3 mb-1">
         <h2 className="text-base font-semibold text-gray-900 dark:text-white">Coalition &amp; outcome</h2>
         <label className="flex items-center gap-2 text-xs text-gray-600 dark:text-gray-400">
@@ -146,7 +146,7 @@ export function CoalitionPanel({ slug, initialOutcome, isDemo = false }: { slug:
             <select
               value={outcome}
               onChange={(e) => void saveOutcome(e.target.value)}
-              className="text-xs rounded-lg border border-gray-300 dark:border-gray-600 px-2 py-1 bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
+              className="text-xs rounded-lg border border-gray-300 dark:border-gray-600 px-2 py-1 bg-surface dark:bg-gray-900 text-gray-900 dark:text-white"
             >
               {OUTCOMES.map((o) => (
                 <option key={o.value} value={o.value}>{o.label}</option>
@@ -166,12 +166,12 @@ export function CoalitionPanel({ slug, initialOutcome, isDemo = false }: { slug:
 
       {isDemo ? null : adding ? (
         <div className="mt-4 pt-3 border-t border-gray-100 dark:border-gray-700 flex flex-wrap gap-2 items-start">
-          <input value={newName} onChange={(e) => setNewName(e.target.value)} placeholder="Organization name" className="px-2.5 py-1.5 text-sm rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-white" />
-          <select value={newSide} onChange={(e) => setNewSide(e.target.value as 'support' | 'oppose')} className="px-2 py-1.5 text-sm rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
+          <input value={newName} onChange={(e) => setNewName(e.target.value)} placeholder="Organization name" className="px-2.5 py-1.5 text-sm rounded-lg border border-gray-300 dark:border-gray-600 bg-surface dark:bg-gray-900 text-gray-900 dark:text-white" />
+          <select value={newSide} onChange={(e) => setNewSide(e.target.value as 'support' | 'oppose')} className="px-2 py-1.5 text-sm rounded-lg border border-gray-300 dark:border-gray-600 bg-surface dark:bg-gray-900 text-gray-900 dark:text-white">
             <option value="support">Supports</option>
             <option value="oppose">Opposes</option>
           </select>
-          <input value={newStatement} onChange={(e) => setNewStatement(e.target.value)} placeholder="What did they say? (public position)" className="flex-1 min-w-48 px-2.5 py-1.5 text-sm rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-white" />
+          <input value={newStatement} onChange={(e) => setNewStatement(e.target.value)} placeholder="What did they say? (public position)" className="flex-1 min-w-48 px-2.5 py-1.5 text-sm rounded-lg border border-gray-300 dark:border-gray-600 bg-surface dark:bg-gray-900 text-gray-900 dark:text-white" />
           <button type="button" onClick={() => void addStakeholder()} className="text-sm px-3 py-1.5 rounded-lg bg-purple-600 hover:bg-purple-700 text-white">Save</button>
           <button type="button" onClick={() => setAdding(false)} className="text-sm px-2 py-1.5 text-gray-500 hover:underline">Cancel</button>
         </div>

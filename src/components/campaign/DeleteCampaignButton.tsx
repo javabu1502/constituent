@@ -71,7 +71,7 @@ export function DeleteCampaignButton({
 
       {showConfirm && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50">
-          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl max-w-sm w-full p-6">
+          <div className="bg-surface dark:bg-gray-800 rounded-2xl shadow-xl max-w-sm w-full p-6">
             <div className="w-12 h-12 bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center mx-auto mb-4">
               <svg className="w-6 h-6 text-red-600 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z" />
@@ -90,7 +90,7 @@ export function DeleteCampaignButton({
               Download what you need first.
             </p>
             {!closed && (
-              <div className="mb-6 p-3 rounded-lg bg-gray-50 dark:bg-gray-900/40 border border-gray-200 dark:border-gray-700">
+              <div className="mb-6 p-3 rounded-lg bg-gray-50 dark:bg-gray-900/40 border border-rule dark:border-gray-700">
                 <p className="text-sm text-gray-600 dark:text-gray-400 mb-3">
                   Closing it stops the campaign collecting and keeps all of that. The public page
                   and the embed say it is closed.

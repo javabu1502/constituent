@@ -90,7 +90,7 @@ function LocalOfficialCard({ official }: { official: LocalOfficial }) {
     .toUpperCase();
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4 flex flex-col">
+    <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4 flex flex-col">
       <div className="flex items-start gap-3 mb-2">
         {official.photoUrl ? (
           <Image
@@ -193,7 +193,7 @@ function LocalOfficialCard({ official }: { official: LocalOfficial }) {
 
 function SkeletonCard() {
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4 animate-pulse">
+    <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4 animate-pulse">
       <div className="flex items-start gap-3 mb-3">
         <div className="w-12 h-12 rounded-full bg-gray-200 dark:bg-gray-700 flex-shrink-0" />
         <div className="flex-1 space-y-2">
@@ -271,7 +271,7 @@ export function LocalOfficialsSection({ cachedLocalOfficials, hasAddress }: Prop
 
   if (error) {
     return (
-      <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm p-8 text-center">
+      <div className="bg-surface dark:bg-gray-800 rounded-2xl border border-rule dark:border-gray-700 p-8 text-center">
         <p className="text-gray-600 dark:text-gray-400">{error}</p>
       </div>
     );
@@ -289,7 +289,7 @@ export function LocalOfficialsSection({ cachedLocalOfficials, hasAddress }: Prop
 
   // Address exists but no data — show helpful fallback links
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm p-8 text-center">
+    <div className="bg-surface dark:bg-gray-800 rounded-2xl border border-rule dark:border-gray-700 p-8 text-center">
       <div className="w-12 h-12 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center mx-auto mb-4">
         <svg className="w-6 h-6 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />

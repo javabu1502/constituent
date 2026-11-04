@@ -269,7 +269,7 @@ export default function ContactStateLegislatorsGuidePage() {
                 Calling your state legislator is often more personal than calling a congressional office. In many states, especially those with citizen or part-time legislatures, the legislator may answer the phone themselves. Be prepared for a real conversation, not just leaving a message with a staffer.
               </p>
 
-              <div className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-5 space-y-4">
+              <div className="bg-gray-50 dark:bg-gray-800 border border-rule dark:border-gray-700 rounded-lg p-5 space-y-4">
                 <p className="text-sm font-semibold text-purple-600 dark:text-purple-400 uppercase tracking-wide">Phone Script</p>
 
                 <div className="space-y-3">
@@ -330,7 +330,7 @@ export default function ContactStateLegislatorsGuidePage() {
                 Emails to state legislators can be more conversational than those to Congress. In many states, your email goes directly to the legislator&apos;s inbox rather than being screened by staff. This is your chance to make a personal connection.
               </p>
 
-              <div className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-5 space-y-4">
+              <div className="bg-gray-50 dark:bg-gray-800 border border-rule dark:border-gray-700 rounded-lg p-5 space-y-4">
                 <p className="text-sm font-semibold text-purple-600 dark:text-purple-400 uppercase tracking-wide">Email Template</p>
 
                 <div className="space-y-3">
@@ -344,7 +344,7 @@ export default function ContactStateLegislatorsGuidePage() {
                     <strong className="text-gray-900 dark:text-white">Body:</strong>
                   </p>
 
-                  <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded p-4 space-y-3 text-sm">
+                  <div className="bg-surface dark:bg-gray-900 border border-rule dark:border-gray-700 rounded p-4 space-y-3 text-sm">
                     <p>Dear <span className="text-purple-600 dark:text-purple-400">[Representative/Senator]</span> <span className="text-purple-600 dark:text-purple-400">[Last Name]</span>,</p>
 
                     <p>My name is <span className="text-purple-600 dark:text-purple-400">[Your Name]</span> and I live in <span className="text-purple-600 dark:text-purple-400">[your city/neighborhood]</span> in your district. I&apos;m writing to ask you to <span className="text-purple-600 dark:text-purple-400">[support/oppose]</span> <span className="text-purple-600 dark:text-purple-400">[Bill Number - Bill Name]</span>.</p>
@@ -402,7 +402,7 @@ export default function ContactStateLegislatorsGuidePage() {
                   <div>State legislators</div>
                 </div>
 
-                <div className="grid grid-cols-3 gap-3 text-sm bg-white dark:bg-gray-900 rounded-lg p-3">
+                <div className="grid grid-cols-3 gap-3 text-sm bg-surface dark:bg-gray-900 rounded-lg p-3">
                   <div className="font-medium text-gray-900 dark:text-white">Social Security</div>
                   <div>Federal</div>
                   <div>Members of Congress</div>
@@ -414,7 +414,7 @@ export default function ContactStateLegislatorsGuidePage() {
                   <div>State legislators <em>and</em> Congress</div>
                 </div>
 
-                <div className="grid grid-cols-3 gap-3 text-sm bg-white dark:bg-gray-900 rounded-lg p-3">
+                <div className="grid grid-cols-3 gap-3 text-sm bg-surface dark:bg-gray-900 rounded-lg p-3">
                   <div className="font-medium text-gray-900 dark:text-white">Gun Laws</div>
                   <div>Both</div>
                   <div>State legislators <em>and</em> Congress</div>
@@ -426,7 +426,7 @@ export default function ContactStateLegislatorsGuidePage() {
                   <div>Members of Congress</div>
                 </div>
 
-                <div className="grid grid-cols-3 gap-3 text-sm bg-white dark:bg-gray-900 rounded-lg p-3">
+                <div className="grid grid-cols-3 gap-3 text-sm bg-surface dark:bg-gray-900 rounded-lg p-3">
                   <div className="font-medium text-gray-900 dark:text-white">Zoning &amp; Land Use</div>
                   <div>Local / State</div>
                   <div>City council, state legislators</div>
@@ -438,7 +438,7 @@ export default function ContactStateLegislatorsGuidePage() {
                   <div>State legislators <em>and</em> Congress</div>
                 </div>
 
-                <div className="grid grid-cols-3 gap-3 text-sm bg-white dark:bg-gray-900 rounded-lg p-3">
+                <div className="grid grid-cols-3 gap-3 text-sm bg-surface dark:bg-gray-900 rounded-lg p-3">
                   <div className="font-medium text-gray-900 dark:text-white">Driver&apos;s Licenses</div>
                   <div>State</div>
                   <div>State legislators</div>
@@ -450,7 +450,7 @@ export default function ContactStateLegislatorsGuidePage() {
                   <div>Members of Congress</div>
                 </div>
 
-                <div className="grid grid-cols-3 gap-3 text-sm bg-white dark:bg-gray-900 rounded-lg p-3">
+                <div className="grid grid-cols-3 gap-3 text-sm bg-surface dark:bg-gray-900 rounded-lg p-3">
                   <div className="font-medium text-gray-900 dark:text-white">Cannabis Laws</div>
                   <div>Both</div>
                   <div>State legislators <em>and</em> Congress</div>
@@ -462,7 +462,7 @@ export default function ContactStateLegislatorsGuidePage() {
                   <div>State legislators, city council</div>
                 </div>
 
-                <div className="grid grid-cols-3 gap-3 text-sm bg-white dark:bg-gray-900 rounded-lg p-3">
+                <div className="grid grid-cols-3 gap-3 text-sm bg-surface dark:bg-gray-900 rounded-lg p-3">
                   <div className="font-medium text-gray-900 dark:text-white">Foreign Policy</div>
                   <div>Federal</div>
                   <div>Members of Congress</div>
@@ -591,7 +591,7 @@ export default function ContactStateLegislatorsGuidePage() {
         </div>
 
         {/* Back to Guides */}
-        <div className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
+        <div className="mt-12 pt-8 border-t border-rule dark:border-gray-700">
           <Link
             href="/guides"
             className="inline-flex items-center gap-2 text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 font-medium transition-colors"

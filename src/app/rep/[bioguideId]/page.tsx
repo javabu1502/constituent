@@ -190,7 +190,7 @@ export default async function RepProfilePage({ params }: RepPageProps) {
       </nav>
 
       {/* Profile Header */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-6 mb-6">
+      <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-6 mb-6">
         <div className="flex flex-col sm:flex-row gap-6">
           {/* Photo */}
           <div className="shrink-0 self-center sm:self-start">
@@ -258,7 +258,7 @@ export default async function RepProfilePage({ params }: RepPageProps) {
         <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-3">
           Contact Information
         </h2>
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
+        <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-5">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {currentTerm?.phone && (
               <div>
@@ -315,7 +315,7 @@ export default async function RepProfilePage({ params }: RepPageProps) {
 
           {/* Social Media */}
           {bio.socialMedia && (bio.socialMedia.twitter || bio.socialMedia.facebook || bio.socialMedia.instagram) && (
-            <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+            <div className="mt-4 pt-4 border-t border-rule dark:border-gray-700">
               <div className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-2">
                 Social Media
               </div>
@@ -363,7 +363,7 @@ export default async function RepProfilePage({ params }: RepPageProps) {
       <RepPublicData bioguideId={bioguideId} name={fullName} />
 
       {/* Bottom CTA */}
-      <div className="flex flex-col sm:flex-row items-center justify-center gap-4 py-8 border-t border-gray-200 dark:border-gray-700 mt-8">
+      <div className="flex flex-col sm:flex-row items-center justify-center gap-4 py-8 border-t border-rule dark:border-gray-700 mt-8">
         <Link
           href={`/contact?repId=${bioguideId}`}
           className="inline-block px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-medium rounded-lg transition-colors"

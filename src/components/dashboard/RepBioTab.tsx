@@ -62,7 +62,7 @@ export type BioData = FederalBio | StateBio;
 function CommitteeBadges({ committees }: { committees: string[] }) {
   if (committees.length === 0) return null;
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-3">
+    <div className="bg-surface dark:bg-gray-800 rounded-lg border border-rule dark:border-gray-700 p-3">
       <h4 className="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-2">Committee Assignments</h4>
       <div className="flex gap-1.5 flex-wrap">
         {committees.map((c) => (
@@ -149,7 +149,7 @@ function FederalBioContent({ bio }: { bio: FederalBio }) {
 
       {/* Social Media */}
       {bio.socialMedia && (bio.socialMedia.twitter || bio.socialMedia.facebook || bio.socialMedia.instagram) && (
-        <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-3">
+        <div className="bg-surface dark:bg-gray-800 rounded-lg border border-rule dark:border-gray-700 p-3">
           <h4 className="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-2">Social Media</h4>
           <div className="flex flex-wrap gap-2">
             {bio.socialMedia.twitter && (
@@ -188,7 +188,7 @@ function FederalBioContent({ bio }: { bio: FederalBio }) {
 
       {/* Contact */}
       {(term?.phone || term?.office || term?.website || term?.contactForm) && (
-        <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-3">
+        <div className="bg-surface dark:bg-gray-800 rounded-lg border border-rule dark:border-gray-700 p-3">
           <h4 className="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-2">Contact</h4>
           <div className="space-y-1.5">
             {term?.phone && (
@@ -267,7 +267,7 @@ function StateBioContent({ bio }: { bio: StateBio }) {
 
       {/* Contact */}
       {(bio.email || bio.phone || bio.office || bio.website) && (
-        <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-3">
+        <div className="bg-surface dark:bg-gray-800 rounded-lg border border-rule dark:border-gray-700 p-3">
           <h4 className="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-2">Contact</h4>
           <div className="space-y-1.5">
             {bio.email && (
@@ -349,7 +349,7 @@ export function RepBioTab({ repId, repLevel, repState, bio: externalBio, bioLoad
             <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-32" />
           </div>
         </div>
-        <div className="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-3">
+        <div className="bg-surface dark:bg-gray-800 rounded-lg border border-rule dark:border-gray-700 p-3">
           {Array.from({ length: 4 }).map((_, i) => (
             <div key={i} className="flex justify-between py-1.5">
               <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-20" />

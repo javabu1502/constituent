@@ -56,7 +56,7 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+    <footer className="border-t border-rule dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
       <div className="max-w-5xl mx-auto px-4 py-8">
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-8 mb-8">
           {FOOTER_COLUMNS.map((col) => (
@@ -90,7 +90,7 @@ export function Footer() {
             </div>
           ))}
         </div>
-        <div className="border-t border-gray-200 dark:border-gray-700 pt-6 pb-2 flex flex-col sm:flex-row items-center justify-center gap-3 text-center">
+        <div className="border-t border-rule dark:border-gray-700 pt-6 pb-2 flex flex-col sm:flex-row items-center justify-center gap-3 text-center">
           <span className="text-sm text-gray-600 dark:text-gray-300">
             Keep {BRAND.name} free and independent.
           </span>
@@ -106,7 +106,7 @@ export function Footer() {
             Donate
           </a>
         </div>
-        <div className="border-t border-gray-200 dark:border-gray-700 pt-4 text-center">
+        <div className="border-t border-rule dark:border-gray-700 pt-4 text-center">
           <div className="flex justify-center gap-4 mb-3">
             {SOCIALS.map((social) => (
               <a

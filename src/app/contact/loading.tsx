@@ -1,8 +1,8 @@
 export default function ContactLoading() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-purple-50 to-white dark:from-gray-900 dark:to-gray-900">
+    <div className="min-h-screen bg-background dark:bg-gray-900">
       <div className="max-w-2xl mx-auto px-4 py-8">
-        <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm overflow-hidden animate-pulse">
+        <div className="bg-surface dark:bg-gray-800 rounded-2xl border border-rule dark:border-gray-700 overflow-hidden animate-pulse">
           {/* Progress bar skeleton */}
           <div className="h-1 bg-gray-200 dark:bg-gray-700" />
 

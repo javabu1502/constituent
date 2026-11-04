@@ -51,7 +51,7 @@ export default function GuidesGrid({ icons }: GuidesGridProps) {
           <Link
             key={guide.href}
             href={guide.href}
-            className="group block bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-200 dark:border-gray-700 hover:border-purple-300 dark:hover:border-purple-600 hover:shadow-lg transition-all"
+            className="group block bg-surface dark:bg-gray-800 rounded-2xl p-6 border border-rule dark:border-gray-700 hover:border-purple-300 dark:hover:border-purple-600 hover:shadow-lg transition-all"
           >
             <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-xl flex items-center justify-center mb-4 text-purple-600 dark:text-purple-400 group-hover:bg-purple-200 dark:group-hover:bg-purple-800 transition-colors">
               {icons[guide.href]}

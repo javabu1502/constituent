@@ -81,7 +81,7 @@ export async function BillJourney({ campaign }: JourneyProps) {
   const currentGoal = ((passed ? 'thank_you' : stages[stages.length - 1]?.stage_goal) || 'custom') as StageGoal;
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm p-6 sm:p-8 mb-6">
+    <div className="bg-surface dark:bg-gray-800 rounded-2xl border border-rule dark:border-gray-700 p-6 sm:p-8 mb-6">
       <div className="flex items-center justify-between gap-3 mb-1">
         <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
           Where {campaign.bill_ref ?? 'the bill'} stands

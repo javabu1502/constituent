@@ -33,7 +33,7 @@ function TrendsSkeleton() {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         {[1, 2, 3].map((i) => (
-          <div key={i} className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-5 h-24" />
+          <div key={i} className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-5 h-24" />
         ))}
       </div>
       <div className="space-y-3">

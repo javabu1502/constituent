@@ -43,14 +43,14 @@ export function CampaignClosedNotice({
     );
 
   return (
-    <div className="rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/60 p-5 sm:p-6">
+    <div className="rounded-xl border border-rule dark:border-gray-700 bg-gray-50 dark:bg-gray-800/60 p-5 sm:p-6">
       <h2 className="text-base font-semibold text-gray-900 dark:text-white">{t.closedHeading}</h2>
       <p className="mt-1 text-sm text-gray-600 dark:text-gray-300">
         {isStory ? t.closedBodyStories : t.closedBodyActions}
       </p>
 
       {outcomeLine && (
-        <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+        <div className="mt-4 pt-4 border-t border-rule dark:border-gray-700">
           <p className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
             {t.closedOutcomeHeading}
           </p>
@@ -58,7 +58,7 @@ export function CampaignClosedNotice({
         </div>
       )}
 
-      <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+      <div className="mt-4 pt-4 border-t border-rule dark:border-gray-700">
         <p className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
           {otherCampaigns.length > 0 && orgName ? t.closedMoreFrom(orgName) : t.closedOnwardHeading}
         </p>

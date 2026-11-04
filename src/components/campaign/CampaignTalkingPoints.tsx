@@ -17,7 +17,7 @@ export function CampaignTalkingPoints({
 }) {
   const color = accent || '#7C3AED';
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm p-6 sm:p-8 mb-6">
+    <div className="bg-surface dark:bg-gray-800 rounded-2xl border border-rule dark:border-gray-700 p-6 sm:p-8 mb-6">
       <div className="flex items-center gap-2 mb-1">
         <span className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: color }} />
         <h2 className="text-lg font-semibold text-gray-900 dark:text-white">

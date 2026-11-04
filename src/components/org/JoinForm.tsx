@@ -89,7 +89,7 @@ export function JoinForm({ slug, orgName, compact = false }: { slug: string; org
 
   return (
     <form
-      className={compact ? '' : 'p-6 rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-sm'}
+      className={compact ? '' : 'p-6 rounded-2xl border border-rule dark:border-gray-700 bg-surface dark:bg-gray-800 shadow-sm'}
       onSubmit={(e) => {
         e.preventDefault();
         void submit(false);
@@ -105,7 +105,7 @@ export function JoinForm({ slug, orgName, compact = false }: { slug: string; org
             value={name}
             onChange={(e) => setName(e.target.value)}
             autoComplete="name"
-            className="w-full px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
+            className="w-full px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 bg-surface dark:bg-gray-900 text-gray-900 dark:text-white"
             placeholder="Your full name"
           />
         </div>
@@ -120,7 +120,7 @@ export function JoinForm({ slug, orgName, compact = false }: { slug: string; org
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             autoComplete="email"
-            className="w-full px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
+            className="w-full px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 bg-surface dark:bg-gray-900 text-gray-900 dark:text-white"
             placeholder="you@example.com"
           />
         </div>

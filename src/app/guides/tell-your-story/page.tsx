@@ -197,7 +197,7 @@ export default function TellYourStoryGuidePage() {
               Example: A Complete Story-Driven Message
             </h2>
             <div className="pl-10">
-              <div className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 text-sm text-gray-700 dark:text-gray-300 space-y-4">
+              <div className="bg-gray-50 dark:bg-gray-800 border border-rule dark:border-gray-700 rounded-xl p-6 text-sm text-gray-700 dark:text-gray-300 space-y-4">
                 <p>Dear Representative Johnson,</p>
                 <p>
                   My name is Maria Chen, and I live at 142 Oak Street in Riverside. I&apos;m writing about childcare costs.
@@ -266,7 +266,7 @@ export default function TellYourStoryGuidePage() {
               {/* Veteran Example */}
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-3">A Veteran on VA Healthcare Wait Times</h3>
-                <div className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 text-sm text-gray-700 dark:text-gray-300 space-y-4">
+                <div className="bg-gray-50 dark:bg-gray-800 border border-rule dark:border-gray-700 rounded-xl p-6 text-sm text-gray-700 dark:text-gray-300 space-y-4">
                   <p>Dear Senator Williams,</p>
                   <p>
                     My name is James Herrera, and I live at 305 Birch Lane in Fort Worth. I served two tours in Afghanistan with the 82nd Airborne. I&apos;m writing because the VA is failing veterans like me.
@@ -291,7 +291,7 @@ export default function TellYourStoryGuidePage() {
               {/* Small Business Owner Example */}
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-3">A Small Business Owner on Regulatory Burden</h3>
-                <div className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 text-sm text-gray-700 dark:text-gray-300 space-y-4">
+                <div className="bg-gray-50 dark:bg-gray-800 border border-rule dark:border-gray-700 rounded-xl p-6 text-sm text-gray-700 dark:text-gray-300 space-y-4">
                   <p>Dear Representative Park,</p>
                   <p>
                     My name is Diane Okafor, and I own Sunrise Bakery at 88 Main Street in Glendale. I&apos;ve been in business for nine years, and I employ 14 people, most of them from our neighborhood. I&apos;m writing because compliance paperwork is strangling my business.
@@ -316,7 +316,7 @@ export default function TellYourStoryGuidePage() {
               {/* Student Example */}
               <div>
                 <h3 className="font-semibold text-gray-900 dark:text-white mb-3">A Student on Student Loan Debt</h3>
-                <div className="bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 text-sm text-gray-700 dark:text-gray-300 space-y-4">
+                <div className="bg-gray-50 dark:bg-gray-800 border border-rule dark:border-gray-700 rounded-xl p-6 text-sm text-gray-700 dark:text-gray-300 space-y-4">
                   <p>Dear Senator Mitchell,</p>
                   <p>
                     My name is Priya Sharma. I&apos;m 26 years old and live at 1200 Elm Avenue in Columbus. I graduated from Ohio State three years ago with a degree in social work and $74,000 in federal student loan debt. I&apos;m writing because that debt is shaping every decision I make.
@@ -576,7 +576,7 @@ export default function TellYourStoryGuidePage() {
         </div>
 
         {/* Back to Guides */}
-        <div className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
+        <div className="mt-12 pt-8 border-t border-rule dark:border-gray-700">
           <Link
             href="/guides"
             className="inline-flex items-center gap-2 text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 font-medium transition-colors"

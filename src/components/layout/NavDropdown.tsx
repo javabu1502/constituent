@@ -98,7 +98,7 @@ export function NavDropdown({ label, items, emphasis = false, menuWidthClass = '
       {open && (
         <div
           role="menu"
-          className={`absolute top-full left-0 mt-2 ${menuWidthClass} bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 shadow-lg py-1 z-50`}
+          className={`absolute top-full left-0 mt-2 ${menuWidthClass} bg-surface dark:bg-gray-800 rounded-lg border border-rule dark:border-gray-700 shadow-lg py-1 z-50`}
         >
           {items.map((item) => (
             <Link

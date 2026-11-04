@@ -85,7 +85,7 @@ function RepCard({
           className={`w-6 h-6 rounded border-2 flex items-center justify-center flex-shrink-0 transition-colors ${
             isSelected
               ? 'border-purple-600 bg-purple-600'
-              : 'border-gray-300 dark:border-gray-500 bg-white dark:bg-gray-700'
+              : 'border-gray-300 dark:border-gray-500 bg-surface dark:bg-gray-700'
           }`}
         >
           {isSelected && (
@@ -241,7 +241,7 @@ export function RepStep({ state, dispatch, onBack }: RepStepProps) {
   return (
     <div className="p-6 sm:p-8">
       <div className="text-center mb-6">
-        <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+        <h3 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
           Who should hear from you?
         </h3>
         <p className="text-gray-500 dark:text-gray-400 mt-2 text-sm">
@@ -250,7 +250,7 @@ export function RepStep({ state, dispatch, onBack }: RepStepProps) {
       </div>
 
       {/* Two paths: guided with the Assistant, or manual below */}
-      <div className="mb-5 p-4 bg-gradient-to-r from-purple-600 to-purple-700 rounded-xl text-white">
+      <div className="on-ink mb-5 p-4 bg-purple-600 text-white">
         <div className="flex items-center justify-between gap-3 flex-wrap">
           <div className="min-w-0 flex-1">
             <p className="text-sm font-semibold">Not sure who to pick?</p>

@@ -47,7 +47,7 @@ export function OrgAccessForm() {
   }
 
   const input =
-    'w-full px-3 py-2.5 text-sm rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-white placeholder-gray-400';
+    'w-full px-3 py-2.5 text-sm rounded-lg border border-gray-300 dark:border-gray-600 bg-surface dark:bg-gray-900 text-gray-900 dark:text-white placeholder-gray-400';
 
   return (
     <form onSubmit={submit} className="grid grid-cols-1 sm:grid-cols-2 gap-3">

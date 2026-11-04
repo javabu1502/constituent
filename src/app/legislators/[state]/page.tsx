@@ -156,7 +156,7 @@ export default async function StateLegislatorsPage({ params }: StatePageProps) {
       </div>
 
       {officials.length === 0 ? (
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-8 text-center">
+        <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-8 text-center">
           <p className="text-gray-500 dark:text-gray-400">
             No legislator data available for {stateInfo.name} yet.
           </p>
@@ -169,7 +169,7 @@ export default async function StateLegislatorsPage({ params }: StatePageProps) {
               <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
                 State Senate <span className="text-sm font-normal text-gray-500 dark:text-gray-400">({upper.length})</span>
               </h2>
-              <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm divide-y divide-gray-100 dark:divide-gray-700">
+              <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 divide-y divide-gray-100 dark:divide-gray-700">
                 {upper.map((leg) => (
                   <LegislatorRow key={leg.id} legislator={leg} />
                 ))}
@@ -183,7 +183,7 @@ export default async function StateLegislatorsPage({ params }: StatePageProps) {
               <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
                 State House <span className="text-sm font-normal text-gray-500 dark:text-gray-400">({lower.length})</span>
               </h2>
-              <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm divide-y divide-gray-100 dark:divide-gray-700">
+              <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 divide-y divide-gray-100 dark:divide-gray-700">
                 {lower.map((leg) => (
                   <LegislatorRow key={leg.id} legislator={leg} />
                 ))}

@@ -47,7 +47,7 @@ export function HomeTrends() {
   if (loaded && issues.length === 0) return null;
 
   return (
-    <section className="py-16 sm:py-20 px-4 bg-white dark:bg-gray-900">
+    <section className="py-16 sm:py-20 px-4 bg-surface dark:bg-gray-900">
       <div className="max-w-3xl mx-auto">
         <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white text-center mb-4">
           What People Are Writing About
@@ -67,7 +67,7 @@ export function HomeTrends() {
             {issues.map((issue, i) => (
               <div
                 key={issue.issue_area}
-                className="bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-3 flex items-center gap-3"
+                className="bg-gray-50 dark:bg-gray-800 rounded-lg border border-rule dark:border-gray-700 p-3 flex items-center gap-3"
               >
                 <span className="text-sm font-medium text-gray-500 dark:text-gray-400 w-6 text-right shrink-0">
                   {i + 1}
@@ -83,7 +83,7 @@ export function HomeTrends() {
                   </div>
                   <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
                     <div
-                      className="h-2 rounded-full bg-gradient-to-r from-purple-500 to-purple-600"
+                      className="h-2 rounded-full bg-purple-600"
                       style={{ width: `${(issue.count / maxCount) * 100}%` }}
                     />
                   </div>
@@ -104,7 +104,7 @@ export function HomeTrends() {
                 <Link
                   key={rep.legislatorId}
                   href={`/rep/${rep.legislatorId}`}
-                  className="inline-flex items-center gap-1.5 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-full px-3 py-1.5 hover:border-purple-300 dark:hover:border-purple-600 transition-colors"
+                  className="inline-flex items-center gap-1.5 bg-gray-50 dark:bg-gray-800 border border-rule dark:border-gray-700 rounded-full px-3 py-1.5 hover:border-purple-300 dark:hover:border-purple-600 transition-colors"
                 >
                   <span className={`w-2 h-2 rounded-full ${
                     rep.party.startsWith('Democrat') ? 'bg-blue-500' :

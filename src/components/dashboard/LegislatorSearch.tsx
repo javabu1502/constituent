@@ -36,10 +36,10 @@ export function LegislatorSearch({
         value={q}
         onChange={(e) => setQ(e.target.value)}
         placeholder="Search by name"
-        className="w-full px-4 py-2.5 text-sm rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-600"
+        className="w-full px-4 py-2.5 text-sm rounded-xl border border-gray-300 dark:border-gray-600 bg-surface dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-600"
       />
       {matches.length > 0 && (
-        <div className="absolute z-10 mt-1 w-full rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-lg overflow-hidden">
+        <div className="absolute z-10 mt-1 w-full rounded-xl border border-rule dark:border-gray-700 bg-surface dark:bg-gray-800 shadow-lg overflow-hidden">
           {matches.map((r) => (
             <Link
               key={r.id}

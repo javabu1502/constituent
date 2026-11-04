@@ -124,11 +124,11 @@ export default async function CampaignEmbedPage({ params }: PageProps) {
             taken — neutrality doesn't stop at the platform's own pages. */}
         {campaign.is_official && campaign.case_for && campaign.case_against && (
           <div className="mb-4 grid grid-cols-1 sm:grid-cols-2 gap-2">
-            <div className="p-3 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+            <div className="p-3 bg-surface dark:bg-gray-800 rounded-lg border border-rule dark:border-gray-700">
               <p className="text-[11px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-1">The case for</p>
               <p className="text-xs text-gray-700 dark:text-gray-300 leading-relaxed">{campaign.case_for}</p>
             </div>
-            <div className="p-3 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+            <div className="p-3 bg-surface dark:bg-gray-800 rounded-lg border border-rule dark:border-gray-700">
               <p className="text-[11px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-1">The case against</p>
               <p className="text-xs text-gray-700 dark:text-gray-300 leading-relaxed">{campaign.case_against}</p>
             </div>
@@ -145,7 +145,7 @@ export default async function CampaignEmbedPage({ params }: PageProps) {
             inEmbed
           />
         ) : (
-          <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4 sm:p-5">
+          <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4 sm:p-5">
             {isStory ? (
               <StorytellerFlow campaign={campaign} />
             ) : (

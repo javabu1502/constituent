@@ -49,7 +49,7 @@ function RecipientChips({
             {group.map((rep) => (
               <span
                 key={rep.id}
-                className="inline-flex items-center px-2 py-0.5 text-xs rounded-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-200"
+                className="inline-flex items-center px-2 py-0.5 text-xs rounded-full bg-surface dark:bg-gray-800 border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-200"
               >
                 {rep.name}
               </span>
@@ -680,7 +680,7 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
     <div className="p-6 sm:p-8">
       {/* Header */}
       <div className="text-center mb-6">
-        <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+        <h3 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
           {contactMethod === 'phone' ? 'Review Scripts' : 'Review Messages'}
         </h3>
         <p className="text-gray-500 dark:text-gray-400 mt-1 text-sm">
@@ -844,7 +844,7 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
             );
           })}
         </div>
-        <div className="pointer-events-none absolute right-0 top-0 bottom-3 w-8 bg-gradient-to-l from-white dark:from-gray-800 to-transparent sm:hidden" />
+        <div className="pointer-events-none absolute right-0 top-0 bottom-3 w-8 bg-gradient-to-l from-surface dark:from-gray-800 to-transparent sm:hidden" />
         </div>
       )}
 
@@ -898,7 +898,7 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
                 type="text"
                 value={currentMessage.subject}
                 onChange={(e) => currentRep && updateMessage(currentRep.name, 'subject', e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-surface dark:bg-gray-700 text-gray-900 dark:text-white"
               />
             </div>
           )}
@@ -917,7 +917,7 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
               value={currentMessage.body}
               onChange={(e) => currentRep && updateMessage(currentRep.name, 'body', e.target.value)}
               rows={contactMethod === 'phone' ? 6 : 8}
-              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent resize-none font-mono text-sm leading-relaxed bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent resize-none font-mono text-sm leading-relaxed bg-surface dark:bg-gray-700 text-gray-900 dark:text-white"
             />
             {/* Regenerate + Feedback row */}
             <div className="flex items-center justify-between mt-2">
@@ -969,7 +969,7 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
                     className="flex items-center gap-1 text-sm font-medium text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                   >
                     {state.loadingIds.has(currentRep.name) ? (
-                      <div className="w-4 h-4 border-2 border-gray-200 dark:border-gray-700 rounded-full animate-spin border-t-gray-500" />
+                      <div className="w-4 h-4 border-2 border-rule dark:border-gray-700 rounded-full animate-spin border-t-gray-500" />
                     ) : (
                       <svg aria-hidden="true" className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
@@ -1000,7 +1000,7 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
                     }}
                     placeholder={"e.g., \"I'm not a gig worker, I'm a teacher\" or \"Make it shorter\""}
                     maxLength={500}
-                    className="flex-1 px-3 py-2 text-sm border border-purple-200 dark:border-purple-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    className="flex-1 px-3 py-2 text-sm border border-purple-200 dark:border-purple-600 rounded-lg bg-surface dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500"
                   />
                   <button
                     onClick={() => reviseMessage(currentRep, suggestionInput)}
@@ -1041,7 +1041,7 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
 
       {/* Navigation between officials */}
       {selectedReps.length > 1 && (
-        <div className="flex items-center justify-between mb-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+        <div className="flex items-center justify-between mb-4 pt-4 border-t border-rule dark:border-gray-700">
           <button
             onClick={() => setReviewIndex(Math.max(0, reviewIndex - 1))}
             disabled={reviewIndex === 0}

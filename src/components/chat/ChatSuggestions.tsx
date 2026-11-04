@@ -60,7 +60,7 @@ export function ChatSuggestions() {
           <button
             key={q}
             onClick={() => sendMessage(q)}
-            className="px-3 py-1.5 text-xs rounded-full border border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors text-left"
+            className="px-3 py-1.5 text-xs rounded-full border border-rule dark:border-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors text-left"
           >
             {q}
           </button>

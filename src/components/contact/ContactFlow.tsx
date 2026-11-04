@@ -468,7 +468,7 @@ export function ContactFlow() {
   if (state.step === 'success') {
     return (
       <div className="w-full max-w-2xl mx-auto">
-        <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm overflow-hidden p-8">
+        <div className="bg-surface dark:bg-gray-800 rounded-2xl border border-rule dark:border-gray-700 overflow-hidden p-8">
           <div className="text-center">
             <div className="w-20 h-20 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mx-auto mb-6">
               <svg className="w-10 h-10 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -611,8 +611,8 @@ export function ContactFlow() {
                   index < currentStepIndex
                     ? 'bg-purple-600 border-purple-600'
                     : index === currentStepIndex
-                    ? 'bg-white dark:bg-gray-800 border-purple-600'
-                    : 'bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600'
+                    ? 'bg-surface dark:bg-gray-800 border-purple-600'
+                    : 'bg-surface dark:bg-gray-800 border-gray-300 dark:border-gray-600'
                 }`}
               />
               <span className="text-xs mt-1 hidden sm:block">
@@ -624,7 +624,7 @@ export function ContactFlow() {
       </div>
 
       {/* Step content card */}
-      <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm overflow-hidden">
+      <div className="bg-surface dark:bg-gray-800 rounded-2xl border border-rule dark:border-gray-700 overflow-hidden">
         {state.step === 'address' && (
           <AddressStep state={state} dispatch={wrappedDispatch} />
         )}

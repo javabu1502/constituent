@@ -109,17 +109,17 @@ export default function BillBecomesLawGuidePage() {
             <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-6">
               <h3 className="font-semibold text-gray-900 dark:text-white mb-4 text-center">Federal Process Summary</h3>
               <div className="flex flex-wrap justify-center items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
-                <span className="bg-white dark:bg-gray-700 px-3 py-1 rounded-full border border-gray-200 dark:border-gray-600">Bill Introduced</span>
+                <span className="bg-surface dark:bg-gray-700 px-3 py-1 rounded-full border border-gray-200 dark:border-gray-600">Bill Introduced</span>
                 <span className="text-purple-500">&rarr;</span>
-                <span className="bg-white dark:bg-gray-700 px-3 py-1 rounded-full border border-gray-200 dark:border-gray-600">Committee</span>
+                <span className="bg-surface dark:bg-gray-700 px-3 py-1 rounded-full border border-gray-200 dark:border-gray-600">Committee</span>
                 <span className="text-purple-500">&rarr;</span>
-                <span className="bg-white dark:bg-gray-700 px-3 py-1 rounded-full border border-gray-200 dark:border-gray-600">Floor Vote</span>
+                <span className="bg-surface dark:bg-gray-700 px-3 py-1 rounded-full border border-gray-200 dark:border-gray-600">Floor Vote</span>
                 <span className="text-purple-500">&rarr;</span>
-                <span className="bg-white dark:bg-gray-700 px-3 py-1 rounded-full border border-gray-200 dark:border-gray-600">Other Chamber</span>
+                <span className="bg-surface dark:bg-gray-700 px-3 py-1 rounded-full border border-gray-200 dark:border-gray-600">Other Chamber</span>
                 <span className="text-purple-500">&rarr;</span>
-                <span className="bg-white dark:bg-gray-700 px-3 py-1 rounded-full border border-gray-200 dark:border-gray-600">Conference</span>
+                <span className="bg-surface dark:bg-gray-700 px-3 py-1 rounded-full border border-gray-200 dark:border-gray-600">Conference</span>
                 <span className="text-purple-500">&rarr;</span>
-                <span className="bg-white dark:bg-gray-700 px-3 py-1 rounded-full border border-gray-200 dark:border-gray-600">President</span>
+                <span className="bg-surface dark:bg-gray-700 px-3 py-1 rounded-full border border-gray-200 dark:border-gray-600">President</span>
                 <span className="text-purple-500">&rarr;</span>
                 <span className="bg-purple-100 dark:bg-purple-900 px-3 py-1 rounded-full border border-purple-200 dark:border-purple-700 text-purple-700 dark:text-purple-300 font-medium">Law</span>
               </div>
@@ -387,7 +387,7 @@ export default function BillBecomesLawGuidePage() {
                   </p>
                 </div>
 
-                <hr className="border-gray-200 dark:border-gray-700" />
+                <hr className="border-rule dark:border-gray-700" />
 
                 <div>
                   <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Stage 2: Committee Hearing</h3>
@@ -405,7 +405,7 @@ export default function BillBecomesLawGuidePage() {
                   </p>
                 </div>
 
-                <hr className="border-gray-200 dark:border-gray-700" />
+                <hr className="border-rule dark:border-gray-700" />
 
                 <div>
                   <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Stage 3: Committee Vote</h3>
@@ -423,7 +423,7 @@ export default function BillBecomesLawGuidePage() {
                   </p>
                 </div>
 
-                <hr className="border-gray-200 dark:border-gray-700" />
+                <hr className="border-rule dark:border-gray-700" />
 
                 <div>
                   <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Stage 4: Floor Debate and Vote</h3>
@@ -441,7 +441,7 @@ export default function BillBecomesLawGuidePage() {
                   </p>
                 </div>
 
-                <hr className="border-gray-200 dark:border-gray-700" />
+                <hr className="border-rule dark:border-gray-700" />
 
                 <div>
                   <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Stage 5: Conference Committee</h3>
@@ -459,7 +459,7 @@ export default function BillBecomesLawGuidePage() {
                   </p>
                 </div>
 
-                <hr className="border-gray-200 dark:border-gray-700" />
+                <hr className="border-rule dark:border-gray-700" />
 
                 <div>
                   <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Stage 6: Presidential or Governor Action</h3>
@@ -593,7 +593,7 @@ export default function BillBecomesLawGuidePage() {
         </div>
 
         {/* Back to Guides */}
-        <div className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700">
+        <div className="mt-12 pt-8 border-t border-rule dark:border-gray-700">
           <Link
             href="/guides"
             className="inline-flex items-center gap-2 text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 font-medium transition-colors"

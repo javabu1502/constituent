@@ -294,21 +294,21 @@ export default async function StateHubPage({ params }: StatePageProps) {
 
         {/* Stat cards */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-          <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 text-center">
+          <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4 text-center">
             <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">{info.houseSeats}</div>
             <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">U.S. House {info.houseSeats === 1 ? 'Seat' : 'Seats'}</div>
           </div>
-          <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 text-center">
+          <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4 text-center">
             <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">
               {new Date(info.primary2026 + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
             </div>
             <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">2026 Primary</div>
           </div>
-          <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 text-center">
+          <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4 text-center">
             <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">{totalOfficials}</div>
             <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">Elected Officials</div>
           </div>
-          <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 text-center">
+          <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4 text-center">
             <div className="text-2xl font-bold">
               {senatorUp2026
                 ? <span className="text-green-600 dark:text-green-400">{senatorUp2026.lastName}</span>
@@ -331,7 +331,7 @@ export default async function StateHubPage({ params }: StatePageProps) {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
             {/* Governor card */}
             {governor && (
-              <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
+              <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-5">
                 <h3 className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-3">
                   {isDC ? 'Mayor' : 'Governor'}
                 </h3>
@@ -351,7 +351,7 @@ export default async function StateHubPage({ params }: StatePageProps) {
             )}
 
             {/* Legislature info card */}
-            <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
+            <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-5">
               <h3 className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-3">Legislature</h3>
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
@@ -376,7 +376,7 @@ export default async function StateHubPage({ params }: StatePageProps) {
 
           {/* Chamber composition bars */}
           {!isDC && (stateSenators.length > 0 || stateReps.length > 0) && (
-            <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5 mb-4">
+            <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-5 mb-4">
               <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-4">Partisan Composition</h3>
               <div className="space-y-4">
                 {stateSenators.length > 0 && (
@@ -429,17 +429,17 @@ export default async function StateHubPage({ params }: StatePageProps) {
             Register to Vote
           </a>
           <a href={info.checkRegistration} target="_blank" rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2.5 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 hover:border-purple-400 text-gray-700 dark:text-gray-300 text-sm font-medium rounded-lg transition-colors">
+            className="inline-flex items-center gap-2 px-4 py-2.5 bg-surface dark:bg-gray-800 border border-gray-300 dark:border-gray-600 hover:border-purple-400 text-gray-700 dark:text-gray-300 text-sm font-medium rounded-lg transition-colors">
             Check Registration
           </a>
           <a href={info.electionOfficeDirectory} target="_blank" rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2.5 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 hover:border-purple-400 text-gray-700 dark:text-gray-300 text-sm font-medium rounded-lg transition-colors">
+            className="inline-flex items-center gap-2 px-4 py-2.5 bg-surface dark:bg-gray-800 border border-gray-300 dark:border-gray-600 hover:border-purple-400 text-gray-700 dark:text-gray-300 text-sm font-medium rounded-lg transition-colors">
             Election Office
           </a>
         </div>
 
         {/* Voting rules grid */}
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5 mb-4">
+        <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-5 mb-4">
           <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-4">Voting Rules</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="flex items-center justify-between">
@@ -470,7 +470,7 @@ export default async function StateHubPage({ params }: StatePageProps) {
         </div>
 
         {/* Election dates */}
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5 mb-4">
+        <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-5 mb-4">
           <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-4">2026 Election Dates</h3>
           <div className="space-y-3">
             <div className="flex items-center justify-between">
@@ -512,7 +512,7 @@ export default async function StateHubPage({ params }: StatePageProps) {
       {senatorUp2026 && (
         <section className="mb-10">
           <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">2026 Senate Race</h2>
-          <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
+          <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-5">
             <div className="flex items-center gap-4">
               {senatorUp2026.photoUrl ? (
                 <Image src={senatorUp2026.photoUrl} alt={senatorUp2026.name} width={64} height={64} className="w-16 h-16 rounded-full object-cover shrink-0 border border-gray-200 dark:border-gray-600" />
@@ -550,7 +550,7 @@ export default async function StateHubPage({ params }: StatePageProps) {
             <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
               U.S. Senators <span className="font-normal text-gray-500 dark:text-gray-400">({senators.length})</span>
             </h3>
-            <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm divide-y divide-gray-100 dark:divide-gray-700">
+            <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 divide-y divide-gray-100 dark:divide-gray-700">
               {senators.map((s) => <OfficialRow key={s.id} official={s} badge={s.senateClass === 2 ? 'Up in 2026' : undefined} />)}
             </div>
           </div>
@@ -561,14 +561,14 @@ export default async function StateHubPage({ params }: StatePageProps) {
             <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
               U.S. Representatives <span className="font-normal text-gray-500 dark:text-gray-400">({representatives.length})</span>
             </h3>
-            <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm divide-y divide-gray-100 dark:divide-gray-700">
+            <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 divide-y divide-gray-100 dark:divide-gray-700">
               {representatives.map((r) => <OfficialRow key={r.id} official={r} />)}
             </div>
           </div>
         )}
 
         {senators.length === 0 && representatives.length === 0 && (
-          <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-6 text-center">
+          <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-6 text-center">
             <p className="text-gray-500 dark:text-gray-400 text-sm">No federal delegation data available.</p>
           </div>
         )}
@@ -601,7 +601,7 @@ export default async function StateHubPage({ params }: StatePageProps) {
                   <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                     {meta?.upperChamberName ?? 'State Senate'} <span className="font-normal text-gray-500 dark:text-gray-400">({stateSenators.length} total)</span>
                   </h3>
-                  <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm divide-y divide-gray-100 dark:divide-gray-700">
+                  <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 divide-y divide-gray-100 dark:divide-gray-700">
                     {stateSenators.slice(0, 5).map((s) => <OfficialRow key={s.id} official={s} />)}
                   </div>
                 </div>
@@ -612,7 +612,7 @@ export default async function StateHubPage({ params }: StatePageProps) {
                   <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                     {meta?.lowerChamberName ?? 'State House'} <span className="font-normal text-gray-500 dark:text-gray-400">({stateReps.length} total)</span>
                   </h3>
-                  <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm divide-y divide-gray-100 dark:divide-gray-700">
+                  <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 divide-y divide-gray-100 dark:divide-gray-700">
                     {stateReps.slice(0, 5).map((r) => <OfficialRow key={r.id} official={r} />)}
                   </div>
                 </div>
@@ -629,7 +629,7 @@ export default async function StateHubPage({ params }: StatePageProps) {
               </Link>
             </>
           ) : (
-            <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-6 text-center">
+            <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-6 text-center">
               <p className="text-gray-500 dark:text-gray-400 text-sm">No state legislator data available for {stateInfo.name} yet.</p>
             </div>
           )}
@@ -653,7 +653,7 @@ export default async function StateHubPage({ params }: StatePageProps) {
         <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Resources</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <a href={info.electionOfficeDirectory} target="_blank" rel="noopener noreferrer"
-            className="flex items-center gap-3 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4 hover:border-purple-300 dark:hover:border-purple-600 transition-colors">
+            className="flex items-center gap-3 bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4 hover:border-purple-300 dark:hover:border-purple-600 transition-colors">
             <div className="w-10 h-10 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center shrink-0">
               <svg className="w-5 h-5 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
@@ -665,7 +665,7 @@ export default async function StateHubPage({ params }: StatePageProps) {
             </div>
           </a>
           <a href={registerUrl} target="_blank" rel="noopener noreferrer"
-            className="flex items-center gap-3 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4 hover:border-purple-300 dark:hover:border-purple-600 transition-colors">
+            className="flex items-center gap-3 bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4 hover:border-purple-300 dark:hover:border-purple-600 transition-colors">
             <div className="w-10 h-10 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center shrink-0">
               <svg className="w-5 h-5 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
@@ -677,7 +677,7 @@ export default async function StateHubPage({ params }: StatePageProps) {
             </div>
           </a>
           <a href={info.checkRegistration} target="_blank" rel="noopener noreferrer"
-            className="flex items-center gap-3 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4 hover:border-purple-300 dark:hover:border-purple-600 transition-colors">
+            className="flex items-center gap-3 bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4 hover:border-purple-300 dark:hover:border-purple-600 transition-colors">
             <div className="w-10 h-10 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center shrink-0">
               <svg className="w-5 h-5 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -689,7 +689,7 @@ export default async function StateHubPage({ params }: StatePageProps) {
             </div>
           </a>
           <a href="https://vote.gov" target="_blank" rel="noopener noreferrer"
-            className="flex items-center gap-3 bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4 hover:border-purple-300 dark:hover:border-purple-600 transition-colors">
+            className="flex items-center gap-3 bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4 hover:border-purple-300 dark:hover:border-purple-600 transition-colors">
             <div className="w-10 h-10 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center shrink-0">
               <svg className="w-5 h-5 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -704,7 +704,7 @@ export default async function StateHubPage({ params }: StatePageProps) {
       </section>
 
       {/* CTA */}
-      <div className="text-center py-8 border-t border-gray-200 dark:border-gray-700">
+      <div className="text-center py-8 border-t border-rule dark:border-gray-700">
         <p className="text-gray-600 dark:text-gray-400 mb-4">
           Contact your {stateInfo.name} representatives. It takes about two minutes.
         </p>

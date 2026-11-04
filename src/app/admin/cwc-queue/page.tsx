@@ -113,7 +113,7 @@ export default function CwcQueuePage() {
       </div>
 
       {notice && (
-        <p className="mb-4 text-sm rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 px-3 py-2 text-gray-800 dark:text-gray-200">
+        <p className="mb-4 text-sm rounded-lg border border-rule dark:border-gray-700 bg-gray-50 dark:bg-gray-800 px-3 py-2 text-gray-800 dark:text-gray-200">
           {notice}
         </p>
       )}
@@ -126,7 +126,7 @@ export default function CwcQueuePage() {
             const log = r.delivery_log;
             const delivered = log?.status === 'delivered';
             return (
-              <li key={r.id} className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-4">
+              <li key={r.id} className="rounded-xl border border-rule dark:border-gray-700 bg-surface dark:bg-gray-800 p-4">
                 <div className="flex flex-wrap items-center gap-2 mb-2">
                   <span className={`px-2 py-0.5 text-xs font-medium rounded-full ${STATUS_STYLE[r.status] ?? STATUS_STYLE.routed}`}>{r.status}</span>
                   <span className="text-xs font-mono text-gray-700 dark:text-gray-300">{r.office_code}</span>

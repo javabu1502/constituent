@@ -92,7 +92,7 @@ export function ComposeStep({
               value={state.coreMessage}
               onChange={(e) => dispatch({ type: 'SET_CORE', payload: e.target.value })}
               rows={10}
-              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent resize-y bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent resize-y bg-surface dark:bg-gray-700 text-gray-900 dark:text-white"
             />
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
               We add the greeting, each official&apos;s name, and your signature automatically — your words are never changed.

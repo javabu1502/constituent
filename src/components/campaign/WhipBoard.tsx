@@ -190,7 +190,7 @@ export function WhipBoard({ slug, isDemo = false }: { slug: string; isDemo?: boo
   if (rows.length === 0) return null;
 
   return (
-    <div className="mb-8 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-5">
+    <div className="mb-8 rounded-xl border border-rule dark:border-gray-700 bg-surface dark:bg-gray-800 p-5">
       <div className="flex flex-wrap items-center justify-between gap-2 mb-1">
         <h2 className="text-base font-semibold text-gray-900 dark:text-white">Whip count</h2>
         <div className="flex flex-wrap gap-1.5 text-xs">
@@ -241,12 +241,12 @@ export function WhipBoard({ slug, isDemo = false }: { slug: string; isDemo?: boo
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search legislators…"
-          className="flex-1 min-w-40 px-3 py-1.5 text-sm rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
+          className="flex-1 min-w-40 px-3 py-1.5 text-sm rounded-lg border border-gray-300 dark:border-gray-600 bg-surface dark:bg-gray-900 text-gray-900 dark:text-white"
         />
         <select
           value={chamberFilter}
           onChange={(e) => setChamberFilter(e.target.value)}
-          className="px-2 py-1.5 text-xs rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
+          className="px-2 py-1.5 text-xs rounded-lg border border-gray-300 dark:border-gray-600 bg-surface dark:bg-gray-900 text-gray-900 dark:text-white"
         >
           <option value="">Both chambers</option>
           <option value="house">House / Assembly</option>
@@ -307,7 +307,7 @@ export function WhipBoard({ slug, isDemo = false }: { slug: string; isDemo?: boo
                   <select
                     value={r.position ?? ''}
                     onChange={(e) => e.target.value && setPosition(r, e.target.value)}
-                    className={`text-xs rounded-lg border border-gray-200 dark:border-gray-600 px-1.5 py-1 ${r.position ? WHIP_STYLES[r.position as keyof typeof WHIP_STYLES] : 'bg-white dark:bg-gray-900 text-gray-500 dark:text-gray-400'}`}
+                    className={`text-xs rounded-lg border border-gray-200 dark:border-gray-600 px-1.5 py-1 ${r.position ? WHIP_STYLES[r.position as keyof typeof WHIP_STYLES] : 'bg-surface dark:bg-gray-900 text-gray-500 dark:text-gray-400'}`}
                   >
                     <option value="">— set —</option>
                     {WHIP_POSITIONS.map((p) => (
@@ -345,7 +345,7 @@ export function WhipBoard({ slug, isDemo = false }: { slug: string; isDemo?: boo
                     onChange={(e) => setNoteDraft(e.target.value)}
                     onKeyDown={(e) => { if (e.key === 'Enter') void addNote(r); }}
                     placeholder={`Meeting note about ${r.name.split(' ').pop()}…`}
-                    className="flex-1 px-2.5 py-1.5 text-sm rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
+                    className="flex-1 px-2.5 py-1.5 text-sm rounded-lg border border-gray-300 dark:border-gray-600 bg-surface dark:bg-gray-900 text-gray-900 dark:text-white"
                   />
                   <input
                     type="number"
@@ -356,7 +356,7 @@ export function WhipBoard({ slug, isDemo = false }: { slug: string; isDemo?: boo
                     onChange={(e) => setNoteHours(e.target.value)}
                     placeholder="hrs"
                     title="Lobbying hours spent on this touchpoint"
-                    className="w-16 px-2 py-1.5 text-sm rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-900 dark:text-white"
+                    className="w-16 px-2 py-1.5 text-sm rounded-lg border border-gray-300 dark:border-gray-600 bg-surface dark:bg-gray-900 text-gray-900 dark:text-white"
                   />
                   <button
                     type="button"

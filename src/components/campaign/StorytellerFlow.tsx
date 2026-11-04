@@ -567,7 +567,7 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
             placeholder={t.sharePlaceholder}
             rows={2}
             disabled={streaming}
-            className="flex-1 px-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 resize-none bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 text-sm"
+            className="flex-1 px-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 resize-none bg-surface dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 text-sm"
           />
           {/* On a phone this link sits under the box so the box keeps its width. */}
           <button type="button" onClick={declineAnswer} disabled={streaming} className="hidden sm:inline self-end text-xs text-gray-500 dark:text-gray-400 underline whitespace-nowrap pb-3">{t.ratherNotSay}</button>
@@ -611,7 +611,7 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             maxLength={120}
-            className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+            className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 bg-surface dark:bg-gray-700 text-gray-900 dark:text-white"
           />
         </div>
         <div>
@@ -627,7 +627,7 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
             onChange={(e) => setBody(e.target.value)}
             rows={12}
             maxLength={8000}
-            className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 resize-y bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm leading-relaxed"
+            className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 resize-y bg-surface dark:bg-gray-700 text-gray-900 dark:text-white text-sm leading-relaxed"
           />
         </div>
 
@@ -647,7 +647,7 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
               onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); reviseStory(); } }}
               maxLength={500}
               placeholder={t.editPlaceholder}
-              className="flex-1 px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400"
+              className="flex-1 px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600 bg-surface dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400"
             />
             <Button type="button" variant="secondary" onClick={reviseStory} isLoading={revising} disabled={reviseNote.trim().length < 3}>
               {t.makeEdit}
@@ -678,7 +678,7 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
               <label
                 key={opt}
                 className={`flex items-start gap-3 p-3 rounded-xl border cursor-pointer transition-colors ${
-                  attribution === opt ? 'border-purple-500 bg-purple-50 dark:bg-purple-900/20' : 'border-gray-200 dark:border-gray-700'
+                  attribution === opt ? 'border-purple-500 bg-purple-50 dark:bg-purple-900/20' : 'border-rule dark:border-gray-700'
                 }`}
               >
                 <input
@@ -709,7 +709,7 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
               onChange={(e) => setStorytellerName(e.target.value)}
               placeholder={attribution === 'first_name_only' ? t.firstNamePlaceholder : t.fullNamePlaceholder}
               maxLength={200}
-              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 bg-surface dark:bg-gray-700 text-gray-900 dark:text-white"
             />
             {attribution === 'first_name_only' && (
               <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">{t.keepFirstOnly}</p>
@@ -770,7 +770,7 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
                 <label
                   key={opt.value}
                   className={`flex items-start gap-3 p-3 rounded-xl border cursor-pointer transition-colors ${
-                    on ? 'border-purple-500 bg-purple-50 dark:bg-purple-900/20' : 'border-gray-200 dark:border-gray-700'
+                    on ? 'border-purple-500 bg-purple-50 dark:bg-purple-900/20' : 'border-rule dark:border-gray-700'
                   }`}
                 >
                   <input
@@ -800,7 +800,7 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
               value={storytellerEmail}
               onChange={(e) => setStorytellerEmail(e.target.value)}
               placeholder={t.emailPlaceholder}
-              className="w-full px-3 py-2 border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
+              className="w-full px-3 py-2 border border-rule dark:border-gray-700 rounded-lg bg-surface dark:bg-gray-700 text-gray-900 dark:text-white text-sm"
             />
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
               {t.sharedOnlyIfTyped}
@@ -868,7 +868,7 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
           rows={12}
           maxLength={8000}
           aria-label={t.anonAria}
-          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 resize-y bg-white dark:bg-gray-700 text-gray-900 dark:text-white text-sm leading-relaxed"
+          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 resize-y bg-surface dark:bg-gray-700 text-gray-900 dark:text-white text-sm leading-relaxed"
         />
         {error && <p className="text-sm text-red-600 dark:text-red-400" role="alert">{error}</p>}
         <div className="flex gap-2">

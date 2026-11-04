@@ -85,7 +85,7 @@ export default function ComplianceReviewPage() {
           {items.map((item) => {
             const flags = Object.entries(item.categories ?? {}).filter(([, v]) => v).map(([k]) => k);
             return (
-              <li key={item.id} className="rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-4">
+              <li key={item.id} className="rounded-xl border border-rule dark:border-gray-700 bg-surface dark:bg-gray-800 p-4">
                 <div className="flex flex-wrap items-center gap-1.5 mb-2">
                   {/* A hold and a refusal are different things and the
                       reviewer could not tell them apart: a held message is

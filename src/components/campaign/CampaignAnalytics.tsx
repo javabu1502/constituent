@@ -299,25 +299,25 @@ function StorytellingAnalytics({ analytics, campaignName, insightsPanel, isDemo 
   }, [analytics.campaign_slug, q, stateFilter, cityFilter, attributionFilter, useFilter, officialFilter]);
 
   const selectClass =
-    'px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-purple-600';
+    'px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg bg-surface dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-purple-600';
 
   return (
     <div className="space-y-6">
       {/* Use / impact / reach at a glance */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
+        <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-5">
           <p className="text-sm text-gray-500 dark:text-gray-400">Stories Shared</p>
           <p className="text-3xl font-bold text-gray-900 dark:text-white mt-1">{analytics.total_stories.toLocaleString()}</p>
           <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">Including anonymous</p>
         </div>
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
+        <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-5">
           <p className="text-sm text-gray-500 dark:text-gray-400">States Reached</p>
           <p className="text-3xl font-bold text-gray-900 dark:text-white mt-1">{stateOptions.length}</p>
           <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
             {cityOptions.length} cit{cityOptions.length === 1 ? 'y' : 'ies'}
           </p>
         </div>
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
+        <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-5">
           <p className="text-sm text-gray-500 dark:text-gray-400">Press-Ready</p>
           <p className="text-3xl font-bold text-gray-900 dark:text-white mt-1">{pressReady}</p>
           <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">OK to share with media</p>
@@ -326,10 +326,10 @@ function StorytellingAnalytics({ analytics, campaignName, insightsPanel, isDemo 
           type="button"
           onClick={() => { if (!isDemo) setShowReachable((v) => !v); }}
           disabled={contactable === 0}
-          className={`bg-white dark:bg-gray-800 rounded-xl border shadow-sm p-5 text-left transition-colors ${
+          className={`bg-surface dark:bg-gray-800 rounded-xl border p-5 text-left transition-colors ${
             showReachable
               ? 'border-purple-500'
-              : 'border-gray-200 dark:border-gray-700'
+              : 'border-rule dark:border-gray-700'
           } ${contactable > 0 ? 'hover:border-purple-400 dark:hover:border-purple-500 cursor-pointer' : ''}`}
         >
           <p className="text-sm text-gray-500 dark:text-gray-400">Reachable</p>
@@ -349,7 +349,7 @@ function StorytellingAnalytics({ analytics, campaignName, insightsPanel, isDemo 
       {/* The reachable list: who agreed to follow-up, with one-click emails.
           Never on the demo, which has no sign-in in front of it. */}
       {showReachable && contactable > 0 && !isDemo && (
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
+        <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-5">
           <div className="flex items-center justify-between gap-3 mb-3">
             <h3 className="text-base font-semibold text-gray-900 dark:text-white">Reachable storytellers</h3>
             <button
@@ -396,14 +396,14 @@ function StorytellingAnalytics({ analytics, campaignName, insightsPanel, isDemo 
       )}
 
       <CollapsibleSection title="Stories Over Time" defaultOpen={false}>
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
+        <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-5">
           <DailyBarChart counts={dailyCounts} unit="story" />
         </div>
       </CollapsibleSection>
 
       {analytics.officials.length > 0 && (
         <CollapsibleSection title="By Elected Official" badge={`${analytics.officials.length}`} defaultOpen={false}>
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
+        <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-5">
           <p className="text-xs text-gray-500 dark:text-gray-400 mb-4">
             Every official (federal, state, and local) matched from your storytellers&rsquo; addresses, with how many
             storytellers each represents. Click one to pull up their constituents&rsquo; stories, then bring exactly those
@@ -428,7 +428,7 @@ function StorytellingAnalytics({ analytics, campaignName, insightsPanel, isDemo 
                         className={`flex items-center justify-between gap-2 px-3 py-2 rounded-lg border text-left transition-colors ${
                           selected
                             ? 'border-purple-600 bg-purple-50 dark:bg-purple-900/30 dark:border-purple-400'
-                            : 'border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50'
+                            : 'border-rule dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50'
                         }`}
                       >
                         <span className="min-w-0">
@@ -462,7 +462,7 @@ function StorytellingAnalytics({ analytics, campaignName, insightsPanel, isDemo 
       )}
 
       {/* Story browser */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
+      <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-5">
         <div className="flex items-start justify-between gap-3 mb-1">
           <h3 className="text-base font-semibold text-gray-900 dark:text-white">Stories</h3>
           {analytics.stories.length > 0 && !isDemo && (
@@ -765,10 +765,10 @@ function MessageBrowser({ messages, slug, isDemo = false }: { messages: NonNulla
   }, [slug, q, stateFilter, officialFilter, statusFilter]);
 
   const selectClass =
-    'px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-purple-600';
+    'px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg bg-surface dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-purple-600';
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
+    <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-5">
       <div className="flex items-center justify-between gap-3 mb-1">
         <h3 className="text-base font-semibold text-gray-900 dark:text-white">Messages</h3>
         {!isDemo && (
@@ -788,7 +788,7 @@ function MessageBrowser({ messages, slug, isDemo = false }: { messages: NonNulla
           value={q}
           onChange={(e) => setQ(e.target.value)}
           placeholder="Search names, cities, officials…"
-          className="flex-1 min-w-[12rem] px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400"
+          className="flex-1 min-w-[12rem] px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg bg-surface dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400"
         />
         <select value={stateFilter} onChange={(e) => setStateFilter(e.target.value)} className={selectClass}>
           <option value="">All states</option>
@@ -813,7 +813,7 @@ function MessageBrowser({ messages, slug, isDemo = false }: { messages: NonNulla
 
       <div className="max-h-[34rem] overflow-y-auto space-y-2">
         {filtered.slice(0, 300).map((m, i) => (
-          <details key={i} className="group border border-gray-200 dark:border-gray-700 rounded-lg p-3">
+          <details key={i} className="group border border-rule dark:border-gray-700 rounded-lg p-3">
             <summary className="cursor-pointer list-none flex items-center justify-between gap-2">
               <span className="text-sm text-gray-900 dark:text-white">
                 {m.name ? (
@@ -912,13 +912,13 @@ export function CampaignAnalytics({ analytics, campaignName, insightsPanel, hide
     <div className="space-y-8">
       {/* Stats cards row — use, impact, reach */}
       <div className="grid grid-cols-2 lg:grid-cols-6 gap-3">
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
+        <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4">
           <p className="text-xs text-gray-500 dark:text-gray-400">Total Actions</p>
           <p className="text-2xl font-bold text-gray-900 dark:text-white mt-1">
             {analytics.total_actions.toLocaleString()}
           </p>
         </div>
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
+        <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4">
           <p className="text-xs text-gray-500 dark:text-gray-400">Total Messages</p>
           <p className="text-2xl font-bold text-gray-900 dark:text-white mt-1">
             {analytics.total_messages.toLocaleString()}
@@ -927,7 +927,7 @@ export function CampaignAnalytics({ analytics, campaignName, insightsPanel, hide
             {analytics.avg_messages_per_action}/participant
           </p>
         </div>
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
+        <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4">
           <p className="text-xs text-gray-500 dark:text-gray-400">This Week</p>
           <p className="text-2xl font-bold text-gray-900 dark:text-white mt-1">
             {analytics.this_week.toLocaleString()}
@@ -938,19 +938,19 @@ export function CampaignAnalytics({ analytics, campaignName, insightsPanel, hide
             </p>
           )}
         </div>
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
+        <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4">
           <p className="text-xs text-gray-500 dark:text-gray-400">Officials Contacted</p>
           <p className="text-2xl font-bold text-gray-900 dark:text-white mt-1">
             {analytics.officials_contacted.length}
           </p>
         </div>
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
+        <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4">
           <p className="text-xs text-gray-500 dark:text-gray-400">States Reached</p>
           <p className="text-2xl font-bold text-gray-900 dark:text-white mt-1">
             {analytics.states_represented.length}
           </p>
         </div>
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-4">
+        <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4">
           <p className="text-xs text-gray-500 dark:text-gray-400">Cities</p>
           <p className="text-2xl font-bold text-gray-900 dark:text-white mt-1">
             {analytics.cities_count}
@@ -975,7 +975,7 @@ export function CampaignAnalytics({ analytics, campaignName, insightsPanel, hide
         const supportPct = Math.round((support / total) * 100);
         const opposePct = 100 - supportPct;
         return (
-          <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
+          <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-5">
             <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-1">Where participants stand</h3>
             <p className="text-xs text-gray-500 dark:text-gray-400 mb-4">
               The position each participant chose before their message was written. {total.toLocaleString()} took a position.
@@ -1002,7 +1002,7 @@ export function CampaignAnalytics({ analytics, campaignName, insightsPanel, hide
 
       {/* Daily activity chart */}
       <CollapsibleSection title="Daily Activity" defaultOpen={false}>
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
+        <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-5">
           <DailyBarChart counts={analytics.daily_counts} unit="action" />
         </div>
       </CollapsibleSection>
@@ -1011,7 +1011,7 @@ export function CampaignAnalytics({ analytics, campaignName, insightsPanel, hide
           Hidden on parents: the whip board is the one legislators section. */}
       {!hideOfficialsPanel && analytics.officials_contacted.length > 0 && (
         <CollapsibleSection title="Officials Contacted" badge={`${analytics.officials_contacted.length}`} defaultOpen={false}>
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
+        <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-5">
           <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">
             Which lawmakers your campaign&rsquo;s messages went to. Use this to see where pressure is landing and
             which offices to target next.
@@ -1078,7 +1078,7 @@ export function CampaignAnalytics({ analytics, campaignName, insightsPanel, hide
       <CollapsibleSection title="Outcomes and Delivery" defaultOpen={false}>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {/* Message outcomes — how far each message got */}
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
+        <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-5">
           <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-1">Message Outcomes</h3>
           <p className="text-xs text-gray-500 dark:text-gray-400 mb-4">
             How far messages got, from opening a contact form to confirmed delivery.
@@ -1110,7 +1110,7 @@ export function CampaignAnalytics({ analytics, campaignName, insightsPanel, hide
         </div>
 
         {/* Delivery breakdown */}
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
+        <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-5">
           <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-1">Delivery Methods</h3>
           <p className="text-xs text-gray-500 dark:text-gray-400 mb-4">
             How participants chose to reach out.
@@ -1146,7 +1146,7 @@ export function CampaignAnalytics({ analytics, campaignName, insightsPanel, hide
       {/* Top states and Top cities side by side */}
       <CollapsibleSection title="Top States and Cities" defaultOpen={false}>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
+        <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-5">
           <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-4">
             Top States
           </h3>
@@ -1174,7 +1174,7 @@ export function CampaignAnalytics({ analytics, campaignName, insightsPanel, hide
           )}
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
+        <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-5">
           <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-4">
             Top Cities
           </h3>
@@ -1213,7 +1213,7 @@ export function CampaignAnalytics({ analytics, campaignName, insightsPanel, hide
 
       {/* Recent activity pulse */}
       {analytics.recent_actions.length > 0 && (
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm p-5">
+        <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-5">
           <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-4">Recent Activity</h3>
           <ul className="divide-y divide-gray-100 dark:divide-gray-700">
             {analytics.recent_actions.map((a, i) => (
