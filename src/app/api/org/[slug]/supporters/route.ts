@@ -3,21 +3,29 @@ import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase';
 import { getStateLegislators } from '@/lib/state-legislators';
 import { collectSupporters, type SupporterSource } from '@/lib/org-supporters';
+import { US_STATES } from '@/lib/constants';
+import { nameSlug } from '@/lib/utils';
 import { verifyMapEmbedToken } from '@/lib/org-embed-token';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
+
+export interface PlaceCount {
+  place: string;
+  count: number;
+}
 
 export interface DistrictCount {
   district: string;
   count: number;
   legislatorName: string | null;
   legislatorParty: string | null;
-}
-
-export interface PlaceCount {
-  place: string;
-  count: number;
+  /** Where in the district they are, for the panel a click opens. */
+  cities: PlaceCount[];
+  /** How they arrived, for the same panel. */
+  sources: { joined: number; acted: number; shared: number };
+  /** The member's own page, built here because the roster lives server-side. */
+  legislatorHref: string | null;
 }
 
 /**
@@ -64,8 +72,16 @@ export async function GET(req: Request, { params }: { params: Promise<{ slug: st
 
   const { supporters, anonymousActions, anonymousStories } = rollup;
 
-  const upper = new Map<string, number>();
-  const lower = new Map<string, number>();
+  /** Per district: how many, where, and how they arrived. */
+  interface Bucket {
+    count: number;
+    cities: Map<string, number>;
+    sources: { joined: number; acted: number; shared: number };
+  }
+  const emptyBucket = (): Bucket => ({ count: 0, cities: new Map(), sources: { joined: 0, acted: 0, shared: 0 } });
+
+  const upper = new Map<string, Bucket>();
+  const lower = new Map<string, Bucket>();
   const states = new Map<string, number>();
   const places = new Map<string, number>();
   const sources: Record<SupporterSource, number> = { joined: 0, acted: 0, shared: 0 };
@@ -74,14 +90,22 @@ export async function GET(req: Request, { params }: { params: Promise<{ slug: st
   for (const s of supporters) {
     for (const src of s.sources) sources[src]++;
     if (s.state) states.set(s.state, (states.get(s.state) ?? 0) + 1);
-    if (s.city) {
-      const key = s.state ? `${s.city}, ${s.state}` : s.city;
-      places.set(key, (places.get(key) ?? 0) + 1);
-    }
+    const place = s.city ? (s.state ? `${s.city}, ${s.state}` : s.city) : null;
+    if (place) places.set(place, (places.get(place) ?? 0) + 1);
+
     if (s.upperDistrict || s.lowerDistrict) {
       mapped++;
-      if (s.upperDistrict) upper.set(s.upperDistrict, (upper.get(s.upperDistrict) ?? 0) + 1);
-      if (s.lowerDistrict) lower.set(s.lowerDistrict, (lower.get(s.lowerDistrict) ?? 0) + 1);
+      for (const [m, district] of [
+        [upper, s.upperDistrict],
+        [lower, s.lowerDistrict],
+      ] as const) {
+        if (!district) continue;
+        const b = m.get(district) ?? emptyBucket();
+        b.count++;
+        if (place) b.cities.set(place, (b.cities.get(place) ?? 0) + 1);
+        for (const src of s.sources) b.sources[src]++;
+        m.set(district, b);
+      }
     }
   }
 
@@ -93,14 +117,29 @@ export async function GET(req: Request, { params }: { params: Promise<{ slug: st
   // The whole chamber roster, not findStateLegislators(): that one takes a
   // district per chamber and returns nothing when given none.
   const roster = primaryState ? getStateLegislators(primaryState) : [];
+  const stateSlug = primaryState
+    ? (US_STATES.find((s) => s.code === primaryState)?.name.toLowerCase().replace(/\s+/g, '-') ?? null)
+    : null;
   const nameFor = (chamber: 'upper' | 'lower', district: string) => {
     const m = roster.find((o) => o.chamber === chamber && String(+o.district) === String(+district));
-    return { legislatorName: m?.name ?? null, legislatorParty: m?.party ?? null };
+    return {
+      legislatorName: m?.name ?? null,
+      legislatorParty: m?.party ?? null,
+      legislatorHref: m?.name && stateSlug ? `/legislators/${stateSlug}/${nameSlug(m.name)}` : null,
+    };
   };
 
-  const shape = (m: Map<string, number>, chamber: 'upper' | 'lower'): DistrictCount[] =>
+  const shape = (m: Map<string, Bucket>, chamber: 'upper' | 'lower'): DistrictCount[] =>
     [...m.entries()]
-      .map(([district, count]) => ({ district, count, ...nameFor(chamber, district) }))
+      .map(([district, b]) => ({
+        district,
+        count: b.count,
+        ...nameFor(chamber, district),
+        cities: [...b.cities.entries()]
+          .map(([place, count]) => ({ place, count }))
+          .sort((x, y) => y.count - x.count || x.place.localeCompare(y.place)),
+        sources: b.sources,
+      }))
       .sort((a, b) => b.count - a.count || Number(a.district) - Number(b.district));
 
   const cities: PlaceCount[] = [...places.entries()]

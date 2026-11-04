@@ -46,7 +46,7 @@ export default async function OrgMapEmbed({ params, searchParams }: PageProps) {
   return (
     <EmbedAutoHeight>
       <div className="p-4">
-        <SupporterMap slug={slug} token={t} />
+        <SupporterMap slug={slug} token={t} publicView />
       </div>
     </EmbedAutoHeight>
   );

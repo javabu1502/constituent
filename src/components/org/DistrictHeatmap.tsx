@@ -2,11 +2,18 @@
 
 import { useMemo, useState } from 'react';
 
+export interface PlaceCount {
+  place: string;
+  count: number;
+}
+
 export interface DistrictCount {
   district: string;
   count: number;
   legislatorName: string | null;
   legislatorParty: string | null;
+  cities: PlaceCount[];
+  sources: { joined: number; acted: number; shared: number };
 }
 
 type Ring = [number, number][];
@@ -43,10 +50,15 @@ export function DistrictHeatmap({
   boundaries,
   counts,
   chamberLabel,
+  selected,
+  onSelect,
 }: {
   boundaries: Boundaries;
   counts: DistrictCount[];
   chamberLabel: string;
+  /** District number the parent is showing a panel for. */
+  selected?: string | null;
+  onSelect?: (district: string | null) => void;
 }) {
   const [hover, setHover] = useState<string | null>(null);
 
@@ -120,15 +132,17 @@ export function DistrictHeatmap({
         {paths.map((p) => {
           const c = byDistrict.get(p.district);
           const n = c?.count ?? 0;
+          const isSelected = selected === p.district;
           return (
             <path
               key={p.district}
               d={p.d}
               fill={fillFor(n)}
-              stroke={hover === p.district ? 'rgb(15 23 42)' : 'rgb(148 163 184)'}
-              strokeWidth={hover === p.district ? 2 : 0.5}
+              stroke={isSelected || hover === p.district ? 'rgb(15 23 42)' : 'rgb(148 163 184)'}
+              strokeWidth={isSelected ? 3 : hover === p.district ? 2 : 0.5}
               onMouseEnter={() => setHover(p.district)}
               onMouseLeave={() => setHover((h) => (h === p.district ? null : h))}
+              onClick={() => onSelect?.(isSelected ? null : p.district)}
               className="cursor-pointer transition-[stroke-width]"
             >
               <title>{`${chamberLabel} District ${p.district}: ${n} supporter${n === 1 ? '' : 's'}${c?.legislatorName ? ` — ${c.legislatorName}` : ''}`}</title>
@@ -151,7 +165,7 @@ export function DistrictHeatmap({
             ? `District ${active.district}: ${active.count} supporter${active.count === 1 ? '' : 's'}${active.legislatorName ? ` · ${active.legislatorName}` : ''}`
             : hover
               ? `District ${hover}: no supporters yet`
-              : 'Hover a district for its count.'}
+              : 'Click a district for its detail.'}
         </p>
       </div>
     </div>

@@ -21,10 +21,15 @@ export function DistrictCartogram({
   boundaries,
   counts,
   chamberLabel,
+  selected,
+  onSelect,
 }: {
   boundaries: { features: TileFeature[] };
   counts: DistrictCount[];
   chamberLabel: string;
+  /** District number the parent is showing a panel for. */
+  selected?: string | null;
+  onSelect?: (district: string | null) => void;
 }) {
   const [hover, setHover] = useState<string | null>(null);
 
@@ -72,17 +77,24 @@ export function DistrictCartogram({
           const c = byDistrict.get(tile.district);
           const n = c?.count ?? 0;
           const s = step(n);
+          const isSelected = selected === tile.district;
           return (
             <button
               key={i}
               type="button"
+              aria-pressed={isSelected}
               onMouseEnter={() => setHover(tile.district)}
               onMouseLeave={() => setHover((h) => (h === tile.district ? null : h))}
               onFocus={() => setHover(tile.district)}
               onBlur={() => setHover((h) => (h === tile.district ? null : h))}
+              onClick={() => onSelect?.(isSelected ? null : tile.district)}
               title={`${chamberLabel} District ${tile.district}: ${n} supporter${n === 1 ? '' : 's'}${c?.legislatorName ? ` — ${c.legislatorName}` : ''}`}
               className={`aspect-square flex flex-col items-center justify-center rounded-sm border text-xs leading-none transition-colors ${
-                hover === tile.district ? 'border-gray-900 dark:border-white' : 'border-gray-300 dark:border-gray-600'
+                isSelected
+                  ? 'border-gray-900 dark:border-white ring-2 ring-gray-900 dark:ring-white'
+                  : hover === tile.district
+                    ? 'border-gray-900 dark:border-white'
+                    : 'border-gray-300 dark:border-gray-600'
               } ${s >= 4 ? 'text-white' : 'text-gray-900 dark:text-gray-100'}`}
               style={{ background: s === 0 ? 'var(--hm-empty)' : `var(--hm-${s})` }}
             >
@@ -107,7 +119,7 @@ export function DistrictCartogram({
             ? `District ${active.district}: ${active.count} supporter${active.count === 1 ? '' : 's'}${active.legislatorName ? ` · ${active.legislatorName}` : ''}`
             : hover
               ? `District ${hover}: no supporters yet`
-              : 'Each tile is one district. Hover for the count.'}
+              : 'Each tile is one district. Click one for its detail.'}
         </p>
       </div>
     </div>
