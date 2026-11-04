@@ -84,7 +84,7 @@ export function SupporterMap({ slug, token }: { slug: string; token?: string }) 
         {anonymous > 0 && (
           <p className="text-sm text-gray-500 dark:text-gray-400 mt-3">
             {anonymous} {anonymous === 1 ? 'person has' : 'people have'} acted or shared a story without leaving
-            contact details, so they are not counted here.
+            contact details.
           </p>
         )}
       </div>
@@ -112,7 +112,7 @@ export function SupporterMap({ slug, token }: { slug: string; token?: string }) 
         <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
           {data.mapped} placed in a district
           {data.unplaced > 0 && <> · {data.unplaced} with no address on file</>}
-          {anonymous > 0 && <> · {anonymous} anonymous, not counted above</>}
+          {anonymous > 0 && <> · {anonymous} anonymous</>}
         </p>
       </div>
 

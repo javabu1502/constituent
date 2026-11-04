@@ -73,8 +73,7 @@ export default async function DashboardSupportersPage() {
         Who you can call on, and where.
       </h1>
       <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300 max-w-[62ch] mb-10">
-        Everyone who joined {orgName}, took an action on one of your campaigns, or shared their story with you,
-        counted once.
+        People who joined {orgName}, took an action on one of your campaigns, or shared their story with you.
       </p>
 
       <section className="mb-14">
@@ -105,8 +104,8 @@ export default async function DashboardSupportersPage() {
       <section>
         <h2 className="label mb-3 border-t border-gray-900 dark:border-gray-600 pt-6">Put the map on your own site</h2>
         <p className="text-sm text-gray-700 dark:text-gray-300 mb-4 max-w-[62ch]">
-          The same map as above, for a supporters or campaign page. It shows district and city counts only, never
-          anyone&rsquo;s name or address. The link carries a key, so the map stays private until you publish it.
+          The same map as above, for a supporters or campaign page. It shows district and city counts. It does not
+          show names or addresses. The link carries a key, so only people you give it to can open the map.
         </p>
         <EmbedSnippet slug={slug} path={mapPath} title={`${orgName} supporters`} minHeight={520} />
       </section>
