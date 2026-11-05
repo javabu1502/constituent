@@ -10,6 +10,7 @@
  */
 import { createHmac, timingSafeEqual } from 'crypto';
 import { createAdminClient } from '@/lib/supabase';
+import { senderAddress } from '@/lib/resend';
 import { Resend } from 'resend';
 
 export const UPDATES_LIST = 'campaign_updates';
@@ -90,7 +91,7 @@ export async function sendStageAdvanceEmails(args: {
     return result;
   }
   const resend = new Resend(process.env.RESEND_API_KEY);
-  const from = process.env.RESEND_FROM_EMAIL || 'notifications@mydemocracy.app';
+  const from = senderAddress();
   const stageUrl = `https://www.mydemocracy.app/campaign/${args.stageSlug}`;
   const subject = `${args.billRef ? `${args.billRef} moved: ` : ''}${args.stageHeadline}`;
 

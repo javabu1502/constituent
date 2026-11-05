@@ -16,6 +16,17 @@ export function isEmailConfigured(): boolean {
   return Boolean(process.env.RESEND_API_KEY);
 }
 
+/**
+ * The From address, trimmed.
+ *
+ * Environment values arrive with whatever whitespace the thing that set them
+ * left behind: `echo value | vercel env add` stores a trailing newline, and a
+ * newline inside a From header is rejected by the API rather than ignored.
+ */
+export function senderAddress(fallback = 'notifications@mydemocracy.app'): string {
+  return (process.env.RESEND_FROM_EMAIL || '').trim() || fallback;
+}
+
 export async function sendDigestEmail(
   to: string,
   subject: string,
@@ -27,7 +38,7 @@ export async function sendDigestEmail(
     return;
   }
 
-  const from = process.env.RESEND_FROM_EMAIL || 'notifications@mydemocracy.app';
+  const from = senderAddress();
 
   const { error } = await resend.emails.send({
     from,
@@ -76,7 +87,7 @@ export async function sendConstituentEmail(
   }
   const resend = getResend();
   if (!resend) return 'skipped';
-  const from = process.env.RESEND_FROM_EMAIL as string;
+  const from = senderAddress();
   try {
     const { error } = await resend.emails.send({ from, to: address, subject, html });
     if (error) {
@@ -111,7 +122,7 @@ export async function sendAdminNotification(
     return;
   }
 
-  const from = process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev';
+  const from = senderAddress('onboarding@resend.dev');
 
   const { error } = await resend.emails.send({ from, to, subject, html });
   if (error) {
