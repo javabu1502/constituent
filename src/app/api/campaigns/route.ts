@@ -8,8 +8,8 @@ import { getCommitteeMembers } from '@/lib/committees';
 import { sendStageAdvanceEmails } from '@/lib/campaign-updates';
 import { getStateCommitteeMembers } from '@/lib/state-committees';
 
-function escapeHtml(str: string): string {
-  return str
+function escapeHtml(str: string | null | undefined): string {
+  return (str ?? '')
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
@@ -228,7 +228,7 @@ export async function POST(request: NextRequest) {
      <p>${escapeHtml(description)}</p>
      <ul>
        <li>Type: ${escapeHtml(campaign_type)}</li>
-       <li>Issue: ${escapeHtml(issue_area)}${issue_subtopic ? ` / ${escapeHtml(issue_subtopic)}` : ''}</li>
+       <li>Issue: ${escapeHtml(issue_area || 'not set')}${issue_subtopic ? ` / ${escapeHtml(issue_subtopic)}` : ''}</li>
        ${isStory
          ? `<li>Story prompt: ${escapeHtml(story_prompt || '(none)')}</li>`
          : `<li>Target level: ${escapeHtml(target_level || '')}</li>`}

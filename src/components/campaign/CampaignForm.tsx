@@ -9,6 +9,7 @@ import { parseTalkingPoints, MAX_REQUIRED_POINTS } from '@/lib/talking-points';
 import { IssuePicker } from '@/components/ui/IssuePicker';
 import { US_STATES } from '@/lib/constants';
 import { detectBillReferences } from '@/lib/bills';
+import { billLevelAllowed as isBillLevelAllowed, billLevelAfterTargetChange } from '@/lib/campaign-targets';
 import { STORY_USAGE_OPTIONS } from '@/lib/story-usage';
 import { TargetPicker, type TargetMode, type TargetOfficial, type TargetParty } from '@/components/campaign/TargetPicker';
 
@@ -127,6 +128,22 @@ export function CampaignForm({
 
   // Optional related bill
   const [billLevel, setBillLevel] = useState<BillLevel>(edit?.initial.resolvedBill?.level ?? '');
+
+  // Does this campaign reach Congress? Only then does the issue area carry a
+  // Library of Congress topic through CWC; otherwise it is display only.
+  const needsLocTopic = targetLevel === 'federal' || targetLevel === 'both' || billLevel === 'federal';
+
+  const billLevelAllowed = (level: BillLevel): boolean => isBillLevelAllowed(targetLevel, level);
+
+  /** Changing who we write to drops a bill that no longer belongs to them. */
+  const chooseTargetLevel = (level: 'federal' | 'state' | 'both') => {
+    setTargetLevel(level);
+    if (billLevelAfterTargetChange(level, billLevel) !== billLevel) {
+      setBillLevel('');
+      setBillQuery('');
+      resetBill();
+    }
+  };
   const [billState, setBillState] = useState(edit?.initial.resolvedBill?.state ?? '');
   const [billQuery, setBillQuery] = useState(edit?.initial.resolvedBill?.ref ?? '');
   const [resolvedBill, setResolvedBill] = useState<ResolvedBill | null>(edit?.initial.resolvedBill ?? null);
@@ -379,8 +396,18 @@ export function CampaignForm({
       errs.description = 'Description must be at least 10 characters';
     }
     if (campaignType === 'advocacy') {
-      if (!issueArea.trim() && !parentCampaignId) {
-        errs.issueArea = 'Select an issue area';
+      // Only a message bound for Congress needs it. CWC's schema demands at
+      // least one Library of Congress topic, and without an issue area we
+      // guess from the headline: across the campaigns on the site today that
+      // guess changes the topic on 54 of 86 federal campaigns and lands on
+      // the generic "Government Operations and Politics" for 36 of them,
+      // which is how a health bill reaches the wrong staffer. State
+      // campaigns carry no such code, so there it is only a label.
+      if (billLevel && !billLevelAllowed(billLevel)) {
+        errs.targetLevel = `A campaign writing to ${targetLevel} representatives cannot reference a ${billLevel} bill`;
+      }
+      if (needsLocTopic && !issueArea.trim() && !parentCampaignId) {
+        errs.issueArea = 'Federal campaigns need an issue area so the message files under the right topic in Congress';
       }
       // Stages inherit the parent's position — only standalone campaigns pick.
       if (!direction && !parentCampaignId) {
@@ -710,7 +737,12 @@ export function CampaignForm({
       {!parentCampaignId && (
       <div data-field="issueArea">
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-          Issue Area <span className="text-red-500">*</span>
+          Issue Area{' '}
+          {needsLocTopic ? (
+            <span className="text-red-500">*</span>
+          ) : (
+            <span className="font-normal text-gray-500 dark:text-gray-400">(optional)</span>
+          )}
         </label>
         <IssuePicker
           value={issueArea}
@@ -721,6 +753,11 @@ export function CampaignForm({
             clearFieldError('issueArea');
           }}
         />
+        <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+          {needsLocTopic
+            ? 'Congress files every message under a topic. This sets it, so yours reaches the staffer who handles the issue.'
+            : 'Used to label and group the campaign on the site. State offices do not use a topic code.'}
+        </p>
         <FieldError field="issueArea" />
       </div>
       )}
@@ -728,7 +765,7 @@ export function CampaignForm({
       {campaignType === 'advocacy' && <SectionHeading n={2} title={sectionTitles[1]} />}
 
       {/* Target Level */}
-      <div>
+      <div data-field="targetLevel">
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
           Target Representatives <span className="text-red-500">*</span>
         </label>
@@ -747,13 +784,14 @@ export function CampaignForm({
                 name="targetLevel"
                 value={level}
                 checked={targetLevel === level}
-                onChange={() => setTargetLevel(level)}
+                onChange={() => chooseTargetLevel(level)}
                 className="sr-only"
               />
               <span className="text-sm font-medium capitalize">{level === 'both' ? 'Both' : level}</span>
             </label>
           ))}
         </div>
+        <FieldError field="targetLevel" />
       </div>
 
       {/* Narrow targeting — hidden in edit mode (targeting is fixed at
@@ -825,27 +863,41 @@ export function CampaignForm({
         )}
 
         <div className="flex gap-2 mb-3">
-          {([['', 'None'], ['federal', 'Federal'], ['state', 'State']] as const).map(([val, lbl]) => (
-            <label
-              key={val || 'none'}
-              className={`flex-1 text-center px-3 py-2 rounded-lg border-2 cursor-pointer text-sm font-medium transition-colors ${
-                billLevel === val
-                  ? 'border-purple-600 bg-purple-50 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300'
-                  : 'border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:border-gray-400'
-              }`}
-            >
-              <input
-                type="radio"
-                name="billLevel"
-                value={val}
-                checked={billLevel === val}
-                onChange={() => { setBillLevel(val); setBillQuery(''); resetBill(); }}
-                className="sr-only"
-              />
-              {lbl}
-            </label>
-          ))}
+          {([['', 'None'], ['federal', 'Federal'], ['state', 'State']] as const).map(([val, lbl]) => {
+            const allowed = billLevelAllowed(val);
+            return (
+              <label
+                key={val || 'none'}
+                title={allowed ? undefined : `This campaign writes to ${targetLevel} representatives, so it cannot reference a ${val} bill.`}
+                className={`flex-1 text-center px-3 py-2 rounded-lg border-2 text-sm font-medium transition-colors ${
+                  !allowed
+                    ? 'border-gray-200 dark:border-gray-700 text-gray-400 dark:text-gray-600 cursor-not-allowed'
+                    : billLevel === val
+                      ? 'border-purple-600 bg-purple-50 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 cursor-pointer'
+                      : 'border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:border-gray-400 cursor-pointer'
+                }`}
+              >
+                <input
+                  type="radio"
+                  name="billLevel"
+                  value={val}
+                  checked={billLevel === val}
+                  disabled={!allowed}
+                  onChange={() => { setBillLevel(val); setBillQuery(''); resetBill(); }}
+                  className="sr-only"
+                />
+                {lbl}
+              </label>
+            );
+          })}
         </div>
+        {targetLevel !== 'both' && (
+          <p className="text-xs text-gray-500 dark:text-gray-400 -mt-2 mb-3">
+            {targetLevel === 'federal'
+              ? 'Writing to Congress, so only a federal bill can be referenced. Pick Both above to link a state bill.'
+              : 'Writing to state legislators, so only a state bill can be referenced. Pick Both above to link a federal bill.'}
+          </p>
+        )}
 
         {billLevel && (
           <>
