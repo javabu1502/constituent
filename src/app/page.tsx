@@ -335,7 +335,7 @@ export default async function HomePage() {
         <div className="max-w-4xl mx-auto">
           <p className="label mb-3">For advocacy organizations</p>
           <h2 className="text-4xl sm:text-5xl font-extrabold tracking-tighter leading-[0.98] mb-5 max-w-[18ch]">
-            Run a campaign your supporters can actually finish.
+            Run a campaign without form letters.
           </h2>
           <p className="text-lg leading-relaxed text-gray-200 mb-8 max-w-[60ch]">
             Nonprofits, advocacy groups and civic organizations create a campaign page and share one link. Every
@@ -353,7 +353,7 @@ export default async function HomePage() {
             <div>
               <p className="label mb-2">Real letters</p>
               <p className="text-sm leading-relaxed text-gray-200">
-                Each one personal and routed to that person&apos;s own officials, never a form letter.
+                Each one personal and routed to that person&apos;s own officials, in the words they chose.
               </p>
             </div>
             <div>
