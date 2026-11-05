@@ -1,9 +1,6 @@
 import Link from 'next/link';
 import { stageOrder } from '@/lib/stages';
-import { LegislatorSearch } from '@/components/dashboard/LegislatorSearch';
 import { CampaignCard, type CampaignRow } from '@/components/dashboard/CampaignCard';
-import { getStateLegislators } from '@/lib/state-legislators';
-import { getAllFederalLegislators } from '@/lib/legislators';
 
 /**
  * The org-shaped dashboard: the org's campaigns and the reach those campaigns
@@ -45,21 +42,6 @@ export function OrgDashboard({
   }
   const topLevelCampaigns = campaigns.filter((c) => !c.parent_campaign_id);
 
-  // Member lookup roster: every legislator in the states this org works,
-  // plus all of Congress when it runs federal campaigns. Most orgs live in
-  // one world or the other — the roster follows their portfolio.
-  const rosterStates = [...new Set(campaigns.map((c) => c.bill_state as string | null).filter(Boolean))] as string[];
-  const hasFederal = topLevelCampaigns.some(
-    (c) => c.campaign_type !== 'storytelling' && !c.bill_state && (c.bill_level === 'federal' || c.target_level === 'federal' || c.target_level === 'both' || !c.target_level)
-  );
-  const legislatorRoster = [
-    ...rosterStates.flatMap((st) =>
-      getStateLegislators(st).map((l) => ({ id: l.id, name: l.name, party: l.party ?? null, chamber: l.chamber ?? null, state: st }))
-    ),
-    ...(hasFederal
-      ? getAllFederalLegislators().map((l) => ({ id: l.id, name: l.name, party: l.party ?? null, chamber: l.chamber ?? null, state: 'US' }))
-      : []),
-  ];
   // Federal and state portfolios render as separate sections.
   const federalCampaigns = topLevelCampaigns.filter((c) => c.campaign_type !== 'storytelling' && !c.bill_state);
   const stateGroups = new Map<string, CampaignRow[]>();
@@ -117,22 +99,26 @@ export function OrgDashboard({
             )}
           </p>
         </div>
+        {/* Settings and New campaign are in the workspace nav two rows up.
+            Repeating them here put five controls above the fold competing
+            with the campaign list. The demo keeps its own targets, since it
+            has no nav to inherit them from. */}
         <div className="sm:shrink-0 flex flex-wrap items-center gap-2">
-          <Link href={isDemo ? '/campaigns#apply' : '/dashboard/settings'} className="text-sm font-medium px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-            Settings
-          </Link>
+          {isDemo && (
+            <Link href="/campaigns#apply" className="text-sm font-medium px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+              Settings
+            </Link>
+          )}
           <Link href={isDemo ? '/demo/report' : '/dashboard/report'} className="text-sm font-medium px-4 py-2 rounded-lg border border-purple-300 dark:border-purple-700 text-purple-700 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/20 transition-colors">
             All-campaign report
           </Link>
-          {/* The demo used to hide every action, so someone evaluating the
-              product saw a dashboard with one button on it. */}
-          <Link href={isDemo ? '/campaigns#apply' : '/campaign/create'} className="text-sm font-medium px-4 py-2 rounded-lg bg-purple-600 hover:bg-purple-700 text-white transition-colors">
-            + New campaign
-          </Link>
+          {isDemo && (
+            <Link href="/campaigns#apply" className="text-sm font-medium px-4 py-2 rounded-lg bg-purple-600 hover:bg-purple-700 text-white transition-colors">
+              + New campaign
+            </Link>
+          )}
         </div>
       </div>
-
-      <LegislatorSearch roster={legislatorRoster} intelBasePath={isDemo ? '/demo/legislator' : '/dashboard/legislator'} />
 
       {!isDemo && (
         <div className="mb-6">
