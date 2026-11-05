@@ -72,7 +72,7 @@ const int = (lo: number, hi: number) => lo + Math.floor(rnd() * (hi - lo + 1));
  * around Reno, which is what makes a district map of Nevada worth drawing.
  */
 const METROS: { name: string; lat: number; lon: number; radius: number; weight: number }[] = [
-  { name: 'Las Vegas', lat: 36.1699, lon: -115.1398, radius: 0.16, weight: 34 },
+  { name: 'Las Vegas', lat: 36.1699, lon: -115.1398, radius: 0.1, weight: 34 },
   { name: 'Henderson', lat: 36.0395, lon: -114.9817, radius: 0.1, weight: 11 },
   { name: 'North Las Vegas', lat: 36.1989, lon: -115.1175, radius: 0.09, weight: 9 },
   { name: 'Spring Valley', lat: 36.108, lon: -115.2454, radius: 0.07, weight: 6 },
@@ -89,6 +89,48 @@ const METROS: { name: string; lat: number; lon: number; radius: number; weight: 
   { name: 'Fallon', lat: 39.4735, lon: -118.7774, radius: 0.04, weight: 1 },
 ];
 const WEIGHT_TOTAL = METROS.reduce((n, m) => n + m.weight, 0);
+
+/**
+ * Gazetteer for labelling, separate from the sampling weights above.
+ *
+ * A point is labelled with the nearest town to it, not the metro it was
+ * drawn around. The jitter reaches ~18km, which is far enough to leave the
+ * Las Vegas valley for a neighbouring rural district, and labelling by the
+ * sampling origin put "Las Vegas" supporters in AD19, which is Mesquite.
+ */
+const CITIES: { name: string; lat: number; lon: number }[] = [
+  ...METROS.map((m) => ({ name: m.name, lat: m.lat, lon: m.lon })),
+  { name: 'Boulder City', lat: 35.9786, lon: -114.8319 },
+  { name: 'Laughlin', lat: 35.1678, lon: -114.573 },
+  { name: 'Moapa Valley', lat: 36.5783, lon: -114.4694 },
+  { name: 'Indian Springs', lat: 36.5686, lon: -115.6711 },
+  { name: 'Winnemucca', lat: 40.973, lon: -117.7357 },
+  { name: 'Ely', lat: 39.2472, lon: -114.8883 },
+  { name: 'Dayton', lat: 39.2377, lon: -119.5935 },
+  { name: 'Gardnerville', lat: 38.9413, lon: -119.7496 },
+  { name: 'Yerington', lat: 38.9857, lon: -119.1632 },
+  { name: 'Lovelock', lat: 40.1796, lon: -118.4737 },
+  { name: 'Tonopah', lat: 38.0672, lon: -117.2304 },
+  { name: 'Caliente', lat: 37.6147, lon: -114.5119 },
+  { name: 'Silver Springs', lat: 39.4138, lon: -119.2254 },
+];
+
+/** Nearest town, with longitude corrected for the latitude band. */
+function nearestCity(lat: number, lon: number): string {
+  const kx = Math.cos((lat * Math.PI) / 180);
+  let best = CITIES[0];
+  let bestD = Infinity;
+  for (const c of CITIES) {
+    const dx = (c.lon - lon) * kx;
+    const dy = c.lat - lat;
+    const d = dx * dx + dy * dy;
+    if (d < bestD) {
+      bestD = d;
+      best = c;
+    }
+  }
+  return best.name;
+}
 
 const FIRST = [
   'Maria', 'Jose', 'Ashley', 'Michael', 'Jennifer', 'David', 'Jessica', 'Daniel', 'Amanda', 'Christopher',
@@ -164,12 +206,13 @@ function makePerson(usedEmails: Set<string>): Person {
     // About one address in twelve fails to geocode in practice. Those people
     // still count as supporters; they are just not placed on the map.
     const resolved = rnd() > 0.08;
+    const city = nearestCity(lat, lon);
     return {
       name: `${first} ${last}`,
       email,
       street: `${int(100, 9800)} ${pick(STREETS)}`,
-      city: metro.name,
-      zip: pick(ZIP_BY_CITY[metro.name] ?? ['89101']),
+      city,
+      zip: pick(ZIP_BY_CITY[city] ?? ZIP_BY_CITY[metro.name] ?? ['89101']),
       upper: resolved ? up.properties.district : null,
       lower: resolved ? low.properties.district : null,
       resolved,
