@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
 import type { User } from '@supabase/supabase-js';
 
-export function UserMenu({ user }: { user: User | null }) {
+export function UserMenu({ user, inWorkspace = false }: { user: User | null; inWorkspace?: boolean }) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -83,13 +83,25 @@ export function UserMenu({ user }: { user: User | null }) {
             </p>
             <p className="text-xs text-gray-500 dark:text-gray-400 truncate">{user.email}</p>
           </div>
-          <Link
-            href="/dashboard"
-            onClick={() => setOpen(false)}
-            className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
-          >
-            My Dashboard
-          </Link>
+          {/* In the workspace the dashboard is the page you are on, and the
+              public menus are hidden, so this is the way back to them. */}
+          {inWorkspace ? (
+            <Link
+              href="/"
+              onClick={() => setOpen(false)}
+              className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+            >
+              Public site
+            </Link>
+          ) : (
+            <Link
+              href="/dashboard"
+              onClick={() => setOpen(false)}
+              className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+            >
+              My Dashboard
+            </Link>
+          )}
           <button
             onClick={handleSignOut}
             className="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"

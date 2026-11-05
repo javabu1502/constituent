@@ -45,29 +45,37 @@ export function MainNav({ user, isOrg }: { user: User | null; isOrg: boolean }) 
           />
         </>
       )}
-      <Link
-        href="/campaigns"
-        className="label-lg text-gray-700 dark:text-gray-300 hover:text-purple-700 dark:hover:text-purple-300 transition-colors"
-      >
-        For Organizations
-      </Link>
-      <NavDropdown
-        label="Explore"
-        items={[
-          { href: '/representatives', label: 'Find My Representatives' },
-          { href: '/states', label: 'States' },
-          { href: '/legislators', label: 'Legislators' },
-          { href: '/news', label: 'News' },
-          { href: '/trends', label: 'Trends' },
-        ]}
-      />
-      <NavDropdown
-        label="Learn"
-        items={[
-          { href: '/guides', label: 'Guides' },
-          { href: '/about', label: 'About' },
-        ]}
-      />
+      {/* The public menus belong to the public site. Inside the workspace they
+          sat beside the org's own nav, so the header carried two complete
+          navigations at once and the row ran to nine items. The wordmark and
+          the account menu are the way back out. */}
+      {!inWorkspace && (
+        <>
+          <Link
+            href="/campaigns"
+            className="label-lg text-gray-700 dark:text-gray-300 hover:text-purple-700 dark:hover:text-purple-300 transition-colors"
+          >
+            For Organizations
+          </Link>
+          <NavDropdown
+            label="Explore"
+            items={[
+              { href: '/representatives', label: 'Find My Representatives' },
+              { href: '/states', label: 'States' },
+              { href: '/legislators', label: 'Legislators' },
+              { href: '/news', label: 'News' },
+              { href: '/trends', label: 'Trends' },
+            ]}
+          />
+          <NavDropdown
+            label="Learn"
+            items={[
+              { href: '/guides', label: 'Guides' },
+              { href: '/about', label: 'About' },
+            ]}
+          />
+        </>
+      )}
       {/* Hidden only inside the workspace: asking an organization for a
           donation while it reviews its own campaign reports is the wrong
           moment, but on the public site it is the same ask as for anyone. */}
@@ -84,7 +92,7 @@ export function MainNav({ user, isOrg }: { user: User | null; isOrg: boolean }) 
           Donate
         </a>
       )}
-      <UserMenu user={user} />
+      <UserMenu user={user} inWorkspace={inWorkspace} />
     </nav>
   );
 }
