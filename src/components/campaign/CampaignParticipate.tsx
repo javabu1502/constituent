@@ -203,23 +203,6 @@ export function CampaignParticipate({
   // the delivery path ships; state-only campaigns never see these fields.
   const cwcFields = CWC_ENABLED && campaign.target_level !== 'state';
 
-  // AddressAutocomplete keeps its own copy of the four fields and reports
-  // through an effect, so the callback has to be stable or it re-fires every
-  // render. initialAddress seeds it once.
-  const initialAddressForPicker = useMemo(
-    () => ({ street, city, state, zip }),
-    // Seed only. Re-creating this on every keystroke would fight the picker.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [],
-  );
-  const handleAddressChange = useCallback((a: { street: string; city: string; state: string; zip: string }) => {
-    setStreet(a.street);
-    setCity(a.city);
-    setState(a.state);
-    setZip(a.zip);
-    setStreetWarning(false);
-    setStreetWarningAcked(false);
-  }, []);
   const [prefix, setPrefix] = useState('');
   // Org campaigns collect email (with notice) so the campaign can re-engage
   // participants when the bill advances. Official weigh-ins stay email-free.
@@ -262,6 +245,26 @@ export function CampaignParticipate({
   // campus building, or PO Box; the person can edit it or go ahead.
   const [streetWarning, setStreetWarning] = useState(false);
   const [streetWarningAcked, setStreetWarningAcked] = useState(false);
+  // Must sit below the four address fields and the warning flags: the memo
+  // body runs during render, so declaring it above them read a const inside
+  // its temporal dead zone and threw on every campaign page.
+  //
+  // AddressAutocomplete keeps its own copy of the fields and reports through
+  // an effect, so the callback has to be stable or it re-fires every render.
+  const initialAddressForPicker = useMemo(
+    () => ({ street, city, state, zip }),
+    // Seed only. Re-creating this on every keystroke would fight the picker.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [],
+  );
+  const handleAddressChange = useCallback((a: { street: string; city: string; state: string; zip: string }) => {
+    setStreet(a.street);
+    setCity(a.city);
+    setState(a.state);
+    setZip(a.zip);
+    setStreetWarning(false);
+    setStreetWarningAcked(false);
+  }, []);
   // The form's submit button sits well below its error slot, so an error set
   // on submit renders off screen and the click reads as "nothing happened".
   const formErrorRef = useRef<HTMLDivElement | null>(null);
