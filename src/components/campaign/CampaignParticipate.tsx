@@ -1,7 +1,8 @@
 'use client';
 
-import { useState, useEffect, useMemo, useRef } from 'react';
+import { useState, useEffect, useMemo, useRef, useCallback } from 'react';
 import Link from 'next/link';
+import { AddressAutocomplete } from '@/components/ui/AddressAutocomplete';
 import { createClient } from '@/lib/supabase/client';
 import { trackEvent } from '@/lib/analytics';
 import type { Campaign } from '@/lib/types';
@@ -201,6 +202,24 @@ export function CampaignParticipate({
   // Collected up front once the flag is on so the payload is complete when
   // the delivery path ships; state-only campaigns never see these fields.
   const cwcFields = CWC_ENABLED && campaign.target_level !== 'state';
+
+  // AddressAutocomplete keeps its own copy of the four fields and reports
+  // through an effect, so the callback has to be stable or it re-fires every
+  // render. initialAddress seeds it once.
+  const initialAddressForPicker = useMemo(
+    () => ({ street, city, state, zip }),
+    // Seed only. Re-creating this on every keystroke would fight the picker.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [],
+  );
+  const handleAddressChange = useCallback((a: { street: string; city: string; state: string; zip: string }) => {
+    setStreet(a.street);
+    setCity(a.city);
+    setState(a.state);
+    setZip(a.zip);
+    setStreetWarning(false);
+    setStreetWarningAcked(false);
+  }, []);
   const [prefix, setPrefix] = useState('');
   // Org campaigns collect email (with notice) so the campaign can re-engage
   // participants when the bill advances. Official weigh-ins stay email-free.
@@ -1334,72 +1353,27 @@ export function CampaignParticipate({
               className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-surface dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
             />
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-              {t.emailFollowUpNote(campaign.org_name || t.organizerFallback)}
+              {/* A city application is not a bill, and there is no bill
+                  number to move. */}
+              {t.emailFollowUpNote(
+                campaign.org_name || t.organizerFallback,
+                campaign.target_level === 'local'
+                  ? campaign.language === 'es'
+                    ? 'esta solicitud'
+                    : 'this application'
+                  : undefined,
+              )}
             </p>
           </div>
         )}
 
-        <div>
-          <label htmlFor="participate-street" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-            {t.streetAddress} <span className="text-red-500">*</span>
-          </label>
-          <input
-            id="participate-street"
-            type="text"
-            value={street}
-            onChange={(e) => { setStreet(e.target.value); setStreetWarning(false); setStreetWarningAcked(false); }}
-            placeholder={t.streetPlaceholder}
-            className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-surface dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
-          />
-        </div>
+        {/* The signup form has had address autocomplete all along; this step
+            never got it, so people retyped a street, a city, a state and a
+            ZIP by hand to find their own officials. Falls back to those same
+            four fields on its own if Maps does not load. */}
+        <AddressAutocomplete initialAddress={initialAddressForPicker} label={t.streetAddress} onAddressChange={handleAddressChange} />
 
-        <div className="grid grid-cols-2 gap-3">
-          <div>
-            <label htmlFor="participate-city" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              {t.city} <span className="text-red-500">*</span>
-            </label>
-            <input
-              id="participate-city"
-              type="text"
-              value={city}
-              onChange={(e) => setCity(e.target.value)}
-              placeholder={t.city}
-              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-surface dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
-            />
-          </div>
-          <div>
-            <label htmlFor="participate-state" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              {t.state} <span className="text-red-500">*</span>
-            </label>
-            <select
-              id="participate-state"
-              value={state}
-              onChange={(e) => setState(e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-surface dark:bg-gray-700 text-gray-900 dark:text-white"
-            >
-              <option value="">{t.selectState}</option>
-              {US_STATES.map((s) => (
-                <option key={s.code} value={s.code}>{s.name}</option>
-              ))}
-            </select>
-          </div>
-        </div>
 
-        <div>
-          <label htmlFor="participate-zip" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-            {t.zip} <span className="text-red-500">*</span>
-          </label>
-          <input
-            id="participate-zip"
-            type="text"
-            inputMode="numeric"
-            value={zip}
-            onChange={(e) => setZip(e.target.value)}
-            placeholder="12345"
-            maxLength={10}
-            className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-surface dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
-          />
-        </div>
 
         <div className="p-3 bg-purple-50 dark:bg-purple-900/30 border border-purple-200 dark:border-purple-700 rounded-xl">
           <p className="text-xs text-purple-700 dark:text-purple-300">
