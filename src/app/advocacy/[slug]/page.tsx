@@ -54,8 +54,20 @@ export default async function LocalActionPage({ params }: PageProps) {
         <p className="text-sm leading-relaxed text-gray-700 dark:text-gray-300">{a.status}</p>
       </div>
 
+      {a.stance !== 'neutral' && a.stanceOwner && (
+        <p className="mt-4 text-sm text-gray-600 dark:text-gray-400 max-w-[62ch]">
+          This page carries the position of {a.stanceOwner}. My Democracy does not take a side on local applications.
+          The facts below come from the city record, and the case for the application is included.
+        </p>
+      )}
+
       <section className="mt-8">
-        <LocalComment caseNumber={a.caseNumber} projectName={a.projectName} plannerEmail={a.plannerEmail} />
+        <LocalComment
+          caseNumber={a.caseNumber}
+          projectName={a.projectName}
+          plannerEmail={a.plannerEmail}
+          stance={a.stance}
+        />
       </section>
 
       <section className="mt-12">
@@ -98,9 +110,11 @@ export default async function LocalActionPage({ params }: PageProps) {
       </section>
 
       <section className="mt-12">
-        <h2 className="label mb-3 border-t border-gray-900 dark:border-gray-600 pt-6">Both cases</h2>
+        <h2 className="label mb-3 border-t border-gray-900 dark:border-gray-600 pt-6">What each side says</h2>
         <p className="text-sm text-gray-600 dark:text-gray-400 mb-5 max-w-[62ch]">
-          We do not take a position on this application. Here is what each side says.
+          {a.stance === 'neutral'
+            ? 'We do not take a position on this application. Here is what each side says.'
+            : 'The comment above is written to oppose the application. The case for it is here too, so you can read both before you decide what to send.'}
         </p>
         <div className="grid sm:grid-cols-2 gap-5">
           <div className="p-4 border border-rule dark:border-gray-700">

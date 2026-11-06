@@ -19,12 +19,16 @@ export function LocalComment({
   caseNumber,
   projectName,
   plannerEmail,
+  stance: fixedStance = 'neutral',
 }: {
   caseNumber: string;
   projectName: string;
   plannerEmail: string;
+  /** Not 'neutral' pins the position and hides the picker. */
+  stance?: 'oppose' | 'support' | 'neutral';
 }) {
-  const [stance, setStance] = useState<'support' | 'oppose' | 'questions' | ''>('');
+  const [pickedStance, setStance] = useState<'support' | 'oppose' | 'questions' | ''>('');
+  const stance = fixedStance === 'neutral' ? pickedStance : fixedStance;
   const [body, setBody] = useState('');
   const [name, setName] = useState('');
   const [place, setPlace] = useState('');
@@ -64,10 +68,12 @@ export function LocalComment({
     <div className="border border-gray-900 dark:border-gray-300 p-5">
       <p className="label mb-2">Write your comment</p>
       <p className="text-sm text-gray-600 dark:text-gray-400 mb-5 max-w-[62ch]">
-        This builds a comment stamped with the case number so the city files it against the right application. You
-        send it yourself. Nothing leaves this page.
+        {fixedStance === 'oppose'
+          ? 'This builds a comment opposing the application, stamped with the case number so the city files it against the right one. The words are yours. You send it yourself, and nothing leaves this page.'
+          : 'This builds a comment stamped with the case number so the city files it against the right application. You send it yourself. Nothing leaves this page.'}
       </p>
 
+      {fixedStance === 'neutral' && (
       <fieldset className="mb-4">
         <legend className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
           Your position <span className="font-normal text-gray-500 dark:text-gray-400">(optional)</span>
@@ -99,6 +105,7 @@ export function LocalComment({
           ))}
         </div>
       </fieldset>
+      )}
 
       <label htmlFor="comment-body" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5">
         What do you want them to know?

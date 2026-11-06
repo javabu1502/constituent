@@ -45,6 +45,14 @@ export interface LocalAction {
   requests: string[];
   /** The case planner. Comments quoting the case number file against it. */
   plannerEmail: string;
+  /**
+   * 'oppose' or 'support' makes the page one-way, the way an advocacy
+   * campaign is. 'neutral' offers both and suggests nothing, the way an
+   * official weigh-in does.
+   */
+  stance: 'oppose' | 'support' | 'neutral';
+  /** Whose position it is. Required whenever stance is not neutral. */
+  stanceOwner?: string;
   changes: LocalDesignationChange[];
   deciders: LocalDecider[];
   /** What has already happened, newest last. */
@@ -77,6 +85,8 @@ export const LOCAL_ACTIONS: LocalAction[] = [
       'A Zoning Map Amendment placing all 329.23 acres in a Specific Plan District (SPD).',
     ],
     plannerEmail: 'gilbertn@reno.gov',
+    stance: 'oppose',
+    stanceOwner: 'North Valleys residents organizing against the application',
     changes: [
       { label: 'Industrial', from: '75.95 acres', to: '156.80 acres', note: 'Roughly double the industrial land on the site today.' },
       { label: 'Parks, Greenways and Open Space', from: '93.09 acres', to: '172.43 acres', note: 'Also roughly doubles.' },

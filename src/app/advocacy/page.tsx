@@ -30,7 +30,7 @@ export default function AdvocacyPage() {
       </h1>
       <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300 max-w-[62ch] mb-10">
         Zoning, land use and other local decisions, while they are still open to comment. Each one lays out what is
-        proposed, what each side says, and who takes the vote. We do not take a position.
+        proposed, what each side says, and who takes the vote.
       </p>
 
       {LOCAL_ACTIONS.length === 0 ? (
