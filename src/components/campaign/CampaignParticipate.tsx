@@ -1077,7 +1077,10 @@ export function CampaignParticipate({
                 </div>
               ))}
             </div>
-            <div className="flex gap-2">
+            {/* The box and its buttons were one flex row, so on a phone the
+                textarea kept about a third of the width and showed two words
+                a line while the person was being asked to tell a story. */}
+            <div className="space-y-2">
               <textarea
                 aria-label={t.chatPlaceholder}
                 value={chatInput}
@@ -1089,15 +1092,19 @@ export function CampaignParticipate({
                   }
                 }}
                 placeholder={t.chatPlaceholder}
-                rows={2}
+                rows={4}
                 disabled={chatStreaming}
-                className="flex-1 px-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 resize-none bg-surface dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 text-sm"
+                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 resize-y min-h-[6rem] bg-surface dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 text-sm"
               />
-              <button type="button" onClick={() => setChatInput(t.ratherNotSayInput)} disabled={chatStreaming} className="self-end text-xs text-gray-500 dark:text-gray-400 underline whitespace-nowrap pb-3">{t.ratherNotSay}</button>
-              <MicButton text={chatInput} setText={setChatInput} disabled={chatStreaming} className="self-end" lang={campaign.language === 'es' ? 'es-US' : 'en-US'} />
-              <Button onClick={() => void sendChat()} isLoading={chatStreaming} className="self-end">
-                {t.send}
-              </Button>
+              <div className="flex items-center justify-between gap-2">
+                <button type="button" onClick={() => setChatInput(t.ratherNotSayInput)} disabled={chatStreaming} className="text-xs text-gray-500 dark:text-gray-400 underline whitespace-nowrap">{t.ratherNotSay}</button>
+                <div className="flex items-center gap-2">
+                  <MicButton text={chatInput} setText={setChatInput} disabled={chatStreaming} lang={campaign.language === 'es' ? 'es-US' : 'en-US'} />
+                  <Button onClick={() => void sendChat()} isLoading={chatStreaming}>
+                    {t.send}
+                  </Button>
+                </div>
+              </div>
             </div>
             <div className="pt-2 border-t border-gray-100 dark:border-gray-700">
               <Button
