@@ -320,15 +320,6 @@ Draft the core message.`;
         body = '';
         continue;
       }
-      // A dash used to throw the draft away and regenerate, which doubled the
-      // wait on a draft that was otherwise finished, and on a slow day spent
-      // the three-attempt budget and returned a 502 after a minute. deDash
-      // turns them into commas, which is the house style anyway, so the fix
-      // is deterministic and free. Logged so the prompt can be judged on how
-      // often it still reaches for one.
-      if (/[\u2014\u2013]/.test(rawBody)) {
-        console.log('[generate-core] draft contained a dash; rewritten rather than regenerated');
-      }
       body = deDash(rawBody);
       if (!body || body.length < 40) continue;
       if (officialStance) {
@@ -343,7 +334,11 @@ Draft the core message.`;
           continue;
         }
       }
-      const cadence = detectAiCadence(rawBody);
+      // On the cleaned body, not the raw one. deDash has already turned the
+      // dashes into commas, and a dash counts as a cadence tell, so checking
+      // the raw text sent almost every draft back for a rewrite it did not
+      // need: the model reaches for a dash most times it writes a paragraph.
+      const cadence = detectAiCadence(body);
       if (attempt === 0 && cadence.length > 0) {
         correction = `YOUR PREVIOUS DRAFT used machine-writing shapes: ${cadence.slice(0, 3).map((c) => `"${c}"`).join(', ')}. Rewrite in flat declarative sentences with none of them.`;
         rejects.push(`attempt ${attempt}: ${correction.slice(0, 120)}`);
