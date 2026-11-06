@@ -53,13 +53,6 @@ export default async function LocalActionPage({ params }: PageProps) {
         <p className="text-sm leading-relaxed text-gray-700 dark:text-gray-300">{a.status}</p>
       </div>
 
-      {a.stance !== 'neutral' && a.stanceOwner && (
-        <p className="mt-4 text-sm text-gray-600 dark:text-gray-400 max-w-[62ch]">
-          This page carries the position of {a.stanceOwner}. My Democracy does not take a side on local applications.
-          The facts below come from the city record and the public notice for the case.
-        </p>
-      )}
-
       {a.campaignSlug && (
         <section className="mt-8 border border-gray-900 dark:border-gray-300 p-5">
           <p className="label mb-2">Write your comment</p>
