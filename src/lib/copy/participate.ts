@@ -39,7 +39,10 @@ const en = {
   draftFailed: 'We could not draft your message. You can write it yourself below, or try again.',
 
   // Guided chat (compose step)
-  guideGreeting: (headline: string) => `Hi. I’m here to help you say why this matters to you, so your message carries your own experience. There is no rush, and you can skip anything.\n\nTo start: what is your connection to "${headline}", or what has happened that makes you care about it?`,
+  // Asks for something that happened, not for a feeling. "Why do you care"
+  // invites "because it's important", which is the one answer a letter cannot
+  // use.
+  guideGreeting: (headline: string) => `Hi. I’m here to help you put your own experience into this message. There is no rush, and you can skip anything.\n\nTo start: how does "${headline}" touch you? Where you live, what you have seen, what it would change.`,
   chatPlaceholder: 'Share as much or as little as you like…',
   send: 'Send',
   ratherNotSay: 'Rather not say',
@@ -169,7 +172,7 @@ const es: ParticipateCopy = {
   redraft: 'Redactar de nuevo',
   draftFailed: 'No pudimos redactar su mensaje. Puede escribirlo usted mismo abajo o intentarlo de nuevo.',
 
-  guideGreeting: (headline: string) => `Hola. Estoy aquí para ayudarle a decir por qué este tema le importa, para que su mensaje lleve su propia experiencia. No hay prisa, y puede saltarse lo que quiera.\n\nPara empezar: ¿cuál es su relación con "${headline}", o qué ha pasado que le hace importarle?`,
+  guideGreeting: (headline: string) => `Hola. Estoy aquí para ayudarle a poner su propia experiencia en este mensaje. No hay prisa, y puede saltarse lo que quiera.\n\nPara empezar: ¿cómo le afecta "${headline}"? Dónde vive, qué ha visto, qué cambiaría.`,
   chatPlaceholder: 'Comparta tanto o tan poco como quiera…',
   send: 'Enviar',
   ratherNotSay: 'Prefiero no decirlo',
