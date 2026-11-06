@@ -1244,7 +1244,8 @@
           "termEnd": "2026",
           "sourceUrl": "https://www.reno.gov/government/city-council/",
           "verifiedAt": "2026-09-28",
-          "unverified": false
+          "unverified": false,
+          "contactFormNote": "This opens the Council's shared public comment form, which every seat uses. Reno does not publish individual email addresses for council members. Name the member you are writing to in the form, and include the case number."
         },
         {
           "name": "Kathleen Taylor",
@@ -1260,7 +1261,8 @@
           "termEnd": "2028",
           "sourceUrl": "https://www.reno.gov/government/city-council/",
           "verifiedAt": "2026-09-28",
-          "unverified": false
+          "unverified": false,
+          "contactFormNote": "This opens the Council's shared public comment form, which every seat uses. Reno does not publish individual email addresses for council members. Name the member you are writing to in the form, and include the case number."
         },
         {
           "name": "Naomi Duerr",
@@ -1276,7 +1278,8 @@
           "termEnd": "2026",
           "sourceUrl": "https://www.reno.gov/government/city-council/",
           "verifiedAt": "2026-09-28",
-          "unverified": false
+          "unverified": false,
+          "contactFormNote": "This opens the Council's shared public comment form, which every seat uses. Reno does not publish individual email addresses for council members. Name the member you are writing to in the form, and include the case number."
         },
         {
           "name": "Miguel Martinez",
@@ -1292,7 +1295,8 @@
           "termEnd": "2028",
           "sourceUrl": "https://www.reno.gov/government/city-council/",
           "verifiedAt": "2026-09-28",
-          "unverified": false
+          "unverified": false,
+          "contactFormNote": "This opens the Council's shared public comment form, which every seat uses. Reno does not publish individual email addresses for council members. Name the member you are writing to in the form, and include the case number."
         },
         {
           "name": "Meghan Ebert",
@@ -1308,7 +1312,8 @@
           "termEnd": "2026",
           "sourceUrl": "https://www.reno.gov/government/city-council/",
           "verifiedAt": "2026-09-28",
-          "unverified": false
+          "unverified": false,
+          "contactFormNote": "This opens the Council's shared public comment form, which every seat uses. Reno does not publish individual email addresses for council members. Name the member you are writing to in the form, and include the case number."
         },
         {
           "name": "Devon Reese",
@@ -1324,7 +1329,8 @@
           "termEnd": "2028",
           "sourceUrl": "https://www.reno.gov/government/city-council/",
           "verifiedAt": "2026-09-28",
-          "unverified": false
+          "unverified": false,
+          "contactFormNote": "This opens the Council's shared public comment form, which every seat uses. Reno does not publish individual email addresses for council members. Name the member you are writing to in the form, and include the case number."
         },
         {
           "name": "Brandi Anderson",
@@ -1340,7 +1346,8 @@
           "termEnd": "2028",
           "sourceUrl": "https://www.reno.gov/government/city-council/",
           "verifiedAt": "2026-09-28",
-          "unverified": false
+          "unverified": false,
+          "contactFormNote": "This opens the Council's shared public comment form, which every seat uses. Reno does not publish individual email addresses for council members. Name the member you are writing to in the form, and include the case number."
         }
       ],
       "boundaries": "reno-wards"

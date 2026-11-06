@@ -18,6 +18,8 @@ export interface LocalSeat {
   email?: string | null;
   emailIsShared?: boolean;
   contactFormUrl?: string | null;
+  /** When the form is shared by a whole body rather than this seat. */
+  contactFormNote?: string | null;
   phone?: string | null;
   website?: string | null;
   photoUrl?: string | null;
@@ -190,6 +192,7 @@ export async function findLocalOfficials(stateCode: string, geo: LocalGeographie
         email: seat.unverified || termHasEnded(seat.termEnd) ? undefined : seat.email ?? undefined,
         website: seat.website ?? body.website ?? undefined,
         contactForm: seat.contactFormUrl ?? undefined,
+        contactFormNote: seat.contactFormNote ?? undefined,
         photoUrl: seat.photoUrl ?? undefined,
         office: `${body.name}${district ? `, ${district}` : ''}`,
         termEnd: seat.termEnd != null ? String(seat.termEnd) : undefined,

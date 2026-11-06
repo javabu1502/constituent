@@ -35,6 +35,8 @@ export interface Official {
   email?: string;
   website?: string;
   contactForm?: string;
+  /** Said plainly when the form is not that official's own. */
+  contactFormNote?: string;
   photoUrl?: string;
   office?: string;
   senateClass?: number;  // Senate class (1, 2, or 3)

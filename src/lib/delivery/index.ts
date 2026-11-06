@@ -137,7 +137,7 @@ export function determineDeliveryMethod(
       captchaBlocked,
       note: captchaBlocked
         ? 'Automated form delivery unavailable — please fill manually'
-        : 'Copy your message and paste into the contact form',
+        : official.contactFormNote || 'Copy your message and paste into the contact form',
     };
   }
 
