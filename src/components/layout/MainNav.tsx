@@ -38,6 +38,7 @@ export function MainNav({ user, isOrg }: { user: User | null; isOrg: boolean }) 
             menuWidthClass="w-60"
             items={[
               { href: '/issues', label: 'Weigh In' },
+              { href: '/advocacy', label: 'Advocacy' },
               { href: '/vote', label: 'Vote' },
               // Regulations (public comment) temporarily hidden, restore to bring it back.
               // { href: '/regulations', label: 'Regulations' },

@@ -3,6 +3,7 @@ import { createAdminClient } from '@/lib/supabase';
 import { US_STATES } from '@/lib/constants';
 import { getAllFederalLegislators } from '@/lib/legislators';
 import { POLICY_TOPICS } from '@/lib/policy-topics';
+import { LOCAL_ACTIONS } from '@/data/local-actions';
 import { slugsForState } from '@/lib/state-legislator-slug';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -20,6 +21,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // specific to land.
     ...POLICY_TOPICS.filter((t) => t.slug !== 'other').map((t) => ({
       url: `${baseUrl}/issues/${t.slug}`,
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
+    })),
+    { url: `${baseUrl}/advocacy`, changeFrequency: 'weekly', priority: 0.8 },
+    // A local case is the kind of thing people search for by name once a
+    // notice lands in their mailbox, so each gets its own address.
+    ...LOCAL_ACTIONS.map((a) => ({
+      url: `${baseUrl}/advocacy/${a.slug}`,
       changeFrequency: 'weekly' as const,
       priority: 0.7,
     })),
