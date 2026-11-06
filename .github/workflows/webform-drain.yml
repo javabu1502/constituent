@@ -14,7 +14,11 @@ concurrency:
 
 jobs:
   drain:
-    runs-on: ubuntu-latest
+    # Pinned, not latest. GitHub moved ubuntu-latest to 26.04 on 2026-11-06
+    # and Playwright 1.58.2 cannot install chromium there, so every run since
+    # has failed at the browser install and no queued webform message has been
+    # delivered. Move this forward when Playwright supports the newer image.
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
