@@ -53,6 +53,18 @@ const OPENERS_DEFAULT = [
   (t: string) => `I'm reaching out as someone you represent, because ${t} affects my family directly.`,
 ];
 
+// A planning commission or a council is not a legislature. The writer is a
+// resident of a place, their standing comes from where they live rather than
+// from a district, and the thing in front of the body is an application or an
+// ordinance rather than an issue they are lobbying on.
+const OPENERS_LOCAL = [
+  (t: string, place: string) => `I am a resident of ${place}, and I am writing about ${t}.`,
+  (t: string, place: string) => `I live in ${place}, and I want to be on the record about ${t}.`,
+  (t: string, place: string) => `As someone who lives in ${place}, I am writing to you about ${t}.`,
+  (t: string, place: string) => `I am writing about ${t}. My home is in ${place}.`,
+  (t: string, place: string) => `My household is in ${place}, and ${t} affects us directly.`,
+];
+
 const OPENERS_COMMITTEE = [
   (c: string, t: string) => `As a member of the ${c}, you are one of the few people deciding what happens to ${t}.`,
   (c: string, t: string) => `You sit on the ${c}, which means ${t} is in your hands before it reaches anyone else.`,
@@ -197,6 +209,9 @@ export function constituentLine(
   city: string,
   stateCode: string,
 ): string | null {
+  // Local openers name the place in the first sentence, so a separate
+  // standing line would say it twice.
+  if (official.level === 'local') return null;
   if (official.level !== 'state') return null;
   const district = (official.district || '').trim();
   if (district) {
@@ -278,7 +293,17 @@ export function buildEnvelope(
     } else if ((opts.stageGoal === 'floor_house' || opts.stageGoal === 'floor_senate') && !isNonVotingDelegate) {
       opener = pick(OPENERS_FLOOR)(target);
     } else {
-      opener = opts.coreOpening?.trim() || pick(isExecutive || isNonVotingDelegate ? OPENERS_EXECUTIVE : OPENERS_DEFAULT)(target);
+      if (official.level === 'local') {
+        // Where they live is the whole of their standing here, so it goes in
+        // the first sentence rather than in a signature block.
+        const place =
+          [[opts.city, opts.stateCode].filter(Boolean).join(', '), opts.zip].filter(Boolean).join(' ') ||
+          opts.stateCode ||
+          'this city';
+        opener = pick(OPENERS_LOCAL)(target, place);
+      } else {
+        opener = opts.coreOpening?.trim() || pick(isExecutive || isNonVotingDelegate ? OPENERS_EXECUTIVE : OPENERS_DEFAULT)(target);
+      }
     }
 
     // Closers: committee asks stay pooled (they reference the committee);

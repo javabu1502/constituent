@@ -95,3 +95,17 @@ describe('CWC-bound drafts', () => {
     expect(body).not.toMatch(/Reno, NV/);
   });
 });
+
+describe('local bodies are not legislatures', () => {
+  const planner = {
+    id: 'case-contact', name: 'Reno Planning Commission', title: 'Case comments',
+    level: 'local' as const, party: 'Nonpartisan', state: 'NV',
+  };
+  it('says nothing in the standing line, because the opener names the place', () => {
+    expect(constituentLine(planner, 'Reno', 'NV')).toBeNull();
+  });
+  it('still gives state legislators their district line', () => {
+    const senator = { ...planner, level: 'state' as const, chamber: 'upper' as const, district: '15' };
+    expect(constituentLine(senator, 'Reno', 'NV')).toBe('I am a constituent in Senate District 15.');
+  });
+});
