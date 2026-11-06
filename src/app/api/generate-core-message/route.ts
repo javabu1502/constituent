@@ -27,6 +27,10 @@ import {
 } from '@/lib/message-quality';
 
 export const runtime = 'nodejs';
+// Drafting is one model call of roughly twelve seconds, twice if the first
+// reply comes back as prose instead of JSON. Stated rather than inherited, so
+// a change to the platform default cannot quietly cut a draft off mid-write.
+export const maxDuration = 60;
 
 /**
  * Message-first flow, pass one of one: draft the constituent's CORE message —
@@ -293,8 +297,8 @@ Draft the core message.`;
     let correction = '';
     // Why each attempt was rejected, so a 502 in the logs says what happened.
     const rejects: string[] = [];
-    // Three attempts: a dash retry plus one substantive correction used to
-    // exhaust the budget and 502 (10-13 quality run).
+    // Three attempts. They are for a model that returned prose instead of
+    // JSON, or narrated its own edit. Punctuation is not worth an attempt.
     for (let attempt = 0; attempt < 3; attempt++) {
       const rawOut = await callClaude(correction ? `${system}\n\n${correction}` : system, user2, original ? 2200 : 1400);
       out = extractJSON(rawOut) as CoreOut;
@@ -316,11 +320,14 @@ Draft the core message.`;
         body = '';
         continue;
       }
-      if (attempt === 0 && /[\u2014\u2013]/.test(rawBody)) {
-        correction = 'Your previous draft used dashes. Return the same JSON object again with every dash removed: end the sentence and start a new one instead. Return ONLY the JSON, no commentary.';
-        rejects.push(`attempt ${attempt}: ${correction.slice(0, 120)}`);
-        body = '';
-        continue;
+      // A dash used to throw the draft away and regenerate, which doubled the
+      // wait on a draft that was otherwise finished, and on a slow day spent
+      // the three-attempt budget and returned a 502 after a minute. deDash
+      // turns them into commas, which is the house style anyway, so the fix
+      // is deterministic and free. Logged so the prompt can be judged on how
+      // often it still reaches for one.
+      if (/[\u2014\u2013]/.test(rawBody)) {
+        console.log('[generate-core] draft contained a dash; rewritten rather than regenerated');
       }
       body = deDash(rawBody);
       if (!body || body.length < 40) continue;
