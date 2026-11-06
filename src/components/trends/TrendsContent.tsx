@@ -315,7 +315,11 @@ export function TrendsContent() {
       {/* Activity over time */}
       {data?.dailyCounts && Object.keys(data.dailyCounts).length > 0 && (
         <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-5">
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Activity (Last 30 Days)</h2>
+          {/* The window follows the filter. Fixed at thirty days, the chart
+              drew the same bars for All Time and This Month. */}
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+            {period === 'week' ? 'Activity (last 7 days)' : period === 'month' ? 'Activity (last 30 days)' : 'Activity (last 90 days)'}
+          </h2>
           <DailyBarChart counts={data.dailyCounts} unit="message" />
         </div>
       )}

@@ -52,6 +52,8 @@ export async function GET(req: NextRequest) {
   const demoFilter = demoIds.length ? `campaign_id.is.null,campaign_id.not.in.(${demoIds.join(',')})` : null;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const excludeDemo = <T,>(q: T): T => (demoFilter ? (q as any).or(demoFilter) : q);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const inPeriod = <T,>(q: T): T => (since ? (q as any).gte('created_at', since) : q);
 
   // Build filtered query for issue rankings
   let issueQuery = excludeDemo(
@@ -69,13 +71,19 @@ export async function GET(req: NextRequest) {
   const fourteenDaysAgo = new Date(Date.now() - 14 * 24 * 60 * 60 * 1000).toISOString();
   const sevenDaysAgo = Date.now() - 7 * 24 * 60 * 60 * 1000;
 
+  // The activity chart covers the period on screen. It used to be fixed at
+  // thirty days, so All Time and This Month drew the same bars and moving
+  // between them looked like nothing had happened.
+  const ninetyDaysAgo = new Date(Date.now() - 90 * 24 * 60 * 60 * 1000).toISOString();
+  const chartSince = since ?? ninetyDaysAgo;
+
   // Recent messages respect the level/state filters (like the issue list) so
   // the activity chart and rising/cooling badges match what's on screen.
   let recentQuery = excludeDemo(
     admin
       .from('messages')
       .select('issue_area, created_at')
-      .gte('created_at', thirtyDaysAgo)
+      .gte('created_at', chartSince)
       .limit(10000)
   );
   if (level !== 'all') recentQuery = recentQuery.eq('legislator_level', level);
@@ -91,11 +99,15 @@ export async function GET(req: NextRequest) {
     { data: campaignData },
   ] = await Promise.all([
     issueQuery,
-    excludeDemo(admin.from('messages').select('*', { count: 'exact', head: true })),
+    // Messages sent, states represented and officials contacted are counts of
+    // the selected period. They ignored it before, so the six cards held the
+    // same numbers whichever button was pressed. "This month" keeps its own
+    // fixed window, because that is what it says.
+    inPeriod(excludeDemo(admin.from('messages').select('*', { count: 'exact', head: true }))),
     excludeDemo(admin.from('messages').select('*', { count: 'exact', head: true }).gte('created_at', thirtyDaysAgo)),
-    excludeDemo(admin.from('messages').select('advocate_state').limit(10000)),
+    inPeriod(excludeDemo(admin.from('messages').select('advocate_state').limit(10000))),
     recentQuery,
-    excludeDemo(admin.from('messages').select('legislator_name').limit(10000)),
+    inPeriod(excludeDemo(admin.from('messages').select('legislator_name').limit(10000))),
     admin.from('campaigns').select('story_count').eq('approval_status', 'approved').eq('is_official', true),
   ]);
 
@@ -182,7 +194,7 @@ export async function GET(req: NextRequest) {
   }
 
   return NextResponse.json(
-    { issues, stats, stateIssues, userState, dailyCounts, issueTrends, topStates },
+    { issues, stats, stateIssues, userState, dailyCounts, issueTrends, topStates, period, chartSince },
     {
       headers: {
         'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=600',
