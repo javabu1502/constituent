@@ -64,8 +64,8 @@ export default async function LocalActionPage({ params }: PageProps) {
         <section className="mt-8 border border-gray-900 dark:border-gray-300 p-5">
           <p className="label mb-2">Write your comment</p>
           <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 max-w-[62ch]">
-            The guide asks what this means to you, drafts the comment in your words, and you edit every line before it
-            goes anywhere. The same flow the campaigns on this site use.
+            Answer a few questions about what this means to you. You get a draft in your own words, and you edit
+            every line before it goes anywhere.
           </p>
           <Link
             href={`/campaign/${a.campaignSlug}`}
