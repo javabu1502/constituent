@@ -53,6 +53,14 @@ export interface LocalAction {
   stance: 'oppose' | 'support' | 'neutral';
   /** Whose position it is. Required whenever stance is not neutral. */
   stanceOwner?: string;
+  /**
+   * Points a commenter can attach, each with where it comes from. A comment
+   * on a land-use case enters a public record, so a point a resident did not
+   * check is a liability to them, not just to us.
+   */
+  talkingPoints: { point: string; basis: string; source?: LocalActionSource }[];
+  /** A few short questions. The answers are the comment. */
+  interview: { id: string; question: string; hint: string }[];
   changes: LocalDesignationChange[];
   deciders: LocalDecider[];
   /** What has already happened, newest last. */
@@ -87,6 +95,56 @@ export const LOCAL_ACTIONS: LocalAction[] = [
     plannerEmail: 'gilbertn@reno.gov',
     stance: 'oppose',
     stanceOwner: 'North Valleys residents organizing against the application',
+    talkingPoints: [
+      {
+        point:
+          'The Hawk Fire burned 15,085 acres across the North Valleys starting August 22, 2026, and destroyed 47 homes, which the state insurance commission recorded as the most destructive wildfire in Nevada. Horizon Hills was among the neighborhoods evacuated.',
+        basis: 'News coverage',
+        source: { label: 'KUNR', url: 'https://www.kunr.org/hawk-fire' },
+      },
+      {
+        point:
+          'Residents of Horizon Hills describe a single route in and out, which congested during that evacuation while emergency vehicles were trying to get in.',
+        basis: 'Residents’ account, not a city finding',
+      },
+      {
+        point:
+          'The application roughly doubles the industrial land on the site, from 75.95 acres to 156.80 acres.',
+        basis: 'The city’s public notice for the case',
+      },
+      {
+        point:
+          'Industrial development of that size puts truck and commute traffic on the same roads the neighborhood uses to leave in an emergency.',
+        basis: 'A concern to raise, not an established finding',
+      },
+      {
+        point:
+          'The application removes the designations that currently allow housing here: 72.72 acres of Large-Lot Neighborhood and 75.95 acres of Suburban Mixed-Use.',
+        basis: 'The city’s public notice for the case',
+      },
+      {
+        point:
+          'A Specific Plan District lets the city write conditions for this site. Conditions on evacuation routing, road capacity and fire access could be attached to any approval.',
+        basis: 'What an SPD designation allows',
+      },
+    ],
+    interview: [
+      {
+        id: 'who',
+        question: 'Where do you live, and how long have you been there?',
+        hint: 'A planner weighs a comment differently when they can see you live with the result.',
+      },
+      {
+        id: 'experience',
+        question: 'What did you see or go through during the Hawk Fire?',
+        hint: 'Skip if you were not here. Your own account carries more than any statistic.',
+      },
+      {
+        id: 'ask',
+        question: 'What do you want the Planning Commission to do?',
+        hint: 'Deny it, delay it, or approve it only with specific conditions.',
+      },
+    ],
     changes: [
       { label: 'Industrial', from: '75.95 acres', to: '156.80 acres', note: 'Roughly double the industrial land on the site today.' },
       { label: 'Parks, Greenways and Open Space', from: '93.09 acres', to: '172.43 acres', note: 'Also roughly doubles.' },
@@ -99,7 +157,7 @@ export const LOCAL_ACTIONS: LocalAction[] = [
         body: 'Reno Planning Commission',
         role: 'Holds the public hearing on the application and makes a recommendation. This is the body to address if you want your position on the record.',
         contact: 'gilbertn@reno.gov · 775-334-2698',
-        contactUrl: 'https://www.reno.gov/government/boards-commissions/planning-commission',
+        contactUrl: 'https://www.reno.gov/PCPublicComment',
       },
       {
         body: 'Reno City Council',
@@ -122,19 +180,21 @@ export const LOCAL_ACTIONS: LocalAction[] = [
     },
     caseAgainst: {
       point:
-        'The Horizon Hills neighborhood has one route in and out. During the Hawk Fire in August 2026 that route congested while residents were leaving and emergency vehicles were arriving. Roughly doubling industrial acreage next to that neighborhood adds truck and commute traffic to the same road, in an area that has already burned.',
-      source: { label: 'This Is Reno, on Hawk Fire road closures and evacuation', url: 'https://thisisreno.com/2026/08/photos-hawk-fire-updates-are-limited-sunday-morning/' },
+        'Horizon Hills was evacuated during the Hawk Fire in August 2026 and residents could not return for days. Residents describe one route in and out, which congested as people left. Roughly doubling industrial acreage next to that neighborhood would add truck and commute traffic to the same road, in an area that has already burned once.',
+      source: { label: 'KUNR, on the Hawk Fire and the Horizon Hills evacuation', url: 'https://www.kunr.org/hawk-fire' },
     },
     context: {
       heading: 'Why evacuation keeps coming up',
       body:
-        'The Hawk Fire started on August 22, 2026 and burned about 10,500 acres across the North Valleys. It destroyed 47 homes, which the state insurance commission recorded as the most destructive wildfire in Nevada. Horizon Hills was among the neighborhoods evacuated on the first day.',
+        'The Hawk Fire started on August 22, 2026 and burned 15,085 acres across the North Valleys. It destroyed 47 homes and one commercial building, which the state insurance commission recorded as the most destructive wildfire in Nevada. Horizon Hills was evacuated, and residents were not allowed back until the following Wednesday afternoon.',
       source: { label: 'KUNR, Hawk Fire coverage', url: 'https://www.kunr.org/hawk-fire' },
     },
     howToComment: [
       'Email the city planner on the case at gilbertn@reno.gov and include the case number LDC25-00057 so your comment is filed with the application.',
+      'Submit the city’s own public comment form at reno.gov/PCPublicComment, which goes to the Planning Commission directly.',
+      'Mail a letter to City of Reno Planning Commission, P.O. Box 1900, Reno, NV 89505. Put the case number on it.',
       'Read the application yourself at Onenv.us. Choose the Planning tab, enter LDC25-00057 in the Record Number field, then open Record Info and Attachments.',
-      'Speak at the Reno Planning Commission hearing once it is scheduled, or send written comment beforehand.',
+      'Speak at the Reno Planning Commission hearing once it is scheduled. Agendas are posted at reno.primegov.com.',
       'Contact your Reno City Council member, since the Council takes the final vote.',
     ],
     materials: { label: 'City of Reno planning records (Onenv.us)', url: 'https://onenv.us' },

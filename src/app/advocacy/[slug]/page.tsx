@@ -62,12 +62,7 @@ export default async function LocalActionPage({ params }: PageProps) {
       )}
 
       <section className="mt-8">
-        <LocalComment
-          caseNumber={a.caseNumber}
-          projectName={a.projectName}
-          plannerEmail={a.plannerEmail}
-          stance={a.stance}
-        />
+        <LocalComment action={a} />
       </section>
 
       <section className="mt-12">
