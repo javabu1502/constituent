@@ -578,6 +578,8 @@ export function CampaignParticipate({
         filtered = filtered.filter((o: Official) => o.level === 'federal');
       } else if (campaign.target_level === 'state') {
         filtered = filtered.filter((o: Official) => o.level === 'state');
+      } else if (campaign.target_level === 'local') {
+        filtered = filtered.filter((o: Official) => o.level === 'local');
       }
 
       // Stage targeting: only contact the officials who matter at this step

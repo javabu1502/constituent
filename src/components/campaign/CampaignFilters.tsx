@@ -15,7 +15,7 @@ interface Campaign {
   is_bill_specific?: boolean;
   bill_type?: string | null;
   bill_number?: string | null;
-  target_level?: 'federal' | 'state' | 'both' | null;
+  target_level?: 'federal' | 'state' | 'both' | 'local' | null;
   bill_state?: string | null;
   bill_ref?: string | null;
 }

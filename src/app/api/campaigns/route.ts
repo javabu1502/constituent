@@ -154,7 +154,10 @@ export async function POST(request: NextRequest) {
       description,
       language: language || 'en',
       // Actions carry the campaign's issue; it is set once on the parent.
-      issue_area: parent ? parent.issue_area : issue_area,
+      // NOT NULL in the database. The form only requires one when the
+      // campaign reaches Congress (it sets the Library of Congress topic), so
+      // everything else needs a fallback rather than a failed insert.
+      issue_area: parent ? parent.issue_area : issue_area || 'Other',
       issue_subtopic: parent ? parent.issue_subtopic : issue_subtopic || null,
       target_level: isStory ? 'federal' : target_level,
       // Stages inherit position and talking points from the parent unless

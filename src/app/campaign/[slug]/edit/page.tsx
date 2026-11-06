@@ -48,7 +48,7 @@ export default async function EditCampaignPage({
     // issue_subtopic when a category was chosen — reverse that mapping here.
     issueArea: campaign.issue_subtopic || campaign.issue_area || '',
     issueCategory: campaign.issue_subtopic ? campaign.issue_area ?? '' : '',
-    targetLevel: (campaign.target_level as 'federal' | 'state' | 'both') ?? 'federal',
+    targetLevel: (campaign.target_level as 'federal' | 'state' | 'both' | 'local') ?? 'federal',
     direction: (campaign.direction as 'support' | 'oppose' | null) ?? '',
     messageTemplate: campaign.message_template ?? '',
     talkingPointsCoverage: campaign.talking_points_coverage === 'fit' ? 'fit' : 'all',

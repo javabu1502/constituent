@@ -32,3 +32,18 @@ describe('billLevelAfterTargetChange', () => {
     expect(billLevelAfterTargetChange('state', '')).toBe('');
   });
 });
+
+describe('local targets', () => {
+  it('cannot cite a bill, because a council acts on applications and ordinances', () => {
+    expect(billLevelAllowed('local', 'federal')).toBe(false);
+    expect(billLevelAllowed('local', 'state')).toBe(false);
+  });
+  it('still allows no bill at all', () => {
+    expect(billLevelAllowed('local', '')).toBe(true);
+  });
+  it('drops a bill when the target changes to local', () => {
+    expect(billLevelAfterTargetChange('local', 'state')).toBe('');
+    expect(billLevelAfterTargetChange('local', 'federal')).toBe('');
+    expect(billLevelAfterTargetChange('local', '')).toBe('');
+  });
+});

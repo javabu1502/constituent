@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { LOCAL_ACTIONS, localActionBySlug } from '@/data/local-actions';
-import { LocalComment } from '@/components/advocacy/LocalComment';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -61,9 +60,21 @@ export default async function LocalActionPage({ params }: PageProps) {
         </p>
       )}
 
-      <section className="mt-8">
-        <LocalComment action={a} />
-      </section>
+      {a.campaignSlug && (
+        <section className="mt-8 border border-gray-900 dark:border-gray-300 p-5">
+          <p className="label mb-2">Write your comment</p>
+          <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 max-w-[62ch]">
+            The guide asks what this means to you, drafts the comment in your words, and you edit every line before it
+            goes anywhere. The same flow the campaigns on this site use.
+          </p>
+          <Link
+            href={`/campaign/${a.campaignSlug}`}
+            className="label-lg inline-block px-5 py-3 bg-purple-600 hover:bg-purple-700 text-white transition-colors"
+          >
+            Start writing
+          </Link>
+        </section>
+      )}
 
       <section className="mt-12">
         <h2 className="label mb-3 border-t border-gray-900 dark:border-gray-600 pt-6">What is being asked for</h2>

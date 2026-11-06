@@ -301,7 +301,8 @@ export interface Campaign {
   description: string;
   issue_area: string;
   issue_subtopic: string | null;
-  target_level: 'federal' | 'state' | 'both';
+  /** 'local' means a city or county body: a council, a planning commission. */
+  target_level: 'federal' | 'state' | 'both' | 'local';
   /** User/advocacy campaigns are directional (one way); null for neutral official weigh-ins + storytelling. */
   direction?: 'support' | 'oppose' | null;
   message_template: string | null;

@@ -117,7 +117,7 @@ export const createCampaignSchema = z.object({
   issue_area: z.string().max(200),
   issue_subtopic: z.string().max(200).nullish(),
   // Advocacy fields
-  target_level: z.enum(['federal', 'state', 'both']).optional(),
+  target_level: z.enum(['federal', 'state', 'both', 'local']).optional(),
   // Directional stance for advocacy campaigns (one way only, chosen at creation).
   direction: z.enum(['support', 'oppose']).optional(),
   message_template: z.string().max(2000).nullish(),

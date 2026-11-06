@@ -29,7 +29,7 @@ export interface CampaignEditInitial {
   description: string;
   issueArea: string;
   issueCategory: string;
-  targetLevel: 'federal' | 'state' | 'both';
+  targetLevel: 'federal' | 'state' | 'both' | 'local';
   direction: 'support' | 'oppose' | '';
   messageTemplate: string;
   talkingPointsCoverage?: 'all' | 'fit';
@@ -54,7 +54,7 @@ export function CampaignForm({
   const [language, setLanguage] = useState<'en' | 'es'>(edit?.initial.language ?? 'en');
   const [issueArea, setIssueArea] = useState(edit?.initial.issueArea ?? (searchParams.get('issue') || ''));
   const [issueCategory, setIssueCategory] = useState(edit?.initial.issueCategory ?? (searchParams.get('category') || ''));
-  const [targetLevel, setTargetLevel] = useState<'federal' | 'state' | 'both'>(edit?.initial.targetLevel ?? 'federal');
+  const [targetLevel, setTargetLevel] = useState<'federal' | 'state' | 'both' | 'local'>(edit?.initial.targetLevel ?? 'federal');
 
   // Narrow targeting: everyone at the level (default), specific officials,
   // or a party slice. Fixed at creation; committee actions use the committee
@@ -136,7 +136,7 @@ export function CampaignForm({
   const billLevelAllowed = (level: BillLevel): boolean => isBillLevelAllowed(targetLevel, level);
 
   /** Changing who we write to drops a bill that no longer belongs to them. */
-  const chooseTargetLevel = (level: 'federal' | 'state' | 'both') => {
+  const chooseTargetLevel = (level: 'federal' | 'state' | 'both' | 'local') => {
     setTargetLevel(level);
     if (billLevelAfterTargetChange(level, billLevel) !== billLevel) {
       setBillLevel('');
@@ -770,7 +770,7 @@ export function CampaignForm({
           Target Representatives <span className="text-red-500">*</span>
         </label>
         <div className="flex gap-3">
-          {(['federal', 'state', 'both'] as const).map((level) => (
+          {(['federal', 'state', 'both', 'local'] as const).map((level) => (
             <label
               key={level}
               className={`flex-1 text-center px-4 py-3 rounded-xl border-2 cursor-pointer transition-colors ${
