@@ -75,29 +75,29 @@ export function EmailCodeForm({
     setBusy(true);
     try {
       const captchaToken = await getToken();
+      // Our own route rather than signInWithOtp, because that sends through
+      // Supabase's mailer, which allows a couple of messages an hour across
+      // the whole project. With no password every sign-in needs an email, so
+      // that cap is the number of people who can get in. This sends the same
+      // code through Resend instead. Verifying it below is unchanged.
+      //
+      // One flow for both: an address with no account gets one, instead of a
+      // dead end telling someone to go to another page and type it again.
       const hasAddress = !!(address.street && address.city && address.state && address.zip);
-      const { error: authError } = await createClient().auth.signInWithOtp({
-        email: email.trim(),
-        options: {
-          // One flow for both. Someone who meant to sign in but never had an
-          // account gets one, instead of a dead end telling them to go to
-          // another page and type the same address again.
-          shouldCreateUser: true,
-          ...(captchaToken ? { captchaToken } : {}),
+      const res = await fetch('/api/auth/send-code', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: email.trim(),
           ...(mode === 'signup'
-            ? {
-                data: {
-                  full_name: name.trim(),
-                  ...(hasAddress
-                    ? { street: address.street, city: address.city, state: address.state, zip: address.zip }
-                    : {}),
-                },
-              }
+            ? { name: name.trim(), ...(hasAddress ? { address } : {}) }
             : {}),
-        },
+          ...(captchaToken ? { captchaToken } : {}),
+        }),
       });
-      if (authError) {
-        setError(authError.message);
+      if (!res.ok) {
+        const b = await res.json().catch(() => ({}));
+        setError(b.error || 'Could not send a code. Try again.');
         return;
       }
       setStage('code');
