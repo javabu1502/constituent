@@ -374,6 +374,12 @@ export interface Campaign {
     party?: 'D' | 'R' | 'I';
     chamber?: 'house' | 'senate' | 'both';
     level?: 'federal' | 'state';
+    /** Local campaigns: the body this is about, matched against Official.office.
+     *  "Local" otherwise means the city, the county and the school board. */
+    body?: string;
+    /** Local campaigns: how the address in recipient_email is labelled. */
+    contact_name?: string;
+    contact_title?: string;
   } | null;
 }
 

@@ -599,6 +599,32 @@ export function CampaignParticipate({
         filtered = filtered.filter((o: Official) => o.level === 'state');
       } else if (campaign.target_level === 'local') {
         filtered = filtered.filter((o: Official) => o.level === 'local');
+        // "Local" covers the city, the county commission and the school
+        // board. A rezoning is none of the county's business, so a campaign
+        // can name the body it is actually about. office reads
+        // "Reno City Council, Ward 4"; jurisdiction is stripped before this
+        // point, so the office string is what there is to match on.
+        const body = campaign.target_filter?.body;
+        if (body) {
+          filtered = filtered.filter((o: Official) => (o.office || '').toLowerCase().startsWith(body.toLowerCase()));
+        }
+      }
+
+      // A local case usually has one address that takes comments for the
+      // record, and it is not an elected official. It rides along as a
+      // recipient so the same message reaches the file and the people who
+      // vote on it.
+      if (campaign.target_level === 'local' && campaign.recipient_email) {
+        const caseContact: Official = {
+          id: `case-contact:${campaign.slug}`,
+          name: campaign.target_filter?.contact_name || 'Case comments',
+          title: campaign.target_filter?.contact_title || 'Goes into the case record',
+          level: 'local',
+          party: 'Nonpartisan',
+          state: campaign.bill_state || campaign.target_filter?.state || '',
+          email: campaign.recipient_email,
+        };
+        filtered = [caseContact, ...filtered.filter((o) => o.id !== caseContact.id)];
       }
 
       // Stage targeting: only contact the officials who matter at this step
