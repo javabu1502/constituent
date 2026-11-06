@@ -68,8 +68,6 @@ export interface LocalAction {
   /** What has already happened, newest last. */
   timeline: { date: string; event: string }[];
   status: string;
-  caseFor: { point: string; source: LocalActionSource };
-  caseAgainst: { point: string; source: LocalActionSource };
   context?: { heading: string; body: string; source: LocalActionSource };
   howToComment: string[];
   materials: LocalActionSource;
@@ -84,9 +82,9 @@ export const LOCAL_ACTIONS: LocalAction[] = [
     caseNumber: 'LDC25-00057',
     projectName: 'Seneca Hills Business Park',
     applicant: 'Visionary 2, LLC and Castello, LLC',
-    title: 'Rezoning 329 acres in the North Valleys',
+    title: '329 acres beside Horizon Hills could become warehouses',
     summary:
-      'An application would redesignate about 329 acres west of North Virginia Street as industrial land and open space, and place the whole site in a single Specific Plan District. Industrial acreage roughly doubles. Mapped parks and open space also roughly double. The designations that currently allow housing on the site are removed.',
+      'Four parcels of empty land west of North Virginia Street, about 329 acres, sit between the Horizon Hills neighborhood and the Union Pacific tracks. The applicant wants them rezoned for industry and open space, and has described the project as warehouse and office buildings. Much of that land is designated for housing today. Horizon Hills was evacuated in August 2026 when the Hawk Fire came through, and residents say the neighborhood has one road in and out.',
     location:
       'About 329.23 acres of undeveloped land north of Seneca Drive, south and west of the Union Pacific Railroad tracks, west of North Virginia Street.',
     parcels: ['082-180-77', '082-180-78', '082-083-10', '082-083-07'],
@@ -176,16 +174,6 @@ export const LOCAL_ACTIONS: LocalAction[] = [
     ],
     status:
       'The applicant neighborhood meeting has already happened. A Reno Planning Commission hearing date had not been published when this page was last checked. Comments sent to the planner go into the case record before that hearing.',
-    caseFor: {
-      point:
-        'The site sits next to the rail corridor and existing industrial land, and the applicant has described the project as warehouse and office buildings. The application also nearly doubles the acreage mapped as parks and open space, and a Specific Plan District lets the city attach conditions written for this specific site rather than applying generic zoning.',
-      source: { label: 'NVBEX, on the applicant’s filing', url: 'https://nevbex.com/2025/05/05/seneca-hills-business-park-reno/' },
-    },
-    caseAgainst: {
-      point:
-        'Horizon Hills was evacuated during the Hawk Fire in August 2026 and residents could not return for days. Residents describe one route in and out, which congested as people left. Roughly doubling industrial acreage next to that neighborhood would add truck and commute traffic to the same road, in an area that has already burned once.',
-      source: { label: 'KUNR, on the Hawk Fire and the Horizon Hills evacuation', url: 'https://www.kunr.org/hawk-fire' },
-    },
     context: {
       heading: 'Why evacuation keeps coming up',
       body:

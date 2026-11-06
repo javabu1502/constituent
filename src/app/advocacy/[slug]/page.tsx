@@ -56,7 +56,7 @@ export default async function LocalActionPage({ params }: PageProps) {
       {a.stance !== 'neutral' && a.stanceOwner && (
         <p className="mt-4 text-sm text-gray-600 dark:text-gray-400 max-w-[62ch]">
           This page carries the position of {a.stanceOwner}. My Democracy does not take a side on local applications.
-          The facts below come from the city record, and the case for the application is included.
+          The facts below come from the city record and the public notice for the case.
         </p>
       )}
 
@@ -113,41 +113,6 @@ export default async function LocalActionPage({ params }: PageProps) {
         <p className="mt-3 text-xs text-gray-500 dark:text-gray-400">
           Assessor parcel numbers: {a.parcels.join(', ')}.
         </p>
-      </section>
-
-      <section className="mt-12">
-        <h2 className="label mb-3 border-t border-gray-900 dark:border-gray-600 pt-6">What each side says</h2>
-        <p className="text-sm text-gray-600 dark:text-gray-400 mb-5 max-w-[62ch]">
-          {a.stance === 'neutral'
-            ? 'We do not take a position on this application. Here is what each side says.'
-            : 'The comment above is written to oppose the application. The case for it is here too, so you can read both before you decide what to send.'}
-        </p>
-        <div className="grid sm:grid-cols-2 gap-5">
-          <div className="p-4 border border-rule dark:border-gray-700">
-            <p className="label mb-2">The case for</p>
-            <p className="text-sm leading-relaxed text-gray-700 dark:text-gray-300">{a.caseFor.point}</p>
-            <a
-              href={a.caseFor.source.url}
-              target="_blank"
-              rel="noreferrer"
-              className="mt-3 inline-block text-xs text-purple-700 dark:text-purple-300 hover:underline"
-            >
-              {a.caseFor.source.label}
-            </a>
-          </div>
-          <div className="p-4 border border-rule dark:border-gray-700">
-            <p className="label mb-2">The case against</p>
-            <p className="text-sm leading-relaxed text-gray-700 dark:text-gray-300">{a.caseAgainst.point}</p>
-            <a
-              href={a.caseAgainst.source.url}
-              target="_blank"
-              rel="noreferrer"
-              className="mt-3 inline-block text-xs text-purple-700 dark:text-purple-300 hover:underline"
-            >
-              {a.caseAgainst.source.label}
-            </a>
-          </div>
-        </div>
       </section>
 
       {a.context && (
