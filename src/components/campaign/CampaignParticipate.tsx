@@ -617,17 +617,40 @@ export function CampaignParticipate({
       // record, and it is not an elected official. It rides along as a
       // recipient so the same message reaches the file and the people who
       // vote on it.
-      if (campaign.target_level === 'local' && campaign.recipient_email) {
-        const caseContact: Official = {
-          id: `case-contact:${campaign.slug}`,
-          name: campaign.target_filter?.contact_name || 'Case comments',
-          title: campaign.target_filter?.contact_title || 'Goes into the case record',
-          level: 'local',
-          party: 'Nonpartisan',
-          state: campaign.bill_state || campaign.target_filter?.state || '',
-          email: campaign.recipient_email,
-        };
-        filtered = [caseContact, ...filtered.filter((o) => o.id !== caseContact.id)];
+      if (campaign.target_level === 'local') {
+        const stateCode = campaign.bill_state || campaign.target_filter?.state || '';
+        const fixed: Official[] = [];
+        if (campaign.recipient_email) {
+          fixed.push({
+            id: `case-contact:${campaign.slug}`,
+            name: campaign.target_filter?.contact_name || 'Case comments',
+            title: campaign.target_filter?.contact_title || 'Goes into the case record',
+            level: 'local',
+            party: 'Nonpartisan',
+            state: stateCode,
+            email: campaign.recipient_email,
+          });
+        }
+        // Published addresses for a body the roster does not carry. Addressed
+        // by seat rather than by person, so a change of commissioner does not
+        // silently send mail to someone who left.
+        for (const r of campaign.target_filter?.recipients ?? []) {
+          fixed.push({
+            id: `fixed:${campaign.slug}:${r.email}`,
+            name: r.name,
+            title: r.title || '',
+            level: 'local',
+            party: 'Nonpartisan',
+            state: stateCode,
+            email: r.email,
+          });
+        }
+        if (fixed.length > 0) {
+          const ids = new Set(fixed.map((f) => f.id));
+          filtered = campaign.target_filter?.recipients_only
+            ? fixed
+            : [...fixed, ...filtered.filter((o) => !ids.has(o.id))];
+        }
       }
 
       // Stage targeting: only contact the officials who matter at this step

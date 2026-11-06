@@ -382,6 +382,14 @@ export interface Campaign {
     /** Local campaigns: how the address in recipient_email is labelled. */
     contact_name?: string;
     contact_title?: string;
+    /**
+     * Published addresses for a body that is not in the officials roster,
+     * e.g. a planning commission addressed by seat. Role addresses rather
+     * than people, so they survive a change of commissioner.
+     */
+    recipients?: { name: string; title?: string; email: string }[];
+    /** Write only to recipients + recipient_email, not to address-matched officials. */
+    recipients_only?: boolean;
   } | null;
 }
 
