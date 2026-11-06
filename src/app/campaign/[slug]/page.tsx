@@ -5,6 +5,8 @@ import { CampaignParticipate } from '@/components/campaign/CampaignParticipate';
 import { StorytellerFlow } from '@/components/campaign/StorytellerFlow';
 import { BillJourney } from '@/components/campaign/BillJourney';
 import { CampaignTalkingPoints } from '@/components/campaign/CampaignTalkingPoints';
+import Link from 'next/link';
+import { LOCAL_ACTIONS } from '@/data/local-actions';
 import { CopyLinkButton } from '@/components/campaign/CopyLinkButton';
 import { CampaignClosedNotice } from '@/components/campaign/CampaignClosedNotice';
 import { fetchBillCard } from '@/lib/congress-api';
@@ -219,6 +221,22 @@ export default async function CampaignPage({ params }: PageProps) {
           {campaign.description}
         </p>
 
+        {/* A local case has a background page: what is proposed, in a table,
+            with the record it came from. The campaign carries two talking
+            points, so the detail has to live somewhere a reader can reach. */}
+        {(() => {
+          const background = LOCAL_ACTIONS.find((a) => a.campaignSlug === campaign.slug);
+          if (!background) return null;
+          return (
+            <Link
+              href={`/advocacy/${background.slug}`}
+              className="mt-3 inline-flex items-center gap-1.5 text-sm text-purple-700 dark:text-purple-300 hover:underline"
+            >
+              What is being proposed, and who decides &rarr;
+            </Link>
+          );
+        })()}
+
         {/* Where do you stand? — both sides, visually equal, neither emphasized */}
         {campaign.is_official && campaign.case_for && campaign.case_against && (
           <div className="mt-6">
@@ -379,7 +397,13 @@ export default async function CampaignPage({ params }: PageProps) {
       <>
       {/* The campaign's contributed language, in the open (two-block model) */}
       {!isStory && campaign.message_template && (
-        <CampaignTalkingPoints template={campaign.message_template} accent={campaign.brand_color ?? null} />
+        <CampaignTalkingPoints
+          template={campaign.message_template}
+          {...(LOCAL_ACTIONS.some((a) => a.campaignSlug === campaign.slug)
+            ? {}
+            : { orgName: campaign.org_name ?? null })}
+          accent={campaign.brand_color ?? null}
+        />
       )}
 
       {/* Bill journey — parent campaigns show where the legislation stands */}

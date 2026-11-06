@@ -6,10 +6,13 @@
  */
 export function CampaignTalkingPoints({
   template,
+  orgName,
   accent,
   subtitle,
 }: {
   template: string;
+  /** Null drops the possessive: used where the byline already names the org. */
+  orgName?: string | null;
   accent?: string | null;
   subtitle?: string;
 }) {
@@ -18,10 +21,9 @@ export function CampaignTalkingPoints({
     <div className="bg-surface dark:bg-gray-800 rounded-2xl border border-rule dark:border-gray-700 p-6 sm:p-8 mb-6">
       <div className="flex items-center gap-2 mb-1">
         <span className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: color }} />
-        {/* Just "Talking points". The byline above already says whose
-            campaign this is, so possessive-ing the heading repeated the org
-            name twice on one screen. */}
-        <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Talking points</h2>
+        <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+          {orgName ? `${orgName}'s talking points` : 'Talking points'}
+        </h2>
       </div>
       <p className="text-xs text-gray-500 dark:text-gray-400 mb-4">
         {subtitle ??

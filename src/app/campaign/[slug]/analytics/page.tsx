@@ -469,6 +469,7 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
       {campaign.message_template && (
         <CampaignTalkingPoints
           template={campaign.message_template}
+          orgName={campaign.org_name ?? null}
           accent={campaign.brand_color ?? null}
           subtitle={
             'Your framing, side by side with reality: compare these points against "What constituents are saying" below — when their own words echo yours, the talking points are landing.'
