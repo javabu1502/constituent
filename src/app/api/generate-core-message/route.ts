@@ -295,11 +295,28 @@ Draft the core message.`;
     let out: CoreOut = null;
     let body = '';
     let correction = '';
+    // The best draft that cleared every integrity gate and failed only a
+    // style, length or frequency one. Those are worth a rewrite when there
+    // is time, and worth shipping when there is not: the person edits the
+    // draft before it goes anywhere, and a flawed draft they can fix beats
+    // an error after a minute of waiting.
+    let soft: { body: string; out: CoreOut } | null = null;
+    const keepSoft = (b: string, o: CoreOut) => {
+      if (!soft && b) soft = { body: b, out: o };
+    };
+    // Each attempt is a model call of roughly twenty seconds against a sixty
+    // second function limit, so a third attempt usually cannot finish. Stop
+    // when there is not time rather than timing out with nothing.
+    const deadline = Date.now() + 34_000;
     // Why each attempt was rejected, so a 502 in the logs says what happened.
     const rejects: string[] = [];
     // Three attempts. They are for a model that returned prose instead of
     // JSON, or narrated its own edit. Punctuation is not worth an attempt.
     for (let attempt = 0; attempt < 3; attempt++) {
+      if (attempt > 0 && Date.now() > deadline) {
+        rejects.push(`attempt ${attempt}: skipped, not enough time left to finish`);
+        break;
+      }
       const rawOut = await callClaude(correction ? `${system}\n\n${correction}` : system, user2, original ? 2200 : 1400);
       out = extractJSON(rawOut) as CoreOut;
       if (!out) {
@@ -340,6 +357,7 @@ Draft the core message.`;
       // need: the model reaches for a dash most times it writes a paragraph.
       const cadence = detectAiCadence(body);
       if (attempt === 0 && cadence.length > 0) {
+        keepSoft(body, out);
         correction = `YOUR PREVIOUS DRAFT used machine-writing shapes: ${cadence.slice(0, 3).map((c) => `"${c}"`).join(', ')}. Rewrite in flat declarative sentences with none of them.`;
         rejects.push(`attempt ${attempt}: ${correction.slice(0, 120)}`);
         body = '';
@@ -353,6 +371,7 @@ Draft the core message.`;
       // sits well above a normal letter, so it only catches a runaway.
       const fullWords = draftFull.split(/\s+/).filter(Boolean).length;
       if (body.split(/\s+/).length > longWords || fullWords > longWordsFull) {
+        keepSoft(body, out);
         correction = `Your previous draft ran long. Rewrite it UNDER ${longTarget} words, keeping the strongest details of the story.`;
         rejects.push(`attempt ${attempt}: ${correction.slice(0, 120)} (body ${body.split(/\s+/).length}w, whole letter ${fullWords}w)`);
         body = '';
@@ -392,6 +411,7 @@ Draft the core message.`;
       }
       const freq = addedFrequencyWords(draftFull, `${userOwnWords} ${campaign?.message_template ?? ''}`);
       if (freq.length > 0 && attempt < 2) {
+        keepSoft(body, out);
         correction = `YOUR PREVIOUS DRAFT ADDED frequency words the constituent never used: ${freq.map((f) => `"${f}"`).join(', ')}. Remove them. Say only how often they said it happens, or leave frequency out.`;
         rejects.push(`attempt ${attempt}: ${correction.slice(0, 120)}`);
         body = '';
@@ -452,6 +472,13 @@ Draft the core message.`;
       rejects.push(`attempt ${attempt}: blocking ${blocking.map((i) => i.code).join(',')}`);
       rejects.push(`attempt ${attempt}: ${correction.slice(0, 120)}`);
       body = '';
+    }
+    if (!body && soft) {
+      // Integrity gates all passed on this one. It is a style miss, and the
+      // person is about to edit it anyway.
+      console.warn('[generate-core] shipping a draft that failed a style gate:', rejects);
+      body = (soft as { body: string; out: CoreOut }).body;
+      out = (soft as { body: string; out: CoreOut }).out;
     }
     if (!body) {
       console.warn('[generate-core] refused:', rejects.length ? rejects : ['empty or short body on every attempt']);
