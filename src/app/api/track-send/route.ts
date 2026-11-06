@@ -48,7 +48,24 @@ export async function POST(request: NextRequest) {
 
   const parsed = parseBody(trackSendSchema, raw);
   if (!parsed.success) {
-    await recordSendRefusal('schema_rejected', { status: 400, ipHash: hashIp(ip) });
+    // A rejected payload was never parsed, so every field logged as null and
+    // the refusal could not say what it was. Eight months of state and local
+    // sends were refused and the table recorded only that something had been.
+    // Pull the identifying bits off the raw body so the next one names itself.
+    const r = (raw ?? {}) as Record<string, unknown>;
+    const rawLegislatorId = typeof r.legislator_id === 'string' ? r.legislator_id : null;
+    console.error('[track-send] schema rejected:', {
+      level: typeof r.legislator_level === 'string' ? r.legislator_level : null,
+      idLength: rawLegislatorId?.length ?? null,
+      status: typeof r.delivery_status === 'string' ? r.delivery_status : null,
+      detail: parsed.error,
+    });
+    await recordSendRefusal('schema_rejected', {
+      status: 400,
+      ipHash: hashIp(ip),
+      legislatorId: rawLegislatorId?.slice(0, 120) ?? null,
+      campaignId: typeof r.campaign_id === 'string' ? r.campaign_id : null,
+    });
     return NextResponse.json(
       { error: parsed.error },
       { status: 400 }

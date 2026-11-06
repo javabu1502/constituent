@@ -466,6 +466,9 @@ export function ContactFlow() {
 
   // Success screen
   if (state.step === 'success') {
+    // Only a send the API accepted gets a status, so this is the number we
+    // can honestly say reached the count.
+    const recordedCount = state.selectedReps.filter((r) => state.sentStatus?.[r.id]).length;
     return (
       <div className="w-full max-w-2xl mx-auto">
         <div className="bg-surface dark:bg-gray-800 rounded-2xl border border-rule dark:border-gray-700 overflow-hidden p-8">
@@ -476,9 +479,26 @@ export function ContactFlow() {
               </svg>
             </div>
             <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Sent</h3>
-            <p className="text-gray-600 dark:text-gray-300 mb-6">
-              Offices tally constituent messages by issue. Yours is now in the count.
-            </p>
+            {/* Counted what was selected and claimed it was in the count
+                regardless. A schema bug rejected every state and local record
+                for eight months while this screen said otherwise, so it now
+                reports what was actually written. The message itself goes
+                through the person's own email and is unaffected either way. */}
+            {recordedCount === state.selectedReps.length ? (
+              <p className="text-gray-600 dark:text-gray-300 mb-6">
+                Offices tally constituent messages by issue. Yours is now in the count.
+              </p>
+            ) : recordedCount > 0 ? (
+              <p className="text-gray-600 dark:text-gray-300 mb-6">
+                Your messages are on their way. We could only add {recordedCount} of {state.selectedReps.length} to
+                the public count, so the totals on this site will show fewer than you sent.
+              </p>
+            ) : (
+              <p className="text-gray-600 dark:text-gray-300 mb-6">
+                Your messages are on their way. We could not add them to the public count on this site, which changes
+                nothing about what the offices received.
+              </p>
+            )}
             <div className="p-4 bg-purple-50 dark:bg-purple-900/30 border border-purple-200 dark:border-purple-700 rounded-xl mb-6">
               <p className="text-sm text-purple-800 dark:text-purple-200">
                 Contacted <strong>{state.selectedReps.length} official{state.selectedReps.length > 1 ? 's' : ''}</strong> about <strong>{state.issue}</strong>
