@@ -55,6 +55,23 @@ export async function GET(req: NextRequest) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const inPeriod = <T,>(q: T): T => (since ? (q as any).gte('created_at', since) : q);
 
+  // Trends tells visitors what people around the country are writing about,
+  // so it should not count us testing the form or a row where someone typed
+  // "a" into the email box. Checked against the data rather than assumed:
+  // these two rules remove 14 of 70, leaving 56 across 14 people.
+  //
+  // Seeded demo traffic is already gone: it lives in demo- campaigns and
+  // excludeDemo drops all 759 rows of it.
+  const OPERATOR_EMAILS = ['jvbusker@gmail.com', 'jared@mydemocracy.app', 'advocacy@mydemocracy.app'];
+  const TEST_NAMES = ['Test Verification', 'Jane doe'];
+  const realTraffic = <T,>(q: T): T =>
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (q as any)
+      // An anonymous send has no address, and that is a real send.
+      .or(`advocate_email.is.null,advocate_email.not.in.(${OPERATOR_EMAILS.join(',')})`)
+      .or('advocate_email.is.null,advocate_email.like.*@*')
+      .or(`advocate_name.is.null,advocate_name.not.in.(${TEST_NAMES.map((n) => `"${n}"`).join(',')})`);
+
   // Build filtered query for issue rankings
   let issueQuery = excludeDemo(
     admin
@@ -62,6 +79,7 @@ export async function GET(req: NextRequest) {
       .select('issue_area, issue_subtopic')
   );
 
+  issueQuery = realTraffic(issueQuery);
   if (since) issueQuery = issueQuery.gte('created_at', since);
   if (level !== 'all') issueQuery = issueQuery.eq('legislator_level', level);
   if (stateParam) issueQuery = issueQuery.eq('advocate_state', stateParam);
@@ -79,13 +97,13 @@ export async function GET(req: NextRequest) {
 
   // Recent messages respect the level/state filters (like the issue list) so
   // the activity chart and rising/cooling badges match what's on screen.
-  let recentQuery = excludeDemo(
+  let recentQuery = realTraffic(excludeDemo(
     admin
       .from('messages')
       .select('issue_area, created_at')
       .gte('created_at', chartSince)
       .limit(10000)
-  );
+  ));
   if (level !== 'all') recentQuery = recentQuery.eq('legislator_level', level);
   if (stateParam) recentQuery = recentQuery.eq('advocate_state', stateParam);
 
@@ -103,11 +121,11 @@ export async function GET(req: NextRequest) {
     // the selected period. They ignored it before, so the six cards held the
     // same numbers whichever button was pressed. "This month" keeps its own
     // fixed window, because that is what it says.
-    inPeriod(excludeDemo(admin.from('messages').select('*', { count: 'exact', head: true }))),
-    excludeDemo(admin.from('messages').select('*', { count: 'exact', head: true }).gte('created_at', thirtyDaysAgo)),
-    inPeriod(excludeDemo(admin.from('messages').select('advocate_state').limit(10000))),
+    inPeriod(realTraffic(excludeDemo(admin.from('messages').select('*', { count: 'exact', head: true })))),
+    realTraffic(excludeDemo(admin.from('messages').select('*', { count: 'exact', head: true }).gte('created_at', thirtyDaysAgo))),
+    inPeriod(realTraffic(excludeDemo(admin.from('messages').select('advocate_state').limit(10000)))),
     recentQuery,
-    inPeriod(excludeDemo(admin.from('messages').select('legislator_name').limit(10000))),
+    inPeriod(realTraffic(excludeDemo(admin.from('messages').select('legislator_name').limit(10000)))),
     admin.from('campaigns').select('story_count').eq('approval_status', 'approved').eq('is_official', true),
   ]);
 
