@@ -43,6 +43,8 @@ export interface LocalAction {
   location: string;
   parcels: string[];
   requests: string[];
+  /** The case planner. Comments quoting the case number file against it. */
+  plannerEmail: string;
   changes: LocalDesignationChange[];
   deciders: LocalDecider[];
   /** What has already happened, newest last. */
@@ -74,6 +76,7 @@ export const LOCAL_ACTIONS: LocalAction[] = [
       'A Master Plan Amendment changing the land use designations across the site.',
       'A Zoning Map Amendment placing all 329.23 acres in a Specific Plan District (SPD).',
     ],
+    plannerEmail: 'gilbertn@reno.gov',
     changes: [
       { label: 'Industrial', from: '75.95 acres', to: '156.80 acres', note: 'Roughly double the industrial land on the site today.' },
       { label: 'Parks, Greenways and Open Space', from: '93.09 acres', to: '172.43 acres', note: 'Also roughly doubles.' },

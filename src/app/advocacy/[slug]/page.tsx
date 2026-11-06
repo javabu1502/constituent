@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { LOCAL_ACTIONS, localActionBySlug } from '@/data/local-actions';
+import { LocalComment } from '@/components/advocacy/LocalComment';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -48,10 +49,14 @@ export default async function LocalActionPage({ params }: PageProps) {
         {a.projectName}. Applicant: {a.applicant}.
       </p>
 
-      <div className="mt-6 p-4 border border-gray-900 dark:border-gray-300">
+      <div className="mt-6 p-4 bg-gray-50 dark:bg-gray-800 border border-rule dark:border-gray-700">
         <p className="label mb-2">Where it stands</p>
         <p className="text-sm leading-relaxed text-gray-700 dark:text-gray-300">{a.status}</p>
       </div>
+
+      <section className="mt-8">
+        <LocalComment caseNumber={a.caseNumber} projectName={a.projectName} plannerEmail={a.plannerEmail} />
+      </section>
 
       <section className="mt-12">
         <h2 className="label mb-3 border-t border-gray-900 dark:border-gray-600 pt-6">What is being asked for</h2>
@@ -164,9 +169,9 @@ export default async function LocalActionPage({ params }: PageProps) {
       </section>
 
       <section className="mt-12">
-        <h2 className="label mb-3 border-t border-gray-900 dark:border-gray-600 pt-6">How to weigh in</h2>
+        <h2 className="label mb-3 border-t border-gray-900 dark:border-gray-600 pt-6">Other ways to be heard</h2>
         <ol className="space-y-3 list-decimal list-inside">
-          {a.howToComment.map((s) => (
+          {a.howToComment.slice(1).map((s) => (
             <li key={s} className="text-gray-700 dark:text-gray-300 leading-relaxed max-w-[62ch]">
               {s}
             </li>
