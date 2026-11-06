@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getFederalLegislatorBio, getCommitteesForMember } from '@/lib/legislators';
 import { getStateLegislators } from '@/lib/state-legislators';
 import { createAdminClient } from '@/lib/supabase';
-import { callClaude } from '@/lib/claude';
+import { fetchWikipediaBio } from '@/lib/wikipedia-bio';
 import { summaryLimiter, getClientIp } from '@/lib/rate-limit';
 
 const CACHE_TTL_MS = 30 * 24 * 60 * 60 * 1000; // 30 days
@@ -149,32 +149,11 @@ export async function GET(request: NextRequest) {
     if (currentTerm?.type === 'sen' && houseTerms > 0) previousChambers.push('House');
     if (currentTerm?.type === 'rep' && senateTerms > 0) previousChambers.push('Senate');
 
-    // Generate narrative bio with Claude AI
     const fullName = bio.name.official_full || `${bio.name.first} ${bio.name.last}${bio.name.suffix ? ` ${bio.name.suffix}` : ''}`;
-    let bioNarrative = '';
-    try {
-      const chamberType = currentTerm?.type === 'sen' ? 'Senate' : 'House of Representatives';
-      const details = [
-        `Name: ${fullName}`,
-        `Party: ${currentTerm?.party ?? 'Unknown'}`,
-        `State: ${currentTerm?.state ?? 'Unknown'}`,
-        currentTerm?.district !== undefined ? `District: ${currentTerm.district}` : null,
-        `Chamber: ${chamberType}`,
-        bio.bio?.birthday ? `Born: ${bio.bio.birthday}` : null,
-        yearsInOffice ? `Years in office: ${yearsInOffice}` : null,
-        firstElectedYear ? `First elected: ${firstElectedYear}` : null,
-        `Total terms: ${bio.terms.length}`,
-        previousChambers.length > 0 ? `Previously served in the ${previousChambers.join(' and ')}` : null,
-      ].filter(Boolean).join('\n');
 
-      bioNarrative = await callClaude(
-        'Generate a 2-3 sentence nonpartisan biographical summary of a US legislator. Be factual and concise. Include when they took office and any prior notable roles (e.g. previous offices held, military service, career background). Do not mention committee assignments. Do not include opinions or policy positions.',
-        details,
-        300,
-      );
-    } catch {
-      // Narrative is optional — proceed without it
-    }
+    // What an encyclopedia says, or nothing. The facts below come from the
+    // congress-legislators data and stand on their own without a narrative.
+    const wiki = await fetchWikipediaBio(admin, bio.wikipedia);
 
     const result = {
       type: 'federal' as const,
@@ -192,7 +171,10 @@ export async function GET(request: NextRequest) {
       houseTerms,
       previousChambers,
       committees,
-      bioNarrative: bioNarrative || undefined,
+      bioNarrative: wiki?.extract,
+      bioSourceUrl: wiki?.articleUrl,
+      bioSourceTitle: wiki?.articleTitle,
+      bioSourceLicense: wiki?.license,
       currentTerm: currentTerm ? {
         type: currentTerm.type === 'sen' ? 'Senate' : 'House',
         start: currentTerm.start,
@@ -236,26 +218,11 @@ export async function GET(request: NextRequest) {
   // Fetch state committees from Open States GraphQL
   const committees = await fetchStateCommittees(repId);
 
-  // Generate narrative bio with Claude AI
-  let bioNarrative = '';
-  try {
-    const chamberName = leg.chamber === 'upper' ? 'Senate' : 'House';
-    const stateName = state.toUpperCase();
-    const details = [
-      `Name: ${leg.name}`,
-      `Party: ${leg.party}`,
-      `Chamber: ${stateName} State ${chamberName}`,
-      `District: ${leg.district}`,
-    ].filter(Boolean).join('\n');
-
-    bioNarrative = await callClaude(
-      'Generate a 2-3 sentence nonpartisan biographical summary of a US state legislator. Be factual and concise. Include career background and notable roles if inferable. Do not mention committee assignments. Do not include opinions or policy positions.',
-      details,
-      200,
-    );
-  } catch {
-    // Narrative is optional — proceed without it
-  }
+  // Previously this asked a model for "career background and notable roles
+  // if inferable" from a name, a party, a chamber and a district. Nothing in
+  // those four things implies a career, so the answer was invented about a
+  // real person. Wikipedia or nothing.
+  const wiki = await fetchWikipediaBio(admin, leg.wikipediaUrl);
 
   const result = {
     type: 'state' as const,
@@ -271,7 +238,10 @@ export async function GET(request: NextRequest) {
     website: leg.website,
     office: leg.office,
     committees,
-    bioNarrative: bioNarrative || undefined,
+    bioNarrative: wiki?.extract,
+    bioSourceUrl: wiki?.articleUrl,
+    bioSourceTitle: wiki?.articleTitle,
+    bioSourceLicense: wiki?.license,
   };
 
   // Cache

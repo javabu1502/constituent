@@ -10,6 +10,8 @@ interface ContactCountData {
 
 interface BioData {
   bioNarrative?: string;
+  bioSourceUrl?: string;
+  bioSourceTitle?: string;
 }
 
 interface NewsArticle {
@@ -153,7 +155,7 @@ export default function ProfileClient({
         </div>
       )}
 
-      {/* AI Bio Narrative */}
+      {/* Encyclopedia summary, not a generated one. */}
       {bioData?.bioNarrative && (
         <section>
           <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-3">About</h2>
@@ -161,9 +163,15 @@ export default function ProfileClient({
             <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed">
               {bioData.bioNarrative}
             </p>
-            <p className="text-xs text-gray-400 dark:text-gray-500 mt-3">
-              Summary based on public records
-            </p>
+            {bioData.bioSourceUrl && (
+              <p className="text-xs text-gray-400 dark:text-gray-500 mt-3">
+                From{' '}
+                <a href={bioData.bioSourceUrl} target="_blank" rel="noreferrer" className="underline">
+                  Wikipedia
+                </a>
+                , CC BY-SA
+              </p>
+            )}
           </div>
         </section>
       )}

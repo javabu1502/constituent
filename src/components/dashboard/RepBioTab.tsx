@@ -19,6 +19,8 @@ interface FederalBio {
   previousChambers: string[];
   committees?: string[];
   bioNarrative?: string;
+  bioSourceUrl?: string;
+  bioSourceTitle?: string;
   currentTerm: {
     type: string;
     start: string;
@@ -55,6 +57,8 @@ interface StateBio {
   office?: string;
   committees?: string[];
   bioNarrative?: string;
+  bioSourceUrl?: string;
+  bioSourceTitle?: string;
 }
 
 export type BioData = FederalBio | StateBio;
@@ -138,9 +142,15 @@ function FederalBioContent({ bio }: { bio: FederalBio }) {
           <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
             {bio.bioNarrative}
           </p>
-          <p className="text-[10px] text-gray-400 dark:text-gray-500 mt-1 italic">
-            Summary based on public records
-          </p>
+          {bio.bioSourceUrl && (
+            <p className="text-[10px] text-gray-400 dark:text-gray-500 mt-1">
+              From{' '}
+              <a href={bio.bioSourceUrl} target="_blank" rel="noreferrer" className="underline">
+                Wikipedia
+              </a>
+              , CC BY-SA
+            </p>
+          )}
         </div>
       )}
 
@@ -256,9 +266,15 @@ function StateBioContent({ bio }: { bio: StateBio }) {
           <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
             {bio.bioNarrative}
           </p>
-          <p className="text-[10px] text-gray-400 dark:text-gray-500 mt-1 italic">
-            Summary based on public records
-          </p>
+          {bio.bioSourceUrl && (
+            <p className="text-[10px] text-gray-400 dark:text-gray-500 mt-1">
+              From{' '}
+              <a href={bio.bioSourceUrl} target="_blank" rel="noreferrer" className="underline">
+                Wikipedia
+              </a>
+              , CC BY-SA
+            </p>
+          )}
         </div>
       )}
 

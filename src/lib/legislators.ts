@@ -757,6 +757,8 @@ export function getFederalLegislatorBio(bioguideId: string): {
   terms: { type: string; start: string; end: string; state: string; district?: number; class?: number; party: string; state_rank?: string; phone?: string; address?: string; url?: string; contact_form?: string; office?: string }[];
   socialMedia?: { twitter?: string; facebook?: string; instagram?: string };
   photoUrl: string;
+  /** Wikipedia article title from the congress-legislators id block. */
+  wikipedia?: string;
 } | null {
   const legislators = loadFederalLegislators();
   const socialMedia = loadFederalSocialMedia();
@@ -767,6 +769,7 @@ export function getFederalLegislatorBio(bioguideId: string): {
   const social = socialMedia.get(bioguideId);
 
   return {
+    wikipedia: legislator.id.wikipedia,
     name: {
       first: legislator.name.first,
       last: legislator.name.last,
