@@ -127,7 +127,7 @@ export type WebformBuild = { ok: true; item: WebformQueueItem } | { ok: false; s
 
 /** Build a queue item from a track-send body, or say why not (fail-closed). */
 export async function buildWebformQueueItem(body: {
-  legislator_id: string; legislator_name: string; legislator_level: string; legislator_chamber: string;
+  legislator_id: string; legislator_name: string; legislator_level: string; legislator_chamber?: string;
   advocate_name: string; advocate_city: string; advocate_state: string; message_body: string; issue_area: string;
 }, cwc: { prefix: string; street: string; zip: string; email: string; subject: string }, campaignRef: string, activeCodes?: ReadonlySet<string>, messageId?: string): Promise<WebformBuild> {
   if (!webformDeliveryEnabled()) return { ok: false, skip: 'WEBFORM_DELIVERY_ENABLED is not true' };

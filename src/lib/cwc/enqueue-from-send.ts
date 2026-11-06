@@ -34,7 +34,9 @@ export interface TrackSendLike {
   advocate_state: string;
   advocate_district?: string;
   legislator_level: string;
-  legislator_chamber: string;
+  // Optional: a mayor or a council member has none, and those never reach
+  // CWC anyway. The chamber mapping below already skips what it cannot map.
+  legislator_chamber?: string;
   issue_area: string;
   issue_subtopic: string;
   message_body: string;

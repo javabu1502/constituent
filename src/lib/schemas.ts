@@ -61,10 +61,18 @@ export const trackSendSchema = z.object({
   advocate_state: z.string().min(1).max(50),
   advocate_district: z.string().max(20).optional(),
   legislator_name: z.string().min(1).max(200),
-  legislator_id: z.string().min(1).max(20),
+  // 20 fit a bioguide id (C000127) and nothing else. A state legislator is
+  // an ocd-person UUID at 47 characters and a local official is
+  // "local:<geoid>:<slug>" at about 29, so every state and local send was
+  // rejected with a 400 while the page said "Sent. Yours is now in the
+  // count." Found 2026-11-06 from the refusals table after a Washington
+  // state message never appeared.
+  legislator_id: z.string().min(1).max(120),
   legislator_party: z.string().min(1).max(50),
   legislator_level: z.string().min(1).max(20),
-  legislator_chamber: z.string().min(1).max(20),
+  // A council member or a mayor has no chamber. Required, it rejected every
+  // local send on its own, independently of the id length.
+  legislator_chamber: z.string().max(40).optional(),
   issue_area: z.string().min(1).max(200),
   issue_subtopic: z.string().min(1).max(200),
   message_body: z.string().min(1).max(10000),
