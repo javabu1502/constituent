@@ -379,7 +379,7 @@ export default async function CampaignPage({ params }: PageProps) {
       <>
       {/* The campaign's contributed language, in the open (two-block model) */}
       {!isStory && campaign.message_template && (
-        <CampaignTalkingPoints template={campaign.message_template} orgName={campaign.org_name ?? null} accent={campaign.brand_color ?? null} />
+        <CampaignTalkingPoints template={campaign.message_template} accent={campaign.brand_color ?? null} />
       )}
 
       {/* Bill journey — parent campaigns show where the legislation stands */}
