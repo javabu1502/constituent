@@ -379,7 +379,7 @@ function OfficialCard({ official, message, deliveryInfo, contactMethod, isCallCo
           <>
             <div className="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg text-sm font-medium bg-green-100 dark:bg-green-900/40 text-green-800 dark:text-green-200">
               <CheckIcon className="w-4 h-4" />
-              {restored ? 'Opened in your email app earlier' : 'Opened in your email app'}
+              {restored ? 'Opened earlier. Send it from your email.' : 'Opened. Now send it from your email.'}
             </div>
             <button
               type="button"
@@ -399,7 +399,7 @@ function OfficialCard({ official, message, deliveryInfo, contactMethod, isCallCo
                 className="flex items-center justify-center gap-2 w-full py-2.5 bg-purple-600 hover:bg-purple-700 disabled:opacity-60 text-white rounded-lg text-sm font-medium transition-colors"
               >
                 <EmailIcon className="w-4 h-4" />
-                Send with Your Email
+                Open in my email
               </button>
             ) : (
               <button
@@ -733,8 +733,8 @@ export function SendStep({ state, dispatch, onBack }: SendStepProps) {
               ? 'All Calls Complete!'
               : 'Call Your Officials'
             : selectedReps.length === 1
-            ? 'Your Message is Ready!'
-            : `${selectedReps.length} Messages Ready!`}
+            ? 'Your message is ready for you to send'
+            : `${selectedReps.length} messages ready for you to send`}
         </h3>
         <p className="text-gray-500 dark:text-gray-400 mt-1 text-sm">
           {contactMethod === 'phone'
@@ -744,12 +744,12 @@ export function SendStep({ state, dispatch, onBack }: SendStepProps) {
             : deliverySummary.cwcCount > 0 && deliverySummary.emailCount + deliverySummary.formCount === 0
             ? 'Click "Send to Congress" to deliver each message'
             : deliverySummary.cwcCount > 0
-            ? `${deliverySummary.cwcCount} go straight to Congress, ${deliverySummary.emailCount + deliverySummary.formCount} open in your email app or a contact form`
+            ? `${deliverySummary.cwcCount} go straight to Congress. The other ${deliverySummary.emailCount + deliverySummary.formCount} open in your own email or a contact form for you to send.`
             : deliverySummary.emailCount > 0 && deliverySummary.formCount > 0
             ? `${deliverySummary.emailCount} via email, ${deliverySummary.formCount} via contact form`
             : deliverySummary.emailCount > 0
-            ? 'Click "Send with Your Email" to open your email app with the message ready to send'
-            : 'Send each message using the options below'}
+            ? 'Each one opens in your own email. You press send from there.'
+            : 'Each one opens in your own email or a contact form. You send it from there.'}
         </p>
       </div>
 

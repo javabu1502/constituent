@@ -80,8 +80,11 @@ const en = {
   generatingMessages: 'Generating personalized messages',
 
   // Review step
-  messagesReady: (n: number) => `${n} Message${n !== 1 ? 's' : ''} Ready`,
-  sendEachBelow: 'Send each message using the options below',
+  // Says who presses send. "Messages ready" sounded queued, and the first
+  // person outside the team to use it only worked out it was his job to send
+  // them by clicking and seeing his mail client open.
+  messagesReady: (n: number) => `${n} message${n !== 1 ? 's' : ''} ready for you to send`,
+  sendEachBelow: 'Each one opens in your own email. You press send from there.',
   seeTalkingPoints: 'See the talking points your messages will include',
   everythingElseYourVoice: 'Everything else is written for your voice. Edit anything before you send.',
   aiUnavailable: 'Our AI writer isn’t available right now, so we’ve started each message for you.',
@@ -93,7 +96,7 @@ const en = {
   sentToCongress: 'Sent to Congress',
   sending: 'Sending',
   sendToCongress: 'Send to Congress',
-  sendEmail: 'Send Email',
+  sendEmail: 'Open in my email',
   openContactForm: 'Open Contact Form',
   visitWebsite: 'Visit Website',
   call: 'Call',
@@ -207,8 +210,8 @@ const es: ParticipateCopy = {
   findingOfficials: 'Buscando a sus funcionarios...',
   generatingMessages: 'Preparando mensajes personalizados',
 
-  messagesReady: (n: number) => `${n} mensaje${n !== 1 ? 's' : ''} listo${n !== 1 ? 's' : ''}`,
-  sendEachBelow: 'Envíe cada mensaje con las opciones de abajo',
+  messagesReady: (n: number) => `${n} mensaje${n !== 1 ? 's' : ''} listo${n !== 1 ? 's' : ''} para que usted lo${n !== 1 ? 's' : ''} envíe`,
+  sendEachBelow: 'Cada uno se abre en su propio correo. Usted lo envía desde ahí.',
   seeTalkingPoints: 'Ver los puntos clave que incluirán sus mensajes',
   everythingElseYourVoice: 'Todo lo demás está escrito con su voz. Edite lo que quiera antes de enviar.',
   aiUnavailable: 'Nuestro redactor automático no está disponible ahora, así que iniciamos cada mensaje por usted.',
@@ -219,7 +222,7 @@ const es: ParticipateCopy = {
   sentToCongress: 'Enviado al Congreso',
   sending: 'Enviando',
   sendToCongress: 'Enviar al Congreso',
-  sendEmail: 'Enviar correo',
+  sendEmail: 'Abrir en mi correo',
   openContactForm: 'Abrir formulario de contacto',
   visitWebsite: 'Visitar sitio web',
   call: 'Llamar al',
