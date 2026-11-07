@@ -80,19 +80,22 @@ export const LOCAL_ACTIONS: LocalAction[] = [
     slug: 'seneca-hills-reno',
     jurisdiction: 'City of Reno, Ward 4',
     caseNumber: 'LDC25-00057',
-    projectName: 'Seneca Hills Business Park',
-    applicant: 'Visionary 2, LLC and Castello, LLC',
-    title: '329 acres beside Horizon Hills could become warehouses',
+    projectName: 'Peavine Peak Trails Business Park',
+    applicant: 'Castello-Monkarsh Development LLC',
+    title: 'A hearing on 329 acres beside Horizon Hills is set for November 19',
     summary:
-      'Four parcels of empty land west of North Virginia Street, about 329 acres, sit between the Horizon Hills neighborhood and the Union Pacific tracks. The applicant wants them rezoned for industry and open space, and has described the project as warehouse and office buildings. Much of that land is designated for housing today. Horizon Hills was evacuated in August 2026 when the Hawk Fire came through, and residents say the neighborhood has one road in and out.',
+      'About 329 acres on the slope below Peavine Peak, next to the Horizon Hills neighborhood. The applicant wants the land rezoned for industry and open space, under the name Peavine Peak Trails Business Park. Much of it is designated for housing today. Horizon Hills was evacuated in August 2026 when the Hawk Fire came through, and residents say Seneca Drive is the only way in and out. The Planning Commission hears it on November 19.',
     location:
-      'About 329.23 acres of undeveloped land north of Seneca Drive, south and west of the Union Pacific Railroad tracks, west of North Virginia Street.',
+      'About 329.23 acres north of Seneca Drive, west of the end of Blackfoot Way, south of the Union Pacific Railroad spur, running northwest for roughly 1.85 miles toward Peavine Peak Road. Ward 4.',
     parcels: ['082-180-77', '082-180-78', '082-083-10', '082-083-07'],
     requests: [
       'A Master Plan Amendment changing the land use designations across the site.',
       'A Zoning Map Amendment placing all 329.23 acres in a Specific Plan District (SPD).',
     ],
-    plannerEmail: 'gilbertn@reno.gov',
+    // The address the city names for comments that enter the record. The
+    // case planner handles questions about the process, which is a different
+    // thing, and a comment sent there is not the same as one on the record.
+    plannerEmail: 'PCPublicComment@reno.gov',
     campaignSlug: 'seneca-hills-rezoning',
     stance: 'oppose',
     stanceOwner: 'North Valleys residents organizing against the application',
@@ -171,9 +174,10 @@ export const LOCAL_ACTIONS: LocalAction[] = [
       { date: 'May 15, 2025', event: 'Ward 4 Neighborhood Advisory Board meeting on that earlier version.' },
       { date: 'August 2026', event: 'The Hawk Fire burned through the North Valleys. Horizon Hills was evacuated.' },
       { date: 'November 4, 2026', event: 'Applicant neighborhood meeting, held virtually. Not a public hearing, and no public officials attended.' },
+      { date: 'November 19, 2026', event: 'Reno Planning Commission public hearing, 6:00 PM, Council Chambers at Reno City Hall. Comments received by noon that day go into the record.' },
     ],
     status:
-      'The applicant neighborhood meeting has already happened. A Reno Planning Commission hearing date had not been published when this page was last checked. Comments sent to the planner go into the case record before that hearing.',
+      'The Reno Planning Commission hears this on Thursday November 19, 2026 at 6:00 PM, in the Council Chambers at Reno City Hall, 1 East First Street. Comments received by noon that day are entered into the record. After that the Commission makes a recommendation and the City Council takes the final vote.',
     context: {
       heading: 'Why evacuation keeps coming up',
       body:
@@ -181,12 +185,12 @@ export const LOCAL_ACTIONS: LocalAction[] = [
       source: { label: 'KUNR, Hawk Fire coverage', url: 'https://www.kunr.org/hawk-fire' },
     },
     howToComment: [
-      'Email the city planner on the case at gilbertn@reno.gov and include the case number LDC25-00057 so your comment is filed with the application.',
-      'Submit the city’s own public comment form at reno.gov/PCPublicComment, which goes to the Planning Commission directly.',
-      'Mail a letter to City of Reno Planning Commission, P.O. Box 1900, Reno, NV 89505. Put the case number on it.',
-      'Read the application yourself at Onenv.us. Choose the Planning tab, enter LDC25-00057 in the Record Number field, then open Record Info and Attachments.',
-      'Speak at the Reno Planning Commission hearing once it is scheduled. Agendas are posted at reno.primegov.com.',
-      'Contact your Reno City Council member, since the Council takes the final vote.',
+      'Email PCPublicComment@reno.gov with LDC25-00057 in the subject. Comments received by noon on November 19 are entered into the record.',
+      'Or use the city’s own form at reno.gov/PCPublicComment, which goes to the Planning Commission.',
+      'Or mail a letter to City of Reno Planning Division, P.O. Box 1900, Reno, NV 89505, with the case number on it.',
+      'Speak at the hearing on November 19 at 6:00 PM, Council Chambers, Reno City Hall, 1 East First Street. Submit a Request to Speak form to the Secretary.',
+      'Read the application yourself at Onenv.us. Choose the Planning tab, enter LDC25-00057 in the Record Number field, then open Record Info and Attachments. Staff reports are posted the Friday before the hearing.',
+      'Questions about the process go to Nathan Gilbert, the planner on the case, at 775-334-2698.',
     ],
     materials: { label: 'City of Reno planning records (Onenv.us)', url: 'https://onenv.us' },
     lastVerified: '2026-11-05',
