@@ -77,7 +77,13 @@ export async function POST(request: Request) {
     return new Response('Campaign not found', { status: 404 });
   }
 
-  const systemPrompt = buildCampaignInterviewPrompt(campaign, stance ?? null);
+  // The turn budget is counted here, not judged by the model. The written
+  // intent was always two or three exchanges, but nothing enforced it, so a
+  // guide that found a hardship could spend every turn on it and never ask
+  // what the writer wanted done.
+  const userTurns = messages.filter((m) => m.role === 'user').length;
+
+  const systemPrompt = buildCampaignInterviewPrompt(campaign, stance ?? null, userTurns);
 
   try {
     const stream = callClaudeStreamFast(systemPrompt, messages, 500);
