@@ -14,6 +14,12 @@ import { verifyTurnstile } from '@/lib/turnstile';
 import { enforceDailyQuota, resolveUsageIdentity } from '@/lib/usage-quota';
 import { scrubUnsupportedIdentityClaims, stripUnsourcedStats } from '@/lib/message-quality';
 
+// Drafting streams one letter per official and has been measured at 26 to 59
+// seconds. This is the longest-running route in the app and was the only one
+// without a cap, so it inherited the platform default and was cut mid-stream
+// at random, which is what the intermittent 502s were.
+export const maxDuration = 60;
+
 type GenerateRequest = z.infer<typeof generateMessageSchema>;
 type OfficialInput = GenerateRequest['officials'][number];
 type AddressInput = NonNullable<GenerateRequest['address']>;
@@ -915,39 +921,44 @@ ${contactMethod === 'phone' ? '{"script": "the revised phone script"}' : '{"subj
     }
   }
 
-  // Detect bills and fetch recent news in parallel — both fail open so neither
-  // adds serial latency or blocks generation on an outage.
-  let billDetailsBlock = '';
-  let newsContext = '';
-  await Promise.all([
-    (async () => {
-      try {
-        const billRefs = detectBillReferences(`${issue} ${ask}`);
-        if (billRefs.length > 0) {
-          const billPromises = billRefs.slice(0, 3).map(async (ref) => {
-            if (ref.level === 'federal') {
-              return fetchFederalBillDetails(ref.type, ref.number);
-            }
-            // State bill — pass state from first official if available
-            const state = officials[0]?.state;
-            return fetchStateBillDetails(ref.raw, state);
-          });
-          const billResults = await Promise.all(billPromises);
-          const validBills = billResults.filter((b): b is NonNullable<typeof b> => b !== null);
-          billDetailsBlock = buildBillDetailsBlock(validBills);
+  // Bill details and recent news, both fail open. These are started here but
+  // deliberately NOT awaited: awaiting them held the response open for up to
+  // the 8s news timeout before a single byte was sent, so the person watched a
+  // blank panel and the per-official vote and district fetches had not even
+  // begun. Started now and awaited inside the stream, they overlap with those
+  // fetches instead of preceding them.
+  const t0 = Date.now();
+  const since = () => Date.now() - t0;
+
+  const billDetailsPromise: Promise<string> = (async () => {
+    try {
+      const billRefs = detectBillReferences(`${issue} ${ask}`);
+      if (billRefs.length === 0) return '';
+      const billPromises = billRefs.slice(0, 3).map(async (ref) => {
+        if (ref.level === 'federal') {
+          return fetchFederalBillDetails(ref.type, ref.number);
         }
-      } catch (err) {
-        console.warn('[generate-message] Bill detection failed:', err);
-      }
-    })(),
-    (async () => {
-      try {
-        newsContext = await fetchRecentNews(`${issue} ${ask}`);
-      } catch (err) {
-        console.warn('[generate-message] News fetch failed:', err);
-      }
-    })(),
-  ]);
+        // State bill — pass state from first official if available
+        const state = officials[0]?.state;
+        return fetchStateBillDetails(ref.raw, state);
+      });
+      const billResults = await Promise.all(billPromises);
+      const validBills = billResults.filter((b): b is NonNullable<typeof b> => b !== null);
+      return buildBillDetailsBlock(validBills);
+    } catch (err) {
+      console.warn('[generate-message] Bill detection failed:', err);
+      return '';
+    }
+  })();
+
+  const newsPromise: Promise<string> = (async () => {
+    try {
+      return await fetchRecentNews(`${issue} ${ask}`);
+    } catch (err) {
+      console.warn('[generate-message] News fetch failed:', err);
+      return '';
+    }
+  })();
 
   // --- Feature 2: SSE streaming ---
   const encoder = new TextEncoder();
@@ -961,21 +972,29 @@ ${contactMethod === 'phone' ? '{"script": "the revised phone script"}' : '{"subj
         // Generate messages in parallel; stream each as it completes
         const promises = officials.map(async (official) => {
           try {
-            // Fetch vote + district data in parallel for federal officials
-            const [voteContext, districtContext] = await Promise.all([
+            // Everything the prompt needs, in flight at once. Bills and news
+            // were already started before the stream opened.
+            const [voteContext, districtContext, billDetailsBlock, newsContext] = await Promise.all([
               fetchRelevantVotes(official, issue, issueCategory),
               fetchDistrictContext(official),
+              billDetailsPromise,
+              newsPromise,
             ]);
+            const contextMs = since();
 
             const result = await generateForOfficial(
               apiKey, official, issue, ask, personalWhy, senderName, address, method,
               topicDataBlock, voteContext, districtContext, selectedTone, billDetailsBlock, newsContext,
               enqueueMessage,
             );
+            // Two wrong diagnoses of this route's latency came from having no
+            // measurement of it. context is every fetch before the model call,
+            // total includes the model.
+            console.log(`[generate-message] ${official.name}: context ${contextMs}ms, total ${since()}ms`);
             enqueueMessage(result);
             return result;
           } catch (err) {
-            console.warn(`[generate-message] AI failed for ${official.name}, using template:`, err);
+            console.warn(`[generate-message] AI failed for ${official.name} after ${since()}ms, using template:`, err);
             const fallback = buildTemplateFallback(official, issue, ask, personalWhy, senderName, address, method);
             enqueueMessage(fallback);
             return fallback;
