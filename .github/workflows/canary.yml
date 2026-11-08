@@ -1,0 +1,23 @@
+name: Canary
+
+# The things a constituent does, checked once a day so a silent failure is
+# found by us rather than by someone trying to write to their councilmember.
+on:
+  schedule:
+    - cron: '17 15 * * *'
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx tsx scripts/canary.ts
+        env:
+          CANARY_SECRET: ${{ secrets.CANARY_SECRET }}

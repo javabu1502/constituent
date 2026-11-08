@@ -178,7 +178,7 @@ async function main() {
       for (let i = 0; i < count; i++) {
         const p = person();
         const ts = at(day);
-        let recipients: { leg: StateLeg; intent: 'persuade' | 'thank' | null }[] = [];
+        const recipients: { leg: StateLeg; intent: 'persuade' | 'thank' | null }[] = [];
         if (s.goal === 'cosponsor') {
           const rep = pick(assembly);
           recipients.push({ leg: rep, intent: sponsors.has(rep.id) ? 'thank' : 'persuade' });

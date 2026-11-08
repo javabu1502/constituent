@@ -73,6 +73,29 @@ export async function POST(request: NextRequest) {
   }
 
   const body = parsed.data;
+
+  // A scheduled canary walks this path every day so a payload shape we have
+  // stopped accepting is found by us rather than by a constituent. The state
+  // and local ids were rejected here for eight months while the page said
+  // the message was counted, and nothing noticed because nothing was looking.
+  //
+  // It validates and stops: no row, no delivery, no side effects. Without
+  // dry_run the secret does nothing, so the request still faces the bot check.
+  const canarySecret = process.env.CANARY_SECRET;
+  const isCanaryDryRun =
+    !!canarySecret &&
+    request.headers.get('x-canary-secret') === canarySecret &&
+    (raw as { dry_run?: unknown }).dry_run === true;
+  if (isCanaryDryRun) {
+    return NextResponse.json({
+      ok: true,
+      dryRun: true,
+      level: body.legislator_level,
+      legislatorIdLength: body.legislator_id.length,
+      hasChamber: typeof body.legislator_chamber === 'string',
+    });
+  }
+
   const identity = await resolveUsageIdentity(ip);
   if (process.env.TURNSTILE_SECRET_KEY) {
     // Bot check stays on for the general website, off for an organization's
