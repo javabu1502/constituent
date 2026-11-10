@@ -61,6 +61,69 @@ interface LegiScanRollCall {
   votes: LegiScanRollCallVote[];
 }
 
+/**
+ * A hard monthly ceiling, below LegiScan's 10,000 so there is room to be wrong.
+ * The allowance was emptied by crawlers walking the 7,000 state legislator
+ * pages in the sitemap, and nothing noticed until LegiScan sent an email: the
+ * calls just started returning ERROR and every caller quietly fell back to
+ * Open States. A budget that refuses locally is visible in the logs and leaves
+ * the remaining quota for people who are actually on the site.
+ */
+const MONTHLY_BUDGET = 8000;
+
+function budgetKey(): string {
+  const now = new Date();
+  return `legiscan-budget-${now.getUTCFullYear()}-${String(now.getUTCMonth() + 1).padStart(2, '0')}`;
+}
+
+/**
+ * Claim `n` queries against this month's budget before spending them. Returns
+ * false when the month is spent, and the caller falls back as it would for any
+ * other LegiScan failure. Read then write, so a burst can overshoot slightly,
+ * which is what the 2,000 of headroom is for.
+ */
+export async function claimLegiscanBudget(n: number): Promise<boolean> {
+  try {
+    const admin = createAdminClient();
+    const key = budgetKey();
+    const { data } = await admin
+      .from('feed_cache')
+      .select('data')
+      .eq('user_id', 'public')
+      .eq('feed_type', key)
+      .single();
+
+    const used = Number((data?.data as { used?: number } | null)?.used ?? 0);
+    if (used + n > MONTHLY_BUDGET) {
+      console.warn(`[legiscan] monthly budget spent: ${used}/${MONTHLY_BUDGET}, refusing ${n}`);
+      return false;
+    }
+
+    await admin
+      .from('feed_cache')
+      .upsert(
+        { user_id: 'public', feed_type: key, data: { used: used + n }, fetched_at: new Date().toISOString() },
+        { onConflict: 'user_id,feed_type' }
+      );
+    return true;
+  } catch {
+    // The budget is a guard, not a gate. If it cannot be read, let the call go.
+    return true;
+  }
+}
+
+type LegiScanMasterList = Record<string, {
+  bill_id: number;
+  number: string;
+  title: string;
+  change_hash: string;
+  status: number;
+  last_action_date: string;
+}>;
+
+/** The master list changes as bills move, but not meaningfully within a day. */
+const MASTER_LIST_TTL_MS = 12 * 60 * 60 * 1000;
+
 async function legiscanFetch(op: string, params: Record<string, string> = {}): Promise<Record<string, unknown> | null> {
   const apiKey = process.env.LEGISCAN_API_KEY;
   if (!apiKey) return null;
@@ -272,18 +335,47 @@ export async function fetchLegiscanVotes(
     }
   }
 
-  // Get master bill list with change_hash values (1 API call)
-  const masterData = await legiscanFetch('getMasterListRaw', { id: String(session.session_id) });
-  if (!masterData?.masterlist) return null;
+  // Past this point the request may actually spend queries, so claim them.
+  // The claim sits below the votes cache check on purpose: a cache hit costs
+  // LegiScan nothing and must not count against the month. A cold person
+  // costs one master list check plus up to twenty bill fetches and their roll
+  // calls, so claim that rather than discover halfway through that the month
+  // is gone.
+  if (!(await claimLegiscanBudget(25))) return null;
 
-  const masterList = masterData.masterlist as Record<string, {
-    bill_id: number;
-    number: string;
-    title: string;
-    change_hash: string;
-    status: number;
-    last_action_date: string;
-  }>;
+  // The master list is identical for every person in a session, but it used to
+  // be fetched once per person with no cache. Nevada alone has 63 legislators
+  // and the sitemap advertises about 7,000 of them nationally, so a crawler
+  // walking those pages spent one query per person on the same payload. That
+  // is what emptied the 10,000 a month allowance. Cached per session now, so
+  // the cost is a couple of queries per state per day rather than one per
+  // legislator anyone happens to look at.
+  const masterCacheKey = `legiscan-masterlist-${session.session_id}`;
+  let masterList: LegiScanMasterList | null = null;
+
+  const { data: masterCached } = await admin
+    .from('feed_cache')
+    .select('data, fetched_at')
+    .eq('user_id', 'public')
+    .eq('feed_type', masterCacheKey)
+    .single();
+
+  if (masterCached && Date.now() - new Date(masterCached.fetched_at).getTime() < MASTER_LIST_TTL_MS) {
+    masterList = masterCached.data as LegiScanMasterList;
+  }
+
+  if (!masterList) {
+    const masterData = await legiscanFetch('getMasterListRaw', { id: String(session.session_id) });
+    if (!masterData?.masterlist) return null;
+    masterList = masterData.masterlist as LegiScanMasterList;
+    await admin
+      .from('feed_cache')
+      .upsert(
+        { user_id: 'public', feed_type: masterCacheKey, data: masterList, fetched_at: new Date().toISOString() },
+        { onConflict: 'user_id,feed_type' }
+      );
+  }
+  if (!masterList) return null;
 
   // Load cached hashes
   const { data: hashCached } = await admin
