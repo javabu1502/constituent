@@ -83,12 +83,36 @@ async function checkSendShapes() {
   }
 }
 
+/**
+ * Every state has two senators. Always, including on the day an appointed
+ * one's term lapses.
+ *
+ * Upstream ends an appointed senator's term on the date of the special
+ * election and publishes nothing more until the winner is sworn in. Florida
+ * and Ohio sat at one senator each for nine days in November 2026 because of
+ * that gap, and nothing said so. The roster is local data, so this costs one
+ * file read and would have caught it the next morning.
+ */
+async function checkSenateCoverage() {
+  const { findSenators } = await import('../src/lib/legislators');
+  const states = ['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY'];
+  let total = 0;
+  for (const state of states) {
+    const seated = findSenators(state).length;
+    total += seated;
+    if (seated !== 2) failures.push(`${state} has ${seated} senators on file, not 2`);
+  }
+  if (total === 100) console.log(`  ok   100  senate seats filled`);
+}
+
 async function main() {
   console.log(`canary against ${SITE}\n`);
   console.log('pages:');
   await checkPages();
   console.log('\nsend payload shapes:');
   await checkSendShapes();
+  console.log('\nroster coverage:');
+  await checkSenateCoverage();
 
   if (failures.length > 0) {
     console.error(`\n${failures.length} FAILED:`);

@@ -8,6 +8,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import * as yaml from 'yaml';
+import { applyTermEndOverrides } from '@/lib/federal-term-overrides';
 
 // Types for the YAML data structures
 interface FederalLegislatorId {
@@ -342,6 +343,10 @@ function loadFederalLegislators(): FederalLegislator[] {
 
   const content = fs.readFileSync(filePath, 'utf-8');
   federalLegislatorsCache = yaml.parse(content) as FederalLegislator[];
+  // Upstream marks an appointed senator's term as ending on the day of the
+  // special election and publishes nothing more until the winner is sworn in.
+  // See federal-term-overrides.ts for the seats currently in that gap.
+  applyTermEndOverrides(federalLegislatorsCache);
 
   return federalLegislatorsCache;
 }
