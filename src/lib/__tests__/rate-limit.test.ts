@@ -83,3 +83,28 @@ describe('getClientIp', () => {
     expect(getClientIp(req)).toBe('127.0.0.1');
   });
 });
+
+describe('activityLimiter', () => {
+  beforeEach(() => {
+    vi.resetModules();
+  });
+
+  // A person reads a handful of legislators in a minute. The crawl that
+  // emptied the LegiScan allowance walked about 7,000 of them.
+  it('passes a person browsing and stops a crawl', async () => {
+    const { activityLimiter } = await import('../rate-limit');
+    const ip = '203.0.113.7';
+    for (let i = 0; i < 30; i++) {
+      expect(activityLimiter.check(ip).success, `request ${i + 1}`).toBe(true);
+    }
+    expect(activityLimiter.check(ip).success).toBe(false);
+  });
+
+  it('counts each address on its own', async () => {
+    const { activityLimiter } = await import('../rate-limit');
+    const crawler = '198.51.100.1';
+    for (let i = 0; i < 31; i++) activityLimiter.check(crawler);
+    expect(activityLimiter.check(crawler).success).toBe(false);
+    expect(activityLimiter.check('198.51.100.2').success).toBe(true);
+  });
+});

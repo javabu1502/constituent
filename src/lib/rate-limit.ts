@@ -68,6 +68,12 @@ export const generateLimiter = rateLimit({ windowMs: 60_000, maxRequests: 5 }); 
 export const summaryLimiter = rateLimit({ windowMs: 60_000, maxRequests: 15 });     // has Supabase cache
 export const writeLimiter = rateLimit({ windowMs: 60_000, maxRequests: 40 });      // track-send, message-feedback, participate, stories; per IP
 export const lookupLimiter = rateLimit({ windowMs: 60_000, maxRequests: 15 });     // representatives
+// Legislator activity: one call per legislator page, each an uncached Open
+// States call plus two Google News RSS calls. A person reads a handful of
+// legislators; the crawl that emptied the LegiScan allowance walked about
+// 7,000 of them. Set above the shared-office case on purpose, because going
+// over serves cached data rather than failing.
+export const activityLimiter = rateLimit({ windowMs: 60_000, maxRequests: 30 });
 export const profileLimiter = rateLimit({ windowMs: 60_000, maxRequests: 10 });    // profile, campaigns
 
 // NOTE: Daily AI cost caps are enforced durably in the database via

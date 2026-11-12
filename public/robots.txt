@@ -1,3 +1,8 @@
 User-agent: *
 Allow: /
+# The API is not content. Nothing under it belongs in an index, and the
+# endpoints behind the legislator pages call metered third-party APIs once per
+# legislator, so a crawl that walks them spends an allowance on nobody.
+Disallow: /api/
+
 Sitemap: https://www.mydemocracy.app/sitemap.xml

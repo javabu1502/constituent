@@ -3,6 +3,7 @@ import { createAdminClient } from '@/lib/supabase';
 import { fetchPersonFeedBills, extractPersonVotes } from '@/lib/openstates-person';
 import { fetchLegiscanVotes } from '@/lib/legiscan-api';
 import { callerIsOrganization } from '@/lib/legiscan-access';
+import { activityLimiter, getClientIp } from '@/lib/rate-limit';
 import type { FeedBill, RepVote, RepNewsArticle } from '@/lib/types';
 
 const CACHE_TTL_MS = 12 * 60 * 60 * 1000; // 12 hours
@@ -104,6 +105,26 @@ async function fetchLegislatorNews(name: string, state: string, personId: string
   return articles.slice(0, 7);
 }
 
+/**
+ * Public answers are cached at Vercel's edge, where a second crawl of the
+ * same legislator is served without the function, the database or anyone's
+ * API being touched at all.
+ *
+ * An organization's answer is never cached there. This route varies by who is
+ * asking, the edge keys on the URL rather than the session, and the two are
+ * the same URL. A shared cache entry would hand an organization's roll-call
+ * record to the next anonymous visitor and undo the gate in legiscan-access.
+ */
+function cachedResponse(data: unknown, shared: boolean): NextResponse {
+  return NextResponse.json(data, {
+    headers: {
+      'Cache-Control': shared
+        ? 'public, s-maxage=43200, stale-while-revalidate=86400'
+        : 'private, no-store',
+    },
+  });
+}
+
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const personId = searchParams.get('personId');
@@ -134,12 +155,23 @@ export async function GET(request: Request) {
     .eq('feed_type', feedType)
     .single();
 
-  if (cached && Date.now() - new Date(cached.fetched_at).getTime() < CACHE_TTL_MS) {
-    // Public entries written before LegiScan became organization-only still
-    // hold roll-call votes. Rebuild rather than serve them, which costs one
-    // Open States call and gives a correct answer instead of an empty one.
-    const stale = !isOrg && (cached.data as { vote_data_source?: string } | null)?.vote_data_source === 'legiscan';
-    if (!stale) return NextResponse.json(cached.data);
+  const fresh = cached && Date.now() - new Date(cached.fetched_at).getTime() < CACHE_TTL_MS;
+  // Public entries written before LegiScan became organization-only still
+  // hold roll-call votes. Rebuild rather than serve them, which costs one
+  // Open States call and gives a correct answer instead of an empty one.
+  const holdsOrgVotes =
+    !isOrg && (cached?.data as { vote_data_source?: string } | null)?.vote_data_source === 'legiscan';
+
+  if (fresh && !holdsOrgVotes) return cachedResponse(cached.data, !isOrg);
+
+  // Everything past here calls Open States and Google News, once per
+  // legislator, so this is where a crawl walking 7,000 pages spends real
+  // money. Going over the limit serves whatever is on file rather than
+  // failing, so a shared office address degrades to slightly older data
+  // instead of an empty panel.
+  if (!activityLimiter.check(getClientIp(request)).success) {
+    if (cached) return cachedResponse(cached.data, !isOrg);
+    return NextResponse.json({ error: 'Too many requests', code: 'RATE_LIMITED' }, { status: 429 });
   }
 
   // One Open States REST call: the person's bills (any sponsorship role)
@@ -195,5 +227,5 @@ export async function GET(request: Request) {
       { onConflict: 'user_id,feed_type' }
     );
 
-  return NextResponse.json(result);
+  return cachedResponse(result, !isOrg);
 }
