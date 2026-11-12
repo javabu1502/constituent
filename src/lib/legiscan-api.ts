@@ -13,6 +13,7 @@
  */
 
 import { createAdminClient } from '@/lib/supabase';
+import { callerIsOrganization } from '@/lib/legiscan-access';
 import type { RepVote } from '@/lib/types';
 
 const BASE_URL = 'https://api.legiscan.com/';
@@ -197,6 +198,7 @@ export async function resolveLegiscanBill(
   stateCode: string,
   query: string,
 ): Promise<{ title: string; url: string; ref: string } | null> {
+  if (!(await callerIsOrganization())) return null;
   const session = await getCurrentSession(stateCode);
   if (!session) return null;
 
@@ -310,6 +312,7 @@ export async function fetchLegiscanVotes(
   chamber: string,
   personId: string,
 ): Promise<{ votes: RepVote[]; source: 'legiscan' } | null> {
+  if (!(await callerIsOrganization())) return null;
   const session = await getCurrentSession(stateCode);
   if (!session) return null;
 

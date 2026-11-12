@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { createAdminClient } from '@/lib/supabase';
 import { fetchPersonFeedBills, extractPersonVotes } from '@/lib/openstates-person';
 import { fetchLegiscanVotes } from '@/lib/legiscan-api';
+import { callerIsOrganization } from '@/lib/legiscan-access';
 import type { FeedBill, RepVote, RepNewsArticle } from '@/lib/types';
 
 const CACHE_TTL_MS = 12 * 60 * 60 * 1000; // 12 hours
@@ -116,7 +117,14 @@ export async function GET(request: Request) {
   }
 
   const admin = createAdminClient();
-  const feedType = `legislator-activity-${personId}`;
+
+  // Two audiences, two cache entries. Only organization accounts reach
+  // LegiScan, so an organization's copy of this panel can hold the full
+  // roll-call record while the public copy holds Open States sponsored-bill
+  // votes. One shared entry would hand whichever version was written first
+  // to everyone.
+  const isOrg = await callerIsOrganization();
+  const feedType = isOrg ? `legislator-activity-org-${personId}` : `legislator-activity-${personId}`;
 
   // Check cache
   const { data: cached } = await admin
@@ -127,7 +135,11 @@ export async function GET(request: Request) {
     .single();
 
   if (cached && Date.now() - new Date(cached.fetched_at).getTime() < CACHE_TTL_MS) {
-    return NextResponse.json(cached.data);
+    // Public entries written before LegiScan became organization-only still
+    // hold roll-call votes. Rebuild rather than serve them, which costs one
+    // Open States call and gives a correct answer instead of an empty one.
+    const stale = !isOrg && (cached.data as { vote_data_source?: string } | null)?.vote_data_source === 'legiscan';
+    if (!stale) return NextResponse.json(cached.data);
   }
 
   // One Open States REST call: the person's bills (any sponsorship role)

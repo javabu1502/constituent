@@ -4,6 +4,7 @@ import { createAdminClient } from '@/lib/supabase';
 import { createClient } from '@/lib/supabase/server';
 import type { RepVote, VotingRecordResponse, Official } from '@/lib/types';
 import { fetchLegiscanVotes } from '@/lib/legiscan-api';
+import { callerIsOrganization } from '@/lib/legiscan-access';
 import { fetchHouseVotes, fetchSenateVotes, computeSummary } from '@/lib/votes';
 
 const CACHE_TTL_MS = 24 * 60 * 60 * 1000; // 24 hours
@@ -144,7 +145,13 @@ export async function GET(request: NextRequest) {
 
   if (cached && Date.now() - new Date(cached.fetched_at).getTime() < CACHE_TTL_MS) {
     const cachedPayload = cached.data as VotingRecordResponse | null;
-    if (cachedPayload?.votes && cachedPayload.votes.length > 0) {
+    // This cache is per user, so it cannot leak one account's roll-call
+    // record to another. Entries written before LegiScan became
+    // organization-only can still hold one for a constituent, so those are
+    // rebuilt instead of served.
+    const staleLegiscan =
+      cachedPayload?.data_source === 'legiscan' && !(await callerIsOrganization());
+    if (!staleLegiscan && cachedPayload?.votes && cachedPayload.votes.length > 0) {
       return NextResponse.json(cachedPayload);
     }
   }

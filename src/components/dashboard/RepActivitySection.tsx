@@ -398,7 +398,7 @@ function VotingRecordTab({ repId, repLevel, repState }: { repId: string; repLeve
             ? <>Data provided by <a href="https://legiscan.com" target="_blank" rel="noopener noreferrer" className="underline font-medium hover:text-gray-700 dark:hover:text-gray-300">LegiScan</a>. Coverage may vary by state legislature session.</>
             : repLevel === 'federal'
               ? 'Voting data from Congress.gov for the 119th Congress. Detailed vote tallies and positions are shown for recent votes where data is available.'
-              : 'Voting data from Open States. Coverage may vary by state legislature session.'}
+              : 'Voting data from Open States, covering bills this legislator sponsored. Coverage varies by state legislature session.'}
         </p>
       </div>
     </div>
