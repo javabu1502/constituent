@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import { updateSession } from '@/lib/supabase/middleware';
+import { isGatedPath, isUsRequest, GEO_BLOCKED_BODY } from '@/lib/geo-gate';
 
 const securityHeaders: Record<string, string> = {
   'X-Frame-Options': 'DENY',
@@ -73,6 +74,16 @@ export async function middleware(request: NextRequest) {
   // needs the PKCE code verifier cookie untouched.
   if (request.nextUrl.pathname === '/auth/callback') {
     return applySecurityHeaders(NextResponse.next(), request.nextUrl.pathname);
+  }
+
+  // Acting costs money and ends at a congressional office, so it is gated to
+  // the United States. Reading is not. See src/lib/geo-gate.ts for why, and
+  // for which paths count as acting.
+  if (isGatedPath(request.nextUrl.pathname) && !isUsRequest(request)) {
+    return applySecurityHeaders(
+      NextResponse.json(GEO_BLOCKED_BODY, { status: 403 }),
+      request.nextUrl.pathname,
+    );
   }
 
   // Custom domain root → that org's campaign page.
