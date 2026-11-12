@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { isUsRequest, isGatedPath, requestCountry } from '../geo-gate';
+import { isUsRequest, isGatedPath, requestCountry, isMonitoringProbe } from '../geo-gate';
 
 const req = (country?: string) =>
   new Request('https://www.mydemocracy.app/api/track-send', {
@@ -58,5 +58,31 @@ describe('geo gate', () => {
   it('does not gate a route that only shares a prefix', () => {
     expect(isGatedPath('/api/representatives-guide')).toBe(false);
     expect(isGatedPath('/api/chatter')).toBe(false);
+  });
+
+  // A canary that 403s because its runner moved abroad reads exactly like an
+  // outage, which is the opposite of what a canary is for.
+  describe('the monitoring probe', () => {
+    const probe = (secret?: string) =>
+      new Request('https://www.mydemocracy.app/api/track-send', {
+        headers: secret ? { 'x-canary-secret': secret, 'x-vercel-ip-country': 'SG' } : { 'x-vercel-ip-country': 'SG' },
+      });
+
+    it('is recognised by its secret', () => {
+      process.env.CANARY_SECRET = 'right';
+      expect(isMonitoringProbe(probe('right'))).toBe(true);
+    });
+
+    it('is not recognised on a wrong or missing secret', () => {
+      process.env.CANARY_SECRET = 'right';
+      expect(isMonitoringProbe(probe('wrong'))).toBe(false);
+      expect(isMonitoringProbe(probe())).toBe(false);
+    });
+
+    // Otherwise any caller sending the header would be exempt.
+    it('is not recognised when no secret is configured', () => {
+      delete process.env.CANARY_SECRET;
+      expect(isMonitoringProbe(probe('anything'))).toBe(false);
+    });
   });
 });

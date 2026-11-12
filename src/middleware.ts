@@ -1,6 +1,6 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import { updateSession } from '@/lib/supabase/middleware';
-import { isGatedPath, isUsRequest, GEO_BLOCKED_BODY } from '@/lib/geo-gate';
+import { isGatedPath, isUsRequest, isMonitoringProbe, GEO_BLOCKED_BODY } from '@/lib/geo-gate';
 
 const securityHeaders: Record<string, string> = {
   'X-Frame-Options': 'DENY',
@@ -79,7 +79,11 @@ export async function middleware(request: NextRequest) {
   // Acting costs money and ends at a congressional office, so it is gated to
   // the United States. Reading is not. See src/lib/geo-gate.ts for why, and
   // for which paths count as acting.
-  if (isGatedPath(request.nextUrl.pathname) && !isUsRequest(request)) {
+  if (
+    isGatedPath(request.nextUrl.pathname) &&
+    !isUsRequest(request) &&
+    !isMonitoringProbe(request)
+  ) {
     return applySecurityHeaders(
       NextResponse.json(GEO_BLOCKED_BODY, { status: 403 }),
       request.nextUrl.pathname,

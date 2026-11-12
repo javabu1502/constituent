@@ -71,6 +71,27 @@ const GATED_PREFIXES = [
   '/api/stories',
 ];
 
+/**
+ * The scheduled canary, which must not be mistaken for the traffic this gate
+ * exists to stop.
+ *
+ * It POSTs to /api/track-send every day from a GitHub runner. Those runners
+ * are US-hosted today, so the gate lets it through today, but nothing
+ * promises that stays true. A canary that starts failing with a 403 because
+ * its runner moved would read exactly like an outage, which is the opposite
+ * of what a canary is for.
+ *
+ * The secret alone grants nothing. track-send still requires dry_run before
+ * it short-circuits, and without it the request faces every normal check, so
+ * the worst this exemption allows is reaching a route from abroad.
+ */
+export function isMonitoringProbe(request: Request): boolean {
+  const secret = process.env.CANARY_SECRET;
+  if (!secret) return false;
+  const sent = request.headers.get('x-canary-secret');
+  return !!sent && sent === secret;
+}
+
 export function isGatedPath(pathname: string): boolean {
   return GATED_PREFIXES.some((p) => pathname === p || pathname.startsWith(`${p}/`));
 }
