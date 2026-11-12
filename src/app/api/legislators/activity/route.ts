@@ -4,6 +4,7 @@ import { fetchPersonFeedBills, extractPersonVotes } from '@/lib/openstates-perso
 import { fetchLegiscanVotes } from '@/lib/legiscan-api';
 import { callerIsOrganization } from '@/lib/legiscan-access';
 import { activityLimiter, getClientIp } from '@/lib/rate-limit';
+import { isAnonymous } from '@/lib/cache-audience';
 import type { FeedBill, RepVote, RepNewsArticle } from '@/lib/types';
 
 const CACHE_TTL_MS = 12 * 60 * 60 * 1000; // 12 hours
@@ -117,11 +118,9 @@ async function fetchLegislatorNews(name: string, state: string, personId: string
  */
 function cachedResponse(data: unknown, shared: boolean): NextResponse {
   return NextResponse.json(data, {
-    headers: {
-      'Cache-Control': shared
-        ? 'public, s-maxage=43200, stale-while-revalidate=86400'
-        : 'private, no-store',
-    },
+    headers: shared
+      ? { 'Cache-Control': 'public, s-maxage=43200, stale-while-revalidate=86400', Vary: 'Cookie' }
+      : { 'Cache-Control': 'private, no-store' },
   });
 }
 
@@ -162,7 +161,9 @@ export async function GET(request: Request) {
   const holdsOrgVotes =
     !isOrg && (cached?.data as { vote_data_source?: string } | null)?.vote_data_source === 'legiscan';
 
-  if (fresh && !holdsOrgVotes) return cachedResponse(cached.data, !isOrg);
+  const shared = isAnonymous(request);
+
+  if (fresh && !holdsOrgVotes) return cachedResponse(cached.data, shared);
 
   // Everything past here calls Open States and Google News, once per
   // legislator, so this is where a crawl walking 7,000 pages spends real
@@ -170,7 +171,7 @@ export async function GET(request: Request) {
   // failing, so a shared office address degrades to slightly older data
   // instead of an empty panel.
   if (!activityLimiter.check(getClientIp(request)).success) {
-    if (cached) return cachedResponse(cached.data, !isOrg);
+    if (cached) return cachedResponse(cached.data, shared);
     return NextResponse.json({ error: 'Too many requests', code: 'RATE_LIMITED' }, { status: 429 });
   }
 
@@ -227,5 +228,5 @@ export async function GET(request: Request) {
       { onConflict: 'user_id,feed_type' }
     );
 
-  return cachedResponse(result, !isOrg);
+  return cachedResponse(result, shared);
 }
