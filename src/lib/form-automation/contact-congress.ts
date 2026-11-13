@@ -111,7 +111,10 @@ export function substitute(value: string, v: FormValues): string {
   const names = Object.keys(table).sort((a, b) => b.length - a.length);
   let out = value;
   for (const name of names) out = out.split(name).join(table[name]);
-  return out;
+  // Anything still looking like a variable was one we do not supply. It is
+  // removed rather than left standing: a congressional office receiving a
+  // letter that says "$NOT_A_FIELD" is the outcome this exists to avoid.
+  return out.replace(/\$[A-Z][A-Z0-9_]*/g, '');
 }
 
 /** "(775) 555-0100", the shape some forms insist on. */
@@ -253,6 +256,22 @@ export function chooseOption(wanted: string, allowed: string[] | undefined): str
       return low.includes(want) || want.includes(low);
     });
     if (partial) return partial;
+
+    // Offices write topics in their own words and their own number:
+    // "Child care" has to find "Children". Compare on word stems, requiring
+    // four characters so "tax" cannot claim "Taxes" and "Transportation"
+    // alike by accident.
+    const stems = (text: string) =>
+      text.split(/[^a-z0-9]+/).filter((w) => w.length >= 4).map((w) => w.replace(/(ies|es|s)$/, ''));
+    const wantStems = stems(want);
+    if (wantStems.length > 0) {
+      const stemMatch = allowed.find((o) =>
+        stems(o.trim().toLowerCase()).some((os) =>
+          wantStems.some((ws) => os.startsWith(ws) || ws.startsWith(os)),
+        ),
+      );
+      if (stemMatch) return stemMatch;
+    }
   }
   const catchAll = allowed.find((o) => /^(other|general|misc)/i.test(o.trim()));
   return catchAll ?? allowed[0];
