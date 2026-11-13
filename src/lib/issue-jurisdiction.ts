@@ -772,3 +772,20 @@ export function matchLabelForLevel(guidance: JurisdictionGuidance, level: GovLev
   const w = guidance.weights[level];
   return w === 2 ? 'best' : w === 1 ? 'also' : 'low';
 }
+
+/**
+ * The level that actually decides a matter, when it plainly is not Congress.
+ *
+ * Used when a message has been held for being outside congressional
+ * jurisdiction, so the constituent can be told which government to go to
+ * instead of being left with "under review". Returns null whenever there is
+ * any federal signal at all, because a mixed message is a judgment call and
+ * the reviewer makes it, not this function.
+ */
+export function offJurisdictionLevel(text: string): 'state' | 'local' | null {
+  const { weights } = getJurisdiction(text || '');
+  if (weights.federal > 0) return null;
+  if (weights.local > 0 && weights.local >= weights.state) return 'local';
+  if (weights.state > 0) return 'state';
+  return null;
+}

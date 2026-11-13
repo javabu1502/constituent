@@ -6,6 +6,7 @@ import { screenMessageForCwc, screeningKeyFor, type GateOutcome, type ScreenSibl
 import { CwcValidationError } from './xml';
 import { CWC_MESSAGE_STATUS, setMessageDeliveryStatus } from './message-status';
 import { notifyAdminOutcome, notifyConstituent, type DeliveryRef } from './notify';
+import { offJurisdictionLevel } from '@/lib/issue-jurisdiction';
 import type { CwcEnvironment } from './delivery-log';
 import type { CwcDelivery } from './types';
 
@@ -184,6 +185,9 @@ export async function enqueueCwcDeliveries(
         constituentEmail: first.constituent.email,
         officialName: group.map((i) => i.delivery.officialName).filter(Boolean).join(', ') || undefined,
         officeCode: first.officeCode,
+        // When the matter plainly belongs to another level of government, the
+        // notice says which one instead of promising a delivery.
+        heldFor: offJurisdictionLevel(first.message?.constituentMessage ?? ''),
       },
       'held',
     );

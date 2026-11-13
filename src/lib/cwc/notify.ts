@@ -27,6 +27,12 @@ export interface DeliveryRef {
   messageKey?: string | null;
   /** Webform only: the office's own contact form, for the constituent's fallback. */
   formUrl?: string | null;
+  /**
+   * Set when a message was held for being outside congressional jurisdiction:
+   * the level that actually decides it. The hold notice then names that
+   * government instead of promising a delivery that is not coming.
+   */
+  heldFor?: 'state' | 'local' | null;
 }
 
 export type ConstituentOutcome = 'held' | 'refused' | 'failed' | 'delivered';
@@ -146,14 +152,37 @@ export function constituentEmailCopy(ref: DeliveryRef, outcome: ConstituentOutco
   const site = siteUrl();
   const footer = `<p>My Democracy sends messages through the official congressional delivery systems. Reply to this email if you have a question.</p>`;
   switch (outcome) {
-    case 'held':
+    case 'held': {
+      // A message held because Congress does not decide the matter is not
+      // waiting on a delivery, so it must not be told one is coming. It is
+      // told which government does decide, which is the one useful thing we
+      // know at this point.
+      const opening = `<p>We received your message to ${official}.</p>
+<p>A reviewer is checking it before it goes to the office.</p>`;
+      if (ref.heldFor === 'state') {
+        return {
+          subject: `Your message to ${official} is under review`,
+          html: `${opening}
+<p>This looks like a matter for your state legislature. If that is right, you can write to your state legislators at <a href="${site}/contact">${site}/contact</a>.</p>
+${footer}`,
+        };
+      }
+      if (ref.heldFor === 'local') {
+        return {
+          subject: `Your message to ${official} is under review`,
+          html: `${opening}
+<p>This looks like a matter for your local government, such as a city council, village board or county commission. We do not yet help you contact local officials. You can find yours through USAGov at <a href="https://www.usa.gov/local-governments">usa.gov/local-governments</a>.</p>
+${footer}`,
+        };
+      }
       return {
         subject: `Your message to ${official} is under review`,
-        html: `<p>We received your message to ${official}.</p>
-<p>A reviewer is checking it before it goes to the office. This usually takes less than a day. You do not need to do anything.</p>
+        html: `${opening}
+<p>This usually takes less than a day. You do not need to do anything.</p>
 <p>We will email you when it is delivered.</p>
 ${footer}`,
       };
+    }
     case 'refused':
       return {
         subject: `Your message to ${official} was not delivered`,
