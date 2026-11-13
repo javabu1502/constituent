@@ -16,6 +16,14 @@ function fakeDb(rows: Record<string, number>, children: string[] = []) {
         select: () => self,
         eq(col: string, val: string) { q[col] = val; return self; },
         in(col: string, vals: string[]) { q[col] = vals.join(','); return self; },
+        // People are counted by paging the rows and deduplicating on email,
+        // not by asking the database for a row count, because one person who
+        // comes back twice is two rows and one person.
+        range(from: number, to: number) {
+          const n = rows[`${table}:all`] ?? 0;
+          const all = Array.from({ length: n }, (_, i) => ({ participant_email: `p${i}@example.com` }));
+          return Promise.resolve({ data: all.slice(from, to + 1), error: null });
+        },
         then(resolve: (v: { count: number; error: null }) => void) {
           if (table === 'campaigns') {
             // the children lookup

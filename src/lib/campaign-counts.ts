@@ -66,6 +66,47 @@ async function countRows(db: DbClient, table: string, apply: (q: never) => unkno
 }
 
 /**
+ * People, counted once each.
+ *
+ * `campaign_actions` holds one row per visit that took action, not one per
+ * person. On 2026-11-12 the Seneca Hills rezoning campaign had five rows from
+ * four addresses, because somebody came back and acted twice, and every
+ * surface reported five people. Counting rows overstates people by however
+ * many came back.
+ *
+ * Rows with no email cannot be deduplicated, so each is counted once. That
+ * can still overstate, and it is the honest ceiling rather than a guess.
+ *
+ * Paged deliberately: an unpaged select stops at PostgREST's default limit
+ * without saying so, which is the failure the message counts above were
+ * already rewritten to avoid.
+ */
+async function countDistinctParticipants(db: DbClient, campaignIds: string[]): Promise<number> {
+  const PAGE = 1000;
+  const seen = new Set<string>();
+  let withoutEmail = 0;
+  try {
+    for (let from = 0; ; from += PAGE) {
+      const { data, error } = await db
+        .from('campaign_actions')
+        .select('participant_email')
+        .in('campaign_id', campaignIds)
+        .range(from, from + PAGE - 1);
+      if (error || !data) break;
+      for (const row of data as Array<{ participant_email?: string | null }>) {
+        const email = (row.participant_email ?? '').trim().toLowerCase();
+        if (email) seen.add(email);
+        else withoutEmail += 1;
+      }
+      if (data.length < PAGE) break;
+    }
+  } catch {
+    return 0;
+  }
+  return seen.size + withoutEmail;
+}
+
+/**
  * Exact counts for an initiative. Never throws: a count that fails comes back
  * as zero rather than taking down the page that asked for it.
  */
@@ -79,7 +120,7 @@ export async function getInitiativeCounts(db: DbClient, campaignId: string): Pro
   const notDelivered = statusesForOutcome('not_delivered');
 
   const [participants, messages, d, f, n, stories] = await Promise.all([
-    countRows(db, 'campaign_actions', (q) => inIds(q)),
+    countDistinctParticipants(db, campaignIds),
     countRows(db, 'messages', (q) => inIds(q)),
     countRows(db, 'messages', (q) => (inIds(q) as { in: (c: string, v: string[]) => unknown }).in('delivery_status', delivered)),
     countRows(db, 'messages', (q) => (inIds(q) as { in: (c: string, v: string[]) => unknown }).in('delivery_status', inFlight)),
@@ -134,4 +175,16 @@ export async function getPortfolioCounts(db: DbClient, campaignIds: string[]): P
   } catch {
     return null;
   }
+}
+
+/**
+ * People who took part in a campaign and its steps, counted once each.
+ *
+ * A light version of getInitiativeCounts for surfaces that want the people
+ * number on its own, such as the public campaign page, without paying for
+ * the five message-status counts it does not render.
+ */
+export async function countCampaignParticipants(db: DbClient, campaignId: string): Promise<number> {
+  const campaignIds = await initiativeCampaignIds(db, campaignId);
+  return countDistinctParticipants(db, campaignIds);
 }

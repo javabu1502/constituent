@@ -12,6 +12,7 @@ import { CopyLinkButton } from '@/components/campaign/CopyLinkButton';
 import { CampaignClosedNotice } from '@/components/campaign/CampaignClosedNotice';
 import { fetchBillCard } from '@/lib/congress-api';
 import { isCampaignClosed } from '@/lib/campaign-close';
+import { countCampaignParticipants } from '@/lib/campaign-counts';
 import type { Campaign } from '@/lib/types';
 
 // Counts below this stay hidden on the public page (the progress bar's first milestone).
@@ -91,6 +92,13 @@ export default async function CampaignPage({ params }: PageProps) {
 
   const campaign = data as Campaign;
   const isStory = campaign.campaign_type === 'storytelling';
+
+  // Two different numbers, both true. `action_count` is officials engaged:
+  // one person writing to three of them moves it by three. This is people,
+  // counted once each. Showing only the first read as a headcount, and on
+  // 2026-11-12 the Seneca Hills page said "19 actions taken" for three
+  // members of the public.
+  const participantCount = isStory ? 0 : await countCampaignParticipants(admin, campaign.id);
 
   // Stage campaigns carry their parent so the participate flow can offer the
   // broader action to people who can't act on this narrow stage (e.g. their
@@ -350,17 +358,24 @@ export default async function CampaignPage({ params }: PageProps) {
               <svg aria-hidden="true" className="w-5 h-5 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
-              <span className="text-lg font-bold text-purple-700 dark:text-purple-300">
-                {isStory ? campaign.story_count : campaign.action_count}
-              </span>
-              <span className="text-sm text-purple-600 dark:text-purple-400">
-                {isStory
-                  ? `${(campaign.story_count === 1) ? 'person has' : 'people have'} shared their story`
-                  // action_count counts officials engaged (one send = one
-                  // action), not distinct people — a person contacting all
-                  // three of their members is three actions.
-                  : `${(campaign.action_count === 1) ? 'action taken' : 'actions taken'}`}
-              </span>
+              {isStory ? (
+                <>
+                  <span className="text-lg font-bold text-purple-700 dark:text-purple-300">
+                    {campaign.story_count}
+                  </span>
+                  <span className="text-sm text-purple-600 dark:text-purple-400">
+                    {`${(campaign.story_count === 1) ? 'person has' : 'people have'} shared their story`}
+                  </span>
+                </>
+              ) : (
+                <span className="text-sm text-purple-600 dark:text-purple-400">
+                  <span className="text-lg font-bold text-purple-700 dark:text-purple-300">{participantCount}</span>
+                  {` ${participantCount === 1 ? 'person' : 'people'}`}
+                  <span className="mx-1.5 text-purple-400">·</span>
+                  <span className="text-lg font-bold text-purple-700 dark:text-purple-300">{campaign.action_count}</span>
+                  {` ${campaign.action_count === 1 ? 'message to an official' : 'messages to officials'}`}
+                </span>
+              )}
             </div>
             <CopyLinkButton slug={campaign.slug} />
           </div>
