@@ -120,3 +120,42 @@ export function statusesForOutcome(outcome: DeliveryOutcome): string[] {
 export function knownStatuses(): string[] {
   return Object.keys(STATUSES);
 }
+
+/**
+ * How far a message got, as a number, so a later click cannot undo an
+ * earlier one.
+ *
+ * One person engaging one official produces several of these. She opens her
+ * mail app, copies the text, comes back and opens it again. On 2026-11-13 one
+ * constituent writing to five officials produced ten rows that way, and every
+ * count on the site read it as ten messages.
+ *
+ * Copying is not sending, and opening twice is not writing twice, so the
+ * strongest status wins and the rest only update the row that exists.
+ */
+const STATUS_RANK: Record<string, number> = {
+  email_copied: 1,
+  website_opened: 1,
+  form_opened: 1,
+  email_opened: 2,
+  called: 2,
+  cwc_held: 3,
+  webform_held: 3,
+  cwc_queued: 3,
+  webform_queued: 3,
+  cwc_refused: 4,
+  cwc_failed: 4,
+  webform_failed: 4,
+  cwc_delivered: 5,
+  webform_delivered: 5,
+};
+
+export function deliveryStatusRank(status: string | null | undefined): number {
+  if (!status) return 0;
+  return STATUS_RANK[status] ?? 2;
+}
+
+/** True when `next` says more than `current` and should replace it. */
+export function isStrongerStatus(next: string | null | undefined, current: string | null | undefined): boolean {
+  return deliveryStatusRank(next) > deliveryStatusRank(current);
+}

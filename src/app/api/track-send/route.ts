@@ -12,6 +12,7 @@ import { enqueueCwcDeliveries } from '@/lib/cwc';
 import { buildCwcQueueItem, shouldEnqueueCwc, type CampaignBillContext } from '@/lib/cwc/enqueue-from-send';
 import { buildWebformQueueItem, enqueueWebformDelivery } from '@/lib/webform/queue';
 import { CWC_MESSAGE_STATUS, WEBFORM_MESSAGE_STATUS, setMessageDeliveryStatus } from '@/lib/cwc/message-status';
+import { isStrongerStatus } from '@/lib/delivery-status';
 import { locTopicsForIssueArea } from '@/lib/cwc/topics';
 
 // The CWC enqueue path (after()) reaches congressional endpoints through the
@@ -196,7 +197,61 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    const { data, error } = await supabase.from('messages').insert({
+    // The row this request ends up pointing at, whether it was created now
+    // or already existed.
+    let messageRowId: string | null = null;
+
+    // One row per person per official per campaign, not one per click.
+    //
+    // She opens her mail app, copies the text, comes back and opens it again.
+    // Each was an insert, so on 2026-11-13 one constituent writing to five
+    // officials produced ten rows and every count on the site read it as ten
+    // messages. Copying is not sending, and opening twice is not writing
+    // twice.
+    //
+    // Bounded by a week, matching the legislator cooldown: the same person
+    // writing to the same office about the same thing a month later is a
+    // second message and should look like one.
+    const sameSender = (body.advocate_email || '').trim().toLowerCase();
+    const weekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
+    type ExistingRow = { id: string; delivery_status: string | null };
+    let existing: ExistingRow | null = null;
+    if (sameSender) {
+      // Wrapped, and deliberately. This is a tidiness lookup: if it cannot
+      // run, the right outcome is an extra row, not a constituent losing
+      // their message because the deduplication query failed.
+      try {
+        let q = supabase
+          .from('messages')
+          .select('id, delivery_status')
+          .eq('advocate_email', body.advocate_email)
+          .eq('legislator_id', body.legislator_id)
+          .gte('created_at', weekAgo)
+          .order('created_at', { ascending: false })
+          .limit(1);
+        q = body.campaign_id ? q.eq('campaign_id', body.campaign_id) : q.is('campaign_id', null);
+        const { data: found } = await q.maybeSingle();
+        existing = (found as ExistingRow | null) ?? null;
+      } catch (e) {
+        console.error('[track-send] dedupe lookup failed, inserting a new row:', (e as Error).message);
+      }
+    }
+
+    if (existing) {
+      // Only ever forward. A copy click arriving after an open must not
+      // reduce what we believe happened.
+      if (isStrongerStatus(body.delivery_status, existing.delivery_status)) {
+        await supabase
+          .from('messages')
+          .update({ delivery_status: body.delivery_status, delivery_method: body.delivery_method })
+          .eq('id', existing.id);
+      }
+      messageRowId = existing.id;
+    }
+
+    const { data, error } = messageRowId
+      ? { data: { id: messageRowId }, error: null }
+      : await supabase.from('messages').insert({
       advocate_name: body.advocate_name,
       advocate_email: body.advocate_email || null,
       advocate_city: body.advocate_city,
@@ -223,7 +278,7 @@ export async function POST(request: NextRequest) {
       message_intent: body.message_intent || null,
       user_id: verifiedUserId,
       campaign_id: body.campaign_id || null,
-    }).select('id').single();
+        }).select('id').single();
 
     if (error) {
       console.error('[track-send] Supabase insert error:', error);
