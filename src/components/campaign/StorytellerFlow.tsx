@@ -134,7 +134,12 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
   // derived city/state + reps with the creator is opt-out. We use the address only
   // in-request, never send the street, and never store any of it.
   const [address, setAddress] = useState<ParsedAddress>({ street: '', city: '', state: '', zip: '' });
-  const [shareLocation, setShareLocation] = useState(false);
+  // Checked by default. An organization collecting stories needs to know
+  // which district a story comes from for it to be worth anything to the
+  // office it goes to, and a storyteller who does not want that unticks it.
+  // Anonymous attribution overrides this regardless: no city, state or
+  // officials are stored on an anonymous story whatever this says.
+  const [shareLocation, setShareLocation] = useState(true);
 
   // Result from preview / submit
   const [finalBody, setFinalBody] = useState('');
@@ -157,6 +162,17 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
   // Map a failed response to a message in the campaign's language. Server
   // text is shown only where it is written for the storyteller (422 from
   // compose, localized there); everything else gets our own copy.
+  /**
+   * Statuses where the server's own wording is the useful thing to show.
+   *
+   * 403 is the one that cost a demo on 2026-11-13: a demonstration campaign
+   * refuses real stories and says exactly that, and the storyteller was told
+   * "Could not submit your story. Please try again" instead, which is advice
+   * to repeat something that cannot work. 400 and 500 are the same shape:
+   * the route writes a sentence for a person and nothing was showing it.
+   */
+  const SERVER_TEXT_STATUSES = [400, 403, 500];
+
   const failureMessage = (status: number, data: Record<string, unknown> | null, fallback: string, serverTextOn: number[] = []): string => {
     if (status === 429) return t.tooManyRequests;
     // The campaign stopped collecting while this page was open.
@@ -421,7 +437,7 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(buildPayload({ preview: true, sharedReps: [], turnstileToken, bodyText: body, previewConfirmed: false })),
         });
-        if (!res.ok) throw new Error(failureMessage(res.status, await readJson(res), res.status === 503 ? t.anonymizeFailed : t.prepareFailed));
+        if (!res.ok) throw new Error(failureMessage(res.status, await readJson(res), res.status === 503 ? t.anonymizeFailed : t.prepareFailed, SERVER_TEXT_STATUSES));
         const data = await readJson(res);
         if (!data) throw new Error(t.prepareFailed);
         const redacted = typeof data.final_body === 'string' && data.final_body ? data.final_body : body.trim();
@@ -439,7 +455,7 @@ export function StorytellerFlow({ campaign }: { campaign: Campaign }) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(buildPayload({ preview: false, sharedReps, turnstileToken, bodyText, previewConfirmed: confirmedBody !== undefined, previewToken, previewedBody })),
       });
-      if (!res.ok) throw new Error(failureMessage(res.status, await readJson(res), res.status === 503 ? t.anonymizeFailed : t.submitFailed));
+      if (!res.ok) throw new Error(failureMessage(res.status, await readJson(res), res.status === 503 ? t.anonymizeFailed : t.submitFailed, SERVER_TEXT_STATUSES));
       const data = await readJson(res);
       if (!data) throw new Error(t.submitFailed);
       setFinalBody(typeof data.final_body === 'string' && data.final_body ? data.final_body : bodyText.trim());
