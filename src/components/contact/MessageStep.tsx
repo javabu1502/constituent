@@ -525,7 +525,20 @@ export function MessageStep({ state, dispatch, onBack }: MessageStepProps) {
             if (ai) {
               const levels = new Set(selectLevels(ai));
               const pool = state.officials.length > 0 ? state.officials : repsNeedingMessages;
-              const chosen = chooseLocalOfficials(pool.filter((o) => levels.has((o.level as GovLevel) ?? 'federal')), `${issueText} ${state.personalWhy || ''}`);
+              // One chamber, when only one can act. The classifier returns
+              // levels, so a federal match used to mean both senators and the
+              // House member even where the reason it printed said
+              // "senators": a message about the Senate majority leader, who
+              // is chosen by senators alone, still went to a member of the
+              // House. Only ever narrows, and only on an explicit answer.
+              const chamber = typeof data.federal_chamber === 'string' ? data.federal_chamber : null;
+              const inScope = (o: { level?: string | null; chamber?: string | null }) => {
+                if (!levels.has((o.level as GovLevel) ?? 'federal')) return false;
+                if (o.level !== 'federal' || !chamber) return true;
+                const isSenate = o.chamber === 'senate';
+                return chamber === 'senate' ? isSenate : chamber === 'house' ? !isSenate : true;
+              };
+              const chosen = chooseLocalOfficials(pool.filter(inScope), `${issueText} ${state.personalWhy || ''}`);
               if (chosen.length > 0) {
                 dispatch({ type: 'SELECT_REPS', payload: chosen });
               }

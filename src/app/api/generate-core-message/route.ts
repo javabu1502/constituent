@@ -246,8 +246,16 @@ is Congress). ${routingHint}
 Also write "jurisdiction_reason": one plain sentence naming the level(s) that
 get this message and why, for the constituent to read.
 
+Also write "federal_chamber" when the matter belongs to ONE chamber of
+Congress and not the other: "senate", "house", or "both". Confirmations,
+treaties, the filibuster and anything about Senate leadership are "senate".
+Revenue bills originating in the House and anything about Speaker or House
+leadership are "house". Nearly everything else is "both", so use "both"
+unless one chamber plainly cannot act. Never contradict what you wrote in
+jurisdiction_reason: if the reason names senators, this is "senate".
+
 ${officialStance ? '\nAlso write "side": the answer you argued for, exactly "YES" or "NO".\n' : ''}${original ? '\nThe constituent wrote in Spanish. Also write "body_es": a faithful Spanish rendering of "body", sentence for sentence, so they can read what is being sent in their name. Same facts, same order, nothing added. No dashes.\n' : ''}
-Return ONLY JSON. Never explain, refuse, or add notes: {"body": "...", "subject": "...", "opening": "...", "ask": "..."${officialStance ? ', "side": "YES"|"NO"' : ''}${original ? ', "body_es": "..."' : ''}, "jurisdiction_reason": "...", "jurisdiction": {"federal": 0|1|2, "state": 0|1|2, "local": 0|1|2}}`;
+Return ONLY JSON. Never explain, refuse, or add notes: {"body": "...", "subject": "...", "opening": "...", "ask": "..."${officialStance ? ', "side": "YES"|"NO"' : ''}${original ? ', "body_es": "..."' : ''}, "jurisdiction_reason": "...", "federal_chamber": "senate"|"house"|"both", "jurisdiction": {"federal": 0|1|2, "state": 0|1|2, "local": 0|1|2}}`;
 
   // The precise action the ask sentence must carry (validated after).
   const stanceVerb =
@@ -291,7 +299,7 @@ Draft the core message.`;
       campaign?.bill_ref, campaign?.bill_title, userOwnWords,
     ].filter(Boolean).join(' ');
 
-    type CoreOut = { body?: string; subject?: unknown; opening?: unknown; ask?: unknown; side?: unknown; body_es?: unknown; jurisdiction?: unknown; jurisdiction_reason?: unknown } | null;
+    type CoreOut = { body?: string; subject?: unknown; opening?: unknown; ask?: unknown; side?: unknown; body_es?: unknown; jurisdiction?: unknown; jurisdiction_reason?: unknown; federal_chamber?: unknown } | null;
     let out: CoreOut = null;
     let body = '';
     let correction = '';
@@ -512,6 +520,13 @@ Draft the core message.`;
     // deterministic rule matched the issue text.
     const jurisdiction = sanitizeAiJurisdiction(out?.jurisdiction)?.weights ?? null;
     const jurisdiction_reason = deDash(String(out?.jurisdiction_reason ?? '').trim()).slice(0, 240) || null;
+    // Only ever narrows, and only on an explicit answer. A missing or
+    // unexpected value means both chambers, which is what this did before the
+    // field existed: a message that reaches one office too many is a smaller
+    // failure than one that reaches none.
+    const rawChamber = String(out?.federal_chamber ?? '').trim().toLowerCase();
+    const federal_chamber: 'senate' | 'house' | null =
+      rawChamber === 'senate' ? 'senate' : rawChamber === 'house' ? 'house' : null;
     // Routing audit trail: what the rules said, what the model said, and why.
     if (!campaign) {
       console.info('[jurisdiction]', JSON.stringify({ text: routingText.slice(0, 160), hint: routingHint ? routingHintWeights : null, source: routingSource, ai: jurisdiction, reason: jurisdiction_reason }));
@@ -519,7 +534,7 @@ Draft the core message.`;
     // Spanish reading copy of the core: for the participant's eyes, never sent.
     const rawBodyEs = original ? deDash(String(out?.body_es ?? '').trim()) : '';
     const body_es = rawBodyEs.length >= 40 ? rawBodyEs : null;
-    return NextResponse.json({ body, subject, opening, ask, jurisdiction, jurisdiction_reason, jurisdiction_source: routingSource, body_es, original });
+    return NextResponse.json({ body, subject, opening, ask, jurisdiction, jurisdiction_reason, federal_chamber, jurisdiction_source: routingSource, body_es, original });
   } catch (err) {
     console.error('[generate-core] failed:', err);
     return NextResponse.json({ error: 'Message drafting is unavailable right now' }, { status: 503 });

@@ -190,9 +190,25 @@ export async function screenMessageForCwc(opts: {
   // here, and the error path below HOLDS the message. A retry must not cost
   // the constituent their delivery. The existing row wins: it is the verdict
   // the queue acted on, and any human review already recorded sits on it.
-  const { error } = await db
+  let { error } = await db
     .from('message_compliance')
     .upsert(rows, { onConflict: 'message_key', ignoreDuplicates: true });
+
+  // ON CONFLICT needs a unique index it can match, and it cannot match a
+  // partial one. Between 2026-10-25 and 2026-11-13 the index carried a
+  // WHERE message_key IS NOT NULL predicate, this write failed every time,
+  // and every passing message was held. The index is plain again, and this
+  // falls back to a plain insert so the shape of an index can never again
+  // decide whether constituent mail gets delivered. A duplicate key here
+  // means the verdict is already recorded, which is the outcome we wanted.
+  if (error) {
+    const { error: insertError } = await db.from('message_compliance').insert(rows);
+    if (!insertError || insertError.code === '23505') {
+      error = null;
+    } else {
+      console.error('[cwc/compliance-gate] verdict insert fallback failed:', insertError.message);
+    }
+  }
   let outcome: GateOutcome = { decision: verdict.decision, verdict };
   if (error) {
     // The audit trail is part of the compliance story: if we cannot record
