@@ -10,8 +10,10 @@ import type { Campaign } from '@/lib/types';
  *
  * Different from the advocacy flow on purpose. Nothing is drafted here and
  * nothing is generated: the letter is fixed, and the only thing the signer
- * supplies is their name, their address and an optional line of their own.
- * That is the whole point of the instrument. A letter signed by 500 people
+ * supplies is their name and their address.
+ * There was a box for a line of their own. It made a ten-second action
+ * look like a writing task, and anyone who wants to write has the other
+ * option. A letter signed by 500 people
  * says one thing 500 times, which is what makes it readable to an office that
  * discounts 500 near-identical form letters.
  *
@@ -27,11 +29,11 @@ export function SignOnFlow({ campaign }: { campaign: Campaign & { letter_body?: 
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [form, setForm] = useState({
-    name: '', email: '', street: '', city: '', state: '', zip: '', personalNote: '', showNamePublicly: false,
+    name: '', email: '', street: '', city: '', state: '', zip: '', showNamePublicly: false,
   });
 
   const consent = signonConsentText(campaign.org_name);
-  const set = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+  const set = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement>) =>
     setForm((f) => ({ ...f, [k]: e.target.type === 'checkbox' ? (e.target as HTMLInputElement).checked : e.target.value }));
 
   async function submit(e: React.FormEvent) {
@@ -84,15 +86,6 @@ export function SignOnFlow({ campaign }: { campaign: Campaign & { letter_body?: 
           <input required className={field} placeholder="ZIP" value={form.zip} onChange={set('zip')} autoComplete="postal-code" />
         </div>
       </div>
-
-      <textarea
-        className={`${field} mt-3`}
-        rows={3}
-        maxLength={600}
-        placeholder="Anything you want to add, in your own words (optional)"
-        value={form.personalNote}
-        onChange={set('personalNote')}
-      />
 
       <p className="mt-4 text-sm text-gray-600 dark:text-gray-300">{consent}</p>
 

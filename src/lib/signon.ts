@@ -48,10 +48,14 @@ export interface OfficeRoll {
  * not a choice, so this states it rather than asking. The one real choice,
  * whether their name appears on the public page, is a separate control and
  * defaults to off.
+ *
+ * It said one more sentence, explaining that the address is how an office
+ * knows you live in the district. True, and nobody asked: a line of consent
+ * should say what happens to your details and stop.
  */
 export function signonConsentText(orgName?: string | null): string {
   const who = orgName?.trim() || 'the organization running this letter';
-  return `Your name and address go to your lawmakers with this letter, and to ${who}. That is how an office knows you live in the district.`;
+  return `Your name and address go to your lawmakers with this letter, and to ${who}.`;
 }
 
 const districtFor = (s: Signature, level: OfficeLevel): string | null => {
@@ -112,7 +116,7 @@ export function publicSignatories(signatures: Signature[]): Array<{ name: string
 /** One office's roll, as the rows an organization pastes under the letter. */
 export function rollCsv(roll: OfficeRoll): string {
   return toCSV(
-    ['Name', 'Street', 'City', 'State', 'ZIP', 'Email', 'Their own words'],
+    ['Name', 'Street', 'City', 'State', 'ZIP', 'Email'],
     roll.signers.map((s) => [
       s.name,
       s.street ?? '',
@@ -120,7 +124,6 @@ export function rollCsv(roll: OfficeRoll): string {
       s.state ?? '',
       s.zip ?? '',
       s.email,
-      s.personal_note ?? '',
     ]),
   );
 }

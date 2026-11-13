@@ -68,11 +68,21 @@ describe('what the public page may show', () => {
 
 describe('the roll an organization pastes under the letter', () => {
   it('carries the address, because that is the evidence', () => {
-    const roll = groupByOffice([sig({ street: '1 Main St', zip: '89506', personal_note: 'I was evacuated.' })], 'federal')[0];
+    const roll = groupByOffice([sig({ street: '1 Main St', zip: '89506' })], 'federal')[0];
     const csv = rollCsv(roll);
     expect(csv).toContain('1 Main St');
     expect(csv).toContain('89506');
-    expect(csv).toContain('I was evacuated.');
+    expect(csv).toContain('a@example.com');
+  });
+
+  // Signers no longer write a line of their own, so the column would be empty
+  // on every row. Signatures taken before the field went keep theirs in the
+  // database, they just do not travel in the export.
+  it('has no column for a line the signer cannot write', () => {
+    const roll = groupByOffice([sig({ personal_note: 'from before the field was removed' })], 'federal')[0];
+    const csv = rollCsv(roll);
+    expect(csv).not.toContain('Their own words');
+    expect(csv).not.toContain('from before the field was removed');
   });
 });
 
@@ -92,5 +102,13 @@ describe('what a signer agrees to', () => {
   // Jared's copy rules: flat declarative sentences only.
   it('uses no em dashes', () => {
     expect(signonConsentText('GEEARS')).not.toContain('—');
+  });
+
+  // It used to add that the address is how an office knows you live in the
+  // district. True, and nobody asked.
+  it('says what happens to your details and stops', () => {
+    const text = signonConsentText('GEEARS');
+    expect(text).not.toMatch(/that is how/i);
+    expect(text.split('.').filter((part) => part.trim()).length).toBe(1);
   });
 });
