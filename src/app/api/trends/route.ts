@@ -2,29 +2,62 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createAdminClient } from '@/lib/supabase';
 import { createClient } from '@/lib/supabase/server';
 
-function aggregateIssues(messages: { issue_area: string; issue_subtopic: string | null }[]) {
-  const issueCounts: Record<string, number> = {};
-  const subtopicCounts: Record<string, Record<string, number>> = {};
+/**
+ * How many distinct people have to share a subtopic before it is published.
+ *
+ * `issue_subtopic` is the constituent's own words, not a category from a
+ * list, so a subtopic used by one person is that person's sentence on a page
+ * anyone can read. On 2026-11-13 this page carried one constituent's full sentence
+ * about a local demolition beside the number 10. She had written it once and
+ * sent it to ten offices, and the page counted messages.
+ */
+const MIN_PEOPLE_FOR_SUBTOPIC = 3;
+
+/** Longer than a label is a sentence, and a sentence is somebody's message. */
+const MAX_SUBTOPIC_LENGTH = 48;
+
+type IssueRow = {
+  issue_area: string;
+  issue_subtopic: string | null;
+  advocate_name?: string | null;
+  advocate_city?: string | null;
+  advocate_state?: string | null;
+};
+
+/** Who sent it, as well as we can tell without storing anything new. */
+function sender(msg: IssueRow): string {
+  return [msg.advocate_name, msg.advocate_city, msg.advocate_state]
+    .map((p) => (p ?? '').trim().toLowerCase())
+    .join('|');
+}
+
+function aggregateIssues(messages: IssueRow[]) {
+  // People, not messages. One person writing to all five of their officials
+  // was five of whatever this counted, so a single constituent could look
+  // like a trend. The same mistake the campaign counts carried until today.
+  const issuePeople: Record<string, Set<string>> = {};
+  const subtopicPeople: Record<string, Record<string, Set<string>>> = {};
+
   for (const msg of messages) {
     const area = msg.issue_area;
-    if (area) {
-      issueCounts[area] = (issueCounts[area] || 0) + 1;
-      const sub = msg.issue_subtopic;
-      if (sub) {
-        if (!subtopicCounts[area]) subtopicCounts[area] = {};
-        subtopicCounts[area][sub] = (subtopicCounts[area][sub] || 0) + 1;
-      }
-    }
+    if (!area) continue;
+    const who = sender(msg);
+    (issuePeople[area] ??= new Set()).add(who);
+
+    const sub = (msg.issue_subtopic ?? '').trim();
+    if (!sub || sub.length > MAX_SUBTOPIC_LENGTH) continue;
+    ((subtopicPeople[area] ??= {})[sub] ??= new Set()).add(who);
   }
-  return Object.entries(issueCounts)
-    .map(([issue_area, count]) => ({
+
+  return Object.entries(issuePeople)
+    .map(([issue_area, people]) => ({
       issue_area,
-      count,
-      subtopics: subtopicCounts[issue_area]
-        ? Object.entries(subtopicCounts[issue_area])
-            .map(([name, cnt]) => ({ name, count: cnt }))
-            .sort((a, b) => b.count - a.count)
-        : [],
+      count: people.size,
+      subtopics: Object.entries(subtopicPeople[issue_area] ?? {})
+        .map(([name, who]) => ({ name, count: who.size }))
+        // Below the threshold a subtopic identifies the person who wrote it.
+        .filter((s) => s.count >= MIN_PEOPLE_FOR_SUBTOPIC)
+        .sort((a, b) => b.count - a.count),
     }))
     .sort((a, b) => b.count - a.count);
 }
@@ -76,7 +109,9 @@ export async function GET(req: NextRequest) {
   let issueQuery = excludeDemo(
     admin
       .from('messages')
-      .select('issue_area, issue_subtopic')
+      // The sender fields are read to count people rather than messages. They
+      // are never returned: only an issue name and a headcount leave here.
+      .select('issue_area, issue_subtopic, advocate_name, advocate_city, advocate_state')
   );
 
   issueQuery = realTraffic(issueQuery);
