@@ -51,25 +51,33 @@ export async function GET() {
   // held with no verdict row is listed here too, and plainly labelled.
   const rows = data ?? [];
   const known = new Set(rows.map((r) => r.message_key as string));
-  const { data: heldRows } = await admin
+  // The official's name and the message itself live inside the `delivery`
+  // jsonb, not in columns of their own.
+  const { data: heldRows, error: heldErr } = await admin
     .from('cwc_send_queue')
-    .select('id, message_key, office_code, official_name, created_at')
+    .select('id, message_key, office_code, delivery, created_at')
     .eq('status', 'held')
     .order('created_at', { ascending: true })
     .limit(100);
+  if (heldErr) console.error('[admin/compliance] held-queue fetch failed:', heldErr.message);
 
   const orphans = (heldRows ?? [])
     .filter((h) => !known.has(h.message_key as string))
-    .map((h) => ({
-      id: `queue-${h.id}`,
-      message_key: h.message_key,
-      decision: 'review',
-      reasons: ['Held before delivery, but the screener verdict was never recorded, so there is nothing to read here.'],
-      categories: [],
-      message_excerpt: `To ${h.official_name ?? h.office_code ?? 'an office'}. The message text is in the queue row, not in an audit record.`,
-      model: 'none',
-      created_at: h.created_at,
-    }));
+    .map((h) => {
+      const delivery = (h.delivery ?? {}) as { officialName?: string; message?: { subject?: string; constituentMessage?: string } };
+      const who = delivery.officialName ?? (h.office_code as string) ?? 'an office';
+      const subject = delivery.message?.subject ? `"${delivery.message.subject}" ` : '';
+      return {
+        id: `queue-${h.id}`,
+        message_key: h.message_key,
+        decision: 'review',
+        reasons: ['Held before delivery, but the screener verdict was never recorded, so there is nothing to read here.'],
+        categories: [],
+        message_excerpt: `${subject}to ${who}. ${(delivery.message?.constituentMessage ?? '').slice(0, 400)}`.trim(),
+        model: 'none',
+        created_at: h.created_at,
+      };
+    });
 
   return NextResponse.json([...rows, ...orphans]);
 }
