@@ -432,13 +432,13 @@ export default async function CampaignPage({ params }: PageProps) {
       {/* The letter, in full, before anyone is asked to put their name to it. */}
       {isSignOn && campaign.letter_body && (
         <section className="mb-8 bg-surface dark:bg-gray-800 rounded-2xl border border-rule dark:border-gray-700 p-6 sm:p-8">
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">The letter</h2>
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Read the letter</h2>
           <div className="whitespace-pre-wrap text-gray-700 dark:text-gray-300 leading-relaxed">
             {campaign.letter_body}
           </div>
           {signatureCount > 0 && (
             <p className="mt-6 pt-4 border-t border-rule dark:border-gray-700 text-sm text-gray-600 dark:text-gray-300">
-              Signed by {signatureCount} {signatureCount === 1 ? 'person' : 'people'}.
+              {signatureCount} {signatureCount === 1 ? 'person has' : 'people have'} signed.
               {shownNames.length > 0 && (
                 <>
                   {' '}

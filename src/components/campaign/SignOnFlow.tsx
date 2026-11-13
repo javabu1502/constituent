@@ -60,11 +60,9 @@ export function SignOnFlow({ campaign }: { campaign: Campaign & { letter_body?: 
       <div className="rounded-2xl border border-green-200 dark:border-green-800 bg-green-50 dark:bg-green-900/20 p-6">
         <h3 className="font-semibold text-gray-900 dark:text-white">Your name is on the letter.</h3>
         <p className="mt-2 text-sm text-gray-700 dark:text-gray-300">
-          {campaign.org_name ? `${campaign.org_name} delivers` : 'The organization running this letter delivers'}{' '}
-          it to the offices it names, with the signatures from each district.
           {done.districtResolved
-            ? ' Yours is filed with the office that represents your address.'
-            : ' We could not match your address to a district, so yours is listed separately for them to place by hand.'}
+            ? `${campaign.org_name ?? 'The organization'} will send it to the legislators who represent you.`
+            : `We could not match your address to a district. ${campaign.org_name ?? 'The organization'} will sort that out before the letter goes.`}
         </p>
       </div>
     );

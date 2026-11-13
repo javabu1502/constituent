@@ -58,8 +58,8 @@ export function SignOnChoice({
   return (
     <div>
       <div className="flex flex-col sm:flex-row gap-3">
-        {tab('sign', 'Add your name', 'Put your name to the letter above. It takes a few seconds.')}
-        {tab('write', 'Write your own', 'Use the points below to write it in your own words.')}
+        {tab('sign', 'Add your name', 'Sign the letter as it is written.')}
+        {tab('write', 'Write your own', 'Start from the talking points and write your own.')}
       </div>
 
       <div className="mt-6">
