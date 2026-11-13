@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { trackEvent } from '@/lib/analytics';
 import { Button } from '@/components/ui/Button';
 import { parseTalkingPoints, MAX_REQUIRED_POINTS } from '@/lib/talking-points';
+import { LOCAL_ROSTER_STATES } from '@/lib/local-coverage';
 import { IssuePicker } from '@/components/ui/IssuePicker';
 import { US_STATES } from '@/lib/constants';
 import { detectBillReferences } from '@/lib/bills';
@@ -155,6 +156,12 @@ export function CampaignForm({
     }
   };
   const [billState, setBillState] = useState(edit?.initial.resolvedBill?.state ?? '');
+  // Local campaigns carry their state in bill_state, the way the Reno
+  // rezoning case does. Only states we hold rosters for are offered: picking
+  // local anywhere else ends the flow with nobody to write to.
+  const [localState, setLocalState] = useState(
+    edit?.initial.resolvedBill?.state ?? (LOCAL_ROSTER_STATES.length === 1 ? LOCAL_ROSTER_STATES[0] : ''),
+  );
   const [billQuery, setBillQuery] = useState(edit?.initial.resolvedBill?.ref ?? '');
   const [resolvedBill, setResolvedBill] = useState<ResolvedBill | null>(edit?.initial.resolvedBill ?? null);
   const [billStatus, setBillStatus] = useState<'idle' | 'resolving' | 'notfound' | 'error'>('idle');
@@ -462,6 +469,7 @@ export function CampaignForm({
         ? {
             ...sharedBody,
             target_level: targetLevel,
+            ...(targetLevel === 'local' && localState ? { bill_state: localState } : {}),
             direction: direction || undefined,
             message_template: messageTemplate.trim() || null,
             talking_points_coverage: talkingPointsCoverage,
@@ -503,6 +511,7 @@ export function CampaignForm({
         ? {
             ...sharedBody,
             target_level: targetLevel,
+            ...(targetLevel === 'local' && localState ? { bill_state: localState } : {}),
             ...(direction ? { direction } : {}),
             message_template: messageTemplate.trim() || null,
             talking_points_coverage: talkingPointsCoverage,
@@ -807,6 +816,28 @@ export function CampaignForm({
           ))}
         </div>
         <FieldError field="targetLevel" />
+
+        {targetLevel === 'local' && (
+          <div className="mt-3">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+              Which state <span className="text-red-500">*</span>
+            </label>
+            <select
+              value={localState}
+              onChange={(e) => setLocalState(e.target.value)}
+              className="w-full sm:w-64 rounded-xl border border-gray-300 dark:border-gray-600 bg-surface dark:bg-gray-800 px-3 py-2 text-sm text-gray-900 dark:text-white"
+            >
+              <option value="">Select a state</option>
+              {LOCAL_ROSTER_STATES.map((code: string) => (
+                <option key={code} value={code}>{code}</option>
+              ))}
+            </select>
+            <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+              City and county rosters are built by hand, so only the states listed here can be
+              targeted locally today.
+            </p>
+          </div>
+        )}
       </div>
       )}
 

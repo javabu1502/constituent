@@ -1,6 +1,7 @@
 import type { Official, JurisdictionLevel, LocalOfficial } from '@/lib/types';
 import nv from '@/data/local/nv.json';
 import { findContainingFeature, type GeoFeatureCollection } from '@/lib/geo/point-in-polygon';
+export { LOCAL_ROSTER_STATES, hasLocalRosters } from '@/lib/local-coverage';
 
 /**
  * Local officials (county commissions, city councils, school boards) from the
