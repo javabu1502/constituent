@@ -1,9 +1,10 @@
 {
-  "checkedAt": "2026-11-13T21:15:22.982Z",
+  "checkedAt": "2026-11-13T21:37:12.605Z",
   "note": "Which vendored contact-form recipes still match their page. Nothing was submitted.",
   "binds": [
     "A000383",
     "B001277",
+    "B001288",
     "C000127",
     "C000880",
     "C001047",
@@ -39,10 +40,6 @@
   ],
   "stale": [
     {
-      "bioguide": "B001288",
-      "reason": "click_on[8] failed: page.click: Timeout 20000ms exceeded."
-    },
-    {
       "bioguide": "F000463",
       "reason": "required field could not be filled: field_E947A1A8-7A71-4295-AA00-FD0FE886E40D"
     },
@@ -52,7 +49,7 @@
     },
     {
       "bioguide": "M001169",
-      "reason": "required field could not be filled: input_0D9C1CBF-0FA9-F521-7BE3-D60FBF8BC532"
+      "reason": "required field could not be filled: input_02A611A6-C6E3-A8FD-5992-EE40147D726A"
     },
     {
       "bioguide": "S001198",

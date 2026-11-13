@@ -143,7 +143,11 @@ export default async function ManageCampaignPage({
         {/* Reaching the people who already acted. They were told, next to the
             box they typed it in, that this organization would email them when
             the bill moved. */}
-        {!isStory && !campaign.is_official && (
+        {/* Explicitly false, not merely falsy. If this column ever stops
+            being selected, `!undefined` would offer the download on a
+            platform campaign, whose participants were told their address is
+            never shared. Missing data should hide the link, not reveal it. */}
+        {!isStory && campaign.is_official === false && (
           <p className="mt-4 text-sm text-gray-600 dark:text-gray-400">
             <a
               href={`/api/campaigns/${campaign.slug}/participants?format=csv`}
