@@ -4,7 +4,7 @@ import { createAdminClient } from '@/lib/supabase';
 import { CAMPAIGN_PAGE_COLUMNS } from '@/lib/campaign-columns';
 import { CampaignParticipate } from '@/components/campaign/CampaignParticipate';
 import { StorytellerFlow } from '@/components/campaign/StorytellerFlow';
-import { SignOnFlow } from '@/components/campaign/SignOnFlow';
+import { SignOnChoice } from '@/components/campaign/SignOnChoice';
 import { publicSignatories } from '@/lib/signon';
 import { BillJourney } from '@/components/campaign/BillJourney';
 import { CampaignTalkingPoints } from '@/components/campaign/CampaignTalkingPoints';
@@ -477,12 +477,12 @@ export default async function CampaignPage({ params }: PageProps) {
       {/* Participation form */}
       <div className="bg-surface dark:bg-gray-800 rounded-2xl border border-rule dark:border-gray-700 p-6 sm:p-8">
         <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">
-          {isStory ? 'Share Your Story' : isSignOn ? 'Sign the letter' : 'Take Action'}
+          {isStory ? 'Share Your Story' : isSignOn ? (campaign.message_template ? 'Take Action' : 'Sign the letter') : 'Take Action'}
         </h2>
         {isStory ? (
           <StorytellerFlow campaign={campaign} />
         ) : isSignOn ? (
-          <SignOnFlow campaign={campaign} />
+          <SignOnChoice campaign={campaign} parentCampaign={parentCampaign} />
         ) : (
           <CampaignParticipate campaign={campaign} parentCampaign={parentCampaign} />
         )}
