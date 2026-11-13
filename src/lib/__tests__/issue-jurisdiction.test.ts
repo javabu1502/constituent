@@ -161,3 +161,28 @@ describe('every selectable issue routes through a hand-audited rule', () => {
     }
   });
 });
+
+/**
+ * Naming your local government should point the picker at local government,
+ * whatever your state calls it. Before this, a village board scored zero on
+ * local and the picker recommended Congress instead.
+ */
+describe('local government by its many names', () => {
+  const named = [
+    'The village board voted to demolish the old mill downtown.',
+    'The village trustees approved the demolition permit.',
+    'Our town board is tearing down a historic building.',
+    'The borough council approved a demolition permit.',
+    'The township trustees signed off on the demolition.',
+    'The select board voted to tear down the library.',
+  ];
+
+  for (const text of named) {
+    it(`points at local: "${text.slice(0, 40)}..."`, () => {
+      const g = getJurisdiction(text);
+      expect(g.weights.local).toBe(2);
+      expect(g.weights.federal).toBe(0);
+    });
+  }
+});
+

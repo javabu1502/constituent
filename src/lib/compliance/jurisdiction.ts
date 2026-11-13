@@ -26,8 +26,13 @@ const STATE_BILL_PATTERN = /\b(AB|SB|HB|HF|SF|LB|LD|SCR|HCR|SJR|HJR|ACR|AJR)\s*-
 const STATE_LEGISLATURE_PATTERN =
   /\b(state (?:legislature|assembly|senate|senator|assemblymember|assemblywoman|assemblyman|representative|house)|(?:nevada|california|texas|florida|new york|arizona|utah|oregon|washington|idaho) (?:legislature|assembly|state senate)|legislative session in carson city|carson city)\b/i;
 
+// Local legislative bodies, under the many names the country gives them.
+// This listed only the big-city forms, so a village board, a town board, a
+// borough council or township trustees read as no local signal at all, and
+// on 2026-11-12 a request to reverse a village board's demolition vote went
+// to a congressional office. Only the model screener stopped it.
 const LOCAL_BODY_PATTERN =
-  /\b(city council|county commission(?:ers)?|board of supervisors|school board|planning commission|zoning board|mayor'?s office|our mayor|the mayor|city manager|county manager|homeowners? association|\bhoa\b)\b/i;
+  /\b(city council|city commission|county commission(?:ers)?|town council|town board|village board|village trustees|village council|borough council|township (?:board|trustees|supervisors)|board of (?:supervisors|selectmen|trustees)|select ?board|alder(?:man|woman|person)|school board|planning commission|zoning board|mayor'?s office|our mayor|the mayor|city manager|county manager|village manager|homeowners? association|\bhoa\b)\b/i;
 
 // A FEDERAL ACTOR OR INSTRUMENT, never a bare topic, and never a bare title.
 //

@@ -540,7 +540,15 @@ RULES.push({
 
 RULES.push({
   // Naming the local government IS the routing signal.
-  pattern: /\bmayor\b|city hall|city council|county commission|town council|board of supervisors|\balderman\b/i,
+  //
+  // "City council" is not how most of the country says this. Illinois alone
+  // has over a thousand villages, each run by a village board; New York has
+  // town boards, Pennsylvania and New Jersey have borough councils, the
+  // Midwest has township trustees and New England has select boards. A
+  // message about a village board's demolition vote reached a congressional
+  // office in November 2026 because none of those words were here, so the
+  // picker never pointed at local government at all.
+  pattern: /\bmayor\b|city hall|city council|city commission|county commission|town council|town board|village board|village trustees|village council|borough council|township (?:board|trustees|supervisors)|board of (?:supervisors|selectmen|trustees)|select ?board|\balder(?:man|woman|person)\b/i,
   guidance: {
     weights: { federal: 0, state: 0, local: 2 },
     why: { local: 'You named your local government — that is who decides this.' },

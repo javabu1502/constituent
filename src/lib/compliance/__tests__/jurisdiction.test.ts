@@ -138,3 +138,47 @@ describe('a topic noun is not a federal ask', () => {
     expect(a.outsideFederal).toBe(false);
   });
 });
+
+/**
+ * The names the rest of the country uses for a local legislative body.
+ *
+ * On 2026-11-12 a constituent asked their member of Congress to reverse a
+ * village board's demolition vote. The deterministic check saw no local
+ * signal, because it knew "city council" and not "village board", and only
+ * the model screener held it. Illinois alone has over a thousand villages.
+ */
+describe('local bodies outside the big-city vocabulary', () => {
+  const local = [
+    ['village board', 'Please reverse the village board decision to demolish the old mill.'],
+    ['village trustees', 'The village trustees approved a demolition permit over our objections.'],
+    ['town board', 'The town board voted to demolish a historic building. Please intervene.'],
+    ['borough council', 'Our borough council approved a demolition permit I disagree with.'],
+    ['township trustees', 'The township trustees approved the demolition.'],
+    ['select board', 'The select board voted to tear down the library.'],
+    ['alderperson', 'My alderperson will not return my calls about the demolition.'],
+  ] as const;
+
+  for (const [name, message] of local) {
+    it(`holds a message that is only about the ${name}`, () => {
+      expect(assessFederalJurisdiction({ message }).outsideFederal).toBe(true);
+    });
+  }
+
+  // The widened vocabulary must not start holding ordinary federal letters.
+  it('still passes a federal ask that happens to name a local body', () => {
+    expect(
+      assessFederalJurisdiction({
+        message: 'Please ask Congress to stop the ICE raids in our county. Our village board cannot.',
+      }).outsideFederal,
+    ).toBe(false);
+  });
+
+  it('still passes a plain federal ask', () => {
+    expect(
+      assessFederalJurisdiction({
+        message: 'Please vote against the tariffs in the pending trade bill in Congress.',
+      }).outsideFederal,
+    ).toBe(false);
+  });
+});
+
