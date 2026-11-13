@@ -38,7 +38,40 @@ export async function GET() {
     console.error('[admin/compliance] queue fetch failed:', error);
     return NextResponse.json({ error: 'Failed to fetch review queue' }, { status: 500 });
   }
-  return NextResponse.json(data ?? []);
+
+  // Held messages whose verdict was never recorded.
+  //
+  // This page listed verdicts, so a message held *because* its verdict could
+  // not be written was invisible on the one screen that can release it. That
+  // happened for three weeks from 2026-10-25, when a partial unique index
+  // made every audit write fail: the queue held the mail and this page said
+  // "Nothing waiting for review".
+  //
+  // The queue is the source of truth for what is actually stuck, so anything
+  // held with no verdict row is listed here too, and plainly labelled.
+  const rows = data ?? [];
+  const known = new Set(rows.map((r) => r.message_key as string));
+  const { data: heldRows } = await admin
+    .from('cwc_send_queue')
+    .select('id, message_key, office_code, official_name, created_at')
+    .eq('status', 'held')
+    .order('created_at', { ascending: true })
+    .limit(100);
+
+  const orphans = (heldRows ?? [])
+    .filter((h) => !known.has(h.message_key as string))
+    .map((h) => ({
+      id: `queue-${h.id}`,
+      message_key: h.message_key,
+      decision: 'review',
+      reasons: ['Held before delivery, but the screener verdict was never recorded, so there is nothing to read here.'],
+      categories: [],
+      message_excerpt: `To ${h.official_name ?? h.office_code ?? 'an office'}. The message text is in the queue row, not in an audit record.`,
+      model: 'none',
+      created_at: h.created_at,
+    }));
+
+  return NextResponse.json([...rows, ...orphans]);
 }
 
 /**
@@ -64,6 +97,49 @@ export async function PATCH(request: NextRequest) {
   }
 
   const admin = createAdminClient();
+
+  // A held message whose verdict was never recorded. The GET above lists
+  // these as `queue-<row id>` so they are visible; releasing one goes
+  // straight to the queue, because there is no verdict row to mark reviewed
+  // and waiting for one would leave the mail stuck forever.
+  if (complianceId.startsWith('queue-')) {
+    const queueId = Number(complianceId.slice('queue-'.length));
+    if (!Number.isFinite(queueId)) return NextResponse.json({ error: 'Review item not found' }, { status: 404 });
+
+    const { data: row } = await admin
+      .from('cwc_send_queue')
+      .select('id, message_key, status')
+      .eq('id', queueId)
+      .maybeSingle();
+    if (!row) return NextResponse.json({ error: 'Review item not found' }, { status: 404 });
+    if (row.status !== 'held') return NextResponse.json({ error: `Already ${row.status}` }, { status: 409 });
+
+    const { updated } = await resolveHeldMessage(row.message_key as string, action);
+    if (updated === 0) {
+      return NextResponse.json(
+        { error: 'Nothing was released, so this was left in the queue.' },
+        { status: 409 },
+      );
+    }
+    // The audit trail still gets its row, written now rather than never, so
+    // the decision is on the record even though the screener's own verdict
+    // was lost.
+    await admin.from('message_compliance').insert({
+      message_key: row.message_key,
+      decision: 'review',
+      reasons: ['Verdict was never recorded; released by an administrator from the queue.'],
+      categories: [],
+      message_excerpt: '',
+      model: 'none',
+      prompt_version: 'none',
+      raw_verdict: {},
+      reviewed_by: user.id,
+      reviewed_at: new Date().toISOString(),
+      review_decision: action === 'approve' ? 'approved' : 'rejected',
+    });
+    return NextResponse.json({ ok: true, released: updated, action });
+  }
+
   const { data: verdict, error: vErr } = await admin
     .from('message_compliance')
     .select('id, message_key, reviewed_at, decision')
