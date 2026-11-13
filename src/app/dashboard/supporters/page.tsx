@@ -3,6 +3,8 @@ import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase';
+import { SupporterList } from '@/components/dashboard/SupporterList';
+import { collectSupporters } from '@/lib/org-supporters';
 import { SupporterMap } from '@/components/org/SupporterMap';
 import { EmbedSnippet } from '@/components/org/EmbedSnippet';
 import { slugCandidates } from '@/lib/org-slug';
@@ -66,6 +68,10 @@ export default async function DashboardSupportersPage() {
 
   const mapPath = `/embed/org/${slug}/map?t=${mapEmbedToken(slug)}`;
 
+  // The people themselves. The map and the district counts never said who
+  // anybody was, which is the one thing an organizer needs from a list.
+  const rollup = await collectSupporters(admin, user.id);
+
   return (
     <div className="max-w-5xl mx-auto px-4 py-10">
       <p className="label mb-3">Supporters</p>
@@ -78,6 +84,15 @@ export default async function DashboardSupportersPage() {
 
       <section className="mb-14">
         <SupporterMap slug={slug} />
+      </section>
+
+      <section className="mb-14">
+        <h2 className="label mb-3 border-t border-gray-900 dark:border-gray-600 pt-6">Everyone, by name</h2>
+        <SupporterList
+          supporters={rollup.supporters}
+          anonymousActions={rollup.anonymousActions}
+          anonymousStories={rollup.anonymousStories}
+        />
       </section>
 
       <section className="mb-14">
