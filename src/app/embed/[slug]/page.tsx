@@ -4,6 +4,7 @@ import { createAdminClient } from '@/lib/supabase';
 import { CAMPAIGN_PAGE_COLUMNS } from '@/lib/campaign-columns';
 import { CampaignParticipate } from '@/components/campaign/CampaignParticipate';
 import { StorytellerFlow } from '@/components/campaign/StorytellerFlow';
+import { EmbedAttribution } from '@/components/embed/EmbedAttribution';
 import { EmbedAutoHeight } from '@/components/embed/EmbedAutoHeight';
 import { CampaignClosedNotice } from '@/components/campaign/CampaignClosedNotice';
 import { isCampaignClosed } from '@/lib/campaign-close';
@@ -155,16 +156,7 @@ export default async function CampaignEmbedPage({ params }: PageProps) {
           </div>
         )}
 
-        <p className="mt-3 text-center text-xs text-gray-400 dark:text-gray-500">
-          <a
-            href={`https://www.mydemocracy.app/campaign/${campaign.slug}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-purple-600 dark:hover:text-purple-400 hover:underline"
-          >
-            Powered by My Democracy
-          </a>
-        </p>
+        <EmbedAttribution href={`https://www.mydemocracy.app/campaign/${campaign.slug}`} source="campaign" />
       </div>
     </EmbedAutoHeight>
   );

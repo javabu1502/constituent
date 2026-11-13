@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { createAdminClient } from '@/lib/supabase';
 import { SupporterMap } from '@/components/org/SupporterMap';
+import { EmbedAttribution } from '@/components/embed/EmbedAttribution';
 import { EmbedAutoHeight } from '@/components/embed/EmbedAutoHeight';
 import { verifyMapEmbedToken } from '@/lib/org-embed-token';
 
@@ -47,6 +48,7 @@ export default async function OrgMapEmbed({ params, searchParams }: PageProps) {
     <EmbedAutoHeight>
       <div className="p-4">
         <SupporterMap slug={slug} token={t} publicView />
+        <EmbedAttribution source="org-map" />
       </div>
     </EmbedAutoHeight>
   );

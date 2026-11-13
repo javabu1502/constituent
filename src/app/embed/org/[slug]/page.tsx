@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { createAdminClient } from '@/lib/supabase';
 import { JoinForm } from '@/components/org/JoinForm';
+import { EmbedAttribution } from '@/components/embed/EmbedAttribution';
 import { EmbedAutoHeight } from '@/components/embed/EmbedAutoHeight';
 
 interface PageProps {
@@ -38,6 +39,7 @@ export default async function OrgJoinEmbed({ params }: PageProps) {
     <EmbedAutoHeight>
       <div className="p-4">
         <JoinForm slug={slug} orgName={org.org_name ?? 'This organization'} compact />
+        <EmbedAttribution source="org-join" />
       </div>
     </EmbedAutoHeight>
   );
