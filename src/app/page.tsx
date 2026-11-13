@@ -217,110 +217,12 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* Your Complete Civic Dashboard */}
-      <section className="py-16 sm:py-20 px-4 bg-surface dark:bg-gray-900">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white text-center mb-4">
-            Your Complete Civic Dashboard
-          </h2>
-          <p className="text-gray-500 dark:text-gray-400 text-center mb-12 max-w-xl mx-auto">
-            Everything you need to stay informed about your officials
-          </p>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* Voting Records */}
-            <Link href="/dashboard" className="bg-surface dark:bg-gray-700 rounded-2xl p-6 border border-gray-200 dark:border-gray-600 hover:border-purple-300 dark:hover:border-purple-600 transition-colors">
-              <div className="w-10 h-10 bg-purple-100 dark:bg-purple-900 rounded-xl flex items-center justify-center mb-4">
-                <svg className="w-5 h-5 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
-                </svg>
-              </div>
-              <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
-                Voting Records
-              </h3>
-              <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
-                See how your officials vote on the issues that matter to you.
-              </p>
-            </Link>
-
-            {/* Campaign Finance */}
-            <Link href="/dashboard" className="bg-surface dark:bg-gray-700 rounded-2xl p-6 border border-gray-200 dark:border-gray-600 hover:border-purple-300 dark:hover:border-purple-600 transition-colors">
-              <div className="w-10 h-10 bg-purple-100 dark:bg-purple-900 rounded-xl flex items-center justify-center mb-4">
-                <svg className="w-5 h-5 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
-                Campaign Finance
-              </h3>
-              <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
-                Follow the money. See who funds your officials&apos; campaigns.
-              </p>
-            </Link>
-
-            {/* Lobbying Activity */}
-            <Link href="/dashboard" className="bg-surface dark:bg-gray-700 rounded-2xl p-6 border border-gray-200 dark:border-gray-600 hover:border-purple-300 dark:hover:border-purple-600 transition-colors">
-              <div className="w-10 h-10 bg-purple-100 dark:bg-purple-900 rounded-xl flex items-center justify-center mb-4">
-                <svg className="w-5 h-5 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
-              </div>
-              <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
-                Lobbying Activity
-              </h3>
-              <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
-                See which organizations are lobbying your officials and on what issues.
-              </p>
-            </Link>
-
-            {/* Bill Tracking */}
-            <Link href="/trends" className="bg-surface dark:bg-gray-700 rounded-2xl p-6 border border-gray-200 dark:border-gray-600 hover:border-purple-300 dark:hover:border-purple-600 transition-colors">
-              <div className="w-10 h-10 bg-purple-100 dark:bg-purple-900 rounded-xl flex items-center justify-center mb-4">
-                <svg className="w-5 h-5 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                </svg>
-              </div>
-              <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
-                Bill Tracking
-              </h3>
-              <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
-                Follow bills in plain English: what they do and where they are in the process.
-              </p>
-            </Link>
-
-            {/* News Feed */}
-            <Link href="/news" className="bg-surface dark:bg-gray-700 rounded-2xl p-6 border border-gray-200 dark:border-gray-600 hover:border-purple-300 dark:hover:border-purple-600 transition-colors">
-              <div className="w-10 h-10 bg-purple-100 dark:bg-purple-900 rounded-xl flex items-center justify-center mb-4">
-                <svg className="w-5 h-5 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
-                </svg>
-              </div>
-              <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
-                News Feed
-              </h3>
-              <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
-                Stay up to date with the latest news about each of your officials.
-              </p>
-            </Link>
-
-            {/* Public Comment (regulations) temporarily hidden — restore this card to bring it back.
-            <Link href="/regulations" className="bg-surface dark:bg-gray-700 rounded-2xl p-6 border border-gray-200 dark:border-gray-600 hover:border-purple-300 dark:hover:border-purple-600 transition-colors">
-              <div className="w-10 h-10 bg-purple-100 dark:bg-purple-900 rounded-xl flex items-center justify-center mb-4">
-                <svg className="w-5 h-5 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-                </svg>
-              </div>
-              <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
-                Public Comment
-              </h3>
-              <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
-                Comment on federal regulations with AI-assisted drafting. Shape the rules that affect your life.
-              </p>
-            </Link>
-            */}
-          </div>
-        </div>
-      </section>
+      {/* The "Your Complete Civic Dashboard" section stood here: five cards
+          for voting records, campaign finance, lobbying, bill tracking and
+          news. Removed 2026-11-12 because the page had grown busy and those
+          are all things to read about an official, which is not what anyone
+          comes here to do. Every page it linked to is still live and reached
+          from the nav and the footer. */}
 
       {/* For advocacy organizations */}
       {/*
