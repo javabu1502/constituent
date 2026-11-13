@@ -1,0 +1,40 @@
+name: Contact form check
+
+# Do the contact-form recipes still match the pages they describe?
+#
+# Several were last touched in 2023, and a stale one does not throw: it fills
+# nothing, the page still answers 200, and a send reports success. So they are
+# walked against the live pages on a schedule, and the result decides which
+# offices the delivery worker is allowed to file for.
+#
+# Nothing is ever submitted. Every run stops at the step before submit.
+on:
+  schedule:
+    # Monthly, early on the 1st. Offices change their sites between sessions
+    # rather than between days.
+    - cron: '0 9 1 * *'
+  workflow_dispatch:
+
+jobs:
+  check:
+    # Pinned, not latest, for the same reason as the webform worker: GitHub
+    # moved ubuntu-latest to 26.04 and Playwright could not install chromium.
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: Walk every definition to the submit step
+        run: npx tsx scripts/contact-form-dryrun.ts
+      - name: Show what changed
+        run: git --no-pager diff --stat src/data/contact-form-dryrun.json || true
+      - uses: actions/upload-artifact@v4
+        with:
+          name: contact-form-dryrun
+          path: src/data/contact-form-dryrun.json
+          retention-days: 90

@@ -72,6 +72,10 @@ interface WebformJob {
   if (jobs.length === 0) return;
 
   const { submitToRepresentative, shutdown } = await import('../src/lib/form-automation');
+  // Two ways to file. A `recipe:` url means the office has a step-by-step
+  // definition of its own form, which names every field, so there is nothing
+  // for the vision analyser to guess at.
+  const { submitByRecipe, recipeBioguide } = await import('../src/lib/form-automation/recipe-submit');
   for (const job of jobs) {
     const finish = async (patch: Record<string, unknown>) => {
       const { error: e } = await sb.from('webform_send_queue').update({ ...patch, leased_by: null, lease_expires_at: null, updated_at: new Date().toISOString() }).eq('id', job.id);
@@ -99,19 +103,26 @@ interface WebformJob {
       // and calls a vision model per page, so a site that misbehaves can
       // stall it; without a ceiling the lease expires mid-run and the row is
       // retried while the first attempt is still going.
+      const bioguide = recipeBioguide(job.form_url);
       const r = await withDeadline(
-        submitToRepresentative(job.form_url, {
-          prefix: c.prefix, firstName: c.firstName, lastName: c.lastName, email: c.email, phone: c.phone,
-          street: c.street, city: c.city, state: c.state, zip: c.zip,
-          topic: job.message.topic, subject: job.message.subject, message: job.message.body,
-        }, {
-          browser: { headless: true, timeout: 45000 },
-          analyzer: { apiKey: process.env.ANTHROPIC_API_KEY || '', model: 'claude-sonnet-4-6' },
-          submit: true,
-        }),
+        bioguide
+          ? submitByRecipe(bioguide, {
+              prefix: c.prefix, firstName: c.firstName, lastName: c.lastName, email: c.email, phone: c.phone,
+              street: c.street, city: c.city, state: c.state, zip: c.zip,
+              topic: job.message.topic, subject: job.message.subject, message: job.message.body,
+            }, { headless: true, timeoutMs: 45000 })
+          : submitToRepresentative(job.form_url, {
+              prefix: c.prefix, firstName: c.firstName, lastName: c.lastName, email: c.email, phone: c.phone,
+              street: c.street, city: c.city, state: c.state, zip: c.zip,
+              topic: job.message.topic, subject: job.message.subject, message: job.message.body,
+            }, {
+              browser: { headless: true, timeout: 45000 },
+              analyzer: { apiKey: process.env.ANTHROPIC_API_KEY || '', model: 'claude-sonnet-4-6' },
+              submit: true,
+            }),
         JOB_DEADLINE_MS,
       );
-      const result = { status: r.status, message: r.message, confirmationNumber: r.confirmationNumber ?? null, validationErrors: r.validationErrors ?? null, pagesFilled: r.pagesFilled, timeTakenMs: r.timeTakenMs, submitSelector: r.submitSelector ?? null };
+      const result = { status: r.status, message: r.message, confirmationNumber: r.confirmationNumber ?? null, validationErrors: r.validationErrors ?? null, pagesFilled: r.pagesFilled, timeTakenMs: r.timeTakenMs, submitSelector: ('submitSelector' in r ? r.submitSelector : null) ?? null };
       if (r.success) {
         console.log(`#${job.id} ${job.official_name}: SENT ${r.confirmationNumber ?? ''}`);
         await finish({ status: 'sent', result, last_error: null });

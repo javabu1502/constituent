@@ -9,6 +9,7 @@ import { resolveOfficeCode } from '@/lib/cwc/offices';
 import { verifyConstituentForOffice } from '@/lib/cwc/verify';
 import { WEBFORM_MESSAGE_STATUS, setMessageDeliveryStatus } from '@/lib/cwc/message-status';
 import { notifyConstituent } from '@/lib/cwc/notify';
+import { hasWorkingRecipe } from '@/lib/webform/recipe-eligibility';
 import type { CwcDelivery } from '@/lib/cwc/types';
 
 /**
@@ -49,6 +50,24 @@ function verifiedForms(): Array<{ id?: string; name: string; url: string }> {
     verifiedCache = (JSON.parse(fs.readFileSync(file, 'utf-8')) as { senators: Array<{ id?: string; name: string; url: string }> }).senators;
   } catch { verifiedCache = []; }
   return verifiedCache;
+}
+
+/**
+ * Can we file for this senator at all, by either route.
+ *
+ * Two now. The older one needs a page hand-verified as holding a message
+ * form, which covered seven senators. The newer one follows a step-by-step
+ * definition of the office's own form, confirmed against the live page by
+ * scripts/contact-form-dryrun.ts, which covers most of the rest.
+ *
+ * The recipe route is tried first because it is checked: a definition is
+ * eligible only when the last sweep walked it to the submit step with every
+ * required field filled, where the older route trusts a verification from
+ * October and a URL.
+ */
+export function filableFormFor(official: { id?: string; name: string; lastName?: string; contactForm?: string }): 'recipe' | string | null {
+  if (hasWorkingRecipe(official.id)) return 'recipe';
+  return captchaFreeFormFor(official);
 }
 
 /** Contact-form URL for a senator whose form the audit found CAPTCHA-free, else null. */
@@ -106,7 +125,7 @@ export async function webformAutomatableSenatorIds(activeCodes?: ReadonlySet<str
     for (const s of findSenators(st)) {
       const code = resolveOfficeCode(s);
       if (code.ok && active.has(code.code)) continue;
-      if (captchaFreeFormFor(s)) ids.push(s.id);
+      if (filableFormFor(s)) ids.push(s.id);
     }
   }
   return ids;
@@ -138,8 +157,11 @@ export async function buildWebformQueueItem(body: {
   const code = resolveOfficeCode(senator);
   const active = activeCodes ?? (await getActiveOfficeCodesCached('senate', { mode: 'production' }));
   if (code.ok && active.has(code.code)) return { ok: false, skip: 'office participates in CWC; use the CWC path' };
-  const formUrl = captchaFreeFormFor(senator);
-  if (!formUrl) return { ok: false, skip: 'no CAPTCHA-free contact form on record' };
+  const filable = filableFormFor(senator);
+  if (!filable) return { ok: false, skip: 'no contact form we can file on record' };
+  // 'recipe' means the worker follows the office's own form definition rather
+  // than being handed a URL to analyse.
+  const formUrl = filable === 'recipe' ? `recipe:${senator.id}` : filable;
   const parts = body.advocate_name.trim().split(/\s+/);
   if (parts.length < 2) return { ok: false, skip: 'advocate name has no last name' };
   // Confirm the sender is actually represented by this senator. The CWC path

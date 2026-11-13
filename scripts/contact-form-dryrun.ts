@@ -103,6 +103,15 @@ async function main() {
 
   console.log(`\nbinds: ${binds.length}   stale: ${stale.length}   skipped: ${skipped.length}`);
 
+  // A run of a few offices prints its results and stops. It must not write
+  // the file, which records which offices are deliverable: a three-office
+  // check would otherwise erase the other forty-four and the queue would
+  // read that as "nothing is automatable".
+  if (only.length > 0) {
+    console.log('\npartial run, so the results file was left alone.');
+    process.exit(0);
+  }
+
   const out = path.join(process.cwd(), 'src', 'data', 'contact-form-dryrun.json');
   fs.writeFileSync(
     out,
