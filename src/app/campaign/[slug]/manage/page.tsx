@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { SignatoryRolls } from '@/components/campaign/SignatoryRolls';
 import { redirect, notFound } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase';
@@ -81,6 +82,7 @@ export default async function ManageCampaignPage({
   // Storytelling campaigns get the same toolbar; they just have no report
   // and no advocacy actions.
   const isStory = campaign.campaign_type === 'storytelling';
+  const isSignOn = campaign.campaign_type === 'signon';
 
   const { data: childRows } = await admin
     .from('campaigns')
@@ -132,6 +134,11 @@ export default async function ManageCampaignPage({
                 ? ` · ${campaign.bill_ref}`
                 : ''}
         </p>
+        {isSignOn && (
+          <div className="mt-6">
+            <SignatoryRolls slug={campaign.slug} />
+          </div>
+        )}
         {closed && (
           <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
             {isStory

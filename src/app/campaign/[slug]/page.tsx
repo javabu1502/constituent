@@ -4,6 +4,8 @@ import { createAdminClient } from '@/lib/supabase';
 import { CAMPAIGN_PAGE_COLUMNS } from '@/lib/campaign-columns';
 import { CampaignParticipate } from '@/components/campaign/CampaignParticipate';
 import { StorytellerFlow } from '@/components/campaign/StorytellerFlow';
+import { SignOnFlow } from '@/components/campaign/SignOnFlow';
+import { publicSignatories } from '@/lib/signon';
 import { BillJourney } from '@/components/campaign/BillJourney';
 import { CampaignTalkingPoints } from '@/components/campaign/CampaignTalkingPoints';
 import Link from 'next/link';
@@ -98,7 +100,23 @@ export default async function CampaignPage({ params }: PageProps) {
   // counted once each. Showing only the first read as a headcount, and on
   // 2026-11-12 the Seneca Hills page said "19 actions taken" for three
   // members of the public.
-  const participantCount = isStory ? 0 : await countCampaignParticipants(admin, campaign.id);
+  const isSignOn = campaign.campaign_type === 'signon';
+  const participantCount = isStory || isSignOn ? 0 : await countCampaignParticipants(admin, campaign.id);
+
+  // A sign-on letter counts signatures, and shows only the names whose owners
+  // asked for that. The address every signer gives is evidence for the office,
+  // not something the page is entitled to publish.
+  let signatureCount = 0;
+  let shownNames: Array<{ name: string; city: string | null; state: string | null }> = [];
+  if (isSignOn) {
+    const { data: rows, count } = await admin
+      .from('campaign_signatures')
+      .select('name, city, state, show_name_publicly', { count: 'exact' })
+      .eq('campaign_id', campaign.id)
+      .is('withdrawn_at', null);
+    signatureCount = count ?? 0;
+    shownNames = publicSignatories((rows ?? []) as never);
+  }
 
   // Stage campaigns carry their parent so the participate flow can offer the
   // broader action to people who can't act on this narrow stage (e.g. their
@@ -347,7 +365,7 @@ export default async function CampaignPage({ params }: PageProps) {
         )}
         {/* Social proof bar. A small count works against the campaign, so
             nothing is shown until it reaches the first milestone. */}
-        {closed ? null : (isStory ? campaign.story_count : campaign.action_count) < SOCIAL_PROOF_MIN ? (
+        {closed ? null : (isStory ? campaign.story_count : isSignOn ? signatureCount : campaign.action_count) < SOCIAL_PROOF_MIN ? (
           <div className="mt-4 flex justify-end">
             <CopyLinkButton slug={campaign.slug} />
           </div>
@@ -411,8 +429,29 @@ export default async function CampaignPage({ params }: PageProps) {
         />
       ) : (
       <>
+      {/* The letter, in full, before anyone is asked to put their name to it. */}
+      {isSignOn && campaign.letter_body && (
+        <section className="mb-8 bg-surface dark:bg-gray-800 rounded-2xl border border-rule dark:border-gray-700 p-6 sm:p-8">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">The letter</h2>
+          <div className="whitespace-pre-wrap text-gray-700 dark:text-gray-300 leading-relaxed">
+            {campaign.letter_body}
+          </div>
+          {signatureCount > 0 && (
+            <p className="mt-6 pt-4 border-t border-rule dark:border-gray-700 text-sm text-gray-600 dark:text-gray-300">
+              Signed by {signatureCount} {signatureCount === 1 ? 'person' : 'people'}.
+              {shownNames.length > 0 && (
+                <>
+                  {' '}
+                  {shownNames.map((p) => [p.name, p.city].filter(Boolean).join(', ')).join(' · ')}
+                </>
+              )}
+            </p>
+          )}
+        </section>
+      )}
+
       {/* The campaign's contributed language, in the open (two-block model) */}
-      {!isStory && campaign.message_template && (
+      {!isStory && !isSignOn && campaign.message_template && (
         <CampaignTalkingPoints
           template={campaign.message_template}
           {...(LOCAL_ACTIONS.some((a) => a.campaignSlug === campaign.slug)
@@ -423,7 +462,7 @@ export default async function CampaignPage({ params }: PageProps) {
       )}
 
       {/* Bill journey — parent campaigns show where the legislation stands */}
-      {!isStory && !campaign.parent_campaign_id && (
+      {!isStory && !isSignOn && !campaign.parent_campaign_id && (
         <BillJourney
           campaign={{
             id: campaign.id,
@@ -438,9 +477,15 @@ export default async function CampaignPage({ params }: PageProps) {
       {/* Participation form */}
       <div className="bg-surface dark:bg-gray-800 rounded-2xl border border-rule dark:border-gray-700 p-6 sm:p-8">
         <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-6">
-          {isStory ? 'Share Your Story' : 'Take Action'}
+          {isStory ? 'Share Your Story' : isSignOn ? 'Sign the letter' : 'Take Action'}
         </h2>
-        {isStory ? <StorytellerFlow campaign={campaign} /> : <CampaignParticipate campaign={campaign} parentCampaign={parentCampaign} />}
+        {isStory ? (
+          <StorytellerFlow campaign={campaign} />
+        ) : isSignOn ? (
+          <SignOnFlow campaign={campaign} />
+        ) : (
+          <CampaignParticipate campaign={campaign} parentCampaign={parentCampaign} />
+        )}
       </div>
       </>
       )}

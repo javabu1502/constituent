@@ -115,7 +115,7 @@ export const trackSendSchema = z.object({
 });
 
 export const createCampaignSchema = z.object({
-  campaign_type: z.enum(['advocacy', 'storytelling']).default('advocacy'),
+  campaign_type: z.enum(['advocacy', 'storytelling', 'signon']).default('advocacy'),
   visibility: z.enum(['public', 'unlisted']).optional(),
   language: z.enum(['en', 'es']).default('en'),
   headline: z.string().min(3).max(100),

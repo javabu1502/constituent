@@ -319,7 +319,10 @@ export interface Campaign {
   bill_title: string | null;
   bill_url: string | null;
   // Campaign type + moderation/visibility (storytelling vs advocacy)
-  campaign_type: 'advocacy' | 'storytelling';
+  /** 'signon' is a letter many people put their name to; see src/lib/signon.ts. */
+  campaign_type: 'advocacy' | 'storytelling' | 'signon';
+  /** Sign-on letters only: the single letter signatories put their name to. */
+  letter_body?: string | null;
   /** Language the participant-facing flows speak. Default 'en'. */
   language?: 'en' | 'es';
   visibility: 'public' | 'unlisted';
