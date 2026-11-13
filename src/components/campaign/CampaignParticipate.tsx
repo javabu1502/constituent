@@ -613,45 +613,14 @@ export function CampaignParticipate({
         }
       }
 
-      // A local case usually has one address that takes comments for the
-      // record, and it is not an elected official. It rides along as a
-      // recipient so the same message reaches the file and the people who
-      // vote on it.
-      if (campaign.target_level === 'local') {
-        const stateCode = campaign.bill_state || campaign.target_filter?.state || '';
-        const fixed: Official[] = [];
-        if (campaign.recipient_email) {
-          fixed.push({
-            id: `case-contact:${campaign.slug}`,
-            name: campaign.target_filter?.contact_name || 'Case comments',
-            title: campaign.target_filter?.contact_title || 'Goes into the case record',
-            level: 'local',
-            party: 'Nonpartisan',
-            state: stateCode,
-            email: campaign.recipient_email,
-          });
-        }
-        // Published addresses for a body the roster does not carry. Addressed
-        // by seat rather than by person, so a change of commissioner does not
-        // silently send mail to someone who left.
-        for (const r of campaign.target_filter?.recipients ?? []) {
-          fixed.push({
-            id: `fixed:${campaign.slug}:${r.email}`,
-            name: r.name,
-            title: r.title || '',
-            level: 'local',
-            party: 'Nonpartisan',
-            state: stateCode,
-            email: r.email,
-          });
-        }
-        if (fixed.length > 0) {
-          const ids = new Set(fixed.map((f) => f.id));
-          filtered = campaign.target_filter?.recipients_only
-            ? fixed
-            : [...fixed, ...filtered.filter((o) => !ids.has(o.id))];
-        }
-      }
+      // Whether the organization named an address of its own. The narrowing
+      // filters below send someone to the "nothing for you here" step when
+      // none of their representatives match, and that is wrong when there is
+      // a committee inbox to write to: most people have no representative on
+      // a seven-member committee, which is exactly why the organization gave
+      // us an address.
+      const hasFixedRecipients =
+        !!campaign.recipient_email || (campaign.target_filter?.recipients ?? []).length > 0;
 
       // Stage targeting: only contact the officials who matter at this step
       // of the legislative journey. Floor stages narrow to the chamber that's
@@ -675,7 +644,7 @@ export function CampaignParticipate({
         committeeName = cmteData.committee?.name ?? null;
         const roster = new Set<string>(cmteData.memberIds || []);
         filtered = filtered.filter((o: Official) => (cmteState ? o.level === 'state' : o.level === 'federal') && roster.has(o.id));
-        if (filtered.length === 0) {
+        if (filtered.length === 0 && !hasFixedRecipients) {
           setNoTargetName(cmteData.committee?.name || 'the targeted committee');
           setStep('noTarget');
           return;
@@ -688,7 +657,7 @@ export function CampaignParticipate({
       if (campaign.target_filter?.type === 'officials' && campaign.target_filter.officials?.length) {
         const roster = new Set(campaign.target_filter.officials.map((t) => t.id));
         filtered = filtered.filter((o: Official) => roster.has(o.id));
-        if (filtered.length === 0) {
+        if (filtered.length === 0 && !hasFixedRecipients) {
           setNoTargetName('the officials this campaign is targeting');
           setStep('noTarget');
           return;
@@ -708,10 +677,58 @@ export function CampaignParticipate({
           }
           return (o.party || '').charAt(0).toUpperCase() === wantParty;
         });
-        if (filtered.length === 0) {
+        if (filtered.length === 0 && !hasFixedRecipients) {
           setNoTargetName('the officials this campaign is targeting');
           setStep('noTarget');
           return;
+        }
+      }
+
+      // Addresses the organization named itself: a committee inbox, a
+      // commission's comment address, a clerk who takes testimony. Nobody
+      // publishes these in a form we can fetch for all 2,699 state committees
+      // and 49 federal ones, and an organization running a campaign about a
+      // committee already knows the address. So they supply it.
+      //
+      // Added after every narrowing filter above, deliberately. These are not
+      // the constituent's representatives, so a committee or party filter
+      // would otherwise strip them out for not being on a roster.
+      //
+      // They always take the email path. An address somebody typed is not a
+      // congressional office and must never reach CWC, which is
+      // constituent-to-seat by definition.
+      {
+        const stateCode = campaign.bill_state || campaign.target_filter?.state || '';
+        const fixed: Official[] = [];
+        if (campaign.recipient_email) {
+          fixed.push({
+            id: `case-contact:${campaign.slug}`,
+            name: campaign.target_filter?.contact_name || 'Comments',
+            title: campaign.target_filter?.contact_title || 'Goes into the record',
+            level: 'local',
+            party: 'Nonpartisan',
+            state: stateCode,
+            email: campaign.recipient_email,
+          });
+        }
+        // Addressed by seat rather than by person, so a change of member does
+        // not silently send mail to someone who left.
+        for (const r of campaign.target_filter?.recipients ?? []) {
+          fixed.push({
+            id: `fixed:${campaign.slug}:${r.email}`,
+            name: r.name,
+            title: r.title || '',
+            level: 'local',
+            party: 'Nonpartisan',
+            state: stateCode,
+            email: r.email,
+          });
+        }
+        if (fixed.length > 0) {
+          const ids = new Set(fixed.map((f) => f.id));
+          filtered = campaign.target_filter?.recipients_only
+            ? fixed
+            : [...fixed, ...filtered.filter((o) => !ids.has(o.id))];
         }
       }
 

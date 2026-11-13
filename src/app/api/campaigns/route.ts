@@ -82,7 +82,7 @@ export async function POST(request: NextRequest) {
     story_prompt, usage_statement, usage_tags, attribution_options, edit_revoke_policy, recipient_email,
     org_name, org_url, org_logo_url, brand_color, custom_domain,
     parent_campaign_id, stage_goal, target_committee, target_committee_state, notify_supporters,
-    target_officials, target_party,
+    target_officials, target_party, extra_recipients,
   } = parsed.data;
 
   const isStory = campaign_type === 'storytelling';
@@ -174,19 +174,27 @@ export async function POST(request: NextRequest) {
       bill_url: isStory ? null : (bill_url || parent?.bill_url || null),
       parent_campaign_id: parent_campaign_id || null,
       stage_goal: parent_campaign_id ? (stage_goal || 'custom') : null,
-      target_filter: target_committee
-        ? { type: 'committee', committee_id: target_committee, ...(target_committee_state ? { state: target_committee_state.toUpperCase() } : {}) }
-        : target_officials
-          ? { type: 'officials', officials: target_officials }
-          : target_party
-            ? { type: 'party', ...target_party }
-            : null,
+      // Addresses the organization named itself ride alongside whichever
+      // targeting mode was chosen, rather than being a mode of their own: a
+      // campaign can write to a committee's members AND to its inbox.
+      target_filter: (() => {
+        const base = target_committee
+          ? { type: 'committee', committee_id: target_committee, ...(target_committee_state ? { state: target_committee_state.toUpperCase() } : {}) }
+          : target_officials
+            ? { type: 'officials', officials: target_officials }
+            : target_party
+              ? { type: 'party', ...target_party }
+              : null;
+        const extras = (extra_recipients ?? []).filter((r) => r.email);
+        if (extras.length === 0) return base;
+        return { ...(base ?? {}), recipients: extras };
+      })(),
       story_prompt: isStory ? (story_prompt || null) : null,
       usage_statement: isStory ? usage_statement : null,
       usage_tags: isStory ? (usage_tags || []) : null,
       attribution_options: isStory ? attribution_options : null,
       edit_revoke_policy: isStory ? edit_revoke_policy : null,
-      recipient_email: isStory ? (recipient_email || user.email || null) : null,
+      recipient_email: isStory ? (recipient_email || user.email || null) : (recipient_email || null),
       ...branding,
       status: 'active',
     })

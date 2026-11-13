@@ -191,6 +191,28 @@ export const createCampaignSchema = z.object({
       state: z.string().length(2).optional(),
     })
     .optional(),
+  /**
+   * Addresses the organization names itself: a committee inbox, a
+   * commission's comment address, a clerk who takes testimony.
+   *
+   * Nobody publishes these in a form we can fetch. Of 2,699 state committees
+   * and 49 federal ones on file, not one carries an email. An organization
+   * running a campaign about a committee already knows the address, so it
+   * supplies it rather than waiting for us to find all of them.
+   *
+   * These always take the email path and never CWC, which is
+   * constituent-to-seat and has no shape for an address somebody typed.
+   */
+  extra_recipients: z
+    .array(
+      z.object({
+        name: z.string().trim().min(2).max(120),
+        title: z.string().trim().max(120).optional(),
+        email: z.string().trim().email().max(200),
+      }),
+    )
+    .max(10)
+    .optional(),
   // Stage creation: email everyone who already acted on the initiative.
   notify_supporters: z.boolean().optional(),
 }).superRefine((data, ctx) => {

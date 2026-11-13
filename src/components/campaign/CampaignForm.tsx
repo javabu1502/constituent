@@ -159,6 +159,11 @@ export function CampaignForm({
   // Local campaigns carry their state in bill_state, the way the Reno
   // rezoning case does. Only states we hold rosters for are offered: picking
   // local anywhere else ends the flow with nobody to write to.
+  // Addresses the organization names itself: a committee inbox, a
+  // commission's comment address, a clerk who takes testimony. None of the
+  // 2,699 state committees or 49 federal ones on file carry an email, and an
+  // organization running a campaign about one already knows the address.
+  const [extraRecipients, setExtraRecipients] = useState<Array<{ name: string; title: string; email: string }>>([]);
   const [localState, setLocalState] = useState(
     edit?.initial.resolvedBill?.state ?? (LOCAL_ROSTER_STATES.length === 1 ? LOCAL_ROSTER_STATES[0] : ''),
   );
@@ -470,6 +475,13 @@ export function CampaignForm({
             ...sharedBody,
             target_level: targetLevel,
             ...(targetLevel === 'local' && localState ? { bill_state: localState } : {}),
+            ...(extraRecipients.filter((r) => r.email.trim() && r.name.trim()).length
+              ? {
+                  extra_recipients: extraRecipients
+                    .filter((r) => r.email.trim() && r.name.trim())
+                    .map((r) => ({ name: r.name.trim(), title: r.title.trim() || undefined, email: r.email.trim() })),
+                }
+              : {}),
             direction: direction || undefined,
             message_template: messageTemplate.trim() || null,
             talking_points_coverage: talkingPointsCoverage,
@@ -512,6 +524,13 @@ export function CampaignForm({
             ...sharedBody,
             target_level: targetLevel,
             ...(targetLevel === 'local' && localState ? { bill_state: localState } : {}),
+            ...(extraRecipients.filter((r) => r.email.trim() && r.name.trim()).length
+              ? {
+                  extra_recipients: extraRecipients
+                    .filter((r) => r.email.trim() && r.name.trim())
+                    .map((r) => ({ name: r.name.trim(), title: r.title.trim() || undefined, email: r.email.trim() })),
+                }
+              : {}),
             ...(direction ? { direction } : {}),
             message_template: messageTemplate.trim() || null,
             talking_points_coverage: talkingPointsCoverage,
@@ -839,6 +858,61 @@ export function CampaignForm({
           </div>
         )}
       </div>
+      )}
+
+      {/* An address the organization supplies, for a body we cannot look up. */}
+      {campaignType === 'advocacy' && (
+        <div>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+            Also send to an inbox{' '}
+            <span className="font-normal text-gray-500 dark:text-gray-400">(optional)</span>
+          </label>
+          <p className="text-sm text-gray-500 dark:text-gray-400 mb-3">
+            A committee, a commission, or whoever takes comments for the record. Messages go here as
+            well as to the sender&apos;s own representatives.
+          </p>
+
+          {extraRecipients.map((r, i) => (
+            <div key={i} className="mb-2 grid gap-2 sm:grid-cols-[1fr_1fr_1.2fr_auto]">
+              <input
+                className="rounded-xl border border-gray-300 dark:border-gray-600 bg-surface dark:bg-gray-800 px-3 py-2 text-sm text-gray-900 dark:text-white"
+                placeholder="Who it is"
+                value={r.name}
+                onChange={(e) => setExtraRecipients((prev) => prev.map((x, j) => (j === i ? { ...x, name: e.target.value } : x)))}
+              />
+              <input
+                className="rounded-xl border border-gray-300 dark:border-gray-600 bg-surface dark:bg-gray-800 px-3 py-2 text-sm text-gray-900 dark:text-white"
+                placeholder="What they do (optional)"
+                value={r.title}
+                onChange={(e) => setExtraRecipients((prev) => prev.map((x, j) => (j === i ? { ...x, title: e.target.value } : x)))}
+              />
+              <input
+                type="email"
+                className="rounded-xl border border-gray-300 dark:border-gray-600 bg-surface dark:bg-gray-800 px-3 py-2 text-sm text-gray-900 dark:text-white"
+                placeholder="Email address"
+                value={r.email}
+                onChange={(e) => setExtraRecipients((prev) => prev.map((x, j) => (j === i ? { ...x, email: e.target.value } : x)))}
+              />
+              <button
+                type="button"
+                onClick={() => setExtraRecipients((prev) => prev.filter((_, j) => j !== i))}
+                className="px-3 py-2 text-sm text-gray-500 dark:text-gray-400 hover:text-red-600 dark:hover:text-red-400"
+              >
+                Remove
+              </button>
+            </div>
+          ))}
+
+          {extraRecipients.length < 10 && (
+            <button
+              type="button"
+              onClick={() => setExtraRecipients((prev) => [...prev, { name: '', title: '', email: '' }])}
+              className="text-sm font-medium text-purple-700 dark:text-purple-300 hover:underline"
+            >
+              {extraRecipients.length === 0 ? 'Add an inbox' : 'Add another'}
+            </button>
+          )}
+        </div>
       )}
 
       {/* Narrow targeting — hidden in edit mode (targeting is fixed at
