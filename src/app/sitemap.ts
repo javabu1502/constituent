@@ -25,6 +25,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.7,
     })),
     { url: `${baseUrl}/advocacy`, changeFrequency: 'weekly', priority: 0.8 },
+    // Pages for what people actually type when they mean to act now, rather
+    // than to read about how a bill becomes law. The guides cover the second
+    // kind well and had nothing for the first.
+    { url: `${baseUrl}/email-my-representative`, changeFrequency: 'monthly', priority: 0.9 },
+    { url: `${baseUrl}/email-my-senator`, changeFrequency: 'monthly', priority: 0.9 },
+    { url: `${baseUrl}/contact-my-state-representative`, changeFrequency: 'monthly', priority: 0.9 },
+    { url: `${baseUrl}/write-a-letter-to-congress`, changeFrequency: 'monthly', priority: 0.9 },
+    // Measured here, so it is the one page an answer engine has a reason to cite.
+    { url: `${baseUrl}/research/how-hard-is-it-to-contact-your-legislature`, changeFrequency: 'monthly', priority: 0.8 },
     // A local case is the kind of thing people search for by name once a
     // notice lands in their mailbox, so each gets its own address.
     ...LOCAL_ACTIONS.map((a) => ({

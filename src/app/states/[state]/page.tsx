@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { ContactAccessNote } from '@/components/states/ContactAccessNote';
 import { US_STATES, PARTY_COLORS, DEFAULT_PARTY_COLOR } from '@/lib/constants';
 import { findSenators, findAllRepresentatives } from '@/lib/legislators';
 import { getStateLegislators, toOfficial } from '@/lib/state-legislators';
@@ -627,6 +628,8 @@ export default async function StateHubPage({ params }: StatePageProps) {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
               </Link>
+
+              <ContactAccessNote stateCode={stateInfo.code} stateName={stateInfo.name} />
             </>
           ) : (
             <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-6 text-center">
