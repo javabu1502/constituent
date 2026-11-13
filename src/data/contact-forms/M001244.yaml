@@ -1,0 +1,174 @@
+bioguide: M001244
+contact_form:
+    method: post
+    action: ""
+    steps:
+        - visit: "https://www.moody.senate.gov/contact-us/"
+        - fill_in:
+              - name: input_5
+                selector: "#input_2_5"
+                value: $NAME_PREFIX
+                required: false
+              - name: input_6
+                selector: "#input_2_6"
+                value: $NAME_FIRST
+                required: true
+              - name: input_7
+                selector: "#input_2_7"
+                value: $NAME_LAST
+                required: true
+              - name: input_8
+                selector: "#input_2_8"
+                value: $ADDRESS_STREET
+                required: true
+              - name: input_9
+                selector: "#input_2_9"
+                value: $ADDRESS_STREET_2
+                required: false
+              - name: input_10
+                selector: "#input_2_10"
+                value: $ADDRESS_CITY
+                required: true
+        - fill_in:
+              - name: input_14
+                selector: "#input_2_14"
+                value: $EMAIL
+                required: true
+              - name: input_15
+                selector: "#input_2_15"
+                value: $SUBJECT
+                required: true
+              - name: input_4
+                selector: "#input_2_4"
+                value: $MESSAGE
+                required: false
+        - wait:
+              - value: 1
+        - fill_in:
+              - name: input_12
+                selector: "#input_2_12"
+                value: $ADDRESS_ZIP5
+                required: true
+        - wait:
+              - value: 0.5
+        - fill_in:
+              - name: input_13
+                selector: "#input_2_13"
+                value: $PHONE_PARENTHESES
+                required: false
+        - select:
+              - name: input_3
+                selector: "#input_2_3"
+                value: $TOPIC
+                required: true
+                options:
+                    Appropriations/Budget: APPROPRIA
+                    Agriculture: AGR
+                    Animals: AN
+                    Arts and Humanities: ART
+                    Banking & Financial Services: BANK
+                    Border Security: BORDER.SEC
+                    Campaign Finance Reform: CFR
+                    Censorship: CENSORSHIP
+                    Constitutional/Civil Rights: CIVIL
+                    Congress and Elections: CONG
+                    Defense and Military: DEF
+                    Education Higher: ED.HIGH
+                    Education K-12: EDU.K12
+                    Energy: ENE
+                    Environment: ENV
+                    Governmental Reform: GOV
+                    Health: HEALTH
+                    Homeland Security: HOM
+                    Housing: HOUSING
+                    Medicaid: MEDICAID
+                    Medicare: MEDICARE
+                    National Security: NAT.SEC
+                    NASA: NASA
+                    Immigration: IMM
+                    Infrastructure: INFRASTRUCTURE
+                    International Affairs: INT
+                    IRS & Tax: IRS
+                    Jobs and the Economy: JOBS
+                    Judges: JUDGES
+                    Judiciary: JUD
+                    Labor: LABOR
+                    LGBT: LGBT
+                    Other Issues: OTHER
+                    Post Office: POST
+                    Second Amendment: GUN
+                    Science and Technology: SCI
+                    Small Business: SM.BUS
+                    Social Issues: SOC
+                    Social Security: SSEC
+                    Trade: TRADE
+                    Transportation: TRA
+                    Veterans: VET
+                    Wildlife: WILD
+        - select:
+              - name: input_11
+                selector: "#input_2_11"
+                value: $ADDRESS_STATE
+                required: true
+                options:
+                    - Alabama
+                    - Alaska
+                    - Arizona
+                    - Arkansas
+                    - California
+                    - Colorado
+                    - Connecticut
+                    - Delaware
+                    - District of Columbia
+                    - Florida
+                    - Georgia
+                    - Hawaii
+                    - Idaho
+                    - Illinois
+                    - Indiana
+                    - Iowa
+                    - Kansas
+                    - Kentucky
+                    - Louisiana
+                    - Maine
+                    - Maryland
+                    - Massachusetts
+                    - Michigan
+                    - Minnesota
+                    - Mississippi
+                    - Missouri
+                    - Montana
+                    - Nebraska
+                    - Nevada
+                    - New Hampshire
+                    - New Jersey
+                    - New Mexico
+                    - New York
+                    - North Carolina
+                    - North Dakota
+                    - Ohio
+                    - Oklahoma
+                    - Oregon
+                    - Pennsylvania
+                    - Rhode Island
+                    - South Carolina
+                    - South Dakota
+                    - Tennessee
+                    - Texas
+                    - Utah
+                    - Vermont
+                    - Virginia
+                    - Washington
+                    - West Virginia
+                    - Wisconsin
+                    - Wyoming
+                    - Armed Forces Americas
+                    - Armed Forces Europe
+                    - Armed Forces Pacific
+        - click_on:
+              - selector: "#gform_submit_button_2"
+    success:
+        headers:
+            status: 200
+        body:
+            contains: "Thanks for contacting us!"

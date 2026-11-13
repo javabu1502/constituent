@@ -1,0 +1,187 @@
+bioguide: S001194
+contact_form:
+  method: post
+  action: /contact
+  steps:
+    - visit: "https://www.schatz.senate.gov/contact/share-your-thoughts/form"
+    - wait:
+        - value: 1
+    - javascript:
+        - value: "Array.prototype.forEach.call(document.querySelectorAll('style,[rel=\"stylesheet\"],[type=\"text/css\"]'), function(element){ try{ element.parentNode.removeChild(element) } catch(err){} });"
+    - javascript:
+        - value: document.querySelector('.SiteHeader')?.remove()
+    - javascript:
+        - value: document.querySelector('.MobileHeader')?.remove()
+    - fill_in:
+        - name: input_3012F9F8-E1FF-15AC-780D-51E059038981
+          selector: "#input-3012F9F8-E1FF-15AC-780D-51E059038981"
+          value: $NAME_FIRST
+          required: true
+        - name: input_3019E679-D896-A600-EA99-2AFF6192202B
+          selector: "#input-3019E679-D896-A600-EA99-2AFF6192202B"
+          value: $NAME_LAST
+          required: true
+        - name: input_3028D193-DFD8-C4F5-9EA9-18136ADF4E5D
+          selector: "#input-3028D193-DFD8-C4F5-9EA9-18136ADF4E5D"
+          value: $ADDRESS_STREET
+          required: true
+        - name: input_3028D249-0458-5091-56F5-8F95636CE606
+          selector: "#input-3028D249-0458-5091-56F5-8F95636CE606"
+          value: $ADDRESS_CITY
+          required: true
+        - name: input_3028D2F9-A2B6-52F8-2ACC-1060ED58A2B7
+          selector: "#input-3028D2F9-A2B6-52F8-2ACC-1060ED58A2B7"
+          value: $ADDRESS_ZIP5
+          required: true
+        - name: input_302BB54B-04DD-6592-A3CA-950B84CBEB21
+          selector: "#input-302BB54B-04DD-6592-A3CA-950B84CBEB21"
+          value: $PHONE
+          required: false
+        - name: input_303460C7-B721-12AF-15EA-2EDF7EAEA5A6
+          selector: "#email"
+          value: $EMAIL
+          required: true
+        - name: input_3034610B-FC23-1553-E7D8-920486264617
+          selector: "#input-3034610B-FC23-1553-E7D8-920486264617"
+          value: $EMAIL
+          required: true
+        - name: input_30403D9F-9D8B-E1D8-02F8-5D7C17B516E7
+          selector: "#input-30403D9F-9D8B-E1D8-02F8-5D7C17B516E7"
+          value: $MESSAGE
+          required: true
+    - select:
+        - name: input_3014F950-07E6-309C-4FC0-3FE72DF6CBFB
+          selector: "#input-3014F950-07E6-309C-4FC0-3FE72DF6CBFB"
+          value: $NAME_PREFIX
+          required: true
+          options:
+            "None": "null"
+            "Mr.": "Mr."
+            "Ms.": "Ms."
+            "Mrs.": "Mrs."
+            "Miss": "Miss"
+        - name: input_3028D290-F31A-BE8C-EB6D-7013B1311662
+          selector: "#input-3028D290-F31A-BE8C-EB6D-7013B1311662"
+          value: $ADDRESS_STATE_POSTAL_ABBREV
+          required: true
+          options:
+            AL: AL
+            AK: AK
+            AR: AR
+            AZ: AZ
+            CA: CA
+            CO: CO
+            CT: CT
+            DC: DC
+            DE: DE
+            FL: FL
+            GA: GA
+            HI: HI
+            ID: ID
+            IL: IL
+            IN: IN
+            IA: IA
+            KS: KS
+            KY: KY
+            LA: LA
+            ME: ME
+            MD: MD
+            MA: MA
+            MI: MI
+            MN: MN
+            MS: MS
+            MO: MO
+            MT: MT
+            NE: NE
+            NV: NV
+            NH: NH
+            NJ: NJ
+            NM: NM
+            NY: NY
+            NC: NC
+            ND: ND
+            OH: OH
+            OK: OK
+            OR: OR
+            PA: PA
+            RI: RI
+            SC: SC
+            SD: SD
+            TN: TN
+            TX: TX
+            UT: UT
+            VT: VT
+            VA: VA
+            WA: WA
+            WV: WV
+            WI: WI
+            WY: WY
+        - name: input_303B886D-E11C-0D7F-3CAC-DF75CA98AC0D
+          selector: "#input-303B886D-E11C-0D7F-3CAC-DF75CA98AC0D"
+          value: $TOPIC
+          required: true
+          options:
+            "Aging/early development/family": FAM
+            "Agriculture": AGR
+            "Animal Welfare": ANIMAL
+            "Antitrust": ANT
+            "Arts and Humanities": ART
+            "Aviation": AVIATION
+            "Banking": BANKS
+            "Budget": BUD
+            "Census": CENSUS
+            "Civil Rights": CIV
+            "Environment": ENV
+            "Technology/Telecommunications": COMM
+            "Defense": DEF
+            "Education": EDU
+            "Elections and Campaign Finance and Congress": ELECT
+            "Energy": ENE
+            "Federal Workforce": FEDWORK
+            "Foreign Relations": FORAFF
+            "Gender": GENDER
+            "Grants": GRANTS
+            "Gun Control": GUN
+            "Native Hawaiians": HAWAIIAN
+            "Health": HEA
+            "Help With a Federal Agency": CASEWORK
+            "Homeland Security": HOM
+            "Housing": HOUSING
+            "Immigration": IMM
+            "Native Americans and Indigenous Peoples": INDIAN
+            "Intellectual Property": "INT PROP"
+            "Intelligence": INTEL
+            "Judiciary": JUD
+            "Labor": LABOR
+            "Maritime": MARITIME
+            "Natural Resources": NATURALRES
+            "Nutrition": NUTRITION
+            "Oceans and Fisheries": OCEANS
+            "Postal Service": POSTAL
+            "Religion": RELIGION
+            "Science and Space": SCIENCE
+            "Small Business and Economic Development": BUS
+            "Social Security": SSEC
+            "Sports": SPORTS
+            "Tax": TAX
+            "Tourism": TOURISM
+            "Transportation & Infrastructure": TRA
+            "Trade": TRADE
+            "Veterans": VET
+            "Welfare": WEL
+    - check:
+        - name: input_304881BC-D73E-2C0B-0971-3FFDD099B014
+          selector: "#input-3048820B-A361-6166-70F4-2D74C1E208F4"
+          value: "3048820B-A361-6166-70F4-2D74C1E208F4"
+          required: true
+    - javascript:
+        - value: document.querySelector("#input-30403D9F-9D8B-E1D8-02F8-5D7C17B516E7").value = document.querySelector("#input-30403D9F-9D8B-E1D8-02F8-5D7C17B516E7").value.replace(/"/g, '');
+    - javascript:
+        - value: document.querySelector('.btn').click();
+    - wait:
+        - value: 3
+  success:
+    headers:
+      status: 200
+    body:
+      contains: "Your message has been received"

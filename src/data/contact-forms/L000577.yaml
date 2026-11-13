@@ -1,0 +1,107 @@
+bioguide:  L000577
+contact_form:
+  method: post
+  action: ""
+  steps:
+    - visit: "https://www.lee.senate.gov/public/index.cfm/contact"
+    - javascript:
+        - value: document.querySelector(".header-top").remove()
+    - fill_in:
+        - name: field_6FA377A2-2FA6-4442-822F-DEECDDF5E8BD
+          selector: "#field_6FA377A2-2FA6-4442-822F-DEECDDF5E8BD"
+          value: $NAME_FIRST
+          required: true
+        - name: field_808885CA-37DE-497C-B398-D689ACDFC0CA
+          selector: "#field_808885CA-37DE-497C-B398-D689ACDFC0CA"
+          value: $NAME_LAST
+          required: true
+        - name: field_CFDBB27C-9BC5-4B32-AC1A-5B1025485E01
+          selector: "#field_CFDBB27C-9BC5-4B32-AC1A-5B1025485E01"
+          value: $ADDRESS_STREET
+          required: true
+        - name: field_444C3E89-0158-42E9-A2ED-BDBC5C8E65C2
+          selector: "#field_444C3E89-0158-42E9-A2ED-BDBC5C8E65C2"
+          value: $ADDRESS_CITY
+          required: true
+        - name: field_947E6987-9B90-4EC7-9ACF-38859EE6C61D
+          selector: "#field_947E6987-9B90-4EC7-9ACF-38859EE6C61D"
+          value: $ADDRESS_ZIP5
+          required: true
+        - name: field_F43574B3-9C23-44A6-80D9-0E0D05E6269B
+          selector: "#field_F43574B3-9C23-44A6-80D9-0E0D05E6269B"
+          value: $EMAIL
+          required: true
+        - name: field_E1F6236D-5A16-4C23-93B1-A9DD0132AD48
+          selector: "#field_E1F6236D-5A16-4C23-93B1-A9DD0132AD48"
+          value: $MESSAGE
+          required: true
+          options:
+            max_length: 5000
+    - select:
+        - name: field_AB5653A3-EE2D-405A-B06F-3CB52793E7F7
+          selector: "#field_AB5653A3-EE2D-405A-B06F-3CB52793E7F7"
+          value: $TOPIC
+          required: true
+          options:
+            Agriculture/Forestry: AGR
+            Appropriations: APPR
+            Animal Issues: ANI
+            Arts  Humanities: ARTS
+            Banking: BANK
+            Boy Scout Letter: BOYSCOUT
+            Budget/Finance, Economy/Jobs: ECON
+            Commerce: COMM
+            Eagle Scout Letter: EAGSCOUT
+            Education: EDU
+            Energy Independence: ENERGY
+            Environment: ENV
+            Ethics: ETHICS
+            Executive Branch: EXEC
+            Foreign Affairs: FORAFF
+            General Government Concerns: GOV
+            Gun Rights: GUN
+            Healthcare: HEA
+            Housing: HOU
+            Immigration/Border Security: IMM
+            Indian Affairs: IND
+            Internet/Telecommunications: INT
+            Judiciary: JUD
+            Labor/Pensions: LAB
+            Letters of Congratulation: LOC
+            Military/Defense: DEF
+            National Security: NATSEC
+            Poverty/Welfare Reform: WEL
+            Public Lands: PUBLAND
+            Religion/Human Rights: RELIG
+            Science/NASA: SCI
+            Small Business: SMALLBUSINESS
+            Social Security: SSEC
+            Tax: TAX
+            Technology: TECH
+            Trade: TRADE
+            Transportation: TRA
+            Veterans: VET
+            Other: OTHER
+    - check:
+        - name: field_D42B86D9-04F0-4F57-AC0C-614B7B86E8AB
+          selector: "#field_D42B86D9-04F0-4F57-AC0C-614B7B86E8AB_0"
+          value: "N"
+    - javascript:
+        - value: document.querySelector('.recaptcha').insertAdjacentHTML('beforeend', "<textarea name='g-recaptcha-response' id='g-recaptcha-response'></textarea>");
+    - javascript:
+        - value: document.querySelector("#g-recaptcha-response").style.display = "block";
+    - javascript:
+        - value: document.querySelector("#field_E1F6236D-5A16-4C23-93B1-A9DD0132AD48").value = document.querySelector("#field_E1F6236D-5A16-4C23-93B1-A9DD0132AD48").value.replace(/"/g, '');
+    - recaptcha:
+        - value: true
+    - javascript:
+        - value: document.querySelector("input.btn.btn-primary").click();
+    - wait:
+        - value: 3
+    - find:
+        - selector: 'div#page-body-inner'
+  success:
+    headers:
+      status: 200
+    body:
+      contains: Thank you

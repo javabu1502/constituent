@@ -1,0 +1,59 @@
+bioguide: W000437
+contact_form:
+  method: post
+  action: ""
+  steps:
+    - visit: "https://www.wicker.senate.gov/contact/email-me/"
+    - fill_in:
+        - name: input_1.3
+          selector: "#input_3_1_3"
+          value: $NAME_FIRST
+          required: true
+        - name: input_1.6
+          selector: "#input_3_1_6"
+          value: $NAME_LAST
+          required: true
+        - name: input_4.1
+          selector: "#input_3_4_1"
+          value: $ADDRESS_STREET
+          required: true
+        - name: input_4.3
+          selector: "#input_3_4_3"
+          value: $ADDRESS_CITY
+          required: true
+        - name: input_4.5
+          selector: "#input_3_4_5"
+          value: $ADDRESS_ZIP5
+          required: true
+        - name: input_9
+          selector: "#input_3_9"
+          value: $PHONE
+          required: true
+        - name: input_2
+          selector: "#input_3_2"
+          value: $EMAIL
+          required: true
+        - name: input_3
+          selector: "#input_3_3"
+          value: $MESSAGE
+          required: true
+    - select:
+        - name: input_1.2
+          selector: "#input_3_1_2"
+          value: $NAME_PREFIX
+          required: true
+          options:
+            - Mr.
+            - Mrs.
+            - Miss
+            - Ms.
+            - Dr.
+            - Prof.
+            - Rev.
+    - click_on:
+      - selector: "#gform_submit_button_3"            
+  success:
+    headers:
+      status: 200
+    body:
+      contains: Thank you for contacting us

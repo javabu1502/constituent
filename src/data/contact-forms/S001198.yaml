@@ -1,0 +1,322 @@
+bioguide: S001198
+contact_form:
+  method: post
+  action: ""
+  steps:
+    - visit: "https://www.sullivan.senate.gov/contact/email/"
+    - find:
+        - selector: "#input_10_2"
+          options:
+            wait: 20
+    - fill_in:
+        - name: input_2
+          selector: "#input_10_2"
+          value: $NAME_FIRST
+          required: true
+        - name: input_3
+          selector: "#input_10_3"
+          value: $NAME_LAST
+          required: true
+        - name: input_5.1
+          selector: "#input_10_5_1"
+          value: $ADDRESS_STREET
+          required: true
+        - name: input_5.3
+          selector: "#input_10_5_3"
+          value: $ADDRESS_CITY
+          required: true
+        - name: input_5.5
+          selector: "#input_10_5_5"
+          value: $ADDRESS_ZIP5
+          required: true
+        - name: input_6
+          selector: "#input_10_6"
+          value: $PHONE
+          required: true
+        - name: input_13
+          selector: "#input_10_13"
+          value: $EMAIL
+          required: true
+        - name: input_13_2
+          selector: "#input_10_13_2"
+          value: $EMAIL
+          required: true
+        - name: input_11
+          selector: "#input_10_11"
+          value: $SUBJECT
+          required: true
+        - name: input_12
+          selector: "#input_10_12"
+          value: $MESSAGE
+          required: true
+    - select:
+        - name: input_5.4
+          selector: "#input_10_5_4"
+          value: $ADDRESS_STATE_FULL
+          required: true
+          options:
+            - Alabama
+            - Alaska
+            - American Samoa
+            - Arizona
+            - Arkansas
+            - California
+            - Colorado
+            - Connecticut
+            - Delaware
+            - District of Columbia
+            - Florida
+            - Georgia
+            - Guam
+            - Hawaii
+            - Idaho
+            - Illinois
+            - Indiana
+            - Iowa
+            - Kansas
+            - Kentucky
+            - Louisiana
+            - Maine
+            - Maryland
+            - Massachusetts
+            - Michigan
+            - Minnesota
+            - Mississippi
+            - Missouri
+            - Montana
+            - Nebraska
+            - Nevada
+            - New Hampshire
+            - New Jersey
+            - New Mexico
+            - New York
+            - North Carolina
+            - North Dakota
+            - Northern Mariana Islands
+            - Ohio
+            - Oklahoma
+            - Oregon
+            - Pennsylvania
+            - Puerto Rico
+            - Rhode Island
+            - South Carolina
+            - South Dakota
+            - Tennessee
+            - Texas
+            - Utah
+            - U.S. Virgin Islands
+            - Vermont
+            - Virginia
+            - Washington
+            - West Virginia
+            - Wisconsin
+            - Wyoming
+            - Armed Forces Americas
+            - Armed Forces Europe
+            - Armed Forces Pacific
+        - name: input_1
+          selector: "#input_10_1"
+          value: $NAME_PREFIX
+          required: false
+          options:
+            - Mr.
+            - Mrs.
+            - Ms.
+            - Dr.
+            - Father
+            - Hon.
+            - Prof.
+            - Professor
+            - Rabbi
+            - Reverend
+            - Sister
+            - Air Force - Airman
+            - Air Force - Airman Basic
+            - Air Force - Airman First Class
+            - Air Force - Brigadier General
+            - Air Force - Captain
+            - Air Force - Chief Master Sergeant
+            - Air Force - Chief Master Sergeant of the Air Force
+            - Air Force - Colonel
+            - Air Force - Command Chief Master Sergeant
+            - Air Force - First Lieutenant
+            - Air Force - First Sergeant (E-7)
+            - Air Force - First Sergeant (E-8)
+            - Air Force - First Sergeant (E-9)
+            - Air Force - General
+            - Air Force - Lieutenant Colonel
+            - Air Force - Lieutenant General
+            - Air Force - Major
+            - Air Force - Major General
+            - Air Force - Master Sergeant
+            - Air Force - Second Lieutenant
+            - Air Force - Senior Airman
+            - Air Force - Senior Master Sergeant
+            - Air Force - Staff Sergeant
+            - Air Force - Technical Sergeant
+            - Army - Brigadier General
+            - Army - Captain
+            - Army - Chief Warrant Officer - 2
+            - Army - Chief Warrant Officer - 3
+            - Army - Chief Warrant Officer - 4
+            - Army - Chief Warrant Officer - 5
+            - Army - Colonel
+            - Army - Command Sergeant Major
+            - Army - Corporal
+            - Army - First Lieutenant
+            - Army - First Sergeant
+            - Army - General
+            - Army - Lieutenant Colonel
+            - Army - Lieutenant General
+            - Army - Major
+            - Army - Major General
+            - Army - Master Sergeant
+            - Army - Private
+            - Army - Private (E-2)
+            - Army - Private First Class
+            - Army - Second Lieutenant
+            - Army - Sergeant
+            - Army - Sergeant First Class
+            - Army - Sergeant Major
+            - Army - Sergeant Major of the Army
+            - Army - Specialist
+            - Army - Staff Sergeant
+            - Army - Warrant Officer
+            - Coast Guard - Admiral
+            - Coast Guard - Captain
+            - Coast Guard - Chief Petty Officer
+            - Coast Guard - Chief Warrant Officer - 2
+            - Coast Guard - Chief Warrant Officer - 3
+            - Coast Guard - Chief Warrant Officer - 4
+            - Coast Guard - Commander
+            - Coast Guard - Ensign
+            - Coast Guard - Lieutenant
+            - Coast Guard - Lieutenant Commander
+            - Coast Guard - Lieutenant Junior Grade
+            - Coast Guard - Master Chief Petty Officer
+            - Coast Guard - Master Chief Petty Officer of the Coast Guard
+            - Coast Guard - Petty Officer First Class
+            - Coast Guard - Petty Officer Second Class
+            - Coast Guard - Petty Officer Third Class
+            - "Coast Guard - Rear Admiral, Lower Half"
+            - "Coast Guard - Rear Admiral, Upper Half"
+            - Coast Guard - Seaman
+            - Coast Guard - Seaman Apprentice
+            - Coast Guard - Seaman Recruit
+            - Coast Guard - Senior Chief Petty Officer
+            - Coast Guard - Vice Admiral
+            - Marine Corps - Brigadier General
+            - Marine Corps - Captain
+            - Marine Corps - Chief Warrant Officer - 2
+            - Marine Corps - Chief Warrant Officer - 3
+            - Marine Corps - Chief Warrant Officer - 4
+            - Marine Corps - Chief Warrant Officer - 5
+            - Marine Corps - Colonel
+            - Marine Corps - Corporal
+            - Marine Corps - First Lieutenant
+            - Marine Corps - First Sergeant
+            - Marine Corps - General
+            - Marine Corps - Gunnery Sergeant
+            - Marine Corps - Lance Corporal
+            - Marine Corps - Lieutenant Colonel
+            - Marine Corps - Lieutenant General
+            - Marine Corps - Major
+            - Marine Corps - Major General
+            - Marine Corps - Master Gunnery Sergeant
+            - Marine Corps - Master Sergeant
+            - Marine Corps - Private
+            - Marine Corps - Private First Class
+            - Marine Corps - Second Lieutenant
+            - Marine Corps - Sergeant
+            - Marine Corps - Sergeant Major
+            - Marine Corps - Sergeant Major of the Marine Corps
+            - Marine Corps - Staff Sergeant
+            - Marine Corps - Warrant Officer
+            - Navy - Admiral
+            - Navy - Captain
+            - Navy - Chief Petty Officer
+            - Navy - Chief Warrant Officer - 2
+            - Navy - Chief Warrant Officer - 3
+            - Navy - Chief Warrant Officer - 4
+            - Navy - Commander
+            - Navy - Ensign
+            - Navy - Lieutenant
+            - Navy - Lieutenant Commander
+            - Navy - Lieutenant Junior Grade
+            - Navy - Master Chief Petty Officer
+            - Navy - Master Chief Petty Officer of the Navy
+            - Navy - Petty Officer First Class
+            - Navy - Petty Officer Second Class
+            - Navy - Petty Officer Third Class
+            - "Navy - Rear Admiral, Lower Half"
+            - "Navy - Rear Admiral, Upper Half"
+            - Navy - Seaman
+            - Navy - Seaman Apprentice
+            - Navy - Seaman Recruit
+            - Navy - Senior Chief Petty Officer
+            - Navy - Vice Admiral
+        - name: input_14
+          selector: "#input_10_14"
+          value: $TOPIC
+          required: true
+          options:
+            Abortion: AB
+            Agriculture: AG
+            Alaska Native Issues: AN
+            Armed Forces: AF
+            Aviation: AV
+            Banking: BA
+            Budget: BU
+            Civil Rights: CV
+            Coast Guard/Maritime: USCG
+            Consumer Protection: CP
+            "Crime & Law Enforcement": CR
+            Economy: ECON
+            Education: ED
+            Elections: EL
+            Endangered Species: ESA
+            Energy: EN
+            Environment: EV
+            Ethics: ET
+            "FEMA/Natural Disasters": FEMA
+            Financial Services: FI
+            Fisheries: FS
+            Foreign Affairs: FA
+            Guns: GC
+            Health Care: HC
+            Homeland Security: HOM
+            Housing: HO
+            Immigration: IM
+            Infrastructure: INFRA
+            Judiciary/Judicial: JU
+            Labor: LA
+            Natural Resources: NR
+            Oceans: OC
+            Other: OTHER
+            Postal Service: PO
+            Public Lands: PL
+            Science: SCI
+            Small Business: SB
+            Social Security: SS
+            Space/NASA: SP
+            Taxes: TX
+            Telecommunications: TC
+            Tourism: TO
+            Trade: TR
+            Transportation: TN
+            TSA: TSA
+            Veterans: VA
+            Wildlife: WL
+    - javascript:
+        - value: "(function(){function clear(sel){var el=document.querySelector(sel);if(!el)return;el.scrollIntoView({block:'center'});var r=el.getBoundingClientRect();var x=r.left+r.width/2,y=r.top+r.height/2;for(var i=0;i<20;i++){var t=document.elementFromPoint(x,y);if(!t||t===el||el.contains(t)||t.contains(el))break;var s=t.closest?t.closest('svg'):null;(s||t).style.pointerEvents='none';}}clear('#gform_submit_button_10');})()"
+    - click_on:
+        - value: Submit
+          selector: "#gform_submit_button_10"
+    - find:
+        - selector: "h1"
+          value: "Thank You"
+  success:
+    headers:
+      status: 200
+    body:
+      contains: "Thank you"

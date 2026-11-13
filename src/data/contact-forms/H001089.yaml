@@ -1,0 +1,114 @@
+bioguide: H001089
+contact_form:
+  method: post
+  action: ''
+  steps:
+  - visit: https://www.hawley.senate.gov/contact-senator-hawley/
+  - fill_in:
+    - name: input_4
+      selector: '[name=input_4]'
+      value: $NAME_FIRST
+      required: true
+    - name: input_5
+      selector: '[name=input_5]'
+      value: $NAME_LAST
+      required: true
+    - name: input_6
+      selector: '[name=input_6]'
+      value: $ADDRESS_STREET
+      required: true
+    - name: input_7
+      selector: '[name=input_7]'
+      value: $ADDRESS_STREET_2
+      required: false
+    - name: input_8
+      selector: '[name=input_8]'
+      value: $ADDRESS_CITY
+      required: true
+    - name: input_10
+      selector: '[name=input_10]'
+      value: $ADDRESS_ZIP5
+      required: true
+    - name: input_11
+      selector: '[name=input_11]'
+      value: $PHONE
+      required: false
+    - name: input_14
+      selector: '[name=input_14]'
+      value: $EMAIL
+      required: true
+    - name: input_19
+      selector: '[name=input_19]'
+      value: $SUBJECT
+      required: true
+    - name: input_21
+      selector: '[name=input_21]'
+      value: $MESSAGE
+      required: true
+  - select:
+    - name: input_3
+      selector: '#input_8_3'
+      value: $NAME_PREFIX
+      required: true
+      options:
+        Dr.: Dr.
+        Mr.: Mr.
+        Mrs.: Mrs.
+        Ms.: Ms.
+        Mr. and Mrs.: Mr. and Mrs.
+    - name: input_16
+      selector: '[name=input_16]'
+      value: $TOPIC
+      required: true
+      options:
+        Abortion: Abortion
+        Adoption: Adoption
+        Agriculture: Agriculture
+        Animal Welfare: Animal Welfare
+        Banking: Banking
+        Budget/Spending: Budget/Spending
+        Citizenship in the Nation Merit Badge: Citizenship in the Nation Merit Badge
+        Civil Rights: Civil Rights
+        Crime/Drugs: Crime/Drugs
+        Defense: Defense
+        Economy: Economy
+        Education (Higher): Education (Higher)
+        Education (K to 12): Education (K to 12)
+        Elections: Elections
+        Energy: Energy
+        Environment: Environment
+        Family Values: Family Values
+        Foreign Relations: Foreign Relations
+        Health: Health
+        Homeland Security: Homeland Security
+        Housing: Housing
+        Immigration: Immigration
+        Intelligence: Intelligence
+        Judiciary: Judiciary
+        Labor: Labor
+        Medicare: Medicare
+        Parks Public Lands: Parks Public Lands
+        Pensions/Retirement: Pensions/Retirement
+        Postal: Postal
+        Regulatory Reform: Regulatory Reform
+        Religion: Religion
+        Science/Technology: Science/Technology
+        Second Amendment: Second Amendment
+        Small Business: Small Business
+        Social Security: Social Security
+        Supreme Court: Supreme Court
+        Taxes: Taxes
+        Telecom: Telecom
+        Trade: Trade
+        Veterans: Veterans
+        Water/Rivers: Water/Rivers
+        Welfare: Welfare
+  - javascript:
+    - value: document.querySelector('#gform_submit_button_8').click()
+  - wait:
+    - value: 10
+  success:
+    headers:
+      status: 200
+    body:
+      contains: Thanks for contacting us!

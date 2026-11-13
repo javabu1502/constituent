@@ -1,0 +1,118 @@
+bioguide:  H001079
+contact_form:
+  method: post
+  action: "/content/contact-senator"
+  steps:
+    - visit: "https://www.hydesmith.senate.gov/contact-senator"
+    - fill_in:
+        - name: "first_name"
+          selector: "#edit-first-name"
+          value: $NAME_FIRST
+          required: true
+        - name: "last_name"
+          selector: "#edit-last-name"
+          value: $NAME_LAST
+          required: true
+        - name: "address_1"
+          selector: "#edit-address-1"
+          value: $ADDRESS_STREET
+          required: true
+        - name: "city"
+          selector: "#edit-city"
+          value: $ADDRESS_CITY
+          required: true
+        - name: "zip"
+          selector: "#edit-zip"
+          value: $ADDRESS_ZIP5
+          required: true
+        - name: "email"
+          selector: "#edit-email"
+          value: $EMAIL
+          required: true
+        - name: "message"
+          selector: "#edit-message"
+          value: $MESSAGE
+          required: true
+    - select:
+        - name: "prefix"
+          selector: "#edit-prefix"
+          value: $NAME_PREFIX
+          required: true
+          options:
+            "Mr.": "Mr."
+            "Mrs.": "Mrs."
+            "Ms.": "Ms."
+            "Mr. and Mrs.": "Mr. and Mrs."
+            "Dr.": "Dr."
+        - name: "topic"
+          selector: "#edit-topic"
+          value: $TOPIC
+          required: true
+          options:
+            - Abortion
+            - Adoption
+            - Aging
+            - Agriculture
+            - Animal Welfare
+            - Appropriations
+            - Banking
+            - Campaign Finance
+            - Children
+            - Civil Rights
+            - Commerce
+            - Communications
+            - Congressional Issues
+            - Crime
+            - Defense
+            - Drugs
+            - Economy
+            - Education Higher
+            - Education K through 12
+            - Elections
+            - Energy
+            - Environment
+            - Family
+            - Food Stamps
+            - Foreign Affairs
+            - Gun Control
+            - Health
+            - Homeland Security
+            - Housing
+            - Immigration
+            - Insurance Health
+            - Insurance Other
+            - Interior
+            - Iran
+            - Iraq
+            - Judiciary
+            - Labor
+            - Medicaid
+            - Medicare
+            - Military
+            - NASA
+            - Nutrition
+            - Other
+            - Patents
+            - Pensions
+            - Securities
+            - Small Business
+            - Social Security
+            - Taxes
+            - Tobacco
+            - Trade
+            - Transportation
+            - Veterans
+            - Welfare
+    - javascript:
+        - value: document.querySelector("#edit-message").value = document.querySelector("#edit-message").value.replace(/"/g, '');
+    - click_on:
+        - selector: "#edit-actions-submit"
+    - find:
+        - selector: ".webform-confirmation__message"
+    - wait:
+        - value: 5
+  success:
+    headers:
+      status: 200
+    body:
+      contains: "Thank you, your message has been sent."

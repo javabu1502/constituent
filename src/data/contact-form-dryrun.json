@@ -1,0 +1,96 @@
+{
+  "checkedAt": "2026-11-13T21:01:56.600Z",
+  "note": "Which vendored contact-form recipes still match their page. Nothing was submitted.",
+  "binds": [
+    "A000383",
+    "B001277",
+    "C000127",
+    "C000880",
+    "C001047",
+    "C001056",
+    "C001075",
+    "C001088",
+    "C001095",
+    "C001098",
+    "C001113",
+    "D000563",
+    "D000622",
+    "G000608",
+    "H000601",
+    "H001076",
+    "H001079",
+    "H001089",
+    "H001104",
+    "J000293",
+    "M000934",
+    "M001153",
+    "M001244",
+    "P000603",
+    "R000584",
+    "R000605",
+    "S001184",
+    "S001194",
+    "T000250",
+    "V000128",
+    "W000437",
+    "W000779",
+    "W000802",
+    "Y000064"
+  ],
+  "stale": [
+    {
+      "bioguide": "B001288",
+      "reason": "click_on[8] failed: page.click: Timeout 20000ms exceeded."
+    },
+    {
+      "bioguide": "F000463",
+      "reason": "required field could not be filled: field_E947A1A8-7A71-4295-AA00-FD0FE886E40D"
+    },
+    {
+      "bioguide": "H001061",
+      "reason": "required option could not be chosen: input_6.4"
+    },
+    {
+      "bioguide": "M001169",
+      "reason": "required field could not be filled: input_021E6848-A43A-487E-E67F-09444047A2BC"
+    },
+    {
+      "bioguide": "S001198",
+      "reason": "required option could not be chosen: input_14"
+    }
+  ],
+  "skipped": [
+    {
+      "bioguide": "B001236",
+      "reason": "needs a challenge solved by a person"
+    },
+    {
+      "bioguide": "B001243",
+      "reason": "needs a challenge solved by a person"
+    },
+    {
+      "bioguide": "K000393",
+      "reason": "needs a challenge solved by a person"
+    },
+    {
+      "bioguide": "L000577",
+      "reason": "needs a challenge solved by a person"
+    },
+    {
+      "bioguide": "M000133",
+      "reason": "needs a challenge solved by a person"
+    },
+    {
+      "bioguide": "M000355",
+      "reason": "needs a challenge solved by a person"
+    },
+    {
+      "bioguide": "R000122",
+      "reason": "needs a challenge solved by a person"
+    },
+    {
+      "bioguide": "T000476",
+      "reason": "needs a challenge solved by a person"
+    }
+  ]
+}

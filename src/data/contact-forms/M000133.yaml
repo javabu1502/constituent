@@ -1,0 +1,206 @@
+bioguide:  M000133
+contact_form:
+  method: post
+  action: "https://www.markey.senate.gov/contact/share-your-opinion"
+  steps:
+    - visit: "https://www.markey.senate.gov/contact/share-your-opinion"
+    - javascript:
+        - value: Array.prototype.forEach.call(document.querySelectorAll('style,[rel=\"stylesheet\"],[type=\"text/css\"]'), function(element){ try{ element.parentNode.removeChild(element) } catch(err){} });
+    - select:
+      - name: topic
+        selector: "#message-topic"
+        value: $TOPIC
+        required: true
+        options:
+          - Agriculture
+          - Animal Rights
+          - Appropriations
+          - Arts/Humanities
+          - Asia
+          - Banking
+          - Budget
+          - Children/Family/Adoption
+          - Civil Rights/LGBT
+          - Civil Service/Postal
+          - Clean Energy
+          - Climate Change
+          - Commemorative/Congratulatory
+          - Commerce
+          - COVID-19
+          - Defense
+          - Drugs
+          - Education K to 12
+          - Elections
+          - Energy
+          - Environment/Public Works
+          - Fisheries
+          - Flag Requests
+          - Foreign Relations
+          - Gun Control
+          - Health
+          - Higher Education
+          - Homeland Security
+          - Housing
+          - Immigration
+          - Indigenous Affairs
+          - Internships
+          - Insurance
+          - Judiciary
+          - Labor
+          - LIHEAP
+          - Medicare/Medicaid
+          - Middle East
+          - Natural Resources
+          - Nuclear Proliferation
+          - Other
+          - Patents
+          - Pensions
+          - Privacy
+          - Public Lands and National Parks
+          - Reproductive Health
+          - Science/Space
+          - Seniors
+          - Small Business
+          - Social Security
+          - Taxes
+          - Technology
+          - Telecommunications
+          - Tours and Tickets
+          - Trade
+          - Transportation
+          - Trump Administration
+          - Veterans
+          - Voting Rights/S.1
+          - Welfare/SNAP
+    - wait:
+      - value: 1
+    - fill_in:
+        - name: input_42427875-9CC0-6E83-5422-011FADF4B2A0
+          selector: "#input-42427875-9CC0-6E83-5422-011FADF4B2A0"
+          value: $NAME_FIRST
+          required: true
+        - name: input_424278A8-A33D-4812-7806-73A81B0352DB
+          selector: "#input-424278A8-A33D-4812-7806-73A81B0352DB"
+          value: $NAME_LAST
+          required: true
+        - name: input_424E4036-EBDF-B0F8-7F83-3AAD2C2D7D7C
+          selector: "#input-424E4036-EBDF-B0F8-7F83-3AAD2C2D7D7C"
+          value: $ADDRESS_STREET
+          required: true
+        - name: input-424E4036-EBDF-B0F8-7F83-3AAD2C2D7D7C
+          selector: "#input-424E40A0-03FE-88D8-1322-61BB69A2E2A6"
+          value: $ADDRESS_CITY
+          required: true
+        - name: input_424E4101-BEB0-D606-7706-803EF69290F1
+          selector: "#input-424E4101-BEB0-D606-7706-803EF69290F1"
+          value: $ADDRESS_ZIP5
+          required: true
+        - name: input_7622D1F7-D717-7B5C-BEBC-423953516A0B
+          selector: "#email"
+          value: $EMAIL
+          required: true
+        - name: input_7622D22B-DFBA-1747-E2FB-BE7F840C5C45
+          selector: "#input-7622D22B-DFBA-1747-E2FB-BE7F840C5C45"
+          value: $EMAIL
+          required: true
+        - name: subject
+          selector: "#input-42717B40-9F86-3CB6-E002-E1CF8FF3DAD5"
+          value: $SUBJECT
+          required: true
+        - name: input_4273AC30-BD7A-71CE-C404-6C3C23E22134
+          selector: "#input-4273AC30-BD7A-71CE-C404-6C3C23E22134"
+          value: $MESSAGE
+          required: true
+    - select:
+        - name: input_42427839-032A-AC44-2F70-9AA66E270A25
+          selector: "#input-42427839-032A-AC44-2F70-9AA66E270A25"
+          value: $NAME_PREFIX
+          required: true
+          options:
+            - Mr.
+            - Ms.
+            - Mrs.
+            - Miss
+            - Mx.
+            - Mr. and Mrs.
+            - Dr.
+        - name: input_424E40CF-05A3-7E5A-5C1F-7132981A8170
+          selector: "#input-424E40CF-05A3-7E5A-5C1F-7132981A8170"
+          value: $ADDRESS_STATE_POSTAL_ABBREV
+          required: true
+          options:
+            "--": "null"
+            AK: AK
+            AL: AL
+            AR: AR
+            AZ: AZ
+            CA: CA
+            CO: CO
+            CT: CT
+            DC: DC
+            DE: DE
+            FL: FL
+            GA: GA
+            HI: HI
+            IA: IA
+            ID: ID
+            IL: IL
+            IN: IN
+            KS: KS
+            KY: KY
+            LA: LA
+            MA: MA
+            MD: MD
+            ME: ME
+            MI: MI
+            MN: MN
+            MO: MO
+            MS: MS
+            MT: MT
+            NC: NC
+            ND: ND
+            NE: NE
+            NH: NH
+            NJ: NJ
+            NM: NM
+            NV: NV
+            NY: NY
+            OH: OH
+            OK: OK
+            OR: OR
+            PA: PA
+            RI: RI
+            SC: SC
+            SD: SD
+            TN: TN
+            TX: TX
+            UT: UT
+            VA: VA
+            VT: VT
+            WA: WA
+            WI: WI
+            WV: WV
+            WY: WY
+    - wait:
+        - value: 1
+    - javascript:
+        - value: document.querySelector("#input-4273AC30-BD7A-71CE-C404-6C3C23E22134").value = document.querySelector("#input-4273AC30-BD7A-71CE-C404-6C3C23E22134").value.replace(/"/g, '');
+    - javascript:
+        - value: "document.querySelector('#g-recaptcha-response').style.cssText = 'display: block; margin-top: 5em;';"
+    - javascript:
+        - value: document.getElementById('g-recaptcha-response') || document.querySelector('.g-recaptcha').insertAdjacentHTML('beforeend', "<textarea name='g-recaptcha-response' id='g-recaptcha-response'></textarea>");
+    - recaptcha:
+        - value: true
+    - wait:
+        - value: 1
+    - javascript:
+        - value: document.querySelector('.btn[type="submit"]').disabled = false;
+    - javascript:
+        - value: document.querySelector('.btn[type="submit"]').click();
+    - wait:
+        - value: 8
+  success:
+    headers:
+      status: 200
+    body:
+      contains: You will receive an automated

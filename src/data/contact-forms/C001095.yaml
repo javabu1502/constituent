@@ -1,0 +1,180 @@
+bioguide:  C001095
+contact_form:
+  method: post
+  action: "https://www.cotton.senate.gov/contact/contact-tom"
+  steps:
+    - visit: "https://www.cotton.senate.gov/contact/contact-tom"
+    - fill_in:
+        - name: input_3
+          selector: "#input_2_3"
+          value: $NAME_FIRST
+          required: true
+        - name: input_4
+          selector: "#input_2_4"
+          value: $NAME_LAST
+          required: true
+        - name: input_5.1
+          selector: "#input_2_5_1"
+          value: $ADDRESS_STREET
+          required: true
+        - name: input_5.3
+          selector: "#input_2_5_3"
+          value: $ADDRESS_CITY
+          required: true
+        - name: input_5.5
+          selector: "#input_2_5_5"
+          value: $ADDRESS_ZIP5
+          required: true
+        - name: input_6
+          selector: "#input_2_6"
+          value: $PHONE
+          required: true
+        - name: input_13
+          selector: "#input_2_13"
+          value: $EMAIL
+          required: true
+        - name: input_13_2
+          selector: "#input_2_13_2"
+          value: $EMAIL
+          required: true
+        - name: input_11
+          selector: "#input_2_11"
+          value: $SUBJECT
+          required: true
+        - name: input_12
+          selector: "#input_2_12"
+          value: $MESSAGE
+          required: true
+    - select:
+        - name: input_2
+          selector: "#input_2_2"
+          value: $NAME_PREFIX
+          required: true
+          options:
+            - Mr.
+            - Mrs.
+            - Ms.
+            - Dr.
+            - Rev.
+            - Prof.
+            - Hon.
+        - name: input_5.4
+          selector: "#input_2_5_4"
+          value: $ADDRESS_STATE_FULL
+          required: true
+          options:
+            - Alabama
+            - Alaska
+            - American Samoa
+            - Arizona
+            - Arkansas
+            - California
+            - Colorado
+            - Connecticut
+            - Delaware
+            - District of Columbia
+            - Florida
+            - Georgia
+            - Guam
+            - Hawaii
+            - Idaho
+            - Illinois
+            - Indiana
+            - Iowa
+            - Kansas
+            - Kentucky
+            - Louisiana
+            - Maine
+            - Maryland
+            - Massachusetts
+            - Michigan
+            - Minnesota
+            - Mississippi
+            - Missouri
+            - Montana
+            - Nebraska
+            - Nevada
+            - New Hampshire
+            - New Jersey
+            - New Mexico
+            - New York
+            - North Carolina
+            - North Dakota
+            - Northern Mariana Islands
+            - Ohio
+            - Oklahoma
+            - Oregon
+            - Pennsylvania
+            - Puerto Rico
+            - Rhode Island
+            - South Carolina
+            - South Dakota
+            - Tennessee
+            - Texas
+            - Utah
+            - U.S. Virgin Islands
+            - Vermont
+            - Virginia
+            - Washington
+            - West Virginia
+            - Wisconsin
+            - Wyoming
+            - Armed Forces Americas
+            - Armed Forces Europe
+            - Armed Forces Pacific
+        - name: input_10
+          selector: "#input_2_10"
+          value: $TOPIC
+          required: true
+          options:
+            - Abortion
+            - Agriculture
+            - Animal Welfare
+            - Banking
+            - Budget
+            - Civil Rights
+            - Congratulations
+            - Crime
+            - Education
+            - Elections
+            - Energy
+            - Environment
+            - Family
+            - Government Affairs
+            - Guns
+            - Health
+            - Homeland Security
+            - Housing
+            - International Relations
+            - Judiciary
+            - Labor
+            - Medicaid
+            - Medicare
+            - Military
+            - NASA
+            - Natural Resources
+            - Other
+            - Patents
+            - Religious Issues
+            - Request
+            - Social Issues
+            - Social Security
+            - Taxes
+            - Telecommunications
+            - Trade
+            - Transportation
+            - Veterans
+            - Welfare
+            - Women's Issues
+    - javascript:
+        - value: document.querySelector("#input_2_12").value = document.querySelector("#input_2_12").value.replace(/"/g, '');
+    - click_on:
+        - value: Submit
+          selector: "#gform_submit_button_2"
+    - wait:
+        - value: 5
+  success:
+    headers:
+      status: 200
+    body:
+      contains: Thank You

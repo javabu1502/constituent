@@ -1,0 +1,173 @@
+bioguide: C001113
+contact_form:
+  method: post
+  action: ""
+  steps:
+    - visit: "https://www.cortezmasto.senate.gov/contact/connect"
+    - javascript:
+        - value: "(function(){function strip(){Array.prototype.forEach.call(document.querySelectorAll('style,[rel=\"stylesheet\"],[type=\"text/css\"]'), function(el){ try{ el.parentNode.removeChild(el) } catch(err){} });} strip(); setInterval(strip, 300);})()"
+    - javascript:
+        - value: "document.body.style.visibility = 'inherit'; var w = document.querySelector('#gform_wrapper_2'); if (w) { w.style.display = 'block'; w.style.visibility = 'visible'; w.style.opacity = '1'; } var f = document.querySelector('#gform_wrapper_2 form'); if (f) { f.style.opacity = '1'; f.style.visibility = 'visible'; }"
+    - javascript:
+        - value: document.querySelector('[data-elementor-type="header"]').remove()
+    - click_on:
+        - selector: "#e-n-tab-title-2666457161"
+    - find:
+        - selector: "#input_2_2"
+          options:
+            wait: 20
+    - fill_in:
+        - name: "input_2"
+          selector: "#input_2_2"
+          value: $NAME_FIRST
+          required: true
+        - name: "input_3"
+          selector: "#input_2_3"
+          value: $NAME_LAST
+          required: true
+        - name: "input_6.1"
+          selector: "#input_2_6_1"
+          value: $ADDRESS_STREET
+          required: true
+        - name: "input_6.3"
+          selector: "#input_2_6_3"
+          value: $ADDRESS_CITY
+          required: true
+        - name: "input_6.5"
+          selector: "#input_2_6_5"
+          value: $ADDRESS_ZIP5
+          required: true
+        - name: "input_41"
+          selector: "#input_2_41"
+          value: $PHONE
+          required: true
+        - name: "input_9"
+          selector: "#input_2_9"
+          value: $EMAIL
+          required: true
+        - name: "input_9_2"
+          selector: "#input_2_9_2"
+          value: $EMAIL
+          required: true
+        - name: "input_11"
+          selector: "#input_2_11"
+          value: $SUBJECT
+          required: true
+        - name: "input_12"
+          selector: "#input_2_12"
+          value: $MESSAGE
+          required: true
+    - select:
+        - name: "input_6.4"
+          selector: "#input_2_6_4"
+          value: $ADDRESS_STATE_FULL
+          required: true
+          options:
+            - Alabama
+            - Alaska
+            - American Samoa
+            - Arizona
+            - Arkansas
+            - California
+            - Colorado
+            - Connecticut
+            - Delaware
+            - District of Columbia
+            - Florida
+            - Georgia
+            - Guam
+            - Hawaii
+            - Idaho
+            - Illinois
+            - Indiana
+            - Iowa
+            - Kansas
+            - Kentucky
+            - Louisiana
+            - Maine
+            - Maryland
+            - Massachusetts
+            - Michigan
+            - Minnesota
+            - Mississippi
+            - Missouri
+            - Montana
+            - Nebraska
+            - Nevada
+            - New Hampshire
+            - New Jersey
+            - New Mexico
+            - New York
+            - North Carolina
+            - North Dakota
+            - Northern Mariana Islands
+            - Ohio
+            - Oklahoma
+            - Oregon
+            - Pennsylvania
+            - Puerto Rico
+            - Rhode Island
+            - South Carolina
+            - South Dakota
+            - Tennessee
+            - Texas
+            - Utah
+            - U.S. Virgin Islands
+            - Vermont
+            - Virginia
+            - Washington
+            - West Virginia
+            - Wisconsin
+            - Wyoming
+            - Armed Forces Americas
+            - Armed Forces Europe
+            - Armed Forces Pacific
+        - name: "input_39"
+          selector: "#input_2_39"
+          value: $NAME_PREFIX
+          required: true
+          options:
+            - Mr.
+            - Mrs.
+            - Prefer not to identify
+            - Ms.
+            - Miss
+            - Professor
+            - Dean
+            - The Honorable
+            - Dr.
+        - name: "input_17"
+          selector: "#input_2_17"
+          value: $TOPIC
+          required: true
+          options:
+             Agriculture: Agriculture
+             Budget: Budget
+             Children: Children
+             Election Reform: Election Reform
+             Energy/Environment: Energy/Environment
+             Finance: Finance
+             Health: Health
+             Housing: Housing
+             Immigration: Immigration
+             Judiciary: Judiciary
+             Labor: Labor
+             Defense: Defense
+             Native Americans: Native Americans
+             Public Safety: Public Safety
+             Retirement: Retirement
+             Taxes: Taxes
+             Technology: Technology
+             Trade: Trade
+             Transportation: Transportation
+             Veterans: Veterans
+    - click_on:
+        - value: Submit
+          selector: "#gform_submit_button_2"
+    - wait:
+        - value: 10
+  success:
+    headers:
+      status: 200
+    body:
+      contains: "Email Catherine"

@@ -1,0 +1,257 @@
+bioguide: C001088
+contact_form:
+  method: post
+  action: "/contact/share-your-opinion/"
+  steps:
+    - visit: "https://www.coons.senate.gov/contact/share-your-opinion/"
+    - javascript:
+        - value: "(function(){function strip(){Array.prototype.forEach.call(document.querySelectorAll('style,[rel=\"stylesheet\"],[type=\"text/css\"]'), function(el){ try{ el.parentNode.removeChild(el) } catch(err){} });} strip(); setInterval(strip, 300);})()"
+    - javascript:
+        - value: "(function(){function unhide(){document.body.style.visibility = 'inherit'; var w = document.querySelector('#gform_wrapper_2'); if (w) { w.classList.remove('gform_hidden'); w.style.display = 'block'; w.style.visibility = 'visible'; w.style.opacity = '1'; } var f = document.querySelector('#gform_wrapper_2 form'); if (f) { f.style.opacity = '1'; f.style.visibility = 'visible'; }} unhide(); setInterval(unhide, 300);})()"
+    - find:
+        - selector: "#input_2_2"
+          options:
+            wait: 30
+    - fill_in:
+        - name: input_2
+          selector: "#input_2_2"
+          value: $NAME_FIRST
+          required: true
+        - name: input_3
+          selector: "#input_2_3"
+          value: $NAME_LAST
+          required: true
+        - name: input_9
+          selector: "#input_2_9"
+          value: $EMAIL
+          required: true
+        - name: input_9_2
+          selector: "#input_2_9_2"
+          value: $EMAIL
+          required: true
+        - name: input_41
+          selector: "#input_2_41"
+          value: $PHONE
+          required: true
+        - name: input_42
+          selector: "#input_2_42"
+          value: $PHONE
+          required: false
+        - name: input_6.1
+          selector: "#input_2_6_1"
+          value: $ADDRESS_STREET
+          required: true
+        - name: input_6.2
+          selector: "#input_2_6_2"
+          value: $ADDRESS_STREET_2
+          required: false
+        - name: input_6.3
+          selector: "#input_2_6_3"
+          value: $ADDRESS_CITY
+          required: true
+        - name: input_6.5
+          selector: "#input_2_6_5"
+          value: $ADDRESS_ZIP5
+          required: true
+        - name: input_11
+          selector: "#input_2_11"
+          value: $SUBJECT
+          required: true
+        - name: input_12
+          selector: "#input_2_12"
+          value: $MESSAGE
+          required: true
+    - select:
+        - name: input_39
+          selector: "#input_2_39"
+          value: $NAME_PREFIX
+          required: true
+          options:
+            Mr.: "Mr."
+            Ms.: "Ms."
+            Mrs.: "Mrs."
+            Miss: "Miss"
+            Mx.: "Mx."
+            Mr. and Mrs.: "Mr. and Mrs."
+            Dr.: "Dr."
+            Prof.: "Prof."
+            Senator: "Senator"
+            Gov.: "Gov."
+            Congressman: "Congressman"
+            Pastor: "Pastor"
+            Hon.: "Hon."
+            Fr.: "Fr."
+            Sister: "Sister"
+            Bishop: "Bishop"
+            Rabbi: "Rabbi"
+            Reverend: "Reverend"
+            Fleet Admiral: "Fleet Admiral"
+            Admiral: "Admiral"
+            1st Lt.: "1st Lt."
+            Vice Admiral: "Vice Admiral"
+            LCDR: "LCDR"
+            Rear Admiral (upper half): "Rear Admiral (upper half)"
+            Rear Admiral (lower half): "Rear Admiral (lower half)"
+            Captain: "Captain"
+            Commander: "Commander"
+            Lieutenant Commander: "Lieutenant Commander"
+            Lieutenant: "Lieutenant"
+            Lieutenant, Junior Grade: "Lieutenant, Junior Grade"
+            Ensign: "Ensign"
+            Master Chief Petty Officer of the Navy: "Master Chief Petty Officer of the Navy"
+            Master Chief Petty Officer: "Master Chief Petty Officer"
+            Senior Chief Petty Officer: "Senior Chief Petty Officer"
+            Chief Petty Officer: "Chief Petty Officer"
+            Petty Officer First Class: "Petty Officer First Class"
+            Petty Officer Second Class: "Petty Officer Second Class"
+            Petty Officer Third Class: "Petty Officer Third Class"
+            Seaman: "Seaman"
+            Seaman Apprentice: "Seaman Apprentice"
+            Seaman Recruit: "Seaman Recruit"
+            Chief Warrant Officer: "Chief Warrant Officer"
+            Warrant Officer: "Warrant Officer"
+            Sgt Major Of The Corps: "Sgt Major Of The Corps"
+            Sergeant Major: "Sergeant Major"
+            Master Gunnery Sgt: "Master Gunnery Sgt"
+            First Sergeant: "First Sergeant"
+            Master Sergeant: "Master Sergeant"
+            Gunnery Sergeant: "Gunnery Sergeant"
+            Staff Sergeant: "Staff Sergeant"
+            Sergeant: "Sergeant"
+            Corporal: "Corporal"
+            Lance Corporal: "Lance Corporal"
+            Private First Class: "Private First Class"
+            Private: "Private"
+            General of the Air Force: "General of the Air Force"
+            General: "General"
+            Lieutenant General: "Lieutenant General"
+            Major General: "Major General"
+            Brigadier Sergeant: "Brigadier Sergeant"
+            Colonel: "Colonel"
+            Major: "Major"
+            First Lieutenant: "First Lieutenant"
+            Second Lieutenant: "Second Lieutenant"
+            Chief Master Sergeant of the Air Force: "Chief Master Sergeant of the Air Force"
+            Command Chief Master Sergeant: "Command Chief Master Sergeant"
+            Chief Master Sergeant: "Chief Master Sergeant"
+            Senior Master Sergeant: "Senior Master Sergeant"
+            Technical Sergeant: "Technical Sergeant"
+            Senior Airman: "Senior Airman"
+            Airman First Class: "Airman First Class"
+            Airman: "Airman"
+        - name: input_17
+          selector: "#input_2_17"
+          value: $TOPIC
+          required: true
+          options:
+            Agriculture: AGRI
+            Animal Welfare: ANIMAL
+            Appropriations/Federal Budget: APPROPS/BUDGET
+            Banking and Financial Services: BANK
+            Campaigns and Elections: CAMPAIGN/ELECTIONS
+            Crime and Law Enforcement: CRIME
+            Defense and Military: DEF
+            Department of Government Efficiency: DOGE
+            Domestic Violence: DOMVIO
+            Economy: ECON
+            Education: EDU
+            Energy: ENERGY
+            Environment: ENVIRO
+            Federal Emergency Management: FEM
+            Federal Workforce: FED
+            Foreign Policy: FP
+            Guns: GUN
+            Health Care: HEALTH
+            Housing: HOUSING
+            Immigration: IMMIG
+            Judiciary: JUDICIARY
+            Labor: LABOR
+            LGBTQ Equality: LGBTQ
+            Nutrition & SNAP/WIC: NUTRITION
+            Prescription Drugs: PRESCRIP
+            Religion: RELIGION
+            Reproductive Health: REPRODUCTIVE
+            Social Security and Pensions: SENIOR
+            Taxes: TAX
+            Telecommunications: TEL
+            Trade: TRADE
+            Transportation and Infrastructure: TRANSPO
+            Veterans: VET
+            Miscellaneous: MISC
+        - name: input_6.4
+          selector: "#input_2_6_4"
+          value: $ADDRESS_STATE_FULL
+          required: true
+          options:
+            Alabama: Alabama
+            Alaska: Alaska
+            American Samoa: American Samoa
+            Arizona: Arizona
+            Arkansas: Arkansas
+            California: California
+            Colorado: Colorado
+            Connecticut: Connecticut
+            Delaware: Delaware
+            District of Columbia: District of Columbia
+            Florida: Florida
+            Georgia: Georgia
+            Guam: Guam
+            Hawaii: Hawaii
+            Idaho: Idaho
+            Illinois: Illinois
+            Indiana: Indiana
+            Iowa: Iowa
+            Kansas: Kansas
+            Kentucky: Kentucky
+            Louisiana: Louisiana
+            Maine: Maine
+            Maryland: Maryland
+            Massachusetts: Massachusetts
+            Michigan: Michigan
+            Minnesota: Minnesota
+            Mississippi: Mississippi
+            Missouri: Missouri
+            Montana: Montana
+            Nebraska: Nebraska
+            Nevada: Nevada
+            New Hampshire: New Hampshire
+            New Jersey: New Jersey
+            New Mexico: New Mexico
+            New York: New York
+            North Carolina: North Carolina
+            North Dakota: North Dakota
+            Northern Mariana Islands: Northern Mariana Islands
+            Ohio: Ohio
+            Oklahoma: Oklahoma
+            Oregon: Oregon
+            Pennsylvania: Pennsylvania
+            Puerto Rico: Puerto Rico
+            Rhode Island: Rhode Island
+            South Carolina: South Carolina
+            South Dakota: South Dakota
+            Tennessee: Tennessee
+            Texas: Texas
+            Utah: Utah
+            U.S. Virgin Islands: U.S. Virgin Islands
+            Vermont: Vermont
+            Virginia: Virginia
+            Washington: Washington
+            West Virginia: West Virginia
+            Wisconsin: Wisconsin
+            Wyoming: Wyoming
+            Armed Forces Americas: Armed Forces Americas
+            Armed Forces Europe: Armed Forces Europe
+            Armed Forces Pacific: Armed Forces Pacific
+    - click_on:
+        - selector: "#gform_submit_button_2"
+    - javascript:
+        - value: "(function(){function reveal(){Array.prototype.forEach.call(document.querySelectorAll('style,[rel=\"stylesheet\"],[type=\"text/css\"]'), function(el){ try{ el.parentNode.removeChild(el) } catch(err){} }); document.body.style.visibility = 'inherit'; Array.prototype.forEach.call(document.querySelectorAll('.gform_hidden,[id^=\"gform_wrapper_\"],[id^=\"gform_confirmation_wrapper_\"]'), function(el){ el.classList.remove('gform_hidden'); el.style.display = 'block'; el.style.visibility = 'visible'; el.style.opacity = '1'; });} reveal(); setInterval(reveal, 300);})()"
+    - find:
+        - selector: "#gform_confirmation_message_2"
+          options:
+            wait: 30
+  success:
+    headers:
+      status: 200
+    body:
+      contains: "Thank you for contacting me"

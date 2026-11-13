@@ -1,0 +1,142 @@
+bioguide:  J000293
+contact_form:
+  method: post
+  action: ""
+  steps:
+    - visit: "https://www.ronjohnson.senate.gov/contact/email-the-senator/"
+    - find:
+        - selector: '#input_3_3'
+    - fill_in:
+        - name: input_3
+          selector: "#input_3_3"
+          value: $NAME_FIRST
+          required: true
+        - name: input_4
+          selector: "#input_3_4"
+          value: $NAME_LAST
+          required: true
+        - name: input_5.1
+          selector: "#input_3_5_1"
+          value: $ADDRESS_STREET
+          required: true
+        - name: input_5.3
+          selector: "#input_3_5_3"
+          value: $ADDRESS_CITY
+          required: true
+        - name: input_5.5
+          selector: "#input_3_5_5"
+          value: $ADDRESS_ZIP5
+          required: true
+        - name: input_3_7
+          selector: "#input_3_7"
+          value: $EMAIL
+          required: true
+        - name: input_6
+          selector: "#input_3_6"
+          value: $PHONE
+          required: true
+        - name: input_9
+          selector: "#input_3_9"
+          value: $SUBJECT
+          required: false
+        - name: input_10
+          selector: "#input_3_10"
+          value: $MESSAGE
+          required: true
+    - select:
+        - name: input_8
+          selector: "#input_3_8"
+          value: $TOPIC
+          required: true
+          options:
+            Agriculture: AGR
+            Budget: BUD
+            Defense: DEF
+            "Economy and Jobs": ECO
+            Education: EDU
+            Energy: ENE
+            Environmental: ENV
+            Foreign Relations: INT
+            Health: HEA
+            Homeland Security: HOM
+            Immigration: IMM
+            Judiciary: JUD
+            Social Issues: SOC
+            Social Security: SSEC
+            Taxes: TAX
+            Telecommunications: TEL
+            Transportation: TRA
+            Veterans: VET
+            Welfare: WEL
+            Other: OTH
+        - name: input_5.4
+          selector: "#input_3_5_4"
+          value: $ADDRESS_STATE_FULL
+          required: true
+          options:
+            Alabama: Alabama
+            Alaska: Alaska
+            American Samoa: American Samoa
+            Arizona: Arizona
+            Arkansas: Arkansas
+            California: California
+            Colorado: Colorado
+            Connecticut: Connecticut
+            Delaware: Delaware
+            District of Columbia: District of Columbia
+            Florida: Florida
+            Georgia: Georgia
+            Guam: Guam
+            Hawaii: Hawaii
+            Idaho: Idaho
+            Illinois: Illinois
+            Indiana: Indiana
+            Iowa: Iowa
+            Kansas: Kansas
+            Kentucky: Kentucky
+            Louisiana: Louisiana
+            Maine: Maine
+            Maryland: Maryland
+            Massachusetts: Massachusetts
+            Michigan: Michigan
+            Minnesota: Minnesota
+            Mississippi: Mississippi
+            Missouri: Missouri
+            Montana: Montana
+            Nebraska: Nebraska
+            Nevada: Nevada
+            New Hampshire: New Hampshire
+            New Jersey: New Jersey
+            New Mexico: New Mexico
+            New York: New York
+            North Carolina: North Carolina
+            North Dakota: North Dakota
+            Northern Mariana Islands: Northern Mariana Islands
+            Ohio: Ohio
+            Oklahoma: Oklahoma
+            Oregon: Oregon
+            Pennsylvania: Pennsylvania
+            Puerto Rico: Puerto Rico
+            Rhode Island: Rhode Island
+            South Carolina: South Carolina
+            South Dakota: South Dakota
+            Tennessee: Tennessee
+            Texas: Texas
+            Utah: Utah
+            U.S. Virgin Islands: U.S. Virgin Islands
+            Vermont: Vermont
+            Virginia: Virginia
+            Washington: Washington
+            West Virginia: West Virginia
+            Wisconsin: Wisconsin
+            Wyoming: Wyoming
+            Armed Forces Americas: Armed Forces Americas
+            Armed Forces Europe: Armed Forces Europe
+            Armed Forces Pacific: Armed Forces Pacific
+    - click_on:
+        - selector: "#gform_submit_button_3"
+  success:
+    headers:
+      status: 200
+    body:
+      contains: Thank you for contacting me
