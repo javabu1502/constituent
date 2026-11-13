@@ -458,6 +458,7 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
             bill_congress: campaign.bill_congress ?? null,
             bill_type: campaign.bill_type ?? null,
             bill_number: campaign.bill_number ?? null,
+            target_level: campaign.target_level ?? null,
           }}
         />
       )}
@@ -486,6 +487,7 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
           parent_campaign_id: campaign.parent_campaign_id ?? null,
           bill_level: campaign.bill_level ?? null,
           bill_state: campaign.bill_state ?? null,
+          target_level: campaign.target_level ?? null,
         }}
       />
 

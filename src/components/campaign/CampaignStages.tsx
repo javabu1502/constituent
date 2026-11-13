@@ -30,6 +30,8 @@ export async function CampaignStages({
     slug: string;
     headline: string;
     parent_campaign_id: string | null;
+    /** Carried into an added step, which writes to the same officials. */
+    target_level?: string | null;
     bill_level?: string | null;
     bill_state?: string | null;
   };
@@ -92,7 +94,7 @@ export async function CampaignStages({
         <h2 className="text-base font-semibold text-gray-900 dark:text-white">Actions</h2>
         {!isDemo && (
           <Link
-            href={`/campaign/create?type=advocacy&parent=${campaign.id}&parent_name=${encodeURIComponent(campaign.headline)}${
+            href={`/campaign/create?type=advocacy&parent=${campaign.id}&parent_name=${encodeURIComponent(campaign.headline)}&target=${campaign.target_level ?? 'federal'}${
               campaign.bill_level === 'state' && campaign.bill_state ? `&state=${campaign.bill_state}` : ''
             }${reachable > 0 ? `&supporters=${reachable}` : ''}`}
             className="text-sm font-medium px-3 py-1.5 rounded-lg border border-purple-300 dark:border-purple-700 text-purple-700 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-900/20 transition-colors"

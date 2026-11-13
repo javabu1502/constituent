@@ -21,6 +21,8 @@ export async function BillStatusPanel({
     bill_ref: string | null;
     bill_level: string | null;
     bill_state: string | null;
+    /** Carried into an added step, which writes to the same officials. */
+    target_level?: string | null;
     bill_congress?: number | null;
     bill_type?: string | null;
     bill_number?: string | null;
@@ -47,7 +49,7 @@ export async function BillStatusPanel({
   }
 
   const addStageHref = suggestion
-    ? `/campaign/create?type=advocacy&parent=${campaign.id}&parent_name=${encodeURIComponent(campaign.headline)}&goal=${suggestion.goal}${
+    ? `/campaign/create?type=advocacy&parent=${campaign.id}&parent_name=${encodeURIComponent(campaign.headline)}&target=${campaign.target_level ?? 'federal'}&goal=${suggestion.goal}${
         campaign.bill_level === 'state' && campaign.bill_state ? `&state=${campaign.bill_state}` : ''
       }${committeeParam}`
     : '';

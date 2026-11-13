@@ -100,7 +100,7 @@ export default async function ManageCampaignPage({
 
   const addActionHref = `/campaign/create?type=advocacy&parent=${campaign.id}&parent_name=${encodeURIComponent(
     campaign.headline
-  )}${campaign.bill_level === 'state' && campaign.bill_state ? `&state=${campaign.bill_state}` : ''}`;
+  )}&target=${campaign.target_level ?? 'federal'}${campaign.bill_level === 'state' && campaign.bill_state ? `&state=${campaign.bill_state}` : ''}`;
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">

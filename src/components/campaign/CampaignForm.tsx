@@ -54,7 +54,17 @@ export function CampaignForm({
   const [language, setLanguage] = useState<'en' | 'es'>(edit?.initial.language ?? 'en');
   const [issueArea, setIssueArea] = useState(edit?.initial.issueArea ?? (searchParams.get('issue') || ''));
   const [issueCategory, setIssueCategory] = useState(edit?.initial.issueCategory ?? (searchParams.get('category') || ''));
-  const [targetLevel, setTargetLevel] = useState<'federal' | 'state' | 'both' | 'local'>(edit?.initial.targetLevel ?? 'federal');
+  // A step writes to the same officials as the campaign it belongs to, so the
+  // link carries the parent's target and the picker below stays hidden.
+  // Asking again per step invited two steps of one campaign to disagree about
+  // who they were even for.
+  const parentTarget = ((): 'federal' | 'state' | 'both' | 'local' | '' => {
+    const raw = searchParams.get('target') || '';
+    return raw === 'federal' || raw === 'state' || raw === 'both' || raw === 'local' ? raw : '';
+  })();
+  const [targetLevel, setTargetLevel] = useState<'federal' | 'state' | 'both' | 'local'>(
+    edit?.initial.targetLevel ?? (parentTarget || 'federal'),
+  );
 
   // Narrow targeting: everyone at the level (default), specific officials,
   // or a party slice. Fixed at creation; committee actions use the committee
@@ -764,13 +774,18 @@ export function CampaignForm({
 
       {campaignType === 'advocacy' && <SectionHeading n={2} title={sectionTitles[1]} />}
 
-      {/* Target Level */}
+      {/* Target Level. Hidden on a step, which inherits the parent's. */}
+      {!parentCampaignId && (
       <div data-field="targetLevel">
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
           Target Representatives <span className="text-red-500">*</span>
         </label>
         <div className="flex gap-3">
-          {(['federal', 'state', 'both', 'local'] as const).map((level) => (
+          {/* 'both' is not offered. A campaign writing to two levels at once
+              asked people to do two things under one heading, and the bill
+              picker below had to explain itself to compensate. Campaigns
+              created before this keep it and still work. */}
+          {(['federal', 'state', 'local'] as const).map((level) => (
             <label
               key={level}
               className={`flex-1 text-center px-4 py-3 rounded-xl border-2 cursor-pointer transition-colors ${
@@ -787,12 +802,13 @@ export function CampaignForm({
                 onChange={() => chooseTargetLevel(level)}
                 className="sr-only"
               />
-              <span className="text-sm font-medium capitalize">{level === 'both' ? 'Both' : level}</span>
+              <span className="text-sm font-medium capitalize">{level}</span>
             </label>
           ))}
         </div>
         <FieldError field="targetLevel" />
       </div>
+      )}
 
       {/* Narrow targeting — hidden in edit mode (targeting is fixed at
           creation) and on committee actions (the committee picker rules).
@@ -894,8 +910,8 @@ export function CampaignForm({
         {targetLevel !== 'both' && (
           <p className="text-xs text-gray-500 dark:text-gray-400 -mt-2 mb-3">
             {targetLevel === 'federal'
-              ? 'Writing to Congress, so only a federal bill can be referenced. Pick Both above to link a state bill.'
-              : 'Writing to state legislators, so only a state bill can be referenced. Pick Both above to link a federal bill.'}
+              ? 'Writing to Congress, so only a federal bill can be referenced.'
+              : 'Writing to state legislators, so only a state bill can be referenced.'}
           </p>
         )}
 
