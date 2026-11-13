@@ -483,6 +483,30 @@ export const orgJoinSchema = z.object({
   turnstileToken: z.string().optional(),
 });
 
+/**
+ * Putting your name to a sign-on letter.
+ *
+ * The street address is required rather than optional, unlike most forms
+ * here, because the whole value of the letter to an office is that the
+ * signers demonstrably live in the district. A signature with no address is
+ * a name on the internet.
+ */
+export const signonSchema = z.object({
+  name: z.string().trim().min(2).max(120),
+  email: z.string().trim().email().max(200),
+  street: z.string().trim().min(3).max(200),
+  city: z.string().trim().min(2).max(100),
+  state: z.string().trim().length(2),
+  zip: z.string().trim().regex(/^\d{5}(-\d{4})?$/, 'Enter a 5-digit ZIP code. ZIP+4 is welcome.'),
+  /** Optional line in the signer's own words, shown to the office with their name. */
+  personalNote: z.string().trim().max(600).optional(),
+  /** The public page only. Sharing with the lawmaker and the org is a condition of signing. */
+  showNamePublicly: z.boolean().default(false),
+  /** The exact words the person agreed to, stored with the row. */
+  consentText: z.string().trim().max(500).optional(),
+  turnstileToken: z.string().optional(),
+});
+
 export function parseBody<T>(
   schema: z.ZodType<T>,
   data: unknown
