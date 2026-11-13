@@ -52,11 +52,11 @@ interface Row {
   ms: number;
 }
 
-async function check(browser: Browser, bioguide: string): Promise<Row> {
+async function check(browser: Browser, bioguide: string, probe = false): Promise<Row> {
   const def = loadDefinition(bioguide);
   const started = Date.now();
   if (!def) return { bioguide, url: null, outcome: 'skipped', detail: 'no definition', ms: 0 };
-  if (!isAutomatable(def)) {
+  if (!isAutomatable(def) && !probe) {
     return { bioguide, url: entryUrl(def), outcome: 'skipped', detail: 'needs a challenge solved by a person', ms: 0 };
   }
 
@@ -66,7 +66,7 @@ async function check(browser: Browser, bioguide: string): Promise<Row> {
   const page = await context.newPage();
   page.setDefaultTimeout(20_000);
   try {
-    const result = await runDefinition(page, def, VALUES, { dryRun: true, stepTimeoutMs: 20_000 });
+    const result = await runDefinition(page, def, VALUES, { dryRun: true, probePastChallenge: probe, stepTimeoutMs: 20_000 });
     return {
       bioguide,
       url: entryUrl(def),
@@ -81,6 +81,9 @@ async function check(browser: Browser, bioguide: string): Promise<Row> {
 
 async function main() {
   const only = process.argv.slice(2).filter((a) => !a.startsWith('-'));
+  // --probe walks past a challenge step to learn whether the rest of the form
+  // still fills. It never submits: the dry run stops before that either way.
+  const probe = process.argv.includes('--probe');
   const ids = only.length > 0 ? only : definedMembers();
   console.log(`checking ${ids.length} contact-form definitions. nothing is submitted.\n`);
 
@@ -88,7 +91,7 @@ async function main() {
   const rows: Row[] = [];
   try {
     for (const id of ids) {
-      const row = await check(browser, id);
+      const row = await check(browser, id, probe);
       rows.push(row);
       const mark = row.outcome === 'binds' ? ' ok ' : row.outcome === 'stale' ? 'STALE' : ' -- ';
       console.log(`  ${mark}  ${id}  ${row.detail.slice(0, 96)}`);
@@ -107,8 +110,8 @@ async function main() {
   // the file, which records which offices are deliverable: a three-office
   // check would otherwise erase the other forty-four and the queue would
   // read that as "nothing is automatable".
-  if (only.length > 0) {
-    console.log('\npartial run, so the results file was left alone.');
+  if (only.length > 0 || probe) {
+    console.log(probe ? '\nprobe run, so the results file was left alone.' : '\npartial run, so the results file was left alone.');
     process.exit(0);
   }
 

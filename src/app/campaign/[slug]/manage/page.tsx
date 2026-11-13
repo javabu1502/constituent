@@ -139,6 +139,22 @@ export default async function ManageCampaignPage({
             <SignatoryRolls slug={campaign.slug} />
           </div>
         )}
+
+        {/* Reaching the people who already acted. They were told, next to the
+            box they typed it in, that this organization would email them when
+            the bill moved. */}
+        {!isStory && !campaign.is_official && (
+          <p className="mt-4 text-sm text-gray-600 dark:text-gray-400">
+            <a
+              href={`/api/campaigns/${campaign.slug}/participants?format=csv`}
+              className="text-purple-700 dark:text-purple-300 hover:underline"
+            >
+              Download everyone who acted
+            </a>
+            {' '}with their email, city and district, one row per person. They agreed to hear from you
+            about this.
+          </p>
+        )}
         {closed && (
           <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
             {isStory

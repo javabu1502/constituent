@@ -28,6 +28,16 @@ export type RunOutcome =
 export interface RunOptions {
   /** Walk every step except the final submit. Used by the dry run. */
   dryRun?: boolean;
+  /**
+   * Walk past a challenge step instead of refusing at it, to learn whether
+   * the form fills at all. Only meaningful with dryRun, which stops before
+   * submitting, and the runner refuses to combine it with a real send.
+   *
+   * Worth probing because a page carrying reCAPTCHA is not necessarily a
+   * page that blocks: Cortez Masto's form loads it and accepted a real
+   * message anyway, which is the invisible scoring kind.
+   */
+  probePastChallenge?: boolean;
   /** Per-step ceiling. The whole run is bounded by the caller. */
   stepTimeoutMs?: number;
   onStep?: (step: Step, index: number) => void;
@@ -62,6 +72,9 @@ export async function runDefinition(
 ): Promise<RunOutcome> {
   const timeout = opts.stepTimeoutMs ?? DEFAULT_STEP_TIMEOUT;
   const stopAt = opts.dryRun ? submitStepIndex(def) : -1;
+  // Steps that failed without being fatal. Reported so a decaying recipe is
+  // visible long before it stops working.
+  const softFailures: string[] = [];
 
   for (let i = 0; i < def.steps.length; i++) {
     if (stopAt >= 0 && i >= stopAt) break;
@@ -85,19 +98,38 @@ export async function runDefinition(
         }
 
         case 'javascript': {
+          // Decoration, almost always. These scripts strip a header, hide a
+          // stylesheet, or style the challenge box for a human looking at a
+          // proxied page. Lee's definition failed the whole letter because
+          // ".header-top" no longer exists on his site.
+          //
+          // So a script that throws is noted and skipped. What a run is
+          // actually judged on is the required fields below and the office's
+          // own confirmation text, both of which are verifiable.
           for (const f of step.fields) {
             if (!f.value) continue;
-            await page.evaluate(f.value);
+            try {
+              await page.evaluate(f.value);
+            } catch (e) {
+              softFailures.push(`${where}: ${(e as Error).message.split('\n')[0].slice(0, 80)}`);
+            }
           }
           break;
         }
 
         case 'find': {
+          // Waiting for something to appear. If it genuinely never does, the
+          // fill_in below fails on a required field and takes the run with
+          // it, so this does not need to be fatal on its own.
           for (const f of step.fields) {
             const s = sel(f.selector, values);
             if (!s) continue;
             const wait = (f.options?.wait ?? 0) * 1000 || timeout;
-            await page.waitForSelector(s, { timeout: Math.min(wait, timeout), state: 'attached' });
+            try {
+              await page.waitForSelector(s, { timeout: Math.min(wait, timeout), state: 'attached' });
+            } catch (e) {
+              softFailures.push(`${where}: ${(e as Error).message.split('\n')[0].slice(0, 80)}`);
+            }
           }
           break;
         }
@@ -166,10 +198,17 @@ export async function runDefinition(
         }
 
         case 'click_on': {
+          // Tabs, accordions, a newsletter box. Tolerated for the same
+          // reason: a click that mattered leaves a required field unfillable,
+          // and the final submit is judged by whether the office confirms.
           for (const f of step.fields) {
             const s = sel(f.selector, values);
             if (!s) continue;
-            await page.click(s, { timeout });
+            try {
+              await page.click(s, { timeout });
+            } catch (e) {
+              softFailures.push(`${where}: ${(e as Error).message.split('\n')[0].slice(0, 80)}`);
+            }
           }
           break;
         }
@@ -177,6 +216,9 @@ export async function runDefinition(
         case 'recaptcha':
           // Never solved here. A challenge means a person has to be present,
           // and the queue refuses these offices before a run ever starts.
+          // A probe walks past it only to see whether the rest still fills,
+          // and a probe never submits.
+          if (opts.probePastChallenge && opts.dryRun) break;
           return { ok: false, reason: 'form requires a challenge a person must solve', failedStep: where };
       }
     } catch (e) {
@@ -189,7 +231,8 @@ export async function runDefinition(
   }
 
   if (opts.dryRun) {
-    return { ok: true, matched: 'reached the submit step with every required field filled' };
+    const note = softFailures.length ? ` (${softFailures.length} cosmetic step(s) skipped)` : '';
+    return { ok: true, matched: `reached the submit step with every required field filled${note}` };
   }
   return confirmSuccess(page, def);
 }
