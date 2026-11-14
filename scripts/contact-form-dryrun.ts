@@ -52,13 +52,31 @@ interface Row {
   ms: number;
 }
 
+/**
+ * Is there a challenge on the page right now that a person has to solve.
+ *
+ * Not the same question as whether the definition carries a `recaptcha` step.
+ * Maintainers add that step and leave it, and offices change their sites:
+ * four of the eight definitions marked that way serve no challenge at all
+ * today, and Cortez Masto's page accepted a real message this afternoon.
+ *
+ * So the live page decides. A reCAPTCHA v2 widget renders a checkbox and
+ * carries a sitekey; that one needs a person. Anything else is worth trying,
+ * because a submission that is refused simply falls back to the email path.
+ */
+async function liveChallenge(page: import('playwright').Page): Promise<boolean> {
+  try {
+    return (await page.locator('.g-recaptcha, [data-sitekey], iframe[src*="recaptcha/api2/anchor"]').count()) > 0;
+  } catch {
+    return false;
+  }
+}
+
 async function check(browser: Browser, bioguide: string, probe = false): Promise<Row> {
   const def = loadDefinition(bioguide);
   const started = Date.now();
   if (!def) return { bioguide, url: null, outcome: 'skipped', detail: 'no definition', ms: 0 };
-  if (!isAutomatable(def) && !probe) {
-    return { bioguide, url: entryUrl(def), outcome: 'skipped', detail: 'needs a challenge solved by a person', ms: 0 };
-  }
+
 
   const context = await browser.newContext({
     userAgent: 'Mozilla/5.0 (compatible; MyDemocracy form check; +https://www.mydemocracy.app)',
@@ -66,12 +84,23 @@ async function check(browser: Browser, bioguide: string, probe = false): Promise
   const page = await context.newPage();
   page.setDefaultTimeout(20_000);
   try {
-    const result = await runDefinition(page, def, VALUES, { dryRun: true, probePastChallenge: probe, stepTimeoutMs: 20_000 });
+    // Definitions marked as needing a challenge are walked anyway, so the
+    // live page can say whether that is still true.
+    const result = await runDefinition(page, def, VALUES, {
+      dryRun: true,
+      probePastChallenge: probe || !isAutomatable(def),
+      stepTimeoutMs: 20_000,
+    });
+    if (result.ok && (await liveChallenge(page))) {
+      return { bioguide, url: entryUrl(def), outcome: 'skipped', detail: 'a challenge on the page needs a person to solve it', ms: Date.now() - started };
+    }
     return {
       bioguide,
       url: entryUrl(def),
       outcome: result.ok ? 'binds' : 'stale',
-      detail: result.ok ? result.matched : `${result.reason}`,
+      detail: result.ok
+        ? (isAutomatable(def) ? result.matched : `${result.matched}; the definition's challenge step is no longer on the page`)
+        : `${result.reason}`,
       ms: Date.now() - started,
     };
   } finally {

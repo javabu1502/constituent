@@ -33,7 +33,7 @@ export interface RecipeSubmitInput {
 export async function submitByRecipe(
   bioguide: string,
   input: RecipeSubmitInput,
-  opts: { headless?: boolean; timeoutMs?: number } = {},
+  opts: { headless?: boolean; timeoutMs?: number; challengeToken?: string | null } = {},
 ): Promise<SubmissionResult> {
   const started = Date.now();
   const def = loadDefinition(bioguide);
@@ -41,9 +41,10 @@ export async function submitByRecipe(
   if (!def) {
     return { success: false, status: 'unknown_error', errorType: 'unknown', message: `no contact-form definition for ${bioguide}`, pagesFilled: 0, timeTakenMs: Date.now() - started };
   }
-  if (!isAutomatable(def)) {
+  if (!isAutomatable(def) && !opts.challengeToken) {
     // A challenge needs a person. Refusing is honest; pressing submit and
-    // hoping is not delivery.
+    // hoping is not delivery. With a token the constituent has already
+    // answered it, so the run goes ahead.
     return { success: false, status: 'captcha_required', errorType: 'captcha', message: 'this office requires a challenge a person must solve', pagesFilled: 0, timeTakenMs: Date.now() - started };
   }
 
@@ -69,7 +70,7 @@ export async function submitByRecipe(
     });
     const page = await context.newPage();
     page.setDefaultTimeout(opts.timeoutMs ?? 30_000);
-    const outcome = await runDefinition(page, def, values, { stepTimeoutMs: opts.timeoutMs ?? 30_000 });
+    const outcome = await runDefinition(page, def, values, { stepTimeoutMs: opts.timeoutMs ?? 30_000, challengeToken: opts.challengeToken });
     const timeTakenMs = Date.now() - started;
 
     if (outcome.ok) {

@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-11-13T21:37:12.605Z",
+  "checkedAt": "2026-11-13T23:57:10.711Z",
   "note": "Which vendored contact-form recipes still match their page. Nothing was submitted.",
   "binds": [
     "A000383",
@@ -23,6 +23,7 @@
     "H001089",
     "H001104",
     "J000293",
+    "M000133",
     "M000934",
     "M001153",
     "M001244",
@@ -48,8 +49,12 @@
       "reason": "required option could not be chosen: input_6.4"
     },
     {
+      "bioguide": "L000577",
+      "reason": "required field could not be filled: field_6FA377A2-2FA6-4442-822F-DEECDDF5E8BD"
+    },
+    {
       "bioguide": "M001169",
-      "reason": "required field could not be filled: input_02A611A6-C6E3-A8FD-5992-EE40147D726A"
+      "reason": "required field could not be filled: input_02E0E441-9477-3987-8977-A4EC9BDD0DBD"
     },
     {
       "bioguide": "S001198",
@@ -59,35 +64,27 @@
   "skipped": [
     {
       "bioguide": "B001236",
-      "reason": "needs a challenge solved by a person"
+      "reason": "a challenge on the page needs a person to solve it"
     },
     {
       "bioguide": "B001243",
-      "reason": "needs a challenge solved by a person"
+      "reason": "a challenge on the page needs a person to solve it"
     },
     {
       "bioguide": "K000393",
-      "reason": "needs a challenge solved by a person"
-    },
-    {
-      "bioguide": "L000577",
-      "reason": "needs a challenge solved by a person"
-    },
-    {
-      "bioguide": "M000133",
-      "reason": "needs a challenge solved by a person"
+      "reason": "a challenge on the page needs a person to solve it"
     },
     {
       "bioguide": "M000355",
-      "reason": "needs a challenge solved by a person"
+      "reason": "a challenge on the page needs a person to solve it"
     },
     {
       "bioguide": "R000122",
-      "reason": "needs a challenge solved by a person"
+      "reason": "a challenge on the page needs a person to solve it"
     },
     {
       "bioguide": "T000476",
-      "reason": "needs a challenge solved by a person"
+      "reason": "a challenge on the page needs a person to solve it"
     }
   ]
 }

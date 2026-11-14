@@ -38,6 +38,12 @@ export interface RunOptions {
    * message anyway, which is the invisible scoring kind.
    */
   probePastChallenge?: boolean;
+  /**
+   * A reCAPTCHA token the constituent produced by solving the office's own
+   * challenge, rendered on our page. Supplying one lets the challenge step
+   * proceed; without one it still refuses.
+   */
+  challengeToken?: string | null;
   /** Per-step ceiling. The whole run is bounded by the caller. */
   stepTimeoutMs?: number;
   onStep?: (step: Step, index: number) => void;
@@ -213,13 +219,31 @@ export async function runDefinition(
           break;
         }
 
-        case 'recaptcha':
-          // Never solved here. A challenge means a person has to be present,
-          // and the queue refuses these offices before a run ever starts.
+        case 'recaptcha': {
+          // Never solved here, and never by anything automated. Either the
+          // constituent already answered the office's own challenge and gave
+          // us the token, or this office is not deliverable and says so.
+          if (opts.challengeToken) {
+            await page.evaluate((token) => {
+              const existing = document.querySelector<HTMLTextAreaElement>('#g-recaptcha-response, textarea[name="g-recaptcha-response"]');
+              if (existing) { existing.value = token; return; }
+              // Some forms only create the field once the widget is answered.
+              const form = document.querySelector('form');
+              if (!form) return;
+              const field = document.createElement('textarea');
+              field.name = 'g-recaptcha-response';
+              field.id = 'g-recaptcha-response';
+              field.style.display = 'none';
+              field.value = token;
+              form.appendChild(field);
+            }, opts.challengeToken);
+            break;
+          }
           // A probe walks past it only to see whether the rest still fills,
           // and a probe never submits.
           if (opts.probePastChallenge && opts.dryRun) break;
           return { ok: false, reason: 'form requires a challenge a person must solve', failedStep: where };
+        }
       }
     } catch (e) {
       return {

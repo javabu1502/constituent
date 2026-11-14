@@ -1,0 +1,11 @@
+{
+  "capturedAt": "2026-11-13",
+  "note": "Senate offices whose contact form carries a reCAPTCHA v2 checkbox. Their sitekeys render on other origins, so the constituent can solve the office's own challenge on our page and we submit their token. A person still solves it; only the surface it is drawn on changes.",
+  "tokenField": "g-recaptcha-response",
+  "offices": {
+    "B001236": { "name": "John Boozman", "state": "AR", "sitekey": "6Le9MC0sAAAAANgZ1Rdr-hHyfcmkdCnnbnggWAjX", "url": "https://www.boozman.senate.gov/public/index.cfm/e-mail-me" },
+    "B001243": { "name": "Marsha Blackburn", "state": "TN", "sitekey": "6LdFMvsqAAAAANaxACKC10XiC6wZDl3OwHU9Cuf6", "url": "https://www.blackburn.senate.gov/email-me" },
+    "M000355": { "name": "Mitch McConnell", "state": "KY", "sitekey": "6LcEJC0sAAAAABsC9fhsCdyVmyO_kq_bjbeaQuJY", "url": "https://www.mcconnell.senate.gov/public/?p=ContactForm" },
+    "T000476": { "name": "Thom Tillis", "state": "NC", "sitekey": "6LfyS3UsAAAAAM4gkDrqZ2qkj1tLrtylHK53fVpz", "url": "https://www.tillis.senate.gov/public/index.cfm/email-me" }
+  }
+}
