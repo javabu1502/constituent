@@ -14,7 +14,7 @@ export default function PrivacyPage() {
           Privacy Policy
         </h1>
         <p className="text-gray-500 dark:text-gray-400 mb-10">
-          Last updated: October 2026
+          Last updated: November 2026
         </p>
 
         <div className="prose prose-gray dark:prose-invert max-w-none">
@@ -518,6 +518,12 @@ export default function PrivacyPage() {
                   <strong className="text-gray-900 dark:text-white">Least privilege</strong>: access to your data is restricted to essential platform operations only.
                 </li>
               </ul>
+              <p>
+                <strong className="text-gray-900 dark:text-white">Where your data is stored</strong>: your data and our backups are stored in
+                the United States. The database, sign-in, and file storage run in Supabase&rsquo;s
+                US East region in Columbus, Ohio. The site itself runs on Vercel in Northern
+                Virginia. We do not store or copy your data outside the United States.
+              </p>
             </div>
           </section>
 
