@@ -1,9 +1,5 @@
 # Data Processing Addendum
 
-**This is a draft for counsel review. It has not been reviewed by an attorney.**
-
----
-
 This Data Processing Addendum ("Addendum") is entered into between:
 
 **My Democracy LLC**, a Nevada limited liability company ("Provider"), and

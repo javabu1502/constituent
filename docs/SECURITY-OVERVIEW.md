@@ -237,7 +237,7 @@ Stated plainly so your team does not have to find them:
 | Gap | Status |
 |---|---|
 | SOC 2 Type II / ISO 27001 | Not held. No audit currently in progress |
-| Third-party penetration test | Not performed. Will scope one if required for approval |
+| Third-party penetration test | Not performed to date |
 | Cyber liability insurance | Not currently carried. Will place coverage before signature if required |
 | Formal written security policy set | Practices are in place and documented here, not yet in a formal policy manual |
 | Point-in-time recovery | Not enabled. Daily backups with seven day retention are in place |
