@@ -80,19 +80,21 @@ request, so a participant's submission is never blocked by an office outage.
 
 ## 4. Application security
 
-**Authorization model.** Every database table holding participant or account
-data has row level security enabled (29 tables as of this writing). Application
-reads and writes run through a privileged server side client that is never
-exposed to the browser. The browser only ever holds a public anonymous key,
-which is locked out of participant data by policy.
+**Authorization model.** Row level security is enabled on every table in the
+application schema, 32 as of this writing. Application reads and writes run
+through a privileged server side client that is never exposed to the browser.
+The browser only ever holds a public anonymous key, which is locked out of
+application data both by revoked grants and by row level security.
 
 **Security review practice.** We have not commissioned a third-party
-penetration test. We run internal security audits. The most recent, completed
-2026-10-23, reviewed every database table for read exposure under the public
-anonymous API key. That audit confirmed that participant and account data is
-not reachable with the anonymous key, and that row level security is enforced
-on every table holding it. Audit findings are remediated and recorded in
-version control as reviewed database migrations.
+penetration test. We run internal security audits, and we act on the
+automated advisories our database provider issues. The most recent review was
+2026-11-17, prompted by a provider advisory, and it brought three
+non-participant tables under row level security that a previous sweep had
+missed. Participant and account data was not among them and is not reachable
+with the public anonymous key. Audit findings are remediated and recorded in
+version control as reviewed database migrations, each naming the finding it
+closes.
 
 **Automated testing.** The codebase carries 122 automated test suites. Four
 test API endpoints specifically for authorization bypass, covering the AI
