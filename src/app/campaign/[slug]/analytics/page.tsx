@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { ActionSetupPanel } from '@/components/campaign/ActionSetupPanel';
+import { LetterAnatomyPanel } from '@/components/campaign/LetterAnatomyPanel';
 import { CampaignHubTabs } from '@/components/campaign/CampaignHubTabs';
 import { redirect, notFound } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
@@ -540,6 +541,22 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
             label: 'Messages and stories',
             panel: (
               <>
+      {/* Storytelling campaigns do not write to officials, and this tab is
+          already narrowed to advocacy by the time it renders. */}
+      <LetterAnatomyPanel
+                    campaign={{
+                      headline: campaign.headline,
+                      ask: campaign.ask ?? null,
+                      stage_goal: campaign.stage_goal ?? null,
+                      bill_ref: campaign.bill_ref ?? null,
+                      bill_level: campaign.bill_level ?? null,
+                      target_level: campaign.target_level ?? null,
+                      direction: campaign.direction ?? null,
+                      target_filter: (campaign.target_filter as { type?: string; committee_id?: string; state?: string } | null) ?? null,
+                    }}
+                    parentBillRef={parentCampaign?.bill_ref ?? null}
+                  />
+
       {campaign.message_template && (
                   <CampaignTalkingPoints
                     template={campaign.message_template}

@@ -15,6 +15,7 @@ import { detectBillReferences } from '@/lib/bills';
 import { billLevelAllowed as isBillLevelAllowed, billLevelAfterTargetChange } from '@/lib/campaign-targets';
 import { STORY_USAGE_OPTIONS } from '@/lib/story-usage';
 import { TargetPicker, type TargetMode, type TargetOfficial, type TargetParty } from '@/components/campaign/TargetPicker';
+import { SupporterEmailPreview } from '@/components/campaign/SupporterEmailPreview';
 
 type BillLevel = '' | 'federal' | 'state';
 interface ResolvedBill {
@@ -131,6 +132,7 @@ export function CampaignForm({
   const stageState = (searchParams.get('state') || '').toUpperCase().slice(0, 2);
   const [stageGoal, setStageGoal] = useState<string>(searchParams.get('goal') || '');
   const supportersReachable = Number(searchParams.get('supporters') || '0') || 0;
+  const parentSlug = searchParams.get('parent_slug') || '';
   const [notifySupporters, setNotifySupporters] = useState(true);
   // Preselected by the live-bill-status "Add this stage" suggestion.
   const [targetCommittee, setTargetCommittee] = useState(searchParams.get('committee') || '');
@@ -645,14 +647,23 @@ export function CampaignForm({
             </select>
             <FieldError field="stageGoal" />
           </div>
-          <label className="flex items-start gap-2 text-sm text-gray-700 dark:text-gray-300 cursor-pointer select-none">
-            <input type="checkbox" checked={notifySupporters} onChange={(e) => setNotifySupporters(e.target.checked)} className="mt-0.5" />
-            <span>
-              Email everyone who already acted on this campaign
-              {supportersReachable > 0 ? ` (${supportersReachable.toLocaleString()} reachable)` : ''}
-              <span className="block text-xs text-gray-500 dark:text-gray-400">Skips anyone who unsubscribed. Every email carries a one-click unsubscribe.</span>
-            </span>
-          </label>
+          <div>
+            <label className="flex items-start gap-2 text-sm text-gray-700 dark:text-gray-300 cursor-pointer select-none">
+              <input type="checkbox" checked={notifySupporters} onChange={(e) => setNotifySupporters(e.target.checked)} className="mt-0.5" />
+              <span>
+                Email everyone who already acted on this campaign
+                {supportersReachable > 0 ? ` (${supportersReachable.toLocaleString()} reachable)` : ''}
+                <span className="block text-xs text-gray-500 dark:text-gray-400">Skips anyone who unsubscribed. Every email carries a one-click unsubscribe.</span>
+              </span>
+            </label>
+            {/* Nobody should send mail to their whole list without reading it
+                first. The preview renders the same template the sender uses. */}
+            {notifySupporters && parentSlug && (
+              <div className="mt-1.5 ml-6">
+                <SupporterEmailPreview parentSlug={parentSlug} headline={headline} />
+              </div>
+            )}
+          </div>
           {stageGoal === 'committee' && (
             <div data-field="targetCommittee">
               <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">

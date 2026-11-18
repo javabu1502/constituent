@@ -87,7 +87,17 @@ export default async function DashboardSupportersPage() {
       </section>
 
       <section className="mb-14">
-        <h2 className="label mb-3 border-t border-gray-900 dark:border-gray-600 pt-6">Everyone, by name</h2>
+        <div className="flex flex-wrap items-end justify-between gap-3 border-t border-gray-900 dark:border-gray-600 pt-6 mb-3">
+          <h2 className="label">Everyone, by name</h2>
+          {rollup.supporters.length > 0 && (
+            <a
+              href="/api/org/supporters/export"
+              className="text-sm font-medium text-purple-700 dark:text-purple-300 hover:underline"
+            >
+              Download all {rollup.supporters.length.toLocaleString()} as CSV
+            </a>
+          )}
+        </div>
         <SupporterList
           supporters={rollup.supporters}
           anonymousActions={rollup.anonymousActions}

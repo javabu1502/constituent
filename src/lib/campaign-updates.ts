@@ -93,7 +93,7 @@ export async function sendStageAdvanceEmails(args: {
   const resend = new Resend(process.env.RESEND_API_KEY);
   const from = senderAddress();
   const stageUrl = `https://www.mydemocracy.app/campaign/${args.stageSlug}`;
-  const subject = `${args.billRef ? `${args.billRef} moved: ` : ''}${args.stageHeadline}`;
+  const subject = stageAdvanceSubject(args.billRef, args.stageHeadline);
 
   for (const [email, name] of byEmail) {
     if (suppressed.has(email)) continue;
@@ -103,21 +103,15 @@ export async function sendStageAdvanceEmails(args: {
       continue;
     }
     const unsub = `https://www.mydemocracy.app/api/campaign-updates/unsubscribe?e=${encodeURIComponent(email)}&t=${updatesUnsubscribeToken(email)}`;
-    const html = `
-      <div style="font-family:system-ui,sans-serif;max-width:560px;margin:0 auto;padding:24px;color:#111">
-        <p style="font-size:13px;color:#7C3AED;font-weight:600;margin:0 0 4px">${escapeHtml(args.orgName || 'My Democracy')}</p>
-        <h2 style="margin:0 0 12px;font-size:20px">${escapeHtml(args.billRef ? `${args.billRef} just moved.` : 'The campaign just moved.')}</h2>
-        <p style="font-size:15px;line-height:1.5">${escapeHtml(name ? `${name.split(' ')[0]}, you` : 'You')} took action on
-        &ldquo;${escapeHtml(args.parentHeadline)}&rdquo;. Thank you. The bill has moved, and there&rsquo;s a new step:</p>
-        <p style="font-size:16px;font-weight:600;margin:16px 0 8px">${escapeHtml(args.stageHeadline)}</p>
-        <p style="margin:20px 0">
-          <a href="${stageUrl}" style="background:#7C3AED;color:#fff;text-decoration:none;padding:10px 18px;border-radius:8px;font-size:15px;font-weight:600">Take the next action</a>
-        </p>
-        <p style="font-size:12px;color:#777;line-height:1.5;margin-top:28px">
-          You're receiving this because you participated in this campaign on My Democracy.
-          <a href="${unsub}" style="color:#777">Unsubscribe from campaign updates</a>.
-        </p>
-      </div>`;
+    const html = renderStageAdvanceEmail({
+      orgName: args.orgName,
+      billRef: args.billRef,
+      parentHeadline: args.parentHeadline,
+      stageHeadline: args.stageHeadline,
+      stageUrl,
+      firstName: name ? name.split(' ')[0] : null,
+      unsubscribeUrl: unsub,
+    });
     try {
       const { error } = await resend.emails.send({ from, to: email, subject, html });
       if (error) console.error('[campaign-updates] send failed:', email, error.message);
@@ -128,6 +122,46 @@ export async function sendStageAdvanceEmails(args: {
   }
   console.log(`[campaign-updates] ${args.stageSlug}: eligible=${result.eligible} sent=${result.sent} suppressed=${result.suppressed} testSkipped=${result.skippedTestData}`);
   return result;
+}
+
+/**
+ * The email itself, as one function.
+ *
+ * An organisation is about to mail its whole supporter list and could not see
+ * what it said. A preview built separately from the sender would drift from
+ * it the first time either changed, so both render from here: what the
+ * preview shows is what goes out, by construction.
+ */
+export function renderStageAdvanceEmail(args: {
+  orgName: string | null;
+  billRef: string | null;
+  parentHeadline: string;
+  stageHeadline: string;
+  stageUrl: string;
+  /** Null in a preview, where there is no particular recipient. */
+  firstName?: string | null;
+  unsubscribeUrl: string;
+}): string {
+  return `
+      <div style="font-family:system-ui,sans-serif;max-width:560px;margin:0 auto;padding:24px;color:#111">
+        <p style="font-size:13px;color:#7C3AED;font-weight:600;margin:0 0 4px">${escapeHtml(args.orgName || 'My Democracy')}</p>
+        <h2 style="margin:0 0 12px;font-size:20px">${escapeHtml(args.billRef ? `${args.billRef} just moved.` : 'The campaign just moved.')}</h2>
+        <p style="font-size:15px;line-height:1.5">${escapeHtml(args.firstName ? `${args.firstName}, you` : 'You')} took action on
+        &ldquo;${escapeHtml(args.parentHeadline)}&rdquo;. Thank you. The bill has moved, and there&rsquo;s a new step:</p>
+        <p style="font-size:16px;font-weight:600;margin:16px 0 8px">${escapeHtml(args.stageHeadline)}</p>
+        <p style="margin:20px 0">
+          <a href="${args.stageUrl}" style="background:#7C3AED;color:#fff;text-decoration:none;padding:10px 18px;border-radius:8px;font-size:15px;font-weight:600">Take the next action</a>
+        </p>
+        <p style="font-size:12px;color:#777;line-height:1.5;margin-top:28px">
+          You're receiving this because you participated in this campaign on My Democracy.
+          <a href="${args.unsubscribeUrl}" style="color:#777">Unsubscribe from campaign updates</a>.
+        </p>
+      </div>`;
+}
+
+/** The subject line, shared for the same reason. */
+export function stageAdvanceSubject(billRef: string | null, stageHeadline: string): string {
+  return `${billRef ? `${billRef} moved: ` : ''}${stageHeadline}`;
 }
 
 function escapeHtml(str: string): string {
