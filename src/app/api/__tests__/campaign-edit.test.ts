@@ -53,6 +53,8 @@ const ownedCampaign = {
   campaign_type: 'advocacy',
   parent_campaign_id: null,
   headline: 'Original headline',
+  org_url: 'https://childrenscabinet.org',
+  custom_domain: null,
 };
 
 function patchRequest(body: Record<string, unknown>) {
@@ -129,5 +131,40 @@ describe('PATCH /api/campaigns/[slug]', () => {
   it('rejects invalid field values', async () => {
     const res = await callPatch({ headline: 'ab' });
     expect(res.status).toBe(400);
+  });
+
+  // Both of these used to be absent from updateCampaignSchema, so the form
+  // sent them and the route threw them away without saying so.
+  it('saves the ask, which the edit form has always sent', async () => {
+    await callPatch({ ask: 'Sign on as an original cosponsor before Friday.' });
+    expect(mockUpdatePayload.value).toMatchObject({
+      ask: 'Sign on as an original cosponsor before Friday.',
+    });
+  });
+
+  it('saves a redirect on the org own domain', async () => {
+    await callPatch({ redirect_url: 'https://childrenscabinet.org/thank-you' });
+    expect(mockUpdatePayload.value).toMatchObject({
+      redirect_url: 'https://childrenscabinet.org/thank-you',
+    });
+  });
+
+  // The whole reason redirect_url could not simply be added to the schema.
+  it('refuses a redirect to a host the org has not claimed', async () => {
+    const res = await callPatch({ redirect_url: 'https://evil.example.com/landing' });
+    expect(res.status).toBe(400);
+    expect(mockUpdatePayload.value).toBeNull();
+  });
+
+  it('refuses a lookalike host', async () => {
+    const res = await callPatch({ redirect_url: 'https://notchildrenscabinet.org/thanks' });
+    expect(res.status).toBe(400);
+  });
+
+  // org_url and the redirect can change in one request, so the check has to
+  // run against what the campaign will be, not what it was.
+  it('allows a redirect to the org url being set in the same request', async () => {
+    await callPatch({ org_url: 'https://geears.org', redirect_url: 'https://geears.org/thanks' });
+    expect(mockUpdatePayload.value).toMatchObject({ redirect_url: 'https://geears.org/thanks' });
   });
 });

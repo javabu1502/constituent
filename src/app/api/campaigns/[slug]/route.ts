@@ -4,6 +4,7 @@ import { createAdminClient } from '@/lib/supabase';
 import { updateCampaignSchema, parseBody } from '@/lib/schemas';
 import { profileLimiter, getClientIp } from '@/lib/rate-limit';
 import { sendAdminNotification } from '@/lib/resend';
+import { checkRedirectTarget } from '@/lib/redirect-target';
 
 function publicCampaign(campaign: Record<string, unknown>) {
   return {
@@ -203,7 +204,7 @@ export async function PATCH(
   const admin = createAdminClient();
   const { data: campaign } = await admin
     .from('campaigns')
-    .select('id, creator_id, campaign_type, parent_campaign_id, headline')
+    .select('id, creator_id, campaign_type, parent_campaign_id, headline, org_url, custom_domain')
     .eq('slug', slug)
     .single();
 
@@ -252,6 +253,22 @@ export async function PATCH(
   }
   if (typeof updates.custom_domain === 'string') {
     updates.custom_domain = updates.custom_domain.toLowerCase();
+  }
+
+  // Same rule as creation: the redirect's host must be one this organization
+  // has already told us is theirs, or the campaign page becomes an open
+  // redirect. Checked against what the campaign will look like AFTER this
+  // update, since org_url and the redirect can change in one request.
+  if ('redirect_url' in updates && updates.redirect_url) {
+    const orgUrl = ('org_url' in updates ? updates.org_url : campaign.org_url) as string | null;
+    const customDomain = ('custom_domain' in updates
+      ? updates.custom_domain
+      : campaign.custom_domain) as string | null;
+    const check = checkRedirectTarget(String(updates.redirect_url), { orgUrl, customDomain });
+    if (!check.ok) {
+      return NextResponse.json({ error: check.reason }, { status: 400 });
+    }
+    updates.redirect_url = check.url;
   }
   // A state bill needs its state; a federal one must not carry a stale state.
   if (updates.bill_level !== 'state' && 'bill_level' in updates) {

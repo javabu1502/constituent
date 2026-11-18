@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getAllFederalLegislators } from '@/lib/legislators';
 import { createAdminClient } from '@/lib/supabase';
 import { US_STATES } from '@/lib/constants';
+import { sanitizeFilterValue } from '@/lib/postgrest-filter';
 
 // Build state name → code lookup for search expansion
 const STATE_NAME_TO_CODE: Record<string, string> = {};
@@ -37,13 +38,18 @@ export async function GET(request: NextRequest) {
   try {
     const admin = createAdminClient();
     if (admin) {
-      const { data } = await admin
-        .from('campaigns')
-        .select('slug, headline, issue_area')
-        .eq('status', 'active')
-        .or(`headline.ilike.%${q}%,description.ilike.%${q}%,issue_area.ilike.%${q}%`)
-        .limit(5);
-      campaigns = data ?? [];
+      // q is a filter EXPRESSION here, not a bound value, so it is sanitized
+      // before it goes anywhere near .or(). See lib/postgrest-filter.ts.
+      const safe = sanitizeFilterValue(q);
+      if (safe) {
+        const { data } = await admin
+          .from('campaigns')
+          .select('slug, headline, issue_area')
+          .eq('status', 'active')
+          .or(`headline.ilike.%${safe}%,description.ilike.%${safe}%,issue_area.ilike.%${safe}%`)
+          .limit(5);
+        campaigns = data ?? [];
+      }
     }
   } catch {
     // Supabase may not be configured; degrade gracefully

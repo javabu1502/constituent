@@ -306,6 +306,18 @@ export const updateCampaignSchema = z
     org_url: z.string().url().max(300).nullish(),
     org_logo_url: z.string().url().max(500).nullish(),
     brand_color: z.string().regex(/^#[0-9a-fA-F]{6}$/, 'Use a hex color like #6A39C9').nullish(),
+    // Both of these were missing, so the edit form sent them and the schema
+    // dropped them: an organization changed its ask or its thank-you
+    // redirect, saved, and nothing happened. The route must run
+    // checkRedirectTarget on redirect_url exactly as creation does, or
+    // allowing it here turns a silent bug into an open redirect.
+    ask: z.string().trim().max(300).nullish(),
+    redirect_url: z
+      .string()
+      .url()
+      .max(500)
+      .startsWith('https://', 'The address must start with https://')
+      .nullish(),
     custom_domain: z
       .string()
       .max(253)
