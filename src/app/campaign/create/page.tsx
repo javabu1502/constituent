@@ -42,13 +42,13 @@ export default async function CreateCampaignPage({
 
   const { type, parent, parent_name } = await searchParams;
   const isStory = type === 'storytelling';
-  // Adding a step to an existing campaign: say so, or people think they
+  // Adding an action to an existing campaign: say so, or people think they
   // lost their place and are starting a second, unrelated campaign.
   const copy = parent
     ? {
         ...COPY.advocacy,
-        heading: parent_name ? `Add a step to “${parent_name}”` : 'Add a step to your campaign',
-        subtitle: 'A step is one push inside your campaign, like a cosponsor ask or a committee vote. It gets its own targets and share link.',
+        heading: parent_name ? `Add an action to “${parent_name}”` : 'Add an action to your campaign',
+        subtitle: 'An action is one ask inside your campaign, like recruiting cosponsors or winning a committee vote. It gets its own targets and share link.',
       }
     : isStory ? COPY.storytelling : COPY.advocacy;
   const createPath = `/campaign/create${isStory ? '?type=storytelling' : '?type=advocacy'}`;

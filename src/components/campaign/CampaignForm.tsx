@@ -426,7 +426,7 @@ export function CampaignForm({
       errs.stageGoal = 'Choose what this stage is trying to achieve';
     }
     if (campaignType === 'advocacy' && stageGoal === 'committee' && !targetCommittee) {
-      errs.targetCommittee = 'Pick the committee this stage targets';
+      errs.targetCommittee = 'Pick the committee this action targets';
     }
     if (!headline.trim() || headline.trim().length < 3) {
       errs.headline = 'Headline must be at least 3 characters';
@@ -630,7 +630,7 @@ export function CampaignForm({
           </p>
           <div data-field="stageGoal">
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-              What is this stage trying to achieve? <span className="text-red-500">*</span>
+              What is this action trying to achieve? <span className="text-red-500">*</span>
             </label>
             <select
               value={stageGoal}
@@ -716,7 +716,7 @@ export function CampaignForm({
                 )}
               </select>
               <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                Messages for this stage only go to members of this committee. Participants whose reps aren&apos;t on it
+                Messages for this action only go to members of this committee. Participants whose reps aren&apos;t on it
                 will be shown other ways to help.
               </p>
               <FieldError field="targetCommittee" />
@@ -1159,8 +1159,8 @@ export function CampaignForm({
         </label>
         {parentCampaignId && (
           <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">
-            Each stage can carry its own talking points. Cite the hearing date at the committee stage, the committee
-            vote at the floor stage. Leave blank to reuse the parent campaign&apos;s points.
+            Each action can carry its own talking points. Cite the hearing date on a committee action, the committee
+            vote on a floor action. Leave blank to reuse the parent campaign&apos;s points.
           </p>
         )}
         {/* The format rule goes ABOVE the box. It used to sit underneath, so
@@ -1412,11 +1412,11 @@ export function CampaignForm({
       )}
 
       <Button type="submit" isLoading={isSubmitting} className="w-full" size="lg">
-        {edit ? 'Save Changes' : 'Launch Campaign'}
+        {edit ? 'Save Changes' : parentCampaignId ? 'Add This Action' : 'Launch Campaign'}
       </Button>
       {!edit && (
         <p className="text-xs text-gray-500 dark:text-gray-400 text-center">
-          Your campaign goes live as soon as you launch it.
+          {parentCampaignId ? 'Your action goes live as soon as you add it.' : 'Your campaign goes live as soon as you launch it.'}
         </p>
       )}
     </form>

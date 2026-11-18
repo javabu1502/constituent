@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
-import { hasWorkingRecipe } from '@/lib/webform/recipe-eligibility';
-import { buildWebformQueueItem, captchaFreeFormFor, enqueueWebformDelivery, setWebformQueueClientFactory, setWebformGate } from '../webform/queue';
+import { hasWorkingRecipe, setRecipeResults, resetRecipeCache } from '@/lib/webform/recipe-eligibility';
+import { buildWebformQueueItem, enqueueWebformDelivery, setWebformQueueClientFactory, setWebformGate } from '../webform/queue';
 
 const body = {
   legislator_id: 'C001113', legislator_name: 'Catherine Cortez Masto', legislator_level: 'federal', legislator_chamber: 'senate',
@@ -21,14 +21,32 @@ describe('webform delivery gate (dark unless WEBFORM_DELIVERY_ENABLED)', () => {
     expect(await buildWebformQueueItem({ ...body, legislator_chamber: 'house', legislator_id: 'A000369' }, cwc, 'c', active)).toMatchObject({ ok: false, skip: /Senate-only/ });
     expect(await buildWebformQueueItem({ ...body, legislator_id: 'R000608', legislator_name: 'Jacky Rosen' }, cwc, 'c', active)).toMatchObject({ ok: false, skip: /participates in CWC/ });
   });
-  // Cortez Masto was the example of a CAPTCHA-gated office here until
-  // 2026-11-13, when it turned out the audit had been reading
-  // /contact while her actual form sits at /contact/connect with no
-  // challenge on it. Her form fills and submits. Markey's genuinely does
-  // carry a challenge, so he is the example now.
-  it('still refuses a senator whose form needs a person to solve a challenge', async () => {
-    expect(hasWorkingRecipe('M000133')).toBe(false);
-    expect(captchaFreeFormFor({ name: 'Edward J. Markey', lastName: 'Markey' })).toBeNull();
+  // This named a real senator twice and was wrong twice. Cortez Masto was
+  // the example until 2026-11-13, when the audit turned out to have been
+  // reading /contact while her form sits at /contact/connect with no
+  // challenge on it. Markey replaced her and the very next sweep walked his
+  // page, found no challenge either, and recorded the recipe as binding, so
+  // the test broke on a true result. The second assertion never checked what
+  // it claimed: captchaFreeFormFor returns null for Markey because he is
+  // absent from a 17-name verified list and a 5-row CAPTCHA audit, which it
+  // would do for a senator with no challenge at all.
+  //
+  // Whether one office challenges today is the sweep's to decide and it
+  // re-decides on every run, so it does not belong in an assertion. The
+  // behaviour does: an office the sweep set aside is not filable, however it
+  // came to be set aside.
+  it('refuses an office the sweep did not confirm, and files for one it did', async () => {
+    resetRecipeCache();
+    setRecipeResults({
+      checkedAt: new Date().toISOString(),
+      binds: ['B000001'],
+      skipped: [{ bioguide: 'C000002', reason: 'a challenge on the page needs a person to solve it' }],
+    });
+    expect(hasWorkingRecipe('B000001')).toBe(true);
+    expect(hasWorkingRecipe('C000002')).toBe(false);
+    // Not in the sweep at all is the same answer as set aside by it.
+    expect(hasWorkingRecipe('D000003')).toBe(false);
+    resetRecipeCache();
   });
 
   it('files for Cortez Masto now that her form is known to bind', async () => {

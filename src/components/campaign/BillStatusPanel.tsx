@@ -34,7 +34,7 @@ export async function BillStatusPanel({
 
   const fmt = (iso: string) => new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 
-  // Match a committee suggestion to our vendored data so the Add-a-stage link
+  // Match a committee suggestion to our vendored data so the add-an-action link
   // arrives with the committee preselected.
   let committeeParam = '';
   const suggestion = status.suggestion;
@@ -49,7 +49,7 @@ export async function BillStatusPanel({
   }
 
   const addStageHref = suggestion
-    ? `/campaign/create?type=advocacy&parent=${campaign.id}&parent_name=${encodeURIComponent(campaign.headline)}&target=${campaign.target_level ?? 'federal'}&goal=${suggestion.goal}${
+    ? `/campaign/create?type=advocacy&parent=${campaign.id}&parent_slug=${campaign.slug}&parent_name=${encodeURIComponent(campaign.headline)}&target=${campaign.target_level ?? 'federal'}&goal=${suggestion.goal}${
         campaign.bill_level === 'state' && campaign.bill_state ? `&state=${campaign.bill_state}` : ''
       }${committeeParam}`
     : '';
@@ -76,7 +76,7 @@ export async function BillStatusPanel({
               <div>
                 <p className="text-sm font-semibold text-purple-800 dark:text-purple-200">
                   Suggested next move: {STAGE_GOAL_LABELS[suggestion.goal]}
-                  {suggestion.committeeName ? ` — ${suggestion.committeeName}` : ''}
+                  {suggestion.committeeName ? `: ${suggestion.committeeName}` : ''}
                 </p>
                 <p className="text-xs text-purple-700 dark:text-purple-300 mt-0.5">{suggestion.reason}</p>
               </div>

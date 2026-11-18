@@ -11,6 +11,7 @@ import {
 const SOURCE_STYLE: Record<PartSource, string> = {
   fixed: 'bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-300',
   org: 'bg-purple-100 text-purple-700 dark:bg-purple-900/40 dark:text-purple-300',
+  default: 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300',
   constituent: 'bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300',
 };
 
@@ -18,9 +19,8 @@ const SOURCE_STYLE: Record<PartSource, string> = {
  * The letter this campaign sends, part by part.
  *
  * Owners could see how many letters went out and to whom, and not one word of
- * what any of them said. Individual letters stay private, which is the right
- * call and also why this exists: if the real ones are not shown, the shape
- * has to be.
+ * what any of them said. Individual letters stay private. That is why this
+ * exists: if the real ones are not shown, the shape has to be.
  */
 export function LetterAnatomyPanel({
   campaign,
@@ -64,7 +64,7 @@ export function LetterAnatomyPanel({
     <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-6 mb-8">
       <h2 className="text-base font-semibold text-gray-900 dark:text-white">The letter officials receive</h2>
       <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-        A sample, with each part marked. Supporters write their own, so no two arrive the same.
+        A sample. Supporters write their own, so the wording varies.
       </p>
 
       <div className="mt-5 space-y-3">

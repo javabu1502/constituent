@@ -202,8 +202,8 @@ export default async function CampaignReportPage({ params }: PageProps) {
           <section>
             <h2 className="text-base font-semibold mb-1">Legislative journey</h2>
             <p className="text-[11px] text-gray-400 dark:text-gray-500 mb-3">
-              This initiative runs a series of actions that follow the bill through Congress; each action targets the
-              officials who matter at that step.
+              This initiative runs a series of actions that follow the bill through Congress. Each one targets the
+              officials who decide that stage of it.
             </p>
             <div className="space-y-1.5">
               {report.stages.map((s) => (
