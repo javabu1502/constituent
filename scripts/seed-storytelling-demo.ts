@@ -205,9 +205,9 @@ async function main() {
       status: 'active',
       headline: 'The Real Cost of Child Care: Nevada Stories',
       description:
-        'Nevada Children First Coalition is collecting first-person stories about finding, affording, and providing child care in Nevada — from parents, grandparents, and providers. These stories power our testimony, reports, and conversations with legislators ahead of the 2027 session.',
+        'Nevada Children First Coalition is collecting first-person stories about finding, affording, and providing child care in Nevada, from parents, grandparents, and providers. These stories power our testimony, reports, and conversations with legislators ahead of the 2027 session.',
       story_prompt:
-        'Tell us what child care actually looks like for your family — the waitlists, the costs, the schedules, the trade-offs. What did it change about your work, your family, or your plans? If you are a provider, tell us that side too.',
+        'Tell us what child care actually looks like for your family: the waitlists, the costs, the schedules, the trade-offs. What did it change about your work, your family, or your plans? If you are a provider, tell us that side too.',
       usage_statement:
         'We use these stories in legislative testimony, published reports, meetings with lawmakers, and (only with your specific permission) with press. You choose exactly which uses you are comfortable with, and you can edit or withdraw your story at any time.',
       usage_tags: ALL_USES,

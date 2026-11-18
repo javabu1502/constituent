@@ -44,7 +44,7 @@ async function main() {
     ...shared,
     slug: 'demo-fed-hr2184-school-meals',
     headline: 'Pass H.R. 2184: Modernize School Meals Nationwide',
-    description: 'H.R. 2184 updates federal school meal reimbursements and cuts paperwork so every district can serve every kid. We are following it through Congress step by step.',
+    description: 'H.R. 2184 updates federal school meal reimbursements and cuts paperwork so every district can serve every kid. We are following it through Congress, one vote at a time.',
     message_template: 'H.R. 2184 modernizes school meal reimbursement rates for the first time in a decade and streamlines eligibility paperwork. District nutrition directors in all 50 states report reimbursements no longer cover costs. The bill is bipartisan, fully offset, and endorsed by the School Nutrition Association.',
     created_at: '2026-06-01T08:00:00-07:00', action_count: 42,
   }).select('id, slug, headline').single();

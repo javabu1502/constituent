@@ -1,6 +1,6 @@
 import { congressFetch } from '@/lib/congress-api';
 import { createAdminClient } from '@/lib/supabase';
-import { createHmac } from 'crypto';
+import { signingSecret, verifyAgainstAny, hmacHex } from '@/lib/signing-secrets';
 
 /** Escape HTML special characters to prevent XSS in email templates. */
 function escapeHtml(str: string): string {
@@ -141,21 +141,24 @@ function getSlug(type?: string): string {
 
 /**
  * Generates an unsubscribe token (HMAC of userId).
+ *
+ * Signed with UNSUBSCRIBE_SECRET once that is set, and with CRON_SECRET
+ * until then. See lib/signing-secrets.ts for why both are accepted on the
+ * way in: these links live in delivered mail, and somebody unsubscribing
+ * from a six-month-old digest is the normal case, not an edge one.
  */
 export function generateUnsubscribeToken(userId: string): string {
-  const secret = process.env.UNSUBSCRIBE_SECRET || process.env.CRON_SECRET;
-  if (!secret) {
-    throw new Error('UNSUBSCRIBE_SECRET or CRON_SECRET must be set');
-  }
-  return createHmac('sha256', secret).update(`${userId}:unsubscribe`).digest('hex');
+  return hmacHex(signingSecret('unsubscribe'), `${userId}:unsubscribe`);
 }
 
 /**
- * Verifies an unsubscribe token.
+ * Verifies an unsubscribe token, against the current secret and the legacy
+ * one, in constant time. This used to be `token === expected`.
  */
 export function verifyUnsubscribeToken(userId: string, token: string): boolean {
-  const expected = generateUnsubscribeToken(userId);
-  return token === expected;
+  return verifyAgainstAny('unsubscribe', `${userId}:unsubscribe`, token, (secret, payload) =>
+    hmacHex(secret, payload),
+  );
 }
 
 /**

@@ -39,20 +39,20 @@ const PLANS: Record<string, StageDef[]> = {
   'demo-nv-ab201-prek': [
     { goal: 'cosponsor', frac: 0.35, headline: 'Ask your Assemblymember to cosponsor AB 201' },
     { goal: 'committee', frac: 0.2, headline: 'Tell Assembly Education: pass AB 201', cmte: findCmte('lower', 'Education') },
-    { goal: 'floor_house', frac: 0.2, headline: 'AB 201 heads to the Assembly floor — vote YES' },
+    { goal: 'floor_house', frac: 0.2, headline: 'AB 201 heads to the Assembly floor: vote YES' },
     { goal: 'floor_senate', frac: 0.15, headline: 'Last vote: tell your state Senator to pass AB 201' },
-    { goal: 'thank_you', frac: 0.1, headline: 'Pre-K passed — thank your legislators' },
+    { goal: 'thank_you', frac: 0.1, headline: 'Pre-K passed: thank your legislators' },
   ],
   'demo-nv-sb118-counselors': [
     { goal: 'cosponsor', frac: 0.4, headline: 'Ask your state Senator to cosponsor SB 118' },
     { goal: 'committee', frac: 0.25, headline: 'Tell Senate Education: pass SB 118', cmte: findCmte('upper', 'Education') },
-    { goal: 'floor_senate', frac: 0.25, headline: 'SB 118 heads to the Senate floor — vote YES' },
-    { goal: 'thank_you', frac: 0.1, headline: 'Counselors funded — thank your legislators' },
+    { goal: 'floor_senate', frac: 0.25, headline: 'SB 118 heads to the Senate floor: vote YES' },
+    { goal: 'thank_you', frac: 0.1, headline: 'Counselors funded: thank your legislators' },
   ],
   'demo-nv-ab342-social-media': [
     { goal: 'cosponsor', frac: 0.4, headline: 'Ask your Assemblymember to cosponsor AB 342' },
     { goal: 'committee', frac: 0.3, headline: 'Tell Assembly Commerce & Labor: pass AB 342', cmte: findCmte('lower', 'Commerce') },
-    { goal: 'floor_house', frac: 0.3, headline: 'AB 342 heads to the Assembly floor — vote YES' },
+    { goal: 'floor_house', frac: 0.3, headline: 'AB 342 heads to the Assembly floor: vote YES' },
   ],
   'demo-nv-sb89-childcare-wages': [
     { goal: 'cosponsor', frac: 0.55, headline: 'Ask your state Senator to cosponsor SB 89' },
@@ -61,11 +61,11 @@ const PLANS: Record<string, StageDef[]> = {
   'demo-nv-ab233-sugary-drinks': [
     { goal: 'cosponsor', frac: 0.4, headline: 'Ask your Assemblymember to cosponsor AB 233' },
     { goal: 'committee', frac: 0.25, headline: 'Tell Assembly Health & Human Services: pass AB 233', cmte: findCmte('lower', 'Health') },
-    { goal: 'floor_house', frac: 0.35, headline: 'AB 233 heads to the Assembly floor — vote YES' },
+    { goal: 'floor_house', frac: 0.35, headline: 'AB 233 heads to the Assembly floor: vote YES' },
   ],
   'demo-nv-sb264-child-labor': [
     { goal: 'committee', frac: 0.8, headline: 'Tell Senate Commerce & Labor: vote NO on SB 264', cmte: findCmte('upper', 'Commerce') },
-    { goal: 'thank_you', frac: 0.2, headline: 'SB 264 is dead — thank the senators who voted no' },
+    { goal: 'thank_you', frac: 0.2, headline: 'SB 264 is dead: thank the senators who voted no' },
   ],
   'demo-nv-ab410-foster-housing': [
     { goal: 'cosponsor', frac: 1, headline: 'Ask your Assemblymember to champion AB 410' },

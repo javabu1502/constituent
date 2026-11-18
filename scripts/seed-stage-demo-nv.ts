@@ -141,7 +141,7 @@ async function main() {
     ...shared,
     slug: 'demo-ab156-parent',
     headline: 'Pass AB 156: Breakfast for Every Nevada Student',
-    description: 'AB 156 would provide free school breakfast to every K-12 student in Nevada. We are following it through every step in Carson City — join the push at the stage that matters right now.',
+    description: 'AB 156 would provide free school breakfast to every K-12 student in Nevada. We are following it through every vote in Carson City. Join the action that matters right now.',
     distribution_plan: 'Email list, PTA chapters, school-board public comment, local press.',
     created_at: '2026-06-15T08:00:00-07:00',
     action_count: 0,
@@ -150,9 +150,9 @@ async function main() {
   const stageDefs = [
     { slug: 'demo-ab156-cosponsors', goal: 'cosponsor', headline: 'Ask your Assemblymember to cosponsor AB 156', desc: 'Before the session heats up, every added cosponsor makes committee passage easier. Ask your Assemblymember to put their name on AB 156.', created: '2026-06-15T08:05:00-07:00', curve: cosponsorCurve, filter: null },
     { slug: 'demo-ab156-committee', goal: 'committee', headline: 'Tell Assembly Education: pass AB 156', desc: 'AB 156 gets its hearing in the Assembly Education Committee on July 16. Committee members need to hear from the constituents they represent.', created: '2026-07-07T08:00:00-07:00', curve: committeeCurve, filter: { type: 'committee', committee_id: education!.id, state: 'NV' } },
-    { slug: 'demo-ab156-assembly-floor', goal: 'floor_house', headline: 'AB 156 heads to the Assembly floor — ask for a YES', desc: 'The full Assembly votes the week of July 21. Tell your Assemblymember to vote yes on AB 156.', created: '2026-07-18T08:00:00-07:00', curve: asmFloorCurve, filter: null },
+    { slug: 'demo-ab156-assembly-floor', goal: 'floor_house', headline: 'AB 156 heads to the Assembly floor: ask for a YES', desc: 'The full Assembly votes the week of July 21. Tell your Assemblymember to vote yes on AB 156.', created: '2026-07-18T08:00:00-07:00', curve: asmFloorCurve, filter: null },
     { slug: 'demo-ab156-senate-floor', goal: 'floor_senate', headline: 'Last vote: tell your state Senator to pass AB 156', desc: 'AB 156 cleared the Assembly 28-14. Now it needs your state Senator.', created: '2026-07-26T08:00:00-07:00', curve: senFloorCurve, filter: null },
-    { slug: 'demo-ab156-thanks', goal: 'thank_you', headline: 'AB 156 passed — thank your legislators', desc: 'Both chambers passed AB 156. Legislators remember gratitude. Take a minute to thank yours.', created: '2026-08-05T08:00:00-07:00', curve: thanksCurve, filter: null },
+    { slug: 'demo-ab156-thanks', goal: 'thank_you', headline: 'AB 156 passed: thank your legislators', desc: 'Both chambers passed AB 156. Legislators remember gratitude. Take a minute to thank yours.', created: '2026-08-05T08:00:00-07:00', curve: thanksCurve, filter: null },
   ] as const;
 
   const actions: Record<string, unknown>[] = [];

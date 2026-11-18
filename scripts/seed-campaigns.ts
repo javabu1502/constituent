@@ -66,7 +66,7 @@ const CAMPAIGNS: SeedCampaign[] = [
     slug: 'authorize-military-force-demand-congress-vote-on-iran',
     headline: 'Authorize Military Force: Demand Congress Vote on Iran',
     description:
-      'The Constitution gives Congress — not the President — the power to declare war. ' +
+      'The Constitution gives Congress, not the President, the power to declare war. ' +
       'Before any expansion of military operations in Iran, demand that your representatives ' +
       'hold a formal vote under the War Powers Act. No more blank checks for open-ended conflict.',
     issue_area: 'Armed Forces and National Security',

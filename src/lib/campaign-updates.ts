@@ -8,29 +8,32 @@
  * unsubscribe link (HMAC-signed, no account needed). Demo/test data
  * (@example.com and demo- campaigns) is never actually mailed.
  */
-import { createHmac, timingSafeEqual } from 'crypto';
 import { createAdminClient } from '@/lib/supabase';
 import { senderAddress } from '@/lib/resend';
 import { Resend } from 'resend';
+import { signingSecret, verifyAgainstAny, hmacHex } from '@/lib/signing-secrets';
 
 export const UPDATES_LIST = 'campaign_updates';
 
-function secret(): string {
-  const s = process.env.CRON_SECRET;
-  if (!s) throw new Error('CRON_SECRET required for unsubscribe tokens');
-  return s;
+function payload(email: string): string {
+  return `${UPDATES_LIST}:${email.toLowerCase()}`;
 }
 
-/** HMAC token binding an email to the campaign-updates list. */
+/**
+ * HMAC token binding an email to the campaign-updates list.
+ *
+ * Signed with CAMPAIGN_UPDATES_SECRET once that is set, and with
+ * CRON_SECRET until then. These links are in mail already delivered, so
+ * both keep verifying: rotating the cron secret must not take away a
+ * supporter's ability to unsubscribe from an email they already have.
+ */
 export function updatesUnsubscribeToken(email: string): string {
-  return createHmac('sha256', secret()).update(`${UPDATES_LIST}:${email.toLowerCase()}`).digest('hex').slice(0, 32);
+  return hmacHex(signingSecret('campaign-updates'), payload(email), 32);
 }
 
 export function verifyUpdatesUnsubscribeToken(email: string, token: string): boolean {
   try {
-    const expected = Buffer.from(updatesUnsubscribeToken(email));
-    const got = Buffer.from(token);
-    return expected.length === got.length && timingSafeEqual(expected, got);
+    return verifyAgainstAny('campaign-updates', payload(email), token, (sec, p) => hmacHex(sec, p, 32));
   } catch {
     return false;
   }
