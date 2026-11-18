@@ -226,7 +226,7 @@ export function RegulationsBrowser() {
                     href={reg.federalRegisterUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm font-medium text-gray-900 dark:text-white hover:text-purple-600 dark:hover:text-purple-400 line-clamp-2 block"
+                    className="text-sm font-medium text-gray-900 dark:text-white hover:text-purple-600 dark:hover:text-purple-400 line-clamp-2"
                   >
                     {reg.title}
                   </a>

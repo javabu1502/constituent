@@ -428,7 +428,7 @@ export function TrendsContent() {
                     <span className="text-sm font-medium text-gray-400 dark:text-gray-500 w-6 text-right shrink-0">
                       {i + 1}
                     </span>
-                    <span className="text-sm font-medium text-gray-900 dark:text-white flex-1 truncate">
+                    <span className="text-sm font-medium text-gray-900 dark:text-white flex-1 min-w-0 truncate">
                       {rep.name}
                     </span>
                     <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${partyBadge(rep.party).className}`}>
@@ -456,7 +456,7 @@ export function TrendsContent() {
                     <span className="text-sm font-medium text-gray-400 dark:text-gray-500 w-6 text-right shrink-0">
                       {i + 1}
                     </span>
-                    <span className="text-sm font-medium text-gray-900 dark:text-white flex-1 truncate">
+                    <span className="text-sm font-medium text-gray-900 dark:text-white flex-1 min-w-0 truncate">
                       {rep.name}
                     </span>
                     <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${partyBadge(rep.party).className}`}>

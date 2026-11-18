@@ -185,7 +185,7 @@ function NewsCard({ article }: { article: RepNewsArticle }) {
         href={article.link}
         target="_blank"
         rel="noopener noreferrer"
-        className="text-sm font-semibold text-gray-900 dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-colors line-clamp-2 block mb-1"
+        className="text-sm font-semibold text-gray-900 dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-colors line-clamp-2 mb-1"
       >
         {article.title}
       </a>
@@ -392,7 +392,7 @@ function LocalOfficialNewsPanel({ name, city }: { name: string; city: string }) 
   return (
     <div className="mt-2 space-y-1">
       {articles.slice(0, 3).map((a, i) => (
-        <a key={i} href={a.link} target="_blank" rel="noopener noreferrer" className="block text-xs text-purple-600 dark:text-purple-400 hover:underline line-clamp-1">
+        <a key={i} href={a.link} target="_blank" rel="noopener noreferrer" className="text-xs text-purple-600 dark:text-purple-400 hover:underline line-clamp-1">
           {a.title}
         </a>
       ))}

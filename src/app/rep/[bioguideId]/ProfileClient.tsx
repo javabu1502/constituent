@@ -195,7 +195,7 @@ export default function ProfileClient({
                   href={article.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm font-semibold text-gray-900 dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-colors line-clamp-2 block mb-1"
+                  className="text-sm font-semibold text-gray-900 dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-colors line-clamp-2 mb-1"
                 >
                   {article.title}
                 </a>
