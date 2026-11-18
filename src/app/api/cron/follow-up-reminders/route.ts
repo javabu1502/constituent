@@ -3,6 +3,7 @@ import { createAdminClient } from '@/lib/supabase';
 import { renderFollowUpHtml } from '@/lib/follow-up-email';
 import { generateUnsubscribeToken } from '@/lib/digest';
 import { sendDigestEmail } from '@/lib/resend';
+import { isCronRequest } from '@/lib/admin-auth';
 
 const BATCH_SIZE = 10;
 const BATCH_DELAY_MS = 1000;
@@ -10,8 +11,7 @@ const BATCH_DELAY_MS = 1000;
 export async function POST(request: NextRequest) {
   // Verify cron secret (same pattern as weekly-digest)
   const authHeader = request.headers.get('authorization');
-  const cronSecret = process.env.CRON_SECRET;
-  if (!cronSecret || authHeader !== `Bearer ${cronSecret}`) {
+  if (!isCronRequest(authHeader)) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 

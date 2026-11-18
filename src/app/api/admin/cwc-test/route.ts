@@ -6,18 +6,12 @@ import {
   cwcSendableProblems,
   type CwcDelivery,
 } from '@/lib/cwc';
+import { isAdmin } from '@/lib/admin-auth';
 
 // Must run in the Node runtime so the undici proxy (static-IP egress) works.
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 export const maxDuration = 60;
-
-function isAdmin(user: { id: string; email?: string }): boolean {
-  const ids = process.env.ADMIN_USER_IDS?.split(',').map((s) => s.trim()).filter(Boolean) ?? [];
-  if (ids.includes(user.id)) return true;
-  const emails = process.env.ADMIN_EMAILS?.split(',').map((s) => s.trim().toLowerCase()).filter(Boolean) ?? [];
-  return !!user.email && emails.includes(user.email.toLowerCase());
-}
 
 // A clearly-labeled TEST delivery. UAT/sandbox never reaches a real office.
 function sampleDelivery(chamber: 'house' | 'senate'): CwcDelivery {

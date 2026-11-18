@@ -1,13 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createAdminClient } from '@/lib/supabase';
 import { publishDraft, publishReply } from '@/lib/social/publisher';
+import { isCronRequest } from '@/lib/admin-auth';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
 function authorized(request: NextRequest): boolean {
   const auth = request.headers.get('authorization');
-  return !!process.env.CRON_SECRET && auth === `Bearer ${process.env.CRON_SECRET}`;
+  return isCronRequest(auth);
 }
 
 /**

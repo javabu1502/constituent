@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase';
 import { profileLimiter, getClientIp } from '@/lib/rate-limit';
+import { sniffImage, SNIFFED_CONTENT_TYPE } from '@/lib/image-sniff';
 
 /**
  * POST /api/campaigns/logo
@@ -44,21 +45,27 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Missing file' }, { status: 400 });
   }
 
-  const ext = ALLOWED_TYPES[file.type];
-  if (!ext) {
+  if (!ALLOWED_TYPES[file.type]) {
     return NextResponse.json({ error: 'Logo must be a PNG, JPEG, or WebP image' }, { status: 400 });
   }
   if (file.size > MAX_BYTES) {
     return NextResponse.json({ error: 'Logo must be 1 MB or smaller' }, { status: 400 });
   }
 
+  const bytes = new Uint8Array(await file.arrayBuffer());
+  // file.type is whatever the browser was told. The bytes are the fact, and
+  // they decide both the extension and the type we serve it back as.
+  const ext = sniffImage(bytes);
+  if (!ext) {
+    return NextResponse.json({ error: 'That file is not a PNG, JPEG, or WebP image' }, { status: 400 });
+  }
+
   const admin = createAdminClient();
   const path = `${user.id}/${crypto.randomUUID()}.${ext}`;
-  const bytes = new Uint8Array(await file.arrayBuffer());
 
   const { error: uploadError } = await admin.storage
     .from('campaign-logos')
-    .upload(path, bytes, { contentType: file.type, upsert: false });
+    .upload(path, bytes, { contentType: SNIFFED_CONTENT_TYPE[ext], upsert: false });
 
   if (uploadError) {
     console.error('[campaigns/logo] upload error:', uploadError);

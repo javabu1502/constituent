@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createAdminClient } from '@/lib/supabase';
 import { sendAdminNotification } from '@/lib/resend';
+import { isCronRequest } from '@/lib/admin-auth';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -11,7 +12,7 @@ export const dynamic = 'force-dynamic';
  */
 export async function GET(request: NextRequest) {
   const auth = request.headers.get('authorization');
-  if (!process.env.CRON_SECRET || auth !== `Bearer ${process.env.CRON_SECRET}`) {
+  if (!isCronRequest(auth)) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 

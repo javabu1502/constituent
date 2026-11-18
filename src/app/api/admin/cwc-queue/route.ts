@@ -3,18 +3,12 @@ import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase';
 import { processCwcSendQueue } from '@/lib/cwc/queue';
 import type { CwcDelivery } from '@/lib/cwc/types';
+import { isAdmin } from '@/lib/admin-auth';
 
 // Node runtime: sends egress through the undici static-IP proxy.
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 export const maxDuration = 60;
-
-function isAdmin(user: { id: string; email?: string }): boolean {
-  const ids = process.env.ADMIN_USER_IDS?.split(',').map((s) => s.trim()).filter(Boolean) ?? [];
-  if (ids.includes(user.id)) return true;
-  const emails = process.env.ADMIN_EMAILS?.split(',').map((s) => s.trim().toLowerCase()).filter(Boolean) ?? [];
-  return !!user.email && emails.includes(user.email.toLowerCase());
-}
 
 async function requireAdmin() {
   const supabase = await createClient();

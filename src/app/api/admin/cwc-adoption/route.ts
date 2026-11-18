@@ -1,15 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase';
+import { isAdmin } from '@/lib/admin-auth';
 
 export const dynamic = 'force-dynamic';
-
-function isAdmin(user: { id: string; email?: string }): boolean {
-  const ids = process.env.ADMIN_USER_IDS?.split(',').map((s) => s.trim()).filter(Boolean) ?? [];
-  if (ids.includes(user.id)) return true;
-  const emails = process.env.ADMIN_EMAILS?.split(',').map((s) => s.trim().toLowerCase()).filter(Boolean) ?? [];
-  return !!user.email && emails.includes(user.email.toLowerCase());
-}
 
 /**
  * GET /api/admin/cwc-adoption — signatures asking non-participating Senate

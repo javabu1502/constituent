@@ -10,6 +10,7 @@ import { graphemeLength, BLUESKY_MAX_GRAPHEMES } from '@/lib/social/bluesky';
 import { publishDraft, sweepPendingDrafts, type SweepResult } from '@/lib/social/publisher';
 import { isTripped } from '@/lib/social/circuit-breaker';
 import { canPostNow } from '@/lib/social/cadence';
+import { isCronRequest } from '@/lib/admin-auth';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -32,7 +33,7 @@ function contentHash(s: string): string {
  */
 export async function GET(request: NextRequest) {
   const auth = request.headers.get('authorization');
-  if (!process.env.CRON_SECRET || auth !== `Bearer ${process.env.CRON_SECRET}`) {
+  if (!isCronRequest(auth)) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 

@@ -7,6 +7,7 @@ import {
 } from '@/lib/cwc/queue-health';
 import { runRetentionScrub, type RetentionSummary } from '@/lib/cwc/retention';
 import { reconcileDeliveryStatuses, type ReconcileSummary } from '@/lib/cwc/reconcile';
+import { isCronRequest } from '@/lib/admin-auth';
 
 // Node runtime required: the CWC client egresses through the undici
 // static-IP proxy, and sends must not be cut off mid-batch.
@@ -41,7 +42,7 @@ const RETENTION_CACHE_KEY = 'cwc:retention-scrub';
  */
 export async function GET(request: NextRequest) {
   const auth = request.headers.get('authorization');
-  if (!process.env.CRON_SECRET || auth !== `Bearer ${process.env.CRON_SECRET}`) {
+  if (!isCronRequest(auth)) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createAdminClient } from '@/lib/supabase';
 import { buildWeeklyDigest, renderDigestHtml, generateUnsubscribeToken } from '@/lib/digest';
 import { sendDigestEmail } from '@/lib/resend';
+import { isCronRequest } from '@/lib/admin-auth';
 
 const BATCH_SIZE = 10;
 const BATCH_DELAY_MS = 1000; // Stay within Resend rate limits
@@ -9,9 +10,7 @@ const BATCH_DELAY_MS = 1000; // Stay within Resend rate limits
 export async function POST(request: NextRequest) {
   // Verify cron secret (Vercel Cron pattern)
   const authHeader = request.headers.get('authorization');
-  const cronSecret = process.env.CRON_SECRET;
-
-  if (!cronSecret || authHeader !== `Bearer ${cronSecret}`) {
+  if (!isCronRequest(authHeader)) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
