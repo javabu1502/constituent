@@ -364,6 +364,8 @@ export interface Campaign {
   org_logo_url?: string | null;
   brand_color?: string | null;
   custom_domain?: string | null;
+  /** https page on the org's own domain to send a supporter to after they act. */
+  redirect_url?: string | null;
   // Stage campaigns: one step of a parent initiative's legislative journey.
   parent_campaign_id?: string | null;
   stage_goal?: 'cosponsor' | 'committee' | 'floor_house' | 'floor_senate' | 'thank_you' | 'custom' | null;

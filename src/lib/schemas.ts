@@ -156,6 +156,16 @@ export const createCampaignSchema = z.object({
     .max(253)
     .regex(/^(?!-)[a-z0-9-]{1,63}(?<!-)(\.(?!-)[a-z0-9-]{1,63}(?<!-))+$/i, 'Enter a bare domain like action.yourorg.org')
     .nullish(),
+  // Where a supporter goes after acting, so the organization's own analytics
+  // record the conversion on their own domain. Shape only here; the host is
+  // checked against this campaign's org_url / custom_domain by
+  // checkRedirectTarget() in the route, which is what stops an open redirect.
+  redirect_url: z
+    .string()
+    .url()
+    .max(500)
+    .startsWith('https://', 'The address must start with https://')
+    .nullish(),
   // Stage campaigns: this campaign is one step of a parent initiative's
   // legislative journey. Parent ownership + one-level nesting enforced in the
   // route; committee stages carry the committee to target.

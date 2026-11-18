@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { checkRedirectTarget } from '@/lib/redirect-target';
 import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase';
 import { createCampaignSchema, parseBody } from '@/lib/schemas';
@@ -80,7 +81,7 @@ export async function POST(request: NextRequest) {
     target_level, direction, message_template, talking_points_coverage, distribution_plan,
     bill_level, bill_state, bill_ref, bill_title, bill_url,
     story_prompt, usage_statement, usage_tags, attribution_options, edit_revoke_policy, recipient_email,
-    org_name, org_url, org_logo_url, brand_color, custom_domain,
+    org_name, org_url, org_logo_url, brand_color, custom_domain, redirect_url,
     parent_campaign_id, stage_goal, target_committee, target_committee_state, notify_supporters,
     target_officials, target_party, extra_recipients,
   } = parsed.data;
@@ -136,6 +137,22 @@ export async function POST(request: NextRequest) {
     brand_color: brand_color || creatorProfile.brand_color || null,
     custom_domain: custom_domain?.toLowerCase() || null,
   };
+
+  // The schema checked the redirect's shape, not whose site it points at.
+  // Without this, every campaign page is an open redirect: a link that reads
+  // as mydemocracy.app and lands anywhere. The host has to be one this
+  // organization has already told us is theirs.
+  let safeRedirectUrl: string | null = null;
+  if (redirect_url) {
+    const check = checkRedirectTarget(redirect_url, {
+      orgUrl: branding.org_url,
+      customDomain: branding.custom_domain,
+    });
+    if (!check.ok) {
+      return NextResponse.json({ error: check.reason }, { status: 400 });
+    }
+    safeRedirectUrl = check.url;
+  }
 
   const admin = createAdminClient();
   const { data: campaign, error } = await admin
@@ -196,6 +213,7 @@ export async function POST(request: NextRequest) {
       edit_revoke_policy: isStory ? edit_revoke_policy : null,
       recipient_email: isStory ? (recipient_email || user.email || null) : (recipient_email || null),
       ...branding,
+      redirect_url: safeRedirectUrl,
       status: 'active',
     })
     .select()
