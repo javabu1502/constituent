@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { CampaignHubTabs } from '@/components/campaign/CampaignHubTabs';
 import { redirect, notFound } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase';
@@ -433,70 +434,99 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
 
       <div className="mb-8 flex items-start justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-            Campaign Analytics
+          {/* The bill number is the name an organiser knows this by. Without
+              one the headline is all there is. */}
+          <h1 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
+            {campaign.bill_ref || campaign.headline}
           </h1>
-          <p className="text-gray-600 dark:text-gray-400 mt-1">
-            {campaign.headline}
-          </p>
+          {campaign.bill_ref && (
+            <p className="text-gray-700 dark:text-gray-300 mt-1">{campaign.headline}</p>
+          )}
         </div>
         <Link href={`/campaign/${slug}/report`} className="shrink-0 text-sm font-medium px-4 py-2 rounded-lg bg-purple-600 hover:bg-purple-700 text-white transition-colors">
           Impact report
         </Link>
       </div>
 
+      <CampaignHubTabs
+        tabs={[
+          {
+            id: 'overview',
+            label: 'Overview',
+            panel: (
+              <>
       {!campaign.parent_campaign_id && (
-        <BillStatusPanel
-          isDemo={isDemo}
-          campaign={{
-            id: campaign.id,
-            slug,
-            headline: campaign.headline,
-            bill_ref: campaign.bill_ref ?? null,
-            bill_level: campaign.bill_level ?? null,
-            bill_state: campaign.bill_state ?? null,
-            bill_congress: campaign.bill_congress ?? null,
-            bill_type: campaign.bill_type ?? null,
-            bill_number: campaign.bill_number ?? null,
-            target_level: campaign.target_level ?? null,
-          }}
-        />
-      )}
+                  <BillStatusPanel
+                    isDemo={isDemo}
+                    campaign={{
+                      id: campaign.id,
+                      slug,
+                      headline: campaign.headline,
+                      bill_ref: campaign.bill_ref ?? null,
+                      bill_level: campaign.bill_level ?? null,
+                      bill_state: campaign.bill_state ?? null,
+                      bill_congress: campaign.bill_congress ?? null,
+                      bill_type: campaign.bill_type ?? null,
+                      bill_number: campaign.bill_number ?? null,
+                      target_level: campaign.target_level ?? null,
+                    }}
+                  />
+                )}
 
-      {hasWhipBoard && <WhipBoard slug={slug} isDemo={isDemo} />}
+
+      <CampaignStages
+                  isDemo={isDemo}
+                  campaign={{
+                    id: campaign.id,
+                    slug,
+                    headline: campaign.headline,
+                    parent_campaign_id: campaign.parent_campaign_id ?? null,
+                    bill_level: campaign.bill_level ?? null,
+                    bill_state: campaign.bill_state ?? null,
+                    target_level: campaign.target_level ?? null,
+                  }}
+                />
+
 
       {!campaign.parent_campaign_id && <CoalitionPanel slug={slug} initialOutcome={campaign.outcome ?? null} isDemo={isDemo} />}
 
-      {campaign.message_template && (
-        <CampaignTalkingPoints
-          template={campaign.message_template}
-          orgName={campaign.org_name ?? null}
-          accent={campaign.brand_color ?? null}
-          subtitle={
-            'Your framing, side by side with reality: compare these points against "What constituents are saying" below — when their own words echo yours, the talking points are landing.'
-          }
-        />
-      )}
 
-      <CampaignStages
-        isDemo={isDemo}
-        campaign={{
-          id: campaign.id,
-          slug,
-          headline: campaign.headline,
-          parent_campaign_id: campaign.parent_campaign_id ?? null,
-          bill_level: campaign.bill_level ?? null,
-          bill_state: campaign.bill_state ?? null,
-          target_level: campaign.target_level ?? null,
-        }}
-      />
+              </>
+            ),
+          },
+          {
+            id: 'whip',
+            label: 'Whip count',
+            panel: hasWhipBoard ? <WhipBoard slug={slug} isDemo={isDemo} /> : null,
+          },
+          {
+            id: 'messages',
+            label: 'Messages and stories',
+            panel: (
+              <>
+      {campaign.message_template && (
+                  <CampaignTalkingPoints
+                    template={campaign.message_template}
+                    orgName={campaign.org_name ?? null}
+                    accent={campaign.brand_color ?? null}
+                    subtitle={
+                      'Your framing, side by side with reality: compare these points against "What constituents are saying" below — when their own words echo yours, the talking points are landing.'
+                    }
+                  />
+                )}
+
 
       <CampaignAnalytics
-        analytics={analytics}
-        campaignName={campaign.headline}
-        insightsPanel={insightsPanel}
-        hideOfficialsPanel={hasWhipBoard}
-        isDemo={isDemo}
+                  analytics={analytics}
+                  campaignName={campaign.headline}
+                  insightsPanel={insightsPanel}
+                  hideOfficialsPanel={hasWhipBoard}
+                  isDemo={isDemo}
+                />
+              </>
+            ),
+          },
+        ]}
       />
     </div>
   );
