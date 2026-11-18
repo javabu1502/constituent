@@ -42,3 +42,20 @@ describe('suggestNextStage', () => {
     expect(suggestNextStage('Prefiled.', null).goal).toBe('cosponsor');
   });
 });
+
+describe('suggestNextStage enactment wording', () => {
+  // Regression: "Approved by Governor" with no "the" matched nothing and fell
+  // through to cosponsor, so a bill that was already law told the org to go
+  // recruit cosponsors. Several states log it without the article.
+  it('recognises enactment however the state words it', () => {
+    for (const action of [
+      'Approved by Governor',
+      'Approved by the Governor. Chapter 212.',
+      'Governor signed AB 123',
+      'Signed by Governor',
+      'Became Public Law No: 119-21.',
+    ]) {
+      expect(suggestNextStage(action, null).goal).toBe('thank_you');
+    }
+  });
+});

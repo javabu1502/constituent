@@ -37,21 +37,21 @@ export interface BillStatus {
 export function suggestNextStage(latestAction: string, latestChamber: string | null): NextStageSuggestion {
   const t = latestAction.toLowerCase();
 
-  if (/signed by (the )?governor|became (public )?law|approved by the governor|chaptered|enacted/.test(t)) {
-    return { goal: 'thank_you', reason: 'The bill has been signed into law — time to thank the legislators who carried it.', committeeName: null };
+  if (/signed by (the )?governor|governor signed|became (public )?law|approved by (the )?governor|chaptered|enacted/.test(t)) {
+    return { goal: 'thank_you', reason: 'The bill is now law. You can thank the legislators who voted for it.', committeeName: null };
   }
   if (/delivered to (the )?governor|presented to the president|to governor|enrolled/.test(t)) {
-    return { goal: 'thank_you', reason: 'The bill has cleared the legislature — thank supporters while the signature is pending.', committeeName: null };
+    return { goal: 'thank_you', reason: 'The bill has passed the legislature and is waiting on a signature.', committeeName: null };
   }
   if (/passed(?: the)? senate|passed(?: the)? upper/.test(t) || (/\bpassed\b/.test(t) && latestChamber === 'upper')) {
-    return { goal: 'thank_you', reason: 'It passed the Senate — if both chambers are done, shift to gratitude; otherwise push the remaining chamber.', committeeName: null };
+    return { goal: 'thank_you', reason: 'It passed the Senate. If the other chamber has also passed it, thank supporters. If not, that chamber is next.', committeeName: null };
   }
   if (/passed(?: the)? (assembly|house)|passed(?: the)? lower/.test(t) || (/\bpassed\b/.test(t) && latestChamber === 'lower')) {
-    return { goal: 'floor_senate', reason: 'It passed the first chamber — the Senate floor is the next fight.', committeeName: null };
+    return { goal: 'floor_senate', reason: 'It passed the first chamber. The Senate floor vote is next.', committeeName: null };
   }
   if (/do pass|reported favorably|committee report|reported out|placed on .*(calendar|file)|ordered to (a )?third reading/.test(t)) {
     const goal: StageGoal = latestChamber === 'upper' ? 'floor_senate' : 'floor_house';
-    return { goal, reason: 'The committee reported it out — mobilize for the floor vote.', committeeName: null };
+    return { goal, reason: 'The committee reported it out. The floor vote is next.', committeeName: null };
   }
   if (/referred to|re-referred|assigned to|in committee|hearing (scheduled|held)|scheduled for hearing/.test(t)) {
     // Try to pull the committee's name out of the action text.
@@ -60,11 +60,11 @@ export function suggestNextStage(latestAction: string, latestChamber: string | n
       latestAction.match(/to (?:the )?([A-Z][A-Za-z,&\- ]+?) [Cc]ommittee/);
     return {
       goal: 'committee',
-      reason: 'The bill sits in committee — target the members who will vote on it there.',
+      reason: 'The bill is in committee. The members of that committee vote on it next.',
       committeeName: m ? m[1].trim() : null,
     };
   }
-  return { goal: 'cosponsor', reason: 'The bill is early in its life — build momentum by recruiting cosponsors.', committeeName: null };
+  return { goal: 'cosponsor', reason: 'The bill was introduced recently. Recruiting cosponsors is the usual first step.', committeeName: null };
 }
 
 const TTL_MS = 60 * 60 * 1000;
