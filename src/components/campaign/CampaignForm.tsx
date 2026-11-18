@@ -36,6 +36,7 @@ export interface CampaignEditInitial {
   direction: 'support' | 'oppose' | '';
   messageTemplate: string;
   ask?: string;
+  redirectUrl?: string;
   storyQuestions?: { id: string; text: string }[];
   talkingPointsCoverage?: 'all' | 'fit';
   storyPrompt: string;
@@ -82,6 +83,9 @@ export function CampaignForm({
   // The one sentence saying what the official should DO. Empty falls back to
   // the sentence stage_goal implies, which is what every campaign did before.
   const [ask, setAsk] = useState(edit?.initial.ask ?? '');
+  // Where a supporter lands after acting, so the org's own analytics record
+  // the conversion. Host is checked against their org_url server-side.
+  const [redirectUrl, setRedirectUrl] = useState(edit?.initial.redirectUrl ?? '');
   // Storytelling only. Up to 3, asked after the story, every one skippable.
   const [storyQuestions, setStoryQuestions] = useState<{ id: string; text: string }[]>(
     edit?.initial.storyQuestions ?? []
@@ -496,6 +500,7 @@ export function CampaignForm({
             direction: direction || undefined,
             message_template: messageTemplate.trim() || null,
             ask: ask.trim() || null,
+            redirect_url: redirectUrl.trim() || null,
             talking_points_coverage: talkingPointsCoverage,
             ...(edit ? {} : targetingBody),
             ...(parentCampaignId
@@ -547,6 +552,7 @@ export function CampaignForm({
             ...(direction ? { direction } : {}),
             message_template: messageTemplate.trim() || null,
             ask: ask.trim() || null,
+            redirect_url: redirectUrl.trim() || null,
             talking_points_coverage: talkingPointsCoverage,
             // Explicit nulls clear a previously linked bill.
             bill_level: resolvedBill?.level ?? null,
@@ -1152,6 +1158,25 @@ export function CampaignForm({
             worked example for the same reason: the old one said "talking
             points or a template", which left it unclear whether to write a
             list or a letter. It is a list. */}
+        <div className="mb-6">
+          <label htmlFor="campaign-redirect" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            Send supporters to your own page afterwards <span className="text-gray-400 dark:text-gray-500 font-normal">(optional)</span>
+          </label>
+          <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">
+            Must be a page on your organization&rsquo;s own website. We add utm_source, utm_campaign and md_action so your
+            analytics can attribute the visit. We run no analytics of our own on campaign pages.
+          </p>
+          <input
+            id="campaign-redirect"
+            type="url"
+            value={redirectUrl}
+            onChange={(e) => setRedirectUrl(e.target.value)}
+            maxLength={500}
+            placeholder="https://yourorg.org/thank-you"
+            className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-surface dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
+          />
+        </div>
+
         <div className="mb-6">
           <label htmlFor="campaign-ask" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             The ask <span className="text-gray-400 dark:text-gray-500 font-normal">(optional)</span>

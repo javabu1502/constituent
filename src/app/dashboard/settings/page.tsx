@@ -6,7 +6,7 @@ import { createAdminClient } from '@/lib/supabase';
 import { OrgSettingsForm } from '@/components/dashboard/OrgSettingsForm';
 
 export const metadata: Metadata = {
-  title: 'Organization Settings | My Democracy',
+  title: 'Organization | My Democracy',
   description: 'Manage your organization name, logo, and branding.',
 };
 
@@ -21,7 +21,7 @@ export default async function OrgSettingsPage() {
   const admin = createAdminClient();
   const { data: profile } = await admin
     .from('profiles')
-    .select('account_type, org_name, org_url, org_logo_url, brand_color')
+    .select('account_type, org_name, org_url, org_about, org_logo_url, brand_color')
     .eq('user_id', user.id)
     .single();
 
@@ -36,9 +36,9 @@ export default async function OrgSettingsPage() {
         <Link href="/dashboard" className="text-sm text-purple-600 dark:text-purple-400 hover:underline">
           &larr; Dashboard
         </Link>
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-white mt-2">Organization Settings</h1>
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-white mt-2">Organization</h1>
         <p className="text-gray-600 dark:text-gray-400 mt-1">
-          Your identity across My Democracy. Campaigns you create automatically carry this name, logo, and color on their pages.
+          Every campaign you create carries this name, logo and color.
         </p>
       </div>
 
@@ -47,6 +47,7 @@ export default async function OrgSettingsPage() {
           initial={{
             org_name: profile.org_name ?? null,
             org_url: profile.org_url ?? null,
+            org_about: profile.org_about ?? null,
             org_logo_url: profile.org_logo_url ?? null,
             brand_color: profile.brand_color ?? null,
           }}

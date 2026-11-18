@@ -12,7 +12,7 @@ async function getOrg(slug: string) {
   const admin = createAdminClient();
   const { data } = await admin
     .from('profiles')
-    .select('user_id, org_name, org_url, org_logo_url, brand_color, org_slug')
+    .select('user_id, org_name, org_url, org_about, org_logo_url, brand_color, org_slug')
     .eq('org_slug', slug)
     .eq('account_type', 'organization')
     .maybeSingle();
@@ -48,6 +48,13 @@ export default async function OrgPage({ params }: PageProps) {
         )}
         <p className="text-sm uppercase tracking-wide text-gray-500 dark:text-gray-400">Join the campaign</p>
         <h1 className="text-3xl font-bold text-gray-900 dark:text-white mt-1">{name}</h1>
+        {/* In the organization's own words, so someone deciding whether to
+            hand over their name and address has something to read. */}
+        {org.org_about && (
+          <p className="text-gray-700 dark:text-gray-300 mt-3 whitespace-pre-line text-left sm:text-center max-w-prose mx-auto">
+            {org.org_about}
+          </p>
+        )}
         <p className="text-gray-600 dark:text-gray-300 mt-3">
           Add your name so {name} can reach you when a bill moves and there is something concrete to do.
         </p>

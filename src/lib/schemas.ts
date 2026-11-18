@@ -488,6 +488,7 @@ export const profileUpdateSchema = z
     // Account-level org identity (defaults for campaign branding). Null clears.
     org_name: z.string().trim().max(120).nullable().optional(),
     org_url: z.string().trim().url().max(300).nullable().optional(),
+    org_about: z.string().trim().max(1000).nullable().optional(),
     org_logo_url: z.string().max(500).nullable().optional(),
     brand_color: z.string().regex(/^#[0-9a-fA-F]{6}$/).nullable().optional(),
   })

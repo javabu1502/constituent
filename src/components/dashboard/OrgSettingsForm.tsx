@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/Button';
 interface OrgSettings {
   org_name: string | null;
   org_url: string | null;
+  org_about: string | null;
   org_logo_url: string | null;
   brand_color: string | null;
 }
@@ -15,6 +16,7 @@ export function OrgSettingsForm({ initial }: { initial: OrgSettings }) {
   const router = useRouter();
   const [orgName, setOrgName] = useState(initial.org_name ?? '');
   const [orgUrl, setOrgUrl] = useState(initial.org_url ?? '');
+  const [orgAbout, setOrgAbout] = useState(initial.org_about ?? '');
   const [logoUrl, setLogoUrl] = useState(initial.org_logo_url ?? '');
   const [brandColor, setBrandColor] = useState(initial.brand_color ?? '');
   const [logoUploading, setLogoUploading] = useState(false);
@@ -52,6 +54,7 @@ export function OrgSettingsForm({ initial }: { initial: OrgSettings }) {
         body: JSON.stringify({
           org_name: orgName.trim() || null,
           org_url: orgUrl.trim() || null,
+          org_about: orgAbout.trim() || null,
           org_logo_url: logoUrl || null,
           brand_color: brandColor || null,
         }),
@@ -97,6 +100,27 @@ export function OrgSettingsForm({ initial }: { initial: OrgSettings }) {
           placeholder="https://yourorg.org"
           className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 bg-surface dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400"
         />
+      </div>
+
+      <div>
+        <label htmlFor="org-about" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          About <span className="text-gray-400 dark:text-gray-500 font-normal">(optional)</span>
+        </label>
+        <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">
+          Shown on your public page and at the top of every campaign you run.
+        </p>
+        <textarea
+          id="org-about"
+          value={orgAbout}
+          onChange={(e) => { setOrgAbout(e.target.value); setSaved(false); }}
+          maxLength={1000}
+          rows={4}
+          placeholder="Who you are and what you work on."
+          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 resize-y bg-surface dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400"
+        />
+        {orgAbout.trim() && (
+          <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">{orgAbout.trim().length} of 1000 characters</p>
+        )}
       </div>
 
       <div className="flex flex-wrap items-end gap-4">
