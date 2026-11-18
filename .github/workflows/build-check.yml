@@ -1,0 +1,38 @@
+name: Build check
+
+# Vercel deploys every push to main straight to production, with nothing in
+# front of it. This cannot block that deploy, and is not trying to: it runs
+# alongside it so a push that breaks the types, the tests or the build says so
+# on the commit, instead of being found later on the site.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Types
+        run: npx tsc --noEmit
+      - name: Tests
+        run: npm test
+      - name: Lint
+        run: npm run lint
+      - name: Build
+        # The build needs the env the app reads at module scope. These are
+        # placeholders: nothing here talks to a real service, and a build that
+        # needed a real key would be a build that leaks one.
+        run: npm run build
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: https://placeholder.supabase.co
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: placeholder
+          SUPABASE_SERVICE_ROLE_KEY: placeholder
