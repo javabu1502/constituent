@@ -1,6 +1,7 @@
 'use client';
 
 import { deliveryStatusLabel, deliveryStatusInfo, deliveryOutcomeBarClass } from '@/lib/delivery-status';
+import { CampaignNotLaunched } from '@/components/campaign/CampaignNotLaunched';
 import { useMemo, useState, type ReactNode } from 'react';
 import { STORY_USAGE_OPTIONS } from '@/lib/story-usage';
 import { US_STATES } from '@/lib/constants';
@@ -300,6 +301,12 @@ function StorytellingAnalytics({ analytics, campaignName, insightsPanel, isDemo 
 
   const selectClass =
     'px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded-lg bg-surface dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-purple-600';
+
+  // Same reasoning as the advocacy side: a page of zeros answers nothing.
+  // The check sits after the hooks above so their order never changes.
+  if (analytics.total_stories === 0) {
+    return <CampaignNotLaunched slug={analytics.campaign_slug} isStory />;
+  }
 
   return (
     <div className="space-y-6">
@@ -859,6 +866,16 @@ function MessageBrowser({ messages, slug, isDemo = false }: { messages: NonNulla
 export function CampaignAnalytics({ analytics, campaignName, insightsPanel, hideOfficialsPanel, isDemo = false }: CampaignAnalyticsProps) {
   if (analytics.kind === 'storytelling') {
     return <StorytellingAnalytics analytics={analytics} campaignName={campaignName} insightsPanel={insightsPanel} isDemo={isDemo} />;
+  }
+
+  // A dashboard of zeros answers nothing. Before anyone has acted the only
+  // question is how people get here, so that is the whole page.
+  if (analytics.total_actions === 0) {
+    // Without a slug there is no link to show, so fall through to the
+    // ordinary view rather than render a panel with an empty address.
+    if (analytics.campaign_slug) {
+      return <CampaignNotLaunched slug={analytics.campaign_slug} />;
+    }
   }
 
   const maxTopState = analytics.top_states.length > 0 ? analytics.top_states[0].count : 1;

@@ -248,6 +248,15 @@ export default async function CampaignPage({ params }: PageProps) {
           {campaign.description}
         </p>
 
+        {/* The ask, where the person being asked can read it. It already
+            shapes every letter; stating it plainly means nobody has to infer
+            what they are agreeing to do. */}
+        {campaign.ask && (
+          <p className="mt-4 rounded-lg border-l-4 border-purple-600 dark:border-purple-500 bg-purple-50 dark:bg-purple-900/20 py-3 pl-4 pr-3 text-[15px] font-medium text-gray-900 dark:text-white">
+            {campaign.ask}
+          </p>
+        )}
+
         {/* A local case has a background page: what is proposed, in a table,
             with the record it came from. The campaign carries two talking
             points, so the detail has to live somewhere a reader can reach. */}

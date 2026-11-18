@@ -649,9 +649,8 @@ export function CampaignForm({
             <input type="checkbox" checked={notifySupporters} onChange={(e) => setNotifySupporters(e.target.checked)} className="mt-0.5" />
             <span>
               Email everyone who already acted on this campaign
-              {supportersReachable > 0 ? ` (${supportersReachable.toLocaleString()} reachable supporters)` : ''} — &ldquo;the
-              bill moved, here&apos;s the next action.&rdquo;
-              <span className="block text-xs text-gray-500 dark:text-gray-400">Your past supporters are your fastest surge. Every email includes one-click unsubscribe.</span>
+              {supportersReachable > 0 ? ` (${supportersReachable.toLocaleString()} reachable)` : ''}
+              <span className="block text-xs text-gray-500 dark:text-gray-400">Skips anyone who unsubscribed. Every email carries a one-click unsubscribe.</span>
             </span>
           </label>
           {stageGoal === 'committee' && (

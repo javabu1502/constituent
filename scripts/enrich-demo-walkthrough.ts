@@ -14,16 +14,40 @@
  * Idempotent: every write is keyed on a demo- slug and re-running changes
  * nothing that is already correct.
  *
- * Usage: SUPABASE_SERVICE_KEY=... npx tsx scripts/enrich-demo-walkthrough.ts
+ * Usage: npx tsx scripts/enrich-demo-walkthrough.ts
+ * Reads the service key from .env.local (SUPABASE_SECRET_KEY), or from
+ * SUPABASE_SERVICE_KEY in the environment.
  */
 
+import * as fs from 'fs';
 import { createClient } from '@supabase/supabase-js';
 import { DEMO_ORG_USER_ID } from '../src/lib/demo';
 import { checkRedirectTarget } from '../src/lib/redirect-target';
 
 const SUPABASE_URL = 'https://mydemocracy.supabase.co';
-const key = process.env.SUPABASE_SERVICE_KEY;
-if (!key) throw new Error('SUPABASE_SERVICE_KEY required');
+
+// Accept either name, and fall back to .env.local, so the key need not be
+// typed onto the command line where it lands in shell history.
+function serviceKey(): string {
+  const fromEnv = process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_SECRET_KEY;
+  if (fromEnv && fromEnv !== '...') return fromEnv;
+  try {
+    const envFile = fs.readFileSync('.env.local', 'utf8');
+    for (const name of ['SUPABASE_SERVICE_KEY', 'SUPABASE_SECRET_KEY']) {
+      const m = envFile.match(new RegExp(`^${name}=["']?([^"'\n]+)`, 'm'));
+      if (m?.[1]?.trim()) return m[1].trim();
+    }
+  } catch {
+    // no .env.local to read; fall through to the message
+  }
+  throw new Error(
+    'No service key.\n' +
+    '  Either fill SUPABASE_SECRET_KEY in .env.local (it is there but empty),\n' +
+    '  or prefix the command with SUPABASE_SERVICE_KEY=<the key>.\n' +
+    '  Supabase dashboard, Project Settings, API keys, service_role.'
+  );
+}
+const key = serviceKey();
 const db = createClient(SUPABASE_URL, key, { auth: { persistSession: false } });
 
 /** One sentence an organisation would write and the goal alone cannot say. */
