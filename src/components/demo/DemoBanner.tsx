@@ -12,7 +12,7 @@ export function DemoBanner() {
         fictional Nevada coalition. Explore everything. Editing is turned off.
       </p>
       <Link
-        href="/campaigns#apply"
+        href="/for-organizations#apply"
         className="shrink-0 text-sm font-medium px-3 py-1.5 rounded-lg bg-purple-600 hover:bg-purple-700 text-white transition-colors"
       >
         Apply for the pilot

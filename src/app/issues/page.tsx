@@ -63,7 +63,7 @@ export default async function IssuesPage() {
           )}
         </div>
         <Link
-          href="/campaigns"
+          href="/for-organizations"
           className="px-4 py-2.5 border-2 border-purple-600 text-purple-600 dark:text-purple-400 dark:border-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/20 text-sm font-medium rounded-lg transition-colors shrink-0 text-center"
         >
           Running a campaign? &rarr;

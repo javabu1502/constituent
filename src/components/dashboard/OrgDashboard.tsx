@@ -112,7 +112,7 @@ export function OrgDashboard({
             has no nav to inherit them from. */}
         <div className="sm:shrink-0 flex flex-wrap items-center gap-2">
           {isDemo && (
-            <Link href="/campaigns#apply" className="text-sm font-medium px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+            <Link href="/for-organizations#apply" className="text-sm font-medium px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
               Settings
             </Link>
           )}
@@ -120,7 +120,7 @@ export function OrgDashboard({
             All-campaign report
           </Link>
           {isDemo && (
-            <Link href="/campaigns#apply" className="text-sm font-medium px-4 py-2 rounded-lg bg-purple-600 hover:bg-purple-700 text-white transition-colors">
+            <Link href="/for-organizations#apply" className="text-sm font-medium px-4 py-2 rounded-lg bg-purple-600 hover:bg-purple-700 text-white transition-colors">
               + New campaign
             </Link>
           )}

@@ -81,7 +81,7 @@ export default async function CreateCampaignPage({
           </div>
           <p className="text-sm text-gray-500 dark:text-gray-400">
             Represent an organization?{' '}
-            <Link href="/campaigns#apply" className="text-purple-600 dark:text-purple-400 hover:underline">
+            <Link href="/for-organizations#apply" className="text-purple-600 dark:text-purple-400 hover:underline">
               Apply for the advocacy platform pilot
             </Link>
             .
@@ -126,7 +126,7 @@ export default async function CreateCampaignPage({
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
               <Link
-                href="/campaigns#apply"
+                href="/for-organizations#apply"
                 className="flex-1 text-center px-4 py-2.5 bg-purple-600 hover:bg-purple-700 text-white text-sm font-medium rounded-lg transition-colors"
               >
                 Apply for an organization account
@@ -143,8 +143,7 @@ export default async function CreateCampaignPage({
 
         <p className="text-center text-sm text-gray-500 dark:text-gray-400 mt-6">
           Here as an individual? You can{' '}
-          <Link href="/issues" className="text-purple-600 dark:text-purple-400 hover:underline font-medium">weigh in on an active issue</Link>,{' '}
-          <Link href="/campaigns" className="text-purple-600 dark:text-purple-400 hover:underline font-medium">browse campaigns</Link>
+          <Link href="/issues" className="text-purple-600 dark:text-purple-400 hover:underline font-medium">weigh in on an active issue</Link>
           {' '}or{' '}
           <Link href="/contact" className="text-purple-600 dark:text-purple-400 hover:underline font-medium">write to your officials</Link>. No organization account needed.
         </p>

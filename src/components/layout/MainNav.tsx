@@ -52,7 +52,7 @@ export function MainNav({ user, isOrg }: { user: User | null; isOrg: boolean }) 
       {!inWorkspace && (
         <>
           <Link
-            href="/campaigns"
+            href="/for-organizations"
             className="label-lg text-gray-700 dark:text-gray-300 hover:text-purple-700 dark:hover:text-purple-300 transition-colors"
           >
             For Organizations

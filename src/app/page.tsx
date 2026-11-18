@@ -268,13 +268,13 @@ export default async function HomePage() {
 
           <div className="flex flex-col sm:flex-row gap-3">
             <Link
-              href="/campaigns#apply"
+              href="/for-organizations#apply"
               className="label-lg px-6 py-3.5 bg-purple-600 hover:bg-purple-500 text-white text-center transition-colors"
             >
               Apply for an org account
             </Link>
             <Link
-              href="/campaigns"
+              href="/for-organizations"
               className="label-lg px-6 py-3.5 border border-white/40 hover:bg-white/10 text-white text-center transition-colors"
             >
               Browse campaigns
