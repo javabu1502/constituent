@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { stageOrder } from '@/lib/stages';
-import { CampaignCard, type CampaignRow } from '@/components/dashboard/CampaignCard';
+import { CampaignCard, type CampaignRow, type CardBillPosition } from '@/components/dashboard/CampaignCard';
 
 /**
  * The org-shaped dashboard: the org's campaigns and the reach those campaigns
@@ -16,12 +16,15 @@ export function OrgDashboard({
   campaigns,
   isDemo = false,
   portfolio = null,
+  billPositions,
 }: {
   displayName: string;
   campaigns: CampaignRow[];
   isDemo?: boolean;
   /** Exact counts across every campaign, when they could be taken. */
   portfolio?: { participants: number; messages: number } | null;
+  /** Where each bill has got to, keyed by campaign id. Resolved by the page. */
+  billPositions?: Map<string, CardBillPosition>;
 }) {
   // Stage campaigns nest under their parent so each initiative reads as ONE
   // narrative — the parent card carries the whole journey, not six siblings.
@@ -78,6 +81,7 @@ export function OrgDashboard({
       campaign={campaign}
       stages={stagesByParent.get(campaign.id as string) ?? []}
       isDemo={isDemo}
+      bill={billPositions?.get(String(campaign.id)) ?? null}
     />
   );
 
@@ -165,19 +169,19 @@ export function OrgDashboard({
           {federalCampaigns.length > 0 && (
             <section className="mb-10">
               <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Federal campaigns</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">{federalCampaigns.map(renderCampaignCard)}</div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">{federalCampaigns.map(renderCampaignCard)}</div>
             </section>
           )}
           {[...stateGroups.entries()].map(([st, list]) => (
             <section key={st} className="mb-10">
               <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">State campaigns · {st}</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">{list.map(renderCampaignCard)}</div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">{list.map(renderCampaignCard)}</div>
             </section>
           ))}
           {storytellingCampaigns.length > 0 && (
             <section className="mb-10">
               <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Storytelling campaigns</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">{storytellingCampaigns.map(renderCampaignCard)}</div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">{storytellingCampaigns.map(renderCampaignCard)}</div>
             </section>
           )}
         </>

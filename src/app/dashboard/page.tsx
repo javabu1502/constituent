@@ -1,4 +1,5 @@
 import { deliveryStatusInfo } from '@/lib/delivery-status';
+import { resolveBillPositions } from '@/lib/card-bill-position';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
@@ -137,6 +138,26 @@ export default async function DashboardPage() {
   }
   const topLevelCampaigns = allCampaigns.filter((c) => !c.parent_campaign_id);
 
+  // Where each bill has got to, for the cards' progress tracks. Cached an
+  // hour inside fetchBillStatus; a lookup that fails just leaves that card
+  // without a track rather than failing the page.
+  const billPositions = await resolveBillPositions(
+    topLevelCampaigns.map((c) => ({
+      id: String(c.id),
+      bill_level: (c.bill_level as string | null) ?? null,
+      bill_state: (c.bill_state as string | null) ?? null,
+      bill_ref: (c.bill_ref as string | null) ?? null,
+      bill_congress: (c.bill_congress as number | null) ?? null,
+      bill_type: (c.bill_type as string | null) ?? null,
+      bill_number: (c.bill_number as string | null) ?? null,
+    })),
+    allCampaigns.map((c) => ({
+      parent_campaign_id: (c.parent_campaign_id as string | null) ?? null,
+      stage_goal: (c.stage_goal as string | null) ?? null,
+      created_at: (c.created_at as string | null) ?? null,
+    })),
+  );
+
   const myStoryIds = (storiesResult.data ?? []).map((s: Record<string, unknown>) => s.id as string);
   const { data: myUseRows } = myStoryIds.length
     ? await admin.from('story_uses').select('id, story_id, use_type, note, status, created_at').in('story_id', myStoryIds).order('created_at', { ascending: false }).limit(200)
@@ -174,7 +195,12 @@ export default async function DashboardPage() {
   // (Federal / State) sections.
   // One campaign card, shared with the org dashboard (CampaignCard).
   const renderCampaignCard = (campaign: CampRow) => (
-    <CampaignCard key={campaign.id} campaign={campaign} stages={stagesByParent.get(campaign.id as string) ?? []} />
+    <CampaignCard
+      key={campaign.id}
+      campaign={campaign}
+      stages={stagesByParent.get(campaign.id as string) ?? []}
+      bill={billPositions.get(String(campaign.id)) ?? null}
+    />
   );
 
   const campaignsSection = campaigns && campaigns.length > 0 ? (
@@ -186,7 +212,7 @@ export default async function DashboardPage() {
             </Link>
           </div>
           <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">Campaigns you&rsquo;re running.</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
             {topLevelCampaigns.map(renderCampaignCard)}
           </div>
         </section>
@@ -205,6 +231,7 @@ export default async function DashboardPage() {
         displayName={(profile?.org_name as string) || (profile?.name as string) || user.email || 'Your organization'}
         campaigns={allCampaigns}
         portfolio={portfolio}
+        billPositions={billPositions}
       />
     );
   }

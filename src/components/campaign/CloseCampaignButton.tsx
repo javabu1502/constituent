@@ -18,11 +18,13 @@ export function CloseCampaignButton({
   closed,
   stepCount = 0,
   isStory = false,
+  menuItem = false,
 }: {
   slug: string;
   headline: string;
   closed: boolean;
   stepCount?: number;
+  menuItem?: boolean;
   isStory?: boolean;
 }) {
   const router = useRouter();
@@ -51,7 +53,7 @@ export function CloseCampaignButton({
       <button
         type="button"
         onClick={() => { setError(null); setShowConfirm(true); }}
-        className="px-3 py-1.5 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 text-sm font-medium rounded-lg transition-colors"
+        className={menuItem ? "w-full text-left px-3 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md transition-colors" : "px-3 py-1.5 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 text-sm font-medium rounded-lg transition-colors"}
       >
         {closed ? 'Reopen' : 'Close'}
       </button>

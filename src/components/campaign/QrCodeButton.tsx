@@ -6,7 +6,12 @@ import QRCode from 'qrcode';
 // Dashboard action: a printable QR code for the campaign link, for flyers,
 // posters, and tabling. Scans land on the campaign page tagged
 // utm_source=qr so scan-driven actions show up in analytics.
-export function QrCodeButton({ slug }: { slug: string }) {
+export function QrCodeButton({ slug, menuItem = false }: { slug: string; menuItem?: boolean }) {
+  // Rendered as a row inside the card's overflow menu rather than a
+  // standalone button. Behaviour, including the modal, is unchanged.
+  const triggerCls = menuItem
+    ? "w-full text-left px-3 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md transition-colors"
+    : "px-3 py-1.5 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 text-sm font-medium rounded-lg transition-colors";
   const [open, setOpen] = useState(false);
   const [dataUrl, setDataUrl] = useState<string | null>(null);
 
@@ -29,7 +34,7 @@ export function QrCodeButton({ slug }: { slug: string }) {
     <>
       <button
         onClick={() => setOpen(true)}
-        className="px-3 py-1.5 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 text-sm font-medium rounded-lg transition-colors"
+        className={triggerCls}
       >
         QR
       </button>
