@@ -17,6 +17,7 @@ export function OrgDashboard({
   isDemo = false,
   portfolio = null,
   billPositions,
+  identityComplete = true,
 }: {
   displayName: string;
   campaigns: CampaignRow[];
@@ -25,6 +26,8 @@ export function OrgDashboard({
   portfolio?: { participants: number; messages: number } | null;
   /** Where each bill has got to, keyed by campaign id. Resolved by the page. */
   billPositions?: Map<string, CardBillPosition>;
+  /** False when the org has no logo or no About yet. */
+  identityComplete?: boolean;
 }) {
   // Stage campaigns nest under their parent so each initiative reads as ONE
   // narrative — the parent card carries the whole journey, not six siblings.
@@ -153,7 +156,27 @@ export function OrgDashboard({
       {topLevelCampaigns.length === 0 ? (
         // First run: a new org lands here with no guidance otherwise. This
         // card disappears forever once the first campaign exists.
-        <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-8 max-w-2xl mx-auto text-center">
+        <div className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-8 max-w-2xl mx-auto">
+          {/* Identity first, and only while it is missing. A campaign copies
+              the organisation's name, logo and colour at the moment it is
+              created, so a first campaign made before any of that exists
+              reaches supporters unbranded, and fixing it afterwards means
+              editing each campaign. */}
+          {!isDemo && !identityComplete && (
+            <div className="mb-6 pb-6 border-b border-rule dark:border-gray-700">
+              <p className="text-xs font-semibold uppercase tracking-wide text-gray-400 dark:text-gray-500 mb-2">First</p>
+              <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Set up your organization</h2>
+              <p className="text-gray-600 dark:text-gray-400 mb-4">
+                Your logo, colour and description. Every campaign you create carries them, so this is worth doing before the first one.
+              </p>
+              <Link href="/dashboard/settings" className="inline-block px-5 py-2.5 border border-purple-300 dark:border-purple-700 text-purple-700 dark:text-purple-300 text-sm font-medium rounded-lg hover:bg-purple-50 dark:hover:bg-purple-900/20">
+                Set up your organization
+              </Link>
+            </div>
+          )}
+          {!isDemo && !identityComplete && (
+            <p className="text-xs font-semibold uppercase tracking-wide text-gray-400 dark:text-gray-500 mb-2">Then</p>
+          )}
           <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Start your first campaign</h2>
           <p className="text-gray-600 dark:text-gray-400 mb-6">
             A campaign is one link. Supporters open it and write to their own representatives. It goes live the moment you launch it.

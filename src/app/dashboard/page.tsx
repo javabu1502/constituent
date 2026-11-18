@@ -232,6 +232,10 @@ export default async function DashboardPage() {
         campaigns={allCampaigns}
         portfolio={portfolio}
         billPositions={billPositions}
+        identityComplete={
+          !!(profile as Record<string, unknown> | null)?.org_logo_url &&
+          !!(profile as Record<string, unknown> | null)?.org_about
+        }
       />
     );
   }
