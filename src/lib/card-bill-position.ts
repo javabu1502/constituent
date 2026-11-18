@@ -80,9 +80,9 @@ export async function resolveBillPositions(
       const running = newestStageGoal.get(c.id);
       const suggested = status.suggestion?.goal;
       if (running && suggested && stageOrder(running) < stageOrder(suggested)) {
-        behind = `The bill is at ${track.stages[position]}. Your newest action asks for ${
+        behind = `Your newest action asks for ${
           STAGE_GOAL_LABELS[running] ?? running
-        }.`;
+        }. The bill is ready for ${STAGE_GOAL_LABELS[suggested] ?? suggested}.`;
       }
 
       return [c.id, { position, label, behind }] as const;

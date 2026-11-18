@@ -125,7 +125,7 @@ export default function PrivacyPage() {
               </p>
               <p className="font-medium text-gray-900 dark:text-white">Only if you have an account, we additionally store:</p>
               <ul className="list-disc list-inside space-y-1 ml-4">
-                <li>The <strong className="text-gray-900 dark:text-white">full text</strong> of each message — so you can read your own message history in your dashboard</li>
+                <li>The <strong className="text-gray-900 dark:text-white">full text</strong> of each message, so you can read your own message history in your dashboard</li>
                 <li>That your email is <strong className="text-gray-900 dark:text-white">linked to your account</strong>, so your message history is yours to read</li>
               </ul>
               <p className="bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-700 rounded-lg p-4 text-blue-800 dark:text-blue-300">
@@ -184,13 +184,13 @@ export default function PrivacyPage() {
                   <strong className="text-gray-900 dark:text-white">Storytelling campaigns</strong>: if you share a personal story with a storytelling campaign, we save it to that campaign&apos;s private dashboard when you press Submit (see the &quot;Storytelling Campaigns&quot; section below). You can withdraw a saved story later from your dashboard, or with the withdraw link you receive when you submit.
                 </li>
                 <li>
-                  <strong className="text-gray-900 dark:text-white">Message-quality ratings</strong>: if you give a draft a thumbs up or down, we record that rating with the issue, tone, and official&apos;s party — but <strong className="text-gray-900 dark:text-white">not</strong> the message text or your identity. It is stored against a one-way hash so we can improve drafting quality.
+                  <strong className="text-gray-900 dark:text-white">Message-quality ratings</strong>: if you give a draft a thumbs up or down, we record that rating with the issue, tone, and official&apos;s party, but <strong className="text-gray-900 dark:text-white">not</strong> the message text or your identity. It is stored against a one-way hash so we can improve drafting quality.
                 </li>
                 <li>
                   <strong className="text-gray-900 dark:text-white">Notification preferences</strong>: if you opt in to the weekly digest or follow-up reminders, we store your email and those preferences so we can send them. You can unsubscribe at any time.
                 </li>
                 <li>
-                  <strong className="text-gray-900 dark:text-white">AI usage logs</strong>: see &quot;To prevent abuse and control costs&quot; below — a timestamped record of AI-generation events, tied to your account or a hashed IP, purged after 30 days.
+                  <strong className="text-gray-900 dark:text-white">AI usage logs</strong>: see &quot;To prevent abuse and control costs&quot; below: a timestamped record of AI-generation events, tied to your account or a hashed IP, purged after 30 days.
                 </li>
               </ul>
             </div>
@@ -468,7 +468,7 @@ export default function PrivacyPage() {
                 <strong className="text-gray-900 dark:text-white">Account data</strong> (profile, address, matched representatives, dashboard preferences) is retained as long as your account is active.
               </p>
               <p>
-                <strong className="text-gray-900 dark:text-white">Message history</strong> (the full text of your messages) is retained only for account holders, so you can view it in your dashboard. For sends without an account, no message text is stored — only the aggregate trend information described above.
+                <strong className="text-gray-900 dark:text-white">Message history</strong> (the full text of your messages) is retained only for account holders, so you can view it in your dashboard. For sends without an account, no message text is stored, only the aggregate trend information described above.
               </p>
               <p>
                 <strong className="text-gray-900 dark:text-white">Cached representative data</strong> (voting records, campaign finance, lobbying, committees) is refreshed periodically from public sources and is not personal data.

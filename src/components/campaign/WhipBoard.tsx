@@ -204,7 +204,7 @@ export function WhipBoard({ slug, isDemo = false }: { slug: string; isDemo?: boo
       <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">
         Your private vote count, relative to YOUR campaign&apos;s ask. <span className="font-medium">Yes / No</span> = they
         told you how they&apos;ll vote · <span className="font-medium">Leaning</span> = your read, no promise yet ·{' '}
-        <span className="font-medium">Uncommitted</span> = still winnable — your to-do list. Sponsor badges sync
+        <span className="font-medium">Uncommitted</span> = still winnable, your to-do list. Sponsor badges sync
         automatically from the bill record. Click a name for full intel; log hours on notes to track lobbying time.
       </p>
 
@@ -231,7 +231,7 @@ export function WhipBoard({ slug, isDemo = false }: { slug: string; isDemo?: boo
             : 'bg-amber-50 dark:bg-amber-900/20 border-amber-200 dark:border-amber-800 text-amber-800 dark:text-amber-300'
         }`}>
           <span className="font-semibold">{committee.name}:</span> {committeeTally.supportive} of {committeeTally.size} supportive
-          (need {committeeTally.majority}) — {committeeTally.supportive >= committeeTally.majority ? 'passes if the whip holds.' : `${committeeTally.majority - committeeTally.supportive} more to a majority.`}
+          (need {committeeTally.majority}). {committeeTally.supportive >= committeeTally.majority ? 'passes if the whip holds.' : `${committeeTally.majority - committeeTally.supportive} more to a majority.`}
         </div>
       )}
 
@@ -309,7 +309,7 @@ export function WhipBoard({ slug, isDemo = false }: { slug: string; isDemo?: boo
                     onChange={(e) => e.target.value && setPosition(r, e.target.value)}
                     className={`text-xs rounded-lg border border-gray-200 dark:border-gray-600 px-1.5 py-1 ${r.position ? WHIP_STYLES[r.position as keyof typeof WHIP_STYLES] : 'bg-surface dark:bg-gray-900 text-gray-500 dark:text-gray-400'}`}
                   >
-                    <option value="">— set —</option>
+                    <option value="">Set a count</option>
                     {WHIP_POSITIONS.map((p) => (
                       <option key={p} value={p}>{WHIP_LABELS[p]}</option>
                     ))}
