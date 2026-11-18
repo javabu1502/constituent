@@ -60,11 +60,11 @@ export function OrgAccessForm() {
         value={workingOn}
         onChange={(e) => setWorkingOn(e.target.value)}
         rows={3}
-        placeholder="What are you working on? (a bill, an issue, a session — anything)"
+        placeholder="What are you working on? (a bill, an issue, a session, anything)"
         className={`${input} sm:col-span-2`}
       />
       {state === 'error' && (
-        <p className="sm:col-span-2 text-sm text-rose-600 dark:text-rose-400">Something went wrong — please try again.</p>
+        <p className="sm:col-span-2 text-sm text-rose-600 dark:text-rose-400">Something went wrong. Please try again.</p>
       )}
       <button
         type="submit"

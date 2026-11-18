@@ -156,7 +156,7 @@ export function CoalitionPanel({ slug, initialOutcome, isDemo = false }: { slug:
         </label>
       </div>
       <p className="text-xs text-gray-500 dark:text-gray-400 mb-4">
-        Who else was in the fight — what they said publicly, and your conversations with them.
+        Who else was in the fight, what they said publicly, and your conversations with them.
       </p>
 
       <div className="flex flex-wrap gap-5">

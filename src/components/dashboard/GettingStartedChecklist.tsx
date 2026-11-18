@@ -12,7 +12,7 @@ const steps = [
   {
     key: 'address',
     title: 'Add your address',
-    description: 'We use it to find the people who represent you — from Congress to your city council.',
+    description: 'We use it to find the people who represent you, from Congress to your city council.',
     doneText: 'Address saved',
     href: '/contact',
   },

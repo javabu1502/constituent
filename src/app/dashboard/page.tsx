@@ -185,7 +185,7 @@ export default async function DashboardPage() {
               + New campaign
             </Link>
           </div>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">Campaigns you&rsquo;re running — check analytics to see your reach.</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">Campaigns you&rsquo;re running.</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {topLevelCampaigns.map(renderCampaignCard)}
           </div>
@@ -247,7 +247,7 @@ export default async function DashboardPage() {
       {(totalMessages > 0 || myStories.length > 0 || (campaigns && campaigns.length > 0)) && (
         <section className="mb-10">
           <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">Your Impact</h2>
-          <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">What you&rsquo;ve done so far — click through for the details.</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">What you&rsquo;ve done so far.</p>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             <a href="#messages" className="bg-surface dark:bg-gray-800 rounded-xl border border-rule dark:border-gray-700 p-4 hover:border-purple-300 dark:hover:border-purple-600 transition-colors">
               <p className="text-sm text-gray-500 dark:text-gray-400">Messages Sent</p>
@@ -305,7 +305,7 @@ export default async function DashboardPage() {
         <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
           Messages I&rsquo;ve Sent{totalMessages > 0 ? ` (${totalMessages})` : ''}
         </h2>
-        <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">Your outreach history — follow up to keep the pressure on.</p>
+        <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">Your outreach history.</p>
         {!messages || messages.length === 0 ? (
             <div className="bg-surface dark:bg-gray-800 rounded-2xl border border-rule dark:border-gray-700 p-8 text-center">
               <div className="w-16 h-16 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center mx-auto mb-4">

@@ -43,7 +43,7 @@ export async function POST(request: NextRequest) {
   });
   if (error) {
     console.error('[org-requests] insert failed:', error);
-    return NextResponse.json({ error: 'Something went wrong — please try again' }, { status: 500 });
+    return NextResponse.json({ error: 'Something went wrong. Please try again' }, { status: 500 });
   }
 
   const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');

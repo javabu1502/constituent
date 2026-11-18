@@ -57,7 +57,7 @@ export async function GET(request: NextRequest) {
   }
 
   const html = `
-    <h2>My Democracy — Social Desk daily digest</h2>
+    <h2>My Democracy social desk, daily digest</h2>
     <p>Last 24h. Kill switch and mode live in Supabase <code>social_config</code>.</p>
     <h3>Awaiting your approval (${pending.length})</h3>${list(pending)}
     <h3>Failed (${failed.length})</h3>${list(failed, true)}

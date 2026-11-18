@@ -11,7 +11,7 @@ const TEAM_PAGE_LIVE = true;
 export const metadata: Metadata = {
   title: 'Team | My Democracy',
   description:
-    'Meet the founder behind My Democracy — why it was built, the mission, and its commitment to non-partisan civic engagement.',
+    'Meet the founder behind My Democracy: why it was built, the mission, and its commitment to non-partisan civic engagement.',
   alternates: {
     canonical: 'https://www.mydemocracy.app/team',
   },

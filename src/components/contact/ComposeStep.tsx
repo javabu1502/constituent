@@ -52,7 +52,7 @@ export function ComposeStep({
         },
       });
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'We could not draft your message — you can write it yourself below or try again.');
+      setError(err instanceof Error ? err.message : 'We could not draft your message. You can write it yourself below, or try again.');
       // Let them write the core by hand if drafting is down.
       setManual(true);
     } finally {
@@ -95,7 +95,7 @@ export function ComposeStep({
               className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent resize-y bg-surface dark:bg-gray-700 text-gray-900 dark:text-white"
             />
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-              We add the greeting, each official&apos;s name, and your signature automatically — your words are never changed.
+              We add the greeting, each official&apos;s name, and your signature automatically. Your words are never changed.
             </p>
             {state.coreFrame?.original && (
               <div className="mt-3 p-3 bg-gray-50 dark:bg-gray-700/40 border border-gray-200 dark:border-gray-600 rounded-xl space-y-2">
@@ -129,7 +129,7 @@ export function ComposeStep({
               }}
               className="flex-1"
             >
-              Looks good — find my officials
+              Looks good, find my officials
             </Button>
             <button
               type="button"

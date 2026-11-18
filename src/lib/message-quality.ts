@@ -110,7 +110,7 @@ export function auditMessageQuality(
 
   for (const p of THREAT_PATTERNS) {
     if (p.test(t)) {
-      issues.push({ level: 'block', code: 'threat', detail: 'The message contains language that reads as a threat. Officials’ offices forward these to security — rewrite it as what you want them to DO.' });
+      issues.push({ level: 'block', code: 'threat', detail: 'The message contains language that reads as a threat. Officials’ offices forward these to security. Rewrite it as what you want them to do.' });
       break;
     }
   }
@@ -125,7 +125,7 @@ export function auditMessageQuality(
   }
 
   if (PROFANITY.test(t)) {
-    issues.push({ level: 'warn', code: 'profanity', detail: 'Profanity gets messages discarded unread. Consider rewording — anger lands harder in plain language.' });
+    issues.push({ level: 'warn', code: 'profanity', detail: 'Profanity gets messages discarded unread. Anger lands harder in plain language.' });
   }
   if (VOTE_THREAT.test(t)) {
     issues.push({ level: 'warn', code: 'vote_threat', detail: 'Staffers discount "or lose my vote" messages. Your story and a clear ask carry more weight.' });

@@ -6,7 +6,7 @@ import { DEMO_ORG_USER_ID, DEMO_ORG_NAME } from '@/lib/demo';
 import { getPortfolioCounts } from '@/lib/campaign-counts';
 
 export const metadata: Metadata = {
-  title: 'Live Demo — Organization Dashboard | My Democracy',
+  title: 'Live demo: organization dashboard | My Democracy',
   description: 'Explore the My Democracy organization dashboard with sample data. Whip boards, legislator intel, coalition tracking, and funder reports.',
   robots: { index: false },
 };

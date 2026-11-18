@@ -4,7 +4,7 @@ import { LegislatorIntelView } from '@/components/dashboard/LegislatorIntelView'
 import { DemoBanner } from '@/components/demo/DemoBanner';
 import { DEMO_ORG_USER_ID } from '@/lib/demo';
 
-export const metadata: Metadata = { title: 'Live Demo — Legislator Intel | My Democracy', robots: { index: false } };
+export const metadata: Metadata = { title: 'Live demo: legislator intel | My Democracy', robots: { index: false } };
 
 export const dynamic = 'force-dynamic';
 

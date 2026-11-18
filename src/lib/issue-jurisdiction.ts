@@ -40,7 +40,7 @@ const RULES: JurisdictionRule[] = [
     pattern: /\birs\b|(?<!state )(?<!property )tax refund|internal revenue|passport|state department(?! of )|\btsa\b|air traffic|\bfaa\b|airline|amtrak|federal student aid|\bfafsa\b|uscis|green card|customs (?:agents?|officers?|enforcement|seiz\w*)|\bcbp\b/i,
     guidance: {
       weights: { federal: 2, state: 0, local: 0 },
-      why: { federal: 'These are federal agencies — congressional offices have caseworkers who deal with them directly.' },
+      why: { federal: 'These are federal agencies. Congressional offices have caseworkers who deal with them directly.' },
     },
   },
   {
@@ -73,7 +73,7 @@ const RULES: JurisdictionRule[] = [
     guidance: {
       weights: { federal: 1, state: 2, local: 0 },
       why: {
-        state: 'Unemployment insurance is run by your state — benefits, eligibility, and the offices that pay claims.',
+        state: 'Unemployment insurance is run by your state: benefits, eligibility, and the offices that pay claims.',
         federal: 'Congress sets the federal framework and funds extensions.',
       },
     },
@@ -104,7 +104,7 @@ const RULES: JurisdictionRule[] = [
     guidance: {
       weights: { federal: 2, state: 1, local: 0 },
       why: {
-        federal: 'Immigration law is set by Congress — your US senators and representative are the decision-makers here.',
+        federal: 'Immigration law is set by Congress. Your US senators and representative are the decision-makers.',
         state: 'States decide some related policies (licenses, in-state tuition, local enforcement cooperation).',
       },
     },
@@ -118,7 +118,7 @@ const RULES: JurisdictionRule[] = [
     guidance: {
       weights: { federal: 2, state: 0, local: 0 },
       why: {
-        federal: 'Medicare and the ACA are federal programs — only Congress can change their funding, subsidies, or rules.',
+        federal: 'Medicare and the ACA are federal programs. Only Congress can change their funding, subsidies, or rules.',
       },
     },
     exclusive: true,
@@ -142,7 +142,7 @@ const RULES: JurisdictionRule[] = [
     guidance: {
       weights: { federal: 1, state: 2, local: 2 },
       why: {
-        state: 'States set school funding, standards, and teacher policy — the biggest levers in education.',
+        state: 'States set school funding, standards, and teacher policy, the biggest levers in education.',
         local: 'School boards and local officials decide budgets, curriculum details, and district policy.',
         federal: 'Congress handles federal education funding.',
       },
@@ -238,7 +238,7 @@ const RULES: JurisdictionRule[] = [
     guidance: {
       weights: { federal: 2, state: 1, local: 0 },
       why: {
-        federal: 'VA benefits and military policy are federal — your members of Congress can also cut through VA red tape for you directly.',
+        federal: 'VA benefits and military policy are federal. Your members of Congress can also cut through VA red tape for you directly.',
         state: 'States run veterans homes and some benefit programs.',
       },
     },
@@ -310,7 +310,7 @@ const RULES: JurisdictionRule[] = [
     guidance: {
       weights: { federal: 1, state: 2, local: 1 },
       why: {
-        state: 'States run elections — registration, ballots, and district maps.',
+        state: 'States run elections: registration, ballots, and district maps.',
         federal: 'Congress sets baseline voting-rights protections.',
         local: 'County officials administer polling places and counts.',
       },
@@ -343,7 +343,7 @@ const RULES: JurisdictionRule[] = [
     guidance: {
       weights: { federal: 2, state: 0, local: 0 },
       why: {
-        federal: 'Foreign policy is entirely federal — only your members of Congress have a vote here.',
+        federal: 'Foreign policy is entirely federal. Only your members of Congress have a vote here.',
       },
     },
     exclusive: true,
@@ -385,7 +385,7 @@ const RULES: JurisdictionRule[] = [
     pattern: /social security|\bssi\b|\bssdi\b|\busps\b|postal service|post office|mail carrier|mail delivery|mailman/i,
     guidance: {
       weights: { federal: 2, state: 0, local: 0 },
-      why: { federal: 'Social Security and the Postal Service are entirely federal — only Congress can act.' },
+      why: { federal: 'Social Security and the Postal Service are entirely federal. Only Congress can act.' },
     },
     exclusive: true,
   },
@@ -440,7 +440,7 @@ const RULES: JurisdictionRule[] = [
     pattern: /\bdmv\b|driver'?s? licen|vehicle registration|car registration|professional licen|occupational licen|barber licen|nursing licen/i,
     guidance: {
       weights: { federal: 0, state: 2, local: 0 },
-      why: { state: 'Licensing — from driving to professions — is purely state-run.' },
+      why: { state: 'Licensing, from driving to professions, is purely state-run.' },
     },
   },
   {
@@ -551,7 +551,7 @@ RULES.push({
   pattern: /\bmayor\b|city hall|city council|city commission|county commission|town council|town board|village board|village trustees|village council|borough council|township (?:board|trustees|supervisors)|board of (?:supervisors|selectmen|trustees)|select ?board|\balder(?:man|woman|person)\b/i,
   guidance: {
     weights: { federal: 0, state: 0, local: 2 },
-    why: { local: 'You named your local government — that is who decides this.' },
+    why: { local: 'You named your local government, which is who decides this.' },
   },
 });
 
@@ -621,8 +621,8 @@ export function getJurisdiction(issueText: string): JurisdictionGuidance {
         local: 0,
       },
       why: {
-        ...(refs.federal.length > 0 ? { federal: `You named a federal bill (${refs.federal[0]}) — that goes to Congress.` } : {}),
-        ...(refs.state.length > 0 ? { state: `You named a state bill (${refs.state[0]}) — that goes to your state legislature.` } : {}),
+        ...(refs.federal.length > 0 ? { federal: `You named a federal bill (${refs.federal[0]}), which goes to Congress.` } : {}),
+        ...(refs.state.length > 0 ? { state: `You named a state bill (${refs.state[0]}), which goes to your state legislature.` } : {}),
       },
     };
   }
@@ -635,8 +635,8 @@ export function getJurisdiction(issueText: string): JurisdictionGuidance {
       weights: { federal: casework.level === 'federal' ? 2 : 0, state: casework.level === 'state' ? 2 : 0, local: 0 },
       why:
         casework.level === 'federal'
-          ? { federal: 'This reads like a personal case with a federal agency — congressional caseworkers handle exactly this.' }
-          : { state: 'This reads like a personal case with a state agency — your state legislator’s office can intervene.' },
+          ? { federal: 'This reads like a personal case with a federal agency. Congressional caseworkers handle exactly this.' }
+          : { state: 'This reads like a personal case with a state agency. Your state legislator’s office can intervene.' },
     };
   }
 

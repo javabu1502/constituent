@@ -286,7 +286,7 @@ export function RepStep({ state, dispatch, onBack }: RepStepProps) {
       {/* Targeted-outreach hint + Select All (de-emphasized escape hatch) */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-4">
         <p className="text-xs text-gray-500 dark:text-gray-400">
-          A targeted message to the right office often lands hardest — but big moments call for everyone.
+          A targeted message to the right office often lands hardest, but big moments call for everyone.
         </p>
         <button
           onClick={handleSelectAll}

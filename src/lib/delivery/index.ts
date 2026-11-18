@@ -118,7 +118,7 @@ export function determineDeliveryMethod(
       stafferName: official.stafferFirstName || null,
       captchaBlocked,
       note: captchaBlocked
-        ? 'Automated form delivery unavailable — using email instead'
+        ? 'Automated form delivery unavailable. Using email instead'
         : stafferNote,
     };
   }
@@ -136,7 +136,7 @@ export function determineDeliveryMethod(
       stafferName: null,
       captchaBlocked,
       note: captchaBlocked
-        ? 'Automated form delivery unavailable — please fill manually'
+        ? 'Automated form delivery unavailable. Please fill it in manually'
         : official.contactFormNote || 'Copy your message and paste into the contact form',
     };
   }

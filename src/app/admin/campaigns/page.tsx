@@ -41,7 +41,7 @@ function buildCreatorMailto(r: ActionResult): string {
   if (r.action === 'approve') {
     subject = `Your My Democracy campaign is live: ${r.headline}`;
     body =
-      `Hi,\n\nGood news — your campaign "${r.headline}" has been approved and is now live.\n\n` +
+      `Hi,\n\nGood news. Your campaign "${r.headline}" has been approved and is now live.\n\n` +
       `Share this link to start collecting support:\n${link}\n\n` +
       (r.note ? `A note from our team:\n${r.note}\n\n` : '') +
       `Thanks for using My Democracy.\n`;
@@ -272,7 +272,7 @@ function CampaignCard({
           <textarea
             value={note ?? ''}
             onChange={(e) => onNoteChange(e.target.value)}
-            placeholder="Optional note to the creator (included in your email — e.g. a reason for rejection or a welcome message)"
+            placeholder="Optional note to the creator, included in your email. For example a reason for rejection, or a welcome message."
             rows={2}
             className="w-full text-sm px-3 py-2 border border-rule dark:border-gray-700 rounded-lg bg-surface dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 resize-none"
           />

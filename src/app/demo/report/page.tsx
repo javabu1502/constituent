@@ -3,7 +3,7 @@ import { OrgReportView } from '@/components/dashboard/OrgReportView';
 import { DemoBanner } from '@/components/demo/DemoBanner';
 import { DEMO_ORG_USER_ID, DEMO_ORG_NAME } from '@/lib/demo';
 
-export const metadata: Metadata = { title: 'Live Demo — Organization Impact Report | My Democracy', robots: { index: false } };
+export const metadata: Metadata = { title: 'Live demo: organization impact report | My Democracy', robots: { index: false } };
 
 export const dynamic = 'force-dynamic';
 

@@ -80,7 +80,7 @@ export function LogMeeting({
       setBody(''); setHours(''); setSelected(new Set()); setLeanings({}); setOpen(false);
       router.refresh();
     } catch {
-      setError('Something failed while saving — check the whip boards and retry what’s missing.');
+      setError('Something failed while saving. Check the whip boards and retry what’s missing.');
     } finally {
       setSaving(false);
     }
@@ -119,7 +119,7 @@ export function LogMeeting({
           </div>
 
           <div>
-            <p className="text-xs font-medium text-gray-700 dark:text-gray-300 mb-1.5">Bills discussed — and any leaning you picked up:</p>
+            <p className="text-xs font-medium text-gray-700 dark:text-gray-300 mb-1.5">Bills discussed, and any leaning you picked up:</p>
             <div className="space-y-1.5">
               {bills.map((b) => (
                 <div key={b.slug} className="flex items-center gap-2">
