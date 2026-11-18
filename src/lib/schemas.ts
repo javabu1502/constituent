@@ -364,6 +364,17 @@ export const submitStorySchema = z.object({
   // Which uses the storyteller is OK with (their choice, not the creator's).
   // Zero is allowed: sharing with the organization for reading only.
   granted_uses: z.array(z.string().max(60)).min(0).max(20),
+  // Answers to the campaign's optional questions. Only ones they filled in;
+  // a blank is a skip. question_text is sent and stored verbatim so a later
+  // edit to the campaign cannot change what they were answering.
+  question_answers: z
+    .array(z.object({
+      question_id: z.string().min(1).max(64),
+      question_text: z.string().trim().min(1).max(200),
+      answer: z.string().trim().min(1).max(500),
+    }))
+    .max(3)
+    .optional(),
   // Explicit checkbox: share this story with the campaign's organization.
   consent_usage: z.literal(true),
   consent_truthful: z.literal(true),

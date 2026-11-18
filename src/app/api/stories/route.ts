@@ -139,6 +139,7 @@ export async function POST(request: NextRequest) {
     preview_token,
     previewed_body,
     turnstileToken,
+    question_answers,
   } = parsed.data;
 
   const identity = await resolveUsageIdentity(ip);
@@ -351,6 +352,22 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Could not save your story. Please try again.' }, { status: 500 });
     }
     storyId = (inserted?.id as string) ?? null;
+
+    // Answers sit beside the story, never inside it: folded into the body they
+    // would inherit its consent, attribution and withdrawal state and stop
+    // being countable. A failure here must not lose the story, so it is logged
+    // and the submission still succeeds.
+    if (storyId && question_answers?.length) {
+      const { error: answerError } = await admin.from('story_question_answers').insert(
+        question_answers.map((qa) => ({
+          story_id: storyId,
+          question_id: qa.question_id,
+          question_text: qa.question_text,
+          answer: qa.answer,
+        }))
+      );
+      if (answerError) console.error('[stories] question answers insert error:', answerError);
+    }
 
     // Running count, only once the story is actually saved (a failed insert
     // used to leave the count one too high; audit 2026-10-23).

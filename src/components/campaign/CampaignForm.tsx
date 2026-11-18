@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import { MAX_ASK_LENGTH } from '@/lib/campaign-ask';
 import { chamberName, isUnicameral } from '@/lib/legislative-process';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
@@ -34,6 +35,8 @@ export interface CampaignEditInitial {
   targetLevel: 'federal' | 'state' | 'both' | 'local';
   direction: 'support' | 'oppose' | '';
   messageTemplate: string;
+  ask?: string;
+  storyQuestions?: { id: string; text: string }[];
   talkingPointsCoverage?: 'all' | 'fit';
   storyPrompt: string;
   usageStatement: string;
@@ -76,6 +79,13 @@ export function CampaignForm({
   const [targetParty, setTargetParty] = useState<TargetParty>({ party: 'D', chamber: 'both', level: 'federal' });
   const [direction, setDirection] = useState<'support' | 'oppose' | ''>(edit?.initial.direction ?? '');
   const [messageTemplate, setMessageTemplate] = useState(edit?.initial.messageTemplate ?? '');
+  // The one sentence saying what the official should DO. Empty falls back to
+  // the sentence stage_goal implies, which is what every campaign did before.
+  const [ask, setAsk] = useState(edit?.initial.ask ?? '');
+  // Storytelling only. Up to 3, asked after the story, every one skippable.
+  const [storyQuestions, setStoryQuestions] = useState<{ id: string; text: string }[]>(
+    edit?.initial.storyQuestions ?? []
+  );
   const [talkingPointsCoverage, setTalkingPointsCoverage] = useState<'all' | 'fit'>(edit?.initial.talkingPointsCoverage ?? 'all');
   const talkingPointCount = parseTalkingPoints(messageTemplate).length;
 
@@ -485,6 +495,7 @@ export function CampaignForm({
               : {}),
             direction: direction || undefined,
             message_template: messageTemplate.trim() || null,
+            ask: ask.trim() || null,
             talking_points_coverage: talkingPointsCoverage,
             ...(edit ? {} : targetingBody),
             ...(parentCampaignId
@@ -510,6 +521,7 @@ export function CampaignForm({
         : {
             ...sharedBody,
             story_prompt: storyPrompt.trim() || null,
+            story_questions: storyQuestions.filter((q) => q.text.trim()).map((q) => ({ id: q.id, text: q.text.trim() })),
             usage_statement: usageStatement.trim() || null,
             usage_tags: usageTags,
             // Change/revoke is standardized (self-service), so there's no
@@ -534,6 +546,7 @@ export function CampaignForm({
               : {}),
             ...(direction ? { direction } : {}),
             message_template: messageTemplate.trim() || null,
+            ask: ask.trim() || null,
             talking_points_coverage: talkingPointsCoverage,
             // Explicit nulls clear a previously linked bill.
             bill_level: resolvedBill?.level ?? null,
@@ -545,6 +558,7 @@ export function CampaignForm({
         : {
             ...sharedBody,
             story_prompt: storyPrompt.trim() || null,
+            story_questions: storyQuestions.filter((q) => q.text.trim()).map((q) => ({ id: q.id, text: q.text.trim() })),
             usage_statement: usageStatement.trim() || null,
             usage_tags: usageTags,
           };
@@ -1138,6 +1152,29 @@ export function CampaignForm({
             worked example for the same reason: the old one said "talking
             points or a template", which left it unclear whether to write a
             list or a letter. It is a list. */}
+        <div className="mb-6">
+          <label htmlFor="campaign-ask" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+            The ask <span className="text-gray-400 dark:text-gray-500 font-normal">(optional)</span>
+          </label>
+          <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">
+            One sentence saying what you want the official to do. Leave it empty and we write it from the action you picked.
+          </p>
+          <input
+            id="campaign-ask"
+            type="text"
+            value={ask}
+            onChange={(e) => setAsk(e.target.value)}
+            maxLength={MAX_ASK_LENGTH}
+            placeholder="e.g., Add your name as an original cosponsor before the Friday deadline."
+            className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-surface dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
+          />
+          {ask.trim() && (
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
+              {ask.trim().length} of {MAX_ASK_LENGTH} characters. A deadline or condition is kept exactly as you write it.
+            </p>
+          )}
+        </div>
+
         <p className="text-xs text-gray-500 dark:text-gray-400 mb-2">
           The points you want every letter to make. Write one per line, up to {MAX_REQUIRED_POINTS}.
         </p>
@@ -1218,6 +1255,52 @@ export function CampaignForm({
               maxLength={2000}
               className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 resize-none bg-surface dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
             />
+          </div>
+
+          {/* Asked AFTER the story is written, and every one skippable. The
+              guide is trauma-informed and must not become a form:
+              src/lib/interview-system-prompt.ts. */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              Questions after the story <span className="text-gray-400 dark:text-gray-500 font-normal">(optional)</span>
+            </label>
+            <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">
+              Asked once the story is written, never before, and a storyteller can skip any of them. Answers are kept
+              apart from the story so you can count them for a report.
+            </p>
+            {storyQuestions.map((q, i) => (
+              <div key={q.id} className="flex items-start gap-2 mb-2">
+                <input
+                  type="text"
+                  value={q.text}
+                  onChange={(e) =>
+                    setStoryQuestions(storyQuestions.map((x, xi) => (xi === i ? { ...x, text: e.target.value } : x)))
+                  }
+                  maxLength={200}
+                  placeholder="e.g., Roughly how many children in your household does this affect?"
+                  className="flex-1 min-w-0 px-4 py-2.5 border border-gray-300 dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-600 bg-surface dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
+                />
+                <button
+                  type="button"
+                  onClick={() => setStoryQuestions(storyQuestions.filter((_, xi) => xi !== i))}
+                  aria-label={`Remove question ${i + 1}`}
+                  className="px-3 py-2.5 text-sm text-gray-500 hover:text-red-700 dark:text-gray-400 dark:hover:text-red-400"
+                >
+                  Remove
+                </button>
+              </div>
+            ))}
+            {storyQuestions.length < 3 ? (
+              <button
+                type="button"
+                onClick={() => setStoryQuestions([...storyQuestions, { id: `q${Date.now().toString(36)}`, text: '' }])}
+                className="text-sm font-medium text-purple-700 dark:text-purple-300 hover:underline"
+              >
+                + Add a question
+              </button>
+            ) : (
+              <p className="text-xs text-gray-500 dark:text-gray-400">Three is the maximum.</p>
+            )}
           </div>
 
           {/* Usage statement */}
