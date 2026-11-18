@@ -19,7 +19,7 @@
 const SITE = (process.env.SITE_URL || 'https://www.mydemocracy.app').replace(/\/$/, '');
 const SECRET = process.env.CANARY_SECRET;
 
-const PAGES = ['/', '/issues', '/contact', '/representatives', '/trends', '/campaigns', '/advocacy'];
+const PAGES = ['/', '/issues', '/contact', '/representatives', '/trends', '/for-organizations', '/advocacy'];
 
 /** The id shapes the app produces. A cap that fits only the first one is the
  *  bug this exists to catch. */
