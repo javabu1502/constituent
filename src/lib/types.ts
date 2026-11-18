@@ -366,6 +366,10 @@ export interface Campaign {
   custom_domain?: string | null;
   /** https page on the org's own domain to send a supporter to after they act. */
   redirect_url?: string | null;
+  /** One sentence saying what the official should do; null falls back to stage_goal. */
+  ask?: string | null;
+  /** Up to 3 optional, skippable questions asked after a story is written. */
+  story_questions?: { id: string; text: string }[] | null;
   // Stage campaigns: one step of a parent initiative's legislative journey.
   parent_campaign_id?: string | null;
   stage_goal?: 'cosponsor' | 'committee' | 'floor_house' | 'floor_senate' | 'thank_you' | 'custom' | null;

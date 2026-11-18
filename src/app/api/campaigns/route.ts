@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { normalizeAsk } from '@/lib/campaign-ask';
 import { checkRedirectTarget } from '@/lib/redirect-target';
 import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase';
@@ -81,6 +82,7 @@ export async function POST(request: NextRequest) {
     target_level, direction, message_template, talking_points_coverage, distribution_plan,
     bill_level, bill_state, bill_ref, bill_title, bill_url,
     story_prompt, usage_statement, usage_tags, attribution_options, edit_revoke_policy, recipient_email,
+    ask, story_questions,
     org_name, org_url, org_logo_url, brand_color, custom_domain, redirect_url,
     parent_campaign_id, stage_goal, target_committee, target_committee_state, notify_supporters,
     target_officials, target_party, extra_recipients,
@@ -214,6 +216,10 @@ export async function POST(request: NextRequest) {
       recipient_email: isStory ? (recipient_email || user.email || null) : (recipient_email || null),
       ...branding,
       redirect_url: safeRedirectUrl,
+      // An organization's own ask; null keeps the sentence stage_goal implies.
+      ask: normalizeAsk(ask),
+      // Storytelling only: optional questions asked after the story is written.
+      story_questions: isStory && story_questions?.length ? story_questions : null,
       status: 'active',
     })
     .select()

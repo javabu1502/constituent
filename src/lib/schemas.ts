@@ -129,6 +129,10 @@ export const createCampaignSchema = z.object({
   // Directional stance for advocacy campaigns (one way only, chosen at creation).
   direction: z.enum(['support', 'oppose']).optional(),
   message_template: z.string().max(2000).nullish(),
+  // One sentence saying what the official should DO. Null falls back to the
+  // sentence stage_goal implies (src/lib/campaign-ask.ts), so existing
+  // campaigns are unchanged.
+  ask: z.string().trim().max(300).nullish(),
   talking_points_coverage: z.enum(['all', 'fit']).optional(),
   distribution_plan: z.string().max(1000).nullish(),
   // Optional related bill (federal or state) — all-or-nothing, resolved client-side
@@ -143,6 +147,13 @@ export const createCampaignSchema = z.object({
   usage_tags: z.array(z.string().max(60)).max(20).optional(),
   attribution_options: z.array(z.enum(['named', 'first_name_only', 'anonymous'])).optional(),
   edit_revoke_policy: z.string().max(2000).nullish(),
+  // Up to 3 optional questions asked AFTER a story is written. Every one is
+  // skippable: the storytelling flow is trauma-informed and must not become
+  // a form. Answers go to story_question_answers, never into the body.
+  story_questions: z
+    .array(z.object({ id: z.string().min(1).max(64), text: z.string().trim().min(3).max(200) }))
+    .max(3)
+    .nullish(),
   recipient_email: z.string().email().max(200).nullish(),
   // White-label branding — honored only for unlisted campaigns (the route
   // drops these for public ones). Logo URL must point at our storage bucket
