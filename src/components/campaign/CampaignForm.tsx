@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import { chamberName, isUnicameral } from '@/lib/legislative-process';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { trackEvent } from '@/lib/analytics';
@@ -646,17 +647,24 @@ export function CampaignForm({
                 <option value="">Choose a committee…</option>
                 {stageState ? (
                   <>
-                    <optgroup label={`${stageState} House / Assembly`}>
-                      {committees.filter((c) => c.chamber === 'lower').map((c) => (
-                        <option key={c.id} value={c.id}>{c.name}</option>
-                      ))}
-                    </optgroup>
-                    <optgroup label={`${stageState} Senate`}>
-                      {committees.filter((c) => c.chamber === 'upper').map((c) => (
-                        <option key={c.id} value={c.id}>{c.name}</option>
-                      ))}
-                    </optgroup>
-                    <optgroup label="Chamber-wide / Joint">
+                    {/* Nebraska has one chamber, so lower and upper would both
+                        be empty and both labelled "Legislature". Show its
+                        single group instead. */}
+                    {!isUnicameral(stageState) && (
+                      <>
+                        <optgroup label={`${stageState} ${chamberName(stageState, 'lower')}`}>
+                          {committees.filter((c) => c.chamber === 'lower').map((c) => (
+                            <option key={c.id} value={c.id}>{c.name}</option>
+                          ))}
+                        </optgroup>
+                        <optgroup label={`${stageState} Senate`}>
+                          {committees.filter((c) => c.chamber === 'upper').map((c) => (
+                            <option key={c.id} value={c.id}>{c.name}</option>
+                          ))}
+                        </optgroup>
+                      </>
+                    )}
+                    <optgroup label={isUnicameral(stageState) ? `${stageState} Legislature` : 'Chamber-wide / Joint'}>
                       {committees.filter((c) => c.chamber === 'legislature').map((c) => (
                         <option key={c.id} value={c.id}>{c.name}</option>
                       ))}
@@ -1270,7 +1278,7 @@ export function CampaignForm({
               whatever the storyteller picks before the story reaches the creator. */}
           <div className="p-3 bg-gray-50 dark:bg-gray-700/50 rounded-xl">
             <p className="text-xs text-gray-600 dark:text-gray-300">
-              <strong>Attribution is the storyteller’s choice.</strong> Each person decides whether to be named, share first name only, or stay anonymous — and we enforce that choice before their story reaches you.
+              <strong>Attribution is the storyteller’s choice.</strong> Each person decides whether to be named, share first name only, or stay anonymous, and we enforce that choice before their story reaches you.
             </p>
           </div>
 
