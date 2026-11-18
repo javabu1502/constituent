@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { buildAskInstruction } from '@/lib/campaign-ask';
 import { z } from 'zod';
 import { createAdminClient } from '@/lib/supabase';
 import { callClaude, deDash, extractJSON } from '@/lib/claude';
@@ -93,6 +94,7 @@ export async function POST(request: NextRequest) {
     description: string;
     direction: string | null;
     message_template: string | null;
+    ask?: string | null;
     is_official: boolean | null;
     bill_ref: string | null;
     bill_title: string | null;
@@ -105,7 +107,7 @@ export async function POST(request: NextRequest) {
     const admin = createAdminClient();
     const { data } = await admin
       .from('campaigns')
-      .select('headline, description, direction, message_template, is_official, bill_ref, bill_title, issue_area, stage_goal, bill_level, target_level, talking_points_coverage')
+      .select('headline, description, direction, message_template, is_official, bill_ref, bill_title, issue_area, stage_goal, bill_level, target_level, talking_points_coverage, ask')
       .eq('slug', parsed.data.campaignSlug)
       .eq('approval_status', 'approved')
       .single();
@@ -264,11 +266,12 @@ Return ONLY JSON. Never explain, refuse, or add notes: {"body": "...", "subject"
       : campaign && !campaign.is_official
       ? campaign.direction === 'oppose' ? 'oppose' : 'support'
       : null;
-  const askInstruction = campaign?.bill_ref
-    ? `THE ASK SENTENCE MUST: name ${campaign.bill_ref} and ask them to ${
-        campaign.stage_goal === 'cosponsor' ? `cosponsor it` : stanceVerb === 'oppose' ? 'oppose it / vote no' : 'support it / vote yes'
-      }.`
-    : '';
+  const askInstruction = buildAskInstruction({
+    ask: campaign?.ask,
+    billRef: campaign?.bill_ref,
+    stageGoal: campaign?.stage_goal,
+    stance: stanceVerb === 'oppose' ? 'oppose' : 'support',
+  });
 
   const user = campaign
     ? `CAMPAIGN: ${campaign.headline}
