@@ -124,7 +124,7 @@ export function CampaignCard({
 
       <Link
         href={hubHref}
-        className="block text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors mb-4 line-clamp-2"
+        className="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors mb-4 line-clamp-2"
       >
         {subtitle}
       </Link>
@@ -132,7 +132,7 @@ export function CampaignCard({
       {/* Where the BILL is, from the official record. Never a count of the
           actions we made: that denominator moves for reasons the organisation
           did not cause. */}
-      {track && bill && (
+      {track && bill && !outcomeLabel && (
         <div className="mb-4">
           <div className="flex gap-1 mb-1.5">
             {track.stages.map((_, i) => (
@@ -182,24 +182,21 @@ export function CampaignCard({
         </div>
       )}
 
-      <div className="mt-auto flex flex-wrap items-center gap-x-2 gap-y-1 pt-3 border-t border-rule dark:border-gray-700 text-sm text-gray-600 dark:text-gray-400">
-        <span>
+      <div className="mt-auto flex items-center gap-2 pt-3 border-t border-rule dark:border-gray-700 text-sm text-gray-600 dark:text-gray-400">
+        <span className="min-w-0 flex-1 truncate">
           <strong className="font-semibold text-gray-900 dark:text-white">{count}</strong>{' '}
           {isStory ? `stor${count === 1 ? 'y' : 'ies'}` : `message${count !== 1 ? 's' : ''}`}
-        </span>
-        {!isStory && stages.length > 0 && (
-          <>
-            <span className="text-gray-300 dark:text-gray-600">·</span>
-            <span>
+          {!isStory && stages.length > 0 && (
+            <>
+              <span className="text-gray-300 dark:text-gray-600"> · </span>
               <strong className="font-semibold text-gray-900 dark:text-white">{stages.length}</strong>{' '}
               action{stages.length !== 1 ? 's' : ''}
-            </span>
-          </>
-        )}
-        <div className="flex-1" />
+            </>
+          )}
+        </span>
         <Link
           href={hubHref}
-          className="text-sm font-semibold text-purple-700 dark:text-purple-300 hover:underline whitespace-nowrap"
+          className="shrink-0 text-sm font-semibold text-purple-700 dark:text-purple-300 hover:underline whitespace-nowrap"
         >
           Campaign hub &rarr;
         </Link>
