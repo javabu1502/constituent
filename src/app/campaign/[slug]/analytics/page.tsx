@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { ActionSetupPanel } from '@/components/campaign/ActionSetupPanel';
 import { CampaignHubTabs } from '@/components/campaign/CampaignHubTabs';
 import { redirect, notFound } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
@@ -255,6 +256,15 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
     .eq('parent_campaign_id', campaign.id);
   const analyticsCampaignIds = [campaign.id, ...(childCampaigns ?? []).map((c) => c.id as string)];
 
+  // An action belongs to a bill. Its page should say which, and link back.
+  const { data: parentCampaign } = campaign.parent_campaign_id
+    ? await admin
+        .from('campaigns')
+        .select('slug, headline, bill_ref')
+        .eq('id', campaign.parent_campaign_id)
+        .maybeSingle()
+    : { data: null };
+
   // The whip board replaces the officials panel wherever it can build a
   // roster (state campaigns, or a committee-targeted stage). Elsewhere the
   // classic officials panel stays.
@@ -434,12 +444,21 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
 
       <div className="mb-8 flex items-start justify-between gap-3">
         <div>
-          {/* The bill number is the name an organiser knows this by. Without
-              one the headline is all there is. */}
-          <h1 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
-            {campaign.bill_ref || campaign.headline}
+          {parentCampaign && (
+            <Link
+              href={`/campaign/${parentCampaign.slug}/analytics`}
+              className="text-sm text-gray-500 dark:text-gray-400 hover:text-purple-700 dark:hover:text-purple-300"
+            >
+              &larr; {parentCampaign.bill_ref || parentCampaign.headline}
+              {parentCampaign.bill_ref ? ` · ${parentCampaign.headline}` : ''}
+            </Link>
+          )}
+          {/* The bill number is the name an organiser knows this by. An action
+              is known by its own headline, under the bill above it. */}
+          <h1 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white mt-1">
+            {campaign.parent_campaign_id ? campaign.headline : campaign.bill_ref || campaign.headline}
           </h1>
-          {campaign.bill_ref && (
+          {!campaign.parent_campaign_id && campaign.bill_ref && (
             <p className="text-gray-700 dark:text-gray-300 mt-1">{campaign.headline}</p>
           )}
         </div>
@@ -447,6 +466,21 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
           Impact report
         </Link>
       </div>
+
+      {campaign.parent_campaign_id && (
+        <ActionSetupPanel
+          campaign={{
+            headline: campaign.headline,
+            ask: campaign.ask ?? null,
+            stage_goal: campaign.stage_goal ?? null,
+            message_template: campaign.message_template ?? null,
+            target_filter: (campaign.target_filter as Record<string, unknown> | null) ?? null,
+            bill_ref: campaign.bill_ref ?? null,
+            direction: campaign.direction ?? null,
+          }}
+          parentBillRef={parentCampaign?.bill_ref ?? null}
+        />
+      )}
 
       <CampaignHubTabs
         tabs={[
