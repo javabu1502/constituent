@@ -48,7 +48,7 @@ Provider's standard fee is **$2,400 per twelve-month term**.
 
 The fee for Customer's first term is **$__________**, invoiced on the
 Effective Date and payable within thirty days. Where that figure is a reduced
-founding member rate, it applies to the first term only.
+pilot organization rate, it applies to the first term only.
 
 The fee for each term after the first is Provider's standard fee as of the
 renewal date. Provider will give at least sixty days' written notice before a
