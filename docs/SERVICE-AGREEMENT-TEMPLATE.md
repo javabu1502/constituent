@@ -29,12 +29,10 @@ removing one Customer is using.
 
 ## 2. Setup services
 
-Provider will build Customer's first three campaigns with Customer at no
-additional charge, including bill research, targeting, and talking points.
+Provider will hold two one-hour onboarding calls with Customer at no
+additional charge.
 
-Additional campaign-building work is billed at $150 per hour, agreed in
-writing before the work begins. Customer can always build its own campaigns
-in the platform at no charge.
+Customer builds its own campaigns in the platform at no charge.
 
 ## 3. Term
 
