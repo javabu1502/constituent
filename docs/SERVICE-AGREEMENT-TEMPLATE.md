@@ -44,7 +44,7 @@ least thirty days before the end of a term.
 
 ## 4. Fees
 
-Provider's standard fee is **$2,500 per twelve-month term**.
+Provider's standard fee is **$2,400 per twelve-month term**.
 
 The fee for Customer's first term is **$__________**, invoiced on the
 Effective Date and payable within thirty days.
