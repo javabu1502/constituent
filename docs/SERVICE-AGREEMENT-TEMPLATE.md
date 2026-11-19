@@ -22,17 +22,30 @@ b. Delivery of constituent messages to federal offices through the House and
 c. Storytelling campaigns, including consent tracking and story management.
 d. Participant and delivery reporting, and data export.
 e. Email updates to an organization's own participants.
-f. Support by email, with a response on business days.
+f. Email support, on the terms in section 2.
 
 Provider may change how a feature works, and will give Customer notice before
 removing one Customer is using.
 
-## 2. Setup services
+## 2. Setup and support
 
 Provider will hold two one-hour onboarding calls with Customer at no
 additional charge.
 
 Customer builds its own campaigns in the platform at no charge.
+
+Support is by email, Monday through Friday, 9am to 5pm Pacific, excluding
+public holidays. Provider aims to answer most messages within two business
+days.
+
+Provider is one person. There is no telephone support and no on-call cover.
+Provider may be unreachable while travelling or on leave, and will tell
+Customer in advance where it expects to be unavailable for more than three
+consecutive business days.
+
+The response time above is an aim rather than a service level. No credit or
+other remedy arises from a slower reply, and Provider decides the order in
+which faults are fixed.
 
 ## 3. Term
 
