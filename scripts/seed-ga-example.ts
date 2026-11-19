@@ -2,13 +2,20 @@
  * A Georgia example campaign on the jared@mydemocracy.app account, for
  * showing the product to a Georgia organization.
  *
- * Why it is not slugged demo-: every demo- campaign under this account is
- * what /demo/dashboard serves to the public, under the name Silver State
- * Families Alliance (src/lib/demo.ts). A Georgia campaign inside a Nevada
- * coalition's public demo would be incoherent, so this one is unlisted and
- * carries its own white-label org name instead. It appears on the account's
- * own dashboard, which lists every campaign by creator_id with no slug
- * filter.
+ * The slug MUST keep its demo- prefix. Four separate protections key on it,
+ * and none of them look at visibility: public trends excludes demo- rows
+ * (src/app/api/trends/route.ts), so do the homepage stats (src/app/page.tsx),
+ * and campaign update emails are never sent to a demo- campaign's
+ * participants (src/lib/campaign-updates.ts). The 08-11 incident was exactly
+ * this: synthetic rows slugged with a -demo SUFFIX slipped the prefix filter
+ * and 125 fabricated messages counted toward public trends.
+ *
+ * The cost of the prefix is that /demo/dashboard serves this campaign to the
+ * public alongside the Nevada portfolio, under one name for the whole demo
+ * org, Silver State Families Alliance (src/lib/demo.ts). A Georgia campaign
+ * under a Nevada coalition reads oddly. That is a cosmetic problem and
+ * polluting public trends is a data-integrity one, so the prefix stays.
+ * Renaming DEMO_ORG_NAME to something state-neutral would settle it.
  *
  * The campaign carries no bill. The Georgia General Assembly's 2025-2026
  * biennium ended at sine die, so nothing filed is still alive, and the next
@@ -21,9 +28,9 @@
  * simulated.
  *
  * Cleanup:
- *   delete from messages where campaign_id = (select id from campaigns where slug = 'ga-child-care-2027');
- *   delete from campaign_actions where campaign_id = (select id from campaigns where slug = 'ga-child-care-2027');
- *   delete from campaigns where slug = 'ga-child-care-2027';
+ *   delete from messages where campaign_id = (select id from campaigns where slug = 'demo-ga-child-care-2027');
+ *   delete from campaign_actions where campaign_id = (select id from campaigns where slug = 'demo-ga-child-care-2027');
+ *   delete from campaigns where slug = 'demo-ga-child-care-2027';
  *
  * Usage:
  *   npx tsx scripts/seed-ga-example.ts           # prints the plan, writes nothing
@@ -36,7 +43,7 @@ import * as path from 'path';
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://mydemocracy.supabase.co';
 const OWNER_ID = '5b807805-8a66-4497-8f46-cf9b92bff610'; // jared@mydemocracy.app
-const SLUG = 'ga-child-care-2027';
+const SLUG = 'demo-ga-child-care-2027';
 
 /** Same lookup as scripts/repair-demo-copy.ts: env first, then .env.local. */
 function serviceKey(): string {
