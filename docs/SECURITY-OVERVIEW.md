@@ -99,7 +99,9 @@ closes.
 **Automated testing.** The codebase carries 122 automated test suites. Four
 test API endpoints specifically for authorization bypass, covering the AI
 drafting, bill summary, local official lookup, and voter information routes.
-Tests run on every change through GitHub Actions before deployment.
+Tests run on every change through GitHub Actions. They report against the
+commit rather than gating the deploy, so a failure is visible immediately
+but does not hold the release.
 
 **Abuse controls.** Bot protection (Cloudflare Turnstile) gates the AI
 features. Rate limits cap how many messages one person can send to one office,

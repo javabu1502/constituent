@@ -159,7 +159,9 @@ export default function PrivacyPage() {
                 <li><strong className="text-gray-900 dark:text-white">Dashboard data</strong>: cached voting records, campaign finance, lobbying activity, committee assignments, and bill tracking preferences</li>
               </ul>
               <p>
-                You can update or delete your account data at any time from your profile settings.
+                You can update your account data at any time from your dashboard. To delete your account and
+                everything associated with it, email us and we will do it within 30 days (see &quot;Data Retention
+                &amp; Deletion&quot; below).
               </p>
             </div>
           </section>

@@ -122,8 +122,10 @@ Customer's election, within 30 days.
 **On termination**, Provider will delete Customer Data within 90 days, except
 Delivery Records retained under section 4 and data Provider must retain by law.
 
-**On Participant request**, a Participant may delete their account and
-associated data through the platform at any time, or by contacting Provider.
+**On Participant request**, Provider will delete a Participant's account and
+associated data within 30 days of a request from that Participant. Requests are
+made to Provider by email. The platform does not currently offer self-service
+deletion.
 
 Residual copies in routine backups are deleted on the normal backup expiration
 cycle. While they persist, they remain subject to this Addendum.
@@ -186,8 +188,8 @@ responding to a Participant's request to access, correct, delete, or port their
 Personal Data, to the extent Customer cannot do so through the platform.
 
 Where a Participant contacts Provider directly, Provider will either handle the
-request through the platform's self-service controls or refer the Participant
-to Customer, and will inform Customer.
+request itself or refer the Participant to Customer, and will inform Customer
+either way.
 
 ## 11. Audit
 
