@@ -264,7 +264,7 @@ export default function PrivacyPage() {
                 any time from your dashboard, or with the withdraw link shown when you submit if you do not have an account.
                 Withdrawing removes it from the organization&apos;s dashboard, its export, and its summaries. Anything the
                 organization already used before then may not be recallable. Stories are kept until you withdraw them or
-                delete your account. You may also email us to delete all of your data (see &quot;Data Retention &amp;
+                your account is deleted. You may also email us to delete all of your data (see &quot;Data Retention &amp;
                 Deletion&quot;). You must be 18 or older, or a parent or guardian sharing your family&apos;s experience, to
                 submit a story.
               </p>
