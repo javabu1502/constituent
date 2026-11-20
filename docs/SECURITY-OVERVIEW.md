@@ -2,7 +2,7 @@
 
 **Prepared for:** vendor security review
 **Operated by:** My Democracy LLC
-**Last updated:** 2026-11-16
+**Last updated:** 2026-11-20
 **Contact:** jared@mydemocracy.app
 
 This document stands in place of a SOC 2 or ISO 27001 report. It covers the

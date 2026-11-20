@@ -224,7 +224,7 @@ Signature: ______________________  Date: __________
 
 Name: Jared Busker
 
-Title: Owner
+Title: Founder
 
 **Customer**
 
