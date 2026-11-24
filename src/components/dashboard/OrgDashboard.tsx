@@ -49,11 +49,25 @@ export function OrgDashboard({
   const topLevelCampaigns = campaigns.filter((c) => !c.parent_campaign_id);
 
   // Federal and state portfolios render as separate sections.
-  const federalCampaigns = topLevelCampaigns.filter((c) => c.campaign_type !== 'storytelling' && !c.bill_state);
+  //
+  // Scope comes from target_level, not bill_state. bill_state is only ever
+  // written for a state BILL campaign or a local one, so a state campaign
+  // carrying no bill -- an off-session budget ask, say -- had a null
+  // bill_state and fell into the federal section. It still names the state
+  // when it has one, which is what gives the section its heading.
+  const scopeOf = (c: CampaignRow) =>
+    typeof c.target_level === 'string' && c.target_level
+      ? c.target_level
+      : c.bill_state
+        ? 'state'
+        : 'federal';
+  const federalCampaigns = topLevelCampaigns.filter(
+    (c) => c.campaign_type !== 'storytelling' && scopeOf(c) === 'federal'
+  );
   const stateGroups = new Map<string, CampaignRow[]>();
   for (const c of topLevelCampaigns) {
-    if (c.campaign_type === 'storytelling' || !c.bill_state) continue;
-    const st = c.bill_state as string;
+    if (c.campaign_type === 'storytelling' || scopeOf(c) === 'federal') continue;
+    const st = typeof c.bill_state === 'string' && c.bill_state ? c.bill_state : '';
     if (!stateGroups.has(st)) stateGroups.set(st, []);
     stateGroups.get(st)!.push(c);
   }
@@ -197,7 +211,7 @@ export function OrgDashboard({
           )}
           {[...stateGroups.entries()].map(([st, list]) => (
             <section key={st} className="mb-10">
-              <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">State campaigns · {st}</h2>
+              <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">{st ? `State campaigns · ${st}` : 'State campaigns'}</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">{list.map(renderCampaignCard)}</div>
             </section>
           ))}

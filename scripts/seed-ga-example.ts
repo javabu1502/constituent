@@ -144,6 +144,10 @@ const campaign = {
   issue_area: 'Families',
   issue_subtopic: 'Child Care',
   target_level: 'state',
+  // No bill (the biennium ended at sine die), but the campaign still belongs
+  // to a state, and bill_state is the column the dashboard reads for the
+  // section heading -- local campaigns already use it the same way.
+  bill_state: 'GA',
   direction: 'support',
   headline: 'Ask Georgia legislators to fund child care in the 2027 session',
   description:
