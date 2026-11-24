@@ -33,7 +33,7 @@ jobs:
         run: npx tsx scripts/contact-form-dryrun.ts
       - name: Show what changed
         run: git --no-pager diff --stat src/data/contact-form-dryrun.json || true
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: contact-form-dryrun
           path: src/data/contact-form-dryrun.json
