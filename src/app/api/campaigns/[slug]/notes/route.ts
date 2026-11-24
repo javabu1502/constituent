@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { canActForCampaign } from '@/lib/org-context';
 import { z } from 'zod';
 import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase';
@@ -22,12 +23,12 @@ const noteSchema = z.object({
 
 async function loadOwned(slug: string) {
   const admin = createAdminClient();
-  const { data: campaign } = await admin.from('campaigns').select('id, creator_id').eq('slug', slug).single();
+  const { data: campaign } = await admin.from('campaigns').select('id, creator_id, org_user_id').eq('slug', slug).single();
   if (!campaign) return { error: 'not_found' as const };
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return { error: 'unauthorized' as const };
-  if (user.id !== campaign.creator_id) return { error: 'forbidden' as const };
+  if (!(await canActForCampaign(user.id, campaign))) return { error: 'forbidden' as const };
   return { campaign, admin, userId: user.id };
 }
 

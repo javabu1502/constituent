@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { canActForCampaign } from '@/lib/org-context';
 import { ActionSetupPanel } from '@/components/campaign/ActionSetupPanel';
 import { LetterAnatomyPanel } from '@/components/campaign/LetterAnatomyPanel';
 import { CampaignHubTabs } from '@/components/campaign/CampaignHubTabs';
@@ -62,7 +63,7 @@ export default async function CampaignAnalyticsPage({ params }: PageProps) {
   // demo campaigns only (public org-backend demo); otherwise auth as before.
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
-  const isOwner = !!user && user.id === campaign.creator_id;
+  const isOwner = !!user && (await canActForCampaign(user.id, campaign));
   const isDemo = !isOwner && isDemoCampaign(campaign);
   if (!isOwner && !isDemo) {
     if (!user) redirect('/login');

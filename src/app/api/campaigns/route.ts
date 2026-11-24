@@ -3,6 +3,7 @@ import { normalizeAsk } from '@/lib/campaign-ask';
 import { checkRedirectTarget } from '@/lib/redirect-target';
 import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase';
+import { resolveOrgContext, canActForCampaign } from '@/lib/org-context';
 import { createCampaignSchema, parseBody } from '@/lib/schemas';
 import { profileLimiter, getClientIp } from '@/lib/rate-limit';
 import { sendAdminNotification } from '@/lib/resend';
@@ -98,13 +99,13 @@ export async function POST(request: NextRequest) {
   if (parent_campaign_id) {
     const { data: parentRow } = await createAdminClient()
       .from('campaigns')
-      .select('creator_id, parent_campaign_id, campaign_type, bill_level, bill_state, bill_ref, bill_title, bill_url, issue_area, issue_subtopic, direction, message_template, slug, headline, org_name')
+      .select('creator_id, org_user_id, parent_campaign_id, campaign_type, bill_level, bill_state, bill_ref, bill_title, bill_url, issue_area, issue_subtopic, direction, message_template, slug, headline, org_name')
       .eq('id', parent_campaign_id)
       .single();
     if (!parentRow) {
       return NextResponse.json({ error: 'Parent campaign not found' }, { status: 404 });
     }
-    if (parentRow.creator_id !== user.id) {
+    if (!(await canActForCampaign(user.id, parentRow))) {
       return NextResponse.json({ error: 'Only the campaign owner can add stages' }, { status: 403 });
     }
     if (parentRow.parent_campaign_id) {
@@ -161,6 +162,9 @@ export async function POST(request: NextRequest) {
     .from('campaigns')
     .insert({
       creator_id: user.id,
+      // The organization owns the campaign; creator_id stays the author, so a
+      // four-person team still records who made each one.
+      org_user_id: (await resolveOrgContext(user.id)).orgUserId,
       slug,
       campaign_type,
       // All user-created campaigns are unlisted; is_official stays false.
@@ -291,7 +295,7 @@ export async function GET() {
   const { data: campaigns, error } = await admin
     .from('campaigns')
     .select('*')
-    .eq('creator_id', user.id)
+    .eq('org_user_id', (await resolveOrgContext(user.id)).orgUserId)
     .order('created_at', { ascending: false });
 
   if (error) {

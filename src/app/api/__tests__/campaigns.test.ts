@@ -25,6 +25,15 @@ vi.mock('@/lib/supabase', () => ({
           })),
         };
       }
+      if (table === 'org_members') {
+        // No membership row: the signed-in user is their own organization,
+        // which is how every account behaved before teams existed.
+        return {
+          select: vi.fn(() => ({
+            eq: vi.fn(() => ({ maybeSingle: async () => ({ data: null }) })),
+          })),
+        };
+      }
       if (table === 'profiles') {
         return {
           select: vi.fn(() => ({

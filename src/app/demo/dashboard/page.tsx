@@ -24,7 +24,7 @@ export default async function DemoDashboardPage() {
   const { data: campaigns } = await admin
     .from('campaigns')
     .select('*')
-    .eq('creator_id', DEMO_ORG_USER_ID)
+    .eq('org_user_id', DEMO_ORG_USER_ID)
     .like('slug', 'demo-%')
     .order('created_at', { ascending: false });
 

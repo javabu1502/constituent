@@ -35,7 +35,7 @@ async function getActions(userId: string) {
   const { data } = await admin
     .from('campaigns')
     .select('slug, headline, description, action_count, story_count, campaign_type, created_at, target_level')
-    .eq('creator_id', userId)
+    .eq('org_user_id', userId)
     .eq('status', 'active')
     .eq('approval_status', 'approved')
     .is('parent_campaign_id', null)

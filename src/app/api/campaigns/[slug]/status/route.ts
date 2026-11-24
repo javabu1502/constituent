@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { canActForCampaign } from '@/lib/org-context';
 import { z } from 'zod';
 import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase';
@@ -32,14 +33,14 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ slu
   const admin = createAdminClient();
   const { data: campaign } = await admin
     .from('campaigns')
-    .select('id, creator_id, parent_campaign_id')
+    .select('id, creator_id, org_user_id, parent_campaign_id')
     .eq('slug', slug)
     .single();
   if (!campaign) return NextResponse.json({ error: 'not_found' }, { status: 404 });
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
-  if (user.id !== campaign.creator_id) return NextResponse.json({ error: 'forbidden' }, { status: 403 });
+  if (!(await canActForCampaign(user.id, campaign))) return NextResponse.json({ error: 'forbidden' }, { status: 403 });
 
   let raw: unknown;
   try {

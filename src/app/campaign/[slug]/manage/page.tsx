@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { canActForCampaign } from '@/lib/org-context';
 import Link from 'next/link';
 import { SignatoryRolls } from '@/components/campaign/SignatoryRolls';
 import { redirect, notFound } from 'next/navigation';
@@ -65,7 +66,7 @@ export default async function ManageCampaignPage({
   if (!campaign) {
     notFound();
   }
-  if (campaign.creator_id !== user.id) {
+  if (!(await canActForCampaign(user.id, campaign))) {
     redirect('/dashboard');
   }
 

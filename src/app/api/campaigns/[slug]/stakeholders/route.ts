@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { canActForCampaign } from '@/lib/org-context';
 import { z } from 'zod';
 import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase';
@@ -20,11 +21,15 @@ const stakeholderSchema = z.object({
 
 async function loadOwned(slug: string, opts?: { allowDemoRead?: boolean }) {
   const admin = createAdminClient();
-  const { data: campaign } = await admin.from('campaigns').select('id, creator_id').eq('slug', slug).single();
+  const { data: campaign } = await admin.from('campaigns').select('id, creator_id, org_user_id').eq('slug', slug).single();
   if (!campaign) return { error: 'not_found' as const };
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
-  if (user && user.id === campaign.creator_id) return { campaign, admin, userId: user.id };
+  // A teammate gets the organization's board, not an empty one of their own,
+  // so the id that scopes notes and targets is the organization's.
+  if (user && (await canActForCampaign(user.id, campaign))) {
+    return { campaign, admin, userId: (campaign.org_user_id as string) ?? (campaign.creator_id as string) };
+  }
   // Public demo: reads only. Writes never take this path.
   if (opts?.allowDemoRead && isDemoCampaign({ slug, creator_id: campaign.creator_id })) {
     return { campaign, admin, userId: campaign.creator_id as string };

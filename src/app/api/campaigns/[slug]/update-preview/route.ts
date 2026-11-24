@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { canActForCampaign } from '@/lib/org-context';
 import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase';
 import { renderStageAdvanceEmail, stageAdvanceSubject } from '@/lib/campaign-updates';
@@ -25,11 +26,11 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
   const admin = createAdminClient();
   const { data: parent } = await admin
     .from('campaigns')
-    .select('id, slug, headline, org_name, bill_ref, creator_id')
+    .select('id, slug, headline, org_name, bill_ref, creator_id, org_user_id')
     .eq('slug', slug)
     .maybeSingle();
   if (!parent) return NextResponse.json({ error: 'Campaign not found' }, { status: 404 });
-  if (parent.creator_id !== user.id) {
+  if (!(await canActForCampaign(user.id, parent))) {
     return NextResponse.json({ error: 'Not your campaign' }, { status: 403 });
   }
 

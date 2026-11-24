@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { canActForCampaign } from '@/lib/org-context';
 import { createAdminClient } from '@/lib/supabase';
 import { createClient } from '@/lib/supabase/server';
 import { toCSV } from '@/lib/csv';
@@ -32,12 +33,12 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
   const admin = createAdminClient();
   const { data: campaign } = await admin
     .from('campaigns')
-    .select('id, creator_id, headline, is_official')
+    .select('id, creator_id, org_user_id, headline, is_official')
     .eq('slug', slug)
     .maybeSingle();
 
   if (!campaign) return NextResponse.json({ error: 'Campaign not found' }, { status: 404 });
-  if (campaign.creator_id !== user.id) return NextResponse.json({ error: 'Not yours' }, { status: 403 });
+  if (!(await canActForCampaign(user.id, campaign))) return NextResponse.json({ error: 'Not yours' }, { status: 403 });
   if (campaign.is_official) {
     // People on a platform campaign were told their address is never shared.
     return NextResponse.json(

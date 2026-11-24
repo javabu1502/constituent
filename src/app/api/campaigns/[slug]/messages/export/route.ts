@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { canActForCampaign } from '@/lib/org-context';
 import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase';
 import { toCSV } from '@/lib/csv';
@@ -25,9 +26,9 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
   if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
   const admin = createAdminClient();
-  const { data: campaign } = await admin.from('campaigns').select('id, slug, creator_id').eq('slug', slug).single();
+  const { data: campaign } = await admin.from('campaigns').select('id, slug, creator_id, org_user_id').eq('slug', slug).single();
   if (!campaign) return NextResponse.json({ error: 'Campaign not found' }, { status: 404 });
-  if (campaign.creator_id !== user.id) return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+  if (!(await canActForCampaign(user.id, campaign))) return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
 
   // The same set of campaigns the analytics page counts: this one plus its
   // steps. Exporting the parent alone returned a header row and nothing else,

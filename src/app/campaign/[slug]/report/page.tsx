@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { canActForCampaign } from '@/lib/org-context';
 import { redirect, notFound } from 'next/navigation';
 import Link from 'next/link';
 import { createClient } from '@/lib/supabase/server';
@@ -68,7 +69,7 @@ export default async function CampaignReportPage({ params }: PageProps) {
   const admin = createAdminClient();
   const { data: campaign } = await admin
     .from('campaigns')
-    .select('id, slug, headline, org_name, brand_color, is_official, direction, campaign_type, support_count, oppose_count, created_at, creator_id, outcome, outcome_note')
+    .select('id, slug, headline, org_name, brand_color, is_official, direction, campaign_type, support_count, oppose_count, created_at, creator_id, org_user_id, outcome, outcome_note')
     .eq('slug', slug)
     .single();
   if (!campaign) notFound();
@@ -79,7 +80,7 @@ export default async function CampaignReportPage({ params }: PageProps) {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  const isOwner = !!user && user.id === campaign.creator_id;
+  const isOwner = !!user && (await canActForCampaign(user.id, campaign));
   const isDemo = !isOwner && isDemoCampaign(campaign);
   if (!isOwner && !isDemo) {
     if (!user) redirect('/login');

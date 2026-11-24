@@ -298,6 +298,8 @@ export interface VotingRecordResponse {
 export interface Campaign {
   id: string;
   creator_id: string;
+  /** The organization that owns this campaign; creator_id stays the author. */
+  org_user_id?: string | null;
   slug: string;
   headline: string;
   description: string;

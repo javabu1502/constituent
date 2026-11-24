@@ -16,7 +16,9 @@ vi.mock('@/lib/supabase', () => ({
   createAdminClient: vi.fn(() => ({
     from: vi.fn(() => ({
       select: vi.fn(() => ({
-        eq: vi.fn(() => ({ single: mockSelectSingle })),
+        // org_members has no row, so resolveOrgContext falls back to "you are
+        // your own organization" -- the behaviour these tests assert.
+        eq: vi.fn(() => ({ single: mockSelectSingle, maybeSingle: async () => ({ data: null }) })),
       })),
       update: vi.fn((payload: Record<string, unknown>) => {
         mockUpdatePayload.value = payload;

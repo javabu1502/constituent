@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { canActForCampaign } from '@/lib/org-context';
 import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase';
 import { updateCampaignSchema, parseBody } from '@/lib/schemas';
@@ -84,7 +85,7 @@ export async function GET(
   // Check if requester is the creator
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
-  const isCreator = user && user.id === campaign.creator_id;
+  const isCreator = !!user && (await canActForCampaign(user.id, campaign));
 
   // Non-creators can only see active campaigns
   if (!isCreator && campaign.status !== 'active') {
@@ -204,14 +205,14 @@ export async function PATCH(
   const admin = createAdminClient();
   const { data: campaign } = await admin
     .from('campaigns')
-    .select('id, creator_id, campaign_type, parent_campaign_id, headline, org_url, custom_domain')
+    .select('id, creator_id, org_user_id, campaign_type, parent_campaign_id, headline, org_url, custom_domain')
     .eq('slug', slug)
     .single();
 
   if (!campaign) {
     return NextResponse.json({ error: 'Campaign not found' }, { status: 404 });
   }
-  if (campaign.creator_id !== user.id) {
+  if (!(await canActForCampaign(user.id, campaign))) {
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
   }
   if (campaign.parent_campaign_id) {
@@ -317,7 +318,7 @@ export async function DELETE(
   // Verify ownership
   const { data: campaign } = await admin
     .from('campaigns')
-    .select('id, creator_id')
+    .select('id, creator_id, org_user_id')
     .eq('slug', slug)
     .single();
 
@@ -325,7 +326,7 @@ export async function DELETE(
     return NextResponse.json({ error: 'Campaign not found' }, { status: 404 });
   }
 
-  if (campaign.creator_id !== user.id) {
+  if (!(await canActForCampaign(user.id, campaign))) {
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
   }
 

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase';
+import { resolveOrgContext } from '@/lib/org-context';
 import { truncate } from '@/lib/utils';
 import { stageOrder } from '@/lib/stages';
 import { MyRepresentativesSection } from '@/components/dashboard/MyRepresentativesSection';
@@ -67,6 +68,11 @@ export default async function DashboardPage() {
       .eq('advocate_email', user.email);
   }
 
+  // Which organization is this person acting for? Their own account when they
+  // are not on a team, which is every constituent and every org that has not
+  // added anyone yet.
+  const orgCtx = await resolveOrgContext(user.id);
+
   // Fetch profile, messages, campaigns, and the user's own stories in parallel
   const [profileResult, messagesResult, campaignsResult, storiesResult] = await Promise.all([
     admin.from('profiles').select('*').eq('user_id', user.id).single(),
@@ -75,7 +81,7 @@ export default async function DashboardPage() {
       .eq('user_id', user.id)
       .order('created_at', { ascending: false })
       .limit(100),
-    admin.from('campaigns').select('*').eq('creator_id', user.id).order('created_at', { ascending: false }),
+    admin.from('campaigns').select('*').eq('org_user_id', orgCtx.orgUserId).order('created_at', { ascending: false }),
     admin.from('stories')
       .select('id,created_at,attribution_level,title,body,campaigns(headline)')
       .eq('user_id', user.id)
@@ -105,6 +111,15 @@ export default async function DashboardPage() {
       .single();
     profile = newProfile;
   }
+
+  // A member of someone else's organization takes the org's identity -- name,
+  // logo, brand, and the account_type that decides which dashboard renders --
+  // from the owner's profile. Their own row still carries their address and
+  // their own representatives, which are theirs and not the organization's.
+  const orgProfile =
+    orgCtx.orgUserId === user.id
+      ? profile
+      : (await admin.from('profiles').select('*').eq('user_id', orgCtx.orgUserId).maybeSingle()).data ?? profile;
 
   const messages = messagesResult.data;
 
@@ -189,7 +204,7 @@ export default async function DashboardPage() {
 
   const recentMessages = messages?.slice(0, 5) ?? [];
 
-  const accountType = ((profile as Record<string, unknown> | null)?.account_type as string) ?? 'constituent';
+  const accountType = ((orgProfile as Record<string, unknown> | null)?.account_type as string) ?? 'constituent';
 
   // One campaign card, shared by the constituent view and the org's grouped
   // (Federal / State) sections.
@@ -228,13 +243,13 @@ export default async function DashboardPage() {
     const portfolio = await getPortfolioCounts(admin, allCampaigns.map((c) => c.id as string));
     return (
       <OrgDashboard
-        displayName={(profile?.org_name as string) || (profile?.name as string) || user.email || 'Your organization'}
+        displayName={(orgProfile?.org_name as string) || (orgProfile?.name as string) || user.email || 'Your organization'}
         campaigns={allCampaigns}
         portfolio={portfolio}
         billPositions={billPositions}
         identityComplete={
-          !!(profile as Record<string, unknown> | null)?.org_logo_url &&
-          !!(profile as Record<string, unknown> | null)?.org_about
+          !!(orgProfile as Record<string, unknown> | null)?.org_logo_url &&
+          !!(orgProfile as Record<string, unknown> | null)?.org_about
         }
       />
     );

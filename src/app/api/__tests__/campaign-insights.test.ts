@@ -18,7 +18,8 @@ vi.mock('@/lib/supabase', () => ({
   createAdminClient: vi.fn(() => ({
     from: vi.fn(() => ({
       select: vi.fn(() => ({
-        eq: vi.fn(() => ({ single: mockSingle })),
+        // No org_members row: the signed-in user is their own organization.
+        eq: vi.fn(() => ({ single: mockSingle, maybeSingle: async () => ({ data: null }) })),
       })),
     })),
   })),

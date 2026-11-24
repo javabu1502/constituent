@@ -70,15 +70,18 @@ export default async function CampaignEmbedPage({ params }: PageProps) {
   if (closed) {
     const { data: ownerRow } = await admin
       .from('campaigns')
-      .select('creator_id, outcome')
+      .select('creator_id, org_user_id, outcome')
       .eq('id', campaign.id)
       .single();
     closedOutcome = (ownerRow?.outcome as string | null) ?? null;
-    if (ownerRow?.creator_id) {
+    // Other live campaigns from the same organization, which is not the same
+    // question as other campaigns by the same person once a team has four.
+    const ownerOrgId = ownerRow?.org_user_id ?? ownerRow?.creator_id;
+    if (ownerOrgId) {
       const { data: siblings } = await admin
         .from('campaigns')
         .select('slug, headline')
-        .eq('creator_id', ownerRow.creator_id)
+        .eq('org_user_id', ownerOrgId)
         .eq('status', 'active')
         .eq('approval_status', 'approved')
         .is('parent_campaign_id', null)

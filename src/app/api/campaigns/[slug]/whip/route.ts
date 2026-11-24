@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { canActForCampaign } from '@/lib/org-context';
 import { z } from 'zod';
 import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase';
@@ -31,13 +32,17 @@ async function loadOwnedCampaign(slug: string, opts?: { allowDemoRead?: boolean 
   const admin = createAdminClient();
   const { data: campaign } = await admin
     .from('campaigns')
-    .select('id, creator_id, campaign_type, target_level, bill_level, bill_state, bill_ref')
+    .select('id, creator_id, org_user_id, campaign_type, target_level, bill_level, bill_state, bill_ref')
     .eq('slug', slug)
     .single();
   if (!campaign) return { error: 'not_found' as const };
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
-  if (user && user.id === campaign.creator_id) return { campaign, admin, userId: user.id };
+  // A teammate gets the organization's board, not an empty one of their own,
+  // so the id that scopes notes and targets is the organization's.
+  if (user && (await canActForCampaign(user.id, campaign))) {
+    return { campaign, admin, userId: (campaign.org_user_id as string) ?? (campaign.creator_id as string) };
+  }
   // Public demo: reads are scoped to the demo org's own data, exactly as the
   // owner would see them. Writes never take this path.
   if (opts?.allowDemoRead && isDemoCampaign({ slug, creator_id: campaign.creator_id })) {
@@ -126,7 +131,7 @@ export async function GET(_req: NextRequest, { params }: { params: Promise<{ slu
     admin.from('legislator_positions').select('legislator_id, legislator_name, legislator_party, legislator_chamber, position, updated_at').eq('campaign_id', campaign.id),
     admin.from('campaign_notes').select('id, campaign_id, legislator_id, legislator_name, body, hours, created_at').eq('creator_id', res.userId).not('legislator_id', 'is', null).order('created_at', { ascending: false }).limit(500),
     admin.from('messages').select('legislator_id').in('campaign_id', initiativeIds).limit(10000),
-    admin.from('campaigns').select('id, bill_ref, parent_campaign_id').eq('creator_id', res.userId),
+    admin.from('campaigns').select('id, bill_ref, parent_campaign_id').eq('org_user_id', res.userId),
     stateCode && campaign.bill_ref ? stateSponsorIds(stateCode, campaign.bill_ref) : Promise.resolve(new Set<string>()),
   ]);
   const billRefById = new Map((orgCampaigns ?? []).map((c) => [c.id as string, (c.bill_ref as string) ?? null]));

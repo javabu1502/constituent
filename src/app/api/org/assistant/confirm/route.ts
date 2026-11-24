@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { canActForCampaign } from '@/lib/org-context';
 import { z } from 'zod';
 import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase';
@@ -80,9 +81,9 @@ export async function POST(req: NextRequest) {
 
   if (parsed.data.kind === 'propose_meeting_log') {
     const { slug, body, legislator_name, legislator_id, hours, position } = parsed.data.input;
-    const { data: campaign } = await admin.from('campaigns').select('id, creator_id').eq('slug', slug).single();
+    const { data: campaign } = await admin.from('campaigns').select('id, creator_id, org_user_id').eq('slug', slug).single();
     if (!campaign) return NextResponse.json({ error: 'That campaign no longer exists.' }, { status: 404 });
-    if (campaign.creator_id !== user.id) return NextResponse.json({ error: 'That campaign belongs to another organization.' }, { status: 403 });
+    if (!(await canActForCampaign(user.id, campaign))) return NextResponse.json({ error: 'That campaign belongs to another organization.' }, { status: 403 });
 
     const { error } = await admin.from('campaign_notes').insert({
       creator_id: user.id,

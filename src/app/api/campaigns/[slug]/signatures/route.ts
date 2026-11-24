@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { canActForCampaign } from '@/lib/org-context';
 import { createAdminClient } from '@/lib/supabase';
 import { createClient } from '@/lib/supabase/server';
 import { groupByOffice, rollCsv, rollLabel, type OfficeLevel, type Signature } from '@/lib/signon';
@@ -27,12 +28,12 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
   const admin = createAdminClient();
   const { data: campaign } = await admin
     .from('campaigns')
-    .select('id, creator_id, campaign_type, headline')
+    .select('id, creator_id, org_user_id, campaign_type, headline')
     .eq('slug', slug)
     .maybeSingle();
 
   if (!campaign) return NextResponse.json({ error: 'Letter not found' }, { status: 404 });
-  if (campaign.creator_id !== user.id) return NextResponse.json({ error: 'Not yours' }, { status: 403 });
+  if (!(await canActForCampaign(user.id, campaign))) return NextResponse.json({ error: 'Not yours' }, { status: 403 });
   if (campaign.campaign_type !== 'signon') {
     return NextResponse.json({ error: 'This campaign is not a sign-on letter' }, { status: 400 });
   }

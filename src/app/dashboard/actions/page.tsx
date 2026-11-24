@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { resolveOrgContext } from '@/lib/org-context';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import { createClient } from '@/lib/supabase/server';
@@ -32,17 +33,20 @@ export default async function DashboardActionsPage() {
   if (!user) redirect('/login');
 
   const admin = createAdminClient();
+  // A teammate's own profile is not the organization's, so the account type
+  // that decides whether this page exists comes from the org they act for.
+  const orgCtx = await resolveOrgContext(user.id);
   const { data: profile } = await admin
     .from('profiles')
     .select('account_type')
-    .eq('user_id', user.id)
+    .eq('user_id', orgCtx.orgUserId)
     .single();
   if (profile?.account_type !== 'organization') redirect('/dashboard');
 
   const { data: campaigns } = await admin
     .from('campaigns')
     .select('id, slug, headline, status, action_count, created_at, parent_campaign_id, stage_goal, bill_ref, bill_level, bill_state, bill_congress, bill_type, bill_number, campaign_type')
-    .eq('creator_id', user.id);
+    .eq('org_user_id', orgCtx.orgUserId);
 
   const all = (campaigns ?? []) as Row[];
   const parents = new Map(all.filter((c) => !c.parent_campaign_id).map((c) => [String(c.id), c]));

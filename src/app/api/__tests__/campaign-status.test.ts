@@ -21,7 +21,13 @@ let stepResult: { data: { id: string }[] | null; error: unknown } = { data: [], 
 vi.mock('@/lib/supabase', () => ({
   createAdminClient: vi.fn(() => ({
     from: () => ({
-      select: () => ({ eq: () => ({ single: async () => ({ data: campaignRow, error: campaignRow ? null : { message: 'no rows' } }) }) }),
+      select: () => ({
+        eq: () => ({
+          single: async () => ({ data: campaignRow, error: campaignRow ? null : { message: 'no rows' } }),
+          // No org_members row: the signed-in user is their own organization.
+          maybeSingle: async () => ({ data: null }),
+        }),
+      }),
       update: (patch: Record<string, unknown>) => {
         mockUpdate(patch);
         return {

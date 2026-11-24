@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { canActForCampaign } from '@/lib/org-context';
 import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase';
 import { toCSV } from '@/lib/csv';
@@ -45,14 +46,14 @@ export async function GET(
   const admin = createAdminClient();
   const { data: campaign, error: campaignError } = await admin
     .from('campaigns')
-    .select('id, slug, creator_id, campaign_type')
+    .select('id, slug, creator_id, org_user_id, campaign_type')
     .eq('slug', slug)
     .single();
 
   if (campaignError || !campaign) {
     return NextResponse.json({ error: 'Campaign not found' }, { status: 404 });
   }
-  if (campaign.creator_id !== user.id) {
+  if (!(await canActForCampaign(user.id, campaign))) {
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
   }
 

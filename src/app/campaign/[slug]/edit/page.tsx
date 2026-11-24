@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { canActForCampaign } from '@/lib/org-context';
 import Link from 'next/link';
 import { redirect, notFound } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
@@ -30,7 +31,7 @@ export default async function EditCampaignPage({
     .eq('slug', slug)
     .single();
 
-  if (!campaign || campaign.creator_id !== user.id) {
+  if (!campaign || !(await canActForCampaign(user.id, campaign))) {
     notFound();
   }
   // Stages carry structure (parent, goal, committee) that isn't editable —
