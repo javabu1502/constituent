@@ -139,6 +139,32 @@ export async function addOrgMember(
   return { ok: true };
 }
 
+/**
+ * Hand the organization to someone else.
+ *
+ * Identifying an organization by its owner's user_id means ownership is woven
+ * through profiles, campaigns, org_supporters, org_target_lists and
+ * org_members, so this is a five-table rewrite rather than a one-row update.
+ * It runs as a single database function for that reason: half a transfer
+ * would strand an organization between two owners, its campaigns under one
+ * and its supporters under another.
+ *
+ * The new owner must already be a member. The outgoing owner stays on as an
+ * admin rather than losing access the moment they hand over the keys.
+ */
+export async function transferOrgOwnership(
+  currentOwnerId: string,
+  newOwnerId: string
+): Promise<{ ok: true } | { ok: false; error: string }> {
+  const admin = createAdminClient();
+  const { error } = await admin.rpc('transfer_org_ownership', {
+    old_owner: currentOwnerId,
+    new_owner: newOwnerId,
+  });
+  if (error) return { ok: false, error: error.message };
+  return { ok: true };
+}
+
 /** Remove someone. The owner stays: an organization without one has no identity. */
 export async function removeOrgMember(
   orgUserId: string,

@@ -9,6 +9,8 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 let memberRow: { org_user_id: string; role: string } | null = null;
 const upsertCalls: Record<string, unknown>[] = [];
 const deleteFilters: Array<[string, string]> = [];
+const rpcCalls: Array<[string, Record<string, unknown>]> = [];
+let rpcError: { message: string } | null = null;
 
 vi.mock('@/lib/supabase', () => ({
   createAdminClient: () => ({
@@ -33,16 +35,23 @@ vi.mock('@/lib/supabase', () => ({
         }),
       }),
     }),
+    rpc: async (fn: string, args: Record<string, unknown>) => {
+      rpcCalls.push([fn, args]);
+      return { error: rpcError };
+    },
     auth: { admin: { getUserById: async () => ({ data: { user: { email: 'a@b.org' } } }) } },
   }),
 }));
 
-const { resolveOrgContext, canActForCampaign, addOrgMember, removeOrgMember } = await import('@/lib/org-context');
+const { resolveOrgContext, canActForCampaign, addOrgMember, removeOrgMember, transferOrgOwnership } =
+  await import('@/lib/org-context');
 
 beforeEach(() => {
   memberRow = null;
   upsertCalls.length = 0;
   deleteFilters.length = 0;
+  rpcCalls.length = 0;
+  rpcError = null;
 });
 
 describe('resolveOrgContext', () => {
@@ -115,5 +124,24 @@ describe('membership changes', () => {
     const res = await removeOrgMember('weca', 'paula');
     expect(res).toEqual({ ok: true });
     expect(deleteFilters).toEqual([['weca', 'paula']]);
+  });
+});
+
+describe('transferOrgOwnership', () => {
+  it('hands the organization over in one database call', async () => {
+    const res = await transferOrgOwnership('kelly', 'paula');
+    expect(res).toEqual({ ok: true });
+    // One transaction, not five table writes from here: a half-finished
+    // transfer would strand the org between two owners.
+    expect(rpcCalls).toEqual([['transfer_org_ownership', { old_owner: 'kelly', new_owner: 'paula' }]]);
+  });
+
+  it('surfaces the database refusal rather than reporting success', async () => {
+    rpcError = { message: 'transfer_org_ownership: paula is not a member of that organization' };
+    const res = await transferOrgOwnership('kelly', 'paula');
+    expect(res).toEqual({
+      ok: false,
+      error: 'transfer_org_ownership: paula is not a member of that organization',
+    });
   });
 });

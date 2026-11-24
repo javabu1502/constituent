@@ -85,3 +85,87 @@ begin
 end $$;
 
 revoke all on public.org_members from anon;
+
+-- Transferring ownership.
+--
+-- Identifying the organization by its owner's user_id kept org_slug,
+-- org_supporters and org_target_lists working untouched, at the cost of
+-- weaving that id through five tables. So "Kelly leaves WECA" is a rewrite,
+-- not a one-row update, and a rewrite half-done would strand an organization
+-- between two owners: its campaigns under one, its supporters under another.
+--
+-- A function, so it is one transaction and cannot land half-done.
+--
+-- The organization's identity lives on the owner's profile, so it moves with
+-- the role. The outgoing owner stays on as an admin rather than being dropped:
+-- losing your own organization because someone handed you the keys would be a
+-- surprising way to find out.
+create or replace function public.transfer_org_ownership(
+  old_owner uuid,
+  new_owner uuid
+) returns void
+language plpgsql
+security definer
+set search_path = public
+as $$
+declare
+  org record;
+begin
+  if old_owner = new_owner then
+    raise exception 'transfer_org_ownership: old and new owner are the same person';
+  end if;
+
+  select account_type, org_name, org_slug, org_url, org_logo_url, brand_color, org_about
+    into org
+  from public.profiles
+  where user_id = old_owner;
+
+  -- FOUND rather than `org is null`: a record of all-null columns is itself
+  -- null, so the two cases are indistinguishable without it.
+  if not found or org.account_type is distinct from 'organization' then
+    raise exception 'transfer_org_ownership: % does not own an organization', old_owner;
+  end if;
+
+  if not exists (
+    select 1 from public.org_members
+    where org_user_id = old_owner and member_user_id = new_owner
+  ) then
+    raise exception 'transfer_org_ownership: % is not a member of that organization', new_owner;
+  end if;
+
+  -- The slug is unique across profiles, so it has to leave the old row before
+  -- it can land on the new one.
+  update public.profiles
+     set org_slug = null,
+         account_type = 'constituent',
+         org_name = null, org_url = null, org_logo_url = null,
+         brand_color = null, org_about = null
+   where user_id = old_owner;
+
+  update public.profiles
+     set account_type = 'organization',
+         org_name = org.org_name,
+         org_slug = org.org_slug,
+         org_url = org.org_url,
+         org_logo_url = org.org_logo_url,
+         brand_color = org.brand_color,
+         org_about = org.org_about
+   where user_id = new_owner;
+
+  -- Everything the organization owns follows its identity.
+  update public.campaigns        set org_user_id = new_owner where org_user_id = old_owner;
+  update public.org_supporters   set org_user_id = new_owner where org_user_id = old_owner;
+  update public.org_target_lists set user_id     = new_owner where user_id     = old_owner;
+
+  -- Re-key membership last, so a failure above leaves the team intact.
+  update public.org_members set org_user_id = new_owner where org_user_id = old_owner;
+  update public.org_members set role = 'owner' where org_user_id = new_owner and member_user_id = new_owner;
+  update public.org_members set role = 'admin' where org_user_id = new_owner and member_user_id = old_owner;
+end;
+$$;
+
+comment on function public.transfer_org_ownership(uuid, uuid) is
+  'Move an organization to a new owner atomically. The outgoing owner stays '
+  'on as an admin. Called from src/lib/org-context.ts.';
+
+revoke all on function public.transfer_org_ownership(uuid, uuid) from anon, authenticated;
