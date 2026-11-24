@@ -17,6 +17,60 @@
 -- profiles.org_slug, org_supporters.org_user_id and org_target_lists.user_id
 -- keep working untouched.
 
+-- First, clear an abandoned organizations model out of the way.
+--
+-- Production carried a public.orgs and a public.org_members shaped
+-- (id, org_id -> orgs.id, user_id, role, created_at). Neither was ever in this
+-- migration history, no code reads either, and both are empty: someone built
+-- them in the dashboard and stopped. Because a table named org_members already
+-- existed, the `create table if not exists` below did nothing and the first
+-- index failed on member_user_id, a column that table has never had.
+--
+-- The drop is keyed on the absence of member_user_id, so re-running this file
+-- once the real table exists cannot drop the real one, and it refuses outright
+-- if either table has gained a row since. A migration should not be able to
+-- destroy data by being run twice.
+do $$
+declare pol record;
+begin
+  -- orgs carried two policies written in terms of org_members ("Org members
+  -- can view their org", "...can update their org"), so the table cannot be
+  -- dropped while they exist. Drop them by name rather than reaching for
+  -- CASCADE: both tables are going, but a cascade would also take anything
+  -- else that had quietly come to depend on them, unseen.
+  for pol in
+    select policyname from pg_policies
+    where schemaname = 'public' and tablename = 'orgs'
+  loop
+    execute format('drop policy if exists %I on public.orgs', pol.policyname);
+  end loop;
+
+  if exists (
+    select 1 from information_schema.tables
+    where table_schema = 'public' and table_name = 'org_members'
+  ) and not exists (
+    select 1 from information_schema.columns
+    where table_schema = 'public' and table_name = 'org_members'
+      and column_name = 'member_user_id'
+  ) then
+    if (select count(*) from public.org_members) > 0 then
+      raise exception 'org_members exists in the pre-migration shape and is not empty; refusing to drop';
+    end if;
+    -- Before orgs: this one holds the foreign key.
+    drop table public.org_members;
+  end if;
+
+  if exists (
+    select 1 from information_schema.tables
+    where table_schema = 'public' and table_name = 'orgs'
+  ) then
+    if (select count(*) from public.orgs) > 0 then
+      raise exception 'orgs is not empty; refusing to drop';
+    end if;
+    drop table public.orgs;
+  end if;
+end $$;
+
 create table if not exists public.org_members (
   org_user_id uuid not null references auth.users (id) on delete cascade,
   member_user_id uuid not null references auth.users (id) on delete cascade,
