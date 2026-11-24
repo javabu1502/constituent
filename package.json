@@ -22,7 +22,7 @@
   "dependencies": {
     "@supabase/ssr": "^0.8.0",
     "@supabase/supabase-js": "^2.97.0",
-    "@tailwindcss/postcss": "^4",
+    "@tailwindcss/postcss": "^4.3.5",
     "@types/qrcode": "^1.5.6",
     "@vercel/analytics": "^1.6.1",
     "clsx": "^2",
@@ -32,11 +32,11 @@
     "qrcode": "^1.5.4",
     "react": "^19",
     "react-dom": "^19",
-    "resend": "^6.9.3",
+    "resend": "^6.39.0",
     "tailwind-merge": "^3",
-    "tailwindcss": "^4",
+    "tailwindcss": "^4.3.5",
     "undici": "^7.30.2",
-    "yaml": "^2",
+    "yaml": "^2.9.1",
     "zod": "^4.6.7"
   },
   "devDependencies": {
@@ -50,6 +50,6 @@
     "playwright": "^1.58.2",
     "tsx": "^4",
     "typescript": "5.9.3",
-    "vitest": "^4.0.18"
+    "vitest": "^5.1.1"
   }
 }

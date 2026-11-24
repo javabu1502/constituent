@@ -1,0 +1,31 @@
+# Nothing told us when a dependency became vulnerable. The 2026-11-23 audit
+# found 24 open advisories, nine of them high, every one with a fix already
+# published -- not because anything was ignored, but because nothing was
+# watching. This is what watches.
+#
+# Weekly rather than daily: a one-person project wants a small Monday batch,
+# not a pull request every morning. Minor and patch updates are grouped so a
+# routine week is one PR to read, while majors arrive alone because they are
+# the ones that need thinking about.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    groups:
+      minor-and-patch:
+        update-types: [minor, patch]
+    commit-message:
+      prefix: deps
+      prefix-development: deps-dev
+
+  # The workflows pin actions by major version; this keeps those current too.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    commit-message:
+      prefix: ci

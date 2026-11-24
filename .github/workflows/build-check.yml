@@ -27,6 +27,13 @@ jobs:
         run: npm test
       - name: Lint
         run: npm run lint
+      - name: Audit
+        # Advisories in packages we actually ship. Dependabot opens the PRs
+        # that clear these; this is the backstop that says so on the commit.
+        # It fails only on critical, because the build-chain carries a steady
+        # background of transitive highs and a step that is always red is a
+        # step nobody reads.
+        run: npm audit --omit=dev --audit-level=critical
       - name: Build
         # The build needs the env the app reads at module scope. These are
         # placeholders: nothing here talks to a real service, and a build that
