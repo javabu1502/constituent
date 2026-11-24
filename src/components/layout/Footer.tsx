@@ -8,7 +8,6 @@ const FOOTER_COLUMNS = [
       { href: '/contact', label: 'Contact' },
       { href: '/representatives', label: 'Find My Representatives' },
       { href: '/legislators', label: 'Legislators' },
-      { href: '/news', label: 'News' },
       { href: '/trends', label: 'Trends' },
       { href: '/vote', label: 'Vote' },
       // Regulations (public comment) temporarily hidden — restore to bring it back.

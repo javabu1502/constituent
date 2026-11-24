@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
-import { CivicNews } from '@/components/news/CivicNews';
 import { DailyBarChart } from '@/components/campaign/CampaignAnalytics';
 
 
@@ -472,17 +471,6 @@ export function TrendsContent() {
           )}
         </div>
       )}
-
-      {/* In the News */}
-      <div>
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-white">In the News</h2>
-          <Link href="/news" className="text-sm text-purple-600 dark:text-purple-400 hover:underline">
-            See all news &rarr;
-          </Link>
-        </div>
-        <CivicNews limit={3} compact />
-      </div>
     </div>
   );
 }

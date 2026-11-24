@@ -32,7 +32,6 @@ describe('where an organization sees its campaign tools', () => {
       '/contact',
       '/about',
       '/guides',
-      '/news',
       '/vote',
       '/legislators',
       '/states/nv',

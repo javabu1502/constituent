@@ -237,7 +237,6 @@ export function SearchDialog({ onClose }: SearchDialogProps) {
                 {[
                   { label: 'Write to Your Officials', href: '/contact' },
                   { label: 'States', href: '/states' },
-                  { label: 'News', href: '/news' },
                   { label: 'Trends', href: '/trends' },
                   { label: 'Vote', href: '/vote' },
                   { label: 'Guides', href: '/guides' },
@@ -262,7 +261,6 @@ export function SearchDialog({ onClose }: SearchDialogProps) {
                 No results for &quot;{query}&quot;
               </p>
               <div className="mt-4 flex flex-wrap justify-center gap-2">
-                <Link href="/news" onClick={onClose} className="text-xs text-purple-600 dark:text-purple-400 hover:underline">Search News</Link>
                 <Link href="/regulations" onClick={onClose} className="text-xs text-purple-600 dark:text-purple-400 hover:underline">Search Regulations</Link>
                 <Link href="/states" onClick={onClose} className="text-xs text-purple-600 dark:text-purple-400 hover:underline">Browse States</Link>
               </div>

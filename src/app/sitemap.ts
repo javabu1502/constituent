@@ -84,7 +84,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/guides/how-impeachment-works`, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${baseUrl}/guides/how-the-census-works`, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${baseUrl}/guides/how-local-government-works`, changeFrequency: 'monthly', priority: 0.7 },
-    { url: `${baseUrl}/news`, changeFrequency: 'daily', priority: 0.8 },
     { url: `${baseUrl}/regulations`, changeFrequency: 'daily', priority: 0.8 },
   ];
 
